@@ -1,0 +1,33 @@
+{
+  "schema": "logos-engine.evidence-generator-relocation.v1",
+  "recordedAt": "2026-11-09T23:53:24.687294+00:00",
+  "operation": "byte_identical_copy_before_correction",
+  "sourceAtCapture": {
+    "path": "scripts/compare-native-public-campaigns.mjs",
+    "sha256": "f79f6295f4a63bca70ca77743de2536291e289f3845f8e46d4faf3bd8d589563",
+    "bytes": 22396
+  },
+  "archivedGenerator": {
+    "path": "docs/migration/lot3a-cost-evidence/diagnostic/comparator-revision/compare-native-public-campaigns-v1.mjs",
+    "sha256": "f79f6295f4a63bca70ca77743de2536291e289f3845f8e46d4faf3bd8d589563",
+    "bytes": 22396
+  },
+  "existingComparison": {
+    "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/public-comparison.json",
+    "sha256": "a810c4f861ec15a7a8924576e4d465443d337ae3e66e76853b78df3b2ddf9165",
+    "bytes": 99494
+  },
+  "recordedComparisonGenerator": {
+    "path": "scripts/compare-native-public-campaigns.mjs",
+    "sha256": "f79f6295f4a63bca70ca77743de2536291e289f3845f8e46d4faf3bd8d589563",
+    "bytes": 22396
+  },
+  "generatorBytesMatchRecordedComparison": true,
+  "existingComparisonUnchanged": true,
+  "plannedCorrection": {
+    "projectionFieldBefore": "material_subquestion",
+    "projectionFieldAfter": "material_access_subquestion",
+    "reason": "The runtime uses material_access_subquestion; preserve the public comparison already generated and issue a separate comparison after the official cost window."
+  },
+  "qualification": "This is an exact archived copy of the generator used for the existing comparison. The existing report is retained unchanged. The copied script is evidence, not a new comparison run; its original repository-relative execution location is recorded separately."
+}

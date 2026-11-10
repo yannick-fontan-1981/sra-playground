@@ -60,7 +60,7 @@ import type {
 } from './v6-native-types.ts';
 
 export const NATIVE_V6_REFERENCE_COMMIT = '786dcf51ca57773d8e3a8948ce9ea3655e7baf8e';
-export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.37.0';
+export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.38.0';
 // The implementation identity and public snapshot describe the same extensions.
 const NATIVE_CALLER_EXTENSIONS = ['neutral_entity_domain_refusal_retained_as_unknown_without_registry_update',
   'retained_learned_preparation_before_unlearned_invitation', 'current_program_access_revalidation', 'measured_program_control_discovery',
@@ -1360,8 +1360,8 @@ export class NativeV6Runtime implements NativeV6Backend {
       actions: this.actions, cycles: this.cycles, nodeCount: this.knowledge?.nodeCount ?? null, hypothesisCount: null, compositionCount: this.compositions.size,
       levelsCompleted: this.current?.levels_completed ?? 0, level: this.current?.level ?? 1,
       // note() owns and deeply freezes every entry. A fresh list preserves old
-      // snapshots while sharing those immutable values; the service still copies
-      // its entire outgoing snapshot across the public protocol boundary.
+      // snapshots while sharing those immutable values. The service keeps its
+      // detached copies; worker transport still copies each complete response.
       activeSeconds: (this.elapsedMs + this.runningMs()) / 1000, lastDecision: this.lastFamily, trace: this.trace.slice(), reason: this.reason,
       sourceCommit: this.sourceCommit, sourceDigest: this.sourceDigest, proposal: this.prefix?.proposal ?? null,
       implementation: NATIVE_V6_IMPLEMENTATION, coverage: { status: 'in_progress', registeredFamilies: this.families.map(f => f.id),

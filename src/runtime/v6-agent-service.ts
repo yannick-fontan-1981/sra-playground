@@ -65,6 +65,10 @@ export class V6AgentService {
   private issuedTickets = 0;
   private busy = false;
   private closed = false;
+  // Keys belong to the backend; values are detached, deeply frozen public
+  // copies. Weak ownership follows the backend's bounded trace/prefix lifetime.
+  private snapshotCopies = new WeakMap<object, unknown>();
+  private immutableSnapshotBranches = new WeakSet<object>();
 
   constructor(factory: NativeBackendFactory) { this.factory = factory; }
 
@@ -79,6 +83,34 @@ export class V6AgentService {
     if (signal?.aborted) throw new V6AgentError('cancelled', 'The native solver session was cancelled.');
   }
 
+  private immutableSnapshotBranch(value: unknown, visiting = new Set<object>()): boolean {
+    if (value === null || typeof value !== 'object') return typeof value !== 'function' && typeof value !== 'symbol';
+    if (this.immutableSnapshotBranches.has(value)) return true;
+    if (!Object.isFrozen(value) || visiting.has(value)) return false;
+    const prototype = Object.getPrototypeOf(value);
+    if (prototype !== Object.prototype && prototype !== null && !(Array.isArray(value) && prototype === Array.prototype)) return false;
+    visiting.add(value);
+    for (const key of Reflect.ownKeys(value)) {
+      const descriptor = Object.getOwnPropertyDescriptor(value, key)!;
+      // Frozen accessors can still change their return value. Exotic objects
+      // (including frozen Map/Set/Date) likewise retain mutable internal state.
+      if (typeof key !== 'string' || !Object.hasOwn(descriptor, 'value') || !this.immutableSnapshotBranch(descriptor.value, visiting)) {
+        visiting.delete(value); return false;
+      }
+    }
+    visiting.delete(value);
+    this.immutableSnapshotBranches.add(value);
+    return true;
+  }
+
+  private copySnapshotBranch<T>(value: T): T {
+    if (value !== null && typeof value === 'object' && this.snapshotCopies.has(value)) return this.snapshotCopies.get(value) as T;
+    const reusable = this.immutableSnapshotBranch(value);
+    const copied = freeze(structuredClone(value));
+    if (reusable && value !== null && typeof value === 'object') this.snapshotCopies.set(value, copied);
+    return copied;
+  }
+
   private snapshot(value: NativeRuntimeSnapshot): V6BackendSnapshot {
     if (!this.backend || !this.current || value.sourceCommit !== this.backend.sourceCommit || value.sourceDigest !== this.backend.sourceDigest
       || value.actions !== this.sequence || value.level !== this.current.level || value.levelsCompleted !== this.current.levels_completed
@@ -91,7 +123,20 @@ export class V6AgentService {
     if (value.graphChain !== undefined && (typeof value.graphChain !== 'string' || !/^[a-f0-9]{64}$/.test(value.graphChain)
       || typeof value.nativeExecutionDigest !== 'string' || !/^[a-f0-9]{64}$/.test(value.nativeExecutionDigest)
       || !Number.isSafeInteger(value.graphRevision) || value.graphRevision! < 1)) throw new V6AgentError('invalid', 'Invalid native knowledge graph identity.');
-    return freeze(structuredClone({ ...value, trace: value.trace.slice(-128) }));
+    // Capture enumerable backend fields once, including injected accessors,
+    // exactly as the original public snapshot projection did.
+    const publicValue = { ...value, trace: value.trace.slice(-128) };
+    if (!this.immutableSnapshotBranch(publicValue.proposal) || !publicValue.trace.every(entry => this.immutableSnapshotBranch(entry))) {
+      return freeze(structuredClone(publicValue));
+    }
+    // The current scalar/authority fields and outer containers remain fresh.
+    // Only already proved immutable diagnostic branches reuse detached copies;
+    // mutable or injected backend values keep their ordinary copy boundary.
+    // The worker's postMessage still copies each full response independently.
+    const copied = structuredClone({ ...publicValue, trace: [], proposal: null }) as V6BackendSnapshot;
+    copied.trace = publicValue.trace.map(entry => this.copySnapshotBranch(entry));
+    copied.proposal = this.copySnapshotBranch(publicValue.proposal);
+    return freeze(copied);
   }
 
   private accept(yielded: NativeRuntimeYield): V6AgentResult {
@@ -154,6 +199,7 @@ export class V6AgentService {
         this.backend = backend; this.sessionId = operation.sessionId; this.sequence = 0;
         this.current = observation; this.pending = null; this.result = null; this.closed = false;
         this.usedTickets.clear(); this.issuedTickets = 0;
+        this.snapshotCopies = new WeakMap(); this.immutableSnapshotBranches = new WeakSet();
         backendWork = true;
         const yielded = await backend.initialize({ sessionId: operation.sessionId, observation, budgets: limits }, this.execution(signal));
         this.checkSignal(signal);

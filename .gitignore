@@ -132,3 +132,13 @@ __pycache__/
 /docs/migration/lot3a-evidence/final/source-archive.tar.gz
 
 /docs/migration/lot3a-evidence/baseline/source-archive.tar.gz
+
+docs/migration/lot3a-cost-evidence/final/source-archive.tar.gz
+docs/migration/lot3a-cost-evidence/diagnostic/smlp-before.cpuprofile
+docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-campaign.json.gz
+
+# Preserve the four complete logs of the declared cost window.
+!/docs/migration/lot3a-cost-evidence/performance/cohort*/*.log

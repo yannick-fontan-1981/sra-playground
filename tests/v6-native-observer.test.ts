@@ -38,6 +38,27 @@ test('geometric transition correspondence keeps original ambiguity rules', () =>
   assert.deepEqual(geometricTransitions(geometricComponents(value.before), geometricComponents(value.after)), value.expected);
 });
 
+test('geometric connectivity preserves diagonal separation, ordering and edge coordinates', () => {
+  const rows = [[4, 9, 9], [9, 4, 9], [9, 9, 4]];
+  assert.deepEqual(geometricComponents(rows, 4).map(({ color, area }) => [color, area]),
+    [[4, 1], [9, 3], [9, 3], [4, 1], [4, 1]]);
+  assert.deepEqual(geometricComponents(rows, 8), [
+    { id: 'component-0', color: 4, bbox: [0, 0, 2, 2], area: 3, scale: 1,
+      mask: [[0, 0], [1, 1], [2, 2]], normalized: [[0, 0], [1, 1], [2, 2]], rectangular: false },
+    { id: 'component-1', color: 9, bbox: [0, 0, 2, 2], area: 6, scale: 1,
+      mask: [[0, 1], [0, 2], [1, 0], [1, 2], [2, 0], [2, 1]],
+      normalized: [[0, 1], [0, 2], [1, 0], [1, 2], [2, 0], [2, 1]], rectangular: false },
+  ]);
+  for (const connectivity of [4, 8] as const) {
+    assert.deepEqual(geometricComponents([[1], [1], [2], [1]], connectivity).map(({ bbox, area, mask }) => ({ bbox, area, mask })), [
+      { bbox: [0, 0, 0, 1], area: 2, mask: [[0, 0], [0, 1]] },
+      { bbox: [0, 2, 0, 2], area: 1, mask: [[0, 0]] },
+      { bbox: [0, 3, 0, 3], area: 1, mask: [[0, 0]] },
+    ]);
+  }
+  assert.throws(() => geometricComponents([[0]], 6 as 4), /Connectivity/);
+});
+
 test('V6 canonical strings use Python ASCII escapes and unsupported rasters fail explicitly', () => {
   assert.equal(v6Canonical({ z: 'é😀', a: 2 }), '{"a":2,"z":"\\u00e9\\ud83d\\ude00"}');
   assert.throws(() => geometricComponents([[0, 1], [2]]), /rectangular/);

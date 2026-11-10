@@ -49,6 +49,10 @@ export interface LocusWitness {
 
 const comparePixel = (a: Pixel, b: Pixel) => a[0] - b[0] || a[1] - b[1];
 const pixelKey = (x: number, y: number) => `${x},${y}`;
+// Preserve the source traversal order without allocating neighbor coordinate
+// pairs for every visited pixel. These offsets are private to the measurement.
+const FOUR_NEIGHBOR_OFFSETS = [-1, 0, 1, 0, 0, -1, 0, 1] as const;
+const EIGHT_NEIGHBOR_OFFSETS = [-1, -1, 0, -1, 1, -1, -1, 0, 1, 0, -1, 1, 0, 1, 1, 1] as const;
 const gcd = (a: number, b: number): number => { while (b) [a, b] = [b, a % b]; return a; };
 async function sha256(bytes: Uint8Array): Promise<string> {
   return [...new Uint8Array(await crypto.subtle.digest('SHA-256', Uint8Array.from(bytes)))].map(value => value.toString(16).padStart(2, '0')).join('');
@@ -98,27 +102,27 @@ export function geometricComponents(rows: NativeRows, connectivity: 4 | 8 = 4): 
   validateRows(rows);
   if (connectivity !== 4 && connectivity !== 8) throw new TypeError('Connectivity must be 4 or 8');
   const height = rows.length, width = rows[0]!.length;
+  const offsets = connectivity === 4 ? FOUR_NEIGHBOR_OFFSETS : EIGHT_NEIGHBOR_OFFSETS;
   const seen = new Uint8Array(height * width), result: GeometricComponent[] = [];
   for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
     const origin = y * width + x;
     if (seen[origin]) continue;
-    const color = rows[y]![x]!, pending: number[] = [origin], pixels: Pixel[] = [];
+    const color = rows[y]![x]!, pending: number[] = [origin], pixels: number[] = [];
     seen[origin] = 1;
     let left = x, right = x, top = y, bottom = y;
     while (pending.length) {
       const current = pending.pop()!, px = current % width, py = Math.floor(current / width);
-      pixels.push([px, py]); left = Math.min(left, px); right = Math.max(right, px);
+      pixels.push(current); left = Math.min(left, px); right = Math.max(right, px);
       top = Math.min(top, py); bottom = Math.max(bottom, py);
-      const neighbors: Pixel[] = connectivity === 4 ? [[px - 1, py], [px + 1, py], [px, py - 1], [px, py + 1]]
-        : [[px - 1, py - 1], [px, py - 1], [px + 1, py - 1], [px - 1, py], [px + 1, py], [px - 1, py + 1], [px, py + 1], [px + 1, py + 1]];
-      for (const [nx, ny] of neighbors) {
+      for (let neighbor = 0; neighbor < offsets.length; neighbor += 2) {
+        const nx = px + offsets[neighbor]!, ny = py + offsets[neighbor + 1]!;
         const index = ny * width + nx;
         if (nx >= 0 && nx < width && ny >= 0 && ny < height && !seen[index] && rows[ny]![nx] === color) {
           seen[index] = 1; pending.push(index);
         }
       }
     }
-    const mask: Pixel[] = pixels.map(([px, py]) => [px - left, py - top] as Pixel).sort(comparePixel);
+    const mask: Pixel[] = pixels.map(index => [index % width - left, Math.floor(index / width) - top] as Pixel).sort(comparePixel);
     // The Python observer takes the GCD of every horizontal AND vertical run.
     const axes: [Map<number, number[]>, Map<number, number[]>] = [new Map(), new Map()];
     for (const [px, py] of mask) {

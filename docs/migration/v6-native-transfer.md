@@ -11,7 +11,50 @@ not satisfy this target.
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
 
-## Current functional delivery: lot 3A, native 0.37.0, cost open
+## Current delivery: lot 3A cost closure, native 0.38.0
+
+**Lot 3A is closed within its announced functional and cost scope.** Native
+`0.38.0` preserves the Panel capability delivered in publication 65 and all three
+RSWP levels. It restores V5's exact encoded periodic-pattern counting, removes
+per-pixel neighbor allocations from the V6 geometric measurement, and reuses
+detached service copies only after deep immutability checks. The
+[correction report](lot3a-cost-correction.md) and
+[lineage](lot3a-cost-lineage.md) state the contracts and native qualifications.
+
+The **245-file** native freeze is
+`f0d8b2b0a746f19036076010025fffa1ad532d5751caa176f7efcccff7bc4aff`.
+The [formal affected delta](lot3a-cost-evidence/final/validation/delta-tests-run.json)
+passes **964/964 tests in 26 files**. Typecheck, entry and migration audits,
+diff checks and the production build also pass. A new cold RSWP session and a
+separate browser execution both retain **19 actions, three completed levels and
+11 prefixes**. The [public comparison](lot3a-cost-evidence/final/rswp-regression/public-comparison-v2.json)
+checks all 19 commands, 20 public packets and 221 animation-inclusive images
+exactly. Full trace identity remains false with distinct version provenance;
+the scoped public equality is reported separately.
+
+The predeclared A1/B1/B2/A2 window compares a freshly measured 0.36 reference
+with frozen 0.38, using the unchanged runner and **+10% median budget**. All eight
+sessions per case and version remain included. The
+[aggregate comparison](lot3a-cost-evidence/performance/combined-comparison.json)
+passes **16/16 criteria**, with `unresolved: []`. Session median changes are
+**+0.851% STCK** and **−28.209% SMLP**; known-prefix service changes are
+**−10.649%** and **−16.386%**. The largest aggregate median increase,
+STCK acquisition/persistence **+6.050%**, remains within budget.
+
+The second cohort's two STCK exceedances, **+11.028% acquisition/persistence**
+and **+13.234% persistence**, remain in the [complete results](lot3a-cost-evidence/performance/results.md),
+alongside the original 0.37 failures and the higher STCK p95 values. The decision
+rule was declared on the combined eight-session distributions before measuring;
+no session or unfavorable cohort was removed. This is an observed budget result,
+not a proof of long-session stability or global migration completeness.
+
+The registry remains **50/76**, with one explicitly partial entry covering
+**one of six observed-composition branches**. The 37 compiled workflows and
+global migration gates keep their previous scope. Next is **lot 3B,
+`chamber_relation_plan`**, including the actually consumed V5 finite-relation
+helpers and candidate CATR with **107.399326 seconds carried forward**.
+
+## Preserved functional delivery: lot 3A, native 0.37.0, initial cost open
 
 The first observed-composition service branch, **`panel_service_plan`**, is now
 connected at the original first goal-access position through the existing
@@ -62,7 +105,7 @@ sublot is not closed. The registry remains **50/76**, with **one
 explicitly partial entry covering one of six branches** among the 26 remaining.
 There are 37 compiled workflows, 152 component-verified modules, 131 partial modules,
 1,086 pending modules, no globally transferred module, and all six completion
-gates remain false. Next is **lot 3A cost closure**, then **lot 3B, `chamber_relation_plan`**, including the
+gates remain false. At that delivery, the next step was **lot 3A cost closure**, then **lot 3B, `chamber_relation_plan`**, including the
 actually consumed V5 finite-relation helpers and public candidate CATR with its
 107.399326 seconds carried forward. See the [complete roadmap](v6-delivery-roadmap.md).
 

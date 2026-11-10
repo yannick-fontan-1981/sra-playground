@@ -1,0 +1,903 @@
+{
+  "schema": "logos-engine.native-cost-consolidation-review.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-09T23:56:38.284036+00:00",
+  "method": "Independent Python standard-library recalculation from the four retained raw timing reports; no timing runner, agent or game was executed. Distributions, per-session median ranges, relative increases and classifications were recalculated for both cohorts and all pooled sessions.",
+  "inputs": [
+    {
+      "path": "docs/migration/lot3a-cost-evidence/performance/comparison-policy.json",
+      "sha256": "76575315636670329de12e4ae4542d6d11290411b7cdb799e7d7af0ec1c83ca9",
+      "bytes": 898
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/performance/cases.json",
+      "sha256": "f052a04b8a1d07a93cff8ee9c19f4694c1c61a6db3f0660bc382a95dcef32a88",
+      "bytes": 1339
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/performance/window.json",
+      "sha256": "8f86aa21ed362d832629edd1bf69af84b6d0171ecfaba582bc4e6168aac96b5b",
+      "bytes": 10778
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/performance/combined-comparison.json",
+      "sha256": "41718ae66ee3aa9864767dd0cae16058b475e5d450f6f1d32941107806c3a488",
+      "bytes": 28903
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/performance/protocol.md",
+      "sha256": "90ad27c1b152768868cf16cc76d3a94f31f70cb92567197f20c2f47d98dc0521",
+      "bytes": 8454
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/performance/cohort1/baseline.json",
+      "sha256": "713094e5b4850b06c2d10a12fd7f7a2f9b2ccd83afb3f536ffb842406e46d0cf",
+      "bytes": 425018
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/performance/cohort1/after.json",
+      "sha256": "c69c9ad6dbb4df2cc61482c0f7901bbcff2af1d73fe1d19648ee09fe127858c1",
+      "bytes": 425379
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/performance/cohort1/comparison.json",
+      "sha256": "d75efce1f395eeddcd5b6ff86d1102e7573bc2a8bc9f7664d3dd7bf7001c0eb7",
+      "bytes": 25201
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/performance/cohort2/baseline.json",
+      "sha256": "bb5e67cdf80bdb1b3c27f6f2585bbccdffe5e255b201e73071c307ecb7adae60",
+      "bytes": 424963
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/performance/cohort2/after.json",
+      "sha256": "fb273aebd6f65a0fafed18438309720cc7ee2a6d445a3705524bb0077e4f71d8",
+      "bytes": 425407
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/performance/cohort2/comparison.json",
+      "sha256": "8081b85640e5f6e002db1357c673ba14846ca5f54cdb2dff2be68fba52654b98",
+      "bytes": 25557
+    }
+  ],
+  "checks": [
+    {
+      "name": "predeclared_eight_sessions_and_unmodified_threshold",
+      "passed": true
+    },
+    {
+      "name": "declared_before_official_window",
+      "passed": true
+    },
+    {
+      "name": "same_historical_controls",
+      "passed": true
+    },
+    {
+      "name": "historical_criteria_preserved",
+      "passed": true
+    },
+    {
+      "name": "observed_abba_order",
+      "passed": true
+    },
+    {
+      "name": "execution_A1_complete_and_sequential",
+      "passed": true
+    },
+    {
+      "name": "execution_A1_report_bytes",
+      "passed": true
+    },
+    {
+      "name": "execution_A1_log_bytes",
+      "passed": true
+    },
+    {
+      "name": "execution_B1_complete_and_sequential",
+      "passed": true
+    },
+    {
+      "name": "execution_B1_report_bytes",
+      "passed": true
+    },
+    {
+      "name": "execution_B1_log_bytes",
+      "passed": true
+    },
+    {
+      "name": "execution_B2_complete_and_sequential",
+      "passed": true
+    },
+    {
+      "name": "execution_B2_report_bytes",
+      "passed": true
+    },
+    {
+      "name": "execution_B2_log_bytes",
+      "passed": true
+    },
+    {
+      "name": "execution_A2_complete_and_sequential",
+      "passed": true
+    },
+    {
+      "name": "execution_A2_report_bytes",
+      "passed": true
+    },
+    {
+      "name": "execution_A2_log_bytes",
+      "passed": true
+    },
+    {
+      "name": "window_input_17",
+      "passed": true,
+      "detail": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/docs/migration/lot3a-evidence/baseline/source-manifest.json"
+    },
+    {
+      "name": "window_input_18",
+      "passed": true,
+      "detail": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/docs/migration/lot3a-cost-evidence/final/source-manifest.json"
+    },
+    {
+      "name": "window_input_19",
+      "passed": true,
+      "detail": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/scripts/measure-native-loop-costs.mjs"
+    },
+    {
+      "name": "window_input_20",
+      "passed": true,
+      "detail": "/workspace/scratch/c4dd29871d33/lot3a-baseline/scripts/measure-native-loop-costs.mjs"
+    },
+    {
+      "name": "window_input_21",
+      "passed": true,
+      "detail": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/scripts/compare-native-loop-costs.mjs"
+    },
+    {
+      "name": "window_input_22",
+      "passed": true,
+      "detail": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/scripts/compare-native-cost-cohorts.mjs"
+    },
+    {
+      "name": "window_input_23",
+      "passed": true,
+      "detail": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/scripts/run-native-cost-window.py"
+    },
+    {
+      "name": "window_input_24",
+      "passed": true,
+      "detail": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json"
+    },
+    {
+      "name": "window_input_25",
+      "passed": true,
+      "detail": "/workspace/scratch/c4dd29871d33/lot3a-baseline/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json"
+    },
+    {
+      "name": "window_input_26",
+      "passed": true,
+      "detail": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm"
+    },
+    {
+      "name": "window_input_27",
+      "passed": true,
+      "detail": "/workspace/scratch/c4dd29871d33/lot3a-baseline/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm"
+    },
+    {
+      "name": "window_input_28",
+      "passed": true,
+      "detail": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/docs/migration/lot3a-cost-evidence/performance/cases.json"
+    },
+    {
+      "name": "window_input_29",
+      "passed": true,
+      "detail": "/workspace/scratch/c4dd29871d33/lot3a-baseline/docs/migration/lot3a-cost-evidence/performance/cases.json"
+    },
+    {
+      "name": "window_input_30",
+      "passed": true,
+      "detail": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/docs/migration/lot3a-cost-evidence/performance/comparison-policy.json"
+    },
+    {
+      "name": "window_input_31",
+      "passed": true,
+      "detail": "/workspace/scratch/c4dd29871d33/lot3a-baseline/docs/migration/lot3a-cost-evidence/performance/comparison-policy.json"
+    },
+    {
+      "name": "window_input_32",
+      "passed": true,
+      "detail": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/docs/migration/lot3a-cost-evidence/performance/protocol.md"
+    },
+    {
+      "name": "window_input_33",
+      "passed": true,
+      "detail": "/workspace/scratch/c4dd29871d33/lot3a-baseline/docs/migration/lot3a-cost-evidence/performance/protocol.md"
+    },
+    {
+      "name": "window_input_34",
+      "passed": true,
+      "detail": "/workspace/scratch/c4dd29871d33/lot3a-baseline/docs/migration/native-campaigns-v39/stck-public-trace.json.gz"
+    },
+    {
+      "name": "window_input_35",
+      "passed": true,
+      "detail": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/docs/migration/native-campaigns-v39/stck-public-trace.json.gz"
+    },
+    {
+      "name": "window_input_36",
+      "passed": true,
+      "detail": "/workspace/scratch/c4dd29871d33/lot3a-baseline/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz"
+    },
+    {
+      "name": "window_input_37",
+      "passed": true,
+      "detail": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz"
+    },
+    {
+      "name": "cohort1_baseline_complete",
+      "passed": true
+    },
+    {
+      "name": "cohort1_baseline_source_digest",
+      "passed": true
+    },
+    {
+      "name": "cohort1_baseline_input_docs/migration/lot3a-cost-evidence/performance/cases.json",
+      "passed": true
+    },
+    {
+      "name": "cohort1_baseline_input_reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "passed": true
+    },
+    {
+      "name": "cohort1_baseline_input_reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "passed": true
+    },
+    {
+      "name": "cohort1_baseline_input_docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "passed": true
+    },
+    {
+      "name": "cohort1_baseline_input_docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "passed": true
+    },
+    {
+      "name": "cohort1_after_complete",
+      "passed": true
+    },
+    {
+      "name": "cohort1_after_source_digest",
+      "passed": true
+    },
+    {
+      "name": "cohort1_after_input_docs/migration/lot3a-cost-evidence/performance/cases.json",
+      "passed": true
+    },
+    {
+      "name": "cohort1_after_input_reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "passed": true
+    },
+    {
+      "name": "cohort1_after_input_reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "passed": true
+    },
+    {
+      "name": "cohort1_after_input_docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "passed": true
+    },
+    {
+      "name": "cohort1_after_input_docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "passed": true
+    },
+    {
+      "name": "cohort1_inputs_matched",
+      "passed": true
+    },
+    {
+      "name": "cohort1_comparison_input_hashes",
+      "passed": true
+    },
+    {
+      "name": "cohort1_STCK_work_exact",
+      "passed": true
+    },
+    {
+      "name": "cohort1_STCK_baseline_rounds_and_warmup",
+      "passed": true
+    },
+    {
+      "name": "cohort1_STCK_baseline_round1_protocol",
+      "passed": true
+    },
+    {
+      "name": "cohort1_STCK_baseline_round2_protocol",
+      "passed": true
+    },
+    {
+      "name": "cohort1_STCK_baseline_round3_protocol",
+      "passed": true
+    },
+    {
+      "name": "cohort1_STCK_baseline_round4_protocol",
+      "passed": true
+    },
+    {
+      "name": "cohort1_STCK_after_rounds_and_warmup",
+      "passed": true
+    },
+    {
+      "name": "cohort1_STCK_after_round1_protocol",
+      "passed": true
+    },
+    {
+      "name": "cohort1_STCK_after_round2_protocol",
+      "passed": true
+    },
+    {
+      "name": "cohort1_STCK_after_round3_protocol",
+      "passed": true
+    },
+    {
+      "name": "cohort1_STCK_after_round4_protocol",
+      "passed": true
+    },
+    {
+      "name": "cohort1_STCK_all_eight_metrics_recomputed",
+      "passed": true
+    },
+    {
+      "name": "cohort1_STCK_baseline_session_distribution",
+      "passed": true
+    },
+    {
+      "name": "cohort1_STCK_after_session_distribution",
+      "passed": true
+    },
+    {
+      "name": "cohort1_STCK_session_comparison",
+      "passed": true
+    },
+    {
+      "name": "cohort1_SMLP_work_exact",
+      "passed": true
+    },
+    {
+      "name": "cohort1_SMLP_baseline_rounds_and_warmup",
+      "passed": true
+    },
+    {
+      "name": "cohort1_SMLP_baseline_round1_protocol",
+      "passed": true
+    },
+    {
+      "name": "cohort1_SMLP_baseline_round2_protocol",
+      "passed": true
+    },
+    {
+      "name": "cohort1_SMLP_baseline_round3_protocol",
+      "passed": true
+    },
+    {
+      "name": "cohort1_SMLP_baseline_round4_protocol",
+      "passed": true
+    },
+    {
+      "name": "cohort1_SMLP_after_rounds_and_warmup",
+      "passed": true
+    },
+    {
+      "name": "cohort1_SMLP_after_round1_protocol",
+      "passed": true
+    },
+    {
+      "name": "cohort1_SMLP_after_round2_protocol",
+      "passed": true
+    },
+    {
+      "name": "cohort1_SMLP_after_round3_protocol",
+      "passed": true
+    },
+    {
+      "name": "cohort1_SMLP_after_round4_protocol",
+      "passed": true
+    },
+    {
+      "name": "cohort1_SMLP_all_eight_metrics_recomputed",
+      "passed": true
+    },
+    {
+      "name": "cohort1_SMLP_baseline_session_distribution",
+      "passed": true
+    },
+    {
+      "name": "cohort1_SMLP_after_session_distribution",
+      "passed": true
+    },
+    {
+      "name": "cohort1_SMLP_session_comparison",
+      "passed": true
+    },
+    {
+      "name": "cohort1_status_and_failures_reproduced",
+      "passed": true
+    },
+    {
+      "name": "cohort1_retained_inputs_and_failure_status",
+      "passed": true
+    },
+    {
+      "name": "cohort2_baseline_complete",
+      "passed": true
+    },
+    {
+      "name": "cohort2_baseline_source_digest",
+      "passed": true
+    },
+    {
+      "name": "cohort2_baseline_input_docs/migration/lot3a-cost-evidence/performance/cases.json",
+      "passed": true
+    },
+    {
+      "name": "cohort2_baseline_input_reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "passed": true
+    },
+    {
+      "name": "cohort2_baseline_input_reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "passed": true
+    },
+    {
+      "name": "cohort2_baseline_input_docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "passed": true
+    },
+    {
+      "name": "cohort2_baseline_input_docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "passed": true
+    },
+    {
+      "name": "cohort2_after_complete",
+      "passed": true
+    },
+    {
+      "name": "cohort2_after_source_digest",
+      "passed": true
+    },
+    {
+      "name": "cohort2_after_input_docs/migration/lot3a-cost-evidence/performance/cases.json",
+      "passed": true
+    },
+    {
+      "name": "cohort2_after_input_reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "passed": true
+    },
+    {
+      "name": "cohort2_after_input_reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "passed": true
+    },
+    {
+      "name": "cohort2_after_input_docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "passed": true
+    },
+    {
+      "name": "cohort2_after_input_docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "passed": true
+    },
+    {
+      "name": "cohort2_inputs_matched",
+      "passed": true
+    },
+    {
+      "name": "cohort2_comparison_input_hashes",
+      "passed": true
+    },
+    {
+      "name": "cohort2_STCK_work_exact",
+      "passed": true
+    },
+    {
+      "name": "cohort2_STCK_baseline_rounds_and_warmup",
+      "passed": true
+    },
+    {
+      "name": "cohort2_STCK_baseline_round1_protocol",
+      "passed": true
+    },
+    {
+      "name": "cohort2_STCK_baseline_round2_protocol",
+      "passed": true
+    },
+    {
+      "name": "cohort2_STCK_baseline_round3_protocol",
+      "passed": true
+    },
+    {
+      "name": "cohort2_STCK_baseline_round4_protocol",
+      "passed": true
+    },
+    {
+      "name": "cohort2_STCK_after_rounds_and_warmup",
+      "passed": true
+    },
+    {
+      "name": "cohort2_STCK_after_round1_protocol",
+      "passed": true
+    },
+    {
+      "name": "cohort2_STCK_after_round2_protocol",
+      "passed": true
+    },
+    {
+      "name": "cohort2_STCK_after_round3_protocol",
+      "passed": true
+    },
+    {
+      "name": "cohort2_STCK_after_round4_protocol",
+      "passed": true
+    },
+    {
+      "name": "cohort2_STCK_all_eight_metrics_recomputed",
+      "passed": true
+    },
+    {
+      "name": "cohort2_STCK_baseline_session_distribution",
+      "passed": true
+    },
+    {
+      "name": "cohort2_STCK_after_session_distribution",
+      "passed": true
+    },
+    {
+      "name": "cohort2_STCK_session_comparison",
+      "passed": true
+    },
+    {
+      "name": "cohort2_SMLP_work_exact",
+      "passed": true
+    },
+    {
+      "name": "cohort2_SMLP_baseline_rounds_and_warmup",
+      "passed": true
+    },
+    {
+      "name": "cohort2_SMLP_baseline_round1_protocol",
+      "passed": true
+    },
+    {
+      "name": "cohort2_SMLP_baseline_round2_protocol",
+      "passed": true
+    },
+    {
+      "name": "cohort2_SMLP_baseline_round3_protocol",
+      "passed": true
+    },
+    {
+      "name": "cohort2_SMLP_baseline_round4_protocol",
+      "passed": true
+    },
+    {
+      "name": "cohort2_SMLP_after_rounds_and_warmup",
+      "passed": true
+    },
+    {
+      "name": "cohort2_SMLP_after_round1_protocol",
+      "passed": true
+    },
+    {
+      "name": "cohort2_SMLP_after_round2_protocol",
+      "passed": true
+    },
+    {
+      "name": "cohort2_SMLP_after_round3_protocol",
+      "passed": true
+    },
+    {
+      "name": "cohort2_SMLP_after_round4_protocol",
+      "passed": true
+    },
+    {
+      "name": "cohort2_SMLP_all_eight_metrics_recomputed",
+      "passed": true
+    },
+    {
+      "name": "cohort2_SMLP_baseline_session_distribution",
+      "passed": true
+    },
+    {
+      "name": "cohort2_SMLP_after_session_distribution",
+      "passed": true
+    },
+    {
+      "name": "cohort2_SMLP_session_comparison",
+      "passed": true
+    },
+    {
+      "name": "cohort2_status_and_failures_reproduced",
+      "passed": true
+    },
+    {
+      "name": "cohort2_retained_inputs_and_failure_status",
+      "passed": true
+    },
+    {
+      "name": "all_static_environments_equal",
+      "passed": true
+    },
+    {
+      "name": "same_runner_and_current_bytes",
+      "passed": true
+    },
+    {
+      "name": "baseline_native_source_identical_across_cohorts",
+      "passed": true
+    },
+    {
+      "name": "baseline_current_native_source_matches_frozen",
+      "passed": true
+    },
+    {
+      "name": "after_native_source_identical_across_cohorts",
+      "passed": true
+    },
+    {
+      "name": "after_current_native_source_matches_frozen",
+      "passed": true
+    },
+    {
+      "name": "baseline_commit_and_digest",
+      "passed": true
+    },
+    {
+      "name": "correction_matches_delivery_freeze",
+      "passed": true
+    },
+    {
+      "name": "STCK_all_eight_sessions_per_side",
+      "passed": true
+    },
+    {
+      "name": "STCK_work_metadata_exact_across_all_sessions",
+      "passed": true
+    },
+    {
+      "name": "STCK_pooled_eight_metrics_recomputed",
+      "passed": true
+    },
+    {
+      "name": "SMLP_all_eight_sessions_per_side",
+      "passed": true
+    },
+    {
+      "name": "SMLP_work_metadata_exact_across_all_sessions",
+      "passed": true
+    },
+    {
+      "name": "SMLP_pooled_eight_metrics_recomputed",
+      "passed": true
+    },
+    {
+      "name": "every_physical_session_included_once",
+      "passed": true
+    },
+    {
+      "name": "two_hundred_measured_actions_per_version",
+      "passed": true
+    },
+    {
+      "name": "aggregate_gate_exactly_matches_predeclared_rule",
+      "passed": true
+    },
+    {
+      "name": "no_exclusions_or_noise_allowance",
+      "passed": true
+    },
+    {
+      "name": "historical_bytes_unchanged_scripts/measure-native-loop-costs.mjs",
+      "passed": true
+    },
+    {
+      "name": "historical_bytes_unchanged_scripts/compare-native-loop-costs.mjs",
+      "passed": true
+    },
+    {
+      "name": "historical_bytes_unchanged_scripts/compare-native-cost-cohorts.mjs",
+      "passed": true
+    },
+    {
+      "name": "historical_bytes_unchanged_docs/migration/lot3a-evidence/performance/combined-comparison.json",
+      "passed": true
+    }
+  ],
+  "checkedCount": 156,
+  "sources": {
+    "baseline": {
+      "digest": "ac7225dd2e5f51551881f0c1d5eba284c64c2f019b08f00e572900319e89255b",
+      "fileCount": 242
+    },
+    "after": {
+      "digest": "f0d8b2b0a746f19036076010025fffa1ad532d5751caa176f7efcccff7bc4aff",
+      "fileCount": 245
+    }
+  },
+  "cohortResults": [
+    {
+      "cohort": 1,
+      "status": "passed",
+      "unresolved": []
+    },
+    {
+      "cohort": 2,
+      "status": "budget_review_required",
+      "unresolved": [
+        {
+          "case": "STCK",
+          "stage": "acquisition_and_persistence",
+          "result": "over_budget_with_noise_unresolved",
+          "medianRelativeIncrease": 0.11027602771279787
+        },
+        {
+          "case": "STCK",
+          "stage": "persistence",
+          "result": "over_budget_with_noise_unresolved",
+          "medianRelativeIncrease": 0.13233777029549287
+        }
+      ]
+    }
+  ],
+  "measuredSessions": 32,
+  "measuredSessionsPerCaseAndVersion": 8,
+  "measuredActionsPerVersion": 200,
+  "budget": {
+    "relativeThreshold": 0.1,
+    "metrics": 16,
+    "withinObservedBudget": 16,
+    "unresolved": []
+  },
+  "metrics": [
+    {
+      "case": "STCK",
+      "stage": "session_elapsed",
+      "countPerVersion": 8,
+      "beforeMedianMs": 10873.907591000001,
+      "afterMedianMs": 10966.417002499998,
+      "relativeIncrease": 0.008507467138727964,
+      "result": "within_observed_budget"
+    },
+    {
+      "case": "STCK",
+      "stage": "new_decision",
+      "countPerVersion": 48,
+      "beforeMedianMs": 312.36736850000125,
+      "afterMedianMs": 301.2175300000017,
+      "relativeIncrease": -0.03569463274458351,
+      "result": "within_observed_budget"
+    },
+    {
+      "case": "STCK",
+      "stage": "known_prefix_service",
+      "countPerVersion": 32,
+      "beforeMedianMs": 9.39356250000128,
+      "afterMedianMs": 8.393206000000646,
+      "relativeIncrease": -0.10649383553901925,
+      "result": "within_observed_budget"
+    },
+    {
+      "case": "STCK",
+      "stage": "known_prefix_request",
+      "countPerVersion": 32,
+      "beforeMedianMs": 11.023382500003208,
+      "afterMedianMs": 10.030824500000563,
+      "relativeIncrease": -0.09004114662648754,
+      "result": "within_observed_budget"
+    },
+    {
+      "case": "STCK",
+      "stage": "known_prefix_guard",
+      "countPerVersion": 32,
+      "beforeMedianMs": 0.21306550000008428,
+      "afterMedianMs": 0.2122845000030793,
+      "relativeIncrease": -0.003665539456198519,
+      "result": "within_observed_budget"
+    },
+    {
+      "case": "STCK",
+      "stage": "acquisition_and_persistence",
+      "countPerVersion": 48,
+      "beforeMedianMs": 913.5693745000017,
+      "afterMedianMs": 968.8372554999987,
+      "relativeIncrease": 0.06049664376090247,
+      "result": "within_observed_budget"
+    },
+    {
+      "case": "STCK",
+      "stage": "persistence",
+      "countPerVersion": 104,
+      "beforeMedianMs": 177.89121199999863,
+      "afterMedianMs": 170.3835805000017,
+      "relativeIncrease": -0.04220349850669969,
+      "result": "within_observed_budget"
+    },
+    {
+      "case": "STCK",
+      "stage": "restoration",
+      "countPerVersion": 96,
+      "beforeMedianMs": 10.997795999999653,
+      "afterMedianMs": 9.752282000001287,
+      "relativeIncrease": -0.11325123688404526,
+      "result": "within_observed_budget"
+    },
+    {
+      "case": "SMLP",
+      "stage": "session_elapsed",
+      "countPerVersion": 8,
+      "beforeMedianMs": 24218.379399000005,
+      "afterMedianMs": 17386.704178499996,
+      "relativeIncrease": -0.28208639017283266,
+      "result": "within_observed_budget"
+    },
+    {
+      "case": "SMLP",
+      "stage": "new_decision",
+      "countPerVersion": 72,
+      "beforeMedianMs": 416.4757210000098,
+      "afterMedianMs": 358.415160499997,
+      "relativeIncrease": -0.13940923221311008,
+      "result": "within_observed_budget"
+    },
+    {
+      "case": "SMLP",
+      "stage": "known_prefix_service",
+      "countPerVersion": 48,
+      "beforeMedianMs": 11.033526999999594,
+      "afterMedianMs": 9.225569999998697,
+      "relativeIncrease": -0.16386029598703689,
+      "result": "within_observed_budget"
+    },
+    {
+      "case": "SMLP",
+      "stage": "known_prefix_request",
+      "countPerVersion": 48,
+      "beforeMedianMs": 13.535190999988117,
+      "afterMedianMs": 11.406915500010655,
+      "relativeIncrease": -0.1572401527233218,
+      "result": "within_observed_budget"
+    },
+    {
+      "case": "SMLP",
+      "stage": "known_prefix_guard",
+      "countPerVersion": 48,
+      "beforeMedianMs": 0.3540720000019064,
+      "afterMedianMs": 0.33370849999482743,
+      "relativeIncrease": -0.0575123138993463,
+      "result": "within_observed_budget"
+    },
+    {
+      "case": "SMLP",
+      "stage": "acquisition_and_persistence",
+      "countPerVersion": 72,
+      "beforeMedianMs": 1748.2586635000043,
+      "afterMedianMs": 949.3091934999975,
+      "relativeIncrease": -0.45699728917717153,
+      "result": "within_observed_budget"
+    },
+    {
+      "case": "SMLP",
+      "stage": "persistence",
+      "countPerVersion": 152,
+      "beforeMedianMs": 147.3336785000065,
+      "afterMedianMs": 144.90351099998952,
+      "relativeIncrease": -0.01649431090541098,
+      "result": "within_observed_budget"
+    },
+    {
+      "case": "SMLP",
+      "stage": "restoration",
+      "countPerVersion": 144,
+      "beforeMedianMs": 4.961746000000858,
+      "afterMedianMs": 4.6785020000024815,
+      "relativeIncrease": -0.05708555012657379,
+      "result": "within_observed_budget"
+    }
+  ],
+  "conclusion": "The aggregate closure is consistent with the predeclared ABBA protocol. Both cohort results remain retained, including the second-cohort STCK acquisition/persistence and persistence overruns; neither cohort was selected or excluded.",
+  "qualification": "This audit verifies retained evidence and arithmetic, not operating-system isolation independently of the execution window, timing accuracy, population confidence intervals, complete private-state equivalence, browser/network/live-game latency or stability over hours. Historical 0.37 failures remain unchanged. The reported code and input hashes establish retained byte identity; they do not independently timestamp the original protocol declaration."
+}

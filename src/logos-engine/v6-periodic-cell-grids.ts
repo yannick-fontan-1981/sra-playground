@@ -11,6 +11,83 @@ const gcd=(a:number,b:number):number=>b?gcd(b,a%b):a;
 const unique=(a:number[])=>[...new Set(a)].sort((x,y)=>x-y);
 const range=(a:number,b:number,step=1):number[]=>{const out:number[]=[];for(let x=a;x<b;x+=step)out.push(x);return out;};
 const count=(a:unknown[]):Map<string,number>=>{const out=new Map<string,number>();for(const x of a){const k=JSON.stringify(x);out.set(k,(out.get(k)??0)+1);}return out;};
+const arraySlice = Array.prototype.slice, arrayMap = Array.prototype.map;
+interface EncodedPeriodicColumns { width: number; axes: string[][] }
+
+/**
+ * V5 frame.py's exact horizontal-fragment IDs and fixed-width byte strings.
+ * This is temporary measurement data owned by one enumeration, not knowledge
+ * or a raster-identity cache. Equal fixed-size cells have equal strings iff
+ * every palette value is equal; no lossy digest enters candidate ranking.
+ *
+ * Keep the former JSON path for nonordinary arrays. Eligibility inspects data
+ * descriptors, so it neither invokes an accessor nor masks slice/toJSON hooks.
+ */
+function encodePeriodicColumns(rows: NativeRows, axes: R[]): EncodedPeriodicColumns | null {
+  if (Object.getPrototypeOf(Array.prototype) !== Object.prototype
+    || Object.getOwnPropertyDescriptor(Array.prototype, 'slice')?.value !== arraySlice
+    || Object.getOwnPropertyDescriptor(Array.prototype, 'map')?.value !== arrayMap
+    || Object.getOwnPropertyDescriptor(Array.prototype, 'toJSON')
+    || Object.getOwnPropertyDescriptor(Object.prototype, 'toJSON')) return null;
+  const dense = (value: unknown): unknown[] | null => {
+    if (!Array.isArray(value) || Object.getPrototypeOf(value) !== Array.prototype
+      || Object.getOwnPropertySymbols(value).length) return null;
+    const descriptors = Object.getOwnPropertyDescriptors(value);
+    if (Object.keys(descriptors).length !== value.length + 1) return null;
+    const result: unknown[] = [];
+    for (let index = 0; index < value.length; index++) {
+      const descriptor = descriptors[String(index)];
+      if (!descriptor || !('value' in descriptor) || !descriptor.enumerable) return null;
+      result.push(descriptor.value);
+    }
+    return result;
+  };
+  const outer = dense(rows);
+  if (!outer) return null;
+  const owned: number[][] = [], palette = new Set<number>();
+  for (const row of outer) {
+    const values = dense(row);
+    if (!values || values.length !== rows[0]!.length) return null;
+    const pixels: number[] = [];
+    for (const value of values) {
+      if (typeof value !== 'number' || !Number.isSafeInteger(value) || value < 0 || value > 255) return null;
+      pixels.push(value); palette.add(value);
+    }
+    owned.push(pixels);
+  }
+  const paletteIndex = new Map([...palette].sort((a, b) => a - b).map((value, index) => [value, index]));
+  const encodedRows = owned.map(row => row.map(value => String.fromCharCode(paletteIndex.get(value)!)).join(''));
+  const fragments = new Map<string, number>(), columns = new Map<string, number[]>();
+  for (const axis of axes) for (const left of axis.starts as number[]) {
+    const columnKey = key([left, axis.cell_extent]);
+    if (columns.has(columnKey)) continue;
+    columns.set(columnKey, encodedRows.map(row => {
+      const fragment = row.slice(left, left + axis.cell_extent);
+      if (!fragments.has(fragment)) fragments.set(fragment, fragments.size);
+      return fragments.get(fragment)!;
+    }));
+  }
+  let width = 1;
+  for (let maximum = fragments.size - 1; maximum >= 256; maximum = Math.floor(maximum / 256)) width++;
+  const bytes = new Map<string, string>();
+  for (const [columnKey, ids] of columns) {
+    let column = '';
+    for (let id of ids) for (let byte = 0; byte < width; byte++) {
+      column += String.fromCharCode(id % 256); id = Math.floor(id / 256);
+    }
+    bytes.set(columnKey, column);
+  }
+  return { width, axes: axes.map(axis => (axis.starts as number[]).map(left => bytes.get(key([left, axis.cell_extent]))!)) };
+}
+
+function encodedPatternCounts(starts: readonly number[], extent: number, width: number, columns: readonly string[]): number[] {
+  const counts = new Map<string, number>();
+  for (const top of starts) for (const column of columns) {
+    const pattern = column.slice(top * width, (top + extent) * width);
+    counts.set(pattern, (counts.get(pattern) ?? 0) + 1);
+  }
+  return [...counts.values()];
+}
 export function exactSupportTileLattices(rows:NativeRows,maximumPitch=16,bordered=false):number[][] {
  const H=rows.length,W=rows[0]!.length,groups=new Map<string,Map<string,number>>();
  for(const c of supportParts(rows)){const b=c.bbox,h=b.height,w=b.width;
@@ -58,14 +135,17 @@ export function enumerateSupportPeriodicCellGrids(rows:NativeRows,options:R={}):
  if(maximumPitch<2||maximumPitch>32||maximumCandidates<1||maximumCandidates>8)throw new TypeError('Periodic grid bounds exceed source limits');
  const exact=[...new Map([...exactSupportTileLattices(rows,maximumPitch,true),...exactSupportTileLattices(rows,maximumPitch,false)].map(p=>[key(p),p])).values()].sort(compare);
  const raxes=measureSupportPeriodicAxes(rows,'row',maximumPitch,exact.map(([r,_c,h])=>[h!,r!])),caxes=measureSupportPeriodicAxes(rows,'column',maximumPitch,exact.map(([_r,c,_h,w])=>[w!,c!]));
+ const encoded=encodePeriodicColumns(rows,caxes);
  const gain=(a:R,axes:R[])=>{if(a.gap_extent!==0)return 0;const aliases=axes.filter(x=>x.gap_extent===0&&x.pitch<a.pitch&&a.pitch%x.pitch===0&&x.offset===a.offset%x.pitch);return aliases.length?Math.max(0,(a.boundary_contrast_ppm-Math.max(...aliases.map(x=>x.boundary_contrast_ppm)))*a.boundary_count):0;};
  const rg=raxes.map(a=>gain(a,raxes)),cg=caxes.map(a=>gain(a,caxes)),described:R[]=[];let pruned=false;
  // The source's exact optimistic pruning is an acceleration. Exhaustive
  // retained-axis measurement yields the same candidates and truncation flag.
  for(let i=0;i<raxes.length;i++)for(let j=0;j<caxes.length;j++){
   const r=raxes[i]!,c=caxes[j]!;if(!conditioned&&(r.gap_extent===0||c.gap_extent===0)&&!(r.gap_extent===0&&c.gap_extent===0&&r.cell_extent===c.cell_extent)){pruned=true;continue;}
-  const patterns:unknown[]=[];for(const top of r.starts)for(const left of c.starts)patterns.push(rows.slice(top,top+r.cell_extent).map(row=>row.slice(left,left+c.cell_extent)));
-  const counts=[...count(patterns).values()],n=patterns.length,repeated=counts.filter(v=>v>1).reduce((a,b)=>a+b,0),repeatedTypes=counts.filter(v=>v>1).length,total=r.separator_total+c.separator_total,consistency=total?Math.floor((r.separator_consistent+c.separator_consistent)*1000000/total):0;
+  let counts:number[];
+  if(encoded)counts=encodedPatternCounts(r.starts,r.cell_extent,encoded.width,encoded.axes[j]!);
+  else{const patterns:unknown[]=[];for(const top of r.starts)for(const left of c.starts)patterns.push(rows.slice(top,top+r.cell_extent).map(row=>row.slice(left,left+c.cell_extent)));counts=[...count(patterns).values()];}
+  const n=r.starts.length*c.starts.length,repeated=counts.filter(v=>v>1).reduce((a,b)=>a+b,0),repeatedTypes=counts.filter(v=>v>1).length,total=r.separator_total+c.separator_total,consistency=total?Math.floor((r.separator_consistent+c.separator_consistent)*1000000/total):0;
   const order=[Number(total>0&&consistency===1000000),r.gap_extent===0&&c.gap_extent===0&&n?Math.floor(Math.max(...counts)*1000000/n):0,repeated*r.cell_extent*c.cell_extent,repeated,repeatedTypes,consistency,n,-r.pitch,-c.pitch,-r.offset,-c.offset];
   described.push({order,ref:`measurement.periodic_grid.r${r.offset}.${r.cell_extent}.${r.gap_extent}.c${c.offset}.${c.cell_extent}.${c.gap_extent}`,r,c,n,counts,consistency,rg:rg[i],cg:cg[j]});
  }
