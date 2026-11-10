@@ -1,0 +1,34 @@
+✔ symbol state retention requires the same single owner registered for selection (112.559361ms)
+✔ the production factory registers Symbols once at its declared position after Workshop and before Inventory (1230.034598ms)
+✖ the complete production caller selects a measured guide through SRC and acquires its ineffective action exactly once (1055.46394ms)
+✔ a foreign actual return can teach Workshop while Symbols has no active or passive acquisition (2473.028124ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 3
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5721.540684
+
+✖ failing tests:
+
+test at tests/v6-symbol-transactions-kernel.test.ts:92:1
+✖ the complete production caller selects a measured guide through SRC and acquires its ineffective action exactly once (1055.46394ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'public_occurrence_recall'
+  - 'public_symbol_transaction'
+            ^
+  
+      at TestContext.<anonymous> (file:///workspace/sites/sra-lot7b-20261110/.sites-checkout/tests/v6-symbol-transactions-kernel.test.ts:101:62)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'public_occurrence_recall',
+    expected: 'public_symbol_transaction',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

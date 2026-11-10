@@ -1,0 +1,12 @@
+Retained from the actual first generator tool result before the 5A quiet interval.
+Command: python -B scripts/export-v6-symbol-interface-reference.py
+Exit code: 1
+No fixture was written by this failed invocation. Original-source verification
+completed before imports; the final after-verification was not reached.
+This log records a development synthetic-builder failure, not a game result.
+
+Traceback (most recent call last):
+  File "/workspace/sites/sra-lot7b-20261110/.sites-checkout/scripts/export-v6-symbol-interface-reference.py", line 196, in <module>
+    assert METHOD['source_signature'] == [6, 22, 23] and METHOD['receiver_signature'] == [5, 22, 23]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

@@ -1,0 +1,95 @@
+{
+  "schema": "logos-engine.lot7b-symbol-interface-reference-validation.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T21:17:02.146930+00:00",
+  "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "scope": "Synthetic functional source-oracle comparison; no game dispatch, global build or cost measurement.",
+  "sourceModified": false,
+  "sourceFilesVerifiedBeforeAndAfter": 1786,
+  "sourceOracleCommand": [
+    "python",
+    "-B",
+    "scripts/export-v6-symbol-interface-reference.py"
+  ],
+  "testCommand": [
+    "node",
+    "--test",
+    "tests/v6-symbol-interface-reference.test.ts"
+  ],
+  "counts": {
+    "tests": 78,
+    "suites": 0,
+    "pass": 78,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "cases": {
+    "acquisitionSteps": 8,
+    "pureCases": 8,
+    "stateCases": 64,
+    "sequences": 1
+  },
+  "learnedMethod": "symbol_interface:c0d592aeb13d70ac412e2cd36d80ee287724c4ba4beab3ed98637ad5f27d01ef",
+  "inputs": [
+    {
+      "path": "src/logos-engine/v6-symbol-interface.ts",
+      "bytes": 20787,
+      "sha256": "2d035f06cfdb229e2da81e7983cd57c0e634a8fcc7451826e2bfbbcae2aaf200"
+    },
+    {
+      "path": "src/logos-engine/v6-symbol-transactions-geometry.ts",
+      "bytes": 3318,
+      "sha256": "9276c6212c53d880f2d40323019f6cb03a695e512a5cac023213172928fd845a"
+    },
+    {
+      "path": "src/logos-engine/v5-symbolic-diagrams.ts",
+      "bytes": 11644,
+      "sha256": "790cdfd116d863f047dc006a7ad518b2200d450bb60bf66a080c0fe3e95593be"
+    },
+    {
+      "path": "src/logos-engine/v5-concentric-frames.ts",
+      "bytes": 11135,
+      "sha256": "3e89e2458ae5cdc73dc7b10533c37f00e636528e88bd335fd8531ffcae1b2d52"
+    },
+    {
+      "path": "src/logos-engine/v6-inventory-measurements.ts",
+      "bytes": 22946,
+      "sha256": "e5b873bc9e16d45d5eb0248e46d06d1ce98e0698de9d991864f75e89d7283d83"
+    },
+    {
+      "path": "scripts/export-v6-symbol-interface-reference.py",
+      "bytes": 27485,
+      "sha256": "a8be47e4760a501b44e22bd23817768e9f5f825e2feee10003055be4d42c9361"
+    },
+    {
+      "path": "tests/v6-symbol-interface-reference.test.ts",
+      "bytes": 7764,
+      "sha256": "fd502fc977adbfa65897a96f5ecd2d7e89dca815268b693f1cc973aabab1c9cc"
+    },
+    {
+      "path": "tests/fixtures/v6-symbol-interface-reference.json.gz",
+      "bytes": 498543,
+      "sha256": "6d8b8408bf994b0048eb24534545d831a6df90e200ec9ada43d20c073c577e1d"
+    }
+  ],
+  "receipts": [
+    {
+      "path": "docs/migration/lot7b-evidence/diagnostic/interface-oracle-02.log",
+      "bytes": 349,
+      "sha256": "a273fc18a384c6754b67ac674e7bf24a6bb16a44f175abee7cb719669aba9e23"
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/diagnostic/interface-tests-01.log",
+      "bytes": 8113,
+      "sha256": "8522d5dd185c9889293f96bad84e642e7d570a40aa13f6b407703c4e4984ce0b"
+    }
+  ],
+  "retainedDevelopmentFailure": {
+    "path": "docs/migration/lot7b-evidence/diagnostic/interface-oracle-initial-failure.log",
+    "bytes": 776,
+    "sha256": "7a800f735e170a51f47b7624a69d7a746b75207ebde18ead7cd630a832008287"
+  },
+  "qualification": "Original unchanged Python on synthetic raster returns and an explicit synthetic official epoch boundary. The method is learned from record calls; controlled state perturbations are named. No game dispatch or game completion proof."
+}

@@ -1,0 +1,32 @@
+{
+  "schema": "logos-engine.cumulative-game-case-checkpoint.v1",
+  "game": "CRAF",
+  "recordedAt": "2026-11-10T21:23:08.140135+00:00",
+  "casePhase": "paused_after_development_three_levels_and_exact_source_parity",
+  "maximumCumulativeSeconds": 2400,
+  "cumulativeSeconds": 383.465343,
+  "remainingSeconds": 2016.534657,
+  "priorCumulativeSeconds": 60.0,
+  "preClockCharge": {
+    "chargedSeconds": 60.0,
+    "kind": "conservative_charge_not_precise_runtime_measurement",
+    "purpose": "Initial public candidate diagnosis, source Kernel fixture and targeted Kernel verification before this live case clock. Includes candidate original offer0.1374992619967088seconds. No prior CRAF live campaign or case checkpoint found in repository evidence."
+  },
+  "targetLevels": 3,
+  "attempts": [
+    "attempt1/execution-craf.json"
+  ],
+  "chargedIntervals": [
+    {
+      "startedAt": "2026-11-10T21:17:44.674792+00:00",
+      "purpose": "development_cold_campaign_and_original_public_parity",
+      "status": "closed",
+      "endedAt": "2026-11-10T21:23:08.140135+00:00",
+      "elapsedSeconds": 323.465343
+    }
+  ],
+  "limitation": "Development CRAF succeeds3levels/36actions,all36selectedbySymbols;144actualsourcecalls/432exactchecks. Final5A/4B integration andbrowser remainpending. Retainthiscumulativeclock foranyfurthercasework.",
+  "currentChargedIntervalSeconds": 323.465343,
+  "actualLevels": 3,
+  "actions": 36
+}

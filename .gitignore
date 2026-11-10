@@ -359,3 +359,9 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 # Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot7a-evidence/performance-integrated/owner-graphs-baseline.json.gz
 /docs/migration/lot7a-evidence/performance-integrated/owner-graphs-candidate.json.gz
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot7b-evidence/attempt1/craf-campaign.json.gz
+
+# Exact frozen source archive; restore with freeze-v53-native-source.py restore DIRECTORY
+/docs/migration/lot7b-evidence/attempt1/source-archive.tar.gz
