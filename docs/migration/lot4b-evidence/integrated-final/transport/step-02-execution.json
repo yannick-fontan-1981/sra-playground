@@ -1,0 +1,30 @@
+{
+  "schema": "logos-engine.bounded-source-helper-execution.v1",
+  "step": 2,
+  "kind": "evidence",
+  "previousCommit": "ef87b64e3188d2ded2f8b75e2b2263766309ce49",
+  "expectedCommit": "621b1c47316d70083b013bcf708b0ec0de772bae",
+  "expectedTree": "2194ba394c8eddcfd7db5e373fbe2971b0a9da17",
+  "rawMissingObjectBytes": 40579945,
+  "startedAt": "2026-11-10T22:57:08.204Z",
+  "finishedAt": "2026-11-10T22:57:23.236Z",
+  "helper": "/home/agent/.codex/plugins/cache/openai-curated-remote/sites/1.1.6/scripts/site-workflow.mjs",
+  "commands": [],
+  "archive": "/workspace/sites/sra-lot4b-publication-20261110/step-02.tar.gz",
+  "exitCode": 0,
+  "helperResult": {
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "checkout_path": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+    "commit_sha": "621b1c47316d70083b013bcf708b0ec0de772bae",
+    "archive": "/workspace/sites/sra-lot4b-publication-20261110/step-02.tar.gz"
+  },
+  "sourceOpening": {
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "checkout_path": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+    "commit_sha": "7d44dbff8ad70c4c34845c246c77cfecf4e451db"
+  },
+  "checkoutLog": "{\"head\": \"621b1c47316d70083b013bcf708b0ec0de772bae\", \"tree\": \"2194ba394c8eddcfd7db5e373fbe2971b0a9da17\", \"clean\": true}\n",
+  "helperLog": "Ready for Site workflow JSON on stdin (input is hidden).\r\n/workspace/sites/sra-lot4b-publication-20261110/step-02.tar.gz\r\n{\"project_id\":\"appgprj_6adbc388d79081918581b93b919d7258\",\"checkout_path\":\"/workspace/sites/sra-lot4a-20261110/.sites-checkout\",\"commit_sha\":\"621b1c47316d70083b013bcf708b0ec0de772bae\",\"archive\":\"/workspace/sites/sra-lot4b-publication-20261110/step-02.tar.gz\"}\r\n",
+  "autoPublishRequested": false,
+  "siteDeploymentPerformed": false
+}
