@@ -1,0 +1,30 @@
+{
+  "schema": "logos-engine.lot5c.recovery-proof-execution.v1",
+  "startedAt": "2026-11-11T11:57:16.024560+00:00",
+  "finishedAt": "2026-11-11T11:57:32.859368+00:00",
+  "elapsedSeconds": 16.834863677000044,
+  "command": [
+    "flock",
+    "-s",
+    "/workspace/shared/sra-coordination/performance.lock",
+    "timeout",
+    "180s",
+    "python3",
+    "scripts/export-observed-binding-reference.py",
+    "--fixture",
+    "tests/fixtures/v6-observed-binding-reference.json.gz",
+    "--receipt",
+    "docs/migration/lot5c-evidence/recovery/source-oracle/export-01.json"
+  ],
+  "exitCode": 0,
+  "log": {
+    "path": "docs/migration/lot5c-evidence/recovery/source-oracle/export-01.log",
+    "bytes": 395,
+    "sha256": "862bd309bc6c84df592853d650b3228d7a48362eb7282c4d189ed5a2bda16b41"
+  },
+  "compressedLog": {
+    "path": "docs/migration/lot5c-evidence/recovery/source-oracle/export-01.log.gz",
+    "bytes": 285,
+    "sha256": "cd210f5f7fb5f55f87494a68892aa125f413f03d3698fe964cd60e4d47f83a2b"
+  }
+}

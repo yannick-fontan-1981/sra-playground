@@ -1,0 +1,19 @@
+{
+  "schema": "logos-engine.lot5c.recovered-proof-tool-source.v1",
+  "recordedAt": "2026-11-11T12:03:28.225157+00:00",
+  "status": "verified_exact_copy",
+  "phase": "after_completed_export_verified_against_its_receipt",
+  "executionReceipt": "docs/migration/lot5c-evidence/recovery/source-oracle/export-01-execution.json",
+  "exportReceipt": "docs/migration/lot5c-evidence/recovery/source-oracle/export-01.json",
+  "source": {
+    "path": "scripts/export-observed-binding-reference.py",
+    "bytes": 33540,
+    "sha256": "799333330e6a7621d52f6a42ce37d04814db7627929f2b9c2a0de35c93f1f9fa"
+  },
+  "preservedSource": {
+    "path": "docs/migration/lot5c-evidence/recovery/source-oracle/export-01-exporter-source.py",
+    "bytes": 33540,
+    "sha256": "799333330e6a7621d52f6a42ce37d04814db7627929f2b9c2a0de35c93f1f9fa"
+  },
+  "qualification": "Exact bytes of the newly executed recovery exporter. This is a subsequent verified copy, not a historical pre-outage archive."
+}
