@@ -1,0 +1,31 @@
+{
+  "schema": "logos-engine.lot4c-post-publication-input-integrity.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-11T01:48:56.633189+00:00",
+  "firstPublishedSiteVersion": 92,
+  "firstPublishedSource": "d06620d1e4ca2c9758cc693b1ced9eeeddccb7e6",
+  "nativeDigest": "eebd099808672be934389020c8f9061df4fdacab28cd7d60c00cd1b080464c04",
+  "publicationInputReceipt": {
+    "path": "docs/migration/lot4c-evidence/integrated-final/publication-inputs.json",
+    "bytes": 177229,
+    "sha256": "e940764ac9f5b1aa2d662aae9b45ff00d61bb5e42b80b37ab4f879d7510b15b8"
+  },
+  "matchedReceiptInputs": 920,
+  "sourceAndTestFiles": 684,
+  "buildInputs": 363,
+  "tests": {
+    "tests": 4838,
+    "pass": 4838,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "regressionChecks": 170,
+  "worker": {
+    "path": "dist/assets/v6-agent-worker-C0LUXp35.js",
+    "sha256": "a42ffe6ff42420abbc3ee9d10e88b10286b6d31935a6a6921ac48132bf6d65be",
+    "bytes": 6737589
+  },
+  "qualification": "Existing receipt inputs, current source/test/build membership, recorded tests/build/replays and worker bytes are rechecked after actual first publication. No test, build, game, benchmark, source comparison or cost recalculation is rerun."
+}

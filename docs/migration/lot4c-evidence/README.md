@@ -1,6 +1,6 @@
 # Preuves du lot 4C
 
-## Fonctionnel intégré validé et coût accepté ; publication en attente
+## Livré dans Site 92 / native 0.57 : fonctionnel validé et coût accepté
 
 Le transfert `facet_example`, simple et composé, est validé dans **native 0.57.0** sur le gel `eebd099808672be934389020c8f9061df4fdacab28cd7d60c00cd1b080464c04`. Le [rapport](../lot4c-facet-examples.md) et la [filiation](../lot4c-facet-examples-lineage.md) distinguent contrats source, connaissances acquises, contribution aux choix et limites. Les dates affichées dans ces documents utilisent **UTC−03** ; les reçus gardent leurs horodatages bruts.
 
@@ -12,6 +12,8 @@ Le transfert `facet_example`, simple et composé, est validé dans **native 0.57
 | [Site 90](planning/published-predecessor-site90.json), [Site 91](planning/published-predecessor-site91.json) | Prédécesseur réel 10A/native 0.56 ; Site 91, commit `5659ddc9420c7624df4865f0afc628782296a186`, déployé le 10 novembre 2026 à 21:42:39 UTC−03 |
 | [Clôture Sites 90–91](planning/published-predecessor-source-closure.json) | Même archive d'application, changements uniquement documentaires et 298 fichiers du candidat toujours conformes au gel |
 | [Manifeste natif final](integrated-final/source-manifest.json), [archive](integrated-final/source-archive.json) | 298 fichiers natifs et 309 entrées d'archive au commit `6065d67c18b1ad85bd62b60c36c6962f18bfeab3` |
+| [Publication réelle Site 92](publication/native-publication.json) | **Native 0.57.0**, source `d06620d1e4ca2c9758cc693b1ced9eeeddccb7e6`, déploiement `succeeded` le **10 novembre 2026 à 22:45:49 UTC−03** ; URL et audience propriétaire privé révision 3 inchangées |
+| [Plan de transport](publication/lot4c-source-push-plan.json), [vérification finale](publication/final-source-build-verification.json), [preuves conservées](publication/retained-transport-evidence.json) | **Cinq envois ordinaires**, sans force ni publication intermédiaire ; **75 membres applicatifs identiques dans chacune des cinq archives**, **746 entrées gelées par checkout**, sources/tests/build/worker inchangés |
 
 ## Résultats finaux exécutés
 
@@ -55,9 +57,9 @@ Chaque médiane de session complète reste **strictement sous +10 %**. Une phase
 
 Les huit sessions par jeu/version alimentent la médiane commune, sans compensation entre jeux, suppression de session mesurée, somme de phases imbriquées ni moyenne de ratios. Le moteur de jeu, le réseau de production et le rendu navigateur restent hors mesure ; le rapport distingue les observations corrélées et les variations possibles de GC/JIT ou d'ordonnancement. L'acceptation ne remplace aucune preuve de parité source ou de contribution en jeu.
 
-## Travail de clôture restant
+## Livraison et suite documentaire
 
-**Le coût est accepté ; la publication 4C reste en attente.** Elle devra lier le commit, le gel, le build et le déploiement réellement réussi, avec l'accès privé existant. Aucun numéro de Site futur n'est annoncé. Le fil 5B prépare native 0.58 en parallèle et attend cette publication effective avant sa propre intégration finale.
+**4C est livré dans Site 92, avec coût accepté et publication privée réussie. Les trois sous-lots 4A/4B/4C sont livrés ; le lot 4 est clos dans ses périmètres annoncés.** Le registre publié atteint **61/76 entrées, 80,3 %, avec 15 restantes** ; les six portes de migration complète demeurent fausses. La présente clôture documentaire consigne la publication effective sur les mêmes entrées natives et applicatives ; son reçu terminal est communiqué séparément. Le prochain travail concret hors lot 4 est l'intégration finale de **5B, `observed_addressed_material`, native 0.58**, déjà préparé en parallèle, en conservant cette clôture ; aucune nouvelle implémentation n'est ajoutée ici.
 
 ## Vérification des entrées de publication
 

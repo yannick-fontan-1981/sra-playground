@@ -1,0 +1,23 @@
+{
+  "schema": "logos-engine.publication-archive-representations.v1",
+  "recordedAt": "2026-11-11T01:48:55.560995+00:00",
+  "localUploadedGzip": {
+    "path": "/workspace/sites/lot4c-publication-20261111/site-step-5.tar.gz",
+    "bytes": 14816080,
+    "sha256": "b0c978ad9f6bf6c63c32cda96683a4b87489b7d54760c62bcf34e6dd94bf5ba6"
+  },
+  "localUncompressedTar": {
+    "bytes": 29911040,
+    "sha256": "033a1190fba31670cb1aa70b3c1379ca24d2fe0bac958585b2bcc5f3d9515f83"
+  },
+  "serverSavedTar": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_000000005d1c820e8f80fd1486fe286c",
+    "content_hash": "sha256:ba99cca503573fc073f14390ddfee3307a98d52e9d537484a53d25e515231f2c",
+    "size_bytes": 29911040,
+    "file_count": 75
+  },
+  "localFileCount": 75,
+  "localEveryMemberMatchesValidatedBuild": true,
+  "qualification": "Local gzip, its decompressed tar stream and the server-saved tar are separately recorded representations. All75 local application members match the validated build. The standard save/deploy operation binds the supplied archive to the exact pushed source; no server archive was downloaded or compared member by member."
+}

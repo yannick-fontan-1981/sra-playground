@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "recordedAt": "2026-11-11T01:39:42.377956+00:00",
+  "sourceCommit": "2b65ba9f43542d9fe61464617545bd2a8c183a75",
+  "archive": "/workspace/sites/lot4c-publication-20261111/site-step-3.tar.gz",
+  "gzipBytes": 14816091,
+  "gzipSha256": "f218d22cd24739a905b722ea72f17344e1711cbbce18b82ecacae8360bb8b447",
+  "applicationMembers": 75,
+  "everyApplicationMemberMatchesValidatedBuild": true,
+  "sourceManifestToArchiveMapping": {
+    ".openai/hosting.json": "dist/.openai/hosting.json"
+  }
+}
