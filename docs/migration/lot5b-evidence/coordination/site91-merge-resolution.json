@@ -1,0 +1,33 @@
+{
+  "schema": "logos-engine.source-integration-resolution.v1",
+  "recordedAt": "2026-11-11T00:45:18.816326+00:00",
+  "publishedPredecessor": {
+    "siteVersion": 91,
+    "nativeVersion": "0.56.0",
+    "commit": "5659ddc9420c7624df4865f0afc628782296a186",
+    "deploymentId": "appgdep_6af3b9f2c9d08191a4d379a088d5f2d9",
+    "status": "succeeded"
+  },
+  "ownBeforeMerge": "c4b5d292262aae6b722e4600175d68ca1c8374ab",
+  "files": [
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "conflicts": 9,
+      "resolution": "Retain both source owners, acquisition slots, ordered entry aliases and event envelopes; candidate version0.58 remains reserved.",
+      "sha256": "e01d444d50a3b8b2424be711efab66cd6d17114c45a443293b12065650119584"
+    },
+    {
+      "path": "scripts/audit-v6-entry-points.ts",
+      "conflicts": 1,
+      "resolution": "Union of explicit Axial and Addressed shared entry identities",
+      "sha256": "5e979e0fa1adf1c68aeba170de2003bb2b28b3ab9535245fadbb45ffc3b1d9bb"
+    },
+    {
+      "path": "migration/v6-transfer-map.json",
+      "resolution": "Actual published10A transfer map plus exactly three own5B records; no predecessor record dropped or duplicated",
+      "addedRecords": 3,
+      "sha256": "e62ab089401979b7ad0690605a6405b578ae7b7bd9261a64d7fedb1450793ef1"
+    }
+  ],
+  "qualification": "Text merge only; final integrated source validation remains pending4C actual publication."
+}

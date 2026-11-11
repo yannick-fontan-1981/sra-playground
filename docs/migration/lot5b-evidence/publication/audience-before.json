@@ -1,0 +1,18 @@
+{
+  "schema": "logos-engine.site-publication-audience-observation.v1",
+  "observedAt": "2026-11-11T02:38:32.116Z",
+  "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+  "latest_version_number": 93,
+  "current_live_url": "https://sra-playground.yannick-fontan.chatgpt.site",
+  "access_mode": "custom",
+  "current_user_role": "owner",
+  "access_revision": 3,
+  "allowed_users": [
+    {
+      "role": "owner",
+      "is_external": false
+    }
+  ],
+  "allowed_groups": 0,
+  "qualification": "Owner-only audience confirmed from actual Sites response; bearer credentials omitted. This does not record a 5B publication."
+}

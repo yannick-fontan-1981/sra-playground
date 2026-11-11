@@ -29,6 +29,7 @@ import { TopologicalRecolor } from './v6-topological-recolor.ts';
 import { AxialQuestion } from './v6-axial-question.ts';
 import { RankedWorkshop } from './v6-ranked-workshop.ts';
 import { SymbolTransactions } from './v6-symbol-transactions.ts';
+import { AddressedMaterial, ADDRESSED_NATIVE_SEARCH_BOUNDS } from './v6-addressed-material.ts';
 import { ReductionTransport } from './v6-reduction-transport.ts';
 import { retainedReductionSuccess, reductionAcquiredContinuationWitness, continuationProposalDigest,
   CONTINUATION_PROPOSAL_DIGEST_PROFILE } from './v6-acquired-continuation.ts';
@@ -71,7 +72,7 @@ import type {
 } from './v6-native-types.ts';
 
 export const NATIVE_V6_REFERENCE_COMMIT = '786dcf51ca57773d8e3a8948ce9ea3655e7baf8e';
-export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.57.0';
+export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.58.0';
 // The implementation identity and public snapshot describe the same extensions.
 const NATIVE_CALLER_EXTENSIONS = ['current_epoch_axial_packet_attribution', 'native_feedback_search_cooperative_incompletion',
   'native_crossed_prefix_assignment_bounds', 'native_atomic_crossed_prefix_event_validation',
@@ -79,6 +80,8 @@ const NATIVE_CALLER_EXTENSIONS = ['current_epoch_axial_packet_attribution', 'nat
   'immutable_frontier_branches_with_delta_checkpoints',
   'blocking_current_proposal_refusal_preserves_selection_order',
   'bounded_linked_temporal_paths_with_current_deadline', 'single_owner_linked_temporal_passive_acquisition',
+  'single_owner_addressed_material_acquisition', 'validated_addressed_material_checkpoint',
+  'bounded_addressed_field_and_stock_search_with_current_deadline',
   TEMPORAL_FRAGMENT_NATIVE_INTERRUPTION,
   'atomic_framed_window_response_validation',
   'bounded_reference_population_paths_and_matching_with_current_level_deadline',
@@ -165,7 +168,7 @@ export interface NativeV6RuntimeConfiguration {
   /** Same source policy drives the native common caller's retained components. */
   callerStrategy?: R;
   /** The same registered instances acquire passive evidence in source order. */
-  acquisitionFamilies?: { supports: SupportNavigation; recall: NativeFamily; framed?: FramedTransfer; outline?: OutlineService; inventory?: ObservedInventory; reaction?: OrderedReaction; reactive?: ReactiveContact; recolor?: TopologicalRecolor; axial?: AxialQuestion; workshop?: RankedWorkshop; symbols?: SymbolTransactions; morphology?: NativeMorphologyFamily; feedback?: NativeFeedbackFamily; preparations?: LinkedTemporalPreparation };
+  acquisitionFamilies?: { supports: SupportNavigation; recall: NativeFamily; framed?: FramedTransfer; outline?: OutlineService; inventory?: ObservedInventory; reaction?: OrderedReaction; reactive?: ReactiveContact; recolor?: TopologicalRecolor; axial?: AxialQuestion; workshop?: RankedWorkshop; symbols?: SymbolTransactions; morphology?: NativeMorphologyFamily; feedback?: NativeFeedbackFamily; fields?: AddressedMaterial; preparations?: LinkedTemporalPreparation };
 }
 
 export class NativeV6Runtime implements NativeV6Backend {
@@ -179,7 +182,7 @@ export class NativeV6Runtime implements NativeV6Backend {
   private authority: NativeCompositionAuthority | null = null;
   private caller: NativeCallerCoordinator | null = null;
   private readonly callerStrategy?: R;
-  private readonly acquisitionFamilies?: { supports: SupportNavigation; recall: NativeFamily; framed?: FramedTransfer; outline?: OutlineService; inventory?: ObservedInventory; reaction?: OrderedReaction; reactive?: ReactiveContact; recolor?: TopologicalRecolor; axial?: AxialQuestion; workshop?: RankedWorkshop; symbols?: SymbolTransactions; morphology?: NativeMorphologyFamily; feedback?: NativeFeedbackFamily; preparations?: LinkedTemporalPreparation };
+  private readonly acquisitionFamilies?: { supports: SupportNavigation; recall: NativeFamily; framed?: FramedTransfer; outline?: OutlineService; inventory?: ObservedInventory; reaction?: OrderedReaction; reactive?: ReactiveContact; recolor?: TopologicalRecolor; axial?: AxialQuestion; workshop?: RankedWorkshop; symbols?: SymbolTransactions; morphology?: NativeMorphologyFamily; feedback?: NativeFeedbackFamily; fields?: AddressedMaterial; preparations?: LinkedTemporalPreparation };
   private callerAcquisitions = 0;
   private callerBoundaryReplays = 0;
   private sessionId = '';
@@ -239,6 +242,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       ...(this.acquisitionFamilies.symbols ? [this.acquisitionFamilies.symbols] : []),
       ...(this.acquisitionFamilies.morphology ? [this.acquisitionFamilies.morphology] : []),
       ...(this.acquisitionFamilies.feedback ? [this.acquisitionFamilies.feedback] : []),
+      ...(this.acquisitionFamilies.fields ? [this.acquisitionFamilies.fields] : []),
       ...(this.acquisitionFamilies.preparations ? [this.acquisitionFamilies.preparations] : []),
       ...Object.values(this.acquisitionFamilies.supports.acquiredCompositions)].every(family => this.families.some(registered => registered.id === family.id)))) {
       throw new TypeError('Passive acquisition requires the registered common caller families');
@@ -251,6 +255,9 @@ export class NativeV6Runtime implements NativeV6Backend {
     }
     if (this.acquisitionFamilies?.symbols && !this.families.includes(this.acquisitionFamilies.symbols)) {
       throw new TypeError('Symbol transaction state retention requires its single registered owner');
+    }
+    if (this.acquisitionFamilies?.fields && !this.families.includes(this.acquisitionFamilies.fields)) {
+      throw new TypeError('Addressed material passive acquisition requires its single registered owner');
     }
     this.acquisitionFamilies?.inventory?.enableCallerContext(() => {
       if (!this.caller) throw new Error('Inventory context requires the initialized common caller');
@@ -1224,7 +1231,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       public_framed_transfer: 'framed_transfer_event', public_outline_service: 'outline_service_event',
       public_observed_inventory: 'observed_inventory_event', public_ordered_reaction: 'reaction_event', public_reactive_contact: 'reactive_event',
       public_topological_recolor: 'topological_recolor_event', public_axial_question: 'axial_question_event', public_ranked_workshop: 'ranked_workshop_event',
-      public_symbol_transaction: 'symbol_transaction_event', morphology: 'morphology_event' };
+      public_symbol_transaction: 'symbol_transaction_event', public_addressed_material: 'addressed_material_event', morphology: 'morphology_event' };
     const key = singleEventKeys[family.id];
     if (key) memory.put(EPISODE, `${key}:${transition.before.revision}`, record.events[0] ?? null, after.observation_ref, after.revision);
     // LinkedPreparation.record returns its full list, including an empty list.
@@ -1267,7 +1274,7 @@ export class NativeV6Runtime implements NativeV6Backend {
 
   /** Source common_frontier_runtime.py acquisitions, once per sealed transition. */
   private async acquirePassiveFamilies(transition: WitnessedTransition, proposal: NativeProposal, selectedSupport: boolean, selectedId: string): Promise<void> {
-    const { supports, recall, framed, outline, inventory, reaction, reactive, recolor, axial, workshop, symbols, morphology, feedback, preparations } = this.acquisitionFamilies!, { before, after, command, first, second, index } = transition;
+    const { supports, recall, framed, outline, inventory, reaction, reactive, recolor, axial, workshop, symbols, morphology, feedback, fields, preparations } = this.acquisitionFamilies!, { before, after, command, first, second, index } = transition;
     const memory = this.authority!.memory;
     if (!selectedSupport) {
       const result = await supports.record(before, after, command, first.frame_rows, second.frame_rows, undefined, undefined, second.frame_packet);
@@ -1286,9 +1293,13 @@ export class NativeV6Runtime implements NativeV6Backend {
     retain('ordered_support_transfer', 'ordered_support_state', state => Boolean(state.events?.length || state.closed?.length));
     retain('sliding_cavity', 'sliding_cavity_state', state => state.body_type != null || Boolean(state.scored?.length));
     retain('metric_composition', 'metric_composition_state', state => state.current != null || Boolean(state.control_samples?.length));
-    // Source order: support owners, addressed material (still a separate lot5
-    // entry), LinkedPreparation, then the shared series owner. Only the actual
-    // selected family acquires attributed records; foreign actions remain passive.
+    // Source order: support owners, AddressedMaterial, LinkedPreparation, then
+    // the shared series owner. A truthy field envelope is retained even when
+    // its events list is empty; a selected field return was already acquired.
+    if (fields && selectedId !== fields.id) {
+      const result = fields.recordSource(before, after, command, first.frame_rows, second.frame_rows, undefined, undefined, second.frame_packet);
+      memory.put(EPISODE, `addressed_material_event:${before.revision}`, result, after.observation_ref, after.revision);
+    }
     if (preparations && selectedId !== preparations.id) {
       const events = preparations.recordSource(before, after, command, first.frame_rows, second.frame_rows);
       if (events.length) memory.put(EPISODE, `linked_preparation_event:${before.revision}`, events, after.observation_ref, after.revision);
@@ -1857,6 +1868,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     configuration.observed_composition_services, (configuration.window_constraints as R).framed_window_composition,
     configuration.window_constraints as R, configuration.window_constraints as R);
   const policy = loaded.common as R;
+  const fields = new AddressedMaterial(policy.addressed_field, { boundedSearch: ADDRESSED_NATIVE_SEARCH_BOUNDS });
   const preparations = new LinkedTemporalPreparation(policy.linked_contact,
     { boundedSearch: LINKED_TEMPORAL_NATIVE_SEARCH_BOUNDS });
   const linkedTemporal = subquestionFamily(preparations, 'program_subquestion', 'linked_temporal_preparation');
@@ -1876,7 +1888,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     animated_contact: new AnimatedContact(policy.animated_contact_question),
   };
   const supports = new SupportNavigation(supportChildren, policy);
-  const families: NativeFamily[] = [windows, symmetric, orbit, containment, surface, code, band, framed, outline, inventory, reactive, reaction, recolor, axial, workshop, symbols, morphology, reduction, recall, supports, feedback, arrangements, facets, linkedTemporal, ...Object.values(supportChildren), ...(visual ? [visual] : []), ...Object.values(interfaces)];
+  const families: NativeFamily[] = [windows, symmetric, orbit, containment, surface, code, band, framed, outline, inventory, reactive, reaction, recolor, axial, workshop, symbols, fields, morphology, reduction, recall, supports, feedback, arrangements, facets, linkedTemporal, ...Object.values(supportChildren), ...(visual ? [visual] : []), ...Object.values(interfaces)];
   const registeredSubquestions = (order: readonly string[], registered: Record<string, NativeFamily>): string[] =>
     order.flatMap(question => registered[question] ? [registered[question].id] : []);
   // The cell, occurrence and program source entries share one acquired journal, but
@@ -1913,7 +1925,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
         conserved_band_transfer: band.id, supported_ternary_reduction: reduction.id, ordered_support_transfer: ordered.id,
         observed_framed_transfer: framed.id, observed_outline_service: outline.id, observed_inventory_composition: inventory.id,
         reactive_contact_continuation: reactive.id, reactive_contact: reactive.id, ordered_reaction: reaction.id, topological_recolor: recolor.id,
-        axial_question: axial.id, observed_ranked_workshop: workshop.id, observed_symbol_transaction: symbols.id };
+        axial_question: axial.id, observed_ranked_workshop: workshop.id, observed_symbol_transaction: symbols.id, observed_addressed_material: fields.id };
       return registered[question] ? [registered[question]!] : supportChildren[question] ? [supportChildren[question]!.id] : [];
     }),
     returned_branch_contrast: ['returned_branch_contrast'],
@@ -1929,7 +1941,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     return ['scored_relation_access', 'observed_support_access'].includes(question) || supportChildren[question] ? [null] : [];
   });
   const materialEntryPoints = configuration.factored_material_return.ordered_subquestions.flatMap<string | null>(question => {
-    if (['observed_framed_transfer', 'observed_inventory_composition', 'reactive_contact_continuation', 'reactive_contact', 'ordered_reaction', 'topological_recolor', 'axial_question', 'observed_ranked_workshop', 'observed_symbol_transaction'].includes(question)) return [question];
+    if (['observed_framed_transfer', 'observed_inventory_composition', 'reactive_contact_continuation', 'reactive_contact', 'ordered_reaction', 'topological_recolor', 'axial_question', 'observed_ranked_workshop', 'observed_symbol_transaction', 'observed_addressed_material'].includes(question)) return [question];
     return ['factored_material_return', 'conditional_transit', 'conserved_band_transfer', 'supported_ternary_reduction', 'ordered_support_transfer', 'observed_outline_service'].includes(question)
       || supportChildren[question] ? [null] : [];
   });
@@ -1949,6 +1961,6 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     fullV6Parity: false };
   const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
   const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
-  return new NativeV6Runtime({ sourceDigest, families, groups, authorityPolicy: loaded.common, callerStrategy: configuration, acquisitionFamilies: { supports, recall, framed, outline: outlineOwner, inventory, reaction, reactive, recolor, axial, workshop, symbols, morphology, feedback, preparations },
+  return new NativeV6Runtime({ sourceDigest, families, groups, authorityPolicy: loaded.common, callerStrategy: configuration, acquisitionFamilies: { supports, recall, framed, outline: outlineOwner, inventory, reaction, reactive, recolor, axial, workshop, symbols, morphology, feedback, fields, preparations },
     maxPointOccurrences: loaded.common.input_domain.max_point_occurrences, ...(options.now ? { now: options.now } : {}) });
 }

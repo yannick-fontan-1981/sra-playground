@@ -1,0 +1,13 @@
+{
+  "schema": "logos-engine.immutable-published-baseline-preparation.v1",
+  "recordedAt": "2026-11-11T01:51:39.946936+00:00",
+  "status": "prepared",
+  "checkout": "/workspace/sites/sra-lot5b-reference-057",
+  "commit": "d06620d1e4ca2c9758cc693b1ced9eeeddccb7e6",
+  "siteVersion": 92,
+  "nativeVersion": "0.57.0",
+  "dependencies": "node_modules shared actual target; pyodide points to byte-verified candidate directory",
+  "packageInputsEqual": true,
+  "costTracesVerified": true,
+  "opaqueAssetsInspected": false
+}

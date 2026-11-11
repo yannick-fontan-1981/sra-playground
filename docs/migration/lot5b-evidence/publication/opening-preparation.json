@@ -1,0 +1,10 @@
+{
+  "schema": "logos-engine.publication-opening-preparation.v1",
+  "recordedAt": "2026-11-11T02:39:17.025Z",
+  "firstLocalCloneOpening": {
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "checkout_path": "/workspace/sites/sra-lot5b-publication-20261111/.sites-checkout",
+    "commit_sha": "61fd6dda12feb6de9597ac9b91be874a62649e79"
+  },
+  "qualification": "The first helper opening verified the local integrated ancestry. The publication checkout was then moved, while clean, to actual published Site93 and is being opened again to obtain its exact predecessor opening result."
+}

@@ -1,0 +1,13 @@
+{
+  "command": [
+    "node",
+    "docs/migration/lot5b-evidence/record-owner-source-inventory.mjs",
+    "/workspace/sites/sra-lot5b-reference-057",
+    "docs/migration/lot5b-evidence/performance-integrated/owner-source-inventory.json"
+  ],
+  "startedAt": "2026-11-11T01:54:35.223270+00:00",
+  "finishedAt": "2026-11-11T01:54:37.545381+00:00",
+  "exitCode": 0,
+  "log": "docs/migration/lot5b-evidence/performance-integrated/owner-source-inventory.log",
+  "officialCostMeasurement": false
+}

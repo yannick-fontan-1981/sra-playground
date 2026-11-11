@@ -1,0 +1,46 @@
+{
+  "schema": "logos-engine.lot5b-final-validation-execution.v1",
+  "mode": "five-checks",
+  "startedAt": "2026-11-11T01:55:06.765176+00:00",
+  "finishedAt": "2026-11-11T01:55:34.835638+00:00",
+  "command": [
+    "flock",
+    "-s",
+    "/workspace/shared/sra-coordination/performance.lock",
+    "python",
+    "-B",
+    "scripts/verify-native-delta.py",
+    "docs/migration/lot5b-evidence/integrated-final",
+    "--build-script",
+    "/home/agent/.codex/plugins/cache/openai-curated-remote/sites/1.1.6/scripts/build-site.mjs"
+  ],
+  "cwd": "/workspace/sites/sra-lot5b-20261110/.sites-checkout",
+  "exitCode": 0,
+  "stdout": {
+    "path": "docs/migration/lot5b-evidence/integrated-final/validation/checks-driver.stdout.log",
+    "bytes": 379,
+    "sha256": "38666c04f437303873dcbec2137e8b395ff7ec405dc43132dafb7b7962e26662"
+  },
+  "stderr": {
+    "path": "docs/migration/lot5b-evidence/integrated-final/validation/checks-driver.stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "exitFile": {
+    "path": "docs/migration/lot5b-evidence/integrated-final/validation/checks-driver.exit",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "formalReceipt": {
+    "path": "docs/migration/lot5b-evidence/integrated-final/validation/checks-run.json",
+    "bytes": 82367,
+    "sha256": "4522487cc4350aaf23631a1a5c7069feb5c9d0923572d852526edd9777ec34c5"
+  },
+  "formalStatus": "passed",
+  "sourceFrozenManifest": {
+    "path": "docs/migration/lot5b-evidence/integrated-final/source-manifest.json",
+    "bytes": 35852,
+    "sha256": "2a0101b7cf56ce98a82e27e36d5ab78b53c297ca54b82c638a168be4560643bd"
+  },
+  "exclusiveNewOutputs": true
+}

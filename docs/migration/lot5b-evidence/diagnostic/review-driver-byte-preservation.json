@@ -1,0 +1,13 @@
+{
+  "schema": "logos-engine.historical-driver-byte-preservation.v1",
+  "recordedAt": "2026-11-11T00:49:03.682344+00:00",
+  "originalPath": "scripts/review-addressed-material-common-loop.mjs",
+  "archive": "docs/migration/lot5b-evidence/diagnostic/review-common-before-preservation-proof.mjs",
+  "sha256": "2ab7428f7cc8eb7169dd94c635f25e8d5635a69d86b1aff41522921951a5db98",
+  "bytes": 9054,
+  "matchedRetainedExecutionInputs": [
+    "common-positive-02",
+    "common-negative-01"
+  ],
+  "qualification": "Exact earlier reviewer bytes preserved before adding a distinct stock preservation-refusal proof mode; historical results remain unchanged."
+}

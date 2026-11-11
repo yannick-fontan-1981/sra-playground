@@ -1,0 +1,291 @@
+{
+  "schema": "logos-engine.released-baseline-replay-preparation.v1",
+  "status": "passed",
+  "game": "FOGW",
+  "targetLevels": 3,
+  "expectedActions": 50,
+  "completePublicPackets": 51,
+  "baselineDecodedBytes": 88762063,
+  "baseline": {
+    "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz",
+    "sha256": "fe037e48df8dd3a7c302a5e85355b2b9555daa6d9d8aa56f7772fc363732726c",
+    "bytes": 8174480
+  },
+  "trace": {
+    "path": "docs/migration/lot3e-evidence/final/fogw-reception-session/fogw-public-trace.json.gz",
+    "sha256": "1d4e92e6ef063e7799bfb4237b17beb148b49bde4ab46ef26ef91a3271d44b46",
+    "bytes": 39060
+  },
+  "exactExpectationSha256": "a01124f939442103bdab9ddc45f6ba0ac974cd2e0259236b70af5dc4de57a924",
+  "initialPublicPacketSha256": "3c9e4f97501c2aa4817b850ab13d8ee79884da89a97615cb6d19a90c22662716",
+  "packetStreamSha256": "75689df76f373e98c8bab476deaffd20226033ca731d3a6247c8f6e213cdf197",
+  "actions": [
+    {
+      "index": 1,
+      "commandSha256": "c5f479c466f9e1f7b7ddf0ea07a823fb97123ce6d1d4b438b06a8bc2eebb5ad4",
+      "publicPacketSha256": "e795c585336987918a5d8272647113f873b76eb1be174719b82ca0410de05589"
+    },
+    {
+      "index": 2,
+      "commandSha256": "edbfda1172ff7eec34bcd04f71f6d20042135b83c42c33dcd0b10364c0b89484",
+      "publicPacketSha256": "0ddac0940417a265e3f0efbb8a8656602d6eaf8ef65c5e12f89c0c92dfdd69bf"
+    },
+    {
+      "index": 3,
+      "commandSha256": "ca52b9717c10702d106010181ed6ba22c0eddefae0a960571818b348a2ffaa3e",
+      "publicPacketSha256": "f17364174f3f5317363c637b7918180622d0dcbb410b034b9ba725c51e71c2f3"
+    },
+    {
+      "index": 4,
+      "commandSha256": "e71ee6e4102c2afaae755a803ca267284e5450fbc667b443e3eb8e1c1609703c",
+      "publicPacketSha256": "43665da6b21b7a78d7645450f1c2692a3f37ad1303a236d9f378aa8cda418094"
+    },
+    {
+      "index": 5,
+      "commandSha256": "e71ee6e4102c2afaae755a803ca267284e5450fbc667b443e3eb8e1c1609703c",
+      "publicPacketSha256": "72da854a23c3139d3235cbadfb91eb54a941e176db180b1488c1f6e728d505ca"
+    },
+    {
+      "index": 6,
+      "commandSha256": "e71ee6e4102c2afaae755a803ca267284e5450fbc667b443e3eb8e1c1609703c",
+      "publicPacketSha256": "148654822c0cf07a14735de3ea887ce617d53ebc75e72537a78415eada071fd2"
+    },
+    {
+      "index": 7,
+      "commandSha256": "e71ee6e4102c2afaae755a803ca267284e5450fbc667b443e3eb8e1c1609703c",
+      "publicPacketSha256": "2022c3289c8e4c0a51ed480dc4b6f8e7acb84e785f3353f9bd95d5a58fc09e79"
+    },
+    {
+      "index": 8,
+      "commandSha256": "e71ee6e4102c2afaae755a803ca267284e5450fbc667b443e3eb8e1c1609703c",
+      "publicPacketSha256": "75f828396c07b1692c6f5c33c7be8c4d716e1b7b74dd1e996567e351a84d7f94"
+    },
+    {
+      "index": 9,
+      "commandSha256": "e71ee6e4102c2afaae755a803ca267284e5450fbc667b443e3eb8e1c1609703c",
+      "publicPacketSha256": "5e9651e220db9570eb6bb27ba4ee6f3842726f9303551303b8d55d549df768b3"
+    },
+    {
+      "index": 10,
+      "commandSha256": "c5f479c466f9e1f7b7ddf0ea07a823fb97123ce6d1d4b438b06a8bc2eebb5ad4",
+      "publicPacketSha256": "15a8a0ba860e5b0ff48246a29db779529c935c081a88f076f2e08d70df44ec51"
+    },
+    {
+      "index": 11,
+      "commandSha256": "ca52b9717c10702d106010181ed6ba22c0eddefae0a960571818b348a2ffaa3e",
+      "publicPacketSha256": "9be6bb1dbf0c63b2c024e8e8d1908f5b8f22208b69340a88e1db3653dcace369"
+    },
+    {
+      "index": 12,
+      "commandSha256": "c5f479c466f9e1f7b7ddf0ea07a823fb97123ce6d1d4b438b06a8bc2eebb5ad4",
+      "publicPacketSha256": "a16806fe445b33363e873f0b34e68d81a878af690a5e7a6e1e3ae4d51fee576b"
+    },
+    {
+      "index": 13,
+      "commandSha256": "c5f479c466f9e1f7b7ddf0ea07a823fb97123ce6d1d4b438b06a8bc2eebb5ad4",
+      "publicPacketSha256": "ed80199b889a9beab733b012b48613b734860a4f933b2c6c77a0fbe595e51461"
+    },
+    {
+      "index": 14,
+      "commandSha256": "c5f479c466f9e1f7b7ddf0ea07a823fb97123ce6d1d4b438b06a8bc2eebb5ad4",
+      "publicPacketSha256": "c6e78e3de94d8477b313ffbf0424e3d3423a304495358d8f2c1fedfc154f174a"
+    },
+    {
+      "index": 15,
+      "commandSha256": "e71ee6e4102c2afaae755a803ca267284e5450fbc667b443e3eb8e1c1609703c",
+      "publicPacketSha256": "7dbbcb56a4ab3a81de2cea819bc35c7b0177f84cc6085e837b7790cbb4ff1421"
+    },
+    {
+      "index": 16,
+      "commandSha256": "e71ee6e4102c2afaae755a803ca267284e5450fbc667b443e3eb8e1c1609703c",
+      "publicPacketSha256": "eaad4534c3ce2e220d1469a61e98d3b699867d4ee51376393142921aba985e47"
+    },
+    {
+      "index": 17,
+      "commandSha256": "e71ee6e4102c2afaae755a803ca267284e5450fbc667b443e3eb8e1c1609703c",
+      "publicPacketSha256": "aff43ad5d3137042131e3b81dacbbe52536f0f11ea6b340082b933067d9e1bb9"
+    },
+    {
+      "index": 18,
+      "commandSha256": "e71ee6e4102c2afaae755a803ca267284e5450fbc667b443e3eb8e1c1609703c",
+      "publicPacketSha256": "23eea0183c64125fc4cf9680bae7dd00fb9a9650280b4a50f56593540a4d445e"
+    },
+    {
+      "index": 19,
+      "commandSha256": "c5f479c466f9e1f7b7ddf0ea07a823fb97123ce6d1d4b438b06a8bc2eebb5ad4",
+      "publicPacketSha256": "c7c51c4bd6869cd54b6cdf845231250bbe04c077e7162246c4d6f152fe7af5ff"
+    },
+    {
+      "index": 20,
+      "commandSha256": "edbfda1172ff7eec34bcd04f71f6d20042135b83c42c33dcd0b10364c0b89484",
+      "publicPacketSha256": "4332070cf3173155bc05e610af23e7ba64e7f98406c49079b12becee36f9bf09"
+    },
+    {
+      "index": 21,
+      "commandSha256": "c5f479c466f9e1f7b7ddf0ea07a823fb97123ce6d1d4b438b06a8bc2eebb5ad4",
+      "publicPacketSha256": "233bafc9c9f9d9600baf39b748bbff9f0f94920be1ff6639f24d05f0710f8ed1"
+    },
+    {
+      "index": 22,
+      "commandSha256": "ca52b9717c10702d106010181ed6ba22c0eddefae0a960571818b348a2ffaa3e",
+      "publicPacketSha256": "15b75b6f92cc63ba6d09ad5f01ff35e312e1c317007e79c2396951557ac398e4"
+    },
+    {
+      "index": 23,
+      "commandSha256": "c5f479c466f9e1f7b7ddf0ea07a823fb97123ce6d1d4b438b06a8bc2eebb5ad4",
+      "publicPacketSha256": "33755486e2e692a2e561654ab1b4b5681ab168174c86cdb29a6b27605b80e26e"
+    },
+    {
+      "index": 24,
+      "commandSha256": "c5f479c466f9e1f7b7ddf0ea07a823fb97123ce6d1d4b438b06a8bc2eebb5ad4",
+      "publicPacketSha256": "235c6d2f02310f4630f57eaf7d5cceeae5d2060dcae4d2baed0bdee96a5eda3a"
+    },
+    {
+      "index": 25,
+      "commandSha256": "c5f479c466f9e1f7b7ddf0ea07a823fb97123ce6d1d4b438b06a8bc2eebb5ad4",
+      "publicPacketSha256": "dfe0256bb957500ecca597ed4ca15acf628114859115e37414d3292ea3f4bfba"
+    },
+    {
+      "index": 26,
+      "commandSha256": "e71ee6e4102c2afaae755a803ca267284e5450fbc667b443e3eb8e1c1609703c",
+      "publicPacketSha256": "88d00895dc101f0aa4ff59db22c5641f70109693a8b48c8a6a51475cfee92b0f"
+    },
+    {
+      "index": 27,
+      "commandSha256": "e71ee6e4102c2afaae755a803ca267284e5450fbc667b443e3eb8e1c1609703c",
+      "publicPacketSha256": "ede51788318cb8c40f604b936cd291fd85e313d6fafc4c44e84374548e3bd4c4"
+    },
+    {
+      "index": 28,
+      "commandSha256": "e71ee6e4102c2afaae755a803ca267284e5450fbc667b443e3eb8e1c1609703c",
+      "publicPacketSha256": "275faf83401cf589049180b725a6d2a3f854e4c1039b3e8495f1c611bcb84727"
+    },
+    {
+      "index": 29,
+      "commandSha256": "e71ee6e4102c2afaae755a803ca267284e5450fbc667b443e3eb8e1c1609703c",
+      "publicPacketSha256": "b44e23224ba88789bb31d52f16dc0490e7ac7264f87ea71c18f7cabd433a2007"
+    },
+    {
+      "index": 30,
+      "commandSha256": "e71ee6e4102c2afaae755a803ca267284e5450fbc667b443e3eb8e1c1609703c",
+      "publicPacketSha256": "1e928869442f29be8f98361cf61bed24060e00fb9e91927aa4617e92fcfe8992"
+    },
+    {
+      "index": 31,
+      "commandSha256": "e71ee6e4102c2afaae755a803ca267284e5450fbc667b443e3eb8e1c1609703c",
+      "publicPacketSha256": "263973917d285f948bd76e7fe437cf03452297a82cd41f2080c493f6d0af9c2b"
+    },
+    {
+      "index": 32,
+      "commandSha256": "e71ee6e4102c2afaae755a803ca267284e5450fbc667b443e3eb8e1c1609703c",
+      "publicPacketSha256": "f287b28d757cb79fbefe955935c0171cd6cf6f8a5934652d1d8bb76c106556ec"
+    },
+    {
+      "index": 33,
+      "commandSha256": "c5f479c466f9e1f7b7ddf0ea07a823fb97123ce6d1d4b438b06a8bc2eebb5ad4",
+      "publicPacketSha256": "29864542245c94f77728cb491de37a5203095ca4110c31353accd726f2d77787"
+    },
+    {
+      "index": 34,
+      "commandSha256": "edbfda1172ff7eec34bcd04f71f6d20042135b83c42c33dcd0b10364c0b89484",
+      "publicPacketSha256": "d802c25d6a962597a57373ec3506bf9720b4828108e2ec9a71cab2e4b95e9efe"
+    },
+    {
+      "index": 35,
+      "commandSha256": "c5f479c466f9e1f7b7ddf0ea07a823fb97123ce6d1d4b438b06a8bc2eebb5ad4",
+      "publicPacketSha256": "002de6e51c90405c6d709cf6612eec327ff97b77d17b92eaf45f9b785ce3fd11"
+    },
+    {
+      "index": 36,
+      "commandSha256": "ca52b9717c10702d106010181ed6ba22c0eddefae0a960571818b348a2ffaa3e",
+      "publicPacketSha256": "8a209e0194dffc824710ad5d1070777b13c385b62ceffc6f46d365bb1d39cdb2"
+    },
+    {
+      "index": 37,
+      "commandSha256": "c5f479c466f9e1f7b7ddf0ea07a823fb97123ce6d1d4b438b06a8bc2eebb5ad4",
+      "publicPacketSha256": "56419aea65d9d5ae47af6abd4d0da50d45a5a4d1e73d10695df256c13e0342d0"
+    },
+    {
+      "index": 38,
+      "commandSha256": "c5f479c466f9e1f7b7ddf0ea07a823fb97123ce6d1d4b438b06a8bc2eebb5ad4",
+      "publicPacketSha256": "c44030de8e28f647f7796007f3f52b91a9d84e6d1091a46617edd8978a25f3d9"
+    },
+    {
+      "index": 39,
+      "commandSha256": "c5f479c466f9e1f7b7ddf0ea07a823fb97123ce6d1d4b438b06a8bc2eebb5ad4",
+      "publicPacketSha256": "d6ea81a8f132df6299ab92d157258a6519871a6d9fc7eb874b7de3344f70c354"
+    },
+    {
+      "index": 40,
+      "commandSha256": "c5f479c466f9e1f7b7ddf0ea07a823fb97123ce6d1d4b438b06a8bc2eebb5ad4",
+      "publicPacketSha256": "6c0859d0599593875cdd5729550fc44a1fa9fca7f24a5cad6eb019c64215617f"
+    },
+    {
+      "index": 41,
+      "commandSha256": "c5f479c466f9e1f7b7ddf0ea07a823fb97123ce6d1d4b438b06a8bc2eebb5ad4",
+      "publicPacketSha256": "60d4cd2ecf0cfa9bd1256fa4e2fb81884f389e362dac569d02211a09867015aa"
+    },
+    {
+      "index": 42,
+      "commandSha256": "c5f479c466f9e1f7b7ddf0ea07a823fb97123ce6d1d4b438b06a8bc2eebb5ad4",
+      "publicPacketSha256": "62f8fd8300c2581970f91e8fe246b90275fcf64165bdcbdd6bb1a12aec6947a6"
+    },
+    {
+      "index": 43,
+      "commandSha256": "c5f479c466f9e1f7b7ddf0ea07a823fb97123ce6d1d4b438b06a8bc2eebb5ad4",
+      "publicPacketSha256": "79fc46ee47b344dae9fcf4ef9a9836286a67f324116453322c1a32138a808872"
+    },
+    {
+      "index": 44,
+      "commandSha256": "e71ee6e4102c2afaae755a803ca267284e5450fbc667b443e3eb8e1c1609703c",
+      "publicPacketSha256": "d07ac878566881829c1ccde3ec79c15bc0a7fed553ad78545256d31db4dc20ea"
+    },
+    {
+      "index": 45,
+      "commandSha256": "e71ee6e4102c2afaae755a803ca267284e5450fbc667b443e3eb8e1c1609703c",
+      "publicPacketSha256": "a3bc4a5189cef4ccc03f588341110a6b82b073d6e05cf6db5623679fcd309b87"
+    },
+    {
+      "index": 46,
+      "commandSha256": "e71ee6e4102c2afaae755a803ca267284e5450fbc667b443e3eb8e1c1609703c",
+      "publicPacketSha256": "4cb4f1bde2380d9b86e5eed619aa9a0de82cb20e3db9224d6aa00661dc0cf9d0"
+    },
+    {
+      "index": 47,
+      "commandSha256": "e71ee6e4102c2afaae755a803ca267284e5450fbc667b443e3eb8e1c1609703c",
+      "publicPacketSha256": "0a1ef3ce6259b0909b1af22dff2b5a13adbdec00d4006d62890f81346747bb96"
+    },
+    {
+      "index": 48,
+      "commandSha256": "e71ee6e4102c2afaae755a803ca267284e5450fbc667b443e3eb8e1c1609703c",
+      "publicPacketSha256": "aa2f2c3c1b834bd8e53c4c5645fee20f19302e291ab49816bb53904112ab460c"
+    },
+    {
+      "index": 49,
+      "commandSha256": "e71ee6e4102c2afaae755a803ca267284e5450fbc667b443e3eb8e1c1609703c",
+      "publicPacketSha256": "0b52616fbd56f46891fd744c80a8884dd21fe607a76ff49634cbbe0fee1ace63"
+    },
+    {
+      "index": 50,
+      "commandSha256": "e71ee6e4102c2afaae755a803ca267284e5450fbc667b443e3eb8e1c1609703c",
+      "publicPacketSha256": "9fe5cd130ed9b3543c5b0695e21f7b2fe81c47aa9e0e3ec24e4e94f9ec3077de"
+    }
+  ],
+  "validation": "The unchanged historical host checks are performed for every command and complete packet hash before release. Only baseline game/target/assets, provenance and trace packets reach the unchanged harness.",
+  "memoryBeforeRelease": {
+    "rss": 890204160,
+    "heapTotal": 490131456,
+    "heapUsed": 361654680,
+    "external": 282593886,
+    "arrayBuffers": 99219230
+  },
+  "baselineRootCollectedBeforeHarnessImport": true,
+  "memoryAfterRelease": {
+    "rss": 601710592,
+    "heapTotal": 156815360,
+    "heapUsed": 15241624,
+    "external": 103105728,
+    "arrayBuffers": 10391631
+  },
+  "preparationOnly": false
+}

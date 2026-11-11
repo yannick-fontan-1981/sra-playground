@@ -1,0 +1,15 @@
+{
+  "schema": "logos-engine.retained-browser-case-clock.v1",
+  "recordedAt": "2026-11-11T01:56:58.393382+00:00",
+  "game": "TRIA",
+  "source": {
+    "path": "docs/migration/lot10a-evidence/integrated-final/browser/case-clock-continuation.json",
+    "sha256": "30b0fdf06efa29265c12b1a0b6017f1278e480b0a40c7ecc16373ccf8184ddb1",
+    "bytes": 1132
+  },
+  "cumulativeSeconds": 895.795295,
+  "maximumCumulativeSeconds": 2400,
+  "remainingSeconds": 1504.204705,
+  "clockReset": false,
+  "qualification": "Latest retained completed TRIA browser clock; no intervening liveTRIA execution observed in coordinated lanes."
+}

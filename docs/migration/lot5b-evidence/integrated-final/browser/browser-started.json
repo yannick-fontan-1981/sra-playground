@@ -1,0 +1,26 @@
+{
+  "schema": "logos-engine.browser-qa-start.v1",
+  "startedAt": "2026-11-11T01:56:58.394558+00:00",
+  "game": "TRIA",
+  "startLevel": 1,
+  "targetLevels": 3,
+  "nativeVersion": "0.58.0",
+  "nativeDigest": "099444085f0579ce60e226c9dece42110c577538f5f337579305a2e5f65483c4",
+  "sourceManifest": {
+    "path": "docs/migration/lot5b-evidence/integrated-final/source-manifest.json",
+    "sha256": "2a0101b7cf56ce98a82e27e36d5ab78b53c297ca54b82c638a168be4560643bd",
+    "bytes": 35852
+  },
+  "compiledWorker": {
+    "path": "dist/assets/v6-agent-worker-DnrnwJL5.js",
+    "sha256": "ebd61a7ee6adc7d30bdb901a2a8f2b5936489f36e1b305be42c6aa052c081248",
+    "bytes": 6794315
+  },
+  "learnedStateInjected": false,
+  "priorClock": {
+    "path": "docs/migration/lot5b-evidence/integrated-final/browser/prior-case-clock.json",
+    "sha256": "6ae9cb16ec1b8ec0ee03a718d2ba71272a1252d17b52cacae431c34eb3c82682",
+    "bytes": 613
+  },
+  "qualification": "Continuous interval begins before managed preview startup; setup and failed interactions remain charged. Intended source and target, no outcome claimed."
+}

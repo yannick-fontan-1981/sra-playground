@@ -1,0 +1,1586 @@
+{
+  "schema": "logos-engine.addressed-material-partial-public-replay.v1",
+  "status": "partial_source_parity_passed",
+  "commonLoopStatus": "failed",
+  "commonLoopFailures": [
+    {
+      "name": "AssertionError",
+      "message": "frontier_preservation_conflict\n+ actual - expected\n\n+ 'stopped'\n- 'action'\n",
+      "stack": "AssertionError [ERR_ASSERTION]: frontier_preservation_conflict\n+ actual - expected\n\n+ 'stopped'\n- 'action'\n\n    at released (file:///workspace/sites/sra-lot5b-20261110/.sites-checkout/scripts/prove-addressed-material-common-loop.mjs:101:10)\n    at file:///workspace/sites/sra-lot5b-20261110/.sites-checkout/scripts/prove-addressed-material-common-loop.mjs:169:5"
+    }
+  ],
+  "completionClaimed": false,
+  "nativeResultsUsedAsOracleInputs": false,
+  "inputs": [
+    {
+      "path": "docs/migration/lot5b-evidence/development/common-stock-01/actual-operations.json",
+      "bytes": 1701868,
+      "sha256": "da7b39f4e85288401bdca41fb0d68697acbbbc5cc13ae4c1fdaa1a3b163dc3c8"
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/development/common-stock-01/original-replay.json.gz",
+      "bytes": 106907,
+      "sha256": "e19ec840db856123fb3fb287b8be2e56b52e902906270b94a2dff61d485b0c7a"
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/development/common-stock-01/original-export.json",
+      "bytes": 7862,
+      "sha256": "f4b3d9ad8f3f934df5eae335744764abe10c0e506c324e2350b7078f3154842d"
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/development/common-stock-01/common-loop.json.gz",
+      "bytes": 433694,
+      "sha256": "38b2c400b50b016e0b009681000be028267d0e15c1f8a5b93c2a27d8537ec765"
+    }
+  ],
+  "inputsUnchanged": true,
+  "operations": 63,
+  "actualReturns": 16,
+  "selectedReturns": 6,
+  "stockReturns": 2,
+  "nextReason": "frontier_preservation_conflict",
+  "checks": {
+    "total": 384,
+    "passed": 384,
+    "failed": 0,
+    "items": [
+      {
+        "name": "0:preservation_obligations:method",
+        "passed": true
+      },
+      {
+        "name": "0:preservation_obligations:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "0:preservation_obligations:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "0:preservation_obligations:exception",
+        "passed": true
+      },
+      {
+        "name": "0:preservation_obligations:result",
+        "passed": true
+      },
+      {
+        "name": "0:preservation_obligations:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "1:propose:method",
+        "passed": true
+      },
+      {
+        "name": "1:propose:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "1:propose:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "1:propose:exception",
+        "passed": true
+      },
+      {
+        "name": "1:propose:result",
+        "passed": true
+      },
+      {
+        "name": "1:propose:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "2:record:method",
+        "passed": true
+      },
+      {
+        "name": "2:record:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "2:record:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "2:record:exception",
+        "passed": true
+      },
+      {
+        "name": "2:record:result",
+        "passed": true
+      },
+      {
+        "name": "2:record:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "3:preservation_obligations:method",
+        "passed": true
+      },
+      {
+        "name": "3:preservation_obligations:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "3:preservation_obligations:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "3:preservation_obligations:exception",
+        "passed": true
+      },
+      {
+        "name": "3:preservation_obligations:result",
+        "passed": true
+      },
+      {
+        "name": "3:preservation_obligations:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "4:record:method",
+        "passed": true
+      },
+      {
+        "name": "4:record:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "4:record:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "4:record:exception",
+        "passed": true
+      },
+      {
+        "name": "4:record:result",
+        "passed": true
+      },
+      {
+        "name": "4:record:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "5:preservation_obligations:method",
+        "passed": true
+      },
+      {
+        "name": "5:preservation_obligations:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "5:preservation_obligations:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "5:preservation_obligations:exception",
+        "passed": true
+      },
+      {
+        "name": "5:preservation_obligations:result",
+        "passed": true
+      },
+      {
+        "name": "5:preservation_obligations:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "6:propose:method",
+        "passed": true
+      },
+      {
+        "name": "6:propose:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "6:propose:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "6:propose:exception",
+        "passed": true
+      },
+      {
+        "name": "6:propose:result",
+        "passed": true
+      },
+      {
+        "name": "6:propose:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "7:record:method",
+        "passed": true
+      },
+      {
+        "name": "7:record:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "7:record:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "7:record:exception",
+        "passed": true
+      },
+      {
+        "name": "7:record:result",
+        "passed": true
+      },
+      {
+        "name": "7:record:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "8:preservation_obligations:method",
+        "passed": true
+      },
+      {
+        "name": "8:preservation_obligations:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "8:preservation_obligations:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "8:preservation_obligations:exception",
+        "passed": true
+      },
+      {
+        "name": "8:preservation_obligations:result",
+        "passed": true
+      },
+      {
+        "name": "8:preservation_obligations:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "9:propose:method",
+        "passed": true
+      },
+      {
+        "name": "9:propose:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "9:propose:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "9:propose:exception",
+        "passed": true
+      },
+      {
+        "name": "9:propose:result",
+        "passed": true
+      },
+      {
+        "name": "9:propose:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "10:record:method",
+        "passed": true
+      },
+      {
+        "name": "10:record:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "10:record:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "10:record:exception",
+        "passed": true
+      },
+      {
+        "name": "10:record:result",
+        "passed": true
+      },
+      {
+        "name": "10:record:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "11:preservation_obligations:method",
+        "passed": true
+      },
+      {
+        "name": "11:preservation_obligations:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "11:preservation_obligations:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "11:preservation_obligations:exception",
+        "passed": true
+      },
+      {
+        "name": "11:preservation_obligations:result",
+        "passed": true
+      },
+      {
+        "name": "11:preservation_obligations:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "12:propose:method",
+        "passed": true
+      },
+      {
+        "name": "12:propose:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "12:propose:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "12:propose:exception",
+        "passed": true
+      },
+      {
+        "name": "12:propose:result",
+        "passed": true
+      },
+      {
+        "name": "12:propose:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "13:record:method",
+        "passed": true
+      },
+      {
+        "name": "13:record:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "13:record:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "13:record:exception",
+        "passed": true
+      },
+      {
+        "name": "13:record:result",
+        "passed": true
+      },
+      {
+        "name": "13:record:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "14:preservation_obligations:method",
+        "passed": true
+      },
+      {
+        "name": "14:preservation_obligations:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "14:preservation_obligations:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "14:preservation_obligations:exception",
+        "passed": true
+      },
+      {
+        "name": "14:preservation_obligations:result",
+        "passed": true
+      },
+      {
+        "name": "14:preservation_obligations:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "15:propose:method",
+        "passed": true
+      },
+      {
+        "name": "15:propose:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "15:propose:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "15:propose:exception",
+        "passed": true
+      },
+      {
+        "name": "15:propose:result",
+        "passed": true
+      },
+      {
+        "name": "15:propose:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "16:record:method",
+        "passed": true
+      },
+      {
+        "name": "16:record:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "16:record:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "16:record:exception",
+        "passed": true
+      },
+      {
+        "name": "16:record:result",
+        "passed": true
+      },
+      {
+        "name": "16:record:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "17:preservation_obligations:method",
+        "passed": true
+      },
+      {
+        "name": "17:preservation_obligations:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "17:preservation_obligations:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "17:preservation_obligations:exception",
+        "passed": true
+      },
+      {
+        "name": "17:preservation_obligations:result",
+        "passed": true
+      },
+      {
+        "name": "17:preservation_obligations:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "18:propose:method",
+        "passed": true
+      },
+      {
+        "name": "18:propose:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "18:propose:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "18:propose:exception",
+        "passed": true
+      },
+      {
+        "name": "18:propose:result",
+        "passed": true
+      },
+      {
+        "name": "18:propose:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "19:record:method",
+        "passed": true
+      },
+      {
+        "name": "19:record:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "19:record:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "19:record:exception",
+        "passed": true
+      },
+      {
+        "name": "19:record:result",
+        "passed": true
+      },
+      {
+        "name": "19:record:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "20:preservation_obligations:method",
+        "passed": true
+      },
+      {
+        "name": "20:preservation_obligations:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "20:preservation_obligations:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "20:preservation_obligations:exception",
+        "passed": true
+      },
+      {
+        "name": "20:preservation_obligations:result",
+        "passed": true
+      },
+      {
+        "name": "20:preservation_obligations:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "21:record:method",
+        "passed": true
+      },
+      {
+        "name": "21:record:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "21:record:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "21:record:exception",
+        "passed": true
+      },
+      {
+        "name": "21:record:result",
+        "passed": true
+      },
+      {
+        "name": "21:record:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "22:preservation_obligations:method",
+        "passed": true
+      },
+      {
+        "name": "22:preservation_obligations:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "22:preservation_obligations:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "22:preservation_obligations:exception",
+        "passed": true
+      },
+      {
+        "name": "22:preservation_obligations:result",
+        "passed": true
+      },
+      {
+        "name": "22:preservation_obligations:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "23:propose:method",
+        "passed": true
+      },
+      {
+        "name": "23:propose:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "23:propose:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "23:propose:exception",
+        "passed": true
+      },
+      {
+        "name": "23:propose:result",
+        "passed": true
+      },
+      {
+        "name": "23:propose:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "24:bind:method",
+        "passed": true
+      },
+      {
+        "name": "24:bind:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "24:bind:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "24:bind:exception",
+        "passed": true
+      },
+      {
+        "name": "24:bind:result",
+        "passed": true
+      },
+      {
+        "name": "24:bind:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "24:bind:point-bindings",
+        "passed": true
+      },
+      {
+        "name": "25:before:method",
+        "passed": true
+      },
+      {
+        "name": "25:before:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "25:before:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "25:before:exception",
+        "passed": true
+      },
+      {
+        "name": "25:before:result",
+        "passed": true
+      },
+      {
+        "name": "25:before:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "26:after:method",
+        "passed": true
+      },
+      {
+        "name": "26:after:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "26:after:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "26:after:exception",
+        "passed": true
+      },
+      {
+        "name": "26:after:result",
+        "passed": true
+      },
+      {
+        "name": "26:after:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "27:record:method",
+        "passed": true
+      },
+      {
+        "name": "27:record:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "27:record:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "27:record:exception",
+        "passed": true
+      },
+      {
+        "name": "27:record:result",
+        "passed": true
+      },
+      {
+        "name": "27:record:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "28:preservation_obligations:method",
+        "passed": true
+      },
+      {
+        "name": "28:preservation_obligations:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "28:preservation_obligations:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "28:preservation_obligations:exception",
+        "passed": true
+      },
+      {
+        "name": "28:preservation_obligations:result",
+        "passed": true
+      },
+      {
+        "name": "28:preservation_obligations:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "29:record:method",
+        "passed": true
+      },
+      {
+        "name": "29:record:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "29:record:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "29:record:exception",
+        "passed": true
+      },
+      {
+        "name": "29:record:result",
+        "passed": true
+      },
+      {
+        "name": "29:record:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "30:preservation_obligations:method",
+        "passed": true
+      },
+      {
+        "name": "30:preservation_obligations:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "30:preservation_obligations:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "30:preservation_obligations:exception",
+        "passed": true
+      },
+      {
+        "name": "30:preservation_obligations:result",
+        "passed": true
+      },
+      {
+        "name": "30:preservation_obligations:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "31:propose:method",
+        "passed": true
+      },
+      {
+        "name": "31:propose:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "31:propose:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "31:propose:exception",
+        "passed": true
+      },
+      {
+        "name": "31:propose:result",
+        "passed": true
+      },
+      {
+        "name": "31:propose:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "32:bind:method",
+        "passed": true
+      },
+      {
+        "name": "32:bind:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "32:bind:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "32:bind:exception",
+        "passed": true
+      },
+      {
+        "name": "32:bind:result",
+        "passed": true
+      },
+      {
+        "name": "32:bind:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "32:bind:point-bindings",
+        "passed": true
+      },
+      {
+        "name": "33:before:method",
+        "passed": true
+      },
+      {
+        "name": "33:before:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "33:before:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "33:before:exception",
+        "passed": true
+      },
+      {
+        "name": "33:before:result",
+        "passed": true
+      },
+      {
+        "name": "33:before:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "34:after:method",
+        "passed": true
+      },
+      {
+        "name": "34:after:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "34:after:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "34:after:exception",
+        "passed": true
+      },
+      {
+        "name": "34:after:result",
+        "passed": true
+      },
+      {
+        "name": "34:after:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "35:record:method",
+        "passed": true
+      },
+      {
+        "name": "35:record:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "35:record:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "35:record:exception",
+        "passed": true
+      },
+      {
+        "name": "35:record:result",
+        "passed": true
+      },
+      {
+        "name": "35:record:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "36:preservation_obligations:method",
+        "passed": true
+      },
+      {
+        "name": "36:preservation_obligations:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "36:preservation_obligations:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "36:preservation_obligations:exception",
+        "passed": true
+      },
+      {
+        "name": "36:preservation_obligations:result",
+        "passed": true
+      },
+      {
+        "name": "36:preservation_obligations:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "37:propose:method",
+        "passed": true
+      },
+      {
+        "name": "37:propose:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "37:propose:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "37:propose:exception",
+        "passed": true
+      },
+      {
+        "name": "37:propose:result",
+        "passed": true
+      },
+      {
+        "name": "37:propose:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "38:bind:method",
+        "passed": true
+      },
+      {
+        "name": "38:bind:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "38:bind:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "38:bind:exception",
+        "passed": true
+      },
+      {
+        "name": "38:bind:result",
+        "passed": true
+      },
+      {
+        "name": "38:bind:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "38:bind:point-bindings",
+        "passed": true
+      },
+      {
+        "name": "39:before:method",
+        "passed": true
+      },
+      {
+        "name": "39:before:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "39:before:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "39:before:exception",
+        "passed": true
+      },
+      {
+        "name": "39:before:result",
+        "passed": true
+      },
+      {
+        "name": "39:before:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "40:after:method",
+        "passed": true
+      },
+      {
+        "name": "40:after:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "40:after:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "40:after:exception",
+        "passed": true
+      },
+      {
+        "name": "40:after:result",
+        "passed": true
+      },
+      {
+        "name": "40:after:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "41:record:method",
+        "passed": true
+      },
+      {
+        "name": "41:record:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "41:record:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "41:record:exception",
+        "passed": true
+      },
+      {
+        "name": "41:record:result",
+        "passed": true
+      },
+      {
+        "name": "41:record:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "42:preservation_obligations:method",
+        "passed": true
+      },
+      {
+        "name": "42:preservation_obligations:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "42:preservation_obligations:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "42:preservation_obligations:exception",
+        "passed": true
+      },
+      {
+        "name": "42:preservation_obligations:result",
+        "passed": true
+      },
+      {
+        "name": "42:preservation_obligations:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "43:record:method",
+        "passed": true
+      },
+      {
+        "name": "43:record:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "43:record:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "43:record:exception",
+        "passed": true
+      },
+      {
+        "name": "43:record:result",
+        "passed": true
+      },
+      {
+        "name": "43:record:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "44:preservation_obligations:method",
+        "passed": true
+      },
+      {
+        "name": "44:preservation_obligations:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "44:preservation_obligations:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "44:preservation_obligations:exception",
+        "passed": true
+      },
+      {
+        "name": "44:preservation_obligations:result",
+        "passed": true
+      },
+      {
+        "name": "44:preservation_obligations:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "45:propose:method",
+        "passed": true
+      },
+      {
+        "name": "45:propose:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "45:propose:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "45:propose:exception",
+        "passed": true
+      },
+      {
+        "name": "45:propose:result",
+        "passed": true
+      },
+      {
+        "name": "45:propose:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "46:bind:method",
+        "passed": true
+      },
+      {
+        "name": "46:bind:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "46:bind:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "46:bind:exception",
+        "passed": true
+      },
+      {
+        "name": "46:bind:result",
+        "passed": true
+      },
+      {
+        "name": "46:bind:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "46:bind:point-bindings",
+        "passed": true
+      },
+      {
+        "name": "47:before:method",
+        "passed": true
+      },
+      {
+        "name": "47:before:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "47:before:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "47:before:exception",
+        "passed": true
+      },
+      {
+        "name": "47:before:result",
+        "passed": true
+      },
+      {
+        "name": "47:before:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "48:after:method",
+        "passed": true
+      },
+      {
+        "name": "48:after:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "48:after:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "48:after:exception",
+        "passed": true
+      },
+      {
+        "name": "48:after:result",
+        "passed": true
+      },
+      {
+        "name": "48:after:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "49:record:method",
+        "passed": true
+      },
+      {
+        "name": "49:record:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "49:record:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "49:record:exception",
+        "passed": true
+      },
+      {
+        "name": "49:record:result",
+        "passed": true
+      },
+      {
+        "name": "49:record:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "50:preservation_obligations:method",
+        "passed": true
+      },
+      {
+        "name": "50:preservation_obligations:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "50:preservation_obligations:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "50:preservation_obligations:exception",
+        "passed": true
+      },
+      {
+        "name": "50:preservation_obligations:result",
+        "passed": true
+      },
+      {
+        "name": "50:preservation_obligations:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "51:propose:method",
+        "passed": true
+      },
+      {
+        "name": "51:propose:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "51:propose:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "51:propose:exception",
+        "passed": true
+      },
+      {
+        "name": "51:propose:result",
+        "passed": true
+      },
+      {
+        "name": "51:propose:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "52:bind:method",
+        "passed": true
+      },
+      {
+        "name": "52:bind:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "52:bind:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "52:bind:exception",
+        "passed": true
+      },
+      {
+        "name": "52:bind:result",
+        "passed": true
+      },
+      {
+        "name": "52:bind:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "52:bind:point-bindings",
+        "passed": true
+      },
+      {
+        "name": "53:before:method",
+        "passed": true
+      },
+      {
+        "name": "53:before:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "53:before:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "53:before:exception",
+        "passed": true
+      },
+      {
+        "name": "53:before:result",
+        "passed": true
+      },
+      {
+        "name": "53:before:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "54:after:method",
+        "passed": true
+      },
+      {
+        "name": "54:after:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "54:after:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "54:after:exception",
+        "passed": true
+      },
+      {
+        "name": "54:after:result",
+        "passed": true
+      },
+      {
+        "name": "54:after:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "55:record:method",
+        "passed": true
+      },
+      {
+        "name": "55:record:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "55:record:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "55:record:exception",
+        "passed": true
+      },
+      {
+        "name": "55:record:result",
+        "passed": true
+      },
+      {
+        "name": "55:record:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "56:preservation_obligations:method",
+        "passed": true
+      },
+      {
+        "name": "56:preservation_obligations:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "56:preservation_obligations:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "56:preservation_obligations:exception",
+        "passed": true
+      },
+      {
+        "name": "56:preservation_obligations:result",
+        "passed": true
+      },
+      {
+        "name": "56:preservation_obligations:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "57:propose:method",
+        "passed": true
+      },
+      {
+        "name": "57:propose:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "57:propose:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "57:propose:exception",
+        "passed": true
+      },
+      {
+        "name": "57:propose:result",
+        "passed": true
+      },
+      {
+        "name": "57:propose:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "58:bind:method",
+        "passed": true
+      },
+      {
+        "name": "58:bind:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "58:bind:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "58:bind:exception",
+        "passed": true
+      },
+      {
+        "name": "58:bind:result",
+        "passed": true
+      },
+      {
+        "name": "58:bind:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "58:bind:point-bindings",
+        "passed": true
+      },
+      {
+        "name": "59:before:method",
+        "passed": true
+      },
+      {
+        "name": "59:before:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "59:before:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "59:before:exception",
+        "passed": true
+      },
+      {
+        "name": "59:before:result",
+        "passed": true
+      },
+      {
+        "name": "59:before:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "60:after:method",
+        "passed": true
+      },
+      {
+        "name": "60:after:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "60:after:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "60:after:exception",
+        "passed": true
+      },
+      {
+        "name": "60:after:result",
+        "passed": true
+      },
+      {
+        "name": "60:after:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "61:record:method",
+        "passed": true
+      },
+      {
+        "name": "61:record:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "61:record:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "61:record:exception",
+        "passed": true
+      },
+      {
+        "name": "61:record:result",
+        "passed": true
+      },
+      {
+        "name": "61:record:complete-source-state",
+        "passed": true
+      },
+      {
+        "name": "62:preservation_obligations:method",
+        "passed": true
+      },
+      {
+        "name": "62:preservation_obligations:public-inputs",
+        "passed": true
+      },
+      {
+        "name": "62:preservation_obligations:proposal-source",
+        "passed": true
+      },
+      {
+        "name": "62:preservation_obligations:exception",
+        "passed": true
+      },
+      {
+        "name": "62:preservation_obligations:result",
+        "passed": true
+      },
+      {
+        "name": "62:preservation_obligations:complete-source-state",
+        "passed": true
+      }
+    ]
+  },
+  "qualification": "Only the actual partial public trajectory is compared with a separate cold original replay. The failed complete-caller attempt remains failed; no proposal, obligation, prior, response or state is changed to bypass its refusal."
+}

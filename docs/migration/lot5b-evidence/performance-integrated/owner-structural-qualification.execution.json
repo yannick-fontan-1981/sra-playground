@@ -1,0 +1,17 @@
+{
+  "command": [
+    "node",
+    "docs/migration/lot5b-evidence/qualify-cost-owner-graphs.mjs",
+    "docs/migration/lot5b-evidence/performance-integrated/functional-baseline.json.gz",
+    "docs/migration/lot5b-evidence/performance-integrated/functional-baseline.receipt.json",
+    "docs/migration/lot5b-evidence/performance-integrated/functional-candidate.json.gz",
+    "docs/migration/lot5b-evidence/performance-integrated/functional-candidate.receipt.json",
+    "docs/migration/lot5b-evidence/performance-integrated/owner-structural-attribution.json",
+    "docs/migration/lot5b-evidence/performance-integrated/owner-structural-fixture.json"
+  ],
+  "startedAt": "2026-11-11T01:54:37.545664+00:00",
+  "finishedAt": "2026-11-11T01:54:50.903904+00:00",
+  "exitCode": 0,
+  "log": "docs/migration/lot5b-evidence/performance-integrated/owner-structural-qualification.log",
+  "officialCostMeasurement": false
+}

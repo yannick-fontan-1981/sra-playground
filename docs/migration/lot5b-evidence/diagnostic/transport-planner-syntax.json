@@ -1,0 +1,15 @@
+{
+  "schema": "logos-engine.source-syntax-checks.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-11T01:21:46.842058+00:00",
+  "checks": [
+    {
+      "path": "docs/migration/lot5b-evidence/plan-bounded-source-transport.py",
+      "bytes": 31356,
+      "sha256": "a53cd2d86d962c60c3a97c2ec533429b8b404c837ec3783c4654a5cb369453a5",
+      "check": "ast.parse",
+      "passed": true
+    }
+  ],
+  "qualification": "Syntax only after explicit4C release. No planner run, Git object, transport, archive or publication."
+}

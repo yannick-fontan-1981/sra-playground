@@ -1,0 +1,16 @@
+{
+  "command": [
+    "python",
+    "-B",
+    "docs/migration/lot5b-evidence/record-cost-log-transport.py",
+    "docs/migration/lot5b-evidence/performance-integrated"
+  ],
+  "startedAt": "2026-11-11T02:29:52.405985+00:00",
+  "finishedAt": "2026-11-11T02:29:52.437244+00:00",
+  "exitCode": 0,
+  "log": {
+    "path": "docs/migration/lot5b-evidence/performance-integrated/log-transport-generation.log",
+    "bytes": 221,
+    "sha256": "a70d1f425dd6473f689b9d9b6a4e409b7ebc5552a361751d9bccb0a41f6b66a9"
+  }
+}

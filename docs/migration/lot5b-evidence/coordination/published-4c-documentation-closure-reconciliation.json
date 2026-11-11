@@ -1,0 +1,39 @@
+{
+  "schema": "logos-engine.published-documentation-closure-reconciliation.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-11T02:04:00.038142+00:00",
+  "nativePublication": {
+    "siteVersion": 92,
+    "commit": "d06620d1e4ca2c9758cc693b1ced9eeeddccb7e6"
+  },
+  "documentationClosure": {
+    "siteVersion": 93,
+    "commit": "74fb966a87a561af357630fae18e3dd71547483c"
+  },
+  "publicationArchiveContentHashUnchanged": true,
+  "nativeTestsBuildInputsUnchanged": true,
+  "comparison": {
+    "command": [
+      "git",
+      "diff",
+      "--name-only",
+      "d06620d1e4ca2c9758cc693b1ced9eeeddccb7e6",
+      "74fb966a87a561af357630fae18e3dd71547483c",
+      "--",
+      "src",
+      "tests",
+      "scripts",
+      "public",
+      "package.json",
+      "package-lock.json"
+    ],
+    "exitCode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "candidateNativeDigestUnchanged": "099444085f0579ce60e226c9dece42110c577538f5f337579305a2e5f65483c4",
+  "candidateNativeFilesVerified": 302,
+  "costBaselineRemainsSite": 92,
+  "candidateArchiveBaseRemains": "ee0c2e663a68e7ac7b272625adf929fcac483956",
+  "qualification": "The actual documentation closure is now merged. It does not relabel the already declared Site92 cost reference, original test baselines or original candidate freeze ancestry."
+}

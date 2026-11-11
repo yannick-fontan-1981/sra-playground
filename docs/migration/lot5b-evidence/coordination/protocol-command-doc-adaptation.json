@@ -1,0 +1,17 @@
+{
+  "schema": "logos-engine.protocol-documentation-adaptation.v1",
+  "recordedAt": "2026-11-11T01:52:51.215225+00:00",
+  "status": "syntax_checked_before_protocol_declaration",
+  "before": {
+    "path": "docs/migration/lot5b-evidence/coordination/protocol-command-doc-before.py",
+    "sha256": "c84a42e0c20efd1eeca100d3b033ba9262b7d393d88de82093c69f9fda7b1d5c",
+    "bytes": 28944
+  },
+  "after": {
+    "path": "docs/migration/lot5b-evidence/prepare-cost-protocol.py",
+    "sha256": "c53e6534b4f570c94610ca7c338462a1e4edc91975d9130a770dcee200811efe",
+    "bytes": 30134
+  },
+  "scope": "Generated protocol Markdown commands only; explicit qualified owner-growth branch and historical diagnostic provenance. Policies, computations, populations, limits and all four graph tools unchanged.",
+  "functionalExecution": false
+}

@@ -1,0 +1,24 @@
+{
+  "schema": "logos-engine.lot5b-source-transport-adaptation.v1",
+  "recordedAt": "2026-11-11T01:13:24.558965+00:00",
+  "source": {
+    "path": "docs/migration/lot10a-evidence/plan-bounded-source-transport.py",
+    "bytes": 31366,
+    "sha256": "384d76d90e648468844813ccc8f68cba4e674c08a77aac55f2892ba2ee375421"
+  },
+  "target": {
+    "path": "docs/migration/lot5b-evidence/plan-bounded-source-transport.py",
+    "bytes": 31356,
+    "sha256": "a53cd2d86d962c60c3a97c2ec533429b8b404c837ec3783c4654a5cb369453a5"
+  },
+  "changes": [
+    "Lot-specific evidence root and completed-window default",
+    "Lot labels in transport commits, temporary directory and CLI text"
+  ],
+  "logicChanged": false,
+  "syntax": "Pending explicit4C compute release; source/text-only preparation during its cost window",
+  "planExecuted": false,
+  "gitObjectsCreated": false,
+  "remoteActionExecuted": false,
+  "qualification": "The retained successful10A planner is adapted only in literal lot labels/paths. Strictly less than32MiB object bound and40MiB missing raw object step bound remain unchanged. No source transport is attempted before completed5B costs and a clean committed delivery."
+}

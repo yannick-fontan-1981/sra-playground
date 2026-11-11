@@ -1,0 +1,321 @@
+{
+  "schema": "logos-engine.coordinated-cost-isolation.v1",
+  "status": "acknowledged_quiet_before_window",
+  "requestedAt": "2026-11-11T02:06:17.533314+00:00",
+  "recordedAt": "2026-11-11T02:16:12.337246+00:00",
+  "otherLaneAcknowledged": true,
+  "ownTrackedComputeEnded": true,
+  "previewStopped": true,
+  "costNodeOptionsOverride": null,
+  "requiredQuietLanes": [
+    "3I",
+    "4A",
+    "4B",
+    "4C",
+    "4C-auxiliary",
+    "5A",
+    "7A",
+    "7B",
+    "10A",
+    "6A",
+    "10B",
+    "7-followup"
+  ],
+  "laneAcknowledgements": [
+    {
+      "lot": "3I",
+      "observedAt": "2026-11-11T02:16:12.335424+00:00",
+      "activeCommand": null,
+      "executionStopped": true,
+      "terminalRelease": true,
+      "evidence": {
+        "path": "docs/migration/lot5b-evidence/performance-integrated/quiet-observations/lot3-status.json",
+        "sha256": "f397d6076b5fde6775fe5056c48e3b69dd10110fcd68d0d627f0849d2a4a8076",
+        "bytes": 4769
+      },
+      "releaseStatement": "Native 0.50 published successfully as Site 79. Source, tests, build, regression evidence and official costs are verified. The agreed next slot is released to 4A."
+    },
+    {
+      "lot": "4A",
+      "observedAt": "2026-11-11T02:16:12.335625+00:00",
+      "activeCommand": null,
+      "executionStopped": true,
+      "terminalRelease": true,
+      "evidence": {
+        "path": "docs/migration/lot5b-evidence/performance-integrated/quiet-observations/lot4a-status.json",
+        "sha256": "110a35288d6d7644ddb16c80554ae33605e4e9117bf8cbda4b781e878d4a8830",
+        "bytes": 7341
+      },
+      "releaseStatement": "Delivered. Native0.51 deployed in Site80, then documentation closure in Site81; both terminal succeeded and deployment archive byte-identical. Source worktree clean. Slot released to7A."
+    },
+    {
+      "lot": "4B",
+      "observedAt": "2026-11-11T02:16:12.335911+00:00",
+      "activeCommand": null,
+      "executionStopped": true,
+      "terminalRelease": true,
+      "evidence": {
+        "path": "docs/migration/lot5b-evidence/performance-integrated/quiet-observations/lot4b-status.json",
+        "sha256": "e6b2cc3277cc11b0012858734688da427127782ca5457c1034c23836a55f4da3",
+        "bytes": 4153
+      },
+      "releaseStatement": "Explicit 4B compute release: ABBA has finished and shared performance.lock is released. Other lanes may resume functional tests/builds/games. No further 4B measurement planned; publication order remains 4B then7B."
+    },
+    {
+      "lot": "4C",
+      "observedAt": "2026-11-11T02:16:12.336053+00:00",
+      "activeCommand": null,
+      "executionStopped": true,
+      "terminalRelease": true,
+      "evidence": {
+        "path": "docs/migration/lot5b-evidence/performance-integrated/quiet-observations/lot4c-status.json",
+        "sha256": "9fe6b2e3510740b3c4a9c21abd1b84c925f0120308ca6320606388a642b2e206",
+        "bytes": 2188
+      },
+      "releaseStatement": "4C publication slot RELEASED. Actual final Site93/native0.57 source74fb966a87a561af357630fae18e3dd71547483c is succeeded; see published-4c-site93.json. Merge this documentation closure before your own publication; native/test/build inputs and server content hash match Site92. Your own final integrated validation/cost/publication may proceed under shared coordination. No further4C computation or publication is planned."
+    },
+    {
+      "lot": "4C-auxiliary",
+      "observedAt": "2026-11-11T02:16:12.336181+00:00",
+      "activeCommand": null,
+      "executionStopped": true,
+      "terminalRelease": true,
+      "evidence": {
+        "path": "docs/migration/lot5b-evidence/performance-integrated/quiet-observations/lot4c-auxiliary-status.json",
+        "sha256": "8a51579499f5df1c85fe244d1aa1a1f6e109867eb99bc07e29703f29d027b9ed",
+        "bytes": 628
+      },
+      "releaseStatement": "Official4C window ended with isolation passed and lock released; auxiliary quiet requirement is released. All auxiliary agents currently idle."
+    },
+    {
+      "lot": "5A",
+      "observedAt": "2026-11-11T02:16:12.336308+00:00",
+      "activeCommand": null,
+      "executionStopped": true,
+      "terminalRelease": true,
+      "evidence": {
+        "path": "docs/migration/lot5b-evidence/performance-integrated/quiet-observations/lot5a-status.json",
+        "sha256": "4fac6b06f74a1b03d3f7fd0ef3e2a34532fccf77df98a35a8339003ff0b66ae2",
+        "bytes": 5578
+      },
+      "releaseStatement": "Explicit functional compute release:5A ABBA has ended and performance.lock is released.4B/7B may resume tests/builds/games. No further5A benchmark planned. Cost computation and source publication remain; actual5A published commit will follow before your release freezes."
+    },
+    {
+      "lot": "7A",
+      "observedAt": "2026-11-11T02:16:12.336424+00:00",
+      "activeCommand": null,
+      "executionStopped": true,
+      "terminalRelease": true,
+      "evidence": {
+        "path": "docs/migration/lot5b-evidence/performance-integrated/quiet-observations/lot7a-status.json",
+        "sha256": "e9c395a90dcfee739a1d52342878ef24739bf1b2d97307eab1f8f6a22ac2fad0",
+        "bytes": 6045
+      },
+      "releaseStatement": "Delivered:7A native0.52 firstpublishedSite82 then documentationclosureSite83, bothsucceeded. Finalsourceclean. Publicationandcomputeslotsreleasedto5A."
+    },
+    {
+      "lot": "7B",
+      "observedAt": "2026-11-11T02:16:12.336545+00:00",
+      "activeCommand": null,
+      "executionStopped": true,
+      "terminalRelease": true,
+      "evidence": {
+        "path": "docs/migration/lot5b-evidence/performance-integrated/quiet-observations/lot7b-status.json",
+        "sha256": "0aeae41dd69aa0f0e543c3ef72700e21500a9b83b5369a78c1f1018ef2293f2b",
+        "bytes": 3991
+      },
+      "releaseStatement": "All 7B execution and publication complete; no further 7B runtime, build, test, oracle or timing work planned."
+    },
+    {
+      "lot": "10A",
+      "observedAt": "2026-11-11T02:16:12.336672+00:00",
+      "activeCommand": null,
+      "executionStopped": true,
+      "terminalRelease": true,
+      "evidence": {
+        "path": "docs/migration/lot5b-evidence/performance-integrated/quiet-observations/lot10a-status.json",
+        "sha256": "944d8396db73c4ae348e4fd2de89ae518d0f65d36811c4cafbd25cfd35bf1129",
+        "bytes": 7473
+      },
+      "releaseStatement": "FINAL10A RELEASE: private Site91 succeeded, native0.56.0, source5659ddc9420c7624df4865f0afc628782296a186. Full receipt /workspace/shared/sra-coordination/published-10a-site91.json. All own locks and compute released. Revised queue10A ->4C ->5B preserved; integrate actual4C successor before5B publication."
+    },
+    {
+      "lot": "6A",
+      "observedAt": "2026-11-11T02:16:12.336777+00:00",
+      "activeCommand": null,
+      "executionStopped": true,
+      "terminalRelease": false,
+      "evidence": {
+        "path": "docs/migration/lot5b-evidence/performance-integrated/quiet-observations/lot6a-status.json",
+        "sha256": "c3d71609ff4a69b4f6f18eff37964784dac6b990cc0feda3b1110c7a680b1944",
+        "bytes": 2014
+      },
+      "acknowledgedAt": "2026-11-11T02:14:22.058123+00:00",
+      "acknowledgement": "6A is a newly active lane continuing completed4C. Your next official ABBA window has priority. All6A compute uses SH; after a short existing-source opening,6A and its agents will acknowledge quiet and do only lightweight file reading/writing through your explicit final release. Please include this lane in coordination if not yet frozen."
+    },
+    {
+      "lot": "10B",
+      "observedAt": "2026-11-11T02:16:12.336936+00:00",
+      "activeCommand": null,
+      "executionStopped": true,
+      "terminalRelease": false,
+      "evidence": {
+        "path": "docs/migration/lot5b-evidence/performance-integrated/quiet-observations/lot10b-status.json",
+        "sha256": "44a89e85e94f0e84813fb25c274f58ed8e0355564a28b5844fb7848de05b15d4",
+        "bytes": 2064
+      },
+      "acknowledgedAt": "2026-11-11T02:10:54.758813+00:00",
+      "acknowledgement": "FRESH10B QUIET ACK: user requested10B after delivered10A. Root and all own delegates are restricted to source/text reading and notes, with no tests/builds/oracles/games/profiles/captures/archives/npm or preview until your explicit functional release after ABBA. Please include lot10b-status.json in readiness and post actual release plus final published source. Your0.58 publication precedes10B; no version race."
+    },
+    {
+      "lot": "7-followup",
+      "observedAt": "2026-11-11T02:16:12.337039+00:00",
+      "activeCommand": null,
+      "executionStopped": true,
+      "terminalRelease": false,
+      "evidence": {
+        "path": "docs/migration/lot5b-evidence/performance-integrated/quiet-observations/lot7-followup-status.json",
+        "sha256": "466ede77ee95a59dff0ca383a909bd3b98f2b4becf1a625da15c90d9f81c5519",
+        "bytes": 1181
+      },
+      "acknowledgedAt": "2026-11-11T02:13:38.168332+00:00",
+      "acknowledgement": "The user resumed the lot7 thread. We acknowledge your02:06 quiet request and perform source/text reads only. No executable proof or checkout preparation until your explicit release. Prior lot7A/7B receipts/statuses remain immutable."
+    }
+  ],
+  "trackedAgentIds": [
+    "/root",
+    "/root/addressed_contract",
+    "/root/addressed_integration",
+    "/root/addressed_oracle"
+  ],
+  "ownAgents": [
+    {
+      "id": "/root",
+      "stoppedAt": "2026-11-11T02:16:12.337093+00:00",
+      "activeCommand": null,
+      "executionStopped": true,
+      "evidence": {
+        "path": "docs/migration/lot5b-evidence/performance-integrated/quiet-observations/own-workers.json",
+        "sha256": "281ad99ebc4a21a0253d152dc0197bd83ebc3f69b478659a8d17420473aabd41",
+        "bytes": 1349
+      }
+    },
+    {
+      "id": "/root/addressed_contract",
+      "stoppedAt": "2026-11-11T02:16:12.337093+00:00",
+      "activeCommand": null,
+      "executionStopped": true,
+      "evidence": {
+        "path": "docs/migration/lot5b-evidence/performance-integrated/quiet-observations/own-workers.json",
+        "sha256": "281ad99ebc4a21a0253d152dc0197bd83ebc3f69b478659a8d17420473aabd41",
+        "bytes": 1349
+      }
+    },
+    {
+      "id": "/root/addressed_integration",
+      "stoppedAt": "2026-11-11T02:16:12.337093+00:00",
+      "activeCommand": null,
+      "executionStopped": true,
+      "evidence": {
+        "path": "docs/migration/lot5b-evidence/performance-integrated/quiet-observations/own-workers.json",
+        "sha256": "281ad99ebc4a21a0253d152dc0197bd83ebc3f69b478659a8d17420473aabd41",
+        "bytes": 1349
+      }
+    },
+    {
+      "id": "/root/addressed_oracle",
+      "stoppedAt": "2026-11-11T02:16:12.337093+00:00",
+      "activeCommand": null,
+      "executionStopped": true,
+      "evidence": {
+        "path": "docs/migration/lot5b-evidence/performance-integrated/quiet-observations/own-workers.json",
+        "sha256": "281ad99ebc4a21a0253d152dc0197bd83ebc3f69b478659a8d17420473aabd41",
+        "bytes": 1349
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "path": "docs/migration/lot5b-evidence/coordination/quiet-request.json",
+      "sha256": "596a7f20ea669e2f26088494f803535a28beef3a57f0d038ef0ddc155266f25f",
+      "bytes": 840
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/performance-integrated/quiet-observations/own-workers.json",
+      "sha256": "281ad99ebc4a21a0253d152dc0197bd83ebc3f69b478659a8d17420473aabd41",
+      "bytes": 1349
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/integrated-final/browser/preview-stop.json",
+      "sha256": "9383ab701992b0b5e96e8ba0b3c3f40b1a6be2d84a1c1a760089037b0ed65fa7",
+      "bytes": 230
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/coordination/quiet-new-lane-discovery.json",
+      "sha256": "300ac459b6be91f22b10d34a21ceafdbcdefb3a516f6411a48507b90b07ba643",
+      "bytes": 451
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/performance-integrated/quiet-observations/lot3-status.json",
+      "sha256": "f397d6076b5fde6775fe5056c48e3b69dd10110fcd68d0d627f0849d2a4a8076",
+      "bytes": 4769
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/performance-integrated/quiet-observations/lot4a-status.json",
+      "sha256": "110a35288d6d7644ddb16c80554ae33605e4e9117bf8cbda4b781e878d4a8830",
+      "bytes": 7341
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/performance-integrated/quiet-observations/lot4b-status.json",
+      "sha256": "e6b2cc3277cc11b0012858734688da427127782ca5457c1034c23836a55f4da3",
+      "bytes": 4153
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/performance-integrated/quiet-observations/lot4c-status.json",
+      "sha256": "9fe6b2e3510740b3c4a9c21abd1b84c925f0120308ca6320606388a642b2e206",
+      "bytes": 2188
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/performance-integrated/quiet-observations/lot4c-auxiliary-status.json",
+      "sha256": "8a51579499f5df1c85fe244d1aa1a1f6e109867eb99bc07e29703f29d027b9ed",
+      "bytes": 628
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/performance-integrated/quiet-observations/lot5a-status.json",
+      "sha256": "4fac6b06f74a1b03d3f7fd0ef3e2a34532fccf77df98a35a8339003ff0b66ae2",
+      "bytes": 5578
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/performance-integrated/quiet-observations/lot7a-status.json",
+      "sha256": "e9c395a90dcfee739a1d52342878ef24739bf1b2d97307eab1f8f6a22ac2fad0",
+      "bytes": 6045
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/performance-integrated/quiet-observations/lot7b-status.json",
+      "sha256": "0aeae41dd69aa0f0e543c3ef72700e21500a9b83b5369a78c1f1018ef2293f2b",
+      "bytes": 3991
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/performance-integrated/quiet-observations/lot10a-status.json",
+      "sha256": "944d8396db73c4ae348e4fd2de89ae518d0f65d36811c4cafbd25cfd35bf1129",
+      "bytes": 7473
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/performance-integrated/quiet-observations/lot6a-status.json",
+      "sha256": "c3d71609ff4a69b4f6f18eff37964784dac6b990cc0feda3b1110c7a680b1944",
+      "bytes": 2014
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/performance-integrated/quiet-observations/lot10b-status.json",
+      "sha256": "44a89e85e94f0e84813fb25c274f58ed8e0355564a28b5844fb7848de05b15d4",
+      "bytes": 2064
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/performance-integrated/quiet-observations/lot7-followup-status.json",
+      "sha256": "466ede77ee95a59dff0ca383a909bd3b98f2b4becf1a625da15c90d9f81c5519",
+      "bytes": 1181
+    }
+  ],
+  "performanceLock": "/workspace/shared/sra-coordination/performance.lock",
+  "qualification": "Fresh reread after02:06 request covers all12known lanes including new6A,10B,7-followup with explicit acknowledgements after that request. Old aliases are separate; auxiliary4C does not substitute for root4C. Only source/text preparation is permitted to others. Exclusive flock will cover the complete official runner. Pre/post lane inventories and execution flags will be retained; text-only status updates do not by themselves imply runtime work. Unobservable external machine load is not asserted absent."
+}

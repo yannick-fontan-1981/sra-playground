@@ -1,0 +1,15 @@
+{
+  "lot": "4C auxiliary workers only; excludes official ABBA runner",
+  "updated_at": "2026-11-11T01:21:05.427929+00:00",
+  "quiet_acknowledged": false,
+  "heavy_work_started": false,
+  "performance_started": false,
+  "publication_started": false,
+  "active_command": null,
+  "stage": "Official4C window ended with isolation passed and lock released; auxiliary quiet requirement is released. All auxiliary agents currently idle.",
+  "agents": [
+    "facet_component: acknowledged text-only quiet",
+    "facet_oracle: completed; shared lock released",
+    "facet_source_audit: read-only source review, no heavy execution"
+  ]
+}

@@ -1,0 +1,1103 @@
+{
+  "schema": "logos-engine.lot5b.independent-numeric-review.v1",
+  "status": "independent_numeric_review_failed",
+  "startedAt": "2026-11-11T02:36:49.814091+00:00",
+  "finishedAt": "2026-11-11T02:36:49.871432+00:00",
+  "scope": "Independent Python standard-library arithmetic from the four retained raw measurement reports. No runtime, game, test, oracle, archive or source edit was executed. Existing reports are comparison targets, not arithmetic inputs. This review does not re-establish isolation, structural attribution, source parity or game completion.",
+  "rawInputs": [
+    {
+      "label": "A1",
+      "cohort": 1,
+      "version": "before",
+      "path": "docs/migration/lot5b-evidence/performance-integrated/cohort1/baseline.json",
+      "bytes": 431966,
+      "sha256": "fa6875957d63d230814c9cdc7d25b6d619445bd6a043aab5fde02d9d872c0d9f"
+    },
+    {
+      "label": "B1",
+      "cohort": 1,
+      "version": "after",
+      "path": "docs/migration/lot5b-evidence/performance-integrated/cohort1/after.json",
+      "bytes": 432519,
+      "sha256": "dbe1a863aa813c742e8a0c8c5aed1309310de56cef97ce8b3a3033aaa507c24f"
+    },
+    {
+      "label": "B2",
+      "cohort": 2,
+      "version": "after",
+      "path": "docs/migration/lot5b-evidence/performance-integrated/cohort2/after.json",
+      "bytes": 432496,
+      "sha256": "04ddbc03fb0d59098fb6fd4357407aab327c74373b816e223ac8111043fd786c"
+    },
+    {
+      "label": "A2",
+      "cohort": 2,
+      "version": "before",
+      "path": "docs/migration/lot5b-evidence/performance-integrated/cohort2/baseline.json",
+      "bytes": 432156,
+      "sha256": "7ca92c9a8c28be610e18deb49f4db207ff9747d0a8c498ff456f47944e953d62"
+    }
+  ],
+  "policy": {
+    "path": "docs/migration/lot5b-evidence/performance-integrated/global-budget-policy.json",
+    "bytes": 2335,
+    "sha256": "b15eed60c5f068d9a60db1494a3e5406bc89c3e15339d5c5700abce283af533a"
+  },
+  "diagnosticPhasePolicy": {
+    "path": "docs/migration/lot5b-evidence/performance-integrated/comparison-policy.json",
+    "bytes": 991,
+    "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+  },
+  "window": {
+    "path": "docs/migration/lot5b-evidence/performance-integrated/window.json",
+    "bytes": 10457,
+    "sha256": "cd82de85fae53ca84320754049036fa55536641171ecb8d179921225d248ca5e"
+  },
+  "comparisonTargets": [
+    {
+      "path": "docs/migration/lot5b-evidence/performance-integrated/owner-growth-comparison.json",
+      "bytes": 247032,
+      "sha256": "3ad759ab4ced920a844165853a7dc621586878dcc83151bef3d3f2b299bd7243"
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/performance-integrated/owner-growth-review.json",
+      "bytes": 2141966,
+      "sha256": "4954a1cd25f5bc6df54d2a317cf1b49d3669769773b2d964d8b7d5aa500bab96"
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/performance-integrated/cohort1/comparison.json",
+      "bytes": 26126,
+      "sha256": "cc7a13653c99272916f0833d145f81ef408391f79fbb2cfd24e4236aa8ffdb31"
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/performance-integrated/cohort2/comparison.json",
+      "bytes": 25607,
+      "sha256": "a66f25f023d58698b90520fd0011cd9cedaa3020c206eb881d70ccaf5de2c7e2"
+    }
+  ],
+  "sourceIdentities": {
+    "baseline": {
+      "nativeVersion": "0.57.0",
+      "siteVersion": 92,
+      "commit": "d06620d1e4ca2c9758cc693b1ced9eeeddccb7e6",
+      "nativeDigest": "eebd099808672be934389020c8f9061df4fdacab28cd7d60c00cd1b080464c04",
+      "nativeFiles": 298
+    },
+    "candidate": {
+      "nativeVersion": "0.58.0",
+      "nativeDigest": "099444085f0579ce60e226c9dece42110c577538f5f337579305a2e5f65483c4",
+      "nativeFiles": 302,
+      "publicationAsserted": false
+    }
+  },
+  "method": {
+    "sessionDuration": "trial.replayElapsedMs; all four measured rounds from both cohorts, with no summation of phase durations",
+    "median": "statistics.median of all individual measured values pooled across cohorts; even counts use the arithmetic mean of the two central values",
+    "strictBudget": "Exact decimal parsing of recorded session durations, median(after) < 1.1 * median(before), separately for each case; no tolerance and no cross-case compensation",
+    "knownPrefixMetrics": "requests where type=advance and kind=action; nativeServiceMs for known_prefix_service, wallMs for known_prefix_request",
+    "otherPhaseMetrics": "samples where stage equals the requested stage; elapsedMs",
+    "p95": "Nearest rank sorted[ceil(0.95*n)-1] only when n>=20, otherwise null; no session p95 for n=8",
+    "roundMedianNoise": "(maximum trial median - minimum trial median) / median(trial medians)",
+    "diagnosticClassification": "Phase median increase <=0.1 passes. Above 0.1, noise above 0.1 gives over_budget_with_noise_unresolved; otherwise over_budget. This diagnostic rule does not replace the separate strict global rule.",
+    "comparisonTolerance": {
+      "absolute": 1e-09,
+      "relative": 1e-12,
+      "appliesTo": "numeric comparison against existing reports only; never applied to budget acceptance"
+    },
+    "qualifications": [
+      "No phase aggregate, raw report precomputed median, or reviewer output was used to derive durations or distributions.",
+      "Phase samples from the same session are not independent confidence evidence. Descriptive p95 and round-median ranges are not confidence intervals.",
+      "The arithmetic mean of cohort increases is disclosed for comparison only and does not determine acceptance."
+    ]
+  },
+  "actualOrder": [
+    "A1",
+    "B1",
+    "B2",
+    "A2"
+  ],
+  "counts": {
+    "physicalSessions": 40,
+    "measuredSessions": 32,
+    "measuredActions": 400,
+    "warmupSessions": 8,
+    "warmupActions": 24,
+    "excludedMeasuredSessions": 0,
+    "excludedOutliers": 0
+  },
+  "sessionDurationsMs": [
+    {
+      "case": "STCK",
+      "order": "cohort 1 rounds 1-4, then cohort 2 rounds 1-4",
+      "beforeMs": [
+        10385.036022999999,
+        10376.58671,
+        10791.934639,
+        10423.039752999997,
+        10966.345189,
+        12255.216866000002,
+        11398.130197000002,
+        11552.289709000004
+      ],
+      "afterMs": [
+        11547.502824,
+        11353.729825999999,
+        11227.209969999996,
+        11013.256840000002,
+        11077.836153,
+        10964.855197,
+        11887.354339000001,
+        11521.895556000003
+      ]
+    },
+    {
+      "case": "SMLP",
+      "order": "cohort 1 rounds 1-4, then cohort 2 rounds 1-4",
+      "beforeMs": [
+        15644.487744999991,
+        18159.579692,
+        17157.158620999995,
+        17215.788182999997,
+        17810.951924999994,
+        17001.962604999993,
+        16761.963187,
+        16623.181247000015
+      ],
+      "afterMs": [
+        16800.284528000004,
+        18739.789227999994,
+        17368.316827999995,
+        17056.86718100001,
+        16827.245997000005,
+        16600.322746000005,
+        16269.049178000001,
+        15879.81916
+      ]
+    }
+  ],
+  "globalCases": [
+    {
+      "case": "STCK",
+      "sessionsPerVersion": 8,
+      "beforeMedianMs": 10879.139914,
+      "afterMedianMs": 11290.469897999998,
+      "medianRelativeIncrease": 0.03780905358802045,
+      "increasePercent": 3.7809053588020447,
+      "exactDecimalBeforeMedianMs": "10879.139914",
+      "exactDecimalAfterMedianMs": "11290.4698979999975",
+      "exactDecimalStrictUpperBoundMs": "11967.0539054",
+      "acceptedStrictlyBelowTenPercent": true,
+      "cohorts": [
+        {
+          "cohort": 1,
+          "beforeMedianMs": 10404.037887999999,
+          "afterMedianMs": 11290.469897999998,
+          "medianRelativeIncrease": 0.08520076719659087
+        },
+        {
+          "cohort": 2,
+          "beforeMedianMs": 11475.209953000003,
+          "afterMedianMs": 11299.865854500002,
+          "medianRelativeIncrease": -0.015280251883684315
+        }
+      ],
+      "arithmeticMeanOfCohortRelativeIncreases": 0.034960257656453275,
+      "pooledMinusMeanCohortPercentagePoints": 0.2848795931567172,
+      "decisionUsesPooledMedianNotMeanCohortRatio": true
+    },
+    {
+      "case": "SMLP",
+      "sessionsPerVersion": 8,
+      "beforeMedianMs": 17079.560612999994,
+      "afterMedianMs": 16813.765262500005,
+      "medianRelativeIncrease": -0.015562189011916416,
+      "increasePercent": -1.5562189011916416,
+      "exactDecimalBeforeMedianMs": "17079.560612999994",
+      "exactDecimalAfterMedianMs": "16813.7652625000045",
+      "exactDecimalStrictUpperBoundMs": "18787.5166742999934",
+      "acceptedStrictlyBelowTenPercent": true,
+      "cohorts": [
+        {
+          "cohort": 1,
+          "beforeMedianMs": 17186.473401999996,
+          "afterMedianMs": 17212.592004500002,
+          "medianRelativeIncrease": 0.0015197185536020008
+        },
+        {
+          "cohort": 2,
+          "beforeMedianMs": 16881.962895999997,
+          "afterMedianMs": 16434.685962000003,
+          "medianRelativeIncrease": -0.026494367790961815
+        }
+      ],
+      "arithmeticMeanOfCohortRelativeIncreases": -0.012487324618679907,
+      "pooledMinusMeanCohortPercentagePoints": -0.30748643932365094,
+      "decisionUsesPooledMedianNotMeanCohortRatio": true
+    }
+  ],
+  "globalBudget": {
+    "relativeIncreaseLimit": 0.1,
+    "comparison": "strictly_less_than",
+    "allCasesMustPass": true,
+    "crossCaseCompensation": false,
+    "acceptedCases": 2,
+    "totalCases": 2,
+    "verified": true
+  },
+  "diagnostics": {
+    "metricColumns": [
+      "stage",
+      "countBefore",
+      "countAfter",
+      "medianBeforeMs",
+      "medianAfterMs",
+      "medianRelativeIncrease",
+      "p95BeforeMs",
+      "p95AfterMs",
+      "p95RelativeIncrease",
+      "roundMedianNoiseBefore",
+      "roundMedianNoiseAfter",
+      "result"
+    ],
+    "pooled": {
+      "withinObservedBudget": 14,
+      "budgetMetricCount": 16,
+      "cases": [
+        {
+          "case": "STCK",
+          "metrics": [
+            [
+              "session_elapsed",
+              8,
+              8,
+              10879.139914,
+              11290.469897999998,
+              0.03780905358802045,
+              null,
+              null,
+              null,
+              0.17268186371814714,
+              0.08170600075408843,
+              "within_observed_budget"
+            ],
+            [
+              "new_decision",
+              48,
+              48,
+              338.3202975000004,
+              346.7891049999989,
+              0.025031922596954193,
+              711.8079519999992,
+              719.5648079999955,
+              0.010897400033536453,
+              0.2044217785468768,
+              0.24162092822460685,
+              "within_observed_budget"
+            ],
+            [
+              "known_prefix_service",
+              32,
+              32,
+              8.877763499999674,
+              8.4397504999979,
+              -0.049338214517855805,
+              12.23777500000142,
+              20.349614999999176,
+              0.6628525201678257,
+              0.36259211725116386,
+              0.27910995263550864,
+              "within_observed_budget"
+            ],
+            [
+              "known_prefix_request",
+              32,
+              32,
+              10.64329700000053,
+              10.41244899999947,
+              -0.021689519704378157,
+              13.993086999998923,
+              22.402057000006607,
+              0.6009374486136141,
+              0.3698366703316338,
+              0.2842031002051067,
+              "within_observed_budget"
+            ],
+            [
+              "known_prefix_guard",
+              32,
+              32,
+              0.22338500000023487,
+              0.21723050000036892,
+              -0.02755108892655944,
+              0.39818799999920884,
+              9.530966999998782,
+              22.93584688643987,
+              0.5187569023233531,
+              0.5736502582464638,
+              "within_observed_budget"
+            ],
+            [
+              "acquisition_and_persistence",
+              48,
+              48,
+              840.8307414999995,
+              917.4095720000023,
+              0.09107520303478678,
+              3924.917601000001,
+              4045.3419030000005,
+              0.03068199494667545,
+              0.2052621930127014,
+              0.12693594369054434,
+              "within_observed_budget"
+            ],
+            [
+              "persistence",
+              104,
+              104,
+              193.54110249999576,
+              203.7505339999998,
+              0.052750714799737475,
+              506.4104320000006,
+              474.97923400000036,
+              -0.06206664794772665,
+              0.27116079798280796,
+              0.39249042655269467,
+              "within_observed_budget"
+            ],
+            [
+              "restoration",
+              96,
+              96,
+              17.344923000000563,
+              19.605482000000848,
+              0.13032972242080354,
+              144.11020499999904,
+              146.44986000000063,
+              0.016235179181110837,
+              0.2593712020182033,
+              0.16936176525516755,
+              "over_budget_with_noise_unresolved"
+            ]
+          ]
+        },
+        {
+          "case": "SMLP",
+          "metrics": [
+            [
+              "session_elapsed",
+              8,
+              8,
+              17079.560612999994,
+              16813.765262500005,
+              -0.015562189011916416,
+              null,
+              null,
+              null,
+              0.1472574151050269,
+              0.17009694279357104,
+              "within_observed_budget"
+            ],
+            [
+              "new_decision",
+              72,
+              72,
+              413.32631499999843,
+              408.0336104999951,
+              -0.0128051476712856,
+              847.0677430000069,
+              871.9509830000025,
+              0.02937573789773662,
+              0.4525681426016452,
+              0.19785112472020322,
+              "within_observed_budget"
+            ],
+            [
+              "known_prefix_service",
+              48,
+              48,
+              10.155580500002543,
+              10.333181499998318,
+              0.017488020502198776,
+              13.705803999997443,
+              20.632734999991953,
+              0.5054012883881751,
+              0.3453516447798971,
+              0.30225000647489125,
+              "within_observed_budget"
+            ],
+            [
+              "known_prefix_request",
+              48,
+              48,
+              12.440729999994801,
+              13.048978499995428,
+              0.048891704908062605,
+              16.601485999999568,
+              22.880535999982385,
+              0.37822216637612915,
+              0.3350490272688709,
+              0.3021432887814781,
+              "within_observed_budget"
+            ],
+            [
+              "known_prefix_guard",
+              48,
+              48,
+              0.365669999999227,
+              0.4082734999974491,
+              0.11650805370501316,
+              0.620346999989124,
+              10.218993000002229,
+              15.473027193137693,
+              0.6044559750946281,
+              0.5109363069167866,
+              "over_budget_with_noise_unresolved"
+            ],
+            [
+              "acquisition_and_persistence",
+              72,
+              72,
+              852.847995499993,
+              848.6950129999968,
+              -0.004869545947119636,
+              2587.0569740000064,
+              2778.039076999994,
+              0.07382214806993548,
+              0.2817049486791216,
+              0.3020627451562562,
+              "within_observed_budget"
+            ],
+            [
+              "persistence",
+              152,
+              152,
+              159.39406549999694,
+              157.016787499997,
+              -0.014914469949321774,
+              258.8705840000039,
+              247.47682599999825,
+              -0.04401333602278057,
+              0.18296433651897512,
+              0.16841959708129148,
+              "within_observed_budget"
+            ],
+            [
+              "restoration",
+              144,
+              144,
+              9.080926999995427,
+              8.930485500000941,
+              -0.016566755794266586,
+              48.017049999994924,
+              57.83531199999561,
+              0.20447449395582873,
+              0.18547212440126212,
+              0.33888638771112556,
+              "within_observed_budget"
+            ]
+          ]
+        }
+      ]
+    },
+    "cohorts": [
+      {
+        "cohort": 1,
+        "withinObservedBudget": 11,
+        "budgetMetricCount": 16,
+        "cases": [
+          {
+            "case": "STCK",
+            "metrics": [
+              [
+                "session_elapsed",
+                4,
+                4,
+                10404.037887999999,
+                11290.469897999998,
+                0.08520076719659087,
+                null,
+                null,
+                null,
+                0.039921800888389807,
+                0.04731831259694817,
+                "within_observed_budget"
+              ],
+              [
+                "new_decision",
+                24,
+                24,
+                320.3813570000002,
+                358.5832700000001,
+                0.11923887631201913,
+                698.8407919999954,
+                641.3997810000001,
+                -0.08219470250957495,
+                0.1865636180080243,
+                0.1921088241628136,
+                "over_budget_with_noise_unresolved"
+              ],
+              [
+                "known_prefix_service",
+                16,
+                16,
+                8.408338999996886,
+                8.68562600000223,
+                0.032977619004829206,
+                null,
+                null,
+                null,
+                0.37501496916225174,
+                0.18705640212631353,
+                "within_observed_budget"
+              ],
+              [
+                "known_prefix_request",
+                16,
+                16,
+                10.129500999999436,
+                10.557542499998817,
+                0.04225691867737669,
+                null,
+                null,
+                null,
+                0.383407995402977,
+                0.140238608342012,
+                "within_observed_budget"
+              ],
+              [
+                "known_prefix_guard",
+                16,
+                16,
+                0.22448650000296766,
+                0.2075459999996383,
+                -0.07546333522552762,
+                null,
+                null,
+                null,
+                0.5347476094222993,
+                0.5217082041570099,
+                "within_observed_budget"
+              ],
+              [
+                "acquisition_and_persistence",
+                24,
+                24,
+                801.1324459999978,
+                925.1802865000027,
+                0.15484061483137745,
+                3546.8623149999985,
+                3787.1854620000013,
+                0.06775654808579823,
+                0.17207053892771915,
+                0.07214859822857254,
+                "over_budget_with_noise_unresolved"
+              ],
+              [
+                "persistence",
+                52,
+                52,
+                174.98411000000033,
+                212.74436500000047,
+                0.21579247967144033,
+                506.4104320000006,
+                471.3756140000005,
+                -0.06918265459428774,
+                0.18697926838084591,
+                0.19608495619683677,
+                "over_budget_with_noise_unresolved"
+              ],
+              [
+                "restoration",
+                48,
+                48,
+                16.738272000002326,
+                19.148417000000336,
+                0.14399007257127105,
+                137.840193,
+                137.6360679999998,
+                -0.001480881559707381,
+                0.0701111504331606,
+                0.16493140945561655,
+                "over_budget_with_noise_unresolved"
+              ]
+            ]
+          },
+          {
+            "case": "SMLP",
+            "metrics": [
+              [
+                "session_elapsed",
+                4,
+                4,
+                17186.473401999996,
+                17212.592004500002,
+                0.0015197185536020008,
+                null,
+                null,
+                null,
+                0.14634136324368477,
+                0.11267940932387945,
+                "within_observed_budget"
+              ],
+              [
+                "new_decision",
+                36,
+                36,
+                436.58630650000487,
+                426.632239999999,
+                -0.022799767999608034,
+                828.8750159999909,
+                876.650220999989,
+                0.05763861146467297,
+                0.36244341021272086,
+                0.09157641954111062,
+                "within_observed_budget"
+              ],
+              [
+                "known_prefix_service",
+                24,
+                24,
+                10.372087499992631,
+                10.205102500003704,
+                -0.016099459244732106,
+                12.472141999998712,
+                22.364382999992813,
+                0.7931469189490565,
+                0.3453516447798971,
+                0.20622029698173258,
+                "within_observed_budget"
+              ],
+              [
+                "known_prefix_request",
+                24,
+                24,
+                12.69562649999716,
+                13.42040149999957,
+                0.0570885572289459,
+                15.40183899999829,
+                24.64023499999894,
+                0.5998242157966769,
+                0.3350490272688709,
+                0.2603455033780096,
+                "within_observed_budget"
+              ],
+              [
+                "known_prefix_guard",
+                24,
+                24,
+                0.3840425000016694,
+                0.4365094999957364,
+                0.13661769203626917,
+                0.5823999999993248,
+                10.935921999975108,
+                17.777338598880128,
+                0.5257707019676122,
+                0.5102249753559797,
+                "over_budget_with_noise_unresolved"
+              ],
+              [
+                "acquisition_and_persistence",
+                36,
+                36,
+                842.7882569999929,
+                871.9139389999982,
+                0.0345587183472178,
+                2776.8518369999947,
+                2778.039076999994,
+                0.00042754891859186905,
+                0.29150027193586675,
+                0.22279342179513278,
+                "within_observed_budget"
+              ],
+              [
+                "persistence",
+                76,
+                76,
+                163.36039549999987,
+                158.40771699999823,
+                -0.030317498221297146,
+                260.6994870000053,
+                276.87793400000373,
+                0.06205783979927082,
+                0.1776652934950458,
+                0.15511000998476066,
+                "within_observed_budget"
+              ],
+              [
+                "restoration",
+                72,
+                72,
+                8.64155049999681,
+                7.5678474999949685,
+                -0.124248883345904,
+                52.82184099999722,
+                61.534557000006316,
+                0.1649453300957373,
+                0.1479111733433591,
+                0.3431310937045462,
+                "within_observed_budget"
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "cohort": 2,
+        "withinObservedBudget": 14,
+        "budgetMetricCount": 16,
+        "cases": [
+          {
+            "case": "STCK",
+            "metrics": [
+              [
+                "session_elapsed",
+                4,
+                4,
+                11475.209953000003,
+                11299.865854500002,
+                -0.015280251883684315,
+                null,
+                null,
+                null,
+                0.11231791682060237,
+                0.08163806136093457,
+                "within_observed_budget"
+              ],
+              [
+                "new_decision",
+                24,
+                24,
+                353.8077274999996,
+                346.7891049999989,
+                -0.019837391765279322,
+                711.8079519999992,
+                719.5648079999955,
+                0.010897400033536453,
+                0.19343838040234948,
+                0.10730094826222439,
+                "within_observed_budget"
+              ],
+              [
+                "known_prefix_service",
+                16,
+                16,
+                9.068159499997819,
+                8.169911999997566,
+                -0.09905510594519962,
+                null,
+                null,
+                null,
+                0.25651133076219484,
+                0.2882226362557337,
+                "within_observed_budget"
+              ],
+              [
+                "known_prefix_request",
+                16,
+                16,
+                10.87610500000028,
+                9.792974000001777,
+                -0.09958813380327558,
+                null,
+                null,
+                null,
+                0.2250358153448262,
+                0.295048451014046,
+                "within_observed_budget"
+              ],
+              [
+                "known_prefix_guard",
+                16,
+                16,
+                0.22338500000023487,
+                0.22216799999841896,
+                -0.005447993382790339,
+                null,
+                null,
+                null,
+                0.18148179792976923,
+                0.4927458627407105,
+                "within_observed_budget"
+              ],
+              [
+                "acquisition_and_persistence",
+                24,
+                24,
+                913.1328334999998,
+                913.6401900000001,
+                0.0005556217905948735,
+                3980.5270119999986,
+                4045.3419030000005,
+                0.016282992378799488,
+                0.10735673244103201,
+                0.12693594369054434,
+                "within_observed_budget"
+              ],
+              [
+                "persistence",
+                52,
+                52,
+                200.57802849999916,
+                188.47161699999924,
+                -0.06035761539056095,
+                555.2464010000003,
+                520.4967160000015,
+                -0.0625842597762265,
+                0.173695433824915,
+                0.41246569614893686,
+                "within_observed_budget"
+              ],
+              [
+                "restoration",
+                48,
+                48,
+                17.889854000000923,
+                20.018342000001212,
+                0.11897738237551736,
+                144.34928400000354,
+                156.9332889999987,
+                0.08717746739910992,
+                0.22031780338303944,
+                0.03991423220573903,
+                "over_budget_with_noise_unresolved"
+              ]
+            ]
+          },
+          {
+            "case": "SMLP",
+            "metrics": [
+              [
+                "session_elapsed",
+                4,
+                4,
+                16881.962895999997,
+                16434.685962000003,
+                -0.026494367790961815,
+                null,
+                null,
+                null,
+                0.07035737996328666,
+                0.057648003691134125,
+                "within_observed_budget"
+              ],
+              [
+                "new_decision",
+                36,
+                36,
+                390.554716000006,
+                395.84156499999517,
+                0.013536769070762178,
+                912.3681369999977,
+                871.9509830000025,
+                -0.044299173065044606,
+                0.25856154425023686,
+                0.1834780952939719,
+                "within_observed_budget"
+              ],
+              [
+                "known_prefix_service",
+                24,
+                24,
+                9.929810999994515,
+                10.559500499999558,
+                0.06341404685400254,
+                16.493877000000793,
+                13.193537999992259,
+                -0.20009479881585002,
+                0.1723391865925955,
+                0.32342478805086716,
+                "within_observed_budget"
+              ],
+              [
+                "known_prefix_request",
+                24,
+                24,
+                12.246373499998299,
+                12.881145999999717,
+                0.05183350809947984,
+                18.994164000003366,
+                16.098308000000543,
+                -0.15246030307005398,
+                0.1654979237386807,
+                0.2960771403659753,
+                "within_observed_budget"
+              ],
+              [
+                "known_prefix_guard",
+                24,
+                24,
+                0.3490555000025779,
+                0.3985945000022184,
+                0.14192298932196934,
+                0.6410619999805931,
+                0.5675579999951879,
+                -0.11465973648045036,
+                0.3568593794427078,
+                0.20962001756705995,
+                "over_budget_with_noise_unresolved"
+              ],
+              [
+                "acquisition_and_persistence",
+                36,
+                36,
+                861.9315329999954,
+                810.3592424999952,
+                -0.05983339572286017,
+                2587.0569740000064,
+                2802.994688999999,
+                0.08346848065975077,
+                0.10420006991437407,
+                0.21718685709935195,
+                "within_observed_budget"
+              ],
+              [
+                "persistence",
+                76,
+                76,
+                156.459918499997,
+                147.3667690000002,
+                -0.05811807641966127,
+                243.24991299999238,
+                239.9696799999947,
+                -0.013485032572232769,
+                0.08978742782207837,
+                0.08233833199035027,
+                "within_observed_budget"
+              ],
+              [
+                "restoration",
+                72,
+                72,
+                9.080926999995427,
+                8.930485500000941,
+                -0.016566755794266586,
+                44.79190799999924,
+                41.25108899999759,
+                -0.07905041687444325,
+                0.14977141309262432,
+                0.15273157099804963,
+                "within_observed_budget"
+              ]
+            ]
+          }
+        ]
+      }
+    ],
+    "pooledOverruns": [
+      {
+        "case": "STCK",
+        "stage": "restoration",
+        "medianRelativeIncrease": 0.13032972242080354,
+        "result": "over_budget_with_noise_unresolved"
+      },
+      {
+        "case": "SMLP",
+        "stage": "known_prefix_guard",
+        "medianRelativeIncrease": 0.11650805370501316,
+        "result": "over_budget_with_noise_unresolved"
+      }
+    ]
+  },
+  "historicalStrictFailure": {
+    "passed": false,
+    "exitCode": 1,
+    "reason": "Within-cohort work metadata changed",
+    "receipt": {
+      "path": "docs/migration/lot5b-evidence/performance-integrated/aggregation-failure.json",
+      "bytes": 2838,
+      "sha256": "f7571847c546191ebf0f404cb22adc82483620b95af45171f2c7891472ccc0a4"
+    },
+    "log": {
+      "path": "docs/migration/lot5b-evidence/performance-integrated/aggregation-failure.log",
+      "bytes": 204711,
+      "sha256": "4c85f9d40eaa4fee7e239abf0073540b14f58988be6994a1d9d758020090dd54"
+    },
+    "qualification": "The numeric budget result does not turn this strict metadata comparison failure into a pass."
+  },
+  "verification": {
+    "checkedAssertions": 2514,
+    "failedAssertions": 16,
+    "discrepancies": [
+      {
+        "check": "A1/SMLP/1 complete reason",
+        "details": null
+      },
+      {
+        "check": "A1/SMLP/2 complete reason",
+        "details": null
+      },
+      {
+        "check": "A1/SMLP/3 complete reason",
+        "details": null
+      },
+      {
+        "check": "A1/SMLP/4 complete reason",
+        "details": null
+      },
+      {
+        "check": "B1/SMLP/1 complete reason",
+        "details": null
+      },
+      {
+        "check": "B1/SMLP/2 complete reason",
+        "details": null
+      },
+      {
+        "check": "B1/SMLP/3 complete reason",
+        "details": null
+      },
+      {
+        "check": "B1/SMLP/4 complete reason",
+        "details": null
+      },
+      {
+        "check": "B2/SMLP/1 complete reason",
+        "details": null
+      },
+      {
+        "check": "B2/SMLP/2 complete reason",
+        "details": null
+      },
+      {
+        "check": "B2/SMLP/3 complete reason",
+        "details": null
+      },
+      {
+        "check": "B2/SMLP/4 complete reason",
+        "details": null
+      },
+      {
+        "check": "A2/SMLP/1 complete reason",
+        "details": null
+      },
+      {
+        "check": "A2/SMLP/2 complete reason",
+        "details": null
+      },
+      {
+        "check": "A2/SMLP/3 complete reason",
+        "details": null
+      },
+      {
+        "check": "A2/SMLP/4 complete reason",
+        "details": null
+      }
+    ],
+    "allReadInputsUnchanged": true,
+    "comparedMetricGroups": {
+      "pooled": 16,
+      "cohorts": 32
+    },
+    "comparedMetricFields": [
+      "count",
+      "medianMs",
+      "p95Ms",
+      "minMs",
+      "maxMs",
+      "medianRelativeIncrease",
+      "roundMedianNoise",
+      "budgetApplies",
+      "result"
+    ]
+  }
+}

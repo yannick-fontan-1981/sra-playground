@@ -1,0 +1,382 @@
+{
+  "case": "craf-055",
+  "game": "CRAF",
+  "mode": "recorded-public-replay",
+  "command": [
+    "node",
+    "--expose-gc",
+    "--max-old-space-size=1536",
+    "scripts/replay-public-regression-released-baseline.mjs",
+    "docs/migration/lot7b-evidence/integrated-final/craf-campaign.json.gz",
+    "docs/migration/lot7b-evidence/integrated-final/craf-public-trace.json.gz",
+    "docs/migration/lot5b-evidence/integrated-final/regressions/craf-055-replay.json.gz",
+    "docs/migration/lot5b-evidence/integrated-final/regressions/craf-055-host-preparation.json"
+  ],
+  "startedAt": "2026-11-11T02:09:08.579327+00:00",
+  "timeoutSeconds": 2400,
+  "baseline": {
+    "path": "docs/migration/lot7b-evidence/integrated-final/craf-campaign.json.gz",
+    "sha256": "78e86660961ed6d75707c001c021b8c223d205137d86288ac21d09a533b680f2",
+    "bytes": 12767727
+  },
+  "trace": {
+    "path": "docs/migration/lot7b-evidence/integrated-final/craf-public-trace.json.gz",
+    "sha256": "cf69ad941e80e17f8d6cd66edc0419a0c6ff7aa8d9bbdaf503cb56a49e8c3f98",
+    "bytes": 40777
+  },
+  "expectedActions": 36,
+  "nodeOldSpaceMiB": 1536,
+  "preflight": {
+    "path": "docs/migration/lot5b-evidence/integrated-final/preflight.json",
+    "sha256": "2b3688c192088a68febb79e0ad192a2c8d266bf86103592d61d11d813b23a86d",
+    "bytes": 5821
+  },
+  "historicalReportProcessExitedBeforeNode": true,
+  "nativeSourceBeforeDigest": "099444085f0579ce60e226c9dece42110c577538f5f337579305a2e5f65483c4",
+  "executionInputsBefore": {
+    "scripts/run-released-public-regressions.py": "7988863afd2b171f31987434bb1176370be2e3afd49dead1edcdc59770d81909",
+    "scripts/run-recorded-public-regressions.py": "df19dc88ff29e78a1cb5935d445644e96cc9fb1ef90b73d802cf51868d2b2c40",
+    "scripts/compare-v54-regressions.py": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+    "scripts/replay-public-regression-released-baseline.mjs": "2ce2a0e1b8f969510373ae161156b2b163d208b4e426cb1f26218f9952b3b164",
+    "scripts/replay-v53-public-regression.mjs": "4359e008db8dadaac17f6504199ff20c752f40f1666ba527f1cd5f16df100a9e",
+    "scripts/run-v53-campaign-proof.py": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+    "tests/helpers/v6-live-game-campaign.ts": "c020a1346db8660f477dee9b40e86698914ab43be020a8ea826a9aac3038f6de",
+    "docs/migration/lot5b-evidence/integrated-final/regression-cases.json": "a16f67724f53def79fe476716c12a61e8064df871911772731983fa2505da3a9",
+    "docs/migration/lot5b-evidence/integrated-final/source-manifest.json": "2a0101b7cf56ce98a82e27e36d5ab78b53c297ca54b82c638a168be4560643bd",
+    "scripts/run-released-public-regressions-streamlog.py": "b05b0e113c93696be45408e4c10549f2a379c22330efbddfcaa0f09cd51309b9"
+  },
+  "phase": "completed",
+  "finishedAt": "2026-11-11T02:10:56.735195+00:00",
+  "exitCode": 0,
+  "timedOut": false,
+  "passed": true,
+  "nodeExitObserved": true,
+  "rawOutputPath": "docs/migration/lot5b-evidence/integrated-final/regressions/craf-055-output.raw.log",
+  "driverPid": 6,
+  "nodePid": 112,
+  "memorySamples": [
+    {
+      "elapsedSeconds": 0.00134082100703381,
+      "pid": 112,
+      "VmSize": "112336 kB",
+      "VmHWM": "1228 kB",
+      "VmRSS": "1228 kB",
+      "Threads": "1"
+    },
+    {
+      "elapsedSeconds": 5.005922101001488,
+      "pid": 112,
+      "VmSize": "10962164 kB",
+      "VmHWM": "1262288 kB",
+      "VmRSS": "951948 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 10.012837104004575,
+      "pid": 112,
+      "VmSize": "10961368 kB",
+      "VmHWM": "1262288 kB",
+      "VmRSS": "952140 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 15.01858298901061,
+      "pid": 112,
+      "VmSize": "10972720 kB",
+      "VmHWM": "1262288 kB",
+      "VmRSS": "967404 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 20.02594129300269,
+      "pid": 112,
+      "VmSize": "10985044 kB",
+      "VmHWM": "1262288 kB",
+      "VmRSS": "980416 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 25.031562977004796,
+      "pid": 112,
+      "VmSize": "11004128 kB",
+      "VmHWM": "1262288 kB",
+      "VmRSS": "1001652 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 30.04149489699921,
+      "pid": 112,
+      "VmSize": "10997120 kB",
+      "VmHWM": "1262288 kB",
+      "VmRSS": "994864 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 35.04980198699923,
+      "pid": 112,
+      "VmSize": "11006460 kB",
+      "VmHWM": "1262288 kB",
+      "VmRSS": "1004436 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 40.057131192006636,
+      "pid": 112,
+      "VmSize": "11044464 kB",
+      "VmHWM": "1262288 kB",
+      "VmRSS": "1042536 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 45.06329817700316,
+      "pid": 112,
+      "VmSize": "11052204 kB",
+      "VmHWM": "1262288 kB",
+      "VmRSS": "1050388 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 50.06917837900983,
+      "pid": 112,
+      "VmSize": "11190000 kB",
+      "VmHWM": "1262288 kB",
+      "VmRSS": "1188060 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 55.07803221400536,
+      "pid": 112,
+      "VmSize": "11254140 kB",
+      "VmHWM": "1349620 kB",
+      "VmRSS": "1252304 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 60.0843587499985,
+      "pid": 112,
+      "VmSize": "11316700 kB",
+      "VmHWM": "1349620 kB",
+      "VmRSS": "1315160 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 65.09010795599897,
+      "pid": 112,
+      "VmSize": "11321168 kB",
+      "VmHWM": "1374624 kB",
+      "VmRSS": "1319472 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 70.09775083900604,
+      "pid": 112,
+      "VmSize": "11394572 kB",
+      "VmHWM": "1393180 kB",
+      "VmRSS": "1393180 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 75.1032189210091,
+      "pid": 112,
+      "VmSize": "11377388 kB",
+      "VmHWM": "1433052 kB",
+      "VmRSS": "1376176 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 80.10992150100356,
+      "pid": 112,
+      "VmSize": "11401516 kB",
+      "VmHWM": "1474128 kB",
+      "VmRSS": "1400100 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 85.11989898100728,
+      "pid": 112,
+      "VmSize": "11461480 kB",
+      "VmHWM": "1474128 kB",
+      "VmRSS": "1460512 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 90.12587530601013,
+      "pid": 112,
+      "VmSize": "11480800 kB",
+      "VmHWM": "1486632 kB",
+      "VmRSS": "1479468 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 95.13266485799977,
+      "pid": 112,
+      "VmSize": "11481716 kB",
+      "VmHWM": "1517084 kB",
+      "VmRSS": "1480672 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 100.14017451000109,
+      "pid": 112,
+      "VmSize": "11456004 kB",
+      "VmHWM": "1525680 kB",
+      "VmRSS": "1454788 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 105.14614385300956,
+      "pid": 112,
+      "VmSize": "12330312 kB",
+      "VmHWM": "2035892 kB",
+      "VmRSS": "1886096 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 108.15121550000913,
+      "pid": 112,
+      "processPresent": false
+    }
+  ],
+  "lastObservedAt": "2026-11-11T02:10:56.732799+00:00",
+  "elapsedSeconds": 108.15391583900782,
+  "lastProgress": {
+    "status": "passed",
+    "failure": null
+  },
+  "rawOutputBytes": 123343,
+  "outputRaw": {
+    "path": "docs/migration/lot5b-evidence/integrated-final/regressions/craf-055-output.raw.log",
+    "sha256": "df166133e5b7a481c54e1abd9b392cdd8099f8e6f7f2d546f04462616ad5afec",
+    "bytes": 123343
+  },
+  "output": {
+    "path": "docs/migration/lot5b-evidence/integrated-final/regressions/craf-055-output.log.gz",
+    "sha256": "a05933ffac7d7a3af65d92b0bbd65b7be5b2d70aed26535332cabf93df7d3d07",
+    "bytes": 5702
+  },
+  "startedReceipt": {
+    "path": "docs/migration/lot5b-evidence/integrated-final/regressions/craf-055-execution-started.json",
+    "sha256": "73632b5fff1455fb1e8e42915485d9f7e5ffef97957a161e7d197d990ce66349",
+    "bytes": 3021
+  },
+  "nodeExitedBeforeComparison": true,
+  "hostPreparation": {
+    "path": "docs/migration/lot5b-evidence/integrated-final/regressions/craf-055-host-preparation.json",
+    "sha256": "fe7a002e19f48d388b2f15589bb1e1ba778c20b7dcceaeaced65597ee082066a",
+    "bytes": 9417
+  },
+  "hostPreparationPassed": true,
+  "report": {
+    "path": "docs/migration/lot5b-evidence/integrated-final/regressions/craf-055-replay.json.gz",
+    "sha256": "6cda6c9903b9a873f6d5cd42395129cbaebcbfff8f3ca1db8b45e6bedd5e160b",
+    "bytes": 13147483
+  },
+  "status": "passed",
+  "actions": 36,
+  "prefixes": 36,
+  "final": {
+    "actions": 36,
+    "levelsCompleted": 3,
+    "level": 4,
+    "state": "NOT_FINISHED",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "activeSeconds": 89.14765542800001,
+    "prefixes": 36,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 36,
+      "boundaryReplays": 2,
+      "goalEvents": 3,
+      "frontierDeltas": 73,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 37
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 37
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 35
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 34
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 1
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 31
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 38
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology"
+      ],
+      "morphologyProvider": {
+        "status": "partial_current_measurements_control_attention_and_methods",
+        "state_owner": "family_state:morphology",
+        "motion_owner": "caller:goal",
+        "forecast_owner": "family_state:public_observed_inventory",
+        "current_decision_scope": "one_source_selection_cycle",
+        "attention_owner": "caller:attention",
+        "method_owner": "caller:counters.targetMethod",
+        "entry_return_owner": "family_state:morphology.entry_access_return",
+        "connected_methods": [
+          "retained_station_method",
+          "entry_access_return",
+          "entry_rebind",
+          "entry_probe",
+          "managed_capacity",
+          "target_extension_continuation"
+        ],
+        "pending": [
+          "complete_original_caller_parity_and_domain_closure"
+        ]
+      },
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 36,
+      "resume": 35
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.58.0"
+  },
+  "passiveOwnerPresence": {
+    "path": "docs/migration/lot5b-evidence/integrated-final/regressions/craf-055-passive-owner-presence.json",
+    "sha256": "40d83796faa4e203f4a5d4ab9851d12bc68b9dae6cd7c8d92f4225f34df7b873",
+    "bytes": 1098
+  },
+  "passiveOwnerPresencePassed": true,
+  "passiveOwnerPrefixesChecked": 0,
+  "passiveOwnerPrefixesPassed": 0,
+  "passiveOwnerTransitionsRetained": 0,
+  "comparison": {
+    "path": "docs/migration/lot5b-evidence/integrated-final/regressions/craf-055-comparison.json",
+    "sha256": "c5a075ff938953b4439e451dd6451087d49702a548592c668f35a9b00a7410d6",
+    "bytes": 10981
+  },
+  "comparisonPassed": true,
+  "comparisonChecks": 17,
+  "failedChecks": [],
+  "nativeSourceAfterDigest": "099444085f0579ce60e226c9dece42110c577538f5f337579305a2e5f65483c4",
+  "nativeSourceUnchanged": true,
+  "immutableInputsUnchanged": true,
+  "postprocessingFinishedAt": "2026-11-11T02:11:04.895153+00:00"
+}

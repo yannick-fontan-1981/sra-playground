@@ -1,0 +1,56 @@
+{
+  "schema": "logos-engine.lot5b-candidate-base-ancestry.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-11T01:53:45.843612+00:00",
+  "checkout": "/workspace/sites/sra-lot5b-20261110/.sites-checkout",
+  "candidateArchiveManifest": {
+    "path": "docs/migration/lot5b-evidence/integrated-final/source-archive.json",
+    "sha256": "3a6a17dcde5a785ede5b0fa4d9c0a721231627cb48b5ff730d9dd5e276c40cc0",
+    "bytes": 37494
+  },
+  "candidateSourceBaseCommit": "ee0c2e663a68e7ac7b272625adf929fcac483956",
+  "publishedPredecessorCommit": "d06620d1e4ca2c9758cc693b1ced9eeeddccb7e6",
+  "publishedPredecessorIsAncestorOfCandidateBase": true,
+  "commands": [
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "--verify",
+        "ee0c2e663a68e7ac7b272625adf929fcac483956^{commit}"
+      ],
+      "startedAt": "2026-11-11T01:53:45.836142+00:00",
+      "finishedAt": "2026-11-11T01:53:45.838820+00:00",
+      "exitCode": 0,
+      "stdout": "ee0c2e663a68e7ac7b272625adf929fcac483956\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "--verify",
+        "d06620d1e4ca2c9758cc693b1ced9eeeddccb7e6^{commit}"
+      ],
+      "startedAt": "2026-11-11T01:53:45.838828+00:00",
+      "finishedAt": "2026-11-11T01:53:45.841031+00:00",
+      "exitCode": 0,
+      "stdout": "d06620d1e4ca2c9758cc693b1ced9eeeddccb7e6\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "merge-base",
+        "--is-ancestor",
+        "d06620d1e4ca2c9758cc693b1ced9eeeddccb7e6",
+        "ee0c2e663a68e7ac7b272625adf929fcac483956"
+      ],
+      "startedAt": "2026-11-11T01:53:45.841038+00:00",
+      "finishedAt": "2026-11-11T01:53:45.843603+00:00",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ]
+}

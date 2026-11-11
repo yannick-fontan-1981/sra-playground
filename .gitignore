@@ -1,12 +1,17 @@
 node_modules/
+/node_modules
 dist/
 .sites-runtime/
 artifacts/
 *.log
 .DS_Store
 public/vendor/pyodide/
+/public/vendor/pyodide
 __pycache__/
 *.pyc
+
+# Lot 5B source archives are retained in verified ordered byte parts.
+/docs/migration/lot5b-evidence/**/source-archive.tar.gz
 
 # v53 exact source archives are tracked in checked, ordered byte parts.
 /docs/migration/native-campaigns-v53/attempt*/source-archive.tar.gz
@@ -507,3 +512,20 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 # Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot4c-evidence/performance-integrated/owner-graphs-baseline.json.gz
 /docs/migration/lot4c-evidence/performance-integrated/owner-graphs-candidate.json.gz
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot5b-evidence/integrated-final/regressions/catr-051-replay.json.gz
+/docs/migration/lot5b-evidence/integrated-final/regressions/conn-050-replay.json.gz
+/docs/migration/lot5b-evidence/integrated-final/regressions/craf-055-replay.json.gz
+/docs/migration/lot5b-evidence/integrated-final/regressions/fogw-051-replay.json.gz
+/docs/migration/lot5b-evidence/integrated-final/regressions/isos-development-4c-replay.json.gz
+/docs/migration/lot5b-evidence/integrated-final/regressions/mind-051-replay.json.gz
+/docs/migration/lot5b-evidence/integrated-final/regressions/rswp-051-replay.json.gz
+/docs/migration/lot5b-evidence/integrated-final/regressions/tria-development-4b-replay.json.gz
+/docs/migration/lot5b-evidence/integrated-final/regressions/vois-051-replay.json.gz
+/docs/migration/lot5b-evidence/integrated-final/regressions/weav-051-replay.json.gz
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot5b-evidence/diagnostic/addressed-reference-key-sorted.json.gz
+/docs/migration/lot5b-evidence/performance-integrated/functional-baseline.json.gz
+/docs/migration/lot5b-evidence/performance-integrated/functional-candidate.json.gz

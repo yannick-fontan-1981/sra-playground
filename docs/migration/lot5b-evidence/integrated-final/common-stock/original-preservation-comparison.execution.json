@@ -1,0 +1,36 @@
+{
+  "schema": "logos-engine.functional-command-execution.v1",
+  "startedAt": "2026-11-11T01:55:00.388496+00:00",
+  "finishedAt": "2026-11-11T01:55:05.716330+00:00",
+  "workingDirectory": "/workspace/sites/sra-lot5b-20261110/.sites-checkout",
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "scripts/review-addressed-preservation-original.py",
+    "docs/migration/lot5b-evidence/integrated-final/common-stock"
+  ],
+  "exitCode": 0,
+  "lock": {
+    "path": "/workspace/shared/sra-coordination/performance.lock",
+    "mode": "shared"
+  },
+  "nativeSourceDigest": "099444085f0579ce60e226c9dece42110c577538f5f337579305a2e5f65483c4",
+  "log": {
+    "path": "docs/migration/lot5b-evidence/integrated-final/common-stock/original-preservation-comparison.execution.log",
+    "bytes": 369,
+    "sha256": "24774372456a2505e5456e3d0500995558e4ddb44553278a1a74612faee1df4c"
+  },
+  "gzipLog": {
+    "path": "docs/migration/lot5b-evidence/integrated-final/common-stock/original-preservation-comparison.execution.log.gz",
+    "bytes": 247,
+    "sha256": "a9d564c06ac4911812400bb09db87a93c45440907df11d6e6ebfd4d2669072f3"
+  },
+  "gzipUncompressedSha256": "24774372456a2505e5456e3d0500995558e4ddb44553278a1a74612faee1df4c",
+  "outputs": [
+    {
+      "path": "docs/migration/lot5b-evidence/integrated-final/common-stock/original-preservation-comparison.json",
+      "bytes": 609004,
+      "sha256": "28508f99681b0c57d116cdabe58df3ed83582ee99cd9b243be1eb54d0b794cfd"
+    }
+  ]
+}

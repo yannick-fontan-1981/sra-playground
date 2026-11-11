@@ -1,0 +1,22 @@
+{
+  "schema": "logos-engine.tool-adaptation.v1",
+  "recordedAt": "2026-11-11T01:46:07.471598+00:00",
+  "status": "source_adapted_syntax_checked_not_executed",
+  "source": {
+    "path": "docs/migration/lot5a-evidence/write-evidence-index.py",
+    "sha256": "72c280c957a4ccfdc8e9ba3188366fbcb4ecdd1e649e17067f571d753832a193",
+    "bytes": 3164
+  },
+  "target": {
+    "path": "docs/migration/lot5b-evidence/write-evidence-index.py",
+    "sha256": "4673978f62012ab34386ab5ddeb86df88624414d61ef169b5be0e3ec7a5670f6",
+    "bytes": 3483
+  },
+  "changes": [
+    "5A evidence and report paths replaced by5B paths",
+    "Use integrated-final actual source manifest",
+    "Derive native population from exact frozen member set instead of hard-coded283"
+  ],
+  "functionalExecution": false,
+  "qualification": "Prepared index generator only. No final source inventory, result or publication is anticipated."
+}

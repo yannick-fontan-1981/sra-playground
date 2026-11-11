@@ -1,0 +1,12 @@
+{
+  "schema": "logos-engine.quiet-inventory-discovery.v1",
+  "recordedAt": "2026-11-11T02:15:00.606396+00:00",
+  "status": "new_active_lanes_discovered_before_measurement",
+  "additionalLanes": [
+    "6A",
+    "10B",
+    "7-followup"
+  ],
+  "measurementStarted": false,
+  "qualification": "The nine-lane prepared inventory was incomplete at final capture; no quiet receipt or readiness was produced. Requests extended to every newly observed lane."
+}

@@ -1,0 +1,81 @@
+{
+  "schema": "logos-engine.lot5b-common-proof-plan.v1",
+  "declaredAt": "2026-11-11T00:49:03.682453+00:00",
+  "stage": "Declared after development diagnostics and before final integrated executions",
+  "productionChangesForStockStop": false,
+  "ownerPriorityChanges": false,
+  "publicResponsesChangedToAvoidRefusal": false,
+  "oracleInputs": "Actual public arguments only; original component starts cold and derives its own proposals. Native expected output remains comparison-only.",
+  "developmentFindings": {
+    "positive": "development/common-positive-02 passed its full declared path",
+    "negative": "development/common-negative-01 passed model-refutation contract",
+    "fullStockTraversal": "development/common-stock-01 and common-stock-03 remain failed on frontier_preservation_conflict; common-stock-02 remains a failed instrumentation attempt",
+    "sourceCause": "development/common-stock-03/original-preservation-diagnostic.json confirms original provider and both original preservation refusals",
+    "qualification": "The new bounded stock proof verifies the observed source-defined stop. It does not convert any failed full traversal into success."
+  },
+  "finalContracts": [
+    {
+      "id": "positive",
+      "chainId": "field-calibrated-positive",
+      "requires": [
+        "complete declared field public path",
+        "at least two navigation clicks from the same authorized retained prefix",
+        "exactly one acquired source envelope per return",
+        "native checkpoint restoration",
+        "cold original operations comparison"
+      ]
+    },
+    {
+      "id": "navigation-no-effect",
+      "chainId": "field-calibrated-positive",
+      "requires": [
+        "stationary return at first acquired navigation step",
+        "model refuted",
+        "subsequent common choice changes",
+        "cold original operations comparison"
+      ]
+    },
+    {
+      "id": "stock-preservation-refusal",
+      "chainId": "cold-stock-source-selected",
+      "requires": [
+        "cold full common caller with original priority",
+        "at least two selected stock returns including observed_joint_material_rewrite and typed_material_relocated_to_address",
+        "current minimum-count obligation retained",
+        "two actual earlier-provider proposals rejected under the same obligations",
+        "frontier_preservation_conflict stops before further stock proposal",
+        "cold original operations comparison",
+        "independent original provider replay and exact original preservation comparison"
+      ],
+      "fullStockTraversalClaimed": false,
+      "qualification": "Bounded stock contribution and faithful refusal only; complete stock traversal and a new real-game result remain unproved."
+    }
+  ],
+  "globalQualifications": [
+    "Synthetic table proofs are not game results or latency benchmarks.",
+    "No WEAV reset or new live campaign.",
+    "Final native digest must be the actual integrated4C successor."
+  ],
+  "retainedFailedStockAttempts": [
+    {
+      "path": "docs/migration/lot5b-evidence/development/common-stock-01/common-loop.json.gz",
+      "bytes": 433694,
+      "sha256": "38b2c400b50b016e0b009681000be028267d0e15c1f8a5b93c2a27d8537ec765"
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/development/common-stock-02/common-loop.json.gz",
+      "bytes": 18768,
+      "sha256": "5db2a90c54e8f2db3594626604ad4b5424c7ceed7a0c80ae14eac7943f669cdc"
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/development/common-stock-03/common-loop.json.gz",
+      "bytes": 533862,
+      "sha256": "ef3b853aca771e720f004a9121d654a6ff575ef87b7f404f554d3552ec6395c2"
+    }
+  ],
+  "originalPreservationDiagnostic": {
+    "path": "docs/migration/lot5b-evidence/development/common-stock-03/original-preservation-diagnostic.json",
+    "bytes": 211139,
+    "sha256": "4fb29e5d68775e4992a8369e94f8b4edfe382eaf4c130ace0c565f62e80c05f1"
+  }
+}
