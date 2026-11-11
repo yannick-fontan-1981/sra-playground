@@ -13,8 +13,8 @@ réelles Site 88 et Site 89 sont maintenant intégrées ; l'identité octet pour
 octet des entrées du candidat validé est vérifiée après fusion. La QA navigateur
 TRIA passe sur ce candidat avec trois niveaux, 17 actions et 17 plans. Le coût
 global est accepté pour **2/2 jeux**, avec **7 688 contrôles indépendants** passés.
-L'intégrité et les entrées de publication passent ; **la publication privée 10A
-est en préparation**. La réserve d'apport propre Axial/POLA n'est pas levée.
+L'intégrité et les entrées de publication passent ; **10A est publié en privé
+dans Site 90 / native 0.56.0**, avec **60/76 entrées raccordées et 16 restantes**. La réserve d'apport propre Axial/POLA n'est pas levée.
 
 ## Composant et boucle commune
 
@@ -142,7 +142,7 @@ ajoute **132,058631 secondes** aux **763,736664 secondes** antérieures et attei
 régression UI et le contrôleur sur TRIA, cas RelativeArrangements existant.
 Elle n'établit aucune contribution propre Axial et ne modifie pas le budget POLA.
 
-## Coût global accepté et contrôles de livraison passés
+## Coût global accepté, contrôles passés et publication Site 90
 
 | Preuve finale | Résultat réel et portée |
 | --- | --- |
@@ -153,6 +153,7 @@ Elle n'établit aucune contribution propre Axial et ne modifie pas le budget POL
 | [Résultats complets](performance-integrated/RESULTS.md) | Médiane complète STCK **10 713,182300500002 → 10 754,6912595 ms (+0,387457 %)** ; SMLP **16 364,226173000006 → 16 386,577008 ms (+0,136584 %)**. Chaque jeu reste strictement sous **+10 %**, sans soustraction ni compensation entre jeux. |
 | [Intégrité de livraison](integrated-final/delivery-integrity.json) | **Passée** : gel natif et archive, entrées source/tests et build conservés ; transport des preuves sans perte. |
 | [Entrées de publication](integrated-final/publication-inputs.json) | **Passées**, enregistrées le **11 novembre 2026 à 00:24:17.507261 UTC** : mêmes sources et worker, preuves fonctionnelles et coût accepté liés. Ce contrôle n'est pas un déploiement. |
+| [Publication native effective](publication/native-publication.json) | **Site 90 / native 0.56.0**, commit `617d1f607d37a6bba1f7ae8ffe1826806e6749a0` ; déploiement **`succeeded` le 11 novembre 2026 à 00:37:52.792934 UTC**, accès privé réservé au propriétaire conservé. **60/76 entrées publiées, 16 restantes**. |
 
 Les **16/16 diagnostics de phase agrégés** passent. Chaque cohorte conserve
 **15/16** : la garde de préfixe SMLP atteint **+15,31 %** dans la première et
@@ -186,8 +187,9 @@ La croissance de l'historique propre à Axial n'a pas de borne de coût démontr
 Les tests synthétiques et les petits rejeux de coût ne remplacent pas cette
 caractérisation. La parité de l'appelant Python complet reste également ouverte.
 
-**La publication privée 10A reste en préparation** ; son reçu effectif reste
-à conserver. **10B vient après cette publication.** La clôture documentaire
+**La publication privée 10A est confirmée dans Site 90**, avec son
+[reçu effectif](publication/native-publication.json). **10B est désormais la
+prochaine étape de ce fil, hors de la présente livraison.** La clôture documentaire
 Site 89 est intégrée séparément et ne remplace pas Site 88 comme référence de
 coût. La réserve [POLA](diagnostic/pola-case-budget-review.json) est inchangée :
 94 actions historiques, zéro niveau, durée inconnue et aucun budget restant

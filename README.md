@@ -5,7 +5,7 @@ Fontan's **Symbolic Reasoning Agent** research.
 
 <!-- LOT10A_README_CURRENT_START -->
 
-## Verified native 0.56.0: AxialQuestion, private publication in preparation
+## Published native 0.56.0: AxialQuestion
 
 **AxialQuestion / lot 10A** is integrated with the actual **Site 89 / native
 0.55.0** predecessor and its unchanged Site 88 execution inputs. The distinct
@@ -13,6 +13,13 @@ Fontan's **Symbolic Reasoning Agent** research.
 `axial.select` through the common runtime. It preserves the source priority,
 quarter-turn distance, recalled-control preference, command and source-index
 tie order, followed by a current one-action OP18 guard.
+
+The first native publication is **Site 90**, deployed privately on
+**11 November 2026 at 00:37:52.792934 UTC** from commit
+`617d1f607d37a6bba1f7ae8ffe1826806e6749a0`. The
+[terminal publication receipt](docs/migration/lot10a-evidence/publication/native-publication.json)
+binds the validated source, build, cost and unchanged owner-only access. The
+documentation closure keeps the same native and build inputs.
 
 Cold common-runtime scenarios acquire selection from another family's public
 return, execute Axial once, acquire an observed rotation and change the next
@@ -39,7 +46,7 @@ RelativeArrangements path, not Axial's own live contribution. POLA's prior
 budget or new action is introduced. Axial's live-game contribution, long-history
 cost and full V6 caller parity remain open. **60/76 source entries are connected,
 with 16 remaining.** Only 10A is covered; **10B WindowQuestion** is the next
-sub-lot after publication.
+sub-lot.
 
 See the [Axial delivery report](docs/migration/lot10a-axial-question.md),
 [source lineage](docs/migration/lot10a-axial-question-lineage.md),

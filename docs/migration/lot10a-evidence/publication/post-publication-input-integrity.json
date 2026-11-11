@@ -1,0 +1,44 @@
+{
+  "schema": "logos-engine.post-publication-input-integrity.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-11T00:40:34.746413+00:00",
+  "publishedSiteVersion": 90,
+  "publishedCommit": "617d1f607d37a6bba1f7ae8ffe1826806e6749a0",
+  "publicationInputGate": {
+    "path": "docs/migration/lot10a-evidence/integrated-final/publication-inputs.json",
+    "sha256": "968377bf4065b468b2ecf3046f0458d0b8e931f6b936549eefd7c752f62a8e33",
+    "bytes": 177739
+  },
+  "frozenInputFingerprintsChecked": 933,
+  "frozenInputsUnchanged": true,
+  "nativeVersion": "0.56.0",
+  "nativeDigest": "be11e761de3c0f3c7d50d10da47be9e0d7b4fc9c5b7d5002cc9272ffce85645a",
+  "nativeAgentWorker": {
+    "path": "dist/assets/v6-agent-worker-D6eTlBhU.js",
+    "sha256": "36a72e7def02971acd46043f2f3ebca24f517b9a5ef5c335c521de00f7eadd7a",
+    "bytes": 6712949
+  },
+  "changedTrackedPaths": [
+    "README.md",
+    "docs/migration/lot10a-axial-question.md",
+    "docs/migration/lot10a-evidence/README.md",
+    "docs/migration/v6-delivery-roadmap.md",
+    "docs/migration/v6-native-transfer.md"
+  ],
+  "newDocumentationPaths": [
+    "docs/migration/lot10a-evidence/publication/archive-representations.json",
+    "docs/migration/lot10a-evidence/publication/fixture-restore.json",
+    "docs/migration/lot10a-evidence/publication/lot10a-source-push-plan.json",
+    "docs/migration/lot10a-evidence/publication/native-publication.json",
+    "docs/migration/lot10a-evidence/publication/source-archive-equality.json",
+    "docs/migration/lot10a-evidence/publication/source-push-step-1.json",
+    "docs/migration/lot10a-evidence/publication/source-push-step-2.json",
+    "docs/migration/lot10a-evidence/publication/source-push-step-3.json",
+    "docs/migration/lot10a-evidence/publication/source-push-step-4.json",
+    "docs/migration/lot10a-evidence/publication/source-push-step-5.json",
+    "docs/migration/lot10a-evidence/publication/source-transport.json",
+    "docs/migration/lot10a-evidence/publication/worktree-bootstrap.json"
+  ],
+  "nativeTestBuildChanges": [],
+  "qualification": "Every933 previously bound fingerprint remains exact after the first publication. Current changes are documentation and publication receipts only. No functional test, build, game, replay or official timing is rerun or relabeled."
+}

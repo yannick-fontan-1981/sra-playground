@@ -1,0 +1,35 @@
+{
+  "schema": "logos-engine.publication-worktree-bootstrap.v1",
+  "recordedAt": "2026-11-11T00:30:35.681838+00:00",
+  "status": "passed_after_ignored_asset_preparation",
+  "initialAttempts": [
+    {
+      "exitCode": 1,
+      "failure": "FileNotFoundError for public/vendor/pyodide/annotated_types-0.7.0-py3-none-any.whl during build-input verification after worktree creation and dist copy"
+    },
+    {
+      "exitCode": 1,
+      "failure": "All native/build/worker bytes matched after symlink preparation, but tracked-worktree cleanliness check refused the untracked public/vendor/ directory symlink"
+    }
+  ],
+  "sourcePushExecutedDuringFailedAttempts": false,
+  "deploymentExecutedDuringFailedAttempts": false,
+  "resolution": {
+    "path": "/workspace/sites/sra-lot10a-publication-20261111/public/vendor/pyodide",
+    "kind": "ignored_dependency_copy",
+    "source": "/workspace/sites/sra-lot10a-20261110/.sites-checkout/public/vendor/pyodide",
+    "copiedFromValidatedCheckout": true,
+    "symlinkRemoved": "Only the symlink created in the preceding attempt; the original runtime assets were preserved"
+  },
+  "nativeFilesMatched": 294,
+  "buildInputsMatched": 359,
+  "worker": {
+    "path": "dist/assets/v6-agent-worker-D6eTlBhU.js",
+    "sha256": "36a72e7def02971acd46043f2f3ebca24f517b9a5ef5c335c521de00f7eadd7a",
+    "bytes": 6712949
+  },
+  "copiedBuildFiles": 74,
+  "checkoutHead": "3fd029c866a002de578af8684f15275e412dd8a5",
+  "trackedWorktreeClean": true,
+  "qualification": "Local packaging preparation only. Missing ignored assets and a symlink ignored differently from the real directory were corrected before any source push. Exact existing dependency bytes were copied, then all native/build inputs and the compiled worker matched. No source, build, test, cost, clock or result was regenerated."
+}
