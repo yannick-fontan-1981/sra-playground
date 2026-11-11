@@ -379,6 +379,19 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 /docs/migration/lot7a-evidence/performance-integrated/owner-graphs-candidate.json.gz
 
 # Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot10a-evidence/isolated-functional/regressions/catr-site83-replay.json.gz
+/docs/migration/lot10a-evidence/isolated-functional/regressions/conn-site83-replay.json.gz
+/docs/migration/lot10a-evidence/isolated-functional/regressions/fogw-site83-replay.json.gz
+/docs/migration/lot10a-evidence/isolated-functional/regressions/mind-site83-replay.json.gz
+/docs/migration/lot10a-evidence/isolated-functional/regressions/rswp-site83-replay.json.gz
+/docs/migration/lot10a-evidence/isolated-functional/regressions/vois-site83-replay.json.gz
+/docs/migration/lot10a-evidence/isolated-functional/regressions/weav-site83-replay.json.gz
+
+# Exact raw validation logs retained in gzip; see isolated-functional/validation/log-transport.json
+/docs/migration/lot10a-evidence/isolated-functional/validation/build-output.raw.txt
+/docs/migration/lot10a-evidence/isolated-functional/validation/delta-tests-output.raw.txt
+/docs/migration/lot10a-evidence/isolated-functional/validation/typecheck-output.raw.txt
+
 /docs/migration/lot7b-evidence/attempt1/craf-campaign.json.gz
 
 # Exact frozen source archive; restore with freeze-v53-native-source.py restore DIRECTORY
@@ -422,6 +435,35 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 /docs/migration/lot4b-evidence/performance-integrated/owner-graphs-baseline.json.gz
 /docs/migration/lot4b-evidence/performance-integrated/owner-graphs-candidate.json.gz
 
+# Lot10A composed candidate source archive retained as exact ordered byte parts.
+/docs/migration/lot10a-evidence/integrated-final/source-archive.tar.gz
+
+# Lot10A exact validation originals are restored from the retained gzip bytes.
+/docs/migration/lot10a-evidence/integrated-final/validation/delta-tests-output.raw.txt
+/docs/migration/lot10a-evidence/integrated-final/validation/typecheck-output.raw.txt
+/docs/migration/lot10a-evidence/integrated-final/validation/entry-audit-output.raw.txt
+/docs/migration/lot10a-evidence/integrated-final/validation/migration-audit-output.raw.txt
+/docs/migration/lot10a-evidence/integrated-final/validation/diff-check-output.raw.txt
+/docs/migration/lot10a-evidence/integrated-final/validation/build-output.raw.txt
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot10a-evidence/integrated-final/regressions/catr-site83-replay.json.gz
+/docs/migration/lot10a-evidence/integrated-final/regressions/conn-site83-replay.json.gz
+/docs/migration/lot10a-evidence/integrated-final/regressions/fogw-site83-replay.json.gz
+/docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-replay.json.gz
+/docs/migration/lot10a-evidence/integrated-final/regressions/rswp-site83-replay.json.gz
+/docs/migration/lot10a-evidence/integrated-final/regressions/vois-site83-replay.json.gz
+/docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-replay.json.gz
+
+# Lot10A exact regression raw logs; restore using integrated-final/README-transport.md
+/docs/migration/lot10a-evidence/integrated-final/regression-driver-output.raw.txt
+/docs/migration/lot10a-evidence/integrated-final/regressions/catr-site83-output.raw.log
+/docs/migration/lot10a-evidence/integrated-final/regressions/rswp-site83-output.raw.log
+/docs/migration/lot10a-evidence/integrated-final/regressions/fogw-site83-output.raw.log
+/docs/migration/lot10a-evidence/integrated-final/regressions/vois-site83-output.raw.log
+/docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-output.raw.log
+/docs/migration/lot10a-evidence/integrated-final/regressions/conn-site83-output.raw.log
+/docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-output.raw.log
 # Exact frozen7B archive; restore from the retained source archive parts.
 /docs/migration/lot7b-evidence/integrated-final/source-archive.tar.gz
 
@@ -440,3 +482,10 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 # Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot7b-evidence/performance-integrated/owner-graphs-baseline.json.gz
 /docs/migration/lot7b-evidence/performance-integrated/owner-graphs-candidate.json.gz
+
+# Exact published Site 88 baseline archive, retained in ordered byte parts.
+/docs/migration/lot10a-evidence/integrated-baseline/source-archive.tar.gz
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot10a-evidence/performance-integrated/owner-graphs-baseline.json.gz
+/docs/migration/lot10a-evidence/performance-integrated/owner-graphs-candidate.json.gz

@@ -1,0 +1,19 @@
+{
+  "step": 1,
+  "expectedCommit": "3fd029c866a002de578af8684f15275e412dd8a5",
+  "archive": "/workspace/sites/lot10a-publication-20261111/site-step-1.tar.gz",
+  "startedAt": "2026-11-11T00:30:52.161Z",
+  "workflow": "/home/agent/.codex/plugins/cache/openai-curated-remote/sites/1.1.6/scripts/site-workflow.mjs",
+  "outputChunks": [
+    "",
+    "/workspace/sites/lot10a-publication-20261111/site-step-1.tar.gz\r\n{\"project_id\":\"appgprj_6adbc388d79081918581b93b919d7258\",\"checkout_path\":\"/workspace/sites/sra-lot10a-publication-20261111\",\"commit_sha\":\"3fd029c866a002de578af8684f15275e412dd8a5\",\"archive\":\"/workspace/sites/lot10a-publication-20261111/site-step-1.tar.gz\"}\r\n"
+  ],
+  "finishedAt": "2026-11-11T00:31:23.449Z",
+  "exitCode": 0,
+  "result": {
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "checkout_path": "/workspace/sites/sra-lot10a-publication-20261111",
+    "commit_sha": "3fd029c866a002de578af8684f15275e412dd8a5",
+    "archive": "/workspace/sites/lot10a-publication-20261111/site-step-1.tar.gz"
+  }
+}

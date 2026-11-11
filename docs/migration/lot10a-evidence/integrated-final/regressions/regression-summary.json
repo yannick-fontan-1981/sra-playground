@@ -1,0 +1,3259 @@
+{
+  "schema": "logos-engine.recorded-public-regressions.v1",
+  "status": "passed",
+  "caseManifest": {
+    "path": "docs/migration/lot10a-evidence/recorded-regression-cases-site83.json",
+    "sha256": "a6514c3064b312de4c6e1a7c07d968a29805eb7dcf8f6f6f1c06302eeeef5f06",
+    "bytes": 4783
+  },
+  "nativeSource": {
+    "fileCount": 294,
+    "digest": "be11e761de3c0f3c7d50d10da47be9e0d7b4fc9c5b7d5002cc9272ffce85645a",
+    "files": {
+      "src/logos-engine/bounded-weak-cache.ts": "01b7df58a9425f8beb4b61ad77a994d37decf63645aa87d99f5877738b251804",
+      "src/logos-engine/bundle.ts": "e632ee85571bc3e4ab226bb3e8ebe4f67b178400fe16faedd2eb26bcff332a85",
+      "src/logos-engine/canonical.ts": "5c2884287aed82d97e7a85c905db5fb800a7e58a523c3ba128a1b61db5069cc1",
+      "src/logos-engine/create-runtime.ts": "56c62442bb09bdcda9fd388b5ee2555ff56b7771335208c1b930c304dc901a77",
+      "src/logos-engine/interpreter.ts": "fcc2aa513bc8e8d7cd5b69156eb2e246fd15327fdbc0e27db9c95f9205147d94",
+      "src/logos-engine/ir.ts": "912987119cfc47a3e6f2175643101cbd24795a289338099d0c94c0e976a3ecfc",
+      "src/logos-engine/kernel.ts": "1cac40f5f9a3356d31ae0fd5247709eb82c5f6402aae3cb68d8edc54c838f207",
+      "src/logos-engine/lab-protocol.ts": "d2cc13ebc9c0b9027ca4d279e7f0fdb193714a5d7023473cbb1a2cdfdcbdced1",
+      "src/logos-engine/lab-worker.ts": "28912219793e9d3f5183a30c0ff5c1430682a8e527bba7f45c351222b3e8c433",
+      "src/logos-engine/public-observer.ts": "be263a0f75b2b34d73d9e11a38d2a71ec4c2b443bcca4595496335b5f8103851",
+      "src/logos-engine/v5-concentric-frames.ts": "3e89e2458ae5cdc73dc7b10533c37f00e636528e88bd335fd8531ffcae1b2d52",
+      "src/logos-engine/v5-finite-relation-domain.ts": "d510633030a3c4aedbfd16e07710d00bb3f0ccbe9646796345b9a22c35f96ea6",
+      "src/logos-engine/v5-piercing-contracts.ts": "200a9d2efe1b3069b97042c0e54c2d10124e578e1285f2ce122c8c29cec3df7c",
+      "src/logos-engine/v5-piercing-plan.ts": "cba5955f1b29153827f74b0cab854c2d5e899054524f52b85aa3e25765445667",
+      "src/logos-engine/v5-reception-wait-contracts.ts": "24f9a184e1de37f577e0cbb4dcc2eb1b0c718a06a39c966e27c82b987ac2b79b",
+      "src/logos-engine/v5-reference-population-calculus.ts": "c6c502de79f48ba7e693283fa308317b07ba148bbd9a3fc93b56f611415e4996",
+      "src/logos-engine/v5-station-profile-scene.ts": "9acd29a843a3cfd60e9345b45d22cf3f9159793a6894b0a0e37c5278a07c14fa",
+      "src/logos-engine/v5-stem-reliefs.ts": "146bc4afd569c288392872e12eb424fed1e9ffcbba880602957a8a788852c428",
+      "src/logos-engine/v5-symbolic-diagrams.ts": "790cdfd116d863f047dc006a7ad518b2200d450bb60bf66a080c0fe3e95593be",
+      "src/logos-engine/v5-temporal-fragment-match.ts": "75c694cad24dae383a19a43fa925ef42e3d9943167781d626272c655ef7a57e5",
+      "src/logos-engine/v6-acquired-continuation.ts": "f076b5e04b3656470dd445d12b5a85d74f29c1f4f82880d83f26e7f0624dda97",
+      "src/logos-engine/v6-alternating-graph-access.ts": "22961c2d6f991e684daa02ff2ed3dae57ee5538b1c3820c4528afea84e221856",
+      "src/logos-engine/v6-alternating-graph-observation.ts": "3dd828b8093f2b3d5aa8164ee40c450f32f6a6ba9f001fe2e40e6aeed91de8ca",
+      "src/logos-engine/v6-alternating-graph-questions.ts": "7765ce9e630a3f96fe6eb53d8ea83f3768ba30bf5bff586895400716153aa31f",
+      "src/logos-engine/v6-animated-contact.ts": "345bea43b2537e98f18c3a598b5727425a34651e42aaedeb0b8d84a8ab4952d4",
+      "src/logos-engine/v6-arrival-mechanics.ts": "b5199c91625a8b5e72de4965292e4adfcf3e9108a9afbf22fc7c47ab605c753e",
+      "src/logos-engine/v6-attention-memory.ts": "b922090ca85bf7a4e8c0e523bbb4aadf8565fac9330da7ddcd22d42c8d07cc74",
+      "src/logos-engine/v6-auxiliary-support-continuation.ts": "07ac7f7c29c4a13e5f8fbe8079f5669a6837e47d4f8826c983167ef5ea245780",
+      "src/logos-engine/v6-auxiliary-support-preparation.ts": "8a74ed9b47754e3e9bd0370a2d6cd7c33ffe7a59f4163070362aee7b893a7345",
+      "src/logos-engine/v6-auxiliary-support.ts": "6df9c42610bb7bd0e3e86333a659fbceb8780b0003696f92c3866ff033c25bef",
+      "src/logos-engine/v6-axial-question-geometry.ts": "351bc7cbc2b53fa1ecef11fd6f6fc36664924316f88e827e008d0f0603542140",
+      "src/logos-engine/v6-axial-question-policy.ts": "1f15a3b835246e7fa227966ec23422b5c0cce06210b15427a46f9438e937dedd",
+      "src/logos-engine/v6-axial-question.ts": "9ca532ec7e625f5057e501a0225e90b4f5020fcb7d5c6568d44e5e8aa66d0480",
+      "src/logos-engine/v6-band-transfer.ts": "9a418ef2fe0563f34845e02fd182ad0414afde093bb1fcc971641a578fb800f8",
+      "src/logos-engine/v6-cavity-clock.ts": "b3da03b69e1655e98094ecef39f12e59bac353bd15a7aa49affcb31f0ca539e2",
+      "src/logos-engine/v6-cavity-kinematics.ts": "a72afe56c453515572478bd86952403391299e0f63b0ee942dec4e2157f2345e",
+      "src/logos-engine/v6-cavity-measurements.ts": "671feab5e9eda5dba9be4ead65345d6f43f5b6b8dc01b9d5d73dd4aef06302a9",
+      "src/logos-engine/v6-cell-patch-observation.ts": "c64981bb7cf091857f0ff1bea5fcc03e22c41e03d93cbde97c14ef0d34de4e12",
+      "src/logos-engine/v6-cell-placement.ts": "143086770cc753c74ef2354161c6fb1cc6e487798a56880312d70916ef7b5830",
+      "src/logos-engine/v6-code-program.ts": "dd2de515b02a331b812608b9cbf69b5ba55856e83773a070e471d7452490f70e",
+      "src/logos-engine/v6-component-matches.ts": "41d4674f343e5a1ba3d4f9e368e238ffd40c67ef5e41e74f9def8ffd6e2a739c",
+      "src/logos-engine/v6-composition-engine.ts": "c259548ad4b74b6aa9eaa589da3856469b73c4e1e1104ccfac55f00e8e1ead56",
+      "src/logos-engine/v6-composition-memory.ts": "567e69aaf134217c15101c3fc4b732df57fabeb3f51156193a82acba8d9a4cc5",
+      "src/logos-engine/v6-configured-arrivals.ts": "85228ebf0f5aaa914be9864bc08de4d7064c020f9beb2388e5aa1571a92b11d7",
+      "src/logos-engine/v6-constellation-cover.ts": "a7c1ac659e38ced3628a614e90c452c82b62b02cc9b6208aa651a7ffa6ab7e95",
+      "src/logos-engine/v6-containment.ts": "db66da09eecc18636440007b9f54ee49266e5aa018082389bcab2834376be21a",
+      "src/logos-engine/v6-contextual-compartments.ts": "07f4e9a56a8c51a75aba8d487916e6fe1a7b350872f3138223f9f1629a047687",
+      "src/logos-engine/v6-contextual-translation.ts": "e7a52a1df070fea7e16ef1e91260301fd7e7632b57944b0cd554cc09a96b4df6",
+      "src/logos-engine/v6-coupled-displays.ts": "c29561fab41c12481e41e3b2e51543b920f3ab87139840ed07a677aab053de72",
+      "src/logos-engine/v6-coupled-pair-epoch-anchor.ts": "dc7c2bb0cdf1e1ea6794339ceb209b110fc1b013e49671f8e11ac6bc4b26747f",
+      "src/logos-engine/v6-coupled-pair-evidence.ts": "eccadc2f8e0f24d98bf2bf6f2a0a879d862f6213bfbc02298d2fe28362ee5a17",
+      "src/logos-engine/v6-coupled-pair-observation.ts": "73635ee7efcc4084058a6cfa914a0db1d8c47c51abbc707056042eff76aa24ca",
+      "src/logos-engine/v6-coupled-pair-planning.ts": "6f02ece78e3ccbd28b795c29d607ea980154545ce014cf0a42f92d38dd905a5c",
+      "src/logos-engine/v6-coupled-pair-route.ts": "bf979bb8b33a798f21ffeb484579a5c9fc322be0fcbf67a16cce58fcbe7cfcd1",
+      "src/logos-engine/v6-crossed-prefix-access.ts": "1fa16f6712e281d50628a2fc6ff619d224d7f44d492f1152ce8a09a93767d162",
+      "src/logos-engine/v6-crossed-prefix-observation.ts": "b1a8808d123b66f27ea4a0b9d06eeff4e91319d91f445582c01245beb7895fbd",
+      "src/logos-engine/v6-derive.ts": "4aee722385293266f34f95bca0ab57717df1aceb1b093cce1646fc56610a4189",
+      "src/logos-engine/v6-drm-projector.ts": "d33803653b1c39ff3c38169e0a27a0d5f385e08d1e035845483b4a5b53fa598b",
+      "src/logos-engine/v6-drm-selection.ts": "8b95dc16a22257ecdd3ce4ccfa48bdad2ec21bdf24319b14c70d11c5ec01d831",
+      "src/logos-engine/v6-effect-access.ts": "7972704e27c074c8bfbc4a6db1f5f43cf04a08e2dde9da50b092ffbf41e61ec0",
+      "src/logos-engine/v6-exposed-reception-access.ts": "25083b8b5238c5fe27ba1a77c0e56798d3717fa7b983b38f44a6838f6181b8b8",
+      "src/logos-engine/v6-exposed-reception-observation.ts": "5a149e23a06a07af56dd92f32e7d0bdb1e7e9e2c8805bdc6d8e54dafac84a36a",
+      "src/logos-engine/v6-factored-return.ts": "a21a0c1adf82768fa31ef3758ec8dbedc509f4b4f9798fa05d6d5a8885b4143b",
+      "src/logos-engine/v6-feedback-sequences-finite.ts": "41c1efacc90495d269156aa33fe01e2d83054a43de7ea424b92d54eae1d67051",
+      "src/logos-engine/v6-feedback-sequences-visual.ts": "9f6b9d8d177806c3d2a6338fa88e70216f2632422ba378054a43b0467fe40e57",
+      "src/logos-engine/v6-feedback-sequences.ts": "4e5189878dac2d3013cea8c8639de109097a584e2811b23fe54338830f293276",
+      "src/logos-engine/v6-field-constraints.ts": "b7f5d309a44001ff8cfc9c292f04229f7532daa41da2cd63340fdfd57edb4fa4",
+      "src/logos-engine/v6-field-service-access.ts": "0a4846ad10b1d1cacb3be947fc72e24e39a1ab1478e41e675d7e065544e95f1a",
+      "src/logos-engine/v6-field-service-observation.ts": "6f3e57e31bd3e821129b35d0a8cf924a2edae6f349dfe7d86fdb7f12a4420a4b",
+      "src/logos-engine/v6-fixed-origin.ts": "c0ed190865b69436da80ba005775467917e826bb1f910c23c2a33f2c2fb547a6",
+      "src/logos-engine/v6-fixed-program-calculation.ts": "21e6cfeb51f1ebc8eab82dad568fc2f65c702d398279a5629118fd3fd83b5c82",
+      "src/logos-engine/v6-framed-directed-composition.ts": "42c3f405624aeb2e7569eddb657233ef5567e76aeb99d248cb0fb341284b2ab4",
+      "src/logos-engine/v6-framed-transfer-mechanics.ts": "6650a99139a47837d97916dc83c17030d27c247227f1a828336ae609e8a0e9fc",
+      "src/logos-engine/v6-framed-transfer-observation.ts": "493ecc9807cce832cf2c18e39e147a206ef1bac01f1ad804b137c2e265fc1401",
+      "src/logos-engine/v6-framed-transfer-phased-receptions.ts": "70d0dce7e7e3030adee6ad4e3e027cc73a28f0c59a4c943f575fb741ac00b991",
+      "src/logos-engine/v6-framed-transfer-policy.ts": "5b3dd25696a10c235b185b42d03bac20bf42c0cf4fe4670f9b3b2b9715052ff2",
+      "src/logos-engine/v6-framed-transfer-public-receptions.ts": "b1bca057d555814afa56030e25548541a8c7079057d6650c1cead298e1095677",
+      "src/logos-engine/v6-framed-transfer.ts": "c0c383e8177e4b286e8c94aee0f0b0a4b37e4a6bd0fddcb9ef364b57e4d2a48b",
+      "src/logos-engine/v6-framed-uniform-questions.ts": "b1f08601aab85b5dd72bb3171f8cc633fc3a2efd94c9887b67be1a0bb52f6519",
+      "src/logos-engine/v6-framed-window-access.ts": "04f1f7c6c39475da23a0f7ea211931464496d03d25c1fc650c55e90fb4fcce4d",
+      "src/logos-engine/v6-framed-window-observation.ts": "5a95763c89c4ffd8f08bd878eaa2105c8342d02b9407f1536eb666c2467ee8fb",
+      "src/logos-engine/v6-geometric-scene.ts": "2c2876afbbf615ab4b1119fcfbb484cfab22f95951ec774b1596c1562da68aba",
+      "src/logos-engine/v6-goal-access.ts": "1a52b96bf2ed27170c1c74090a814e9d955329d6e65d48d89bf53f08c532820e",
+      "src/logos-engine/v6-hash.ts": "6b86db7b533d55da900a3c65a06ec1e18547180245b3e3a2eaa837be09c669f5",
+      "src/logos-engine/v6-information-goals.ts": "7ad4f42e977c1e8b997c23d01340ec51a5b58cafb3494853de1b5987a59031b8",
+      "src/logos-engine/v6-inventory-boundary.ts": "b23845bc1638d2e0f7a796f10e2576d2be81a40f72de35c242e5072f8bab0871",
+      "src/logos-engine/v6-inventory-caller-context.ts": "617ff752c9ac5f65443bec856deb634a2c5a5d52863dad81e19828cadebf56e7",
+      "src/logos-engine/v6-inventory-context-intervention.ts": "7c0011a08ef7c4737eb0b1d2b58f0a78cdf031900cc732798526d628e5864915",
+      "src/logos-engine/v6-inventory-continuation.ts": "d2b759d364a67200c497e1c9f0ef4b741dd1fe0b5573c8f35910b60ff1910eb1",
+      "src/logos-engine/v6-inventory-contrast.ts": "a948847a87da36e84b8f166aafac32b6218c76bd453a6c4baa2252e33cbf40d2",
+      "src/logos-engine/v6-inventory-control-revalidation.ts": "53acd791199a4232d855826d4efb02c10eef75e8c2c6a4c2106d95dd2c2b7366",
+      "src/logos-engine/v6-inventory-dependencies.ts": "1ca105f969635ee87d1ec03a9ffd3ae4fcbc293e9bc9ba5325a85b42f14b23d2",
+      "src/logos-engine/v6-inventory-effect-scope.ts": "3506ad0a12efa70e9dd7e4fb6e60e67efab3d769dd4b16cdee99e0daf8575cfd",
+      "src/logos-engine/v6-inventory-endpoints.ts": "32b117812e956c3e696658930151db2ea564854bdb956f56264344424def9984",
+      "src/logos-engine/v6-inventory-initial.ts": "4c756c4c2758801df76cbde2a4a03c210d1a671dc0a5e12fa4a8ee87922f61ef",
+      "src/logos-engine/v6-inventory-local-contact.ts": "abd8b2c5c762f195158b9d47f2b9467b0add83befba4362eebf7ebb01eecb96e",
+      "src/logos-engine/v6-inventory-material-layers.ts": "c97a6ae40b33005daab059e16a3efb29e4d10b66833479a8d8a3499fc55272f7",
+      "src/logos-engine/v6-inventory-measurements.ts": "e5b873bc9e16d45d5eb0248e46d06d1ce98e0698de9d991864f75e89d7283d83",
+      "src/logos-engine/v6-inventory-policy.ts": "a9e8019e538bc252f1cd5c8e68f44d17c0d73c18205f2a8606774add757cbf6e",
+      "src/logos-engine/v6-inventory-project.ts": "42e4eaf682eab6e022aa4f6fc512c980c504e5196fc055dd8bb176a7bbbdd60f",
+      "src/logos-engine/v6-inventory-routing.ts": "d7c915933ed4795d0b7e49549444235efcf8efdda6523c43ed9e736e5d38ecb1",
+      "src/logos-engine/v6-invited-reduction.ts": "a3433583cbd83d668e736e781c8730f27cc7c337aca4ef87dd3bc22d501115c9",
+      "src/logos-engine/v6-joint-transport.ts": "8cfc3ec9ad1185d9ab2ee43e00baebcdd5f8bb4ff699f7ecd423d7cf4b7dd710",
+      "src/logos-engine/v6-knowledge-store.ts": "035d41597a5831bfa65bb1f627e3a0d05b84cc44cfda05566359873ef8c5af08",
+      "src/logos-engine/v6-labeled-sequence-access.ts": "04f478bc7ded6dbdde010a785016a82b69b742ca7313a99dcca25558ec694966",
+      "src/logos-engine/v6-labeled-sequence-composition.ts": "5a00dbb997c4aca3cea6377310afca63c5b218d5c7afe9450809bfe088f15b3c",
+      "src/logos-engine/v6-labeled-sequence-mechanics.ts": "7c8d4cd4c4569014ca41bf71c1b2bb9d9013bfc6e4489e38d6b758dafe019c41",
+      "src/logos-engine/v6-labeled-sequence-observation.ts": "7515112983485a7ede3ddde59eb072e25814b227aa2afc11d2c3fde984f7089d",
+      "src/logos-engine/v6-learned-preparation.ts": "e16351a022c6abc05f02edf5c3e2108ae7474b348ae4ae7f75dc2bcfb42d547a",
+      "src/logos-engine/v6-linked-packet-access.ts": "656caa4b9223d8af3bacd63beb7ed4ca025f74e7a4544f572a08dc1829190f6d",
+      "src/logos-engine/v6-linked-packet-numeric.ts": "5cb47676010580be49c87997a3f0f9bf2e6cb52baac9902ac59ca33d5480e820",
+      "src/logos-engine/v6-linked-packet-observation.ts": "62b264348db16ef18cc661bca78b66508ae7cfb6eb280b7a2ba1a26fc9315e41",
+      "src/logos-engine/v6-linked-packet-ray.ts": "b691ffc519104296798d65263020ad9f34390fadd7c65a8bad33c535ab9e101d",
+      "src/logos-engine/v6-linked-temporal-common.ts": "3e7111bccfefa22a67afad24cefdbc95834053eb233007f4f4ddda19f1bfe54f",
+      "src/logos-engine/v6-linked-temporal-contact.ts": "29b68e614203302e36ef731866544e35146b2b553b7d424c0e533eb38519b1b5",
+      "src/logos-engine/v6-linked-temporal-phase.ts": "d431c10a89c967b056417ba526d68907ef1ddac62b5411b51f9d70edb8c994e1",
+      "src/logos-engine/v6-linked-temporal-preparation.ts": "c85464b1162352f7c6cb329f2d2f9b6cbcc74baae616be3d643d1ac1b646aeed",
+      "src/logos-engine/v6-metric-composition.ts": "1fcfcfe780ef6599756785392159040cc7f2acfa6356376275778a58e086018d",
+      "src/logos-engine/v6-metric-stack-mechanics.ts": "a114e116a7c401f7ddfde803521990468c825684888b491c61d697c9712bb121",
+      "src/logos-engine/v6-morphology-entry.ts": "d0a1d7edd852dd22eb52d172e2933bc6b366abb156df43a14b57c3ab2784f5c4",
+      "src/logos-engine/v6-morphology-family.ts": "8a93b05951618de69c9cf26cb074fffa9dab09a8e4e9774efd1dcdad0cfc21df",
+      "src/logos-engine/v6-morphology-managed.ts": "449ed91b6e7d22e7463643326e10087bed50f8103f57eb5deb9f23e9d5834ed0",
+      "src/logos-engine/v6-morphology-measurements.ts": "e9f191007ae64c42c433183f721cd43cc9c92cd1c501c5a3c350916e348ec813",
+      "src/logos-engine/v6-morphology-policy.ts": "9ae837dceed31e0ae87c393885bd1b4979aa07c41bff198ba1045765b4fd7345",
+      "src/logos-engine/v6-motion-contrast.ts": "493c439f740643c7eb118ba72831cf090feaff7665119c11b3ab6ef9ea4a6556",
+      "src/logos-engine/v6-native-authority.ts": "f5a54ecac86fb097ee739dc6e4f8b4729819d58c9992fee92188527a1544b3ff",
+      "src/logos-engine/v6-native-caller.ts": "621aa8b5569420e12905af4c22db1be50a387e22cec0e01bc24db1695b1b917a",
+      "src/logos-engine/v6-native-interface-families.ts": "1434f49f81f5b6c8707db2dafe4f97a2dff7b54cb1b2505064d085d8bb309fe0",
+      "src/logos-engine/v6-native-observer.ts": "1a0ffa26548bf6c1ebbd22724731c2238dc24c84074885e832b671dbbe8dfe02",
+      "src/logos-engine/v6-native-owned.ts": "b4a1eeb1cf43bb04695bce8267903cd122fe778b4b938a98b1640a9ba6ee4839",
+      "src/logos-engine/v6-native-runtime.ts": "ddbe8767e813c00c0ce5e4e5008f6021151f3d81dd3d02b4a354a36ad5359644",
+      "src/logos-engine/v6-native-state-graph.ts": "b739db6d6066a06f4175b4377f0d0ae1f351b708e5d27fbdb99c9de7e6ed0b4d",
+      "src/logos-engine/v6-native-transition-domain.ts": "e96f781bed5d88204cd347b61ee87b7dd3447b3f57b2ec6a4aba2e023fbe1621",
+      "src/logos-engine/v6-native-types.ts": "6fbb3e98ba8350e4a9ec82fb4d155e635887a8a83c53a9603f8f3e7d075d0b07",
+      "src/logos-engine/v6-native-working-witness.ts": "08bca697678eb3a89960ff2ed1c49b9fc0c91082b86952be51edf0f34a1f38fb",
+      "src/logos-engine/v6-observed-derivations.ts": "c48b5601f0895c8cad913690a9216138ec08985aee4e7c7b1e7d0189964f05d6",
+      "src/logos-engine/v6-observed-frontier.ts": "c2adeb462bf5a4089af59c8141b880c9ef2ba6378d1fc5c52c33333fe564ba62",
+      "src/logos-engine/v6-observed-inventory.ts": "dcd496eecc2131acc697a119c14ac028c2cabd73c5ddb78a7f21cef1ad0ae426",
+      "src/logos-engine/v6-occluded-catalogue-access.ts": "a9682d5822103f292873d316a183d6de96bcecc85f645d2b74a60ae056f38c16",
+      "src/logos-engine/v6-occluded-catalogue-mechanics.ts": "dcb9df5d17b48b334ca02ff69526bbb94d03988972d8ab6caa02ef4645c04e3b",
+      "src/logos-engine/v6-occluded-catalogue-observation.ts": "378094537a4416c7c24755dabbe577015049f3d8e93a1e0702e5b68322f8b21a",
+      "src/logos-engine/v6-occurrence-program-observer.ts": "559f7bf2ed94031304bd483efb8ee71015f9b9787345f2a4c193f40facc9cb47",
+      "src/logos-engine/v6-occurrence-recall.ts": "ec30da66531af8d410a647209699eb14155fd9b3e4f310ab8a3d9fd39734df88",
+      "src/logos-engine/v6-occurrence-scene.ts": "ea76d01aa56f560c0ae4831ca8901ed5ee0a7d064dbc1590b547aaaebfc5447f",
+      "src/logos-engine/v6-operations.ts": "4aad959893595a1844721b93ec8897479536f95ccfa890be045656fa1e96fa06",
+      "src/logos-engine/v6-orbit-constraints.ts": "408a175132ab9869db4150dcecabb20d6eafeccfd301f12294eb6de1df57cc5f",
+      "src/logos-engine/v6-ordered-reaction-measurements.ts": "0b78801e60bdba040e72543e9d794a7cc23a226be3bf9c06bdb3693b3aa1c492",
+      "src/logos-engine/v6-ordered-reaction-policy.ts": "d8bedd6d8bb7aa9ee9bcf6ce019d26948d9bf82a45502110e4a89040ebe8cefc",
+      "src/logos-engine/v6-ordered-reaction.ts": "fd5209fc689ec4cb344a93b1f8bc462ac780a3c623607e036e0c989f0363b8de",
+      "src/logos-engine/v6-ordered-support.ts": "899d3784ac80ad83e113c8e0ad44a1b380bec5d5c6b552b66a1b7c3543b03c79",
+      "src/logos-engine/v6-oriented-coupling.ts": "c1ed7f0ed5fc62c319329fc93dbc51ddf4168c06c4abfe9b60e128480f65d94b",
+      "src/logos-engine/v6-oriented-handoff-mechanics.ts": "1e0e1392560f7afca9a7988e994da2e321e2ea2dfb8a0fcda2c67095b616b0ca",
+      "src/logos-engine/v6-outline-access.ts": "b80b1a0f5ff4792eb33318db20932b33b11c6711e8a1675cc9d693309188b0df",
+      "src/logos-engine/v6-outline-arrival.ts": "1e0be453bf1ac4c044f64bd832de17cd66925e15424ec8dee2123e05cb64833f",
+      "src/logos-engine/v6-outline-continuation.ts": "dc0f79d5e76e60d41657fcb93f12a42b3c32722fcd6498ac2b2fb360fafabbef",
+      "src/logos-engine/v6-outline-geometry.ts": "286ccd39621da1870e755d917c134177a032c76a9d5202cf0aabf94264da2ab4",
+      "src/logos-engine/v6-outline-identity.ts": "2cb39535e79fd37081f7f65e8368237f2c92b895751259534461d23e78adccfb",
+      "src/logos-engine/v6-outline-policy.ts": "82d0abedf862248c86eda8fc84e6db49c1a53ea4825ca2db32cbfbc865532c89",
+      "src/logos-engine/v6-outline-public-context.ts": "4027918a071a23baebb2082f78b732fe40d3d4102d0a7842984cd1cf49e3d0a3",
+      "src/logos-engine/v6-outline-recovery-policy.ts": "85ba7bcaba6806e1b79056032af94620360a63180b6209cbdcaa84a4289fc413",
+      "src/logos-engine/v6-outline-rejoin.ts": "186a1b55303dede0ef7af4d2909467e8cbc7ac6f31646b4f45f58c1ac86a88e4",
+      "src/logos-engine/v6-outline-service.ts": "9cea513f9a0996b81f28e1e83b074cdf302e7458abbce3527b2c954050aee628",
+      "src/logos-engine/v6-panel-service-access.ts": "163d10a0a913e1e6fd3d2a047a2d870af41d74f56ac3b4c8636e73d4da725246",
+      "src/logos-engine/v6-panel-service-observation.ts": "36c991be0e250c1b3b91b6349d8cadc32358691594e1c89f5e0cb88ca6db0c82",
+      "src/logos-engine/v6-panel-service-pattern-set.ts": "593f40d3e19cc0ef04c515d470f3d0907d597827c69c62e36d4157e14fb5022f",
+      "src/logos-engine/v6-passage-options.ts": "bf4691d0447e39263bc7f793f5b8577a63e41574a48a6a426fd5e6f3449e8d36",
+      "src/logos-engine/v6-periodic-cell-grids.ts": "8b5fb0937b896a35ee85ee8a1111e0c99dd742ec7f8da76f490434b3defd6100",
+      "src/logos-engine/v6-periodic-sums.ts": "51e3932eb2f0fc141311f8d2bd31d9a49e34c95cc12085e24a37966305bff48f",
+      "src/logos-engine/v6-point-contrasts.ts": "3984da390831630edcc8dcb78e5178d92d8d78df2941d63cd6d8409e0fd2ae90",
+      "src/logos-engine/v6-point-set.ts": "93ed8442779a022e5fd6534ea6eb140c81f08c2f010e2ad1f22a270a70af4268",
+      "src/logos-engine/v6-port-assembly.ts": "fd41bf045465287af77c5bb68497e79c97357250501bd75cfe62e166f5b5694d",
+      "src/logos-engine/v6-product-panel-access.ts": "b8a2042599366decbaabef48ef3191c8e39862cd872ed65550635c859dd81a6b",
+      "src/logos-engine/v6-product-panel-mechanics.ts": "f437f00d5af5437675dfe40e85cd2b2abe4a459b3216557237e0042b5eddc5a9",
+      "src/logos-engine/v6-product-panel-observation.ts": "197c7bcb4539a738bd18428a47342b472efc0f96ba0e886a5bcc892de67ec2e1",
+      "src/logos-engine/v6-program-composition-access.ts": "0a7c7e5b9fc8123b0c9305ce83c635e9bcfddaeb519a90f8cb9fcc9d62cbfb3b",
+      "src/logos-engine/v6-program-compositions.ts": "d204009c83c30ea52d8509334f8098cd4631efee8cd97564cdc8d474681226db",
+      "src/logos-engine/v6-program-control-discovery.ts": "bca59f32bc034fb7acc13a03f717a8f62fd5f7a88f3539e3b8980187d655599a",
+      "src/logos-engine/v6-program-current-access.ts": "5345e5b936ef3e06e0cae87f48ad6cf4e29620bd385183079032346538ce782d",
+      "src/logos-engine/v6-program-geometry.ts": "2d05fbc64dc83ef4440340193d19a08b5ee15fd40e9f39d0709f019d7fe7a0ed",
+      "src/logos-engine/v6-program-identity.ts": "28f5ef405f24d1994a55df6e7aac20b00a41ddb59f111605e104e5a55f802d35",
+      "src/logos-engine/v6-program-input-access.ts": "6d6020068c41aff129a224c37ce12267cfec968d9ccd31714a8bfa9315b4994b",
+      "src/logos-engine/v6-program-relations.ts": "f10b3831742b0b1ea245861ae662d6ab5f57886710a6c6a427b1f1788adbdb8d",
+      "src/logos-engine/v6-program-respondent-observations.ts": "6e336609e2aad6f5eb710408c5baf61a34abe4592ce1102d44fd5f22f6498def",
+      "src/logos-engine/v6-program-respondent-search.ts": "a02c8259a5092ba9052064d7301276b87544f57254d51860129dd0b56785d6ee",
+      "src/logos-engine/v6-prospective-contact.ts": "6e9028332c46b3baf43a3cc78c961845df6f38b010a6dc68bbe0ece9878076fb",
+      "src/logos-engine/v6-queued-field-access.ts": "d82677b16348f56574a523d6067686df5bfe75f2bbf1c6dc98e3d98936f65364",
+      "src/logos-engine/v6-queued-field-mechanics.ts": "ad60553bc1f54719e15a0970b543214c25e0dc98ca122dbf758ce19e46e72d2e",
+      "src/logos-engine/v6-queued-field-models.ts": "1df4892fc12d56065d551e96f1477680f3b532223d592aea8ccfdddc757dfb14",
+      "src/logos-engine/v6-queued-field-observation.ts": "9ee5d548d73fa2cf117a927af9154386b83faf172df88977b5ffb2fbbbf05ce9",
+      "src/logos-engine/v6-queued-field-search.ts": "48c541067445cdb69708ecae9f8620f30bc98e6242c153d42f59be514876e509",
+      "src/logos-engine/v6-radial-port-access.ts": "1f7805d567bd08309de6d900f2faeab35d45414e31fbd33ecb825789abcc2af2",
+      "src/logos-engine/v6-radial-port-observation.ts": "a3cc820db5b92b56c9b9858d877bad5650794b987a37795014d1c1cfdd8567d3",
+      "src/logos-engine/v6-ranked-workshop-geometry.ts": "a416373924474785f561504897164f92a6f56bfde876c5ccaa8d3bca5814815e",
+      "src/logos-engine/v6-ranked-workshop-methods.ts": "4791e41b0e012c49805b55595543229e3c510879fc23ed9381ee0d3f4b49860f",
+      "src/logos-engine/v6-ranked-workshop-preparation.ts": "17a3e9f5c183b937eef7b7ee31be351221e11ed472a338f775f97e955b19db39",
+      "src/logos-engine/v6-ranked-workshop.ts": "002ea017828e0dc1304c3f0a8eeb6ff4acb66c70ff1d8ff269a917d132a18cf2",
+      "src/logos-engine/v6-ray-capture-domain.ts": "7996e8baf69eaa1748af50c45489f5cd66de7a12a3739731bfd19679267debb5",
+      "src/logos-engine/v6-reactive-contact-escape.ts": "c7488c89290a8c796059adce6be4b04c1c942de2080a5fff651ac248003a3224",
+      "src/logos-engine/v6-reactive-contact-geometry.ts": "d5f1251810e26be598a159f93d0626fbe13a1cedfe182f59ef0d37e3e0e0bf55",
+      "src/logos-engine/v6-reactive-contact-measurements.ts": "e3c5c2b984bb2138d10d33efc40ee854f89ad6401e3757948bdeeb8b592c224c",
+      "src/logos-engine/v6-reactive-contact-parent.ts": "971792f143829fa5db3dfc4626a3f780a3830c77651f7306951238148e25daf5",
+      "src/logos-engine/v6-reactive-contact-policy.ts": "ea17534bb239b8db6ea4e661f99a80f7e38888e53e49c0d660390c295838c17d",
+      "src/logos-engine/v6-reactive-contact-source81-context.ts": "b8fec2b503d8fb39d219ec149cab6650fcf46879089d79edb01c739ce2293230",
+      "src/logos-engine/v6-reactive-contact-source81-execution.ts": "4e8dc42c89b9325ba9565b2b709cd14f06877db7e4864843a0d07b9a467970e8",
+      "src/logos-engine/v6-reactive-contact-source81-measurements.ts": "36e8d6079a0d930f470a22e5777c92921eb7169eab07ca40c302f35e49ec8296",
+      "src/logos-engine/v6-reactive-contact-source81-policy.ts": "27268cd7f898b04739ad8b180b83c70c533c624a7dd43ade2818ff0bec865d1e",
+      "src/logos-engine/v6-reactive-contact-source81-projection.ts": "a5b737d29a6c2b051f85ba9de9223ffebf72f4602bd8270d99b5b4e9d43e8566",
+      "src/logos-engine/v6-reactive-contact-stationary.ts": "7be0d566f1aff231248348fd8e171a3aac1f0e3d52adb15c775886dd2cd43d88",
+      "src/logos-engine/v6-reactive-contact.ts": "2fb6259ad6d2eb81e780aaaffe50537f7649959e74778c3ebb80c6fa63c95212",
+      "src/logos-engine/v6-reasoning-memory.ts": "b55c186c99636f28c9e6e9c657b9bb50892eac06a3306be197503188069d901a",
+      "src/logos-engine/v6-reception-residual-evidence.ts": "30bbad1ffb6a285616aed59f83f22aeb083dc97c687c1d8959662e6c83174656",
+      "src/logos-engine/v6-reception-service-access.ts": "6bfb06ec5d3b06f2206c0511fa4fe27184635663f51a83235e1b2d9bc06a8c06",
+      "src/logos-engine/v6-reception-service-observation.ts": "5ba914e70bbfd86c84b40e9b0666a97bf412c0c4a4af70276e00e0dcfad463c3",
+      "src/logos-engine/v6-recurrent-series-access.ts": "f204318af580cd23cfe938feaa2cf01530fcd92e8b939306f1e5efdf9fbf6c47",
+      "src/logos-engine/v6-recurrent-series-observation.ts": "713c4a249a5b418ee41c231b8bd008ac156f00166cafe1950ff979f3391a95bd",
+      "src/logos-engine/v6-reduction-transport.ts": "da83dc004bf4fa81e079badfbb8793096429dea0159bb15c914ee921a15f4c6f",
+      "src/logos-engine/v6-reference-population-access.ts": "5806047c7db43fd0d179c5319932e63271b793148ac4477e352abef9c0d458bc",
+      "src/logos-engine/v6-reference-population-observation.ts": "eff2ab1863edbfcd074300e180508156d0732b586f63169e9bbedc07d3af2308",
+      "src/logos-engine/v6-reflected-cover.ts": "55977d7424fff5e27a4ab70da4afc97992c169fda199030856c0f63111d07a8e",
+      "src/logos-engine/v6-reflection-audit.ts": "3be81a699abc466413d479aaf92afc536f7f34612b4efa3f3bec1a40cc51e43f",
+      "src/logos-engine/v6-relational-chamber-access.ts": "8794649d437e1f772d072ba80267050801c2347125ebd6602d6898153140311a",
+      "src/logos-engine/v6-relational-chamber-observation.ts": "105fbdcad3e5fa5967c5c0de9bc912e6f868e24effb1a0be29c89940e44983d8",
+      "src/logos-engine/v6-relative-arrangements-geometry.ts": "77ef5e1b75a9b9ae683bb95fda3f667c9b6f5c849cb5d526808309ace62b84db",
+      "src/logos-engine/v6-relative-arrangements-planner.ts": "95681a2cddd92628f830058a72b6e6afe4311a0666b2ccb50e1f6677ad105b30",
+      "src/logos-engine/v6-relative-arrangements.ts": "4e283c8a8cba9f48740ae59b83edf2821f6fa505591e4d699a8c9cce9fd3917c",
+      "src/logos-engine/v6-returned-probe-scope.ts": "d397ce6172d4abdf1505569ecb15b589959c4f7e086b213d1fff586fb43a5773",
+      "src/logos-engine/v6-rigid-marker-pose.ts": "8c1f67959c4f17f51333a0eec267697332257906649e74f5dfed11a9c1371daf",
+      "src/logos-engine/v6-rooted-line-access.ts": "ae3848d565cb25e32398463649d2af0002e667dbb3c68d7b4cfd3a8dd1dd70e6",
+      "src/logos-engine/v6-rooted-line-mechanics.ts": "58d6c53dd456a1b1340cbebcdcaaca03289224bd83d352844ab69fda88bb0cd1",
+      "src/logos-engine/v6-rooted-line-observation.ts": "e27bcbd44ef862d49050aabaf1ac5a964a8a77acdda49dc24413acdb1d69b381",
+      "src/logos-engine/v6-rooted-quota-access.ts": "1ead15afeff3017b2c364a4d9e1993e38be22d205d920b251c68b8e2474e5670",
+      "src/logos-engine/v6-rooted-quota-mark-support.ts": "658f6c3679adaede14e23da0e84075925db4f4385180d8f6623b84f46b07473b",
+      "src/logos-engine/v6-rooted-quota-mechanics.ts": "75e82d04c126db12817a8a60477d8d73b8e6fda2402669551be27debe5b41667",
+      "src/logos-engine/v6-rooted-quota-observation.ts": "c2705354a7c1bf3ff2d29508f5b43d92f637b3d0e040c6433da18c9b376d34bb",
+      "src/logos-engine/v6-scored-rewrite.ts": "55969fca1910b4db246392bc80262f12de1328c50938ed31aa1ee5a2b48895ac",
+      "src/logos-engine/v6-selection-contracts.ts": "785fd2eaa6d5a89752fc636a3d169d7fec83e15b704a590f980d5e397dd9b848",
+      "src/logos-engine/v6-shared-series.ts": "d9ef976e60120b6fb3c96956a2314c2e3550d463e004dbd9856dc5eb92d44701",
+      "src/logos-engine/v6-sliding-cavity.ts": "93d614ecb1e058cba26739be9d44c2f115a51ad134055c851351a8929d6134e2",
+      "src/logos-engine/v6-slot-substitution.ts": "d9cbf60eab3d9e8672ddb5dd47b3eb8d02faccbb671b011de72a569959550424",
+      "src/logos-engine/v6-src-program.ts": "d41717575e252784a81519e8c7853853af3c2d7372b86ecb7efb3655c3e3df77",
+      "src/logos-engine/v6-subset-diagnosis.ts": "ba72f80a8ba613cc3590d8c47881555b12a048ba2379d5d5bbaa569f83af0e25",
+      "src/logos-engine/v6-support-measurements.ts": "774aa280ca0248979b1e2d362e8c11fded20be33d42fe47a1b33ffd557ea58e5",
+      "src/logos-engine/v6-support-navigation-domain.ts": "5229223b7c4a30609d933fe90d379529192599c59a915eb47e279cd0eebde324",
+      "src/logos-engine/v6-support-navigation.ts": "13c9baea9395c4b82d7512e79b57e15aa59d2d04460e16ba3087a57c611c769a",
+      "src/logos-engine/v6-supported-lines.ts": "e96c813fe2775918e585db640e97ae0b9f44a46aabece9ac315683429bd27ec5",
+      "src/logos-engine/v6-surface-program.ts": "705aae0acc4e85ab52e8255fe0b0705a3258a2dfa03dfd2f89d00af9351821e1",
+      "src/logos-engine/v6-symbol-interface.ts": "2d035f06cfdb229e2da81e7983cd57c0e634a8fcc7451826e2bfbbcae2aaf200",
+      "src/logos-engine/v6-symbol-transactions-geometry.ts": "9276c6212c53d880f2d40323019f6cb03a695e512a5cac023213172928fd845a",
+      "src/logos-engine/v6-symbol-transactions.ts": "fc4191c869196b85333cc2db847307a369033beb9fb682fc1bbc746522c4136d",
+      "src/logos-engine/v6-target-binding.ts": "c3767ea64e21422a55b5b80ed3830171805f6bfda7db5b3a81d094d344b6eb00",
+      "src/logos-engine/v6-target-method.ts": "bbee49ae3ad55ecc07148ffbb131e7f9ac8ce0847a0b1bbd6747805a992de7dd",
+      "src/logos-engine/v6-topological-recolor-geometry.ts": "c5d4e7bfa59d6898376df85d5f667e1fdb7509f210f3fafb6f29cb830da2327c",
+      "src/logos-engine/v6-topological-recolor-policy.ts": "5674fe0239311ad5902a3af0e9ce4d2fc5b403e0ab6feee6504baaca4b543c3e",
+      "src/logos-engine/v6-topological-recolor.ts": "e6858e9033eb04355b01a0212fad1c3d98efcf9b4bc3d3db2f2fd0f2a409bdb3",
+      "src/logos-engine/v6-trace-field-access.ts": "8fd096550b370f7420f6fa0f88c64ae5176583d7d9847befb9f5a35ebbd85141",
+      "src/logos-engine/v6-trace-field-mechanics.ts": "630b54efc423bac1e0e5a144894dc0175faaa65db075c40dd35d394404140c72",
+      "src/logos-engine/v6-trace-field-observation.ts": "8594ed86df8b8f94d7bfb11c11abb973d871a7ba1a9cf65363eb192ebf89428d",
+      "src/logos-engine/v6-trace-field-support.ts": "1e60f1ebc9bb9d1c21f79d74019c1d16d53f199cf811407eaae56a3284fc968f",
+      "src/logos-engine/v6-transient-contact-memory.ts": "b824a89828e2601888f266e711a03becd7694ad2eacb7198535a27f0e0d6239f",
+      "src/logos-engine/v6-transient-measurements.ts": "d63918632455bf69a835d8814cd4073163e5a9fb7013176e5cd3adfb54e4f432",
+      "src/logos-engine/v6-transition-learning.ts": "d086cfd9ad9601c8e6f8e627d8a34c1768f7408a0ea2c70fa1b2cc72a517e668",
+      "src/logos-engine/v6-typed-material-access.ts": "38912ea247930460f996673577032824967a191b5065b615a388ba80bd7e418d",
+      "src/logos-engine/v6-typed-material-composition.ts": "7e6013acc38ca0e30e327010f0b43b78a1a03c0548a466f6ffb953497c26a566",
+      "src/logos-engine/v6-typed-material-evidence.ts": "ad355976edee2a3a0bfd93c3b106d306e378aa610dace12c28f427dec19d79fd",
+      "src/logos-engine/v6-typed-material-observation.ts": "52f098e86d0103d19b246833792e9e81cb70e2bcea0179abd72e0cfda1baef3b",
+      "src/logos-engine/v6-view-frontier.ts": "b2024b93cf43f5426c3d75e90ba452205ece31c86f3bda55960627e5f00d7be3",
+      "src/logos-engine/v6-visible-box-ray.ts": "7243c2c9614fb9d5c3f6d269ef285d640e65b4f95b6a3765ef4ec60337028def",
+      "src/logos-engine/v6-visual-sequences.ts": "64927ccf8622b5c863bec64bd603f99ae096b12f6687d7548df4c19073186196",
+      "src/logos-engine/v6-word-interface.ts": "039a0a2984a9c036c29f5865b5e8dc9281d836873b064f700965485b21e6ab1a",
+      "src/logos-engine/v6/animated-contact-rules.json": "5bca3105873cd5617d017d29dc775d6ffe3b8ba9386f681b712cf16131e7bc06",
+      "src/logos-engine/v6/catalog.json": "fce784714987c370c604a09d4622ef39665948b2365c656cde80295c6c94c939",
+      "src/logos-engine/v6/framed-transfer-policy.json": "149c775c0ef5661e1d833cb61c97ff8fc179a054f1abb0b60f2676214b70c284",
+      "src/logos-engine/v6/frontier-policy.json": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f",
+      "src/logos-engine/v6/inventory-policy.json": "eb1c5839fe38e6b1849e483102d91e4d06ef3df04967a24eee71a64c8177e01a",
+      "src/logos-engine/v6/ordered-reaction-policy.json": "a65529838197f0e16f62438cd0a592886e305dab625e814ef748b4d9e781c516",
+      "src/logos-engine/v6/outline-continuation.json": "b2ac35526cf6fd60733250308823eac62107f33490655d562ea63542ed6efd4f",
+      "src/logos-engine/v6/outline-policy.json": "7844c15779e0cb984376f2ad0595430f8501565dcfe3786e73e2735a0c76bae9",
+      "src/logos-engine/v6/outline-public-context.json": "1ae9a2c82f22b1f07f5e4d22c0cc7195e6cbc4b3e43fe8b2abc830ccfd0ce270",
+      "src/logos-engine/v6/outline-recovery.json": "872b67f54d6555f8409c12a78faa3d20751444dcab22f39d7363cd29298910a0",
+      "src/logos-engine/v6/programs.json": "e006723f49460276a0753c1977ab0eabb30775409b37ba7d7af8b0b8b8527834",
+      "src/logos-engine/v6/reactive-contact-policy.json": "1fd4fab0dda3987e4a9c41af601edb51c548272654b4429184c7b2bd8a40532b",
+      "src/logos-engine/v7-runtime.ts": "fc87928c00a6cda1e3bb7d22d5411135314f2c7f4676e4495cc5e8929624729b",
+      "src/runtime/browser-games.ts": "4127cafea3717e627885f318eac9650452b7cea8dfd267f945a2af56c6e895da",
+      "src/runtime/contracts.ts": "7e3bbd9e7951b1249622961bc801bdf789fb3538a85a7fb4fdc4befccf0e48bc",
+      "src/runtime/game-worker.ts": "52f62b68c23b2c70c2b18461da042bf08f7fe44f7be068d5fc0e3e2942ac7159",
+      "src/runtime/sra-agent-protocol.ts": "0c755574e90b79202147e98c150c7167386c121b16ac8b554d98ed372e3cd131",
+      "src/runtime/sra-agent-service.ts": "e2c65fd373784b1757f04ba7439041e9f49e85e52bfeb0da80787bddaa1c8e60",
+      "src/runtime/sra-agent-worker.ts": "fa3efa5f1ff5d82dd0ad7b599961e15c68c36512e6085d7e5d7f4ea1734156a8",
+      "src/runtime/sra-agent.ts": "1127bad3109f1450e9a5b0939f2fa7d204989361229892c72e05831ecb56d64f",
+      "src/runtime/v6-agent-client.ts": "6907afe159d13966a77fe1e017bca093e8dda6a9108ace8d9f2a9a3fd356b9dd",
+      "src/runtime/v6-agent-protocol.ts": "597b4d4ab19882a37048e1fa9caeaebea2112b66e25f6294f428bb7916818aa4",
+      "src/runtime/v6-agent-service.ts": "02ce41d5e014fcc06f85371f552f949b9dfce56093afae4bc0fcb7aad2f60d96",
+      "src/runtime/v6-agent-worker.ts": "dc46fd485102080ee0fa41b559760769f2f707c7adaf8768a0b7306f308407fc",
+      "src/runtime/v6-agent.ts": "cb01061771a29a2ad59b02560431be8adc8dae0ba3933a81358ba29dcb7789af"
+    }
+  },
+  "nativeSourceAfter": {
+    "fileCount": 294,
+    "digest": "be11e761de3c0f3c7d50d10da47be9e0d7b4fc9c5b7d5002cc9272ffce85645a",
+    "files": {
+      "src/logos-engine/bounded-weak-cache.ts": "01b7df58a9425f8beb4b61ad77a994d37decf63645aa87d99f5877738b251804",
+      "src/logos-engine/bundle.ts": "e632ee85571bc3e4ab226bb3e8ebe4f67b178400fe16faedd2eb26bcff332a85",
+      "src/logos-engine/canonical.ts": "5c2884287aed82d97e7a85c905db5fb800a7e58a523c3ba128a1b61db5069cc1",
+      "src/logos-engine/create-runtime.ts": "56c62442bb09bdcda9fd388b5ee2555ff56b7771335208c1b930c304dc901a77",
+      "src/logos-engine/interpreter.ts": "fcc2aa513bc8e8d7cd5b69156eb2e246fd15327fdbc0e27db9c95f9205147d94",
+      "src/logos-engine/ir.ts": "912987119cfc47a3e6f2175643101cbd24795a289338099d0c94c0e976a3ecfc",
+      "src/logos-engine/kernel.ts": "1cac40f5f9a3356d31ae0fd5247709eb82c5f6402aae3cb68d8edc54c838f207",
+      "src/logos-engine/lab-protocol.ts": "d2cc13ebc9c0b9027ca4d279e7f0fdb193714a5d7023473cbb1a2cdfdcbdced1",
+      "src/logos-engine/lab-worker.ts": "28912219793e9d3f5183a30c0ff5c1430682a8e527bba7f45c351222b3e8c433",
+      "src/logos-engine/public-observer.ts": "be263a0f75b2b34d73d9e11a38d2a71ec4c2b443bcca4595496335b5f8103851",
+      "src/logos-engine/v5-concentric-frames.ts": "3e89e2458ae5cdc73dc7b10533c37f00e636528e88bd335fd8531ffcae1b2d52",
+      "src/logos-engine/v5-finite-relation-domain.ts": "d510633030a3c4aedbfd16e07710d00bb3f0ccbe9646796345b9a22c35f96ea6",
+      "src/logos-engine/v5-piercing-contracts.ts": "200a9d2efe1b3069b97042c0e54c2d10124e578e1285f2ce122c8c29cec3df7c",
+      "src/logos-engine/v5-piercing-plan.ts": "cba5955f1b29153827f74b0cab854c2d5e899054524f52b85aa3e25765445667",
+      "src/logos-engine/v5-reception-wait-contracts.ts": "24f9a184e1de37f577e0cbb4dcc2eb1b0c718a06a39c966e27c82b987ac2b79b",
+      "src/logos-engine/v5-reference-population-calculus.ts": "c6c502de79f48ba7e693283fa308317b07ba148bbd9a3fc93b56f611415e4996",
+      "src/logos-engine/v5-station-profile-scene.ts": "9acd29a843a3cfd60e9345b45d22cf3f9159793a6894b0a0e37c5278a07c14fa",
+      "src/logos-engine/v5-stem-reliefs.ts": "146bc4afd569c288392872e12eb424fed1e9ffcbba880602957a8a788852c428",
+      "src/logos-engine/v5-symbolic-diagrams.ts": "790cdfd116d863f047dc006a7ad518b2200d450bb60bf66a080c0fe3e95593be",
+      "src/logos-engine/v5-temporal-fragment-match.ts": "75c694cad24dae383a19a43fa925ef42e3d9943167781d626272c655ef7a57e5",
+      "src/logos-engine/v6-acquired-continuation.ts": "f076b5e04b3656470dd445d12b5a85d74f29c1f4f82880d83f26e7f0624dda97",
+      "src/logos-engine/v6-alternating-graph-access.ts": "22961c2d6f991e684daa02ff2ed3dae57ee5538b1c3820c4528afea84e221856",
+      "src/logos-engine/v6-alternating-graph-observation.ts": "3dd828b8093f2b3d5aa8164ee40c450f32f6a6ba9f001fe2e40e6aeed91de8ca",
+      "src/logos-engine/v6-alternating-graph-questions.ts": "7765ce9e630a3f96fe6eb53d8ea83f3768ba30bf5bff586895400716153aa31f",
+      "src/logos-engine/v6-animated-contact.ts": "345bea43b2537e98f18c3a598b5727425a34651e42aaedeb0b8d84a8ab4952d4",
+      "src/logos-engine/v6-arrival-mechanics.ts": "b5199c91625a8b5e72de4965292e4adfcf3e9108a9afbf22fc7c47ab605c753e",
+      "src/logos-engine/v6-attention-memory.ts": "b922090ca85bf7a4e8c0e523bbb4aadf8565fac9330da7ddcd22d42c8d07cc74",
+      "src/logos-engine/v6-auxiliary-support-continuation.ts": "07ac7f7c29c4a13e5f8fbe8079f5669a6837e47d4f8826c983167ef5ea245780",
+      "src/logos-engine/v6-auxiliary-support-preparation.ts": "8a74ed9b47754e3e9bd0370a2d6cd7c33ffe7a59f4163070362aee7b893a7345",
+      "src/logos-engine/v6-auxiliary-support.ts": "6df9c42610bb7bd0e3e86333a659fbceb8780b0003696f92c3866ff033c25bef",
+      "src/logos-engine/v6-axial-question-geometry.ts": "351bc7cbc2b53fa1ecef11fd6f6fc36664924316f88e827e008d0f0603542140",
+      "src/logos-engine/v6-axial-question-policy.ts": "1f15a3b835246e7fa227966ec23422b5c0cce06210b15427a46f9438e937dedd",
+      "src/logos-engine/v6-axial-question.ts": "9ca532ec7e625f5057e501a0225e90b4f5020fcb7d5c6568d44e5e8aa66d0480",
+      "src/logos-engine/v6-band-transfer.ts": "9a418ef2fe0563f34845e02fd182ad0414afde093bb1fcc971641a578fb800f8",
+      "src/logos-engine/v6-cavity-clock.ts": "b3da03b69e1655e98094ecef39f12e59bac353bd15a7aa49affcb31f0ca539e2",
+      "src/logos-engine/v6-cavity-kinematics.ts": "a72afe56c453515572478bd86952403391299e0f63b0ee942dec4e2157f2345e",
+      "src/logos-engine/v6-cavity-measurements.ts": "671feab5e9eda5dba9be4ead65345d6f43f5b6b8dc01b9d5d73dd4aef06302a9",
+      "src/logos-engine/v6-cell-patch-observation.ts": "c64981bb7cf091857f0ff1bea5fcc03e22c41e03d93cbde97c14ef0d34de4e12",
+      "src/logos-engine/v6-cell-placement.ts": "143086770cc753c74ef2354161c6fb1cc6e487798a56880312d70916ef7b5830",
+      "src/logos-engine/v6-code-program.ts": "dd2de515b02a331b812608b9cbf69b5ba55856e83773a070e471d7452490f70e",
+      "src/logos-engine/v6-component-matches.ts": "41d4674f343e5a1ba3d4f9e368e238ffd40c67ef5e41e74f9def8ffd6e2a739c",
+      "src/logos-engine/v6-composition-engine.ts": "c259548ad4b74b6aa9eaa589da3856469b73c4e1e1104ccfac55f00e8e1ead56",
+      "src/logos-engine/v6-composition-memory.ts": "567e69aaf134217c15101c3fc4b732df57fabeb3f51156193a82acba8d9a4cc5",
+      "src/logos-engine/v6-configured-arrivals.ts": "85228ebf0f5aaa914be9864bc08de4d7064c020f9beb2388e5aa1571a92b11d7",
+      "src/logos-engine/v6-constellation-cover.ts": "a7c1ac659e38ced3628a614e90c452c82b62b02cc9b6208aa651a7ffa6ab7e95",
+      "src/logos-engine/v6-containment.ts": "db66da09eecc18636440007b9f54ee49266e5aa018082389bcab2834376be21a",
+      "src/logos-engine/v6-contextual-compartments.ts": "07f4e9a56a8c51a75aba8d487916e6fe1a7b350872f3138223f9f1629a047687",
+      "src/logos-engine/v6-contextual-translation.ts": "e7a52a1df070fea7e16ef1e91260301fd7e7632b57944b0cd554cc09a96b4df6",
+      "src/logos-engine/v6-coupled-displays.ts": "c29561fab41c12481e41e3b2e51543b920f3ab87139840ed07a677aab053de72",
+      "src/logos-engine/v6-coupled-pair-epoch-anchor.ts": "dc7c2bb0cdf1e1ea6794339ceb209b110fc1b013e49671f8e11ac6bc4b26747f",
+      "src/logos-engine/v6-coupled-pair-evidence.ts": "eccadc2f8e0f24d98bf2bf6f2a0a879d862f6213bfbc02298d2fe28362ee5a17",
+      "src/logos-engine/v6-coupled-pair-observation.ts": "73635ee7efcc4084058a6cfa914a0db1d8c47c51abbc707056042eff76aa24ca",
+      "src/logos-engine/v6-coupled-pair-planning.ts": "6f02ece78e3ccbd28b795c29d607ea980154545ce014cf0a42f92d38dd905a5c",
+      "src/logos-engine/v6-coupled-pair-route.ts": "bf979bb8b33a798f21ffeb484579a5c9fc322be0fcbf67a16cce58fcbe7cfcd1",
+      "src/logos-engine/v6-crossed-prefix-access.ts": "1fa16f6712e281d50628a2fc6ff619d224d7f44d492f1152ce8a09a93767d162",
+      "src/logos-engine/v6-crossed-prefix-observation.ts": "b1a8808d123b66f27ea4a0b9d06eeff4e91319d91f445582c01245beb7895fbd",
+      "src/logos-engine/v6-derive.ts": "4aee722385293266f34f95bca0ab57717df1aceb1b093cce1646fc56610a4189",
+      "src/logos-engine/v6-drm-projector.ts": "d33803653b1c39ff3c38169e0a27a0d5f385e08d1e035845483b4a5b53fa598b",
+      "src/logos-engine/v6-drm-selection.ts": "8b95dc16a22257ecdd3ce4ccfa48bdad2ec21bdf24319b14c70d11c5ec01d831",
+      "src/logos-engine/v6-effect-access.ts": "7972704e27c074c8bfbc4a6db1f5f43cf04a08e2dde9da50b092ffbf41e61ec0",
+      "src/logos-engine/v6-exposed-reception-access.ts": "25083b8b5238c5fe27ba1a77c0e56798d3717fa7b983b38f44a6838f6181b8b8",
+      "src/logos-engine/v6-exposed-reception-observation.ts": "5a149e23a06a07af56dd92f32e7d0bdb1e7e9e2c8805bdc6d8e54dafac84a36a",
+      "src/logos-engine/v6-factored-return.ts": "a21a0c1adf82768fa31ef3758ec8dbedc509f4b4f9798fa05d6d5a8885b4143b",
+      "src/logos-engine/v6-feedback-sequences-finite.ts": "41c1efacc90495d269156aa33fe01e2d83054a43de7ea424b92d54eae1d67051",
+      "src/logos-engine/v6-feedback-sequences-visual.ts": "9f6b9d8d177806c3d2a6338fa88e70216f2632422ba378054a43b0467fe40e57",
+      "src/logos-engine/v6-feedback-sequences.ts": "4e5189878dac2d3013cea8c8639de109097a584e2811b23fe54338830f293276",
+      "src/logos-engine/v6-field-constraints.ts": "b7f5d309a44001ff8cfc9c292f04229f7532daa41da2cd63340fdfd57edb4fa4",
+      "src/logos-engine/v6-field-service-access.ts": "0a4846ad10b1d1cacb3be947fc72e24e39a1ab1478e41e675d7e065544e95f1a",
+      "src/logos-engine/v6-field-service-observation.ts": "6f3e57e31bd3e821129b35d0a8cf924a2edae6f349dfe7d86fdb7f12a4420a4b",
+      "src/logos-engine/v6-fixed-origin.ts": "c0ed190865b69436da80ba005775467917e826bb1f910c23c2a33f2c2fb547a6",
+      "src/logos-engine/v6-fixed-program-calculation.ts": "21e6cfeb51f1ebc8eab82dad568fc2f65c702d398279a5629118fd3fd83b5c82",
+      "src/logos-engine/v6-framed-directed-composition.ts": "42c3f405624aeb2e7569eddb657233ef5567e76aeb99d248cb0fb341284b2ab4",
+      "src/logos-engine/v6-framed-transfer-mechanics.ts": "6650a99139a47837d97916dc83c17030d27c247227f1a828336ae609e8a0e9fc",
+      "src/logos-engine/v6-framed-transfer-observation.ts": "493ecc9807cce832cf2c18e39e147a206ef1bac01f1ad804b137c2e265fc1401",
+      "src/logos-engine/v6-framed-transfer-phased-receptions.ts": "70d0dce7e7e3030adee6ad4e3e027cc73a28f0c59a4c943f575fb741ac00b991",
+      "src/logos-engine/v6-framed-transfer-policy.ts": "5b3dd25696a10c235b185b42d03bac20bf42c0cf4fe4670f9b3b2b9715052ff2",
+      "src/logos-engine/v6-framed-transfer-public-receptions.ts": "b1bca057d555814afa56030e25548541a8c7079057d6650c1cead298e1095677",
+      "src/logos-engine/v6-framed-transfer.ts": "c0c383e8177e4b286e8c94aee0f0b0a4b37e4a6bd0fddcb9ef364b57e4d2a48b",
+      "src/logos-engine/v6-framed-uniform-questions.ts": "b1f08601aab85b5dd72bb3171f8cc633fc3a2efd94c9887b67be1a0bb52f6519",
+      "src/logos-engine/v6-framed-window-access.ts": "04f1f7c6c39475da23a0f7ea211931464496d03d25c1fc650c55e90fb4fcce4d",
+      "src/logos-engine/v6-framed-window-observation.ts": "5a95763c89c4ffd8f08bd878eaa2105c8342d02b9407f1536eb666c2467ee8fb",
+      "src/logos-engine/v6-geometric-scene.ts": "2c2876afbbf615ab4b1119fcfbb484cfab22f95951ec774b1596c1562da68aba",
+      "src/logos-engine/v6-goal-access.ts": "1a52b96bf2ed27170c1c74090a814e9d955329d6e65d48d89bf53f08c532820e",
+      "src/logos-engine/v6-hash.ts": "6b86db7b533d55da900a3c65a06ec1e18547180245b3e3a2eaa837be09c669f5",
+      "src/logos-engine/v6-information-goals.ts": "7ad4f42e977c1e8b997c23d01340ec51a5b58cafb3494853de1b5987a59031b8",
+      "src/logos-engine/v6-inventory-boundary.ts": "b23845bc1638d2e0f7a796f10e2576d2be81a40f72de35c242e5072f8bab0871",
+      "src/logos-engine/v6-inventory-caller-context.ts": "617ff752c9ac5f65443bec856deb634a2c5a5d52863dad81e19828cadebf56e7",
+      "src/logos-engine/v6-inventory-context-intervention.ts": "7c0011a08ef7c4737eb0b1d2b58f0a78cdf031900cc732798526d628e5864915",
+      "src/logos-engine/v6-inventory-continuation.ts": "d2b759d364a67200c497e1c9f0ef4b741dd1fe0b5573c8f35910b60ff1910eb1",
+      "src/logos-engine/v6-inventory-contrast.ts": "a948847a87da36e84b8f166aafac32b6218c76bd453a6c4baa2252e33cbf40d2",
+      "src/logos-engine/v6-inventory-control-revalidation.ts": "53acd791199a4232d855826d4efb02c10eef75e8c2c6a4c2106d95dd2c2b7366",
+      "src/logos-engine/v6-inventory-dependencies.ts": "1ca105f969635ee87d1ec03a9ffd3ae4fcbc293e9bc9ba5325a85b42f14b23d2",
+      "src/logos-engine/v6-inventory-effect-scope.ts": "3506ad0a12efa70e9dd7e4fb6e60e67efab3d769dd4b16cdee99e0daf8575cfd",
+      "src/logos-engine/v6-inventory-endpoints.ts": "32b117812e956c3e696658930151db2ea564854bdb956f56264344424def9984",
+      "src/logos-engine/v6-inventory-initial.ts": "4c756c4c2758801df76cbde2a4a03c210d1a671dc0a5e12fa4a8ee87922f61ef",
+      "src/logos-engine/v6-inventory-local-contact.ts": "abd8b2c5c762f195158b9d47f2b9467b0add83befba4362eebf7ebb01eecb96e",
+      "src/logos-engine/v6-inventory-material-layers.ts": "c97a6ae40b33005daab059e16a3efb29e4d10b66833479a8d8a3499fc55272f7",
+      "src/logos-engine/v6-inventory-measurements.ts": "e5b873bc9e16d45d5eb0248e46d06d1ce98e0698de9d991864f75e89d7283d83",
+      "src/logos-engine/v6-inventory-policy.ts": "a9e8019e538bc252f1cd5c8e68f44d17c0d73c18205f2a8606774add757cbf6e",
+      "src/logos-engine/v6-inventory-project.ts": "42e4eaf682eab6e022aa4f6fc512c980c504e5196fc055dd8bb176a7bbbdd60f",
+      "src/logos-engine/v6-inventory-routing.ts": "d7c915933ed4795d0b7e49549444235efcf8efdda6523c43ed9e736e5d38ecb1",
+      "src/logos-engine/v6-invited-reduction.ts": "a3433583cbd83d668e736e781c8730f27cc7c337aca4ef87dd3bc22d501115c9",
+      "src/logos-engine/v6-joint-transport.ts": "8cfc3ec9ad1185d9ab2ee43e00baebcdd5f8bb4ff699f7ecd423d7cf4b7dd710",
+      "src/logos-engine/v6-knowledge-store.ts": "035d41597a5831bfa65bb1f627e3a0d05b84cc44cfda05566359873ef8c5af08",
+      "src/logos-engine/v6-labeled-sequence-access.ts": "04f478bc7ded6dbdde010a785016a82b69b742ca7313a99dcca25558ec694966",
+      "src/logos-engine/v6-labeled-sequence-composition.ts": "5a00dbb997c4aca3cea6377310afca63c5b218d5c7afe9450809bfe088f15b3c",
+      "src/logos-engine/v6-labeled-sequence-mechanics.ts": "7c8d4cd4c4569014ca41bf71c1b2bb9d9013bfc6e4489e38d6b758dafe019c41",
+      "src/logos-engine/v6-labeled-sequence-observation.ts": "7515112983485a7ede3ddde59eb072e25814b227aa2afc11d2c3fde984f7089d",
+      "src/logos-engine/v6-learned-preparation.ts": "e16351a022c6abc05f02edf5c3e2108ae7474b348ae4ae7f75dc2bcfb42d547a",
+      "src/logos-engine/v6-linked-packet-access.ts": "656caa4b9223d8af3bacd63beb7ed4ca025f74e7a4544f572a08dc1829190f6d",
+      "src/logos-engine/v6-linked-packet-numeric.ts": "5cb47676010580be49c87997a3f0f9bf2e6cb52baac9902ac59ca33d5480e820",
+      "src/logos-engine/v6-linked-packet-observation.ts": "62b264348db16ef18cc661bca78b66508ae7cfb6eb280b7a2ba1a26fc9315e41",
+      "src/logos-engine/v6-linked-packet-ray.ts": "b691ffc519104296798d65263020ad9f34390fadd7c65a8bad33c535ab9e101d",
+      "src/logos-engine/v6-linked-temporal-common.ts": "3e7111bccfefa22a67afad24cefdbc95834053eb233007f4f4ddda19f1bfe54f",
+      "src/logos-engine/v6-linked-temporal-contact.ts": "29b68e614203302e36ef731866544e35146b2b553b7d424c0e533eb38519b1b5",
+      "src/logos-engine/v6-linked-temporal-phase.ts": "d431c10a89c967b056417ba526d68907ef1ddac62b5411b51f9d70edb8c994e1",
+      "src/logos-engine/v6-linked-temporal-preparation.ts": "c85464b1162352f7c6cb329f2d2f9b6cbcc74baae616be3d643d1ac1b646aeed",
+      "src/logos-engine/v6-metric-composition.ts": "1fcfcfe780ef6599756785392159040cc7f2acfa6356376275778a58e086018d",
+      "src/logos-engine/v6-metric-stack-mechanics.ts": "a114e116a7c401f7ddfde803521990468c825684888b491c61d697c9712bb121",
+      "src/logos-engine/v6-morphology-entry.ts": "d0a1d7edd852dd22eb52d172e2933bc6b366abb156df43a14b57c3ab2784f5c4",
+      "src/logos-engine/v6-morphology-family.ts": "8a93b05951618de69c9cf26cb074fffa9dab09a8e4e9774efd1dcdad0cfc21df",
+      "src/logos-engine/v6-morphology-managed.ts": "449ed91b6e7d22e7463643326e10087bed50f8103f57eb5deb9f23e9d5834ed0",
+      "src/logos-engine/v6-morphology-measurements.ts": "e9f191007ae64c42c433183f721cd43cc9c92cd1c501c5a3c350916e348ec813",
+      "src/logos-engine/v6-morphology-policy.ts": "9ae837dceed31e0ae87c393885bd1b4979aa07c41bff198ba1045765b4fd7345",
+      "src/logos-engine/v6-motion-contrast.ts": "493c439f740643c7eb118ba72831cf090feaff7665119c11b3ab6ef9ea4a6556",
+      "src/logos-engine/v6-native-authority.ts": "f5a54ecac86fb097ee739dc6e4f8b4729819d58c9992fee92188527a1544b3ff",
+      "src/logos-engine/v6-native-caller.ts": "621aa8b5569420e12905af4c22db1be50a387e22cec0e01bc24db1695b1b917a",
+      "src/logos-engine/v6-native-interface-families.ts": "1434f49f81f5b6c8707db2dafe4f97a2dff7b54cb1b2505064d085d8bb309fe0",
+      "src/logos-engine/v6-native-observer.ts": "1a0ffa26548bf6c1ebbd22724731c2238dc24c84074885e832b671dbbe8dfe02",
+      "src/logos-engine/v6-native-owned.ts": "b4a1eeb1cf43bb04695bce8267903cd122fe778b4b938a98b1640a9ba6ee4839",
+      "src/logos-engine/v6-native-runtime.ts": "ddbe8767e813c00c0ce5e4e5008f6021151f3d81dd3d02b4a354a36ad5359644",
+      "src/logos-engine/v6-native-state-graph.ts": "b739db6d6066a06f4175b4377f0d0ae1f351b708e5d27fbdb99c9de7e6ed0b4d",
+      "src/logos-engine/v6-native-transition-domain.ts": "e96f781bed5d88204cd347b61ee87b7dd3447b3f57b2ec6a4aba2e023fbe1621",
+      "src/logos-engine/v6-native-types.ts": "6fbb3e98ba8350e4a9ec82fb4d155e635887a8a83c53a9603f8f3e7d075d0b07",
+      "src/logos-engine/v6-native-working-witness.ts": "08bca697678eb3a89960ff2ed1c49b9fc0c91082b86952be51edf0f34a1f38fb",
+      "src/logos-engine/v6-observed-derivations.ts": "c48b5601f0895c8cad913690a9216138ec08985aee4e7c7b1e7d0189964f05d6",
+      "src/logos-engine/v6-observed-frontier.ts": "c2adeb462bf5a4089af59c8141b880c9ef2ba6378d1fc5c52c33333fe564ba62",
+      "src/logos-engine/v6-observed-inventory.ts": "dcd496eecc2131acc697a119c14ac028c2cabd73c5ddb78a7f21cef1ad0ae426",
+      "src/logos-engine/v6-occluded-catalogue-access.ts": "a9682d5822103f292873d316a183d6de96bcecc85f645d2b74a60ae056f38c16",
+      "src/logos-engine/v6-occluded-catalogue-mechanics.ts": "dcb9df5d17b48b334ca02ff69526bbb94d03988972d8ab6caa02ef4645c04e3b",
+      "src/logos-engine/v6-occluded-catalogue-observation.ts": "378094537a4416c7c24755dabbe577015049f3d8e93a1e0702e5b68322f8b21a",
+      "src/logos-engine/v6-occurrence-program-observer.ts": "559f7bf2ed94031304bd483efb8ee71015f9b9787345f2a4c193f40facc9cb47",
+      "src/logos-engine/v6-occurrence-recall.ts": "ec30da66531af8d410a647209699eb14155fd9b3e4f310ab8a3d9fd39734df88",
+      "src/logos-engine/v6-occurrence-scene.ts": "ea76d01aa56f560c0ae4831ca8901ed5ee0a7d064dbc1590b547aaaebfc5447f",
+      "src/logos-engine/v6-operations.ts": "4aad959893595a1844721b93ec8897479536f95ccfa890be045656fa1e96fa06",
+      "src/logos-engine/v6-orbit-constraints.ts": "408a175132ab9869db4150dcecabb20d6eafeccfd301f12294eb6de1df57cc5f",
+      "src/logos-engine/v6-ordered-reaction-measurements.ts": "0b78801e60bdba040e72543e9d794a7cc23a226be3bf9c06bdb3693b3aa1c492",
+      "src/logos-engine/v6-ordered-reaction-policy.ts": "d8bedd6d8bb7aa9ee9bcf6ce019d26948d9bf82a45502110e4a89040ebe8cefc",
+      "src/logos-engine/v6-ordered-reaction.ts": "fd5209fc689ec4cb344a93b1f8bc462ac780a3c623607e036e0c989f0363b8de",
+      "src/logos-engine/v6-ordered-support.ts": "899d3784ac80ad83e113c8e0ad44a1b380bec5d5c6b552b66a1b7c3543b03c79",
+      "src/logos-engine/v6-oriented-coupling.ts": "c1ed7f0ed5fc62c319329fc93dbc51ddf4168c06c4abfe9b60e128480f65d94b",
+      "src/logos-engine/v6-oriented-handoff-mechanics.ts": "1e0e1392560f7afca9a7988e994da2e321e2ea2dfb8a0fcda2c67095b616b0ca",
+      "src/logos-engine/v6-outline-access.ts": "b80b1a0f5ff4792eb33318db20932b33b11c6711e8a1675cc9d693309188b0df",
+      "src/logos-engine/v6-outline-arrival.ts": "1e0be453bf1ac4c044f64bd832de17cd66925e15424ec8dee2123e05cb64833f",
+      "src/logos-engine/v6-outline-continuation.ts": "dc0f79d5e76e60d41657fcb93f12a42b3c32722fcd6498ac2b2fb360fafabbef",
+      "src/logos-engine/v6-outline-geometry.ts": "286ccd39621da1870e755d917c134177a032c76a9d5202cf0aabf94264da2ab4",
+      "src/logos-engine/v6-outline-identity.ts": "2cb39535e79fd37081f7f65e8368237f2c92b895751259534461d23e78adccfb",
+      "src/logos-engine/v6-outline-policy.ts": "82d0abedf862248c86eda8fc84e6db49c1a53ea4825ca2db32cbfbc865532c89",
+      "src/logos-engine/v6-outline-public-context.ts": "4027918a071a23baebb2082f78b732fe40d3d4102d0a7842984cd1cf49e3d0a3",
+      "src/logos-engine/v6-outline-recovery-policy.ts": "85ba7bcaba6806e1b79056032af94620360a63180b6209cbdcaa84a4289fc413",
+      "src/logos-engine/v6-outline-rejoin.ts": "186a1b55303dede0ef7af4d2909467e8cbc7ac6f31646b4f45f58c1ac86a88e4",
+      "src/logos-engine/v6-outline-service.ts": "9cea513f9a0996b81f28e1e83b074cdf302e7458abbce3527b2c954050aee628",
+      "src/logos-engine/v6-panel-service-access.ts": "163d10a0a913e1e6fd3d2a047a2d870af41d74f56ac3b4c8636e73d4da725246",
+      "src/logos-engine/v6-panel-service-observation.ts": "36c991be0e250c1b3b91b6349d8cadc32358691594e1c89f5e0cb88ca6db0c82",
+      "src/logos-engine/v6-panel-service-pattern-set.ts": "593f40d3e19cc0ef04c515d470f3d0907d597827c69c62e36d4157e14fb5022f",
+      "src/logos-engine/v6-passage-options.ts": "bf4691d0447e39263bc7f793f5b8577a63e41574a48a6a426fd5e6f3449e8d36",
+      "src/logos-engine/v6-periodic-cell-grids.ts": "8b5fb0937b896a35ee85ee8a1111e0c99dd742ec7f8da76f490434b3defd6100",
+      "src/logos-engine/v6-periodic-sums.ts": "51e3932eb2f0fc141311f8d2bd31d9a49e34c95cc12085e24a37966305bff48f",
+      "src/logos-engine/v6-point-contrasts.ts": "3984da390831630edcc8dcb78e5178d92d8d78df2941d63cd6d8409e0fd2ae90",
+      "src/logos-engine/v6-point-set.ts": "93ed8442779a022e5fd6534ea6eb140c81f08c2f010e2ad1f22a270a70af4268",
+      "src/logos-engine/v6-port-assembly.ts": "fd41bf045465287af77c5bb68497e79c97357250501bd75cfe62e166f5b5694d",
+      "src/logos-engine/v6-product-panel-access.ts": "b8a2042599366decbaabef48ef3191c8e39862cd872ed65550635c859dd81a6b",
+      "src/logos-engine/v6-product-panel-mechanics.ts": "f437f00d5af5437675dfe40e85cd2b2abe4a459b3216557237e0042b5eddc5a9",
+      "src/logos-engine/v6-product-panel-observation.ts": "197c7bcb4539a738bd18428a47342b472efc0f96ba0e886a5bcc892de67ec2e1",
+      "src/logos-engine/v6-program-composition-access.ts": "0a7c7e5b9fc8123b0c9305ce83c635e9bcfddaeb519a90f8cb9fcc9d62cbfb3b",
+      "src/logos-engine/v6-program-compositions.ts": "d204009c83c30ea52d8509334f8098cd4631efee8cd97564cdc8d474681226db",
+      "src/logos-engine/v6-program-control-discovery.ts": "bca59f32bc034fb7acc13a03f717a8f62fd5f7a88f3539e3b8980187d655599a",
+      "src/logos-engine/v6-program-current-access.ts": "5345e5b936ef3e06e0cae87f48ad6cf4e29620bd385183079032346538ce782d",
+      "src/logos-engine/v6-program-geometry.ts": "2d05fbc64dc83ef4440340193d19a08b5ee15fd40e9f39d0709f019d7fe7a0ed",
+      "src/logos-engine/v6-program-identity.ts": "28f5ef405f24d1994a55df6e7aac20b00a41ddb59f111605e104e5a55f802d35",
+      "src/logos-engine/v6-program-input-access.ts": "6d6020068c41aff129a224c37ce12267cfec968d9ccd31714a8bfa9315b4994b",
+      "src/logos-engine/v6-program-relations.ts": "f10b3831742b0b1ea245861ae662d6ab5f57886710a6c6a427b1f1788adbdb8d",
+      "src/logos-engine/v6-program-respondent-observations.ts": "6e336609e2aad6f5eb710408c5baf61a34abe4592ce1102d44fd5f22f6498def",
+      "src/logos-engine/v6-program-respondent-search.ts": "a02c8259a5092ba9052064d7301276b87544f57254d51860129dd0b56785d6ee",
+      "src/logos-engine/v6-prospective-contact.ts": "6e9028332c46b3baf43a3cc78c961845df6f38b010a6dc68bbe0ece9878076fb",
+      "src/logos-engine/v6-queued-field-access.ts": "d82677b16348f56574a523d6067686df5bfe75f2bbf1c6dc98e3d98936f65364",
+      "src/logos-engine/v6-queued-field-mechanics.ts": "ad60553bc1f54719e15a0970b543214c25e0dc98ca122dbf758ce19e46e72d2e",
+      "src/logos-engine/v6-queued-field-models.ts": "1df4892fc12d56065d551e96f1477680f3b532223d592aea8ccfdddc757dfb14",
+      "src/logos-engine/v6-queued-field-observation.ts": "9ee5d548d73fa2cf117a927af9154386b83faf172df88977b5ffb2fbbbf05ce9",
+      "src/logos-engine/v6-queued-field-search.ts": "48c541067445cdb69708ecae9f8620f30bc98e6242c153d42f59be514876e509",
+      "src/logos-engine/v6-radial-port-access.ts": "1f7805d567bd08309de6d900f2faeab35d45414e31fbd33ecb825789abcc2af2",
+      "src/logos-engine/v6-radial-port-observation.ts": "a3cc820db5b92b56c9b9858d877bad5650794b987a37795014d1c1cfdd8567d3",
+      "src/logos-engine/v6-ranked-workshop-geometry.ts": "a416373924474785f561504897164f92a6f56bfde876c5ccaa8d3bca5814815e",
+      "src/logos-engine/v6-ranked-workshop-methods.ts": "4791e41b0e012c49805b55595543229e3c510879fc23ed9381ee0d3f4b49860f",
+      "src/logos-engine/v6-ranked-workshop-preparation.ts": "17a3e9f5c183b937eef7b7ee31be351221e11ed472a338f775f97e955b19db39",
+      "src/logos-engine/v6-ranked-workshop.ts": "002ea017828e0dc1304c3f0a8eeb6ff4acb66c70ff1d8ff269a917d132a18cf2",
+      "src/logos-engine/v6-ray-capture-domain.ts": "7996e8baf69eaa1748af50c45489f5cd66de7a12a3739731bfd19679267debb5",
+      "src/logos-engine/v6-reactive-contact-escape.ts": "c7488c89290a8c796059adce6be4b04c1c942de2080a5fff651ac248003a3224",
+      "src/logos-engine/v6-reactive-contact-geometry.ts": "d5f1251810e26be598a159f93d0626fbe13a1cedfe182f59ef0d37e3e0e0bf55",
+      "src/logos-engine/v6-reactive-contact-measurements.ts": "e3c5c2b984bb2138d10d33efc40ee854f89ad6401e3757948bdeeb8b592c224c",
+      "src/logos-engine/v6-reactive-contact-parent.ts": "971792f143829fa5db3dfc4626a3f780a3830c77651f7306951238148e25daf5",
+      "src/logos-engine/v6-reactive-contact-policy.ts": "ea17534bb239b8db6ea4e661f99a80f7e38888e53e49c0d660390c295838c17d",
+      "src/logos-engine/v6-reactive-contact-source81-context.ts": "b8fec2b503d8fb39d219ec149cab6650fcf46879089d79edb01c739ce2293230",
+      "src/logos-engine/v6-reactive-contact-source81-execution.ts": "4e8dc42c89b9325ba9565b2b709cd14f06877db7e4864843a0d07b9a467970e8",
+      "src/logos-engine/v6-reactive-contact-source81-measurements.ts": "36e8d6079a0d930f470a22e5777c92921eb7169eab07ca40c302f35e49ec8296",
+      "src/logos-engine/v6-reactive-contact-source81-policy.ts": "27268cd7f898b04739ad8b180b83c70c533c624a7dd43ade2818ff0bec865d1e",
+      "src/logos-engine/v6-reactive-contact-source81-projection.ts": "a5b737d29a6c2b051f85ba9de9223ffebf72f4602bd8270d99b5b4e9d43e8566",
+      "src/logos-engine/v6-reactive-contact-stationary.ts": "7be0d566f1aff231248348fd8e171a3aac1f0e3d52adb15c775886dd2cd43d88",
+      "src/logos-engine/v6-reactive-contact.ts": "2fb6259ad6d2eb81e780aaaffe50537f7649959e74778c3ebb80c6fa63c95212",
+      "src/logos-engine/v6-reasoning-memory.ts": "b55c186c99636f28c9e6e9c657b9bb50892eac06a3306be197503188069d901a",
+      "src/logos-engine/v6-reception-residual-evidence.ts": "30bbad1ffb6a285616aed59f83f22aeb083dc97c687c1d8959662e6c83174656",
+      "src/logos-engine/v6-reception-service-access.ts": "6bfb06ec5d3b06f2206c0511fa4fe27184635663f51a83235e1b2d9bc06a8c06",
+      "src/logos-engine/v6-reception-service-observation.ts": "5ba914e70bbfd86c84b40e9b0666a97bf412c0c4a4af70276e00e0dcfad463c3",
+      "src/logos-engine/v6-recurrent-series-access.ts": "f204318af580cd23cfe938feaa2cf01530fcd92e8b939306f1e5efdf9fbf6c47",
+      "src/logos-engine/v6-recurrent-series-observation.ts": "713c4a249a5b418ee41c231b8bd008ac156f00166cafe1950ff979f3391a95bd",
+      "src/logos-engine/v6-reduction-transport.ts": "da83dc004bf4fa81e079badfbb8793096429dea0159bb15c914ee921a15f4c6f",
+      "src/logos-engine/v6-reference-population-access.ts": "5806047c7db43fd0d179c5319932e63271b793148ac4477e352abef9c0d458bc",
+      "src/logos-engine/v6-reference-population-observation.ts": "eff2ab1863edbfcd074300e180508156d0732b586f63169e9bbedc07d3af2308",
+      "src/logos-engine/v6-reflected-cover.ts": "55977d7424fff5e27a4ab70da4afc97992c169fda199030856c0f63111d07a8e",
+      "src/logos-engine/v6-reflection-audit.ts": "3be81a699abc466413d479aaf92afc536f7f34612b4efa3f3bec1a40cc51e43f",
+      "src/logos-engine/v6-relational-chamber-access.ts": "8794649d437e1f772d072ba80267050801c2347125ebd6602d6898153140311a",
+      "src/logos-engine/v6-relational-chamber-observation.ts": "105fbdcad3e5fa5967c5c0de9bc912e6f868e24effb1a0be29c89940e44983d8",
+      "src/logos-engine/v6-relative-arrangements-geometry.ts": "77ef5e1b75a9b9ae683bb95fda3f667c9b6f5c849cb5d526808309ace62b84db",
+      "src/logos-engine/v6-relative-arrangements-planner.ts": "95681a2cddd92628f830058a72b6e6afe4311a0666b2ccb50e1f6677ad105b30",
+      "src/logos-engine/v6-relative-arrangements.ts": "4e283c8a8cba9f48740ae59b83edf2821f6fa505591e4d699a8c9cce9fd3917c",
+      "src/logos-engine/v6-returned-probe-scope.ts": "d397ce6172d4abdf1505569ecb15b589959c4f7e086b213d1fff586fb43a5773",
+      "src/logos-engine/v6-rigid-marker-pose.ts": "8c1f67959c4f17f51333a0eec267697332257906649e74f5dfed11a9c1371daf",
+      "src/logos-engine/v6-rooted-line-access.ts": "ae3848d565cb25e32398463649d2af0002e667dbb3c68d7b4cfd3a8dd1dd70e6",
+      "src/logos-engine/v6-rooted-line-mechanics.ts": "58d6c53dd456a1b1340cbebcdcaaca03289224bd83d352844ab69fda88bb0cd1",
+      "src/logos-engine/v6-rooted-line-observation.ts": "e27bcbd44ef862d49050aabaf1ac5a964a8a77acdda49dc24413acdb1d69b381",
+      "src/logos-engine/v6-rooted-quota-access.ts": "1ead15afeff3017b2c364a4d9e1993e38be22d205d920b251c68b8e2474e5670",
+      "src/logos-engine/v6-rooted-quota-mark-support.ts": "658f6c3679adaede14e23da0e84075925db4f4385180d8f6623b84f46b07473b",
+      "src/logos-engine/v6-rooted-quota-mechanics.ts": "75e82d04c126db12817a8a60477d8d73b8e6fda2402669551be27debe5b41667",
+      "src/logos-engine/v6-rooted-quota-observation.ts": "c2705354a7c1bf3ff2d29508f5b43d92f637b3d0e040c6433da18c9b376d34bb",
+      "src/logos-engine/v6-scored-rewrite.ts": "55969fca1910b4db246392bc80262f12de1328c50938ed31aa1ee5a2b48895ac",
+      "src/logos-engine/v6-selection-contracts.ts": "785fd2eaa6d5a89752fc636a3d169d7fec83e15b704a590f980d5e397dd9b848",
+      "src/logos-engine/v6-shared-series.ts": "d9ef976e60120b6fb3c96956a2314c2e3550d463e004dbd9856dc5eb92d44701",
+      "src/logos-engine/v6-sliding-cavity.ts": "93d614ecb1e058cba26739be9d44c2f115a51ad134055c851351a8929d6134e2",
+      "src/logos-engine/v6-slot-substitution.ts": "d9cbf60eab3d9e8672ddb5dd47b3eb8d02faccbb671b011de72a569959550424",
+      "src/logos-engine/v6-src-program.ts": "d41717575e252784a81519e8c7853853af3c2d7372b86ecb7efb3655c3e3df77",
+      "src/logos-engine/v6-subset-diagnosis.ts": "ba72f80a8ba613cc3590d8c47881555b12a048ba2379d5d5bbaa569f83af0e25",
+      "src/logos-engine/v6-support-measurements.ts": "774aa280ca0248979b1e2d362e8c11fded20be33d42fe47a1b33ffd557ea58e5",
+      "src/logos-engine/v6-support-navigation-domain.ts": "5229223b7c4a30609d933fe90d379529192599c59a915eb47e279cd0eebde324",
+      "src/logos-engine/v6-support-navigation.ts": "13c9baea9395c4b82d7512e79b57e15aa59d2d04460e16ba3087a57c611c769a",
+      "src/logos-engine/v6-supported-lines.ts": "e96c813fe2775918e585db640e97ae0b9f44a46aabece9ac315683429bd27ec5",
+      "src/logos-engine/v6-surface-program.ts": "705aae0acc4e85ab52e8255fe0b0705a3258a2dfa03dfd2f89d00af9351821e1",
+      "src/logos-engine/v6-symbol-interface.ts": "2d035f06cfdb229e2da81e7983cd57c0e634a8fcc7451826e2bfbbcae2aaf200",
+      "src/logos-engine/v6-symbol-transactions-geometry.ts": "9276c6212c53d880f2d40323019f6cb03a695e512a5cac023213172928fd845a",
+      "src/logos-engine/v6-symbol-transactions.ts": "fc4191c869196b85333cc2db847307a369033beb9fb682fc1bbc746522c4136d",
+      "src/logos-engine/v6-target-binding.ts": "c3767ea64e21422a55b5b80ed3830171805f6bfda7db5b3a81d094d344b6eb00",
+      "src/logos-engine/v6-target-method.ts": "bbee49ae3ad55ecc07148ffbb131e7f9ac8ce0847a0b1bbd6747805a992de7dd",
+      "src/logos-engine/v6-topological-recolor-geometry.ts": "c5d4e7bfa59d6898376df85d5f667e1fdb7509f210f3fafb6f29cb830da2327c",
+      "src/logos-engine/v6-topological-recolor-policy.ts": "5674fe0239311ad5902a3af0e9ce4d2fc5b403e0ab6feee6504baaca4b543c3e",
+      "src/logos-engine/v6-topological-recolor.ts": "e6858e9033eb04355b01a0212fad1c3d98efcf9b4bc3d3db2f2fd0f2a409bdb3",
+      "src/logos-engine/v6-trace-field-access.ts": "8fd096550b370f7420f6fa0f88c64ae5176583d7d9847befb9f5a35ebbd85141",
+      "src/logos-engine/v6-trace-field-mechanics.ts": "630b54efc423bac1e0e5a144894dc0175faaa65db075c40dd35d394404140c72",
+      "src/logos-engine/v6-trace-field-observation.ts": "8594ed86df8b8f94d7bfb11c11abb973d871a7ba1a9cf65363eb192ebf89428d",
+      "src/logos-engine/v6-trace-field-support.ts": "1e60f1ebc9bb9d1c21f79d74019c1d16d53f199cf811407eaae56a3284fc968f",
+      "src/logos-engine/v6-transient-contact-memory.ts": "b824a89828e2601888f266e711a03becd7694ad2eacb7198535a27f0e0d6239f",
+      "src/logos-engine/v6-transient-measurements.ts": "d63918632455bf69a835d8814cd4073163e5a9fb7013176e5cd3adfb54e4f432",
+      "src/logos-engine/v6-transition-learning.ts": "d086cfd9ad9601c8e6f8e627d8a34c1768f7408a0ea2c70fa1b2cc72a517e668",
+      "src/logos-engine/v6-typed-material-access.ts": "38912ea247930460f996673577032824967a191b5065b615a388ba80bd7e418d",
+      "src/logos-engine/v6-typed-material-composition.ts": "7e6013acc38ca0e30e327010f0b43b78a1a03c0548a466f6ffb953497c26a566",
+      "src/logos-engine/v6-typed-material-evidence.ts": "ad355976edee2a3a0bfd93c3b106d306e378aa610dace12c28f427dec19d79fd",
+      "src/logos-engine/v6-typed-material-observation.ts": "52f098e86d0103d19b246833792e9e81cb70e2bcea0179abd72e0cfda1baef3b",
+      "src/logos-engine/v6-view-frontier.ts": "b2024b93cf43f5426c3d75e90ba452205ece31c86f3bda55960627e5f00d7be3",
+      "src/logos-engine/v6-visible-box-ray.ts": "7243c2c9614fb9d5c3f6d269ef285d640e65b4f95b6a3765ef4ec60337028def",
+      "src/logos-engine/v6-visual-sequences.ts": "64927ccf8622b5c863bec64bd603f99ae096b12f6687d7548df4c19073186196",
+      "src/logos-engine/v6-word-interface.ts": "039a0a2984a9c036c29f5865b5e8dc9281d836873b064f700965485b21e6ab1a",
+      "src/logos-engine/v6/animated-contact-rules.json": "5bca3105873cd5617d017d29dc775d6ffe3b8ba9386f681b712cf16131e7bc06",
+      "src/logos-engine/v6/catalog.json": "fce784714987c370c604a09d4622ef39665948b2365c656cde80295c6c94c939",
+      "src/logos-engine/v6/framed-transfer-policy.json": "149c775c0ef5661e1d833cb61c97ff8fc179a054f1abb0b60f2676214b70c284",
+      "src/logos-engine/v6/frontier-policy.json": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f",
+      "src/logos-engine/v6/inventory-policy.json": "eb1c5839fe38e6b1849e483102d91e4d06ef3df04967a24eee71a64c8177e01a",
+      "src/logos-engine/v6/ordered-reaction-policy.json": "a65529838197f0e16f62438cd0a592886e305dab625e814ef748b4d9e781c516",
+      "src/logos-engine/v6/outline-continuation.json": "b2ac35526cf6fd60733250308823eac62107f33490655d562ea63542ed6efd4f",
+      "src/logos-engine/v6/outline-policy.json": "7844c15779e0cb984376f2ad0595430f8501565dcfe3786e73e2735a0c76bae9",
+      "src/logos-engine/v6/outline-public-context.json": "1ae9a2c82f22b1f07f5e4d22c0cc7195e6cbc4b3e43fe8b2abc830ccfd0ce270",
+      "src/logos-engine/v6/outline-recovery.json": "872b67f54d6555f8409c12a78faa3d20751444dcab22f39d7363cd29298910a0",
+      "src/logos-engine/v6/programs.json": "e006723f49460276a0753c1977ab0eabb30775409b37ba7d7af8b0b8b8527834",
+      "src/logos-engine/v6/reactive-contact-policy.json": "1fd4fab0dda3987e4a9c41af601edb51c548272654b4429184c7b2bd8a40532b",
+      "src/logos-engine/v7-runtime.ts": "fc87928c00a6cda1e3bb7d22d5411135314f2c7f4676e4495cc5e8929624729b",
+      "src/runtime/browser-games.ts": "4127cafea3717e627885f318eac9650452b7cea8dfd267f945a2af56c6e895da",
+      "src/runtime/contracts.ts": "7e3bbd9e7951b1249622961bc801bdf789fb3538a85a7fb4fdc4befccf0e48bc",
+      "src/runtime/game-worker.ts": "52f62b68c23b2c70c2b18461da042bf08f7fe44f7be068d5fc0e3e2942ac7159",
+      "src/runtime/sra-agent-protocol.ts": "0c755574e90b79202147e98c150c7167386c121b16ac8b554d98ed372e3cd131",
+      "src/runtime/sra-agent-service.ts": "e2c65fd373784b1757f04ba7439041e9f49e85e52bfeb0da80787bddaa1c8e60",
+      "src/runtime/sra-agent-worker.ts": "fa3efa5f1ff5d82dd0ad7b599961e15c68c36512e6085d7e5d7f4ea1734156a8",
+      "src/runtime/sra-agent.ts": "1127bad3109f1450e9a5b0939f2fa7d204989361229892c72e05831ecb56d64f",
+      "src/runtime/v6-agent-client.ts": "6907afe159d13966a77fe1e017bca093e8dda6a9108ace8d9f2a9a3fd356b9dd",
+      "src/runtime/v6-agent-protocol.ts": "597b4d4ab19882a37048e1fa9caeaebea2112b66e25f6294f428bb7916818aa4",
+      "src/runtime/v6-agent-service.ts": "02ce41d5e014fcc06f85371f552f949b9dfce56093afae4bc0fcb7aad2f60d96",
+      "src/runtime/v6-agent-worker.ts": "dc46fd485102080ee0fa41b559760769f2f707c7adaf8768a0b7306f308407fc",
+      "src/runtime/v6-agent.ts": "cb01061771a29a2ad59b02560431be8adc8dae0ba3933a81358ba29dcb7789af"
+    }
+  },
+  "executionInputs": {
+    "scripts/run-released-public-regressions.py": "7988863afd2b171f31987434bb1176370be2e3afd49dead1edcdc59770d81909",
+    "scripts/run-recorded-public-regressions.py": "df19dc88ff29e78a1cb5935d445644e96cc9fb1ef90b73d802cf51868d2b2c40",
+    "scripts/compare-v54-regressions.py": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+    "scripts/replay-public-regression-released-baseline.mjs": "2ce2a0e1b8f969510373ae161156b2b163d208b4e426cb1f26218f9952b3b164",
+    "scripts/replay-v53-public-regression.mjs": "4359e008db8dadaac17f6504199ff20c752f40f1666ba527f1cd5f16df100a9e",
+    "scripts/run-v53-campaign-proof.py": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+    "tests/helpers/v6-live-game-campaign.ts": "dfc77470fe8050033cd9b13df5386e0689babac9b3d37d1c4d7b1f3d71199cb9",
+    "docs/migration/lot10a-evidence/recorded-regression-cases-site83.json": "a6514c3064b312de4c6e1a7c07d968a29805eb7dcf8f6f6f1c06302eeeef5f06",
+    "docs/migration/lot10a-evidence/integrated-final/source-manifest.json": "55b78bacc97745a6b8b1bde35156ec0f7184a6ad1cf4a637d35a81b82abec42f",
+    "scripts/run-released-public-regressions-streamlog.py": "b05b0e113c93696be45408e4c10549f2a379c22330efbddfcaa0f09cd51309b9"
+  },
+  "executionInputsAfter": {
+    "scripts/run-released-public-regressions.py": "7988863afd2b171f31987434bb1176370be2e3afd49dead1edcdc59770d81909",
+    "scripts/run-recorded-public-regressions.py": "df19dc88ff29e78a1cb5935d445644e96cc9fb1ef90b73d802cf51868d2b2c40",
+    "scripts/compare-v54-regressions.py": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+    "scripts/replay-public-regression-released-baseline.mjs": "2ce2a0e1b8f969510373ae161156b2b163d208b4e426cb1f26218f9952b3b164",
+    "scripts/replay-v53-public-regression.mjs": "4359e008db8dadaac17f6504199ff20c752f40f1666ba527f1cd5f16df100a9e",
+    "scripts/run-v53-campaign-proof.py": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+    "tests/helpers/v6-live-game-campaign.ts": "dfc77470fe8050033cd9b13df5386e0689babac9b3d37d1c4d7b1f3d71199cb9",
+    "docs/migration/lot10a-evidence/recorded-regression-cases-site83.json": "a6514c3064b312de4c6e1a7c07d968a29805eb7dcf8f6f6f1c06302eeeef5f06",
+    "docs/migration/lot10a-evidence/integrated-final/source-manifest.json": "55b78bacc97745a6b8b1bde35156ec0f7184a6ad1cf4a637d35a81b82abec42f",
+    "scripts/run-released-public-regressions-streamlog.py": "b05b0e113c93696be45408e4c10549f2a379c22330efbddfcaa0f09cd51309b9"
+  },
+  "executionInputsUnchanged": true,
+  "maximumConcurrentReplays": 1,
+  "nodeOldSpaceMiB": 1536,
+  "memoryBefore": {},
+  "memoryAfter": {},
+  "preflight": {
+    "path": "docs/migration/lot10a-evidence/integrated-final/preflight.json",
+    "sha256": "b8a90ca9f45f9a45d465f8aedabe81b29a27dd05fd8858106c177afd6d42ba42",
+    "bytes": 4384
+  },
+  "prevalidatedTotals": {
+    "commands": 292,
+    "completePublicPackets": 299,
+    "animationFrames": 1405,
+    "prefixes": 210,
+    "requests": 502,
+    "naturalLevelBoundaries": 21
+  },
+  "results": [
+    {
+      "case": "catr-site83",
+      "game": "CATR",
+      "mode": "recorded-public-replay",
+      "command": [
+        "node",
+        "--expose-gc",
+        "--max-old-space-size=1536",
+        "scripts/replay-public-regression-released-baseline.mjs",
+        "docs/migration/lot7a-evidence/integrated-final/regressions/catr-051-replay.json.gz",
+        "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-public-trace.json.gz",
+        "docs/migration/lot10a-evidence/integrated-final/regressions/catr-site83-replay.json.gz",
+        "docs/migration/lot10a-evidence/integrated-final/regressions/catr-site83-host-preparation.json"
+      ],
+      "startedAt": "2026-11-10T23:13:49.858452+00:00",
+      "timeoutSeconds": 2400,
+      "baseline": {
+        "path": "docs/migration/lot7a-evidence/integrated-final/regressions/catr-051-replay.json.gz",
+        "sha256": "29f58eb7f74b768b1fdc7e0453fc64a1ae972a54ab39f4a1fb9b2defa5e3d5aa",
+        "bytes": 1924297
+      },
+      "trace": {
+        "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-public-trace.json.gz",
+        "sha256": "e152eb2705947addd1506cb01872d23770d188cb1dd46c86dcbc9bdf7f4f2816",
+        "bytes": 24340
+      },
+      "expectedActions": 12,
+      "nodeOldSpaceMiB": 1536,
+      "preflight": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/preflight.json",
+        "sha256": "b8a90ca9f45f9a45d465f8aedabe81b29a27dd05fd8858106c177afd6d42ba42",
+        "bytes": 4384
+      },
+      "historicalReportProcessExitedBeforeNode": true,
+      "nativeSourceBeforeDigest": "be11e761de3c0f3c7d50d10da47be9e0d7b4fc9c5b7d5002cc9272ffce85645a",
+      "executionInputsBefore": {
+        "scripts/run-released-public-regressions.py": "7988863afd2b171f31987434bb1176370be2e3afd49dead1edcdc59770d81909",
+        "scripts/run-recorded-public-regressions.py": "df19dc88ff29e78a1cb5935d445644e96cc9fb1ef90b73d802cf51868d2b2c40",
+        "scripts/compare-v54-regressions.py": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+        "scripts/replay-public-regression-released-baseline.mjs": "2ce2a0e1b8f969510373ae161156b2b163d208b4e426cb1f26218f9952b3b164",
+        "scripts/replay-v53-public-regression.mjs": "4359e008db8dadaac17f6504199ff20c752f40f1666ba527f1cd5f16df100a9e",
+        "scripts/run-v53-campaign-proof.py": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+        "tests/helpers/v6-live-game-campaign.ts": "dfc77470fe8050033cd9b13df5386e0689babac9b3d37d1c4d7b1f3d71199cb9",
+        "docs/migration/lot10a-evidence/recorded-regression-cases-site83.json": "a6514c3064b312de4c6e1a7c07d968a29805eb7dcf8f6f6f1c06302eeeef5f06",
+        "docs/migration/lot10a-evidence/integrated-final/source-manifest.json": "55b78bacc97745a6b8b1bde35156ec0f7184a6ad1cf4a637d35a81b82abec42f",
+        "scripts/run-released-public-regressions-streamlog.py": "b05b0e113c93696be45408e4c10549f2a379c22330efbddfcaa0f09cd51309b9"
+      },
+      "phase": "completed",
+      "finishedAt": "2026-11-10T23:14:07.026077+00:00",
+      "exitCode": 0,
+      "timedOut": false,
+      "passed": true,
+      "nodeExitObserved": true,
+      "rawOutputPath": "docs/migration/lot10a-evidence/integrated-final/regressions/catr-site83-output.raw.log",
+      "driverPid": 21,
+      "nodePid": 23,
+      "memorySamples": [
+        {
+          "elapsedSeconds": 0.00445442899945192,
+          "pid": 23,
+          "VmSize": "112344 kB",
+          "VmHWM": "1872 kB",
+          "VmRSS": "1872 kB",
+          "Threads": "1"
+        },
+        {
+          "elapsedSeconds": 5.011244958994212,
+          "pid": 23,
+          "VmSize": "10391040 kB",
+          "VmHWM": "367260 kB",
+          "VmRSS": "367260 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 10.143199201003881,
+          "pid": 23,
+          "VmSize": "10479804 kB",
+          "VmHWM": "460640 kB",
+          "VmRSS": "460640 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 15.152306361997034,
+          "pid": 23,
+          "VmSize": "10542912 kB",
+          "VmHWM": "536448 kB",
+          "VmRSS": "524868 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 17.162412031000713,
+          "pid": 23,
+          "processPresent": false
+        }
+      ],
+      "lastObservedAt": "2026-11-10T23:14:07.023825+00:00",
+      "elapsedSeconds": 17.16495887299243,
+      "lastProgress": {
+        "status": "passed",
+        "failure": null
+      },
+      "rawOutputBytes": 39222,
+      "outputRaw": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/catr-site83-output.raw.log",
+        "sha256": "8d8a1a8b0aad34d0bc8b3a8a44923cb79edf4060e8ce6ea6e8a84cd54a68239d",
+        "bytes": 39222
+      },
+      "output": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/catr-site83-output.log.gz",
+        "sha256": "59ddc15b1d4ce4a1802870aec5803f17c96cb9068db2e294882e73d5eeeb0371",
+        "bytes": 2665
+      },
+      "startedReceipt": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/catr-site83-execution-started.json",
+        "sha256": "7d9aa475f4003f489b9b6523b3321f4baf64c90726383124a2d70e22777c3c32",
+        "bytes": 3114
+      },
+      "nodeExitedBeforeComparison": true,
+      "hostPreparation": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/catr-site83-host-preparation.json",
+        "sha256": "3c35df632630c27355c3155cf3d913831c34a340b1a204a464b62903c20c7141",
+        "bytes": 4212
+      },
+      "hostPreparationPassed": true,
+      "report": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/catr-site83-replay.json.gz",
+        "sha256": "9f9e01239502643cd886a0ae96eb95c260622a13fbe672d405ce447053c959de",
+        "bytes": 1931036
+      },
+      "status": "passed",
+      "actions": 12,
+      "prefixes": 8,
+      "final": {
+        "actions": 12,
+        "levelsCompleted": 3,
+        "level": 4,
+        "state": "NOT_FINISHED",
+        "status": "stopped",
+        "reason": "target_levels_completed",
+        "activeSeconds": 14.561106967000002,
+        "prefixes": 8,
+        "caller": {
+          "enabled": true,
+          "acquiredTransitions": 12,
+          "boundaryReplays": 2,
+          "goalEvents": 6,
+          "frontierDeltas": 25,
+          "components": {
+            "goal": {
+              "id": "caller:goal",
+              "revision": 9
+            },
+            "frontier": {
+              "id": "caller:frontier",
+              "revision": 9
+            },
+            "view": {
+              "id": "caller:view",
+              "revision": 8
+            },
+            "attention": {
+              "id": "caller:attention",
+              "revision": 1
+            },
+            "points": {
+              "id": "caller:points",
+              "revision": 7
+            },
+            "displays": {
+              "id": "caller:displays",
+              "revision": 1
+            },
+            "controls": {
+              "id": "caller:controls",
+              "revision": 9
+            },
+            "counters": {
+              "id": "caller:counters",
+              "revision": 9
+            }
+          },
+          "pendingSourceProviders": [
+            "morphology"
+          ],
+          "morphologyProvider": {
+            "status": "partial_current_measurements_control_attention_and_methods",
+            "state_owner": "family_state:morphology",
+            "motion_owner": "caller:goal",
+            "forecast_owner": "family_state:public_observed_inventory",
+            "current_decision_scope": "one_source_selection_cycle",
+            "attention_owner": "caller:attention",
+            "method_owner": "caller:counters.targetMethod",
+            "entry_return_owner": "family_state:morphology.entry_access_return",
+            "connected_methods": [
+              "retained_station_method",
+              "entry_access_return",
+              "entry_rebind",
+              "entry_probe",
+              "managed_capacity",
+              "target_extension_continuation"
+            ],
+            "pending": [
+              "complete_original_caller_parity_and_domain_closure"
+            ]
+          },
+          "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+        },
+        "fullV6Parity": false,
+        "sessions": 1,
+        "operationCounts": {
+          "init": 1,
+          "advance": 12,
+          "resume": 7
+        },
+        "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.56.0"
+      },
+      "passiveOwnerPresence": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/catr-site83-passive-owner-presence.json",
+        "sha256": "7618664fb926f6824b1f64626caf4c29996162ca2656c50bc1f5cb5a7df8e4c7",
+        "bytes": 1101
+      },
+      "passiveOwnerPresencePassed": true,
+      "passiveOwnerPrefixesChecked": 0,
+      "passiveOwnerPrefixesPassed": 0,
+      "passiveOwnerTransitionsRetained": 0,
+      "comparison": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/catr-site83-comparison.json",
+        "sha256": "622520f3f7cd7391eed6fc884fe19797f3cab145b95f006b309c15e576c8a78f",
+        "bytes": 11020
+      },
+      "comparisonPassed": true,
+      "comparisonChecks": 17,
+      "failedChecks": [],
+      "nativeSourceAfterDigest": "be11e761de3c0f3c7d50d10da47be9e0d7b4fc9c5b7d5002cc9272ffce85645a",
+      "nativeSourceUnchanged": true,
+      "immutableInputsUnchanged": true,
+      "postprocessingFinishedAt": "2026-11-10T23:14:08.062978+00:00",
+      "execution": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/catr-site83-execution.json",
+        "sha256": "2618a371888479b84417d75edbcf291d07471e8a1fdf0384bb61cad0908b2410",
+        "bytes": 8748
+      }
+    },
+    {
+      "case": "rswp-site83",
+      "game": "RSWP",
+      "mode": "recorded-public-replay",
+      "command": [
+        "node",
+        "--expose-gc",
+        "--max-old-space-size=1536",
+        "scripts/replay-public-regression-released-baseline.mjs",
+        "docs/migration/lot7a-evidence/integrated-final/regressions/rswp-051-replay.json.gz",
+        "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+        "docs/migration/lot10a-evidence/integrated-final/regressions/rswp-site83-replay.json.gz",
+        "docs/migration/lot10a-evidence/integrated-final/regressions/rswp-site83-host-preparation.json"
+      ],
+      "startedAt": "2026-11-10T23:14:08.110083+00:00",
+      "timeoutSeconds": 2400,
+      "baseline": {
+        "path": "docs/migration/lot7a-evidence/integrated-final/regressions/rswp-051-replay.json.gz",
+        "sha256": "e201922c639e6dfb19661d2a50d519166cc3eaffd21108022b0b4e878888fa21",
+        "bytes": 2990807
+      },
+      "trace": {
+        "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+        "sha256": "43f32a75b0d8cd747457602a3c3f113e5d63ec621e45bb2bc1d195f242997755",
+        "bytes": 41445
+      },
+      "expectedActions": 19,
+      "nodeOldSpaceMiB": 1536,
+      "preflight": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/preflight.json",
+        "sha256": "b8a90ca9f45f9a45d465f8aedabe81b29a27dd05fd8858106c177afd6d42ba42",
+        "bytes": 4384
+      },
+      "historicalReportProcessExitedBeforeNode": true,
+      "nativeSourceBeforeDigest": "be11e761de3c0f3c7d50d10da47be9e0d7b4fc9c5b7d5002cc9272ffce85645a",
+      "executionInputsBefore": {
+        "scripts/run-released-public-regressions.py": "7988863afd2b171f31987434bb1176370be2e3afd49dead1edcdc59770d81909",
+        "scripts/run-recorded-public-regressions.py": "df19dc88ff29e78a1cb5935d445644e96cc9fb1ef90b73d802cf51868d2b2c40",
+        "scripts/compare-v54-regressions.py": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+        "scripts/replay-public-regression-released-baseline.mjs": "2ce2a0e1b8f969510373ae161156b2b163d208b4e426cb1f26218f9952b3b164",
+        "scripts/replay-v53-public-regression.mjs": "4359e008db8dadaac17f6504199ff20c752f40f1666ba527f1cd5f16df100a9e",
+        "scripts/run-v53-campaign-proof.py": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+        "tests/helpers/v6-live-game-campaign.ts": "dfc77470fe8050033cd9b13df5386e0689babac9b3d37d1c4d7b1f3d71199cb9",
+        "docs/migration/lot10a-evidence/recorded-regression-cases-site83.json": "a6514c3064b312de4c6e1a7c07d968a29805eb7dcf8f6f6f1c06302eeeef5f06",
+        "docs/migration/lot10a-evidence/integrated-final/source-manifest.json": "55b78bacc97745a6b8b1bde35156ec0f7184a6ad1cf4a637d35a81b82abec42f",
+        "scripts/run-released-public-regressions-streamlog.py": "b05b0e113c93696be45408e4c10549f2a379c22330efbddfcaa0f09cd51309b9"
+      },
+      "phase": "completed",
+      "finishedAt": "2026-11-10T23:14:45.478387+00:00",
+      "exitCode": 0,
+      "timedOut": false,
+      "passed": true,
+      "nodeExitObserved": true,
+      "rawOutputPath": "docs/migration/lot10a-evidence/integrated-final/regressions/rswp-site83-output.raw.log",
+      "driverPid": 21,
+      "nodePid": 36,
+      "memorySamples": [
+        {
+          "elapsedSeconds": 0.0016231170011451468,
+          "pid": 36,
+          "VmSize": "112336 kB",
+          "VmHWM": "1164 kB",
+          "VmRSS": "1164 kB",
+          "Threads": "1"
+        },
+        {
+          "elapsedSeconds": 5.02034482700401,
+          "pid": 36,
+          "VmSize": "10396260 kB",
+          "VmHWM": "386536 kB",
+          "VmRSS": "377088 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 10.033319168011076,
+          "pid": 36,
+          "VmSize": "10467048 kB",
+          "VmHWM": "458432 kB",
+          "VmRSS": "454024 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 15.04449671000475,
+          "pid": 36,
+          "VmSize": "10559788 kB",
+          "VmHWM": "548632 kB",
+          "VmRSS": "547416 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 20.062065082005574,
+          "pid": 36,
+          "VmSize": "10688676 kB",
+          "VmHWM": "697552 kB",
+          "VmRSS": "677040 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 25.07156736199977,
+          "pid": 36,
+          "VmSize": "10730952 kB",
+          "VmHWM": "719604 kB",
+          "VmRSS": "719604 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 30.085313937001047,
+          "pid": 36,
+          "VmSize": "10744176 kB",
+          "VmHWM": "769924 kB",
+          "VmRSS": "733248 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 35.102317659999244,
+          "pid": 36,
+          "VmSize": "10891060 kB",
+          "VmHWM": "920104 kB",
+          "VmRSS": "880296 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 37.36385104400688,
+          "pid": 36,
+          "processPresent": false
+        }
+      ],
+      "lastObservedAt": "2026-11-10T23:14:45.475916+00:00",
+      "elapsedSeconds": 37.36655459699978,
+      "lastProgress": {
+        "status": "passed",
+        "failure": null
+      },
+      "rawOutputBytes": 55350,
+      "outputRaw": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/rswp-site83-output.raw.log",
+        "sha256": "56382254e88ef4289679e927af376a55462a60c8d2946e5bd7a643e79031941b",
+        "bytes": 55350
+      },
+      "output": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/rswp-site83-output.log.gz",
+        "sha256": "b65fbeb20dde1449aa638ade2df0a3efd367a61beaee768fba64f651d8aabafd",
+        "bytes": 3158
+      },
+      "startedReceipt": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/rswp-site83-execution-started.json",
+        "sha256": "2a3f591d1e3bf3280c6c0324fb6f047ed46f77ca6b964f1328b7f7b2be04ceb1",
+        "bytes": 3086
+      },
+      "nodeExitedBeforeComparison": true,
+      "hostPreparation": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/rswp-site83-host-preparation.json",
+        "sha256": "834c4722a88998c3c992cba5c44817c2285a15f4e7a042c189864001c6d99294",
+        "bytes": 5725
+      },
+      "hostPreparationPassed": true,
+      "report": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/rswp-site83-replay.json.gz",
+        "sha256": "d87289f4235c7b1d297b30788e442fd1440fa9fb10205ec5def1930ab02ae3c1",
+        "bytes": 2997916
+      },
+      "status": "passed",
+      "actions": 19,
+      "prefixes": 11,
+      "final": {
+        "actions": 19,
+        "levelsCompleted": 3,
+        "level": 4,
+        "state": "NOT_FINISHED",
+        "status": "stopped",
+        "reason": "target_levels_completed",
+        "activeSeconds": 28.923369687,
+        "prefixes": 11,
+        "caller": {
+          "enabled": true,
+          "acquiredTransitions": 19,
+          "boundaryReplays": 2,
+          "goalEvents": 3,
+          "frontierDeltas": 39,
+          "components": {
+            "goal": {
+              "id": "caller:goal",
+              "revision": 12
+            },
+            "frontier": {
+              "id": "caller:frontier",
+              "revision": 12
+            },
+            "view": {
+              "id": "caller:view",
+              "revision": 12
+            },
+            "attention": {
+              "id": "caller:attention",
+              "revision": 1
+            },
+            "points": {
+              "id": "caller:points",
+              "revision": 11
+            },
+            "displays": {
+              "id": "caller:displays",
+              "revision": 1
+            },
+            "controls": {
+              "id": "caller:controls",
+              "revision": 1
+            },
+            "counters": {
+              "id": "caller:counters",
+              "revision": 12
+            }
+          },
+          "pendingSourceProviders": [
+            "morphology"
+          ],
+          "morphologyProvider": {
+            "status": "partial_current_measurements_control_attention_and_methods",
+            "state_owner": "family_state:morphology",
+            "motion_owner": "caller:goal",
+            "forecast_owner": "family_state:public_observed_inventory",
+            "current_decision_scope": "one_source_selection_cycle",
+            "attention_owner": "caller:attention",
+            "method_owner": "caller:counters.targetMethod",
+            "entry_return_owner": "family_state:morphology.entry_access_return",
+            "connected_methods": [
+              "retained_station_method",
+              "entry_access_return",
+              "entry_rebind",
+              "entry_probe",
+              "managed_capacity",
+              "target_extension_continuation"
+            ],
+            "pending": [
+              "complete_original_caller_parity_and_domain_closure"
+            ]
+          },
+          "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+        },
+        "fullV6Parity": false,
+        "sessions": 1,
+        "operationCounts": {
+          "init": 1,
+          "advance": 19,
+          "resume": 10
+        },
+        "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.56.0"
+      },
+      "passiveOwnerPresence": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/rswp-site83-passive-owner-presence.json",
+        "sha256": "bf1796bc425fe0f357b418a841c877e45bdafd2de7b9b78c2b579f468366c120",
+        "bytes": 1101
+      },
+      "passiveOwnerPresencePassed": true,
+      "passiveOwnerPrefixesChecked": 0,
+      "passiveOwnerPrefixesPassed": 0,
+      "passiveOwnerTransitionsRetained": 0,
+      "comparison": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/rswp-site83-comparison.json",
+        "sha256": "690302dea04af1c5bac9932ebc8050e61465bb2790c39a5c3415961f531ca2aa",
+        "bytes": 11007
+      },
+      "comparisonPassed": true,
+      "comparisonChecks": 17,
+      "failedChecks": [],
+      "nativeSourceAfterDigest": "be11e761de3c0f3c7d50d10da47be9e0d7b4fc9c5b7d5002cc9272ffce85645a",
+      "nativeSourceUnchanged": true,
+      "immutableInputsUnchanged": true,
+      "postprocessingFinishedAt": "2026-11-10T23:14:47.434783+00:00",
+      "execution": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/rswp-site83-execution.json",
+        "sha256": "b0cad73202f8a752d310ce72c58e5e0a142ecf26586b025fa244b250a80a7baf",
+        "bytes": 9452
+      }
+    },
+    {
+      "case": "fogw-site83",
+      "game": "FOGW",
+      "mode": "recorded-public-replay",
+      "command": [
+        "node",
+        "--expose-gc",
+        "--max-old-space-size=1536",
+        "scripts/replay-public-regression-released-baseline.mjs",
+        "docs/migration/lot7a-evidence/integrated-final/regressions/fogw-051-replay.json.gz",
+        "docs/migration/lot3e-evidence/final/fogw-reception-session/fogw-public-trace.json.gz",
+        "docs/migration/lot10a-evidence/integrated-final/regressions/fogw-site83-replay.json.gz",
+        "docs/migration/lot10a-evidence/integrated-final/regressions/fogw-site83-host-preparation.json"
+      ],
+      "startedAt": "2026-11-10T23:14:47.498535+00:00",
+      "timeoutSeconds": 2400,
+      "baseline": {
+        "path": "docs/migration/lot7a-evidence/integrated-final/regressions/fogw-051-replay.json.gz",
+        "sha256": "add01b91655d718fe4ea70033948ed9b2434d9571ea0e05874d4e0532484a5b8",
+        "bytes": 9451915
+      },
+      "trace": {
+        "path": "docs/migration/lot3e-evidence/final/fogw-reception-session/fogw-public-trace.json.gz",
+        "sha256": "1d4e92e6ef063e7799bfb4237b17beb148b49bde4ab46ef26ef91a3271d44b46",
+        "bytes": 39060
+      },
+      "expectedActions": 50,
+      "nodeOldSpaceMiB": 1536,
+      "preflight": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/preflight.json",
+        "sha256": "b8a90ca9f45f9a45d465f8aedabe81b29a27dd05fd8858106c177afd6d42ba42",
+        "bytes": 4384
+      },
+      "historicalReportProcessExitedBeforeNode": true,
+      "nativeSourceBeforeDigest": "be11e761de3c0f3c7d50d10da47be9e0d7b4fc9c5b7d5002cc9272ffce85645a",
+      "executionInputsBefore": {
+        "scripts/run-released-public-regressions.py": "7988863afd2b171f31987434bb1176370be2e3afd49dead1edcdc59770d81909",
+        "scripts/run-recorded-public-regressions.py": "df19dc88ff29e78a1cb5935d445644e96cc9fb1ef90b73d802cf51868d2b2c40",
+        "scripts/compare-v54-regressions.py": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+        "scripts/replay-public-regression-released-baseline.mjs": "2ce2a0e1b8f969510373ae161156b2b163d208b4e426cb1f26218f9952b3b164",
+        "scripts/replay-v53-public-regression.mjs": "4359e008db8dadaac17f6504199ff20c752f40f1666ba527f1cd5f16df100a9e",
+        "scripts/run-v53-campaign-proof.py": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+        "tests/helpers/v6-live-game-campaign.ts": "dfc77470fe8050033cd9b13df5386e0689babac9b3d37d1c4d7b1f3d71199cb9",
+        "docs/migration/lot10a-evidence/recorded-regression-cases-site83.json": "a6514c3064b312de4c6e1a7c07d968a29805eb7dcf8f6f6f1c06302eeeef5f06",
+        "docs/migration/lot10a-evidence/integrated-final/source-manifest.json": "55b78bacc97745a6b8b1bde35156ec0f7184a6ad1cf4a637d35a81b82abec42f",
+        "scripts/run-released-public-regressions-streamlog.py": "b05b0e113c93696be45408e4c10549f2a379c22330efbddfcaa0f09cd51309b9"
+      },
+      "phase": "completed",
+      "finishedAt": "2026-11-10T23:16:33.510043+00:00",
+      "exitCode": 0,
+      "timedOut": false,
+      "passed": true,
+      "nodeExitObserved": true,
+      "rawOutputPath": "docs/migration/lot10a-evidence/integrated-final/regressions/fogw-site83-output.raw.log",
+      "driverPid": 21,
+      "nodePid": 49,
+      "memorySamples": [
+        {
+          "elapsedSeconds": 0.001491972987423651,
+          "pid": 49,
+          "VmSize": "112336 kB",
+          "VmHWM": "708 kB",
+          "VmRSS": "708 kB",
+          "Threads": "1"
+        },
+        {
+          "elapsedSeconds": 5.008988411995233,
+          "pid": 49,
+          "VmSize": "10702268 kB",
+          "VmHWM": "917484 kB",
+          "VmRSS": "675640 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 10.020082513990928,
+          "pid": 49,
+          "VmSize": "10694500 kB",
+          "VmHWM": "917484 kB",
+          "VmRSS": "670876 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 15.03067349900084,
+          "pid": 49,
+          "VmSize": "10713516 kB",
+          "VmHWM": "917484 kB",
+          "VmRSS": "690372 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 20.046949270996265,
+          "pid": 49,
+          "VmSize": "10710376 kB",
+          "VmHWM": "917484 kB",
+          "VmRSS": "687976 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 25.058465719994274,
+          "pid": 49,
+          "VmSize": "10816652 kB",
+          "VmHWM": "917484 kB",
+          "VmRSS": "795080 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 30.075676050997572,
+          "pid": 49,
+          "VmSize": "10917016 kB",
+          "VmHWM": "917484 kB",
+          "VmRSS": "895748 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 35.08996470599959,
+          "pid": 49,
+          "VmSize": "10926500 kB",
+          "VmHWM": "935760 kB",
+          "VmRSS": "905652 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 40.100762809001026,
+          "pid": 49,
+          "VmSize": "10937200 kB",
+          "VmHWM": "989068 kB",
+          "VmRSS": "916280 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 45.11061088000133,
+          "pid": 49,
+          "VmSize": "11084448 kB",
+          "VmHWM": "1063532 kB",
+          "VmRSS": "1063532 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 50.11651687599078,
+          "pid": 49,
+          "VmSize": "11046300 kB",
+          "VmHWM": "1076676 kB",
+          "VmRSS": "1025412 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 55.12839960599376,
+          "pid": 49,
+          "VmSize": "11019516 kB",
+          "VmHWM": "1098648 kB",
+          "VmRSS": "998212 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 60.142372071990394,
+          "pid": 49,
+          "VmSize": "11098368 kB",
+          "VmHWM": "1098648 kB",
+          "VmRSS": "1077488 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 65.15655863400025,
+          "pid": 49,
+          "VmSize": "11048316 kB",
+          "VmHWM": "1143740 kB",
+          "VmRSS": "1034356 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 70.16412651799328,
+          "pid": 49,
+          "VmSize": "11120320 kB",
+          "VmHWM": "1143740 kB",
+          "VmRSS": "1106696 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 75.17678786299075,
+          "pid": 49,
+          "VmSize": "11093404 kB",
+          "VmHWM": "1194700 kB",
+          "VmRSS": "1079276 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 80.18714775699482,
+          "pid": 49,
+          "VmSize": "11218124 kB",
+          "VmHWM": "1204876 kB",
+          "VmRSS": "1204876 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 85.20087327199872,
+          "pid": 49,
+          "VmSize": "11247964 kB",
+          "VmHWM": "1347152 kB",
+          "VmRSS": "1234620 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 90.21357716000057,
+          "pid": 49,
+          "VmSize": "11362500 kB",
+          "VmHWM": "1349376 kB",
+          "VmRSS": "1349376 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 95.23031128398725,
+          "pid": 49,
+          "VmSize": "11233228 kB",
+          "VmHWM": "1385620 kB",
+          "VmRSS": "1220104 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 100.24047200998757,
+          "pid": 49,
+          "VmSize": "11327904 kB",
+          "VmHWM": "1385620 kB",
+          "VmRSS": "1314784 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 105.2495043730014,
+          "pid": 49,
+          "VmSize": "11513932 kB",
+          "VmHWM": "1699076 kB",
+          "VmRSS": "1501252 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 106.00679250099347,
+          "pid": 49,
+          "processPresent": false
+        }
+      ],
+      "lastObservedAt": "2026-11-10T23:16:33.506893+00:00",
+      "elapsedSeconds": 106.01022199599538,
+      "lastProgress": {
+        "status": "passed",
+        "failure": null
+      },
+      "rawOutputBytes": 131250,
+      "outputRaw": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/fogw-site83-output.raw.log",
+        "sha256": "921823f08a50c92daf7859f0f761051ea4901d3dce60d2dbc894e6a792faf9fa",
+        "bytes": 131250
+      },
+      "output": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/fogw-site83-output.log.gz",
+        "sha256": "c9c0088249c91413d62aa483f6094a91d46db4a44ef09f3664c640ca9a5c6e0b",
+        "bytes": 5538
+      },
+      "startedReceipt": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/fogw-site83-execution-started.json",
+        "sha256": "80b5d29bbc1d6c9b58f50ebd1dcb51f7889e7e0863ffe4bd04faf81e73fbf2ac",
+        "bytes": 3090
+      },
+      "nodeExitedBeforeComparison": true,
+      "hostPreparation": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/fogw-site83-host-preparation.json",
+        "sha256": "7ee60e464b55da768f414ad74b7e37ab4e470d1386cdb89f1d2d9427f333176c",
+        "bytes": 12492
+      },
+      "hostPreparationPassed": true,
+      "report": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/fogw-site83-replay.json.gz",
+        "sha256": "49a60d7ba617ea069f06462aaea5c4fb4be60dfff84d49bb3dcb57b66d59d52b",
+        "bytes": 9475084
+      },
+      "status": "passed",
+      "actions": 50,
+      "prefixes": 27,
+      "final": {
+        "actions": 50,
+        "levelsCompleted": 3,
+        "level": 4,
+        "state": "NOT_FINISHED",
+        "status": "stopped",
+        "reason": "target_levels_completed",
+        "activeSeconds": 88.93183305800001,
+        "prefixes": 27,
+        "caller": {
+          "enabled": true,
+          "acquiredTransitions": 50,
+          "boundaryReplays": 2,
+          "goalEvents": 3,
+          "frontierDeltas": 101,
+          "components": {
+            "goal": {
+              "id": "caller:goal",
+              "revision": 28
+            },
+            "frontier": {
+              "id": "caller:frontier",
+              "revision": 28
+            },
+            "view": {
+              "id": "caller:view",
+              "revision": 28
+            },
+            "attention": {
+              "id": "caller:attention",
+              "revision": 1
+            },
+            "points": {
+              "id": "caller:points",
+              "revision": 22
+            },
+            "displays": {
+              "id": "caller:displays",
+              "revision": 1
+            },
+            "controls": {
+              "id": "caller:controls",
+              "revision": 1
+            },
+            "counters": {
+              "id": "caller:counters",
+              "revision": 28
+            }
+          },
+          "pendingSourceProviders": [
+            "morphology"
+          ],
+          "morphologyProvider": {
+            "status": "partial_current_measurements_control_attention_and_methods",
+            "state_owner": "family_state:morphology",
+            "motion_owner": "caller:goal",
+            "forecast_owner": "family_state:public_observed_inventory",
+            "current_decision_scope": "one_source_selection_cycle",
+            "attention_owner": "caller:attention",
+            "method_owner": "caller:counters.targetMethod",
+            "entry_return_owner": "family_state:morphology.entry_access_return",
+            "connected_methods": [
+              "retained_station_method",
+              "entry_access_return",
+              "entry_rebind",
+              "entry_probe",
+              "managed_capacity",
+              "target_extension_continuation"
+            ],
+            "pending": [
+              "complete_original_caller_parity_and_domain_closure"
+            ]
+          },
+          "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+        },
+        "fullV6Parity": false,
+        "sessions": 1,
+        "operationCounts": {
+          "init": 1,
+          "advance": 50,
+          "resume": 26
+        },
+        "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.56.0"
+      },
+      "passiveOwnerPresence": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/fogw-site83-passive-owner-presence.json",
+        "sha256": "2af9e593336e8dda20c480e048287b3ee2935596f87b29b71b80a044acf3e238",
+        "bytes": 1101
+      },
+      "passiveOwnerPresencePassed": true,
+      "passiveOwnerPrefixesChecked": 0,
+      "passiveOwnerPrefixesPassed": 0,
+      "passiveOwnerTransitionsRetained": 0,
+      "comparison": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/fogw-site83-comparison.json",
+        "sha256": "06e7f207d5325cab1119ad6c4cdcbdfdaed84a5c0fec5c3a4c64e4e6668379fa",
+        "bytes": 11009
+      },
+      "comparisonPassed": true,
+      "comparisonChecks": 17,
+      "failedChecks": [],
+      "nativeSourceAfterDigest": "be11e761de3c0f3c7d50d10da47be9e0d7b4fc9c5b7d5002cc9272ffce85645a",
+      "nativeSourceUnchanged": true,
+      "immutableInputsUnchanged": true,
+      "postprocessingFinishedAt": "2026-11-10T23:16:39.019091+00:00",
+      "execution": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/fogw-site83-execution.json",
+        "sha256": "15327eae7a8af823a9293cd4f2be932000967e589e35c9989a5163f8aa6b8036",
+        "bytes": 12041
+      }
+    },
+    {
+      "case": "vois-site83",
+      "game": "VOIS",
+      "mode": "recorded-public-replay",
+      "command": [
+        "node",
+        "--expose-gc",
+        "--max-old-space-size=1536",
+        "scripts/replay-public-regression-released-baseline.mjs",
+        "docs/migration/lot7a-evidence/integrated-final/regressions/vois-051-replay.json.gz",
+        "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+        "docs/migration/lot10a-evidence/integrated-final/regressions/vois-site83-replay.json.gz",
+        "docs/migration/lot10a-evidence/integrated-final/regressions/vois-site83-host-preparation.json"
+      ],
+      "startedAt": "2026-11-10T23:16:39.068568+00:00",
+      "timeoutSeconds": 2400,
+      "baseline": {
+        "path": "docs/migration/lot7a-evidence/integrated-final/regressions/vois-051-replay.json.gz",
+        "sha256": "add92f05b526b0ed4b760488282285f86173f618d139af1b86d7ca70a149d249",
+        "bytes": 12325381
+      },
+      "trace": {
+        "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+        "sha256": "d642c805485571c0e54ed3421644cbd8463ca3697ce135b223f635487b58069d",
+        "bytes": 19976
+      },
+      "expectedActions": 78,
+      "nodeOldSpaceMiB": 1536,
+      "preflight": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/preflight.json",
+        "sha256": "b8a90ca9f45f9a45d465f8aedabe81b29a27dd05fd8858106c177afd6d42ba42",
+        "bytes": 4384
+      },
+      "historicalReportProcessExitedBeforeNode": true,
+      "nativeSourceBeforeDigest": "be11e761de3c0f3c7d50d10da47be9e0d7b4fc9c5b7d5002cc9272ffce85645a",
+      "executionInputsBefore": {
+        "scripts/run-released-public-regressions.py": "7988863afd2b171f31987434bb1176370be2e3afd49dead1edcdc59770d81909",
+        "scripts/run-recorded-public-regressions.py": "df19dc88ff29e78a1cb5935d445644e96cc9fb1ef90b73d802cf51868d2b2c40",
+        "scripts/compare-v54-regressions.py": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+        "scripts/replay-public-regression-released-baseline.mjs": "2ce2a0e1b8f969510373ae161156b2b163d208b4e426cb1f26218f9952b3b164",
+        "scripts/replay-v53-public-regression.mjs": "4359e008db8dadaac17f6504199ff20c752f40f1666ba527f1cd5f16df100a9e",
+        "scripts/run-v53-campaign-proof.py": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+        "tests/helpers/v6-live-game-campaign.ts": "dfc77470fe8050033cd9b13df5386e0689babac9b3d37d1c4d7b1f3d71199cb9",
+        "docs/migration/lot10a-evidence/recorded-regression-cases-site83.json": "a6514c3064b312de4c6e1a7c07d968a29805eb7dcf8f6f6f1c06302eeeef5f06",
+        "docs/migration/lot10a-evidence/integrated-final/source-manifest.json": "55b78bacc97745a6b8b1bde35156ec0f7184a6ad1cf4a637d35a81b82abec42f",
+        "scripts/run-released-public-regressions-streamlog.py": "b05b0e113c93696be45408e4c10549f2a379c22330efbddfcaa0f09cd51309b9"
+      },
+      "phase": "completed",
+      "finishedAt": "2026-11-10T23:19:20.753420+00:00",
+      "exitCode": 0,
+      "timedOut": false,
+      "passed": true,
+      "nodeExitObserved": true,
+      "rawOutputPath": "docs/migration/lot10a-evidence/integrated-final/regressions/vois-site83-output.raw.log",
+      "driverPid": 21,
+      "nodePid": 62,
+      "memorySamples": [
+        {
+          "elapsedSeconds": 0.0014744979998795316,
+          "pid": 62,
+          "VmSize": "112336 kB",
+          "VmHWM": "968 kB",
+          "VmRSS": "968 kB",
+          "Threads": "1"
+        },
+        {
+          "elapsedSeconds": 5.00792180399003,
+          "pid": 62,
+          "VmSize": "10863356 kB",
+          "VmHWM": "1009548 kB",
+          "VmRSS": "844480 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 10.019142406992614,
+          "pid": 62,
+          "VmSize": "10867532 kB",
+          "VmHWM": "1009548 kB",
+          "VmRSS": "851944 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 15.035574446999817,
+          "pid": 62,
+          "VmSize": "10875704 kB",
+          "VmHWM": "1009548 kB",
+          "VmRSS": "861084 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 20.05310061899945,
+          "pid": 62,
+          "VmSize": "10880248 kB",
+          "VmHWM": "1009548 kB",
+          "VmRSS": "866228 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 25.06275537298643,
+          "pid": 62,
+          "VmSize": "10894588 kB",
+          "VmHWM": "1009548 kB",
+          "VmRSS": "880516 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 30.080870471996604,
+          "pid": 62,
+          "VmSize": "10885688 kB",
+          "VmHWM": "1009548 kB",
+          "VmRSS": "871752 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 35.101666680988274,
+          "pid": 62,
+          "VmSize": "10899672 kB",
+          "VmHWM": "1009548 kB",
+          "VmRSS": "886136 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 40.10749582698918,
+          "pid": 62,
+          "VmSize": "10908316 kB",
+          "VmHWM": "1009548 kB",
+          "VmRSS": "894524 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 45.11819684499642,
+          "pid": 62,
+          "VmSize": "11051208 kB",
+          "VmHWM": "1037528 kB",
+          "VmRSS": "1037528 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 50.127116183997714,
+          "pid": 62,
+          "VmSize": "11077988 kB",
+          "VmHWM": "1103476 kB",
+          "VmRSS": "1064236 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 55.13568488598685,
+          "pid": 62,
+          "VmSize": "11107560 kB",
+          "VmHWM": "1197496 kB",
+          "VmRSS": "1094044 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 60.14400669799943,
+          "pid": 62,
+          "VmSize": "11180044 kB",
+          "VmHWM": "1197496 kB",
+          "VmRSS": "1166732 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 65.15084014399326,
+          "pid": 62,
+          "VmSize": "11168080 kB",
+          "VmHWM": "1278168 kB",
+          "VmRSS": "1160260 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 70.16750783799216,
+          "pid": 62,
+          "VmSize": "11266448 kB",
+          "VmHWM": "1278168 kB",
+          "VmRSS": "1258668 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 75.18161371699534,
+          "pid": 62,
+          "VmSize": "11169604 kB",
+          "VmHWM": "1294472 kB",
+          "VmRSS": "1162584 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 80.19618273399828,
+          "pid": 62,
+          "VmSize": "11244948 kB",
+          "VmHWM": "1294472 kB",
+          "VmRSS": "1238128 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 85.21541453799,
+          "pid": 62,
+          "VmSize": "11257808 kB",
+          "VmHWM": "1353328 kB",
+          "VmRSS": "1250744 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 90.22443667499465,
+          "pid": 62,
+          "VmSize": "11383572 kB",
+          "VmHWM": "1378308 kB",
+          "VmRSS": "1376748 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 95.2345563719864,
+          "pid": 62,
+          "VmSize": "11302392 kB",
+          "VmHWM": "1379756 kB",
+          "VmRSS": "1296436 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 100.24566087199491,
+          "pid": 62,
+          "VmSize": "11325584 kB",
+          "VmHWM": "1427208 kB",
+          "VmRSS": "1319368 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 105.25886221999826,
+          "pid": 62,
+          "VmSize": "11412384 kB",
+          "VmHWM": "1427208 kB",
+          "VmRSS": "1406336 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 110.26735950699367,
+          "pid": 62,
+          "VmSize": "11362956 kB",
+          "VmHWM": "1466304 kB",
+          "VmRSS": "1356500 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 115.27528258098755,
+          "pid": 62,
+          "VmSize": "11461608 kB",
+          "VmHWM": "1466304 kB",
+          "VmRSS": "1457532 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 120.28490584599786,
+          "pid": 62,
+          "VmSize": "11401676 kB",
+          "VmHWM": "1468752 kB",
+          "VmRSS": "1397604 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 125.2943160119903,
+          "pid": 62,
+          "VmSize": "11472796 kB",
+          "VmHWM": "1468752 kB",
+          "VmRSS": "1468724 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 130.3084725989902,
+          "pid": 62,
+          "VmSize": "11403804 kB",
+          "VmHWM": "1468752 kB",
+          "VmRSS": "1399960 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 135.33075732599536,
+          "pid": 62,
+          "VmSize": "11352944 kB",
+          "VmHWM": "1468752 kB",
+          "VmRSS": "1349100 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 140.34511927199492,
+          "pid": 62,
+          "VmSize": "11429544 kB",
+          "VmHWM": "1468752 kB",
+          "VmRSS": "1425704 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 145.35730345099,
+          "pid": 62,
+          "VmSize": "11433160 kB",
+          "VmHWM": "1468752 kB",
+          "VmRSS": "1429320 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 150.36926627499633,
+          "pid": 62,
+          "VmSize": "11447772 kB",
+          "VmHWM": "1488500 kB",
+          "VmRSS": "1443592 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 155.40513770798862,
+          "pid": 62,
+          "VmSize": "11402532 kB",
+          "VmHWM": "1492036 kB",
+          "VmRSS": "1398468 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 160.4245917359949,
+          "pid": 62,
+          "VmSize": "11401844 kB",
+          "VmHWM": "1899544 kB",
+          "VmRSS": "1206460 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 161.6799786289921,
+          "pid": 62,
+          "processPresent": false
+        }
+      ],
+      "lastObservedAt": "2026-11-10T23:19:20.750277+00:00",
+      "elapsedSeconds": 161.6833996619971,
+      "lastProgress": {
+        "status": "passed",
+        "failure": null
+      },
+      "rawOutputBytes": 200763,
+      "outputRaw": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/vois-site83-output.raw.log",
+        "sha256": "8ec114c5088b0593bec245ac58295b717d402be3d1c8d40be52e58e5113d4da1",
+        "bytes": 200763
+      },
+      "output": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/vois-site83-output.log.gz",
+        "sha256": "2b8e851edabf7dfd7a4dc1bb51ebae7249a4e04bc7c5674ea3a789d12ecc3bb2",
+        "bytes": 7629
+      },
+      "startedReceipt": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/vois-site83-execution-started.json",
+        "sha256": "d8590c49b92c2fd01efd343d78da0727bd881dc669916f6fdec30e972f71c722",
+        "bytes": 3093
+      },
+      "nodeExitedBeforeComparison": true,
+      "hostPreparation": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/vois-site83-host-preparation.json",
+        "sha256": "87d63313d457cd36fa442a8f6b8e245b14490eaa5cff76c4712bd2d19ccdb43e",
+        "bytes": 18598
+      },
+      "hostPreparationPassed": true,
+      "report": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/vois-site83-replay.json.gz",
+        "sha256": "262ee2053fca5c355fb0cdeddf5510db4a1d783f30137ded44b5497cf89c8c16",
+        "bytes": 12352513
+      },
+      "status": "passed",
+      "actions": 78,
+      "prefixes": 42,
+      "final": {
+        "actions": 78,
+        "levelsCompleted": 3,
+        "level": 4,
+        "state": "NOT_FINISHED",
+        "status": "stopped",
+        "reason": "target_levels_completed",
+        "activeSeconds": 133.02813409500015,
+        "prefixes": 42,
+        "caller": {
+          "enabled": true,
+          "acquiredTransitions": 78,
+          "boundaryReplays": 2,
+          "goalEvents": 3,
+          "frontierDeltas": 157,
+          "components": {
+            "goal": {
+              "id": "caller:goal",
+              "revision": 43
+            },
+            "frontier": {
+              "id": "caller:frontier",
+              "revision": 43
+            },
+            "view": {
+              "id": "caller:view",
+              "revision": 34
+            },
+            "attention": {
+              "id": "caller:attention",
+              "revision": 1
+            },
+            "points": {
+              "id": "caller:points",
+              "revision": 30
+            },
+            "displays": {
+              "id": "caller:displays",
+              "revision": 1
+            },
+            "controls": {
+              "id": "caller:controls",
+              "revision": 27
+            },
+            "counters": {
+              "id": "caller:counters",
+              "revision": 43
+            }
+          },
+          "pendingSourceProviders": [
+            "morphology"
+          ],
+          "morphologyProvider": {
+            "status": "partial_current_measurements_control_attention_and_methods",
+            "state_owner": "family_state:morphology",
+            "motion_owner": "caller:goal",
+            "forecast_owner": "family_state:public_observed_inventory",
+            "current_decision_scope": "one_source_selection_cycle",
+            "attention_owner": "caller:attention",
+            "method_owner": "caller:counters.targetMethod",
+            "entry_return_owner": "family_state:morphology.entry_access_return",
+            "connected_methods": [
+              "retained_station_method",
+              "entry_access_return",
+              "entry_rebind",
+              "entry_probe",
+              "managed_capacity",
+              "target_extension_continuation"
+            ],
+            "pending": [
+              "complete_original_caller_parity_and_domain_closure"
+            ]
+          },
+          "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+        },
+        "fullV6Parity": false,
+        "sessions": 1,
+        "operationCounts": {
+          "init": 1,
+          "advance": 78,
+          "resume": 41
+        },
+        "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.56.0"
+      },
+      "passiveOwnerPresence": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/vois-site83-passive-owner-presence.json",
+        "sha256": "cf5b2a04218a3e4ec7638133cba8b01ec9079dee43235ce292c7fba779b03ca4",
+        "bytes": 1102
+      },
+      "passiveOwnerPresencePassed": true,
+      "passiveOwnerPrefixesChecked": 0,
+      "passiveOwnerPrefixesPassed": 0,
+      "passiveOwnerTransitionsRetained": 0,
+      "comparison": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/vois-site83-comparison.json",
+        "sha256": "ba52c4edf5da7a1da4f01b93d0aa3343fe805029027610e8fff9bcdab47792e1",
+        "bytes": 11012
+      },
+      "comparisonPassed": true,
+      "comparisonChecks": 17,
+      "failedChecks": [],
+      "nativeSourceAfterDigest": "be11e761de3c0f3c7d50d10da47be9e0d7b4fc9c5b7d5002cc9272ffce85645a",
+      "nativeSourceUnchanged": true,
+      "immutableInputsUnchanged": true,
+      "postprocessingFinishedAt": "2026-11-10T23:19:27.065006+00:00",
+      "execution": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/vois-site83-execution.json",
+        "sha256": "919094aff36085a832b09823a854df0449575a8087f4fa0aaf83764bbd2146f0",
+        "bytes": 14079
+      }
+    },
+    {
+      "case": "weav-site83",
+      "game": "WEAV",
+      "mode": "recorded-public-replay",
+      "command": [
+        "node",
+        "--expose-gc",
+        "--max-old-space-size=1536",
+        "scripts/replay-public-regression-released-baseline.mjs",
+        "docs/migration/lot7a-evidence/integrated-final/regressions/weav-051-replay.json.gz",
+        "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+        "docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-replay.json.gz",
+        "docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-host-preparation.json"
+      ],
+      "startedAt": "2026-11-10T23:19:27.101108+00:00",
+      "timeoutSeconds": 2400,
+      "baseline": {
+        "path": "docs/migration/lot7a-evidence/integrated-final/regressions/weav-051-replay.json.gz",
+        "sha256": "b7340c28c16b52f45ac06cca5bcc66b6fcb6d15e03e33fb9e30108228729fe02",
+        "bytes": 15387477
+      },
+      "trace": {
+        "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+        "sha256": "a46f6a331e8f98767ee709c2931edd6d0abde9cc636b93ef384509c04adface2",
+        "bytes": 26568
+      },
+      "expectedActions": 81,
+      "nodeOldSpaceMiB": 1536,
+      "preflight": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/preflight.json",
+        "sha256": "b8a90ca9f45f9a45d465f8aedabe81b29a27dd05fd8858106c177afd6d42ba42",
+        "bytes": 4384
+      },
+      "historicalReportProcessExitedBeforeNode": true,
+      "nativeSourceBeforeDigest": "be11e761de3c0f3c7d50d10da47be9e0d7b4fc9c5b7d5002cc9272ffce85645a",
+      "executionInputsBefore": {
+        "scripts/run-released-public-regressions.py": "7988863afd2b171f31987434bb1176370be2e3afd49dead1edcdc59770d81909",
+        "scripts/run-recorded-public-regressions.py": "df19dc88ff29e78a1cb5935d445644e96cc9fb1ef90b73d802cf51868d2b2c40",
+        "scripts/compare-v54-regressions.py": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+        "scripts/replay-public-regression-released-baseline.mjs": "2ce2a0e1b8f969510373ae161156b2b163d208b4e426cb1f26218f9952b3b164",
+        "scripts/replay-v53-public-regression.mjs": "4359e008db8dadaac17f6504199ff20c752f40f1666ba527f1cd5f16df100a9e",
+        "scripts/run-v53-campaign-proof.py": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+        "tests/helpers/v6-live-game-campaign.ts": "dfc77470fe8050033cd9b13df5386e0689babac9b3d37d1c4d7b1f3d71199cb9",
+        "docs/migration/lot10a-evidence/recorded-regression-cases-site83.json": "a6514c3064b312de4c6e1a7c07d968a29805eb7dcf8f6f6f1c06302eeeef5f06",
+        "docs/migration/lot10a-evidence/integrated-final/source-manifest.json": "55b78bacc97745a6b8b1bde35156ec0f7184a6ad1cf4a637d35a81b82abec42f",
+        "scripts/run-released-public-regressions-streamlog.py": "b05b0e113c93696be45408e4c10549f2a379c22330efbddfcaa0f09cd51309b9"
+      },
+      "phase": "completed",
+      "finishedAt": "2026-11-10T23:23:46.424886+00:00",
+      "exitCode": 0,
+      "timedOut": false,
+      "passed": true,
+      "nodeExitObserved": true,
+      "rawOutputPath": "docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-output.raw.log",
+      "driverPid": 21,
+      "nodePid": 75,
+      "memorySamples": [
+        {
+          "elapsedSeconds": 0.0014862149982945994,
+          "pid": 75,
+          "VmSize": "112336 kB",
+          "VmHWM": "1272 kB",
+          "VmRSS": "1272 kB",
+          "Threads": "1"
+        },
+        {
+          "elapsedSeconds": 5.014504537000903,
+          "pid": 75,
+          "VmSize": "11054364 kB",
+          "VmHWM": "1242132 kB",
+          "VmRSS": "1036196 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 10.022667818004265,
+          "pid": 75,
+          "VmSize": "11047460 kB",
+          "VmHWM": "1242132 kB",
+          "VmRSS": "1058088 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 15.03135632899648,
+          "pid": 75,
+          "VmSize": "11057936 kB",
+          "VmHWM": "1242132 kB",
+          "VmRSS": "1069164 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 20.042598903004546,
+          "pid": 75,
+          "VmSize": "11093760 kB",
+          "VmHWM": "1242132 kB",
+          "VmRSS": "1105492 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 25.049633021000773,
+          "pid": 75,
+          "VmSize": "11066168 kB",
+          "VmHWM": "1242132 kB",
+          "VmRSS": "1078136 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 30.057598458995926,
+          "pid": 75,
+          "VmSize": "11078928 kB",
+          "VmHWM": "1242132 kB",
+          "VmRSS": "1091300 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 35.068644629005576,
+          "pid": 75,
+          "VmSize": "11096608 kB",
+          "VmHWM": "1242132 kB",
+          "VmRSS": "1108944 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 40.07725979700626,
+          "pid": 75,
+          "VmSize": "11105560 kB",
+          "VmHWM": "1242132 kB",
+          "VmRSS": "1117948 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 45.09093947999645,
+          "pid": 75,
+          "VmSize": "11135428 kB",
+          "VmHWM": "1242132 kB",
+          "VmRSS": "1147828 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 50.106079254997894,
+          "pid": 75,
+          "VmSize": "11093560 kB",
+          "VmHWM": "1242132 kB",
+          "VmRSS": "1106192 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 55.1201596710016,
+          "pid": 75,
+          "VmSize": "11153952 kB",
+          "VmHWM": "1242132 kB",
+          "VmRSS": "1166684 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 60.13221931600128,
+          "pid": 75,
+          "VmSize": "11147728 kB",
+          "VmHWM": "1242132 kB",
+          "VmRSS": "1159676 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 65.14180392799608,
+          "pid": 75,
+          "VmSize": "11205872 kB",
+          "VmHWM": "1242132 kB",
+          "VmRSS": "1218244 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 70.14836045399716,
+          "pid": 75,
+          "VmSize": "11185876 kB",
+          "VmHWM": "1242132 kB",
+          "VmRSS": "1198192 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 75.18402668699855,
+          "pid": 75,
+          "VmSize": "11175736 kB",
+          "VmHWM": "1250228 kB",
+          "VmRSS": "1188516 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 80.19954347399471,
+          "pid": 75,
+          "VmSize": "11291216 kB",
+          "VmHWM": "1304364 kB",
+          "VmRSS": "1304364 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 85.20661394900526,
+          "pid": 75,
+          "VmSize": "11285640 kB",
+          "VmHWM": "1369116 kB",
+          "VmRSS": "1298916 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 90.22064167600183,
+          "pid": 75,
+          "VmSize": "11344188 kB",
+          "VmHWM": "1369116 kB",
+          "VmRSS": "1357488 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 95.22972906600626,
+          "pid": 75,
+          "VmSize": "11331500 kB",
+          "VmHWM": "1419216 kB",
+          "VmRSS": "1344580 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 100.23886663299345,
+          "pid": 75,
+          "VmSize": "11467788 kB",
+          "VmHWM": "1481220 kB",
+          "VmRSS": "1481220 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 105.24682922799548,
+          "pid": 75,
+          "VmSize": "11401916 kB",
+          "VmHWM": "1481520 kB",
+          "VmRSS": "1415436 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 110.26096040400444,
+          "pid": 75,
+          "VmSize": "11398740 kB",
+          "VmHWM": "1502216 kB",
+          "VmRSS": "1411960 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 115.27179695300583,
+          "pid": 75,
+          "VmSize": "11367180 kB",
+          "VmHWM": "1502216 kB",
+          "VmRSS": "1380796 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 120.28005501099688,
+          "pid": 75,
+          "VmSize": "11469984 kB",
+          "VmHWM": "1502216 kB",
+          "VmRSS": "1483688 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 125.28703010600293,
+          "pid": 75,
+          "VmSize": "11451928 kB",
+          "VmHWM": "1553860 kB",
+          "VmRSS": "1465612 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 130.29954323900165,
+          "pid": 75,
+          "VmSize": "11475544 kB",
+          "VmHWM": "1553860 kB",
+          "VmRSS": "1489392 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 135.30506285099545,
+          "pid": 75,
+          "VmSize": "11438272 kB",
+          "VmHWM": "1555852 kB",
+          "VmRSS": "1452224 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 140.31129479200172,
+          "pid": 75,
+          "VmSize": "11528108 kB",
+          "VmHWM": "1555852 kB",
+          "VmRSS": "1541920 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 145.3306332009961,
+          "pid": 75,
+          "VmSize": "11528484 kB",
+          "VmHWM": "1590992 kB",
+          "VmRSS": "1542484 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 150.3419812840002,
+          "pid": 75,
+          "VmSize": "11528652 kB",
+          "VmHWM": "1590992 kB",
+          "VmRSS": "1542524 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 155.34792105300585,
+          "pid": 75,
+          "VmSize": "11466408 kB",
+          "VmHWM": "1590992 kB",
+          "VmRSS": "1480280 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 160.3618451700022,
+          "pid": 75,
+          "VmSize": "11571628 kB",
+          "VmHWM": "1590992 kB",
+          "VmRSS": "1585536 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 165.36914478099789,
+          "pid": 75,
+          "VmSize": "11523512 kB",
+          "VmHWM": "1596416 kB",
+          "VmRSS": "1537336 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 170.3839023009932,
+          "pid": 75,
+          "VmSize": "11518652 kB",
+          "VmHWM": "1596416 kB",
+          "VmRSS": "1532548 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 175.39187467900047,
+          "pid": 75,
+          "VmSize": "11470520 kB",
+          "VmHWM": "1596416 kB",
+          "VmRSS": "1484776 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 180.4002851719997,
+          "pid": 75,
+          "VmSize": "11478840 kB",
+          "VmHWM": "1596416 kB",
+          "VmRSS": "1493116 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 185.40941629999725,
+          "pid": 75,
+          "VmSize": "11487188 kB",
+          "VmHWM": "1596416 kB",
+          "VmRSS": "1501552 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 190.43341793099535,
+          "pid": 75,
+          "VmSize": "11577848 kB",
+          "VmHWM": "1596416 kB",
+          "VmRSS": "1592304 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 195.44329836299585,
+          "pid": 75,
+          "VmSize": "11576628 kB",
+          "VmHWM": "1610464 kB",
+          "VmRSS": "1591036 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 200.45665510199615,
+          "pid": 75,
+          "VmSize": "11508576 kB",
+          "VmHWM": "1610464 kB",
+          "VmRSS": "1523136 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 205.4737884339993,
+          "pid": 75,
+          "VmSize": "11578304 kB",
+          "VmHWM": "1610464 kB",
+          "VmRSS": "1592952 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 210.4854192539933,
+          "pid": 75,
+          "VmSize": "11517036 kB",
+          "VmHWM": "1629492 kB",
+          "VmRSS": "1531692 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 215.49810720900132,
+          "pid": 75,
+          "VmSize": "11621104 kB",
+          "VmHWM": "1720584 kB",
+          "VmRSS": "1640920 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 220.50832547000027,
+          "pid": 75,
+          "VmSize": "11645244 kB",
+          "VmHWM": "1733316 kB",
+          "VmRSS": "1665244 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 225.52388747400255,
+          "pid": 75,
+          "VmSize": "11641516 kB",
+          "VmHWM": "1738224 kB",
+          "VmRSS": "1661524 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 230.53376843700244,
+          "pid": 75,
+          "VmSize": "11638012 kB",
+          "VmHWM": "1740992 kB",
+          "VmRSS": "1658020 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 235.542773794994,
+          "pid": 75,
+          "VmSize": "11723788 kB",
+          "VmHWM": "1743608 kB",
+          "VmRSS": "1743608 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 240.54916517699894,
+          "pid": 75,
+          "VmSize": "11720872 kB",
+          "VmHWM": "1742792 kB",
+          "VmRSS": "1740692 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 245.5551493899984,
+          "pid": 75,
+          "VmSize": "11715160 kB",
+          "VmHWM": "1742792 kB",
+          "VmRSS": "1734828 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 250.56030780400033,
+          "pid": 75,
+          "VmSize": "11718012 kB",
+          "VmHWM": "1754008 kB",
+          "VmRSS": "1738016 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 255.5655942720041,
+          "pid": 75,
+          "VmSize": "11666188 kB",
+          "VmHWM": "1754008 kB",
+          "VmRSS": "1686192 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 259.32052923600713,
+          "pid": 75,
+          "processPresent": false
+        }
+      ],
+      "lastObservedAt": "2026-11-10T23:23:46.423062+00:00",
+      "elapsedSeconds": 259.32261937299336,
+      "lastProgress": {
+        "status": "passed",
+        "failure": null
+      },
+      "rawOutputBytes": 268731,
+      "outputRaw": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-output.raw.log",
+        "sha256": "696604bc17ffb4d959f1b6611211a64d9d92a5b3354a5b15b503d50b222a4fa7",
+        "bytes": 268731
+      },
+      "output": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-output.log.gz",
+        "sha256": "8d27a1db2aed7a404a8b37e2eb00006130e0237844d48170b50088a84800b1f3",
+        "bytes": 10268
+      },
+      "startedReceipt": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-execution-started.json",
+        "sha256": "da45f0c39798d53df6b122c436ac144be82f4c45d819e3f6e63d9182e2bf9943",
+        "bytes": 3101
+      },
+      "nodeExitedBeforeComparison": true,
+      "hostPreparation": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-host-preparation.json",
+        "sha256": "a9e51815b7064648fc746283d25a6d9630b84dc66336ab6f36211c8df9ca3a85",
+        "bytes": 19259
+      },
+      "hostPreparationPassed": true,
+      "report": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-replay.json.gz",
+        "sha256": "16ab776aeb4f9f1d0e8286d92e033c9d8ca781c833fcaeb9cfcb5393e7624c39",
+        "bytes": 15437372
+      },
+      "status": "passed",
+      "actions": 81,
+      "prefixes": 81,
+      "final": {
+        "actions": 81,
+        "levelsCompleted": 3,
+        "level": 4,
+        "state": "NOT_FINISHED",
+        "status": "stopped",
+        "reason": "target_levels_completed",
+        "activeSeconds": 208.66634178600017,
+        "prefixes": 81,
+        "caller": {
+          "enabled": true,
+          "acquiredTransitions": 81,
+          "boundaryReplays": 2,
+          "goalEvents": 3,
+          "frontierDeltas": 163,
+          "components": {
+            "goal": {
+              "id": "caller:goal",
+              "revision": 82
+            },
+            "frontier": {
+              "id": "caller:frontier",
+              "revision": 82
+            },
+            "view": {
+              "id": "caller:view",
+              "revision": 62
+            },
+            "attention": {
+              "id": "caller:attention",
+              "revision": 1
+            },
+            "points": {
+              "id": "caller:points",
+              "revision": 42
+            },
+            "displays": {
+              "id": "caller:displays",
+              "revision": 1
+            },
+            "controls": {
+              "id": "caller:controls",
+              "revision": 7
+            },
+            "counters": {
+              "id": "caller:counters",
+              "revision": 83
+            }
+          },
+          "pendingSourceProviders": [
+            "morphology"
+          ],
+          "morphologyProvider": {
+            "status": "partial_current_measurements_control_attention_and_methods",
+            "state_owner": "family_state:morphology",
+            "motion_owner": "caller:goal",
+            "forecast_owner": "family_state:public_observed_inventory",
+            "current_decision_scope": "one_source_selection_cycle",
+            "attention_owner": "caller:attention",
+            "method_owner": "caller:counters.targetMethod",
+            "entry_return_owner": "family_state:morphology.entry_access_return",
+            "connected_methods": [
+              "retained_station_method",
+              "entry_access_return",
+              "entry_rebind",
+              "entry_probe",
+              "managed_capacity",
+              "target_extension_continuation"
+            ],
+            "pending": [
+              "complete_original_caller_parity_and_domain_closure"
+            ]
+          },
+          "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+        },
+        "fullV6Parity": false,
+        "sessions": 1,
+        "operationCounts": {
+          "init": 1,
+          "advance": 81,
+          "resume": 80
+        },
+        "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.56.0"
+      },
+      "passiveOwnerPresence": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-passive-owner-presence.json",
+        "sha256": "d3930afc85b3162a4c583b668419f9fbc2a31cde05993a8b3accdbaa3678f3a4",
+        "bytes": 1102
+      },
+      "passiveOwnerPresencePassed": true,
+      "passiveOwnerPrefixesChecked": 0,
+      "passiveOwnerPrefixesPassed": 0,
+      "passiveOwnerTransitionsRetained": 0,
+      "comparison": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-comparison.json",
+        "sha256": "4c05be447c1f5b4aec274dedfe5acd3232c52e32758c81a4d312906a6811fb49",
+        "bytes": 11017
+      },
+      "comparisonPassed": true,
+      "comparisonChecks": 17,
+      "failedChecks": [],
+      "nativeSourceAfterDigest": "be11e761de3c0f3c7d50d10da47be9e0d7b4fc9c5b7d5002cc9272ffce85645a",
+      "nativeSourceUnchanged": true,
+      "immutableInputsUnchanged": true,
+      "postprocessingFinishedAt": "2026-11-10T23:23:53.300562+00:00",
+      "execution": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-execution.json",
+        "sha256": "834095f8c2292c2c3f5a45483ceb3bde53e153d37155aba07910d0f280f0ebe7",
+        "bytes": 17614
+      }
+    },
+    {
+      "case": "conn-site83",
+      "game": "CONN",
+      "mode": "recorded-public-replay",
+      "command": [
+        "node",
+        "--expose-gc",
+        "--max-old-space-size=1536",
+        "scripts/replay-public-regression-released-baseline.mjs",
+        "docs/migration/lot7a-evidence/integrated-final/regressions/conn-050-replay.json.gz",
+        "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-public-trace.json.gz",
+        "docs/migration/lot10a-evidence/integrated-final/regressions/conn-site83-replay.json.gz",
+        "docs/migration/lot10a-evidence/integrated-final/regressions/conn-site83-host-preparation.json"
+      ],
+      "startedAt": "2026-11-10T23:23:53.334089+00:00",
+      "timeoutSeconds": 2400,
+      "baseline": {
+        "path": "docs/migration/lot7a-evidence/integrated-final/regressions/conn-050-replay.json.gz",
+        "sha256": "5e736b0167acada767719054e9672f51086ee8659159ceaee6c5815a5ba9813c",
+        "bytes": 3732728
+      },
+      "trace": {
+        "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-public-trace.json.gz",
+        "sha256": "fc8c7bf4529490e6e6ee04e7a5a51b389180e5fb5e35255145c59ecf4dd0f102",
+        "bytes": 56466
+      },
+      "expectedActions": 21,
+      "nodeOldSpaceMiB": 1536,
+      "preflight": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/preflight.json",
+        "sha256": "b8a90ca9f45f9a45d465f8aedabe81b29a27dd05fd8858106c177afd6d42ba42",
+        "bytes": 4384
+      },
+      "historicalReportProcessExitedBeforeNode": true,
+      "nativeSourceBeforeDigest": "be11e761de3c0f3c7d50d10da47be9e0d7b4fc9c5b7d5002cc9272ffce85645a",
+      "executionInputsBefore": {
+        "scripts/run-released-public-regressions.py": "7988863afd2b171f31987434bb1176370be2e3afd49dead1edcdc59770d81909",
+        "scripts/run-recorded-public-regressions.py": "df19dc88ff29e78a1cb5935d445644e96cc9fb1ef90b73d802cf51868d2b2c40",
+        "scripts/compare-v54-regressions.py": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+        "scripts/replay-public-regression-released-baseline.mjs": "2ce2a0e1b8f969510373ae161156b2b163d208b4e426cb1f26218f9952b3b164",
+        "scripts/replay-v53-public-regression.mjs": "4359e008db8dadaac17f6504199ff20c752f40f1666ba527f1cd5f16df100a9e",
+        "scripts/run-v53-campaign-proof.py": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+        "tests/helpers/v6-live-game-campaign.ts": "dfc77470fe8050033cd9b13df5386e0689babac9b3d37d1c4d7b1f3d71199cb9",
+        "docs/migration/lot10a-evidence/recorded-regression-cases-site83.json": "a6514c3064b312de4c6e1a7c07d968a29805eb7dcf8f6f6f1c06302eeeef5f06",
+        "docs/migration/lot10a-evidence/integrated-final/source-manifest.json": "55b78bacc97745a6b8b1bde35156ec0f7184a6ad1cf4a637d35a81b82abec42f",
+        "scripts/run-released-public-regressions-streamlog.py": "b05b0e113c93696be45408e4c10549f2a379c22330efbddfcaa0f09cd51309b9"
+      },
+      "phase": "completed",
+      "finishedAt": "2026-11-10T23:24:44.151926+00:00",
+      "exitCode": 0,
+      "timedOut": false,
+      "passed": true,
+      "nodeExitObserved": true,
+      "rawOutputPath": "docs/migration/lot10a-evidence/integrated-final/regressions/conn-site83-output.raw.log",
+      "driverPid": 21,
+      "nodePid": 88,
+      "memorySamples": [
+        {
+          "elapsedSeconds": 0.0011225880007259548,
+          "pid": 88,
+          "VmSize": "112336 kB",
+          "VmHWM": "436 kB",
+          "VmRSS": "436 kB",
+          "Threads": "1"
+        },
+        {
+          "elapsedSeconds": 5.0055368629982695,
+          "pid": 88,
+          "VmSize": "10464656 kB",
+          "VmHWM": "459552 kB",
+          "VmRSS": "438924 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 10.012457769989851,
+          "pid": 88,
+          "VmSize": "10498732 kB",
+          "VmHWM": "473656 kB",
+          "VmRSS": "473656 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 15.018595117988298,
+          "pid": 88,
+          "VmSize": "10559272 kB",
+          "VmHWM": "561016 kB",
+          "VmRSS": "536896 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 20.02434460198856,
+          "pid": 88,
+          "VmSize": "10670728 kB",
+          "VmHWM": "648904 kB",
+          "VmRSS": "648904 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 25.030115848989226,
+          "pid": 88,
+          "VmSize": "10780228 kB",
+          "VmHWM": "760980 kB",
+          "VmRSS": "760980 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 30.03636795700004,
+          "pid": 88,
+          "VmSize": "10783996 kB",
+          "VmHWM": "827268 kB",
+          "VmRSS": "765168 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 35.04203341298853,
+          "pid": 88,
+          "VmSize": "10821632 kB",
+          "VmHWM": "913372 kB",
+          "VmRSS": "802708 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 40.047919762990205,
+          "pid": 88,
+          "VmSize": "10976920 kB",
+          "VmHWM": "957692 kB",
+          "VmRSS": "957692 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 45.0555017299921,
+          "pid": 88,
+          "VmSize": "11000428 kB",
+          "VmHWM": "1035844 kB",
+          "VmRSS": "982480 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 50.061892507990706,
+          "pid": 88,
+          "VmSize": "11224744 kB",
+          "VmHWM": "1097680 kB",
+          "VmRSS": "1094424 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 50.81469170800119,
+          "pid": 88,
+          "processPresent": false
+        }
+      ],
+      "lastObservedAt": "2026-11-10T23:24:44.150274+00:00",
+      "elapsedSeconds": 50.816586886998266,
+      "lastProgress": {
+        "status": "passed",
+        "failure": null
+      },
+      "rawOutputBytes": 74695,
+      "outputRaw": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/conn-site83-output.raw.log",
+        "sha256": "5f751880a56889232a4c6da4a66e4b6fbb9c687379cb226b82966d12f782739a",
+        "bytes": 74695
+      },
+      "output": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/conn-site83-output.log.gz",
+        "sha256": "4d8f1e86e0fcf050de2cad914ffc6d419a94fd60b0807eba0083bad8164311a6",
+        "bytes": 4059
+      },
+      "startedReceipt": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/conn-site83-execution-started.json",
+        "sha256": "91eb35a68125fe76c50dc79d63847f4df39776728ff69561da90df67915d6e49",
+        "bytes": 3104
+      },
+      "nodeExitedBeforeComparison": true,
+      "hostPreparation": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/conn-site83-host-preparation.json",
+        "sha256": "11b802274a96718407156aad31b0cb1172a8e05a58493cb5381f631a304926ac",
+        "bytes": 6172
+      },
+      "hostPreparationPassed": true,
+      "report": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/conn-site83-replay.json.gz",
+        "sha256": "33aca1096c52185254cffddc777285791d0ed569303d652f01e6df63aa9b9402",
+        "bytes": 4011638
+      },
+      "status": "passed",
+      "actions": 21,
+      "prefixes": 21,
+      "final": {
+        "actions": 21,
+        "levelsCompleted": 3,
+        "level": 4,
+        "state": "NOT_FINISHED",
+        "status": "stopped",
+        "reason": "target_levels_completed",
+        "activeSeconds": 39.247629618,
+        "prefixes": 21,
+        "caller": {
+          "enabled": true,
+          "acquiredTransitions": 21,
+          "boundaryReplays": 2,
+          "goalEvents": 3,
+          "frontierDeltas": 50,
+          "components": {
+            "goal": {
+              "id": "caller:goal",
+              "revision": 22
+            },
+            "frontier": {
+              "id": "caller:frontier",
+              "revision": 29
+            },
+            "view": {
+              "id": "caller:view",
+              "revision": 17
+            },
+            "attention": {
+              "id": "caller:attention",
+              "revision": 1
+            },
+            "points": {
+              "id": "caller:points",
+              "revision": 19
+            },
+            "displays": {
+              "id": "caller:displays",
+              "revision": 3
+            },
+            "controls": {
+              "id": "caller:controls",
+              "revision": 14
+            },
+            "counters": {
+              "id": "caller:counters",
+              "revision": 30
+            }
+          },
+          "pendingSourceProviders": [
+            "morphology"
+          ],
+          "morphologyProvider": {
+            "status": "partial_current_measurements_control_attention_and_methods",
+            "state_owner": "family_state:morphology",
+            "motion_owner": "caller:goal",
+            "forecast_owner": "family_state:public_observed_inventory",
+            "current_decision_scope": "one_source_selection_cycle",
+            "attention_owner": "caller:attention",
+            "method_owner": "caller:counters.targetMethod",
+            "entry_return_owner": "family_state:morphology.entry_access_return",
+            "connected_methods": [
+              "retained_station_method",
+              "entry_access_return",
+              "entry_rebind",
+              "entry_probe",
+              "managed_capacity",
+              "target_extension_continuation"
+            ],
+            "pending": [
+              "complete_original_caller_parity_and_domain_closure"
+            ]
+          },
+          "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+        },
+        "fullV6Parity": false,
+        "sessions": 1,
+        "operationCounts": {
+          "init": 1,
+          "advance": 21,
+          "resume": 20
+        },
+        "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.56.0"
+      },
+      "passiveOwnerPresence": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/conn-site83-passive-owner-presence.json",
+        "sha256": "375c185c840b724c9f49eafe117579dab6951bf4fe2f7a62337938d60b441635",
+        "bytes": 1101
+      },
+      "passiveOwnerPresencePassed": true,
+      "passiveOwnerPrefixesChecked": 0,
+      "passiveOwnerPrefixesPassed": 0,
+      "passiveOwnerTransitionsRetained": 0,
+      "comparison": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/conn-site83-comparison.json",
+        "sha256": "007be7bcdce713b30e8772ecc3e598700a0246ad6423ecc7b78d493ce7868c16",
+        "bytes": 11016
+      },
+      "comparisonPassed": true,
+      "comparisonChecks": 17,
+      "failedChecks": [],
+      "nativeSourceAfterDigest": "be11e761de3c0f3c7d50d10da47be9e0d7b4fc9c5b7d5002cc9272ffce85645a",
+      "nativeSourceUnchanged": true,
+      "immutableInputsUnchanged": true,
+      "postprocessingFinishedAt": "2026-11-10T23:24:46.381313+00:00",
+      "execution": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/conn-site83-execution.json",
+        "sha256": "0d75c2abee02c75938a12fc1c0909231a8d45225aa8cb8bdd1e8cac132ceaeba",
+        "bytes": 10021
+      }
+    },
+    {
+      "case": "mind-site83",
+      "game": "MIND",
+      "mode": "recorded-public-replay",
+      "command": [
+        "node",
+        "--expose-gc",
+        "--max-old-space-size=1536",
+        "scripts/replay-public-regression-released-baseline.mjs",
+        "docs/migration/lot7a-evidence/integrated-final/regressions/mind-051-replay.json.gz",
+        "docs/migration/lot7a-evidence/integrated-baseline/recorded/mind-public-trace.json.gz",
+        "docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-replay.json.gz",
+        "docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-host-preparation.json"
+      ],
+      "startedAt": "2026-11-10T23:24:46.420446+00:00",
+      "timeoutSeconds": 2400,
+      "baseline": {
+        "path": "docs/migration/lot7a-evidence/integrated-final/regressions/mind-051-replay.json.gz",
+        "sha256": "a23bcfb3603b904f7049fb6ff1dd1426b2959b8ffd2e20612c616053b887dc44",
+        "bytes": 4977259
+      },
+      "trace": {
+        "path": "docs/migration/lot7a-evidence/integrated-baseline/recorded/mind-public-trace.json.gz",
+        "sha256": "f74678fa4d9c1b5397545b648ab353c29fc0a5a4c0eb35ab36a5258bfa34ca0c",
+        "bytes": 17256
+      },
+      "expectedActions": 31,
+      "nodeOldSpaceMiB": 1536,
+      "preflight": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/preflight.json",
+        "sha256": "b8a90ca9f45f9a45d465f8aedabe81b29a27dd05fd8858106c177afd6d42ba42",
+        "bytes": 4384
+      },
+      "historicalReportProcessExitedBeforeNode": true,
+      "nativeSourceBeforeDigest": "be11e761de3c0f3c7d50d10da47be9e0d7b4fc9c5b7d5002cc9272ffce85645a",
+      "executionInputsBefore": {
+        "scripts/run-released-public-regressions.py": "7988863afd2b171f31987434bb1176370be2e3afd49dead1edcdc59770d81909",
+        "scripts/run-recorded-public-regressions.py": "df19dc88ff29e78a1cb5935d445644e96cc9fb1ef90b73d802cf51868d2b2c40",
+        "scripts/compare-v54-regressions.py": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+        "scripts/replay-public-regression-released-baseline.mjs": "2ce2a0e1b8f969510373ae161156b2b163d208b4e426cb1f26218f9952b3b164",
+        "scripts/replay-v53-public-regression.mjs": "4359e008db8dadaac17f6504199ff20c752f40f1666ba527f1cd5f16df100a9e",
+        "scripts/run-v53-campaign-proof.py": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+        "tests/helpers/v6-live-game-campaign.ts": "dfc77470fe8050033cd9b13df5386e0689babac9b3d37d1c4d7b1f3d71199cb9",
+        "docs/migration/lot10a-evidence/recorded-regression-cases-site83.json": "a6514c3064b312de4c6e1a7c07d968a29805eb7dcf8f6f6f1c06302eeeef5f06",
+        "docs/migration/lot10a-evidence/integrated-final/source-manifest.json": "55b78bacc97745a6b8b1bde35156ec0f7184a6ad1cf4a637d35a81b82abec42f",
+        "scripts/run-released-public-regressions-streamlog.py": "b05b0e113c93696be45408e4c10549f2a379c22330efbddfcaa0f09cd51309b9"
+      },
+      "phase": "completed",
+      "finishedAt": "2026-11-10T23:25:34.483226+00:00",
+      "exitCode": 0,
+      "timedOut": false,
+      "passed": true,
+      "nodeExitObserved": true,
+      "rawOutputPath": "docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-output.raw.log",
+      "driverPid": 21,
+      "nodePid": 101,
+      "memorySamples": [
+        {
+          "elapsedSeconds": 0.0011177910055266693,
+          "pid": 101,
+          "VmSize": "112336 kB",
+          "VmHWM": "788 kB",
+          "VmRSS": "788 kB",
+          "Threads": "1"
+        },
+        {
+          "elapsedSeconds": 5.00604487300734,
+          "pid": 101,
+          "VmSize": "10500740 kB",
+          "VmHWM": "492464 kB",
+          "VmRSS": "479736 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 10.0118015390035,
+          "pid": 101,
+          "VmSize": "10507652 kB",
+          "VmHWM": "510280 kB",
+          "VmRSS": "489152 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 15.019451561005553,
+          "pid": 101,
+          "VmSize": "10612224 kB",
+          "VmHWM": "604212 kB",
+          "VmRSS": "594040 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 20.025099749007495,
+          "pid": 101,
+          "VmSize": "10650652 kB",
+          "VmHWM": "675816 kB",
+          "VmRSS": "634468 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 25.03112251200946,
+          "pid": 101,
+          "VmSize": "10719672 kB",
+          "VmHWM": "737340 kB",
+          "VmRSS": "703588 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 30.036704943995574,
+          "pid": 101,
+          "VmSize": "10742120 kB",
+          "VmHWM": "780368 kB",
+          "VmRSS": "726280 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 35.04311762499856,
+          "pid": 101,
+          "VmSize": "10816528 kB",
+          "VmHWM": "850208 kB",
+          "VmRSS": "801436 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 40.0495487730077,
+          "pid": 101,
+          "VmSize": "10881144 kB",
+          "VmHWM": "934756 kB",
+          "VmRSS": "866144 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 45.05496904099709,
+          "pid": 101,
+          "VmSize": "10945308 kB",
+          "VmHWM": "1050500 kB",
+          "VmRSS": "930288 kB",
+          "Threads": "11"
+        },
+        {
+          "elapsedSeconds": 48.05931623400829,
+          "pid": 101,
+          "processPresent": false
+        }
+      ],
+      "lastObservedAt": "2026-11-10T23:25:34.481240+00:00",
+      "elapsedSeconds": 48.06156638699758,
+      "lastProgress": {
+        "status": "passed",
+        "failure": null
+      },
+      "rawOutputBytes": 88969,
+      "outputRaw": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-output.raw.log",
+        "sha256": "398abd4ec4615fc47ea229166f3b45fce4787dca05a382ae72d4dbed74b2ead5",
+        "bytes": 88969
+      },
+      "output": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-output.log.gz",
+        "sha256": "6c1f1a15fd2a803fbeef9ac871f3fe11d09f4cbd1bcae049a20188161c9e18f3",
+        "bytes": 4313
+      },
+      "startedReceipt": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-execution-started.json",
+        "sha256": "d9e7d90b835f21fe334ea0b056d88a95eec551b3d90e865f4984baa5f31858d2",
+        "bytes": 3090
+      },
+      "nodeExitedBeforeComparison": true,
+      "hostPreparation": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-host-preparation.json",
+        "sha256": "26096ebb1bfbc6733fc040ca40009aac875d06f0d67ea1b81edf2cfb2199cfba",
+        "bytes": 8348
+      },
+      "hostPreparationPassed": true,
+      "report": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-replay.json.gz",
+        "sha256": "3610c9daf1ec1766b8eb161c5f3212b12fa66f4a5e85d45e2aa05a8266eda18d",
+        "bytes": 4992142
+      },
+      "status": "passed",
+      "actions": 31,
+      "prefixes": 20,
+      "final": {
+        "actions": 31,
+        "levelsCompleted": 3,
+        "level": 4,
+        "state": "NOT_FINISHED",
+        "status": "stopped",
+        "reason": "target_levels_completed",
+        "activeSeconds": 38.836354566999994,
+        "prefixes": 20,
+        "caller": {
+          "enabled": true,
+          "acquiredTransitions": 31,
+          "boundaryReplays": 2,
+          "goalEvents": 3,
+          "frontierDeltas": 63,
+          "components": {
+            "goal": {
+              "id": "caller:goal",
+              "revision": 21
+            },
+            "frontier": {
+              "id": "caller:frontier",
+              "revision": 21
+            },
+            "view": {
+              "id": "caller:view",
+              "revision": 21
+            },
+            "attention": {
+              "id": "caller:attention",
+              "revision": 1
+            },
+            "points": {
+              "id": "caller:points",
+              "revision": 16
+            },
+            "displays": {
+              "id": "caller:displays",
+              "revision": 1
+            },
+            "controls": {
+              "id": "caller:controls",
+              "revision": 21
+            },
+            "counters": {
+              "id": "caller:counters",
+              "revision": 22
+            }
+          },
+          "pendingSourceProviders": [
+            "morphology"
+          ],
+          "morphologyProvider": {
+            "status": "partial_current_measurements_control_attention_and_methods",
+            "state_owner": "family_state:morphology",
+            "motion_owner": "caller:goal",
+            "forecast_owner": "family_state:public_observed_inventory",
+            "current_decision_scope": "one_source_selection_cycle",
+            "attention_owner": "caller:attention",
+            "method_owner": "caller:counters.targetMethod",
+            "entry_return_owner": "family_state:morphology.entry_access_return",
+            "connected_methods": [
+              "retained_station_method",
+              "entry_access_return",
+              "entry_rebind",
+              "entry_probe",
+              "managed_capacity",
+              "target_extension_continuation"
+            ],
+            "pending": [
+              "complete_original_caller_parity_and_domain_closure"
+            ]
+          },
+          "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+        },
+        "fullV6Parity": false,
+        "sessions": 1,
+        "operationCounts": {
+          "init": 1,
+          "advance": 31,
+          "resume": 19
+        },
+        "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.56.0"
+      },
+      "passiveOwnerPresence": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-passive-owner-presence.json",
+        "sha256": "0de17df896863318f0c9958fdc96624c8057fed30ef87ab80e484b6e274a16e0",
+        "bytes": 1101
+      },
+      "passiveOwnerPresencePassed": true,
+      "passiveOwnerPrefixesChecked": 0,
+      "passiveOwnerPrefixesPassed": 0,
+      "passiveOwnerTransitionsRetained": 0,
+      "comparison": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-comparison.json",
+        "sha256": "8adb4095a71c19020f9a5d9fb873b4589d6e529a9191e87a2693e75126e470ea",
+        "bytes": 11009
+      },
+      "comparisonPassed": true,
+      "comparisonChecks": 17,
+      "failedChecks": [],
+      "nativeSourceAfterDigest": "be11e761de3c0f3c7d50d10da47be9e0d7b4fc9c5b7d5002cc9272ffce85645a",
+      "nativeSourceUnchanged": true,
+      "immutableInputsUnchanged": true,
+      "postprocessingFinishedAt": "2026-11-10T23:25:37.087949+00:00",
+      "execution": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-execution.json",
+        "sha256": "670c65a84736361ed2020ad028582f33fb9766b05b0e36b00cc153074140f876",
+        "bytes": 9835
+      }
+    }
+  ],
+  "passed": 7,
+  "total": 7,
+  "comparisonChecksPassed": 119,
+  "comparisonChecksExpected": 119,
+  "passiveOwnerRequirements": [],
+  "passiveOwnerPrefixesChecked": 0,
+  "passiveOwnerPrefixesPassed": 0,
+  "passiveOwnerTransitionsRetained": 0,
+  "qualification": "Cold native common-caller replays use unchanged archived public returns. Every current command is computed before the host supplies its expected return. The unchanged historical comparator supplies the same 17 checks and check labels: commands, complete public-packet hashes, animation lengths, primitive boundaries, selected family/group/proposal kind/subquestion, named coordination entry/guard fields, prefix lengths, epoch anchors, source-series event counts, common-caller counters, natural level boundaries and final public result. Only fresh observation-session prefixes are normalized in the selected fields. Timings, implementation labels and migration-status labels are excluded. Complete provider payloads, derived identities, graph chains/revisions, full original-caller parity and equality of newly added family state are not asserted. Original payloads remain in the complete reports. These are recorded-return regressions, not new live game successes or a speed comparison. Legacy v53/v54 labels in the reused comparator identify its provenance; the case manifest and frozen source identify the actual baselines and current execution. This recovery changes only replay-host lifetimes: full historical reports are released before the unchanged native harness starts. Prevalidation and the unchanged 17-check comparison execute in separate, non-overlapping processes. All new replay evidence is retained in full. The explicit Node heap cap applies only to this recorded regression, never to official costs. The durable driver preserves raw Node output from process start, before any compression or comparison. A lost tool connection is not classified as out-of-memory without a retained exit signal or fatal diagnostic."
+}

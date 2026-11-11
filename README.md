@@ -3,18 +3,70 @@
 An English-language playground for **100 interactive games** and Yannick
 Fontan's **Symbolic Reasoning Agent** research.
 
+<!-- LOT10A_README_CURRENT_START -->
+
+## Published native 0.56.0: AxialQuestion
+
+**AxialQuestion / lot 10A** is integrated with the actual **Site 89 / native
+0.55.0** predecessor and its unchanged Site 88 execution inputs. The distinct
+`public_axial_question` owner now executes `v6.axial_question.choose` and
+`axial.select` through the common runtime. It preserves the source priority,
+quarter-turn distance, recalled-control preference, command and source-index
+tie order, followed by a current one-action OP18 guard.
+
+The first native publication is **Site 90**, deployed privately on
+**11 November 2026 at 00:37:52.792934 UTC** from commit
+`617d1f607d37a6bba1f7ae8ffe1826806e6749a0`. The
+[terminal publication receipt](docs/migration/lot10a-evidence/publication/native-publication.json)
+binds the validated source, build, cost and unchanged owner-only access. The
+documentation closure keeps the same native and build inputs.
+
+Cold common-runtime scenarios acquire selection from another family's public
+return, execute Axial once, acquire an observed rotation and change the next
+choice to **ACTION4 instead of the ACTION3 ablation**. Attempts, ambiguous
+boundaries, portable methods and restoration retain their separate contracts.
+The final scope passes **1,538 tests in 45 files**, **five project checks** and
+**seven recorded regressions / 119 comparisons**. Its source comparisons cover
+122 original-reference cases and eight additional native contracts, with six
+common-runtime scenarios included in the final suite.
+
+The predeclared **A1/B1/B2/A2 cost window is accepted on both games** against
+the actually published **Site 88 / native 0.55.0**: complete-session medians
+change by **+0.387457% for STCK** and **+0.136584% for SMLP**, each strictly below
++10%. All **32 measured sessions / 400 actions** remain, with **7,688 independent
+checks**. Aggregate phase diagnostics pass 16/16; each cohort retains its 15/16
+status and the two adverse SMLP phase results. The historical strict metadata
+failure remains failed alongside the owner qualification declared before timing.
+See the [complete cost report](docs/migration/lot10a-evidence/performance-integrated/RESULTS.md).
+
+The continuous browser check completes three TRIA levels in 17 actions and
+confirms Pause followed by one action. It verifies the existing
+RelativeArrangements path, not Axial's own live contribution. POLA's prior
+94-action attempt has no recoverable elapsed-time receipt, so no new 40-minute
+budget or new action is introduced. Axial's live-game contribution, long-history
+cost and full V6 caller parity remain open. **60/76 source entries are connected,
+with 16 remaining.** Only 10A is covered; **10B WindowQuestion** is the next
+sub-lot.
+
+See the [Axial delivery report](docs/migration/lot10a-axial-question.md),
+[source lineage](docs/migration/lot10a-axial-question-lineage.md),
+[evidence index](docs/migration/lot10a-evidence/README.md) and
+[delivery roadmap](docs/migration/v6-delivery-roadmap.md).
+
+<!-- LOT10A_README_CURRENT_END -->
+
 <!-- LOT7B_README_CURRENT_START -->
 
-## Current migration candidate: native 0.55.0
+## Published native 0.55.0: SymbolTransactions
 
-The integrated **SymbolTransactions / lot 7B** candidate includes the actually
+The published **SymbolTransactions / lot 7B** release includes the actually
 published **Site 87 / native 0.54.0** predecessor. It adds the source workflow
 `v6.symbol_transactions.choose` and its distinct `public_symbol_transaction`
 owner. Transactions bind the current frame, pixel owner, exact action and public
 observation. Only the owner's selected returns become transaction evidence;
 Workshop retains its separate active and passive acquisition paths.
 
-The frozen candidate passes **4,327 tests in 112 files**, five project checks,
+The frozen release passes **4,327 tests in 112 files**, five project checks,
 and **eight strict recorded regressions / 136 comparisons**. Its cold CRAF run
 and managed browser check each complete **three levels in 36 actions**. The
 original Python owner independently matches **144 calls / 432 exact checks**;
@@ -30,7 +82,12 @@ with **3,927 independent arithmetic checks**. Aggregate phase diagnostics pass
 16/16; both cohorts remain 15/16, and adverse SMLP p95 values remain visible in
 the [full cost report](docs/migration/lot7b-evidence/performance-integrated/results.md).
 The strict historical work-metadata failure is retained alongside the separate
-qualification declared before measurement. Publication is the remaining step.
+qualification declared before measurement. The first native 7B publication is
+**Site 88**, deployed privately on **10 November 2026 at 20:56:02 UTC−03** from
+commit `43ee01ba5469fd4fbffe10eb6a786fe99b1c35a7`. Its
+[terminal publication receipt](docs/migration/lot7b-evidence/publication/native-publication.json)
+binds the exact validated source tree and compiled worker; the accompanying
+documentation closure retains that same build.
 These common cost paths do not select Symbols and do not establish active CRAF
 transaction cost. Full V6 caller parity remains open: **59/76 source entries
 are connected, with 17 remaining**, and no module is declared fully verified.

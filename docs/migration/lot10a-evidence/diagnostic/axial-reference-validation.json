@@ -1,0 +1,73 @@
+{
+  "schema": "logos-engine.lot10a.axial-reference-validation.v1",
+  "created_at": "2026-11-10T21:19:29.412145+00:00",
+  "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "sourceModified": false,
+  "sourceFilesVerifiedBeforeAndAfter": 1786,
+  "qualification": "Unchanged original Python on synthetic public rasters and controlled returns. No game dispatch or solved-level claim.",
+  "boundaryQualification": "The source accepts a same-grid, same-target, same-body-count final frame across an epoch boundary. This source limitation is explicitly retained; native attribution is tested separately.",
+  "counts": {
+    "tests": 130,
+    "pass": 130,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "originalFamilyCases": 68,
+    "originalGeometryCases": 38,
+    "originalPolicyCases": 16,
+    "additionalNativeContractTests": 8
+  },
+  "commands": [
+    "flock -s -n /workspace/shared/sra-coordination/performance.lock python scripts/export-v6-axial-question-reference.py",
+    "flock -s -n /workspace/shared/sra-coordination/performance.lock node --test --test-reporter=tap tests/v6-axial-question-reference.test.ts"
+  ],
+  "finalLog": "docs/migration/lot10a-evidence/diagnostic/axial-reference-04.tap",
+  "finalExportLog": "docs/migration/lot10a-evidence/diagnostic/oracle-export-04.log",
+  "files": {
+    "scripts/export-v6-axial-question-reference.py": "e3b219b9bbac03922422b21f900435402b91ead65d9fd219013a017f06eed5c8",
+    "tests/v6-axial-question-reference.test.ts": "f97d02aef86a3b687df4b381774d190a2406cf3b1cee4d4ff839a2f2c0191bab",
+    "tests/fixtures/v6-axial-question-reference.json.gz": "5d5462a9ec7c8fcef91432eb0e022a62062ed03f79eafe67f0a4c2f9b3958b4a",
+    "src/logos-engine/v6-axial-question.ts": "6c7eaf64b573bbccc4699b9d8208c5da435d0e973ba9577d470fb55f0f511f57",
+    "src/logos-engine/v6-axial-question-policy.ts": "1f15a3b835246e7fa227966ec23422b5c0cce06210b15427a46f9438e937dedd",
+    "src/logos-engine/v6-axial-question-geometry.ts": "351bc7cbc2b53fa1ecef11fd6f6fc36664924316f88e827e008d0f0603542140"
+  },
+  "retainedAttempts": [
+    {
+      "log": "docs/migration/lot10a-evidence/diagnostic/axial-reference-01.tap",
+      "tests": 126,
+      "pass": 125,
+      "fail": 1,
+      "cause": "Supplemental test expected stopped; pinned SRC receipt is completed. All original-source comparisons passed. Corrected supplemental assertion to use original receipt."
+    },
+    {
+      "log": "docs/migration/lot10a-evidence/diagnostic/axial-reference-02.tap",
+      "tests": 126,
+      "pass": 126,
+      "fail": 0
+    },
+    {
+      "log": "docs/migration/lot10a-evidence/diagnostic/axial-reference-03.tap",
+      "tests": 128,
+      "pass": 127,
+      "fail": 1,
+      "cause": "Additional outside-target oracle exposed JavaScript negative zero in opposite-axis multiplication. Family normalized zero to preserve Python integer semantics."
+    },
+    {
+      "log": "docs/migration/lot10a-evidence/diagnostic/axial-reference-04.tap",
+      "tests": 130,
+      "pass": 130,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    }
+  ],
+  "kernelCold": "Foreign ACTION1-only public observation obtains one-pixel selected-marker contrast, followed by Axial SRC proposal and conditional rotation. Source action has no data key, matching production observed_frontier.",
+  "notClaimed": [
+    "live game execution",
+    "official game success",
+    "complete Python common-caller parity",
+    "performance acceptance"
+  ]
+}

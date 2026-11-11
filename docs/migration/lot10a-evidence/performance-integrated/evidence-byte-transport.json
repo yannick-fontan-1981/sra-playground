@@ -1,0 +1,25 @@
+{
+  "operation": "verify",
+  "directory": "docs/migration/lot10a-evidence/performance-integrated",
+  "partBytes": 900000,
+  "verified": [
+    {
+      "path": "docs/migration/lot10a-evidence/performance-integrated/owner-graphs-baseline.json.gz",
+      "sha256": "22d6ae21086a27146efa56844b8c2fc56d582974d94f1dd61c4691bbcebc8e1a",
+      "bytes": 5028205,
+      "manifest": "docs/migration/lot10a-evidence/performance-integrated/owner-graphs-baseline.json.gz.parts.json",
+      "parts": 6,
+      "restored": false
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/performance-integrated/owner-graphs-candidate.json.gz",
+      "sha256": "4ae9218f5821f34b2d85d338cfe9c1c6563493978b2f2f12fb4cd1c5336c7d40",
+      "bytes": 5036835,
+      "manifest": "docs/migration/lot10a-evidence/performance-integrated/owner-graphs-candidate.json.gz.parts.json",
+      "parts": 6,
+      "restored": false
+    }
+  ],
+  "gitignoreEntriesAdded": [],
+  "qualification": "Exact byte transport only; no agent result is regenerated or reinterpreted."
+}

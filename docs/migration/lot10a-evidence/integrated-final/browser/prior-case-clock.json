@@ -1,0 +1,34 @@
+{
+  "schema": "logos-engine.case-clock-prior-binding.v1",
+  "recordedAt": "2026-11-10T23:30:35.722161+00:00",
+  "game": "TRIA",
+  "status": "prior_clock_bound_no_new_run_started",
+  "maximumCumulativeSeconds": 2400,
+  "cumulativeBeforeSeconds": 763.736664,
+  "remainingBeforeSeconds": 1636.263336,
+  "clockReset": false,
+  "newActions": 0,
+  "sources": [
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/browser/browser-qa-continuation-test-correction-binding.json",
+      "sha256": "76ea7a40d1e5caac0c3b023da6aa69b131123e8e20c2ec65fc5dce6b2de95cc6",
+      "bytes": 1789
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/browser/browser-qa-test-correction-binding.json",
+      "sha256": "f94d60ed2e3a4c562f0724f20124b5ab69b3275f856a2771460ee39bd47396b4",
+      "bytes": 3840
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/browser/observed-states.json",
+      "sha256": "4262133043c084ec18e0cff925d19bf2ac7d36ee6479cb112fd9f6903b9f5856",
+      "bytes": 3515
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/tria-case-resolution.json",
+      "sha256": "db90a62494a55bb8c96e59676a6bd9baf9521421cc3ea4f084acd23c70cf46fc",
+      "bytes": 2135
+    }
+  ],
+  "qualification": "Prior actual resolution and 4B final browser interval are retained cumulatively. Archived replays do not establish a new live interval. No 10A browser or game has started; a future attempt must retain its entire observed interval including setup and errors. Browser regression will not establish own Axial contribution."
+}

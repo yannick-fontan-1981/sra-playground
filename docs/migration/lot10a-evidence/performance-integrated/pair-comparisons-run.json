@@ -1,0 +1,98 @@
+{
+  "schema": "logos-engine.retained-tool-executions.v1",
+  "executions": [
+    {
+      "command": [
+        "node",
+        "scripts/compare-native-loop-costs.mjs",
+        "docs/migration/lot10a-evidence/performance-integrated/comparison-policy.json",
+        "docs/migration/lot10a-evidence/performance-integrated/cohort1/baseline.json",
+        "docs/migration/lot10a-evidence/performance-integrated/cohort1/after.json",
+        "docs/migration/lot10a-evidence/performance-integrated/cohort1/comparison.json"
+      ],
+      "startedAt": "2026-11-11T00:23:51.455362+00:00",
+      "finishedAt": "2026-11-11T00:23:51.531837+00:00",
+      "exitCode": 0,
+      "inputs": [
+        {
+          "path": "scripts/compare-native-loop-costs.mjs",
+          "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb",
+          "bytes": 9861
+        },
+        {
+          "path": "docs/migration/lot10a-evidence/performance-integrated/comparison-policy.json",
+          "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68",
+          "bytes": 991
+        },
+        {
+          "path": "docs/migration/lot10a-evidence/performance-integrated/cohort1/baseline.json",
+          "sha256": "59f17db6f31629ed2a85c6c18d0df9e2e4e1fe17b0d41ee9e4835ebf1e787d4d",
+          "bytes": 431186
+        },
+        {
+          "path": "docs/migration/lot10a-evidence/performance-integrated/cohort1/after.json",
+          "sha256": "7a0d9781303b701760a9fbad9522160beb434e62785f8ef54151f7d39ce3cd0f",
+          "bytes": 431544
+        }
+      ],
+      "inputsUnchanged": true,
+      "log": {
+        "path": "docs/migration/lot10a-evidence/performance-integrated/cohort1/comparison.log",
+        "sha256": "027dd3eea3af1e059b099fe887408c4c6f394466953f088ec645bbd67a4a9c8e",
+        "bytes": 275
+      },
+      "output": {
+        "path": "docs/migration/lot10a-evidence/performance-integrated/cohort1/comparison.json",
+        "sha256": "9c1f844f20724d79909af8a7b78ca1522ef32d1a074b629495f3b5963c66f621",
+        "bytes": 25389
+      }
+    },
+    {
+      "command": [
+        "node",
+        "scripts/compare-native-loop-costs.mjs",
+        "docs/migration/lot10a-evidence/performance-integrated/comparison-policy.json",
+        "docs/migration/lot10a-evidence/performance-integrated/cohort2/baseline.json",
+        "docs/migration/lot10a-evidence/performance-integrated/cohort2/after.json",
+        "docs/migration/lot10a-evidence/performance-integrated/cohort2/comparison.json"
+      ],
+      "startedAt": "2026-11-11T00:23:51.532999+00:00",
+      "finishedAt": "2026-11-11T00:23:51.595036+00:00",
+      "exitCode": 0,
+      "inputs": [
+        {
+          "path": "scripts/compare-native-loop-costs.mjs",
+          "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb",
+          "bytes": 9861
+        },
+        {
+          "path": "docs/migration/lot10a-evidence/performance-integrated/comparison-policy.json",
+          "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68",
+          "bytes": 991
+        },
+        {
+          "path": "docs/migration/lot10a-evidence/performance-integrated/cohort2/baseline.json",
+          "sha256": "78e0481dbf9aff3289dd7016e221e58ac163e3b0a55a4ef9afb44acd03be2b96",
+          "bytes": 431237
+        },
+        {
+          "path": "docs/migration/lot10a-evidence/performance-integrated/cohort2/after.json",
+          "sha256": "ced69f50233de231baae115621e180651ac42b9176c53088e79c7ed359a2a68c",
+          "bytes": 431519
+        }
+      ],
+      "inputsUnchanged": true,
+      "log": {
+        "path": "docs/migration/lot10a-evidence/performance-integrated/cohort2/comparison.log",
+        "sha256": "a5f15ae506f60bae3f8d0dac2f5e98a72ece3ea47dabf34406458a3f54a84f87",
+        "bytes": 284
+      },
+      "output": {
+        "path": "docs/migration/lot10a-evidence/performance-integrated/cohort2/comparison.json",
+        "sha256": "0461b436c82b3d19f11f8e2896605dcef0bc74a6243dd83b9e1c563b37f33860",
+        "bytes": 25413
+      }
+    }
+  ],
+  "qualification": "Actual unchanged pair comparators executed after the complete official window. Diagnostic phase statuses are retained and do not decide the separately declared global budget."
+}

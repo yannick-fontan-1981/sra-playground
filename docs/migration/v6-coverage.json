@@ -30,10 +30,10 @@
     "declaredClassesAndFunctions": 12857,
     "dataFiles": 417,
     "verifiedModules": 0,
-    "componentVerifiedModules": 181,
-    "partiallyTransferredModules": 146,
+    "componentVerifiedModules": 185,
+    "partiallyTransferredModules": 147,
     "transferredUnverifiedModules": 0,
-    "pendingModules": 1042,
+    "pendingModules": 1037,
     "strategyFamilies": 16
   },
   "families": [
@@ -3874,9 +3874,15 @@
           "endLine": 588
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-axial-question-geometry.ts"
+      ],
+      "proof": [
+        "tests/fixtures/v6-axial-question-reference.json.gz",
+        "tests/v6-axial-question-reference.test.ts",
+        "docs/migration/lot10a-axial-question-lineage.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/axial_route_a.py",
@@ -75817,7 +75823,9 @@
         "tests/v6-morphology-methods-reference.test.ts",
         "docs/migration/lot2c-method-continuation-lineage.md",
         "tests/v6-ranked-workshop-kernel.test.ts",
-        "docs/migration/lot7a-ranked-workshop-lineage.md"
+        "docs/migration/lot7a-ranked-workshop-lineage.md",
+        "tests/v6-axial-question-kernel.test.ts",
+        "docs/migration/lot10a-axial-question-lineage.md"
       ]
     },
     {
@@ -87345,9 +87353,13 @@
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "lines": 0,
       "definitions": [],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-axial-question.ts"
+      ],
+      "proof": [
+        "tests/v6-axial-question-reference.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/axial_question/family.py",
@@ -87428,9 +87440,19 @@
           "endLine": 77
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-axial-question-geometry.ts",
+        "src/logos-engine/v6-axial-question-policy.ts",
+        "src/logos-engine/v6-axial-question.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "tests/fixtures/v6-axial-question-reference.json.gz",
+        "tests/v6-axial-question-reference.test.ts",
+        "tests/v6-axial-question-kernel.test.ts",
+        "docs/migration/lot10a-axial-question-lineage.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/axial_question/geometry.py",
@@ -87469,9 +87491,19 @@
           "endLine": 84
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-axial-question-geometry.ts",
+        "src/logos-engine/v6-axial-question-policy.ts",
+        "src/logos-engine/v6-axial-question.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "tests/fixtures/v6-axial-question-reference.json.gz",
+        "tests/v6-axial-question-reference.test.ts",
+        "tests/v6-axial-question-kernel.test.ts",
+        "docs/migration/lot10a-axial-question-lineage.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/axial_question/policy.py",
@@ -87504,9 +87536,19 @@
           "endLine": 15
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-axial-question-geometry.ts",
+        "src/logos-engine/v6-axial-question-policy.ts",
+        "src/logos-engine/v6-axial-question.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "tests/fixtures/v6-axial-question-reference.json.gz",
+        "tests/v6-axial-question-reference.test.ts",
+        "tests/v6-axial-question-kernel.test.ts",
+        "docs/migration/lot10a-axial-question-lineage.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/chart_navigation/__init__.py",
@@ -94924,7 +94966,9 @@
         "tests/v6-control-attention-kernel.test.ts",
         "docs/migration/lot2b-control-attention-lineage.md",
         "tests/v6-ranked-workshop-kernel.test.ts",
-        "docs/migration/lot7a-ranked-workshop-lineage.md"
+        "docs/migration/lot7a-ranked-workshop-lineage.md",
+        "tests/v6-axial-question-kernel.test.ts",
+        "docs/migration/lot10a-axial-question-lineage.md"
       ]
     },
     {
@@ -99069,6 +99113,7 @@
     "Lot3E/native0.46 transfers ReceptionService own measured projection, access/return contracts, consumed ResidualAccess evidence reducer and V5 wait ledger. Source-mode component fixtures remain distinct from named native common ownership/current-epoch/wait adaptations. The facade is5/6; ReferencePopulation and full inherited closure remain pending.50/76complete entries,37compiled workflows and six false completion gates remain distinct. No campaign or cost result is inferred from mappings; actual evidence is documented in lot3e-reception-service.md.",
     "Lot3F/native0.47 connects ReferencePopulation as the sixth declared observed-composition branch under the existing SharedSeries owner. Measured projection, acquired selection/control, exact finite-cell matching and conditional selected cardinal motion have independent source and native contracts. The entry facade becomes6/6 and51/76 complete declared entries, with37 compiled workflows; inherited source closure, color/terminal laws and full original-caller parity remain partial. All six global completion gates remain false. Campaign and cost outcomes are separate evidence, not inferred from this mapping.",
     "Lot3G/native0.48 connects framed_window_composition immediately after rooted_quota_composition under the authoritative SharedSeries owner. Exact current pixel equality supports a conditional point experiment; only real supplied returns acquire trial outcomes. Source component parity, native interrupted-pixel/malformed-response adaptations and exhaustive prefilter limits remain explicit.52/76 declared entries,6/6 observed branches and37 compiled workflows are separate counts; all six completion gates remain false. Integrated synthetic evidence, retained public views, regressions and cost outcomes are qualified independently, with no game victory inferred from component contracts.",
+    "Lot10A transfers axial_question with an independently checked source chooser, geometry and active/passive acquired owner. Its complete common synthetic loop is cold and uses actual SRC/WHY-ACT/action/return/restoration. The current_epoch_axial_packet_attribution extension is separately qualified from exact Python behavior. Four subsequent lot10 entries remain pending; no new game success or cost acceptance follows from these component proofs.",
     "Lot5A proposes two component_verified mappings (LinkedPreparation and LinkedContact) and two partial_transfer mappings (PhaseRelations and PhaseTransfer). The consumed entry calls phase.linked_contact.propose directly. Passive phase acquisition, conditional portable knowledge and legacy guard delegation do not activate the independent PhaseRelations/PhaseTransfer proposal policies. No complete-migration gate, final integrated entry audit or campaign result is advanced by these component statuses.",
     "The independent Python fixture is generated from the unchanged pinned originals and contains 14 helpers, nine cold chains / 165 operations, 13 explicit direct components and two retained source exceptions. Native tests compare admitted results and complete projected state for both continuous owners and owners restored after every operation. All 51 focused tests and the transitive targeted typecheck pass in the postreview development receipt, with unchanged direct-input fingerprints; this predates integration of the effectively published lot 7A parent and is not its merged-source gate.",
     "Malformed AFTER without entities is an explicit invalid-input difference: Python appends a command and then raises KeyError('entities'), leaving a partial inconsistent history, which the fixture preserves verbatim. Native ingress rejects that malformed observation with TypeError before mutation. An already retained partial BEFORE remains admitted when source record does not snapshot it. Neither exception is normalized into null or a successful acquired transition, and restoration is not weakened to admit the corrupted source history.",

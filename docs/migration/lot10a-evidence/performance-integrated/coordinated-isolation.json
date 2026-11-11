@@ -1,0 +1,182 @@
+{
+  "schema": "logos-engine.coordinated-cost-isolation.v1",
+  "status": "acknowledged_quiet_before_window",
+  "recordedAt": "2026-11-11T00:14:22.583617+00:00",
+  "otherLaneAcknowledged": true,
+  "ownTrackedComputeEnded": true,
+  "previewStopped": true,
+  "costNodeOptionsOverride": null,
+  "performanceDirectory": "docs/migration/lot10a-evidence/performance-integrated",
+  "nativeDigests": {
+    "baseline": "ea25603262a7473e5ab9994d2e2e86dd64a8291dd7c1dc18ede4d1f443cdc53b",
+    "candidate": "be11e761de3c0f3c7d50d10da47be9e0d7b4fc9c5b7d5002cc9272ffce85645a"
+  },
+  "declaration": {
+    "path": "docs/migration/lot10a-evidence/performance-integrated/declaration.json",
+    "sha256": "ce3b13a7afad39f1de8caa9421ad029bb577ff42497d92ab404ef0c15f6f21e8",
+    "bytes": 6799
+  },
+  "knownLanes": [
+    {
+      "name": "10A axial_question",
+      "updatedAt": "2026-11-11T00:14:22.570883+00:00",
+      "activeCommand": null,
+      "snapshot": {
+        "path": "docs/migration/lot10a-evidence/performance-integrated/coordination-snapshots/lot10a-status.json",
+        "sha256": "ccd08e86d21c1bc61ccdd1f241c2d8daa5f7ba11ca376496c47393e4f5f6238f",
+        "bytes": 5259
+      },
+      "acknowledgementKind": "own_compute_completed",
+      "qualification": "The exact status bytes are retained. Historical started flags do not override explicit terminal completion and release. Current4C/5B commitments explicitly include their agents and extend until10A release."
+    },
+    {
+      "name": "3I recurrent_series",
+      "updatedAt": "2026-11-10T19:03:07.717559+00:00",
+      "activeCommand": null,
+      "snapshot": {
+        "path": "docs/migration/lot10a-evidence/performance-integrated/coordination-snapshots/lot3-status.json",
+        "sha256": "f397d6076b5fde6775fe5056c48e3b69dd10110fcd68d0d627f0849d2a4a8076",
+        "bytes": 4769
+      },
+      "acknowledgementKind": "retained_terminal_release",
+      "qualification": "The exact status bytes are retained. Historical started flags do not override explicit terminal completion and release. Current4C/5B commitments explicitly include their agents and extend until10A release."
+    },
+    {
+      "name": "4A observed_feedback_sequence",
+      "updatedAt": "2026-11-10T21:02:36.176186+00:00",
+      "activeCommand": null,
+      "snapshot": {
+        "path": "docs/migration/lot10a-evidence/performance-integrated/coordination-snapshots/lot4a-status.json",
+        "sha256": "110a35288d6d7644ddb16c80554ae33605e4e9117bf8cbda4b781e878d4a8830",
+        "bytes": 7341
+      },
+      "acknowledgementKind": "retained_terminal_release",
+      "qualification": "The exact status bytes are retained. Historical started flags do not override explicit terminal completion and release. Current4C/5B commitments explicitly include their agents and extend until10A release."
+    },
+    {
+      "name": "4B relative_arrangement",
+      "updatedAt": "2026-11-10T23:03:50.097808+00:00",
+      "activeCommand": null,
+      "snapshot": {
+        "path": "docs/migration/lot10a-evidence/performance-integrated/coordination-snapshots/lot4b-status.json",
+        "sha256": "e6b2cc3277cc11b0012858734688da427127782ca5457c1034c23836a55f4da3",
+        "bytes": 4153
+      },
+      "acknowledgementKind": "retained_terminal_release",
+      "qualification": "The exact status bytes are retained. Historical started flags do not override explicit terminal completion and release. Current4C/5B commitments explicitly include their agents and extend until10A release."
+    },
+    {
+      "name": "4C",
+      "updatedAt": "2026-11-11T00:13:39.046597+00:00",
+      "activeCommand": null,
+      "snapshot": {
+        "path": "docs/migration/lot10a-evidence/performance-integrated/coordination-snapshots/lot4c-status.json",
+        "sha256": "a55343d655cbc4287d60d2ed9ed6c5f2dd615f471dadec7f54aedee8e4061fee",
+        "bytes": 1660
+      },
+      "acknowledgementKind": "current_10A_window_quiet",
+      "qualification": "The exact status bytes are retained. Historical started flags do not override explicit terminal completion and release. Current4C/5B commitments explicitly include their agents and extend until10A release."
+    },
+    {
+      "name": "5A linked_temporal_preparation and generic long-session performance",
+      "updatedAt": "2026-11-11T00:11:54.910557+00:00",
+      "activeCommand": null,
+      "snapshot": {
+        "path": "docs/migration/lot10a-evidence/performance-integrated/coordination-snapshots/lot5a-status.json",
+        "sha256": "4fac6b06f74a1b03d3f7fd0ef3e2a34532fccf77df98a35a8339003ff0b66ae2",
+        "bytes": 5578
+      },
+      "acknowledgementKind": "retained_terminal_release",
+      "qualification": "The exact status bytes are retained. Historical started flags do not override explicit terminal completion and release. Current4C/5B commitments explicitly include their agents and extend until10A release."
+    },
+    {
+      "name": "5B observed_addressed_material",
+      "updatedAt": "2026-11-11T00:11:54.910557+00:00",
+      "activeCommand": null,
+      "snapshot": {
+        "path": "docs/migration/lot10a-evidence/performance-integrated/coordination-snapshots/lot5b-status.json",
+        "sha256": "345b2ebf700b1565949f3b0051ed02636ce4303914e8aa6f21b36ee0f9aab312",
+        "bytes": 1686
+      },
+      "acknowledgementKind": "current_10A_window_quiet",
+      "qualification": "The exact status bytes are retained. Historical started flags do not override explicit terminal completion and release. Current4C/5B commitments explicitly include their agents and extend until10A release."
+    },
+    {
+      "name": "7A observed_ranked_workshop",
+      "updatedAt": "2026-11-10T21:24:13.816528+00:00",
+      "activeCommand": null,
+      "snapshot": {
+        "path": "docs/migration/lot10a-evidence/performance-integrated/coordination-snapshots/lot7a-status.json",
+        "sha256": "e9c395a90dcfee739a1d52342878ef24739bf1b2d97307eab1f8f6a22ac2fad0",
+        "bytes": 6045
+      },
+      "acknowledgementKind": "retained_terminal_release",
+      "qualification": "The exact status bytes are retained. Historical started flags do not override explicit terminal completion and release. Current4C/5B commitments explicitly include their agents and extend until10A release."
+    },
+    {
+      "name": "7B observed_symbol_transaction",
+      "updatedAt": "2026-11-11T00:03:07.031944+00:00",
+      "activeCommand": null,
+      "snapshot": {
+        "path": "docs/migration/lot10a-evidence/performance-integrated/coordination-snapshots/lot7b-status.json",
+        "sha256": "0aeae41dd69aa0f0e543c3ef72700e21500a9b83b5369a78c1f1018ef2293f2b",
+        "bytes": 3991
+      },
+      "acknowledgementKind": "retained_terminal_release",
+      "qualification": "The exact status bytes are retained. Historical started flags do not override explicit terminal completion and release. Current4C/5B commitments explicitly include their agents and extend until10A release."
+    }
+  ],
+  "evidence": [
+    {
+      "path": "docs/migration/lot10a-evidence/performance-integrated/coordination-snapshots/lot10a-status.json",
+      "sha256": "ccd08e86d21c1bc61ccdd1f241c2d8daa5f7ba11ca376496c47393e4f5f6238f",
+      "bytes": 5259
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/performance-integrated/coordination-snapshots/lot3-status.json",
+      "sha256": "f397d6076b5fde6775fe5056c48e3b69dd10110fcd68d0d627f0849d2a4a8076",
+      "bytes": 4769
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/performance-integrated/coordination-snapshots/lot4a-status.json",
+      "sha256": "110a35288d6d7644ddb16c80554ae33605e4e9117bf8cbda4b781e878d4a8830",
+      "bytes": 7341
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/performance-integrated/coordination-snapshots/lot4b-status.json",
+      "sha256": "e6b2cc3277cc11b0012858734688da427127782ca5457c1034c23836a55f4da3",
+      "bytes": 4153
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/performance-integrated/coordination-snapshots/lot4c-status.json",
+      "sha256": "a55343d655cbc4287d60d2ed9ed6c5f2dd615f471dadec7f54aedee8e4061fee",
+      "bytes": 1660
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/performance-integrated/coordination-snapshots/lot5a-status.json",
+      "sha256": "4fac6b06f74a1b03d3f7fd0ef3e2a34532fccf77df98a35a8339003ff0b66ae2",
+      "bytes": 5578
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/performance-integrated/coordination-snapshots/lot5b-status.json",
+      "sha256": "345b2ebf700b1565949f3b0051ed02636ce4303914e8aa6f21b36ee0f9aab312",
+      "bytes": 1686
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/performance-integrated/coordination-snapshots/lot7a-status.json",
+      "sha256": "e9c395a90dcfee739a1d52342878ef24739bf1b2d97307eab1f8f6a22ac2fad0",
+      "bytes": 6045
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/performance-integrated/coordination-snapshots/lot7b-status.json",
+      "sha256": "0aeae41dd69aa0f0e543c3ef72700e21500a9b83b5369a78c1f1018ef2293f2b",
+      "bytes": 3991
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/performance-integrated/coordination-snapshots/own-compute-ended.json",
+      "sha256": "fe140422335c9d0a07c186b49de2bf3b988e09dfea293d3d9b537961c847dfbe",
+      "bytes": 1169
+    }
+  ],
+  "qualification": "Fresh snapshots after completed functional/structural/static preparation retain terminal3I/4A/4B/5A/7A/7B releases and explicit current4C/5B quiet commitments covering their agents until10A release. All own agents and tracked compute have ended and preview is stopped. The official runner will additionally hold performance.lock exclusively across A1/B1/B2/A2; neither lock availability nor a process scan substitutes for these acknowledgements."
+}

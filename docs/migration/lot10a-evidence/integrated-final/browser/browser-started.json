@@ -1,0 +1,17 @@
+{
+  "schema": "logos-engine.browser-qa-start.v1",
+  "startedAt": "2026-11-10T23:42:25.056369+00:00",
+  "recordedAt": "2026-11-10T23:42:41.572420+00:00",
+  "status": "running",
+  "game": "TRIA",
+  "previewUrl": "http://127.0.0.1:4173/",
+  "previewCheckout": "/workspace/sites/sra-lot10a-20261110/.sites-checkout",
+  "nativeVersion": "0.56.0",
+  "nativeDigest": "be11e761de3c0f3c7d50d10da47be9e0d7b4fc9c5b7d5002cc9272ffce85645a",
+  "cumulativeBeforeSeconds": 763.736664,
+  "remainingBeforeSeconds": 1636.263336,
+  "clockReset": false,
+  "learnedStateInjected": false,
+  "provesAxialContribution": false,
+  "qualification": "Continuous browser QA interval begins with managed preview startup. The entire interval including setup and any errors will be charged to the retained TRIA case clock. Intended source identity, not yet a browser result."
+}

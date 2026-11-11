@@ -1,0 +1,26 @@
+{
+  "schema": "logos-engine.prepared-predecessor-source-observation.v1",
+  "status": "prepared_not_published",
+  "recordedAt": "2026-11-10T23:11:26.466195+00:00",
+  "lot": "7B",
+  "commit": "28f3f388e18bad21a186795f965102a83e6b53d7",
+  "nativeVersion": "0.55.0",
+  "nativeDigest": "ea25603262a7473e5ab9994d2e2e86dd64a8291dd7c1dc18ede4d1f443cdc53b",
+  "nativeFiles": 291,
+  "sourceAndTestWorktreeClean": true,
+  "allNativeFilesMatchedRetainedFreeze": true,
+  "observedFreeze": {
+    "path": "docs/migration/lot10a-evidence/coordination/prepared-7b-native-manifest.json",
+    "sha256": "c301ce42ecb2592f1a4af49d6efde1d91a034cec06536d02b07c878eed31bea9",
+    "bytes": 34553
+  },
+  "observedStatus": {
+    "path": "docs/migration/lot10a-evidence/coordination/prepared-7b-status.json",
+    "sha256": "f22f0fa4f8993993dffd7f7ebe15eb17de7dc071612fd3b7bb72abf8670a225c",
+    "bytes": 3071
+  },
+  "permissionForFinalProofReuse": false,
+  "permissionForCostDeclaration": false,
+  "requiredLaterReconciliation": "Integrate the actually published7B commit, then compare every frozen native/source/test/build and execution input before reusing functional proofs. Any differing consumed byte requires renewed verification on the final source.",
+  "qualification": "Prepared source snapshot only. No claim that7B or10A is published, nor that functional checks or costs have passed."
+}

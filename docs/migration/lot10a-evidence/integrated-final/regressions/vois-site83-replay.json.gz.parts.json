@@ -1,0 +1,81 @@
+{
+  "schema": "logos-engine.evidence-byte-parts.v1",
+  "original": {
+    "file": "vois-site83-replay.json.gz",
+    "sha256": "262ee2053fca5c355fb0cdeddf5510db4a1d783f30137ded44b5497cf89c8c16",
+    "bytes": 12352513
+  },
+  "parts": [
+    {
+      "file": "vois-site83-replay.json.gz.part000",
+      "sha256": "864335fbbe379393040ebb18238b22e98ea6dd7388a7e229abd0a9a343a8f9cd",
+      "bytes": 900000
+    },
+    {
+      "file": "vois-site83-replay.json.gz.part001",
+      "sha256": "0d76d54a2575ac816107d2e9ec93125d3ee0199a30b5a252ac26c917569a6650",
+      "bytes": 900000
+    },
+    {
+      "file": "vois-site83-replay.json.gz.part002",
+      "sha256": "6c7986411961d678b911c373e8d021122287b89403a907c2bb2ff0056d19d756",
+      "bytes": 900000
+    },
+    {
+      "file": "vois-site83-replay.json.gz.part003",
+      "sha256": "68ae9fa2abfed7003a47799bac615d170645c5e550d78d1b68ddd6da74950ae7",
+      "bytes": 900000
+    },
+    {
+      "file": "vois-site83-replay.json.gz.part004",
+      "sha256": "67ff56e008c7c862b3338970c84a6b79dc17f051c3cbd3169db545f78e2f62b8",
+      "bytes": 900000
+    },
+    {
+      "file": "vois-site83-replay.json.gz.part005",
+      "sha256": "d0d5a9061eff9b9d183f22e8744f17ea68e13369bd5063da076364c5f9f82950",
+      "bytes": 900000
+    },
+    {
+      "file": "vois-site83-replay.json.gz.part006",
+      "sha256": "5e5f78ba16971afd50a967acf4a1ceba5e5b4dd32b503f407ab05ce2f6052a39",
+      "bytes": 900000
+    },
+    {
+      "file": "vois-site83-replay.json.gz.part007",
+      "sha256": "08d4a8af0e968c7eb65038a2cf8d6dfdfb18c77be62fc0584ae5e6c0147bbb66",
+      "bytes": 900000
+    },
+    {
+      "file": "vois-site83-replay.json.gz.part008",
+      "sha256": "4172d20de0a9f7da1702a695f58f18a3a49e8026488850b69e22bdcf04fc7052",
+      "bytes": 900000
+    },
+    {
+      "file": "vois-site83-replay.json.gz.part009",
+      "sha256": "4f1b07b2c9e47cb8e63cb3106b7f92e69a14a8677e3ac193730cebbf788f7a40",
+      "bytes": 900000
+    },
+    {
+      "file": "vois-site83-replay.json.gz.part010",
+      "sha256": "6bd68bf10403d7b30d413ce2eb0a2df095bb68fae81add83515d017e9583d772",
+      "bytes": 900000
+    },
+    {
+      "file": "vois-site83-replay.json.gz.part011",
+      "sha256": "78c1b9dfe017b10430b075c6fd1482615a896dcece22f42ed47a27b35e93ef24",
+      "bytes": 900000
+    },
+    {
+      "file": "vois-site83-replay.json.gz.part012",
+      "sha256": "f235f7d663b7d7e5d17ee4a4006282b6a31ed7c8d779213026fd3710265d49aa",
+      "bytes": 900000
+    },
+    {
+      "file": "vois-site83-replay.json.gz.part013",
+      "sha256": "a96c92e540c2f6112896662df7d90acb9ed3637866e23d9d73210487e94f10c5",
+      "bytes": 652513
+    }
+  ],
+  "qualification": "Exact byte partitions of immutable evidence; original data and checksum are unchanged."
+}

@@ -1,0 +1,26 @@
+{
+  "schema": "logos-engine.lot7b-archive-representations.v1",
+  "status": "different_container_representations_retained",
+  "recordedAt": "2026-11-10T23:59:48.450930+00:00",
+  "local": {
+    "path": "/workspace/sites/sra-lot7b-20261110/lot7b-publish-step-5.tar",
+    "compressedBytes": 14802086,
+    "compressedSha256": "776007facbb505a011252e945600429067df9191f00cf0489a8327fe1c39947b",
+    "decodedTarBytes": 29870080,
+    "decodedTarSha256": "d497668aba2ef5c7fd4eab0da335d60ca081e194e04507ffdf7819b47766630c"
+  },
+  "site88ArchiveStorage": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_000000000e68820eb734f0e08fd0016b",
+    "content_hash": "sha256:edabfe0902bbbe8457cfaa6cef49877c1b0c9400e6f945f053971d69bc7232a8",
+    "size_bytes": 29859840,
+    "file_count": 75
+  },
+  "decodedContainerBytesEqual": false,
+  "diagnostic": {
+    "initialReadOnlyContainerEqualityAssertion": "failed before any receipt write",
+    "fileContentComparison": "all five local archives have the same 75 named file byte hashes and the verified compiled worker",
+    "observedDifferenceBytes": 10240
+  },
+  "qualification": "Local container hashes and server-returned archive hashes are retained separately; byte identity between these archive containers is not claimed. The normal Sites operation binds the supplied build artifact to the exact pushed source commit. Source and build-content equality are recorded independently."
+}

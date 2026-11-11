@@ -1,0 +1,66 @@
+{
+  "schema": "logos-engine.lot10a.validation-runner-static-review.v1",
+  "createdAt": "2026-11-10T21:25:14.170308+00:00",
+  "qualification": "Source text parsed only. No release runner, tests, builds, replay, fixture regeneration or official cost execution was started.",
+  "runners": [
+    {
+      "name": "run-release-checks.py",
+      "astParsed": true,
+      "sha256": "6c188e3bb6125a2e14ae28fd9c4ae66ba28eda1443a66c1c511177222cebe27e"
+    },
+    {
+      "name": "run-regressions.py",
+      "astParsed": true,
+      "sha256": "3fe410356dbed0df745758b9ece3b81a6f53895398ec86dc07f8e652573b2400"
+    }
+  ],
+  "declaredTestFiles": 30,
+  "allDeclaredTestsExist": true,
+  "duplicatedTests": false,
+  "baselineStorage": [
+    {
+      "game": "CATR",
+      "baselineRestorationNeeded": true,
+      "partsManifestMatches": true,
+      "tracePresent": true
+    },
+    {
+      "game": "RSWP",
+      "baselineRestorationNeeded": true,
+      "partsManifestMatches": true,
+      "tracePresent": true
+    },
+    {
+      "game": "FOGW",
+      "baselineRestorationNeeded": true,
+      "partsManifestMatches": true,
+      "tracePresent": true
+    },
+    {
+      "game": "VOIS",
+      "baselineRestorationNeeded": true,
+      "partsManifestMatches": true,
+      "tracePresent": true
+    },
+    {
+      "game": "WEAV",
+      "baselineRestorationNeeded": true,
+      "partsManifestMatches": true,
+      "tracePresent": true
+    },
+    {
+      "game": "CONN",
+      "baselineRestorationNeeded": true,
+      "partsManifestMatches": true,
+      "tracePresent": true
+    },
+    {
+      "game": "MIND",
+      "baselineRestorationNeeded": true,
+      "partsManifestMatches": true,
+      "tracePresent": true
+    }
+  ],
+  "formalEvidenceEmitted": false,
+  "supersededScopeNote": "The initial source-only review above covered 30 files. The prepared scope was subsequently extended to 31 by adding the modified tests/v6-radial-port-integration.test.ts. No runner, test, build or replay was executed for this text change during renewed lane quiet."
+}

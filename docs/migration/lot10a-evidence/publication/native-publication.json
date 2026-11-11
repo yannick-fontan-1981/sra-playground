@@ -1,0 +1,69 @@
+{
+  "schema": "logos-engine.native-site-publication.v1",
+  "status": "succeeded",
+  "recordedAt": "2026-11-11T00:39:24.792Z",
+  "lot": "10A axial_question",
+  "nativeVersion": "0.56.0",
+  "nativeDigest": "be11e761de3c0f3c7d50d10da47be9e0d7b4fc9c5b7d5002cc9272ffce85645a",
+  "retainedDeliveryCommit": "c045cd674f47c1a11b44623e832743d53742ad41",
+  "publishedCommit": "617d1f607d37a6bba1f7ae8ffe1826806e6749a0",
+  "publishedTree": "74af8b5cf1eeebc8abe18afdac0035cd86016b39",
+  "version": {
+    "id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_ef85f23971048191930f820d296b581b",
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "version_number": 90,
+    "source": {
+      "commit_sha": "617d1f607d37a6bba1f7ae8ffe1826806e6749a0"
+    },
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_000000000978820eb62ac087629f6cc3",
+      "content_hash": "sha256:11d54c5d3320c139561241638fdcbb9a33c0c2e895d9789a58c462d9c09b6072",
+      "size_bytes": 29880320,
+      "file_count": 75
+    },
+    "deployment_id": "appgdep_6af3b8cbfd44819198aeec88b7688c49"
+  },
+  "deployment": {
+    "id": "appgdep_6af3b8cbfd44819198aeec88b7688c49",
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "title": "SRA Playground",
+    "version_id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_ef85f23971048191930f820d296b581b",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6adbc388d79081918581b93b919d7258",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-11-11T00:37:52.792934+00:00"
+  },
+  "access": {
+    "id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "current_live_url": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "current_user_role": "owner",
+    "latest_version_number": 90,
+    "access_mode": "custom",
+    "access_policy": {
+      "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+      "revision": 3,
+      "updated_at": "2026-11-02T14:06:30.480596+00:00",
+      "access_mode": "custom",
+      "allowed_user_count": 1,
+      "allowed_user_roles": [
+        "owner"
+      ],
+      "allowed_editor_count": 0,
+      "allowed_group_count": 0,
+      "external_visitor_count": 0
+    }
+  },
+  "sourceTransportPlan": "docs/migration/lot10a-evidence/publication/lot10a-source-push-plan.json",
+  "sourceArchiveEquality": "docs/migration/lot10a-evidence/publication/source-archive-equality.json",
+  "publicationInputGate": "docs/migration/lot10a-evidence/integrated-final/publication-inputs.json",
+  "browserEvidence": "docs/migration/lot10a-evidence/integrated-final/browser/browser-qa.json",
+  "costReview": "docs/migration/lot10a-evidence/performance-integrated/owner-growth-review.json",
+  "ownLiveContribution": "not_established",
+  "qualification": "First actual owner-private publication of native0.56.0, after completed functional proof, declared and accepted global cost, and successful publication-input gate. The five standard ordinary pushes preserve the exact retained delivery tree and original history. No intermediate Site version was saved or deployed. A documentation closure will record this observed publication without changing native or build inputs. POLA, long Axial history, boundary attribution and full caller parity reservations remain."
+}

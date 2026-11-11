@@ -1,0 +1,106 @@
+{
+  "lot": "10A axial_question",
+  "checkout": "/workspace/sites/sra-lot10a-20261110/.sites-checkout",
+  "branch": "lot10a-axial-question",
+  "basePublishedCommit": "bed48116585da864dd5c412ed11dd6990a950e8e",
+  "baseSiteVersion": 83,
+  "updated_at": "2026-11-10T23:28:08.969468+00:00",
+  "stage": "Explicit quiet for 7B official cost. Final 10A validation complete: 1538 tests, 5 project gates, 7 replay cases / 119 comparisons. Replay driver exited 0 at 23:25:37.152744 UTC; shared lock released. No new compute until explicit 7B release.",
+  "heavy_work_started": false,
+  "performance_started": false,
+  "publication_started": false,
+  "quiet_acknowledged": true,
+  "own_agents": "All 10A agents and root have no native computation, tests, build, capture, game, packing or archive work active. Read-only coordination and text edits only.",
+  "publication_order": "Existing queue Site83 -> 5A -> 4B -> 7B preserved; 10A will integrate published predecessors and request its own slot when ready",
+  "request_to_lot5a": "Transport correction acknowledged. 10A has not imported the unpublished 33d91 ancestry. Please post actual saved/deployed commit and final success; no 10A compute will disturb publication or the next 4B window.",
+  "request_to_lot4b": "Your explicit22:48:31 functional release is acknowledged. Only bounded readiness helper validation has resumed; awaiting your actual published commit before integration. No10A cost declaration or timing yet.",
+  "request_to_lot7b": "EXPLICIT 10A QUIET ACK: driver ended 2026-11-10T23:25:37.152744+00:00 with exit 0, performance.lock SH released. Root and all own agents are quiet; our browser was not started. Include this current acknowledgment in isolation. 10A will remain quiet until your explicit compute release. Please announce that release and the actual published 7B commit/version when ready.",
+  "active_command": null,
+  "localFunctionalCommit": "90a8541",
+  "localPreparationCommit": "d967a48af1b6fa04d2a90acdd5eac305231ee33a",
+  "caseClocks": {
+    "POLA": {
+      "priorActions": 94,
+      "priorLevels": 0,
+      "cumulativeSeconds": null,
+      "remainingSeconds": null,
+      "newActions": 0,
+      "status": "prior_clock_unrecoverable_no_new_budget"
+    }
+  },
+  "isolatedFunctional": {
+    "nativeDigest": "cabd056f2fddded1c5f7bcc214bd1fd1ac387764b61cddf42606debe72f37915",
+    "nativeFiles": 282,
+    "archiveFiles": 293,
+    "firstTests": {
+      "passed": 866,
+      "total": 867,
+      "staleOrderExpectation": 1
+    },
+    "correctedFilePassed": 3,
+    "projectChecksPassed": 5,
+    "regressionCasesPassed": 7,
+    "comparisonsPassed": 119,
+    "commands": 292,
+    "prefixes": 210
+  },
+  "localEvidenceCommit": "acc550af7ecad5be4ab3c71c8d73d637be9d6f82",
+  "sourceTransportObjectLimitBytes": 33554432,
+  "sourceTransportObjectComparison": "strictly_less_than",
+  "latestPublishedPredecessor": {
+    "siteVersion": 87,
+    "commit": "dd355400264b50942486559b8ca56ee6dfc6a3cc",
+    "nativeVersion": "0.54.0",
+    "status": "succeeded"
+  },
+  "post5aFunctional": {
+    "mergeCommit": "fff552b4222b001b4fa6da013accb70ed539e301",
+    "nativeDigest": "18cd7e271353a9cd652e1e4814e351f1ae4fb3c3d9d2ac520a0c45fdd1c23b00",
+    "nativeFiles": 286,
+    "kernelCounts": {
+      "tests": 6,
+      "pass": 6,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "entryCount": 58
+  },
+  "historyLookupValidation": {
+    "tests": 136,
+    "passed": 136,
+    "nativeDigest": "8a0465f7edf8454239fdd2bfb301c5714824f33f74a2ed7165b2bec19d237a97"
+  },
+  "source_fetch_active": false,
+  "post4bFunctional": {
+    "nativeDigest": "72a54109f47c7a5002e9778baff67cf944cde68a42b42c1fee2e585766f7d03f",
+    "nativeFiles": 289,
+    "entryCount": 59,
+    "qualification": "Intermediate actual4B plus Axial inventories only; final7B validation pending."
+  },
+  "prepared7B": {
+    "commit": "28f3f388e18bad21a186795f965102a83e6b53d7",
+    "nativeVersion": "0.55.0",
+    "status": "prepared_not_published",
+    "nativeAndTestWorkingTreeClean": true
+  },
+  "candidateNativeVersion": "0.56.0",
+  "nativeFrozenDigest": "be11e761de3c0f3c7d50d10da47be9e0d7b4fc9c5b7d5002cc9272ffce85645a",
+  "nativeFrozenCommit": "19f3116c95e8e8ce99aff067de113ae23fc634d6",
+  "nativeFrozenFiles": 294,
+  "functional_progress": {
+    "formalTestFiles": 45,
+    "formalTests": 1538,
+    "formalPassed": 1538,
+    "projectChecksCompleted": 5,
+    "projectChecksPassed": 5,
+    "replayCasesCompleted": 7,
+    "replayComparisonsPassed": 119,
+    "replayDriverEndedAt": "2026-11-10T23:25:37.152744+00:00",
+    "replayCommands": 292,
+    "replayPrefixes": 210
+  },
+  "quiet_acknowledged_at": "2026-11-10T23:28:08.969468+00:00",
+  "preview_stopped": true
+}

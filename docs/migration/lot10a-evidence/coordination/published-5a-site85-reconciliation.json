@@ -1,0 +1,35 @@
+{
+  "schema": "logos-engine.documentation-predecessor-reconciliation.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T22:28:55.112948+00:00",
+  "firstPublishedPredecessor": {
+    "siteVersion": 84,
+    "commit": "51e2813dedb2d71001290f94f100605e0327ead3"
+  },
+  "documentationSuccessor": {
+    "siteVersion": 85,
+    "commit": "a009e1f138bb18251d697f49647bacc615ee514f"
+  },
+  "predecessorExecutionDiffCommand": [
+    "git",
+    "diff",
+    "--name-only",
+    "51e2813dedb2d71001290f94f100605e0327ead3",
+    "a009e1f138bb18251d697f49647bacc615ee514f",
+    "--",
+    "src",
+    "tests",
+    "public",
+    "content",
+    "package.json",
+    "package-lock.json",
+    "vite.config.ts",
+    "index.html",
+    ".openai/hosting.json"
+  ],
+  "predecessorExecutionDiff": [],
+  "currentNativeSourceDigest": "8a0465f7edf8454239fdd2bfb301c5714824f33f74a2ed7165b2bec19d237a97",
+  "currentNativeFiles": 286,
+  "currentNativeInputsUnchangedFromHistoryLookupValidation": true,
+  "qualification": "The published documentation successor preserves execution inputs; the current Axial native inventory is exactly the inventory of the completed136-test targeted run. No new execution or final10A validation is inferred."
+}

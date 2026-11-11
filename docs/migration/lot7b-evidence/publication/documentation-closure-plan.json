@@ -1,0 +1,38 @@
+{
+  "schema": "logos-engine.lot7b-documentation-closure-plan.v1",
+  "status": "prepared_after_native_publication",
+  "recordedAt": "2026-11-11T00:00:46.275535+00:00",
+  "nativePublishedSiteVersion": 88,
+  "nativePublishedCommit": "43ee01ba5469fd4fbffe10eb6a786fe99b1c35a7",
+  "nativeVersion": "0.55.0",
+  "nativeDigest": "ea25603262a7473e5ab9994d2e2e86dd64a8291dd7c1dc18ede4d1f443cdc53b",
+  "changedExistingPaths": [
+    "README.md",
+    "docs/migration/lot7b-evidence/README.md",
+    "docs/migration/lot7b-symbol-transactions-lineage.md",
+    "docs/migration/lot7b-symbol-transactions.md",
+    "docs/migration/v6-delivery-roadmap.md"
+  ],
+  "newPaths": [
+    "docs/migration/lot7b-evidence/publication/archive-representations.json",
+    "docs/migration/lot7b-evidence/publication/documentation-closure-plan.json",
+    "docs/migration/lot7b-evidence/publication/native-publication.json",
+    "docs/migration/lot7b-evidence/publication/post-publication-input-integrity.json",
+    "docs/migration/lot7b-evidence/publication/source-archive-equality.json",
+    "docs/migration/lot7b-evidence/publication/source-push-1.txt",
+    "docs/migration/lot7b-evidence/publication/source-push-2.txt",
+    "docs/migration/lot7b-evidence/publication/source-push-3.txt",
+    "docs/migration/lot7b-evidence/publication/source-push-4.txt",
+    "docs/migration/lot7b-evidence/publication/source-push-5.txt",
+    "docs/migration/lot7b-evidence/publication/source-push-plan.json",
+    "docs/migration/lot7b-evidence/publication/source-transport.json"
+  ],
+  "nativeTestScriptFixtureBuildInputsChanged": false,
+  "all902FrozenInputFingerprintsUnchanged": true,
+  "postPublicationIntegrity": "post-publication-input-integrity.json",
+  "buildReused": true,
+  "nativeAgentWorkerSha256": "42cd9d454f39d59657621271faa0cb82fc38eaeeb0353e1d4f0aee2a76111974",
+  "newTestsOrTimingRuns": 0,
+  "publicationAudienceChanged": false,
+  "documentationCommitAndDeployment": "To be bound by the external terminal receipt after this documentation commit is published; no future Site version is predicted."
+}
