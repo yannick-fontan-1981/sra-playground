@@ -1,0 +1,410 @@
+{
+  "schema": "logos-engine.lot8a.work-form-qualification-review.v1",
+  "status": "passed",
+  "reviewedAt": "2026-11-11T22:20:47.697606+00:00",
+  "reviewer": "proof_review",
+  "decision": "Prepared work forms and the retained per-role graph qualification are supported by the immutable evidence. All recorded differences match their declared narrow attribution; no official timing or strict graph-parity claim is granted.",
+  "reviewScope": "Read-only evidence inspection and archive field verification; the only write is this new review. No repository module, native runtime, session, qualifier or game was executed.",
+  "candidateHeadDuringReview": "7c8f43365a277406e95c898165d01a7bf6e19772",
+  "baselineHeadDuringReview": "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+  "plans": {
+    "capture": {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/contract/work-form-capture-plan-v2.json",
+      "sha256": "88f6d92d9daba0ccb4f12bc921e451308b9b3c4b60eb343da25ef002de4e0a1c",
+      "bytes": 29751
+    },
+    "qualification": {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/contract/work-form-qualification-plan.json",
+      "sha256": "31487820a4899689cd9ef4e33b52e13d1bac42fa18cb0e647140f4585ce96d2c",
+      "bytes": 32266
+    }
+  },
+  "artifacts": {
+    "ownerInventory": {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/work-forms-01/owner-inventory.json",
+      "sha256": "6bf16425d44e0437d7fa00780140d93b1d7e79e16e95ba3cda3710e8574640d1",
+      "bytes": 127075
+    },
+    "attribution": {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/work-forms-01/owner-graph-attribution.json",
+      "sha256": "58a65d816c52740d401e538165a070a287ddeb9111b5c5ff92e4a5b7ef4e9298",
+      "bytes": 207219
+    },
+    "workForms": {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/work-forms-01/work-forms.json",
+      "sha256": "521772f4db5810e3d9136acef57b92b76ac9c138e971352c7d065f897d906cd5",
+      "bytes": 60514
+    },
+    "differenceStream": {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/work-forms-01/owner-graph-attribution.differences.jsonl.gz",
+      "bytes": 715754,
+      "sha256": "c1c1f9b61080299d3d66c1c8e9554f32e4e91f9f7f8cce2694a7d824ce9baa0e"
+    },
+    "materialization": {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/work-forms-01/baseline-support-materialization.json",
+      "sha256": "e1af98849072860ccba3b0175d2333be63366c7e107ee1c18087272c1096386b",
+      "bytes": 2201
+    }
+  },
+  "fingerprints": {
+    "referencesVerified": 646,
+    "distinctResolvedPaths": 114,
+    "roleScopedInventorySourceInputReferences": 10,
+    "failures": [],
+    "baselineNativeFilesVerified": 322,
+    "candidateNativeFilesVerified": 324,
+    "nativeDigestMapsRecomputed": true
+  },
+  "wrappers": [
+    {
+      "role": "inventory",
+      "receipt": {
+        "path": "docs/migration/lot8a-evidence/qualification-provisional-02/stages/work-form-owner-inventory-02/receipt.json",
+        "sha256": "57a76a2a73ba597ceb72299d848de1ea748c322ea3e20d413cb89c0b0fd21e96",
+        "bytes": 1164933
+      },
+      "status": "passed",
+      "exitCode": 0,
+      "semanticAssertions": 7,
+      "allAssertionsPassed": true,
+      "frozenInputsUnchanged": true,
+      "rawLogsMatchCompressedCopies": true
+    },
+    {
+      "role": "baseline",
+      "receipt": {
+        "path": "docs/migration/lot8a-evidence/qualification-provisional-02/stages/work-form-baseline-capture/receipt.json",
+        "sha256": "33b14f5bc7faadcb303de37458b94b8b0cd63d6b2134be07d2e63ccd8ec258b3",
+        "bytes": 1167079
+      },
+      "status": "passed",
+      "exitCode": 0,
+      "semanticAssertions": 11,
+      "allAssertionsPassed": true,
+      "frozenInputsUnchanged": true,
+      "rawLogsMatchCompressedCopies": true
+    },
+    {
+      "role": "candidate",
+      "receipt": {
+        "path": "docs/migration/lot8a-evidence/qualification-provisional-02/stages/work-form-candidate-capture/receipt.json",
+        "sha256": "3f43e748c791b2b585588924685178d3f847254a108d04d06ae47d92da7d194c",
+        "bytes": 1167125
+      },
+      "status": "passed",
+      "exitCode": 0,
+      "semanticAssertions": 11,
+      "allAssertionsPassed": true,
+      "frozenInputsUnchanged": true,
+      "rawLogsMatchCompressedCopies": true
+    },
+    {
+      "role": "qualification",
+      "receipt": {
+        "path": "docs/migration/lot8a-evidence/qualification-provisional-02/stages/work-form-graph-qualification/receipt.json",
+        "sha256": "350ad089ea02a1a5755f0779ccd7cc326b0bd687d102608914481d2969fe89aa",
+        "bytes": 1180987
+      },
+      "status": "passed",
+      "exitCode": 0,
+      "semanticAssertions": 19,
+      "allAssertionsPassed": true,
+      "frozenInputsUnchanged": true,
+      "rawLogsMatchCompressedCopies": true
+    }
+  ],
+  "roles": {
+    "baseline": {
+      "checkout": "/workspace/sites/sra-lot8a-prepared6b-20261111",
+      "sourceCommit": "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+      "nativeVersion": "0.64.0",
+      "nativeFileCount": 322,
+      "nativeDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+      "factorySourceDigest": "38723a2f1b6a933d6052223eae75972c410139c02fe84778b27ffdee9ad9a34f",
+      "published": false,
+      "captureReceipt": {
+        "path": "docs/migration/lot8a-evidence/qualification-provisional-02/work-forms-01/baseline-capture.receipt.json",
+        "sha256": "af518982bfa642ae5a0008ae8d8cba4b3b349b1d68518ab0e466f6778193f1e5",
+        "bytes": 121833
+      },
+      "captureReport": {
+        "path": "docs/migration/lot8a-evidence/qualification-provisional-02/work-forms-01/baseline-capture.json.gz",
+        "bytes": 6205663,
+        "sha256": "33d94de6a2f1f47bfdc9857c6fa465d6f986c7033fb8ba33feaa999b5a7de08c"
+      },
+      "sessions": 4,
+      "actions": 31,
+      "measuredCostSessions": 0,
+      "timingReportsRead": 0,
+      "timingMetricsProduced": 0,
+      "allNativeFileHashesVerified": true
+    },
+    "candidate": {
+      "checkout": "/workspace/sites/sra-lot8a-motif-20261111/.sites-checkout",
+      "sourceCommit": "7c8f43365a277406e95c898165d01a7bf6e19772",
+      "nativeVersion": "0.65.0",
+      "nativeFileCount": 324,
+      "nativeDigest": "936fa2bf81965272b1ddbab4a5c01f98aeb6a48188c1f7a8c91de226598c5e43",
+      "factorySourceDigest": "d159809d342551dd34d1b22bcc523d00399162852ae041aee4799722cabcd18f",
+      "published": false,
+      "captureReceipt": {
+        "path": "docs/migration/lot8a-evidence/qualification-provisional-02/work-forms-01/candidate-capture.receipt.json",
+        "sha256": "74d776675c5c3823cba2503f462d2275f95e3e731a8d8a8d8cbd7389cfb47c1c",
+        "bytes": 121570
+      },
+      "captureReport": {
+        "path": "docs/migration/lot8a-evidence/qualification-provisional-02/work-forms-01/candidate-capture.json.gz",
+        "bytes": 6245059,
+        "sha256": "c95c7fadb14757570866af422182cb85e659beee1fe71b57ffb7a5302765aa6b"
+      },
+      "sessions": 4,
+      "actions": 31,
+      "measuredCostSessions": 0,
+      "timingReportsRead": 0,
+      "timingMetricsProduced": 0,
+      "allNativeFileHashesVerified": true
+    }
+  },
+  "materialization": {
+    "receipt": {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/work-forms-01/baseline-support-materialization.json",
+      "sha256": "e1af98849072860ccba3b0175d2333be63366c7e107ee1c18087272c1096386b",
+      "bytes": 2201
+    },
+    "baselineCommit": "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+    "declarativePath": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/composition_target_tree.json",
+    "bytes": 5341,
+    "sha256": "2a1e4f20eccb89ba2eca9f2b6cfe0e33528c283251453853f0a8a80b43d96635",
+    "exactBlobFromSameBaselineCommit": true,
+    "identicalCandidateBytes": true,
+    "nativeCodeUnchanged": true,
+    "retainedInitialFailure": {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/stages/work-form-owner-inventory/receipt.json",
+      "sha256": "f08b0693fc828a1fa77cf81cd3ecd9ad3d718756b8ca18bdee6f47ed281ced93",
+      "bytes": 1160838
+    },
+    "initialInventoryStatus": "failed",
+    "initialInventoryExitCode": 1,
+    "initialInventoryOutputs": [],
+    "initialDiagnostic": "ERR_MODULE_NOT_FOUND for composition_target_tree.json imported by v6-target-binding.ts",
+    "runtimeSessionsDuringMaterialization": 0
+  },
+  "populationCounts": {
+    "qualifierChecks": 64,
+    "pairedGraphPoints": 58,
+    "roleGraphPoints": 116,
+    "clockBounds": 168,
+    "clockBoundsPerRole": 84,
+    "ownerCheckpointCoverageEntries": 290,
+    "sourceFactCoverageEntries": 116,
+    "workForms": 4,
+    "sessionsPerRole": 4,
+    "actionsPerRole": 31,
+    "qualificationWrapperAssertions": 19
+  },
+  "workForms": [
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "actionsPerRole": 3,
+      "terminalInspectionsPerRole": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "actionsPerRole": 10,
+      "terminalInspectionsPerRole": 3
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "actionsPerRole": 3,
+      "terminalInspectionsPerRole": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "actionsPerRole": 15,
+      "terminalInspectionsPerRole": 3
+    }
+  ],
+  "attributionAudit": {
+    "status": "passed",
+    "method": "Data-only archive inspection; no repository module imported or executed.",
+    "differenceRows": 21956,
+    "differenceStreamDecodedBytes": 16110551,
+    "differenceStreamDecodedSha256": "3c8f72fa42c6eb57de488cc54b7b3cda907e6e0d29f3f6e2321855b9e09a66d1",
+    "classes": {
+      "attributed_role_source_digest": 20893,
+      "attributed_exact_trace_created_wall_clock": 1055,
+      "attributed_motif_owner_or_reachable_fragment": 8
+    },
+    "eachSideAttributionChecks": {
+      "baseline": {
+        "attributed_role_source_digest": 20893,
+        "attributed_exact_trace_created_wall_clock": 1055,
+        "attributed_motif_owner_or_reachable_fragment": 8
+      },
+      "candidate": {
+        "attributed_role_source_digest": 20893,
+        "attributed_exact_trace_created_wall_clock": 1055,
+        "attributed_motif_owner_or_reachable_fragment": 8
+      }
+    },
+    "captureArchives": {
+      "baseline": {
+        "records": 98,
+        "types": {
+          "preflight": 1,
+          "session_start": 4,
+          "capture": 52,
+          "command_checked": 31,
+          "session_end": 4,
+          "terminal_inspection": 6
+        },
+        "coldSessions": 4,
+        "points": 58,
+        "declaredFactorySourceDigest": "38723a2f1b6a933d6052223eae75972c410139c02fe84778b27ffdee9ad9a34f",
+        "formsExactlyMatchRawSessionEndAndReceipt": true
+      },
+      "candidate": {
+        "records": 98,
+        "types": {
+          "preflight": 1,
+          "session_start": 4,
+          "capture": 52,
+          "command_checked": 31,
+          "session_end": 4,
+          "terminal_inspection": 6
+        },
+        "coldSessions": 4,
+        "points": 58,
+        "declaredFactorySourceDigest": "d159809d342551dd34d1b22bcc523d00399162852ae041aee4799722cabcd18f",
+        "formsExactlyMatchRawSessionEndAndReceipt": true
+      }
+    },
+    "clockProofsBoundToActualCaptureRows": 168,
+    "clockProofsByRole": {
+      "baseline": 84,
+      "candidate": 84
+    },
+    "motifAddedNodes": [
+      {
+        "case": "STCK",
+        "form": "warmup",
+        "nodeId": "family_state:motif_access",
+        "nodeSha256": "fc6044c9de8747fa6666c2f81187728a82f8528c8932aa88d62c93d81ff6b540"
+      },
+      {
+        "case": "STCK",
+        "form": "warmup",
+        "nodeId": "family_activation:motif_access",
+        "nodeSha256": "9b5ac3cbb114e1b1cdf03608db71f4fe42b74fe1d06fbea02150ca9a6af0f69a"
+      },
+      {
+        "case": "STCK",
+        "form": "measured",
+        "nodeId": "family_state:motif_access",
+        "nodeSha256": "e008f974b56e5ad256f0318e55502076afc84c430df0658c71009aa52f6182ef"
+      },
+      {
+        "case": "STCK",
+        "form": "measured",
+        "nodeId": "family_activation:motif_access",
+        "nodeSha256": "aa3780f4085fa87d203ea862a25f0a9fa7dca25df0341ad989f07e9dd00ac9df"
+      },
+      {
+        "case": "SMLP",
+        "form": "warmup",
+        "nodeId": "family_state:motif_access",
+        "nodeSha256": "9736cfb48d6fe840637af1cb835e0535f610b4f2ab5aa644c64dbae5ca0525b3"
+      },
+      {
+        "case": "SMLP",
+        "form": "warmup",
+        "nodeId": "family_activation:motif_access",
+        "nodeSha256": "35dcbe1a95340ede529cb9c62dfd9d9d4112b6655e9bec0aa3d2464a8f63620b"
+      },
+      {
+        "case": "SMLP",
+        "form": "measured",
+        "nodeId": "family_state:motif_access",
+        "nodeSha256": "b4804e201f7cbbc81509ea6c5951e12a075d1449ba010bc60b8f011c6eeb1129"
+      },
+      {
+        "case": "SMLP",
+        "form": "measured",
+        "nodeId": "family_activation:motif_access",
+        "nodeSha256": "06831b569381191c3b4a5b79d92a9151771dca27079def3c4d4685788720de5f"
+      }
+    ],
+    "formsCanonicalHashMatches": true,
+    "errors": []
+  },
+  "attributionScope": {
+    "sourceDigest": {
+      "occurrences": 20893,
+      "onlyPath": "/origin/source_digest",
+      "bothValuesMatchCapturedNodesAndIndependentlyRecordedFactoryDigests": true,
+      "nativeFileDigestAndFactorySourceDigestRemainDistinct": true
+    },
+    "createdClock": {
+      "occurrences": 1055,
+      "onlyObservedPath": "/value/root/members/created/bits",
+      "exactFloat64BitsValidatedAgainstBothRawCaptures": true,
+      "integerMillisecondRoundTrip": true,
+      "sourceTraceIdAndComponentChecked": true,
+      "all168FirstCreationBoundsMatchActualCapturedServiceCallIntervals": true,
+      "allRetainedTraceTimestampsUnchanged": true,
+      "bodyAndOtherRawValueLeavesNotOmitted": true
+    },
+    "motifPopulation": {
+      "occurrences": 8,
+      "actualAddedIds": [
+        "family_state:motif_access",
+        "family_activation:motif_access"
+      ],
+      "oncePerIdPerWorkForm": true,
+      "baselineAbsenceAndCandidatePresenceVerified": true,
+      "allEightCanonicalNodeHashesVerifiedFromCapture": true,
+      "additionalFragmentPopulationDifferencesInThisRun": 0
+    },
+    "unattributedDifferences": 0,
+    "completeDifferenceStreamReadToEof": true
+  },
+  "ownerScope": {
+    "bindingAndSelectedRigidRegisteredInBothRoles": true,
+    "motifRegisteredOnlyInCandidate": true,
+    "bindingRecordsEveryFixedPublicReturn": true,
+    "selectedRigidRecordedReturns": 0,
+    "persistedSelectedMotifFacts": 0,
+    "sameEpisodeThreeActiveOwnerBehaviorEstablished": false
+  },
+  "preservedLimits": {
+    "preparedOnly": true,
+    "officialPerformanceEligible": false,
+    "strictCommonGraphParity": false,
+    "actualPublishedBaseline": false,
+    "officialWindowCreated": false,
+    "readinessCreated": false,
+    "timingMetricsProduced": 0,
+    "fullOriginalCallerParityEstablished": false,
+    "publicationPerformedByReviewer": false,
+    "globalLockUsedByReviewer": false
+  },
+  "limitations": [
+    "Zero unattributed differences describes the four observed prepared work forms and these finite graph points; it is not a general equivalence theorem or a strict graph-identity claim.",
+    "The original qualifier validated each role with its retained Kernel/store. This reviewer inspected its pinned implementation and terminal evidence, then checked every recorded attribution against archived fields, without rerunning that qualifier.",
+    "Warmup/measured are fixture shape names. Both captures were untimed, and the source baseline is an unpublished prepared parent.",
+    "Presence, checkpoints and restore/proposal observations of owners do not establish a same-episode execution with three active owners or complete original caller parity.",
+    "The 1536 MiB flag is a Node old-space cap and is not an official cost result or a total RSS limit."
+  ],
+  "blockers": [],
+  "nativeExecutionsByReviewer": 0,
+  "gameExecutionsByReviewer": 0,
+  "qualifierReexecutionsByReviewer": 0,
+  "commitsByReviewer": 0,
+  "writesByReviewer": [
+    "docs/migration/lot8a-evidence/qualification-provisional-02/review/work-form-qualification-review.json"
+  ]
+}

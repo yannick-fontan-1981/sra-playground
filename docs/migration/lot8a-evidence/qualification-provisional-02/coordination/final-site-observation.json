@@ -1,0 +1,51 @@
+{
+  "schema": "logos-engine.lot8a.final-publication-observation.v1",
+  "observedAt": "2026-11-11T22:15:45.380Z",
+  "providerOperations": [
+    "sites_get_site",
+    "sites_get_site_version",
+    "sites_get_deployment_status"
+  ],
+  "site": {
+    "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+    "latestVersionNumber": 103,
+    "status": "active",
+    "currentLiveUrl": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "accessMode": "custom",
+    "accessPolicyRevision": 3,
+    "allowedUsers": 1,
+    "allowedGroups": 0,
+    "externalVisitorCount": 0,
+    "ownerOnly": true
+  },
+  "version": {
+    "id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_c8356cd5ad648191a646ac0a9c059a24",
+    "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+    "versionNumber": 103,
+    "source": {
+      "commit_sha": "4afcbfe6a25bd3a88223be543e443bc53b9c8814"
+    },
+    "deploymentId": "appgdep_6af49db69234819195c9c093cb79a7da"
+  },
+  "deployment": {
+    "id": "appgdep_6af49db69234819195c9c093cb79a7da",
+    "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+    "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_c8356cd5ad648191a646ac0a9c059a24",
+    "status": "succeeded",
+    "type": "publish",
+    "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "failureMessage": null,
+    "updatedAt": "2026-11-11T16:54:28.036164+00:00"
+  },
+  "actualPublishedNativeVersion": "0.62.0",
+  "nativeVersionSource": "docs/migration/lot10b-evidence/recovery-20261111/publication-062/native-publication.json",
+  "actualPublishedSource": "4afcbfe6a25bd3a88223be543e443bc53b9c8814",
+  "unpublishedCandidates": [
+    "5C / 0.63",
+    "6B / 0.64",
+    "8A / 0.65"
+  ],
+  "qualification": "Read-only final observation. Version103 source and its succeeded deployment are freshly retrieved; access remains owner-only, revision3. Candidate branch checkpoints do not publish the Site.",
+  "sitePublicationPerformed": false,
+  "performanceStarted": false
+}

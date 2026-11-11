@@ -1,0 +1,130 @@
+{
+  "schema": "logos-engine.lot8a.resumption-push-index.v1",
+  "recordedAt": "2026-11-11T22:21:10.178323+00:00",
+  "receipts": [
+    {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/transport/lot8a-resumption-common-push-01.json",
+      "sha256": "db13d0371d2f28f233d35a132a5368c75c739a4d3a68ff71affae92ebbd4a384",
+      "bytes": 4238,
+      "status": "pushed_and_verified",
+      "expectedCommit": "f51e87261386e9a6bd95d0b630ddc991d92af7d6",
+      "remoteCommitAfter": "f51e87261386e9a6bd95d0b630ddc991d92af7d6",
+      "globalLockAcquired": false,
+      "sitePublicationPerformed": false,
+      "finishedAt": "2026-11-11T21:37:10.587028+00:00"
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/transport/lot8a-resumption-prepared-baseline-support-push-01.json",
+      "sha256": "d0dc5cfbd412d16790fc6b1e53616c9ac4cdca4e1aefa26e578832bbd576d4fe",
+      "bytes": 4237,
+      "status": "pushed_and_verified",
+      "expectedCommit": "7c8f43365a277406e95c898165d01a7bf6e19772",
+      "remoteCommitAfter": "7c8f43365a277406e95c898165d01a7bf6e19772",
+      "globalLockAcquired": false,
+      "sitePublicationPerformed": false,
+      "finishedAt": "2026-11-11T22:11:25.878370+00:00"
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/transport/lot8a-resumption-reconciled-regressions-push-01.json",
+      "sha256": "c40d46dd048a3abc8a6b493be59a99dfbad0fc7554c9d8c3c516982fabffbfb0",
+      "bytes": 4232,
+      "status": "pushed_and_verified",
+      "expectedCommit": "44e8dafc60041d698357a55c27665cf27ceaa19c",
+      "remoteCommitAfter": "44e8dafc60041d698357a55c27665cf27ceaa19c",
+      "globalLockAcquired": false,
+      "sitePublicationPerformed": false,
+      "finishedAt": "2026-11-11T22:08:52.323092+00:00"
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/transport/lot8a-resumption-selected-push-01.json",
+      "sha256": "485cd5133ac4769a1fb14cc8674c7218f4d6993886371df20cdeba88e12ba6e0",
+      "bytes": 4239,
+      "status": "pushed_and_verified",
+      "expectedCommit": "deb4b5e433eccdd94b0edd9321b81d2f775f4e26",
+      "remoteCommitAfter": "deb4b5e433eccdd94b0edd9321b81d2f775f4e26",
+      "globalLockAcquired": false,
+      "sitePublicationPerformed": false,
+      "finishedAt": "2026-11-11T21:37:26.562333+00:00"
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/transport/lot8a-resumption-stream-first-results-push-01.json",
+      "sha256": "0943623b0b30ed4f56055e67ed2743904121421383a67ab1a7e4ea9e54ae3f3d",
+      "bytes": 4237,
+      "status": "pushed_and_verified",
+      "expectedCommit": "5f6a3c13da47166868f0528b6755c937116377ae",
+      "remoteCommitAfter": "5f6a3c13da47166868f0528b6755c937116377ae",
+      "globalLockAcquired": false,
+      "sitePublicationPerformed": false,
+      "finishedAt": "2026-11-11T21:42:34.150705+00:00"
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/transport/lot8a-resumption-stream-push-01.json",
+      "sha256": "dddfcf53586866aff837162116fa0750ac761bb81cece88556007a2fcdd468b0",
+      "bytes": 4239,
+      "status": "pushed_and_verified",
+      "expectedCommit": "dae198c42a2270100ce3cbff9c1bc57d52adf8b1",
+      "remoteCommitAfter": "dae198c42a2270100ce3cbff9c1bc57d52adf8b1",
+      "globalLockAcquired": false,
+      "sitePublicationPerformed": false,
+      "finishedAt": "2026-11-11T21:39:52.513308+00:00"
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/transport/lot8a-resumption-terminal-regressions-push-01.json",
+      "sha256": "757baec45c4ba346953577bb0823e8fdee68c72470805ae2007e3b8dc2ec9214",
+      "bytes": 4229,
+      "status": "pushed_and_verified",
+      "expectedCommit": "f5f6062e4a60ccd23b3f9c00cb89ccf607612b7e",
+      "remoteCommitAfter": "f5f6062e4a60ccd23b3f9c00cb89ccf607612b7e",
+      "globalLockAcquired": false,
+      "sitePublicationPerformed": false,
+      "finishedAt": "2026-11-11T22:01:40.568982+00:00"
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/transport/lot8a-resumption-vois-push-01.json",
+      "sha256": "dcc1464c37be42376b8d06cccc55e016ce7e842453b0e27f04b8bcee6e4f920d",
+      "bytes": 1672,
+      "status": "failed",
+      "expectedCommit": "4eb431ddf2021fc4b394bdf038c0a87911b6b419",
+      "remoteCommitAfter": null,
+      "globalLockAcquired": false,
+      "sitePublicationPerformed": false,
+      "finishedAt": "2026-11-11T21:46:26.922805+00:00"
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/transport/lot8a-resumption-vois-push-02.json",
+      "sha256": "70e511e7378ec72097cd68f6f150dd8ce526a6f19bcb3904f68a6b1c46451bc0",
+      "bytes": 4239,
+      "status": "pushed_and_verified",
+      "expectedCommit": "4eb431ddf2021fc4b394bdf038c0a87911b6b419",
+      "remoteCommitAfter": "4eb431ddf2021fc4b394bdf038c0a87911b6b419",
+      "globalLockAcquired": false,
+      "sitePublicationPerformed": false,
+      "finishedAt": "2026-11-11T21:47:16.198251+00:00"
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/transport/lot8a-resumption-weav-pinned-plan-push-01.json",
+      "sha256": "025b82d2a3f78b9c77929a56ebded1f5ab6052cae8e56fd2b207a4bab8c25c9e",
+      "bytes": 4235,
+      "status": "pushed_and_verified",
+      "expectedCommit": "f3fa67368feafea2f19bc20c386bc20a41b58689",
+      "remoteCommitAfter": "f3fa67368feafea2f19bc20c386bc20a41b58689",
+      "globalLockAcquired": false,
+      "sitePublicationPerformed": false,
+      "finishedAt": "2026-11-11T22:02:33.067435+00:00"
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/transport/lot8a-resumption-workforms-plan-push-01.json",
+      "sha256": "b4b8971a7adefb3c3c62944d11f7d7b3f05fd419484b1ab6848e0dff8b9d2a93",
+      "bytes": 4228,
+      "status": "pushed_and_verified",
+      "expectedCommit": "4918e571b53159f0bcf4ff7e4715cbc913a0652b",
+      "remoteCommitAfter": "4918e571b53159f0bcf4ff7e4715cbc913a0652b",
+      "globalLockAcquired": false,
+      "sitePublicationPerformed": false,
+      "finishedAt": "2026-11-11T21:50:17.803167+00:00"
+    }
+  ],
+  "latestVerifiedAtIndexCreation": "7c8f43365a277406e95c898165d01a7bf6e19772",
+  "laterClosureCommitsMayFollow": true,
+  "scope": "Retained independently verified source branch checkpoints only. Later closure commits and their last verification are reported separately; no official performance lock or Site publication."
+}

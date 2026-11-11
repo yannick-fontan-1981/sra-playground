@@ -1,0 +1,31 @@
+{
+  "schema": "logos-engine.lot8a.final-input-integrity.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-11T22:22:30.532937+00:00",
+  "headBeforeClosure": "7c8f43365a277406e95c898165d01a7bf6e19772",
+  "inputFreeze": {
+    "path": "docs/migration/lot8a-evidence/qualification-provisional-01/contract/input-freeze.json",
+    "sha256": "072b5e52b1dc24a74c7bd2d19d0e6850191441b38005d884d3dc395e180225d4",
+    "bytes": 564572
+  },
+  "inventoryRunner": {
+    "path": "docs/migration/lot8a-evidence/tools/validate-composition.py",
+    "sha256": "3d58f82af41a4c467077f2cb1210347989c8ffac9f008da094b3891272be3e3d",
+    "bytes": 34550
+  },
+  "allFrozenInputsEqual": true,
+  "actualCanonicalInventorySha256": "620f62bab065b2bc11f15e3bc1608af6e8e71dc2c25de7486c4b71f147595a9b",
+  "sourceAndTestInputCount": 745,
+  "auxiliaryScriptInputCount": 382,
+  "buildInputCount": 389,
+  "originalInputFileCount": 1786,
+  "nativeManifest": {
+    "path": "docs/migration/lot8a-evidence/qualification-provisional-01/contract/source-manifest.json",
+    "sha256": "325268f8cd80b67996ab2d4a05df5203247257bc603f1cf29f63f0d9165d7167",
+    "bytes": 38477
+  },
+  "nativeFileCount": 324,
+  "nativeDigest": "936fa2bf81965272b1ddbab4a5c01f98aeb6a48188c1f7a8c91de226598c5e43",
+  "nativeFileHashesEqual": true,
+  "qualification": "Read-only final inventory and hash equality, after documentation and8B source preparation. No tests, source oracle, runtime, game, performance measurement, publication or lock operation executed."
+}
