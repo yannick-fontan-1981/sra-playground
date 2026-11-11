@@ -1,0 +1,979 @@
+{
+  "schema": "logos-engine.native-cost-window-readiness.v1",
+  "status": "ready",
+  "finalizedAt": "2026-11-10T23:31:07.356435+00:00",
+  "measurementAuthorized": true,
+  "pendingRequirements": [],
+  "generator": {
+    "path": "docs/migration/lot7b-evidence/finalize-cost-readiness.py",
+    "sha256": "2daef854c33b272a4641e4f42035b229ea08427ad94648489de922624568d45f",
+    "bytes": 30488
+  },
+  "nativeVersion": "0.55.0",
+  "nativeSourceDigest": "ea25603262a7473e5ab9994d2e2e86dd64a8291dd7c1dc18ede4d1f443cdc53b",
+  "baseline": {
+    "nativeVersion": "0.54.0",
+    "siteVersion": 87,
+    "commit": "dd355400264b50942486559b8ca56ee6dfc6a3cc",
+    "nativeDigest": "f25d56d1c63dc929b01bb31b3898b84cecc69e6e412d535c0d122170ea401ce9",
+    "nativeFiles": 286
+  },
+  "candidate": {
+    "nativeVersion": "0.55.0",
+    "nativeDigest": "ea25603262a7473e5ab9994d2e2e86dd64a8291dd7c1dc18ede4d1f443cdc53b",
+    "nativeFiles": 291,
+    "sourceBaseCommit": "28f3f388e18bad21a186795f965102a83e6b53d7",
+    "checkoutHead": "491a5fe60926ba74753228b744764dd3f6c5357a",
+    "nativeSourceCommit": "491a5fe60926ba74753228b744764dd3f6c5357a",
+    "nativeWorktreeChanges": [],
+    "siteVersion": null,
+    "qualification": "The frozen digest and archive identify candidate bytes. A null source commit means the checkout HEAD is ancestry only. No candidate publication is asserted."
+  },
+  "formalTests": {
+    "tests": 4327,
+    "pass": 4327,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "formalTestFiles": 112,
+  "regressionChecks": 136,
+  "sourceParityCalls": 144,
+  "sourceParityChecks": 432,
+  "sourceCheckpointPrefixes": 36,
+  "sourceCheckpointChecks": 252,
+  "sourceRestoredPrefixes": 36,
+  "game": {
+    "id": "CRAF",
+    "targetLevels": 3,
+    "campaignLevels": 3,
+    "browserLevels": 3,
+    "targetMet": true,
+    "browserTargetMet": true,
+    "browserQualification": "Actual managed browser UI on integrated0.55 frozen source/build. Cold CRAF selected from level1; Pause, exact one-action increment, continued same reasoning session and three natural boundaries observed. Current visible owner public_symbol_transaction. No arbitrary level jump or learned-state injection. No full original-caller parity, instantaneous interrupt, measured Pause latency or cost benchmark claimed. Initial CUA session inactivity reset preceded UI interaction and was recovered normally. Screenshot and actual accessibility observations retained.",
+    "qualification": "Integrated final cold campaign, original Python source/actual restoration parity and managed browser all pass three CRAF levels/36actions. Prior failures and all cumulative time retained. No full original-caller parity, browser performance benchmark or measured Pause-latency claim.",
+    "cumulativeSeconds": 1646.100543,
+    "remainingSeconds": 753.899457,
+    "clockReset": false
+  },
+  "inputs": [
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/declaration.json",
+      "sha256": "64c9c29a8909489fca2d618adf36493328698040e29978831772e48423b800db",
+      "bytes": 5556
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/global-budget-policy.json",
+      "sha256": "39bf54571a29ac15309470418c2b647cbee74e517a4554b545c99ec60926290f",
+      "bytes": 2335
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/preparation.json",
+      "sha256": "4ef18854c7901897278baa18f8c9b781df34e03886d04154c2e71e81679e35e2",
+      "bytes": 3412
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/protocol-check.json",
+      "sha256": "62507baae23e41ea8ef659d40ec02165a587564d21290043b00baa2fe797c421",
+      "bytes": 417
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/protocol.md",
+      "sha256": "6aa664dce72dc4d59ce2029ec808980a29aa4f89aa37405b2dd3403439fbbb8c",
+      "bytes": 13168
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/cases.json",
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d",
+      "bytes": 1451
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/comparison-policy.json",
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68",
+      "bytes": 991
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/baseline-integrated/source-manifest.json",
+      "sha256": "699559bcf331e34dfa8e62137b099f05ba2e160811bc8e8e18ed1a3117bec164",
+      "bytes": 33961
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/source-manifest.json",
+      "sha256": "c301ce42ecb2592f1a4af49d6efde1d91a034cec06536d02b07c878eed31bea9",
+      "bytes": 34553
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/source-archive.json",
+      "sha256": "2c71c417d657aca19776c9ba85abf0441763b3df077c08685730dcad1fec8bb7",
+      "bytes": 36195
+    },
+    {
+      "path": "scripts/review-native-global-cost-window.py",
+      "sha256": "9ab2ecd9d6ddf234e96332421a6e55937a766495c1a20dd223f4441d6b516940",
+      "bytes": 22204
+    },
+    {
+      "path": "scripts/review-native-global-cost-budget.py",
+      "sha256": "b4312bcdae058ba58c16b4e5e24cb53626496b38f8a154834e0452a43e97d341",
+      "bytes": 8476
+    },
+    {
+      "path": "scripts/run-native-cost-window.py",
+      "sha256": "0ec9c69c859d0555e963643010d2254caee8c63d1c9a98ec07cd9af0ce0ce613",
+      "bytes": 8933
+    },
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59",
+      "bytes": 20670
+    },
+    {
+      "path": "scripts/compare-native-loop-costs.mjs",
+      "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb",
+      "bytes": 9861
+    },
+    {
+      "path": "scripts/compare-native-cost-cohorts.mjs",
+      "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34",
+      "bytes": 19460
+    },
+    {
+      "path": "scripts/review-native-cost-consolidation.py",
+      "sha256": "b13174cec5befbb816e70554fd5d47da215eae941b983e66f05b9dd4417b3bd4",
+      "bytes": 17810
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/source-archive-parts.json",
+      "sha256": "db333ec7bd5cafb4b58477e266e1cafcfb644c9d6829df0d0322a068368e0ccd",
+      "bytes": 1035
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/coordination/published-base-binding.json",
+      "sha256": "e8db0cfbdb6e8a040a82322b0b9d72b57a42eef9904e56e5a0cd3a6b68d6ba55",
+      "bytes": 1463
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/source-archive.tar.gz",
+      "sha256": "9d4acec65c73fc2c31822b5f45e06f02dd95e697240eac0925c37ede8cadf92b",
+      "bytes": 1801856
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/validation/delta-tests-run.json",
+      "sha256": "a283fb7c65bc227203105468b793e2b791defc53db159f11a0288ae271487d1d",
+      "bytes": 127182
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/validation/checks-run.json",
+      "sha256": "bbc8cc657c1d2705950bff1dbdd75cb2bb8a416d65845a7e6a6aa827993b2bdd",
+      "bytes": 79749
+    },
+    {
+      "path": "scripts/verify-native-delta.py",
+      "sha256": "0ee99d46e7702b4b2c44c69ebef8cfaa646839be1134a8501f0d7220c0730780",
+      "bytes": 5917
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/validation/delta-tests-output.log.gz",
+      "sha256": "aedd423554ce1ddb91acc6d0fcdb8fbc3ac29e73fe38527ebc11cbdd30f84979",
+      "bytes": 123004
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/validation/typecheck-output.log.gz",
+      "sha256": "0d2cbbee31ca5839df68f3a5ae10b6102ed35a65bd129facd4509c36a18a564d",
+      "bytes": 141
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/validation/entry-audit-output.log.gz",
+      "sha256": "92e88d13b13ce0b3f6a807f4a557c6df4d3634c601cc1feebbab83c83e11f805",
+      "bytes": 178
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/validation/migration-audit-output.log.gz",
+      "sha256": "b0ec53fdff06e09f03ac230aa84d3e471663887f20f26ad3563852b99bce2155",
+      "bytes": 204
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/validation/diff-check-output.log.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "bytes": 20
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/validation/build-output.log.gz",
+      "sha256": "399740ee4775eb870167dff44c13a784b680a0ee21507252f2eee6ba3606c678",
+      "bytes": 1589
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/coordination/integrated-test-scope-plan.json",
+      "sha256": "495baa97a08e3f0b6ee00106f0aa99f701c86a7442464a4495b47a446fc0b928",
+      "bytes": 7312
+    },
+    {
+      "path": "dist/assets/v6-agent-worker-CyxEvdt1.js",
+      "sha256": "42cd9d454f39d59657621271faa0cb82fc38eaeeb0353e1d4f0aee2a76111974",
+      "bytes": 6695320
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/regressions/regression-summary.json",
+      "sha256": "4cf4b5cd12ac18dd4a0385a784ac49810d311c90eec7bf8d3df67b35b04d8da6",
+      "bytes": 181424
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/recorded-regression-cases-final.json",
+      "sha256": "92039b4892be0ee05faa1e66001ec6d9f92403d7143ed0bf61462b78ba50eecc",
+      "bytes": 4490
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz",
+      "sha256": "379ce17151369af5ba39e205cc8b2882aa4e97a3dd8909b9c831a7b2b0ac7fb6",
+      "bytes": 1649205
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-public-trace.json.gz",
+      "sha256": "e152eb2705947addd1506cb01872d23770d188cb1dd46c86dcbc9bdf7f4f2816",
+      "bytes": 24340
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/regressions/catr-051-output.log.gz",
+      "sha256": "4430d83c1aeb4c06ad93ad9525d6b10b34c90c828024a62c37f22cf71713e714",
+      "bytes": 2671
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/regressions/catr-051-replay.json.gz",
+      "sha256": "cd725011084a9988d41fc82bac13b2d28aaf7b14d4d4acf2f7139e66a35dedca",
+      "bytes": 1930816
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/regressions/catr-051-comparison.json",
+      "sha256": "74114eb716f4d96bba144c1354bf6ae010d7d5757e4d338c8e39164da67a15ff",
+      "bytes": 11014
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/regressions/catr-051-execution.json",
+      "sha256": "2c5a3b6a8388373d54afc416d0f9839f4d23255a4a0ea125b434c297c4d241b0",
+      "bytes": 8687
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/regressions/catr-051-passive-owner-presence.json",
+      "sha256": "88d62ecdc5dde1108d9ad1f296088b9365547958cfa3e8e331b12f5b7e1f14db",
+      "bytes": 1095
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz",
+      "sha256": "5de1bbc32db1a3dffdf5c350ef70ca90142007c6ebc7735f8b8c56e9fdfa00ba",
+      "bytes": 2585868
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+      "sha256": "43f32a75b0d8cd747457602a3c3f113e5d63ec621e45bb2bc1d195f242997755",
+      "bytes": 41445
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/regressions/rswp-051-output.log.gz",
+      "sha256": "cd7968f47b23abf8ee76ce1be1a92357f5cc0257b60efe6383cd3c4104689067",
+      "bytes": 3133
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/regressions/rswp-051-replay.json.gz",
+      "sha256": "d4d72f54ed37ebc537ada6c2e3c2418221c6950326bc7fcde32b1eedaaf3972f",
+      "bytes": 2998016
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/regressions/rswp-051-comparison.json",
+      "sha256": "28e22ff49be995398b180d9611f59d7293b37630b25c58ca9037732e0d3325b4",
+      "bytes": 11001
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/regressions/rswp-051-execution.json",
+      "sha256": "72020cb5848f34c2cc8d585582a040b7913c306740ec8c6483a0b0c92260c757",
+      "bytes": 9217
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/regressions/rswp-051-passive-owner-presence.json",
+      "sha256": "3d62ca474c64a0796a255d9949fe53dd9f6fafd65d46fe0a6a5a49931724eedc",
+      "bytes": 1095
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz",
+      "sha256": "fe037e48df8dd3a7c302a5e85355b2b9555daa6d9d8aa56f7772fc363732726c",
+      "bytes": 8174480
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/final/fogw-reception-session/fogw-public-trace.json.gz",
+      "sha256": "1d4e92e6ef063e7799bfb4237b17beb148b49bde4ab46ef26ef91a3271d44b46",
+      "bytes": 39060
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/regressions/fogw-051-output.log.gz",
+      "sha256": "a73a164cb14f7ec91657faae54684f502c323add1ce053047aee768ff786b4c0",
+      "bytes": 5529
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/regressions/fogw-051-replay.json.gz",
+      "sha256": "fcc0cf839875d7da22c554ac62a4d41887bb79874f5e6c2f8697baf03a559435",
+      "bytes": 9474444
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/regressions/fogw-051-comparison.json",
+      "sha256": "75ebf6e4bffde70b374999ab44ac95b870deb6b1bca8efa6c9c125203b8a6c28",
+      "bytes": 11003
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/regressions/fogw-051-execution.json",
+      "sha256": "f0b6c32b369d8da5e37aef3b331a5bf7cb9de7be12065e16f31291a6373c2745",
+      "bytes": 11982
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/regressions/fogw-051-passive-owner-presence.json",
+      "sha256": "4b703c7aeba3d3ee81087fbed3d8150d0574f6a04593e9803ab6b8b687ac7bda",
+      "bytes": 1095
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz",
+      "sha256": "39a6e6551cf94a48842b154afdc2256dafd88fd93404e4776bd67b24d5a4796d",
+      "bytes": 10678168
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+      "sha256": "d642c805485571c0e54ed3421644cbd8463ca3697ce135b223f635487b58069d",
+      "bytes": 19976
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/regressions/vois-051-output.log.gz",
+      "sha256": "088cb73a91a9131b46a7cb3e183538054d287c0857227b4a757c1cec0d546119",
+      "bytes": 7594
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/regressions/vois-051-replay.json.gz",
+      "sha256": "ae0d4141caeae9b861190da00110b86a573e411888072d34154b0d14842dd398",
+      "bytes": 12352720
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/regressions/vois-051-comparison.json",
+      "sha256": "44d30e09d22b84d4624af6797a00f2ba588851a5490c562b4124aced2d6469aa",
+      "bytes": 11006
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/regressions/vois-051-execution.json",
+      "sha256": "b82f231d49759fd75dff6bc249e1a21db56e7c256580aa5e72ff00e272dc06b5",
+      "bytes": 13847
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/regressions/vois-051-passive-owner-presence.json",
+      "sha256": "67d8ee9cd0011c6cc6dd6c2afb8cbf8d8f8ae73a2ba6d6b23724d4abb3ac31dc",
+      "bytes": 1096
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz",
+      "sha256": "f3df06cff6d370874889f5183a77dd91ae585060c04ba052d0025cd2db9e3750",
+      "bytes": 2630905
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-public-trace.json.gz",
+      "sha256": "fc8c7bf4529490e6e6ee04e7a5a51b389180e5fb5e35255145c59ecf4dd0f102",
+      "bytes": 56466
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/regressions/conn-050-output.log.gz",
+      "sha256": "410a7ce0299d76dc74accf2035d6b86db98aa6ca8cc930d4f2c7fa73c30ed0b5",
+      "bytes": 4049
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/regressions/conn-050-replay.json.gz",
+      "sha256": "81019563c5403ee3e45605656eb2909143f0a4aea76a7f84d1a1b31530f37b39",
+      "bytes": 4012161
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/regressions/conn-050-comparison.json",
+      "sha256": "a8658e35bfad8b93ff8badd8e3e8aa635880af787cd0ac310b4460735871fd1d",
+      "bytes": 11017
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/regressions/conn-050-execution.json",
+      "sha256": "6c6aac49f2613ca674157cca65698e9dc96fc2c0c7c95a9647c3257f7a63dbcc",
+      "bytes": 10351
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/regressions/conn-050-passive-owner-presence.json",
+      "sha256": "61adcc796821225c4eecefd7de8805df93abf7de5aa9807112f483792e4c9c72",
+      "bytes": 1095
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz",
+      "sha256": "6a187286069287a89cedb60ac0f206e0702abae5d8df0dd2615bd43c1bb5c75a",
+      "bytes": 4349054
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-baseline/recorded/mind-public-trace.json.gz",
+      "sha256": "f74678fa4d9c1b5397545b648ab353c29fc0a5a4c0eb35ab36a5258bfa34ca0c",
+      "bytes": 17256
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/regressions/mind-051-output.log.gz",
+      "sha256": "e72946a644c9da5ab7e08621c67e93bb23121d53a15718a7601dee9e65e1d7a2",
+      "bytes": 4307
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/regressions/mind-051-replay.json.gz",
+      "sha256": "408c958e6348d60a2a3f633b7e6f423bbcdafe6e4d12cf1b230a70aebf041c95",
+      "bytes": 4991779
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/regressions/mind-051-comparison.json",
+      "sha256": "d576e97195a188d9bb9ce57e35a1fc450ff7301178572b98e450a2aed9a9cc1d",
+      "bytes": 11002
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/regressions/mind-051-execution.json",
+      "sha256": "def42a52083431b19e06a82270db45076c8895c61b8686a284b527839c475c27",
+      "bytes": 9963
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/regressions/mind-051-passive-owner-presence.json",
+      "sha256": "b7b95d397eebc23f378e5d6c09cae473235e13028a350d4f6c489703a78ffb58",
+      "bytes": 1095
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz",
+      "sha256": "114906e80b2ff5817adeaa105fd4e84ea2b057d8393b202dc03f35248b350fc3",
+      "bytes": 13577757
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+      "sha256": "a46f6a331e8f98767ee709c2931edd6d0abde9cc636b93ef384509c04adface2",
+      "bytes": 26568
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/regressions/weav-051-output.log.gz",
+      "sha256": "ee7e1d3812035429cc4b1b20c7fd317f0bd3e4ea20e32dfaaf587a201b56db93",
+      "bytes": 10207
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/regressions/weav-051-replay.json.gz",
+      "sha256": "d5258fc5c4ed70c4241ac28b136bf6c24b9a852217804a11484c17a7849ed8ee",
+      "bytes": 15436476
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/regressions/weav-051-comparison.json",
+      "sha256": "c05a39cfb94005a62ada585bfce50aaa0f2490ef952cc9d94f2587fbfa510176",
+      "bytes": 11021
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/regressions/weav-051-execution.json",
+      "sha256": "3f68a12c046f3cdbec9b7d2a2687f11528b4d04796a317e961580f9f1fd2ca0f",
+      "bytes": 18319
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/regressions/weav-051-passive-owner-presence.json",
+      "sha256": "787945289d506a6159fd1450e923bd951ddf7a4532f30697b7a926bb0aa4ea36",
+      "bytes": 1096
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz",
+      "sha256": "e473af537c042d76ce98f13b2cc9be495e7b4ac08ca443251df7804d542bdbbe",
+      "bytes": 3161161
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-public-trace.json.gz",
+      "sha256": "916d0f1cb1dcbfd9b7ba7624e7d3d4648a91ae7ef64583288af4711d2a955ac3",
+      "bytes": 13286
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/regressions/tria-development-4b-output.log.gz",
+      "sha256": "3fac22c5aa160d53394a33a5199e1db7d449971e8c5838d5f9441538e57b61d8",
+      "bytes": 3566
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/regressions/tria-development-4b-replay.json.gz",
+      "sha256": "e8c08e019d35d9c7892ed6935b9067c84c6a6c0eb1003f5203c45b2e4bdabb20",
+      "bytes": 3472282
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/regressions/tria-development-4b-comparison.json",
+      "sha256": "2fc91f815c825f5e674c499270e22c286494ff3a1d87f1501e8596d61a2b7fd8",
+      "bytes": 11005
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/regressions/tria-development-4b-execution.json",
+      "sha256": "64b1933ed203f15095858f11836200781abf4155a5585edea7dac2b6eb2dc4dc",
+      "bytes": 9880
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/regressions/tria-development-4b-passive-owner-presence.json",
+      "sha256": "fe50236ac3ce9035e7563bcd6437e021d42c2382881fe45ae12cf627d64835aa",
+      "bytes": 1106
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/delivery-integrity.json",
+      "sha256": "67c46f6518d118e23519450830f09b71b7a59ebe958b51a687bbcc8560dabcb9",
+      "bytes": 10999
+    },
+    {
+      "path": "scripts/verify-native-delivery.py",
+      "sha256": "ca36a235e5da8aa8abd963aaa6a282d90217ed58a721bfdbba361527dd48409a",
+      "bytes": 26494
+    },
+    {
+      "path": "scripts/run-v53-campaign-proof.py",
+      "sha256": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+      "bytes": 5421
+    },
+    {
+      "path": "scripts/compare-v54-reactive-public-evidence.py",
+      "sha256": "3274acc5ed28a40f91ad0ee2e34c247ab160919ea43855cf514b4fbc22ef6a69",
+      "bytes": 18850
+    },
+    {
+      "path": "scripts/evidence-byte-parts.py",
+      "sha256": "fcc651b3d533a87805378c126b1253d40f343ccc51108a7881c3db33bf1f8350",
+      "bytes": 7210
+    },
+    {
+      "path": "scripts/restore-v53-evidence.py",
+      "sha256": "e0494dda3dd445e0db0bf04cccac27ad8d19c917ccd2b4b10c068df6faf7c23d",
+      "bytes": 3361
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/original/craf-public-parity.json",
+      "sha256": "6aedafd6f8aa69339df4a4b8ed42733eaa3e1e4f0666a0ef48819480cfb4529e",
+      "bytes": 136719
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/original/craf-contribution.json.gz",
+      "sha256": "1a3a1a25bd42f0cac3cf92dc2a0860ac6973297af2541eaddf1f375662149df5",
+      "bytes": 17291
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/browser/browser-qa.json",
+      "sha256": "6ef037c81511ddf56e6d0bb5ec2585d2795a75bdb293b16b67ccf8068a76a281",
+      "bytes": 2709
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/browser/preview-stopped.json",
+      "sha256": "4e231cebdf78cd11a6368c6193f7d2ed39cf6390704801e255fcd02d93c7f777",
+      "bytes": 455
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/craf-case-checkpoint-final.json",
+      "sha256": "cf3941bbdc3035298ef0cc660ef95bffa84d91e7f2d4c34b59023b285c101235",
+      "bytes": 3296
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/lkey-partial-contract.json",
+      "sha256": "35237fa483be91c5993df9978ea45e911bef28a6a091c795e7b6db5aae75edff",
+      "bytes": 4330
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/lkey-partial/qualification.json",
+      "sha256": "e3a981a36ba37f6bc4e9bedd1ee5d19d9ca3df24a5a64b5899c27f0e33c2ca53",
+      "bytes": 94383
+    },
+    {
+      "path": "scripts/compare-symbol-transactions-public-parity.py",
+      "sha256": "0c1341e87e59cb4d276158eb74a626b41cbc140c891af82c08cec5cf3ae441ea",
+      "bytes": 32449
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/craf-campaign.json.gz",
+      "sha256": "78e86660961ed6d75707c001c021b8c223d205137d86288ac21d09a533b680f2",
+      "bytes": 12767727
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/browser/observed-states.json",
+      "sha256": "eba7229a20f1e32ebc61d071768d8f442d2a732ee121e9ec2b3344800cd988b9",
+      "bytes": 46437
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/browser/final-ax.txt",
+      "sha256": "546a3be729959414c20945b5c6ad938177d18d5ff8a1e5d7a99f6af13bbf3a7d",
+      "bytes": 11632
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/browser/final.png",
+      "sha256": "bceb66ee75c2da31d4af53a6a17d2b0a72e41aaf3730dbb47d92fd273266d58f",
+      "bytes": 305852
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/browser/observed-summary.json",
+      "sha256": "aecaf4dbd601b09ee37f901418ece21283aa880b84d2c1eef31a27d3fcedba0b",
+      "bytes": 1079
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/static-preflight.json",
+      "sha256": "d597d406cc05705692c89e4d1dc46d7cfa6aa9ecbe9b1d10147044b35a860dca",
+      "bytes": 17687
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/check-cost-static-inputs.py",
+      "sha256": "ab4426eda556decca32950f415483178d7459fab5c2065f37be107b6678f1b18",
+      "bytes": 27602
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/check-cost-static-inputs.py",
+      "sha256": "8911f321cd5de299087e3937fa4df68c8167950329884e0bad78feca38c12f15",
+      "bytes": 23419
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/prepare-cost-protocol.py",
+      "sha256": "482cfc5b6cf263705be9a84c798cb0d114099c6cc009f8247a22ce0ac8f32e17",
+      "bytes": 28789
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/owner-growth-contract.json",
+      "sha256": "a53e0487475b23203106d4f2fb5781ba24651e724ccaf1cdd5a83c7fd417ff99",
+      "bytes": 2745
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/consolidate-owner-costs.mjs",
+      "sha256": "2858a65766d624c467232da84aeed89ed529225bc8ea5478216a716d09097064",
+      "bytes": 52832
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/review-owner-costs.py",
+      "sha256": "0504bba2ad469298158f30394db95e5a8d69f4f363b50360236ddc970e18bf31",
+      "bytes": 70151
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/owner-source-inventory.json",
+      "sha256": "01e929c97b798781f7885ce2ccdd9cffc9bdc50a88ff5a915a87e070b027de2b",
+      "bytes": 112040
+    },
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "sha256": "bdbe9be7c49f26e894f6eebd6b5ea9296f4de0e47c23b1985c6f7a4869eeb98d",
+      "bytes": 149089
+    },
+    {
+      "path": "src/logos-engine/v6-symbol-transactions.ts",
+      "sha256": "fc4191c869196b85333cc2db847307a369033beb9fb682fc1bbc746522c4136d",
+      "bytes": 21854
+    },
+    {
+      "path": "src/logos-engine/v6-knowledge-store.ts",
+      "sha256": "035d41597a5831bfa65bb1f627e3a0d05b84cc44cfda05566359873ef8c5af08",
+      "bytes": 14849
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/owner-structural-fixture.json",
+      "sha256": "2bb560b34f146aa5f7eab4a1a194621644b4771e4adf88e93ac2117c221f2700",
+      "bytes": 60036
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/owner-structural-attribution.json",
+      "sha256": "1e1cd9348ef733dd99b27535e542cba57ae15c6df77123532711778ed212f8b1",
+      "bytes": 96314
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/capture-cost-owner-graphs.mjs",
+      "sha256": "d50ec7357a18113a1ca6e0c94690d99fe888f67474da33ff047e912666de4373",
+      "bytes": 22795
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/qualify-cost-owner-graphs.mjs",
+      "sha256": "ac08db60893a2a733a00965fc1e2f4a2c14da6f8b6974876b708ca54ec8e16dd",
+      "bytes": 45066
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/qualify-cost-owner-graphs.mjs",
+      "sha256": "3bb06dfe8ad7d0ab7874dd0bfda219c7639cbc6dd27cf7b517732b40df2902f1",
+      "bytes": 38940
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/capture-cost-owner-graphs.mjs",
+      "sha256": "3afca2b4756a01c1ba1736ab775781e48a17977f8bdcf6654873fd904f452c33",
+      "bytes": 20111
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/owner-graphs-baseline.receipt.json",
+      "sha256": "07b8810b72547d084ef4dee7ed7912642aed074b846d4ae2967c0676bc70ea5a",
+      "bytes": 106741
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/owner-graphs-baseline.json.gz",
+      "sha256": "9045d72878939cec5dc5467432b9be8472f0f6b673b38ca33e76f8e6c8d4f410",
+      "bytes": 5024373
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/owner-graphs-candidate.receipt.json",
+      "sha256": "59ce1c05499dfdb538c2016faa935d2888de274576a16747f70118e8ad152465",
+      "bytes": 107494
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/owner-graphs-candidate.json.gz",
+      "sha256": "c8722d7d468e052f0c8d25f7268ee8a0afe4748e978b9707c7b997748d393479",
+      "bytes": 5032868
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f",
+      "bytes": 48531
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44",
+      "bytes": 46966
+    },
+    {
+      "path": "docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b",
+      "bytes": 53583
+    },
+    {
+      "path": "docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9",
+      "bytes": 111624
+    },
+    {
+      "path": "src/logos-engine/kernel.ts",
+      "sha256": "1cac40f5f9a3356d31ae0fd5247709eb82c5f6402aae3cb68d8edc54c838f207",
+      "bytes": 23637
+    },
+    {
+      "path": "src/logos-engine/canonical.ts",
+      "sha256": "5c2884287aed82d97e7a85c905db5fb800a7e58a523c3ba128a1b61db5069cc1",
+      "bytes": 11291
+    },
+    {
+      "path": "src/logos-engine/v6-native-state-graph.ts",
+      "sha256": "b739db6d6066a06f4175b4377f0d0ae1f351b708e5d27fbdb99c9de7e6ed0b4d",
+      "bytes": 21947
+    },
+    {
+      "path": "src/logos-engine/v6-hash.ts",
+      "sha256": "6b86db7b533d55da900a3c65a06ec1e18547180245b3e3a2eaa837be09c669f5",
+      "bytes": 2842
+    },
+    {
+      "path": "src/logos-engine/v6-src-program.ts",
+      "sha256": "d41717575e252784a81519e8c7853853af3c2d7372b86ecb7efb3655c3e3df77",
+      "bytes": 5903
+    },
+    {
+      "path": "src/logos-engine/v6/programs.json",
+      "sha256": "e006723f49460276a0753c1977ab0eabb30775409b37ba7d7af8b0b8b8527834",
+      "bytes": 1502394
+    },
+    {
+      "path": "src/runtime/v6-agent-service.ts",
+      "sha256": "02ce41d5e014fcc06f85371f552f949b9dfce56093afae4bc0fcb7aad2f60d96",
+      "bytes": 18195
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/coordinated-isolation.json",
+      "sha256": "078d08ef4306c24a03cdbe2256c1e8e28d880393383a84ec1d2efd862dbc2b01",
+      "bytes": 7493
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/isolation-evidence/lot3-status.json",
+      "sha256": "f397d6076b5fde6775fe5056c48e3b69dd10110fcd68d0d627f0849d2a4a8076",
+      "bytes": 4769
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/isolation-evidence/lot4a-status.json",
+      "sha256": "110a35288d6d7644ddb16c80554ae33605e4e9117bf8cbda4b781e878d4a8830",
+      "bytes": 7341
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/isolation-evidence/lot7a-status.json",
+      "sha256": "e9c395a90dcfee739a1d52342878ef24739bf1b2d97307eab1f8f6a22ac2fad0",
+      "bytes": 6045
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/isolation-evidence/lot5a-status.json",
+      "sha256": "6c59d5cce15d1cd1342581cf26e886013def11f19c84777733f689511a573519",
+      "bytes": 5135
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/isolation-evidence/lot4b-status.json",
+      "sha256": "e6b2cc3277cc11b0012858734688da427127782ca5457c1034c23836a55f4da3",
+      "bytes": 4153
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/isolation-setup-diagnostic.json",
+      "sha256": "9588e67ac43825da6c94b3a320c6009cf70f9f980a4f875e68dc4537d0dd1905",
+      "bytes": 760
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/isolation-evidence/own-agents-quiet.json",
+      "sha256": "f57d5c32875c2e6b946f482eff1543c6cfcd4218aa318bf99f975551316b6f87",
+      "bytes": 1042
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/performance-lock-acquired.json",
+      "sha256": "d5d80d40849870cd6dfae92bd7349b49c8268c975eece2bbfd1aa3c1abffe917",
+      "bytes": 636
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/diagnostic/final-cost-qualification-independent-review.json",
+      "sha256": "b95ff037b017307f7622afce154c7c9042710463d882d5e74b60a6592ae3dc1c",
+      "bytes": 19101
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/baseline-dependency-restoration.json",
+      "sha256": "56c48bae8445b5b177864ca92d7f0ba51254197a674504c8a74cc21a91b6b012",
+      "bytes": 1527
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/finalize-cost-readiness.py",
+      "sha256": "2daef854c33b272a4641e4f42035b229ea08427ad94648489de922624568d45f",
+      "bytes": 30488
+    }
+  ],
+  "isolation": {
+    "schema": "logos-engine.coordinated-cost-isolation.v1",
+    "recordedAt": "2026-11-10T23:30:50.005737+00:00",
+    "status": "acknowledged_quiet_before_window",
+    "otherLaneAcknowledged": true,
+    "ownTrackedComputeEnded": true,
+    "previewStopped": true,
+    "costNodeOptionsOverride": null,
+    "locks": {
+      "performance": "/workspace/shared/sra-coordination/performance.lock",
+      "publication": "/workspace/shared/sra-coordination/publication.lock"
+    },
+    "knownLanes": [
+      {
+        "lot": "3I recurrent_series",
+        "updatedAt": "2026-11-10T19:03:07.717559+00:00",
+        "activeCommand": null,
+        "stage": "Native 0.50 published successfully as Site 79. Source, tests, build, regression evidence and official costs are verified. The agreed next slot is released to 4A.",
+        "publicationStartedField": true,
+        "qualification": "Historical publication_started remains true, while the same terminal status confirms actualSite79 success and explicit slot release. Later actual published4A/7A/5A/4B successors are verified. The flag is retained and is not recast as an active current command.",
+        "release": "Integrate this actual native 0.50 commit and validate the resulting native 0.51 source. Do not reuse isolated native 0.50 proofs or costs as evidence for the integrated candidate. The agreed next publication is 4A, then 7A integrates that actual commit and validates native 0.52."
+      },
+      {
+        "lot": "4A observed_feedback_sequence",
+        "updatedAt": "2026-11-10T21:02:36.176186+00:00",
+        "activeCommand": null,
+        "stage": "Delivered. Native0.51 deployed in Site80, then documentation closure in Site81; both terminal succeeded and deployment archive byte-identical. Source worktree clean. Slot released to7A.",
+        "publicationStartedField": false,
+        "qualification": null,
+        "release": null
+      },
+      {
+        "lot": "7A observed_ranked_workshop",
+        "updatedAt": "2026-11-10T21:24:13.816528+00:00",
+        "activeCommand": null,
+        "stage": "Delivered:7A native0.52 firstpublishedSite82 then documentationclosureSite83, bothsucceeded. Finalsourceclean. Publicationandcomputeslotsreleasedto5A.",
+        "publicationStartedField": false,
+        "qualification": null,
+        "release": "7A fully deliveredSite83. Successor7Bexplicitlyquietfor5AupcomingABBA: source/text only, noexecution; see lot7b-status.json."
+      },
+      {
+        "lot": "5A linked_temporal_preparation and generic long-session performance",
+        "updatedAt": "2026-11-10T22:19:51.591441+00:00",
+        "activeCommand": null,
+        "stage": "Completed: first native0.53publication Site84 and documentation closure Site85 both succeeded privately. Final source a009e1f138bb18251d697f49647bacc615ee514f. Native/test/build/costs unchanged, all evidence retained. No further5Aexecution; releasing publication lock.",
+        "publicationStartedField": false,
+        "qualification": null,
+        "release": "5A is actually published: Site85, native0.53, commit a009e1f138bb18251d697f49647bacc615ee514f. Integrate this real final successor before your validation/publication. Receipt: /workspace/shared/sra-coordination/published-5a-site85.json. All5Awork complete; compute released and publication lock released immediately after this write. Preserve publication order4Bthen7B."
+      },
+      {
+        "lot": "4B relative_arrangement",
+        "updatedAt": "2026-11-10T23:03:50.097808+00:00",
+        "activeCommand": null,
+        "stage": "Completed: first native0.54 publication Site86 and documentation closure Site87 both succeeded privately. Final source dd355400264b50942486559b8ca56ee6dfc6a3cc. All native/test/build/cost inputs unchanged; roadmap current. No further4B execution; releasing publication lock.",
+        "publicationStartedField": false,
+        "qualification": null,
+        "release": "4B is actually published: Site87, native0.54, commit dd355400264b50942486559b8ca56ee6dfc6a3cc. Integrate this real final successor before your final freeze, measures and publication. Receipt: /workspace/shared/sra-coordination/published-4b-site87.json. All4B work is complete; compute and publication lock released immediately after this write."
+      }
+    ],
+    "evidence": [
+      {
+        "path": "docs/migration/lot7b-evidence/performance-integrated/isolation-evidence/lot3-status.json",
+        "sha256": "f397d6076b5fde6775fe5056c48e3b69dd10110fcd68d0d627f0849d2a4a8076",
+        "bytes": 4769
+      },
+      {
+        "path": "docs/migration/lot7b-evidence/performance-integrated/isolation-evidence/lot4a-status.json",
+        "sha256": "110a35288d6d7644ddb16c80554ae33605e4e9117bf8cbda4b781e878d4a8830",
+        "bytes": 7341
+      },
+      {
+        "path": "docs/migration/lot7b-evidence/performance-integrated/isolation-evidence/lot7a-status.json",
+        "sha256": "e9c395a90dcfee739a1d52342878ef24739bf1b2d97307eab1f8f6a22ac2fad0",
+        "bytes": 6045
+      },
+      {
+        "path": "docs/migration/lot7b-evidence/performance-integrated/isolation-evidence/lot5a-status.json",
+        "sha256": "6c59d5cce15d1cd1342581cf26e886013def11f19c84777733f689511a573519",
+        "bytes": 5135
+      },
+      {
+        "path": "docs/migration/lot7b-evidence/performance-integrated/isolation-evidence/lot4b-status.json",
+        "sha256": "e6b2cc3277cc11b0012858734688da427127782ca5457c1034c23836a55f4da3",
+        "bytes": 4153
+      },
+      {
+        "path": "docs/migration/lot7b-evidence/performance-integrated/isolation-setup-diagnostic.json",
+        "sha256": "9588e67ac43825da6c94b3a320c6009cf70f9f980a4f875e68dc4537d0dd1905",
+        "bytes": 760
+      },
+      {
+        "path": "docs/migration/lot7b-evidence/performance-integrated/isolation-evidence/own-agents-quiet.json",
+        "sha256": "f57d5c32875c2e6b946f482eff1543c6cfcd4218aa318bf99f975551316b6f87",
+        "bytes": 1042
+      },
+      {
+        "path": "docs/migration/lot7b-evidence/performance-integrated/performance-lock-acquired.json",
+        "sha256": "d5d80d40849870cd6dfae92bd7349b49c8268c975eece2bbfd1aa3c1abffe917",
+        "bytes": 636
+      },
+      {
+        "path": "docs/migration/lot7b-evidence/coordination/published-base-binding.json",
+        "sha256": "e8db0cfbdb6e8a040a82322b0b9d72b57a42eef9904e56e5a0cd3a6b68d6ba55",
+        "bytes": 1463
+      },
+      {
+        "path": "docs/migration/lot7b-evidence/diagnostic/final-cost-qualification-independent-review.json",
+        "sha256": "b95ff037b017307f7622afce154c7c9042710463d882d5e74b60a6592ae3dc1c",
+        "bytes": 19101
+      },
+      {
+        "path": "docs/migration/lot7b-evidence/integrated-final/browser/preview-stopped.json",
+        "sha256": "4e231cebdf78cd11a6368c6193f7d2ed39cf6390704801e255fcd02d93c7f777",
+        "bytes": 455
+      },
+      {
+        "path": "docs/migration/lot7b-evidence/performance-integrated/baseline-dependency-restoration.json",
+        "sha256": "56c48bae8445b5b177864ca92d7f0ba51254197a674504c8a74cc21a91b6b012",
+        "bytes": 1527
+      }
+    ],
+    "qualification": "Actual published3I/4A/7A/5A/4B terminal release statements were freshly reread and retained. The5A and4B statuses explicitly report no further execution, all work completed and release to successors; this continuing authorization is retained rather than claiming a new reply after7B request. Both7B subtrees explicitly ended compute and reviews. Preview stopped; all functional and transport work ended. Actual exclusive advisory flock held awaiting readiness and premeasurement commit. Cooperative evidence, not process visibility alone, establishes declared quiet interval. The historical3I publication flag qualification remains explicit."
+  },
+  "qualification": "Completed official delta tests, five checks, empty audit failures, strict regressions, delivery integrity, cold original-Python parity with observed selected-prefix native restoration, actual browser evidence and the cumulative game clock precede this cost window. An explicitly qualified unmet three-level game target is retained and does not become a success claim. Cooperative lane acknowledgement and ended tracked work establish the declared quiet interval; process visibility alone does not establish isolation.",
+  "ownerCostContract": {
+    "path": "docs/migration/lot7b-evidence/performance-integrated/owner-growth-contract.json",
+    "sha256": "a53e0487475b23203106d4f2fb5781ba24651e724ccaf1cdd5a83c7fd417ff99",
+    "bytes": 2745
+  },
+  "historicalStrictIdentityNotAnticipated": true,
+  "watchedExternalInputs": [
+    {
+      "path": "/workspace/sites/sra-lot7b-baseline-20261110/scripts/measure-native-loop-costs.mjs",
+      "bytes": 20670,
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "/workspace/sites/sra-lot7b-baseline-20261110/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "bytes": 48531,
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+    },
+    {
+      "path": "/workspace/sites/sra-lot7b-baseline-20261110/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "bytes": 46966,
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    },
+    {
+      "path": "/workspace/sites/sra-lot7b-baseline-20261110/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "bytes": 53583,
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "path": "/workspace/sites/sra-lot7b-baseline-20261110/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "bytes": 111624,
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    }
+  ]
+}

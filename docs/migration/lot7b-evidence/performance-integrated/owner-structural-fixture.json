@@ -1,0 +1,2132 @@
+{
+  "schema": "logos-engine.lot7b-owner-cost-structural-fixture.v1",
+  "status": "qualified_functional_structure",
+  "recordedAt": "2026-11-10T23:22:57.379Z",
+  "nativeDigests": {
+    "baseline": "f25d56d1c63dc929b01bb31b3898b84cecc69e6e412d535c0d122170ea401ce9",
+    "candidate": "ea25603262a7473e5ab9994d2e2e86dd64a8291dd7c1dc18ede4d1f443cdc53b"
+  },
+  "cases": {
+    "path": "docs/migration/lot7b-evidence/performance-integrated/cases.json",
+    "bytes": 1451,
+    "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+  },
+  "captureTool": {
+    "path": "docs/migration/lot7b-evidence/capture-cost-owner-graphs.mjs",
+    "bytes": 22795,
+    "sha256": "d50ec7357a18113a1ca6e0c94690d99fe888f67474da33ff047e912666de4373"
+  },
+  "captures": {
+    "baseline": {
+      "report": {
+        "path": "docs/migration/lot7b-evidence/performance-integrated/owner-graphs-baseline.json.gz",
+        "bytes": 5024373,
+        "sha256": "9045d72878939cec5dc5467432b9be8472f0f6b673b38ca33e76f8e6c8d4f410"
+      },
+      "receipt": {
+        "path": "docs/migration/lot7b-evidence/performance-integrated/owner-graphs-baseline.receipt.json",
+        "bytes": 106741,
+        "sha256": "07b8810b72547d084ef4dee7ed7912642aed074b846d4ae2967c0676bc70ea5a"
+      }
+    },
+    "candidate": {
+      "report": {
+        "path": "docs/migration/lot7b-evidence/performance-integrated/owner-graphs-candidate.json.gz",
+        "bytes": 5032868,
+        "sha256": "c8722d7d468e052f0c8d25f7268ee8a0afe4748e978b9707c7b997748d393479"
+      },
+      "receipt": {
+        "path": "docs/migration/lot7b-evidence/performance-integrated/owner-graphs-candidate.receipt.json",
+        "bytes": 107494,
+        "sha256": "59ce1c05499dfdb538c2016faa935d2888de274576a16747f70118e8ad152465"
+      }
+    }
+  },
+  "attribution": {
+    "path": "docs/migration/lot7b-evidence/performance-integrated/owner-structural-attribution.json",
+    "bytes": 96314,
+    "sha256": "1e1cd9348ef733dd99b27535e542cba57ae15c6df77123532711778ed212f8b1"
+  },
+  "forms": [
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "baseline": {
+        "actions": 3,
+        "cycles": 3,
+        "levelsCompleted": 1,
+        "requests": [
+          {
+            "type": "init",
+            "sequence": 0,
+            "kind": "action",
+            "actions": 0
+          },
+          {
+            "type": "advance",
+            "sequence": 1,
+            "kind": "boundary",
+            "actions": 1
+          },
+          {
+            "type": "resume",
+            "sequence": 1,
+            "kind": "action",
+            "actions": 1
+          },
+          {
+            "type": "advance",
+            "sequence": 2,
+            "kind": "boundary",
+            "actions": 2
+          },
+          {
+            "type": "resume",
+            "sequence": 2,
+            "kind": "action",
+            "actions": 2
+          },
+          {
+            "type": "advance",
+            "sequence": 3,
+            "kind": "boundary",
+            "actions": 3
+          }
+        ],
+        "observations": [
+          {
+            "type": "init",
+            "sequence": 0,
+            "family": "public_occurrence_recall",
+            "proposalKind": "marked_collection_edit",
+            "poseMode": null,
+            "actions": 0,
+            "cycles": 0,
+            "levelsCompleted": 0,
+            "nodeCount": 163,
+            "acquiredTransitions": 0
+          },
+          {
+            "type": "advance",
+            "sequence": 1,
+            "family": "public_occurrence_recall",
+            "proposalKind": "marked_collection_edit",
+            "poseMode": null,
+            "actions": 1,
+            "cycles": 1,
+            "levelsCompleted": 0,
+            "nodeCount": 191,
+            "acquiredTransitions": 1
+          },
+          {
+            "type": "resume",
+            "sequence": 1,
+            "family": "public_occurrence_recall",
+            "proposalKind": "marked_collection_edit",
+            "poseMode": null,
+            "actions": 1,
+            "cycles": 1,
+            "levelsCompleted": 0,
+            "nodeCount": 193,
+            "acquiredTransitions": 1
+          },
+          {
+            "type": "advance",
+            "sequence": 2,
+            "family": "public_occurrence_recall",
+            "proposalKind": "marked_collection_edit",
+            "poseMode": null,
+            "actions": 2,
+            "cycles": 2,
+            "levelsCompleted": 0,
+            "nodeCount": 215,
+            "acquiredTransitions": 2
+          },
+          {
+            "type": "resume",
+            "sequence": 2,
+            "family": "public_occurrence_recall",
+            "proposalKind": "marked_collection_edit",
+            "poseMode": null,
+            "actions": 2,
+            "cycles": 2,
+            "levelsCompleted": 0,
+            "nodeCount": 217,
+            "acquiredTransitions": 2
+          },
+          {
+            "type": "advance",
+            "sequence": 3,
+            "family": "public_occurrence_recall",
+            "proposalKind": "marked_collection_edit",
+            "poseMode": null,
+            "actions": 3,
+            "cycles": 3,
+            "levelsCompleted": 1,
+            "nodeCount": 239,
+            "acquiredTransitions": 3
+          }
+        ],
+        "inspection": [],
+        "final": {
+          "actions": 3,
+          "levelsCompleted": 1,
+          "reason": null,
+          "graphRevision": 496,
+          "nodeCount": 239,
+          "acquiredTransitions": 3,
+          "implementation": "logos-engine.typescript.v6.native-migration/0.54.0"
+        }
+      },
+      "candidate": {
+        "actions": 3,
+        "cycles": 3,
+        "levelsCompleted": 1,
+        "requests": [
+          {
+            "type": "init",
+            "sequence": 0,
+            "kind": "action",
+            "actions": 0
+          },
+          {
+            "type": "advance",
+            "sequence": 1,
+            "kind": "boundary",
+            "actions": 1
+          },
+          {
+            "type": "resume",
+            "sequence": 1,
+            "kind": "action",
+            "actions": 1
+          },
+          {
+            "type": "advance",
+            "sequence": 2,
+            "kind": "boundary",
+            "actions": 2
+          },
+          {
+            "type": "resume",
+            "sequence": 2,
+            "kind": "action",
+            "actions": 2
+          },
+          {
+            "type": "advance",
+            "sequence": 3,
+            "kind": "boundary",
+            "actions": 3
+          }
+        ],
+        "observations": [
+          {
+            "type": "init",
+            "sequence": 0,
+            "family": "public_occurrence_recall",
+            "proposalKind": "marked_collection_edit",
+            "poseMode": null,
+            "actions": 0,
+            "cycles": 0,
+            "levelsCompleted": 0,
+            "nodeCount": 166,
+            "acquiredTransitions": 0
+          },
+          {
+            "type": "advance",
+            "sequence": 1,
+            "family": "public_occurrence_recall",
+            "proposalKind": "marked_collection_edit",
+            "poseMode": null,
+            "actions": 1,
+            "cycles": 1,
+            "levelsCompleted": 0,
+            "nodeCount": 194,
+            "acquiredTransitions": 1
+          },
+          {
+            "type": "resume",
+            "sequence": 1,
+            "family": "public_occurrence_recall",
+            "proposalKind": "marked_collection_edit",
+            "poseMode": null,
+            "actions": 1,
+            "cycles": 1,
+            "levelsCompleted": 0,
+            "nodeCount": 196,
+            "acquiredTransitions": 1
+          },
+          {
+            "type": "advance",
+            "sequence": 2,
+            "family": "public_occurrence_recall",
+            "proposalKind": "marked_collection_edit",
+            "poseMode": null,
+            "actions": 2,
+            "cycles": 2,
+            "levelsCompleted": 0,
+            "nodeCount": 218,
+            "acquiredTransitions": 2
+          },
+          {
+            "type": "resume",
+            "sequence": 2,
+            "family": "public_occurrence_recall",
+            "proposalKind": "marked_collection_edit",
+            "poseMode": null,
+            "actions": 2,
+            "cycles": 2,
+            "levelsCompleted": 0,
+            "nodeCount": 220,
+            "acquiredTransitions": 2
+          },
+          {
+            "type": "advance",
+            "sequence": 3,
+            "family": "public_occurrence_recall",
+            "proposalKind": "marked_collection_edit",
+            "poseMode": null,
+            "actions": 3,
+            "cycles": 3,
+            "levelsCompleted": 1,
+            "nodeCount": 242,
+            "acquiredTransitions": 3
+          }
+        ],
+        "inspection": [],
+        "final": {
+          "actions": 3,
+          "levelsCompleted": 1,
+          "reason": null,
+          "graphRevision": 502,
+          "nodeCount": 242,
+          "acquiredTransitions": 3,
+          "implementation": "logos-engine.typescript.v6.native-migration/0.55.0"
+        }
+      }
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "baseline": {
+        "actions": 10,
+        "cycles": 6,
+        "levelsCompleted": 2,
+        "requests": [
+          {
+            "type": "init",
+            "sequence": 0,
+            "kind": "action",
+            "actions": 0
+          },
+          {
+            "type": "advance",
+            "sequence": 1,
+            "kind": "boundary",
+            "actions": 1
+          },
+          {
+            "type": "resume",
+            "sequence": 1,
+            "kind": "action",
+            "actions": 1
+          },
+          {
+            "type": "advance",
+            "sequence": 2,
+            "kind": "boundary",
+            "actions": 2
+          },
+          {
+            "type": "resume",
+            "sequence": 2,
+            "kind": "action",
+            "actions": 2
+          },
+          {
+            "type": "advance",
+            "sequence": 3,
+            "kind": "boundary",
+            "actions": 3
+          },
+          {
+            "type": "resume",
+            "sequence": 3,
+            "kind": "action",
+            "actions": 3
+          },
+          {
+            "type": "advance",
+            "sequence": 4,
+            "kind": "boundary",
+            "actions": 4
+          },
+          {
+            "type": "resume",
+            "sequence": 4,
+            "kind": "action",
+            "actions": 4
+          },
+          {
+            "type": "advance",
+            "sequence": 5,
+            "kind": "action",
+            "actions": 5
+          },
+          {
+            "type": "advance",
+            "sequence": 6,
+            "kind": "action",
+            "actions": 6
+          },
+          {
+            "type": "advance",
+            "sequence": 7,
+            "kind": "action",
+            "actions": 7
+          },
+          {
+            "type": "advance",
+            "sequence": 8,
+            "kind": "action",
+            "actions": 8
+          },
+          {
+            "type": "advance",
+            "sequence": 9,
+            "kind": "boundary",
+            "actions": 9
+          },
+          {
+            "type": "resume",
+            "sequence": 9,
+            "kind": "action",
+            "actions": 9
+          },
+          {
+            "type": "advance",
+            "sequence": 10,
+            "kind": "boundary",
+            "actions": 10
+          }
+        ],
+        "observations": [
+          {
+            "type": "init",
+            "sequence": 0,
+            "family": "public_occurrence_recall",
+            "proposalKind": "marked_collection_edit",
+            "poseMode": null,
+            "actions": 0,
+            "cycles": 0,
+            "levelsCompleted": 0,
+            "nodeCount": 163,
+            "acquiredTransitions": 0
+          },
+          {
+            "type": "advance",
+            "sequence": 1,
+            "family": "public_occurrence_recall",
+            "proposalKind": "marked_collection_edit",
+            "poseMode": null,
+            "actions": 1,
+            "cycles": 1,
+            "levelsCompleted": 0,
+            "nodeCount": 191,
+            "acquiredTransitions": 1
+          },
+          {
+            "type": "resume",
+            "sequence": 1,
+            "family": "public_occurrence_recall",
+            "proposalKind": "marked_collection_edit",
+            "poseMode": null,
+            "actions": 1,
+            "cycles": 1,
+            "levelsCompleted": 0,
+            "nodeCount": 193,
+            "acquiredTransitions": 1
+          },
+          {
+            "type": "advance",
+            "sequence": 2,
+            "family": "public_occurrence_recall",
+            "proposalKind": "marked_collection_edit",
+            "poseMode": null,
+            "actions": 2,
+            "cycles": 2,
+            "levelsCompleted": 0,
+            "nodeCount": 215,
+            "acquiredTransitions": 2
+          },
+          {
+            "type": "resume",
+            "sequence": 2,
+            "family": "public_occurrence_recall",
+            "proposalKind": "marked_collection_edit",
+            "poseMode": null,
+            "actions": 2,
+            "cycles": 2,
+            "levelsCompleted": 0,
+            "nodeCount": 217,
+            "acquiredTransitions": 2
+          },
+          {
+            "type": "advance",
+            "sequence": 3,
+            "family": "public_occurrence_recall",
+            "proposalKind": "marked_collection_edit",
+            "poseMode": null,
+            "actions": 3,
+            "cycles": 3,
+            "levelsCompleted": 1,
+            "nodeCount": 239,
+            "acquiredTransitions": 3
+          },
+          {
+            "type": "resume",
+            "sequence": 3,
+            "family": "public_occurrence_recall",
+            "proposalKind": "public_program_composition",
+            "poseMode": null,
+            "actions": 3,
+            "cycles": 3,
+            "levelsCompleted": 1,
+            "nodeCount": 241,
+            "acquiredTransitions": 3
+          },
+          {
+            "type": "advance",
+            "sequence": 4,
+            "family": "public_occurrence_recall",
+            "proposalKind": "public_program_composition",
+            "poseMode": null,
+            "actions": 4,
+            "cycles": 4,
+            "levelsCompleted": 1,
+            "nodeCount": 263,
+            "acquiredTransitions": 4
+          },
+          {
+            "type": "resume",
+            "sequence": 4,
+            "family": "public_occurrence_recall",
+            "proposalKind": "public_program_composition",
+            "poseMode": null,
+            "actions": 4,
+            "cycles": 4,
+            "levelsCompleted": 1,
+            "nodeCount": 265,
+            "acquiredTransitions": 4
+          },
+          {
+            "type": "advance",
+            "sequence": 5,
+            "family": "public_occurrence_recall",
+            "proposalKind": "public_program_composition",
+            "poseMode": null,
+            "actions": 5,
+            "cycles": 4,
+            "levelsCompleted": 1,
+            "nodeCount": 265,
+            "acquiredTransitions": 4
+          },
+          {
+            "type": "advance",
+            "sequence": 6,
+            "family": "public_occurrence_recall",
+            "proposalKind": "public_program_composition",
+            "poseMode": null,
+            "actions": 6,
+            "cycles": 4,
+            "levelsCompleted": 1,
+            "nodeCount": 265,
+            "acquiredTransitions": 4
+          },
+          {
+            "type": "advance",
+            "sequence": 7,
+            "family": "public_occurrence_recall",
+            "proposalKind": "public_program_composition",
+            "poseMode": null,
+            "actions": 7,
+            "cycles": 4,
+            "levelsCompleted": 1,
+            "nodeCount": 265,
+            "acquiredTransitions": 4
+          },
+          {
+            "type": "advance",
+            "sequence": 8,
+            "family": "public_occurrence_recall",
+            "proposalKind": "public_program_composition",
+            "poseMode": null,
+            "actions": 8,
+            "cycles": 4,
+            "levelsCompleted": 1,
+            "nodeCount": 265,
+            "acquiredTransitions": 4
+          },
+          {
+            "type": "advance",
+            "sequence": 9,
+            "family": "public_occurrence_recall",
+            "proposalKind": "public_program_composition",
+            "poseMode": null,
+            "actions": 9,
+            "cycles": 5,
+            "levelsCompleted": 1,
+            "nodeCount": 344,
+            "acquiredTransitions": 9
+          },
+          {
+            "type": "resume",
+            "sequence": 9,
+            "family": "public_occurrence_recall",
+            "proposalKind": "public_program_composition",
+            "poseMode": null,
+            "actions": 9,
+            "cycles": 5,
+            "levelsCompleted": 1,
+            "nodeCount": 346,
+            "acquiredTransitions": 9
+          },
+          {
+            "type": "advance",
+            "sequence": 10,
+            "family": "public_occurrence_recall",
+            "proposalKind": "public_program_composition",
+            "poseMode": null,
+            "actions": 10,
+            "cycles": 6,
+            "levelsCompleted": 2,
+            "nodeCount": 366,
+            "acquiredTransitions": 10
+          }
+        ],
+        "inspection": [
+          {
+            "graphNodes": 366
+          },
+          {
+            "graphNodes": 366
+          },
+          {
+            "graphNodes": 366
+          }
+        ],
+        "final": {
+          "actions": 10,
+          "levelsCompleted": 2,
+          "reason": null,
+          "graphRevision": 891,
+          "nodeCount": 366,
+          "acquiredTransitions": 10,
+          "implementation": "logos-engine.typescript.v6.native-migration/0.54.0"
+        }
+      },
+      "candidate": {
+        "actions": 10,
+        "cycles": 6,
+        "levelsCompleted": 2,
+        "requests": [
+          {
+            "type": "init",
+            "sequence": 0,
+            "kind": "action",
+            "actions": 0
+          },
+          {
+            "type": "advance",
+            "sequence": 1,
+            "kind": "boundary",
+            "actions": 1
+          },
+          {
+            "type": "resume",
+            "sequence": 1,
+            "kind": "action",
+            "actions": 1
+          },
+          {
+            "type": "advance",
+            "sequence": 2,
+            "kind": "boundary",
+            "actions": 2
+          },
+          {
+            "type": "resume",
+            "sequence": 2,
+            "kind": "action",
+            "actions": 2
+          },
+          {
+            "type": "advance",
+            "sequence": 3,
+            "kind": "boundary",
+            "actions": 3
+          },
+          {
+            "type": "resume",
+            "sequence": 3,
+            "kind": "action",
+            "actions": 3
+          },
+          {
+            "type": "advance",
+            "sequence": 4,
+            "kind": "boundary",
+            "actions": 4
+          },
+          {
+            "type": "resume",
+            "sequence": 4,
+            "kind": "action",
+            "actions": 4
+          },
+          {
+            "type": "advance",
+            "sequence": 5,
+            "kind": "action",
+            "actions": 5
+          },
+          {
+            "type": "advance",
+            "sequence": 6,
+            "kind": "action",
+            "actions": 6
+          },
+          {
+            "type": "advance",
+            "sequence": 7,
+            "kind": "action",
+            "actions": 7
+          },
+          {
+            "type": "advance",
+            "sequence": 8,
+            "kind": "action",
+            "actions": 8
+          },
+          {
+            "type": "advance",
+            "sequence": 9,
+            "kind": "boundary",
+            "actions": 9
+          },
+          {
+            "type": "resume",
+            "sequence": 9,
+            "kind": "action",
+            "actions": 9
+          },
+          {
+            "type": "advance",
+            "sequence": 10,
+            "kind": "boundary",
+            "actions": 10
+          }
+        ],
+        "observations": [
+          {
+            "type": "init",
+            "sequence": 0,
+            "family": "public_occurrence_recall",
+            "proposalKind": "marked_collection_edit",
+            "poseMode": null,
+            "actions": 0,
+            "cycles": 0,
+            "levelsCompleted": 0,
+            "nodeCount": 166,
+            "acquiredTransitions": 0
+          },
+          {
+            "type": "advance",
+            "sequence": 1,
+            "family": "public_occurrence_recall",
+            "proposalKind": "marked_collection_edit",
+            "poseMode": null,
+            "actions": 1,
+            "cycles": 1,
+            "levelsCompleted": 0,
+            "nodeCount": 194,
+            "acquiredTransitions": 1
+          },
+          {
+            "type": "resume",
+            "sequence": 1,
+            "family": "public_occurrence_recall",
+            "proposalKind": "marked_collection_edit",
+            "poseMode": null,
+            "actions": 1,
+            "cycles": 1,
+            "levelsCompleted": 0,
+            "nodeCount": 196,
+            "acquiredTransitions": 1
+          },
+          {
+            "type": "advance",
+            "sequence": 2,
+            "family": "public_occurrence_recall",
+            "proposalKind": "marked_collection_edit",
+            "poseMode": null,
+            "actions": 2,
+            "cycles": 2,
+            "levelsCompleted": 0,
+            "nodeCount": 218,
+            "acquiredTransitions": 2
+          },
+          {
+            "type": "resume",
+            "sequence": 2,
+            "family": "public_occurrence_recall",
+            "proposalKind": "marked_collection_edit",
+            "poseMode": null,
+            "actions": 2,
+            "cycles": 2,
+            "levelsCompleted": 0,
+            "nodeCount": 220,
+            "acquiredTransitions": 2
+          },
+          {
+            "type": "advance",
+            "sequence": 3,
+            "family": "public_occurrence_recall",
+            "proposalKind": "marked_collection_edit",
+            "poseMode": null,
+            "actions": 3,
+            "cycles": 3,
+            "levelsCompleted": 1,
+            "nodeCount": 242,
+            "acquiredTransitions": 3
+          },
+          {
+            "type": "resume",
+            "sequence": 3,
+            "family": "public_occurrence_recall",
+            "proposalKind": "public_program_composition",
+            "poseMode": null,
+            "actions": 3,
+            "cycles": 3,
+            "levelsCompleted": 1,
+            "nodeCount": 244,
+            "acquiredTransitions": 3
+          },
+          {
+            "type": "advance",
+            "sequence": 4,
+            "family": "public_occurrence_recall",
+            "proposalKind": "public_program_composition",
+            "poseMode": null,
+            "actions": 4,
+            "cycles": 4,
+            "levelsCompleted": 1,
+            "nodeCount": 266,
+            "acquiredTransitions": 4
+          },
+          {
+            "type": "resume",
+            "sequence": 4,
+            "family": "public_occurrence_recall",
+            "proposalKind": "public_program_composition",
+            "poseMode": null,
+            "actions": 4,
+            "cycles": 4,
+            "levelsCompleted": 1,
+            "nodeCount": 268,
+            "acquiredTransitions": 4
+          },
+          {
+            "type": "advance",
+            "sequence": 5,
+            "family": "public_occurrence_recall",
+            "proposalKind": "public_program_composition",
+            "poseMode": null,
+            "actions": 5,
+            "cycles": 4,
+            "levelsCompleted": 1,
+            "nodeCount": 268,
+            "acquiredTransitions": 4
+          },
+          {
+            "type": "advance",
+            "sequence": 6,
+            "family": "public_occurrence_recall",
+            "proposalKind": "public_program_composition",
+            "poseMode": null,
+            "actions": 6,
+            "cycles": 4,
+            "levelsCompleted": 1,
+            "nodeCount": 268,
+            "acquiredTransitions": 4
+          },
+          {
+            "type": "advance",
+            "sequence": 7,
+            "family": "public_occurrence_recall",
+            "proposalKind": "public_program_composition",
+            "poseMode": null,
+            "actions": 7,
+            "cycles": 4,
+            "levelsCompleted": 1,
+            "nodeCount": 268,
+            "acquiredTransitions": 4
+          },
+          {
+            "type": "advance",
+            "sequence": 8,
+            "family": "public_occurrence_recall",
+            "proposalKind": "public_program_composition",
+            "poseMode": null,
+            "actions": 8,
+            "cycles": 4,
+            "levelsCompleted": 1,
+            "nodeCount": 268,
+            "acquiredTransitions": 4
+          },
+          {
+            "type": "advance",
+            "sequence": 9,
+            "family": "public_occurrence_recall",
+            "proposalKind": "public_program_composition",
+            "poseMode": null,
+            "actions": 9,
+            "cycles": 5,
+            "levelsCompleted": 1,
+            "nodeCount": 347,
+            "acquiredTransitions": 9
+          },
+          {
+            "type": "resume",
+            "sequence": 9,
+            "family": "public_occurrence_recall",
+            "proposalKind": "public_program_composition",
+            "poseMode": null,
+            "actions": 9,
+            "cycles": 5,
+            "levelsCompleted": 1,
+            "nodeCount": 349,
+            "acquiredTransitions": 9
+          },
+          {
+            "type": "advance",
+            "sequence": 10,
+            "family": "public_occurrence_recall",
+            "proposalKind": "public_program_composition",
+            "poseMode": null,
+            "actions": 10,
+            "cycles": 6,
+            "levelsCompleted": 2,
+            "nodeCount": 369,
+            "acquiredTransitions": 10
+          }
+        ],
+        "inspection": [
+          {
+            "graphNodes": 369
+          },
+          {
+            "graphNodes": 369
+          },
+          {
+            "graphNodes": 369
+          }
+        ],
+        "final": {
+          "actions": 10,
+          "levelsCompleted": 2,
+          "reason": null,
+          "graphRevision": 900,
+          "nodeCount": 369,
+          "acquiredTransitions": 10,
+          "implementation": "logos-engine.typescript.v6.native-migration/0.55.0"
+        }
+      }
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "baseline": {
+        "actions": 3,
+        "cycles": 3,
+        "levelsCompleted": 1,
+        "requests": [
+          {
+            "type": "init",
+            "sequence": 0,
+            "kind": "action",
+            "actions": 0
+          },
+          {
+            "type": "advance",
+            "sequence": 1,
+            "kind": "boundary",
+            "actions": 1
+          },
+          {
+            "type": "resume",
+            "sequence": 1,
+            "kind": "action",
+            "actions": 1
+          },
+          {
+            "type": "advance",
+            "sequence": 2,
+            "kind": "boundary",
+            "actions": 2
+          },
+          {
+            "type": "resume",
+            "sequence": 2,
+            "kind": "action",
+            "actions": 2
+          },
+          {
+            "type": "advance",
+            "sequence": 3,
+            "kind": "boundary",
+            "actions": 3
+          }
+        ],
+        "observations": [
+          {
+            "type": "init",
+            "sequence": 0,
+            "family": "observed_frontier",
+            "proposalKind": "experiment",
+            "poseMode": null,
+            "actions": 0,
+            "cycles": 0,
+            "levelsCompleted": 0,
+            "nodeCount": 168,
+            "acquiredTransitions": 0
+          },
+          {
+            "type": "advance",
+            "sequence": 1,
+            "family": "observed_frontier",
+            "proposalKind": "experiment",
+            "poseMode": null,
+            "actions": 1,
+            "cycles": 1,
+            "levelsCompleted": 0,
+            "nodeCount": 186,
+            "acquiredTransitions": 1
+          },
+          {
+            "type": "resume",
+            "sequence": 1,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 1,
+            "cycles": 1,
+            "levelsCompleted": 0,
+            "nodeCount": 188,
+            "acquiredTransitions": 1
+          },
+          {
+            "type": "advance",
+            "sequence": 2,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 2,
+            "cycles": 2,
+            "levelsCompleted": 0,
+            "nodeCount": 203,
+            "acquiredTransitions": 2
+          },
+          {
+            "type": "resume",
+            "sequence": 2,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 2,
+            "cycles": 2,
+            "levelsCompleted": 0,
+            "nodeCount": 205,
+            "acquiredTransitions": 2
+          },
+          {
+            "type": "advance",
+            "sequence": 3,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 3,
+            "cycles": 3,
+            "levelsCompleted": 1,
+            "nodeCount": 230,
+            "acquiredTransitions": 3
+          }
+        ],
+        "inspection": [],
+        "final": {
+          "actions": 3,
+          "levelsCompleted": 1,
+          "reason": null,
+          "graphRevision": 504,
+          "nodeCount": 230,
+          "acquiredTransitions": 3,
+          "implementation": "logos-engine.typescript.v6.native-migration/0.54.0"
+        }
+      },
+      "candidate": {
+        "actions": 3,
+        "cycles": 3,
+        "levelsCompleted": 1,
+        "requests": [
+          {
+            "type": "init",
+            "sequence": 0,
+            "kind": "action",
+            "actions": 0
+          },
+          {
+            "type": "advance",
+            "sequence": 1,
+            "kind": "boundary",
+            "actions": 1
+          },
+          {
+            "type": "resume",
+            "sequence": 1,
+            "kind": "action",
+            "actions": 1
+          },
+          {
+            "type": "advance",
+            "sequence": 2,
+            "kind": "boundary",
+            "actions": 2
+          },
+          {
+            "type": "resume",
+            "sequence": 2,
+            "kind": "action",
+            "actions": 2
+          },
+          {
+            "type": "advance",
+            "sequence": 3,
+            "kind": "boundary",
+            "actions": 3
+          }
+        ],
+        "observations": [
+          {
+            "type": "init",
+            "sequence": 0,
+            "family": "observed_frontier",
+            "proposalKind": "experiment",
+            "poseMode": null,
+            "actions": 0,
+            "cycles": 0,
+            "levelsCompleted": 0,
+            "nodeCount": 171,
+            "acquiredTransitions": 0
+          },
+          {
+            "type": "advance",
+            "sequence": 1,
+            "family": "observed_frontier",
+            "proposalKind": "experiment",
+            "poseMode": null,
+            "actions": 1,
+            "cycles": 1,
+            "levelsCompleted": 0,
+            "nodeCount": 189,
+            "acquiredTransitions": 1
+          },
+          {
+            "type": "resume",
+            "sequence": 1,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 1,
+            "cycles": 1,
+            "levelsCompleted": 0,
+            "nodeCount": 191,
+            "acquiredTransitions": 1
+          },
+          {
+            "type": "advance",
+            "sequence": 2,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 2,
+            "cycles": 2,
+            "levelsCompleted": 0,
+            "nodeCount": 206,
+            "acquiredTransitions": 2
+          },
+          {
+            "type": "resume",
+            "sequence": 2,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 2,
+            "cycles": 2,
+            "levelsCompleted": 0,
+            "nodeCount": 208,
+            "acquiredTransitions": 2
+          },
+          {
+            "type": "advance",
+            "sequence": 3,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 3,
+            "cycles": 3,
+            "levelsCompleted": 1,
+            "nodeCount": 233,
+            "acquiredTransitions": 3
+          }
+        ],
+        "inspection": [],
+        "final": {
+          "actions": 3,
+          "levelsCompleted": 1,
+          "reason": null,
+          "graphRevision": 511,
+          "nodeCount": 233,
+          "acquiredTransitions": 3,
+          "implementation": "logos-engine.typescript.v6.native-migration/0.55.0"
+        }
+      }
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "baseline": {
+        "actions": 15,
+        "cycles": 9,
+        "levelsCompleted": 3,
+        "requests": [
+          {
+            "type": "init",
+            "sequence": 0,
+            "kind": "action",
+            "actions": 0
+          },
+          {
+            "type": "advance",
+            "sequence": 1,
+            "kind": "boundary",
+            "actions": 1
+          },
+          {
+            "type": "resume",
+            "sequence": 1,
+            "kind": "action",
+            "actions": 1
+          },
+          {
+            "type": "advance",
+            "sequence": 2,
+            "kind": "boundary",
+            "actions": 2
+          },
+          {
+            "type": "resume",
+            "sequence": 2,
+            "kind": "action",
+            "actions": 2
+          },
+          {
+            "type": "advance",
+            "sequence": 3,
+            "kind": "boundary",
+            "actions": 3
+          },
+          {
+            "type": "resume",
+            "sequence": 3,
+            "kind": "action",
+            "actions": 3
+          },
+          {
+            "type": "advance",
+            "sequence": 4,
+            "kind": "boundary",
+            "actions": 4
+          },
+          {
+            "type": "resume",
+            "sequence": 4,
+            "kind": "action",
+            "actions": 4
+          },
+          {
+            "type": "advance",
+            "sequence": 5,
+            "kind": "action",
+            "actions": 5
+          },
+          {
+            "type": "advance",
+            "sequence": 6,
+            "kind": "action",
+            "actions": 6
+          },
+          {
+            "type": "advance",
+            "sequence": 7,
+            "kind": "boundary",
+            "actions": 7
+          },
+          {
+            "type": "resume",
+            "sequence": 7,
+            "kind": "action",
+            "actions": 7
+          },
+          {
+            "type": "advance",
+            "sequence": 8,
+            "kind": "boundary",
+            "actions": 8
+          },
+          {
+            "type": "resume",
+            "sequence": 8,
+            "kind": "action",
+            "actions": 8
+          },
+          {
+            "type": "advance",
+            "sequence": 9,
+            "kind": "boundary",
+            "actions": 9
+          },
+          {
+            "type": "resume",
+            "sequence": 9,
+            "kind": "action",
+            "actions": 9
+          },
+          {
+            "type": "advance",
+            "sequence": 10,
+            "kind": "action",
+            "actions": 10
+          },
+          {
+            "type": "advance",
+            "sequence": 11,
+            "kind": "boundary",
+            "actions": 11
+          },
+          {
+            "type": "resume",
+            "sequence": 11,
+            "kind": "action",
+            "actions": 11
+          },
+          {
+            "type": "advance",
+            "sequence": 12,
+            "kind": "action",
+            "actions": 12
+          },
+          {
+            "type": "advance",
+            "sequence": 13,
+            "kind": "action",
+            "actions": 13
+          },
+          {
+            "type": "advance",
+            "sequence": 14,
+            "kind": "action",
+            "actions": 14
+          },
+          {
+            "type": "advance",
+            "sequence": 15,
+            "kind": "stopped",
+            "actions": 15
+          }
+        ],
+        "observations": [
+          {
+            "type": "init",
+            "sequence": 0,
+            "family": "observed_frontier",
+            "proposalKind": "experiment",
+            "poseMode": null,
+            "actions": 0,
+            "cycles": 0,
+            "levelsCompleted": 0,
+            "nodeCount": 168,
+            "acquiredTransitions": 0
+          },
+          {
+            "type": "advance",
+            "sequence": 1,
+            "family": "observed_frontier",
+            "proposalKind": "experiment",
+            "poseMode": null,
+            "actions": 1,
+            "cycles": 1,
+            "levelsCompleted": 0,
+            "nodeCount": 186,
+            "acquiredTransitions": 1
+          },
+          {
+            "type": "resume",
+            "sequence": 1,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 1,
+            "cycles": 1,
+            "levelsCompleted": 0,
+            "nodeCount": 188,
+            "acquiredTransitions": 1
+          },
+          {
+            "type": "advance",
+            "sequence": 2,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 2,
+            "cycles": 2,
+            "levelsCompleted": 0,
+            "nodeCount": 203,
+            "acquiredTransitions": 2
+          },
+          {
+            "type": "resume",
+            "sequence": 2,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 2,
+            "cycles": 2,
+            "levelsCompleted": 0,
+            "nodeCount": 205,
+            "acquiredTransitions": 2
+          },
+          {
+            "type": "advance",
+            "sequence": 3,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 3,
+            "cycles": 3,
+            "levelsCompleted": 1,
+            "nodeCount": 230,
+            "acquiredTransitions": 3
+          },
+          {
+            "type": "resume",
+            "sequence": 3,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 3,
+            "cycles": 3,
+            "levelsCompleted": 1,
+            "nodeCount": 232,
+            "acquiredTransitions": 3
+          },
+          {
+            "type": "advance",
+            "sequence": 4,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 4,
+            "cycles": 4,
+            "levelsCompleted": 1,
+            "nodeCount": 246,
+            "acquiredTransitions": 4
+          },
+          {
+            "type": "resume",
+            "sequence": 4,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 4,
+            "cycles": 4,
+            "levelsCompleted": 1,
+            "nodeCount": 248,
+            "acquiredTransitions": 4
+          },
+          {
+            "type": "advance",
+            "sequence": 5,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 5,
+            "cycles": 4,
+            "levelsCompleted": 1,
+            "nodeCount": 248,
+            "acquiredTransitions": 4
+          },
+          {
+            "type": "advance",
+            "sequence": 6,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 6,
+            "cycles": 4,
+            "levelsCompleted": 1,
+            "nodeCount": 248,
+            "acquiredTransitions": 4
+          },
+          {
+            "type": "advance",
+            "sequence": 7,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 7,
+            "cycles": 5,
+            "levelsCompleted": 2,
+            "nodeCount": 295,
+            "acquiredTransitions": 7
+          },
+          {
+            "type": "resume",
+            "sequence": 7,
+            "family": "public_occurrence_recall",
+            "proposalKind": "public_occurrence_recall",
+            "poseMode": null,
+            "actions": 7,
+            "cycles": 5,
+            "levelsCompleted": 2,
+            "nodeCount": 297,
+            "acquiredTransitions": 7
+          },
+          {
+            "type": "advance",
+            "sequence": 8,
+            "family": "public_occurrence_recall",
+            "proposalKind": "public_occurrence_recall",
+            "poseMode": null,
+            "actions": 8,
+            "cycles": 6,
+            "levelsCompleted": 2,
+            "nodeCount": 316,
+            "acquiredTransitions": 8
+          },
+          {
+            "type": "resume",
+            "sequence": 8,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 8,
+            "cycles": 6,
+            "levelsCompleted": 2,
+            "nodeCount": 318,
+            "acquiredTransitions": 8
+          },
+          {
+            "type": "advance",
+            "sequence": 9,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 9,
+            "cycles": 7,
+            "levelsCompleted": 2,
+            "nodeCount": 337,
+            "acquiredTransitions": 9
+          },
+          {
+            "type": "resume",
+            "sequence": 9,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 9,
+            "cycles": 7,
+            "levelsCompleted": 2,
+            "nodeCount": 339,
+            "acquiredTransitions": 9
+          },
+          {
+            "type": "advance",
+            "sequence": 10,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 10,
+            "cycles": 7,
+            "levelsCompleted": 2,
+            "nodeCount": 339,
+            "acquiredTransitions": 9
+          },
+          {
+            "type": "advance",
+            "sequence": 11,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 11,
+            "cycles": 8,
+            "levelsCompleted": 2,
+            "nodeCount": 373,
+            "acquiredTransitions": 11
+          },
+          {
+            "type": "resume",
+            "sequence": 11,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 11,
+            "cycles": 8,
+            "levelsCompleted": 2,
+            "nodeCount": 375,
+            "acquiredTransitions": 11
+          },
+          {
+            "type": "advance",
+            "sequence": 12,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 12,
+            "cycles": 8,
+            "levelsCompleted": 2,
+            "nodeCount": 375,
+            "acquiredTransitions": 11
+          },
+          {
+            "type": "advance",
+            "sequence": 13,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 13,
+            "cycles": 8,
+            "levelsCompleted": 2,
+            "nodeCount": 375,
+            "acquiredTransitions": 11
+          },
+          {
+            "type": "advance",
+            "sequence": 14,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 14,
+            "cycles": 8,
+            "levelsCompleted": 2,
+            "nodeCount": 375,
+            "acquiredTransitions": 11
+          },
+          {
+            "type": "advance",
+            "sequence": 15,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 15,
+            "cycles": 9,
+            "levelsCompleted": 3,
+            "nodeCount": 435,
+            "acquiredTransitions": 15
+          }
+        ],
+        "inspection": [
+          {
+            "graphNodes": 435
+          },
+          {
+            "graphNodes": 435
+          },
+          {
+            "graphNodes": 435
+          }
+        ],
+        "final": {
+          "actions": 15,
+          "levelsCompleted": 3,
+          "reason": "target_levels_completed",
+          "graphRevision": 1248,
+          "nodeCount": 435,
+          "acquiredTransitions": 15,
+          "implementation": "logos-engine.typescript.v6.native-migration/0.54.0"
+        }
+      },
+      "candidate": {
+        "actions": 15,
+        "cycles": 9,
+        "levelsCompleted": 3,
+        "requests": [
+          {
+            "type": "init",
+            "sequence": 0,
+            "kind": "action",
+            "actions": 0
+          },
+          {
+            "type": "advance",
+            "sequence": 1,
+            "kind": "boundary",
+            "actions": 1
+          },
+          {
+            "type": "resume",
+            "sequence": 1,
+            "kind": "action",
+            "actions": 1
+          },
+          {
+            "type": "advance",
+            "sequence": 2,
+            "kind": "boundary",
+            "actions": 2
+          },
+          {
+            "type": "resume",
+            "sequence": 2,
+            "kind": "action",
+            "actions": 2
+          },
+          {
+            "type": "advance",
+            "sequence": 3,
+            "kind": "boundary",
+            "actions": 3
+          },
+          {
+            "type": "resume",
+            "sequence": 3,
+            "kind": "action",
+            "actions": 3
+          },
+          {
+            "type": "advance",
+            "sequence": 4,
+            "kind": "boundary",
+            "actions": 4
+          },
+          {
+            "type": "resume",
+            "sequence": 4,
+            "kind": "action",
+            "actions": 4
+          },
+          {
+            "type": "advance",
+            "sequence": 5,
+            "kind": "action",
+            "actions": 5
+          },
+          {
+            "type": "advance",
+            "sequence": 6,
+            "kind": "action",
+            "actions": 6
+          },
+          {
+            "type": "advance",
+            "sequence": 7,
+            "kind": "boundary",
+            "actions": 7
+          },
+          {
+            "type": "resume",
+            "sequence": 7,
+            "kind": "action",
+            "actions": 7
+          },
+          {
+            "type": "advance",
+            "sequence": 8,
+            "kind": "boundary",
+            "actions": 8
+          },
+          {
+            "type": "resume",
+            "sequence": 8,
+            "kind": "action",
+            "actions": 8
+          },
+          {
+            "type": "advance",
+            "sequence": 9,
+            "kind": "boundary",
+            "actions": 9
+          },
+          {
+            "type": "resume",
+            "sequence": 9,
+            "kind": "action",
+            "actions": 9
+          },
+          {
+            "type": "advance",
+            "sequence": 10,
+            "kind": "action",
+            "actions": 10
+          },
+          {
+            "type": "advance",
+            "sequence": 11,
+            "kind": "boundary",
+            "actions": 11
+          },
+          {
+            "type": "resume",
+            "sequence": 11,
+            "kind": "action",
+            "actions": 11
+          },
+          {
+            "type": "advance",
+            "sequence": 12,
+            "kind": "action",
+            "actions": 12
+          },
+          {
+            "type": "advance",
+            "sequence": 13,
+            "kind": "action",
+            "actions": 13
+          },
+          {
+            "type": "advance",
+            "sequence": 14,
+            "kind": "action",
+            "actions": 14
+          },
+          {
+            "type": "advance",
+            "sequence": 15,
+            "kind": "stopped",
+            "actions": 15
+          }
+        ],
+        "observations": [
+          {
+            "type": "init",
+            "sequence": 0,
+            "family": "observed_frontier",
+            "proposalKind": "experiment",
+            "poseMode": null,
+            "actions": 0,
+            "cycles": 0,
+            "levelsCompleted": 0,
+            "nodeCount": 171,
+            "acquiredTransitions": 0
+          },
+          {
+            "type": "advance",
+            "sequence": 1,
+            "family": "observed_frontier",
+            "proposalKind": "experiment",
+            "poseMode": null,
+            "actions": 1,
+            "cycles": 1,
+            "levelsCompleted": 0,
+            "nodeCount": 189,
+            "acquiredTransitions": 1
+          },
+          {
+            "type": "resume",
+            "sequence": 1,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 1,
+            "cycles": 1,
+            "levelsCompleted": 0,
+            "nodeCount": 191,
+            "acquiredTransitions": 1
+          },
+          {
+            "type": "advance",
+            "sequence": 2,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 2,
+            "cycles": 2,
+            "levelsCompleted": 0,
+            "nodeCount": 206,
+            "acquiredTransitions": 2
+          },
+          {
+            "type": "resume",
+            "sequence": 2,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 2,
+            "cycles": 2,
+            "levelsCompleted": 0,
+            "nodeCount": 208,
+            "acquiredTransitions": 2
+          },
+          {
+            "type": "advance",
+            "sequence": 3,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 3,
+            "cycles": 3,
+            "levelsCompleted": 1,
+            "nodeCount": 233,
+            "acquiredTransitions": 3
+          },
+          {
+            "type": "resume",
+            "sequence": 3,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 3,
+            "cycles": 3,
+            "levelsCompleted": 1,
+            "nodeCount": 235,
+            "acquiredTransitions": 3
+          },
+          {
+            "type": "advance",
+            "sequence": 4,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 4,
+            "cycles": 4,
+            "levelsCompleted": 1,
+            "nodeCount": 249,
+            "acquiredTransitions": 4
+          },
+          {
+            "type": "resume",
+            "sequence": 4,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 4,
+            "cycles": 4,
+            "levelsCompleted": 1,
+            "nodeCount": 251,
+            "acquiredTransitions": 4
+          },
+          {
+            "type": "advance",
+            "sequence": 5,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 5,
+            "cycles": 4,
+            "levelsCompleted": 1,
+            "nodeCount": 251,
+            "acquiredTransitions": 4
+          },
+          {
+            "type": "advance",
+            "sequence": 6,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 6,
+            "cycles": 4,
+            "levelsCompleted": 1,
+            "nodeCount": 251,
+            "acquiredTransitions": 4
+          },
+          {
+            "type": "advance",
+            "sequence": 7,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 7,
+            "cycles": 5,
+            "levelsCompleted": 2,
+            "nodeCount": 298,
+            "acquiredTransitions": 7
+          },
+          {
+            "type": "resume",
+            "sequence": 7,
+            "family": "public_occurrence_recall",
+            "proposalKind": "public_occurrence_recall",
+            "poseMode": null,
+            "actions": 7,
+            "cycles": 5,
+            "levelsCompleted": 2,
+            "nodeCount": 300,
+            "acquiredTransitions": 7
+          },
+          {
+            "type": "advance",
+            "sequence": 8,
+            "family": "public_occurrence_recall",
+            "proposalKind": "public_occurrence_recall",
+            "poseMode": null,
+            "actions": 8,
+            "cycles": 6,
+            "levelsCompleted": 2,
+            "nodeCount": 319,
+            "acquiredTransitions": 8
+          },
+          {
+            "type": "resume",
+            "sequence": 8,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 8,
+            "cycles": 6,
+            "levelsCompleted": 2,
+            "nodeCount": 321,
+            "acquiredTransitions": 8
+          },
+          {
+            "type": "advance",
+            "sequence": 9,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 9,
+            "cycles": 7,
+            "levelsCompleted": 2,
+            "nodeCount": 340,
+            "acquiredTransitions": 9
+          },
+          {
+            "type": "resume",
+            "sequence": 9,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 9,
+            "cycles": 7,
+            "levelsCompleted": 2,
+            "nodeCount": 342,
+            "acquiredTransitions": 9
+          },
+          {
+            "type": "advance",
+            "sequence": 10,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 10,
+            "cycles": 7,
+            "levelsCompleted": 2,
+            "nodeCount": 342,
+            "acquiredTransitions": 9
+          },
+          {
+            "type": "advance",
+            "sequence": 11,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 11,
+            "cycles": 8,
+            "levelsCompleted": 2,
+            "nodeCount": 376,
+            "acquiredTransitions": 11
+          },
+          {
+            "type": "resume",
+            "sequence": 11,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 11,
+            "cycles": 8,
+            "levelsCompleted": 2,
+            "nodeCount": 378,
+            "acquiredTransitions": 11
+          },
+          {
+            "type": "advance",
+            "sequence": 12,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 12,
+            "cycles": 8,
+            "levelsCompleted": 2,
+            "nodeCount": 378,
+            "acquiredTransitions": 11
+          },
+          {
+            "type": "advance",
+            "sequence": 13,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 13,
+            "cycles": 8,
+            "levelsCompleted": 2,
+            "nodeCount": 378,
+            "acquiredTransitions": 11
+          },
+          {
+            "type": "advance",
+            "sequence": 14,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 14,
+            "cycles": 8,
+            "levelsCompleted": 2,
+            "nodeCount": 378,
+            "acquiredTransitions": 11
+          },
+          {
+            "type": "advance",
+            "sequence": 15,
+            "family": "configured_arrivals",
+            "proposalKind": "configured_first_arrival_composition",
+            "poseMode": null,
+            "actions": 15,
+            "cycles": 9,
+            "levelsCompleted": 3,
+            "nodeCount": 438,
+            "acquiredTransitions": 15
+          }
+        ],
+        "inspection": [
+          {
+            "graphNodes": 438
+          },
+          {
+            "graphNodes": 438
+          },
+          {
+            "graphNodes": 438
+          }
+        ],
+        "final": {
+          "actions": 15,
+          "levelsCompleted": 3,
+          "reason": "target_levels_completed",
+          "graphRevision": 1261,
+          "nodeCount": 438,
+          "acquiredTransitions": 15,
+          "implementation": "logos-engine.typescript.v6.native-migration/0.55.0"
+        }
+      }
+    }
+  ]
+}

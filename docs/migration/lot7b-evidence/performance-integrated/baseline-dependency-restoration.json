@@ -1,0 +1,29 @@
+{
+  "schema": "logos-engine.baseline-dependency-restoration.v1",
+  "recordedAt": "2026-11-10T23:25:35.501778+00:00",
+  "status": "restored_exact_dependency_tree_before_measurement",
+  "retainedInitialFailure": {
+    "path": "docs/migration/lot7b-evidence/performance-integrated/static-preflight-attempt1.json",
+    "bytes": 17296,
+    "sha256": "71fb29af1af7d538cc0d6a47895dc5cda9da7365807653f676142ba32c5248d9",
+    "unsatisfied": [
+      {
+        "name": "baseline_dependency_equivalence_public/vendor/pyodide",
+        "satisfied": false
+      }
+    ]
+  },
+  "source": "/workspace/sites/sra-lot7b-20261110/.sites-checkout/public/vendor/pyodide",
+  "target": "/workspace/sites/sra-lot7b-baseline-20261110/public/vendor/pyodide",
+  "files": 12,
+  "digest": "129dcf3aff5b4e4c2212613039b57817793a298609b439e85e3e007fb603ccf6",
+  "byteIdentical": true,
+  "nativeSourceChanged": false,
+  "testToolOrExpectationChanged": false,
+  "measurementExecuted": false,
+  "setupAssertion": {
+    "initialExitCode": 1,
+    "reason": "Restoration setup initially compared structured unsatisfied rows to names; assertion stopped before any mutation. Corrected row-name read; static checker unchanged."
+  },
+  "qualification": "Detached published baseline lacked untracked Pyodide runtime assets. Copied the candidate physical vendor directory exactly, after retaining the genuine static preflight refusal. This restores dependency equivalence only; all source/test/tool/capture/contract bytes remain unchanged. No game, test or cost rerun."
+}

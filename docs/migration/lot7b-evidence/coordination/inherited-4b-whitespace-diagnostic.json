@@ -1,0 +1,44 @@
+{
+  "schema": "logos-engine.inherited-whitespace-diagnostic.v1",
+  "recordedAt": "2026-11-10T23:28:00.540009+00:00",
+  "status": "retained_published_bytes",
+  "publishedPredecessor": "dd355400264b50942486559b8ca56ee6dfc6a3cc",
+  "observedMergeCheck": {
+    "command": [
+      "git",
+      "diff",
+      "--cached",
+      "--check"
+    ],
+    "exitCode": 2,
+    "diagnostic": "new blank line at EOF",
+    "phase": "before native0.55 integration commit28f3f388"
+  },
+  "files": [
+    {
+      "path": "docs/migration/lot4b-evidence/development/typecheck-01.log",
+      "bytes": 149,
+      "sha256": "617dc12a2c337d93b91e07bef62eae59b1abe157b737d909052c3e9d2db0d09d",
+      "matchesActualPublishedPredecessor": true
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/typecheck-merged-site82.log",
+      "bytes": 149,
+      "sha256": "617dc12a2c337d93b91e07bef62eae59b1abe157b737d909052c3e9d2db0d09d",
+      "matchesActualPublishedPredecessor": true
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/planning/roadmap-final-patch-plan.md",
+      "bytes": 29360,
+      "sha256": "f2c343bcbee8bb761781b6adc65f2dc04251561baad82a4a503fe7b0136c80e7",
+      "matchesActualPublishedPredecessor": true
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/review-owner-costs.py",
+      "bytes": 70762,
+      "sha256": "4e842901740ba1ac384df6198dabf766f7f7dfd6778917a183234ed9f02a994e",
+      "matchesActualPublishedPredecessor": true
+    }
+  ],
+  "qualification": "The initial cached merge diff reported four trailing blank lines inherited byte-for-byte from the actual published4B predecessor. Preserved predecessor logs, note and measured-analysis tool unchanged. This is not a native/test failure. The final official five-check receipt includes a passed diff-check."
+}

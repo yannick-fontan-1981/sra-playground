@@ -1,0 +1,28 @@
+{
+  "schema": "logos-engine.advisory-performance-lock-completion.v1",
+  "startedAt": "2026-11-10T23:32:46.765919+00:00",
+  "finishedAt": "2026-11-10T23:41:23.087248+00:00",
+  "pid": 2,
+  "lock": "/workspace/shared/sra-coordination/performance.lock",
+  "exitCode": 0,
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "scripts/run-native-cost-window.py",
+    "/workspace/sites/sra-lot7b-baseline-20261110",
+    "docs/migration/lot7b-evidence/performance-integrated",
+    "docs/migration/lot7b-evidence/baseline-integrated/source-manifest.json",
+    "docs/migration/lot7b-evidence/integrated-final/source-manifest.json"
+  ],
+  "acquisition": {
+    "path": "docs/migration/lot7b-evidence/performance-integrated/performance-lock-acquired.json",
+    "bytes": 636,
+    "sha256": "d5d80d40849870cd6dfae92bd7349b49c8268c975eece2bbfd1aa3c1abffe917"
+  },
+  "readiness": {
+    "path": "docs/migration/lot7b-evidence/performance-integrated/readiness.json",
+    "bytes": 44480,
+    "sha256": "525ceb005b0be5ee59651af72f87b8031e232c5c73c56e73c5f094600843cf48"
+  },
+  "qualification": "The exclusive advisory lock remained held for the entire child runner. It is released when this wrapper exits."
+}

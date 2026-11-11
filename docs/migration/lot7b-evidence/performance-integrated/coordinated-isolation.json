@@ -1,0 +1,123 @@
+{
+  "schema": "logos-engine.coordinated-cost-isolation.v1",
+  "recordedAt": "2026-11-10T23:30:50.005737+00:00",
+  "status": "acknowledged_quiet_before_window",
+  "otherLaneAcknowledged": true,
+  "ownTrackedComputeEnded": true,
+  "previewStopped": true,
+  "costNodeOptionsOverride": null,
+  "locks": {
+    "performance": "/workspace/shared/sra-coordination/performance.lock",
+    "publication": "/workspace/shared/sra-coordination/publication.lock"
+  },
+  "knownLanes": [
+    {
+      "lot": "3I recurrent_series",
+      "updatedAt": "2026-11-10T19:03:07.717559+00:00",
+      "activeCommand": null,
+      "stage": "Native 0.50 published successfully as Site 79. Source, tests, build, regression evidence and official costs are verified. The agreed next slot is released to 4A.",
+      "publicationStartedField": true,
+      "qualification": "Historical publication_started remains true, while the same terminal status confirms actualSite79 success and explicit slot release. Later actual published4A/7A/5A/4B successors are verified. The flag is retained and is not recast as an active current command.",
+      "release": "Integrate this actual native 0.50 commit and validate the resulting native 0.51 source. Do not reuse isolated native 0.50 proofs or costs as evidence for the integrated candidate. The agreed next publication is 4A, then 7A integrates that actual commit and validates native 0.52."
+    },
+    {
+      "lot": "4A observed_feedback_sequence",
+      "updatedAt": "2026-11-10T21:02:36.176186+00:00",
+      "activeCommand": null,
+      "stage": "Delivered. Native0.51 deployed in Site80, then documentation closure in Site81; both terminal succeeded and deployment archive byte-identical. Source worktree clean. Slot released to7A.",
+      "publicationStartedField": false,
+      "qualification": null,
+      "release": null
+    },
+    {
+      "lot": "7A observed_ranked_workshop",
+      "updatedAt": "2026-11-10T21:24:13.816528+00:00",
+      "activeCommand": null,
+      "stage": "Delivered:7A native0.52 firstpublishedSite82 then documentationclosureSite83, bothsucceeded. Finalsourceclean. Publicationandcomputeslotsreleasedto5A.",
+      "publicationStartedField": false,
+      "qualification": null,
+      "release": "7A fully deliveredSite83. Successor7Bexplicitlyquietfor5AupcomingABBA: source/text only, noexecution; see lot7b-status.json."
+    },
+    {
+      "lot": "5A linked_temporal_preparation and generic long-session performance",
+      "updatedAt": "2026-11-10T22:19:51.591441+00:00",
+      "activeCommand": null,
+      "stage": "Completed: first native0.53publication Site84 and documentation closure Site85 both succeeded privately. Final source a009e1f138bb18251d697f49647bacc615ee514f. Native/test/build/costs unchanged, all evidence retained. No further5Aexecution; releasing publication lock.",
+      "publicationStartedField": false,
+      "qualification": null,
+      "release": "5A is actually published: Site85, native0.53, commit a009e1f138bb18251d697f49647bacc615ee514f. Integrate this real final successor before your validation/publication. Receipt: /workspace/shared/sra-coordination/published-5a-site85.json. All5Awork complete; compute released and publication lock released immediately after this write. Preserve publication order4Bthen7B."
+    },
+    {
+      "lot": "4B relative_arrangement",
+      "updatedAt": "2026-11-10T23:03:50.097808+00:00",
+      "activeCommand": null,
+      "stage": "Completed: first native0.54 publication Site86 and documentation closure Site87 both succeeded privately. Final source dd355400264b50942486559b8ca56ee6dfc6a3cc. All native/test/build/cost inputs unchanged; roadmap current. No further4B execution; releasing publication lock.",
+      "publicationStartedField": false,
+      "qualification": null,
+      "release": "4B is actually published: Site87, native0.54, commit dd355400264b50942486559b8ca56ee6dfc6a3cc. Integrate this real final successor before your final freeze, measures and publication. Receipt: /workspace/shared/sra-coordination/published-4b-site87.json. All4B work is complete; compute and publication lock released immediately after this write."
+    }
+  ],
+  "evidence": [
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/isolation-evidence/lot3-status.json",
+      "sha256": "f397d6076b5fde6775fe5056c48e3b69dd10110fcd68d0d627f0849d2a4a8076",
+      "bytes": 4769
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/isolation-evidence/lot4a-status.json",
+      "sha256": "110a35288d6d7644ddb16c80554ae33605e4e9117bf8cbda4b781e878d4a8830",
+      "bytes": 7341
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/isolation-evidence/lot7a-status.json",
+      "sha256": "e9c395a90dcfee739a1d52342878ef24739bf1b2d97307eab1f8f6a22ac2fad0",
+      "bytes": 6045
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/isolation-evidence/lot5a-status.json",
+      "sha256": "6c59d5cce15d1cd1342581cf26e886013def11f19c84777733f689511a573519",
+      "bytes": 5135
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/isolation-evidence/lot4b-status.json",
+      "sha256": "e6b2cc3277cc11b0012858734688da427127782ca5457c1034c23836a55f4da3",
+      "bytes": 4153
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/isolation-setup-diagnostic.json",
+      "sha256": "9588e67ac43825da6c94b3a320c6009cf70f9f980a4f875e68dc4537d0dd1905",
+      "bytes": 760
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/isolation-evidence/own-agents-quiet.json",
+      "sha256": "f57d5c32875c2e6b946f482eff1543c6cfcd4218aa318bf99f975551316b6f87",
+      "bytes": 1042
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/performance-lock-acquired.json",
+      "sha256": "d5d80d40849870cd6dfae92bd7349b49c8268c975eece2bbfd1aa3c1abffe917",
+      "bytes": 636
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/coordination/published-base-binding.json",
+      "sha256": "e8db0cfbdb6e8a040a82322b0b9d72b57a42eef9904e56e5a0cd3a6b68d6ba55",
+      "bytes": 1463
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/diagnostic/final-cost-qualification-independent-review.json",
+      "sha256": "b95ff037b017307f7622afce154c7c9042710463d882d5e74b60a6592ae3dc1c",
+      "bytes": 19101
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/browser/preview-stopped.json",
+      "sha256": "4e231cebdf78cd11a6368c6193f7d2ed39cf6390704801e255fcd02d93c7f777",
+      "bytes": 455
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/performance-integrated/baseline-dependency-restoration.json",
+      "sha256": "56c48bae8445b5b177864ca92d7f0ba51254197a674504c8a74cc21a91b6b012",
+      "bytes": 1527
+    }
+  ],
+  "qualification": "Actual published3I/4A/7A/5A/4B terminal release statements were freshly reread and retained. The5A and4B statuses explicitly report no further execution, all work completed and release to successors; this continuing authorization is retained rather than claiming a new reply after7B request. Both7B subtrees explicitly ended compute and reviews. Preview stopped; all functional and transport work ended. Actual exclusive advisory flock held awaiting readiness and premeasurement commit. Cooperative evidence, not process visibility alone, establishes declared quiet interval. The historical3I publication flag qualification remains explicit."
+}

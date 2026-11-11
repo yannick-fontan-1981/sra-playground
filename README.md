@@ -3,6 +3,46 @@
 An English-language playground for **100 interactive games** and Yannick
 Fontan's **Symbolic Reasoning Agent** research.
 
+<!-- LOT7B_README_CURRENT_START -->
+
+## Current migration candidate: native 0.55.0
+
+The integrated **SymbolTransactions / lot 7B** candidate includes the actually
+published **Site 87 / native 0.54.0** predecessor. It adds the source workflow
+`v6.symbol_transactions.choose` and its distinct `public_symbol_transaction`
+owner. Transactions bind the current frame, pixel owner, exact action and public
+observation. Only the owner's selected returns become transaction evidence;
+Workshop retains its separate active and passive acquisition paths.
+
+The frozen candidate passes **4,327 tests in 112 files**, five project checks,
+and **eight strict recorded regressions / 136 comparisons**. Its cold CRAF run
+and managed browser check each complete **three levels in 36 actions**. The
+original Python owner independently matches **144 calls / 432 exact checks**;
+**36 acquired prefixes and actually observed native restorations** pass another
+**252 checks**. Removing acquired methods removes the 27 later interface
+proposals. LKEY retains its two-level result and the third-level
+`frontier_unknown` limitation.
+
+The predeclared **A1/B1/B2/A2 cost window passes the global budget** against
+Site 87: pooled complete-session medians change by **−2.227459% for STCK** and
+**+0.724394% for SMLP**. All **32 measured sessions / 400 actions** are retained,
+with **3,927 independent arithmetic checks**. Aggregate phase diagnostics pass
+16/16; both cohorts remain 15/16, and adverse SMLP p95 values remain visible in
+the [full cost report](docs/migration/lot7b-evidence/performance-integrated/results.md).
+The strict historical work-metadata failure is retained alongside the separate
+qualification declared before measurement. Publication is the remaining step.
+These common cost paths do not select Symbols and do not establish active CRAF
+transaction cost. Full V6 caller parity remains open: **59/76 source entries
+are connected, with 17 remaining**, and no module is declared fully verified.
+
+See the [delivery roadmap](docs/migration/v6-delivery-roadmap.md),
+[Symbols report](docs/migration/lot7b-symbol-transactions.md),
+[source lineage](docs/migration/lot7b-symbol-transactions-lineage.md) and
+[retained evidence](docs/migration/lot7b-evidence/README.md).
+The milestones below retain their historical results and limitations.
+
+<!-- LOT7B_README_CURRENT_END -->
+
 ## The browser playground
 
 - **100 original game engines:** 25 official games and 75 custom games from
@@ -29,7 +69,7 @@ Fontan's **Symbolic Reasoning Agent** research.
   path supports guarded coordinate actions, committed sequences, Pause and
   cross-level memory. Use **One action**, **Run 16 actions**, or **Run to next
   level**; opening the tab does not move the game.
-  **Current native revision `0.36.0` preserves the lot 2C behavior while reducing
+  **Historical native revision `0.36.0` preserves the lot 2C behavior while reducing
   redundant common-runtime work.** Four generic changes share unchanged encoded
   values and their validated hydration, read current authorization identities
   without rebuilding diagnostics, share owned frozen trace entries inside
@@ -64,7 +104,7 @@ Fontan's **Symbolic Reasoning Agent** research.
   increases by **1.65%**, within the same limit. LIFE remains a separate diagnostic:
   its session median increases by **3.39%**, with its other increases and the
   measurement limits retained in the [results](docs/migration/lot2c-cost-evidence/performance/results.md).
-  **Lot 2C is closed within its declared delivery scope. Lot 3 is next**, starting
+  **Lot 2C closed within its declared delivery scope. Lot 3 was next**, starting
   with `observed_composition_services` for shared memory and composition services.
   Complete morphology-domain closure and full V6 parity remain open.
   **Previous functional lot 2C delivery, native `0.35.0`:** acquired station
@@ -99,8 +139,8 @@ Fontan's **Symbolic Reasoning Agent** research.
   the initial comparison has 14/16 medians within +10%; its fresh paired STCK
   follow-up has five of eight medians above that unchanged limit. These failures
   remain retained in their original receipts. The passing 0.36.0 comparison
-  closes this cost gate without reclassifying those historical failures. Lot 3's
-  shared memory and composition services are next. Complete morphology-domain
+  closes this historical cost gate without reclassifying those failures. At that
+  milestone, lot 3's shared memory and composition services were next. Complete morphology-domain
   closure and full V6 parity remain separate open migration goals.
   Previous [lot 2B](docs/migration/lot2b-control-attention.md) connected the current
   morphology decision to control acquisition and attention parent-return,

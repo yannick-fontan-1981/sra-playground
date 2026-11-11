@@ -1,0 +1,41 @@
+{
+  "schema": "logos-engine.merge-whitespace-review.v1",
+  "recordedAt": "2026-11-11T00:03:56.730937+00:00",
+  "publishedPredecessor": "43ee01ba5469fd4fbffe10eb6a786fe99b1c35a7",
+  "fullCachedCheck": {
+    "command": [
+      "git",
+      "diff",
+      "--cached",
+      "--check"
+    ],
+    "exitCode": 2,
+    "stdout": "docs/migration/lot7b-evidence/diagnostic/browser-raw-whitespace.log:2: trailing whitespace.\n++\t\t\t\t\t\t\t224 AXListMarker \u25be \ndocs/migration/lot7b-evidence/diagnostic/browser-raw-whitespace.log:4: trailing whitespace.\n++\t\t\t\t\t\t\t\t\t263 AXListMarker 1. \ndocs/migration/lot7b-evidence/diagnostic/browser-raw-whitespace.log:6: trailing whitespace.\n++\t\t\t\t\t\t\t247 text Inspect the V6 reasoning trace \ndocs/migration/lot7b-evidence/diagnostic/browser-raw-whitespace.log:8: trailing whitespace.\n++\t\t\t\t\t189 text The 100 games on this page run locally in your browser. The ongoing SRA Agent migration transfers V6 capabilities into native TypeScript and the common V7 reasoning architecture. Coordinate inputs, guarded action sequences and memory across levels are connected. The original Python game engines remain isolated from the agent. Explore the shared reasoning syntax in the \ndocs/migration/lot7b-evidence/integrated-final/browser/final-ax.txt:181: trailing whitespace.\n+\t\t\t\t\t\t\t224 AXListMarker \u25be \ndocs/migration/lot7b-evidence/integrated-final/browser/final-ax.txt:195: trailing whitespace.\n+\t\t\t\t\t\t\t\t\t263 AXListMarker 1. \ndocs/migration/lot7b-evidence/integrated-final/browser/final-ax.txt:199: trailing whitespace.\n+\t\t\t\t\t\t\t247 text Inspect the V6 reasoning trace \ndocs/migration/lot7b-evidence/integrated-final/browser/final-ax.txt:214: trailing whitespace.\n+\t\t\t\t\t189 text The 100 games on this page run locally in your browser. The ongoing SRA Agent migration transfers V6 capabilities into native TypeScript and the common V7 reasoning architecture. Coordinate inputs, guarded action sequences and memory across levels are connected. The original Python game engines remain isolated from the agent. Explore the shared reasoning syntax in the \n",
+    "stderr": ""
+  },
+  "ownResolvedScope": {
+    "paths": [
+      ".gitignore",
+      "docs/migration/v6-delivery-roadmap.md",
+      "docs/migration/lot10a-evidence/coordination",
+      "docs/migration/lot10a-evidence/integrated-baseline"
+    ],
+    "exitCode": 0,
+    "stdout": ""
+  },
+  "preservedPublishedEvidence": [
+    {
+      "path": "docs/migration/lot7b-evidence/diagnostic/browser-raw-whitespace.log",
+      "bytes": 873,
+      "sha256": "fa3d6c601a426d33a980ff23adab8359309d868e5c251ca7db43c0c7458712e2",
+      "exactPublishedBytes": true
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/browser/final-ax.txt",
+      "bytes": 11632,
+      "sha256": "546a3be729959414c20945b5c6ad938177d18d5ff8a1e5d7a99f6af13bbf3a7d",
+      "exactPublishedBytes": true
+    }
+  ],
+  "qualification": "Inherited evidence bytes are retained exactly. The full staged whitespace result is not relabeled as a pass; own resolved documentation and exclusions are checked separately."
+}
