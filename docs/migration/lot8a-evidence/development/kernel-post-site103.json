@@ -1,0 +1,24 @@
+{
+  "schema": "sra.lot8a.preflight-after-site103.v1",
+  "startedAt": "2026-11-11T17:09:44.112415+00:00",
+  "finishedAt": "2026-11-11T17:09:55.211295+00:00",
+  "elapsedSeconds": 11.0988901540004,
+  "command": [
+    "node",
+    "--test",
+    "tests/v6-motif-access-kernel.test.ts"
+  ],
+  "exitCode": 0,
+  "sourceCommit": "df30bfd35396737f483b61ddff628f8396a9f54a",
+  "sourcePins": {
+    "src/logos-engine/v6-motif-access.ts": "2302d521959133b39560792d01ae4c2403a3b4b4a333ae10e089359a403394e0",
+    "src/logos-engine/v6-motif-access-geometry.ts": "36d5e1d51a1ebef5c82dea7951c18fe115af2067624447d39e37100c4a9de9b3",
+    "src/logos-engine/v6-native-runtime.ts": "26a7c34c97e76c0c4d73fac965314736cf887417b40e8a17a4a47806ce210e2a",
+    "src/logos-engine/v6-native-types.ts": "7ce043684a9243224f845b97e7a3f22aa7c9348643d2af89316755d9e441c6ca",
+    "src/logos-engine/v6-field-constraints.ts": "0d75ae535fb4e37c7e4ee28474e17e341afd5f436d717356a8f9b5617f1ae619",
+    "tests/v6-motif-access-kernel.test.ts": "a6f21fbdf6305cec8d23a59076c45ef78bbcb5163434ae9151734287dcefee5b"
+  },
+  "inputsUnchanged": true,
+  "log": "kernel-post-site103.log",
+  "qualification": "Development preflight after actual Site103/native0.62 merge; not final0.64 predecessor qualification."
+}

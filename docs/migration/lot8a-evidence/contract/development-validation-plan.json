@@ -1,17 +1,17 @@
 {
   "schema": "logos-engine.v6.motif-access-development-validation-plan.v1",
-  "qualification": "development_only_on_site101_not_final_065_or_cost",
+  "qualification": "development_only_on_site103_not_final_065_or_cost",
   "baseSite": {
-    "version": 101,
-    "nativeVersion": "0.61.0",
-    "publishedCommit": "d75a36f0a99bf6c301034523a3138a64d2f6e744",
-    "qualification": "Actual inherited published base; this tool does not claim final integration of the later 0.62/0.63/0.64 predecessors."
+    "version": 103,
+    "nativeVersion": "0.62.0",
+    "publishedCommit": "4afcbfe6a25bd3a88223be543e443bc53b9c8814",
+    "qualification": "Actual published10B predecessor integrated before this development declaration. Later published0.63 and0.64 remain required before final8A qualification."
   },
   "candidateVersion": "0.65.0 provisional development only",
   "runner": {
     "path": "docs/migration/lot8a-evidence/tools/validate-development.py",
-    "sha256": "25df093e7a14a3d40f48eac540ee7c69495710a7d2bb41116d7176f9d0cf5a4c",
-    "bytes": 22617
+    "sha256": "3a6bef9102fbab20a8ecd31f49f7014f98517c6a1006a1e92fb7b09f068c1bf8",
+    "bytes": 27047
   },
   "inheritedScope": {
     "path": "docs/migration/lot7b-evidence/followup-recovery/contract/test-scope-final.json",
@@ -177,13 +177,17 @@
     "tests/v6-workshop-followup-source.test.ts",
     "tests/v6-motif-access-reference.test.ts",
     "tests/v6-motif-access-contract.test.ts",
-    "tests/v6-motif-access-kernel.test.ts"
+    "tests/v6-motif-access-kernel.test.ts",
+    "tests/v6-window-question-kernel.test.ts",
+    "tests/v6-window-question-reference.test.ts"
   ],
-  "testFileCount": 136,
+  "testFileCount": 138,
   "newTestFiles": [
     "tests/v6-motif-access-reference.test.ts",
     "tests/v6-motif-access-contract.test.ts",
-    "tests/v6-motif-access-kernel.test.ts"
+    "tests/v6-motif-access-kernel.test.ts",
+    "tests/v6-window-question-kernel.test.ts",
+    "tests/v6-window-question-reference.test.ts"
   ],
   "excludedTestModules": [
     "tests/v6-ranked-workshop-reference.test.ts",
@@ -332,7 +336,9 @@
     "tests/v6-workshop-followup-source.test.ts",
     "tests/v6-motif-access-reference.test.ts",
     "tests/v6-motif-access-contract.test.ts",
-    "tests/v6-motif-access-kernel.test.ts"
+    "tests/v6-motif-access-kernel.test.ts",
+    "tests/v6-window-question-kernel.test.ts",
+    "tests/v6-window-question-reference.test.ts"
   ],
   "checks": [
     {
@@ -396,45 +402,76 @@
   },
   "activityIntervalSeconds": 1,
   "toolYieldTimeMs": 1000,
-  "timeoutRationale": "The retained133-file serial suite required854.432s. A prospective1800s ceiling permits the unchanged population plus3 motif files and modest contention; each separate delivery gate gets180s. No sample/game budget is involved. No automatic retry or extension.",
+  "timeoutRationale": "The retained133-file serial suite required854.432s. A prospective1800s ceiling permits the unchanged population plus3 Motif and2 published synthetic Window tests and modest contention; each separate delivery gate gets180s. No game/cost budget, automatic retry or extension.",
   "expectedEntryCoverage": {
-    "connected": 64,
+    "connected": 65,
     "declared": 76,
-    "fullV6Parity": false
+    "fullV6Parity": false,
+    "groups": [
+      {
+        "id": "goal_access",
+        "connected": 11,
+        "declared": 12
+      },
+      {
+        "id": "window_constraints",
+        "connected": 21,
+        "declared": 21
+      },
+      {
+        "id": "surface",
+        "connected": 10,
+        "declared": 10
+      },
+      {
+        "id": "factored_material_return",
+        "connected": 23,
+        "declared": 33
+      }
+    ]
   },
   "coordination": {
     "lot10b": {
       "path": "/workspace/shared/sra-coordination/lot10b-status.json",
-      "observedAt": "2026-11-11T16:59:28.896580+00:00",
+      "observedAt": "2026-11-11T17:13:10.553062+00:00",
       "observedRequestId": "lot10b-cost-74143a-final-01",
       "observedRequestedAt": "2026-11-11T16:19:49.894713+00:00",
       "observedCostRequestId": "lot10b-cost-74143a-final-01",
       "observedCostRequestedAt": "2026-11-11T16:19:49.894713+00:00",
-      "latestStatusUpdatedAt": "2026-11-11T16:55:54.731539+00:00"
+      "latestStatusUpdatedAt": "2026-11-11T17:02:12.064269+00:00"
     },
     "lot5c": {
       "path": "/workspace/shared/sra-coordination/lot5c-status.json",
-      "observedAt": "2026-11-11T16:59:28.896702+00:00",
+      "observedAt": "2026-11-11T17:13:10.553155+00:00",
       "observedRequestId": "lot10b-cost-74143a-final-01",
       "observedRequestedAt": null,
       "observedCostRequestId": null,
       "observedCostRequestedAt": null,
-      "latestStatusUpdatedAt": "2026-11-11T16:46:11.463499+00:00"
+      "latestStatusUpdatedAt": "2026-11-11T17:12:29.696765+00:00"
     },
     "lot6b": {
       "path": "/workspace/shared/sra-coordination/lot6b-status.json",
-      "observedAt": "2026-11-11T16:59:28.896789+00:00",
+      "observedAt": "2026-11-11T17:13:10.553237+00:00",
       "observedRequestId": null,
       "observedRequestedAt": null,
       "observedCostRequestId": null,
       "observedCostRequestedAt": null,
-      "latestStatusUpdatedAt": "2026-11-11T16:39:21.822889+00:00"
+      "latestStatusUpdatedAt": "2026-11-11T17:12:38.371771+00:00"
+    },
+    "lot10c": {
+      "path": "/workspace/shared/sra-coordination/lot10c-status.json",
+      "observedAt": "2026-11-11T17:15:57.764777+00:00",
+      "observedRequestId": null,
+      "observedRequestedAt": null,
+      "observedCostRequestId": null,
+      "observedCostRequestedAt": null,
+      "latestStatusUpdatedAt": "2026-11-11T17:02:12.064269+00:00"
     }
   },
   "stages": [
     {
       "name": "tests",
-      "requires": "Explicit root GO; all136 files and native/test/build inputs finalized beforehand",
+      "requires": "Explicit root execution GO; all138 declared tests and the prepared native/test/build inputs finalized beforehand",
       "produces": [
         "development-freeze.json",
         "tests-run.json",
@@ -462,7 +499,7 @@
   ],
   "inputBinding": {
     "nativeSource": "Same sorted src/logos-engine + src/runtime .ts/.json/.drm convention as the unchanged native-source verifier",
-    "sourceAndTests": "Exact membership and opaque SHA256 of src and tests; selected execution remains the explicit136 file list",
+    "sourceAndTests": "Exact membership and opaque SHA256 of src and tests; selected execution remains the explicit138 file list",
     "auxiliaryScripts": "Exact membership and opaque SHA256 of scripts",
     "build": "Exact src/public/content inventory plus the standard10 build extras when present; prepare dependencies/generated inputs before tests",
     "reference": "Exact1786-file immutable manifest, opaque hash/byte checks only; no game fixture decoding or original component execution",
@@ -471,7 +508,7 @@
   },
   "semanticAcceptance": {
     "tests": "Exit0, one complete TAP summary, positive total=passed, fail/cancelled/skipped/todo all0",
-    "entryAudit": "Exit0, complete JSON stdout equals report connection counters64/76 and fullV6Parity=false; any failures field must be[]",
+    "entryAudit": "Exit0, complete JSON stdout/report agree at65/76 and exact groups11/12,21/21,10/10,23/33; fullV6Parity=false; any failures field must be[]",
     "migrationAudit": "Exit0 AND explicit failures=[] in stdout and complete coverage report, matching every summary counter; complete=false remains honest development status",
     "otherGates": "Exit0; build additionally requires exactly one native worker and retains the complete built dist fingerprint map"
   },
@@ -488,74 +525,16 @@
   ],
   "scopeLimits": "Development checkpoint evidence only; later actual predecessor integration, final freeze, official regressions/qualification/cost and publication remain separate work.",
   "draftPreparedAt": "2026-11-11T16:59:28.896794+00:00",
-  "status": "draft_waiting_actual_site103_integration",
+  "status": "declared_ready_for_explicit_root_go",
   "draftUpdatedAt": "2026-11-11T17:02:08.209739+00:00",
   "fixtureExistencePreflight": {
-    "observedAt": "2026-11-11T17:02:08.209712+00:00",
-    "mode": "named_declared_TypeScript_reads_and_file_existence_only",
-    "testFilesRead": 136,
-    "uniqueLiteralLocalReferences": 255,
-    "existingFiles": 247,
-    "existingDirectoryBases": [
-      ".",
-      "docs/migration/native-campaigns-v53/diagnostics",
-      "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source",
-      "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6",
-      "tests/fixtures/v6-native-caller"
-    ],
-    "missingFiles": [
-      {
-        "path": "tests/fixtures/v6-feedback-sequences-reference.json.gz",
-        "usedBy": [
-          {
-            "test": "tests/v6-feedback-sequences-integration.test.ts",
-            "line": 16
-          },
-          {
-            "test": "tests/v6-feedback-sequences-reference.test.ts",
-            "line": 12
-          },
-          {
-            "test": "tests/v6-facet-examples-foreign-acquisition.test.ts",
-            "line": 15
-          }
-        ],
-        "partManifestCandidatesPresent": [
-          "tests/fixtures/v6-feedback-sequences-reference.json.gz.parts.json"
-        ],
-        "containsClosedLkeyName": false
-      },
-      {
-        "path": "tests/fixtures/v6-outline-service-reference.json.gz",
-        "usedBy": [
-          {
-            "test": "tests/v6-outline-kernel.test.ts",
-            "line": 21
-          }
-        ],
-        "partManifestCandidatesPresent": [
-          "tests/fixtures/v6-outline-service-reference.json.gz.parts.json"
-        ],
-        "containsClosedLkeyName": false
-      },
-      {
-        "path": "tests/fixtures/v6-relative-arrangements-reference.json.gz",
-        "usedBy": [
-          {
-            "test": "tests/v6-relative-arrangements-integration.test.ts",
-            "line": 15
-          },
-          {
-            "test": "tests/v6-relative-arrangements-reference.test.ts",
-            "line": 17
-          }
-        ],
-        "partManifestCandidatesPresent": [
-          "tests/fixtures/v6-relative-arrangements-reference.json.gz.parts.json"
-        ],
-        "containsClosedLkeyName": false
-      }
-    ],
+    "observedAt": "2026-11-11T17:13:10.557077+00:00",
+    "mode": "named_selected_TypeScript_reads_and_stat_only",
+    "testFilesRead": 138,
+    "literalLocalReferences": 262,
+    "presentFiles": 257,
+    "presentDirectoryBases": 5,
+    "missingFiles": [],
     "dynamicExpressionsNotResolved": [
       {
         "test": "tests/v5-finite-relation-domain.test.ts",
@@ -663,23 +642,7 @@
         "expression": "../${fixture.generator.path}"
       }
     ],
-    "qualification": "No fixture bytes read or copied. Only static relative imports and literal new URL paths with import.meta.url as the actual base were resolved. Concatenated expressions and other URL bases remain unverified.",
-    "initialConservativeScan": {
-      "candidateMissingPaths": [
-        ".",
-        "docs/migration/native-campaigns-v53/diagnostics",
-        "manifest.json",
-        "reference/v6",
-        "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source",
-        "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6",
-        "tests/fixtures",
-        "tests/fixtures/v6-feedback-sequences-reference.json.gz",
-        "tests/fixtures/v6-native-caller",
-        "tests/fixtures/v6-outline-service-reference.json.gz",
-        "tests/fixtures/v6-relative-arrangements-reference.json.gz"
-      ],
-      "correction": "Existing URL base directories and expressions resolved against a different URL variable are not missing literal files. They were removed from the actionable missing-file list after refining the named-source syntax check."
-    }
+    "qualification": "No fixture content decoded. Literal relative imports and import.meta.url URL paths only; dynamic expressions remain qualified. New Window fixture is present; the three prior missing blobs are covered by the opaque materialization receipt."
   },
   "preflightInvocationObservations": [
     {
@@ -698,24 +661,224 @@
     }
   ],
   "prospectiveReconciliationRequired": {
-    "reason": "Actual published10B0.62 became available before any freeze/full validation; root will integrate Site103 first.",
-    "actualPredecessor": {
-      "siteVersion": 103,
-      "nativeVersion": "0.62.0",
-      "publishedCommit": "4afcbfe6a25bd3a88223be543e443bc53b9c8814"
+    "status": "actual_site103_integrated_before_declaration",
+    "completedAt": "2026-11-11T17:13:10.553295+00:00",
+    "remaining": "Later actual0.63/0.64 integration and final8A qualification are outside this development stage."
+  },
+  "previousDraft": {
+    "path": "docs/migration/lot8a-evidence/contract/development-validation-plan.json",
+    "sha256": "c80a4573de7778c664c29befd90def27b906029044e92afd53c9379ba7bf7b39",
+    "retainedSourceCheckpoint": "1447758",
+    "status": "draft_waiting_actual_site103_integration",
+    "qualification": "Historical Site101 draft; no tests or gates executed under it."
+  },
+  "declaredAt": "2026-11-11T17:15:57.764793+00:00",
+  "declarationId": "lot8a-development-site103-138-a6ea3e5e-02",
+  "integrationCheckpoint": "df30bfd35396737f483b61ddff628f8396a9f54a",
+  "testFileHashes": {
+    "tests/bounded-weak-cache.test.ts": "76efd3c1489f00a7b76dd0f9ba7fa210a5baf079aed954e8dc1a3db54296f24f",
+    "tests/canonical-cache.test.ts": "6062eb52ce1258640dd42b0a8316551e2544e76591d3e4b3985114ecb8972846",
+    "tests/kernel-batch.test.ts": "4ba737866fbca10e9dc3a573878380bb8e3afaaebdc53d351502283b870ce943",
+    "tests/v5-finite-relation-domain.test.ts": "e358221c2e90477ae12ebbab358866093787d095e9dd2da52913a2d34795c5b6",
+    "tests/v5-piercing-native.test.ts": "489eeef69135d9053e76d0aa728aea4e8b7991628b0200818d0102be768896c5",
+    "tests/v5-reception-wait-contracts.test.ts": "8fdde7013a20e2215db51515bdd43158285b312697237aee3e9b0ed172b2fe10",
+    "tests/v5-reference-population-calculus.test.ts": "e5d6f2d4ca542bfbbe46e681f3e1bbd062b975f6aca3ce8f9cc80a8df90d8075",
+    "tests/v5-temporal-fragment-match.test.ts": "a246b9e2ddc9f3104341a19765d3e962da2352d877a2062cb367ea48071b86be",
+    "tests/v6-acquired-continuation-priority.test.ts": "aac67dd3a18f20d55467fd9d3db328470413bdd75b6b3d1b06eb0a93ea7b2984",
+    "tests/v6-agent.test.ts": "be0b63b7cb74bbfc1e7345fa7dc2d09ca78ad3b4d046f28fa671e771dcb68cc2",
+    "tests/v6-alternating-graph-access.test.ts": "d7b53577ee8037b8c8736064db212d0d3f9959f1f04ddeec1399b28de4abbd48",
+    "tests/v6-alternating-graph-integration.test.ts": "b5444ee2923b77f44f57f7ea8ea0b7249f728bbb5c826893136252107909c901",
+    "tests/v6-auxiliary-support.test.ts": "b9a999601d6e7216eec714b4b4792314bf0f6dc09001d81c63ed501405c40c3e",
+    "tests/v6-caller-integration.test.ts": "72597754574bcfed663ae33d695e3ed75a69dca6a5cbd0e1228200230b92eade",
+    "tests/v6-cell-placement-integration.test.ts": "39310f52a96559e45066a5d8ef94c8a0e48bc61fe7cb1d1328631b1555be9b4f",
+    "tests/v6-cell-placement.test.ts": "81a4bf7632f4bc8be63e94d176747bffa32afc63f1814ae2175b08d420d351a4",
+    "tests/v6-configured-arrivals.test.ts": "805e00966544b88198b6025d77c9f29c2f9f11adead1117a5cb8f15f346ec8ea",
+    "tests/v6-control-attention-reference.test.ts": "3cd2112202e321bddce3d2c430fc73c3357fe12f188a0ce6b028637c9be19455",
+    "tests/v6-coupled-pair-planning.test.ts": "94d74c6d50892bd3ce05579fdf71b36b648bdfedf7dc6663c8d67a9125e31ee1",
+    "tests/v6-crossed-prefix-access.test.ts": "7d059aebacbe8f3fa4d7668366d145212d17f889745070b5f82f9a3524a08099",
+    "tests/v6-crossed-prefix-integration.test.ts": "b40a6a1458c564ddf860134ba675a99f835cc9a5b8c2c583ceedcedff13ad9ac",
+    "tests/v6-crossed-prefix-observation.test.ts": "6564abd19642f2bcfb66357509d796d37e17d82bfc64297d79c1532d9eeb7484",
+    "tests/v6-exposed-current-evidence.test.ts": "4951895e851e40174c11591ef9cdc21234b3b0c66af858eeb228c987807b0766",
+    "tests/v6-exposed-reception-integration.test.ts": "d5523d9d6c3bdc566128bfc17828b6ac7895afe51bc6c1838a0c069fff4845e1",
+    "tests/v6-exposed-reception-observation.test.ts": "88627b8a24b9f21854371d1dbc655aaadb5118447a588e397a48152851ca7747",
+    "tests/v6-exposed-reception.test.ts": "79e5e482120221448c270128766af0cd2b872e8de8378d32bd8a88d8b51bd958",
+    "tests/v6-feedback-sequences-integration.test.ts": "f1b5da93895b648864e6f0da1f11d9776836a619d712a231796dc6237165e59c",
+    "tests/v6-feedback-sequences-reference.test.ts": "924e2954664fe0a3ae96b3b7a340ea555a88e13cbfd37d313f62b525c5361d5f",
+    "tests/v6-framed-transfer-kernel.test.ts": "253900593c7a42b9cf68e5ab9bfe5b32e57c30c0296078deed4132c37a160a67",
+    "tests/v6-framed-window-access.test.ts": "f6e49a7d5b7bb185460677fe512cdf65dfb1e75e26e6e998fd518b4002a108ab",
+    "tests/v6-framed-window-integration.test.ts": "cbd4d0130e00be57085a30ae78a334c25174842d7959a1a14438faee0dad7926",
+    "tests/v6-framed-window-observation.test.ts": "292f5ed178f43be18e3f5355c785911094f91f3e1b94e84b3eafa5a0df8c1bf8",
+    "tests/v6-frontier-native-snapshot.test.ts": "fc1aaed4faefa0cbd8083c15d6f65a764d0cf9878dc398984411cece1deccb3f",
+    "tests/v6-goal-attention.test.ts": "22acd80e35d54cfddbbc597acc0d979efc7f4003fa964fb2d2caeae9bb1f6e59",
+    "tests/v6-incremental-memory.test.ts": "fc89b6425b901c7dd1212f4d515977562d2b6ec549e6d2676fdb126770dd6870",
+    "tests/v6-interface-families.test.ts": "7d6aaa18ce6dfb07cc2290b82fef27ab90f4792e8abd295aa8b1f0fa051e2f90",
+    "tests/v6-inventory-copy-cost.test.ts": "5fda1a77f3c37bf51ae65219765d693e075878fce205d2e9f7a051a6c4e53cd8",
+    "tests/v6-inventory-family-reference.test.ts": "2091f6807c8bbb0549f38f0ae3cd07ece7771cab222a6cf2a84dd56174d1a755",
+    "tests/v6-inventory-kernel.test.ts": "51825c88b4be17d1a67f86c319b19ebea9439d0d48c636a8918a367fcc2605cf",
+    "tests/v6-inventory-restoration-cache.test.ts": "f17376ff75f4d1e70825d305e527df59c8ce0c614d8cd636618dfc79afd5eb11",
+    "tests/v6-knowledge-store.test.ts": "ac4e5f62adf2533d7e7499627802bb3003a51f87a8f6b1d65320b31f54800230",
+    "tests/v6-learned-preparation-priority.test.ts": "95925a8f78a504f2ead485bff35a23a0295af3756d21193f7a275017dfc185ec",
+    "tests/v6-linked-temporal-preparation.test.ts": "289d207d31ed1f2ce68346d5ad538405cb20b60468120198f61090c2a39fba21",
+    "tests/v6-linked-temporal-reference.test.ts": "700078b51c3e6c849493d4594746f460ebd52ccfa9964f506cd4b1cd6c901690",
+    "tests/v6-material-recovery-priority.test.ts": "9290ed25edf4d4ed7ef6d8151406ef17d564305bea93a4ce50e519158134419a",
+    "tests/v6-motion-caller-integration.test.ts": "9f65e0e69e8545d005ceaa577cee7f9f66fdaf6db17c530284752afffc354d20",
+    "tests/v6-motion-contrast.test.ts": "527ec4c75dca9ef565db9100189f0599a14677d88f5ca98c5a341b7f969cf134",
+    "tests/v6-native-authority.test.ts": "6b35c231916ee37a07ed2c8505a5cdd71b35f305bc93d1a411fdbcc98a58697d",
+    "tests/v6-native-caller.test.ts": "1285ae419fa7282e9c5bde8c7873a5a5db8dfa2c817a2f3850a0e34e0ccf5334",
+    "tests/v6-native-checkpoint-integration.test.ts": "1e17fafacf64e79dbb540ff4b9740b30f733c444d0d167d40e7ce56cc9f3abfe",
+    "tests/v6-native-copy.test.ts": "d109221ee552a7c80e1098b0d2acf3e7130169f1e7f447f552e8dea9b4990b8e",
+    "tests/v6-native-family-registration.test.ts": "6044611e8c4f941c919933e4c883ecf23c6242642e7d767d9b3107cd6a9611d5",
+    "tests/v6-native-hydration-cache.test.ts": "213918b61178728029ba43588a288731125b4176f41f88833851318c114e9100",
+    "tests/v6-native-interface-families.test.ts": "ffaa56bc8ca98a2f100b109fc6bf023add516e1368d24933959270230fd07904",
+    "tests/v6-native-mixed-path.test.ts": "95bbe592e8b6b992eb092d088030b1716d64d4976a9be06816fe5fbcf5711fc0",
+    "tests/v6-native-observer.test.ts": "c50e379c6db4cd55af1e7911033a6123e8e964d33d40b764ac7e3ca340f6c9aa",
+    "tests/v6-native-persistence.test.ts": "a50306119a9e8429015ec2e338c4e054efe276a56c53b0d3f5b735fedabc33d9",
+    "tests/v6-native-runtime.test.ts": "8badc5aba5b71906da3d33bc323455b047721d5546c16fdbb20ac76d6eb8b7fc",
+    "tests/v6-native-snapshot-identity.test.ts": "2fa5c08b3e8d078f423f1afd0e25bfea5380df20c167b5fdd964f228996207d0",
+    "tests/v6-native-state-graph.test.ts": "5d43343376c73016fed9c01d92c781cdcbc67d81a6bfcc2b0934e0d2308b0c2c",
+    "tests/v6-native-transition-domain-integration.test.ts": "d20a3565b85d908ff27a15ac5e808fc754cc6c33f048dd6fb636dd45fa8421cc",
+    "tests/v6-native-transition-domain.test.ts": "cf885b68ce37924bae11b859769ece813c46ea0cb66ea7f0c2bb64c4d3d51462",
+    "tests/v6-native-working-witness.test.ts": "53e20eca15ed57dc3d9c8247712987d1f8217c2fab853d846d7cef9a0860a1c7",
+    "tests/v6-occluded-catalogue-kernel.test.ts": "e02b2114c9eb8580b6fed2a4551aec1377314fb590b0e3b753a78dc78017d9ea",
+    "tests/v6-occluded-catalogue-reference.test.ts": "9d8a8e4daacc6f2f63b391df783622e70c953a385163f4b39c10cbbeefc0c6a6",
+    "tests/v6-ordered-reaction-kernel.test.ts": "634c0b60a08d9c348ce27a8738b216458725319874f37ef653b6a312e57d0b61",
+    "tests/v6-outline-arbitration.test.ts": "328b946fef040604d971af6886bdc8c55412da40e7011ff2d334f3e62d961e1f",
+    "tests/v6-outline-kernel.test.ts": "6ce304331166783327d41e7213b70d51fed15a19919b93fc93dafa87ce8408c4",
+    "tests/v6-panel-service.test.ts": "80431b060a6776f2f63ef3cb06584f07634c383dd84888620a1efaca7eeb8c19",
+    "tests/v6-periodic-pattern-counts.test.ts": "768c4accecced8b77c556f7a0c0679441e1cf70e27ddb3fd6f1564a5a7d2abc8",
+    "tests/v6-point-display.test.ts": "25da80929ee69628b6d90dc95e9a12c79ef6c89594c466a15763eb73a7d1a578",
+    "tests/v6-point-set.test.ts": "494e7fc1b37f08674efd049cee83957346dcf20dc6a31c7486a774da5a730821",
+    "tests/v6-radial-port-integration.test.ts": "5be679aa36ab6ce6c7128a6bdcc4a2d31a44a4adbb4936744aaf03ff6e350154",
+    "tests/v6-reactive-contact-kernel.test.ts": "49ae62a39eecf1454b59f91c39aeb15c0949e2b868dfb858fe9d95e4e6ee8440",
+    "tests/v6-reception-residual-evidence.test.ts": "2d7f266a75b5db684998adb06a5a742fa07a86b675003e607f37e4a422bffa92",
+    "tests/v6-reception-service-access.test.ts": "40514cd985eae59fed33e8b765ca4448025f1b5775f4dedf6b33d965f763914a",
+    "tests/v6-reception-service-integration.test.ts": "d618f4d24511b1b3ae1124fd4792dfd693a66198b9e22590deb263d520750da3",
+    "tests/v6-reception-service-native-contracts.test.ts": "b80c8330b73f9497ea2cbc2e5b7a52f8284497d208fc51ddf0d48dbf1274ea63",
+    "tests/v6-reception-service-observation.test.ts": "36704d0d7f8dcc2b514d4d2536a59ed704ce256da9539eb53d6e20197af49cf1",
+    "tests/v6-recurrent-series-access.test.ts": "b1d03ee907c6068c615e311e617f18a7e94f8e2ed73837b43cd57188f5d44114",
+    "tests/v6-recurrent-series-integration.test.ts": "bf3b28b9dda73590f63f03a9d0ba5c549af3b313f43b506da4072e5e259c135f",
+    "tests/v6-recurrent-series-native.test.ts": "f2a8c90c692870538560efef03bf3daa3ff1531333b4c80774e1ae67ae1b8ca0",
+    "tests/v6-recurrent-series-observation.test.ts": "e09fe0d83f2a6da66fa65be774eb316a7cebc28c3761b54d71f97d8fd0e511d7",
+    "tests/v6-reference-population-access.test.ts": "0eca09dd7618ef5f50231c665d8b7636e23289f33c9adc62a3b8f4d38d99cda5",
+    "tests/v6-reference-population-integration.test.ts": "0aa8f82c4bf9939c1b99d683f0dc20c7ba057a5d339f63f74eee70d8dff205c3",
+    "tests/v6-reference-population-observation.test.ts": "14c16d06c787d7bfac25849251977fc7cbfb6494d0751853d64d090ddd60059c",
+    "tests/v6-relational-chamber-integration.test.ts": "fa9195286072ccbbadc774f8737954e1b06799f71a8b95e5574a698d55cb3741",
+    "tests/v6-relational-chamber.test.ts": "fce640edbd03db804b9ae5784587f7bea9523879cc3aa04abe13a33e176b43bd",
+    "tests/v6-relative-arrangements-integration.test.ts": "9f413be4fb48c72872bb584b8919e9b331935ba4179156ef93aae052ceed88d9",
+    "tests/v6-relative-arrangements-reference.test.ts": "11f92e2aee67db509c7523a8b7ebba37ae47110f320a3dcc1e156e3f93f5ffa6",
+    "tests/v6-rooted-line-access.test.ts": "736c273c50fd53edfb309df4ced0827fe4ea86b9ee37ff1b0b6c95715e0cf30d",
+    "tests/v6-rooted-line-integration.test.ts": "b4cdbe782ef89aa529ce12d42031b0be1e290e4677ab17675fefd87abe39f255",
+    "tests/v6-rooted-line-observation.test.ts": "7e7abba231a20203e8f600ed8ba5c456e14700444d6d70708ac8ba852bc91cf2",
+    "tests/v6-rooted-quota-mark-support.test.ts": "cd423355a49653dc070a427a66a7765e5aa48f663ef59cd7d37e471256542de5",
+    "tests/v6-rooted-quota-parity.test.ts": "ad8aaa81d0ab4e9df92f76e72a9ab0fb4e8aaff223177a7e432fe960728513c7",
+    "tests/v6-service-snapshot-reuse.test.ts": "ca3aafda8b40a0f51931abb3682de0cb2e7a5e0c049b58ab65d270a047303688",
+    "tests/v6-shared-series-native.test.ts": "3746f7d817f6dc17537089ac9fc430d1620e447ab23ac014e2efdc67a6f8144a",
+    "tests/v6-shared-series.test.ts": "50f5d5289a3b0aa930c8030cc3118d0df0fa6b1b36927b337649766fa5c01688",
+    "tests/v6-source-entry-routing.test.ts": "c9e5e5036f15dc3151bcc2afec5dde4ba73c2a0efd2c8849fa75ea0d90154b15",
+    "tests/v6-support-caller-integration.test.ts": "4ca081661a4781def8fe1e443dc946511e534aa8c355863fdaf2b67fa3741997",
+    "tests/v6-support-extensions.test.ts": "0aafcedde8fa90cbd7b6592461827fa967782ee3ca389ce1f04e77c7e2272952",
+    "tests/v6-support-navigation.test.ts": "74cc87f14be3df74294939ca1b603b9743322b99c931ca70c82d9ab5bbb9a299",
+    "tests/v6-support-procedures.test.ts": "25a72872cf3ca44fe2267da7ac4d2927ef2f9f1488966c5dde0a46450f24a554",
+    "tests/v6-topological-recolor-kernel.test.ts": "d16b0a364d02b6c8b9f010bd949a9df837d58e8b38128a4eabcf851e1cfbd3ad",
+    "tests/v6-visual-sequences.test.ts": "44daf171fb2740d46eafb6e14abb705ac6c2aec8b97b202fdc67ae007d13b5a3",
+    "tests/v7-kernel.test.ts": "d718d6bff6e5f6f911e468e0b36bbe18054dc007ec5400ff00a802c1e37f24de",
+    "tests/v6-symbol-geometry-reference.test.ts": "3f8e1d3d9838b091f6771fcbcac3b495f4a75e74416d5914cd90b82aed5e9540",
+    "tests/v6-symbol-interface-reference.test.ts": "fd502fc977adbfa65897a96f5ecd2d7e89dca815268b693f1cc973aabab1c9cc",
+    "tests/v6-symbol-transactions-reference.test.ts": "1724213fb32b5de56dae453875dcd999e94a3da8954414f29400311683d3ce34",
+    "tests/v6-axial-question-reference.test.ts": "f97d02aef86a3b687df4b381774d190a2406cf3b1cee4d4ff839a2f2c0191bab",
+    "tests/v6-axial-question-kernel.test.ts": "68a4407c4414fb6999ec5d4a709390c8bdbad909c9bfd581a6e683b8febed4c7",
+    "tests/v6-src-program.test.ts": "3ec78a7618be15ff2f4daa7f7db71a5833b700c73090ad5d9d01719b3b1ae5ad",
+    "tests/v6-drm-projector.test.ts": "8e90b5e2fc0f73bad14d0a9c1fab26799d5ce87904308158176f1baf70a21b87",
+    "tests/v6-select-reference.test.ts": "dd036b7758d74cdec7f1d1300f1bc1aaf1ee8e51fb70b2a7ee4627db4b09e07a",
+    "tests/v6-topological-recolor-reference.test.ts": "a0924218ea5ac8f0665282c3580d0d29d5fb89395803e02fd83bbda146c356b5",
+    "tests/v6-facet-examples.test.ts": "83658d0eb48ceddd68795698d3460af4a76d47a79f21847502067c22ec5aee31",
+    "tests/v6-facet-examples-integration.test.ts": "0593876ad491b81960033edc3f7ef23db55b4831e675771e735f8499c9071ef2",
+    "tests/v6-facet-examples-foreign-acquisition.test.ts": "677d483fd2375ed39001f453a44d6e53040db443c9120a541a149aa5fcb69917",
+    "tests/v6-addressed-material-reference.test.ts": "e912ce7195a76cbf8db15464dd4582444ce1e15cdde2e189c8190f1a6ed1fdcc",
+    "tests/v6-addressed-material.test.ts": "7bc8300b24fecf8645ee639a680cb3169c92fa9b1e02d7a370910e1ac0439aa6",
+    "tests/v6-field-stock.test.ts": "4c60ec72411972cb1271515e16fffca5dd5a36ff850ab5bc5dc2470393185ce6",
+    "tests/v6-addressed-material-kernel.test.ts": "85a357e6182206883ea54e25f4620837906ee155803e3e33deff7b881da78c83",
+    "tests/v6-preview-packing-native.test.ts": "aa0653c551322bb88f98b2c11ae308923fa609ad624ac684d70209bd51e47947",
+    "tests/v6-preview-packing-reference.test.ts": "eb5f392ed9c0cf518c558900399876fee0e6cea210482f8525868f82be3038c0",
+    "tests/v6-preview-packing-integration.test.ts": "cc53204d05704cdfb1cf6f17043103ee1133952ddcf2137a8fd86810e49b4a9a",
+    "tests/v6-preview-capture.test.ts": "0310091777271e9e220d16e7b3a58066a868902196cd43fd14cd70c8949a3463",
+    "tests/v6-animated-contact.test.ts": "2b62da2c3ecbc75c652210060422fa20a2da7a361bab0915f7cbcac4f07fd0a5",
+    "tests/v6-program-control-discovery-integration.test.ts": "cea536940fe02acecc5c76251a109ac2d723301f8241c90115933390e6d1cc69",
+    "tests/v6-typed-material-kernel.test.ts": "4b8fb77abb88eff7fa27e338b83ff4c4929c7835fe6ea1e7fdb18c6278b2597b",
+    "tests/v6-ranked-workshop-grounded-inquiry.test.ts": "b133fa3bdd856d42fa0b4099e328f96ba04ddf09c7d822fddce0e403d2e300d8",
+    "tests/v6-stationary-contact-continuation.test.ts": "188e9a244ee9660faf840eabac42ee3c820c08bf5d70de26001c6f01643ecc25",
+    "tests/v6-workshop-cold-caller-continuation.test.ts": "f7bae0bc9e8c692e1ee7e76130a6948609b57c9c3b755ff90f1dad366b9a9a45",
+    "tests/v6-workshop-followup-source.test.ts": "19c88fcd51c6ddc2251081c4f9c8c507bff692763737cb296d249e7cac0276aa",
+    "tests/v6-motif-access-reference.test.ts": "57989c648156c9545bc43f43392886ad01c07d16893ae5bd0e20d061fea0c715",
+    "tests/v6-motif-access-contract.test.ts": "06898e719de4c9291bbdf2fa0ac99e6062c90d391764c6f77d52dddb7d011c98",
+    "tests/v6-motif-access-kernel.test.ts": "a6f21fbdf6305cec8d23a59076c45ef78bbcb5163434ae9151734287dcefee5b",
+    "tests/v6-window-question-kernel.test.ts": "a6dfb97cb28d1a1f872b1e8068790d3d4716cbe6c4fa65f8501b4525968d2c06",
+    "tests/v6-window-question-reference.test.ts": "0c3b39287ee417415837de9624d531d47997c2eb39843f93ec54d6e83ef49d0a"
+  },
+  "preparedNativeSource": {
+    "fileCount": 312,
+    "digest": "a6ea3e5e8140b14aa260485ebd4192429a86c4d3ec02075f14043f215cc798e1",
+    "qualification": "Prepared development identity; actual immutable input capture is recorded by the tests stage, not a final0.65 delivery freeze."
+  },
+  "predecessorProof": {
+    "publication": {
+      "path": "docs/migration/lot8a-evidence/coordination/published10b-site103.json",
+      "sha256": "6170e3e6fcad600f5d22b8b03daca1428148492b553a55002075373c734fda26",
+      "bytes": 2495
     },
-    "nativePublication": {
-      "siteVersion": 102,
-      "publishedCommit": "1019d2eb929d7dc201a5c1f6edce5aa1c5dfa464"
+    "mergeReview": {
+      "path": "docs/migration/lot8a-evidence/coordination/site103-merge-review.json",
+      "sha256": "bee73fb9641bb2fa39f05c15ce22a58203282e9cc14cb4e3ec8affd1dd9bb9cc",
+      "bytes": 5361
     },
-    "requiredNextSteps": [
-      "Preserve actual0.62 currentExecution and tighter host deadline through integration",
-      "Replace the draft136 selection with the exact inherited safe scope plus newly integrated10B tests and three8A tests",
-      "Update actual base identity and prospectively expected entry count to65/76 after integration",
-      "Recheck fixture existence and prepare any permitted missing dependencies before a new explicit root GO"
+    "nativeManifest": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/source-manifest.json",
+      "sha256": "846e38686406140e8f0c975836faadf646e4c20b0bcbc833fe4e228912535e93",
+      "bytes": 36806
+    },
+    "allowedNativeDeltas": [
+      "src/logos-engine/v6-field-constraints.ts",
+      "src/logos-engine/v6-motif-access-geometry.ts",
+      "src/logos-engine/v6-motif-access.ts",
+      "src/logos-engine/v6-native-runtime.ts"
     ],
-    "currentDraftScopeIsNotAuthorizedForExecution": true,
-    "nativeSourceFrozen": false,
-    "testsOrFiveGatesExecutedByThisRunner": 0
-  }
+    "unchangedPublishedNativeFiles": 308,
+    "globalRuntimeQualification": "Root merge review explicitly preserves actual0.62 deadline/currentExecution. Independent opaque native inventory comparison found exactly the four declared Motif-related files different; every other published native file matches.",
+    "currentExecutionCallSitesObserved": [
+      501,
+      519,
+      771,
+      1115
+    ]
+  },
+  "safeFixtureMaterialization": {
+    "path": "docs/migration/lot8a-evidence/coordination/materialized-safe-fixtures.json",
+    "sha256": "3922d4e9b613d84be6e00a010ba4362acafdfeecef42eb4f93653a51ac523fa3",
+    "bytes": 2459
+  },
+  "newPredecessorSyntheticFixture": {
+    "path": "tests/fixtures/v6-window-question-reference.json.gz",
+    "sha256": "3ba3e55879402d6d06d07a0dcbcdbfc8402f3498a0e71dafc19a5c36a4858aa2",
+    "bytes": 125943
+  },
+  "newPredecessorTestQualification": "Only published Window synthetic reference/kernel tests added. Their named source asserts synthetic and No game dispatch; no HPDL/LKEY game fixture or new original oracle invocation is selected.",
+  "logTransport": {
+    "mode": "new deterministic gzip plus per-command manifest",
+    "preserves": "All raw stdout/stderr/activity bytes including failed attempts, with verified length and SHA256; no filtering or newline normalization",
+    "trackedArtifacts": "*-stdout.log.gz, *-stderr.log.gz, *-activity.jsonl.gz, *-log-transport.json and command receipts",
+    "rawLogPolicy": "Raw .log outputs remain locally available. The parent may explicitly force-add small raw logs, but lossless compressed storage is sufficient for the runner to verify exact original log bytes.",
+    "quietStop": "If a new quiet request stops a command, further hashing/compression is deferred and no validation is claimed."
+  },
+  "rootExecutionGo": "Awaited; this preparation has not executed tests or delivery gates",
+  "priorUnexecutedDeclaration": {
+    "id": "lot8a-development-site103-138-a6ea3e5e-01",
+    "fingerprint": {
+      "path": "docs/migration/lot8a-evidence/contract/development-validation-plan.json",
+      "sha256": "6cd0748399466d08330e34248e19c0b3e8aaa7400672188b90580c2bd5428d8e",
+      "bytes": 47383
+    },
+    "qualification": "Superseded prospectively before any runner execution to add actual active successor10C; no measured/test/gate results were produced."
+  },
+  "coordinationQualification": "Actual active lanes10C,5C,6B are monitored together with retained10B; a completed10B status never substitutes for10C quiet acknowledgment.",
+  "buildPreparationPrerequisite": "Root observed all12 pinned runtime assets absent and will materialize verified exact cache bytes plus run normal prepare-python/content generators before tests capture any build inputs. No tests or five delivery gates are run by this declaration."
 }

@@ -1,0 +1,260 @@
+{
+  "schema": "logos-engine.v6.motif-access-site103-integration-review.v1",
+  "status": "passed_source_delta_review_only",
+  "recordedAt": "2026-11-11T17:13:29.249828+00:00",
+  "reviewer": "/root/audit_caller_contract",
+  "publishedPredecessor": {
+    "siteVersion": 103,
+    "nativeVersion": "0.62.0",
+    "commit": "4afcbfe6a25bd3a88223be543e443bc53b9c8814",
+    "deploymentStatus": "succeeded",
+    "deploymentUpdatedAt": "2026-11-11T16:54:28.036164+00:00",
+    "ownerOnlyAccessRevision": 3,
+    "apiObservation": {
+      "path": "docs/migration/lot8a-evidence/coordination/published10b-site103.json",
+      "sha256": "6170e3e6fcad600f5d22b8b03daca1428148492b553a55002075373c734fda26",
+      "bytes": 2495
+    },
+    "qualification": "The actual Sites observation was read from the retained API receipt. This reviewer did not make a fresh API request."
+  },
+  "reviewedCandidate": {
+    "commit": "df30bfd35396737f483b61ddff628f8396a9f54a",
+    "reservedNativeVersion": "0.65.0",
+    "currentScopedFilesMatchCommit": true,
+    "nativeDeltaPaths": [
+      "src/logos-engine/v6-field-constraints.ts",
+      "src/logos-engine/v6-motif-access-geometry.ts",
+      "src/logos-engine/v6-motif-access.ts",
+      "src/logos-engine/v6-native-runtime.ts"
+    ],
+    "nativeSources": [
+      {
+        "path": "src/logos-engine/v6-field-constraints.ts",
+        "sha256": "0d75ae535fb4e37c7e4ee28474e17e341afd5f436d717356a8f9b5617f1ae619",
+        "bytes": 35731
+      },
+      {
+        "path": "src/logos-engine/v6-motif-access-geometry.ts",
+        "sha256": "36d5e1d51a1ebef5c82dea7951c18fe115af2067624447d39e37100c4a9de9b3",
+        "bytes": 15261
+      },
+      {
+        "path": "src/logos-engine/v6-motif-access.ts",
+        "sha256": "2302d521959133b39560792d01ae4c2403a3b4b4a333ae10e089359a403394e0",
+        "bytes": 32665
+      },
+      {
+        "path": "src/logos-engine/v6-native-runtime.ts",
+        "sha256": "26a7c34c97e76c0c4d73fac965314736cf887417b40e8a17a4a47806ce210e2a",
+        "bytes": 163567
+      }
+    ],
+    "entryAudit": {
+      "path": "scripts/audit-v6-entry-points.ts",
+      "sha256": "d5be1f843e3aa70bacd6918386370169902abc848f8bc31f4ccf8493806de99c",
+      "bytes": 7402
+    },
+    "registryTest": {
+      "path": "tests/v6-radial-port-integration.test.ts",
+      "sha256": "5be679aa36ab6ce6c7128a6bdcc4a2d31a44a4adbb4936744aaf03ff6e350154",
+      "bytes": 28749
+    },
+    "motifTests": [
+      {
+        "path": "tests/v6-motif-access-reference.test.ts",
+        "sha256": "57989c648156c9545bc43f43392886ad01c07d16893ae5bd0e20d061fea0c715",
+        "bytes": 12297
+      },
+      {
+        "path": "tests/v6-motif-access-kernel.test.ts",
+        "sha256": "a6f21fbdf6305cec8d23a59076c45ef78bbcb5163434ae9151734287dcefee5b",
+        "bytes": 9890
+      }
+    ]
+  },
+  "reviewMethod": {
+    "kind": "read_only_source_diff_and_named_file_review",
+    "command": [
+      "git",
+      "diff",
+      "4afcbfe6a25bd3a88223be543e443bc53b9c8814",
+      "df30bfd35396737f483b61ddff628f8396a9f54a",
+      "--",
+      "src",
+      "scripts/audit-v6-entry-points.ts",
+      "tests/v6-radial-port-integration.test.ts"
+    ],
+    "headScopedPatchEqualsReviewedCommitPatch": true,
+    "scopedPatchSha256": "b43e1536d3ab483a4432d8d57a7781d36b016c87eb80b2dbb9843f5b3819896a",
+    "scopedPatchBytes": 63583,
+    "workingTreeScopedDiffFromReviewedCommitEmpty": true,
+    "coordination": "Small named 10B/5C/6B statuses checked before filesystem commands; commands and this evidence write held the shared performance lock.",
+    "testsRunByReviewer": false,
+    "projectImportsByReviewer": false,
+    "buildsRunByReviewer": false,
+    "typecheckRunByReviewer": false,
+    "gameOrReplayExecutionByReviewer": false,
+    "performanceMeasurementByReviewer": false,
+    "lkeyPayloadAccessByReviewer": false,
+    "onlyWrittenFile": "docs/migration/lot8a-evidence/contract/site103-integration-review.json"
+  },
+  "previousReview": {
+    "receipt": {
+      "path": "docs/migration/lot8a-evidence/contract/source-review.json",
+      "sha256": "55050564de333485752adcb963c3659aa3f34fb6e3c3c5ec491f83dde714acdc",
+      "bytes": 17598
+    },
+    "basis": "Isolated Site101/native0.61 plus8A, before the Site103 merge",
+    "unchangedPortFiles": [
+      {
+        "path": "src/logos-engine/v6-motif-access.ts",
+        "sha256": "2302d521959133b39560792d01ae4c2403a3b4b4a333ae10e089359a403394e0",
+        "bytes": 32665
+      },
+      {
+        "path": "src/logos-engine/v6-motif-access-geometry.ts",
+        "sha256": "36d5e1d51a1ebef5c82dea7951c18fe115af2067624447d39e37100c4a9de9b3",
+        "bytes": 15261
+      }
+    ],
+    "qualification": "The initial receipt remains immutable and historical. Its development test/probe results are not relabeled as runs on this merged candidate."
+  },
+  "preservedActual062": {
+    "files": [
+      {
+        "path": "src/logos-engine/v6-native-types.ts",
+        "sha256": "7ce043684a9243224f845b97e7a3f22aa7c9348643d2af89316755d9e441c6ca",
+        "bytes": 13085
+      },
+      {
+        "path": "src/logos-engine/v6-window-question.ts",
+        "sha256": "e39796308982f8758e7cc8b3caf8f9eb52d59fadfacd0219202fde4520e57e79",
+        "bytes": 23042
+      },
+      {
+        "path": "src/logos-engine/v6-window-question-geometry.ts",
+        "sha256": "d3356acfd8f028cc126713eda521e05e817a11bdf569e5296a5638786e1e5e99",
+        "bytes": 16356
+      },
+      {
+        "path": "src/logos-engine/v6-window-question-policy.ts",
+        "sha256": "8ac176a9fd48676cba8ebfeb57b91f6bb27be0104969082ef9ba97edab6f703c",
+        "bytes": 3794
+      }
+    ],
+    "comparisonMethod": [
+      "git",
+      "diff",
+      "4afcbfe6a25bd3a88223be543e443bc53b9c8814",
+      "--",
+      "src/logos-engine/v6-native-types.ts",
+      "src/logos-engine/v6-window-question.ts",
+      "src/logos-engine/v6-window-question-geometry.ts",
+      "src/logos-engine/v6-window-question-policy.ts"
+    ],
+    "comparisonPatchEmpty": true,
+    "runtimeSectionsUnchangedByDelta": [
+      "currentExecution calculates remaining active-level time and translates the caller deadline from its supplied clock origin.",
+      "Each selection gets a fresh current execution context; no planning context is retained across requests or pauses.",
+      "The ordinary before guard receives the fifth current NativeExecution argument at authorization and at existing coordination checks.",
+      "Window retains its provider, ordinary current guard, event acquisition, explicit material entry and all 0.62 deadline extensions."
+    ],
+    "nativeTypeContract": "NativeExecution.now/deadlineMs and NativeFamily.before optional fifth execution argument are unchanged from the actual published predecessor."
+  },
+  "integrationFindings": [
+    {
+      "id": "minimal-native-delta",
+      "status": "passed",
+      "finding": "Exactly four tracked native files differ from Site103: the two previously reviewed Motif files, the optional SymmetryPolicy field and the scoped runtime integration. No Window or NativeTypes change is introduced by8A."
+    },
+    {
+      "id": "window-and-motif-coexist",
+      "status": "passed",
+      "finding": "The merged family list contains both public_window_question and motif_access. Both source aliases remain. The material mapping keeps window_question explicit and motif_conditioned_access null for the direct proposal wrapper; source DRM order remains the selector."
+    },
+    {
+      "id": "selected-only-acquisition",
+      "status": "passed",
+      "finding": "Motif retains one owner and one selected record event under common-observation-frontier/motif:{before.revision}. It is not added to passive acquisition families. The ordinary factory adapter forwards current execution and bounded-search refusal."
+    },
+    {
+      "id": "source-local-symmetry-exclusion",
+      "status": "passed",
+      "finding": "The optional policy flag plus unique motif lattice/body suppress only the final SymmetricField fallback. Existing earlier source entries and later groups remain in their declared positions."
+    },
+    {
+      "id": "registry-continuity",
+      "status": "passed",
+      "finding": "The independent entry script retains window_question:public_window_question and adds motif_conditioned_access:motif_access. The registry test adds only this material entry over0.62: group counts11/12,21/21,10/10,23/33; total65/76. These are reviewed expected counts, not a claim that the pending full suite has passed.",
+      "expectedConnected": 65,
+      "declared": 76,
+      "expectedMaterialConnected": 23,
+      "materialDeclared": 33
+    },
+    {
+      "id": "port-and-restore-unchanged",
+      "status": "passed",
+      "finding": "The core and geometry fingerprints equal the initial reviewed files, including the corrected selected/current-ray card checks, distinct ray trajectory positions and linked-blocker requirements. Historical epoch memories remain permitted."
+    },
+    {
+      "id": "development-and-final-cost-separated",
+      "status": "passed",
+      "finding": "The current README explicitly reserves0.65, denies publication/cost qualification of8A, identifies actual Site103/0.62 and still requires actual0.63/0.64 predecessors before final integration and cost. The old0.61/0.62 cost results are not reused as8A cost."
+    }
+  ],
+  "retainedMergeFailure": {
+    "receipt": {
+      "path": "docs/migration/lot8a-evidence/coordination/site103-merge-review.json",
+      "sha256": "bee73fb9641bb2fa39f05c15ce22a58203282e9cc14cb4e3ec8affd1dd9bb9cc",
+      "bytes": 5361
+    },
+    "fullMergeIndexDiffCheck": {
+      "command": [
+        "git",
+        "diff",
+        "--check",
+        "--cached"
+      ],
+      "exitCode": 2,
+      "qualification": "The existing exit2 remains a failure. Its reported whitespace findings concern retained inherited predecessor logs/source; this review does not relabel it as a success."
+    },
+    "reportedInheritedFileCount": 10,
+    "reportedInheritedBytesEqualPredecessor": true,
+    "inheritanceQualification": "Equality is recorded in the retained merge-review receipt; this focused source review does not rescan the inherited proof logs.",
+    "candidateDeltaDiffCheck": {
+      "command": [
+        "git",
+        "diff",
+        "--check",
+        "--cached",
+        "4afcbfe6a25bd3a88223be543e443bc53b9c8814"
+      ],
+      "exitCode": 0,
+      "qualification": "Separate retained exit0 for the new candidate delta against actual Site103. This reviewer read the receipt and did not rerun a delivery gate."
+    }
+  },
+  "documentationReviewed": [
+    {
+      "path": "docs/migration/lot8a-evidence/contract/source-contract.md",
+      "sha256": "a4f59a35f4d8879069fbac361ebcd6bc2ce2068bd3254abbce1871a6fb25d4d0",
+      "bytes": 5839
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/README.md",
+      "sha256": "dffbd912c99a0bf88c1ef3d732bff01623a7f9497ada7ea50e37ef1ed3213d1a",
+      "bytes": 2533
+    }
+  ],
+  "limits": {
+    "search": "Production Motif search is explicitly bounded at8192 states/16384 frontier entries and refuses partial results. Stored full paths can require O(S^2) space; this is not a byte-memory or whole-geometry latency proof.",
+    "fullSuite": "No138-file development suite result is asserted by this receipt. Its execution and semantic gates belong to separate evidence.",
+    "finalPredecessors": [
+      "actual published0.63",
+      "actual published0.64"
+    ],
+    "finalCost": "Still suspended until final integration; require complete-session median increase strictly below+10% for STCK and SMLP separately, retaining phase/cohort diagnostics.",
+    "game": "No game-win, browser, live gameplay, compulsory three-level campaign or complete caller-parity claim.",
+    "lkey": "Permanently closed; no payload, fixture decoding, oracle, replay or gameplay accessed.",
+    "reviewConclusion": "No blocking source-integration finding within this exact reviewed delta. This is not final delivery or publication acceptance."
+  }
+}

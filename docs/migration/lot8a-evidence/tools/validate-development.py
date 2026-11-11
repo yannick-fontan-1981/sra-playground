@@ -13,6 +13,7 @@ from __future__ import annotations
 import argparse
 from datetime import datetime, timezone
 import fcntl
+import gzip
 import hashlib
 import json
 import os
@@ -44,6 +45,8 @@ NEW_TESTS = [
     "tests/v6-motif-access-reference.test.ts",
     "tests/v6-motif-access-contract.test.ts",
     "tests/v6-motif-access-kernel.test.ts",
+    "tests/v6-window-question-kernel.test.ts",
+    "tests/v6-window-question-reference.test.ts",
 ]
 
 
@@ -84,6 +87,7 @@ def checked(record):
 
 
 def coordination(plan):
+    require(set(plan["coordination"]) == {"lot10b", "lot10c", "lot5c", "lot6b"}, "Monitor actual successor10C as well as the retained10B/5C/6B records")
     result = {}
     for lane, declaration in plan["coordination"].items():
         path = Path(declaration["path"])
@@ -171,17 +175,36 @@ def audit_inputs(plan):
 def validate_plan(plan):
     require(plan.get("status") == "declared_ready_for_explicit_root_go", "Draft plan cannot execute; reconcile the actual published predecessor and obtain root GO")
     require(plan["schema"] == "logos-engine.v6.motif-access-development-validation-plan.v1", "Unexpected plan")
-    require(plan["qualification"] == "development_only_on_site101_not_final_065_or_cost", "Development qualification changed")
+    require(plan["qualification"] == "development_only_on_site103_not_final_065_or_cost", "Development qualification changed")
     require(plan["excludedTestModules"] == EXCLUDED, "Closed LKEY exclusions changed")
+    require(plan["baseSite"]["version"] == 103 and
+            plan["baseSite"]["publishedCommit"] == "4afcbfe6a25bd3a88223be543e443bc53b9c8814",
+            "Actual published predecessor changed")
+    publication = json.loads(checked(plan["predecessorProof"]["publication"]).read_text())
+    require(publication["siteVersion"] == 103 and publication["deployment"]["status"] == "succeeded" and
+            publication["versions"][0]["source"]["commit_sha"] == plan["baseSite"]["publishedCommit"],
+            "Actual Site103 publication proof mismatch")
+    review = json.loads(checked(plan["predecessorProof"]["mergeReview"]).read_text())
+    require(review["publishedPredecessor"] == plan["baseSite"]["publishedCommit"] and
+            sorted(review["nativeDeltas"]) == plan["predecessorProof"]["allowedNativeDeltas"],
+            "Declared native merge delta changed")
+    checked(plan["predecessorProof"]["nativeManifest"])
+    materialization = json.loads(checked(plan["safeFixtureMaterialization"]).read_text())
+    for item in materialization["files"]:
+        actual = fp(ROOT / item["file"])
+        require(actual["sha256"] == item["sha256"] and actual["bytes"] == item["bytes"],
+                "Materialized safe fixture differs from its retained byte proof")
+    checked(plan["newPredecessorSyntheticFixture"])
     require(plan["newTestFiles"] == NEW_TESTS, "New scope changed")
     scope = json.loads(checked(plan["inheritedScope"]).read_text())
     require(len(scope["testFiles"]) == 133, "Inherited safe scope changed")
-    require(plan["testFiles"] == scope["testFiles"] + NEW_TESTS, "Exact inherited order plus three files is required")
-    require(len(plan["testFiles"]) == len(set(plan["testFiles"])) == 136, "Expected 136 unique test files")
+    require(plan["testFiles"] == scope["testFiles"] + NEW_TESTS, "Exact inherited order plus the five declared added files is required")
+    require(len(plan["testFiles"]) == len(set(plan["testFiles"])) == 138, "Expected 138 unique test files")
     require(not set(EXCLUDED).intersection(plan["testFiles"]), "Closed module is in test scope")
     for name in plan["testFiles"]:
         require(name.startswith("tests/") and name.endswith(".test.ts") and (ROOT / name).is_file(),
                 "Missing declared test: " + name)
+        require(sha(ROOT / name) == plan["testFileHashes"][name], "Declared test source changed: " + name)
     historical = json.loads(checked(plan["historicalChecks"]).read_text())
     require(plan["checks"] == [{"name": row["name"], "command": row["command"]} for row in historical["checks"]],
             "Five gate commands must match the retained actual receipt")
@@ -194,6 +217,40 @@ def validate_plan(plan):
     require(fp(Path(__file__)) == plan["runner"], "Runner differs from prospective plan")
     for record in plan["externalBuildHelperFiles"]:
         checked(record)
+
+
+def transport_logs(records, directory, name):
+    """Lossless named-log storage, with no rewriting or omission of raw bytes."""
+    stored = []
+    for record in records:
+        raw_path = checked(record)
+        compressed_path = Path(str(raw_path) + ".gz")
+        raw = raw_path.read_bytes()
+        compressed = gzip.compress(raw, mtime=0)
+        with compressed_path.open("xb") as stream:
+            stream.write(compressed)
+        require(gzip.decompress(compressed) == raw, "Lossless log transport mismatch")
+        stored.append({"raw": record, "gzip": fp(compressed_path)})
+    manifest = {"schema": "logos-engine.v6.development-log-transport.v1", "recordedAt": now(),
+                "status": "verified_byte_exact", "entries": stored,
+                "qualification": "Complete stdout, stderr and activity, including failures; no filtering or newline normalization."}
+    target = directory / (name + "-log-transport.json")
+    write_absent(target, manifest)
+    return fp(target)
+
+
+def retained_log(execution, record):
+    manifest = json.loads(checked(execution["logTransport"]).read_text())
+    require(manifest["status"] == "verified_byte_exact", "Invalid log transport")
+    matches = [row for row in manifest["entries"] if row["raw"] == record]
+    require(len(matches) == 1, "Log not uniquely bound by transport")
+    raw = gzip.decompress(checked(matches[0]["gzip"]).read_bytes())
+    require(len(raw) == record["bytes"] and hashlib.sha256(raw).hexdigest() == record["sha256"],
+            "Transported raw log fingerprint mismatch")
+    original = ROOT / record["path"]
+    if original.exists():
+        checked(record)
+    return raw
 
 
 def terminate(process):
@@ -249,16 +306,19 @@ def execute(command, name, directory, lock_fd, plan):
             return {"path": path.relative_to(ROOT).as_posix(), "bytes": path.stat().st_size,
                     "sha256DeferredBecauseQuietWasRequested": True}
         return fp(path)
-    return {"name": name, "command": command, "startedAt": started, "finishedAt": now(),
-            "elapsedSeconds": time.monotonic() - clock,
-            "exitCode": process.returncode if process is not None else None,
-            "predeclaredTimeoutSeconds": limit, "stoppedReason": stop_reason,
-            "stdout": recorded_log(stdout_path), "stderr": recorded_log(stderr_path),
-            "activity": recorded_log(activity_path)}
+    row = {"name": name, "command": command, "startedAt": started, "finishedAt": now(),
+           "elapsedSeconds": time.monotonic() - clock,
+           "exitCode": process.returncode if process is not None else None,
+           "predeclaredTimeoutSeconds": limit, "stoppedReason": stop_reason,
+           "stdout": recorded_log(stdout_path), "stderr": recorded_log(stderr_path),
+           "activity": recorded_log(activity_path)}
+    if not quiet_stop:
+        row["logTransport"] = transport_logs([row["stdout"], row["stderr"], row["activity"]], directory, name)
+    return row
 
 
 def semantic(row, plan):
-    output = checked(row["stdout"]).read_text()
+    output = retained_log(row, row["stdout"]).decode()
     name = row["name"]
     result = {"passed": False, "failures": []}
     if row["exitCode"] != 0 or row["stoppedReason"] is not None:
@@ -278,8 +338,11 @@ def semantic(row, plan):
         report = json.loads(report_path.read_text())
         expected = plan["expectedEntryCoverage"]
         require(summary["connected"] == report["connected"] == expected["connected"] and
-                summary["declared"] == report["declared"] == expected["declared"], "Entry coverage differs from declared 64/76")
+                summary["declared"] == report["declared"] == expected["declared"], "Entry coverage differs from declared 65/76")
         require(summary["fullV6Parity"] is False and report["fullV6Parity"] is False, "Development report overclaims full parity")
+        require(summary["groups"] == expected["groups"] and
+                [{"id": group["id"], "connected": group["connected"], "declared": group["declared"]}
+                 for group in report["groups"]] == expected["groups"], "Entry group counters differ from declaration")
         require(all(summary[key] == report[key] for key in ("connected", "declared", "percent", "fullV6Parity")),
                 "Entry stdout differs from its retained report")
         require(summary.get("failures", []) == [] and report.get("failures", []) == [], "Entry audit semantic failures")
@@ -338,6 +401,9 @@ def main():
         passed = False
         try:
             before = inputs()
+            require(before["nativeSource"]["digest"] == plan["preparedNativeSource"]["digest"] and
+                    before["nativeSource"]["fileCount"] == plan["preparedNativeSource"]["fileCount"],
+                    "Native source differs from the prepared development declaration")
             if args.stage == "tests":
                 receipt["mappingAtTestsBefore"] = fp(ROOT / "migration/v6-transfer-map.json")
                 write_absent(directory / "development-freeze.json", {
@@ -351,6 +417,8 @@ def main():
                         tests["generator"] == receipt["generator"], "Fresh successful tests with the same plan and runner are required")
                 require(tests["inputsAfter"] == before, "Native/source/test/build/original inputs changed since successful tests")
                 receipt["successfulTests"] = fp(tests_path)
+                for record in (tests["execution"]["stdout"], tests["execution"]["stderr"], tests["execution"]["activity"]):
+                    retained_log(tests["execution"], record)
                 index = [row["name"] for row in plan["checks"]].index(name)
                 receipt["precedingChecks"] = []
                 for previous in plan["checks"][:index]:
@@ -360,7 +428,7 @@ def main():
                             prior["generator"] == receipt["generator"] and prior["inputsAfter"] == before,
                             "A preceding gate is absent, failed or bound to changed inputs")
                     for record in (prior["execution"]["stdout"], prior["execution"]["stderr"], prior["execution"]["activity"]):
-                        checked(record)
+                        retained_log(prior["execution"], record)
                     if prior.get("semantic", {}).get("report"):
                         checked(prior["semantic"]["report"])
                     receipt["precedingChecks"].append(fp(prior_path))
@@ -408,7 +476,9 @@ def main():
         receipt["finishedAt"] = now()
         write_absent(receipt_path, receipt)
         print(json.dumps({"status": receipt["status"], "name": name, "receipt": fp(receipt_path),
-                          "semantic": receipt.get("semantic"), "error": receipt.get("error")}), flush=True)
+                          "semanticPassed": receipt.get("semantic", {}).get("passed"),
+                          "counts": receipt.get("semantic", {}).get("counts"),
+                          "error": receipt.get("error")}), flush=True)
         if not passed:
             raise SystemExit(1)
 
