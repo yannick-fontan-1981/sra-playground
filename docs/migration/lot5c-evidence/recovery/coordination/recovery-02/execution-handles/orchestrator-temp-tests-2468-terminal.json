@@ -1,0 +1,13 @@
+{
+  "sessionId": 2468,
+  "exitCode": 0,
+  "terminalChunkId": "ce434c",
+  "observedAt": "2026-11-11T20:02:45.015650+00:00",
+  "result": {
+    "casesRun": 13,
+    "failures": 0,
+    "errors": 0,
+    "inputsUnchanged": true
+  },
+  "scope": "Temporary mutex/status orchestration only; no native or official cost"
+}

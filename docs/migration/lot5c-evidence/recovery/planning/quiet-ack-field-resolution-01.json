@@ -1,0 +1,50 @@
+{
+  "schema": "logos-engine.lot5c-specific-quiet-ack-field-resolution.v1",
+  "status": "declared_before_measurement_pending_independent_review",
+  "recordedAt": "2026-11-11T18:50:35.038669+00:00",
+  "requestId": "lot5c-cost-a33a5f88-final-01",
+  "request": {
+    "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-final-01/request.json",
+    "bytes": 1868,
+    "sha256": "b3da2add5362ebe397b1032a2bbc9824b5c7abcd0fd79c01bfabd9196aee7761"
+  },
+  "lane": "lot10c",
+  "sourcePath": "/workspace/shared/sra-coordination/lot10c-status.json",
+  "rawAck": {
+    "path": "docs/migration/lot5c-evidence/recovery/planning/lot10c-quiet-ack-raw-01.json",
+    "bytes": 6558,
+    "sha256": "6c361b848909bda5bae35208ebebd0827c466e6ab72a6bf54af8a2b5f1a34ad7"
+  },
+  "acknowledgedAt": "2026-11-11T18:36:58.444829+00:00",
+  "originalUpdatedAt": "2026-11-11T18:36:58.444829+00:00",
+  "sourcePayloadSha256WithoutUpdatedAt": "3ee55b794451b4c7b821c08e54691fdbed46be0163ccf2ce54630f8c9007f8ce",
+  "explicitFreshAckText": "FRESH EXACT FULL QUIET ACK lot5c-cost-a33a5f88-final-01. All own source evidence transport terminal and remote verified at18:33:49.901UTC. Final four pushes retain87 files/90297853 raw bytes; sourceHEAD3ea5e39b7c3f18ea84baf485a2494a9b948e0984, treeclean. Your active request stopped the optional final transport-receipt addition before any repository read/mutation. Preview already stopped; its idle tab6 is now closed and absence verified. All three workers terminal. No queued activity; hold until explicitrelease.",
+  "recordedStaleActiveCommand": "All10recorded regressions terminalPASS170/170,357commands/30levelboundaries; all workers idle. Final bounded documentary/source checkpoint closure planned <=120s after exact proof-summary binding; no further test/game/browser/replay/cost is queued.",
+  "fieldResolution": [
+    {
+      "field": "active_command",
+      "rawValue": "All10recorded regressions terminalPASS170/170,357commands/30levelboundaries; all workers idle. Final bounded documentary/source checkpoint closure planned <=120s after exact proof-summary binding; no further test/game/browser/replay/cost is queued.",
+      "resolvedValue": null,
+      "basis": "The stale field describes already completed recorded regressions and their planned documentary/source checkpoint closure. The fresh exact ACK explicitly closes all source transport (four verified pushes and clean HEAD), states every worker terminal, and says the optional last documentary receipt addition was stopped before repository access. No part of the previously described work remains unaccounted for."
+    },
+    {
+      "field": "no_queued_commands",
+      "rawFieldAbsent": true,
+      "resolvedValue": true,
+      "basis": "The fresh exact ACK explicitly states No queued activity; hold until explicitrelease."
+    }
+  ],
+  "resolvedBy": "lot5c_root_interpretation_of_explicit_peer_ack",
+  "peerStatusFileModified": false,
+  "peerAckCreatedOrRetimed": false,
+  "measurementsStarted": false,
+  "scopeLimits": [
+    "Only this10C exact ACK identity, timestamp and pinned payload may use this fallback; canonical already-idle payloads retain the ordinary strict path.",
+    "Only active_command and the absent no_queued_commands field may be resolved in an attributed in-memory copy; original raw bytes remain retained.",
+    "Every other field is unchanged; actual active/queued work, changed identity, withdrawn ACK or incompatible payload stops the procedure.",
+    "Raw-status payloads remain monitored; no time elapsed without response is treated as evidence.",
+    "The three active lanes still require fresh exact ACKs after completed functional evidence; new coordination-reader reviews must precede readiness and the first measurement.",
+    "Frozen benchmark sources/tools/policies/cases and the strict per-game global budget remain unchanged."
+  ],
+  "qualification": "Specific premeasurement field reconciliation, not a new or synthetic peer acknowledgment. The actual peer-authored quiet_acknowledged=true, request ID, timestamp and explicit closure text remain the authority. Two source reviews must validate complete coverage and the guarded reader before use."
+}

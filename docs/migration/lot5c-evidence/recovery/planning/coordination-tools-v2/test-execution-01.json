@@ -1,0 +1,2596 @@
+{
+  "schema": "logos-engine.lot5c.bounded-locked-command-independent-tests.v1",
+  "startedAt": "2026-11-11T19:41:35.234038+00:00",
+  "status": "passed",
+  "wrapper": {
+    "file": "run-bounded-locked-command.py",
+    "bytes": 28889,
+    "sha256": "8b308821943e79f27c8d5614a5408721234ed6a6729a83ab83dedd075cc21346"
+  },
+  "harness": {
+    "file": "test_bounded_locked_command.py",
+    "bytes": 18148,
+    "sha256": "a0bbb377978479610e1a56ed05a3dd330eb8f5c5d7c017c50d54a62657336243"
+  },
+  "temporaryLocksOnly": true,
+  "productionExclusiveLockAttempted": false,
+  "actualCheckpointHelpersExecuted": false,
+  "officialSitesWorkflowExecuted": false,
+  "gitExecuted": false,
+  "networkExecuted": false,
+  "projectRuntimeExecuted": false,
+  "cases": [
+    {
+      "name": "success",
+      "passed": true,
+      "durationSeconds": 0.098441,
+      "checks": [
+        {
+          "name": "expected_exit_code",
+          "passed": true
+        },
+        {
+          "name": "expected_terminal_status",
+          "passed": true
+        },
+        {
+          "name": "expected_terminal_reason",
+          "passed": true
+        },
+        {
+          "name": "cleanup_complete",
+          "passed": true
+        },
+        {
+          "name": "no_dummy_credential_in_console_or_receipt",
+          "passed": true
+        },
+        {
+          "name": "tool_session_id_not_fabricated",
+          "passed": true
+        },
+        {
+          "name": "child_spawn_matches_expectation",
+          "passed": true
+        },
+        {
+          "name": "lock_acquired_matches_expectation",
+          "passed": true
+        },
+        {
+          "name": "no_shared_lock_during_input",
+          "passed": true
+        },
+        {
+          "name": "child_tty_echo_disabled",
+          "passed": true
+        },
+        {
+          "name": "lock_descriptor_not_inherited",
+          "passed": true
+        },
+        {
+          "name": "leader_terminal",
+          "passed": true
+        },
+        {
+          "name": "lock_free_after_terminal",
+          "passed": true
+        }
+      ],
+      "receipt": {
+        "automaticRetry": false,
+        "childCloseFds": true,
+        "childExitCode": 0,
+        "childHandshakeAt": "2026-11-11T19:41:35.318772+00:00",
+        "childInputDeliveredAt": "2026-11-11T19:41:35.318868+00:00",
+        "childOutputBytes": {
+          "stderr": 54,
+          "stdout": 240
+        },
+        "childPid": 8,
+        "childProcessGroup": 8,
+        "childPtyEchoDisabled": true,
+        "childStarted": true,
+        "childStartedAt": "2026-11-11T19:41:35.282671+00:00",
+        "cleanup": {
+          "childStarted": true,
+          "complete": true,
+          "leaderExitCode": 0,
+          "processGroup": 8,
+          "reapedDescendants": 0,
+          "signals": []
+        },
+        "dependencies": [],
+        "durationSeconds": 0.044243,
+        "exitCode": 0,
+        "finishedAt": "2026-11-11T19:41:35.324859+00:00",
+        "helper": "temporary-stand-in",
+        "helperFingerprint": {
+          "bytes": 2647,
+          "file": "fake_helper.py",
+          "sha256": "0c2983fd2c32afde978a89ebdec58bc6ecbe0f582ad2a126f437ff3d524ae2cc"
+        },
+        "initialCoordination": [
+          {
+            "lane": "lot5c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot6b",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot8a",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot10c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          }
+        ],
+        "inputBytesRead": 138,
+        "inputCompletedAt": "2026-11-11T19:41:35.281520+00:00",
+        "inputEchoDisabled": true,
+        "limits": {
+          "handshakeSeconds": 0.4,
+          "inputBytes": 65536,
+          "inputSeconds": 1.0,
+          "killGraceSeconds": 1.5,
+          "outputBytes": 1048576,
+          "termGraceSeconds": 0.15,
+          "workSeconds": 1.5
+        },
+        "lockAcquired": true,
+        "lockAcquiredAt": "2026-11-11T19:41:35.281598+00:00",
+        "lockDescriptor": 3,
+        "lockDescriptorInheritable": false,
+        "lockReleasedAt": "2026-11-11T19:41:35.324825+00:00",
+        "partialOperationalSideEffectsPossible": false,
+        "postLockCoordination": [
+          {
+            "lane": "lot5c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot6b",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot8a",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot10c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          }
+        ],
+        "preLockCoordination": [
+          {
+            "lane": "lot5c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot6b",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot8a",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot10c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          }
+        ],
+        "rawChildOutputStored": false,
+        "rawInputStored": false,
+        "results": [
+          {
+            "branch": "refs/heads/lot5c-recovery-checkpoint-20261111",
+            "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "remoteHead": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "sitePublicationPerformed": false,
+            "status": "pushed_and_verified"
+          }
+        ],
+        "schema": "logos-engine.lot5c.bounded-locked-command.v2",
+        "sitePublicationPerformed": false,
+        "startedAt": "2026-11-11T19:41:35.280622+00:00",
+        "status": "passed",
+        "toolSessionBinding": "external_root_record_required",
+        "toolSessionId": null,
+        "wrapperPid": 7
+      },
+      "testObservation": {
+        "leader": 8,
+        "group": 8,
+        "echoOff": true,
+        "lockFdAbsent": true
+      }
+    },
+    {
+      "name": "nonzero_and_secret_output",
+      "passed": true,
+      "durationSeconds": 0.085609,
+      "checks": [
+        {
+          "name": "expected_exit_code",
+          "passed": true
+        },
+        {
+          "name": "expected_terminal_status",
+          "passed": true
+        },
+        {
+          "name": "expected_terminal_reason",
+          "passed": true
+        },
+        {
+          "name": "cleanup_complete",
+          "passed": true
+        },
+        {
+          "name": "no_dummy_credential_in_console_or_receipt",
+          "passed": true
+        },
+        {
+          "name": "tool_session_id_not_fabricated",
+          "passed": true
+        },
+        {
+          "name": "child_spawn_matches_expectation",
+          "passed": true
+        },
+        {
+          "name": "lock_acquired_matches_expectation",
+          "passed": true
+        },
+        {
+          "name": "no_shared_lock_during_input",
+          "passed": true
+        },
+        {
+          "name": "child_tty_echo_disabled",
+          "passed": true
+        },
+        {
+          "name": "lock_descriptor_not_inherited",
+          "passed": true
+        },
+        {
+          "name": "leader_terminal",
+          "passed": true
+        },
+        {
+          "name": "lock_free_after_terminal",
+          "passed": true
+        }
+      ],
+      "receipt": {
+        "automaticRetry": false,
+        "childCloseFds": true,
+        "childExitCode": 7,
+        "childHandshakeAt": "2026-11-11T19:41:35.404457+00:00",
+        "childInputDeliveredAt": "2026-11-11T19:41:35.404520+00:00",
+        "childOutputBytes": {
+          "stderr": 101,
+          "stdout": 62
+        },
+        "childPid": 10,
+        "childProcessGroup": 10,
+        "childPtyEchoDisabled": true,
+        "childStarted": true,
+        "childStartedAt": "2026-11-11T19:41:35.378313+00:00",
+        "cleanup": {
+          "childStarted": true,
+          "complete": true,
+          "leaderExitCode": 7,
+          "processGroup": 10,
+          "reapedDescendants": 0,
+          "signals": []
+        },
+        "dependencies": [],
+        "durationSeconds": 0.035181,
+        "exitCode": 1,
+        "finishedAt": "2026-11-11T19:41:35.411877+00:00",
+        "helper": "temporary-stand-in",
+        "helperFingerprint": {
+          "bytes": 2647,
+          "file": "fake_helper.py",
+          "sha256": "0c2983fd2c32afde978a89ebdec58bc6ecbe0f582ad2a126f437ff3d524ae2cc"
+        },
+        "initialCoordination": [
+          {
+            "lane": "lot5c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot6b",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot8a",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot10c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          }
+        ],
+        "inputBytesRead": 138,
+        "inputCompletedAt": "2026-11-11T19:41:35.377400+00:00",
+        "inputEchoDisabled": true,
+        "limits": {
+          "handshakeSeconds": 0.4,
+          "inputBytes": 65536,
+          "inputSeconds": 1.0,
+          "killGraceSeconds": 1.5,
+          "outputBytes": 1048576,
+          "termGraceSeconds": 0.15,
+          "workSeconds": 1.5
+        },
+        "lockAcquired": true,
+        "lockAcquiredAt": "2026-11-11T19:41:35.377476+00:00",
+        "lockDescriptor": 3,
+        "lockDescriptorInheritable": false,
+        "lockReleasedAt": "2026-11-11T19:41:35.411809+00:00",
+        "partialOperationalSideEffectsPossible": true,
+        "postLockCoordination": [
+          {
+            "lane": "lot5c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot6b",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot8a",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot10c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          }
+        ],
+        "preLockCoordination": [
+          {
+            "lane": "lot5c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot6b",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot8a",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot10c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          }
+        ],
+        "rawChildOutputStored": false,
+        "rawInputStored": false,
+        "reason": "child_exit_nonzero",
+        "results": [],
+        "schema": "logos-engine.lot5c.bounded-locked-command.v2",
+        "sitePublicationPerformed": false,
+        "startedAt": "2026-11-11T19:41:35.376703+00:00",
+        "status": "failed",
+        "toolSessionBinding": "external_root_record_required",
+        "toolSessionId": null,
+        "wrapperPid": 9
+      },
+      "testObservation": {
+        "leader": 10,
+        "group": 10,
+        "echoOff": true,
+        "lockFdAbsent": true
+      }
+    },
+    {
+      "name": "partial_input_timeout",
+      "passed": true,
+      "durationSeconds": 0.572439,
+      "checks": [
+        {
+          "name": "expected_exit_code",
+          "passed": true
+        },
+        {
+          "name": "expected_terminal_status",
+          "passed": true
+        },
+        {
+          "name": "expected_terminal_reason",
+          "passed": true
+        },
+        {
+          "name": "cleanup_complete",
+          "passed": true
+        },
+        {
+          "name": "no_dummy_credential_in_console_or_receipt",
+          "passed": true
+        },
+        {
+          "name": "tool_session_id_not_fabricated",
+          "passed": true
+        },
+        {
+          "name": "child_spawn_matches_expectation",
+          "passed": true
+        },
+        {
+          "name": "lock_acquired_matches_expectation",
+          "passed": true
+        },
+        {
+          "name": "no_shared_lock_during_input",
+          "passed": true
+        },
+        {
+          "name": "partial_input_retained_only_as_count",
+          "passed": true
+        },
+        {
+          "name": "lock_free_after_terminal",
+          "passed": true
+        }
+      ],
+      "receipt": {
+        "automaticRetry": false,
+        "childOutputBytes": {
+          "stderr": 0,
+          "stdout": 0
+        },
+        "childStarted": false,
+        "cleanup": {
+          "childStarted": false,
+          "complete": true,
+          "reapedDescendants": 0,
+          "signals": []
+        },
+        "durationSeconds": 0.501851,
+        "exitCode": 124,
+        "finishedAt": "2026-11-11T19:41:35.979419+00:00",
+        "helper": "temporary-stand-in",
+        "initialCoordination": [
+          {
+            "lane": "lot5c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot6b",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot8a",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot10c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          }
+        ],
+        "inputBytesRead": 69,
+        "inputEchoDisabled": true,
+        "limits": {
+          "handshakeSeconds": 0.4,
+          "inputBytes": 65536,
+          "inputSeconds": 0.5,
+          "killGraceSeconds": 1.5,
+          "outputBytes": 1048576,
+          "termGraceSeconds": 0.15,
+          "workSeconds": 1.5
+        },
+        "lockAcquired": false,
+        "partialOperationalSideEffectsPossible": false,
+        "rawChildOutputStored": false,
+        "rawInputStored": false,
+        "reason": "input_timeout",
+        "results": [],
+        "schema": "logos-engine.lot5c.bounded-locked-command.v2",
+        "sitePublicationPerformed": false,
+        "startedAt": "2026-11-11T19:41:35.477591+00:00",
+        "status": "failed",
+        "toolSessionBinding": "external_root_record_required",
+        "toolSessionId": null,
+        "wrapperPid": 11
+      },
+      "testObservation": {}
+    },
+    {
+      "name": "handshake_timeout",
+      "passed": true,
+      "durationSeconds": 0.651404,
+      "checks": [
+        {
+          "name": "expected_exit_code",
+          "passed": true
+        },
+        {
+          "name": "expected_terminal_status",
+          "passed": true
+        },
+        {
+          "name": "expected_terminal_reason",
+          "passed": true
+        },
+        {
+          "name": "cleanup_complete",
+          "passed": true
+        },
+        {
+          "name": "no_dummy_credential_in_console_or_receipt",
+          "passed": true
+        },
+        {
+          "name": "tool_session_id_not_fabricated",
+          "passed": true
+        },
+        {
+          "name": "child_spawn_matches_expectation",
+          "passed": true
+        },
+        {
+          "name": "lock_acquired_matches_expectation",
+          "passed": true
+        },
+        {
+          "name": "no_shared_lock_during_input",
+          "passed": true
+        },
+        {
+          "name": "child_tty_echo_disabled",
+          "passed": true
+        },
+        {
+          "name": "lock_descriptor_not_inherited",
+          "passed": true
+        },
+        {
+          "name": "leader_terminal",
+          "passed": true
+        },
+        {
+          "name": "lock_free_after_terminal",
+          "passed": true
+        }
+      ],
+      "receipt": {
+        "automaticRetry": false,
+        "childCloseFds": true,
+        "childExitCode": -9,
+        "childOutputBytes": {
+          "stderr": 0,
+          "stdout": 0
+        },
+        "childPid": 13,
+        "childProcessGroup": 13,
+        "childPtyEchoDisabled": true,
+        "childStarted": true,
+        "childStartedAt": "2026-11-11T19:41:36.040461+00:00",
+        "cleanup": {
+          "childStarted": true,
+          "complete": true,
+          "leaderExitCode": -9,
+          "processGroup": 13,
+          "reapedDescendants": 0,
+          "signals": [
+            "SIGTERM",
+            "SIGKILL"
+          ]
+        },
+        "dependencies": [],
+        "durationSeconds": 0.594404,
+        "exitCode": 124,
+        "finishedAt": "2026-11-11T19:41:36.632926+00:00",
+        "helper": "temporary-stand-in",
+        "helperFingerprint": {
+          "bytes": 2647,
+          "file": "fake_helper.py",
+          "sha256": "0c2983fd2c32afde978a89ebdec58bc6ecbe0f582ad2a126f437ff3d524ae2cc"
+        },
+        "initialCoordination": [
+          {
+            "lane": "lot5c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot6b",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot8a",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot10c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          }
+        ],
+        "inputBytesRead": 138,
+        "inputCompletedAt": "2026-11-11T19:41:36.039583+00:00",
+        "inputEchoDisabled": true,
+        "limits": {
+          "handshakeSeconds": 0.4,
+          "inputBytes": 65536,
+          "inputSeconds": 1.0,
+          "killGraceSeconds": 1.5,
+          "outputBytes": 1048576,
+          "termGraceSeconds": 0.15,
+          "workSeconds": 1.5
+        },
+        "lockAcquired": true,
+        "lockAcquiredAt": "2026-11-11T19:41:36.039660+00:00",
+        "lockDescriptor": 3,
+        "lockDescriptorInheritable": false,
+        "lockReleasedAt": "2026-11-11T19:41:36.632885+00:00",
+        "partialOperationalSideEffectsPossible": true,
+        "postLockCoordination": [
+          {
+            "lane": "lot5c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot6b",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot8a",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot10c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          }
+        ],
+        "preLockCoordination": [
+          {
+            "lane": "lot5c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot6b",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot8a",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot10c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          }
+        ],
+        "rawChildOutputStored": false,
+        "rawInputStored": false,
+        "reason": "handshake_timeout",
+        "results": [],
+        "schema": "logos-engine.lot5c.bounded-locked-command.v2",
+        "sitePublicationPerformed": false,
+        "startedAt": "2026-11-11T19:41:36.038530+00:00",
+        "status": "failed",
+        "toolSessionBinding": "external_root_record_required",
+        "toolSessionId": null,
+        "wrapperPid": 12
+      },
+      "testObservation": {
+        "leader": 13,
+        "group": 13,
+        "echoOff": true,
+        "lockFdAbsent": true
+      }
+    },
+    {
+      "name": "work_timeout_child_and_descendant",
+      "passed": true,
+      "durationSeconds": 0.738972,
+      "checks": [
+        {
+          "name": "expected_exit_code",
+          "passed": true
+        },
+        {
+          "name": "expected_terminal_status",
+          "passed": true
+        },
+        {
+          "name": "expected_terminal_reason",
+          "passed": true
+        },
+        {
+          "name": "cleanup_complete",
+          "passed": true
+        },
+        {
+          "name": "no_dummy_credential_in_console_or_receipt",
+          "passed": true
+        },
+        {
+          "name": "tool_session_id_not_fabricated",
+          "passed": true
+        },
+        {
+          "name": "child_spawn_matches_expectation",
+          "passed": true
+        },
+        {
+          "name": "lock_acquired_matches_expectation",
+          "passed": true
+        },
+        {
+          "name": "no_shared_lock_during_input",
+          "passed": true
+        },
+        {
+          "name": "child_tty_echo_disabled",
+          "passed": true
+        },
+        {
+          "name": "lock_descriptor_not_inherited",
+          "passed": true
+        },
+        {
+          "name": "leader_terminal",
+          "passed": true
+        },
+        {
+          "name": "descendant_terminal",
+          "passed": true
+        },
+        {
+          "name": "descendant_reaped",
+          "passed": true
+        },
+        {
+          "name": "lock_free_after_terminal",
+          "passed": true
+        }
+      ],
+      "receipt": {
+        "automaticRetry": false,
+        "childCloseFds": true,
+        "childExitCode": -9,
+        "childHandshakeAt": "2026-11-11T19:41:36.719292+00:00",
+        "childInputDeliveredAt": "2026-11-11T19:41:36.719378+00:00",
+        "childOutputBytes": {
+          "stderr": 54,
+          "stdout": 0
+        },
+        "childPid": 15,
+        "childProcessGroup": 15,
+        "childPtyEchoDisabled": true,
+        "childStarted": true,
+        "childStartedAt": "2026-11-11T19:41:36.693951+00:00",
+        "cleanup": {
+          "childStarted": true,
+          "complete": true,
+          "leaderExitCode": -9,
+          "processGroup": 15,
+          "reapedDescendants": 1,
+          "signals": [
+            "SIGTERM",
+            "SIGKILL"
+          ]
+        },
+        "dependencies": [],
+        "durationSeconds": 0.683804,
+        "exitCode": 124,
+        "finishedAt": "2026-11-11T19:41:37.375795+00:00",
+        "helper": "temporary-stand-in",
+        "helperFingerprint": {
+          "bytes": 2647,
+          "file": "fake_helper.py",
+          "sha256": "0c2983fd2c32afde978a89ebdec58bc6ecbe0f582ad2a126f437ff3d524ae2cc"
+        },
+        "initialCoordination": [
+          {
+            "lane": "lot5c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot6b",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot8a",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot10c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          }
+        ],
+        "inputBytesRead": 138,
+        "inputCompletedAt": "2026-11-11T19:41:36.692833+00:00",
+        "inputEchoDisabled": true,
+        "limits": {
+          "handshakeSeconds": 0.4,
+          "inputBytes": 65536,
+          "inputSeconds": 1.0,
+          "killGraceSeconds": 1.5,
+          "outputBytes": 1048576,
+          "termGraceSeconds": 0.15,
+          "workSeconds": 0.5
+        },
+        "lockAcquired": true,
+        "lockAcquiredAt": "2026-11-11T19:41:36.692907+00:00",
+        "lockDescriptor": 3,
+        "lockDescriptorInheritable": false,
+        "lockReleasedAt": "2026-11-11T19:41:37.375750+00:00",
+        "partialOperationalSideEffectsPossible": true,
+        "postLockCoordination": [
+          {
+            "lane": "lot5c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot6b",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot8a",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot10c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          }
+        ],
+        "preLockCoordination": [
+          {
+            "lane": "lot5c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot6b",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot8a",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot10c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          }
+        ],
+        "rawChildOutputStored": false,
+        "rawInputStored": false,
+        "reason": "work_timeout",
+        "results": [],
+        "schema": "logos-engine.lot5c.bounded-locked-command.v2",
+        "sitePublicationPerformed": false,
+        "startedAt": "2026-11-11T19:41:36.691999+00:00",
+        "status": "failed",
+        "toolSessionBinding": "external_root_record_required",
+        "toolSessionId": null,
+        "wrapperPid": 14
+      },
+      "testObservation": {
+        "leader": 15,
+        "group": 15,
+        "echoOff": true,
+        "lockFdAbsent": true,
+        "descendant": 16
+      }
+    },
+    {
+      "name": "signal_interruption_child_and_descendant",
+      "passed": true,
+      "durationSeconds": 0.323937,
+      "checks": [
+        {
+          "name": "expected_exit_code",
+          "passed": true
+        },
+        {
+          "name": "expected_terminal_status",
+          "passed": true
+        },
+        {
+          "name": "expected_terminal_reason",
+          "passed": true
+        },
+        {
+          "name": "cleanup_complete",
+          "passed": true
+        },
+        {
+          "name": "no_dummy_credential_in_console_or_receipt",
+          "passed": true
+        },
+        {
+          "name": "tool_session_id_not_fabricated",
+          "passed": true
+        },
+        {
+          "name": "child_spawn_matches_expectation",
+          "passed": true
+        },
+        {
+          "name": "lock_acquired_matches_expectation",
+          "passed": true
+        },
+        {
+          "name": "no_shared_lock_during_input",
+          "passed": true
+        },
+        {
+          "name": "child_tty_echo_disabled",
+          "passed": true
+        },
+        {
+          "name": "lock_descriptor_not_inherited",
+          "passed": true
+        },
+        {
+          "name": "leader_terminal",
+          "passed": true
+        },
+        {
+          "name": "descendant_terminal",
+          "passed": true
+        },
+        {
+          "name": "descendant_reaped",
+          "passed": true
+        },
+        {
+          "name": "signal_retained",
+          "passed": true
+        },
+        {
+          "name": "lock_free_after_terminal",
+          "passed": true
+        }
+      ],
+      "receipt": {
+        "automaticRetry": false,
+        "childCloseFds": true,
+        "childExitCode": -9,
+        "childHandshakeAt": "2026-11-11T19:41:37.455247+00:00",
+        "childInputDeliveredAt": "2026-11-11T19:41:37.455333+00:00",
+        "childOutputBytes": {
+          "stderr": 54,
+          "stdout": 0
+        },
+        "childPid": 18,
+        "childProcessGroup": 18,
+        "childPtyEchoDisabled": true,
+        "childStarted": true,
+        "childStartedAt": "2026-11-11T19:41:37.428513+00:00",
+        "cleanup": {
+          "childStarted": true,
+          "complete": true,
+          "leaderExitCode": -9,
+          "processGroup": 18,
+          "reapedDescendants": 1,
+          "signals": [
+            "SIGTERM",
+            "SIGKILL"
+          ]
+        },
+        "dependencies": [],
+        "durationSeconds": 0.26139,
+        "exitCode": 143,
+        "finishedAt": "2026-11-11T19:41:37.688099+00:00",
+        "helper": "temporary-stand-in",
+        "helperFingerprint": {
+          "bytes": 2647,
+          "file": "fake_helper.py",
+          "sha256": "0c2983fd2c32afde978a89ebdec58bc6ecbe0f582ad2a126f437ff3d524ae2cc"
+        },
+        "initialCoordination": [
+          {
+            "lane": "lot5c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot6b",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot8a",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot10c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          }
+        ],
+        "inputBytesRead": 138,
+        "inputCompletedAt": "2026-11-11T19:41:37.427450+00:00",
+        "inputEchoDisabled": true,
+        "limits": {
+          "handshakeSeconds": 0.4,
+          "inputBytes": 65536,
+          "inputSeconds": 1.0,
+          "killGraceSeconds": 1.5,
+          "outputBytes": 1048576,
+          "termGraceSeconds": 0.15,
+          "workSeconds": 1.5
+        },
+        "lockAcquired": true,
+        "lockAcquiredAt": "2026-11-11T19:41:37.427527+00:00",
+        "lockDescriptor": 3,
+        "lockDescriptorInheritable": false,
+        "lockReleasedAt": "2026-11-11T19:41:37.688040+00:00",
+        "partialOperationalSideEffectsPossible": true,
+        "postLockCoordination": [
+          {
+            "lane": "lot5c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot6b",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot8a",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot10c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          }
+        ],
+        "preLockCoordination": [
+          {
+            "lane": "lot5c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot6b",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot8a",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot10c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          }
+        ],
+        "rawChildOutputStored": false,
+        "rawInputStored": false,
+        "reason": "interrupted",
+        "receivedSignal": "SIGTERM",
+        "results": [],
+        "schema": "logos-engine.lot5c.bounded-locked-command.v2",
+        "sitePublicationPerformed": false,
+        "startedAt": "2026-11-11T19:41:37.426715+00:00",
+        "status": "interrupted",
+        "toolSessionBinding": "external_root_record_required",
+        "toolSessionId": null,
+        "wrapperPid": 17
+      },
+      "testObservation": {
+        "leader": 18,
+        "group": 18,
+        "echoOff": true,
+        "lockFdAbsent": true,
+        "descendant": 19
+      }
+    },
+    {
+      "name": "lock_descriptor_absent_in_child",
+      "passed": true,
+      "durationSeconds": 0.080545,
+      "checks": [
+        {
+          "name": "expected_exit_code",
+          "passed": true
+        },
+        {
+          "name": "expected_terminal_status",
+          "passed": true
+        },
+        {
+          "name": "expected_terminal_reason",
+          "passed": true
+        },
+        {
+          "name": "cleanup_complete",
+          "passed": true
+        },
+        {
+          "name": "no_dummy_credential_in_console_or_receipt",
+          "passed": true
+        },
+        {
+          "name": "tool_session_id_not_fabricated",
+          "passed": true
+        },
+        {
+          "name": "child_spawn_matches_expectation",
+          "passed": true
+        },
+        {
+          "name": "lock_acquired_matches_expectation",
+          "passed": true
+        },
+        {
+          "name": "no_shared_lock_during_input",
+          "passed": true
+        },
+        {
+          "name": "child_tty_echo_disabled",
+          "passed": true
+        },
+        {
+          "name": "lock_descriptor_not_inherited",
+          "passed": true
+        },
+        {
+          "name": "leader_terminal",
+          "passed": true
+        },
+        {
+          "name": "lock_free_after_terminal",
+          "passed": true
+        }
+      ],
+      "receipt": {
+        "automaticRetry": false,
+        "childCloseFds": true,
+        "childExitCode": 0,
+        "childHandshakeAt": "2026-11-11T19:41:37.777454+00:00",
+        "childInputDeliveredAt": "2026-11-11T19:41:37.777514+00:00",
+        "childOutputBytes": {
+          "stderr": 54,
+          "stdout": 240
+        },
+        "childPid": 21,
+        "childProcessGroup": 21,
+        "childPtyEchoDisabled": true,
+        "childStarted": true,
+        "childStartedAt": "2026-11-11T19:41:37.753867+00:00",
+        "cleanup": {
+          "childStarted": true,
+          "complete": true,
+          "leaderExitCode": 0,
+          "processGroup": 21,
+          "reapedDescendants": 0,
+          "signals": []
+        },
+        "dependencies": [],
+        "durationSeconds": 0.030999,
+        "exitCode": 0,
+        "finishedAt": "2026-11-11T19:41:37.781986+00:00",
+        "helper": "temporary-stand-in",
+        "helperFingerprint": {
+          "bytes": 2647,
+          "file": "fake_helper.py",
+          "sha256": "0c2983fd2c32afde978a89ebdec58bc6ecbe0f582ad2a126f437ff3d524ae2cc"
+        },
+        "initialCoordination": [
+          {
+            "lane": "lot5c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot6b",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot8a",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot10c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          }
+        ],
+        "inputBytesRead": 138,
+        "inputCompletedAt": "2026-11-11T19:41:37.752883+00:00",
+        "inputEchoDisabled": true,
+        "limits": {
+          "handshakeSeconds": 0.4,
+          "inputBytes": 65536,
+          "inputSeconds": 1.0,
+          "killGraceSeconds": 1.5,
+          "outputBytes": 1048576,
+          "termGraceSeconds": 0.15,
+          "workSeconds": 1.5
+        },
+        "lockAcquired": true,
+        "lockAcquiredAt": "2026-11-11T19:41:37.752972+00:00",
+        "lockDescriptor": 3,
+        "lockDescriptorInheritable": false,
+        "lockReleasedAt": "2026-11-11T19:41:37.781950+00:00",
+        "partialOperationalSideEffectsPossible": false,
+        "postLockCoordination": [
+          {
+            "lane": "lot5c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot6b",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot8a",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot10c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          }
+        ],
+        "preLockCoordination": [
+          {
+            "lane": "lot5c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot6b",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot8a",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot10c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          }
+        ],
+        "rawChildOutputStored": false,
+        "rawInputStored": false,
+        "results": [
+          {
+            "branch": "refs/heads/lot5c-recovery-checkpoint-20261111",
+            "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "remoteHead": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "sitePublicationPerformed": false,
+            "status": "pushed_and_verified"
+          }
+        ],
+        "schema": "logos-engine.lot5c.bounded-locked-command.v2",
+        "sitePublicationPerformed": false,
+        "startedAt": "2026-11-11T19:41:37.750994+00:00",
+        "status": "passed",
+        "toolSessionBinding": "external_root_record_required",
+        "toolSessionId": null,
+        "wrapperPid": 20
+      },
+      "testObservation": {
+        "leader": 21,
+        "group": 21,
+        "echoOff": true,
+        "lockFdAbsent": true
+      }
+    },
+    {
+      "name": "quiet_changed_after_input_before_lock",
+      "passed": true,
+      "durationSeconds": 0.055573,
+      "checks": [
+        {
+          "name": "expected_exit_code",
+          "passed": true
+        },
+        {
+          "name": "expected_terminal_status",
+          "passed": true
+        },
+        {
+          "name": "expected_terminal_reason",
+          "passed": true
+        },
+        {
+          "name": "cleanup_complete",
+          "passed": true
+        },
+        {
+          "name": "no_dummy_credential_in_console_or_receipt",
+          "passed": true
+        },
+        {
+          "name": "tool_session_id_not_fabricated",
+          "passed": true
+        },
+        {
+          "name": "child_spawn_matches_expectation",
+          "passed": true
+        },
+        {
+          "name": "lock_acquired_matches_expectation",
+          "passed": true
+        },
+        {
+          "name": "no_shared_lock_during_input",
+          "passed": true
+        },
+        {
+          "name": "lock_free_after_terminal",
+          "passed": true
+        }
+      ],
+      "receipt": {
+        "automaticRetry": false,
+        "childOutputBytes": {
+          "stderr": 0,
+          "stdout": 0
+        },
+        "childStarted": false,
+        "cleanup": {
+          "childStarted": false,
+          "complete": true,
+          "reapedDescendants": 0,
+          "signals": []
+        },
+        "durationSeconds": 0.006113,
+        "exitCode": 75,
+        "finishedAt": "2026-11-11T19:41:37.838039+00:00",
+        "helper": "temporary-stand-in",
+        "initialCoordination": [
+          {
+            "lane": "lot5c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot6b",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot8a",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot10c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          }
+        ],
+        "inputBytesRead": 138,
+        "inputCompletedAt": "2026-11-11T19:41:37.837891+00:00",
+        "inputEchoDisabled": true,
+        "limits": {
+          "handshakeSeconds": 0.4,
+          "inputBytes": 65536,
+          "inputSeconds": 1.0,
+          "killGraceSeconds": 1.5,
+          "outputBytes": 1048576,
+          "termGraceSeconds": 0.15,
+          "workSeconds": 1.5
+        },
+        "lockAcquired": false,
+        "partialOperationalSideEffectsPossible": false,
+        "rawChildOutputStored": false,
+        "rawInputStored": false,
+        "reason": "coordination_quiet_requested",
+        "results": [],
+        "schema": "logos-engine.lot5c.bounded-locked-command.v2",
+        "sitePublicationPerformed": false,
+        "startedAt": "2026-11-11T19:41:37.831933+00:00",
+        "status": "failed",
+        "toolSessionBinding": "external_root_record_required",
+        "toolSessionId": null,
+        "wrapperPid": 22
+      },
+      "testObservation": {}
+    },
+    {
+      "name": "quiet_changed_after_lock_before_child",
+      "passed": true,
+      "durationSeconds": 0.065803,
+      "checks": [
+        {
+          "name": "expected_exit_code",
+          "passed": true
+        },
+        {
+          "name": "expected_terminal_status",
+          "passed": true
+        },
+        {
+          "name": "expected_terminal_reason",
+          "passed": true
+        },
+        {
+          "name": "cleanup_complete",
+          "passed": true
+        },
+        {
+          "name": "no_dummy_credential_in_console_or_receipt",
+          "passed": true
+        },
+        {
+          "name": "tool_session_id_not_fabricated",
+          "passed": true
+        },
+        {
+          "name": "child_spawn_matches_expectation",
+          "passed": true
+        },
+        {
+          "name": "lock_acquired_matches_expectation",
+          "passed": true
+        },
+        {
+          "name": "no_shared_lock_during_input",
+          "passed": true
+        },
+        {
+          "name": "lock_free_after_terminal",
+          "passed": true
+        }
+      ],
+      "receipt": {
+        "automaticRetry": false,
+        "childOutputBytes": {
+          "stderr": 0,
+          "stdout": 0
+        },
+        "childStarted": false,
+        "cleanup": {
+          "childStarted": false,
+          "complete": true,
+          "reapedDescendants": 0,
+          "signals": []
+        },
+        "durationSeconds": 0.001174,
+        "exitCode": 75,
+        "finishedAt": "2026-11-11T19:41:37.900819+00:00",
+        "helper": "temporary-stand-in",
+        "initialCoordination": [
+          {
+            "lane": "lot5c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot6b",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot8a",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot10c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          }
+        ],
+        "inputBytesRead": 138,
+        "inputCompletedAt": "2026-11-11T19:41:37.900630+00:00",
+        "inputEchoDisabled": true,
+        "limits": {
+          "handshakeSeconds": 0.4,
+          "inputBytes": 65536,
+          "inputSeconds": 1.0,
+          "killGraceSeconds": 1.5,
+          "outputBytes": 1048576,
+          "termGraceSeconds": 0.15,
+          "workSeconds": 1.5
+        },
+        "lockAcquired": true,
+        "lockAcquiredAt": "2026-11-11T19:41:37.900725+00:00",
+        "lockDescriptor": 3,
+        "lockDescriptorInheritable": false,
+        "lockReleasedAt": "2026-11-11T19:41:37.900805+00:00",
+        "partialOperationalSideEffectsPossible": false,
+        "preLockCoordination": [
+          {
+            "lane": "lot5c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot6b",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot8a",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot10c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          }
+        ],
+        "rawChildOutputStored": false,
+        "rawInputStored": false,
+        "reason": "coordination_quiet_requested",
+        "results": [],
+        "schema": "logos-engine.lot5c.bounded-locked-command.v2",
+        "sitePublicationPerformed": false,
+        "startedAt": "2026-11-11T19:41:37.899653+00:00",
+        "status": "failed",
+        "toolSessionBinding": "external_root_record_required",
+        "toolSessionId": null,
+        "wrapperPid": 23
+      },
+      "testObservation": {}
+    },
+    {
+      "name": "leader_success_descendant_cleanup",
+      "passed": true,
+      "durationSeconds": 0.335752,
+      "checks": [
+        {
+          "name": "expected_exit_code",
+          "passed": true
+        },
+        {
+          "name": "expected_terminal_status",
+          "passed": true
+        },
+        {
+          "name": "expected_terminal_reason",
+          "passed": true
+        },
+        {
+          "name": "cleanup_complete",
+          "passed": true
+        },
+        {
+          "name": "no_dummy_credential_in_console_or_receipt",
+          "passed": true
+        },
+        {
+          "name": "tool_session_id_not_fabricated",
+          "passed": true
+        },
+        {
+          "name": "child_spawn_matches_expectation",
+          "passed": true
+        },
+        {
+          "name": "lock_acquired_matches_expectation",
+          "passed": true
+        },
+        {
+          "name": "no_shared_lock_during_input",
+          "passed": true
+        },
+        {
+          "name": "child_tty_echo_disabled",
+          "passed": true
+        },
+        {
+          "name": "lock_descriptor_not_inherited",
+          "passed": true
+        },
+        {
+          "name": "leader_terminal",
+          "passed": true
+        },
+        {
+          "name": "descendant_terminal",
+          "passed": true
+        },
+        {
+          "name": "descendant_reaped",
+          "passed": true
+        },
+        {
+          "name": "lock_free_after_terminal",
+          "passed": true
+        }
+      ],
+      "receipt": {
+        "automaticRetry": false,
+        "childCloseFds": true,
+        "childExitCode": 0,
+        "childHandshakeAt": "2026-11-11T19:41:37.984389+00:00",
+        "childInputDeliveredAt": "2026-11-11T19:41:37.984510+00:00",
+        "childOutputBytes": {
+          "stderr": 54,
+          "stdout": 240
+        },
+        "childPid": 25,
+        "childProcessGroup": 25,
+        "childPtyEchoDisabled": true,
+        "childStarted": true,
+        "childStartedAt": "2026-11-11T19:41:37.957873+00:00",
+        "cleanup": {
+          "childStarted": true,
+          "complete": true,
+          "leaderExitCode": 0,
+          "processGroup": 25,
+          "reapedDescendants": 1,
+          "signals": [
+            "SIGTERM",
+            "SIGKILL"
+          ]
+        },
+        "dependencies": [],
+        "durationSeconds": 0.283117,
+        "exitCode": 0,
+        "finishedAt": "2026-11-11T19:41:38.238773+00:00",
+        "helper": "temporary-stand-in",
+        "helperFingerprint": {
+          "bytes": 2647,
+          "file": "fake_helper.py",
+          "sha256": "0c2983fd2c32afde978a89ebdec58bc6ecbe0f582ad2a126f437ff3d524ae2cc"
+        },
+        "initialCoordination": [
+          {
+            "lane": "lot5c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot6b",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot8a",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot10c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          }
+        ],
+        "inputBytesRead": 138,
+        "inputCompletedAt": "2026-11-11T19:41:37.956779+00:00",
+        "inputEchoDisabled": true,
+        "limits": {
+          "handshakeSeconds": 0.4,
+          "inputBytes": 65536,
+          "inputSeconds": 1.0,
+          "killGraceSeconds": 1.5,
+          "outputBytes": 1048576,
+          "termGraceSeconds": 0.15,
+          "workSeconds": 1.5
+        },
+        "lockAcquired": true,
+        "lockAcquiredAt": "2026-11-11T19:41:37.956855+00:00",
+        "lockDescriptor": 3,
+        "lockDescriptorInheritable": false,
+        "lockReleasedAt": "2026-11-11T19:41:38.238663+00:00",
+        "partialOperationalSideEffectsPossible": false,
+        "postLockCoordination": [
+          {
+            "lane": "lot5c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot6b",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot8a",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot10c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          }
+        ],
+        "preLockCoordination": [
+          {
+            "lane": "lot5c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot6b",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot8a",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot10c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          }
+        ],
+        "rawChildOutputStored": false,
+        "rawInputStored": false,
+        "results": [
+          {
+            "branch": "refs/heads/lot5c-recovery-checkpoint-20261111",
+            "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "remoteHead": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "sitePublicationPerformed": false,
+            "status": "pushed_and_verified"
+          }
+        ],
+        "schema": "logos-engine.lot5c.bounded-locked-command.v2",
+        "sitePublicationPerformed": false,
+        "startedAt": "2026-11-11T19:41:37.955663+00:00",
+        "status": "passed",
+        "toolSessionBinding": "external_root_record_required",
+        "toolSessionId": null,
+        "wrapperPid": 24
+      },
+      "testObservation": {
+        "leader": 25,
+        "group": 25,
+        "echoOff": true,
+        "lockFdAbsent": true,
+        "descendant": 26
+      }
+    },
+    {
+      "name": "exclusive_lock_refusal_no_retry",
+      "passed": true,
+      "durationSeconds": 0.065035,
+      "checks": [
+        {
+          "name": "expected_exit_code",
+          "passed": true
+        },
+        {
+          "name": "expected_terminal_status",
+          "passed": true
+        },
+        {
+          "name": "expected_terminal_reason",
+          "passed": true
+        },
+        {
+          "name": "cleanup_complete",
+          "passed": true
+        },
+        {
+          "name": "no_dummy_credential_in_console_or_receipt",
+          "passed": true
+        },
+        {
+          "name": "tool_session_id_not_fabricated",
+          "passed": true
+        },
+        {
+          "name": "child_spawn_matches_expectation",
+          "passed": true
+        },
+        {
+          "name": "lock_acquired_matches_expectation",
+          "passed": true
+        },
+        {
+          "name": "lock_free_after_terminal",
+          "passed": true
+        }
+      ],
+      "receipt": {
+        "automaticRetry": false,
+        "childOutputBytes": {
+          "stderr": 0,
+          "stdout": 0
+        },
+        "childStarted": false,
+        "cleanup": {
+          "childStarted": false,
+          "complete": true,
+          "reapedDescendants": 0,
+          "signals": []
+        },
+        "durationSeconds": 0.001147,
+        "exitCode": 75,
+        "finishedAt": "2026-11-11T19:41:38.306302+00:00",
+        "helper": "temporary-stand-in",
+        "initialCoordination": [
+          {
+            "lane": "lot5c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot6b",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot8a",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot10c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          }
+        ],
+        "inputBytesRead": 138,
+        "inputCompletedAt": "2026-11-11T19:41:38.306141+00:00",
+        "inputEchoDisabled": true,
+        "limits": {
+          "handshakeSeconds": 0.4,
+          "inputBytes": 65536,
+          "inputSeconds": 1.0,
+          "killGraceSeconds": 1.5,
+          "outputBytes": 1048576,
+          "termGraceSeconds": 0.15,
+          "workSeconds": 1.5
+        },
+        "lockAcquired": false,
+        "partialOperationalSideEffectsPossible": false,
+        "preLockCoordination": [
+          {
+            "lane": "lot5c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot6b",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot8a",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot10c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          }
+        ],
+        "rawChildOutputStored": false,
+        "rawInputStored": false,
+        "reason": "shared_lock_unavailable",
+        "results": [],
+        "schema": "logos-engine.lot5c.bounded-locked-command.v2",
+        "sitePublicationPerformed": false,
+        "startedAt": "2026-11-11T19:41:38.305165+00:00",
+        "status": "failed",
+        "toolSessionBinding": "external_root_record_required",
+        "toolSessionId": null,
+        "wrapperPid": 27
+      },
+      "testObservation": {}
+    },
+    {
+      "name": "official_sites_protocol_stand_in",
+      "passed": true,
+      "durationSeconds": 0.084116,
+      "checks": [
+        {
+          "name": "expected_exit_code",
+          "passed": true
+        },
+        {
+          "name": "expected_terminal_status",
+          "passed": true
+        },
+        {
+          "name": "expected_terminal_reason",
+          "passed": true
+        },
+        {
+          "name": "cleanup_complete",
+          "passed": true
+        },
+        {
+          "name": "no_dummy_credential_in_console_or_receipt",
+          "passed": true
+        },
+        {
+          "name": "tool_session_id_not_fabricated",
+          "passed": true
+        },
+        {
+          "name": "child_spawn_matches_expectation",
+          "passed": true
+        },
+        {
+          "name": "lock_acquired_matches_expectation",
+          "passed": true
+        },
+        {
+          "name": "no_shared_lock_during_input",
+          "passed": true
+        },
+        {
+          "name": "child_tty_echo_disabled",
+          "passed": true
+        },
+        {
+          "name": "lock_descriptor_not_inherited",
+          "passed": true
+        },
+        {
+          "name": "leader_terminal",
+          "passed": true
+        },
+        {
+          "name": "lock_free_after_terminal",
+          "passed": true
+        }
+      ],
+      "receipt": {
+        "automaticRetry": false,
+        "childCloseFds": true,
+        "childExitCode": 0,
+        "childHandshakeAt": "2026-11-11T19:41:38.386235+00:00",
+        "childInputDeliveredAt": "2026-11-11T19:41:38.386348+00:00",
+        "childOutputBytes": {
+          "stderr": 57,
+          "stdout": 328
+        },
+        "childPid": 29,
+        "childProcessGroup": 29,
+        "childPtyEchoDisabled": true,
+        "childStarted": true,
+        "childStartedAt": "2026-11-11T19:41:38.359784+00:00",
+        "cleanup": {
+          "childStarted": true,
+          "complete": true,
+          "leaderExitCode": 0,
+          "processGroup": 29,
+          "reapedDescendants": 0,
+          "signals": []
+        },
+        "dependencies": [],
+        "durationSeconds": 0.035565,
+        "exitCode": 0,
+        "finishedAt": "2026-11-11T19:41:38.391498+00:00",
+        "helper": "temporary-stand-in",
+        "helperFingerprint": {
+          "bytes": 2647,
+          "file": "fake_helper.py",
+          "sha256": "0c2983fd2c32afde978a89ebdec58bc6ecbe0f582ad2a126f437ff3d524ae2cc"
+        },
+        "initialCoordination": [
+          {
+            "lane": "lot5c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot6b",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot8a",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot10c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          }
+        ],
+        "inputBytesRead": 439,
+        "inputCompletedAt": "2026-11-11T19:41:38.356768+00:00",
+        "inputEchoDisabled": true,
+        "limits": {
+          "handshakeSeconds": 0.4,
+          "inputBytes": 65536,
+          "inputSeconds": 1.0,
+          "killGraceSeconds": 1.5,
+          "outputBytes": 1048576,
+          "termGraceSeconds": 0.15,
+          "workSeconds": 1.5
+        },
+        "lockAcquired": true,
+        "lockAcquiredAt": "2026-11-11T19:41:38.357508+00:00",
+        "lockDescriptor": 3,
+        "lockDescriptorInheritable": false,
+        "lockReleasedAt": "2026-11-11T19:41:38.391465+00:00",
+        "partialOperationalSideEffectsPossible": false,
+        "postLockCoordination": [
+          {
+            "lane": "lot5c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot6b",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot8a",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot10c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          }
+        ],
+        "preLockCoordination": [
+          {
+            "lane": "lot5c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot6b",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot8a",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot10c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          }
+        ],
+        "rawChildOutputStored": false,
+        "rawInputStored": false,
+        "results": [
+          {
+            "archiveDeclared": true,
+            "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+            "sitePublicationPerformed": false,
+            "status": "source_and_archive_prepared"
+          }
+        ],
+        "schema": "logos-engine.lot5c.bounded-locked-command.v2",
+        "sitePublicationPerformed": false,
+        "startedAt": "2026-11-11T19:41:38.355939+00:00",
+        "status": "passed",
+        "toolSessionBinding": "external_root_record_required",
+        "toolSessionId": null,
+        "wrapperPid": 28
+      },
+      "testObservation": {
+        "leader": 29,
+        "group": 29,
+        "echoOff": true,
+        "lockFdAbsent": true
+      }
+    },
+    {
+      "name": "quiet_present_before_input",
+      "passed": true,
+      "durationSeconds": 0.050528,
+      "checks": [
+        {
+          "name": "expected_exit_code",
+          "passed": true
+        },
+        {
+          "name": "expected_terminal_status",
+          "passed": true
+        },
+        {
+          "name": "expected_terminal_reason",
+          "passed": true
+        },
+        {
+          "name": "cleanup_complete",
+          "passed": true
+        },
+        {
+          "name": "no_dummy_credential_in_console_or_receipt",
+          "passed": true
+        },
+        {
+          "name": "tool_session_id_not_fabricated",
+          "passed": true
+        },
+        {
+          "name": "child_spawn_matches_expectation",
+          "passed": true
+        },
+        {
+          "name": "lock_acquired_matches_expectation",
+          "passed": true
+        },
+        {
+          "name": "input_never_requested",
+          "passed": true
+        },
+        {
+          "name": "lock_free_after_terminal",
+          "passed": true
+        }
+      ],
+      "receipt": {
+        "automaticRetry": false,
+        "childOutputBytes": {
+          "stderr": 0,
+          "stdout": 0
+        },
+        "childStarted": false,
+        "cleanup": {
+          "childStarted": false,
+          "complete": true,
+          "reapedDescendants": 0,
+          "signals": []
+        },
+        "durationSeconds": 0.000406,
+        "exitCode": 75,
+        "finishedAt": "2026-11-11T19:41:38.443660+00:00",
+        "helper": "temporary-stand-in",
+        "inputBytesRead": 0,
+        "limits": {
+          "handshakeSeconds": 0.4,
+          "inputBytes": 65536,
+          "inputSeconds": 1.0,
+          "killGraceSeconds": 1.5,
+          "outputBytes": 1048576,
+          "termGraceSeconds": 0.15,
+          "workSeconds": 1.5
+        },
+        "lockAcquired": false,
+        "partialOperationalSideEffectsPossible": false,
+        "rawChildOutputStored": false,
+        "rawInputStored": false,
+        "reason": "coordination_quiet_requested",
+        "results": [],
+        "schema": "logos-engine.lot5c.bounded-locked-command.v2",
+        "sitePublicationPerformed": false,
+        "startedAt": "2026-11-11T19:41:38.443263+00:00",
+        "status": "failed",
+        "toolSessionBinding": "external_root_record_required",
+        "toolSessionId": null,
+        "wrapperPid": 30
+      },
+      "testObservation": {}
+    },
+    {
+      "name": "changed_helper_fingerprint",
+      "passed": true,
+      "durationSeconds": 0.058271,
+      "checks": [
+        {
+          "name": "expected_exit_code",
+          "passed": true
+        },
+        {
+          "name": "expected_terminal_status",
+          "passed": true
+        },
+        {
+          "name": "expected_terminal_reason",
+          "passed": true
+        },
+        {
+          "name": "cleanup_complete",
+          "passed": true
+        },
+        {
+          "name": "no_dummy_credential_in_console_or_receipt",
+          "passed": true
+        },
+        {
+          "name": "tool_session_id_not_fabricated",
+          "passed": true
+        },
+        {
+          "name": "child_spawn_matches_expectation",
+          "passed": true
+        },
+        {
+          "name": "lock_acquired_matches_expectation",
+          "passed": true
+        },
+        {
+          "name": "no_shared_lock_during_input",
+          "passed": true
+        },
+        {
+          "name": "lock_free_after_terminal",
+          "passed": true
+        }
+      ],
+      "receipt": {
+        "automaticRetry": false,
+        "childOutputBytes": {
+          "stderr": 0,
+          "stdout": 0
+        },
+        "childStarted": false,
+        "cleanup": {
+          "childStarted": false,
+          "complete": true,
+          "reapedDescendants": 0,
+          "signals": []
+        },
+        "durationSeconds": 0.001298,
+        "exitCode": 1,
+        "finishedAt": "2026-11-11T19:41:38.500944+00:00",
+        "helper": "temporary-stand-in",
+        "initialCoordination": [
+          {
+            "lane": "lot5c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot6b",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot8a",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot10c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          }
+        ],
+        "inputBytesRead": 138,
+        "inputCompletedAt": "2026-11-11T19:41:38.500790+00:00",
+        "inputEchoDisabled": true,
+        "limits": {
+          "handshakeSeconds": 0.4,
+          "inputBytes": 65536,
+          "inputSeconds": 1.0,
+          "killGraceSeconds": 1.5,
+          "outputBytes": 1048576,
+          "termGraceSeconds": 0.15,
+          "workSeconds": 1.5
+        },
+        "lockAcquired": true,
+        "lockAcquiredAt": "2026-11-11T19:41:38.500871+00:00",
+        "lockDescriptor": 3,
+        "lockDescriptorInheritable": false,
+        "lockReleasedAt": "2026-11-11T19:41:38.500932+00:00",
+        "partialOperationalSideEffectsPossible": false,
+        "postLockCoordination": [
+          {
+            "lane": "lot5c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot6b",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot8a",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot10c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          }
+        ],
+        "preLockCoordination": [
+          {
+            "lane": "lot5c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot6b",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot8a",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot10c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          }
+        ],
+        "rawChildOutputStored": false,
+        "rawInputStored": false,
+        "reason": "helper_fingerprint_changed",
+        "results": [],
+        "schema": "logos-engine.lot5c.bounded-locked-command.v2",
+        "sitePublicationPerformed": false,
+        "startedAt": "2026-11-11T19:41:38.499652+00:00",
+        "status": "failed",
+        "toolSessionBinding": "external_root_record_required",
+        "toolSessionId": null,
+        "wrapperPid": 31
+      },
+      "testObservation": {}
+    },
+    {
+      "name": "new_quiet_during_child_work",
+      "passed": true,
+      "durationSeconds": 0.604363,
+      "checks": [
+        {
+          "name": "expected_exit_code",
+          "passed": true
+        },
+        {
+          "name": "expected_terminal_status",
+          "passed": true
+        },
+        {
+          "name": "expected_terminal_reason",
+          "passed": true
+        },
+        {
+          "name": "cleanup_complete",
+          "passed": true
+        },
+        {
+          "name": "no_dummy_credential_in_console_or_receipt",
+          "passed": true
+        },
+        {
+          "name": "tool_session_id_not_fabricated",
+          "passed": true
+        },
+        {
+          "name": "child_spawn_matches_expectation",
+          "passed": true
+        },
+        {
+          "name": "lock_acquired_matches_expectation",
+          "passed": true
+        },
+        {
+          "name": "no_shared_lock_during_input",
+          "passed": true
+        },
+        {
+          "name": "child_tty_echo_disabled",
+          "passed": true
+        },
+        {
+          "name": "lock_descriptor_not_inherited",
+          "passed": true
+        },
+        {
+          "name": "leader_terminal",
+          "passed": true
+        },
+        {
+          "name": "lock_free_after_terminal",
+          "passed": true
+        }
+      ],
+      "receipt": {
+        "automaticRetry": false,
+        "childCloseFds": true,
+        "childExitCode": -15,
+        "childHandshakeAt": "2026-11-11T19:41:38.579661+00:00",
+        "childInputDeliveredAt": "2026-11-11T19:41:38.579742+00:00",
+        "childOutputBytes": {
+          "stderr": 54,
+          "stdout": 0
+        },
+        "childPid": 33,
+        "childProcessGroup": 33,
+        "childPtyEchoDisabled": true,
+        "childStarted": true,
+        "childStartedAt": "2026-11-11T19:41:38.555579+00:00",
+        "cleanup": {
+          "childStarted": true,
+          "complete": true,
+          "leaderExitCode": -15,
+          "processGroup": 33,
+          "reapedDescendants": 0,
+          "signals": [
+            "SIGTERM"
+          ]
+        },
+        "dependencies": [],
+        "durationSeconds": 0.551701,
+        "exitCode": 75,
+        "finishedAt": "2026-11-11T19:41:39.105602+00:00",
+        "helper": "temporary-stand-in",
+        "helperFingerprint": {
+          "bytes": 2647,
+          "file": "fake_helper.py",
+          "sha256": "0c2983fd2c32afde978a89ebdec58bc6ecbe0f582ad2a126f437ff3d524ae2cc"
+        },
+        "initialCoordination": [
+          {
+            "lane": "lot5c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot6b",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot8a",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot10c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          }
+        ],
+        "inputBytesRead": 138,
+        "inputCompletedAt": "2026-11-11T19:41:38.554661+00:00",
+        "inputEchoDisabled": true,
+        "limits": {
+          "handshakeSeconds": 0.4,
+          "inputBytes": 65536,
+          "inputSeconds": 1.0,
+          "killGraceSeconds": 1.5,
+          "outputBytes": 1048576,
+          "termGraceSeconds": 0.15,
+          "workSeconds": 1.5
+        },
+        "lockAcquired": true,
+        "lockAcquiredAt": "2026-11-11T19:41:38.554735+00:00",
+        "lockDescriptor": 3,
+        "lockDescriptorInheritable": false,
+        "lockReleasedAt": "2026-11-11T19:41:39.105560+00:00",
+        "partialOperationalSideEffectsPossible": true,
+        "postLockCoordination": [
+          {
+            "lane": "lot5c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot6b",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot8a",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot10c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          }
+        ],
+        "preLockCoordination": [
+          {
+            "lane": "lot5c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot6b",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot8a",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          },
+          {
+            "lane": "lot10c",
+            "quietRequested": false,
+            "statusSha256": "74e2f37d657530ee50bd46a782f63f399ebef3a1a2ae29a11b601be9b17d247b"
+          }
+        ],
+        "rawChildOutputStored": false,
+        "rawInputStored": false,
+        "reason": "coordination_quiet_requested",
+        "results": [],
+        "schema": "logos-engine.lot5c.bounded-locked-command.v2",
+        "sitePublicationPerformed": false,
+        "startedAt": "2026-11-11T19:41:38.553908+00:00",
+        "status": "failed",
+        "toolSessionBinding": "external_root_record_required",
+        "toolSessionId": null,
+        "wrapperPid": 32
+      },
+      "testObservation": {
+        "leader": 33,
+        "group": 33,
+        "echoOff": true,
+        "lockFdAbsent": true
+      }
+    }
+  ],
+  "finishedAt": "2026-11-11T19:41:39.118670+00:00",
+  "plannedCases": 15,
+  "completedCases": 15,
+  "passedChecks": 184,
+  "totalChecks": 184
+}

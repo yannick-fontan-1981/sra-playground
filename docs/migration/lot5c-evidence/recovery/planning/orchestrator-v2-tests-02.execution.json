@@ -1,0 +1,49 @@
+{
+  "schema": "logos-engine.lot5c-orchestration-temporary-tests.v1",
+  "status": "passed",
+  "startedAt": "2026-11-11T19:59:20.608278+00:00",
+  "finishedAt": "2026-11-11T19:59:28.627883+00:00",
+  "casesRun": 13,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "sourceBefore": [
+    {
+      "path": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/planning/orchestrate-cost-recovery-02.py",
+      "bytes": 22791,
+      "sha256": "747b4ecf6d42b89ffc474b9a35ab87ec2c3e85898f1a824a309964df7318cf99"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/planning/cost-process-control-v2.py",
+      "bytes": 8499,
+      "sha256": "7e5fa20cdc5590cb28fdfbda24a9f493ec3e24534b9866fa366221a1a3a5a24c"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/planning/test-orchestrate-cost-recovery-02.py",
+      "bytes": 14675,
+      "sha256": "1c16c2fa8e189ed1facfc9234cec8585b1c27cd12fdf8809b794608569635dbc"
+    }
+  ],
+  "sourceAfter": [
+    {
+      "path": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/planning/orchestrate-cost-recovery-02.py",
+      "bytes": 22791,
+      "sha256": "747b4ecf6d42b89ffc474b9a35ab87ec2c3e85898f1a824a309964df7318cf99"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/planning/cost-process-control-v2.py",
+      "bytes": 8499,
+      "sha256": "7e5fa20cdc5590cb28fdfbda24a9f493ec3e24534b9866fa366221a1a3a5a24c"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/planning/test-orchestrate-cost-recovery-02.py",
+      "bytes": 14675,
+      "sha256": "1c16c2fa8e189ed1facfc9234cec8585b1c27cd12fdf8809b794608569635dbc"
+    }
+  ],
+  "inputsUnchanged": true,
+  "onlyTemporaryMutexAndStatuses": true,
+  "actualCostExecuted": false,
+  "nativeTestsExecuted": false,
+  "runnerOutput": "test_active_window_uses_its_separate_deadline (__main__.Cases.test_active_window_uses_its_separate_deadline) ... ok\ntest_child_timeout_cleans_descendant_and_shared_lock (__main__.Cases.test_child_timeout_cleans_descendant_and_shared_lock) ... ok\ntest_cleanup_error_still_checks_registry_and_never_claims_idle (__main__.Cases.test_cleanup_error_still_checks_registry_and_never_claims_idle) ... ok\ntest_foreign_controller_lease_refused (__main__.Cases.test_foreign_controller_lease_refused) ... ok\ntest_fresh_raw_acks_then_controller_refusal_release (__main__.Cases.test_fresh_raw_acks_then_controller_refusal_release) ... ok\ntest_malformed_review_counts_and_duplicate_subjects_refused (__main__.Cases.test_malformed_review_counts_and_duplicate_subjects_refused) ... ok\ntest_monotonic_expiry_when_wall_clock_stops (__main__.Cases.test_monotonic_expiry_when_wall_clock_stops) ... ok\ntest_old_incomplete_future_ack_refused (__main__.Cases.test_old_incomplete_future_ack_refused) ... ok\ntest_signal_between_spawn_and_assignment_is_cleaned (__main__.Cases.test_signal_between_spawn_and_assignment_is_cleaned) ... ok\ntest_signal_during_readiness_releases_and_closes (__main__.Cases.test_signal_during_readiness_releases_and_closes) ... ok\ntest_started_receipt_write_error_still_cleans (__main__.Cases.test_started_receipt_write_error_still_cleans) ... ok\ntest_terminal_receipt_failure_cannot_keep_quiet (__main__.Cases.test_terminal_receipt_failure_cannot_keep_quiet) ... ok\ntest_timeout_releases_and_one_cycle_only (__main__.Cases.test_timeout_releases_and_one_cycle_only) ... ok\n\n----------------------------------------------------------------------\nRan 13 tests in 8.019s\n\nOK\n"
+}

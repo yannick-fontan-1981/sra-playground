@@ -1,0 +1,56 @@
+{
+  "schema": "logos-engine.lot5c-own-cost-quiet-closure.v1",
+  "status": "all_own_processes_and_workers_idle",
+  "requestId": "lot5c-cost-a33a5f88-available-03",
+  "recordedAt": "2026-11-11T21:48:14.654366+00:00",
+  "ownTrackedComputeEnded": true,
+  "activeCommand": null,
+  "noQueuedCommands": true,
+  "previewStopped": true,
+  "browserTabClosed": true,
+  "workers": [
+    {
+      "agent": "lot5_cost_protocol_audit",
+      "observedTerminal": true,
+      "activeCommand": null,
+      "noQueuedCommands": true,
+      "toolsAndReadsStoppedUntilExplicitRelease": true
+    },
+    {
+      "agent": "lot5_scope_preview",
+      "observedTerminal": true,
+      "activeCommand": null,
+      "noQueuedCommands": true,
+      "toolsAndReadsStoppedUntilExplicitRelease": true
+    },
+    {
+      "agent": "lot5_site101_merge_audit",
+      "observedTerminal": true,
+      "activeCommand": null,
+      "noQueuedCommands": true,
+      "toolsAndReadsStoppedUntilExplicitRelease": true
+    }
+  ],
+  "checkpointCommit": "ed983a15f718bd00fac41c867c1b6b9320c7ea95",
+  "checkpointPushedAndVerified": true,
+  "checkpointToolSessionId": 19930,
+  "checkpointToolTerminalExitCode": 0,
+  "evidence": [
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/coordination-v4-independent-review.json",
+      "bytes": 48120,
+      "sha256": "3b84eb0de4abb7e56bbb52d8d9246d7ca45d721341d08eb891989736698fbf52"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/recovery-03/source-checkpoint-v4-preparation-live.json",
+      "bytes": 5687,
+      "sha256": "207afc698e082b8525649242009996bd844badd0bd8d4890254a7c0dde1c1e36"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/recovery-03/source-checkpoint-v4-preparation-terminal.json",
+      "bytes": 499,
+      "sha256": "726a109f8af4e593f9480dfed24663299a4839261d03a85afb1fdfaca6c59b49"
+    }
+  ],
+  "qualification": "All three actual agent completion messages and the real checkpoint tool terminal were observed. No source/Git/native/browser/archive command is left running or queued. Only the single bounded coordinator and its declared readiness/measured ABBA/postprocessing follow. This closure does not assert peer ACKs or EX availability."
+}

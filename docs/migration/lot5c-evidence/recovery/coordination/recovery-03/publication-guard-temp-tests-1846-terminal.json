@@ -1,0 +1,14 @@
+{
+  "schema": "logos-engine.lot5c.tool-session-terminal.v1",
+  "sessionId": 1846,
+  "terminalChunkId": "9ef66d",
+  "exitCode": 0,
+  "recordedAt": "2026-11-11T21:07:14.519570+00:00",
+  "scope": "independent TEMP publication guardian tests",
+  "casesPassed": 10,
+  "checksPassed": 54,
+  "checksTotal": 54,
+  "allOwnedTestProcessesTerminal": true,
+  "productionPublicationMutexAcquired": false,
+  "actualProviderCalls": 0
+}

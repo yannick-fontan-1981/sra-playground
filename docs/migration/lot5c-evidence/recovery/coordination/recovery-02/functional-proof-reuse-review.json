@@ -1,0 +1,38 @@
+{
+  "schema": "logos-engine.lot5c-functional-proof-reuse-review.v1",
+  "recordedAt": "2026-11-11T19:34:14.927200+00:00",
+  "reviewer": "/root/lot5_site101_merge_audit",
+  "reviewLastCommandEndedAt": "2026-11-11T19:31:00.792011+00:00",
+  "reviewExitCode": 0,
+  "checkpoint": "501198d7638c7a56c3b85d357beb917469899402",
+  "gitWorkingTreeAtReview": "clean at19:29:32UTC, before root added recovery02 evidence",
+  "frozenBaseCommit": "805b30297dc1b715dbfd9f1197a9a8ba7b361b90",
+  "declaredFrozenPathsComparedByGit": 867,
+  "changedFrozenPaths": 0,
+  "sourceScopeCompared": [
+    "src",
+    "tests",
+    "scripts",
+    "migration",
+    "package.json",
+    "package-lock.json",
+    "tsconfig.json"
+  ],
+  "changedSourceScopePaths": 0,
+  "nativeFiles": 318,
+  "nativeDigest": "a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57",
+  "formalTestFiles": 138,
+  "wholeModuleExclusions": 4,
+  "regressionCases": 11,
+  "checksPerCase": 17,
+  "regressionExecutionInputCount": 10,
+  "historicalReadiness": {
+    "bytes": 581225,
+    "sha256": "bf1caef4f9824367aad9564c9cffa3683137b07f6e74af753d67f52b9e52ff90",
+    "unchanged": true,
+    "newWindowAuthorization": false
+  },
+  "qualification": "Reuses previously terminal functional results because their declared inputs are unchanged. No functional test, replay, build, live game or cost was executed by this review. Reviewer compared exact tracked paths and retained manifest identities; did not independently rehash all native source bytes. A new final readiness must verify current actual inputs and fresh coordination.",
+  "existingReviewsApplyOnlyToOldToolBytes": true,
+  "newCoordinationSourceReviewRequiredBeforeNewQuietRequest": true
+}

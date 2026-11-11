@@ -1,0 +1,293 @@
+{
+  "schema": "logos-engine.lot5c-available03-terminal-independent-review.v1",
+  "status": "passed_terminal_documentary_review",
+  "recordedAt": "2026-11-11T22:02:23.665511+00:00",
+  "requestId": "lot5c-cost-a33a5f88-available-03",
+  "reviewer": "lot5_site101_merge_audit",
+  "subjects": [
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-final-03/request.json",
+      "bytes": 2911,
+      "sha256": "1e259327e21b563f46fce9b3359f4d997474e5c2fff0066a6ffebc2b6ee6d0e3"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-final-03/attempt-sentinel.json",
+      "bytes": 352,
+      "sha256": "7cca6d0e1c8088ef47ea0aa6e92d33bb2da22c703121a821331f4f9cd64327c2"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-final-03/attempt-result.json",
+      "bytes": 808,
+      "sha256": "637298173ed6354ee130e2d336b3363a8ef03803dcf2c2f9169078c2ca360294"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/recovery-03/available03-orchestrator-handle.json",
+      "bytes": 629,
+      "sha256": "6dc624e2b056950e447850eb75179157d0020c350de5e99a21a78110394f8ca5"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/recovery-03/available03-orchestrator-terminal.json",
+      "bytes": 1222,
+      "sha256": "c52b86c5b76f03a957977fbfcbc7067642fcc8685105533537eaf93d48a618dc"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/recovery-03/available03-release-policy-clarification-status.json",
+      "bytes": 20252,
+      "sha256": "141b38cf1b4853266ebb085cc9219e23ab5c87944cf102b64ad1dcc42756a337"
+    }
+  ],
+  "checks": [
+    {
+      "id": "exact_receipts_unchanged",
+      "passed": true,
+      "detail": "Five terminal request/attempt/tool receipts were rechecked byte for byte before this write."
+    },
+    {
+      "id": "single_exact_request",
+      "passed": true,
+      "detail": "Every receipt identifies lot5c-cost-a33a5f88-available-03."
+    },
+    {
+      "id": "one_cycle_no_automatic_retry",
+      "passed": true,
+      "detail": "The exhausted attempt is not retried or renewed."
+    },
+    {
+      "id": "deadline_exactly_600_seconds",
+      "passed": true,
+      "detail": "The declared availability interval is exactly600 seconds."
+    },
+    {
+      "id": "actual_tool_terminal",
+      "passed": true,
+      "detail": "The actual session is71059, terminal exit124/chunk64cb3e; no PID interpretation is used."
+    },
+    {
+      "id": "terminal_output_matches_result",
+      "passed": true,
+      "detail": "The actual terminal output equals the persisted attempt-result JSON."
+    },
+    {
+      "id": "expiration_before_fresh_acks",
+      "passed": true,
+      "detail": "The terminal cause is missing fresh ACKs, not a measured cost failure or EX refusal."
+    },
+    {
+      "id": "cleanup_confirmed",
+      "passed": true,
+      "detail": "Terminal orchestration and its tool observation confirm cleanup."
+    },
+    {
+      "id": "no_cost_acceptance_in_result",
+      "passed": true,
+      "detail": "The result asserts neither a sample window nor cost acceptance."
+    },
+    {
+      "id": "all_three_acks_missing_in_observed_metadata",
+      "passed": true,
+      "detail": "No valid exact-request ACK within the expired interval is present in the named metadata observed during this review; the full mutable status history was not reconstructed."
+    },
+    {
+      "id": "own_release_exact",
+      "passed": true,
+      "detail": "Current status explicitly releases the exact request at21:58:17.652553UTC."
+    },
+    {
+      "id": "official_flags_inactive",
+      "passed": true,
+      "detail": "The authoritative current flags report no official measurement and no owned performance lock."
+    },
+    {
+      "id": "no_cost_or_publication_promotion",
+      "passed": true,
+      "detail": "Unmeasured/unaccepted status is retained; false and null are both non-acceptance representations, and no candidate publication is asserted."
+    },
+    {
+      "id": "no_readiness_window_lease_controller_or_registry",
+      "passed": true,
+      "detail": "All eight named readiness04/window/isolation/lease/controller/measurement-release/registry paths are absent."
+    },
+    {
+      "id": "performance_lock_same_identity",
+      "passed": true,
+      "detail": "Only metadata was read; no mutex opening, acquisition, replacement or deletion occurred."
+    },
+    {
+      "id": "publication_lock_same_identity",
+      "passed": true,
+      "detail": "Only metadata was read; no mutex opening, acquisition, replacement or deletion occurred."
+    },
+    {
+      "id": "immutable_clarification_snapshot_matches",
+      "passed": true,
+      "detail": "The immutable new clarification snapshot equals the final own-status observation."
+    },
+    {
+      "id": "review_scope_only",
+      "passed": true,
+      "detail": "No source execution, tests, game, benchmark, provider, Git, /proc, production EX, new ACK or new cycle was performed; only this new receipt is written."
+    }
+  ],
+  "checksPassed": 18,
+  "checksTotal": 18,
+  "unresolvedFindings": [],
+  "terminalFacts": {
+    "actualSessionId": 71059,
+    "exitCode": 124,
+    "chunkId": "64cb3e",
+    "failureReason": "availability_deadline_before_fresh_acks",
+    "requestedAt": "2026-11-11T21:48:17.650081+00:00",
+    "availabilityDeadline": "2026-11-11T21:58:17.650081+00:00",
+    "releasedAt": "2026-11-11T21:58:17.652553+00:00",
+    "finishedAt": "2026-11-11T21:58:17.657556+00:00",
+    "releaseAfterDeadlineSeconds": 0.002472,
+    "cleanupConfirmed": true,
+    "missingFreshAckLanesObserved": [
+      "lot6b",
+      "lot8a",
+      "lot10c"
+    ],
+    "exclusiveAttemptsInThisAttempt": 0,
+    "officialSamplesInThisAttempt": 0,
+    "readiness04Created": false,
+    "controllerLaunchedAccordingToRetainedEvidence": false,
+    "automaticRetry": false,
+    "newCycleCreated": false,
+    "costAcceptanceAsserted": false,
+    "publicationAsserted": false
+  },
+  "artifactAbsence": {
+    "docs/migration/lot5c-evidence/recovery/performance-integrated-04/readiness.json": true,
+    "docs/migration/lot5c-evidence/recovery/performance-integrated-04/window.json": true,
+    "docs/migration/lot5c-evidence/recovery/coordination/cost-final-03/isolation.json": true,
+    "docs/migration/lot5c-evidence/recovery/coordination/cost-final-03/window-lease.json": true,
+    "docs/migration/lot5c-evidence/recovery/coordination/cost-final-03/controller-execution.json": true,
+    "docs/migration/lot5c-evidence/recovery/coordination/cost-final-03/lock-window.json": true,
+    "docs/migration/lot5c-evidence/recovery/coordination/cost-final-03/measurement-release.json": true,
+    "/workspace/shared/sra-coordination/lot5c-available-03-active-children.json": true
+  },
+  "lockIdentities": {
+    "performance.lock": {
+      "path": "/workspace/shared/sra-coordination/performance.lock",
+      "device": 27,
+      "inode": 1971854,
+      "isRegularFile": true,
+      "isSymlink": false
+    },
+    "publication.lock": {
+      "path": "/workspace/shared/sra-coordination/publication.lock",
+      "device": 27,
+      "inode": 1971855,
+      "isRegularFile": true,
+      "isSymlink": false
+    }
+  },
+  "namedStatusObservations": {
+    "lot5c": {
+      "fingerprint": {
+        "path": "/workspace/shared/sra-coordination/lot5c-status.json",
+        "bytes": 20252,
+        "sha256": "141b38cf1b4853266ebb085cc9219e23ab5c87944cf102b64ad1dcc42756a337"
+      },
+      "updatedAt": "2026-11-11T22:00:16.823579+00:00",
+      "officialPerformanceActive": false,
+      "quietRequested": false,
+      "quietRequestId": "lot5c-cost-a33a5f88-available-03",
+      "quietAcknowledged": false,
+      "quietAcknowledgedAt": "2026-11-11T17:51:23.840576+00:00",
+      "activeCommand": "Only terminal documentation, independent release review and source checkpoint without global lock. No active quiet, cost or publication.",
+      "allOwnSubagentsIdle": false,
+      "noQueuedCommands": true
+    },
+    "lot6b": {
+      "fingerprint": {
+        "path": "/workspace/shared/sra-coordination/lot6b-status.json",
+        "bytes": 16197,
+        "sha256": "e5eeb5c15e6e3c1ecbad3db351936613c83d3855d74530cb9ed4d240eaa30e39"
+      },
+      "updatedAt": "2026-11-11T21:47:54.252341+00:00",
+      "officialPerformanceActive": false,
+      "quietRequested": false,
+      "quietRequestId": null,
+      "quietAcknowledged": false,
+      "quietAcknowledgedAt": null,
+      "activeCommand": "New user continuation: read-only review of 6B final-cost dependencies and prospective6C observed_rigid_cargo transfer; no SH, official window, game or publication.",
+      "allOwnSubagentsIdle": false,
+      "noQueuedCommands": true,
+      "validExactAckWithinExpiredInterval": false
+    },
+    "lot8a": {
+      "fingerprint": {
+        "path": "/workspace/shared/sra-coordination/lot8a-status.json",
+        "bytes": 18744,
+        "sha256": "420fb751eb8ee2661725229cb0904205b809163a3b54ad7e40c7de585083be4e"
+      },
+      "updatedAt": "2026-11-11T22:01:26.670783+00:00",
+      "officialPerformanceActive": false,
+      "quietRequested": false,
+      "quietRequestId": "lot5c-cost-a33a5f88-final-01",
+      "quietAcknowledged": false,
+      "quietAcknowledgedAt": "2026-11-11T18:35:44.230663+00:00",
+      "activeCommand": null,
+      "allOwnSubagentsIdle": true,
+      "noQueuedCommands": true,
+      "validExactAckWithinExpiredInterval": false
+    },
+    "lot10c": {
+      "fingerprint": {
+        "path": "/workspace/shared/sra-coordination/lot10c-status.json",
+        "bytes": 5097,
+        "sha256": "47102e88170033d5c675e58cd9706902c34f40bd63c9cbd10dcdd904ea9e0ee3"
+      },
+      "updatedAt": "2026-11-11T21:58:15.222076+00:00",
+      "officialPerformanceActive": false,
+      "quietRequested": false,
+      "quietRequestId": null,
+      "quietAcknowledged": false,
+      "quietAcknowledgedAt": null,
+      "activeCommand": null,
+      "allOwnSubagentsIdle": true,
+      "noQueuedCommands": true,
+      "validExactAckWithinExpiredInterval": false
+    }
+  },
+  "documentaryCorrection": {
+    "initialOwnStatusFingerprint": {
+      "path": "/workspace/shared/sra-coordination/lot5c-status.json",
+      "bytes": 19923,
+      "sha256": "e207d8e4eec7232ebc87b437ab46ad86995ff86a0e7615fb94e4299f508c665e"
+    },
+    "initialFinding": "Legacy quiet_scope still extended through comparisons and next_step still announced cycle03; explicit release flags were already correct.",
+    "finalSnapshot": {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/recovery-03/available03-release-policy-clarification-status.json",
+      "bytes": 20252,
+      "sha256": "141b38cf1b4853266ebb085cc9219e23ab5c87944cf102b64ad1dcc42756a337"
+    },
+    "finalQuietScope": "No current quiet request. Under the latest user instruction, ordinary development, functional tests, commits and pushes take no global mutex. Any future official measurement alone requires fresh all-worker ACKs and short EX through terminal ABBA/final integrity and sealed observations. Explicit release precedes comparisons, review, transport and rendering; actual publication uses its separate bounded guardian.",
+    "finalNextStep": "A future measurement needs actual contemporaneous availability and fresh exact ACKs from6B,8A,10C and their workers, then fresh readiness and one real EX acquisition. Do not restart pauses automatically or reuse abandoned ACK/readiness. Cost must pass strict per-game complete-session +10% rule before publication0.63; publication order5C,6B,8A,10C retained.",
+    "finalNextBoundedStep": "Finish release documentation and independent source checkpoint without a global lock; no additional cost cycle in this recovery.",
+    "olderEvidenceEditedByReviewer": false
+  },
+  "reviewInvocationIncident": {
+    "kind": "overly_narrow_nullable_flag_assertion",
+    "initialExitCode": 1,
+    "initialChunkId": "318371",
+    "description": "The first receipt writer required official_cost_accepted:null exactly. The final status uses a non-acceptance value; the corrected check accepts only null or false, never true.",
+    "actualFinalValue": false,
+    "priorWriteOccurred": false,
+    "productionExecutionOccurred": false
+  },
+  "limits": [
+    "The current named metadata and terminal attempt establish missing fresh ACKs; no full status-history journal was decoded.",
+    "Zero EX/controller/sample conclusions are scoped to this attempt and corroborated by its terminal cause and absent expected artifacts, not to activity of other lanes.",
+    "Unchanged inode identity does not establish present lock availability or identify any historical holder. No process was inspected, signaled or closed.",
+    "Shared status fingerprints are dated observations and must not serve as immutable future readiness inputs. The clarification snapshot is separately pinned.",
+    "No readiness, cost acceptance or publication is asserted. A future attempt is not authorized or initiated by this review."
+  ],
+  "allPreviousEvidenceUnmodified": true,
+  "testsExecuted": 0,
+  "productionExclusiveAttempts": 0,
+  "globalMutexUsed": false,
+  "allOwnCommandsTerminalAfterWrite": true,
+  "noQueuedCommandsAfterWrite": true
+}

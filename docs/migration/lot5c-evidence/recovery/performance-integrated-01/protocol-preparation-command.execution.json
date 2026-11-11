@@ -1,0 +1,45 @@
+{
+  "schema": "logos-engine.lot5c.command-execution.v1",
+  "status": "passed",
+  "startedAt": "2026-11-11T17:20:03.800112+00:00",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "docs/migration/lot5c-evidence/prepare-cost-protocol.py",
+    "--finalize",
+    "--baseline-checkout",
+    "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout",
+    "--baseline-site-version",
+    "102",
+    "--candidate-version",
+    "0.63.0",
+    "--output-directory",
+    "docs/migration/lot5c-evidence/recovery/performance-integrated-01",
+    "--candidate-source-directory",
+    "docs/migration/lot5c-evidence/recovery/integrated-final-01",
+    "--baseline-manifest",
+    "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/source-manifest.json",
+    "--owner-cost-qualification"
+  ],
+  "cwd": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout",
+  "timeoutSeconds": 180.0,
+  "wrapper": {
+    "path": "docs/migration/lot5c-evidence/run-evidence-command.py",
+    "bytes": 3904,
+    "sha256": "99b16a35eac1f12acb3063e43d303ffc020b3339109e22eff1f807d1e87e47db"
+  },
+  "finishedAt": "2026-11-11T17:20:04.171900+00:00",
+  "durationSeconds": 0.36999211500005913,
+  "exitCode": 0,
+  "timedOut": false,
+  "log": {
+    "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/protocol-preparation-command.log",
+    "bytes": 429,
+    "sha256": "98272521d2984efbf0f8ba8dc521ea00575b9c4edeb6118453fa6016be751b15"
+  },
+  "compressedLog": {
+    "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/protocol-preparation-command.log.gz",
+    "bytes": 330,
+    "sha256": "a11989e686f9511afab24f5dae61f25463df143639a9a9400e81583b4d78ca6b"
+  }
+}

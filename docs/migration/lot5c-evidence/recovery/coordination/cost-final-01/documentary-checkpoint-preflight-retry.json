@@ -1,0 +1,12 @@
+{
+  "schema": "logos-engine.lot5c-documentary-checkpoint-preflight-retry.v1",
+  "recordedAt": "2026-11-11T19:13:58.223103+00:00",
+  "initialToolOutputChunk": "dd3f29",
+  "initialExitCode": 1,
+  "cause": "The local reader stripped leading whitespace from git porcelain output, corrupting the first status-column offset. Its allowlist assertion stopped before add/commit or any native action.",
+  "correction": "Preserve raw porcelain whitespace for path extraction; keep all file allowlists and source identities unchanged.",
+  "initialIndexChanged": false,
+  "initialCommitCreated": false,
+  "nativeChanged": false,
+  "costExecuted": false
+}

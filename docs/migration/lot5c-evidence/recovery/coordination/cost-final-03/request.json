@@ -1,0 +1,51 @@
+{
+  "schema": "logos-engine.coordinated-cost-request.v1",
+  "requestId": "lot5c-cost-a33a5f88-available-03",
+  "requestedAt": "2026-11-11T21:48:17.650081+00:00",
+  "availabilityDeadline": "2026-11-11T21:58:17.650081+00:00",
+  "availabilityMaximumSeconds": 600,
+  "activeWindowMaximumSeconds": 5400,
+  "coordinationAmendment": {
+    "path": "docs/migration/lot5c-evidence/recovery/planning/coordination-v4-policy-amendment.json",
+    "bytes": 6074,
+    "sha256": "37299e179c186904f5bf42e2c564df39cc6bbbb4c54e628c02c70e47e0b94704"
+  },
+  "lane": "lot5c",
+  "performanceDirectory": "docs/migration/lot5c-evidence/recovery/performance-integrated-04",
+  "nativeDigests": {
+    "baseline": "74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12",
+    "candidate": "a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57"
+  },
+  "requiredLanes": [
+    "lot6b",
+    "lot8a",
+    "lot10c"
+  ],
+  "maximumExclusiveAttempts": 1,
+  "automaticRetry": false,
+  "allowCurrentUsefulCommandsToFinishNormally": true,
+  "automaticTimeBasedRelease": true,
+  "expiryRule": "This request expires at availabilityDeadline unless the exact window-lease.json records actual EX before it. After acquisition, explicit measurement-release.json ends EX and quiet immediately after terminal ABBA/final integrity, before comparisons/review/transport/rendering. The fixed windowDeadline remains the whole-workflow maximum, including ordinary postprocessing. No extension or automatic new cycle.",
+  "windowLeasePath": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/coordination/cost-final-03/window-lease.json",
+  "measurementReleasePath": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/coordination/cost-final-03/measurement-release.json",
+  "scope": "Finish current useful commands normally, then root and all workers full-tool-idle: no queued source/Git/hash/archive/test/build/replay/game/browser/cost work. Only tiny named coordination metadata through terminal ABBA and final integrity. Explicit release precedes all ordinary comparisons/review/transport/rendering. Fresh exact ACK after actual closure; no cancellation requested.",
+  "requestedAckFields": {
+    "quiet_acknowledged": true,
+    "quiet_request_id": "lot5c-cost-a33a5f88-available-03",
+    "active_command": null,
+    "heavy_execution_active": false,
+    "all_own_subagents_idle": true,
+    "no_queued_commands": true
+  },
+  "functionalProofsReusedBecauseInputsUnchanged": true,
+  "currentFunctionalProofs": {
+    "testsPassed": 5339,
+    "testFiles": 138,
+    "commonChecksPassed": 6818,
+    "recordedCasesPassed": 11,
+    "recordedChecksPassed": 187,
+    "recordedActions": 390,
+    "projectChecksPassed": 5
+  },
+  "qualification": "One new bounded cycle. Old01 ACKs/readiness never authorize this attempt. No official sample has started."
+}

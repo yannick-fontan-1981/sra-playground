@@ -1,0 +1,423 @@
+{
+  "schema": "logos-engine.lot5c-cost-readiness-finalizer-source-review.v1",
+  "status": "passed_source_review",
+  "recordedAt": "2026-11-11T18:24:14.677641+00:00",
+  "reviewer": "independent agent /root/lot5_site101_merge_audit",
+  "finalizer": {
+    "path": "docs/migration/lot5c-evidence/recovery/planning/finalize-readiness-5c.py",
+    "bytes": 51023,
+    "sha256": "715b8d1b6a92c2cee3ef9c5049201298468ee6bee55f7ceb2556bf927d98c55e"
+  },
+  "controllerSourceReview": {
+    "path": "docs/migration/lot5c-evidence/recovery/planning/coordinated-cost-controller-review.json",
+    "bytes": 14690,
+    "sha256": "36c20fd902531396299b44493d6cd72215029591f5ad12ff7f41f907b12cbc4f"
+  },
+  "activePerformanceDirectory": "docs/migration/lot5c-evidence/recovery/performance-integrated-02",
+  "requestId": "lot5c-cost-a33a5f88-final-01",
+  "inputs": [
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/finalize-readiness-5c.py",
+      "bytes": 51023,
+      "sha256": "715b8d1b6a92c2cee3ef9c5049201298468ee6bee55f7ceb2556bf927d98c55e"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/coordinated-cost-controller-review.json",
+      "bytes": 14690,
+      "sha256": "36c20fd902531396299b44493d6cd72215029591f5ad12ff7f41f907b12cbc4f"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/run-coordinated-cost-5c.py",
+      "bytes": 16154,
+      "sha256": "0967fd35e3727c9e7c3354d330665bc601eb8c88fb49af3eeee35879eb2b7e58"
+    },
+    {
+      "path": "scripts/run-native-cost-window.py",
+      "bytes": 8933,
+      "sha256": "0ec9c69c859d0555e963643010d2254caee8c63d1c9a98ec07cd9af0ce0ce613"
+    },
+    {
+      "path": "scripts/review-native-global-cost-window.py",
+      "bytes": 22204,
+      "sha256": "9ab2ecd9d6ddf234e96332421a6e55937a766495c1a20dd223f4441d6b516940"
+    },
+    {
+      "path": "scripts/verify-native-delivery.py",
+      "bytes": 26494,
+      "sha256": "ca36a235e5da8aa8abd963aaa6a282d90217ed58a721bfdbba361527dd48409a"
+    },
+    {
+      "path": "scripts/run-released-public-regressions-streamlog.py",
+      "bytes": 15626,
+      "sha256": "b05b0e113c93696be45408e4c10549f2a379c22330efbddfcaa0f09cd51309b9"
+    },
+    {
+      "path": "scripts/run-released-public-regressions.py",
+      "bytes": 14089,
+      "sha256": "7988863afd2b171f31987434bb1176370be2e3afd49dead1edcdc59770d81909"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/consolidate-owner-costs.mjs",
+      "bytes": 61449,
+      "sha256": "69957840c81d50e3d7b68dedf4293b5aa9c4072f882fe1fc858f5e03815330b7"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/review-owner-costs.py",
+      "bytes": 81151,
+      "sha256": "452ccf903970230f5855458cd35f2f3f30224307026663ebd865b494986371df"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/write-cost-results.py",
+      "bytes": 50139,
+      "sha256": "16bf3b946dd2d30e582fec814f08a5abf75e8d8200bd3525ee1e466fa85e72a9"
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/finalize-cost-readiness.py",
+      "bytes": 53396,
+      "sha256": "eaf76dd08542c47c3a56eaaafeb1b851e0d018e3882cf3755c16dd974026c90a"
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/record-cost-log-transport.py",
+      "bytes": 3879,
+      "sha256": "df0039243dbfaa89351973e7c0d58b8edc0c8e28dd8895f10fe5ff1af272f05f"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/validation/delta-tests-run.json",
+      "bytes": 139954,
+      "sha256": "ce85bdbe5c2f15848a016c2168872676ec442dfc9e6d918205e6d21188fde62a"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/validation/checks-run.json",
+      "bytes": 86303,
+      "sha256": "f55a87ecbd4c363e77bdd967638402f5dde9695df0408bcb77d98c8a25673067"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/validation-contract.json",
+      "bytes": 10771,
+      "sha256": "4a57ed369cc5e314a7a4f6babf61e51aa7b70e171c2b2a3586d296b79f8013ff"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/test-scope.json",
+      "bytes": 7401,
+      "sha256": "91530b6fdfcfdb89db815b610d37e7988866aac610d4669c8c6f572822f0bdc1"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/common/common-final-01/summary.json",
+      "bytes": 9900,
+      "sha256": "972ca6380cbb6cb605cac36d3bc6e8c18d60834a3935d5ec1f7c16a669c6b72a"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/browser-qa/summary.json",
+      "bytes": 3044,
+      "sha256": "8d106adc160048899bbf90a17d85c891b8517ecc778347e36ab31ab331d81d80"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/independent-readiness-input-review.json",
+      "bytes": 36942,
+      "sha256": "17118655a5e4803b2e965de673ef6b055ca965c21617ed5520e31fb44a39e70c"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/static-preflight.json",
+      "bytes": 19919,
+      "sha256": "2bed63fe86914300d5933c98ed65cc0e222df308f44336836414603a5cd0e46b"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/owner-growth-contract.json",
+      "bytes": 6009,
+      "sha256": "08dc46007afbb0b54f219fc519f4bb7b8239a59c9263a2714aa60a61d0537c5f"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/readiness-plan.json",
+      "bytes": 32411,
+      "sha256": "58dc8468744429925925d1907f1775f7467c32f6a844461dee8c55134bafea28"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/regressions-preparation/retry-driver-launch.execution.json",
+      "bytes": 2032,
+      "sha256": "ccc074daa32e448807a8985520887024064fff93f6e53e0328bb1f0136d80267"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/regressions/regression-summary.json",
+      "bytes": 227733,
+      "sha256": "632ed89d8d25722605a430bf53a29a8b682d9212081b351e6a8ed98ca41b21d7"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/recorded-regression-cases.json",
+      "bytes": 15556,
+      "sha256": "18684d23bf7122a9f88f85d8bdb6f557144f892e7f09f2ef7630cbb5a7e6bc33"
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01/readiness.json",
+      "bytes": 360928,
+      "sha256": "a4944fe4ab87c43fef7443aa2a0b66f85c5c66ec10406abae19d66e5d007f0f9"
+    }
+  ],
+  "checkedCount": 38,
+  "checks": [
+    {
+      "name": "exact_final_source_and_ast",
+      "passed": true,
+      "detail": "51,023-byte final source, SHA715b8d1b6a92c2cee3ef9c5049201298468ee6bee55f7ceb2556bf927d98c55e; AST parsed without execution."
+    },
+    {
+      "name": "repository_root_and_actual_source_pair",
+      "passed": true,
+      "detail": "Correct planning-directory root; actual Site102/0.62/310 baseline and frozen0.63/a33/318 candidate are explicit and checked."
+    },
+    {
+      "name": "reviewed_controller_binding",
+      "passed": true,
+      "detail": "The finalizer requires the exact independently reviewed controller and retains its review fingerprint."
+    },
+    {
+      "name": "lossless_transport_recipe_binding",
+      "passed": true,
+      "detail": "The lossless log-transport source is explicitly pinned."
+    },
+    {
+      "name": "actual_final_test_schema_and_population",
+      "passed": true,
+      "detail": "Actual final receipt has5339/5339 tests,138 files and no failure/cancellation/skip/todo; finalizer also requires the actual TAP summary."
+    },
+    {
+      "name": "exact_frozen_test_scope",
+      "passed": true,
+      "detail": "The four final lists,138 unique test files, frozen archive membership and four whole-module exclusions are compared."
+    },
+    {
+      "name": "actual_five_gate_commands",
+      "passed": true,
+      "detail": "Actual gate commands match the finalizer, including the current build recipe and migration-audit invocation."
+    },
+    {
+      "name": "formal_generator_and_frozen_verifier",
+      "passed": true,
+      "detail": "The generator is pinned, imported verifier bytes must belong to the867-file frozen archive, and completed test/build receipts plus current inventories/production worker are checked."
+    },
+    {
+      "name": "semantic_project_audits",
+      "passed": true,
+      "detail": "Actual gate log JSON is decoded within128KiB; connected65/76 and fullV6Parity=false remain explicit, as do no migration failures and complete=false."
+    },
+    {
+      "name": "actual_terminal_observed_launch_schema",
+      "passed": true,
+      "detail": "Actual session21691 launch observation is terminal, exit0, and binds the unchanged final summary; no outer command wrapper is invented."
+    },
+    {
+      "name": "actual_replay_cli_compatible",
+      "passed": true,
+      "detail": "The finalizer exact command comparison matches the real released-driver invocation."
+    },
+    {
+      "name": "actual_11_by_17_terminal_population",
+      "passed": true,
+      "detail": "All11 final replay rows and187 retained comparisons are now complete;390 recorded actions are observed, with no new live campaign."
+    },
+    {
+      "name": "actual_replay_required_fields",
+      "passed": true,
+      "detail": "Every actual finished row provides the exact terminal/source/child-exit/postprocessing fields required by the new reader."
+    },
+    {
+      "name": "replay_exact_receipt_and_comparator_checks",
+      "passed": true,
+      "detail": "Code requires each summary row to equal its actual execution receipt,17 ordered literal comparator labels, equal projection hashes, baseline/report/trace fingerprints and actual candidate digest."
+    },
+    {
+      "name": "replay_sequential_interval_and_native_inputs",
+      "passed": true,
+      "detail": "Code requires every row to remain within the observed launch, sequential after prior postprocessing, with frozen native/13 execution inputs and1536MiB/2400s limits."
+    },
+    {
+      "name": "historical_replay_scope_and_reservations",
+      "passed": true,
+      "detail": "The eleven inherited historical baselines retain their pins; KATA provenance is preserved and no replay-wide passive Binding coverage is invented."
+    },
+    {
+      "name": "actual_common_schema_population",
+      "passed": true,
+      "detail": "Actual common proof is6818 checks,7 native tests and8 scenarios bound to the current final suite."
+    },
+    {
+      "name": "common_original_independence_and_completion",
+      "passed": true,
+      "detail": "Code checks all four original modes, every recorded comparison item, cold original exports,1786-source inventory invariance, no native oracle input, zero exceptions and all8 terminal commands."
+    },
+    {
+      "name": "browser_real_scope_and_retained_overrun",
+      "passed": true,
+      "detail": "Actual CASC UI-only evidence remains0 actions/0 solved levels;270.393167s total and90.393167s overrun are copied and qualified, not changed into gameplay proof."
+    },
+    {
+      "name": "browser_produced_build_binding",
+      "passed": true,
+      "detail": "Code binds74 staged distribution files to the recorded production build and rechecks distribution membership; closed tab, stopped preview and application-error scope remain required."
+    },
+    {
+      "name": "closed_case_and_parity_reservations",
+      "passed": true,
+      "detail": "Closed-case text and whole-module exclusions are copied from the frozen validation contract; fullStrategyRouterParity remainsfalse."
+    },
+    {
+      "name": "inherited_hpdl_partial_reserve",
+      "passed": true,
+      "detail": "The inherited actual10B HPDL record is retained aspartial with no clock reset; its evidence is fingerprinted."
+    },
+    {
+      "name": "actual_static_76_and_review_84",
+      "passed": true,
+      "detail": "Actual02 schemas and values match the finalizer76/84 requirements; these inputs assert no readiness or isolation."
+    },
+    {
+      "name": "active02_prior01_retention",
+      "passed": true,
+      "detail": "Code requires explicit prior-only supersession and39 exact prior artifacts, preserves the failed static receipt, and rechecks membership before/after."
+    },
+    {
+      "name": "structural_owner_domain_four_paths",
+      "passed": true,
+      "detail": "The closed source domain, actual02 qualification,64 structural and29 equivalence checks, dependency repair and four allowed metrics remain bound."
+    },
+    {
+      "name": "consumer_required_readiness_fields",
+      "passed": true,
+      "detail": "Output contains measurementAuthorized=true only after validation, pendingRequirements=[], candidate nativeSourceDigest and exact ownerCostContract; authorization is cost-only, with publication/game authorizationfalse."
+    },
+    {
+      "name": "consumer_required_input_fingerprints",
+      "passed": true,
+      "detail": "Exact owner contract/static/declaration/domainReview/sourceEvidencePaths/consolidator/reviewer records are retained in inputs and rechecked."
+    },
+    {
+      "name": "baseline_external_input_separation",
+      "passed": true,
+      "detail": "Evidence snapshots separate absolute baseline paths into watchedExternalInputs; this matches the renderer confinement and SHA/size checks."
+    },
+    {
+      "name": "consumer_predeclaration_chronology",
+      "passed": true,
+      "detail": "Policy<=declaration<=owner contract<=static<=readiness is checked; consumers require readiness before the later official window."
+    },
+    {
+      "name": "isolation_exact_window_and_active_lanes",
+      "passed": true,
+      "detail": "Fresh retained cooperative payloads must name the exact request/directory/digests/declaration and show all three active lanes and their workers fully idle."
+    },
+    {
+      "name": "isolation_after_completed_evidence",
+      "passed": true,
+      "detail": "Each ACK timestamp must follow latest completed functional evidence and precede the bound isolation receipt; own compute-ended, preview-stopped and no NODE_OPTIONS override are required."
+    },
+    {
+      "name": "exclusive_lock_claim_not_fabricated",
+      "passed": true,
+      "detail": "Reader explicitly leaves current ACK freshness and nonblocking EX ownership to the reviewed outer controller at actual window opening."
+    },
+    {
+      "name": "immutable_input_and_membership_recheck",
+      "passed": true,
+      "detail": "All retained bytes, native membership, test/build membership and prior39-file membership are rechecked before exclusive readiness output."
+    },
+    {
+      "name": "unmeasured_absence_guard",
+      "passed": true,
+      "detail": "Both candidate and baseline readiness/cost/aggregate/report/cohort outputs must be absent before and after verification; there is no force/skip option."
+    },
+    {
+      "name": "bounded_receipt_parsing_and_no_raw_decode",
+      "passed": true,
+      "detail": "Source inspection: bounded JSON and test/audit text logs only; graph/game archives are streamed for fingerprints. Frozen verification helper functions read metadata/maps/archive source, not raw game journals."
+    },
+    {
+      "name": "exclusive_success_and_retained_failure",
+      "passed": true,
+      "detail": "Success uses exclusive readiness creation; caught errors retain a new exclusive failure receipt with measurementAuthorized=false and do not replace evidence."
+    },
+    {
+      "name": "review_executed_no_finalizer_or_readiness",
+      "passed": true,
+      "detail": "Only AST/source/metadata review occurred; the finalizer and imported proof helpers were not executed by this reviewer."
+    },
+    {
+      "name": "reviewed_final_source_stable",
+      "passed": true,
+      "detail": "Final source SHA remained715b8d1b… throughout this review."
+    }
+  ],
+  "resolvedFindings": [],
+  "unresolvedFindings": [],
+  "actualCompletedEvidenceObserved": {
+    "tests": 5339,
+    "testFiles": 138,
+    "projectGates": 5,
+    "commonChecks": 6818,
+    "nativeCommonTests": 7,
+    "commonScenarios": 8,
+    "replayCases": 11,
+    "replayChecks": 187,
+    "recordedReplayActions": 390,
+    "replayTerminalObservedAt": "2026-11-11T18:21:07.551785+00:00",
+    "staticPreflightChecks": 76,
+    "independentPreparationReviewChecks": 84
+  },
+  "reservations": {
+    "closedCases": {
+      "LKEY": "Four entire eager-loading test modules excluded; no action/replay/oracle/payload analysis/browser. Closed budget preserved.",
+      "WEAV": "No new live or reset. Historical public regression only; level6 remains open and exhausted budget preserved.",
+      "CGWL": "No new live; historical missing raw evidence is not regenerated as fresh proof.",
+      "HPDL": "Excluded from declared recorded regressions; partial published10B proof remains partial, closed clock unchanged."
+    },
+    "excludedWholeModules": [
+      "tests/v6-ranked-workshop-reference.test.ts",
+      "tests/v6-ranked-workshop-kernel.test.ts",
+      "tests/v6-symbol-transactions-kernel.test.ts",
+      "tests/v6-framed-transfer-reference.test.ts"
+    ],
+    "recordedReplayBindingQualification": "The retained historical recorder has no dedicated Binding prefix capture. These eleven replays do not assert passive Binding acquisition. Fresh common seven-test/eight-scenario proof and original comparisons establish the separately declared Binding coverage.",
+    "inheritedReplayBaselineQualification": "Ten historical rows retain exact baseline and public-trace pins; none is rebased to a newer replay output. KATA remains the eleventh inherited row with its original 0.60 fresh-current-native-self-consistency provenance label, serving as a fixed inherited baseline for 5C. This does not claim that the 10B ten-case fresh campaign included KATA or that a new self-comparison or live contribution was performed. The 187 checks are planned checks, not executed successes.",
+    "browserAgentActions": 0,
+    "browserAgentLevelsSolved": 0,
+    "browserTotalWallSeconds": 270.393167,
+    "browserWallOverrunSeconds": 90.393167,
+    "inheritedHPDLStatus": "partial",
+    "inheritedHPDLClockReset": false,
+    "fullStrategyRouterParity": false
+  },
+  "preMeasurementConditions": [
+    "The reviewed finalizer still must actually complete all file/receipt validations successfully against these unchanged inputs.",
+    "Fresh exact6B/8A/10C cooperative ACKs, an explicit own-closure receipt and the bound isolation receipt must exist before finalization.",
+    "The reviewed controller must acquire nonblocking EX and recheck actual current ACKs before opening A1; quiet continues through arithmetic review until explicit release."
+  ],
+  "scopeLimits": [
+    "This is a source/AST and bounded actual-receipt compatibility review. The finalizer was not imported or executed and no readiness.json was created.",
+    "The now-complete11-case driver observation and summary schemas were checked; raw replay reports, raw game journals and raw graph archives were not decoded.",
+    "The source review checks the finalizer validation logic and its real consumer contracts. It does not itself grant functional readiness, isolation, cost acceptance, game success or publication.",
+    "Historical10B validation patterns were inspected without adapting or editing their source. The reviewed finalizer is an explicitly new pre-window tool outside the frozen867-member archive."
+  ],
+  "finalizerExecuted": false,
+  "nativeRuntimeExecuted": false,
+  "testsExecuted": false,
+  "replaysExecuted": false,
+  "measurementExecuted": false,
+  "readinessCreated": false,
+  "readinessAsserted": false,
+  "isolationAsserted": false,
+  "existingInputsEdited": false,
+  "inputsUnchanged": true,
+  "commandsTerminal": true,
+  "quietChecks": [
+    {
+      "path": "/workspace/shared/sra-coordination/lot10b-status.json",
+      "quietRequested": false,
+      "requestId": "lot10b-cost-74143a-final-01",
+      "checkedAt": "2026-11-11T18:24:14.639235+00:00"
+    },
+    {
+      "path": "/workspace/shared/sra-coordination/lot10c-status.json",
+      "quietRequested": false,
+      "requestId": "lot10c-recr01-bb7d62-functional",
+      "checkedAt": "2026-11-11T18:24:14.639485+00:00"
+    }
+  ]
+}

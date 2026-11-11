@@ -1,0 +1,161 @@
+--- docs/migration/lot5c-evidence/recovery/planning/run-coordinated-cost-5c-v3.py
++++ docs/migration/lot5c-evidence/recovery/planning/run-coordinated-cost-5c-v4.py
+@@ -35,6 +35,7 @@
+ 
+ 
+ HELPER = Path(__file__).with_name('cost-process-control-v2.py')
++AMENDMENT = Path(__file__).with_name('coordination-v4-policy-amendment.json')
+ REGISTRY_PATH = SHARED / 'lot5c-available-03-active-children.json'
+ EXPECTED_LOCK_IDENTITY = (27, 1971854)
+ 
+@@ -130,19 +131,24 @@
+         'qualification': 'Four complete original logs remain unchanged. Deterministic gzip with mtime0 is decompressed and compared byte for byte. No sample, diagnostic or log is removed, filtered or truncated.'})
+ 
+ 
+-def release_quiet(reason, cleanup_complete):
+-    """Public own-lane release, independent of optional receipt/journal success."""
++def release_quiet(reason, cleanup_complete, ordinary_postprocessing=False):
++    """Release official isolation; declare ongoing ordinary analysis truthfully."""
+     at = stamp()
+     status_path = SHARED / 'lot5c-status.json'
+     value = read(status_path)
+     require(value.get('quiet_request_id') == REQUEST, 'Cannot release a different request')
++    first = value.get('quiet_released_at') if (value.get('quiet_requested') is False
++        and value.get('released_request_id') == REQUEST) else at
+     value.update(updated_at=at, quiet_requested=False, quiet_released=True,
+-        quiet_released_at=at, released_request_id=REQUEST, performance_lock_held=False,
+-        performance_completed=True, active_command=None if cleanup_complete else 'cleanup_failed_requires_owner',
+-        heavy_execution_active=not cleanup_complete, no_queued_commands=True,
+-        quiet_release_reason=reason, quiet_release_automatic=True)
++        quiet_released_at=first, released_request_id=REQUEST, quiet_acknowledged=False,
++        performance_lock_held=False, performance_completed=True, official_performance_active=False,
++        active_command=('Ordinary cost comparisons, arithmetic review, transport and rendering; no global mutex.'
++            if ordinary_postprocessing and cleanup_complete else None if cleanup_complete else 'cleanup_failed_requires_owner'),
++        heavy_execution_active=ordinary_postprocessing or not cleanup_complete,
++        no_queued_commands=not ordinary_postprocessing, quiet_release_reason=reason, quiet_release_automatic=True,
++        phase='cost_ordinary_postprocessing' if ordinary_postprocessing else 'cost_controller_terminal')
+     replace(status_path, value)
+-    return at
++    return first
+ 
+ 
+ def main(argv=None):
+@@ -153,6 +159,7 @@
+     require(args.execute, 'Explicit --execute required; no automatic production invocation')
+     ctl = lifecycle()
+     lock_fd, locked, observations, registry = None, False, None, None
++    measurement_released, window_end = False, None
+     controller_path = COORD / 'lock-window.json'
+     observations_path = COORD / 'quiet-observations.jsonl'
+     receipt = {'schema': 'logos-engine.lot5c-coordinated-cost-controller.v2',
+@@ -160,8 +167,9 @@
+         'lockMode': 'exclusive_nonblocking', 'exclusiveAttempts': 0,
+         'availabilityMaximumSeconds': 600, 'windowMaximumSeconds': 5400,
+         'childMaximumSeconds': 3600, 'executions': [], 'observations': 0,
++        'coordinationObservationScope': 'official_ABBA_through_terminal_integrity_only',
+         'allObservedLanePayloadsStableExceptTimestamp': True,
+-        'qualification': 'Named cooperative status observations only. The benchmark, ABBA order, populations, tools and acceptance rules are unchanged. All registered child groups are cleaned before unlock and automatic quiet release.'}
++        'qualification': 'Named cooperative status observations only. The benchmark, ABBA order, populations, tools and acceptance rules are unchanged. Official ABBA and terminal integrity remain isolated; EX and quiet end before ordinary postprocessing. Owned groups remain bounded and cleaned through the whole workflow.'}
+     handlers = {sig: signal.signal(sig, interrupted) for sig in
+                 (signal.SIGINT, signal.SIGTERM, signal.SIGHUP, signal.SIGALRM)}
+     journal_created = False
+@@ -202,7 +210,9 @@
+                 for data in iter(lambda: stream.read(1 << 20), b''):
+                     size += len(data); h.update(data)
+             require((size, h.hexdigest()) == (item['bytes'], item['sha256']), 'External readiness input changed')
+-        for path in (isolation_path, Path(__file__), HELPER):
++        require(readiness['coordinationAmendment'] == fingerprint(AMENDMENT)
++                and request['coordinationAmendment'] == fingerprint(AMENDMENT), 'Exact reviewed coordination amendment required')
++        for path in (isolation_path, Path(__file__), HELPER, AMENDMENT):
+             require(fingerprint(path) in readiness['inputs'], 'Readiness must bind reviewed input: ' + str(path))
+         declared = read(PERF / 'declaration.json')
+         require(readiness['nativeSourceDigest'] == declared['candidate']['nativeDigest'], 'Candidate readiness mismatch')
+@@ -216,8 +226,10 @@
+         observations = observations_path.open('x')
+ 
+         def observe(phase):
+-            if locked:
++            if window_end is not None:
+                 require(time.monotonic() < window_end, 'Global5400s cost/analysis deadline exceeded')
++            if measurement_released:
++                return  # Sealed observation bytes and historical ACK snapshots never change after release.
+             rows = []
+             for lane in LANES:
+                 path = SHARED / (lane + '-status.json')
+@@ -273,7 +285,8 @@
+         own = read(SHARED / 'lot5c-status.json')
+         require(own.get('quiet_request_id') == REQUEST and own.get('quiet_requested') is True, 'Own request was withdrawn')
+         own.update(updated_at=stamp(), performance_lock_held=True, performance_started=True,
+-            performance_completed=False, active_command='Declared ABBA and complete cost analysis under EX',
++            performance_completed=False, official_performance_active=True,
++            active_command='Declared official ABBA and final integrity under EX',
+             heavy_execution_active=True, quiet_window_deadline=receipt['windowDeadline'])
+         replace(SHARED / 'lot5c-status.json', own)
+         ctl.enable_subreaper()
+@@ -316,6 +329,47 @@
+         window = read(PERF / 'window.json')
+         require(window['status'] == 'passed' and window['finalIntegrity'] == 'passed', 'Incomplete actual window')
+         require(window['plannedOrder'] == [r['label'] for r in window['executions']] == ['A1', 'B1', 'B2', 'A2'], 'Order mismatch')
++        require(all(row['status'] == 'passed' and row['exitCode'] == 0 for row in window['executions']),
++                'Every actual ABBA series must be terminal and passed before release')
++        require(not registry.groups, 'Official command descendants are not terminal')
++        observe('after_abba_terminal_and_final_integrity')
++        final_snapshots = []
++        for lane in LANES:
++            raw = (SHARED / (lane + '-status.json')).read_bytes()
++            require(len(raw) <= 100_000 and normalized(json.loads(raw)) == baseline_payloads[lane],
++                    'Final measured-interval acknowledgment changed: ' + lane)
++            target = COORD / (lane + '-after-measurement.json')
++            with target.open('xb') as stream:
++                stream.write(raw); stream.flush(); os.fsync(stream.fileno())
++            final_snapshots.append({'lane': lane, 'observedAt': stamp(), 'evidence': fingerprint(target)})
++        observations.close(); observations = None
++        receipt['coordinationObservations'] = fingerprint(observations_path)
++        receipt['measurementWindow'] = fingerprint(PERF / 'window.json')
++        receipt['measurementCompletedAt'] = stamp()
++        try:
++            fcntl.flock(lock_fd, fcntl.LOCK_UN)
++            receipt['lockReleasedAt'] = stamp()
++        finally:
++            os.close(lock_fd)
++            receipt['descriptorClosedAt'] = stamp()
++            receipt.setdefault('lockReleasedAt', receipt['descriptorClosedAt'])
++            lock_fd, locked = None, False
++        receipt['quietReleasedAt'] = release_quiet('abba_terminal_integrity_passed', True, ordinary_postprocessing=True)
++        receipt['automaticQuietReleasePerformed'] = True
++        measurement_released = True
++        receipt['status'] = 'ordinary_postprocessing_without_global_mutex'
++        exclusive(COORD / 'measurement-release.json', {
++            'schema': 'logos-engine.lot5c-measurement-release.v1',
++            'status': 'abba_terminal_integrity_passed_exclusive_and_quiet_released',
++            'requestId': REQUEST, 'recordedAt': stamp(), 'coordinationAmendment': fingerprint(AMENDMENT),
++            'window': receipt['measurementWindow'], 'readiness': fingerprint(readiness_path),
++            'officialAbbaExecution': receipt['executions'][-1], 'finalMeasuredIntervalAcks': final_snapshots,
++            'sealedQuietObservations': receipt['coordinationObservations'],
++            'lockAcquiredAt': receipt['lockAcquiredAt'], 'lockReleasedAt': receipt['lockReleasedAt'],
++            'descriptorClosedAt': receipt['descriptorClosedAt'], 'quietReleasedAt': receipt['quietReleasedAt'],
++            'globalMutexRequiredForRemainingAnalysis': False, 'remainingAnalysisStillActive': True,
++            'qualification': 'Only the official ABBA interval through terminal cleanup and final integrity was isolated. Quiet observations and final ACK snapshots are now sealed. Comparisons, retained strict refusal, arithmetic review, transport and rendering follow as ordinary work; this receipt asserts no cost acceptance.'})
++        replace(controller_path, receipt)
+         for index in (1, 2):
+             paths = [PERF / 'comparison-policy.json', PERF / f'cohort{index}/baseline.json',
+                      PERF / f'cohort{index}/after.json', PERF / f'cohort{index}/comparison.json']
+@@ -349,8 +403,6 @@
+         require(run('cost-report', ['python', '-B', 'docs/migration/lot5c-evidence/write-cost-results.py',
+                     '--output-directory', relative(PERF)])['exitCode'] == 0, 'Cost report failed')
+         observe('after_all_reviews')
+-        for lane in LANES:
+-            exclusive(COORD / (lane + '-after-review.json'), read(SHARED / (lane + '-status.json')))
+         receipt.update(status='completed_pending_root_acceptance', completedAt=stamp(),
+                        window=fingerprint(PERF / 'window.json'), review=fingerprint(PERF / 'owner-growth-review.json'),
+                        comparison=fingerprint(PERF / 'owner-growth-comparison.json'),
+@@ -371,7 +423,8 @@
+                     except BaseException as error:
+                         cleanup_complete = False; errors.append('owned-group cleanup: ' + str(error))
+         finally:
+-            lock_released_at, descriptor_closed_at = None, None
++            lock_released_at = receipt.get('lockReleasedAt')
++            descriptor_closed_at = receipt.get('descriptorClosedAt')
+             try:
+                 if lock_fd is not None and locked:
+                     fcntl.flock(lock_fd, fcntl.LOCK_UN)

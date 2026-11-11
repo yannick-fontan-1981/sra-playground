@@ -1,0 +1,23 @@
+{
+  "observedAt": "2026-11-11T17:43:36.040Z",
+  "state": "Browser tab: 5, Title: \"SRA Playground · CASC — Symbolic Reasoning Agent\", URL: \"http://127.0.0.1:4173/?game=CASC&level=1\".\nThe following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.\nRemoved element IDs: 45, 158-178\n~0 AXWebArea SRA Playground · CASC — Symbolic Reasoning Agent, URL: 127.0.0.1:4173/?game=CASC&level=1\n~\t\t2 link Description: Skip to the games, Value: 127.0.0.1:4173/?game=CASC&level=1#game-select\n~\t\t\t\t8 link Description: PLAYGROUND, Value: 127.0.0.1:4173/?game=CASC&level=1#playground\n+\t\t\t\t\t\t197 text Ready\n~\t\t\t\t\t\t154 tab (selectable, settable, boolean) Manual, Value: 0, ID: manual-tab\n~\t\t\t\t\t\t155 tab (selected, settable, boolean) SRA Agent Native TS, Value: 1, ID: agent-tab\n+\t\t\t\t\t198 container Description: CASC game board. Use the arrow keys, Space, or click to interact., ID: game-canvas\n+\t\t\t\t\t\t199 text Your browser must support canvas to play.\n+\t\t\t\t\t200 container Description: SRA Agent Native TS, ID: agent-panel\n+\t\t\t\t\t\t201 heading Solve with SRA., Value: 3\n+\t\t\t\t\t\t\t202 text Solve with SRA.\n+\t\t\t\t\t\t203 text Ready to run from level 1.\n+\t\t\t\t\t\t204 button Run to next level, ID: agent-run\n+\t\t\t\t\t\t205 button Run 16 actions, ID: agent-batch\n+\t\t\t\t\t\t206 button One action, ID: agent-step\n+\t\t\t\t\t\t207 button (disabled) Pause, ID: agent-pause\n+\t\t\t\t\t\t208 container Agent session\n+\t\t\t\t\t\t\t209 text 0\n+\t\t\t\t\t\t\t210 text actions\n+\t\t\t\t\t\t\t211 text 0\n+\t\t\t\t\t\t\t212 text levels solved\n+\t\t\t\t\t\t\t213 text 0\n+\t\t\t\t\t\t\t214 text completed plans\n+\t\t\t\t\t\t215 button New reasoning session, ID: agent-new-session\n+\t\t\t\t\t\t216 button Return to Manual, ID: return-manual\n+\t\t\t\t\t217 container Description: Agent reasoning, ID: agent-inspection\n+\t\t\t\t\t\t218 button (collapsed) Inspect reasoning Open to display the current plan, trace and memory, Secondary Actions: Expand\n+\t\t\t\t\t\t\t219 AXListMarker ▸ \n+\t\t\t\t\t\t\t220 text Inspect reasoning\n+\t\t\t\t\t\t\t221 text Open to display the current plan, trace and memory\nThe focused UI element is 155 tab (selected, settable, boolean) SRA Agent Native TS, Value: 1, ID: agent-tab",
+  "consoleWarningsAndErrors": [
+    {
+      "level": "error",
+      "message": "Error sending browser metadata to extension: Object",
+      "timestamp": "2026-11-11T17:42:17.093Z",
+      "url": "chrome-extension://kcdongibgcplmaagnmgpjhpjgmmaaaaa/content-script.bundle.js"
+    },
+    {
+      "level": "error",
+      "message": "Error sending browser metadata to extension: Object",
+      "timestamp": "2026-11-11T17:42:37.687Z",
+      "url": "chrome-extension://kcdongibgcplmaagnmgpjhpjgmmaaaaa/content-script.bundle.js"
+    }
+  ],
+  "url": "http://127.0.0.1:4173/?game=CASC&level=1",
+  "title": "SRA Playground · CASC — Symbolic Reasoning Agent",
+  "agentActions": 0,
+  "agentLevelsSolved": 0,
+  "newGameCampaign": false
+}

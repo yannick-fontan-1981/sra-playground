@@ -1,0 +1,62 @@
+{
+  "schema": "logos-engine.lot5c-coordination-recovery-plan.v1",
+  "status": "preparation_only_no_quiet_request",
+  "recordedAt": "2026-11-11T19:40:55.706521+00:00",
+  "sourceCheckpoint": "501198d7638c7a56c3b85d357beb917469899402",
+  "candidateNativeVersion": "0.63.0",
+  "candidateNativeDigest": "a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57",
+  "baselinePublishedNativeVersion": "0.62.0",
+  "baselinePublishedNativeSite": 102,
+  "baselinePublishedDocumentarySite": 103,
+  "frozenFunctionalInputsUnchanged": 867,
+  "reusePreviousFunctionalProofs": true,
+  "nativeOrBenchmarkPolicyChangesAuthorizedByThisPlan": false,
+  "targetedRecovery": {
+    "receipt": "targeted-recovery.json",
+    "holderIdentified": false,
+    "oldSessionClosed": false,
+    "searchBudgetSeconds": 180,
+    "elapsedSeconds": 106.57683,
+    "repeatProcScans": false
+  },
+  "hardening": {
+    "inputBeforeSharedLock": true,
+    "inputDeadlineSeconds": 45,
+    "currentCoordinationRecheckedAfterInputAndLock": true,
+    "closeOnExecAndCloseFds": true,
+    "wholeOwnedProcessGroupCleanup": true,
+    "boundedWorkAndSignalCleanup": true,
+    "realExternalSessionIdsRecordedImmediately": true,
+    "liveReceiptsOutsideCheckout": true,
+    "independentTemporaryMutexTestsBeforeProductionUse": true
+  },
+  "futureSingleAttempt": {
+    "requestId": "lot5c-cost-a33a5f88-recovery-02",
+    "requestNotYetIssued": true,
+    "maximumAttempts": 1,
+    "availabilityPhaseMaximumSeconds": 600,
+    "availabilityPhaseIncludes": [
+      "fresh current lane and worker acknowledgments after actual useful command completion",
+      "new isolation",
+      "new readiness",
+      "single nonblocking exclusive acquisition"
+    ],
+    "activeCostAndAnalysisMaximumSeconds": 5400,
+    "eachActiveCostChildMaximumSeconds": 3600,
+    "sameMutexPath": "/workspace/shared/sra-coordination/performance.lock",
+    "neverDeleteOrReplaceMutex": true,
+    "noCancellationOfUsefulPeerCommands": true,
+    "releaseOnDeadlineRefusalErrorInterruption": true,
+    "zeroAutomaticRetry": true,
+    "oldAckOrReadinessReuseForbidden": true,
+    "benchmark": "Existing ABBA, reference inputs, measured/warmup populations and complete-session strict-per-game +10% rule unchanged."
+  },
+  "performance03Preparation": {
+    "original01And02Preserved": true,
+    "newCanonicalReadiness": true,
+    "structuralEvidenceReusedWithNewDocumentaryBinding": true,
+    "specificFixtureAdaptation": "Only cases.path may be rebound from02 to03 where frozen static checker requires path equality; case bytes/hash, forms, captures, attribution and original timestamps stay unchanged. Separate current derivation receipt must enumerate exact semantic differences.",
+    "newNativeCapturesAuthorized": false
+  },
+  "administrationIfStillBlocked": "Use execution-service execution/PTY inventory to identify the exact holder of device27/inode1971854, verify its activity, and close only that identified execution through the supported runtime operation. No guessed session IDs or mutex replacement."
+}

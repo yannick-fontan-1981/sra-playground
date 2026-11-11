@@ -1,0 +1,148 @@
+--- docs/migration/lot5c-evidence/recovery/planning/orchestrate-cost-available-03.py
++++ docs/migration/lot5c-evidence/recovery/planning/orchestrate-cost-available-03-v4.py
+@@ -8,7 +8,6 @@
+ import argparse
+ from contextlib import contextmanager
+ from datetime import datetime, timedelta, timezone
+-import fcntl
+ import hashlib
+ import importlib.util
+ import json
+@@ -28,10 +27,11 @@
+ REQUEST = 'lot5c-cost-a33a5f88-available-03'
+ LANES = ('lot6b', 'lot8a', 'lot10c')
+ OWN = SHARED / 'lot5c-status.json'
+-REVIEW = PLAN / 'coordination-v3-independent-review.json'
++REVIEW = PLAN / 'coordination-v4-independent-review.json'
++AMENDMENT = PLAN / 'coordination-v4-policy-amendment.json'
+ OWN_CLOSURE = BASE / 'coordination/recovery-03/own-preparation-closure.json'
+-FINALIZER = PLAN / 'finalize-readiness-5c-v3.py'
+-CONTROLLER = PLAN / 'run-coordinated-cost-5c-v3.py'
++FINALIZER = PLAN / 'finalize-readiness-5c-v4.py'
++CONTROLLER = PLAN / 'run-coordinated-cost-5c-v4.py'
+ PROCESS_HELPER = PLAN / 'cost-process-control-v2.py'
+ REGISTRY = SHARED / 'lot5c-available-03-active-children.json'
+ AVAILABILITY_SECONDS = 600
+@@ -75,18 +75,28 @@
+         f.write('\n'); f.flush(); os.fsync(f.fileno())
+     os.replace(tmp, p)
+ 
++def official_performance_active(value):
++    explicit = value.get('official_performance_active')
++    if explicit is not None:
++        require(type(explicit) is bool, 'official_performance_active must be boolean or null')
++        return explicit
++    started, released = value.get('performance_started'), value.get('quiet_released')
++    require(started is None or type(started) is bool, 'performance_started must be boolean or null')
++    require(released is None or type(released) is bool, 'quiet_released must be boolean or null')
++    return started is True and released is not True
++
++
++def require_no_foreign_official_performance():
++    for lane in LANES:
++        require(not official_performance_active(read(SHARED / (lane + '-status.json'))),
++                'Foreign official performance is already active: ' + lane)
++
++
+ @contextmanager
+-def shared_lock():
+-    fd = os.open(SHARED / 'performance.lock', os.O_RDWR | os.O_CLOEXEC)
+-    try:
+-        os.set_inheritable(fd, False)
+-        fcntl.flock(fd, fcntl.LOCK_SH | fcntl.LOCK_NB)
+-        yield
+-    finally:
+-        try:
+-            fcntl.flock(fd, fcntl.LOCK_UN)
+-        finally:
+-            os.close(fd)
++def preparation_without_global_mutex():
++    require_no_foreign_official_performance()
++    yield
++    require_no_foreign_official_performance()
+ 
+ _SIGNAL = None
+ _CLEANUP_CONFIRMED = True
+@@ -114,13 +124,13 @@
+     require(not (PERF / 'readiness.json').exists() and not (PERF / 'window.json').exists(), 'Never reuse a readiness or window')
+     require(not (COORD / 'request.json').exists() and not (COORD / 'attempt-sentinel.json').exists(), 'This unique cycle already exists')
+     require(not REGISTRY.exists(), 'A previous process registry exists; never reuse it')
+-    with shared_lock():
++    with preparation_without_global_mutex():
+         review = read(REVIEW)
+-        require(review['schema'] == 'logos-engine.lot5c-coordination-v3-independent-review.v1' and review['status'] == 'passed', 'Independent v2 review required')
++        require(review['schema'] == 'logos-engine.lot5c-coordination-v4-independent-review.v1' and review['status'] == 'passed', 'Independent v4 review required')
+         require(review['checksPassed'] == review['checksTotal'] == len(review['checks']) > 0 and all(c['passed'] is True for c in review['checks']), 'Every review check must pass')
+         subjects = {x['path']: x for x in review['subjects']}
+         require(len(subjects) == len(review['subjects']), 'Duplicate review subjects refused')
+-        for p in (Path(__file__), FINALIZER, CONTROLLER, PROCESS_HELPER):
++        for p in (Path(__file__), FINALIZER, CONTROLLER, PROCESS_HELPER, AMENDMENT):
+             require(subjects.get(fp(p)['path']) == fp(p), 'Reviewed coordinator source changed: ' + p.name)
+         for item in review['subjects']:
+             target = (ROOT / item['path']).resolve()
+@@ -132,9 +142,7 @@
+         require(all(w['observedTerminal'] is True and w['activeCommand'] is None and w['noQueuedCommands'] is True for w in closure['workers']) and {w['agent'] for w in closure['workers']} == {'lot5_cost_protocol_audit', 'lot5_scope_preview', 'lot5_site101_merge_audit'}, 'All three own workers must actually be closed')
+         own = read(OWN)
+         require(own.get('all_own_subagents_idle') is True and own.get('no_queued_commands') is True and own.get('quiet_requested') is not True, 'Own current coordination is not closed')
+-        for lane in LANES:
+-            require(read(SHARED / (lane + '-status.json')).get('quiet_requested') is not True, 'Another lane requests quiet')
+-        require(read(PERF / 'static-preflight.json')['status'] == 'static_inputs_checked', 'Fresh preparation03 must pass')
++        require(read(PERF / 'static-preflight.json')['status'] == 'static_inputs_checked', 'Fresh preparation04 must pass')
+     return review, closure
+ 
+ def publish_request():
+@@ -143,13 +151,15 @@
+     request = {'schema': 'logos-engine.coordinated-cost-request.v1', 'requestId': REQUEST,
+         'requestedAt': now.isoformat(), 'availabilityDeadline': deadline.isoformat(),
+         'availabilityMaximumSeconds': AVAILABILITY_SECONDS, 'activeWindowMaximumSeconds': WINDOW_SECONDS,
++        'coordinationAmendment': fp(AMENDMENT),
+         'lane': 'lot5c', 'performanceDirectory': str(PERF.relative_to(ROOT)), 'nativeDigests': DIGESTS,
+         'requiredLanes': list(LANES), 'maximumExclusiveAttempts': 1, 'automaticRetry': False,
+         'allowCurrentUsefulCommandsToFinishNormally': True,
+         'automaticTimeBasedRelease': True,
+-        'expiryRule': 'This request is explicitly released at availabilityDeadline unless the exact window-lease.json records real exclusive acquisition before that deadline. If acquired, its fixed windowDeadline is the maximum quiet lease. No deadline extension or new cycle is automatic.',
++        'expiryRule': 'This request expires at availabilityDeadline unless the exact window-lease.json records actual EX before it. After acquisition, explicit measurement-release.json ends EX and quiet immediately after terminal ABBA/final integrity, before comparisons/review/transport/rendering. The fixed windowDeadline remains the whole-workflow maximum, including ordinary postprocessing. No extension or automatic new cycle.',
+         'windowLeasePath': str(COORD / 'window-lease.json'),
+-        'scope': 'Finish current useful commands normally, then root and all workers full-tool-idle: no queued source/Git/hash/archive/test/build/replay/game/browser/cost work. Only tiny named coordination metadata through ABBA/comparisons/review. Fresh exact ACK after actual closure; no cancellation requested.',
++        'measurementReleasePath': str(COORD / 'measurement-release.json'),
++        'scope': 'Finish current useful commands normally, then root and all workers full-tool-idle: no queued source/Git/hash/archive/test/build/replay/game/browser/cost work. Only tiny named coordination metadata through terminal ABBA and final integrity. Explicit release precedes all ordinary comparisons/review/transport/rendering. Fresh exact ACK after actual closure; no cancellation requested.',
+         'requestedAckFields': {'quiet_acknowledged': True, 'quiet_request_id': REQUEST, 'active_command': None,
+             'heavy_execution_active': False, 'all_own_subagents_idle': True, 'no_queued_commands': True},
+         'functionalProofsReusedBecauseInputsUnchanged': True,
+@@ -164,7 +174,7 @@
+         'quiet_requested_at': request['requestedAt'], 'quiet_availability_deadline': request['availabilityDeadline'],
+         'quiet_active_window_max_seconds': WINDOW_SECONDS, 'quiet_expiry_rule': request['expiryRule'],
+         'active_command': 'Only bounded coordinator metadata wait; actual useful peer commands may finish normally.',
+-        'heavy_execution_active': False, 'performance_started': False, 'all_own_subagents_idle': True,
++        'heavy_execution_active': False, 'performance_started': False, 'official_performance_active': False, 'all_own_subagents_idle': True,
+         'all_own_subagents_compute_idle': True, 'parallel_worker_activity': None, 'no_queued_commands': True})
+     message = ('Fresh one-cycle request ' + REQUEST + '. Finish useful current commands normally, do not cancel them. '
+         + 'ACK only after root/all workers actually close and queues are empty. Availability deadline ' + request['availabilityDeadline']
+@@ -314,9 +324,12 @@
+             'active_command': None if _CLEANUP_CONFIRMED else 'Known coordinator execution cleanup unconfirmed; no idle ACK is authorized.',
+             'heavy_execution_active': False if _CLEANUP_CONFIRMED else None, 'cleanup_confirmed': _CLEANUP_CONFIRMED,
+             'no_queued_commands': True,
++            'official_performance_active': False if _CLEANUP_CONFIRMED else own.get('official_performance_active'),
++            'performance_lock_held': False if _CLEANUP_CONFIRMED else own.get('performance_lock_held'),
++            'performance_completed': True if _CLEANUP_CONFIRMED else own.get('performance_completed'),
+             'phase': 'available03_terminal_' + reason})
+         for lane in LANES:
+-            own['request_to_' + lane] = 'Explicit RELEASE of ' + REQUEST + ' at ' + first_release + '. Reason: ' + reason + '. No automatic retry or new pause. Ordinary work under existing SH mutex may proceed. Publication order remains5C,6B,8A,10C; no publication is asserted by this release.'
++            own['request_to_' + lane] = 'Explicit RELEASE of ' + REQUEST + ' at ' + first_release + '. Reason: ' + reason + '. No automatic retry or new pause. Ordinary development, tests, commits and pushes may proceed without the global mutex. Publication order remains5C,6B,8A,10C; no publication is asserted by this release.'
+         replace(OWN, own)
+     return {'releasedAt': at, 'reason': reason, 'requestId': REQUEST, 'automaticRetry': False}
+ 
+@@ -333,11 +346,11 @@
+         save_new(COORD / 'attempt-sentinel.json', {'requestId': REQUEST, 'createdAt': stamp(), 'maximumCycles': 1, 'orchestrator': fp(Path(__file__))})
+         request = publish_request(); activated = True; check_signal()
+         wait_and_isolate(request, closure)
+-        with shared_lock():
++        with preparation_without_global_mutex():
+             run_child('readiness', [sys.executable, '-B', str(FINALIZER), '--regression-launch-receipt',
+                 str(BASE / 'integrated-final-01/regressions-preparation/retry-driver-launch.execution.json'),
+                 '--isolation-receipt', str(COORD / 'isolation.json')], request)
+-        # The readiness SH descriptor is closed before launching the EX controller.
++        # Preparation/readiness take no global mutex; only the official-measurement controller takes EX.
+         run_child('controller', [sys.executable, '-B', str(CONTROLLER), '--execute', '--availability-deadline', request['availabilityDeadline']], request)
+         result['status'] = 'controller_completed_cost_verdict_must_be_read'; code = 0
+     except BaseException as error:

@@ -1,0 +1,97 @@
+--- docs/migration/lot5c-evidence/recovery/planning/finalize-readiness-5c-v3.py
++++ docs/migration/lot5c-evidence/recovery/planning/finalize-readiness-5c-v4.py
+@@ -10,7 +10,7 @@
+ 
+ The historical 10B finalizer and frozen common delivery verifier supply the
+ validation patterns. This new 5C adapter is outside the 867-member source archive;
+-its own fingerprint and the new external v3 controller/orchestrator and unchanged v2 process helper are bound in readiness.
++its own fingerprint and the new external v4 controller/orchestrator and unchanged v2 process helper are bound in readiness.
+ Historical02 proof remains validated with its original84-check review;04 links the retained03 documents without a new functional run.
+ """
+ from __future__ import annotations
+@@ -39,10 +39,11 @@
+ SOURCE_PRIOR = BASE / 'recovery/performance-integrated-02'
+ OLD = BASE / 'recovery/performance-integrated-01'
+ COMMON = BASE / 'recovery/common/common-final-01'
+-CONTROLLER = BASE / 'recovery/planning/run-coordinated-cost-5c-v3.py'
+-ORCHESTRATOR = BASE / 'recovery/planning/orchestrate-cost-available-03.py'
++CONTROLLER = BASE / 'recovery/planning/run-coordinated-cost-5c-v4.py'
++ORCHESTRATOR = BASE / 'recovery/planning/orchestrate-cost-available-03-v4.py'
+ PROCESS_HELPER = BASE / 'recovery/planning/cost-process-control-v2.py'
+-GLOBAL_REVIEW = BASE / 'recovery/planning/coordination-v3-independent-review.json'
++GLOBAL_REVIEW = BASE / 'recovery/planning/coordination-v4-independent-review.json'
++AMENDMENT = BASE / 'recovery/planning/coordination-v4-policy-amendment.json'
+ COORD = BASE / 'recovery/coordination/cost-final-03'
+ VERIFIER = ROOT / 'scripts/verify-native-delivery.py'
+ BASELINE = Path('/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout')
+@@ -688,6 +689,7 @@
+     require(value['request'] == e.keep(COORD / 'request.json') and value['request'] in value['evidence'],
+             'Isolation must bind the actual new request')
+     request = e.read(COORD / 'request.json')
++    require(request['coordinationAmendment'] == e.keep(AMENDMENT), 'Request must bind the exact coordination amendment')
+     requested, available = instant(request['requestedAt']), instant(request['availabilityDeadline'])
+     require(request['requestId'] == REQUEST and available == requested + timedelta(seconds=600)
+             and latest <= requested <= recorded <= e.deadline < available,
+@@ -736,14 +738,31 @@
+     orchestrator, process_helper = e.keep(ORCHESTRATOR), e.keep(PROCESS_HELPER)
+     controller_review_path = GLOBAL_REVIEW
+     controller_review = e.read(controller_review_path)
+-    require(controller_review['schema'] == 'logos-engine.lot5c-coordination-v3-independent-review.v1'
++    require(controller_review['schema'] == 'logos-engine.lot5c-coordination-v4-independent-review.v1'
+             and controller_review['status'] == 'passed'
+             and controller_review['checksPassed'] == controller_review['checksTotal'] == len(controller_review['checks']) > 0
+             and all(item['passed'] is True for item in controller_review['checks'])
+             and all(item in controller_review['subjects'] for item in (generator, controller, orchestrator, process_helper)),
+-            'Global independent review must pass and pin every exact v3 orchestration source')
++            'Global independent review must pass and pin every exact v4 orchestration source')
+     for record in controller_review['subjects']:
+         e.verify(record)
++    amendment_record = e.keep(AMENDMENT)
++    amendment = e.read(AMENDMENT)
++    require(amendment['schema'] == 'logos-engine.lot5c-coordination-policy-amendment.v4'
++            and amendment['status'] == 'declared_operational_amendment_before_request'
++            and amendment['requestId'] == REQUEST and amendment['performanceDirectory'] == PERF.relative_to(ROOT).as_posix()
++            and amendment['unchangedFrozenProtocol'] == e.keep(PERF / 'protocol.md')
++            and amendment_record in controller_review['subjects']
++            and amendment['ordinaryPreparation'] == {'globalMutexRequired': False,
++                'foreignPendingQuietBlocksPreparation': False, 'foreignOrdinaryWorkBlocksPreparation': False,
++                'foreignPublicationBlocksPreparation': False, 'foreignActiveOfficialPerformanceBlocksPreparation': True}
++            and amendment['ordinaryPostprocessing'] == {'globalMutexRequired': False,
++                'quietAcksRequiredAfterMeasurementRelease': False, 'actualOrdinaryActivityRemainsDeclared': True,
++                'allOriginalCommandsAndInputsPreserved': True, 'allEvidenceAndSampleGuardsPreserved': True}
++            and amendment['noNativeOrBenchmarkChange'] is True and amendment['noAcceptanceCriterionChange'] is True
++            and amendment['frozenProtocolEdited'] is False, 'Reviewed user coordination amendment is required')
++    require(instant(amendment['recordedAt']) <= started, 'Future coordination amendment')
++    e.fingerprints(amendment)
+     coordination_review_at = instant(controller_review['recordedAt'])
+     require(coordination_review_at <= started, 'Future coordination source review')
+     historical = e.keep(ROOT / 'docs/migration/lot10b-evidence/finalize-cost-readiness.py')
+@@ -787,7 +806,7 @@
+     require(all(e.keep(PERF / name) in controller_review['subjects'] for name in
+                 ('coordination-repreparation.json', 'structural-documentary-rebinding.json', 'static-preflight.json')),
+             'Independent coordination review must pin the exact04 documentary/static preparation')
+-    e.recorded(controller_review)
++    e.recorded(controller_review); e.recorded(amendment)
+     inherited = e.read(ROOT / 'docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01/readiness.json')
+     require(inherited['nativeSourceDigest'] == BASELINE_DIGEST and inherited['game']['id'] == 'HPDL'
+             and inherited['game']['status'] == 'partial' and inherited['game']['clockReset'] is False,
+@@ -818,7 +837,7 @@
+         'startedAt': started.isoformat(), 'finalizedAt': finalized.isoformat(), 'measurementAuthorized': True,
+         'authorizationScope': 'cost_measurement_only', 'publicationAuthorized': False, 'gameActionsAuthorized': False,
+         'pendingRequirements': [], 'generator': generator, 'historicalValidationPattern': historical,
+-        'preWindowController': controller, 'controllerSourceReview': e.keep(controller_review_path),
++        'preWindowController': controller, 'controllerSourceReview': e.keep(controller_review_path), 'coordinationAmendment': amendment_record,
+         'losslessLogTransportPattern': transport_pattern, 'preWindowToolsOutsideFrozenArchive': [generator, controller, orchestrator, process_helper],
+         'nativeVersion': '0.63.0', 'nativeSourceDigest': source['digest'], 'baseline': declaration['baseline'], 'candidate': declaration['candidate'],
+         **facts, **replay, 'common': common_proof, 'browser': browser_proof, 'preparationReview': prep_facts,
+@@ -836,7 +855,9 @@
+             'requiredLanes': sorted(LANES), 'actualLockOwnershipObservedByFinalizer': False,
+             'availabilityMaximumSeconds': 600, 'windowMaximumSeconds': 5400, 'childMaximumSeconds': 3600,
+              'exclusiveAcquisitionAttempts': 1, 'automaticRetryPermitted': False,
+-             'quietMustContinueUntilAutomaticTerminalRelease': True},
++             'quietMustContinueThroughOfficialAbbaTerminalIntegrity': True,
++             'exclusiveLockReleasedBeforeOrdinaryPostprocessing': True,
++             'ordinaryPostprocessingRequiresGlobalMutex': False},
+         'inputs': e.snapshot(), 'watchedExternalInputs': e.snapshot(external=True),
+         'qualification': 'All functional readiness claims are checked against terminal retained5C evidence on the actual318-file a33 source and published310-file Site102 baseline. This reader performs only file/receipt verification; no game, replay, test, build, profile or measurement runs. Raw game journals and raw owner graphs are streamed only for fingerprints, never decoded. The supplied cooperative ACKs follow all completed evidence. Actual nonblocking EX ownership and current fresh ACK payloads remain mandatory controller checks at window opening; this reader does not claim to observe the lock. Readiness authorizes cost measurement only, preserves all closed budgets and functional/browser reservations, and asserts no cost acceptance, strict historical work identity, whole original-caller parity or publication.'}
+     write_exclusive(PERF / 'readiness.json', result)

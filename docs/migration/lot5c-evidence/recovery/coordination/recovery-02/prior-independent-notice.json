@@ -1,0 +1,79 @@
+{
+  "schema": "sra.coordination-diagnostic-notice.v1",
+  "from": "independent-user-requested-lock-diagnostic",
+  "for": [
+    "lot5c",
+    "lot6b",
+    "lot8a",
+    "lot10c"
+  ],
+  "observationOnly": true,
+  "observedAt": "2026-11-11T19:17:50.359511+00:00",
+  "relatedRequestId": "lot5c-cost-a33a5f88-final-01",
+  "explicitQuietReleaseAt": "2026-11-11T19:08:34.656015+00:00",
+  "releaseSource": "/workspace/shared/sra-coordination/lot5c-status.json",
+  "currentState": {
+    "lot5c": "Functional work complete; official cost unmeasured; checkpoint verified; no current quiet requested.",
+    "lot6b": "Explicit release observed; ordinary SH validation resumed, attempt03 batch01 active at last read.",
+    "lot8a": "Explicit release observed; ordinary SH source integration resumed.",
+    "lot10c": "Explicit release observed; ordinary SH source composition resumed."
+  },
+  "instantaneousProbes": [
+    {
+      "path": "/workspace/shared/sra-coordination/performance.lock",
+      "device": 27,
+      "inode": 1971854,
+      "mode": "exclusive",
+      "acquired": false,
+      "released": false,
+      "seconds": 0.000093,
+      "error": {
+        "errno": 11,
+        "message": "[Errno 11] Resource temporarily unavailable"
+      }
+    },
+    {
+      "path": "/workspace/shared/sra-coordination/performance.lock",
+      "device": 27,
+      "inode": 1971854,
+      "mode": "shared",
+      "acquired": true,
+      "released": true,
+      "seconds": 0.000004,
+      "error": null
+    },
+    {
+      "path": "/workspace/shared/sra-coordination/publication.lock",
+      "device": 27,
+      "inode": 1971855,
+      "mode": "exclusive",
+      "acquired": true,
+      "released": true,
+      "seconds": 0.000002,
+      "error": null
+    }
+  ],
+  "probeQualification": "Nonblocking acquisitions, immediately released when successful. Ordinary SH work had already resumed, so this later EX refusal alone cannot prove an orphan. The earlier quiet-window blocker receipt is retained as the evidence of unresolved contention after lane ACKs.",
+  "priorQuietWindowBlocker": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/coordination/cost-final-01/lock-blocker-and-quiet-release.json",
+  "holderIdentified": false,
+  "processVisibility": "Fresh executor commands expose only a few command-local processes. No exact dev27/inode1971854 descriptor was visible in root or independent worker inspections. No central execution-session listing tool was found.",
+  "concreteDesignFinding": {
+    "script": "/tmp/sra-lot8a-push-checkpoint.py",
+    "behavior": "Acquires SH before hidden_credential(), whose stdin readline has no deadline. A waiting instance could retain SH indefinitely.",
+    "attribution": "Known push receipts are terminal. This defect does not identify the current holder.",
+    "lostOpeningAttempt": "8A reports a different source-opening attempt with truncated output and no retained session_id/cell_id. Its exact wrapper and owner were not recovered; this remains an unconfirmed lead.",
+    "subsequentFixedAttempt": "/tmp/lot8a-open-source-03.py reads input before SH, applies a45-second input deadline and a90-second helper deadline; attempt3 receipt is terminal. This does not close an earlier lost session."
+  },
+  "actions": {
+    "existingLockFilesUnchanged": true,
+    "processesSignaled": 0,
+    "peerStatusesChanged": false,
+    "testsLaunched": false,
+    "officialMeasurementLaunched": false,
+    "publicationPerformed": false
+  },
+  "nextUsefulAction": "Recover the original outstanding execution handle through its owning runtime/conversation and confirm its terminal closure, or use a supported runtime operation that terminates that exact execution. Once real EX availability returns, request a fresh quiet window and fresh all-worker ACKs before the unchanged official cost protocol.",
+  "doesNotReleaseCurrentOrFutureRequests": true,
+  "doesNotAuthorizeOfficialMeasurementOrPublication": true,
+  "notificationLimitation": "This is an independent diagnostic receipt. Its existence does not imply other conversations have read it or been awakened."
+}

@@ -1,0 +1,23 @@
+{
+  "schema": "logos-engine.lot5c-verbatim-diff-whitespace-qualification.v1",
+  "recordedAt": "2026-11-11T21:22:21.115895+00:00",
+  "initialFullCheck": {
+    "exitCode": 2,
+    "stdout": "docs/migration/lot5c-evidence/recovery/planning/v3-controller-source.diff:16: trailing whitespace.\n+ \ndocs/migration/lot5c-evidence/recovery/planning/v3-controller-source.diff:17: trailing whitespace.\n+ \ndocs/migration/lot5c-evidence/recovery/planning/v3-controller-source.diff:22: trailing whitespace.\n+ \ndocs/migration/lot5c-evidence/recovery/planning/v3-controller-source.diff:23: trailing whitespace.\n+ \ndocs/migration/lot5c-evidence/recovery/planning/v3-controller-source.diff:22: new blank line at EOF.\ndocs/migration/lot5c-evidence/recovery/planning/v3-finalizer-source.diff:4: trailing whitespace.\n+ \ndocs/migration/lot5c-evidence/recovery/planning/v3-finalizer-source.diff:13: trailing whitespace.\n+ \ndocs/migration/lot5c-evidence/recovery/planning/v3-finalizer-source.diff:136: trailing whitespace.\n+ \n",
+    "stderr": ""
+  },
+  "qualification": "Only retained unified-diff evidence files contain blank context lines represented by a single space. Their exact reviewed bytes are intentionally preserved; modifying them would change the archived comparison evidence. All other staged files pass the scoped whitespace check. No source/native/benchmark gate is relaxed.",
+  "preservedVerbatimFiles": [
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/v3-controller-source.diff",
+      "bytes": 1300,
+      "sha256": "b2cab5e112578b406f6bd895c44622e7bce5dc85dfe18dbcabf8f8ffaaeb4033"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/v3-finalizer-source.diff",
+      "bytes": 15882,
+      "sha256": "3dd8fecc3ba3bbfa6bc120fe2e4005bd2b9651be939bbabafe92032075c0e1cb"
+    }
+  ],
+  "scopedCheckExitCode": 0
+}

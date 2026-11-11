@@ -1,0 +1,146 @@
+{
+  "schema": "logos-engine.lot5c-available03-closure.v1",
+  "status": "closed_no_measurement_no_publication",
+  "recordedAt": "2026-11-11T21:59:48.453713+00:00",
+  "requestId": "lot5c-cost-a33a5f88-available-03",
+  "requestAt": "2026-11-11T21:48:17.650081+00:00",
+  "availabilityDeadline": "2026-11-11T21:58:17.650081+00:00",
+  "availabilityMaximumSeconds": 600,
+  "actualReleaseAt": "2026-11-11T21:58:17.652553+00:00",
+  "actualRequestToReleaseSeconds": 600.002472,
+  "releaseDispatchOverrunSeconds": 0.002472,
+  "actualToolSessionId": 71059,
+  "actualTerminalChunkId": "64cb3e",
+  "actualTerminalExitCode": 124,
+  "cleanupConfirmed": true,
+  "failureReason": "availability_deadline_before_fresh_acks",
+  "lastWaitingObservation": {
+    "actualToolChunkId": "a9f314",
+    "observedCoordinatorTimestamp": "2026-11-11T21:57:47.999428+00:00",
+    "missingFreshAcknowledgments": [
+      "lot6b",
+      "lot8a",
+      "lot10c"
+    ]
+  },
+  "peerSnapshotsAfterTermination": [
+    {
+      "lane": "lot6b",
+      "snapshot": "docs/migration/lot5c-evidence/recovery/coordination/recovery-03/available03-terminal-lot6b-status.json",
+      "updatedAt": "2026-11-11T21:47:54.252341+00:00",
+      "phase": "next_step_source_review_6b_cost_and_6c",
+      "requestId": null,
+      "acknowledged": false,
+      "acknowledgedAt": null,
+      "activeCommand": "New user continuation: read-only review of 6B final-cost dependencies and prospective6C observed_rigid_cargo transfer; no SH, official window, game or publication.",
+      "allOwnSubagentsIdle": false
+    },
+    {
+      "lane": "lot8a",
+      "snapshot": "docs/migration/lot5c-evidence/recovery/coordination/recovery-03/available03-terminal-lot8a-status.json",
+      "updatedAt": "2026-11-11T21:48:56.340624+00:00",
+      "phase": "stream02_six_regressions_passed_weav_running",
+      "requestId": "lot5c-cost-a33a5f88-final-01",
+      "acknowledged": false,
+      "acknowledgedAt": "2026-11-11T18:35:44.230663+00:00",
+      "activeCommand": "qualify-composition-v2.py recorded-regressions-stream-02",
+      "allOwnSubagentsIdle": true
+    },
+    {
+      "lane": "lot10c",
+      "snapshot": "docs/migration/lot5c-evidence/recovery/coordination/recovery-03/available03-terminal-lot10c-status.json",
+      "updatedAt": "2026-11-11T21:58:15.222076+00:00",
+      "phase": "functional_milestone_saved_10d_preparation_ready",
+      "requestId": null,
+      "acknowledged": false,
+      "acknowledgedAt": null,
+      "activeCommand": null,
+      "allOwnSubagentsIdle": true
+    }
+  ],
+  "newCycleCount": 1,
+  "maximumNewCycles": 1,
+  "furtherAutomaticCycle": false,
+  "quietRequested": false,
+  "quietReleased": true,
+  "exclusiveAcquisitionAttempted": false,
+  "missingArtifacts": [
+    "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/performance-integrated-04/readiness.json",
+    "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/performance-integrated-04/window.json",
+    "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/coordination/cost-final-03/window-lease.json",
+    "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/coordination/cost-final-03/measurement-release.json",
+    "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/coordination/cost-final-03/controller.execution.json",
+    "/workspace/shared/sra-coordination/lot5c-available-03-active-children.json"
+  ],
+  "officialMeasuredSamples": 0,
+  "officialCostMeasured": false,
+  "officialCostAcceptedByGame": {
+    "STCK": null,
+    "SMLP": null
+  },
+  "candidate063Published": false,
+  "nativeOrBenchmarkChanged": false,
+  "functionalProofsReused": {
+    "tests": 5339,
+    "testFiles": 138,
+    "checks": 5,
+    "commonComparisons": 6818,
+    "recordedCases": 11,
+    "recordedComparisons": 187
+  },
+  "lockIdentities": [
+    {
+      "path": "/workspace/shared/sra-coordination/performance.lock",
+      "device": 27,
+      "inode": 1971854,
+      "acquiredByThisAttempt": false,
+      "replacedOrDeleted": false
+    },
+    {
+      "path": "/workspace/shared/sra-coordination/publication.lock",
+      "device": 27,
+      "inode": 1971855,
+      "acquiredByThisAttempt": false,
+      "replacedOrDeleted": false
+    }
+  ],
+  "historicalHolderIdentified": false,
+  "historicalSessionClosed": false,
+  "classification": "Fresh all-worker ACKs were not obtained within the one allowed availability interval. This is not a new exclusive-lock refusal and does not prove a current holder. Prior instant exclusive availability remains historical, not isolation.",
+  "ordinaryWorkPolicy": "Development, functional tests, commits and branch pushes use no global mutex and wait for no peer publication. Only actual official measurement and publication retain their own short exclusive scopes.",
+  "lastPushedPreparationCommit": "ed983a15f718bd00fac41c867c1b6b9320c7ea95",
+  "branch": "lot5c-recovery-checkpoint-20261111",
+  "evidence": [
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-final-03/request.json",
+      "bytes": 2911,
+      "sha256": "1e259327e21b563f46fce9b3359f4d997474e5c2fff0066a6ffebc2b6ee6d0e3"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-final-03/attempt-sentinel.json",
+      "bytes": 352,
+      "sha256": "7cca6d0e1c8088ef47ea0aa6e92d33bb2da22c703121a821331f4f9cd64327c2"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-final-03/attempt-result.json",
+      "bytes": 808,
+      "sha256": "637298173ed6354ee130e2d336b3363a8ef03803dcf2c2f9169078c2ca360294"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/recovery-03/available03-orchestrator-handle.json",
+      "bytes": 629,
+      "sha256": "6dc624e2b056950e447850eb75179157d0020c350de5e99a21a78110394f8ca5"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/recovery-03/available03-orchestrator-terminal.json",
+      "bytes": 1222,
+      "sha256": "c52b86c5b76f03a957977fbfcbc7067642fcc8685105533537eaf93d48a618dc"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/recovery-03/available03-explicit-release-status.json",
+      "bytes": 19923,
+      "sha256": "e207d8e4eec7232ebc87b437ab46ad86995ff86a0e7615fb94e4299f508c665e"
+    }
+  ],
+  "nextStep": "A future measurement needs actual contemporaneous availability and fresh exact ACKs from6B,8A,10C and their workers, then fresh readiness and one real EX acquisition. Do not restart pauses automatically or reuse abandoned ACK/readiness. Cost must pass strict per-game complete-session +10% rule before publication0.63; publication order5C,6B,8A,10C retained."
+}

@@ -1,0 +1,14 @@
+{
+  "schema": "logos-engine.lot5c-actual-tool-terminal.v1",
+  "observedAt": "2026-11-11T21:47:51.120Z",
+  "actualSessionId": 19930,
+  "actualToolResult": {
+    "chunk_id": "b107dd",
+    "wall_time_seconds": 2.3119e-05,
+    "exit_code": 0,
+    "original_token_count": 33,
+    "output": "{\"schema\": \"logos-engine.lot5c.bounded-command.v3\", \"status\": \"passed\", \"reason\": null, \"exitCode\": 0, \"cleanupComplete\": true}\r\n"
+  },
+  "globalLockUsed": false,
+  "publicationPerformed": false
+}

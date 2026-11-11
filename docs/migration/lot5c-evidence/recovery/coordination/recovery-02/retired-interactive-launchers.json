@@ -1,0 +1,25 @@
+{
+  "schema": "logos-engine.lot5c-retired-interactive-launchers.v1",
+  "recordedAt": "2026-11-11T20:02:45.201569+00:00",
+  "status": "old_local_entrypoints_fail_fast",
+  "rows": [
+    {
+      "originalLocalPath": "/workspace/scratch/8a0681e98bf4/push_lot5_checkpoint.mjs",
+      "retainedOriginal": "docs/migration/lot5c-evidence/recovery/planning/coordination-tools-v2/push_lot5_checkpoint.mjs",
+      "originalSha256": "d2d610d16dc972c6f7263650caf89a06c10a441bc12d2405eb591a7e7f8d39c2",
+      "replacementSha256": "2fc625a965f44353000e7f958a49a71c54ffec3c10315073696e05858be4b6b7",
+      "refusalExitCode": 64,
+      "temporaryMutexReacquired": true
+    },
+    {
+      "originalLocalPath": "/workspace/scratch/8a0681e98bf4/push_lot5_checkpoints_bounded.mjs",
+      "retainedOriginal": "docs/migration/lot5c-evidence/recovery/planning/coordination-tools-v2/push_lot5_checkpoints_bounded.mjs",
+      "originalSha256": "84e8727e4b86a1a5e3d66bc843c4f3718a3d716c498fd232a810aab627665e04",
+      "replacementSha256": "2fc625a965f44353000e7f958a49a71c54ffec3c10315073696e05858be4b6b7",
+      "refusalExitCode": 64,
+      "temporaryMutexReacquired": true
+    }
+  ],
+  "oldRunningExecutionClosedByFileReplacement": false,
+  "qualification": "The exact original Node sources remain retained for the reviewed supervisor. Local historical entrypoints now refuse without reading input. This prevents a future use of the old outer-flock invocation; replacing a file does not terminate any existing inaccessible session. Tests used independent temporary mutexes only."
+}

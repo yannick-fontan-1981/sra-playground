@@ -1,0 +1,45 @@
+{
+  "schema": "logos-engine.coordinated-cost-request.v1",
+  "requestId": "lot5c-cost-a33a5f88-recovery-02",
+  "requestedAt": "2026-11-11T20:20:25.609789+00:00",
+  "availabilityDeadline": "2026-11-11T20:30:25.609789+00:00",
+  "availabilityMaximumSeconds": 600,
+  "activeWindowMaximumSeconds": 5400,
+  "lane": "lot5c",
+  "performanceDirectory": "docs/migration/lot5c-evidence/recovery/performance-integrated-03",
+  "nativeDigests": {
+    "baseline": "74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12",
+    "candidate": "a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57"
+  },
+  "requiredLanes": [
+    "lot6b",
+    "lot8a",
+    "lot10c"
+  ],
+  "maximumExclusiveAttempts": 1,
+  "automaticRetry": false,
+  "allowCurrentUsefulCommandsToFinishNormally": true,
+  "automaticTimeBasedRelease": true,
+  "expiryRule": "This request is explicitly released at availabilityDeadline unless the exact window-lease.json records real exclusive acquisition before that deadline. If acquired, its fixed windowDeadline is the maximum quiet lease. No deadline extension or new cycle is automatic.",
+  "windowLeasePath": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/coordination/cost-final-02/window-lease.json",
+  "scope": "Finish current useful commands normally, then root and all workers full-tool-idle: no queued source/Git/hash/archive/test/build/replay/game/browser/cost work. Only tiny named coordination metadata through ABBA/comparisons/review. Fresh exact ACK after actual closure; no cancellation requested.",
+  "requestedAckFields": {
+    "quiet_acknowledged": true,
+    "quiet_request_id": "lot5c-cost-a33a5f88-recovery-02",
+    "active_command": null,
+    "heavy_execution_active": false,
+    "all_own_subagents_idle": true,
+    "no_queued_commands": true
+  },
+  "functionalProofsReusedBecauseInputsUnchanged": true,
+  "currentFunctionalProofs": {
+    "testsPassed": 5339,
+    "testFiles": 138,
+    "commonChecksPassed": 6818,
+    "recordedCasesPassed": 11,
+    "recordedChecksPassed": 187,
+    "recordedActions": 390,
+    "projectChecksPassed": 5
+  },
+  "qualification": "One new bounded cycle. Old01 ACKs/readiness never authorize this attempt. No official sample has started."
+}

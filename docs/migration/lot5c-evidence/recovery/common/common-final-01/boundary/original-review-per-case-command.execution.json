@@ -1,0 +1,38 @@
+{
+  "schema": "logos-engine.lot5c.command-execution.v1",
+  "status": "passed",
+  "startedAt": "2026-11-11T17:38:41.584698+00:00",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "scripts/review-observed-binding-common-replay.py",
+    "docs/migration/lot5c-evidence/recovery/common/common-final-01/boundary",
+    "--fixture",
+    "docs/migration/lot5c-evidence/recovery/common/common-final-01/boundary/original-replay-per-case.json.gz",
+    "--export-receipt",
+    "docs/migration/lot5c-evidence/recovery/common/common-final-01/boundary/original-export-per-case.json",
+    "--output",
+    "docs/migration/lot5c-evidence/recovery/common/common-final-01/boundary/original-comparison-per-case.json"
+  ],
+  "cwd": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout",
+  "timeoutSeconds": 180.0,
+  "wrapper": {
+    "path": "docs/migration/lot5c-evidence/run-evidence-command.py",
+    "bytes": 3904,
+    "sha256": "99b16a35eac1f12acb3063e43d303ffc020b3339109e22eff1f807d1e87e47db"
+  },
+  "finishedAt": "2026-11-11T17:38:43.017492+00:00",
+  "durationSeconds": 1.4312676310000825,
+  "exitCode": 0,
+  "timedOut": false,
+  "log": {
+    "path": "docs/migration/lot5c-evidence/recovery/common/common-final-01/boundary/original-review-per-case-command.log",
+    "bytes": 224,
+    "sha256": "08493f527c86d231a5830093086d3af6e16b489094299cc8a752f3907a030f50"
+  },
+  "compressedLog": {
+    "path": "docs/migration/lot5c-evidence/recovery/common/common-final-01/boundary/original-review-per-case-command.log.gz",
+    "bytes": 182,
+    "sha256": "e1d416e92e4be9a6ba1d8c7709e6d320959c4f5381bee37b21dc4a9b06ea0d43"
+  }
+}

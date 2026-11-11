@@ -1,0 +1,171 @@
+{
+  "schema": "logos-engine.lot5c.publication-preflight.v1",
+  "status": "preflight_complete_publication_pending_cost_and_bounded_publication_guard",
+  "taskStartedAt": "2026-11-11T20:50:33Z",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "observations": {
+    "getSite": {
+      "id": "appgprj_6adbc388d79081918581b93b919d7258",
+      "status": "active",
+      "latest_version_number": 103,
+      "current_live_url": "https://sra-playground.yannick-fontan.chatgpt.site",
+      "updated_at": "2026-11-11T16:55:19.683817+00:00",
+      "current_user_role": "owner",
+      "access_mode": "custom",
+      "access_policy": {
+        "access_mode": "custom",
+        "allowed_account_user_count": 1,
+        "allowed_workspace_group_count": 0,
+        "allowed_tenant_group_count": 0,
+        "external_visitor_count": 0
+      }
+    },
+    "latestVersions": [
+      {
+        "id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_c8356cd5ad648191a646ac0a9c059a24",
+        "version_number": 103,
+        "source": {
+          "commit_sha": "4afcbfe6a25bd3a88223be543e443bc53b9c8814"
+        },
+        "deployment_id": "appgdep_6af49db69234819195c9c093cb79a7da"
+      },
+      {
+        "id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_ebb6198d3844819188b9db25c43aaa31",
+        "version_number": 102,
+        "source": {
+          "commit_sha": "1019d2eb929d7dc201a5c1f6edce5aa1c5dfa464"
+        },
+        "deployment_id": "appgdep_6af49caf0b808191a14190d3261b6f9d"
+      },
+      {
+        "id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_48ccb50314448191a19781a9c89eb830",
+        "version_number": 101,
+        "source": {
+          "commit_sha": "d75a36f0a99bf6c301034523a3138a64d2f6e744"
+        },
+        "deployment_id": "appgdep_6af48d2be4908191bfe5398512c01bcb"
+      }
+    ],
+    "predecessorChanged": false,
+    "actualNativePredecessor": {
+      "version": 102,
+      "nativeVersion": "0.62",
+      "source": "1019d2eb929d7dc201a5c1f6edce5aa1c5dfa464",
+      "deploymentId": "appgdep_6af49caf0b808191a14190d3261b6f9d",
+      "terminalStatusFromExistingProviderReceipt": "succeeded"
+    },
+    "actualDocumentaryClosure": {
+      "version": 103,
+      "source": "4afcbfe6a25bd3a88223be543e443bc53b9c8814",
+      "deploymentId": "appgdep_6af49db69234819195c9c093cb79a7da",
+      "terminalStatusFromExistingProviderReceipt": "succeeded"
+    },
+    "currentReadbackQualification": "Fresh get_site and list_site_versions match the retained terminal publication receipts; no new deployment polling was needed for these already terminal publications.",
+    "publicationMutex": {
+      "path": "/workspace/shared/sra-coordination/publication.lock",
+      "exists": true,
+      "sizeBytes": 0,
+      "acquired": false
+    },
+    "newPerformanceMutexEvidence": {
+      "reportedBy": "root",
+      "reportedAt": "2026-11-11T20:42:14.650043Z",
+      "claim": "10C acquired and released the same performance mutex in EX",
+      "independentlyProbed": false
+    }
+  },
+  "inputs": [
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/integration-published-10b/site102-publication-readback.json",
+      "sha256": "4fe34cd930c422a4037bbdf6aef77b42a305167cf44059954bef5f20408822a8"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/integration-published-10b/site103-publication-readback.json",
+      "sha256": "38392d6fccff75f496e5339c7d0bc8a04b78891c9e26a1103eb49f818c48a4c9"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/coordination-tools-v2/run-bounded-locked-command.py",
+      "bytes": 29004,
+      "sha256": "1cf15ba630657b8fe83bd81c98071b0b67965a93a5caa211a568655df338e3a6"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/coordination-tools-v2/operator-contract.json",
+      "bytes": 3893,
+      "sha256": "23fcd97a0dc01f809fec072c0075638c4aab78d53eea4fd07745c8b90eeeb1f3"
+    }
+  ],
+  "exactPreparationCommand": [
+    "python",
+    "-B",
+    "docs/migration/lot5c-evidence/recovery/planning/coordination-tools-v2/run-bounded-locked-command.py",
+    "--helper",
+    "sites-workflow",
+    "--checkout",
+    "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout",
+    "--receipt",
+    "/workspace/shared/sra-coordination/lot5c-execution-handles/publication-after-cost-03.json",
+    "--input-timeout",
+    "45",
+    "--handshake-timeout",
+    "10",
+    "--work-timeout",
+    "540"
+  ],
+  "commandConditions": {
+    "tty": true,
+    "outerFlock": false,
+    "receiptMustBeNew": true,
+    "realToolSessionIdRecordedBeforeCredentialInput": true,
+    "credentialSource": "Fresh same-project credential acquired only when publication is ready; memory and hidden stdin only.",
+    "stdinShape": {
+      "credential": "fresh returned credential object",
+      "source": "complete retained source opening result for this checkout and project",
+      "commands": "Only remaining necessary checks/builds as explicit argv arrays; [] only if already successful with unchanged build inputs.",
+      "archivePath": "fresh absolute tar destination outside the checkout; retain unchanged through successful save"
+    }
+  },
+  "remainingGates": [
+    "Actual final 5C cost accepted for STCK and SMLP separately under strict pooled complete-session median increase <10%; retained phase overruns and all official samples; no acceptance inferred from this preflight.",
+    "New request, exact fresh ACKs/readiness and v3 cost controller are managed by root/audit; release the cost quiet window before publication work.",
+    "Bind final evidence, current clean source commit and unchanged accepted native/build inputs; preserve all previous failed/refused attempts.",
+    "Refresh get_site/access immediately before publication if state changed; owner+custom+one account count alone is not asserted here to prove owner-only access.",
+    "Provide and review a bounded owner of the existing publication mutex covering source push, packaging, native save/deploy and terminal reconciliation.",
+    "Use the wrapper result only after terminal exit0, cleanup.complete=true and verified source commit/archive binding.",
+    "Inspect the fresh credential automatic-publication fields without retaining its token. If publish_on_push_accepted is true for a live authorization window, reconcile the push-created version/deployment and do not separately save/deploy. A false flag does not cancel an earlier window; resolve any existing deployment before a new publication."
+  ],
+  "publicationGuardFinding": {
+    "currentWrapperScope": "The validated v2 wrapper takes only SH|NB on performance.lock and bounds the Node source/package process. It does not acquire publication.lock and does not bound or supervise subsequent native save/deploy/status calls.",
+    "unsafePatterns": [
+      "Direct official Node helper waits for interactive JSON without its own input deadline.",
+      "Unbounded flock -x publication.lock or a lock keeper waiting forever for input/release.",
+      "Assuming source-wrapper exit unlocks a separate publication mutex or proves deployment terminal.",
+      "Unbounded deployment polling or a fresh save/deploy after an uncertain existing attempt."
+    ],
+    "requiredSupervisor": "A separate minimal publication lease/supervisor is still required. Use one nonblocking acquisition of the existing publication mutex, a non-inheritable FD, a hard total deadline (proposed <=600s), durable sanitized initial/terminal receipts, catchable signal/finally cleanup and explicit release. Never recreate the mutex. The validated source wrapper remains unchanged and receives JSON before its own SH.",
+    "providerUncertainty": "If a native provider operation outlives the lease or has an uncertain response, retain exact project/version/deployment IDs and an unresolved-operation record that blocks a new publication until reconciliation. Lease expiry is not evidence that the provider operation was cancelled. Never retry save blindly.",
+    "proposedPolling": "Poll only pending/building/publishing, with a fixed small interval and the same absolute operation deadline. Stop on succeeded/failed. A succeeded result with URL requires no extra status/browser call.",
+    "privateRouting": "If owner-only access is explicitly confirmed at publication time, use save_version_and_deploy_private once; otherwise preserve the current audience with save_site_version then deploy_site_version. A retained saved_version_id requires deploy-only recovery, never another save.",
+    "automaticPublicationRouting": "The explicit save/deploy route applies only after automatic publish-on-push state has been reconciled. Preserve an already returned version/deployment ID; never duplicate an operation whose outcome is uncertain."
+  },
+  "forbiddenActionsPerformed": false,
+  "executed": {
+    "credentialCreation": false,
+    "credentialWrite": false,
+    "push": false,
+    "saveVersion": false,
+    "deploy": false,
+    "preview": false,
+    "browser": false,
+    "test": false,
+    "build": false,
+    "cost": false,
+    "productionExclusiveLock": false,
+    "processInspection": false
+  },
+  "tokensRetained": false,
+  "wrappersOrEngineModified": false,
+  "recordedAt": "2026-11-11T20:53:23.195901+00:00",
+  "finishedAt": "2026-11-11T20:54:20.202013+00:00",
+  "wallClockReviewSeconds": 227.202013,
+  "timingQualification": "Each container command was externally bounded15-30seconds and returned terminal; the overall review wall clock, including tool discovery and reasoning, exceeded90seconds and is reported rather than presented as a90second wall-clock run."
+}
