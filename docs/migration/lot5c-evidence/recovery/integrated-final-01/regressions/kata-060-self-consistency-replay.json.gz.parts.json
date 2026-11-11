@@ -1,0 +1,66 @@
+{
+  "schema": "logos-engine.evidence-byte-parts.v1",
+  "original": {
+    "file": "kata-060-self-consistency-replay.json.gz",
+    "sha256": "049938080df2b27b435aa5f83fb7c8c18a0b12e629110560a9d2378c18195788",
+    "bytes": 9007197
+  },
+  "parts": [
+    {
+      "file": "kata-060-self-consistency-replay.json.gz.part000",
+      "sha256": "3add5366252750c646705639e10c87e2dfa095145c500143b6fa2ae9823c982f",
+      "bytes": 900000
+    },
+    {
+      "file": "kata-060-self-consistency-replay.json.gz.part001",
+      "sha256": "39e742f0cdc69a8732160c8eb6d7c58036014380cf94d0d54fdb4469dea1df42",
+      "bytes": 900000
+    },
+    {
+      "file": "kata-060-self-consistency-replay.json.gz.part002",
+      "sha256": "a585cf48ecadd73fd098eb95953dd506a510b2b32c6112a651a66c4e4354f53e",
+      "bytes": 900000
+    },
+    {
+      "file": "kata-060-self-consistency-replay.json.gz.part003",
+      "sha256": "2d5d3ba63bbb5dad63031651f751670c852965404c34e73aa8444317aa2ef2f6",
+      "bytes": 900000
+    },
+    {
+      "file": "kata-060-self-consistency-replay.json.gz.part004",
+      "sha256": "01d33d113aef1c293cb97036bc0c8df90bb092669d99c1cc3d06d4c9f3c6809a",
+      "bytes": 900000
+    },
+    {
+      "file": "kata-060-self-consistency-replay.json.gz.part005",
+      "sha256": "76841419b5181b9c7dbf23d46cf29c5ff1193c62831110e85c07782779f8873b",
+      "bytes": 900000
+    },
+    {
+      "file": "kata-060-self-consistency-replay.json.gz.part006",
+      "sha256": "01ed9923ad0d011d6dec7ad5cfd6bc9f8b5e511f7465146787f0a5b7680eafd9",
+      "bytes": 900000
+    },
+    {
+      "file": "kata-060-self-consistency-replay.json.gz.part007",
+      "sha256": "4f1b8b46cc06faae0872920bd9efd35ce6b1e30a26d5f97b7927bcb9d80735fa",
+      "bytes": 900000
+    },
+    {
+      "file": "kata-060-self-consistency-replay.json.gz.part008",
+      "sha256": "1008bb6c4b78ec29459aeb2472aef4335dd6a5aa59cb084a0d22a8180ecb78f8",
+      "bytes": 900000
+    },
+    {
+      "file": "kata-060-self-consistency-replay.json.gz.part009",
+      "sha256": "ad1fb0b409ea7231d3dacbb6dd7d85df4342a759a9b4ea611a686aa7dbee044a",
+      "bytes": 900000
+    },
+    {
+      "file": "kata-060-self-consistency-replay.json.gz.part010",
+      "sha256": "c4305f5c1aa56f94f78da5a65521ffeca414e0eebb977462fae4de07075a80a5",
+      "bytes": 7197
+    }
+  ],
+  "qualification": "Exact byte partitions of immutable evidence; original data and checksum are unchanged."
+}
