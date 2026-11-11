@@ -1,0 +1,32 @@
+{
+  "schema": "logos-engine.lot6a.own-agent-quiet-observation.v1",
+  "observedAt": "2026-11-11T13:19:41+00:00",
+  "source": "Actual final messages after the parent-receipt provenance correction and final replay documentation",
+  "agents": [
+    {
+      "id": "/root/preview_rebuild_component",
+      "status": "completed",
+      "activeCommand": null,
+      "executionStopped": true,
+      "queuedCommand": null,
+      "statement": "Explicit terminal confirmation: final provenance variant reviewed statically against actual child receipts; no replay/game/test/measurement; all commands finished."
+    },
+    {
+      "id": "/root/preview_rebuild_oracle",
+      "status": "completed",
+      "activeCommand": null,
+      "executionStopped": true,
+      "queuedCommand": null,
+      "statement": "Explicit terminal confirmation: both documentary updates completed; no active or queued command; remains idle for cost."
+    },
+    {
+      "id": "/root/recover_6a_files",
+      "status": "completed",
+      "activeCommand": null,
+      "executionStopped": true,
+      "queuedCommand": null,
+      "statement": "Remains completed after the read-only memory diagnostic; no active or queued command."
+    }
+  ],
+  "qualification": "Observation after all additional static/documentary work. No earlier parent prelaunch hash inventory or exact finish time is invented. No child agent will be scheduled for computing work until the official cost window ends."
+}

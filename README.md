@@ -1,11 +1,47 @@
 # SRA Playground
 
+<!-- LOT6A_README_CURRENT_START -->
+
+## Current migration: lot 6A PreviewPacking / native 0.60.0
+
+The reconstructed `preview_packing` owner is connected in the original strategy order, with selected-return acquisition, guarded commands and exact source-state restoration. Private native publication is confirmed in **Site 96**, commit `cdaceea1c8918430a70b95fa427b31fcd22d290c`, preserving the owner-only audience.
+
+The final freeze contains **306 native files**, digest `ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229`, and 322 archived native/execution inputs. This is a new reconstruction from immutable original source; lost earlier 6A results are historical only.
+
+| Actual proof | Result |
+| --- | --- |
+| Final declared tests | **4795/4795 in 126 files**, no failures, skips, cancellations or TODOs |
+| Release checks | **5/5**, including the production build |
+| Independent component oracle | **1,288 checks**, including 724 consumed-file hashes; all 1,786 original files unchanged |
+| Cold KATA and actual browser | **3 levels / 33 actions / 14 plans**, Pause at 9 then exactly one action to 10 |
+| Cold original parity | **174 events, 113 calls, 61 restores, zero differences**; 56 ablations, 17 action/refusal changes |
+| Recorded returns | **187/187 scoped checks**: 10 historical traces plus one same-candidate KATA repeatability check. |
+| [Owner presence](docs/migration/lot6a-evidence/integrated-final-02/regressions-final/preview-owner-presence.json) | **11/11 cases**, 289 prefixes (14 selected / 275 foreign), 390 returns (33 selected / 357 foreign), **33 selected acquisitions / 0 passive**, 611 restores (578 native / 33 source) |
+| [Final integrity](docs/migration/lot6a-evidence/integrated-final-02/delivery-integrity.json) | **`passed`**, 703 source/test files, 371 build inputs, 13 regression execution inputs, 12 byte-identical restored reports |
+| [Pre-measurement readiness](docs/migration/lot6a-evidence/performance-integrated/readiness.json) | **`ready`**, actual evidence and prerequisites bound before measurement |
+| [Publication inputs](docs/migration/lot6a-evidence/integrated-final-02/publication-inputs.json) | **`passed`**, accepted cost and validated bytes bound; this receipt performs no publication |
+| [Verified source transport](docs/migration/lot6a-evidence/publication/final-source-build-verification.json) | **5 actual source pushes**, 75 application members per archive and **375 exact comparisons**, without rebuilding |
+
+The register now has **63/76 connected entries (82.9%), 13 remaining**. Coverage retains 195 component-verified modules, 148 partial transfers and 1,026 pending; no module is fully verified and all six full-migration gates remain false.
+
+Global complete-session median results: **STCK +6.094357%**; **SMLP +3.262812%** Both cases are accepted. The predeclared rule is strictly below +10% for each case; phase overruns remain visible and may be accepted only when that global rule passes. No measured sample is removed.
+
+The [independent review](docs/migration/lot6a-evidence/performance-integrated/owner-growth-review.json) performed **17,890 checks** across **32 measured sessions / 400 actions**. **11/16 aggregate timing diagnostics** remain within the observed budget; the eight metrics per case include `session_elapsed`. The [complete cost report](docs/migration/lot6a-evidence/performance-integrated/results.md) retains all five pooled phase overruns, both cohorts, dispersion and available p95. The historical strict metadata failure remains failed; the separate predeclared owner contract qualifies only the captured structural deltas.
+
+The 126-file scope explicitly excludes three inherited modules that execute the closed-budget LKEY case. The first **4,793/4,795** run remains failed; the complete successful rerun and all five final checks are retained under `docs/migration/lot6a-evidence/integrated-final-02/validation-final/validation`. Two failed replays in the first batch and a further WEAV retry ended with three retained `-9` exits (SIGKILL); the exit code alone does not establish a memory cause. The subsequent **1,024 MiB** WEAV replay failed with **`-6` after 73 actions** and an [explicit V8 heap-exhaustion diagnostic](docs/migration/lot6a-evidence/recovery/weav-memory/diagnostic.json); this does not establish the cause of the earlier SIGKILLs. The [final exclusive 1,536 MiB replay](docs/migration/lot6a-evidence/integrated-final-02/released-weav-exclusive-1536/regressions/regression-summary.json) passed **81 actions and 17/17 checks**. The checked **9 + 1 + 1** composition binds each retained result to its real invocation in the [final summary](docs/migration/lot6a-evidence/integrated-final-02/regressions-final/regression-summary.json). The [first failed consolidation](docs/migration/lot6a-evidence/recovery/consolidation-attempt-01.json) remains retained; `actual_retained_child_execution_inputs` binds the actual child execution inputs without inventing a parent inventory recorded before launch. No replay was repeated for that provenance correction. The native bounds return blocking unknowns; they do not prove impossibility or guarantee instantaneous Pause. Long-session history compaction and full-original-caller parity remain open.
+
+The [cumulative KATA clock](docs/migration/lot6a-evidence/case-clock.json) is closed within budget at **2256.934540 / 2,400 seconds**, leaving **143.065460 seconds unused**; earlier charges and attempts remain included.
+
+**6A is closed within its stated scope. Next in this lane: 6B `selected_rigid`**, followed by `observed_rigid_cargo` and `shared_settlement`. See the [updated roadmap](docs/migration/v6-delivery-roadmap.md), [6A report](docs/migration/lot6a-preview-packing.md), [source lineage](docs/migration/lot6a-preview-packing-lineage.md) and [evidence index](docs/migration/lot6a-evidence/README.md).
+
+<!-- LOT6A_README_CURRENT_END -->
+
 An English-language playground for **100 interactive games** and Yannick
 Fontan's **Symbolic Reasoning Agent** research.
 
-<!-- LOT5B_README_CURRENT_START -->
+<!-- LOT5B_README_HISTORICAL_START -->
 
-## Current publication: Site 94 / lot 5B / native 0.58.0
+## Historical publication: Site 94 / lot 5B / native 0.58.0
 
 **AddressedMaterial / lot 5B is functionally validated and its global cost is
 accepted. Its private publication is confirmed in
@@ -95,7 +131,7 @@ started **6A / `preview_packing`** and **10B / `window_question`** after complet
 [evidence index](docs/migration/lot5b-evidence/README.md) and
 [current roadmap](docs/migration/v6-delivery-roadmap.md).
 
-<!-- LOT5B_README_CURRENT_END -->
+<!-- LOT5B_README_HISTORICAL_END -->
 
 <!-- LOT4C_README_CURRENT_START -->
 

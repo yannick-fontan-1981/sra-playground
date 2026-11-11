@@ -1,0 +1,105 @@
+{
+  "schema": "logos-engine.lot6a.bounded-source-transport-adaptation.v1",
+  "recordedAt": "2026-11-11T12:40:42.836887+00:00",
+  "status": "static_adaptation_verified",
+  "sourceCommit": "3a70463039768f7114edae7d94d7dd33b7f36aa8",
+  "source": {
+    "path": "docs/migration/lot5b-evidence/plan-bounded-source-transport.py",
+    "bytes": 31356,
+    "sha256": "a53cd2d86d962c60c3a97c2ec533429b8b404c837ec3783c4654a5cb369453a5"
+  },
+  "adapted": {
+    "path": "docs/migration/lot6a-evidence/plan-bounded-source-transport.py",
+    "bytes": 31356,
+    "sha256": "26e57308eb943f6a5e13ed24d1833c0cf82b4242e46133ea696eff7480df6ebd"
+  },
+  "sourceMatchesPublishedGitObject": true,
+  "transformation": "Exact byte substitutions 5B -> 6A and 5b -> 6a only; no other edit",
+  "replacements": [
+    {
+      "from": "5B",
+      "to": "6A",
+      "occurrences": 4
+    },
+    {
+      "from": "5b",
+      "to": "6a",
+      "occurrences": 6
+    }
+  ],
+  "nonTextAstIdentical": true,
+  "nonTextAstSha256": "9facde43e1b91698d2e07c90aa70d7786e64b38608bdc88947163c97b1a64c26",
+  "astNormalization": "Only str and bytes Constant values replaced by type-specific sentinels; structure, names, numeric constants and call arguments otherwise retained.",
+  "changedLiterals": [
+    {
+      "line": 2,
+      "type": "str",
+      "before": "Plan bounded, ordinary fast-forward source pushes after the official window.\n\nRun only once the final delivery is committed and the checkout is clean:\n\n  python -B docs/migration/lot5b-evidence/plan-bounded-source-transport.py     --base FULL_ACTUALLY_PUBLISHED_PREDECESSOR_COMMIT --target HEAD     --output /ABSOLUTE/PATH/OUTSIDE/CHECKOUT/lot5b-source-push-plan.json\n\nThis creates Git tree/commit objects with a temporary index. It never changes\nHEAD, a branch, the real index, a worktree file, credentials, or a remote. It\ndoes not build, package, push, or deploy. The exclusive JSON output is outside\nthe checkout. A failed plan is retained there and must not be executed.\n\nEvery step counts ALL objects newly reachable from ALL of its parents, against\nthe previous planned remote commit, using rev-list and cat-file object sizes.\n40 MiB of raw object contents is a bound with headroom below the observed\n64 MiB server limit; it is not a measurement or guarantee of wire pack size.\nThe backend also rejects individual objects of 32 MiB or more. The complete\nnew target/history object inventory is checked before creating any commit;\nsplitting pushes cannot make such an object admissible.\nLarge proof blobs are deferred, while all other target paths are complete in\nthe first step. The final tree is exactly the original HEAD tree, and the\noriginal HEAD is a direct parent of the final transport commit.\n",
+      "after": "Plan bounded, ordinary fast-forward source pushes after the official window.\n\nRun only once the final delivery is committed and the checkout is clean:\n\n  python -B docs/migration/lot6a-evidence/plan-bounded-source-transport.py     --base FULL_ACTUALLY_PUBLISHED_PREDECESSOR_COMMIT --target HEAD     --output /ABSOLUTE/PATH/OUTSIDE/CHECKOUT/lot6a-source-push-plan.json\n\nThis creates Git tree/commit objects with a temporary index. It never changes\nHEAD, a branch, the real index, a worktree file, credentials, or a remote. It\ndoes not build, package, push, or deploy. The exclusive JSON output is outside\nthe checkout. A failed plan is retained there and must not be executed.\n\nEvery step counts ALL objects newly reachable from ALL of its parents, against\nthe previous planned remote commit, using rev-list and cat-file object sizes.\n40 MiB of raw object contents is a bound with headroom below the observed\n64 MiB server limit; it is not a measurement or guarantee of wire pack size.\nThe backend also rejects individual objects of 32 MiB or more. The complete\nnew target/history object inventory is checked before creating any commit;\nsplitting pushes cannot make such an object admissible.\nLarge proof blobs are deferred, while all other target paths are complete in\nthe first step. The final tree is exactly the original HEAD tree, and the\noriginal HEAD is a direct parent of the final transport commit.\n"
+    },
+    {
+      "line": 42,
+      "type": "bytes",
+      "before": "docs/migration/lot5b-evidence/",
+      "after": "docs/migration/lot6a-evidence/"
+    },
+    {
+      "line": 43,
+      "type": "str",
+      "before": "docs/migration/lot5b-evidence/performance-integrated/window.json",
+      "after": "docs/migration/lot6a-evidence/performance-integrated/window.json"
+    },
+    {
+      "line": 270,
+      "type": "str",
+      "before": "Preserve original lot 5B delivery history after bounded source transport",
+      "after": "Preserve original lot 6A delivery history after bounded source transport"
+    },
+    {
+      "line": 447,
+      "type": "str",
+      "before": "Minimum size for deferring a regular proof data file under lot5b-evidence",
+      "after": "Minimum size for deferring a regular proof data file under lot6a-evidence"
+    },
+    {
+      "line": 256,
+      "type": "str",
+      "before": "Transport lot 5B evidence batch ",
+      "after": "Transport lot 6A evidence batch "
+    },
+    {
+      "line": 393,
+      "type": "str",
+      "before": "Transport complete lot 5B source, tests and build inputs",
+      "after": "Transport complete lot 6A source, tests and build inputs"
+    },
+    {
+      "line": 293,
+      "type": "str",
+      "before": "Transport retained lot 5B ancestry batch ",
+      "after": "Transport retained lot 6A ancestry batch "
+    },
+    {
+      "line": 491,
+      "type": "str",
+      "before": "lot5b-transport-index-",
+      "after": "lot6a-transport-index-"
+    }
+  ],
+  "unifiedDiff": "--- docs/migration/lot5b-evidence/plan-bounded-source-transport.py\n+++ docs/migration/lot6a-evidence/plan-bounded-source-transport.py\n@@ -3,9 +3,9 @@\n \n Run only once the final delivery is committed and the checkout is clean:\n \n-  python -B docs/migration/lot5b-evidence/plan-bounded-source-transport.py \\\n+  python -B docs/migration/lot6a-evidence/plan-bounded-source-transport.py \\\n     --base FULL_ACTUALLY_PUBLISHED_PREDECESSOR_COMMIT --target HEAD \\\n-    --output /ABSOLUTE/PATH/OUTSIDE/CHECKOUT/lot5b-source-push-plan.json\n+    --output /ABSOLUTE/PATH/OUTSIDE/CHECKOUT/lot6a-source-push-plan.json\n \n This creates Git tree/commit objects with a temporary index. It never changes\n HEAD, a branch, the real index, a worktree file, credentials, or a remote. It\n@@ -39,8 +39,8 @@\n \n \n ROOT = Path(__file__).resolve().parents[3]\n-EVIDENCE = b'docs/migration/lot5b-evidence/'\n-DEFAULT_WINDOW = ROOT / 'docs/migration/lot5b-evidence/performance-integrated/window.json'\n+EVIDENCE = b'docs/migration/lot6a-evidence/'\n+DEFAULT_WINDOW = ROOT / 'docs/migration/lot6a-evidence/performance-integrated/window.json'\n RAW_LIMIT = 40 * 1024 * 1024\n SERVER_LIMIT = 64 * 1024 * 1024\n INDIVIDUAL_OBJECT_LIMIT = 32 * 1024 * 1024\n@@ -253,7 +253,7 @@\n     def proof_batch(self, index, paths):\n         tree = self.write_step_tree(index, paths)\n         parents = [self.current]\n-        commit = self.commit(tree, parents, f'Transport lot 5B evidence batch {len(self.steps) + 1}')\n+        commit = self.commit(tree, parents, f'Transport lot 6A evidence batch {len(self.steps) + 1}')\n         stats = self.missing(commit, self.current)\n         if stats['rawBytes'] > self.args.max_missing_raw_bytes:\n             require(len(paths) > 1,\n@@ -267,7 +267,7 @@\n     def final_candidate(self):\n         parents = [self.current, self.target]\n         commit = self.commit(self.target_tree, parents,\n-                             'Preserve original lot 5B delivery history after bounded source transport')\n+                             'Preserve original lot 6A delivery history after bounded source transport')\n         return commit, parents, self.missing(commit, self.current)\n \n     def preserve_history(self):\n@@ -290,7 +290,7 @@\n                     break\n                 bridge_parents = [self.current, *proposed]\n                 bridge = self.commit(self.target_tree, bridge_parents,\n-                                     f'Transport retained lot 5B ancestry batch {len(self.steps) + 1}')\n+                                     f'Transport retained lot 6A ancestry batch {len(self.steps) + 1}')\n                 bridge_stats = self.missing(bridge, self.current)\n                 if bridge_stats['rawBytes'] <= self.args.max_missing_raw_bytes:\n                     frontier = proposed\n@@ -390,7 +390,7 @@\n         else:\n             tree = self.write_step_tree(index, self.critical)\n             parents = [self.current]\n-            commit = self.commit(tree, parents, 'Transport complete lot 5B source, tests and build inputs')\n+            commit = self.commit(tree, parents, 'Transport complete lot 6A source, tests and build inputs')\n             stats = self.missing(commit, self.current)\n             require(stats['rawBytes'] <= self.args.max_missing_raw_bytes,\n                     f'All non-deferred source paths require {stats[\"rawBytes\"]} raw object bytes in the first step')\n@@ -444,7 +444,7 @@\n     parser.add_argument('--max-missing-raw-bytes', type=int, default=RAW_LIMIT,\n                         help='Per-push sum of all missing raw object contents; at most 41943040')\n     parser.add_argument('--bulk-min-bytes', type=int, default=256 * 1024,\n-                        help='Minimum size for deferring a regular proof data file under lot5b-evidence')\n+                        help='Minimum size for deferring a regular proof data file under lot6a-evidence')\n     args = parser.parse_args()\n     require(not any(os.environ.get(name) for name in REDIRECT_ENV), 'Git location/index overrides are not accepted')\n     require(re.fullmatch(r'[0-9a-fA-F]{40}', args.base), '--base must be a full published commit ID')\n@@ -488,7 +488,7 @@\n     with output.open('x', encoding='utf-8') as stream:\n         try:\n             planner.prepare()\n-            with tempfile.TemporaryDirectory(prefix='lot5b-transport-index-', dir=output.parent) as temporary:\n+            with tempfile.TemporaryDirectory(prefix='lot6a-transport-index-', dir=output.parent) as temporary:\n                 planner.build(Path(temporary) / 'index')\n             plan['status'] = 'planned_not_pushed'\n         except (ValueError, OSError, KeyError, json.JSONDecodeError) as error:\n",
+  "unchangedBounds": {
+    "perStepRawObjectBytes": 41943040,
+    "serverLimitBytes": 67108864,
+    "individualObjectMustBeStrictlyBelowBytes": 33554432
+  },
+  "verification": {
+    "pythonSyntaxParsed": true,
+    "plannerImported": false,
+    "plannerExecuted": false,
+    "gitObjectCreation": false,
+    "branchOrIndexMutation": false,
+    "pushOrDeployment": false,
+    "buildTestsGamesOrMeasurementsExecuted": false
+  },
+  "qualification": "Adaptation and static syntax/AST verification only. The planner requires a passed completed official window and a clean final committed checkout. No plan, source transport, build verification or publication is inferred."
+}

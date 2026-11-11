@@ -1,0 +1,470 @@
+{
+  "schema": "logos-engine.lot6a.completed-log-transports.v1",
+  "recordedAt": "2026-11-11T13:32:44.518080+00:00",
+  "status": "passed",
+  "logs": [
+    {
+      "original": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/campaign-command-execution.log",
+        "bytes": 1888,
+        "sha256": "7537578e06e8720971369c109d35946bf7978142bd3fb871d1701f276c7904ca"
+      },
+      "transport": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/campaign-command-execution.log.gz",
+        "bytes": 830,
+        "sha256": "29670e5ebf25061d3e949f00117071a227540da4315351e168c1dd5bb528d664"
+      },
+      "transportExisted": true,
+      "byteIdenticalAfterDecompression": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/regressions-execution.log",
+        "bytes": 3241,
+        "sha256": "043e0ce8d3b954cf07c332e5d0e0316557a93a6e3608a652ab6037c67d6f5f5a"
+      },
+      "transport": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/regressions-execution.log.gz",
+        "bytes": 509,
+        "sha256": "4259872d9100615b684c5017c044afc24cce55a904e001c48e1a984895ede3ee"
+      },
+      "transportExisted": true,
+      "byteIdenticalAfterDecompression": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/regressions-final/presence-verification.log",
+        "bytes": 777,
+        "sha256": "f566e4934c6f10a5488a0a19481324c299efde95582dd856ceff3e83e48cdd72"
+      },
+      "transport": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/regressions-final/presence-verification.log.gz",
+        "bytes": 428,
+        "sha256": "df88e95a8b6ab3414a9870dc3dec4fa721d354bb3acd1a5ebd7a480a6f994533"
+      },
+      "transportExisted": true,
+      "byteIdenticalAfterDecompression": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/released-recovery/regressions/craf-055-output.raw.log",
+        "bytes": 123412,
+        "sha256": "15ca7a82937ee5899015efc22f5794ad5a7510c6ef64ef45aa503387afaae1bf"
+      },
+      "transport": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/released-recovery/regressions/craf-055-output.log.gz",
+        "bytes": 5768,
+        "sha256": "dafd405229de30020628dff8e26ae38c61524c607950deef1d9759afaf8159d6"
+      },
+      "transportExisted": true,
+      "byteIdenticalAfterDecompression": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/released-recovery/regressions/weav-051-output.raw.log",
+        "bytes": 266825,
+        "sha256": "447c424b4794c6eafae8558a935cccb854903a97b0dbc0e9bc017b4994340554"
+      },
+      "transport": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/released-recovery/regressions/weav-051-output.log.gz",
+        "bytes": 9908,
+        "sha256": "7d8990402c529ffc6ace5c15eed2843306529281106b63e42a591a0e4b703a10"
+      },
+      "transportExisted": true,
+      "byteIdenticalAfterDecompression": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/released-recovery-execution.log",
+        "bytes": 8201,
+        "sha256": "926271fc674f256965dacb68d533507c0465cf240e1861f44ecef712908c9407"
+      },
+      "transport": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/released-recovery-execution.log.gz",
+        "bytes": 1098,
+        "sha256": "16f8769e9298b5f92de0467881ee599fdea6c12287aa9aaf2d94a98b9bc2c2bb"
+      },
+      "transportExisted": true,
+      "byteIdenticalAfterDecompression": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/released-weav-1024/regressions/weav-051-output.raw.log",
+        "bytes": 240222,
+        "sha256": "d802eea0c10ae0dbd2aca4d683d45fcd7c96234d40fe1cf97867f7c8395fae18"
+      },
+      "transport": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/released-weav-1024/regressions/weav-051-output.log.gz",
+        "bytes": 9454,
+        "sha256": "7ae7ca2897264c75e3cf08fae571720dee8a8713618673c21ab9eee2cb1cbf21"
+      },
+      "transportExisted": true,
+      "byteIdenticalAfterDecompression": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/released-weav-1024-execution.log",
+        "bytes": 5371,
+        "sha256": "a011ce4bdb4f5a14a53cd32cf4b520c158becdcfac636f25400bc75a2e2ce4b9"
+      },
+      "transport": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/released-weav-1024-execution.log.gz",
+        "bytes": 797,
+        "sha256": "90e4f48f011ee68d5fcd8f912a2506a99a038f0cc3ad05b905b9f71f1c53f907"
+      },
+      "transportExisted": true,
+      "byteIdenticalAfterDecompression": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/released-weav-exclusive-1536/regressions/weav-051-output.raw.log",
+        "bytes": 268708,
+        "sha256": "170c941dafe826b86a2b51cd86b00d50dcfb01d4d047130a655ba810a4c95609"
+      },
+      "transport": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/released-weav-exclusive-1536/regressions/weav-051-output.log.gz",
+        "bytes": 10310,
+        "sha256": "704816ddd096199cea4c3dff3bb7b6f376d9ba1727f1ac3f9a7229581f2bb60c"
+      },
+      "transportExisted": true,
+      "byteIdenticalAfterDecompression": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/released-weav-exclusive-1536-execution.log",
+        "bytes": 5003,
+        "sha256": "e0f3d9d5acbb569b0e0ac280505144f2af0734b66823251edf901135ba698a75"
+      },
+      "transport": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/released-weav-exclusive-1536-execution.log.gz",
+        "bytes": 753,
+        "sha256": "b635f5b26a088774be16cbedc4de043fb4ee44d6ba888a1bb0d5808b26f7f5bc"
+      },
+      "transportExisted": true,
+      "byteIdenticalAfterDecompression": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/validation/full-test-execution.log",
+        "bytes": 249,
+        "sha256": "54a890c3ddb7e3ab24901c938eab5a65ff517fb802696086bc607991a5b857bb"
+      },
+      "transport": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/validation/full-test-execution.log.gz",
+        "bytes": 185,
+        "sha256": "2012fe211afcf4510acd354727a34e185e4ed88c3c4d2488e615ac6eaf6a41be"
+      },
+      "transportExisted": true,
+      "byteIdenticalAfterDecompression": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/validation/preview-verification-execution.log",
+        "bytes": 12805,
+        "sha256": "31381d28fc4191a26a1a48238125cadedc986dddbbff6b74fd24d8be17503d89"
+      },
+      "transport": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/validation/preview-verification-execution.log.gz",
+        "bytes": 2658,
+        "sha256": "09cc1702f08f313b1396d04dadc2f1f2d0e3829f5e21a3bf420d0a63f5b1aef2"
+      },
+      "transportExisted": true,
+      "byteIdenticalAfterDecompression": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/validation/release-checks-execution.log",
+        "bytes": 382,
+        "sha256": "e887980c8a47be37d9464302c81c023c23b8514ff340f8e4fc2371113ce3e049"
+      },
+      "transport": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/validation/release-checks-execution.log.gz",
+        "bytes": 174,
+        "sha256": "1391fc3714a38e95459b74da675486c1b4a0ad6c05cd8eaa569dc66569b77d11"
+      },
+      "transportExisted": true,
+      "byteIdenticalAfterDecompression": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/validation-final/full-test-execution.log",
+        "bytes": 266,
+        "sha256": "25aafbec3e1663e0f21c6b763a07dcc9ef1648209e6e8e0425be9a042acab23f"
+      },
+      "transport": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/validation-final/full-test-execution.log.gz",
+        "bytes": 185,
+        "sha256": "31620f4a0d343d9c2dfae267c5eda0b5452966c74c41ed1eb61359ff0e45893f"
+      },
+      "transportExisted": true,
+      "byteIdenticalAfterDecompression": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/validation-final/release-checks-execution.log",
+        "bytes": 399,
+        "sha256": "ab18d2739e6aa62eda84167be80e9fdf45b5badd431568d6064cf3cba7edbd99"
+      },
+      "transport": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/validation-final/release-checks-execution.log.gz",
+        "bytes": 179,
+        "sha256": "46fbfb4a6f511a94137e1702fe25565d4ae6ccc7fb1ac8456129715bc8732c0a"
+      },
+      "transportExisted": true,
+      "byteIdenticalAfterDecompression": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/aggregation-failure.log",
+        "bytes": 204738,
+        "sha256": "89e3aae5e1b96cfb59c0e79539bab52156fecde2d191f8260b833bd933ecf8c7"
+      },
+      "transport": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/aggregation-failure.log.gz",
+        "bytes": 4018,
+        "sha256": "87a2c4a2eab6c22eaf78075e301169e16873e8eb7c7a3869e4eba7374e66c283"
+      },
+      "transportExisted": false,
+      "byteIdenticalAfterDecompression": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/cohort1/after.log",
+        "bytes": 1585,
+        "sha256": "0b6d5945a33e517cb285214677b3ebbea0c03e9fb1b8561b5ac1893f028635aa"
+      },
+      "transport": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/cohort1/after.log.gz",
+        "bytes": 450,
+        "sha256": "0c5022408d939758f235cf7c9e861eed9f231f7e1f85241cda6b9f1d81f3cf10"
+      },
+      "transportExisted": true,
+      "byteIdenticalAfterDecompression": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/cohort1/baseline.log",
+        "bytes": 1568,
+        "sha256": "49f40174488a9152392fcad90a026c1f87bdd97089448b3b8ced6e0e72162d96"
+      },
+      "transport": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/cohort1/baseline.log.gz",
+        "bytes": 438,
+        "sha256": "89f62651f06d0202221b4c790c09fe20dd3724d534d8cafc1ac739eecc11a7eb"
+      },
+      "transportExisted": true,
+      "byteIdenticalAfterDecompression": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/cohort1/comparison.log",
+        "bytes": 796,
+        "sha256": "0d1f22537b65dabcb26a06e866fb890d63ee8a41128921b5378183931f42738b"
+      },
+      "transport": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/cohort1/comparison.log.gz",
+        "bytes": 324,
+        "sha256": "395c7f68fe8879a9af070a73525544557ec5fc3e0620e3cdc7daa2b3b9be9f42"
+      },
+      "transportExisted": false,
+      "byteIdenticalAfterDecompression": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/cohort2/after.log",
+        "bytes": 1573,
+        "sha256": "a88042ea89e05cb696e2b8203d971d66aba6c37051b757e78496e7ad89bb618a"
+      },
+      "transport": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/cohort2/after.log.gz",
+        "bytes": 442,
+        "sha256": "9ab7e439e5da756a22666a94ed94628889e794d6274230a8eacf19e450e1bb0e"
+      },
+      "transportExisted": true,
+      "byteIdenticalAfterDecompression": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/cohort2/baseline.log",
+        "bytes": 1574,
+        "sha256": "1cb22bf1871ae85a4bb242393b056cbd1877c2046ca2492cab0306c31fd8bc10"
+      },
+      "transport": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/cohort2/baseline.log.gz",
+        "bytes": 442,
+        "sha256": "afe029639257663f6057940061080054e5d4b6bdce23725de65eac457a8522b6"
+      },
+      "transportExisted": true,
+      "byteIdenticalAfterDecompression": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/cohort2/comparison.log",
+        "bytes": 1076,
+        "sha256": "b999b96cc5e7f8aa9dff85ee20f5db96c84caea889f97a635f06491745ae1971"
+      },
+      "transport": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/cohort2/comparison.log.gz",
+        "bytes": 370,
+        "sha256": "fc2c651e32d546d7a05afab2c801dbfbcea14b2fd61cbf5006ccc3d21cdad216"
+      },
+      "transportExisted": false,
+      "byteIdenticalAfterDecompression": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/functional-baseline-execution.log",
+        "bytes": 359,
+        "sha256": "52ef860ff587d92d2aa74fb4a2a50dddd0d80a1b53e1302f1e5af63b02b70993"
+      },
+      "transport": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/functional-baseline-execution.log.gz",
+        "bytes": 223,
+        "sha256": "8fbb6e7d42b4943b1a48eae48efa25ec760a7e7c08df24f39164dbe0c6e7844d"
+      },
+      "transportExisted": true,
+      "byteIdenticalAfterDecompression": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/functional-candidate-execution.log",
+        "bytes": 362,
+        "sha256": "ca74d5ccb36a2f36182ab3acc787fff495464fd8201d85fa1c2fbd3668986b68"
+      },
+      "transport": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/functional-candidate-execution.log.gz",
+        "bytes": 224,
+        "sha256": "c24d114025cf227ff9ac1c2c1472e3886e5d7691368c5a1acee3fae005105589"
+      },
+      "transportExisted": true,
+      "byteIdenticalAfterDecompression": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/log-transport-generation.log",
+        "bytes": 221,
+        "sha256": "c701cd16227a20eba0ca4d371eca586c4f4e81390268644e4c1152b6c7cc345a"
+      },
+      "transport": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/log-transport-generation.log.gz",
+        "bytes": 188,
+        "sha256": "ebbd9269259b0da258a214bfeb6e9cac1b2175ef4ba6bc2369a551f0894fc16d"
+      },
+      "transportExisted": false,
+      "byteIdenticalAfterDecompression": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/owner-growth-consolidation.log",
+        "bytes": 291,
+        "sha256": "4941ec46114a8e50d476f80f0d9a6fef75045645a7dada93b93753e44e6499f7"
+      },
+      "transport": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/owner-growth-consolidation.log.gz",
+        "bytes": 224,
+        "sha256": "3325a9492784a83ee193a85ecc4afb7469fd57fbc5a64dff1f146cd653cb94b9"
+      },
+      "transportExisted": false,
+      "byteIdenticalAfterDecompression": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/owner-growth-review.log",
+        "bytes": 338,
+        "sha256": "766bcf196e561bc2f68d1f94780e91689f8d6efc4915f967aace40907f842a3a"
+      },
+      "transport": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/owner-growth-review.log.gz",
+        "bytes": 232,
+        "sha256": "c59ca294b68053a193fa748889aa305413c25382661e53ae0d3d7b255ccd0999"
+      },
+      "transportExisted": false,
+      "byteIdenticalAfterDecompression": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/owner-qualification-execution.log",
+        "bytes": 300,
+        "sha256": "04d5b132000825b1e9ff6890e14c270363a5abd2cc2a7e0d87b23d5c3da6be45"
+      },
+      "transport": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/owner-qualification-execution.log.gz",
+        "bytes": 178,
+        "sha256": "f5439b0ab8003c57e9176b59e1d1743ff9c7eb998b0820611da6bcca60372d80"
+      },
+      "transportExisted": true,
+      "byteIdenticalAfterDecompression": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/owner-source-inventory-execution.log",
+        "bytes": 527,
+        "sha256": "9fac975a940eed3ecf9258aed0f7ec19b9407479d5396ca5e016210361073d9a"
+      },
+      "transport": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/owner-source-inventory-execution.log.gz",
+        "bytes": 333,
+        "sha256": "e8583d46dc3e09a047a7f3c886c15d37709cf4d9f1c6594ab9976b247d77d51b"
+      },
+      "transportExisted": true,
+      "byteIdenticalAfterDecompression": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/readiness-execution-01.log",
+        "bytes": 281,
+        "sha256": "6510e14673ae195a29b799d5ec46c2c4fb0a44ceed805f81239bf181f9dc1188"
+      },
+      "transport": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/readiness-execution-01.log.gz",
+        "bytes": 226,
+        "sha256": "cdc2971e355145ba12b1efbff34fdd0ad7246580ad8626e4294e538d07e464d0"
+      },
+      "transportExisted": true,
+      "byteIdenticalAfterDecompression": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/results-render.log",
+        "bytes": 521,
+        "sha256": "32d7fd71415f557ac817863afc622deac8ebcaf33eeacb1a308c67a5be5d4fb9"
+      },
+      "transport": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/results-render.log.gz",
+        "bytes": 322,
+        "sha256": "747a28f7d95412b76bc30db48ea2bdfc77864245e31632dc853a66b36001c871"
+      },
+      "transportExisted": false,
+      "byteIdenticalAfterDecompression": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot6a-evidence/publication/publication-inputs-execution-01.log",
+        "bytes": 290,
+        "sha256": "79783158db49206abbe49941ef69d713f3e85a5cb30a63a7b240b8ba82f3efff"
+      },
+      "transport": {
+        "path": "docs/migration/lot6a-evidence/publication/publication-inputs-execution-01.log.gz",
+        "bytes": 232,
+        "sha256": "823ab29e847fdad4505e93cfcbf5591b64e598a80d4c00aad010299bedda74dd"
+      },
+      "transportExisted": true,
+      "byteIdenticalAfterDecompression": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot6a-evidence/recovery/registry-expectation-correction-execution.log",
+        "bytes": 19678,
+        "sha256": "e19d5b73b826a526cba6693ed46674e6a5bab2707f5edfe557df3e994a90c45d"
+      },
+      "transport": {
+        "path": "docs/migration/lot6a-evidence/recovery/registry-expectation-correction-execution.log.gz",
+        "bytes": 3359,
+        "sha256": "e27d9853eddcc19705c5ac29666eddfd7a517a8a996273e40413e5198cad1dda"
+      },
+      "transportExisted": true,
+      "byteIdenticalAfterDecompression": true
+    }
+  ],
+  "qualification": "Exact gzip transport of completed original output only; no source result or raw log is changed."
+}
