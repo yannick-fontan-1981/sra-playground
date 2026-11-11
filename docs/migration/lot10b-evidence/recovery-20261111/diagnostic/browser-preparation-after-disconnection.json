@@ -1,0 +1,38 @@
+{
+  "schema": "logos-engine.lot10b.browser-preparation.v1",
+  "recordedAt": "2026-11-11T15:43:14.191850+00:00",
+  "status": "prepared_blank_tab",
+  "observations": [
+    {
+      "operation": "rewriteDocumentation",
+      "result": "Kernel state was reset after inactivity; code not executed"
+    },
+    {
+      "operation": "getState",
+      "result": "Chrome browser1, existing about:blank tab2"
+    },
+    {
+      "operation": "getTab2",
+      "result": "Runtime.addBinding timed out"
+    },
+    {
+      "operation": "getBrowser1",
+      "result": "Selected Chrome/cdp and read browser API documentation"
+    },
+    {
+      "operation": "documented tabs.get2",
+      "result": "Runtime.addBinding timed out"
+    },
+    {
+      "operation": "documented tabs.new",
+      "result": "Fresh tab4 returned; DOM blank; URL observed about:blank"
+    }
+  ],
+  "browserId": "1",
+  "preparedTabId": "4",
+  "observedUrl": "about:blank",
+  "gameSelected": false,
+  "gameActionExecuted": false,
+  "previewStarted": false,
+  "qualification": "Only generic browser reconnection and documentation preparation. No HPDL page, game, runtime or learned state was loaded; this is not browser QA of the candidate."
+}

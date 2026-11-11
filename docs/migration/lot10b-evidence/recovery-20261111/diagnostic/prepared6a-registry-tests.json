@@ -1,0 +1,23 @@
+{
+  "schema": "logos-engine.lot10b.prepared-registry-test-integration.v1",
+  "recordedAt": "2026-11-11T12:44:25.468065+00:00",
+  "preparedCommit": "c263271442b8e8a8084c39c2f9301fd3163e7d29",
+  "files": [
+    {
+      "path": "tests/v6-radial-port-integration.test.ts",
+      "beforeSha256": "16c2a894dfe4d46469b09d5fa7ed600b4b1a1202017f4a1222d8ac00fc81b8d4",
+      "preparedSha256": "0faea483ab4037f420eac59d76ac52281be3358187d600ead878024ff559f461",
+      "afterSha256": "dfdc64e8a96620cafd41ddb4f5ac5ca0dfaaa31bbc0664cf8aa8f527b68c05b1",
+      "windowEntryAdded": true
+    },
+    {
+      "path": "tests/v6-coupled-pair-planning.test.ts",
+      "beforeSha256": "d16d0298affca92a9f2fca638b256b0b04cbba528a276ed73db98bcb7ed779f8",
+      "preparedSha256": "94d74c6d50892bd3ce05579fdf71b36b648bdfedf7dc6663c8d67a9125e31ee1",
+      "afterSha256": "94d74c6d50892bd3ce05579fdf71b36b648bdfedf7dc6663c8d67a9125e31ee1",
+      "windowEntryAdded": false
+    }
+  ],
+  "actualExpectedEntries": 64,
+  "qualification": "Inherited stale registry expectations corrected from the prepared6A source commit, then Window added according to actual DRM registration. No test or game executed by this source edit; fresh declared finalscope is44 files."
+}

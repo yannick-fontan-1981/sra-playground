@@ -1,0 +1,21 @@
+{
+  "qualification": "Exact recovered Site95 byte parts, no expected result recomputed.",
+  "files": [
+    {
+      "path": "tests/fixtures/v6-feedback-sequences-reference.json.gz",
+      "sha256": "d1bf31b8fbf899aa9d85baa5fdaf9549b7c6f6a786fab43d7ac9f88af3231b6d",
+      "bytes": 1032946,
+      "manifest": "tests/fixtures/v6-feedback-sequences-reference.json.gz.parts.json",
+      "parts": 2,
+      "restored": true
+    },
+    {
+      "path": "tests/fixtures/v6-relative-arrangements-reference.json.gz",
+      "sha256": "fa52436d34ee32e7fcf4e30f67122c5bede6823d0ff2cb34980cdc4885c3f933",
+      "bytes": 1099570,
+      "manifest": "tests/fixtures/v6-relative-arrangements-reference.json.gz.parts.json",
+      "parts": 2,
+      "restored": true
+    }
+  ]
+}

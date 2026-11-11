@@ -1,0 +1,31 @@
+{
+  "schema": "logos-engine.evidence-byte-parts.v1",
+  "original": {
+    "file": "isos-development-4c-replay.json.gz",
+    "sha256": "214c5fe3b3aafca1441053424975bf2fbea6e3ec3b1f232e1e4dadaa0d57ed6a",
+    "bytes": 3170713
+  },
+  "parts": [
+    {
+      "file": "isos-development-4c-replay.json.gz.part000",
+      "sha256": "bffa551424c1bb3afd13129717099543ff37c1351eed3745104b6ef7702c616d",
+      "bytes": 900000
+    },
+    {
+      "file": "isos-development-4c-replay.json.gz.part001",
+      "sha256": "6f798fca9936f2b2bcb6f1dff58d2203eee588e7cfebf90d7cdde3d116dda509",
+      "bytes": 900000
+    },
+    {
+      "file": "isos-development-4c-replay.json.gz.part002",
+      "sha256": "fab1cb5599f5f42afa29e70f41b6b1951e672646de69e8cebcb17307565a7a3a",
+      "bytes": 900000
+    },
+    {
+      "file": "isos-development-4c-replay.json.gz.part003",
+      "sha256": "c1c4fc2aa432a2245c6a2226d0fd9542732b1f51bd3b7df4e11f8bd324252ad3",
+      "bytes": 470713
+    }
+  ],
+  "qualification": "Exact byte partitions of immutable evidence; original data and checksum are unchanged."
+}

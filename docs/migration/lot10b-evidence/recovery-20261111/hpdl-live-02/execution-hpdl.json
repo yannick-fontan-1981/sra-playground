@@ -1,0 +1,263 @@
+{
+  "schema": "logos-engine.lot10b.hpdl-clocked-execution.v1",
+  "attemptId": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-02",
+  "game": "HPDL",
+  "targetLevels": 6,
+  "startedAt": "2026-11-11T15:51:56.417519+00:00",
+  "captureFinishedAt": "2026-11-11T15:57:14.364138+00:00",
+  "elapsedSecondsThroughCapture": 317.946618666,
+  "activityCeilingSeconds": 300.0,
+  "terminationMarginSeconds": 0.5,
+  "retentionReserveSeconds": 30.0,
+  "priorCumulativeSeconds": 1263.3446460859916,
+  "remainingBeforeSeconds": 1136.6553539140084,
+  "child": {
+    "pid": 5,
+    "startedAt": "2026-11-11T15:51:56.857009+00:00",
+    "startedElapsedSeconds": 0.439504404,
+    "allowanceAfterPreflightSeconds": 299.06054538399985,
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "--max-old-space-size=1536",
+      "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/run-hpdl-campaign.mjs",
+      "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-02"
+    ],
+    "nodeOldSpaceMiB": 1536,
+    "parentDeathSignal": "SIGKILL",
+    "separateProcessGroup": true,
+    "finishedAt": "2026-11-11T15:56:55.987050+00:00",
+    "finishedElapsedSeconds": 299.569544329,
+    "exitCode": -9
+  },
+  "exitCode": -9,
+  "attemptOutcome": "activity_timeout",
+  "termination": {
+    "reason": "preparation_plus_child_activity_ceiling",
+    "requestedAt": "2026-11-11T15:56:55.917697+00:00",
+    "elapsedSeconds": 299.500211436,
+    "signal": "SIGKILL",
+    "signalSent": true,
+    "reapedAt": "2026-11-11T15:56:55.985929+00:00",
+    "reapedElapsedSeconds": 299.568448024,
+    "exitCode": -9
+  },
+  "receivedSignals": [],
+  "nativeSourceManifestDigest": "74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12",
+  "sourceInputsUnchanged": true,
+  "capture": {
+    "errors": [],
+    "publicJournal": {
+      "present": true,
+      "completeRecords": 40,
+      "initialReturns": 1,
+      "observedActionReturns": 39,
+      "malformedCompleteRecords": [],
+      "trailingPartialBytes": 0,
+      "traceMatchesCompleteRecords": null,
+      "lastObservedPublicFields": {
+        "level": 4,
+        "levels_completed": 3,
+        "state": "NOT_FINISHED",
+        "step_index": 39,
+        "frame_hash": "b2e679ad801c60e6"
+      },
+      "qualification": "Counts only complete observed public returns. An interrupted or in-flight action is not invented."
+    },
+    "lastCheckpoint": {
+      "sequence": 38,
+      "recordedAt": "2026-11-11T15:56:40.734Z",
+      "completeCampaign": false,
+      "reportStatus": "running",
+      "recordedActions": 38,
+      "recordedPrefixes": 38
+    },
+    "checkpointIndex": {
+      "present": true,
+      "completeRecords": 38,
+      "lastCompleteRecord": {
+        "sequence": 38,
+        "recordedAt": "2026-11-11T15:56:40.734Z",
+        "completeCampaign": false,
+        "reportStatus": "running",
+        "recordedActions": 38,
+        "recordedPrefixes": 38,
+        "packetsObserved": 39,
+        "actionReturnsObserved": 38,
+        "captureDiagnostics": {
+          "serialization": "incremental_json_v1",
+          "checkpointBytes": 138369641,
+          "serializationAndCommitElapsedMs": 8095.873980999982,
+          "memoryBeforeCapture": {
+            "rss": 1750310912,
+            "heapTotal": 1359462400,
+            "heapUsed": 1220171672,
+            "external": 111404119,
+            "arrayBuffers": 42597192
+          },
+          "memoryAfterCapture": {
+            "rss": 1750310912,
+            "heapTotal": 1359986688,
+            "heapUsed": 1190121776,
+            "external": 110952616,
+            "arrayBuffers": 42145689
+          },
+          "processLifetimeMaxRssBeforeCaptureKilobytes": 1713416,
+          "processLifetimeMaxRssAfterCaptureKilobytes": 1713416,
+          "qualification": "Elapsed time uses a monotonic clock and covers serialization and commit. maxRSS values are cumulative process-lifetime maxima in kilobytes, not peaks attributable to this capture. Process memory samples surround serialization and commit only. No cause of an earlier process termination is inferred."
+        }
+      },
+      "trailingPartialBytes": 0,
+      "malformedCompleteRecords": []
+    },
+    "campaignStatus": null,
+    "actualFinal": null,
+    "actualFailure": null,
+    "finalCaptureComplete": false,
+    "reportCountsMatchJournal": false,
+    "qualification": "A missing/partial capture is an evidence limitation, never an inferred game failure or campaign success."
+  },
+  "finalExecutionEvidenceComplete": false,
+  "campaignPassedEstablished": false,
+  "completeActionCountEstablished": false,
+  "errors": [],
+  "artifacts": {
+    "attempt-start.json": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-02/attempt-start.json",
+      "sha256": "bfb7b78f2cc261525d0d7137a74007169707e57703b4c96f11da327b5a71f2c9",
+      "bytes": 1205
+    },
+    "child-process.json": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-02/child-process.json",
+      "sha256": "5ec2c856b13bcb7704df54d1895ef588c7be05c38f7fc7e77f108f668ea84b43",
+      "bytes": 693
+    },
+    "clock-before.json": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-02/clock-before.json",
+      "sha256": "c18dd914ff7735d662b7e8ecf5fdf764c3b9d5e8616f6ba1e5d7a5f33d76bd9e",
+      "bytes": 11880
+    },
+    "hpdl-actual-public-journal.jsonl": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-02/hpdl-actual-public-journal.jsonl",
+      "sha256": "66bbf55e5272078263c639bdcfc590de16815a26e8b8054239548d2ed67a2e7a",
+      "bytes": 3920681
+    },
+    "hpdl-actual-public-journal.jsonl.gz": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-02/hpdl-actual-public-journal.jsonl.gz",
+      "sha256": "d0a8451f63a41eff9e805ee00749cf44191a6a5b72e054990a9b3fc30f29198e",
+      "bytes": 37568
+    },
+    "hpdl-checkpoint-000039.inprogress.json": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-02/hpdl-checkpoint-000039.inprogress.json",
+      "sha256": "b9886472da963a0e124209b169c00a8d381bf0f014bdbf093930afdcc8532e3b",
+      "bytes": 18130848
+    },
+    "hpdl-checkpoint.json": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-02/hpdl-checkpoint.json",
+      "sha256": "b64a44186344e8ac645698f4fd34bbb7118c1ca5c22c81310f1a5c6991e5751e",
+      "bytes": 138369641
+    },
+    "hpdl-checkpoint.json.gz": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-02/hpdl-checkpoint.json.gz",
+      "sha256": "1b3702fc75b104f769eba925dcfb4e69aa3244258e4097091e415a5a7d8207a1",
+      "bytes": 16326392
+    },
+    "hpdl-checkpoints.jsonl": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-02/hpdl-checkpoints.jsonl",
+      "sha256": "8223e9778868a99b81803a370ef0de34240721088bd79aea3059357b91c559e8",
+      "bytes": 38653
+    },
+    "hpdl-checkpoints.jsonl.gz": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-02/hpdl-checkpoints.jsonl.gz",
+      "sha256": "d6a94146d2ffb586b39870216eb33200abba3936d135d045d394a6bc0f48902d",
+      "bytes": 4794
+    },
+    "hpdl-child-start.json": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-02/hpdl-child-start.json",
+      "sha256": "ac966cbccd29cf581324e699d1e879a2a12028bb1f47a60eeaa471d487690ebc",
+      "bytes": 369
+    },
+    "hpdl-live.log": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-02/hpdl-live.log",
+      "sha256": "3dfff0a2d261c20fd13663afd4fd08825279ff4eccb315f64ff12a9fd62f16e9",
+      "bytes": 130384
+    },
+    "hpdl-live.log.gz": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-02/hpdl-live.log.gz",
+      "sha256": "0752a66cda6ad53e2329edb8d094f24fd16100265740f7582e4bbe48732155ce",
+      "bytes": 5486
+    },
+    "postflight.json": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-02/postflight.json",
+      "sha256": "1169d830bae660c14118274c238342a8e3d47bf36d77245122236a5f31557b36",
+      "bytes": 211636
+    },
+    "preflight.json": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-02/preflight.json",
+      "sha256": "b94f5f2f4befa53909bebbb23a14e97820e2457e98d622f2e27fcf04ba1ea16f",
+      "bytes": 212366
+    }
+  },
+  "losslessArchives": [
+    {
+      "original": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-02/hpdl-live.log",
+        "sha256": "3dfff0a2d261c20fd13663afd4fd08825279ff4eccb315f64ff12a9fd62f16e9",
+        "bytes": 130384
+      },
+      "compressed": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-02/hpdl-live.log.gz",
+        "sha256": "0752a66cda6ad53e2329edb8d094f24fd16100265740f7582e4bbe48732155ce",
+        "bytes": 5486
+      },
+      "roundtripVerified": true,
+      "restoredSha256": "3dfff0a2d261c20fd13663afd4fd08825279ff4eccb315f64ff12a9fd62f16e9",
+      "restoredBytes": 130384
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-02/hpdl-actual-public-journal.jsonl",
+        "sha256": "66bbf55e5272078263c639bdcfc590de16815a26e8b8054239548d2ed67a2e7a",
+        "bytes": 3920681
+      },
+      "compressed": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-02/hpdl-actual-public-journal.jsonl.gz",
+        "sha256": "d0a8451f63a41eff9e805ee00749cf44191a6a5b72e054990a9b3fc30f29198e",
+        "bytes": 37568
+      },
+      "roundtripVerified": true,
+      "restoredSha256": "66bbf55e5272078263c639bdcfc590de16815a26e8b8054239548d2ed67a2e7a",
+      "restoredBytes": 3920681
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-02/hpdl-checkpoints.jsonl",
+        "sha256": "8223e9778868a99b81803a370ef0de34240721088bd79aea3059357b91c559e8",
+        "bytes": 38653
+      },
+      "compressed": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-02/hpdl-checkpoints.jsonl.gz",
+        "sha256": "d6a94146d2ffb586b39870216eb33200abba3936d135d045d394a6bc0f48902d",
+        "bytes": 4794
+      },
+      "roundtripVerified": true,
+      "restoredSha256": "8223e9778868a99b81803a370ef0de34240721088bd79aea3059357b91c559e8",
+      "restoredBytes": 38653
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-02/hpdl-checkpoint.json",
+        "sha256": "b64a44186344e8ac645698f4fd34bbb7118c1ca5c22c81310f1a5c6991e5751e",
+        "bytes": 138369641
+      },
+      "compressed": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-02/hpdl-checkpoint.json.gz",
+        "sha256": "1b3702fc75b104f769eba925dcfb4e69aa3244258e4097091e415a5a7d8207a1",
+        "bytes": 16326392
+      },
+      "roundtripVerified": true,
+      "restoredSha256": "b64a44186344e8ac645698f4fd34bbb7118c1ca5c22c81310f1a5c6991e5751e",
+      "restoredBytes": 138369641
+    }
+  ],
+  "qualification": "One admitted cold production campaign, target six, without any additional action cap. The monotone charge includes wrapper preparation, full child lifetime and post-stop retention. The final ledger additionally charges receipt writing/hashing before its atomic terminal update. Historical time is retained despite unrecovered raw evidence. Partial checkpoints and clock/capture failures do not establish campaign success or game failure. No source/function/full-caller parity is inferred."
+}

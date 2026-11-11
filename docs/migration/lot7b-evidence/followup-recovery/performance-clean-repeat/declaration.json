@@ -1,0 +1,124 @@
+{
+  "schema": "logos-engine.native-cost-protocol-declaration.v2",
+  "recordedAt": "2026-11-11T12:04:22.799564-03:00",
+  "status": "declared_before_official_window",
+  "protocol": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/protocol.md",
+    "sha256": "3891258b8d0d2a6f9de0bc3c700b77430afaaf5f71fab5dc85dcca5a540f40b5",
+    "bytes": 9595
+  },
+  "cases": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/cases.json",
+    "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d",
+    "bytes": 1451
+  },
+  "diagnosticComparisonPolicy": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/comparison-policy.json",
+    "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68",
+    "bytes": 991
+  },
+  "globalBudgetPolicy": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/global-budget-policy.json",
+    "sha256": "1b1115a4789e60b481843d57fd0afa240c6c9ae81e4619d04248f025f43e4fb8",
+    "bytes": 2355
+  },
+  "baselineManifest": {
+    "path": "docs/migration/lot6a-evidence/integrated-final-02/source-manifest.json",
+    "sha256": "52f3624d419cb8209e6545274b3867b5f150d8630a0daa05369fd7613ed435fe",
+    "bytes": 36332
+  },
+  "candidateManifest": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/integrated-final/source-manifest.json",
+    "sha256": "c597c7629495e98fcfad64cdd827393bc58d2d8f26594474e60add601485e4de",
+    "bytes": 36332
+  },
+  "candidateArchiveManifest": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/integrated-final/source-archive.json",
+    "sha256": "b5aed5edf28950407c9893610ccd15122ff6e1012a394afce2fdcbf9aeb05c1d",
+    "bytes": 37992
+  },
+  "nativeDigests": {
+    "baseline": "ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229",
+    "candidate": "f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279"
+  },
+  "officialTools": [
+    {
+      "path": "scripts/run-native-cost-window.py",
+      "sha256": "0ec9c69c859d0555e963643010d2254caee8c63d1c9a98ec07cd9af0ce0ce613",
+      "bytes": 8933
+    },
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59",
+      "bytes": 20670
+    },
+    {
+      "path": "scripts/compare-native-loop-costs.mjs",
+      "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb",
+      "bytes": 9861
+    },
+    {
+      "path": "scripts/compare-native-cost-cohorts.mjs",
+      "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34",
+      "bytes": 19460
+    },
+    {
+      "path": "scripts/review-native-cost-consolidation.py",
+      "sha256": "b13174cec5befbb816e70554fd5d47da215eae941b983e66f05b9dd4417b3bd4",
+      "bytes": 17810
+    }
+  ],
+  "globalDecisionTool": {
+    "path": "scripts/review-native-global-cost-window.py",
+    "sha256": "9ab2ecd9d6ddf234e96332421a6e55937a766495c1a20dd223f4441d6b516940",
+    "bytes": 22204
+  },
+  "globalCalculationTool": {
+    "path": "scripts/review-native-global-cost-budget.py",
+    "sha256": "b4312bcdae058ba58c16b4e5e24cb53626496b38f8a154834e0452a43e97d341",
+    "bytes": 8476
+  },
+  "plannedOrder": [
+    "A1",
+    "B1",
+    "B2",
+    "A2"
+  ],
+  "cohorts": 2,
+  "sessionsPerCaseVersionCohort": 4,
+  "measuredSessions": 32,
+  "measuredActions": 400,
+  "excludedWarmupSessions": 8,
+  "excludedWarmupActions": 24,
+  "globalBudgetCases": 2,
+  "diagnosticMetrics": 16,
+  "relativeGlobalBudget": 0.1,
+  "globalComparison": "strictly_less_than",
+  "phaseOverrunsBlockAcceptance": false,
+  "allCasesMustPass": true,
+  "crossCaseCompensation": false,
+  "inputsByteIdenticalToHistorical": true,
+  "officialToolsByteIdenticalToHistorical": true,
+  "noOfficialWindowAtDeclaration": true,
+  "functionalReadinessNotAnticipated": true,
+  "finalizedAt": "2026-11-11T12:04:22.799564-03:00",
+  "baseline": {
+    "nativeVersion": "0.60.0",
+    "siteVersion": 97,
+    "commit": "98336fba4e696a51c90ff7f7b37b8bdf95f34847",
+    "nativeDigest": "ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229",
+    "nativeFiles": 306
+  },
+  "candidate": {
+    "nativeVersion": "0.61.0",
+    "nativeDigest": "f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279",
+    "nativeFiles": 306,
+    "sourceBaseCommit": "21bf20adae7f80726d9414cb57495c003674fb54",
+    "checkoutHead": "e6fb44d0930bb9a0afe78bbc80c5f5dde9334dc7",
+    "nativeSourceCommit": "e6fb44d0930bb9a0afe78bbc80c5f5dde9334dc7",
+    "nativeWorktreeChanges": [],
+    "siteVersion": null,
+    "qualification": "The frozen digest and archive identify candidate bytes. A null source commit means the checkout HEAD is ancestry only. No candidate publication is asserted."
+  },
+  "qualification": "This declaration binds actual baseline and candidate source identities before any official measurement. It asserts no test outcome, game success, machine isolation, publication or functional readiness."
+}

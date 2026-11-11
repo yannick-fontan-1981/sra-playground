@@ -1,0 +1,72 @@
+{
+  "schema": "logos-engine.lot10b.disconnection-recovery-observation.v1",
+  "recordedAt": "2026-11-11T15:34:02.253841+00:00",
+  "userReportedDisconnection": true,
+  "priorExecutionSession": 70855,
+  "resumeToolResult": "Unknown process id 70855",
+  "originalReceipt": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-01/regression-launch.json",
+    "sha256": "7b96bd0b425873bb66915dc409de9b7e1c45dccb1f99349681f932a4dd9cdc2f",
+    "bytes": 8950
+  },
+  "rawOutput": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-01/regression-driver-output.raw.txt",
+    "sha256": "56f63e86b78ff2304954fa567e45c969963fdeb64161fc38d600e96dec075ead",
+    "bytes": 2992
+  },
+  "completeCases": [
+    {
+      "case": "catr-051",
+      "receipt": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-01/regressions/catr-051-execution.json",
+        "sha256": "b263219f58fa6a588a5c35a82e85a665e52f31212887c5b307a958d64e19a0c4",
+        "bytes": 8956
+      },
+      "phase": "completed",
+      "passed": true,
+      "exitCode": 0,
+      "nodeExitObserved": true,
+      "lastObservedAt": "2026-11-11T14:50:13.544502+00:00",
+      "lastProgress": {
+        "status": "passed",
+        "failure": null
+      }
+    },
+    {
+      "case": "rswp-051",
+      "receipt": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-01/regressions/rswp-051-execution.json",
+        "sha256": "c52ec9052d28b0711cea66ebdcc5dae0108d8d891c13f8add06d892a0f63aba5",
+        "bytes": 9477
+      },
+      "phase": "completed",
+      "passed": true,
+      "exitCode": 0,
+      "nodeExitObserved": true,
+      "lastObservedAt": "2026-11-11T14:50:47.493153+00:00",
+      "lastProgress": {
+        "status": "passed",
+        "failure": null
+      }
+    }
+  ],
+  "incompleteCase": {
+    "case": "fogw-051",
+    "receipt": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-01/regressions/fogw-051-execution.json",
+      "sha256": "350e498f81ae88edbc74cd46e76a7594e19df65075b686a0cbc41df823917e0e",
+      "bytes": 6137
+    },
+    "phase": "node_running",
+    "passed": false,
+    "exitCode": null,
+    "nodeExitObserved": false,
+    "lastObservedAt": "2026-11-11T14:51:59.841731+00:00",
+    "lastProgress": {
+      "phase": "request",
+      "operation": "advance",
+      "sequence": 43
+    }
+  },
+  "qualification": "The tool session was unavailable after the user-reported disconnection. Its final process exit and cause were not observed. The original running receipt and raw evidence are retained; no exit code, end time or ten-case success is inferred. Fresh complete ten-case replay is required in integrated-final-02."
+}

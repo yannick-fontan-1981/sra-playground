@@ -1,0 +1,371 @@
+{
+  "schema": "logos-engine.followup-application-tar-verification.v1",
+  "startedAt": "2026-11-11T14:37:00.073692+00:00",
+  "status": "passed",
+  "checkout": "/workspace/sites/sra-lot7-followup-recovery-20261111/.sites-checkout",
+  "inventoryPath": "/workspace/sites/sra-lot7-followup-publication-artifacts-20261111/validated-build-and-object-inventory.json",
+  "archivePath": "/workspace/sites/sra-lot7-followup-publication-artifacts-20261111/source-step-02.tar.gz",
+  "expectedInventorySha256": "b82afd24480b9203e8406ffb81ce737ed5080d53056e24a3317dfd352b885d71",
+  "expectedRegularMemberCount": 75,
+  "expectedRegularMemberBytes": 29929130,
+  "qualification": "Read-only byte verification. No extraction, build, packaging, test, game, replay, benchmark, Git write, push or publication.",
+  "onlyWrittenArtifact": "/workspace/sites/sra-lot7-followup-publication-artifacts-20261111/source-step-02-application-verification.json",
+  "performanceLock": {
+    "path": "/workspace/shared/sra-coordination/performance.lock",
+    "mode": "shared_nonblocking",
+    "acquired": true
+  },
+  "inventory": {
+    "sha256": "b82afd24480b9203e8406ffb81ce737ed5080d53056e24a3317dfd352b885d71",
+    "bytes": 203900
+  },
+  "inventorySha256": "b82afd24480b9203e8406ffb81ce737ed5080d53056e24a3317dfd352b885d71",
+  "archive": {
+    "sha256": "1871db79441356dd7ee6772f500c770a2b62ff96177e193e9ddcc2a5f02968dc",
+    "bytes": 14835715
+  },
+  "archiveSha256": "1871db79441356dd7ee6772f500c770a2b62ff96177e193e9ddcc2a5f02968dc",
+  "regularMemberCount": 75,
+  "totalMemberCount": 85,
+  "regularMemberBytes": 29929130,
+  "exactRegularPathSet": true,
+  "allMemberBytesAndSha256MatchInventory": true,
+  "allCurrentDistAndHostingBytesMatchInventory": true,
+  "inputsUnchangedDuringVerification": true,
+  "forbiddenMembers": [],
+  "missingFiles": [],
+  "extraFiles": [],
+  "hostingMapping": {
+    "source": ".openai/hosting.json",
+    "archive": "dist/.openai/hosting.json",
+    "byteExact": true
+  },
+  "nativeWorker": {
+    "path": "dist/assets/v6-agent-worker-BOW7U7bZ.js",
+    "sha256": "531a5a14739622b50a92b10ffd8daa4dbec9b6a3a3e1314c5dd34949765ac6f1",
+    "bytes": 6823840
+  },
+  "regularMembers": {
+    "dist/.openai/hosting.json": {
+      "sha256": "15296ade4f5629e260fc2d338c4cb64efe4bbf356e4be2158458cf9541791705",
+      "bytes": 106
+    },
+    "dist/arc-agi-3.html": {
+      "sha256": "f184bc8b08b03e4de3c3a4e047b4484fa59429104d66a83ea876ac5c8b4ca899",
+      "bytes": 15321
+    },
+    "dist/architecture.html": {
+      "sha256": "393ec83f9ba8a28fab69d043f72d3870325e2d1cfa053458b23cae4dd0004218",
+      "bytes": 18137
+    },
+    "dist/architecture/implementation.html": {
+      "sha256": "f2d91888f8a3902b09d5a565d57772c07191f4d3da25f16728012938e5980cb7",
+      "bytes": 14811
+    },
+    "dist/architecture/memory.html": {
+      "sha256": "bae156612ab97e38e2b3be0a37443d6124ee999b757cd2686a7f3f07a32cfcca",
+      "bytes": 11031
+    },
+    "dist/architecture/principle-distillation.html": {
+      "sha256": "23dd57e8c8ce66000237c20588c800da91951c384c6fbeadc2d94a6835a42cff",
+      "bytes": 20167
+    },
+    "dist/architecture/reasoning-tree.html": {
+      "sha256": "d968043fb97ea5f5f5fa12d2dd815aa077297cfa15b44d7a66ea08ef06dafb03",
+      "bytes": 22585
+    },
+    "dist/architecture/reasoning.html": {
+      "sha256": "3b6c4430c476817f22e623cc23f5c6e4865e8458436bb4444fe8f4f9d269b2db",
+      "bytes": 14403
+    },
+    "dist/architecture/representations.html": {
+      "sha256": "d47d499aa17ce4c8337a36ea8b1f18501f0b9d81a373dbf496ace1454853134a",
+      "bytes": 13465
+    },
+    "dist/architecture/symbolic-choice.html": {
+      "sha256": "ee8ad417e9cd6b49d5771914c19363bce5931cc2fe06b210987482e61dbc18fb",
+      "bytes": 19545
+    },
+    "dist/assets/bundle-DhSwXDTY.json": {
+      "sha256": "809bb77585831cb8a43a6e91c2a2e18eec84e8c3a5a772fddb82596823b1cd3a",
+      "bytes": 422274
+    },
+    "dist/assets/common_frontier_policy.drm-Dl1WBFy2.json": {
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f",
+      "bytes": 48531
+    },
+    "dist/assets/gallery-BNtGCBrK.js": {
+      "sha256": "28910bce918066f47fa6a66241c70119626529bbeb5db8bd5f973c228ea887e4",
+      "bytes": 1030
+    },
+    "dist/assets/gallery-e3nGcIHv.css": {
+      "sha256": "d3ae54b6584210af45bf9f10a56b9611f8194f1494c7cad72d26600dce7a8d70",
+      "bytes": 6037
+    },
+    "dist/assets/game-worker-CXlZYTJN.js": {
+      "sha256": "7c051735fc05c6e6d31e5d93c6655dec03cec3c011871f154c03cb41729ffe60",
+      "bytes": 1645
+    },
+    "dist/assets/index-0l2q35a6.css": {
+      "sha256": "5b01cec87a0dc70e6fa0759aceae88b59b2fe4c35a639355f3a80ace4dfe8f73",
+      "bytes": 8375
+    },
+    "dist/assets/index-CxDbTC2T.js": {
+      "sha256": "bf40112e021fe08a716547336842135ce9973303174b7daf2663ca446a7b3475",
+      "bytes": 94180
+    },
+    "dist/assets/lab-worker-Bg0iqfz3.js": {
+      "sha256": "75c6be4332d8146798a20a136a19bc2bfb62cef68f7461576727380f96ca7e68",
+      "bytes": 53139
+    },
+    "dist/assets/reading-BtkRf0U9.js": {
+      "sha256": "076fdd9b9dd1c922d6624ecf6122119670fc477762a8795720df153a31153f62",
+      "bytes": 1474
+    },
+    "dist/assets/reading-n65TbKcd.css": {
+      "sha256": "5bf2cc9ce52413a59ce96a866a7c665448f902091a00bed040aedfb124e04eb8",
+      "bytes": 27282
+    },
+    "dist/assets/reasoning-lab-CsA8aTU7.css": {
+      "sha256": "f0684f34208051cd0c3b826c3c8383a5c84b1c5a093e4c3f466edb1f1928dc7d",
+      "bytes": 9117
+    },
+    "dist/assets/reasoning-lab-dAnpUWlY.js": {
+      "sha256": "6fde54bcd347a285446fe00aadfb0bab015448a724cb9c9f5539ca1a258bc1f2",
+      "bytes": 12725
+    },
+    "dist/assets/site-header-DKl4Usgc.js": {
+      "sha256": "6a3e135a2bb810510f4d2c3d364b6f9c46f1330bc6fd5a755d3b44e6d361a502",
+      "bytes": 2950
+    },
+    "dist/assets/strategy-g4UuL-Tb.drm": {
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44",
+      "bytes": 46966
+    },
+    "dist/assets/styles-DL3nQckm.css": {
+      "sha256": "507718e8da9b7bde5815d81d46d39920dca38292ada6a071dec7c6c6d56e612e",
+      "bytes": 44114
+    },
+    "dist/assets/styles-IHo3spd-.js": {
+      "sha256": "785597bca2e7dd97a652a20a197c077079e635a5663433448e0e1d9fd8c98a64",
+      "bytes": 698
+    },
+    "dist/assets/symbolic-reasoning-CKMVdpW0.js": {
+      "sha256": "dd9f55d3cc4c022f7a107c0e6b0fd446e4fcaa760209a96f020d89385202bcc1",
+      "bytes": 4022
+    },
+    "dist/assets/symbolic-reasoning-ClXzdkf8.css": {
+      "sha256": "8c2587aa54ade772063cf2ab6245e153587cd264c0fc07ca2a4918505a72eb45",
+      "bytes": 3419
+    },
+    "dist/assets/v6-agent-worker-BOW7U7bZ.js": {
+      "sha256": "531a5a14739622b50a92b10ffd8daa4dbec9b6a3a3e1314c5dd34949765ac6f1",
+      "bytes": 6823840
+    },
+    "dist/assets/v6-knowledge-store-Dxsl6j-F.js": {
+      "sha256": "c03fe32861a99ceac7b101f313204b4db17a6292fe80756407d3dd1f450ae7b6",
+      "bytes": 1074951
+    },
+    "dist/contact.html": {
+      "sha256": "9a11434292094696278847591ccb1364c95dddda0c89df2afb74d52ac655e673",
+      "bytes": 7020
+    },
+    "dist/favicon.svg": {
+      "sha256": "6af0232ec54b0f68a8bb4d3f76520ac6bb3bb4deb1080297e4ec97cb962a4c98",
+      "bytes": 704
+    },
+    "dist/gallery.html": {
+      "sha256": "f911f93d2fe135101cb21caccf2f86d18a7bbd01ec430a570d1b2a7e8bc69433",
+      "bytes": 149831
+    },
+    "dist/gallery/custom.png": {
+      "sha256": "55c26c2e0c1ba517d25bd71e3d7e2b10eb63fb3a305f4bcdea3aacf20ba7ce36",
+      "bytes": 40443
+    },
+    "dist/gallery/custom_2.png": {
+      "sha256": "761462d1686d3080ff4814d41bf6e6f00471a2a6bcd041717d4193182d96a16e",
+      "bytes": 43309
+    },
+    "dist/gallery/custom_3.png": {
+      "sha256": "33905823143e957237e4d01d43f63ad79fc4b9a141802dd85bd29869ff372682",
+      "bytes": 51441
+    },
+    "dist/gallery/official.png": {
+      "sha256": "01136766dd4d43e0c500b486ec2a984db37d757d8e543de4fe321ce3ed41a294",
+      "bytes": 51788
+    },
+    "dist/game-mosaic.png": {
+      "sha256": "4d7ffcee792622cb066f5e1f9f713010487614a84ead6f82d91907e4c7be86c4",
+      "bytes": 9619
+    },
+    "dist/index.html": {
+      "sha256": "b1adea61db0b2ab567da9f750705ff61cde4fbf4bb6a8a80230bee058495c642",
+      "bytes": 1048
+    },
+    "dist/licenses/pyodide-MPL-2.0.txt": {
+      "sha256": "393eaf2b92b3d49bea139e39b6fd205b6e99c499999986aec5554586a830dfdd",
+      "bytes": 16726
+    },
+    "dist/motivation.html": {
+      "sha256": "6d46cb3c71bae00ace98c5e3551ca3499c6b03a3653b992c9cb0224732859ef9",
+      "bytes": 40983
+    },
+    "dist/provenance.json": {
+      "sha256": "11c49ed27cf58c54eda091082b2c449ff83bcfb6973c6cbfe477bda740a3f422",
+      "bytes": 658
+    },
+    "dist/python/custom-games.zip": {
+      "sha256": "44d108fe4feed3ce0c9587e90f071876b13730af8136cd54cbfa5c1562d87822",
+      "bytes": 899593
+    },
+    "dist/python/custom-manifest.json": {
+      "sha256": "24186565f3f17f923df00465ea4a842d6058b13eab5f9109c6b6576617dd6324",
+      "bytes": 178907
+    },
+    "dist/python/custom_level_navigation.py": {
+      "sha256": "8cc1716619aff08915135ebfa093fc305b211e28fabdff2c027d994d84f82c9b",
+      "bytes": 7900
+    },
+    "dist/python/game_bridge.py": {
+      "sha256": "cc9df3ea6eae0057898fa01fd949322c6af0b481030f4c271b9a719f0a07983e",
+      "bytes": 13121
+    },
+    "dist/python/official-games.zip": {
+      "sha256": "90b5aeaee21ec11285799287445b33d3c19f4ea4894a8a60964117f7757f59ed",
+      "bytes": 304996
+    },
+    "dist/python/official_adapter.py": {
+      "sha256": "efead273b89ffe8cf595e41b9f4b25a6106e6cb6e5a7d1013ebc887cfc646837",
+      "bytes": 9574
+    },
+    "dist/reasoning-lab.html": {
+      "sha256": "faf0f734c815ddd54e4fd87442d718c66410f13c55a80b94e1e65ef799fa8789",
+      "bytes": 1049
+    },
+    "dist/symbolic-reasoning.html": {
+      "sha256": "0e85c8abaeaa5a5d847383cec5cd3eb26da35755d90f1ab11edfd13c733e3a6e",
+      "bytes": 32187
+    },
+    "dist/vendor/pyodide/annotated_types-0.7.0-py3-none-any.whl": {
+      "sha256": "6541523b4b16c1953d2fc9b82fb86c540eea9f78fca329ab371ed13a8b0faa51",
+      "bytes": 11963
+    },
+    "dist/vendor/pyodide/numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl": {
+      "sha256": "a292c1f5d7d8a2208cd5e94fc467604c131cabcd2fc14fed6eefde121e7fabdf",
+      "bytes": 2960568
+    },
+    "dist/vendor/pyodide/package.json": {
+      "sha256": "40ca48e43ce4ddc68412d5b7a7ca9e2477cd4f0e672277ae468ac2245717079b",
+      "bytes": 2999
+    },
+    "dist/vendor/pyodide/pydantic-2.12.5-py3-none-any.whl": {
+      "sha256": "04854875001e07a8a74d87b7c80296cba168773d8c9804e232d695f82484d7d7",
+      "bytes": 463578
+    },
+    "dist/vendor/pyodide/pydantic_core-2.41.5-cp314-cp314-pyemscripten_2026_0_wasm32.whl": {
+      "sha256": "54703fa42a0d4d574283cfb8f08050ba7820c9a42b0a21bc1286407d9a9e54da",
+      "bytes": 1310164
+    },
+    "dist/vendor/pyodide/pyodide-lock.json": {
+      "sha256": "5dc2fc119108bc148c7457dc86e7675b5c87e1cafd420b9c34c1eaef7b36c010",
+      "bytes": 119077
+    },
+    "dist/vendor/pyodide/pyodide.asm.mjs": {
+      "sha256": "f7cdc8ece80678ceb712f8e65ebe6d3a83203a180c399865f49612a051693635",
+      "bytes": 1250344
+    },
+    "dist/vendor/pyodide/pyodide.asm.wasm": {
+      "sha256": "cc36e3cab04fdfc9a63ff13eb52eae2b911bf46c025cc7b281f394bd3de1d5e6",
+      "bytes": 9598218
+    },
+    "dist/vendor/pyodide/pyodide.mjs": {
+      "sha256": "6f1d60f7bf529beb300f0f47983c921d3982363640ba20af0e38efdddbc66109",
+      "bytes": 17931
+    },
+    "dist/vendor/pyodide/python_stdlib.zip": {
+      "sha256": "fa1957e5777068fc4f7437f96d860ae2fbe9c19732ba06c84e004ec16dd7dd7a",
+      "bytes": 2545637
+    },
+    "dist/vendor/pyodide/typing_extensions-4.15.0-py3-none-any.whl": {
+      "sha256": "4fec68770a05408e668a4fa53d6bf4f0f684b9dacf820c7c5d6e97d3ad225e29",
+      "bytes": 44613
+    },
+    "dist/vendor/pyodide/typing_inspection-0.4.2-py3-none-any.whl": {
+      "sha256": "deb989630985f7a7296b90357a947a804a7612cecbb6439d6e71128e01f61051",
+      "bytes": 14610
+    },
+    "dist/videos.html": {
+      "sha256": "b6deca802c9e323306c3247e549400383e63dbc234429ae585f598c412455cd6",
+      "bytes": 8663
+    },
+    "dist/videos/01-understandable-intelligence.html": {
+      "sha256": "44782a784b3bd3ba23bb25f2a4f3ca678ec9c5213d6bca7670720b82e5e0de66",
+      "bytes": 13055
+    },
+    "dist/videos/02-principle-distillation.html": {
+      "sha256": "57ad6532c26a1dcd4e14afad1fb888562f1005b9751645b0562b33b44c0ba5dd",
+      "bytes": 12311
+    },
+    "dist/videos/03-operational-consciousness.html": {
+      "sha256": "e5aafeccada41f000f97f7a7712620e2752c34b0ff3c280357a0a3067aa6c8c0",
+      "bytes": 12947
+    },
+    "dist/videos/04-verbalizing-reasoning.html": {
+      "sha256": "59a6a45129f237a96208e83549fd283553c2d6d9505deb5f8d2c50b8b03502c8",
+      "bytes": 11133
+    },
+    "dist/videos/05-alignment.html": {
+      "sha256": "352fff951e4bbf0e95966e1c6d72d22fcf4c98a2194b54f08bfcc49d74f60821",
+      "bytes": 12702
+    },
+    "dist/videos/06-primitives-of-reasoning.html": {
+      "sha256": "ee09a62676e1b6a8064696da2e0ab484e780a48651360fb2809ec2d5dd53fad2",
+      "bytes": 14663
+    },
+    "dist/videos/episode-01.jpg": {
+      "sha256": "cfd8654db761b2043c1a4b746b50113c7ed3c81c9e42fdf531836e41f8fb2453",
+      "bytes": 91838
+    },
+    "dist/videos/episode-02.jpg": {
+      "sha256": "86eb8b4727825b22bcd634433fee5f2f58d0ca98874d40f00b828097cb2724ea",
+      "bytes": 135572
+    },
+    "dist/videos/episode-03.jpg": {
+      "sha256": "c93bba8a9c5706a1972fef3748d5f73c3949cf8c3a47ac921e3b82f60c19cf4d",
+      "bytes": 136431
+    },
+    "dist/videos/episode-04.jpg": {
+      "sha256": "2be40bbc9cce439d7133419ac588d45a6dfb1305354d60eb2a76aa1629da20a4",
+      "bytes": 121426
+    },
+    "dist/videos/episode-05.jpg": {
+      "sha256": "7e5536baa75c8c7d7d9f8faf0ef31ac9f9efa23efebf4de68c1c2ae5b5310935",
+      "bytes": 175688
+    },
+    "dist/videos/episode-06.jpg": {
+      "sha256": "e59350247899c1e62d7dfdb246788a0754d9600d3ce682597ad262818b8c92c1",
+      "bytes": 145762
+    }
+  },
+  "directoryMembers": [
+    "dist",
+    "dist/.openai",
+    "dist/architecture",
+    "dist/assets",
+    "dist/gallery",
+    "dist/licenses",
+    "dist/python",
+    "dist/vendor",
+    "dist/vendor/pyodide",
+    "dist/videos"
+  ],
+  "tarEndPaddingBytes": 1536,
+  "expandedTarBytes": 29992960,
+  "verifier": {
+    "path": "/tmp/verify-lot7-final-application-tar.py",
+    "sha256": "d26a508c8878a462dff2193ac1c287bb7258914367918c60cec1beb7ffc9e9e7",
+    "bytes": 14492
+  },
+  "packageFormat": "Sites 1.1.6 packages a dist-rooted tar.gz and stages source hosting at dist/.openai/hosting.json. The source manifest already uses the normalized dist directory; no hosting-byte exemption is applied.",
+  "finishedAt": "2026-11-11T14:37:00.279595+00:00"
+}

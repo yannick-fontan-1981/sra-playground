@@ -1,0 +1,46 @@
+{
+  "schema": "logos-engine.lot6b.published-062-integration.v1",
+  "completedAt": "2026-11-11T17:22:34.942286+00:00",
+  "publishedPredecessor": "4afcbfe6a25bd3a88223be543e443bc53b9c8814",
+  "priorDevelopmentCheckpoint": "4d1af37632cc40323171ddb3d05dab4c8389aa34",
+  "nativeSource": {
+    "digest": "2e710bd53c5e77d2215f2a6dcb0d2aa5f206debfd793f1b43f91a2c9746d66bd",
+    "fileCount": 314
+  },
+  "tests": {
+    "targeted": 33,
+    "commonRuntime": 9,
+    "failed": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "inputsUnchanged": true,
+    "commonRuntimeIncludesArchivedReplays": [
+      "HANO",
+      "SYME",
+      "DNOI"
+    ]
+  },
+  "entryPoints": {
+    "connected": 65,
+    "declared": 76,
+    "percent": 85.5
+  },
+  "migrationSummary": {
+    "pythonModules": 1369,
+    "pythonLines": 320375,
+    "declaredClassesAndFunctions": 12857,
+    "dataFiles": 417,
+    "verifiedModules": 0,
+    "componentVerifiedModules": 202,
+    "partiallyTransferredModules": 149,
+    "transferredUnverifiedModules": 0,
+    "pendingModules": 1018,
+    "strategyFamilies": 16
+  },
+  "migrationFailures": [],
+  "typecheck": "passed",
+  "newKLOTExecution": false,
+  "newBrowserQualification": false,
+  "official6BCost": false,
+  "qualification": "Actual0.62 is integrated and its deadline conversion preserved. This is a development checkpoint before actual published0.63 reconciliation. Previous KLOT proof remains bound to its original native digest; no success or cost is inferred for this new freeze."
+}

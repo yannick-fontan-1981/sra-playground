@@ -1,0 +1,24 @@
+{
+  "schema": "logos-engine.lot10b.environment-recovery.v1",
+  "recordedAt": "2026-11-11T11:58:03.643076+00:00",
+  "actualPublishedSite": 95,
+  "actualPublishedCommit": "3a70463039768f7114edae7d94d7dd33b7f36aa8",
+  "actualPublishedNativeVersion": "0.58.0",
+  "oldCheckoutPresent": false,
+  "oldCoordinationPresentAtFirstObservation": false,
+  "recoveredUnpublishedCommits": [],
+  "priorUnpublishedCommitIds": [
+    "e45dd6bdd3cb4544eb17d6e13b5e00b0ef35b1d5",
+    "48ad49abf716d345a8b9e2b7738099a46fae8fdf",
+    "0f7ae5e480c9a67ea61ceaae5809bc47530f3220",
+    "d9b2c2bd61499eda2532fccd7b64ab203ce9963d"
+  ],
+  "historicallyReportedHPDL": {
+    "chargedSeconds": 159.45478678199166,
+    "remainingSeconds": 2240.5452132180085,
+    "actions": 40,
+    "rawLedgerRecovered": false,
+    "newActionsInThisRecovery": 0
+  },
+  "qualification": "Repository source and published historical evidence were recovered from actualSite95. Local-only later code and receipts were not recovered. Prior reported results remain historical observations, not recreated execution evidence. Reconstructed code and all required new proofs will carry new provenance; prior HPDL time is retained, never reset."
+}

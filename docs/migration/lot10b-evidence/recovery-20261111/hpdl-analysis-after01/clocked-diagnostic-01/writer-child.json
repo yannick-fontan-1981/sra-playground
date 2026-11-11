@@ -1,0 +1,27 @@
+{
+  "name": "writer",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "--max-old-space-size=1536",
+    "--expose-gc",
+    "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/check-stream-evidence-json.mjs",
+    "--checkpoint",
+    "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json",
+    "--execution-receipt",
+    "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/execution-hpdl.json",
+    "--output",
+    "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/writer-check.json"
+  ],
+  "resultPath": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/writer-check.json",
+  "logPath": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/writer.log",
+  "status": "running",
+  "startedAt": "2026-11-11T13:32:40.695834+00:00",
+  "monotonicStartedNs": "6405163625456",
+  "exitCode": null,
+  "childSpawnEstablished": true,
+  "termination": null,
+  "pid": 4,
+  "processGroupId": 4,
+  "parentDeathSignal": "SIGKILL",
+  "separateProcessGroup": true
+}

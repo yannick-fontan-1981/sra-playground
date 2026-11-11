@@ -342,6 +342,58 @@ test('a known prefix survives a long inactive pause with a refreshed deadline, t
   } finally { runtime.close('selected_rigid_pause_active_budget_contract_complete'); }
 });
 
+test('a paused known prefix preserves a tighter caller deadline on a different clock and refuses the next expired action', async () => {
+  let clock = 1000, callerClock = 9_000_000;
+  const runtime = await createNativeV6Runtime(declarations, { now: () => clock });
+  const { raw } = owner(runtime), events: R[] = []; captureSelectedRigid(raw, events);
+  try {
+    const learned = await learnThroughCaller(runtime, events, 'selected-rigid-shifted-caller-deadline');
+    const source = callerSession().steps[2], original = learned.result;
+    const oldDeadline = raw.captureContext().levelDeadlineMs!;
+    const proposalCount = proposals(events).length, recordCount = records(events).length;
+    clock += 3_600_000; // The retained action was paused without active-level work.
+    assert.ok(clock > oldDeadline);
+    const callerDeadline = callerClock + 75;
+    const boundedExecution: NativeExecution = { ...execution, now: () => callerClock, deadlineMs: callerDeadline };
+    let result = await runtime.advance({ command: original.command!,
+      observation: copy(source.returns[0].afterPublic), executionMs: 0 }, boundedExecution);
+    retainReturnReference(result, source.returns[0], learned.references);
+    released(result);
+    assert.equal(result.authorization!.decision_revision, original.authorization!.decision_revision);
+    assert.equal(result.authorization!.action_index, 1);
+    assert.equal(proposals(events).length, proposalCount);
+    assert.equal(records(events).length, recordCount);
+    assert.equal(result.snapshot.activeSeconds, 0);
+    const continued = events.findLast(event => event.method === 'before')!;
+    assert.equal(continued.result.admitted, true);
+    assert.equal(continued.contextBefore.levelDeadlineMs, clock + 75,
+      'The caller deadline is translated to the runtime clock without enlarging its remaining duration');
+    assert.equal(continued.contextBefore.remainingLevelActions, 77);
+    assert.deepEqual(continued.clockReads, [clock]);
+
+    // The second command was already authorized. Its actual return must be
+    // acquired, but an expired request must not authorize a third command.
+    clock += 76; callerClock += 76;
+    result = await runtime.advance({ command: result.command!,
+      observation: copy(source.returns[1].afterPublic), executionMs: 0 }, boundedExecution);
+    retainReturnReference(result, source.returns[1], learned.references);
+    assert.notEqual(result.kind, 'action');
+    assert.equal(result.command, null);
+    assert.equal(result.snapshot.activeSeconds, 0,
+      'This refusal belongs to the tighter caller deadline, not the active-level time cap');
+    assert.equal(result.snapshot.actions, 4);
+    assert.equal(proposals(events).length, proposalCount);
+    const refused = events.findLast(event => event.method === 'before')!;
+    assert.equal(refused.arguments[1], 2);
+    assert.equal(refused.contextBefore.levelDeadlineMs, clock);
+    assert.equal(refused.contextBefore.remainingLevelActions, 76);
+    assert.deepEqual(refused.result, { admitted: false, reason: 'level_deadline' });
+    assert.equal(records(events).length, 4, 'Both real path returns are acquired once when the expired guard seals the prefix');
+    retainedState(runtime, raw, rebind(source.returns[1].stateAfter, learned.references));
+    assert.ok(events.every(event => event.returnedNormally && event.observationErrors.length === 0));
+  } finally { runtime.close('selected_rigid_shifted_caller_deadline_contract_complete'); }
+});
+
 test('the adapter passes the current zero level quota separately from its positive prefix allowance', async () => {
   const first = callerSession().steps[0], raw = new NativeSelectedRigid(copy(fixture.configuration));
   const wrapper = selectedRigidFamily(raw);

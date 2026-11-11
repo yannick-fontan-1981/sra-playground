@@ -1,8 +1,64 @@
 # Complete V6 capability transfer into the V7 architecture
 
+<!-- LOT10B_TRANSFER_CURRENT_START -->
+
+## Published lot 10B: WindowQuestion / native 0.62.0 / Site 102, with partial HPDL qualification
+
+**WindowQuestion / native 0.62.0 is actually published in [Site 102](lot10b-evidence/recovery-20261111/publication-062/native-publication.json)**, source `1019d2eb929d7dc201a5c1f6edce5aa1c5dfa464`, terminal deployment **`succeeded` on 11 November 2026 at 13:50:10.918057 UTC−03**. Functional validation and complete-session cost are accepted, with the explicit partial HPDL qualification preserved. The published native preserves the actual published native 0.61 predecessor from Site 98 and the [effective Site 101 documentation closure](lot10b-evidence/recovery-20261111/published7-integration-01/documentation101-observation.json), source `d75a36f0a99bf6c301034523a3138a64d2f6e744`. That predecessor closure is merged locally in `866dc5f`. The owner-private audience and access revision 3 are unchanged. This documentation closure brings together the actual native publication evidence and the updated roadmap.
+
+| Current 10B evidence | Result and qualification |
+| --- | --- |
+| [Frozen native source](lot10b-evidence/recovery-20261111/integrated-final-02/source-manifest.json) and [delivery integrity](lot10b-evidence/recovery-20261111/integrated-final-02/delivery-integrity.json) | **310 native files**, digest `74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12`, **768 frozen archive inputs**; verified source and validation provenance retained. |
+| [Declared tests](lot10b-evidence/recovery-20261111/integrated-final-02/validation/delta-tests-run.json), [release checks](lot10b-evidence/recovery-20261111/integrated-final-02/validation/checks-run.json), [recorded regressions](lot10b-evidence/recovery-20261111/integrated-final-02/regressions/regression-summary.json) | **1,205/1,205 tests in 44 files**, **5/5 delivery checks**, **10/10 recorded cases and 170/170 comparisons passed**. The interrupted first replay attempt remains retained. |
+| [Entry register](v6-entry-point-progress.json) | **64/76 connected entries, 12 remaining**. This is entry coverage, not complete V6 parity. |
+| [Transfer inventory](v6-coverage.json) | **199 component-verified modules, 149 partial transfers, 1,021 pending and 0 fully verified modules**. All six complete-migration gates remain false. |
+| [HPDL02 on the current candidate](lot10b-evidence/recovery-20261111/hpdl-live-02/execution-hpdl.json) | **Partial: three levels completed, 39 actual public returns and 38 sealed actions/prefixes**. The activity limit of 300 seconds ended the attempt at level 4 `NOT_FINISHED`; the partial next checkpoint is retained. No final campaign/trace or six-level success is claimed. |
+| [Original component comparison](lot10b-evidence/recovery-20261111/hpdl-analysis-after02/clocked-diagnostic-01/window-source-parity.PARTIAL.json.gz) | **93 source calls, 76 restores, 152 ablations and 23 action/refusal changes, zero differences**. This proof belongs to current digest 741; the earlier 318 proof remains historical and separate. Complete-original-caller parity is not established. |
+| [Actual browser QA](lot10b-evidence/recovery-20261111/hpdl-browser-01/browser-qa.json) | **Passed**: Pause at 2 actions, one action to 3, then resume through the first level at 7 actions. The second pause wait timed out; the actual subsequent state was “Level completed”, with no invented second “Paused” state. |
+| [Cumulative HPDL review](lot10b-evidence/recovery-20261111/hpdl-final-review-01/hpdl-case-budget-review.json) | **Partial qualification, own live contribution observed**, clock closed at **1909.1412980339917 / 2400 seconds**, leaving **490.85870196600837 seconds**, without reset or refunded intervals. |
+
+### Accepted global cost against published native 0.61
+
+The [complete cost report](lot10b-evidence/recovery-20261111/performance-integrated-01/RESULTS.md) and [independent qualified review](lot10b-evidence/recovery-20261111/performance-integrated-01/owner-growth-review.json) accept **2/2 games**, with **10,297/10,297 checks**. The unchanged A1/B1/B2/A2 population retains **32 measured sessions / 400 actions** and **8 separate warmups / 24 actions**.
+
+| Complete-session median change | Accepted result |
+| --- | --- |
+| STCK | **+5.4005729298%**, strictly below +10% |
+| SMLP | **−1.7989027140%**, strictly below +10% |
+
+**SMLP restoration increases by +26.3436295523%**. That phase overrun remains visible and is admissible under the user's rule because the complete-session global criterion passes for SMLP. No measured session is removed, no time is subtracted and no game offsets another. The historical strict aggregator retains its real **exit 1** and `Within-cohort work metadata changed` refusal; acceptance is separately supported by the contract declared before measurement and its qualified review. It is not a fabricated success of that strict aggregator.
+
+**Native 0.62 is delivered in Site 102 with its partial HPDL qualification retained.** HPDL retains its three-level partial result and full-caller limitation. The next capability in lot 10 is **10C / `ordered_recruitment`**, followed by 10D / `temporal_selection` and 10E / `invited_endpoints`. See the [current roadmap](v6-delivery-roadmap.md), [WindowQuestion lineage](lot10b-window-question-lineage.md) and [10B evidence index](lot10b-evidence/README.md).
+
+<!-- LOT10B_TRANSFER_CURRENT_END -->
+
+<!-- LOT7_FOLLOWUP_TRANSFER_START -->
+
+## Historical published predecessor: Workshop continuation / native 0.61.0
+
+The [native follow-up is published in Site 98](lot7b-evidence/followup-recovery/publication/native-publication.json), commit `653e40a4f45df8ec8c6bda005004c7cdb8df074a`, deployment `succeeded` on **11 November 2026 at 11:39:04.455525 UTC−03**. The existing owner-private audience is preserved. Its documentation closure is published in **Site 99**, commit `61e176b42234db380f23aaace216e6bd2bfe7491`, at **11:49:50 UTC−03**. The [corrective documentation is published in Site 100](lot7b-evidence/followup-recovery/publication/clean-repeat-correction-publication.json), commit `5f8ca04cbf69cf2ccf7d2aba64a4cfde2a280613`, at **12:17:03.733262 UTC−03**; it recorded the first window’s withdrawal before the clean repeat. Actual Site 97 / native 0.60 remains the measured predecessor.
+
+**The complete clean ABBA repeat is accepted: native 0.61 is published and cost-qualified.** The [eligible window](lot7b-evidence/followup-recovery/performance-clean-repeat/window.json) ran on **11 November 2026, 12:22:07–12:31:04 UTC−03** (**15:22:07.889158–15:31:04.565927 UTC**); [isolation acceptance](lot7b-evidence/followup-recovery/performance-clean-repeat/isolation-revalidation.json) was recorded at **12:31:59 UTC−03**. The [global decision](lot7b-evidence/followup-recovery/performance-clean-repeat/global-budget-decision.json) accepts **2/2 cases**, with complete-session medians **STCK −2.924030%** and **SMLP +0.009074%**. Each game independently stays strictly below +10%; phase overruns remain admissible under the user’s rule and remain visible.
+
+The entire first window remains ineligible for isolated cost acceptance. The [acknowledged deviations](lot7b-evidence/followup-recovery/coordination/quiet-deviation-acknowledgment.json) retain both the Lot 5C scans, each emitting approximately 175–178 MB during **11:19:51–11:22:52.050157 UTC−03**, and the separate Lot 6B startup Git-read exception. They overlapped the first **11:17:29–11:26:42 UTC−03** window. Its **STCK +5.918585% / SMLP +1.304421%** figures are historical arithmetic only. Every original sample and receipt is preserved byte for byte; no selection or pooling between windows supplies the current acceptance.
+
+After a grounded stationary-contact refusal, the native caller consults the remaining providers in declared order. The first non-null offer must have its own current acquired witness and pass its ordinary guard. Workshop seals the exact current source question without changing its eleven proposal fields or eight persistent fields. This is an explicit native coordination extension; complete Python-caller parity is not claimed.
+
+- **5,042/5,042 tests in 133 files**, five delivery checks and **187/187 comparisons across 11 declared regressions** passed. Their source is unchanged; the clean cost repeat adds no functional capture. The original two stale assertions remain recorded.
+- The first static audit’s missing 6A proof remains recorded. After the actual predecessor proof arrived, the unchanged audit passed; the complete report differs only in its now-empty failure list. The [reviewed prospective closure](lot7b-evidence/followup-recovery/integrated-final/post-publication-audit/closure.json) preserves all earlier receipts.
+- The [strict verification](lot7b-evidence/followup-recovery/performance-clean-repeat/strict-work-verification.json) matches exact predeclared work forms in **40/40 trials**: **32 measured sessions / 400 actions**, plus only **8 excluded warmups / 24 actions**. The [independent arithmetic review](lot7b-evidence/followup-recovery/performance-clean-repeat/consolidation-review.json) passes **231/231 checks**.
+- Aggregate phase diagnostics are **14/16**: restoration remains **STCK +19.386244%** and **SMLP +17.331942%**. Three cohort overruns also remain: cohort 1 restoration **STCK +19.386244% / SMLP +20.346903%**, and cohort 2 restoration **SMLP +32.116928%**. All samples, diagnostics and available p95 remain in the [clean-repeat report](lot7b-evidence/followup-recovery/performance-clean-repeat/results.md); the [first report](lot7b-evidence/followup-recovery/performance/results.md) is retained separately.
+- The [exclusive lock](lot7b-evidence/followup-recovery/performance-clean-repeat/lock-window.json) was held through strict verification of all 40 trials. The three active lanes’ status payloads were unchanged at start, end and acceptance apart from timestamps. The repeat binds source commit `965e2dbe38c1a484a3dc1f5d79e5dcec03d55b03` and the same **306-file native digest** `f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279`. **304 files match the predecessor**; the delta is the native caller and RankedWorkshop. Five ordinary source pushes and **375 exact application-member comparisons** preserve the validated build.
+
+LKEY remains closed at **2,390.347106991 seconds**, with no new action, replay, oracle, payload analysis or browser claim. Lost unpublished historical observations do not validate the reconstructed bytes. For this predecessor, the register recorded **63/76 connected entries, 13 open**; all six complete-migration gates remain false. **The native 0.61 follow-up is complete and qualified. Its successor 10B / 0.62 `window_question` is tracked in the current candidate block above; subsequent publication slots remain 5C / 0.63 `observed_object_binding` and 6B `selected_rigid`, with cost windows and publications serialized.** See the [updated roadmap](v6-delivery-roadmap.md) and [evidence index](lot7b-evidence/followup-recovery/README.md).
+
+The [final clean-repeat documentation closure is actually published in Site 101](lot10b-evidence/recovery-20261111/published7-integration-01/documentation101-observation.json), source `d75a36f0a99bf6c301034523a3138a64d2f6e744`, with terminal deployment `succeeded` on **11 November 2026 at 12:43:52.515923 UTC−03**. Sites 99, 100 and 101 preserve the native 0.61 and application build of Site 98. The accepted cost is the complete clean repeat reported above; the withdrawn first-window figures remain historical only.
+
+<!-- LOT7_FOLLOWUP_TRANSFER_END -->
+
 <!-- LOT6A_TRANSFER_CURRENT_START -->
 
-## Current migration: lot 6A PreviewPacking / native 0.60.0
+## Published predecessor: lot 6A PreviewPacking / native 0.60.0
 
 The reconstructed `preview_packing` owner is connected in the original strategy order, with selected-return acquisition, guarded commands and exact source-state restoration. Private native publication is confirmed in **Site 96**, commit `cdaceea1c8918430a70b95fa427b31fcd22d290c`, preserving the owner-only audience.
 

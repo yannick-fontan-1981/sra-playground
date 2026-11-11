@@ -12,14 +12,11 @@ __pycache__/
 
 # Lot 5B source archives are retained in verified ordered byte parts.
 /docs/migration/lot5b-evidence/**/source-archive.tar.gz
-
 # v53 exact source archives are tracked in checked, ordered byte parts.
 /docs/migration/native-campaigns-v53/attempt*/source-archive.tar.gz
 /tests/fixtures/v6-outline-service-reference.json.gz
-
 # Frozen campaign archives are represented by their checked byte parts.
 /docs/migration/native-campaigns-v*/**/source-archive.tar.gz
-
 # v52 evidence: lossless gzip is tracked; restore JSON with scripts/restore-v52-evidence.py
 /docs/migration/native-campaigns-v52/attempt7/gare-three-levels.json
 /docs/migration/native-campaigns-v52/attempt8/gare-three-levels.json
@@ -45,7 +42,6 @@ __pycache__/
 /docs/migration/native-campaigns-v52/valv-recorded-public-replay.json
 /docs/migration/native-campaigns-v52/verified/gare-three-levels.json
 /docs/migration/native-campaigns-v52/zipp-recorded-public-replay.json
-
 # Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/native-campaigns-v56/final/glob-campaign.json.gz
 /docs/migration/native-campaigns-v56/final/regressions/catl-replay.json.gz
@@ -57,16 +53,10 @@ __pycache__/
 /docs/migration/native-campaigns-v56/final/regressions/stck-replay.json.gz
 /docs/migration/native-campaigns-v56/final/regressions/valv-replay.json.gz
 /docs/migration/native-campaigns-v56/final/regressions/zipp-replay.json.gz
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/native-campaigns-v56/final/regressions/as66-replay.json.gz
 /docs/migration/native-campaigns-v56/final/regressions/gare-replay.json.gz
 /docs/migration/native-campaigns-v56/final/regressions/re86-replay.json.gz
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/native-campaigns-v57/baseline-smlp/smlp-campaign.json.gz
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/native-campaigns-v57/final/regressions/as66-replay.json.gz
 /docs/migration/native-campaigns-v57/final/regressions/catl-replay.json.gz
 /docs/migration/native-campaigns-v57/final/regressions/cn04-replay.json.gz
@@ -81,81 +71,48 @@ __pycache__/
 /docs/migration/native-campaigns-v57/final/regressions/valv-replay.json.gz
 /docs/migration/native-campaigns-v57/final/regressions/zipp-replay.json.gz
 /docs/migration/native-campaigns-v57/final/smlp-campaign.json.gz
-
 # Lot 1 exact originals are retained in checked gzip or ordered source parts.
 /docs/migration/lot1-evidence/ablation/parent-scope-gap.json
 /docs/migration/lot1-evidence/final/source-archive.tar.gz
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot1-evidence/final/life-campaign.json.gz
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot2a-evidence/ls20-cold/ls20-campaign.json.gz
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot2a-evidence/tr87-cold/tr87-campaign.json.gz
-
 /docs/migration/lot2a-evidence/final/source-archive.tar.gz
 /docs/migration/lot2a-evidence/ls20-cold/source-archive.tar.gz
 /docs/migration/lot2a-evidence/tr87-cold/source-archive.tar.gz
-
 # Exact performance receipt retained as checked gzip.
 /docs/migration/lot2a-evidence/performance/after.json
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot2b-evidence/final/ls20-control-attention/ls20-campaign.json.gz
-
 # Exact lot 2B source archives are retained in checked ordered parts.
 /docs/migration/lot2b-evidence/**/source-archive.tar.gz
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot2b-evidence/final/syme-control-attention/syme-campaign.json.gz
 /docs/migration/lot2b-evidence/final/weav-control-attention/weav-campaign.json.gz
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot2c-evidence/final/ls20-method-continuation/ls20-campaign.json.gz
 /docs/migration/lot2c-evidence/final/source-archive.tar.gz
-
 # Lot 2C exact performance receipts retained in checked gzip archives.
 /docs/migration/lot2c-evidence/performance/after.json
 /docs/migration/lot2c-evidence/performance/managed-component-costs.json
 /docs/migration/lot2c-evidence/performance/stck-followup/after.json
-
 /docs/migration/lot2c-cost-evidence/final/source-archive.tar.gz
 /docs/migration/lot2c-cost-evidence/performance/baseline.json
 /docs/migration/lot2c-cost-evidence/performance/after.json
-
 /docs/migration/lot2c-cost-evidence/final/ls20-regression/ls20-campaign.json.gz
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot2c-cost-evidence/diagnostic/semantic-after.json.gz
 /docs/migration/lot2c-cost-evidence/diagnostic/semantic-baseline.json.gz
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot3a-evidence/final/rswp-campaign.json.gz
-
 /docs/migration/lot3a-evidence/final/source-archive.tar.gz
-
 /docs/migration/lot3a-evidence/baseline/source-archive.tar.gz
-
 docs/migration/lot3a-cost-evidence/final/source-archive.tar.gz
 docs/migration/lot3a-cost-evidence/diagnostic/smlp-before.cpuprofile
 docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-campaign.json.gz
-
 # Preserve the four complete logs of the declared cost window.
 !/docs/migration/lot3a-cost-evidence/performance/cohort*/*.log
-
 # Lot 3B frozen sources are retained in checked ordered byte parts.
 /docs/migration/lot3b-evidence/**/source-archive.tar.gz
 !/docs/migration/lot3b-evidence/performance/cohort*/*.log
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot3b-evidence/final/catr-session/catr-campaign.json.gz
 /docs/migration/lot3b-evidence/final/regressions/rswp-038-replay.json.gz
-
 # Lot 3B cost correction: lossless source/profile originals and retained measurement logs
 /docs/migration/lot3b-cost-evidence/final/source-archive.tar.gz
 /docs/migration/lot3b-cost-evidence/diagnostic/stck-before.cpuprofile
@@ -165,155 +122,109 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 !/docs/migration/lot3b-cost-evidence/performance/cohort2/baseline.log
 !/docs/migration/lot3b-cost-evidence/performance/cohort2/after.log
 /docs/migration/lot3b-cost-evidence/final-v2/source-archive.tar.gz
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot3b-cost-evidence/final-v2/catr-cost-session/catr-campaign.json.gz
 /docs/migration/lot3b-cost-evidence/final-v2/regressions/catr-039-replay.json.gz
 /docs/migration/lot3b-cost-evidence/final-v2/regressions/rswp-039-replay.json.gz
-
 /docs/migration/lot3b-cost-evidence/final-v3/source-archive.tar.gz
-
 # Preserve every log of the second declared Lot 3B cost window.
 !/docs/migration/lot3b-cost-evidence/performance-v2/cohort1/baseline.log
 !/docs/migration/lot3b-cost-evidence/performance-v2/cohort1/after.log
 !/docs/migration/lot3b-cost-evidence/performance-v2/cohort2/baseline.log
 !/docs/migration/lot3b-cost-evidence/performance-v2/cohort2/after.log
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot3b-cost-evidence/final-v3/catr-cost-v3-session/catr-campaign.json.gz
 /docs/migration/lot3b-cost-evidence/final-v3/regressions/catr-039-replay.json.gz
 /docs/migration/lot3b-cost-evidence/final-v3/regressions/rswp-039-replay.json.gz
-
 # Retain all four normal-path v2 diagnostic logs alongside their profiles.
 !/docs/migration/lot3b-cost-evidence/diagnostic/normal-path-v2-before-stck.log
 !/docs/migration/lot3b-cost-evidence/diagnostic/normal-path-v2-before-smlp.log
 !/docs/migration/lot3b-cost-evidence/diagnostic/normal-path-v2-after-stck.log
 !/docs/migration/lot3b-cost-evidence/diagnostic/normal-path-v2-after-smlp.log
-
 # Lot 3B SMLP cost diagnostics: raw CPU profiles retained as exact gzip.
 /docs/migration/lot3b-smlp-cost-evidence/diagnostic/*.cpuprofile
 !/docs/migration/lot3b-smlp-cost-evidence/diagnostic/*.log
-
 # Frozen native source is retained in exact ordered archive parts.
 /docs/migration/lot3b-smlp-cost-evidence/final/source-archive.tar.gz
 !/docs/migration/lot3b-smlp-cost-evidence/performance/cohort1/baseline.log
 !/docs/migration/lot3b-smlp-cost-evidence/performance/cohort1/after.log
 !/docs/migration/lot3b-smlp-cost-evidence/performance/cohort2/baseline.log
 !/docs/migration/lot3b-smlp-cost-evidence/performance/cohort2/after.log
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot3b-smlp-cost-evidence/final/catr-smlp-cost-session/catr-campaign.json.gz
 /docs/migration/lot3b-smlp-cost-evidence/final/regressions/catr-040-replay.json.gz
 /docs/migration/lot3b-smlp-cost-evidence/final/regressions/rswp-040-replay.json.gz
-
 # Lot 3B common state correction: lossless profiles and frozen source parts.
 /docs/migration/lot3b-state-cost-evidence/diagnostic/*.cpuprofile
 /docs/migration/lot3b-state-cost-evidence/final/source-archive.tar.gz
 !/docs/migration/lot3b-state-cost-evidence/diagnostic/*.log
 !/docs/migration/lot3b-state-cost-evidence/performance/cohort*/*.log
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-campaign.json.gz
 /docs/migration/lot3b-state-cost-evidence/final/regressions/catr-041-replay.json.gz
 /docs/migration/lot3b-state-cost-evidence/final/regressions/rswp-041-replay.json.gz
-
 # Lot 3C source freeze is retained as exact ordered archive parts.
 /docs/migration/lot3c-evidence/final/source-archive.tar.gz
 !/docs/migration/lot3c-evidence/performance/cohort*/*.log
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot3c-evidence/baseline/cwse-campaign.json.gz
 /docs/migration/lot3c-evidence/final/cwse-session/cwse-campaign.json.gz
 /docs/migration/lot3c-evidence/final/regressions/catr-042-replay.json.gz
 /docs/migration/lot3c-evidence/final/regressions/rswp-042-replay.json.gz
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot3c-current-evidence/final/cwse-current-session/cwse-campaign.json.gz
 /docs/migration/lot3c-current-evidence/final/regressions/catr-043-replay.json.gz
 /docs/migration/lot3c-current-evidence/final/regressions/rswp-043-replay.json.gz
 /docs/migration/lot3c-current-evidence/final/source-archive.tar.gz
 /docs/migration/lot3d-evidence/final/source-archive.tar.gz
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot3d-evidence/baseline/sk48-bounded-reference/sk48-campaign.json.gz
 /docs/migration/lot3d-evidence/final/regressions/catr-044-replay.json.gz
 /docs/migration/lot3d-evidence/final/regressions/rswp-044-replay.json.gz
 /docs/migration/lot3d-evidence/final/sk48-rooted-session/sk48-campaign.json.gz
-
 # Lot3E native source snapshots are stored as checked exact byte parts.
 /docs/migration/lot3e-evidence/**/source-archive.tar.gz
 !/docs/migration/lot3e-evidence/performance/cohort*/*.log
-
 # Exact contribution JSON; restore with lot3e-evidence/restore-contribution.py
 /docs/migration/lot3e-evidence/final/fogw-reception-session/reception-service-contribution.json
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot3e-evidence/baseline/fogw-bounded-reference/fogw-campaign.json.gz
 /docs/migration/lot3e-evidence/final/fogw-reception-session/fogw-campaign.json.gz
 /docs/migration/lot3e-evidence/final/regressions/catr-045-replay.json.gz
 /docs/migration/lot3e-evidence/final/regressions/rswp-045-replay.json.gz
-
 # Exact pre-freeze audit output is preserved in deterministic gzip.
 /docs/migration/lot3e-evidence/diagnostic/pre-freeze-migration-audit.json
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot3f-evidence/final/regressions/catr-046-replay.json.gz
 /docs/migration/lot3f-evidence/final/regressions/fogw-046-replay.json.gz
 /docs/migration/lot3f-evidence/final/regressions/rswp-046-replay.json.gz
 /docs/migration/lot3f-evidence/final/vois-population-session/vois-campaign.json.gz
-
 # Lot3F frozen native archive retained as exact checked byte parts
 /docs/migration/lot3f-evidence/final/source-archive.tar.gz
-
 # Exact large contribution JSON retained as deterministic gzip
 /docs/migration/lot3f-evidence/final/vois-population-session/reference-population-contribution.json
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot3g-evidence/final/regressions/catr-047-replay.json.gz
 /docs/migration/lot3g-evidence/final/regressions/fogw-047-replay.json.gz
 /docs/migration/lot3g-evidence/final/regressions/rswp-047-replay.json.gz
 /docs/migration/lot3g-evidence/final/regressions/vois-047-replay.json.gz
 /docs/migration/lot3g-evidence/diagnostic/retained-public-command-comparison.json
 /docs/migration/lot3g-evidence/final/source-archive.tar.gz
-
 # Lot3H originals retained as checked byte parts or deterministic gzip
 /docs/migration/lot3h-evidence/final/source-archive.tar.gz
 /docs/migration/lot3h-evidence/final/regressions/catr-048-replay.json.gz
 /docs/migration/lot3h-evidence/final/regressions/rswp-048-replay.json.gz
 /docs/migration/lot3h-evidence/final/regressions/fogw-048-replay.json.gz
 /docs/migration/lot3h-evidence/final/regressions/vois-048-replay.json.gz
-
 /docs/migration/lot3h-evidence/final/crossed-prefix-common-loop.json.gz
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot3h-evidence/baseline/weav-native048/weav-campaign.json.gz
 /docs/migration/lot3h-evidence/diagnostic/weav-public-source-parity.json.gz
 /docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-campaign.json.gz
-
 # Lot 7A immutable source archives are tracked as verified ordered byte parts.
 /docs/migration/lot7a-evidence/**/source-archive.tar.gz
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot7a-evidence/attempt1/lkey-campaign.json.gz
 /docs/migration/lot7a-evidence/final/regressions/catr-049-replay.json.gz
 /docs/migration/lot7a-evidence/final/regressions/fogw-049-replay.json.gz
 /docs/migration/lot7a-evidence/final/regressions/rswp-049-replay.json.gz
 /docs/migration/lot7a-evidence/final/regressions/vois-049-replay.json.gz
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /tests/fixtures/v6-feedback-sequences-reference.json.gz
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot4a-evidence/diagnostic/candidate-01/mind-feedback-session-02/mind-campaign.json.gz
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot4a-evidence/final/regressions/catr-049-replay.json.gz
 /docs/migration/lot4a-evidence/final/regressions/fogw-049-replay.json.gz
 /docs/migration/lot4a-evidence/final/regressions/rswp-049-replay.json.gz
 /docs/migration/lot4a-evidence/final/regressions/vois-049-replay.json.gz
 /docs/migration/lot3i-evidence/final/source-archive.tar.gz
 !/docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-output.raw.log
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot3i-evidence/baseline/conn-native049/conn-campaign.json.gz
 /docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz
 /docs/migration/lot3i-evidence/final/regressions/catr-049-replay.json.gz
@@ -321,8 +232,6 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 /docs/migration/lot3i-evidence/final/regressions/rswp-049-replay.json.gz
 /docs/migration/lot3i-evidence/final/regressions/vois-049-replay.json.gz
 /docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-replay.json.gz
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot7a-evidence/integrated-final/lkey-campaign.json.gz
 /docs/migration/lot7a-evidence/integrated-final/regressions/catr-051-replay.json.gz
 /docs/migration/lot7a-evidence/integrated-final/regressions/conn-050-replay.json.gz
@@ -333,52 +242,34 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 /docs/migration/lot7a-evidence/integrated-final/regressions/weav-051-replay.json.gz
 # Frozen source archive retained as exact ordered byte parts
 /docs/migration/lot4a-evidence/integrated-051/source-archive.tar.gz
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz
 /docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz
 /docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz
 /docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz
 /docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz
-
 !/docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-output.raw.log
 !/docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-output.raw.log
 !/docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-output.raw.log
 !/docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-output.raw.log
 !/docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-output.raw.log
 !/docs/migration/lot4a-evidence/mind-integrated-051-01-phase.log
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz
-
 !/docs/migration/lot4a-evidence/performance-integrated/cohort1/baseline.log
 !/docs/migration/lot4a-evidence/performance-integrated/cohort1/after.log
 !/docs/migration/lot4a-evidence/performance-integrated/cohort2/baseline.log
 !/docs/migration/lot4a-evidence/performance-integrated/cohort2/after.log
 !/docs/migration/lot4a-evidence/performance-integrated/aggregation-failure-reproduced.log
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot4a-evidence/performance-integrated/owner-graphs-A-01.json.gz
 /docs/migration/lot4a-evidence/performance-integrated/owner-graphs-B-01.json.gz
-
 # Retained lot4B development and case execution logs
 !/docs/migration/lot4b-evidence/**/*.log
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot4b-evidence/development/tria-baseline-site81/tria-campaign.json.gz
 /docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /tests/fixtures/v6-relative-arrangements-reference.json.gz
-
 # Exact frozen archives are retained in verified byte parts
 /docs/migration/lot4b-evidence/**/source-archive.tar.gz
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot7a-evidence/performance-integrated/owner-graphs-baseline.json.gz
 /docs/migration/lot7a-evidence/performance-integrated/owner-graphs-candidate.json.gz
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot10a-evidence/isolated-functional/regressions/catr-site83-replay.json.gz
 /docs/migration/lot10a-evidence/isolated-functional/regressions/conn-site83-replay.json.gz
 /docs/migration/lot10a-evidence/isolated-functional/regressions/fogw-site83-replay.json.gz
@@ -386,17 +277,13 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 /docs/migration/lot10a-evidence/isolated-functional/regressions/rswp-site83-replay.json.gz
 /docs/migration/lot10a-evidence/isolated-functional/regressions/vois-site83-replay.json.gz
 /docs/migration/lot10a-evidence/isolated-functional/regressions/weav-site83-replay.json.gz
-
 # Exact raw validation logs retained in gzip; see isolated-functional/validation/log-transport.json
 /docs/migration/lot10a-evidence/isolated-functional/validation/build-output.raw.txt
 /docs/migration/lot10a-evidence/isolated-functional/validation/delta-tests-output.raw.txt
 /docs/migration/lot10a-evidence/isolated-functional/validation/typecheck-output.raw.txt
-
 /docs/migration/lot7b-evidence/attempt1/craf-campaign.json.gz
-
 # Exact frozen source archive; restore with freeze-v53-native-source.py restore DIRECTORY
 /docs/migration/lot7b-evidence/attempt1/source-archive.tar.gz
-
 /docs/migration/lot5a-evidence/final/regressions/catr-052-replay.json.gz
 /docs/migration/lot5a-evidence/final/regressions/conn-052-replay.json.gz
 /docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz
@@ -404,23 +291,15 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 /docs/migration/lot5a-evidence/final/regressions/rswp-052-replay.json.gz
 /docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz
 /docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz
-
 # Lot5A exact frozen archives; lossless parts and reconstruction receipts are retained.
 /docs/migration/lot5a-evidence/final/source-archive.tar.gz
 /docs/migration/lot5a-evidence/final/test-expectation-correction/source-archive.tar.gz
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot5a-evidence/performance/baseline-structure.json.gz
 /docs/migration/lot5a-evidence/performance/candidate-structure.json.gz
-
 # Lot 5A server object-size repair: exact bytes are retained as parts and manifests.
 /docs/migration/lot5a-evidence/performance/diagnostic/shared-fragment-first-creator.json
 /docs/migration/lot5a-evidence/final/transport/retained-original-history.bundle
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot4b-evidence/development/lkey-partial-site83/attempt-03/replay-campaign.json.gz
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot4b-evidence/integrated-final/lkey-partial/replay-campaign.json.gz
 /docs/migration/lot4b-evidence/integrated-final/regressions/catr-051-replay.json.gz
 /docs/migration/lot4b-evidence/integrated-final/regressions/conn-050-replay.json.gz
@@ -430,14 +309,10 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 /docs/migration/lot4b-evidence/integrated-final/regressions/tria-development-4b-replay.json.gz
 /docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-replay.json.gz
 /docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot4b-evidence/performance-integrated/owner-graphs-baseline.json.gz
 /docs/migration/lot4b-evidence/performance-integrated/owner-graphs-candidate.json.gz
-
 # Lot10A composed candidate source archive retained as exact ordered byte parts.
 /docs/migration/lot10a-evidence/integrated-final/source-archive.tar.gz
-
 # Lot10A exact validation originals are restored from the retained gzip bytes.
 /docs/migration/lot10a-evidence/integrated-final/validation/delta-tests-output.raw.txt
 /docs/migration/lot10a-evidence/integrated-final/validation/typecheck-output.raw.txt
@@ -445,8 +320,6 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 /docs/migration/lot10a-evidence/integrated-final/validation/migration-audit-output.raw.txt
 /docs/migration/lot10a-evidence/integrated-final/validation/diff-check-output.raw.txt
 /docs/migration/lot10a-evidence/integrated-final/validation/build-output.raw.txt
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot10a-evidence/integrated-final/regressions/catr-site83-replay.json.gz
 /docs/migration/lot10a-evidence/integrated-final/regressions/conn-site83-replay.json.gz
 /docs/migration/lot10a-evidence/integrated-final/regressions/fogw-site83-replay.json.gz
@@ -454,7 +327,6 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 /docs/migration/lot10a-evidence/integrated-final/regressions/rswp-site83-replay.json.gz
 /docs/migration/lot10a-evidence/integrated-final/regressions/vois-site83-replay.json.gz
 /docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-replay.json.gz
-
 # Lot10A exact regression raw logs; restore using integrated-final/README-transport.md
 /docs/migration/lot10a-evidence/integrated-final/regression-driver-output.raw.txt
 /docs/migration/lot10a-evidence/integrated-final/regressions/catr-site83-output.raw.log
@@ -466,8 +338,6 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 /docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-output.raw.log
 # Exact frozen7B archive; restore from the retained source archive parts.
 /docs/migration/lot7b-evidence/integrated-final/source-archive.tar.gz
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot7b-evidence/integrated-final/craf-campaign.json.gz
 /docs/migration/lot7b-evidence/integrated-final/lkey-partial/replay-campaign.json.gz
 /docs/migration/lot7b-evidence/integrated-final/regressions/catr-051-replay.json.gz
@@ -478,19 +348,12 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 /docs/migration/lot7b-evidence/integrated-final/regressions/tria-development-4b-replay.json.gz
 /docs/migration/lot7b-evidence/integrated-final/regressions/vois-051-replay.json.gz
 /docs/migration/lot7b-evidence/integrated-final/regressions/weav-051-replay.json.gz
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot7b-evidence/performance-integrated/owner-graphs-baseline.json.gz
 /docs/migration/lot7b-evidence/performance-integrated/owner-graphs-candidate.json.gz
-
 # Exact published Site 88 baseline archive, retained in ordered byte parts.
 /docs/migration/lot10a-evidence/integrated-baseline/source-archive.tar.gz
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot10a-evidence/performance-integrated/owner-graphs-baseline.json.gz
 /docs/migration/lot10a-evidence/performance-integrated/owner-graphs-candidate.json.gz
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot4c-evidence/integrated-final/lkey-partial/replay-campaign.json.gz
 /docs/migration/lot4c-evidence/integrated-final/regressions/catr-051-replay.json.gz
 /docs/migration/lot4c-evidence/integrated-final/regressions/conn-050-replay.json.gz
@@ -502,18 +365,10 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 /docs/migration/lot4c-evidence/integrated-final/regressions/tria-development-4b-replay.json.gz
 /docs/migration/lot4c-evidence/integrated-final/regressions/vois-051-replay.json.gz
 /docs/migration/lot4c-evidence/integrated-final/regressions/weav-051-replay.json.gz
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot4c-evidence/reference-isos-056/isos-campaign.json.gz
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot4c-evidence/development/isos-live-01/isos-campaign.json.gz
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot4c-evidence/performance-integrated/owner-graphs-baseline.json.gz
 /docs/migration/lot4c-evidence/performance-integrated/owner-graphs-candidate.json.gz
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot5b-evidence/integrated-final/regressions/catr-051-replay.json.gz
 /docs/migration/lot5b-evidence/integrated-final/regressions/conn-050-replay.json.gz
 /docs/migration/lot5b-evidence/integrated-final/regressions/craf-055-replay.json.gz
@@ -524,13 +379,20 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 /docs/migration/lot5b-evidence/integrated-final/regressions/tria-development-4b-replay.json.gz
 /docs/migration/lot5b-evidence/integrated-final/regressions/vois-051-replay.json.gz
 /docs/migration/lot5b-evidence/integrated-final/regressions/weav-051-replay.json.gz
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot5b-evidence/diagnostic/addressed-reference-key-sorted.json.gz
 /docs/migration/lot5b-evidence/performance-integrated/functional-baseline.json.gz
 /docs/migration/lot5b-evidence/performance-integrated/functional-candidate.json.gz
-
-# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot7b-evidence/followup-recovery/integrated-final/regressions/regressions/catr-051-replay.json.gz
+/docs/migration/lot7b-evidence/followup-recovery/integrated-final/regressions/regressions/conn-050-replay.json.gz
+/docs/migration/lot7b-evidence/followup-recovery/integrated-final/regressions/regressions/craf-055-replay.json.gz
+/docs/migration/lot7b-evidence/followup-recovery/integrated-final/regressions/regressions/fogw-051-replay.json.gz
+/docs/migration/lot7b-evidence/followup-recovery/integrated-final/regressions/regressions/isos-development-4c-replay.json.gz
+/docs/migration/lot7b-evidence/followup-recovery/integrated-final/regressions/regressions/kata-060-self-consistency-replay.json.gz
+/docs/migration/lot7b-evidence/followup-recovery/integrated-final/regressions/regressions/mind-051-replay.json.gz
+/docs/migration/lot7b-evidence/followup-recovery/integrated-final/regressions/regressions/rswp-051-replay.json.gz
+/docs/migration/lot7b-evidence/followup-recovery/integrated-final/regressions/regressions/tria-development-4b-replay.json.gz
+/docs/migration/lot7b-evidence/followup-recovery/integrated-final/regressions/regressions/vois-051-replay.json.gz
+/docs/migration/lot7b-evidence/followup-recovery/integrated-final/regressions/regressions/weav-051-replay.json.gz
 /docs/migration/lot6a-evidence/integrated-final-02/kata-campaign.json.gz
 /docs/migration/lot6a-evidence/integrated-final-02/regressions/catr-051-replay.json.gz
 /docs/migration/lot6a-evidence/integrated-final-02/regressions/conn-050-replay.json.gz
@@ -545,3 +407,95 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 /docs/migration/lot6a-evidence/integrated-final-02/released-weav-exclusive-1536/regressions/weav-051-replay.json.gz
 /docs/migration/lot6a-evidence/performance-integrated/functional-baseline.json.gz
 /docs/migration/lot6a-evidence/performance-integrated/functional-candidate.json.gz
+/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json.gz
+# Lot10B exact originals verified against retained gzip or frozen archive parts.
+/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-actual-public-journal.jsonl
+/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json
+/docs/migration/lot10b-evidence/recovery-20261111/hpdl-freeze-01/source-archive.tar.gz
+/docs/migration/lot10b-evidence/recovery-20261111/integrated-final-01/source-archive.tar.gz
+# Preserve exact Lot10B diagnostic logs, including failed or incomplete attempts.
+!/docs/migration/lot10b-evidence/recovery/diagnostic/source-call-capture/capture-01.log
+!/docs/migration/lot10b-evidence/recovery/diagnostic/source-call-capture/capture-02.log
+!/docs/migration/lot10b-evidence/recovery/diagnostic/source-call-capture/capture-03.log
+!/docs/migration/lot10b-evidence/recovery/diagnostic/source-call-capture/parity-01.log
+!/docs/migration/lot10b-evidence/recovery/diagnostic/source-call-capture/parity-03.log
+!/docs/migration/lot10b-evidence/recovery/diagnostic/window-oracle/checkpoint-47-first-abstention-01.log
+!/docs/migration/lot10b-evidence/recovery/diagnostic/window-oracle/export-01.log
+!/docs/migration/lot10b-evidence/recovery/diagnostic/window-oracle/export-02.log
+!/docs/migration/lot10b-evidence/recovery-20261111/diagnostic/entry-audit-01.log
+!/docs/migration/lot10b-evidence/recovery-20261111/diagnostic/kernel-01.log
+!/docs/migration/lot10b-evidence/recovery-20261111/diagnostic/kernel-02.log
+!/docs/migration/lot10b-evidence/recovery-20261111/diagnostic/lot10b-composed-typecheck-01.log
+!/docs/migration/lot10b-evidence/recovery-20261111/diagnostic/lot10b-composed-typecheck-02.log
+!/docs/migration/lot10b-evidence/recovery-20261111/diagnostic/migration-audit-01.log
+!/docs/migration/lot10b-evidence/recovery-20261111/diagnostic/migration-audit-02.log
+!/docs/migration/lot10b-evidence/recovery-20261111/diagnostic/typecheck-01.log
+!/docs/migration/lot10b-evidence/recovery-20261111/diagnostic/typecheck-02.log
+!/docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/parity.log
+!/docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/writer.log
+!/docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-02/parity.log
+!/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-live.log
+!/docs/migration/lot10b-evidence/recovery-20261111/lossless-transport-01/pack-error.log
+!/docs/migration/lot10b-evidence/recovery-20261111/lossless-transport-01/verification-error.log
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/catr-051-replay.json.gz
+/docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/conn-050-replay.json.gz
+/docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/craf-055-replay.json.gz
+/docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/fogw-051-replay.json.gz
+/docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/isos-development-4c-replay.json.gz
+/docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/mind-051-replay.json.gz
+/docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/rswp-051-replay.json.gz
+/docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/tria-development-4b-replay.json.gz
+/docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/vois-051-replay.json.gz
+/docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/weav-051-replay.json.gz
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-02/hpdl-checkpoint-000039.inprogress.json.gz
+/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-02/hpdl-checkpoint.json.gz
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01/baseline-owner-graphs.json.gz
+/docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01/candidate-owner-graphs.json.gz
+
+/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-02/hpdl-checkpoint.json
+
+/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-02/hpdl-checkpoint-000039.inprogress.json
+
+/docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/source-archive.tar.gz
+
+!/docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/catr-051-output.raw.log
+
+!/docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/conn-050-output.raw.log
+
+!/docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/craf-055-output.raw.log
+
+!/docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/fogw-051-output.raw.log
+
+!/docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/isos-development-4c-output.raw.log
+
+!/docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/mind-051-output.raw.log
+
+!/docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/rswp-051-output.raw.log
+
+!/docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/tria-development-4b-output.raw.log
+
+!/docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/vois-051-output.raw.log
+
+!/docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/weav-051-output.raw.log
+
+!/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-02/hpdl-live.log
+
+!/docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after02/clocked-diagnostic-01/parity.log
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot10b-evidence/recovery-20261111/integrated-final-01/regressions/catr-051-replay.json.gz
+/docs/migration/lot10b-evidence/recovery-20261111/integrated-final-01/regressions/rswp-051-replay.json.gz
+
+!/docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01/aggregation-failure.log
+
+# Preserve the four actual ABBA execution logs for lot 10B.
+!docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01/cohort1/baseline.log
+!docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01/cohort1/after.log
+!docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01/cohort2/baseline.log
+!docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01/cohort2/after.log

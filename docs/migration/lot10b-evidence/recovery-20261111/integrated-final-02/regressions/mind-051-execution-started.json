@@ -1,0 +1,58 @@
+{
+  "case": "mind-051",
+  "game": "MIND",
+  "mode": "recorded-public-replay",
+  "command": [
+    "node",
+    "--expose-gc",
+    "--max-old-space-size=1536",
+    "scripts/replay-public-regression-released-baseline.mjs",
+    "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz",
+    "docs/migration/lot7a-evidence/integrated-baseline/recorded/mind-public-trace.json.gz",
+    "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/mind-051-replay.json.gz",
+    "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/mind-051-host-preparation.json"
+  ],
+  "startedAt": "2026-11-11T15:40:55.059812+00:00",
+  "timeoutSeconds": 2400,
+  "baseline": {
+    "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz",
+    "sha256": "6a187286069287a89cedb60ac0f206e0702abae5d8df0dd2615bd43c1bb5c75a",
+    "bytes": 4349054
+  },
+  "trace": {
+    "path": "docs/migration/lot7a-evidence/integrated-baseline/recorded/mind-public-trace.json.gz",
+    "sha256": "f74678fa4d9c1b5397545b648ab353c29fc0a5a4c0eb35ab36a5258bfa34ca0c",
+    "bytes": 17256
+  },
+  "expectedActions": 31,
+  "nodeOldSpaceMiB": 1536,
+  "preflight": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/preflight.json",
+    "sha256": "49427a3ce879134e24d2c549efffcc810c081b25448bd871660b572dab59eca4",
+    "bytes": 5814
+  },
+  "historicalReportProcessExitedBeforeNode": true,
+  "nativeSourceBeforeDigest": "74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12",
+  "executionInputsBefore": {
+    "scripts/run-released-public-regressions.py": "7988863afd2b171f31987434bb1176370be2e3afd49dead1edcdc59770d81909",
+    "scripts/run-recorded-public-regressions.py": "df19dc88ff29e78a1cb5935d445644e96cc9fb1ef90b73d802cf51868d2b2c40",
+    "scripts/compare-v54-regressions.py": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+    "scripts/replay-public-regression-released-baseline.mjs": "2ce2a0e1b8f969510373ae161156b2b163d208b4e426cb1f26218f9952b3b164",
+    "scripts/replay-v53-public-regression.mjs": "4359e008db8dadaac17f6504199ff20c752f40f1666ba527f1cd5f16df100a9e",
+    "scripts/run-v53-campaign-proof.py": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+    "tests/helpers/v6-live-game-campaign.ts": "5f82ca1f3c80a39983c5c14ee30a2ac6239822815a6641b1402bc29c2e1d32d4",
+    "docs/migration/lot10b-evidence/recorded-regression-cases.json": "a16f67724f53def79fe476716c12a61e8064df871911772731983fa2505da3a9",
+    "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/source-manifest.json": "846e38686406140e8f0c975836faadf646e4c20b0bcbc833fe4e228912535e93",
+    "scripts/run-released-public-regressions-streamlog.py": "b05b0e113c93696be45408e4c10549f2a379c22330efbddfcaa0f09cd51309b9"
+  },
+  "phase": "started",
+  "finishedAt": null,
+  "exitCode": null,
+  "timedOut": false,
+  "passed": false,
+  "nodeExitObserved": false,
+  "rawOutputPath": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/mind-051-output.raw.log",
+  "driverPid": 5,
+  "nodePid": null,
+  "memorySamples": []
+}

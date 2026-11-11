@@ -1,0 +1,43 @@
+{
+  "schema": "logos-engine.followup-coordinated-isolation-completion.v1",
+  "recordedAt": "2026-11-11T14:27:24.635370+00:00",
+  "status": "passed",
+  "window": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/performance/window.json",
+    "sha256": "c40f04f8f212c7f66812f217786f4c41726caf56d00efd3b5827e0ab31a2f9cb",
+    "bytes": 11222
+  },
+  "strictWorkVerification": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/performance/strict-work-verification.json",
+    "sha256": "11dd1fd7e7ca9f2d373de2464d2ef469fcb99fff96f72f58ed93269807176f30",
+    "bytes": 17022
+  },
+  "isolationBeforeWindow": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/coordination/quiet-window-final.json",
+    "sha256": "c0cea317ab923b8f8f893a5eb609144944b4f466db3b532ac522a8054d1f1ffb",
+    "bytes": 4279
+  },
+  "lock": {
+    "schema": "sra.coordinated-exclusive-lock.v1",
+    "requestId": "lot7-followup-f8d5097-strict-window",
+    "status": "released",
+    "lock": "/workspace/shared/sra-coordination/performance.lock",
+    "lockMode": "exclusive",
+    "holderPid": 2,
+    "acquiredAt": "2026-11-11T13:56:47.227929+00:00",
+    "releaseCondition": "Controller signals only after the official ABBA runner has terminated",
+    "releasedAt": "2026-11-11T14:27:24.161342+00:00"
+  },
+  "exclusiveLockHeldForEntireWindow": true,
+  "officialExecutionsCompleted": [
+    "A1",
+    "B1",
+    "B2",
+    "A2"
+  ],
+  "runnerSession": 98533,
+  "runnerExitCode": 0,
+  "quietReleased": true,
+  "publicationLockRemainsHeld": true,
+  "qualification": "The exclusive performance holder remained alive through the whole official window and strict40-trial verification, then was explicitly released. Readiness/source preparation before window.startedAt is separate from timing. Source/publication lock remains reserved for this follow-up through native and documentation closure."
+}

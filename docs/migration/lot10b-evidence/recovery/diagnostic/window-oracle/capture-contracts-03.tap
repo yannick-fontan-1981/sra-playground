@@ -1,0 +1,11 @@
+✔ passive Window capture preserves Promise, return and exception identities and actual execution arguments (11.291077ms)
+✔ passive Window capture exposes observer failures without replacing original returns or undefined rejections (0.629971ms)
+✔ passive Window prefix capture reads persisted checkpoints and actual source facts without invoking persistence (24.233859ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 278.372728

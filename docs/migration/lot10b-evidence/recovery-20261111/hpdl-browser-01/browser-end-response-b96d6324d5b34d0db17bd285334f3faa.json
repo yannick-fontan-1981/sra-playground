@@ -1,0 +1,24 @@
+{
+  "schema": "logos-engine.lot10b.hpdl-browser-end-response.v1",
+  "request": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-browser-01/browser-end-request-b96d6324d5b34d0db17bd285334f3faa.json",
+    "sha256": "fc265e60766389b3ca4dde0c43ba90d6c84f3b4e8e9543f5a38db34d0a9f9389",
+    "bytes": 2203
+  },
+  "requestId": "b96d6324d5b34d0db17bd285334f3faa",
+  "respondedBy": "original_foreground_holder",
+  "status": "closed",
+  "closure": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-browser-01/browser-closed.json",
+    "sha256": "b4763e8952a7610c9a5b294df927556a6bdc7dee3db69692907dcb02f12acf3d",
+    "bytes": 1174
+  },
+  "executionReceipt": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-browser-01/execution-hpdl-browser.json",
+    "sha256": "6a3084fb460e4fc18c30096a889511dc93a54d3be40738fcca88c96092482b4a",
+    "bytes": 4197
+  },
+  "chargedSeconds": 169.609669038,
+  "remainingSeconds": 649.0968358210083,
+  "recordedAt": "2026-11-11T16:10:24.141661+00:00"
+}

@@ -1,0 +1,86 @@
+{
+  "schema": "logos-engine.coordinated-cost-isolation.v1",
+  "status": "acknowledged_quiet_before_window",
+  "recordedAt": "2026-11-11T16:23:21.275386+00:00",
+  "requestId": "lot10b-cost-74143a-final-01",
+  "otherLaneAcknowledged": true,
+  "ownTrackedComputeEnded": true,
+  "previewStopped": true,
+  "costNodeOptionsOverride": null,
+  "performanceDirectory": "docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01",
+  "nativeDigests": {
+    "baseline": "f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279",
+    "candidate": "74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12"
+  },
+  "declaration": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01/declaration.json",
+    "bytes": 6957,
+    "sha256": "3a43aeb7301695a20b0bcd12d17d2293b6495aba0419bebcd69ae4ef62e483b1"
+  },
+  "knownLanes": [
+    {
+      "lane": "lot5c",
+      "activeCommand": null,
+      "updatedAt": "2026-11-11T16:22:29.980791+00:00",
+      "acknowledgedAt": "2026-11-11T16:22:29.980791+00:00",
+      "requestId": "lot10b-cost-74143a-final-01",
+      "evidence": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/coordination/cost-final-01/lot5c-ack.json",
+        "bytes": 9602,
+        "sha256": "8f4fe2bedada9c9cf9d4c7dc08caa3ac88a08471de5b2b4ae66749f0be6cd68e"
+      }
+    },
+    {
+      "lane": "lot6b",
+      "activeCommand": null,
+      "updatedAt": "2026-11-11T16:20:28.278108+00:00",
+      "acknowledgedAt": "2026-11-11T16:20:28.278108+00:00",
+      "requestId": "lot10b-cost-74143a-final-01",
+      "evidence": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/coordination/cost-final-01/lot6b-ack.json",
+        "bytes": 4863,
+        "sha256": "e5001539c5b75bb334e4756c2173ad022ecc2c02cc530f234a767ccdd537ca56"
+      }
+    },
+    {
+      "lane": "lot8a",
+      "activeCommand": null,
+      "updatedAt": "2026-11-11T16:21:49.869335+00:00",
+      "acknowledgedAt": "2026-11-11T16:21:49.869335+00:00",
+      "requestId": "lot10b-cost-74143a-final-01",
+      "evidence": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/coordination/cost-final-01/lot8a-ack.json",
+        "bytes": 3954,
+        "sha256": "104d9c407b461f3e75f8233bfc326061fedafd59fd0a885f0886bfc26a25567c"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/coordination/cost-final-01/lot5c-ack.json",
+      "bytes": 9602,
+      "sha256": "8f4fe2bedada9c9cf9d4c7dc08caa3ac88a08471de5b2b4ae66749f0be6cd68e"
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/coordination/cost-final-01/lot6b-ack.json",
+      "bytes": 4863,
+      "sha256": "e5001539c5b75bb334e4756c2173ad022ecc2c02cc530f234a767ccdd537ca56"
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/coordination/cost-final-01/lot8a-ack.json",
+      "bytes": 3954,
+      "sha256": "104d9c407b461f3e75f8233bfc326061fedafd59fd0a885f0886bfc26a25567c"
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/coordination/cost-final-01/request.json",
+      "bytes": 878,
+      "sha256": "893804d8b470d24213718e695d1f04d85f5358bc165cbaded2f19e2d997c8170"
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/coordination/cost-final-01/own-closure.json",
+      "bytes": 796,
+      "sha256": "7278c13da1f1ac3fca7327c5bdbd94db288cc82610288abb1eb627ca42a47685"
+    }
+  ],
+  "qualification": "Fresh explicit acknowledgments from5C,6B and8A all follow the exact16:19:49.894713UTC request and all completed functional/static evidence. Root and all own agents are idle; preview and browser holder are stopped. Quiet applies through the entire official ABBA window and arithmetic review until explicit release. Earlier functional-source slot incidents remain retained and precede this cost interval. Only tiny named coordination metadata may be read or written; no cost sample has begun."
+}

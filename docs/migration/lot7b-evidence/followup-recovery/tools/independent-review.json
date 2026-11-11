@@ -1,0 +1,143 @@
+{
+  "schema": "sra.lot7.followup-independent-tool-review.v1",
+  "status": "passed_source_review_only",
+  "reviewMode": "source_review_only",
+  "reviewer": "/root/audit_caller_contract",
+  "recordedAt": "2026-11-11T12:14:40.470646+00:00",
+  "syntaxChecksStartedAt": "2026-11-11T12:14:40.235346+00:00",
+  "tools": [
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/tools/capture-strict-cost-forms.mjs",
+      "sha256": "8e269df48afbfea2991e976a252bf49e95cd15207b2442794078454c9fc8a568",
+      "bytes": 12545
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/tools/verify-strict-cost-forms.mjs",
+      "sha256": "07276dd501a919c97d3f53b7ea594eed8029b5a363f2a498515c1a304551a22b",
+      "bytes": 7759
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/tools/finalize-cost-readiness.py",
+      "sha256": "4dc660b1b505f585a933e8d82987d96c1a1b19c034b285ccbda1e36b285f76fa",
+      "bytes": 29228
+    }
+  ],
+  "toolBytesUnchangedDuringSyntaxChecks": true,
+  "syntaxChecks": [
+    {
+      "kind": "syntax_only",
+      "tool": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/tools/capture-strict-cost-forms.mjs",
+        "sha256": "8e269df48afbfea2991e976a252bf49e95cd15207b2442794078454c9fc8a568",
+        "bytes": 12545
+      },
+      "argv": [
+        "node",
+        "--check",
+        "docs/migration/lot7b-evidence/followup-recovery/tools/capture-strict-cost-forms.mjs"
+      ],
+      "startedAt": "2026-11-11T12:14:40.235770+00:00",
+      "finishedAt": "2026-11-11T12:14:40.353770+00:00",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "",
+      "moduleExecuted": false
+    },
+    {
+      "kind": "syntax_only",
+      "tool": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/tools/verify-strict-cost-forms.mjs",
+        "sha256": "07276dd501a919c97d3f53b7ea594eed8029b5a363f2a498515c1a304551a22b",
+        "bytes": 7759
+      },
+      "argv": [
+        "node",
+        "--check",
+        "docs/migration/lot7b-evidence/followup-recovery/tools/verify-strict-cost-forms.mjs"
+      ],
+      "startedAt": "2026-11-11T12:14:40.353923+00:00",
+      "finishedAt": "2026-11-11T12:14:40.452529+00:00",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "",
+      "moduleExecuted": false
+    },
+    {
+      "kind": "syntax_only",
+      "tool": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/tools/finalize-cost-readiness.py",
+        "sha256": "4dc660b1b505f585a933e8d82987d96c1a1b19c034b285ccbda1e36b285f76fa",
+        "bytes": 29228
+      },
+      "method": "Python ast.parse of the file text, without importing or executing that module",
+      "startedAt": "2026-11-11T12:14:40.452551+00:00",
+      "finishedAt": "2026-11-11T12:14:40.470276+00:00",
+      "status": "passed",
+      "moduleExecuted": false
+    }
+  ],
+  "reviewScope": [
+    "Exact official bridge/trial reuse; location and module-entry adaptation only, with the unchanged official worker file.",
+    "Four exact A/B work forms captured by eight nonofficial functional sessions totaling62actions; no retained timing metrics or altered public payload.",
+    "All40 official trials, including warmups, checked against prospective work signatures without structural exemptions.",
+    "The complete32measured sessions/400actions and8excluded warmups/24actions are mandatory.",
+    "Readiness binds current candidate and actual published baseline identities, frozen archive, source/test/build maps, ten exact regressions and unchanged original source pin.",
+    "Executable fingerprints and a dated quiet acknowledgment bind this particular source pair and performance window.",
+    "Missing unpublished evidence remains disclosed and historical observations are not reused as proof; the cumulative LKEY clock remains closed."
+  ],
+  "findingsClosed": [
+    {
+      "id": "complete_current_input_binding",
+      "finding": "Selected test-file checks alone allowed a helper, non-native build input or regression execution input to change after formal verification.",
+      "resolution": "Full source/test and build maps with exact membership, regression execution inputs, all input fingerprints and final rechecks are required."
+    },
+    {
+      "id": "frozen_archive_and_original_pin_binding",
+      "finding": "Earlier static/integrity pass flags did not independently detect later changes to frozen archive bytes, archive inputs or original pinned source.",
+      "resolution": "Current archive bytes, ordered part fingerprints, every archived input and the1786original-source file hashes are checked and retained."
+    },
+    {
+      "id": "dated_targeted_quiet_receipt",
+      "finding": "Boolean quiet claims without required evidence or chronology could reuse a stale acknowledgment.",
+      "resolution": "The receipt must identify the current native digests and performance directory, include6A/10B/5C acknowledgments and nonempty evidence, and be dated after completed functional work and before readiness."
+    },
+    {
+      "id": "current_published_baseline_binding",
+      "finding": "The finalizer relied on earlier baseline checks; the official runner would only detect a later mismatch at window startup.",
+      "resolution": "Current baseline native inventory and actual Git HEAD are checked before and after finalization, and every baseline native file is retained as a watched external input."
+    },
+    {
+      "id": "ten_distinct_declared_regressions",
+      "finding": "Membership and aggregate counts alone did not exclude duplicated successful regression rows.",
+      "resolution": "Exactly ten result game and case IDs must match the declared order, and each baseline and trace path/SHA-256 must match its declared case."
+    }
+  ],
+  "remainingBlockingSourceFindings": [],
+  "mandatoryFollowupGates": [
+    {
+      "id": "strict_post_window_work_verification",
+      "required": true,
+      "action": "After the official window, run verify-strict-cost-forms.mjs against the same performance directory and require its passed receipt before delivery.",
+      "reason": "The unchanged historical cost-results renderer does not automatically require strict-work-verification.json; this remains a separate mandatory gate."
+    },
+    {
+      "id": "fresh_published_6a_regression_coverage",
+      "requiredWhen": "The actual published baseline includes the newly recovered6A implementation.",
+      "action": "Include fresh safe6A predecessor tests in the declared formal candidate scope in addition to the122safe5B inherited files and four new follow-up files.",
+      "reason": "The finalizer minimum enforces the safe5B inheritance and new follow-up contracts; it does not by itself impose all newly published6A tests."
+    }
+  ],
+  "executionLimits": {
+    "syntaxChecksOnly": true,
+    "functionalCaptureExecuted": false,
+    "officialCostWindowExecuted": false,
+    "nativeWorkerStarted": false,
+    "gameExecuted": false,
+    "replayExecuted": false,
+    "oracleExecuted": false,
+    "lkeyPayloadDecoded": false,
+    "testsExecuted": false,
+    "helperEditsMadeByReviewer": false
+  },
+  "qualification": "Independent source review and syntax checks only. This record is prospective support for the pinned tools, not a functional run, cost acceptance, readiness receipt, new game proof or claim of complete original-caller parity."
+}

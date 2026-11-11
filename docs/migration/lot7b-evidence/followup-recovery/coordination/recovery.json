@@ -1,0 +1,190 @@
+{
+  "schema": "sra.lot7.followup-recovery.v1",
+  "recordedAt": "2026-11-11T12:05:46.515336+00:00",
+  "qualification": "New recovery checkpoint reconstructed from the current checkout and prior conversation. It is not a recovered original receipt and does not turn prior observations into evidence for the reconstructed source.",
+  "originalSourceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "publishedBaseline": {
+    "siteVersion": 95,
+    "nativeVersion": "0.58.0",
+    "commit": "3a70463039768f7114edae7d94d7dd33b7f36aa8",
+    "qualification": "Actual published source recovered and verified by the coordinating parent before this record."
+  },
+  "checkout": "/workspace/sites/sra-lot7-followup-recovery-20261111/.sites-checkout",
+  "unpublishedSourceRecovered": false,
+  "unpublishedRawProofsRecovered": false,
+  "historicalObservationsReusedAsProof": false,
+  "lostUnpublishedCommits": [
+    "d9b2c2bd61499eda2532fccd7b64ab203ce9963d",
+    "c456e275682e7596fb7bfd9ed3ecdeac515ecb3a",
+    "eafcadde60775cc787b76dd011b8f63c554d1ba9"
+  ],
+  "reconstruction": {
+    "productionFiles": [
+      "src/logos-engine/v6-native-runtime.ts",
+      "src/logos-engine/v6-ranked-workshop.ts"
+    ],
+    "newNativeEntries": 0,
+    "newOwners": 0,
+    "newWorkflows": 0,
+    "byteIdentityToLostCandidateClaimed": false,
+    "freshValidationRequired": true,
+    "finalFrozenSourceIdentity": "pending"
+  },
+  "historicalObservations": [
+    {
+      "kind": "unpublished_candidate_validation",
+      "evidenceStatus": "prior_conversation_only",
+      "eligibleForGates": false,
+      "nativeVersion": "0.61.0",
+      "nativeFiles": 306,
+      "reportedNativeDigest": "a54ce51e25bf17196aad2e5665b304b255dfa1c9834c0e3091dc09aca3bff314",
+      "testsPassed": 5285,
+      "testsTotal": 5285,
+      "testFiles": 133,
+      "projectGatesPassed": 5,
+      "projectGatesTotal": 5,
+      "publicationOccurred": false,
+      "ownOfficialCostWindowOccurred": false
+    },
+    {
+      "kind": "first_instrumented_cold_attempt",
+      "case": "LKEY",
+      "evidenceStatus": "prior_conversation_only",
+      "eligibleForGates": false,
+      "outcome": "failed_strict_json_receipt",
+      "actions": 26,
+      "levelsCompleted": 2,
+      "sealedPrefixes": 25,
+      "reportedNativeFiles": 302,
+      "reportedNativeDigest": "a1b597f3cf34dd72d7025ce9e69ef5833e259e6a969930f086abe8d2b1546bec",
+      "failure": "undefined preferred_proposal_id in a strict JSON coordination receipt",
+      "completeCallerParityClaimed": false
+    },
+    {
+      "kind": "corrected_instrumented_attempt",
+      "case": "LKEY",
+      "evidenceStatus": "prior_conversation_only",
+      "eligibleForGates": false,
+      "outcome": "watchdog_partial",
+      "retainedPublicActions": 38,
+      "watchdogSeconds": 100,
+      "processExitCode": -15,
+      "reportedNativeFiles": 302,
+      "reportedNativeDigest": "f270d02d8449f36327e3f46315524fb5a693ad9014912bddf0cd9a81b2b30d8d",
+      "finalReportRecovered": false,
+      "finalOracleRecovered": false
+    },
+    {
+      "kind": "independent_managed_browser_observation",
+      "case": "LKEY",
+      "evidenceStatus": "prior_conversation_only",
+      "eligibleForGates": false,
+      "reportedOutcome": "three_levels_completed",
+      "actions": 44,
+      "plans": 44,
+      "levelsCompleted": 3,
+      "naturalBoundaries": [
+        {
+          "actions": 16,
+          "levelsCompleted": 1
+        },
+        {
+          "actions": 24,
+          "levelsCompleted": 2
+        },
+        {
+          "actions": 44,
+          "levelsCompleted": 3
+        }
+      ],
+      "reportedNativeFiles": 302,
+      "reportedNativeDigest": "f270d02d8449f36327e3f46315524fb5a693ad9014912bddf0cd9a81b2b30d8d",
+      "reportedActiveCounterSeconds": 86.7,
+      "counterIsWallTime": false,
+      "rawScreenshotRecovered": false,
+      "newReconstructedSourceGameProof": false,
+      "completeCallerParityClaimed": false
+    }
+  ],
+  "newCaseActivity": false,
+  "lkeyClock": "lkey-closed-clock.json",
+  "freshOriginalSourceFingerprints": [
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/animated_contact_access.py",
+      "sha256": "be3d4d1a574b2a44a5484c558eec75086579221c4c3cc769679d9954e003710a",
+      "bytes": 12561,
+      "reviewedLines": "93–95",
+      "role": "Refus global après contact sans continuation justifiée"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_animated_contact.py",
+      "sha256": "a224e77adc32343bc107b2dc5e9ee138ccc2de98c74262e71da423a04c0ec69c",
+      "bytes": 3320,
+      "reviewedLines": "22–23",
+      "role": "Transmission du refus par la famille source"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.py",
+      "sha256": "425aca6c30e7abb38a537dfcef38f92c418bc4dfa35201ae52dc42ba4390fa55",
+      "bytes": 34610,
+      "reviewedLines": "159–188 ; 330–398",
+      "role": "Ordre déclaré, arrêt sur le refus goal_access et entrée Workshop matérielle"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_runtime.py",
+      "sha256": "bcc9bc79d04287c830efedce48b4cc2ab89b5600b8a77fe09782c35d1c05c064",
+      "bytes": 97217,
+      "reviewedLines": "464",
+      "role": "Arrêt de l’appelant sur une proposition non proposée"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/ranked_workshop/family.py",
+      "sha256": "d5e597658994d23659fc086ae9fd66d031501d1fd8a319ce95f38579bd8bb95d",
+      "bytes": 15235,
+      "reviewedLines": "29–62 ; 63–117",
+      "role": "Sélection/proposition, gardes, acquisition et état source"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/ranked_workshop/methods.py",
+      "sha256": "385ca82f1019822f00529c23d62068f62da7e1e093b6544ca49b56885811960d",
+      "bytes": 11146,
+      "reviewedLines": "14–35 ; 71–77",
+      "role": "Signature, changements et revalidation portable"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/ranked_workshop/geometry.py",
+      "sha256": "a3b72041268907e90addca0c6780504c56952fdb6f44532ab05afa4280d01ffe",
+      "bytes": 3122,
+      "reviewedLines": "18–29",
+      "role": "Projection et contexte stable"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/ranked_workshop/preparation.py",
+      "sha256": "67e07fe07f12ca0f064a27ee0145b72879bbb20c16b8fedea365330a5740faae",
+      "bytes": 8311,
+      "reviewedLines": "24–30",
+      "role": "Méthode de mode requise par les préparations"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/ranked_workshop/workshop.drm",
+      "sha256": "f46249629bb6d9fc4ed1276a4f287fe5dee250fc9f2fd908e47c244a1f2f8cee",
+      "bytes": 48323,
+      "reviewedLines": "document complet",
+      "role": "Règles et ordre de choix existants"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/ranked_workshop/workshop.src",
+      "sha256": "999c1cc9247db04ca14d36a67ee9172f54602cb7ce018eadad28e34eeab35aff",
+      "bytes": 305,
+      "reviewedLines": "document complet",
+      "role": "Workflow source de mesure et sélection existant"
+    }
+  ],
+  "requiredNextEvidence": [
+    "freeze the reconstructed and integrated source",
+    "fresh declared synthetic and allowed inherited tests",
+    "fresh project gates and allowed public regressions",
+    "prospective strict complete-session cost review against the actual published baseline",
+    "actual private publication receipt"
+  ]
+}

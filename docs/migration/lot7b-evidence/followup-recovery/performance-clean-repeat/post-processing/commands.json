@@ -1,0 +1,234 @@
+{
+  "schema": "logos-engine.followup-repeat-post-processing.v1",
+  "commands": [
+    {
+      "index": 1,
+      "command": [
+        "node",
+        "scripts/compare-native-loop-costs.mjs",
+        "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/comparison-policy.json",
+        "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/cohort1/baseline.json",
+        "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/cohort1/after.json",
+        "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/cohort1/comparison.json"
+      ],
+      "startedAt": "2026-11-11T15:31:51.951138+00:00",
+      "finishedAt": "2026-11-11T15:31:52.088384+00:00",
+      "exitCode": 0,
+      "stdout": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/post-processing/01-stdout.log.gz",
+        "sha256": "36ef3c5d806a9c06aa4dffd9f506e92b457f4def792b8344a2a67bca540fd164",
+        "bytes": 415,
+        "gzipSha256": "c1b02347df9aef8bc45a9379752ebe57c26dbcc8ac3cdb6a8042cc399d2beda2",
+        "gzipBytes": 259
+      },
+      "stderr": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/post-processing/01-stderr.log.gz",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0,
+        "gzipSha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+        "gzipBytes": 20
+      }
+    },
+    {
+      "index": 2,
+      "command": [
+        "node",
+        "scripts/compare-native-loop-costs.mjs",
+        "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/comparison-policy.json",
+        "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/cohort2/baseline.json",
+        "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/cohort2/after.json",
+        "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/cohort2/comparison.json"
+      ],
+      "startedAt": "2026-11-11T15:31:52.089535+00:00",
+      "finishedAt": "2026-11-11T15:31:52.166788+00:00",
+      "exitCode": 0,
+      "stdout": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/post-processing/02-stdout.log.gz",
+        "sha256": "971ebe76921fd0427cb006b71e66017051e12945b9c758eee0bcb925f3f433bf",
+        "bytes": 287,
+        "gzipSha256": "ce4772f74286efbd80920f40b41aab7edca6aa331fb5672ffa40e24e5311d4c3",
+        "gzipBytes": 233
+      },
+      "stderr": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/post-processing/02-stderr.log.gz",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0,
+        "gzipSha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+        "gzipBytes": 20
+      }
+    },
+    {
+      "index": 3,
+      "command": [
+        "node",
+        "scripts/compare-native-cost-cohorts.mjs",
+        "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/comparison-policy.json",
+        "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/cohort1/baseline.json",
+        "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/cohort1/after.json",
+        "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/cohort1/comparison.json",
+        "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/cohort2/baseline.json",
+        "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/cohort2/after.json",
+        "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/cohort2/comparison.json",
+        "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/combined-comparison.json"
+      ],
+      "startedAt": "2026-11-11T15:31:52.167727+00:00",
+      "finishedAt": "2026-11-11T15:31:52.345252+00:00",
+      "exitCode": 0,
+      "stdout": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/post-processing/03-stdout.log.gz",
+        "sha256": "544773055576268e7e7a522b23bfefc78f1ae56717bbd5113c3e531450b296e5",
+        "bytes": 548,
+        "gzipSha256": "089bdbaa58bf7e5b6b74297fe6d388e981388a58a03d569fde85750bed805a21",
+        "gzipBytes": 310
+      },
+      "stderr": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/post-processing/03-stderr.log.gz",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0,
+        "gzipSha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+        "gzipBytes": 20
+      }
+    },
+    {
+      "index": 4,
+      "command": [
+        "python",
+        "-B",
+        "scripts/review-native-cost-consolidation.py",
+        "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat"
+      ],
+      "startedAt": "2026-11-11T15:31:52.346488+00:00",
+      "finishedAt": "2026-11-11T15:31:52.444901+00:00",
+      "exitCode": 0,
+      "stdout": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/post-processing/04-stdout.log.gz",
+        "sha256": "dc8b1f9b6e9fbf2e62a8db399435ed004f131dd755a727aff65c06d49f775c69",
+        "bytes": 686,
+        "gzipSha256": "a0325edca9e37cd6bf1a18a72b41c972055210ee73b45a963f89e29b938490c5",
+        "gzipBytes": 398
+      },
+      "stderr": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/post-processing/04-stderr.log.gz",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0,
+        "gzipSha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+        "gzipBytes": 20
+      }
+    },
+    {
+      "index": 5,
+      "command": [
+        "python",
+        "-B",
+        "scripts/review-native-global-cost-window.py",
+        "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/combined-comparison.json",
+        "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/declaration.json",
+        "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/global-budget-decision.json",
+        "--lot",
+        "7B",
+        "--native-version",
+        "0.61.0"
+      ],
+      "startedAt": "2026-11-11T15:31:52.445693+00:00",
+      "finishedAt": "2026-11-11T15:31:52.535708+00:00",
+      "exitCode": 0,
+      "stdout": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/post-processing/05-stdout.log.gz",
+        "sha256": "d880b7083d9af561e004abc09f770e82bbdf9e3538995c21ee1c62c0c2d29803",
+        "bytes": 229,
+        "gzipSha256": "75df557310658de10b3a7cbe1ec905b2bde48f21074dbd84379e62a1aa63ebec",
+        "gzipBytes": 179
+      },
+      "stderr": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/post-processing/05-stderr.log.gz",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0,
+        "gzipSha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+        "gzipBytes": 20
+      }
+    },
+    {
+      "index": 6,
+      "command": [
+        "python",
+        "-B",
+        "docs/migration/lot7b-evidence/record-cost-log-transport.py",
+        "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat"
+      ],
+      "startedAt": "2026-11-11T15:31:52.536484+00:00",
+      "finishedAt": "2026-11-11T15:31:52.566482+00:00",
+      "exitCode": 0,
+      "stdout": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/post-processing/06-stdout.log.gz",
+        "sha256": "4d36c78caa1569742de33b84a01fc407e5c4a2041177e08bddca146b7f246bf4",
+        "bytes": 241,
+        "gzipSha256": "d95fdd32952bbf9dd4179f336a71fb187d03b0d4deed2b53611732ffa825be80",
+        "gzipBytes": 201
+      },
+      "stderr": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/post-processing/06-stderr.log.gz",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0,
+        "gzipSha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+        "gzipBytes": 20
+      }
+    },
+    {
+      "index": 7,
+      "command": [
+        "python",
+        "-B",
+        "docs/migration/lot7b-evidence/write-cost-results.py",
+        "--output-directory",
+        "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat",
+        "--candidate-source-directory",
+        "docs/migration/lot7b-evidence/followup-recovery/integrated-final",
+        "--baseline-manifest",
+        "docs/migration/lot6a-evidence/integrated-final-02/source-manifest.json"
+      ],
+      "startedAt": "2026-11-11T15:31:52.567421+00:00",
+      "finishedAt": "2026-11-11T15:31:54.149831+00:00",
+      "exitCode": 0,
+      "stdout": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/post-processing/07-stdout.log.gz",
+        "sha256": "368e6b38e0ac5ca43ea58209abd438be0b60dd54919911cd84ca0977890241a5",
+        "bytes": 561,
+        "gzipSha256": "b48f93dc0a146f4de1fb348fd5b8986a452f1b0a2f212174c11b8f0365e909b8",
+        "gzipBytes": 336
+      },
+      "stderr": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/post-processing/07-stderr.log.gz",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0,
+        "gzipSha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+        "gzipBytes": 20
+      }
+    },
+    {
+      "index": 8,
+      "command": [
+        "python",
+        "-B",
+        "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/tools/repeat-evidence.py",
+        "accept"
+      ],
+      "startedAt": "2026-11-11T15:31:54.151787+00:00",
+      "finishedAt": "2026-11-11T15:31:59.129302+00:00",
+      "exitCode": 0,
+      "stdout": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/post-processing/08-stdout.log.gz",
+        "sha256": "a7e79a3733d3b19759687582e7bfead21aba55d04c45bab2a0bc06bc22ed557f",
+        "bytes": 723,
+        "gzipSha256": "e648c13818ba8f750f54dfdebf0c0fa3cce8d191917a94bf4511e97abcc712ab",
+        "gzipBytes": 417
+      },
+      "stderr": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/post-processing/08-stderr.log.gz",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0,
+        "gzipSha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+        "gzipBytes": 20
+      }
+    }
+  ]
+}

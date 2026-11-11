@@ -1,0 +1,30 @@
+{
+  "schema": "logos-engine.followup-prepared-regression-input-recovery.v1",
+  "recordedAt": "2026-11-11T12:29:49.101980+00:00",
+  "status": "prepared_input_bytes_verified",
+  "records": [
+    {
+      "path": "docs/migration/lot6a-evidence/integrated-final-02/kata-campaign.json.gz",
+      "sha256": "a3318ed5f7d742f63b5923f3e1e46b0d9cfff1d18e767b45c522d61aa354e455",
+      "bytes": 8253174,
+      "kind": "baseline"
+    },
+    {
+      "path": "docs/migration/lot6a-evidence/integrated-final-02/kata-public-trace.json.gz",
+      "sha256": "c236c95ec0bdcb892a6940940098e4310eb35a6ae11acaf6b74545d09aa22daa",
+      "bytes": 12579,
+      "kind": "trace"
+    }
+  ],
+  "sourceManifest": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/coordination/prepared-6a-regression-cases.json",
+    "sha256": "dc84ecc83902ecb71865710220b593df351dc0ca7ae6885561e986a509df7ea1",
+    "bytes": 8422
+  },
+  "newCases": 1,
+  "case": "KATA",
+  "newLiveExecution": false,
+  "newReplayExecution": false,
+  "nativeSourceModified": false,
+  "qualification": "Copy verified opaque gzipbytes only, before the declaredfollow-up regressions. No case payload interpreted. Actual6Apublication remains a separate pre-cost prerequisite."
+}

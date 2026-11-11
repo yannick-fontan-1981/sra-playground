@@ -13,7 +13,7 @@ import { project, stableContext } from './v6-ranked-workshop-geometry.ts';
 import { extensionOptions, changes, modeSignature, profiles, relations } from './v6-ranked-workshop-methods.ts';
 import { bandIndex } from './v6-ranked-workshop-preparation.ts';
 import type { JsonObject, Primitive } from './ir.ts';
-import type { NativeAfterResult, NativeBeforeResult, NativeCommand, NativeFamily, NativeObservation,
+import type { NativeAfterResult, NativeBeforeResult, NativeCommand, NativeFamily, NativeGroundedInquiryWitness, NativeObservation,
   NativeProgramHandle, NativeProgramRegistry, NativeProposal, NativePublicObservation, NativeRecord,
   NativeRecordResult, NativeRows } from './v6-native-types.ts';
 
@@ -23,6 +23,10 @@ const WORKFLOW = 'v6.ranked_workshop.choose';
 const FORMAT = 'native.public_ranked_workshop.v1';
 const FIELDS = ['epoch', 'mode_evidence', 'rejected', 'events', 'mode_methods', 'input_effects',
   'method_refutations', 'operator_observations'] as const;
+// The original proposal has these eleven fields. Caller routing and Kernel
+// receipts may decorate it later, without becoming part of this source seal.
+const PROPOSAL_FIELDS = ['status', 'kind', 'actions', 'steps', 'facts', 'binding', 'workshop_plan',
+  'compositions', 'question', 'route_refs', 'bundle_template'] as const;
 const copy = <T>(value: T): T => structuredClone(value);
 function compare(a: any, b: any): number {
   if (Array.isArray(a) && Array.isArray(b)) {
@@ -71,6 +75,7 @@ export class RankedWorkshop implements NativeFamily<any> {
   private readonly callbacks: Readonly<Record<string, Primitive>>;
   private checkpoint: R | null = null;
   private revision = 0;
+  private selectionSeal: { observation: NativeObservation; proposal: NativeProposal } | null = null;
 
   private constructor(registry: NativeDrmRegistry, loaded: NativeLoadedDrm) {
     this.registry = registry; this.loaded = loaded;
@@ -112,7 +117,7 @@ export class RankedWorkshop implements NativeFamily<any> {
     this.clearTransient();
   }
   restoreNative(value: Readonly<NativeRecord>): void {
-    if (value === this.checkpoint && equal(this.state(), this.checkpoint!.source_state)) return;
+    if (value === this.checkpoint && equal(this.state(), this.checkpoint!.source_state)) { this.selectionSeal = null; return; }
     const supplied = retainNativeJson(value);
     if (!isJsonObject(supplied) || supplied.format !== FORMAT || Object.keys(supplied).length !== 2 || !isJsonObject(supplied.source_state)) {
       throw new TypeError('Invalid native ranked-workshop checkpoint');
@@ -123,7 +128,7 @@ export class RankedWorkshop implements NativeFamily<any> {
     this.clearTransient();
   }
   private clearTransient(): void {
-    this.cache.clear(); this.selected = null; this.measured = {}; this.observation = {};
+    this.cache.clear(); this.selected = null; this.measured = {}; this.observation = {}; this.selectionSeal = null;
   }
   scope(obs: R): void {
     if (this.epoch !== obs.level_epoch) { this.epoch = obs.level_epoch; this.mode_evidence = []; this.rejected = []; }
@@ -170,6 +175,7 @@ export class RankedWorkshop implements NativeFamily<any> {
     return { selected: this.selected !== null, alternatives: grouped.size };
   }
   async proposeSource(obs: NativeObservation, rows: NativeRows, inputs: readonly NativeCommand[], remaining: number): Promise<NativeProposal | null> {
+    this.selectionSeal = null;
     this.scope(obs); if (remaining < 1) return null;
     const [scene, context] = this.projected(obs, rows), extensions = truthy(context)
       ? extensionOptions(this, obs, rows, scene, context, inputs, remaining) : [];
@@ -197,7 +203,7 @@ export class RankedWorkshop implements NativeFamily<any> {
         'tools_and_their_domains', ...(extension?.unknown ?? [])],
       falsifiers: ['current_profile_or_marker_changed', 'other_profiles_change_unpredicted',
         'selected_control_does_not_produce_discriminating_effect', 'scope_changed'] };
-    return { status: 'proposed', kind: this.id, actions: [action], steps: [{ action,
+    const proposal: NativeProposal = { status: 'proposed', kind: this.id, actions: [action], steps: [{ action,
       expected_before: { level_epoch: obs.level_epoch, frame_hash: obs.frame_hash }, expected_after: null }], facts,
       binding: Object.fromEntries(['observation_ref', 'level_epoch', 'levels_completed', 'frame_hash'].map(k => [k, obs[k]])),
       workshop_plan: plan, compositions: [{ id: focus, role: 'information_question', observed: false,
@@ -210,6 +216,8 @@ export class RankedWorkshop implements NativeFamily<any> {
       bundle_template: { operation_key: 'OP18', composition_ref: focus, objective_ref: 'G_official_completion',
         purpose: this.config.question, preconditions: facts, evidence, actions: [action], preserve_refs: [],
         preservation_evidence: {}, outcome_guard: { path: ['value'], contains: focus } } };
+    this.selectionSeal = { observation: retainNativeJson(obs), proposal: retainNativeJson(proposal) };
+    return proposal;
   }
   async propose(obs: NativeObservation, rows: NativeRows, inputs: readonly NativeCommand[], remaining: number): Promise<NativeProposal | null> {
     return this.proposeSource(obs, rows, inputs, remaining);
@@ -219,6 +227,61 @@ export class RankedWorkshop implements NativeFamily<any> {
     if (group !== 'factored_material_return' || question !== 'observed_ranked_workshop') throw new TypeError('Unknown ranked workshop source entry');
     const proposal = await this.propose(obs, rows, inputs, remaining);
     if (proposal) proposal.material_access_subquestion = question; return proposal;
+  }
+  /** Native coordination may continue a grounded question after a local
+   * contact refusal. This reads acquired source state and the exact current
+   * source selection; it neither changes that selection nor grants an action.
+   * Portable methods still require a new probe, and current mode evidence
+   * never establishes the effect of the selected continuation command. */
+  groundedInquiryWitness(proposal: R, obs: NativeObservation): NativeGroundedInquiryWitness | null {
+    const seal = this.selectionSeal;
+    if (!seal || !equal(obs, seal.observation) || this.epoch !== obs.level_epoch
+      || PROPOSAL_FIELDS.some(key => !Object.hasOwn(proposal, key) || !equal(proposal[key], seal.proposal[key]))
+      || proposal.status !== 'proposed' || proposal.kind !== this.id || proposal.actions.length !== 1) return null;
+    const plan = proposal.workshop_plan, context = plan.context, extension = plan.extension;
+    if (!equal(this.observation, obs) || !equal(this.measured.context, context)
+      || !equal(proposal.binding, Object.fromEntries(['observation_ref', 'level_epoch', 'levels_completed', 'frame_hash'].map(k => [k, obs[k]])))
+      || plan.context_sha256 !== digest(stableContext(context))
+      || plan.current_drm_sha256 !== this.loaded.source_hash || plan.source_drm_sha256 !== this.config.origin_drm_sha256
+      || this.rejected.some(row => equal(row, [plan.rule_ref, plan.context_sha256]))
+      || extension?.method_ref && this.method_refutations.some(row => equal(row, [extension.method_ref, obs.level_epoch]))) return null;
+    const publicContrast = (contrast: R): boolean => isJsonObject(contrast) && Array.isArray(contrast.evidence) && contrast.evidence.length === 2
+      && contrast.evidence.every((ref: unknown) => typeof ref === 'string' && ref.length > 0)
+      && contrast.evidence[0] !== contrast.evidence[1]
+      && (equal(contrast.change, [0, 1]) || equal(contrast.change, [1, 0]))
+      && Number.isSafeInteger(contrast.source_epoch);
+    const retainedMethod = (action: R, ref: string): R | undefined => this.mode_methods.find(method => method.ref === ref
+      && equal(method.action, action) && equal(method.signature, modeSignature(context))
+      && method.ref === 'mode_method:' + digest([method.signature, method.action])
+      && !this.method_refutations.some(row => equal(row, [method.ref, obs.level_epoch])));
+    let method: R | undefined, evidence: string[];
+    if (extension?.kind === 'revalidate_mode') {
+      method = retainedMethod(proposal.actions[0], extension.method_ref);
+      if (!method || this.mode_evidence.length || context.station_profile_inner_singleton_count !== 0
+        || !equal(extension.action, method.action) || !Array.isArray(method.contrasts)
+        || !method.contrasts.every(publicContrast)
+        || !method.contrasts.some((row: R) => equal(row.change, [0, 1]))
+        || !method.contrasts.some((row: R) => equal(row.change, [1, 0]))) return null;
+      evidence = method.contrasts.flatMap((row: R) => row.evidence);
+      if (new Set(evidence).size < 3 || !equal(extension.evidence, evidence)) return null;
+    } else {
+      if (this.mode_evidence.length !== 1) return null;
+      const contrast = this.mode_evidence[0]!;
+      if (!isJsonObject(contrast.action) || typeof contrast.action.action_ref !== 'string') return null;
+      const ref = 'mode_method:' + digest([modeSignature(context), contrast.action]);
+      method = retainedMethod(contrast.action, ref);
+      if (!method || contrast.same_profiles_and_marker_position !== true
+        || !Array.isArray(contrast.observed_change) || contrast.observed_change[1] !== context.station_profile_inner_singleton_count
+        || !Array.isArray(method.contrasts)
+        || !method.contrasts.some((row: R) => publicContrast(row) && row.source_epoch === obs.level_epoch
+          && equal(row.change, contrast.observed_change) && equal(row.evidence, contrast.evidence))) return null;
+      evidence = contrast.evidence;
+    }
+    return { status: 'acquired_context_for_unknown_effect', observation_ref: obs.observation_ref,
+      context_model_ids: [method.ref], evidence_refs: [...new Set(evidence)],
+      qualification: extension?.kind === 'revalidate_mode'
+        ? 'Both public mode contrasts support this exact source-selected revalidation question. The new-scope effect remains unknown and ordinary preservation, binding and action guards still apply.'
+        : 'A public mode contrast in this epoch supports this exact source-selected continuation. Its command may differ from the mode input; its effect remains unknown and ordinary preservation, binding and action guards still apply.' };
   }
   bind(proposal: R, _domain?: unknown): void {
     if (proposal.actions.length !== 1 || !equal(proposal.actions, proposal.steps.map((s: R) => s.action))

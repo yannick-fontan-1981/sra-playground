@@ -1,0 +1,53 @@
+{
+  "schema": "logos-engine.lot10b-native-publication.v1",
+  "observedAt": "2026-11-11T16:50:34.062Z",
+  "nativeVersion": "0.62.0",
+  "nativeSourceDigest": "74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12",
+  "deployment": {
+    "id": "appgdep_6af49caf0b808191a14190d3261b6f9d",
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "title": "SRA Playground",
+    "version_id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_ebb6198d3844819188b9db25c43aaa31",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6adbc388d79081918581b93b919d7258",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-11-11T16:50:10.918057+00:00"
+  },
+  "version": {
+    "id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_ebb6198d3844819188b9db25c43aaa31",
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "version_number": 102,
+    "source": {
+      "commit_sha": "1019d2eb929d7dc201a5c1f6edce5aa1c5dfa464"
+    },
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_000000009d00820e941cc03425f73077",
+      "content_hash": "sha256:9724c4bbc91636ebb8e008466b01fcf980fdc86edc46073555aa4e179946e386",
+      "size_bytes": 30023680,
+      "file_count": 75
+    },
+    "screenshot_url": null,
+    "deployment_id": "appgdep_6af49caf0b808191a14190d3261b6f9d"
+  },
+  "audience": {
+    "role": "owner",
+    "accessMode": "custom",
+    "revision": 3,
+    "allowedUserCount": 1,
+    "allowedGroupCount": 0,
+    "externalVisitorCount": 0
+  },
+  "sourceWorkflow": {
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "checkout_path": "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout",
+    "commit_sha": "1019d2eb929d7dc201a5c1f6edce5aa1c5dfa464",
+    "archive": "/workspace/sites/sra-lot10b-recovery-20261111/publication-native-062/step-06.tar.gz"
+  },
+  "qualification": "Actual terminal private native publication after six ordinary source pushes, unchanged final publication inputs and 450 exact application-member comparisons. HPDL qualification remains partial; this publication does not establish six-level success or full-original-caller parity."
+}

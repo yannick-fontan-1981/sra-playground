@@ -1,0 +1,465 @@
+{
+  "schema": "logos-engine.followup-clean-repeat-declaration.v1",
+  "status": "declared_before_repeat",
+  "recordedAt": "2026-11-11T15:12:40.938964+00:00",
+  "generator": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/tools/repeat-evidence.py",
+    "sha256": "6dbf91bfad102dcd5b576fa00a8f36972ebfeed2d29fcf33aefdfae9fef4f517",
+    "bytes": 41745
+  },
+  "tools": {
+    "delivery": {
+      "path": "scripts/verify-native-delivery.py",
+      "sha256": "ca36a235e5da8aa8abd963aaa6a282d90217ed58a721bfdbba361527dd48409a",
+      "bytes": 26494
+    },
+    "readiness": {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/tools/finalize-cost-readiness.py",
+      "sha256": "7e2cee8c0f4ab9821ab17fbf642a75a7492c8e8ce783ac8f3869b10941da01a1",
+      "bytes": 51683
+    },
+    "publication": {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/tools/record-publication-inputs.py",
+      "sha256": "d2d000492902cac9e8812c49fa6f588b11e410f5c9b4dd34561d40e8441b9f8b",
+      "bytes": 44812
+    },
+    "global": {
+      "path": "scripts/review-native-global-cost-window.py",
+      "sha256": "9ab2ecd9d6ddf234e96332421a6e55937a766495c1a20dd223f4441d6b516940",
+      "bytes": 22204
+    },
+    "strict": {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/tools/verify-strict-cost-forms.mjs",
+      "sha256": "07276dd501a919c97d3f53b7ea594eed8029b5a363f2a498515c1a304551a22b",
+      "bytes": 7759
+    },
+    "driver": {
+      "path": "scripts/run-native-cost-window.py",
+      "sha256": "0ec9c69c859d0555e963643010d2254caee8c63d1c9a98ec07cd9af0ce0ce613",
+      "bytes": 8933
+    },
+    "renderer": {
+      "path": "docs/migration/lot7b-evidence/write-cost-results.py",
+      "sha256": "121c3446bd172495ffa2075dadf2c7ac400c7c4feadfe5a400f8b71b895368db",
+      "bytes": 41724
+    },
+    "prepare": {
+      "path": "docs/migration/lot7b-evidence/prepare-cost-protocol.py",
+      "sha256": "482cfc5b6cf263705be9a84c798cb0d114099c6cc009f8247a22ce0ac8f32e17",
+      "bytes": 28789
+    },
+    "static": {
+      "path": "docs/migration/lot7b-evidence/check-cost-static-inputs.py",
+      "sha256": "ab4426eda556decca32950f415483178d7459fab5c2065f37be107b6678f1b18",
+      "bytes": 27602
+    },
+    "capture": {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/tools/capture-strict-cost-forms.mjs",
+      "sha256": "8e269df48afbfea2991e976a252bf49e95cd15207b2442794078454c9fc8a568",
+      "bytes": 12545
+    }
+  },
+  "protocol": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/declaration.json",
+    "sha256": "727a4956837421892edfd1f04c649cef4004d0128d056150b3cbd560735e3132",
+    "bytes": 5021
+  },
+  "quietRequestId": "lot7-followup-clean-repeat-f8d5097-final",
+  "finalQuietAnnouncedAt": "2026-11-11T15:07:59.348713+00:00",
+  "laneStatusSources": {
+    "lot6b": "/workspace/shared/sra-coordination/lot6b-status.json",
+    "lot10b": "/workspace/shared/sra-coordination/lot10b-status.json",
+    "lot5c": "/workspace/shared/sra-coordination/lot5c-status.json"
+  },
+  "statusPayloadChangesAllowed": [
+    "updated_at"
+  ],
+  "activeLanes": [
+    "lot6b",
+    "lot10b",
+    "lot5c"
+  ],
+  "performanceLock": "/workspace/shared/sra-coordination/performance.lock",
+  "nativeDigests": {
+    "baseline": "ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229",
+    "candidate": "f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279"
+  },
+  "population": {
+    "measuredSessions": 32,
+    "measuredActions": 400,
+    "excludedWarmupSessions": 8,
+    "excludedWarmupActions": 24
+  },
+  "firstWindowEligibility": "withdrawn_entire_window_due_to_isolation_deviations",
+  "incidentAcknowledgment": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/coordination/quiet-deviation-acknowledgment.json",
+    "sha256": "db68cd28bb55cf478fa299d4e5650afe999da1713f3c6ab752b5a5027c15cf4d",
+    "bytes": 4033
+  },
+  "primaryIncident": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/coordination/lot5c-quiet-deviation-20261111T1420.json",
+    "sha256": "8bec4c8bb8d3b9c705c0bf3de2578dca70663e541aedbef2ae624ee47b8c7ea7",
+    "bytes": 1714
+  },
+  "successorIncident": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/coordination/lot6b-startup-exception-status-snapshot.json",
+    "sha256": "1b296c0555540d055ee88172c84cd7dd08ccbe7aa7470a86be72f11ab0498a1c",
+    "bytes": 3400
+  },
+  "originalWindow": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/performance/window.json",
+    "sha256": "c40f04f8f212c7f66812f217786f4c41726caf56d00efd3b5827e0ab31a2f9cb",
+    "bytes": 11222
+  },
+  "originalReadiness": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/performance/readiness.json",
+    "sha256": "d58859bfde2c1bfef89873ae71b0e273eb22014919737fc4fb9f0e4ac31ab653",
+    "bytes": 715304
+  },
+  "originalPublicationInputs": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/integrated-final/publication-inputs.json",
+    "sha256": "084b763620132a6c8f68c37adc63dc38e275112f816f08a300870f7f4863960f",
+    "bytes": 714176
+  },
+  "originalForms": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/performance/strict-work-forms.json",
+    "sha256": "825546ffc4f061a1063fbeea4c52c89c2d7a79dbc3dee02e11ab6c1de0ca6637",
+    "bytes": 255907
+  },
+  "reusedForms": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/strict-work-forms.json",
+    "sha256": "825546ffc4f061a1063fbeea4c52c89c2d7a79dbc3dee02e11ab6c1de0ca6637",
+    "bytes": 255907
+  },
+  "functionalCaptureRepeated": false,
+  "newFunctionalSessions": 0,
+  "caseRelocation": {
+    "original": {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance/cases.json",
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d",
+      "bytes": 1451
+    },
+    "repeat": {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/cases.json",
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d",
+      "bytes": 1451
+    },
+    "byteIdentical": true
+  },
+  "protectedOriginalFiles": [
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/contract/publication-verifier-declaration-v2.json",
+      "sha256": "7442f3f6bd749c290e2021ec723ce55e3faa0e341f1f9c158c215d71cbe81005",
+      "bytes": 5653
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/contract/publication-verifier-declaration.json",
+      "sha256": "89124ff2db4ee21fc38fcd685bc8048a51f676ed740ee2d055d972a09febc9fd",
+      "bytes": 4924
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/contract/regression-cases-final.json",
+      "sha256": "612786e95a3cd6c98c7a0ccd4bd5e616ff5b54d1de18f7962aae79d50faf4f36",
+      "bytes": 9035
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/contract/regression-cases.json",
+      "sha256": "71011abbb49ebab20275e8f78e05575b0f417d5a0189df9f32b9e7fe691a3ef4",
+      "bytes": 8392
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/contract/source-contract.md",
+      "sha256": "fd8a6141d7326beaeede78457729672ce37da234b03c76e3d547d08a1796498c",
+      "bytes": 11617
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/contract/test-scope-final.json",
+      "sha256": "edfd5f06e5c07271e5a480977a0f23dee07fc05be1d98e96187d71fd69b768c4",
+      "bytes": 24017
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/contract/test-scope.json",
+      "sha256": "2cecca0a3969206a5a6a4111f4447bddf21cdf4d77121d15fa6741a57c7d2fa3",
+      "bytes": 8080
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/contract/validation-plan.json",
+      "sha256": "5cfa663302de867793048b45e152f7f918defae3f7eab8c73a9bb022b7badbfd",
+      "bytes": 8256
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/integrated-final/publication-inputs.json",
+      "sha256": "084b763620132a6c8f68c37adc63dc38e275112f816f08a300870f7f4863960f",
+      "bytes": 714176
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance/cases.json",
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d",
+      "bytes": 1451
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance/cohort1/after.json",
+      "sha256": "796f8226aa8b5eca1de25ec29afdfe01e9be4f0a7ab6d7b049b6411739455752",
+      "bytes": 432921
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance/cohort1/after.log",
+      "sha256": "f473df03bb6f18411f80a6f5803e15d59d37b78be3c14bd083d2007c9bf39a01",
+      "bytes": 1597
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance/cohort1/after.log.gz",
+      "sha256": "0a267e89fbf3cc64e6fae20be4639af5dff5cc9b4110ef85027d9e010fb03f2f",
+      "bytes": 453
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance/cohort1/baseline.json",
+      "sha256": "99e24282cf28e009ee69f08f68cc57531acf89da4e51c13e988a81202f44aa6a",
+      "bytes": 433065
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance/cohort1/baseline.log",
+      "sha256": "926dd5168fb88d7a29cb40915a043bae84d49d11b7ec9739c5774e2ddb0ab4a5",
+      "bytes": 1583
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance/cohort1/baseline.log.gz",
+      "sha256": "714753bdf71085976ebd6fdf9e8fbe253ef31677962dd222a401373c46f98b92",
+      "bytes": 449
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance/cohort1/comparison.json",
+      "sha256": "03a05f59a21921cf4e7d511e7982fb115d57bf0415a41ee577720f80207fa7ed",
+      "bytes": 25406
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance/cohort2/after.json",
+      "sha256": "41679c1ededd4978adf8f23854727677e7321f90da366a8c9343ffb121313fed",
+      "bytes": 432969
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance/cohort2/after.log",
+      "sha256": "1bd82506f2c877c41ccd5d3f8b3f7f38d2e9d9bd81d80812a5829c396e5944fa",
+      "bytes": 1587
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance/cohort2/after.log.gz",
+      "sha256": "145ba996065b5b8aaa26d50d74a5c6e4185a22ddbb0f396e7f6417e4d04ae97f",
+      "bytes": 450
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance/cohort2/baseline.json",
+      "sha256": "6c6a39167968133bcaecab576605751e1b3115fc4351566f4a1ed6a1515d7967",
+      "bytes": 432973
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance/cohort2/baseline.log",
+      "sha256": "fff885a7df66c65a1c1be3c37af67d97261f1e6b2cdc36b5f288d265fa123bbf",
+      "bytes": 1581
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance/cohort2/baseline.log.gz",
+      "sha256": "cae97db420bff3a575a5dc2be1025bf645fa01d7dfcb1810c67bf22c535a813a",
+      "bytes": 451
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance/cohort2/comparison.json",
+      "sha256": "50068e47b019ff13f7d6d907c25553cd9d49c060dfd93c816e0b8a635bbe3908",
+      "bytes": 25980
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance/combined-comparison.json",
+      "sha256": "9c3d8073d02ac7d09a1924e9622613eba03c0ffe7095a995eeae56a711796c7e",
+      "bytes": 29658
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance/comparison-policy.json",
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68",
+      "bytes": 991
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance/consolidation-review.json",
+      "sha256": "a7ed4865f82094731d20f9eac0c83972a5b6438685c0c04f8fff8faece009482",
+      "bytes": 45200
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance/coordinated-isolation-completion.json",
+      "sha256": "61df00810b368a4e2caee6bfb6592c9185296e9c66d45687245f5894d40b40b0",
+      "bytes": 1884
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance/declaration.json",
+      "sha256": "f8042743a42a93769de12e804d0b3590d844f94c5013cb4f54cf05772698ad14",
+      "bytes": 4969
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance/global-budget-decision.json",
+      "sha256": "026e04bba6980b390731e4b165055eb2763f071f774948c70f444b7e6f9b0d68",
+      "bytes": 30092
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance/global-budget-policy.json",
+      "sha256": "9733f5de2329c08ec91c85d32144fb60ab72fa499cd3cddd8532093fc119b545",
+      "bytes": 2342
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance/log-transport.json",
+      "sha256": "7faec73eee65f7d76f93c2da7109f8a875006b3a24423a4e8df8de317f49a4b5",
+      "bytes": 3141
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance/premeasurement-attempts/readiness-attempt-01.json",
+      "sha256": "04c93bf3ac53f1c7925a176a033d925c47e6837240d239c1e0bea466c61535dc",
+      "bytes": 1449
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance/premeasurement-attempts/static-preflight-01.json",
+      "sha256": "488c7d8372bc512a854767d1bfd34ae90507d7fd2688cea3bc4dd033bdcf926f",
+      "bytes": 13323
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance/premeasurement-attempts/static-preflight-retry.json",
+      "sha256": "4594541a7ab815e8884ffc2d92c3931b7cabe54a3eea19e1fd5eb331f23f6eda",
+      "bytes": 1176
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance/preparation.json",
+      "sha256": "7122fc6fb5acd4f251b1cdea48ee815c1fdd6f825cdc00065b8499549f0140d0",
+      "bytes": 3500
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance/protocol-check.json",
+      "sha256": "d5c364ce7e74e0ec725024f644b547ceae13fb4e830dbb8336352f98098c05a2",
+      "bytes": 424
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance/protocol.md",
+      "sha256": "8fbba48d388348bb79ee4219ea6e061d337ab26c154aaf514ae567d0e8ac3718",
+      "bytes": 9530
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance/readiness.json",
+      "sha256": "d58859bfde2c1bfef89873ae71b0e273eb22014919737fc4fb9f0e4ac31ab653",
+      "bytes": 715304
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance/results-render.json",
+      "sha256": "8ceebe77dfedb4fde7a97ec9c3763457186598398d7ddc79bceb8af7b72863a1",
+      "bytes": 80528
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance/results.md",
+      "sha256": "6dc9f2f4babdd11eae009fed542f2a2b54147db7b5e6635e4c53cc12d97d14b6",
+      "bytes": 33306
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance/static-preflight.json",
+      "sha256": "c50666fe596c438e9828ed1f7f89587a3f6fe46e38a2ffd1d83c2c7131afdb44",
+      "bytes": 13217
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance/strict-work-capture.json",
+      "sha256": "e5b15a6882ab1c1ec183c7b4a7ce1b125527ecc4a5bf8d2179d99c7518998a67",
+      "bytes": 3485
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance/strict-work-declaration.json",
+      "sha256": "82716bdccf2578c9adf818d388a6c947ffc9dc2da71e17cafb271f2680220ed2",
+      "bytes": 2118
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance/strict-work-forms.json",
+      "sha256": "825546ffc4f061a1063fbeea4c52c89c2d7a79dbc3dee02e11ab6c1de0ca6637",
+      "bytes": 255907
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance/strict-work-verification.json",
+      "sha256": "11dd1fd7e7ca9f2d373de2464d2ef469fcb99fff96f72f58ed93269807176f30",
+      "bytes": 17022
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance/window.json",
+      "sha256": "c40f04f8f212c7f66812f217786f4c41726caf56d00efd3b5827e0ab31a2f9cb",
+      "bytes": 11222
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/tools/capture-strict-cost-forms.mjs",
+      "sha256": "8e269df48afbfea2991e976a252bf49e95cd15207b2442794078454c9fc8a568",
+      "bytes": 12545
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/tools/finalize-cost-readiness.py",
+      "sha256": "7e2cee8c0f4ab9821ab17fbf642a75a7492c8e8ce783ac8f3869b10941da01a1",
+      "bytes": 51683
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/tools/history/finalize-cost-readiness-11-case-v2.py",
+      "sha256": "1cee23b5aace9a7bbed096d498a0c6255842f28dfd7e9dfc4760a67859a5e913",
+      "bytes": 36312
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/tools/history/finalize-cost-readiness-validation-retry-v3.py",
+      "sha256": "4ed625736afbb76f5412af5c2b9518e3ce4f0d817e06a361a33e1bf58ca7cc21",
+      "bytes": 40411
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/tools/history/record-publication-inputs-v1.py",
+      "sha256": "1302d84691ec50710b0e6d4442cce80e10fe018efba92fa65ae01b51967ca307",
+      "bytes": 40082
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/tools/independent-audit-closure-review.json",
+      "sha256": "bf4ea186b4f829e56c36688686d8e8d26aef2f4e2ee025096d56bbf72188b548",
+      "bytes": 13728
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/tools/independent-publication-review.json",
+      "sha256": "d6caed72e98cafcb698796bc0bd9b7596557aae0ea05dcaa5f75c978e2fce1f5",
+      "bytes": 10654
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/tools/independent-review-v2.json",
+      "sha256": "4ebd79d1bd45bbfbb7597290405b4ddce1717030dc0fc2385f45e79c662e791c",
+      "bytes": 10095
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/tools/independent-review-v3.json",
+      "sha256": "567fdce42622c68d8fba9e132af48712812da4e2ba61f746151f6e18223282d8",
+      "bytes": 15278
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/tools/independent-review.json",
+      "sha256": "9838a672587b03e8c8e379cb69d898a4f45a466fe7d113e498049d13953077ea",
+      "bytes": 7357
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/tools/migration-audit-closure-amendment.json",
+      "sha256": "7041103d6587be4a5ffa3271dd6befb4609c56b3f47b7a9236638256fae5e351",
+      "bytes": 8412
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/tools/readiness-scope-amendment.json",
+      "sha256": "4a229bad726205ffd29bcc7fd8603593bb4902abf0fec04216d2c23df11aa98f",
+      "bytes": 4789
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/tools/record-publication-inputs.py",
+      "sha256": "d2d000492902cac9e8812c49fa6f588b11e410f5c9b4dd34561d40e8441b9f8b",
+      "bytes": 44812
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/tools/validation-retry-amendment.json",
+      "sha256": "a0994baf5bf179e6ddb24f4a11e23bd73fe832dc89773582bffa6f80a4b41728",
+      "bytes": 7484
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/tools/verify-strict-cost-forms.mjs",
+      "sha256": "07276dd501a919c97d3f53b7ea594eed8029b5a363f2a498515c1a304551a22b",
+      "bytes": 7759
+    }
+  ],
+  "selectionBetweenWindows": false,
+  "poolingBetweenWindows": false,
+  "automaticFurtherRepeat": false,
+  "qualification": "The complete first timing window is ineligible irrespective of its numerical result. All its original bytes remain retained. Only one complete fresh A1/B1/B2/A2 window may revalidate isolation acceptance; no old timing is pooled, selected or substituted. Existing exact functional forms are reused with their original timestamps and identities, not presented as newly executed."
+}

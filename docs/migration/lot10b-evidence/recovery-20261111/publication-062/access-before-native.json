@@ -1,0 +1,14 @@
+{
+  "schema": "logos-engine.site-access-observation.v1",
+  "observedAt": "2026-11-11T16:37:39.917Z",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "latestVersion": 101,
+  "currentUserRole": "owner",
+  "accessMode": "custom",
+  "policyRevision": 3,
+  "allowedUsers": 1,
+  "allowedGroups": 0,
+  "externalVisitors": 0,
+  "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+  "qualification": "Actual Sites get_site readback before native publication. Owner-only audience remains unchanged."
+}

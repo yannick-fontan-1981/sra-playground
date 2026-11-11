@@ -1,0 +1,68 @@
+{
+  "schema": "logos-engine.retained-tool-failure.v1",
+  "command": [
+    "node",
+    "scripts/compare-native-cost-cohorts.mjs",
+    "docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01/comparison-policy.json",
+    "docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01/cohort1/baseline.json",
+    "docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01/cohort1/after.json",
+    "docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01/cohort1/comparison.json",
+    "docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01/cohort2/baseline.json",
+    "docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01/cohort2/after.json",
+    "docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01/cohort2/comparison.json",
+    "docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01/combined-comparison.json"
+  ],
+  "exitCode": 1,
+  "inputsUnchanged": true,
+  "outputExists": false,
+  "startedAt": "2026-11-11T16:33:35.238204+00:00",
+  "finishedAt": "2026-11-11T16:33:35.410995+00:00",
+  "inputs": [
+    {
+      "path": "scripts/compare-native-cost-cohorts.mjs",
+      "bytes": 19460,
+      "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34"
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01/comparison-policy.json",
+      "bytes": 991,
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01/cohort1/baseline.json",
+      "bytes": 433059,
+      "sha256": "0f90c6ec9e7007e00f4d2eb962dc8a0667c2d3d3e854f9455518c65f595476f7"
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01/cohort1/after.json",
+      "bytes": 433500,
+      "sha256": "bb61a8a45648688494f28b38d20e140bb3465400f11bbd15723d17561b0bd3bc"
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01/cohort1/comparison.json",
+      "bytes": 25478,
+      "sha256": "4f4dea6d8aeabc5424ac9e5bae4bdb983f5209f627e2115364e70b5f816f0b81"
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01/cohort2/baseline.json",
+      "bytes": 433108,
+      "sha256": "83c417373c23dbbfa620506d6ef488ee562b17252ebace065a725dc0908be745"
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01/cohort2/after.json",
+      "bytes": 433543,
+      "sha256": "eba5885b35fb17374c134c4a19cd8dc283d86593639c2839a459cd490880c98a"
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01/cohort2/comparison.json",
+      "bytes": 26021,
+      "sha256": "c4e6ec0854dc1c7497ee4dd99b97631f3b039040eaf48faf7c26a24f6bcd1086"
+    }
+  ],
+  "log": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01/aggregation-failure.log",
+    "bytes": 204741,
+    "sha256": "0864cd86edcf07884a78b532aab4757f64d1b92ebebb87ac08d4fbf41dcfe132"
+  },
+  "qualification": "Actual unchanged historical strict aggregator invocation. Its exit and raw log are retained without converting its result into a pass. Structural qualification, if eligible, is handled by the separately declared owner contract."
+}

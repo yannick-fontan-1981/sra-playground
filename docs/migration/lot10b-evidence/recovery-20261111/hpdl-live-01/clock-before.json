@@ -1,0 +1,22 @@
+{
+  "schema": "logos-engine.lot10b.hpdl-cumulative-clock.v1",
+  "game": "HPDL",
+  "recordedAt": "2026-11-11T12:21:04Z",
+  "maximumCumulativeSeconds": 2400,
+  "clockReset": false,
+  "historicalDebit": {
+    "chargedSeconds": 159.45478678199166,
+    "actions": 40,
+    "provenance": "retained_conversation_and_environment_recovery_declaration",
+    "declarationPath": "docs/migration/lot10b-evidence/recovery-20261111/recovery-status.json",
+    "rawEvidenceRecovered": false,
+    "intervalsRecovered": false,
+    "qualification": "Historic elapsed time and actions remain charged. Their original raw ledger, intervals, reports and public journal were not recovered. This entry is a retained debit, not a newly reproduced execution or validation result."
+  },
+  "attempts": [],
+  "cumulativeChargedSeconds": 159.45478678199166,
+  "remainingSeconds": 2240.5452132180085,
+  "budgetExceededSeconds": 0,
+  "budgetAvailability": "available",
+  "qualification": "No fresh HPDL attempt is represented by this initial ledger. Every admitted future interval, including failure, timeout and evidence retention, must be appended and charged. A running entry blocks further admission until its actual outcome is accounted for; it is never silently discarded or refunded. Browser gameplay shares this same 2400-second budget."
+}

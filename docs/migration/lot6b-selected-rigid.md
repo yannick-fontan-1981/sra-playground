@@ -1,5 +1,61 @@
 # Lot 6B : SelectedRigid
 
+<!-- LOT6B_SITE103_INTEGRATION_START -->
+## Reprise après le signalement KLOT : publication et fusion
+
+Le [constat courant du Site](lot6b-evidence/integration-site103-01/publication-observation.json)
+confirme **Site 103 / native 0.62**, commit
+`4afcbfe6a25bd3a88223be543e443bc53b9c8814`, déploiement
+`appgdep_6af49db69234819195c9c093cb79a7da` réussi et accès propriétaire seul,
+revérifiés le 11 novembre 2026 à **14:05:12 UTC−03 (17:05:12 UTC)**.
+SelectedRigid est absent du registre publié et son entrée reste en attente.
+Aucun sélecteur d’un autre moteur n’est présent dans l’interface observée pour
+activer le candidat local. Ce constat établit l’écart de publication à prendre
+en compte dans le signalement utilisateur « KLOT ne réussit pas ».
+
+Les trois niveaux KLOT, les 38 actions, les 30 préfixes et la relecture originale
+sans différence restent les preuves du **gel historique sur Site 97 / native
+0.60**, pas celles du nouveau code fusionné. Le publié 103 et cet ancien
+candidat totalisent chacun 64/76 entrées, mais WindowQuestion est présent dans
+le premier et SelectedRigid dans le second. **La fusion exacte atteint maintenant 65/76 (85,5 %), selon le nouvel audit
+exécuté et lié ci-dessous.**
+
+La source publiée exacte 103 est désormais fusionnée et vérifiée. Le
+raccordement de `currentExecution`, du cinquième argument des gardes et du
+quota `remainingLevelActions` conserve le délai hôte plus strict après
+conversion d’origine d’horloge. Aucun nouvel essai KLOT, résultat navigateur
+ou coût 6B n’est acquis à ce stade. La préparation de 5C reste provisoire ;
+0.63 n’est pas encore publié. Le gel final, ses régressions, le navigateur,
+le coût global et la publication 6B restent ouverts.
+### Validation de l’intégration exacte de Site 103
+
+La fusion avec le publié 103 est maintenant vérifiée sur le
+[gel de développement intégré](lot6b-evidence/integration-site103-01/development-freeze),
+qui comprend **314 fichiers natifs**, digest
+`2e710bd53c5e77d2215f2a6dcb0d2aa5f206debfd793f1b43f91a2c9746d66bd`.
+
+| Contrôle exécuté | Résultat |
+| --- | --- |
+| [Trois fichiers ciblés](lot6b-evidence/integration-site103-01/targeted-attempt-01/execution.json) | **33/33 tests réussis**. |
+| [Runtime commun](lot6b-evidence/integration-site103-01/checks-attempt-01/runtime-tests.json) | **9/9 tests réussis**, dont les rejeux archivés HANO, SYME et DNOI. |
+| [Audit des entrées](lot6b-evidence/integration-site103-01/checks-attempt-01/entry-audit.json) | **65/76 entrées, 85,5 %**, désormais effectivement auditées. |
+| [Audit de migration](lot6b-evidence/integration-site103-01/checks-attempt-01/migration-audit.json) | **202 composants vérifiés, 149 transferts partiels, 1 018 modules en attente ; `failures: []`**. |
+| [TypeScript](lot6b-evidence/integration-site103-01/checks-attempt-01/typecheck.json) | Réussi. |
+
+Les entrées surveillées de ces exécutions sont inchangées. Ces résultats
+qualifient l’intégration exacte 103, y compris le raccordement courant de
+l’horloge et des gardes ; ils ne réattribuent pas l’ancienne campagne KLOT à
+ce nouveau gel. **Aucun nouvel essai KLOT, contrôle navigateur ou coût 6B
+n’est revendiqué.**
+
+La prochaine préparation est la fusion **provisoire** du checkpoint immuable
+5C `805b30297dc1b715dbfd9f1197a9a8ba7b361b90`. Ce checkpoint n’est pas encore
+publié. La réconciliation exacte avec le futur 0.63 effectivement publié reste
+obligatoire avant le gel final 6B, ses régressions, le navigateur, le coût et
+la publication.
+
+<!-- LOT6B_SITE103_INTEGRATION_END -->
+
 ## État de travail et provenance
 
 **Transfert en cours, non publié.** Le checkout isolé a été ouvert sur le commit
@@ -189,7 +245,7 @@ restaurées exactement et le nouvel audit sémantique a réussi avec zéro erreu
 comme le détaille la clôture ci-dessous. Le premier résultat incomplet reste
 conservé sans remplacement rétrospectif.
 
-Le site effectivement publié est maintenant **Site 101 / native 0.61**,
+Au point de contrôle précédent, le site effectivement publié était **Site 101 / native 0.61**,
 source `d75a36f0a99bf6c301034523a3138a64d2f6e744`. Ce constat ne change pas
 l’origine Site 97 du gel de développement 6B. Le checkpoint source 5C
 `d54a58f2` reste non publié ; il ne constitue pas le prédécesseur livré 0.63.

@@ -1,0 +1,15 @@
+{
+  "schema": "logos-engine.lot10b-production-browser-observation.v1",
+  "observedAt": "2026-11-11T16:52:00.708890+00:00",
+  "siteVersion": 102,
+  "nativeVersion": "0.62.0",
+  "url": "https://sra-playground.yannick-fontan.chatgpt.site/",
+  "browserTab": "4",
+  "title": "Sign in required",
+  "visibleHeading": "Log in to access",
+  "visibleSignInControl": "Continue with ChatGPT",
+  "result": "private_sign_in_gate_observed",
+  "additionalHPDLActions": 0,
+  "additionalHPDLCaseWork": false,
+  "qualification": "The actual production URL was opened with CUA and returned the expected sign-in gate. No sign-in, access bypass or production game interaction was attempted. This observation does not claim a new production gameplay QA pass; the completed browser QA remains bound to the verified build and archived application bytes."
+}

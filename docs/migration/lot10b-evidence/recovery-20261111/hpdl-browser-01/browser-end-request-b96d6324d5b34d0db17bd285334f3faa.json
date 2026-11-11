@@ -1,0 +1,52 @@
+{
+  "schema": "logos-engine.lot10b.hpdl-browser-end-request.v1",
+  "requestId": "b96d6324d5b34d0db17bd285334f3faa",
+  "attemptId": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-browser-01",
+  "requestedAt": "2026-11-11T16:10:24.080731+00:00",
+  "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+  "beginReceipt": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-browser-01/browser-begin.json",
+    "sha256": "1f1ec38fb0a657f9b7033fabf4dcd8336127c3d413c349e3b75de33710ff5c52",
+    "bytes": 1972
+  },
+  "executionInputs": {
+    "browserClockHelper": {
+      "path": "docs/migration/lot10b-evidence/browser-hpdl-clock.py",
+      "sha256": "d66acf82d4de25e9e5208957d750178f4dc0da9b65e727cda71e6e6d22debc2c",
+      "bytes": 34611
+    },
+    "cumulativeClockReader": {
+      "path": "docs/migration/lot10b-evidence/run-hpdl-clocked-proof.py",
+      "sha256": "e959e8d9b7ed5875bc9843393aeae44586674229fccb951279097c4c75195971",
+      "bytes": 36304
+    }
+  },
+  "observation": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-browser-01/observed-cua.json",
+    "sha256": "f89365b6f5e705c6b0eaecf9e56b35ef45a3a3e69dcacb286c8512bedeae3333",
+    "bytes": 65311
+  },
+  "artifacts": [
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-browser-01/observed-cua.json",
+      "sha256": "f89365b6f5e705c6b0eaecf9e56b35ef45a3a3e69dcacb286c8512bedeae3333",
+      "bytes": 65311
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-browser-01/hpdl-paused.png",
+      "sha256": "1046bd19258b87e66ef1097919175bcd3990fc25a508e89c42ba05f7fbaeca44",
+      "bytes": 66459
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-browser-01/hpdl-one-action.png",
+      "sha256": "b3296b2958dc35de61ebd44fb5bbbbe36980691adf02e09dc45818a026d3c277",
+      "bytes": 66316
+    }
+  ],
+  "reportedObservation": {
+    "actionsDuringInterval": 7,
+    "levelsCompletedAtEnd": 1
+  },
+  "reason": "qa_finished",
+  "qualification": "This external command only requests closure from the original holder. It does not look up a foreign PID, calculate a terminal charge, mutate the ledger or claim a browser result."
+}

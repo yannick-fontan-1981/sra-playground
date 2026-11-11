@@ -1,0 +1,24 @@
+{
+  "schema": "logos-engine.followup-cost-qualification-correction-publication.v1",
+  "recordedAt": "2026-11-11T15:18:47.981Z",
+  "status": "succeeded",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "siteVersion": 100,
+  "nativeVersion": "0.61.0",
+  "nativeDigest": "f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279",
+  "commit": "5f8ca04cbf69cf2ccf7d2aba64a4cfde2a280613",
+  "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_ddf97f19ecd0819195a414899b483c34",
+  "deploymentId": "appgdep_6af486e34c788191bd1d38bc9cba6bdf",
+  "deploymentUpdatedAt": "2026-11-11T15:17:03.733262+00:00",
+  "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+  "archive": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_000000007524820ea8e101bafb6b41a2",
+    "content_hash": "sha256:13a7d25939ceb816f8a20db7d398cf6bf3b760785f076f3bc86b07218ad11dbc",
+    "size_bytes": 29992960,
+    "file_count": 75
+  },
+  "costQualification": "First window retained but ineligible for isolated cost acceptance; full clean repeat declared and independently reviewed, not yet executed.",
+  "nativeAndApplicationBuild": "Unchanged from native Site98, with75 exact application members and the same hosting archive content hash.",
+  "qualification": "Actual succeeded publication correcting the documentary cost claim. It does not claim a new measured result or repeat success."
+}

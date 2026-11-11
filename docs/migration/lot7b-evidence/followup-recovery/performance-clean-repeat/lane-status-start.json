@@ -1,0 +1,36 @@
+{
+  "schema": "logos-engine.followup-repeat-lane-status-snapshot.v1",
+  "phase": "start",
+  "recordedAt": "2026-11-11T15:22:07.830525+00:00",
+  "requestId": "lot7-followup-clean-repeat-f8d5097-final",
+  "byteLimitPerLane": 65536,
+  "statuses": [
+    {
+      "lane": "lot6b",
+      "sourcePath": "/workspace/shared/sra-coordination/lot6b-status.json",
+      "snapshot": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/lane-status-start/lot6b-status.json",
+        "sha256": "8272cd40139e9c6f64a5bd1d72d8392ea9f824f4819602c2b4385a7d29ecd1d3",
+        "bytes": 2909
+      }
+    },
+    {
+      "lane": "lot10b",
+      "sourcePath": "/workspace/shared/sra-coordination/lot10b-status.json",
+      "snapshot": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/lane-status-start/lot10b-status.json",
+        "sha256": "8cae2722d7ae4ad653612be530fa2c35ee9fcc2a55ce9d8fa78cb13e3d1ee044",
+        "bytes": 4366
+      }
+    },
+    {
+      "lane": "lot5c",
+      "sourcePath": "/workspace/shared/sra-coordination/lot5c-status.json",
+      "snapshot": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/lane-status-start/lot5c-status.json",
+        "sha256": "ddce33484dfcb01a41b6cfeb6ae3bd0f27bf682e014bb80dac47703cf201a097",
+        "bytes": 4826
+      }
+    }
+  ]
+}

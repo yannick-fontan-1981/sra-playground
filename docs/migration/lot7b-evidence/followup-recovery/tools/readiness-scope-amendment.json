@@ -1,0 +1,107 @@
+{
+  "schema": "logos-engine.followup-readiness-scope-amendment.v1",
+  "recordedAt": "2026-11-11T12:34:55.054740+00:00",
+  "reason": "The newly reconstructed6A predecessor declares an additional exact KATA public trajectory. Preserve all eleven predecessor cases prospectively instead of omitting the new inherited case. No own regression, functional cost capture or official cost measurement has started.",
+  "before": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/tools/finalize-cost-readiness.py",
+    "sha256": "4dc660b1b505f585a933e8d82987d96c1a1b19c034b285ccbda1e36b285f76fa",
+    "bytes": 29228
+  },
+  "beforeSourceCommit": "578022883399e6c7479bff07100c2303faa9e00d",
+  "after": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/tools/finalize-cost-readiness.py",
+    "sha256": "1cee23b5aace9a7bbed096d498a0c6255842f28dfd7e9dfc4760a67859a5e913",
+    "bytes": 36312
+  },
+  "previousRegressionCases": 10,
+  "previousComparisonChecks": 170,
+  "requiredRegressionCases": 11,
+  "requiredComparisonChecks": 187,
+  "strictComparisonsPerCase": 17,
+  "strictComparisonRulesUnchanged": true,
+  "beforeAnyOwnRegression": true,
+  "beforeAnyOfficialCost": true,
+  "observedAbsentExecutionReceipts": {
+    "window.json": [],
+    "readiness.json": [],
+    "strict-work-capture.json": [],
+    "*-execution-started.json": [],
+    "regression-summary.json": []
+  },
+  "prepared6aRegressionManifest": {
+    "sourceCheckout": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout",
+    "sourcePath": "docs/migration/lot6a-evidence/integrated-final-02/regression-cases.json",
+    "retainedCopy": {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/coordination/prepared-6a-regression-cases.json",
+      "sha256": "dc84ecc83902ecb71865710220b593df351dc0ca7ae6885561e986a509df7ea1",
+      "bytes": 8422
+    },
+    "caseIds": [
+      "catr-051",
+      "rswp-051",
+      "fogw-051",
+      "vois-051",
+      "conn-050",
+      "mind-051",
+      "weav-051",
+      "tria-development-4b",
+      "craf-055",
+      "isos-development-4c",
+      "kata-060-self-consistency"
+    ]
+  },
+  "candidateRegressionDeclaration": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/contract/regression-cases-final.json",
+    "sha256": "612786e95a3cd6c98c7a0ccd4bd5e616ff5b54d1de18f7962aae79d50faf4f36",
+    "bytes": 9035
+  },
+  "preparedNativeManifest": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/coordination/prepared-6a-source-manifest.json",
+    "sha256": "52f3624d419cb8209e6545274b3867b5f150d8630a0daa05369fd7613ed435fe",
+    "bytes": 36332
+  },
+  "preparedSourceObservation": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/coordination/prepared-6a-source-observation.json",
+    "sha256": "682c29eb19f69943e4642c5b53d2c5b0f05109e939cad81e6e83de7714479441",
+    "bytes": 6583
+  },
+  "publicationReconciliationRequired": {
+    "actualSucceededPublication": true,
+    "actualBaselineNativeEqualsPreparedManifest": true,
+    "publishedNativeManifestGitBlobEqualsPreparedBytes": true,
+    "publishedRegressionManifestGitBlobEqualsRetainedBytes": true,
+    "candidatePreparedAndPublishedCaseRowsExactlyEqual": true,
+    "noLateSourceChangeExemption": true
+  },
+  "historicalReview": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/tools/independent-review.json",
+    "sha256": "9838a672587b03e8c8e379cb69d898a4f45a466fe7d113e498049d13953077ea",
+    "bytes": 7357
+  },
+  "strictCostHelpersUnchanged": {
+    "capture-strict-cost-forms.mjs": {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/tools/capture-strict-cost-forms.mjs",
+      "sha256": "8e269df48afbfea2991e976a252bf49e95cd15207b2442794078454c9fc8a568",
+      "bytes": 12545
+    },
+    "verify-strict-cost-forms.mjs": {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/tools/verify-strict-cost-forms.mjs",
+      "sha256": "07276dd501a919c97d3f53b7ea594eed8029b5a363f2a498515c1a304551a22b",
+      "bytes": 7759
+    }
+  },
+  "costScopeUnchanged": {
+    "functionalSessions": 8,
+    "functionalActions": 62,
+    "officialTrials": 40,
+    "measuredSessions": 32,
+    "measuredActions": 400,
+    "excludedWarmupSessions": 8,
+    "excludedWarmupActions": 24,
+    "structuralExemptions": [],
+    "globalRule": "pooled complete-session median strictly below+10% separately for STCK and SMLP; phases remain diagnostic"
+  },
+  "sourceAndTestFilesEditedByThisAmendment": false,
+  "caseExecutionsByThisAmendment": 0,
+  "qualification": "This note changes a future validation requirement before any affected execution. It reports no regression pass, cost, publication, new gameplay or original-caller parity. The earlier ten-case source review is retained unchanged; new independent review binds this amended helper. LKEY remains closed."
+}

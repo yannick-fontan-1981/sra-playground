@@ -1,0 +1,81 @@
+{
+  "site": {
+    "id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "latest_version_number": 103,
+    "access_mode": "custom",
+    "access_revision": 3,
+    "allowed_users": [
+      {
+        "role": "owner"
+      }
+    ],
+    "external_visitor_count": 0,
+    "observedAt": "2026-11-11T17:05:12.444Z"
+  },
+  "deployment": {
+    "id": "appgdep_6af49db69234819195c9c093cb79a7da",
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "title": "SRA Playground",
+    "version_id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_c8356cd5ad648191a646ac0a9c059a24",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": "sediment://file_0000000051b481f8bd01cfe7c5e447de",
+    "provider_deployment_id": "site---6adbc388d79081918581b93b919d7258",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-11-11T16:54:28.036164+00:00"
+  },
+  "versions": [
+    {
+      "id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_c8356cd5ad648191a646ac0a9c059a24",
+      "version_number": 103,
+      "source": {
+        "commit_sha": "4afcbfe6a25bd3a88223be543e443bc53b9c8814"
+      },
+      "archive_storage": {
+        "archive_format": "tar",
+        "sediment_file_id": "file_000000007d5c820eb673da4e6931b5a4",
+        "content_hash": "sha256:9724c4bbc91636ebb8e008466b01fcf980fdc86edc46073555aa4e179946e386",
+        "size_bytes": 30023680,
+        "file_count": 75
+      },
+      "deployment_id": "appgdep_6af49db69234819195c9c093cb79a7da"
+    },
+    {
+      "id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_ebb6198d3844819188b9db25c43aaa31",
+      "version_number": 102,
+      "source": {
+        "commit_sha": "1019d2eb929d7dc201a5c1f6edce5aa1c5dfa464"
+      },
+      "archive_storage": {
+        "archive_format": "tar",
+        "sediment_file_id": "file_000000009d00820e941cc03425f73077",
+        "content_hash": "sha256:9724c4bbc91636ebb8e008466b01fcf980fdc86edc46073555aa4e179946e386",
+        "size_bytes": 30023680,
+        "file_count": 75
+      },
+      "deployment_id": "appgdep_6af49caf0b808191a14190d3261b6f9d"
+    },
+    {
+      "id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_48ccb50314448191a19781a9c89eb830",
+      "version_number": 101,
+      "source": {
+        "commit_sha": "d75a36f0a99bf6c301034523a3138a64d2f6e744"
+      },
+      "archive_storage": {
+        "archive_format": "tar",
+        "sediment_file_id": "file_000000002468820e9fe4411b13b99e20",
+        "content_hash": "sha256:13a7d25939ceb816f8a20db7d398cf6bf3b760785f076f3bc86b07218ad11dbc",
+        "size_bytes": 29992960,
+        "file_count": 75
+      },
+      "deployment_id": "appgdep_6af48d2be4908191bfe5398512c01bcb"
+    }
+  ],
+  "userReport": "KLOT ne semble pas réussir !",
+  "qualification": "Published-source gap verified by exact commit inspection; no reproduction of the user's exact browser session and no new KLOT action yet.",
+  "observedAt": "2026-11-11T17:09:07.124Z"
+}
