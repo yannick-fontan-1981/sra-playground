@@ -1,6 +1,6 @@
 # Lot 10A : question axiale acquise
 
-## État de préparation
+## État intégré : coût accepté, publication privée en préparation
 
 Le lot 10A raccorde `axial_question` au runtime commun depuis la base réellement publiée **Site 83**, moteur **0.52.0**, commit `bed48116585da864dd5c412ed11dd6990a950e8e`. Le travail est isolé dans la branche `lot10a-axial-question`. Le candidat courant porte la version **0.56.0** ; il intègre les publications 5A et 4B ainsi que la publication réelle 7B / Site 88 et sa clôture documentaire Site 89. Les entrées 10B à 10E ne sont pas réalisées par ce lot.
 
@@ -14,7 +14,22 @@ Le [contrôle navigateur TRIA](lot10a-evidence/integrated-final/browser/browser-
 
 La [continuation de l'horloge TRIA](lot10a-evidence/integrated-final/browser/case-clock-continuation.json) ajoute **132,058631 secondes** aux **763,736664 secondes** déjà conservées, soit **895,795295 secondes cumulées**, sans remise à zéro. Le preview est arrêté après le contrôle. Cette QA établit une régression réelle de l'interface et du contrôleur sur un cas RelativeArrangements existant ; elle ne prouve pas l'apport propre Axial et ne lève pas la réserve POLA.
 
-Le candidat a été composé et testé avant publication de 7B avec le gel préparé **7B / 0.55.0**, commit `28f3f388e18bad21a186795f965102a83e6b53d7`, digest `ea25603262a7473e5ab9994d2e2e86dd64a8291dd7c1dc18ede4d1f443cdc53b`. La [déclaration de source préparée](lot10a-evidence/coordination/prepared-7b-source-observation.json) conserve cette provenance. La [publication réelle Site 88](lot10a-evidence/coordination/published-7b-site88.json), commit `43ee01ba5469fd4fbffe10eb6a786fe99b1c35a7`, et sa clôture documentaire **Site 89**, commit `4cea66731c0809f08288ea6f7287ef3dd7a392bd`, sont maintenant intégrées. L'identité octet pour octet du candidat validé est vérifiée après fusion : **294 fichiers natifs, 676 entrées source/tests, 359 entrées de build, 11 entrées de rejeu et worker final inchangés**. Les entrées source, tests, scripts, public, contenu et build de 7B sont identiques entre le gel préparé et ces deux publications. **La référence de coût sera Site 88 / native 0.55.0** ; Site 89 est sa clôture documentaire avec la même archive. Le coût 10A n'est pas encore exécuté et sa publication reste à établir. La réserve d'apport propre Axial/POLA reste inchangée.
+Le candidat a été composé et testé avant publication de 7B avec le gel préparé **7B / 0.55.0**, commit `28f3f388e18bad21a186795f965102a83e6b53d7`, digest `ea25603262a7473e5ab9994d2e2e86dd64a8291dd7c1dc18ede4d1f443cdc53b`. La [déclaration de source préparée](lot10a-evidence/coordination/prepared-7b-source-observation.json) conserve cette provenance. La [publication réelle Site 88](lot10a-evidence/coordination/published-7b-site88.json), commit `43ee01ba5469fd4fbffe10eb6a786fe99b1c35a7`, et sa clôture documentaire **Site 89**, commit `4cea66731c0809f08288ea6f7287ef3dd7a392bd`, sont maintenant intégrées. La [réconciliation après fusion](lot10a-evidence/coordination/published-7b-sites88-89-reconciliation.json) vérifie l'identité octet pour octet du candidat validé : **294 fichiers natifs, 676 entrées source/tests, 359 entrées de build, 11 entrées de rejeu et worker final inchangés**. Les entrées source, tests, scripts, public, contenu et build de 7B sont identiques entre le gel préparé et ces deux publications. **La référence de coût est Site 88 / native 0.55.0** ; Site 89 est sa clôture documentaire avec la même archive. Le coût global 10A est accepté ; sa publication privée est en préparation. La réserve d'apport propre Axial/POLA reste inchangée.
+
+## Coût intégré et intégrité de livraison
+
+La [fenêtre officielle A1/B1/B2/A2](lot10a-evidence/performance-integrated/window.json) s'est déroulée le **11 novembre 2026, de 00:14:54.378751 à 00:23:30.797609 UTC**. Elle conserve **32 sessions mesurées et 400 actions** ; les **huit sessions de chauffe et leurs 24 actions** sont les seules exclusions. La [revue indépendante](lot10a-evidence/performance-integrated/owner-growth-review.json) passe **7 688 contrôles** et confirme `accepted: true`, `globalAccepted: true`, **2/2 jeux acceptés**.
+
+| Jeu | Médiane complète Site 88 / 0.55, ms | Médiane complète 10A / 0.56, ms | Écart |
+| --- | ---: | ---: | ---: |
+| STCK | 10 713,182300500002 | 10 754,6912595 | **+0,387457 %** |
+| SMLP | 16 364,226173000006 | 16 386,577008 | **+0,136584 %** |
+
+Chaque médiane regroupe les huit sessions mesurées par version pour le jeu concerné et reste **strictement sous +10 %**. Aucun temps attribué à Axial n'est soustrait ; les jeux ne se compensent pas. Les **16/16 diagnostics de phase agrégés** passent, mais chaque cohorte garde **15/16** : la garde de préfixe SMLP atteint **+15,31 %** dans la première et son acquisition/persistance **+13,99 %** dans la seconde. Ces avertissements ne sont ni supprimés ni convertis en réussite de chaque cohorte.
+
+Le [comparateur historique strict](lot10a-evidence/performance-integrated/aggregation-failure.json) reste réellement en échec, code **1**, sur `Within-cohort work metadata changed`. La qualification structurelle déclarée avant mesure passe **64 contrôles** ; la consolidation vérifie ses **432 deltas** contre les formes capturées. Le [contrôle statique préalable](lot10a-evidence/performance-integrated/static-preflight.json) passe **77 contrôles**. L'acceptation complémentaire porte sur le coût global de ces parcours communs ; elle ne démontre ni le coût d'un long historique de rotations Axial, ni une contribution propre dans une partie. Le [rapport complet](lot10a-evidence/performance-integrated/RESULTS.md) conserve les sessions, phases, dispersions et limites.
+
+L'[intégrité de livraison](lot10a-evidence/integrated-final/delivery-integrity.json) et le [contrôle des entrées de publication](lot10a-evidence/integrated-final/publication-inputs.json) sont **passés** sur le gel natif, ses **305 membres d'archive**, les sources/tests, les entrées de build et le worker final inchangés. Le contrôle des entrées de publication est enregistré le **11 novembre 2026 à 00:24:17.507261 UTC**. Il lie les preuves fonctionnelles et le coût accepté ; **la publication privée 10A reste en préparation**.
 
 ## Historique des validations et intégrations
 
@@ -36,7 +51,7 @@ Une proposition porte une action conditionnelle **OP18**. Le runtime exécute la
 
 La boucle synthétique intégrée part d'une mémoire froide. Une action `ACTION1`, choisie par une autre famille à partir des seules observations publiques, change le marqueur central. Le passage passif Axial atteste ce contraste une fois. La décision suivante passe par `v6.axial_question.choose`, `axial.select`, OP18 et l'autorisation commune.
 
-Un retour contrôlé observe ensuite `ACTION4 → quart de tour −1`, contrairement à son a priori. La famille conserve le reçu avec ses preuves et rappelle cette commande à la décision suivante. Une ablation séparée des seuls reçus de rotation, dans une instance native de diagnostic, donne la commande différente attendue par Python. Le diagnostic ne modifie pas la mémoire ni les autorisations du caller de production.
+Un retour contrôlé observe ensuite `ACTION4 → quart de tour −1`, contrairement à son a priori. La famille conserve le reçu avec ses preuves et la décision suivante choisit **`ACTION4`**. Dans la [boucle commune vérifiée](../../tests/v6-axial-question-kernel.test.ts), l'ablation séparée des seuls reçus de rotation donne **`ACTION3`**, conformément à Python. Ce contraste établit l'influence de la méthode acquise dans ce scénario synthétique. Le diagnostic ne modifie pas la mémoire ni les autorisations du caller de production et n'exécute aucune action de jeu supplémentaire.
 
 Deux retours sans effet consomment les deux tentatives du contexte. Axial s'abstient ensuite dans ce même contexte. Une modification géométrique pertinente peut rouvrir une question ; elle n'efface pas arbitrairement les contre-exemples.
 
@@ -64,4 +79,4 @@ La mesure des barres reste finie dans le domaine public, sans borne temporelle p
 
 ## Prochaine étape
 
-L'identité des entrées du gel fonctionnel et de la QA navigateur est vérifiée après fusion des publications réelles 7B / Sites 88 et 89. Terminer les qualifications, la mesure de coût contre Site 88 / native 0.55.0 et les vérifications de publication 10A. Les réserves d'apport propre Axial/POLA, de coût des longues sessions et de parité complète de l'appelant restent explicites. Les autres entrées du lot 10 restent hors du périmètre de cette livraison en préparation.
+Publier en privé le gel 10A dont le fonctionnel intégré, le coût global et les entrées de publication sont vérifiés, puis conserver le reçu du déploiement effectif. **10B, `window_question`, vient après cette publication** ; aucune réalisation 10B n'est incluse ici. Les réserves d'apport propre Axial/POLA, de coût des longues sessions, d'attribution aux frontières et de parité complète de l'appelant restent explicites.

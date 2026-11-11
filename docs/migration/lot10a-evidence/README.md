@@ -11,9 +11,10 @@ La validation du candidat intégré **0.56.0** passe **1 538/1 538 tests sur
 Ces contrôles ont été exécutés avant publication de 7B. Les publications
 réelles Site 88 et Site 89 sont maintenant intégrées ; l'identité octet pour
 octet des entrées du candidat validé est vérifiée après fusion. La QA navigateur
-TRIA passe sur ce candidat avec trois niveaux, 17 actions et 17 plans ; le coût
-et la publication 10A restent à établir. La réserve d'apport propre Axial/POLA
-n'est pas levée.
+TRIA passe sur ce candidat avec trois niveaux, 17 actions et 17 plans. Le coût
+global est accepté pour **2/2 jeux**, avec **7 688 contrôles indépendants** passés.
+L'intégrité et les entrées de publication passent ; **la publication privée 10A
+est en préparation**. La réserve d'apport propre Axial/POLA n'est pas levée.
 
 ## Composant et boucle commune
 
@@ -21,7 +22,7 @@ n'est pas levée.
 | --- | --- |
 | [Comparaisons de référence](diagnostic/axial-reference-validation.json) | 130/130 tests : 68 cas de famille, 38 de géométrie/V5, 16 de politique/SRC et huit contrats natifs. Les 1 786 fichiers originaux sont vérifiés avant/après l'oracle. |
 | [Dernier journal de référence](diagnostic/axial-reference-04.tap) | Les essais antérieurs restent conservés, notamment l'écart réel de zéro négatif corrigé. |
-| [Boucle commune](diagnostic/kernel-03.log) | 6/6 scénarios synthétiques : sélection passive froide, action Axial autorisée, acquisition unique, décision influencée, tentatives, frontières et restauration. |
+| [Boucle commune](diagnostic/kernel-03.log) | 6/6 scénarios synthétiques : sélection passive froide, action Axial autorisée, acquisition unique, tentatives, frontières et restauration. Après la rotation acquise, la décision choisit `ACTION4` ; retirer uniquement les reçus de rotation dans l'instance de diagnostic donne `ACTION3`. |
 | [Revue source](independent-source-review.md) | Relecture de la famille, de la politique et du raccordement par un agent distinct ; la géométrie est relue par son auteur. Aucun nouveau défaut bloquant identifié dans le domaine annoncé. |
 | [Admission publique initiale](diagnostic/initial-public-admission.json) | 95 images initiales archivées ; POLA est seul admis par la mesure. Aucune action de jeu. |
 | [Budget POLA](diagnostic/pola-case-budget-review.json) | Essai historique de 94 actions, zéro niveau, temps inconnu. Aucune nouvelle horloge créée ; contribution en nouvelle partie ouverte. |
@@ -90,7 +91,7 @@ la publication de 7B restait à intégrer à ce stade historique.
 
 ## Candidat validé avant publication 7B et réconcilié après fusion
 
-Le candidat de validation **0.56.0** a été composé et testé avant publication de 7B avec le gel préparé **7B / 0.55.0**, commit `28f3f388e18bad21a186795f965102a83e6b53d7`, digest `ea25603262a7473e5ab9994d2e2e86dd64a8291dd7c1dc18ede4d1f443cdc53b`. La [déclaration de source préparée](coordination/prepared-7b-source-observation.json) conserve cette provenance. La [publication réelle Site 88](coordination/published-7b-site88.json), commit `43ee01ba5469fd4fbffe10eb6a786fe99b1c35a7`, et sa clôture documentaire **Site 89**, commit `4cea66731c0809f08288ea6f7287ef3dd7a392bd`, sont maintenant intégrées. L'identité octet pour octet du candidat validé est vérifiée après fusion pour les **294 fichiers natifs, 676 entrées source/tests, 359 entrées de build, 11 entrées de rejeu et le worker final**. Les entrées source, tests, scripts, public, contenu et build de 7B sont identiques entre le gel préparé et ces deux publications. **La référence de coût sera Site 88 / native 0.55.0** ; Site 89 conserve la même archive comme clôture documentaire. Aucun coût 10A n'est encore exécuté.
+Le candidat de validation **0.56.0** a été composé et testé avant publication de 7B avec le gel préparé **7B / 0.55.0**, commit `28f3f388e18bad21a186795f965102a83e6b53d7`, digest `ea25603262a7473e5ab9994d2e2e86dd64a8291dd7c1dc18ede4d1f443cdc53b`. La [déclaration de source préparée](coordination/prepared-7b-source-observation.json) conserve cette provenance. La [publication réelle Site 88](coordination/published-7b-site88.json), commit `43ee01ba5469fd4fbffe10eb6a786fe99b1c35a7`, et sa clôture documentaire **Site 89**, commit `4cea66731c0809f08288ea6f7287ef3dd7a392bd`, sont maintenant intégrées. La [réconciliation après fusion](coordination/published-7b-sites88-89-reconciliation.json) vérifie l'identité octet pour octet du candidat validé pour les **294 fichiers natifs, 676 entrées source/tests, 359 entrées de build, 11 entrées de rejeu et le worker final**. Les entrées source, tests, scripts, public, contenu et build de 7B sont identiques entre le gel préparé et ces deux publications. **La référence du coût accepté est Site 88 / native 0.55.0** ; Site 89 conserve la même archive comme clôture documentaire.
 
 Le [gel natif intégré](integrated-final/source-manifest.json) est établi sur
 `19f3116c95e8e8ce99aff067de113ae23fc634d6`. Son digest est
@@ -141,7 +142,26 @@ ajoute **132,058631 secondes** aux **763,736664 secondes** antérieures et attei
 régression UI et le contrôleur sur TRIA, cas RelativeArrangements existant.
 Elle n'établit aucune contribution propre Axial et ne modifie pas le budget POLA.
 
-## Contrôles et livraison encore à établir
+## Coût global accepté et contrôles de livraison passés
+
+| Preuve finale | Résultat réel et portée |
+| --- | --- |
+| [Fenêtre officielle](performance-integrated/window.json) | **11 novembre 2026, 00:14:54.378751 → 00:23:30.797609 UTC** ; ordre A1/B1/B2/A2, **32 sessions mesurées, 400 actions**. Les **huit chauffes et leurs 24 actions** sont les seules exclusions. |
+| [Qualification structurelle](performance-integrated/owner-structural-attribution.json), [contrat](performance-integrated/owner-growth-contract.json) et [contrôle statique](performance-integrated/static-preflight.json) | Qualification fixée avant mesure : **64 contrôles** ; **432 deltas** contrôlés par la consolidation. Contrôle statique : **77**. |
+| [Refus historique strict](performance-integrated/aggregation-failure.json) | Échec réel conservé, code **1**, `Within-cohort work metadata changed`. L'acceptation complémentaire ne transforme pas ce résultat en réussite stricte. |
+| [Revue indépendante](performance-integrated/owner-growth-review.json) | **7 688 contrôles passés**, `accepted: true`, `globalAccepted: true`, **2/2 jeux acceptés**. |
+| [Résultats complets](performance-integrated/RESULTS.md) | Médiane complète STCK **10 713,182300500002 → 10 754,6912595 ms (+0,387457 %)** ; SMLP **16 364,226173000006 → 16 386,577008 ms (+0,136584 %)**. Chaque jeu reste strictement sous **+10 %**, sans soustraction ni compensation entre jeux. |
+| [Intégrité de livraison](integrated-final/delivery-integrity.json) | **Passée** : gel natif et archive, entrées source/tests et build conservés ; transport des preuves sans perte. |
+| [Entrées de publication](integrated-final/publication-inputs.json) | **Passées**, enregistrées le **11 novembre 2026 à 00:24:17.507261 UTC** : mêmes sources et worker, preuves fonctionnelles et coût accepté liés. Ce contrôle n'est pas un déploiement. |
+
+Les **16/16 diagnostics de phase agrégés** passent. Chaque cohorte conserve
+**15/16** : la garde de préfixe SMLP atteint **+15,31 %** dans la première et
+l'acquisition/persistance SMLP **+13,99 %** dans la seconde. Les deux avertissements
+restent visibles dans le rapport. Ces parcours établissent le coût global de
+la boucle commune sur STCK/SMLP ; ils n'établissent pas le coût d'un historique
+long de rotations Axial ni une contribution propre dans une partie.
+
+## Préparation et outils conservés
 
 - [Périmètre fonctionnel et rejeux](validation-and-regression-plan.md),
   [revue des runners](validation-runner-source-review.md),
@@ -149,29 +169,27 @@ Elle n'établit aucune contribution propre Axial et ne modifie pas le budget POL
 - [Commandes de coût](README-commands.md),
   [préparation des déclarations](README-preparation.md).
 - [Finalisation de la readiness](README-readiness.md),
-  [revue indépendante du lecteur](readiness-source-review.md). Sa préparation
-  et sa revue textuelle ne constituent pas une readiness exécutée. Le
-  [contrôle AST et aide CLI](diagnostic/readiness-helper-validation.json) passe
-  sur les octets inchangés ; il n’exécute pas la finalisation sur les preuves.
+  [revue indépendante du lecteur](readiness-source-review.md) et
+  [readiness effectivement finalisée avant mesure](performance-integrated/readiness.json).
+  Le [contrôle AST et aide CLI](diagnostic/readiness-helper-validation.json)
+  conserve séparément sa portée de validation syntaxique et d'interface.
 - [Revue des analyseurs de coût](cost-tool-source-review.md),
   [revue des finaliseurs](cost-preparation-source-review.md),
   [contrôle syntaxique borné](diagnostic/cost-preparation-syntax.json).
 
-Les captures fonctionnelles doivent qualifier l'ajout du seul propriétaire
-Axial sur la référence intégrée réelle avant la mesure. La fenêtre officielle
-conserve A1/B1/B2/A2, 32 sessions mesurées et 400 actions. Chaque jeu doit rester
-strictement sous +10 % de médiane complète ; aucun temps de propriétaire n'est
-soustrait. Le refus du comparateur historique et l'analyse complémentaire restent
-des résultats distincts. La présence des outils ne vaut pas qualification,
-readiness, mesure ni acceptation.
+Les captures fonctionnelles et la déclaration précèdent la mesure. Le refus du
+comparateur historique et l'analyse complémentaire restent des résultats
+distincts. Les revues de préparation ne sont pas des exécutions de coût ; les
+résultats effectifs sont ceux des reçus finaux liés ci-dessus.
 
 La croissance de l'historique propre à Axial n'a pas de borne de coût démontrée.
 Les tests synthétiques et les petits rejeux de coût ne remplacent pas cette
 caractérisation. La parité de l'appelant Python complet reste également ouverte.
 
-La qualification puis la mesure de coût contre **Site 88 / native 0.55.0**
-et les vérifications de publication 10A restent à faire. La clôture documentaire
-Site 89 est intégrée séparément et ne remplace pas cette référence de coût. La réserve [POLA](diagnostic/pola-case-budget-review.json) est inchangée :
+**La publication privée 10A reste en préparation** ; son reçu effectif reste
+à conserver. **10B vient après cette publication.** La clôture documentaire
+Site 89 est intégrée séparément et ne remplace pas Site 88 comme référence de
+coût. La réserve [POLA](diagnostic/pola-case-budget-review.json) est inchangée :
 94 actions historiques, zéro niveau, durée inconnue et aucun budget restant
 positif établi. Les rejeux et la QA TRIA ne créent aucune nouvelle horloge POLA
 et ne lèvent ni sa réserve d'apport propre Axial ni celle de réussite officielle.
