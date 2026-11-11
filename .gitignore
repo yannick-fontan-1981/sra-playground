@@ -529,3 +529,19 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 /docs/migration/lot5b-evidence/diagnostic/addressed-reference-key-sorted.json.gz
 /docs/migration/lot5b-evidence/performance-integrated/functional-baseline.json.gz
 /docs/migration/lot5b-evidence/performance-integrated/functional-candidate.json.gz
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot6a-evidence/integrated-final-02/kata-campaign.json.gz
+/docs/migration/lot6a-evidence/integrated-final-02/regressions/catr-051-replay.json.gz
+/docs/migration/lot6a-evidence/integrated-final-02/regressions/conn-050-replay.json.gz
+/docs/migration/lot6a-evidence/integrated-final-02/regressions/fogw-051-replay.json.gz
+/docs/migration/lot6a-evidence/integrated-final-02/regressions/isos-development-4c-replay.json.gz
+/docs/migration/lot6a-evidence/integrated-final-02/regressions/kata-060-self-consistency-replay.json.gz
+/docs/migration/lot6a-evidence/integrated-final-02/regressions/mind-051-replay.json.gz
+/docs/migration/lot6a-evidence/integrated-final-02/regressions/rswp-051-replay.json.gz
+/docs/migration/lot6a-evidence/integrated-final-02/regressions/tria-development-4b-replay.json.gz
+/docs/migration/lot6a-evidence/integrated-final-02/regressions/vois-051-replay.json.gz
+/docs/migration/lot6a-evidence/integrated-final-02/released-recovery/regressions/craf-055-replay.json.gz
+/docs/migration/lot6a-evidence/integrated-final-02/released-weav-exclusive-1536/regressions/weav-051-replay.json.gz
+/docs/migration/lot6a-evidence/performance-integrated/functional-baseline.json.gz
+/docs/migration/lot6a-evidence/performance-integrated/functional-candidate.json.gz

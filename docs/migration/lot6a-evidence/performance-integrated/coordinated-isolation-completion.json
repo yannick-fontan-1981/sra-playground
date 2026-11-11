@@ -1,0 +1,62 @@
+{
+  "schema": "logos-engine.coordinated-cost-isolation-completion.v1",
+  "status": "quiet_observed_after_completed_window",
+  "recordedAt": "2026-11-11T13:31:30.999487+00:00",
+  "window": {
+    "path": "docs/migration/lot6a-evidence/performance-integrated/window.json",
+    "bytes": 10919,
+    "sha256": "66b759664a6e4acb91d7d29d1aa20118151950da21d056d3109ef584589b65d6"
+  },
+  "windowFinishedAt": "2026-11-11T13:30:47.215648+00:00",
+  "exclusiveCompletion": {
+    "path": "docs/migration/lot6a-evidence/performance-integrated/exclusive-window-completion.json",
+    "bytes": 193,
+    "sha256": "e46c2a3016aa15c6f7a254f5d6c6305d19bcbad4f2156ca273e3c1c14bc95d0a"
+  },
+  "initialIsolation": {
+    "path": "docs/migration/lot6a-evidence/performance-integrated/coordinated-isolation.json",
+    "bytes": 6149,
+    "sha256": "fd482f684ac250b770128ca327ffb213d442e29e516394f46dbe49fe3b08cef6"
+  },
+  "laneObservations": [
+    {
+      "lot": "7-followup",
+      "observedAt": "2026-11-11T13:31:30.998626+00:00",
+      "quietAcknowledged": true,
+      "activeCommand": null,
+      "executionStopped": true,
+      "evidence": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/isolation/completion-lot7-followup-status.json",
+        "bytes": 5214,
+        "sha256": "5eec737fe109b9676cf48045991669e18d90fd62cc8f0faaf502c5f4fbd84043"
+      }
+    },
+    {
+      "lot": "10B",
+      "observedAt": "2026-11-11T13:31:30.999141+00:00",
+      "quietAcknowledged": true,
+      "activeCommand": null,
+      "executionStopped": true,
+      "evidence": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/isolation/completion-lot10b-status.json",
+        "bytes": 4187,
+        "sha256": "25f6e514bc94f5421a25254eae12eff6fb7a218c655edfc557b3594a579615f4"
+      }
+    },
+    {
+      "lot": "5C",
+      "observedAt": "2026-11-11T13:31:30.999404+00:00",
+      "quietAcknowledged": true,
+      "activeCommand": null,
+      "executionStopped": true,
+      "evidence": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/isolation/completion-lot5c-status.json",
+        "bytes": 4096,
+        "sha256": "f4ccbe9ee4ce668fff2c48995cfa8b0b02b6adddec6a93952ef7d1fca301b458"
+      }
+    }
+  ],
+  "ownTrackedAgentsResumed": false,
+  "previewResumed": false,
+  "qualification": "Actual cooperative quiet status rechecked after the terminal four-series window. The EX lock was held through the recorded completion. No tracked child-agent computing work was requested during this window; only lightweight status observations occurred."
+}

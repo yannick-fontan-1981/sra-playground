@@ -1,0 +1,38 @@
+{
+  "case": "craf-055",
+  "game": "CRAF",
+  "mode": "recorded-public-replay",
+  "command": [
+    "node",
+    "scripts/replay-v53-public-regression.mjs",
+    "docs/migration/lot7b-evidence/integrated-final/craf-campaign.json.gz",
+    "docs/migration/lot7b-evidence/integrated-final/craf-public-trace.json.gz",
+    "docs/migration/lot6a-evidence/integrated-final-02/regressions/craf-055-replay.json.gz"
+  ],
+  "startedAt": "2026-11-11T12:30:26.672667+00:00",
+  "finishedAt": "2026-11-11T12:31:59.724015+00:00",
+  "elapsedSeconds": 93.05134862799969,
+  "exitCode": -9,
+  "timeoutSeconds": 600,
+  "timedOut": false,
+  "baseline": {
+    "path": "docs/migration/lot7b-evidence/integrated-final/craf-campaign.json.gz",
+    "sha256": "78e86660961ed6d75707c001c021b8c223d205137d86288ac21d09a533b680f2",
+    "bytes": 12767727
+  },
+  "trace": {
+    "path": "docs/migration/lot7b-evidence/integrated-final/craf-public-trace.json.gz",
+    "sha256": "cf69ad941e80e17f8d6cd66edc0419a0c6ff7aa8d9bbdaf503cb56a49e8c3f98",
+    "bytes": 40777
+  },
+  "output": {
+    "path": "docs/migration/lot6a-evidence/integrated-final-02/regressions/craf-055-output.log.gz",
+    "sha256": "0d1f925a0bd5f3e2bea8ce9ec21e930d48f103496e7be8448405e56f9eefd6f7",
+    "bytes": 4370
+  },
+  "passed": false,
+  "nativeSourceBeforeDigest": "ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229",
+  "nativeSourceAfterDigest": "ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229",
+  "nativeSourceUnchanged": true,
+  "immutableInputsUnchanged": true
+}

@@ -1,0 +1,10 @@
+{
+  "schema": "logos-engine.lot6a.recovery-test-observation.v1",
+  "status": "failed",
+  "command": ["node", "--test", "tests/v6-preview-packing-integration.test.ts"],
+  "exitCode": 1,
+  "counts": {"tests": 4, "pass": 3, "fail": 1, "cancelled": 0, "skipped": 0, "todo": 0},
+  "failure": "The blocking-unknown test expected undefined for command, but the runtime contract returns null. The stopped/frontier_unknown assertions passed before this assertion.",
+  "correction": "Correct only the test's command absence expectation to null. Keep the subsequent zero-action and zero-lower-provider assertions.",
+  "qualification": "Fresh development observation recorded from actual command output after workspace recovery. Not a formal frozen release receipt or a recreated historical6A proof."
+}

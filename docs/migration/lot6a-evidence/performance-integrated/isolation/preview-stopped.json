@@ -1,0 +1,12 @@
+{
+  "schema": "logos-engine.lot6a.preview-stop-observation.v1",
+  "observedAt": "2026-11-11T12:58:53+00:00",
+  "command": [
+    "sites-preview",
+    "status"
+  ],
+  "checkout": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout",
+  "exitCode": 0,
+  "stdout": "Sites preview stopped\n",
+  "previewStopped": true
+}

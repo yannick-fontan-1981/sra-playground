@@ -1,0 +1,11 @@
+{
+  "schema": "logos-engine.lot6a.source-opening.v1",
+  "recordedAt": "2026-11-11T12:53:01+00:00",
+  "result": {
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "checkout_path": "/workspace/sites/sra-lot6a-publication-20261111/.sites-checkout",
+    "commit_sha": "3a70463039768f7114edae7d94d7dd33b7f36aa8"
+  },
+  "rawOutput": "{\"project_id\":\"appgprj_6adbc388d79081918581b93b919d7258\",\"checkout_path\":\"/workspace/sites/sra-lot6a-publication-20261111/.sites-checkout\",\"commit_sha\":\"3a70463039768f7114edae7d94d7dd33b7f36aa8\"}\r\n",
+  "qualification": "Complete stdout JSON returned by the successful standard Site workflow reopening of the existing transport checkout; no local source commit or Site deployment performed."
+}

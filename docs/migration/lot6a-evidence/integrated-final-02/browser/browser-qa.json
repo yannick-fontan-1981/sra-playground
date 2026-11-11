@@ -1,0 +1,135 @@
+{
+  "schema": "logos-engine.lot6a.browser-qa.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-11T12:26:39.829178+00:00",
+  "startedAt": "2026-11-11T12:23:41.652Z",
+  "finishedAt": "2026-11-11T12:26:04.974Z",
+  "nativeDigest": "ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229",
+  "nativeVersion": "0.60.0",
+  "game": "KATA",
+  "targetLevels": 3,
+  "worker": {
+    "path": "dist/assets/v6-agent-worker-Cxq6njdG.js",
+    "sha256": "0b11a07818bf02c19503c66bfd094f94b10c77802449cbda3f268c8d2ecb21d0",
+    "bytes": 6820259
+  },
+  "initial": {
+    "actions": 0,
+    "levelsCompleted": 0,
+    "plans": 0,
+    "level": 1,
+    "observedAt": "2026-11-11T12:23:41.652Z",
+    "observedStatus": "Ready to run from level 1.",
+    "url": "http://127.0.0.1:4173/?game=KATA&level=1"
+  },
+  "singleStep": {
+    "actions": 1,
+    "levelsCompleted": 0,
+    "plans": 1,
+    "level": 1,
+    "observedAt": "2026-11-11T12:23:56.998Z",
+    "observedStatus": "One action completed.",
+    "url": "http://127.0.0.1:4173/?game=KATA&level=1",
+    "actionsBefore": 0,
+    "actionsAfter": 1
+  },
+  "paused": {
+    "actions": 9,
+    "levelsCompleted": 1,
+    "plans": 7,
+    "level": 2,
+    "observedAt": "2026-11-11T12:24:47.832Z",
+    "observedStatus": "Paused.",
+    "url": "http://127.0.0.1:4173/?game=KATA&level=2"
+  },
+  "stepAfterPause": {
+    "actions": 10,
+    "levelsCompleted": 1,
+    "plans": 8,
+    "level": 2,
+    "observedAt": "2026-11-11T12:25:14.504Z",
+    "observedStatus": "One action completed.",
+    "url": "http://127.0.0.1:4173/?game=KATA&level=2",
+    "actionsBefore": 9,
+    "actionsAfter": 10
+  },
+  "boundaries": [
+    {
+      "actions": 8,
+      "levelsCompleted": 1,
+      "plans": 6,
+      "level": 2,
+      "observedAt": "2026-11-11T12:24:19.553Z",
+      "observedStatus": "Level completed.",
+      "url": "http://127.0.0.1:4173/?game=KATA&level=2"
+    },
+    {
+      "actions": 16,
+      "levelsCompleted": 2,
+      "plans": 10,
+      "level": 3,
+      "observedAt": "2026-11-11T12:25:43.507Z",
+      "observedStatus": "Level completed.",
+      "url": "http://127.0.0.1:4173/?game=KATA&level=3"
+    },
+    {
+      "actions": 33,
+      "levelsCompleted": 3,
+      "plans": 14,
+      "level": 4,
+      "observedAt": "2026-11-11T12:26:04.974Z",
+      "observedStatus": "Level completed.",
+      "url": "http://127.0.0.1:4173/?game=KATA&level=4"
+    }
+  ],
+  "final": {
+    "actions": 33,
+    "levelsCompleted": 3,
+    "plans": 14,
+    "level": 4,
+    "observedAt": "2026-11-11T12:26:04.974Z",
+    "observedStatus": "Level completed.",
+    "url": "http://127.0.0.1:4173/?game=KATA&level=4"
+  },
+  "previewBuild": {
+    "manifest": {
+      "path": "docs/migration/lot6a-evidence/integrated-final-02/browser/static-preview-inputs.json",
+      "sha256": "01c7f418e03ae2fc22214aa12b4d493a72d49e9f052a71474c12225b89b8cef7",
+      "bytes": 18657
+    }
+  },
+  "observations": [
+    {
+      "path": "docs/migration/lot6a-evidence/integrated-final-02/browser/observations.json",
+      "sha256": "80a1431a84186873c2a4ecc24c31fb0eefb0dd13d97277c4d2a50d06faa15018",
+      "bytes": 3077
+    }
+  ],
+  "screenshot": {
+    "path": "docs/migration/lot6a-evidence/integrated-final-02/browser/kata-three-levels.png",
+    "sha256": "52d51fdbad444ea610ebdff8859230221563f5deab006c0a55637fe79456e83c",
+    "bytes": 75106
+  },
+  "earlierPauseAttempt": {
+    "request": {
+      "actions": 7,
+      "levelsCompleted": 0,
+      "plans": 5,
+      "level": 2,
+      "observedAt": "2026-11-11T12:24:02.410Z",
+      "observedStatus": "Pausing after the engaged action and its real outcome\u2026",
+      "url": "http://127.0.0.1:4173/?game=KATA&level=2"
+    },
+    "settled": {
+      "actions": 8,
+      "levelsCompleted": 1,
+      "plans": 6,
+      "level": 2,
+      "observedAt": "2026-11-11T12:24:09.655Z",
+      "observedStatus": "Level completed.",
+      "url": "http://127.0.0.1:4173/?game=KATA&level=2"
+    },
+    "qualification": "Pause was requested as the first natural boundary completed; the UI reported Level completed. Retained as an observed attempt, not the successful Paused acknowledgement."
+  },
+  "qualification": "Actual single cold browser session using the exact validated static build. Three natural boundaries, one-action execution, successful Pause and one-action resume. No level jump, manual game action, learned-state injection or session reset. The observed initial/final timestamps bound the retained UI observations; the cumulative case interval also covers setup. Not a latency measurement or whole-game win."
+}

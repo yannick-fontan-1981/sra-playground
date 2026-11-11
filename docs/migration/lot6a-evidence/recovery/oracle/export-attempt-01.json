@@ -1,0 +1,37 @@
+{
+  "schema": "sra.preview-packing-recovery-oracle-execution.v1",
+  "startedAt": "2026-11-11T11:57:21.968095+00:00",
+  "python": "3.12.14",
+  "pythonHashSeed": "0",
+  "script": {
+    "bytes": 25411,
+    "sha256": "eae0d47bfc99a12089a26b45e74805b85c8aa33d5b81376afa3856e4da82ac32"
+  },
+  "sourceBefore": {
+    "commit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+    "files": 1786,
+    "manifest": {
+      "bytes": 424024,
+      "sha256": "491eb3b737bbb490a1b7c212f5b1e75f5a8f84b2124b95d9dd54a0d09eca85d6"
+    },
+    "unchanged": true
+  },
+  "historicalReceiptsRecreated": false,
+  "gameExecution": false,
+  "status": "failed",
+  "errorType": "StopIteration",
+  "error": "",
+  "traceback": "Traceback (most recent call last):\n  File \"/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/scripts/export-v6-preview-packing-reference.py\", line 381, in main\n    'configuration': plain(family.config), 'initial': initial_cases(), 'sessions': series,\n                                                      ^^^^^^^^^^^^^^^\n  File \"/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/scripts/export-v6-preview-packing-reference.py\", line 210, in initial_cases\n    add('point-with-two-measured-owners', corrupt='duplicate-owner')\n  File \"/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/scripts/export-v6-preview-packing-reference.py\", line 196, in add\n    owner = next(e for e in obs['entities'] if [point['x']-e['bbox'][0], point['y']-e['bbox'][1]] in e['mask'])\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nStopIteration\n",
+  "sourceAfter": {
+    "commit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+    "files": 1786,
+    "manifest": {
+      "bytes": 424024,
+      "sha256": "491eb3b737bbb490a1b7c212f5b1e75f5a8f84b2124b95d9dd54a0d09eca85d6"
+    },
+    "unchanged": true
+  },
+  "elapsedSeconds": 0.9328125639999598,
+  "finishedAt": "2026-11-11T11:57:22.900910+00:00",
+  "exitCode": 1
+}

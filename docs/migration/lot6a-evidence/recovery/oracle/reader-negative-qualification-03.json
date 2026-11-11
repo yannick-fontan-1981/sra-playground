@@ -1,0 +1,684 @@
+{
+  "schema": "sra.preview-packing-reader-negative-qualification.v1",
+  "status": "passed",
+  "startedAt": "2026-11-11T12:10:08.322913+00:00",
+  "finishedAt": "2026-11-11T12:10:19.063117+00:00",
+  "elapsedSeconds": 10.740210786000034,
+  "reader": {
+    "bytes": 29311,
+    "sha256": "d19f9cd619503e44936de872a8a7fdc89f91bbea74e9322affb67d36df3cec45"
+  },
+  "qualificationScript": {
+    "bytes": 6028,
+    "sha256": "cbdd8498c467bcb945de04bee498b55d7614b80cd7b23f0dd88bd00e80eb704e"
+  },
+  "oracle": {
+    "bytes": 30417,
+    "sha256": "2a6823ddcef78a7b898c9cb30635af6f7aae912984f914050d1bd999fcddfb79"
+  },
+  "capture": {
+    "path": "docs/migration/lot6a-evidence/recovery/oracle/synthetic-native-capture-01.json.gz",
+    "bytes": 44760,
+    "sha256": "8f5caecbc16fcf842cee5acec9608b352b2cba4d6eed7101b0161ef3f5949631"
+  },
+  "baselineCounts": {
+    "proposed": 5,
+    "propose": 5,
+    "before": 4,
+    "after": 4,
+    "selectedRecords": 4,
+    "controlChangingRecords": 2,
+    "modelChangingRecords": 3,
+    "epochBoundaryReturns": 1,
+    "record": 4,
+    "actualRestores": 4,
+    "chronologicalEvents": 21,
+    "comparedEvents": 21,
+    "uniqueObservations": 5,
+    "selectedPrefixes": 0,
+    "foreignPrefixes": 0,
+    "ablations": 0,
+    "actionChangingAblations": 0,
+    "nonemptyAblations": 0,
+    "ablationErrors": 0
+  },
+  "sourceBefore": {
+    "commit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+    "files": 1786,
+    "manifest": {
+      "bytes": 424024,
+      "sha256": "491eb3b737bbb490a1b7c212f5b1e75f5a8f84b2124b95d9dd54a0d09eca85d6"
+    },
+    "unchanged": true
+  },
+  "sourceAfter": {
+    "commit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+    "files": 1786,
+    "manifest": {
+      "bytes": 424024,
+      "sha256": "491eb3b737bbb490a1b7c212f5b1e75f5a8f84b2124b95d9dd54a0d09eca85d6"
+    },
+    "unchanged": true
+  },
+  "gameExecution": false,
+  "cases": [
+    {
+      "id": "changed-native-before-state-is-not-an-oracle-seed",
+      "rejected": true,
+      "differenceCount": 1,
+      "firstDifferences": [
+        {
+          "path": "events[0].sourceBefore.packing_controls.foreign",
+          "expectedPresent": false,
+          "actualPresent": true
+        }
+      ],
+      "stop": null,
+      "mutatedCaptureDigest": "b56a5b4aa430d9d64ef0fa93829d1fec9c061abde7d2c4bd9170f198cd048dd1",
+      "sourceFinalEqualsUnmutatedSource": true
+    },
+    {
+      "id": "changed-native-after-state-is-detected",
+      "rejected": true,
+      "differenceCount": 1,
+      "firstDifferences": [
+        {
+          "path": "events[3].sourceAfter.packing_model.selected",
+          "expected": "piece:0",
+          "actual": "foreign"
+        }
+      ],
+      "stop": null,
+      "mutatedCaptureDigest": "bd14bebda7fb46f18a9a5d5b14925ff43737a3e099a54f45cacb92b82bad14e8",
+      "sourceFinalEqualsUnmutatedSource": true
+    },
+    {
+      "id": "changed-proposal-result-is-detected",
+      "rejected": true,
+      "differenceCount": 1,
+      "firstDifferences": [
+        {
+          "path": "events[0].result.actions[0].action_ref",
+          "expected": "ACTION6",
+          "actual": "ACTION5"
+        }
+      ],
+      "stop": null,
+      "mutatedCaptureDigest": "cf161ab100817f52c89d60efc74961659568550cdc9c4327915af2567c6a3dc1",
+      "sourceFinalEqualsUnmutatedSource": true
+    },
+    {
+      "id": "changed-native-plan-is-not-used-for-original-record",
+      "rejected": true,
+      "differenceCount": 1,
+      "firstDifferences": [
+        {
+          "path": "events[3].arguments[5].independentSourceProposal.preview_packing_plan.calculation.method",
+          "expected": "V5.preview_piece_packing._residual",
+          "actual": "fabricated"
+        }
+      ],
+      "stop": null,
+      "mutatedCaptureDigest": "e3f004606d960c91c68e404ec35da1eaef97ae3105fd4f9c00affcb59deeae46",
+      "sourceFinalEqualsUnmutatedSource": true
+    },
+    {
+      "id": "changed-restore-input-is-not-an-oracle-seed",
+      "rejected": true,
+      "differenceCount": 1,
+      "firstDifferences": [
+        {
+          "path": "events[4].receivedState.packing_model",
+          "expected": {
+            "q": 3,
+            "offset": [
+              3,
+              3
+            ],
+            "board": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                1
+              ]
+            ],
+            "pieces": [
+              {
+                "id": "piece:0",
+                "color": 5,
+                "mask": [
+                  [
+                    0,
+                    0
+                  ],
+                  [
+                    1,
+                    0
+                  ]
+                ],
+                "anchor": [
+                  0,
+                  7
+                ],
+                "movable": true
+              },
+              {
+                "id": "piece:1",
+                "color": 4,
+                "mask": [
+                  [
+                    0,
+                    0
+                  ],
+                  [
+                    1,
+                    0
+                  ]
+                ],
+                "anchor": [
+                  0,
+                  4
+                ],
+                "movable": true
+              }
+            ],
+            "background": 0,
+            "empty": 1,
+            "frame_color": 8,
+            "frame": [
+              2,
+              2,
+              9,
+              9
+            ],
+            "world": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                0,
+                3
+              ],
+              [
+                0,
+                4
+              ],
+              [
+                0,
+                5
+              ],
+              [
+                0,
+                6
+              ],
+              [
+                0,
+                7
+              ],
+              [
+                0,
+                8
+              ],
+              [
+                0,
+                9
+              ],
+              [
+                0,
+                10
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                1
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                1,
+                3
+              ],
+              [
+                1,
+                4
+              ],
+              [
+                1,
+                5
+              ],
+              [
+                1,
+                6
+              ],
+              [
+                1,
+                7
+              ],
+              [
+                1,
+                8
+              ],
+              [
+                1,
+                9
+              ],
+              [
+                1,
+                10
+              ],
+              [
+                2,
+                0
+              ],
+              [
+                2,
+                1
+              ],
+              [
+                2,
+                2
+              ],
+              [
+                2,
+                3
+              ],
+              [
+                2,
+                4
+              ],
+              [
+                2,
+                5
+              ],
+              [
+                2,
+                6
+              ],
+              [
+                2,
+                7
+              ],
+              [
+                2,
+                8
+              ],
+              [
+                2,
+                9
+              ],
+              [
+                2,
+                10
+              ],
+              [
+                3,
+                0
+              ],
+              [
+                3,
+                1
+              ],
+              [
+                3,
+                2
+              ],
+              [
+                3,
+                3
+              ],
+              [
+                3,
+                4
+              ],
+              [
+                3,
+                5
+              ],
+              [
+                3,
+                6
+              ],
+              [
+                3,
+                7
+              ],
+              [
+                3,
+                8
+              ],
+              [
+                3,
+                9
+              ],
+              [
+                3,
+                10
+              ],
+              [
+                4,
+                0
+              ],
+              [
+                4,
+                1
+              ],
+              [
+                4,
+                2
+              ],
+              [
+                4,
+                3
+              ],
+              [
+                4,
+                4
+              ],
+              [
+                4,
+                5
+              ],
+              [
+                4,
+                6
+              ],
+              [
+                4,
+                7
+              ],
+              [
+                4,
+                8
+              ],
+              [
+                4,
+                9
+              ],
+              [
+                4,
+                10
+              ],
+              [
+                5,
+                0
+              ],
+              [
+                5,
+                1
+              ],
+              [
+                5,
+                2
+              ],
+              [
+                5,
+                3
+              ],
+              [
+                5,
+                4
+              ],
+              [
+                5,
+                5
+              ],
+              [
+                5,
+                6
+              ],
+              [
+                5,
+                7
+              ],
+              [
+                5,
+                8
+              ],
+              [
+                5,
+                9
+              ],
+              [
+                5,
+                10
+              ],
+              [
+                6,
+                0
+              ],
+              [
+                6,
+                1
+              ],
+              [
+                6,
+                2
+              ],
+              [
+                6,
+                3
+              ],
+              [
+                6,
+                4
+              ],
+              [
+                6,
+                5
+              ],
+              [
+                6,
+                6
+              ],
+              [
+                6,
+                7
+              ],
+              [
+                6,
+                8
+              ],
+              [
+                6,
+                9
+              ],
+              [
+                6,
+                10
+              ]
+            ],
+            "selected": "piece:0",
+            "preview_color": 7,
+            "evidence": [
+              "original-preview-packing-recovery-synthetic:epoch:1:revision:0:frame:2378c157a01ec4ee",
+              "original-preview-packing-recovery-synthetic:epoch:1:revision:0:frame:2378c157a01ec4ee",
+              "original-preview-packing-recovery-synthetic:epoch:1:revision:1:frame:12d9873ddc8bb676"
+            ],
+            "epoch": 1,
+            "tried": []
+          },
+          "actual": null
+        }
+      ],
+      "stop": null,
+      "mutatedCaptureDigest": "ad7b6b8845b5654cdb7797e9026b3f217f89a58861966f699feb99829a9af172",
+      "sourceFinalEqualsUnmutatedSource": true
+    },
+    {
+      "id": "changed-restore-schema-is-rejected",
+      "rejected": true,
+      "differenceCount": 0,
+      "firstDifferences": [],
+      "stop": {
+        "event": 4,
+        "type": "ValueError",
+        "message": "Wrong native checkpoint schema"
+      },
+      "mutatedCaptureDigest": "0f3c7f2fc65b10ed2b9c7e322efefe55bce344057de4e3bead8636afd04542c2",
+      "sourceFinalEqualsUnmutatedSource": false
+    },
+    {
+      "id": "omitted-event-sequence-is-rejected",
+      "rejected": true,
+      "differenceCount": 0,
+      "firstDifferences": [],
+      "stop": {
+        "event": 3,
+        "type": "ValueError",
+        "message": "Events must be complete and ordered from zero"
+      },
+      "mutatedCaptureDigest": "b467d6be97780ed094ac4b7ddb653ba3f70801b03f196e7635b5966913e1d164",
+      "sourceFinalEqualsUnmutatedSource": false
+    },
+    {
+      "id": "failed-passive-observation-is-rejected",
+      "rejected": true,
+      "differenceCount": 0,
+      "firstDifferences": [],
+      "stop": {
+        "event": 0,
+        "type": "ValueError",
+        "message": "Call failed or passive capture lost information"
+      },
+      "mutatedCaptureDigest": "cf74b82fc1573b44d94d86ab64a88b032e1083fa4bfb4f4fd013d175f08b56cc",
+      "sourceFinalEqualsUnmutatedSource": false
+    },
+    {
+      "id": "unfinished-native-call-is-rejected",
+      "rejected": true,
+      "differenceCount": 0,
+      "firstDifferences": [],
+      "stop": {
+        "event": 0,
+        "type": "ValueError",
+        "message": "Call failed or passive capture lost information"
+      },
+      "mutatedCaptureDigest": "198a801aeafb103a9c6610c3fe27d79c714fb0dbf6849d9d67b532e4ffb9bf00",
+      "sourceFinalEqualsUnmutatedSource": false
+    },
+    {
+      "id": "unqualified-nested-call-is-rejected",
+      "rejected": true,
+      "differenceCount": 0,
+      "firstDifferences": [],
+      "stop": {
+        "event": 0,
+        "type": "ValueError",
+        "message": "Unqualified nested or concurrent Preview call"
+      },
+      "mutatedCaptureDigest": "84af2a5ddb03cc136316c50e1b77d5dc42a29b22a337923ec7e9c94bd2bee2a4",
+      "sourceFinalEqualsUnmutatedSource": false
+    },
+    {
+      "id": "native-input-candidate-list-is-remeasured-publicly",
+      "rejected": true,
+      "differenceCount": 12,
+      "firstDifferences": [
+        {
+          "path": "events[0].currentPublicInputDomain.length",
+          "expected": 14,
+          "actual": 13
+        },
+        {
+          "path": "events[0].currentPublicInputDomain[0].action_ref",
+          "expected": "ACTION1",
+          "actual": "ACTION2"
+        },
+        {
+          "path": "events[0].currentPublicInputDomain[1].action_ref",
+          "expected": "ACTION2",
+          "actual": "ACTION3"
+        },
+        {
+          "path": "events[0].currentPublicInputDomain[2].action_ref",
+          "expected": "ACTION3",
+          "actual": "ACTION4"
+        }
+      ],
+      "stop": null,
+      "mutatedCaptureDigest": "0511a0faf62f2f75ce0f75d4406faefd80a69e3845d348613eb95bb79ac5bae4",
+      "sourceFinalEqualsUnmutatedSource": true
+    },
+    {
+      "id": "missing-null-restore-result-is-not-inferred",
+      "rejected": true,
+      "differenceCount": 0,
+      "firstDifferences": [],
+      "stop": {
+        "event": 4,
+        "type": "ValueError",
+        "message": "Completed call lacks its explicitly observed return value"
+      },
+      "mutatedCaptureDigest": "6e9a4396e7a5e210a0dfd52e8fc3dcc9c4c8fd9fdfc32b577ba556fb580295ea",
+      "sourceFinalEqualsUnmutatedSource": false
+    },
+    {
+      "id": "boolean-sequence-is-not-an-integer-cursor",
+      "rejected": true,
+      "differenceCount": 0,
+      "firstDifferences": [],
+      "stop": {
+        "event": 1,
+        "type": "ValueError",
+        "message": "Events must be complete and ordered from zero"
+      },
+      "mutatedCaptureDigest": "7ad0dd5e5ec01eb9c8edbdb0a1b08b7f8c36a7ccf4f77cf904aab0a2ad7eb69c",
+      "sourceFinalEqualsUnmutatedSource": false
+    },
+    {
+      "id": "boolean-depth-is-not-an-integer-depth",
+      "rejected": true,
+      "differenceCount": 0,
+      "firstDifferences": [],
+      "stop": {
+        "event": 0,
+        "type": "ValueError",
+        "message": "Unqualified nested or concurrent Preview call"
+      },
+      "mutatedCaptureDigest": "ff725bdbb569374b8c1ed827bed2cf22bbe86ce00aaddf06286c71cb5be4051e",
+      "sourceFinalEqualsUnmutatedSource": false
+    },
+    {
+      "id": "acquisition-without-actual-before-guard-is-rejected",
+      "rejected": true,
+      "differenceCount": 1,
+      "firstDifferences": [
+        {
+          "path": "events[2].actualGuardCoverage",
+          "expected": true,
+          "actual": false
+        }
+      ],
+      "stop": null,
+      "mutatedCaptureDigest": "a29a9f1e082313e3b6e10f7976a8c30dfd3f934970fe9677bc303cc0d10523bb",
+      "sourceFinalEqualsUnmutatedSource": true
+    }
+  ],
+  "rejected": 15,
+  "scope": "Mutations of a synthetic direct-component capture qualify input validation, exact comparisons, no native-state/plan seeding, chronological restore/guard checks. This is not caller/game evidence."
+}

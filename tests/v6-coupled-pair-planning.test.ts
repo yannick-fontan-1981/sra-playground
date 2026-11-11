@@ -158,7 +158,7 @@ test('observed, coupled and graph source entries share one retained public_occur
   const window = coverage.sourceGroups.find((group: R) => group.id === 'window_constraints');
   assert.equal(goal.families.filter((id: string) => id === 'public_occurrence_recall').length, 3);
   assert.deepEqual(goal.entryPoints.filter((entry: string | null) => entry !== null),
-    ['observed_composition_services', 'coupled_support_composition', 'alternating_graph_composition', 'observed_feedback_sequence']);
+    ['observed_composition_services', 'coupled_support_composition', 'alternating_graph_composition', 'preview_packing', 'observed_feedback_sequence']);
   assert.equal(goal.entryPoints[0], 'observed_composition_services');
   assert.deepEqual(coverage.partialEntryPoints, {});
   assert.deepEqual(coverage.observedCompositionBranches.connectedBranches,

@@ -1,0 +1,89 @@
+{
+  "schema": "logos-engine.lot6a-owner-cost-contract.v2",
+  "lot": "6A",
+  "declaredAt": "2026-11-11T12:25:32.410591+00:00",
+  "performanceDirectory": "docs/migration/lot6a-evidence/performance-integrated",
+  "declaration": {
+    "path": "docs/migration/lot6a-evidence/performance-integrated/declaration.json",
+    "bytes": 5794,
+    "sha256": "4f845314b71ded4a715c6fc8e213f2e7a89a551d7489b7847a9786d5d86ff87d"
+  },
+  "tools": {
+    "consolidator": {
+      "path": "docs/migration/lot6a-evidence/consolidate-owner-costs.mjs",
+      "bytes": 52958,
+      "sha256": "6ef8481b3187edb8d6e14d2ea2a3ea40673106dcad180025deec975446a9597f"
+    },
+    "reviewer": {
+      "path": "docs/migration/lot6a-evidence/review-owner-costs.py",
+      "bytes": 70329,
+      "sha256": "13b6585d87fc2306e9652d70e64fdefc7a8499f141216dc65ba67295c235bc20"
+    }
+  },
+  "structuralExpectation": {
+    "ownerId": "preview_packing",
+    "programId": null,
+    "installedNodeIds": [
+      "family_state:preview_packing",
+      "family_activation:preview_packing"
+    ],
+    "allowedPaths": [
+      "observations[*].nodeCount",
+      "inspection[*].graphNodes",
+      "final.nodeCount",
+      "final.graphRevision"
+    ],
+    "mode": "predeclared_functional_fixture",
+    "qualification": "functional_structure_frozen_before_measurement"
+  },
+  "sourceEvidence": [
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "bytes": 157861,
+      "sha256": "6a6a52060c9202f8cf64b252bb849b6bf569a78b50a2e17adc4bd495471fecbd"
+    },
+    {
+      "path": "src/logos-engine/v6-preview-packing.ts",
+      "bytes": 27050,
+      "sha256": "f4ca39b35d6cd8acf14f9efbab6f1de0f7f4694906e4383d53cbec1d6dc9b450"
+    },
+    {
+      "path": "src/logos-engine/v6-preview-packing-types.ts",
+      "bytes": 4879,
+      "sha256": "93ef62ff8da9990f6a25ede4ed29b16ccd2fafa94771c06db93887d2cd324e10"
+    },
+    {
+      "path": "src/logos-engine/v6-preview-packing-geometry.ts",
+      "bytes": 8121,
+      "sha256": "bd2dbde5a5975b611e627171e46b9f4a7c418d0341b4c6ef653eb11bb707adc2"
+    },
+    {
+      "path": "src/logos-engine/v6-preview-packing-calculus.ts",
+      "bytes": 13276,
+      "sha256": "ca48f8b5622fe65ea71c54fe0d31e9171280a85154cad3719d10da3523cc2b75"
+    },
+    {
+      "path": "src/logos-engine/v6-knowledge-store.ts",
+      "bytes": 14849,
+      "sha256": "035d41597a5831bfa65bb1f627e3a0d05b84cc44cfda05566359873ef8c5af08"
+    },
+    {
+      "path": "src/logos-engine/kernel.ts",
+      "bytes": 23637,
+      "sha256": "1cac40f5f9a3356d31ae0fd5247709eb82c5f6402aae3cb68d8edc54c838f207"
+    }
+  ],
+  "ownerInventory": {
+    "path": "docs/migration/lot6a-evidence/performance-integrated/owner-source-inventory.json",
+    "bytes": 119051,
+    "sha256": "df9c30d22c82c74935b9d7cec5d96bf1e99df547a1d5b2db0cca92d503417555"
+  },
+  "structuralFixture": {
+    "path": "docs/migration/lot6a-evidence/performance-integrated/owner-structural-fixture.json",
+    "bytes": 60028,
+    "sha256": "a7915f510298136403fda180c1221b1c38e7fc29ff7bf144fd78cd8a4a7bf5fe"
+  },
+  "strictFailureReceipt": "docs/migration/lot6a-evidence/performance-integrated/aggregation-failure.json",
+  "strictFailureLog": "docs/migration/lot6a-evidence/performance-integrated/aggregation-failure.log",
+  "historicalAggregateOutput": "docs/migration/lot6a-evidence/performance-integrated/combined-comparison.json"
+}

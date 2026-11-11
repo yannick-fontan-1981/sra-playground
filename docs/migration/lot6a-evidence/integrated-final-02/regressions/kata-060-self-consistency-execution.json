@@ -1,0 +1,147 @@
+{
+  "case": "kata-060-self-consistency",
+  "game": "KATA",
+  "mode": "recorded-public-replay",
+  "command": [
+    "node",
+    "scripts/replay-v53-public-regression.mjs",
+    "docs/migration/lot6a-evidence/integrated-final-02/kata-campaign.json.gz",
+    "docs/migration/lot6a-evidence/integrated-final-02/kata-public-trace.json.gz",
+    "docs/migration/lot6a-evidence/integrated-final-02/regressions/kata-060-self-consistency-replay.json.gz"
+  ],
+  "startedAt": "2026-11-11T12:31:06.890616+00:00",
+  "finishedAt": "2026-11-11T12:32:03.537985+00:00",
+  "elapsedSeconds": 56.64737077200016,
+  "exitCode": 0,
+  "timeoutSeconds": 600,
+  "timedOut": false,
+  "baseline": {
+    "path": "docs/migration/lot6a-evidence/integrated-final-02/kata-campaign.json.gz",
+    "sha256": "a3318ed5f7d742f63b5923f3e1e46b0d9cfff1d18e767b45c522d61aa354e455",
+    "bytes": 8253174
+  },
+  "trace": {
+    "path": "docs/migration/lot6a-evidence/integrated-final-02/kata-public-trace.json.gz",
+    "sha256": "c236c95ec0bdcb892a6940940098e4310eb35a6ae11acaf6b74545d09aa22daa",
+    "bytes": 12579
+  },
+  "output": {
+    "path": "docs/migration/lot6a-evidence/integrated-final-02/regressions/kata-060-self-consistency-output.log.gz",
+    "sha256": "6bed31474cee68bb94c0249c1b0081003ccbb85d8cf99eeadfc8c53bb187ad4e",
+    "bytes": 3749
+  },
+  "passed": true,
+  "report": {
+    "path": "docs/migration/lot6a-evidence/integrated-final-02/regressions/kata-060-self-consistency-replay.json.gz",
+    "sha256": "ded74fd96386dbcc98ffb5949986d991da12063d5e313b40f8dd36a8f5b33fb7",
+    "bytes": 8253579
+  },
+  "status": "passed",
+  "actions": 33,
+  "prefixes": 14,
+  "final": {
+    "actions": 33,
+    "levelsCompleted": 3,
+    "level": 4,
+    "state": "NOT_FINISHED",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "activeSeconds": 39.05103219899998,
+    "prefixes": 14,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 33,
+      "boundaryReplays": 2,
+      "goalEvents": 3,
+      "frontierDeltas": 67,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 15
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 15
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 15
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 11
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 1
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 9
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 16
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology"
+      ],
+      "morphologyProvider": {
+        "status": "partial_current_measurements_control_attention_and_methods",
+        "state_owner": "family_state:morphology",
+        "motion_owner": "caller:goal",
+        "forecast_owner": "family_state:public_observed_inventory",
+        "current_decision_scope": "one_source_selection_cycle",
+        "attention_owner": "caller:attention",
+        "method_owner": "caller:counters.targetMethod",
+        "entry_return_owner": "family_state:morphology.entry_access_return",
+        "connected_methods": [
+          "retained_station_method",
+          "entry_access_return",
+          "entry_rebind",
+          "entry_probe",
+          "managed_capacity",
+          "target_extension_continuation"
+        ],
+        "pending": [
+          "complete_original_caller_parity_and_domain_closure"
+        ]
+      },
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 33,
+      "resume": 13
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.60.0"
+  },
+  "passiveOwnerPresence": {
+    "path": "docs/migration/lot6a-evidence/integrated-final-02/regressions/kata-060-self-consistency-passive-owner-presence.json",
+    "sha256": "96477548d6c5ff75e1c8b40bfafc29c69f67e1d78cb8ef2e83cd66c096827f55",
+    "bytes": 1120
+  },
+  "passiveOwnerPresencePassed": true,
+  "passiveOwnerPrefixesChecked": 0,
+  "passiveOwnerPrefixesPassed": 0,
+  "passiveOwnerTransitionsRetained": 0,
+  "comparison": {
+    "path": "docs/migration/lot6a-evidence/integrated-final-02/regressions/kata-060-self-consistency-comparison.json",
+    "sha256": "d05b438d5c72ab658a314b883780960af43e52f832b7c283fda93fc4d0adccbf",
+    "bytes": 10634
+  },
+  "comparisonPassed": true,
+  "comparisonChecks": 17,
+  "failedChecks": [],
+  "nativeSourceBeforeDigest": "ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229",
+  "nativeSourceAfterDigest": "ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229",
+  "nativeSourceUnchanged": true,
+  "immutableInputsUnchanged": true
+}

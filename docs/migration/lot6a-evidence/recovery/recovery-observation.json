@@ -1,0 +1,67 @@
+{
+  "schema": "logos-engine.lot6a.workspace-recovery.v1",
+  "recordedAt": "2026-11-11T11:55:48.634Z",
+  "status": "original_candidate_not_recovered_reconstruction_started",
+  "published": {
+    "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+    "siteVersion": 95,
+    "nativeVersion": "0.58.0",
+    "commit": "3a70463039768f7114edae7d94d7dd33b7f36aa8",
+    "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "audience": "owner-only",
+    "accessPolicyRevision": 3
+  },
+  "sourceOpening": {
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "checkout_path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout",
+    "commit_sha": "3a70463039768f7114edae7d94d7dd33b7f36aa8"
+  },
+  "remoteRefs": [
+    {
+      "ref": "HEAD",
+      "commit": "3a70463039768f7114edae7d94d7dd33b7f36aa8"
+    },
+    {
+      "ref": "refs/heads/main",
+      "commit": "3a70463039768f7114edae7d94d7dd33b7f36aa8"
+    }
+  ],
+  "verifiedAbsentCommits": [
+    "0f7ae5e480c9a67ea61ceaae5809bc47530f3220",
+    "726167e518f3ad435f42dfe2871d16c09d531cab"
+  ],
+  "unreachableObjectsFound": false,
+  "searchScope": "Targeted local checkout/archive inventory; Git refs and fsck; targeted Library filename search and project continuity retrieval. No recovered final6A source or proof bytes.",
+  "historicalOnly": {
+    "nativeVersion": "0.60.0",
+    "digest": "d30042cd3440d550ae1c9a70cbccb2275ef8eae81417778b61e0b2c3b9fc3127",
+    "tests": {
+      "passed": 5080,
+      "total": 5080
+    },
+    "strictRegressionChecks": {
+      "passed": 187,
+      "total": 187
+    },
+    "cost": {
+      "STCK": 0.029043066108464997,
+      "SMLP": -0.01065755470380471,
+      "STCK_newDecision": 0.10766922612592955
+    },
+    "qualification": "Values retained from previous conversation observations; original receipts are unavailable here. They are not validations of the reconstructed candidate."
+  },
+  "reconstruction": {
+    "originalPin": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+    "requiresNewNativeFreeze": true,
+    "requiresNewFunctionalProofs": true,
+    "requiresNewCostMeasurement": true
+  },
+  "caseBudget": {
+    "case": "KATA",
+    "limitSeconds": 2400,
+    "priorChargedSeconds": 1489.2254091450009,
+    "remainingBeforeRecoverySeconds": 910.7745908549991,
+    "provenance": "Previous completed case-clock observation, not recovered file bytes",
+    "reset": false
+  }
+}

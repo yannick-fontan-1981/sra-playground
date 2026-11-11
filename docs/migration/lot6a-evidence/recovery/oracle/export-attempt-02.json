@@ -1,0 +1,56 @@
+{
+  "schema": "sra.preview-packing-recovery-oracle-execution.v1",
+  "startedAt": "2026-11-11T11:58:12.392761+00:00",
+  "python": "3.12.14",
+  "pythonHashSeed": "0",
+  "script": {
+    "bytes": 29769,
+    "sha256": "ceaf6953464dbc7731ecb9ee3b36ee1a3be9731e576d4d306cd75cee3b529ce6"
+  },
+  "sourceBefore": {
+    "commit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+    "files": 1786,
+    "manifest": {
+      "bytes": 424024,
+      "sha256": "491eb3b737bbb490a1b7c212f5b1e75f5a8f84b2124b95d9dd54a0d09eca85d6"
+    },
+    "unchanged": true
+  },
+  "historicalReceiptsRecreated": false,
+  "gameExecution": false,
+  "status": "passed",
+  "output": {
+    "path": "tests/fixtures/v6-preview-packing/reference.json.gz",
+    "bytes": 120112,
+    "sha256": "8bd88de3a7d818501187339c79f23e2876ee263dfe9065331a4e23bbf817358d"
+  },
+  "rawBytes": 2321340,
+  "importedSourceFiles": 724,
+  "initialCases": 14,
+  "sessions": 9,
+  "sourceSteps": 29,
+  "helpers": {
+    "normalized": 4,
+    "transforms": 16,
+    "scenes": 3,
+    "points": 6,
+    "samples": 1,
+    "poses": 4,
+    "assignments": 5
+  },
+  "guards": 11,
+  "records": 2,
+  "stateVariants": 9,
+  "sourceAfter": {
+    "commit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+    "files": 1786,
+    "manifest": {
+      "bytes": 424024,
+      "sha256": "491eb3b737bbb490a1b7c212f5b1e75f5a8f84b2124b95d9dd54a0d09eca85d6"
+    },
+    "unchanged": true
+  },
+  "elapsedSeconds": 1.6843792990000566,
+  "finishedAt": "2026-11-11T11:58:14.077143+00:00",
+  "exitCode": 0
+}

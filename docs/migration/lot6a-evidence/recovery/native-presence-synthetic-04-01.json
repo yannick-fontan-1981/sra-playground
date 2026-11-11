@@ -1,0 +1,400 @@
+{
+  "schema": "logos-engine.lot6a.preview-owner-presence.v1",
+  "mode": "synthetic_qualification",
+  "recordedAt": "2026-11-11T12:23:09.695667+00:00",
+  "generator": {
+    "path": "scripts/verify-preview-packing-presence.py",
+    "sha256": "6702438d10baa72d7d59a09e58cc610852e46d80fefd8968443fecd953e190cc",
+    "bytes": 48162
+  },
+  "inputs": [
+    {
+      "path": "docs/migration/lot6a-evidence/recovery/oracle/runtime-synthetic-capture-04.json.gz",
+      "sha256": "9db70e0c70cdcaf4ffe7dfe9b4b3039dd00c5bcbda0299eb1b7dc8210052f287",
+      "bytes": 865477
+    }
+  ],
+  "caseManifest": null,
+  "regressionSummary": null,
+  "nativeDigest": "ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229",
+  "status": "passed",
+  "cases": [
+    {
+      "case": "synthetic",
+      "status": "passed",
+      "prefixes": 3,
+      "selectedPrefixes": 3,
+      "foreignPrefixes": 0,
+      "physicalReturns": 4,
+      "selectedReturns": 4,
+      "foreignReturns": 0,
+      "selectedRecords": 4,
+      "passiveReturns": 0,
+      "events": 25,
+      "proposalCalls": 3,
+      "actualRestores": 10,
+      "nativeRestores": 6,
+      "sourceRestores": 4,
+      "sourceFactsRetainedPrefixes": 3,
+      "acquiredSourceFacts": 4,
+      "coldPrefixes": 0,
+      "completedEventCursors": 3,
+      "errors": [],
+      "nativeDigest": "ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229",
+      "prefixChecks": [
+        {
+          "id": "prefix_evidence:1",
+          "eventsFrom": 0,
+          "eventsThrough": 7,
+          "selected": true,
+          "returns": 1,
+          "records": 1,
+          "sourceRestores": 1,
+          "stateDigest": "dc6d7e29360df2ae2efd86e7459b3319cebfb555c4f738d56368fb917ebf0506"
+        },
+        {
+          "id": "prefix_evidence:2",
+          "eventsFrom": 7,
+          "eventsThrough": 14,
+          "selected": true,
+          "returns": 1,
+          "records": 1,
+          "sourceRestores": 1,
+          "stateDigest": "6aa59f55525ba8b75391e42f0edcd7fa58c902fb783d327d59996a5f7c189e95"
+        },
+        {
+          "id": "prefix_evidence:3",
+          "eventsFrom": 14,
+          "eventsThrough": 25,
+          "selected": true,
+          "returns": 2,
+          "records": 2,
+          "sourceRestores": 2,
+          "stateDigest": "79c6ef844853cd81bf897b1e8cfaff64d3f7edccd2b3192f0e4f178c07c77bc2"
+        }
+      ],
+      "game": "SYN1",
+      "report": {
+        "path": "docs/migration/lot6a-evidence/recovery/oracle/runtime-synthetic-capture-04.json.gz",
+        "sha256": "9db70e0c70cdcaf4ffe7dfe9b4b3039dd00c5bcbda0299eb1b7dc8210052f287",
+        "bytes": 865477
+      }
+    }
+  ],
+  "errors": [],
+  "qualification": "Read-only consistency of one captured native Preview owner, complete call journal, physical-return selection, retained source facts and actual restorations. No Python/original-source parity, game execution, new live success, cost result or complete-caller equivalence is claimed. Earlier source fact writes overwritten by the last fact are represented by the observed source-restoration calls, not reconstructed as retained facts.",
+  "pythonParityClaimed": false,
+  "gameExecution": false,
+  "negativeQualification": {
+    "status": "passed",
+    "baselineMustPass": true,
+    "cases": [
+      {
+        "case": "event-sequence-gap",
+        "expectedError": "event_sequence",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "event_sequence",
+            "where": "previewPackingEvents[1]",
+            "message": "Invocation sequence is not complete and ordered"
+          }
+        ],
+        "mutatedEvidenceDigest": "06328e6f7d8376ce099f41c33106f9b5b10e2ec115048df9b4b02d5eda8e5ef8"
+      },
+      {
+        "case": "boolean-sequence",
+        "expectedError": "event_sequence",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "event_sequence",
+            "where": "previewPackingEvents[1]",
+            "message": "Invocation sequence is not complete and ordered"
+          }
+        ],
+        "mutatedEvidenceDigest": "de5d52cd79955c74d1196d9b51740f0b6514071a1de5650292440782fe04ca3d"
+      },
+      {
+        "case": "unfinished-call",
+        "expectedError": "event_completion",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "event_completion",
+            "where": "previewPackingEvents[0]",
+            "message": "Pending, failed or missing call result"
+          }
+        ],
+        "mutatedEvidenceDigest": "e505981d2e95d60e5316b43c852df241d3165d7219c52f49fde0b4ef3f43e798"
+      },
+      {
+        "case": "observation-error",
+        "expectedError": "event_observation_error",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "event_observation_error",
+            "where": "previewPackingEvents[0]",
+            "message": "Passive observation failed or its error inventory is missing"
+          }
+        ],
+        "mutatedEvidenceDigest": "f3575d267afc90e33c0b76f7d545eff19e69b339ff2a438cffe9df3548845386"
+      },
+      {
+        "case": "unqualified-nesting",
+        "expectedError": "event_depth",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "event_depth",
+            "where": "previewPackingEvents[0]",
+            "message": "Malformed nesting depth"
+          }
+        ],
+        "mutatedEvidenceDigest": "10fc9b2456b33bbc8bb814c7dd8be681c7788bc4797141f961f18f3ea8f8b549"
+      },
+      {
+        "case": "missing-restore-result",
+        "expectedError": "event_completion",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "event_completion",
+            "where": "previewPackingEvents[0]",
+            "message": "Pending, failed or missing call result"
+          }
+        ],
+        "mutatedEvidenceDigest": "1fb4aaf2376cbf2029ffb95f557f557028dbbb9a9be52f45b292368aeb70fe2b"
+      },
+      {
+        "case": "restore-schema",
+        "expectedError": "native_state_schema",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "native_state_schema",
+            "where": "previewPackingEvents[0].arguments[0]",
+            "message": "Expected exact native.preview_packing.v1 envelope"
+          }
+        ],
+        "mutatedEvidenceDigest": "3b33bde7e1f86a5ddb7af4841aa07d21cc79c39d65092b5d435741c4714f6bf8"
+      },
+      {
+        "case": "changed-call-state",
+        "expectedError": "state_continuity",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "state_continuity",
+            "where": "previewPackingEvents[1]",
+            "message": "Source state changed outside the ordered journal"
+          }
+        ],
+        "mutatedEvidenceDigest": "1c020a7477da42c247916f85bb3186f71d93196fbed01c99850b83807155ff26"
+      },
+      {
+        "case": "boolean-prefix-cursor",
+        "expectedError": "event_cursor",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "event_cursor",
+            "where": "prefixes[0]",
+            "message": "Cursor must end complete calls and cover ordered new events"
+          }
+        ],
+        "mutatedEvidenceDigest": "a0a497bc4e31e105a195245632504203a794a07859493e2927eb2e4a38a9c40c"
+      },
+      {
+        "case": "missing-final-cursor",
+        "expectedError": "uncovered_events",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "uncovered_events",
+            "where": "prefixes",
+            "message": "Journal events remain outside sealed prefix cursors"
+          }
+        ],
+        "mutatedEvidenceDigest": "0e92ffd37a1c4692b3a50626a96103194bb04a3ea9aeaf16d1ad1c3bafef5ccd"
+      },
+      {
+        "case": "changed-prefix-state",
+        "expectedError": "prefix_state",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "prefix_state",
+            "where": "prefixes[0]",
+            "message": "Retained envelope, actual instance and journal state differ"
+          }
+        ],
+        "mutatedEvidenceDigest": "fd6c7bad4a9b4d892c699f630a308b33436d117c9fdc7818eecaa275c2ebe4af"
+      },
+      {
+        "case": "extra-native-field",
+        "expectedError": "native_state_schema",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "native_state_schema",
+            "where": "prefixes[0].state",
+            "message": "Expected exact native.preview_packing.v1 envelope"
+          }
+        ],
+        "mutatedEvidenceDigest": "23339a3aed2d46fc77d66deaed7e3a37843a926192949f7a887310548e1150a3"
+      },
+      {
+        "case": "physical-order",
+        "expectedError": "physical_sequence",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "physical_sequence",
+            "where": "actions",
+            "message": "Physical sequence is not complete and ordered"
+          }
+        ],
+        "mutatedEvidenceDigest": "9443a793487a0ed141c43cd2599e2532be98a2c141d8fa116dadfb4ebe9100b8"
+      },
+      {
+        "case": "physical-packet",
+        "expectedError": "physical_packet_binding",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "physical_packet_binding",
+            "where": "prefixes[0]",
+            "message": "Recorded return differs from the physical complete packet"
+          }
+        ],
+        "mutatedEvidenceDigest": "1a00aa3c6c23e1a0a0cd030ec5d176268902cfad3cccc66227e62aa7a29d7216"
+      },
+      {
+        "case": "missing-source-facts",
+        "expectedError": "missing_source_facts",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "missing_source_facts",
+            "where": "prefixes[0]",
+            "message": "Recorder did not retain actual Preview source facts"
+          }
+        ],
+        "mutatedEvidenceDigest": "4f56af7dfd586917353c9d0d1dbdbf9160b2f6fd335180ed1fbf547135810539"
+      },
+      {
+        "case": "changed-retained-source-fact",
+        "expectedError": "retained_source_fact",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "retained_source_fact",
+            "where": "prefixes[0]",
+            "message": "Retained model lacks its actual last source fact and matching restoration"
+          }
+        ],
+        "mutatedEvidenceDigest": "cc335bbc4d557053edc4c8c0b712a9bf4f048129f5d63a1ab4c413f5638f566b"
+      },
+      {
+        "case": "missing-selected-envelope",
+        "expectedError": "acquired_source_fact",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "acquired_source_fact",
+            "where": "prefixes[0]",
+            "message": "Retained selected source envelopes differ from actual records or contain foreign records"
+          }
+        ],
+        "mutatedEvidenceDigest": "b6dd245a83051a2e00a4f2f969804695695420d658c548be53a5e1105e2f8378"
+      },
+      {
+        "case": "record-on-foreign-physical-return",
+        "expectedError": "foreign_record",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "foreign_record",
+            "where": "prefixes[0]",
+            "message": "A foreign physical return acquired a Preview record"
+          }
+        ],
+        "mutatedEvidenceDigest": "c2b6a6c597f64cef3bb355beddea6e6a6a3becd130c88e94b4c69cc7f6861385"
+      },
+      {
+        "case": "missing-actual-source-restore-with-renumbered-events",
+        "expectedError": "source_restore_coverage",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "source_restore_coverage",
+            "where": "prefixes[0]",
+            "message": "Each retained-model physical return needs its actual source checkpoint restoration"
+          }
+        ],
+        "mutatedEvidenceDigest": "8a54a3bc99f1e3c9c220bf1053a20eea1cb01e89b08bd80d6065441d3a9d8003"
+      },
+      {
+        "case": "missing-actual-native-restore-with-renumbered-events",
+        "expectedError": "prefix_actual_restore",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "prefix_actual_restore",
+            "where": "prefixes[0]",
+            "message": "No actual final native restore of the retained checkpoint"
+          }
+        ],
+        "mutatedEvidenceDigest": "39c0aed97a1f94c4602c2740cf1935487fd152b3afed3f6999cc89d5e2bc4f4a"
+      }
+    ],
+    "mutations": 20,
+    "rejected": 20,
+    "expectedErrorsObserved": 20,
+    "scope": "Detached synthetic evidence mutations only; no capture rewrite, provider import, game or parity execution."
+  },
+  "inputsUnchanged": true,
+  "totals": {
+    "prefixes": 3,
+    "selectedPrefixes": 3,
+    "foreignPrefixes": 0,
+    "physicalReturns": 4,
+    "selectedReturns": 4,
+    "foreignReturns": 0,
+    "selectedRecords": 4,
+    "passiveReturns": 0,
+    "events": 25,
+    "proposalCalls": 3,
+    "actualRestores": 10,
+    "nativeRestores": 6,
+    "sourceRestores": 4,
+    "sourceFactsRetainedPrefixes": 3,
+    "acquiredSourceFacts": 4,
+    "coldPrefixes": 0,
+    "completedEventCursors": 3,
+    "cases": 1,
+    "passedCases": 1
+  }
+}
