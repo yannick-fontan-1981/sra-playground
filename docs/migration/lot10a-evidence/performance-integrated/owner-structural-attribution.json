@@ -1,0 +1,2485 @@
+{
+  "schema": "logos-engine.lot10a-owner-cost-structural-attribution.v1",
+  "status": "qualified_functional_structure",
+  "startedAt": "2026-11-11T00:12:57.135Z",
+  "checks": [
+    {
+      "name": "immutable_capture_provenance_before_measurement",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:warmup:0",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:warmup:1",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:warmup:2",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:warmup:3",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:warmup:4",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:warmup:5",
+      "passed": true
+    },
+    {
+      "name": "shape:STCK:warmup",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:0",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:1",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:2",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:3",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:4",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:5",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:6",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:7",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:8",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:9",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:10",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:11",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:12",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:13",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:14",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:15",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:16",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:17",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:18",
+      "passed": true
+    },
+    {
+      "name": "shape:STCK:measured",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:warmup:0",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:warmup:1",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:warmup:2",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:warmup:3",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:warmup:4",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:warmup:5",
+      "passed": true
+    },
+    {
+      "name": "shape:SMLP:warmup",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:0",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:1",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:2",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:3",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:4",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:5",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:6",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:7",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:8",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:9",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:10",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:11",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:12",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:13",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:14",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:15",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:16",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:17",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:18",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:19",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:20",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:21",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:22",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:23",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:24",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:25",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:26",
+      "passed": true
+    },
+    {
+      "name": "shape:SMLP:measured",
+      "passed": true
+    },
+    {
+      "name": "all_inputs_unchanged_and_no_window_started",
+      "passed": true
+    }
+  ],
+  "nodeAttributions": [
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 27,
+      "nodeId": "family_state:public_axial_question",
+      "kind": "family_state",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "20835884ad5b7454adaf3f51deda49cda50c804d433824855fb6505990d2556c",
+      "category": "axial_owner_state",
+      "sourceStateSha256": "65084d3a21c540f13fcd87520bac75604983357077c77d5037deeac6b87bd080",
+      "epoch": null,
+      "retainedRotations": [],
+      "portableMethodCount": 0
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 28,
+      "nodeId": "family_activation:public_axial_question",
+      "kind": "family_activation",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "8d7353b87628249aa3c01b25815bd740c248abc679d6645bea48fff155cb7853",
+      "category": "axial_installation"
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 125,
+      "nodeId": "program:v6.axial_question.choose",
+      "kind": "program",
+      "revision": 1,
+      "cause": {
+        "statement": "program.install",
+        "step": "native_store",
+        "workflow": "v6.axial_question.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "7fbeb827640198ab4402a3490a54d1e18d5d07dbf3fc4002432dff1fa3145cd0",
+      "category": "axial_installation"
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 1,
+      "request": "advance",
+      "requestSequence": 1,
+      "deltaSequence": 246,
+      "nodeId": "family_state:public_axial_question",
+      "kind": "family_state",
+      "revision": 2,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:1"
+      ],
+      "nodeSha256": "db73a128719289bda368f86b275d4458f2764100596e9726c9db6226e0085a98",
+      "category": "axial_owner_state",
+      "sourceStateSha256": "b02cd6fe982fab9992733cad064375d068c13ef663715b9648500e0598a9593c",
+      "epoch": 1,
+      "retainedRotations": [],
+      "portableMethodCount": 0
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 3,
+      "request": "advance",
+      "requestSequence": 2,
+      "deltaSequence": 358,
+      "nodeId": "family_state:public_axial_question",
+      "kind": "family_state",
+      "revision": 3,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:2"
+      ],
+      "nodeSha256": "996976a900313c260645bf892ea284ad4b45c72bccdf5a98e7a77db5419e61c3",
+      "category": "axial_owner_state",
+      "sourceStateSha256": "b02cd6fe982fab9992733cad064375d068c13ef663715b9648500e0598a9593c",
+      "epoch": 1,
+      "retainedRotations": [],
+      "portableMethodCount": 0
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 5,
+      "request": "advance",
+      "requestSequence": 3,
+      "deltaSequence": 466,
+      "nodeId": "family_state:public_axial_question",
+      "kind": "family_state",
+      "revision": 4,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:3"
+      ],
+      "nodeSha256": "a29bf2966d37a40992a45c7937c336e46298f4cfbb7af0a608f2d9694acb00ba",
+      "category": "axial_owner_state",
+      "sourceStateSha256": "b02cd6fe982fab9992733cad064375d068c13ef663715b9648500e0598a9593c",
+      "epoch": 1,
+      "retainedRotations": [],
+      "portableMethodCount": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 27,
+      "nodeId": "family_state:public_axial_question",
+      "kind": "family_state",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "b35685a944477da55b142ea9cba469e280322eb530bd4b5b2e62eac7a8a83fe9",
+      "category": "axial_owner_state",
+      "sourceStateSha256": "65084d3a21c540f13fcd87520bac75604983357077c77d5037deeac6b87bd080",
+      "epoch": null,
+      "retainedRotations": [],
+      "portableMethodCount": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 28,
+      "nodeId": "family_activation:public_axial_question",
+      "kind": "family_activation",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "ef10cd7564c332cd5f0b7bc5a5d74bc2270f02b2a9ba1a79a9b14dcbb77b337d",
+      "category": "axial_installation"
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 125,
+      "nodeId": "program:v6.axial_question.choose",
+      "kind": "program",
+      "revision": 1,
+      "cause": {
+        "statement": "program.install",
+        "step": "native_store",
+        "workflow": "v6.axial_question.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "562951754882bf134cd16768647ebf12c1062cc5b8ca1f882289d59e200ef5bb",
+      "category": "axial_installation"
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 1,
+      "request": "advance",
+      "requestSequence": 1,
+      "deltaSequence": 246,
+      "nodeId": "family_state:public_axial_question",
+      "kind": "family_state",
+      "revision": 2,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:1"
+      ],
+      "nodeSha256": "feff19e740e5a13d4ebd32bd8afcfcf7bda9fda6fb1da41a3dbd33eaf44c3673",
+      "category": "axial_owner_state",
+      "sourceStateSha256": "b02cd6fe982fab9992733cad064375d068c13ef663715b9648500e0598a9593c",
+      "epoch": 1,
+      "retainedRotations": [],
+      "portableMethodCount": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 3,
+      "request": "advance",
+      "requestSequence": 2,
+      "deltaSequence": 358,
+      "nodeId": "family_state:public_axial_question",
+      "kind": "family_state",
+      "revision": 3,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:2"
+      ],
+      "nodeSha256": "ec79e150a6ce2e297bdbe0028b12f006d5025dcbb069b6c2c2015bec443c12e8",
+      "category": "axial_owner_state",
+      "sourceStateSha256": "b02cd6fe982fab9992733cad064375d068c13ef663715b9648500e0598a9593c",
+      "epoch": 1,
+      "retainedRotations": [],
+      "portableMethodCount": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 5,
+      "request": "advance",
+      "requestSequence": 3,
+      "deltaSequence": 466,
+      "nodeId": "family_state:public_axial_question",
+      "kind": "family_state",
+      "revision": 4,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:3"
+      ],
+      "nodeSha256": "a573573610d8f31a1d7cd911306c07d0e9aeaf6855e8bc3c8d7404bceed654f3",
+      "category": "axial_owner_state",
+      "sourceStateSha256": "b02cd6fe982fab9992733cad064375d068c13ef663715b9648500e0598a9593c",
+      "epoch": 1,
+      "retainedRotations": [],
+      "portableMethodCount": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 7,
+      "request": "advance",
+      "requestSequence": 4,
+      "deltaSequence": 585,
+      "nodeId": "family_state:public_axial_question",
+      "kind": "family_state",
+      "revision": 5,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:4"
+      ],
+      "nodeSha256": "9e8bb802102e8e86351d30546025f75767d40c9414f6ed595b20e60e500c719c",
+      "category": "axial_owner_state",
+      "sourceStateSha256": "984ea5cc84f8eca8d36d64bc3fd1832464786e87e4936b86eb075dca89eed9e8",
+      "epoch": 2,
+      "retainedRotations": [],
+      "portableMethodCount": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 13,
+      "request": "advance",
+      "requestSequence": 9,
+      "deltaSequence": 754,
+      "nodeId": "family_state:public_axial_question",
+      "kind": "family_state",
+      "revision": 6,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:5"
+      ],
+      "nodeSha256": "7f88f6f4c4f9bbd0bc4057a21b138f9174036dc0f0b2f6c62cae9734689ea82b",
+      "category": "axial_owner_state",
+      "sourceStateSha256": "984ea5cc84f8eca8d36d64bc3fd1832464786e87e4936b86eb075dca89eed9e8",
+      "epoch": 2,
+      "retainedRotations": [],
+      "portableMethodCount": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 15,
+      "request": "advance",
+      "requestSequence": 10,
+      "deltaSequence": 868,
+      "nodeId": "family_state:public_axial_question",
+      "kind": "family_state",
+      "revision": 7,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:10"
+      ],
+      "nodeSha256": "f2cba61e02a64b878523c6681293dda19d264c2540719d5473e5b481a100c94e",
+      "category": "axial_owner_state",
+      "sourceStateSha256": "984ea5cc84f8eca8d36d64bc3fd1832464786e87e4936b86eb075dca89eed9e8",
+      "epoch": 2,
+      "retainedRotations": [],
+      "portableMethodCount": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 27,
+      "nodeId": "family_state:public_axial_question",
+      "kind": "family_state",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "3efd8010ce314ae45941d50e5f06244f4feccf595fe16c0442cde8399e96c390",
+      "category": "axial_owner_state",
+      "sourceStateSha256": "65084d3a21c540f13fcd87520bac75604983357077c77d5037deeac6b87bd080",
+      "epoch": null,
+      "retainedRotations": [],
+      "portableMethodCount": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 28,
+      "nodeId": "family_activation:public_axial_question",
+      "kind": "family_activation",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "e01147ae9cb94ed4cd5240b663f46c870396938751c3debbe1488d32593ca50d",
+      "category": "axial_installation"
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 125,
+      "nodeId": "program:v6.axial_question.choose",
+      "kind": "program",
+      "revision": 1,
+      "cause": {
+        "statement": "program.install",
+        "step": "native_store",
+        "workflow": "v6.axial_question.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "8f87aa9271c28c06cfd9587edee64e7d90cda950eb599ce57aba31b592531c57",
+      "category": "axial_installation"
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 189,
+      "nodeId": "family_state:public_axial_question",
+      "kind": "family_state",
+      "revision": 2,
+      "cause": {
+        "statement": "caller.prepare",
+        "step": "selection",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "2e7788c7b37a02bd1dde603826a1b569e0237c4f4c4f0e871bc8014ef24d0204",
+      "category": "axial_owner_state",
+      "sourceStateSha256": "b02cd6fe982fab9992733cad064375d068c13ef663715b9648500e0598a9593c",
+      "epoch": 1,
+      "retainedRotations": [],
+      "portableMethodCount": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 1,
+      "request": "advance",
+      "requestSequence": 1,
+      "deltaSequence": 261,
+      "nodeId": "family_state:public_axial_question",
+      "kind": "family_state",
+      "revision": 3,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:1"
+      ],
+      "nodeSha256": "b5cf81d136363f653521a68ee75956d9452b02a784702f61e8243f3540700d4f",
+      "category": "axial_owner_state",
+      "sourceStateSha256": "b02cd6fe982fab9992733cad064375d068c13ef663715b9648500e0598a9593c",
+      "epoch": 1,
+      "retainedRotations": [],
+      "portableMethodCount": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 3,
+      "request": "advance",
+      "requestSequence": 2,
+      "deltaSequence": 367,
+      "nodeId": "family_state:public_axial_question",
+      "kind": "family_state",
+      "revision": 4,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:2"
+      ],
+      "nodeSha256": "0adb7e44997440e8a6a7768d2d6d6acf91f03cb58495ce559b05ac1dbb992eaf",
+      "category": "axial_owner_state",
+      "sourceStateSha256": "b02cd6fe982fab9992733cad064375d068c13ef663715b9648500e0598a9593c",
+      "epoch": 1,
+      "retainedRotations": [],
+      "portableMethodCount": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 5,
+      "request": "advance",
+      "requestSequence": 3,
+      "deltaSequence": 473,
+      "nodeId": "family_state:public_axial_question",
+      "kind": "family_state",
+      "revision": 5,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:3"
+      ],
+      "nodeSha256": "8c1c3013ca73a2e0b99d7379a66b7d5cd1cb3930ecf8c3aa2de2c1554193b1c6",
+      "category": "axial_owner_state",
+      "sourceStateSha256": "b02cd6fe982fab9992733cad064375d068c13ef663715b9648500e0598a9593c",
+      "epoch": 1,
+      "retainedRotations": [],
+      "portableMethodCount": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 27,
+      "nodeId": "family_state:public_axial_question",
+      "kind": "family_state",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "bbddcd5207fbb48b18fe8068e63c4c80ce174b0f4447285b694328f849211242",
+      "category": "axial_owner_state",
+      "sourceStateSha256": "65084d3a21c540f13fcd87520bac75604983357077c77d5037deeac6b87bd080",
+      "epoch": null,
+      "retainedRotations": [],
+      "portableMethodCount": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 28,
+      "nodeId": "family_activation:public_axial_question",
+      "kind": "family_activation",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "d0fc45dafa74bc22ca3f12b391780182ecc76ddb0d92ee981eb65359432aa0ea",
+      "category": "axial_installation"
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 125,
+      "nodeId": "program:v6.axial_question.choose",
+      "kind": "program",
+      "revision": 1,
+      "cause": {
+        "statement": "program.install",
+        "step": "native_store",
+        "workflow": "v6.axial_question.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "58ae869ba7fddb01f51acb1543932522e23a0e0ab6a0884dd46578e2d7e1bbdf",
+      "category": "axial_installation"
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 189,
+      "nodeId": "family_state:public_axial_question",
+      "kind": "family_state",
+      "revision": 2,
+      "cause": {
+        "statement": "caller.prepare",
+        "step": "selection",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "3799f47d3a2457f376fc525d3775ca7e30da6e5a834ebbdbb754ea1e6bceb9cd",
+      "category": "axial_owner_state",
+      "sourceStateSha256": "b02cd6fe982fab9992733cad064375d068c13ef663715b9648500e0598a9593c",
+      "epoch": 1,
+      "retainedRotations": [],
+      "portableMethodCount": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 1,
+      "request": "advance",
+      "requestSequence": 1,
+      "deltaSequence": 261,
+      "nodeId": "family_state:public_axial_question",
+      "kind": "family_state",
+      "revision": 3,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:1"
+      ],
+      "nodeSha256": "46953af9200569f803124a96da202e5d2bebdde010c20ddab46df3952136d205",
+      "category": "axial_owner_state",
+      "sourceStateSha256": "b02cd6fe982fab9992733cad064375d068c13ef663715b9648500e0598a9593c",
+      "epoch": 1,
+      "retainedRotations": [],
+      "portableMethodCount": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 3,
+      "request": "advance",
+      "requestSequence": 2,
+      "deltaSequence": 367,
+      "nodeId": "family_state:public_axial_question",
+      "kind": "family_state",
+      "revision": 4,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:2"
+      ],
+      "nodeSha256": "5a39310a56d2a1149b7bab42821aa90bfd574548e9bf99c5df978bf4a8f80c0b",
+      "category": "axial_owner_state",
+      "sourceStateSha256": "b02cd6fe982fab9992733cad064375d068c13ef663715b9648500e0598a9593c",
+      "epoch": 1,
+      "retainedRotations": [],
+      "portableMethodCount": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 5,
+      "request": "advance",
+      "requestSequence": 3,
+      "deltaSequence": 473,
+      "nodeId": "family_state:public_axial_question",
+      "kind": "family_state",
+      "revision": 5,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:3"
+      ],
+      "nodeSha256": "ccdf5dc9a44610f63095a20f0a73cb2a9ef4e87418d646ecfd51e860747f2ede",
+      "category": "axial_owner_state",
+      "sourceStateSha256": "b02cd6fe982fab9992733cad064375d068c13ef663715b9648500e0598a9593c",
+      "epoch": 1,
+      "retainedRotations": [],
+      "portableMethodCount": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 7,
+      "request": "advance",
+      "requestSequence": 4,
+      "deltaSequence": 593,
+      "nodeId": "family_state:public_axial_question",
+      "kind": "family_state",
+      "revision": 6,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:4"
+      ],
+      "nodeSha256": "81c1d965d72a7e4fd0d30b559b59b9e9e528e9b127fc10469c14219b8adde05d",
+      "category": "axial_owner_state",
+      "sourceStateSha256": "984ea5cc84f8eca8d36d64bc3fd1832464786e87e4936b86eb075dca89eed9e8",
+      "epoch": 2,
+      "retainedRotations": [],
+      "portableMethodCount": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 11,
+      "request": "advance",
+      "requestSequence": 7,
+      "deltaSequence": 727,
+      "nodeId": "family_state:public_axial_question",
+      "kind": "family_state",
+      "revision": 7,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:5"
+      ],
+      "nodeSha256": "5f38be663d8786ee5098c8645f33baf13ff6b33a373276a0c1d6d7fcae49e80c",
+      "category": "axial_owner_state",
+      "sourceStateSha256": "984ea5cc84f8eca8d36d64bc3fd1832464786e87e4936b86eb075dca89eed9e8",
+      "epoch": 2,
+      "retainedRotations": [],
+      "portableMethodCount": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 13,
+      "request": "advance",
+      "requestSequence": 8,
+      "deltaSequence": 843,
+      "nodeId": "family_state:public_axial_question",
+      "kind": "family_state",
+      "revision": 8,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:8"
+      ],
+      "nodeSha256": "5306e339a5345f1ee1abfe46060762e25d478be6aa5113b4fbc1b114a926794a",
+      "category": "axial_owner_state",
+      "sourceStateSha256": "60fed7958dde647d06e67753c1059fe9ebbfa0a84d24ec7e9da02547e87725a5",
+      "epoch": 3,
+      "retainedRotations": [],
+      "portableMethodCount": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 15,
+      "request": "advance",
+      "requestSequence": 9,
+      "deltaSequence": 956,
+      "nodeId": "family_state:public_axial_question",
+      "kind": "family_state",
+      "revision": 9,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:9"
+      ],
+      "nodeSha256": "1cc580b3f2cbf3331602db064fe6e76030c5165627fb286561ee5a1a77d5ff74",
+      "category": "axial_owner_state",
+      "sourceStateSha256": "60fed7958dde647d06e67753c1059fe9ebbfa0a84d24ec7e9da02547e87725a5",
+      "epoch": 3,
+      "retainedRotations": [],
+      "portableMethodCount": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 18,
+      "request": "advance",
+      "requestSequence": 11,
+      "deltaSequence": 1081,
+      "nodeId": "family_state:public_axial_question",
+      "kind": "family_state",
+      "revision": 10,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:10"
+      ],
+      "nodeSha256": "0bbbcff84efe28a9c455e4d29bc773f2b9a66d520e3632b87a8eb0bc2464f7d1",
+      "category": "axial_owner_state",
+      "sourceStateSha256": "60fed7958dde647d06e67753c1059fe9ebbfa0a84d24ec7e9da02547e87725a5",
+      "epoch": 3,
+      "retainedRotations": [],
+      "portableMethodCount": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 23,
+      "request": "advance",
+      "requestSequence": 15,
+      "deltaSequence": 1231,
+      "nodeId": "family_state:public_axial_question",
+      "kind": "family_state",
+      "revision": 11,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:12"
+      ],
+      "nodeSha256": "1e2f17d2e378964a1909b1fc2c9b4148f5e3492c8066fcdcbf05f977cf31a8a6",
+      "category": "axial_owner_state",
+      "sourceStateSha256": "60fed7958dde647d06e67753c1059fe9ebbfa0a84d24ec7e9da02547e87725a5",
+      "epoch": 3,
+      "retainedRotations": [],
+      "portableMethodCount": 0
+    }
+  ],
+  "points": [
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "sequence": 0,
+      "baselineNodeCount": 166,
+      "candidateNodeCount": 169,
+      "baselineGraphRevision": 175,
+      "candidateGraphRevision": 178,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 3,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 1,
+      "request": "advance",
+      "sequence": 1,
+      "baselineNodeCount": 194,
+      "candidateNodeCount": 197,
+      "baselineGraphRevision": 281,
+      "candidateGraphRevision": 285,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 4,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 2,
+      "request": "resume",
+      "sequence": 1,
+      "baselineNodeCount": 196,
+      "candidateNodeCount": 199,
+      "baselineGraphRevision": 291,
+      "candidateGraphRevision": 295,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 4,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 3,
+      "request": "advance",
+      "sequence": 2,
+      "baselineNodeCount": 218,
+      "candidateNodeCount": 221,
+      "baselineGraphRevision": 394,
+      "candidateGraphRevision": 399,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 5,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 4,
+      "request": "resume",
+      "sequence": 2,
+      "baselineNodeCount": 220,
+      "candidateNodeCount": 223,
+      "baselineGraphRevision": 404,
+      "candidateGraphRevision": 409,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 5,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 5,
+      "request": "advance",
+      "sequence": 3,
+      "baselineNodeCount": 242,
+      "candidateNodeCount": 245,
+      "baselineGraphRevision": 502,
+      "candidateGraphRevision": 508,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 6,
+      "officialBoundarySourceCalls": [
+        2
+      ]
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "sequence": 0,
+      "baselineNodeCount": 166,
+      "candidateNodeCount": 169,
+      "baselineGraphRevision": 175,
+      "candidateGraphRevision": 178,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 3,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 1,
+      "request": "advance",
+      "sequence": 1,
+      "baselineNodeCount": 194,
+      "candidateNodeCount": 197,
+      "baselineGraphRevision": 281,
+      "candidateGraphRevision": 285,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 4,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 2,
+      "request": "resume",
+      "sequence": 1,
+      "baselineNodeCount": 196,
+      "candidateNodeCount": 199,
+      "baselineGraphRevision": 291,
+      "candidateGraphRevision": 295,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 4,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 3,
+      "request": "advance",
+      "sequence": 2,
+      "baselineNodeCount": 218,
+      "candidateNodeCount": 221,
+      "baselineGraphRevision": 394,
+      "candidateGraphRevision": 399,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 5,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 4,
+      "request": "resume",
+      "sequence": 2,
+      "baselineNodeCount": 220,
+      "candidateNodeCount": 223,
+      "baselineGraphRevision": 404,
+      "candidateGraphRevision": 409,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 5,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 5,
+      "request": "advance",
+      "sequence": 3,
+      "baselineNodeCount": 242,
+      "candidateNodeCount": 245,
+      "baselineGraphRevision": 502,
+      "candidateGraphRevision": 508,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 6,
+      "officialBoundarySourceCalls": [
+        2
+      ]
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 6,
+      "request": "resume",
+      "sequence": 3,
+      "baselineNodeCount": 244,
+      "candidateNodeCount": 247,
+      "baselineGraphRevision": 514,
+      "candidateGraphRevision": 520,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 6,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 7,
+      "request": "advance",
+      "sequence": 4,
+      "baselineNodeCount": 266,
+      "candidateNodeCount": 269,
+      "baselineGraphRevision": 617,
+      "candidateGraphRevision": 624,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 7,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 8,
+      "request": "resume",
+      "sequence": 4,
+      "baselineNodeCount": 268,
+      "candidateNodeCount": 271,
+      "baselineGraphRevision": 628,
+      "candidateGraphRevision": 635,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 7,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 9,
+      "request": "advance",
+      "sequence": 5,
+      "baselineNodeCount": 268,
+      "candidateNodeCount": 271,
+      "baselineGraphRevision": 628,
+      "candidateGraphRevision": 635,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 7,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 10,
+      "request": "advance",
+      "sequence": 6,
+      "baselineNodeCount": 268,
+      "candidateNodeCount": 271,
+      "baselineGraphRevision": 628,
+      "candidateGraphRevision": 635,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 7,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 11,
+      "request": "advance",
+      "sequence": 7,
+      "baselineNodeCount": 268,
+      "candidateNodeCount": 271,
+      "baselineGraphRevision": 628,
+      "candidateGraphRevision": 635,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 7,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 12,
+      "request": "advance",
+      "sequence": 8,
+      "baselineNodeCount": 268,
+      "candidateNodeCount": 271,
+      "baselineGraphRevision": 628,
+      "candidateGraphRevision": 635,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 7,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 13,
+      "request": "advance",
+      "sequence": 9,
+      "baselineNodeCount": 347,
+      "candidateNodeCount": 350,
+      "baselineGraphRevision": 789,
+      "candidateGraphRevision": 797,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 8,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 14,
+      "request": "resume",
+      "sequence": 9,
+      "baselineNodeCount": 349,
+      "candidateNodeCount": 352,
+      "baselineGraphRevision": 799,
+      "candidateGraphRevision": 807,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 8,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 15,
+      "request": "advance",
+      "sequence": 10,
+      "baselineNodeCount": 369,
+      "candidateNodeCount": 372,
+      "baselineGraphRevision": 900,
+      "candidateGraphRevision": 909,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 9,
+      "officialBoundarySourceCalls": [
+        9
+      ]
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 16,
+      "request": "inspect",
+      "sequence": 10,
+      "baselineNodeCount": 369,
+      "candidateNodeCount": 372,
+      "baselineGraphRevision": 900,
+      "candidateGraphRevision": 909,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 9,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 17,
+      "request": "inspect",
+      "sequence": 10,
+      "baselineNodeCount": 369,
+      "candidateNodeCount": 372,
+      "baselineGraphRevision": 900,
+      "candidateGraphRevision": 909,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 9,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 18,
+      "request": "inspect",
+      "sequence": 10,
+      "baselineNodeCount": 369,
+      "candidateNodeCount": 372,
+      "baselineGraphRevision": 900,
+      "candidateGraphRevision": 909,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 9,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "sequence": 0,
+      "baselineNodeCount": 171,
+      "candidateNodeCount": 174,
+      "baselineGraphRevision": 202,
+      "candidateGraphRevision": 206,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 4,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 1,
+      "request": "advance",
+      "sequence": 1,
+      "baselineNodeCount": 189,
+      "candidateNodeCount": 192,
+      "baselineGraphRevision": 295,
+      "candidateGraphRevision": 300,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 5,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 2,
+      "request": "resume",
+      "sequence": 1,
+      "baselineNodeCount": 191,
+      "candidateNodeCount": 194,
+      "baselineGraphRevision": 305,
+      "candidateGraphRevision": 310,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 5,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 3,
+      "request": "advance",
+      "sequence": 2,
+      "baselineNodeCount": 206,
+      "candidateNodeCount": 209,
+      "baselineGraphRevision": 400,
+      "candidateGraphRevision": 406,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 6,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 4,
+      "request": "resume",
+      "sequence": 2,
+      "baselineNodeCount": 208,
+      "candidateNodeCount": 211,
+      "baselineGraphRevision": 410,
+      "candidateGraphRevision": 416,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 6,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 5,
+      "request": "advance",
+      "sequence": 3,
+      "baselineNodeCount": 233,
+      "candidateNodeCount": 236,
+      "baselineGraphRevision": 511,
+      "candidateGraphRevision": 518,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 7,
+      "officialBoundarySourceCalls": [
+        2
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "sequence": 0,
+      "baselineNodeCount": 171,
+      "candidateNodeCount": 174,
+      "baselineGraphRevision": 202,
+      "candidateGraphRevision": 206,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 4,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 1,
+      "request": "advance",
+      "sequence": 1,
+      "baselineNodeCount": 189,
+      "candidateNodeCount": 192,
+      "baselineGraphRevision": 295,
+      "candidateGraphRevision": 300,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 5,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 2,
+      "request": "resume",
+      "sequence": 1,
+      "baselineNodeCount": 191,
+      "candidateNodeCount": 194,
+      "baselineGraphRevision": 305,
+      "candidateGraphRevision": 310,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 5,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 3,
+      "request": "advance",
+      "sequence": 2,
+      "baselineNodeCount": 206,
+      "candidateNodeCount": 209,
+      "baselineGraphRevision": 400,
+      "candidateGraphRevision": 406,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 6,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 4,
+      "request": "resume",
+      "sequence": 2,
+      "baselineNodeCount": 208,
+      "candidateNodeCount": 211,
+      "baselineGraphRevision": 410,
+      "candidateGraphRevision": 416,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 6,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 5,
+      "request": "advance",
+      "sequence": 3,
+      "baselineNodeCount": 233,
+      "candidateNodeCount": 236,
+      "baselineGraphRevision": 511,
+      "candidateGraphRevision": 518,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 7,
+      "officialBoundarySourceCalls": [
+        2
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 6,
+      "request": "resume",
+      "sequence": 3,
+      "baselineNodeCount": 235,
+      "candidateNodeCount": 238,
+      "baselineGraphRevision": 531,
+      "candidateGraphRevision": 538,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 7,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 7,
+      "request": "advance",
+      "sequence": 4,
+      "baselineNodeCount": 249,
+      "candidateNodeCount": 252,
+      "baselineGraphRevision": 624,
+      "candidateGraphRevision": 632,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 8,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 8,
+      "request": "resume",
+      "sequence": 4,
+      "baselineNodeCount": 251,
+      "candidateNodeCount": 254,
+      "baselineGraphRevision": 634,
+      "candidateGraphRevision": 642,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 8,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 9,
+      "request": "advance",
+      "sequence": 5,
+      "baselineNodeCount": 251,
+      "candidateNodeCount": 254,
+      "baselineGraphRevision": 634,
+      "candidateGraphRevision": 642,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 8,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 10,
+      "request": "advance",
+      "sequence": 6,
+      "baselineNodeCount": 251,
+      "candidateNodeCount": 254,
+      "baselineGraphRevision": 634,
+      "candidateGraphRevision": 642,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 8,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 11,
+      "request": "advance",
+      "sequence": 7,
+      "baselineNodeCount": 298,
+      "candidateNodeCount": 301,
+      "baselineGraphRevision": 762,
+      "candidateGraphRevision": 771,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 9,
+      "officialBoundarySourceCalls": [
+        6
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 12,
+      "request": "resume",
+      "sequence": 7,
+      "baselineNodeCount": 300,
+      "candidateNodeCount": 303,
+      "baselineGraphRevision": 773,
+      "candidateGraphRevision": 782,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 9,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 13,
+      "request": "advance",
+      "sequence": 8,
+      "baselineNodeCount": 319,
+      "candidateNodeCount": 322,
+      "baselineGraphRevision": 872,
+      "candidateGraphRevision": 882,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 10,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 14,
+      "request": "resume",
+      "sequence": 8,
+      "baselineNodeCount": 321,
+      "candidateNodeCount": 324,
+      "baselineGraphRevision": 889,
+      "candidateGraphRevision": 899,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 10,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 15,
+      "request": "advance",
+      "sequence": 9,
+      "baselineNodeCount": 340,
+      "candidateNodeCount": 343,
+      "baselineGraphRevision": 986,
+      "candidateGraphRevision": 997,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 11,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 16,
+      "request": "resume",
+      "sequence": 9,
+      "baselineNodeCount": 342,
+      "candidateNodeCount": 345,
+      "baselineGraphRevision": 996,
+      "candidateGraphRevision": 1007,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 11,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 17,
+      "request": "advance",
+      "sequence": 10,
+      "baselineNodeCount": 342,
+      "candidateNodeCount": 345,
+      "baselineGraphRevision": 996,
+      "candidateGraphRevision": 1007,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 11,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 18,
+      "request": "advance",
+      "sequence": 11,
+      "baselineNodeCount": 376,
+      "candidateNodeCount": 379,
+      "baselineGraphRevision": 1110,
+      "candidateGraphRevision": 1122,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 12,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 19,
+      "request": "resume",
+      "sequence": 11,
+      "baselineNodeCount": 378,
+      "candidateNodeCount": 381,
+      "baselineGraphRevision": 1120,
+      "candidateGraphRevision": 1132,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 12,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 20,
+      "request": "advance",
+      "sequence": 12,
+      "baselineNodeCount": 378,
+      "candidateNodeCount": 381,
+      "baselineGraphRevision": 1120,
+      "candidateGraphRevision": 1132,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 12,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 21,
+      "request": "advance",
+      "sequence": 13,
+      "baselineNodeCount": 378,
+      "candidateNodeCount": 381,
+      "baselineGraphRevision": 1120,
+      "candidateGraphRevision": 1132,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 12,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 22,
+      "request": "advance",
+      "sequence": 14,
+      "baselineNodeCount": 378,
+      "candidateNodeCount": 381,
+      "baselineGraphRevision": 1120,
+      "candidateGraphRevision": 1132,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 12,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 23,
+      "request": "advance",
+      "sequence": 15,
+      "baselineNodeCount": 438,
+      "candidateNodeCount": 441,
+      "baselineGraphRevision": 1261,
+      "candidateGraphRevision": 1274,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 13,
+      "officialBoundarySourceCalls": [
+        14
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 24,
+      "request": "inspect",
+      "sequence": 15,
+      "baselineNodeCount": 438,
+      "candidateNodeCount": 441,
+      "baselineGraphRevision": 1261,
+      "candidateGraphRevision": 1274,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 13,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 25,
+      "request": "inspect",
+      "sequence": 15,
+      "baselineNodeCount": 438,
+      "candidateNodeCount": 441,
+      "baselineGraphRevision": 1261,
+      "candidateGraphRevision": 1274,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 13,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 26,
+      "request": "inspect",
+      "sequence": 15,
+      "baselineNodeCount": 438,
+      "candidateNodeCount": 441,
+      "baselineGraphRevision": 1261,
+      "candidateGraphRevision": 1274,
+      "addedNodeIds": [
+        "family_activation:public_axial_question",
+        "family_state:public_axial_question",
+        "program:v6.axial_question.choose"
+      ],
+      "attributedCumulativeDeltas": 13,
+      "officialBoundarySourceCalls": []
+    }
+  ],
+  "failures": [],
+  "commandBoundaryProjections": [
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "sourceCallIndex": 2,
+      "action": 3,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "rule": "V6AgentService.commandFromNative data object spread; source omission retained"
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "sourceCallIndex": 2,
+      "action": 3,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "rule": "V6AgentService.commandFromNative data object spread; source omission retained"
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "sourceCallIndex": 8,
+      "action": 9,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "rule": "V6AgentService.commandFromNative data object spread; source omission retained"
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "sourceCallIndex": 9,
+      "action": 10,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "rule": "V6AgentService.commandFromNative data object spread; source omission retained"
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "sourceCallIndex": 0,
+      "action": 1,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "rule": "V6AgentService.commandFromNative data object spread; source omission retained"
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "sourceCallIndex": 2,
+      "action": 3,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "rule": "V6AgentService.commandFromNative data object spread; source omission retained"
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "sourceCallIndex": 0,
+      "action": 1,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "rule": "V6AgentService.commandFromNative data object spread; source omission retained"
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "sourceCallIndex": 2,
+      "action": 3,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "rule": "V6AgentService.commandFromNative data object spread; source omission retained"
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "sourceCallIndex": 3,
+      "action": 4,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "rule": "V6AgentService.commandFromNative data object spread; source omission retained"
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "sourceCallIndex": 6,
+      "action": 7,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "rule": "V6AgentService.commandFromNative data object spread; source omission retained"
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "sourceCallIndex": 8,
+      "action": 9,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "rule": "V6AgentService.commandFromNative data object spread; source omission retained"
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "sourceCallIndex": 10,
+      "action": 11,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "rule": "V6AgentService.commandFromNative data object spread; source omission retained"
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "sourceCallIndex": 14,
+      "action": 15,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "rule": "V6AgentService.commandFromNative data object spread; source omission retained"
+    }
+  ],
+  "generator": {
+    "path": "docs/migration/lot10a-evidence/qualify-cost-owner-graphs.mjs",
+    "bytes": 41354,
+    "sha256": "872e3216b18936cb54bbcab4095d701364691f59ff70f94244ac44511f3db1dc"
+  },
+  "nativeDigests": {
+    "baseline": "ea25603262a7473e5ab9994d2e2e86dd64a8291dd7c1dc18ede4d1f443cdc53b",
+    "candidate": "be11e761de3c0f3c7d50d10da47be9e0d7b4fc9c5b7d5002cc9272ffce85645a"
+  },
+  "recordedAt": "2026-11-11T00:13:10.646Z",
+  "inputs": [
+    {
+      "path": "docs/migration/lot10a-evidence/qualify-cost-owner-graphs.mjs",
+      "bytes": 41354,
+      "sha256": "872e3216b18936cb54bbcab4095d701364691f59ff70f94244ac44511f3db1dc"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/capture-cost-owner-graphs.mjs",
+      "bytes": 20087,
+      "sha256": "cdf7ab7f8200817011a75762afa1d5ac662ea525bab43c75f290005fef768981"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/performance-integrated/owner-graphs-baseline.receipt.json",
+      "bytes": 106782,
+      "sha256": "5f1071f72844993e87eabb28df2f8861974081b8fbc7ad11d19153a759f61eba"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-baseline/source-manifest.json",
+      "bytes": 34553,
+      "sha256": "c301ce42ecb2592f1a4af49d6efde1d91a034cec06536d02b07c878eed31bea9"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/performance-integrated/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/performance-integrated/owner-graphs-baseline.json.gz",
+      "bytes": 5028205,
+      "sha256": "22d6ae21086a27146efa56844b8c2fc56d582974d94f1dd61c4691bbcebc8e1a"
+    },
+    {
+      "path": "/workspace/sites/sra-lot10a-baseline-site88-20261110/scripts/measure-native-loop-costs.mjs",
+      "bytes": 20670,
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "/workspace/sites/sra-lot10a-baseline-site88-20261110/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "bytes": 48531,
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+    },
+    {
+      "path": "/workspace/sites/sra-lot10a-baseline-site88-20261110/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "bytes": 46966,
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    },
+    {
+      "path": "/workspace/sites/sra-lot10a-baseline-site88-20261110/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "bytes": 53583,
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "path": "/workspace/sites/sra-lot10a-baseline-site88-20261110/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "bytes": 111624,
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/performance-integrated/owner-graphs-candidate.receipt.json",
+      "bytes": 106966,
+      "sha256": "42967d9060880ee531ee9c00f857787690b357b8fa772463fa06f12bc4b42ca9"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/source-manifest.json",
+      "bytes": 34908,
+      "sha256": "55b78bacc97745a6b8b1bde35156ec0f7184a6ad1cf4a637d35a81b82abec42f"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/performance-integrated/owner-graphs-candidate.json.gz",
+      "bytes": 5036835,
+      "sha256": "4ae9218f5821f34b2d85d338cfe9c1c6563493978b2f2f12fb4cd1c5336c7d40"
+    },
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "bytes": 20670,
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "bytes": 48531,
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "bytes": 46966,
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    },
+    {
+      "path": "docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "bytes": 53583,
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "path": "docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "bytes": 111624,
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    },
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "bytes": 150713,
+      "sha256": "ddbe8767e813c00c0ce5e4e5008f6021151f3d81dd3d02b4a354a36ad5359644"
+    },
+    {
+      "path": "src/logos-engine/v6-axial-question.ts",
+      "bytes": 19173,
+      "sha256": "9ca532ec7e625f5057e501a0225e90b4f5020fcb7d5c6568d44e5e8aa66d0480"
+    },
+    {
+      "path": "src/logos-engine/v6-knowledge-store.ts",
+      "bytes": 14849,
+      "sha256": "035d41597a5831bfa65bb1f627e3a0d05b84cc44cfda05566359873ef8c5af08"
+    },
+    {
+      "path": "src/logos-engine/kernel.ts",
+      "bytes": 23637,
+      "sha256": "1cac40f5f9a3356d31ae0fd5247709eb82c5f6402aae3cb68d8edc54c838f207"
+    },
+    {
+      "path": "src/logos-engine/canonical.ts",
+      "bytes": 11291,
+      "sha256": "5c2884287aed82d97e7a85c905db5fb800a7e58a523c3ba128a1b61db5069cc1"
+    },
+    {
+      "path": "src/logos-engine/v6-native-state-graph.ts",
+      "bytes": 21947,
+      "sha256": "b739db6d6066a06f4175b4377f0d0ae1f351b708e5d27fbdb99c9de7e6ed0b4d"
+    },
+    {
+      "path": "src/logos-engine/v6-hash.ts",
+      "bytes": 2842,
+      "sha256": "6b86db7b533d55da900a3c65a06ec1e18547180245b3e3a2eaa837be09c669f5"
+    },
+    {
+      "path": "src/logos-engine/v6-src-program.ts",
+      "bytes": 5903,
+      "sha256": "d41717575e252784a81519e8c7853853af3c2d7372b86ecb7efb3655c3e3df77"
+    },
+    {
+      "path": "src/logos-engine/v6/programs.json",
+      "bytes": 1502394,
+      "sha256": "e006723f49460276a0753c1977ab0eabb30775409b37ba7d7af8b0b8b8527834"
+    },
+    {
+      "path": "src/runtime/v6-agent-service.ts",
+      "bytes": 18195,
+      "sha256": "02ce41d5e014fcc06f85371f552f949b9dfce56093afae4bc0fcb7aad2f60d96"
+    }
+  ],
+  "checkedCount": 64,
+  "formsSha256": "a3c554002a2f43217789e01fcd488be717d7a9f9bc4c66dd7e74cd0e13d201a6",
+  "qualification": "Every captured graph reconstructs from its exact complete Kernel delta chain. Added candidate nodes/deltas receive explicit installation, Axial state, observed source event/state-fact or reachable-fragment attribution. Common node identities/metadata and common delta identity/cause/order remain exact apart from their declared runtime source digest; private value equality across versions is not asserted. Structural counts come from the captures, without an added-node or cycle formula. The forms are fixed before any cost window and every future raw trial must match its own form exactly. No cost values, timing correction, future-run success or full graph/caller semantic parity is inferred."
+}

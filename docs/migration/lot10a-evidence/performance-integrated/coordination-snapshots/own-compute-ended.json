@@ -1,0 +1,31 @@
+{
+  "schema": "logos-engine.own-compute-observation.v1",
+  "recordedAt": "2026-11-11T00:14:22.583136+00:00",
+  "agents": {
+    "axial_family": "completed",
+    "axial_oracle": "completed",
+    "axial_source_contract": "completed"
+  },
+  "observationSource": "Collaboration list_agents and completed exec session outputs observed by delivery owner",
+  "completedExecSessions": [
+    62576,
+    19773,
+    8170,
+    51721,
+    92040
+  ],
+  "allListedExitCodes": 0,
+  "staticPreflight": {
+    "path": "docs/migration/lot10a-evidence/performance-integrated/static-preflight.json",
+    "sha256": "93a0eb570c2cae26dcd169137cbadef89e15b9bf073d0ee1d1c737f3293276f3",
+    "bytes": 18399
+  },
+  "previewStopped": true,
+  "browserEvidence": {
+    "path": "docs/migration/lot10a-evidence/integrated-final/browser/browser-qa.json",
+    "sha256": "b6832a442ac1bb421241155b297fb4fa5ba242ab41fa7249e8e5206639c698ad",
+    "bytes": 3151
+  },
+  "costNodeOptionsOverride": null,
+  "qualification": "Observed completion of tracked functional preparation jobs and all own agents. This is cooperative isolation evidence, not a claim that process visibility alone proves machine isolation."
+}

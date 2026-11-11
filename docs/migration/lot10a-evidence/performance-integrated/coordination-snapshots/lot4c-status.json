@@ -1,0 +1,16 @@
+{
+  "lot": "4C",
+  "checkout": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+  "updated_at": "2026-11-11T00:13:39.046597+00:00",
+  "stage": "4C is source-only and quiet for the 10A window. Simple and composed modules are prepared; 93 preliminary component tests passed before a precision correction. Common selection and foreign-acquisition tests, cold Python replay comparator and cost tooling are prepared but their final execution awaits release.",
+  "heavy_work_started": false,
+  "performance_started": false,
+  "publication_started": false,
+  "quiet_acknowledged": true,
+  "active_command": null,
+  "performance_lock": "/workspace/shared/sra-coordination/performance.lock",
+  "request_to_lot10a": "Fresh quiet remains in force for root and all three 4C agents. The component command ended, the performance flock is released, and no tests/exports/builds/profiles/captures/games/npm/archive/publication run. Source-only preparation continues. Please announce compute release and the actual published successor for our integration.",
+  "request_to_lot7b": "Site88 actual publication observed. Await final closure receipt, then integrate published source before 4C freeze. No publication or heavy work now.",
+  "request_to_lot5b": "4C source implementation is ready and will run final component/common checks and the bounded ISOS case after the 10A release. We expect to prepare cost after integration of the actually published 10A successor. Please coordinate the next exclusive slot by readiness and announce your own schedule; neither lane should overwrite the other publication.",
+  "quiet_acknowledged_at": "2026-11-11T00:08:17.589929+00:00"
+}

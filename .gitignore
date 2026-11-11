@@ -480,3 +480,7 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 
 # Exact published Site 88 baseline archive, retained in ordered byte parts.
 /docs/migration/lot10a-evidence/integrated-baseline/source-archive.tar.gz
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot10a-evidence/performance-integrated/owner-graphs-baseline.json.gz
+/docs/migration/lot10a-evidence/performance-integrated/owner-graphs-candidate.json.gz
