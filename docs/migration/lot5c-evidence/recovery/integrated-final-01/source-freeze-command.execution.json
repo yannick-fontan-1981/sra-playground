@@ -1,0 +1,39 @@
+{
+  "schema": "logos-engine.lot5c.command-execution.v1",
+  "status": "passed",
+  "startedAt": "2026-11-11T17:16:18.489258+00:00",
+  "command": [
+    "python",
+    "-B",
+    "docs/migration/lot5c-evidence/freeze-source.py",
+    "freeze",
+    "docs/migration/lot5c-evidence/recovery/integrated-final-01",
+    "--test-scope",
+    "docs/migration/lot5c-evidence/recovery/integration-published-10b/final-scope-reconciliation.json",
+    "--replay-scope",
+    "docs/migration/lot5c-evidence/recovery/integrated-final-01/recorded-regression-cases.json",
+    "--contract",
+    "docs/migration/lot5c-evidence/recovery/integrated-final-01/validation-contract.json"
+  ],
+  "cwd": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout",
+  "timeoutSeconds": 180.0,
+  "wrapper": {
+    "path": "docs/migration/lot5c-evidence/run-evidence-command.py",
+    "bytes": 3904,
+    "sha256": "99b16a35eac1f12acb3063e43d303ffc020b3339109e22eff1f807d1e87e47db"
+  },
+  "finishedAt": "2026-11-11T17:16:20.471892+00:00",
+  "durationSeconds": 1.9813612990001275,
+  "exitCode": 0,
+  "timedOut": false,
+  "log": {
+    "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/source-freeze-command.log",
+    "bytes": 245,
+    "sha256": "457b7f5657d502598098450a858689e2ace9b232cf5f14d623f94d03d7ea18b8"
+  },
+  "compressedLog": {
+    "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/source-freeze-command.log.gz",
+    "bytes": 204,
+    "sha256": "1b1936a7cb31a0ad9c887d144785733cec39f7a4534770ae14857f21c8044ab3"
+  }
+}
