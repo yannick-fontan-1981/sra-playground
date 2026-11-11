@@ -1,0 +1,13 @@
+{
+  "schema": "logos-engine.lot5c-actual-tool-session.v1",
+  "requestId": "lot5c-cost-a33a5f88-available-03",
+  "sessionId": 71059,
+  "initialChunkId": "82ca08",
+  "observedAt": "2026-11-11T21:48:23.961Z",
+  "command": "timeout --signal=TERM --kill-after=10s 6115s python -B docs/migration/lot5c-evidence/recovery/planning/orchestrate-cost-available-03-v4.py --execute",
+  "checkout": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout",
+  "interactiveInput": false,
+  "outerFlock": false,
+  "maximumNewCycles": 1,
+  "receipt": "docs/migration/lot5c-evidence/recovery/coordination/cost-final-03/attempt-result.json"
+}

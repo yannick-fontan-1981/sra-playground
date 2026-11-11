@@ -1,0 +1,11 @@
+{
+  "schema": "logos-engine.lot5c-actual-tool-session.v1",
+  "purpose": "Ordinary v4 preparation source checkpoint without global lock",
+  "sessionId": 19930,
+  "initialChunkId": "568ce7",
+  "checkpoint": "ed983a15f718bd00fac41c867c1b6b9320c7ea95",
+  "globalLockUsed": false,
+  "inputNotYetSent": true,
+  "observedAt": "2026-11-11T21:47:27.508Z",
+  "liveReceipt": "/workspace/shared/sra-coordination/lot5c-execution-handles/source-checkpoint-v4-preparation-live.json"
+}
