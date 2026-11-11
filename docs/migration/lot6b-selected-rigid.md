@@ -184,9 +184,10 @@ ont cinq commandes terminées avec un code processus zéro. **Cela ne constitue
 pas cinq contrôles sémantiques réussis** : le rapport d’audit de migration
 conserve trois références manquantes correspondant à deux fixtures héritées.
 Le garde-fou générique de l’audit a été corrigé pour rendre un code d’échec
-lorsque de telles références manquent. La restauration exacte des deux fixtures
-est en cours ; le contrôle sémantique final reste à exécuter et à qualifier.
-Ce premier résultat incomplet ne sera pas remplacé rétrospectivement.
+lorsque de telles références manquent. Les deux fixtures ont ensuite été
+restaurées exactement et le nouvel audit sémantique a réussi avec zéro erreur,
+comme le détaille la clôture ci-dessous. Le premier résultat incomplet reste
+conservé sans remplacement rétrospectif.
 
 Le site effectivement publié est maintenant **Site 101 / native 0.61**,
 source `d75a36f0a99bf6c301034523a3138a64d2f6e744`. Ce constat ne change pas

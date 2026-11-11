@@ -195,9 +195,10 @@ chaque jeu** dans la fenêtre isolée retenue.
 Les cinq premiers processus de contrôle ont rendu zéro, mais l’audit de
 migration conserve trois références manquantes correspondant à deux fixtures
 héritées. Ce passage reste sémantiquement incomplet. Le garde-fou de l’audit
-rend désormais un échec pour des références absentes ; la restauration exacte
-des fixtures et la nouvelle validation sémantique restent en cours. Aucun
-bilan « cinq contrôles réussis » n’est attribué à ce passage.
+rend désormais un échec pour des références absentes. Les fixtures ont ensuite
+été restaurées exactement et le nouvel audit sémantique a réussi avec zéro
+erreur ; la clôture ci-dessous conserve les reçus distincts. Aucun bilan
+« cinq contrôles réussis » n’est attribué au premier passage.
 
 La publication réellement courante est Site 101 / native 0.61, source
 `d75a36f0a99bf6c301034523a3138a64d2f6e744`. Le gel 6B présenté conserve
