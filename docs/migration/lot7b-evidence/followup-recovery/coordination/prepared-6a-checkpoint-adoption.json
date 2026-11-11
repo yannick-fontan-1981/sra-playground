@@ -1,0 +1,38 @@
+{
+  "schema": "logos-engine.prepared-source-checkpoint-adoption.v1",
+  "recordedAt": "2026-11-11T12:44:18.966022+00:00",
+  "sourceCheckpoint": "c263271442b8e8a8084c39c2f9301fd3163e7d29",
+  "status": "adopted_test_expectation_corrections_and_presence_verifier",
+  "files": [
+    {
+      "path": "tests/v6-coupled-pair-planning.test.ts",
+      "beforeSha256": "d16d0298affca92a9f2fca638b256b0b04cbba528a276ed73db98bcb7ed779f8",
+      "afterSha256": "94d74c6d50892bd3ce05579fdf71b36b648bdfedf7dc6663c8d67a9125e31ee1",
+      "sourceCommit": "c263271442b8e8a8084c39c2f9301fd3163e7d29"
+    },
+    {
+      "path": "tests/v6-radial-port-integration.test.ts",
+      "beforeSha256": "16c2a894dfe4d46469b09d5fa7ed600b4b1a1202017f4a1222d8ac00fc81b8d4",
+      "afterSha256": "0faea483ab4037f420eac59d76ac52281be3358187d600ead878024ff559f461",
+      "sourceCommit": "c263271442b8e8a8084c39c2f9301fd3163e7d29"
+    },
+    {
+      "path": "scripts/verify-preview-packing-presence.py",
+      "beforeSha256": null,
+      "afterSha256": "4bf800fe0f570ef275b361d4b837dc4e9df4fb3bbb18f5600ba60f59bd43f362",
+      "sourceCommit": "c263271442b8e8a8084c39c2f9301fd3163e7d29"
+    }
+  ],
+  "nativeDigest": "f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279",
+  "nativeFiles": 306,
+  "nativeUnchanged": true,
+  "replayHarnessSha256": "62a29629b68b316dafd2a5a0868fc16409b5805591ad4849888107d94ce0e50a",
+  "replayHarnessUnchanged": true,
+  "firstFormalReceipt": "docs/migration/lot7b-evidence/followup-recovery/integrated-final/validation/delta-tests-run.json",
+  "firstFormalResult": {
+    "tests": 5042,
+    "passed": 5040,
+    "failed": 2
+  },
+  "qualification": "Only the two corrected registry expectations and the newly available presence verifier were copied from the prepared6A checkpoint. Native files and replay harness were not written; active recorded regressions remain on their frozen source. The failed first validation is retained."
+}

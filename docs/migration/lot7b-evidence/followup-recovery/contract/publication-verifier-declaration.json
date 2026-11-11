@@ -1,0 +1,117 @@
+{
+  "schema": "logos-engine.followup-publication-verifier-declaration.v1",
+  "status": "declared_before_official_window",
+  "recordedAt": "2026-11-11T13:37:23.500756+00:00",
+  "generator": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/tools/record-publication-inputs.py",
+    "sha256": "1302d84691ec50710b0e6d4442cce80e10fe018efba92fa65ae01b51967ca307",
+    "bytes": 40082
+  },
+  "tools": {
+    "delivery": {
+      "path": "scripts/verify-native-delivery.py",
+      "sha256": "ca36a235e5da8aa8abd963aaa6a282d90217ed58a721bfdbba361527dd48409a",
+      "bytes": 26494
+    },
+    "campaign": {
+      "path": "scripts/run-v53-campaign-proof.py",
+      "sha256": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+      "bytes": 5421
+    },
+    "original": {
+      "path": "scripts/compare-v54-reactive-public-evidence.py",
+      "sha256": "3274acc5ed28a40f91ad0ee2e34c247ab160919ea43855cf514b4fbc22ef6a69",
+      "bytes": 18850
+    },
+    "transport": {
+      "path": "scripts/evidence-byte-parts.py",
+      "sha256": "fcc651b3d533a87805378c126b1253d40f343ccc51108a7881c3db33bf1f8350",
+      "bytes": 7210
+    },
+    "restore": {
+      "path": "scripts/restore-v53-evidence.py",
+      "sha256": "e0494dda3dd445e0db0bf04cccac27ad8d19c917ccd2b4b10c068df6faf7c23d",
+      "bytes": 3361
+    },
+    "globalReview": {
+      "path": "scripts/review-native-global-cost-window.py",
+      "sha256": "9ab2ecd9d6ddf234e96332421a6e55937a766495c1a20dd223f4441d6b516940",
+      "bytes": 22204
+    },
+    "globalCalculation": {
+      "path": "scripts/review-native-global-cost-budget.py",
+      "sha256": "b4312bcdae058ba58c16b4e5e24cb53626496b38f8a154834e0452a43e97d341",
+      "bytes": 8476
+    },
+    "arithmeticReview": {
+      "path": "scripts/review-native-cost-consolidation.py",
+      "sha256": "b13174cec5befbb816e70554fd5d47da215eae941b983e66f05b9dd4417b3bd4",
+      "bytes": 17810
+    },
+    "workSignature": {
+      "path": "scripts/compare-native-cost-cohorts.mjs",
+      "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34",
+      "bytes": 19460
+    },
+    "renderer": {
+      "path": "docs/migration/lot7b-evidence/write-cost-results.py",
+      "sha256": "121c3446bd172495ffa2075dadf2c7ac400c7c4feadfe5a400f8b71b895368db",
+      "bytes": 41724
+    },
+    "logTransport": {
+      "path": "docs/migration/lot7b-evidence/record-cost-log-transport.py",
+      "sha256": "b9083755fdc25fabaa2bb599552e90104b403bf22c91668912108ae294ef8b18",
+      "bytes": 3879
+    },
+    "readiness": {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/tools/finalize-cost-readiness.py",
+      "sha256": "4ed625736afbb76f5412af5c2b9518e3ce4f0d817e06a361a33e1bf58ca7cc21",
+      "bytes": 40411
+    },
+    "capture": {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/tools/capture-strict-cost-forms.mjs",
+      "sha256": "8e269df48afbfea2991e976a252bf49e95cd15207b2442794078454c9fc8a568",
+      "bytes": 12545
+    },
+    "strictVerifier": {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/tools/verify-strict-cost-forms.mjs",
+      "sha256": "07276dd501a919c97d3f53b7ea594eed8029b5a363f2a498515c1a304551a22b",
+      "bytes": 7759
+    }
+  },
+  "paths": {
+    "performanceDirectory": "docs/migration/lot7b-evidence/followup-recovery/performance",
+    "candidateSourceDirectory": "docs/migration/lot7b-evidence/followup-recovery/integrated-final",
+    "validationDirectory": "docs/migration/lot7b-evidence/followup-recovery/integrated-final/verification-attempt-02/validation",
+    "testScopePlan": "docs/migration/lot7b-evidence/followup-recovery/contract/test-scope-final.json",
+    "baselinePublicationReceipt": "docs/migration/lot7b-evidence/followup-recovery/coordination/baseline-publication.json"
+  },
+  "candidateManifest": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/integrated-final/source-manifest.json",
+    "sha256": "c597c7629495e98fcfad64cdd827393bc58d2d8f26594474e60add601485e4de",
+    "bytes": 36332
+  },
+  "testScopePlan": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/contract/test-scope-final.json",
+    "sha256": "edfd5f06e5c07271e5a480977a0f23dee07fc05be1d98e96187d71fd69b768c4",
+    "bytes": 24017
+  },
+  "population": {
+    "measuredSessions": 32,
+    "measuredActions": 400,
+    "excludedWarmupSessions": 8,
+    "excludedWarmupActions": 24
+  },
+  "structuralExemptions": [],
+  "globalRule": "pooled_complete_session_median_strictly_below_plus_10_percent_per_case",
+  "requiredChronology": [
+    "publication_declaration",
+    "readiness",
+    "official_window",
+    "strict_work_verification",
+    "report_rendering",
+    "publication_inputs"
+  ],
+  "candidateCommitRequirement": "Exact verifier, declaration, strict tools/forms and readiness in both B report Git heads.",
+  "qualification": "Prospective file and receipt verification only. No publication, measurement or functional execution."
+}

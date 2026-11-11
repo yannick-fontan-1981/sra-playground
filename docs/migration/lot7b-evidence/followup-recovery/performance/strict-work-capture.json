@@ -1,0 +1,106 @@
+{
+  "schema": "logos-engine.followup-strict-work-capture.v1",
+  "status": "passed",
+  "startedAt": "2026-11-11T13:54:32.417Z",
+  "declaration": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/performance/strict-work-declaration.json",
+    "sha256": "82716bdccf2578c9adf818d388a6c947ffc9dc2da71e17cafb271f2680220ed2",
+    "bytes": 2118
+  },
+  "nativeDigests": {
+    "baseline": "ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229",
+    "candidate": "f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279"
+  },
+  "sessions": [
+    {
+      "role": "baseline",
+      "case": "STCK",
+      "warmup": true,
+      "actions": 3,
+      "status": "passed",
+      "startedAt": "2026-11-11T13:54:33.785Z",
+      "finishedAt": "2026-11-11T13:54:39.798Z",
+      "signatureSha256": "15f5c5dcedb4a74ef2d5bb58dc353114c10bcc2b281f62c19587b7f2b07dc8e9"
+    },
+    {
+      "role": "baseline",
+      "case": "STCK",
+      "warmup": false,
+      "actions": 10,
+      "status": "passed",
+      "startedAt": "2026-11-11T13:54:39.800Z",
+      "finishedAt": "2026-11-11T13:54:52.946Z",
+      "signatureSha256": "1426b79020ff0f8a15f7f6be78927c27adc42dee61bc503b413ba2cb5d636eb1"
+    },
+    {
+      "role": "baseline",
+      "case": "SMLP",
+      "warmup": true,
+      "actions": 3,
+      "status": "passed",
+      "startedAt": "2026-11-11T13:54:53.487Z",
+      "finishedAt": "2026-11-11T13:54:58.649Z",
+      "signatureSha256": "cd863ebf2cc4bf7261d55feb768181085509517d920a0ed3a3e7a52e310b2403"
+    },
+    {
+      "role": "baseline",
+      "case": "SMLP",
+      "warmup": false,
+      "actions": 15,
+      "status": "passed",
+      "startedAt": "2026-11-11T13:54:58.650Z",
+      "finishedAt": "2026-11-11T13:55:16.810Z",
+      "signatureSha256": "b9d7030833c18d97a60df75ca10837ea950a53d8f47b869e8852023ae3f88d26"
+    },
+    {
+      "role": "candidate",
+      "case": "STCK",
+      "warmup": true,
+      "actions": 3,
+      "status": "passed",
+      "startedAt": "2026-11-11T13:55:17.325Z",
+      "finishedAt": "2026-11-11T13:55:21.695Z",
+      "signatureSha256": "15f5c5dcedb4a74ef2d5bb58dc353114c10bcc2b281f62c19587b7f2b07dc8e9"
+    },
+    {
+      "role": "candidate",
+      "case": "STCK",
+      "warmup": false,
+      "actions": 10,
+      "status": "passed",
+      "startedAt": "2026-11-11T13:55:21.695Z",
+      "finishedAt": "2026-11-11T13:55:34.054Z",
+      "signatureSha256": "1426b79020ff0f8a15f7f6be78927c27adc42dee61bc503b413ba2cb5d636eb1"
+    },
+    {
+      "role": "candidate",
+      "case": "SMLP",
+      "warmup": true,
+      "actions": 3,
+      "status": "passed",
+      "startedAt": "2026-11-11T13:55:34.562Z",
+      "finishedAt": "2026-11-11T13:55:39.041Z",
+      "signatureSha256": "cd863ebf2cc4bf7261d55feb768181085509517d920a0ed3a3e7a52e310b2403"
+    },
+    {
+      "role": "candidate",
+      "case": "SMLP",
+      "warmup": false,
+      "actions": 15,
+      "status": "passed",
+      "startedAt": "2026-11-11T13:55:39.043Z",
+      "finishedAt": "2026-11-11T13:55:57.197Z",
+      "signatureSha256": "b9d7030833c18d97a60df75ca10837ea950a53d8f47b869e8852023ae3f88d26"
+    }
+  ],
+  "failures": [],
+  "measuredCostSessions": 0,
+  "timingMetricsRetained": 0,
+  "finishedAt": "2026-11-11T13:55:57.316Z",
+  "forms": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/performance/strict-work-forms.json",
+    "sha256": "825546ffc4f061a1063fbeea4c52c89c2d7a79dbc3dee02e11ab6c1de0ca6637",
+    "bytes": 255907
+  },
+  "sourceAndInputsUnchanged": true
+}
