@@ -1,0 +1,3763 @@
+{
+  "schema": "logos-engine.lot5c-owner-cost-structural-attribution.v1",
+  "status": "qualified_functional_structure",
+  "startedAt": "2026-11-11T17:26:02.782Z",
+  "checks": [
+    {
+      "name": "immutable_capture_provenance_before_measurement",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:warmup:0",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:warmup:1",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:warmup:2",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:warmup:3",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:warmup:4",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:warmup:5",
+      "passed": true
+    },
+    {
+      "name": "shape:STCK:warmup",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:0",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:1",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:2",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:3",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:4",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:5",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:6",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:7",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:8",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:9",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:10",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:11",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:12",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:13",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:14",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:15",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:16",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:17",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:18",
+      "passed": true
+    },
+    {
+      "name": "shape:STCK:measured",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:warmup:0",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:warmup:1",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:warmup:2",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:warmup:3",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:warmup:4",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:warmup:5",
+      "passed": true
+    },
+    {
+      "name": "shape:SMLP:warmup",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:0",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:1",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:2",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:3",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:4",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:5",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:6",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:7",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:8",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:9",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:10",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:11",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:12",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:13",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:14",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:15",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:16",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:17",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:18",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:19",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:20",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:21",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:22",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:23",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:24",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:25",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:26",
+      "passed": true
+    },
+    {
+      "name": "shape:SMLP:measured",
+      "passed": true
+    },
+    {
+      "name": "all_inputs_unchanged_and_no_window_started",
+      "passed": true
+    }
+  ],
+  "nodeAttributions": [
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 37,
+      "nodeId": "family_state:public_observed_binding",
+      "kind": "family_state",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "dae25ace1b8634dad1661283e27665ac9cedadfaf364cad7331152c5b0ae8234",
+      "category": "observedBinding_owner_state",
+      "checkpointIndex": 0,
+      "sourceStateSha256": "a052b0951aec8b94afaedb5267e9f6b580f7dd8d2f0147c176c9e9de3a8afd53",
+      "epoch": null
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 38,
+      "nodeId": "family_activation:public_observed_binding",
+      "kind": "family_activation",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "46b8451a76a0fd7dc308df7cb9b8cefff4a015b651c93c564e1a1baf12b09f73",
+      "category": "observedBinding_installation"
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 139,
+      "nodeId": "program:v6.observed_binding.choose",
+      "kind": "program",
+      "revision": 1,
+      "cause": {
+        "statement": "program.install",
+        "step": "native_store",
+        "workflow": "v6.observed_binding.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "30d82debb3504eca646c253d5af2709272f0b1f9b5a78e6a49f0c7c6648cf641",
+      "category": "observedBinding_installed_source_program",
+      "workflow": "v6.observed_binding.choose",
+      "executionHash": "4e0df7158f87d0ba2ec7ab36f41c2fd517b666d4e228ff1bde151bc71c6f2dfc",
+      "transitiveSourceHash": "fb2ff7e22ea223b6fc0a118831122f5f4a416b2f5ae0d286774a99776ba39564"
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 1,
+      "request": "advance",
+      "requestSequence": 1,
+      "deltaSequence": 266,
+      "nodeId": "family_state:public_observed_binding",
+      "kind": "family_state",
+      "revision": 2,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:1"
+      ],
+      "nodeSha256": "c7a2c6a1e529b5d8db845fd1422e90f7ec19cc4b510b92c554b59dbb110c6b33",
+      "category": "observedBinding_owner_state",
+      "checkpointIndex": 2,
+      "sourceStateSha256": "a13263ee9fa528f5e7efd042b80c54f383fdf38ba9aeb151870571c86dfb8229",
+      "epoch": 1
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 3,
+      "request": "advance",
+      "requestSequence": 2,
+      "deltaSequence": 384,
+      "nodeId": "family_state:public_observed_binding",
+      "kind": "family_state",
+      "revision": 3,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:2"
+      ],
+      "nodeSha256": "d88adc7e65dfae6818fe3a822de76bef7dd1d191706f664762b8f50e89a2b3b6",
+      "category": "observedBinding_owner_state",
+      "checkpointIndex": 2,
+      "sourceStateSha256": "a13263ee9fa528f5e7efd042b80c54f383fdf38ba9aeb151870571c86dfb8229",
+      "epoch": 1
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 5,
+      "request": "advance",
+      "requestSequence": 3,
+      "deltaSequence": 447,
+      "nodeId": "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e",
+      "kind": "component_state",
+      "revision": 1,
+      "cause": {
+        "statement": "transition.acquire",
+        "step": "native_memory",
+        "workflow": "prototype.laya_router.route"
+      },
+      "evidence": [],
+      "nodeSha256": "8f8b9baa1718e9164c5f3b8041323c9376e44bff86300f415cbc45637980b9fd",
+      "category": "observedBinding_source_event_fact",
+      "factKey": "object_binding_event:3",
+      "sourceCallIndex": 2,
+      "sourceEventCount": 1,
+      "sourceStatus": "scope_changed_preserving_conditional_methods",
+      "beforeObservation": "lot5c-owner-cost-stck-warmup:epoch:1:revision:3:frame:fd8a9f7309f0e2fd",
+      "afterObservation": "lot5c-owner-cost-stck-warmup:epoch:2:revision:4:frame:fed2f15409370124",
+      "officialBoundary": true
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 5,
+      "request": "advance",
+      "requestSequence": 3,
+      "deltaSequence": 499,
+      "nodeId": "family_state:public_observed_binding",
+      "kind": "family_state",
+      "revision": 4,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:3"
+      ],
+      "nodeSha256": "cb6f2258977862b2946d03ad50441e4fd03838c8d6d45e72732a6ae07029fdac",
+      "category": "observedBinding_owner_state",
+      "checkpointIndex": 4,
+      "sourceStateSha256": "3f9fca27e1bdde3700176486314f2bf2cf66031c5f2735decb8ebd7a4b266dbd",
+      "epoch": 2
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 37,
+      "nodeId": "family_state:public_observed_binding",
+      "kind": "family_state",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "0dff6c9fbfe6ca3b872df579f9d28d5e544f626d4faf2102d3c0e7765ed2e105",
+      "category": "observedBinding_owner_state",
+      "checkpointIndex": 0,
+      "sourceStateSha256": "a052b0951aec8b94afaedb5267e9f6b580f7dd8d2f0147c176c9e9de3a8afd53",
+      "epoch": null
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 38,
+      "nodeId": "family_activation:public_observed_binding",
+      "kind": "family_activation",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "1152a45c6db213ebb82bec42fe8664fa2668c5def6451ac1e53ac118e965f262",
+      "category": "observedBinding_installation"
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 139,
+      "nodeId": "program:v6.observed_binding.choose",
+      "kind": "program",
+      "revision": 1,
+      "cause": {
+        "statement": "program.install",
+        "step": "native_store",
+        "workflow": "v6.observed_binding.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "54f018763abf037cb514da16a42d6edc71817f7dfb307a13fa13428bf909e964",
+      "category": "observedBinding_installed_source_program",
+      "workflow": "v6.observed_binding.choose",
+      "executionHash": "4e0df7158f87d0ba2ec7ab36f41c2fd517b666d4e228ff1bde151bc71c6f2dfc",
+      "transitiveSourceHash": "fb2ff7e22ea223b6fc0a118831122f5f4a416b2f5ae0d286774a99776ba39564"
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 1,
+      "request": "advance",
+      "requestSequence": 1,
+      "deltaSequence": 266,
+      "nodeId": "family_state:public_observed_binding",
+      "kind": "family_state",
+      "revision": 2,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:1"
+      ],
+      "nodeSha256": "cd7c36a79962f78a922afd3c83d5a8df9a219bc0f707ba88f9a320984c9cd920",
+      "category": "observedBinding_owner_state",
+      "checkpointIndex": 2,
+      "sourceStateSha256": "a13263ee9fa528f5e7efd042b80c54f383fdf38ba9aeb151870571c86dfb8229",
+      "epoch": 1
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 3,
+      "request": "advance",
+      "requestSequence": 2,
+      "deltaSequence": 384,
+      "nodeId": "family_state:public_observed_binding",
+      "kind": "family_state",
+      "revision": 3,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:2"
+      ],
+      "nodeSha256": "5c261e866885ead665faa9d5f6596a0376480f33f9e7ba2779ddd340c09b8ca2",
+      "category": "observedBinding_owner_state",
+      "checkpointIndex": 2,
+      "sourceStateSha256": "a13263ee9fa528f5e7efd042b80c54f383fdf38ba9aeb151870571c86dfb8229",
+      "epoch": 1
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 5,
+      "request": "advance",
+      "requestSequence": 3,
+      "deltaSequence": 447,
+      "nodeId": "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e",
+      "kind": "component_state",
+      "revision": 1,
+      "cause": {
+        "statement": "transition.acquire",
+        "step": "native_memory",
+        "workflow": "prototype.laya_router.route"
+      },
+      "evidence": [],
+      "nodeSha256": "7f608ff04d2d9fda3788c383c3e95fd6c0473625f4ca6f41b891debb00c35f3e",
+      "category": "observedBinding_source_event_fact",
+      "factKey": "object_binding_event:3",
+      "sourceCallIndex": 2,
+      "sourceEventCount": 1,
+      "sourceStatus": "scope_changed_preserving_conditional_methods",
+      "beforeObservation": "lot5c-owner-cost-stck-measured:epoch:1:revision:3:frame:fd8a9f7309f0e2fd",
+      "afterObservation": "lot5c-owner-cost-stck-measured:epoch:2:revision:4:frame:fed2f15409370124",
+      "officialBoundary": true
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 5,
+      "request": "advance",
+      "requestSequence": 3,
+      "deltaSequence": 499,
+      "nodeId": "family_state:public_observed_binding",
+      "kind": "family_state",
+      "revision": 4,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:3"
+      ],
+      "nodeSha256": "dc0c27b3a569ab6e67446ddacef30d64b997698964932d333000201a087e1228",
+      "category": "observedBinding_owner_state",
+      "checkpointIndex": 4,
+      "sourceStateSha256": "3f9fca27e1bdde3700176486314f2bf2cf66031c5f2735decb8ebd7a4b266dbd",
+      "epoch": 2
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 7,
+      "request": "advance",
+      "requestSequence": 4,
+      "deltaSequence": 625,
+      "nodeId": "family_state:public_observed_binding",
+      "kind": "family_state",
+      "revision": 5,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:4"
+      ],
+      "nodeSha256": "a0024ebea7a5fdf9e6374654f6b0677353bf9d0342b02d7654b04009a5dc9771",
+      "category": "observedBinding_owner_state",
+      "checkpointIndex": 4,
+      "sourceStateSha256": "3f9fca27e1bdde3700176486314f2bf2cf66031c5f2735decb8ebd7a4b266dbd",
+      "epoch": 2
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 13,
+      "request": "advance",
+      "requestSequence": 9,
+      "deltaSequence": 804,
+      "nodeId": "family_state:public_observed_binding",
+      "kind": "family_state",
+      "revision": 6,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:5"
+      ],
+      "nodeSha256": "d3c3d5d6c249998a62bf865d926baa68c8597c2f574aeb263a7f18dcee4ed7b9",
+      "category": "observedBinding_owner_state",
+      "checkpointIndex": 4,
+      "sourceStateSha256": "3f9fca27e1bdde3700176486314f2bf2cf66031c5f2735decb8ebd7a4b266dbd",
+      "epoch": 2
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 15,
+      "request": "advance",
+      "requestSequence": 10,
+      "deltaSequence": 871,
+      "nodeId": "reasoning:fact:bf6fc68e8d2d561e77a3b9a8cba1f93f881d4fcfe7522af4da5e0904b67b956f",
+      "kind": "component_state",
+      "revision": 1,
+      "cause": {
+        "statement": "transition.acquire",
+        "step": "native_memory",
+        "workflow": "prototype.laya_router.route"
+      },
+      "evidence": [],
+      "nodeSha256": "1d3dd80316fef572e26e6d0964964670ca5f2f9a8d89afcc598162b059745592",
+      "category": "observedBinding_source_event_fact",
+      "factKey": "object_binding_event:10",
+      "sourceCallIndex": 9,
+      "sourceEventCount": 1,
+      "sourceStatus": "scope_changed_preserving_conditional_methods",
+      "beforeObservation": "lot5c-owner-cost-stck-measured:epoch:2:revision:10:frame:aac5e17b9b1c4e5b",
+      "afterObservation": "lot5c-owner-cost-stck-measured:epoch:3:revision:11:frame:e880aa3b42a8e8c1",
+      "officialBoundary": true
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 15,
+      "request": "advance",
+      "requestSequence": 10,
+      "deltaSequence": 925,
+      "nodeId": "family_state:public_observed_binding",
+      "kind": "family_state",
+      "revision": 7,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:10"
+      ],
+      "nodeSha256": "ddb12c4cf55e12e0302a3cd0da25d101a959e84575aad1b807b616f690340d0b",
+      "category": "observedBinding_owner_state",
+      "checkpointIndex": 6,
+      "sourceStateSha256": "f2083ffaa16fda2033342195401ad95946907ba5a8e5e47b7f981d1bc35a835c",
+      "epoch": 3
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 37,
+      "nodeId": "family_state:public_observed_binding",
+      "kind": "family_state",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "ddfb834afcf8c8ac9da53978040d3b1677f12f17cd2149eb9469fa6457871dc8",
+      "category": "observedBinding_owner_state",
+      "checkpointIndex": 0,
+      "sourceStateSha256": "a052b0951aec8b94afaedb5267e9f6b580f7dd8d2f0147c176c9e9de3a8afd53",
+      "epoch": null
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 38,
+      "nodeId": "family_activation:public_observed_binding",
+      "kind": "family_activation",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "75216d71fe2de78b332f68ce130b5194140889e72db10c07d6baa301a43b4346",
+      "category": "observedBinding_installation"
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 139,
+      "nodeId": "program:v6.observed_binding.choose",
+      "kind": "program",
+      "revision": 1,
+      "cause": {
+        "statement": "program.install",
+        "step": "native_store",
+        "workflow": "v6.observed_binding.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "5a78f3b211362c2556a86041b3280b53d013bb6011e1be3c9a507e40f27c7a42",
+      "category": "observedBinding_installed_source_program",
+      "workflow": "v6.observed_binding.choose",
+      "executionHash": "4e0df7158f87d0ba2ec7ab36f41c2fd517b666d4e228ff1bde151bc71c6f2dfc",
+      "transitiveSourceHash": "fb2ff7e22ea223b6fc0a118831122f5f4a416b2f5ae0d286774a99776ba39564"
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 1,
+      "request": "advance",
+      "requestSequence": 1,
+      "deltaSequence": 283,
+      "nodeId": "family_state:public_observed_binding",
+      "kind": "family_state",
+      "revision": 2,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:1"
+      ],
+      "nodeSha256": "354dbf9bacbbfefb028b344a8ed91fe611576efdd256c3343f357c6a76e3817c",
+      "category": "observedBinding_owner_state",
+      "checkpointIndex": 2,
+      "sourceStateSha256": "a13263ee9fa528f5e7efd042b80c54f383fdf38ba9aeb151870571c86dfb8229",
+      "epoch": 1
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 3,
+      "request": "advance",
+      "requestSequence": 2,
+      "deltaSequence": 395,
+      "nodeId": "family_state:public_observed_binding",
+      "kind": "family_state",
+      "revision": 3,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:2"
+      ],
+      "nodeSha256": "fa39653dfc07f02a887619bd9c647308811c0cad8345fa326dfd8777fdb6f705",
+      "category": "observedBinding_owner_state",
+      "checkpointIndex": 2,
+      "sourceStateSha256": "a13263ee9fa528f5e7efd042b80c54f383fdf38ba9aeb151870571c86dfb8229",
+      "epoch": 1
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 5,
+      "request": "advance",
+      "requestSequence": 3,
+      "deltaSequence": 455,
+      "nodeId": "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e",
+      "kind": "component_state",
+      "revision": 1,
+      "cause": {
+        "statement": "transition.acquire",
+        "step": "native_memory",
+        "workflow": "prototype.laya_router.route"
+      },
+      "evidence": [],
+      "nodeSha256": "43fc61107511b82a78f24ad0e6ec079b9ab0bfe60eeff7401a8ff6956e0e299d",
+      "category": "observedBinding_source_event_fact",
+      "factKey": "object_binding_event:3",
+      "sourceCallIndex": 2,
+      "sourceEventCount": 1,
+      "sourceStatus": "scope_changed_preserving_conditional_methods",
+      "beforeObservation": "lot5c-owner-cost-smlp-warmup:epoch:1:revision:3:frame:bce8c883896b59f4",
+      "afterObservation": "lot5c-owner-cost-smlp-warmup:epoch:2:revision:4:frame:e5988dd7f87420f6",
+      "officialBoundary": true
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 5,
+      "request": "advance",
+      "requestSequence": 3,
+      "deltaSequence": 508,
+      "nodeId": "family_state:public_observed_binding",
+      "kind": "family_state",
+      "revision": 4,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:3"
+      ],
+      "nodeSha256": "c84b493fd258fe41ef8c225c7c7932165f454f6de88e2ba565b620b685822f19",
+      "category": "observedBinding_owner_state",
+      "checkpointIndex": 4,
+      "sourceStateSha256": "3f9fca27e1bdde3700176486314f2bf2cf66031c5f2735decb8ebd7a4b266dbd",
+      "epoch": 2
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 37,
+      "nodeId": "family_state:public_observed_binding",
+      "kind": "family_state",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "3be08c8979d7bf27bfbb6871bbb0b3a024441aa24c2aeab855b27edcde3a5bde",
+      "category": "observedBinding_owner_state",
+      "checkpointIndex": 0,
+      "sourceStateSha256": "a052b0951aec8b94afaedb5267e9f6b580f7dd8d2f0147c176c9e9de3a8afd53",
+      "epoch": null
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 38,
+      "nodeId": "family_activation:public_observed_binding",
+      "kind": "family_activation",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "78f952429cddc2d0356a74bff293ccf7e1d725b9e549fafd724cbf4da3f260b7",
+      "category": "observedBinding_installation"
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 139,
+      "nodeId": "program:v6.observed_binding.choose",
+      "kind": "program",
+      "revision": 1,
+      "cause": {
+        "statement": "program.install",
+        "step": "native_store",
+        "workflow": "v6.observed_binding.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "7522d9bbc654cc68b8ae85703d53def85addd9283e64cf77b1fa05003e55e7d9",
+      "category": "observedBinding_installed_source_program",
+      "workflow": "v6.observed_binding.choose",
+      "executionHash": "4e0df7158f87d0ba2ec7ab36f41c2fd517b666d4e228ff1bde151bc71c6f2dfc",
+      "transitiveSourceHash": "fb2ff7e22ea223b6fc0a118831122f5f4a416b2f5ae0d286774a99776ba39564"
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 1,
+      "request": "advance",
+      "requestSequence": 1,
+      "deltaSequence": 283,
+      "nodeId": "family_state:public_observed_binding",
+      "kind": "family_state",
+      "revision": 2,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:1"
+      ],
+      "nodeSha256": "1ea89469cb612fdea7a97e1dd3fb3ca55a414d1d2d11271b7bc92f401a403940",
+      "category": "observedBinding_owner_state",
+      "checkpointIndex": 2,
+      "sourceStateSha256": "a13263ee9fa528f5e7efd042b80c54f383fdf38ba9aeb151870571c86dfb8229",
+      "epoch": 1
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 3,
+      "request": "advance",
+      "requestSequence": 2,
+      "deltaSequence": 395,
+      "nodeId": "family_state:public_observed_binding",
+      "kind": "family_state",
+      "revision": 3,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:2"
+      ],
+      "nodeSha256": "8e8df30b30cf466e4b92fd5a985b51e66b0c1e597194c57dd744938839954997",
+      "category": "observedBinding_owner_state",
+      "checkpointIndex": 2,
+      "sourceStateSha256": "a13263ee9fa528f5e7efd042b80c54f383fdf38ba9aeb151870571c86dfb8229",
+      "epoch": 1
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 5,
+      "request": "advance",
+      "requestSequence": 3,
+      "deltaSequence": 455,
+      "nodeId": "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e",
+      "kind": "component_state",
+      "revision": 1,
+      "cause": {
+        "statement": "transition.acquire",
+        "step": "native_memory",
+        "workflow": "prototype.laya_router.route"
+      },
+      "evidence": [],
+      "nodeSha256": "5e1f8ec9b9169ae4587f030277e5ce3ee0e8314ed174c2e494a986a28983b72b",
+      "category": "observedBinding_source_event_fact",
+      "factKey": "object_binding_event:3",
+      "sourceCallIndex": 2,
+      "sourceEventCount": 1,
+      "sourceStatus": "scope_changed_preserving_conditional_methods",
+      "beforeObservation": "lot5c-owner-cost-smlp-measured:epoch:1:revision:3:frame:bce8c883896b59f4",
+      "afterObservation": "lot5c-owner-cost-smlp-measured:epoch:2:revision:4:frame:e5988dd7f87420f6",
+      "officialBoundary": true
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 5,
+      "request": "advance",
+      "requestSequence": 3,
+      "deltaSequence": 508,
+      "nodeId": "family_state:public_observed_binding",
+      "kind": "family_state",
+      "revision": 4,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:3"
+      ],
+      "nodeSha256": "fa00c8a1363920e8d39e42b02246cb1863cade74ed1dbaf7e023db1e123f9b80",
+      "category": "observedBinding_owner_state",
+      "checkpointIndex": 4,
+      "sourceStateSha256": "3f9fca27e1bdde3700176486314f2bf2cf66031c5f2735decb8ebd7a4b266dbd",
+      "epoch": 2
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 7,
+      "request": "advance",
+      "requestSequence": 4,
+      "deltaSequence": 636,
+      "nodeId": "family_state:public_observed_binding",
+      "kind": "family_state",
+      "revision": 5,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:4"
+      ],
+      "nodeSha256": "019adf817556faa485a28ab07ef8082ff35a11f6aecb26723693ca0d5246eb38",
+      "category": "observedBinding_owner_state",
+      "checkpointIndex": 4,
+      "sourceStateSha256": "3f9fca27e1bdde3700176486314f2bf2cf66031c5f2735decb8ebd7a4b266dbd",
+      "epoch": 2
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 11,
+      "request": "advance",
+      "requestSequence": 7,
+      "deltaSequence": 725,
+      "nodeId": "reasoning:fact:3c619b15cc20da19a694bd25a76d2da68f1620b027f33ca3c5605373ec526704",
+      "kind": "component_state",
+      "revision": 1,
+      "cause": {
+        "statement": "transition.acquire",
+        "step": "native_memory",
+        "workflow": "prototype.laya_router.route"
+      },
+      "evidence": [],
+      "nodeSha256": "2d15ff5203c7d8e61b2114e9f6780a9252dae9f1525f049cab29b1929142da94",
+      "category": "observedBinding_source_event_fact",
+      "factKey": "object_binding_event:7",
+      "sourceCallIndex": 6,
+      "sourceEventCount": 1,
+      "sourceStatus": "scope_changed_preserving_conditional_methods",
+      "beforeObservation": "lot5c-owner-cost-smlp-measured:epoch:2:revision:7:frame:1fc6ca9809b62023",
+      "afterObservation": "lot5c-owner-cost-smlp-measured:epoch:3:revision:8:frame:fface9e1e28549fd",
+      "officialBoundary": true
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 11,
+      "request": "advance",
+      "requestSequence": 7,
+      "deltaSequence": 779,
+      "nodeId": "family_state:public_observed_binding",
+      "kind": "family_state",
+      "revision": 6,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:5"
+      ],
+      "nodeSha256": "b6c5470e4db7ff24616045a94c884cd210a794bfe8b0ee19d3e04184351953e2",
+      "category": "observedBinding_owner_state",
+      "checkpointIndex": 6,
+      "sourceStateSha256": "f2083ffaa16fda2033342195401ad95946907ba5a8e5e47b7f981d1bc35a835c",
+      "epoch": 3
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 13,
+      "request": "advance",
+      "requestSequence": 8,
+      "deltaSequence": 902,
+      "nodeId": "family_state:public_observed_binding",
+      "kind": "family_state",
+      "revision": 7,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:8"
+      ],
+      "nodeSha256": "f1dafd03b6152e5c2d1db6383ee4a6c2f0b83cad5306a8ea56f93665d5142bd8",
+      "category": "observedBinding_owner_state",
+      "checkpointIndex": 6,
+      "sourceStateSha256": "f2083ffaa16fda2033342195401ad95946907ba5a8e5e47b7f981d1bc35a835c",
+      "epoch": 3
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 15,
+      "request": "advance",
+      "requestSequence": 9,
+      "deltaSequence": 1022,
+      "nodeId": "family_state:public_observed_binding",
+      "kind": "family_state",
+      "revision": 8,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:9"
+      ],
+      "nodeSha256": "065e285d0397844a9dd453fc9b778628ae6b0c70d9d8626d6c4687624ba04231",
+      "category": "observedBinding_owner_state",
+      "checkpointIndex": 6,
+      "sourceStateSha256": "f2083ffaa16fda2033342195401ad95946907ba5a8e5e47b7f981d1bc35a835c",
+      "epoch": 3
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 18,
+      "request": "advance",
+      "requestSequence": 11,
+      "deltaSequence": 1154,
+      "nodeId": "family_state:public_observed_binding",
+      "kind": "family_state",
+      "revision": 9,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:10"
+      ],
+      "nodeSha256": "06163f35ea7f977c58b9043600b746182f0f31e49e6e4d9b80abd2baed8addd4",
+      "category": "observedBinding_owner_state",
+      "checkpointIndex": 6,
+      "sourceStateSha256": "f2083ffaa16fda2033342195401ad95946907ba5a8e5e47b7f981d1bc35a835c",
+      "epoch": 3
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 23,
+      "request": "advance",
+      "requestSequence": 15,
+      "deltaSequence": 1259,
+      "nodeId": "reasoning:fact:5fb09defa9307524dbf164e056efb4a1e0061cef30f82f07c531251ba5f7f291",
+      "kind": "component_state",
+      "revision": 1,
+      "cause": {
+        "statement": "transition.acquire",
+        "step": "native_memory",
+        "workflow": "prototype.laya_router.route"
+      },
+      "evidence": [],
+      "nodeSha256": "ad46d94537843bb2a7ca5d6b48f6efd0ca1a0b40cf316903f30dcf20eb37e2df",
+      "category": "observedBinding_source_event_fact",
+      "factKey": "object_binding_event:15",
+      "sourceCallIndex": 14,
+      "sourceEventCount": 1,
+      "sourceStatus": "scope_changed_preserving_conditional_methods",
+      "beforeObservation": "lot5c-owner-cost-smlp-measured:epoch:3:revision:15:frame:f8b1fede3bd25976",
+      "afterObservation": "lot5c-owner-cost-smlp-measured:epoch:4:revision:16:frame:6d43ed5dd243fea3",
+      "officialBoundary": true
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 23,
+      "request": "advance",
+      "requestSequence": 15,
+      "deltaSequence": 1314,
+      "nodeId": "family_state:public_observed_binding",
+      "kind": "family_state",
+      "revision": 10,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:12"
+      ],
+      "nodeSha256": "ecab55e14df78398b78532cdd6f621b4d8c419d8a9980ba7b9fb55190c4f15a1",
+      "category": "observedBinding_owner_state",
+      "checkpointIndex": 8,
+      "sourceStateSha256": "5c6ee350cbb639fec86e9362bb4f2ec186da8d2672a1ef63d6c987db7c88ccfd",
+      "epoch": 4
+    }
+  ],
+  "points": [
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "sequence": 0,
+      "baselineNodeCount": 179,
+      "candidateNodeCount": 182,
+      "baselineGraphRevision": 189,
+      "candidateGraphRevision": 192,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose"
+      ],
+      "attributedCumulativeDeltas": 3,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 1,
+      "request": "advance",
+      "sequence": 1,
+      "baselineNodeCount": 208,
+      "candidateNodeCount": 211,
+      "baselineGraphRevision": 301,
+      "candidateGraphRevision": 305,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose"
+      ],
+      "attributedCumulativeDeltas": 4,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 2,
+      "request": "resume",
+      "sequence": 1,
+      "baselineNodeCount": 210,
+      "candidateNodeCount": 213,
+      "baselineGraphRevision": 311,
+      "candidateGraphRevision": 315,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose"
+      ],
+      "attributedCumulativeDeltas": 4,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 3,
+      "request": "advance",
+      "sequence": 2,
+      "baselineNodeCount": 233,
+      "candidateNodeCount": 236,
+      "baselineGraphRevision": 420,
+      "candidateGraphRevision": 425,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose"
+      ],
+      "attributedCumulativeDeltas": 5,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 4,
+      "request": "resume",
+      "sequence": 2,
+      "baselineNodeCount": 235,
+      "candidateNodeCount": 238,
+      "baselineGraphRevision": 430,
+      "candidateGraphRevision": 435,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose"
+      ],
+      "attributedCumulativeDeltas": 5,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 5,
+      "request": "advance",
+      "sequence": 3,
+      "baselineNodeCount": 258,
+      "candidateNodeCount": 262,
+      "baselineGraphRevision": 534,
+      "candidateGraphRevision": 541,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose",
+        "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e"
+      ],
+      "attributedCumulativeDeltas": 7,
+      "officialBoundarySourceCalls": [
+        2
+      ]
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "sequence": 0,
+      "baselineNodeCount": 179,
+      "candidateNodeCount": 182,
+      "baselineGraphRevision": 189,
+      "candidateGraphRevision": 192,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose"
+      ],
+      "attributedCumulativeDeltas": 3,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 1,
+      "request": "advance",
+      "sequence": 1,
+      "baselineNodeCount": 208,
+      "candidateNodeCount": 211,
+      "baselineGraphRevision": 301,
+      "candidateGraphRevision": 305,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose"
+      ],
+      "attributedCumulativeDeltas": 4,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 2,
+      "request": "resume",
+      "sequence": 1,
+      "baselineNodeCount": 210,
+      "candidateNodeCount": 213,
+      "baselineGraphRevision": 311,
+      "candidateGraphRevision": 315,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose"
+      ],
+      "attributedCumulativeDeltas": 4,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 3,
+      "request": "advance",
+      "sequence": 2,
+      "baselineNodeCount": 233,
+      "candidateNodeCount": 236,
+      "baselineGraphRevision": 420,
+      "candidateGraphRevision": 425,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose"
+      ],
+      "attributedCumulativeDeltas": 5,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 4,
+      "request": "resume",
+      "sequence": 2,
+      "baselineNodeCount": 235,
+      "candidateNodeCount": 238,
+      "baselineGraphRevision": 430,
+      "candidateGraphRevision": 435,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose"
+      ],
+      "attributedCumulativeDeltas": 5,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 5,
+      "request": "advance",
+      "sequence": 3,
+      "baselineNodeCount": 258,
+      "candidateNodeCount": 262,
+      "baselineGraphRevision": 534,
+      "candidateGraphRevision": 541,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose",
+        "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e"
+      ],
+      "attributedCumulativeDeltas": 7,
+      "officialBoundarySourceCalls": [
+        2
+      ]
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 6,
+      "request": "resume",
+      "sequence": 3,
+      "baselineNodeCount": 260,
+      "candidateNodeCount": 264,
+      "baselineGraphRevision": 547,
+      "candidateGraphRevision": 554,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose",
+        "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e"
+      ],
+      "attributedCumulativeDeltas": 7,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 7,
+      "request": "advance",
+      "sequence": 4,
+      "baselineNodeCount": 283,
+      "candidateNodeCount": 287,
+      "baselineGraphRevision": 656,
+      "candidateGraphRevision": 664,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose",
+        "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e"
+      ],
+      "attributedCumulativeDeltas": 8,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 8,
+      "request": "resume",
+      "sequence": 4,
+      "baselineNodeCount": 285,
+      "candidateNodeCount": 289,
+      "baselineGraphRevision": 667,
+      "candidateGraphRevision": 675,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose",
+        "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e"
+      ],
+      "attributedCumulativeDeltas": 8,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 9,
+      "request": "advance",
+      "sequence": 5,
+      "baselineNodeCount": 285,
+      "candidateNodeCount": 289,
+      "baselineGraphRevision": 667,
+      "candidateGraphRevision": 675,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose",
+        "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e"
+      ],
+      "attributedCumulativeDeltas": 8,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 10,
+      "request": "advance",
+      "sequence": 6,
+      "baselineNodeCount": 285,
+      "candidateNodeCount": 289,
+      "baselineGraphRevision": 667,
+      "candidateGraphRevision": 675,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose",
+        "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e"
+      ],
+      "attributedCumulativeDeltas": 8,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 11,
+      "request": "advance",
+      "sequence": 7,
+      "baselineNodeCount": 285,
+      "candidateNodeCount": 289,
+      "baselineGraphRevision": 667,
+      "candidateGraphRevision": 675,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose",
+        "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e"
+      ],
+      "attributedCumulativeDeltas": 8,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 12,
+      "request": "advance",
+      "sequence": 8,
+      "baselineNodeCount": 285,
+      "candidateNodeCount": 289,
+      "baselineGraphRevision": 667,
+      "candidateGraphRevision": 675,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose",
+        "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e"
+      ],
+      "attributedCumulativeDeltas": 8,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 13,
+      "request": "advance",
+      "sequence": 9,
+      "baselineNodeCount": 369,
+      "candidateNodeCount": 373,
+      "baselineGraphRevision": 838,
+      "candidateGraphRevision": 847,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose",
+        "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e"
+      ],
+      "attributedCumulativeDeltas": 9,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 14,
+      "request": "resume",
+      "sequence": 9,
+      "baselineNodeCount": 371,
+      "candidateNodeCount": 375,
+      "baselineGraphRevision": 848,
+      "candidateGraphRevision": 857,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose",
+        "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e"
+      ],
+      "attributedCumulativeDeltas": 9,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 15,
+      "request": "advance",
+      "sequence": 10,
+      "baselineNodeCount": 392,
+      "candidateNodeCount": 397,
+      "baselineGraphRevision": 955,
+      "candidateGraphRevision": 966,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose",
+        "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e",
+        "reasoning:fact:bf6fc68e8d2d561e77a3b9a8cba1f93f881d4fcfe7522af4da5e0904b67b956f"
+      ],
+      "attributedCumulativeDeltas": 11,
+      "officialBoundarySourceCalls": [
+        9
+      ]
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 16,
+      "request": "inspect",
+      "sequence": 10,
+      "baselineNodeCount": 392,
+      "candidateNodeCount": 397,
+      "baselineGraphRevision": 955,
+      "candidateGraphRevision": 966,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose",
+        "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e",
+        "reasoning:fact:bf6fc68e8d2d561e77a3b9a8cba1f93f881d4fcfe7522af4da5e0904b67b956f"
+      ],
+      "attributedCumulativeDeltas": 11,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 17,
+      "request": "inspect",
+      "sequence": 10,
+      "baselineNodeCount": 392,
+      "candidateNodeCount": 397,
+      "baselineGraphRevision": 955,
+      "candidateGraphRevision": 966,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose",
+        "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e",
+        "reasoning:fact:bf6fc68e8d2d561e77a3b9a8cba1f93f881d4fcfe7522af4da5e0904b67b956f"
+      ],
+      "attributedCumulativeDeltas": 11,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 18,
+      "request": "inspect",
+      "sequence": 10,
+      "baselineNodeCount": 392,
+      "candidateNodeCount": 397,
+      "baselineGraphRevision": 955,
+      "candidateGraphRevision": 966,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose",
+        "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e",
+        "reasoning:fact:bf6fc68e8d2d561e77a3b9a8cba1f93f881d4fcfe7522af4da5e0904b67b956f"
+      ],
+      "attributedCumulativeDeltas": 11,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "sequence": 0,
+      "baselineNodeCount": 184,
+      "candidateNodeCount": 187,
+      "baselineGraphRevision": 219,
+      "candidateGraphRevision": 222,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose"
+      ],
+      "attributedCumulativeDeltas": 3,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 1,
+      "request": "advance",
+      "sequence": 1,
+      "baselineNodeCount": 203,
+      "candidateNodeCount": 206,
+      "baselineGraphRevision": 318,
+      "candidateGraphRevision": 322,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose"
+      ],
+      "attributedCumulativeDeltas": 4,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 2,
+      "request": "resume",
+      "sequence": 1,
+      "baselineNodeCount": 205,
+      "candidateNodeCount": 208,
+      "baselineGraphRevision": 328,
+      "candidateGraphRevision": 332,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose"
+      ],
+      "attributedCumulativeDeltas": 4,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 3,
+      "request": "advance",
+      "sequence": 2,
+      "baselineNodeCount": 221,
+      "candidateNodeCount": 224,
+      "baselineGraphRevision": 429,
+      "candidateGraphRevision": 434,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose"
+      ],
+      "attributedCumulativeDeltas": 5,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 4,
+      "request": "resume",
+      "sequence": 2,
+      "baselineNodeCount": 223,
+      "candidateNodeCount": 226,
+      "baselineGraphRevision": 439,
+      "candidateGraphRevision": 444,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose"
+      ],
+      "attributedCumulativeDeltas": 5,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 5,
+      "request": "advance",
+      "sequence": 3,
+      "baselineNodeCount": 249,
+      "candidateNodeCount": 253,
+      "baselineGraphRevision": 546,
+      "candidateGraphRevision": 553,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose",
+        "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e"
+      ],
+      "attributedCumulativeDeltas": 7,
+      "officialBoundarySourceCalls": [
+        2
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "sequence": 0,
+      "baselineNodeCount": 184,
+      "candidateNodeCount": 187,
+      "baselineGraphRevision": 219,
+      "candidateGraphRevision": 222,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose"
+      ],
+      "attributedCumulativeDeltas": 3,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 1,
+      "request": "advance",
+      "sequence": 1,
+      "baselineNodeCount": 203,
+      "candidateNodeCount": 206,
+      "baselineGraphRevision": 318,
+      "candidateGraphRevision": 322,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose"
+      ],
+      "attributedCumulativeDeltas": 4,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 2,
+      "request": "resume",
+      "sequence": 1,
+      "baselineNodeCount": 205,
+      "candidateNodeCount": 208,
+      "baselineGraphRevision": 328,
+      "candidateGraphRevision": 332,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose"
+      ],
+      "attributedCumulativeDeltas": 4,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 3,
+      "request": "advance",
+      "sequence": 2,
+      "baselineNodeCount": 221,
+      "candidateNodeCount": 224,
+      "baselineGraphRevision": 429,
+      "candidateGraphRevision": 434,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose"
+      ],
+      "attributedCumulativeDeltas": 5,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 4,
+      "request": "resume",
+      "sequence": 2,
+      "baselineNodeCount": 223,
+      "candidateNodeCount": 226,
+      "baselineGraphRevision": 439,
+      "candidateGraphRevision": 444,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose"
+      ],
+      "attributedCumulativeDeltas": 5,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 5,
+      "request": "advance",
+      "sequence": 3,
+      "baselineNodeCount": 249,
+      "candidateNodeCount": 253,
+      "baselineGraphRevision": 546,
+      "candidateGraphRevision": 553,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose",
+        "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e"
+      ],
+      "attributedCumulativeDeltas": 7,
+      "officialBoundarySourceCalls": [
+        2
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 6,
+      "request": "resume",
+      "sequence": 3,
+      "baselineNodeCount": 251,
+      "candidateNodeCount": 255,
+      "baselineGraphRevision": 568,
+      "candidateGraphRevision": 575,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose",
+        "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e"
+      ],
+      "attributedCumulativeDeltas": 7,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 7,
+      "request": "advance",
+      "sequence": 4,
+      "baselineNodeCount": 266,
+      "candidateNodeCount": 270,
+      "baselineGraphRevision": 667,
+      "candidateGraphRevision": 675,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose",
+        "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e"
+      ],
+      "attributedCumulativeDeltas": 8,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 8,
+      "request": "resume",
+      "sequence": 4,
+      "baselineNodeCount": 268,
+      "candidateNodeCount": 272,
+      "baselineGraphRevision": 677,
+      "candidateGraphRevision": 685,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose",
+        "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e"
+      ],
+      "attributedCumulativeDeltas": 8,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 9,
+      "request": "advance",
+      "sequence": 5,
+      "baselineNodeCount": 268,
+      "candidateNodeCount": 272,
+      "baselineGraphRevision": 677,
+      "candidateGraphRevision": 685,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose",
+        "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e"
+      ],
+      "attributedCumulativeDeltas": 8,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 10,
+      "request": "advance",
+      "sequence": 6,
+      "baselineNodeCount": 268,
+      "candidateNodeCount": 272,
+      "baselineGraphRevision": 677,
+      "candidateGraphRevision": 685,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose",
+        "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e"
+      ],
+      "attributedCumulativeDeltas": 8,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 11,
+      "request": "advance",
+      "sequence": 7,
+      "baselineNodeCount": 318,
+      "candidateNodeCount": 323,
+      "baselineGraphRevision": 813,
+      "candidateGraphRevision": 823,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose",
+        "reasoning:fact:3c619b15cc20da19a694bd25a76d2da68f1620b027f33ca3c5605373ec526704",
+        "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e"
+      ],
+      "attributedCumulativeDeltas": 10,
+      "officialBoundarySourceCalls": [
+        6
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 12,
+      "request": "resume",
+      "sequence": 7,
+      "baselineNodeCount": 320,
+      "candidateNodeCount": 325,
+      "baselineGraphRevision": 825,
+      "candidateGraphRevision": 835,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose",
+        "reasoning:fact:3c619b15cc20da19a694bd25a76d2da68f1620b027f33ca3c5605373ec526704",
+        "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e"
+      ],
+      "attributedCumulativeDeltas": 10,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 13,
+      "request": "advance",
+      "sequence": 8,
+      "baselineNodeCount": 340,
+      "candidateNodeCount": 345,
+      "baselineGraphRevision": 930,
+      "candidateGraphRevision": 941,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose",
+        "reasoning:fact:3c619b15cc20da19a694bd25a76d2da68f1620b027f33ca3c5605373ec526704",
+        "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e"
+      ],
+      "attributedCumulativeDeltas": 11,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 14,
+      "request": "resume",
+      "sequence": 8,
+      "baselineNodeCount": 342,
+      "candidateNodeCount": 347,
+      "baselineGraphRevision": 948,
+      "candidateGraphRevision": 959,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose",
+        "reasoning:fact:3c619b15cc20da19a694bd25a76d2da68f1620b027f33ca3c5605373ec526704",
+        "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e"
+      ],
+      "attributedCumulativeDeltas": 11,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 15,
+      "request": "advance",
+      "sequence": 9,
+      "baselineNodeCount": 362,
+      "candidateNodeCount": 367,
+      "baselineGraphRevision": 1051,
+      "candidateGraphRevision": 1063,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose",
+        "reasoning:fact:3c619b15cc20da19a694bd25a76d2da68f1620b027f33ca3c5605373ec526704",
+        "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e"
+      ],
+      "attributedCumulativeDeltas": 12,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 16,
+      "request": "resume",
+      "sequence": 9,
+      "baselineNodeCount": 364,
+      "candidateNodeCount": 369,
+      "baselineGraphRevision": 1061,
+      "candidateGraphRevision": 1073,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose",
+        "reasoning:fact:3c619b15cc20da19a694bd25a76d2da68f1620b027f33ca3c5605373ec526704",
+        "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e"
+      ],
+      "attributedCumulativeDeltas": 12,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 17,
+      "request": "advance",
+      "sequence": 10,
+      "baselineNodeCount": 364,
+      "candidateNodeCount": 369,
+      "baselineGraphRevision": 1061,
+      "candidateGraphRevision": 1073,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose",
+        "reasoning:fact:3c619b15cc20da19a694bd25a76d2da68f1620b027f33ca3c5605373ec526704",
+        "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e"
+      ],
+      "attributedCumulativeDeltas": 12,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 18,
+      "request": "advance",
+      "sequence": 11,
+      "baselineNodeCount": 400,
+      "candidateNodeCount": 405,
+      "baselineGraphRevision": 1182,
+      "candidateGraphRevision": 1195,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose",
+        "reasoning:fact:3c619b15cc20da19a694bd25a76d2da68f1620b027f33ca3c5605373ec526704",
+        "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e"
+      ],
+      "attributedCumulativeDeltas": 13,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 19,
+      "request": "resume",
+      "sequence": 11,
+      "baselineNodeCount": 402,
+      "candidateNodeCount": 407,
+      "baselineGraphRevision": 1192,
+      "candidateGraphRevision": 1205,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose",
+        "reasoning:fact:3c619b15cc20da19a694bd25a76d2da68f1620b027f33ca3c5605373ec526704",
+        "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e"
+      ],
+      "attributedCumulativeDeltas": 13,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 20,
+      "request": "advance",
+      "sequence": 12,
+      "baselineNodeCount": 402,
+      "candidateNodeCount": 407,
+      "baselineGraphRevision": 1192,
+      "candidateGraphRevision": 1205,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose",
+        "reasoning:fact:3c619b15cc20da19a694bd25a76d2da68f1620b027f33ca3c5605373ec526704",
+        "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e"
+      ],
+      "attributedCumulativeDeltas": 13,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 21,
+      "request": "advance",
+      "sequence": 13,
+      "baselineNodeCount": 402,
+      "candidateNodeCount": 407,
+      "baselineGraphRevision": 1192,
+      "candidateGraphRevision": 1205,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose",
+        "reasoning:fact:3c619b15cc20da19a694bd25a76d2da68f1620b027f33ca3c5605373ec526704",
+        "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e"
+      ],
+      "attributedCumulativeDeltas": 13,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 22,
+      "request": "advance",
+      "sequence": 14,
+      "baselineNodeCount": 402,
+      "candidateNodeCount": 407,
+      "baselineGraphRevision": 1192,
+      "candidateGraphRevision": 1205,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose",
+        "reasoning:fact:3c619b15cc20da19a694bd25a76d2da68f1620b027f33ca3c5605373ec526704",
+        "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e"
+      ],
+      "attributedCumulativeDeltas": 13,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 23,
+      "request": "advance",
+      "sequence": 15,
+      "baselineNodeCount": 466,
+      "candidateNodeCount": 472,
+      "baselineGraphRevision": 1342,
+      "candidateGraphRevision": 1357,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose",
+        "reasoning:fact:3c619b15cc20da19a694bd25a76d2da68f1620b027f33ca3c5605373ec526704",
+        "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e",
+        "reasoning:fact:5fb09defa9307524dbf164e056efb4a1e0061cef30f82f07c531251ba5f7f291"
+      ],
+      "attributedCumulativeDeltas": 15,
+      "officialBoundarySourceCalls": [
+        14
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 24,
+      "request": "inspect",
+      "sequence": 15,
+      "baselineNodeCount": 466,
+      "candidateNodeCount": 472,
+      "baselineGraphRevision": 1342,
+      "candidateGraphRevision": 1357,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose",
+        "reasoning:fact:3c619b15cc20da19a694bd25a76d2da68f1620b027f33ca3c5605373ec526704",
+        "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e",
+        "reasoning:fact:5fb09defa9307524dbf164e056efb4a1e0061cef30f82f07c531251ba5f7f291"
+      ],
+      "attributedCumulativeDeltas": 15,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 25,
+      "request": "inspect",
+      "sequence": 15,
+      "baselineNodeCount": 466,
+      "candidateNodeCount": 472,
+      "baselineGraphRevision": 1342,
+      "candidateGraphRevision": 1357,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose",
+        "reasoning:fact:3c619b15cc20da19a694bd25a76d2da68f1620b027f33ca3c5605373ec526704",
+        "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e",
+        "reasoning:fact:5fb09defa9307524dbf164e056efb4a1e0061cef30f82f07c531251ba5f7f291"
+      ],
+      "attributedCumulativeDeltas": 15,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 26,
+      "request": "inspect",
+      "sequence": 15,
+      "baselineNodeCount": 466,
+      "candidateNodeCount": 472,
+      "baselineGraphRevision": 1342,
+      "candidateGraphRevision": 1357,
+      "addedNodeIds": [
+        "family_activation:public_observed_binding",
+        "family_state:public_observed_binding",
+        "program:v6.observed_binding.choose",
+        "reasoning:fact:3c619b15cc20da19a694bd25a76d2da68f1620b027f33ca3c5605373ec526704",
+        "reasoning:fact:55c153a62a6278daff2844329ca8e44e4c2447f8b2b5f979a5a9067933455e5e",
+        "reasoning:fact:5fb09defa9307524dbf164e056efb4a1e0061cef30f82f07c531251ba5f7f291"
+      ],
+      "attributedCumulativeDeltas": 15,
+      "officialBoundarySourceCalls": []
+    }
+  ],
+  "failures": [],
+  "commandBoundaryProjections": [
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "sourceCallIndex": 2,
+      "action": 3,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "rule": "V6AgentService.commandFromNative data object spread; source omission retained"
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "sourceCallIndex": 2,
+      "action": 3,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "rule": "V6AgentService.commandFromNative data object spread; source omission retained"
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "sourceCallIndex": 8,
+      "action": 9,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "rule": "V6AgentService.commandFromNative data object spread; source omission retained"
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "sourceCallIndex": 9,
+      "action": 10,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "rule": "V6AgentService.commandFromNative data object spread; source omission retained"
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "sourceCallIndex": 0,
+      "action": 1,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "rule": "V6AgentService.commandFromNative data object spread; source omission retained"
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "sourceCallIndex": 2,
+      "action": 3,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "rule": "V6AgentService.commandFromNative data object spread; source omission retained"
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "sourceCallIndex": 0,
+      "action": 1,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "rule": "V6AgentService.commandFromNative data object spread; source omission retained"
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "sourceCallIndex": 2,
+      "action": 3,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "rule": "V6AgentService.commandFromNative data object spread; source omission retained"
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "sourceCallIndex": 3,
+      "action": 4,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "rule": "V6AgentService.commandFromNative data object spread; source omission retained"
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "sourceCallIndex": 6,
+      "action": 7,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "rule": "V6AgentService.commandFromNative data object spread; source omission retained"
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "sourceCallIndex": 8,
+      "action": 9,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "rule": "V6AgentService.commandFromNative data object spread; source omission retained"
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "sourceCallIndex": 10,
+      "action": 11,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "rule": "V6AgentService.commandFromNative data object spread; source omission retained"
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "sourceCallIndex": 14,
+      "action": 15,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "rule": "V6AgentService.commandFromNative data object spread; source omission retained"
+    }
+  ],
+  "sourceFactCoverage": [
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 0,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "sourceEventCallIndices": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 1,
+      "acquiredReturns": 1,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [
+        0
+      ],
+      "sourceEventCallIndices": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 2,
+      "acquiredReturns": 1,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [
+        0
+      ],
+      "sourceEventCallIndices": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 3,
+      "acquiredReturns": 2,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [
+        0,
+        1
+      ],
+      "sourceEventCallIndices": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 4,
+      "acquiredReturns": 2,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [
+        0,
+        1
+      ],
+      "sourceEventCallIndices": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 5,
+      "acquiredReturns": 3,
+      "persistedSourceFacts": 1,
+      "sourceCallIndices": [
+        0,
+        1,
+        2
+      ],
+      "sourceEventCallIndices": [
+        2
+      ]
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 0,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "sourceEventCallIndices": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 1,
+      "acquiredReturns": 1,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [
+        0
+      ],
+      "sourceEventCallIndices": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 2,
+      "acquiredReturns": 1,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [
+        0
+      ],
+      "sourceEventCallIndices": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 3,
+      "acquiredReturns": 2,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [
+        0,
+        1
+      ],
+      "sourceEventCallIndices": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 4,
+      "acquiredReturns": 2,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [
+        0,
+        1
+      ],
+      "sourceEventCallIndices": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 5,
+      "acquiredReturns": 3,
+      "persistedSourceFacts": 1,
+      "sourceCallIndices": [
+        0,
+        1,
+        2
+      ],
+      "sourceEventCallIndices": [
+        2
+      ]
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 6,
+      "acquiredReturns": 3,
+      "persistedSourceFacts": 1,
+      "sourceCallIndices": [
+        0,
+        1,
+        2
+      ],
+      "sourceEventCallIndices": [
+        2
+      ]
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 7,
+      "acquiredReturns": 4,
+      "persistedSourceFacts": 1,
+      "sourceCallIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "sourceEventCallIndices": [
+        2
+      ]
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 8,
+      "acquiredReturns": 4,
+      "persistedSourceFacts": 1,
+      "sourceCallIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "sourceEventCallIndices": [
+        2
+      ]
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 9,
+      "acquiredReturns": 4,
+      "persistedSourceFacts": 1,
+      "sourceCallIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "sourceEventCallIndices": [
+        2
+      ]
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 10,
+      "acquiredReturns": 4,
+      "persistedSourceFacts": 1,
+      "sourceCallIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "sourceEventCallIndices": [
+        2
+      ]
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 11,
+      "acquiredReturns": 4,
+      "persistedSourceFacts": 1,
+      "sourceCallIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "sourceEventCallIndices": [
+        2
+      ]
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 12,
+      "acquiredReturns": 4,
+      "persistedSourceFacts": 1,
+      "sourceCallIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "sourceEventCallIndices": [
+        2
+      ]
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 13,
+      "acquiredReturns": 9,
+      "persistedSourceFacts": 1,
+      "sourceCallIndices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "sourceEventCallIndices": [
+        2
+      ]
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 14,
+      "acquiredReturns": 9,
+      "persistedSourceFacts": 1,
+      "sourceCallIndices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "sourceEventCallIndices": [
+        2
+      ]
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 15,
+      "acquiredReturns": 10,
+      "persistedSourceFacts": 2,
+      "sourceCallIndices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "sourceEventCallIndices": [
+        2,
+        9
+      ]
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 16,
+      "acquiredReturns": 10,
+      "persistedSourceFacts": 2,
+      "sourceCallIndices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "sourceEventCallIndices": [
+        2,
+        9
+      ]
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 17,
+      "acquiredReturns": 10,
+      "persistedSourceFacts": 2,
+      "sourceCallIndices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "sourceEventCallIndices": [
+        2,
+        9
+      ]
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 18,
+      "acquiredReturns": 10,
+      "persistedSourceFacts": 2,
+      "sourceCallIndices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "sourceEventCallIndices": [
+        2,
+        9
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 0,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "sourceEventCallIndices": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 1,
+      "acquiredReturns": 1,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [
+        0
+      ],
+      "sourceEventCallIndices": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 2,
+      "acquiredReturns": 1,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [
+        0
+      ],
+      "sourceEventCallIndices": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 3,
+      "acquiredReturns": 2,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [
+        0,
+        1
+      ],
+      "sourceEventCallIndices": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 4,
+      "acquiredReturns": 2,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [
+        0,
+        1
+      ],
+      "sourceEventCallIndices": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 5,
+      "acquiredReturns": 3,
+      "persistedSourceFacts": 1,
+      "sourceCallIndices": [
+        0,
+        1,
+        2
+      ],
+      "sourceEventCallIndices": [
+        2
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 0,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "sourceEventCallIndices": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 1,
+      "acquiredReturns": 1,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [
+        0
+      ],
+      "sourceEventCallIndices": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 2,
+      "acquiredReturns": 1,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [
+        0
+      ],
+      "sourceEventCallIndices": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 3,
+      "acquiredReturns": 2,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [
+        0,
+        1
+      ],
+      "sourceEventCallIndices": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 4,
+      "acquiredReturns": 2,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [
+        0,
+        1
+      ],
+      "sourceEventCallIndices": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 5,
+      "acquiredReturns": 3,
+      "persistedSourceFacts": 1,
+      "sourceCallIndices": [
+        0,
+        1,
+        2
+      ],
+      "sourceEventCallIndices": [
+        2
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 6,
+      "acquiredReturns": 3,
+      "persistedSourceFacts": 1,
+      "sourceCallIndices": [
+        0,
+        1,
+        2
+      ],
+      "sourceEventCallIndices": [
+        2
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 7,
+      "acquiredReturns": 4,
+      "persistedSourceFacts": 1,
+      "sourceCallIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "sourceEventCallIndices": [
+        2
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 8,
+      "acquiredReturns": 4,
+      "persistedSourceFacts": 1,
+      "sourceCallIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "sourceEventCallIndices": [
+        2
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 9,
+      "acquiredReturns": 4,
+      "persistedSourceFacts": 1,
+      "sourceCallIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "sourceEventCallIndices": [
+        2
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 10,
+      "acquiredReturns": 4,
+      "persistedSourceFacts": 1,
+      "sourceCallIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "sourceEventCallIndices": [
+        2
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 11,
+      "acquiredReturns": 7,
+      "persistedSourceFacts": 2,
+      "sourceCallIndices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "sourceEventCallIndices": [
+        2,
+        6
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 12,
+      "acquiredReturns": 7,
+      "persistedSourceFacts": 2,
+      "sourceCallIndices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "sourceEventCallIndices": [
+        2,
+        6
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 13,
+      "acquiredReturns": 8,
+      "persistedSourceFacts": 2,
+      "sourceCallIndices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "sourceEventCallIndices": [
+        2,
+        6
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 14,
+      "acquiredReturns": 8,
+      "persistedSourceFacts": 2,
+      "sourceCallIndices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "sourceEventCallIndices": [
+        2,
+        6
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 15,
+      "acquiredReturns": 9,
+      "persistedSourceFacts": 2,
+      "sourceCallIndices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "sourceEventCallIndices": [
+        2,
+        6
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 16,
+      "acquiredReturns": 9,
+      "persistedSourceFacts": 2,
+      "sourceCallIndices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "sourceEventCallIndices": [
+        2,
+        6
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 17,
+      "acquiredReturns": 9,
+      "persistedSourceFacts": 2,
+      "sourceCallIndices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "sourceEventCallIndices": [
+        2,
+        6
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 18,
+      "acquiredReturns": 11,
+      "persistedSourceFacts": 2,
+      "sourceCallIndices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "sourceEventCallIndices": [
+        2,
+        6
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 19,
+      "acquiredReturns": 11,
+      "persistedSourceFacts": 2,
+      "sourceCallIndices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "sourceEventCallIndices": [
+        2,
+        6
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 20,
+      "acquiredReturns": 11,
+      "persistedSourceFacts": 2,
+      "sourceCallIndices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "sourceEventCallIndices": [
+        2,
+        6
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 21,
+      "acquiredReturns": 11,
+      "persistedSourceFacts": 2,
+      "sourceCallIndices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "sourceEventCallIndices": [
+        2,
+        6
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 22,
+      "acquiredReturns": 11,
+      "persistedSourceFacts": 2,
+      "sourceCallIndices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "sourceEventCallIndices": [
+        2,
+        6
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 23,
+      "acquiredReturns": 15,
+      "persistedSourceFacts": 3,
+      "sourceCallIndices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "sourceEventCallIndices": [
+        2,
+        6,
+        14
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 24,
+      "acquiredReturns": 15,
+      "persistedSourceFacts": 3,
+      "sourceCallIndices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "sourceEventCallIndices": [
+        2,
+        6,
+        14
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 25,
+      "acquiredReturns": 15,
+      "persistedSourceFacts": 3,
+      "sourceCallIndices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "sourceEventCallIndices": [
+        2,
+        6,
+        14
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 26,
+      "acquiredReturns": 15,
+      "persistedSourceFacts": 3,
+      "sourceCallIndices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "sourceEventCallIndices": [
+        2,
+        6,
+        14
+      ]
+    }
+  ],
+  "generator": {
+    "path": "docs/migration/lot5c-evidence/qualify-cost-owner-graphs.mjs",
+    "bytes": 52657,
+    "sha256": "b1f4ae869ce9faf6f45faaace841950aa76de5821230ad16d3404ab646cb3e89"
+  },
+  "derivedFrom": {
+    "path": "docs/migration/lot5b-evidence/qualify-cost-owner-graphs.mjs",
+    "bytes": 44787,
+    "sha256": "69306a171896e8cd4947ba2b6c118f6a542bbd4f804c1841fc0b584e1086261f"
+  },
+  "domainReview": {
+    "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-domain-source-review.json",
+    "bytes": 5584,
+    "sha256": "ad027c2327b0b073c75deaa48cd9d27e90e5909066beb78a94973d706565f626"
+  },
+  "acquisitionMode": "passive_nonadmitted_source_binding",
+  "acceptedBoundaryReturn": {
+    "status": "scope_changed_preserving_conditional_methods",
+    "evidence": [
+      "before.observation_ref",
+      "after.observation_ref"
+    ]
+  },
+  "nativeDigests": {
+    "baseline": "74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12",
+    "candidate": "a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57"
+  },
+  "recordedAt": "2026-11-11T17:26:20.567Z",
+  "inputs": [
+    {
+      "path": "docs/migration/lot5c-evidence/qualify-cost-owner-graphs.mjs",
+      "bytes": 52657,
+      "sha256": "b1f4ae869ce9faf6f45faaace841950aa76de5821230ad16d3404ab646cb3e89"
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/qualify-cost-owner-graphs.mjs",
+      "bytes": 44787,
+      "sha256": "69306a171896e8cd4947ba2b6c118f6a542bbd4f804c1841fc0b584e1086261f"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/capture-cost-owner-graphs.mjs",
+      "bytes": 28139,
+      "sha256": "177354ff2120fcd148688365c62b854a81ca30a49999f5d9e85a451171a3150d"
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/capture-cost-owner-graphs.mjs",
+      "bytes": 22054,
+      "sha256": "36fc06114430aa31df284eb14c456a2dfd185edec1430d8b3a7c97e5d65d7b57"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-domain-source-review.json",
+      "bytes": 5584,
+      "sha256": "ad027c2327b0b073c75deaa48cd9d27e90e5909066beb78a94973d706565f626"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-source-evidence-paths.json",
+      "bytes": 528,
+      "sha256": "4960a996175c03c0ce92365bda7f3dcaf747f1c7fd8467e34a84584816a87b62"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/guarded_binding/tracker.py",
+      "bytes": 10802,
+      "sha256": "73ecff4ca22e2edbac5f6955fcbac55cc29a5f3a9bb55075b31969b6785fe517"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/guarded_binding/family.py",
+      "bytes": 9286,
+      "sha256": "7905b2ae89f0514c1c9a938db9ec955058e68e795259903deeb0874b33f62389"
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/performance-integrated/owner-structural-fixture.json",
+      "bytes": 60029,
+      "sha256": "832ad17bcfeee27d01ad47273fc306437898fa46a5916014d103d0e4d34bf71d"
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/performance-integrated/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/baseline-owner-graphs.receipt.json",
+      "bytes": 114892,
+      "sha256": "72fe1ce2d3ba9f27b31f549421f0a4c1b79da52566e329911eb2a8afefa43098"
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/source-manifest.json",
+      "bytes": 36806,
+      "sha256": "846e38686406140e8f0c975836faadf646e4c20b0bcbc833fe4e228912535e93"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/baseline-owner-graphs.json.gz",
+      "bytes": 5109271,
+      "sha256": "01aca0a4dde1029919b9dff233959f3aaa72820333dc1d7e3baea8c767e115b2"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout/src/logos-engine/kernel.ts",
+      "bytes": 23637,
+      "sha256": "1cac40f5f9a3356d31ae0fd5247709eb82c5f6402aae3cb68d8edc54c838f207"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout/src/logos-engine/v6-knowledge-store.ts",
+      "bytes": 14849,
+      "sha256": "035d41597a5831bfa65bb1f627e3a0d05b84cc44cfda05566359873ef8c5af08"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout/scripts/measure-native-loop-costs.mjs",
+      "bytes": 20670,
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "bytes": 48531,
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "bytes": 46966,
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "bytes": 53583,
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "bytes": 111624,
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/candidate-owner-graphs.receipt.json",
+      "bytes": 115863,
+      "sha256": "eea5ddc96d52b1218c06f84fc9fe85e1f01cfddc4b74130c61bfa7280a98e8ba"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/source-manifest.json",
+      "bytes": 37772,
+      "sha256": "6fd96a8c19867ee6740db8293c14bf241d9929a31e24f391e95d3aee4c6fab66"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/candidate-owner-graphs.json.gz",
+      "bytes": 5160803,
+      "sha256": "a39f71649496a2a0023658f6ebf4ff41d34a77fd479ce59edfadd9be4182462a"
+    },
+    {
+      "path": "src/logos-engine/kernel.ts",
+      "bytes": 23637,
+      "sha256": "1cac40f5f9a3356d31ae0fd5247709eb82c5f6402aae3cb68d8edc54c838f207"
+    },
+    {
+      "path": "src/logos-engine/v6-knowledge-store.ts",
+      "bytes": 14849,
+      "sha256": "035d41597a5831bfa65bb1f627e3a0d05b84cc44cfda05566359873ef8c5af08"
+    },
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "bytes": 20670,
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "bytes": 48531,
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "bytes": 46966,
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    },
+    {
+      "path": "docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "bytes": 53583,
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "path": "docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "bytes": 111624,
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    },
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "bytes": 167438,
+      "sha256": "c5bc40b3dd40b383f6bd31bbc8c77955a24c7b62a774792ccea38e9f8b79d0f3"
+    },
+    {
+      "path": "src/logos-engine/v6-observed-binding.ts",
+      "bytes": 22934,
+      "sha256": "f7ed39d3215339e0facc33db3ab2ed81e6fe7afaf049f8ab148dadff590f5e73"
+    },
+    {
+      "path": "src/logos-engine/v6-observed-binding-state.ts",
+      "bytes": 17300,
+      "sha256": "43e3f0e95af3ee9f39dbe7fcaf22b6af5fc1b4603b7c00a1765d6786517f7558"
+    },
+    {
+      "path": "src/logos-engine/v6-object-binding-common.ts",
+      "bytes": 3431,
+      "sha256": "b35a0a3941bcd0056417acfc59ca23a49bbacc372d4556088652ffa9c62a99c5"
+    },
+    {
+      "path": "src/logos-engine/v6-object-binding-geometry.ts",
+      "bytes": 11470,
+      "sha256": "37963dc265701b7d9c6951ca768f0e21b5f42be118362257e09dd714678199bc"
+    },
+    {
+      "path": "src/logos-engine/v6-object-binding-identity.ts",
+      "bytes": 2829,
+      "sha256": "e7e1aa6365c6cc8c4a834e59bd8d9fa00c254608b6cb55dbbce04e0c6ed7d4d2"
+    },
+    {
+      "path": "src/logos-engine/v6-object-binding-planning.ts",
+      "bytes": 8856,
+      "sha256": "a5925aedf7fe772ed96825bf14e113281b704d416ad1d37e0996a6ca85a98d2f"
+    },
+    {
+      "path": "src/logos-engine/v6-object-binding-reception.ts",
+      "bytes": 4750,
+      "sha256": "d39cb08e4003ad1ab026167da9eb9a6fd371c651304f1946afeb5b05a89507fc"
+    },
+    {
+      "path": "src/logos-engine/v6-object-binding-tracker.ts",
+      "bytes": 16082,
+      "sha256": "e80c8b7da07a952d8dde240ef35989a9c00a2c264a3ff90bddf23e0761da63d4"
+    },
+    {
+      "path": "src/logos-engine/canonical.ts",
+      "bytes": 11291,
+      "sha256": "5c2884287aed82d97e7a85c905db5fb800a7e58a523c3ba128a1b61db5069cc1"
+    },
+    {
+      "path": "src/logos-engine/v6-native-state-graph.ts",
+      "bytes": 21947,
+      "sha256": "b739db6d6066a06f4175b4377f0d0ae1f351b708e5d27fbdb99c9de7e6ed0b4d"
+    },
+    {
+      "path": "src/logos-engine/v6-hash.ts",
+      "bytes": 2842,
+      "sha256": "6b86db7b533d55da900a3c65a06ec1e18547180245b3e3a2eaa837be09c669f5"
+    },
+    {
+      "path": "src/logos-engine/v6-src-program.ts",
+      "bytes": 5903,
+      "sha256": "d41717575e252784a81519e8c7853853af3c2d7372b86ecb7efb3655c3e3df77"
+    },
+    {
+      "path": "src/logos-engine/v6/programs.json",
+      "bytes": 1502394,
+      "sha256": "e006723f49460276a0753c1977ab0eabb30775409b37ba7d7af8b0b8b8527834"
+    },
+    {
+      "path": "src/runtime/v6-agent-service.ts",
+      "bytes": 18195,
+      "sha256": "02ce41d5e014fcc06f85371f552f949b9dfce56093afae4bc0fcb7aad2f60d96"
+    }
+  ],
+  "checkedCount": 64,
+  "formsSha256": "89d4bb89f1e22ef73409d5e7b0497a745631b7f71fab50f51355dc1f2a20f183",
+  "qualification": "Every captured graph reconstructs from its exact complete Kernel delta chain using the validator bound to its own source freeze and identical value codecs. The declared nonadmitted Binding domain requires no context, core, methods, native refusal, attention mutation or attention write. Each actual passive record is null except for the exact original official-boundary event, and only those nonnull returns create facts. Added candidate nodes/deltas receive explicit family installation, exact source-program installation, actual ObservedBinding checkpoint, boundary-event fact or reachable-fragment attribution. Actual common attention and persisted attention values are compared exactly across roles. Other common node identities/metadata and common delta identity/cause/order remain exact apart from their declared runtime source digest; general private-value equality across versions is not asserted. Structural counts come from the captures, without an added-node or cycle formula. The forms are fixed before any cost window and every future raw trial must match its own form exactly. No cost values, timing correction, future-run success or full graph/caller semantic parity is inferred."
+}

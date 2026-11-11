@@ -1,0 +1,14 @@
+{
+  "schema": "logos-engine.lot5c.checkpoint-transport.v1",
+  "recordedAt": "2026-11-11T17:23:19.245497+00:00",
+  "status": "pushed_and_verified",
+  "commit": "c8ff4f2b4d495e12494130112258b7a62281d93c",
+  "branch": "refs/heads/lot5c-recovery-checkpoint-20261111",
+  "remoteHead": "c8ff4f2b4d495e12494130112258b7a62281d93c",
+  "fetchedMain": "2981a62d456802d39dcde316734793e905fb0ebf",
+  "workingTreeCleanAtVerification": true,
+  "verificationObservedBeforeFinalSuiteStartedAt": "2026-11-11T17:17:42.095665+00:00",
+  "sourceCommitBoundByFinalArchive": "805b30297dc1b715dbfd9f1197a9a8ba7b361b90",
+  "sitePublicationPerformed": false,
+  "qualification": "Actual ordinary no-force checkpoint push and exact remote-ref readback. This saves source/evidence recovery state; it does not publish0.63 or accept its final tests/cost."
+}

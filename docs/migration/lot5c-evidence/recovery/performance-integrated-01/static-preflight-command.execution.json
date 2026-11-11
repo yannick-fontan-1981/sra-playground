@@ -1,0 +1,33 @@
+{
+  "schema": "logos-engine.lot5c.command-execution.v1",
+  "status": "failed",
+  "startedAt": "2026-11-11T17:34:26.633251+00:00",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "docs/migration/lot5c-evidence/check-cost-static-inputs.py",
+    "--performance-directory",
+    "docs/migration/lot5c-evidence/recovery/performance-integrated-01"
+  ],
+  "cwd": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout",
+  "timeoutSeconds": 180.0,
+  "wrapper": {
+    "path": "docs/migration/lot5c-evidence/run-evidence-command.py",
+    "bytes": 3904,
+    "sha256": "99b16a35eac1f12acb3063e43d303ffc020b3339109e22eff1f807d1e87e47db"
+  },
+  "finishedAt": "2026-11-11T17:34:27.151497+00:00",
+  "durationSeconds": 0.51674168700265,
+  "exitCode": 1,
+  "timedOut": false,
+  "log": {
+    "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/static-preflight-command.log",
+    "bytes": 445,
+    "sha256": "5bcece9a07052f36dcea0190bd1859104d0a791dc875dff0601d9b010aaab6dd"
+  },
+  "compressedLog": {
+    "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/static-preflight-command.log.gz",
+    "bytes": 310,
+    "sha256": "25affed22c4fbf9f04ba73bc84dbab09bbb24e5f0ea8648f626288b6f77dc692"
+  }
+}
