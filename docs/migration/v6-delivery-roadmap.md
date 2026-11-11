@@ -101,6 +101,20 @@ La [revue globale v3](lot5c-evidence/recovery/planning/coordination-v3-independe
 
 <!-- LOT5C_AVAILABLE03_CURRENT_END -->
 
+<!-- LOT5C_ORDINARY_UNLOCKED_CURRENT_START -->
+
+### Nouvelle règle utilisateur : travail courant sans verrou global
+
+L’[instruction explicite conservée](lot5c-evidence/recovery/coordination/recovery-03/ordinary-work-policy.json) retire l’obligation du verrou global pour le développement, les tests fonctionnels, les commits et les push. Le lot 5 travaille dans son checkout dédié et sur **`lot5c-recovery-checkpoint-20261111`** ; ses sauvegardes de branche n’attendent pas les publications des autres lots. Les fichiers de mutex existants restent intacts.
+
+Le nouvel [auxiliaire ordinaire v3](lot5c-evidence/recovery/planning/coordination-tools-v3/README.md) ne prend aucun mutex global dans ses trois modes. Les délais d’entrée/travail, l’assainissement des résultats, les identifiants réels et le nettoyage des enfants sont conservés. **4 scénarios ciblés / 69 contrôles** passent, dont un transport sous mutex temporaire tenu EX, malgré une demande prospective et une publication en attente. Seule une véritable fenêtre officielle de performance active est respectée ; la publication dispose de son gardien distinct.
+
+Le [premier transfert réel sans mutex](lot5c-evidence/recovery/coordination/recovery-03/source-checkpoint-unlocked-v3-live.json) a poussé puis vérifié les commits **`2ada5045fb94c4e34bd68f1ecd6f1f73aa778bd5`** et **`a59abde5a714e566962568f492598a2522562871`** le 11 novembre 2026 à **18:28:14 UTC−03**. La session réelle 96368 est terminale, code 0, nettoyage complet, **`lockAcquired: false`**. Aucune publication de site n’en résulte.
+
+La coordination de coût v4 est **terminée et vérifiée** : [7 tests temporaires sur 7](lot5c-evidence/recovery/planning/v4-coordination-scope-tests-01.execution.json), puis [48 contrôles indépendants sur 48 et 122 sujets exacts](lot5c-evidence/recovery/planning/coordination-v4-independent-review.json). EX et le calme sont réservés à l’**ABBA effectivement mesuré et à son intégrité terminale** ; les transports de preuves, comparaisons, revues et rapports suivent sans mutex global. Le protocole et les preuves antérieurs restent conservés ; l’[amendement explicite](lot5c-evidence/recovery/planning/coordination-v4-policy-amendment.json) remplace la seule prolongation du calme prévue au protocole historique. Les populations, chauffes, commandes ABBA et critères de coût ne changent pas. **Prochaine étape : sauvegarder ces corrections, fermer réellement les préparations, puis lancer l’unique demande fraîche `lot5c-cost-a33a5f88-available-03`, limitée à 600 secondes pour obtenir la disponibilité. Aucune demande, mesure ou publication nouvelle n’est encore lancée à ce stade.**
+
+<!-- LOT5C_ORDINARY_UNLOCKED_CURRENT_END -->
+
 <!-- LOT5C_ROADMAP_CURRENT_END -->
 
 <!-- LOT10B_CURRENT_BEGIN -->

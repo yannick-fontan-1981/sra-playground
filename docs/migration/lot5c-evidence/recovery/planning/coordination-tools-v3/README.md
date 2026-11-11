@@ -34,7 +34,7 @@ Seven functions are AST-identical to the validated v2 source: hidden input, rece
 
 ## Publication remains separate
 
-Actual publication uses the dedicated `publication-coordination-v1/publication-guard.py` and its existing publication mutex. This wrapper does not replace that guardian. Root must observe the guardian's durable operation ACK and actual tool-session/deadline requirements before a source/publication phase. A pending publication does not impose a new global lock on unrelated development, tests or checkpoint pushes.
+Actual publication uses the dedicated `publication-coordination-v1/publication-guard.py` and its existing publication mutex. This wrapper does not replace that guardian. Root must observe the guardian's durable operation ACK and actual tool-session/deadline requirements only for phases that are part of an actual publication. Ordinary development, source work and checkpoint pushes require neither the publication guardian nor any publication prerequisite. A pending publication does not impose a new global lock on unrelated development, tests or checkpoint pushes.
 
 The guardian and official-cost controller retain their own exclusive locks only for their respective operations. No older source, native input, cost script, publication guardian or v2 artifact was changed by this v3 derivation.
 
