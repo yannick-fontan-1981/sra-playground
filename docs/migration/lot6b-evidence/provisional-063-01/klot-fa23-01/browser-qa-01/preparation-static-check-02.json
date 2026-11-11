@@ -1,0 +1,39 @@
+{
+  "schema": "logos-engine.lot6b-browser-qa-static-preparation-check.v1",
+  "recordedAt": "2026-11-11T20:00:39.483267+00:00",
+  "status": "ready_for_root_review_not_executed",
+  "helperAstParsedWithoutImport": true,
+  "helper": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-01/hold-managed-preview.py",
+    "bytes": 8625,
+    "sha256": "13c6271b3a5ededca471216be30305ff82c7e436cb143328100611dab947eac2"
+  },
+  "declaration": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-01/execution-declaration.json",
+    "bytes": 5051,
+    "sha256": "95dd7cf58f1382adbbbd80a409b50720972ec75490ae84b2aff40e9df5ca2bed"
+  },
+  "plan": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-01/plan.md",
+    "bytes": 5273,
+    "sha256": "c1b00aa24f0fadf0c1b435203d0440834f2e142d97fb9241089730a7d65c8aa8"
+  },
+  "watch": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-01/browser-watch.json",
+    "bytes": 491692,
+    "sha256": "6751e109f5bd5499bfbc86b22ca560d7b411dff84fae6c75195b6dab73ba8093"
+  },
+  "clockPathSuppliedByRoot": "docs/migration/lot6b-evidence/klot-case-clock.json",
+  "clockContentsRead": false,
+  "parentEntries": 2956,
+  "browserEntries": 3005,
+  "parentPinsChanged": [],
+  "onlyUpdatedWatchPins": [
+    "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-01/execution-declaration.json",
+    "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-01/plan.md"
+  ],
+  "runtimeOrCliExecuted": false,
+  "browserOpened": false,
+  "nativeModified": false,
+  "pendingPlaceholders": []
+}
