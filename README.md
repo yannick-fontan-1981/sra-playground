@@ -1,8 +1,28 @@
 # SRA Playground
 
+<!-- LOT7_FOLLOWUP_README_START -->
+
+## Current migration: Workshop continuation / native 0.61.0
+
+The [native follow-up is published in Site 98](docs/migration/lot7b-evidence/followup-recovery/publication/native-publication.json), commit `653e40a4f45df8ec8c6bda005004c7cdb8df074a`, deployment `succeeded` on **11 November 2026 at 11:39:04.455525 UTC−03**. The existing owner-private audience is preserved. Actual Site 97 / native 0.60 is the measured predecessor.
+
+After a grounded stationary-contact refusal, the native caller consults the remaining providers in declared order. The first non-null offer must have its own current acquired witness and pass its ordinary guard. Workshop seals the exact current source question without changing its eleven proposal fields or eight persistent fields. This is an explicit native coordination extension; complete Python-caller parity is not claimed.
+
+- **5,042/5,042 tests in 133 files**, five delivery checks and **187/187 comparisons across 11 declared regressions** passed. The original two stale assertions remain recorded.
+- The first static audit's missing 6A proof remains recorded. After the actual predecessor proof arrived, the unchanged audit passed; the complete report differs only in its now-empty failure list. The [reviewed prospective closure](docs/migration/lot7b-evidence/followup-recovery/integrated-final/post-publication-audit/closure.json) preserves all earlier receipts.
+- **40/40 official trials** match the exact predeclared work forms. All **32 measured sessions / 400 actions** remain; only **8 warmups / 24 actions** are excluded.
+- Global complete-session medians are accepted: **STCK +5.918585%** and **SMLP +1.304421%**, each strictly below +10%. Aggregate diagnostics pass **16/16**; the five cohort phase overruns remain visible in the [complete report](docs/migration/lot7b-evidence/followup-recovery/performance/results.md).
+- The published freeze contains **306 native files**, digest `f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279`. **304 files match the published predecessor**; the delta is the native caller and RankedWorkshop. Five ordinary source pushes and **375 exact application-member comparisons** preserve the validated build.
+
+LKEY remains closed at **2,390.347106991 seconds**, with no new action, replay, oracle, payload analysis or browser claim. Lost unpublished historical observations do not validate the reconstructed bytes. The register remains **63/76 connected entries, 13 open**; all six complete-migration gates remain false. **Next delivery: 10B / WindowQuestion / native 0.62, followed by 5C / observed_object_binding / native 0.63.** See the [updated roadmap](docs/migration/v6-delivery-roadmap.md) and [evidence index](docs/migration/lot7b-evidence/followup-recovery/README.md).
+
+This documentation closure preserves the native and application build of Site 98; its terminal receipt is reported separately.
+
+<!-- LOT7_FOLLOWUP_README_END -->
+
 <!-- LOT6A_README_CURRENT_START -->
 
-## Current migration: lot 6A PreviewPacking / native 0.60.0
+## Published predecessor: lot 6A PreviewPacking / native 0.60.0
 
 The reconstructed `preview_packing` owner is connected in the original strategy order, with selected-return acquisition, guarded commands and exact source-state restoration. Private native publication is confirmed in **Site 96**, commit `cdaceea1c8918430a70b95fa427b31fcd22d290c`, preserving the owner-only audience.
 

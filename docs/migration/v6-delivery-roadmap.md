@@ -2,9 +2,9 @@
 
 <!-- LOT7_FOLLOWUP_RECOVERY_START -->
 
-## Travail courant du fil 7 : continuation Workshop, candidat 0.61 reconstruit
+## Jalon livré du fil 7 : continuation Workshop, native 0.61 / Site 98
 
-**La référence réellement publiée est désormais Site 97 / native 0.60.0, clôture documentaire de 6A après sa publication native dans Site 96. Le complément Workshop 0.61 est reconstruit et validé fonctionnellement : 5 042/5 042 tests, 5/5 contrôles de livraison et 187/187 comparaisons de rejeu. Son **coût global est accepté pour les deux jeux** ; la publication privée reste à effectuer.** La récupération initiale est partie de Site 95 au commit `3a70463039768f7114edae7d94d7dd33b7f36aa8` ; le prédécesseur actuel est le commit publié `98336fba4e696a51c90ff7f7b37b8bdf95f34847`. Les anciens fichiers non publiés et leurs preuves brutes n'ont pas été retrouvés après le remplacement de l'environnement. Le [constat de récupération](lot7b-evidence/followup-recovery/coordination/recovery.json) conserve les observations historiques avec `eligibleForGates: false` : elles ne valident pas les octets reconstruits. L'[index des nouvelles preuves](lot7b-evidence/followup-recovery/README.md) distingue les résultats acquis des contrôles en cours.
+**Le complément Workshop 0.61 est réellement publié dans Site 98**, au commit `653e40a4f45df8ec8c6bda005004c7cdb8df074a`, statut terminal **`succeeded` le 11 novembre 2026 à 11:39:04.455525 UTC−03**. La [publication native](lot7b-evidence/followup-recovery/publication/native-publication.json) confirme l’URL existante et l’accès privé au propriétaire, révision **3**. Le candidat reconstruit a réussi **5 042/5 042 tests**, **5/5 contrôles de livraison avec clôture explicite de l’audit**, **187/187 comparaisons de rejeu** et le **budget global pour les deux jeux**. Sa référence de coût reste **Site 97 / native 0.60.0**, clôture documentaire de 6A après sa publication native dans Site 96. La récupération initiale est partie de Site 95 au commit `3a70463039768f7114edae7d94d7dd33b7f36aa8` ; le prédécesseur actuel est le commit publié `98336fba4e696a51c90ff7f7b37b8bdf95f34847`. Les anciens fichiers non publiés et leurs preuves brutes n'ont pas été retrouvés après le remplacement de l'environnement. Le [constat de récupération](lot7b-evidence/followup-recovery/coordination/recovery.json) conserve les observations historiques avec `eligibleForGates: false` : elles ne valident pas les octets reconstruits. L'[index des nouvelles preuves](lot7b-evidence/followup-recovery/README.md) distingue les validations fraîches des observations historiques.
 
 ### Comportement et source du complément
 
@@ -39,26 +39,32 @@ La [clôture d’isolation](lot7b-evidence/followup-recovery/performance/coordin
 
 Ces mesures portent sur la boucle commune de STCK/SMLP. Elles excluent moteur de jeu, réseau de production et rendu navigateur ; elles ne démontrent ni le coût maximal d’une recherche Workshop positive ni la stabilité de sessions de plusieurs heures.
 
-### Feuille de route actualisée du candidat
+### Publication et clôture documentaire
 
-Le [registre du candidat](v6-entry-point-progress.json) atteint **63/76 entrées raccordées, soit 82,9 %, zéro partielle et 13 restantes** : `goal_access` 11/12, `window_constraints` 21/21, `surface` 10/10 et `factored_material_return` 21/33. Ce gain d'entrée provient de 6A ; le complément Workshop n'en ajoute pas. L'[audit actuel](v6-coverage.json) compte **195 composants vérifiés, 148 transferts partiels, 1 026 modules en attente et zéro module entièrement vérifié**, sur 1 369 modules Python et 417 fichiers de données. **Les six portes de migration complète restent fausses.** Ces compteurs décrivent le candidat reconstruit, sans anticiper sa publication.
+Le [transport effectif](lot7b-evidence/followup-recovery/publication/source-transport-completion.json) conserve **cinq envois ordinaires de sources**, sans forçage, et **375 comparaisons exactes** des 75 membres applicatifs. Le [dernier contrôle](lot7b-evidence/followup-recovery/publication/final-source-recheck.json) lie le commit publié, le worker validé et le reçu d’acceptation engagé dans Git. Les 97 194 778 octets bruts d’objets nouveaux sont répartis sous la borne déclarée par envoi ; cette mesure n’est pas une taille de transport réseau.
+
+La présente clôture documentaire conserve le code natif, les tests, les entrées de compilation et les membres applicatifs de **Site 98 / native 0.61**. Le numéro et le reçu terminal de cette clôture sont communiqués séparément après son déploiement, sans anticiper un résultat d’hébergement.
+
+### Feuille de route actualisée après publication
+
+Le [registre publié du complément](v6-entry-point-progress.json) atteint **63/76 entrées raccordées, soit 82,9 %, zéro partielle et 13 restantes** : `goal_access` 11/12, `window_constraints` 21/21, `surface` 10/10 et `factored_material_return` 21/33. Ce gain d'entrée provient de 6A ; le complément Workshop n'en ajoute pas. L'[audit actuel](v6-coverage.json) compte **195 composants vérifiés, 148 transferts partiels, 1 026 modules en attente et zéro module entièrement vérifié**, sur 1 369 modules Python et 417 fichiers de données. **Les six portes de migration complète restent fausses.** Ces compteurs décrivent le gel reconstruit effectivement publié dans Site 98.
 
 | Voie | État et prochaine étape |
 | --- | --- |
 | **6A / 0.60** | **Livré dans Sites 96–97** et réconcilié ; coût global accepté, STCK **+6,094357 %**, SMLP **+3,262812 %**. Prochaine capacité de ce fil : **6B / `selected_rigid`**. |
-| **Complément 7 / 0.61** | Validation fraîche et réconciliation de Site 97 réussies : **5 042 tests**, **cinq contrôles** et **187 comparaisons**. **Coût global accepté** : STCK **+5,918585 %**, SMLP **+1,304421 %** ; publier la source exacte puis clôturer la documentation. |
-| **10B / 0.62** | Chantier `window_question` séparé ; réconcilier ses prédécesseurs réellement publiés avant sa propre clôture. |
-| **5C / 0.63** | Chantier `observed_object_binding` séparé ; poursuivre après les prédécesseurs convenus. |
+| **Complément 7 / 0.61** | **Livré dans Site 98** : **5 042 tests**, **cinq contrôles avec audit réconcilié**, **187 comparaisons**, coût global **STCK +5,918585 % / SMLP +1,304421 %**. Ce complément est clos dans son périmètre. |
+| **10B / 0.62** | **Prochaine livraison convenue** : `window_question`. Intégrer la clôture réelle de 0.61, geler son propre candidat, terminer ses validations et mesurer son coût avant publication. |
+| **5C / 0.63** | `observed_object_binding`, après 10B et les prédécesseurs publiés. Conserver ses preuves de composant distinctes de la future validation intégrée et de son coût. |
 | **Lots 7A/7B et lot 4** | Clos dans leurs périmètres déjà publiés ; aucune preuve historique perdue n'est réattribuée au candidat actuel. |
 | **Lots 8, 9 et 11 ; sessions longues** | Restent planifiés selon leurs contrats. Les réserves de parité complète, de compaction et de latence des sessions longues restent ouvertes. |
 
-La séquence convenue reste **6A / 0.60 → complément 7 / 0.61 → 10B / 0.62 → 5C / 0.63**, avec publication et fenêtre de coût sérialisées. Les sections suivantes conservent les faits des jalons antérieurs dans leurs périmètres propres.
+La séquence convenue reste **6A / 0.60 → complément 7 / 0.61 → 10B / 0.62 → 5C / 0.63**, avec publication et fenêtre de coût sérialisées. **6A et le complément 7 sont livrés ; le prochain créneau revient à 10B.** Les sections suivantes conservent les faits des jalons antérieurs dans leurs périmètres propres.
 
 <!-- LOT7_FOLLOWUP_RECOVERY_END -->
 
 <!-- LOT6A_ROADMAP_CURRENT_START -->
 
-## Jalon courant : lot 6A PreviewPacking — livré dans Site 96
+## Prédécesseur livré : lot 6A PreviewPacking — Sites 96–97
 
 **`preview_packing` est raccordé au moteur natif 0.60, avec un propriétaire unique, des commandes gardées et une acquisition réservée aux retours réellement sélectionnés.** La [publication privée réelle](lot6a-evidence/publication/native-publication.json) est confirmée **Site 96 / native 0.60.0**, commit `cdaceea1c8918430a70b95fa427b31fcd22d290c`, statut terminal `succeeded`. L’URL existante et l’audience propriétaire seul sont préservées.
 
