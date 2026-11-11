@@ -1,0 +1,128 @@
+{
+  "schema": "logos-engine.retained-test-execution.v1",
+  "command": [
+    "flock",
+    "-s",
+    "/workspace/shared/sra-coordination/performance.lock",
+    "timeout",
+    "180",
+    "node",
+    "--test",
+    "tests/v6-observed-binding.test.ts"
+  ],
+  "cwd": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout",
+  "startedAt": "2026-11-11T12:14:41.975734Z",
+  "finishedAt": "2026-11-11T12:14:45.007109Z",
+  "durationSeconds": 3.0353547780000554,
+  "exitCode": 0,
+  "inputsBefore": [
+    {
+      "path": "src/logos-engine/v6-object-binding-common.ts",
+      "bytes": 3431,
+      "sha256": "b35a0a3941bcd0056417acfc59ca23a49bbacc372d4556088652ffa9c62a99c5"
+    },
+    {
+      "path": "src/logos-engine/v6-object-binding-geometry.ts",
+      "bytes": 11470,
+      "sha256": "37963dc265701b7d9c6951ca768f0e21b5f42be118362257e09dd714678199bc"
+    },
+    {
+      "path": "src/logos-engine/v6-object-binding-identity.ts",
+      "bytes": 2829,
+      "sha256": "e7e1aa6365c6cc8c4a834e59bd8d9fa00c254608b6cb55dbbce04e0c6ed7d4d2"
+    },
+    {
+      "path": "src/logos-engine/v6-object-binding-reception.ts",
+      "bytes": 4750,
+      "sha256": "d39cb08e4003ad1ab026167da9eb9a6fd371c651304f1946afeb5b05a89507fc"
+    },
+    {
+      "path": "src/logos-engine/v6-object-binding-tracker.ts",
+      "bytes": 16082,
+      "sha256": "e80c8b7da07a952d8dde240ef35989a9c00a2c264a3ff90bddf23e0761da63d4"
+    },
+    {
+      "path": "src/logos-engine/v6-object-binding-planning.ts",
+      "bytes": 8856,
+      "sha256": "a5925aedf7fe772ed96825bf14e113281b704d416ad1d37e0996a6ca85a98d2f"
+    },
+    {
+      "path": "src/logos-engine/v6-observed-binding-state.ts",
+      "bytes": 17300,
+      "sha256": "43e3f0e95af3ee9f39dbe7fcaf22b6af5fc1b4603b7c00a1765d6786517f7558"
+    },
+    {
+      "path": "src/logos-engine/v6-observed-binding.ts",
+      "bytes": 22934,
+      "sha256": "f7ed39d3215339e0facc33db3ab2ed81e6fe7afaf049f8ab148dadff590f5e73"
+    },
+    {
+      "path": "tests/v6-observed-binding.test.ts",
+      "bytes": 23014,
+      "sha256": "7a4297282b8d65aea817ebe0a91ff3c301c7311a8dc0940401cc121e9938ab03"
+    },
+    {
+      "path": "tests/fixtures/v6-observed-binding-reference.json.gz",
+      "bytes": 3454135,
+      "sha256": "eacefcf58171fbaa4c9bce248210ab0fb105a067ec92981ca2d21f0a057747d9"
+    }
+  ],
+  "inputsAfter": [
+    {
+      "path": "src/logos-engine/v6-object-binding-common.ts",
+      "bytes": 3431,
+      "sha256": "b35a0a3941bcd0056417acfc59ca23a49bbacc372d4556088652ffa9c62a99c5"
+    },
+    {
+      "path": "src/logos-engine/v6-object-binding-geometry.ts",
+      "bytes": 11470,
+      "sha256": "37963dc265701b7d9c6951ca768f0e21b5f42be118362257e09dd714678199bc"
+    },
+    {
+      "path": "src/logos-engine/v6-object-binding-identity.ts",
+      "bytes": 2829,
+      "sha256": "e7e1aa6365c6cc8c4a834e59bd8d9fa00c254608b6cb55dbbce04e0c6ed7d4d2"
+    },
+    {
+      "path": "src/logos-engine/v6-object-binding-reception.ts",
+      "bytes": 4750,
+      "sha256": "d39cb08e4003ad1ab026167da9eb9a6fd371c651304f1946afeb5b05a89507fc"
+    },
+    {
+      "path": "src/logos-engine/v6-object-binding-tracker.ts",
+      "bytes": 16082,
+      "sha256": "e80c8b7da07a952d8dde240ef35989a9c00a2c264a3ff90bddf23e0761da63d4"
+    },
+    {
+      "path": "src/logos-engine/v6-object-binding-planning.ts",
+      "bytes": 8856,
+      "sha256": "a5925aedf7fe772ed96825bf14e113281b704d416ad1d37e0996a6ca85a98d2f"
+    },
+    {
+      "path": "src/logos-engine/v6-observed-binding-state.ts",
+      "bytes": 17300,
+      "sha256": "43e3f0e95af3ee9f39dbe7fcaf22b6af5fc1b4603b7c00a1765d6786517f7558"
+    },
+    {
+      "path": "src/logos-engine/v6-observed-binding.ts",
+      "bytes": 22934,
+      "sha256": "f7ed39d3215339e0facc33db3ab2ed81e6fe7afaf049f8ab148dadff590f5e73"
+    },
+    {
+      "path": "tests/v6-observed-binding.test.ts",
+      "bytes": 23014,
+      "sha256": "7a4297282b8d65aea817ebe0a91ff3c301c7311a8dc0940401cc121e9938ab03"
+    },
+    {
+      "path": "tests/fixtures/v6-observed-binding-reference.json.gz",
+      "bytes": 3454135,
+      "sha256": "eacefcf58171fbaa4c9bce248210ab0fb105a067ec92981ca2d21f0a057747d9"
+    }
+  ],
+  "inputsUnchanged": true,
+  "log": {
+    "path": "docs/migration/lot5c-evidence/recovery/native-unit/unit-01.log",
+    "bytes": 1581,
+    "sha256": "61043814535f9593340d25fac1c7b376782ff170a672de828b2ff195e5376b25"
+  }
+}

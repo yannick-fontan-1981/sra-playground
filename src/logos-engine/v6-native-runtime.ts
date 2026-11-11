@@ -86,6 +86,7 @@ const NATIVE_CALLER_EXTENSIONS = ['current_epoch_axial_packet_attribution', 'nat
   'single_owner_observed_binding_with_shared_caller_attention',
   'validated_object_binding_checkpoint_without_duplicate_attention',
   'bounded_object_binding_search_retained_as_incomplete',
+  'observed_binding_acquisition_deadline_uses_active_level_budget',
   TEMPORAL_FRAGMENT_NATIVE_INTERRUPTION,
   'atomic_framed_window_response_validation',
   'bounded_reference_population_paths_and_matching_with_current_level_deadline',
@@ -1142,6 +1143,18 @@ export class NativeV6Runtime implements NativeV6Backend {
   private async seal(execution: NativeExecution): Promise<void> {
     const prefix = this.prefix;
     if (!prefix) throw new Error('No native prefix to seal');
+    // A boundary may already expose the next level. Acquisition still belongs
+    // to the level whose actual primitive(s) formed this sealed prefix.
+    const acquisitionLevel = prefix.witnessed[0]?.first.level ?? this.computeLevel;
+    const acquisitionNow = this.now();
+    const runningActiveMs = this.computeStart !== null && this.computeLevel === acquisitionLevel
+      ? Math.max(0, acquisitionNow - this.computeStart) : 0;
+    const remainingActiveMs = Math.max(0, 360_000 - (this.levelMs.get(acquisitionLevel) ?? 0)
+      - runningActiveMs);
+    const callerRemainingMs = execution.deadlineMs === undefined ? Infinity
+      : Math.max(0, execution.deadlineMs - (execution.now ?? (() => performance.now()))());
+    const acquisitionExecution: NativeExecution = { ...execution, now: this.now,
+      deadlineMs: acquisitionNow + Math.min(remainingActiveMs, callerRemainingMs) };
     const compositionReturns: R[] = [];
     const nativeAcquisitionsIncomplete: R[] = [];
     const recordSelected = async (transition: WitnessedTransition): Promise<R | null> => {
@@ -1153,7 +1166,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       // Other source adapters retain their exact historical argument lists.
       const record = common ? null : selectedFamily === this.acquisitionFamilies?.binding
         ? await selectedFamily.record(transition.before, transition.after, transition.command,
-          transition.first.frame_rows, transition.second.frame_rows, prefix.proposal, transition.index, transition.second.frame_packet, execution)
+          transition.first.frame_rows, transition.second.frame_rows, prefix.proposal, transition.index, transition.second.frame_packet, acquisitionExecution)
         : await selectedFamily.record(transition.before, transition.after, transition.command,
           transition.first.frame_rows, transition.second.frame_rows, prefix.proposal, transition.index, transition.second.frame_packet);
       // Preserve the former detached-record validation, but release that copy
@@ -1165,7 +1178,7 @@ export class NativeV6Runtime implements NativeV6Backend {
         record.native_acquisition_refusal as NativeRecord));
       if (!selectedIncomplete && record && this.caller && this.authority) this.retainSelectedAcquisition(selectedFamily, record, transition);
       if (this.acquisitionFamilies) nativeAcquisitionsIncomplete.push(...await this.acquirePassiveFamilies(transition,
-        prefix.proposal, Boolean(selectedSupport), prefix.family.id, execution, selectedIncomplete ? selectedFamily.id : null));
+        prefix.proposal, Boolean(selectedSupport), prefix.family.id, acquisitionExecution, selectedIncomplete ? selectedFamily.id : null));
       const parentFamily = this.typedMaterialParentFamily();
       if (this.caller && parentFamily) {
         const result = recordTypedMaterialParent(this.caller.attention, parentFamily.compositionDependencyState!(), prefix.proposal, transition, record);

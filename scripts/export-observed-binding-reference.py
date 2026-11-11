@@ -30,6 +30,7 @@ FIELDS = ('epoch', 'core', 'moves', 'tried', 'blocked', 'held', 'interaction', '
           'goal_evidence', 'correspondence_context', 'context_refutations', 'pending_reception', 'reception_receipts', 'observed_frames')
 CHAINS, HELPERS = [], []
 JOURNAL_SCHEMA = 'logos-engine.v6.observed-binding-public-operations.v1'
+CALLER_STATE_RETENTION = 'core_or_methods_memory_roundtrip'
 
 
 def sha(value):
@@ -176,6 +177,27 @@ class Chain:
         self.case.update(finalState=plain(self.owner.state()), finalAttention=attention_state(self.shared),
                          finalMemoryPuts=plain(self.memory.puts))
         return self.case
+
+    def retain_caller_state(self, memory, observation, operation_count):
+        """Execute the original caller's conditional state/put/get/restore.
+
+        Memory is the immutable original SQLite implementation, using an
+        in-memory database. Its pack(sort_keys=True) boundary matters to the
+        consumed order of moves and frame maps. No native state is supplied.
+        The record operation's annotation remains its pre-retention result.
+        """
+        before = self.owner.state()
+        retained = bool(self.owner.tracker.core or self.owner.tracker.methods)
+        receipt = {'afterOperationCount': operation_count, 'retained': retained,
+                   'beforeState': plain(before), 'storedFact': None}
+        if retained:
+            memory.put(self.case['episode'], 'observed_object_binding_state', before,
+                       evidence=observation['observation_ref'], revision=observation['revision'])
+            stored = memory.get(self.case['episode'], 'observed_object_binding_state')
+            receipt['storedFact'] = plain(stored)
+            self.owner.restore(stored['value'])
+        receipt['afterState'] = plain(self.owner.state())
+        self.case['sourceStateRetentions'].append(receipt)
 
 
 def rect(rows, box, color):
@@ -462,21 +484,34 @@ def replay_journal(path):
     chain = Chain(data['id'], episode=data.get('episode', 'common-observation-frontier'))
     bound = {**fingerprint(path), 'nativeResultsConsulted': False}
     chain.case['inputJournal'] = bound
-    for index, operation in enumerate(data['operations']):
-        if not isinstance(operation, dict) or set(operation) - {'method', 'input', 'useLatestSourceProposal', 'native'}:
-            raise ValueError('Unexpected captured operation field at ' + str(index))
-        method, required, optional = JOURNAL_METHODS[operation['method']]
-        args = operation['input']
-        if not isinstance(args, dict) or not required <= set(args) or set(args) - required - optional:
-            raise ValueError('Invalid public inputs; native proposals or states are never replay inputs')
-        selected = operation.get('useLatestSourceProposal', False)
-        if type(selected) is not bool or selected and method not in ('record', 'bind', 'before', 'after'):
-            raise ValueError('Invalid original proposal selection flag')
-        if method in ('bind', 'before', 'after') and not selected:
-            raise ValueError('A source binder or guard requires the locally recomputed proposal')
-        chain.call(method, selected=selected, **args)
-        chain.case['operations'][-1].update(journalOperation=index, capturedMethod=operation['method'])
-    chain.finish()
+    retention = data.get('sourceStateRetention')
+    if retention not in (None, CALLER_STATE_RETENTION):
+        raise ValueError('Unknown original caller state-retention contract')
+    memory = SourceMemory(':memory:') if retention else None
+    if retention:
+        chain.case.update(sourceStateRetention=retention, sourceStateRetentions=[])
+    try:
+        for index, operation in enumerate(data['operations']):
+            if not isinstance(operation, dict) or set(operation) - {'method', 'input', 'useLatestSourceProposal', 'native'}:
+                raise ValueError('Unexpected captured operation field at ' + str(index))
+            method, required, optional = JOURNAL_METHODS[operation['method']]
+            args = operation['input']
+            if not isinstance(args, dict) or not required <= set(args) or set(args) - required - optional:
+                raise ValueError('Invalid public inputs; native proposals or states are never replay inputs')
+            selected = operation.get('useLatestSourceProposal', False)
+            if type(selected) is not bool or selected and method not in ('record', 'bind', 'before', 'after'):
+                raise ValueError('Invalid original proposal selection flag')
+            if method in ('bind', 'before', 'after') and not selected:
+                raise ValueError('A source binder or guard requires the locally recomputed proposal')
+            chain.call(method, selected=selected, **args)
+            row = chain.case['operations'][-1]
+            row.update(journalOperation=index, capturedMethod=operation['method'])
+            if memory is not None and method == 'record' and 'exception' not in row:
+                chain.retain_caller_state(memory, args['after'], index + 1)
+        chain.finish()
+    finally:
+        if memory is not None:
+            memory.close()
     return bound
 
 
@@ -506,9 +541,10 @@ def main():
     journal_before = [fingerprint(path) for path in journals]
     try:
         sys.path[:0] = [str(SOURCE), str(PROTO)]
-        global FAMILY, TRACKER, GEOMETRY, IDENTITY, RECEPTION, PLANNING, NEUTRAL, AttentionMemory
+        global FAMILY, TRACKER, GEOMETRY, IDENTITY, RECEPTION, PLANNING, NEUTRAL, AttentionMemory, SourceMemory
         FAMILY, TRACKER, GEOMETRY, IDENTITY, RECEPTION, PLANNING = [importlib.import_module(name) for name in DIRECT_MODULES]
         AttentionMemory = importlib.import_module('attention_memory').AttentionMemory
+        SourceMemory = importlib.import_module('memory').Memory
         NEUTRAL = importlib.import_module('neutral_observer')
         input_journals = [replay_journal(path) for path in journals]
         if not journals:
@@ -554,6 +590,8 @@ def main():
         'JSON preserves insertion order; tuples become arrays and sets become sorted arrays. Python float type paths are explicit only at digest helper boundaries.',
         'Component and public-call parity do not establish the entire StrategyRouter, game completion, performance or publication.',
     ]
+    if any(chain.get('sourceStateRetention') == CALLER_STATE_RETENTION for chain in CHAINS):
+        qualifications.append('The explicitly declared common caller state-retention branch executes immutable original Memory.put/get and owner.restore using only the locally calculated Python state. Its SQLite JSON key ordering is retained; native checkpoint inputs are never oracle inputs.')
     data = {'schema': 'logos-engine.v6.observed-binding-reference.v1', 'referenceCommit': COMMIT,
             'mode': 'captured-public-journals' if journals else 'declared-synthetic-public-returns',
             'sourceModules': list(DIRECT_MODULES), 'helpers': HELPERS, 'chains': CHAINS,
@@ -574,6 +612,10 @@ def main():
                           'chains': len(CHAINS), 'chainOperations': sum(len(c['operations']) for c in CHAINS),
                           'sourceExceptions': len(exceptions), 'attentionMemoryPuts': sum(len(c['finalMemoryPuts']) for c in CHAINS)},
                'qualifications': qualifications}
+    if journals:
+        retention_rows = [row for chain in CHAINS for row in chain.get('sourceStateRetentions', [])]
+        receipt['counts'].update(sourceStateRetentionChecks=len(retention_rows),
+                                 sourceStateRetentions=sum(row['retained'] for row in retention_rows))
     exclusive_json(receipt_path, receipt)
     print(json.dumps({'status': 'passed', 'counts': receipt['counts'], 'fixture': receipt['fixture']}), flush=True)
 

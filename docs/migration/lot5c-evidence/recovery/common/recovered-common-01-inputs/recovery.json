@@ -1,0 +1,37 @@
+{
+  "schema": "logos-engine.lot5c.executed-common-input-recovery.v1",
+  "status": "recovered_exact_by_preexecution_pins",
+  "recordedAt": "2026-11-11T12:28:36.685591+00:00",
+  "originalReport": "docs/migration/lot5c-evidence/recovery/common/common-01/positive/common-loop.json.gz",
+  "archivedAtExecution": false,
+  "historicalOutcomeChanged": false,
+  "inputs": [
+    {
+      "executionInput": {
+        "path": "docs/migration/lot5c-evidence/recovery/common/common-plan.json",
+        "bytes": 7549,
+        "sha256": "ae6bb8e2b981ea602d8e43cb6cac6292b9225ccae65a3597d2fc4f00e470e8ca"
+      },
+      "preservedPath": "docs/migration/lot5c-evidence/recovery/common/recovered-common-01-inputs/docs/migration/lot5c-evidence/recovery/common/common-plan.json",
+      "method": "byte reconstruction by reversing the declared clock-scenario amendment; equality established by original run SHA-256"
+    },
+    {
+      "executionInput": {
+        "path": "scripts/native-object-binding-common-loop.ts",
+        "bytes": 28528,
+        "sha256": "2b95a7a49864c430afbf6c1ed14dfba35a66a4aae78efd050dce7d815a1cba85"
+      },
+      "preservedPath": "docs/migration/lot5c-evidence/recovery/common/recovered-common-01-inputs/scripts/native-object-binding-common-loop.ts",
+      "method": "current exact source verified against original run pin"
+    },
+    {
+      "executionInput": {
+        "path": "tests/v6-object-binding-common.test.ts",
+        "bytes": 22406,
+        "sha256": "f63973302a96ddaf574c75b1a1519443ba8f2980c3e2cf20403782f82b0cc918"
+      },
+      "preservedPath": "docs/migration/lot5c-evidence/recovery/common/recovered-common-01-inputs/tests/v6-object-binding-common.test.ts",
+      "method": "byte reconstruction by removing the later appended clock-only test; equality established by original run SHA-256"
+    }
+  ]
+}

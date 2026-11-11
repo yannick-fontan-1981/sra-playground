@@ -3486,15 +3486,24 @@
         "agents/yf_arc3_v6/morphology_policy/guarded_binding/geometry.py"
       ],
       "targets": [
-        "src/logos-engine/v6-inventory-measurements.ts"
+        "src/logos-engine/v6-inventory-measurements.ts",
+        "src/logos-engine/v6-object-binding-geometry.ts",
+        "src/logos-engine/v6-object-binding-common.ts"
       ],
-      "status": "partial_transfer",
+      "status": "component_verified",
       "proof": [
         "scripts/export-v6-inventory-observation-reference.py",
         "tests/fixtures/v6-inventory-observation-reference.json.gz",
-        "tests/v6-inventory-observation-reference.test.ts"
+        "tests/v6-inventory-observation-reference.test.ts",
+        "scripts/export-observed-binding-reference.py",
+        "tests/fixtures/v6-observed-binding-reference.json.gz",
+        "tests/v6-observed-binding-reference.test.ts",
+        "tests/v6-observed-binding.test.ts",
+        "scripts/native-object-binding-common-loop.ts",
+        "tests/v6-object-binding-common.test.ts",
+        "docs/migration/lot5c-observed-object-binding-lineage.md"
       ],
-      "notes": "Only the complete consumed unique, find_body, moved_core and revalidate_frame routines are transferred for inventory current binding and effect-scope checks. Missing/ambiguous signatures, competing cores, preferred minimum area, contour occlusion and literal public coordinates retain source behavior. Other object/frame discovery, correspondence and generic geometry services in this module remain pending; the ObservedBinding family is not thereby transferred."
+      "notes": "The complete consumed guarded-binding geometry surface is transferred, including object/frame correspondence, body location, empty/occluded frames and preservation regions. Existing inventory-helper mappings and their proofs remain retained. Reconstructed after workspace replacement from immutable original commit786dcf51ca57773d8e3a8948ce9ea3655e7baf8e; fresh independent oracle/parity98 tests and13 native-extension tests pass. The original failed recovery attempt is retained. This component status does not assert full original-caller parity, final integrated release validation, official cost acceptance, new game success or completion of any global migration gate."
     },
     {
       "sources": [
@@ -3503,18 +3512,28 @@
       "targets": [
         "src/logos-engine/v6-inventory-measurements.ts",
         "src/logos-engine/v6-inventory-continuation.ts",
-        "src/logos-engine/v6-inventory-context-intervention.ts"
+        "src/logos-engine/v6-inventory-context-intervention.ts",
+        "src/logos-engine/v6-observed-binding.ts",
+        "src/logos-engine/v6-observed-binding-state.ts",
+        "src/logos-engine/v6-native-runtime.ts"
       ],
-      "status": "partial_transfer",
+      "status": "component_verified",
       "proof": [
         "scripts/export-v6-inventory-observation-reference.py",
         "tests/fixtures/v6-inventory-observation-reference.json.gz",
         "tests/v6-inventory-observation-reference.test.ts",
         "scripts/export-v6-inventory-helpers-reference.py",
         "tests/fixtures/v6-inventory-helpers-reference.json.gz",
-        "tests/v6-inventory-helpers-reference.test.ts"
+        "tests/v6-inventory-helpers-reference.test.ts",
+        "scripts/export-observed-binding-reference.py",
+        "tests/fixtures/v6-observed-binding-reference.json.gz",
+        "tests/v6-observed-binding-reference.test.ts",
+        "tests/v6-observed-binding.test.ts",
+        "scripts/native-object-binding-common-loop.ts",
+        "tests/v6-object-binding-common.test.ts",
+        "docs/migration/lot5c-observed-object-binding-lineage.md"
       ],
-      "notes": "Only locate, the complete finite raster search for the exact uniquely matching core palette/area/offset mask, is transferred and exercised by inventory observations, access reconciliation and context questions. The ObservedBinding class and its own policy, inheritance, planning and acquisition are not transferred by this mapping."
+      "notes": "The ObservedBinding source entry, compiled binding workflow, selected/passive acquisition, shared attention, guards and sixteen-field source projection are transferred. The native owner checkpoint, transactional cancellation, work limits and active-level acquisition deadline are explicit extensions, not Python source data. Extra source restore keys persist across reset, while the native checkpoint stays closed. Reconstructed after workspace replacement from immutable original commit786dcf51ca57773d8e3a8948ce9ea3655e7baf8e; fresh independent oracle/parity98 tests and13 native-extension tests pass. The original failed recovery attempt is retained. This component status does not assert full original-caller parity, final integrated release validation, official cost acceptance, new game success or completion of any global migration gate."
     },
     {
       "sources": [
@@ -4784,6 +4803,83 @@
         "tests/v6-addressed-material-kernel.test.ts"
       ],
       "notes": "Lot5B transfers the complete consumed addressed-field/stock chain on its admitted public-observation domain. The independent unchanged original oracle covers 19 cold chains, 522 operations and 14 helpers; source results and complete state match through ordinary and native checkpoint restoration. Source empty event envelopes and truthy empty-action refusals remain distinct from abstention. Acquisition, empirical distance bounds, exact locus witnesses, per-step guards, scored prior retention, typed stock rules, lineages, minimum-count obligations and counterexamples are preserved. Checkpoints, owned immutable snapshots and cooperative work/deadline/abort incompletion are explicit native extensions; neither Python class supplies a checkpoint API. Four cold production-factory contracts cover one registered owner, passive envelopes and actual authoritative restoration. Selected full-common contribution and final integrated release gates are separate pending evidence at this development mapping update; this does not claim whole original caller selection parity or a new game success."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/morphology_policy/guarded_binding/tracker.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-object-binding-tracker.ts",
+        "src/logos-engine/v6-observed-binding-state.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-observed-binding-reference.py",
+        "tests/fixtures/v6-observed-binding-reference.json.gz",
+        "tests/v6-observed-binding-reference.test.ts",
+        "tests/v6-observed-binding.test.ts",
+        "scripts/native-object-binding-common-loop.ts",
+        "tests/v6-object-binding-common.test.ts",
+        "docs/migration/lot5c-observed-object-binding-lineage.md"
+      ],
+      "notes": "The source tracker fields, context admission/refutation, motion/binding/identity/reception transitions, local reset with retained conditional methods/goals, and source restore merging are transferred. Native forks share immutable branches and commit only completed bounded operations. Reconstructed after workspace replacement from immutable original commit786dcf51ca57773d8e3a8948ce9ea3655e7baf8e; fresh independent oracle/parity98 tests and13 native-extension tests pass. The original failed recovery attempt is retained. This component status does not assert full original-caller parity, final integrated release validation, official cost acceptance, new game success or completion of any global migration gate."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/morphology_policy/guarded_binding/identity.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-object-binding-identity.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-observed-binding-reference.py",
+        "tests/fixtures/v6-observed-binding-reference.json.gz",
+        "tests/v6-observed-binding-reference.test.ts",
+        "tests/v6-observed-binding.test.ts",
+        "scripts/native-object-binding-common-loop.ts",
+        "tests/v6-object-binding-common.test.ts",
+        "docs/migration/lot5c-observed-object-binding-lineage.md"
+      ],
+      "notes": "Source object identity preservation, ambiguity and changed-frame evidence are transferred with exact observed inputs and source equality semantics. Reconstructed after workspace replacement from immutable original commit786dcf51ca57773d8e3a8948ce9ea3655e7baf8e; fresh independent oracle/parity98 tests and13 native-extension tests pass. The original failed recovery attempt is retained. This component status does not assert full original-caller parity, final integrated release validation, official cost acceptance, new game success or completion of any global migration gate."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/morphology_policy/guarded_binding/reception.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-object-binding-reception.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-observed-binding-reference.py",
+        "tests/fixtures/v6-observed-binding-reference.json.gz",
+        "tests/v6-observed-binding-reference.test.ts",
+        "tests/v6-observed-binding.test.ts",
+        "scripts/native-object-binding-common-loop.ts",
+        "tests/v6-object-binding-common.test.ts",
+        "docs/migration/lot5c-observed-object-binding-lineage.md"
+      ],
+      "notes": "Source arrival and separation reasoning are transferred; source confirmations remain distinct from hypothetical reception and from a natural official boundary. Reconstructed after workspace replacement from immutable original commit786dcf51ca57773d8e3a8948ce9ea3655e7baf8e; fresh independent oracle/parity98 tests and13 native-extension tests pass. The original failed recovery attempt is retained. This component status does not assert full original-caller parity, final integrated release validation, official cost acceptance, new game success or completion of any global migration gate."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/morphology_policy/guarded_binding/planning.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-object-binding-planning.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-observed-binding-reference.py",
+        "tests/fixtures/v6-observed-binding-reference.json.gz",
+        "tests/v6-observed-binding-reference.test.ts",
+        "tests/v6-observed-binding.test.ts",
+        "scripts/native-object-binding-common-loop.ts",
+        "tests/v6-object-binding-common.test.ts",
+        "docs/migration/lot5c-observed-object-binding-lineage.md"
+      ],
+      "notes": "Source offer construction and ordered bounded prefixes are transferred with actual current object/frame binding and source route/preservation guards. Reconstructed after workspace replacement from immutable original commit786dcf51ca57773d8e3a8948ce9ea3655e7baf8e; fresh independent oracle/parity98 tests and13 native-extension tests pass. The original failed recovery attempt is retained. This component status does not assert full original-caller parity, final integrated release validation, official cost acceptance, new game success or completion of any global migration gate."
     }
   ],
   "scopeNotes": [
@@ -4860,7 +4956,8 @@
     "Native checkpoint schema logos-engine.linked-temporal-preparation.v1 and immutable ownership are explicit extensions, not Python-defined checkpoint semantics. Foreign mutable rows are retained before sharing; geometry receipts bind mask/digest/dimensions; contact body geometry and portable byte templates are validated; restore constructs a replacement owner before publication. Public state projections remain detached. Source epoch/state boundaries release phase rasters and commands, and portable reset releases local trials; conditional priors and adapter event/score witnesses remain. This is not global historical-fact eviction or a constant-memory claim for the full caller.",
     "Cold temporal chains demonstrate calibrated, guarded key prefixes of up to min(16, remaining), contrasted effects and subsequent component decisions. The separate key/click/key controller proof uses a declared synthetic family and is not a temporal click-policy transfer. A component source match, a legacy guard component or a present runtime registration does not certify complete production-priority selection, WHY/ACT authority or contribution to a real game. The 5B addressed-material and 5C object-binding entries remain separate and open.",
     "The portable native constructor initializes local fields eagerly, whereas the Python constructor initially holds only prior and the consumed boundary immediately calls reset_epoch. Direct from_boundary cases therefore compare prior; actual cold boundaries compare the full reset/acquisition state. Portable templates retain conditional source references without old-epoch raster lists. Native safe-integer and uint8 public-raster contracts do not claim arbitrary Python numeric or malformed-input coercion equivalence.",
-    "No new game, live WEAV attempt, official cost decision or publication result is established by these mappings. The separate WEAV diagnostic retains its exhausted cumulative case clock and unmet six-level target. Common-loop contribution, merged-source functional gates, the predeclared global cost policy, final integrity and publication remain parent-owned evidence to be reviewed before any 5A closure."
+    "No new game, live WEAV attempt, official cost decision or publication result is established by these mappings. The separate WEAV diagnostic retains its exhausted cumulative case clock and unmet six-level target. Common-loop contribution, merged-source functional gates, the predeclared global cost policy, final integrity and publication remain parent-owned evidence to be reviewed before any 5A closure.",
+    "Lot5C recovery reconstructs observed_object_binding from the pinned original with a single registered owner and shared caller attention. Fresh component proofs are retained under docs/migration/lot5c-evidence/recovery; lost historical5C evidence is not reused. Seven common scenarios passed on the first reconstructed runtime; the independent original replay and the subsequently added active-level deadline proof remain separately qualified. Publication, final integrated gates and official costs are still open. All six complete-migration gates remain false."
   ],
   "completionGates": {
     "allRequiredCapabilitiesTransferred": false,
