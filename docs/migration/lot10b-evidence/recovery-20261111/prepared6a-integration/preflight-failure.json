@@ -1,0 +1,6 @@
+{
+  "recordedAt": "2026-11-11T12:28:34.477947+00:00",
+  "status": "stopped_before_copy",
+  "reason": "Prepared working harness differs from its frozen archive; all native inputs examined still match. No import or merge was written.",
+  "path": "tests/helpers/v6-live-game-campaign.ts"
+}

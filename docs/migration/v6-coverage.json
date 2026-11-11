@@ -30,10 +30,10 @@
     "declaredClassesAndFunctions": 12857,
     "dataFiles": 417,
     "verifiedModules": 0,
-    "componentVerifiedModules": 196,
-    "partiallyTransferredModules": 148,
+    "componentVerifiedModules": 199,
+    "partiallyTransferredModules": 149,
     "transferredUnverifiedModules": 0,
-    "pendingModules": 1025,
+    "pendingModules": 1021,
     "strategyFamilies": 16
   },
   "families": [
@@ -40950,9 +40950,16 @@
           "endLine": 483
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-preview-packing-calculus.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-preview-packing-reference.py",
+        "scripts/compare-v6-preview-packing-reference.ts",
+        "tests/fixtures/v6-preview-packing/reference.json.gz",
+        "tests/v6-preview-packing-native.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/production_supposition_c.py",
@@ -92009,9 +92016,23 @@
           "endLine": 9
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-preview-packing.ts",
+        "src/logos-engine/v6-preview-packing-types.ts",
+        "src/logos-engine/v6-preview-packing-geometry.ts",
+        "src/logos-engine/v6-preview-packing-calculus.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-preview-packing-reference.py",
+        "scripts/compare-v6-preview-packing-reference.ts",
+        "tests/fixtures/v6-preview-packing/reference.json.gz",
+        "tests/v6-preview-packing-native.test.ts",
+        "tests/v6-preview-packing-reference.test.ts",
+        "tests/v6-preview-packing-integration.test.ts",
+        "docs/migration/lot6a-evidence/recovery/native-source-review.json"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/preview_packing/donor.py",
@@ -92116,9 +92137,23 @@
           "endLine": 126
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-preview-packing.ts",
+        "src/logos-engine/v6-preview-packing-types.ts",
+        "src/logos-engine/v6-preview-packing-geometry.ts",
+        "src/logos-engine/v6-preview-packing-calculus.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-preview-packing-reference.py",
+        "scripts/compare-v6-preview-packing-reference.ts",
+        "tests/fixtures/v6-preview-packing/reference.json.gz",
+        "tests/v6-preview-packing-native.test.ts",
+        "tests/v6-preview-packing-reference.test.ts",
+        "tests/v6-preview-packing-integration.test.ts",
+        "docs/migration/lot6a-evidence/recovery/native-source-review.json"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/preview_packing/family.py",
@@ -92181,9 +92216,23 @@
           "endLine": 54
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-preview-packing.ts",
+        "src/logos-engine/v6-preview-packing-types.ts",
+        "src/logos-engine/v6-preview-packing-geometry.ts",
+        "src/logos-engine/v6-preview-packing-calculus.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-preview-packing-reference.py",
+        "scripts/compare-v6-preview-packing-reference.ts",
+        "tests/fixtures/v6-preview-packing/reference.json.gz",
+        "tests/v6-preview-packing-native.test.ts",
+        "tests/v6-preview-packing-reference.test.ts",
+        "tests/v6-preview-packing-integration.test.ts",
+        "docs/migration/lot6a-evidence/recovery/native-source-review.json"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/qualify.py",

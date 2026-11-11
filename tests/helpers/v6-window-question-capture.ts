@@ -144,7 +144,7 @@ export function installWindowQuestionCapture(owner: R, report: R): WindowQuestio
         const acquired = facts.filter(fact => {
           const match = /^window_question_event:(\d+)$/.exec(fact.key);
           return match && revisions.has(Number(match[1]));
-        }).map(fact => ({ key: fact.key, value: copy(fact.value), evidence: fact.evidence, revision: fact.revision }));
+        }).map(fact => ({ episode: fact.episode, key: fact.key, value: copy(fact.value), evidence: fact.evidence, revision: fact.revision }));
         result = { stateNode: OWNER, checkpointFormat: checkpoint.format,
           sourceState: copy(checkpoint.source_state), nativeCheckpoint: checkpoint,
           instanceSourceState: copy(owner.state()), sourceCallsThrough: sourceCalls.length,

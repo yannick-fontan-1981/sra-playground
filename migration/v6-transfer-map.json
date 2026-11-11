@@ -4858,6 +4858,47 @@
         "docs/migration/lot10b-window-question-lineage.md"
       ],
       "notes": "Only the model constructors, eligibility and one-beat WindowProcessingD kernel consumed by V6 coverage are transferred. Persistent ranks, first eligible receiver, ordered refusals, current-beat parent pulse dependencies and the fresh shared 4096-visit/1000ms/4096-domain source budget remain. Other unconsumed V5 planner and interaction paths stay outside this mapping."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/morphology_policy/preview_packing/family.py",
+        "agents/yf_arc3_v6/morphology_policy/preview_packing/donor.py",
+        "agents/yf_arc3_v6/morphology_policy/preview_packing/base.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-preview-packing.ts",
+        "src/logos-engine/v6-preview-packing-types.ts",
+        "src/logos-engine/v6-preview-packing-geometry.ts",
+        "src/logos-engine/v6-preview-packing-calculus.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-preview-packing-reference.py",
+        "scripts/compare-v6-preview-packing-reference.ts",
+        "tests/fixtures/v6-preview-packing/reference.json.gz",
+        "tests/v6-preview-packing-native.test.ts",
+        "tests/v6-preview-packing-reference.test.ts",
+        "tests/v6-preview-packing-integration.test.ts",
+        "docs/migration/lot6a-evidence/recovery/native-source-review.json"
+      ],
+      "notes": "Fresh lot6A reconstruction from the immutable source after loss of the unpublished candidate. Component proposal, current point binding, guards, selected returns, source state and real caller restorations have independent synthetic checks. This does not establish whole-original-caller or complete-game parity. Current native bounds and explicit blocking incompletion preserve conservative action authority; source limitations remain documented."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v5/capabilities/preview_piece_packing.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-preview-packing-calculus.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-preview-packing-reference.py",
+        "scripts/compare-v6-preview-packing-reference.ts",
+        "tests/fixtures/v6-preview-packing/reference.json.gz",
+        "tests/v6-preview-packing-native.test.ts"
+      ],
+      "notes": "Only the V6 Preview donor consumed normalized transforms and finite residual assignment calculation are transferred and compared. The complete V5 mechanical service, movement command model and other public entry points remain outside this claim."
     }
   ],
   "scopeNotes": [

@@ -299,9 +299,9 @@ test('passive Window prefix capture reads persisted checkpoints and actual sourc
   family.restoreNative = () => { throw new Error('The observer must not restore'); };
   const transition = { command: k.foreignCommand, before: k.initialObservation.observation_ref,
     after: k.editedObservation.observation_ref, outcome: 'changed' };
-  const eventFact = { key: 'window_question_event:1', value: k.passive.value,
+  const eventFact = { episode: 'common-observation-frontier', key: 'window_question_event:1', value: k.passive.value,
     evidence: transition.after, revision: 2 };
-  const retained = { key: 'window_question_state', value: k.passive.afterState,
+  const retained = { episode: 'common-observation-frontier', key: 'window_question_state', value: k.passive.afterState,
     evidence: transition.after, revision: 2 };
   const snapshot = capture.prefixSnapshot({ read: key => {
     assert.equal(key, 'family_state:public_window_question'); return checkpoint;
