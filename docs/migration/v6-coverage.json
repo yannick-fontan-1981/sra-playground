@@ -30,10 +30,10 @@
     "declaredClassesAndFunctions": 12857,
     "dataFiles": 417,
     "verifiedModules": 0,
-    "componentVerifiedModules": 198,
-    "partiallyTransferredModules": 145,
+    "componentVerifiedModules": 205,
+    "partiallyTransferredModules": 147,
     "transferredUnverifiedModules": 0,
-    "pendingModules": 1026,
+    "pendingModules": 1017,
     "strategyFamilies": 16
   },
   "families": [
@@ -40950,9 +40950,16 @@
           "endLine": 483
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-preview-packing-calculus.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-preview-packing-reference.py",
+        "scripts/compare-v6-preview-packing-reference.ts",
+        "tests/fixtures/v6-preview-packing/reference.json.gz",
+        "tests/v6-preview-packing-native.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/production_supposition_c.py",
@@ -58645,9 +58652,18 @@
           "endLine": 65
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v5-window-processing.ts",
+        "src/logos-engine/v6-window-question-geometry.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-window-question-reference.py",
+        "tests/fixtures/v6-window-question-reference.json.gz",
+        "tests/v6-window-question-reference.test.ts",
+        "tests/v6-window-question-kernel.test.ts",
+        "docs/migration/lot10b-window-question-lineage.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/window_processing_primitive_d.py",
@@ -92060,9 +92076,23 @@
           "endLine": 9
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-preview-packing.ts",
+        "src/logos-engine/v6-preview-packing-types.ts",
+        "src/logos-engine/v6-preview-packing-geometry.ts",
+        "src/logos-engine/v6-preview-packing-calculus.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-preview-packing-reference.py",
+        "scripts/compare-v6-preview-packing-reference.ts",
+        "tests/fixtures/v6-preview-packing/reference.json.gz",
+        "tests/v6-preview-packing-native.test.ts",
+        "tests/v6-preview-packing-reference.test.ts",
+        "tests/v6-preview-packing-integration.test.ts",
+        "docs/migration/lot6a-evidence/recovery/native-source-review.json"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/preview_packing/donor.py",
@@ -92167,9 +92197,23 @@
           "endLine": 126
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-preview-packing.ts",
+        "src/logos-engine/v6-preview-packing-types.ts",
+        "src/logos-engine/v6-preview-packing-geometry.ts",
+        "src/logos-engine/v6-preview-packing-calculus.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-preview-packing-reference.py",
+        "scripts/compare-v6-preview-packing-reference.ts",
+        "tests/fixtures/v6-preview-packing/reference.json.gz",
+        "tests/v6-preview-packing-native.test.ts",
+        "tests/v6-preview-packing-reference.test.ts",
+        "tests/v6-preview-packing-integration.test.ts",
+        "docs/migration/lot6a-evidence/recovery/native-source-review.json"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/preview_packing/family.py",
@@ -92232,9 +92276,23 @@
           "endLine": 54
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-preview-packing.ts",
+        "src/logos-engine/v6-preview-packing-types.ts",
+        "src/logos-engine/v6-preview-packing-geometry.ts",
+        "src/logos-engine/v6-preview-packing-calculus.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-preview-packing-reference.py",
+        "scripts/compare-v6-preview-packing-reference.ts",
+        "tests/fixtures/v6-preview-packing/reference.json.gz",
+        "tests/v6-preview-packing-native.test.ts",
+        "tests/v6-preview-packing-reference.test.ts",
+        "tests/v6-preview-packing-integration.test.ts",
+        "docs/migration/lot6a-evidence/recovery/native-source-review.json"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/qualify.py",
@@ -96053,9 +96111,15 @@
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "lines": 0,
       "definitions": [],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-window-question.ts"
+      ],
+      "proof": [
+        "tests/v6-window-question-reference.test.ts",
+        "tests/v6-window-question-kernel.test.ts",
+        "docs/migration/lot10b-window-question-lineage.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/window_question/family.py",
@@ -96130,9 +96194,20 @@
           "endLine": 64
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-window-question-geometry.ts",
+        "src/logos-engine/v6-window-question-policy.ts",
+        "src/logos-engine/v6-window-question.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-window-question-reference.py",
+        "tests/fixtures/v6-window-question-reference.json.gz",
+        "tests/v6-window-question-reference.test.ts",
+        "tests/v6-window-question-kernel.test.ts",
+        "docs/migration/lot10b-window-question-lineage.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/window_question/geometry.py",
@@ -96171,9 +96246,20 @@
           "endLine": 44
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-window-question-geometry.ts",
+        "src/logos-engine/v6-window-question-policy.ts",
+        "src/logos-engine/v6-window-question.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-window-question-reference.py",
+        "tests/fixtures/v6-window-question-reference.json.gz",
+        "tests/v6-window-question-reference.test.ts",
+        "tests/v6-window-question-kernel.test.ts",
+        "docs/migration/lot10b-window-question-lineage.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/window_question/policy.py",
@@ -96206,9 +96292,20 @@
           "endLine": 15
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-window-question-geometry.ts",
+        "src/logos-engine/v6-window-question-policy.ts",
+        "src/logos-engine/v6-window-question.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-window-question-reference.py",
+        "tests/fixtures/v6-window-question-reference.json.gz",
+        "tests/v6-window-question-reference.test.ts",
+        "tests/v6-window-question-kernel.test.ts",
+        "docs/migration/lot10b-window-question-lineage.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/upstream_loader.py",
@@ -99194,7 +99291,8 @@
   "failures": [
     "Missing differential evidence: tests/fixtures/v6-feedback-sequences-reference.json.gz",
     "Missing differential evidence: tests/fixtures/v6-feedback-sequences-reference.json.gz",
-    "Missing differential evidence: tests/fixtures/v6-relative-arrangements-reference.json.gz"
+    "Missing differential evidence: tests/fixtures/v6-relative-arrangements-reference.json.gz",
+    "Missing differential evidence: docs/migration/lot6a-evidence/recovery/native-source-review.json"
   ],
   "scopeNotes": [
     "The completion gate includes the published common symbolic caller and every transitive reasoning capability it requires, including inherited V5 implementations.",

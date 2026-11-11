@@ -142,7 +142,8 @@ export interface NativeFamily<P extends NativeProposal = NativeProposal> {
   sourceGroupStop?(group: string, entry: string | null, observation: NativeObservation): NativeRecord | null;
   preservationObligations?(observation: NativeObservation, rows: NativeRows): NativeMaybePromise<readonly NativeRecord[]>;
   bind?(proposal: P, domain: ObservedInputDomain): NativeMaybePromise<void>;
-  before(proposal: P, index: number, publicPacket: NativePublicObservation, observation: NativeObservation): NativeMaybePromise<NativeBeforeResult>;
+  before(proposal: P, index: number, publicPacket: NativePublicObservation, observation: NativeObservation,
+    execution?: NativeExecution): NativeMaybePromise<NativeBeforeResult>;
   after(proposal: P, index: number, before: NativeObservation, after: NativeObservation,
     firstRows: NativeRows, secondRows: NativeRows): NativeMaybePromise<NativeAfterResult>;
   record(before: NativeObservation, after: NativeObservation, command: NativeCommand,

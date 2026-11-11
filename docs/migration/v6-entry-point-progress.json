@@ -4,15 +4,15 @@
   "strategySha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44",
   "implementation": "logos-engine.typescript.v6.native-migration/0.63.0",
   "metric": "Connection of the explicit subquestions in the four ordered source DRM lists",
-  "connected": 63,
+  "connected": 65,
   "partiallyConnected": 0,
   "declared": 76,
-  "percent": 82.9,
+  "percent": 85.5,
   "groups": [
     {
       "id": "goal_access",
       "declared": 12,
-      "connected": 10,
+      "connected": 11,
       "partiallyConnected": 0,
       "entries": [
         {
@@ -47,8 +47,8 @@
         },
         {
           "question": "preview_packing",
-          "family": null,
-          "status": "pending"
+          "family": "preview_packing",
+          "status": "connected"
         },
         {
           "question": "selected_rigid",
@@ -251,7 +251,7 @@
     {
       "id": "factored_material_return",
       "declared": 33,
-      "connected": 22,
+      "connected": 23,
       "partiallyConnected": 0,
       "entries": [
         {
@@ -351,8 +351,8 @@
         },
         {
           "question": "window_question",
-          "family": null,
-          "status": "pending"
+          "family": "public_window_question",
+          "status": "connected"
         },
         {
           "question": "ordered_recruitment",
@@ -433,6 +433,7 @@
         "goal_access",
         "support_navigation",
         "subset_diagnosis",
+        "preview_packing",
         "invited_reduction",
         "joint_transport",
         "feedback_sequences",
@@ -445,6 +446,7 @@
         null,
         null,
         null,
+        "preview_packing",
         null,
         null,
         "observed_feedback_sequence",
@@ -573,6 +575,7 @@
         "public_framed_transfer",
         "public_topological_recolor",
         "public_axial_question",
+        "public_window_question",
         "public_reactive_contact",
         "public_ordered_reaction",
         "oriented_coupling",
@@ -597,6 +600,7 @@
         "observed_framed_transfer",
         "topological_recolor",
         "axial_question",
+        "window_question",
         "reactive_contact",
         "ordered_reaction",
         null,

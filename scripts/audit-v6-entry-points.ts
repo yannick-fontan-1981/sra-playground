@@ -31,6 +31,7 @@ const aliases: Record<string, string> = {
   observed_inventory_composition: 'public_observed_inventory',
   topological_recolor: 'public_topological_recolor',
   axial_question: 'public_axial_question',
+  window_question: 'public_window_question',
   observed_ranked_workshop: 'public_ranked_workshop',
   observed_symbol_transaction: 'public_symbol_transaction',
   observed_addressed_material: 'public_addressed_material',
@@ -64,7 +65,7 @@ const groups = lists.map(([id, declared]) => {
     const family = aliases[question] ?? question;
     const explicitSharedEntry = (['goal_access', 'window_constraints'].includes(id) && family === 'public_occurrence_recall')
       || family === 'public_framed_transfer' || family === 'public_reactive_contact' || family === 'public_ordered_reaction' || family === 'public_observed_inventory'
-      || family === 'public_topological_recolor' || family === 'public_axial_question' || family === 'public_ranked_workshop' || family === 'public_symbol_transaction' || family === 'public_addressed_material' || family === 'public_observed_binding' || family === 'feedback_sequences' || family === 'relative_arrangements' || family === 'facet_examples';
+      || family === 'public_topological_recolor' || family === 'public_axial_question' || family === 'public_window_question' || family === 'public_ranked_workshop' || family === 'public_symbol_transaction' || family === 'public_addressed_material' || family === 'public_observed_binding' || family === 'preview_packing' || family === 'feedback_sequences' || family === 'relative_arrangements' || family === 'facet_examples';
     const connected = registered.has(family) && (!explicitSharedEntry || actual.entryPoints?.some((entry, index) =>
       entry === question && actual.families[index] === family) === true);
     const partial = connected ? coverage.partialEntryPoints?.[question] : null;

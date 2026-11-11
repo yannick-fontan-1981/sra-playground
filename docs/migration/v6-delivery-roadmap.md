@@ -2,7 +2,23 @@
 
 <!-- LOT5B_ROADMAP_CURRENT_START -->
 
-## Jalon courant : lot 5B livré dans Site 94 / native 0.58, validation et coût global acceptés
+<!-- LOT10B_CURRENT_BEGIN -->
+## Jalon de reprise : 10B WindowQuestion reconstruit, validation en cours
+
+Le dépôt effectivement récupéré est **Site 95 / native 0.58.0**, commit `3a70463039768f7114edae7d94d7dd33b7f36aa8`. Les travaux locaux non publiés de l'environnement précédent n'ont pas été retrouvés. [La reprise et ses limites](lot10b-evidence/recovery-20261111/recovery-status.json) distinguent donc les observations historiques des nouvelles preuves ; aucun ancien résultat n'est réémis comme preuve de cette reconstruction.
+
+**WindowQuestion a été reconstruit depuis les originaux V6/V5 épinglés.** Les nouvelles vérifications de développement donnent **173/173 contrats de référence**, **4/4 scénarios froids communs**, **56/56 contrôles communs supplémentaires** et un contrôle TypeScript passé. Elles ne remplacent pas le gel et la validation finale. La [filiation](lot10b-window-question-lineage.md) décrit les six champs de l'état, le choix SRC réel, l'acquisition active/passive unique et la garde coopérative utilisant le contexte courant.
+
+L'audit de ce candidat isolé raccorde **63/76 entrées**, soit **82,9 %**, avec **13 restantes**. Il compte **196 composants vérifiés, 148 transferts partiels et 1 025 modules en attente**, zéro module entièrement vérifié et aucun échec d'audit. Les six portes de migration complète restent ouvertes. Ces compteurs seront recalculés après intégration des prédécesseurs reconstruits.
+
+**HPDL reste à qualifier sur ce nouveau code.** Le temps historiquement consigné, **159,45478678199166 secondes et 40 actions**, reste débité du budget de 2 400 secondes ; les anciens journaux bruts n'ont pas été récupérés. Une nouvelle tentative froide vise les six niveaux avec une limite externe de 600 secondes, sans autre plafond d'actions que celui du produit. L'intégration des prédécesseurs 6A puis suivi 7, la validation finale, le coût et la publication 10B sont encore à établir. L'étiquette de travail **0.62.0** n'annonce pas une publication.
+
+La règle acceptée demeure : **pour chaque jeu de référence, la médiane des sessions complètes doit rester strictement sous +10 %**. Une phase dépassant +10 % peut être acceptée lorsque ce global passe ; tous les échantillons et diagnostics de phase restent conservés.
+
+**Suite du fil 10 : clôturer 10B, puis 10C / `ordered_recruitment`.** 10D / `temporal_selection` et 10E / `invited_endpoints` restent ensuite à réaliser.
+<!-- LOT10B_CURRENT_END -->
+
+## Prédécesseur publié : lot 5B livré dans Site 94 / native 0.58, validation et coût global acceptés
 
 **`observed_addressed_material` est livré dans [Site 94 / native 0.58.0](lot5b-evidence/publication/native-publication.json), avec validation fonctionnelle, budget global accepté et publication privée confirmée.** Le commit `fbd968f7c194575777965219f64fa78d3460b08e` a atteint le statut terminal `succeeded` le **11 novembre 2026 à 02:52:58.534517 UTC** ; l'audience propriétaire seul, révision **3**, et l'URL sont préservées. La livraison intègre le prédécesseur publié **Site 92 / native 0.57.0** puis sa **clôture documentaire Site 93**. Le [reçu de réconciliation](lot5b-evidence/coordination/published-4c-documentation-closure-reconciliation.json) vérifie l'identité des sources natives, tests et entrées de build entre ces publications ; la référence de coût déclarée reste Site 92. Le [gel 5B](lot5b-evidence/integrated-final/source-manifest.json) contient **302 fichiers natifs**, digest `099444085f0579ce60e226c9dece42110c577538f5f337579305a2e5f65483c4`, avec **313 fichiers dans l'[archive](lot5b-evidence/integrated-final/source-archive.json)**.
 
@@ -885,7 +901,7 @@ Le [rapport 7A](lot7a-ranked-workshop.md) et la [filiation source → TypeScript
 | Sous-lot | Entrée et workflow | État dans le fil 10 |
 | --- | --- | --- |
 | 10A | `axial_question` / `v6.axial_question.choose` | Publié dans Sites 90–91 / 0.56, intégré et fonctionnel vérifié : 1 538 tests, 5 contrôles, 119 comparaisons et QA TRIA trois niveaux/17 actions/17 plans ; publications 7B/Sites 88–89 réconciliées, coût global accepté et entrées de publication vérifiées ; publication privée confirmée, contribution propre en partie ouverte |
-| 10B | `window_question` / `v6.window_question.choose` | **Commencé dans une autre conversation**, après 10A clos ; intégration du prédécesseur réellement publié avant son propre gel final. Aucun résultat 10B n'est attribué au gel 5B. |
+| 10B | `window_question` / `v6.window_question.choose` | **Reconstruction neuve en cours sur Site 95** : 173 contrats de référence, quatre scénarios froids communs et 56 contrôles communs passés en développement ; HPDL, gel intégré, coût et publication restent à établir. |
 | 10C | `ordered_recruitment` / `v6.ordered_recruitment.choose` | À réaliser |
 | 10D | `temporal_selection` / `v6.temporal_selection.choose` | À réaliser |
 | 10E | `invited_endpoints` / `v6.invited_endpoints.choose` | À réaliser |
