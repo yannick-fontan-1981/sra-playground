@@ -1,0 +1,435 @@
+{
+  "checkedAt": "2026-11-11T19:22:44.581122+00:00",
+  "statuses": {
+    "lot5c-status.json": {
+      "schema": "sra.parallel-lane-status.v1",
+      "lane": "lot5c",
+      "checkout": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout",
+      "updated_at": "2026-11-11T19:16:00.226786+00:00",
+      "phase": "functional_complete_cost_blocked_zero_samples_checkpoint_verified",
+      "active_command": null,
+      "heavy_work_started": true,
+      "heavy_execution_active": false,
+      "performance_started": false,
+      "publication_started": false,
+      "quiet_acknowledged": false,
+      "reserved_native_version": "0.63.0",
+      "base_site": 102,
+      "performance_lock": "/workspace/shared/sra-coordination/performance.lock",
+      "publication_lock": "/workspace/shared/sra-coordination/publication.lock",
+      "no_live_games": true,
+      "notes": "All final functional proofs,106 exact replay parts, actual historical ready, exact ACKs, unused withdrawn proposals, EXrefusal, diagnoses/release and updated roadmap are retained in verified source checkpoint501198d7. Root/allworkers idle; zero official5Ccost samples.",
+      "publication_queue_acknowledged": [
+        "6A0.60",
+        "7followup0.61",
+        "10B0.62",
+        "5C0.63"
+      ],
+      "requires_actual_published_predecessor": true,
+      "checkpoint_push_target": "lot5c-recovery-checkpoint-20261111",
+      "checkpoint_commit": "501198d7638c7a56c3b85d357beb917469899402",
+      "checkpoint_publication": "none, source checkpoint branch only",
+      "checkpoint_pushed_and_verified": true,
+      "prospective_integration_request": "/workspace/shared/sra-coordination/lot5c-integration-request.json",
+      "quiet_request_id": "lot5c-cost-a33a5f88-final-01",
+      "quiet_scope": "Fresh exact request ACK from each active lane and all of its workers after actual terminal closure of any finite current activity. All source/compute/Git/hash/archive/test/replay/game/browser/preview work and queues stay stopped through A1/B1/B2/A2, comparisons, arithmetic review and explicit root release. Only tiny named coordination metadata is allowed. Root completes readiness verification before the first sample; no official measurement has started.",
+      "native_deadline_test": "Both caller/runtime clock offset directions pass on the composed candidate; exact 10B fix integrated. Binding first-return level ownership remains preserved.",
+      "all_own_subagents_idle": true,
+      "quiet_request_withdrawn_by_peer_at": "2026-11-11T12:37:00.902589+00:00",
+      "prepared_integrated_commit": "f4a6040f0f0d78550c867d608318e08e0c156d2f",
+      "prepared_peer_commit": "653e40a4f45df8ec8c6bda005004c7cdb8df074a",
+      "latest_validation": {
+        "testsPassed": 16,
+        "nativeRuntime": 9,
+        "windowKernel": 4,
+        "bindingAcquisitionBounds": 3,
+        "checksPassed": 3,
+        "summary": "docs/migration/lot5c-evidence/recovery/integration-published-6a/summary.json",
+        "freshFullCommon02Run": false
+      },
+      "resumed_conversation_cwd": "/workspace/scratch/8a0681e98bf4",
+      "request_to_lot6a": "Actual published Sites 96/97 are integrated and verified in the Lot 5C checkpoint. No source work is queued.",
+      "request_to_lot10b": "Actualpublishednative102 anddocumentary103 reconciled and merged. All318candidate nativefilesstillmatcha33; currentExecutionclockfix preserved. Final138test/11casegate preparation ongoing. Will request freshquietfromactive10C beforeowncost.",
+      "next_bounded_step": "Identify/close the actual existing SH holder or observe trueEX availability, then renew exact all-worker quiet, isolation/readiness and unchangedABBA cost. Publish0.63onlyafter both per-game complete-session globals pass strictlybelow+10%.",
+      "request_to_lot7_followup": "Checkpoint recovery completed after your explicit release. Final remote d54a58f2 verified. Six exact clean-repeat receipts retained in 5C and roadmap updated: first window remains withdrawn; clean repeat accepted. Final published documentary closure remains to be reconciled with the actual 10B handoff. All own work is now idle.",
+      "text_preparation": "Roadmap and lineage updated with exact common02 totals, retained failures, recorded LIFE foreign-parent case vs synthetic source cases, source integrity, global per-game cost criterion and pending final integration. No native code changes in this closure.",
+      "quiet_acknowledged_at": "2026-11-11T17:51:23.840576+00:00",
+      "common_02": {
+        "summary": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/common/common-02/summary.json",
+        "checksPassed": 6818,
+        "checksTotal": 6818,
+        "nativeTests": 7,
+        "declaredScenarios": 8,
+        "operations": 412,
+        "actualReturns": 80,
+        "nativeDigest": "35e03bc9df42bb01762cc025d1e5faa838845637944f560a499fd8800df4e0ed",
+        "nativeFiles": 318,
+        "uniqueInputsVerified": 1074,
+        "liveGamesLaunched": 0
+      },
+      "quiet_interval_contaminated": true,
+      "quiet_deviation": "/workspace/shared/sra-coordination/lot5c-quiet-deviation-20261111T1420.json",
+      "pending_checkpoint_commit": null,
+      "checkpoint_transport_status": "Two ordinary bounded source-only pushes completed; final exact own-branch remoteHEAD verified. No force push or site publication.",
+      "quiet_release_observed_at": "2026-11-11T17:54:11.992901+00:00",
+      "actual_published_predecessors": {
+        "lot6aDocumentation97": "98336fba4e696a51c90ff7f7b37b8bdf95f34847",
+        "lot7Native98": "653e40a4f45df8ec8c6bda005004c7cdb8df074a",
+        "lot7FinalPublishedDocumentation": "d75a36f0a99bf6c301034523a3138a64d2f6e744",
+        "lot10bNative062": "1019d2eb929d7dc201a5c1f6edce5aa1c5dfa464",
+        "lot10bFinalDocumentation103": "4afcbfe6a25bd3a88223be543e443bc53b9c8814"
+      },
+      "request_to_lot6b": "Documentary closure terminal; all5Cworkers androot idle, no queue. Sourcecheckpoint501198d7638c7a56c3b85d357beb917469899402 remotelyverified; currentroadmap and allreadiness/EXrefusal/release receipts retained. Requestlot5c-cost-a33a5f88-final-01 remains explicitlyreleased since19:08:34.656015UTC. Zeroofficialsamples and no0.63publication. Futurecost requires realEX and newfreshquiet/ACK/readiness. Report only an actually recovered oldsession/holder closure; neverreplace actualmutex.",
+      "lot7_clean_repeat_observed": {
+        "status": "accepted_from_complete_clean_repeat",
+        "firstWindowRemainsIneligible": true,
+        "receipt": "docs/migration/lot5c-evidence/recovery/coordination/lot7-clean-repeat-observation/observation.json",
+        "STCKPercent": -2.924029997654297,
+        "SMLPPercent": 0.009073896194578176
+      },
+      "next_quiet_acknowledgment": {
+        "requestId": "lot10b-hpdl02-proof-qa",
+        "acknowledgedAt": "2026-11-11T15:56:58.662338+00:00",
+        "scope": "Original source comparison at most 300 s plus browser controls planned at most 180 s, charged to the same cumulative clock, without a new CLI game campaign. No official cost measurement.",
+        "activeCommand": null,
+        "allOwnAgentsIdle": true,
+        "queuedWork": false,
+        "currentWindowStillHeld": "lot10b-hpdl02-74143a-functional"
+      },
+      "bounded_source_preparation_request": {
+        "requestedAt": "2026-11-11T16:02:00.323868+00:00",
+        "maxSeconds": 60,
+        "status": "not_released_deferred_until_explicit_proof_qa_release",
+        "scope": "Exact Site 101 metadata, small named source reads and authenticated fetch only; no tests/build/replay/game/archive/recursive content scan/push",
+        "willNotDelayProofQa": true
+      },
+      "bounded_source_preparation": {
+        "startedAt": "2026-11-11T16:16:29.052925+00:00",
+        "deadline": "2026-11-11T16:18:29.052925+00:00",
+        "permissionIssuedAt": "2026-11-11T16:14:39.360572+00:00",
+        "lastSourceCommandEndedAt": "2026-11-11T16:17:51.407004+00:00",
+        "status": "closed_with_pending_roadmap_merge_conflict"
+      },
+      "source101_preparation": {
+        "providerVersion": 101,
+        "providerStatus": "succeeded",
+        "publishedCommit": "d75a36f0a99bf6c301034523a3138a64d2f6e744",
+        "fetchSession": 18054,
+        "fetchExitCode": 0,
+        "fetchedMain": "d75a36f0a99bf6c301034523a3138a64d2f6e744",
+        "mergeCommandCompletedAt": "2026-11-11T16:17:51.407004+00:00",
+        "unresolvedFiles": [
+          "docs/migration/v6-delivery-roadmap.md"
+        ],
+        "sourceReviewerTerminalAt": "2026-11-11T16:17:25.182678+00:00",
+        "sourceSlotExpiredGuard": "No source work started by guarded command after 16:18:29 deadline"
+      },
+      "prospective_scope_observation": {
+        "minimumTestFiles": 136,
+        "inheritedRecordedReplays": 11,
+        "checksPerReplay": 17,
+        "finalScopePendingActualPublished10B": true,
+        "fourClosedLkeyModulesExcluded": true
+      },
+      "pending_source_closure_request": {
+        "status": "withdrawn_for_official_cost",
+        "sourceWorkWillWaitForExplicitRelease": true
+      },
+      "source_preparation_incidents": [
+        {
+          "kind": "bounded_manifest_inspection_invocation",
+          "error": "KeyError: 0",
+          "cause": "The reader treated the manifest files mapping as a list.",
+          "initialExitCode": 1,
+          "correctedReadExitCode": 0,
+          "occurredWithin": [
+            "2026-11-11T16:16:29.052925+00:00",
+            "2026-11-11T16:17:51.407004+00:00"
+          ],
+          "nativeCodeModified": false,
+          "testExecuted": false
+        },
+        {
+          "kind": "late_slot_guard",
+          "at": "2026-11-11T16:19:24.112091+00:00",
+          "result": "source_slot_elapsed_no_more_work_started",
+          "sourceReadsOrMutationsPerformed": false
+        },
+        {
+          "kind": "stale_coordination_status",
+          "actualLastSourceCommandEndedAt": "2026-11-11T16:17:51.407004+00:00",
+          "statusCorrectedAt": "2026-11-11T16:21:16.747440+00:00",
+          "actualSourceWorkBeyondDeclaredSlot": false
+        }
+      ],
+      "recovery_base_site": 95,
+      "quiet_requested": false,
+      "request_to_lot8a": "Documentary closure terminal; all5Cworkers androot idle, no queue. Sourcecheckpoint501198d7638c7a56c3b85d357beb917469899402 remotelyverified; currentroadmap and allreadiness/EXrefusal/release receipts retained. Requestlot5c-cost-a33a5f88-final-01 remains explicitlyreleased since19:08:34.656015UTC. Zeroofficialsamples and no0.63publication. Futurecost requires realEX and newfreshquiet/ACK/readiness. Report only an actually recovered oldsession/holder closure; neverreplace actualmutex.",
+      "request_to_lot10c": "Documentary closure terminal; all5Cworkers androot idle, no queue. Sourcecheckpoint501198d7638c7a56c3b85d357beb917469899402 remotelyverified; currentroadmap and allreadiness/EXrefusal/release receipts retained. Requestlot5c-cost-a33a5f88-final-01 remains explicitlyreleased since19:08:34.656015UTC. Zeroofficialsamples and no0.63publication. Futurecost requires realEX and newfreshquiet/ACK/readiness. Report only an actually recovered oldsession/holder closure; neverreplace actualmutex.",
+      "final_source_commit": "805b30297dc1b715dbfd9f1197a9a8ba7b361b90",
+      "final_freeze_directory": "docs/migration/lot5c-evidence/recovery/integrated-final-01",
+      "test_scope_files": 138,
+      "parallel_worker_activity": null,
+      "publication_source_ancestry_pending": null,
+      "structural_qualification": {
+        "status": "passed_pending_independent_review",
+        "checksPassed": 64,
+        "checksTotal": 64,
+        "comparedPoints": 58,
+        "attributedDeltas": 40,
+        "functionalCaptureSessions": 8,
+        "functionalCaptureActions": 62,
+        "officialTimingSamples": 0,
+        "finalizerExecuted": false
+      },
+      "final_native_suite_exit_code": 0,
+      "final_native_suite": {
+        "files": 138,
+        "counts": {
+          "tests": 5339,
+          "pass": 5339,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        "nativeDigest": "a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57",
+        "nativeSourceUnchanged": true,
+        "sourceAndTestInputsUnchanged": true,
+        "receipt": "docs/migration/lot5c-evidence/recovery/integrated-final-01/validation/delta-tests-run.json"
+      },
+      "final_delivery_checks_exit_code": 0,
+      "final_delivery_checks": {
+        "status": "passed",
+        "checksPassed": 5,
+        "checksTotal": 5,
+        "semanticMigrationFailures": [],
+        "nativeSourceUnchanged": true,
+        "allFrozenExecutionInputsUnchanged": 867,
+        "entryCoverage": {
+          "connected": 65,
+          "declared": 76,
+          "partiallyConnected": 0
+        }
+      },
+      "preview_running": false,
+      "preview_checkout": "/workspace/sites/sra-lot5c-production-qa-20261111",
+      "browser_qa_bound_seconds": 180,
+      "preview_stopped": true,
+      "browser_qa_terminal": true,
+      "browser_qa_scope": "Actual built static0.63 UI, defaultCASC initialization,0agent actions; browser tab closed and managed preview stopped.",
+      "browser_qa_actual_wall_seconds": 270.393167,
+      "browser_qa_planning_bound_exceeded": true,
+      "browser_qa_planning_overrun_seconds": 90.393167,
+      "browser_qa_planning_qualification": "The complete staging-to-preview-closure interval exceeded the announced180s planning allowance. This overrun is retained; no official cost window, requested game action or closed-case campaign occurred during this UI-only check. No earlier closure is claimed.",
+      "fresh_common_proof": {
+        "checksPassed": 6818,
+        "checksTotal": 6818,
+        "operations": 412,
+        "returns": 80,
+        "nativeDigest": "a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57",
+        "summary": "docs/migration/lot5c-evidence/recovery/common/common-final-01/summary.json"
+      },
+      "cost_static_preflight": {
+        "directory": "docs/migration/lot5c-evidence/recovery/performance-integrated-02",
+        "status": "static_inputs_checked",
+        "checkedCount": 76,
+        "initialFailureRetained": "performance-integrated-01/static-preflight.json",
+        "measurementExecuted": false,
+        "independentReviewChecksPassed": 84,
+        "independentReviewStatus": "passed_inputs_only_readiness_not_asserted"
+      },
+      "all_own_subagents_compute_idle": true,
+      "publication_source_ancestry_reconciled": {
+        "sourceCheckpoint": "2981a62d456802d39dcde316734793e905fb0ebf",
+        "mergeCommit": "6eef29d17137d6c81d4c0b0ab6c389060a8d5045",
+        "treeUnchanged": true
+      },
+      "no_queued_commands": true,
+      "checkpoint_verification_observed_at": "2026-11-11T19:16:00.226786+00:00",
+      "recorded_regression_driver_exit_code": 0,
+      "recorded_preflight_failure_retained": "docs/migration/lot5c-evidence/recovery/integrated-final-01/regressions-preparation/initial-preflight-failure.json",
+      "recorded_regression_retry_started": true,
+      "prospective_cost_request_id": null,
+      "recorded_regressions": {
+        "status": "passed",
+        "casesPassed": 11,
+        "casesTotal": 11,
+        "checksPassed": 187,
+        "checksExpected": 187,
+        "recordedActions": 390,
+        "terminalObservedAt": "2026-11-11T18:21:07.551785+00:00",
+        "summary": {
+          "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/regressions/regression-summary.json",
+          "bytes": 227733,
+          "sha256": "632ed89d8d25722605a430bf53a29a8b682d9212081b351e6a8ed98ca41b21d7"
+        }
+      },
+      "quiet_requested_at": "2026-11-11T18:34:20.752335+00:00",
+      "ack_schema_pending": {},
+      "readiness_status": "historical_ready_preserved_requires_fresh_isolation_after_release",
+      "quiet_released": true,
+      "quiet_released_at": "2026-11-11T19:08:34.656015+00:00",
+      "released_request_id": "lot5c-cost-a33a5f88-final-01",
+      "lock_blocker_receipt": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/coordination/cost-final-01/lock-blocker-and-quiet-release.json",
+      "final_closure_transport": {
+        "sessionId": 1104,
+        "terminalChunk": "98b8b2",
+        "exitCode": 0,
+        "remoteHead": "501198d7638c7a56c3b85d357beb917469899402",
+        "fetchedMain": "2981a62d456802d39dcde316734793e905fb0ebf",
+        "sitePublicationPerformed": false
+      }
+    },
+    "lot10c-status.json": {
+      "schema": "sra.shared-lane-status.v1",
+      "lane": "10C",
+      "updated_at": "2026-11-11T19:17:26.118233+00:00",
+      "stage": "Development gates complete: 1382/1382 tests across 46 files, five checks/build, 173 original-source cases and four cold-kernel cases passed.",
+      "checkout": "/workspace/sites/sra-lot10c-20261111/.sites-checkout",
+      "branch": "lot10c-ordered-recruitment-20261111",
+      "source_checkpoint": "3ea5e39b7c3f18ea84baf485a2494a9b948e0984",
+      "active_command": "Prospective source composition under SH:5C+10C committed,6B merge being resolved,8A next. No functional tests/game/browser/cost launched.",
+      "heavy_execution_active": false,
+      "performance_started": false,
+      "publication_started": false,
+      "quiet_requested": false,
+      "all_own_subagents_idle": false,
+      "published_predecessor": {
+        "version": 103,
+        "nativeVersion": "0.62.0",
+        "publishedSource": "4afcbfe6a25bd3a88223be543e443bc53b9c8814"
+      },
+      "publication_order": "10C proposes0.66 after agreed5C0.63 ->6B0.64 ->8A0.65; integrate actual published predecessors before final qualification. No future version claimed.",
+      "request_to_other_lanes": "10C development terminal and source-only checkpoint3ea5e39b verified. All tests/replays/browser/source operations stopped, no queued or automatic work. Exact fresh quiet ACK to5C officialcost request lot5c-cost-a33a5f88-final-01. Actual integration order unchanged:0.63,0.64,0.65,then proposed10C0.66.",
+      "source_opening": {
+        "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+        "checkout_path": "/workspace/sites/sra-lot10c-20261111/.sites-checkout",
+        "commit_sha": "2981a62d456802d39dcde316734793e905fb0ebf"
+      },
+      "prospective_case": {
+        "code": "RECR",
+        "selectionBasis": "Public title and description only; no engine or game-state inspection",
+        "cumulativeClockAdmitted": true,
+        "chargedSeconds": 642.600846598,
+        "remainingSeconds": 1757.399153402,
+        "liveGameStarted": true,
+        "clockPath": "/workspace/sites/sra-lot10c-20261111/.sites-checkout/docs/migration/lot10c-evidence/case-clock.json"
+      },
+      "next_functional_window": {
+        "requestId": "lot10c-recr01-bb7d62-functional",
+        "status": "closed_released",
+        "game": "RECR",
+        "targetLevels": 3,
+        "activityCeilingSeconds": 300,
+        "retentionCeilingSeconds": 30,
+        "timingClaim": false,
+        "nativeSource": "development0.62base plus10C, finalpredecessors notyetintegrated",
+        "policy": "Please finish currently declared sequential functional suites; do not cancel them for this request. Request fresh full-tool idle only after explicit start coordination.5C officialcost retains priority ifready.",
+        "nativeDigest": "bb7d62b5823d76ae7a5ecd452cb622ebb04f2b85b20fb0d2f9a5c35a1535b361",
+        "sourceManifest": "docs/migration/lot10c-evidence/development/recr01-source/source-manifest.json",
+        "startedAt": "2026-11-11T17:51:33.369133+00:00",
+        "finishedAt": "2026-11-11T17:53:53.132648+00:00"
+      },
+      "request_to_lot5c": "Explicit release19:08:34 observed. Resuming ordinary bounded source-only preparation under existing SH mutex; no official cost, game or browser. Original mutex unchanged. Fresh exact quiet request will stop new work and receive an ACK after actual current terminal closure.",
+      "request_to_lot6b": "10C resumed after5C explicit release. Preparing prospective composition using immutable current checkpoints; please expose latest verified candidate checkpoint and its relation to actual0.63. No claim of actual0.64, no cost or browser.",
+      "request_to_lot8a": "10C resumed after5C explicit release. Preparing prospective composition using immutable current checkpoints; please expose latest verified motif candidate and its predecessor coverage. Original mutex unchanged; report any recovered waiting helper session/closure to5C.",
+      "quiet_request_id": "lot5c-cost-a33a5f88-final-01",
+      "quiet_requested_at": "2026-11-11T17:45:47.557963+00:00",
+      "source_checkpoint_remote_verified": true,
+      "quiet_released_at": "2026-11-11T17:53:53.132648+00:00",
+      "development_game_result": {
+        "nativeDigest": "bb7d62b5823d76ae7a5ecd452cb622ebb04f2b85b20fb0d2f9a5c35a1535b361",
+        "levels": 3,
+        "actions": 17,
+        "campaignPassedEstablished": true,
+        "finalIntegrated": false,
+        "executionReceipt": "docs/migration/lot10c-evidence/development/recr01/execution-recruitment.json",
+        "sourceComparedCalls": 50,
+        "sourceDifferences": 0,
+        "activeRecords": 16,
+        "nativeRestorationsCompared": 34,
+        "ablations": 102,
+        "ablationsChangingActionOrRefusal": 41,
+        "componentExactOriginalParity": true,
+        "fullOriginalCommonCallerParity": false,
+        "sourceParityReceipt": "docs/migration/lot10c-evidence/development/recr01-parity02/original-parity.json.gz"
+      },
+      "parallel_worker_activity": "Three bounded source-only workers: immutable predecessor inventory, caller-order review, documentary checkpoint closure. Each <=180s; no test/game/browser/cost.",
+      "preview_stopped": true,
+      "development_regressions": {
+        "directory": "docs/migration/lot10c-evidence/development/regressions01",
+        "cases": 10,
+        "checksExpected": 170,
+        "sourceDigest": "bb7d62b5823d76ae7a5ecd452cb622ebb04f2b85b20fb0d2f9a5c35a1535b361",
+        "perCaseTimeoutSeconds": 600,
+        "status": "passed",
+        "newGame": false,
+        "timingClaim": false,
+        "checksPassed": 170,
+        "casesPassed": 10,
+        "finishedAt": "2026-11-11T18:25:42.352529+00:00"
+      },
+      "current_activity": "Composing immutable prepared predecessors; actual publications and official10Ccost pending.",
+      "source_checkpoint_verified_at": "2026-11-11T18:33:49.901Z",
+      "source_checkpoint_working_tree_clean": true,
+      "source_checkpoint_handoff": "/workspace/shared/sra-coordination/lot10c-checkpoint-3ea5e39b-handoff.json",
+      "quiet_acknowledged": false,
+      "quiet_acknowledged_at": "2026-11-11T19:05:59.348551+00:00",
+      "quiet_scope": "Exact fresh ACK for lot5c-cost-a33a5f88-final-01. Root and all workers fully tool-idle. No source/Git/hash/archive/test/replay/game/browser/preview or cost work and no queued work until explicit5C release. Only tiny named coordination metadata permitted.",
+      "next_step": "After explicit5Crelease and actualpublished0.63/0.64/0.65: reconcile/freeze finalcandidate, repeat affected qualification, measure STCK/SMLP complete-session cost, publish in order. No automatic command queued.",
+      "no_queued_commands": true,
+      "all_own_subagents_compute_idle": false,
+      "metadata_clarification": {
+        "at": "2026-11-11T18:53:47.412449+00:00",
+        "before": {
+          "active_command": "All10recorded regressions terminalPASS170/170,357commands/30levelboundaries; all workers idle. Final bounded documentary/source checkpoint closure planned <=120s after exact proof-summary binding; no further test/game/browser/replay/cost is queued.",
+          "no_queued_commands": null
+        },
+        "after": {
+          "active_command": null,
+          "no_queued_commands": true
+        },
+        "officialMeasurementNotStartedAtObservation": true,
+        "priorRawStatus": "/workspace/shared/sra-coordination/lot10c-status-before-metadata-clarification-20261111T1853.json",
+        "actualActivityChanged": false
+      },
+      "lock_diagnosis": {
+        "schema": "lot10c.own-lock-holder-diagnosis.v1",
+        "observedAt": "2026-11-11T19:01:03.435020+00:00",
+        "requestedBy": "lot5c-cost-a33a5f88-final-01",
+        "lockPath": "/workspace/shared/sra-coordination/performance.lock",
+        "lockDevice": 27,
+        "lockInode": 1971854,
+        "matchingProcLocks": 0,
+        "matchingVisibleProcDescriptors": 0,
+        "lslocksVisibleRecords": 0,
+        "scanSeconds": 0.024,
+        "processesTerminated": 0,
+        "sourceOrGamePayloadRead": false,
+        "scope": "Visible process namespace only; no open descriptor for the exact performance.lock or its deleted form was found. No foreign process was signaled."
+      },
+      "lock_probe": {
+        "schema": "lot10c.instantaneous-lock-probe.v1",
+        "observedAt": "2026-11-11T19:03:31.585388+00:00",
+        "exclusiveNonblockingAcquisitionSucceeded": false,
+        "releasedImmediately": false,
+        "probeSeconds": 0.0001139029991463758,
+        "sourceOrRuntimeWorkPerformed": false,
+        "error": {
+          "errno": 11,
+          "message": "[Errno 11] Resource temporarily unavailable"
+        },
+        "qualification": "Instantaneous lock availability only; no claim about performance isolation or other namespaces."
+      },
+      "bounded_source_release_request": {
+        "requestedAt": "2026-11-11T19:07:45.846159+00:00",
+        "requestId": "lot5c-cost-a33a5f88-final-01",
+        "maxSeconds": 180,
+        "scope": "After explicit temporary release only: source checkpoint closure and prospective dependency inventory; no tests, game, browser, archive or cost.",
+        "status": "awaiting_explicit_release_no_command_queued"
+      },
+      "quiet_release_observed_at": "2026-11-11T19:09:23.198866+00:00"
+    }
+  }
+}

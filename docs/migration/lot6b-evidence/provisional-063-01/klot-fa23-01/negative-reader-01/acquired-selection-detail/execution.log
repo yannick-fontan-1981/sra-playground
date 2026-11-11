@@ -1,0 +1,102 @@
+{
+  "schema": "sra.selected-rigid-cold-original-execution.v1",
+  "status": "failed",
+  "startedAt": "2026-11-11T19:50:39.912760+00:00",
+  "command": [
+    "/workspace/sites/sra-lot6b-20261111/.sites-checkout/scripts/compare-selected-rigid-public-parity.py",
+    "--root",
+    "/workspace/sites/sra-lot6b-20261111/.sites-checkout",
+    "--report",
+    "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/negative-reader-01/acquired-selection-detail/report.json.gz",
+    "--output",
+    "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/negative-reader-01/acquired-selection-detail/source-comparison.json.gz",
+    "--receipt",
+    "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/negative-reader-01/acquired-selection-detail/source-execution.json",
+    "--without-ablations",
+    "--require-prefixes"
+  ],
+  "gameExecution": false,
+  "nativeExecution": false,
+  "nativeStateSeed": false,
+  "nativePlanSeed": false,
+  "input": {
+    "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/negative-reader-01/acquired-selection-detail/report.json.gz",
+    "bytes": 11521231,
+    "sha256": "1bea4059802e67b0ddf86835df6462fde49a1e3a70a10f393bc53791b9ecf49d"
+  },
+  "reader": {
+    "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/scripts/compare-selected-rigid-public-parity.py",
+    "bytes": 43759,
+    "sha256": "d77b4fbec377668f8673c39cb1401bcbce86cd11323a2ef0671f757df24e8f38"
+  },
+  "exporter": {
+    "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/scripts/export-v6-selected-rigid-reference.py",
+    "bytes": 48745,
+    "sha256": "90df08227717a2c23aa1550f105935ed8812815622f069941344fa2c91e0fc16"
+  },
+  "presenceVerifier": {
+    "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/scripts/verify-selected-rigid-presence.py",
+    "bytes": 65174,
+    "sha256": "91a1b0ded6d4b303ded74218a714ff042dcb35cf756bbe68b654f1d8003357b5"
+  },
+  "sourceBefore": {
+    "commit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+    "files": 1786,
+    "manifest": {
+      "bytes": 424024,
+      "sha256": "491eb3b737bbb490a1b7c212f5b1e75f5a8f84b2124b95d9dd54a0d09eca85d6"
+    },
+    "unchanged": true
+  },
+  "output": {
+    "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/negative-reader-01/acquired-selection-detail/source-comparison.json.gz",
+    "bytes": 55852,
+    "sha256": "477d7b7e00382e7a07b515e0cd61548d8d6df17aca5a3451f979154aad1de5e0",
+    "rawBytes": 2094527
+  },
+  "counts": {
+    "actualRestores": 98,
+    "nativeRestores": 60,
+    "restoreNative": 60,
+    "setCurrentBudget": 98,
+    "proposed": 30,
+    "propose": 30,
+    "bind": 68,
+    "before": 38,
+    "after": 38,
+    "selectedRecords": 38,
+    "nullSelectedReturns": 3,
+    "acquiredSourceEvents": 35,
+    "modelChangingRecords": 35,
+    "controlChangingRecords": 4,
+    "epochBoundaryReturns": 3,
+    "scoreOnlyBoundaryReturns": 0,
+    "record": 38,
+    "sourceRestores": 38,
+    "restoreSourceState": 38,
+    "chronologicalEvents": 408,
+    "comparedRootEvents": 340,
+    "comparedEvents": 408,
+    "uniqueObservations": 39,
+    "selectedPrefixes": 30,
+    "foreignPrefixes": 0,
+    "ablations": 0,
+    "actionChangingAblations": 0,
+    "nonemptyAblations": 0,
+    "ablationErrors": 0
+  },
+  "differences": 1118,
+  "stop": null,
+  "sourceAfter": {
+    "commit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+    "files": 1786,
+    "manifest": {
+      "bytes": 424024,
+      "sha256": "491eb3b737bbb490a1b7c212f5b1e75f5a8f84b2124b95d9dd54a0d09eca85d6"
+    },
+    "unchanged": true
+  },
+  "elapsedSeconds": 52.1436519509989,
+  "finishedAt": "2026-11-11T19:51:32.056410+00:00",
+  "exitCode": 1
+}

@@ -1,0 +1,58 @@
+{
+  "case": "vois-051",
+  "game": "VOIS",
+  "mode": "recorded-public-replay",
+  "command": [
+    "node",
+    "--expose-gc",
+    "--max-old-space-size=1536",
+    "scripts/replay-public-regression-released-baseline.mjs",
+    "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz",
+    "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/regressions/vois-051-replay.json.gz",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/regressions/vois-051-host-preparation.json"
+  ],
+  "startedAt": "2026-11-11T19:42:44.846300+00:00",
+  "timeoutSeconds": 600,
+  "baseline": {
+    "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz",
+    "sha256": "39a6e6551cf94a48842b154afdc2256dafd88fd93404e4776bd67b24d5a4796d",
+    "bytes": 10678168
+  },
+  "trace": {
+    "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+    "sha256": "d642c805485571c0e54ed3421644cbd8463ca3697ce135b223f635487b58069d",
+    "bytes": 19976
+  },
+  "expectedActions": 78,
+  "nodeOldSpaceMiB": 1536,
+  "preflight": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/preflight.json",
+    "sha256": "1d0d68d2a644483fe27e946c34f58b7df32785b9d6c468e994601d4b724b877f",
+    "bytes": 1431
+  },
+  "historicalReportProcessExitedBeforeNode": true,
+  "nativeSourceBeforeDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+  "executionInputsBefore": {
+    "scripts/run-released-public-regressions.py": "7988863afd2b171f31987434bb1176370be2e3afd49dead1edcdc59770d81909",
+    "scripts/run-recorded-public-regressions.py": "df19dc88ff29e78a1cb5935d445644e96cc9fb1ef90b73d802cf51868d2b2c40",
+    "scripts/compare-v54-regressions.py": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+    "scripts/replay-public-regression-released-baseline.mjs": "2ce2a0e1b8f969510373ae161156b2b163d208b4e426cb1f26218f9952b3b164",
+    "scripts/replay-v53-public-regression.mjs": "4359e008db8dadaac17f6504199ff20c752f40f1666ba527f1cd5f16df100a9e",
+    "scripts/run-v53-campaign-proof.py": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+    "tests/helpers/v6-live-game-campaign.ts": "d0fa63c45126e2c4d21c8c25cd350103785c537a250b2a6903410195b82d16ca",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/case-manifest.json": "d797ad03c58431ea3395432656e97fb13e100096cd1897664dea6559b089dc8f",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/source-manifest.json": "2098197ea6c45c06bf42983bc1b47cd2dbe15a49f43b2f647d1884e591649f42",
+    "scripts/run-released-public-regressions-streamlog.py": "b05b0e113c93696be45408e4c10549f2a379c22330efbddfcaa0f09cd51309b9"
+  },
+  "phase": "started",
+  "finishedAt": null,
+  "exitCode": null,
+  "timedOut": false,
+  "passed": false,
+  "nodeExitObserved": false,
+  "rawOutputPath": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/regressions/vois-051-output.raw.log",
+  "driverPid": 10,
+  "nodePid": null,
+  "memorySamples": []
+}

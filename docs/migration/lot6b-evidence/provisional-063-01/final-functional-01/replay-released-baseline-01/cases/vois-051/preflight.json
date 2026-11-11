@@ -1,0 +1,43 @@
+{
+  "schema": "logos-engine.released-baseline-replay-preflight.v1",
+  "status": "passed",
+  "caseManifest": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/case-manifest.json",
+    "sha256": "d797ad03c58431ea3395432656e97fb13e100096cd1897664dea6559b089dc8f",
+    "bytes": 3643
+  },
+  "cases": [
+    {
+      "id": "vois-051",
+      "game": "VOIS",
+      "baseline": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz",
+      "trace": "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+      "counts": {
+        "commands": 78,
+        "completePublicPackets": 79,
+        "animationFrames": 97,
+        "prefixes": 42,
+        "requests": 120,
+        "naturalLevelBoundaries": 3
+      },
+      "targetLevels": 3
+    }
+  ],
+  "totals": {
+    "commands": 78,
+    "completePublicPackets": 79,
+    "animationFrames": 97,
+    "prefixes": 42,
+    "requests": 120,
+    "naturalLevelBoundaries": 3
+  },
+  "passiveOwnerRequirements": [],
+  "prevalidator": {
+    "path": "scripts/run-recorded-public-regressions.py",
+    "sha256": "df19dc88ff29e78a1cb5935d445644e96cc9fb1ef90b73d802cf51868d2b2c40",
+    "bytes": 20897
+  },
+  "replaysExecuted": 0,
+  "prevalidationProcessExitedBeforeAnyReplay": true,
+  "nativeSourceDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886"
+}

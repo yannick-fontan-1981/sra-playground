@@ -1,0 +1,431 @@
+{
+  "recordedAt": "2026-11-11T19:52:18.468106+00:00",
+  "descriptions": {
+    "original-comparison-receipt.json": {
+      "schema": "sra.selected-rigid-cold-original-execution.v1",
+      "status": "passed",
+      "startedAt": "2026-11-11T19:46:49.123386+00:00",
+      "command": {
+        "itemCount": 10,
+        "firstItemKeys": null
+      },
+      "gameExecution": false,
+      "nativeExecution": false,
+      "nativeStateSeed": false,
+      "nativePlanSeed": false,
+      "input": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/klot-campaign.json.gz",
+        "bytes": 11699122,
+        "sha256": "dd24c51f21bbd382f57056076da7c6af7724d4c4183f458170a77e2dfec8563d"
+      },
+      "reader": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/scripts/compare-selected-rigid-public-parity.py",
+        "bytes": 43759,
+        "sha256": "d77b4fbec377668f8673c39cb1401bcbce86cd11323a2ef0671f757df24e8f38"
+      },
+      "exporter": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/scripts/export-v6-selected-rigid-reference.py",
+        "bytes": 48745,
+        "sha256": "90df08227717a2c23aa1550f105935ed8812815622f069941344fa2c91e0fc16"
+      },
+      "presenceVerifier": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/scripts/verify-selected-rigid-presence.py",
+        "bytes": 65174,
+        "sha256": "91a1b0ded6d4b303ded74218a714ff042dcb35cf756bbe68b654f1d8003357b5"
+      },
+      "sourceBefore": {
+        "commit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+        "files": 1786,
+        "manifest": {
+          "bytes": 424024,
+          "sha256": "491eb3b737bbb490a1b7c212f5b1e75f5a8f84b2124b95d9dd54a0d09eca85d6"
+        },
+        "unchanged": true
+      },
+      "output": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/original-comparison.json.gz",
+        "bytes": 108557,
+        "sha256": "3966ebc64b7da6974345a85d516533a87920560593192c392310451f3daf3478",
+        "rawBytes": 3763014
+      },
+      "counts": {
+        "actualRestores": 98,
+        "nativeRestores": 60,
+        "restoreNative": 60,
+        "setCurrentBudget": 98,
+        "proposed": 30,
+        "propose": 30,
+        "bind": 68,
+        "before": 38,
+        "after": 38,
+        "selectedRecords": 38,
+        "nullSelectedReturns": 3,
+        "acquiredSourceEvents": 35,
+        "modelChangingRecords": 35,
+        "controlChangingRecords": 4,
+        "epochBoundaryReturns": 3,
+        "scoreOnlyBoundaryReturns": 0,
+        "record": 38,
+        "sourceRestores": 38,
+        "restoreSourceState": 38,
+        "chronologicalEvents": 408,
+        "comparedRootEvents": 340,
+        "comparedEvents": 408,
+        "uniqueObservations": 39,
+        "selectedPrefixes": 30,
+        "foreignPrefixes": 0,
+        "ablations": 204,
+        "actionChangingAblations": 63,
+        "nonemptyAblations": 198,
+        "ablationErrors": 0
+      },
+      "differences": 0,
+      "stop": null,
+      "sourceAfter": {
+        "commit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+        "files": 1786,
+        "manifest": {
+          "bytes": 424024,
+          "sha256": "491eb3b737bbb490a1b7c212f5b1e75f5a8f84b2124b95d9dd54a0d09eca85d6"
+        },
+        "unchanged": true
+      },
+      "elapsedSeconds": 66.78427167799964,
+      "finishedAt": "2026-11-11T19:47:55.907650+00:00",
+      "exitCode": 0
+    },
+    "original-comparison.json.gz": {
+      "schema": "sra.selected-rigid-cold-original-parity.v1",
+      "status": "passed",
+      "coldStart": true,
+      "nativeStatesUsedToPrimeSource": false,
+      "nativePlansUsedToAcquireSource": false,
+      "gameExecution": false,
+      "callChecks": {
+        "itemCount": 340,
+        "firstItemKeys": [
+          "event",
+          "endCursor",
+          "method",
+          "sourceProposalEvent",
+          "sourceBeforeDigest",
+          "sourceAfterDigest",
+          "sourceResult",
+          "originalFamilyResult",
+          "beforeDifferences",
+          "returnDifferences",
+          "afterDifferences"
+        ]
+      },
+      "nestedChecks": {
+        "itemCount": 68,
+        "firstItemKeys": [
+          "event",
+          "parent",
+          "method",
+          "sourceStateOrigin"
+        ]
+      },
+      "restorationChecks": {
+        "itemCount": 98,
+        "firstItemKeys": [
+          "event",
+          "method",
+          "receivedDifferences",
+          "nativeStateSeed",
+          "restoredSourceStateOrigin"
+        ]
+      },
+      "publicObservationChecks": {
+        "itemCount": 39,
+        "firstItemKeys": [
+          "firstEvent",
+          "side",
+          "reference",
+          "rowsDigest",
+          "originalDigest",
+          "differences"
+        ]
+      },
+      "callerAnnotations": {
+        "itemCount": 606,
+        "firstItemKeys": [
+          "path",
+          "value",
+          "origin"
+        ]
+      },
+      "budgetChecks": {
+        "itemCount": 98,
+        "firstItemKeys": [
+          "event",
+          "nested",
+          "execution",
+          "remainingLevelActions",
+          "stateOrigin"
+        ]
+      },
+      "clockChecks": {
+        "itemCount": 68,
+        "firstItemKeys": [
+          "event",
+          "mode",
+          "nativeReadsAlreadyConsumed",
+          "nativeFirstMs",
+          "nativeLastMs",
+          "levelDeadlineMs",
+          "remainingAtObservedEntryMs",
+          "sourceReads",
+          "elapsedSeconds"
+        ]
+      },
+      "physicalActionChecks": {
+        "itemCount": 38,
+        "firstItemKeys": [
+          "recordEvent",
+          "sequence",
+          "differences"
+        ]
+      },
+      "prefixChecks": {
+        "itemCount": 30,
+        "firstItemKeys": [
+          "prefix",
+          "eventsThrough",
+          "selected",
+          "recordEvents",
+          "restoreEvents",
+          "differences",
+          "passed"
+        ]
+      },
+      "guardCoverage": {
+        "itemCount": 38,
+        "firstItemKeys": [
+          "recordEvent",
+          "beforeEvents",
+          "afterEvents",
+          "passed"
+        ]
+      },
+      "ablations": {
+        "itemCount": 204,
+        "firstItemKeys": [
+          "event",
+          "intervention",
+          "sourceStateOrigin",
+          "nativeStateUsed",
+          "nativePlanUsed",
+          "sourceStateChanged",
+          "emptyIntervention",
+          "baselineStateDigest",
+          "intervenedStateDigest",
+          "entryBudget",
+          "clock",
+          "originalDecision",
+          "ablatedDecision",
+          "actionOrRefusalChanged",
+          "fullProposalChanged",
+          "proposal",
+          "error"
+        ]
+      },
+      "differences": {
+        "itemCount": 0,
+        "firstItemKeys": null
+      },
+      "stop": null,
+      "scope": "One unchanged original SelectedRigid component on recorded public observations and actual execution budgets; not the complete original caller or a new game success.",
+      "normalizations": {
+        "itemCount": 6,
+        "firstItemKeys": null
+      },
+      "counts": {
+        "actualRestores": 98,
+        "nativeRestores": 60,
+        "restoreNative": 60,
+        "setCurrentBudget": 98,
+        "proposed": 30,
+        "propose": 30,
+        "bind": 68,
+        "before": 38,
+        "after": 38,
+        "selectedRecords": 38,
+        "nullSelectedReturns": 3,
+        "acquiredSourceEvents": 35,
+        "modelChangingRecords": 35,
+        "controlChangingRecords": 4,
+        "epochBoundaryReturns": 3,
+        "scoreOnlyBoundaryReturns": 0,
+        "record": 38,
+        "sourceRestores": 38,
+        "restoreSourceState": 38,
+        "chronologicalEvents": 408,
+        "comparedRootEvents": 340,
+        "comparedEvents": 408,
+        "uniqueObservations": 39,
+        "selectedPrefixes": 30,
+        "foreignPrefixes": 0,
+        "ablations": 204,
+        "actionChangingAblations": 63,
+        "nonemptyAblations": 198,
+        "ablationErrors": 0
+      },
+      "finalSourceState": {
+        "format": "selected_rigid_events.v1",
+        "events": {
+          "itemCount": 35,
+          "firstItemKeys": [
+            "kind",
+            "state",
+            "models",
+            "detail"
+          ]
+        }
+      },
+      "finalRetainedDigest": "dc50492895e20c009fafa5294832c1d954c7b02eed2ea23e8d484984c52acfc2"
+    },
+    "negative-reader-01/qualification.json": {
+      "schema": "sra.selected-rigid-cold-reader-negative-qualification.v1",
+      "status": "passed",
+      "startedAt": "2026-11-11T19:48:34.820843+00:00",
+      "command": {
+        "itemCount": 11,
+        "firstItemKeys": null
+      },
+      "gameExecution": false,
+      "nativeExecution": false,
+      "baselineReexecuted": false,
+      "caseClockQualification": "All processing must be charged by the outer case-clock wrapper for a game-derived input.",
+      "cases": {
+        "itemCount": 2,
+        "firstItemKeys": [
+          "mutation",
+          "status",
+          "input",
+          "structuralJournal",
+          "command",
+          "timeoutSeconds",
+          "startedAt",
+          "exitCode",
+          "elapsedSeconds",
+          "finishedAt",
+          "log",
+          "comparison",
+          "execution",
+          "semanticDifferences",
+          "allDifferenceCount",
+          "stop",
+          "failureKind"
+        ]
+      },
+      "inputs": {
+        "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/klot-campaign.json.gz": {
+          "bytes": 11699122,
+          "sha256": "dd24c51f21bbd382f57056076da7c6af7724d4c4183f458170a77e2dfec8563d"
+        },
+        "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/original-comparison.json.gz": {
+          "bytes": 108557,
+          "sha256": "3966ebc64b7da6974345a85d516533a87920560593192c392310451f3daf3478"
+        },
+        "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/original-comparison-receipt.json": {
+          "bytes": 2863,
+          "sha256": "ac54b9fbfa553d84e1be24541b5f01eadb76dbdcfe5d4e1c6aa704ba61f70b6d"
+        },
+        "/workspace/sites/sra-lot6b-20261111/.sites-checkout/scripts/compare-selected-rigid-public-parity.py": {
+          "bytes": 43759,
+          "sha256": "d77b4fbec377668f8673c39cb1401bcbce86cd11323a2ef0671f757df24e8f38"
+        },
+        "/workspace/sites/sra-lot6b-20261111/.sites-checkout/scripts/export-v6-selected-rigid-reference.py": {
+          "bytes": 48745,
+          "sha256": "90df08227717a2c23aa1550f105935ed8812815622f069941344fa2c91e0fc16"
+        },
+        "/workspace/sites/sra-lot6b-20261111/.sites-checkout/scripts/verify-selected-rigid-presence.py": {
+          "bytes": 65174,
+          "sha256": "91a1b0ded6d4b303ded74218a714ff042dcb35cf756bbe68b654f1d8003357b5"
+        },
+        "/workspace/sites/sra-lot6b-20261111/.sites-checkout/scripts/tests/qualify-selected-rigid-cold-reader.py": {
+          "bytes": 16714,
+          "sha256": "0375b132bf7c4fbc798ac4384c96c6d9134c512289d98d0ec67d877c89465f47"
+        }
+      },
+      "positiveProof": {
+        "result": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/original-comparison.json.gz",
+        "receipt": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/original-comparison-receipt.json",
+        "game": "KLOT",
+        "inputSchema": "logos-engine.v6.integrated-game-campaign.v1",
+        "inputStatus": "passed",
+        "syntheticQualification": null,
+        "counts": {
+          "actualRestores": 98,
+          "nativeRestores": 60,
+          "restoreNative": 60,
+          "setCurrentBudget": 98,
+          "proposed": 30,
+          "propose": 30,
+          "bind": 68,
+          "before": 38,
+          "after": 38,
+          "selectedRecords": 38,
+          "nullSelectedReturns": 3,
+          "acquiredSourceEvents": 35,
+          "modelChangingRecords": 35,
+          "controlChangingRecords": 4,
+          "epochBoundaryReturns": 3,
+          "scoreOnlyBoundaryReturns": 0,
+          "record": 38,
+          "sourceRestores": 38,
+          "restoreSourceState": 38,
+          "chronologicalEvents": 408,
+          "comparedRootEvents": 340,
+          "comparedEvents": 408,
+          "uniqueObservations": 39,
+          "selectedPrefixes": 30,
+          "foreignPrefixes": 0,
+          "ablations": 204,
+          "actionChangingAblations": 63,
+          "nonemptyAblations": 198,
+          "ablationErrors": 0
+        },
+        "scope": "One unchanged original SelectedRigid component on recorded public observations and actual execution budgets; not the complete original caller or a new game success.",
+        "sourceBefore": {
+          "commit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+          "files": 1786,
+          "manifest": {
+            "keys": [
+              "bytes",
+              "sha256"
+            ],
+            "fieldCount": 2
+          },
+          "unchanged": true
+        }
+      },
+      "inputVerificationErrors": {
+        "itemCount": 0,
+        "firstItemKeys": null
+      },
+      "inputsUnchanged": true,
+      "elapsedSeconds": 178.11130507100097,
+      "finishedAt": "2026-11-11T19:51:32.932155+00:00",
+      "exitCode": 0
+    }
+  },
+  "inputs": [
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/original-comparison-receipt.json",
+      "bytes": 2863,
+      "sha256": "ac54b9fbfa553d84e1be24541b5f01eadb76dbdcfe5d4e1c6aa704ba61f70b6d"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/original-comparison.json.gz",
+      "bytes": 108557,
+      "sha256": "3966ebc64b7da6974345a85d516533a87920560593192c392310451f3daf3478"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/negative-reader-01/qualification.json",
+      "bytes": 217145,
+      "sha256": "e1f170fa06a19c77d62cc3b58aae1abcbe66aa29a9d8bd879353ce0964225211"
+    }
+  ]
+}

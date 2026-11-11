@@ -1,0 +1,94 @@
+{
+  "schema": "logos-engine.lot6b.single-released-replay-terminal-observation.v1",
+  "case": "vois-051",
+  "game": "VOIS",
+  "startedAt": "2026-11-11T19:42:41.257520+00:00",
+  "finishedAt": "2026-11-11T19:45:46.908318+00:00",
+  "elapsedSeconds": 185.64991487700172,
+  "exitCode": 0,
+  "command": [
+    "flock",
+    "-s",
+    "-n",
+    "/workspace/shared/sra-coordination/performance.lock",
+    "python",
+    "-B",
+    "docs/migration/lot6b-evidence/record-command.py",
+    "--receipt",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/bounded-command.json",
+    "--watch-manifest",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/replay-watch.json",
+    "--",
+    "timeout",
+    "--signal=KILL",
+    "630s",
+    "python",
+    "-B",
+    "scripts/run-released-public-regressions-streamlog.py",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/case-manifest.json",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051",
+    "--source-manifest",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/source-manifest.json",
+    "--node-old-space-mib",
+    "1536",
+    "--timeout-seconds",
+    "600"
+  ],
+  "declaredBy": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/execution-declaration.json",
+  "quietSeenDuringCase": [],
+  "nextCaseQueued": false,
+  "passed": true,
+  "boundedReceipt": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/bounded-command.json",
+    "status": "passed",
+    "exitCode": 0,
+    "inputsUnchanged": true,
+    "elapsedSeconds": 184.31135274999906
+  },
+  "preflight": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/preflight.json",
+    "prevalidationProcessExitedBeforeAnyReplay": true
+  },
+  "regressionSummary": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/regressions/regression-summary.json",
+    "status": "passed",
+    "executionInputsUnchanged": true,
+    "results": [
+      {
+        "case": "vois-051",
+        "passed": true,
+        "comparisonPassed": true,
+        "comparisonChecks": 17,
+        "failedChecks": [],
+        "nativeSourceBeforeDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+        "nativeSourceAfterDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+        "nativeSourceUnchanged": true,
+        "immutableInputsUnchanged": true,
+        "elapsedSeconds": 173.86063695900157,
+        "timedOut": false,
+        "nodeOldSpaceMiB": 1536,
+        "nodeExitObserved": true,
+        "historicalReportProcessExitedBeforeNode": true,
+        "nodeExitedBeforeComparison": true,
+        "hostPreparationPassed": true,
+        "passiveOwnerPresencePassed": true,
+        "exitCode": 0,
+        "hostPreparation": {
+          "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/regressions/vois-051-host-preparation.json",
+          "sha256": "5a9f3633b9676adeb000b85c9eff36d7f70116cfbbade3cae2f301f063fc4030",
+          "bytes": 18591
+        },
+        "report": {
+          "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/regressions/vois-051-replay.json.gz",
+          "sha256": "80b76bf344f46023e2203e9cbf0e23276d6119a20af041f3fe4ef83dd15f132b",
+          "bytes": 14063217
+        },
+        "comparison": {
+          "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/regressions/vois-051-comparison.json",
+          "sha256": "e335b33375a845786f69eb70eabc664bb199a4364fe38a84c308a319757b0b65",
+          "bytes": 11071
+        }
+      }
+    ]
+  }
+}

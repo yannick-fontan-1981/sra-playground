@@ -1,0 +1,94 @@
+{
+  "schema": "logos-engine.lot6b.single-released-replay-terminal-observation.v1",
+  "case": "isos-development-4c",
+  "game": "ISOS",
+  "startedAt": "2026-11-11T19:56:08.271214+00:00",
+  "finishedAt": "2026-11-11T19:56:42.038327+00:00",
+  "elapsedSeconds": 33.76650857599816,
+  "exitCode": 0,
+  "command": [
+    "flock",
+    "-s",
+    "-n",
+    "/workspace/shared/sra-coordination/performance.lock",
+    "python",
+    "-B",
+    "docs/migration/lot6b-evidence/record-command.py",
+    "--receipt",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/bounded-command.json",
+    "--watch-manifest",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/replay-watch.json",
+    "--",
+    "timeout",
+    "--signal=KILL",
+    "630s",
+    "python",
+    "-B",
+    "scripts/run-released-public-regressions-streamlog.py",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/case-manifest.json",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c",
+    "--source-manifest",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/source-manifest.json",
+    "--node-old-space-mib",
+    "1536",
+    "--timeout-seconds",
+    "600"
+  ],
+  "declaredBy": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/execution-declaration.json",
+  "quietSeenDuringCase": [],
+  "nextCaseQueued": false,
+  "passed": true,
+  "boundedReceipt": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/bounded-command.json",
+    "status": "passed",
+    "exitCode": 0,
+    "inputsUnchanged": true,
+    "elapsedSeconds": 32.23911020999731
+  },
+  "preflight": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/preflight.json",
+    "prevalidationProcessExitedBeforeAnyReplay": true
+  },
+  "regressionSummary": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/regressions/regression-summary.json",
+    "status": "passed",
+    "executionInputsUnchanged": true,
+    "results": [
+      {
+        "case": "isos-development-4c",
+        "passed": true,
+        "comparisonPassed": true,
+        "comparisonChecks": 17,
+        "failedChecks": [],
+        "nativeSourceBeforeDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+        "nativeSourceAfterDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+        "nativeSourceUnchanged": true,
+        "immutableInputsUnchanged": true,
+        "elapsedSeconds": 28.609894009001437,
+        "timedOut": false,
+        "nodeOldSpaceMiB": 1536,
+        "nodeExitObserved": true,
+        "historicalReportProcessExitedBeforeNode": true,
+        "nodeExitedBeforeComparison": true,
+        "hostPreparationPassed": true,
+        "passiveOwnerPresencePassed": true,
+        "exitCode": 0,
+        "hostPreparation": {
+          "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/regressions/isos-development-4c-host-preparation.json",
+          "sha256": "7a471ac341bef6bc9038e96fea6b2df552623ef2e6f811bcf3e4459302b9aacb",
+          "bytes": 4192
+        },
+        "report": {
+          "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/regressions/isos-development-4c-replay.json.gz",
+          "sha256": "b80391fb9b97f123bf2f27c0d6442da0b9e6a9c309abcd790511651deac850e9",
+          "bytes": 3592527
+        },
+        "comparison": {
+          "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/regressions/isos-development-4c-comparison.json",
+          "sha256": "fccb19ebdfdeccdf4cd8d5cdce7c2aa9ab8fc0f8c8367e50ce9ebc860133352e",
+          "bytes": 11081
+        }
+      }
+    ]
+  }
+}

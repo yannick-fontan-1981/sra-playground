@@ -1,0 +1,6 @@
+{"name": "typecheck", "exitCode": 0, "counts": null}
+{"name": "entry-audit", "exitCode": 0, "counts": null}
+{"name": "migration-audit", "exitCode": 0, "counts": null}
+{"name": "diff-check", "exitCode": 0, "counts": null}
+{"name": "build", "exitCode": 0, "counts": null}
+{"status": "passed", "receipt": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/validation/checks-run.json"}

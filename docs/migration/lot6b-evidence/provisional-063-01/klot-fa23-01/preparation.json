@@ -1,0 +1,15 @@
+{
+  "schema": "logos-engine.lot6b.integrated-klot-preparation.v1",
+  "status": "prepared_not_executed",
+  "recordedAt": "2026-11-11T19:33:32.817372+00:00",
+  "nativeDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+  "nativeFiles": 322,
+  "sourceManifestCopies": [
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/source-manifest.json",
+    "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/source-manifest.json"
+  ],
+  "watchedFiles": 2956,
+  "watchedBytes": 222616623,
+  "hiddenPayloadsInterpreted": false,
+  "gameExecuted": false
+}

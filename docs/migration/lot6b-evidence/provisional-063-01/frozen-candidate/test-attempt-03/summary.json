@@ -1,0 +1,159 @@
+{
+  "schema": "logos-engine.lot6b.complete-four-batch-result.v1",
+  "recordedAt": "2026-11-11T19:37:03.485897+00:00",
+  "status": "passed",
+  "testAttempt": 3,
+  "nativeDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+  "nativeFileCount": 322,
+  "testFiles": 142,
+  "exactDeclaredFileUnion": true,
+  "allFullSourceAndTestInputMapsIdentical": true,
+  "allInputsUnchangedDuringRuns": true,
+  "currentSourceAndTestInputMapStillIdentical": true,
+  "sourceAndTestInputCount": 739,
+  "sourceAndTestInputsDigest": "934bc163d4ff2b86b1f72251415ab59f8ce4a00ae84a0794b878bde2302808c3",
+  "completeTapSummaries": true,
+  "counts": {
+    "tests": 5405,
+    "pass": 5405,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "batches": [
+    {
+      "id": "batch-01",
+      "testFiles": 36,
+      "counts": {
+        "tests": 1817,
+        "pass": 1817,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "driverElapsedSeconds": 126.55125474300075,
+      "wrapperElapsedSeconds": 127.2850449739999,
+      "driverReceipt": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/frozen-candidate/test-attempt-03/batch-01/validation/delta-tests-run.json",
+        "bytes": 131673,
+        "sha256": "c4c41f8a1cd4f4761015749fea713a6c40f87fd274a98475107df2a7f048790c"
+      },
+      "boundedReceipt": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/frozen-candidate/test-attempt-03/batch-01/bounded-execution.json",
+        "bytes": 2651,
+        "sha256": "d9e718d342ab9f12f7bfd8ff586b42c1fac78cdb3ece376625e5334202602835"
+      },
+      "fullTapLog": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/frozen-candidate/test-attempt-03/batch-01/validation/delta-tests-output.log.gz",
+        "sha256": "9113ca78da73cbb7cc664082877182c13a72b5d218fcd408cdb12fa9172ed40c",
+        "bytes": 50471
+      }
+    },
+    {
+      "id": "batch-02",
+      "testFiles": 36,
+      "counts": {
+        "tests": 875,
+        "pass": 875,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "driverElapsedSeconds": 286.3222603180002,
+      "wrapperElapsedSeconds": 286.8865852850031,
+      "driverReceipt": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/frozen-candidate/test-attempt-03/batch-02/validation/delta-tests-run.json",
+        "bytes": 131666,
+        "sha256": "d19f46fa3b4371e74c0cb642c44689e8fa955353fc254385f42c40e069665e54"
+      },
+      "boundedReceipt": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/frozen-candidate/test-attempt-03/batch-02/bounded-execution.json",
+        "bytes": 2649,
+        "sha256": "54a3bf3fb03e4801163d45c01897496b89756745222019d7e50ac30aa6664bc3"
+      },
+      "fullTapLog": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/frozen-candidate/test-attempt-03/batch-02/validation/delta-tests-output.log.gz",
+        "sha256": "13c04e9edaeaf20ba7f027d1f3b1a5e3c4d19a4830a9a8d0ad1fe10a4f31b832",
+        "bytes": 27864
+      }
+    },
+    {
+      "id": "batch-03",
+      "testFiles": 35,
+      "counts": {
+        "tests": 1099,
+        "pass": 1099,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "driverElapsedSeconds": 370.92945584300105,
+      "wrapperElapsedSeconds": 371.3946768800015,
+      "driverReceipt": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/frozen-candidate/test-attempt-03/batch-03/validation/delta-tests-run.json",
+        "bytes": 131771,
+        "sha256": "192aff335ea1c88bb99e732f9e8e7b833dee7f18f3047a6ddf641204f6e26554"
+      },
+      "boundedReceipt": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/frozen-candidate/test-attempt-03/batch-03/bounded-execution.json",
+        "bytes": 2702,
+        "sha256": "e16f138bcce0b82d577e1c5f56a8a7210ee5d4a7dae5293ac444dc757c9b0932"
+      },
+      "fullTapLog": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/frozen-candidate/test-attempt-03/batch-03/validation/delta-tests-output.log.gz",
+        "sha256": "56998b7cd422ba2e0052d08f72a512380d95b6f26905cb12d436cc787afac427",
+        "bytes": 32496
+      }
+    },
+    {
+      "id": "batch-04",
+      "testFiles": 35,
+      "counts": {
+        "tests": 1614,
+        "pass": 1614,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "driverElapsedSeconds": 147.67629202999888,
+      "wrapperElapsedSeconds": 148.22802298500028,
+      "driverReceipt": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/frozen-candidate/test-attempt-03/batch-04/validation/delta-tests-run.json",
+        "bytes": 131635,
+        "sha256": "210426ae95cd20fc5a1d5805958175135c9ae1e9fbbc38670cf02ddd875cd7c9"
+      },
+      "boundedReceipt": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/frozen-candidate/test-attempt-03/batch-04/bounded-execution.json",
+        "bytes": 2635,
+        "sha256": "6c838be7258821282b34943d5b934bc7a9dd165a4eba6a99e904d2b3a169da7c"
+      },
+      "fullTapLog": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/frozen-candidate/test-attempt-03/batch-04/validation/delta-tests-output.log.gz",
+        "sha256": "5b8b75cbbebcb3984b032c691e439a8282c92928768ef63e23194a0904f24c82",
+        "bytes": 44549
+      }
+    }
+  ],
+  "declaration": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/frozen-candidate/test-attempt-03/test-declaration.json",
+    "bytes": 58018,
+    "sha256": "fa6da9c4c824951fac3786f738025253f70a445b3a9b936ac35fd8090b3dab6b"
+  },
+  "scope": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/validation-scope-plan.json",
+    "bytes": 24505,
+    "sha256": "19cb0b2380f202c0762b24734c07773e1a6c3ac5cca4f5a468a48483624e0558"
+  },
+  "previousFailedAttemptRetained": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/frozen-candidate/test-attempt-02/summary.json",
+    "bytes": 3731,
+    "sha256": "b6c60587687bd15d91303f4864295c0b8e9f943ac53768caae27963382475193"
+  },
+  "actualPublished063Reconciliation": "pending",
+  "qualification": "All four complete declared batches passed on identical full source/test maps and native fa23. All142 files executed; zero failed/cancelled/skipped/todo tests. Prior5404/5405 remains failed; no prior partial credit used. This test result does not establish game/browser/cost/publication success."
+}

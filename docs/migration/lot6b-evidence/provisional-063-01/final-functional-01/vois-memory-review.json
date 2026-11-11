@@ -1,0 +1,139 @@
+{
+  "schema": "logos-engine.lot6b-vois-memory-source-review.v1",
+  "recordedAt": "2026-11-11T19:32:08.271281+00:00",
+  "status": "prefer_prospective_released_baseline_harness_at_1536_MiB",
+  "recommendation": "Integrate only the three exact retained5C host scripts prospectively, retain the current6B native source and capture helper, and declare a new sequential VOIS attempt at1536MiB with --expose-gc. Do not first increase the old host to3072MiB.",
+  "failed6B": {
+    "execution": "replay-cases/vois-051/regressions/vois-051-execution.json",
+    "configuredOldSpaceMiB": 1536,
+    "nodeExitCode": -6,
+    "timedOut": false,
+    "elapsedSeconds": 179.6522238990001,
+    "fatalDiagnostic": "Reached heap limit Allocation failed - JavaScript heap out of memory",
+    "lastGCReportedMB": {
+      "beforeUsed": 1600.8,
+      "beforeCapacity": 1725.6,
+      "afterUsed": 1540.7,
+      "afterCapacity": 1563.9
+    },
+    "actualRSSPeak": null,
+    "memoryReceiptBefore": {},
+    "memoryReceiptAfter": {},
+    "comparisonChecksPassed": 0,
+    "comparisonChecksExpected": 17,
+    "reportProduced": false,
+    "interpretation": "V8 heap exhaustion is explicit;1536 is a configured old-space allowance, not measured total RSS. The final target_levels_completed progress event is not a retained replay success or completed comparison. The fatal stack does not identify a precise JSON.stringify call."
+  },
+  "concreteLifetimeIssue": [
+    {
+      "path": "scripts/replay-v53-public-regression.mjs",
+      "lines": [
+        17,
+        18,
+        19,
+        29,
+        36
+      ],
+      "finding": "The old module retains the complete parsed historical baseline and compressed inputs alongside the current replay; the final report is also synchronously JSON-stringified and gzip-compressed. This creates avoidable overlapping live data; the exact failing allocation is not proven."
+    },
+    {
+      "path": "scripts/run-recorded-public-regressions.py",
+      "finding": "The run worker reads the full before/trace objects before launching Node and retains them for the later comparison, so historical decoded data also overlaps the child in the parent process."
+    }
+  ],
+  "recent5CProvenance": {
+    "checkout": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout",
+    "executionReceipt": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/integrated-final-01/regressions/vois-051-execution.json",
+    "command": [
+      "node",
+      "--expose-gc",
+      "--max-old-space-size=1536",
+      "scripts/replay-public-regression-released-baseline.mjs",
+      "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz",
+      "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+      "docs/migration/lot5c-evidence/recovery/integrated-final-01/regressions/vois-051-replay.json.gz",
+      "docs/migration/lot5c-evidence/recovery/integrated-final-01/regressions/vois-051-host-preparation.json"
+    ],
+    "passed": true,
+    "comparisonChecks": 17,
+    "failedChecks": [],
+    "elapsedSeconds": 160.7179661400005,
+    "nativeSourceDigest": "a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57",
+    "nativeSourceUnchanged": true,
+    "historicalReportProcessExitedBeforeNode": true,
+    "nodeExitedBeforeComparison": true,
+    "sourceFiles": {
+      "scripts/run-released-public-regressions-streamlog.py": "b05b0e113c93696be45408e4c10549f2a379c22330efbddfcaa0f09cd51309b9",
+      "scripts/run-released-public-regressions.py": "7988863afd2b171f31987434bb1176370be2e3afd49dead1edcdc59770d81909",
+      "scripts/replay-public-regression-released-baseline.mjs": "2ce2a0e1b8f969510373ae161156b2b163d208b4e426cb1f26218f9952b3b164"
+    },
+    "allThreeCurrentSourceHashesMatchedTheRetained5CReceiptHashes": true,
+    "releasePreparation": {
+      "status": "passed",
+      "baselineDecodedBytes": 80800262,
+      "baselineRootCollectedBeforeHarnessImport": true,
+      "expectedActions": 78,
+      "completePublicPackets": 79,
+      "memoryBeforeRelease": {
+        "rss": 949772288,
+        "heapTotal": 576962560,
+        "heapUsed": 490645616,
+        "external": 261708325,
+        "arrayBuffers": 94721076
+      },
+      "memoryAfterRelease": {
+        "rss": 694808576,
+        "heapTotal": 148426752,
+        "heapUsed": 12314280,
+        "external": 4094388,
+        "arrayBuffers": 212115
+      }
+    },
+    "memorySamples": {
+      "VmRSS_max_sample_kB": 1556244,
+      "VmHWM_max_sample_kB": 1975592,
+      "samples": 34
+    },
+    "scope": "This is evidence from5C and does not establish a future6B pass."
+  },
+  "sourceReview": {
+    "prevalidation": "The unchanged original prepare() runs in a completed child before Node, so its full decoded historical reports no longer overlap the replay process.",
+    "nodePreparation": "prepare() keeps only original packets and small game/target/assets/provenance expectations. A fresh event-loop turn, explicit GC and WeakRef assertion verify collection of the historical root before importing the campaign helper.",
+    "comparison": "The unchanged comparator runs in a separate child after observed Node exit; its exact17checks and passive-owner presence checks remain required. No report/packet clipping or modified action/time budget is introduced.",
+    "observability": "The stream-log driver retains raw output and durable receipts, samples VmRSS/VmHWM every5seconds, and requires observed child exit. It preserves failure instead of inferring success from progress.",
+    "dependenciesByteEqualToOurCheckout": [
+      "scripts/run-recorded-public-regressions.py",
+      "scripts/compare-v54-regressions.py",
+      "scripts/run-v53-campaign-proof.py"
+    ],
+    "current6BCampaignHelperDifference": "tests/helpers/v6-live-game-campaign.ts differs only by the SelectedRigid capture import/owner registration, event journal and retained-prefix evidence additions in the inspected diff. Keep this current helper; do not replace it with the5C helper to reduce memory.",
+    "nativeChangeRequired": false,
+    "comparatorChangeRequired": false,
+    "integrationValidation": "Use new outputs and a prospective watch covering all three scripts, current campaign/capture helpers, comparator, case pins and fa23 native freeze. Require hostPreparationPassed, baselineRootCollectedBeforeHarnessImport, observed child exit, full report,17/17comparison, owner-presence checks and unchanged inputs. Preserve the failed attempt."
+  },
+  "visibleHostMemory": {
+    "observedAt": "2026-11-11T19:32:08.271310+00:00",
+    "procMeminfo": {
+      "MemTotal": "10206472 kB",
+      "MemFree": "6923776 kB",
+      "MemAvailable": "8961692 kB",
+      "SwapTotal": "0 kB",
+      "SwapFree": "0 kB"
+    },
+    "procSelfCgroup": "0::/",
+    "cgroupFilesystemMounted": false,
+    "effectiveCgroupMemoryLimit": null,
+    "qualification": "/sys/fs/cgroup and a cgroup mount are absent in this visible namespace. Host MemAvailable is a point-in-time observation, not a guaranteed per-process or global allocation allowance."
+  },
+  "about3072MiB": "The visible host headroom does not by itself rule out a single3072MiB old-space process, but does not prove an effective cgroup/RSS allowance. The retained host already addresses a concrete lifetime problem and passed the same VOIS inputs at1536MiB in5C. Its current CLI permits only768/1024/1536. A3072variant would require a separate prospective change and cannot be treated as already qualified.",
+  "performed": {
+    "replay": false,
+    "tests": false,
+    "nativeImport": false,
+    "hiddenEngineOrLevelDataRead": false,
+    "harnessOrNativeEdited": false,
+    "officialCost": false,
+    "smallHarnessSourceHashesCompared": true,
+    "onlyNewOutput": "vois-memory-review.json"
+  }
+}

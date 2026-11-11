@@ -1,0 +1,133 @@
+{
+  "schema": "logos-engine.lot6b-browser-qa-preparation.v1",
+  "preparedAt": "2026-11-11T19:59:00.523271+00:00",
+  "status": "prepared_not_executed_pending_root_source_review",
+  "command": [
+    "python",
+    "-B",
+    "docs/migration/lot6b-evidence/run-case-command.py",
+    "--clock",
+    "docs/migration/lot6b-evidence/klot-case-clock.json",
+    "--label",
+    "klot-fa23-browser-qa-01",
+    "--limit-seconds",
+    "600",
+    "--receipt",
+    "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-01/browser-case-command.json",
+    "--watch-manifest",
+    "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-01/browser-watch.json",
+    "--",
+    "python",
+    "-B",
+    "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-01/hold-managed-preview.py",
+    "--checkout",
+    "/workspace/sites/sra-lot6b-20261111/.sites-checkout",
+    "--output-directory",
+    "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-01"
+  ],
+  "clockContentsRead": false,
+  "sharedLock": "/workspace/shared/sra-coordination/performance.lock",
+  "freshQuietGuards": [
+    "/workspace/shared/sra-coordination/lot5c-status.json",
+    "/workspace/shared/sra-coordination/lot10c-status.json"
+  ],
+  "qaTargetSeconds": 360,
+  "operatorClosureDeadlineSeconds": 480,
+  "helperWaitLimitSeconds": 525,
+  "outerLimitSeconds": 600,
+  "subcommandLimitsSeconds": {
+    "statusBefore": 15,
+    "start": 60,
+    "stopFinally": 30,
+    "statusAfter": 15
+  },
+  "previewCommandContract": {
+    "start": [
+      "sites-preview",
+      "start",
+      "/workspace/sites/sra-lot6b-20261111/.sites-checkout"
+    ],
+    "status": [
+      "sites-preview",
+      "status"
+    ],
+    "stop": [
+      "sites-preview",
+      "stop"
+    ],
+    "stoppedStdout": "Sites preview stopped\n",
+    "stoppedStatusBasis": "Actual root observation supplied in conversation at approximately19:48 UTC; no new CLI execution here.",
+    "managedEnvironmentBasis": "Root reports SITES_MANAGED_LINUX_CONTAINER=1."
+  },
+  "documentation": "Sites managed preview reference read from skill://plugin_connector_1p_689987207de08191979cf68eca2941c6/sites/references/preview/managed.md",
+  "parentWatch": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/functional-watch.json",
+    "bytes": 483319,
+    "sha256": "96c9f6e576b34c9251af52659e7aed96125cb5ffd686ef94cc433507b3c0d4e5"
+  },
+  "buildWatch": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/build-watch-attempt03.json",
+    "bytes": 487940,
+    "sha256": "ae35b96135007d53ac1f3ffba521e56130b5dc9704fc301e6b273154375de5c2"
+  },
+  "inheritedEntries": 2956,
+  "addedLocalBuildEntries": [
+    "content/arc-agi-3.json",
+    "content/architecture.json",
+    "content/contact.json",
+    "content/game-gallery-assets.json",
+    "content/motivation.json",
+    "content/symbolic-reasoning.json",
+    "content/videos.json",
+    "migration/v6-transfer-map.json",
+    "public/favicon.svg",
+    "public/gallery/custom.png",
+    "public/gallery/custom_2.png",
+    "public/gallery/custom_3.png",
+    "public/gallery/official.png",
+    "public/game-mosaic.png",
+    "public/licenses/pyodide-MPL-2.0.txt",
+    "public/provenance.json",
+    "public/python/custom-manifest.json",
+    "public/videos/episode-01.jpg",
+    "public/videos/episode-02.jpg",
+    "public/videos/episode-03.jpg",
+    "public/videos/episode-04.jpg",
+    "public/videos/episode-05.jpg",
+    "public/videos/episode-06.jpg",
+    "reasoning-lab.html"
+  ],
+  "addedGeneratedHtmlEntries": [
+    "arc-agi-3.html",
+    "architecture/implementation.html",
+    "architecture/memory.html",
+    "architecture/principle-distillation.html",
+    "architecture/reasoning-tree.html",
+    "architecture/reasoning.html",
+    "architecture/representations.html",
+    "architecture/symbolic-choice.html",
+    "architecture.html",
+    "contact.html",
+    "gallery.html",
+    "motivation.html",
+    "symbolic-reasoning.html",
+    "videos/01-understandable-intelligence.html",
+    "videos/02-principle-distillation.html",
+    "videos/03-operational-consciousness.html",
+    "videos/04-verbalizing-reasoning.html",
+    "videos/05-alignment.html",
+    "videos/06-primitives-of-reasoning.html",
+    "videos.html"
+  ],
+  "workerScope": "Vite development serves watched TypeScript workers. dist workers are not served and are not claimed tested.",
+  "externalBuildHelpersAdded": false,
+  "hostImageFullyFrozen": false,
+  "helperControlsBrowserWorker": false,
+  "browserClosedByTimeoutClaimed": false,
+  "nativeModified": false,
+  "testsOrPreviewExecuted": false,
+  "klotReportsOrLedgerRead": false,
+  "preparationReadRefusal": "A first text read of the ELF sites-preview executable raised UnicodeDecodeError; no CLI launched. Later inspection was static binary strings and documentation only.",
+  "clockPathSuppliedByRoot": "docs/migration/lot6b-evidence/klot-case-clock.json",
+  "clockPathBoundAt": "2026-11-11T20:00:39.468367+00:00"
+}

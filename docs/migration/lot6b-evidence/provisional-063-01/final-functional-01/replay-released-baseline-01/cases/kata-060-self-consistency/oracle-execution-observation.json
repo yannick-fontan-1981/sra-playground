@@ -1,0 +1,94 @@
+{
+  "schema": "logos-engine.lot6b.single-released-replay-terminal-observation.v1",
+  "case": "kata-060-self-consistency",
+  "game": "KATA",
+  "startedAt": "2026-11-11T19:57:23.209153+00:00",
+  "finishedAt": "2026-11-11T19:58:25.485816+00:00",
+  "elapsedSeconds": 62.27556076899782,
+  "exitCode": 0,
+  "command": [
+    "flock",
+    "-s",
+    "-n",
+    "/workspace/shared/sra-coordination/performance.lock",
+    "python",
+    "-B",
+    "docs/migration/lot6b-evidence/record-command.py",
+    "--receipt",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/bounded-command.json",
+    "--watch-manifest",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/replay-watch.json",
+    "--",
+    "timeout",
+    "--signal=KILL",
+    "630s",
+    "python",
+    "-B",
+    "scripts/run-released-public-regressions-streamlog.py",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/case-manifest.json",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency",
+    "--source-manifest",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/source-manifest.json",
+    "--node-old-space-mib",
+    "1536",
+    "--timeout-seconds",
+    "600"
+  ],
+  "declaredBy": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/execution-declaration.json",
+  "quietSeenDuringCase": [],
+  "nextCaseQueued": false,
+  "passed": true,
+  "boundedReceipt": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/bounded-command.json",
+    "status": "passed",
+    "exitCode": 0,
+    "inputsUnchanged": true,
+    "elapsedSeconds": 61.13544423100029
+  },
+  "preflight": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/preflight.json",
+    "prevalidationProcessExitedBeforeAnyReplay": true
+  },
+  "regressionSummary": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/regressions/regression-summary.json",
+    "status": "passed",
+    "executionInputsUnchanged": true,
+    "results": [
+      {
+        "case": "kata-060-self-consistency",
+        "passed": true,
+        "comparisonPassed": true,
+        "comparisonChecks": 17,
+        "failedChecks": [],
+        "nativeSourceBeforeDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+        "nativeSourceAfterDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+        "nativeSourceUnchanged": true,
+        "immutableInputsUnchanged": true,
+        "elapsedSeconds": 48.673588008998195,
+        "timedOut": false,
+        "nodeOldSpaceMiB": 1536,
+        "nodeExitObserved": true,
+        "historicalReportProcessExitedBeforeNode": true,
+        "nodeExitedBeforeComparison": true,
+        "hostPreparationPassed": true,
+        "passiveOwnerPresencePassed": true,
+        "exitCode": 0,
+        "hostPreparation": {
+          "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/regressions/kata-060-self-consistency-host-preparation.json",
+          "sha256": "30756f2fb85fb50b780b617e4163d3e1f8abf843b2cedea99a4ce8773ede2ae9",
+          "bytes": 8760
+        },
+        "report": {
+          "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/regressions/kata-060-self-consistency-replay.json.gz",
+          "sha256": "0749f1b23833e6224194e5391fd813f9287ae02349e72e2ccbcc6e2827e97236",
+          "bytes": 9022072
+        },
+        "comparison": {
+          "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/regressions/kata-060-self-consistency-comparison.json",
+          "sha256": "899ee8c90c21c304413c66e88c3a6070a26060cf43e847ea63bf5c725767229e",
+          "bytes": 11083
+        }
+      }
+    ]
+  }
+}

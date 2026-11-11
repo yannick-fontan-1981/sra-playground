@@ -1,0 +1,5 @@
+{
+  "status": "source_edit_guard_stopped_before_qualifier_write",
+  "reason": "The first editor expected two terminal newlines; the actual file ended differently. Only the two before copies were written. No qualifier, test or native execution occurred.",
+  "qualifierStillEqualToPreservedBefore": true
+}

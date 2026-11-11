@@ -1,0 +1,32 @@
+✔ distinct real capture times are admitted while both original nodes remain unchanged (3.378972ms)
+✔ capture endpoints are inclusive and separate sessions have separate stability identities (0.519164ms)
+✔ rejects created before its own window (0.984316ms)
+✔ rejects created after its own window (0.325241ms)
+✔ rejects created another role window (0.346813ms)
+✔ rejects created nonfinite NaN (0.235736ms)
+✔ rejects created nonfinite infinity (0.239642ms)
+✔ rejects created submillisecond clock (0.207323ms)
+✔ rejects created wrong encoded type (0.832808ms)
+✔ rejects created malformed bits (0.487936ms)
+✔ rejects created extra encoded field (0.659696ms)
+✔ rejects unstable timestamp in role 0 (0.580015ms)
+✔ rejects unstable timestamp in role 1 (0.347515ms)
+✔ rejects other node field without retaining partial attribution (0.317118ms)
+✔ rejects other envelope field without retaining partial attribution (0.575068ms)
+✔ rejects trace body value without retaining partial attribution (0.372833ms)
+✔ rejects nested created field without retaining partial attribution (0.336348ms)
+✔ rejects incorrect origin without retaining partial attribution (0.313213ms)
+✔ rejects incorrect real trace ID without retaining partial attribution (0.209466ms)
+✔ rejects wrong session without retaining partial attribution (0.181284ms)
+✔ rejects extra root member without retaining partial attribution (1.65606ms)
+✔ nontrace created differences cannot receive the temporal exception (0.305371ms)
+✔ a falsely labelled trace identifier and a missing temporal context are rejected (0.448477ms)
+✔ invalid capture windows cannot create an attribution context (0.219742ms)
+ℹ tests 24
+ℹ suites 0
+ℹ pass 24
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 187.461179

@@ -1,0 +1,94 @@
+{
+  "schema": "logos-engine.lot6b.single-released-replay-terminal-observation.v1",
+  "case": "weav-051",
+  "game": "WEAV",
+  "startedAt": "2026-11-11T19:47:04.808611+00:00",
+  "finishedAt": "2026-11-11T19:52:35.069922+00:00",
+  "elapsedSeconds": 330.26076853799896,
+  "exitCode": 0,
+  "command": [
+    "flock",
+    "-s",
+    "-n",
+    "/workspace/shared/sra-coordination/performance.lock",
+    "python",
+    "-B",
+    "docs/migration/lot6b-evidence/record-command.py",
+    "--receipt",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/weav-051/bounded-command.json",
+    "--watch-manifest",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/weav-051/replay-watch.json",
+    "--",
+    "timeout",
+    "--signal=KILL",
+    "630s",
+    "python",
+    "-B",
+    "scripts/run-released-public-regressions-streamlog.py",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/weav-051/case-manifest.json",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/weav-051",
+    "--source-manifest",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/weav-051/source-manifest.json",
+    "--node-old-space-mib",
+    "1536",
+    "--timeout-seconds",
+    "600"
+  ],
+  "declaredBy": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/execution-declaration.json",
+  "quietSeenDuringCase": [],
+  "nextCaseQueued": false,
+  "passed": true,
+  "boundedReceipt": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/weav-051/bounded-command.json",
+    "status": "passed",
+    "exitCode": 0,
+    "inputsUnchanged": true,
+    "elapsedSeconds": 329.14830009300204
+  },
+  "preflight": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/weav-051/preflight.json",
+    "prevalidationProcessExitedBeforeAnyReplay": true
+  },
+  "regressionSummary": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/weav-051/regressions/regression-summary.json",
+    "status": "passed",
+    "executionInputsUnchanged": true,
+    "results": [
+      {
+        "case": "weav-051",
+        "passed": true,
+        "comparisonPassed": true,
+        "comparisonChecks": 17,
+        "failedChecks": [],
+        "nativeSourceBeforeDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+        "nativeSourceAfterDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+        "nativeSourceUnchanged": true,
+        "immutableInputsUnchanged": true,
+        "elapsedSeconds": 309.82305950299997,
+        "timedOut": false,
+        "nodeOldSpaceMiB": 1536,
+        "nodeExitObserved": true,
+        "historicalReportProcessExitedBeforeNode": true,
+        "nodeExitedBeforeComparison": true,
+        "hostPreparationPassed": true,
+        "passiveOwnerPresencePassed": true,
+        "exitCode": 0,
+        "hostPreparation": {
+          "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/weav-051/regressions/weav-051-host-preparation.json",
+          "sha256": "9a6a1bb327d5c2acf5ee950a49b59bf224e3fd1783ba74bb47a90b8a814e4447",
+          "bytes": 19265
+        },
+        "report": {
+          "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/weav-051/regressions/weav-051-replay.json.gz",
+          "sha256": "c4f2f0f055155fa3705184961894ecacdc090a47633be6032f999ff07de1582c",
+          "bytes": 19406827
+        },
+        "comparison": {
+          "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/weav-051/regressions/weav-051-comparison.json",
+          "sha256": "1053faf3a63b3483f01aedc37cca821959a4d6a02012eaadec726d3e2a597f65",
+          "bytes": 11086
+        }
+      }
+    ]
+  }
+}

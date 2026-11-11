@@ -1,0 +1,91 @@
+{
+  "schema": "logos-engine.lot6b-downstream-time-attribution-independent-source-review.v1",
+  "recordedAt": "2026-11-11T19:37:45.036026+00:00",
+  "status": "source_review_complete_ready_for_prospective_validation_not_executed",
+  "reviewer": "runtime_review",
+  "blockingFindings": [],
+  "scope": {
+    "sourceOnly": true,
+    "sourceDiffReference": "Retained downstream-01/before copies; all four saved patch bodies exactly match the current source differences against those copies. No Git revision or native hash was recomputed in this review.",
+    "consumers": [
+      "finalize-owner-cost-contract.py",
+      "check-cost-static-inputs.py",
+      "consolidate-owner-costs.mjs",
+      "review-owner-costs.py"
+    ],
+    "qualifier": "Existing producer fields and point traversal were read; no qualifier change or execution.",
+    "testsExecuted": false,
+    "consumerCliExecuted": false,
+    "qualificationExecuted": false,
+    "nativeImported": false,
+    "gameOrReplayExecuted": false,
+    "officialCostExecuted": false
+  },
+  "findings": [
+    {
+      "id": "exact-policy",
+      "result": "satisfied_by_source",
+      "evidence": "local-python-validator.txt:45-62; local-javascript-validator.txt:23-35",
+      "detail": "Only exact_except_attributed_trace_envelope_created is accepted. Policy and temporal objects require exact keys. The sole temporal leaf is /value/root/members/created/bits of native_reasoning_trace, with Date.now() / 1000, the exact two source paths, role/sessionId/nodeId stability key, and allOtherFieldsExact true. No recursive normalization or old-exact fallback was added."
+    },
+    {
+      "id": "receipt-role-and-source-binding",
+      "result": "satisfied_by_source",
+      "evidence": "local-python-validator.txt:63-119; local-javascript-validator.txt:36-79; production calls at finalize:405, preflight:489-490, consolidate:391, review:607-608",
+      "detail": "Each role matches its receipt native digest, report fingerprint and capture tool. Before/after inventory, inputs and generator must match, with explicit integrity flags and empty failures. Both captured native inventories must bind both clock source hashes listed among the qualifier inputs. The qualifier generator and both receipt/report fingerprints must be exact listed inputs. Existing callers verify the actual file fingerprints and retain their source/manifests/chronology checks."
+    },
+    {
+      "id": "time-records",
+      "result": "satisfied_by_source",
+      "evidence": "local-python-validator.txt:132-157; local-javascript-validator.txt:87-109",
+      "detail": "Exact record schema; valid role and captured session; positive safe canonical trace identifier; unique role/session/trace; finite float64 bits agreeing exactly with seconds and integer milliseconds; canonical UTC timestamp inside that role receipt interval; receipt boundary strings exact. Both roles must exist for each emitted trace pair and every captured session must be represented. The validators do not mutate evidence."
+    },
+    {
+      "id": "point-coverage",
+      "result": "satisfied_by_source_with_declared_boundary",
+      "evidence": "local-python-validator.txt:100-131,158-161; local-javascript-validator.txt:63-86,110-112; README.md",
+      "detail": "Four ordered forms are fixed. Captures and terminal inspections match retained shape array lengths; their counters define the exact ordered point register for both roles. Coverage reproduces each point node/delta count under the precise policy with zero unattributed differences. Unique paired records do not independently establish that no entire trace pair was omitted; exact other bodies, exhaustive graph traversal, role-bound graph origins, chains and tickets remain guarantees of the fingerprinted qualifier. This limitation is explicitly documented, with no invented trace-count formula."
+    },
+    {
+      "id": "preserved-cost-and-history",
+      "result": "satisfied_by_textual_diff",
+      "evidence": "All four saved .patch files and before copies compared to current source",
+      "detail": "Outside the inserted local validators, changes are only required standard-library imports, capture receipt collection, and replacement of the former exact-policy check by the strict temporal-policy call. No global budget, per-game full-session threshold, phase-exception rule, cohorts/order, sample arithmetic, work signature, raw measurement projection, historical comparator or retained failure is altered."
+    }
+  ],
+  "preparedTests": {
+    "corpus": "synthetic-policy-cases.json",
+    "distinctScenarios": 51,
+    "positiveScenarios": 1,
+    "negativeScenarios": 50,
+    "pythonConsumers": 3,
+    "anticipatedPythonCases": 153,
+    "javascriptConsumers": 1,
+    "anticipatedJavaScriptCases": 51,
+    "anticipatedTotalCases": 204,
+    "status": "source_inspected_not_executed",
+    "countsAreResults": false,
+    "coverage": "Malformed/broadened policy, source/receipt/generator mismatch, foreign role/session/trace, invalid float64/nonfinite/submillisecond/out-of-window time, missing or duplicate records/pairs/sessions, incomplete/reordered/invalid point coverage, and capture counter drift. Positive case uses distinct valid times. Each case asserts that its input evidence remains unchanged.",
+    "boundary": "These are 51 synthetic scenarios applied to four exported/local functions, including three identical Python validator bodies. They do not execute the four complete CLI workflows, authenticate synthetic file fingerprints, or prove cost/native/game behavior.",
+    "commands": [
+      "python -B docs/migration/lot6b-evidence/provisional-063-01/cost-time-attribution-01/downstream-01/temporal-policy-consumers.test.py",
+      "node --test --test-concurrency=1 docs/migration/lot6b-evidence/provisional-063-01/cost-time-attribution-01/downstream-01/temporal-policy-consumers.test.mjs"
+    ]
+  },
+  "nonblockingOperationalObservation": {
+    "id": "preflight-refusal-output",
+    "evidence": "check-cost-static-inputs.py:249-250,489-490,512-545",
+    "detail": "The new validator raises ValueError on a semantic refusal. In static preflight, this propagates before static-preflight.json is written; the previous boolean policy check could instead be collected into that negative receipt. It fails closed and cannot produce a successful measurement gate. A declared command receipt must retain the exit and traceback. The prepared function-level tests do not validate this CLI output behavior."
+  },
+  "nextSteps": [
+    "Declare and run the prepared 153 Python plus 51 JavaScript cases under the current coordination, retaining fresh terminal receipts and source/input fingerprints. No result is anticipated by this source review.",
+    "If those cases pass, validate the existing real provisional attribution/fixture and bound capture receipts with new retained functional outputs; do not rewrite the original refusal or the qualified attribution.",
+    "Finalize new contracts/preflight fingerprints only against verified actual published predecessor provenance. The provisional 805b/a33 and candidate fa23/322 artifacts do not establish that publication or an official cost result."
+  ],
+  "mutation": {
+    "sourcesOrTestsChanged": false,
+    "qualifierOrNativeChanged": false,
+    "priorReceiptsChanged": false,
+    "onlyNewFile": "docs/migration/lot6b-evidence/provisional-063-01/cost-time-attribution-01/downstream-01/source-review.json"
+  }
+}

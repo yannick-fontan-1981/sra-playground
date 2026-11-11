@@ -1,0 +1,25 @@
+{
+  "schema": "logos-engine.lot6b-downstream-test-counts.v1",
+  "recordedAt": "2026-11-11T19:41:32.698176+00:00",
+  "status": "exact_expected_tests_passed",
+  "executionReceipt": "docs/migration/lot6b-evidence/provisional-063-01/cost-time-attribution-01/downstream-01/python-policy-tests-execution-01.json",
+  "expectedTests": 153,
+  "reportedTests": 153,
+  "individualOkLines": 153,
+  "unittestOk": true,
+  "wrapperExitCode": 0,
+  "commandExitCode": 0,
+  "elapsedSeconds": 0.2058299230011471,
+  "inputsUnchanged": true,
+  "watchedInputs": 57,
+  "logTail": [
+    "test_2_wrong_role_interval_is_refused (__main__.LocalTemporalPolicyTests.test_2_wrong_role_interval_is_refused) ... ok",
+    "test_2_zero_common_nodes_is_refused (__main__.LocalTemporalPolicyTests.test_2_zero_common_nodes_is_refused) ... ok",
+    "test_2_zero_trace_identifier_is_refused (__main__.LocalTemporalPolicyTests.test_2_zero_trace_identifier_is_refused) ... ok",
+    "",
+    "----------------------------------------------------------------------",
+    "Ran 153 tests in 0.090s",
+    "",
+    "OK"
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "schema": "logos-engine.lot6b-retained-attribution-local-compatibility.v1",
+  "status": "local_compatibility_passed",
+  "startedAt": "2026-11-11T19:42:06.612380+00:00",
+  "finishedAt": "2026-11-11T19:42:06.823889+00:00",
+  "nativeDigests": {
+    "baseline": "a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57",
+    "candidate": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886"
+  },
+  "consumers": [
+    {
+      "consumer": "finalize-owner-cost-contract.py",
+      "passed": true,
+      "evidenceUnchanged": true
+    },
+    {
+      "consumer": "check-cost-static-inputs.py",
+      "passed": true,
+      "evidenceUnchanged": true
+    },
+    {
+      "consumer": "review-owner-costs.py",
+      "passed": true,
+      "evidenceUnchanged": true
+    },
+    {
+      "consumer": "consolidate-owner-costs.mjs",
+      "passed": true,
+      "evidenceUnchanged": true,
+      "exitCode": 0,
+      "stdout": "{\"consumer\":\"consolidate-owner-costs.mjs\",\"passed\":true,\"evidenceUnchanged\":true}\n",
+      "stderr": ""
+    }
+  ],
+  "forms": 4,
+  "points": 58,
+  "commonValueCoverage": 58,
+  "temporalRecords": 168,
+  "attributionFailures": [],
+  "fingerprintedAttributionInputsVerified": 39,
+  "fullConsumerCliExecuted": false,
+  "graphBodiesRequalified": false,
+  "contractFinalized": false,
+  "preflightExecuted": false,
+  "officialCostExecuted": false,
+  "nativeImported": false,
+  "publicationProvenance": "provisional805b/a33 against fa23/322; no actual published predecessor claimed",
+  "proofBoundary": "Local function compatibility with exact retained attribution/fixture/receipts. Graph traversal, other bodies and chains/tickets are not replayed. Semantic ValueError remains a refusal, not a negative static-preflight JSON receipt."
+}

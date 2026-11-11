@@ -1,0 +1,18 @@
+{
+  "files": {
+    "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/annotated_types-0.7.0-py3-none-any.whl": "6541523b4b16c1953d2fc9b82fb86c540eea9f78fca329ab371ed13a8b0faa51",
+    "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl": "a292c1f5d7d8a2208cd5e94fc467604c131cabcd2fc14fed6eefde121e7fabdf",
+    "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/package.json": "40ca48e43ce4ddc68412d5b7a7ca9e2477cd4f0e672277ae468ac2245717079b",
+    "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pydantic-2.12.5-py3-none-any.whl": "04854875001e07a8a74d87b7c80296cba168773d8c9804e232d695f82484d7d7",
+    "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pydantic_core-2.41.5-cp314-cp314-pyemscripten_2026_0_wasm32.whl": "54703fa42a0d4d574283cfb8f08050ba7820c9a42b0a21bc1286407d9a9e54da",
+    "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pyodide-lock.json": "5dc2fc119108bc148c7457dc86e7675b5c87e1cafd420b9c34c1eaef7b36c010",
+    "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pyodide.asm.mjs": "f7cdc8ece80678ceb712f8e65ebe6d3a83203a180c399865f49612a051693635",
+    "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pyodide.asm.wasm": "cc36e3cab04fdfc9a63ff13eb52eae2b911bf46c025cc7b281f394bd3de1d5e6",
+    "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pyodide.mjs": "6f1d60f7bf529beb300f0f47983c921d3982363640ba20af0e38efdddbc66109",
+    "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/python_stdlib.zip": "fa1957e5777068fc4f7437f96d860ae2fbe9c19732ba06c84e004ec16dd7dd7a",
+    "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/typing_extensions-4.15.0-py3-none-any.whl": "4fec68770a05408e668a4fa53d6bf4f0f684b9dacf820c7c5d6e97d3ad225e29",
+    "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/typing_inspection-0.4.2-py3-none-any.whl": "deb989630985f7a7296b90357a947a804a7612cecbb6439d6e71128e01f61051",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/functional-watch-attempt02.json": "b977dfc6d08741fdd6ec2155cbde7e83fb848d24c3bd1458795db9a9873232dd"
+  },
+  "qualification": "Immutable source assets only; destination alias location is the declared preparation mutation."
+}

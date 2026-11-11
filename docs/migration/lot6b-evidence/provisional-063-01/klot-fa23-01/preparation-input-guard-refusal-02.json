@@ -1,0 +1,9 @@
+{
+  "status": "input_guard_refused_before_case_clock_and_payload",
+  "exitCode": 1,
+  "reason": "A watched Pyodide file resolved through the public alias to the external6A cache, outside this checkout.",
+  "sourceOrGameWorkExecuted": false,
+  "caseClockStarted": false,
+  "correctiveAction": "Materialized identical asset bytes in local6B cache and retained the original wrapper guard.",
+  "materialization": "docs/migration/lot6b-evidence/provisional-063-01/runtime-cache-materialization-01/result.json"
+}

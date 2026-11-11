@@ -1,0 +1,286 @@
+{
+  "case": "kata-060-self-consistency",
+  "game": "KATA",
+  "mode": "recorded-public-replay",
+  "command": [
+    "node",
+    "--expose-gc",
+    "--max-old-space-size=1536",
+    "scripts/replay-public-regression-released-baseline.mjs",
+    "docs/migration/lot6a-evidence/integrated-final-02/kata-campaign.json.gz",
+    "docs/migration/lot6a-evidence/integrated-final-02/kata-public-trace.json.gz",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/regressions/kata-060-self-consistency-replay.json.gz",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/regressions/kata-060-self-consistency-host-preparation.json"
+  ],
+  "startedAt": "2026-11-11T19:57:28.863839+00:00",
+  "timeoutSeconds": 600,
+  "baseline": {
+    "path": "docs/migration/lot6a-evidence/integrated-final-02/kata-campaign.json.gz",
+    "sha256": "a3318ed5f7d742f63b5923f3e1e46b0d9cfff1d18e767b45c522d61aa354e455",
+    "bytes": 8253174
+  },
+  "trace": {
+    "path": "docs/migration/lot6a-evidence/integrated-final-02/kata-public-trace.json.gz",
+    "sha256": "c236c95ec0bdcb892a6940940098e4310eb35a6ae11acaf6b74545d09aa22daa",
+    "bytes": 12579
+  },
+  "expectedActions": 33,
+  "nodeOldSpaceMiB": 1536,
+  "preflight": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/preflight.json",
+    "sha256": "02e59a6513eabaf8956afa0698a1c474eeb14c11abb8b76ce3130a0f37007d7a",
+    "bytes": 1444
+  },
+  "historicalReportProcessExitedBeforeNode": true,
+  "nativeSourceBeforeDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+  "executionInputsBefore": {
+    "scripts/run-released-public-regressions.py": "7988863afd2b171f31987434bb1176370be2e3afd49dead1edcdc59770d81909",
+    "scripts/run-recorded-public-regressions.py": "df19dc88ff29e78a1cb5935d445644e96cc9fb1ef90b73d802cf51868d2b2c40",
+    "scripts/compare-v54-regressions.py": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+    "scripts/replay-public-regression-released-baseline.mjs": "2ce2a0e1b8f969510373ae161156b2b163d208b4e426cb1f26218f9952b3b164",
+    "scripts/replay-v53-public-regression.mjs": "4359e008db8dadaac17f6504199ff20c752f40f1666ba527f1cd5f16df100a9e",
+    "scripts/run-v53-campaign-proof.py": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+    "tests/helpers/v6-live-game-campaign.ts": "d0fa63c45126e2c4d21c8c25cd350103785c537a250b2a6903410195b82d16ca",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/case-manifest.json": "cb0924ce3f1f670dbc3f5d1855c8da718214a2010f5c9e7e3cbc9f45691f2db2",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/source-manifest.json": "2098197ea6c45c06bf42983bc1b47cd2dbe15a49f43b2f647d1884e591649f42",
+    "scripts/run-released-public-regressions-streamlog.py": "b05b0e113c93696be45408e4c10549f2a379c22330efbddfcaa0f09cd51309b9"
+  },
+  "phase": "completed",
+  "finishedAt": "2026-11-11T19:58:17.538749+00:00",
+  "exitCode": 0,
+  "timedOut": false,
+  "passed": true,
+  "nodeExitObserved": true,
+  "rawOutputPath": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/regressions/kata-060-self-consistency-output.raw.log",
+  "driverPid": 10,
+  "nodePid": 12,
+  "memorySamples": [
+    {
+      "elapsedSeconds": 0.0013711719984712545,
+      "pid": 12,
+      "VmSize": "112328 kB",
+      "VmHWM": "404 kB",
+      "VmRSS": "404 kB",
+      "Threads": "1"
+    },
+    {
+      "elapsedSeconds": 5.020407558997249,
+      "pid": 12,
+      "VmSize": "10754624 kB",
+      "VmHWM": "907772 kB",
+      "VmRSS": "742604 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 10.030860784998367,
+      "pid": 12,
+      "VmSize": "10758032 kB",
+      "VmHWM": "907772 kB",
+      "VmRSS": "747020 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 15.043445121998957,
+      "pid": 12,
+      "VmSize": "10769472 kB",
+      "VmHWM": "907772 kB",
+      "VmRSS": "759248 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 20.054912734998652,
+      "pid": 12,
+      "VmSize": "10803236 kB",
+      "VmHWM": "907772 kB",
+      "VmRSS": "793744 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 25.07626409599834,
+      "pid": 12,
+      "VmSize": "10853396 kB",
+      "VmHWM": "907772 kB",
+      "VmRSS": "846024 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 30.09079553599804,
+      "pid": 12,
+      "VmSize": "11053636 kB",
+      "VmHWM": "1046532 kB",
+      "VmRSS": "1046532 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 35.097179361997405,
+      "pid": 12,
+      "VmSize": "11146608 kB",
+      "VmHWM": "1139732 kB",
+      "VmRSS": "1139732 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 40.10717828199995,
+      "pid": 12,
+      "VmSize": "11187760 kB",
+      "VmHWM": "1310812 kB",
+      "VmRSS": "1183912 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 45.114986302000034,
+      "pid": 12,
+      "VmSize": "11383568 kB",
+      "VmHWM": "1379028 kB",
+      "VmRSS": "1379028 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 48.63691088199994,
+      "pid": 12,
+      "processPresent": false
+    }
+  ],
+  "lastObservedAt": "2026-11-11T19:58:17.522500+00:00",
+  "elapsedSeconds": 48.673588008998195,
+  "lastProgress": {
+    "status": "passed",
+    "failure": null
+  },
+  "rawOutputBytes": 82592,
+  "outputRaw": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/regressions/kata-060-self-consistency-output.raw.log",
+    "sha256": "d56f5adf9eeb4e34330fb35e33fbd4e04b8ea7716780d35b2265e09a07e9bce0",
+    "bytes": 82592
+  },
+  "output": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/regressions/kata-060-self-consistency-output.log.gz",
+    "sha256": "b3b8ed656c9e4d6a9770b33d82865d23e87d762eb6bc77e4208629b4fddfa47c",
+    "bytes": 4047
+  },
+  "startedReceipt": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/regressions/kata-060-self-consistency-execution-started.json",
+    "sha256": "f387b9ff3fa7b4c528abe57f4bab648ed8430db064151d95ea8d5533191dd98f",
+    "bytes": 3589
+  },
+  "nodeExitedBeforeComparison": true,
+  "hostPreparation": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/regressions/kata-060-self-consistency-host-preparation.json",
+    "sha256": "30756f2fb85fb50b780b617e4163d3e1f8abf843b2cedea99a4ce8773ede2ae9",
+    "bytes": 8760
+  },
+  "hostPreparationPassed": true,
+  "report": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/regressions/kata-060-self-consistency-replay.json.gz",
+    "sha256": "0749f1b23833e6224194e5391fd813f9287ae02349e72e2ccbcc6e2827e97236",
+    "bytes": 9022072
+  },
+  "status": "passed",
+  "actions": 33,
+  "prefixes": 14,
+  "final": {
+    "actions": 33,
+    "levelsCompleted": 3,
+    "level": 4,
+    "state": "NOT_FINISHED",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "activeSeconds": 34.391000928,
+    "prefixes": 14,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 33,
+      "boundaryReplays": 2,
+      "goalEvents": 3,
+      "frontierDeltas": 67,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 15
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 15
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 15
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 11
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 1
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 9
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 16
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology"
+      ],
+      "morphologyProvider": {
+        "status": "partial_current_measurements_control_attention_and_methods",
+        "state_owner": "family_state:morphology",
+        "motion_owner": "caller:goal",
+        "forecast_owner": "family_state:public_observed_inventory",
+        "current_decision_scope": "one_source_selection_cycle",
+        "attention_owner": "caller:attention",
+        "method_owner": "caller:counters.targetMethod",
+        "entry_return_owner": "family_state:morphology.entry_access_return",
+        "connected_methods": [
+          "retained_station_method",
+          "entry_access_return",
+          "entry_rebind",
+          "entry_probe",
+          "managed_capacity",
+          "target_extension_continuation"
+        ],
+        "pending": [
+          "complete_original_caller_parity_and_domain_closure"
+        ]
+      },
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 33,
+      "resume": 13
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.64.0"
+  },
+  "passiveOwnerPresence": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/regressions/kata-060-self-consistency-passive-owner-presence.json",
+    "sha256": "1e24ae1c4fdde8a6b93f9a560bb2641b5db4c99f40b21e51b2f2873eb940c555",
+    "bytes": 1275
+  },
+  "passiveOwnerPresencePassed": true,
+  "passiveOwnerPrefixesChecked": 0,
+  "passiveOwnerPrefixesPassed": 0,
+  "passiveOwnerTransitionsRetained": 0,
+  "comparison": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/regressions/kata-060-self-consistency-comparison.json",
+    "sha256": "899ee8c90c21c304413c66e88c3a6070a26060cf43e847ea63bf5c725767229e",
+    "bytes": 11083
+  },
+  "comparisonPassed": true,
+  "comparisonChecks": 17,
+  "failedChecks": [],
+  "nativeSourceAfterDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+  "nativeSourceUnchanged": true,
+  "immutableInputsUnchanged": true,
+  "postprocessingFinishedAt": "2026-11-11T19:58:24.878434+00:00"
+}

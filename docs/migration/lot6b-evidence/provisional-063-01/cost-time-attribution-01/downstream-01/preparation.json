@@ -1,0 +1,46 @@
+{
+  "schema": "logos-engine.lot6b-downstream-time-attribution-source-preparation.v1",
+  "preparedAt": "2026-11-11T19:30:08.639699+00:00",
+  "status": "source_prepared_not_executed",
+  "files": {
+    "finalize-owner-cost-contract.py": {
+      "beforeBytes": 16988,
+      "afterBytes": 27590,
+      "patchLines": 224
+    },
+    "check-cost-static-inputs.py": {
+      "beforeBytes": 28667,
+      "afterBytes": 39550,
+      "patchLines": 202
+    },
+    "consolidate-owner-costs.mjs": {
+      "beforeBytes": 53741,
+      "afterBytes": 62159,
+      "patchLines": 156
+    },
+    "review-owner-costs.py": {
+      "beforeBytes": 71359,
+      "afterBytes": 82195,
+      "patchLines": 214
+    }
+  },
+  "newRuntimeDependencies": [],
+  "qualifierModified": false,
+  "nativeModified": false,
+  "frozenTestsModified": false,
+  "plansModified": false,
+  "testsExecuted": false,
+  "measurementExecuted": false,
+  "coverageBoundary": "Local validators bind emitted records and observed point counters. Complete trace traversal, other bodies and role-bound graph origins/chains/tickets remain guarantees of the fingerprinted qualifier. No trace-count formula is introduced.",
+  "toolClosure": "Existing dynamic fingerprints bind changed consolidator/reviewer; qualifier generator and two common native clock sources are required in already verified attribution inputs. Python implementations remain independent and use only standard-library imports. Fresh final contracts/preflights must be generated after review; old receipts are not rewritten.",
+  "preparedTests": {
+    "cases": 51,
+    "positive": 1,
+    "negative": 50,
+    "pythonConsumers": 3,
+    "javascriptConsumers": 1,
+    "anticipatedPythonCases": 153,
+    "anticipatedJavaScriptCases": 51,
+    "executed": false
+  }
+}
