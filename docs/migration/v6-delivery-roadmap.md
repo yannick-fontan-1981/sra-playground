@@ -1,8 +1,126 @@
 # Feuille de route V5/V6 vers Logos Engine TypeScript
 
+<!-- LOT6B_DEVELOPMENT_CURRENT_START -->
+
+## Avancement du lot 6B : SelectedRigid fonctionnel, clôture intégrée à venir
+
+**Le candidat 6B réussit trois niveaux KLOT en 38 actions et 30 préfixes.** La campagne froide utilise le seul appelant TypeScript, sans plan, état appris ou agent Python fourni à ses décisions. La relecture indépendante du Python original compare **408 événements sans différence**, dont 38 retours sélectionnés, 35 événements acquis, trois retours de frontière de valeur `null` et 98 restaurations. **204 ablations, dont 63 changements d’action ou de refus**, établissent une contribution des connaissances acquises ; les deux corruptions sémantiques contrôlées sont rejetées.
+
+Ce résultat est un **jalon de développement sur Site 97**, avec la version **0.64 réservée**. Il ne constitue pas une livraison 6B finale. La documentation publiée de **Site 101 / native 0.61**, commit `d75a36f0a99bf6c301034523a3138a64d2f6e744`, est réconciliée ci-dessous ; ses sources natives ne sont pas encore fusionnées dans ce candidat. Les livraisons effectives 10B / 0.62 puis 5C / 0.63 restent les prédécesseurs requis avant le gel et la mesure finale 6B.
+
+| Vérification 6B acquise | Résultat et preuve |
+| --- | --- |
+| Oracle de composant | **1 082 contrôles comportementaux**, plus 2 511 contrôles de provenance ; 18 cas initiaux, sept sessions froides synthétiques, cinq restaurations. [Essai 04](lot6b-evidence/oracle/attempt-04/native-comparison.json). |
+| Intégration ciblée | **10/10 tests**, aucune annulation ni exclusion. Propriétaire unique, cinq refus source, conservation après retour étranger, reprise après Pause et arrêt du budget actif. [Essai 02](lot6b-evidence/integration/attempt-02/execution.json). |
+| Campagne froide KLOT | **3 niveaux / 38 actions / 30 préfixes**, gel de 310 fichiers natifs ; [exécution bornée](lot6b-evidence/development-freeze-01/bounded-execution.json). |
+| Original Python sur KLOT | **408 événements / zéro différence**, 98 restaurations, 204 ablations dont 63 modifient une action ou un refus. [Reçu indépendant](lot6b-evidence/development-freeze-01/source-parity-attempt-01/reader-execution.json). |
+| Qualification du lecteur | **Deux corruptions sémantiques rejetées**, sans nouvelle partie, sans exception ni dépassement valant réussite. [Qualification](lot6b-evidence/development-freeze-01/reader-negative-attempt-01/results/qualification.json). |
+| Budget cumulé KLOT | **350,862154 s / 2 400 s**, horloge fermée, **2 049,137846 s restantes** ; antécédents et diagnostics inclus. [Horloge](lot6b-evidence/klot-case-clock.json). |
+| Inventaire du candidat | **64/76 entrées raccordées (84,2 %), 12 restantes** ; **198 composants vérifiés**, 148 transferts partiels, 1 023 modules en attente. Zéro module entièrement vérifié et six portes de migration complète encore fausses. |
+
+Le compteur publié reste **63/76** dans native 0.61. Le compteur **64/76** appartient au candidat 6B sur sa base de développement ; il n’anticipe pas les entrées des livraisons 10B et 5C. Les échecs antérieurs **21/22** et **53/54** restent conservés. Le dernier échec portait sur une attente de conservation de Preview antérieure à la création de son cache d’époque ; le test corrigé vérifie l’état exact présent avant le retour étranger.
+
+Le premier passage des cinq commandes techniques a renvoyé zéro, mais l’audit de migration signalait trois références vers **deux fixtures historiques absentes**. Ce succès de processus n’est pas présenté comme une validation sémantique. Le garde générique de l’audit a été corrigé et refuse désormais ces références manquantes ; la [restauration exacte](lot6b-evidence/fixture-restoration/attempt-01/recovery.json) puis le [nouvel audit sémantique](lot6b-evidence/audit-guard/restored-inventory.json) sont réussis, avec zéro erreur. Les autres contrôles et la compilation restent valables sur les mêmes sources natives.
+
+### Suite du lot 6 et critère de coût
+
+| Étape | État actuel | Prochaine opération |
+| --- | --- | --- |
+| 6A `preview_packing` | Livré, Sites 96–97 / native 0.60 | Conserver ses preuves et réserves. |
+| 6B `selected_rigid` | Port raccordé ; composant, intégration ciblée et contribution KLOT vérifiés sur le candidat | Intégrer les prédécesseurs réellement publiés, puis qualifications finales. |
+| 6C `observed_rigid_cargo` | À transférer | Après la clôture intégrée de 6B. |
+| 6D `shared_settlement` | À transférer | Après 6C, avec les critères communs du lot. |
+
+La fusion devra préserver le helper d’horloge `currentExecution` introduit par 10B et transmettre son délai courant à la garde SelectedRigid, y compris lorsqu’un demandeur fournit un délai plus court. Restent ensuite les régressions déclarées sur le gel intégré, le contrôle navigateur, la qualification des graphes communs, la fenêtre officielle de coût et la publication privée coordonnée.
+
+**Aucun pourcentage de coût 6B n’est encore revendiqué.** Le critère autorisé reste la **médiane de session complète strictement inférieure à +10 % pour chaque jeu testé**. Une phase peut dépasser +10 % lorsque ce critère global passe ; tous les diagnostics et échantillons sont conservés, sans addition de phases imbriquées et sans compensation entre jeux.
+
+Les plafonds de recherche ne bornent pas le journal source complet. Le bouton Pause empêche les prochaines actions physiques et conserve le préfixe, mais ne préempte pas la recherche déjà engagée dans le worker. Ces réserves et la [filiation source → TypeScript → consommateur → preuve](lot6b-selected-rigid-lineage.md) demeurent explicites.
+
+<!-- LOT6B_DEVELOPMENT_CURRENT_END -->
+
+<!-- LOT7_FOLLOWUP_RECOVERY_START -->
+
+## Fil 7 : native 0.61 publié et qualifié après répétition propre du coût
+
+**Le complément Workshop 0.61 est réellement publié dans Site 98**, au commit `653e40a4f45df8ec8c6bda005004c7cdb8df074a`, statut terminal **`succeeded` le 11 novembre 2026 à 11:39:04.455525 UTC−03**. La [publication native](lot7b-evidence/followup-recovery/publication/native-publication.json) confirme l’URL existante et l’accès privé au propriétaire, révision **3**. Le candidat reconstruit a réussi **5 042/5 042 tests**, **5/5 contrôles de livraison avec clôture explicite de l’audit**, **187/187 comparaisons de rejeu** ; ces validations fonctionnelles restent inchangées. **Le complément 0.61 est terminé et qualifié : la répétition propre du coût est acceptée pour STCK et SMLP. La première fenêtre reste intégralement inéligible après les deux incidents d’isolation.** La clôture documentaire est réellement publiée dans **Site 99**, commit `61e176b42234db380f23aaace216e6bd2bfe7491`, statut `succeeded` le **11 novembre 2026 à 11:49:50 UTC−03**. La [correction documentaire Site 100](lot7b-evidence/followup-recovery/publication/clean-repeat-correction-publication.json), commit `5f8ca04cbf69cf2ccf7d2aba64a4cfde2a280613`, est réellement déployée à **12:17:03.733262 UTC−03**, avant la répétition propre. Sa référence de coût reste **Site 97 / native 0.60.0**, clôture documentaire de 6A après sa publication native dans Site 96. La récupération initiale est partie de Site 95 au commit `3a70463039768f7114edae7d94d7dd33b7f36aa8` ; le prédécesseur actuel est le commit publié `98336fba4e696a51c90ff7f7b37b8bdf95f34847`. Les anciens fichiers non publiés et leurs preuves brutes n'ont pas été retrouvés après le remplacement de l'environnement. Le [constat de récupération](lot7b-evidence/followup-recovery/coordination/recovery.json) conserve les observations historiques avec `eligibleForGates: false` : elles ne valident pas les octets reconstruits. L'[index des nouvelles preuves](lot7b-evidence/followup-recovery/README.md) distingue les validations fraîches des observations historiques.
+
+### Comportement et source du complément
+
+Le [contrat du complément](lot7b-evidence/followup-recovery/contract/source-contract.md) porte sur deux fichiers de production : l'appelant natif et le propriétaire RankedWorkshop. Après une invitation de contact acquise comme stationnaire, l'appelant consulte le reste du groupe puis les groupes suivants dans leur ordre déclaré. La première proposition non nulle doit posséder son propre témoin acquis et passer sa garde actuelle. Les refus globaux, les arrêts locaux de groupe, la préservation, la liaison et WHY/ACT conservent leur portée. Le témoin Workshop ne modifie ni les onze champs de sa proposition source ni son état persistant ; il atteste le contexte d'une question dont l'effet reste inconnu. Il s'agit d'une extension native explicite, sans nouvelle entrée ni nouveau propriétaire, et sans revendication de parité de tout l'appelant Python.
+
+Le [gel reconstruit](lot7b-evidence/followup-recovery/integrated-final/source-manifest.json) contient **306 fichiers natifs**, digest `f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279`. Il intègre le [snapshot 6A stabilisé](lot7b-evidence/followup-recovery/coordination/prepared-6a-source-observation.json), dont **304 fichiers natifs restent identiques** ; seules les deux sources du complément diffèrent. Le checkpoint 6A `c263271442b8e8a8084c39c2f9301fd3163e7d29` est disponible. Son [adoption complémentaire](lot7b-evidence/followup-recovery/coordination/prepared-6a-checkpoint-adoption.json) corrige deux attentes de registre et ajoute le vérificateur de présence, sans modifier le code natif ni le programme de rejeu. Le [checkpoint source du complément](lot7b-evidence/followup-recovery/coordination/source-checkpoint-900febf8b165.json) est sauvegardé et vérifié ; il ne constitue pas une publication du Site. La [réconciliation avec Site 97](lot7b-evidence/followup-recovery/coordination/published-6a-site97-reconciliation.json) est réussie : la source préparée et les onze cas déclarés correspondent exactement au prédécesseur publié. Les **709 fichiers source/tests** et les **371 entrées de compilation** du candidat restent identiques aux validations retenues.
+
+### Validation fraîche et limites
+
+Le [périmètre final](lot7b-evidence/followup-recovery/contract/test-scope-final.json) conserve **133 fichiers de tests**, dont les quatre nouveaux contrats 6A et les sept fichiers nouveaux ou affectés par le complément. La [première passe](lot7b-evidence/followup-recovery/integrated-final/validation/delta-tests-run.json) a réussi **5 040 tests sur 5 042** ; les deux échecs étaient des attentes de registre devenues incomplètes. Les corrections exactes de 6A ont été adoptées, puis la même liste de 133 fichiers a été relancée sur le même gel. La [seconde passe](lot7b-evidence/followup-recovery/integrated-final/verification-attempt-02/validation/delta-tests-run.json) a réussi **5 042/5 042 tests**, sans échec, annulation, test ignoré ni TODO. Le premier échec reste conservé. Les [cinq contrôles de livraison](lot7b-evidence/followup-recovery/integrated-final/verification-attempt-02/validation/checks-run.json) sont **réussis**, compilation comprise. Le contrôle de préparation a néanmoins retenu une erreur sémantique dans l’ancien audit : une pièce de preuve 6A absente avant sa publication, malgré le code de sortie 0. Après fusion de Site 97, le [même audit statique relancé](lot7b-evidence/followup-recovery/integrated-final/post-publication-audit/closure.json) a une liste d’erreurs vide. L’ancien résultat reste conservé ; les sources, tests, entrées de compilation et originaux sont inchangés.
+
+Les vérifications ciblées ont réussi **51 nouveaux contrôles et 196 contrôles affectés**. L'oracle Python original traite **24 opérations et six mesures publiques complètes**, sur deux scènes synthétiques indépendantes, avec **1 786 fichiers originaux vérifiés avant et après**. Le chemin froid de l'appelant réel couvre le contact stationnaire, la restauration depuis le magasin commun, la question Workshop, WHY/ACT et l'acquisition unique du retour sans effet. Il ne revendique aucun niveau gagné.
+
+Les [onze régressions publiques déclarées avant rejeu](lot7b-evidence/followup-recovery/contract/regression-cases-final.json) conservent **17 comparaisons strictes par cas, soit 187 attendues**. Les dix premières reprennent les entrées publiées de Site 95 ; KATA reprend la trajectoire fraîche de 6A et conserve cette provenance explicite. La [série complète](lot7b-evidence/followup-recovery/integrated-final/regressions/regressions/regression-summary.json) est **réussie : 11/11 cas et 187/187 comparaisons**. Les trois modules qui chargent la géométrie LKEY historique sont exclus du périmètre frais ; leurs résultats publiés restent historiques. L'[horloge LKEY](lot7b-evidence/followup-recovery/coordination/lkey-closed-clock.json) reste fermée à **2 390,347106991 s cumulées**, sans remise à zéro ni nouvel essai. L'ancien résultat navigateur de trois niveaux en 44 actions n'est pas une preuve du nouveau gel.
+
+### Répétition propre acceptée : coût global et isolation qualifiés
+
+La [nouvelle fenêtre complète](lot7b-evidence/followup-recovery/performance-clean-repeat/window.json) a été exécutée le **11 novembre 2026 de 12:22:07 à 12:31:04 UTC−03**, soit **15:22:07.889158–15:31:04.565927 UTC**, dans l’ordre **A1/B1/B2/A2**. Elle conserve **32 sessions mesurées / 400 actions**, avec seulement **huit chauffes / 24 actions exclues**. La [vérification stricte](lot7b-evidence/followup-recovery/performance-clean-repeat/strict-work-verification.json) retrouve les signatures exactes des **40/40 essais**, chauffes comprises ; aucune forme fonctionnelle n’a été recapturée. La [revue arithmétique indépendante](lot7b-evidence/followup-recovery/performance-clean-repeat/consolidation-review.json) passe **231/231 contrôles**.
+
+La [décision globale](lot7b-evidence/followup-recovery/performance-clean-repeat/global-budget-decision.json) accepte **2/2 jeux** contre **Site 97 / native 0.60**, sur les médianes groupées des huit sessions par jeu et version :
+
+| Jeu | Médiane complète 0.60, ms | Médiane complète 0.61, ms | Variation globale | Décision |
+| --- | ---: | ---: | ---: | --- |
+| STCK | 11 303,262202 | 10 972,7514245 | **−2,924030 %** | Accepté |
+| SMLP | 16 919,6392275 | 16 921,174498 | **+0,009074 %** | Accepté |
+
+Chaque jeu reste **strictement sous +10 %**, sans compensation entre jeux, moyenne de ratios de cohortes ou addition de phases imbriquées. Conformément à la règle utilisateur, les dépassements de phase restent admissibles et visibles : la [comparaison agrégée](lot7b-evidence/followup-recovery/performance-clean-repeat/combined-comparison.json) conserve **14/16 diagnostics dans le seuil**, avec restauration **STCK +19,386244 %** et **SMLP +17,331942 %**. Les trois dépassements de cohorte sont également conservés : cohorte 1, restauration **STCK +19,386244 %** et **SMLP +20,346903 %** ; cohorte 2, restauration **SMLP +32,116928 %**. Le [rapport complet](lot7b-evidence/followup-recovery/performance-clean-repeat/results.md) conserve toutes les sessions, les diagnostics et les p95 disponibles, dont la hausse de p95 de la garde de préfixe SMLP en cohorte 1.
+
+La [requalification d’isolation](lot7b-evidence/followup-recovery/performance-clean-repeat/isolation-revalidation.json), acceptée à **12:31:59 UTC−03**, lie le même commit source `965e2dbe38c1a484a3dc1f5d79e5dcec03d55b03`, le digest natif `f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279` et les preuves fonctionnelles inchangées. Le [verrou exclusif](lot7b-evidence/followup-recovery/performance-clean-repeat/lock-window.json) est resté détenu jusqu’à la vérification stricte des 40 essais. Les états des trois voies actives, au début, à la fin et à l’acceptation, sont identiques hors horodatages. Le calme a été libéré après acceptation. **Seule cette répétition complète fournit le coût isolé éligible : aucune sélection ni mise en commun avec la première fenêtre.**
+
+### Première fenêtre conservée, intégralement inéligible pour le coût isolé
+
+L’[incident de calme déclaré par le lot 5C](lot7b-evidence/followup-recovery/coordination/quiet-deviation-acknowledgment.json) concerne **deux recherches récursives ayant émis environ 175–178 Mo chacune**, dans l’intervalle conservateur **11:19:51–11:22:52.050157 UTC−03**. Il chevauche la fenêtre ABBA ci-dessous. La même pièce conserve l’exception distincte du démarrage 6B, comprenant des lectures Git pendant cette première fenêtre. Aucune ampleur d’effet n’est attribuée à ces exceptions. L’isolation de toute cette première fenêtre reste disqualifiée et son acceptation de livraison retirée, même après réussite de la répétition propre. Les anciens échantillons et reçus restent inchangés ; aucune session ou cohorte n’est soustraite ou mélangée avec la nouvelle fenêtre.
+
+La [fenêtre officielle](lot7b-evidence/followup-recovery/performance/window.json), le **11 novembre 2026 de 11:17:29 à 11:26:42 UTC−03**, a conservé l’ordre **A1/B1/B2/A2**, **32 sessions mesurées et 400 actions**. Seules les **huit chauffes et leurs 24 actions** sont exclues. La [vérification stricte](lot7b-evidence/followup-recovery/performance/strict-work-verification.json) retrouve les quatre formes déclarées dans **40/40 essais**, chauffes comprises, après les huit captures fonctionnelles et leurs 62 actions. Aucune exemption structurelle ni tolérance de bruit supplémentaire n’est introduite.
+
+La [décision globale historique](lot7b-evidence/followup-recovery/performance/global-budget-decision.json) conserve son verdict numérique **2/2 jeux sous le seuil** contre la référence publiée **Site 97 / native 0.60**. Ce reçu n’est pas réécrit, mais ne vaut plus acceptation de coût isolé ni qualification finale de livraison. La [revue arithmétique](lot7b-evidence/followup-recovery/performance/consolidation-review.json) passe **231/231 contrôles**.
+
+| Jeu | Médiane complète 0.60, ms | Médiane complète 0.61, ms | Variation globale |
+| --- | ---: | ---: | ---: |
+| STCK | 11 263,783 | 11 930,440 | **+5,918585 %** |
+| SMLP | 17 008,792 | 17 230,659 | **+1,304421 %** |
+
+**Les résultats numériques de cette première fenêtre restent strictement sous +10 %, mais l’acceptation de coût est retirée faute d’isolation.** La règle utilisateur, appliquée inchangée à la répétition propre acceptée, est la suivante : une phase au-delà de +10 % peut être acceptée si le global passe séparément pour STCK et SMLP. Les médianes des phases imbriquées ne sont pas additionnées, aucun jeu ne compense l’autre et aucun ratio de cohorte n’est moyenné.
+
+Les **16/16 diagnostics agrégés** sont dans le budget observé. Les cohortes conservent **15/16 puis 12/16** : restauration SMLP **+12,905976 %** en cohorte 1 ; restauration STCK **+50,299402 %**, service de préfixe SMLP **+18,203364 %**, requête de préfixe SMLP **+11,296129 %** et acquisition/persistance SMLP **+13,698573 %** en cohorte 2. Ces dépassements, les p95 disponibles et toutes les sessions restent dans le [rapport complet](lot7b-evidence/followup-recovery/performance/results.md). Aucun échantillon mesuré n’est retiré.
+
+L’ancien [reçu de clôture d’isolation](lot7b-evidence/followup-recovery/performance/coordinated-isolation-completion.json) et le [contrôle des entrées de publication](lot7b-evidence/followup-recovery/integrated-final/publication-inputs.json) restent conservés. Le verrou exclusif consigné n’a pas empêché les scans non coordonnés : ces reçus ne suffisent plus à qualifier l’isolation ni l’acceptation de coût. Leur état historique reste inchangé, avec les deux passages B liés au même commit `78220117e6cbd315098c98effd647a07825cc4da`. Le [complément d’audit](lot7b-evidence/followup-recovery/integrated-final/post-publication-audit/closure.json), son [amendement préalable à la mesure](lot7b-evidence/followup-recovery/tools/migration-audit-closure-amendment.json) et sa [revue indépendante](lot7b-evidence/followup-recovery/tools/independent-audit-closure-review.json) conservent la seule alerte initiale et sa résolution vérifiée ; les contrôles du coût restent inchangés.
+
+Ces mesures portent sur la boucle commune de STCK/SMLP. Elles excluent moteur de jeu, réseau de production et rendu navigateur ; elles ne démontrent ni le coût maximal d’une recherche Workshop positive ni la stabilité de sessions de plusieurs heures.
+
+### Publication et clôture documentaire
+
+Le [transport effectif](lot7b-evidence/followup-recovery/publication/source-transport-completion.json) conserve **cinq envois ordinaires de sources**, sans forçage, et **375 comparaisons exactes** des 75 membres applicatifs. Le [dernier contrôle](lot7b-evidence/followup-recovery/publication/final-source-recheck.json) lie le commit publié, le worker validé et le reçu d’acceptation engagé dans Git. Les 97 194 778 octets bruts d’objets nouveaux sont répartis sous la borne déclarée par envoi ; cette mesure n’est pas une taille de transport réseau.
+
+La clôture documentaire **Site 99**, commit `61e176b42234db380f23aaace216e6bd2bfe7491`, est terminée avec le statut `succeeded` à **11:49:50 UTC−03**. Elle conserve le code natif, les tests, les entrées de compilation et les membres applicatifs de **Site 98 / native 0.61**. La correction **Site 100**, commit `5f8ca04cbf69cf2ccf7d2aba64a4cfde2a280613`, a été déployée avec succès à **12:17:03.733262 UTC−03** pour retirer la qualification de la première fenêtre, avec les mêmes sources et membres applicatifs. La répétition propre a ensuite qualifié le coût à **12:31:59 UTC−03**. La publication de cette clôture documentaire finale sera consignée séparément après son déploiement ; aucun numéro de Site futur n’est attribué ici.
+
+### Feuille de route actualisée après publication
+
+Le [registre publié du complément](v6-entry-point-progress.json) atteint **63/76 entrées raccordées, soit 82,9 %, zéro partielle et 13 restantes** : `goal_access` 11/12, `window_constraints` 21/21, `surface` 10/10 et `factored_material_return` 21/33. Ce gain d'entrée provient de 6A ; le complément Workshop n'en ajoute pas. L'[audit actuel](v6-coverage.json) compte **195 composants vérifiés, 148 transferts partiels, 1 026 modules en attente et zéro module entièrement vérifié**, sur 1 369 modules Python et 417 fichiers de données. **Les six portes de migration complète restent fausses.** Ces compteurs décrivent le gel reconstruit effectivement publié dans Site 98.
+
+| Voie | État et prochaine étape |
+| --- | --- |
+| **6A / 0.60** | **Livré dans Sites 96–97** et réconcilié ; coût global accepté, STCK **+6,094357 %**, SMLP **+3,262812 %**. Prochaine capacité de ce fil : **6B / `selected_rigid`**, après les priorités sérialisées 10B puis 5C. |
+| **Complément 7 / 0.61** | **Terminé et qualifié** : native publié dans Site 98, documentation dans Sites 99–100 ; répétition propre acceptée, **STCK −2,924030 % / SMLP +0,009074 %**. **5 042 tests**, cinq contrôles avec audit réconcilié et **187 comparaisons** inchangés. Toute la première fenêtre reste inéligible et conservée comme historique. |
+| **10B / 0.62** | **Prochaine étape : `window_question`.** Le prédécesseur 0.61 est désormais qualifié ; poursuivre l’intégration, la validation puis la fenêtre de coût et la publication propres à 10B. |
+| **5C / 0.63** | `observed_object_binding`, après 10B et les prédécesseurs publiés. Conserver ses preuves de composant distinctes de la future validation intégrée et de son coût. |
+| **Lots 7A/7B et lot 4** | Clos dans leurs périmètres déjà publiés ; aucune preuve historique perdue n'est réattribuée au candidat actuel. |
+| **Lots 8, 9 et 11 ; sessions longues** | Restent planifiés selon leurs contrats. Les réserves de parité complète, de compaction et de latence des sessions longues restent ouvertes. |
+
+La séquence convenue est **6A / 0.60 → complément 7 / 0.61 → 10B / 0.62 → 5C / 0.63 → 6B / `selected_rigid`**, avec publication et fenêtre de coût sérialisées. **6A et native 0.61 sont publiés et qualifiés ; 10B constitue la prochaine étape, puis 5C et 6B.** Les sections suivantes conservent les faits des jalons antérieurs dans leurs périmètres propres.
+
+<!-- LOT7_FOLLOWUP_RECOVERY_END -->
+
 <!-- LOT6A_ROADMAP_CURRENT_START -->
 
-## Jalon courant : lot 6A PreviewPacking — livré dans Site 96
+## Prédécesseur livré : lot 6A PreviewPacking — Sites 96–97
 
 **`preview_packing` est raccordé au moteur natif 0.60, avec un propriétaire unique, des commandes gardées et une acquisition réservée aux retours réellement sélectionnés.** La [publication privée réelle](lot6a-evidence/publication/native-publication.json) est confirmée **Site 96 / native 0.60.0**, commit `cdaceea1c8918430a70b95fa427b31fcd22d290c`, statut terminal `succeeded`. L’URL existante et l’audience propriétaire seul sont préservées.
 
@@ -515,7 +633,7 @@ Les entrées restantes du tableau décrivent le **gel 6A / native 0.60 : 63/76 e
 | 3 | Mémoire commune et compositions | **0 au registre** | Propriétaire commun, acquisition et contrats de continuation | **3A, 3B, 3E, 3F, 3H et 3I clôturés dans leurs périmètres.** 3C/3D conservent CWSE/SK48 ; 3G garde sa réserve de contribution propre en jeu. **3I / 0.50 : RecurrentSeries et son repli SupportedLine, CONN trois niveaux/21 actions, validation formelle, cinq rejeux, intégrité et coût global acceptés.** Publication confirmée : Site 79. Façade à six branches sur six ; aucune réserve historique effacée. |
 | 4 | Exemples, correspondances et retours discriminants | **0 au registre** | Observations, callbacks SRC, gardes et mémoire propre | **4A, 4B et 4C livrés ; lot 4 clos dans ses périmètres annoncés**, 4C publié dans Site 92/native 0.57, branches simples et composées, ISOS trois niveaux/douze actions. **Coût global accepté et publication privée confirmée.** |
 | 5 | Temps, adressage et liaisons | **1** | Historique public ; contrat de conservation pour les consommateurs concernés | **5A publié dans Sites 84–85 / 0.53. 5B/native 0.58 est livré dans Site 94, intègre les prédécesseurs Sites 92/93 et conserve sa validation technique ainsi que son coût global accepté.** Prochaine capacité du lot 5 : **5C, `observed_object_binding`**. Stock commun borné à 8/17 étapes ; sessions longues et WEAV6 restent réservés. |
-| 6 | Pièces rigides, cargaisons et stabilisation commune | **3** | Géométrie, contrôles, recherche bornée et interruption | **6A `preview_packing` : livré dans Site 96.** Prochaine capacité : **6B `selected_rigid`**, puis 6C `observed_rigid_cargo` et 6D `shared_settlement`. |
+| 6 | Pièces rigides, cargaisons et stabilisation commune | **3 ouvertes à la publication ; 2 sans raccordement dans le candidat 6B** | Géométrie, contrôles, recherche bornée et interruption | **6A livré. 6B `selected_rigid` : développement fonctionnel vérifié**, KLOT trois niveaux/38 actions, intégration finale et coût à venir. Puis 6C `observed_rigid_cargo` et 6D `shared_settlement`. |
 | 7 | Ateliers et transactions symboliques | **0 au registre** | Interfaces mesurées, SRC et mémoire des méthodes | **Transferts 7A/7B clos** : 7A Sites 82–83/native 0.52, 7B Sites 88–89/native 0.55, coûts acceptés et propriétaires distincts. **Suivi LKEY L3 séparé**, sans requalifier les échecs ni effacer la réserve de continuation. |
 | 8 | Accès conditionné et routage de branches | 2 | Calibration des commandes et préfixes gardés | Planifié |
 | 9 | Navigation, régions et canaux | 3 | Graphes, retours publics et budgets courants | Planifié ; Recolor déjà acquis |
@@ -889,6 +1007,8 @@ Les preuves de développement gardent leur portée propre : **81 tests différen
 **Critères de fin :** reprise depuis la phase observée et arrêt sur divergence ; adressage lié à l'objet/contexte courants ; ancienne liaison invalidée par ambiguïté, déplacement pertinent ou nouvelle portée ; parent conservé jusqu'à effet attesté, réfutation ou frontière, avec effet sur la décision suivante ; interruption/restauration préservant connaissances et obligations.
 
 ## Lot 6 : pièces rigides, cargaisons et stabilisation
+
+**Mise à jour 6B :** le candidat raccorde `selected_rigid` et réussit KLOT sur trois niveaux, avec comparaison originale indépendante sans différence. Sa clôture attend les prédécesseurs publiés et les qualifications finales ; voir le jalon de développement en tête.
 
 **Entrées :** `preview_packing`, `selected_rigid`, `observed_rigid_cargo`, `shared_settlement`.
 
