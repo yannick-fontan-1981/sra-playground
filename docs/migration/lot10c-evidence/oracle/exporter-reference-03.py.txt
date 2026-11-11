@@ -1,0 +1,475 @@
+#!/usr/bin/env python3
+"""Execute unchanged pinned OrderedRecruitment/V5 originals on synthetic inputs.
+
+Rasters are constructed from the source's public geometric constraints. No
+native implementation, private game engine, game dispatch or learned live state
+is read. Every pinned original is checked before and after execution.
+"""
+from __future__ import annotations
+import argparse
+from collections import Counter
+from copy import deepcopy
+from datetime import datetime, timezone
+import fcntl
+import gzip
+import hashlib
+import json
+from pathlib import Path
+import sys
+import tempfile
+from types import SimpleNamespace
+from unittest.mock import patch
+
+ROOT = Path(__file__).resolve().parents[1]
+COMMIT = '786dcf51ca57773d8e3a8948ce9ea3655e7baf8e'
+SOURCE = ROOT / 'reference/v6' / COMMIT / 'source'
+sys.dont_write_bytecode = True
+
+
+def encoded(value):
+    return json.dumps(value, ensure_ascii=False, allow_nan=False, sort_keys=True, separators=(',', ':')).encode()
+
+
+def plain(value):
+    if hasattr(value, 'model_dump'): return plain(value.model_dump())
+    if hasattr(value, 'items'): return {str(k): plain(v) for k, v in value.items()}
+    if isinstance(value, (list, tuple)): return [plain(v) for v in value]
+    if isinstance(value, (set, frozenset)): return [plain(v) for v in sorted(value)]
+    return value
+
+
+def verify_sources():
+    manifest = json.loads((SOURCE.parent / 'manifest.json').read_text())
+    assert manifest['commit'] == COMMIT and len(manifest['files']) == 1786
+    for name, record in manifest['files'].items():
+        raw = (SOURCE / name).read_bytes()
+        assert len(raw) == record['bytes'] and hashlib.sha256(raw).hexdigest() == record['sha256'], name
+    return manifest
+
+
+def capture(call):
+    try: return {'value': plain(call())}
+    except Exception as error:
+        result = {'name': type(error).__name__, 'message': str(error)}
+        if hasattr(error, 'cause'): result['cause'] = error.cause
+        if hasattr(error, 'frontier'): result['frontier'] = plain(error.frontier)
+        return {'error': result}
+
+
+def box(rows, left, top, right, bottom, color, outline=False):
+    for y in range(top, bottom + 1):
+        for x in range(left, right + 1):
+            if not outline or x in (left, right) or y in (top, bottom): rows[y][x] = color
+
+
+def inward_coordinates(n):
+    # Independent construction by sorted rings and perimeter position. This is
+    # an input layout, not a copied expected queue or a native measurement.
+    points = [(x, y) for y in range(n) for x in range(n)]
+    def position(point):
+        x, y = point; ring = min(x, y, n - 1 - x, n - 1 - y)
+        left = top = ring; right = bottom = n - 1 - ring; edge = right - left
+        if y == top: offset = x - left
+        elif x == right: offset = edge + y - top
+        elif y == bottom: offset = 2 * edge + right - x
+        else: offset = 3 * edge + bottom - y
+        return ring, offset
+    return sorted(points, key=position)
+
+
+def raster(queues=None, enemies=None, phase='COMBAT', quota=1, quotas=None,
+           palette=((2, 3), (10, 11), (12, 13)), vertical=False, shift=(0, 0),
+           link_directions=None, fill_links=False):
+    queues = [[0], []] if queues is None else deepcopy(queues)
+    enemies = [[1], [2]] if enemies is None else deepcopy(enemies)
+    assert len(queues) == len(enemies) and len(queues) >= 2
+    count = len(queues); quotas = [1] * count if quotas is None else list(quotas)
+    dx, dy = shift; top = 18 + dy
+    positions = [(2 + dx + (0 if vertical else 28 * i), top + (18 * i if vertical else 0)) for i in range(count)]
+    room_bottom = max(y + 12 for x, y in positions); button_top = room_bottom + 12
+    width = max(58 + dx, max(x + 23 for x, y in positions)); height = button_top + 13
+    rows = [[0] * width for _ in range(height)]
+    for index, pair in enumerate(palette):
+        y = 1 + 5 * index + dy
+        following = palette[(index + 1) % len(palette)]
+        for x, value in zip((1 + dx, 5 + dx), pair): box(rows, x, y, x + 2, y + 2, value)
+        for x, value in zip((14 + dx, 18 + dx), following): box(rows, x, y, x + 1, y + 1, value)
+        rows[y][10 + dx] = 5; rows[y + 1][11 + dx] = 5; rows[y + 2][10 + dx] = 5
+    for index, ((left, y), queue, enemy) in enumerate(zip(positions, queues, enemies)):
+        box(rows, left, y, left + 20, y + 12, 7, outline=True)
+        xs_left = [left + 3, left + 5, left + 7]; xs_right = [left + 13, left + 15, left + 17]
+        ys = [y + 3, y + 5, y + 7]
+        for yy in ys:
+            for xx in xs_left + xs_right: rows[yy][xx] = 1
+        for queue_values, xs, camp in ((queue, list(reversed(xs_left)), 0), (enemy, xs_right, 1)):
+            for typ, (u, v) in zip(queue_values, inward_coordinates(3)):
+                rows[ys[v] - 1][xs[u] - 1] = palette[typ][camp]
+            if queue_values: rows[ys[0]][xs[0]] = 14
+        for token in range(quotas[index]): rows[y + 10][left + 3 + 2 * token] = 6
+    for i in range(count - 1):
+        x, y = positions[i]; direction = 1 if link_directions is None else link_directions[i]
+        if vertical:
+            center = (x + 10, y + 15)
+            tip = (center[0], center[1] + direction)
+            wings = [(center[0] - 1, center[1]), (center[0] + 1, center[1])]
+        else:
+            center = (x + 24, y + 6)
+            tip = (center[0] + direction, center[1])
+            wings = [(center[0], center[1] - 1), (center[0], center[1] + 1)]
+        for xx, yy in [tip, *wings, *([center] if fill_links else [])]: rows[yy][xx] = 4
+    if phase == 'RECRUIT':
+        left, y = 2 + dx, room_bottom + 4
+        box(rows, left, y, left + max(10, 2 * quota + 2), y + 4, 7, outline=True)
+        for token in range(quota): box(rows, left + 2 + 2 * token, y + 1, left + 2 + 2 * token, y + 3, 7)
+    for index, pair in enumerate(palette):
+        x = 2 + dx + index * 10
+        box(rows, x, button_top, x + 5, button_top + 9, 7 if phase == 'RECRUIT' else 8, outline=True)
+        rows[button_top + 4][x + 2] = pair[0]
+    return rows
+
+
+def build_cases(geometry, projection, Family, Policy, reduction, mechanical, observe, probes, executed):
+    groups = {key: [] for key in ('geometryCases', 'projectionCases', 'cases', 'policyCases', 'reductionCases', 'constructorCases', 'nativeAdaptationCases')}
+    raw_results = {}
+    def observation(rows, revision=1, epoch=1, actions=None):
+        packet = SimpleNamespace(frame_rows=rows,
+            frame_hash=hashlib.sha256(json.dumps(rows, separators=(',', ':')).encode()).hexdigest()[:16],
+            level=epoch, levels_completed=epoch - 1, state='NOT_FINISHED',
+            available_action_refs=tuple(['ACTION1', 'ACTION5', 'ACTION6'] if actions is None else actions))
+        return plain(observe(packet, revision, 'ordered:synthetic')[0])
+    def geom(name, operation, arguments, native_operation=None):
+        result = capture(lambda: getattr(geometry, operation)(*deepcopy(arguments)))
+        row = {'id': name, 'operation': native_operation or {
+            'measure': 'measureOrderedRecruitment', 'digest': 'recruitmentDigest', 'rectangles': 'recruitmentRectangles',
+            'legend': 'recruitmentLegend', 'spiral': 'recruitmentSpiral', 'lattice_subsets': 'recruitmentLatticeSubsets',
+            'connector': 'recruitmentConnector'}[operation], 'arguments': plain(arguments), **result}
+        groups['geometryCases'].append(row); return row
+    def projected(name, measurement, config=None, remaining=8):
+        cfg = deepcopy(config if config is not None else policy.config)
+        arguments = [deepcopy(measurement), cfg, deepcopy(obs1), remaining]
+        def calls(name): return sum(count for (_, _, function), count in executed.items() if function == name)
+        before_kernel, before_lookup = calls('measure_ordered_front_reduction_d'), calls('alternatives.<locals>.reduce')
+        result = capture(lambda: projection.alternatives(*arguments))
+        kernel_calls, lookups = calls('measure_ordered_front_reduction_d') - before_kernel, calls('alternatives.<locals>.reduce') - before_lookup
+        row = {'id': name, 'arguments': plain(arguments), 'sourceKernelCalls': kernel_calls, 'sourceReductionLookups': lookups, 'sourceCacheHits': lookups - kernel_calls, **result}
+        groups['projectionCases'].append(row); return row
+    def family_case(name, operation, arguments, seed=None, duplicate_offers=False):
+        owner = Family()
+        if seed is not None: owner.restore(deepcopy(seed))
+        before = plain(owner.state()); args = deepcopy(arguments)
+        if operation == 'beforeSource': args[2] = SimpleNamespace(**args[2])
+        if duplicate_offers:
+            original = owner.offers
+            def duplicate(*values):
+                offers, measurement = original(*values); return offers + deepcopy(offers), measurement
+            owner.offers = duplicate
+        method = {'proposeSource': 'propose', 'beforeSource': 'before', 'recordSource': 'record'}.get(operation, operation)
+        try:
+            value = getattr(owner, method)(*args); raw_results[name] = deepcopy(value)
+            outcome = {'value': plain(value)}
+        except Exception as error:
+            outcome = {'error': {'name': type(error).__name__, 'message': str(error)}}
+        row = {'id': name, 'operation': operation, 'arguments': plain(arguments), 'seedState': before,
+            'beforeState': before, **outcome, 'afterState': plain(owner.state())}
+        if duplicate_offers: row['controlledDependency'] = 'duplicate_exact_current_offers'
+        groups['cases'].append(row); return row
+    def policy_case(name, offers):
+        row = {'id': name, 'offers': plain(offers), 'select': plain(policy.select(deepcopy(offers))),
+            'choose': plain(policy.choose(deepcopy(offers)))}
+        groups['policyCases'].append(row); return row
+    def constructor(name, operation, argument):
+        model = {'normalizeDuelOccurrenceD': reduction.DuelOccurrenceD, 'normalizeHeadDuelRuleD': reduction.HeadDuelRuleD,
+            'normalizeOrderedFrontReductionRequestD': reduction.OrderedFrontReductionRequestD}[operation]
+        row = {'id': name, 'operation': operation, 'argument': plain(argument),
+            **capture(lambda: model.model_validate(deepcopy(argument)))}
+        groups['constructorCases'].append(row); return row
+    def request(left=(0,), right=(1,), rank_rule='KEEP', rank_value=None, **changes):
+        scope = {'request_ref': 'ordered:synthetic:request', 'caller_ref': 'ordered:synthetic:caller',
+            'parent_consumer_ref': 'G_official_completion', 'parent_goal_ref': 'G_official_completion',
+            'parent_contribution_ref': 'synthetic_survival_projection', 'caller_next_item_ref': 'inspect_current_heads',
+            'epoch': 1, 'evidence_revision_ref': 'ordered:synthetic:observation:1', 'model_revision_ref': 'ordered:synthetic:model:1',
+            'model_status_ref': 'conditional_not_acquired_full_law', 'event_owner_ref': 'current_public_question',
+            'input_domain_complete': True, 'assumption_refs': ['synthetic_current_relation']}
+        def occurrences(values, camp):
+            return [{'occurrence_ref': f'{camp}:{i}', 'type_ref': f'type:{typ}', 'camp_ref': camp, 'rank': i}
+                    for i, typ in enumerate(values)]
+        rules = [{'left_type_ref': f'type:{a}', 'right_type_ref': f'type:{b}',
+            'result': 'TIE' if a == b else 'LEFT' if (a + 1) % 3 == b else 'RIGHT',
+            'winner_rank_rule': rank_rule, 'winner_rank_value': rank_value, 'law_evidence_ref': f'synthetic:relation:{a}:{b}'}
+            for a in range(3) for b in range(3)]
+        body = {'scope': scope, 'operation_ref': 'mechanics.typed_word_transduction.ordered_front_reduction',
+            'mode_ref': 'STEP_INTERNAL', 'requested_result_type': 'DMechanicalResult', 'node_bound': 4096,
+            'depth_bound': 4096, 'domain_bound': 4096, 'time_bound_ms': 1000, 'phase_ref': 'INTERNAL_ENGAGEMENT',
+            'left_queue': occurrences(left, 'player'), 'right_queue': occurrences(right, 'enemy'),
+            'left_camp_ref': 'player', 'right_camp_ref': 'enemy', 'head_rules': rules, 'tie_rule': 'REMOVE_BOTH',
+            'closure_scope': 'engagement', 'parent_command_ref': 'hypothetical_engage',
+            'left_queue_revision_ref': 'ordered:synthetic:observation:1', 'right_queue_revision_ref': 'ordered:synthetic:observation:1',
+            'completed_duel_cursor': 0}
+        body.update(changes); return body
+    def reduced(name, body, clocks=(0,)):
+        count = 0
+        def clock():
+            nonlocal count
+            value = clocks[min(count, len(clocks) - 1)] / 1000; count += 1; return value
+        model = reduction.OrderedFrontReductionRequestD.model_validate(deepcopy(body))
+        with patch.object(mechanical, 'monotonic', clock):
+            result = capture(lambda: reduction.measure_ordered_front_reduction_d(model))
+        row = {'id': name, 'request': plain(body), 'normalizedRequest': plain(model),
+            'inputDigest': mechanical.d_input_digest(model), 'clockMilliseconds': list(clocks), 'clockCalls': count, **result}
+        groups['reductionCases'].append(row); return row
+
+    policy = Policy()
+    initial = probes['combat']['rows']; edited = probes['calibrated_recruit']['rows']; engaged = probes['next_combat']['rows']
+    initial_m = geometry.measure(initial); order = initial_m['order']; edited_m = geometry.measure(edited, order)
+    engaged_m = geometry.measure(engaged, order)
+    obs0, obs1, obs2 = observation(initial, actions=['ACTION5']), observation(edited, 2), observation(engaged, 3)
+    assert projection.summary(initial_m)['queue'] == [0] and projection.summary(initial_m)['enemy'] == [1]
+    assert projection.summary(edited_m) == {'room': 0, 'phase': 'RECRUIT', 'quota': 1, 'queue': [0], 'enemy': []}
+    assert projection.summary(engaged_m) == {'room': 1, 'phase': 'COMBAT', 'quota': None, 'queue': [0, 1], 'enemy': [2]}
+    with patch.object(mechanical, 'monotonic', lambda: 0.0):
+        for name, value in probes.items(): geom('measured_' + name, 'measure', [value['rows']])
+        geom('measured_next_with_retained_order', 'measure', [engaged, order])
+        geom('reversed_valid_order', 'measure', [initial, list(reversed(order))])
+        geom('missing_order_member', 'measure', [initial, order[:-1]])
+        geom('duplicate_order_member', 'measure', [initial, [*order, order[0]]])
+        geom('filled_connector', 'measure', [raster(fill_links=True)])
+        geom('reverse_connector_direction_is_not_progression_law', 'measure', [raster(link_directions=[-1])])
+        geom('translated_scene', 'measure', [raster(shift=(3, 2))])
+        geom('two_pair_legend', 'measure', [raster(enemies=[[1], [0]], palette=((2, 3), (10, 11)))])
+        geom('multiple_active_rooms', 'measure', [raster(queues=[[0], [1]])])
+        geom('no_active_room', 'measure', [raster(queues=[[], []])])
+        interior = raster(queues=[[], [0], []], enemies=[[], [1], [2]])
+        geom('interior_active_without_order', 'measure', [interior])
+        geom('interior_active_with_retained_order', 'measure', [interior, probes['three_rooms']['measurement']['order']])
+        geom('empty_frame', 'measure', [[]]); geom('zero_width_frame', 'measure', [[[]]])
+        for name, edits in [
+            ('missing_first_legend_relation', [(x, y, 0) for y in range(1, 4) for x in range(1, 20)]),
+            ('missing_button_field', [(4, 46, 0)]),
+            ('missing_front_marker', [(9, 21, 1)]),
+            ('extra_front_marker', [(7, 21, 14)]),
+            ('missing_third_lattice_point', [(5, 23, 0)]),
+            ('queue_hole_before_later_item', [(8, 20, 0), (6, 20, 2)]),
+            ('missing_chain_connector', [(26, 23, 0), (27, 24, 0), (26, 25, 0)]),
+        ]:
+            rows = deepcopy(initial)
+            for x, y, color in edits: rows[y][x] = color
+            geom(name, 'measure', [rows])
+        for n in range(0, 9): geom('spiral_' + str(n), 'spiral', [n])
+        points = [(x, y) for y in (2, 4, 6) for x in (2, 4, 6, 12, 14, 16)]
+        geom('complete_two_camp_lattice', 'lattice_subsets', [points])
+        geom('two_front_markers_missing_from_lattice', 'lattice_subsets', [points[1:-1]])
+        geom('three_lattice_points_missing', 'lattice_subsets', [points[2:-1]])
+        geom('rectangles_current_scene', 'rectangles', [initial])
+        geom('legend_from_actual_components', 'legend', [initial, geometry.components(initial)])
+        geom('horizontal_connector', 'connector', [initial, [23, 19, 29, 29], 0, 'horizontal'])
+        geom('wrong_connector_axis', 'connector', [initial, [23, 19, 29, 29], 0, 'vertical'])
+        geom('mixed_connector_colors', 'connector', [[[0, 4, 0], [0, 0, 5], [0, 4, 0]], [0, 0, 2, 2], 0, 'horizontal'])
+        geom('integer_type_keys_in_complete_measurement_digest', 'digest', [initial_m])
+        geom('integer_type_keys_in_offer_digest', 'digest', [{'measurement': initial_m, 'context': [True, None, 'é', 2]}])
+        geom('json_scalar_types_digest', 'digest', [[True, False, None, '10', 10, 2, 'é']])
+        noninteger = [True, False, None, '10', 10, 2.5, 'é']
+        groups['nativeAdaptationCases'].append({'id': 'non_integer_digest_native_boundary', 'operation': 'recruitmentDigest', 'argument': noninteger, 'sourceResult': capture(lambda: geometry.digest(noninteger)), 'nativeExpectedError': 'TypeError', 'qualification': 'The declared native V7 canonical scalar domain contains exact safe integers; the original general Python json.dumps digest also accepts noninteger floats. Its actual original digest is retained separately from the native refusal.'})
+
+        projected('current_combat_all_visible_rooms', initial_m, remaining=8)
+        ready_plans = projected('recruitment_unique_surviving_append', edited_m, remaining=2)
+        assert len(ready_plans['value'][0]) == 1 and ready_plans['value'][0][0]['steps'][0]['type'] == 1
+        projected('continuation_combat_last_room', engaged_m, remaining=1)
+        for remaining in (0, 1): projected('remaining_' + str(remaining), edited_m, remaining=remaining)
+        for key, value in [('queue_order_hypothesis', 'unknown'), ('append_hypothesis', 'front'), ('winner_hypothesis', 'ADD_ONE')]:
+            projected('unsupported_' + key, edited_m, {**policy.config, key: value})
+        for value in (None, 0, 9):
+            m = deepcopy(edited_m); m['quota'] = value; projected('quota_' + str(value), m)
+        incomplete = deepcopy(edited_m); incomplete['legend']['relations'] = incomplete['legend']['relations'][:1]
+        projected('incomplete_type_relation_is_not_impossibility', incomplete)
+        for tie in ('REMOVE_BOTH', 'KEEP_LEFT', 'KEEP_RIGHT', 'STOP'):
+            projected('declared_tie_' + tie, edited_m, {**policy.config, 'tie_hypothesis': tie})
+        for bound in (0, 1, 2, 3, 4): projected('search_bound_' + str(bound), edited_m, {**policy.config, 'search_bound': bound})
+        projected('three_visible_rooms_included', probes['three_rooms']['measurement'], remaining=7)
+        blocked_future = deepcopy(probes['three_rooms']['measurement']); blocked_future['rooms'][1]['quota_hypothesis'] = 0
+        blocked = projected('future_room_quota_missing_blocks_whole_chain', blocked_future, remaining=7)
+        assert blocked['value'][0] == []
+        reordered = deepcopy(edited_m); reordered['buttons'] = list(reversed(reordered['buttons']))
+        projected('button_input_order_does_not_replace_type_enumeration', reordered)
+
+        cold = family_case('cold_no_actual_contrast_no_proposal', 'proposeSource', [obs0, initial, [], 9])
+        assert cold['value'] is None
+        foreign = {'action_ref': 'ACTION5', 'data': {}}
+        passive = family_case('foreign_single_enemy_return_calibrates', 'recordSource', [obs0, obs1, foreign, initial, edited, None, 0, [initial, edited]], cold['afterState'])
+        assert len(passive['afterState']['methods']) == 1
+        family_case('calibration_omitted_command_data_source_boundary', 'recordSource', [obs0, obs1, {'action_ref': 'ACTION5'}, initial, edited])
+        no_effect = family_case('unchanged_return_does_not_calibrate', 'recordSource', [obs0, obs0, foreign, initial, initial])
+        assert no_effect['afterState']['methods'] == []
+        passive_no_change = family_case('kernel_passive_no_change_revision2', 'recordSource', [obs0, observation(initial, 2, actions=['ACTION5']), foreign, initial, initial, None, 0, [initial]], cold['afterState'])
+        family_case('foreign_command_identity_is_not_method_authority', 'recordSource', [obs0, obs1, {'action_ref': 'ACTION1'}, initial, edited])
+        family_case('cold_recruit_without_contrast_no_offer', 'proposeSource', [obs1, edited, [], 8])
+        offers = family_case('all_current_offers', 'offers', [obs1, edited, 8], passive['afterState'])
+        proposal = family_case('calibrated_current_recruitment_proposal', 'proposeSource', [obs1, edited, [], 8], passive['afterState'])
+        p = raw_results['calibrated_current_recruitment_proposal']; assert p is not None
+        assert p['recruitment_plan']['offer']['step']['type'] == 1
+        admitted = family_case('current_guard_recomputes_exact_offer', 'beforeSource', [p, 0, {'frame_rows': edited}, obs1], passive['afterState'])
+        assert admitted['value']['admitted'] is True
+        family_case('duplicate_exact_offer_guard_refuses', 'beforeSource', [p, 0, {'frame_rows': edited}, obs1], passive['afterState'], True)
+        for field, value in [('observation_ref', 'foreign'), ('level_epoch', 2), ('frame_hash', 'foreign')]:
+            family_case('guard_changed_' + field, 'beforeSource', [p, 0, {'frame_rows': edited}, {**obs1, field: value}], passive['afterState'])
+        family_case('guard_nonzero_index', 'beforeSource', [p, 1, {'frame_rows': edited}, obs1], passive['afterState'])
+        family_case('guard_changed_actual_scene', 'beforeSource', [p, 0, {'frame_rows': initial}, obs1], passive['afterState'])
+        altered = deepcopy(p); altered['actions'][0]['data']['x'] += 1
+        family_case('bind_rejects_inexact_action', 'bind', [altered, None], passive['afterState'])
+        family_case('after_never_promises_success_or_preservation', 'after', [p, 0, obs1, obs2, edited, engaged], passive['afterState'])
+        family_case('unavailable_current_point_action', 'proposeSource', [{**obs1, 'available_action_refs': ['ACTION5']}, edited, [], 8], passive['afterState'])
+        family_case('no_remaining_action', 'proposeSource', [obs1, edited, [], 0], passive['afterState'])
+        append = family_case('actual_append_reconciles_and_retains_suffix', 'recordSource', [obs1, obs2, p['actions'][0], edited, engaged, p, 0, [edited, engaged]], passive['afterState'])
+        assert append['afterState']['continuation'] is not None
+        continuation = family_case('continuation_reuses_validated_suffix', 'proposeSource', [obs2, engaged, [], 7], append['afterState'])
+        p2 = raw_results['continuation_reuses_validated_suffix']; assert p2 is not None
+        assert p2['recruitment_plan']['offer']['search'] == {'status': 'validated_suffix_retained_no_new_search'}
+        family_case('continuation_current_guard', 'beforeSource', [p2, 0, {'frame_rows': engaged}, obs2], append['afterState'])
+        failed = family_case('actual_no_effect_reconciles_false', 'recordSource', [obs1, {**obs1, 'observation_ref': 'ordered:noeffect'}, p['actions'][0], edited, edited, p, 0, []], passive['afterState'])
+        kernel_no_effect = family_case('kernel_actual_no_effect_revision3', 'recordSource', [obs1, observation(edited, 3), p['actions'][0], edited, edited, p, 0, [edited]], passive['afterState'])
+        family_case('tried_context_does_not_offer_again', 'proposeSource', [obs1, edited, [], 8], failed['afterState'])
+        invalid = deepcopy(edited); invalid[21][9] = 1
+        family_case('unmeasured_return_resets_order_and_continuation', 'recordSource', [obs1, obs2, p['actions'][0], edited, invalid, p], passive['afterState'])
+        family_case('unsupported_first_frame_is_passive_abstention', 'recordSource', [obs1, obs2, p['actions'][0], [[]], engaged], passive['afterState'])
+        new_rows = raster(shift=(2, 1)); new_obs = observation(new_rows, 4, 2)
+        boundary = family_case('actual_boundary_preserves_method_not_permit', 'recordSource', [obs2, new_obs, p2['actions'][0], engaged, new_rows, p2, 0, [engaged, new_rows]], append['afterState'])
+        assert boundary['afterState']['methods'] == [] and boundary['afterState']['portable'][0]['authority'] == 'revisable_method_not_current_permit'
+        portable = family_case('portable_method_requires_new_current_binding', 'proposeSource', [new_obs, new_rows, [], 8], boundary['afterState'])
+        family_case('old_guard_refuses_new_epoch', 'beforeSource', [p2, 0, {'frame_rows': new_rows}, new_obs], boundary['afterState'])
+        family_case('restore_partial_source_fields', 'restore', [{'methods': [], 'last': {'kept': True}}], append['afterState'])
+        family_case('state_exact_all_seven_fields', 'state', [], append['afterState'])
+
+        facts = {name: True for name in ('actual_interface_contrast', 'current_scene_revalidated', 'conditional_parent_survival', 'untried_context')}
+        def offer(kind='composition_question', cost=2, survivors=1, **extra): return {'kind': kind, 'facts': deepcopy(facts), 'cost': cost, 'survivors': survivors, **extra}
+        policy_case('empty_abstention', [])
+        policy_case('continuation_priority_before_cost', [offer(cost=1), offer('continuation', 99)])
+        policy_case('cost_before_survivors', [offer(cost=3, survivors=9), offer(cost=2, survivors=1)])
+        policy_case('more_survivors_before_enumeration', [offer(survivors=1), offer(survivors=2)])
+        policy_case('equal_priority_cost_survivors_keeps_first', [offer(), offer()])
+        policy_case('unknown_kind_refused', [offer('foreign')])
+        for field in facts:
+            policy_case('missing_fact_' + field, [offer(facts={key: value for key, value in facts.items() if key != field})])
+            policy_case('false_fact_' + field, [offer(facts={**facts, field: False})])
+        policy_case('python_bool_numeric_equality', [offer(facts={key: 1 for key in facts})])
+        policy_case('string_true_is_not_boolean_true', [offer(facts={key: 'true' for key in facts})])
+
+        for name, body in [('left_wins', request()), ('right_wins', request(left=(1,), right=(0,))),
+            ('both_empty', request(left=(), right=())), ('empty_left', request(left=())), ('empty_right', request(right=())),
+            ('consumed_prefix_preserves_order', request(left=(2, 0), right=(1, 1))),
+            ('rank_add_one', request(right=(1, 1), rank_rule='ADD_ONE')), ('rank_set', request(rank_rule='SET', rank_value=17)),
+            ('single_duel_scope', request(right=(1, 1), closure_scope='one_duel')),
+            ('signature_mismatch', request(operation_ref='foreign')), ('requested_type_mismatch', request(requested_result_type='Foreign')),
+            ('domain_bound', request(domain_bound=1)), ('node_bound', request(left=(0, 2), right=(1, 1), node_bound=1)),
+            ('depth_bound', request(right=(1, 1), depth_bound=1))]: reduced(name, body)
+        for tie in ('REMOVE_BOTH', 'KEEP_LEFT', 'KEEP_RIGHT', 'STOP'): reduced('tie_' + tie, request(left=(0, 1), right=(0, 2), tie_rule=tie))
+        missing = request(); missing['head_rules'] = [r for r in missing['head_rules'] if (r['left_type_ref'], r['right_type_ref']) != ('type:0', 'type:1')]
+        reduced('head_relation_not_bound', missing)
+        incomplete_scope = request(); incomplete_scope['scope']['input_domain_complete'] = False; reduced('input_domain_incomplete', incomplete_scope)
+        reduced('time_bound_before_visit', request(), (0, 1000))
+        reduced('time_bound_on_final_finish', request(), (0, 0, 1000))
+        suspended = next(row for row in groups['reductionCases'] if row['id'] == 'node_bound')['value']['frontier']
+        resume = request(left=(0, 2), right=(1, 1), resume_frontier=deepcopy(suspended))
+        reduced('resume_exact_consumed_prefix', resume)
+        for name, key, value in [('resume_wrong_command', 'parent_command_ref', 'foreign'), ('resume_wrong_digest', 'input_digest', '0' * 64),
+                                  ('resume_wrong_cursor', 'completed_duel_cursor', suspended['completed_duel_cursor'] + 1)]:
+            changed = deepcopy(resume); changed['resume_frontier'][key] = value; reduced(name, changed)
+        changed = deepcopy(resume); changed['resume_frontier']['left_queue'].reverse(); reduced('resume_wrong_ordered_suffix', changed)
+        base = request()
+        constructor('occurrence', 'normalizeDuelOccurrenceD', base['left_queue'][0])
+        constructor('numeric_rank_coercion', 'normalizeDuelOccurrenceD', {**base['left_queue'][0], 'rank': '2'})
+        constructor('boolean_rank_coercion', 'normalizeDuelOccurrenceD', {**base['left_queue'][0], 'rank': True})
+        constructor('rule', 'normalizeHeadDuelRuleD', base['head_rules'][0])
+        constructor('request_defaults', 'normalizeOrderedFrontReductionRequestD', base)
+        invalid_models = [
+            ('duplicate_occurrence_identity', {**base, 'left_queue': [base['left_queue'][0], base['left_queue'][0]]}),
+            ('wrong_occurrence_camp', {**base, 'left_queue': [{**base['left_queue'][0], 'camp_ref': 'enemy'}]}),
+            ('duplicate_relation', {**base, 'head_rules': [base['head_rules'][0], base['head_rules'][0]]}),
+            ('set_without_value', {**base, 'head_rules': [{**base['head_rules'][0], 'winner_rank_rule': 'SET'}]}),
+            ('zero_node_bound', {**base, 'node_bound': 0}), ('invalid_tie_rule', {**base, 'tie_rule': 'foreign'}),
+            ('negative_cursor', {**base, 'completed_duel_cursor': -1}), ('extra_request_key', {**base, 'invented': True})]
+        for name, value in invalid_models: constructor(name, 'normalizeOrderedFrontReductionRequestD', value)
+        for name, value in [('empty_occurrence_identity', {**base['left_queue'][0], 'occurrence_ref': ''}),
+                            ('extra_occurrence_key', {**base['left_queue'][0], 'invented': True})]: constructor(name, 'normalizeDuelOccurrenceD', value)
+        unsafe = {**base['left_queue'][0], 'rank': 2 ** 53}
+        groups['nativeAdaptationCases'].append({'id': 'unsafe_integer_rank_boundary', 'operation': 'normalizeDuelOccurrenceD',
+            'argument': unsafe, 'sourceResult': capture(lambda: reduction.DuelOccurrenceD.model_validate(unsafe)),
+            'nativeExpectedError': 'TypeError', 'qualification': 'Named exact portable-integer boundary. Original Python unbounded integer acceptance is retained, not claimed as native parity.'})
+    return {'groupCounts': {name: len(rows) for name, rows in groups.items()}, **groups,
+        'configuration': plain(policy.config), 'sourceDrmHash': policy.loaded.source_hash,
+        'kernelCold': {'qualification': 'Cold source sequence from public synthetic rows and actual supplied returns; no injected learned state or private game access.',
+            'initialRows': initial, 'recruitRows': edited, 'nextCombatRows': engaged,
+            'initialObservation': obs0, 'recruitObservation': obs1, 'nextCombatObservation': obs2,
+            'foreignCommand': foreign, 'stageRemaining': {'initial': 9, 'recruit': 8, 'continuation': 7, 'portable': 8},
+            'cold': cold, 'passive': passive, 'offers': offers, 'proposal': proposal, 'admitted': admitted,
+            'append': append, 'continuation': continuation, 'noEffect': kernel_no_effect, 'passiveNoChange': passive_no_change},
+        'kernelPortable': {'newRows': new_rows, 'newObservation': new_obs, 'boundary': boundary, 'proposal': portable},
+        'cooperative': {'measurement': plain(edited_m), 'config': plain(policy.config), 'observation': obs1, 'remaining': 8,
+            'sourceResult': next(row['value'] for row in groups['projectionCases'] if row['id'] == 'recruitment_unique_surviving_append')},
+        'summaryCases': [{'id': name, 'measurement': plain(m), 'value': plain(projection.summary(m))}
+                         for name, m in [('combat', initial_m), ('recruit', edited_m), ('next_combat', engaged_m)]]}
+
+
+def build(probe=False):
+    manifest = verify_sources(); executed = Counter(); prefix = str(SOURCE) + '/'
+    sys.path[:0] = [str(SOURCE), str(SOURCE / 'agents/yf_arc3_v6/laya_proto')]
+    def profile(frame, event, arg):
+        if event == 'call' and frame.f_code.co_filename.startswith(prefix):
+            executed[(frame.f_code.co_filename[len(prefix):], frame.f_code.co_firstlineno, frame.f_code.co_qualname)] += 1
+    sys.setprofile(profile)
+    try:
+        from agents.yf_arc3_v6.morphology_policy.ordered_recruitment import geometry, projection
+        from agents.yf_arc3_v6.morphology_policy.ordered_recruitment.family import OrderedRecruitment
+        from agents.yf_arc3_v6.morphology_policy.ordered_recruitment.policy import RecruitmentPolicy
+        from agents.yf_arc3_v5.capabilities import ordered_front_reduction_d as reduction
+        from agents.yf_arc3_v5.capabilities import mechanical_family_contracts_d as mechanical
+        from neutral_observer import measure as observe
+        cases = {}
+        for name, args in [('combat', {}), ('calibrated_recruit', {'enemies': [[], [2]], 'phase': 'RECRUIT'}),
+                           ('next_combat', {'queues': [[], [0, 1]], 'enemies': [[], [2]]}),
+                           ('vertical', {'vertical': True}), ('three_rooms', {'queues': [[0], [], []], 'enemies': [[1], [2], [0]]})]:
+            rows = raster(**args); cases[name] = {'rows': rows, 'measurement': geometry.measure(rows)}
+        if not probe: assert all(value['measurement'] is not None for value in cases.values()), {key: value['measurement'] is not None for key, value in cases.items()}
+        result = {'probe': cases, 'probeAllMeasured': all(value['measurement'] is not None for value in cases.values())} if probe else build_cases(geometry, projection, OrderedRecruitment, RecruitmentPolicy, reduction, mechanical, observe, cases, executed)
+    finally:
+        sys.setprofile(None)
+        after_manifest = verify_sources()
+        assert manifest == after_manifest
+    imported = {Path(module.__file__).resolve() for module in list(sys.modules.values()) if getattr(module, '__file__', None)
+                and Path(module.__file__).resolve().is_relative_to(SOURCE)}
+    imported.update(SOURCE / path for path, _, _ in executed)
+    for suffix in ('*.drm', '*.src'): imported.update((SOURCE / 'agents/yf_arc3_v6/morphology_policy/ordered_recruitment').glob(suffix))
+    return {'schema': 'logos-engine.v6.ordered-recruitment-reference.v1', 'referenceCommit': COMMIT,
+        'sourceModified': False, 'fullCallerParity': False,
+        'sourceFilesVerifiedBefore': len(manifest['files']), 'sourceFilesVerifiedAfter': len(after_manifest['files']),
+        'sourceFilesVerifiedBeforeAndAfter': len(manifest['files']),
+        'generator': {'path': Path(__file__).relative_to(ROOT).as_posix(), 'sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest()},
+        'qualification': 'Unchanged original Python executed on synthetic public rasters, independently constructed geometric inputs and controlled returns. No native output is used as an oracle. No game dispatch, private engine, solved-level or full caller parity claim.',
+        'clockQualification': 'The external DWorkBudget monotonic dependency is fixed for deterministic finite-work source comparisons. Dedicated budget cases retain their actual supplied clock sequence and call count.',
+        'sourceHashes': {path.relative_to(SOURCE).as_posix(): hashlib.sha256(path.read_bytes()).hexdigest() for path in sorted(imported)},
+        'executedSourceFunctions': [{'path': path, 'line': line, 'function': name, 'calls': calls} for (path, line, name), calls in sorted(executed.items())], **result}
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output', type=Path, default=ROOT / 'tests/fixtures/v6-ordered-recruitment-reference.json.gz')
+    parser.add_argument('--probe', action='store_true')
+    parser.add_argument('--coordination-lock', type=Path, default=Path('/workspace/shared/sra-coordination/performance.lock'))
+    args = parser.parse_args(); output = args.output.resolve()
+    if output.exists() or not output.is_relative_to(ROOT) or output.is_relative_to(SOURCE.parent) or not output.name.endswith('.json.gz'):
+        parser.error('Supply a new .json.gz path in this checkout, outside pinned originals')
+    with args.coordination_lock.open('a') as lock:
+        fcntl.flock(lock.fileno(), fcntl.LOCK_SH | fcntl.LOCK_NB)
+        with tempfile.TemporaryDirectory(prefix='ordered-original-reference-') as cache:
+            sys.pycache_prefix = cache
+            value = build(args.probe)
+            value['bytecodeIsolation'] = {'dontWriteBytecode': True, 'freshPrefixEmptyAfter': not any(Path(cache).rglob('*'))}
+            assert value['bytecodeIsolation']['freshPrefixEmptyAfter']
+        raw = gzip.compress(encoded(value) + b'\n', mtime=0)
+        assert len(raw) < 32 * 1024 * 1024
+        output.parent.mkdir(parents=True, exist_ok=True)
+        with output.open('xb') as stream: stream.write(raw)
+        print(json.dumps({'path': output.relative_to(ROOT).as_posix(), 'bytes': len(raw), 'sha256': hashlib.sha256(raw).hexdigest(),
+            'groupCounts': value.get('groupCounts'), 'probeAllMeasured': value.get('probeAllMeasured'), 'sourceFilesVerifiedBeforeAndAfter': value['sourceFilesVerifiedBeforeAndAfter']}))
+        if args.probe and not value['probeAllMeasured']: raise SystemExit(1)
+
+
+if __name__ == '__main__': main()

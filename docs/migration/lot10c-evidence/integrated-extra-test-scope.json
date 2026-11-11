@@ -1,0 +1,18 @@
+{
+  "qualification": "Inherited affected continuation, common selection and PreviewPacking tests from actual published0.62. No LKEY or HPDL game/replay/data analysis is added. Later actual published predecessor deltas must be reconciled before final10C qualification.",
+  "testFiles": [
+    "tests/v6-ranked-workshop-grounded-inquiry.test.ts",
+    "tests/v6-stationary-contact-continuation.test.ts",
+    "tests/v6-workshop-cold-caller-continuation.test.ts",
+    "tests/v6-workshop-followup-source.test.ts",
+    "tests/v6-program-control-discovery-integration.test.ts",
+    "tests/v6-preview-packing-native.test.ts",
+    "tests/v6-preview-packing-reference.test.ts",
+    "tests/v6-preview-packing-integration.test.ts",
+    "tests/v6-preview-capture.test.ts",
+    "tests/v6-acquired-continuation-priority.test.ts",
+    "tests/v6-learned-preparation-priority.test.ts",
+    "tests/v6-material-recovery-priority.test.ts",
+    "tests/v6-coupled-pair-planning.test.ts"
+  ]
+}

@@ -4899,6 +4899,65 @@
         "tests/v6-preview-packing-native.test.ts"
       ],
       "notes": "Only the V6 Preview donor consumed normalized transforms and finite residual assignment calculation are transferred and compared. The complete V5 mechanical service, movement command model and other public entry points remain outside this claim."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/morphology_policy/ordered_recruitment/geometry.py",
+        "agents/yf_arc3_v6/morphology_policy/ordered_recruitment/projection.py",
+        "agents/yf_arc3_v6/morphology_policy/ordered_recruitment/policy.py",
+        "agents/yf_arc3_v6/morphology_policy/ordered_recruitment/family.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-ordered-recruitment-geometry.ts",
+        "src/logos-engine/v6-ordered-recruitment-projection.ts",
+        "src/logos-engine/v6-ordered-recruitment-policy.ts",
+        "src/logos-engine/v6-ordered-recruitment.ts",
+        "src/logos-engine/v5-ordered-front-reduction.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-ordered-recruitment-reference.py",
+        "tests/fixtures/v6-ordered-recruitment-reference.json.gz",
+        "tests/v6-ordered-recruitment-reference.test.ts",
+        "tests/v6-ordered-recruitment-kernel.test.ts",
+        "docs/migration/lot10c-ordered-recruitment-lineage.md"
+      ],
+      "notes": "Lot10C independent original-source oracle: 173 contracts compare complete geometry/projections, policy/SRC, all seven source fields and the consumed actual V5 ordered-front reducer. Four cold common-kernel tests acquire a real foreign contrast, execute the actual SRC callback and OP18/WHY-ACT, reconcile one selected return and restore its continuation. Active events preserve the original window_constraint fallback; passive events use recruitment_event. Source methods/portable/attempts persistence differs from the complete checkpoint. Cooperative incomplete-search refusal and the portable safe-integer domain are named native adaptations. This is bounded component verification, not an official RECR success, final integrated delivery or full caller parity."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/morphology_policy/ordered_recruitment/__init__.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-ordered-recruitment.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "tests/v6-ordered-recruitment-reference.test.ts",
+        "tests/v6-ordered-recruitment-kernel.test.ts",
+        "docs/migration/lot10c-ordered-recruitment-lineage.md"
+      ],
+      "notes": "The pinned original initializer is empty. Cold common tests execute native imports and register one actual owner at the declared source entry."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/morphology_policy/ordered_recruitment/recruitment.drm",
+        "agents/yf_arc3_v6/morphology_policy/ordered_recruitment/recruitment.src"
+      ],
+      "targets": [
+        "src/logos-engine/v6-ordered-recruitment-policy.ts",
+        "src/logos-engine/v6/programs.json"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-ordered-recruitment-reference.py",
+        "tests/fixtures/v6-ordered-recruitment-reference.json.gz",
+        "tests/v6-ordered-recruitment-reference.test.ts",
+        "tests/v6-ordered-recruitment-kernel.test.ts",
+        "docs/migration/lot10c-ordered-recruitment-lineage.md"
+      ],
+      "notes": "The previously compiled v6.ordered_recruitment.choose workflow now executes recruitment.select through the authoritative common registry. Source priority, cost, negative survivors and enumeration order remain exact. Compilation and actual invocation remain distinct metrics."
     }
   ],
   "scopeNotes": [
@@ -4975,7 +5034,8 @@
     "Native checkpoint schema logos-engine.linked-temporal-preparation.v1 and immutable ownership are explicit extensions, not Python-defined checkpoint semantics. Foreign mutable rows are retained before sharing; geometry receipts bind mask/digest/dimensions; contact body geometry and portable byte templates are validated; restore constructs a replacement owner before publication. Public state projections remain detached. Source epoch/state boundaries release phase rasters and commands, and portable reset releases local trials; conditional priors and adapter event/score witnesses remain. This is not global historical-fact eviction or a constant-memory claim for the full caller.",
     "Cold temporal chains demonstrate calibrated, guarded key prefixes of up to min(16, remaining), contrasted effects and subsequent component decisions. The separate key/click/key controller proof uses a declared synthetic family and is not a temporal click-policy transfer. A component source match, a legacy guard component or a present runtime registration does not certify complete production-priority selection, WHY/ACT authority or contribution to a real game. The 5B addressed-material and 5C object-binding entries remain separate and open.",
     "The portable native constructor initializes local fields eagerly, whereas the Python constructor initially holds only prior and the consumed boundary immediately calls reset_epoch. Direct from_boundary cases therefore compare prior; actual cold boundaries compare the full reset/acquisition state. Portable templates retain conditional source references without old-epoch raster lists. Native safe-integer and uint8 public-raster contracts do not claim arbitrary Python numeric or malformed-input coercion equivalence.",
-    "No new game, live WEAV attempt, official cost decision or publication result is established by these mappings. The separate WEAV diagnostic retains its exhausted cumulative case clock and unmet six-level target. Common-loop contribution, merged-source functional gates, the predeclared global cost policy, final integrity and publication remain parent-owned evidence to be reviewed before any 5A closure."
+    "No new game, live WEAV attempt, official cost decision or publication result is established by these mappings. The separate WEAV diagnostic retains its exhausted cumulative case clock and unmet six-level target. Common-loop contribution, merged-source functional gates, the predeclared global cost policy, final integrity and publication remain parent-owned evidence to be reviewed before any 5A closure.",
+    "Lot10C connects ordered_recruitment at its original material-list position after window_question, through one public_ordered_recruitment owner. Source component and cold common-loop proofs are complete in their declared synthetic domains. Actual game contribution, final integrated delivery, costs and full strategic-caller parity are separate evidence and are not inferred from these mappings."
   ],
   "completionGates": {
     "allRequiredCapabilitiesTransferred": false,

@@ -1,0 +1,46 @@
+{
+  "schema": "logos-engine.lot10c.case-activity-execution.v1",
+  "attemptId": "docs/migration/lot10c-evidence/case-activities/admission",
+  "game": "RECR",
+  "purpose": "Public catalog selection and prior-case admission review",
+  "startedAt": "2026-11-11T17:28:05.269561+00:00",
+  "finishedAt": "2026-11-11T17:28:05.478253+00:00",
+  "status": "completed",
+  "elapsedSecondsThroughCapture": 0.20870978,
+  "executionHelpersUnchanged": true,
+  "executionHelpers": [
+    {
+      "path": "docs/migration/lot10c-evidence/admit-case.py",
+      "sha256": "424b9ab4d2c887616b6e21638d0a522dcd010d9a94ab7fdbcae075669fa3f37f",
+      "bytes": 7852
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/case-activity.py",
+      "sha256": "c3a61752ff70eb6724a723a18c10fa4d445bf72d3d54011d7c2d7db6dbbe0681",
+      "bytes": 8126
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/run-clocked-proof.py",
+      "sha256": "530ed0272ac269340a28d9481c8db4188dc79cccdd85aa05c8a62570321ccbe3",
+      "bytes": 42344
+    }
+  ],
+  "generator": {
+    "path": "docs/migration/lot10c-evidence/admit-case.py",
+    "sha256": "424b9ab4d2c887616b6e21638d0a522dcd010d9a94ab7fdbcae075669fa3f37f",
+    "bytes": 7852
+  },
+  "evidence": [
+    {
+      "path": "docs/migration/lot10c-evidence/case-admission-review.json",
+      "sha256": "975cddde2c228f84d2132d8f76c4b8ca360b83a85f584926c350c2d32a268d2e",
+      "bytes": 4460
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/case-contract.json",
+      "sha256": "3b1bd39194961a4340a0dabcb733d0d447c3c495003ff6c510bbe0832faaccf7",
+      "bytes": 996
+    }
+  ],
+  "qualification": "Actual monotonic time from admission entry through metadata review and retention; no live game was launched."
+}

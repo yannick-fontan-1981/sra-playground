@@ -1,5 +1,30 @@
 # Feuille de route V5/V6 vers Logos Engine TypeScript
 
+<!-- LOT10C_CURRENT_BEGIN -->
+## Étape active : 10C OrderedRecruitment, composant raccordé et contrats froids vérifiés
+
+**10C est en cours de qualification ; il n'est pas encore publié.** Le développement part de **Site 103 / native 0.62**, checkpoint documentaire `2981a62d456802d39dcde316734793e905fb0ebf`, et conserve les corrections d'horloge, la livraison 10B et ses réserves.
+
+Le port de `ordered_recruitment`, de sa politique et de la réduction V5 effectivement consommée passe **173/173 tests de référence originale et 4/4 tests du noyau commun**. La boucle commune part sans méthode acquise, apprend d'un retour étranger, exécute `recruitment.select` puis WHY/ACT, acquiert le retour sélectionné une seule fois et restaure la continuation depuis le graphe partagé. Les sept champs source sont conservés. Les clés originales restent distinctes : `window_constraint` pour le retour actif et `recruitment_event` pour le passif. La [filiation 10C](lot10c-ordered-recruitment-lineage.md) et le [contrat source](lot10c-evidence/source-contract.md) détaillent ces preuves et les adaptations natives explicites.
+
+Le typage et les audits de développement passent. Le registre **local de développement** atteint **65/76 entrées, soit 85,5 %, et 11 restantes** ; l'inventaire local compte **204 composants vérifiés, 149 transferts partiels et 1 016 modules en attente**, zéro module entièrement vérifié. Les six portes de migration complète restent `false`. Ces compteurs ne remplacent pas les chiffres du Site 103 effectivement publié.
+
+Le [gel de préparation RECR](lot10c-evidence/development/recr01-source/source-manifest.json) conserve **315 fichiers natifs**, digest `bb7d62b5823d76ae7a5ecd452cb622ebb04f2b85b20fb0d2f9a5c35a1535b361`, dans une [archive de 334 entrées d'exécution](lot10c-evidence/development/recr01-source/source-archive.json). RECR, « Recruit Army », a été choisi uniquement à partir du catalogue public. Son [registre unique](lot10c-evidence/case-clock.json) débite **0,210466935 seconde d'admission**, avec **2 399,789533065 secondes restantes** ; aucune partie n'est encore lancée. Le lancement prévu vise trois niveaux, avec 300 secondes d'activité et au plus 30 secondes de rétention supervisée, après la clôture des suites déjà actives dans les autres fils.
+
+| Sous-lot 10 | État actuel | Suite |
+| --- | --- | --- |
+| **10A — `axial_question`** | Livré dans Sites 90–91 / 0.56 ; réserve d'apport propre conservée. | Aucun changement dans cette étape. |
+| **10B — `window_question`** | Livré dans Sites 102–103 / 0.62 ; coût global accepté et réserve HPDL partielle. | La réussite des six niveaux HPDL reste non établie. |
+| **10C — `ordered_recruitment`** | Port et contrats source/communs passés ; qualification de livraison en cours. | RECR et comparaison originale, navigateur, contrôles et régressions sur le gel final, coût puis publication. |
+| **10D — `temporal_selection`** | Planifié. | Après clôture qualifiée de 10C. |
+| **10E — `invited_endpoints`** | Planifié. | Après 10D. |
+
+La finalisation de 10C intégrera les prédécesseurs **réellement publiés** : 5C / 0.63, puis 6B / 0.64 et 8A / 0.65 selon la file convenue ; 0.66 est proposée pour 10C, sans publication anticipée. Les validations actuelles restent des preuves de développement sur la base 0.62.
+
+**Règle de coût confirmée : médiane des sessions complètes strictement inférieure à +10 % pour chacun de STCK et SMLP.** Une phase peut dépasser +10 % si le global de ce même jeu passe. Toutes les sessions mesurées et tous les diagnostics de phase seront conservés, sans compensation entre jeux. Aucun résultat de coût 10C n'est encore déclaré.
+
+<!-- LOT10C_CURRENT_END -->
+
 <!-- LOT10B_CURRENT_BEGIN -->
 ## Jalon 10B livré : Site 102 / native 0.62, coût accepté et réserve HPDL partielle
 
@@ -1078,7 +1103,7 @@ Le [rapport 7A](lot7a-ranked-workshop.md) et la [filiation source → TypeScript
 | --- | --- | --- |
 | 10A | `axial_question` / `v6.axial_question.choose` | Publié dans Sites 90–91 / 0.56, intégré et fonctionnel vérifié : 1 538 tests, 5 contrôles, 119 comparaisons et QA TRIA trois niveaux/17 actions/17 plans ; publications 7B/Sites 88–89 réconciliées, coût global accepté et entrées de publication vérifiées ; publication privée confirmée, contribution propre en partie ouverte |
 | 10B | `window_question` / `v6.window_question.choose` | **Livré dans Site 102 / native 0.62, avec réserve HPDL partielle** : 310 natifs/ 768 entrées gelées, digest `74143a7…`, registre 64/76 ; 1 205 tests, 5 contrôles, 10 rejeux/ 170 comparaisons passés. HPDL02 : 3 niveaux, 39 retours, arrêt 300 s ; PARTIAL 93 appels/ 76 restaurations/ 38 préfixes sans divergence, 152 ablations dont 95 appliquées et 23 changements. QA pause 2/action 3/reprise jusqu’à 7 actions et 1 niveau ; seconde attente de pause expirée conservée. Apport propre observé, réussite six niveaux et full caller non établis. Horloge 1 909,1412980339917 s débités / 490,85870196600837 s restants. Structure 8 formes/ 62 actions, préflight 77/77 et intégrité passés ; **coût global accepté : STCK +5,400572929772963 %, SMLP −1,7989027140400675 %**, revue 10 297/10 297 passée. Phase restauration SMLP +26,34362955231715 % conservée ; agrégateur historique strict sorti 1 et qualification déclarée distincte. Publication native 0.62 effective dans Site 102. Prochaine étape : 10C / `ordered_recruitment`, puis 10D / `temporal_selection` et 10E / `invited_endpoints`. |
-| 10C | `ordered_recruitment` / `v6.ordered_recruitment.choose` | À réaliser |
+| 10C | `ordered_recruitment` / `v6.ordered_recruitment.choose` | **En cours : 173/173 références et 4/4 contrats froids communs passés**, typage et audits de développement passés ; registre local 65/76, gel 315 fichiers natifs `bb7d62b…`. RECR admis sans partie lancée ; qualification finale, coût et publication restent à établir après intégration des prédécesseurs réellement publiés. |
 | 10D | `temporal_selection` / `v6.temporal_selection.choose` | À réaliser |
 | 10E | `invited_endpoints` / `v6.invited_endpoints.choose` | À réaliser |
 

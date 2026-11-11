@@ -1,0 +1,52 @@
+{
+  "qualification": "Bounded development preflight; no official game/cost/publication or final freeze assertion. Raw audit semantics must also be inspected.",
+  "checks": [
+    {
+      "name": "typecheck",
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "startedAt": "2026-11-11T17:23:36.810560+00:00",
+      "exitCode": 0,
+      "elapsedSeconds": 12.959235329999501,
+      "finishedAt": "2026-11-11T17:23:49.769817+00:00"
+    },
+    {
+      "name": "entry-audit",
+      "command": [
+        "node",
+        "scripts/audit-v6-entry-points.ts"
+      ],
+      "startedAt": "2026-11-11T17:23:49.771020+00:00",
+      "exitCode": 0,
+      "elapsedSeconds": 0.8700918840004306,
+      "finishedAt": "2026-11-11T17:23:50.641122+00:00"
+    },
+    {
+      "name": "migration-audit",
+      "command": [
+        "python",
+        "-B",
+        "scripts/audit-v6-migration.py"
+      ],
+      "startedAt": "2026-11-11T17:23:50.641693+00:00",
+      "exitCode": 0,
+      "elapsedSeconds": 7.828348418999667,
+      "finishedAt": "2026-11-11T17:23:58.470051+00:00"
+    },
+    {
+      "name": "diff-check",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "startedAt": "2026-11-11T17:23:58.470604+00:00",
+      "exitCode": 0,
+      "elapsedSeconds": 0.0671326580013556,
+      "finishedAt": "2026-11-11T17:23:58.537745+00:00"
+    }
+  ]
+}

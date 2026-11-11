@@ -1,0 +1,6 @@
+{"name":"reject_altered_selected_after","passed":true,"comparisonPassed":false,"exactParityPassed":false,"stop":null}
+{"name":"reject_extra_selected_after_field","passed":true,"comparisonPassed":false,"exactParityPassed":false,"stop":null}
+{"name":"reject_missing_seventh_state_field","passed":true,"comparisonPassed":false,"exactParityPassed":false,"stop":{"callIndex":3,"error":{"name":"ValueError","message":"Expected exactly the seven original Recruitment owner fields"}}}
+{"name":"reject_additional_state_field","passed":true,"comparisonPassed":false,"exactParityPassed":false,"stop":{"callIndex":1,"error":{"name":"ValueError","message":"Expected exactly the seven original Recruitment owner fields"}}}
+{"name":"reject_altered_restore_input","passed":true,"comparisonPassed":false,"exactParityPassed":false,"stop":null}
+{"passed": true, "tests": 5, "output": "docs/migration/lot10c-evidence/development/parity-readers-attempt03-state/results", "originalsVerifiedBeforeAndAfter": 1786, "consumedOriginalHashes": 726}

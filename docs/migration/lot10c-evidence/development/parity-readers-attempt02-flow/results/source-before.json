@@ -1,0 +1,38 @@
+{
+  "sourceBefore": {
+    "commit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+    "filesVerified": 1786,
+    "inventoryDigest": "9e8f6be8b05a83b0666066b3fda55c0f955e25d9428328e85cac1938b3d9cc2e",
+    "manifest": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/manifest.json",
+      "bytes": 424024,
+      "sha256": "491eb3b737bbb490a1b7c212f5b1e75f5a8f84b2124b95d9dd54a0d09eca85d6"
+    }
+  },
+  "bytecodeBefore": {
+    "files": 0,
+    "inventoryDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "inputs": {
+    "test": {
+      "path": "scripts/test-ordered-recruitment-parity-readers.py",
+      "bytes": 21841,
+      "sha256": "26dc97ff7a11889428d55899fc99c8777c300c6f161c08e11610b85f701cc970"
+    },
+    "publicReader": {
+      "path": "scripts/compare-ordered-recruitment-public-parity.py",
+      "bytes": 72500,
+      "sha256": "8593a0cb69148fecc5396608b2799d11348d124a6c45bf7e326a1c4362bda994"
+    },
+    "checkpointReader": {
+      "path": "scripts/compare-ordered-recruitment-checkpoint-parity.py",
+      "bytes": 24055,
+      "sha256": "3d50b37d55172160537b3289b14f0418a9b8dd8ccf88d5e38cb7fee986f71bb2"
+    },
+    "oracle": {
+      "path": "tests/fixtures/v6-ordered-recruitment-reference.json.gz",
+      "bytes": 1008627,
+      "sha256": "bfcc4444286bd5a55252eacd11f6cdc06cbf0163924796a9debef302586f2460"
+    }
+  }
+}

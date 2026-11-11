@@ -1,0 +1,22 @@
+{
+  "schema": "sra.shared-lane-status.v1",
+  "lane": "10C",
+  "updated_at": "2026-11-11T17:02:12.064269+00:00",
+  "stage": "Source implementation of ordered_recruitment begins from actual published native0.62/Site103 plus its receipt-only checkpoint. No game, cost or publication started.",
+  "checkout": "/workspace/sites/sra-lot10c-20261111/.sites-checkout",
+  "branch": "lot10c-ordered-recruitment-20261111",
+  "source_checkpoint": "2981a62d456802d39dcde316734793e905fb0ebf",
+  "active_command": "Native source, original oracle and integration preparation under shared performance lock",
+  "heavy_execution_active": false,
+  "performance_started": false,
+  "publication_started": false,
+  "quiet_requested": false,
+  "all_own_subagents_idle": false,
+  "published_predecessor": {
+    "version": 103,
+    "nativeVersion": "0.62.0",
+    "publishedSource": "4afcbfe6a25bd3a88223be543e443bc53b9c8814"
+  },
+  "publication_order": "10C proposes0.66 after agreed5C0.63 ->6B0.64 ->8A0.65; integrate actual published predecessors before final qualification. No future version claimed.",
+  "request_to_other_lanes": "10B remains completed. The same conversation is now ACTIVE on successor10C ordered_recruitment in a separate worktree. Use this status for future fresh idle acknowledgments; completed10B is not an idle-thread acknowledgment. No official cost or live game starts before separate coordination. Preserve agreed5C/6B/8A publication order; please announce expected publication readiness and any required quiet interval."
+}

@@ -1,0 +1,302 @@
+#!/usr/bin/env python3
+"""Bounded synthetic contract checks for the Recruitment parity readers.
+
+Only the independently generated kernelCold oracle supplies observations,
+proposals, states and source returns. No native runtime, game, private engine,
+actual case contract or historical campaign is loaded. The common comparison
+core is exercised directly; the PARTIAL wrapper's historical archive gate is
+not bypassed or claimed as tested. Its public-journal reader is checked alone.
+Each expected rejection retains its full comparison report in a new directory.
+"""
+from __future__ import annotations
+
+import argparse
+from collections import Counter
+from copy import deepcopy
+from datetime import datetime, timezone
+import fcntl
+import gzip
+import importlib.util
+import json
+from pathlib import Path
+import signal
+import sys
+import tempfile
+from unittest.mock import patch
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.dont_write_bytecode = True
+
+
+def load_reader(name, relative):
+    spec = importlib.util.spec_from_file_location(name, ROOT / relative)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def packet(rows, observation, frames):
+    return {'frame_rows': deepcopy(rows), 'frame_packet': deepcopy(frames),
+        'level': observation['level_epoch'], 'levels_completed': observation['levels_completed'],
+        'state': observation['state'], 'step_index': observation['revision'] - 1,
+        'available_action_refs': deepcopy(observation['available_action_refs']),
+        'frame_hash': observation['frame_hash']}
+
+
+def build_synthetic_history(parity, fixture):
+    f = fixture['kernelCold']
+    chosen = ('cold', 'passive', 'proposal', 'admitted', 'append', 'continuation')
+    calls = []
+    for index, name in enumerate(chosen):
+        case = f[name]
+        method = {'proposeSource': 'propose', 'beforeSource': 'before'}.get(case['operation'], case['operation'])
+        if index:
+            assert calls[-1]['sourceAfter'] == case['beforeState'], ('Oracle sequence is not contiguous', name)
+        calls.append({'index': index, 'stream': 'source', 'method': method,
+            'arguments': deepcopy(case['arguments']), 'sourceBefore': deepcopy(case['beforeState']),
+            'sourceAfter': deepcopy(case['afterState']), 'result': deepcopy(case['value']),
+            'completion': 'returned', 'returnMode': 'sync' if method == 'recordSource' else 'async',
+            'sourceDepthBefore': 0, 'sourceDepthAfter': 0, 'observationErrors': []})
+    packets = [
+        {'command': None, 'packet': packet(f['initialRows'], f['initialObservation'], [f['initialRows']])},
+        {'command': deepcopy(f['foreignCommand']), 'packet': packet(f['recruitRows'], f['recruitObservation'], f['passive']['arguments'][7])},
+        {'command': deepcopy(f['append']['arguments'][2]), 'packet': packet(f['nextCombatRows'], f['nextCombatObservation'], f['append']['arguments'][7])},
+    ]
+    # The source oracle's guard consumed only frame_rows; the public reader
+    # additionally requires the full synthetic packet at that same revision.
+    # This is a public input envelope, not an altered expected source result.
+    calls[3]['arguments'][2] = deepcopy(packets[1]['packet'])
+    restores, prefixes, actions = [], [], []
+    after_case = next(row for row in fixture['cases'] if row['id'] == 'after_never_promises_success_or_preservation')
+    for ordinal, (case_name, call_index, cursor, selected) in enumerate((('passive', 1, 2, False), ('append', 4, 5, True))):
+        case = f[case_name]
+        before, after, command = case['arguments'][:3]
+        owner = deepcopy(case['afterState'])
+        checkpoint = {'format': parity.FORMAT, 'source_state': deepcopy(owner)}
+        restore = {'index': ordinal, 'stream': 'restore', 'method': 'restoreNative',
+            'sourceCallsBefore': cursor, 'sourceCallsAfter': cursor,
+            'sourceDepthBefore': 0, 'sourceDepthAfter': 0, 'completion': 'returned',
+            'returnMode': 'sync', 'observationErrors': [], 'sourceBefore': deepcopy(owner),
+            'sourceAfter': deepcopy(owner), 'nativeInput': deepcopy(checkpoint)}
+        restores.append(restore)
+        family = 'public_ordered_recruitment' if selected else 'synthetic_foreign_frontier'
+        event = 'window_constraint' if selected else 'recruitment_event'
+        source_fact = {'episode': parity.EPISODE, 'key': 'recruitment_state', 'value': deepcopy(owner),
+            'evidence': after['observation_ref'], 'revision': after['revision']}
+        acquired = {'episode': parity.EPISODE, 'key': f"{event}:{before['revision']}",
+            'value': deepcopy(case['value']), 'evidence': after['observation_ref'], 'revision': after['revision']}
+        retained = {'stateNode': parity.OWNER, 'checkpointFormat': parity.FORMAT,
+            'sourceState': deepcopy(owner), 'nativeCheckpoint': checkpoint, 'instanceSourceState': deepcopy(owner),
+            'sourceCallsThrough': cursor, 'restoreCallsThrough': ordinal + 1, 'sourceDepthAtSnapshot': 0,
+            'nativeRestoration': deepcopy(restore), 'retainedSourceFact': source_fact, 'acquired': [acquired],
+            'selectionReceipt': None,
+            'transitions': [{'command': deepcopy(command), 'before': before['observation_ref'], 'after': after['observation_ref'],
+                'outcome': deepcopy(after_case['value']) if selected else {'synthetic_foreign_outcome': True}}]}
+        if selected:
+            retained['selectedProposal'] = deepcopy(f['proposal']['value'])
+        prefixes.append({'family': family, 'acquiredActions': 1, 'orderedRecruitment': retained})
+        current = packets[ordinal + 1]['packet']
+        actions.append({'sequence': ordinal + 1, 'command': deepcopy(command), 'family': family,
+            'publicPacketSha256': parity.packet_hash(current), 'animationFrames': len(current['frame_packet']),
+            'frameHash': after['frame_hash'], 'levelAfter': after['level_epoch'], 'levelBefore': before['level_epoch'],
+            'completedAfter': after['levels_completed']})
+    # This is a synthetic transport label, not a native source inventory claim.
+    source_digest = parity.digest({'syntheticOnly': True, 'referenceCommit': fixture['referenceCommit']})
+    campaign = {'schema': 'synthetic.recruitment.reader-contract.v1', 'game': 'SYNTHETIC',
+        'referenceCommit': fixture['referenceCommit'], 'status': 'passed', 'source': {'digest': source_digest},
+        'initial': {'publicPacketSha256': parity.packet_hash(packets[0]['packet'])}, 'final': {'actions': len(actions)},
+        'recruitmentCaptureErrors': [], 'recruitmentSourceCalls': calls, 'recruitmentRestoreCalls': restores,
+        'prefixes': prefixes, 'actions': actions}
+    trace = {'schema': 'logos-engine.native-public-game-trace.v1', 'game': 'SYNTHETIC', 'status': 'passed',
+        'sourceDigest': source_digest, 'packets': packets}
+    return campaign, trace
+
+
+def mutation_specs(fixture):
+    f = fixture['kernelCold']
+    def stale_before(c, t):
+        c['recruitmentSourceCalls'][4]['arguments'][0] = deepcopy(f['initialObservation'])
+        c['recruitmentSourceCalls'][4]['arguments'][3] = deepcopy(f['initialRows'])
+        c['prefixes'][1]['orderedRecruitment']['transitions'][0]['before'] = f['initialObservation']['observation_ref']
+    def future_proposal(c, t):
+        c['recruitmentSourceCalls'][0]['arguments'][0] = deepcopy(f['recruitObservation'])
+        c['recruitmentSourceCalls'][0]['arguments'][1] = deepcopy(f['recruitRows'])
+    def future_guard(c, t):
+        c['recruitmentSourceCalls'][3]['arguments'][3] = deepcopy(f['nextCombatObservation'])
+        c['recruitmentSourceCalls'][3]['arguments'][2] = deepcopy(t['packets'][2]['packet'])
+    def wrong_outcome(c, t):
+        c['prefixes'][1]['orderedRecruitment']['transitions'][0]['outcome']['reason'] = 'synthetic_corruption'
+    def extra_outcome(c, t):
+        c['prefixes'][1]['orderedRecruitment']['transitions'][0]['outcome']['unverified_native_field'] = True
+    def missing_state(c, t):
+        del c['recruitmentSourceCalls'][3]['sourceAfter']['last']
+    def extra_state(c, t):
+        c['recruitmentSourceCalls'][1]['sourceAfter']['unrecognized_field'] = 0
+    def wrong_restore(c, t):
+        c['recruitmentRestoreCalls'][0]['nativeInput']['source_state']['order'].reverse()
+    def wrong_passive_key(c, t):
+        c['prefixes'][0]['orderedRecruitment']['acquired'][0]['key'] = 'window_constraint:1'
+    def wrong_active_key(c, t):
+        c['prefixes'][1]['orderedRecruitment']['acquired'][0]['key'] = 'recruitment_event:2'
+    def wrong_selected_offer(c, t):
+        c['prefixes'][1]['orderedRecruitment']['selectedProposal']['recruitment_plan']['offer']['cost'] += 1
+    def missing_animation_frame(c, t):
+        t['packets'][1]['packet']['frame_packet'].pop()
+    return [
+        ('reject_stale_before', stale_before, 'Acquisition must consume the current public packet'),
+        ('reject_future_proposal', future_proposal, 'Proposal must use the current acquired public packet'),
+        ('reject_future_guard', future_guard, 'Before guard must use the current acquired public packet'),
+        ('reject_altered_selected_after', wrong_outcome, 'originalAfterResult.reason'),
+        ('reject_extra_selected_after_field', extra_outcome, 'originalAfterResult.unverified_native_field'),
+        ('reject_missing_seventh_state_field', missing_state, 'Expected exactly the seven original'),
+        ('reject_additional_state_field', extra_state, 'Expected exactly the seven original'),
+        ('reject_altered_restore_input', wrong_restore, 'restores[0].nativeInput.order'),
+        ('reject_passive_event_as_active', wrong_passive_key, 'prefixes[0].acquiredSourceFacts[0].key'),
+        ('reject_active_event_as_passive', wrong_active_key, 'prefixes[1].acquiredSourceFacts[0].key'),
+        ('reject_selected_offer_same_action', wrong_selected_offer, 'selectedProposal.originalProposal.recruitment_plan.offer.cost'),
+        ('reject_missing_return_animation_frame', missing_animation_frame, 'completeAcquiredPublicPacket.frame_packet'),
+    ]
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output-dir', type=Path, required=True)
+    parser.add_argument('--max-seconds', type=int, default=45)
+    parser.add_argument('--group', choices=('flow', 'state', 'binding', 'all'), default='all')
+    args = parser.parse_args()
+    output = args.output_dir.resolve()
+    if not output.is_relative_to(ROOT / 'docs/migration/lot10c-evidence') or output.exists():
+        parser.error('A new Lot10C evidence directory is required')
+    if not 1 <= args.max_seconds <= 60:
+        parser.error('The bounded synthetic invocation must be between 1 and 60 seconds')
+    parity = load_reader('recruitment_reader_under_test', 'scripts/compare-ordered-recruitment-public-parity.py')
+    partial = load_reader('recruitment_checkpoint_reader_under_test', 'scripts/compare-ordered-recruitment-checkpoint-parity.py')
+    fixture_path = ROOT / 'tests/fixtures/v6-ordered-recruitment-reference.json.gz'
+    report = {'schema': 'logos-engine.ordered-recruitment-parity-readers.synthetic-contract.v1',
+        'startedAt': datetime.now(timezone.utc).isoformat(), 'syntheticOnly': True, 'gameHostRun': False,
+        'nativeAgentRun': False, 'actualCaseContractLoaded': False, 'historicalCheckpointWrapperRun': False,
+        'qualification': 'The shared source-comparison core and standalone journal parser only. Synthetic native-shaped receipts are comparands derived from the independent original oracle, not claims about any actual native execution, campaign, freeze, scheduling interruption or cost.',
+        'group': args.group, 'tests': []}
+    executed = Counter()
+    with Path('/workspace/shared/sra-coordination/performance.lock').open('a') as lock:
+        fcntl.flock(lock.fileno(), fcntl.LOCK_SH | fcntl.LOCK_NB)
+        output.mkdir(parents=True)
+        paths = {'test': Path(__file__).resolve(), 'publicReader': ROOT / 'scripts/compare-ordered-recruitment-public-parity.py',
+            'checkpointReader': ROOT / 'scripts/compare-ordered-recruitment-checkpoint-parity.py', 'oracle': fixture_path}
+        report['inputs'] = {name: parity.fingerprint(path) for name, path in paths.items()}
+        for name in ('test', 'publicReader', 'checkpointReader'):
+            (output / (name + '.source.py.txt')).write_bytes(paths[name].read_bytes())
+        signal.alarm(args.max_seconds)
+        with tempfile.TemporaryDirectory(prefix='ordered-reader-synthetic-') as cache:
+            sys.pycache_prefix = cache
+            report['sourceBefore'] = parity.verify_originals()
+            report['bytecodeBefore'] = parity.existing_bytecode()
+            (output / 'source-before.json').write_text(json.dumps({'sourceBefore': report['sourceBefore'], 'bytecodeBefore': report['bytecodeBefore'], 'inputs': report['inputs']}, indent=2) + '\n')
+            fixture = parity.read_json(fixture_path)
+            assert fixture['sourceModified'] is False and fixture['referenceCommit'] == parity.COMMIT
+            base_campaign, base_trace = build_synthetic_history(parity, fixture)
+            parity.write_evidence(output / 'synthetic-inputs.json.gz', {'campaign': base_campaign, 'trace': base_trace,
+                'qualification': report['qualification']})
+            sys.path[:0] = [str(parity.SOURCE), str(parity.SOURCE / 'agents/yf_arc3_v6/laya_proto')]
+            from agents.yf_arc3_v6.morphology_policy.ordered_recruitment.family import OrderedRecruitment
+            from agents.yf_arc3_v6.morphology_policy.ordered_recruitment import geometry, projection
+            from agents.yf_arc3_v5.capabilities import mechanical_family_contracts_d as mechanical
+            from neutral_observer import measure
+            prefix = str(parity.SOURCE) + '/'
+            def profile(frame, event, arg):
+                if event == 'call' and frame.f_code.co_filename.startswith(prefix):
+                    executed[(frame.f_code.co_filename[len(prefix):], frame.f_code.co_firstlineno, frame.f_code.co_qualname)] += 1
+            prior_profile = sys.getprofile()
+            sys.setprofile(profile)
+            def check(name, mutate=None, expected_rejection=None, adaptation=False):
+                campaign, trace = deepcopy(base_campaign), deepcopy(base_trace)
+                if mutate:
+                    mutate(campaign, trace)
+                replay = parity.compare_campaign(campaign, trace, OrderedRecruitment, measure, geometry, projection)
+                proof = parity.write_evidence(output / (name + '.json.gz'), replay)
+                if expected_rejection:
+                    diagnostics = json.dumps({'stop': replay['stop'], 'differences': replay['differences'],
+                        'prefixErrors': [row.get('error') for row in replay['prefixChecks'] if row.get('error')]})
+                    okay = replay['componentComparisonPassed'] is False and expected_rejection in diagnostics
+                else:
+                    okay = replay['componentComparisonPassed'] is True and replay['exactOriginalReturnParityPassed'] is (not adaptation)
+                    okay = okay and replay['counts']['activeRecords'] == 1 and replay['counts']['passiveRecords'] == 1 \
+                        and replay['counts']['nativeRestoresCompared'] == 2 and replay['counts']['selectedAfterResultsCompared'] == 1
+                row = {'name': name, 'passed': okay, 'expectedRejection': expected_rejection,
+                    'comparisonPassed': replay['componentComparisonPassed'], 'exactParityPassed': replay['exactOriginalReturnParityPassed'],
+                    'report': proof, 'counts': replay['counts'], 'ablationCounts': replay['ablationCounts'],
+                    'stop': replay['stop'], 'firstDifferences': replay['differences'][:3]}
+                report['tests'].append(row)
+                print(json.dumps({key: row[key] for key in ('name', 'passed', 'comparisonPassed', 'exactParityPassed', 'stop')}, separators=(',', ':')), flush=True)
+                if not okay:
+                    raise AssertionError('Synthetic reader contract failed: ' + name)
+            try:
+                with patch.object(mechanical, 'monotonic', lambda: 0):
+                    if args.group in ('flow', 'all'):
+                        check('accept_cold_original_control')
+                    selected_indices = {'flow': range(0, 3), 'state': range(3, 8), 'binding': range(8, 12), 'all': range(12)}[args.group]
+                    mutations = mutation_specs(fixture)
+                    for index in selected_indices:
+                        name, mutate, expected = mutations[index]
+                        check(name, mutate, expected)
+                    def scheduled_refusal(c, t):
+                        obs = fixture['kernelCold']['initialObservation']
+                        c['recruitmentSourceCalls'][0]['nativeAdaptation'] = {
+                            'status': 'unknown', 'source_owner': 'public_ordered_recruitment',
+                            'observation_ref': obs['observation_ref'], 'level_epoch': obs['level_epoch'], 'frame_hash': obs['frame_hash'],
+                            'release_authority': False, 'domain_complete': False, 'status_is_not_an_acquired_refutation': True,
+                            'reason': 'ordered_recruitment_search_incomplete', 'search': {'truncated': True,
+                                'native_search_incomplete': {'reason': 'native_abort', 'frontier': {}}}}
+                    if args.group in ('binding', 'all'):
+                        check('qualify_refusal_without_exact_parity', scheduled_refusal, adaptation=True)
+                    def false_authority(c, t):
+                        scheduled_refusal(c, t)
+                        c['recruitmentSourceCalls'][0]['nativeAdaptation']['release_authority'] = True
+                    if args.group in ('binding', 'all'):
+                        check('reject_refusal_with_release_authority', false_authority, 'nativeAdaptation.binding.release_authority')
+            finally:
+                sys.setprofile(prior_profile)
+            if args.group in ('binding', 'all'):
+                journal = output / 'synthetic-public.jsonl'
+                journal.write_bytes(b''.join(parity.encoded(row) + b'\n' for row in base_trace['packets']))
+                rows, summary = partial.read_journal(journal)
+                okay = rows == base_trace['packets'] and summary == {'completeRecords': 3, 'malformedCompleteRecords': [], 'trailingPartialBytes': 0}
+                report['tests'].append({'name': 'journal_complete_synthetic_packets', 'passed': okay, 'summary': summary})
+                assert okay
+                trailing = output / 'synthetic-public-trailing.jsonl'
+                trailing.write_bytes(journal.read_bytes() + b'{"command":')
+                rows, summary = partial.read_journal(trailing)
+                okay = rows == base_trace['packets'] and summary['trailingPartialBytes'] == len(b'{"command":') and not summary['malformedCompleteRecords']
+                report['tests'].append({'name': 'journal_preserves_partial_tail', 'passed': okay, 'summary': summary})
+                assert okay
+                duplicate = output / 'synthetic-public-duplicate.jsonl'
+                duplicate.write_bytes(b'{"command":null,"command":null,"packet":{}}\n')
+                rows, summary = partial.read_journal(duplicate)
+                okay = rows == [] and len(summary['malformedCompleteRecords']) == 1 and summary['trailingPartialBytes'] == 0
+                report['tests'].append({'name': 'journal_rejects_duplicate_fields', 'passed': okay, 'summary': summary})
+                assert okay
+            report['sourceAfter'] = parity.verify_originals()
+            report['originalsUnchanged'] = report['sourceBefore'] == report['sourceAfter']
+            report['inputsAfter'] = {name: parity.fingerprint(path) for name, path in paths.items()}
+            report['inputsUnchanged'] = report['inputs'] == report['inputsAfter']
+            imported = {Path(module.__file__).resolve() for module in tuple(sys.modules.values())
+                if getattr(module, '__file__', None) and Path(module.__file__).resolve().is_relative_to(parity.SOURCE)}
+            imported.update(parity.SOURCE / 'agents/yf_arc3_v6/morphology_policy/ordered_recruitment' / name for name in ('recruitment.drm', 'recruitment.src'))
+            report['sourceHashes'] = {path.relative_to(parity.SOURCE).as_posix(): parity.fingerprint(path)['sha256'] for path in sorted(imported)}
+            report['bytecodeAfter'] = parity.existing_bytecode()
+            report['bytecodeIsolation'] = sys.dont_write_bytecode and not any(Path(cache).rglob('*')) and report['bytecodeBefore'] == report['bytecodeAfter']
+            report['executedSourceFunctions'] = [{'path': path, 'line': line, 'function': name, 'calls': count}
+                for (path, line, name), count in sorted(executed.items())]
+        signal.alarm(0)
+        report['completedAt'] = datetime.now(timezone.utc).isoformat()
+        report['passed'] = report['originalsUnchanged'] and report['inputsUnchanged'] and report['bytecodeIsolation'] \
+            and bool(executed) and all(row['passed'] for row in report['tests'])
+        report['testCount'] = len(report['tests'])
+        (output / 'summary.json').write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n')
+        print(json.dumps({'passed': report['passed'], 'tests': len(report['tests']), 'output': parity.path_label(output),
+            'originalsVerifiedBeforeAndAfter': report['sourceBefore']['filesVerified'], 'consumedOriginalHashes': len(report['sourceHashes'])}), flush=True)
+    return 0 if report['passed'] else 1
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())

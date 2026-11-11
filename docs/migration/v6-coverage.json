@@ -30,10 +30,10 @@
     "declaredClassesAndFunctions": 12857,
     "dataFiles": 417,
     "verifiedModules": 0,
-    "componentVerifiedModules": 199,
+    "componentVerifiedModules": 204,
     "partiallyTransferredModules": 149,
     "transferredUnverifiedModules": 0,
-    "pendingModules": 1021,
+    "pendingModules": 1016,
     "strategyFamilies": 16
   },
   "families": [
@@ -91364,9 +91364,15 @@
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "lines": 0,
       "definitions": [],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-ordered-recruitment.ts"
+      ],
+      "proof": [
+        "tests/v6-ordered-recruitment-reference.test.ts",
+        "tests/v6-ordered-recruitment-kernel.test.ts",
+        "docs/migration/lot10c-ordered-recruitment-lineage.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/ordered_recruitment/family.py",
@@ -91441,9 +91447,22 @@
           "endLine": 77
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-ordered-recruitment-geometry.ts",
+        "src/logos-engine/v6-ordered-recruitment-projection.ts",
+        "src/logos-engine/v6-ordered-recruitment-policy.ts",
+        "src/logos-engine/v6-ordered-recruitment.ts",
+        "src/logos-engine/v5-ordered-front-reduction.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-ordered-recruitment-reference.py",
+        "tests/fixtures/v6-ordered-recruitment-reference.json.gz",
+        "tests/v6-ordered-recruitment-reference.test.ts",
+        "tests/v6-ordered-recruitment-kernel.test.ts",
+        "docs/migration/lot10c-ordered-recruitment-lineage.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/ordered_recruitment/geometry.py",
@@ -91494,9 +91513,22 @@
           "endLine": 182
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-ordered-recruitment-geometry.ts",
+        "src/logos-engine/v6-ordered-recruitment-projection.ts",
+        "src/logos-engine/v6-ordered-recruitment-policy.ts",
+        "src/logos-engine/v6-ordered-recruitment.ts",
+        "src/logos-engine/v5-ordered-front-reduction.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-ordered-recruitment-reference.py",
+        "tests/fixtures/v6-ordered-recruitment-reference.json.gz",
+        "tests/v6-ordered-recruitment-reference.test.ts",
+        "tests/v6-ordered-recruitment-kernel.test.ts",
+        "docs/migration/lot10c-ordered-recruitment-lineage.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/ordered_recruitment/policy.py",
@@ -91529,9 +91561,22 @@
           "endLine": 15
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-ordered-recruitment-geometry.ts",
+        "src/logos-engine/v6-ordered-recruitment-projection.ts",
+        "src/logos-engine/v6-ordered-recruitment-policy.ts",
+        "src/logos-engine/v6-ordered-recruitment.ts",
+        "src/logos-engine/v5-ordered-front-reduction.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-ordered-recruitment-reference.py",
+        "tests/fixtures/v6-ordered-recruitment-reference.json.gz",
+        "tests/v6-ordered-recruitment-reference.test.ts",
+        "tests/v6-ordered-recruitment-kernel.test.ts",
+        "docs/migration/lot10c-ordered-recruitment-lineage.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/ordered_recruitment/projection.py",
@@ -91564,9 +91609,22 @@
           "endLine": 47
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-ordered-recruitment-geometry.ts",
+        "src/logos-engine/v6-ordered-recruitment-projection.ts",
+        "src/logos-engine/v6-ordered-recruitment-policy.ts",
+        "src/logos-engine/v6-ordered-recruitment.ts",
+        "src/logos-engine/v5-ordered-front-reduction.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-ordered-recruitment-reference.py",
+        "tests/fixtures/v6-ordered-recruitment-reference.json.gz",
+        "tests/v6-ordered-recruitment-reference.test.ts",
+        "tests/v6-ordered-recruitment-kernel.test.ts",
+        "docs/migration/lot10c-ordered-recruitment-lineage.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/orthogonal_features.py",
@@ -99303,6 +99361,7 @@
     "Native checkpoint schema logos-engine.linked-temporal-preparation.v1 and immutable ownership are explicit extensions, not Python-defined checkpoint semantics. Foreign mutable rows are retained before sharing; geometry receipts bind mask/digest/dimensions; contact body geometry and portable byte templates are validated; restore constructs a replacement owner before publication. Public state projections remain detached. Source epoch/state boundaries release phase rasters and commands, and portable reset releases local trials; conditional priors and adapter event/score witnesses remain. This is not global historical-fact eviction or a constant-memory claim for the full caller.",
     "Cold temporal chains demonstrate calibrated, guarded key prefixes of up to min(16, remaining), contrasted effects and subsequent component decisions. The separate key/click/key controller proof uses a declared synthetic family and is not a temporal click-policy transfer. A component source match, a legacy guard component or a present runtime registration does not certify complete production-priority selection, WHY/ACT authority or contribution to a real game. The 5B addressed-material and 5C object-binding entries remain separate and open.",
     "The portable native constructor initializes local fields eagerly, whereas the Python constructor initially holds only prior and the consumed boundary immediately calls reset_epoch. Direct from_boundary cases therefore compare prior; actual cold boundaries compare the full reset/acquisition state. Portable templates retain conditional source references without old-epoch raster lists. Native safe-integer and uint8 public-raster contracts do not claim arbitrary Python numeric or malformed-input coercion equivalence.",
-    "No new game, live WEAV attempt, official cost decision or publication result is established by these mappings. The separate WEAV diagnostic retains its exhausted cumulative case clock and unmet six-level target. Common-loop contribution, merged-source functional gates, the predeclared global cost policy, final integrity and publication remain parent-owned evidence to be reviewed before any 5A closure."
+    "No new game, live WEAV attempt, official cost decision or publication result is established by these mappings. The separate WEAV diagnostic retains its exhausted cumulative case clock and unmet six-level target. Common-loop contribution, merged-source functional gates, the predeclared global cost policy, final integrity and publication remain parent-owned evidence to be reviewed before any 5A closure.",
+    "Lot10C connects ordered_recruitment at its original material-list position after window_question, through one public_ordered_recruitment owner. Source component and cold common-loop proofs are complete in their declared synthetic domains. Actual game contribution, final integrated delivery, costs and full strategic-caller parity are separate evidence and are not inferred from these mappings."
   ]
 }

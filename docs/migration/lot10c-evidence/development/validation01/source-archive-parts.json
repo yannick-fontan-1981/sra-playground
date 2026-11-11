@@ -1,0 +1,36 @@
+{
+  "schema": "logos-engine.v53.frozen-source-parts.v1",
+  "original": {
+    "path": "docs/migration/lot10c-evidence/development/validation01/source-archive.tar.gz",
+    "sha256": "67ee04a601ad4da53aca4a5cbb603de02309234b780ac930be9c2d26c2ab21b5",
+    "bytes": 4415462
+  },
+  "parts": [
+    {
+      "path": "docs/migration/lot10c-evidence/development/validation01/source-archive.tar.gz.part000",
+      "sha256": "74b0791420cb481060f9edf751e65a19b84ea38226c1038eb010aa64904cf1ca",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/development/validation01/source-archive.tar.gz.part001",
+      "sha256": "765f1dc89684a73c7c0a50f6aef29c48bd3318ce6baa4a1990d3fdd84ec85716",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/development/validation01/source-archive.tar.gz.part002",
+      "sha256": "f5f32419619f47de81a7f636b286c1c97708132f33d218f8ade0744be5d5a01f",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/development/validation01/source-archive.tar.gz.part003",
+      "sha256": "c89afd106c9f96a137ce05f0299a6d02933351668084884ae1b435a2bdfe557d",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/development/validation01/source-archive.tar.gz.part004",
+      "sha256": "cabe2a8ba06bfb8c4c0c8c765549926379411bd9f29e3c3b6265fb7c8b52fcd8",
+      "bytes": 815462
+    }
+  ],
+  "qualification": "Ordered byte slices of the exact frozen gzip archive. No source or evidence content changes."
+}

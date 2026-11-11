@@ -1,0 +1,24 @@
+{
+  "schema": "logos-engine.lot10c.case-contract.v1",
+  "game": "RECR",
+  "targetLevels": 3,
+  "maximumCumulativeSeconds": 2400,
+  "clockReset": false,
+  "createdAt": "2026-11-11T17:28:05.342902+00:00",
+  "publicSelection": {
+    "name": "Recruit Army",
+    "description": "Recruit an ordered squad between battles to clear successive enemy rooms.",
+    "catalog": {
+      "path": "src/games/catalog.ts",
+      "sha256": "a6181c4937ad74f7f3ba74906c4d173ff1176dc8043508726b1ddf327abc667b",
+      "bytes": 42120
+    },
+    "basis": "Public title and description only"
+  },
+  "admissionEvidence": {
+    "path": "docs/migration/lot10c-evidence/case-admission-review.json",
+    "sha256": "975cddde2c228f84d2132d8f76c4b8ca360b83a85f584926c350c2d32a268d2e",
+    "bytes": 4460
+  },
+  "qualification": "One case clock covers admission, diagnostics, all live attempts, evidence retention and browser checks. A new source freeze, failure, interruption or final predecessor integration does not reset it."
+}

@@ -1,0 +1,133 @@
+{
+  "schema": "logos-engine.ordered-recruitment-parity-readers.synthetic-verification.v1",
+  "recordedAt": "2026-11-11T17:33:49.665528+00:00",
+  "passed": true,
+  "syntheticOnly": true,
+  "uniqueChecks": 18,
+  "checks": [
+    "accept_cold_original_control",
+    "reject_stale_before",
+    "reject_future_proposal",
+    "reject_future_guard",
+    "reject_altered_selected_after",
+    "reject_extra_selected_after_field",
+    "reject_missing_seventh_state_field",
+    "reject_additional_state_field",
+    "reject_altered_restore_input",
+    "reject_passive_event_as_active",
+    "reject_active_event_as_passive",
+    "reject_selected_offer_same_action",
+    "reject_missing_return_animation_frame",
+    "qualify_refusal_without_exact_parity",
+    "reject_refusal_with_release_authority",
+    "journal_complete_synthetic_packets",
+    "journal_preserves_partial_tail",
+    "journal_rejects_duplicate_fields"
+  ],
+  "groups": [
+    {
+      "group": "flow",
+      "tests": 4,
+      "execution": {
+        "path": "docs/migration/lot10c-evidence/development/parity-readers-attempt02-flow/execution.json",
+        "bytes": 993,
+        "sha256": "de9e21125b11147b972828e6363764da65d6d924b7a3c388727455390e45b4c6"
+      },
+      "summary": {
+        "path": "docs/migration/lot10c-evidence/development/parity-readers-attempt02-flow/results/summary.json",
+        "bytes": 180034,
+        "sha256": "c4cb3863b272b1c9637d38240398f6af10f006c997353576fa718a12f16c3889"
+      },
+      "raw": {
+        "path": "docs/migration/lot10c-evidence/development/parity-readers-attempt02-flow/output.raw.txt",
+        "bytes": 1020,
+        "sha256": "f32d39aa03170531e9a9a8170ab47c3b55508d71101c91b00155e491ac148f01"
+      },
+      "elapsedSeconds": 20.2914617360002
+    },
+    {
+      "group": "state",
+      "tests": 5,
+      "execution": {
+        "path": "docs/migration/lot10c-evidence/development/parity-readers-attempt03-state/execution.json",
+        "bytes": 998,
+        "sha256": "a269d825b4e93f959dda4f5d4e7896db60cddb8c5e9686871fdf329ed9c62382"
+      },
+      "summary": {
+        "path": "docs/migration/lot10c-evidence/development/parity-readers-attempt03-state/results/summary.json",
+        "bytes": 183218,
+        "sha256": "902094aa29c985060109ceec755cc4c3088dd1be35c7dba263eb57ac04a499d3"
+      },
+      "raw": {
+        "path": "docs/migration/lot10c-evidence/development/parity-readers-attempt03-state/output.raw.txt",
+        "bytes": 1022,
+        "sha256": "d9849de3c20fa3abbc9ee47f337904dd93f06778279e59497e868b3e61de83d4"
+      },
+      "elapsedSeconds": 29.577181840002595
+    },
+    {
+      "group": "binding",
+      "tests": 9,
+      "execution": {
+        "path": "docs/migration/lot10c-evidence/development/parity-readers-attempt04-binding/execution.json",
+        "bytes": 1002,
+        "sha256": "b5c1b6b319d045f03c1a22cdfaea32c69d7d831b131e9973662ed33ad41db948"
+      },
+      "summary": {
+        "path": "docs/migration/lot10c-evidence/development/parity-readers-attempt04-binding/results/summary.json",
+        "bytes": 561354,
+        "sha256": "c2f677ee884caf1804b3012708c4e4a84d6bcccdb22249925f365a102ec72eca"
+      },
+      "raw": {
+        "path": "docs/migration/lot10c-evidence/development/parity-readers-attempt04-binding/output.raw.txt",
+        "bytes": 934,
+        "sha256": "ef71cf89b391e6efd9cdc2a3b94bd9558ca5feb3d8d425e0458cab9a955d309f"
+      },
+      "elapsedSeconds": 41.77037300699885
+    }
+  ],
+  "sameInputsAcrossAllGroups": true,
+  "currentInputsMatchAllGroups": true,
+  "inputs": {
+    "test": {
+      "path": "scripts/test-ordered-recruitment-parity-readers.py",
+      "bytes": 21841,
+      "sha256": "26dc97ff7a11889428d55899fc99c8777c300c6f161c08e11610b85f701cc970"
+    },
+    "publicReader": {
+      "path": "scripts/compare-ordered-recruitment-public-parity.py",
+      "bytes": 72500,
+      "sha256": "8593a0cb69148fecc5396608b2799d11348d124a6c45bf7e326a1c4362bda994"
+    },
+    "checkpointReader": {
+      "path": "scripts/compare-ordered-recruitment-checkpoint-parity.py",
+      "bytes": 24055,
+      "sha256": "3d50b37d55172160537b3289b14f0418a9b8dd8ccf88d5e38cb7fee986f71bb2"
+    },
+    "oracle": {
+      "path": "tests/fixtures/v6-ordered-recruitment-reference.json.gz",
+      "bytes": 1008627,
+      "sha256": "bfcc4444286bd5a55252eacd11f6cdc06cbf0163924796a9debef302586f2460"
+    }
+  },
+  "originalFilesVerifiedBeforeAndAfterEachGroup": 1786,
+  "consumedOriginalHashesPerGroup": 726,
+  "sameConsumedSourceHashesAcrossGroups": true,
+  "bytecodeIsolationPassedEachGroup": true,
+  "maximumRetainedFileBytes": 561354,
+  "previousIncompleteAttempt": {
+    "execution": {
+      "path": "docs/migration/lot10c-evidence/development/parity-readers-attempt01/execution.json",
+      "bytes": 959,
+      "sha256": "62820d14b38481c29856af5a08fc0d859a4b37771943c0315c02cfbcd94662b8"
+    },
+    "raw": {
+      "path": "docs/migration/lot10c-evidence/development/parity-readers-attempt01/output.raw.txt",
+      "bytes": 1651,
+      "sha256": "0d6b07232b0802f1580e356cd0df9f69d1707a3b7fb65467c330bad4d256ac5f"
+    },
+    "exitCode": -14,
+    "qualification": "The original combined invocation reached its declared SIGALRM 45-second bound after nine successful checks. Its raw output and finished per-check reports are retained unchanged. It is not counted as a complete test run."
+  },
+  "qualification": "Synthetic comparison-core and journal-parser checks only. No actual case contract, campaign, native runtime, game, historical PARTIAL archive gate, performance sample or whole-game contribution is qualified."
+}

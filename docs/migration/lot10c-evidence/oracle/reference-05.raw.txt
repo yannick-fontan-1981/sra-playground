@@ -1,0 +1,2 @@
+{"path": "tests/fixtures/v6-ordered-recruitment-reference.json.gz", "bytes": 1008627, "sha256": "bfcc4444286bd5a55252eacd11f6cdc06cbf0163924796a9debef302586f2460", "groupCounts": {"geometryCases": 46, "projectionCases": 25, "cases": 33, "policyCases": 16, "reductionCases": 27, "constructorCases": 17, "nativeAdaptationCases": 2}, "probeAllMeasured": null, "sourceFilesVerifiedBeforeAndAfter": 1786}
+
