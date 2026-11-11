@@ -89,7 +89,7 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
     status: 'running', referenceCommit: V6_REFERENCE_COMMIT,
     budget: { levelActionCaps: Array(targetLevels).fill(600), activeSecondsPerLevel: 360, clock: 'real active compute and native execution' },
     source: sourceBefore, gameAssets: {}, actions: [], boundaries: [], prefixes: [], requests: [], domainAssessments: [],
-    baseline: null, pythonAgentModules: null, failure: null, inventorySourceCalls: [], recolorSourceCalls: [], workshopSourceCalls: [], symbolSourceCalls: [], symbolRestoreCalls: [], feedbackSourceCalls: [], relativeArrangementSourceCalls: [], motionSourceCalls: [], motionSnapshots: {}, morphologySourceCalls: [], controlAttentionSourceCalls: [],
+    baseline: null, pythonAgentModules: null, failure: null, inventorySourceCalls: [], recolorSourceCalls: [], workshopSourceCalls: [], symbolSourceCalls: [], symbolRestoreCalls: [], feedbackSourceCalls: [], relativeArrangementSourceCalls: [], facetExampleSourceCalls: [], facetExampleRestoreCalls: [], motionSourceCalls: [], motionSnapshots: {}, morphologySourceCalls: [], controlAttentionSourceCalls: [],
   };
   if (options.recordedPublic) report.recordedPublicReplay = {
     trace: options.recordedPublic.trace, baseline: options.recordedPublic.baseline,
@@ -97,6 +97,7 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
   };
   let runtime: Awaited<ReturnType<typeof createNativeV6Runtime>> | undefined;
   let symbolsOwner: R | undefined;
+  let facetsOwner: R | undefined;
   let native: Awaited<ReturnType<typeof loadPyodide>> | undefined;
   let agent: BrowserV6Agent | undefined, current: GameObservation | undefined;
   let lastResponse: V6AgentResult | undefined, lastCycles = 0, previousActions = 0, previousSeconds = 0;
@@ -329,6 +330,72 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
             } catch (error) { return failed(error); }
           };
         }
+      }
+      // Observe the selected-only Facet owner and its actual restorations.
+      // Inputs and results pass through unchanged; captured states never feed it.
+      const facets = (runtime as unknown as { families: R[] }).families.find(f => f.id === 'facet_examples');
+      if (facets) {
+        facetsOwner = facets;
+        let sourceDepth = 0;
+        for (const method of ['propose', 'proposeInSubquestion', 'before', 'after', 'record']) {
+          const original = facets[method];
+          assert.equal(typeof original, 'function', `Missing facet source surface: ${method}`);
+          facets[method] = function (...args: any[]) {
+            const capturedArgs = method === 'proposeInSubquestion' ? args.slice(2, 6)
+              : method === 'propose' || method === 'before' ? args.slice(0, 4)
+              : method === 'after' ? args.slice(0, 6) : args.slice(0, 7);
+            const event: R = { index: report.facetExampleSourceCalls.length,
+              method: method === 'proposeInSubquestion' ? 'propose' : method, nativeMethod: method,
+              selectionEntry: method === 'proposeInSubquestion' ? args.slice(0, 2) : null,
+              arguments: structuredClone(capturedArgs), sourceBefore: this.state() };
+            sourceDepth++;
+            const complete = (result: any): any => {
+              event.result = structuredClone(method === 'record' ? result.events[0] : result ?? null);
+              event.sourceAfter = this.state(); report.facetExampleSourceCalls.push(event); sourceDepth--; return result;
+            };
+            const failed = (error: unknown): never => {
+              event.error = error instanceof Error ? `${error.name}: ${error.message}` : String(error);
+              event.sourceAfter = this.state(); report.facetExampleSourceCalls.push(event); sourceDepth--; throw error;
+            };
+            try {
+              const result = original.apply(this, args);
+              return result && typeof result.then === 'function' ? result.then(complete, failed) : complete(result);
+            } catch (error) { return failed(error); }
+          };
+        }
+        const restore = facets.restore;
+        facets.restore = function (...args: any[]) {
+          const event: R = { index: report.facetExampleRestoreCalls.length, method: 'restore',
+            arguments: null, sourceCallsBefore: report.facetExampleSourceCalls.length, sourceDepthBefore: sourceDepth,
+            sourceBefore: null, sourceCallsAfter: null, sourceDepthAfter: null, sourceAfter: null,
+            returnMode: null, completion: 'pending', returnedNormally: false, exception: null, observationErrors: [] };
+          report.facetExampleRestoreCalls.push(event);
+          const describe = (error: unknown): R => {
+            try { return { type: error instanceof Error ? error.name : typeof error,
+              message: error instanceof Error ? error.message : String(error) }; }
+            catch { return { type: 'uninspectable_exception', message: 'The passive observer could not serialize this exception.' }; }
+          };
+          const observationError = (phase: string, error: unknown): void => { event.observationErrors.push({ phase, ...describe(error) }); };
+          try { event.arguments = structuredClone(args); } catch (error) { observationError('arguments', error); }
+          try { event.sourceBefore = this.state(); } catch (error) { observationError('sourceBefore', error); }
+          const complete = (completion: string, error?: unknown): void => {
+            event.completion = completion;
+            event.returnedNormally = completion === 'returned' || completion === 'resolved';
+            if (!event.returnedNormally) event.exception = describe(error);
+            event.sourceCallsAfter = report.facetExampleSourceCalls.length; event.sourceDepthAfter = sourceDepth;
+            try { event.sourceAfter = this.state(); } catch (failure) { observationError('sourceAfter', failure); }
+          };
+          let result: any;
+          try { result = restore.apply(this, args); }
+          catch (error) { event.returnMode = 'sync'; complete('threw', error); throw error; }
+          try {
+            if (result && typeof result.then === 'function') {
+              event.returnMode = 'async';
+              void result.then(() => complete('resolved'), (error: unknown) => complete('rejected', error));
+            } else { event.returnMode = 'sync'; complete('returned'); }
+          } catch (error) { observationError('completion', error); }
+          return result;
+        };
       }
       // The caller is constructed during initialize. Observe its actual instance
       // before the first plan, without replacing any producer or supplying state.
@@ -577,6 +644,7 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
             acquiredActions: evidence.transitions.length, family: snapshot.lastDecision, operations: ['OP29', 'OP30', 'OP31'],
             proposalKind: evidence.proposal.kind ?? null, fieldSubquestion: evidence.proposal.field_subquestion ?? null,
             materialSubquestion: evidence.proposal.material_access_subquestion ?? null,
+            programSubquestion: evidence.proposal.program_subquestion ?? null,
             selectionGroup: evidence.proposal.strategy_receipt?.selected ?? null,
             ...(graph.nodes['family_state:feedback_sequences'] ? { observedFeedbackSequence: {
               stateNode: 'family_state:feedback_sequences', state: read('family_state:feedback_sequences'),
@@ -588,6 +656,15 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
               sourceCallsThrough: report.relativeArrangementSourceCalls.length,
               proposal: evidence.proposal.arrangement_plan ? evidence.proposal : null,
               qualification: 'Passive recorder of actual selected acquisition. The family receives no passive acquisition; this recorder supplies no state, action or return.',
+            } } : {}),
+            ...(graph.nodes['family_state:facet_examples'] ? { facetExample: {
+              stateNode: 'family_state:facet_examples', state: read('family_state:facet_examples'),
+              sourceCallsThrough: report.facetExampleSourceCalls.length,
+              restoreCallsThrough: report.facetExampleRestoreCalls.length,
+              instanceSourceState: facetsOwner?.state() ?? null,
+              nativeRestoration: structuredClone(report.facetExampleRestoreCalls.at(-1) ?? null),
+              proposal: evidence.proposal.facet_plan ? evidence.proposal : null,
+              qualification: 'Read-only capture after the actual selected acquisition and restoration. No passive Facet acquisition or injected state, command, return or expected result.',
             } } : {}),
             controlAttention: { morphology: evidence.proposal.morphology ?? null,
               controlAcquisition: evidence.proposal.question?.control_acquisition ?? null,

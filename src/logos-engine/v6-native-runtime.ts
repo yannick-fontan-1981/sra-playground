@@ -13,6 +13,8 @@ import { FeedbackSequences } from './v6-feedback-sequences.ts';
 import type { FeedbackSequenceProposal } from './v6-feedback-sequences.ts';
 import { RelativeArrangements } from './v6-relative-arrangements.ts';
 import type { RelativeArrangementProposal } from './v6-relative-arrangements.ts';
+import { NativeFacetExamples } from './v6-facet-examples.ts';
+import type { FacetExampleProposal } from './v6-facet-examples.ts';
 import { OrbitConstraints } from './v6-orbit-constraints.ts';
 import { Containment } from './v6-containment.ts';
 import { SurfaceProgram } from './v6-surface-program.ts';
@@ -1213,7 +1215,7 @@ export class NativeV6Runtime implements NativeV6Backend {
     const memory = this.authority!.memory, after = transition.after;
     const singleEventKeys: Record<string, string> = { window_constraints: 'window_constraint', regular_field_correspondence: 'symmetric_field',
       orbit_constraints: 'orbit_constraint', containment: 'containment', surface_program: 'surface', code_program: 'codes', band_transfer: 'bands', reduction_transport: 'reduction',
-      visual_sequences: 'visual_sequence_event', feedback_sequences: 'feedback_sequence_event', relative_arrangements: 'relative_arrangement_event', slot_substitution: 'slots', word_interface: 'words', port_assembly: 'ports', constellation_cover: 'constellations',
+      visual_sequences: 'visual_sequence_event', feedback_sequences: 'feedback_sequence_event', relative_arrangements: 'relative_arrangement_event', facet_examples: 'facet_example_event', slot_substitution: 'slots', word_interface: 'words', port_assembly: 'ports', constellation_cover: 'constellations',
       public_framed_transfer: 'framed_transfer_event', public_outline_service: 'outline_service_event',
       public_observed_inventory: 'observed_inventory_event', public_ordered_reaction: 'reaction_event', public_reactive_contact: 'reactive_event',
       public_topological_recolor: 'topological_recolor_event', public_ranked_workshop: 'ranked_workshop_event',
@@ -1239,6 +1241,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       family.restore(memory.get(EPISODE, family.id === 'ordered_support_transfer' ? 'ordered_support_state' : 'visual_sequence_state').value);
     }
     if (family.id === 'relative_arrangements') this.retainFamilyState(family, 'relative_arrangement_state', transition);
+    if (family.id === 'facet_examples') this.retainFamilyState(family, 'facet_example_state', transition);
     if ((family.id === 'window_constraints' || family.id === 'regular_field_correspondence')
       && (record.events[0] as R | null)?.status === 'official_boundary_witness') {
       const state = family.state();
@@ -1740,6 +1743,29 @@ export function relativeArrangementFamily(arrangements = new RelativeArrangement
     state: () => arrangements.state(), restore: state => arrangements.restore(state),
   };
 }
+/** FacetExamples observes only its selected experiment. A null proposal lets
+ * the remaining source program-construction providers continue. */
+export function facetExampleFamily(facets = new NativeFacetExamples()): NativeFamily {
+  const sourceProposal = (value: NativeProposal) => value as FacetExampleProposal;
+  const offer: NativeFamily['propose'] = async (observation, rows, inputs, remaining) => {
+    const value = await facets.propose(observation, rows, inputs, remaining);
+    if (value) value.program_subquestion = 'facet_example';
+    return value;
+  };
+  return {
+    id: 'facet_examples',
+    attachPrograms: registry => facets.attachPrograms(registry),
+    propose: offer,
+    proposeInSubquestion: (group, entry, ...args) => group === 'surface' && entry === 'facet_example' ? offer(...args) : null,
+    bind: (value, domain) => facets.bind(sourceProposal(value), domain),
+    before: (value, index, publicPacket, observation) => facets.before(sourceProposal(value), index, publicPacket, observation),
+    after: (value, index, before, after, firstRows, secondRows) => facets.after(sourceProposal(value), index, before, after, firstRows, secondRows),
+    record: async (before, after, command, firstRows, secondRows, value, index) => ({
+      events: [await facets.record(before, after, command, firstRows, secondRows, sourceProposal(value), index)],
+    }),
+    state: () => facets.state(), restore: state => facets.restore(state),
+  };
+}
 export interface NativeV6Declarations {
   common: { provided_objective: { definition: string }; input_domain: { max_point_occurrences: number }; ordered_support_transfer: OrderedSupportPolicy };
   strategy: { declarations: { configuration: R & {
@@ -1768,6 +1794,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   const feedbackFirst = configuration.information_goal?.feedback_sequences_first === true;
   const feedback = feedbackSequenceFamily();
   const arrangements = relativeArrangementFamily();
+  const facets = facetExampleFamily();
   const windows = subquestionFamily(fieldFamily(new WindowConstraints()), 'field_subquestion', 'multiscale_constraints'), symmetric = fieldFamily(new SymmetricField(symmetry));
   const orbit = originalEventFamily(new OrbitConstraints()), containment = originalEventFamily(new Containment());
   const surface = subquestionFamily(originalEventFamily(new SurfaceProgram()), 'program_subquestion', 'surface_rewrite');
@@ -1827,7 +1854,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     animated_contact: new AnimatedContact(policy.animated_contact_question),
   };
   const supports = new SupportNavigation(supportChildren, policy);
-  const families: NativeFamily[] = [windows, symmetric, orbit, containment, surface, code, band, framed, outline, inventory, reactive, reaction, recolor, workshop, symbols, morphology, reduction, recall, supports, feedback, arrangements, linkedTemporal, ...Object.values(supportChildren), ...(visual ? [visual] : []), ...Object.values(interfaces)];
+  const families: NativeFamily[] = [windows, symmetric, orbit, containment, surface, code, band, framed, outline, inventory, reactive, reaction, recolor, workshop, symbols, morphology, reduction, recall, supports, feedback, arrangements, facets, linkedTemporal, ...Object.values(supportChildren), ...(visual ? [visual] : []), ...Object.values(interfaces)];
   const registeredSubquestions = (order: readonly string[], registered: Record<string, NativeFamily>): string[] =>
     order.flatMap(question => registered[question] ? [registered[question].id] : []);
   // The cell, occurrence and program source entries share one acquired journal, but
@@ -1841,6 +1868,11 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   };
   const windowEntries = (configuration.window_constraints.ordered_subquestions as string[])
     .filter(question => windowProviders[question]);
+  const surfaceProviders: Record<string, NativeFamily> = {
+    facet_example: facets, surface_rewrite: surface, learned_code_program: code,
+    linked_temporal_preparation: linkedTemporal, ...interfaces, ...supportChildren,
+  };
+  const surfaceEntries = configuration.program_construction.ordered_subquestions.filter(question => surfaceProviders[question]);
   const groupMembers: Record<string, readonly string[]> = {
     goal_access: (configuration.goal_access_subquestions as string[]).flatMap(question => {
       if (['observed_composition_services', 'coupled_support_composition', 'alternating_graph_composition'].includes(question)) return [recall.id];
@@ -1851,7 +1883,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     }),
     window_constraints: [...windowEntries.map(question => windowProviders[question]!.id), symmetric.id],
     orbit_constraints: [orbit.id], containment: [containment.id],
-    surface: registeredSubquestions(configuration.program_construction.ordered_subquestions, { surface_rewrite: surface, learned_code_program: code, linked_temporal_preparation: linkedTemporal, ...interfaces, ...supportChildren }),
+    surface: registeredSubquestions(configuration.program_construction.ordered_subquestions, surfaceProviders),
     pre_score_contact: ['pre_score_contact'],
     scored_local_rewrite: ['scored_local_rewrite', ...(visual && visualContinuation ? [visual.id] : [])],
     factored_material_return: configuration.factored_material_return.ordered_subquestions.flatMap(question => {
@@ -1882,6 +1914,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   const groups: NativeSelectionGroup[] = loaded.strategy.declarations[0]!.configuration.families.map(id => ({
     id, families: groupMembers[id] ?? [], ...(id === 'goal_access' ? { entryPoints: goalEntryPoints }
       : id === 'window_constraints' ? { entryPoints: [...windowEntries.map(question => [recall, framed, arrangements].includes(windowProviders[question]!) ? question : null), null] }
+      : id === 'surface' ? { entryPoints: surfaceEntries.map(question => question === 'facet_example' ? question : null) }
       : id === 'factored_material_return' ? { entryPoints: materialEntryPoints } : {}),
   }));
   // Some original policy declarations contain non-integer thresholds. This

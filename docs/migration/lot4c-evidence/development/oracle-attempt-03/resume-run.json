@@ -1,0 +1,130 @@
+{
+  "schema": "logos-engine.lot4c.development-oracle-resume.v1",
+  "startedAt": "2026-11-11T00:25:46.560291+00:00",
+  "oldFixture": {
+    "path": "docs/migration/lot4c-evidence/development/oracle-attempt-02/fixture.json.gz",
+    "bytes": 1270568,
+    "sha256": "0bf086c58a8779dd3b64042f5c1fa65260e54ed0f7270c52f8f6e4e67b1f75ac"
+  },
+  "priorLogs": [
+    {
+      "rawPath": "docs/migration/lot4c-evidence/development/oracle-attempt-01/generation.log",
+      "rawBytes": 1918,
+      "rawSha256": "0fca3f396f1961288655d09ad2e098b8d733c210969d667fcc58002acf5f9e7c",
+      "gzipPath": "docs/migration/lot4c-evidence/development/oracle-attempt-01/generation.log.gz",
+      "gzipBytes": 610,
+      "gzipSha256": "3648b93acb1631131d2a5babeb1c37921a482722ef4b4ad55b7ac89bde1d5758",
+      "roundTripExact": true
+    },
+    {
+      "rawPath": "docs/migration/lot4c-evidence/development/oracle-attempt-02/generation.log",
+      "rawBytes": 2510,
+      "rawSha256": "6da8e46819124f366a0e6b84a629e9da2162f363005beae81a88ba06f7d77f4e",
+      "gzipPath": "docs/migration/lot4c-evidence/development/oracle-attempt-02/generation.log.gz",
+      "gzipBytes": 587,
+      "gzipSha256": "1153b637d282950d85d6ab745836c3cfa962eefe99c67ed85b39267c1f2f2145",
+      "roundTripExact": true
+    },
+    {
+      "rawPath": "docs/migration/lot4c-evidence/development/oracle-attempt-02/tests.log",
+      "rawBytes": 10144,
+      "rawSha256": "0cfe3c29f5989bea4e035c4b1cbe572efca3cb74876aa4e17a27360aef6ea4f9",
+      "gzipPath": "docs/migration/lot4c-evidence/development/oracle-attempt-02/tests.log.gz",
+      "gzipBytes": 2628,
+      "gzipSha256": "47bf57fa6d0efb74be4d6af1cf3dd9d96e9381df528ef4f2def80a92bcbbbc05",
+      "roundTripExact": true
+    }
+  ],
+  "inputs": {
+    "scripts/export-v6-facet-examples-reference.py": {
+      "path": "docs/migration/lot4c-evidence/development/oracle-attempt-03/inputs/scripts/export-v6-facet-examples-reference.py",
+      "bytes": 41416,
+      "sha256": "85a544a82f7d107007c60f5c6b5d2de6eb33247b8baee3b72b5650fef14ee19c"
+    },
+    "tests/v6-facet-examples.test.ts": {
+      "path": "docs/migration/lot4c-evidence/development/oracle-attempt-03/inputs/tests/v6-facet-examples.test.ts",
+      "bytes": 18177,
+      "sha256": "83658d0eb48ceddd68795698d3460af4a76d47a79f21847502067c22ec5aee31"
+    },
+    "src/logos-engine/v6-facet-examples.ts": {
+      "path": "docs/migration/lot4c-evidence/development/oracle-attempt-03/inputs/src/logos-engine/v6-facet-examples.ts",
+      "bytes": 20780,
+      "sha256": "577d3a3850c2bfac2a3daddfdabf419cac0b31a8912455f8102b4d4790ccbc8c"
+    },
+    "src/logos-engine/v6-facet-examples-geometry.ts": {
+      "path": "docs/migration/lot4c-evidence/development/oracle-attempt-03/inputs/src/logos-engine/v6-facet-examples-geometry.ts",
+      "bytes": 10691,
+      "sha256": "6319fbfbabc653d7e696b72020e4f7af50fb923deb558c2da31ab5a62f04c122"
+    },
+    "src/logos-engine/v6-facet-examples-compound.ts": {
+      "path": "docs/migration/lot4c-evidence/development/oracle-attempt-03/inputs/src/logos-engine/v6-facet-examples-compound.ts",
+      "bytes": 15063,
+      "sha256": "21e0ecafe71db7588eb57c4e88ccae21124c5e43406b404940344fa507488731"
+    },
+    "src/logos-engine/v6-facet-examples-stencils.ts": {
+      "path": "docs/migration/lot4c-evidence/development/oracle-attempt-03/inputs/src/logos-engine/v6-facet-examples-stencils.ts",
+      "bytes": 7492,
+      "sha256": "40f6003e7720236d07be38bf8c260e0e002d6224e0a8e89c412b507b5ec0b663"
+    }
+  },
+  "lock": "/workspace/shared/sra-coordination/performance.lock",
+  "lockMode": "exclusive-nonblocking",
+  "runs": [
+    {
+      "name": "generation",
+      "arguments": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "scripts/export-v6-facet-examples-reference.py",
+        "--out",
+        "/workspace/sites/sra-lot4a-20261110/.sites-checkout/docs/migration/lot4c-evidence/development/oracle-attempt-03/generated-fixture.json.gz"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 8.72089651999704,
+      "log": {
+        "rawPath": "docs/migration/lot4c-evidence/development/oracle-attempt-03/generation.log",
+        "rawBytes": 2545,
+        "rawSha256": "b8b54f988984acbef0e1255296303b20ef48201324ccfb45e470be5724862761",
+        "gzipPath": "docs/migration/lot4c-evidence/development/oracle-attempt-03/generation.log.gz",
+        "gzipBytes": 613,
+        "gzipSha256": "9beafe9fb461483ff363775b06644cc07a460128565708f788c9584ca5538718",
+        "roundTripExact": true
+      }
+    },
+    {
+      "name": "tests",
+      "arguments": [
+        "node",
+        "--test",
+        "tests/v6-facet-examples.test.ts"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 1.1845516419998603,
+      "log": {
+        "rawPath": "docs/migration/lot4c-evidence/development/oracle-attempt-03/tests.log",
+        "rawBytes": 10761,
+        "rawSha256": "7a744fb32e19d4af1d6983febad1d1be4ec1ea0cc3faecfe7987c415bba0d28a",
+        "gzipPath": "docs/migration/lot4c-evidence/development/oracle-attempt-03/tests.log.gz",
+        "gzipBytes": 2779,
+        "gzipSha256": "da35a17eeead83d6c6109f277575739115da4d0709b9751bf2bef16f43f51dea",
+        "roundTripExact": true
+      }
+    }
+  ],
+  "newFixture": {
+    "path": "tests/fixtures/v6-facet-examples-reference.json.gz",
+    "bytes": 1293211,
+    "sha256": "821212440d936da3e60ff1e5aae26c722373371b3dbc9105ac0039f4dc985e62",
+    "generatedCopy": "docs/migration/lot4c-evidence/development/oracle-attempt-03/generated-fixture.json.gz"
+  },
+  "finishedAt": "2026-11-11T00:25:56.501500+00:00",
+  "exitCode": 0,
+  "inputBytesUnchanged": {
+    "scripts/export-v6-facet-examples-reference.py": true,
+    "tests/v6-facet-examples.test.ts": true,
+    "src/logos-engine/v6-facet-examples.ts": true,
+    "src/logos-engine/v6-facet-examples-geometry.ts": true,
+    "src/logos-engine/v6-facet-examples-compound.ts": true,
+    "src/logos-engine/v6-facet-examples-stencils.ts": true
+  }
+}
