@@ -1,12 +1,17 @@
 node_modules/
+/node_modules
 dist/
 .sites-runtime/
 artifacts/
 *.log
 .DS_Store
 public/vendor/pyodide/
+/public/vendor/pyodide
 __pycache__/
 *.pyc
+
+# Lot 5B source archives are retained in verified ordered byte parts.
+/docs/migration/lot5b-evidence/**/source-archive.tar.gz
 
 # v53 exact source archives are tracked in checked, ordered byte parts.
 /docs/migration/native-campaigns-v53/attempt*/source-archive.tar.gz

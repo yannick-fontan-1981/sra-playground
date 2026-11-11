@@ -4631,6 +4631,62 @@
         "docs/migration/lot5a-evidence/diagnostic/linked-temporal-20261110T203811Z-tests.tap"
       ],
       "notes": "Lot5A transfers conditional from_boundary construction, portable prior fields, strict byte patches, reset_epoch, role/site measurement, changed pixels, visible effect assessment, passive input/mode/site/reversal acquisition and portable before/after delegation. Original conditional knowledge survives two scored boundaries in a cold wrapper chain, while old-epoch raster histories and local portable trials are released according to source boundaries. Direct portable guards begin from the explicitly retained acquired setup; their proposal inputs are legacy component cases and do not certify autonomous proposal selection. Native construction eagerly initializes local fields that the source creates in reset_epoch; the direct constructor case compares prior, and the consumed boundary path compares full post-reset state. PhaseTransfer.propose, its path search and separate autonomous proposal policy remain unported/unrouted. The complete module therefore remains partial_transfer."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/common_addressed_material.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-addressed-material.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-addressed-material-reference.py",
+        "tests/fixtures/v6-addressed-material-reference.json.gz",
+        "tests/v6-addressed-material-reference.test.ts",
+        "tests/v6-addressed-material.test.ts",
+        "tests/v6-field-stock.test.ts",
+        "tests/v6-addressed-material-kernel.test.ts"
+      ],
+      "notes": "Lot5B transfers the complete consumed addressed-field/stock chain on its admitted public-observation domain. The independent unchanged original oracle covers 19 cold chains, 522 operations and 14 helpers; source results and complete state match through ordinary and native checkpoint restoration. Source empty event envelopes and truthy empty-action refusals remain distinct from abstention. Acquisition, empirical distance bounds, exact locus witnesses, per-step guards, scored prior retention, typed stock rules, lineages, minimum-count obligations and counterexamples are preserved. Checkpoints, owned immutable snapshots and cooperative work/deadline/abort incompletion are explicit native extensions; neither Python class supplies a checkpoint API. Four cold production-factory contracts cover one registered owner, passive envelopes and actual authoritative restoration. Selected full-common contribution and final integrated release gates are separate pending evidence at this development mapping update; this does not claim whole original caller selection parity or a new game success."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/common_addressed_field.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-addressed-field.ts",
+        "src/logos-engine/v6-addressed-material-common.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-addressed-material-reference.py",
+        "tests/fixtures/v6-addressed-material-reference.json.gz",
+        "tests/v6-addressed-material-reference.test.ts",
+        "tests/v6-addressed-material.test.ts",
+        "tests/v6-field-stock.test.ts",
+        "tests/v6-addressed-material-kernel.test.ts"
+      ],
+      "notes": "Lot5B transfers the complete consumed addressed-field/stock chain on its admitted public-observation domain. The independent unchanged original oracle covers 19 cold chains, 522 operations and 14 helpers; source results and complete state match through ordinary and native checkpoint restoration. Source empty event envelopes and truthy empty-action refusals remain distinct from abstention. Acquisition, empirical distance bounds, exact locus witnesses, per-step guards, scored prior retention, typed stock rules, lineages, minimum-count obligations and counterexamples are preserved. Checkpoints, owned immutable snapshots and cooperative work/deadline/abort incompletion are explicit native extensions; neither Python class supplies a checkpoint API. Four cold production-factory contracts cover one registered owner, passive envelopes and actual authoritative restoration. Selected full-common contribution and final integrated release gates are separate pending evidence at this development mapping update; this does not claim whole original caller selection parity or a new game success."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/common_field_stock.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-field-stock.ts",
+        "src/logos-engine/v6-addressed-material-common.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-addressed-material-reference.py",
+        "tests/fixtures/v6-addressed-material-reference.json.gz",
+        "tests/v6-addressed-material-reference.test.ts",
+        "tests/v6-addressed-material.test.ts",
+        "tests/v6-field-stock.test.ts",
+        "tests/v6-addressed-material-kernel.test.ts"
+      ],
+      "notes": "Lot5B transfers the complete consumed addressed-field/stock chain on its admitted public-observation domain. The independent unchanged original oracle covers 19 cold chains, 522 operations and 14 helpers; source results and complete state match through ordinary and native checkpoint restoration. Source empty event envelopes and truthy empty-action refusals remain distinct from abstention. Acquisition, empirical distance bounds, exact locus witnesses, per-step guards, scored prior retention, typed stock rules, lineages, minimum-count obligations and counterexamples are preserved. Checkpoints, owned immutable snapshots and cooperative work/deadline/abort incompletion are explicit native extensions; neither Python class supplies a checkpoint API. Four cold production-factory contracts cover one registered owner, passive envelopes and actual authoritative restoration. Selected full-common contribution and final integrated release gates are separate pending evidence at this development mapping update; this does not claim whole original caller selection parity or a new game success."
     }
   ],
   "scopeNotes": [
