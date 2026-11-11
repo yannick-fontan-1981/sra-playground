@@ -1,0 +1,147 @@
+{
+  "schema": "logos-engine.lot7b-bounded-source-transport.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T23:56:02.578047+00:00",
+  "plan": "source-push-plan.json",
+  "archiveEquality": "source-archive-equality.json",
+  "normalWorkflow": "/home/agent/.codex/plugins/cache/openai-curated-remote/sites/1.1.6/scripts/site-workflow.mjs",
+  "opening": {
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "checkout_path": "/workspace/sites/sra-lot7b-20261110/.sites-checkout",
+    "commit_sha": "93ec798a017febbeca8aec3f705bc04d9ebe26c4"
+  },
+  "publishedBaseCommit": "dd355400264b50942486559b8ca56ee6dfc6a3cc",
+  "retainedTargetCommit": "93ec798a017febbeca8aec3f705bc04d9ebe26c4",
+  "finalCommit": "43ee01ba5469fd4fbffe10eb6a786fe99b1c35a7",
+  "targetTree": "63299a0dfe2b0901d80b1e851d4bd0250813605e",
+  "finalTree": "63299a0dfe2b0901d80b1e851d4bd0250813605e",
+  "finalParents": [
+    "1a17d43b076b42177bc8718098ce1f6b54b3a837",
+    "93ec798a017febbeca8aec3f705bc04d9ebe26c4"
+  ],
+  "finalTreeExactlyEqualToTarget": true,
+  "originalTargetIsDirectParent": true,
+  "deliveryBranchFastForwarded": true,
+  "allNativeTestBuildInputsEqualFromFirstStep": true,
+  "allFiveArchiveContentManifestsEqual": true,
+  "archiveFileCount": 75,
+  "rawStepLimitBytes": 41943040,
+  "individualObjectLimitExclusiveBytes": 33554432,
+  "maximumRawStepBytes": 40508936,
+  "maximumIndividualObjectBytes": 2550509,
+  "totalNewReachableObjects": 560,
+  "rawBoundsAreNotObservedNetworkPackSizes": true,
+  "forcePush": false,
+  "intermediateSiteDeployment": false,
+  "publishOnPushAccepted": false,
+  "sourcePushes": [
+    {
+      "step": 1,
+      "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+      "checkout_path": "/workspace/sites/sra-lot7b-20261110/.sites-checkout",
+      "commit_sha": "30bccd38ad7214c8c4d11fea93d25c4662a6be0e",
+      "archive": "/workspace/sites/sra-lot7b-20261110/lot7b-publish-step-1.tar"
+    },
+    {
+      "step": 2,
+      "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+      "checkout_path": "/workspace/sites/sra-lot7b-20261110/.sites-checkout",
+      "commit_sha": "3c6fd6fc446c6c2804cc78107050056fd565c590",
+      "archive": "/workspace/sites/sra-lot7b-20261110/lot7b-publish-step-2.tar"
+    },
+    {
+      "step": 3,
+      "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+      "checkout_path": "/workspace/sites/sra-lot7b-20261110/.sites-checkout",
+      "commit_sha": "b95b77c0b3fa1d1237dbec1ff912f7f15f658de9",
+      "archive": "/workspace/sites/sra-lot7b-20261110/lot7b-publish-step-3.tar"
+    },
+    {
+      "step": 4,
+      "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+      "checkout_path": "/workspace/sites/sra-lot7b-20261110/.sites-checkout",
+      "commit_sha": "1a17d43b076b42177bc8718098ce1f6b54b3a837",
+      "archive": "/workspace/sites/sra-lot7b-20261110/lot7b-publish-step-4.tar"
+    },
+    {
+      "step": 5,
+      "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+      "checkout_path": "/workspace/sites/sra-lot7b-20261110/.sites-checkout",
+      "commit_sha": "43ee01ba5469fd4fbffe10eb6a786fe99b1c35a7",
+      "archive": "/workspace/sites/sra-lot7b-20261110/lot7b-publish-step-5.tar"
+    }
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "kind": "complete_source",
+      "previousCommit": "dd355400264b50942486559b8ca56ee6dfc6a3cc",
+      "commit": "30bccd38ad7214c8c4d11fea93d25c4662a6be0e",
+      "tree": "5c37abfc1056bcf59e1be92b08e1614171c3dfbb",
+      "parents": [
+        "dd355400264b50942486559b8ca56ee6dfc6a3cc"
+      ],
+      "rawMissingObjectBytes": 9964597
+    },
+    {
+      "step": 2,
+      "kind": "evidence",
+      "previousCommit": "30bccd38ad7214c8c4d11fea93d25c4662a6be0e",
+      "commit": "3c6fd6fc446c6c2804cc78107050056fd565c590",
+      "tree": "7c6c993997cbf02e22beac6ae90eb45c389d0de3",
+      "parents": [
+        "30bccd38ad7214c8c4d11fea93d25c4662a6be0e"
+      ],
+      "rawMissingObjectBytes": 40323739
+    },
+    {
+      "step": 3,
+      "kind": "evidence",
+      "previousCommit": "3c6fd6fc446c6c2804cc78107050056fd565c590",
+      "commit": "b95b77c0b3fa1d1237dbec1ff912f7f15f658de9",
+      "tree": "983b304f1a47d324a965c7198f04e527f096f4d4",
+      "parents": [
+        "3c6fd6fc446c6c2804cc78107050056fd565c590"
+      ],
+      "rawMissingObjectBytes": 40508936
+    },
+    {
+      "step": 4,
+      "kind": "evidence",
+      "previousCommit": "b95b77c0b3fa1d1237dbec1ff912f7f15f658de9",
+      "commit": "1a17d43b076b42177bc8718098ce1f6b54b3a837",
+      "tree": "63299a0dfe2b0901d80b1e851d4bd0250813605e",
+      "parents": [
+        "b95b77c0b3fa1d1237dbec1ff912f7f15f658de9"
+      ],
+      "rawMissingObjectBytes": 18860699
+    },
+    {
+      "step": 5,
+      "kind": "final_history_merge",
+      "previousCommit": "1a17d43b076b42177bc8718098ce1f6b54b3a837",
+      "commit": "43ee01ba5469fd4fbffe10eb6a786fe99b1c35a7",
+      "tree": "63299a0dfe2b0901d80b1e851d4bd0250813605e",
+      "parents": [
+        "1a17d43b076b42177bc8718098ce1f6b54b3a837",
+        "93ec798a017febbeca8aec3f705bc04d9ebe26c4"
+      ],
+      "rawMissingObjectBytes": 7803767
+    }
+  ],
+  "independentReadOnlyReview": {
+    "status": "no_defect_found",
+    "objectMetadataVerified": 560,
+    "publishedBaseIsAncestor": true,
+    "rejectedOriginal5ACommitIsNotAncestor": true,
+    "rejectedOversizedBlobAbsent": true,
+    "filesOrServicesModified": false
+  },
+  "diagnostics": [
+    {
+      "kind": "read_only_preflight_reference_assumption",
+      "status": "resolved_before_first_push",
+      "message": "The first local check assumed origin/main, but this managed checkout has no named remotes. The normal workflow fetch uses FETCH_HEAD; its observed value exactly matched dd355400264b50942486559b8ca56ee6dfc6a3cc. No push, checkout switch or file mutation occurred in the failed check."
+    }
+  ]
+}

@@ -2,10 +2,12 @@
 
 ## État de cette correspondance
 
-Le candidat intégré est **native 0.55.0**, après la publication réelle 4B
-**Site 87**, commit `dd355400264b50942486559b8ca56ee6dfc6a3cc`, native **0.54.0**.
+La première publication native 7B est **Site 88**, **native 0.55.0**, attestée
+`succeeded` le **10 novembre 2026 à 20:56:02 UTC−03**. Elle succède à la publication
+réelle 4B **Site 87**, commit `dd355400264b50942486559b8ca56ee6dfc6a3cc`, native **0.54.0**.
 La [liaison au prédécesseur publié](lot7b-evidence/coordination/published-base-binding.json)
-est conservée séparément du candidat. Le [gel natif](lot7b-evidence/integrated-final/source-manifest.json)
+est conservée séparément du [reçu de publication 7B](lot7b-evidence/publication/native-publication.json).
+Le [gel natif](lot7b-evidence/integrated-final/source-manifest.json)
 contient **291 fichiers**, digest
 `ea25603262a7473e5ab9994d2e2e86dd64a8291dd7c1dc18ede4d1f443cdc53b` ;
 l'[archive figée](lot7b-evidence/integrated-final/source-archive.json) contient
@@ -236,11 +238,28 @@ CRAF : **le coût de cette trajectoire Symbols active reste hors de la mesure**.
 <!-- LOT7B_LINEAGE_COST_FINAL_END -->
 
 <!-- LOT7B_LINEAGE_PUBLICATION_FINAL_START -->
-## Publication — en attente de preuve terminale
+## Première publication native 7B — Site 88
 
-Le candidat 7B n'est pas encore présenté comme publié. La référence actuellement
-attestée reste **Site 87**, native **0.54.0**. Le commit final livré, la version
-Site et son état terminal seront inscrits ici après conservation des reçus
-effectifs de publication ; les preuves de coût terminées devront être liées au
-même gel natif 0.55. Aucun numéro de publication futur n'est prédit.
+Le [reçu terminal](lot7b-evidence/publication/native-publication.json) atteste
+**Site 88**, **native 0.55.0**, avec le déploiement
+`appgdep_6af3aeff18f08191963da329ba10b5a2` au statut **`succeeded`** le
+`2026-11-10T23:56:02.578047+00:00`, soit **20:56:02 UTC−03**.
+
+| Identité conservée | Valeur |
+| --- | --- |
+| Commit publié | `43ee01ba5469fd4fbffe10eb6a786fe99b1c35a7` |
+| Arbre publié | `63299a0dfe2b0901d80b1e851d4bd0250813605e` |
+| Cible originale conservée | `93ec798a017febbeca8aec3f705bc04d9ebe26c4` |
+
+Le [transport source](lot7b-evidence/publication/source-transport.json), son
+[plan de publication](lot7b-evidence/publication/source-push-plan.json) et
+l'[égalité des 75 fichiers du build](lot7b-evidence/publication/source-archive-equality.json)
+conservent la filiation vers la cible originale et le gel validé. Le build publié
+est identique au build validé ; les preuves fonctionnelles, le coût accepté et
+leurs limites restent ceux décrits dans cette filiation.
+
+L'accès reste **privé, mode `custom`**, révision **3**, avec **un compte autorisé,
+aucun groupe et aucun accès externe**. Une clôture documentaire distincte suivra
+avec ce même build ; son numéro et son commit seront consignés uniquement après
+son propre reçu terminal. Site 88 désigne ici la première publication native 7B.
 <!-- LOT7B_LINEAGE_PUBLICATION_FINAL_END -->

@@ -1,7 +1,9 @@
 # Preuves du lot 7B
 
-État courant : **preuves fonctionnelles intégrées terminées sur native 0.55.0**,
-après intégration du véritable prédécesseur 4B **Site 87**, commit
+**Première publication native 7B : Site 88, native 0.55.0, déploiement `succeeded`.**
+Le [reçu effectif](publication/native-publication.json) conserve cette publication
+privée et les identités du build validé. Les preuves fonctionnelles intégrées
+sont terminées après intégration du véritable prédécesseur 4B **Site 87**, commit
 `dd355400264b50942486559b8ca56ee6dfc6a3cc`, native **0.54.0**. Le gel contient
 **291 fichiers natifs** et une archive de **302 entrées**, digest
 `ea25603262a7473e5ab9994d2e2e86dd64a8291dd7c1dc18ede4d1f443cdc53b`.
@@ -108,11 +110,34 @@ partir de ces seules captures.
 <!-- LOT7B_EVIDENCE_COST_FINAL_END -->
 
 <!-- LOT7B_EVIDENCE_PUBLICATION_FINAL_START -->
-## Publication 7B : reçu terminal attendu
+## Première publication native 7B : Site 88, terminée
 
-Site 87 est la publication effective du prédécesseur 4B. Aucun déploiement 7B
-n'est encore revendiqué dans cet index. Le commit envoyé, la version Site, le
-statut terminal et leurs reçus seront ajoutés après la publication effective.
+[`publication/native-publication.json`](publication/native-publication.json)
+atteste **Site 88 / native 0.55.0**, déploiement
+`appgdep_6af3aeff18f08191963da329ba10b5a2` **`succeeded`**, constaté le
+**10 novembre 2026 à 23:56:02.578047 UTC** (**20:56:02 UTC−03**).
+
+| Identité ou preuve | Valeur et portée |
+| --- | --- |
+| Commit publié | `43ee01ba5469fd4fbffe10eb6a786fe99b1c35a7` |
+| Arbre publié exact | `63299a0dfe2b0901d80b1e851d4bd0250813605e`, identique à la cible validée |
+| Cible conservée comme parent direct | `93ec798a017febbeca8aec3f705bc04d9ebe26c4` |
+| [`publication/source-transport.json`](publication/source-transport.json) | Reçu du transport effectif des sources |
+| [`publication/source-push-plan.json`](publication/source-push-plan.json) | Plan borné conservant la cible validée et son histoire |
+| [`publication/source-archive-equality.json`](publication/source-archive-equality.json) | Égalité des 75 fichiers du build entre les cinq paquets locaux ; worker validé inchangé |
+| [`publication/post-publication-input-integrity.json`](publication/post-publication-input-integrity.json) | 894 reçus locaux et huit entrées externes recontrôlés après publication, tous inchangés |
+| [`publication/archive-representations.json`](publication/archive-representations.json) | Empreintes des conteneurs locaux et du stockage Sites conservées séparément, sans revendication d'égalité binaire des conteneurs |
+
+L'URL privée habituelle et l'accès **`custom`, révision 3**, restent inchangés :
+**un compte autorisé, zéro groupe et zéro visiteur externe**. Les 291 fichiers
+natifs, les 302 entrées de l'archive et le digest `ea256…` sont ceux du gel
+validé et de la fenêtre de coût terminée.
+
+Ces reçus et les textes mis à jour font l'objet d'une **clôture documentaire
+distincte avec exactement le même build**. Son numéro et son commit seront
+consignés après son résultat réel ; aucune identité future n'est prédite.
+Site 88 est ici la première publication native 7B, avec les limites de preuve
+fonctionnelle et de coût déjà exposées.
 <!-- LOT7B_EVIDENCE_PUBLICATION_FINAL_END -->
 
 ## Historique de développement conservé
