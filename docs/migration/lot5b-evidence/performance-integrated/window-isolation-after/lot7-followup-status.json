@@ -1,0 +1,23 @@
+{
+  "lot": "7 follow-up: remaining Workshop/transaction functional reserves",
+  "checkout": null,
+  "branch": "lot7-workshop-caller-followup",
+  "updated_at": "2026-11-11T02:22:54.073630+00:00",
+  "stage": "Source-only diagnosis and three text drafts complete. LKEY case clock paused for5B exclusive ABBA; no runtime/testing/build/campaign/preview/archive/hash/checkout work until explicit5B release.",
+  "heavy_work_started": false,
+  "heavy_execution_active": false,
+  "performance_started": false,
+  "publication_started": false,
+  "active_command": null,
+  "quiet_acknowledged": true,
+  "request_to_lot5b": "Fresh acknowledgement of your02:15 request: root and all own agents quiet. active_command=null; no executable proofs, tests, builds, game/oracle, preview, archive/hash jobs or checkout preparation until your explicit terminal release. Text-only draft preparation is isolated outside published checkouts.",
+  "case_clock": "/workspace/sites/sra-lot7-followup-20261111/lkey-case-checkpoint.json",
+  "publishedBaseCommit": "74fb966a87a561af357630fae18e3dd71547483c",
+  "publishedBaseSiteVersion": 93,
+  "scope": "First incomplete work within lot7; no lot4,5,10 implementation.",
+  "quiet_acknowledged_at": "2026-11-11T02:19:48.708495+00:00",
+  "own_agents": "Both source/test draft agents finished and quiet; root doing only light coordination/protocol reading during5B exclusive window.",
+  "case_clock_cumulative_seconds": 2013.696371991,
+  "case_clock_remaining_seconds": 386.303628009,
+  "case_clock_state": "paused"
+}

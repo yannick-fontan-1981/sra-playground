@@ -1,0 +1,934 @@
+{
+  "schema": "logos-engine.addressed-material-common-original-comparison.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-11T01:55:00.375Z",
+  "chainId": "cold-stock-source-selected",
+  "mode": "stock-preservation-refusal",
+  "nativeSourceDigest": "099444085f0579ce60e226c9dece42110c577538f5f337579305a2e5f65483c4",
+  "inputs": [
+    {
+      "path": "docs/migration/lot5b-evidence/integrated-final/common-stock/original-export.json",
+      "bytes": 7866,
+      "sha256": "568e8a42749585cfc3ab8eaac9a3b6335367f7625b5926bd422284ba085f7dad"
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/integrated-final/common-stock/original-replay.json.gz",
+      "bytes": 106914,
+      "sha256": "3daa2197a320ff89f562d6138a635e4f4cf59e20fe505ddbcc36688255d502b8"
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/integrated-final/common-stock/common-loop.json.gz",
+      "bytes": 536751,
+      "sha256": "3ca48eead85b448b53a5b5c1759aa4e2cac3ee452fa8d0eff5bac6ee442d5668"
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/integrated-final/common-stock/actual-operations.json",
+      "bytes": 1701886,
+      "sha256": "9a89860814de89edf921be7682cd66d7648777d2f08a507c9b7f78d4fe5f21d2"
+    },
+    {
+      "path": "scripts/review-addressed-material-common-loop.mjs",
+      "bytes": 10169,
+      "sha256": "698126bfafd5c7da4de94c03f8819f8f99776633acc9d45cac631e097d6e2fa2"
+    },
+    {
+      "path": "scripts/export-v6-addressed-material-reference.py",
+      "bytes": 41167,
+      "sha256": "dea2f235885442441842c12fd42597c944e2e230e91ac34b5b27cd6347293834"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/manifest.json",
+      "bytes": 424024,
+      "sha256": "491eb3b737bbb490a1b7c212f5b1e75f5a8f84b2124b95d9dd54a0d09eca85d6"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_addressed_field.py",
+      "bytes": 23618,
+      "sha256": "4659d687838934212829b90a3f40f306716f0490034f24d280def1f9b52b7af0"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_addressed_material.py",
+      "bytes": 814,
+      "sha256": "0f5de8d03d14fe978ff468810e7a8e4dea9215db90b0d6a51ba189660bb62f85"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_containment.py",
+      "bytes": 16818,
+      "sha256": "c718640b16b000f2088f443aa4e5c68512c20e936878d2e63a46f45624014a4b"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_field_stock.py",
+      "bytes": 24591,
+      "sha256": "d265b26743f112f8f9e18b18461a20f998fb4d16ba2efb9615a53d317ea0cc46"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_linked_contact.py",
+      "bytes": 34703,
+      "sha256": "bb2f258632fc71f280afaf2c988907fe7ee916e51da926389df44bb70f63f8b9"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_linked_preparation.py",
+      "bytes": 2422,
+      "sha256": "90095faefe45772155a565b32fb12172f23569d317e890e814925b801c098012"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_multiscale_constraints.py",
+      "bytes": 16566,
+      "sha256": "01da7c7f636ed2039a364188c7f4fedb2c4c0a0e8bb6b2ba7f22b1c259eaaf12"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_phase_relations.py",
+      "bytes": 22162,
+      "sha256": "8b43e2cf31d784af6efe7b1535520fcb3385f8d58893b7617d4e0360e07fea0f"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_visible_identity.py",
+      "bytes": 4424,
+      "sha256": "601e3a88a2535b669f6a294089931731b6b7b30f3bb8b6098337e9fafbc74326"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/geometric_observer.py",
+      "bytes": 9562,
+      "sha256": "1017b130cb91f799ab5bdb2f26789c2645078d9b9d226469b3915d4a7262eaac"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/neutral_observer.py",
+      "bytes": 3179,
+      "sha256": "9b09085eb708c084d82682b13848666ef1ca5f3fc6c10861d96e139228af927a"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/observed_input_domain.py",
+      "bytes": 4897,
+      "sha256": "5b8f2f84af9e946e939a53e4f4c70c1eea49e5e2f8017bac547537380e2a7785"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/terminal_composition.py",
+      "bytes": 31558,
+      "sha256": "10ab6ba513d3cc0b4dbf96868d8c716eee449068dba3f2fcdf06d5b35566609e"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/typed_material_observations.py",
+      "bytes": 4377,
+      "sha256": "423d0c2f70192a914feae4ac99144c832b08373acf08a8c488510338197fb565"
+    }
+  ],
+  "inputsUnchanged": true,
+  "coldOriginal": true,
+  "nativeResultsUsedAsOracleInputs": false,
+  "operations": 63,
+  "actualReturns": 16,
+  "selectedReturns": 6,
+  "passiveReturns": 10,
+  "navigationReturns": 1,
+  "stockReturns": 2,
+  "publicPath": {
+    "declaredStages": 17,
+    "completedStages": 8,
+    "complete": false,
+    "preservationRefusal": true
+  },
+  "checks": {
+    "total": 199,
+    "passed": 199,
+    "failed": 0,
+    "items": [
+      {
+        "name": "cold_original_and_actual_public_journal_bound_to_immutable_sources",
+        "passed": true
+      },
+      {
+        "name": "operation:0:preservation_obligations:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:0:preservation_obligations:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:0:preservation_obligations:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:1:propose:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:1:propose:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:1:propose:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:2:record:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:2:record:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:2:record:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:3:preservation_obligations:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:3:preservation_obligations:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:3:preservation_obligations:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:4:record:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:4:record:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:4:record:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:5:preservation_obligations:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:5:preservation_obligations:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:5:preservation_obligations:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:6:propose:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:6:propose:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:6:propose:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:7:record:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:7:record:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:7:record:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:8:preservation_obligations:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:8:preservation_obligations:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:8:preservation_obligations:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:9:propose:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:9:propose:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:9:propose:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:10:record:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:10:record:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:10:record:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:11:preservation_obligations:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:11:preservation_obligations:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:11:preservation_obligations:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:12:propose:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:12:propose:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:12:propose:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:13:record:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:13:record:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:13:record:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:14:preservation_obligations:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:14:preservation_obligations:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:14:preservation_obligations:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:15:propose:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:15:propose:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:15:propose:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:16:record:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:16:record:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:16:record:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:17:preservation_obligations:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:17:preservation_obligations:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:17:preservation_obligations:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:18:propose:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:18:propose:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:18:propose:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:19:record:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:19:record:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:19:record:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:20:preservation_obligations:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:20:preservation_obligations:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:20:preservation_obligations:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:21:record:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:21:record:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:21:record:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:22:preservation_obligations:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:22:preservation_obligations:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:22:preservation_obligations:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:23:propose:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:23:propose:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:23:propose:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:24:bind:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:24:bind:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:24:bind:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:24:bind:exact_source_point_bindings",
+        "passed": true
+      },
+      {
+        "name": "operation:25:before:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:25:before:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:25:before:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:26:after:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:26:after:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:26:after:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:27:record:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:27:record:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:27:record:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:28:preservation_obligations:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:28:preservation_obligations:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:28:preservation_obligations:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:29:record:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:29:record:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:29:record:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:30:preservation_obligations:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:30:preservation_obligations:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:30:preservation_obligations:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:31:propose:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:31:propose:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:31:propose:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:32:bind:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:32:bind:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:32:bind:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:32:bind:exact_source_point_bindings",
+        "passed": true
+      },
+      {
+        "name": "operation:33:before:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:33:before:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:33:before:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:34:after:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:34:after:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:34:after:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:35:record:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:35:record:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:35:record:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:36:preservation_obligations:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:36:preservation_obligations:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:36:preservation_obligations:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:37:propose:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:37:propose:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:37:propose:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:38:bind:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:38:bind:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:38:bind:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:38:bind:exact_source_point_bindings",
+        "passed": true
+      },
+      {
+        "name": "operation:39:before:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:39:before:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:39:before:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:40:after:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:40:after:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:40:after:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:41:record:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:41:record:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:41:record:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:42:preservation_obligations:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:42:preservation_obligations:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:42:preservation_obligations:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:43:record:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:43:record:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:43:record:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:44:preservation_obligations:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:44:preservation_obligations:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:44:preservation_obligations:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:45:propose:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:45:propose:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:45:propose:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:46:bind:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:46:bind:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:46:bind:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:46:bind:exact_source_point_bindings",
+        "passed": true
+      },
+      {
+        "name": "operation:47:before:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:47:before:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:47:before:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:48:after:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:48:after:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:48:after:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:49:record:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:49:record:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:49:record:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:50:preservation_obligations:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:50:preservation_obligations:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:50:preservation_obligations:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:51:propose:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:51:propose:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:51:propose:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:52:bind:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:52:bind:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:52:bind:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:52:bind:exact_source_point_bindings",
+        "passed": true
+      },
+      {
+        "name": "operation:53:before:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:53:before:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:53:before:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:54:after:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:54:after:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:54:after:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:55:record:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:55:record:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:55:record:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:56:preservation_obligations:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:56:preservation_obligations:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:56:preservation_obligations:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:57:propose:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:57:propose:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:57:propose:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:58:bind:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:58:bind:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:58:bind:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:58:bind:exact_source_point_bindings",
+        "passed": true
+      },
+      {
+        "name": "operation:59:before:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:59:before:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:59:before:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:60:after:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:60:after:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:60:after:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:61:record:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:61:record:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:61:record:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "operation:62:preservation_obligations:same_actual_public_inputs",
+        "passed": true
+      },
+      {
+        "name": "operation:62:preservation_obligations:original_result",
+        "passed": true
+      },
+      {
+        "name": "operation:62:preservation_obligations:complete_source_state",
+        "passed": true
+      },
+      {
+        "name": "actual_return_population_and_unique_ownership",
+        "passed": true
+      },
+      {
+        "name": "actual_native_checkpoint_restoration_evidence",
+        "passed": true
+      },
+      {
+        "name": "bounded_stock_contribution_preserves_the_declared_source_stop",
+        "passed": true
+      }
+    ]
+  },
+  "qualification": "The original starts cold and recomputes every proposal, guard, obligation, result and complete source state from the actual public method inputs. Selected proposal arguments come only from its own latest computation. Bind compares the exact action/locus/point bindings; additional common-caller proposal decorations remain in the native journal and are outside that component projection. Native checkpoint restoration is separately observed, not described as an original Python API. Synthetic common-loop success is not a game result, a latency measurement or whole-original-caller selection parity."
+}

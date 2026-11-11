@@ -1,0 +1,16 @@
+{
+  "schema": "logos-engine.source-syntax-inspection.v1",
+  "status": "syntax_passed",
+  "startedAt": "2026-11-11T02:47:06.974014+00:00",
+  "finishedAt": "2026-11-11T02:47:06.979279+00:00",
+  "source": {
+    "path": "docs/migration/lot5b-evidence/publication/verify-final-source-build.py",
+    "bytes": 33181,
+    "sha256": "cdd3526cbf0a222ded9770fdbded2b626b71af6204cc2b72d4566235ffb33036"
+  },
+  "method": "ast.parse UTF-8 Python source; no import or execution of the prepared verifier",
+  "sourceUnchanged": true,
+  "verifierBodyExecuted": false,
+  "functionalGateExecuted": false,
+  "transportOrPublicationExecuted": false
+}

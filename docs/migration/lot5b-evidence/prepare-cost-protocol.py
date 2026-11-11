@@ -282,6 +282,23 @@ def main():
         protocol_text += f'''
 ## Consolidation complémentaire déclarée avant mesure : propriétaire ajouté
 
+Pour cette fenêtre avec `ownerCostQualification`, les commandes historiques
+présentées plus haut conservent le rôle de diagnostic strict. Si ce comparateur
+refuse réellement la structure ajoutée, son reçu et son journal sont conservés,
+puis la consolidation et la revue complémentaires suivantes portent la décision :
+
+```sh
+node docs/migration/lot5b-evidence/consolidate-owner-costs.mjs {relative(OUT / 'owner-growth-contract.json')} {relative(OUT / 'owner-growth-comparison.json')}
+python -B docs/migration/lot5b-evidence/review-owner-costs.py {relative(OUT / 'owner-growth-contract.json')} {relative(OUT / 'owner-growth-comparison.json')} {relative(OUT / 'owner-growth-review.json')}
+```
+
+Les revues historiques sur `combined-comparison.json` exigent que ce fichier
+ait réellement été produit. La branche complémentaire utilise exclusivement
+`owner-growth-comparison.json` et `owner-growth-review.json`, y compris pour
+le rendu de sa décision globale. Le [mémo des commandes](../coordination/cost-command-sequence.md)
+précise la capture fidèle du résultat strict et la liaison de chaque sortie.
+Aucun échec ni succès futur n'est fabriqué pour choisir une branche.
+
 Cette fenêtre ajoute le propriétaire `public_addressed_material`, sans programme
 séparé installé par cette famille. L'identité intégrale des compteurs de graphe entre
 les deux versions n'est donc pas une prémisse de cette analyse complémentaire.

@@ -1,0 +1,21 @@
+{
+  "schema": "logos-engine.cooperative-cost-quiet-request.v1",
+  "requestedAt": "2026-11-11T02:06:17.533314+00:00",
+  "lot": "5B",
+  "nativeVersion": "0.58.0",
+  "nativeDigest": "099444085f0579ce60e226c9dece42110c577538f5f337579305a2e5f65483c4",
+  "knownOtherStatusFiles": [
+    "lot10a-status.json",
+    "lot3-status.json",
+    "lot4a-status.json",
+    "lot4b-status.json",
+    "lot4c-auxiliary-status.json",
+    "lot4c-status.json",
+    "lot5a-status.json",
+    "lot7a-status.json",
+    "lot7b-status.json"
+  ],
+  "plannedWindow": "A1/B1/B2/A2;32 measured sessions/400 actions;8 warmups/24 actions separate",
+  "measurementStarted": false,
+  "qualification": "Request declared while final own tests/replays finish. Official launch requires completed gates, fresh rereading of all known/successor lanes and exclusive performance lock."
+}

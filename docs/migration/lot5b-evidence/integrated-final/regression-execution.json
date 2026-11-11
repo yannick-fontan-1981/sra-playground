@@ -1,0 +1,69 @@
+{
+  "schema": "logos-engine.lot5b-recorded-regression-execution.v1",
+  "status": "passed",
+  "startedAt": "2026-11-11T01:56:25.983800+00:00",
+  "finishedAt": "2026-11-11T02:11:33.416548+00:00",
+  "recordedAt": "2026-11-11T02:11:33.418538+00:00",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "scripts/run-released-public-regressions-streamlog.py",
+    "docs/migration/lot5b-evidence/integrated-final/regression-cases.json",
+    "docs/migration/lot5b-evidence/integrated-final",
+    "--source-manifest",
+    "docs/migration/lot5b-evidence/integrated-final/source-manifest.json",
+    "--node-old-space-mib",
+    "1536",
+    "--timeout-seconds",
+    "2400"
+  ],
+  "exitCode": 0,
+  "launch": {
+    "path": "docs/migration/lot5b-evidence/integrated-final/regression-launch.json",
+    "bytes": 2314,
+    "sha256": "4ca7b3a781ca5c312e50ac37f3e7c480c300eef61bb806924ed5cf607a7089ca"
+  },
+  "generator": {
+    "path": "docs/migration/lot5b-evidence/coordination/run-integrated-regressions.py",
+    "bytes": 4905,
+    "sha256": "2928b439e04c27d4b8e16c0d7fa1969d3e5b09cf3ebbcd2a509eff848cb659c5"
+  },
+  "rawOutput": {
+    "path": "docs/migration/lot5b-evidence/integrated-final/regression-driver-output.raw.txt",
+    "bytes": 19551,
+    "sha256": "6fb0c75b30b595f262cc36d7bdd2500608711a59d39b71af331b34db08eed93f"
+  },
+  "compressedOutput": {
+    "path": "docs/migration/lot5b-evidence/integrated-final/regression-driver-output.log.gz",
+    "bytes": 2251,
+    "sha256": "db9665d782824e6d8b5fc29f379042762314a0298bfcb44768e4ad8cb4cd430a"
+  },
+  "outputCompressionRoundTripExact": true,
+  "sourceManifest": {
+    "path": "docs/migration/lot5b-evidence/integrated-final/source-manifest.json",
+    "bytes": 35852,
+    "sha256": "2a0101b7cf56ce98a82e27e36d5ab78b53c297ca54b82c638a168be4560643bd"
+  },
+  "caseManifest": {
+    "path": "docs/migration/lot5b-evidence/integrated-final/regression-cases.json",
+    "bytes": 8305,
+    "sha256": "a16f67724f53def79fe476716c12a61e8064df871911772731983fa2505da3a9"
+  },
+  "driver": {
+    "path": "scripts/run-released-public-regressions-streamlog.py",
+    "bytes": 15626,
+    "sha256": "b05b0e113c93696be45408e4c10549f2a379c22330efbddfcaa0f09cd51309b9"
+  },
+  "declaredInputsUnchanged": true,
+  "nativeSourceDigest": "099444085f0579ce60e226c9dece42110c577538f5f337579305a2e5f65483c4",
+  "summary": {
+    "path": "docs/migration/lot5b-evidence/integrated-final/regressions/regression-summary.json",
+    "bytes": 206536,
+    "sha256": "e1656a5ada566f7ecfaac76c044f7ccd12dad1104a984a91f1fef673c81d74b9"
+  },
+  "passedCases": 10,
+  "totalCases": 10,
+  "comparisonChecksPassed": 170,
+  "comparisonChecksExpected": 170,
+  "qualification": "Concurrent functional recorded-return regressions, not official latency measurement or live games. Historical baselines, public traces and the 17 strict comparison labels remain unchanged."
+}

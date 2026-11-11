@@ -1,0 +1,21 @@
+{
+  "command": [
+    "python",
+    "-B",
+    "docs/migration/lot5b-evidence/write-cost-results.py",
+    "--output-directory",
+    "docs/migration/lot5b-evidence/performance-integrated",
+    "--candidate-source-directory",
+    "docs/migration/lot5b-evidence/integrated-final",
+    "--baseline-manifest",
+    "docs/migration/lot5b-evidence/baseline-published-057/source-manifest.json"
+  ],
+  "startedAt": "2026-11-11T02:29:52.437673+00:00",
+  "finishedAt": "2026-11-11T02:29:53.782671+00:00",
+  "exitCode": 0,
+  "log": {
+    "path": "docs/migration/lot5b-evidence/performance-integrated/results-render.log",
+    "bytes": 521,
+    "sha256": "b0bc11d0cae946023aabc206e0ed67f075f129553716165967dc617fc166305d"
+  }
+}

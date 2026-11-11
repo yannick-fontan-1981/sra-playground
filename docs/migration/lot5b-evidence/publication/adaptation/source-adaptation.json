@@ -1,0 +1,114 @@
+{
+  "schema": "logos-engine.lot5b-final-source-build-verifier-adaptation.v1",
+  "recordedAt": "2026-11-11T02:47:06.984527+00:00",
+  "status": "source_prepared_and_syntax_checked",
+  "derivedFrom": {
+    "path": "docs/migration/lot4c-evidence/publication/verify-final-source-build.py",
+    "bytes": 22907,
+    "sha256": "b66a3bd933ea765e9551e759d5bdb2087c0e357a6216b6df02c30d1a8df6c2f3"
+  },
+  "retainedBefore": {
+    "path": "docs/migration/lot5b-evidence/publication/adaptation/verify-final-source-build-4c-published.py",
+    "bytes": 22907,
+    "sha256": "b66a3bd933ea765e9551e759d5bdb2087c0e357a6216b6df02c30d1a8df6c2f3"
+  },
+  "preparedVerifier": {
+    "path": "docs/migration/lot5b-evidence/publication/verify-final-source-build.py",
+    "bytes": 33181,
+    "sha256": "cdd3526cbf0a222ded9770fdbded2b626b71af6204cc2b72d4566235ffb33036"
+  },
+  "retainedAfter": {
+    "path": "docs/migration/lot5b-evidence/publication/adaptation/verify-final-source-build-5b-prepared.py",
+    "bytes": 33181,
+    "sha256": "cdd3526cbf0a222ded9770fdbded2b626b71af6204cc2b72d4566235ffb33036"
+  },
+  "patch": {
+    "path": "docs/migration/lot5b-evidence/publication/adaptation/verify-final-source-build.patch",
+    "bytes": 32646,
+    "sha256": "2b751f1f9484f7b1e3c1422c8b76b6e94a26efeae0a3332da64436ebcb4a150d"
+  },
+  "usage": {
+    "path": "docs/migration/lot5b-evidence/publication/verify-final-source-build-usage.md",
+    "bytes": 9226,
+    "sha256": "2cd472762720b9b44bf062b4be35744925959dca8ce4543260ef02f8887989ea"
+  },
+  "syntax": {
+    "path": "docs/migration/lot5b-evidence/publication/adaptation/syntax-01.json",
+    "bytes": 629,
+    "sha256": "c1efee0901d3f120eab90b5677bd9f43817bbcc7eb214cd412c1a24043df5f0a"
+  },
+  "actualReceiptInputs": [
+    {
+      "path": "docs/migration/lot5b-evidence/integrated-final/source-manifest.json",
+      "bytes": 35852,
+      "sha256": "2a0101b7cf56ce98a82e27e36d5ab78b53c297ca54b82c638a168be4560643bd"
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/integrated-final/source-archive.json",
+      "bytes": 37494,
+      "sha256": "3a6a17dcde5a785ede5b0fa4d9c0a721231627cb48b5ff730d9dd5e276c40cc0"
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/integrated-final/validation/delta-tests-run.json",
+      "bytes": 132464,
+      "sha256": "fee43cc4d12454c987fafd04bdf67215eb4a975f46674204f2573251cd6396ce"
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/integrated-final/validation/checks-run.json",
+      "bytes": 82367,
+      "sha256": "4522487cc4350aaf23631a1a5c7069feb5c9d0923572d852526edd9777ec34c5"
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/integrated-final/regressions/regression-summary.json",
+      "bytes": 206536,
+      "sha256": "e1656a5ada566f7ecfaac76c044f7ccd12dad1104a984a91f1fef673c81d74b9"
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/integrated-final/delivery-integrity.json",
+      "bytes": 10672,
+      "sha256": "c19ee00573bbe22dcb093628410ac0200c903364116c88627d8dcfd461237bee"
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/integrated-final/publication-inputs.json",
+      "bytes": 455381,
+      "sha256": "e945c30b23d02d1a704e15997c0f4fe0a538ef774b80ee3d2a021f09e6b42f04"
+    }
+  ],
+  "observedIntegratedIdentity": {
+    "nativeVersion": "0.58.0",
+    "nativeSourceDigest": "099444085f0579ce60e226c9dece42110c577538f5f337579305a2e5f65483c4",
+    "nativeSourceMembers": 302,
+    "sourceArchiveMembers": 313,
+    "inventoryCounts": {
+      "native": 302,
+      "archive": 313,
+      "sourceAndTests": 693,
+      "buildInputs": 367,
+      "replay": 10
+    },
+    "uniqueFrozenInputsPerCheckout": 755
+  },
+  "adaptations": [
+    "All checkout/artifact paths, plan/preparation/publication SHA pins and workflow/archive filename patterns are CLI parameters.",
+    "Future commits, trees, project and step population are derived only from the actual pinned bounded-source-push-plan.v2.",
+    "5B publication receipts/costAccepted/costGlobalStatus fields replace the incompatible 4C fields; actual counts and native version come from linked integrated receipts.",
+    "Native/source/test/build/replay inventories, exact membership, worker bytes, ancestry, raw workflow results, archive members and before/after invariants remain mandatory.",
+    "The .openai/hosting.json to dist/.openai/hosting.json package mapping is preserved.",
+    "The obsolete mandatory 4C archive-path failure is removed; actual declared 5B transport failures can be pinned separately without promotion.",
+    "The actual strict-cost failure receipt and exact log are mandatory in both checkouts, keep exitCode 1 and require the strict aggregate output to remain absent.",
+    "The actual cost verdict remains distinct from byte integrity; no Site result or publication authorization is inferred."
+  ],
+  "executionLimits": {
+    "verifierBodyExecuted": false,
+    "mockGateExecuted": false,
+    "futureTransportPlanCreated": false,
+    "futureArchiveCreated": false,
+    "nativeSourceModified": false,
+    "testModified": false,
+    "buildRun": false,
+    "costToolModified": false,
+    "gitMutation": false,
+    "publicationPerformed": false
+  },
+  "qualification": "Preparation and Python syntax only. This is not a successful transport/source/build verification result; that verifier must run once the real declared source helpers and retained archives exist."
+}

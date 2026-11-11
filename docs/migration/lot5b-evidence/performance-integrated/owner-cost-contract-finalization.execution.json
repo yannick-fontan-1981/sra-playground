@@ -1,0 +1,13 @@
+{
+  "command": [
+    "python",
+    "-B",
+    "docs/migration/lot5b-evidence/finalize-owner-cost-contract.py",
+    "docs/migration/lot5b-evidence/performance-integrated"
+  ],
+  "startedAt": "2026-11-11T01:54:50.904243+00:00",
+  "finishedAt": "2026-11-11T01:54:51.018532+00:00",
+  "exitCode": 0,
+  "log": "docs/migration/lot5b-evidence/performance-integrated/owner-cost-contract-finalization.log",
+  "officialCostMeasurement": false
+}

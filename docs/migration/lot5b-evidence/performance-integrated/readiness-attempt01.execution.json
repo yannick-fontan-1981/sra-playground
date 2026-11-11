@@ -1,0 +1,35 @@
+{
+  "command": [
+    "python",
+    "-B",
+    "docs/migration/lot5b-evidence/finalize-cost-readiness.py",
+    "--performance-directory",
+    "docs/migration/lot5b-evidence/performance-integrated",
+    "--candidate-source-directory",
+    "docs/migration/lot5b-evidence/integrated-final",
+    "--test-scope-plan",
+    "docs/migration/lot5b-evidence/coordination/integrated-test-scope-plan.json",
+    "--publication-chain",
+    "docs/migration/lot5b-evidence/coordination/published-predecessor-chain.json",
+    "--oracle-export-receipt",
+    "docs/migration/lot5b-evidence/diagnostic/source-oracle-export.json",
+    "--common-positive-directory",
+    "docs/migration/lot5b-evidence/integrated-final/common-positive",
+    "--common-negative-directory",
+    "docs/migration/lot5b-evidence/integrated-final/common-negative",
+    "--common-stock-directory",
+    "docs/migration/lot5b-evidence/integrated-final/common-stock",
+    "--browser-receipt",
+    "docs/migration/lot5b-evidence/integrated-final/browser/browser-qa.json",
+    "--weav-case-checkpoint",
+    "docs/migration/lot5b-evidence/coordination/weav-case-checkpoint.json"
+  ],
+  "startedAt": "2026-11-11T02:16:12.338157+00:00",
+  "finishedAt": "2026-11-11T02:16:16.834826+00:00",
+  "exitCode": 0,
+  "log": {
+    "path": "docs/migration/lot5b-evidence/performance-integrated/readiness-attempt01.log",
+    "sha256": "9644117d85cd0826bd7212a51c8044d645280ca19eac998edbe3c888a2b5bb78",
+    "bytes": 364
+  }
+}

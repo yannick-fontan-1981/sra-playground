@@ -3,9 +3,90 @@
 An English-language playground for **100 interactive games** and Yannick
 Fontan's **Symbolic Reasoning Agent** research.
 
+<!-- LOT5B_README_CURRENT_START -->
+
+## Current validated candidate: lot 5B / native 0.58.0 — publication pending
+
+**AddressedMaterial / lot 5B is functionally validated and its global cost is
+accepted. Its Site publication is still pending; no new Site version is claimed.**
+The candidate integrates the actual Site 92 / native 0.57.0 predecessor and its
+[Site 93 documentation closure](docs/migration/lot5b-evidence/coordination/published-4c-documentation-closure-reconciliation.json).
+The closure preserves the native and build inputs; Site 92 remains the declared
+cost reference. The [candidate freeze](docs/migration/lot5b-evidence/integrated-final/source-manifest.json)
+contains **302 native files**, digest
+`099444085f0579ce60e226c9dece42110c577538f5f337579305a2e5f65483c4`, and its
+[source archive](docs/migration/lot5b-evidence/integrated-final/source-archive.json)
+binds **313 files**.
+
+One `public_addressed_material` owner transfers the consumed
+`AddressedMaterial → AddressedField → FieldStock` chain. It learns from actual
+selected and passive returns, binds each addressed click to the current observed
+object and guards every step of a bounded path. Retained hypotheses must be
+revalidated across boundaries. Stock preservation obligations also constrain
+proposals from other families.
+
+| Completed evidence on the 0.58 freeze | Result |
+| --- | --- |
+| [Final tests](docs/migration/lot5b-evidence/integrated-final/validation/delta-tests-run.json) | **4,900/4,900 tests in 125 files**, no failures, cancellations, skips or TODOs |
+| [Project checks](docs/migration/lot5b-evidence/integrated-final/validation/checks-run.json) | **5/5 passed**, including both audits and the production build |
+| [Ten recorded regressions](docs/migration/lot5b-evidence/integrated-final/regressions/regression-summary.json) | **170/170 checks**; 357 actions, 275 prefixes, 632 requests, 30 natural boundaries, 367 complete public packets and 1,676 animation frames |
+| [Independent component oracle](docs/migration/lot5b-evidence/diagnostic/source-oracle-export.json) | **14 helpers, 19 cold chains, 522 operations**; 1,786 immutable original files verified before and after |
+| Original comparisons of actual common-loop journals | [Positive **169/169**](docs/migration/lot5b-evidence/integrated-final/common-positive/original-comparison.json), [negative **164/164**](docs/migration/lot5b-evidence/integrated-final/common-negative/original-comparison.json), [bounded stock **199/199**](docs/migration/lot5b-evidence/integrated-final/common-stock/original-comparison.json) |
+| [Original stock preservation](docs/migration/lot5b-evidence/integrated-final/common-stock/original-preservation-comparison.json) | **835/835 checks**; independently recomputed provider and two identical preservation refusals |
+| [Actual browser QA](docs/migration/lot5b-evidence/integrated-final/browser/browser-qa.json) | **Three TRIA levels, 17 actions and 17 plans**; Pause at two actions, then exactly one action to reach three, followed by natural progression |
+
+The stock common-loop proof is deliberately bounded: **8/17 stages, one fusion
+and one move**, followed by the original preservation refusal. Its three earlier
+failed attempts remain failed. Neither this proof nor the component oracle
+establishes complete stock traversal or complete-original-caller parity. The
+recorded regressions and TRIA interface check do not add a new game success or
+establish AddressedMaterial's own contribution in a live game.
+
+The [current register](docs/migration/v6-entry-point-progress.json) has
+**62/76 connected entries (81.6%), zero partial entries and 14 remaining**.
+The [coverage inventory](docs/migration/v6-coverage.json) retains
+**192 component-verified modules, 147 partial transfers, 1,030 pending and zero
+fully verified modules**. **All six full-migration gates remain false.**
+
+The [official ABBA window](docs/migration/lot5b-evidence/performance-integrated/window.json)
+retains all **32 measured sessions / 400 actions**, with eight warmups / 24
+actions separated. Its [independent review](docs/migration/lot5b-evidence/performance-integrated/owner-growth-review.json)
+passes **11,865/11,865 checks** and accepts both complete-session medians:
+**STCK +3.780905%**, **SMLP −1.556219%**, each strictly below a 10% increase.
+Phase diagnostics remain **14/16**, including **STCK restoration +13.032972%**
+and **SMLP known-prefix guard +11.650805%**; the cohorts retain **11/16** and
+**14/16**. The [full report](docs/migration/lot5b-evidence/performance-integrated/results.md)
+retains all sessions, adverse p95 values and scope limitations. A phase over
+10% is accepted under the authorized per-game global rule without hiding its
+diagnostic.
+
+The historical strict aggregator remains failed with **exit 1**. The separate
+predeclared rule qualifies **432 structural counter differences**, backed by
+**64/64 structural checks** and **68/68 static preflight checks**; these are
+not 432 additional Kernel deltas. No measured duration is corrected or removed.
+This accepted budget does not establish general acceleration, constant
+long-session latency or a solution to **WEAV level 6**. Its exhausted cumulative
+clock remains unchanged, with no new live WEAV attempt or reset.
+
+The next step in this conversation is **5C / `observed_object_binding`**, after
+the real 5B publication is recorded; **lot 5 has one registry entry remaining**.
+Lot 4 is closed within its delivered scopes. Lot 7's transfers are closed, with
+the **LKEY level-3 follow-up** handled separately. Other conversations have
+started **6A / `preview_packing`** and **10B / `window_question`** after completed
+10A; lots **8, 9 and 11** remain planned. See the
+[5B report](docs/migration/lot5b-addressed-material.md),
+[evidence index](docs/migration/lot5b-evidence/README.md) and
+[current roadmap](docs/migration/v6-delivery-roadmap.md).
+
+<!-- LOT5B_README_CURRENT_END -->
+
 <!-- LOT4C_README_CURRENT_START -->
 
-## Site 92 / native 0.57.0: FacetExamples delivered
+## Published predecessor: Site 92 / native 0.57.0, FacetExamples delivered
+
+The following section preserves the 4C publication milestone. Its documentation
+closure is now published in Site 93 and reconciled by the current 5B candidate
+above; the results and next-step statements below retain their historical scope.
 
 **Lot 4C is delivered, with functional validation, accepted global cost and actual
 private publication in [Site 92](docs/migration/lot4c-evidence/publication/native-publication.json).**

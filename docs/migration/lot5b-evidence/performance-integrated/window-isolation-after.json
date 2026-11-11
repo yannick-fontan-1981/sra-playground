@@ -1,0 +1,127 @@
+{
+  "recordedAt": "2026-11-11T02:27:33.371534+00:00",
+  "knownLanePopulationUnchanged": true,
+  "files": [
+    {
+      "file": "lot10a-status.json",
+      "evidence": {
+        "path": "docs/migration/lot5b-evidence/performance-integrated/window-isolation-after/lot10a-status.json",
+        "sha256": "944d8396db73c4ae348e4fd2de89ae518d0f65d36811c4cafbd25cfd35bf1129",
+        "bytes": 7473
+      },
+      "executionFlagsQuiet": true,
+      "nonQuietFlags": {}
+    },
+    {
+      "file": "lot10b-status.json",
+      "evidence": {
+        "path": "docs/migration/lot5b-evidence/performance-integrated/window-isolation-after/lot10b-status.json",
+        "sha256": "950d3ebfd442e13b88cc6a9b4bdb4f707d915ebccac07c6f11b76e55310f759b",
+        "bytes": 3068
+      },
+      "executionFlagsQuiet": true,
+      "nonQuietFlags": {}
+    },
+    {
+      "file": "lot3-status.json",
+      "evidence": {
+        "path": "docs/migration/lot5b-evidence/performance-integrated/window-isolation-after/lot3-status.json",
+        "sha256": "f397d6076b5fde6775fe5056c48e3b69dd10110fcd68d0d627f0849d2a4a8076",
+        "bytes": 4769
+      },
+      "executionFlagsQuiet": true,
+      "nonQuietFlags": {}
+    },
+    {
+      "file": "lot4a-status.json",
+      "evidence": {
+        "path": "docs/migration/lot5b-evidence/performance-integrated/window-isolation-after/lot4a-status.json",
+        "sha256": "110a35288d6d7644ddb16c80554ae33605e4e9117bf8cbda4b781e878d4a8830",
+        "bytes": 7341
+      },
+      "executionFlagsQuiet": true,
+      "nonQuietFlags": {}
+    },
+    {
+      "file": "lot4b-status.json",
+      "evidence": {
+        "path": "docs/migration/lot5b-evidence/performance-integrated/window-isolation-after/lot4b-status.json",
+        "sha256": "e6b2cc3277cc11b0012858734688da427127782ca5457c1034c23836a55f4da3",
+        "bytes": 4153
+      },
+      "executionFlagsQuiet": true,
+      "nonQuietFlags": {}
+    },
+    {
+      "file": "lot4c-auxiliary-status.json",
+      "evidence": {
+        "path": "docs/migration/lot5b-evidence/performance-integrated/window-isolation-after/lot4c-auxiliary-status.json",
+        "sha256": "8a51579499f5df1c85fe244d1aa1a1f6e109867eb99bc07e29703f29d027b9ed",
+        "bytes": 628
+      },
+      "executionFlagsQuiet": true,
+      "nonQuietFlags": {}
+    },
+    {
+      "file": "lot4c-status.json",
+      "evidence": {
+        "path": "docs/migration/lot5b-evidence/performance-integrated/window-isolation-after/lot4c-status.json",
+        "sha256": "9fe6b2e3510740b3c4a9c21abd1b84c925f0120308ca6320606388a642b2e206",
+        "bytes": 2188
+      },
+      "executionFlagsQuiet": true,
+      "nonQuietFlags": {}
+    },
+    {
+      "file": "lot5a-status.json",
+      "evidence": {
+        "path": "docs/migration/lot5b-evidence/performance-integrated/window-isolation-after/lot5a-status.json",
+        "sha256": "4fac6b06f74a1b03d3f7fd0ef3e2a34532fccf77df98a35a8339003ff0b66ae2",
+        "bytes": 5578
+      },
+      "executionFlagsQuiet": true,
+      "nonQuietFlags": {}
+    },
+    {
+      "file": "lot6a-status.json",
+      "evidence": {
+        "path": "docs/migration/lot5b-evidence/performance-integrated/window-isolation-after/lot6a-status.json",
+        "sha256": "6801ab43d9628a4203148d7e592da3566634b02d5ef5bb23f8eb2b01442b14dd",
+        "bytes": 2255
+      },
+      "executionFlagsQuiet": true,
+      "nonQuietFlags": {}
+    },
+    {
+      "file": "lot7-followup-status.json",
+      "evidence": {
+        "path": "docs/migration/lot5b-evidence/performance-integrated/window-isolation-after/lot7-followup-status.json",
+        "sha256": "bd45a70b1082acfe5e92eccaeefda72bd3383925c7aef0de8381c6f55c1a8697",
+        "bytes": 1532
+      },
+      "executionFlagsQuiet": true,
+      "nonQuietFlags": {}
+    },
+    {
+      "file": "lot7a-status.json",
+      "evidence": {
+        "path": "docs/migration/lot5b-evidence/performance-integrated/window-isolation-after/lot7a-status.json",
+        "sha256": "e9c395a90dcfee739a1d52342878ef24739bf1b2d97307eab1f8f6a22ac2fad0",
+        "bytes": 6045
+      },
+      "executionFlagsQuiet": true,
+      "nonQuietFlags": {}
+    },
+    {
+      "file": "lot7b-status.json",
+      "evidence": {
+        "path": "docs/migration/lot5b-evidence/performance-integrated/window-isolation-after/lot7b-status.json",
+        "sha256": "0aeae41dd69aa0f0e543c3ef72700e21500a9b83b5369a78c1f1018ef2293f2b",
+        "bytes": 3991
+      },
+      "executionFlagsQuiet": true,
+      "nonQuietFlags": {}
+    }
+  ],
+  "nonQuietLanes": []
+}

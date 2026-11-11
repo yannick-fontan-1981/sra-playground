@@ -1,0 +1,24 @@
+{
+  "schema": "logos-engine.browser-case-clock-continuation.v1",
+  "status": "completed",
+  "game": "TRIA",
+  "clockReset": false,
+  "maximumCumulativeSeconds": 2400,
+  "startedAt": "2026-11-11T01:56:58.394558+00:00",
+  "finishedAt": "2026-11-11T02:03:04.906482+00:00",
+  "elapsedSeconds": 366.511924,
+  "cumulativeBeforeSeconds": 895.795295,
+  "cumulativeAfterSeconds": 1262.307219,
+  "remainingSeconds": 1137.692781,
+  "priorClock": {
+    "path": "docs/migration/lot5b-evidence/integrated-final/browser/prior-case-clock.json",
+    "sha256": "6ae9cb16ec1b8ec0ee03a718d2ba71272a1252d17b52cacae431c34eb3c82682",
+    "bytes": 613
+  },
+  "browserReceipt": {
+    "path": "docs/migration/lot5b-evidence/integrated-final/browser/browser-qa.json",
+    "sha256": "cfd106c511d5814331140b416713985d369f282b05eac41f4ea0e33fa2e03fab",
+    "bytes": 3336
+  },
+  "qualification": "Entire interval from preview setup through UI observations, initial runtime reset, failed Pause attempt, successful controls, final screenshot and actual preview shutdown is charged. No excluded failed interaction or reset."
+}

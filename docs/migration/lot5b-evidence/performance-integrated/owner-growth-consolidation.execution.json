@@ -1,0 +1,16 @@
+{
+  "command": [
+    "node",
+    "docs/migration/lot5b-evidence/consolidate-owner-costs.mjs",
+    "docs/migration/lot5b-evidence/performance-integrated/owner-growth-contract.json",
+    "docs/migration/lot5b-evidence/performance-integrated/owner-growth-comparison.json"
+  ],
+  "startedAt": "2026-11-11T02:29:49.865946+00:00",
+  "finishedAt": "2026-11-11T02:29:51.391263+00:00",
+  "exitCode": 0,
+  "log": {
+    "path": "docs/migration/lot5b-evidence/performance-integrated/owner-growth-consolidation.log",
+    "bytes": 291,
+    "sha256": "c122f9fd45231d821a4a99904b4011acd39d23e0cceb87364cccad82f9392ed8"
+  }
+}

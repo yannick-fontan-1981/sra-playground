@@ -1,0 +1,21 @@
+{
+  "schema": "logos-engine.evidence-byte-parts.v1",
+  "original": {
+    "file": "addressed-reference-key-sorted.json.gz",
+    "sha256": "7bac32f8e9b80e494f0a8d55d02beb64a7178c9e4f9f40411f26ef4067d9c24e",
+    "bytes": 1081738
+  },
+  "parts": [
+    {
+      "file": "addressed-reference-key-sorted.json.gz.part000",
+      "sha256": "b8f7a4021e7d9e43279c1aff01850d1dd2d4a78a728f120f9ef3a6a925ac6746",
+      "bytes": 900000
+    },
+    {
+      "file": "addressed-reference-key-sorted.json.gz.part001",
+      "sha256": "6ba5eb17373b77d5884a7d8a15e49120a94aae5426a1aa1ad66d8f65faf995d6",
+      "bytes": 181738
+    }
+  ],
+  "qualification": "Exact byte partitions of immutable evidence; original data and checksum are unchanged."
+}

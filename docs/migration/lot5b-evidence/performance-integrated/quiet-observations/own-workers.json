@@ -1,0 +1,38 @@
+{
+  "schema": "logos-engine.observed-own-worker-quiet.v1",
+  "observedAt": "2026-11-11T02:16:12.337093+00:00",
+  "source": "Root directly observed collaboration.list_agents: all three named agents completed, and their final messages explicitly release all executions; root tracked functional commands and preview shutdown completed.",
+  "agents": [
+    {
+      "id": "/root",
+      "agentStatus": "running controller only",
+      "activeCommand": null,
+      "executionStopped": true
+    },
+    {
+      "id": "/root/addressed_contract",
+      "agentStatus": "completed",
+      "activeCommand": null,
+      "executionStopped": true
+    },
+    {
+      "id": "/root/addressed_integration",
+      "agentStatus": "completed",
+      "activeCommand": null,
+      "executionStopped": true
+    },
+    {
+      "id": "/root/addressed_oracle",
+      "agentStatus": "completed",
+      "activeCommand": null,
+      "executionStopped": true
+    }
+  ],
+  "NODE_OPTIONS": null,
+  "previewStop": {
+    "path": "docs/migration/lot5b-evidence/integrated-final/browser/preview-stop.json",
+    "sha256": "9383ab701992b0b5e96e8ba0b3c3f40b1a6be2d84a1c1a760089037b0ed65fa7",
+    "bytes": 230
+  },
+  "qualification": "No native agent/game/test/build/oracle/preview/archive job remains. Root performs only final file verification and the declared official cost controller."
+}

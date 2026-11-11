@@ -1,0 +1,14 @@
+{
+  "command": [
+    "node",
+    "scripts/compare-native-loop-costs.mjs",
+    "docs/migration/lot5b-evidence/performance-integrated/comparison-policy.json",
+    "docs/migration/lot5b-evidence/performance-integrated/cohort2/baseline.json",
+    "docs/migration/lot5b-evidence/performance-integrated/cohort2/after.json",
+    "docs/migration/lot5b-evidence/performance-integrated/cohort2/comparison.json"
+  ],
+  "startedAt": "2026-11-11T02:29:15.185618+00:00",
+  "finishedAt": "2026-11-11T02:29:15.285137+00:00",
+  "exitCode": 0,
+  "log": "docs/migration/lot5b-evidence/performance-integrated/cohort2/comparison.log"
+}

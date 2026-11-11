@@ -1,0 +1,2332 @@
+{
+  "schema": "logos-engine.lot5b-integrated-input-preparation.v1",
+  "status": "inputs_prepared_and_verified",
+  "startedAt": "2026-11-11T01:53:46.979458+00:00",
+  "finishedAt": "2026-11-11T01:53:47.671268+00:00",
+  "generator": {
+    "path": "docs/migration/lot5b-evidence/coordination/prepare-integrated-inputs.py",
+    "sha256": "96a45e38ef1768d93c892745b2fa0c8ba4cffb8244fdbe693df3d309e5e137e6",
+    "bytes": 15376
+  },
+  "coordination": {
+    "lock": "/workspace/shared/sra-coordination/performance.lock",
+    "mode": "shared"
+  },
+  "publishedPredecessor": {
+    "siteVersion": 92,
+    "nativeVersion": "0.57.0",
+    "commit": "d06620d1e4ca2c9758cc693b1ced9eeeddccb7e6",
+    "nativeDigest": "eebd099808672be934389020c8f9061df4fdacab28cd7d60c00cd1b080464c04",
+    "publication": {
+      "path": "docs/migration/lot5b-evidence/coordination/published-4c-site92.json",
+      "sha256": "2b79ab3c147e6b6e4dd86161324634413691ef4feb95ab215d5507f72fecbda4",
+      "bytes": 1496
+    },
+    "sourceVerification": {
+      "path": "docs/migration/lot5b-evidence/coordination/published-4c-source-verification.json",
+      "sha256": "2babd319a77392755a6027415dc483fd4187ad0d4d4ebe7a370e8995ccc3e285",
+      "bytes": 36662
+    }
+  },
+  "scope": {
+    "path": "docs/migration/lot5b-evidence/coordination/integrated-test-scope-plan.json",
+    "sha256": "1fbf4b6dd77386cbf69b352744438cb3e8a0fe79c5b778296d1d5f05b14ff32b",
+    "bytes": 14802
+  },
+  "caseManifest": {
+    "path": "docs/migration/lot5b-evidence/integrated-final/regression-cases.json",
+    "sha256": "a16f67724f53def79fe476716c12a61e8064df871911772731983fa2505da3a9",
+    "bytes": 8305
+  },
+  "testFiles": 125,
+  "cases": 10,
+  "plannedStrictChecks": 170,
+  "casePinsCopiedExactly": true,
+  "restoredMissingInputs": [
+    {
+      "input": {
+        "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-campaign.json.gz",
+        "sha256": "93e59ab1146d4eef7c944a0e1fc0ab7b0d539cc90a074abe424742be011eec37",
+        "bytes": 3027289
+      },
+      "partsManifest": {
+        "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-campaign.json.gz.parts.json",
+        "sha256": "57e48a6b31035a2e9d9be146a878067137cc34aa776728da8918929c59f261a2",
+        "bytes": 1005
+      },
+      "partCount": 4,
+      "helperResult": {
+        "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-campaign.json.gz",
+        "sha256": "93e59ab1146d4eef7c944a0e1fc0ab7b0d539cc90a074abe424742be011eec37",
+        "bytes": 3027289,
+        "manifest": "docs/migration/lot4c-evidence/development/isos-live-01/isos-campaign.json.gz.parts.json",
+        "parts": 4,
+        "restored": true
+      },
+      "sourceResultRegenerated": false
+    }
+  ],
+  "verifiedRegressionInputs": [
+    {
+      "case": "catr-051",
+      "kind": "baseline",
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz",
+      "sha256": "379ce17151369af5ba39e205cc8b2882aa4e97a3dd8909b9c831a7b2b0ac7fb6",
+      "bytes": 1649205
+    },
+    {
+      "case": "catr-051",
+      "kind": "trace",
+      "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-public-trace.json.gz",
+      "sha256": "e152eb2705947addd1506cb01872d23770d188cb1dd46c86dcbc9bdf7f4f2816",
+      "bytes": 24340
+    },
+    {
+      "case": "rswp-051",
+      "kind": "baseline",
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz",
+      "sha256": "5de1bbc32db1a3dffdf5c350ef70ca90142007c6ebc7735f8b8c56e9fdfa00ba",
+      "bytes": 2585868
+    },
+    {
+      "case": "rswp-051",
+      "kind": "trace",
+      "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+      "sha256": "43f32a75b0d8cd747457602a3c3f113e5d63ec621e45bb2bc1d195f242997755",
+      "bytes": 41445
+    },
+    {
+      "case": "fogw-051",
+      "kind": "baseline",
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz",
+      "sha256": "fe037e48df8dd3a7c302a5e85355b2b9555daa6d9d8aa56f7772fc363732726c",
+      "bytes": 8174480
+    },
+    {
+      "case": "fogw-051",
+      "kind": "trace",
+      "path": "docs/migration/lot3e-evidence/final/fogw-reception-session/fogw-public-trace.json.gz",
+      "sha256": "1d4e92e6ef063e7799bfb4237b17beb148b49bde4ab46ef26ef91a3271d44b46",
+      "bytes": 39060
+    },
+    {
+      "case": "vois-051",
+      "kind": "baseline",
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz",
+      "sha256": "39a6e6551cf94a48842b154afdc2256dafd88fd93404e4776bd67b24d5a4796d",
+      "bytes": 10678168
+    },
+    {
+      "case": "vois-051",
+      "kind": "trace",
+      "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+      "sha256": "d642c805485571c0e54ed3421644cbd8463ca3697ce135b223f635487b58069d",
+      "bytes": 19976
+    },
+    {
+      "case": "conn-050",
+      "kind": "baseline",
+      "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz",
+      "sha256": "f3df06cff6d370874889f5183a77dd91ae585060c04ba052d0025cd2db9e3750",
+      "bytes": 2630905
+    },
+    {
+      "case": "conn-050",
+      "kind": "trace",
+      "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-public-trace.json.gz",
+      "sha256": "fc8c7bf4529490e6e6ee04e7a5a51b389180e5fb5e35255145c59ecf4dd0f102",
+      "bytes": 56466
+    },
+    {
+      "case": "mind-051",
+      "kind": "baseline",
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz",
+      "sha256": "6a187286069287a89cedb60ac0f206e0702abae5d8df0dd2615bd43c1bb5c75a",
+      "bytes": 4349054
+    },
+    {
+      "case": "mind-051",
+      "kind": "trace",
+      "path": "docs/migration/lot7a-evidence/integrated-baseline/recorded/mind-public-trace.json.gz",
+      "sha256": "f74678fa4d9c1b5397545b648ab353c29fc0a5a4c0eb35ab36a5258bfa34ca0c",
+      "bytes": 17256
+    },
+    {
+      "case": "weav-051",
+      "kind": "baseline",
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz",
+      "sha256": "114906e80b2ff5817adeaa105fd4e84ea2b057d8393b202dc03f35248b350fc3",
+      "bytes": 13577757
+    },
+    {
+      "case": "weav-051",
+      "kind": "trace",
+      "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+      "sha256": "a46f6a331e8f98767ee709c2931edd6d0abde9cc636b93ef384509c04adface2",
+      "bytes": 26568
+    },
+    {
+      "case": "tria-development-4b",
+      "kind": "baseline",
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz",
+      "sha256": "e473af537c042d76ce98f13b2cc9be495e7b4ac08ca443251df7804d542bdbbe",
+      "bytes": 3161161
+    },
+    {
+      "case": "tria-development-4b",
+      "kind": "trace",
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-public-trace.json.gz",
+      "sha256": "916d0f1cb1dcbfd9b7ba7624e7d3d4648a91ae7ef64583288af4711d2a955ac3",
+      "bytes": 13286
+    },
+    {
+      "case": "craf-055",
+      "kind": "baseline",
+      "path": "docs/migration/lot7b-evidence/integrated-final/craf-campaign.json.gz",
+      "sha256": "78e86660961ed6d75707c001c021b8c223d205137d86288ac21d09a533b680f2",
+      "bytes": 12767727
+    },
+    {
+      "case": "craf-055",
+      "kind": "trace",
+      "path": "docs/migration/lot7b-evidence/integrated-final/craf-public-trace.json.gz",
+      "sha256": "cf69ad941e80e17f8d6cd66edc0419a0c6ff7aa8d9bbdaf503cb56a49e8c3f98",
+      "bytes": 40777
+    },
+    {
+      "case": "isos-development-4c",
+      "kind": "baseline",
+      "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-campaign.json.gz",
+      "sha256": "93e59ab1146d4eef7c944a0e1fc0ab7b0d539cc90a074abe424742be011eec37",
+      "bytes": 3027289
+    },
+    {
+      "case": "isos-development-4c",
+      "kind": "trace",
+      "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-public-trace.json.gz",
+      "sha256": "5b302279efb140d1c549d9650d434efb38fde0b8bc5809ab072de66159c8c329",
+      "bytes": 11183
+    }
+  ],
+  "inheritedFixtureFilesVerified": 150,
+  "ownFixture": {
+    "path": "tests/fixtures/v6-addressed-material-reference.json.gz",
+    "sha256": "063fa8d5114852fa0ffdd9e1a62fff79bf967ffcef8689186c2badcd0556b682",
+    "bytes": 1074290
+  },
+  "staticLiteralUrlInputs": [
+    {
+      "test": "tests/v5-finite-relation-domain.test.ts",
+      "literal": "./fixtures/v5-finite-relation-domain-reference.json.gz",
+      "path": "tests/fixtures/v5-finite-relation-domain-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v5-piercing-native.test.ts",
+      "literal": "./fixtures/v5-piercing-reference.json.gz",
+      "path": "tests/fixtures/v5-piercing-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v5-reception-wait-contracts.test.ts",
+      "literal": "./fixtures/v6-reception-service-reference.json.gz",
+      "path": "tests/fixtures/v6-reception-service-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v5-reference-population-calculus.test.ts",
+      "literal": "./fixtures/v6-reference-population-reference.json.gz",
+      "path": "tests/fixtures/v6-reference-population-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v5-temporal-fragment-match.test.ts",
+      "literal": "./fixtures/v6-framed-window-reference.json.gz",
+      "path": "tests/fixtures/v6-framed-window-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-acquired-continuation-priority.test.ts",
+      "literal": "../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/",
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-alternating-graph-access.test.ts",
+      "literal": "./fixtures/v6-alternating-graph-access-reference.json.gz",
+      "path": "tests/fixtures/v6-alternating-graph-access-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-alternating-graph-access.test.ts",
+      "literal": "../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/",
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-alternating-graph-integration.test.ts",
+      "literal": "./fixtures/v6-alternating-graph-access-reference.json.gz",
+      "path": "tests/fixtures/v6-alternating-graph-access-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-alternating-graph-integration.test.ts",
+      "literal": "./fixtures/v6-alternating-common-reference.json.gz",
+      "path": "tests/fixtures/v6-alternating-common-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-alternating-graph-integration.test.ts",
+      "literal": "../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/",
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-auxiliary-support.test.ts",
+      "literal": "./fixtures/v6-auxiliary-support-reference.json.gz",
+      "path": "tests/fixtures/v6-auxiliary-support-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-caller-integration.test.ts",
+      "literal": "../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/",
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-caller-integration.test.ts",
+      "literal": "./fixtures/v6-native-caller/hano-first-prefix.json",
+      "path": "tests/fixtures/v6-native-caller/hano-first-prefix.json",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-cell-placement-integration.test.ts",
+      "literal": "./fixtures/v6-cell-placement-reference.json.gz",
+      "path": "tests/fixtures/v6-cell-placement-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-cell-placement-integration.test.ts",
+      "literal": "../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/",
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-cell-placement.test.ts",
+      "literal": "./fixtures/v6-cell-placement-reference.json.gz",
+      "path": "tests/fixtures/v6-cell-placement-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-cell-placement.test.ts",
+      "literal": "../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/",
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-configured-arrivals.test.ts",
+      "literal": "./fixtures/v6-configured-arrivals-reference.json.gz",
+      "path": "tests/fixtures/v6-configured-arrivals-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-control-attention-reference.test.ts",
+      "literal": "./fixtures/v6-control-attention-reference.json.gz",
+      "path": "tests/fixtures/v6-control-attention-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-coupled-pair-planning.test.ts",
+      "literal": "./fixtures/v6-coupled-pair-planning-reference.json.gz",
+      "path": "tests/fixtures/v6-coupled-pair-planning-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-coupled-pair-planning.test.ts",
+      "literal": "../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/",
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-coupled-pair-planning.test.ts",
+      "literal": "./fixtures/v6-occurrence-reference.json",
+      "path": "tests/fixtures/v6-occurrence-reference.json",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-crossed-prefix-access.test.ts",
+      "literal": "./fixtures/v6-crossed-prefix-reference.json.gz",
+      "path": "tests/fixtures/v6-crossed-prefix-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-crossed-prefix-integration.test.ts",
+      "literal": "./fixtures/v6-crossed-prefix-legacy-checkpoints.json.gz",
+      "path": "tests/fixtures/v6-crossed-prefix-legacy-checkpoints.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-crossed-prefix-integration.test.ts",
+      "literal": "./fixtures/v6-crossed-prefix-reference.json.gz",
+      "path": "tests/fixtures/v6-crossed-prefix-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-crossed-prefix-integration.test.ts",
+      "literal": "../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/",
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-crossed-prefix-observation.test.ts",
+      "literal": "./fixtures/v6-crossed-prefix-reference.json.gz",
+      "path": "tests/fixtures/v6-crossed-prefix-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-crossed-prefix-observation.test.ts",
+      "literal": "../",
+      "path": ".",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-exposed-current-evidence.test.ts",
+      "literal": "../",
+      "path": ".",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-exposed-reception-integration.test.ts",
+      "literal": "./fixtures/v6-exposed-reception-legacy-checkpoints.json.gz",
+      "path": "tests/fixtures/v6-exposed-reception-legacy-checkpoints.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-exposed-reception-integration.test.ts",
+      "literal": "./fixtures/v6-exposed-reception-parity.json.gz",
+      "path": "tests/fixtures/v6-exposed-reception-parity.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-exposed-reception-integration.test.ts",
+      "literal": "../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-exposed-reception-observation.test.ts",
+      "literal": "../",
+      "path": ".",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-exposed-reception.test.ts",
+      "literal": "../",
+      "path": ".",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-feedback-sequences-integration.test.ts",
+      "literal": "../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/",
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-feedback-sequences-integration.test.ts",
+      "literal": "./fixtures/v6-feedback-sequences-reference.json.gz",
+      "path": "tests/fixtures/v6-feedback-sequences-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-feedback-sequences-reference.test.ts",
+      "literal": "./fixtures/v6-feedback-sequences-reference.json.gz",
+      "path": "tests/fixtures/v6-feedback-sequences-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-feedback-sequences-reference.test.ts",
+      "literal": "../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/",
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-framed-transfer-kernel.test.ts",
+      "literal": "../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/",
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-framed-transfer-kernel.test.ts",
+      "literal": "./fixtures/v6-framed-transfer-original-public.json.gz",
+      "path": "tests/fixtures/v6-framed-transfer-original-public.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-framed-transfer-kernel.test.ts",
+      "literal": "./fixtures/v6-native-caller/hano-first-prefix.json",
+      "path": "tests/fixtures/v6-native-caller/hano-first-prefix.json",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-framed-window-access.test.ts",
+      "literal": "./fixtures/v6-framed-window-reference.json.gz",
+      "path": "tests/fixtures/v6-framed-window-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-framed-window-integration.test.ts",
+      "literal": "./fixtures/v6-framed-window-legacy-checkpoints.json.gz",
+      "path": "tests/fixtures/v6-framed-window-legacy-checkpoints.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-framed-window-integration.test.ts",
+      "literal": "./fixtures/v6-framed-window-reference.json.gz",
+      "path": "tests/fixtures/v6-framed-window-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-framed-window-integration.test.ts",
+      "literal": "../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/",
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-framed-window-observation.test.ts",
+      "literal": "./fixtures/v6-framed-window-reference.json.gz",
+      "path": "tests/fixtures/v6-framed-window-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-framed-window-observation.test.ts",
+      "literal": "../",
+      "path": ".",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-frontier-native-snapshot.test.ts",
+      "literal": "./fixtures/v6-frontier-reference.json",
+      "path": "tests/fixtures/v6-frontier-reference.json",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-goal-attention.test.ts",
+      "literal": "./fixtures/v6-goal-attention-reference.json",
+      "path": "tests/fixtures/v6-goal-attention-reference.json",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-goal-attention.test.ts",
+      "literal": "./fixtures/v6-composition-reference.json",
+      "path": "tests/fixtures/v6-composition-reference.json",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-incremental-memory.test.ts",
+      "literal": "./fixtures/v6-transition-reference.json",
+      "path": "tests/fixtures/v6-transition-reference.json",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-interface-families.test.ts",
+      "literal": "./fixtures/v6-interface-families-reference.json",
+      "path": "tests/fixtures/v6-interface-families-reference.json",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-inventory-family-reference.test.ts",
+      "literal": "./fixtures/v6-inventory-family-reference.json.gz",
+      "path": "tests/fixtures/v6-inventory-family-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-inventory-kernel.test.ts",
+      "literal": "../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/",
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-inventory-kernel.test.ts",
+      "literal": "./fixtures/v6-inventory-family-reference.json.gz",
+      "path": "tests/fixtures/v6-inventory-family-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-inventory-kernel.test.ts",
+      "literal": "./fixtures/v6-native-caller/hano-first-prefix.json",
+      "path": "tests/fixtures/v6-native-caller/hano-first-prefix.json",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-inventory-restoration-cache.test.ts",
+      "literal": "./fixtures/v6-inventory-family-reference.json.gz",
+      "path": "tests/fixtures/v6-inventory-family-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-knowledge-store.test.ts",
+      "literal": "./fixtures/v6-sequence-reference.json",
+      "path": "tests/fixtures/v6-sequence-reference.json",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-learned-preparation-priority.test.ts",
+      "literal": "../",
+      "path": ".",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-linked-temporal-reference.test.ts",
+      "literal": "./fixtures/v6-linked-preparation-reference.json.gz",
+      "path": "tests/fixtures/v6-linked-preparation-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-material-recovery-priority.test.ts",
+      "literal": "../docs/migration/native-campaigns-v50/life-public-trace.json.gz",
+      "path": "docs/migration/native-campaigns-v50/life-public-trace.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-material-recovery-priority.test.ts",
+      "literal": "../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/",
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-motion-caller-integration.test.ts",
+      "literal": "./fixtures/v6-motion-contrast-reference.json.gz",
+      "path": "tests/fixtures/v6-motion-contrast-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-motion-caller-integration.test.ts",
+      "literal": "../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/",
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-motion-contrast.test.ts",
+      "literal": "./fixtures/v6-motion-contrast-reference.json.gz",
+      "path": "tests/fixtures/v6-motion-contrast-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-native-authority.test.ts",
+      "literal": "../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/",
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-native-authority.test.ts",
+      "literal": "./fixtures/v6-ordered-support-reference.json",
+      "path": "tests/fixtures/v6-ordered-support-reference.json",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-native-caller.test.ts",
+      "literal": "./fixtures/v6-native-caller/",
+      "path": "tests/fixtures/v6-native-caller",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-native-checkpoint-integration.test.ts",
+      "literal": "../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/",
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-native-checkpoint-integration.test.ts",
+      "literal": "./fixtures/v6-native-caller/memo-first-prefix.json",
+      "path": "tests/fixtures/v6-native-caller/memo-first-prefix.json",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-native-family-registration.test.ts",
+      "literal": "./fixtures/v6-interface-families-reference.json",
+      "path": "tests/fixtures/v6-interface-families-reference.json",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-native-interface-families.test.ts",
+      "literal": "./fixtures/v6-interface-families-reference.json",
+      "path": "tests/fixtures/v6-interface-families-reference.json",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-native-observer.test.ts",
+      "literal": "./fixtures/v6-observer-reference.json",
+      "path": "tests/fixtures/v6-observer-reference.json",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-native-runtime.test.ts",
+      "literal": "../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/",
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-native-runtime.test.ts",
+      "literal": "./fixtures/v6-ordered-support-reference.json",
+      "path": "tests/fixtures/v6-ordered-support-reference.json",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-native-runtime.test.ts",
+      "literal": "./fixtures/v6-field-reference.json",
+      "path": "tests/fixtures/v6-field-reference.json",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-native-transition-domain-integration.test.ts",
+      "literal": "../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/",
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-native-transition-domain-integration.test.ts",
+      "literal": "../docs/migration/native-campaigns-v35/dico-domain-public-witness.json.gz",
+      "path": "docs/migration/native-campaigns-v35/dico-domain-public-witness.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-native-transition-domain-integration.test.ts",
+      "literal": "./fixtures/v6-transition-reference.json",
+      "path": "tests/fixtures/v6-transition-reference.json",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-native-transition-domain.test.ts",
+      "literal": "./fixtures/v6-transition-reference.json",
+      "path": "tests/fixtures/v6-transition-reference.json",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-native-transition-domain.test.ts",
+      "literal": "../docs/migration/native-campaigns-v35/dico-domain-public-witness.json.gz",
+      "path": "docs/migration/native-campaigns-v35/dico-domain-public-witness.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-occluded-catalogue-kernel.test.ts",
+      "literal": "./fixtures/v6-occluded-catalogue-frontier-original-public.json.gz",
+      "path": "tests/fixtures/v6-occluded-catalogue-frontier-original-public.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-occluded-catalogue-kernel.test.ts",
+      "literal": "../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/",
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-occluded-catalogue-reference.test.ts",
+      "literal": "../",
+      "path": ".",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-ordered-reaction-kernel.test.ts",
+      "literal": "../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/",
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-ordered-reaction-kernel.test.ts",
+      "literal": "./fixtures/v6-ordered-reaction-family-reference.json.gz",
+      "path": "tests/fixtures/v6-ordered-reaction-family-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-ordered-reaction-kernel.test.ts",
+      "literal": "./fixtures/v6-native-caller/hano-first-prefix.json",
+      "path": "tests/fixtures/v6-native-caller/hano-first-prefix.json",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-outline-arbitration.test.ts",
+      "literal": "../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/",
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-outline-arbitration.test.ts",
+      "literal": "../docs/migration/native-campaigns-v53/diagnostics/",
+      "path": "docs/migration/native-campaigns-v53/diagnostics",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-outline-arbitration.test.ts",
+      "literal": "../docs/migration/native-campaigns-v53/attempt2/esct-public-trace.json.gz",
+      "path": "docs/migration/native-campaigns-v53/attempt2/esct-public-trace.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-outline-kernel.test.ts",
+      "literal": "../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/",
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-outline-kernel.test.ts",
+      "literal": "./fixtures/v6-outline-service-reference.json.gz",
+      "path": "tests/fixtures/v6-outline-service-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-outline-kernel.test.ts",
+      "literal": "./fixtures/v6-native-caller/hano-first-prefix.json",
+      "path": "tests/fixtures/v6-native-caller/hano-first-prefix.json",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-panel-service.test.ts",
+      "literal": "../",
+      "path": ".",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-periodic-pattern-counts.test.ts",
+      "literal": "./fixtures/v6-periodic-pattern-reference.json.gz",
+      "path": "tests/fixtures/v6-periodic-pattern-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-point-display.test.ts",
+      "literal": "./fixtures/v6-point-display-reference.json",
+      "path": "tests/fixtures/v6-point-display-reference.json",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-point-set.test.ts",
+      "literal": "./fixtures/v6-point-set-reference.json",
+      "path": "tests/fixtures/v6-point-set-reference.json",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-radial-port-integration.test.ts",
+      "literal": "../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/",
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-radial-port-integration.test.ts",
+      "literal": "../docs/migration/native-campaigns-v41/diagnostics/pipe-first-public.json.gz",
+      "path": "docs/migration/native-campaigns-v41/diagnostics/pipe-first-public.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-radial-port-integration.test.ts",
+      "literal": "../docs/migration/native-campaigns-v41/diagnostics/pipe-second-public.json.gz",
+      "path": "docs/migration/native-campaigns-v41/diagnostics/pipe-second-public.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-ranked-workshop-kernel.test.ts",
+      "literal": "../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/",
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-ranked-workshop-kernel.test.ts",
+      "literal": "./fixtures/v6-ranked-workshop-reference.json.gz",
+      "path": "tests/fixtures/v6-ranked-workshop-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-ranked-workshop-reference.test.ts",
+      "literal": "./fixtures/v6-ranked-workshop-reference.json.gz",
+      "path": "tests/fixtures/v6-ranked-workshop-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-reactive-contact-kernel.test.ts",
+      "literal": "../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/",
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-reactive-contact-kernel.test.ts",
+      "literal": "./fixtures/v6-reactive-contact-family-reference.json.gz",
+      "path": "tests/fixtures/v6-reactive-contact-family-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-reactive-contact-kernel.test.ts",
+      "literal": "./fixtures/v6-native-caller/hano-first-prefix.json",
+      "path": "tests/fixtures/v6-native-caller/hano-first-prefix.json",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-reception-residual-evidence.test.ts",
+      "literal": "./fixtures/v6-reception-service-reference.json.gz",
+      "path": "tests/fixtures/v6-reception-service-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-reception-service-access.test.ts",
+      "literal": "./fixtures/v6-reception-service-reference.json.gz",
+      "path": "tests/fixtures/v6-reception-service-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-reception-service-integration.test.ts",
+      "literal": "./fixtures/v6-reception-service-legacy-checkpoints.json.gz",
+      "path": "tests/fixtures/v6-reception-service-legacy-checkpoints.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-reception-service-integration.test.ts",
+      "literal": "./fixtures/v6-reception-service-reference.json.gz",
+      "path": "tests/fixtures/v6-reception-service-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-reception-service-native-contracts.test.ts",
+      "literal": "./fixtures/v6-reception-service-reference.json.gz",
+      "path": "tests/fixtures/v6-reception-service-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-reception-service-observation.test.ts",
+      "literal": "../",
+      "path": ".",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-recurrent-series-access.test.ts",
+      "literal": "./fixtures/v6-recurrent-series-reference.json.gz",
+      "path": "tests/fixtures/v6-recurrent-series-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-recurrent-series-integration.test.ts",
+      "literal": "./fixtures/v6-recurrent-series-legacy-checkpoints.json.gz",
+      "path": "tests/fixtures/v6-recurrent-series-legacy-checkpoints.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-recurrent-series-integration.test.ts",
+      "literal": "./fixtures/v6-recurrent-series-reference.json.gz",
+      "path": "tests/fixtures/v6-recurrent-series-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-recurrent-series-integration.test.ts",
+      "literal": "./fixtures/v6-crossed-prefix-reference.json.gz",
+      "path": "tests/fixtures/v6-crossed-prefix-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-recurrent-series-integration.test.ts",
+      "literal": "../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/",
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-recurrent-series-observation.test.ts",
+      "literal": "./fixtures/v6-recurrent-series-reference.json.gz",
+      "path": "tests/fixtures/v6-recurrent-series-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-recurrent-series-observation.test.ts",
+      "literal": "../",
+      "path": ".",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-reference-population-access.test.ts",
+      "literal": "./fixtures/v6-reference-population-reference.json.gz",
+      "path": "tests/fixtures/v6-reference-population-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-reference-population-integration.test.ts",
+      "literal": "./fixtures/v6-reference-population-legacy-checkpoints.json.gz",
+      "path": "tests/fixtures/v6-reference-population-legacy-checkpoints.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-reference-population-integration.test.ts",
+      "literal": "./fixtures/v6-reference-population-reference.json.gz",
+      "path": "tests/fixtures/v6-reference-population-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-reference-population-observation.test.ts",
+      "literal": "../",
+      "path": ".",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-relational-chamber.test.ts",
+      "literal": "../",
+      "path": ".",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-relative-arrangements-integration.test.ts",
+      "literal": "../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/",
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-relative-arrangements-integration.test.ts",
+      "literal": "./fixtures/v6-relative-arrangements-reference.json.gz",
+      "path": "tests/fixtures/v6-relative-arrangements-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-relative-arrangements-reference.test.ts",
+      "literal": "./fixtures/v6-relative-arrangements-reference.json.gz",
+      "path": "tests/fixtures/v6-relative-arrangements-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-relative-arrangements-reference.test.ts",
+      "literal": "../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/",
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-rooted-line-access.test.ts",
+      "literal": "./fixtures/v6-rooted-line-reference.json.gz",
+      "path": "tests/fixtures/v6-rooted-line-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-rooted-line-integration.test.ts",
+      "literal": "./fixtures/v6-rooted-line-legacy-checkpoints.json.gz",
+      "path": "tests/fixtures/v6-rooted-line-legacy-checkpoints.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-rooted-line-integration.test.ts",
+      "literal": "./fixtures/v6-rooted-line-reference.json.gz",
+      "path": "tests/fixtures/v6-rooted-line-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-rooted-line-observation.test.ts",
+      "literal": "../",
+      "path": ".",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-rooted-quota-mark-support.test.ts",
+      "literal": "../",
+      "path": ".",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-rooted-quota-parity.test.ts",
+      "literal": "../",
+      "path": ".",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-rooted-quota-parity.test.ts",
+      "literal": "fixtures/v6-rooted-quota-reference.json.gz",
+      "path": "tests/fixtures/v6-rooted-quota-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-rooted-quota-parity.test.ts",
+      "literal": "fixtures/v6-rooted-quota-original-public.json.gz",
+      "path": "tests/fixtures/v6-rooted-quota-original-public.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-shared-series-native.test.ts",
+      "literal": "./fixtures/v6-coupled-pair-planning-reference.json.gz",
+      "path": "tests/fixtures/v6-coupled-pair-planning-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-shared-series-native.test.ts",
+      "literal": "./fixtures/v6-auxiliary-support-reference.json.gz",
+      "path": "tests/fixtures/v6-auxiliary-support-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-shared-series-native.test.ts",
+      "literal": "./fixtures/v6-panel-service-parity.json.gz",
+      "path": "tests/fixtures/v6-panel-service-parity.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-shared-series.test.ts",
+      "literal": "./fixtures/v6-occurrence-reference.json",
+      "path": "tests/fixtures/v6-occurrence-reference.json",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-shared-series.test.ts",
+      "literal": "./fixtures/v6-coupled-pair-epoch-anchor-reference.json.gz",
+      "path": "tests/fixtures/v6-coupled-pair-epoch-anchor-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-shared-series.test.ts",
+      "literal": "./fixtures/v6-coupled-pair-evidence-reference.json.gz",
+      "path": "tests/fixtures/v6-coupled-pair-evidence-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-support-caller-integration.test.ts",
+      "literal": "../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/",
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-support-caller-integration.test.ts",
+      "literal": "./fixtures/v6-native-caller/memo-first-prefix.json",
+      "path": "tests/fixtures/v6-native-caller/memo-first-prefix.json",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-support-caller-integration.test.ts",
+      "literal": "./fixtures/v6-interface-families-reference.json",
+      "path": "tests/fixtures/v6-interface-families-reference.json",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-support-caller-integration.test.ts",
+      "literal": "./fixtures/v6-support-extensions-reference.json.gz",
+      "path": "tests/fixtures/v6-support-extensions-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-support-caller-integration.test.ts",
+      "literal": "./fixtures/v6-native-caller/onde-first-prefix.json",
+      "path": "tests/fixtures/v6-native-caller/onde-first-prefix.json",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-support-extensions.test.ts",
+      "literal": "./fixtures/v6-support-extensions-reference.json.gz",
+      "path": "tests/fixtures/v6-support-extensions-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-support-navigation.test.ts",
+      "literal": "./fixtures/v6-support-navigation-reference.json.gz",
+      "path": "tests/fixtures/v6-support-navigation-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-support-procedures.test.ts",
+      "literal": "./fixtures/v6-support-procedures-reference.json.gz",
+      "path": "tests/fixtures/v6-support-procedures-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-topological-recolor-kernel.test.ts",
+      "literal": "../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/",
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-topological-recolor-kernel.test.ts",
+      "literal": "./fixtures/v6-topological-recolor-reference.json.gz",
+      "path": "tests/fixtures/v6-topological-recolor-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-topological-recolor-kernel.test.ts",
+      "literal": "./fixtures/v6-native-caller/hano-first-prefix.json",
+      "path": "tests/fixtures/v6-native-caller/hano-first-prefix.json",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-visual-sequences.test.ts",
+      "literal": "./fixtures/v6-sequence-reference.json",
+      "path": "tests/fixtures/v6-sequence-reference.json",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-visual-sequences.test.ts",
+      "literal": "../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/",
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v7-kernel.test.ts",
+      "literal": "../reference/v7/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/bundle.json",
+      "path": "reference/v7/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/bundle.json",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-symbol-geometry-reference.test.ts",
+      "literal": "./fixtures/v6-symbol-geometry-reference.json.gz",
+      "path": "tests/fixtures/v6-symbol-geometry-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-symbol-interface-reference.test.ts",
+      "literal": "./fixtures/v6-symbol-interface-reference.json.gz",
+      "path": "tests/fixtures/v6-symbol-interface-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-symbol-transactions-reference.test.ts",
+      "literal": "./fixtures/v6-symbol-transactions-reference.json.gz",
+      "path": "tests/fixtures/v6-symbol-transactions-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-symbol-transactions-kernel.test.ts",
+      "literal": "../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/",
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-symbol-transactions-kernel.test.ts",
+      "literal": "./fixtures/v6-symbol-transactions-reference.json.gz",
+      "path": "tests/fixtures/v6-symbol-transactions-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-symbol-transactions-kernel.test.ts",
+      "literal": "./fixtures/v6-symbol-kernel-reference.json.gz",
+      "path": "tests/fixtures/v6-symbol-kernel-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-symbol-transactions-kernel.test.ts",
+      "literal": "./fixtures/v6-ranked-workshop-reference.json.gz",
+      "path": "tests/fixtures/v6-ranked-workshop-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-axial-question-reference.test.ts",
+      "literal": "./fixtures/v6-axial-question-reference.json.gz",
+      "path": "tests/fixtures/v6-axial-question-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-axial-question-kernel.test.ts",
+      "literal": "../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/",
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-axial-question-kernel.test.ts",
+      "literal": "./fixtures/v6-axial-question-reference.json.gz",
+      "path": "tests/fixtures/v6-axial-question-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-drm-projector.test.ts",
+      "literal": "./fixtures/v6-drm-reference.json",
+      "path": "tests/fixtures/v6-drm-reference.json",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-select-reference.test.ts",
+      "literal": "./fixtures/v6-select-reference.json.gz",
+      "path": "tests/fixtures/v6-select-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-select-reference.test.ts",
+      "literal": "./fixtures/v6-select-builder-reference.json.gz",
+      "path": "tests/fixtures/v6-select-builder-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-select-reference.test.ts",
+      "literal": "../src/logos-engine/v6/programs.json",
+      "path": "src/logos-engine/v6/programs.json",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-topological-recolor-reference.test.ts",
+      "literal": "./fixtures/v6-topological-recolor-reference.json.gz",
+      "path": "tests/fixtures/v6-topological-recolor-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-facet-examples.test.ts",
+      "literal": "./fixtures/v6-facet-examples-reference.json.gz",
+      "path": "tests/fixtures/v6-facet-examples-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-facet-examples.test.ts",
+      "literal": "../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/",
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-facet-examples-integration.test.ts",
+      "literal": "../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/",
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-facet-examples-integration.test.ts",
+      "literal": "./fixtures/v6-facet-examples-reference.json.gz",
+      "path": "tests/fixtures/v6-facet-examples-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-facet-examples-foreign-acquisition.test.ts",
+      "literal": "../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/",
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6",
+      "kind": "directory"
+    },
+    {
+      "test": "tests/v6-facet-examples-foreign-acquisition.test.ts",
+      "literal": "./fixtures/v6-feedback-sequences-reference.json.gz",
+      "path": "tests/fixtures/v6-feedback-sequences-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-addressed-material-reference.test.ts",
+      "literal": "./fixtures/v6-addressed-material-reference.json.gz",
+      "path": "tests/fixtures/v6-addressed-material-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-addressed-material.test.ts",
+      "literal": "./fixtures/v6-addressed-material-reference.json.gz",
+      "path": "tests/fixtures/v6-addressed-material-reference.json.gz",
+      "kind": "file"
+    },
+    {
+      "test": "tests/v6-addressed-material-kernel.test.ts",
+      "literal": "../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/",
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6",
+      "kind": "directory"
+    }
+  ],
+  "missingStaticLiteralUrlInputs": [],
+  "staticScanQualification": "Literal new URL(token, import.meta.url) paths in the 125 test files only; indirect/dynamic bases are outside this bounded scan.",
+  "copiedSmallPublicationReceipt": {
+    "from": "/workspace/shared/sra-coordination/published-7b-site89.json",
+    "to": {
+      "path": "docs/migration/lot5b-evidence/coordination/published-7b-site89.json",
+      "sha256": "d9290df94c1abb1823b114880fa3267d7d2b2c7451461cd30f3e37f0489590dd",
+      "bytes": 8854
+    },
+    "byteIdentical": true
+  },
+  "inputs": [
+    {
+      "path": "docs/migration/lot5b-evidence/coordination/prepare-integrated-inputs.py",
+      "sha256": "96a45e38ef1768d93c892745b2fa0c8ba4cffb8244fdbe693df3d309e5e137e6",
+      "bytes": 15376
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/coordination/published-7b-site89.json",
+      "sha256": "d9290df94c1abb1823b114880fa3267d7d2b2c7451461cd30f3e37f0489590dd",
+      "bytes": 8854
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/coordination/published-4c-site92.json",
+      "sha256": "2b79ab3c147e6b6e4dd86161324634413691ef4feb95ab215d5507f72fecbda4",
+      "bytes": 1496
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/coordination/published-4c-source-verification.json",
+      "sha256": "2babd319a77392755a6027415dc483fd4187ad0d4d4ebe7a370e8995ccc3e285",
+      "bytes": 36662
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/coordination/published-10a-source-verification.json",
+      "sha256": "68876d965f716fbe107c0ef7dcbf90b32af7ab0f48971611a876988aa9012264",
+      "bytes": 36420
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/validation/delta-tests-run.json",
+      "sha256": "a283fb7c65bc227203105468b793e2b791defc53db159f11a0288ae271487d1d",
+      "bytes": 127182
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/validation/delta-tests-run.json",
+      "sha256": "dfefab4e7e2cb7daf9a999c1ef13a030e87af96ecfd15f3081eccdebdba8db00",
+      "bytes": 166994
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/validation/delta-tests-run.json",
+      "sha256": "31c84cf8c1a2aa8a871107f358edc0acf041a9cc5771529af088f93958e06822",
+      "bytes": 130562
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/recorded-regression-cases-final.json",
+      "sha256": "ce233dbd707f723ac74bc5994b162cd9b2705b855012f8a8789039948abd2a7c",
+      "bytes": 8094
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/regressions/regression-summary.json",
+      "sha256": "ccaaaf9794c26d35de02742ef51abb0507661e0a8c88e9ac1dd4a9d1c995c4cf",
+      "bytes": 204482
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/publication-inputs.json",
+      "sha256": "e940764ac9f5b1aa2d662aae9b45ff00d61bb5e42b80b37ab4f879d7510b15b8",
+      "bytes": 177229
+    },
+    {
+      "path": "scripts/compare-v54-regressions.py",
+      "sha256": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+      "bytes": 18166
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/regressions/catr-051-comparison.json",
+      "sha256": "11c894410489fddfc439df42cc8484f0a37563a2bc4e799fff779ce675b030f9",
+      "bytes": 11014
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/regressions/rswp-051-comparison.json",
+      "sha256": "28d06d50af7e3f583f3c85767fb5e92fd1a478f7180b5dbbe8dfbc252c6fd5f8",
+      "bytes": 11001
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/regressions/fogw-051-comparison.json",
+      "sha256": "31f1bbe07faa3d837a4cfb3758c28d07bae61c9cca37e0490d43c47ca0e6457a",
+      "bytes": 11003
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/regressions/vois-051-comparison.json",
+      "sha256": "4e7a4b16d975bf75b0417f97c40decf0f8e4938e05a3e903bb72b32735c2469c",
+      "bytes": 11006
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/regressions/conn-050-comparison.json",
+      "sha256": "386c16b5939158bae4e67577132208cac2087306b344bbc74c398dc432dc9a4b",
+      "bytes": 11017
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/regressions/mind-051-comparison.json",
+      "sha256": "b397cf3439fc6c51b0dcea587e1705e72d06cd49d1cec6e73a0fe64f5ebe352a",
+      "bytes": 11002
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/regressions/weav-051-comparison.json",
+      "sha256": "9a706804d7b966ba114951ea65f7b893267ecdebbe82e9bbb0611e5f0a363e93",
+      "bytes": 11021
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/regressions/tria-development-4b-comparison.json",
+      "sha256": "2cb9b6b57c1e25d493709a9b1c620aad8efaf200ca65443661525263363b1508",
+      "bytes": 11005
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/regressions/craf-055-comparison.json",
+      "sha256": "163f8e1705ecc68cd61f1b3c3151da43e750c8a5d1ce58e5df5d01bbf153cabb",
+      "bytes": 10981
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/regressions/isos-development-4c-comparison.json",
+      "sha256": "2744e666a4a1e54a3d190c39d022b6290d303873d954acff97cbb5ec2f5881b7",
+      "bytes": 11005
+    },
+    {
+      "path": "scripts/evidence-byte-parts.py",
+      "sha256": "fcc651b3d533a87805378c126b1253d40f343ccc51108a7881c3db33bf1f8350",
+      "bytes": 7210
+    },
+    {
+      "path": "scripts/restore-v53-evidence.py",
+      "sha256": "e0494dda3dd445e0db0bf04cccac27ad8d19c917ccd2b4b10c068df6faf7c23d",
+      "bytes": 3361
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz",
+      "sha256": "379ce17151369af5ba39e205cc8b2882aa4e97a3dd8909b9c831a7b2b0ac7fb6",
+      "bytes": 1649205
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-public-trace.json.gz",
+      "sha256": "e152eb2705947addd1506cb01872d23770d188cb1dd46c86dcbc9bdf7f4f2816",
+      "bytes": 24340
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz",
+      "sha256": "5de1bbc32db1a3dffdf5c350ef70ca90142007c6ebc7735f8b8c56e9fdfa00ba",
+      "bytes": 2585868
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+      "sha256": "43f32a75b0d8cd747457602a3c3f113e5d63ec621e45bb2bc1d195f242997755",
+      "bytes": 41445
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz",
+      "sha256": "fe037e48df8dd3a7c302a5e85355b2b9555daa6d9d8aa56f7772fc363732726c",
+      "bytes": 8174480
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/final/fogw-reception-session/fogw-public-trace.json.gz",
+      "sha256": "1d4e92e6ef063e7799bfb4237b17beb148b49bde4ab46ef26ef91a3271d44b46",
+      "bytes": 39060
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz",
+      "sha256": "39a6e6551cf94a48842b154afdc2256dafd88fd93404e4776bd67b24d5a4796d",
+      "bytes": 10678168
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+      "sha256": "d642c805485571c0e54ed3421644cbd8463ca3697ce135b223f635487b58069d",
+      "bytes": 19976
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz",
+      "sha256": "f3df06cff6d370874889f5183a77dd91ae585060c04ba052d0025cd2db9e3750",
+      "bytes": 2630905
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-public-trace.json.gz",
+      "sha256": "fc8c7bf4529490e6e6ee04e7a5a51b389180e5fb5e35255145c59ecf4dd0f102",
+      "bytes": 56466
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz",
+      "sha256": "6a187286069287a89cedb60ac0f206e0702abae5d8df0dd2615bd43c1bb5c75a",
+      "bytes": 4349054
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-baseline/recorded/mind-public-trace.json.gz",
+      "sha256": "f74678fa4d9c1b5397545b648ab353c29fc0a5a4c0eb35ab36a5258bfa34ca0c",
+      "bytes": 17256
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz",
+      "sha256": "114906e80b2ff5817adeaa105fd4e84ea2b057d8393b202dc03f35248b350fc3",
+      "bytes": 13577757
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+      "sha256": "a46f6a331e8f98767ee709c2931edd6d0abde9cc636b93ef384509c04adface2",
+      "bytes": 26568
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz",
+      "sha256": "e473af537c042d76ce98f13b2cc9be495e7b4ac08ca443251df7804d542bdbbe",
+      "bytes": 3161161
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-public-trace.json.gz",
+      "sha256": "916d0f1cb1dcbfd9b7ba7624e7d3d4648a91ae7ef64583288af4711d2a955ac3",
+      "bytes": 13286
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/craf-campaign.json.gz",
+      "sha256": "78e86660961ed6d75707c001c021b8c223d205137d86288ac21d09a533b680f2",
+      "bytes": 12767727
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/integrated-final/craf-public-trace.json.gz",
+      "sha256": "cf69ad941e80e17f8d6cd66edc0419a0c6ff7aa8d9bbdaf503cb56a49e8c3f98",
+      "bytes": 40777
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-campaign.json.gz.parts.json",
+      "sha256": "57e48a6b31035a2e9d9be146a878067137cc34aa776728da8918929c59f261a2",
+      "bytes": 1005
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-campaign.json.gz.part000",
+      "sha256": "726783bba3b088d7f5a3760f3bd440ba1ef65aa03d42e6667866b674f32ce196",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-campaign.json.gz.part001",
+      "sha256": "382ccbe3a324467164609112d8a6fba67dd0acfa7ff8a52bc00e81fd93e5ead4",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-campaign.json.gz.part002",
+      "sha256": "21e326d7dbe41f8ee2280d902b62264612da109aeba27fadcd8be67c64f6baa3",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-campaign.json.gz.part003",
+      "sha256": "9a3595cc79fc61c97a382b2f7e12215286f91350a401bee33d44d5c4878bc72d",
+      "bytes": 327289
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-campaign.json.gz",
+      "sha256": "93e59ab1146d4eef7c944a0e1fc0ab7b0d539cc90a074abe424742be011eec37",
+      "bytes": 3027289
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-public-trace.json.gz",
+      "sha256": "5b302279efb140d1c549d9650d434efb38fde0b8bc5809ab072de66159c8c329",
+      "bytes": 11183
+    },
+    {
+      "path": "tests/fixtures/pipes-python.json",
+      "sha256": "19401efe33f7991701a01c657d18c3f851be94750e340d725bf1c6cf0ada7cbe",
+      "bytes": 1103178
+    },
+    {
+      "path": "tests/fixtures/public-observer-python.json",
+      "sha256": "5464da62e9c5d60b0dbf4bf4438b1cb6b41dae77773226a683a08d89b2113503",
+      "bytes": 80378
+    },
+    {
+      "path": "tests/fixtures/src-while-reference.json",
+      "sha256": "7b3f0e5ddaac2d77cc56ca0bd25c8f8b1e1653fbda1668f1068893235eb6d275",
+      "bytes": 51576
+    },
+    {
+      "path": "tests/fixtures/v5-finite-relation-domain-reference.json.gz",
+      "sha256": "b5c9aac2192e3f53fd20061cf709d1e7e55fda25dba7354188c7c6ec262cf84c",
+      "bytes": 16561
+    },
+    {
+      "path": "tests/fixtures/v5-piercing-reference.json.gz",
+      "sha256": "f36682c8fc491240bebbba10413a6aa4901a2b30db57d72e7a3f6fee320e5f5b",
+      "bytes": 8217
+    },
+    {
+      "path": "tests/fixtures/v6-alternating-common-reference.json.gz",
+      "sha256": "0319e26d6e4d2b1d4f1e7928aeb1720a5ad3accd90553db781419f2fe217239a",
+      "bytes": 48379
+    },
+    {
+      "path": "tests/fixtures/v6-alternating-graph-access-reference.json.gz",
+      "sha256": "7c0486c27204fee683eb7eb68409ae683101957f614c7277ca2bb1d9496c67c5",
+      "bytes": 131472
+    },
+    {
+      "path": "tests/fixtures/v6-alternating-graph-measurement-reference.json.gz",
+      "sha256": "154c7be66f23cb14c14ad9f21f34a80989573376714c7ee2733575d7fef84b80",
+      "bytes": 114821
+    },
+    {
+      "path": "tests/fixtures/v6-animated-contact-reference.json",
+      "sha256": "2161c4a9924b4b637b1e68bfdfff94d7fcba2d82379863140af358d04bf8dd26",
+      "bytes": 2235233
+    },
+    {
+      "path": "tests/fixtures/v6-auxiliary-support-reference.json.gz",
+      "sha256": "27242c47a09e95c4532d2a76470cd7c4d6188889c2831874ebda507ad202c3bb",
+      "bytes": 89274
+    },
+    {
+      "path": "tests/fixtures/v6-cell-placement-reference.json.gz",
+      "sha256": "d374918216470a5e7a0237332dd5aeb5ac82e06bd2efec38858bc12aa886bc02",
+      "bytes": 87899
+    },
+    {
+      "path": "tests/fixtures/v6-composition-engine-reference.json",
+      "sha256": "89e7e8c021079068c18b7e6c61c0631961304d7cdbcd72391dcadd9d43baaeb9",
+      "bytes": 3544604
+    },
+    {
+      "path": "tests/fixtures/v6-composition-reference.json",
+      "sha256": "3a58a2bf25e12917ab1bd0c5c5b6de563c9d836ef945efdf926ed28096154ded",
+      "bytes": 877297
+    },
+    {
+      "path": "tests/fixtures/v6-configured-arrivals-reference.json.gz",
+      "sha256": "6bcab41a00569e06e1ce97ca03d64fef2cad2a6b2ed33bf38df9e86625170490",
+      "bytes": 18306
+    },
+    {
+      "path": "tests/fixtures/v6-contextual-translation-reference.json.gz",
+      "sha256": "65544cfd2e0e0fdcc5c261996a0388ca0b191036a28caee529a78d63c965f891",
+      "bytes": 23618
+    },
+    {
+      "path": "tests/fixtures/v6-control-attention-reference.json.gz",
+      "sha256": "2d1338f08632a4cd41add69c3a95945b4d5df2059ecde34ccb118464416f8fb2",
+      "bytes": 31722
+    },
+    {
+      "path": "tests/fixtures/v6-coupled-pair-epoch-anchor-reference.json.gz",
+      "sha256": "654758ebc8f08ad9e1af0e3719084ff2929e4833aad30ec9d0616c679a77993b",
+      "bytes": 241391
+    },
+    {
+      "path": "tests/fixtures/v6-coupled-pair-evidence-reference.json.gz",
+      "sha256": "4b14bd7f2f08b36302d320cdaec6035e7ceb1bcd366b292ce5776d67afc00346",
+      "bytes": 117968
+    },
+    {
+      "path": "tests/fixtures/v6-coupled-pair-observation-reference.json.gz",
+      "sha256": "8e4f6cd36939a1c1fb4800e149c7aee744949cefafdde54ed255e7ad99097435",
+      "bytes": 5342
+    },
+    {
+      "path": "tests/fixtures/v6-coupled-pair-planning-reference.json.gz",
+      "sha256": "f79c983c5ce243219c492a1f3e5fb7798fa88c83b1b5225c73d865388740f2fb",
+      "bytes": 176802
+    },
+    {
+      "path": "tests/fixtures/v6-coupled-pair-route-reference.json.gz",
+      "sha256": "a41fe392e5b305d75920d77563602130009d3bf1f580d217d4d508fb0a690f76",
+      "bytes": 11573
+    },
+    {
+      "path": "tests/fixtures/v6-coupling-metric-reference.json",
+      "sha256": "bb84fbc7e62d1bdd322a4379159dc5a3c681d6fe5add59eae9b9c6514da8e06b",
+      "bytes": 1775725
+    },
+    {
+      "path": "tests/fixtures/v6-crossed-prefix-legacy-checkpoints.json.gz",
+      "sha256": "ea2ef8d201dc350c41cab447982e6a15dab5b5b187066ca56a79782144aef811",
+      "bytes": 4108
+    },
+    {
+      "path": "tests/fixtures/v6-crossed-prefix-reference.json.gz",
+      "sha256": "ca2b1e6c4ccdd41d35a45e11f989f4ea168e7959011d658c0f54e887c9b79af4",
+      "bytes": 350899
+    },
+    {
+      "path": "tests/fixtures/v6-drm-reference.json",
+      "sha256": "1f6e84dd5d1a9b904ae042fd570592b586db48341d4462d17611f9271faf8aed",
+      "bytes": 189788
+    },
+    {
+      "path": "tests/fixtures/v6-exposed-reception-legacy-checkpoints.json.gz",
+      "sha256": "db1bce38a17a1f9685a9c4819a008457fbab915344812a3cc70c83bff6e0f0c0",
+      "bytes": 1945
+    },
+    {
+      "path": "tests/fixtures/v6-exposed-reception-parity.json.gz",
+      "sha256": "80bf5ec28780bd398a8d8dc6ccdb63d2faa9d4759bb79b6e653e1fdedf09ebef",
+      "bytes": 655567
+    },
+    {
+      "path": "tests/fixtures/v6-feedback-sequences-reference.json.gz",
+      "sha256": "d1bf31b8fbf899aa9d85baa5fdaf9549b7c6f6a786fab43d7ac9f88af3231b6d",
+      "bytes": 1032946
+    },
+    {
+      "path": "tests/fixtures/v6-feedback-sequences-reference.json.gz.part000",
+      "sha256": "df621f5beaabd752efc8576eb269bd773e39bff3cd34b8388a23f120144dca08",
+      "bytes": 900000
+    },
+    {
+      "path": "tests/fixtures/v6-feedback-sequences-reference.json.gz.part001",
+      "sha256": "e610682240f1221de0fa5324ff28bf639012ea80756d851af758ea45c30da6b1",
+      "bytes": 132946
+    },
+    {
+      "path": "tests/fixtures/v6-feedback-sequences-reference.json.gz.parts.json",
+      "sha256": "a6d353cf9a13e583498c56b94da769b843af22f203289ebfe6a955fae7425f0b",
+      "bytes": 727
+    },
+    {
+      "path": "tests/fixtures/v6-field-reference.json",
+      "sha256": "0bceb91dc54c053e41f7ecfe1b03bb53a8d5a0c1712407a9b96e06715f425aba",
+      "bytes": 6280880
+    },
+    {
+      "path": "tests/fixtures/v6-field-service-original-public.json.gz",
+      "sha256": "806dd23649c4f52fadc882e694a1997799e3be9450571054a61ab480e0ba15ba",
+      "bytes": 898270
+    },
+    {
+      "path": "tests/fixtures/v6-field-service-reference.json.gz",
+      "sha256": "b583f58ecf7feabae1353cc3fd7dce241cb1c0197d78cb62c983adb7dc62dfb7",
+      "bytes": 2852033
+    },
+    {
+      "path": "tests/fixtures/v6-framed-directed-composition-public.json.gz",
+      "sha256": "b6ebb635a76268885783160b96892b2e6734e26e1134ca16181bd3ee6dae6b6a",
+      "bytes": 114201
+    },
+    {
+      "path": "tests/fixtures/v6-framed-transfer-original-lkey-public.json.gz",
+      "sha256": "52c542a45606f93a96f589d8e187837e88b78b1eda63733df9469eb9d4a44b64",
+      "bytes": 88908
+    },
+    {
+      "path": "tests/fixtures/v6-framed-transfer-original-public.json.gz",
+      "sha256": "72b34a8e699086d5cc54987f98fd4e1c4c0f9972feb27b1f0368dacae93c1dfa",
+      "bytes": 526168
+    },
+    {
+      "path": "tests/fixtures/v6-framed-transfer-reference.json.gz",
+      "sha256": "ddbba559adc2f252afa6a61e05ad0c3a077d7bbbf5f96ad7ad7c3a0b4eca935f",
+      "bytes": 6171170
+    },
+    {
+      "path": "tests/fixtures/v6-framed-typed-prerequisite.json.gz",
+      "sha256": "6a65518bb259d9722dc4f5bdf3dbcbe49f415b2cc0a3497aafaf42d2a0171346",
+      "bytes": 60057
+    },
+    {
+      "path": "tests/fixtures/v6-framed-typed-priority-after-nine.json.gz",
+      "sha256": "51979d3dfa0638b0fa2adcfae021954bb173eb64769cd57f88a80e9e479276f4",
+      "bytes": 16806
+    },
+    {
+      "path": "tests/fixtures/v6-framed-uniform-collision.json.gz",
+      "sha256": "c718ceb573c7ade28f7f345f58f09a1faa8e4aef4ab3f758ebe69604d0636ad1",
+      "bytes": 2489
+    },
+    {
+      "path": "tests/fixtures/v6-framed-window-legacy-checkpoints.json.gz",
+      "sha256": "ad3e27de2a4455e91794272c41d0ebec043e471d16858ec81fed28e9baadd9b7",
+      "bytes": 3468
+    },
+    {
+      "path": "tests/fixtures/v6-framed-window-reference.json.gz",
+      "sha256": "c95c3e9bfaddd0746d3e4bc173995d89f0243dcab5eef2b2ddcec8fd7cac5b00",
+      "bytes": 60773
+    },
+    {
+      "path": "tests/fixtures/v6-frontier-reference.json",
+      "sha256": "a6c6c7a2d7222bba1e801f398d32cbd61b7f088e45aefde6375fdd479278181e",
+      "bytes": 869283
+    },
+    {
+      "path": "tests/fixtures/v6-geometry-reference.json",
+      "sha256": "7068bf29a86f978fac122f9a58d3449b805893f537223884e6af1b6b66e3aa1e",
+      "bytes": 4451011
+    },
+    {
+      "path": "tests/fixtures/v6-goal-attention-reference.json",
+      "sha256": "e3b3707b76cc9b1e2267f3d108315e111d262eac21fc46deb12cebeb243798ac",
+      "bytes": 783064
+    },
+    {
+      "path": "tests/fixtures/v6-interface-families-reference.json",
+      "sha256": "c63c597f6195a2bef78c770b197bd6e83789bca4cac85f999bf00352cf4b95e5",
+      "bytes": 2633984
+    },
+    {
+      "path": "tests/fixtures/v6-inventory-family-reference.json.gz",
+      "sha256": "6ffb59fd02e8ce1755de8889e13ca9fb9773ba14334a314ef139f4c54ccc816b",
+      "bytes": 147644
+    },
+    {
+      "path": "tests/fixtures/v6-inventory-helpers-reference.json.gz",
+      "sha256": "22504c1cefb4a87694c8282da3fd5db27b74a259fad1c2e4a0d9530f33c7dd91",
+      "bytes": 564031
+    },
+    {
+      "path": "tests/fixtures/v6-inventory-observation-reference.json.gz",
+      "sha256": "92bda205768fa629d389acd5aea0caa906f734c44f983644115bbdc6ef8b390f",
+      "bytes": 126271
+    },
+    {
+      "path": "tests/fixtures/v6-labeled-composition-reference.json.gz",
+      "sha256": "2b4e13ddd59f0730a2daa1686733a945f895e93013458bbd96850389ae63c6e7",
+      "bytes": 1874475
+    },
+    {
+      "path": "tests/fixtures/v6-labeled-sequence-original-public.json.gz",
+      "sha256": "b3480b613308f2c1fa43df5a8ef9b3990ccf475a7edf2524532d35d7b51ba329",
+      "bytes": 1411096
+    },
+    {
+      "path": "tests/fixtures/v6-labeled-sequence-reference.json.gz",
+      "sha256": "aa41d64fab8d5c33d7d1c12d5a0f7ce6e7f4962ac75fd44f962c3bd8d177ca18",
+      "bytes": 5551258
+    },
+    {
+      "path": "tests/fixtures/v6-linked-packet-initial-public.json.gz",
+      "sha256": "3f82fb0b60a104095623216023054ef438ca4cc516941c671c385ebcbf1e54f2",
+      "bytes": 1026835
+    },
+    {
+      "path": "tests/fixtures/v6-linked-packet-original-public.json.gz",
+      "sha256": "ea835b611db3301aa80129aec7f75ac4b4c33efe9ae8b470945cd9043c988aa5",
+      "bytes": 1899111
+    },
+    {
+      "path": "tests/fixtures/v6-linked-packet-reference-alias-diagnostic.json.gz",
+      "sha256": "3ee4fe6907c44726ec06f5789effcf6bba6857e23cc06741a4034356ea93aa83",
+      "bytes": 1580717
+    },
+    {
+      "path": "tests/fixtures/v6-linked-packet-reference.json.gz",
+      "sha256": "43e4c7cb34f1d3745be074a65bcd154829932c6dd1c278791a8f23b08521b555",
+      "bytes": 2996826
+    },
+    {
+      "path": "tests/fixtures/v6-linked-preparation-reference.json.gz",
+      "sha256": "280397c931e2ba7bff5aa99931b64b938d18e5224e66e9da397407c0e3018299",
+      "bytes": 719074
+    },
+    {
+      "path": "tests/fixtures/v6-morphology-entry-reference.json.gz",
+      "sha256": "2ea1ee23ab986f84e589c75d1a9ac806bb7285fe32e2d0a3e34b31d6b6633583",
+      "bytes": 295568
+    },
+    {
+      "path": "tests/fixtures/v6-morphology-managed-reference.json.gz",
+      "sha256": "ed90ac39b579741c4f0e5799e6638d52f3c76cb2f9ac80acab81649fab995508",
+      "bytes": 46160
+    },
+    {
+      "path": "tests/fixtures/v6-morphology-measurements-reference.json.gz",
+      "sha256": "240ab70440bd2efe7588b1ab5d673e61210842987801f9fdeb44bafc87185757",
+      "bytes": 278370
+    },
+    {
+      "path": "tests/fixtures/v6-morphology-methods-reference.json.gz",
+      "sha256": "c4a324715e0d2f18a6b67432c9a428f11e1b880e6c24e3831d312c5a5d6a49f9",
+      "bytes": 109384
+    },
+    {
+      "path": "tests/fixtures/v6-motion-contrast-reference.json.gz",
+      "sha256": "f5daf3ab1d07a509ce9268277f84ddd74414eaf08b4e6d74dc3a6f4b27aa7f2d",
+      "bytes": 21095
+    },
+    {
+      "path": "tests/fixtures/v6-native-caller/hano-first-prefix.json",
+      "sha256": "6bfdfef94cf41b773e534e1c062f1ea6f332da026705dca7db9775abaedd2b35",
+      "bytes": 2363827
+    },
+    {
+      "path": "tests/fixtures/v6-native-caller/memo-first-prefix.json",
+      "sha256": "517324ce489606968d03d88e2edcf23bd3189f7e7c3ad378047f22654a39c810",
+      "bytes": 794148
+    },
+    {
+      "path": "tests/fixtures/v6-native-caller/onde-first-prefix.json",
+      "sha256": "1f5c16a35194d52714c1aeec28b15ed27590c33bae262a8b0c5861b2aff37d0c",
+      "bytes": 1135502
+    },
+    {
+      "path": "tests/fixtures/v6-native-caller/report.json",
+      "sha256": "28c0aee35b50189ca00642e8f428d9d26cdf1f5be98249231c37821e53254be8",
+      "bytes": 18986
+    },
+    {
+      "path": "tests/fixtures/v6-native-caller/viewport-three-prefixes.json",
+      "sha256": "f3f9db78d1da262de307739dc4a841ad28a8ac6c26141a3737dcd4d2bddf38ec",
+      "bytes": 1849588
+    },
+    {
+      "path": "tests/fixtures/v6-next-transfer-initial-public.json.gz",
+      "sha256": "2211864cc60a00037ca138927ab75b9b791c7f905636c66cad0fa1ed5b5ced87",
+      "bytes": 17746
+    },
+    {
+      "path": "tests/fixtures/v6-observer-reference.json",
+      "sha256": "6ec6e5255bbf31ceb1633456b543f32d802c53f9234f46204623c66d4a37a825",
+      "bytes": 151364
+    },
+    {
+      "path": "tests/fixtures/v6-occluded-catalogue-frontier-original-public.json.gz",
+      "sha256": "d55035a11cd1f757b421e5df02d70de4daf9d6010949346e81f4d706ffeef509",
+      "bytes": 340124
+    },
+    {
+      "path": "tests/fixtures/v6-occluded-catalogue-original-public.json.gz",
+      "sha256": "3dfca8ca888404f021512c5c1dff2c74a34c2e70467ed2ad1cf8ecbc3d59b7b3",
+      "bytes": 51349
+    },
+    {
+      "path": "tests/fixtures/v6-occluded-catalogue-reference.json.gz",
+      "sha256": "c3702192076a607b4308fa2c99652a26b04e3aa4479b1e7a51c5d48d77666450",
+      "bytes": 196872
+    },
+    {
+      "path": "tests/fixtures/v6-occurrence-reference.json",
+      "sha256": "3e6b161eeba7539dc3829d3657928b544328c79dfae2c5e594c03d814c755bb9",
+      "bytes": 6525592
+    },
+    {
+      "path": "tests/fixtures/v6-operations-reference.json",
+      "sha256": "bd268f2f93582aece3dbc03d8075cf0c865b66b4e28681088b4547024149d03b",
+      "bytes": 658896
+    },
+    {
+      "path": "tests/fixtures/v6-orbit-containment-reference.json",
+      "sha256": "41832d9ad8f35c34d08c576f7303902ea66bec42b0e5208d184c363148441624",
+      "bytes": 8810498
+    },
+    {
+      "path": "tests/fixtures/v6-ordered-reaction-family-reference.json.gz",
+      "sha256": "03e934e8b96720a40ecb9011e635ac9879757da177c321bf319bbc687f75ac38",
+      "bytes": 129567
+    },
+    {
+      "path": "tests/fixtures/v6-ordered-reaction-reference.json.gz",
+      "sha256": "4b20dd58dfdbe37538dd915a33388031a1da384163d9d3823af37e6f4c7d3548",
+      "bytes": 21812
+    },
+    {
+      "path": "tests/fixtures/v6-ordered-support-main-reference.json",
+      "sha256": "2aaf3bb7a2846ebb37641d9eabe1d1fea3d83fff29ae011e95a2bd5c469f43cb",
+      "bytes": 305247
+    },
+    {
+      "path": "tests/fixtures/v6-ordered-support-reference.json",
+      "sha256": "592de5b4eac271df8d3bdf9addea962380885b59c0f4b7508ea1ca7c9f6eb863",
+      "bytes": 2907792
+    },
+    {
+      "path": "tests/fixtures/v6-outline-continuation-reference.json.gz",
+      "sha256": "9bd3ff5cde210df3e8476cd1ef7cdc02048075cb5a5b2c75266e789c24f1bd9d",
+      "bytes": 126190
+    },
+    {
+      "path": "tests/fixtures/v6-outline-local-count-reference.json.gz",
+      "sha256": "e1394aaa7a8f3b0bcb9aa7b3adba058bb2732d78d8d9ed99283686fc0a8f243f",
+      "bytes": 122470
+    },
+    {
+      "path": "tests/fixtures/v6-outline-prior-raster-reference.json.gz",
+      "sha256": "76d575db196f285eb0edf71ec8f57e7cf3abe43f8fc232d737a205a956d6bf71",
+      "bytes": 438846
+    },
+    {
+      "path": "tests/fixtures/v6-outline-recovery-policy-reference.json.gz",
+      "sha256": "48f130e588f35fd3d640014fc3ed6d12a7050102ec10d1c92e599cb030dc89e2",
+      "bytes": 5273
+    },
+    {
+      "path": "tests/fixtures/v6-outline-rejoin-reference.json.gz",
+      "sha256": "4c0957a109b77df450f18539b1742ad6d4d5a44745580a332af6fbcfd6253db3",
+      "bytes": 5533
+    },
+    {
+      "path": "tests/fixtures/v6-outline-service-reference.json.gz",
+      "sha256": "50ce0fdf885f79c66a168b25e4327e3f97b538d49924170da6a49ede7af1685b",
+      "bytes": 1211188
+    },
+    {
+      "path": "tests/fixtures/v6-outline-service-reference.json.gz.part000",
+      "sha256": "8501764909a6e9707c57747871cfc1bed489f97695734baf9e7cc7c40adad892",
+      "bytes": 900000
+    },
+    {
+      "path": "tests/fixtures/v6-outline-service-reference.json.gz.part001",
+      "sha256": "6e67f36ffd39316ca5a553d071ba4b3c0d84eb70b5a86ab83fd3ff8028764a65",
+      "bytes": 311188
+    },
+    {
+      "path": "tests/fixtures/v6-outline-service-reference.json.gz.parts.json",
+      "sha256": "337cfbef162b5f8ac9822dc294b4b5a5bc8b733a05c010cb089d94d3e6fea4b1",
+      "bytes": 718
+    },
+    {
+      "path": "tests/fixtures/v6-panel-service-parity.json.gz",
+      "sha256": "0fc54e9b3af159e9bc9fc9d3525737f83a47d4ab038612be0cfe6e127d6cb2ac",
+      "bytes": 638026
+    },
+    {
+      "path": "tests/fixtures/v6-periodic-pattern-reference.json.gz",
+      "sha256": "3b8742b5d78ce0022f1de1e7622063839a67e4e12e77579622845479c543fef9",
+      "bytes": 2509
+    },
+    {
+      "path": "tests/fixtures/v6-point-display-reference.json",
+      "sha256": "4b136480bd7223da72c8747659c6b2344d289c15bf7cbb129d891b1ab236abb8",
+      "bytes": 793685
+    },
+    {
+      "path": "tests/fixtures/v6-point-set-reference.json",
+      "sha256": "17607b6b77a7f6dee8c0181ccbc797003bae3933e89b1b4c50db4292059c3ed0",
+      "bytes": 99796
+    },
+    {
+      "path": "tests/fixtures/v6-product-panel-original-public.json.gz",
+      "sha256": "2f61643c1334d0b15c5720a9ecfb82533d9051e361f052aa6c7795e667480f0b",
+      "bytes": 347475
+    },
+    {
+      "path": "tests/fixtures/v6-product-panel-reference.json.gz",
+      "sha256": "4a03bb88c74425229755b05c5efdef2e135b97468927f55265f623b9e9ce9013",
+      "bytes": 659616
+    },
+    {
+      "path": "tests/fixtures/v6-program-composition-reference.json.gz",
+      "sha256": "5aaf850ec7fc8d94b0817282f0894d0dbe9e902c8b5e2a3313f9a4d7f45e764a",
+      "bytes": 769482
+    },
+    {
+      "path": "tests/fixtures/v6-program-families-reference.json",
+      "sha256": "d574a01370e02b11590b55e63f902d9dd05813251e2bcf94356a6eb6139bbfc7",
+      "bytes": 1265810
+    },
+    {
+      "path": "tests/fixtures/v6-program-priority-public.json.gz",
+      "sha256": "d05d31ef20661988b6ac2c88f936d839a95ecd86cbb041aa31ede28dd53c6843",
+      "bytes": 4088
+    },
+    {
+      "path": "tests/fixtures/v6-prospective-reference.json",
+      "sha256": "347841af45af3c9434d9aa0701dcc6606b43de52ce8b5a7b33e79f0968200922",
+      "bytes": 2951619
+    },
+    {
+      "path": "tests/fixtures/v6-queued-field-original-public.json.gz",
+      "sha256": "263131035dd831a77797ef467a0b45c177093afdc72e84000c9f87d798ab338b",
+      "bytes": 744670
+    },
+    {
+      "path": "tests/fixtures/v6-queued-field-reference-parent-diagnostic.json.gz",
+      "sha256": "7105f0a20cac098cef76cda4b2c3f8597879fdc784ffefff10239a0c7b902529",
+      "bytes": 416298
+    },
+    {
+      "path": "tests/fixtures/v6-queued-field-reference.json.gz",
+      "sha256": "a8a75bcb34ec1dfc4a7d4e1a98c1a44264ffba6459766f40fd84802344380e3e",
+      "bytes": 419417
+    },
+    {
+      "path": "tests/fixtures/v6-radial-port-reference.json.gz",
+      "sha256": "0e4ce04594d06648ec91c8cb3ab9febd8e2c3dba89ad7f02df197b7c731244f1",
+      "bytes": 432057
+    },
+    {
+      "path": "tests/fixtures/v6-ranked-workshop-reference.json.gz",
+      "sha256": "8c1344b16b835e145e9a90edfc3cf18eec022851ae4f6146d5e07ce52ff685d0",
+      "bytes": 1431536
+    },
+    {
+      "path": "tests/fixtures/v6-reactive-contact-family-reference.json.gz",
+      "sha256": "1b6974870a0b69e155498efbc54b7101332d7211742d838593e0dfe8bd46afaf",
+      "bytes": 83499
+    },
+    {
+      "path": "tests/fixtures/v6-reactive-contact-reference.json.gz",
+      "sha256": "58f1dc9dfe2c9ad0a870fd711c05469826586dc0d6bbb2e9b2ea72e750900890",
+      "bytes": 36255
+    },
+    {
+      "path": "tests/fixtures/v6-reactive-contact-source81-reference.json.gz",
+      "sha256": "383055b361a7d5e79411654aade63576eecb0584c3e4605854e6de86e3e6ac4e",
+      "bytes": 806136
+    },
+    {
+      "path": "tests/fixtures/v6-reception-service-legacy-checkpoints.json.gz",
+      "sha256": "111e35807a9c8a2374b787c91aa714bca09db8a6a185c98aeb521ecdb7693587",
+      "bytes": 2310
+    },
+    {
+      "path": "tests/fixtures/v6-reception-service-reference.json.gz",
+      "sha256": "0542610d8e0e4c495ca9ca7cf28ca4aba29b848724f71f35dc95775f0b0f034d",
+      "bytes": 755239
+    },
+    {
+      "path": "tests/fixtures/v6-recurrent-series-legacy-checkpoints.json.gz",
+      "sha256": "8e2209f60e199bb5c0bf314adbc91d48587ab56c357d2afc94a8b48d3b3b3bfd",
+      "bytes": 5886
+    },
+    {
+      "path": "tests/fixtures/v6-recurrent-series-reference.json.gz",
+      "sha256": "ba0bfdcacea2fc07cdbf332838a14ee93b50b592585f94ff5a3f5d3fabd0f3f5",
+      "bytes": 94043
+    },
+    {
+      "path": "tests/fixtures/v6-reduction-transport-dame-original-public.json.gz",
+      "sha256": "b644b3322170c3c3e14723f6ced36c82d44d7d9341282a0da35ff885cff68cac",
+      "bytes": 11515
+    },
+    {
+      "path": "tests/fixtures/v6-reduction-transport-lf52-original-public.json.gz",
+      "sha256": "e407a3067e902effd0fb1dcca56d0651bafc0ede06e8b88b06c8d736c50cbe30",
+      "bytes": 1147274
+    },
+    {
+      "path": "tests/fixtures/v6-reduction-transport-original-public.json.gz",
+      "sha256": "1adefab6a52984093f2f4cb49e4b0be5b9c82f06513ef5e4a72774d8748ea593",
+      "bytes": 14053
+    },
+    {
+      "path": "tests/fixtures/v6-reduction-transport-reference.json.gz",
+      "sha256": "b26680cff657d2faed103f549fa8b62ff7b977ebb6c1b44e349e60f6755482a7",
+      "bytes": 271621
+    },
+    {
+      "path": "tests/fixtures/v6-reference-population-legacy-checkpoints.json.gz",
+      "sha256": "4ae9c591820e5b1ce49eeae2b1110f8caec3f1f3da4489d70d9e05d1acf266d5",
+      "bytes": 2490
+    },
+    {
+      "path": "tests/fixtures/v6-reference-population-reference.json.gz",
+      "sha256": "4a8f656ab4aa5708647916bd3fe52a1a09b2c78a64376c2c0cc0552214d86b97",
+      "bytes": 676234
+    },
+    {
+      "path": "tests/fixtures/v6-relational-chamber-parity.json.gz",
+      "sha256": "685c7dbcd40351367ef4add1cc857667002d3cb9ac12ebedfc10e340ac4a3c75",
+      "bytes": 652089
+    },
+    {
+      "path": "tests/fixtures/v6-relative-arrangements-reference.json.gz",
+      "sha256": "fa52436d34ee32e7fcf4e30f67122c5bede6823d0ff2cb34980cdc4885c3f933",
+      "bytes": 1099570
+    },
+    {
+      "path": "tests/fixtures/v6-relative-arrangements-reference.json.gz.part000",
+      "sha256": "32120859b8da92edde3c1668345cf3ebeb6b183959e8f61da34c093aa64db519",
+      "bytes": 900000
+    },
+    {
+      "path": "tests/fixtures/v6-relative-arrangements-reference.json.gz.part001",
+      "sha256": "f2b55c493b9d18600e7a7edbc7eac363fb1c6fa4f7c04ae7055affee3b2a3f5f",
+      "bytes": 199570
+    },
+    {
+      "path": "tests/fixtures/v6-relative-arrangements-reference.json.gz.parts.json",
+      "sha256": "8143217aa3cd4398e74d6fa85698f40f3afadfc96eddd9118d2af80f780ee28f",
+      "bytes": 736
+    },
+    {
+      "path": "tests/fixtures/v6-rooted-line-legacy-checkpoints.json.gz",
+      "sha256": "7da5863e51001f604aa16f86655774b9bd636da7bdd116e451fdaf190c7488f6",
+      "bytes": 2178
+    },
+    {
+      "path": "tests/fixtures/v6-rooted-line-reference.json.gz",
+      "sha256": "39275a93a5db4de49beeba4b789e4a08af000dd5c8f63a02b0d1c0153f58e565",
+      "bytes": 201516
+    },
+    {
+      "path": "tests/fixtures/v6-rooted-quota-original-public.json.gz",
+      "sha256": "3628a2510adfad669c024df9c1542e8151ba6994b081bfea908a69d8528019d2",
+      "bytes": 168184
+    },
+    {
+      "path": "tests/fixtures/v6-rooted-quota-reference.json.gz",
+      "sha256": "94e544811eae3e9cda30b686ebef8e77f2bd9d54842822b2a290328f6db2ebcd",
+      "bytes": 295234
+    },
+    {
+      "path": "tests/fixtures/v6-select-builder-reference.json.gz",
+      "sha256": "0d45888e93a9901073e8410c1cf9291520fdf72f7cee79d5c65989091d5ed5c0",
+      "bytes": 1580
+    },
+    {
+      "path": "tests/fixtures/v6-select-reference.json.gz",
+      "sha256": "44779f3574b0b17a9ee40f0756ee149e8c4f1b4009d99c663b9e97c2844bdb70",
+      "bytes": 18282
+    },
+    {
+      "path": "tests/fixtures/v6-sequence-reference.json",
+      "sha256": "3700f464e84b486beb02814e93974f2435cbad44029cb15e0380f364629e7a60",
+      "bytes": 481220
+    },
+    {
+      "path": "tests/fixtures/v6-sliding-cavity-reference.json.gz",
+      "sha256": "dd9ee3bb1b6e04840ce2df142e75b6d1cd6f38e288621ffe77ab04ad282af66e",
+      "bytes": 860681
+    },
+    {
+      "path": "tests/fixtures/v6-support-extensions-reference.json.gz",
+      "sha256": "d5880a193741bb1fea22fa940c9db5a8535d88abd8fe41778e2f5ef083ef5a2d",
+      "bytes": 1181685
+    },
+    {
+      "path": "tests/fixtures/v6-support-navigation-reference.json.gz",
+      "sha256": "0cf23f580b91955352a3aff93f6ad82f3395ef34cf964e571fcfaf1a4a26a1c7",
+      "bytes": 233946
+    },
+    {
+      "path": "tests/fixtures/v6-support-procedures-reference.json.gz",
+      "sha256": "2b968e0ee1826693447f6f5ba2f9b77ac2d615d889e96936a7664ad90bca998c",
+      "bytes": 2249864
+    },
+    {
+      "path": "tests/fixtures/v6-symbol-geometry-reference.json.gz",
+      "sha256": "486fcf11563222147c9e417c749064fdf57653bab54665ccef97d4984efcc8aa",
+      "bytes": 204265
+    },
+    {
+      "path": "tests/fixtures/v6-symbol-interface-reference.json.gz",
+      "sha256": "6d8b8408bf994b0048eb24534545d831a6df90e200ec9ada43d20c073c577e1d",
+      "bytes": 498543
+    },
+    {
+      "path": "tests/fixtures/v6-symbol-kernel-reference.json.gz",
+      "sha256": "60b29f2828e017265a0ff34f20aa64297699a1f6f43d84496f715f3e2414061f",
+      "bytes": 61841
+    },
+    {
+      "path": "tests/fixtures/v6-symbol-transactions-reference.json.gz",
+      "sha256": "f18261d26582894be5cc5f5d08bce7ca800ead710d9c0c0eb41a39a0b903fcc1",
+      "bytes": 461650
+    },
+    {
+      "path": "tests/fixtures/v6-target-reference.json",
+      "sha256": "4fbe8fcddd3e7d8f3764b2f037b60acfdd8871b9c0739dd2aea703462765c572",
+      "bytes": 569851
+    },
+    {
+      "path": "tests/fixtures/v6-topological-recolor-reference.json.gz",
+      "sha256": "2a45a6350bd7b6a42996d1ee3e080999b66e556e6b30770025f407f41a750df6",
+      "bytes": 132414
+    },
+    {
+      "path": "tests/fixtures/v6-trace-field-original-public.json.gz",
+      "sha256": "3c997c4009454ab1e8ad67d1b3dbb89df8e4b9c07964ff0f188f57f891be6c8a",
+      "bytes": 773083
+    },
+    {
+      "path": "tests/fixtures/v6-trace-field-reference.json.gz",
+      "sha256": "f5a2bef3a806a1876292c06659fbf3d5691788cd010769072fd3071f12301f49",
+      "bytes": 1635333
+    },
+    {
+      "path": "tests/fixtures/v6-transition-reference.json",
+      "sha256": "23841c507d1ffac0d7c209f8fb39b86c4166518d0bd164417172f9141f5549d6",
+      "bytes": 2163214
+    },
+    {
+      "path": "tests/fixtures/v6-typed-material-original-public.json.gz",
+      "sha256": "3b8447ca844aacecd3c088307f7ba0d3fffd6eac26101915cc4e38da5451a1da",
+      "bytes": 1743614
+    },
+    {
+      "path": "tests/fixtures/v6-typed-material-reference.json.gz",
+      "sha256": "5b943df8824490c8f81325b7172d582e4549d2821242307bbddcd66498deee8f",
+      "bytes": 3532340
+    },
+    {
+      "path": "tests/fixtures/v6-view-reference.json",
+      "sha256": "7f407d73db95e52b774b56abfef5ee389185dd701684d0f448032c0bb0334224",
+      "bytes": 1206020
+    },
+    {
+      "path": "tests/fixtures/v6-visible-box-ray-reference.json.gz",
+      "sha256": "67cd5613867d72a5dbb788ecd1c6ee2f41499af7b55b0051473bc2c48d52a635",
+      "bytes": 35516
+    },
+    {
+      "path": "tests/fixtures/v7-choice-reference.json",
+      "sha256": "1c211f9c0412b976aaa84cb5cfe1aab16ba1dcf63c3afee70bb038675d384158",
+      "bytes": 1888825
+    },
+    {
+      "path": "tests/fixtures/v7-reference.json",
+      "sha256": "48286294b2a2885692133eb89c553f0aeb5511835f88d281348899bd5827f5bd",
+      "bytes": 2465078
+    },
+    {
+      "path": "tests/fixtures/v6-axial-question-reference.json.gz",
+      "sha256": "5d5462a9ec7c8fcef91432eb0e022a62062ed03f79eafe67f0a4c2f9b3958b4a",
+      "bytes": 222358
+    },
+    {
+      "path": "tests/fixtures/v6-facet-examples-reference.json.gz",
+      "sha256": "821212440d936da3e60ff1e5aae26c722373371b3dbc9105ac0039f4dc985e62",
+      "bytes": 1293211
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/diagnostic/source-oracle-export.json",
+      "sha256": "18200759307af758aa540811e76cb00ffe3a15ead29639e5b25ef0003fc839c7",
+      "bytes": 7614
+    },
+    {
+      "path": "tests/fixtures/v6-addressed-material-reference.json.gz",
+      "sha256": "063fa8d5114852fa0ffdd9e1a62fff79bf967ffcef8689186c2badcd0556b682",
+      "bytes": 1074290
+    }
+  ],
+  "inputsUnchanged": true,
+  "testsExecuted": false,
+  "oraclesExecuted": false,
+  "replaysExecuted": false,
+  "gamesExecuted": false,
+  "nativeSourceModified": false,
+  "gitExecuted": false,
+  "futureSiteVersionAnticipated": false,
+  "qualification": "Metadata declaration and exact byte reconstruction only. Existing differing inputs are refused; no existing evidence is overwritten and no agent result is regenerated. This is not functional validation."
+}

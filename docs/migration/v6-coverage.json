@@ -30,10 +30,10 @@
     "declaredClassesAndFunctions": 12857,
     "dataFiles": 417,
     "verifiedModules": 0,
-    "componentVerifiedModules": 189,
+    "componentVerifiedModules": 192,
     "partiallyTransferredModules": 147,
     "transferredUnverifiedModules": 0,
-    "pendingModules": 1033,
+    "pendingModules": 1030,
     "strategyFamilies": 16
   },
   "families": [
@@ -73568,9 +73568,19 @@
           "endLine": 386
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-addressed-field.ts",
+        "src/logos-engine/v6-addressed-material-common.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-addressed-material-reference.py",
+        "tests/fixtures/v6-addressed-material-reference.json.gz",
+        "tests/v6-addressed-material-reference.test.ts",
+        "tests/v6-addressed-material.test.ts",
+        "tests/v6-field-stock.test.ts",
+        "tests/v6-addressed-material-kernel.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_addressed_material.py",
@@ -73597,9 +73607,18 @@
           "endLine": 16
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-addressed-material.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-addressed-material-reference.py",
+        "tests/fixtures/v6-addressed-material-reference.json.gz",
+        "tests/v6-addressed-material-reference.test.ts",
+        "tests/v6-addressed-material.test.ts",
+        "tests/v6-field-stock.test.ts",
+        "tests/v6-addressed-material-kernel.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_alternating_graph.py",
@@ -75294,9 +75313,19 @@
           "endLine": 378
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-field-stock.ts",
+        "src/logos-engine/v6-addressed-material-common.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-addressed-material-reference.py",
+        "tests/fixtures/v6-addressed-material-reference.json.gz",
+        "tests/v6-addressed-material-reference.test.ts",
+        "tests/v6-addressed-material.test.ts",
+        "tests/v6-field-stock.test.ts",
+        "tests/v6-addressed-material-kernel.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_fixed_origin.py",

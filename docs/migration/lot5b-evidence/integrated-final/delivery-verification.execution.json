@@ -1,0 +1,22 @@
+{
+  "command": [
+    "python",
+    "-B",
+    "scripts/verify-native-delivery.py",
+    "docs/migration/lot5b-evidence/integrated-final",
+    "--require-regressions",
+    "--receipt",
+    "browser/browser-qa.json",
+    "--receipt",
+    "common-positive/original-comparison.json",
+    "--receipt",
+    "common-negative/original-comparison.json",
+    "--receipt",
+    "common-stock/original-comparison.json",
+    "--receipt",
+    "common-stock/original-preservation-comparison.json"
+  ],
+  "startedAt": "2026-11-11T02:12:17.380260+00:00",
+  "finishedAt": "2026-11-11T02:12:20.755768+00:00",
+  "exitCode": 0
+}

@@ -1,0 +1,18 @@
+{
+  "lot": "7 follow-up: remaining Workshop/transaction functional reserves",
+  "checkout": null,
+  "branch": "lot7-workshop-caller-followup",
+  "updated_at": "2026-11-11T02:13:38.168332+00:00",
+  "stage": "Read-only source diagnosis of retained LKEY L3 reserve. Actual Site93/native0.57 verified. 5B quiet request acknowledged; no tests, oracles, campaigns, builds, preview, checkout preparation, cost or publication while its exclusive window is pending/active.",
+  "heavy_work_started": false,
+  "heavy_execution_active": false,
+  "performance_started": false,
+  "publication_started": false,
+  "active_command": null,
+  "quiet_acknowledged": true,
+  "request_to_lot5b": "The user resumed the lot7 thread. We acknowledge your02:06 quiet request and perform source/text reads only. No executable proof or checkout preparation until your explicit release. Prior lot7A/7B receipts/statuses remain immutable.",
+  "case_clock": "/workspace/sites/sra-lot7-followup-20261111/lkey-case-checkpoint.json",
+  "publishedBaseCommit": "74fb966a87a561af357630fae18e3dd71547483c",
+  "publishedBaseSiteVersion": 93,
+  "scope": "First incomplete work within lot7; no lot4,5,10 implementation."
+}

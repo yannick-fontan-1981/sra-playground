@@ -1,0 +1,86 @@
+{
+  "schema": "logos-engine.browser-qa.v1",
+  "recordedAt": "2026-11-11T02:03:04.908312+00:00",
+  "startedAt": "2026-11-11T01:56:58.394558+00:00",
+  "finishedAt": "2026-11-11T02:01:58.692Z",
+  "game": "TRIA",
+  "startLevel": 1,
+  "targetLevels": 3,
+  "targetMet": true,
+  "nativeVersion": "0.58.0",
+  "nativeDigest": "099444085f0579ce60e226c9dece42110c577538f5f337579305a2e5f65483c4",
+  "sourceManifest": {
+    "path": "docs/migration/lot5b-evidence/integrated-final/source-manifest.json",
+    "sha256": "2a0101b7cf56ce98a82e27e36d5ab78b53c297ca54b82c638a168be4560643bd",
+    "bytes": 35852
+  },
+  "compiledWorker": {
+    "path": "dist/assets/v6-agent-worker-DnrnwJL5.js",
+    "sha256": "ebd61a7ee6adc7d30bdb901a2a8f2b5936489f36e1b305be42c6aa052c081248",
+    "bytes": 6794315
+  },
+  "learnedStateInjected": false,
+  "pause": {
+    "observed": "Paused.",
+    "actions": 2,
+    "levels": 1,
+    "plans": 2
+  },
+  "oneAction": {
+    "observed": "One action completed.",
+    "actionsBefore": 2,
+    "actionsAfter": 3,
+    "levels": 1,
+    "plans": 3
+  },
+  "resume": {
+    "observed": "Reading the board and planning… followed by natural level boundaries.",
+    "reasoningSessionReset": false
+  },
+  "final": {
+    "observed": "Level completed.",
+    "actions": 17,
+    "levels": 3,
+    "plans": 17,
+    "level": 4,
+    "url": "http://127.0.0.1:4173/?game=TRIA&level=4"
+  },
+  "artifacts": [
+    {
+      "path": "docs/migration/lot5b-evidence/integrated-final/browser/browser-started.json",
+      "sha256": "58573a0675dbadcdca19a5783719bb20b07c366741ff0dec573f00bee09e07d5",
+      "bytes": 1093
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/integrated-final/browser/prior-case-clock.json",
+      "sha256": "6ae9cb16ec1b8ec0ee03a718d2ba71272a1252d17b52cacae431c34eb3c82682",
+      "bytes": 613
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/integrated-final/browser/observed-states.json",
+      "sha256": "e0781987c25bd24376b3881cc96c0f9ce736e16c520df849a43dc3ffd0265e9e",
+      "bytes": 20467
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/integrated-final/browser/tria-three-levels.png",
+      "sha256": "a4eddfa8dcdaa41fdc49275e554b16854939e486def72a0f1900bf2e4ce6ef23",
+      "bytes": 76362
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/integrated-final/browser/observation-finished.json",
+      "sha256": "772a906e0fe62dc6b5f0a4b60e1d3009fc54ea7c88d83f3e4a0f4a0d49da9b73",
+      "bytes": 179
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/integrated-final/browser/interaction-diagnostics.json",
+      "sha256": "dbe1f4df1e5f8ed1159da25808e4c34d426d565d932a9b0058dd975bbce80dfd",
+      "bytes": 613
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/integrated-final/browser/preview-stop.json",
+      "sha256": "9383ab701992b0b5e96e8ba0b3c3f40b1a6be2d84a1c1a760089037b0ed65fa7",
+      "bytes": 230
+    }
+  ],
+  "qualification": "Actual cold managed-preview session on the frozen0.58 build, continuous natural progression through3levels. Pause observed at2actions; one-action resume acquired3actions/3plans without memory reset. A missed first Pause click after a completed boundary is retained. No manual game action, level jump, learned-state injection or WEAV execution. This is an existing TRIA UI regression, not own Addressed contribution or a latency benchmark."
+}

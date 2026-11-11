@@ -1,6 +1,51 @@
 # Complete V6 capability transfer into the V7 architecture
 
-## Current publication: Site 92 / lot 4C native 0.57.0, delivered
+<!-- LOT5B_TRANSFER_CURRENT_START -->
+
+## Current validated transfer: lot 5B / native 0.58.0 — publication pending
+
+**The consumed AddressedMaterial chain is functionally validated and its global cost is accepted. The 5B Site publication remains pending; no deployment or Site number is anticipated.** The candidate integrates the actual **Site 92 / native 0.57.0** source and its **Site 93 documentation closure**. The [reconciliation receipt](lot5b-evidence/coordination/published-4c-documentation-closure-reconciliation.json) confirms unchanged native, test and build inputs between those publications. The declared cost baseline remains Site 92. The [candidate manifest](lot5b-evidence/integrated-final/source-manifest.json) contains **302 native files**, digest `099444085f0579ce60e226c9dece42110c577538f5f337579305a2e5f65483c4`; the [source archive](lot5b-evidence/integrated-final/source-archive.json) retains **313 files**.
+
+The single `public_addressed_material` owner consumes `AddressedMaterial → AddressedField → FieldStock` at the original strategy position. Selected and passive returns acquire the same source state once, including unresolved envelopes with empty events. Current observation, object support, epoch and hypothesis evidence bind addressed clicks. A calibrated proposal may carry a bounded click path, with every step guarded and a new return able to invalidate continuation. Boundaries clear the source-local active samples and calibration while retaining conditional hypotheses for revalidation. Typed stock learns demands, observed rewrites and lineages; preservation obligations also constrain other owners. The [5B report](lot5b-addressed-material.md) and [source lineage](lot5b-addressed-material-lineage.md) distinguish these consumed contracts from native immutable-checkpoint, restoration and cooperative-bound extensions.
+
+| Completed evidence on this 0.58 freeze | Result and scope |
+| --- | --- |
+| [Declared final suite](lot5b-evidence/integrated-final/validation/delta-tests-run.json) | **4,900/4,900 tests across 125 files**, zero failures, cancellations, skips or TODOs |
+| [Project checks](lot5b-evidence/integrated-final/validation/checks-run.json) | **5/5 passed**: types, entry audit, migration audit, diff and build; native source unchanged |
+| [Ten recorded regressions](lot5b-evidence/integrated-final/regressions/regression-summary.json) | **170/170 checks**, 357 actions, 275 prefixes, 632 requests, 30 natural boundaries, 367 complete public packets and 1,676 animation frames |
+| [Independent original oracle](lot5b-evidence/diagnostic/source-oracle-export.json) | **14 helpers, 19 cold chains and 522 operations**; 1,786 immutable original files verified before and after |
+| Actual common-loop journal comparisons | [Positive **169/169**](lot5b-evidence/integrated-final/common-positive/original-comparison.json), [negative **164/164**](lot5b-evidence/integrated-final/common-negative/original-comparison.json), [bounded stock **199/199**](lot5b-evidence/integrated-final/common-stock/original-comparison.json) |
+| [Original provider and preservation](lot5b-evidence/integrated-final/common-stock/original-preservation-comparison.json) | **835/835 checks**; provider recomputed from actual public returns and both exact preservation refusals reproduced |
+| [Final browser QA](lot5b-evidence/integrated-final/browser/browser-qa.json) | **TRIA: three levels, 17 actions, 17 plans**, Pause at two actions, one action to three, then natural progression without a memory reset |
+
+The common stock proof completes **8/17 stages**, with **one fusion and one move**, and then respects the source preservation stop. It does not claim complete stock traversal. The three earlier failed common-stock attempts remain failed; a separately predeclared `stock-preservation-refusal` contract supplies the successful bounded proof. The original provider/binder comparison is distinct from complete-original-caller parity. Recorded-return regressions are not new live-game successes, and the TRIA interface regression does not establish AddressedMaterial's own live contribution.
+
+The [entry register](v6-entry-point-progress.json) now contains **62/76 connected entries (81.6%), zero partial entries and 14 remaining**: `goal_access` 10/12, `window_constraints` 21/21, `surface` 10/10 and `factored_material_return` 21/33. The [coverage audit](v6-coverage.json) reports **192 component-verified modules, 147 partial transfers, 1,030 pending and zero fully verified modules**, over 1,369 Python modules and 417 data files. **All six complete-migration gates remain false.** Entry connection, component coverage and complete caller parity remain separate measures.
+
+### Completed global cost qualification
+
+The [official window](lot5b-evidence/performance-integrated/window.json) ran on **11 November 2026, 02:18:39–02:27:33 UTC** in A1/B1/B2/A2 order, retaining **32 measured sessions / 400 actions** and separating **eight warmups / 24 actions**. All four series and final integrity passed; [completed isolation](lot5b-evidence/performance-integrated/coordinated-isolation-completion.json) records the exclusive lock and all 12 known cooperative lanes quiet at both boundaries. The [independent review](lot5b-evidence/performance-integrated/owner-growth-review.json) passes **11,865/11,865 checks** and accepts **2/2 games** under the predeclared rule:
+
+| Complete-session median | Site 92 / 0.57, ms | Candidate 0.58, ms | Change |
+| --- | --- | --- | --- |
+| STCK | 10,879.140 | 11,290.470 | **+3.780905%** |
+| SMLP | 17,079.561 | 16,813.765 | **−1.556219%** |
+
+Each pooled per-game median remains **strictly below +10%**, without cross-game compensation, summed nested phases, averaged cohort ratios or excluded measured sessions. Phase diagnostics remain **14/16**: **STCK restoration +13.032972%** and **SMLP known-prefix guard +11.650805%** are retained. Cohorts remain **11/16** and **14/16**. The [full report](lot5b-evidence/performance-integrated/results.md) preserves distributions and adverse p95 values, including guard latency spikes.
+
+The [historical strict comparison](lot5b-evidence/performance-integrated/aggregation-failure.json) remains a real **exit-1 failure** on work metadata. The separate [contract declared before measurement](lot5b-evidence/performance-integrated/owner-growth-contract.json) qualifies **432 structural counter differences** against captured functional forms; it does not introduce 432 new Kernel deltas or infer equality of private graph leaves from counters. The qualification passes **64/64 structural checks** and **68/68 static preflight checks**. No timing correction or favorable-session selection is applied.
+
+### Remaining scope and coordination
+
+The immediate delivery step is the actual 5B publication and its receipt. **5C / `observed_object_binding` is the next capability in this conversation; lot 5 has one registry entry remaining.** General history compaction, propagation of every forced move and latency stability across long sessions still need separate evidence. **WEAV level 6 remains unresolved**; its exhausted cumulative clock is preserved, with no new live attempt or reset.
+
+Lot 4 is closed within its announced transfer scopes. Lot 7's two transfers are closed, while the LKEY level-3 follow-up remains a separate conversation and scope. Other conversations have started **6A / `preview_packing`** and **10B / `window_question`** following completed 10A; lots **8, 9 and 11** remain planned. These ongoing branches are not claimed as part of the frozen 5B delivery. The [roadmap](v6-delivery-roadmap.md) and [5B evidence index](lot5b-evidence/README.md) retain all limitations and the still-pending publication state.
+
+<!-- LOT5B_TRANSFER_CURRENT_END -->
+
+## Published predecessor: Site 92 / lot 4C native 0.57.0, delivered
+
+This section preserves the 4C publication milestone and its then-current next steps. Its later Site 93 documentation closure is now reconciled in the 5B candidate above; the historical 4C results remain unchanged.
 
 **FacetExamples is delivered in [Site 92 / native 0.57.0](lot4c-evidence/publication/native-publication.json), with functional validation and accepted global cost.** Source commit `d06620d1e4ca2c9758cc693b1ced9eeeddccb7e6` reached terminal deployment `succeeded` on **10 November 2026 at 22:45:49 UTC−03**. The existing URL and owner-only private audience, revision **3**, remain unchanged. The [frozen native manifest](lot4c-evidence/integrated-final/source-manifest.json) contains **298 native files**, digest `eebd099808672be934389020c8f9061df4fdacab28cd7d60c00cd1b080464c04`. The [309-file execution archive](lot4c-evidence/integrated-final/source-archive.json) records freeze commit `6065d67c18b1ad85bd62b60c36c6962f18bfeab3`. The actual predecessor of this delivery is **10A / Site 91 / native 0.56.0**, commit `5659ddc9420c7624df4865f0afc628782296a186`, confirmed on **10 November 2026 at 21:42:39 UTC−03**. The [Sites 90–91 reconciliation](lot4c-evidence/planning/published-predecessor-source-closure.json) retains that baseline's provenance.
 
@@ -77,7 +122,7 @@ modules and verified trajectories below establish progress, not completion.
 
 <!-- LOT4B_CURRENT_START -->
 
-## Current integrated transfer: lot 4B native 0.54.0, relative arrangements
+## Published predecessor transfer: lot 4B native 0.54.0, relative arrangements
 
 Native **0.54.0** is frozen at **`f25d56d1c63dc929b01bb31b3898b84cecc69e6e412d535c0d122170ea401ce9`**, with **286 native files and a 297-file archive**. It integrates the actual published **5A / Site 85 / native 0.53.0** commit **`a009e1f138bb18251d697f49647bacc615ee514f`**, following Site 84 with unchanged execution inputs. The [published predecessor closure](lot4b-evidence/integrated-baseline/published-closure85.json), [report](lot4b-relative-arrangements.md) and [source lineage](lot4b-relative-arrangements-lineage.md) bind that scope. **Functional verification and the global cost gate are complete; the first 4B publication is verified in Site 86.**
 
@@ -1987,7 +2032,7 @@ silently dropping unimplemented capabilities.
 
 ### Historical frozen inventory: integrated lot 5A native 0.53.0
 
-The [5A report](lot5a-linked-temporal-preparation.md) and its exact final validation receipts retain the historical 0.53 milestone with different scopes: **57/76 entries**, **19 remaining**, **174 component-verified / 145 partial / 1,050 pending modules**, **zero fully verified modules** and **all six global gates false**. These historical counts do not describe the current register or coverage inventory, whose published 0.57 results are reported at the top of this document. Formal validation at the 5A milestone is **3,835/3,835 in 102 files**, with **5/5 checks**, **16/16 common-loop checks** and **119/119 comparisons across seven recorded cases**. The graph has **50 installed owners versus 49** and **21 family-installed programs in both versions**; installed programs are distinct from compiled workflow inventory. The global cost is accepted for both games under the qualified rule described above; the first private publication is verified in Site 84. WEAV6 and browser reservations remain explicit.
+The [5A report](lot5a-linked-temporal-preparation.md) and its exact final validation receipts retain the historical 0.53 milestone with different scopes: **57/76 entries**, **19 remaining**, **174 component-verified / 145 partial / 1,050 pending modules**, **zero fully verified modules** and **all six global gates false**. These historical counts do not describe the current register or coverage inventory, whose validated 0.58 candidate results and pending publication are reported at the top of this document. Formal validation at the 5A milestone is **3,835/3,835 in 102 files**, with **5/5 checks**, **16/16 common-loop checks** and **119/119 comparisons across seven recorded cases**. The graph has **50 installed owners versus 49** and **21 family-installed programs in both versions**; installed programs are distinct from compiled workflow inventory. The global cost is accepted for both games under the qualified rule described above; the first private publication is verified in Site 84. WEAV6 and browser reservations remain explicit.
 
 ### Historical frozen inventory: integrated lot 7A native 0.52.0
 

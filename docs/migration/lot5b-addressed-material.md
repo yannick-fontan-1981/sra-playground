@@ -2,7 +2,9 @@
 
 ## État de livraison
 
-**Le transfert de développement de `observed_addressed_material` est implémenté ; sa livraison intégrée reste en préparation.** Le candidat réserve native **0.58.0**, après le lot 10A réellement publié dans Sites 90/91 et le lot 4C attendu en 0.57. Les validations finales, la fenêtre de coût et la publication 5B ne sont pas encore acquises dans cet état du rapport.
+**Le transfert de `observed_addressed_material` est intégré et gelé en native 0.58.0 ; sa validation fonctionnelle et son budget global sont acceptés. La publication 5B reste en attente.** Le candidat intègre le lot 4C réellement publié dans Site 92, après 10A dans Sites 90/91, ainsi que la clôture documentaire Site 93. Les **4 900 tests finaux**, les cinq contrôles incluant la compilation, les **dix rejeux et leurs 170/170 comparaisons**, les preuves communes et leur comparaison originale ainsi que le contrôle navigateur sont terminés. La fenêtre officielle accepte **STCK à +3,780905 %** et **SMLP à −1,556219 %** selon le critère global autorisé ; les deux dépassements de phase et le refus du comparateur structurel strict restent conservés.
+
+Le [gel final](lot5b-evidence/integrated-final/source-manifest.json) contient **302 fichiers natifs**, de digest `099444085f0579ce60e226c9dece42110c577538f5f337579305a2e5f65483c4`. Son [archive de sources](lot5b-evidence/integrated-final/source-archive.json) épingle **313 fichiers**. Le [registre du candidat](v6-entry-point-progress.json) compte **62/76 entrées raccordées**, soit **81,6 %**, zéro partielle et 14 ouvertes. Ce compteur décrit le raccordement des entrées ; il ne constitue pas une déclaration de parité globale avec V6.
 
 Le périmètre couvre la chaîne consommée `AddressedMaterial → AddressedField → FieldStock`, avec un propriétaire unique dans le moteur commun. Le [contrat de filiation](lot5b-addressed-material-lineage.md) décrit les conditions source, les refus et les limites du transfert. Le lot 5C, `observed_object_binding`, reste ouvert. Les autres conversations conservent les lots 4, 7 et 10.
 
@@ -45,15 +47,54 @@ Les trois essais stock échoués restent épinglés et échoués. Le [plan final
 
 ## 4. Intégration et validation finale
 
-Le [successeur 10A effectivement publié](lot5b-evidence/coordination/published-10a-site91.json) est intégré. Ses **294 fichiers natifs** correspondent exactement à son [inventaire publié](lot5b-evidence/coordination/published-10a-source-verification.json). Les conflits de fusion ont conservé les deux propriétaires, leurs acquisitions, leurs entrées ordonnées et leurs événements. Le contrôle de compilation après cette intégration passe.
+Le [successeur 10A effectivement publié](lot5b-evidence/coordination/published-10a-site91.json) est intégré ; ses **294 fichiers natifs** correspondent à son [inventaire publié](lot5b-evidence/coordination/published-10a-source-verification.json). Le [successeur 4C, Site 92 / native 0.57.0](lot5b-evidence/coordination/published-4c-source-verification.json), est également intégré après comparaison de ses **298 fichiers natifs** avec les objets Git publiés. Les conflits de fusion ont conservé les propriétaires, leurs acquisitions, leurs entrées ordonnées et leurs événements.
 
-Le gel final attend le successeur 4C réellement publié. L’union ordonnée des tests publiés, les rejeux publics, les trois contrats communs, l’original indépendant, le navigateur et les contrôles de coût seront liés à ce gel. Aucun résultat de développement n’est présenté comme une validation du futur gel.
+La [réconciliation avec la clôture documentaire Site 93](lot5b-evidence/coordination/published-4c-documentation-closure-reconciliation.json) est passée. Elle vérifie que les sources natives, tests, scripts et entrées de build sont inchangés entre les publications 92 et 93. Le gel candidat conserve son digest et sa base d'archive `ee0c2e663a68e7ac7b272625adf929fcac483956` ; la référence de coût déclarée reste **Site 92**.
+
+### Preuves terminées sur le gel final
+
+| Preuve | Résultat effectivement observé | Portée |
+| --- | --- | --- |
+| [Navigation positive](lot5b-evidence/integrated-final/common-positive/original-comparison.json) | **169/169 contrôles** ; 54 opérations, 15 retours dont cinq propres et dix passifs ; 7/7 étapes | Le journal de la boucle commune est rejoué à froid par le Python original |
+| [Navigation sans effet](lot5b-evidence/integrated-final/common-negative/original-comparison.json) | **164/164** ; 52 opérations, 14 retours dont quatre propres et dix passifs | La réfutation attendue du modèle modifie la décision suivante |
+| [Contribution stock suivie du refus](lot5b-evidence/integrated-final/common-stock/original-comparison.json) | **199/199** ; 63 opérations, 16 retours dont six propres ; **deux actions stock : une fusion et un déplacement** | Contrat `stock-preservation-refusal` : **8/17 étapes**, puis arrêt de préservation ; parcours complet non revendiqué |
+| [Fournisseur et préservation originaux](lot5b-evidence/integrated-final/common-stock/original-preservation-comparison.json) | **835/835** ; même proposition du fournisseur et mêmes deux refus de préservation | Mémoire service reconstruite depuis les 16 retours, avec quatre retours service sélectionnés, douze passifs et quatre événements imbriqués |
+| [Navigateur TRIA](lot5b-evidence/integrated-final/browser/browser-qa.json) | **Trois niveaux résolus, 17 actions, 17 plans**, arrivée au niveau 4 ; Pause à deux actions, puis « One action » fait passer le compteur à trois | Régression d'interface sur un jeu déjà utilisé, progression naturelle sans remise à zéro de la mémoire ; aucune contribution propre du matériau adressé ni mesure de latence déduite |
+
+Les trois exports originaux finaux vérifient chacun les **1 786 fichiers immuables avant et après**, sans modification, et commencent avec un propriétaire froid. Les résultats natifs ne servent pas à calculer les attentes originales. Les sept commandes d'export et de revue ont un code retour nul ; leurs journaux complets, transports gzip et reçus d'exécution sont conservés à côté des comparaisons. La revue de préservation vérifie aussi l'inventaire original complet et les entrées exactes de ses deux appels. Les trois anciens essais stock restent échoués ; le nouveau contrat borné ne les requalifie pas.
+
+### Tests finaux et rejeux terminés
+
+Le [plan intégré](lot5b-evidence/coordination/integrated-test-scope-plan.json) déclare une union ordonnée de **125 fichiers de tests**. Le [résultat final](lot5b-evidence/integrated-final/validation/delta-tests-run.json) est **4 900/4 900 tests réussis**, sans échec, annulation, test ignoré ni test en attente. Les [cinq contrôles](lot5b-evidence/integrated-final/validation/checks-run.json) passent également : vérification des types, audit des entrées, audit de migration, contrôle du diff et compilation. Le reçu confirme que les sources natives sont restées inchangées.
+
+Les [dix rejeux publics](lot5b-evidence/integrated-final/regressions/regression-summary.json) passent **170/170 contrôles** sur les [cas déclarés](lot5b-evidence/integrated-final/regression-cases.json) : **357 actions, 275 préfixes, 632 requêtes, 30 frontières naturelles de niveau, 367 paquets publics complets et 1 676 images d'animation**. Le moteur recalcule chaque commande avant de recevoir le retour public archivé. Les comparaisons gardent les commandes, sélections, gardes, frontières et résultats publics de leur contrat historique ; elles ne prétendent pas comparer tous les contenus privés, le graphe complet ou le routeur Python entier. Ces rejeux de traces ne constituent ni de nouvelles réussites en jeu ni une mesure d'accélération.
+
+### Publication 5B — en attente
+
+La publication 5B n'est pas encore déclarée. Son état, sa version Site et le commit effectivement déployé seront renseignés à partir du reçu réel, après vérification des sources, du build et des entrées de publication. Les publications 92/93 décrites ici sont celles du prédécesseur 4C.
 
 ## 5. Règle et mesure du coût
 
 La consigne utilisateur est appliquée au **temps de session complet**, séparément sur STCK et SMLP : la médiane groupée du candidat doit rester **strictement en dessous de +10 %** par rapport à la référence publiée remesurée. Un jeu ne compense pas un autre. Les durées de phases imbriquées ne sont pas additionnées.
 
-La fenêtre prévue conserve l’ordre A1/B1/B2/A2, 32 sessions mesurées et 400 actions, avec huit sessions par jeu et version. Les chauffes sont séparées. Les dépassements de phase, les cohortes défavorables et les distributions restent visibles. La structure supplémentaire du propriétaire doit être attribuée avant mesure. **Aucune mesure officielle 5B n’est encore déclarée dans cet état du rapport.**
+La [fenêtre officielle](lot5b-evidence/performance-integrated/window.json) s'est déroulée le **11 novembre 2026, de 02:18:39 à 02:27:33 UTC**, dans l'ordre déclaré A1/B1/B2/A2. Les quatre séries et leur intégrité finale passent. Elle conserve **32 sessions mesurées et 400 actions**, avec huit sessions par jeu et version ; **huit chauffes et leurs 24 actions** sont séparées. Aucune session mesurée ni valeur extrême n'est exclue. L'[isolation](lot5b-evidence/performance-integrated/coordinated-isolation-completion.json) confirme le verrou exclusif sur toute la fenêtre et les **12 voies de travail connues au calme** à ses deux bornes.
+
+La [qualification structurelle préalable](lot5b-evidence/performance-integrated/owner-structural-attribution.json) passe **64/64 contrôles** : elle attribue les structures ajoutées à l'installation du propriétaire, à son checkpoint, aux enveloppes source des retours passifs et aux fragments atteignables réellement capturés. Le [précontrôle statique](lot5b-evidence/performance-integrated/static-preflight.json) passe **68/68 contrôles** et confirme les entrées gelées, la référence Site 92 et l'absence de mesure dans ce contrôle. Ces captures fonctionnelles et vérifications ne sont pas des mesures de coût.
+
+### Résultat de coût global accepté, diagnostics conservés
+
+Le [rapport complet](lot5b-evidence/performance-integrated/results.md) conserve les 32 sessions, les phases, la dispersion et les p95. La [revue indépendante](lot5b-evidence/performance-integrated/owner-growth-review.json) passe **11 865/11 865 contrôles** et accepte **2/2 jeux** sous le statut `accepted_under_predeclared_owner_cost_rule`.
+
+| Jeu | Médiane de session Site 92, ms | Médiane du candidat, ms | Variation globale | Décision |
+| --- | --- | --- | --- | --- |
+| STCK | 10 879,140 | 11 290,470 | **+3,780905 %** | Accepté, strictement sous +10 % |
+| SMLP | 17 079,561 | 16 813,765 | **−1,556219 %** | Accepté, strictement sous +10 % |
+
+Le diagnostic agrégé par mesure reste **14/16**, avec deux dépassements conservés : **restauration STCK +13,032972 %** et **garde du préfixe connu SMLP +11,650805 %**, tous deux classés `over_budget_with_noise_unresolved`. Les deux cohortes gardent respectivement **11/16** et **14/16** diagnostics dans le seuil, sans choisir la plus favorable. Les huit sessions de chaque jeu et version sont réunies pour la décision globale ; les ratios des cohortes ne sont pas moyennés. Ces dépassements de phase sont acceptables selon la consigne utilisateur puisque le temps complet de chaque jeu reste sous +10 %.
+
+Le [comparateur historique strict](lot5b-evidence/performance-integrated/aggregation-failure.json) conserve son **échec réel, code retour 1**, sur l'identité des métadonnées de travail. Il n'est pas requalifié en succès. La consolidation distincte applique le [contrat structurel déclaré avant mesure](lot5b-evidence/performance-integrated/owner-growth-contract.json) et vérifie **432 écarts de compteurs structurels** contre leurs formes fonctionnelles attendues. Ce nombre ne désigne pas 432 nouveaux deltas du moteur. Les autres métadonnées restent comparées, les signatures demeurent stables dans chaque version, et aucune durée n'est corrigée pour compenser l'ajout du propriétaire.
+
+Les pointes de latence restent une réserve visible : dans cette fenêtre, le p95 des gardes passe de **0,398 à 9,531 ms sur STCK** et de **0,620 à 10,219 ms sur SMLP**. Le rapport conserve les autres hausses et les valeurs indisponibles ; cette observation ne suffit pas à en attribuer la cause. Le budget accepté sur STCK/SMLP n'établit pas une accélération générale, une contribution propre de cette famille sur ces jeux ou une latence constante au fil de niveaux plus longs.
 
 ## 6. WEAV et rapidité perçue
 
@@ -65,10 +106,10 @@ Le budget cumulatif WEAV antérieur reste épuisé : aucune nouvelle exécution 
 
 | Priorité | Travail | Condition de sortie |
 | --- | --- | --- |
-| En cours | Livrer 5B sur le successeur 4C publié | Gel réel, union des tests, rejeux, preuves communes qualifiées, navigateur, coûts et publication effectivement vérifiés |
+| En cours | Publier le lot 5B validé sur le gel intégré à Sites 92/93 | Vérifier sources, build et entrées de publication, puis conserver le reçu de déploiement réel ; 4 900 tests, 170 contrôles de rejeu, cinq contrôles incluant la compilation, preuves communes bornées, navigateur et budget global déjà acquis |
 | Ensuite | 5C — `observed_object_binding` | Liaison de l’objet courant, conservation et retours de composition, avec restauration et frontières |
 | Réserve explicite | Coordination après le préfixe stock | Un parcours commun peut continuer en respectant les obligations ; aucun contournement du refus source |
-| Suivi transversal | Temps de décision, persistance, restauration et données des anciens niveaux | Mesures déclarées sur des parcours assez longs et attribution des gains, sans déduire une accélération d’une simple acceptation du seuil |
+| Suivi transversal | Temps de décision, persistance, restauration, pointes de latence et données des anciens niveaux | Suivre notamment la restauration STCK et les gardes SMLP ; mesurer des parcours assez longs et attribuer les gains, sans déduire une accélération générale du budget global accepté |
 | WEAV | Niveau 6 et croissance de la latence | Budget et campagne distincts établis ; aucune réussite anticipée |
 
-L’[index des preuves](lot5b-evidence/README.md) conserve les diagnostics et les résultats à leur portée réelle. La [feuille de route générale](v6-delivery-roadmap.md) sera actualisée après intégration du prédécesseur final.
+L'[index des preuves](lot5b-evidence/README.md) conserve les diagnostics et les résultats à leur portée réelle. La [feuille de route générale](v6-delivery-roadmap.md) porte la coordination entre les lots ; les éléments encore en attente ci-dessus ne sont pas présentés comme achevés.
