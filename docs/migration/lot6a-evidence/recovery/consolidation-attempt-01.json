@@ -1,0 +1,12 @@
+{
+  "schema": "logos-engine.lot6a.consolidation-attempt-observation.v1",
+  "recordedAt": "2026-11-11T13:13:06.252672+00:00",
+  "status": "failed",
+  "exitCode": 1,
+  "commandTool": "consolidate-regression-recovery.py with original/recovery/intermediate-failed/final-recovery sources",
+  "errorType": "KeyError",
+  "error": "inputs",
+  "location": "invocation() accessing receipt[inputs] for final outer execution",
+  "successfulSummaryWritten": false,
+  "qualification": "Observed failure of the first consolidation command; final replay itself passed. The actual final outer receipt has no parent inputs list. It remains unchanged. Complete actual before/after fingerprints are retained by the central child runner and must be explicitly bound; no replay success is changed."
+}

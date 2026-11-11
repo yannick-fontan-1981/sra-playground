@@ -1,0 +1,535 @@
+{
+  "schema": "logos-engine.native-cost-static-preflight.v1",
+  "recordedAt": "2026-11-11T12:25:32.892145+00:00",
+  "startedAt": "2026-11-11T12:25:32.472175+00:00",
+  "status": "static_inputs_checked",
+  "measurementExecuted": false,
+  "baselineCheckout": "/workspace/sites/sra-lot6a-recovery-baseline-site95-20261111",
+  "candidateCheckout": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout",
+  "nodeVersion": "v24.22.1",
+  "checkedCount": 68,
+  "checks": [
+    {
+      "name": "distinct_checkouts",
+      "satisfied": true
+    },
+    {
+      "name": "declared_checkouts",
+      "satisfied": true
+    },
+    {
+      "name": "baseline_published_commit",
+      "satisfied": true,
+      "commit": "3a70463039768f7114edae7d94d7dd33b7f36aa8",
+      "siteVersion": 95
+    },
+    {
+      "name": "baseline_native_worktree_clean",
+      "satisfied": true
+    },
+    {
+      "name": "distinct_native_digests",
+      "satisfied": true
+    },
+    {
+      "name": "baseline_actual_native_inventory",
+      "satisfied": true,
+      "digest": "099444085f0579ce60e226c9dece42110c577538f5f337579305a2e5f65483c4",
+      "fileCount": 302
+    },
+    {
+      "name": "baseline_declared_native_identity",
+      "satisfied": true
+    },
+    {
+      "name": "baseline_actual_version",
+      "satisfied": true,
+      "versions": [
+        "0.58.0"
+      ]
+    },
+    {
+      "name": "candidate_actual_native_inventory",
+      "satisfied": true,
+      "digest": "ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229",
+      "fileCount": 306
+    },
+    {
+      "name": "candidate_declared_native_identity",
+      "satisfied": true
+    },
+    {
+      "name": "candidate_actual_version",
+      "satisfied": true,
+      "versions": [
+        "0.60.0"
+      ]
+    },
+    {
+      "name": "declared_fingerprint_protocol",
+      "satisfied": true
+    },
+    {
+      "name": "declared_fingerprint_cases",
+      "satisfied": true
+    },
+    {
+      "name": "declared_fingerprint_diagnosticComparisonPolicy",
+      "satisfied": true
+    },
+    {
+      "name": "declared_fingerprint_globalBudgetPolicy",
+      "satisfied": true
+    },
+    {
+      "name": "declared_fingerprint_baselineManifest",
+      "satisfied": true
+    },
+    {
+      "name": "declared_fingerprint_candidateManifest",
+      "satisfied": true
+    },
+    {
+      "name": "declared_fingerprint_candidateArchiveManifest",
+      "satisfied": true
+    },
+    {
+      "name": "declared_fingerprint_globalDecisionTool",
+      "satisfied": true
+    },
+    {
+      "name": "declared_fingerprint_globalCalculationTool",
+      "satisfied": true
+    },
+    {
+      "name": "exact_seven_historical_tools",
+      "satisfied": true,
+      "count": 7
+    },
+    {
+      "name": "unchanged_tool_scripts/run-native-cost-window.py",
+      "satisfied": true
+    },
+    {
+      "name": "unchanged_tool_scripts/measure-native-loop-costs.mjs",
+      "satisfied": true
+    },
+    {
+      "name": "unchanged_tool_scripts/compare-native-loop-costs.mjs",
+      "satisfied": true
+    },
+    {
+      "name": "unchanged_tool_scripts/compare-native-cost-cohorts.mjs",
+      "satisfied": true
+    },
+    {
+      "name": "unchanged_tool_scripts/review-native-cost-consolidation.py",
+      "satisfied": true
+    },
+    {
+      "name": "unchanged_tool_scripts/review-native-global-cost-window.py",
+      "satisfied": true
+    },
+    {
+      "name": "unchanged_tool_scripts/review-native-global-cost-budget.py",
+      "satisfied": true
+    },
+    {
+      "name": "historical_input_cases.json",
+      "satisfied": true,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "name": "historical_input_comparison-policy.json",
+      "satisfied": true,
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+    },
+    {
+      "name": "same_measurement_runner",
+      "satisfied": true
+    },
+    {
+      "name": "same_source_declaration_laya_proto/common_frontier_policy.drm.json",
+      "satisfied": true,
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+    },
+    {
+      "name": "same_source_declaration_morphology_policy/strategy.drm",
+      "satisfied": true,
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    },
+    {
+      "name": "baseline_trace_STCK",
+      "satisfied": true,
+      "path": "/workspace/sites/sra-lot6a-recovery-baseline-site95-20261111/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "name": "candidate_trace_STCK",
+      "satisfied": true,
+      "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "name": "baseline_trace_SMLP",
+      "satisfied": true,
+      "path": "/workspace/sites/sra-lot6a-recovery-baseline-site95-20261111/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    },
+    {
+      "name": "candidate_trace_SMLP",
+      "satisfied": true,
+      "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    },
+    {
+      "name": "wrapper_order",
+      "satisfied": true,
+      "plans": [
+        [
+          "A1",
+          "baseline",
+          "cohort1/baseline"
+        ],
+        [
+          "B1",
+          "ROOT",
+          "cohort1/after"
+        ],
+        [
+          "B2",
+          "ROOT",
+          "cohort2/after"
+        ],
+        [
+          "A2",
+          "baseline",
+          "cohort2/baseline"
+        ]
+      ]
+    },
+    {
+      "name": "exact_case_schedule",
+      "satisfied": true
+    },
+    {
+      "name": "declared_order_and_cohorts",
+      "satisfied": true
+    },
+    {
+      "name": "cohort_counts_calculated_from_cases",
+      "satisfied": true,
+      "measuredSessions": 32,
+      "measuredActions": 400,
+      "excludedWarmupSessions": 8,
+      "excludedWarmupActions": 24
+    },
+    {
+      "name": "strict_per_game_global_gate",
+      "satisfied": true
+    },
+    {
+      "name": "finalization_is_explicit",
+      "satisfied": true
+    },
+    {
+      "name": "declared_chronology",
+      "satisfied": true,
+      "finalizedAt": "2026-11-11T09:18:26.548339-03:00"
+    },
+    {
+      "name": "baseline_input_copy_cases.json",
+      "satisfied": true,
+      "state": "absent_runner_will_copy"
+    },
+    {
+      "name": "baseline_input_copy_comparison-policy.json",
+      "satisfied": true,
+      "state": "absent_runner_will_copy"
+    },
+    {
+      "name": "baseline_input_copy_protocol.md",
+      "satisfied": true,
+      "state": "absent_runner_will_copy"
+    },
+    {
+      "name": "exclusive_measurement_outputs_absent",
+      "satisfied": true,
+      "existing": []
+    },
+    {
+      "name": "baseline_dependency_equivalence_node_modules",
+      "satisfied": true
+    },
+    {
+      "name": "baseline_dependency_equivalence_public/vendor/pyodide",
+      "satisfied": true
+    },
+    {
+      "name": "candidate_archive_identity",
+      "satisfied": true,
+      "files": 322
+    },
+    {
+      "name": "all_frozen_archive_inputs_current",
+      "satisfied": true,
+      "mismatched": []
+    },
+    {
+      "name": "archived_bytes_match_manifest",
+      "satisfied": true,
+      "archivedFiles": 322
+    },
+    {
+      "name": "retained_protocol_contract_checker",
+      "satisfied": true,
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "scripts/review-native-global-cost-window.py",
+        "--check-protocol",
+        "docs/migration/lot6a-evidence/performance-integrated/declaration.json"
+      ],
+      "exitCode": 0,
+      "stdout": "{\"status\": \"protocol_contract_passed\", \"declaration\": \"docs/migration/lot6a-evidence/performance-integrated/declaration.json\", \"finalizedAt\": \"2026-11-11T09:18:26.548339-03:00\", \"nativeDigests\": {\"baseline\": \"099444085f0579ce60e226c9dece42110c577538f5f337579305a2e5f65483c4\", \"candidate\": \"ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229\"}, \"caseIds\": [\"STCK\", \"SMLP\"], \"measurementExecuted\": false}\n",
+      "stderr": ""
+    },
+    {
+      "name": "owner_contract_declared_inside_window",
+      "satisfied": true
+    },
+    {
+      "name": "owner_tools_unchanged",
+      "satisfied": true
+    },
+    {
+      "name": "owner_structural_rule_fixed",
+      "satisfied": true
+    },
+    {
+      "name": "owner_baseline_capture_io_predeclared",
+      "satisfied": true,
+      "baselineCheckout": "/workspace/sites/sra-lot6a-recovery-baseline-site95-20261111",
+      "externalPaths": [
+        "/workspace/sites/sra-lot6a-recovery-baseline-site95-20261111/src/logos-engine/kernel.ts",
+        "/workspace/sites/sra-lot6a-recovery-baseline-site95-20261111/src/logos-engine/v6-knowledge-store.ts",
+        "/workspace/sites/sra-lot6a-recovery-baseline-site95-20261111/scripts/measure-native-loop-costs.mjs",
+        "/workspace/sites/sra-lot6a-recovery-baseline-site95-20261111/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+        "/workspace/sites/sra-lot6a-recovery-baseline-site95-20261111/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+        "/workspace/sites/sra-lot6a-recovery-baseline-site95-20261111/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/preview_packing/preview.drm",
+        "/workspace/sites/sra-lot6a-recovery-baseline-site95-20261111/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+        "/workspace/sites/sra-lot6a-recovery-baseline-site95-20261111/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz"
+      ]
+    },
+    {
+      "name": "owner_baseline_capture_inputs_unchanged",
+      "satisfied": true
+    },
+    {
+      "name": "owner_attribution_external_inputs_exact",
+      "satisfied": true
+    },
+    {
+      "name": "functional_structure_fingerprints",
+      "satisfied": true
+    },
+    {
+      "name": "functional_structure_identity",
+      "satisfied": true
+    },
+    {
+      "name": "functional_structure_predeclared",
+      "satisfied": true
+    },
+    {
+      "name": "owner_source_inventory_bound",
+      "satisfied": true
+    },
+    {
+      "name": "owner_inventory_exact_addition_owners",
+      "satisfied": true
+    },
+    {
+      "name": "owner_inventory_exact_addition_programs",
+      "satisfied": true
+    },
+    {
+      "name": "owner_contract_chronology",
+      "satisfied": true
+    },
+    {
+      "name": "owner_outputs_absent",
+      "satisfied": true
+    }
+  ],
+  "unsatisfied": [],
+  "declaration": {
+    "path": "docs/migration/lot6a-evidence/performance-integrated/declaration.json",
+    "sha256": "4f845314b71ded4a715c6fc8e213f2e7a89a551d7489b7847a9786d5d86ff87d",
+    "bytes": 5794
+  },
+  "traces": [
+    {
+      "role": "baseline",
+      "case": "STCK",
+      "path": "/workspace/sites/sra-lot6a-recovery-baseline-site95-20261111/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "bytes": 53583,
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b",
+      "expectedSha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "role": "candidate",
+      "case": "STCK",
+      "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "bytes": 53583,
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b",
+      "expectedSha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "role": "baseline",
+      "case": "SMLP",
+      "path": "/workspace/sites/sra-lot6a-recovery-baseline-site95-20261111/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "bytes": 111624,
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9",
+      "expectedSha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    },
+    {
+      "role": "candidate",
+      "case": "SMLP",
+      "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "bytes": 111624,
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9",
+      "expectedSha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    }
+  ],
+  "dependencyLinks": [
+    {
+      "path": "/workspace/sites/sra-lot6a-recovery-baseline-site95-20261111/node_modules",
+      "candidatePath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/node_modules",
+      "isSymlink": true,
+      "target": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/node_modules",
+      "targetExists": true,
+      "candidateExists": true,
+      "sameTargetAsCandidate": true
+    },
+    {
+      "path": "/workspace/sites/sra-lot6a-recovery-baseline-site95-20261111/public/vendor/pyodide",
+      "candidatePath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide",
+      "isSymlink": false,
+      "target": "/workspace/sites/sra-lot6a-recovery-baseline-site95-20261111/public/vendor/pyodide",
+      "targetExists": true,
+      "candidateExists": true,
+      "sameTargetAsCandidate": false,
+      "copiedTree": {
+        "byteIdentical": true,
+        "baselineFiles": 12,
+        "candidateFiles": 12,
+        "baselineDigest": "129dcf3aff5b4e4c2212613039b57817793a298609b439e85e3e007fb603ccf6",
+        "candidateDigest": "129dcf3aff5b4e4c2212613039b57817793a298609b439e85e3e007fb603ccf6",
+        "baselineOnly": [],
+        "candidateOnly": [],
+        "changed": [],
+        "comparison": "Every file name and SHA-256, including generated caches; no asset was imported or interpreted."
+      }
+    }
+  ],
+  "protocolCheck": {
+    "path": "docs/migration/lot6a-evidence/performance-integrated/protocol-check.json",
+    "sha256": "64717ce191a6d4857d3190a2a992ac1c7ac27887c932994dabbe25de7cc94cd9",
+    "bytes": 417
+  },
+  "readinessCreated": false,
+  "isolationChecked": false,
+  "functionalReadinessChecked": false,
+  "generator": {
+    "path": "docs/migration/lot6a-evidence/check-cost-static-inputs.py",
+    "sha256": "28eb3b63af5ab9e145e877b0a2eb882f5e89eb326fc5517347d2b76918dca47a",
+    "bytes": 27608
+  },
+  "adaptedFrom": {
+    "path": "docs/migration/lot5b-evidence/check-cost-static-inputs.py",
+    "sha256": "024c23aad5bae4b666cd2e47226b396a937a658a84a0d3cd927fcd1b9fa14cc1",
+    "bytes": 27635
+  },
+  "historicalOrigin": {
+    "path": "docs/migration/lot3h-evidence/check-cost-static-inputs.py",
+    "sha256": "6aaa8170be30bd4c69f3af5ad2d501475d3967a00fa96e6f5843ecee4357039e",
+    "bytes": 16713
+  },
+  "candidateFreeze": {
+    "path": "docs/migration/lot6a-evidence/integrated-final-02/source-manifest.json",
+    "sha256": "52f3624d419cb8209e6545274b3867b5f150d8630a0daa05369fd7613ed435fe",
+    "bytes": 36332
+  },
+  "preparationTool": {
+    "path": "docs/migration/lot6a-evidence/prepare-cost-protocol.py",
+    "sha256": "48229486f8c41b9c74393de8d5ed006862ee6854a18271edf7be015d8fd6cadc",
+    "bytes": 30307
+  },
+  "supersession": null,
+  "qualification": "Static inventory, archive, fingerprint, AST and dependency inspection only. The retained protocol checker performs no measurement. No runtime worker, game, replay, test or build was started. Dependency gaps and cache differences are retained, not repaired or treated as equivalent. This receipt neither authorizes a superseded window nor asserts functional readiness, isolation or a game outcome. The owner must separately bind actual completed evidence and cross-thread coordination before any official window.",
+  "ownerCostContract": {
+    "path": "docs/migration/lot6a-evidence/performance-integrated/owner-growth-contract.json",
+    "sha256": "1523d2aec39929379c79919bd1eb587a25e197c8fd6e8c2c80ab69cd1612fa62",
+    "bytes": 3343
+  },
+  "ownerCostTools": {
+    "consolidator": {
+      "path": "docs/migration/lot6a-evidence/consolidate-owner-costs.mjs",
+      "sha256": "6ef8481b3187edb8d6e14d2ea2a3ea40673106dcad180025deec975446a9597f",
+      "bytes": 52958
+    },
+    "reviewer": {
+      "path": "docs/migration/lot6a-evidence/review-owner-costs.py",
+      "sha256": "13b6585d87fc2306e9652d70e64fdefc7a8499f141216dc65ba67295c235bc20",
+      "bytes": 70329
+    }
+  },
+  "ownerStructuralFixture": {
+    "path": "docs/migration/lot6a-evidence/performance-integrated/owner-structural-fixture.json",
+    "bytes": 60028,
+    "sha256": "a7915f510298136403fda180c1221b1c38e7fc29ff7bf144fd78cd8a4a7bf5fe"
+  },
+  "ownerStructuralExternalInputs": [
+    {
+      "path": "/workspace/sites/sra-lot6a-recovery-baseline-site95-20261111/src/logos-engine/kernel.ts",
+      "bytes": 23637,
+      "sha256": "1cac40f5f9a3356d31ae0fd5247709eb82c5f6402aae3cb68d8edc54c838f207"
+    },
+    {
+      "path": "/workspace/sites/sra-lot6a-recovery-baseline-site95-20261111/src/logos-engine/v6-knowledge-store.ts",
+      "bytes": 14849,
+      "sha256": "035d41597a5831bfa65bb1f627e3a0d05b84cc44cfda05566359873ef8c5af08"
+    },
+    {
+      "path": "/workspace/sites/sra-lot6a-recovery-baseline-site95-20261111/scripts/measure-native-loop-costs.mjs",
+      "bytes": 20670,
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "/workspace/sites/sra-lot6a-recovery-baseline-site95-20261111/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "bytes": 48531,
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+    },
+    {
+      "path": "/workspace/sites/sra-lot6a-recovery-baseline-site95-20261111/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "bytes": 46966,
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    },
+    {
+      "path": "/workspace/sites/sra-lot6a-recovery-baseline-site95-20261111/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/preview_packing/preview.drm",
+      "bytes": 1832,
+      "sha256": "9d5908d0991962c5abae02dc93930e9210e59487b286fe9ab7200b27c42f27a5"
+    },
+    {
+      "path": "/workspace/sites/sra-lot6a-recovery-baseline-site95-20261111/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "bytes": 53583,
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "path": "/workspace/sites/sra-lot6a-recovery-baseline-site95-20261111/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "bytes": 111624,
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    }
+  ]
+}

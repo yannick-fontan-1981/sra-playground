@@ -1,0 +1,61 @@
+{
+  "schema": "logos-engine.evidence-byte-parts.v1",
+  "original": {
+    "file": "kata-campaign.json.gz",
+    "sha256": "a3318ed5f7d742f63b5923f3e1e46b0d9cfff1d18e767b45c522d61aa354e455",
+    "bytes": 8253174
+  },
+  "parts": [
+    {
+      "file": "kata-campaign.json.gz.part000",
+      "sha256": "ad3a0d1bdc142551714913709286a3e379a719252217b50be08c2050066a8960",
+      "bytes": 900000
+    },
+    {
+      "file": "kata-campaign.json.gz.part001",
+      "sha256": "ef03b1201fecdf5459cd63970909af08c115189ea261d5dc9a7b6c1a3aae7112",
+      "bytes": 900000
+    },
+    {
+      "file": "kata-campaign.json.gz.part002",
+      "sha256": "4ba078e8816fd3673b3b760f75f0f4039fe1bfde1d5a10bbf0898c6d8f2ee24e",
+      "bytes": 900000
+    },
+    {
+      "file": "kata-campaign.json.gz.part003",
+      "sha256": "e13335964031778fa8b3c0997ad4fab7ffaa3810f3aab280567160948d39213c",
+      "bytes": 900000
+    },
+    {
+      "file": "kata-campaign.json.gz.part004",
+      "sha256": "72a9e6dd8c85622e5687ff5fb9b76ae7c16babd96e28be217017c2195c0d225e",
+      "bytes": 900000
+    },
+    {
+      "file": "kata-campaign.json.gz.part005",
+      "sha256": "a4225460aae232195ded572dd4b48e33c0dcaf1e82dc299179e5c5ed72816e22",
+      "bytes": 900000
+    },
+    {
+      "file": "kata-campaign.json.gz.part006",
+      "sha256": "df107ddbe0963f36cc9b723a1fd1977aaf624048a67598355a1c547fbba185b1",
+      "bytes": 900000
+    },
+    {
+      "file": "kata-campaign.json.gz.part007",
+      "sha256": "456e11f31a0cdebb2a40b24f6f85a0dd6088cd66e75759a7d3ddb6f5d0fad14f",
+      "bytes": 900000
+    },
+    {
+      "file": "kata-campaign.json.gz.part008",
+      "sha256": "d708162f8e9a255d69bd83a5802f75df25e24963129b90cb99191ef86f0b41ee",
+      "bytes": 900000
+    },
+    {
+      "file": "kata-campaign.json.gz.part009",
+      "sha256": "4af6ebc5e83e7e35b331e9db41c9f5e0d83a4fd11883beb02a5da417ffad54ce",
+      "bytes": 153174
+    }
+  ],
+  "qualification": "Exact byte partitions of immutable evidence; original data and checksum are unchanged."
+}

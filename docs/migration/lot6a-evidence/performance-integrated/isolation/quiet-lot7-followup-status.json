@@ -1,0 +1,83 @@
+{
+  "lot": "7 follow-up: Workshop stationary continuation",
+  "updated_at": "2026-11-11T13:13:52.465138+00:00",
+  "phase": "source_only_quiet_for_6a_final_window",
+  "checkout": "/workspace/sites/sra-lot7-followup-recovery-20261111/.sites-checkout",
+  "stage": "Eleven-case187comparison amendment andindependentreviewv2 recordedbeforefirstownreplay. Frozen306candidatef8d5097 unchanged. Allcaseinputs verified; KATA usesprepared6Aactualpublicreturns, noLKEY. Functionalwalltimes are notperformance data.",
+  "heavy_work_started": false,
+  "heavy_execution_active": false,
+  "performance_started": false,
+  "publication_started": false,
+  "active_command": null,
+  "preview_stopped": true,
+  "case_clock_state": "closed",
+  "case_clock_cumulative_seconds": 2390.347106991,
+  "case_clock_remaining_seconds": 9.652893008999854,
+  "reserved_native_version": "0.61.0 previously agreed, subject to recovery and actual source verification",
+  "publication_order": "Previously agreed6A0.60 ->7followup0.61 ->10B0.62 ->5C0.63; actual latest Site95/native0.58 still verified now.",
+  "request_to_other_lanes": "Ownfunctionalvalidationcomplete5042/5042+5/5+187/187; freshquietackfor6Afinalwindow. No activeorqueuedheavywork. Await6Aexplicitreleaseandactualpublicationbeforefurtherpreparation.",
+  "request_to_lot6a": "Existing WEAV metadata is available at /workspace/shared/sra-coordination/lot7-followup-weav-existing-receipt-note.json: exact command, recorded input hashes, sampled RSS/HWM and receipt paths. No hash or replay was rerun. Our f8 native differs from your ea native by the two follow-up files; the harness is identical at 62a29629. Your successful 1536 MiB exclusive result is now observed. Our quiet acknowledgment remains active through your closure and cost. Please hand off after actual publication.",
+  "request_to_lot10b": "Prospective nextquiet request lot7-followup-f8d5097-strict-window AFTER6Aactualpub+release. Ourallfunctional5042/5042+5/5+187/187 done; pleaseavoidstartingnewlongbatches between6Areleaseandournextwindow. We needactual6Areconciliation+strictforms+readiness thenABBA; willfreshrequestackbeforemeasurement. Current6Aquietunchanged.",
+  "request_to_lot5c": "Your one prepared corrected common02 run (about two minutes plus comparison) is coordinated after explicit 6A release under the shared lock, during our actual 6A reconciliation/preparation. Please announce completion and a fresh quiet acknowledgment for lot7-followup-f8d5097-strict-window before our ABBA window; do not start another long batch then. The current 6A quiet hold remains active.",
+  "branch": "lot7-followup-recovered-site95",
+  "source_checkpoint": {
+    "commit": "900febf8b165136be07663ee106de1747a1f1181",
+    "ref": "refs/heads/lot7-followup-recovery-checkpoint-20261111",
+    "pushedAndVerified": true,
+    "nativeDigest": "f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279",
+    "nativeFileCount": 306,
+    "publication": false
+  },
+  "source_docs_checkpoint": "5780228",
+  "provisional_validation": {
+    "newSyntheticTestsPassed": 51,
+    "affectedTestsPassed": 196,
+    "typecheck": "passed",
+    "originalPythonSyntheticOperations": 24,
+    "originalSourceFilesVerified": 1786,
+    "finalIntegratedValidation": "pending6Astableintegration"
+  },
+  "formal_first_attempt": {
+    "tests": 5042,
+    "passed": 5040,
+    "failed": 2,
+    "retained": true
+  },
+  "prepared6ACheckpoint": "c263271442b8e8a8084c39c2f9301fd3163e7d29",
+  "testCorrectionCheckpoint": "900febf8b165136be07663ee106de1747a1f1181",
+  "buildGate": "5/5 passed on unchanged frozen source",
+  "quiet_request_id": "lot6a-reconstruction-ea2b5228-final-window",
+  "quiet_request_observed_at": "2026-11-11T12:48:42.886940+00:00",
+  "quiet_acknowledged": true,
+  "recorded_regressions_completed": {
+    "cases": 11,
+    "comparisons": 187,
+    "status": "passed",
+    "exitCode": 0,
+    "session": 72585
+  },
+  "quiet_acknowledged_at": "2026-11-11T12:59:07.412337+00:00",
+  "quiet_scope": "No tests, imports, hashes, archives, Git, builds, preview, games or queued commands until explicit6Arelease; source text and coordination only.",
+  "all_own_subagents_compute_idle": true,
+  "formal_retry": {
+    "status": "passed",
+    "tests": 5042,
+    "passed": 5042,
+    "failed": 0,
+    "skipped": 0,
+    "cancelled": 0,
+    "todo": 0,
+    "session": 8462,
+    "receipt": "docs/migration/lot7b-evidence/followup-recovery/integrated-final/verification-attempt-02/validation/delta-tests-run.json"
+  },
+  "next_requested_quiet_window": {
+    "requestId": "lot7-followup-f8d5097-strict-window",
+    "requestedAt": "2026-11-11T13:10:51.159060+00:00",
+    "startsAfter": "6A explicit release and actually published source reconciliation; not before",
+    "candidateNativeDigest": "f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279",
+    "preparedBaselineDigest": "ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229",
+    "functionalStatus": "5042/5042 tests,5/5 delivery checks,187/187 recorded comparisons passed",
+    "remainingBeforeMeasurement": "Actual6A merge/reconciliation, completed evidence packaging/integrity, strict functional forms and final readiness",
+    "measurementStarted": false
+  }
+}

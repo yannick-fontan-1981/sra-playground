@@ -1,0 +1,315 @@
+{
+  "schema": "logos-engine.lot6a-measured-cost-finalizer-static-review.v1",
+  "recordedAtUtc": "2026-11-11T12:45:14.781821+00:00",
+  "status": "static_checked_not_executed",
+  "generatorUnderReview": {
+    "path": "docs/migration/lot6a-evidence/finalize-measured-cost.py",
+    "bytes": 16709,
+    "sha256": "7bb153c1967572826fdf1fc1771090023b2da42e56b816f511baca7773a48c53"
+  },
+  "syntax": {
+    "passed": true,
+    "method": "ast.parse and compile in memory only; no import or invocation of the driver",
+    "lines": 270,
+    "subprocessRunSites": 1
+  },
+  "executionPerformed": false,
+  "windowReadByThisPreparation": false,
+  "measurementOrRuntimeExecuted": false,
+  "inputSchemaAssertions": [
+    {
+      "input": "window.json",
+      "schema": "logos-engine.native-cost-window.v1",
+      "required": [
+        "status=passed",
+        "finalIntegrity=passed",
+        "plannedOrder and all execution labels exactly A1/B1/B2/A2",
+        "all executions status=passed and integer exitCode=0",
+        "completed timestamps",
+        "matching native identities, raw report SHA and log SHA"
+      ]
+    },
+    {
+      "input": "declaration.json",
+      "schema": "logos-engine.native-cost-protocol-declaration.v2",
+      "required": [
+        "declared_before_official_window",
+        "exact source-manifest overrides",
+        "seven central tool fingerprints unchanged",
+        "qualified owner contract and tools bound"
+      ]
+    },
+    {
+      "input": "owner-growth-contract.json",
+      "schema": "logos-engine.lot6a-owner-cost-contract.v2",
+      "required": [
+        "lot=6A",
+        "this performance directory",
+        "exact declaration fingerprint",
+        "closed strict output paths"
+      ]
+    },
+    {
+      "input": "four raw reports",
+      "schema": "logos-engine.native-loop-costs.v1",
+      "required": [
+        "status=passed",
+        "nativeSourceUnchanged=true",
+        "digest matches actual window series"
+      ]
+    },
+    {
+      "input": "two comparison outputs",
+      "schema": "logos-engine.native-loop-cost-comparison.v1",
+      "required": [
+        "status passed or budget_review_required; phase overruns remain preserved"
+      ]
+    },
+    {
+      "input": "independent review output",
+      "schema": "logos-engine.lot6a-owner-cost-review.v2",
+      "required": [
+        "qualified_owner_cost_review_passed",
+        "globalAccepted is boolean",
+        "accepted and aggregate.globalAccepted agree exactly"
+      ]
+    }
+  ],
+  "strictExecutionReceipt": {
+    "source": "coordination/cost-command-sequence.md section 7; consumers consolidate-owner-costs.mjs and review-owner-costs.py",
+    "exactKeys": [
+      "schema",
+      "command",
+      "startedAt",
+      "finishedAt",
+      "exitCode",
+      "inputs",
+      "inputsUnchanged",
+      "outputExists",
+      "log"
+    ],
+    "failureSchema": "logos-engine.retained-tool-failure.v1",
+    "successSchema": "logos-engine.retained-tool-execution.v1",
+    "inputOrder": [
+      "strict comparator",
+      "diagnostic policy",
+      "cohort1 baseline",
+      "cohort1 after",
+      "cohort1 comparison",
+      "cohort2 baseline",
+      "cohort2 after",
+      "cohort2 comparison"
+    ],
+    "qualifiedBranchRequires": [
+      "actual nonzero process exit",
+      "unchanged inputs",
+      "no historical aggregate file",
+      "actual log contains Within-cohort work metadata changed"
+    ],
+    "otherOutcomes": "Actual success goes to aggregation-unexpected-success.json. Other completed failures remain aggregation-failure.json with their actual values. Neither opens the qualified branch unless all predicates hold. Invocation/capture failures retain the journal and stop without inventing a valid strict receipt."
+  },
+  "plannedCommandsNotExecutions": [
+    [
+      "node",
+      "scripts/compare-native-loop-costs.mjs",
+      "docs/migration/lot6a-evidence/performance-integrated/comparison-policy.json",
+      "docs/migration/lot6a-evidence/performance-integrated/cohort1/baseline.json",
+      "docs/migration/lot6a-evidence/performance-integrated/cohort1/after.json",
+      "docs/migration/lot6a-evidence/performance-integrated/cohort1/comparison.json"
+    ],
+    [
+      "node",
+      "scripts/compare-native-loop-costs.mjs",
+      "docs/migration/lot6a-evidence/performance-integrated/comparison-policy.json",
+      "docs/migration/lot6a-evidence/performance-integrated/cohort2/baseline.json",
+      "docs/migration/lot6a-evidence/performance-integrated/cohort2/after.json",
+      "docs/migration/lot6a-evidence/performance-integrated/cohort2/comparison.json"
+    ],
+    [
+      "node",
+      "scripts/compare-native-cost-cohorts.mjs",
+      "docs/migration/lot6a-evidence/performance-integrated/comparison-policy.json",
+      "docs/migration/lot6a-evidence/performance-integrated/cohort1/baseline.json",
+      "docs/migration/lot6a-evidence/performance-integrated/cohort1/after.json",
+      "docs/migration/lot6a-evidence/performance-integrated/cohort1/comparison.json",
+      "docs/migration/lot6a-evidence/performance-integrated/cohort2/baseline.json",
+      "docs/migration/lot6a-evidence/performance-integrated/cohort2/after.json",
+      "docs/migration/lot6a-evidence/performance-integrated/cohort2/comparison.json",
+      "docs/migration/lot6a-evidence/performance-integrated/combined-comparison.json"
+    ],
+    [
+      "node",
+      "docs/migration/lot6a-evidence/consolidate-owner-costs.mjs",
+      "docs/migration/lot6a-evidence/performance-integrated/owner-growth-contract.json",
+      "docs/migration/lot6a-evidence/performance-integrated/owner-growth-comparison.json"
+    ],
+    [
+      "<sys.executable>",
+      "-B",
+      "docs/migration/lot6a-evidence/review-owner-costs.py",
+      "docs/migration/lot6a-evidence/performance-integrated/owner-growth-contract.json",
+      "docs/migration/lot6a-evidence/performance-integrated/owner-growth-comparison.json",
+      "docs/migration/lot6a-evidence/performance-integrated/owner-growth-review.json"
+    ],
+    [
+      "<sys.executable>",
+      "-B",
+      "docs/migration/lot6a-evidence/record-cost-log-transport.py",
+      "docs/migration/lot6a-evidence/performance-integrated"
+    ],
+    [
+      "<sys.executable>",
+      "-B",
+      "docs/migration/lot6a-evidence/write-cost-results.py",
+      "--output-directory",
+      "docs/migration/lot6a-evidence/performance-integrated",
+      "--candidate-source-directory",
+      "docs/migration/lot6a-evidence/integrated-final-02",
+      "--baseline-manifest",
+      "docs/migration/lot6a-evidence/baseline/source-manifest.json"
+    ]
+  ],
+  "outputPolicy": {
+    "exclusivePreflight": true,
+    "exclusiveChildOutputs": true,
+    "exclusiveLogs": true,
+    "refusePartialPreviousFinalization": true,
+    "appendOnlyJournal": "finalize-measured-cost.jsonl",
+    "finalReceipt": "finalize-measured-cost-execution.json",
+    "retry": false,
+    "measurementCommandIncluded": false,
+    "existingInputsModified": false
+  },
+  "exitCodes": {
+    "0": "All analysis/render commands complete and independent global budget is accepted.",
+    "2": "All analysis/render commands complete and independent global budget is refused; results remain rendered.",
+    "1": "Input/precondition/command/integrity failure or strict result outside the predeclared branch; no retry."
+  },
+  "review": {
+    "author": "/root/preview_rebuild_oracle",
+    "independentReader": "/root/preview_rebuild_component",
+    "scope": "Exact existing argv, exclusive creation, faithful strict-result capture, independent refusal propagation, and final input-error delta. Static reading only.",
+    "concreteDefectsRemaining": [],
+    "correctedBeforeExecution": [
+      "Post-command input disappearance is recorded as inputsUnchanged=false plus integrityError.",
+      "Command log/output fingerprint failures cannot bypass command_finished journaling; missing log proof stops without a fabricated strict receipt.",
+      "A completed strict command with changed inputs is retained with its actual values before its branch is refused."
+    ]
+  },
+  "risksAndLimits": [
+    "An existing partial finalization is deliberately not resumable by this driver; all prior files remain for diagnosis.",
+    "A strict success or different strict failure stops the owner-qualified path instead of being reclassified.",
+    "A successful arithmetic review can return globalAccepted=false; the report is still rendered and this driver exits 2.",
+    "The driver delegates all statistics and structural qualification to the already declared tools; it supplies no replacement acceptance rule.",
+    "This static review does not claim the future commands will pass. No completed cost window was read or analyzed during preparation."
+  ],
+  "centralToolsUnchanged": [
+    {
+      "path": "scripts/run-native-cost-window.py",
+      "sha256": "0ec9c69c859d0555e963643010d2254caee8c63d1c9a98ec07cd9af0ce0ce613",
+      "bytes": 8933
+    },
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59",
+      "bytes": 20670
+    },
+    {
+      "path": "scripts/compare-native-loop-costs.mjs",
+      "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb",
+      "bytes": 9861
+    },
+    {
+      "path": "scripts/compare-native-cost-cohorts.mjs",
+      "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34",
+      "bytes": 19460
+    },
+    {
+      "path": "scripts/review-native-cost-consolidation.py",
+      "sha256": "b13174cec5befbb816e70554fd5d47da215eae941b983e66f05b9dd4417b3bd4",
+      "bytes": 17810
+    },
+    {
+      "path": "scripts/review-native-global-cost-window.py",
+      "sha256": "9ab2ecd9d6ddf234e96332421a6e55937a766495c1a20dd223f4441d6b516940",
+      "bytes": 22204
+    },
+    {
+      "path": "scripts/review-native-global-cost-budget.py",
+      "sha256": "b4312bcdae058ba58c16b4e5e24cb53626496b38f8a154834e0452a43e97d341",
+      "bytes": 8476
+    }
+  ],
+  "inputs": [
+    {
+      "path": "docs/migration/lot6a-evidence/finalize-measured-cost.py",
+      "bytes": 16709,
+      "sha256": "7bb153c1967572826fdf1fc1771090023b2da42e56b816f511baca7773a48c53"
+    },
+    {
+      "path": "docs/migration/lot6a-evidence/coordination/cost-command-sequence.md",
+      "bytes": 20515,
+      "sha256": "0d56d271f0715ec6d7d6a738a831fbe0c25df9911539c0ded42aa31cd14c0ab6"
+    },
+    {
+      "path": "docs/migration/lot6a-evidence/consolidate-owner-costs.mjs",
+      "bytes": 52958,
+      "sha256": "6ef8481b3187edb8d6e14d2ea2a3ea40673106dcad180025deec975446a9597f"
+    },
+    {
+      "path": "docs/migration/lot6a-evidence/review-owner-costs.py",
+      "bytes": 70329,
+      "sha256": "13b6585d87fc2306e9652d70e64fdefc7a8499f141216dc65ba67295c235bc20"
+    },
+    {
+      "path": "docs/migration/lot6a-evidence/record-cost-log-transport.py",
+      "bytes": 3889,
+      "sha256": "80309f5db053e850ea410dd1d855a4627deb6edca97758587deecf76ad173f52"
+    },
+    {
+      "path": "docs/migration/lot6a-evidence/write-cost-results.py",
+      "bytes": 41898,
+      "sha256": "810de6a13a0288488f12f370a98b9ff61443aa988f17535d352388d18cda4b96"
+    },
+    {
+      "path": "docs/migration/lot6a-evidence/performance-integrated/declaration.json",
+      "bytes": 5794,
+      "sha256": "4f845314b71ded4a715c6fc8e213f2e7a89a551d7489b7847a9786d5d86ff87d"
+    },
+    {
+      "path": "scripts/run-native-cost-window.py",
+      "bytes": 8933,
+      "sha256": "0ec9c69c859d0555e963643010d2254caee8c63d1c9a98ec07cd9af0ce0ce613"
+    },
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "bytes": 20670,
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "scripts/compare-native-loop-costs.mjs",
+      "bytes": 9861,
+      "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb"
+    },
+    {
+      "path": "scripts/compare-native-cost-cohorts.mjs",
+      "bytes": 19460,
+      "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34"
+    },
+    {
+      "path": "scripts/review-native-cost-consolidation.py",
+      "bytes": 17810,
+      "sha256": "b13174cec5befbb816e70554fd5d47da215eae941b983e66f05b9dd4417b3bd4"
+    },
+    {
+      "path": "scripts/review-native-global-cost-window.py",
+      "bytes": 22204,
+      "sha256": "9ab2ecd9d6ddf234e96332421a6e55937a766495c1a20dd223f4441d6b516940"
+    },
+    {
+      "path": "scripts/review-native-global-cost-budget.py",
+      "bytes": 8476,
+      "sha256": "b4312bcdae058ba58c16b4e5e24cb53626496b38f8a154834e0452a43e97d341"
+    }
+  ]
+}

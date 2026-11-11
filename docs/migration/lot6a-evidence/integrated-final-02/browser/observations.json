@@ -1,0 +1,56 @@
+[
+  {
+    "event": "initial",
+    "observedAt": "2026-11-11T12:23:41.652Z",
+    "url": "http://127.0.0.1:4173/?game=KATA&level=1",
+    "panel": "Solve with SRA.\n\nReady to run from level 1.\n\nRun to next level\nRun 16 actions\nOne action\nPause\n0\nactions\n0\nlevels solved\n0\ncompleted plans\nNew reasoning session\nReturn to Manual"
+  },
+  {
+    "event": "singleStep",
+    "observedAt": "2026-11-11T12:23:56.998Z",
+    "url": "http://127.0.0.1:4173/?game=KATA&level=1",
+    "panel": "Solve with SRA.\n\nOne action completed.\n\nRun to next level\nRun 16 actions\nOne action\nPause\n1\nactions\n0\nlevels solved\n1\ncompleted plans\nNew reasoning session\nReturn to Manual"
+  },
+  {
+    "event": "paused",
+    "observedAt": "2026-11-11T12:24:02.410Z",
+    "url": "http://127.0.0.1:4173/?game=KATA&level=2",
+    "panel": "Solve with SRA.\n\nPausing after the engaged action and its real outcome…\n\nRun to next level\nRun 16 actions\nOne action\nPause\n7\nactions\n0\nlevels solved\n5\ncompleted plans\nNew reasoning session\nReturn to Manual"
+  },
+  {
+    "event": "pauseSettled",
+    "observedAt": "2026-11-11T12:24:09.655Z",
+    "url": "http://127.0.0.1:4173/?game=KATA&level=2",
+    "panel": "Solve with SRA.\n\nLevel completed.\n\nRun to next level\nRun 16 actions\nOne action\nPause\n8\nactions\n1\nlevels solved\n6\ncompleted plans\nNew reasoning session\nReturn to Manual"
+  },
+  {
+    "event": "boundary1",
+    "observedAt": "2026-11-11T12:24:19.553Z",
+    "url": "http://127.0.0.1:4173/?game=KATA&level=2",
+    "panel": "Solve with SRA.\n\nLevel completed.\n\nRun to next level\nRun 16 actions\nOne action\nPause\n8\nactions\n1\nlevels solved\n6\ncompleted plans\nNew reasoning session\nReturn to Manual"
+  },
+  {
+    "event": "pausedAcknowledged",
+    "observedAt": "2026-11-11T12:24:47.832Z",
+    "url": "http://127.0.0.1:4173/?game=KATA&level=2",
+    "panel": "Solve with SRA.\n\nPaused.\n\nRun to next level\nRun 16 actions\nOne action\nPause\n9\nactions\n1\nlevels solved\n7\ncompleted plans\nNew reasoning session\nReturn to Manual"
+  },
+  {
+    "event": "stepAfterPause",
+    "observedAt": "2026-11-11T12:25:14.504Z",
+    "url": "http://127.0.0.1:4173/?game=KATA&level=2",
+    "panel": "Solve with SRA.\n\nOne action completed.\n\nRun to next level\nRun 16 actions\nOne action\nPause\n10\nactions\n1\nlevels solved\n8\ncompleted plans\nNew reasoning session\nReturn to Manual"
+  },
+  {
+    "event": "boundary2",
+    "observedAt": "2026-11-11T12:25:43.507Z",
+    "url": "http://127.0.0.1:4173/?game=KATA&level=3",
+    "panel": "Solve with SRA.\n\nLevel completed.\n\nRun to next level\nRun 16 actions\nOne action\nPause\n16\nactions\n2\nlevels solved\n10\ncompleted plans\nNew reasoning session\nReturn to Manual"
+  },
+  {
+    "event": "boundary3",
+    "observedAt": "2026-11-11T12:26:04.974Z",
+    "url": "http://127.0.0.1:4173/?game=KATA&level=4",
+    "panel": "Solve with SRA.\n\nLevel completed.\n\nRun to next level\nRun 16 actions\nOne action\nPause\n33\nactions\n3\nlevels solved\n14\ncompleted plans\nNew reasoning session\nReturn to Manual"
+  }
+]
