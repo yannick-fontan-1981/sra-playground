@@ -1,0 +1,597 @@
+{
+  "schema": "logos-engine.lot5c-owner-qualification-independent-review.v1",
+  "status": "passed_bounded_receipt_review",
+  "recordedAt": "2026-11-11T17:32:47.901291+00:00",
+  "reviewer": "independent agent /root/lot5_site101_merge_audit",
+  "nativeDigests": {
+    "baseline": "74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12",
+    "candidate": "a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57"
+  },
+  "ownerId": "public_observed_binding",
+  "programId": "v6.observed_binding.choose",
+  "acquisitionMode": "passive_nonadmitted_source_binding",
+  "inputs": [
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/owner-graph-attribution.json",
+      "bytes": 107007,
+      "sha256": "c0528cf494f17f156086e8d0c540fa0421c8bcf7b1c656454d96767b0916f74c"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/owner-structural-fixture.json",
+      "bytes": 60104,
+      "sha256": "67d2afc5d54b8203c636aa8868c7b5967760dc7b44b0329eeb8b67ef98253296"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/owner-source-inventory.json",
+      "bytes": 123426,
+      "sha256": "936188c0d9368737e1b797e205fc3de099585a1cacc8bbc308b13a6c2ba0ba53"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/baseline-owner-graphs.receipt.json",
+      "bytes": 114892,
+      "sha256": "72fe1ce2d3ba9f27b31f549421f0a4c1b79da52566e329911eb2a8afefa43098"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/candidate-owner-graphs.receipt.json",
+      "bytes": 115863,
+      "sha256": "eea5ddc96d52b1218c06f84fc9fe85e1f01cfddc4b74130c61bfa7280a98e8ba"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/baseline-owner-graphs.json.gz",
+      "bytes": 5109271,
+      "sha256": "01aca0a4dde1029919b9dff233959f3aaa72820333dc1d7e3baea8c767e115b2"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/candidate-owner-graphs.json.gz",
+      "bytes": 5160803,
+      "sha256": "a39f71649496a2a0023658f6ebf4ff41d34a77fd479ce59edfadd9be4182462a"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-domain-source-review.json",
+      "bytes": 5584,
+      "sha256": "ad027c2327b0b073c75deaa48cd9d27e90e5909066beb78a94973d706565f626"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/capture-cost-owner-graphs.mjs",
+      "bytes": 28139,
+      "sha256": "177354ff2120fcd148688365c62b854a81ca30a49999f5d9e85a451171a3150d"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/qualify-cost-owner-graphs.mjs",
+      "bytes": 52657,
+      "sha256": "b1f4ae869ce9faf6f45faaace841950aa76de5821230ad16d3404ab646cb3e89"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-source-evidence-paths.json",
+      "bytes": 528,
+      "sha256": "4960a996175c03c0ce92365bda7f3dcaf747f1c7fd8467e34a84584816a87b62"
+    }
+  ],
+  "checkedCount": 92,
+  "checks": [
+    {
+      "name": "parent_exact_fingerprint/owner-graph-attribution.json",
+      "passed": true
+    },
+    {
+      "name": "parent_exact_fingerprint/owner-structural-fixture.json",
+      "passed": true
+    },
+    {
+      "name": "attribution_64_checks_complete",
+      "passed": true
+    },
+    {
+      "name": "fixture_qualified",
+      "passed": true
+    },
+    {
+      "name": "exact_native_digests",
+      "passed": true
+    },
+    {
+      "name": "canonical_forms_hash",
+      "passed": true
+    },
+    {
+      "name": "four_exact_form_pairs",
+      "passed": true
+    },
+    {
+      "name": "40_attributed_deltas_58_paired_points",
+      "passed": true
+    },
+    {
+      "name": "point_and_coverage_order_identical",
+      "passed": true
+    },
+    {
+      "name": "unique_attribution_input_records",
+      "passed": true
+    },
+    {
+      "name": "receipt_bound_in_attribution/baseline-owner-graphs.receipt.json",
+      "passed": true
+    },
+    {
+      "name": "receipt_bound_in_attribution/candidate-owner-graphs.receipt.json",
+      "passed": true
+    },
+    {
+      "name": "inventory_only_binding_added/owners",
+      "passed": true
+    },
+    {
+      "name": "inventory_only_binding_added/programs",
+      "passed": true
+    },
+    {
+      "name": "inventory_only_binding_added/programNodeIds",
+      "passed": true
+    },
+    {
+      "name": "owner_inventory_factory_uninitialized",
+      "passed": true
+    },
+    {
+      "name": "capture_receipt_status/baseline",
+      "passed": true
+    },
+    {
+      "name": "capture_not_cost_measurement/baseline",
+      "passed": true
+    },
+    {
+      "name": "capture_inputs_unchanged/baseline",
+      "passed": true
+    },
+    {
+      "name": "native_inventory_matches_prior_source_inventory/baseline",
+      "passed": true
+    },
+    {
+      "name": "capture_generator_unchanged/baseline",
+      "passed": true
+    },
+    {
+      "name": "source_domain_and_cases_bound/baseline",
+      "passed": true
+    },
+    {
+      "name": "four_sessions_31_actions/baseline",
+      "passed": true
+    },
+    {
+      "name": "58_captured_points/baseline",
+      "passed": true
+    },
+    {
+      "name": "capture_before_qualification/baseline",
+      "passed": true
+    },
+    {
+      "name": "fixture_receipt_and_report_binding/baseline",
+      "passed": true
+    },
+    {
+      "name": "compressed_capture_exact_streaming_sha/baseline",
+      "passed": true
+    },
+    {
+      "name": "capture_receipt_status/candidate",
+      "passed": true
+    },
+    {
+      "name": "capture_not_cost_measurement/candidate",
+      "passed": true
+    },
+    {
+      "name": "capture_inputs_unchanged/candidate",
+      "passed": true
+    },
+    {
+      "name": "native_inventory_matches_prior_source_inventory/candidate",
+      "passed": true
+    },
+    {
+      "name": "capture_generator_unchanged/candidate",
+      "passed": true
+    },
+    {
+      "name": "source_domain_and_cases_bound/candidate",
+      "passed": true
+    },
+    {
+      "name": "four_sessions_31_actions/candidate",
+      "passed": true
+    },
+    {
+      "name": "58_captured_points/candidate",
+      "passed": true
+    },
+    {
+      "name": "capture_before_qualification/candidate",
+      "passed": true
+    },
+    {
+      "name": "fixture_receipt_and_report_binding/candidate",
+      "passed": true
+    },
+    {
+      "name": "compressed_capture_exact_streaming_sha/candidate",
+      "passed": true
+    },
+    {
+      "name": "referenced_artifact_sha/docs/migration/lot5c-evidence/recovery/coordination/cost-domain-source-review.json",
+      "passed": true
+    },
+    {
+      "name": "referenced_artifact_sha/docs/migration/lot5c-evidence/recovery/performance-integrated-01/cases.json",
+      "passed": true
+    },
+    {
+      "name": "referenced_artifact_sha/docs/migration/lot5c-evidence/capture-cost-owner-graphs.mjs",
+      "passed": true
+    },
+    {
+      "name": "referenced_artifact_sha/docs/migration/lot5c-evidence/qualify-cost-owner-graphs.mjs",
+      "passed": true
+    },
+    {
+      "name": "source_evidence_path_domain_unchanged",
+      "passed": true
+    },
+    {
+      "name": "original_source_domain_unchanged",
+      "passed": true
+    },
+    {
+      "name": "exact_binding_attribution_categories",
+      "passed": true
+    },
+    {
+      "name": "owner_and_program_node_identity",
+      "passed": true
+    },
+    {
+      "name": "seven_exact_official_boundary_facts",
+      "passed": true
+    },
+    {
+      "name": "same_binding_source_program_in_all_four_forms",
+      "passed": true
+    },
+    {
+      "name": "only_four_metric_paths_and_explicit_version_identity/STCK:warmup",
+      "passed": true
+    },
+    {
+      "name": "same_actions_cycles_levels/STCK:warmup",
+      "passed": true
+    },
+    {
+      "name": "fixture_exactly_matches_capture_receipt_shapes/STCK:warmup",
+      "passed": true
+    },
+    {
+      "name": "all_acquired_binding_returns_preserved/STCK:warmup",
+      "passed": true
+    },
+    {
+      "name": "contiguous_complete_points/STCK:warmup",
+      "passed": true
+    },
+    {
+      "name": "unique_ordered_candidate_deltas/STCK:warmup",
+      "passed": true
+    },
+    {
+      "name": "every_point_counts_bound_to_explicit_deltas/STCK:warmup",
+      "passed": true
+    },
+    {
+      "name": "every_point_ordered_return_and_fact_coverage/STCK:warmup",
+      "passed": true
+    },
+    {
+      "name": "all_nonnull_boundary_returns_have_facts/STCK:warmup",
+      "passed": true
+    },
+    {
+      "name": "final_metrics_match_last_actual_point/STCK:warmup",
+      "passed": true
+    },
+    {
+      "name": "only_four_metric_paths_and_explicit_version_identity/STCK:measured",
+      "passed": true
+    },
+    {
+      "name": "same_actions_cycles_levels/STCK:measured",
+      "passed": true
+    },
+    {
+      "name": "fixture_exactly_matches_capture_receipt_shapes/STCK:measured",
+      "passed": true
+    },
+    {
+      "name": "all_acquired_binding_returns_preserved/STCK:measured",
+      "passed": true
+    },
+    {
+      "name": "contiguous_complete_points/STCK:measured",
+      "passed": true
+    },
+    {
+      "name": "unique_ordered_candidate_deltas/STCK:measured",
+      "passed": true
+    },
+    {
+      "name": "every_point_counts_bound_to_explicit_deltas/STCK:measured",
+      "passed": true
+    },
+    {
+      "name": "every_point_ordered_return_and_fact_coverage/STCK:measured",
+      "passed": true
+    },
+    {
+      "name": "all_nonnull_boundary_returns_have_facts/STCK:measured",
+      "passed": true
+    },
+    {
+      "name": "final_metrics_match_last_actual_point/STCK:measured",
+      "passed": true
+    },
+    {
+      "name": "only_four_metric_paths_and_explicit_version_identity/SMLP:warmup",
+      "passed": true
+    },
+    {
+      "name": "same_actions_cycles_levels/SMLP:warmup",
+      "passed": true
+    },
+    {
+      "name": "fixture_exactly_matches_capture_receipt_shapes/SMLP:warmup",
+      "passed": true
+    },
+    {
+      "name": "all_acquired_binding_returns_preserved/SMLP:warmup",
+      "passed": true
+    },
+    {
+      "name": "contiguous_complete_points/SMLP:warmup",
+      "passed": true
+    },
+    {
+      "name": "unique_ordered_candidate_deltas/SMLP:warmup",
+      "passed": true
+    },
+    {
+      "name": "every_point_counts_bound_to_explicit_deltas/SMLP:warmup",
+      "passed": true
+    },
+    {
+      "name": "every_point_ordered_return_and_fact_coverage/SMLP:warmup",
+      "passed": true
+    },
+    {
+      "name": "all_nonnull_boundary_returns_have_facts/SMLP:warmup",
+      "passed": true
+    },
+    {
+      "name": "final_metrics_match_last_actual_point/SMLP:warmup",
+      "passed": true
+    },
+    {
+      "name": "only_four_metric_paths_and_explicit_version_identity/SMLP:measured",
+      "passed": true
+    },
+    {
+      "name": "same_actions_cycles_levels/SMLP:measured",
+      "passed": true
+    },
+    {
+      "name": "fixture_exactly_matches_capture_receipt_shapes/SMLP:measured",
+      "passed": true
+    },
+    {
+      "name": "all_acquired_binding_returns_preserved/SMLP:measured",
+      "passed": true
+    },
+    {
+      "name": "contiguous_complete_points/SMLP:measured",
+      "passed": true
+    },
+    {
+      "name": "unique_ordered_candidate_deltas/SMLP:measured",
+      "passed": true
+    },
+    {
+      "name": "every_point_counts_bound_to_explicit_deltas/SMLP:measured",
+      "passed": true
+    },
+    {
+      "name": "every_point_ordered_return_and_fact_coverage/SMLP:measured",
+      "passed": true
+    },
+    {
+      "name": "all_nonnull_boundary_returns_have_facts/SMLP:measured",
+      "passed": true
+    },
+    {
+      "name": "final_metrics_match_last_actual_point/SMLP:measured",
+      "passed": true
+    },
+    {
+      "name": "exact_four_structural_metric_paths_observed",
+      "passed": true
+    },
+    {
+      "name": "growth_is_nonconstant_and_capture_derived",
+      "passed": true
+    },
+    {
+      "name": "command_projection_retains_source_omission",
+      "passed": true
+    },
+    {
+      "name": "all_artifacts_unchanged_before_review_write",
+      "passed": true
+    }
+  ],
+  "findings": [],
+  "summary": {
+    "formsPerSide": 4,
+    "pairedGraphPoints": 58,
+    "attributedCandidateDeltas": 40,
+    "attributionCategories": {
+      "observedBinding_owner_state": 25,
+      "observedBinding_installation": 4,
+      "observedBinding_installed_source_program": 4,
+      "observedBinding_source_event_fact": 7
+    },
+    "orderedAcquiredReturnsAcrossCandidateForms": 31,
+    "nonnullOfficialBoundaryFacts": 7,
+    "forms": [
+      {
+        "case": "STCK",
+        "form": "warmup",
+        "actionsPerSide": 3,
+        "cyclesPerSide": 3,
+        "levelsCompletedPerSide": 1,
+        "pairedPoints": 6,
+        "attributedDeltas": 7,
+        "orderedAcquiredReturns": 3,
+        "nonnullBoundaryFacts": 1,
+        "finalNodeCounts": {
+          "baseline": 258,
+          "candidate": 262
+        },
+        "finalGraphRevisions": {
+          "baseline": 534,
+          "candidate": 541
+        }
+      },
+      {
+        "case": "STCK",
+        "form": "measured",
+        "actionsPerSide": 10,
+        "cyclesPerSide": 6,
+        "levelsCompletedPerSide": 2,
+        "pairedPoints": 19,
+        "attributedDeltas": 11,
+        "orderedAcquiredReturns": 10,
+        "nonnullBoundaryFacts": 2,
+        "finalNodeCounts": {
+          "baseline": 392,
+          "candidate": 397
+        },
+        "finalGraphRevisions": {
+          "baseline": 955,
+          "candidate": 966
+        }
+      },
+      {
+        "case": "SMLP",
+        "form": "warmup",
+        "actionsPerSide": 3,
+        "cyclesPerSide": 3,
+        "levelsCompletedPerSide": 1,
+        "pairedPoints": 6,
+        "attributedDeltas": 7,
+        "orderedAcquiredReturns": 3,
+        "nonnullBoundaryFacts": 1,
+        "finalNodeCounts": {
+          "baseline": 249,
+          "candidate": 253
+        },
+        "finalGraphRevisions": {
+          "baseline": 546,
+          "candidate": 553
+        }
+      },
+      {
+        "case": "SMLP",
+        "form": "measured",
+        "actionsPerSide": 15,
+        "cyclesPerSide": 9,
+        "levelsCompletedPerSide": 3,
+        "pairedPoints": 27,
+        "attributedDeltas": 15,
+        "orderedAcquiredReturns": 15,
+        "nonnullBoundaryFacts": 3,
+        "finalNodeCounts": {
+          "baseline": 466,
+          "candidate": 472
+        },
+        "finalGraphRevisions": {
+          "baseline": 1342,
+          "candidate": 1357
+        }
+      }
+    ],
+    "formsSha256": "89d4bb89f1e22ef73409d5e7b0497a745631b7f71fab50f51355dc1f2a20f183",
+    "formsHashEncoding": "compact JSON with recursive sorted keys",
+    "allowedMetricPaths": [
+      "observations[*].nodeCount",
+      "inspection[*].graphNodes",
+      "final.nodeCount",
+      "final.graphRevision"
+    ],
+    "separateIdentityDifference": "final.implementation is exactly native 0.62.0 versus 0.63.0; it is not a structural metric allowance",
+    "constantGrowthAssumed": false
+  },
+  "scope": {
+    "parsedReceipts": [
+      "owner-graph-attribution.json",
+      "owner-structural-fixture.json",
+      "owner-source-inventory.json",
+      "baseline-owner-graphs.receipt.json",
+      "candidate-owner-graphs.receipt.json"
+    ],
+    "streamedFingerprintOnly": [
+      "docs/migration/lot5c-evidence/recovery/performance-integrated-01/baseline-owner-graphs.json.gz",
+      "docs/migration/lot5c-evidence/recovery/performance-integrated-01/candidate-owner-graphs.json.gz",
+      "docs/migration/lot5c-evidence/recovery/coordination/cost-domain-source-review.json",
+      "docs/migration/lot5c-evidence/recovery/performance-integrated-01/cases.json",
+      "docs/migration/lot5c-evidence/capture-cost-owner-graphs.mjs",
+      "docs/migration/lot5c-evidence/qualify-cost-owner-graphs.mjs",
+      "docs/migration/lot5c-evidence/recovery/coordination/cost-source-evidence-paths.json"
+    ],
+    "compressedGraphArchivesDecoded": false,
+    "nativeFilesRehashed": false,
+    "sourceDomainArtifactsRehashed": true,
+    "producerAttributionChecksReported": 64,
+    "producerAttributionChecksAllPassed": true,
+    "independentGraphReconstructionExecuted": false,
+    "existingOrFrozenFilesEdited": false,
+    "nativeRuntimeExecuted": false,
+    "testSuiteExecuted": false,
+    "replayExecuted": false,
+    "measurementExecuted": false
+  },
+  "limits": [
+    "This bounded independent review compares actual receipt and fixture contents, exact fingerprints, explicit delta attribution arithmetic and ordered return coverage; it does not rerun the graph qualifier.",
+    "The complete compressed graph archives were checked by streaming SHA256 and byte count, without decompression or decoding. Their full node/delta reconstruction and private-value domain checks remain the qualified producer's 64 recorded checks.",
+    "The pre-existing source inventory remains factory-only and uninitialized; these separate later cold captures initialized four functional forms per role.",
+    "The qualified domain remains passive nonadmitted Binding, retaining the exact original official-boundary nonnull returns. This does not establish full Binding, caller or graph semantic parity.",
+    "Every subsequent official trial must independently match its own frozen form; no future structural match, functional-suite result, readiness, quiet isolation, timing value or cost acceptance is asserted."
+  ],
+  "quietChecks": [
+    {
+      "quietRequested": false,
+      "requestId": "lot10b-cost-74143a-final-01",
+      "checkedAt": "2026-11-11T17:32:47.872769+00:00"
+    },
+    {
+      "quietRequested": false,
+      "requestId": "lot10b-cost-74143a-final-01",
+      "checkedAt": "2026-11-11T17:32:47.901274+00:00"
+    }
+  ],
+  "commandsTerminal": true
+}

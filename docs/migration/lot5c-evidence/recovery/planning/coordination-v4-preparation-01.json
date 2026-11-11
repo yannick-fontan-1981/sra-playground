@@ -1,0 +1,181 @@
+{
+  "schema": "logos-engine.lot5c-coordination-v4-preparation.v1",
+  "status": "targeted_changes_verified_pending_independent_review",
+  "recordedAt": "2026-11-11T21:39:54.704683+00:00",
+  "requestId": "lot5c-cost-a33a5f88-available-03",
+  "newSources": [
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/orchestrate-cost-available-03-v4.py",
+      "bytes": 24155,
+      "sha256": "a605d3cb7c8bc01d5920c9dbd9353fc5b08ad6b4474d6cb0de64e59cebfc5897"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/run-coordinated-cost-5c-v4.py",
+      "bytes": 29910,
+      "sha256": "0f773dec2d177837d21e76c76e2a2e95ad8ede379124214ea9eed9a1c8cf8176"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/finalize-readiness-5c-v4.py",
+      "bytes": 68935,
+      "sha256": "2b0ddc88d4a7070544c1133feedd03e3c2a1f830770cbed123526bc8fed295c1"
+    }
+  ],
+  "policyAmendment": {
+    "path": "docs/migration/lot5c-evidence/recovery/planning/coordination-v4-policy-amendment.json",
+    "bytes": 6074,
+    "sha256": "37299e179c186904f5bf42e2c564df39cc6bbbb4c54e628c02c70e47e0b94704"
+  },
+  "unchangedV3Sources": [
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/orchestrate-cost-available-03.py",
+      "bytes": 22795,
+      "sha256": "9cf2dde454d17cc24d0b6e7900e57badbc623d5283a64138c7d6db589ffb6b04"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/run-coordinated-cost-5c-v3.py",
+      "bytes": 25588,
+      "sha256": "07bfb3b94da98906b431272f94e8946ca7e4bd5b9deae1d798b9ef5239fd62c8"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/finalize-readiness-5c-v3.py",
+      "bytes": 67027,
+      "sha256": "3abd980dd710d4741d32e89a4163c3ad5cc735ce450df6bdeee004353d51a118"
+    }
+  ],
+  "unchangedProcessHelper": {
+    "path": "docs/migration/lot5c-evidence/recovery/planning/cost-process-control-v2.py",
+    "bytes": 8499,
+    "sha256": "7e5fa20cdc5590cb28fdfbda24a9f493ec3e24534b9866fa366221a1a3a5a24c"
+  },
+  "preservedV3Review": {
+    "path": "docs/migration/lot5c-evidence/recovery/planning/coordination-v3-independent-review.json",
+    "bytes": 36497,
+    "sha256": "d2bf5ba7db403448fb1029205da7143720856e7a5d75170e4389b3febf2b977e"
+  },
+  "exactSourceDiffs": [
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/v4-parent-source.diff",
+      "bytes": 11250,
+      "sha256": "9461f1dada78c24fb37e96c91267246986fcf9414d45281eb579d87c9685b681"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/v4-controller-source.diff",
+      "bytes": 11185,
+      "sha256": "49c3586342ecd1613257f747a1e998bfc47ebc5bab8d7f8d74a88964849dba9d"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/v4-finalizer-source.diff",
+      "bytes": 8551,
+      "sha256": "e09afd4d76ce2e7298cebccba9bc4bbfa06e8c8e1725051cb30c98a939173cfd"
+    }
+  ],
+  "sourceChecks": {
+    "unchangedFinalizerReadersByAst": [
+      "Evidence",
+      "unmeasured",
+      "load_verifier",
+      "native_inventory",
+      "native_version",
+      "formal",
+      "regressions",
+      "common",
+      "browser",
+      "preparation_02",
+      "preparation"
+    ],
+    "allDeclaredCostRunCallsIdentical": true,
+    "allCommandConstructionAssignmentsIdentical": true,
+    "costChildRunAndCleanupBodyIdentical": true,
+    "losslessLogTransportBodyIdentical": true,
+    "controllerExclusiveAcquisitionSites": 1,
+    "parentHasNoFlockOrSharedLockContext": true,
+    "workflowDeadlineCheckedBeforePostReleaseObservationReturn": true,
+    "oldFrozenProtocolBytesUnchanged": true,
+    "syntaxAndHelp": [
+      {
+        "name": "orchestrate-cost-available-03-v4.py",
+        "helpExitCode": 0
+      },
+      {
+        "name": "run-coordinated-cost-5c-v4.py",
+        "helpExitCode": 0
+      },
+      {
+        "name": "finalize-readiness-5c-v4.py",
+        "helpExitCode": 0
+      }
+    ]
+  },
+  "targetedTemporaryTests": {
+    "source": {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/v4-test-coordination-scope.py",
+      "bytes": 12641,
+      "sha256": "05228c1f745efd21758a0c51f1bfd217170042a66b5ab8e6ed4d4b6d76688f35"
+    },
+    "execution": {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/v4-coordination-scope-tests-01.execution.json",
+      "bytes": 1119,
+      "sha256": "1305142b0210d89f5c72f5acaecdbd9bce39011b53d0289ad19b4c94c13ca450"
+    },
+    "log": {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/v4-coordination-scope-tests-01.log",
+      "bytes": 1143,
+      "sha256": "77d6797733858eb969ae6598e50fff24089ab155fcc64085390d77135b21f34f"
+    },
+    "passed": 7,
+    "total": 7,
+    "productionStateTouched": false,
+    "productionMutexAcquired": false,
+    "nativeRuntimeExecuted": false,
+    "oldUnchangedSuitesReexecuted": false,
+    "coverage": [
+      "exact shared active-performance predicate and malformed legacy fields",
+      "ordinary preflight accepts pending quiet and active/pending publication without a mutex",
+      "actual active foreign performance refuses preparation",
+      "readiness without mutex and exclusive cost delegated to controller",
+      "ABBA terminal/integrity then actual temp EX/quiet release before both synthetic comparisons",
+      "sealed observations and first release timestamps survive peer activity and postprocessing failure",
+      "failed ABBA and release-journal failure cleanly release without successful-cost claim"
+    ]
+  },
+  "coordinationScope": {
+    "ordinaryWorkUsesGlobalMutex": false,
+    "foreignPublicationBlocksOrdinaryPreparation": false,
+    "currentNamedLanes": [
+      "lot5c",
+      "lot6b",
+      "lot8a",
+      "lot10c"
+    ],
+    "retired10BObservation": {
+      "updatedAt": "2026-11-11T17:02:12.064269+00:00",
+      "performanceStarted": true,
+      "performanceCompleted": true,
+      "quietReleased": null,
+      "classification": "Delivered historical10B is superseded by current10C activity. Root explicitly confirmed the current four-lane scope; the old metadata must not create a permanent logical lock.",
+      "peerStatusEdited": false
+    },
+    "officialIsolationEnds": "After all four ABBA executions are terminal, finalIntegrity passes, owned command groups are terminal, and the final quiet observations/ACK snapshots are sealed.",
+    "measurementReleaseReceipt": "docs/migration/lot5c-evidence/recovery/coordination/cost-final-03/measurement-release.json",
+    "postprocessing": "No global lock or continued quiet requirement; actual ordinary activity stays declared until terminal.",
+    "freshPeerAcksStillRequired": true,
+    "actualExclusiveNonblockingCostLockStillRequired": true,
+    "firstReleaseTimestampsPreserved": true
+  },
+  "budgets": {
+    "availabilitySeconds": 600,
+    "workflowAfterAcquisitionSeconds": 5400,
+    "childSeconds": 3600,
+    "exclusiveAttemptsMaximum": 1,
+    "automaticRetry": false
+  },
+  "ownPreparationClosureCurrentlyExists": false,
+  "requiredNextReview": {
+    "path": "docs/migration/lot5c-evidence/recovery/planning/coordination-v4-independent-review.json",
+    "schema": "logos-engine.lot5c-coordination-v4-independent-review.v1"
+  },
+  "noActualRequestReadinessOrWindowCreated": true,
+  "noNativeBenchmarkPolicyPopulationWarmupOrAcceptanceChange": true,
+  "allOwnCommandsTerminal": true,
+  "qualification": "Only operational coordination changed under the newer user instruction. Frozen protocol line69 is preserved and explicitly amended, not silently claimed satisfied. Existing functional and documentary04 evidence remain unchanged. All measurement samples retain fresh ACK/EX protection; postprocessing uses immutable retained inputs after explicit release. All new execution checks used synthetic temporary directories and blocked production/native launchers."
+}

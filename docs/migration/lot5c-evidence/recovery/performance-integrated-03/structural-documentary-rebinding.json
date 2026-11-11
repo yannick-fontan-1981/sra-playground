@@ -1,0 +1,103 @@
+{
+  "schema": "logos-engine.lot5c-structural-documentary-rebinding.v1",
+  "status": "reused_structural_proof_new_documentary_binding",
+  "recordedAt": "2026-11-11T19:46:34.601517+00:00",
+  "previousDirectory": "docs/migration/lot5c-evidence/recovery/performance-integrated-02",
+  "activeDirectory": "docs/migration/lot5c-evidence/recovery/performance-integrated-03",
+  "originalFixture": {
+    "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/owner-structural-fixture.json",
+    "bytes": 60104,
+    "sha256": "6f8d45dc8d68e8d3a67c45a66ac1045d12d123c43c02ab66e4ac1a09b63191d5"
+  },
+  "derivedFixture": {
+    "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/owner-structural-fixture.json",
+    "bytes": 60104,
+    "sha256": "3fd3dcf30a1e0f13fde9ca5700b0a7f164da56c7f5435ad343be765788e39160"
+  },
+  "semanticDifferences": [
+    {
+      "path": "cases.path",
+      "before": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/cases.json",
+      "after": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/cases.json"
+    }
+  ],
+  "allOtherFixtureValuesEqual": true,
+  "fixtureByteIdentical": false,
+  "originalRecordedAtPreserved": "2026-11-11T17:44:01.815Z",
+  "casesOriginal": {
+    "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/cases.json",
+    "bytes": 1451,
+    "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+  },
+  "casesCurrent": {
+    "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/cases.json",
+    "bytes": 1451,
+    "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+  },
+  "caseBytesIdentical": true,
+  "exactCopies": [
+    {
+      "original": {
+        "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/owner-source-inventory.json",
+        "bytes": 123426,
+        "sha256": "b8fcb70f1fa56f0f5218698bf08d9764698590c7fbeaa2024179a3999501dac0"
+      },
+      "copy": {
+        "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/owner-source-inventory.json",
+        "bytes": 123426,
+        "sha256": "b8fcb70f1fa56f0f5218698bf08d9764698590c7fbeaa2024179a3999501dac0"
+      },
+      "byteIdentical": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/owner-graph-attribution.json",
+        "bytes": 107007,
+        "sha256": "b33228947598d563935cee9b1d2bac70ba3b4c55b11018d306ea96c2933a8534"
+      },
+      "copy": {
+        "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/owner-graph-attribution.json",
+        "bytes": 107007,
+        "sha256": "b33228947598d563935cee9b1d2bac70ba3b4c55b11018d306ea96c2933a8534"
+      },
+      "byteIdentical": true
+    }
+  ],
+  "capturesReusedWithoutEdits": {
+    "baseline": {
+      "report": {
+        "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/baseline-owner-graphs.json.gz",
+        "bytes": 5109323,
+        "sha256": "cd99971740e98723e239c25b3498839c6a4d01164e148637f6fda380717278e3"
+      },
+      "receipt": {
+        "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/baseline-owner-graphs.receipt.json",
+        "bytes": 114892,
+        "sha256": "564c50b4832b7bb027d6115f18d14fcbb0abd404a98dac037032ef1f7d7af6d1"
+      }
+    },
+    "candidate": {
+      "report": {
+        "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/candidate-owner-graphs.json.gz",
+        "bytes": 5160779,
+        "sha256": "3212f4f2df298d908c094d7a18c908c16a8c8e21f8096946b95c8df30e7fb9f8"
+      },
+      "receipt": {
+        "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/candidate-owner-graphs.receipt.json",
+        "bytes": 115863,
+        "sha256": "72edf085e93b8e935f93715742487b3be64e656fc706a21cbf3280cc237c706b"
+      }
+    }
+  },
+  "attributionReusedWithoutEdits": {
+    "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/owner-graph-attribution.json",
+    "bytes": 107007,
+    "sha256": "b33228947598d563935cee9b1d2bac70ba3b4c55b11018d306ea96c2933a8534"
+  },
+  "formsUnchanged": true,
+  "captureTimestampsRetimed": false,
+  "nativeCaptureExecuted": false,
+  "replayExecuted": false,
+  "measurementExecuted": false,
+  "qualification": "Preuve structurelle réutilisée, nouvelle liaison documentaire. Seul cases.path est relié à03 pour satisfaire le contrôle statique gelé ; mêmes octets/SHA des cas, mêmes formes/captures/attribution et dates historiques. Aucune nouvelle capture ni copie byte-identique de la fixture dérivée n’est affirmée."
+}

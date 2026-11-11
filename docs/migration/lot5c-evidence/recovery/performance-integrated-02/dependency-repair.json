@@ -1,0 +1,105 @@
+{
+  "schema": "logos-engine.lot5c-baseline-dependency-repair.v1",
+  "status": "repaired_ignored_dependencies_only",
+  "startedAt": "2026-11-11T17:40:09.117825+00:00",
+  "baselineCheckout": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout",
+  "candidateCheckout": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout",
+  "baselineCommit": "1019d2eb929d7dc201a5c1f6edce5aa1c5dfa464",
+  "baselineManifest": {
+    "path": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout/docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/source-manifest.json",
+    "bytes": 36806,
+    "sha256": "846e38686406140e8f0c975836faadf646e4c20b0bcbc833fe4e228912535e93"
+  },
+  "baselineNativeBefore": {
+    "files": 310,
+    "digest": "74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12",
+    "gitNativeStatus": ""
+  },
+  "identicalDependencyManifests": [
+    {
+      "path": "package.json",
+      "baseline": {
+        "path": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout/package.json",
+        "bytes": 919,
+        "sha256": "c0da9e013fd85bd7f279f1b496acd034536747fc88abab34b109067766b73154"
+      },
+      "candidate": {
+        "path": "package.json",
+        "bytes": 919,
+        "sha256": "c0da9e013fd85bd7f279f1b496acd034536747fc88abab34b109067766b73154"
+      },
+      "byteIdentical": true
+    },
+    {
+      "path": "package-lock.json",
+      "baseline": {
+        "path": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout/package-lock.json",
+        "bytes": 29342,
+        "sha256": "93bc180b1ecf92e7976bb54bcb3a0aef1d3e96d65c41ee300676207832cd274e"
+      },
+      "candidate": {
+        "path": "package-lock.json",
+        "bytes": 29342,
+        "sha256": "93bc180b1ecf92e7976bb54bcb3a0aef1d3e96d65c41ee300676207832cd274e"
+      },
+      "byteIdentical": true
+    },
+    {
+      "path": "scripts/python-runtime-assets.json",
+      "baseline": {
+        "path": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout/scripts/python-runtime-assets.json",
+        "bytes": 3389,
+        "sha256": "e702a914cf88345d486d7d8a36c95f2076287d8935e02cc428b7a66749500d43"
+      },
+      "candidate": {
+        "path": "scripts/python-runtime-assets.json",
+        "bytes": 3389,
+        "sha256": "e702a914cf88345d486d7d8a36c95f2076287d8935e02cc428b7a66749500d43"
+      },
+      "byteIdentical": true
+    }
+  ],
+  "links": [
+    {
+      "path": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout/node_modules",
+      "candidatePath": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/node_modules",
+      "resolvedTarget": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/node_modules",
+      "previouslyAbsent": true,
+      "ignoredBy": ".gitignore:2:/node_modules\tnode_modules/",
+      "created": true,
+      "observedLinkTarget": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/node_modules",
+      "sameResolvedTargetAsCandidate": true
+    },
+    {
+      "path": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout/public/vendor/pyodide",
+      "candidatePath": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/public/vendor/pyodide",
+      "resolvedTarget": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/public/vendor/pyodide",
+      "previouslyAbsent": true,
+      "ignoredBy": ".gitignore:9:/public/vendor/pyodide\tpublic/vendor/pyodide/",
+      "created": true,
+      "observedLinkTarget": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/public/vendor/pyodide",
+      "sameResolvedTargetAsCandidate": true
+    }
+  ],
+  "createdParentDirectories": [
+    "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout/public/vendor"
+  ],
+  "priorAttemptDirectory": "docs/migration/lot5c-evidence/recovery/performance-integrated-01",
+  "priorAttemptUnchanged": true,
+  "codeChanged": false,
+  "nativeSourceChanged": false,
+  "runtimeExecuted": false,
+  "measurementExecuted": false,
+  "readinessCreated": false,
+  "finishedAt": "2026-11-11T17:40:09.168040+00:00",
+  "baselineNativeAfter": {
+    "files": 310,
+    "digest": "74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12",
+    "gitNativeStatus": ""
+  },
+  "priorAttemptInventory": {
+    "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/prior-attempt-inventory.json",
+    "bytes": 6350,
+    "sha256": "0d5f1a51c7c413664459adb2e46a8b8078f0a0c25cb4e93acd4180ea6ae12698"
+  }
+}

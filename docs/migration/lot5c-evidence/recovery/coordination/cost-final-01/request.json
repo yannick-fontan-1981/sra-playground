@@ -1,0 +1,39 @@
+{
+  "schema": "logos-engine.coordinated-cost-request.v1",
+  "requestId": "lot5c-cost-a33a5f88-final-01",
+  "requestedAt": "2026-11-11T18:34:20.752335+00:00",
+  "lane": "lot5c",
+  "performanceDirectory": "docs/migration/lot5c-evidence/recovery/performance-integrated-02",
+  "nativeDigests": {
+    "baseline": "74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12",
+    "candidate": "a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57"
+  },
+  "requiredLanes": [
+    "lot6b",
+    "lot8a",
+    "lot10c"
+  ],
+  "scope": "Fresh exact request ACK from each active lane and all of its workers after actual terminal closure of any finite current activity. All source/compute/Git/hash/archive/test/replay/game/browser/preview work and queues stay stopped through A1/B1/B2/A2, comparisons, arithmetic review and explicit root release. Only tiny named coordination metadata is allowed. Root completes readiness verification before the first sample; no official measurement has started.",
+  "currentFunctionalProofs": {
+    "testsPassed": 5339,
+    "testFiles": 138,
+    "commonChecksPassed": 6818,
+    "recordedCasesPassed": 11,
+    "recordedChecksPassed": 187,
+    "recordedActions": 390,
+    "projectChecksPassed": 5,
+    "staticPreflightPassed": 76,
+    "independentPreparationChecksPassed": 84
+  },
+  "expectedDurationMinutes": 15,
+  "automaticTimeBasedRelease": false,
+  "requestedAckFields": {
+    "quiet_acknowledged": true,
+    "quiet_request_id": "lot5c-cost-a33a5f88-final-01",
+    "active_command": null,
+    "heavy_execution_active": false,
+    "all_own_subagents_idle": true,
+    "no_queued_commands": true
+  },
+  "qualification": "Request only. Root will not start before all exact fresh acknowledgments, completed readiness and nonblocking exclusive lock acquisition. The actual resumed8A is active; no old terminal snapshot is reused."
+}

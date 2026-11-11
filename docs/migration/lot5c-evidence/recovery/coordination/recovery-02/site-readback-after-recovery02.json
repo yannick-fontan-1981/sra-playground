@@ -1,0 +1,24 @@
+{
+  "schema": "logos-engine.lot5c-site-readback-after-recovery.v1",
+  "providerTool": "sites_get_site",
+  "providerMetadata": {
+    "id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "latest_version_number": 103,
+    "status": "active",
+    "current_live_url": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "current_user_role": "owner",
+    "access_mode": "custom",
+    "access_revision": 3,
+    "updated_at": "2026-11-11T16:55:19.683817+00:00",
+    "observedAt": "2026-11-11T20:31:48.933Z"
+  },
+  "latestPublicationNumberUnchanged": 103,
+  "publishedNativeVersion": "0.62.0",
+  "publishedNativeEvidence": "docs/migration/lot5c-evidence/recovery/integration-published-10b/site103-reconciliation.json",
+  "nativePublicationSource": "1019d2eb929d7dc201a5c1f6edce5aa1c5dfa464",
+  "documentaryPublicationSource": "4afcbfe6a25bd3a88223be543e443bc53b9c8814",
+  "lot5c063Published": false,
+  "sitePublicationPerformedDuringRecovery": false,
+  "audienceChanged": false,
+  "qualification": "Fresh provider metadata confirms latest version103 remains active. Native0.62 and exact sources are bound by the preserved Site102/103 publication evidence; get_site alone does not return native version or commit."
+}

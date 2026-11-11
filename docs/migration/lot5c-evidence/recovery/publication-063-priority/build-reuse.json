@@ -1,0 +1,33 @@
+{
+  "schema": "logos-engine.lot5c-priority-build-reuse.v1",
+  "status": "unchanged_validated_build_reused",
+  "recordedAt": "2026-11-11T22:21:04.669091+00:00",
+  "verificationReporter": "Actual completed independent agent /root/lot5_cost_protocol_audit",
+  "nativeVersion": "0.63.0",
+  "nativeFiles": 318,
+  "nativeDigest": "a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57",
+  "frozenInputsUnchanged": 867,
+  "buildInputsUnchanged": 383,
+  "sourceAndTestInputsUnchanged": 728,
+  "distFilesUnchanged": 74,
+  "buildAttestation": {
+    "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/validation/checks-run.json",
+    "bytes": 86303,
+    "sha256": "f55a87ecbd4c363e77bdd967638402f5dde9695df0408bcb77d98c8a25673067"
+  },
+  "producedBuildInventory": {
+    "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/browser-qa/produced-build-staging.json",
+    "bytes": 8542,
+    "sha256": "80dac70694687eec4e48fb6fc84e242e19a13a7d86e6110de7854b6f0868b32f"
+  },
+  "worker": {
+    "path": "dist/assets/v6-agent-worker-Boh2vO01.js",
+    "bytes": 6903479,
+    "sha256": "05312bcb0be07ff1cac9e4721508459091eced5df1a29248fc05c8fb427feaaa"
+  },
+  "testsReexecuted": false,
+  "buildReexecuted": false,
+  "benchmarkExecuted": false,
+  "costAccepted": false,
+  "qualification": "Existing validated build and exact functional inputs remain unchanged. No functional rerun or rebuild is necessary for the user-authorized priority publication. This integrity check is not official performance qualification."
+}

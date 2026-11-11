@@ -1,0 +1,61 @@
+{
+  "schema": "logos-engine.lot8a.published063-observation.v1",
+  "observedAt": "2026-11-11T22:25:53.814Z",
+  "site": {
+    "observedAt": "2026-11-11T22:25:53.814Z",
+    "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+    "latestVersionNumber": 104,
+    "status": "active",
+    "currentLiveUrl": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "accessMode": "custom",
+    "revision": 3,
+    "ownerOnly": true,
+    "externalVisitorCount": 0
+  },
+  "version": {
+    "id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_f7ae00b356008191afcc05c4da1aa448",
+    "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+    "versionNumber": 104,
+    "source": {
+      "commit_sha": "bc53ddf36f0379be24cfc0667f8f8d6fdd650032"
+    },
+    "deploymentId": "appgdep_6af4eb09254c8191ba5ad5415cdf0ef9",
+    "archive": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_0000000021f0820e97aa69c2fb892d88",
+      "content_hash": "sha256:46dadb5ec6b76e82fed5cdf7515599434671a3f05add953d91d39ef4cac7979d",
+      "size_bytes": 30074880,
+      "file_count": 75
+    }
+  },
+  "deployment": {
+    "id": "appgdep_6af4eb09254c8191ba5ad5415cdf0ef9",
+    "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+    "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_f7ae00b356008191afcc05c4da1aa448",
+    "status": "succeeded",
+    "type": "publish",
+    "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "failureMessage": null,
+    "updatedAt": "2026-11-11T22:24:27.661756+00:00"
+  },
+  "nativeVersion": "0.63.0",
+  "nativeFiles": 318,
+  "nativeDigest": "a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57",
+  "entryCoverage": {
+    "connected": 65,
+    "declared": 76,
+    "percent": 85.5
+  },
+  "cost": {
+    "measured": false,
+    "accepted": false,
+    "games": {
+      "STCK": "not_measured",
+      "SMLP": "not_measured"
+    },
+    "source": "docs/migration/lot5c-evidence/recovery/publication-063-priority/authorization.json",
+    "scope": "Observed exception for publication0.63 only; it does not waive8A cost criteria."
+  },
+  "publicationPerformedByThisLot": false,
+  "performanceStartedByThisLot": false
+}

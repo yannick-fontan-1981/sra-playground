@@ -1,0 +1,201 @@
+{
+  "schema": "logos-engine.lot5c-coordination-v2-preparation.v1",
+  "status": "sources_and_temp_tests_ready_for_independent_review",
+  "recordedAt": "2026-11-11T20:01:07.743745+00:00",
+  "requestId": "lot5c-cost-a33a5f88-recovery-02",
+  "subjects": [
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/cost-process-control-v2.py",
+      "bytes": 8499,
+      "sha256": "7e5fa20cdc5590cb28fdfbda24a9f493ec3e24534b9866fa366221a1a3a5a24c"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/run-coordinated-cost-5c-v2.py",
+      "bytes": 25586,
+      "sha256": "174bd2363d6a85f19d3bf4243d39067f7d8482cf77e7d4dbf070ca8f66673105"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/finalize-readiness-5c-v2.py",
+      "bytes": 65022,
+      "sha256": "2372e634fdd493430d90ae0a6ba00d98421689ca9121861f88ec7281413a1ad7"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/test-cost-orchestration-v2.py",
+      "bytes": 12314,
+      "sha256": "679a78b1282c1824a8d620977f8877afdcfdcc50fa0f28bc149c9e7b5ae59b22"
+    }
+  ],
+  "historicalSourcesPreserved": [
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/run-coordinated-cost-5c.py",
+      "bytes": 16154,
+      "sha256": "0967fd35e3727c9e7c3354d330665bc601eb8c88fb49af3eeee35879eb2b7e58"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/finalize-readiness-5c.py",
+      "bytes": 51023,
+      "sha256": "715b8d1b6a92c2cee3ef9c5049201298468ee6bee55f7ceb2556bf927d98c55e"
+    }
+  ],
+  "semanticSourceChecks": [
+    {
+      "id": "unchanged_finalizer_Evidence",
+      "passed": true
+    },
+    {
+      "id": "unchanged_finalizer_unmeasured",
+      "passed": true
+    },
+    {
+      "id": "unchanged_finalizer_load_verifier",
+      "passed": true
+    },
+    {
+      "id": "unchanged_finalizer_native_inventory",
+      "passed": true
+    },
+    {
+      "id": "unchanged_finalizer_native_version",
+      "passed": true
+    },
+    {
+      "id": "unchanged_finalizer_formal",
+      "passed": true
+    },
+    {
+      "id": "unchanged_finalizer_regressions",
+      "passed": true
+    },
+    {
+      "id": "unchanged_finalizer_common",
+      "passed": true
+    },
+    {
+      "id": "unchanged_finalizer_browser",
+      "passed": true
+    },
+    {
+      "id": "original02_preparation_body_preserved",
+      "passed": true
+    },
+    {
+      "id": "declared_cost_commands_options_order_preserved",
+      "passed": true
+    }
+  ],
+  "checkedCount": 11,
+  "preparation03": {
+    "staticPreflight": {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/static-preflight.json",
+      "bytes": 19703,
+      "sha256": "04652e57624402dfb03a7617e72e4db625fa5343fa1406924d1ca2d6c13fd41f"
+    },
+    "checksPassed": 76,
+    "documentaryRebinding": {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/structural-documentary-rebinding.json",
+      "bytes": 4659,
+      "sha256": "ef49568d4eebbb0eb50bee85538a0a30bdff9e6e882b68afa2088c35bacaa91b"
+    },
+    "repreparation": {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/coordination-repreparation.json",
+      "bytes": 13820,
+      "sha256": "ef57545d06d42aa4c2836ecc99d7a79cbc636146aa39a2d8e45d057ff8863998"
+    },
+    "original02FilesPreserved": 44,
+    "original01FilesPreservedByPrior84CheckReview": 39
+  },
+  "temporaryTests": {
+    "receipt": {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/cost-orchestration-v2-tests-03.execution.json",
+      "bytes": 1118,
+      "sha256": "22a4d7fb690f51391f5ed20c50e4e1720af2d3a67cb9c7ff65b3d44d28e8aa9b"
+    },
+    "log": {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/cost-orchestration-v2-tests-03.log",
+      "bytes": 1140,
+      "sha256": "5214abdf76968e33c94f80117e0ae6f19e04682c27ce9046b88cf4db791417d3"
+    },
+    "passed": 8,
+    "total": 8,
+    "priorFailedFixtureAttemptRetained": {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/cost-orchestration-v2-tests-01.execution.json",
+      "bytes": 1118,
+      "sha256": "0b1049a6c15773dc57013542bc9f72ded5462c1c707604fc634d8bb3aa8c2d3b"
+    },
+    "priorFailureCause": "Two synthetic test fixture errors: malformed dummy descendant Python string and synthetic manifest paths outside the temporary root. Both stopped before native or benchmark launch; fixtures alone were corrected.",
+    "scenarios": [
+      "temporary EX reacquisition after close without LOCK_UN while dummy child alive",
+      "successful dummy child and cleared group registry",
+      "global timeout and complete group cleanup",
+      "leader exit with surviving TERM-ignoring descendant",
+      "catchable TERM cleanup",
+      "single EXNB refusal with quiet release and no child launch",
+      "journal error after EX still unlocks/releases",
+      "blocked dummy launcher error after EX still releases",
+      "absent temporary mutex is refused without creation, EX attempt or claimed lock release"
+    ],
+    "productionMutexUsedByTests": "Ordinary surrounding SH only; all tested EX locks are new temporary files",
+    "productionQuietMetadataUsedByTests": false,
+    "nativeOrBenchmarkExecuted": false,
+    "priorPassingAttemptRetained": {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/cost-orchestration-v2-tests-02.execution.json",
+      "bytes": 1118,
+      "sha256": "d5d16b08b8b23a94a850844c0ac19dfab84112a927fd25925d1757d92ed5d87c"
+    }
+  },
+  "syntaxAndCliHelp": {
+    "astPassed": true,
+    "helpExitCodes": {
+      "cost-process-control-v2.py": 0,
+      "run-coordinated-cost-5c-v2.py": 0,
+      "finalize-readiness-5c-v2.py": 0
+    }
+  },
+  "launchApi": {
+    "controller": [
+      "python",
+      "-B",
+      "docs/migration/lot5c-evidence/recovery/planning/run-coordinated-cost-5c-v2.py",
+      "--execute",
+      "--availability-deadline",
+      "<exact request availabilityDeadline ISO UTC>"
+    ],
+    "controllerMustNotHaveOuterSharedLock": true,
+    "finalizerMandatoryArgs": [
+      "--regression-launch-receipt",
+      "docs/migration/lot5c-evidence/recovery/integrated-final-01/regressions-preparation/retry-driver-launch.execution.json",
+      "--isolation-receipt",
+      "docs/migration/lot5c-evidence/recovery/coordination/cost-final-02/isolation.json"
+    ],
+    "finalizerMustUseOrdinaryNonblockingSharedLock": true,
+    "orchestratorOwnedByRoot": "docs/migration/lot5c-evidence/recovery/planning/orchestrate-cost-recovery-02.py",
+    "requiredGlobalReview": "docs/migration/lot5c-evidence/recovery/planning/coordination-v2-independent-review.json",
+    "newCanonicalReadiness": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/readiness.json",
+    "windowLease": "docs/migration/lot5c-evidence/recovery/coordination/cost-final-02/window-lease.json",
+    "liveChildRegistry": "/workspace/shared/sra-coordination/lot5c-recovery-02-active-children.json"
+  },
+  "budgets": {
+    "availabilitySeconds": 600,
+    "exclusiveAttempts": 1,
+    "retries": 0,
+    "windowAndAnalysisSeconds": 5400,
+    "childSeconds": 3600
+  },
+  "readinessCreated": false,
+  "quietRequestIssued": false,
+  "productionControllerExecuted": false,
+  "measurementExecuted": false,
+  "allOwnCommandsTerminal": true,
+  "qualification": "New orchestration only. Functional/native proofs, source digests, benchmark tools/options/populations, strict complete-session per-game +10% threshold, phase diagnostics, and historical strict refusal remain unchanged. Production is left for root after independent review and actual fresh request/ACKs.",
+  "supersedesPreparationReceipt": {
+    "path": "docs/migration/lot5c-evidence/recovery/planning/coordination-v2-preparation-02.json",
+    "bytes": 8156,
+    "sha256": "d884fa6d41c79159ffde824e07b3cfeb93577896ce696a60a419aae73dce78c8"
+  },
+  "reviewCorrections": {
+    "mutexOpen": "No O_CREAT; O_NOFOLLOW, regular file, fstat/path stat exact identity device27/inode1971854",
+    "refusedAcquisitionReceipt": "lockReleasedAt null when EX never acquired; descriptorClosedAt only after actual descriptor close",
+    "frozenProtocolOrFunctionalChanges": false,
+    "ownClosurePath": "Aligned with root orchestrator at recovery/coordination/recovery-02/own-preparation-closure.json; same strict fields, dates and required isolation evidence fingerprint."
+  }
+}

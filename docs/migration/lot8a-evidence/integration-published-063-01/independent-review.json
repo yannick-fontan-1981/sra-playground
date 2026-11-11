@@ -1,0 +1,412 @@
+{
+  "schema": "logos-engine.lot8a.published063-integration-independent-review.v1",
+  "status": "passed_documentary_integration_source_and_scope_review",
+  "recordedAt": "2026-11-11T22:35:33.951303+00:00",
+  "reviewer": "/root/coordination_audit",
+  "scope": "Read-only Git/index, opaque source hashing and documentary evidence review. Only this review file is written. No test, native runtime, factory, oracle, session, benchmark, publication, commit or other-lot edit is performed.",
+  "mergeState": {
+    "ownParent": "7ee1bda09bf996f849c663c176e3a3d65ddf86a0",
+    "incomingPublishedParent": "bc53ddf36f0379be24cfc0667f8f8d6fdd650032",
+    "mergeBase": "805b30297dc1b715dbfd9f1197a9a8ba7b361b90",
+    "mergeCommittedAtReview": false,
+    "unmergedEntries": 0,
+    "stagedChangedPaths": 590,
+    "indexEntriesSha256": "7d3039c2f5a358be81088e0d909bd31b48b86fd5759d066e52f0b36f0218fbaa",
+    "otherLotIncomingBlobsExact": 583,
+    "protectedSourceChanges": []
+  },
+  "reviewedReports": [
+    {
+      "path": "docs/migration/lot8a-evidence/integration-published-063-01/publication-observation.json",
+      "sha256": "27a9986d1affa1248b10fa43a55335a54296b32da59e6b10845fb6ac75b9f447",
+      "bytes": 2168
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/integration-published-063-01/published-native-manifest.json",
+      "sha256": "6fd96a8c19867ee6740db8293c14bf241d9929a31e24f391e95d3aee4c6fab66",
+      "bytes": 37772
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/integration-published-063-01/source-reconciliation.json",
+      "sha256": "6fbed4834fbfb66e79285f2cc887506378d6a996040f3fc1368ea564549eabf5",
+      "bytes": 66615
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/integration-published-063-01/summary.json",
+      "sha256": "3b72812508bf5c07200d0122c36e1e013763c0f3304a7fd97add6ad9ef94c262",
+      "bytes": 20717
+    }
+  ],
+  "linkedEvidencePinsVerified": 37,
+  "nativeIdentity": {
+    "published": {
+      "fileCount": 318,
+      "digest": "a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57"
+    },
+    "candidate": {
+      "fileCount": 324,
+      "digest": "936fa2bf81965272b1ddbab4a5c01f98aeb6a48188c1f7a8c91de226598c5e43"
+    },
+    "publishedMissingInCandidate": [],
+    "preexistingCompositionChangedSharedFiles": [
+      "src/logos-engine/v6-field-constraints.ts",
+      "src/logos-engine/v6-native-runtime.ts",
+      "src/logos-engine/v6-native-types.ts"
+    ],
+    "preexistingCompositionAdditionalFiles": [
+      "src/logos-engine/v6-motif-access-geometry.ts",
+      "src/logos-engine/v6-motif-access.ts",
+      "src/logos-engine/v6-selected-rigid-geometry.ts",
+      "src/logos-engine/v6-selected-rigid-search.ts",
+      "src/logos-engine/v6-selected-rigid-types.ts",
+      "src/logos-engine/v6-selected-rigid.ts"
+    ],
+    "newNativeChangesDueToMerge": []
+  },
+  "inputProfiles": {
+    "counts": {
+      "sourceAndTest": 745,
+      "scripts": 382,
+      "build": 389,
+      "originals": 1786
+    },
+    "allEqualValidatedFreeze": true,
+    "originalContentsOpaqueHashedOnly": true
+  },
+  "publicationEvidenceScope": "Local provider observation supplied by root is internally matched to the exact published Git commit/native manifest. This reviewer did not issue a second live Sites API request.",
+  "costQualification": {
+    "published063OfficialCostMeasured": false,
+    "published063OfficialCostAccepted": false,
+    "games": {
+      "STCK": "not_measured",
+      "SMLP": "not_measured"
+    },
+    "exceptionAppliesTo8A": false,
+    "8AOfficialCostStarted": false,
+    "8ARequiredBaseline": "actual_published_native0.64",
+    "strictPerGameGlobalIncreaseLimit": 0.1,
+    "phaseOverrunsAllowedOnlyWhenBothGlobalCriteriaPass": true
+  },
+  "preparedQualificationRetained": {
+    "sections": [
+      "inheritedValidatedFreeze",
+      "common",
+      "recordedRegressions",
+      "preparedWorkForms",
+      "workPolicy",
+      "officialCost",
+      "nextOrdinaryWork",
+      "retainedAttempts"
+    ],
+    "strictCommonGraphParity": false,
+    "officialPerformanceEligible": false,
+    "allSixCompleteMigrationGatesRemainFalse": true
+  },
+  "checks": [
+    {
+      "name": "declared_merge_parents_match",
+      "passed": true
+    },
+    {
+      "name": "all_conflicts_resolved",
+      "passed": true
+    },
+    {
+      "name": "worktree_matches_index_before_review",
+      "passed": true
+    },
+    {
+      "name": "merge_stages_no_protected_source_change",
+      "passed": true,
+      "changedPathCount": 590,
+      "protectedChanges": []
+    },
+    {
+      "name": "incoming_delta_exact",
+      "passed": true
+    },
+    {
+      "name": "other_lot_incoming_blobs_preserved",
+      "passed": true,
+      "files": 583
+    },
+    {
+      "name": "incoming_tree_src",
+      "passed": true
+    },
+    {
+      "name": "incoming_tree_tests",
+      "passed": true
+    },
+    {
+      "name": "incoming_tree_scripts",
+      "passed": true
+    },
+    {
+      "name": "incoming_tree_public",
+      "passed": true
+    },
+    {
+      "name": "incoming_tree_content",
+      "passed": true
+    },
+    {
+      "name": "incoming_tree_reference",
+      "passed": true
+    },
+    {
+      "name": "incoming_tree_migration",
+      "passed": true
+    },
+    {
+      "name": "freeze_and_inventory_runner_pins_match",
+      "passed": true
+    },
+    {
+      "name": "original_manifest_membership_and_pin",
+      "passed": true
+    },
+    {
+      "name": "frozen_profile_sourceAndTestInputs",
+      "passed": true,
+      "count": 745
+    },
+    {
+      "name": "frozen_profile_auxiliaryScriptInputs",
+      "passed": true,
+      "count": 382
+    },
+    {
+      "name": "frozen_profile_buildInputs",
+      "passed": true,
+      "count": 389
+    },
+    {
+      "name": "frozen_profile_originalInputs",
+      "passed": true,
+      "count": 1786
+    },
+    {
+      "name": "profile_counts_match_reconciliation",
+      "passed": true
+    },
+    {
+      "name": "candidate_native_manifest_unchanged",
+      "passed": true
+    },
+    {
+      "name": "published_native_manifest_recomputed_from_exact_git_blobs",
+      "passed": true
+    },
+    {
+      "name": "composition_delta_declared_exactly",
+      "passed": true
+    },
+    {
+      "name": "prepared_evidence_sections_preserved",
+      "passed": true,
+      "sections": [
+        "inheritedValidatedFreeze",
+        "common",
+        "recordedRegressions",
+        "preparedWorkForms",
+        "workPolicy",
+        "officialCost",
+        "nextOrdinaryWork",
+        "retainedAttempts"
+      ]
+    },
+    {
+      "name": "linked_evidence_pin_0",
+      "passed": true
+    },
+    {
+      "name": "linked_evidence_pin_1",
+      "passed": true
+    },
+    {
+      "name": "linked_evidence_pin_2",
+      "passed": true
+    },
+    {
+      "name": "linked_evidence_pin_3",
+      "passed": true
+    },
+    {
+      "name": "linked_evidence_pin_4",
+      "passed": true
+    },
+    {
+      "name": "linked_evidence_pin_5",
+      "passed": true
+    },
+    {
+      "name": "linked_evidence_pin_6",
+      "passed": true
+    },
+    {
+      "name": "linked_evidence_pin_7",
+      "passed": true
+    },
+    {
+      "name": "linked_evidence_pin_8",
+      "passed": true
+    },
+    {
+      "name": "linked_evidence_pin_9",
+      "passed": true
+    },
+    {
+      "name": "linked_evidence_pin_10",
+      "passed": true
+    },
+    {
+      "name": "linked_evidence_pin_11",
+      "passed": true
+    },
+    {
+      "name": "linked_evidence_pin_12",
+      "passed": true
+    },
+    {
+      "name": "linked_evidence_pin_13",
+      "passed": true
+    },
+    {
+      "name": "linked_evidence_pin_14",
+      "passed": true
+    },
+    {
+      "name": "linked_evidence_pin_15",
+      "passed": true
+    },
+    {
+      "name": "linked_evidence_pin_16",
+      "passed": true
+    },
+    {
+      "name": "linked_evidence_pin_17",
+      "passed": true
+    },
+    {
+      "name": "linked_evidence_pin_18",
+      "passed": true
+    },
+    {
+      "name": "linked_evidence_pin_19",
+      "passed": true
+    },
+    {
+      "name": "linked_evidence_pin_20",
+      "passed": true
+    },
+    {
+      "name": "linked_evidence_pin_21",
+      "passed": true
+    },
+    {
+      "name": "linked_evidence_pin_22",
+      "passed": true
+    },
+    {
+      "name": "linked_evidence_pin_23",
+      "passed": true
+    },
+    {
+      "name": "linked_evidence_pin_24",
+      "passed": true
+    },
+    {
+      "name": "linked_evidence_pin_25",
+      "passed": true
+    },
+    {
+      "name": "linked_evidence_pin_26",
+      "passed": true
+    },
+    {
+      "name": "linked_evidence_pin_27",
+      "passed": true
+    },
+    {
+      "name": "linked_evidence_pin_28",
+      "passed": true
+    },
+    {
+      "name": "linked_evidence_pin_29",
+      "passed": true
+    },
+    {
+      "name": "linked_evidence_pin_30",
+      "passed": true
+    },
+    {
+      "name": "linked_evidence_pin_31",
+      "passed": true
+    },
+    {
+      "name": "linked_evidence_pin_32",
+      "passed": true
+    },
+    {
+      "name": "linked_evidence_pin_33",
+      "passed": true
+    },
+    {
+      "name": "linked_evidence_pin_34",
+      "passed": true
+    },
+    {
+      "name": "linked_evidence_pin_35",
+      "passed": true
+    },
+    {
+      "name": "linked_evidence_pin_36",
+      "passed": true
+    },
+    {
+      "name": "authorization_is_incoming_exact_blob",
+      "passed": true
+    },
+    {
+      "name": "publication_receipt_identity_consistent",
+      "passed": true
+    },
+    {
+      "name": "published_063_cost_reserve_retained",
+      "passed": true
+    },
+    {
+      "name": "8a_qualification_and_cost_scope_not_waived",
+      "passed": true
+    },
+    {
+      "name": "ordinary_work_without_global_lock_retained",
+      "passed": true
+    },
+    {
+      "name": "roadmap_has_no_conflict_markers",
+      "passed": true
+    },
+    {
+      "name": "roadmap_current_section_preserves_qualification_and_reserves",
+      "passed": true
+    },
+    {
+      "name": "lot8a_readme_current_section_preserves_qualification_and_reserves",
+      "passed": true
+    },
+    {
+      "name": "review_inputs_and_merge_index_stable",
+      "passed": true
+    }
+  ],
+  "checksPassed": 70,
+  "failures": [],
+  "limits": [
+    "Review validates the staged documentary reconciliation, not a committed merge or deployed 8A release.",
+    "Published 0.63 retains unmeasured and unaccepted official performance for STCK and SMLP.",
+    "Prepared 0.64 remains unpublished; actual published 0.64 reconciliation and affected final qualifications remain open.",
+    "No new tests or independent raw-capture recomparison are claimed here; inherited evidence pins and scope are preserved."
+  ]
+}

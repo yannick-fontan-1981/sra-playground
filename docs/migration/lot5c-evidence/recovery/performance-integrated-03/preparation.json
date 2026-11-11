@@ -1,0 +1,103 @@
+{
+  "schema": "logos-engine.native-cost-protocol-preparation.v1",
+  "preparedAt": "2026-11-11T16:46:34.488736-03:00",
+  "status": "source_freezes_verified_not_functional_readiness",
+  "measurementExecuted": false,
+  "baselineCheckout": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout",
+  "candidateCheckout": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout",
+  "baseline": {
+    "nativeVersion": "0.62.0",
+    "siteVersion": 102,
+    "commit": "1019d2eb929d7dc201a5c1f6edce5aa1c5dfa464",
+    "nativeDigest": "74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12",
+    "nativeFiles": 310
+  },
+  "candidate": {
+    "nativeVersion": "0.63.0",
+    "nativeDigest": "a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57",
+    "nativeFiles": 318,
+    "sourceBaseCommit": "805b30297dc1b715dbfd9f1197a9a8ba7b361b90",
+    "checkoutHead": "501198d7638c7a56c3b85d357beb917469899402",
+    "nativeSourceCommit": "501198d7638c7a56c3b85d357beb917469899402",
+    "nativeWorktreeChanges": [],
+    "siteVersion": null,
+    "qualification": "The frozen digest and archive identify candidate bytes. A null source commit means the checkout HEAD is ancestry only. No candidate publication is asserted."
+  },
+  "outputDirectory": "docs/migration/lot5c-evidence/recovery/performance-integrated-03",
+  "candidateSourceDirectory": "docs/migration/lot5c-evidence/recovery/integrated-final-01",
+  "baselineManifest": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/source-manifest.json",
+    "sha256": "846e38686406140e8f0c975836faadf646e4c20b0bcbc833fe4e228912535e93",
+    "bytes": 36806
+  },
+  "candidateManifest": {
+    "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/source-manifest.json",
+    "sha256": "6fd96a8c19867ee6740db8293c14bf241d9929a31e24f391e95d3aee4c6fab66",
+    "bytes": 37772
+  },
+  "candidateArchiveManifest": {
+    "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/source-archive.json",
+    "sha256": "a6182ee1961e258aa8f3a70f3388daf20db2f5d3ee75fe17e737f429ff5d0a51",
+    "bytes": 103710
+  },
+  "retainedTools": [
+    {
+      "path": "scripts/run-native-cost-window.py",
+      "sha256": "0ec9c69c859d0555e963643010d2254caee8c63d1c9a98ec07cd9af0ce0ce613",
+      "bytes": 8933
+    },
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59",
+      "bytes": 20670
+    },
+    {
+      "path": "scripts/compare-native-loop-costs.mjs",
+      "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb",
+      "bytes": 9861
+    },
+    {
+      "path": "scripts/compare-native-cost-cohorts.mjs",
+      "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34",
+      "bytes": 19460
+    },
+    {
+      "path": "scripts/review-native-cost-consolidation.py",
+      "sha256": "b13174cec5befbb816e70554fd5d47da215eae941b983e66f05b9dd4417b3bd4",
+      "bytes": 17810
+    },
+    {
+      "path": "scripts/review-native-global-cost-window.py",
+      "sha256": "9ab2ecd9d6ddf234e96332421a6e55937a766495c1a20dd223f4441d6b516940",
+      "bytes": 22204
+    },
+    {
+      "path": "scripts/review-native-global-cost-budget.py",
+      "sha256": "b4312bcdae058ba58c16b4e5e24cb53626496b38f8a154834e0452a43e97d341",
+      "bytes": 8476
+    }
+  ],
+  "generator": {
+    "path": "docs/migration/lot5c-evidence/prepare-cost-protocol.py",
+    "sha256": "b8f5096ae5521306904168da48b1ee3e69045384d5fb8c88dc4441e3efebfce8",
+    "bytes": 34594
+  },
+  "directlyAdaptedFrom": {
+    "path": "docs/migration/lot5b-evidence/prepare-cost-protocol.py",
+    "sha256": "c53e6534b4f570c94610ca7c338462a1e4edc91975d9130a770dcee200811efe",
+    "bytes": 30134
+  },
+  "ownerSourceDomain": {
+    "domainReview": {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-domain-source-review.json",
+      "sha256": "ad027c2327b0b073c75deaa48cd9d27e90e5909066beb78a94973d706565f626",
+      "bytes": 5584
+    },
+    "sourceEvidencePaths": {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-source-evidence-paths.json",
+      "sha256": "4960a996175c03c0ce92365bda7f3dcaf747f1c7fd8467e34a84584816a87b62",
+      "bytes": 528
+    }
+  },
+  "qualification": "Local source identities verified. No tests, builds, game, browser, benchmark, readiness or isolation claims are produced."
+}

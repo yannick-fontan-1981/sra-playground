@@ -1,0 +1,69 @@
+{
+  "schema": "logos-engine.lot5c-cost-declaration-independent-review.v1",
+  "recordedAt": "2026-11-11T17:24:26.933838+00:00",
+  "reviewer": "lot5_site101_merge_audit",
+  "status": "passed_within_declaration_and_inventory_review_scope",
+  "inputs": [
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/declaration.json",
+      "bytes": 5661,
+      "sha256": "7b3022ccdd57849f6121446b9e8170e93f16bfec9c73eb8978b8b625eaab7351"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/global-budget-policy.json",
+      "bytes": 2348,
+      "sha256": "ac3d2c33fb990b851c1dd96efb0e7f38ceb40c5f7efbd72ae227a654c3c18de0"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/comparison-policy.json",
+      "bytes": 991,
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/protocol-check.json",
+      "bytes": 429,
+      "sha256": "98272521d2984efbf0f8ba8dc521ea00575b9c4edeb6118453fa6016be751b15"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/owner-source-inventory.json",
+      "bytes": 123426,
+      "sha256": "936188c0d9368737e1b797e205fc3de099585a1cacc8bbc308b13a6c2ba0ba53"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/preparation.json",
+      "bytes": 4411,
+      "sha256": "1f2c25c7304afd4e215514f70137fcfac95c3339af8acf423b58a1ed6082e17f"
+    }
+  ],
+  "findings": [],
+  "confirmed": {
+    "baselineSite": 102,
+    "baselineVersion": "0.62.0",
+    "baselineCommit": "1019d2eb929d7dc201a5c1f6edce5aa1c5dfa464",
+    "candidateVersion": "0.63.0",
+    "candidateFrozenSourceCommit": "805b30297dc1b715dbfd9f1197a9a8ba7b361b90",
+    "candidateNativeDigest": "a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57",
+    "strictGlobalPerGameIncreaseBelowPercent": 10,
+    "phaseOverrunsRetained": true,
+    "measuredSessionsDeclared": 32,
+    "measuredActionsDeclared": 400,
+    "warmupSessionsDeclared": 8,
+    "warmupActionsDeclared": 24,
+    "measuredSessionsExcluded": 0,
+    "outliersExcluded": 0,
+    "ownerCounts": [
+      57,
+      58
+    ],
+    "programCounts": [
+      26,
+      27
+    ],
+    "onlyAddedOwner": "public_observed_binding",
+    "onlyAddedProgram": "v6.observed_binding.choose",
+    "existingOrderPreserved": true,
+    "runtimeUninitializedBeforeAndAfterBothSides": true
+  },
+  "presentationQualification": "comparison-policy.json preserves historical Lot3B wording naming0.38/0.40 exactly. Current declaration and global-budget-policy identify the real0.62/0.63 counterpart and current global acceptance rule; historical policy bytes must not be relabeled or edited.",
+  "qualification": "Review of declared identities, rules, populations and bounded factory inventory assertions only. No measured window, structural acceptance, native test or publication is claimed."
+}

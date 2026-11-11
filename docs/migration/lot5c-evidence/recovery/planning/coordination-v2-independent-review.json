@@ -1,0 +1,783 @@
+{
+  "schema": "logos-engine.lot5c-coordination-v2-independent-review.v1",
+  "status": "passed",
+  "reviewer": "/root/lot5_site101_merge_audit",
+  "requestId": "lot5c-cost-a33a5f88-recovery-02",
+  "reviewScope": "Independent source and retained-proof review plus bounded temporary synthetic tests; not live readiness, isolation, EX availability, cost acceptance or publication.",
+  "subjects": [
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/recovery-02/retired-interactive-launchers.json",
+      "bytes": 1558,
+      "sha256": "6da6068afdde81008d5fd8e30c6d3c36dadd084dce5780d7a903c02aea0867db"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/recovery-02/retired-scratch-launcher.mjs",
+      "bytes": 172,
+      "sha256": "2fc625a965f44353000e7f958a49a71c54ffec3c10315073696e05858be4b6b7"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/recorded-regression-cases.json",
+      "bytes": 15556,
+      "sha256": "18684d23bf7122a9f88f85d8bdb6f557144f892e7f09f2ef7630cbb5a7e6bc33"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/source-archive.json",
+      "bytes": 103710,
+      "sha256": "a6182ee1961e258aa8f3a70f3388daf20db2f5d3ee75fe17e737f429ff5d0a51"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/source-manifest.json",
+      "bytes": 37772,
+      "sha256": "6fd96a8c19867ee6740db8293c14bf241d9929a31e24f391e95d3aee4c6fab66"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/test-scope.json",
+      "bytes": 7401,
+      "sha256": "91530b6fdfcfdb89db815b610d37e7988866aac610d4669c8c6f572822f0bdc1"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/validation-contract.json",
+      "bytes": 10771,
+      "sha256": "4a57ed369cc5e314a7a4f6babf61e51aa7b70e171c2b2a3586d296b79f8013ff"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/readiness.json",
+      "bytes": 581225,
+      "sha256": "bf1caef4f9824367aad9564c9cffa3683137b07f6e74af753d67f52b9e52ff90"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/comparison-policy.json",
+      "bytes": 991,
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/coordination-repreparation.json",
+      "bytes": 13820,
+      "sha256": "ef57545d06d42aa4c2836ecc99d7a79cbc636146aa39a2d8e45d057ff8863998"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/declaration.json",
+      "bytes": 5661,
+      "sha256": "9c741d8597e5b864ba265cbab8adbf8cb8b7b15f3644ed86ed5e72f3a359a38c"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/global-budget-policy.json",
+      "bytes": 2348,
+      "sha256": "e60c27539dbcbc09af4e6d657e73bbb666e5449d41ae6e6cd75e1e8bd0454bcf"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/owner-contract-finalization.execution.json",
+      "bytes": 1202,
+      "sha256": "b7aeb66b6d9f6f721c72817927fbd607b3ca089036b5fc03a3b72242aa3f5033"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/owner-graph-attribution.json",
+      "bytes": 107007,
+      "sha256": "b33228947598d563935cee9b1d2bac70ba3b4c55b11018d306ea96c2933a8534"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/owner-growth-contract.json",
+      "bytes": 6009,
+      "sha256": "90050dc24aef8cadea1367bdff9bc64e0063d2a0fa325276117201fa06e2be90"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/owner-source-inventory.json",
+      "bytes": 123426,
+      "sha256": "b8fcb70f1fa56f0f5218698bf08d9764698590c7fbeaa2024179a3999501dac0"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/owner-structural-fixture.json",
+      "bytes": 60104,
+      "sha256": "3fd3dcf30a1e0f13fde9ca5700b0a7f164da56c7f5435ad343be765788e39160"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/preparation.json",
+      "bytes": 4411,
+      "sha256": "0e544c136ff82cd228adb7c078d4681ca4cdc0795fdd66ab4585b7a9d960c5d7"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/protocol-check.json",
+      "bytes": 429,
+      "sha256": "a65c7d24576459c82591b49c93ad757eb5710c396d0dc5873b5792e78ba22b0a"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/protocol-preparation.execution.json",
+      "bytes": 1669,
+      "sha256": "6706dd6ef1f16c206c2e7be973e73621dee827f49726309a06d5c1574f7994fb"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/protocol.md",
+      "bytes": 16466,
+      "sha256": "c8d38807961f0cf88face9b80d073c567a0463b37a2da96e1dabda7db6e10e04"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/static-preflight-command.execution.json",
+      "bytes": 1222,
+      "sha256": "1f205b6e8376780d1e0742d571b07284b3e8a526bcb3afee16b401d8d0a746d7"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/static-preflight.json",
+      "bytes": 19703,
+      "sha256": "04652e57624402dfb03a7617e72e4db625fa5343fa1406924d1ca2d6c13fd41f"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/structural-documentary-rebinding.json",
+      "bytes": 4659,
+      "sha256": "ef49568d4eebbb0eb50bee85538a0a30bdff9e6e882b68afa2088c35bacaa91b"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/coordinated-cost-controller-review.json",
+      "bytes": 14690,
+      "sha256": "36c20fd902531396299b44493d6cd72215029591f5ad12ff7f41f907b12cbc4f"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/coordination-tools-v2/implementation-receipt-02.json",
+      "bytes": 4081,
+      "sha256": "0d5e3492bf9a67d4a0ee4cd48b111125b1a54f9bb034cd7e153bb6d1aa64edfe"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/coordination-tools-v2/implementation-receipt.json",
+      "bytes": 4109,
+      "sha256": "12b678b9c4eed64d3f6e4ea09cd1d0778c6969b5988c941a566ba1922212bbed"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/coordination-tools-v2/operator-contract.json",
+      "bytes": 3893,
+      "sha256": "23fcd97a0dc01f809fec072c0075638c4aab78d53eea4fd07745c8b90eeeb1f3"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/coordination-tools-v2/push_lot5_checkpoint.mjs",
+      "bytes": 4953,
+      "sha256": "d2d610d16dc972c6f7263650caf89a06c10a441bc12d2405eb591a7e7f8d39c2"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/coordination-tools-v2/push_lot5_checkpoints_bounded.mjs",
+      "bytes": 7201,
+      "sha256": "84e8727e4b86a1a5e3d66bc843c4f3718a3d716c498fd232a810aab627665e04"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/coordination-tools-v2/README.md",
+      "bytes": 7684,
+      "sha256": "db7dbc92f49714e7009f6f48a9422374a0268e0d4f92c26a54a4ff7d1cf5b233"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/coordination-tools-v2/run-bounded-locked-command.py",
+      "bytes": 29004,
+      "sha256": "1cf15ba630657b8fe83bd81c98071b0b67965a93a5caa211a568655df338e3a6"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/coordination-tools-v2/test_bounded_locked_command.py",
+      "bytes": 19956,
+      "sha256": "9eb66818f4a187252f7ef532879a778247697ba00a20445b93e5a67ce66a1b51"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/coordination-tools-v2/test-execution-01.json",
+      "bytes": 80300,
+      "sha256": "82218b8c792bcb3237a64d9ad76394b0ca720cae67b2460125e9f58285a4da7d"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/coordination-tools-v2/test-execution-02.json",
+      "bytes": 88150,
+      "sha256": "4f2ac45fdd919996feb720d1ba1a9e48870ff95d896a520ea91356f2b61e7256"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/coordination-tools-v2/test-execution-03.json",
+      "bytes": 101914,
+      "sha256": "2cd3a9b230b1747c4e3b9802ed0e9889bb297c339c199ba1aeaaca60c415f1cc"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/coordination-v2-preparation-03.json",
+      "bytes": 8353,
+      "sha256": "3041899cc214941f1f0e50c39dc29d572465f15569fdaf47434cfa5655d2a889"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/cost-orchestration-v2-tests-01.execution.json",
+      "bytes": 1118,
+      "sha256": "0b1049a6c15773dc57013542bc9f72ded5462c1c707604fc634d8bb3aa8c2d3b"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/cost-orchestration-v2-tests-02.execution.json",
+      "bytes": 1118,
+      "sha256": "d5d16b08b8b23a94a850844c0ac19dfab84112a927fd25925d1757d92ed5d87c"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/cost-orchestration-v2-tests-03.execution.json",
+      "bytes": 1118,
+      "sha256": "22a4d7fb690f51391f5ed20c50e4e1720af2d3a67cb9c7ff65b3d44d28e8aa9b"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/cost-orchestration-v2-tests-03.log",
+      "bytes": 1140,
+      "sha256": "5214abdf76968e33c94f80117e0ae6f19e04682c27ce9046b88cf4db791417d3"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/cost-process-control-v2.py",
+      "bytes": 8499,
+      "sha256": "7e5fa20cdc5590cb28fdfbda24a9f493ec3e24534b9866fa366221a1a3a5a24c"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/finalize-readiness-5c-independent-review.json",
+      "bytes": 20160,
+      "sha256": "94f1451c32bf25bfe9bac5e40e1a92161356cf6063c0d96649dec1ca6da11b6a"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/finalize-readiness-5c-v2.py",
+      "bytes": 65022,
+      "sha256": "2372e634fdd493430d90ae0a6ba00d98421689ca9121861f88ec7281413a1ad7"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/finalize-readiness-5c.py",
+      "bytes": 51023,
+      "sha256": "715b8d1b6a92c2cee3ef9c5049201298468ee6bee55f7ceb2556bf927d98c55e"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/orchestrate-cost-recovery-02.py",
+      "bytes": 22791,
+      "sha256": "747b4ecf6d42b89ffc474b9a35ab87ec2c3e85898f1a824a309964df7318cf99"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/orchestrator-v2-tests-02.execution.json",
+      "bytes": 3806,
+      "sha256": "6e7496c46726a981244f552588b500a123517d074a0c545650924dfda3725351"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/run-coordinated-cost-5c-v2.py",
+      "bytes": 25586,
+      "sha256": "174bd2363d6a85f19d3bf4243d39067f7d8482cf77e7d4dbf070ca8f66673105"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/run-coordinated-cost-5c.py",
+      "bytes": 16154,
+      "sha256": "0967fd35e3727c9e7c3354d330665bc601eb8c88fb49af3eeee35879eb2b7e58"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/test-cost-orchestration-v2.py",
+      "bytes": 12314,
+      "sha256": "679a78b1282c1824a8d620977f8877afdcfdcc50fa0f28bc149c9e7b5ae59b22"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/test-orchestrate-cost-recovery-02.py",
+      "bytes": 14675,
+      "sha256": "1c16c2fa8e189ed1facfc9234cec8585b1c27cd12fdf8809b794608569635dbc"
+    }
+  ],
+  "checks": [
+    {
+      "id": "exact_final_subjects",
+      "passed": true,
+      "detail": "52 current repository files are bound by path, byte count and SHA-256; all were rechecked before this new receipt."
+    },
+    {
+      "id": "historical_functional_input_scope",
+      "passed": true,
+      "detail": "Git diff against805b3029 is empty over the exact867 archived input paths."
+    },
+    {
+      "id": "historical01_and02_retained",
+      "passed": true,
+      "detail": "Tracked performance01, performance02 and coordination01 files have no diff against501198d7; historical readiness is preserved solely as evidence, never as current authorization."
+    },
+    {
+      "id": "original_orchestration_sources_and_reviews_retained",
+      "passed": true,
+      "detail": "Original715b8d1b finalizer,0967fd35 controller and their original independent reviews retain their exact bytes."
+    },
+    {
+      "id": "unchanged_functional_reader_Evidence",
+      "passed": true,
+      "detail": "AST identical to the original reviewed finalizer, excluding location attributes."
+    },
+    {
+      "id": "unchanged_functional_reader_unmeasured",
+      "passed": true,
+      "detail": "AST identical to the original reviewed finalizer, excluding location attributes."
+    },
+    {
+      "id": "unchanged_functional_reader_load_verifier",
+      "passed": true,
+      "detail": "AST identical to the original reviewed finalizer, excluding location attributes."
+    },
+    {
+      "id": "unchanged_functional_reader_native_inventory",
+      "passed": true,
+      "detail": "AST identical to the original reviewed finalizer, excluding location attributes."
+    },
+    {
+      "id": "unchanged_functional_reader_native_version",
+      "passed": true,
+      "detail": "AST identical to the original reviewed finalizer, excluding location attributes."
+    },
+    {
+      "id": "unchanged_functional_reader_formal",
+      "passed": true,
+      "detail": "AST identical to the original reviewed finalizer, excluding location attributes."
+    },
+    {
+      "id": "unchanged_functional_reader_regressions",
+      "passed": true,
+      "detail": "AST identical to the original reviewed finalizer, excluding location attributes."
+    },
+    {
+      "id": "unchanged_functional_reader_common",
+      "passed": true,
+      "detail": "AST identical to the original reviewed finalizer, excluding location attributes."
+    },
+    {
+      "id": "unchanged_functional_reader_browser",
+      "passed": true,
+      "detail": "AST identical to the original reviewed finalizer, excluding location attributes."
+    },
+    {
+      "id": "original_preparation02_reader_retained",
+      "passed": true,
+      "detail": "Original preparation function body is unchanged under the name preparation_02."
+    },
+    {
+      "id": "exact_benchmark_command_sequence",
+      "passed": true,
+      "detail": "The full ABBA, cohort comparisons, historical strict refusal, qualified consolidation, arithmetic review, transport and renderer command block is unchanged."
+    },
+    {
+      "id": "functional_results_not_retimed",
+      "passed": true,
+      "detail": "Original5339/138 tests,11x17 replay proof,6818 common checks,5 gates and browser reservations keep their original evidence and timestamps."
+    },
+    {
+      "id": "separate_functional_and_prewindow_chronology",
+      "passed": true,
+      "detail": "The finalizer records original latestCompletedFunctionalEvidenceAt separately from latestPreWindowEvidenceAt; new review and preparation must precede the new request."
+    },
+    {
+      "id": "performance03_is_new",
+      "passed": true,
+      "detail": "New declaration, contract and canonical readiness location belong to performance-integrated-03; neither old ACKs nor old readiness authorize it."
+    },
+    {
+      "id": "documentary_fixture_difference_exact",
+      "passed": true,
+      "detail": "Independent recursive comparison found exactly /cases/path changed between fixture02 and fixture03; every other JSON value including forms and original timestamp is equal."
+    },
+    {
+      "id": "documentary_provenance_accurate",
+      "passed": true,
+      "detail": "structural-documentary-rebinding explicitly labels a new documentary binding of reused proof and does not claim a fresh capture or byte-identical derived fixture."
+    },
+    {
+      "id": "reused_inputs_byte_identical",
+      "passed": true,
+      "detail": "Cases, diagnostic policy, source inventory and attribution are byte-identical between02 and03."
+    },
+    {
+      "id": "fresh_static03_receipt",
+      "passed": true,
+      "detail": "Actual static03 receipt has76 entries, every satisfied flag true and no unsatisfied entry; it asserts neither functional readiness nor isolation."
+    },
+    {
+      "id": "fixed_populations_and_budget",
+      "passed": true,
+      "detail": "32 measured sessions/400 actions and8 warmups/24 actions remain; each game's complete-session pooled median must increase strictly less than10%; phase overruns and p95 stay visible without excluding measured outliers."
+    },
+    {
+      "id": "closed_source_owner_domain",
+      "passed": true,
+      "detail": "The same passive nonadmitted Binding source domain and exactly four allowed structural metric paths remain in the contract and finalizer."
+    },
+    {
+      "id": "historical_preservation_rechecked_before_readiness",
+      "passed": true,
+      "detail": "The finalizer checks exact membership and fingerprints of39 historical01 files and44 historical02 files before/after validation."
+    },
+    {
+      "id": "new_unique_request_and_single_cycle",
+      "passed": true,
+      "detail": "The orchestrator exclusively creates a new request and attempt sentinel for lot5c-cost-a33a5f88-recovery-02; pre-existing readiness, window, request, sentinel or registry is refused."
+    },
+    {
+      "id": "fresh_exact_three_lane_acks",
+      "passed": true,
+      "detail": "Only fresh6B/8A/10C ACKs for the new request, with idle worker/queue fields, can form isolation; raw snapshots are retained without normalization or invented ACKs."
+    },
+    {
+      "id": "fresh_own_closure_after_review",
+      "passed": true,
+      "detail": "Own-preparation closure must follow this global review, include all three actual workers and stopped preview/browser, and be bound directly in isolation."
+    },
+    {
+      "id": "own_closure_path_aligned",
+      "passed": true,
+      "detail": "Orchestrator and finalizer both use recovery/coordination/recovery-02/own-preparation-closure.json; the derived own-closure remains a separate record."
+    },
+    {
+      "id": "availability600_utc_and_monotonic",
+      "passed": true,
+      "detail": "Availability is limited to600seconds for ACKs/isolation/readiness/EX, with both UTC and monotonic enforcement and explicit request expiry."
+    },
+    {
+      "id": "window5400_and_child3600",
+      "passed": true,
+      "detail": "After actual EX, the controller bounds the window and analyses to5400seconds and each child to3600seconds; the parent watchdog adds a conservative monotonic ceiling."
+    },
+    {
+      "id": "one_existing_mutex_ex_attempt",
+      "passed": true,
+      "detail": "Controller opens only the existing regular non-symlink mutex, pins device27/inode1971854, and performs exactly one EX|NB attempt without retry or replacement."
+    },
+    {
+      "id": "shared_readiness_lock_closed_before_ex",
+      "passed": true,
+      "detail": "The orchestrator's readiness SH scope ends and closes its non-inheritable descriptor before the controller is launched."
+    },
+    {
+      "id": "fresh_readiness_bindings_before_ex",
+      "passed": true,
+      "detail": "Controller rechecks current readiness inputs, external baseline inputs, exact isolation and reviewed controller/helper before attempting EX."
+    },
+    {
+      "id": "current_ack_payload_monitoring",
+      "passed": true,
+      "detail": "Named current peer payloads must retain their acknowledged contents except updated_at, with actual cooperative observations through the complete window/review."
+    },
+    {
+      "id": "immutable_actual_ex_lease",
+      "passed": true,
+      "detail": "Only an actual acquired EX produces the exclusive-created lease with the exact request, known controller PID and fixed window deadline."
+    },
+    {
+      "id": "owned_process_gate_and_registry",
+      "passed": true,
+      "detail": "The process helper launches a separate group, registers it before releasing a one-use execution gate, and passes only that gate FD."
+    },
+    {
+      "id": "lock_descriptors_not_inherited",
+      "passed": true,
+      "detail": "Cost and transport children use close_fds and non-inheritable lock descriptors; no production lock descriptor is passed to descendants."
+    },
+    {
+      "id": "leader_exit_does_not_skip_descendants",
+      "passed": true,
+      "detail": "Subreaping and TERM/KILL cleanup cover known descendants even after the leader exits; no /proc scan or unrelated PID adoption is used."
+    },
+    {
+      "id": "orchestrator_signal_spawn_boundary",
+      "passed": true,
+      "detail": "Signals set a flag; checks occur after Popen assignment, so cleanup retains the known child handle."
+    },
+    {
+      "id": "registry_cleanup_independent_of_group_error",
+      "passed": true,
+      "detail": "Parent attempts the known controller registry cleanup after confirmed leader termination even if group cleanup raises; unconfirmed cleanup is not labeled idle."
+    },
+    {
+      "id": "automatic_release_on_terminal_paths",
+      "passed": true,
+      "detail": "Refusal, error, expiry and normal completion reach automatic own-request release independently of optional execution/journal writes."
+    },
+    {
+      "id": "release_chronology_not_fabricated",
+      "passed": true,
+      "detail": "lockReleasedAt remains null when EX was never acquired; actual descriptorClosedAt is separate."
+    },
+    {
+      "id": "no_cost_acceptance_from_artifact_presence",
+      "passed": true,
+      "detail": "The orchestrator reports windowArtifactPresent and explicitly leaves actual samples/acceptance to controller/window evidence."
+    },
+    {
+      "id": "bounded_transport_hidden_input",
+      "passed": true,
+      "detail": "Transport input is hidden, bounded to45seconds/65536bytes, and read before opening SH; four named statuses are rechecked after input and after SH."
+    },
+    {
+      "id": "bounded_transport_child_contract",
+      "passed": true,
+      "detail": "Only pinned checkpoint or official Sites helper modes are exposed, with exact handshakes, bounded output, work<=540seconds and group cleanup."
+    },
+    {
+      "id": "transport_raw_mode_and_large_records",
+      "passed": true,
+      "detail": "Final wrapper also disables ICANON itself; all three pinned real helpers independently enable raw mode before their handshake."
+    },
+    {
+      "id": "transport_secret_and_output_scope",
+      "passed": true,
+      "detail": "No raw input/output, arbitrary exception text or environment dump is retained; sanitized result fields and counts only. Git tracing/overrides are removed and hooks disabled."
+    },
+    {
+      "id": "real_session_id_not_fabricated",
+      "passed": true,
+      "detail": "Wrapper leaves toolSessionId null; the operator must retain the real tool session identifier separately before providing credentials."
+    },
+    {
+      "id": "retired_launchers_preserved_and_disabled",
+      "passed": true,
+      "detail": "Original Node sources retain their exact bytes; both old local entrypoints now contain the same172-byte immediate-refusal stub, with no input read. This does not claim to close any old running session."
+    },
+    {
+      "id": "transport_tests_bound",
+      "passed": true,
+      "detail": "Final wrapper harness/receipt bind exact1cf15ba6 source,18/18 cases and239/239 checks; every individual passed flag was inspected."
+    },
+    {
+      "id": "cost_lifecycle_tests_bound",
+      "passed": true,
+      "detail": "Current controller/helper harness passed8/8 TEMP tests, including missing mutex, one EX refusal, journal errors, timeout, signal and surviving descendant cases."
+    },
+    {
+      "id": "orchestrator_tests_bound",
+      "passed": true,
+      "detail": "Exact747b4ecf orchestrator/helper/harness fingerprints match before/after the13/13 TEMP tests, including wall-clock stoppage and malformed review metadata."
+    },
+    {
+      "id": "independent_large_record_tests",
+      "passed": true,
+      "detail": "Two additional independent TEMP stand-ins passed14/14 assertions, including exactly65536 input bytes, full cleanup and temporary-lock availability after release."
+    },
+    {
+      "id": "independent_old_authorization_rejection",
+      "passed": true,
+      "detail": "Additional independent TEMP guard checks passed11/11: historical readiness refused before any lock/child/request/sentinel, old-cycle and pre-request ACKs refused, fresh exact ACK accepted."
+    },
+    {
+      "id": "global_review_counts_and_subject_integrity",
+      "passed": true,
+      "detail": "Orchestrator validates positive check count equal to actual list length, no duplicate subjects and exact current fingerprints; finalizer likewise requires this review and03 preparation subjects."
+    },
+    {
+      "id": "new_production_artifacts_absent_at_review",
+      "passed": true,
+      "detail": "No recovery02 production request, sentinel, performance03 readiness or window exists at the final review check."
+    },
+    {
+      "id": "review_scope_no_native_or_measurement",
+      "passed": true,
+      "detail": "This reviewer executed only bounded source/metadata checks and temporary Python tests; no production cost controller/finalizer, native runtime, benchmark, game, replay or project test was run."
+    }
+  ],
+  "checksPassed": 58,
+  "checksTotal": 58,
+  "resolvedFindings": [
+    {
+      "id": "fixture_cases_path",
+      "resolution": "Exact static-checker equality required a new explicitly attributed03 fixture binding. Original02 is unchanged; only cases.path differs."
+    },
+    {
+      "id": "pty_test_model",
+      "resolution": "The first independent stand-in omitted raw mode required by every pinned helper before handshake. This was corrected in the review; the final wrapper additionally removes that dependency and large-record tests pass."
+    },
+    {
+      "id": "orchestrator_signal_cleanup_and_clock",
+      "resolution": "Flag-based signals, independent registry cleanup, truthful cleanup status and UTC+monotonic ceilings were added and covered by targeted tests."
+    },
+    {
+      "id": "mutex_creation_and_release_timestamp",
+      "resolution": "O_CREAT removed; existing mutex identity/type pinned. Refused acquisition keeps lockReleasedAt null and records descriptor closure separately."
+    },
+    {
+      "id": "own_closure_path",
+      "resolution": "Finalizer and orchestrator now bind the same actual preparation closure path and strict fields."
+    }
+  ],
+  "unresolvedFindings": [],
+  "budgets": {
+    "availabilityBeforeExclusiveSeconds": 600,
+    "exclusiveWindowAndAnalysisSeconds": 5400,
+    "childMaximumSeconds": 3600,
+    "maximumExclusiveAttempts": 1,
+    "automaticRetry": false
+  },
+  "functionalProofReuse": {
+    "checkpoint": "501198d7638c7a56c3b85d357beb917469899402",
+    "frozenSourceCommit": "805b30297dc1b715dbfd9f1197a9a8ba7b361b90",
+    "nativeFiles": 318,
+    "nativeDigest": "a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57",
+    "frozenInputPathsUnchanged": 867,
+    "originalReadersAstUnchanged": {
+      "Evidence": true,
+      "unmeasured": true,
+      "load_verifier": true,
+      "native_inventory": true,
+      "native_version": true,
+      "formal": true,
+      "regressions": true,
+      "common": true,
+      "browser": true
+    },
+    "originalPreparation02BodyUnchanged": true,
+    "costCommandBlockUnchanged": true,
+    "newFunctionalExecution": false,
+    "qualification": "Historical functional results retain their original dates and limitations. The old readiness is fingerprinted solely to preserve history; only a newly finalized performance03 readiness after the fresh request can authorize a window."
+  },
+  "temporaryValidation": {
+    "wrapper": {
+      "cases": 18,
+      "checks": 239,
+      "receipt": {
+        "path": "docs/migration/lot5c-evidence/recovery/planning/coordination-tools-v2/test-execution-03.json",
+        "bytes": 101914,
+        "sha256": "2cd3a9b230b1747c4e3b9802ed0e9889bb297c339c199ba1aeaaca60c415f1cc"
+      }
+    },
+    "costLifecycle": {
+      "cases": 8,
+      "receipt": {
+        "path": "docs/migration/lot5c-evidence/recovery/planning/cost-orchestration-v2-tests-03.execution.json",
+        "bytes": 1118,
+        "sha256": "22a4d7fb690f51391f5ed20c50e4e1720af2d3a67cb9c7ff65b3d44d28e8aa9b"
+      }
+    },
+    "orchestrator": {
+      "cases": 13,
+      "receipt": {
+        "path": "docs/migration/lot5c-evidence/recovery/planning/orchestrator-v2-tests-02.execution.json",
+        "bytes": 3806,
+        "sha256": "6e7496c46726a981244f552588b500a123517d074a0c545650924dfda3725351"
+      }
+    },
+    "independentTests": [
+      {
+        "kind": "pty_initial_counterexample",
+        "toolChunk": "3c1fc7",
+        "sourceSha256": "697d1b66ac567a46b3774c08dbc0d09cc7cd7ad6ac9ef2a9af6d4d0789ab7e66",
+        "qualification": "Initial stand-in omitted the real pinned helpers raw-before-handshake step; not evidence of a production helper defect."
+      },
+      {
+        "kind": "pty_final",
+        "toolChunk": "935bc0",
+        "sourceSha256": "1cf15ba630657b8fe83bd81c98071b0b67965a93a5caa211a568655df338e3a6",
+        "cases": [
+          {
+            "inputBytes": 6016,
+            "childRawModeBeforeHandshake": false,
+            "scope": "additional robustness outside the pinned helper handshake contract",
+            "checks": {
+              "exit0": true,
+              "passed": true,
+              "allBytesDelivered": true,
+              "cleanupComplete": true,
+              "unlockRecorded": true,
+              "temporaryExclusiveProbeSucceeded": true,
+              "syntheticPrivateInputAbsent": true
+            },
+            "durationSeconds": 0.021154
+          },
+          {
+            "inputBytes": 65536,
+            "childRawModeBeforeHandshake": true,
+            "scope": "production-faithful boundary",
+            "checks": {
+              "exit0": true,
+              "passed": true,
+              "allBytesDelivered": true,
+              "cleanupComplete": true,
+              "unlockRecorded": true,
+              "temporaryExclusiveProbeSucceeded": true,
+              "syntheticPrivateInputAbsent": true
+            },
+            "durationSeconds": 0.026365
+          }
+        ],
+        "passedChecks": 14,
+        "totalChecks": 14,
+        "noActualHelperGitNetworkNativeOrBenchmark": true,
+        "terminalAt": "2026-11-11T19:49:24.815549+00:00"
+      },
+      {
+        "kind": "orchestrator_old_authorization_guards",
+        "toolChunk": "9dc065",
+        "sourceSha256": "747b4ecf6d42b89ffc474b9a35ab87ec2c3e85898f1a824a309964df7318cf99",
+        "scope": "Actual orchestrator guards on temporary paths only; synthetic old readiness fixture, no shared-lock function or child attempted. Pure ACK predicates only.",
+        "checks": {
+          "oldReadinessRefused": true,
+          "noLockOrChildAttempt": true,
+          "oldReadinessBytesPreserved": true,
+          "noRequestCreated": true,
+          "noCycleSentinelCreated": true,
+          "noIsolationCreated": true,
+          "noWindowCreated": true,
+          "ownStatusUnchanged": true,
+          "freshExactAckAccepted": true,
+          "oldCycleAckRejected": true,
+          "CurrentCyclePreRequestAckRejected": true
+        },
+        "passedChecks": 11,
+        "totalChecks": 11,
+        "productionRequestIssued": false,
+        "productionReadinessCreated": false,
+        "nativeOrCostExecuted": false,
+        "terminalAt": "2026-11-11T20:07:22.198427+00:00"
+      }
+    ]
+  },
+  "retiredExternalEntrypoints": [
+    {
+      "path": "/workspace/scratch/8a0681e98bf4/push_lot5_checkpoint.mjs",
+      "bytes": 172,
+      "sha256": "2fc625a965f44353000e7f958a49a71c54ffec3c10315073696e05858be4b6b7"
+    },
+    {
+      "path": "/workspace/scratch/8a0681e98bf4/push_lot5_checkpoints_bounded.mjs",
+      "bytes": 172,
+      "sha256": "2fc625a965f44353000e7f958a49a71c54ffec3c10315073696e05858be4b6b7"
+    }
+  ],
+  "newProductionRequestIssued": false,
+  "productionReadinessCreated": false,
+  "productionIsolationCreated": false,
+  "productionExclusiveLockAttempted": false,
+  "productionCostExecuted": false,
+  "nativeRuntimeExecuted": false,
+  "projectTestsExecuted": false,
+  "replaysExecuted": false,
+  "credentialsUsed": false,
+  "procInspected": false,
+  "lockHolderSearched": false,
+  "existingInputsEdited": false,
+  "futureConditions": [
+    "Root must finish its own current work and record actual worker/browser/preview closure after this review.",
+    "The orchestrator must use the exact reviewed subjects; any source or bound-input change invalidates this review.",
+    "Issue only the single new recovery02 request and collect fresh raw exact ACKs from all three active lanes; do not reuse01 ACKs or readiness.",
+    "A real new canonical readiness03 and the sole real nonblocking EX acquisition remain mandatory. This review makes no assertion about production mutex availability.",
+    "On refusal/error/expiry, preserve the terminal evidence and release automatically; no automatic second request or retry."
+  ],
+  "scopeLimits": [
+    "No raw game journal or compressed structural graph was decoded in this review.",
+    "The867 input preservation check was a bounded Git comparison against the declared frozen path list; the finalizer retains its own complete manifest/byte checks.",
+    "Prior01/02 tracked evidence and original sources/reviews were checked unchanged; finalizer will recheck complete prior membership/fingerprints before readiness.",
+    "Retained test receipts were read and bound; this reviewer additionally ran only the two transport-boundary cases and11 temporary authorization assertions.",
+    "File replacement of retired launchers prevents future invocation only and does not identify or terminate an older inaccessible session.",
+    "The one receipt-schema read that expected a generic log field failed before any mutation; its custom schema was then read correctly. It was not a production or test execution failure."
+  ],
+  "quietChecks": [
+    {
+      "lane": "lot5c-status.json",
+      "updatedAt": "2026-11-11T20:04:44.908411+00:00",
+      "quietRequested": false
+    },
+    {
+      "lane": "lot6b-status.json",
+      "updatedAt": "2026-11-11T20:07:43.132616+00:00",
+      "quietRequested": false
+    },
+    {
+      "lane": "lot8a-status.json",
+      "updatedAt": "2026-11-11T20:10:28.564307+00:00",
+      "quietRequested": null
+    },
+    {
+      "lane": "lot10c-status.json",
+      "updatedAt": "2026-11-11T20:01:17.074830+00:00",
+      "quietRequested": false
+    }
+  ],
+  "lastVerificationAt": "2026-11-11T20:10:54.803605+00:00",
+  "allPriorReviewerCommandsTerminal": true,
+  "liveReviewerSessionIds": [],
+  "qualification": "Passed review of the exact new coordination sources and documentary03 inputs only. Functional/native proofs, strict per-game complete-session budget, phase diagnostics, populations and closed-case reserves remain unchanged. No cost result, publication, new game campaign, original-router parity or historical strict work identity is asserted.",
+  "recordedAt": "2026-11-11T20:13:22.949668+00:00",
+  "inputsRecheckedBeforeWrite": true
+}

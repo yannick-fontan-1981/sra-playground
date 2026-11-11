@@ -1,0 +1,47 @@
+{
+  "schema": "logos-engine.lot5c-own-cost-quiet-closure.v1",
+  "status": "all_own_processes_and_workers_idle",
+  "recordedAt": "2026-11-11T18:57:48.408904+00:00",
+  "requestId": "lot5c-cost-a33a5f88-final-01",
+  "ownTrackedComputeEnded": true,
+  "activeCommand": null,
+  "noQueuedCommands": true,
+  "previewStopped": true,
+  "browserTabClosed": true,
+  "workers": [
+    {
+      "agent": "lot5_cost_protocol_audit",
+      "activeCommand": null,
+      "noQueuedCommands": true,
+      "observedTerminal": true,
+      "toolsAndReadsStoppedUntilExplicitRelease": true
+    },
+    {
+      "agent": "lot5_scope_preview",
+      "activeCommand": null,
+      "noQueuedCommands": true,
+      "observedTerminal": true,
+      "toolsAndReadsStoppedUntilExplicitRelease": true
+    },
+    {
+      "agent": "lot5_site101_merge_audit",
+      "activeCommand": null,
+      "noQueuedCommands": true,
+      "observedTerminal": true,
+      "toolsAndReadsStoppedUntilExplicitRelease": true
+    }
+  ],
+  "allOwnWorkersObservedIdleAt": "2026-11-11T18:57:48.408904+00:00",
+  "priorClosure": {
+    "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-final-01/own-closure.json",
+    "bytes": 1968,
+    "sha256": "1d58e387ba2c1ec038e1688469f9243e99121f41de03990636c9e27bfe5dec70"
+  },
+  "premeasurementReviewRestartClosed": true,
+  "unusedResolutionWithdrawn": {
+    "path": "docs/migration/lot5c-evidence/recovery/planning/withdrawn-ack-field-resolution/withdrawal.json",
+    "bytes": 2736,
+    "sha256": "58a24d8877b8c7f5b82eff1a7314565ff0d8490e74bfbdbcf16cd5728aea21ae"
+  },
+  "qualification": "The earlier quiet closure was followed by explicitly authorized bounded premeasurement metadata-reader reviews, with no measurement. Those reviews and every root source command are now terminal. Exact original reviewed strict guards are restored; no interpretation adapter will execute. Root next performs only declared readiness and the controlled official cost workflow; all workers remain idle through explicit release."
+}

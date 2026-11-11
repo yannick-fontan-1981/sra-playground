@@ -1,0 +1,147 @@
+{
+  "automaticRetry": false,
+  "childCloseFds": true,
+  "childExitCode": 0,
+  "childHandshakeAt": "2026-11-11T20:19:12.593658+00:00",
+  "childInputDeliveredAt": "2026-11-11T20:19:12.593736+00:00",
+  "childOutputBytes": {
+    "stderr": 54,
+    "stdout": 871
+  },
+  "childPid": 5,
+  "childProcessGroup": 5,
+  "childPtyEchoDisabled": true,
+  "childStarted": true,
+  "childStartedAt": "2026-11-11T20:19:12.485732+00:00",
+  "cleanup": {
+    "childStarted": true,
+    "complete": true,
+    "leaderExitCode": 0,
+    "processGroup": 5,
+    "reapedDescendants": 0,
+    "signals": []
+  },
+  "dependencies": [],
+  "durationSeconds": 4.621692,
+  "exitCode": 0,
+  "finishedAt": "2026-11-11T20:19:15.563952+00:00",
+  "helper": "bounded-checkpoints",
+  "helperFingerprint": {
+    "bytes": 7201,
+    "file": "push_lot5_checkpoints_bounded.mjs",
+    "sha256": "84e8727e4b86a1a5e3d66bc843c4f3718a3d716c498fd232a810aab627665e04"
+  },
+  "initialCoordination": [
+    {
+      "lane": "lot5c",
+      "quietRequested": false,
+      "statusSha256": "893827819c27792859aeddf91e0f07e1997c2d76662dc9a89a7835927f232c07"
+    },
+    {
+      "lane": "lot6b",
+      "quietRequested": false,
+      "statusSha256": "03a2a652f580e07fee00e0f777e334b3690ee85a012974bef1fe7d87aaba5681"
+    },
+    {
+      "lane": "lot8a",
+      "quietRequested": null,
+      "statusSha256": "afd9862ab1e35729961ef530e402cf6565cce998c587b06e21dfca84aefdbc55"
+    },
+    {
+      "lane": "lot10c",
+      "quietRequested": false,
+      "statusSha256": "0944ff0d0e1f2448431470e9dbf8ed23807566b36fbcc2a115e16474fc46317f"
+    }
+  ],
+  "inputBytesRead": 708,
+  "inputCompletedAt": "2026-11-11T20:19:12.483338+00:00",
+  "inputEchoDisabled": true,
+  "limits": {
+    "handshakeSeconds": 10.0,
+    "inputBytes": 65536,
+    "inputSeconds": 45.0,
+    "killGraceSeconds": 3.0,
+    "outputBytes": 1048576,
+    "termGraceSeconds": 1.0,
+    "workSeconds": 300.0
+  },
+  "lockAcquired": true,
+  "lockAcquiredAt": "2026-11-11T20:19:12.483965+00:00",
+  "lockDescriptor": 3,
+  "lockDescriptorInheritable": false,
+  "lockReleasedAt": "2026-11-11T20:19:15.563899+00:00",
+  "partialOperationalSideEffectsPossible": false,
+  "postLockCoordination": [
+    {
+      "lane": "lot5c",
+      "quietRequested": false,
+      "statusSha256": "893827819c27792859aeddf91e0f07e1997c2d76662dc9a89a7835927f232c07"
+    },
+    {
+      "lane": "lot6b",
+      "quietRequested": false,
+      "statusSha256": "03a2a652f580e07fee00e0f777e334b3690ee85a012974bef1fe7d87aaba5681"
+    },
+    {
+      "lane": "lot8a",
+      "quietRequested": null,
+      "statusSha256": "afd9862ab1e35729961ef530e402cf6565cce998c587b06e21dfca84aefdbc55"
+    },
+    {
+      "lane": "lot10c",
+      "quietRequested": false,
+      "statusSha256": "0944ff0d0e1f2448431470e9dbf8ed23807566b36fbcc2a115e16474fc46317f"
+    }
+  ],
+  "preLockCoordination": [
+    {
+      "lane": "lot5c",
+      "quietRequested": false,
+      "statusSha256": "893827819c27792859aeddf91e0f07e1997c2d76662dc9a89a7835927f232c07"
+    },
+    {
+      "lane": "lot6b",
+      "quietRequested": false,
+      "statusSha256": "03a2a652f580e07fee00e0f777e334b3690ee85a012974bef1fe7d87aaba5681"
+    },
+    {
+      "lane": "lot8a",
+      "quietRequested": null,
+      "statusSha256": "afd9862ab1e35729961ef530e402cf6565cce998c587b06e21dfca84aefdbc55"
+    },
+    {
+      "lane": "lot10c",
+      "quietRequested": false,
+      "statusSha256": "0944ff0d0e1f2448431470e9dbf8ed23807566b36fbcc2a115e16474fc46317f"
+    }
+  ],
+  "rawChildOutputStored": false,
+  "rawInputStored": false,
+  "results": [
+    {
+      "commit": "34d919cb059322bdecc160606faac0bccd23c75b",
+      "objects": 75,
+      "previousRemote": "501198d7638c7a56c3b85d357beb917469899402",
+      "rawNewObjectBytes": 1041120,
+      "remoteHead": "34d919cb059322bdecc160606faac0bccd23c75b",
+      "sitePublicationPerformed": false,
+      "sourceCheckoutHead": "34d919cb059322bdecc160606faac0bccd23c75b",
+      "status": "bounded_checkpoint_pushed_and_verified"
+    },
+    {
+      "branch": "refs/heads/lot5c-recovery-checkpoint-20261111",
+      "commit": "34d919cb059322bdecc160606faac0bccd23c75b",
+      "fetchedMain": "2981a62d456802d39dcde316734793e905fb0ebf",
+      "remoteHead": "34d919cb059322bdecc160606faac0bccd23c75b",
+      "sitePublicationPerformed": false,
+      "status": "pushed_and_verified"
+    }
+  ],
+  "schema": "logos-engine.lot5c.bounded-locked-command.v2",
+  "sitePublicationPerformed": false,
+  "startedAt": "2026-11-11T20:19:10.942270+00:00",
+  "status": "passed",
+  "toolSessionBinding": "external_root_record_required",
+  "toolSessionId": null,
+  "wrapperPid": 2
+}

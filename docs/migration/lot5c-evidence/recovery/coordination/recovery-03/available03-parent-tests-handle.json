@@ -1,0 +1,8 @@
+{
+  "tool": "exec_command",
+  "sessionId": 52060,
+  "recordedAt": "2026-11-11T20:53:32.520Z",
+  "source": "actual exec_command result",
+  "scope": "three temporary v3 namespace and fresh ACK tests",
+  "maximumSeconds": 30
+}

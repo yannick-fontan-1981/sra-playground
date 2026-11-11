@@ -1,0 +1,14 @@
+{
+  "schema": "logos-engine.lot5c-unlocked-checkpoint-terminal.v1",
+  "recordedAt": "2026-11-11T21:29:07.252099+00:00",
+  "sessionId": 96368,
+  "terminal": {
+    "chunk_id": "8e6b0b",
+    "wall_time_seconds": 1.8034e-05,
+    "exit_code": 0,
+    "original_token_count": 33,
+    "output": "{\"schema\": \"logos-engine.lot5c.bounded-command.v3\", \"status\": \"passed\", \"reason\": null, \"exitCode\": 0, \"cleanupComplete\": true}\r\n"
+  },
+  "globalMutexAcquired": false,
+  "remoteHead": "a59abde5a714e566962568f492598a2522562871"
+}

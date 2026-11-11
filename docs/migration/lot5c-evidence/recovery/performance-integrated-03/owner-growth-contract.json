@@ -1,0 +1,152 @@
+{
+  "schema": "logos-engine.lot5c-owner-cost-contract.v2",
+  "lot": "5C",
+  "declaredAt": "2026-11-11T19:46:47.850267+00:00",
+  "generator": {
+    "path": "docs/migration/lot5c-evidence/finalize-owner-cost-contract.py",
+    "bytes": 27103,
+    "sha256": "07a88bb23c8b7c4d95aab4cdde613f933d97023f03209abbc1783e2d257a07ed"
+  },
+  "derivedFrom": {
+    "path": "docs/migration/lot5b-evidence/finalize-owner-cost-contract.py",
+    "bytes": 15763,
+    "sha256": "58fd6f433ee6043c3cd24f3c763f4ede265c4b2e60374a9916807bccc68c2997"
+  },
+  "domainReview": {
+    "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-domain-source-review.json",
+    "bytes": 5584,
+    "sha256": "ad027c2327b0b073c75deaa48cd9d27e90e5909066beb78a94973d706565f626"
+  },
+  "sourceEvidencePaths": {
+    "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-source-evidence-paths.json",
+    "bytes": 528,
+    "sha256": "4960a996175c03c0ce92365bda7f3dcaf747f1c7fd8467e34a84584816a87b62"
+  },
+  "acquisitionDomain": {
+    "acquisitionMode": "passive_nonadmitted_source_binding",
+    "contextAdmission": false,
+    "core": null,
+    "methods": [],
+    "attentionMutation": false,
+    "nativeAcquisitionIncomplete": false,
+    "recordOutsideOfficialBoundary": null,
+    "recordAtOfficialBoundary": {
+      "status": "scope_changed_preserving_conditional_methods",
+      "evidence": [
+        "before.observation_ref",
+        "after.observation_ref"
+      ]
+    },
+    "recordPayloadKeys": [
+      "status",
+      "evidence"
+    ],
+    "officialBoundaryPredicate": "before.level_epoch != after.level_epoch or after.levels_completed > before.levels_completed",
+    "factCoverage": "One exact passive source fact for each actually captured nonnull boundary return; no fact for a null return. sourceCallIndices covers every acquired return; sourceEventCallIndices is exactly the ordered nonnull subset."
+  },
+  "performanceDirectory": "docs/migration/lot5c-evidence/recovery/performance-integrated-03",
+  "declaration": {
+    "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/declaration.json",
+    "bytes": 5661,
+    "sha256": "9c741d8597e5b864ba265cbab8adbf8cb8b7b15f3644ed86ed5e72f3a359a38c"
+  },
+  "tools": {
+    "consolidator": {
+      "path": "docs/migration/lot5c-evidence/consolidate-owner-costs.mjs",
+      "bytes": 61449,
+      "sha256": "69957840c81d50e3d7b68dedf4293b5aa9c4072f882fe1fc858f5e03815330b7"
+    },
+    "reviewer": {
+      "path": "docs/migration/lot5c-evidence/review-owner-costs.py",
+      "bytes": 81151,
+      "sha256": "452ccf903970230f5855458cd35f2f3f30224307026663ebd865b494986371df"
+    }
+  },
+  "structuralExpectation": {
+    "ownerId": "public_observed_binding",
+    "programId": "v6.observed_binding.choose",
+    "installedNodeIds": [
+      "family_state:public_observed_binding",
+      "family_activation:public_observed_binding",
+      "program:v6.observed_binding.choose"
+    ],
+    "allowedPaths": [
+      "observations[*].nodeCount",
+      "inspection[*].graphNodes",
+      "final.nodeCount",
+      "final.graphRevision"
+    ],
+    "mode": "predeclared_functional_fixture",
+    "qualification": "functional_structure_frozen_before_measurement"
+  },
+  "sourceEvidence": [
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "bytes": 167438,
+      "sha256": "c5bc40b3dd40b383f6bd31bbc8c77955a24c7b62a774792ccea38e9f8b79d0f3"
+    },
+    {
+      "path": "src/logos-engine/v6-observed-binding.ts",
+      "bytes": 22934,
+      "sha256": "f7ed39d3215339e0facc33db3ab2ed81e6fe7afaf049f8ab148dadff590f5e73"
+    },
+    {
+      "path": "src/logos-engine/v6-observed-binding-state.ts",
+      "bytes": 17300,
+      "sha256": "43e3f0e95af3ee9f39dbe7fcaf22b6af5fc1b4603b7c00a1765d6786517f7558"
+    },
+    {
+      "path": "src/logos-engine/v6-object-binding-common.ts",
+      "bytes": 3431,
+      "sha256": "b35a0a3941bcd0056417acfc59ca23a49bbacc372d4556088652ffa9c62a99c5"
+    },
+    {
+      "path": "src/logos-engine/v6-object-binding-geometry.ts",
+      "bytes": 11470,
+      "sha256": "37963dc265701b7d9c6951ca768f0e21b5f42be118362257e09dd714678199bc"
+    },
+    {
+      "path": "src/logos-engine/v6-object-binding-identity.ts",
+      "bytes": 2829,
+      "sha256": "e7e1aa6365c6cc8c4a834e59bd8d9fa00c254608b6cb55dbbce04e0c6ed7d4d2"
+    },
+    {
+      "path": "src/logos-engine/v6-object-binding-planning.ts",
+      "bytes": 8856,
+      "sha256": "a5925aedf7fe772ed96825bf14e113281b704d416ad1d37e0996a6ca85a98d2f"
+    },
+    {
+      "path": "src/logos-engine/v6-object-binding-reception.ts",
+      "bytes": 4750,
+      "sha256": "d39cb08e4003ad1ab026167da9eb9a6fd371c651304f1946afeb5b05a89507fc"
+    },
+    {
+      "path": "src/logos-engine/v6-object-binding-tracker.ts",
+      "bytes": 16082,
+      "sha256": "e80c8b7da07a952d8dde240ef35989a9c00a2c264a3ff90bddf23e0761da63d4"
+    },
+    {
+      "path": "src/logos-engine/v6-knowledge-store.ts",
+      "bytes": 14849,
+      "sha256": "035d41597a5831bfa65bb1f627e3a0d05b84cc44cfda05566359873ef8c5af08"
+    },
+    {
+      "path": "src/logos-engine/kernel.ts",
+      "bytes": 23637,
+      "sha256": "1cac40f5f9a3356d31ae0fd5247709eb82c5f6402aae3cb68d8edc54c838f207"
+    }
+  ],
+  "ownerInventory": {
+    "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/owner-source-inventory.json",
+    "bytes": 123426,
+    "sha256": "b8fcb70f1fa56f0f5218698bf08d9764698590c7fbeaa2024179a3999501dac0"
+  },
+  "structuralFixture": {
+    "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/owner-structural-fixture.json",
+    "bytes": 60104,
+    "sha256": "3fd3dcf30a1e0f13fde9ca5700b0a7f164da56c7f5435ad343be765788e39160"
+  },
+  "strictFailureReceipt": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/aggregation-failure.json",
+  "strictFailureLog": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/aggregation-failure.log",
+  "historicalAggregateOutput": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/combined-comparison.json"
+}

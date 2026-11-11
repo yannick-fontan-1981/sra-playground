@@ -1,0 +1,96 @@
+{
+  "schema": "logos-engine.lot5c.publication-final-observation.v1",
+  "status": "published_102_native_and_103_documentary_closure_unchanged",
+  "observationsStartedAt": "2026-11-11 21:59:28 UTC",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "site": {
+    "id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "title": "SRA Playground",
+    "status": "active",
+    "latestVersionNumber": 103,
+    "currentLiveUrl": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "updatedAt": "2026-11-11T16:55:19.683817+00:00",
+    "currentUserRole": "owner",
+    "accessMode": "custom",
+    "accessPolicy": {
+      "accessMode": "custom",
+      "revision": 3,
+      "updatedAt": "2026-11-02T14:06:30.480596+00:00",
+      "allowedAccountCount": 1,
+      "allowedWorkspaceGroupCount": 0,
+      "allowedTenantGroupCount": 0,
+      "externalVisitorCount": 0
+    }
+  },
+  "versions": [
+    {
+      "id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_c8356cd5ad648191a646ac0a9c059a24",
+      "versionNumber": 103,
+      "commitSha": "4afcbfe6a25bd3a88223be543e443bc53b9c8814",
+      "deploymentId": "appgdep_6af49db69234819195c9c093cb79a7da"
+    },
+    {
+      "id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_ebb6198d3844819188b9db25c43aaa31",
+      "versionNumber": 102,
+      "commitSha": "1019d2eb929d7dc201a5c1f6edce5aa1c5dfa464",
+      "deploymentId": "appgdep_6af49caf0b808191a14190d3261b6f9d"
+    },
+    {
+      "id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_48ccb50314448191a19781a9c89eb830",
+      "versionNumber": 101,
+      "commitSha": "d75a36f0a99bf6c301034523a3138a64d2f6e744",
+      "deploymentId": "appgdep_6af48d2be4908191bfe5398512c01bcb"
+    }
+  ],
+  "deployments": [
+    {
+      "versionNumber": 103,
+      "id": "appgdep_6af49db69234819195c9c093cb79a7da",
+      "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_c8356cd5ad648191a646ac0a9c059a24",
+      "status": "succeeded",
+      "publicationStage": null,
+      "type": "publish",
+      "updatedAt": "2026-11-11T16:54:28.036164+00:00",
+      "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+      "failureMessage": null
+    },
+    {
+      "versionNumber": 102,
+      "id": "appgdep_6af49caf0b808191a14190d3261b6f9d",
+      "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_ebb6198d3844819188b9db25c43aaa31",
+      "status": "succeeded",
+      "publicationStage": null,
+      "type": "publish",
+      "updatedAt": "2026-11-11T16:50:10.918057+00:00",
+      "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+      "failureMessage": null
+    }
+  ],
+  "comparisonToPriorPreflight": {
+    "reference": "docs/migration/lot5c-evidence/recovery/coordination/recovery-03/publication-preflight.json",
+    "publishedLineageUnchanged": true,
+    "nativePredecessor": {
+      "siteVersion": 102,
+      "nativeVersionLabelFromRetainedPreflight": "0.62",
+      "commitSha": "1019d2eb929d7dc201a5c1f6edce5aa1c5dfa464"
+    },
+    "documentaryClosure": {
+      "siteVersion": 103,
+      "commitSha": "4afcbfe6a25bd3a88223be543e443bc53b9c8814"
+    },
+    "audience": {
+      "accessMode": "custom",
+      "revision": 3,
+      "unchangedFromPriorObservation": true
+    },
+    "noNewNativeOrCostQualificationInferred": true
+  },
+  "sourceOfObservation": "Fresh read-only Sites APIs: get_site, list_site_versions and terminal deployment status for the exact returned deployment IDs. No repository/source reads or tests were used.",
+  "accessModified": false,
+  "credentialRequestedOrRetained": false,
+  "publicationAttempted": false,
+  "roadmapModified": false,
+  "sourceCommandOrTestExecuted": false,
+  "recordedAt": "2026-11-11T22:00:34.105251+00:00",
+  "elapsedSeconds": 66.105251
+}

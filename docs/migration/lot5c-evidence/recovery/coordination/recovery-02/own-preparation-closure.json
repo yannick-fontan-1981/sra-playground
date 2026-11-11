@@ -1,0 +1,57 @@
+{
+  "schema": "logos-engine.lot5c-own-cost-quiet-closure.v1",
+  "status": "all_own_processes_and_workers_idle",
+  "recordedAt": "2026-11-11T20:20:25.177769+00:00",
+  "requestId": "lot5c-cost-a33a5f88-recovery-02",
+  "ownTrackedComputeEnded": true,
+  "activeCommand": null,
+  "noQueuedCommands": true,
+  "previewStopped": true,
+  "browserTabClosed": true,
+  "checkpointCommit": "34d919cb059322bdecc160606faac0bccd23c75b",
+  "checkpointRemoteVerified": true,
+  "lastOrdinaryCommandTerminal": {
+    "tool": "exec_command",
+    "chunk": "a20d21",
+    "exitCode": 0,
+    "finishedAt": "2026-11-11T20:20:10.639507+00:00"
+  },
+  "checkpointTransportTerminal": {
+    "sessionId": 47855,
+    "terminalChunk": "be27e4",
+    "exitCode": 0,
+    "cleanupComplete": true,
+    "lockReleasedAt": "2026-11-11T20:19:15.563899+00:00"
+  },
+  "independentReview": {
+    "status": "passed",
+    "checksPassed": 58,
+    "checksTotal": 58,
+    "subjects": 52,
+    "sha256": "af90515bd2b10dde7b861a923190853566ba2ef657c371a9ecdb416337698d04"
+  },
+  "workers": [
+    {
+      "agent": "lot5_cost_protocol_audit",
+      "activeCommand": null,
+      "noQueuedCommands": true,
+      "observedTerminal": true,
+      "toolsAndReadsStoppedUntilExplicitRelease": true
+    },
+    {
+      "agent": "lot5_scope_preview",
+      "activeCommand": null,
+      "noQueuedCommands": true,
+      "observedTerminal": true,
+      "toolsAndReadsStoppedUntilExplicitRelease": true
+    },
+    {
+      "agent": "lot5_site101_merge_audit",
+      "activeCommand": null,
+      "noQueuedCommands": true,
+      "observedTerminal": true,
+      "toolsAndReadsStoppedUntilExplicitRelease": true
+    }
+  ],
+  "qualification": "Actual root source/checkpoint/read work and three workers are terminal. This metadata receipt follows those observed terminals. Only declared bounded coordinator, readiness and existing cost protocol may follow; no ordinary work queued."
+}

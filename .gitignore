@@ -499,3 +499,16 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 !docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01/cohort1/after.log
 !docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01/cohort2/baseline.log
 !docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01/cohort2/after.log
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot5c-evidence/recovery/integrated-final-01/regressions/catr-051-replay.json.gz
+/docs/migration/lot5c-evidence/recovery/integrated-final-01/regressions/conn-050-replay.json.gz
+/docs/migration/lot5c-evidence/recovery/integrated-final-01/regressions/craf-055-replay.json.gz
+/docs/migration/lot5c-evidence/recovery/integrated-final-01/regressions/fogw-051-replay.json.gz
+/docs/migration/lot5c-evidence/recovery/integrated-final-01/regressions/isos-development-4c-replay.json.gz
+/docs/migration/lot5c-evidence/recovery/integrated-final-01/regressions/kata-060-self-consistency-replay.json.gz
+/docs/migration/lot5c-evidence/recovery/integrated-final-01/regressions/mind-051-replay.json.gz
+/docs/migration/lot5c-evidence/recovery/integrated-final-01/regressions/rswp-051-replay.json.gz
+/docs/migration/lot5c-evidence/recovery/integrated-final-01/regressions/tria-development-4b-replay.json.gz
+/docs/migration/lot5c-evidence/recovery/integrated-final-01/regressions/vois-051-replay.json.gz
+/docs/migration/lot5c-evidence/recovery/integrated-final-01/regressions/weav-051-replay.json.gz

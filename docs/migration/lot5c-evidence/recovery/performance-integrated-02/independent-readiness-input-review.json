@@ -1,0 +1,1014 @@
+{
+  "schema": "logos-engine.lot5c-independent-readiness-input-review.v1",
+  "status": "passed_inputs_only_readiness_not_asserted",
+  "recordedAt": "2026-11-11T17:58:34.694081+00:00",
+  "reviewer": "independent agent /root/lot5_site101_merge_audit",
+  "activeDirectory": "docs/migration/lot5c-evidence/recovery/performance-integrated-02",
+  "supersededPriorDirectory": "docs/migration/lot5c-evidence/recovery/performance-integrated-01",
+  "inputs": [
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/dependency-repair.json",
+      "bytes": 4511,
+      "sha256": "606e2655c472d11823c3367f6a7213df318c24bbf3527f0c9a462e36854fa101"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/prior-attempt-inventory.json",
+      "bytes": 6350,
+      "sha256": "0d5f1a51c7c413664459adb2e46a8b8078f0a0c25cb4e93acd4180ea6ae12698"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/superseded-before-measurement.json",
+      "bytes": 3297,
+      "sha256": "1d3f45d98ae9dcd142953a60e5bd0b122a00e0ee53f433a0e0f9c4dc751eae8f"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/structural-repeat-equivalence.json",
+      "bytes": 5183,
+      "sha256": "e36f2b0072b5e9da21afae2a13179ece7be921d33bae7e9206c857737dc094a6"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/owner-growth-contract.json",
+      "bytes": 6009,
+      "sha256": "08dc46007afbb0b54f219fc519f4bb7b8239a59c9263a2714aa60a61d0537c5f"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/static-preflight.json",
+      "bytes": 19919,
+      "sha256": "2bed63fe86914300d5933c98ed65cc0e222df308f44336836414603a5cd0e46b"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/owner-structural-fixture.json",
+      "bytes": 60104,
+      "sha256": "6f8d45dc8d68e8d3a67c45a66ac1045d12d123c43c02ab66e4ac1a09b63191d5"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/owner-graph-attribution.json",
+      "bytes": 107007,
+      "sha256": "b33228947598d563935cee9b1d2bac70ba3b4c55b11018d306ea96c2933a8534"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/owner-source-inventory.json",
+      "bytes": 123426,
+      "sha256": "b8fcb70f1fa56f0f5218698bf08d9764698590c7fbeaa2024179a3999501dac0"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/global-budget-policy.json",
+      "bytes": 2348,
+      "sha256": "ad6878f3065ec5fca67f4fda7ed3cfac936795c3ee11a37fec4a42fe1a5ca53b"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/declaration.json",
+      "bytes": 5661,
+      "sha256": "b63f8d61f27ce9d6401c0015ecf2888cd947f504bfbdbfb954e799c28f8a7c8e"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/owner-structural-fixture.json",
+      "bytes": 60104,
+      "sha256": "67d2afc5d54b8203c636aa8868c7b5967760dc7b44b0329eeb8b67ef98253296"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/owner-graph-attribution.json",
+      "bytes": 107007,
+      "sha256": "c0528cf494f17f156086e8d0c540fa0421c8bcf7b1c656454d96767b0916f74c"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/owner-source-inventory.json",
+      "bytes": 123426,
+      "sha256": "936188c0d9368737e1b797e205fc3de099585a1cacc8bbc308b13a6c2ba0ba53"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/global-budget-policy.json",
+      "bytes": 2348,
+      "sha256": "ac3d2c33fb990b851c1dd96efb0e7f38ceb40c5f7efbd72ae227a654c3c18de0"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/owner-growth-contract.json",
+      "bytes": 6009,
+      "sha256": "d2f97d71bb68388c77ccfc45b791a1529806ed4096893f7a227d497af7079e25"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/static-preflight.json",
+      "bytes": 19941,
+      "sha256": "7112cfff86b26a59e2f804b45a62c20ed0e7b42aeeb311eb2157ca219504d7e1"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/static-preflight-command.execution.json",
+      "bytes": 1287,
+      "sha256": "ea99789ecab9828d9a4a0dd34d44627e4cc487204d94a3b31d13afa371aa6235"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout/package.json",
+      "bytes": 919,
+      "sha256": "c0da9e013fd85bd7f279f1b496acd034536747fc88abab34b109067766b73154"
+    },
+    {
+      "path": "package.json",
+      "bytes": 919,
+      "sha256": "c0da9e013fd85bd7f279f1b496acd034536747fc88abab34b109067766b73154"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout/package-lock.json",
+      "bytes": 29342,
+      "sha256": "93bc180b1ecf92e7976bb54bcb3a0aef1d3e96d65c41ee300676207832cd274e"
+    },
+    {
+      "path": "package-lock.json",
+      "bytes": 29342,
+      "sha256": "93bc180b1ecf92e7976bb54bcb3a0aef1d3e96d65c41ee300676207832cd274e"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout/scripts/python-runtime-assets.json",
+      "bytes": 3389,
+      "sha256": "e702a914cf88345d486d7d8a36c95f2076287d8935e02cc428b7a66749500d43"
+    },
+    {
+      "path": "scripts/python-runtime-assets.json",
+      "bytes": 3389,
+      "sha256": "e702a914cf88345d486d7d8a36c95f2076287d8935e02cc428b7a66749500d43"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/baseline-owner-graphs-command.execution.json",
+      "bytes": 1492,
+      "sha256": "e4aa6f9633701cc61e5dbbcafab32c3bc1d284da19ff4beb8e7aa918ea255739"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/baseline-owner-graphs-command.log",
+      "bytes": 387,
+      "sha256": "cb16d43ce48f968b0322584dec91a920a7edb3900f1e182885c9150dc7755138"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/baseline-owner-graphs-command.log.gz",
+      "bytes": 238,
+      "sha256": "294ec1c6a6f2fc0f0c81062ae264466525c7d1a3c9be11d87770490f6b8f4ade"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/baseline-owner-graphs.json.gz",
+      "bytes": 5109271,
+      "sha256": "01aca0a4dde1029919b9dff233959f3aaa72820333dc1d7e3baea8c767e115b2"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/baseline-owner-graphs.receipt.json",
+      "bytes": 114892,
+      "sha256": "72fe1ce2d3ba9f27b31f549421f0a4c1b79da52566e329911eb2a8afefa43098"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/candidate-owner-graphs-command.execution.json",
+      "bytes": 1479,
+      "sha256": "ce10cd24d0419fbfc533ab689bd1282d61ee1492a059abe364dc5fbc62453424"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/candidate-owner-graphs-command.log",
+      "bytes": 390,
+      "sha256": "efcf6e64534e4459c44d7b5dd9f72eb590382b93363ebe94740ae208e595d553"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/candidate-owner-graphs-command.log.gz",
+      "bytes": 238,
+      "sha256": "79c11170576fce04f9864d8cf41b593d37b7a6b63bfb734e8607dd8fa2e454a0"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/candidate-owner-graphs.json.gz",
+      "bytes": 5160803,
+      "sha256": "a39f71649496a2a0023658f6ebf4ff41d34a77fd479ce59edfadd9be4182462a"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/candidate-owner-graphs.receipt.json",
+      "bytes": 115863,
+      "sha256": "eea5ddc96d52b1218c06f84fc9fe85e1f01cfddc4b74130c61bfa7280a98e8ba"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/comparison-policy.json",
+      "bytes": 991,
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/declaration-independent-review.json",
+      "bytes": 3027,
+      "sha256": "3056f7433e53e27bb153c0621767359d1babf8148da1ceffa7a83fa7064ac7fa"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/declaration.json",
+      "bytes": 5661,
+      "sha256": "7b3022ccdd57849f6121446b9e8170e93f16bfec9c73eb8978b8b625eaab7351"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/owner-contract-finalization-command.execution.json",
+      "bytes": 1285,
+      "sha256": "d94fddc4ad799bc62b7c2257984572cc2e762b56a1d069d110ed98a56033ea16"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/owner-contract-finalization-command.log",
+      "bytes": 350,
+      "sha256": "a57dc7413fbf7e271bf25b09bb1a4c487d7e7afe8ca1cbdcb3c8f1fa3e663f89"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/owner-contract-finalization-command.log.gz",
+      "bytes": 269,
+      "sha256": "c487f4a4d6999019e7ee29edd481833697e59e1c709692bbfa7d97eb5badb644"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/owner-graph-qualification-command.execution.json",
+      "bytes": 1750,
+      "sha256": "c05c96608a9e1b703c1c1cf16dd24aca16722a98a0effc93acc5c1baa3f7f82a"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/owner-graph-qualification-command.log",
+      "bytes": 319,
+      "sha256": "12a41f95f3f32c405359e74f0aa511db144631114591b6bb465afc7d6008b552"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/owner-graph-qualification-command.log.gz",
+      "bytes": 191,
+      "sha256": "3357fdda9d71262e2c33af484ded76914ae104576581915d2d3aabcddf239d44"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/owner-qualification-independent-review.json",
+      "bytes": 17962,
+      "sha256": "bbe4c0cf056d6e3346e110aa00c7c56d77b1902c1c2ecf24ac40280006f78490"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/owner-source-inventory-command.execution.json",
+      "bytes": 1301,
+      "sha256": "30e8ea93dcda5759e352d2acefeafd417bab38a1cc18e0cebf0d57de3d007711"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/owner-source-inventory-command.log",
+      "bytes": 575,
+      "sha256": "24804144f8fb1f96e6e9cb2c3cba3ab3c73fdbc4ba247dd3645436ad78494ae8"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/owner-source-inventory-command.log.gz",
+      "bytes": 359,
+      "sha256": "5ca078626fba122e688cf5e981c72c300f9c8863264015c1262327043a10bcc2"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/preparation.json",
+      "bytes": 4411,
+      "sha256": "1f2c25c7304afd4e215514f70137fcfac95c3339af8acf423b58a1ed6082e17f"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/protocol-check.json",
+      "bytes": 429,
+      "sha256": "98272521d2984efbf0f8ba8dc521ea00575b9c4edeb6118453fa6016be751b15"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/protocol-preparation-command.execution.json",
+      "bytes": 1753,
+      "sha256": "3cfad837fadc2eccda9cc8ed5eabc185eb35f28d394a8469da521246bd392086"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/protocol-preparation-command.log",
+      "bytes": 429,
+      "sha256": "98272521d2984efbf0f8ba8dc521ea00575b9c4edeb6118453fa6016be751b15"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/protocol-preparation-command.log.gz",
+      "bytes": 330,
+      "sha256": "a11989e686f9511afab24f5dae61f25463df143639a9a9400e81583b4d78ca6b"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/protocol.md",
+      "bytes": 16466,
+      "sha256": "a1b24a837051099bc095350470a8ca47a2fe4513fe738687bf6ed08421a5aee2"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/static-preflight-command.log",
+      "bytes": 445,
+      "sha256": "5bcece9a07052f36dcea0190bd1859104d0a791dc875dff0601d9b010aaab6dd"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/static-preflight-command.log.gz",
+      "bytes": 310,
+      "sha256": "25affed22c4fbf9f04ba73bc84dbab09bbb24e5f0ea8648f626288b6f77dc692"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/baseline-owner-graphs.receipt.json",
+      "bytes": 114892,
+      "sha256": "564c50b4832b7bb027d6115f18d14fcbb0abd404a98dac037032ef1f7d7af6d1"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/baseline-owner-graphs.json.gz",
+      "bytes": 5109323,
+      "sha256": "cd99971740e98723e239c25b3498839c6a4d01164e148637f6fda380717278e3"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/candidate-owner-graphs.receipt.json",
+      "bytes": 115863,
+      "sha256": "72edf085e93b8e935f93715742487b3be64e656fc706a21cbf3280cc237c706b"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/candidate-owner-graphs.json.gz",
+      "bytes": 5160779,
+      "sha256": "3212f4f2df298d908c094d7a18c908c16a8c8e21f8096946b95c8df30e7fb9f8"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/check-cost-static-inputs.py",
+      "bytes": 38502,
+      "sha256": "5564a925956a16eefd011deb107e05f42687f7a04e224d37c6a0bac259374168"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/prepare-cost-protocol.py",
+      "bytes": 34594,
+      "sha256": "b8f5096ae5521306904168da48b1ee3e69045384d5fb8c88dc4441e3efebfce8"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/finalize-owner-cost-contract.py",
+      "bytes": 27103,
+      "sha256": "07a88bb23c8b7c4d95aab4cdde613f933d97023f03209abbc1783e2d257a07ed"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/consolidate-owner-costs.mjs",
+      "bytes": 61449,
+      "sha256": "69957840c81d50e3d7b68dedf4293b5aa9c4072f882fe1fc858f5e03815330b7"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/review-owner-costs.py",
+      "bytes": 81151,
+      "sha256": "452ccf903970230f5855458cd35f2f3f30224307026663ebd865b494986371df"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/capture-cost-owner-graphs.mjs",
+      "bytes": 28139,
+      "sha256": "177354ff2120fcd148688365c62b854a81ca30a49999f5d9e85a451171a3150d"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/qualify-cost-owner-graphs.mjs",
+      "bytes": 52657,
+      "sha256": "b1f4ae869ce9faf6f45faaace841950aa76de5821230ad16d3404ab646cb3e89"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/record-owner-source-inventory.mjs",
+      "bytes": 13603,
+      "sha256": "50c9275c331e1013b7d618dd93023f79826398aa191c34fb9c05680b01210d8d"
+    },
+    {
+      "path": "scripts/run-native-cost-window.py",
+      "bytes": 8933,
+      "sha256": "0ec9c69c859d0555e963643010d2254caee8c63d1c9a98ec07cd9af0ce0ce613"
+    },
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "bytes": 20670,
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "scripts/compare-native-loop-costs.mjs",
+      "bytes": 9861,
+      "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb"
+    },
+    {
+      "path": "scripts/compare-native-cost-cohorts.mjs",
+      "bytes": 19460,
+      "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34"
+    },
+    {
+      "path": "scripts/review-native-cost-consolidation.py",
+      "bytes": 17810,
+      "sha256": "b13174cec5befbb816e70554fd5d47da215eae941b983e66f05b9dd4417b3bd4"
+    },
+    {
+      "path": "scripts/review-native-global-cost-window.py",
+      "bytes": 22204,
+      "sha256": "9ab2ecd9d6ddf234e96332421a6e55937a766495c1a20dd223f4441d6b516940"
+    },
+    {
+      "path": "scripts/review-native-global-cost-budget.py",
+      "bytes": 8476,
+      "sha256": "b4312bcdae058ba58c16b4e5e24cb53626496b38f8a154834e0452a43e97d341"
+    }
+  ],
+  "checkedCount": 84,
+  "checks": [
+    {
+      "name": "repair_scoped_to_ignored_dependencies",
+      "passed": true
+    },
+    {
+      "name": "baseline_native_receipt_unchanged",
+      "passed": true
+    },
+    {
+      "name": "exact_two_dependencies",
+      "passed": true
+    },
+    {
+      "name": "actual_dependency_link/node_modules",
+      "passed": true
+    },
+    {
+      "name": "actual_dependency_link/public/vendor/pyodide",
+      "passed": true
+    },
+    {
+      "name": "actual_dependencies_remain_git_ignored",
+      "passed": true,
+      "detail": [
+        ".gitignore:2:/node_modules\tnode_modules",
+        ".gitignore:9:/public/vendor/pyodide\tpublic/vendor/pyodide"
+      ]
+    },
+    {
+      "name": "tracked_native_sources_unchanged//workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout",
+      "passed": true
+    },
+    {
+      "name": "tracked_native_sources_unchanged//workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout",
+      "passed": true
+    },
+    {
+      "name": "dependency_manifest_identity/package.json",
+      "passed": true
+    },
+    {
+      "name": "dependency_manifest_identity/package-lock.json",
+      "passed": true
+    },
+    {
+      "name": "dependency_manifest_identity/scripts/python-runtime-assets.json",
+      "passed": true
+    },
+    {
+      "name": "repair_inventory_binding",
+      "passed": true
+    },
+    {
+      "name": "prior_inventory_has_exact_39_files",
+      "passed": true
+    },
+    {
+      "name": "all_39_prior_artifacts_retained_exactly",
+      "passed": true
+    },
+    {
+      "name": "prior_failure_remains_explicit",
+      "passed": true
+    },
+    {
+      "name": "supersession_applies_only_to_01",
+      "passed": true
+    },
+    {
+      "name": "supersession_keeps_domain_and_rules",
+      "passed": true
+    },
+    {
+      "name": "supersession_binding/priorFailedPreflight",
+      "passed": true
+    },
+    {
+      "name": "supersession_binding/priorFailureExecution",
+      "passed": true
+    },
+    {
+      "name": "supersession_binding/priorDeclaration",
+      "passed": true
+    },
+    {
+      "name": "supersession_binding/priorStructuralContract",
+      "passed": true
+    },
+    {
+      "name": "supersession_binding/priorStructuralAttribution",
+      "passed": true
+    },
+    {
+      "name": "supersession_binding/priorStructuralFixture",
+      "passed": true
+    },
+    {
+      "name": "supersession_binding/priorAttemptInventory",
+      "passed": true
+    },
+    {
+      "name": "supersession_binding/dependencyRepair",
+      "passed": true
+    },
+    {
+      "name": "equivalence_receipt_all_29_checks",
+      "passed": true
+    },
+    {
+      "name": "equivalence_input_binding/docs/migration/lot5c-evidence/recovery/performance-integrated-01/owner-structural-fixture.json",
+      "passed": true
+    },
+    {
+      "name": "equivalence_input_binding/docs/migration/lot5c-evidence/recovery/performance-integrated-01/owner-graph-attribution.json",
+      "passed": true
+    },
+    {
+      "name": "equivalence_input_binding/docs/migration/lot5c-evidence/recovery/performance-integrated-01/owner-source-inventory.json",
+      "passed": true
+    },
+    {
+      "name": "equivalence_input_binding/docs/migration/lot5c-evidence/recovery/performance-integrated-01/global-budget-policy.json",
+      "passed": true
+    },
+    {
+      "name": "equivalence_input_binding/docs/migration/lot5c-evidence/recovery/performance-integrated-02/owner-structural-fixture.json",
+      "passed": true
+    },
+    {
+      "name": "equivalence_input_binding/docs/migration/lot5c-evidence/recovery/performance-integrated-02/owner-graph-attribution.json",
+      "passed": true
+    },
+    {
+      "name": "equivalence_input_binding/docs/migration/lot5c-evidence/recovery/performance-integrated-02/owner-source-inventory.json",
+      "passed": true
+    },
+    {
+      "name": "equivalence_input_binding/docs/migration/lot5c-evidence/recovery/performance-integrated-02/global-budget-policy.json",
+      "passed": true
+    },
+    {
+      "name": "actual_complete_forms_equal_to_reviewed_01",
+      "passed": true
+    },
+    {
+      "name": "fresh_64_of_64_qualification",
+      "passed": true
+    },
+    {
+      "name": "40_deltas_58_points_same_recorded_counts",
+      "passed": true
+    },
+    {
+      "name": "same_closed_domain_and_boundary_returns",
+      "passed": true
+    },
+    {
+      "name": "contract_acquisition_domain_unchanged",
+      "passed": true
+    },
+    {
+      "name": "four_structural_paths_only",
+      "passed": true
+    },
+    {
+      "name": "native_inventory_and_owner_order_unchanged",
+      "passed": true
+    },
+    {
+      "name": "all_actual_global_rules_and_populations_unchanged",
+      "passed": true
+    },
+    {
+      "name": "fresh_capture_chronology/baseline",
+      "passed": true
+    },
+    {
+      "name": "fresh_receipt_shapes_bound/baseline",
+      "passed": true
+    },
+    {
+      "name": "capture_native_inputs_unchanged/baseline",
+      "passed": true
+    },
+    {
+      "name": "capture_is_not_measurement/baseline",
+      "passed": true
+    },
+    {
+      "name": "new_capture_artifact_bound/baseline",
+      "passed": true
+    },
+    {
+      "name": "fresh_raw_capture_distinct_from_01/baseline",
+      "passed": true
+    },
+    {
+      "name": "fresh_capture_chronology/candidate",
+      "passed": true
+    },
+    {
+      "name": "fresh_receipt_shapes_bound/candidate",
+      "passed": true
+    },
+    {
+      "name": "capture_native_inputs_unchanged/candidate",
+      "passed": true
+    },
+    {
+      "name": "capture_is_not_measurement/candidate",
+      "passed": true
+    },
+    {
+      "name": "new_capture_artifact_bound/candidate",
+      "passed": true
+    },
+    {
+      "name": "fresh_raw_capture_distinct_from_01/candidate",
+      "passed": true
+    },
+    {
+      "name": "fresh_captures_sequential",
+      "passed": true
+    },
+    {
+      "name": "contract_qualified_before_static",
+      "passed": true
+    },
+    {
+      "name": "static_preflight_76_of_76",
+      "passed": true
+    },
+    {
+      "name": "static_is_not_readiness_or_isolation",
+      "passed": true
+    },
+    {
+      "name": "contract_is_active_02",
+      "passed": true
+    },
+    {
+      "name": "static_declaration_binding",
+      "passed": true
+    },
+    {
+      "name": "static_supersession_binding",
+      "passed": true
+    },
+    {
+      "name": "static_contract_binding",
+      "passed": true
+    },
+    {
+      "name": "static_fixture_binding",
+      "passed": true
+    },
+    {
+      "name": "contract_fixture_binding",
+      "passed": true
+    },
+    {
+      "name": "contract_inventory_binding",
+      "passed": true
+    },
+    {
+      "name": "fixture_attribution_binding",
+      "passed": true
+    },
+    {
+      "name": "immutable_helper_actual_sha/docs/migration/lot5c-evidence/check-cost-static-inputs.py",
+      "passed": true
+    },
+    {
+      "name": "immutable_helper_actual_sha/docs/migration/lot5c-evidence/prepare-cost-protocol.py",
+      "passed": true
+    },
+    {
+      "name": "immutable_helper_actual_sha/docs/migration/lot5c-evidence/finalize-owner-cost-contract.py",
+      "passed": true
+    },
+    {
+      "name": "immutable_helper_actual_sha/docs/migration/lot5c-evidence/consolidate-owner-costs.mjs",
+      "passed": true
+    },
+    {
+      "name": "immutable_helper_actual_sha/docs/migration/lot5c-evidence/review-owner-costs.py",
+      "passed": true
+    },
+    {
+      "name": "immutable_helper_actual_sha/docs/migration/lot5c-evidence/capture-cost-owner-graphs.mjs",
+      "passed": true
+    },
+    {
+      "name": "immutable_helper_actual_sha/docs/migration/lot5c-evidence/qualify-cost-owner-graphs.mjs",
+      "passed": true
+    },
+    {
+      "name": "immutable_helper_actual_sha/docs/migration/lot5c-evidence/record-owner-source-inventory.mjs",
+      "passed": true
+    },
+    {
+      "name": "immutable_helper_actual_sha/scripts/run-native-cost-window.py",
+      "passed": true
+    },
+    {
+      "name": "immutable_helper_actual_sha/scripts/measure-native-loop-costs.mjs",
+      "passed": true
+    },
+    {
+      "name": "immutable_helper_actual_sha/scripts/compare-native-loop-costs.mjs",
+      "passed": true
+    },
+    {
+      "name": "immutable_helper_actual_sha/scripts/compare-native-cost-cohorts.mjs",
+      "passed": true
+    },
+    {
+      "name": "immutable_helper_actual_sha/scripts/review-native-cost-consolidation.py",
+      "passed": true
+    },
+    {
+      "name": "immutable_helper_actual_sha/scripts/review-native-global-cost-window.py",
+      "passed": true
+    },
+    {
+      "name": "immutable_helper_actual_sha/scripts/review-native-global-cost-budget.py",
+      "passed": true
+    },
+    {
+      "name": "helper_identity_matches_prior_attempt",
+      "passed": true
+    },
+    {
+      "name": "no_official_samples_decisions_or_readiness",
+      "passed": true,
+      "detail": {
+        "readiness.json": true,
+        "window.json": true,
+        "cohort1/baseline.json": true,
+        "cohort1/after.json": true,
+        "cohort2/baseline.json": true,
+        "cohort2/after.json": true,
+        "owner-growth-comparison.json": true,
+        "owner-growth-review.json": true,
+        "combined-comparison.json": true,
+        "aggregation-failure.json": true
+      }
+    },
+    {
+      "name": "all_reviewed_inputs_unchanged_at_end",
+      "passed": true
+    }
+  ],
+  "findings": [],
+  "dependencyLinksObserved": [
+    {
+      "path": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout/node_modules",
+      "candidatePath": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/node_modules",
+      "isSymlink": true,
+      "observedLinkTarget": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/node_modules",
+      "resolvedTarget": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/node_modules",
+      "candidateResolvedTarget": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/node_modules",
+      "targetExists": true
+    },
+    {
+      "path": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout/public/vendor/pyodide",
+      "candidatePath": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/public/vendor/pyodide",
+      "isSymlink": true,
+      "observedLinkTarget": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/public/vendor/pyodide",
+      "resolvedTarget": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/public/vendor/pyodide",
+      "candidateResolvedTarget": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/public/vendor/pyodide",
+      "targetExists": true
+    }
+  ],
+  "nativeGitChecks": [
+    {
+      "checkout": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout",
+      "reference": "1019d2eb929d7dc201a5c1f6edce5aa1c5dfa464",
+      "command": [
+        "git",
+        "diff",
+        "--quiet",
+        "1019d2eb929d7dc201a5c1f6edce5aa1c5dfa464",
+        "--",
+        "src/logos-engine",
+        "src/runtime"
+      ],
+      "exitCode": 0
+    },
+    {
+      "checkout": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout",
+      "reference": "805b30297dc1b715dbfd9f1197a9a8ba7b361b90",
+      "command": [
+        "git",
+        "diff",
+        "--quiet",
+        "805b30297dc1b715dbfd9f1197a9a8ba7b361b90",
+        "--",
+        "src/logos-engine",
+        "src/runtime"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "priorAttemptPreservation": {
+    "fileCount": 39,
+    "allListedFilesByteIdentical": true,
+    "retainedFailureNames": [
+      "baseline_dependency_equivalence_node_modules",
+      "baseline_dependency_equivalence_public/vendor/pyodide"
+    ],
+    "priorPreflightStatus": "static_input_review_failed",
+    "priorExecutionExitCode": 1
+  },
+  "freshCaptures": [
+    {
+      "role": "baseline",
+      "startedAt": "2026-11-11T17:41:25.680Z",
+      "finishedAt": "2026-11-11T17:42:09.388Z",
+      "forms": 4,
+      "actions": 31,
+      "report": {
+        "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/baseline-owner-graphs.json.gz",
+        "bytes": 5109323,
+        "sha256": "cd99971740e98723e239c25b3498839c6a4d01164e148637f6fda380717278e3"
+      },
+      "priorReport": {
+        "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/baseline-owner-graphs.json.gz",
+        "bytes": 5109271,
+        "sha256": "01aca0a4dde1029919b9dff233959f3aaa72820333dc1d7e3baea8c767e115b2"
+      },
+      "measuredCostSessions": 0
+    },
+    {
+      "role": "candidate",
+      "startedAt": "2026-11-11T17:42:39.037Z",
+      "finishedAt": "2026-11-11T17:43:21.625Z",
+      "forms": 4,
+      "actions": 31,
+      "report": {
+        "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/candidate-owner-graphs.json.gz",
+        "bytes": 5160779,
+        "sha256": "3212f4f2df298d908c094d7a18c908c16a8c8e21f8096946b95c8df30e7fb9f8"
+      },
+      "priorReport": {
+        "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-01/candidate-owner-graphs.json.gz",
+        "bytes": 5160803,
+        "sha256": "a39f71649496a2a0023658f6ebf4ff41d34a77fd479ce59edfadd9be4182462a"
+      },
+      "measuredCostSessions": 0
+    }
+  ],
+  "structure": {
+    "formsPerRole": 4,
+    "formsSha256": "89d4bb89f1e22ef73409d5e7b0497a745631b7f71fab50f51355dc1f2a20f183",
+    "pairedPoints": 58,
+    "attributedDeltas": 40,
+    "sourceFactCoverageExactlyEqualTo01": true,
+    "sourceDomainUnchanged": true,
+    "metricPaths": [
+      "observations[*].nodeCount",
+      "inspection[*].graphNodes",
+      "final.nodeCount",
+      "final.graphRevision"
+    ],
+    "qualificationChecks": 64,
+    "equivalenceReceiptChecks": 29
+  },
+  "staticPreflight": {
+    "checksPassed": 76,
+    "checksExpected": 76,
+    "unsatisfied": [],
+    "receipt": {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/static-preflight.json",
+      "bytes": 19919,
+      "sha256": "2bed63fe86914300d5933c98ed65cc0e222df308f44336836414603a5cd0e46b"
+    }
+  },
+  "noOfficialOutputObservations": {
+    "readiness.json": true,
+    "window.json": true,
+    "cohort1/baseline.json": true,
+    "cohort1/after.json": true,
+    "cohort2/baseline.json": true,
+    "cohort2/after.json": true,
+    "owner-growth-comparison.json": true,
+    "owner-growth-review.json": true,
+    "combined-comparison.json": true,
+    "aggregation-failure.json": true
+  },
+  "immutableHelperFingerprintsVerified": [
+    {
+      "path": "docs/migration/lot5c-evidence/check-cost-static-inputs.py",
+      "sha256": "5564a925956a16eefd011deb107e05f42687f7a04e224d37c6a0bac259374168",
+      "bytes": 38502
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/prepare-cost-protocol.py",
+      "sha256": "b8f5096ae5521306904168da48b1ee3e69045384d5fb8c88dc4441e3efebfce8",
+      "bytes": 34594
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/finalize-owner-cost-contract.py",
+      "bytes": 27103,
+      "sha256": "07a88bb23c8b7c4d95aab4cdde613f933d97023f03209abbc1783e2d257a07ed"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/consolidate-owner-costs.mjs",
+      "bytes": 61449,
+      "sha256": "69957840c81d50e3d7b68dedf4293b5aa9c4072f882fe1fc858f5e03815330b7"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/review-owner-costs.py",
+      "bytes": 81151,
+      "sha256": "452ccf903970230f5855458cd35f2f3f30224307026663ebd865b494986371df"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/capture-cost-owner-graphs.mjs",
+      "bytes": 28139,
+      "sha256": "177354ff2120fcd148688365c62b854a81ca30a49999f5d9e85a451171a3150d"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/qualify-cost-owner-graphs.mjs",
+      "bytes": 52657,
+      "sha256": "b1f4ae869ce9faf6f45faaace841950aa76de5821230ad16d3404ab646cb3e89"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/record-owner-source-inventory.mjs",
+      "bytes": 13603,
+      "sha256": "50c9275c331e1013b7d618dd93023f79826398aa191c34fb9c05680b01210d8d"
+    },
+    {
+      "path": "scripts/run-native-cost-window.py",
+      "sha256": "0ec9c69c859d0555e963643010d2254caee8c63d1c9a98ec07cd9af0ce0ce613",
+      "bytes": 8933
+    },
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59",
+      "bytes": 20670
+    },
+    {
+      "path": "scripts/compare-native-loop-costs.mjs",
+      "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb",
+      "bytes": 9861
+    },
+    {
+      "path": "scripts/compare-native-cost-cohorts.mjs",
+      "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34",
+      "bytes": 19460
+    },
+    {
+      "path": "scripts/review-native-cost-consolidation.py",
+      "sha256": "b13174cec5befbb816e70554fd5d47da215eae941b983e66f05b9dd4417b3bd4",
+      "bytes": 17810
+    },
+    {
+      "path": "scripts/review-native-global-cost-window.py",
+      "sha256": "9ab2ecd9d6ddf234e96332421a6e55937a766495c1a20dd223f4441d6b516940",
+      "bytes": 22204
+    },
+    {
+      "path": "scripts/review-native-global-cost-budget.py",
+      "sha256": "b4312bcdae058ba58c16b4e5e24cb53626496b38f8a154834e0452a43e97d341",
+      "bytes": 8476
+    }
+  ],
+  "scope": {
+    "rawGraphArchivesDecoded": false,
+    "rawJournalsDecoded": false,
+    "priorInventoryFilesVerifiedByStreamingHash": 39,
+    "newRawCaptureArchivesVerifiedByStreamingHash": 2,
+    "nativeTreeRehashed": false,
+    "trackedNativeFilesComparedByGit": true,
+    "nativeRuntimeExecuted": false,
+    "testSuiteExecuted": false,
+    "replaysExecuted": false,
+    "measurementExecuted": false,
+    "existingInputsEdited": false,
+    "readinessAsserted": false,
+    "isolationAsserted": false
+  },
+  "limits": [
+    "This receipt is an independent bounded review of repaired dependencies, retained attempt01 artifacts and prepared attempt02 inputs. It is not an official readiness or cost decision.",
+    "Both dependency links were checked directly against the exact existing candidate targets. Dependency directories were not traversed or executed.",
+    "All 39 explicitly inventoried prior files and both fresh compressed graph captures were checked by size and streaming SHA256 without decoding the raw graphs or journals.",
+    "Complete small fixture forms and source-fact coverage were compared directly with the previously reviewed01 records; the graph qualifier was not rerun and private graph semantics were not independently reconstructed.",
+    "Native unchangedness combines exact before/after inventory equality, retained static checks and bounded git diff --quiet against actual baseline1019d2e and frozen candidate805b3029. The entire native tree was not rehashed by this review.",
+    "Actual completed functional evidence and fresh cross-lane isolation remain separate prerequisites before official measurement."
+  ],
+  "quietChecks": [
+    {
+      "checkedAt": "2026-11-11T17:58:34.515983+00:00",
+      "lanes": [
+        {
+          "path": "/workspace/shared/sra-coordination/lot10b-status.json",
+          "quietRequested": false,
+          "requestId": "lot10b-cost-74143a-final-01",
+          "releasedAt": "2026-11-11T16:35:26.168981+00:00"
+        },
+        {
+          "path": "/workspace/shared/sra-coordination/lot10c-status.json",
+          "quietRequested": false,
+          "requestId": "lot10c-recr01-bb7d62-functional",
+          "releasedAt": "2026-11-11T17:53:53.132648+00:00"
+        }
+      ]
+    },
+    {
+      "checkedAt": "2026-11-11T17:58:34.694055+00:00",
+      "lanes": [
+        {
+          "path": "/workspace/shared/sra-coordination/lot10b-status.json",
+          "quietRequested": false,
+          "requestId": "lot10b-cost-74143a-final-01",
+          "releasedAt": "2026-11-11T16:35:26.168981+00:00"
+        },
+        {
+          "path": "/workspace/shared/sra-coordination/lot10c-status.json",
+          "quietRequested": false,
+          "requestId": "lot10c-recr01-bb7d62-functional",
+          "releasedAt": "2026-11-11T17:53:53.132648+00:00"
+        }
+      ]
+    }
+  ],
+  "commandsTerminal": true
+}

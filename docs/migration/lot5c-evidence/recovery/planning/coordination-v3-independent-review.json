@@ -1,0 +1,830 @@
+{
+  "schema": "logos-engine.lot5c-coordination-v3-independent-review.v1",
+  "status": "passed",
+  "reviewer": "lot5_site101_merge_audit",
+  "requestId": "lot5c-cost-a33a5f88-available-03",
+  "reviewScope": "Independent bounded source and documentary review of minimal v3 coordination copies and fresh performance04 bindings. No runtime, native proof, lifecycle rerun, full finalizer or cost execution.",
+  "subjects": [
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/source-manifest.json",
+      "bytes": 36806,
+      "sha256": "846e38686406140e8f0c975836faadf646e4c20b0bcbc833fe4e228912535e93"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-final-02/attempt-result.json",
+      "bytes": 806,
+      "sha256": "3f6d2083d6dc6afc515b42aa6518ac9defce9fa06b4b5974f4c213fbb2dc23a4"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-final-02/request.json",
+      "bytes": 2260,
+      "sha256": "8dfeeb1657be09764a45d5503cc5ff78c014f6e1bbfaf0fd566305ce6b12285c"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/recovery-02/retired-interactive-launchers.json",
+      "bytes": 1558,
+      "sha256": "6da6068afdde81008d5fd8e30c6d3c36dadd084dce5780d7a903c02aea0867db"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/recovery-02/retired-scratch-launcher.mjs",
+      "bytes": 172,
+      "sha256": "2fc625a965f44353000e7f958a49a71c54ffec3c10315073696e05858be4b6b7"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/recovery-02/terminal-independent-review.json",
+      "bytes": 14736,
+      "sha256": "a0be86344fcb91cd83350319e92d28de219cdd84b32c8bb1c9d08107a01dcda6"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/recovery-03/new-availability-review.json",
+      "bytes": 11774,
+      "sha256": "311fee246000bdb8757f0b008d86fab51982ad5e6dc6c9a960e7d5954b38fe46"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/recorded-regression-cases.json",
+      "bytes": 15556,
+      "sha256": "18684d23bf7122a9f88f85d8bdb6f557144f892e7f09f2ef7630cbb5a7e6bc33"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/source-archive.json",
+      "bytes": 103710,
+      "sha256": "a6182ee1961e258aa8f3a70f3388daf20db2f5d3ee75fe17e737f429ff5d0a51"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/source-manifest.json",
+      "bytes": 37772,
+      "sha256": "6fd96a8c19867ee6740db8293c14bf241d9929a31e24f391e95d3aee4c6fab66"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/test-scope.json",
+      "bytes": 7401,
+      "sha256": "91530b6fdfcfdb89db815b610d37e7988866aac610d4669c8c6f572822f0bdc1"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/validation-contract.json",
+      "bytes": 10771,
+      "sha256": "4a57ed369cc5e314a7a4f6babf61e51aa7b70e171c2b2a3586d296b79f8013ff"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/independent-readiness-input-review.json",
+      "bytes": 36942,
+      "sha256": "17118655a5e4803b2e965de673ef6b055ca965c21617ed5520e31fb44a39e70c"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/owner-structural-fixture.json",
+      "bytes": 60104,
+      "sha256": "6f8d45dc8d68e8d3a67c45a66ac1045d12d123c43c02ab66e4ac1a09b63191d5"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/readiness.json",
+      "bytes": 581225,
+      "sha256": "bf1caef4f9824367aad9564c9cffa3683137b07f6e74af753d67f52b9e52ff90"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/comparison-policy.json",
+      "bytes": 991,
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/coordination-repreparation.json",
+      "bytes": 13820,
+      "sha256": "ef57545d06d42aa4c2836ecc99d7a79cbc636146aa39a2d8e45d057ff8863998"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/declaration.json",
+      "bytes": 5661,
+      "sha256": "9c741d8597e5b864ba265cbab8adbf8cb8b7b15f3644ed86ed5e72f3a359a38c"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/global-budget-policy.json",
+      "bytes": 2348,
+      "sha256": "e60c27539dbcbc09af4e6d657e73bbb666e5449d41ae6e6cd75e1e8bd0454bcf"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/owner-contract-finalization.execution.json",
+      "bytes": 1202,
+      "sha256": "b7aeb66b6d9f6f721c72817927fbd607b3ca089036b5fc03a3b72242aa3f5033"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/owner-graph-attribution.json",
+      "bytes": 107007,
+      "sha256": "b33228947598d563935cee9b1d2bac70ba3b4c55b11018d306ea96c2933a8534"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/owner-growth-contract.json",
+      "bytes": 6009,
+      "sha256": "90050dc24aef8cadea1367bdff9bc64e0063d2a0fa325276117201fa06e2be90"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/owner-source-inventory.json",
+      "bytes": 123426,
+      "sha256": "b8fcb70f1fa56f0f5218698bf08d9764698590c7fbeaa2024179a3999501dac0"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/owner-structural-fixture.json",
+      "bytes": 60104,
+      "sha256": "3fd3dcf30a1e0f13fde9ca5700b0a7f164da56c7f5435ad343be765788e39160"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/preparation.json",
+      "bytes": 4411,
+      "sha256": "0e544c136ff82cd228adb7c078d4681ca4cdc0795fdd66ab4585b7a9d960c5d7"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/protocol-check.json",
+      "bytes": 429,
+      "sha256": "a65c7d24576459c82591b49c93ad757eb5710c396d0dc5873b5792e78ba22b0a"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/protocol-preparation.execution.json",
+      "bytes": 1669,
+      "sha256": "6706dd6ef1f16c206c2e7be973e73621dee827f49726309a06d5c1574f7994fb"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/protocol.md",
+      "bytes": 16466,
+      "sha256": "c8d38807961f0cf88face9b80d073c567a0463b37a2da96e1dabda7db6e10e04"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/static-preflight-command.execution.json",
+      "bytes": 1222,
+      "sha256": "1f205b6e8376780d1e0742d571b07284b3e8a526bcb3afee16b401d8d0a746d7"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/static-preflight.json",
+      "bytes": 19703,
+      "sha256": "04652e57624402dfb03a7617e72e4db625fa5343fa1406924d1ca2d6c13fd41f"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/structural-documentary-rebinding.json",
+      "bytes": 4659,
+      "sha256": "ef49568d4eebbb0eb50bee85538a0a30bdff9e6e882b68afa2088c35bacaa91b"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-04/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-04/comparison-policy.json",
+      "bytes": 991,
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-04/coordination-repreparation.json",
+      "bytes": 16708,
+      "sha256": "7b47a0412acfa9e2a6489c07c85a4ce0341027ac005452d6023ca9ec51ce737b"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-04/declaration.json",
+      "bytes": 5661,
+      "sha256": "e25bdadd4227edbb7f1fc11a56e61dfa87a10c4814e3c07ef4fc20dd592fb306"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-04/global-budget-policy.json",
+      "bytes": 2348,
+      "sha256": "24a2bf59eeaa442e0ce4704d4aeee3f2d09ac564273be9886a37aabe82eef4ba"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-04/owner-contract-finalization.execution.json",
+      "bytes": 1202,
+      "sha256": "a72af1f443772bf6014098bb1accef48652fe6fa6e03aa4c8337435931aafe37"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-04/owner-graph-attribution.json",
+      "bytes": 107007,
+      "sha256": "b33228947598d563935cee9b1d2bac70ba3b4c55b11018d306ea96c2933a8534"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-04/owner-growth-contract.json",
+      "bytes": 6009,
+      "sha256": "b6a039ec4725d6ac408147149faf180d31cf089b0e2097e27c45727848112fcc"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-04/owner-source-inventory.json",
+      "bytes": 123426,
+      "sha256": "b8fcb70f1fa56f0f5218698bf08d9764698590c7fbeaa2024179a3999501dac0"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-04/owner-structural-fixture.json",
+      "bytes": 60104,
+      "sha256": "49e5f031252281da4d49e58d40d6ffaac6d67a0f3c356b409541cb333199b939"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-04/preparation.json",
+      "bytes": 4411,
+      "sha256": "124a6953d7b7b097ed13210637fac844d2c4a0905db0991e89f6aef1bf90b0b5"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-04/protocol-check.json",
+      "bytes": 429,
+      "sha256": "7e668df42982501de068a138cd76d85369b852aea68e3d1eeb2ffd73acfd8e70"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-04/protocol-preparation.execution.json",
+      "bytes": 1669,
+      "sha256": "b973449546c8cb78c1717f274e2733ae2b3013105a5234d2917cfe88e5d5132c"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-04/protocol.md",
+      "bytes": 16466,
+      "sha256": "f1a58a87f924f73e22a1eee5c17a1eeacf1b1fd1d2090dbaa80e7abd48c71f39"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-04/static-preflight-command.execution.json",
+      "bytes": 1222,
+      "sha256": "bb3590cdb1e7b08f17a72136a774bec92edcd5963002acebd756831edef35f97"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-04/static-preflight.json",
+      "bytes": 19703,
+      "sha256": "a879db5d40eb3b1f5531c20fbbea5b1bb90ccc549c976d7877fb2cc6d5fa75db"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-04/structural-documentary-rebinding.json",
+      "bytes": 4743,
+      "sha256": "7458de03ab6d8fe33e4d9711aaceea5a5c7fbcda8d43db55adf80db96a27749b"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/coordinated-cost-controller-review.json",
+      "bytes": 14690,
+      "sha256": "36c20fd902531396299b44493d6cd72215029591f5ad12ff7f41f907b12cbc4f"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/coordination-tools-v2/implementation-receipt-02.json",
+      "bytes": 4081,
+      "sha256": "0d5e3492bf9a67d4a0ee4cd48b111125b1a54f9bb034cd7e153bb6d1aa64edfe"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/coordination-tools-v2/implementation-receipt.json",
+      "bytes": 4109,
+      "sha256": "12b678b9c4eed64d3f6e4ea09cd1d0778c6969b5988c941a566ba1922212bbed"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/coordination-tools-v2/operator-contract.json",
+      "bytes": 3893,
+      "sha256": "23fcd97a0dc01f809fec072c0075638c4aab78d53eea4fd07745c8b90eeeb1f3"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/coordination-tools-v2/push_lot5_checkpoint.mjs",
+      "bytes": 4953,
+      "sha256": "d2d610d16dc972c6f7263650caf89a06c10a441bc12d2405eb591a7e7f8d39c2"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/coordination-tools-v2/push_lot5_checkpoints_bounded.mjs",
+      "bytes": 7201,
+      "sha256": "84e8727e4b86a1a5e3d66bc843c4f3718a3d716c498fd232a810aab627665e04"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/coordination-tools-v2/README.md",
+      "bytes": 7684,
+      "sha256": "db7dbc92f49714e7009f6f48a9422374a0268e0d4f92c26a54a4ff7d1cf5b233"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/coordination-tools-v2/run-bounded-locked-command.py",
+      "bytes": 29004,
+      "sha256": "1cf15ba630657b8fe83bd81c98071b0b67965a93a5caa211a568655df338e3a6"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/coordination-tools-v2/test_bounded_locked_command.py",
+      "bytes": 19956,
+      "sha256": "9eb66818f4a187252f7ef532879a778247697ba00a20445b93e5a67ce66a1b51"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/coordination-tools-v2/test-execution-01.json",
+      "bytes": 80300,
+      "sha256": "82218b8c792bcb3237a64d9ad76394b0ca720cae67b2460125e9f58285a4da7d"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/coordination-tools-v2/test-execution-02.json",
+      "bytes": 88150,
+      "sha256": "4f2ac45fdd919996feb720d1ba1a9e48870ff95d896a520ea91356f2b61e7256"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/coordination-tools-v2/test-execution-03.json",
+      "bytes": 101914,
+      "sha256": "2cd3a9b230b1747c4e3b9802ed0e9889bb297c339c199ba1aeaaca60c415f1cc"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/coordination-v2-independent-review.json",
+      "bytes": 35702,
+      "sha256": "af90515bd2b10dde7b861a923190853566ba2ef657c371a9ecdb416337698d04"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/coordination-v2-preparation-03.json",
+      "bytes": 8353,
+      "sha256": "3041899cc214941f1f0e50c39dc29d572465f15569fdaf47434cfa5655d2a889"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/coordination-v3-preparation-01.json",
+      "bytes": 9730,
+      "sha256": "2fe58e9cd37c02d35b3bd8f9f7d0726031fc21f25ddc0ab16e52d0a32bd18007"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/cost-orchestration-v2-tests-01.execution.json",
+      "bytes": 1118,
+      "sha256": "0b1049a6c15773dc57013542bc9f72ded5462c1c707604fc634d8bb3aa8c2d3b"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/cost-orchestration-v2-tests-02.execution.json",
+      "bytes": 1118,
+      "sha256": "d5d16b08b8b23a94a850844c0ac19dfab84112a927fd25925d1757d92ed5d87c"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/cost-orchestration-v2-tests-03.execution.json",
+      "bytes": 1118,
+      "sha256": "22a4d7fb690f51391f5ed20c50e4e1720af2d3a67cb9c7ff65b3d44d28e8aa9b"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/cost-orchestration-v2-tests-03.log",
+      "bytes": 1140,
+      "sha256": "5214abdf76968e33c94f80117e0ae6f19e04682c27ce9046b88cf4db791417d3"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/cost-process-control-v2.py",
+      "bytes": 8499,
+      "sha256": "7e5fa20cdc5590cb28fdfbda24a9f493ec3e24534b9866fa366221a1a3a5a24c"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/finalize-readiness-5c-independent-review.json",
+      "bytes": 20160,
+      "sha256": "94f1451c32bf25bfe9bac5e40e1a92161356cf6063c0d96649dec1ca6da11b6a"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/finalize-readiness-5c-v2.py",
+      "bytes": 65022,
+      "sha256": "2372e634fdd493430d90ae0a6ba00d98421689ca9121861f88ec7281413a1ad7"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/finalize-readiness-5c-v3.py",
+      "bytes": 67027,
+      "sha256": "3abd980dd710d4741d32e89a4163c3ad5cc735ce450df6bdeee004353d51a118"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/finalize-readiness-5c.py",
+      "bytes": 51023,
+      "sha256": "715b8d1b6a92c2cee3ef9c5049201298468ee6bee55f7ceb2556bf927d98c55e"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/orchestrate-cost-available-03.py",
+      "bytes": 22795,
+      "sha256": "9cf2dde454d17cc24d0b6e7900e57badbc623d5283a64138c7d6db589ffb6b04"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/orchestrate-cost-recovery-02.py",
+      "bytes": 22791,
+      "sha256": "747b4ecf6d42b89ffc474b9a35ab87ec2c3e85898f1a824a309964df7318cf99"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/orchestrator-v2-tests-02.execution.json",
+      "bytes": 3806,
+      "sha256": "6e7496c46726a981244f552588b500a123517d074a0c545650924dfda3725351"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/orchestrator-v3-rebinding.json",
+      "bytes": 2778,
+      "sha256": "02f070f7dde623d8c3bc3d57ce1e55aae866c3246138a02a0233857ee73aff72"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/orchestrator-v3-targeted-tests.execution.json",
+      "bytes": 3177,
+      "sha256": "8a41ecfbd23c31f9a7c5ec6bde57f7869400db9eab8c3ce398f822cc7af1b642"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/run-coordinated-cost-5c-v2.py",
+      "bytes": 25586,
+      "sha256": "174bd2363d6a85f19d3bf4243d39067f7d8482cf77e7d4dbf070ca8f66673105"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/run-coordinated-cost-5c-v3.py",
+      "bytes": 25588,
+      "sha256": "07bfb3b94da98906b431272f94e8946ca7e4bd5b9deae1d798b9ef5239fd62c8"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/run-coordinated-cost-5c.py",
+      "bytes": 16154,
+      "sha256": "0967fd35e3727c9e7c3354d330665bc601eb8c88fb49af3eeee35879eb2b7e58"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/test-cost-orchestration-v2.py",
+      "bytes": 12314,
+      "sha256": "679a78b1282c1824a8d620977f8877afdcfdcc50fa0f28bc149c9e7b5ae59b22"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/test-orchestrate-cost-recovery-02.py",
+      "bytes": 14675,
+      "sha256": "1c16c2fa8e189ed1facfc9234cec8585b1c27cd12fdf8809b794608569635dbc"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/test-orchestrator-v3-rebinding.py",
+      "bytes": 3300,
+      "sha256": "5a563f40dbdf6826f1e7f39a5c58e60d087956a98cd30e5bb40c2223f3a39bdc"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/v3-controller-source.diff",
+      "bytes": 1300,
+      "sha256": "b2cab5e112578b406f6bd895c44622e7bce5dc85dfe18dbcabf8f8ffaaeb4033"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/v3-finalizer-source.diff",
+      "bytes": 15882,
+      "sha256": "3dd8fecc3ba3bbfa6bc120fe2e4005bd2b9651be939bbabafe92032075c0e1cb"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/v3-source-documentary-validation-command.execution.json",
+      "bytes": 1153,
+      "sha256": "0c1f1c92886fd577799e3ade9f7e30579fd821a445a4d06d8b28fddd360a8f1c"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/v3-source-documentary-validation-command.log",
+      "bytes": 354,
+      "sha256": "c567ce2b648e3d37517f6e7f46d897775cb23ae370465d0d5fbfa2745aeeec1a"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/v3-source-documentary-validation-command.log.gz",
+      "bytes": 264,
+      "sha256": "7ac40978660262d5a0ad5eb1a2ab711cd9d47bef8574627dbfc09aafa5b40aa6"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/v3-source-documentary-validation.json",
+      "bytes": 8053,
+      "sha256": "ed4f1887e16fdb8ff182be30d70b4e84cacf2e0b9714e4ee8946948064629ca2"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/v3-source-substitutions.json",
+      "bytes": 2795,
+      "sha256": "043105ae06b9c8b71462348a71a2a91f01d886c8f42542eee9c58f3be41381a1"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/v3-verify-source-and-documentary-bindings.py",
+      "bytes": 7431,
+      "sha256": "cab61f73b81c3fffd49d5ba1b83dbb81756eb511b15e5d817ef5066312af9713"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/run-evidence-command.py",
+      "bytes": 3904,
+      "sha256": "99b16a35eac1f12acb3063e43d303ffc020b3339109e22eff1f807d1e87e47db"
+    }
+  ],
+  "checks": [
+    {
+      "id": "exact_93_subject_fingerprints",
+      "passed": true,
+      "detail": "All93 named repository subjects independently hashed; paths are unique and relative to checkout root."
+    },
+    {
+      "id": "prior_v2_review_preserved",
+      "passed": true,
+      "detail": "Previous58-check source/TEMP review is retained, with all52 of its subjects unchanged."
+    },
+    {
+      "id": "parent_exact_11_substitutions",
+      "passed": true,
+      "detail": "No parent behavior change beyond the11 declared namespace/schema/phase substitutions."
+    },
+    {
+      "id": "controller_exact_4_substitutions",
+      "passed": true,
+      "detail": "REQUEST, PERF, COORD and REGISTRY_PATH only."
+    },
+    {
+      "id": "controller_all_bodies_unchanged",
+      "passed": true,
+      "detail": "All controller function/class AST bodies match reviewed v2."
+    },
+    {
+      "id": "finalizer_change_scope",
+      "passed": true,
+      "detail": "Only documentary predecessor validation and fresh namespace bindings change."
+    },
+    {
+      "id": "functional_readers_unchanged",
+      "passed": true,
+      "detail": "Evidence, unmeasured, verifier/native readers, formal/replay/common/browser and original preparation_02 match v2 AST."
+    },
+    {
+      "id": "process_helper_unchanged",
+      "passed": true,
+      "detail": "Prior process-group cleanup, gate/registry, subreaper and descriptor lifecycle evidence remains applicable."
+    },
+    {
+      "id": "wrapper_and_retained_tests_unchanged",
+      "passed": true,
+      "detail": "Transport wrapper and its retained18-case/239-check proof are exact prior subjects; no rerun or credential transport by this review."
+    },
+    {
+      "id": "new_parent_tests_3_of_3",
+      "passed": true,
+      "detail": "New namespace/configuration and fresh authorization cases only; historical13-case lifecycle proof remains retained."
+    },
+    {
+      "id": "legacy_ack01_02_explicitly_rejected",
+      "passed": true,
+      "detail": "Targeted harness explicitly rejects both old request IDs."
+    },
+    {
+      "id": "new_tests_temp_scope_only",
+      "passed": true,
+      "detail": "TEMP fixture tests do not create production quiet, EX acquisition or benchmark."
+    },
+    {
+      "id": "source_documentary_validation_28_of_28",
+      "passed": true,
+      "detail": "Writer's exact source-only execution receipt is bound;179 documentary inputs were verified."
+    },
+    {
+      "id": "documentary_validator_does_not_finalize",
+      "passed": true,
+      "detail": "Reviewed validator disables subprocess creation, blocks finalize/main and calls preparation() only."
+    },
+    {
+      "id": "source_documentary_command_terminal",
+      "passed": true,
+      "detail": "Actual terminal command receipt and354-byte log are bound."
+    },
+    {
+      "id": "static04_76_of_76",
+      "passed": true,
+      "detail": "Fresh static input receipt is bound, without functional-readiness or cost claim."
+    },
+    {
+      "id": "historical03_23_exact_members",
+      "passed": true,
+      "detail": "Named03 directory membership checked independently; complete content map retained in04 derivation and validated by179-input reader."
+    },
+    {
+      "id": "historical02_44_exact_members",
+      "passed": true,
+      "detail": "Named02 directory membership checked independently."
+    },
+    {
+      "id": "original02_preservation_map_retained",
+      "passed": true,
+      "detail": "04 keeps the exact44-file map originally recorded by03."
+    },
+    {
+      "id": "original84_review_remains_anchor",
+      "passed": true,
+      "detail": "SOURCE_PRIOR remains02; neither03 nor04 is mislabeled a new structural/functional capture."
+    },
+    {
+      "id": "historical01_39_preserved_by_anchor",
+      "passed": true,
+      "detail": "Original01 failures remain included through the unchanged original02 reader and inventory."
+    },
+    {
+      "id": "fixture02_03_single_path_delta",
+      "passed": true,
+      "detail": "Independent full small-fixture comparison: only cases.path differs."
+    },
+    {
+      "id": "fixture03_04_single_path_delta",
+      "passed": true,
+      "detail": "No shape, ordered boundary fact, attribution or capture content changes."
+    },
+    {
+      "id": "original_capture_times_retained",
+      "passed": true,
+      "detail": "All three fixture recordedAt values remain2026-11-11T17:44:01.815Z."
+    },
+    {
+      "id": "four_copies_identity_retained",
+      "passed": true,
+      "detail": "Cases, comparison policy, owner inventory and attribution are byte-identical03→04; finalizer also compares each against02."
+    },
+    {
+      "id": "declaration_differences_match_exact_record",
+      "passed": true,
+      "detail": "Only11 allowed metadata/path/head fields differ; source digests, tools, cohorts and populations remain unchanged."
+    },
+    {
+      "id": "global_policy_differences_match_exact_record",
+      "passed": true,
+      "detail": "Only four documentary timestamp/path/head fields differ."
+    },
+    {
+      "id": "owner_contract_differences_match_exact_record",
+      "passed": true,
+      "detail": "Only10 declared documentary path/hash/time fields differ."
+    },
+    {
+      "id": "baseline_candidate_exact",
+      "passed": true,
+      "detail": "Baseline Site102/1019d2e/74143a and candidate checkpoint37f3dabe/a33 declarations remain exact; no publication asserted."
+    },
+    {
+      "id": "strict_global_per_case_and_phase_exception",
+      "passed": true,
+      "detail": "Both STCK and SMLP must independently remain strictly below+10%; diagnostic phase overruns remain visible and may be accepted."
+    },
+    {
+      "id": "full_populations_and_abba_retained",
+      "passed": true,
+      "detail": "No excluded measured sessions, outlier removal or altered benchmark order."
+    },
+    {
+      "id": "binding_source_domain_unchanged",
+      "passed": true,
+      "detail": "Passive Binding source qualification remains closed; documentary rebinding does not claim additional native acquisition."
+    },
+    {
+      "id": "no_new_functional_or_capture_claim",
+      "passed": true,
+      "detail": "Retained functional results are not retimed or rerun by this preparation."
+    },
+    {
+      "id": "new_request04_paths_aligned",
+      "passed": true,
+      "detail": "Parent/controller/finalizer use available03/cost-final03/performance04 and the same fresh own-closure path."
+    },
+    {
+      "id": "fresh_three_lane_ack_rules_retained",
+      "passed": true,
+      "detail": "Exact new ID, true acknowledgment, no active/heavy/queued work, actual worker idle and timestamps after request remain required for6B/8A/10C."
+    },
+    {
+      "id": "fresh_own_closure_and_review_chronology",
+      "passed": true,
+      "detail": "Own closure must follow this completed review, precede the request and truthfully report all three workers terminal; this review does not precreate it."
+    },
+    {
+      "id": "availability600_window5400_child3600",
+      "passed": true,
+      "detail": "Availability is a separate pre-EX budget; actual acquisition starts the bounded active window."
+    },
+    {
+      "id": "single_existing_mutex_ex_no_retry",
+      "passed": true,
+      "detail": "Existing regular mutex device27/inode1971854 only; one EX|NB, no O_CREAT/replacement, preparation SH closed before controller."
+    },
+    {
+      "id": "release_cleanup_and_truthfulness_retained",
+      "passed": true,
+      "detail": "Unchanged reviewed bodies retain cleanup on leader exit/signals, independent registry cleanup, deadline/rejection release, and no false idle/cost acceptance claim."
+    },
+    {
+      "id": "old_cycle_closure_stays_historical",
+      "passed": true,
+      "detail": "Recovery02 expiration, zero EX/samples and release stay intact; old ACK/readiness cannot authorize03."
+    },
+    {
+      "id": "new_availability_limited_to_observed_instant",
+      "passed": true,
+      "detail": "10C's20:42:14.650043 successful EX/release is a new fact, not fresh peer isolation or guaranteed future availability."
+    },
+    {
+      "id": "no_new_production_artifacts",
+      "passed": true,
+      "detail": "No request/sentinel/readiness/window/lease/controller result/owner result or active child registry exists at final bounded verification."
+    },
+    {
+      "id": "four_quiet_flags_checked_before_reads",
+      "passed": true,
+      "detail": "8A's absent field is retained as absent; none of the four named quiet requests is true."
+    },
+    {
+      "id": "review_not_a_cost_or_publication_verdict",
+      "passed": true,
+      "detail": "This is source/documentary readiness-input review. Real fresh quiet/readiness/EX/cost and publication remain future, separately evidenced operations."
+    }
+  ],
+  "checksPassed": 44,
+  "checksTotal": 44,
+  "resolvedFindings": [],
+  "unresolvedFindings": [],
+  "sourceComparison": {
+    "parentSubstitutions": 11,
+    "controllerSubstitutions": 4,
+    "finalizerChangedDefinitions": [
+      "preparation",
+      "quiet",
+      "finalize"
+    ],
+    "unchangedFunctionalDefinitions": [
+      "Evidence",
+      "unmeasured",
+      "load_verifier",
+      "native_inventory",
+      "native_version",
+      "formal",
+      "regressions",
+      "common",
+      "browser",
+      "preparation_02"
+    ],
+    "helperAndTransportWrapperUnchanged": true
+  },
+  "preparationEvidence": {
+    "staticChecks": 76,
+    "sourceDocumentaryChecks": 28,
+    "sourceDocumentaryInputs": 179,
+    "historical03Members": 23,
+    "historical02Members": 44,
+    "originalIndependentPreparationChecks": 84,
+    "historical01Members": 39,
+    "fixtureOnlyChangedField": "cases.path",
+    "captureTimestampsRetained": true
+  },
+  "retainedFunctionalProofs": {
+    "qualification": "Historical results retained under unchanged readers and frozen proof manifests; no new execution by this review. Finalizer must perform its complete fresh binding checks.",
+    "testsPassed": 5339,
+    "testFiles": 138,
+    "recordedCases": 11,
+    "recordedChecksPassed": 187,
+    "recordedActions": 390,
+    "commonChecksPassed": 6818,
+    "projectGates": 5,
+    "fullOriginalRouterParity": false,
+    "passiveBindingNativeAcquisitionClaimed": false,
+    "browserQATimeOverrunRetained": true
+  },
+  "temporaryValidation": {
+    "newParentCasesPassed": 3,
+    "newParentCasesTotal": 3,
+    "newParentLegacyACK01and02Rejected": true,
+    "retainedParentV2Cases": 13,
+    "retainedCostLifecycleCases": 8,
+    "retainedTransportCases": 18,
+    "retainedTransportChecks": 239,
+    "unchangedLifecycleTestsReexecuted": false,
+    "independentReviewASTOnly": true
+  },
+  "historicalOnlyReadinessSubjects": [
+    "docs/migration/lot5c-evidence/recovery/performance-integrated-02/readiness.json"
+  ],
+  "budgets": {
+    "availabilitySeconds": 600,
+    "activeWindowAndAnalysesSeconds": 5400,
+    "childMaximumSeconds": 3600,
+    "maximumExclusiveAttempts": 1,
+    "automaticRetry": false
+  },
+  "futureConditions": [
+    "Complete all preparation, transport, browser/preview and reviewer work before writing the actual own closure; its timestamp must follow this review.",
+    "Issue the unique available03 request only after real own closure, then obtain exact fresh ACK snapshots from6B/8A/10C; ordinary peer work may finish normally.",
+    "Create fresh performance04 readiness bound to the new request, isolation, current source/review fingerprints and preserved valid functional evidence; old ACKs/readiness are historical only.",
+    "Close preparation SH, attempt the same existing mutex exactly once with EX|NB, retain actual process handles, and release automatically on refusal, expiry or error.",
+    "Accept cost only from the complete measured population and independent downstream reports, with each game's global median strictly below+10%; retain phase overruns and tails.",
+    "Publication supervision is a separate review and is not covered or authorized by this cost-source receipt."
+  ],
+  "nonblockingNotes": [
+    "Historical error-message labels mentioning v2 or preparation03 remain cosmetically stale; executable schema/path comparisons correctly target v3/performance04. Parent explicitly retained these strings to keep the minimal source diff.",
+    "The preparatory source reader validates179 documentary inputs; it is not a full readiness execution or a fresh functional/structural run."
+  ],
+  "reviewInvocationIncidents": [
+    {
+      "kind": "Output budget only",
+      "result": "An initial metadata response was truncated before JSON parsing; no mutation or source execution occurred. The exact small sources/receipts were then read with bounded selected output."
+    },
+    {
+      "chunkId": "0e661d",
+      "exitCode": 1,
+      "kind": "Reviewer assertion used an assumed changed-function name; no source/module execution or mutation occurred.",
+      "resolved": true,
+      "resolution": "Correct actual changed function name is finalize; corrected comparison passed without source execution."
+    }
+  ],
+  "scopeLimits": [
+    "No native/game source was opened or executed; no project test, replay, build, benchmark, EX probe, /proc inspection, holder search or network operation was performed.",
+    "No raw game journal or compressed graph was decoded. Existing581225-byte historical readiness was hashed only.",
+    "All93 explicit subjects were independently hashed; exact23/44 directory membership was checked. Full indirect historical content verification is bound to the source-only179-input validation and is rechecked by the finalizer; no fresh claim of individually reviewing every graph or native file is made.",
+    "Current functional input equality is represented by unchanged frozen manifests/retained proof and the finalizer's required validation; this review did not repeat native inventory hashing.",
+    "No future own closure, request, isolation, readiness, transport receipt, publication helper or roadmap is included among immutable subjects.",
+    "External availability was independently reviewed in the bound new-availability-review receipt; availability remains instantaneous and does not replace future EX or fresh ACKs.",
+    "All source reads used nonblocking SH on the existing mutex after fresh checks of the four named quiet flags."
+  ],
+  "newProductionRequestIssued": false,
+  "productionReadinessCreated": false,
+  "productionIsolationCreated": false,
+  "productionExclusiveLockAttempted": false,
+  "productionCostExecuted": false,
+  "nativeRuntimeExecuted": false,
+  "projectTestsExecuted": false,
+  "replaysExecuted": false,
+  "credentialsUsed": false,
+  "procInspected": false,
+  "lockHolderSearched": false,
+  "existingInputsEdited": false,
+  "lastVerificationAt": "2026-11-11T21:01:05.041003+00:00",
+  "quietChecks": {
+    "lot5c": false,
+    "lot6b": false,
+    "lot8a": null,
+    "lot10c": false
+  },
+  "allPriorReviewerCommandsTerminal": true,
+  "liveReviewerSessionIds": [],
+  "qualification": "Ready for the actual owner to close preparation and, after fresh genuine isolation, attempt the single new bounded cycle. This review does not assert production readiness, continuous isolation, cost acceptance or publication.",
+  "recordedAt": "2026-11-11T21:03:16.647506+00:00",
+  "finalQuietCheck": {
+    "lot5c": false,
+    "lot6b": false,
+    "lot8a": null,
+    "lot10c": false
+  }
+}

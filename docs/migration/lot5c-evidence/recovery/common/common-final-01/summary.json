@@ -1,0 +1,234 @@
+{
+  "schema": "logos-engine.lot5c-final-common-proof-summary.v1",
+  "recordedAt": "2026-11-11T17:47:33.965552+00:00",
+  "status": "passed_within_declared_final_common_scope",
+  "nativeVersion": "0.63.0",
+  "frozenSourceCommit": "805b30297dc1b715dbfd9f1197a9a8ba7b361b90",
+  "nativeManifest": {
+    "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/source-manifest.json",
+    "bytes": 37772,
+    "sha256": "6fd96a8c19867ee6740db8293c14bf241d9929a31e24f391e95d3aee4c6fab66"
+  },
+  "nativeFiles": 318,
+  "nativeDigest": "a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57",
+  "nativeCommonTests": 7,
+  "declaredScenarios": [
+    "positive",
+    "refutation",
+    "ambiguity",
+    "boundary",
+    "foreign-parent",
+    "passive-acquisition-bound",
+    "selected-acquisition-bound",
+    "level-clock-acquisition-bound"
+  ],
+  "nativeSuiteProof": {
+    "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/validation/delta-tests-run.json",
+    "bytes": 139954,
+    "sha256": "ce85bdbe5c2f15848a016c2168872676ec442dfc9e6d918205e6d21188fde62a"
+  },
+  "originalComparisonCases": [
+    {
+      "mode": "positive",
+      "receipt": {
+        "path": "docs/migration/lot5c-evidence/recovery/common/common-final-01/positive/original-comparison-per-case.json",
+        "bytes": 463424,
+        "sha256": "00579b97e771071b110b1e4541434b3b95550836fc031e612bed3b4bec6b88a8"
+      },
+      "checksPassed": 1895,
+      "checksTotal": 1895,
+      "operations": 124,
+      "actualReturns": 24,
+      "selectedReturns": 23,
+      "passiveReturns": 1,
+      "sourceMemoryPuts": 2,
+      "nativeMemoryPuts": 2,
+      "sourceStateRetentionChecks": 24,
+      "sourceStateRetentions": 24,
+      "coldOriginal": true,
+      "inputsUnchanged": true,
+      "nativeResultsUsedAsOracleInputs": false
+    },
+    {
+      "mode": "refutation",
+      "receipt": {
+        "path": "docs/migration/lot5c-evidence/recovery/common/common-final-01/refutation/original-comparison-per-case.json",
+        "bytes": 463463,
+        "sha256": "3788a7d28c6a777ee851ba8e4804db6650a5067a8aadc97250902f09413a100e"
+      },
+      "checksPassed": 1895,
+      "checksTotal": 1895,
+      "operations": 124,
+      "actualReturns": 24,
+      "selectedReturns": 23,
+      "passiveReturns": 1,
+      "sourceMemoryPuts": 1,
+      "nativeMemoryPuts": 1,
+      "sourceStateRetentionChecks": 24,
+      "sourceStateRetentions": 24,
+      "coldOriginal": true,
+      "inputsUnchanged": true,
+      "nativeResultsUsedAsOracleInputs": false
+    },
+    {
+      "mode": "ambiguity",
+      "receipt": {
+        "path": "docs/migration/lot5c-evidence/recovery/common/common-final-01/ambiguity/original-comparison-per-case.json",
+        "bytes": 388204,
+        "sha256": "a52aa3ba5955148f4ccca7a19d1bada82c943801d028575862b302ff5f52612f"
+      },
+      "checksPassed": 1229,
+      "checksTotal": 1229,
+      "operations": 50,
+      "actualReturns": 9,
+      "selectedReturns": 8,
+      "passiveReturns": 1,
+      "sourceMemoryPuts": 1,
+      "nativeMemoryPuts": 1,
+      "sourceStateRetentionChecks": 9,
+      "sourceStateRetentions": 9,
+      "coldOriginal": true,
+      "inputsUnchanged": true,
+      "nativeResultsUsedAsOracleInputs": false
+    },
+    {
+      "mode": "boundary",
+      "receipt": {
+        "path": "docs/migration/lot5c-evidence/recovery/common/common-final-01/boundary/original-comparison-per-case.json",
+        "bytes": 449548,
+        "sha256": "2d3ca650647efaa0abc64e59a0a4f2466c6dd49f6ea98874c1d19840c1379b08"
+      },
+      "checksPassed": 1799,
+      "checksTotal": 1799,
+      "operations": 114,
+      "actualReturns": 23,
+      "selectedReturns": 22,
+      "passiveReturns": 1,
+      "sourceMemoryPuts": 2,
+      "nativeMemoryPuts": 2,
+      "sourceStateRetentionChecks": 23,
+      "sourceStateRetentions": 23,
+      "coldOriginal": true,
+      "inputsUnchanged": true,
+      "nativeResultsUsedAsOracleInputs": false
+    }
+  ],
+  "originalExports": [
+    {
+      "mode": "positive",
+      "receipt": {
+        "path": "docs/migration/lot5c-evidence/recovery/common/common-final-01/positive/original-export-per-case.json",
+        "bytes": 226549,
+        "sha256": "0778170b46c5dacde938479a8e0bf9e3ba5034873446c9eae1141513883ff43b"
+      },
+      "originalFilesBefore": 1786,
+      "originalFilesAfter": 1786,
+      "inventoryBefore": "2c06ba8133eddb500e1cfc9ef7620f978e13530dc690b7255f457a2b7cf441f2",
+      "inventoryAfter": "2c06ba8133eddb500e1cfc9ef7620f978e13530dc690b7255f457a2b7cf441f2",
+      "sourceExceptions": 0
+    },
+    {
+      "mode": "refutation",
+      "receipt": {
+        "path": "docs/migration/lot5c-evidence/recovery/common/common-final-01/refutation/original-export-per-case.json",
+        "bytes": 226553,
+        "sha256": "a246f3a9cbf78ffc5a8eb5d018f4985f495693391128372e2af75bbd4ffd9778"
+      },
+      "originalFilesBefore": 1786,
+      "originalFilesAfter": 1786,
+      "inventoryBefore": "2c06ba8133eddb500e1cfc9ef7620f978e13530dc690b7255f457a2b7cf441f2",
+      "inventoryAfter": "2c06ba8133eddb500e1cfc9ef7620f978e13530dc690b7255f457a2b7cf441f2",
+      "sourceExceptions": 0
+    },
+    {
+      "mode": "ambiguity",
+      "receipt": {
+        "path": "docs/migration/lot5c-evidence/recovery/common/common-final-01/ambiguity/original-export-per-case.json",
+        "bytes": 226548,
+        "sha256": "6fb57669695442f0911c4388b6941aea6febffac318abaafe842d3bbaa89e98e"
+      },
+      "originalFilesBefore": 1786,
+      "originalFilesAfter": 1786,
+      "inventoryBefore": "2c06ba8133eddb500e1cfc9ef7620f978e13530dc690b7255f457a2b7cf441f2",
+      "inventoryAfter": "2c06ba8133eddb500e1cfc9ef7620f978e13530dc690b7255f457a2b7cf441f2",
+      "sourceExceptions": 0
+    },
+    {
+      "mode": "boundary",
+      "receipt": {
+        "path": "docs/migration/lot5c-evidence/recovery/common/common-final-01/boundary/original-export-per-case.json",
+        "bytes": 226549,
+        "sha256": "75d7349705869b52058f9aa8643a99864275083ff486834e971de632dbdad6a0"
+      },
+      "originalFilesBefore": 1786,
+      "originalFilesAfter": 1786,
+      "inventoryBefore": "2c06ba8133eddb500e1cfc9ef7620f978e13530dc690b7255f457a2b7cf441f2",
+      "inventoryAfter": "2c06ba8133eddb500e1cfc9ef7620f978e13530dc690b7255f457a2b7cf441f2",
+      "sourceExceptions": 0
+    }
+  ],
+  "executionReceipts": [
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/common/common-final-01/positive/original-export-per-case-command.execution.json",
+      "bytes": 1571,
+      "sha256": "8c40e800c842496bb84975d6143404a590590de87694cc58f3b8a71bed1949cf"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/common/common-final-01/positive/original-review-per-case-command.execution.json",
+      "bytes": 1671,
+      "sha256": "2f6e50535ea664f199ffee37ca51fc75ea7b7b1eed224f56119447eb10e9a440"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/common/common-final-01/refutation/original-export-per-case-command.execution.json",
+      "bytes": 1581,
+      "sha256": "1ba990b24daaf29525d9ad5dc182467ce892bdd247b78c5905dab0fa2869f01f"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/common/common-final-01/refutation/original-review-per-case-command.execution.json",
+      "bytes": 1683,
+      "sha256": "059bc4334397f0bde8863ac14c823a8877cd33cc948334605b3829a218d01147"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/common/common-final-01/ambiguity/original-export-per-case-command.execution.json",
+      "bytes": 1576,
+      "sha256": "3457efe6f4b70d6661f1d761be0521fddf9c15f0f8cdd675317e28f9cffc380c"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/common/common-final-01/ambiguity/original-review-per-case-command.execution.json",
+      "bytes": 1677,
+      "sha256": "3c575d2c7e91682a7221a6446cf41e5faef41294adc02ddaa7f672fdf87e5ce9"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/common/common-final-01/boundary/original-export-per-case-command.execution.json",
+      "bytes": 1571,
+      "sha256": "08e552fb118ee45316f1b07053615d4292ac114515ce57dcef3cc784d0efe9e1"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/common/common-final-01/boundary/original-review-per-case-command.execution.json",
+      "bytes": 1671,
+      "sha256": "f20d800f42feadde75fa784cd9d544cb79df10ffff51218ac10c7dafbcc42fb1"
+    }
+  ],
+  "commandsPassed": 8,
+  "checksPassed": 6818,
+  "checksTotal": 6818,
+  "operations": 412,
+  "actualReturns": 80,
+  "selectedReturns": 76,
+  "passiveReturns": 4,
+  "sourceStateRetentions": 80,
+  "sourceStateRetentionChecks": 80,
+  "sourceMemoryPuts": 6,
+  "nativeMemoryPuts": 6,
+  "sourceExceptions": 0,
+  "all867FrozenExecutionInputsUnchanged": true,
+  "scopeDocumentBinding": {
+    "testScopeFileArchivedDirectly": false,
+    "sha256BoundByArchivedValidationContractAndSeparateBinding": true,
+    "all138TestsAndActualRunnerReconciliationArchived": true,
+    "allThreeTestListsEqual": true,
+    "qualification": "A documentary membership assertion stopped at17:39:16UTC because test-scope.json is not itself an archive member. The actual runner uses archived final-scope-reconciliation.json; the archived validation contract also retains the complete list and the exact external scope-file hash. Subsequent checks verify the separate binding without editing the immutable archive."
+  },
+  "earlierCommon02": "Retained at its original35e03bc9 native freeze; not relabeled as this fresh execution.",
+  "qualification": "Fresh native common tests and independent cold original Binding/AttentionMemory comparisons on the finala33 freeze. Four synthetic declared source cases and their actual retention are compared separately. The foreign-parent public LIFE prefix and three acquisition-bound scenarios retain their own native scope. This does not establish entire original StrategyRouter parity, a new live-game campaign, acceptable cost or publication."
+}

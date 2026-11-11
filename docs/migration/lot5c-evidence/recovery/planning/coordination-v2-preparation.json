@@ -1,0 +1,184 @@
+{
+  "schema": "logos-engine.lot5c-coordination-v2-preparation.v1",
+  "status": "sources_and_temp_tests_ready_for_independent_review",
+  "recordedAt": "2026-11-11T19:58:13.449418+00:00",
+  "requestId": "lot5c-cost-a33a5f88-recovery-02",
+  "subjects": [
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/cost-process-control-v2.py",
+      "bytes": 8499,
+      "sha256": "7e5fa20cdc5590cb28fdfbda24a9f493ec3e24534b9866fa366221a1a3a5a24c"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/run-coordinated-cost-5c-v2.py",
+      "bytes": 24430,
+      "sha256": "381a903abbb977b08bbcb7ab484f2f7ff3d030bf92af8c22de85c12f9f9a5114"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/finalize-readiness-5c-v2.py",
+      "bytes": 64989,
+      "sha256": "194c2127a1ffad10f81aa381f48751c364a5e99c78f280ff9c2969b85f36f19e"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/test-cost-orchestration-v2.py",
+      "bytes": 11304,
+      "sha256": "f9978eb958a9e76ee5e60f9f12271f869860f779fe393ac37e7b541a4204aa00"
+    }
+  ],
+  "historicalSourcesPreserved": [
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/run-coordinated-cost-5c.py",
+      "bytes": 16154,
+      "sha256": "0967fd35e3727c9e7c3354d330665bc601eb8c88fb49af3eeee35879eb2b7e58"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/finalize-readiness-5c.py",
+      "bytes": 51023,
+      "sha256": "715b8d1b6a92c2cee3ef9c5049201298468ee6bee55f7ceb2556bf927d98c55e"
+    }
+  ],
+  "semanticSourceChecks": [
+    {
+      "id": "unchanged_finalizer_Evidence",
+      "passed": true
+    },
+    {
+      "id": "unchanged_finalizer_unmeasured",
+      "passed": true
+    },
+    {
+      "id": "unchanged_finalizer_load_verifier",
+      "passed": true
+    },
+    {
+      "id": "unchanged_finalizer_native_inventory",
+      "passed": true
+    },
+    {
+      "id": "unchanged_finalizer_native_version",
+      "passed": true
+    },
+    {
+      "id": "unchanged_finalizer_formal",
+      "passed": true
+    },
+    {
+      "id": "unchanged_finalizer_regressions",
+      "passed": true
+    },
+    {
+      "id": "unchanged_finalizer_common",
+      "passed": true
+    },
+    {
+      "id": "unchanged_finalizer_browser",
+      "passed": true
+    },
+    {
+      "id": "original02_preparation_body_preserved",
+      "passed": true
+    },
+    {
+      "id": "declared_cost_commands_options_order_preserved",
+      "passed": true
+    }
+  ],
+  "checkedCount": 11,
+  "preparation03": {
+    "staticPreflight": {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/static-preflight.json",
+      "bytes": 19703,
+      "sha256": "04652e57624402dfb03a7617e72e4db625fa5343fa1406924d1ca2d6c13fd41f"
+    },
+    "checksPassed": 76,
+    "documentaryRebinding": {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/structural-documentary-rebinding.json",
+      "bytes": 4659,
+      "sha256": "ef49568d4eebbb0eb50bee85538a0a30bdff9e6e882b68afa2088c35bacaa91b"
+    },
+    "repreparation": {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/coordination-repreparation.json",
+      "bytes": 13820,
+      "sha256": "ef57545d06d42aa4c2836ecc99d7a79cbc636146aa39a2d8e45d057ff8863998"
+    },
+    "original02FilesPreserved": 44,
+    "original01FilesPreservedByPrior84CheckReview": 39
+  },
+  "temporaryTests": {
+    "receipt": {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/cost-orchestration-v2-tests-02.execution.json",
+      "bytes": 1118,
+      "sha256": "d5d16b08b8b23a94a850844c0ac19dfab84112a927fd25925d1757d92ed5d87c"
+    },
+    "log": {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/cost-orchestration-v2-tests-02.log",
+      "bytes": 1039,
+      "sha256": "f064471d8b10d2f312afc00dcb3bf0c30967287c4826d39b2292f01ac99a5c36"
+    },
+    "passed": 7,
+    "total": 7,
+    "priorFailedFixtureAttemptRetained": {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/cost-orchestration-v2-tests-01.execution.json",
+      "bytes": 1118,
+      "sha256": "0b1049a6c15773dc57013542bc9f72ded5462c1c707604fc634d8bb3aa8c2d3b"
+    },
+    "priorFailureCause": "Two synthetic test fixture errors: malformed dummy descendant Python string and synthetic manifest paths outside the temporary root. Both stopped before native or benchmark launch; fixtures alone were corrected.",
+    "scenarios": [
+      "temporary EX reacquisition after close without LOCK_UN while dummy child alive",
+      "successful dummy child and cleared group registry",
+      "global timeout and complete group cleanup",
+      "leader exit with surviving TERM-ignoring descendant",
+      "catchable TERM cleanup",
+      "single EXNB refusal with quiet release and no child launch",
+      "journal error after EX still unlocks/releases",
+      "blocked dummy launcher error after EX still releases"
+    ],
+    "productionMutexUsedByTests": "Ordinary surrounding SH only; all tested EX locks are new temporary files",
+    "productionQuietMetadataUsedByTests": false,
+    "nativeOrBenchmarkExecuted": false
+  },
+  "syntaxAndCliHelp": {
+    "astPassed": true,
+    "helpExitCodes": {
+      "cost-process-control-v2.py": 0,
+      "run-coordinated-cost-5c-v2.py": 0,
+      "finalize-readiness-5c-v2.py": 0
+    }
+  },
+  "launchApi": {
+    "controller": [
+      "python",
+      "-B",
+      "docs/migration/lot5c-evidence/recovery/planning/run-coordinated-cost-5c-v2.py",
+      "--execute",
+      "--availability-deadline",
+      "<exact request availabilityDeadline ISO UTC>"
+    ],
+    "controllerMustNotHaveOuterSharedLock": true,
+    "finalizerMandatoryArgs": [
+      "--regression-launch-receipt",
+      "docs/migration/lot5c-evidence/recovery/integrated-final-01/regressions-preparation/retry-driver-launch.execution.json",
+      "--isolation-receipt",
+      "docs/migration/lot5c-evidence/recovery/coordination/cost-final-02/isolation.json"
+    ],
+    "finalizerMustUseOrdinaryNonblockingSharedLock": true,
+    "orchestratorOwnedByRoot": "docs/migration/lot5c-evidence/recovery/planning/orchestrate-cost-recovery-02.py",
+    "requiredGlobalReview": "docs/migration/lot5c-evidence/recovery/planning/coordination-v2-independent-review.json",
+    "newCanonicalReadiness": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/readiness.json",
+    "windowLease": "docs/migration/lot5c-evidence/recovery/coordination/cost-final-02/window-lease.json",
+    "liveChildRegistry": "/workspace/shared/sra-coordination/lot5c-recovery-02-active-children.json"
+  },
+  "budgets": {
+    "availabilitySeconds": 600,
+    "exclusiveAttempts": 1,
+    "retries": 0,
+    "windowAndAnalysisSeconds": 5400,
+    "childSeconds": 3600
+  },
+  "readinessCreated": false,
+  "quietRequestIssued": false,
+  "productionControllerExecuted": false,
+  "measurementExecuted": false,
+  "allOwnCommandsTerminal": true,
+  "qualification": "New orchestration only. Functional/native proofs, source digests, benchmark tools/options/populations, strict complete-session per-game +10% threshold, phase diagnostics, and historical strict refusal remain unchanged. Production is left for root after independent review and actual fresh request/ACKs."
+}

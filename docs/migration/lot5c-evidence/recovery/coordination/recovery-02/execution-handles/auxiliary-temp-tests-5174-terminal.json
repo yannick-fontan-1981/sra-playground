@@ -1,0 +1,17 @@
+{
+  "schema": "logos-engine.lot5c.tool-session-terminal.v1",
+  "sessionId": 5174,
+  "exitCode": 0,
+  "terminalChunkId": "70afaf",
+  "observedAt": "2026-11-11T19:47:30.421423+00:00",
+  "source": "tools.write_stdin terminal result",
+  "scope": "independent temporary coordination tests only",
+  "credentialsUsed": false,
+  "remainingCommandQueued": false,
+  "result": {
+    "casesPassed": 18,
+    "casesPlanned": 18,
+    "checksPassed": 239,
+    "checksTotal": 239
+  }
+}

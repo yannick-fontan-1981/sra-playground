@@ -1,0 +1,862 @@
+{
+  "schema": "logos-engine.lot5c.bounded-command-v3-focused-tests.v1",
+  "status": "passed",
+  "startedAt": "2026-11-11T21:23:40.081642+00:00",
+  "wrapper": {
+    "file": "run-bounded-command.py",
+    "bytes": 28896,
+    "sha256": "cef0c238244e587afa94a822264861c12017cec919608d5a10cfe5610ecc60fe"
+  },
+  "retainedExerciseSource": {
+    "file": "test_bounded_locked_command.py",
+    "bytes": 19956,
+    "sha256": "9eb66818f4a187252f7ef532879a778247697ba00a20445b93e5a67ce66a1b51"
+  },
+  "fullEighteenCaseSuiteReexecuted": false,
+  "actualNodeOrGitHelpersExecuted": false,
+  "productionPerformanceMutexOpenedOrAcquired": false,
+  "publicationExecuted": false,
+  "cases": [
+    {
+      "name": "ordinary_success_with_temp_ex_and_prospective_publication",
+      "passed": true,
+      "durationSeconds": 0.086409,
+      "checks": [
+        {
+          "name": "expected_exit_code",
+          "passed": true
+        },
+        {
+          "name": "expected_terminal_status",
+          "passed": true
+        },
+        {
+          "name": "expected_terminal_reason",
+          "passed": true
+        },
+        {
+          "name": "cleanup_complete",
+          "passed": true
+        },
+        {
+          "name": "no_dummy_credential_in_console_or_receipt",
+          "passed": true
+        },
+        {
+          "name": "tool_session_id_not_fabricated",
+          "passed": true
+        },
+        {
+          "name": "child_spawn_matches_expectation",
+          "passed": true
+        },
+        {
+          "name": "lock_acquired_matches_expectation",
+          "passed": true
+        },
+        {
+          "name": "child_tty_echo_disabled",
+          "passed": true
+        },
+        {
+          "name": "lock_descriptor_not_inherited",
+          "passed": true
+        },
+        {
+          "name": "git_hooks_disabled_even_with_inherited_override",
+          "passed": true
+        },
+        {
+          "name": "leader_terminal",
+          "passed": true
+        },
+        {
+          "name": "lock_free_after_terminal",
+          "passed": true
+        },
+        {
+          "name": "performance_mutex_not_accessed",
+          "passed": true
+        },
+        {
+          "name": "publication_mutex_not_imposed_on_ordinary_transport",
+          "passed": true
+        }
+      ],
+      "receipt": {
+        "automaticRetry": false,
+        "childCloseFds": true,
+        "childExitCode": 0,
+        "childHandshakeAt": "2026-11-11T21:23:40.155538+00:00",
+        "childInputDeliveredAt": "2026-11-11T21:23:40.155620+00:00",
+        "childOutputBytes": {
+          "stderr": 54,
+          "stdout": 240
+        },
+        "childPid": 7,
+        "childProcessGroup": 7,
+        "childPtyEchoDisabled": true,
+        "childStarted": true,
+        "childStartedAt": "2026-11-11T21:23:40.128913+00:00",
+        "cleanup": {
+          "childStarted": true,
+          "complete": true,
+          "leaderExitCode": 0,
+          "processGroup": 7,
+          "reapedDescendants": 0,
+          "signals": []
+        },
+        "dependencies": [],
+        "durationSeconds": 0.032525,
+        "exitCode": 0,
+        "finishedAt": "2026-11-11T21:23:40.159883+00:00",
+        "helper": "temporary-stand-in",
+        "helperFingerprint": {
+          "bytes": 2998,
+          "file": "fake_helper.py",
+          "sha256": "6b441e037c4ddd9a41d9d3e597646d7912a33e08e1c0c5dc65be3a97888db2d0"
+        },
+        "initialCoordination": [
+          {
+            "lane": "lot5c",
+            "officialPerformanceActive": false,
+            "prospectiveQuietRequested": true,
+            "signal": "explicit_owner_flag",
+            "statusSha256": "ebcbd7377802bd73cc5089aa73cea083ac4e18f728e2a3d6a8e6feb7b5fda727"
+          },
+          {
+            "lane": "lot6b",
+            "officialPerformanceActive": false,
+            "prospectiveQuietRequested": true,
+            "signal": "explicit_owner_flag",
+            "statusSha256": "ebcbd7377802bd73cc5089aa73cea083ac4e18f728e2a3d6a8e6feb7b5fda727"
+          },
+          {
+            "lane": "lot8a",
+            "officialPerformanceActive": false,
+            "prospectiveQuietRequested": true,
+            "signal": "explicit_owner_flag",
+            "statusSha256": "ebcbd7377802bd73cc5089aa73cea083ac4e18f728e2a3d6a8e6feb7b5fda727"
+          },
+          {
+            "lane": "lot10c",
+            "officialPerformanceActive": false,
+            "prospectiveQuietRequested": true,
+            "signal": "explicit_owner_flag",
+            "statusSha256": "ebcbd7377802bd73cc5089aa73cea083ac4e18f728e2a3d6a8e6feb7b5fda727"
+          }
+        ],
+        "inputBytesRead": 138,
+        "inputCompletedAt": "2026-11-11T21:23:40.128018+00:00",
+        "inputEchoDisabled": true,
+        "limits": {
+          "handshakeSeconds": 0.4,
+          "inputBytes": 65536,
+          "inputSeconds": 1.0,
+          "killGraceSeconds": 1.5,
+          "outputBytes": 1048576,
+          "termGraceSeconds": 0.15,
+          "workSeconds": 1.5
+        },
+        "lockAcquired": false,
+        "partialOperationalSideEffectsPossible": false,
+        "performanceMutexAccessed": false,
+        "postInputCoordination": [
+          {
+            "lane": "lot5c",
+            "officialPerformanceActive": false,
+            "prospectiveQuietRequested": true,
+            "signal": "explicit_owner_flag",
+            "statusSha256": "ebcbd7377802bd73cc5089aa73cea083ac4e18f728e2a3d6a8e6feb7b5fda727"
+          },
+          {
+            "lane": "lot6b",
+            "officialPerformanceActive": false,
+            "prospectiveQuietRequested": true,
+            "signal": "explicit_owner_flag",
+            "statusSha256": "ebcbd7377802bd73cc5089aa73cea083ac4e18f728e2a3d6a8e6feb7b5fda727"
+          },
+          {
+            "lane": "lot8a",
+            "officialPerformanceActive": false,
+            "prospectiveQuietRequested": true,
+            "signal": "explicit_owner_flag",
+            "statusSha256": "ebcbd7377802bd73cc5089aa73cea083ac4e18f728e2a3d6a8e6feb7b5fda727"
+          },
+          {
+            "lane": "lot10c",
+            "officialPerformanceActive": false,
+            "prospectiveQuietRequested": true,
+            "signal": "explicit_owner_flag",
+            "statusSha256": "ebcbd7377802bd73cc5089aa73cea083ac4e18f728e2a3d6a8e6feb7b5fda727"
+          }
+        ],
+        "preLaunchCoordination": [
+          {
+            "lane": "lot5c",
+            "officialPerformanceActive": false,
+            "prospectiveQuietRequested": true,
+            "signal": "explicit_owner_flag",
+            "statusSha256": "ebcbd7377802bd73cc5089aa73cea083ac4e18f728e2a3d6a8e6feb7b5fda727"
+          },
+          {
+            "lane": "lot6b",
+            "officialPerformanceActive": false,
+            "prospectiveQuietRequested": true,
+            "signal": "explicit_owner_flag",
+            "statusSha256": "ebcbd7377802bd73cc5089aa73cea083ac4e18f728e2a3d6a8e6feb7b5fda727"
+          },
+          {
+            "lane": "lot8a",
+            "officialPerformanceActive": false,
+            "prospectiveQuietRequested": true,
+            "signal": "explicit_owner_flag",
+            "statusSha256": "ebcbd7377802bd73cc5089aa73cea083ac4e18f728e2a3d6a8e6feb7b5fda727"
+          },
+          {
+            "lane": "lot10c",
+            "officialPerformanceActive": false,
+            "prospectiveQuietRequested": true,
+            "signal": "explicit_owner_flag",
+            "statusSha256": "ebcbd7377802bd73cc5089aa73cea083ac4e18f728e2a3d6a8e6feb7b5fda727"
+          }
+        ],
+        "publicationMutexManagedHere": false,
+        "rawChildOutputStored": false,
+        "rawInputStored": false,
+        "results": [
+          {
+            "branch": "refs/heads/lot5c-recovery-checkpoint-20261111",
+            "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "remoteHead": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "sitePublicationPerformed": false,
+            "status": "pushed_and_verified"
+          }
+        ],
+        "schema": "logos-engine.lot5c.bounded-command.v3",
+        "sitePublicationPerformed": false,
+        "startedAt": "2026-11-11T21:23:40.127367+00:00",
+        "status": "passed",
+        "toolSessionBinding": "external_root_record_required",
+        "toolSessionId": null,
+        "wrapperPid": 6
+      },
+      "testObservation": {
+        "leader": 7,
+        "group": 7,
+        "echoOff": true,
+        "lockFdAbsent": true,
+        "hooksDisabled": true,
+        "inputBytes": 138
+      }
+    },
+    {
+      "name": "nonzero_cleanup_with_temp_ex",
+      "passed": true,
+      "durationSeconds": 0.098809,
+      "checks": [
+        {
+          "name": "expected_exit_code",
+          "passed": true
+        },
+        {
+          "name": "expected_terminal_status",
+          "passed": true
+        },
+        {
+          "name": "expected_terminal_reason",
+          "passed": true
+        },
+        {
+          "name": "cleanup_complete",
+          "passed": true
+        },
+        {
+          "name": "no_dummy_credential_in_console_or_receipt",
+          "passed": true
+        },
+        {
+          "name": "tool_session_id_not_fabricated",
+          "passed": true
+        },
+        {
+          "name": "child_spawn_matches_expectation",
+          "passed": true
+        },
+        {
+          "name": "lock_acquired_matches_expectation",
+          "passed": true
+        },
+        {
+          "name": "child_tty_echo_disabled",
+          "passed": true
+        },
+        {
+          "name": "lock_descriptor_not_inherited",
+          "passed": true
+        },
+        {
+          "name": "git_hooks_disabled_even_with_inherited_override",
+          "passed": true
+        },
+        {
+          "name": "leader_terminal",
+          "passed": true
+        },
+        {
+          "name": "lock_free_after_terminal",
+          "passed": true
+        },
+        {
+          "name": "performance_mutex_not_accessed",
+          "passed": true
+        },
+        {
+          "name": "publication_mutex_not_imposed_on_ordinary_transport",
+          "passed": true
+        }
+      ],
+      "receipt": {
+        "automaticRetry": false,
+        "childCloseFds": true,
+        "childExitCode": 7,
+        "childHandshakeAt": "2026-11-11T21:23:40.254630+00:00",
+        "childInputDeliveredAt": "2026-11-11T21:23:40.254735+00:00",
+        "childOutputBytes": {
+          "stderr": 101,
+          "stdout": 62
+        },
+        "childPid": 9,
+        "childProcessGroup": 9,
+        "childPtyEchoDisabled": true,
+        "childStarted": true,
+        "childStartedAt": "2026-11-11T21:23:40.221716+00:00",
+        "cleanup": {
+          "childStarted": true,
+          "complete": true,
+          "leaderExitCode": 7,
+          "processGroup": 9,
+          "reapedDescendants": 0,
+          "signals": []
+        },
+        "dependencies": [],
+        "durationSeconds": 0.04064,
+        "exitCode": 1,
+        "finishedAt": "2026-11-11T21:23:40.259498+00:00",
+        "helper": "temporary-stand-in",
+        "helperFingerprint": {
+          "bytes": 2998,
+          "file": "fake_helper.py",
+          "sha256": "6b441e037c4ddd9a41d9d3e597646d7912a33e08e1c0c5dc65be3a97888db2d0"
+        },
+        "initialCoordination": [
+          {
+            "lane": "lot5c",
+            "officialPerformanceActive": false,
+            "prospectiveQuietRequested": true,
+            "signal": "explicit_owner_flag",
+            "statusSha256": "ebcbd7377802bd73cc5089aa73cea083ac4e18f728e2a3d6a8e6feb7b5fda727"
+          },
+          {
+            "lane": "lot6b",
+            "officialPerformanceActive": false,
+            "prospectiveQuietRequested": true,
+            "signal": "explicit_owner_flag",
+            "statusSha256": "ebcbd7377802bd73cc5089aa73cea083ac4e18f728e2a3d6a8e6feb7b5fda727"
+          },
+          {
+            "lane": "lot8a",
+            "officialPerformanceActive": false,
+            "prospectiveQuietRequested": true,
+            "signal": "explicit_owner_flag",
+            "statusSha256": "ebcbd7377802bd73cc5089aa73cea083ac4e18f728e2a3d6a8e6feb7b5fda727"
+          },
+          {
+            "lane": "lot10c",
+            "officialPerformanceActive": false,
+            "prospectiveQuietRequested": true,
+            "signal": "explicit_owner_flag",
+            "statusSha256": "ebcbd7377802bd73cc5089aa73cea083ac4e18f728e2a3d6a8e6feb7b5fda727"
+          }
+        ],
+        "inputBytesRead": 138,
+        "inputCompletedAt": "2026-11-11T21:23:40.220865+00:00",
+        "inputEchoDisabled": true,
+        "limits": {
+          "handshakeSeconds": 0.4,
+          "inputBytes": 65536,
+          "inputSeconds": 1.0,
+          "killGraceSeconds": 1.5,
+          "outputBytes": 1048576,
+          "termGraceSeconds": 0.15,
+          "workSeconds": 1.5
+        },
+        "lockAcquired": false,
+        "partialOperationalSideEffectsPossible": true,
+        "performanceMutexAccessed": false,
+        "postInputCoordination": [
+          {
+            "lane": "lot5c",
+            "officialPerformanceActive": false,
+            "prospectiveQuietRequested": true,
+            "signal": "explicit_owner_flag",
+            "statusSha256": "ebcbd7377802bd73cc5089aa73cea083ac4e18f728e2a3d6a8e6feb7b5fda727"
+          },
+          {
+            "lane": "lot6b",
+            "officialPerformanceActive": false,
+            "prospectiveQuietRequested": true,
+            "signal": "explicit_owner_flag",
+            "statusSha256": "ebcbd7377802bd73cc5089aa73cea083ac4e18f728e2a3d6a8e6feb7b5fda727"
+          },
+          {
+            "lane": "lot8a",
+            "officialPerformanceActive": false,
+            "prospectiveQuietRequested": true,
+            "signal": "explicit_owner_flag",
+            "statusSha256": "ebcbd7377802bd73cc5089aa73cea083ac4e18f728e2a3d6a8e6feb7b5fda727"
+          },
+          {
+            "lane": "lot10c",
+            "officialPerformanceActive": false,
+            "prospectiveQuietRequested": true,
+            "signal": "explicit_owner_flag",
+            "statusSha256": "ebcbd7377802bd73cc5089aa73cea083ac4e18f728e2a3d6a8e6feb7b5fda727"
+          }
+        ],
+        "preLaunchCoordination": [
+          {
+            "lane": "lot5c",
+            "officialPerformanceActive": false,
+            "prospectiveQuietRequested": true,
+            "signal": "explicit_owner_flag",
+            "statusSha256": "ebcbd7377802bd73cc5089aa73cea083ac4e18f728e2a3d6a8e6feb7b5fda727"
+          },
+          {
+            "lane": "lot6b",
+            "officialPerformanceActive": false,
+            "prospectiveQuietRequested": true,
+            "signal": "explicit_owner_flag",
+            "statusSha256": "ebcbd7377802bd73cc5089aa73cea083ac4e18f728e2a3d6a8e6feb7b5fda727"
+          },
+          {
+            "lane": "lot8a",
+            "officialPerformanceActive": false,
+            "prospectiveQuietRequested": true,
+            "signal": "explicit_owner_flag",
+            "statusSha256": "ebcbd7377802bd73cc5089aa73cea083ac4e18f728e2a3d6a8e6feb7b5fda727"
+          },
+          {
+            "lane": "lot10c",
+            "officialPerformanceActive": false,
+            "prospectiveQuietRequested": true,
+            "signal": "explicit_owner_flag",
+            "statusSha256": "ebcbd7377802bd73cc5089aa73cea083ac4e18f728e2a3d6a8e6feb7b5fda727"
+          }
+        ],
+        "publicationMutexManagedHere": false,
+        "rawChildOutputStored": false,
+        "rawInputStored": false,
+        "reason": "child_exit_nonzero",
+        "results": [],
+        "schema": "logos-engine.lot5c.bounded-command.v3",
+        "sitePublicationPerformed": false,
+        "startedAt": "2026-11-11T21:23:40.218868+00:00",
+        "status": "failed",
+        "toolSessionBinding": "external_root_record_required",
+        "toolSessionId": null,
+        "wrapperPid": 8
+      },
+      "testObservation": {
+        "leader": 9,
+        "group": 9,
+        "echoOff": true,
+        "lockFdAbsent": true,
+        "hooksDisabled": true,
+        "inputBytes": 138
+      }
+    },
+    {
+      "name": "timeout_descendant_cleanup_with_temp_ex",
+      "passed": true,
+      "durationSeconds": 0.752671,
+      "checks": [
+        {
+          "name": "expected_exit_code",
+          "passed": true
+        },
+        {
+          "name": "expected_terminal_status",
+          "passed": true
+        },
+        {
+          "name": "expected_terminal_reason",
+          "passed": true
+        },
+        {
+          "name": "cleanup_complete",
+          "passed": true
+        },
+        {
+          "name": "no_dummy_credential_in_console_or_receipt",
+          "passed": true
+        },
+        {
+          "name": "tool_session_id_not_fabricated",
+          "passed": true
+        },
+        {
+          "name": "child_spawn_matches_expectation",
+          "passed": true
+        },
+        {
+          "name": "lock_acquired_matches_expectation",
+          "passed": true
+        },
+        {
+          "name": "child_tty_echo_disabled",
+          "passed": true
+        },
+        {
+          "name": "lock_descriptor_not_inherited",
+          "passed": true
+        },
+        {
+          "name": "git_hooks_disabled_even_with_inherited_override",
+          "passed": true
+        },
+        {
+          "name": "leader_terminal",
+          "passed": true
+        },
+        {
+          "name": "descendant_terminal",
+          "passed": true
+        },
+        {
+          "name": "descendant_reaped",
+          "passed": true
+        },
+        {
+          "name": "lock_free_after_terminal",
+          "passed": true
+        },
+        {
+          "name": "performance_mutex_not_accessed",
+          "passed": true
+        },
+        {
+          "name": "publication_mutex_not_imposed_on_ordinary_transport",
+          "passed": true
+        }
+      ],
+      "receipt": {
+        "automaticRetry": false,
+        "childCloseFds": true,
+        "childExitCode": -9,
+        "childHandshakeAt": "2026-11-11T21:23:40.339752+00:00",
+        "childInputDeliveredAt": "2026-11-11T21:23:40.339828+00:00",
+        "childOutputBytes": {
+          "stderr": 54,
+          "stdout": 0
+        },
+        "childPid": 11,
+        "childProcessGroup": 11,
+        "childPtyEchoDisabled": true,
+        "childStarted": true,
+        "childStartedAt": "2026-11-11T21:23:40.315068+00:00",
+        "cleanup": {
+          "childStarted": true,
+          "complete": true,
+          "leaderExitCode": -9,
+          "processGroup": 11,
+          "reapedDescendants": 1,
+          "signals": [
+            "SIGTERM",
+            "SIGKILL"
+          ]
+        },
+        "dependencies": [],
+        "durationSeconds": 0.690056,
+        "exitCode": 124,
+        "finishedAt": "2026-11-11T21:23:41.003471+00:00",
+        "helper": "temporary-stand-in",
+        "helperFingerprint": {
+          "bytes": 2998,
+          "file": "fake_helper.py",
+          "sha256": "6b441e037c4ddd9a41d9d3e597646d7912a33e08e1c0c5dc65be3a97888db2d0"
+        },
+        "initialCoordination": [
+          {
+            "lane": "lot5c",
+            "officialPerformanceActive": false,
+            "prospectiveQuietRequested": true,
+            "signal": "explicit_owner_flag",
+            "statusSha256": "ebcbd7377802bd73cc5089aa73cea083ac4e18f728e2a3d6a8e6feb7b5fda727"
+          },
+          {
+            "lane": "lot6b",
+            "officialPerformanceActive": false,
+            "prospectiveQuietRequested": true,
+            "signal": "explicit_owner_flag",
+            "statusSha256": "ebcbd7377802bd73cc5089aa73cea083ac4e18f728e2a3d6a8e6feb7b5fda727"
+          },
+          {
+            "lane": "lot8a",
+            "officialPerformanceActive": false,
+            "prospectiveQuietRequested": true,
+            "signal": "explicit_owner_flag",
+            "statusSha256": "ebcbd7377802bd73cc5089aa73cea083ac4e18f728e2a3d6a8e6feb7b5fda727"
+          },
+          {
+            "lane": "lot10c",
+            "officialPerformanceActive": false,
+            "prospectiveQuietRequested": true,
+            "signal": "explicit_owner_flag",
+            "statusSha256": "ebcbd7377802bd73cc5089aa73cea083ac4e18f728e2a3d6a8e6feb7b5fda727"
+          }
+        ],
+        "inputBytesRead": 138,
+        "inputCompletedAt": "2026-11-11T21:23:40.314160+00:00",
+        "inputEchoDisabled": true,
+        "limits": {
+          "handshakeSeconds": 0.4,
+          "inputBytes": 65536,
+          "inputSeconds": 1.0,
+          "killGraceSeconds": 1.5,
+          "outputBytes": 1048576,
+          "termGraceSeconds": 0.15,
+          "workSeconds": 0.5
+        },
+        "lockAcquired": false,
+        "partialOperationalSideEffectsPossible": true,
+        "performanceMutexAccessed": false,
+        "postInputCoordination": [
+          {
+            "lane": "lot5c",
+            "officialPerformanceActive": false,
+            "prospectiveQuietRequested": true,
+            "signal": "explicit_owner_flag",
+            "statusSha256": "ebcbd7377802bd73cc5089aa73cea083ac4e18f728e2a3d6a8e6feb7b5fda727"
+          },
+          {
+            "lane": "lot6b",
+            "officialPerformanceActive": false,
+            "prospectiveQuietRequested": true,
+            "signal": "explicit_owner_flag",
+            "statusSha256": "ebcbd7377802bd73cc5089aa73cea083ac4e18f728e2a3d6a8e6feb7b5fda727"
+          },
+          {
+            "lane": "lot8a",
+            "officialPerformanceActive": false,
+            "prospectiveQuietRequested": true,
+            "signal": "explicit_owner_flag",
+            "statusSha256": "ebcbd7377802bd73cc5089aa73cea083ac4e18f728e2a3d6a8e6feb7b5fda727"
+          },
+          {
+            "lane": "lot10c",
+            "officialPerformanceActive": false,
+            "prospectiveQuietRequested": true,
+            "signal": "explicit_owner_flag",
+            "statusSha256": "ebcbd7377802bd73cc5089aa73cea083ac4e18f728e2a3d6a8e6feb7b5fda727"
+          }
+        ],
+        "preLaunchCoordination": [
+          {
+            "lane": "lot5c",
+            "officialPerformanceActive": false,
+            "prospectiveQuietRequested": true,
+            "signal": "explicit_owner_flag",
+            "statusSha256": "ebcbd7377802bd73cc5089aa73cea083ac4e18f728e2a3d6a8e6feb7b5fda727"
+          },
+          {
+            "lane": "lot6b",
+            "officialPerformanceActive": false,
+            "prospectiveQuietRequested": true,
+            "signal": "explicit_owner_flag",
+            "statusSha256": "ebcbd7377802bd73cc5089aa73cea083ac4e18f728e2a3d6a8e6feb7b5fda727"
+          },
+          {
+            "lane": "lot8a",
+            "officialPerformanceActive": false,
+            "prospectiveQuietRequested": true,
+            "signal": "explicit_owner_flag",
+            "statusSha256": "ebcbd7377802bd73cc5089aa73cea083ac4e18f728e2a3d6a8e6feb7b5fda727"
+          },
+          {
+            "lane": "lot10c",
+            "officialPerformanceActive": false,
+            "prospectiveQuietRequested": true,
+            "signal": "explicit_owner_flag",
+            "statusSha256": "ebcbd7377802bd73cc5089aa73cea083ac4e18f728e2a3d6a8e6feb7b5fda727"
+          }
+        ],
+        "publicationMutexManagedHere": false,
+        "rawChildOutputStored": false,
+        "rawInputStored": false,
+        "reason": "work_timeout",
+        "results": [],
+        "schema": "logos-engine.lot5c.bounded-command.v3",
+        "sitePublicationPerformed": false,
+        "startedAt": "2026-11-11T21:23:40.313546+00:00",
+        "status": "failed",
+        "toolSessionBinding": "external_root_record_required",
+        "toolSessionId": null,
+        "wrapperPid": 10
+      },
+      "testObservation": {
+        "leader": 11,
+        "group": 11,
+        "echoOff": true,
+        "lockFdAbsent": true,
+        "hooksDisabled": true,
+        "inputBytes": 138,
+        "descendant": 12
+      }
+    },
+    {
+      "name": "actual_official_performance_blocks_before_input",
+      "passed": true,
+      "durationSeconds": 0.061091,
+      "checks": [
+        {
+          "name": "expected_exit_code",
+          "passed": true
+        },
+        {
+          "name": "expected_terminal_status",
+          "passed": true
+        },
+        {
+          "name": "expected_terminal_reason",
+          "passed": true
+        },
+        {
+          "name": "cleanup_complete",
+          "passed": true
+        },
+        {
+          "name": "no_dummy_credential_in_console_or_receipt",
+          "passed": true
+        },
+        {
+          "name": "tool_session_id_not_fabricated",
+          "passed": true
+        },
+        {
+          "name": "child_spawn_matches_expectation",
+          "passed": true
+        },
+        {
+          "name": "lock_acquired_matches_expectation",
+          "passed": true
+        },
+        {
+          "name": "input_never_requested",
+          "passed": true
+        },
+        {
+          "name": "lock_free_after_terminal",
+          "passed": true
+        },
+        {
+          "name": "performance_mutex_not_accessed",
+          "passed": true
+        },
+        {
+          "name": "publication_mutex_not_imposed_on_ordinary_transport",
+          "passed": true
+        }
+      ],
+      "receipt": {
+        "automaticRetry": false,
+        "childOutputBytes": {
+          "stderr": 0,
+          "stdout": 0
+        },
+        "childStarted": false,
+        "cleanup": {
+          "childStarted": false,
+          "complete": true,
+          "reapedDescendants": 0,
+          "signals": []
+        },
+        "durationSeconds": 0.000332,
+        "exitCode": 75,
+        "finishedAt": "2026-11-11T21:23:41.078245+00:00",
+        "helper": "temporary-stand-in",
+        "inputBytesRead": 0,
+        "limits": {
+          "handshakeSeconds": 0.4,
+          "inputBytes": 65536,
+          "inputSeconds": 1.0,
+          "killGraceSeconds": 1.5,
+          "outputBytes": 1048576,
+          "termGraceSeconds": 0.15,
+          "workSeconds": 1.5
+        },
+        "lockAcquired": false,
+        "partialOperationalSideEffectsPossible": false,
+        "performanceMutexAccessed": false,
+        "publicationMutexManagedHere": false,
+        "rawChildOutputStored": false,
+        "rawInputStored": false,
+        "reason": "official_performance_window_active",
+        "results": [],
+        "schema": "logos-engine.lot5c.bounded-command.v3",
+        "sitePublicationPerformed": false,
+        "startedAt": "2026-11-11T21:23:41.077924+00:00",
+        "status": "failed",
+        "toolSessionBinding": "external_root_record_required",
+        "toolSessionId": null,
+        "wrapperPid": 13
+      },
+      "testObservation": {}
+    }
+  ],
+  "predicateChecks": [
+    {
+      "name": "omitted_fields_are_not_active",
+      "passed": true
+    },
+    {
+      "name": "prospective_quiet_heavy_tests_and_publication_are_not_active",
+      "passed": true
+    },
+    {
+      "name": "explicit_active_wins_over_old_release",
+      "passed": true
+    },
+    {
+      "name": "explicit_inactive_wins_over_historical_start",
+      "passed": true
+    },
+    {
+      "name": "legacy_started_without_release_is_active",
+      "passed": true
+    },
+    {
+      "name": "legacy_started_with_explicit_release_is_inactive",
+      "passed": true
+    },
+    {
+      "name": "null_primary_uses_legacy_fallback",
+      "passed": true
+    },
+    {
+      "name": "malformed_authoritative_active_flag_refuses",
+      "passed": true
+    },
+    {
+      "name": "no_performance_mutex_literal_or_flock_call",
+      "passed": true
+    },
+    {
+      "name": "v2_source_unchanged",
+      "passed": true
+    }
+  ],
+  "finishedAt": "2026-11-11T21:23:41.096520+00:00",
+  "totalChecks": 69,
+  "passedChecks": 69
+}

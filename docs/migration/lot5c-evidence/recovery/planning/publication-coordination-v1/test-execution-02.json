@@ -1,0 +1,64 @@
+{
+  "schema": "logos-engine.lot5c.publication-pid-namespace-targeted-test.v1",
+  "status": "passed",
+  "startedAt": "2026-11-11T21:10:23.471131+00:00",
+  "finishedAt": "2026-11-11T21:10:23.472306+00:00",
+  "source": {
+    "bytes": 20084,
+    "sha256": "cab500c5aa0495af077e5961ce15a2c56f2c2ba650ffb4d9605c615f454198b9"
+  },
+  "preservedSource": {
+    "file": "publication-guard-before-pid-namespace-fix.py",
+    "bytes": 19869,
+    "sha256": "0cb8b31989e167a5776206fc89c3efb8031688a1c539c569dc9169d674876deb"
+  },
+  "preservedTenCaseReceipt": {
+    "file": "test-execution-01.json",
+    "sha256": "616174b67063b5902c868dec142d3cab93b4710ea066a7b9d6776092f7289194",
+    "reexecuted": false
+  },
+  "checks": [
+    {
+      "name": "old_cross_namespace_pid_dependency_reproduced_without_system_call",
+      "passed": true
+    },
+    {
+      "name": "new_metadata_inspect_accepts_namespace_invisible_diagnostic_pid",
+      "passed": true
+    },
+    {
+      "name": "new_inspect_does_not_mistake_local_same_number_for_liveness",
+      "passed": true
+    },
+    {
+      "name": "actual_tool_session_check_remains_explicitly_required",
+      "passed": true
+    },
+    {
+      "name": "request_identity_guard_retained",
+      "passed": true
+    },
+    {
+      "name": "heartbeat_freshness_guard_retained",
+      "passed": true
+    },
+    {
+      "name": "absolute_deadline_guard_retained",
+      "passed": true
+    },
+    {
+      "name": "original_ten_test_receipt_unchanged",
+      "passed": true
+    }
+  ],
+  "passedChecks": 8,
+  "totalChecks": 8,
+  "guardProcessesLaunched": 0,
+  "actualPidProbesOrSignals": 0,
+  "processNamespaceInspections": 0,
+  "productionExclusiveLockAttempts": 0,
+  "providerCalls": 0,
+  "nativeOrCostExecutions": 0,
+  "toolSessionId": null,
+  "qualification": "Pure targeted inspect contract test using TEMP metadata and a Python trap for os.kill. The previous contract intentionally fails the mocked invisible-PID probe; the corrected contract never invokes it. No claim of production liveness is made."
+}

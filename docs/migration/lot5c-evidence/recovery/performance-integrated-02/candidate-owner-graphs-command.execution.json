@@ -1,0 +1,35 @@
+{
+  "schema": "logos-engine.lot5c.command-execution.v1",
+  "status": "passed",
+  "startedAt": "2026-11-11T17:42:38.940362+00:00",
+  "command": [
+    "node",
+    "docs/migration/lot5c-evidence/capture-cost-owner-graphs.mjs",
+    "candidate",
+    "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout",
+    "docs/migration/lot5c-evidence/recovery/performance-integrated-02/cases.json",
+    "docs/migration/lot5c-evidence/recovery/integrated-final-01/source-manifest.json",
+    "docs/migration/lot5c-evidence/recovery/performance-integrated-02/candidate-owner-graphs.json.gz"
+  ],
+  "cwd": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout",
+  "timeoutSeconds": 900.0,
+  "wrapper": {
+    "path": "docs/migration/lot5c-evidence/run-evidence-command.py",
+    "bytes": 3904,
+    "sha256": "99b16a35eac1f12acb3063e43d303ffc020b3339109e22eff1f807d1e87e47db"
+  },
+  "finishedAt": "2026-11-11T17:43:21.752610+00:00",
+  "durationSeconds": 42.81020722999892,
+  "exitCode": 0,
+  "timedOut": false,
+  "log": {
+    "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/candidate-owner-graphs-command.log",
+    "bytes": 390,
+    "sha256": "26343411e3032b650ed3a0abebd823febbf15423c864267692a541b3eaadf30e"
+  },
+  "compressedLog": {
+    "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/candidate-owner-graphs-command.log.gz",
+    "bytes": 238,
+    "sha256": "2fe0fe95c8ef8a9bd6c83d8cc00bd26e195a735f81c60851ec32a02c2f3e7241"
+  }
+}

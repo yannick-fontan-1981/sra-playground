@@ -4,7 +4,7 @@
 
 ## Lot 8A : preuves communes et régressions qualifiées sur la composition préparée
 
-**Les trois preuves communes sont vérifiées et les 11 régressions enregistrées sont qualifiées, avec 187/187 contrôles. Les quatre formes de travail sont capturées sur chacun des deux rôles puis qualifiées hors chronométrage.** Le [bilan courant](qualification-provisional-02/qualification-summary.json) distingue ces résultats préparatoires de la future qualification contre le véritable 0.64 publié.
+**Les trois preuves communes sont vérifiées et les 11 régressions enregistrées sont qualifiées, avec 187/187 contrôles. Les quatre formes de travail sont capturées sur chacun des deux rôles puis qualifiées hors chronométrage.** Le [bilan courant réconcilié](integration-published-063-01/summary.json) distingue ces résultats préparatoires de la future qualification contre le véritable 0.64 publié.
 
 Le candidat conserve **324 fichiers natifs**, digest `936fa2bf81965272b1ddbab4a5c01f98aeb6a48188c1f7a8c91de226598c5e43`. La [composition 5C + 6B + 8A](integration-provisional-063-064-01/contract/composition-review.json) et le [gel validé](integration-provisional-063-064-01/validation-summary.json) restent inchangés : **5 606/5 606 tests dans 145 fichiers**, aucun échec, annulation, cas ignoré ni `todo`, et cinq contrôles passés (typage, audit des entrées, audit de migration, diff, compilation). Ces résultats restent attachés à leur exécution déclarée ; ils ne sont pas présentés comme une nouvelle relance des tests. Les enveloppes fonctionnelles récentes vérifient les mêmes entrées gelées, dont les **1 786 fichiers originaux**.
 
@@ -35,7 +35,7 @@ La [revue indépendante de cette qualification](qualification-provisional-02/rev
 
 ### Publication, coût et travail courant
 
-Le [constat Sites final](qualification-provisional-02/coordination/final-site-observation.json) retrouve **Site 103 / native 0.62**, source `4afcbfe6a25bd3a88223be543e443bc53b9c8814`, déploiement `succeeded`, accès privé au propriétaire et révision d’accès 3. **0.63, 0.64 et 0.65 restent non publiées.** La sauvegarde de la branche `lot8a-motif-checkpoint-20261111` est distincte d’une publication du Site ; les [reçus de transport](qualification-provisional-02/transport/push-receipts-index-02.json) conservent les commits effectivement vérifiés à distance.
+Le [constat Sites 104](integration-published-063-01/publication-observation.json) confirme **native 0.63 publiée**, source `bc53ddf36f0379be24cfc0667f8f8d6fdd650032`, déploiement `succeeded`, accès privé au propriétaire et révision 3. Cette [publication prioritaire 5C](../lot5c-evidence/recovery/publication-063-priority/authorization.json) conserve explicitement un **coût officiel non mesuré et non accepté** pour STCK et SMLP. Cette exception ne s’étend pas à 8A. **Le véritable 0.63 est réconcilié dans la branche 8A ; 0.64 et 0.65 restent non publiées au constat de cette étape.** Le [bilan de réconciliation](integration-published-063-01/summary.json) vérifie que les fichiers natifs, de tests, de scripts, de compilation et originaux restent exactement ceux du gel qualifié. Les sauvegardes de `lot8a-motif-checkpoint-20261111` demeurent distinctes d’une publication du Site.
 
 Le développement, les tests fonctionnels, les commits et les push continuent **sans verrou global et sans attendre les publications des autres lots**, conformément à la [politique courante](qualification-provisional-01/contract/current-work-lock-policy.json). Une exclusivité courte reste réservée aux mesures officielles et à la publication. Aucun verrou global n’a été acquis pour les présentes qualifications ; aucun fichier de verrou détenu n’a été supprimé.
 
@@ -46,9 +46,9 @@ Le [protocole officiel prospectif](integration-provisional-063-064-01/contract/c
 | Étape | État établi | Prochaine action |
 | --- | --- | --- |
 | 10B / 0.62 | Publié, Site 103 ; réserve HPDL partielle conservée | Conserver le prédécesseur exact et ses limites. |
-| 5C / 0.63 | Préparation fonctionnelle sauvegardée, non publiée selon le constat courant | Organiser une fenêtre officielle réellement disponible, qualifier son coût puis publier. |
-| 6B / 0.64 | Préparation sauvegardée, non publiée | Réconcilier le véritable 0.63 publié, puis fermer le coût et publier 0.64. |
-| **8A / 0.65** | **Natif validé ; preuves communes, 11 régressions et formes/graphes préparatoires qualifiés** | Réconcilier le véritable 0.64 publié, vérifier les différences avec le gel préparé et renouveler les qualifications affectées ; mesure officielle puis publication après acceptation. |
+| 5C / 0.63 | **Publié prioritairement dans Site 104 ; coût officiel non mesuré et non accepté** | Conserver cette réserve et ses preuves ; la qualification future du coût garde son critère global. |
+| 6B / 0.64 | Préparation sauvegardée, non publiée au constat de cette étape | Intégrer le 0.63 désormais publié, puis fermer la qualification finale et le coût avant sa publication. |
+| **8A / 0.65** | **0.63 publié réconcilié ; natif validé, preuves communes, 11 régressions et formes/graphes préparatoires qualifiés** | Réconcilier le véritable 0.64 publié, vérifier les différences avec le gel préparé et renouveler les qualifications affectées ; mesure officielle puis publication après acceptation. |
 | **8B** | `parallel_branch_routing` reste ouvert ; [préparation source établie](../lot8b-evidence/preparation-20261111/README.md) | Écrire le contrat de transfert et le corpus original indépendant, puis porter le propriétaire et ses dépendances consommées, sans attendre la publication pour ce travail courant. |
 | 6C / 6D | `observed_rigid_cargo` et `shared_settlement` ouverts | Transférer puis qualifier leurs capacités dans leurs propres périmètres. |
 | Lot 9 | `chart_navigation`, `region_intervention`, `joint_channels` ouverts | Traiter navigation, régions et canaux ; conserver `discrete_network` hors du compteur 76. |
@@ -96,7 +96,7 @@ Ces preuves établissent un comportement synthétique et une contribution dans l
 
 ## Prochaine qualification
 
-1. Intégrer les sources réellement publiées de 0.63 puis 0.64 et vérifier leurs invariants.
+1. Conserver la [réconciliation du 0.63 réellement publié](integration-published-063-01/summary.json), puis intégrer le véritable 0.64 publié et vérifier les différences avec le parent préparé.
 2. Geler ce candidat intégré ; exécuter les non-régressions et qualifications affectées sur ces octets.
 3. Déclarer les formes de travail et la croissance du propriétaire avant toute mesure officielle.
 4. Comparer le coût au prédécesseur réellement publié, dans une fenêtre coordonnée complète.

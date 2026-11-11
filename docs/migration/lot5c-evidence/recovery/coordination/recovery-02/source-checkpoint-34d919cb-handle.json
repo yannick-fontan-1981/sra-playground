@@ -1,0 +1,11 @@
+{
+  "schema": "logos-engine.lot5c-execution-handle.v1",
+  "tool": "exec_command",
+  "sessionId": 47365,
+  "source": "actual tool result before credential input",
+  "recordedAt": "2026-11-11T20:15:36.050254+00:00",
+  "liveReceipt": "/workspace/shared/sra-coordination/lot5c-execution-handles/source-checkpoint-34d919cb-live.json",
+  "workMaximumSeconds": 300,
+  "inputMaximumSeconds": 45,
+  "credentialPersisted": false
+}

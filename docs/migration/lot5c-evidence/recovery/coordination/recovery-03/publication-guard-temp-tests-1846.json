@@ -1,0 +1,11 @@
+{
+  "schema": "logos-engine.lot5c.tool-session-start.v1",
+  "sessionId": 1846,
+  "initialChunkId": "86fde2",
+  "recordedAt": "2026-11-11T21:04:31.029329+00:00",
+  "scope": "independent TEMP publication mutex guardian tests",
+  "osTimeoutSeconds": 60,
+  "killAfterSeconds": 5,
+  "actualProviderCalls": 0,
+  "productionPublicationMutexAcquired": false
+}

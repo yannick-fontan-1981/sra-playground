@@ -1,0 +1,51 @@
+{
+  "schema": "logos-engine.lot5c-availability-observation.v1",
+  "recordedAt": "2026-11-11T20:26:38.856717+00:00",
+  "requestId": "lot5c-cost-a33a5f88-recovery-02",
+  "status": "partial_acknowledgments_not_authorization",
+  "exclusiveAttemptPerformed": false,
+  "rows": [
+    {
+      "lane": "lot6b",
+      "observedAt": "2026-11-11T20:26:38.856717+00:00",
+      "bytes": 12936,
+      "sha256": "ad384cdd2c26f5ed7ac23fb6c48c8f8c0385f1a044ab62efb5930b7b683f17d5",
+      "updated_at": "2026-11-11T20:22:15.406525+00:00",
+      "quiet_request_id": "lot5c-cost-a33a5f88-recovery-02",
+      "quiet_acknowledged": true,
+      "quiet_acknowledged_at": "2026-11-11T20:22:15.406525+00:00",
+      "active_command": null,
+      "heavy_execution_active": false,
+      "all_own_subagents_idle": true,
+      "no_queued_commands": true
+    },
+    {
+      "lane": "lot8a",
+      "observedAt": "2026-11-11T20:26:38.856717+00:00",
+      "bytes": 16015,
+      "sha256": "afd9862ab1e35729961ef530e402cf6565cce998c587b06e21dfca84aefdbc55",
+      "updated_at": "2026-11-11T20:11:32.565538+00:00",
+      "quiet_request_id": "lot5c-cost-a33a5f88-final-01",
+      "quiet_acknowledged": false,
+      "quiet_acknowledged_at": "2026-11-11T18:35:44.230663+00:00",
+      "active_command": null,
+      "heavy_execution_active": false,
+      "all_own_subagents_idle": true,
+      "no_queued_commands": true
+    },
+    {
+      "lane": "lot10c",
+      "observedAt": "2026-11-11T20:26:38.856717+00:00",
+      "bytes": 8867,
+      "sha256": "0944ff0d0e1f2448431470e9dbf8ed23807566b36fbcc2a115e16474fc46317f",
+      "updated_at": "2026-11-11T20:01:17.074830+00:00",
+      "quiet_request_id": "lot5c-cost-a33a5f88-final-01",
+      "quiet_acknowledged": false,
+      "quiet_acknowledged_at": "2026-11-11T19:05:59.348551+00:00",
+      "active_command": "Source-only ancestor transport:18 declared sequential steps,one verified; each<=180s under SH with fresh quiet checks and exact advertised/ref verification. No automatic next step, no main update or publication.",
+      "heavy_execution_active": false,
+      "all_own_subagents_idle": true,
+      "no_queued_commands": true
+    }
+  ]
+}

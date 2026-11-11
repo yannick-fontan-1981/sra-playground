@@ -1,0 +1,17 @@
+{
+  "schema": "logos-engine.lot5c-checkpoint-whitespace-qualification.v1",
+  "recordedAt": "2026-11-11T21:47:13.057035+00:00",
+  "globalLockUsed": false,
+  "fullDiffCheckExitCode": 2,
+  "fullDiffCheckOutput": "docs/migration/lot5c-evidence/recovery/planning/v4-controller-source.diff:4: trailing whitespace.\n+ \ndocs/migration/lot5c-evidence/recovery/planning/v4-controller-source.diff:5: trailing whitespace.\n+ \ndocs/migration/lot5c-evidence/recovery/planning/v4-controller-source.diff:10: trailing whitespace.\n+ \ndocs/migration/lot5c-evidence/recovery/planning/v4-controller-source.diff:13: trailing whitespace.\n+ \ndocs/migration/lot5c-evidence/recovery/planning/v4-controller-source.diff:14: trailing whitespace.\n+ \ndocs/migration/lot5c-evidence/recovery/planning/v4-controller-source.diff:40: trailing whitespace.\n+ \ndocs/migration/lot5c-evidence/recovery/planning/v4-controller-source.diff:41: trailing whitespace.\n+ \ndocs/migration/lot5c-evidence/recovery/planning/v4-controller-source.diff:75: trailing whitespace.\n+ \ndocs/migration/lot5c-evidence/recovery/planning/v4-finalizer-source.diff:4: trailing whitespace.\n+ \ndocs/migration/lot5c-evidence/recovery/planning/v4-parent-source.diff:29: trailing whitespace.\n+ \ndocs/migration/lot5c-evidence/recovery/planning/v4-parent-source.diff:63: trailing whitespace.\n+ \ndocs/migration/lot5c-evidence/recovery/planning/v4-parent-source.diff:92: trailing whitespace.\n+ \ndocs/migration/lot5c-evidence/recovery/planning/v4-parent-source.diff:134: trailing whitespace.\n+ \n",
+  "scopedDiffCheckExitCode": 0,
+  "excludedVerbatimEvidence": [
+    "docs/migration/lot5c-evidence/recovery/planning/v4-parent-source.diff",
+    "docs/migration/lot5c-evidence/recovery/planning/v4-controller-source.diff",
+    "docs/migration/lot5c-evidence/recovery/planning/v4-finalizer-source.diff"
+  ],
+  "qualification": "Only exact archived unified diff evidence is excluded from cosmetic whitespace checks. Its bytes are pinned by the independent review and preserved; every actual source/document passes. No native tests rerun.",
+  "reviewSha256": "3b84eb0de4abb7e56bbb52d8d9246d7ca45d721341d08eb891989736698fbf52",
+  "reviewSubjectsVerified": 122,
+  "originalCheckpointPreserved": true
+}
