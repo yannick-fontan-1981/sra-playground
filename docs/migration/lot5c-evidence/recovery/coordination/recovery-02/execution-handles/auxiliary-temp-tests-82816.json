@@ -1,0 +1,11 @@
+{
+  "schema": "logos-engine.lot5c.tool-session-start.v1",
+  "sessionId": 82816,
+  "initialChunkId": "fc91dd",
+  "observedAt": "2026-11-11T19:43:40.171326+00:00",
+  "scope": "temporary independent coordination harness, final wrapper revision",
+  "osTimeoutSeconds": 60,
+  "killAfterSeconds": 5,
+  "credentialsUsed": false,
+  "productionExclusiveLockAttempted": false
+}

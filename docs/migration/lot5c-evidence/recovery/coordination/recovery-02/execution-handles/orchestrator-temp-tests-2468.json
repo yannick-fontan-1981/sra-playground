@@ -1,0 +1,9 @@
+{
+  "sessionId": 2468,
+  "source": "actual exec_command result",
+  "recordedAt": "2026-11-11T19:59:21.896564+00:00",
+  "outerTimeoutSeconds": 60,
+  "killAfterSeconds": 5,
+  "scope": "temporary independent-mutex orchestration tests only",
+  "officialCost": false
+}

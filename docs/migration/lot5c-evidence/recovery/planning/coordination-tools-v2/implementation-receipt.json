@@ -1,0 +1,103 @@
+{
+  "schema": "logos-engine.lot5c.coordination-tools-v2-implementation.v1",
+  "status": "implemented_independent_temporary_tests_passed_pending_source_review",
+  "recordedAt": "2026-11-11T19:44:24.254391+00:00",
+  "files": [
+    {
+      "file": "README.md",
+      "bytes": 7488,
+      "sha256": "c6af00f8b7aaa7400243edee076b0af61b074dea5cba2fba8d8b4c16beb3f9f0"
+    },
+    {
+      "file": "push_lot5_checkpoint.mjs",
+      "bytes": 4953,
+      "sha256": "d2d610d16dc972c6f7263650caf89a06c10a441bc12d2405eb591a7e7f8d39c2"
+    },
+    {
+      "file": "push_lot5_checkpoints_bounded.mjs",
+      "bytes": 7201,
+      "sha256": "84e8727e4b86a1a5e3d66bc843c4f3718a3d716c498fd232a810aab627665e04"
+    },
+    {
+      "file": "run-bounded-locked-command.py",
+      "bytes": 28916,
+      "sha256": "697d1b66ac567a46b3774c08dbc0d09cc7cd7ad6ac9ef2a9af6d4d0789ab7e66"
+    },
+    {
+      "file": "test-execution-01.json",
+      "bytes": 80300,
+      "sha256": "82218b8c792bcb3237a64d9ad76394b0ca720cae67b2460125e9f58285a4da7d"
+    },
+    {
+      "file": "test-execution-02.json",
+      "bytes": 88150,
+      "sha256": "4f2ac45fdd919996feb720d1ba1a9e48870ff95d896a520ea91356f2b61e7256"
+    },
+    {
+      "file": "test_bounded_locked_command.py",
+      "bytes": 18897,
+      "sha256": "a385d4d83c56a2de78557da6246acfb555f095e89a55105ada0674b920a4508d"
+    }
+  ],
+  "finalWrapper": {
+    "file": "run-bounded-locked-command.py",
+    "bytes": 28916,
+    "sha256": "697d1b66ac567a46b3774c08dbc0d09cc7cd7ad6ac9ef2a9af6d4d0789ab7e66"
+  },
+  "finalTemporaryTests": {
+    "file": "test-execution-02.json",
+    "wrapperSha256": "697d1b66ac567a46b3774c08dbc0d09cc7cd7ad6ac9ef2a9af6d4d0789ab7e66",
+    "status": "passed",
+    "cases": 16,
+    "passedChecks": 207,
+    "totalChecks": 207
+  },
+  "historicalTemporaryTests": {
+    "file": "test-execution-01.json",
+    "cases": 15,
+    "checks": 184,
+    "retained": true,
+    "scope": "before additional inherited Git-config removal"
+  },
+  "toolSessions": [
+    {
+      "sessionId": 40858,
+      "terminalExitCode": 0,
+      "terminalChunkId": "2c060c"
+    },
+    {
+      "sessionId": 82816,
+      "terminalExitCode": 0,
+      "terminalChunkId": "fbb6a5"
+    }
+  ],
+  "credentialsUsed": false,
+  "gitExecuted": false,
+  "actualNodeHelpersExecuted": false,
+  "officialSitesWorkflowExecuted": false,
+  "productionExclusiveLockAttempted": false,
+  "projectRuntimeExecuted": false,
+  "productionLockHolderSearchPerformed": false,
+  "originalHelpersModified": false,
+  "originalCostControllersModified": false,
+  "writesConfinedTo": [
+    "docs/migration/lot5c-evidence/recovery/planning/coordination-tools-v2",
+    "explicit session metadata under /workspace/shared/sra-coordination/lot5c-execution-handles",
+    "independent automatically removed temporary test directories"
+  ],
+  "sourceFindings": [
+    "Both original Node helpers had unbounded TTY input and unbounded synchronous Git calls.",
+    "The bounded helper limited transport volume and commit count, not wall-clock duration.",
+    "An external flock command can hold SH while waiting for interactive input; its direct child can inherit the lock FD without an explicit close guard.",
+    "The old evidence runner handled timeout but did not guarantee finally teardown on signals or every exception, nor clean surviving descendants after a successful leader exit.",
+    "A live receipt inside the repository makes the existing checkpoint helpers reject the checkout as dirty."
+  ],
+  "limits": [
+    "Catchable TERM/INT/HUP are handled; SIGKILL of the supervisor cannot run cleanup.",
+    "This is trusted process-group supervision, not containment of a program deliberately escaping into another session.",
+    "Python cannot guarantee erasure of every immutable in-memory copy.",
+    "Failed or cancelled network operations can have partial remote side effects; no automatic retry or rollback.",
+    "Kernel/filesystem stalls are not hard-real-time guarantees; cleanup failure is explicit and must never count as an idle ACK."
+  ],
+  "next": "independent source review; no actual transport authorized by this test receipt"
+}

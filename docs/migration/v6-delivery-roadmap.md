@@ -57,6 +57,20 @@ Le critère de coût reste la médiane groupée de session complète **stricteme
 
 Les sessions longues restent un chantier distinct : traitement en delta, compaction démontrée des données devenues inutiles, chemins continus et propagation générique des coups obligatoires. **WEAV niveau 6 reste une réserve**, avec son budget épuisé conservé. Aucun nouveau lancement réel de jeu n’a été effectué dans cette étape.
 
+<!-- LOT5C_RECOVERY02_CURRENT_START -->
+
+### Reprise 02 : protections de coordination vérifiées, unique tentative à préparer
+
+La [recherche ciblée](lot5c-evidence/recovery/coordination/recovery-02/targeted-recovery.json) est terminée en **106,577 secondes pour un budget annoncé de 180 secondes**. Aucun identifiant exploitable du détenteur n’a été retrouvé ; aucune session ancienne n’a été fermée. Les inspections `/proc` déjà connues n’ont pas été répétées. Une contention observée pendant les travaux partagés des autres lots n’est pas traitée comme preuve d’un verrou abandonné.
+
+La [réutilisation des preuves fonctionnelles](lot5c-evidence/recovery/coordination/recovery-02/functional-proof-reuse-review.json) est justifiée par les **867 chemins gelés inchangés**. Les modifications portent uniquement sur la coordination. Le nouvel [auxiliaire borné](lot5c-evidence/recovery/planning/coordination-tools-v2/README.md) reçoit la saisie cachée avant SH, borne les attentes et les enfants, revérifie les états, ferme les descripteurs et nettoie les groupes possédés ; **18/18 scénarios et 239/239 vérifications** passent sur des mutex temporaires. Les anciens points d’entrée Scratch [refusent désormais immédiatement](lot5c-evidence/recovery/coordination/recovery-02/retired-interactive-launchers.json), avec leurs originaux retenus à l’identique ; cette prévention ne ferme pas une ancienne session.
+
+Le [contrôleur de coût durci](lot5c-evidence/recovery/planning/coordination-v2-preparation-03.json) passe **8/8 scénarios temporaires**, refuse un mutex absent sans le recréer et distingue un refus EX d’une libération réelle. Le [coordinateur parent](lot5c-evidence/recovery/planning/orchestrator-v2-tests-02.execution.json) passe **13/13 scénarios**, dont signal pendant le lancement, nettoyage incomplet, expiration avec horloge murale figée, ancien ACK refusé et levée de la pause malgré une erreur de journal. Les premiers échecs de fixtures synthétiques sont conservés. Aucun de ces essais n’est une mesure officielle ni une nouvelle validation du moteur natif.
+
+La [préparation 03](lot5c-evidence/recovery/performance-integrated-03/coordination-repreparation.json) conserve intégralement 01/02, réutilise les formes et captures historiques et dérive une seule liaison de fixture, `cases.path`, avec les mêmes octets de cas. Son précontrôle statique passe **76/76**. La [revue indépendante globale](lot5c-evidence/recovery/planning/coordination-v2-independent-review.json) passe **58/58 contrôles**, lie **52 fichiers** et précède toute nouvelle demande. Ses **25 assertions supplémentaires** portent sur des protocoles et autorisations temporaires ; les trois travailleurs de préparation et de revue ont terminé leurs commandes. Le [plan de reprise](lot5c-evidence/recovery/coordination/recovery-02/recovery-plan.json) prévoit **un seul cycle** `lot5c-cost-a33a5f88-recovery-02` : **600 secondes maximum pour obtenir les ACK frais, l’isolation, la readiness et l’EX**, puis, si l’EX est réellement acquis, **5 400 secondes maximum pour la fenêtre et ses analyses**, avec chaque enfant borné à 3 600 secondes. Une disponibilité refusée, une erreur ou une expiration libère la demande ; aucun second cycle automatique n’est prévu. **À ce stade préparatoire, la demande 02 n’est pas émise, le coût 5C reste non mesuré et 0.63 non publiée.**
+
+<!-- LOT5C_RECOVERY02_CURRENT_END -->
+
 <!-- LOT5C_ROADMAP_CURRENT_END -->
 
 <!-- LOT10B_CURRENT_BEGIN -->

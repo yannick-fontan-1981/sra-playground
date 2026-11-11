@@ -1,0 +1,238 @@
+{
+  "schema": "logos-engine.lot5c-cost-coordination-repreparation.v1",
+  "status": "prepared_static_inputs_only_no_readiness",
+  "recordedAt": "2026-11-11T19:51:12.933407+00:00",
+  "previousDirectory": "docs/migration/lot5c-evidence/recovery/performance-integrated-02",
+  "activeDirectory": "docs/migration/lot5c-evidence/recovery/performance-integrated-03",
+  "requestId": "lot5c-cost-a33a5f88-recovery-02",
+  "priorDirectoryPreservation": {
+    "directory": "docs/migration/lot5c-evidence/recovery/performance-integrated-02",
+    "fileCount": 44,
+    "files": {
+      "baseline-owner-graphs-command.execution.json": "9055ecb63fd16ead52dc4a75288f809491214dcae319764bf248dc75e6cf59ce",
+      "baseline-owner-graphs-command.log": "b905bf2385e2fc47c5ffc85c85b19c64ad1d159d4616a26b035a0e8f3ffe1c89",
+      "baseline-owner-graphs-command.log.gz": "3f2a68fb5365c67e5af5104ea49c4d9d3997938fb6087e0c3df3ba8b14e658dd",
+      "baseline-owner-graphs.json.gz": "cd99971740e98723e239c25b3498839c6a4d01164e148637f6fda380717278e3",
+      "baseline-owner-graphs.receipt.json": "564c50b4832b7bb027d6115f18d14fcbb0abd404a98dac037032ef1f7d7af6d1",
+      "candidate-owner-graphs-command.execution.json": "6252c150348a334a619c99aee50584d3568b8341e28faaebbda7f937823161e4",
+      "candidate-owner-graphs-command.log": "26343411e3032b650ed3a0abebd823febbf15423c864267692a541b3eaadf30e",
+      "candidate-owner-graphs-command.log.gz": "2fe0fe95c8ef8a9bd6c83d8cc00bd26e195a735f81c60851ec32a02c2f3e7241",
+      "candidate-owner-graphs.json.gz": "3212f4f2df298d908c094d7a18c908c16a8c8e21f8096946b95c8df30e7fb9f8",
+      "candidate-owner-graphs.receipt.json": "72edf085e93b8e935f93715742487b3be64e656fc706a21cbf3280cc237c706b",
+      "cases.json": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d",
+      "comparison-policy.json": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68",
+      "declaration.json": "b63f8d61f27ce9d6401c0015ecf2888cd947f504bfbdbfb954e799c28f8a7c8e",
+      "dependency-repair.json": "606e2655c472d11823c3367f6a7213df318c24bbf3527f0c9a462e36854fa101",
+      "global-budget-policy.json": "ad6878f3065ec5fca67f4fda7ed3cfac936795c3ee11a37fec4a42fe1a5ca53b",
+      "independent-readiness-input-review.json": "17118655a5e4803b2e965de673ef6b055ca965c21617ed5520e31fb44a39e70c",
+      "owner-contract-finalization-command.execution.json": "1fa1b8d79ce5f468fc4ac269872ca898f19774312f61d98f79fa368b99838bd0",
+      "owner-contract-finalization-command.log": "55f173fd73d882b96c333987396284a86aec515e9ff74e8a01479dfad5e65661",
+      "owner-contract-finalization-command.log.gz": "e0a826eb5c628985d114e886caea8a524ca1513f8d8db9f93ed0d47903fa65d0",
+      "owner-graph-attribution.json": "b33228947598d563935cee9b1d2bac70ba3b4c55b11018d306ea96c2933a8534",
+      "owner-graph-qualification-command.execution.json": "8716df606a16547c2e25aac4306d9b57145022e823ca4278a4655103519d86f4",
+      "owner-graph-qualification-command.log": "6589502f556e8d489f0162273f3b36438aab111202af4e7a40c49e8f3333b2b2",
+      "owner-graph-qualification-command.log.gz": "74676ac8e4c21af961d63c841f4978e8f771aafbcc82109cef705a38b1e40073",
+      "owner-growth-contract.json": "08dc46007afbb0b54f219fc519f4bb7b8239a59c9263a2714aa60a61d0537c5f",
+      "owner-source-inventory-command.execution.json": "f88d6a2f3c181aa295472c6bb9a42c5e0cdddd830dfb9bb491c9c1f1c82e7806",
+      "owner-source-inventory-command.log": "a5f8df59869db5b4be19f5dba9882d9804e993c2109450be0e6c02dd04365388",
+      "owner-source-inventory-command.log.gz": "6b3925b78971b5debc35dddb36cd092e0d3c02a285ea3cd1cae37253509089f5",
+      "owner-source-inventory.json": "b8fcb70f1fa56f0f5218698bf08d9764698590c7fbeaa2024179a3999501dac0",
+      "owner-structural-fixture.json": "6f8d45dc8d68e8d3a67c45a66ac1045d12d123c43c02ab66e4ac1a09b63191d5",
+      "preparation.json": "caa8777ff04d2a17bf34bc0629e4691c0c4a48a9cc57f1879517f86b87c51c1d",
+      "prior-attempt-inventory.json": "0d5f1a51c7c413664459adb2e46a8b8078f0a0c25cb4e93acd4180ea6ae12698",
+      "protocol-check.json": "459cc47730ee6e4f358a744997227d90ef68430d73915af56f24128cf06d5196",
+      "protocol-preparation-command.execution.json": "83977f27c0d289865ac3eb7e684bef302e90e3ffb73cf894a1b28ac193da81c9",
+      "protocol-preparation-command.log": "459cc47730ee6e4f358a744997227d90ef68430d73915af56f24128cf06d5196",
+      "protocol-preparation-command.log.gz": "c20c4dad33416c2bd5dcd2964e8abb305c016724a8d50aefd469c08fcb99bb40",
+      "protocol.md": "34b172067d69fdde843cad2abbea6d2ce724dfed0ffa5c2d93eb0270e27262bd",
+      "readiness-plan.json": "58dc8468744429925925d1907f1775f7467c32f6a844461dee8c55134bafea28",
+      "readiness.json": "bf1caef4f9824367aad9564c9cffa3683137b07f6e74af753d67f52b9e52ff90",
+      "static-preflight-command.execution.json": "2d2fe0a915f6a356c5ea6564d744259a331be913828ae08d890dd72d284590c1",
+      "static-preflight-command.log": "9ea5580f3eaa7a2164aa310baa56ec43ad9b6b64a440b15617584a2b9ecac77d",
+      "static-preflight-command.log.gz": "1ba8a0eaea756953899edd47db7dadbe1c5aa2f91b7ac750a9bb9df1b92544a7",
+      "static-preflight.json": "2bed63fe86914300d5933c98ed65cc0e222df308f44336836414603a5cd0e46b",
+      "structural-repeat-equivalence.json": "e36f2b0072b5e9da21afae2a13179ece7be921d33bae7e9206c857737dc094a6",
+      "superseded-before-measurement.json": "1d3f45d98ae9dcd142953a60e5bd0b122a00e0ee53f433a0e0f9c4dc751eae8f"
+    }
+  },
+  "sourceCheckpoint": "501198d7638c7a56c3b85d357beb917469899402",
+  "unchangedFrozenNativeDigests": {
+    "baseline": "74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12",
+    "candidate": "a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57"
+  },
+  "originalSourceFreeze": {
+    "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/source-manifest.json",
+    "bytes": 37772,
+    "sha256": "6fd96a8c19867ee6740db8293c14bf241d9929a31e24f391e95d3aee4c6fab66"
+  },
+  "originalFunctionalEvidenceReused": true,
+  "nativeOrBenchmarkSourceChanged": false,
+  "newFunctionalProofExecuted": false,
+  "newCaptureExecuted": false,
+  "newReplayExecuted": false,
+  "measurementExecuted": false,
+  "readinessAsserted": false,
+  "oldReadinessReusedAsActive": false,
+  "fixtureRebinding": {
+    "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/structural-documentary-rebinding.json",
+    "bytes": 4659,
+    "sha256": "ef49568d4eebbb0eb50bee85538a0a30bdff9e6e882b68afa2088c35bacaa91b"
+  },
+  "actualProtocolPreparation": {
+    "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/protocol-preparation.execution.json",
+    "bytes": 1669,
+    "sha256": "6706dd6ef1f16c206c2e7be973e73621dee827f49726309a06d5c1574f7994fb"
+  },
+  "actualContractFinalization": {
+    "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/owner-contract-finalization.execution.json",
+    "bytes": 1202,
+    "sha256": "b7aeb66b6d9f6f721c72817927fbd607b3ca089036b5fc03a3b72242aa3f5033"
+  },
+  "actualStaticPreflightCommand": {
+    "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/static-preflight-command.execution.json",
+    "bytes": 1222,
+    "sha256": "1f205b6e8376780d1e0742d571b07284b3e8a526bcb3afee16b401d8d0a746d7"
+  },
+  "actualStaticPreflight": {
+    "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/static-preflight.json",
+    "bytes": 19703,
+    "sha256": "04652e57624402dfb03a7617e72e4db625fa5343fa1406924d1ca2d6c13fd41f"
+  },
+  "original84CheckReview": {
+    "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/independent-readiness-input-review.json",
+    "bytes": 36942,
+    "sha256": "17118655a5e4803b2e965de673ef6b055ca965c21617ed5520e31fb44a39e70c"
+  },
+  "declarationDifferences": [
+    {
+      "path": "/recordedAt",
+      "before": "2026-11-11T14:41:11.793729-03:00",
+      "after": "2026-11-11T16:46:34.488736-03:00"
+    },
+    {
+      "path": "/protocol/path",
+      "before": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/protocol.md",
+      "after": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/protocol.md"
+    },
+    {
+      "path": "/protocol/sha256",
+      "before": "34b172067d69fdde843cad2abbea6d2ce724dfed0ffa5c2d93eb0270e27262bd",
+      "after": "c8d38807961f0cf88face9b80d073c567a0463b37a2da96e1dabda7db6e10e04"
+    },
+    {
+      "path": "/cases/path",
+      "before": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/cases.json",
+      "after": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/cases.json"
+    },
+    {
+      "path": "/diagnosticComparisonPolicy/path",
+      "before": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/comparison-policy.json",
+      "after": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/comparison-policy.json"
+    },
+    {
+      "path": "/globalBudgetPolicy/path",
+      "before": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/global-budget-policy.json",
+      "after": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/global-budget-policy.json"
+    },
+    {
+      "path": "/globalBudgetPolicy/sha256",
+      "before": "ad6878f3065ec5fca67f4fda7ed3cfac936795c3ee11a37fec4a42fe1a5ca53b",
+      "after": "e60c27539dbcbc09af4e6d657e73bbb666e5449d41ae6e6cd75e1e8bd0454bcf"
+    },
+    {
+      "path": "/finalizedAt",
+      "before": "2026-11-11T14:41:11.793729-03:00",
+      "after": "2026-11-11T16:46:34.488736-03:00"
+    },
+    {
+      "path": "/candidate/checkoutHead",
+      "before": "c8ff4f2b4d495e12494130112258b7a62281d93c",
+      "after": "501198d7638c7a56c3b85d357beb917469899402"
+    },
+    {
+      "path": "/candidate/nativeSourceCommit",
+      "before": "c8ff4f2b4d495e12494130112258b7a62281d93c",
+      "after": "501198d7638c7a56c3b85d357beb917469899402"
+    },
+    {
+      "path": "/ownerCostQualification/contractPath",
+      "before": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/owner-growth-contract.json",
+      "after": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/owner-growth-contract.json"
+    }
+  ],
+  "globalPolicyDifferences": [
+    {
+      "path": "/declaredAt",
+      "before": "2026-11-11T14:41:11.793729-03:00",
+      "after": "2026-11-11T16:46:34.488736-03:00"
+    },
+    {
+      "path": "/diagnosticPhasePolicy",
+      "before": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/comparison-policy.json",
+      "after": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/comparison-policy.json"
+    },
+    {
+      "path": "/candidate/checkoutHead",
+      "before": "c8ff4f2b4d495e12494130112258b7a62281d93c",
+      "after": "501198d7638c7a56c3b85d357beb917469899402"
+    },
+    {
+      "path": "/candidate/nativeSourceCommit",
+      "before": "c8ff4f2b4d495e12494130112258b7a62281d93c",
+      "after": "501198d7638c7a56c3b85d357beb917469899402"
+    }
+  ],
+  "ownerContractDifferences": [
+    {
+      "path": "/declaredAt",
+      "before": "2026-11-11T17:45:22.704553+00:00",
+      "after": "2026-11-11T19:46:47.850267+00:00"
+    },
+    {
+      "path": "/performanceDirectory",
+      "before": "docs/migration/lot5c-evidence/recovery/performance-integrated-02",
+      "after": "docs/migration/lot5c-evidence/recovery/performance-integrated-03"
+    },
+    {
+      "path": "/declaration/path",
+      "before": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/declaration.json",
+      "after": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/declaration.json"
+    },
+    {
+      "path": "/declaration/sha256",
+      "before": "b63f8d61f27ce9d6401c0015ecf2888cd947f504bfbdbfb954e799c28f8a7c8e",
+      "after": "9c741d8597e5b864ba265cbab8adbf8cb8b7b15f3644ed86ed5e72f3a359a38c"
+    },
+    {
+      "path": "/ownerInventory/path",
+      "before": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/owner-source-inventory.json",
+      "after": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/owner-source-inventory.json"
+    },
+    {
+      "path": "/structuralFixture/path",
+      "before": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/owner-structural-fixture.json",
+      "after": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/owner-structural-fixture.json"
+    },
+    {
+      "path": "/structuralFixture/sha256",
+      "before": "6f8d45dc8d68e8d3a67c45a66ac1045d12d123c43c02ab66e4ac1a09b63191d5",
+      "after": "3fd3dcf30a1e0f13fde9ca5700b0a7f164da56c7f5435ad343be765788e39160"
+    },
+    {
+      "path": "/strictFailureReceipt",
+      "before": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/aggregation-failure.json",
+      "after": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/aggregation-failure.json"
+    },
+    {
+      "path": "/strictFailureLog",
+      "before": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/aggregation-failure.log",
+      "after": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/aggregation-failure.log"
+    },
+    {
+      "path": "/historicalAggregateOutput",
+      "before": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/combined-comparison.json",
+      "after": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/combined-comparison.json"
+    }
+  ],
+  "qualification": "Only a new documentary cost directory and coordination are prepared. Historical structural evidence is reused; no new functional result or capture is claimed. The fixture differs exactly at cases.path, with identical cases bytes and every original capture/fixture date retained. Existing source helpers derive the new protocol and contract and pass all76 static checks. Old01/02 remain retained; their old readiness and old ACKs cannot authorize the new request."
+}

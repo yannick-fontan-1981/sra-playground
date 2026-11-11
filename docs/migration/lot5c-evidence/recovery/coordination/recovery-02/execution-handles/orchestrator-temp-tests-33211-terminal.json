@@ -1,0 +1,8 @@
+{
+  "sessionId": 33211,
+  "exitCode": 1,
+  "terminalChunkId": "a31656",
+  "observedAt": "2026-11-11T19:59:15.240822+00:00",
+  "result": "13 synthetic cases;4 failure entries and1 error, including duplicate teardown assertion for one case. Whole-main fixture failed before request because original __file__ was outside temporary ROOT; cancelled-writer fixture cleanup tightened. Initial source and failed receipt preserved.",
+  "productionCostExecuted": false
+}

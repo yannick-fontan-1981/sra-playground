@@ -1,0 +1,32 @@
+{
+  "schema": "logos-engine.lot5c.command-execution.v1",
+  "status": "passed",
+  "startedAt": "2026-11-11T19:46:47.758263+00:00",
+  "command": [
+    "python",
+    "-B",
+    "docs/migration/lot5c-evidence/finalize-owner-cost-contract.py",
+    "docs/migration/lot5c-evidence/recovery/performance-integrated-03"
+  ],
+  "cwd": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout",
+  "timeoutSeconds": 90.0,
+  "wrapper": {
+    "path": "docs/migration/lot5c-evidence/run-evidence-command.py",
+    "bytes": 3904,
+    "sha256": "99b16a35eac1f12acb3063e43d303ffc020b3339109e22eff1f807d1e87e47db"
+  },
+  "finishedAt": "2026-11-11T19:46:47.933657+00:00",
+  "durationSeconds": 0.17349649099924136,
+  "exitCode": 0,
+  "timedOut": false,
+  "log": {
+    "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/owner-contract-finalization.log",
+    "bytes": 350,
+    "sha256": "47a160d4b9719ed963ccbb0d71867e47e72f768df5cb46cbbacfdd53f9fbfc25"
+  },
+  "compressedLog": {
+    "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-03/owner-contract-finalization.log.gz",
+    "bytes": 269,
+    "sha256": "7e041423567aad637712f879114c2b90390789ab207bae93ec38f75602b8878a"
+  }
+}
