@@ -1,0 +1,110 @@
+{
+  "schema": "logos-engine.lot10a-readiness-helper-validation.v1",
+  "status": "passed",
+  "startedAt": "2026-11-10T22:52:11.119746+00:00",
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "lock": {
+    "path": "/workspace/shared/sra-coordination/performance.lock",
+    "mode": "shared_nonblocking",
+    "heldForCompleteInvocation": true
+  },
+  "authorization": "Parent authorized bounded AST and --help after explicit 4B compute release at 2026-11-10T22:48:31 UTC.",
+  "sourcesBefore": [
+    {
+      "path": "docs/migration/lot10a-evidence/finalize-cost-readiness.py",
+      "sha256": "49f2ae8087adef22e5aa591e2fa3fd45ca4e49702db852bb01106b02fffb08fe",
+      "bytes": 51883
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/README-readiness.md",
+      "sha256": "2c5c0b092bc05aa08712af4151e7d32c9afb35493ce2b6c551f13767f91189e6",
+      "bytes": 5848
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/readiness-source-review.md",
+      "sha256": "2495756c8a824f56cf04efad3ece66b655238e2b72f8774e15fa4d70d2fc5d02",
+      "bytes": 8743
+    }
+  ],
+  "checks": [
+    {
+      "name": "python-ast",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "-c",
+        "import ast, json, pathlib, sys; p = pathlib.Path(sys.argv[1]); tree = ast.parse(p.read_text(encoding='utf-8'), filename=str(p)); print(json.dumps({'status':'parsed','file':str(p),'moduleStatements':len(tree.body)}))",
+        "docs/migration/lot10a-evidence/finalize-cost-readiness.py"
+      ],
+      "startedAt": "2026-11-10T22:52:11.120295+00:00",
+      "finishedAt": "2026-11-10T22:52:11.163099+00:00",
+      "exitCode": 0,
+      "stdout": "{\"status\": \"parsed\", \"file\": \"docs/migration/lot10a-evidence/finalize-cost-readiness.py\", \"moduleStatements\": 47}\n",
+      "stderr": ""
+    },
+    {
+      "name": "argparse-help",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "docs/migration/lot10a-evidence/finalize-cost-readiness.py",
+        "--help"
+      ],
+      "startedAt": "2026-11-10T22:52:11.163274+00:00",
+      "finishedAt": "2026-11-10T22:52:11.213214+00:00",
+      "exitCode": 0,
+      "stdout": "usage: finalize-cost-readiness.py [-h] --baseline-checkout BASELINE_CHECKOUT\n                                  --final-directory FINAL_DIRECTORY\n                                  --performance-directory\n                                  PERFORMANCE_DIRECTORY --validation-directory\n                                  VALIDATION_DIRECTORY --isolation-receipt\n                                  ISOLATION_RECEIPT --browser-evidence\n                                  BROWSER_EVIDENCE --contribution-reserve\n                                  CONTRIBUTION_RESERVE --regression-cases\n                                  REGRESSION_CASES\n\nBind completed 10A evidence before the first official cost sample. This reader\nreuses the unchanged delivery verifier after checking its recorded\nfingerprint. It starts no native process, test, replay, build, browser, game\nor measurement. A supplied cooperative quiet receipt is mandatory; locks and\nprocess visibility are not evidence of isolation. Browser and POLA\nreservations remain explicit. The exclusive readiness.json authorizes cost\nmeasurement only. Failures are retained as exclusive readiness-failure-*.json\nfiles.\n\noptions:\n  -h, --help            show this help message and exit\n  --baseline-checkout BASELINE_CHECKOUT\n  --final-directory FINAL_DIRECTORY\n  --performance-directory PERFORMANCE_DIRECTORY\n  --validation-directory VALIDATION_DIRECTORY\n  --isolation-receipt ISOLATION_RECEIPT\n  --browser-evidence BROWSER_EVIDENCE\n  --contribution-reserve CONTRIBUTION_RESERVE\n  --regression-cases REGRESSION_CASES\n",
+      "stderr": ""
+    }
+  ],
+  "nativeExecution": false,
+  "readinessFinalized": false,
+  "declarationCreated": false,
+  "measurementExecuted": false,
+  "qualification": "Actual Python AST parsing and argparse --help only. No finalizer invocation with evidence inputs, no native import/test/build/replay/capture/benchmark, and no source modification.",
+  "coordinationBefore": [
+    {
+      "path": "/workspace/shared/sra-coordination/lot4b-status.json",
+      "sha256": "6ec72844b51b67e6c8f02f1a43a03513175c04e0f4df078a2da62422462d6f85",
+      "bytes": 3468,
+      "updatedAt": "2026-11-10T22:50:37.528028+00:00",
+      "stage": "Cost accepted on both games: STCK−1.812977%, SMLP+2.735461%; independent3960checks and publication-input integrity passed. Preparing final documents and bounded source transport.",
+      "performanceStarted": false
+    },
+    {
+      "path": "/workspace/shared/sra-coordination/lot5a-status.json",
+      "sha256": "6c59d5cce15d1cd1342581cf26e886013def11f19c84777733f689511a573519",
+      "bytes": 5135,
+      "updatedAt": "2026-11-10T22:19:51.591441+00:00",
+      "stage": "Completed: first native0.53publication Site84 and documentation closure Site85 both succeeded privately. Final source a009e1f138bb18251d697f49647bacc615ee514f. Native/test/build/costs unchanged, all evidence retained. No further5Aexecution; releasing publication lock.",
+      "performanceStarted": false
+    },
+    {
+      "path": "/workspace/shared/sra-coordination/lot7b-status.json",
+      "sha256": "5ee87e8a763534ee8ae50905cf84b47757e54911eb13f74e4bea1a81f9043fe7",
+      "bytes": 2521,
+      "updatedAt": "2026-11-10T22:50:06.321671+00:00",
+      "stage": "Prepared actual restoration capture passes both Python AST checks and full TypeScript typecheck. Recording coherent preparation; waiting for actual4B publication before final integration/freeze.",
+      "performanceStarted": false
+    }
+  ],
+  "sourcesAfter": [
+    {
+      "path": "docs/migration/lot10a-evidence/finalize-cost-readiness.py",
+      "sha256": "49f2ae8087adef22e5aa591e2fa3fd45ca4e49702db852bb01106b02fffb08fe",
+      "bytes": 51883
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/README-readiness.md",
+      "sha256": "2c5c0b092bc05aa08712af4151e7d32c9afb35493ce2b6c551f13767f91189e6",
+      "bytes": 5848
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/readiness-source-review.md",
+      "sha256": "2495756c8a824f56cf04efad3ece66b655238e2b72f8774e15fa4d70d2fc5d02",
+      "bytes": 8743
+    }
+  ],
+  "sourcesUnchanged": true,
+  "finishedAt": "2026-11-10T22:52:11.214395+00:00"
+}

@@ -1,0 +1,393 @@
+{
+  "schema": "logos-engine.lot10a.published-baseline-preparation.v1",
+  "status": "passed",
+  "startedAt": "2026-11-11T00:02:22.629128+00:00",
+  "baselineCheckout": "/workspace/sites/sra-lot10a-baseline-site88-20261110",
+  "publishedSiteVersion": 88,
+  "expectedCommit": "43ee01ba5469fd4fbffe10eb6a786fe99b1c35a7",
+  "preparedComparisonCommit": "28f3f388e18bad21a186795f965102a83e6b53d7",
+  "expectedNativeVersion": "0.55.0",
+  "expectedNativeDigest": "ea25603262a7473e5ab9994d2e2e86dd64a8291dd7c1dc18ede4d1f443cdc53b",
+  "expectedNativeFileCount": 291,
+  "relativeSourceDirectory": "docs/migration/lot10a-evidence/integrated-baseline",
+  "coordination": {
+    "lock": "/workspace/shared/sra-coordination/performance.lock",
+    "mode": "shared_nonblocking",
+    "timingClaim": false
+  },
+  "commands": [
+    {
+      "name": "worktree-add",
+      "command": [
+        "git",
+        "worktree",
+        "add",
+        "--detach",
+        "--quiet",
+        "/workspace/sites/sra-lot10a-baseline-site88-20261110",
+        "43ee01ba5469fd4fbffe10eb6a786fe99b1c35a7"
+      ],
+      "cwd": "/workspace/sites/sra-lot10a-20261110/.sites-checkout",
+      "exitCode": 0,
+      "stdout": {
+        "path": "docs/migration/lot10a-evidence/coordination/site88-baseline-preparation/worktree-add-stdout.raw.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "docs/migration/lot10a-evidence/coordination/site88-baseline-preparation/worktree-add-stderr.raw.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "baseline-head-before",
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/workspace/sites/sra-lot10a-baseline-site88-20261110",
+      "exitCode": 0,
+      "stdout": {
+        "path": "docs/migration/lot10a-evidence/coordination/site88-baseline-preparation/baseline-head-before-stdout.raw.txt",
+        "bytes": 41,
+        "sha256": "51474ec6143a5535b46b5251c5203c8761f88edfd4aa9035325cad792745d94e"
+      },
+      "stderr": {
+        "path": "docs/migration/lot10a-evidence/coordination/site88-baseline-preparation/baseline-head-before-stderr.raw.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "baseline-detached",
+      "command": [
+        "git",
+        "symbolic-ref",
+        "--quiet",
+        "HEAD"
+      ],
+      "cwd": "/workspace/sites/sra-lot10a-baseline-site88-20261110",
+      "exitCode": 1,
+      "stdout": {
+        "path": "docs/migration/lot10a-evidence/coordination/site88-baseline-preparation/baseline-detached-stdout.raw.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "docs/migration/lot10a-evidence/coordination/site88-baseline-preparation/baseline-detached-stderr.raw.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "native-status-before",
+      "command": [
+        "git",
+        "status",
+        "--porcelain=v1",
+        "--untracked-files=all",
+        "--",
+        "src/logos-engine",
+        "src/runtime"
+      ],
+      "cwd": "/workspace/sites/sra-lot10a-baseline-site88-20261110",
+      "exitCode": 0,
+      "stdout": {
+        "path": "docs/migration/lot10a-evidence/coordination/site88-baseline-preparation/native-status-before-stdout.raw.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "docs/migration/lot10a-evidence/coordination/site88-baseline-preparation/native-status-before-stderr.raw.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "freeze-helper-status",
+      "command": [
+        "git",
+        "status",
+        "--porcelain=v1",
+        "--untracked-files=all",
+        "--",
+        "scripts/freeze-v53-native-source.py",
+        "scripts/run-v53-campaign-proof.py"
+      ],
+      "cwd": "/workspace/sites/sra-lot10a-baseline-site88-20261110",
+      "exitCode": 0,
+      "stdout": {
+        "path": "docs/migration/lot10a-evidence/coordination/site88-baseline-preparation/freeze-helper-status-stdout.raw.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "docs/migration/lot10a-evidence/coordination/site88-baseline-preparation/freeze-helper-status-stderr.raw.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "freeze",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "scripts/freeze-v53-native-source.py",
+        "freeze",
+        "docs/migration/lot10a-evidence/integrated-baseline"
+      ],
+      "cwd": "/workspace/sites/sra-lot10a-baseline-site88-20261110",
+      "exitCode": 0,
+      "stdout": {
+        "path": "docs/migration/lot10a-evidence/coordination/site88-baseline-preparation/freeze-stdout.raw.txt",
+        "bytes": 237,
+        "sha256": "d97a748986e253a286e113afb7c28f320d609927a8954b1f61ed9b7a45cd7cb2"
+      },
+      "stderr": {
+        "path": "docs/migration/lot10a-evidence/coordination/site88-baseline-preparation/freeze-stderr.raw.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "public-trace-status",
+      "command": [
+        "git",
+        "status",
+        "--porcelain=v1",
+        "--untracked-files=all",
+        "--",
+        "docs/migration/lot3h-evidence/performance/cases.json",
+        "docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+        "docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz"
+      ],
+      "cwd": "/workspace/sites/sra-lot10a-baseline-site88-20261110",
+      "exitCode": 0,
+      "stdout": {
+        "path": "docs/migration/lot10a-evidence/coordination/site88-baseline-preparation/public-trace-status-stdout.raw.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "docs/migration/lot10a-evidence/coordination/site88-baseline-preparation/public-trace-status-stderr.raw.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "prepared-source-test-build-diff",
+      "command": [
+        "git",
+        "diff",
+        "--name-only",
+        "28f3f388e18bad21a186795f965102a83e6b53d7",
+        "43ee01ba5469fd4fbffe10eb6a786fe99b1c35a7",
+        "--",
+        "src",
+        "tests",
+        "scripts",
+        "public",
+        "index.html",
+        "package.json",
+        "package-lock.json",
+        "tsconfig.json",
+        "vite.config.ts",
+        ".openai/hosting.json"
+      ],
+      "cwd": "/workspace/sites/sra-lot10a-20261110/.sites-checkout",
+      "exitCode": 0,
+      "stdout": {
+        "path": "docs/migration/lot10a-evidence/coordination/site88-baseline-preparation/prepared-source-test-build-diff-stdout.raw.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "docs/migration/lot10a-evidence/coordination/site88-baseline-preparation/prepared-source-test-build-diff-stderr.raw.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "baseline-head-after",
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/workspace/sites/sra-lot10a-baseline-site88-20261110",
+      "exitCode": 0,
+      "stdout": {
+        "path": "docs/migration/lot10a-evidence/coordination/site88-baseline-preparation/baseline-head-after-stdout.raw.txt",
+        "bytes": 41,
+        "sha256": "51474ec6143a5535b46b5251c5203c8761f88edfd4aa9035325cad792745d94e"
+      },
+      "stderr": {
+        "path": "docs/migration/lot10a-evidence/coordination/site88-baseline-preparation/baseline-head-after-stderr.raw.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "native-status-after",
+      "command": [
+        "git",
+        "status",
+        "--porcelain=v1",
+        "--untracked-files=all",
+        "--",
+        "src/logos-engine",
+        "src/runtime"
+      ],
+      "cwd": "/workspace/sites/sra-lot10a-baseline-site88-20261110",
+      "exitCode": 0,
+      "stdout": {
+        "path": "docs/migration/lot10a-evidence/coordination/site88-baseline-preparation/native-status-after-stdout.raw.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "docs/migration/lot10a-evidence/coordination/site88-baseline-preparation/native-status-after-stderr.raw.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "dependencyTargets": {
+    "node_modules": "/workspace/sites/sra-lot10a-20261110/.sites-checkout/node_modules",
+    "public/vendor/pyodide": "/workspace/sites/sra-lot10a-20261110/.sites-checkout/public/vendor/pyodide"
+  },
+  "headBefore": "43ee01ba5469fd4fbffe10eb6a786fe99b1c35a7",
+  "detached": true,
+  "freezeHelpers": [
+    {
+      "path": "scripts/freeze-v53-native-source.py",
+      "bytes": 5719,
+      "sha256": "f5ef4f4734ce2b53a162dee60a23ce7ca43931e10bdbc08a04e4316c374d5bd4"
+    },
+    {
+      "path": "scripts/run-v53-campaign-proof.py",
+      "bytes": 5421,
+      "sha256": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782"
+    }
+  ],
+  "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.55.0",
+  "freezeStdout": {
+    "operation": "freeze",
+    "directory": "docs/migration/lot10a-evidence/integrated-baseline",
+    "verified": {
+      "nativeSourceManifestDigest": "ea25603262a7473e5ab9994d2e2e86dd64a8291dd7c1dc18ede4d1f443cdc53b",
+      "files": 302,
+      "nativeFiles": 291
+    }
+  },
+  "splitIncludedByFreeze": true,
+  "nativeSource": {
+    "fileCount": 291,
+    "digest": "ea25603262a7473e5ab9994d2e2e86dd64a8291dd7c1dc18ede4d1f443cdc53b"
+  },
+  "archiveMembers": 302,
+  "archive": {
+    "path": "docs/migration/lot10a-evidence/integrated-baseline/source-archive.tar.gz",
+    "sha256": "9d4acec65c73fc2c31822b5f45e06f02dd95e697240eac0925c37ede8cadf92b",
+    "bytes": 1801856
+  },
+  "archiveParts": [
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-baseline/source-archive.tar.gz.part000",
+      "sha256": "e6146938364da5036b812946d529f76f920227dbe4a25fee4731342f0d3672ce",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-baseline/source-archive.tar.gz.part001",
+      "sha256": "5a731483ec0049590dbdaf9517e34c386f137d9d642b5747b29589bb8f9c996d",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-baseline/source-archive.tar.gz.part002",
+      "sha256": "04381a7bb0ad4b16961152f4122c892220683a3d91675e2ad648753592165f31",
+      "bytes": 1856
+    }
+  ],
+  "historicalCases": {
+    "path": "docs/migration/lot3h-evidence/performance/cases.json",
+    "bytes": 1451,
+    "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+  },
+  "publicTraces": [
+    {
+      "game": "STCK",
+      "path": "docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "bytes": 53583,
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b",
+      "candidateIdentical": true,
+      "historicalDigestMatched": true
+    },
+    {
+      "game": "SMLP",
+      "path": "docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "bytes": 111624,
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9",
+      "candidateIdentical": true,
+      "historicalDigestMatched": true
+    }
+  ],
+  "preparedSourceTestBuildDiffEmpty": true,
+  "preparedComparisonScope": [
+    "src",
+    "tests",
+    "scripts",
+    "public",
+    "index.html",
+    "package.json",
+    "package-lock.json",
+    "tsconfig.json",
+    "vite.config.ts",
+    ".openai/hosting.json"
+  ],
+  "copiedArtifacts": [
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-baseline/source-manifest.json",
+      "bytes": 34553,
+      "sha256": "c301ce42ecb2592f1a4af49d6efde1d91a034cec06536d02b07c878eed31bea9"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-baseline/source-archive.json",
+      "bytes": 36199,
+      "sha256": "ad026a3b1f9f1b883f93387b817c1a1df3fef3692f20a745b29ff74ae6389b48"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-baseline/source-archive-parts.json",
+      "bytes": 1051,
+      "sha256": "368be3cf6de44e32557635ec711dea1b0fabafb1646156422d580e64f0e2a1c8"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-baseline/source-archive.tar.gz",
+      "bytes": 1801856,
+      "sha256": "9d4acec65c73fc2c31822b5f45e06f02dd95e697240eac0925c37ede8cadf92b"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-baseline/source-archive.tar.gz.part000",
+      "bytes": 900000,
+      "sha256": "e6146938364da5036b812946d529f76f920227dbe4a25fee4731342f0d3672ce"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-baseline/source-archive.tar.gz.part001",
+      "bytes": 900000,
+      "sha256": "5a731483ec0049590dbdaf9517e34c386f137d9d642b5747b29589bb8f9c996d"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-baseline/source-archive.tar.gz.part002",
+      "bytes": 1856,
+      "sha256": "04381a7bb0ad4b16961152f4122c892220683a3d91675e2ad648753592165f31"
+    }
+  ],
+  "headAfter": "43ee01ba5469fd4fbffe10eb6a786fe99b1c35a7",
+  "nativeSourcesCleanBeforeAndAfter": true,
+  "frozenNativeBytesUnchanged": true,
+  "gitignoreModified": false,
+  "archiveExclusionToAdd": "/docs/migration/lot10a-evidence/integrated-baseline/source-archive.tar.gz",
+  "finishedAt": "2026-11-11T00:02:30.308036+00:00",
+  "qualification": "Fresh detached worktree at the exact parent-verified Site88 publication. The unchanged published freeze helper archives source inputs and splits exact bytes; only the three source manifests, archive and ordered parts are copied exclusively to the candidate under identical relative labels. Source identities, dependency targets, STCK/SMLP trace fingerprints and the specified prepared-to-published source/test/build diff are checked without executing an agent. Existing outputs and actual failures are retained. No owner inventory, capture, cost declaration, measurement, replay, test, build, game, native delivery verification, staging or commit is performed."
+}

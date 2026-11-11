@@ -1,0 +1,9 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> sra-playground@0.1.0 typecheck
+> tsc --noEmit
+
+src/logos-engine/v6-axial-question.ts(131,12): error TS2352: Conversion of type '{ status: string; kind: string; actions: R[]; steps: { action: R; expected_after: null; }[]; facts: { axial_question_current: boolean; }; binding: { [k: string]: unknown; }; axial_plan: { offer: R; choice: R; workflow: AxialReceipt; drm_hash: string; }; compositions: { ...; }[]; question: { ...; }; route_refs: any[]...' to type 'NativeProposal' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Types of property 'actions' are incompatible.
+    Type 'R[]' is not comparable to type 'readonly NativeCommand[]'.
+      Type 'R' is missing the following properties from type 'NativeCommand': action_ref, data

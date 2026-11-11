@@ -1,0 +1,51 @@
+{
+  "schema": "logos-engine.lot10a.isolated-test-resolution.v1",
+  "recordedAt": "2026-11-10T21:49:02.338969+00:00",
+  "nativeSourceDigest": "cabd056f2fddded1c5f7bcc214bd1fd1ac387764b61cddf42606debe72f37915",
+  "nativeSourceChanged": false,
+  "firstRun": {
+    "path": "docs/migration/lot10a-evidence/isolated-functional/validation/delta-tests-run.json",
+    "bytes": 156268,
+    "sha256": "06728ddce02c52844cb931c477d5685d941af0fbd1fd65fb8007de3e6a6405e8"
+  },
+  "firstCounts": {
+    "tests": 867,
+    "pass": 866,
+    "fail": 1,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "failedTest": "recolor has one cold owner at its declared material position and uses the existing source program",
+  "cause": "The inherited test expected reactive_contact immediately after topological_recolor. The pinned strategy puts axial_question directly after topological_recolor; the newly connected source entry makes the former expectation obsolete.",
+  "correction": "Update only the adjacent entry expectation and assert its public_axial_question owner. No implementation or pinned reference change.",
+  "sourceContract": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+  "changedTest": {
+    "path": "tests/v6-topological-recolor-kernel.test.ts",
+    "bytes": 10078,
+    "sha256": "d16b0a364d02b6c8b9f010bd949a9df837d58e8b38128a4eabcf851e1cfbd3ad"
+  },
+  "previousTestSha256": "3fe2a1a50c74c79144da3436ffab674be627b0b52ad44390bb8529fbf9de5cd8",
+  "boundedRecheck": {
+    "command": [
+      "node",
+      "--test",
+      "--test-reporter=tap",
+      "tests/v6-topological-recolor-kernel.test.ts"
+    ],
+    "log": {
+      "path": "docs/migration/lot10a-evidence/diagnostic/recolor-order-recheck.tap",
+      "bytes": 906,
+      "sha256": "275ba528d8090f1f32d807adba020995cbb48a90aa2e0e8afd05c3fbd2f8b90e"
+    },
+    "counts": {
+      "tests": 3,
+      "pass": 3,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    }
+  },
+  "qualification": "The initial 31-file receipt remains failed and preserved. Only the affected three-test file was rerun on the unchanged isolated native source. This does not replace the future full declared integrated test scope."
+}

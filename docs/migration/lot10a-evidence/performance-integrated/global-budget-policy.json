@@ -1,0 +1,59 @@
+{
+  "schema": "logos-engine.native-global-cost-policy.v1",
+  "declaredAt": "2026-11-11T00:11:06.107443+00:00",
+  "authorization": {
+    "source": "retained project cost rule declared prospectively for lot10A",
+    "verbatim": "si le global reste en dessous de 10% d'augmentation alors une phase qui dépasse 10% peut être accepté.",
+    "retainedPolicy": {
+      "path": "docs/migration/lot3h-evidence/performance/global-budget-policy.json",
+      "sha256": "cd36bc36abde70765edbb6dc0c78165c889a7c5fed1c88f8b7c72d650a4652f7",
+      "bytes": 2011
+    }
+  },
+  "globalStage": "session_elapsed",
+  "statistic": "pooled median of complete measured-session durations per tested case",
+  "caseIds": [
+    "STCK",
+    "SMLP"
+  ],
+  "relativeIncreaseLimit": 0.1,
+  "comparison": "strictly_less_than",
+  "allCasesMustPass": true,
+  "crossCaseCompensation": false,
+  "phaseOverrunsMayBeAccepted": true,
+  "phasesAndP95RemainVisible": true,
+  "diagnosticPhasePolicy": "docs/migration/lot10a-evidence/performance-integrated/comparison-policy.json",
+  "plannedOrder": [
+    "A1",
+    "B1",
+    "B2",
+    "A2"
+  ],
+  "cohorts": 2,
+  "sessionsPerCaseVersionCohort": 4,
+  "measuredSessions": 32,
+  "measuredActions": 400,
+  "excludedWarmupSessions": 8,
+  "excludedWarmupActions": 24,
+  "excludedMeasuredSessions": 0,
+  "excludedOutliers": 0,
+  "baseline": {
+    "nativeVersion": "0.55.0",
+    "siteVersion": 88,
+    "commit": "43ee01ba5469fd4fbffe10eb6a786fe99b1c35a7",
+    "nativeDigest": "ea25603262a7473e5ab9994d2e2e86dd64a8291dd7c1dc18ede4d1f443cdc53b",
+    "nativeFiles": 291
+  },
+  "candidate": {
+    "nativeVersion": "0.56.0",
+    "nativeDigest": "be11e761de3c0f3c7d50d10da47be9e0d7b4fc9c5b7d5002cc9272ffce85645a",
+    "nativeFiles": 294,
+    "sourceBaseCommit": "19f3116c95e8e8ce99aff067de113ae23fc634d6",
+    "checkoutHead": "367a6ecb742ef114b419b5003ef2bb70965e22a8",
+    "nativeSourceCommit": "367a6ecb742ef114b419b5003ef2bb70965e22a8",
+    "nativeWorktreeChanges": [],
+    "siteVersion": null,
+    "qualification": "The frozen digest and archive identify candidate bytes. A null source commit means the checkout HEAD is ancestry only. No candidate publication is asserted."
+  },
+  "qualification": "Declared before a new lot10A official window on exact retained source freezes. Each game must independently remain strictly below +10% complete-session median increase. All measured samples, phase results and available p95 remain. Readiness, isolation and functional evidence are separate."
+}

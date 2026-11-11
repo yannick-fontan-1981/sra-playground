@@ -1,0 +1,44 @@
+{
+  "schema": "logos-engine.lot10a.integrated-extra-test-scope.v1",
+  "status": "declared_for_frozen_candidate_pending_actual7b_publication",
+  "testFiles": [
+    "tests/kernel-batch.test.ts",
+    "tests/v6-crossed-prefix-access.test.ts",
+    "tests/v6-frontier-native-snapshot.test.ts",
+    "tests/v6-native-mixed-path.test.ts",
+    "tests/v6-linked-temporal-preparation.test.ts",
+    "tests/v6-linked-temporal-reference.test.ts",
+    "tests/v6-learned-preparation-priority.test.ts",
+    "tests/v6-relative-arrangements-reference.test.ts",
+    "tests/v6-relative-arrangements-integration.test.ts",
+    "tests/v6-coupled-pair-planning.test.ts",
+    "tests/v6-symbol-transactions-reference.test.ts",
+    "tests/v6-symbol-transactions-kernel.test.ts",
+    "tests/v6-symbol-geometry-reference.test.ts",
+    "tests/v6-symbol-interface-reference.test.ts"
+  ],
+  "predecessorTestFileCounts": {
+    "5A": 6,
+    "4B": 4,
+    "7B": 4
+  },
+  "baseScope": "docs/migration/lot10a-evidence/validation-test-scope.json",
+  "baseTestFileCountAtPreparation": 31,
+  "extraTestFileCount": 14,
+  "duplicateExtraTestFiles": [],
+  "overlapWithBaseScope": [],
+  "qualification": "Explicit45-file scope for the composed0.56 candidate:31base contracts plus14 predecessor tests. All paths exist and are unique. Published5A/4B and the frozen prepared7B source are identified here. Final reuse requires merging actual7B publication and proving unchanged native/source/test/build/execution bytes in a separate reconciliation receipt; this immutable scope declaration does not claim published7B or passed tests.",
+  "preparedPredecessor": {
+    "lot": "7B",
+    "commit": "28f3f388e18bad21a186795f965102a83e6b53d7",
+    "nativeDigest": "ea25603262a7473e5ab9994d2e2e86dd64a8291dd7c1dc18ede4d1f443cdc53b",
+    "nativeVersion": "0.55.0",
+    "status": "prepared_not_published"
+  },
+  "publishedPredecessors": {
+    "5A": "a009e1f138bb18251d697f49647bacc615ee514f",
+    "4B": "dd355400264b50942486559b8ca56ee6dfc6a3cc"
+  },
+  "candidateNativeVersion": "0.56.0",
+  "reconciledAt": "2026-11-10T23:11:26.466195+00:00"
+}

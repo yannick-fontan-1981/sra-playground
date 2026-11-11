@@ -1,0 +1,31 @@
+{
+  "schema": "logos-engine.evidence-byte-parts.v1",
+  "original": {
+    "file": "rswp-site83-replay.json.gz",
+    "sha256": "d87289f4235c7b1d297b30788e442fd1440fa9fb10205ec5def1930ab02ae3c1",
+    "bytes": 2997916
+  },
+  "parts": [
+    {
+      "file": "rswp-site83-replay.json.gz.part000",
+      "sha256": "ace0daf45dc9e84ee9527fd28a88c2f2955e78df61fc586d667349090233cb23",
+      "bytes": 900000
+    },
+    {
+      "file": "rswp-site83-replay.json.gz.part001",
+      "sha256": "600dd3bcfab87da19737c5890cabce64aa9ad2fb03e74cda3a6b50913b5ab472",
+      "bytes": 900000
+    },
+    {
+      "file": "rswp-site83-replay.json.gz.part002",
+      "sha256": "16729a9b3a63aaa99280d7a3c2014460ea267854a25d0063853b3bce80b69fdb",
+      "bytes": 900000
+    },
+    {
+      "file": "rswp-site83-replay.json.gz.part003",
+      "sha256": "aaaacb126b4176797c9df280f157c9060001967ae82b160d4654f8d206cbdc65",
+      "bytes": 297916
+    }
+  ],
+  "qualification": "Exact byte partitions of immutable evidence; original data and checksum are unchanged."
+}

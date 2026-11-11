@@ -1,0 +1,56 @@
+{
+  "lot": "7B observed_symbol_transaction",
+  "checkout": "/workspace/sites/sra-lot7b-20261110/.sites-checkout",
+  "branch": "lot7b-symbol-transactions-delivery",
+  "basePublishedCommit": "a009e1f138bb18251d697f49647bacc615ee514f",
+  "baseSiteVersion": 85,
+  "updated_at": "2026-11-10T23:09:05.947521+00:00",
+  "stage": "Native0.55 final freeze stable.112 formal tests,8strict recorded regressions and cold CRAF start in separate lanes; no official cost.",
+  "heavy_work_started": true,
+  "performance_started": false,
+  "publication_started": false,
+  "publication_order": "7A Site83 ->5A ->4B ->7B, integrating actualpublishedpredecessors before7Bfreeze.",
+  "request": "5A and4B:7Bsourceport started after7Apublished; notifythisstatus beforeexclusivecostslot and7Bwillpause alltests/oracles/builds. No7Bofficialtimingplanneduntilactualpredecessorsintegrated.",
+  "caseClocks": {
+    "CRAF": {
+      "cumulativeSeconds": 847.684697,
+      "remainingSeconds": 1552.3153029999999,
+      "status": "active",
+      "startedAt": "2026-11-10T23:09:05.947521+00:00"
+    }
+  },
+  "nativeVersionAssigned": true,
+  "baseNativeVersion": "0.53.0",
+  "quiet_acknowledged": false,
+  "active_command": "112formal tests/fivechecks;8strict recorded cases then partialLKEY; coldCRAF36expected-actions target3 actual-only",
+  "own_agents": "review_integration_plan: formal tests/checks; merge_feedback_evidence: strict regressions then partialLKEY; root: CRAF and browser. No measurement.",
+  "request_to_lot5a": "Site85 closure announced and will be verified/integrated. Site84 native sources already verified and integrated without rejected oversized ancestry.",
+  "request_to_lot4b": "Root independently verified Site86 succeeded and source082ce553 native0.54 digestf25. Integrating now, then final7B functional tests/campaigns. Your documentation closure will be integrated with native/test/build identity verified before our own cost window. No7B cost until your complete release.",
+  "functional_progress": {
+    "componentTests": 275,
+    "kernelTests": 4,
+    "crafLevels": 3,
+    "crafActions": 36,
+    "symbolSelected": 36,
+    "originalCalls": 144,
+    "originalChecks": 432,
+    "interfaceMethodAblationRemovedProposals": 27,
+    "boundAblationRemovedProposals": 18
+  },
+  "developmentCommits": [
+    "66c8b64",
+    "4533371"
+  ],
+  "preparedMergeCommit": "2c2da44f960fa01557b2d9e1fe01a62f068eb079",
+  "preparedMergeDigest": "4b2f3c698d73a78c79f2e7ffd9486620b2a391a69e5575d0e3d7c75e3597f7cb",
+  "deliveryHead": "28f3f388e18bad21a186795f965102a83e6b53d7",
+  "quiet_acknowledged_at": "2026-11-10T22:30:19.524096+00:00",
+  "preparation": "Passive actual Symbols native restoration witness and exhaustive material-entry assertion prepared; execution deferred until4B release and actual published integration.",
+  "initialDevelopmentBase": {
+    "commit": "bed48116585da864dd5c412ed11dd6990a950e8e",
+    "siteVersion": 83,
+    "nativeVersion": "0.52.0"
+  },
+  "nativeVersion": "0.55.0",
+  "nativeFrozenDigest": "ea25603262a7473e5ab9994d2e2e86dd64a8291dd7c1dc18ede4d1f443cdc53b"
+}

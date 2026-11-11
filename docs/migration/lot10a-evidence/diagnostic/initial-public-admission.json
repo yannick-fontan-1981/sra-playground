@@ -1,0 +1,1173 @@
+{
+  "schema": "logos-engine.lot10a.initial-public-admission.v1",
+  "startedAt": "2026-11-10T21:17:56.648Z",
+  "completedAt": "2026-11-10T21:17:57.883Z",
+  "sourceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "nativeGeometry": {
+    "path": "src/logos-engine/v6-axial-question-geometry.ts",
+    "sha256": "351bc7cbc2b53fa1ecef11fd6f6fc36664924316f88e827e008d0f0603542140"
+  },
+  "corpus": {
+    "path": "tests/fixtures/v6-linked-packet-initial-public.json.gz",
+    "sha256": "3f82fb0b60a104095623216023054ef438ca4cc516941c671c385ebcbf1e54f2",
+    "totalViews": 100,
+    "selectedViews": 95,
+    "excludedGames": [
+      "CWSE",
+      "SK48",
+      "FOGW",
+      "VOIS",
+      "WEAV"
+    ],
+    "exclusionScope": "Existing case clocks retained; no new diagnosis of these cases in this bounded candidate scan."
+  },
+  "observedActions": 0,
+  "gameExecution": false,
+  "levelJumps": 0,
+  "learnedStatePreloaded": false,
+  "scope": "Native geometry on archived initial public rasters only; no Python parity, action proposal, game execution or official completion claim.",
+  "admittedMeasurements": [
+    "POLA"
+  ],
+  "cases": [
+    {
+      "game": "AR25",
+      "rowsSha256": "dcb73927160522c26e2655d31ead221e6da6aab818037d20388bbf46e9afa1b0",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:dcb73927160522c2",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "BP35",
+      "rowsSha256": "73ed3968e48e2ac7b6d4a41c2a408abeba6f9ce1c493ad03ce2dd512b0be55bd",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:73ed3968e48e2ac7",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "CD82",
+      "rowsSha256": "824ef203a4308533d58fd0b7207d4bb4396f1ac1b6ed8bf4a5160259c94a6904",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:824ef203a4308533",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "CN04",
+      "rowsSha256": "76e9c99bc22f6b778aa1edd6bf938de351aedb10016b72f95bb67d75490ba0e7",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:76e9c99bc22f6b77",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "DC22",
+      "rowsSha256": "3882264d7cb6462eb124e8cfc3c3920d25a499167b2b0436cf62c1d753e12d4a",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:3882264d7cb6462e",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "FT09",
+      "rowsSha256": "b537cde839031c143072b1b1fd7612179a55b4a8ff85a1c485e3be3fd3b33211",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:b537cde839031c14",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "G50T",
+      "rowsSha256": "f79ab0e9d856fdf82c39b63b513bc997ebe8313394732f8318bd2815d639e586",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:f79ab0e9d856fdf8",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "KA59",
+      "rowsSha256": "a5391f47a4b5f63feb8af396ab4b0bbdd2f80a18a0f19ffe6f128765e9d75e2c",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:a5391f47a4b5f63f",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "LF52",
+      "rowsSha256": "8c3509a81bc0b33cdcadefd63b15f8d8259dcfc4f6f12c00a1ff598d849bc4ff",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:8c3509a81bc0b33c",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "LP85",
+      "rowsSha256": "10d339c4ff95d67f9c94ded838ab2080df929551e32ae1443ffa888cd580632a",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:10d339c4ff95d67f",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "LS20",
+      "rowsSha256": "f530cf6adb4a6d0fe87baa072ecf62be621169f9ef3b0baf09539904c5f4220f",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:f530cf6adb4a6d0f",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "M0R0",
+      "rowsSha256": "bb1341069e852a7c58ff55efadf07481d91af3c13f11fd3d2e791b9c061074c9",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:bb1341069e852a7c",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "R11L",
+      "rowsSha256": "130ccc591dbbae50cc3698a6746ac101dcfa7a83f87135ae411ed7e863358d1f",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:130ccc591dbbae50",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "RE86",
+      "rowsSha256": "86e77cb5586f7c726877e5b5e100f6a5e7904970a02d0be64f15550162ed399f",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:86e77cb5586f7c72",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "S5I5",
+      "rowsSha256": "0de899ef426dee32a5ae69f04d75484537ada1c8a01db97fc25b240227139335",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:0de899ef426dee32",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "SB26",
+      "rowsSha256": "8cc17052ea2038b2a490b9e2c224d25ed1ec8a167f5f28bc0b0f2abe01ac3f01",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:8cc17052ea2038b2",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "SC25",
+      "rowsSha256": "518653148c1631c7757a723e0e9f144e62e09fce58cdd5648881c2a8b4c8211c",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:518653148c1631c7",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "SP80",
+      "rowsSha256": "0ba719661c41cd3db3499afa4ec373d1ae79386e50c866e2487946b59a255b1b",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:0ba719661c41cd3d",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "SU15",
+      "rowsSha256": "e04c9e9cd2bdb08059068a08a978791e5772f5fa4433ac90d22453b8ce96c82e",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:e04c9e9cd2bdb080",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "TN36",
+      "rowsSha256": "3e8702e648bb97558ba2787491f62222b7148b397a9176f60c3ce18d38a62f8b",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:3e8702e648bb9755",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "TR87",
+      "rowsSha256": "bf60e2953965adca1444960d2bf267bab440c2d18234c0a245ce214ea0982174",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:bf60e2953965adca",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "TU93",
+      "rowsSha256": "23357766b7528ba534149f7208fb60ca49ff5ef82d5df20d3d48a4f30f3c0ad0",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:23357766b7528ba5",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "VC33",
+      "rowsSha256": "fdde551e3fd269f62e14eb380d2244aefb8f8230f3af72741a2d89acbf1fe414",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:fdde551e3fd269f6",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "WA30",
+      "rowsSha256": "22f3ccd4739a85cebbd807dc32cee300c3e43630d38a8422ccf48e81fba53e82",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:22f3ccd4739a85ce",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "SKBN",
+      "rowsSha256": "397457b492afea44a57c288c30be2deca0273bea7b0e1478c8a0050994c69316",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:397457b492afea44",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "CLRS",
+      "rowsSha256": "e2b4355c3cbb57a22e040fe0acfb5ae7a6f7b71c73584dac7a1b1b14efa03c88",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:e2b4355c3cbb57a2",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "SWCH",
+      "rowsSha256": "2a01379c598b3d702d63422050272988fe3438f432111386b085561b5c32d65d",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:2a01379c598b3d70",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "STCK",
+      "rowsSha256": "0aff2f0878f2054d021b294f4972e1450ef08479ba80af7cca138998bc341521",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:0aff2f0878f2054d",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "HANO",
+      "rowsSha256": "b98de996d71bd15851a87548cec2dfe58106d84aa35339aad5963407bdbaaf2e",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:b98de996d71bd158",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "SEQN",
+      "rowsSha256": "90b98f0d2993a9338e5446a775a38e880770aabbdf7f5ff297aed6f6c14252bc",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:90b98f0d2993a933",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "MIND",
+      "rowsSha256": "38a98b347eb0eff5c6715e6e34925f0a95bc1cb499c9865f1ddfb7fbc2011e19",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:38a98b347eb0eff5",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "MEMO",
+      "rowsSha256": "27ba4cd855a64b3d790f42ff92a5a4edce4d661801613b2583acd119432c7211",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:27ba4cd855a64b3d",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "REGN",
+      "rowsSha256": "47aa13d6af55af3e0efd065ed7eacc0793512ef6c920614ef326caa1d92f6662",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:47aa13d6af55af3e",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "CONN",
+      "rowsSha256": "8582db376241703619ffe1d10270b7cc526be874c62085c23b4f31e89979bee7",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:8582db3762417036",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "DNOI",
+      "rowsSha256": "fe8185baa681f8b64efdc63295c621b807d85c690745d8d564aa59e0d6c192f1",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:fe8185baa681f8b6",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "SYME",
+      "rowsSha256": "a8e7722fbd6f8241e802a54867e6428e28e7f7178ce3a114ddc3c7302f7294ef",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:a8e7722fbd6f8241",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "GORI",
+      "rowsSha256": "b7789fb9ae19a319ec1ea7fc4a2b5d1c2032885c185218e4bdcb3f93bf61207c",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:b7789fb9ae19a319",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "KEYD",
+      "rowsSha256": "1968dffaf6bef93353bc2796ce9df0ebb70698d8baf58f7da9b0783c6aa7f5ee",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:1968dffaf6bef933",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "LOGI",
+      "rowsSha256": "93695febfcefd196d6fbbcff9f117a5ce5de86d17055a4da802b798a61030999",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:93695febfcefd196",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "PORT",
+      "rowsSha256": "3e7e40321ad15433fc75d6adecc02c58d7d5c16546c8f49f14c2883710f9f9e3",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:3e7e40321ad15433",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "LIFE",
+      "rowsSha256": "9cf0321c97cd4ec754393e834b157de7e7cde599fe0974595ae4ffdba7d8ab3c",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:9cf0321c97cd4ec7",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "VALV",
+      "rowsSha256": "cde1b5db276f7597a9cd17df4a7fd8b23aa162a91794fdd6d9b1d33233614cb4",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:cde1b5db276f7597",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "SIGN",
+      "rowsSha256": "bbef948cb4925d829a7f5d95461d85ec055d1d78afa9ad728ad04f52ed3739b5",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:bbef948cb4925d82",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "CASC",
+      "rowsSha256": "8c751a15869573d10359498d60bf0d9b344fbdbb71ecf05056fa864ae313a0b1",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:8c751a15869573d1",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "CRAF",
+      "rowsSha256": "2731a599e06fc2a4c77cbcabfd56c7435bb2460502797e671265a1197286578b",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:2731a599e06fc2a4",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "ESCT",
+      "rowsSha256": "cb790f27dc27d7dcc8a3d1628c47b76477a44340e54c5639fb6dee4e7c8b7bee",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:cb790f27dc27d7dc",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "LS19",
+      "rowsSha256": "19e99dde912cee08a4af4335e108a6e015c69930f09e3187badbee1cfce79df0",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:19e99dde912cee08",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "FITE",
+      "rowsSha256": "d87fbc49803097ac0ba44180e25bdb74e570f659e14320faedc958eaeb4385d1",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:d87fbc49803097ac",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "AS66",
+      "rowsSha256": "39bddf2920c3e13f28141733944f4c45ff9b67f56c82a0069b7ae8064eeb01c6",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:39bddf2920c3e13f",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "GARE",
+      "rowsSha256": "372d5629c8032c12bb6be9150b40108818a3af65d203882cf571cd065376ee8c",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:372d5629c8032c12",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "COLM",
+      "rowsSha256": "9d4a4267497767523469da17ab2b360ec596e6586b14f76669f21a35ebc12ef6",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:9d4a426749776752",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "GABA",
+      "rowsSha256": "dad2631650c921872de1c150ac09acb85d27679acb68414d4b8b77670559c0d6",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:dad2631650c92187",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "FUIT",
+      "rowsSha256": "17c5c4147e1623328f2b519b60befd3f96eb71e4902ae84a542f25b597f261ed",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:17c5c4147e162332",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "ETAG",
+      "rowsSha256": "bf64cd6cbf5bc15a9b00f0270ceb7ce53217119e180463a4307d97f0c9c9fc2a",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:bf64cd6cbf5bc15a",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "TICT",
+      "rowsSha256": "a672cd7ff15e02d16aaaed5a5afaf7fe0e4c0e6577cda214e9edeb950d15a6ae",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:a672cd7ff15e02d1",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "GLOB",
+      "rowsSha256": "ba5d996decc75763ca4b613ce00433341e5d95f6a656a487341aacbdd92f23ae",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:ba5d996decc75763",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "KATA",
+      "rowsSha256": "6b968a6e6ad21fd191e6e71b41ec2062fab66dd436551e5c7615bb8a262709de",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:6b968a6e6ad21fd1",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "HOLE",
+      "rowsSha256": "e4e1a575a19b1589791565ca108e306f748ddfaa2101cf6f0b8dd09d9c1f2577",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:e4e1a575a19b1589",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "GRAV",
+      "rowsSha256": "864f1740139121cfca5655e1c6162fb94eddf1032b314ff1e81a6b30606b8193",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:864f1740139121cf",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "POLA",
+      "rowsSha256": "c3a7becb1324bb0c32fd017492b17ca549984223997a3b0d9e9e90a4f81e9490",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:c3a7becb1324bb0c",
+      "measurement": {
+        "bodies": [
+          {
+            "bbox": [
+              19,
+              23,
+              23,
+              27
+            ],
+            "center": [
+              21,
+              25
+            ],
+            "axis": [
+              -1,
+              0
+            ],
+            "poles": [
+              8,
+              9
+            ],
+            "core": 3,
+            "side": 4,
+            "marker": 3,
+            "size": 5,
+            "signature": [
+              8,
+              9,
+              3,
+              4,
+              5
+            ]
+          },
+          {
+            "bbox": [
+              39,
+              23,
+              43,
+              27
+            ],
+            "center": [
+              41,
+              25
+            ],
+            "axis": [
+              0,
+              1
+            ],
+            "poles": [
+              8,
+              9
+            ],
+            "core": 3,
+            "side": 4,
+            "marker": 3,
+            "size": 5,
+            "signature": [
+              8,
+              9,
+              3,
+              4,
+              5
+            ]
+          }
+        ],
+        "target": {
+          "center": [
+            26,
+            25
+          ],
+          "bbox": [
+            24,
+            23,
+            28,
+            27
+          ],
+          "ring_value": 14,
+          "inside": 5
+        },
+        "quantum": 5,
+        "grid_bounds": [
+          11,
+          10,
+          51,
+          40
+        ],
+        "anchors": [
+          [
+            11,
+            10
+          ],
+          [
+            16,
+            10
+          ],
+          [
+            21,
+            10
+          ],
+          [
+            26,
+            10
+          ],
+          [
+            31,
+            10
+          ],
+          [
+            36,
+            10
+          ],
+          [
+            41,
+            10
+          ],
+          [
+            46,
+            10
+          ],
+          [
+            51,
+            10
+          ],
+          [
+            11,
+            15
+          ],
+          [
+            51,
+            15
+          ],
+          [
+            11,
+            20
+          ],
+          [
+            51,
+            20
+          ],
+          [
+            11,
+            25
+          ],
+          [
+            21,
+            25
+          ],
+          [
+            41,
+            25
+          ],
+          [
+            51,
+            25
+          ],
+          [
+            11,
+            30
+          ],
+          [
+            51,
+            30
+          ],
+          [
+            11,
+            35
+          ],
+          [
+            51,
+            35
+          ],
+          [
+            11,
+            40
+          ],
+          [
+            16,
+            40
+          ],
+          [
+            21,
+            40
+          ],
+          [
+            26,
+            40
+          ],
+          [
+            31,
+            40
+          ],
+          [
+            36,
+            40
+          ],
+          [
+            41,
+            40
+          ],
+          [
+            46,
+            40
+          ],
+          [
+            51,
+            40
+          ]
+        ],
+        "selected": null,
+        "ambiguous_selection": false,
+        "signature": [
+          8,
+          9,
+          3,
+          4,
+          5
+        ]
+      },
+      "relations": [
+        {
+          "center": [
+            21,
+            25
+          ],
+          "relations": [
+            {
+              "kind": "between",
+              "peer": {
+                "bbox": [
+                  39,
+                  23,
+                  43,
+                  27
+                ],
+                "center": [
+                  41,
+                  25
+                ],
+                "axis": [
+                  0,
+                  1
+                ],
+                "poles": [
+                  8,
+                  9
+                ],
+                "core": 3,
+                "side": 4,
+                "marker": 3,
+                "size": 5,
+                "signature": [
+                  8,
+                  9,
+                  3,
+                  4,
+                  5
+                ]
+              },
+              "dependency": [],
+              "target": [
+                26,
+                25
+              ],
+              "scope": "qualitative_interaction_hypothesis_no_endpoint_prediction"
+            }
+          ]
+        },
+        {
+          "center": [
+            41,
+            25
+          ],
+          "relations": []
+        }
+      ],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "ELAS",
+      "rowsSha256": "56f3647e10bd9638197258bdfccd3a6050cd3f80c781e70c0f28bb80f9be0c81",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:56f3647e10bd9638",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "TRIA",
+      "rowsSha256": "a3db269ad73475b813151f988b54a441394e6903a148f291a88f454d4a150be7",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:a3db269ad73475b8",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "SERI",
+      "rowsSha256": "a3d9e5b6d56eb9f748d1aeb08b87e47ac5df4ebabf02c279692ba2eebecaaefe",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:a3d9e5b6d56eb9f7",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "COMB",
+      "rowsSha256": "a188f019a6b99b2b0e8e6bdb65d91087423c62941d320a2b204edfcb1e1a17fa",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:a188f019a6b99b2b",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "ISOS",
+      "rowsSha256": "2213b32effda75e66db7f38caf14b276feafbd547a28086089e6000a114ffabe",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:2213b32effda75e6",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "SELE",
+      "rowsSha256": "e0cab414a9ad4004ac9d3b63fd660f69e8e03d9d8e5112bb7c3be11dce00f1bf",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:e0cab414a9ad4004",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "REWI",
+      "rowsSha256": "470ca6d4cd27a31e2474b9d2c31e2a0b6acd5517dd84f3a80230e5a10f60a345",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:470ca6d4cd27a31e",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "LKEY",
+      "rowsSha256": "8d0eaeb50c797a2aa1e22d0a4ebbfc101b6b8c16ffce0d9a4fb1626689eebfc2",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:8d0eaeb50c797a2a",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "TEQU",
+      "rowsSha256": "414f03727847c86e0878f9f4b726d0594946230a299f3b138a4ae28629d874a1",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:414f03727847c86e",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "GMAP",
+      "rowsSha256": "2bcae799f4729d870ad808e3c67aabf045f134537ae6f43086139088b9bbcef7",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:2bcae799f4729d87",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "CGWL",
+      "rowsSha256": "5b9f513c36c7067d1ffb90e4c9771a8913b0d80a9fd8c47279f11f16b98b156a",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:5b9f513c36c7067d",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "GRIL",
+      "rowsSha256": "586f549f819870203dd5c0e39249781c696f013f174149462967d1aeefcd224a",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:586f549f81987020",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "DICO",
+      "rowsSha256": "4c66a07b55379fb40871c5ebf6ed4908fe63b83c977c44d48c75cd73cc13bb55",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:4c66a07b55379fb4",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "EVAS",
+      "rowsSha256": "ceac639fe38e32deec9e52b3735a601e68b464736e3187d5644c2854fbfd3bc5",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:ceac639fe38e32de",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "KLOT",
+      "rowsSha256": "b70f41cc40f08e72bc7e6b23399bf2a34a507a21b01957f126d454e1c9ea4f4b",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:b70f41cc40f08e72",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "UPST",
+      "rowsSha256": "97ddaef0e9538cf50e870eac5cda28e075fdc130423b1690323931649dd648a4",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:97ddaef0e9538cf5",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "THER",
+      "rowsSha256": "e4949964e4d02658f8a3a275445fa1d2e2e46af5d370cf0269d20527e9215e54",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:e4949964e4d02658",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "ZIPP",
+      "rowsSha256": "32f5e9dc5ce9d135fc44aeecf95f6e6396bcb5d9a14350a3f8c13a1553c49c4d",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:32f5e9dc5ce9d135",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "AMZE",
+      "rowsSha256": "0859ffa1372ea6ac6d27ebb210802441bd8af406bafdba55073752f132375bb7",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:0859ffa1372ea6ac",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "PIPE",
+      "rowsSha256": "cc2da57812c48d52f01a6a481ab614622744023eca0d9786e1f8294e63e9adfd",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:cc2da57812c48d52",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "GIGO",
+      "rowsSha256": "7e07e5696982516142d1fbbac0829a30743c0c3d9ee5364c4f90ec25d5f21519",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:7e07e56969825161",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "CATL",
+      "rowsSha256": "645b3c0a4e06f24412f2c54de3ba3c15269956e85b62fa87778d892afa269152",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:645b3c0a4e06f244",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "PRTL",
+      "rowsSha256": "6ef4fd56acd3239f2bda6ae13a7ce1bc6e1ef9359d3876cec7b8af69b53a3d87",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:6ef4fd56acd3239f",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "MOTO",
+      "rowsSha256": "507788fb1b628579d36689d261d4816b083c40ce51b57a387e9fa6b1042ea817",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:507788fb1b628579",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "ONDE",
+      "rowsSha256": "f5c3dcb0500da2091d8daac7acd1cbb72aebb33c04c70c67581597b1fbbc90cd",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:f5c3dcb0500da209",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "SNAR",
+      "rowsSha256": "23a18f323d2571f2a275ba89cd389c2fb6218b9ab25972c6da613eeecbc5fac1",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:23a18f323d2571f2",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "TRCP",
+      "rowsSha256": "03590df58a79831a29e72b892f3a529280a4eced2dd549b81c7710887a42bda2",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:03590df58a79831a",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "SPOR",
+      "rowsSha256": "ef7046fff5e68e4fe5410037c13726829e2670eccd87b21574aa8de5d518cd1c",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:ef7046fff5e68e4f",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "CAVA",
+      "rowsSha256": "3a81cada09d4393d3485a246ad461ef1d6166729c0ac6be0de0c61333c2891a0",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:3a81cada09d4393d",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "SMLP",
+      "rowsSha256": "63772d1746311d0c37da6dcd30cff4ba62157a79f1e16ec4aa08459daebc1b8c",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:63772d1746311d0c",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "DAME",
+      "rowsSha256": "1f154e9b119b149c01a2b34fadeb0f48516193742535984798e748a1ac85e91e",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:1f154e9b119b149c",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "HPDL",
+      "rowsSha256": "a736549b36c7d3a0374e9634ba3694317e060824f7863219344ea69c4a141586",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:a736549b36c7d3a0",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "CATR",
+      "rowsSha256": "8c49c0659af32834cd35d79a00608588832424e35fc567bbd58a249652d28657",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:8c49c0659af32834",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "RECR",
+      "rowsSha256": "9c659d0462f191ba93ee6aa1bb8c433cdca6d890e4f69b81d28b7fa31325ff79",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:9c659d0462f191ba",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    },
+    {
+      "game": "RSWP",
+      "rowsSha256": "3e364c99f049645bdf11855e84a26fad61cb91abd02efe914b6bf78f17006256",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:3e364c99f049645b",
+      "measurement": null,
+      "relations": [],
+      "acquiredSelection": false,
+      "coldFamilyAdmissible": false
+    }
+  ],
+  "historicalPola": {
+    "source": "docs/migration/v53-outline-service-and-current-relations.md",
+    "sourceVersion": "attempt3/native0.25",
+    "actions": 94,
+    "completedLevels": 0,
+    "finalCampaignReceipt": false,
+    "status": "interrupted_public_journal",
+    "elapsedSeconds": null,
+    "clockReset": false,
+    "qualification": "Prior effort exists; recover original elapsed time or explicitly qualify missing historical clock before a new live attempt."
+  }
+}
