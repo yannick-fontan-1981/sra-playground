@@ -116,7 +116,7 @@ summary = {
          'correction': 'Re-export each unchanged native journal independently with the same exporter '
             'and reviewer, keeping separate per-case receipts. No native rerun or criteria change.'},
     ],
-    'qualification': 'Eight declared synthetic scenarios pass through seven native tests. Only the '
+    'qualification': 'Eight declared common scenarios pass through seven native tests. The foreign-parent case uses an existing recorded LIFE public replay; the other cases use synthetic scenes. No new live game was launched. Only the '
         'four source scenarios are independently compared to original Python; foreign-parent and '
         'three acquisition-bound scenarios are additional native contracts. This is not full '
         'StrategyRouter parity, a live-game result, a performance verdict or publication.',
