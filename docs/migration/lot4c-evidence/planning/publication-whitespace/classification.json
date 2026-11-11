@@ -1,0 +1,12 @@
+{
+  "schema": "logos-engine.retained-evidence-whitespace-classification.v1",
+  "recordedAt": "2026-11-11T01:33:00.458787+00:00",
+  "reason": "The initial staged diff-check found original trailing spaces in exact retained patch context/browser accessibility text and one extra EOF blank in the already declared cost reviewer. No retained data or frozen tool may be rewritten after validation. Exact paths receive only the relevant whitespace classification; source code elsewhere keeps normal checks.",
+  "initialExitCode": 2,
+  "rawEvidenceChanged": false,
+  "frozenCostReviewerSha256": "ac2b4d5478144736986d2c1a6e141cf823f547590acbe365822e4c77b7a26ab1",
+  "frozenCostReviewerUnchanged": true,
+  "attributesBeforeSha256": "e84e8d4e75c6aa853e552ac27a4a93017af2b8a8be47d7e2a1438666b789b337",
+  "attributesAfterSha256": "b486e850b381995c121cab7f86b0e31966b574ece4a9381eb1d833f82fae309d",
+  "nativeTestBuildOrMeasurementChanges": false
+}

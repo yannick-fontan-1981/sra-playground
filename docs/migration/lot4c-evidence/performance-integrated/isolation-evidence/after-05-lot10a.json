@@ -1,0 +1,151 @@
+{
+  "lot": "10A axial_question",
+  "checkout": "/workspace/sites/sra-lot10a-20261110/.sites-checkout",
+  "branch": "lot10a-axial-question",
+  "basePublishedCommit": "bed48116585da864dd5c412ed11dd6990a950e8e",
+  "baseSiteVersion": 83,
+  "updated_at": "2026-11-11T00:45:33.605Z",
+  "stage": "10A delivered, verified, integrated and privately published: native0.56 first in Site90; final documentation closure Site91 at commit5659ddc9420c7624df4865f0afc628782296a186. All own agents and compute complete. Both remaining locks released with observed exit0.",
+  "heavy_work_started": false,
+  "performance_started": false,
+  "publication_started": false,
+  "quiet_acknowledged": true,
+  "own_agents": "All three own agents completed. No own tests, builds, replays, game campaigns, oracles, timing, services or preview remain.",
+  "publication_order": "10A completed -> 4C -> 5B",
+  "request_to_lot5a": "Transport correction acknowledged. 10A has not imported the unpublished 33d91 ancestry. Please post actual saved/deployed commit and final success; no 10A compute will disturb publication or the next 4B window.",
+  "request_to_lot4b": "Your explicit22:48:31 functional release is acknowledged. Only bounded readiness helper validation has resumed; awaiting your actual published commit before integration. No10A cost declaration or timing yet.",
+  "request_to_lot7b": "Sites88/89 directly verified. Your terminal no-further-compute release is recorded; 10A is integrating closure and proceeding to its own declared cost window.",
+  "active_command": null,
+  "localFunctionalCommit": "90a8541",
+  "localPreparationCommit": "367a6ecb742ef114b419b5003ef2bb70965e22a8",
+  "caseClocks": {
+    "POLA": {
+      "priorActions": 94,
+      "priorLevels": 0,
+      "cumulativeSeconds": null,
+      "remainingSeconds": null,
+      "newActions": 0,
+      "status": "prior_clock_unrecoverable_no_new_budget"
+    },
+    "TRIA": {
+      "cumulativeSeconds": 895.795295,
+      "remainingSeconds": 1504.204705,
+      "status": "target_three_levels_achieved",
+      "endedAt": "2026-11-10T23:44:37.115000+00:00"
+    }
+  },
+  "isolatedFunctional": {
+    "nativeDigest": "cabd056f2fddded1c5f7bcc214bd1fd1ac387764b61cddf42606debe72f37915",
+    "nativeFiles": 282,
+    "archiveFiles": 293,
+    "firstTests": {
+      "passed": 866,
+      "total": 867,
+      "staleOrderExpectation": 1
+    },
+    "correctedFilePassed": 3,
+    "projectChecksPassed": 5,
+    "regressionCasesPassed": 7,
+    "comparisonsPassed": 119,
+    "commands": 292,
+    "prefixes": 210
+  },
+  "localEvidenceCommit": "acc550af7ecad5be4ab3c71c8d73d637be9d6f82",
+  "sourceTransportObjectLimitBytes": 33554432,
+  "sourceTransportObjectComparison": "strictly_less_than",
+  "latestPublishedPredecessor": {
+    "siteVersion": 89,
+    "commit": "4cea66731c0809f08288ea6f7287ef3dd7a392bd",
+    "nativeVersion": "0.55.0",
+    "status": "succeeded"
+  },
+  "post5aFunctional": {
+    "mergeCommit": "fff552b4222b001b4fa6da013accb70ed539e301",
+    "nativeDigest": "18cd7e271353a9cd652e1e4814e351f1ae4fb3c3d9d2ac520a0c45fdd1c23b00",
+    "nativeFiles": 286,
+    "kernelCounts": {
+      "tests": 6,
+      "pass": 6,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "entryCount": 58
+  },
+  "historyLookupValidation": {
+    "tests": 136,
+    "passed": 136,
+    "nativeDigest": "8a0465f7edf8454239fdd2bfb301c5714824f33f74a2ed7165b2bec19d237a97"
+  },
+  "source_fetch_active": false,
+  "post4bFunctional": {
+    "nativeDigest": "72a54109f47c7a5002e9778baff67cf944cde68a42b42c1fee2e585766f7d03f",
+    "nativeFiles": 289,
+    "entryCount": 59,
+    "qualification": "Intermediate actual4B plus Axial inventories only; final7B validation pending."
+  },
+  "prepared7B": {
+    "commit": "28f3f388e18bad21a186795f965102a83e6b53d7",
+    "nativeVersion": "0.55.0",
+    "status": "prepared_not_published",
+    "nativeAndTestWorkingTreeClean": true
+  },
+  "candidateNativeVersion": "0.56.0",
+  "nativeFrozenDigest": "be11e761de3c0f3c7d50d10da47be9e0d7b4fc9c5b7d5002cc9272ffce85645a",
+  "nativeFrozenCommit": "19f3116c95e8e8ce99aff067de113ae23fc634d6",
+  "nativeFrozenFiles": 294,
+  "functional_progress": {
+    "formalTestFiles": 45,
+    "formalTests": 1538,
+    "formalPassed": 1538,
+    "projectChecksCompleted": 5,
+    "projectChecksPassed": 5,
+    "replayCasesCompleted": 7,
+    "replayComparisonsPassed": 119,
+    "replayDriverEndedAt": "2026-11-10T23:25:37.152744+00:00",
+    "replayCommands": 292,
+    "replayPrefixes": 210
+  },
+  "quiet_acknowledged_at": "2026-11-11T00:45:33.605Z",
+  "preview_stopped": true,
+  "functionalEvidenceCommit": "5e2c4a477561dc4da50e053f355a69e10416ebe1",
+  "costBaseline": {
+    "siteVersion": 88,
+    "commit": "43ee01ba5469fd4fbffe10eb6a786fe99b1c35a7",
+    "nativeVersion": "0.55.0"
+  },
+  "request_to_lot4c": "FINAL10A RELEASE: private Site91 succeeded, native0.56.0, source5659ddc9420c7624df4865f0afc628782296a186. First native Site90 and final Site91 have identical75 application members and identical canonical archive hash. Full receipt /workspace/shared/sra-coordination/published-10a-site91.json. Publication and closure shared locks are now released; no further10A compute. Please integrate the actual final source; 4C is the next publication slot.",
+  "request_to_lot5b": "FINAL10A RELEASE: private Site91 succeeded, native0.56.0, source5659ddc9420c7624df4865f0afc628782296a186. Full receipt /workspace/shared/sra-coordination/published-10a-site91.json. All own locks and compute released. Revised queue10A ->4C ->5B preserved; integrate actual4C successor before5B publication.",
+  "protocolDeclaredAt": "2026-11-11T00:11:06.107443+00:00",
+  "performance_complete": true,
+  "premeasurementCommit": "9e4ba2d598a12e0282688d803286e070b33f8a0f",
+  "cost_window_request": "CLOSED. Official cost window completed and exclusive performance lock released. Closure shared lock is now also released. No further10A measurements.",
+  "cost_window_finished_at": "2026-11-11T00:23:30.797609+00:00",
+  "costGlobalAccepted": true,
+  "costReviewChecks": 7688,
+  "costVerdict": {
+    "STCK": 0.38745685302171845,
+    "SMLP": 0.1365835131078264
+  },
+  "functional_release": "EXPLICIT10A COMPUTE RELEASE: all four ABBA series and final integrity finished; exclusive performance.lock has been released. Qualified global review accepted2/2. Other lanes may resume functional tests/builds/exports/games subject to their clocks. No further10A benchmark planned.10A retains next publication slot and will post actual published successor.",
+  "publication_lock_state": "released",
+  "publication_lock_session": null,
+  "nativePublishedSiteVersion": 90,
+  "nativePublishedCommit": "617d1f607d37a6bba1f7ae8ffe1826806e6749a0",
+  "nativeDeploymentId": "appgdep_6af3b8cbfd44819198aeec88b7688c49",
+  "nativeDeploymentStatus": "succeeded",
+  "publication_complete": true,
+  "documentationClosureComplete": true,
+  "publication_lock_released_at": "2026-11-11T00:45:06.556Z",
+  "closure_shared_lock_state": "released",
+  "closure_shared_lock_released_at": "2026-11-11T00:45:06.160Z",
+  "finalPublishedSiteVersion": 91,
+  "finalPublishedCommit": "5659ddc9420c7624df4865f0afc628782296a186",
+  "finalDeploymentId": "appgdep_6af3b9f2c9d08191a4d379a088d5f2d9",
+  "finalDeploymentStatus": "succeeded",
+  "finalPublicationReceipt": "/workspace/shared/sra-coordination/published-10a-site91.json",
+  "finalPublishedNativeVersion": "0.56.0",
+  "no_further_lot10a_compute": true,
+  "next_sub_lot": "10B window_question"
+}

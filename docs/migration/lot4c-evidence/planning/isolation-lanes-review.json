@@ -1,0 +1,162 @@
+{
+  "schema": "logos-engine.lot4c-isolation-lanes-source-review.v1",
+  "recordedAt": "2026-11-11T01:11:37+00:00",
+  "status": "static_policy_review_passed",
+  "reviewer": "facet_source_audit",
+  "scope": "Read-only source review, small JSON reads and fingerprints. No benchmark, launcher, readiness helper, test, import, build, Git, archive, publication or status mutation was executed by this review.",
+  "reviewedInputs": {
+    "policy": {
+      "path": "docs/migration/lot4c-evidence/performance-integrated/coordination-policy.json",
+      "bytes": 9231,
+      "sha256": "99a08b1913df7741578e1feac1a623f39ce0e0ae908f48a6f2291b2da9c100ce"
+    },
+    "launcher": {
+      "path": "docs/migration/lot4c-evidence/launch-isolated-cost-window.py",
+      "bytes": 20213,
+      "sha256": "d113285c59fafb69e39ec7b324b6069af49b8e6666bd75b514a8c83e01d17883"
+    },
+    "readinessFinalizer": {
+      "path": "docs/migration/lot4c-evidence/finalize-cost-readiness.py",
+      "bytes": 20689,
+      "sha256": "7d3695d0acffab9f457905fb5f71aa2be300781183fbe223933068f2803ce20b"
+    }
+  },
+  "sharedLock": "/workspace/shared/sra-coordination/performance.lock",
+  "allEightCurrentStatusesHaveExactlyTheseRequiredSignals": {
+    "quiet_acknowledged": true,
+    "heavy_work_started": false,
+    "performance_started": false,
+    "publication_started": false,
+    "active_command": null
+  },
+  "requiredSignalKeysActuallyPresent": true,
+  "lanes": [
+    {
+      "name": "lot4a",
+      "path": "/workspace/shared/sra-coordination/lot4a-status.json",
+      "mode": "completed_no_further_execution",
+      "completionEvidence": ["docs/migration/lot4c-evidence/performance-integrated/isolation-declaration-evidence/lot4a-status.json"],
+      "basis": "Native 0.51 and documentation closure delivered; slot released to 7A; all subagents and compute jobs finished."
+    },
+    {
+      "name": "lot4b",
+      "path": "/workspace/shared/sra-coordination/lot4b-status.json",
+      "mode": "completed_no_further_execution",
+      "completionEvidence": [
+        "docs/migration/lot4c-evidence/performance-integrated/isolation-declaration-evidence/lot4b-status.json",
+        "docs/migration/lot4c-evidence/performance-integrated/isolation-declaration-evidence/published-4b-site87.json"
+      ],
+      "basis": "Site 86 and closure Site 87 succeeded; explicit no further 4B execution."
+    },
+    {
+      "name": "lot5a",
+      "path": "/workspace/shared/sra-coordination/lot5a-status.json",
+      "mode": "completed_no_further_execution",
+      "completionEvidence": [
+        "docs/migration/lot4c-evidence/performance-integrated/isolation-declaration-evidence/lot5a-status.json",
+        "docs/migration/lot4c-evidence/performance-integrated/isolation-declaration-evidence/published-5a-site85.json"
+      ],
+      "basis": "Site 84 and closure Site 85 succeeded; explicit no further 5A execution. Its continuation 5B is separately monitored and requires its own fresh quiet acknowledgement."
+    },
+    {
+      "name": "lot7a",
+      "path": "/workspace/shared/sra-coordination/lot7a-status.json",
+      "mode": "completed_no_further_execution",
+      "completionEvidence": ["docs/migration/lot4c-evidence/performance-integrated/isolation-declaration-evidence/lot7a-status.json"],
+      "basis": "Site 82 and closure Site 83 succeeded; publication and compute slots released to 5A, no active measurement or functional work."
+    },
+    {
+      "name": "lot7b",
+      "path": "/workspace/shared/sra-coordination/lot7b-status.json",
+      "mode": "completed_no_further_execution",
+      "completionEvidence": [
+        "docs/migration/lot4c-evidence/performance-integrated/isolation-declaration-evidence/lot7b-status.json",
+        "docs/migration/lot4c-evidence/performance-integrated/isolation-declaration-evidence/published-7b-site89.json"
+      ],
+      "basis": "Site 88 and closure Site 89 succeeded; functional_release explicitly ends all execution and publication."
+    },
+    {
+      "name": "lot10a",
+      "path": "/workspace/shared/sra-coordination/lot10a-status.json",
+      "mode": "completed_no_further_execution",
+      "completionEvidence": [
+        "docs/migration/lot4c-evidence/performance-integrated/isolation-declaration-evidence/lot10a-status.json",
+        "docs/migration/lot4c-evidence/performance-integrated/isolation-declaration-evidence/published-10a-site91.json"
+      ],
+      "basis": "Site 90 and closure Site 91 succeeded; no_further_lot10a_compute=true, all own agents finished and remaining locks released."
+    },
+    {
+      "name": "lot5b",
+      "path": "/workspace/shared/sra-coordination/lot5b-status.json",
+      "mode": "explicit_quiet",
+      "acknowledgedAt": "2026-11-11T01:08:32.603053+00:00",
+      "basis": "Fresh acknowledgement for the forthcoming 4C ABBA window; all functional commands ended and remaining activity restricted to source/text until explicit 4C release. The older acknowledgement for 10A was not used."
+    },
+    {
+      "name": "lot4c_auxiliary",
+      "path": "/workspace/shared/sra-coordination/lot4c-auxiliary-status.json",
+      "mode": "explicit_quiet",
+      "basis": "Dedicated auxiliary-worker surface: functional work and captures ended; only source/text review permitted. The official benchmark owner remains outside this quiet lane."
+    }
+  ],
+  "retainedEvidenceVerification": {
+    "directory": "docs/migration/lot4c-evidence/performance-integrated/isolation-declaration-evidence",
+    "filesComparedWithPolicy": 13,
+    "allByteLengthsAndSha256Match": true,
+    "completionEvidenceUsesRetainedSnapshotsInsteadOfMutableSharedFiles": true
+  },
+  "explicitExclusions": [
+    {
+      "path": "/workspace/shared/sra-coordination/lot3-status.json",
+      "qualification": "Historical terminal 3I only. Its original schema lacks quiet_acknowledged and retains historical publication_started=true alongside publication_completed=true. The exact snapshot is retained in policy.historicalTerminalOutsideCurrentLanes; no signals were invented or status rewritten. Active successor lanes are separately monitored."
+    },
+    {
+      "path": "/workspace/shared/sra-coordination/lot4c-status.json",
+      "qualification": "Official measurement owner must truthfully advertise its active measurement. Its non-measuring auxiliaries are covered by lot4c_auxiliary."
+    }
+  ],
+  "launcherContractReview": [
+    "Policy schema, shared lock path, unique safe lane names and direct shared-status parent paths match the frozen launcher.",
+    "The launcher requires all five keys to be present with exact types and values; completed mode does not bypass activity flags.",
+    "Each terminal mode has a nonempty terminalStatement and fingerprinted completionEvidence, all 13 retained policy evidence records match the files read.",
+    "Current statuses are reread under exclusive flock before measurement and after child completion; raw bytes are retained even when validation fails.",
+    "Fresh quiet was initially pending for 5B and is now explicitly satisfied. The launcher must still check the live statuses at launch and completion.",
+    "predeclarationEvidence and acknowledgedAt are descriptive policy bindings; explicit_quiet validation uses the actual status signals captured by the launcher, not a substituted old snapshot."
+  ],
+  "readinessReview": {
+    "requiredArguments": ["--performance-directory", "--final-directory", "--published-predecessor", "--parity", "--browser", "--case-clock", "--integrity"],
+    "repeatableAdditionalArgument": "--partial-regression",
+    "reviewedConcreteInputs": {
+      "publishedPredecessor": "docs/migration/lot4c-evidence/planning/published-predecessor-site91.json",
+      "parity": "docs/migration/lot4c-evidence/integrated-final/isos-facet-source-parity.json.gz",
+      "browser": "docs/migration/lot4c-evidence/integrated-final/browser/browser-qa.json",
+      "caseClock": "docs/migration/lot4c-evidence/case-clock.json",
+      "integrity": "docs/migration/lot4c-evidence/integrated-final/delivery-integrity.json",
+      "partialRegression": "docs/migration/lot4c-evidence/integrated-final/lkey-partial/qualification.json"
+    },
+    "schemaCautions": [
+      "Use the full compressed Facet source parity report, not its diagnostic or execution receipt.",
+      "Published predecessor must expose actual version/deployment and match declared Site 91 and commit 5659ddc9420c7624df4865f0afc628782296a186; Site 90 equivalence does not satisfy exact declared publication identity.",
+      "LKEY remains a separate partial-preservation qualification with rawCampaignStatus=failed and gameTargetCompleted=false; it does not become a strict completed case.",
+      "Integrity must be the native-delivery-integrity.v1 receipt with nativeSourceDigest and actual bound receipts; the finalizer refuses missing or changed inputs.",
+      "Owner contract and static preflight precede readiness, which precedes the future window. Existing readiness or window outputs are not overwritten.",
+      "Strict regression verification scales as 17 checks per declared case; 10 current strict cases mean 170 checks. Public final parity may use frozen replay without asserting an additional live game run."
+    ],
+    "observedRootReceipt": {
+      "path": "docs/migration/lot4c-evidence/performance-integrated/readiness.json",
+      "schema": "logos-engine.native-cost-window-readiness.v1",
+      "status": "ready",
+      "finalizedAt": "2026-11-11T01:09:46.133285+00:00",
+      "inputCount": 890,
+      "functionalMeasurementReady": true,
+      "measurementAuthorized": true,
+      "measurementExecuted": false,
+      "pendingRequirements": [],
+      "nativeSourceDigest": "eebd099808672be934389020c8f9061df4fdacab28cd7d60c00cd1b080464c04"
+    },
+    "executedByThisReviewer": false
+  },
+  "costDecisionRule": "The predeclared global median increase must remain strictly below 10% separately for STCK and SMLP; phase overruns remain visible diagnostics and are not independent vetoes. No timing result or acceptance outcome is asserted by this review.",
+  "remainingQualification": "Cooperative declared project lanes and the shared flock are reviewed. This does not certify unrelated uninstrumented host processes. No additional fresh-quiet blocker was identified at the observed state; final launch-time verification remains mandatory.",
+  "changedFiles": ["docs/migration/lot4c-evidence/planning/isolation-lanes-review.json"]
+}

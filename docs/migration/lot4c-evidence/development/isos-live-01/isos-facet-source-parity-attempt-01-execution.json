@@ -1,0 +1,72 @@
+{
+  "schema": "logos-engine.lot4c.public-comparator-execution.v1",
+  "startedAt": "2026-11-11T00:32:32.744925+00:00",
+  "arguments": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "scripts/compare-facet-example-public-parity.py",
+    "docs/migration/lot4c-evidence/development/isos-live-01/isos-campaign.json.gz",
+    "--output",
+    "docs/migration/lot4c-evidence/development/isos-live-01/isos-facet-source-parity-attempt-01.json.gz"
+  ],
+  "inputsBefore": {
+    "generator": {
+      "path": "scripts/compare-facet-example-public-parity.py",
+      "bytes": 53713,
+      "sha256": "7114e3526abe3b50c453165b87694f46b34f8b8e834c761ec9f96ebe199c1465"
+    },
+    "campaign": {
+      "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-campaign.json.gz",
+      "bytes": 3027289,
+      "sha256": "93e59ab1146d4eef7c944a0e1fc0ab7b0d539cc90a074abe424742be011eec37"
+    }
+  },
+  "comparatorSnapshot": {
+    "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-facet-source-parity-attempt-01-generator.py",
+    "bytes": 53713,
+    "sha256": "7114e3526abe3b50c453165b87694f46b34f8b8e834c761ec9f96ebe199c1465"
+  },
+  "lock": "/workspace/shared/sra-coordination/performance.lock",
+  "lockMode": "exclusive-nonblocking",
+  "gameExecution": false,
+  "caseClock": {
+    "intervalStartedAt": "2026-11-11T00:31:05+00:00",
+    "priorSelectorSeconds": 5.134,
+    "remainingSecondsAtStart": 2307.121075,
+    "maximumCumulativeSeconds": 2400
+  },
+  "elapsedSeconds": 16.862892876990372,
+  "finishedAt": "2026-11-11T00:32:49.611321+00:00",
+  "exitCode": 1,
+  "inputsAfter": {
+    "generator": {
+      "path": "scripts/compare-facet-example-public-parity.py",
+      "bytes": 53713,
+      "sha256": "7114e3526abe3b50c453165b87694f46b34f8b8e834c761ec9f96ebe199c1465"
+    },
+    "campaign": {
+      "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-campaign.json.gz",
+      "bytes": 3027289,
+      "sha256": "93e59ab1146d4eef7c944a0e1fc0ab7b0d539cc90a074abe424742be011eec37"
+    }
+  },
+  "inputsUnchanged": true,
+  "stdout": {
+    "raw": {
+      "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-facet-source-parity-attempt-01.stdout.log",
+      "bytes": 4703,
+      "sha256": "ca729bdc5b9654b642c7c9124ce6a89e2212f7e71fab3bef3a3b5b815baeaf94"
+    },
+    "gzip": {
+      "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-facet-source-parity-attempt-01.stdout.log.gz",
+      "bytes": 1180,
+      "sha256": "a6137ff9eaf57883be6c903f3c8023193456b7b3c7466a37acf8b80191d96b67"
+    },
+    "roundTripExact": true
+  },
+  "output": {
+    "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-facet-source-parity-attempt-01.json.gz",
+    "bytes": 78894,
+    "sha256": "53228c8a74d9f23ee762444be6d1ad99bef52dedd4feb5519a01c8aef2c447a1"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "lot": "4C auxiliary workers only; excludes official ABBA runner",
+  "updated_at": "2026-11-11T01:10:44.271352+00:00",
+  "quiet_acknowledged": true,
+  "heavy_work_started": false,
+  "performance_started": false,
+  "publication_started": false,
+  "active_command": null,
+  "stage": "All functional tests, regressions, cold comparisons, real-game/browser runs, preview and untimed captures have finished. Only documentation/source-text review remains permitted until official window release. No test, build, oracle, Git, archive or other heavy command is active in an auxiliary 4C worker.",
+  "agents": [
+    "facet_component: acknowledged text-only quiet",
+    "facet_oracle: completed; shared lock released",
+    "facet_source_audit: read-only source review, no heavy execution"
+  ]
+}

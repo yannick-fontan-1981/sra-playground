@@ -1,0 +1,175 @@
+{
+  "schema": "logos-engine.partial-public-regression-plan.v1",
+  "preparedAt": "2026-11-11T00:30:25.779494+00:00",
+  "status": "planning_only_pending_native_freeze",
+  "executable": false,
+  "replaysExecuted": 0,
+  "inheritedContract": {
+    "path": "docs/migration/lot7b-evidence/integrated-final/lkey-partial-contract.json",
+    "sha256": "35237fa483be91c5993df9978ea45e911bef28a6a091c795e7b6db5aae75edff",
+    "bytes": 4330
+  },
+  "inheritedQualification": {
+    "path": "docs/migration/lot7b-evidence/integrated-final/lkey-partial/qualification.json",
+    "sha256": "e3a981a36ba37f6bc4e9bedd1ee5d19d9ca3df24a5a64b5899c27f0e33c2ca53",
+    "bytes": 94383
+  },
+  "sourcePublication": {
+    "receipt": {
+      "path": "docs/migration/lot4c-evidence/planning/published-start-site89.json",
+      "sha256": "26bdd9e8af18c2fa0d5eba4a132690e914112b95ff6c8647ce541b1aa8b6cef0",
+      "bytes": 1192
+    },
+    "siteVersion": 89,
+    "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_9152b674b7348191a581e326508ca5fe",
+    "sourceCommit": "4cea66731c0809f08288ea6f7287ef3dd7a392bd",
+    "deploymentId": "appgdep_6af3b06c78448191a7f12b792f1f4ad1",
+    "deploymentStatus": "succeeded",
+    "nativeVersion": "0.55.0",
+    "retainedEvidenceMatchesPublishedCommit": true,
+    "qualification": "Retained 7B Site 89 publication provenance only; this does not identify a later 10A integration or the unfrozen 4C native candidate."
+  },
+  "historicalQualification": {
+    "status": "partial_trajectory_preserved",
+    "passedChecks": 157,
+    "totalChecks": 157,
+    "gameTargetCompleted": false,
+    "liveGameExecuted": false,
+    "rawCampaignStatus": "failed",
+    "qualification": "These are the retained 7B partial-regression results, not results for 4C."
+  },
+  "baseline": {
+    "path": "docs/migration/lot7a-evidence/integrated-final/lkey-campaign.json.gz",
+    "sha256": "11aa4589a7d294cc5c7aed2e0e3946541cf48a208b891b0c7229a190e290aff4",
+    "bytes": 5445629
+  },
+  "trace": {
+    "path": "docs/migration/lot7a-evidence/integrated-final/lkey-public-trace.json.gz",
+    "sha256": "de96446d655f3c5165f4eeebfbd0aa1ed074c2b65ee35288d84c6d4112a2a763",
+    "bytes": 10983
+  },
+  "baselineExecution": {
+    "path": "docs/migration/lot7a-evidence/integrated-final/execution-lkey.json",
+    "sha256": "ac35fbe45492ee87b02e472455d828408b33d261ed1873f6044f1419c611dfec",
+    "bytes": 70533
+  },
+  "historicalSourceManifest": {
+    "path": "docs/migration/lot7b-evidence/integrated-final/source-manifest.json",
+    "sha256": "c301ce42ecb2592f1a4af49d6efde1d91a034cec06536d02b07c878eed31bea9",
+    "bytes": 34553
+  },
+  "historicalExecutionInputs": {
+    "runner": {
+      "path": "scripts/replay-native-partial-public-regression.mjs",
+      "sha256": "7fed8d182e48c9707d07856a78b3604f2279a678020906ed5e5716c4cb1d9665",
+      "bytes": 42152
+    },
+    "harness": {
+      "path": "tests/helpers/v6-live-game-campaign.ts",
+      "sha256": "dfc77470fe8050033cd9b13df5386e0689babac9b3d37d1c4d7b1f3d71199cb9",
+      "bytes": 80281
+    },
+    "service": {
+      "path": "src/runtime/v6-agent-service.ts",
+      "sha256": "02ce41d5e014fcc06f85371f552f949b9dfce56093afae4bc0fcb7aad2f60d96",
+      "bytes": 18195
+    },
+    "protocol": {
+      "path": "src/runtime/v6-agent-protocol.ts",
+      "sha256": "597b4d4ab19882a37048e1fa9caeaebea2112b66e25f6294f428bb7916818aa4",
+      "bytes": 9389
+    },
+    "commonDeclaration": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f",
+      "bytes": 48531
+    },
+    "strategyDeclaration": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44",
+      "bytes": 46966
+    }
+  },
+  "candidateBindings": {
+    "sourceManifest": null,
+    "executionInputs": null
+  },
+  "requiredCandidateExecutionInputPaths": {
+    "runner": "scripts/replay-native-partial-public-regression.mjs",
+    "harness": "tests/helpers/v6-live-game-campaign.ts",
+    "service": "src/runtime/v6-agent-service.ts",
+    "protocol": "src/runtime/v6-agent-protocol.ts",
+    "commonDeclaration": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+    "strategyDeclaration": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm"
+  },
+  "expected": {
+    "game": "LKEY",
+    "targetLevels": 3,
+    "baselineSourceDigest": "f5f4a67d68f867d3a37ef66fd7c07b9e75b9d201daceb732038f8fa71caa59eb",
+    "status": "failed",
+    "traceStatus": "failed",
+    "baselineExitCode": 1,
+    "failure": "Did not complete LKEY level 3: V6 stopped: frontier_unknown. Its acquired evidence is retained for inspection.",
+    "actions": 25,
+    "prefixes": 25,
+    "completePublicPackets": 26,
+    "boundaryActionCounts": [
+      16,
+      24
+    ],
+    "final": {
+      "actions": 25,
+      "levelsCompleted": 2,
+      "level": 3,
+      "state": "NOT_FINISHED",
+      "status": "stopped",
+      "reason": "frontier_unknown",
+      "prefixes": 25,
+      "sessions": 1,
+      "operationCounts": {
+        "init": 1,
+        "advance": 25,
+        "resume": 25
+      }
+    },
+    "workshop": {
+      "calls": 49,
+      "records": 25,
+      "selectedRecords": 14,
+      "passiveRecords": 11
+    }
+  },
+  "comparisonScope": {
+    "exact": [
+      "complete public commands and packets",
+      "action metadata except executionMs",
+      "selected prefix scalar fields and declared coordination fields",
+      "epoch order and inherited source-series counts",
+      "request protocol and caller counters/components",
+      "natural boundaries and retained-session caller counters/components",
+      "final public outcome, unresolved failure and operation counts",
+      "mechanical domain assessments",
+      "Workshop source-call order, public revisions, commands, selections and record cardinality"
+    ],
+    "excluded": [
+      "durations",
+      "native implementation label",
+      "migration coverage/status labels",
+      "fresh observation-session identifiers in coordination and epoch anchors",
+      "graph chains, graph revisions, graph node counts and complete provider state equality"
+    ],
+    "actionNormalization": "none",
+    "publicPacketNormalization": "none",
+    "targetCompletionClaim": false,
+    "speedComparisonClaim": false,
+    "originalCallerParityClaim": false
+  },
+  "activationSteps": [
+    "Integrate the actual published 10A successor before choosing the final 4C native candidate.",
+    "Freeze the final 4C native source and materialize its source manifest; bind that actual manifest instead of the historical 7B manifest.",
+    "Fingerprint the actual runner, harness, service, protocol and both original declarations at the exact existing paths declared in this plan.",
+    "Materialize a separate logos-engine.partial-public-regression-contract.v1 contract with status declared, all frozen input fingerprints and the unchanged baseline, trace, baselineExecution, expected and comparisonScope fields.",
+    "After the coordinated execution release, execute the existing partial-regression runner with that concrete contract and retain its raw failed campaign separately from the preservation qualification."
+  ],
+  "qualification": "Planning only. No replay, live public action, clock reset or new success has occurred. The inherited target remains three levels; the exact expected public trajectory retains two completed levels, 25 actions and the unresolved frontier_unknown stop in level three. A later partial_trajectory_preserved result would certify that retained trajectory only. Historical source and execution fingerprints describe 7B and must not be reused as unfrozen 4C candidate bindings."
+}

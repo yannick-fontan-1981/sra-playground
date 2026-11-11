@@ -1,0 +1,9 @@
+{
+  "schema": "logos-engine.retained-implementation-diagnostic.v1",
+  "recordedAt": "2026-11-11T01:48:23.197712+00:00",
+  "status": "failed",
+  "operation": "Textual conflict resolution preparation",
+  "failure": "AssertionError: multiline regex consumed two conflict blocks as one; assertion preceded write, so source remained conflicted. Following audit command exited1 with ERR_INVALID_TYPESCRIPT_SYNTAX on the unchanged merge marker.",
+  "correction": "Bound the closing marker to a single line, keep expected block counts, stop shell after dependent failures.",
+  "finalReleaseTest": false
+}

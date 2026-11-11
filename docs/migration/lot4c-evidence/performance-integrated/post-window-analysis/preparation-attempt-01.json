@@ -1,0 +1,15 @@
+{
+  "schema": "logos-engine.retained-preparation-failure.v1",
+  "recordedAt": "2026-11-11T01:21:39.167885+00:00",
+  "status": "failed_before_analysis",
+  "exitCode": 1,
+  "errorType": "FileNotFoundError",
+  "missingInput": "docs/migration/lot4c-evidence/performance-integrated/cohort1/comparison.json",
+  "origin": "Transcription of the preceding exec result: the orchestration attempted to fingerprint pair comparison outputs before running the two declared unchanged pair comparators. No strict aggregator or measurement was executed in that attempt.",
+  "window": {
+    "path": "docs/migration/lot4c-evidence/performance-integrated/window.json",
+    "bytes": 10452,
+    "sha256": "5fe24aa83f63f6d3cf8d0ee209bf04ac7e67c33ee5dc3ad7e7efdd25a2c0091d"
+  },
+  "resolution": "Run the already declared historical pair comparators, then the unchanged aggregation/consolidation/review tools. No data, tool, rule or measured session is changed."
+}

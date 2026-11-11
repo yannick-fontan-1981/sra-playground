@@ -1,0 +1,180 @@
+{
+  "schema": "logos-engine.lot4c.readiness-launch-static-source-review.v1",
+  "recordedAt": "2026-11-11T00:39:05+00:00",
+  "status": "static_review_complete_execution_pending",
+  "reviewer": "facet_source_audit",
+  "scope": "Source-only review requested during the coordinated 10A compute restriction. This receipt records reading, source edits and fingerprints, not an executed readiness, launch, browser check, game, oracle, build or benchmark.",
+  "reviewedFiles": [
+    {
+      "path": "docs/migration/lot4c-evidence/finalize-cost-readiness.py",
+      "bytes": 20689,
+      "sha256": "7d3695d0acffab9f457905fb5f71aa2be300781183fbe223933068f2803ce20b"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/launch-isolated-cost-window.py",
+      "bytes": 20213,
+      "sha256": "d113285c59fafb69e39ec7b324b6069af49b8e6666bd75b514a8c83e01d17883"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/write-cost-results.py",
+      "bytes": 44604,
+      "sha256": "fd30758f5c8fa89a3ae14b866234bf22c257ab91cf52ea0ee631c4d6253e5e1c"
+    }
+  ],
+  "referenceSources": [
+    {
+      "path": "scripts/run-native-cost-window.py",
+      "bytes": 8933,
+      "sha256": "0ec9c69c859d0555e963643010d2254caee8c63d1c9a98ec07cd9af0ce0ce613"
+    },
+    {
+      "path": "scripts/verify-native-delta.py",
+      "bytes": 5917,
+      "sha256": "0ee99d46e7702b4b2c44c69ebef8cfaa646839be1134a8501f0d7220c0730780"
+    },
+    {
+      "path": "scripts/verify-native-delivery.py",
+      "bytes": 26494,
+      "sha256": "ca36a235e5da8aa8abd963aaa6a282d90217ed58a721bfdbba361527dd48409a"
+    },
+    {
+      "path": "scripts/replay-native-partial-public-regression.mjs",
+      "bytes": 42152,
+      "sha256": "7fed8d182e48c9707d07856a78b3604f2279a678020906ed5e5716c4cb1d9665"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/consolidate-owner-costs.mjs",
+      "bytes": 52839,
+      "sha256": "b3e6349cbc52076b2e6782f107dc89c0feb466a946a69390b1d62511749bf807"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/review-owner-costs.py",
+      "bytes": 70741,
+      "sha256": "ac2b4d5478144736986d2c1a6e141cf823f547590acbe365822e4c77b7a26ab1"
+    }
+  ],
+  "historicalReceiptShapesInspected": [
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/validation/delta-tests-run.json",
+      "sha256": "046169f7e0e0b7f0ebdd3d384ace79bb36cb8c318c849f82ab34ab981af61626",
+      "qualification": "Historical initial failed test receipt inspected only for its emitted schema; its failure is not treated as a pass or attributed to 4C."
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/validation/checks-run.json",
+      "sha256": "74e6034d12e7cc7fe408a5b23b82bc02763da673f4ac949570f6219dd20bd135"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/regression-summary.json",
+      "sha256": "d47f428c40300f71aa3961a7dc0a8ca14c4da06bdcf20bee579518f8821a1e05"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/lkey-partial/qualification.json",
+      "sha256": "4e8fc8dfae9959484a85b0962725be0be453e79d612ace9f6608c79e0711e18e"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/delivery-integrity.json",
+      "sha256": "c27b10eea5302a5b15563e8c64476ffe48ad20780e0e8339d85e3cae00be9e63"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/window.json",
+      "sha256": "cb56920dab8a5f2404f72e428c80b7fc4db7f7ff6fbb401b30a2cd064223184d"
+    }
+  ],
+  "findingsAndSourceCorrections": [
+    {
+      "id": "readiness_consumer_fields",
+      "finding": "Both existing owner-cost consumers require measurementAuthorized, pendingRequirements and nativeSourceDigest; the new readiness producer initially emitted only functionalMeasurementReady and nativeDigests.",
+      "correction": "The producer now emits both exact contracts and qualifies authorization as completed functional/source prerequisites. The separate launcher still requires fresh observed coordination and the exclusive flock."
+    },
+    {
+      "id": "actual_delivery_integrity_schema",
+      "finding": "The unchanged delivery verifier emits logos-engine.native-delivery-integrity.v1 with nativeSourceDigest, receipts, originalSourceFilesUnchanged and nativeAgentWorker; it does not emit nativeDigest/evidence.",
+      "correction": "Readiness now checks that actual schema, its candidate/final-directory binding, recorded test/regression results, 1786 original-file count, worker, archive/byte-storage qualifications and retained input fingerprints."
+    },
+    {
+      "id": "transitive_inputs_and_chronology",
+      "finding": "Preparation, protocol verification, structural inputs, complete regression inputs and receipt chronology needed explicit binding before the launch.",
+      "correction": "Readiness checks those retained records, completed test/release/regression/parity times, and the policy -> declaration -> owner contract -> static preflight -> readiness order. Baseline-checkout external records use watchedExternalInputs so existing consumers do not mistake them for repository-relative inputs. Partial raw failures remain failed; each charged case interval is nonnegative, evidenced and retained within the cumulative 2400-second limit."
+    },
+    {
+      "id": "window_failure_finalization",
+      "finding": "Window reading and interval parsing originally occurred outside the exception guard. A missing/null finishedAt, malformed JSON, or failure in the before snapshot could bypass the completion receipt; the default finish value could also invent a completed boundary.",
+      "correction": "The launcher preserves failure stages and the observed window fingerprint, keeps absent/null boundaries absent, emits failed completion for incomplete intervals, verifies actual successful ABBA completion separately, and writes the final receipt before explicit unlocking/closing in finally. Initial snapshot failures and failed runner exits remain failures. Catchable termination stops the exclusively owned child process group before post-run verification."
+    },
+    {
+      "id": "retained_coordination_evidence",
+      "finding": "The original launcher stored status bytes only after quiet validation and the renderer checked only the final flags/window hash.",
+      "correction": "Status bytes are now saved before their validation. Boolean signals are type-sensitive. Source policy/readiness/preparation/launcher hashes are checked before and after. The renderer binds the initial receipt, exact before/after snapshots and declared signals, the candidate/window hashes, and the complete held-lock chronology. Text-only progress changes remain allowed and visible in the raw snapshots."
+    },
+    {
+      "id": "surviving_measurement_child",
+      "finding": "Independent source review by facet_component found that waiting only for the Python runner or cleaning only while poll() is None could leave its inherited-group Node child running after the parent exits.",
+      "correction": "The launcher now inspects the exclusively created PGID whenever a child was created, regardless of the parent's return code. PID/state membership from Linux /proc distinguishes live members from retained zombies. Surviving members receive SIGTERM then SIGKILL with bounded observations. A pass requires demonstrated group completion. Catchable interrupts during Popen are deferred until the process handle is assigned, so cleanup cannot lose a successfully created child. This path was reviewed by reading only."
+    }
+  ],
+  "failurePathsReviewedByReadingOnly": [
+    "Preflight or readiness failure before acquiring the lock",
+    "Nonblocking flock contention without a measurement launch",
+    "Incomplete or invalid before coordination snapshot",
+    "Failure to spawn the unchanged official runner",
+    "Nonzero runner exit with its raw window retained",
+    "Absent, malformed, running or failed window.json",
+    "Missing, null, invalid or timezone-less finishedAt",
+    "Window interval outside the acquired/held lock interval",
+    "Changed computation signal or predeclared input",
+    "Catchable interruption and cleanup of the owned child",
+    "Direct Python-runner termination while an inherited-group Node child survives",
+    "Completion-receipt write failure still reaching unlock/close"
+  ],
+  "independentClosureReview": {
+    "reviewer": "facet_component",
+    "mode": "source_only_no_edits_no_execution",
+    "initialFinding": "A terminated Python runner could leave its Node child active after releasing flock.",
+    "finalFinding": "The correction covers every created process, checks PGID membership independently of poll(), correctly parses the Linux stat fields, excludes Z/X from executable members, bounds SIGTERM/SIGKILL observations, retains a failure when closure cannot be demonstrated, and defers interruption until Popen has assigned its handle. No new material defect was identified in these blocks.",
+    "qualification": "Independent static review only; no runtime, signal or failure-path execution."
+  },
+  "costAcceptance": {
+    "ruleUnchanged": true,
+    "global": "For each STCK and SMLP case, compare the pooled median of all eight complete measured sessions per version: after < 1.1 * before. Equality at +10 percent fails. No compensation between games.",
+    "phaseOverrunsRemainDiagnostic": true,
+    "phaseAndP95ValuesRemainVisible": true,
+    "historicalStrictFailureRemainsFailed": true,
+    "newPerformanceVerdict": null,
+    "calculatorsAndMeasurementRunnerEdited": false
+  },
+  "facetPlainTransportReview": {
+    "path": "scripts/compare-facet-example-public-parity.py",
+    "bytes": 55787,
+    "sha256": "2d7af5de0cc530cc9203ce56613fd43d727e7086bfac9aa56d024b941c4919ee",
+    "modifiedByThisReview": false,
+    "conclusion": "No FrozenMap reaches the current comparator plain() calls through the inspected cold Facet execution paths.",
+    "sourcePaths": [
+      "morphology_policy/facet_examples/family.py: propose, before, after, record, state",
+      "morphology_policy/facet_examples/compound.py: acquire_seed and plan",
+      "morphology_policy/facet_examples/stencils.py: compare and candidates",
+      "morphology_policy/src_runtime.py: plain and SrcProgram.run",
+      "agents/yf_arc3_v5/logos/types.py: freeze_json"
+    ],
+    "reason": "SrcProgram already returns ordinary transport values. The only nested configuration mapping used by compound_plan is converted to dict; its remaining configuration sequences freeze to native tuples, which JSON accepts. source_method is the portable dict acquired from public observations, not the configuration FrozenMap. State/guard/event results contain ordinary dict/list/scalar data. The exporter additionally serializes family.config, which explains its Mapping adapter without establishing the same need in this comparator.",
+    "qualification": "Source reachability review only; no original imports or comparator execution by this reviewer. The oracle owner's subsequently authorized immutable-offer patch was read separately: it preserves full original proposals at propose for immutable prefix evidence, retains the original aliased object for guards/record, and reports later alias differences explicitly. It does not remove a field or weaken numeric/proposal equality."
+  },
+  "futureReceiptContracts": {
+    "integrity": "Use the unchanged verify-native-delivery.py output directly, with the same final directory and validation receipts.",
+    "sourceComparedGame": "The parity input may be the final frozen public replay. The readiness game qualification does not infer liveGameExecuted or a new live win from selected contributions or a passed component comparison. The strict regression count is derived from the actual complete summary, not fixed to nine cases.",
+    "browser": "status passed or infrastructure_blocked; nativeDigest and worker must match the final build. A pass requires the campaign game, pauseObserved, oneActionObserved, sameContinuousSession and evidence fingerprints. An infrastructure block requires actionsExecuted=0 and failureEvidence fingerprints.",
+    "caseClock": "game, maximumSeconds=2400, chargedSeconds, clockWasReset=false, and nonempty intervals with nonnegative chargedSeconds and evidence fingerprints; intervals must sum to the retained cumulative clock."
+  },
+  "execution": {
+    "pythonImports": false,
+    "syntaxChecks": false,
+    "helpersExecuted": false,
+    "tests": false,
+    "oracles": false,
+    "gamesOrReplays": false,
+    "buildsOrNpm": false,
+    "archives": false,
+    "benchmarks": false,
+    "commits": false
+  },
+  "qualification": "This is a static source review, not proof that unexecuted helpers or failure branches pass. Only the three assigned cost scripts were changed. The earlier cost-source-review.json remains a historical review of its recorded helper versions. Cooperative signals and flock do not establish silence of unrelated uninstrumented host processes; uncaught OS termination or unavailable storage cannot be relabeled as a passed completion."
+}

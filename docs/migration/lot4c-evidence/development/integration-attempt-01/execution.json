@@ -1,0 +1,37 @@
+[
+  {
+    "name": "typecheck",
+    "command": [
+      "npm",
+      "run",
+      "typecheck"
+    ],
+    "startedAt": "2026-11-11T00:26:14.616439+00:00",
+    "elapsedSeconds": 8.825864023005124,
+    "exitCode": 0,
+    "output": {
+      "path": "docs/migration/lot4c-evidence/development/integration-attempt-01/typecheck.log.gz",
+      "bytes": 141,
+      "sha256": "0d2cbbee31ca5839df68f3a5ae10b6102ed35a65bd129facd4509c36a18a564d"
+    }
+  },
+  {
+    "name": "tests",
+    "command": [
+      "node",
+      "--test",
+      "--test-concurrency=1",
+      "tests/v6-facet-examples-integration.test.ts",
+      "tests/v6-facet-examples-foreign-acquisition.test.ts",
+      "tests/v6-native-family-registration.test.ts"
+    ],
+    "startedAt": "2026-11-11T00:26:23.442452+00:00",
+    "elapsedSeconds": 40.28427950499463,
+    "exitCode": 0,
+    "output": {
+      "path": "docs/migration/lot4c-evidence/development/integration-attempt-01/tests.log.gz",
+      "bytes": 713,
+      "sha256": "5d7eeb1f1b2f30e0710a7f453209ae858592402656d9c18ae1ae9242291294cc"
+    }
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "operation": "pack",
+  "directory": "docs/migration/lot4c-evidence/reference-isos-056",
+  "partBytes": 900000,
+  "verified": [
+    {
+      "path": "docs/migration/lot4c-evidence/reference-isos-056/isos-campaign.json.gz",
+      "sha256": "bbb36a4f831e54a6f38a0aa472364cb9d161439e2ac9327d7e2de0013111e132",
+      "bytes": 2354175,
+      "manifest": "docs/migration/lot4c-evidence/reference-isos-056/isos-campaign.json.gz.parts.json",
+      "parts": 3,
+      "restored": false
+    }
+  ],
+  "gitignoreEntriesAdded": [
+    "/docs/migration/lot4c-evidence/reference-isos-056/isos-campaign.json.gz"
+  ],
+  "qualification": "Exact byte transport only; no agent result is regenerated or reinterpreted."
+}

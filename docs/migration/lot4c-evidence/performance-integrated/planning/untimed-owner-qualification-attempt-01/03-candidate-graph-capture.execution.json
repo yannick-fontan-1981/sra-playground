@@ -1,0 +1,33 @@
+{
+  "name": "03-candidate-graph-capture",
+  "command": [
+    "node",
+    "docs/migration/lot4c-evidence/capture-cost-owner-graphs.mjs",
+    "candidate",
+    "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+    "docs/migration/lot4c-evidence/performance-integrated/cases.json",
+    "docs/migration/lot4c-evidence/integrated-final/source-manifest.json",
+    "docs/migration/lot4c-evidence/performance-integrated/owner-graphs-candidate.json.gz"
+  ],
+  "startedAt": "2026-11-11T01:07:59.712789+00:00",
+  "pid": 32,
+  "exitCode": 0,
+  "executionElapsedSeconds": 41.89813014000538,
+  "finishedAt": "2026-11-11T01:08:41.610952+00:00",
+  "stdout": {
+    "path": "docs/migration/lot4c-evidence/performance-integrated/planning/untimed-owner-qualification-attempt-01/03-candidate-graph-capture.stdout.log",
+    "bytes": 366,
+    "sha256": "f55ccde0ff243a39ab18a5defe596c713a1acdb42cf94826a38f9a70c30b60e7"
+  },
+  "stdoutArchive": {
+    "gzip": {
+      "path": "docs/migration/lot4c-evidence/performance-integrated/planning/untimed-owner-qualification-attempt-01/03-candidate-graph-capture.stdout.log.gz",
+      "bytes": 229,
+      "sha256": "6824f8aa53ccb0faa0af3baf61d87e93759c0346238a613bda6da6350109b94e"
+    },
+    "uncompressedBytes": 366,
+    "uncompressedSha256": "f55ccde0ff243a39ab18a5defe596c713a1acdb42cf94826a38f9a70c30b60e7",
+    "exactRoundTrip": true
+  },
+  "scope": "Execution audit only; elapsed process duration is not a cost sample or performance comparison."
+}

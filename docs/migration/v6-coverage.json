@@ -30,10 +30,10 @@
     "declaredClassesAndFunctions": 12857,
     "dataFiles": 417,
     "verifiedModules": 0,
-    "componentVerifiedModules": 185,
+    "componentVerifiedModules": 189,
     "partiallyTransferredModules": 147,
     "transferredUnverifiedModules": 0,
-    "pendingModules": 1037,
+    "pendingModules": 1033,
     "strategyFamilies": 16
   },
   "families": [
@@ -88360,9 +88360,23 @@
           "endLine": 99
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-facet-examples.ts",
+        "src/logos-engine/v6-facet-examples-geometry.ts",
+        "src/logos-engine/v6-facet-examples-compound.ts",
+        "src/logos-engine/v6-facet-examples-stencils.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-facet-examples-reference.py",
+        "tests/fixtures/v6-facet-examples-reference.json.gz",
+        "tests/v6-facet-examples.test.ts",
+        "tests/v6-facet-examples-integration.test.ts",
+        "tests/v6-facet-examples-foreign-acquisition.test.ts",
+        "docs/migration/lot4c-facet-examples-lineage.md",
+        "docs/migration/lot4c-evidence/development/oracle-attempt-03/resume-run.json"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/facet_examples/family.py",
@@ -88437,9 +88451,23 @@
           "endLine": 102
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-facet-examples.ts",
+        "src/logos-engine/v6-facet-examples-geometry.ts",
+        "src/logos-engine/v6-facet-examples-compound.ts",
+        "src/logos-engine/v6-facet-examples-stencils.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-facet-examples-reference.py",
+        "tests/fixtures/v6-facet-examples-reference.json.gz",
+        "tests/v6-facet-examples.test.ts",
+        "tests/v6-facet-examples-integration.test.ts",
+        "tests/v6-facet-examples-foreign-acquisition.test.ts",
+        "docs/migration/lot4c-facet-examples-lineage.md",
+        "docs/migration/lot4c-evidence/development/oracle-attempt-03/resume-run.json"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/facet_examples/geometry.py",
@@ -88484,9 +88512,23 @@
           "endLine": 78
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-facet-examples.ts",
+        "src/logos-engine/v6-facet-examples-geometry.ts",
+        "src/logos-engine/v6-facet-examples-compound.ts",
+        "src/logos-engine/v6-facet-examples-stencils.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-facet-examples-reference.py",
+        "tests/fixtures/v6-facet-examples-reference.json.gz",
+        "tests/v6-facet-examples.test.ts",
+        "tests/v6-facet-examples-integration.test.ts",
+        "tests/v6-facet-examples-foreign-acquisition.test.ts",
+        "docs/migration/lot4c-facet-examples-lineage.md",
+        "docs/migration/lot4c-evidence/development/oracle-attempt-03/resume-run.json"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/facet_examples/stencils.py",
@@ -88519,9 +88561,23 @@
           "endLine": 58
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-facet-examples.ts",
+        "src/logos-engine/v6-facet-examples-geometry.ts",
+        "src/logos-engine/v6-facet-examples-compound.ts",
+        "src/logos-engine/v6-facet-examples-stencils.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-facet-examples-reference.py",
+        "tests/fixtures/v6-facet-examples-reference.json.gz",
+        "tests/v6-facet-examples.test.ts",
+        "tests/v6-facet-examples-integration.test.ts",
+        "tests/v6-facet-examples-foreign-acquisition.test.ts",
+        "docs/migration/lot4c-facet-examples-lineage.md",
+        "docs/migration/lot4c-evidence/development/oracle-attempt-03/resume-run.json"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/feature_occurrences.py",

@@ -1,0 +1,508 @@
+{
+  "schema": "logos-engine.coordinated-cost-isolation-completion.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-11T01:20:33.028845+00:00",
+  "startReceipt": {
+    "path": "docs/migration/lot4c-evidence/performance-integrated/coordinated-isolation-start.json",
+    "bytes": 8865,
+    "sha256": "d458e5a7b1875349590a359828a7375dfb29a5044b8f5ed68c7ef59466995933"
+  },
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "scripts/run-native-cost-window.py",
+    "/workspace/sites/sra-lot4c-reference-056",
+    "docs/migration/lot4c-evidence/performance-integrated",
+    "docs/migration/lot4c-evidence/reference-isos-056/source-manifest.json",
+    "docs/migration/lot4c-evidence/integrated-final/source-manifest.json"
+  ],
+  "exitCode": 0,
+  "measurementAttempted": true,
+  "runnerPid": 6,
+  "window": {
+    "path": "docs/migration/lot4c-evidence/performance-integrated/window.json",
+    "bytes": 10452,
+    "sha256": "5fe24aa83f63f6d3cf8d0ee209bf04ac7e67c33ee5dc3ad7e7efdd25a2c0091d"
+  },
+  "windowOutcome": {
+    "status": "passed",
+    "finalIntegrity": "passed",
+    "startedAt": "2026-11-11T01:11:49.090705+00:00",
+    "finishedAt": "2026-11-11T01:20:32.701656+00:00",
+    "error": null,
+    "integrityError": null
+  },
+  "lock": "/workspace/shared/sra-coordination/performance.lock",
+  "lockAcquiredAt": "2026-11-11T01:11:48.748573+00:00",
+  "lockHeldThrough": "2026-11-11T01:20:33.028820+00:00",
+  "lockHeldAcrossWholeWindow": true,
+  "coordinationSignalsUnchanged": true,
+  "beforeVerified": true,
+  "afterVerified": true,
+  "before": [
+    {
+      "name": "lot4a",
+      "mode": "completed_no_further_execution",
+      "source": "/workspace/shared/sra-coordination/lot4a-status.json",
+      "snapshot": {
+        "path": "docs/migration/lot4c-evidence/performance-integrated/isolation-evidence/before-00-lot4a.json",
+        "bytes": 7341,
+        "sha256": "110a35288d6d7644ddb16c80554ae33605e4e9117bf8cbda4b781e878d4a8830"
+      },
+      "observedAt": "2026-11-11T01:11:48.749162+00:00",
+      "requiredSignals": {
+        "quiet_acknowledged": true,
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "active_command": null
+      },
+      "actualSignals": {
+        "active_command": null,
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "quiet_acknowledged": true
+      },
+      "quietVerified": true
+    },
+    {
+      "name": "lot4b",
+      "mode": "completed_no_further_execution",
+      "source": "/workspace/shared/sra-coordination/lot4b-status.json",
+      "snapshot": {
+        "path": "docs/migration/lot4c-evidence/performance-integrated/isolation-evidence/before-01-lot4b.json",
+        "bytes": 4153,
+        "sha256": "e6b2cc3277cc11b0012858734688da427127782ca5457c1034c23836a55f4da3"
+      },
+      "observedAt": "2026-11-11T01:11:48.749570+00:00",
+      "requiredSignals": {
+        "quiet_acknowledged": true,
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "active_command": null
+      },
+      "actualSignals": {
+        "active_command": null,
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "quiet_acknowledged": true
+      },
+      "quietVerified": true
+    },
+    {
+      "name": "lot5a",
+      "mode": "completed_no_further_execution",
+      "source": "/workspace/shared/sra-coordination/lot5a-status.json",
+      "snapshot": {
+        "path": "docs/migration/lot4c-evidence/performance-integrated/isolation-evidence/before-02-lot5a.json",
+        "bytes": 5578,
+        "sha256": "4fac6b06f74a1b03d3f7fd0ef3e2a34532fccf77df98a35a8339003ff0b66ae2"
+      },
+      "observedAt": "2026-11-11T01:11:48.750269+00:00",
+      "requiredSignals": {
+        "quiet_acknowledged": true,
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "active_command": null
+      },
+      "actualSignals": {
+        "active_command": null,
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "quiet_acknowledged": true
+      },
+      "quietVerified": true
+    },
+    {
+      "name": "lot7a",
+      "mode": "completed_no_further_execution",
+      "source": "/workspace/shared/sra-coordination/lot7a-status.json",
+      "snapshot": {
+        "path": "docs/migration/lot4c-evidence/performance-integrated/isolation-evidence/before-03-lot7a.json",
+        "bytes": 6045,
+        "sha256": "e9c395a90dcfee739a1d52342878ef24739bf1b2d97307eab1f8f6a22ac2fad0"
+      },
+      "observedAt": "2026-11-11T01:11:48.750911+00:00",
+      "requiredSignals": {
+        "quiet_acknowledged": true,
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "active_command": null
+      },
+      "actualSignals": {
+        "active_command": null,
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "quiet_acknowledged": true
+      },
+      "quietVerified": true
+    },
+    {
+      "name": "lot7b",
+      "mode": "completed_no_further_execution",
+      "source": "/workspace/shared/sra-coordination/lot7b-status.json",
+      "snapshot": {
+        "path": "docs/migration/lot4c-evidence/performance-integrated/isolation-evidence/before-04-lot7b.json",
+        "bytes": 3991,
+        "sha256": "0aeae41dd69aa0f0e543c3ef72700e21500a9b83b5369a78c1f1018ef2293f2b"
+      },
+      "observedAt": "2026-11-11T01:11:48.751239+00:00",
+      "requiredSignals": {
+        "quiet_acknowledged": true,
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "active_command": null
+      },
+      "actualSignals": {
+        "active_command": null,
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "quiet_acknowledged": true
+      },
+      "quietVerified": true
+    },
+    {
+      "name": "lot10a",
+      "mode": "completed_no_further_execution",
+      "source": "/workspace/shared/sra-coordination/lot10a-status.json",
+      "snapshot": {
+        "path": "docs/migration/lot4c-evidence/performance-integrated/isolation-evidence/before-05-lot10a.json",
+        "bytes": 7473,
+        "sha256": "944d8396db73c4ae348e4fd2de89ae518d0f65d36811c4cafbd25cfd35bf1129"
+      },
+      "observedAt": "2026-11-11T01:11:48.751711+00:00",
+      "requiredSignals": {
+        "quiet_acknowledged": true,
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "active_command": null
+      },
+      "actualSignals": {
+        "active_command": null,
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "quiet_acknowledged": true
+      },
+      "quietVerified": true
+    },
+    {
+      "name": "lot5b",
+      "mode": "explicit_quiet",
+      "source": "/workspace/shared/sra-coordination/lot5b-status.json",
+      "snapshot": {
+        "path": "docs/migration/lot4c-evidence/performance-integrated/isolation-evidence/before-06-lot5b.json",
+        "bytes": 2183,
+        "sha256": "c81467c40212e70d4e7c0df2fc5e8dbe95b068c1376c0c8e1a76f7ecdbb339fd"
+      },
+      "observedAt": "2026-11-11T01:11:48.752187+00:00",
+      "requiredSignals": {
+        "quiet_acknowledged": true,
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "active_command": null
+      },
+      "actualSignals": {
+        "active_command": null,
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "quiet_acknowledged": true
+      },
+      "quietVerified": true
+    },
+    {
+      "name": "lot4c_auxiliary",
+      "mode": "explicit_quiet",
+      "source": "/workspace/shared/sra-coordination/lot4c-auxiliary-status.json",
+      "snapshot": {
+        "path": "docs/migration/lot4c-evidence/performance-integrated/isolation-evidence/before-07-lot4c_auxiliary.json",
+        "bytes": 789,
+        "sha256": "6c328bcede2c31c0e8948dfd9ddfee11c0167cc8d7704bc1123ff765b38ec92e"
+      },
+      "observedAt": "2026-11-11T01:11:48.752356+00:00",
+      "requiredSignals": {
+        "quiet_acknowledged": true,
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "active_command": null
+      },
+      "actualSignals": {
+        "active_command": null,
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "quiet_acknowledged": true
+      },
+      "quietVerified": true
+    }
+  ],
+  "after": [
+    {
+      "name": "lot4a",
+      "mode": "completed_no_further_execution",
+      "source": "/workspace/shared/sra-coordination/lot4a-status.json",
+      "snapshot": {
+        "path": "docs/migration/lot4c-evidence/performance-integrated/isolation-evidence/after-00-lot4a.json",
+        "bytes": 7341,
+        "sha256": "110a35288d6d7644ddb16c80554ae33605e4e9117bf8cbda4b781e878d4a8830"
+      },
+      "observedAt": "2026-11-11T01:20:32.709675+00:00",
+      "requiredSignals": {
+        "quiet_acknowledged": true,
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "active_command": null
+      },
+      "actualSignals": {
+        "active_command": null,
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "quiet_acknowledged": true
+      },
+      "quietVerified": true
+    },
+    {
+      "name": "lot4b",
+      "mode": "completed_no_further_execution",
+      "source": "/workspace/shared/sra-coordination/lot4b-status.json",
+      "snapshot": {
+        "path": "docs/migration/lot4c-evidence/performance-integrated/isolation-evidence/after-01-lot4b.json",
+        "bytes": 4153,
+        "sha256": "e6b2cc3277cc11b0012858734688da427127782ca5457c1034c23836a55f4da3"
+      },
+      "observedAt": "2026-11-11T01:20:32.710121+00:00",
+      "requiredSignals": {
+        "quiet_acknowledged": true,
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "active_command": null
+      },
+      "actualSignals": {
+        "active_command": null,
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "quiet_acknowledged": true
+      },
+      "quietVerified": true
+    },
+    {
+      "name": "lot5a",
+      "mode": "completed_no_further_execution",
+      "source": "/workspace/shared/sra-coordination/lot5a-status.json",
+      "snapshot": {
+        "path": "docs/migration/lot4c-evidence/performance-integrated/isolation-evidence/after-02-lot5a.json",
+        "bytes": 5578,
+        "sha256": "4fac6b06f74a1b03d3f7fd0ef3e2a34532fccf77df98a35a8339003ff0b66ae2"
+      },
+      "observedAt": "2026-11-11T01:20:32.710560+00:00",
+      "requiredSignals": {
+        "quiet_acknowledged": true,
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "active_command": null
+      },
+      "actualSignals": {
+        "active_command": null,
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "quiet_acknowledged": true
+      },
+      "quietVerified": true
+    },
+    {
+      "name": "lot7a",
+      "mode": "completed_no_further_execution",
+      "source": "/workspace/shared/sra-coordination/lot7a-status.json",
+      "snapshot": {
+        "path": "docs/migration/lot4c-evidence/performance-integrated/isolation-evidence/after-03-lot7a.json",
+        "bytes": 6045,
+        "sha256": "e9c395a90dcfee739a1d52342878ef24739bf1b2d97307eab1f8f6a22ac2fad0"
+      },
+      "observedAt": "2026-11-11T01:20:32.711013+00:00",
+      "requiredSignals": {
+        "quiet_acknowledged": true,
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "active_command": null
+      },
+      "actualSignals": {
+        "active_command": null,
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "quiet_acknowledged": true
+      },
+      "quietVerified": true
+    },
+    {
+      "name": "lot7b",
+      "mode": "completed_no_further_execution",
+      "source": "/workspace/shared/sra-coordination/lot7b-status.json",
+      "snapshot": {
+        "path": "docs/migration/lot4c-evidence/performance-integrated/isolation-evidence/after-04-lot7b.json",
+        "bytes": 3991,
+        "sha256": "0aeae41dd69aa0f0e543c3ef72700e21500a9b83b5369a78c1f1018ef2293f2b"
+      },
+      "observedAt": "2026-11-11T01:20:32.711312+00:00",
+      "requiredSignals": {
+        "quiet_acknowledged": true,
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "active_command": null
+      },
+      "actualSignals": {
+        "active_command": null,
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "quiet_acknowledged": true
+      },
+      "quietVerified": true
+    },
+    {
+      "name": "lot10a",
+      "mode": "completed_no_further_execution",
+      "source": "/workspace/shared/sra-coordination/lot10a-status.json",
+      "snapshot": {
+        "path": "docs/migration/lot4c-evidence/performance-integrated/isolation-evidence/after-05-lot10a.json",
+        "bytes": 7473,
+        "sha256": "944d8396db73c4ae348e4fd2de89ae518d0f65d36811c4cafbd25cfd35bf1129"
+      },
+      "observedAt": "2026-11-11T01:20:32.711836+00:00",
+      "requiredSignals": {
+        "quiet_acknowledged": true,
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "active_command": null
+      },
+      "actualSignals": {
+        "active_command": null,
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "quiet_acknowledged": true
+      },
+      "quietVerified": true
+    },
+    {
+      "name": "lot5b",
+      "mode": "explicit_quiet",
+      "source": "/workspace/shared/sra-coordination/lot5b-status.json",
+      "snapshot": {
+        "path": "docs/migration/lot4c-evidence/performance-integrated/isolation-evidence/after-06-lot5b.json",
+        "bytes": 2183,
+        "sha256": "c81467c40212e70d4e7c0df2fc5e8dbe95b068c1376c0c8e1a76f7ecdbb339fd"
+      },
+      "observedAt": "2026-11-11T01:20:32.712360+00:00",
+      "requiredSignals": {
+        "quiet_acknowledged": true,
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "active_command": null
+      },
+      "actualSignals": {
+        "active_command": null,
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "quiet_acknowledged": true
+      },
+      "quietVerified": true
+    },
+    {
+      "name": "lot4c_auxiliary",
+      "mode": "explicit_quiet",
+      "source": "/workspace/shared/sra-coordination/lot4c-auxiliary-status.json",
+      "snapshot": {
+        "path": "docs/migration/lot4c-evidence/performance-integrated/isolation-evidence/after-07-lot4c_auxiliary.json",
+        "bytes": 789,
+        "sha256": "6c328bcede2c31c0e8948dfd9ddfee11c0167cc8d7704bc1123ff765b38ec92e"
+      },
+      "observedAt": "2026-11-11T01:20:32.712565+00:00",
+      "requiredSignals": {
+        "quiet_acknowledged": true,
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "active_command": null
+      },
+      "actualSignals": {
+        "active_command": null,
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "quiet_acknowledged": true
+      },
+      "quietVerified": true
+    }
+  ],
+  "inputs": [
+    {
+      "path": "docs/migration/lot4c-evidence/launch-isolated-cost-window.py",
+      "bytes": 20213,
+      "sha256": "d113285c59fafb69e39ec7b324b6069af49b8e6666bd75b514a8c83e01d17883"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/performance-integrated/coordination-policy.json",
+      "bytes": 9231,
+      "sha256": "99a08b1913df7741578e1feac1a623f39ce0e0ae908f48a6f2291b2da9c100ce"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/performance-integrated/declaration.json",
+      "bytes": 5555,
+      "sha256": "8bf44d7ffbfa67222205e2b5c19dfe128df8cd9a0546ff13a14d12369dc6a477"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/performance-integrated/readiness.json",
+      "bytes": 167172,
+      "sha256": "41f49a5e8501364cb6f2723976a92ec12dc8858e020ebca1d4bef2e35acd22cc"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/performance-integrated/preparation.json",
+      "bytes": 3407,
+      "sha256": "7db7d7c41070c04945399df67aea3e3bdca863a8e070162065242262cf86c9b2"
+    }
+  ],
+  "childCleanup": {
+    "required": false,
+    "completed": true,
+    "processGroup": 6,
+    "signalsSent": [],
+    "before": {
+      "members": [],
+      "live": [],
+      "zombies": []
+    },
+    "after": {
+      "members": [],
+      "live": [],
+      "zombies": []
+    }
+  },
+  "failure": null,
+  "failures": [],
+  "qualification": "Observed source-bound ABBA completion and before/after cooperative signals only. The flock remains held through child cleanup, post-run verification and receipt writing. Incomplete or absent window boundaries are retained as failures and never synthesized. No claim is made about uninstrumented unrelated host processes."
+}

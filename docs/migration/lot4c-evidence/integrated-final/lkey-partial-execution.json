@@ -1,0 +1,42 @@
+{
+  "schema": "logos-engine.lot4c.partial-public-regression-execution.v1",
+  "status": "completed",
+  "startedAt": "2026-11-11T01:02:58.114188172Z",
+  "finishedAt": "2026-11-11T01:03:47.739339689Z",
+  "recordedAt": "2026-11-11T01:03:47.753194407Z",
+  "exitCode": 0,
+  "stdoutGzipExitCode": 0,
+  "command": [
+    "node",
+    "--expose-gc",
+    "--max-old-space-size=1536",
+    "scripts/replay-native-partial-public-regression.mjs",
+    "docs/migration/lot7a-evidence/integrated-final/lkey-campaign.json.gz",
+    "docs/migration/lot7a-evidence/integrated-final/lkey-public-trace.json.gz",
+    "docs/migration/lot4c-evidence/integrated-final/source-manifest.json",
+    "docs/migration/lot4c-evidence/integrated-final/lkey-partial",
+    "--contract",
+    "docs/migration/lot4c-evidence/integrated-final/lkey-partial-contract.json"
+  ],
+  "lock": {
+    "path": "/workspace/shared/sra-coordination/performance.lock",
+    "mode": "shared",
+    "command": [
+      "flock",
+      "-s",
+      "9"
+    ],
+    "heldAcrossHelperAndLogTransport": true
+  },
+  "stdout": {
+    "path": "docs/migration/lot4c-evidence/integrated-final/lkey-partial-stdout.log",
+    "sha256": "e2f34b1d6d5769060d06b733a4e61019634777c201e39cc2cd4ea8e6beac4919",
+    "bytes": 230
+  },
+  "stdoutGzip": {
+    "path": "docs/migration/lot4c-evidence/integrated-final/lkey-partial-stdout.log.gz",
+    "sha256": "3ddfa67cec1c2616f34ba12bbcd8bbf9f0ad3426c4ab4d75f959d5ff5d540260",
+    "bytes": 183
+  },
+  "qualification": "Execution of the declared recorded-public partial trajectory only. Helper exit status qualifies preservation; the raw campaign retains its failed target outcome. No live game, new real game action, performance measurement or publication is performed."
+}

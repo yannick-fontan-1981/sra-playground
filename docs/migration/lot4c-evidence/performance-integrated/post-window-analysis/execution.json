@@ -1,0 +1,118 @@
+{
+  "steps": [
+    {
+      "label": "pair-cohort1",
+      "command": [
+        "node",
+        "scripts/compare-native-loop-costs.mjs",
+        "docs/migration/lot4c-evidence/performance-integrated/comparison-policy.json",
+        "docs/migration/lot4c-evidence/performance-integrated/cohort1/baseline.json",
+        "docs/migration/lot4c-evidence/performance-integrated/cohort1/after.json",
+        "docs/migration/lot4c-evidence/performance-integrated/cohort1/comparison.json"
+      ],
+      "startedAt": "2026-11-11T01:21:39.168193+00:00",
+      "finishedAt": "2026-11-11T01:21:39.242804+00:00",
+      "exitCode": 0,
+      "output": {
+        "path": "docs/migration/lot4c-evidence/performance-integrated/post-window-analysis/pair-cohort1.log",
+        "bytes": 268,
+        "sha256": "779ef3d4f0af3dc30b71caf31f2e7d58cc1e3a7db9b79e29b9cb2a196baf0285"
+      }
+    },
+    {
+      "label": "pair-cohort2",
+      "command": [
+        "node",
+        "scripts/compare-native-loop-costs.mjs",
+        "docs/migration/lot4c-evidence/performance-integrated/comparison-policy.json",
+        "docs/migration/lot4c-evidence/performance-integrated/cohort2/baseline.json",
+        "docs/migration/lot4c-evidence/performance-integrated/cohort2/after.json",
+        "docs/migration/lot4c-evidence/performance-integrated/cohort2/comparison.json"
+      ],
+      "startedAt": "2026-11-11T01:21:39.243330+00:00",
+      "finishedAt": "2026-11-11T01:21:39.320346+00:00",
+      "exitCode": 0,
+      "output": {
+        "path": "docs/migration/lot4c-evidence/performance-integrated/post-window-analysis/pair-cohort2.log",
+        "bytes": 267,
+        "sha256": "97b6b4e199305e8765581f9eb0ef0e9d96defce02ef40874cd57ee1b52e00608"
+      }
+    },
+    {
+      "label": "consolidate",
+      "command": [
+        "node",
+        "docs/migration/lot4c-evidence/consolidate-owner-costs.mjs",
+        "docs/migration/lot4c-evidence/performance-integrated/owner-growth-contract.json",
+        "docs/migration/lot4c-evidence/performance-integrated/owner-growth-comparison.json"
+      ],
+      "startedAt": "2026-11-11T01:21:39.444245+00:00",
+      "finishedAt": "2026-11-11T01:21:40.619289+00:00",
+      "exitCode": 0,
+      "output": {
+        "path": "docs/migration/lot4c-evidence/performance-integrated/post-window-analysis/consolidate.log",
+        "bytes": 291,
+        "sha256": "8b4576cf90e74fb270ad08709397f5d602a8c625ffc346effd8d7caa1414ed15"
+      }
+    },
+    {
+      "label": "independent-review",
+      "command": [
+        "python",
+        "-B",
+        "docs/migration/lot4c-evidence/review-owner-costs.py",
+        "docs/migration/lot4c-evidence/performance-integrated/owner-growth-contract.json",
+        "docs/migration/lot4c-evidence/performance-integrated/owner-growth-comparison.json",
+        "docs/migration/lot4c-evidence/performance-integrated/owner-growth-review.json"
+      ],
+      "startedAt": "2026-11-11T01:21:40.619833+00:00",
+      "finishedAt": "2026-11-11T01:21:41.378691+00:00",
+      "exitCode": 0,
+      "output": {
+        "path": "docs/migration/lot4c-evidence/performance-integrated/post-window-analysis/independent-review.log",
+        "bytes": 337,
+        "sha256": "f1848ae57159d4fac61e587be1107bf27f6dc4b72ebc4c6f0582ec27342a9ae8"
+      }
+    },
+    {
+      "label": "log-transport",
+      "command": [
+        "python",
+        "-B",
+        "docs/migration/lot4c-evidence/record-cost-log-transport.py",
+        "docs/migration/lot4c-evidence/performance-integrated"
+      ],
+      "startedAt": "2026-11-11T01:21:41.379350+00:00",
+      "finishedAt": "2026-11-11T01:21:41.410536+00:00",
+      "exitCode": 0,
+      "output": {
+        "path": "docs/migration/lot4c-evidence/performance-integrated/post-window-analysis/log-transport.log",
+        "bytes": 221,
+        "sha256": "dd09a6a70da040115516b746b6ef8e4790c74c4751279c9a80759a360e442fd7"
+      }
+    },
+    {
+      "label": "render",
+      "command": [
+        "python",
+        "-B",
+        "docs/migration/lot4c-evidence/write-cost-results.py",
+        "--performance-directory",
+        "docs/migration/lot4c-evidence/performance-integrated",
+        "--candidate-source-directory",
+        "docs/migration/lot4c-evidence/integrated-final",
+        "--baseline-manifest",
+        "docs/migration/lot4c-evidence/reference-isos-056/source-manifest.json"
+      ],
+      "startedAt": "2026-11-11T01:21:41.411087+00:00",
+      "finishedAt": "2026-11-11T01:21:42.326712+00:00",
+      "exitCode": 0,
+      "output": {
+        "path": "docs/migration/lot4c-evidence/performance-integrated/post-window-analysis/render.log",
+        "bytes": 521,
+        "sha256": "ce76c3c7a2ff093d693dd7936738f3021ef7e8566514bb8575558abccec7ff59"
+      }
+    }
+  ],
+  "measurementExecuted": false
+}

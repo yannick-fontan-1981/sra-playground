@@ -1,0 +1,41 @@
+{
+  "schema": "logos-engine.evidence-byte-parts.v1",
+  "original": {
+    "file": "mind-051-replay.json.gz",
+    "sha256": "0e9a9c4abb6a1da5fc880a14223dfd1f0ef32d6cc3de7a68a96c9690d1757961",
+    "bytes": 4995992
+  },
+  "parts": [
+    {
+      "file": "mind-051-replay.json.gz.part000",
+      "sha256": "cfb102e189534bbe52756c83ab7466d5eb2eb8eb9c86713c71bccfebccfd6445",
+      "bytes": 900000
+    },
+    {
+      "file": "mind-051-replay.json.gz.part001",
+      "sha256": "25041ee857344d3bbee40c3eea01687e56fc4ffa602bbb703736d9bdce771d2c",
+      "bytes": 900000
+    },
+    {
+      "file": "mind-051-replay.json.gz.part002",
+      "sha256": "9c6b6c67f7d13509a0e217ad9675740e75489b14bc6def8d0f8a7c6499b806f0",
+      "bytes": 900000
+    },
+    {
+      "file": "mind-051-replay.json.gz.part003",
+      "sha256": "986636d039bd389a3f3aad1ce4956452c69e809541042edd86685ed588111300",
+      "bytes": 900000
+    },
+    {
+      "file": "mind-051-replay.json.gz.part004",
+      "sha256": "ea62660b1187f55343764f39396497c65356a667d365f5bec3b74567afee0e7c",
+      "bytes": 900000
+    },
+    {
+      "file": "mind-051-replay.json.gz.part005",
+      "sha256": "f8a541c0e38590afe576dadb55b4c9c3c3905048c3e55e94574bad24c8c06606",
+      "bytes": 495992
+    }
+  ],
+  "qualification": "Exact byte partitions of immutable evidence; original data and checksum are unchanged."
+}

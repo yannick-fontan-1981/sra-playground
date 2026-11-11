@@ -1,0 +1,74 @@
+{
+  "schema": "logos-engine.lot4c-publication-recorder-compatibility-correction.v1",
+  "recordedAt": "2026-11-11T01:29:14+00:00",
+  "status": "source_correction_independently_reviewed_before_retry",
+  "authorization": "Delivery owner authorized a correction only to record-publication-inputs.py, preserving every functional gate and the failed first execution, followed by independent facet_oracle source review and one new exclusive execution with identical arguments.",
+  "firstExecution": {
+    "path": "docs/migration/lot4c-evidence/publication-preflight/record-publication-inputs-execution.json",
+    "sha256": "45c42e10f1bfe599e1ec748caf537b2217fa2d8957ecff566c263d9e6403867a",
+    "status": "failed",
+    "exitCode": 1,
+    "error": "KeyError: 'sourceAndTestInputsUnchanged'",
+    "publicationInputsCreated": false,
+    "preserved": true
+  },
+  "reason": "The literal 10A adaptation expected metadata produced by the specialized 10A release runner. The actual 4C checks-run.json comes from the official verify-native-delta.py --build-script branch: five ordered checks, native source, buildInputs and worker, without a source/test snapshot or semanticPassed annotations. Its separate test receipt contains the exact source/test snapshot. The prior static review did not identify these actual-schema differences; the first real execution exposed the snapshot error, and source diagnosis found the semantic annotation mismatch before retry.",
+  "priorStaticReviewRetained": {
+    "path": "docs/migration/lot4c-evidence/planning/publication-tools-source-review.json",
+    "sha256": "c6991d0f04a237c145db53f7c5cda80ca2af239df5b8df7d4c935a09fa98a3b2",
+    "qualification": "Its literal-replacement result remains true; its recorder compatibility conclusion is superseded by the actual failed execution and this documented correction. It was not rewritten."
+  },
+  "before": {
+    "path": "docs/migration/lot4c-evidence/publication-preflight/record-publication-inputs-before.py",
+    "bytes": 17876,
+    "sha256": "bd8070cc153351d59914ef3a3d9f72b9f5040ac5f23380dc5b95fb196de64c91"
+  },
+  "after": {
+    "path": "docs/migration/lot4c-evidence/record-publication-inputs.py",
+    "bytes": 23139,
+    "sha256": "3314d92dfba0efc0694ef65ac0fe2b2a068cd505a655df5a4de26ff44f075cbf"
+  },
+  "diff": {
+    "path": "docs/migration/lot4c-evidence/publication-preflight/record-publication-inputs-compatibility.patch",
+    "bytes": 8113,
+    "sha256": "cae2c542b2f3681f6c65a3f4bf03c96ff448a4784b4ab3c3de1b5c8f4d22aa35"
+  },
+  "independentReview": {
+    "path": "docs/migration/lot4c-evidence/publication-preflight/record-publication-inputs-compatibility-oracle-review.json",
+    "sha256": "f3210278be820515915548d1a06d2107196aa30284f6f6223a4595128d759f58",
+    "reviewer": "facet_oracle",
+    "status": "source_review_passed",
+    "checks": 9,
+    "recorderExecutedByReviewer": false
+  },
+  "strictCompatibility": [
+    "verify_tests, verify_build, verify_regressions and both frozen native inventories remain unconditional and are checked twice during recording.",
+    "Any source/test snapshot present in checks must include both fields, remain marked unchanged and equal the tests snapshot exactly. A partial, false or mismatching snapshot fails.",
+    "Both fields may be absent only in the exact official five checks-only top-level schema, with the expected generator path and exact ordered gates. The current test snapshot, current build inputs, unique worker and shared src mapping remain independently verified.",
+    "A present semanticPassed must be true. An absent annotation is accepted only in the official checks-only branch after fingerprinted gzip log decoding and exact JSON-summary comparison with a current closure report.",
+    "The entry closure must expose exactly one connected surface/facet_example entry owned by facet_examples and name the measured native implementation. The migration audit must retain an empty failures list.",
+    "fullV6Parity=false and complete=false remain explicit requirements and are retained in the resulting validationInputBinding.",
+    "The new validationInputBinding is recorded and must remain identical across both final formal-input checks."
+  ],
+  "provenanceLimit": "Frozen fingerprinted logs are the historical gate outputs. The detailed reports were not fingerprinted in the original 4C gate receipt or readiness input set. They become current closure bindings whose summaries equal those logs; no missing historical detailed-report fingerprint is inferred. This limited provenance is explicit in the final publication-input receipt.",
+  "unchangedValidationReceipts": [
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/validation/checks-run.json",
+      "bytes": 81433,
+      "sha256": "701c404450fe60791ac4756a287308a66f59e6664c8e46cab14ec73b0361cc3b"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/validation/delta-tests-run.json",
+      "bytes": 130562,
+      "sha256": "31c84cf8c1a2aa8a871107f358edc0acf041a9cc5771529af088f93958e06822"
+    }
+  ],
+  "changedExecutableFiles": ["docs/migration/lot4c-evidence/record-publication-inputs.py"],
+  "unchangedScopes": "No measurement, reviewer, readiness, native, test, build, runtime, transport or publication source changed. No test, build, audit rerun, new timing, game, Git or publication was performed to prepare this correction. The accepted global budget rule and actual failed historical strict comparison are unchanged.",
+  "retry": {
+    "directory": "docs/migration/lot4c-evidence/publication-preflight/attempt-02",
+    "exclusiveNewAttempt": true,
+    "arguments": "Exactly the first execution command, including flock -s, baseline/final/performance/validation directories and the three optional evidence arguments.",
+    "executedAtReceiptCreation": false
+  }
+}

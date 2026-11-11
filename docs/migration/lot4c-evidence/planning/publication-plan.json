@@ -1,0 +1,49 @@
+{
+  "schema": "logos-engine.lot4c-publication-plan.v1",
+  "declaredAt": "2026-11-11T01:30:17.401265+00:00",
+  "status": "prepared_before_source_push",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "nativeVersion": "0.57.0",
+  "nativeDigest": "eebd099808672be934389020c8f9061df4fdacab28cd7d60c00cd1b080464c04",
+  "actuallyPublishedPredecessor": {
+    "siteVersion": 91,
+    "sourceCommit": "5659ddc9420c7624df4865f0afc628782296a186"
+  },
+  "sourceOpening": {
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "checkout_path": "/workspace/sites/sra-lot4c-publication-20261111",
+    "commit_sha": "5659ddc9420c7624df4865f0afc628782296a186"
+  },
+  "bindings": [
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/delivery-integrity.json",
+      "bytes": 11065,
+      "sha256": "6f48206af7517940050a421af4561b8bbeec1d1199576c21752dd5e2da06b5ae"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/performance-integrated/owner-growth-review.json",
+      "bytes": 1266654,
+      "sha256": "2a672ee1a2809805e3b06f75f1506634bf6e8ffc1f681bd2d0d89223c9bc09bb"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/performance-integrated/coordinated-isolation-completion.json",
+      "bytes": 18018,
+      "sha256": "c194184514a51e97b064a2e964a2dbc1b83415ead6101ded901371b3738eee2a"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/performance-integrated/results-render.json",
+      "bytes": 16069,
+      "sha256": "cc6c61dc16d21d656aced5e1016026a0d1ed590147cb1585b1e94751b46bc575"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/planning/prepublication-site-audience.json",
+      "bytes": 778,
+      "sha256": "9c11a05d83ad3ae5351bc1a2c6d0485fbd5fbca5713e928ae106392f1e6d743c"
+    }
+  ],
+  "requiredBeforePush": "Passed publication-inputs receipt on this unchanged native/test/build/cost evidence, then exact committed clean delivery tree.",
+  "sourceTransport": "Use the reviewed bounded ordinary fast-forward plan through the standard Sites workflow, without force push or automatic publication on intermediate pushes. Preserve original target history and exact final tree.",
+  "application": "Reuse and individually verify the already tested build; no rebuild is planned. Match all archive application members to that build before publishing.",
+  "audience": "Existing owner-private audience; unchanged revision3.",
+  "closure": "After first actual succeeded publication, retain real version/deployment receipts and update roadmap documentation. Any documentation closure uses the same native/test/build inputs and exact application members. No future Site number is assigned in advance."
+}

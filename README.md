@@ -3,9 +3,104 @@
 An English-language playground for **100 interactive games** and Yannick
 Fontan's **Symbolic Reasoning Agent** research.
 
+<!-- LOT4C_README_CURRENT_START -->
+
+## Native 0.57.0: FacetExamples validated, global cost accepted
+
+**Lot 4C is functionally validated and its global cost is accepted; publication
+remains pending.** The frozen candidate integrates the actual **10A / Site 91 / native
+0.56.0** predecessor, commit `5659ddc9420c7624df4865f0afc628782296a186`, deployed
+on **10 November 2026 at 21:42:39 UTC−03**. The
+[Site 90–91 closure](docs/migration/lot4c-evidence/planning/published-predecessor-source-closure.json)
+retains identical application inputs. The
+[0.57 source manifest](docs/migration/lot4c-evidence/integrated-final/source-manifest.json)
+contains **298 native files**, digest
+`eebd099808672be934389020c8f9061df4fdacab28cd7d60c00cd1b080464c04`, with a
+309-file execution archive. No future Site version is assigned.
+
+The single `facet_examples` owner connects the first `surface` entry,
+`facet_example`, through `v6.facet_examples.choose`. It measures visible examples,
+acquires a seed and an upward face movement from selected public returns, and
+revalidates the resulting portable method before compound continuation. A
+visually complete composition without official progress remains refuted. Foreign
+selected returns continue to reach existing passive owners, including Axial,
+without creating Facet acquisition.
+
+The [final declared suite](docs/migration/lot4c-evidence/integrated-final/validation/delta-tests-run.json)
+passes **4,838/4,838 tests in 121 files** and
+[five project checks](docs/migration/lot4c-evidence/integrated-final/validation/checks-run.json).
+The [ten strict recorded regressions](docs/migration/lot4c-evidence/integrated-final/regressions/regression-summary.json)
+pass **170/170 checks** over **357 actions, 275 prefixes, 367 complete public
+packets, 1,676 animation frames, 632 requests and 30 natural boundaries**, with
+source and execution inputs unchanged. The separate
+[LKEY preservation](docs/migration/lot4c-evidence/integrated-final/lkey-partial/qualification.json)
+passes **157/157 checks** while retaining its raw failed result: two levels,
+25 actions and `frontier_unknown` at the third level.
+
+The [cold original-component comparison](docs/migration/lot4c-evidence/integrated-final/isos-facet-source-parity-diagnostic.json)
+matches **48 calls, 24 guards, 12 selected records, 36 actually observed native
+restorations, 12 prefixes and 13 public observations**, with zero differences.
+Its **60 memory ablations** retain nine changed actions/refusals, four metadata-only
+changes and 47 unchanged proposals, including 41 empty interventions. These are
+component counterfactuals on the final replay capture, not additional live games
+or complete-caller parity.
+
+The [actual 0.57 browser session](docs/migration/lot4c-evidence/integrated-final/browser/browser-qa.json)
+completes **three ISOS levels in 12 actions and 12 plans**, with Pause at one
+action, exactly one further action, and natural boundaries at 3/7/12. The
+[final screenshot](docs/migration/lot4c-evidence/integrated-final/browser/isos-three-levels.png)
+retains that result. ISOS has six levels; full-game victory is not claimed. The
+published 0.56 reference remains a bounded eight-action, zero-level observation.
+The [cumulative clock](docs/migration/lot4c-evidence/case-clock.json) retains
+**1,259.938444409 of 2,400 seconds** through interval 04, without reset.
+
+Coverage is **61/76 connected entries (80.3%), with 15 remaining**. The audit
+retains **189 component-verified modules, 147 partial transfers, 1,033 pending
+and zero fully verified modules**; all six full-migration gates remain false.
+
+The [official ABBA window](docs/migration/lot4c-evidence/performance-integrated/window.json)
+ran on **10 November 2026, 22:11:49–22:20:32 UTC−03**, preserving all **32 measured
+sessions / 400 actions**, with only eight warmups / 24 actions excluded. The
+[independent review](docs/migration/lot4c-evidence/performance-integrated/owner-growth-review.json)
+passes **7,630/7,630 checks** and accepts **2/2 games**: complete-session medians
+are **11,253.251434999998 → 11,046.9208325 ms for STCK (−1.833520%)** and
+**16,297.509763000002 → 16,272.070031000007 ms for SMLP (−0.156096%)**.
+Each game stays **strictly below a 10% increase**, without cross-game compensation,
+removed measured sessions or an average of cohort ratios.
+
+Phase diagnostics remain **15/16**, including **SMLP restoration +25.066387%**;
+each cohort also retains 15/16, with STCK new decision **+10.782328%** in the first
+and SMLP restoration **+42.839691%** in the second. STCK restoration p95 increases
+**+13.878385%** overall and **+22.824004%** in cohort 2. The
+[complete cost report](docs/migration/lot4c-evidence/performance-integrated/results.md)
+retains all distributions, Pause, memory and scope limitations. A phase above
+10% is accepted under the authorized per-game global rule; its diagnostic stays visible.
+
+The historical strict aggregator remains failed with exit 1. The supplementary
+decision qualifies **432 structural differences on four predeclared paths**, backed
+by **37 attributed untimed deltas / 64 checks** and **65 static preflight checks**.
+Public counts do not establish identity of private graph leaves. The
+[delivery integrity](docs/migration/lot4c-evidence/integrated-final/delivery-integrity.json)
+and [completed isolation](docs/migration/lot4c-evidence/performance-integrated/coordinated-isolation-completion.json)
+pass. The [first post-window preparation failure](docs/migration/lot4c-evidence/performance-integrated/post-window-analysis/preparation-attempt-01.json)
+is retained: cohort comparisons were requested before generation, then produced
+by the declared tools without rerunning measurements or changing inputs.
+These common-loop timings do not establish long Facet-composition cost, hours-long
+stability, immediate interruption of any search or full-caller parity.
+
+**Actual 4C publication is the remaining delivery step.** Lot **5B is prepared
+separately as native 0.58** and awaits that publication before final integration.
+
+See the [4C report](docs/migration/lot4c-facet-examples.md),
+[source lineage](docs/migration/lot4c-facet-examples-lineage.md),
+[evidence index](docs/migration/lot4c-evidence/README.md) and
+[updated roadmap](docs/migration/v6-delivery-roadmap.md).
+
+<!-- LOT4C_README_CURRENT_END -->
+
 <!-- LOT10A_README_CURRENT_START -->
 
-## Published native 0.56.0: AxialQuestion
+## Published predecessor native 0.56.0: AxialQuestion, Sites 90–91
 
 **AxialQuestion / lot 10A** is integrated with the actual **Site 89 / native
 0.55.0** predecessor and its unchanged Site 88 execution inputs. The distinct
@@ -15,11 +110,15 @@ quarter-turn distance, recalled-control preference, command and source-index
 tie order, followed by a current one-action OP18 guard.
 
 The first native publication is **Site 90**, deployed privately on
-**11 November 2026 at 00:37:52.792934 UTC** from commit
+**10 November 2026 at 21:37:52.792934 UTC−03** from commit
 `617d1f607d37a6bba1f7ae8ffe1826806e6749a0`. The
 [terminal publication receipt](docs/migration/lot10a-evidence/publication/native-publication.json)
 binds the validated source, build, cost and unchanged owner-only access. The
-documentation closure keeps the same native and build inputs.
+documentation closure keeps the same native and build inputs. That closure is
+actually published in **Site 91**, commit
+`5659ddc9420c7624df4865f0afc628782296a186`, confirmed at **21:42:39 UTC−03 on
+10 November 2026** by the
+[retained publication receipt](docs/migration/lot4c-evidence/planning/published-predecessor-site91.json).
 
 Cold common-runtime scenarios acquire selection from another family's public
 return, execute Axial once, acquire an observed rotation and change the next

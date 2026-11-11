@@ -1,0 +1,33 @@
+{
+  "phase": "campaign",
+  "command": [
+    "python",
+    "-B",
+    "scripts/run-bounded-native-campaign-proof.py",
+    "ISOS",
+    "3",
+    "8",
+    "docs/migration/lot4c-evidence/reference-isos-056"
+  ],
+  "cwd": "/workspace/sites/sra-lot4c-reference-056",
+  "startedAt": "2026-11-11T00:51:35.428143+00:00",
+  "finishedAt": "2026-11-11T00:51:56.738364+00:00",
+  "elapsedSeconds": 21.310226410001633,
+  "exitCode": 1,
+  "timedOut": false,
+  "stdout": {
+    "path": "docs/migration/lot4c-evidence/reference-isos-056/campaign.stdout.log",
+    "sha256": "1d3931baee14946e4aec18af9195c0ca23e501be9257c9b8ddf883c3abb7cf49",
+    "bytes": 2321
+  },
+  "stdoutArchive": {
+    "compressed": {
+      "path": "docs/migration/lot4c-evidence/reference-isos-056/campaign.stdout.log.gz",
+      "sha256": "3be76625620e76ab576db02930ada2b91f389714c35553fd1ec08e716460303e",
+      "bytes": 1046
+    },
+    "uncompressedBytes": 2321,
+    "uncompressedSha256": "1d3931baee14946e4aec18af9195c0ca23e501be9257c9b8ddf883c3abb7cf49",
+    "exactRoundTrip": true
+  }
+}

@@ -1,0 +1,150 @@
+{
+  "schema": "logos-engine.game-case-cumulative-clock.v1",
+  "game": "ISOS",
+  "maximumSeconds": 2400,
+  "chargedSeconds": 1259.938444409008,
+  "clockWasReset": false,
+  "status": "closed",
+  "intervals": [
+    {
+      "id": "candidate-selection",
+      "startedAt": "2026-11-11T00:27:17.930095+00:00",
+      "finishedAt": "2026-11-11T00:27:23.064477+00:00",
+      "chargedSeconds": 5.134041409008205,
+      "evidence": [
+        {
+          "path": "docs/migration/lot4c-evidence/development/candidate-selector-run.json",
+          "bytes": 341,
+          "sha256": "d8ffae03a93bd0d5eabbcdf93cf64ac3691feef150feb1c771c662895e825dcc"
+        },
+        {
+          "path": "docs/migration/lot4c-evidence/candidate-selection.json",
+          "bytes": 201734,
+          "sha256": "d4a1c5e476400ffaf8cfbe9183346bbc09a7628478b457f52ab11c9a157e0b7c"
+        }
+      ]
+    },
+    {
+      "id": "development-live-and-source-diagnosis",
+      "startedAt": "2026-11-11T00:31:05.070411+00:00",
+      "finishedAt": "2026-11-11T00:35:43.404599+00:00",
+      "chargedSeconds": 278.334188,
+      "evidence": [
+        {
+          "path": "docs/migration/lot4c-evidence/development/isos-active-interval-01.json",
+          "bytes": 1503,
+          "sha256": "610a81fe76e2bd7818100e88c5a4629928753ec8c7ba7234754cec95a6c52d93"
+        },
+        {
+          "path": "docs/migration/lot4c-evidence/development/isos-live-01/execution-isos.json",
+          "bytes": 74632,
+          "sha256": "e0c7cc5b6d72407de63d55d26530751694c4cae17f853046972768019033c8cd"
+        },
+        {
+          "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-facet-source-parity-attempt-01-execution.json",
+          "bytes": 2858,
+          "sha256": "29f40924cf9ce9e4024dceaf7b0f756f489a8108c0d1a2dcab536567fa5fa621"
+        },
+        {
+          "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-facet-source-parity-attempt-02-execution.json",
+          "bytes": 3108,
+          "sha256": "7017c0228c64f0ada9b0c046f1ad971deeef2f2d3089475bd4604715bd9e358a"
+        },
+        {
+          "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-facet-source-parity-snapshot-correction.json",
+          "bytes": 3364,
+          "sha256": "74b823650389b74852ea6d46d463ea5697c3bf206b68649cf8b6c8cfce97c4c4"
+        }
+      ]
+    },
+    {
+      "id": "case-interval-02",
+      "startedAt": "2026-11-11T00:46:09.773531+00:00",
+      "finishedAt": "2026-11-11T00:52:31.877083+00:00",
+      "chargedSeconds": 382.103552,
+      "evidence": [
+        {
+          "path": "docs/migration/lot4c-evidence/development/isos-active-interval-02.json",
+          "bytes": 5791,
+          "sha256": "ecf1211b5f96756340f55d220a6eaa29acb58b00a7789d2a1794f6241ff2c749"
+        },
+        {
+          "path": "docs/migration/lot4c-evidence/reference-isos-056/reference-case-execution.json",
+          "bytes": 6304,
+          "sha256": "3674ddcb4acd3c9565f044882ab17931e8a6a5dbe508b20c46e7f1265b78306d"
+        },
+        {
+          "path": "docs/migration/lot4c-evidence/development/isos-reference-056-copy.json",
+          "bytes": 12566,
+          "sha256": "b49d5b3957b035d949400309f579847e8f42b49b0d19bf6f9fa82e6f6454fe7b"
+        },
+        {
+          "path": "docs/migration/lot4c-evidence/development/isos-reference-056-public-diagnostic.json",
+          "bytes": 2237,
+          "sha256": "6c0c594a3c69fb642eb89b285976b93cad32a9fc57594ea315648312e6dc0b25"
+        }
+      ]
+    },
+    {
+      "id": "case-interval-03",
+      "startedAt": "2026-11-11T00:51:07.023882+00:00",
+      "finishedAt": "2026-11-11T00:58:31.724782+00:00",
+      "chargedSeconds": 444.7009,
+      "evidence": [
+        {
+          "path": "docs/migration/lot4c-evidence/development/isos-active-interval-03.json",
+          "bytes": 941,
+          "sha256": "9745e37321f1b6636017b43c9f77fb424862a9ea4a4532a6cca474162b416bc4"
+        },
+        {
+          "path": "docs/migration/lot4c-evidence/integrated-final/browser/browser-qa.json",
+          "bytes": 5471,
+          "sha256": "cb305c01c36dc94239e2514ceea5b3b61296d1f996a1c787534392daa1449861"
+        },
+        {
+          "path": "docs/migration/lot4c-evidence/integrated-final/browser/isos-three-levels.png",
+          "bytes": 84419,
+          "sha256": "17f1c51ef8479b8606ee5829e97cade8d5990ff4aeaa7d3499894e6048b6cf8a"
+        }
+      ]
+    },
+    {
+      "id": "case-interval-04",
+      "startedAt": "2026-11-11T00:59:59.773927+00:00",
+      "finishedAt": "2026-11-11T01:02:29.439690+00:00",
+      "chargedSeconds": 149.665763,
+      "evidence": [
+        {
+          "path": "docs/migration/lot4c-evidence/development/isos-active-interval-04.json",
+          "bytes": 1704,
+          "sha256": "2d2977905ddba84dfd30ff2432c499ca36ad4dad296a66ae0b2aa012599e4da7"
+        },
+        {
+          "path": "docs/migration/lot4c-evidence/integrated-final/regressions/isos-development-4c-execution.json",
+          "bytes": 8976,
+          "sha256": "b7cba61d25017fde00cea09f1364193cbe83f78afe3506c71ef543427e9a1824"
+        },
+        {
+          "path": "docs/migration/lot4c-evidence/integrated-final/isos-facet-source-parity-execution.json",
+          "bytes": 76557,
+          "sha256": "c65be3529535d79268a135dca1e3fbbf048b68b16f5267058f8dace10f0db423"
+        },
+        {
+          "path": "docs/migration/lot4c-evidence/integrated-final/isos-facet-source-parity-diagnostic.json",
+          "bytes": 6353,
+          "sha256": "92aee5748426dbf4193af94e643b6643e2b50f582e0230d14edccbe89d748828"
+        },
+        {
+          "path": "docs/migration/lot4c-evidence/integrated-final/isos-facet-source-parity.json.gz",
+          "bytes": 80222,
+          "sha256": "4171b8bff1050ae05ee613351883ededfc199713da01b5996fc132d776a559f7"
+        }
+      ]
+    }
+  ],
+  "lastUpdatedAt": "2026-11-11T01:06:09.467046+00:00",
+  "qualification": "All declared active ISOS intervals, including original candidate selection, bounded baseline, failed and corrected source comparisons, final recorded replay, diagnosis and actual browser validation, remain charged without reset. Overlapping intervals02 and03 are both fully charged conservatively. Functional work on this case is complete; no subsequent game execution is planned for lot4C.",
+  "conservativeOverlapAccounting": "Intervals02 and03 partly overlap; their full durations are both charged, conservatively. No elapsed case work was removed.",
+  "remainingSeconds": 1140.061555590992,
+  "withinBudget": true
+}

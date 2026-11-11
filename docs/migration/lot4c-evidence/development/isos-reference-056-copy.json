@@ -1,0 +1,332 @@
+{
+  "schema": "logos-engine.lot4c.exact-reference-evidence-copy.v1",
+  "recordedAt": "2026-11-11T00:51:57.436547+00:00",
+  "sourceCheckout": "/workspace/sites/sra-lot4c-reference-056",
+  "destinationCheckout": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+  "fileCount": 23,
+  "files": [
+    {
+      "source": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/campaign.execution.json",
+        "sha256": "e827b248dfb3f75296277aaafe6eaab0487000dd03f870deaf1e3fdcae52e748",
+        "bytes": 1042
+      },
+      "destination": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/campaign.execution.json",
+        "sha256": "e827b248dfb3f75296277aaafe6eaab0487000dd03f870deaf1e3fdcae52e748",
+        "bytes": 1042
+      },
+      "action": "copied_absent",
+      "identical": true
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/campaign.stdout.log",
+        "sha256": "1d3931baee14946e4aec18af9195c0ca23e501be9257c9b8ddf883c3abb7cf49",
+        "bytes": 2321
+      },
+      "destination": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/campaign.stdout.log",
+        "sha256": "1d3931baee14946e4aec18af9195c0ca23e501be9257c9b8ddf883c3abb7cf49",
+        "bytes": 2321
+      },
+      "action": "copied_absent",
+      "identical": true
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/campaign.stdout.log.gz",
+        "sha256": "3be76625620e76ab576db02930ada2b91f389714c35553fd1ec08e716460303e",
+        "bytes": 1046
+      },
+      "destination": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/campaign.stdout.log.gz",
+        "sha256": "3be76625620e76ab576db02930ada2b91f389714c35553fd1ec08e716460303e",
+        "bytes": 1046
+      },
+      "action": "copied_absent",
+      "identical": true
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/execution-isos.json",
+        "sha256": "5237b2ed3e4a3b2c9ea60980b8c2531976340c134de4db8aaa9ea7de583940a7",
+        "bytes": 74295
+      },
+      "destination": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/execution-isos.json",
+        "sha256": "5237b2ed3e4a3b2c9ea60980b8c2531976340c134de4db8aaa9ea7de583940a7",
+        "bytes": 74295
+      },
+      "action": "copied_absent",
+      "identical": true
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/freeze.execution.json",
+        "sha256": "9ed3b260aa952f03eb00d731bcd63b3ac8a0d1549ba4f6558772c25f06826261",
+        "bytes": 1008
+      },
+      "destination": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/freeze.execution.json",
+        "sha256": "9ed3b260aa952f03eb00d731bcd63b3ac8a0d1549ba4f6558772c25f06826261",
+        "bytes": 1008
+      },
+      "action": "copied_absent",
+      "identical": true
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/freeze.stdout.log",
+        "sha256": "baa31dd7aa7205efcd449cef18ab7bbf1483a33b0bb0af2f5c3162f73644fa12",
+        "bytes": 235
+      },
+      "destination": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/freeze.stdout.log",
+        "sha256": "baa31dd7aa7205efcd449cef18ab7bbf1483a33b0bb0af2f5c3162f73644fa12",
+        "bytes": 235
+      },
+      "action": "copied_absent",
+      "identical": true
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/freeze.stdout.log.gz",
+        "sha256": "a9f2650cfcc828426ad90afc678c572fd1bd314e78d21877eee17e6596604adf",
+        "bytes": 197
+      },
+      "destination": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/freeze.stdout.log.gz",
+        "sha256": "a9f2650cfcc828426ad90afc678c572fd1bd314e78d21877eee17e6596604adf",
+        "bytes": 197
+      },
+      "action": "copied_absent",
+      "identical": true
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/isos-actual-public-journal.jsonl.gz",
+        "sha256": "8041d3f735c81250f701fb10e3548e216641eec0b2bf58af81c3a289156d3c9e",
+        "bytes": 1747
+      },
+      "destination": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/isos-actual-public-journal.jsonl.gz",
+        "sha256": "8041d3f735c81250f701fb10e3548e216641eec0b2bf58af81c3a289156d3c9e",
+        "bytes": 1747
+      },
+      "action": "copied_absent",
+      "identical": true
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/isos-campaign.json.gz",
+        "sha256": "bbb36a4f831e54a6f38a0aa472364cb9d161439e2ac9327d7e2de0013111e132",
+        "bytes": 2354175
+      },
+      "destination": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/isos-campaign.json.gz",
+        "sha256": "bbb36a4f831e54a6f38a0aa472364cb9d161439e2ac9327d7e2de0013111e132",
+        "bytes": 2354175
+      },
+      "action": "copied_absent",
+      "identical": true
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/isos-output.log.gz",
+        "sha256": "19f7e7a91ec519cfb9ecc59f094aa6d11cc7b2fdbd70ab784154f90fdc1c0c88",
+        "bytes": 1864
+      },
+      "destination": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/isos-output.log.gz",
+        "sha256": "19f7e7a91ec519cfb9ecc59f094aa6d11cc7b2fdbd70ab784154f90fdc1c0c88",
+        "bytes": 1864
+      },
+      "action": "copied_absent",
+      "identical": true
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/isos-public-trace.json.gz",
+        "sha256": "5ea4e2d6066252e0726b98b2d0846cce9feb09ca75145c8498751a444e8fd77e",
+        "bytes": 3764
+      },
+      "destination": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/isos-public-trace.json.gz",
+        "sha256": "5ea4e2d6066252e0726b98b2d0846cce9feb09ca75145c8498751a444e8fd77e",
+        "bytes": 3764
+      },
+      "action": "copied_absent",
+      "identical": true
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/precheck-attempt01.json",
+        "sha256": "a0107a0134021548e2bbd762dd32bb6f9f7d912309a511e8160562c2cba27494",
+        "bytes": 901
+      },
+      "destination": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/precheck-attempt01.json",
+        "sha256": "a0107a0134021548e2bbd762dd32bb6f9f7d912309a511e8160562c2cba27494",
+        "bytes": 901
+      },
+      "action": "copied_absent",
+      "identical": true
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/precheck-attempt01.stdout.log.gz",
+        "sha256": "4d9525479c8aa6203178ca6add4fdd47affd13bc0300f63fd112e38f395f58f5",
+        "bytes": 103
+      },
+      "destination": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/precheck-attempt01.stdout.log.gz",
+        "sha256": "4d9525479c8aa6203178ca6add4fdd47affd13bc0300f63fd112e38f395f58f5",
+        "bytes": 103
+      },
+      "action": "copied_absent",
+      "identical": true
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/reference-case-execution.json",
+        "sha256": "3674ddcb4acd3c9565f044882ab17931e8a6a5dbe508b20c46e7f1265b78306d",
+        "bytes": 6304
+      },
+      "destination": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/reference-case-execution.json",
+        "sha256": "3674ddcb4acd3c9565f044882ab17931e8a6a5dbe508b20c46e7f1265b78306d",
+        "bytes": 6304
+      },
+      "action": "copied_absent",
+      "identical": true
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/reference-orchestration.py",
+        "sha256": "3f8af0f1834daea0b0132e70e949851f2617fdf26ab04db9b6231ba1aa8d8b05",
+        "bytes": 13814
+      },
+      "destination": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/reference-orchestration.py",
+        "sha256": "3f8af0f1834daea0b0132e70e949851f2617fdf26ab04db9b6231ba1aa8d8b05",
+        "bytes": 13814
+      },
+      "action": "copied_absent",
+      "identical": true
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/runtime-asset-restoration.json",
+        "sha256": "214929a3ee5ed8c397e7db7201bc42253125638a173f61613936920cb070696d",
+        "bytes": 7599
+      },
+      "destination": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/runtime-asset-restoration.json",
+        "sha256": "214929a3ee5ed8c397e7db7201bc42253125638a173f61613936920cb070696d",
+        "bytes": 7599
+      },
+      "action": "copied_absent",
+      "identical": true
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/source-archive-parts.json",
+        "sha256": "2a113fec4e2cfd7aec168083aa2f357548086a0d18684e3bcc50cb6265112902",
+        "bytes": 1044
+      },
+      "destination": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/source-archive-parts.json",
+        "sha256": "2a113fec4e2cfd7aec168083aa2f357548086a0d18684e3bcc50cb6265112902",
+        "bytes": 1044
+      },
+      "action": "copied_absent",
+      "identical": true
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/source-archive.json",
+        "sha256": "13e0d0a2c1b681ed00dac163fc59ac3f2499ef1642f4b1121b496da3baaa2420",
+        "bytes": 36552
+      },
+      "destination": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/source-archive.json",
+        "sha256": "13e0d0a2c1b681ed00dac163fc59ac3f2499ef1642f4b1121b496da3baaa2420",
+        "bytes": 36552
+      },
+      "action": "copied_absent",
+      "identical": true
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/source-archive.tar.gz",
+        "sha256": "d034ccca9476cf311f5e99c84b26cd2a813338c3d6d3fd6679f8180016d52008",
+        "bytes": 1813776
+      },
+      "destination": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/source-archive.tar.gz",
+        "sha256": "d034ccca9476cf311f5e99c84b26cd2a813338c3d6d3fd6679f8180016d52008",
+        "bytes": 1813776
+      },
+      "action": "copied_absent",
+      "identical": true
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/source-archive.tar.gz.part000",
+        "sha256": "b402583713eb6de0c0bf52450b5559d15198618ca526157c98e2510a56c62266",
+        "bytes": 900000
+      },
+      "destination": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/source-archive.tar.gz.part000",
+        "sha256": "b402583713eb6de0c0bf52450b5559d15198618ca526157c98e2510a56c62266",
+        "bytes": 900000
+      },
+      "action": "copied_absent",
+      "identical": true
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/source-archive.tar.gz.part001",
+        "sha256": "707c0b401b4de1632a1deb7f851586e286e6833a0ec8dd9c6004df5d603d8b27",
+        "bytes": 900000
+      },
+      "destination": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/source-archive.tar.gz.part001",
+        "sha256": "707c0b401b4de1632a1deb7f851586e286e6833a0ec8dd9c6004df5d603d8b27",
+        "bytes": 900000
+      },
+      "action": "copied_absent",
+      "identical": true
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/source-archive.tar.gz.part002",
+        "sha256": "2e8f6ff439bbb8580d2b24b158a31551193748b6d9ce48ebae9ac0fc18d03120",
+        "bytes": 13776
+      },
+      "destination": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/source-archive.tar.gz.part002",
+        "sha256": "2e8f6ff439bbb8580d2b24b158a31551193748b6d9ce48ebae9ac0fc18d03120",
+        "bytes": 13776
+      },
+      "action": "copied_absent",
+      "identical": true
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/source-manifest.json",
+        "sha256": "55b78bacc97745a6b8b1bde35156ec0f7184a6ad1cf4a637d35a81b82abec42f",
+        "bytes": 34908
+      },
+      "destination": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/source-manifest.json",
+        "sha256": "55b78bacc97745a6b8b1bde35156ec0f7184a6ad1cf4a637d35a81b82abec42f",
+        "bytes": 34908
+      },
+      "action": "copied_absent",
+      "identical": true
+    }
+  ],
+  "allBytesIdentical": true
+}

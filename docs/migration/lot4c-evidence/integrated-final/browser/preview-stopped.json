@@ -1,0 +1,11 @@
+{
+  "status": "stopped",
+  "recordedAt": "2026-11-11T00:59:22.990253+00:00",
+  "command": [
+    "sites-preview",
+    "stop"
+  ],
+  "exitCode": 0,
+  "observedOutput": "Sites preview stopped",
+  "nativeDigest": "eebd099808672be934389020c8f9061df4fdacab28cd7d60c00cd1b080464c04"
+}

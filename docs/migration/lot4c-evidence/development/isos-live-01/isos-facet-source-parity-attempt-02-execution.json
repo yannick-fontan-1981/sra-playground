@@ -1,0 +1,77 @@
+{
+  "schema": "logos-engine.lot4c.public-comparator-execution.v1",
+  "startedAt": "2026-11-11T00:34:39.799550+00:00",
+  "arguments": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "scripts/compare-facet-example-public-parity.py",
+    "docs/migration/lot4c-evidence/development/isos-live-01/isos-campaign.json.gz",
+    "--output",
+    "docs/migration/lot4c-evidence/development/isos-live-01/isos-facet-source-parity-attempt-02.json.gz"
+  ],
+  "inputsBefore": {
+    "generator": {
+      "path": "scripts/compare-facet-example-public-parity.py",
+      "bytes": 55787,
+      "sha256": "2d7af5de0cc530cc9203ce56613fd43d727e7086bfac9aa56d024b941c4919ee"
+    },
+    "campaign": {
+      "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-campaign.json.gz",
+      "bytes": 3027289,
+      "sha256": "93e59ab1146d4eef7c944a0e1fc0ab7b0d539cc90a074abe424742be011eec37"
+    }
+  },
+  "comparatorSnapshot": {
+    "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-facet-source-parity-attempt-02-generator.py",
+    "bytes": 55787,
+    "sha256": "2d7af5de0cc530cc9203ce56613fd43d727e7086bfac9aa56d024b941c4919ee"
+  },
+  "lock": "/workspace/shared/sra-coordination/performance.lock",
+  "lockMode": "exclusive-nonblocking",
+  "gameExecution": false,
+  "contractCorrection": {
+    "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-facet-source-parity-snapshot-correction.json",
+    "bytes": 3364,
+    "sha256": "74b823650389b74852ea6d46d463ea5697c3bf206b68649cf8b6c8cfce97c4c4"
+  },
+  "caseClock": {
+    "intervalStartedAt": "2026-11-11T00:31:05+00:00",
+    "priorSelectorSeconds": 5.134,
+    "remainingSecondsAtStart": 2180.06645,
+    "maximumCumulativeSeconds": 2400
+  },
+  "elapsedSeconds": 18.522773049000534,
+  "finishedAt": "2026-11-11T00:34:58.326093+00:00",
+  "exitCode": 0,
+  "inputsAfter": {
+    "generator": {
+      "path": "scripts/compare-facet-example-public-parity.py",
+      "bytes": 55787,
+      "sha256": "2d7af5de0cc530cc9203ce56613fd43d727e7086bfac9aa56d024b941c4919ee"
+    },
+    "campaign": {
+      "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-campaign.json.gz",
+      "bytes": 3027289,
+      "sha256": "93e59ab1146d4eef7c944a0e1fc0ab7b0d539cc90a074abe424742be011eec37"
+    }
+  },
+  "inputsUnchanged": true,
+  "stdout": {
+    "raw": {
+      "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-facet-source-parity-attempt-02.stdout.log",
+      "bytes": 4703,
+      "sha256": "b08b604412d77f473bd33e4eb1ca661dfe1b75bdf5aa2bd6c05cff3b00691059"
+    },
+    "gzip": {
+      "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-facet-source-parity-attempt-02.stdout.log.gz",
+      "bytes": 1178,
+      "sha256": "5adb63ad2d4de033a4b96aea08d89ddd2df3dc91ac40cf192dd2e9fdda622e6b"
+    },
+    "roundTripExact": true
+  },
+  "output": {
+    "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-facet-source-parity-attempt-02.json.gz",
+    "bytes": 80109,
+    "sha256": "22f1165159968c979ec9e93771d587c4b2caba2b49744ca1d20e05391c230b15"
+  }
+}

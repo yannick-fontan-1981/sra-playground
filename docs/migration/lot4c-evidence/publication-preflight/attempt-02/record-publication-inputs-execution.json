@@ -1,0 +1,378 @@
+{
+  "schema": "logos-engine.lot4c-publication-inputs-execution.v1",
+  "attempt": 2,
+  "status": "passed",
+  "startedAt": "2026-11-11T01:30:07.188951+00:00",
+  "finishedAt": "2026-11-11T01:30:10.418953+00:00",
+  "elapsedSeconds": 3.2300066809984855,
+  "cwd": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+  "command": [
+    "flock",
+    "-s",
+    "/workspace/shared/sra-coordination/performance.lock",
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "docs/migration/lot4c-evidence/record-publication-inputs.py",
+    "/workspace/sites/sra-lot4c-reference-056",
+    "docs/migration/lot4c-evidence/integrated-final",
+    "docs/migration/lot4c-evidence/performance-integrated",
+    "docs/migration/lot4c-evidence/integrated-final/validation",
+    "--browser-evidence",
+    "docs/migration/lot4c-evidence/integrated-final/browser/browser-qa.json",
+    "--game-evidence",
+    "docs/migration/lot4c-evidence/integrated-final/isos-facet-source-parity-execution.json",
+    "--game-evidence",
+    "docs/migration/lot4c-evidence/case-clock.json"
+  ],
+  "sameArgumentsAsFirstAttempt": true,
+  "lock": {
+    "path": "/workspace/shared/sra-coordination/performance.lock",
+    "mode": "shared",
+    "invocation": "flock -s",
+    "processFinishedBeforeReceipt": true
+  },
+  "exitCode": 0,
+  "exception": null,
+  "priorFailedAttempt": {
+    "path": "docs/migration/lot4c-evidence/publication-preflight/record-publication-inputs-execution.json",
+    "bytes": 2887,
+    "sha256": "45c42e10f1bfe599e1ec748caf537b2217fa2d8957ecff566c263d9e6403867a"
+  },
+  "compatibilityCorrection": {
+    "path": "docs/migration/lot4c-evidence/publication-preflight/record-publication-inputs-correction.json",
+    "bytes": 5819,
+    "sha256": "3673c48764a67b51adbae61434d46cf1715d0f89614cc34dceca73ceee32e0dc"
+  },
+  "independentSourceReview": {
+    "path": "docs/migration/lot4c-evidence/publication-preflight/record-publication-inputs-compatibility-oracle-review.json",
+    "bytes": 7728,
+    "sha256": "f3210278be820515915548d1a06d2107196aa30284f6f6223a4595128d759f58"
+  },
+  "helperBefore": {
+    "path": "docs/migration/lot4c-evidence/record-publication-inputs.py",
+    "bytes": 23139,
+    "sha256": "3314d92dfba0efc0694ef65ac0fe2b2a068cd505a655df5a4de26ff44f075cbf"
+  },
+  "helperAfter": {
+    "path": "docs/migration/lot4c-evidence/record-publication-inputs.py",
+    "bytes": 23139,
+    "sha256": "3314d92dfba0efc0694ef65ac0fe2b2a068cd505a655df5a4de26ff44f075cbf"
+  },
+  "helperUnchangedDuringExecution": true,
+  "watchedInputReceiptsBefore": [
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/source-manifest.json",
+      "bytes": 35387,
+      "sha256": "453b773ee0b81364d44679b611214a527c008aab8f01ae2bf9cd402e7996f4aa"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/source-archive.json",
+      "bytes": 37029,
+      "sha256": "e612d906db5cef893c47a3cf30a1ef43289497a9613459c098f95cbb8fa137f8"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/validation/checks-run.json",
+      "bytes": 81433,
+      "sha256": "701c404450fe60791ac4756a287308a66f59e6664c8e46cab14ec73b0361cc3b"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/validation/delta-tests-run.json",
+      "bytes": 130562,
+      "sha256": "31c84cf8c1a2aa8a871107f358edc0acf041a9cc5771529af088f93958e06822"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/delivery-integrity.json",
+      "bytes": 11065,
+      "sha256": "6f48206af7517940050a421af4561b8bbeec1d1199576c21752dd5e2da06b5ae"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/performance-integrated/readiness.json",
+      "bytes": 167172,
+      "sha256": "41f49a5e8501364cb6f2723976a92ec12dc8858e020ebca1d4bef2e35acd22cc"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/performance-integrated/window.json",
+      "bytes": 10452,
+      "sha256": "5fe24aa83f63f6d3cf8d0ee209bf04ac7e67c33ee5dc3ad7e7efdd25a2c0091d"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/performance-integrated/owner-growth-contract.json",
+      "bytes": 22630,
+      "sha256": "69aa6df22ce8f1735927a480cda36bb0a7b3f1d5f3ba774c5ec9884cbbbb7738"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/performance-integrated/owner-growth-comparison.json",
+      "bytes": 244725,
+      "sha256": "b54c20c1e2da76ed05c8100400ff90d1524e721899b64ad35679bd4d36d7d3d7"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/performance-integrated/owner-growth-review.json",
+      "bytes": 1266654,
+      "sha256": "2a672ee1a2809805e3b06f75f1506634bf6e8ffc1f681bd2d0d89223c9bc09bb"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/browser/browser-qa.json",
+      "bytes": 5471,
+      "sha256": "cb305c01c36dc94239e2514ceea5b3b61296d1f996a1c787534392daa1449861"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/isos-facet-source-parity-execution.json",
+      "bytes": 76557,
+      "sha256": "c65be3529535d79268a135dca1e3fbbf048b68b16f5267058f8dace10f0db423"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/case-clock.json",
+      "bytes": 6494,
+      "sha256": "9040781ae6f8518f4039f2714a57a24701e196349d0d99b29eb6e4ba5fb7a1c3"
+    }
+  ],
+  "watchedInputReceiptsAfter": [
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/source-manifest.json",
+      "bytes": 35387,
+      "sha256": "453b773ee0b81364d44679b611214a527c008aab8f01ae2bf9cd402e7996f4aa"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/source-archive.json",
+      "bytes": 37029,
+      "sha256": "e612d906db5cef893c47a3cf30a1ef43289497a9613459c098f95cbb8fa137f8"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/validation/checks-run.json",
+      "bytes": 81433,
+      "sha256": "701c404450fe60791ac4756a287308a66f59e6664c8e46cab14ec73b0361cc3b"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/validation/delta-tests-run.json",
+      "bytes": 130562,
+      "sha256": "31c84cf8c1a2aa8a871107f358edc0acf041a9cc5771529af088f93958e06822"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/delivery-integrity.json",
+      "bytes": 11065,
+      "sha256": "6f48206af7517940050a421af4561b8bbeec1d1199576c21752dd5e2da06b5ae"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/performance-integrated/readiness.json",
+      "bytes": 167172,
+      "sha256": "41f49a5e8501364cb6f2723976a92ec12dc8858e020ebca1d4bef2e35acd22cc"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/performance-integrated/window.json",
+      "bytes": 10452,
+      "sha256": "5fe24aa83f63f6d3cf8d0ee209bf04ac7e67c33ee5dc3ad7e7efdd25a2c0091d"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/performance-integrated/owner-growth-contract.json",
+      "bytes": 22630,
+      "sha256": "69aa6df22ce8f1735927a480cda36bb0a7b3f1d5f3ba774c5ec9884cbbbb7738"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/performance-integrated/owner-growth-comparison.json",
+      "bytes": 244725,
+      "sha256": "b54c20c1e2da76ed05c8100400ff90d1524e721899b64ad35679bd4d36d7d3d7"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/performance-integrated/owner-growth-review.json",
+      "bytes": 1266654,
+      "sha256": "2a672ee1a2809805e3b06f75f1506634bf6e8ffc1f681bd2d0d89223c9bc09bb"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/browser/browser-qa.json",
+      "bytes": 5471,
+      "sha256": "cb305c01c36dc94239e2514ceea5b3b61296d1f996a1c787534392daa1449861"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/isos-facet-source-parity-execution.json",
+      "bytes": 76557,
+      "sha256": "c65be3529535d79268a135dca1e3fbbf048b68b16f5267058f8dace10f0db423"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/case-clock.json",
+      "bytes": 6494,
+      "sha256": "9040781ae6f8518f4039f2714a57a24701e196349d0d99b29eb6e4ba5fb7a1c3"
+    }
+  ],
+  "watchedInputReceiptsUnchanged": true,
+  "stdout": {
+    "path": "docs/migration/lot4c-evidence/publication-preflight/attempt-02/record-publication-inputs.stdout.log",
+    "bytes": 366,
+    "sha256": "e4f1dbde3c438e13552ad08c8dbb00c2b8126173456be71ff9f093dfc171b103"
+  },
+  "stderr": {
+    "path": "docs/migration/lot4c-evidence/publication-preflight/attempt-02/record-publication-inputs.stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "exit": {
+    "path": "docs/migration/lot4c-evidence/publication-preflight/attempt-02/record-publication-inputs.exit",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "publicationInputs": {
+    "path": "docs/migration/lot4c-evidence/integrated-final/publication-inputs.json",
+    "bytes": 177229,
+    "sha256": "e940764ac9f5b1aa2d662aae9b45ff00d61bb5e42b80b37ab4f879d7510b15b8"
+  },
+  "resultSummary": {
+    "schema": "logos-engine.lot4c-publication-inputs.v1",
+    "status": "passed",
+    "nativeVersion": "0.57.0",
+    "nativeSourceDigest": "eebd099808672be934389020c8f9061df4fdacab28cd7d60c00cd1b080464c04",
+    "baseline": {
+      "checkout": "/workspace/sites/sra-lot4c-reference-056",
+      "nativeVersion": "0.56.0",
+      "nativeSourceDigest": "be11e761de3c0f3c7d50d10da47be9e0d7b4fc9c5b7d5002cc9272ffce85645a"
+    },
+    "fileInventories": {
+      "native": 298,
+      "archive": 309,
+      "sourceAndTests": 684,
+      "buildInputs": 363,
+      "regressionExecutionInputs": 10
+    },
+    "tests": {
+      "tests": 4838,
+      "pass": 4838,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "projectChecks": 5,
+    "regressions": {
+      "passed": 10,
+      "total": 10,
+      "comparisonChecksPassed": 170,
+      "comparisonChecksExpected": 170,
+      "passiveOwnerPrefixesChecked": 0,
+      "passiveOwnerPrefixesPassed": 0,
+      "passiveOwnerTransitionsRetained": 0,
+      "prevalidatedTotals": {
+        "commands": 357,
+        "completePublicPackets": 367,
+        "animationFrames": 1676,
+        "prefixes": 275,
+        "requests": 632,
+        "naturalLevelBoundaries": 30
+      }
+    },
+    "costGlobalStatus": "accepted_under_predeclared_owner_cost_rule",
+    "globalAccepted": true,
+    "acceptedCases": 2,
+    "totalCases": 2,
+    "costPopulation": {
+      "measuredSessions": 32,
+      "measuredActions": 400,
+      "excludedWarmupSessions": 8,
+      "excludedWarmupActions": 24
+    },
+    "historicalStrictPassed": false,
+    "strictFailureExitCode": 1,
+    "providedEvidence": {
+      "browser": [
+        {
+          "path": "docs/migration/lot4c-evidence/integrated-final/browser/browser-qa.json",
+          "sha256": "cb305c01c36dc94239e2514ceea5b3b61296d1f996a1c787534392daa1449861",
+          "bytes": 5471
+        }
+      ],
+      "game": [
+        {
+          "path": "docs/migration/lot4c-evidence/integrated-final/isos-facet-source-parity-execution.json",
+          "sha256": "c65be3529535d79268a135dca1e3fbbf048b68b16f5267058f8dace10f0db423",
+          "bytes": 76557
+        },
+        {
+          "path": "docs/migration/lot4c-evidence/case-clock.json",
+          "sha256": "9040781ae6f8518f4039f2714a57a24701e196349d0d99b29eb6e4ba5fb7a1c3",
+          "bytes": 6494
+        }
+      ],
+      "contributionReserve": null
+    },
+    "validationInputBinding": {
+      "checksSourceAndTestSnapshot": "absent_in_official_five_checks_only",
+      "testsSnapshotVerifiedAgainstCurrentInputs": true,
+      "buildInputsVerifiedAgainstCurrentInputs": true,
+      "sharedSourceInputsExactlyEqual": true,
+      "audits": {
+        "entry-audit": {
+          "mode": "frozen_gate_log_with_current_closure_report",
+          "semanticPassed": true,
+          "frozenGateLog": {
+            "path": "docs/migration/lot4c-evidence/integrated-final/validation/entry-audit-output.log.gz",
+            "sha256": "c7a045a68458e7c6e7d597b27eb64e1f9d7e9fcd768347f8d632fb5eb263f2b4",
+            "bytes": 179
+          },
+          "currentClosureReport": {
+            "path": "docs/migration/v6-entry-point-progress.json",
+            "sha256": "c4ef0ef123ebad3d616b4b97e41089cccade73a1c4ad8390f5bd729e871518ba",
+            "bytes": 19215
+          },
+          "summary": {
+            "connected": 61,
+            "declared": 76,
+            "percent": 80.3,
+            "groups": [
+              {
+                "id": "goal_access",
+                "connected": 10,
+                "declared": 12
+              },
+              {
+                "id": "window_constraints",
+                "connected": 21,
+                "declared": 21
+              },
+              {
+                "id": "surface",
+                "connected": 10,
+                "declared": 10
+              },
+              {
+                "id": "factored_material_return",
+                "connected": 20,
+                "declared": 33
+              }
+            ],
+            "fullV6Parity": false
+          },
+          "historicalReportFingerprintClaimed": false,
+          "qualification": "The fingerprinted log is the retained gate output. The detailed report is bound now at closure, with its exact summary compared to that log; no missing historical report fingerprint is inferred."
+        },
+        "migration-audit": {
+          "mode": "frozen_gate_log_with_current_closure_report",
+          "semanticPassed": true,
+          "frozenGateLog": {
+            "path": "docs/migration/lot4c-evidence/integrated-final/validation/migration-audit-output.log.gz",
+            "sha256": "4d15208928ca75b486fc735e5d086bd53e65dcb4b1b27af9a5e25f1cd1b214bd",
+            "bytes": 205
+          },
+          "currentClosureReport": {
+            "path": "docs/migration/v6-coverage.json",
+            "sha256": "4c9e80f30cf4e5b8e05ba28567c5ef78816b1effabbaa449968eaad8bff11a6c",
+            "bytes": 2555816
+          },
+          "summary": {
+            "complete": false,
+            "pythonModules": 1369,
+            "pythonLines": 320375,
+            "declaredClassesAndFunctions": 12857,
+            "dataFiles": 417,
+            "verifiedModules": 0,
+            "componentVerifiedModules": 189,
+            "partiallyTransferredModules": 147,
+            "transferredUnverifiedModules": 0,
+            "pendingModules": 1033,
+            "strategyFamilies": 16,
+            "failures": []
+          },
+          "historicalReportFingerprintClaimed": false,
+          "qualification": "The fingerprinted log is the retained gate output. The detailed report is bound now at closure, with its exact summary compared to that log; no missing historical report fingerprint is inferred."
+        }
+      }
+    }
+  },
+  "qualification": "One exclusive retry of the corrected and independently source-reviewed publication recorder, unchanged after review, under the identical shared flock command and arguments. The failed first attempt remains retained. Thirteen existing input receipts were unchanged. No new measurement, test, build, game, Git operation, transport or publication was performed. The recorder retains its release-input-integrity scope and the explicitly limited current-closure audit-report provenance."
+}

@@ -1,0 +1,8 @@
+{
+  "status": "failed_retained_log_whitespace",
+  "exitCode": 2,
+  "recordedAt": "2026-11-11T01:33:35.032306+00:00",
+  "rawOutputSha256": "52245a8a6bdef460ff8b63b4c1776278db8f8cefa73daead795d8d0bbd215d6e",
+  "compressedOutput": "docs/migration/lot4c-evidence/planning/publication-whitespace/recheck-attempt-02.stdout.log.gz",
+  "reason": "The literal preserved initial diff-check stdout also contains the original whitespace it reports. Classify this exact retained data path only; all data bytes and frozen tools remain unchanged."
+}
