@@ -1,0 +1,57 @@
+{
+  "schema": "logos-engine.lot10a.case-budget-review.v1",
+  "reviewedAt": "2026-11-10T21:32:47.262557+00:00",
+  "case": "POLA",
+  "publicTitle": "Polarity",
+  "caseLimitSeconds": 2400,
+  "status": "prior_case_clock_unrecoverable_no_positive_remaining_budget_established",
+  "historicalAttempt": {
+    "sourceAttempt": "attempt3",
+    "nativeVersion": "0.25.0",
+    "publicActions": 94,
+    "levelsCompleted": 0,
+    "finalCampaignReceipt": null,
+    "cumulativeSeconds": null,
+    "remainingSeconds": null,
+    "evidence": {
+      "path": "docs/migration/v53-outline-service-and-current-relations.md",
+      "sha256": "c26be7af2be8a39dfdf3bf75a876479ed91b42b1e2e60451044b994d0add06c4",
+      "bytes": 21295
+    },
+    "introducingCommit": "89ac23b"
+  },
+  "sourceAdmission": {
+    "evidence": {
+      "path": "docs/migration/lot10a-evidence/diagnostic/initial-public-admission.json",
+      "sha256": "054d357badedd82adaf0c7ddffc77e4630277b7a19f48b02b5e83ffb418159bf",
+      "bytes": 38889
+    },
+    "initialScenesExamined": 95,
+    "admittedCases": [
+      "POLA"
+    ],
+    "qualification": "Archived public initial rasters; no game actions or source-Python parity in this scan."
+  },
+  "retrievalReview": {
+    "publishedBaseCommit": "bed48116585da864dd5c412ed11dd6990a950e8e",
+    "reachablePublishedCommits": 110,
+    "trackedPathMatches": [
+      "docs/migration/v53-outline-service-and-current-relations.md",
+      "reference/sra/212d8d426f07/custom_games/engines/polarity.py"
+    ],
+    "trackedPublicJournalOrFinalPolaReceiptFound": false,
+    "gameEngineContentsRead": false,
+    "previousScratchDirectoryExists": false,
+    "personalContextReview": "A prior cold POLA launch is recalled, but no elapsed or remaining case budget was recovered. This is not a timing receipt."
+  },
+  "decision": {
+    "newCaseClockCreated": false,
+    "newGameActions": 0,
+    "priorBudgetAssumedFresh": false,
+    "borrowedElapsedFromOtherGame": false,
+    "ownLiveContribution": "open",
+    "officialSuccess": "not_established",
+    "reason": "The known prior attempt must count toward the same 40-minute case limit. Its missing elapsed time prevents a defensible positive remaining budget; retain the reserve rather than reset it."
+  },
+  "qualification": "This review does not assert that all 2400 seconds were used. It states that a positive remaining budget cannot be established from the retained evidence."
+}

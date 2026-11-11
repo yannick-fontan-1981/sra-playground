@@ -1,0 +1,133 @@
+{
+  "schema": "logos-engine.released-baseline-replay-preflight.v1",
+  "status": "passed",
+  "caseManifest": {
+    "path": "docs/migration/lot10a-evidence/recorded-regression-cases-site83.json",
+    "sha256": "a6514c3064b312de4c6e1a7c07d968a29805eb7dcf8f6f6f1c06302eeeef5f06",
+    "bytes": 4783
+  },
+  "cases": [
+    {
+      "id": "catr-site83",
+      "game": "CATR",
+      "baseline": "docs/migration/lot7a-evidence/integrated-final/regressions/catr-051-replay.json.gz",
+      "trace": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-public-trace.json.gz",
+      "counts": {
+        "commands": 12,
+        "completePublicPackets": 13,
+        "animationFrames": 115,
+        "prefixes": 8,
+        "requests": 20,
+        "naturalLevelBoundaries": 3
+      },
+      "targetLevels": 3
+    },
+    {
+      "id": "rswp-site83",
+      "game": "RSWP",
+      "baseline": "docs/migration/lot7a-evidence/integrated-final/regressions/rswp-051-replay.json.gz",
+      "trace": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+      "counts": {
+        "commands": 19,
+        "completePublicPackets": 20,
+        "animationFrames": 221,
+        "prefixes": 11,
+        "requests": 30,
+        "naturalLevelBoundaries": 3
+      },
+      "targetLevels": 3
+    },
+    {
+      "id": "fogw-site83",
+      "game": "FOGW",
+      "baseline": "docs/migration/lot7a-evidence/integrated-final/regressions/fogw-051-replay.json.gz",
+      "trace": "docs/migration/lot3e-evidence/final/fogw-reception-session/fogw-public-trace.json.gz",
+      "counts": {
+        "commands": 50,
+        "completePublicPackets": 51,
+        "animationFrames": 167,
+        "prefixes": 27,
+        "requests": 77,
+        "naturalLevelBoundaries": 3
+      },
+      "targetLevels": 3
+    },
+    {
+      "id": "vois-site83",
+      "game": "VOIS",
+      "baseline": "docs/migration/lot7a-evidence/integrated-final/regressions/vois-051-replay.json.gz",
+      "trace": "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+      "counts": {
+        "commands": 78,
+        "completePublicPackets": 79,
+        "animationFrames": 97,
+        "prefixes": 42,
+        "requests": 120,
+        "naturalLevelBoundaries": 3
+      },
+      "targetLevels": 3
+    },
+    {
+      "id": "weav-site83",
+      "game": "WEAV",
+      "baseline": "docs/migration/lot7a-evidence/integrated-final/regressions/weav-051-replay.json.gz",
+      "trace": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+      "counts": {
+        "commands": 81,
+        "completePublicPackets": 82,
+        "animationFrames": 105,
+        "prefixes": 81,
+        "requests": 162,
+        "naturalLevelBoundaries": 3
+      },
+      "targetLevels": 3
+    },
+    {
+      "id": "conn-site83",
+      "game": "CONN",
+      "baseline": "docs/migration/lot7a-evidence/integrated-final/regressions/conn-050-replay.json.gz",
+      "trace": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-public-trace.json.gz",
+      "counts": {
+        "commands": 21,
+        "completePublicPackets": 22,
+        "animationFrames": 562,
+        "prefixes": 21,
+        "requests": 42,
+        "naturalLevelBoundaries": 3
+      },
+      "targetLevels": 3
+    },
+    {
+      "id": "mind-site83",
+      "game": "MIND",
+      "baseline": "docs/migration/lot7a-evidence/integrated-final/regressions/mind-051-replay.json.gz",
+      "trace": "docs/migration/lot7a-evidence/integrated-baseline/recorded/mind-public-trace.json.gz",
+      "counts": {
+        "commands": 31,
+        "completePublicPackets": 32,
+        "animationFrames": 138,
+        "prefixes": 20,
+        "requests": 51,
+        "naturalLevelBoundaries": 3
+      },
+      "targetLevels": 3
+    }
+  ],
+  "totals": {
+    "commands": 292,
+    "completePublicPackets": 299,
+    "animationFrames": 1405,
+    "prefixes": 210,
+    "requests": 502,
+    "naturalLevelBoundaries": 21
+  },
+  "passiveOwnerRequirements": [],
+  "prevalidator": {
+    "path": "scripts/run-recorded-public-regressions.py",
+    "sha256": "df19dc88ff29e78a1cb5935d445644e96cc9fb1ef90b73d802cf51868d2b2c40",
+    "bytes": 20897
+  },
+  "replaysExecuted": 0,
+  "prevalidationProcessExitedBeforeAnyReplay": true,
+  "nativeSourceDigest": "be11e761de3c0f3c7d50d10da47be9e0d7b4fc9c5b7d5002cc9272ffce85645a"
+}

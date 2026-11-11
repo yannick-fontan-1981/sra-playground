@@ -1,0 +1,93 @@
+{
+  "schema": "logos-engine.integration-inventory-diagnostic.v1",
+  "startedAt": "2026-11-10T22:16:29.569508+00:00",
+  "status": "passed",
+  "publishedPredecessor": "51e2813dedb2d71001290f94f100605e0327ead3",
+  "qualification": "Development inventory after actual 5A merge. Not a final 10A validation, cost result or publication.",
+  "checks": [
+    {
+      "name": "entry-audit",
+      "command": [
+        "node",
+        "scripts/audit-v6-entry-points.ts"
+      ],
+      "startedAt": "2026-11-10T22:16:29.569686+00:00",
+      "finishedAt": "2026-11-10T22:16:30.286211+00:00",
+      "exitCode": 0,
+      "raw": {
+        "path": "docs/migration/lot10a-evidence/diagnostic/post5a-entry-audit.raw.txt",
+        "bytes": 293,
+        "sha256": "c48b34a63e3a8471d2051902b6abcc49311fe6f07bf169fe0f63d3ac40ed021b"
+      },
+      "gzip": {
+        "path": "docs/migration/lot10a-evidence/diagnostic/post5a-entry-audit.raw.txt.gz",
+        "bytes": 178,
+        "sha256": "3b36c8c76e6a5a8c9ebdb1338fc7268071fdc7ed13a25cae8887424cf3738609"
+      },
+      "result": {
+        "connected": 58,
+        "declared": 76,
+        "percent": 76.3,
+        "groups": [
+          {
+            "id": "goal_access",
+            "connected": 10,
+            "declared": 12
+          },
+          {
+            "id": "window_constraints",
+            "connected": 20,
+            "declared": 21
+          },
+          {
+            "id": "surface",
+            "connected": 9,
+            "declared": 10
+          },
+          {
+            "id": "factored_material_return",
+            "connected": 19,
+            "declared": 33
+          }
+        ],
+        "fullV6Parity": false
+      }
+    },
+    {
+      "name": "migration-audit",
+      "command": [
+        "python",
+        "-B",
+        "scripts/audit-v6-migration.py"
+      ],
+      "startedAt": "2026-11-10T22:16:30.286730+00:00",
+      "finishedAt": "2026-11-10T22:16:37.067562+00:00",
+      "exitCode": 0,
+      "raw": {
+        "path": "docs/migration/lot10a-evidence/diagnostic/post5a-migration-audit.raw.txt",
+        "bytes": 338,
+        "sha256": "2f68e55698d329ce36e9e0daba779cdf4b72214ae731a46bbeae7aa12c3266cc"
+      },
+      "gzip": {
+        "path": "docs/migration/lot10a-evidence/diagnostic/post5a-migration-audit.raw.txt.gz",
+        "bytes": 206,
+        "sha256": "c572cab0cf523c13d1a005c82b757607838822d9533d5990c204a685b85261da"
+      },
+      "result": {
+        "complete": false,
+        "pythonModules": 1369,
+        "pythonLines": 320375,
+        "declaredClassesAndFunctions": 12857,
+        "dataFiles": 417,
+        "verifiedModules": 0,
+        "componentVerifiedModules": 178,
+        "partiallyTransferredModules": 146,
+        "transferredUnverifiedModules": 0,
+        "pendingModules": 1045,
+        "strategyFamilies": 16,
+        "failures": []
+      }
+    }
+  ],
+  "finishedAt": "2026-11-10T22:16:37.068289+00:00"
+}

@@ -1,0 +1,49 @@
+TAP version 13
+# Subtest: Axial has one cold owner and its exact source entry after Recolor with a shared stored workflow
+ok 1 - Axial has one cold owner and its exact source entry after Recolor with a shared stored workflow
+  ---
+  duration_ms: 1273.06594
+  type: 'test'
+  ...
+# Subtest: cold common caller learns a foreign selection, runs axial.select, acquires one rotation and recalls it at its next decision
+ok 2 - cold common caller learns a foreign selection, runs axial.select, acquires one rotation and recalls it at its next decision
+  ---
+  duration_ms: 1779.831112
+  type: 'test'
+  ...
+# Subtest: two real sealed no-effect inputs exhaust the source context attempts without blind rotation repetition
+not ok 3 - two real sealed no-effect inputs exhaust the source context attempts without blind rotation repetition
+  ---
+  duration_ms: 1889.140384
+  type: 'test'
+  location: '/workspace/sites/sra-lot10a-20261110/.sites-checkout/tests/v6-axial-question-kernel.test.ts:134:1'
+  failureType: 'testCodeFailure'
+  error: "Cannot read properties of undefined (reading 'value')"
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/sites/sra-lot10a-20261110/.sites-checkout/tests/v6-axial-question-kernel.test.ts:145:47)
+    async Test.run (node:internal/test_runner/test:1409:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: an old-scene intermediate frame supports rotation at a natural boundary and only methods survive restoration
+ok 4 - an old-scene intermediate frame supports rotation at a natural boundary and only methods survive restoration
+  ---
+  duration_ms: 1737.124124
+  type: 'test'
+  ...
+# Subtest: a new level with identical attribution anchors never becomes evidence for the preceding rotation
+ok 5 - a new level with identical attribution anchors never becomes evidence for the preceding rotation
+  ---
+  duration_ms: 1496.63034
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 4
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 8937.290472

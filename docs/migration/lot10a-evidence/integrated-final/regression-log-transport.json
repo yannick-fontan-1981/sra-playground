@@ -1,0 +1,216 @@
+{
+  "schema": "logos-engine.lossless-regression-log-transport.v1",
+  "status": "passed",
+  "startedAt": "2026-11-10T23:43:57.308772+00:00",
+  "recordedAt": "2026-11-10T23:43:57.319202+00:00",
+  "nativeSourceDigest": "be11e761de3c0f3c7d50d10da47be9e0d7b4fc9c5b7d5002cc9272ffce85645a",
+  "coordination": {
+    "lock": "/workspace/shared/sra-coordination/performance.lock",
+    "mode": "shared_nonblocking",
+    "release": "Explicit 7B compute release at 2026-11-10T23:41:51.171370+00:00",
+    "timingClaim": false
+  },
+  "verificationReceipts": [
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regression-launch.json",
+      "bytes": 14309,
+      "sha256": "430bfd50c1a5fb37d33fe77bfc060062d76ce8397e3011e4f0d9e32a53a64941"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/regression-summary.json",
+      "bytes": 170171,
+      "sha256": "966f099e2c69808a15cd90d8438be0894d2ed46628b763ddaccd909f6b66ab12"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/evidence-byte-transport.json",
+      "bytes": 3638,
+      "sha256": "68f36d7d9049608873ceb868b41bf52853d246b6a0befe83e8bcd6c30518fba0"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/catr-site83-execution.json",
+      "bytes": 8748,
+      "sha256": "2618a371888479b84417d75edbcf291d07471e8a1fdf0384bb61cad0908b2410"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/rswp-site83-execution.json",
+      "bytes": 9452,
+      "sha256": "b0cad73202f8a752d310ce72c58e5e0a142ecf26586b025fa244b250a80a7baf"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/fogw-site83-execution.json",
+      "bytes": 12041,
+      "sha256": "15327eae7a8af823a9293cd4f2be932000967e589e35c9989a5163f8aa6b8036"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/vois-site83-execution.json",
+      "bytes": 14079,
+      "sha256": "919094aff36085a832b09823a854df0449575a8087f4fa0aaf83764bbd2146f0"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-execution.json",
+      "bytes": 17614,
+      "sha256": "834095f8c2292c2c3f5a45483ceb3bde53e153d37155aba07910d0f280f0ebe7"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/conn-site83-execution.json",
+      "bytes": 10021,
+      "sha256": "0d75c2abee02c75938a12fc1c0909231a8d45225aa8cb8bdd1e8cac132ceaeba"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-execution.json",
+      "bytes": 9835,
+      "sha256": "670c65a84736361ed2020ad028582f33fb9766b05b0e36b00cc153074140f876"
+    }
+  ],
+  "checkedPairs": 8,
+  "checks": [
+    {
+      "check": "regression-driver",
+      "receipt": "docs/migration/lot10a-evidence/integrated-final/regression-launch.json",
+      "raw": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regression-driver-output.raw.txt",
+        "sha256": "bbaa33760a32b85cecebfb3107f4e199295d46e9eafd2a1c929338e9b7e6202a",
+        "bytes": 15642
+      },
+      "gzip": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regression-driver-output.log.gz",
+        "sha256": "f62c035146c8c18071bbf252cea1a932fd9913efe4528bc6c1f476122ba9ca4d",
+        "bytes": 1820
+      },
+      "recordedFingerprintsMatch": true,
+      "byteIdentical": true
+    },
+    {
+      "check": "CATR",
+      "receipt": "docs/migration/lot10a-evidence/integrated-final/regressions/catr-site83-execution.json",
+      "raw": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/catr-site83-output.raw.log",
+        "sha256": "8d8a1a8b0aad34d0bc8b3a8a44923cb79edf4060e8ce6ea6e8a84cd54a68239d",
+        "bytes": 39222
+      },
+      "gzip": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/catr-site83-output.log.gz",
+        "sha256": "59ddc15b1d4ce4a1802870aec5803f17c96cb9068db2e294882e73d5eeeb0371",
+        "bytes": 2665
+      },
+      "recordedFingerprintsMatch": true,
+      "byteIdentical": true
+    },
+    {
+      "check": "RSWP",
+      "receipt": "docs/migration/lot10a-evidence/integrated-final/regressions/rswp-site83-execution.json",
+      "raw": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/rswp-site83-output.raw.log",
+        "sha256": "56382254e88ef4289679e927af376a55462a60c8d2946e5bd7a643e79031941b",
+        "bytes": 55350
+      },
+      "gzip": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/rswp-site83-output.log.gz",
+        "sha256": "b65fbeb20dde1449aa638ade2df0a3efd367a61beaee768fba64f651d8aabafd",
+        "bytes": 3158
+      },
+      "recordedFingerprintsMatch": true,
+      "byteIdentical": true
+    },
+    {
+      "check": "FOGW",
+      "receipt": "docs/migration/lot10a-evidence/integrated-final/regressions/fogw-site83-execution.json",
+      "raw": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/fogw-site83-output.raw.log",
+        "sha256": "921823f08a50c92daf7859f0f761051ea4901d3dce60d2dbc894e6a792faf9fa",
+        "bytes": 131250
+      },
+      "gzip": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/fogw-site83-output.log.gz",
+        "sha256": "c9c0088249c91413d62aa483f6094a91d46db4a44ef09f3664c640ca9a5c6e0b",
+        "bytes": 5538
+      },
+      "recordedFingerprintsMatch": true,
+      "byteIdentical": true
+    },
+    {
+      "check": "VOIS",
+      "receipt": "docs/migration/lot10a-evidence/integrated-final/regressions/vois-site83-execution.json",
+      "raw": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/vois-site83-output.raw.log",
+        "sha256": "8ec114c5088b0593bec245ac58295b717d402be3d1c8d40be52e58e5113d4da1",
+        "bytes": 200763
+      },
+      "gzip": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/vois-site83-output.log.gz",
+        "sha256": "2b8e851edabf7dfd7a4dc1bb51ebae7249a4e04bc7c5674ea3a789d12ecc3bb2",
+        "bytes": 7629
+      },
+      "recordedFingerprintsMatch": true,
+      "byteIdentical": true
+    },
+    {
+      "check": "WEAV",
+      "receipt": "docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-execution.json",
+      "raw": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-output.raw.log",
+        "sha256": "696604bc17ffb4d959f1b6611211a64d9d92a5b3354a5b15b503d50b222a4fa7",
+        "bytes": 268731
+      },
+      "gzip": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-output.log.gz",
+        "sha256": "8d27a1db2aed7a404a8b37e2eb00006130e0237844d48170b50088a84800b1f3",
+        "bytes": 10268
+      },
+      "recordedFingerprintsMatch": true,
+      "byteIdentical": true
+    },
+    {
+      "check": "CONN",
+      "receipt": "docs/migration/lot10a-evidence/integrated-final/regressions/conn-site83-execution.json",
+      "raw": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/conn-site83-output.raw.log",
+        "sha256": "5f751880a56889232a4c6da4a66e4b6fbb9c687379cb226b82966d12f782739a",
+        "bytes": 74695
+      },
+      "gzip": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/conn-site83-output.log.gz",
+        "sha256": "4d8f1e86e0fcf050de2cad914ffc6d419a94fd60b0807eba0083bad8164311a6",
+        "bytes": 4059
+      },
+      "recordedFingerprintsMatch": true,
+      "byteIdentical": true
+    },
+    {
+      "check": "MIND",
+      "receipt": "docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-execution.json",
+      "raw": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-output.raw.log",
+        "sha256": "398abd4ec4615fc47ea229166f3b45fce4787dca05a382ae72d4dbed74b2ead5",
+        "bytes": 88969
+      },
+      "gzip": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-output.log.gz",
+        "sha256": "6c1f1a15fd2a803fbeef9ac871f3fe11d09f4cbd1bcae049a20188161c9e18f3",
+        "bytes": 4313
+      },
+      "recordedFingerprintsMatch": true,
+      "byteIdentical": true
+    }
+  ],
+  "reportTransport": {
+    "receipt": "docs/migration/lot10a-evidence/integrated-final/evidence-byte-transport.json",
+    "reports": 7,
+    "parts": 61,
+    "originalBytes": 51197701,
+    "partBytes": 900000,
+    "exactExecutionReportFingerprintsMatched": true
+  },
+  "sourceReceiptBytesUnchanged": true,
+  "gitignoreEntriesAdded": [
+    "/docs/migration/lot10a-evidence/integrated-final/regression-driver-output.raw.txt",
+    "/docs/migration/lot10a-evidence/integrated-final/regressions/catr-site83-output.raw.log",
+    "/docs/migration/lot10a-evidence/integrated-final/regressions/rswp-site83-output.raw.log",
+    "/docs/migration/lot10a-evidence/integrated-final/regressions/fogw-site83-output.raw.log",
+    "/docs/migration/lot10a-evidence/integrated-final/regressions/vois-site83-output.raw.log",
+    "/docs/migration/lot10a-evidence/integrated-final/regressions/weav-site83-output.raw.log",
+    "/docs/migration/lot10a-evidence/integrated-final/regressions/conn-site83-output.raw.log",
+    "/docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-output.raw.log"
+  ],
+  "qualification": "Exact transport of the existing driver log and seven case logs. The SHA-256 and byte length of both members match their retained execution receipts, and gzip decompression yields byte-identical raw output. Every original remains local. The unchanged evidence-byte-parts helper stdout is retained verbatim and its seven report identities match the retained regression summary. No replay, test, build, game, baseline generation, native delivery verification, timing claim or semantic reinterpretation is performed."
+}

@@ -1,0 +1,286 @@
+{
+  "case": "mind-site83",
+  "game": "MIND",
+  "mode": "recorded-public-replay",
+  "command": [
+    "node",
+    "--expose-gc",
+    "--max-old-space-size=1536",
+    "scripts/replay-public-regression-released-baseline.mjs",
+    "docs/migration/lot7a-evidence/integrated-final/regressions/mind-051-replay.json.gz",
+    "docs/migration/lot7a-evidence/integrated-baseline/recorded/mind-public-trace.json.gz",
+    "docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-replay.json.gz",
+    "docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-host-preparation.json"
+  ],
+  "startedAt": "2026-11-10T23:24:46.420446+00:00",
+  "timeoutSeconds": 2400,
+  "baseline": {
+    "path": "docs/migration/lot7a-evidence/integrated-final/regressions/mind-051-replay.json.gz",
+    "sha256": "a23bcfb3603b904f7049fb6ff1dd1426b2959b8ffd2e20612c616053b887dc44",
+    "bytes": 4977259
+  },
+  "trace": {
+    "path": "docs/migration/lot7a-evidence/integrated-baseline/recorded/mind-public-trace.json.gz",
+    "sha256": "f74678fa4d9c1b5397545b648ab353c29fc0a5a4c0eb35ab36a5258bfa34ca0c",
+    "bytes": 17256
+  },
+  "expectedActions": 31,
+  "nodeOldSpaceMiB": 1536,
+  "preflight": {
+    "path": "docs/migration/lot10a-evidence/integrated-final/preflight.json",
+    "sha256": "b8a90ca9f45f9a45d465f8aedabe81b29a27dd05fd8858106c177afd6d42ba42",
+    "bytes": 4384
+  },
+  "historicalReportProcessExitedBeforeNode": true,
+  "nativeSourceBeforeDigest": "be11e761de3c0f3c7d50d10da47be9e0d7b4fc9c5b7d5002cc9272ffce85645a",
+  "executionInputsBefore": {
+    "scripts/run-released-public-regressions.py": "7988863afd2b171f31987434bb1176370be2e3afd49dead1edcdc59770d81909",
+    "scripts/run-recorded-public-regressions.py": "df19dc88ff29e78a1cb5935d445644e96cc9fb1ef90b73d802cf51868d2b2c40",
+    "scripts/compare-v54-regressions.py": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+    "scripts/replay-public-regression-released-baseline.mjs": "2ce2a0e1b8f969510373ae161156b2b163d208b4e426cb1f26218f9952b3b164",
+    "scripts/replay-v53-public-regression.mjs": "4359e008db8dadaac17f6504199ff20c752f40f1666ba527f1cd5f16df100a9e",
+    "scripts/run-v53-campaign-proof.py": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+    "tests/helpers/v6-live-game-campaign.ts": "dfc77470fe8050033cd9b13df5386e0689babac9b3d37d1c4d7b1f3d71199cb9",
+    "docs/migration/lot10a-evidence/recorded-regression-cases-site83.json": "a6514c3064b312de4c6e1a7c07d968a29805eb7dcf8f6f6f1c06302eeeef5f06",
+    "docs/migration/lot10a-evidence/integrated-final/source-manifest.json": "55b78bacc97745a6b8b1bde35156ec0f7184a6ad1cf4a637d35a81b82abec42f",
+    "scripts/run-released-public-regressions-streamlog.py": "b05b0e113c93696be45408e4c10549f2a379c22330efbddfcaa0f09cd51309b9"
+  },
+  "phase": "completed",
+  "finishedAt": "2026-11-10T23:25:34.483226+00:00",
+  "exitCode": 0,
+  "timedOut": false,
+  "passed": true,
+  "nodeExitObserved": true,
+  "rawOutputPath": "docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-output.raw.log",
+  "driverPid": 21,
+  "nodePid": 101,
+  "memorySamples": [
+    {
+      "elapsedSeconds": 0.0011177910055266693,
+      "pid": 101,
+      "VmSize": "112336 kB",
+      "VmHWM": "788 kB",
+      "VmRSS": "788 kB",
+      "Threads": "1"
+    },
+    {
+      "elapsedSeconds": 5.00604487300734,
+      "pid": 101,
+      "VmSize": "10500740 kB",
+      "VmHWM": "492464 kB",
+      "VmRSS": "479736 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 10.0118015390035,
+      "pid": 101,
+      "VmSize": "10507652 kB",
+      "VmHWM": "510280 kB",
+      "VmRSS": "489152 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 15.019451561005553,
+      "pid": 101,
+      "VmSize": "10612224 kB",
+      "VmHWM": "604212 kB",
+      "VmRSS": "594040 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 20.025099749007495,
+      "pid": 101,
+      "VmSize": "10650652 kB",
+      "VmHWM": "675816 kB",
+      "VmRSS": "634468 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 25.03112251200946,
+      "pid": 101,
+      "VmSize": "10719672 kB",
+      "VmHWM": "737340 kB",
+      "VmRSS": "703588 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 30.036704943995574,
+      "pid": 101,
+      "VmSize": "10742120 kB",
+      "VmHWM": "780368 kB",
+      "VmRSS": "726280 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 35.04311762499856,
+      "pid": 101,
+      "VmSize": "10816528 kB",
+      "VmHWM": "850208 kB",
+      "VmRSS": "801436 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 40.0495487730077,
+      "pid": 101,
+      "VmSize": "10881144 kB",
+      "VmHWM": "934756 kB",
+      "VmRSS": "866144 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 45.05496904099709,
+      "pid": 101,
+      "VmSize": "10945308 kB",
+      "VmHWM": "1050500 kB",
+      "VmRSS": "930288 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 48.05931623400829,
+      "pid": 101,
+      "processPresent": false
+    }
+  ],
+  "lastObservedAt": "2026-11-10T23:25:34.481240+00:00",
+  "elapsedSeconds": 48.06156638699758,
+  "lastProgress": {
+    "status": "passed",
+    "failure": null
+  },
+  "rawOutputBytes": 88969,
+  "outputRaw": {
+    "path": "docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-output.raw.log",
+    "sha256": "398abd4ec4615fc47ea229166f3b45fce4787dca05a382ae72d4dbed74b2ead5",
+    "bytes": 88969
+  },
+  "output": {
+    "path": "docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-output.log.gz",
+    "sha256": "6c1f1a15fd2a803fbeef9ac871f3fe11d09f4cbd1bcae049a20188161c9e18f3",
+    "bytes": 4313
+  },
+  "startedReceipt": {
+    "path": "docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-execution-started.json",
+    "sha256": "d9e7d90b835f21fe334ea0b056d88a95eec551b3d90e865f4984baa5f31858d2",
+    "bytes": 3090
+  },
+  "nodeExitedBeforeComparison": true,
+  "hostPreparation": {
+    "path": "docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-host-preparation.json",
+    "sha256": "26096ebb1bfbc6733fc040ca40009aac875d06f0d67ea1b81edf2cfb2199cfba",
+    "bytes": 8348
+  },
+  "hostPreparationPassed": true,
+  "report": {
+    "path": "docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-replay.json.gz",
+    "sha256": "3610c9daf1ec1766b8eb161c5f3212b12fa66f4a5e85d45e2aa05a8266eda18d",
+    "bytes": 4992142
+  },
+  "status": "passed",
+  "actions": 31,
+  "prefixes": 20,
+  "final": {
+    "actions": 31,
+    "levelsCompleted": 3,
+    "level": 4,
+    "state": "NOT_FINISHED",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "activeSeconds": 38.836354566999994,
+    "prefixes": 20,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 31,
+      "boundaryReplays": 2,
+      "goalEvents": 3,
+      "frontierDeltas": 63,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 21
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 21
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 21
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 16
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 1
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 21
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 22
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology"
+      ],
+      "morphologyProvider": {
+        "status": "partial_current_measurements_control_attention_and_methods",
+        "state_owner": "family_state:morphology",
+        "motion_owner": "caller:goal",
+        "forecast_owner": "family_state:public_observed_inventory",
+        "current_decision_scope": "one_source_selection_cycle",
+        "attention_owner": "caller:attention",
+        "method_owner": "caller:counters.targetMethod",
+        "entry_return_owner": "family_state:morphology.entry_access_return",
+        "connected_methods": [
+          "retained_station_method",
+          "entry_access_return",
+          "entry_rebind",
+          "entry_probe",
+          "managed_capacity",
+          "target_extension_continuation"
+        ],
+        "pending": [
+          "complete_original_caller_parity_and_domain_closure"
+        ]
+      },
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 31,
+      "resume": 19
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.56.0"
+  },
+  "passiveOwnerPresence": {
+    "path": "docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-passive-owner-presence.json",
+    "sha256": "0de17df896863318f0c9958fdc96624c8057fed30ef87ab80e484b6e274a16e0",
+    "bytes": 1101
+  },
+  "passiveOwnerPresencePassed": true,
+  "passiveOwnerPrefixesChecked": 0,
+  "passiveOwnerPrefixesPassed": 0,
+  "passiveOwnerTransitionsRetained": 0,
+  "comparison": {
+    "path": "docs/migration/lot10a-evidence/integrated-final/regressions/mind-site83-comparison.json",
+    "sha256": "8adb4095a71c19020f9a5d9fb873b4589d6e529a9191e87a2693e75126e470ea",
+    "bytes": 11009
+  },
+  "comparisonPassed": true,
+  "comparisonChecks": 17,
+  "failedChecks": [],
+  "nativeSourceAfterDigest": "be11e761de3c0f3c7d50d10da47be9e0d7b4fc9c5b7d5002cc9272ffce85645a",
+  "nativeSourceUnchanged": true,
+  "immutableInputsUnchanged": true,
+  "postprocessingFinishedAt": "2026-11-10T23:25:37.087949+00:00"
+}

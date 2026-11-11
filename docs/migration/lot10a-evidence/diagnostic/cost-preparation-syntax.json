@@ -1,0 +1,39 @@
+{
+  "schema": "logos-engine.lot10a-cost-preparation-syntax.v1",
+  "startedAt": "2026-11-10T21:43:23.753156+00:00",
+  "finishedAt": "2026-11-10T21:43:23.769797+00:00",
+  "status": "passed",
+  "method": "In-memory Python compile only; code objects were never executed and target modules were not imported.",
+  "lock": "shared nonblocking /workspace/shared/sra-coordination/performance.lock",
+  "checks": [
+    {
+      "input": {
+        "path": "docs/migration/lot10a-evidence/prepare-cost-protocol.py",
+        "bytes": 34571,
+        "sha256": "16daa2a587b43d584fc57250eb7d5af6c4670740510bcb126350f973187fe571"
+      },
+      "passed": true
+    },
+    {
+      "input": {
+        "path": "docs/migration/lot10a-evidence/prepare-owner-cost-contract.py",
+        "bytes": 21739,
+        "sha256": "f0d64dcddb6c55f7324d3fec0226b5632ca221658fd9d440c1af8f4daba9902b"
+      },
+      "passed": true
+    },
+    {
+      "input": {
+        "path": "docs/migration/lot10a-evidence/check-cost-static-inputs.py",
+        "bytes": 28875,
+        "sha256": "c94adf92ef69e346457a446c0be543071d58875b36bfc5c2bf93aa7762fed4d7"
+      },
+      "passed": true
+    }
+  ],
+  "helpersExecuted": false,
+  "declarationsCreated": false,
+  "capturesExecuted": false,
+  "measurementExecuted": false,
+  "qualification": "Performed after the explicit 5A functional release and independent text review. This verifies syntax only, not runtime behavior or actual cost readiness."
+}

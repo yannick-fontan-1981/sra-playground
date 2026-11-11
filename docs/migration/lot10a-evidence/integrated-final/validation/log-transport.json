@@ -1,0 +1,109 @@
+{
+  "schema": "logos-engine.lossless-validation-log-transport.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T23:22:15.265308+00:00",
+  "verificationReceipts": [
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/validation/delta-tests-run.json",
+      "bytes": 166994,
+      "sha256": "dfefab4e7e2cb7daf9a999c1ef13a030e87af96ecfd15f3081eccdebdba8db00"
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/validation/checks-run.json",
+      "bytes": 200994,
+      "sha256": "ec5329c447294fc8353a8d1262c7b86bb7b642645574e3313d34a10d71366977"
+    }
+  ],
+  "coordination": {
+    "lock": "/workspace/shared/sra-coordination/performance.lock",
+    "mode": "shared_nonblocking",
+    "timingClaim": false
+  },
+  "checks": [
+    {
+      "check": "delta-tests",
+      "raw": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/validation/delta-tests-output.raw.txt",
+        "bytes": 332410,
+        "sha256": "971ff44f0b7b27af1d2f960ac671cb900d761b251eb86fdcb220c3a33ac85de1"
+      },
+      "gzip": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/validation/delta-tests-output.log.gz",
+        "bytes": 46882,
+        "sha256": "537c8e2c62e5bb768531b9520254dd72779ee94af2bd4488f31cd7a3da15db9c"
+      },
+      "byteIdentical": true
+    },
+    {
+      "check": "typecheck",
+      "raw": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/validation/typecheck-output.raw.txt",
+        "bytes": 149,
+        "sha256": "617dc12a2c337d93b91e07bef62eae59b1abe157b737d909052c3e9d2db0d09d"
+      },
+      "gzip": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/validation/typecheck-output.log.gz",
+        "bytes": 141,
+        "sha256": "78290cf257517c2b6a4d9f165940126c31e87b7fb3a60f132304f01bf3c3bf9f"
+      },
+      "byteIdentical": true
+    },
+    {
+      "check": "entry-audit",
+      "raw": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/validation/entry-audit-output.raw.txt",
+        "bytes": 293,
+        "sha256": "0ffce586a3ae9be82bb9e388104e111e91ba41cd372a656dfc53d20d0c9925dd"
+      },
+      "gzip": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/validation/entry-audit-output.log.gz",
+        "bytes": 179,
+        "sha256": "75c490d697b8be13e130aae07b9542a20cd82a059f1ec1067aecc69d8d3b4923"
+      },
+      "byteIdentical": true
+    },
+    {
+      "check": "migration-audit",
+      "raw": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/validation/migration-audit-output.raw.txt",
+        "bytes": 338,
+        "sha256": "a22e415e0318a7a62f922579f598d1f02a3e559a9916833bc2f7f5bb11646c63"
+      },
+      "gzip": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/validation/migration-audit-output.log.gz",
+        "bytes": 205,
+        "sha256": "e0a1b632d0c548accfe4c50f809f1dd5d62a1daa424fdcd33cb4d80b14051568"
+      },
+      "byteIdentical": true
+    },
+    {
+      "check": "diff-check",
+      "raw": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/validation/diff-check-output.raw.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "gzip": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/validation/diff-check-output.log.gz",
+        "bytes": 20,
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      },
+      "byteIdentical": true
+    },
+    {
+      "check": "build",
+      "raw": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/validation/build-output.raw.txt",
+        "bytes": 4628,
+        "sha256": "98ecdd24bb65dbe7d5fbe1ccbeee52691816328a76865764f958493df161654b"
+      },
+      "gzip": {
+        "path": "docs/migration/lot10a-evidence/integrated-final/validation/build-output.log.gz",
+        "bytes": 1591,
+        "sha256": "fdd6c9757b4eef3bf8022eb8edbbd3c07bef55b85107c7caf998303a26ada8c5"
+      },
+      "byteIdentical": true
+    }
+  ],
+  "qualification": "The six original raw logs and their existing gzip files remain unchanged locally. All recorded hashes and byte lengths match the final verification receipts. Each gzip restores its exact original raw bytes at the recorded path, including diagnostic whitespace. This receipt supports lossless transport; no test result, log content or timing sample is changed, and no benchmark is run."
+}

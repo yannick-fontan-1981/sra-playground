@@ -1,0 +1,74 @@
+{
+  "schema": "logos-engine.browser-qa.v1",
+  "recordedAt": "2026-11-10T23:45:25.281841+00:00",
+  "startedAt": "2026-11-10T23:42:25.056369+00:00",
+  "finishedAt": "2026-11-10T23:44:37.115000+00:00",
+  "status": "passed",
+  "game": "TRIA",
+  "nativeVersion": "0.56.0",
+  "nativeDigest": "be11e761de3c0f3c7d50d10da47be9e0d7b4fc9c5b7d5002cc9272ffce85645a",
+  "sourceManifest": {
+    "path": "docs/migration/lot10a-evidence/integrated-final/source-manifest.json",
+    "sha256": "55b78bacc97745a6b8b1bde35156ec0f7184a6ad1cf4a637d35a81b82abec42f",
+    "bytes": 34908
+  },
+  "previewCheckout": "/workspace/sites/sra-lot10a-20261110/.sites-checkout",
+  "previewUrl": "http://127.0.0.1:4173/",
+  "nativeAgentWorker": {
+    "path": "dist/assets/v6-agent-worker-D6eTlBhU.js",
+    "sha256": "36a72e7def02971acd46043f2f3ebca24f517b9a5ef5c335c521de00f7eadd7a",
+    "bytes": 6712949
+  },
+  "learnedStateInjected": false,
+  "pause": {
+    "observed": "Paused.",
+    "actions": 4,
+    "levels": 1,
+    "plans": 4
+  },
+  "oneAction": {
+    "observed": "One action completed.",
+    "actions": 5,
+    "levels": 1,
+    "plans": 5
+  },
+  "final": {
+    "observed": "Level completed.",
+    "actions": 17,
+    "levels": 3,
+    "plans": 17,
+    "level": 4,
+    "url": "http://127.0.0.1:4173/?game=TRIA&level=4"
+  },
+  "previewStopped": true,
+  "previewStoppedAt": "2026-11-10T23:45:25.281841+00:00",
+  "provesAxialContribution": false,
+  "artifacts": [
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/browser/browser-started.json",
+      "sha256": "8ecf3193e6b766c8cda7028a667a636eab3ab9b9678f3cd7a5e2ff81caa6c86d",
+      "bytes": 845
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/browser/prior-case-clock.json",
+      "sha256": "c5a989f63e146a0cf2c14e16823f7f70aad844c1a8e0684fd10bd05a3b34190d",
+      "bytes": 1573
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/browser/observed-states.json",
+      "sha256": "fedcc79a6b5192ca542f255f28e86d0f7e19709261960bda444828baba954552",
+      "bytes": 3446
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/browser/tria-boundary-in-progress.png",
+      "sha256": "8c739ce9e3f807a1d4f704624d7318c6bcb411394403d7c7ca5f3686e4d71412",
+      "bytes": 76221
+    },
+    {
+      "path": "docs/migration/lot10a-evidence/integrated-final/browser/tria-three-levels.png",
+      "sha256": "a4eddfa8dcdaa41fdc49275e554b16854939e486def72a0f1900bf2e4ce6ef23",
+      "bytes": 76362
+    }
+  ],
+  "qualification": "Fresh browser tab and cold native reasoning session in managed preview, continuous natural progression through three levels. Pause acquired the engaged real return, and one action resumed from 4 to 5 without resetting memory. The completed third boundary was observed only after sealing reached 17 actions/3 levels/17 plans; the earlier URL-only transition is retained separately. Native version is bound through the exact preview checkout and compiled worker, not claimed as a visible version label. This is actual browser regression on an existing RelativeArrangements case, not own Axial contribution or a Node timing result."
+}

@@ -1,0 +1,92 @@
+{
+  "schema": "logos-engine.lossless-validation-log-transport.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T22:07:27.569024+00:00",
+  "checks": [
+    {
+      "check": "delta-tests",
+      "raw": {
+        "path": "docs/migration/lot10a-evidence/isolated-functional/validation/delta-tests-output.raw.txt",
+        "bytes": 183762,
+        "sha256": "8589e464821087bae067a78f29937beb99b44457bd0450137bc0c76361cce9cf"
+      },
+      "gzip": {
+        "path": "docs/migration/lot10a-evidence/isolated-functional/validation/delta-tests-output.log.gz",
+        "bytes": 26981,
+        "sha256": "97af0fe0af0baf34c0f447f0b8cdd320bee718f73acc1fbaf58a8ada8458ceb5"
+      },
+      "byteIdentical": true
+    },
+    {
+      "check": "typecheck",
+      "raw": {
+        "path": "docs/migration/lot10a-evidence/isolated-functional/validation/typecheck-output.raw.txt",
+        "bytes": 149,
+        "sha256": "617dc12a2c337d93b91e07bef62eae59b1abe157b737d909052c3e9d2db0d09d"
+      },
+      "gzip": {
+        "path": "docs/migration/lot10a-evidence/isolated-functional/validation/typecheck-output.log.gz",
+        "bytes": 141,
+        "sha256": "78290cf257517c2b6a4d9f165940126c31e87b7fb3a60f132304f01bf3c3bf9f"
+      },
+      "byteIdentical": true
+    },
+    {
+      "check": "entry-audit",
+      "raw": {
+        "path": "docs/migration/lot10a-evidence/isolated-functional/validation/entry-audit-output.raw.txt",
+        "bytes": 291,
+        "sha256": "80e507ebb75292f40ba6c75b40366b9a66972d986b7dcf0329b5729abde0ec4e"
+      },
+      "gzip": {
+        "path": "docs/migration/lot10a-evidence/isolated-functional/validation/entry-audit-output.log.gz",
+        "bytes": 178,
+        "sha256": "e07e7088fac4d5a7de1b0a87f88e1d423d177e5a0bcda58e3aec53a576ab679f"
+      },
+      "byteIdentical": true
+    },
+    {
+      "check": "migration-audit",
+      "raw": {
+        "path": "docs/migration/lot10a-evidence/isolated-functional/validation/migration-audit-output.raw.txt",
+        "bytes": 338,
+        "sha256": "da59a1d117b476686e69914be47b7904087c9853fcf0ab8a95eef7c18e81b552"
+      },
+      "gzip": {
+        "path": "docs/migration/lot10a-evidence/isolated-functional/validation/migration-audit-output.log.gz",
+        "bytes": 206,
+        "sha256": "cced2f1c14b136f6b0c6ed66f6bc3ae1a0c0595db7e64f1ebfa8eb085f175bc4"
+      },
+      "byteIdentical": true
+    },
+    {
+      "check": "diff-check",
+      "raw": {
+        "path": "docs/migration/lot10a-evidence/isolated-functional/validation/diff-check-output.raw.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "gzip": {
+        "path": "docs/migration/lot10a-evidence/isolated-functional/validation/diff-check-output.log.gz",
+        "bytes": 20,
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      },
+      "byteIdentical": true
+    },
+    {
+      "check": "build",
+      "raw": {
+        "path": "docs/migration/lot10a-evidence/isolated-functional/validation/build-output.raw.txt",
+        "bytes": 5104,
+        "sha256": "02a5ffe738f07baed8ed754a511202578eb1a8c4ced5d21f8a77f8a44691e8b9"
+      },
+      "gzip": {
+        "path": "docs/migration/lot10a-evidence/isolated-functional/validation/build-output.log.gz",
+        "bytes": 1751,
+        "sha256": "9a955839ebce821c0c19417be1493b799154fba73da4d914ebc52ee5af4b9b84"
+      },
+      "byteIdentical": true
+    }
+  ],
+  "qualification": "All original bytes, including diagnostic whitespace and the failed test output, are retained by the existing gzip outputs. Original files remain unchanged locally. The three raw files with whitespace diagnostics are omitted from Git and restored by gzip decompression to the raw paths. No test result, sample or diagnostic is changed."
+}

@@ -3,6 +3,51 @@
 An English-language playground for **100 interactive games** and Yannick
 Fontan's **Symbolic Reasoning Agent** research.
 
+<!-- LOT10A_README_CURRENT_START -->
+
+## Verified native 0.56.0: AxialQuestion, private publication in preparation
+
+**AxialQuestion / lot 10A** is integrated with the actual **Site 89 / native
+0.55.0** predecessor and its unchanged Site 88 execution inputs. The distinct
+`public_axial_question` owner now executes `v6.axial_question.choose` and
+`axial.select` through the common runtime. It preserves the source priority,
+quarter-turn distance, recalled-control preference, command and source-index
+tie order, followed by a current one-action OP18 guard.
+
+Cold common-runtime scenarios acquire selection from another family's public
+return, execute Axial once, acquire an observed rotation and change the next
+choice to **ACTION4 instead of the ACTION3 ablation**. Attempts, ambiguous
+boundaries, portable methods and restoration retain their separate contracts.
+The final scope passes **1,538 tests in 45 files**, **five project checks** and
+**seven recorded regressions / 119 comparisons**. Its source comparisons cover
+122 original-reference cases and eight additional native contracts, with six
+common-runtime scenarios included in the final suite.
+
+The predeclared **A1/B1/B2/A2 cost window is accepted on both games** against
+the actually published **Site 88 / native 0.55.0**: complete-session medians
+change by **+0.387457% for STCK** and **+0.136584% for SMLP**, each strictly below
++10%. All **32 measured sessions / 400 actions** remain, with **7,688 independent
+checks**. Aggregate phase diagnostics pass 16/16; each cohort retains its 15/16
+status and the two adverse SMLP phase results. The historical strict metadata
+failure remains failed alongside the owner qualification declared before timing.
+See the [complete cost report](docs/migration/lot10a-evidence/performance-integrated/RESULTS.md).
+
+The continuous browser check completes three TRIA levels in 17 actions and
+confirms Pause followed by one action. It verifies the existing
+RelativeArrangements path, not Axial's own live contribution. POLA's prior
+94-action attempt has no recoverable elapsed-time receipt, so no new 40-minute
+budget or new action is introduced. Axial's live-game contribution, long-history
+cost and full V6 caller parity remain open. **60/76 source entries are connected,
+with 16 remaining.** Only 10A is covered; **10B WindowQuestion** is the next
+sub-lot after publication.
+
+See the [Axial delivery report](docs/migration/lot10a-axial-question.md),
+[source lineage](docs/migration/lot10a-axial-question-lineage.md),
+[evidence index](docs/migration/lot10a-evidence/README.md) and
+[delivery roadmap](docs/migration/v6-delivery-roadmap.md).
+
+<!-- LOT10A_README_CURRENT_END -->
+
 <!-- LOT7B_README_CURRENT_START -->
 
 ## Published native 0.55.0: SymbolTransactions

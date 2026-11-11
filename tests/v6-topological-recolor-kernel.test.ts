@@ -45,7 +45,9 @@ test('recolor has one cold owner at its declared material position and uses the 
     const material = (result.snapshot.coverage as R).sourceGroups.find((g: R) => g.id === 'factored_material_return');
     const index = material.entryPoints.indexOf('topological_recolor'); assert.ok(index > 0);
     assert.equal(material.families[index], ID); assert.equal(material.entryPoints[index - 1], 'observed_framed_transfer');
-    assert.equal(material.entryPoints[index + 1], 'reactive_contact'); assert.equal(material.families.filter((id: string) => id === ID).length, 1);
+    assert.equal(material.entryPoints[index + 1], 'axial_question');
+    assert.equal(material.families[index + 1], 'public_axial_question');
+    assert.equal(material.families.filter((id: string) => id === ID).length, 1);
     const graph = runtime.inspectKnowledge();
     assert.deepEqual(Object.values(graph.nodes).filter(n => n.kind === 'family_state' && n.family === ID).map(n => n.id), [OWNER]);
     assert.ok(graph.nodes['program:v6.topological_recolor.choose']);
