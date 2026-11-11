@@ -1,0 +1,99 @@
+{
+  "schema": "logos-engine.lot4c-final-source-build-verification-execution.v1",
+  "status": "passed",
+  "startedAt": "2026-11-11T01:44:45.833694+00:00",
+  "finishedAt": "2026-11-11T01:44:47.739437+00:00",
+  "elapsedSeconds": 1.9057552449958166,
+  "command": [
+    "flock",
+    "-s",
+    "/workspace/shared/sra-coordination/performance.lock",
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "/workspace/sites/lot4c-publication-20261111/verify-final-source-build.py",
+    "--go-after-step-five"
+  ],
+  "cwd": "/workspace/sites/lot4c-publication-20261111",
+  "exitCode": 0,
+  "lock": {
+    "path": "/workspace/shared/sra-coordination/performance.lock",
+    "mode": "shared",
+    "processFinishedBeforeReceipt": true
+  },
+  "generatorBefore": {
+    "path": "/workspace/sites/lot4c-publication-20261111/verify-final-source-build.py",
+    "bytes": 22907,
+    "sha256": "b66a3bd933ea765e9551e759d5bdb2087c0e357a6216b6df02c30d1a8df6c2f3"
+  },
+  "generatorAfter": {
+    "path": "/workspace/sites/lot4c-publication-20261111/verify-final-source-build.py",
+    "bytes": 22907,
+    "sha256": "b66a3bd933ea765e9551e759d5bdb2087c0e357a6216b6df02c30d1a8df6c2f3"
+  },
+  "generatorUnchanged": true,
+  "stdout": {
+    "path": "/workspace/sites/lot4c-publication-20261111/final-source-build-verification.stdout.log",
+    "bytes": 303,
+    "sha256": "c05e06d1c70ae0ac5ad157fb04541db4305de31df980d5652c7b71ce5fffabe0"
+  },
+  "stderr": {
+    "path": "/workspace/sites/lot4c-publication-20261111/final-source-build-verification.stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "exit": {
+    "path": "/workspace/sites/lot4c-publication-20261111/final-source-build-verification.exit",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "verification": {
+    "path": "/workspace/sites/lot4c-publication-20261111/final-source-build-verification.json",
+    "bytes": 388086,
+    "sha256": "fa9102bbde5d4ef10c44ed9b096a4101cd56e5791f6a83fffda735c2d29ede19"
+  },
+  "summary": {
+    "status": "passed",
+    "workflowReceiptsVerified": 5,
+    "applicationMemberComparisons": 375,
+    "finalCommit": "d06620d1e4ca2c9758cc693b1ced9eeeddccb7e6",
+    "finalTree": "8c063a438a88d11e94115a87255b7c54ad8f1547",
+    "retainedTargetIsDirectParent": true,
+    "sourceBuildByteIntegrityPassed": true,
+    "frozenInputs": {
+      "uniqueInputsPerCheckout": 746,
+      "checkoutsVerified": 2,
+      "inventoryCounts": {
+        "native": 298,
+        "archive": 309,
+        "sourceAndTests": 684,
+        "buildInputs": 363,
+        "replay": 10
+      },
+      "allBytesMatch": true,
+      "nativeSourceDigest": "eebd099808672be934389020c8f9061df4fdacab28cd7d60c00cd1b080464c04",
+      "exactNativeTestBuildMembership": true,
+      "ignoredInputsVerifiedWithoutModification": [
+        "tests/fixtures/v6-feedback-sequences-reference.json.gz",
+        "tests/fixtures/v6-outline-service-reference.json.gz",
+        "tests/fixtures/v6-relative-arrangements-reference.json.gz",
+        "public/vendor/pyodide/annotated_types-0.7.0-py3-none-any.whl",
+        "public/vendor/pyodide/numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+        "public/vendor/pyodide/package.json",
+        "public/vendor/pyodide/pydantic-2.12.5-py3-none-any.whl",
+        "public/vendor/pyodide/pydantic_core-2.41.5-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+        "public/vendor/pyodide/pyodide-lock.json",
+        "public/vendor/pyodide/pyodide.asm.mjs",
+        "public/vendor/pyodide/pyodide.asm.wasm",
+        "public/vendor/pyodide/pyodide.mjs",
+        "public/vendor/pyodide/python_stdlib.zip",
+        "public/vendor/pyodide/typing_extensions-4.15.0-py3-none-any.whl",
+        "public/vendor/pyodide/typing_inspection-0.4.2-py3-none-any.whl"
+      ]
+    },
+    "worktreesUnchanged": true,
+    "inputsUnchanged": true,
+    "inputCount": 1668,
+    "error": null
+  },
+  "qualification": "Final read-only verification executed after the delivery owner GO under flock -s. All outputs are outside both checkouts. No build, test, cost run, game, Git mutation, source push, file restoration, Site save or deployment was performed."
+}

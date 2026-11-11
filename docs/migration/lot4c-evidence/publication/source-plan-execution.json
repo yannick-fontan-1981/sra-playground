@@ -1,0 +1,16 @@
+{
+  "command": [
+    "python",
+    "-B",
+    "docs/migration/lot4c-evidence/plan-bounded-source-transport.py",
+    "--base",
+    "5659ddc9420c7624df4865f0afc628782296a186",
+    "--target",
+    "HEAD",
+    "--output",
+    "/workspace/sites/lot4c-publication-20261111/lot4c-source-push-plan.json"
+  ],
+  "startedAt": "2026-11-11T01:33:51.517333+00:00",
+  "finishedAt": "2026-11-11T01:33:52.078673+00:00",
+  "exitCode": 0
+}

@@ -1,0 +1,16 @@
+{
+  "step": 1,
+  "startedAt": "2026-11-11T01:34:59.087Z",
+  "finishedAt": "2026-11-11T01:35:38.138Z",
+  "exitCode": 0,
+  "outputChunks": [
+    "",
+    "/workspace/sites/lot4c-publication-20261111/site-step-1.tar.gz\r\n{\"project_id\":\"appgprj_6adbc388d79081918581b93b919d7258\",\"checkout_path\":\"/workspace/sites/sra-lot4c-publication-20261111\",\"commit_sha\":\"248d5b9f33ef93f8d2a30a20586bc7ee6cdbae8d\",\"archive\":\"/workspace/sites/lot4c-publication-20261111/site-step-1.tar.gz\"}\r\n"
+  ],
+  "result": {
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "checkout_path": "/workspace/sites/sra-lot4c-publication-20261111",
+    "commit_sha": "248d5b9f33ef93f8d2a30a20586bc7ee6cdbae8d",
+    "archive": "/workspace/sites/lot4c-publication-20261111/site-step-1.tar.gz"
+  }
+}

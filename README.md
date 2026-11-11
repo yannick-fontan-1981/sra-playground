@@ -5,10 +5,15 @@ Fontan's **Symbolic Reasoning Agent** research.
 
 <!-- LOT4C_README_CURRENT_START -->
 
-## Native 0.57.0: FacetExamples validated, global cost accepted
+## Site 92 / native 0.57.0: FacetExamples delivered
 
-**Lot 4C is functionally validated and its global cost is accepted; publication
-remains pending.** The frozen candidate integrates the actual **10A / Site 91 / native
+**Lot 4C is delivered, with functional validation, accepted global cost and actual
+private publication in [Site 92](docs/migration/lot4c-evidence/publication/native-publication.json).**
+Source commit `d06620d1e4ca2c9758cc693b1ced9eeeddccb7e6` reached terminal deployment
+`succeeded` on **10 November 2026 at 22:45:49 UTC−03**. The
+[existing URL](https://sra-playground.yannick-fontan.chatgpt.site) and owner-only
+private audience, revision **3**, are unchanged. The published freeze integrates
+the actual **10A / Site 91 / native
 0.56.0** predecessor, commit `5659ddc9420c7624df4865f0afc628782296a186`, deployed
 on **10 November 2026 at 21:42:39 UTC−03**. The
 [Site 90–91 closure](docs/migration/lot4c-evidence/planning/published-predecessor-source-closure.json)
@@ -16,7 +21,16 @@ retains identical application inputs. The
 [0.57 source manifest](docs/migration/lot4c-evidence/integrated-final/source-manifest.json)
 contains **298 native files**, digest
 `eebd099808672be934389020c8f9061df4fdacab28cd7d60c00cd1b080464c04`, with a
-309-file execution archive. No future Site version is assigned.
+309-file execution archive.
+
+The [source transport](docs/migration/lot4c-evidence/publication/lot4c-source-push-plan.json)
+uses **five ordinary pushes, without force or intermediate publication**. Its
+[final verification](docs/migration/lot4c-evidence/publication/final-source-build-verification.json)
+confirms **75 identical application members in each of five archives**, and
+**746 frozen inputs per checkout** across both checkouts. Native source, tests,
+build inputs and worker remain unchanged. The 375 member comparisons cover the five local gzip archives against the
+validated build. The server-stored tar is identified separately by the publication
+receipt; it was not downloaded or compared member by member.
 
 The single `facet_examples` owner connects the first `surface` entry,
 `facet_example`, through `v6.facet_examples.choose`. It measures visible examples,
@@ -54,7 +68,7 @@ published 0.56 reference remains a bounded eight-action, zero-level observation.
 The [cumulative clock](docs/migration/lot4c-evidence/case-clock.json) retains
 **1,259.938444409 of 2,400 seconds** through interval 04, without reset.
 
-Coverage is **61/76 connected entries (80.3%), with 15 remaining**. The audit
+Published coverage is **61/76 connected entries (80.3%), with 15 remaining**. The audit
 retains **189 component-verified modules, 147 partial transfers, 1,033 pending
 and zero fully verified modules**; all six full-migration gates remain false.
 
@@ -88,8 +102,12 @@ by the declared tools without rerunning measurements or changing inputs.
 These common-loop timings do not establish long Facet-composition cost, hours-long
 stability, immediate interruption of any search or full-caller parity.
 
-**Actual 4C publication is the remaining delivery step.** Lot **5B is prepared
-separately as native 0.58** and awaits that publication before final integration.
+**Lots 4A, 4B and 4C are delivered; lot 4 is closed within its announced scopes.**
+This documentation closure records the actual Site 92 publication and keeps
+the same native and application inputs; its terminal publication receipt is
+reported separately. The next concrete work outside lot 4 is final integration
+of the separately prepared **5B / `observed_addressed_material` / native 0.58**,
+including this documentation closure. This delivery adds no further 5B implementation.
 
 See the [4C report](docs/migration/lot4c-facet-examples.md),
 [source lineage](docs/migration/lot4c-facet-examples-lineage.md),

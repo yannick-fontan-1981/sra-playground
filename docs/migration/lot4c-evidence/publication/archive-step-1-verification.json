@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "recordedAt": "2026-11-11T01:36:43.452309+00:00",
+  "sourceCommit": "248d5b9f33ef93f8d2a30a20586bc7ee6cdbae8d",
+  "archive": "/workspace/sites/lot4c-publication-20261111/site-step-1.tar.gz",
+  "gzipBytes": 14816016,
+  "gzipSha256": "260e84c1d796f11508cff8197a727add5b1b69be5c1bce2b833cc05b3ebee84a",
+  "applicationMembers": 75,
+  "everyApplicationMemberMatchesValidatedBuild": true,
+  "sourceManifestToArchiveMapping": {
+    ".openai/hosting.json": "dist/.openai/hosting.json"
+  },
+  "unchangedStandardPackager": {
+    "path": "/home/agent/.codex/plugins/cache/openai-curated-remote/sites/1.1.6/scripts/package-site.mjs",
+    "sha256": "1c3d64f670771cb9ebb97a11058e88a62b34d79eca2e9fc557d637a3c844941a"
+  }
+}
