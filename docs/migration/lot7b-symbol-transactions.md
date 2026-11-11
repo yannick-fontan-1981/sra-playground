@@ -1,9 +1,12 @@
 # Lot 7B — transactions symboliques
 
-## Candidat intégré et preuves figées
+## Première publication native 7B et preuves figées
 
 Le propriétaire `public_symbol_transaction` est porté et raccordé à l'entrée
 matérielle `observed_symbol_transaction`, avec son état distinct de Workshop.
+La **première publication native 7B est Site 88**, native **0.55.0**, avec un
+déploiement `succeeded` attesté par le
+[reçu de publication réelle](lot7b-evidence/publication/native-publication.json).
 Les validations fonctionnelles finales portent sur **native 0.55.0**, après
 intégration du véritable prédécesseur 4B **Site 87**, commit
 `dd355400264b50942486559b8ca56ee6dfc6a3cc`, native **0.54.0**. Les identités sont
@@ -253,12 +256,31 @@ formes de coût, ni inversement.
 <!-- LOT7B_COST_FINAL_END -->
 
 <!-- LOT7B_PUBLICATION_FINAL_START -->
-## Publication 7B : résultat à consigner
+## Première publication native 7B : Site 88
 
-Le prédécesseur effectivement publié est Site 87. Les contrôles et le build du
-candidat 0.55 sont terminés, mais aucun déploiement 7B n'est revendiqué ici.
-Le commit envoyé, la version Site, le statut terminal et leurs reçus seront
-consignés après la publication effective.
+Le [reçu réel](lot7b-evidence/publication/native-publication.json), conservé le
+**10 novembre 2026 à 23:56:02.578047 UTC** (**20:56:02 UTC−03**), atteste le
+déploiement **`appgdep_6af3aeff18f08191963da329ba10b5a2`**, statut
+**`succeeded`**, pour **Site 88 / native 0.55.0**.
+
+| Identité conservée | Valeur |
+| --- | --- |
+| Commit effectivement publié | `43ee01ba5469fd4fbffe10eb6a786fe99b1c35a7` |
+| Arbre publié, exactement égal à la cible validée | `63299a0dfe2b0901d80b1e851d4bd0250813605e` |
+| Commit cible conservé comme parent direct | `93ec798a017febbeca8aec3f705bc04d9ebe26c4` |
+| Gel natif publié | `ea25603262a7473e5ab9994d2e2e86dd64a8291dd7c1dc18ede4d1f443cdc53b`, 291 fichiers natifs, 302 entrées archivées |
+
+Le [transport des sources](lot7b-evidence/publication/source-transport.json), son
+[plan borné](lot7b-evidence/publication/source-push-plan.json) et la
+[égalité des 75 fichiers du build entre les cinq paquets locaux](lot7b-evidence/publication/source-archive-equality.json)
+conservent la correspondance entre la cible validée et les octets publiés.
+L'URL privée habituelle et l'accès `custom` restent inchangés : révision **3**,
+**un compte autorisé, zéro groupe et zéro visiteur externe**.
+
+Les reçus et cette documentation font l'objet d'une **clôture documentaire
+distincte**, avec exactement le même build validé. Son numéro et son commit
+ne sont pas anticipés ici ; Site 88 désigne cette première publication native.
+Les limites fonctionnelles et de coût énoncées plus haut restent inchangées.
 <!-- LOT7B_PUBLICATION_FINAL_END -->
 
 ## Portée et limites conservées

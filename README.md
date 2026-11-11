@@ -5,16 +5,16 @@ Fontan's **Symbolic Reasoning Agent** research.
 
 <!-- LOT7B_README_CURRENT_START -->
 
-## Current migration candidate: native 0.55.0
+## Published native 0.55.0: SymbolTransactions
 
-The integrated **SymbolTransactions / lot 7B** candidate includes the actually
+The published **SymbolTransactions / lot 7B** release includes the actually
 published **Site 87 / native 0.54.0** predecessor. It adds the source workflow
 `v6.symbol_transactions.choose` and its distinct `public_symbol_transaction`
 owner. Transactions bind the current frame, pixel owner, exact action and public
 observation. Only the owner's selected returns become transaction evidence;
 Workshop retains its separate active and passive acquisition paths.
 
-The frozen candidate passes **4,327 tests in 112 files**, five project checks,
+The frozen release passes **4,327 tests in 112 files**, five project checks,
 and **eight strict recorded regressions / 136 comparisons**. Its cold CRAF run
 and managed browser check each complete **three levels in 36 actions**. The
 original Python owner independently matches **144 calls / 432 exact checks**;
@@ -30,7 +30,12 @@ with **3,927 independent arithmetic checks**. Aggregate phase diagnostics pass
 16/16; both cohorts remain 15/16, and adverse SMLP p95 values remain visible in
 the [full cost report](docs/migration/lot7b-evidence/performance-integrated/results.md).
 The strict historical work-metadata failure is retained alongside the separate
-qualification declared before measurement. Publication is the remaining step.
+qualification declared before measurement. The first native 7B publication is
+**Site 88**, deployed privately on **10 November 2026 at 20:56:02 UTC−03** from
+commit `43ee01ba5469fd4fbffe10eb6a786fe99b1c35a7`. Its
+[terminal publication receipt](docs/migration/lot7b-evidence/publication/native-publication.json)
+binds the exact validated source tree and compiled worker; the accompanying
+documentation closure retains that same build.
 These common cost paths do not select Symbols and do not establish active CRAF
 transaction cost. Full V6 caller parity remains open: **59/76 source entries
 are connected, with 17 remaining**, and no module is declared fully verified.

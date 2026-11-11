@@ -8,9 +8,9 @@ La référence reste le commit V6
 
 La validation du candidat intégré **0.56.0** passe **1 538/1 538 tests sur
 45 fichiers**, **5/5 contrôles du projet** et **7/7 rejeux, 119/119 comparaisons**.
-Ce candidat inclut la source préparée de 7B, qui n'est pas encore publiée.
-La fusion de sa publication réelle et l'identité exacte des entrées restent
-obligatoires avant la réutilisation finale de ces résultats. La QA navigateur
+Ces contrôles ont été exécutés avant publication de 7B. Les publications
+réelles Site 88 et Site 89 sont maintenant intégrées ; l'identité octet pour
+octet des entrées du candidat validé est vérifiée après fusion. La QA navigateur
 TRIA passe sur ce candidat avec trois niveaux, 17 actions et 17 plans ; le coût
 et la publication 10A restent à établir. La réserve d'apport propre Axial/POLA
 n'est pas levée.
@@ -57,7 +57,7 @@ aux chemins `raw` du reçu restitue exactement les empreintes déclarées.
 
 Les contrôles isolés ne remplacent pas la validation du candidat après intégration
 des prédécesseurs. Le test corrigé est inclus dans les 45 fichiers du candidat
-intégré décrit ci-dessous, dont la source 7B reste préparée. Aucun coût, succès
+intégré décrit ci-dessous, depuis réconcilié avec 7B réellement publié. Aucun coût, succès
 de jeu ou déploiement supplémentaire n'est déduit du gel isolé ; son reçu en échec
 et les autres essais historiques restent conservés.
 
@@ -86,11 +86,11 @@ conserve ses autres entrées et limite le diff natif à Axial et son raccordemen
 Les [audits réels](diagnostic/post4b-inventory-run.json) passent : **59/76 entrées**,
 181 composants vérifiés, 146 transferts partiels, 1 042 en attente, aucun échec
 de mapping. Ce point intermédiaire ne constitue pas la validation finale 10A ;
-la publication de 7B doit encore être intégrée.
+la publication de 7B restait à intégrer à ce stade historique.
 
-## Candidat composé avant publication 7B
+## Candidat validé avant publication 7B et réconcilié après fusion
 
-Le candidat de validation **0.56.0** est composé avec le gel préparé **7B / 0.55.0**, commit `28f3f388e18bad21a186795f965102a83e6b53d7`, digest `ea25603262a7473e5ab9994d2e2e86dd64a8291dd7c1dc18ede4d1f443cdc53b`. Ce prédécesseur n'est pas encore publié. La [déclaration de source préparée](coordination/prepared-7b-source-observation.json) identifie ses octets ; la réutilisation finale des contrôles exige une fusion de la publication réelle et une comparaison exacte de toutes les entrées natives, source/tests, build et d'exécution. Aucun coût 10A n'est déclaré ou mesuré sur ce seul état préparé.
+Le candidat de validation **0.56.0** a été composé et testé avant publication de 7B avec le gel préparé **7B / 0.55.0**, commit `28f3f388e18bad21a186795f965102a83e6b53d7`, digest `ea25603262a7473e5ab9994d2e2e86dd64a8291dd7c1dc18ede4d1f443cdc53b`. La [déclaration de source préparée](coordination/prepared-7b-source-observation.json) conserve cette provenance. La [publication réelle Site 88](coordination/published-7b-site88.json), commit `43ee01ba5469fd4fbffe10eb6a786fe99b1c35a7`, et sa clôture documentaire **Site 89**, commit `4cea66731c0809f08288ea6f7287ef3dd7a392bd`, sont maintenant intégrées. L'identité octet pour octet du candidat validé est vérifiée après fusion pour les **294 fichiers natifs, 676 entrées source/tests, 359 entrées de build, 11 entrées de rejeu et le worker final**. Les entrées source, tests, scripts, public, contenu et build de 7B sont identiques entre le gel préparé et ces deux publications. **La référence de coût sera Site 88 / native 0.55.0** ; Site 89 conserve la même archive comme clôture documentaire. Aucun coût 10A n'est encore exécuté.
 
 Le [gel natif intégré](integrated-final/source-manifest.json) est établi sur
 `19f3116c95e8e8ce99aff067de113ae23fc634d6`. Son digest est
@@ -116,10 +116,9 @@ boucle passive restent celles des scénarios synthétiques dédiés.
 
 Ces résultats fonctionnels ne constituent ni de nouvelles parties, ni une mesure
 de vitesse, ni une contribution propre Axial. Les durées conservées supervisent
-les exécutions ; elles ne font pas partie du protocole de coût. La publication
-réelle de 7B doit encore être fusionnée et toutes les entrées natives, source/tests,
-build et d'exécution comparées exactement au gel validé. Tout écart doit être
-résolu avant la réutilisation des preuves concernées.
+les exécutions ; elles ne font pas partie du protocole de coût. La réconciliation
+après fusion des publications réelles Sites 88 et 89 conserve exactement les
+entrées natives, source/tests, build et de rejeu ainsi que le worker validé.
 
 ## Contrôle navigateur TRIA du candidat
 
@@ -170,9 +169,9 @@ La croissance de l'historique propre à Axial n'a pas de borne de coût démontr
 Les tests synthétiques et les petits rejeux de coût ne remplacent pas cette
 caractérisation. La parité de l'appelant Python complet reste également ouverte.
 
-La qualification puis la mesure de coût sur la référence réellement intégrée
-et les vérifications de publication restent à faire, après fusion de 7B
-effectivement publié. La réserve [POLA](diagnostic/pola-case-budget-review.json) est inchangée :
+La qualification puis la mesure de coût contre **Site 88 / native 0.55.0**
+et les vérifications de publication 10A restent à faire. La clôture documentaire
+Site 89 est intégrée séparément et ne remplace pas cette référence de coût. La réserve [POLA](diagnostic/pola-case-budget-review.json) est inchangée :
 94 actions historiques, zéro niveau, durée inconnue et aucun budget restant
 positif établi. Les rejeux et la QA TRIA ne créent aucune nouvelle horloge POLA
 et ne lèvent ni sa réserve d'apport propre Axial ni celle de réussite officielle.
