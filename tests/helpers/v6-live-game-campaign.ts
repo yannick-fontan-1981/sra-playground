@@ -12,6 +12,8 @@ import type { NativeV6Declarations } from '../../src/logos-engine/v6-native-runt
 import type { NativeCommand, NativePublicObservation } from '../../src/logos-engine/v6-native-types.ts';
 import type { GameObservation } from '../../src/runtime/browser-games.ts';
 import type { V6AgentResult, V6AgentTransport, V6PublicObservation } from '../../src/runtime/v6-agent-protocol.ts';
+import { installWindowQuestionCapture } from './v6-window-question-capture.ts';
+import type { WindowQuestionCapture } from './v6-window-question-capture.ts';
 
 type R = Record<string, any>;
 const ROOT = new URL('../../', import.meta.url);
@@ -98,6 +100,7 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
   let runtime: Awaited<ReturnType<typeof createNativeV6Runtime>> | undefined;
   let symbolsOwner: R | undefined;
   let facetsOwner: R | undefined;
+  let windowCapture: WindowQuestionCapture | undefined;
   let native: Awaited<ReturnType<typeof loadPyodide>> | undefined;
   let agent: BrowserV6Agent | undefined, current: GameObservation | undefined;
   let lastResponse: V6AgentResult | undefined, lastCycles = 0, previousActions = 0, previousSeconds = 0;
@@ -116,6 +119,8 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
     } as NativeV6Declarations;
     const service = new V6AgentService(async () => {
       runtime = await createNativeV6Runtime(declarations);
+      const windowOwner = (runtime as unknown as { families: R[] }).families.find(family => family.id === 'public_window_question');
+      if (windowOwner) windowCapture = installWindowQuestionCapture(windowOwner, report);
       // Evidence-only source-call observer. It preserves the method's sync or
       // async return, inputs, ordering and state, and never supplies a decision.
       // Inventory propose() can acquire memories even when another provider
@@ -646,6 +651,8 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
             materialSubquestion: evidence.proposal.material_access_subquestion ?? null,
             programSubquestion: evidence.proposal.program_subquestion ?? null,
             selectionGroup: evidence.proposal.strategy_receipt?.selected ?? null,
+            ...(windowCapture ? { windowQuestion: windowCapture.prefixSnapshot({ read, facts: reasoningFacts,
+              transitions: evidence.transitions, proposal: evidence.proposal, selectedFamily: snapshot.lastDecision }) } : {}),
             ...(graph.nodes['family_state:feedback_sequences'] ? { observedFeedbackSequence: {
               stateNode: 'family_state:feedback_sequences', state: read('family_state:feedback_sequences'),
               proposal: evidence.proposal.feedback_plan ? evidence.proposal : null,
@@ -1067,5 +1074,6 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
     fullV6Parity: final?.coverage?.fullV6Parity ?? false, sessions: sessions.size, operationCounts,
     nativeImplementation: (lastResponse?.snapshot as R | undefined)?.implementation ?? null };
   report.elapsedSeconds = (performance.now() - started) / 1000;
+  windowCapture?.dispose();
   return report;
 }

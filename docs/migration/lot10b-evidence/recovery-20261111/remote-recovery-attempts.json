@@ -1,0 +1,32 @@
+[
+  {
+    "operation": "list_remote_heads_and_tags",
+    "exitCode": 0,
+    "stdout": "3a70463039768f7114edae7d94d7dd33b7f36aa8\trefs/heads/main\n",
+    "stderr": ""
+  },
+  {
+    "operation": "fetch_previously_identified_commit_e45dd6bdd3cb4544eb17d6e13b5e00b0ef35b1d5",
+    "exitCode": 128,
+    "stdout": "",
+    "stderr": "error: RPC failed; HTTP 500 curl 22 The requested URL returned error: 500\nfatal: expected 'acknowledgments'\n"
+  },
+  {
+    "operation": "fetch_previously_identified_commit_48ad49abf716d345a8b9e2b7738099a46fae8fdf",
+    "exitCode": 128,
+    "stdout": "",
+    "stderr": "error: RPC failed; HTTP 500 curl 22 The requested URL returned error: 500\nfatal: expected 'acknowledgments'\n"
+  },
+  {
+    "operation": "fetch_previously_identified_commit_0f7ae5e480c9a67ea61ceaae5809bc47530f3220",
+    "exitCode": 128,
+    "stdout": "",
+    "stderr": "error: RPC failed; HTTP 500 curl 22 The requested URL returned error: 500\nfatal: expected 'acknowledgments'\n"
+  },
+  {
+    "operation": "fetch_previously_identified_commit_d9b2c2bd61499eda2532fccd7b64ab203ce9963d",
+    "exitCode": 128,
+    "stdout": "",
+    "stderr": "error: RPC failed; HTTP 500 curl 22 The requested URL returned error: 500\nfatal: expected 'acknowledgments'\n"
+  }
+]
