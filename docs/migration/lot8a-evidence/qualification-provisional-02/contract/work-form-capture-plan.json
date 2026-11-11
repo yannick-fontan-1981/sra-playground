@@ -207,8 +207,8 @@
     },
     {
       "path": "docs/migration/lot8a-evidence/qualification-provisional-02/work-forms-01/baseline-native.json",
-      "sha256": "6f23c135107ae67789602850d63f6366407d6b4aabfcaea7af388130ae26728d",
-      "bytes": 38378
+      "sha256": "2098197ea6c45c06bf42983bc1b47cd2dbe15a49f43b2f647d1884e591649f42",
+      "bytes": 38246
     },
     {
       "path": "docs/migration/lot8a-evidence/qualification-provisional-02/work-forms-01/candidate-native.json",
@@ -609,10 +609,11 @@
     "requiredBaseline": "actual published0.64"
   },
   "limits": {
-    "passiveOwnerRequirementsAreEmpty": true,
-    "seventeenHistoricalProjectionsOnly": true,
+    "preparedParentOnly": true,
+    "allThreeOwnersObserved": true,
     "fullCallerParity": false,
-    "sameEpisodeThreeOwnerActivation": false,
+    "officialPerformanceOrPublication": false,
+    "allPrivateGraphDifferencesRetained": true,
     "LKEY": "Permanently closed, no payload/oracle/replay/game; four named loading modules excluded from execution."
   },
   "supersedesProspectively": {
@@ -661,6 +662,20 @@
     "recordedAt": "2026-11-11T21:50:06.791458+00:00",
     "basis": "Read exact fixed generator schemas before any execution",
     "inventoryQualificationField": "qualificationStage, not a nonexistent preparedOnly field",
-    "capturedActionsAndSessionsAsserted": true
+    "capturedActionsAndSessionsAsserted": true,
+    "baselineManifestProjection": {
+      "recordedAt": "2026-11-11T21:56:56.419958+00:00",
+      "nativeInventoryFields": [
+        "fileCount",
+        "digest",
+        "files"
+      ],
+      "retainedMetadataInOriginalManifest": [
+        "schema",
+        "commit",
+        "published"
+      ],
+      "reason": "Capture compares exact native inventory shape; original prepared manifest also carries historical metadata. Only new prospective projection changed, before any execution; source hashes unchanged."
+    }
   }
 }
