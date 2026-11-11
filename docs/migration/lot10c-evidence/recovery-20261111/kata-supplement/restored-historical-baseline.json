@@ -1,0 +1,8 @@
+{
+  "path": "docs/migration/lot6a-evidence/integrated-final-02/kata-campaign.json.gz",
+  "sha256": "a3318ed5f7d742f63b5923f3e1e46b0d9cfff1d18e767b45c522d61aa354e455",
+  "bytes": 8253174,
+  "manifest": "docs/migration/lot6a-evidence/integrated-final-02/kata-campaign.json.gz.parts.json",
+  "parts": 10,
+  "restored": true
+}
