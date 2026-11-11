@@ -1,0 +1,162 @@
+{
+  "schema": "logos-engine.retained-input-reconstruction.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-11T00:54:14.994568+00:00",
+  "tool": {
+    "path": "scripts/evidence-byte-parts.py",
+    "bytes": 7210,
+    "sha256": "fcc651b3d533a87805378c126b1253d40f343ccc51108a7881c3db33bf1f8350"
+  },
+  "preparationPlan": {
+    "path": "docs/migration/lot5b-evidence/coordination/regression-scope-preparation.json",
+    "bytes": 96407,
+    "sha256": "d80a24e4fd758f06dd8bca6d313baabdf9ad9fb92f7d286fa3a48fa7e14e74d7"
+  },
+  "restoredOrVerified": [
+    {
+      "manifest": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz.parts.json",
+      "presentBefore": false,
+      "verification": {
+        "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz",
+        "sha256": "f3df06cff6d370874889f5183a77dd91ae585060c04ba052d0025cd2db9e3750",
+        "bytes": 2630905,
+        "manifest": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz.parts.json",
+        "parts": 3,
+        "restored": true
+      }
+    },
+    {
+      "manifest": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz.parts.json",
+      "presentBefore": false,
+      "verification": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz",
+        "sha256": "6a187286069287a89cedb60ac0f206e0702abae5d8df0dd2615bd43c1bb5c75a",
+        "bytes": 4349054,
+        "manifest": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz.parts.json",
+        "parts": 5,
+        "restored": true
+      }
+    },
+    {
+      "manifest": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz.parts.json",
+      "presentBefore": false,
+      "verification": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz",
+        "sha256": "379ce17151369af5ba39e205cc8b2882aa4e97a3dd8909b9c831a7b2b0ac7fb6",
+        "bytes": 1649205,
+        "manifest": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz.parts.json",
+        "parts": 2,
+        "restored": true
+      }
+    },
+    {
+      "manifest": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz.parts.json",
+      "presentBefore": false,
+      "verification": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz",
+        "sha256": "fe037e48df8dd3a7c302a5e85355b2b9555daa6d9d8aa56f7772fc363732726c",
+        "bytes": 8174480,
+        "manifest": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz.parts.json",
+        "parts": 10,
+        "restored": true
+      }
+    },
+    {
+      "manifest": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz.parts.json",
+      "presentBefore": false,
+      "verification": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz",
+        "sha256": "5de1bbc32db1a3dffdf5c350ef70ca90142007c6ebc7735f8b8c56e9fdfa00ba",
+        "bytes": 2585868,
+        "manifest": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz.parts.json",
+        "parts": 3,
+        "restored": true
+      }
+    },
+    {
+      "manifest": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.parts.json",
+      "presentBefore": false,
+      "verification": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz",
+        "sha256": "39a6e6551cf94a48842b154afdc2256dafd88fd93404e4776bd67b24d5a4796d",
+        "bytes": 10678168,
+        "manifest": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.parts.json",
+        "parts": 12,
+        "restored": true
+      }
+    },
+    {
+      "manifest": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.parts.json",
+      "presentBefore": false,
+      "verification": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz",
+        "sha256": "114906e80b2ff5817adeaa105fd4e84ea2b057d8393b202dc03f35248b350fc3",
+        "bytes": 13577757,
+        "manifest": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.parts.json",
+        "parts": 16,
+        "restored": true
+      }
+    },
+    {
+      "manifest": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz.parts.json",
+      "presentBefore": false,
+      "verification": {
+        "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz",
+        "sha256": "e473af537c042d76ce98f13b2cc9be495e7b4ac08ca443251df7804d542bdbbe",
+        "bytes": 3161161,
+        "manifest": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz.parts.json",
+        "parts": 4,
+        "restored": true
+      }
+    },
+    {
+      "manifest": "docs/migration/lot7b-evidence/integrated-final/craf-campaign.json.gz.parts.json",
+      "presentBefore": false,
+      "verification": {
+        "path": "docs/migration/lot7b-evidence/integrated-final/craf-campaign.json.gz",
+        "sha256": "78e86660961ed6d75707c001c021b8c223d205137d86288ac21d09a533b680f2",
+        "bytes": 12767727,
+        "manifest": "docs/migration/lot7b-evidence/integrated-final/craf-campaign.json.gz.parts.json",
+        "parts": 15,
+        "restored": true
+      }
+    },
+    {
+      "manifest": "tests/fixtures/v6-feedback-sequences-reference.json.gz.parts.json",
+      "presentBefore": false,
+      "verification": {
+        "path": "tests/fixtures/v6-feedback-sequences-reference.json.gz",
+        "sha256": "d1bf31b8fbf899aa9d85baa5fdaf9549b7c6f6a786fab43d7ac9f88af3231b6d",
+        "bytes": 1032946,
+        "manifest": "tests/fixtures/v6-feedback-sequences-reference.json.gz.parts.json",
+        "parts": 2,
+        "restored": true
+      }
+    },
+    {
+      "manifest": "tests/fixtures/v6-outline-service-reference.json.gz.parts.json",
+      "presentBefore": false,
+      "verification": {
+        "path": "tests/fixtures/v6-outline-service-reference.json.gz",
+        "sha256": "50ce0fdf885f79c66a168b25e4327e3f97b538d49924170da6a49ede7af1685b",
+        "bytes": 1211188,
+        "manifest": "tests/fixtures/v6-outline-service-reference.json.gz.parts.json",
+        "parts": 2,
+        "restored": true
+      }
+    },
+    {
+      "manifest": "tests/fixtures/v6-relative-arrangements-reference.json.gz.parts.json",
+      "presentBefore": false,
+      "verification": {
+        "path": "tests/fixtures/v6-relative-arrangements-reference.json.gz",
+        "sha256": "fa52436d34ee32e7fcf4e30f67122c5bede6823d0ff2cb34980cdc4885c3f933",
+        "bytes": 1099570,
+        "manifest": "tests/fixtures/v6-relative-arrangements-reference.json.gz.parts.json",
+        "parts": 2,
+        "restored": true
+      }
+    }
+  ],
+  "qualification": "Exact retained byte parts only; no agent, game, oracle, test or cost result executed. Missing unpublished4C ISOS input remains pending."
+}

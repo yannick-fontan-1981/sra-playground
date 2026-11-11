@@ -1,0 +1,66 @@
+{
+  "recordedAt": "2026-11-11T00:35:08.555292+00:00",
+  "status": "passed",
+  "checks": [
+    {
+      "path": "docs/migration/lot5b-evidence/prepare-cost-protocol.py",
+      "sha256": "c84a42e0c20efd1eeca100d3b033ba9262b7d393d88de82093c69f9fda7b1d5c",
+      "bytes": 28944,
+      "exitCode": 0,
+      "method": "Python AST parse only"
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/check-cost-static-inputs.py",
+      "sha256": "024c23aad5bae4b666cd2e47226b396a937a658a84a0d3cd927fcd1b9fa14cc1",
+      "bytes": 27635,
+      "exitCode": 0,
+      "method": "Python AST parse only"
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/review-owner-costs.py",
+      "sha256": "dd2524cbc52e51ed77a7393d4c4a044028f49c4a7fd6a36687534aeb1d8880e7",
+      "bytes": 70321,
+      "exitCode": 0,
+      "method": "Python AST parse only"
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/write-cost-results.py",
+      "sha256": "476076b107260a1617d1dad6e5043b29100e9d3af99465c80747e72279175bff",
+      "bytes": 41726,
+      "exitCode": 0,
+      "method": "Python AST parse only"
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/record-cost-log-transport.py",
+      "sha256": "df0039243dbfaa89351973e7c0d58b8edc0c8e28dd8895f10fe5ff1af272f05f",
+      "bytes": 3879,
+      "exitCode": 0,
+      "method": "Python AST parse only"
+    },
+    {
+      "path": "docs/migration/lot5b-evidence/consolidate-owner-costs.mjs",
+      "sha256": "cccc02b44a500292ac64a62379270e4003d3430f8ac0b68c81eb89609fffef95",
+      "bytes": 52981,
+      "exitCode": 0,
+      "method": "Node syntax check only",
+      "output": ""
+    },
+    {
+      "path": "scripts/prove-addressed-material-common-loop.mjs",
+      "sha256": "92bc3858afca6342b612bf7666dd2621072aa2179ed990f51af137276fd945c5",
+      "bytes": 19139,
+      "exitCode": 0,
+      "method": "Node syntax check only",
+      "output": ""
+    },
+    {
+      "path": "scripts/review-addressed-material-common-loop.mjs",
+      "sha256": "2ab7428f7cc8eb7169dd94c635f25e8d5635a69d86b1aff41522921951a5db98",
+      "bytes": 9054,
+      "exitCode": 0,
+      "method": "Node syntax check only",
+      "output": ""
+    }
+  ],
+  "qualification": "Syntax only; no runtime, oracle, measurement, capture or report logic executed."
+}

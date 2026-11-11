@@ -1,0 +1,57 @@
+{
+  "recordedAt": "2026-11-11T00:18:35.834179+00:00",
+  "status": "source_preparation_only_not_executed",
+  "derivedFrom": [
+    {
+      "path": "docs/migration/lot7b-evidence/prepare-cost-protocol.py",
+      "sha256": "482cfc5b6cf263705be9a84c798cb0d114099c6cc009f8247a22ce0ac8f32e17",
+      "bytes": 28789
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/consolidate-owner-costs.mjs",
+      "sha256": "2858a65766d624c467232da84aeed89ed529225bc8ea5478216a716d09097064",
+      "bytes": 52832
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/review-owner-costs.py",
+      "sha256": "0504bba2ad469298158f30394db95e5a8d69f4f363b50360236ddc970e18bf31",
+      "bytes": 70151
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/check-cost-static-inputs.py",
+      "sha256": "ab4426eda556decca32950f415483178d7459fab5c2065f37be107b6678f1b18",
+      "bytes": 27602
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/write-cost-results.py",
+      "sha256": "121c3446bd172495ffa2075dadf2c7ac400c7c4feadfe5a400f8b71b895368db",
+      "bytes": 41724
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/record-owner-source-inventory.mjs",
+      "sha256": "1b7891ca9b2a3627d7fc10a870861cfb3189d069dbffc30fa59175bb53899295",
+      "bytes": 12789
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/record-cost-log-transport.py",
+      "sha256": "b9083755fdc25fabaa2bb599552e90104b403bf22c91668912108ae294ef8b18",
+      "bytes": 3879
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/capture-cost-owner-graphs.mjs",
+      "sha256": "e4e2394eedb4aff41f312e5627d262666c38d4e84cbeebb7655ac9866e1e8cdc",
+      "bytes": 20995
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/qualify-cost-owner-graphs.mjs",
+      "sha256": "99c9ca930f6ca86bb54f7ef1d0e67dbb5af84365b827b9c881b956f6a519f0d7",
+      "bytes": 41436
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/initial-preparation-tools/finalize-owner-cost-contract.py",
+      "sha256": "d559cd3a89dc6a5aa4d5960c6f5f5387f21d70b93aa4ef02e64cac8907a19d59",
+      "bytes": 9695
+    }
+  ],
+  "qualification": "Initial5B source adaptation. No protocol declaration, execution, functional qualification, cost timing or acceptance is claimed."
+}
