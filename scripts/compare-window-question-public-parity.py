@@ -19,6 +19,7 @@ import argparse
 from collections import Counter, defaultdict
 from copy import deepcopy
 from datetime import datetime, timezone
+import faulthandler
 import fcntl
 import gzip
 import hashlib
@@ -28,6 +29,7 @@ from pathlib import Path
 import re
 import sys
 import tempfile
+import time
 from types import SimpleNamespace
 from unittest.mock import patch
 
@@ -46,6 +48,89 @@ PACKET_FIELDS = ('frame_rows', 'frame_packet', 'level', 'levels_completed', 'sta
 INTERVENTIONS = {'remove_edits': ['edits'], 'remove_portable': ['portable'],
                  'remove_attempts': ['attempts'], 'remove_all_methods': ['edits', 'portable']}
 sys.dont_write_bytecode = True
+_PROGRESS_STARTED_NS = None
+_PROGRESS_WRITE_FAILED = False
+_TRACEBACK_TIMER_STARTED = False
+_OBSERVABILITY_ERRORS = []
+_OBSERVABILITY_ERROR_COUNT = 0
+TRACEBACK_INTERVAL_SECONDS = 30
+MAX_OBSERVABILITY_ERRORS = 8
+
+
+def _observability_error(operation, error):
+    """A bounded, separate best-effort log; it cannot change source parity."""
+    global _OBSERVABILITY_ERROR_COUNT
+    try:
+        _OBSERVABILITY_ERROR_COUNT += 1
+        if len(_OBSERVABILITY_ERRORS) >= MAX_OBSERVABILITY_ERRORS:
+            return
+        try:
+            message = str(error)[:256]
+        except Exception:
+            message = '<exception text unavailable>'
+        row = {'operation': operation, 'errorType': type(error).__name__, 'message': message}
+        _OBSERVABILITY_ERRORS.append(row)
+        try:
+            print(json.dumps({'event': 'window_source_parity_observability_error', **row},
+                             allow_nan=False, separators=(',', ':')), file=sys.__stderr__, flush=True)
+        except Exception:
+            pass  # An unavailable diagnostic stream must not prevent the parity receipt.
+    except Exception:
+        pass
+
+
+def diagnostic_progress(stage, **fields):
+    """Small flushed progress records only; never an intermediate parity result."""
+    global _PROGRESS_WRITE_FAILED
+    if _PROGRESS_STARTED_NS is None or _PROGRESS_WRITE_FAILED:
+        return
+    try:
+        row = {'event': 'window_source_parity_progress', 'stage': stage,
+               'recordedAt': datetime.now(timezone.utc).isoformat(),
+               'elapsedSeconds': (time.monotonic_ns() - _PROGRESS_STARTED_NS) / 1_000_000_000,
+               **fields}
+        print(json.dumps(row, allow_nan=False, separators=(',', ':')), file=sys.stderr, flush=True)
+    except Exception as error:
+        _PROGRESS_WRITE_FAILED = True
+        _observability_error('progress_write', error)
+
+
+def start_diagnostics():
+    global _PROGRESS_STARTED_NS, _TRACEBACK_TIMER_STARTED
+    try:
+        _PROGRESS_STARTED_NS = time.monotonic_ns()
+    except Exception as error:
+        _observability_error('progress_clock_start', error)
+    try:
+        faulthandler.enable(file=sys.stderr, all_threads=True)
+    except Exception as error:
+        _observability_error('faulthandler_enable', error)
+    try:
+        faulthandler.dump_traceback_later(TRACEBACK_INTERVAL_SECONDS, repeat=True, file=sys.stderr)
+        _TRACEBACK_TIMER_STARTED = True
+    except Exception as error:
+        _observability_error('faulthandler_timer_start', error)
+    diagnostic_progress('observability_started', tracebackIntervalSeconds=TRACEBACK_INTERVAL_SECONDS,
+                        sourceProfilingUnchanged=True, progressIsNotAParityReceipt=True)
+
+
+def stop_diagnostics():
+    global _PROGRESS_STARTED_NS, _TRACEBACK_TIMER_STARTED
+    if _TRACEBACK_TIMER_STARTED:
+        try:
+            faulthandler.cancel_dump_traceback_later()
+        except Exception as error:
+            _observability_error('faulthandler_timer_stop', error)
+        _TRACEBACK_TIMER_STARTED = False
+    _PROGRESS_STARTED_NS = None
+    if _OBSERVABILITY_ERRORS:
+        try:
+            print(json.dumps({'event': 'window_source_parity_observability_error_summary',
+                              'errors': _OBSERVABILITY_ERRORS, 'totalErrors': _OBSERVABILITY_ERROR_COUNT,
+                              'sourceParityVerdictUnaffected': True}, allow_nan=False, separators=(',', ':')),
+                  file=sys.__stderr__, flush=True)
+        except Exception:
+            pass
 
 
 def require(condition, message):
@@ -207,19 +292,38 @@ def packet_hash(value):
                           ensure_ascii=False, separators=(',', ':')).encode())
 
 
-def compare_campaign(campaign, trace, family_class, observer, geometry):
+def compare_campaign(campaign, trace, family_class, observer, geometry, *, _checkpoint_scope=None):
     require(campaign.get('referenceCommit') == COMMIT, 'Unexpected campaign reference commit')
-    require(campaign.get('status') in ('passed', 'failed'), 'A complete report is required; a running journal is not a campaign')
+    if _checkpoint_scope is None:
+        require(campaign.get('status') in ('passed', 'failed'), 'A complete report is required; a running journal is not a campaign')
+    else:
+        # Only the distinct checkpoint verifier uses this explicit internal
+        # path, after verifying the wrapper, archive, checkpoint and journal.
+        # The normal CLI still refuses every running/partial campaign.
+        require(_checkpoint_scope.get('schema') == 'logos-engine.window-question-verified-checkpoint-scope.v1'
+                and _checkpoint_scope.get('completeCampaign') is False
+                and _checkpoint_scope.get('historicalExecutionVerified') is True,
+                'Partial history requires its separately verified historical execution scope')
+        require(campaign.get('status') == 'running' and 'final' not in campaign
+                and 'sourceUnchangedDuringRun' not in campaign,
+                'Never fabricate a final result or a sourceUnchangedDuringRun field for a checkpoint')
     require(campaign.get('windowCaptureErrors') == [], 'The passive Window collector reported an observation failure')
     calls, restores, prefixes, actions = (campaign.get(key) for key in
         ('windowSourceCalls', 'windowRestoreCalls', 'prefixes', 'actions'))
     require(isinstance(calls, list) and calls, 'Missing actual Window source calls')
     require(all(isinstance(value, list) for value in (restores, prefixes, actions)), 'Missing complete capture inventories')
-    require(campaign.get('final', {}).get('actions') == len(actions), 'Final action count differs from the complete action inventory')
-    require(isinstance(trace, dict) and trace.get('schema') == 'logos-engine.native-public-game-trace.v1'
-            and trace.get('game') == campaign.get('game') and trace.get('status') == campaign.get('status')
-            and trace.get('sourceDigest') == campaign.get('source', {}).get('digest'), 'The public trace is not bound to this campaign')
-    packets = trace.get('packets')
+    diagnostic_progress('comparison_started', sourceCalls=len(calls), nativeRestores=len(restores),
+                        sealedPrefixes=len(prefixes), physicalActions=len(actions))
+    if _checkpoint_scope is None:
+        require(campaign.get('final', {}).get('actions') == len(actions), 'Final action count differs from the complete action inventory')
+        require(isinstance(trace, dict) and trace.get('schema') == 'logos-engine.native-public-game-trace.v1'
+                and trace.get('game') == campaign.get('game') and trace.get('status') == campaign.get('status')
+                and trace.get('sourceDigest') == campaign.get('source', {}).get('digest'), 'The public trace is not bound to this campaign')
+        packets = trace.get('packets')
+    else:
+        require(trace is None and _checkpoint_scope.get('sealedActions') == len(actions),
+                'Partial comparison must use only the complete journal prefix declared by its verifier')
+        packets = _checkpoint_scope.get('publicJournalPrefix')
     require(isinstance(packets, list) and len(packets) == len(actions) + 1 and packets[0].get('command') is None,
             'The complete initial packet and every actual public return are required')
     for ordinal, item in enumerate(packets):
@@ -243,7 +347,8 @@ def compare_campaign(campaign, trace, family_class, observer, geometry):
         'differences': [], 'stop': None,
         'publicTraceBinding': {'completePackets': len(packets), 'initialPacketSha256': packet_hash(packets[0]['packet']),
             'nativeFramesUsedToInventTrace': False,
-            'qualification': 'The separately retained complete public host trace is compared to every source observation and acquired packet; no initial animation packet is inferred.'},
+        'qualification': ('The separately retained complete public host trace is compared to every source observation and acquired packet; no initial animation packet is inferred.'
+            if _checkpoint_scope is None else 'Only the declared initial packet and sealed-action prefix of the actual retained public journal are compared. Later observed returns remain outside acquired source parity; no final trace or result is fabricated.')},
         'eventFactCaptureScope': {'observedFields': ['episode', 'key', 'value', 'evidence', 'revision'],
             'episodeObservedInEventCapture': True, 'sourceEpisode': EPISODE,
             'qualification': 'The complete reasoning event fact and retained window_question_state fact are compared, including their actual episode and evidence/revision metadata.'},
@@ -276,6 +381,7 @@ def compare_campaign(campaign, trace, family_class, observer, geometry):
                     and row.get('sourceDepthAfter') == 0, 'Native restoration intersects an unfinished source call')
             require(row.get('completion') == 'returned' and row.get('returnMode') == 'sync'
                     and not row.get('error') and row.get('observationErrors') == [], 'Native restore did not complete cleanly')
+            diagnostic_progress('native_restore_started', restoreIndex=next_restore, sourceCursor=cursor)
             before = state(family.state())
             delta = compare(before, state(row.get('sourceBefore')), f'restores[{next_restore}].sourceBefore')
             delta += compare(before, checkpoint(row.get('nativeInput')), f'restores[{next_restore}].nativeInput')
@@ -287,6 +393,7 @@ def compare_campaign(campaign, trace, family_class, observer, geometry):
                 'stateOrigin': 'this cold original owner only', 'nativeStateSeed': False,
                 'sourceBeforeDigest': digest(before), 'sourceAfterDigest': digest(after), 'differences': len(delta), 'passed': not delta})
             snapshots[cursor] = deepcopy(after)
+            diagnostic_progress('native_restore_completed', restoreIndex=next_restore, differences=len(delta))
             next_restore += 1
 
     def proposal_core(value, where, selected=False):
@@ -367,6 +474,7 @@ def compare_campaign(campaign, trace, family_class, observer, geometry):
         return deepcopy(measured)
 
     def ablations(index, args, before, actual, after):
+        diagnostic_progress('restoration_proposal_started', callIndex=index)
         restored = family_class()
         restored.restore(deepcopy(before))
         restored_value = plain(restored.propose(*deepcopy(args)))
@@ -374,7 +482,9 @@ def compare_campaign(campaign, trace, family_class, observer, geometry):
         delta += compare(after, state(restored.state()), f'calls[{index}].restoration.state')
         report['restorationChecks'].append({'callIndex': index, 'nativeStateSeed': False,
             'stateOrigin': 'independent original replay only', 'differences': len(delta), 'passed': not delta})
+        diagnostic_progress('restoration_proposal_completed', callIndex=index, differences=len(delta))
         for name, fields in INTERVENTIONS.items():
+            diagnostic_progress('ablation_started', callIndex=index, intervention=name)
             modified = deepcopy(before)
             removed = {field: modified[field] for field in fields}
             for field in fields:
@@ -402,6 +512,8 @@ def compare_campaign(campaign, trace, family_class, observer, geometry):
             except Exception as error:
                 row.update(executed=False, error=error_value(error), actionOrRefusalChanged=None)
             report['ablations'].append(row)
+            diagnostic_progress('ablation_completed', callIndex=index, intervention=name,
+                                executed=row['executed'], interventionApplied=row['interventionApplied'])
 
     def native_adaptation(index, captured, args, source_value, source_error, before, after):
         method, receipt = captured['method'], captured.get('nativeAdaptation')
@@ -464,6 +576,8 @@ def compare_campaign(campaign, trace, family_class, observer, geometry):
 
     for index, captured in enumerate(calls):
         try:
+            diagnostic_progress('source_call_started', callIndex=index,
+                                method=captured.get('method') if isinstance(captured, dict) else None)
             replay_restores(index)
             require(isinstance(captured, dict) and captured.get('index') == index and captured.get('stream') == 'source',
                     'Source call indices must be complete and ordered from zero')
@@ -489,10 +603,13 @@ def compare_campaign(campaign, trace, family_class, observer, geometry):
                 if args[5] is not None:
                     args[5], original_proposal_index, original_snapshot = own_proposal(args[5], f'calls[{index}].proposal')
             source_value, source_error = None, None
+            diagnostic_progress('source_invocation_started', callIndex=index, method=method)
             try:
                 source_value = getattr(family, 'record' if method == 'recordSource' else method)(*args)
             except Exception as error:
                 source_error = error_value(error)
+            diagnostic_progress('source_invocation_completed', callIndex=index, method=method,
+                                returned=source_error is None)
             after = state(family.state())
             delta += compare(after, state(captured.get('sourceAfter')), f'calls[{index}].sourceAfter')
             adapted = captured.get('nativeAdaptation') is not None
@@ -549,8 +666,11 @@ def compare_campaign(campaign, trace, family_class, observer, geometry):
                 'sourceBeforeDigest': digest(before), 'sourceAfterDigest': digest(after),
                 'sourceResultDigest': digest(source_value), 'nativeResultDigest': digest(captured.get('result')),
                 'sourceError': source_error, 'differences': len(delta), 'passed': not delta})
+            diagnostic_progress('source_call_completed', callIndex=index, method=method,
+                                differences=len(delta), ablationsCompleted=len(report['ablations']))
         except Exception as error:
             report['stop'] = {'callIndex': index, 'error': error_value(error)}
+            diagnostic_progress('source_call_stopped', callIndex=index, errorType=type(error).__name__)
             break
     if report['stop'] is None:
         try:
@@ -562,6 +682,7 @@ def compare_campaign(campaign, trace, family_class, observer, geometry):
     previous_cursor, previous_restore, records_covered, action_cursor = 0, 0, set(), 0
     for prefix_index, prefix in enumerate(prefixes):
         try:
+            diagnostic_progress('sealed_prefix_started', prefixIndex=prefix_index)
             retained = prefix.get('windowQuestion')
             require(isinstance(retained, dict) and retained.get('stateNode') == OWNER
                     and retained.get('checkpointFormat') == FORMAT, 'Missing actual sealed Window checkpoint')
@@ -634,8 +755,11 @@ def compare_campaign(campaign, trace, family_class, observer, geometry):
                 'recordsCovered': [row['index'] for row in interval_records], 'acquiredActions': len(interval_records),
                 'sourceStateDigest': digest(snapshots[cursor]), 'differences': len(delta), 'passed': not delta})
             previous_cursor, previous_restore = cursor, restore_cursor
+            diagnostic_progress('sealed_prefix_completed', prefixIndex=prefix_index,
+                                differences=len(delta), physicalActionsCompared=action_cursor)
         except Exception as error:
             report['prefixChecks'].append({'prefixIndex': prefix_index, 'passed': False, 'error': error_value(error)})
+            diagnostic_progress('sealed_prefix_stopped', prefixIndex=prefix_index, errorType=type(error).__name__)
             break
     source_proposals = [row for row in report['callChecks'] if row['method'] == 'propose' and not row['nativeAdaptation']]
     ablation_errors = sum(not row['executed'] for row in report['ablations'])
@@ -666,6 +790,14 @@ def compare_campaign(campaign, trace, family_class, observer, geometry):
         and report['ablationCounts']['expected'] == report['ablationCounts']['total']
     report['exactOriginalReturnParityPassed'] = report['componentComparisonPassed'] and not report['nativeAdaptations']
     report['componentParityPassed'] = report['exactOriginalReturnParityPassed']
+    if _checkpoint_scope is not None:
+        report['comparisonScope'] = {'kind': 'sealed_checkpoint_prefix_only', 'completeCampaign': False,
+            'sealedActions': len(actions), 'completePublicPacketsCompared': len(packets),
+            'unsealedPublicReturnsComparedAsAcquisitions': False,
+            'qualification': 'Every parity/count field in this replay is limited to the verified sealed checkpoint prefix. It is not a terminal campaign or whole-journal acquisition claim.'}
+    diagnostic_progress('comparison_completed', componentComparisonPassed=report['componentComparisonPassed'],
+                        sourceCallsCompared=len(report['callChecks']), nativeRestoresCompared=next_restore,
+                        ablationsCompleted=len(report['ablations']), physicalActionsCompared=action_cursor)
     return report
 
 
@@ -740,9 +872,13 @@ def main():
             report['bytecodeIsolation'] = {'dontWriteBytecode': True,
                 'freshPrefixEmptyBefore': not any(Path(cache).rglob('*')), 'existingSourceBytecodeBefore': existing_bytecode()}
             try:
+                diagnostic_progress('input_fingerprints_started')
                 report['inputs'] = {key: fingerprint(path) for key, path in paths.items()}
+                diagnostic_progress('original_inventory_before_started')
                 report['sourceBefore'] = verify_originals()
+                diagnostic_progress('campaign_and_trace_read_started')
                 campaign, trace = read_json(campaign_path), read_json(trace_path)
+                diagnostic_progress('campaign_and_trace_read_completed')
                 report.update(game=campaign.get('game'), campaignSchema=campaign.get('schema'), campaignStatus=campaign.get('status'),
                     campaignFailure=campaign.get('failure'), campaignFinal=campaign.get('final'), nativeSource=campaign.get('source'))
                 report['campaignNativeBinding'] = verify_campaign_native(campaign)
@@ -768,13 +904,16 @@ def main():
                 report['sourceHashes'] = {path.relative_to(SOURCE).as_posix(): fingerprint(path)['sha256'] for path in sorted(imported)}
             except Exception as error:
                 report['error'] = error_value(error)
+                diagnostic_progress('comparison_error', errorType=type(error).__name__)
             try:
+                diagnostic_progress('original_inventory_after_started')
                 report['sourceAfter'] = verify_originals()
                 report['originalsUnchanged'] = report.get('sourceBefore') == report['sourceAfter']
             except Exception as error:
                 report['sourceVerificationError'] = error_value(error)
                 report['originalsUnchanged'] = False
             try:
+                diagnostic_progress('input_fingerprints_after_started')
                 report['inputsAfter'] = {key: fingerprint(path) for key, path in paths.items()}
                 report['inputsUnchanged'] = report['inputs'] == report['inputsAfter']
                 if report.get('campaignNativeBinding'):
@@ -796,7 +935,9 @@ def main():
             and report.get('inputsUnchanged') and report.get('campaignNativeBindingUnchanged') \
             and report['bytecodeIsolation']['passed'] and replay.get('componentComparisonPassed') and executed else 'failed'
         report['completedAt'] = datetime.now(timezone.utc).isoformat()
+        diagnostic_progress('receipt_write_started', status=report['status'])
         output_fingerprint = write_evidence(output, report)
+        diagnostic_progress('receipt_write_completed', status=report['status'])
     print(json.dumps({'status': report['status'], 'output': output_fingerprint,
         'counts': replay.get('counts'), 'ablations': replay.get('ablationCounts'),
         'exactOriginalReturnParityPassed': replay.get('exactOriginalReturnParityPassed'),
@@ -806,4 +947,8 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    start_diagnostics()
+    try:
+        main()
+    finally:
+        stop_diagnostics()

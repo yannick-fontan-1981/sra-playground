@@ -1,0 +1,471 @@
+{
+  "schema": "logos-engine.lot10b.stream-evidence-json-check.v1",
+  "status": "passed",
+  "startedAt": "2026-11-11T13:32:40.807Z",
+  "gameHostRun": false,
+  "nativeAgentRun": false,
+  "originalComponentRun": false,
+  "harnessImported": false,
+  "nodeVersion": "v24.22.1",
+  "execArgv": [
+    "--max-old-space-size=1536",
+    "--expose-gc"
+  ],
+  "pid": 4,
+  "byteComparisonMethod": "Direct positional comparison against every retained original byte, including the trailing newline, followed independently by gzip/gunzip output comparison against the same original file.",
+  "qualification": "One serialization traversal of one retained partial checkpoint. This establishes neither game success, the cause of SIGKILL, total campaign capture cost nor a bound on production process RSS. The parent diagnostic clock owns the complete interval and timeout accounting.",
+  "started": {
+    "event": "writer_diagnostic_started",
+    "recordedAt": "2026-11-11T13:32:40.808Z",
+    "elapsedMs": 0.5392930000000007,
+    "memory": {
+      "rss": 38666240,
+      "heapTotal": 12898304,
+      "heapUsed": 8383464,
+      "external": 4081836,
+      "arrayBuffers": 146615,
+      "processLifetimeMaxRssBytes": 38666240
+    }
+  },
+  "inputsBefore": {
+    "verifier": {
+      "path": "docs/migration/lot10b-evidence/check-stream-evidence-json.mjs",
+      "bytes": 19528,
+      "sha256": "0511eb7eebe0313386db269f2cbee2f019d8e3f2a7397728fcdd5500162733eb"
+    },
+    "serializer": {
+      "path": "docs/migration/lot10b-evidence/stream-evidence-json.mjs",
+      "bytes": 6601,
+      "sha256": "96ac2ddbaac8cc62126f6674301b2362301895f44ce90e5dbd1dec9fb6fc87ca"
+    },
+    "runnerReadOnly": {
+      "path": "docs/migration/lot10b-evidence/run-hpdl-campaign.mjs",
+      "bytes": 8285,
+      "sha256": "ddb3bf22034b8210303b487c9d0eed9bbef5d5f864e0dc184907b6c2b9538799"
+    },
+    "checkpoint": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json",
+      "bytes": 177532943,
+      "sha256": "871f8cd0df7c74f0ce54bbe046f0e54f16d025686adf4fc7bbe8531f71c2fef0"
+    },
+    "executionReceipt": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/execution-hpdl.json",
+      "bytes": 10116,
+      "sha256": "f3fc927792b2574c32dd76aaa996b503b33925923051bf207a90f1cac4736e6f"
+    }
+  },
+  "smallCases": [
+    {
+      "name": "empty_values",
+      "trailingNewline": false,
+      "bytes": 76,
+      "iteratorEqual": true,
+      "synchronousFileEqual": true
+    },
+    {
+      "name": "empty_values",
+      "trailingNewline": true,
+      "bytes": 77,
+      "iteratorEqual": true,
+      "synchronousFileEqual": true
+    },
+    {
+      "name": "property_order",
+      "trailingNewline": false,
+      "bytes": 48,
+      "iteratorEqual": true,
+      "synchronousFileEqual": true
+    },
+    {
+      "name": "property_order",
+      "trailingNewline": true,
+      "bytes": 49,
+      "iteratorEqual": true,
+      "synchronousFileEqual": true
+    },
+    {
+      "name": "omissions_and_sparse_arrays",
+      "trailingNewline": false,
+      "bytes": 37,
+      "iteratorEqual": true,
+      "synchronousFileEqual": true
+    },
+    {
+      "name": "omissions_and_sparse_arrays",
+      "trailingNewline": true,
+      "bytes": 38,
+      "iteratorEqual": true,
+      "synchronousFileEqual": true
+    },
+    {
+      "name": "numbers",
+      "trailingNewline": false,
+      "bytes": 84,
+      "iteratorEqual": true,
+      "synchronousFileEqual": true
+    },
+    {
+      "name": "numbers",
+      "trailingNewline": true,
+      "bytes": 85,
+      "iteratorEqual": true,
+      "synchronousFileEqual": true
+    },
+    {
+      "name": "unicode_and_escaping",
+      "trailingNewline": false,
+      "bytes": 94175,
+      "iteratorEqual": true,
+      "synchronousFileEqual": true
+    },
+    {
+      "name": "unicode_and_escaping",
+      "trailingNewline": true,
+      "bytes": 94176,
+      "iteratorEqual": true,
+      "synchronousFileEqual": true
+    },
+    {
+      "name": "buffer_boundaries",
+      "trailingNewline": false,
+      "bytes": 66410,
+      "iteratorEqual": true,
+      "synchronousFileEqual": true
+    },
+    {
+      "name": "buffer_boundaries",
+      "trailingNewline": true,
+      "bytes": 66411,
+      "iteratorEqual": true,
+      "synchronousFileEqual": true
+    },
+    {
+      "name": "shared_acyclic_reference",
+      "trailingNewline": false,
+      "bytes": 56,
+      "iteratorEqual": true,
+      "synchronousFileEqual": true
+    },
+    {
+      "name": "shared_acyclic_reference",
+      "trailingNewline": true,
+      "bytes": 57,
+      "iteratorEqual": true,
+      "synchronousFileEqual": true
+    },
+    {
+      "name": "to_json_keys_and_function",
+      "trailingNewline": false,
+      "bytes": 39,
+      "iteratorEqual": true,
+      "synchronousFileEqual": true
+    },
+    {
+      "name": "to_json_keys_and_function",
+      "trailingNewline": true,
+      "bytes": 40,
+      "iteratorEqual": true,
+      "synchronousFileEqual": true
+    },
+    {
+      "name": "getter_and_key_snapshot",
+      "trailingNewline": false,
+      "bytes": 9,
+      "iteratorEqual": true,
+      "synchronousFileEqual": true
+    },
+    {
+      "name": "getter_and_key_snapshot",
+      "trailingNewline": true,
+      "bytes": 10,
+      "iteratorEqual": true,
+      "synchronousFileEqual": true
+    },
+    {
+      "name": "native_wrappers",
+      "trailingNewline": false,
+      "bytes": 65,
+      "iteratorEqual": true,
+      "synchronousFileEqual": true
+    },
+    {
+      "name": "native_wrappers",
+      "trailingNewline": true,
+      "bytes": 66,
+      "iteratorEqual": true,
+      "synchronousFileEqual": true
+    },
+    {
+      "name": "root_undefined",
+      "trailingNewline": false,
+      "bytes": 0,
+      "iteratorEqual": true,
+      "synchronousFileEqual": true
+    },
+    {
+      "name": "root_undefined",
+      "trailingNewline": true,
+      "bytes": 0,
+      "iteratorEqual": true,
+      "synchronousFileEqual": true
+    },
+    {
+      "name": "root_symbol",
+      "trailingNewline": false,
+      "bytes": 0,
+      "iteratorEqual": true,
+      "synchronousFileEqual": true
+    },
+    {
+      "name": "root_symbol",
+      "trailingNewline": true,
+      "bytes": 0,
+      "iteratorEqual": true,
+      "synchronousFileEqual": true
+    },
+    {
+      "name": "root_function",
+      "trailingNewline": false,
+      "bytes": 0,
+      "iteratorEqual": true,
+      "synchronousFileEqual": true
+    },
+    {
+      "name": "root_function",
+      "trailingNewline": true,
+      "bytes": 0,
+      "iteratorEqual": true,
+      "synchronousFileEqual": true
+    },
+    {
+      "name": "native_raw_json",
+      "trailingNewline": false,
+      "bytes": 28,
+      "iteratorEqual": true,
+      "synchronousFileEqual": true
+    },
+    {
+      "name": "native_raw_json",
+      "trailingNewline": true,
+      "bytes": 29,
+      "iteratorEqual": true,
+      "synchronousFileEqual": true
+    }
+  ],
+  "errorCases": [
+    {
+      "name": "ancestor_cycle",
+      "mode": "iterator",
+      "originalErrorPropagated": true,
+      "errorName": "TypeError"
+    },
+    {
+      "name": "ancestor_cycle",
+      "mode": "sync_writer",
+      "originalErrorPropagated": true,
+      "errorName": "TypeError"
+    },
+    {
+      "name": "array_cycle",
+      "mode": "iterator",
+      "originalErrorPropagated": true,
+      "errorName": "TypeError"
+    },
+    {
+      "name": "array_cycle",
+      "mode": "sync_writer",
+      "originalErrorPropagated": true,
+      "errorName": "TypeError"
+    },
+    {
+      "name": "bigint",
+      "mode": "iterator",
+      "originalErrorPropagated": true,
+      "errorName": "TypeError"
+    },
+    {
+      "name": "bigint",
+      "mode": "sync_writer",
+      "originalErrorPropagated": true,
+      "errorName": "TypeError"
+    },
+    {
+      "name": "bigint_to_json_once",
+      "mode": "iterator",
+      "originalErrorPropagated": true,
+      "errorName": "TypeError"
+    },
+    {
+      "name": "bigint_to_json_once",
+      "mode": "sync_writer",
+      "originalErrorPropagated": true,
+      "errorName": "TypeError"
+    },
+    {
+      "name": "getter_error_identity",
+      "mode": "iterator",
+      "originalErrorPropagated": true,
+      "errorName": "Error"
+    },
+    {
+      "name": "getter_error_identity",
+      "mode": "sync_writer",
+      "originalErrorPropagated": true,
+      "errorName": "Error"
+    },
+    {
+      "name": "to_json_error_identity",
+      "mode": "iterator",
+      "originalErrorPropagated": true,
+      "errorName": "Error"
+    },
+    {
+      "name": "to_json_error_identity",
+      "mode": "sync_writer",
+      "originalErrorPropagated": true,
+      "errorName": "Error"
+    },
+    {
+      "name": "readonly_descriptor",
+      "mode": "sync_writer",
+      "originalErrorPropagated": true,
+      "errorCode": "EBADF"
+    }
+  ],
+  "afterSmallCases": {
+    "event": "small_cases_completed",
+    "recordedAt": "2026-11-11T13:32:40.967Z",
+    "elapsedMs": 158.75041600000003,
+    "memory": {
+      "rss": 47742976,
+      "heapTotal": 13684736,
+      "heapUsed": 8302976,
+      "external": 4244420,
+      "arrayBuffers": 277687,
+      "processLifetimeMaxRssBytes": 47960064
+    },
+    "cases": 28,
+    "errors": 13
+  },
+  "parseElapsedMs": 4478.842253,
+  "partialInput": {
+    "sequence": 47,
+    "recordedAt": "2026-11-11T12:39:12.069Z",
+    "actions": 47,
+    "prefixes": 47,
+    "campaignStatus": "running",
+    "finalFieldsAdded": false
+  },
+  "afterParse": {
+    "event": "checkpoint_parsed",
+    "recordedAt": "2026-11-11T13:32:45.446Z",
+    "elapsedMs": 4637.9725020000005,
+    "memory": {
+      "rss": 1317937152,
+      "heapTotal": 1266315264,
+      "heapUsed": 1189766048,
+      "external": 4178848,
+      "arrayBuffers": 212115,
+      "processLifetimeMaxRssBytes": 1317937152
+    }
+  },
+  "beforeSerialization": {
+    "event": "checkpoint_before_serialization",
+    "recordedAt": "2026-11-11T13:32:45.692Z",
+    "elapsedMs": 4884.198573000001,
+    "memory": {
+      "rss": 965722112,
+      "heapTotal": 970248192,
+      "heapUsed": 834620552,
+      "external": 4178848,
+      "arrayBuffers": 212115,
+      "processLifetimeMaxRssBytes": 1320558592
+    },
+    "diagnosticGcBeforeTraversal": true
+  },
+  "bytesComparisons": {
+    "direct": {
+      "equalByteForByte": true,
+      "bytes": 177532943,
+      "exactEof": true,
+      "chunks": 10840,
+      "maximumChunkBytes": 16410,
+      "originalSha256": "871f8cd0df7c74f0ce54bbe046f0e54f16d025686adf4fc7bbe8531f71c2fef0"
+    },
+    "gzipRoundTrip": {
+      "equalByteForByte": true,
+      "bytes": 177532943,
+      "exactEof": true,
+      "chunks": 13143,
+      "maximumChunkBytes": 16384,
+      "originalSha256": "871f8cd0df7c74f0ce54bbe046f0e54f16d025686adf4fc7bbe8531f71c2fef0"
+    },
+    "gzipAndGunzipCompleted": true,
+    "compressedBytes": 21263269,
+    "generatorTraversals": 1,
+    "hugeOutputCollected": false,
+    "hugeOutputFileCreated": false,
+    "serializationAndRoundTripElapsedMs": 15607.903716
+  },
+  "afterSerialization": {
+    "event": "checkpoint_bytes_verified",
+    "recordedAt": "2026-11-11T13:33:01.301Z",
+    "elapsedMs": 20493.072523,
+    "memory": {
+      "rss": 1027739648,
+      "heapTotal": 971558912,
+      "heapUsed": 855410152,
+      "external": 7521200,
+      "arrayBuffers": 3554467,
+      "processLifetimeMaxRssBytes": 1320558592
+    },
+    "bytes": 177532943,
+    "compressedBytes": 21263269
+  },
+  "originalFileStatBeforeAndAfter": {
+    "dev": "27",
+    "ino": "3016082",
+    "size": "177532943",
+    "mtimeNs": "1794400755323848044",
+    "ctimeNs": "1794400755399850076"
+  },
+  "inputsAfter": {
+    "verifier": {
+      "path": "docs/migration/lot10b-evidence/check-stream-evidence-json.mjs",
+      "bytes": 19528,
+      "sha256": "0511eb7eebe0313386db269f2cbee2f019d8e3f2a7397728fcdd5500162733eb"
+    },
+    "serializer": {
+      "path": "docs/migration/lot10b-evidence/stream-evidence-json.mjs",
+      "bytes": 6601,
+      "sha256": "96ac2ddbaac8cc62126f6674301b2362301895f44ce90e5dbd1dec9fb6fc87ca"
+    },
+    "runnerReadOnly": {
+      "path": "docs/migration/lot10b-evidence/run-hpdl-campaign.mjs",
+      "bytes": 8285,
+      "sha256": "ddb3bf22034b8210303b487c9d0eed9bbef5d5f864e0dc184907b6c2b9538799"
+    },
+    "checkpoint": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json",
+      "bytes": 177532943,
+      "sha256": "871f8cd0df7c74f0ce54bbe046f0e54f16d025686adf4fc7bbe8531f71c2fef0"
+    },
+    "executionReceipt": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/execution-hpdl.json",
+      "bytes": 10116,
+      "sha256": "f3fc927792b2574c32dd76aaa996b503b33925923051bf207a90f1cac4736e6f"
+    }
+  },
+  "inputsUnchanged": true,
+  "completedAt": "2026-11-11T13:33:01.440Z",
+  "elapsedMsInsideChild": 20632.544659,
+  "finalMemory": {
+    "rss": 1027739648,
+    "heapTotal": 164679680,
+    "heapUsed": 8515872,
+    "external": 4703152,
+    "arrayBuffers": 736419,
+    "processLifetimeMaxRssBytes": 1320558592
+  },
+  "memoryQualification": "Before/after samples and lifetime process max RSS include parsing and this offline diagnostic. They are not a production per-checkpoint peak or an explanation of the earlier SIGKILL. Explicit GC is confined to this diagnostic; production allocation is unchanged."
+}

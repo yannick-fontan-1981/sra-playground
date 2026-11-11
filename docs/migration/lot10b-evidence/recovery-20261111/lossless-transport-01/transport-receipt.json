@@ -1,0 +1,584 @@
+{
+  "schema": "logos-engine.lot10b.lossless-evidence-transport.v1",
+  "status": "passed",
+  "startedAt": "2026-11-11T14:30:53.189139+00:00",
+  "finishedAt": "2026-11-11T14:30:53.827699+00:00",
+  "elapsedSeconds": 0.638559466,
+  "performanceLock": {
+    "path": "/workspace/shared/sra-coordination/performance.lock",
+    "mode": "shared"
+  },
+  "scope": "Lossless byte transport only for completed retained evidence. Historical failures and incomplete artifacts keep their exact bytes and status.",
+  "historicalExecutionReceipt": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/execution-hpdl.json",
+    "sha256": "f3fc927792b2574c32dd76aaa996b503b33925923051bf207a90f1cac4736e6f",
+    "bytes": 10116
+  },
+  "packExecution": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/lossless-transport-01/pack-execution.json",
+    "sha256": "a93588e26c580c9d4b1b65dd3c8f888e9b5d97662bca95be8269a50a3e3b2073",
+    "bytes": 931
+  },
+  "packOutput": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/lossless-transport-01/pack-output.json",
+    "sha256": "b05b3f4ea491de85390008ac16f1c9f0993415d17355bed34d47bdb3db4ff359",
+    "bytes": 729
+  },
+  "helpersUnchanged": [
+    {
+      "path": "scripts/evidence-byte-parts.py",
+      "sha256": "fcc651b3d533a87805378c126b1253d40f343ccc51108a7881c3db33bf1f8350",
+      "bytes": 7210
+    },
+    {
+      "path": "scripts/restore-v53-evidence.py",
+      "sha256": "e0494dda3dd445e0db0bf04cccac27ad8d19c917ccd2b4b10c068df6faf7c23d",
+      "bytes": 3361
+    }
+  ],
+  "rawGzipMappings": [
+    {
+      "original": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-live.log",
+        "sha256": "ce8537a941808ac6aed22268f956f2ef195343d04412b684d5c2f3900f98a038",
+        "bytes": 159375
+      },
+      "compressed": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-live.log.gz",
+        "sha256": "d3214a5c9a1750daf9e058ad00c1018ffb4766458e4e94d3862b35f6d3fb4289",
+        "bytes": 6468
+      },
+      "exactByteComparison": true,
+      "exactEof": true,
+      "gzipCompleted": true,
+      "restoredSha256": "ce8537a941808ac6aed22268f956f2ef195343d04412b684d5c2f3900f98a038",
+      "restoredBytes": 159375,
+      "blockBytes": 1048576
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-actual-public-journal.jsonl",
+        "sha256": "bc5e5d58c05f9baac6b1b5b34c80e45d7379e50f45cd5e1c2b78298ba34595ec",
+        "bytes": 4075597
+      },
+      "compressed": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-actual-public-journal.jsonl.gz",
+        "sha256": "d3a9535e50a66132e37bb3387bdc2c4c45cd0bd000c2a7bb2b819fa2e7de4a13",
+        "bytes": 38720
+      },
+      "exactByteComparison": true,
+      "exactEof": true,
+      "gzipCompleted": true,
+      "restoredSha256": "bc5e5d58c05f9baac6b1b5b34c80e45d7379e50f45cd5e1c2b78298ba34595ec",
+      "restoredBytes": 4075597,
+      "blockBytes": 1048576
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoints.jsonl",
+        "sha256": "432209ff14163ec6673d3426ee9e5645f8e173d15a26969c63e251dd1ee1b9b5",
+        "bytes": 9215
+      },
+      "compressed": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoints.jsonl.gz",
+        "sha256": "3aee66bf1bc0f7cd30f0bb689e5f77d76c4b95c6f9d4772fd2b76b8e50dd7b69",
+        "bytes": 1052
+      },
+      "exactByteComparison": true,
+      "exactEof": true,
+      "gzipCompleted": true,
+      "restoredSha256": "432209ff14163ec6673d3426ee9e5645f8e173d15a26969c63e251dd1ee1b9b5",
+      "restoredBytes": 9215,
+      "blockBytes": 1048576
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json",
+        "sha256": "871f8cd0df7c74f0ce54bbe046f0e54f16d025686adf4fc7bbe8531f71c2fef0",
+        "bytes": 177532943
+      },
+      "compressed": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json.gz",
+        "sha256": "928a2031fd48f98a87d0ccbb7fd21a447106e65cccaca50b8628781e4cb97348",
+        "bytes": 20775890
+      },
+      "exactByteComparison": true,
+      "exactEof": true,
+      "gzipCompleted": true,
+      "restoredSha256": "871f8cd0df7c74f0ce54bbe046f0e54f16d025686adf4fc7bbe8531f71c2fef0",
+      "restoredBytes": 177532943,
+      "blockBytes": 1048576
+    }
+  ],
+  "jsonGzipPartTransports": [
+    {
+      "original": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json.gz",
+        "sha256": "928a2031fd48f98a87d0ccbb7fd21a447106e65cccaca50b8628781e4cb97348",
+        "bytes": 20775890
+      },
+      "partsManifest": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json.gz.parts.json",
+        "sha256": "8be8ba7801f4d441970c1c6527dcfe3aff6a97b5e25329335318566f257b9235",
+        "bytes": 4375
+      },
+      "parts": [
+        {
+          "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json.gz.part000",
+          "sha256": "fc985bbdcedda0fbc99cb7a20257d50df26dfb9f722da451f270862972dff42e",
+          "bytes": 900000
+        },
+        {
+          "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json.gz.part001",
+          "sha256": "f83496fe00b089d1a7f4f9244d5196633466618daa831ae7cd7d902380f0b6a8",
+          "bytes": 900000
+        },
+        {
+          "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json.gz.part002",
+          "sha256": "c856294360e03329962c159a070eb9d244d767f34a2f507a601f46f067dc1f04",
+          "bytes": 900000
+        },
+        {
+          "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json.gz.part003",
+          "sha256": "1100c53dfc60fd3aa3e5f542af34d0238ceb8fce7168cb1ca357d1c4ef17a22a",
+          "bytes": 900000
+        },
+        {
+          "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json.gz.part004",
+          "sha256": "3e2a95d5a363c3df4fd3f0300cd4c28aedeed6521c396e2dce37c8dbdd9c165c",
+          "bytes": 900000
+        },
+        {
+          "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json.gz.part005",
+          "sha256": "4e88acd85704c5fa531c179a204fa25d8f44a74ea9d446ef05ad0ce3fb701205",
+          "bytes": 900000
+        },
+        {
+          "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json.gz.part006",
+          "sha256": "996d8d892fde28e7e744c2a99e18a73868a7efe6657388d454d5312158535f2f",
+          "bytes": 900000
+        },
+        {
+          "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json.gz.part007",
+          "sha256": "a199d3ff8ae879450363924156799d1d1f1e3a94d56dff1fa079febfc82b0e35",
+          "bytes": 900000
+        },
+        {
+          "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json.gz.part008",
+          "sha256": "4e44c329bc9e73c87f73469b68fd7ac7f9d6d65002183dea459e3753e0b368d1",
+          "bytes": 900000
+        },
+        {
+          "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json.gz.part009",
+          "sha256": "2cc0ff068e26bcc64b4783af0e50ed62e8a5aeccab1a92220557a9d214616528",
+          "bytes": 900000
+        },
+        {
+          "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json.gz.part010",
+          "sha256": "a51e5d9d50a5c04c209784dac99e1f053ebc5b02244aed636e53e12aa84013f1",
+          "bytes": 900000
+        },
+        {
+          "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json.gz.part011",
+          "sha256": "aab1dbee00b0ba3766fc93f89e8078b4c9f14f5bc2a0ffe28505ef07f122e8e4",
+          "bytes": 900000
+        },
+        {
+          "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json.gz.part012",
+          "sha256": "9fe09ebc9f339baddd537f51075e89d3890e03d7ef949416a3f0dd43c88e06ea",
+          "bytes": 900000
+        },
+        {
+          "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json.gz.part013",
+          "sha256": "8ac91bed3c5e366b1505d406592f0d17794faf691a96a8dc0f69f588b2420903",
+          "bytes": 900000
+        },
+        {
+          "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json.gz.part014",
+          "sha256": "f17401f62d8f29d03d469fa0620d19dfaaffccd63456df51d9fbe62dd32e00fe",
+          "bytes": 900000
+        },
+        {
+          "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json.gz.part015",
+          "sha256": "caa89b72e4384ae982ace52fd18942de8ce67adc8817ec9e40e5c222e1760b78",
+          "bytes": 900000
+        },
+        {
+          "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json.gz.part016",
+          "sha256": "012ceecae900e5c2dfe6cfcf80c462a32c5fd15db7e1741e0872e865a5bb0af8",
+          "bytes": 900000
+        },
+        {
+          "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json.gz.part017",
+          "sha256": "6be5208111d1695f22b164a2cbd9245dfe5f71d4adb1149e2aa61e02b351f025",
+          "bytes": 900000
+        },
+        {
+          "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json.gz.part018",
+          "sha256": "523348a5b5b9822a5774e55446eb46f0651c3fb782c92ca0be4a8e01ab51e686",
+          "bytes": 900000
+        },
+        {
+          "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json.gz.part019",
+          "sha256": "dad347be1163a2f5311d91ac3fd6f212ca5471be932d28afcdcc2cb673cfe066",
+          "bytes": 900000
+        },
+        {
+          "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json.gz.part020",
+          "sha256": "44764060ed92231091d6ba21962c29b1d38aefb4a39bc4ec478b3f904c51bb37",
+          "bytes": 900000
+        },
+        {
+          "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json.gz.part021",
+          "sha256": "4502f02c5623e3b68c89b45ee108ed78f972d7a10cff14727d3569f46a3bf7cc",
+          "bytes": 900000
+        },
+        {
+          "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json.gz.part022",
+          "sha256": "550f4ba7efbe2f5439baf0ce53c3ef04dbae14ad7bc18f933ee9e6c11b92415f",
+          "bytes": 900000
+        },
+        {
+          "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json.gz.part023",
+          "sha256": "a2cbfd93f3f5c3b99e7d22af042310320eb932e029921ca22f90dd95042e32dd",
+          "bytes": 75890
+        }
+      ],
+      "verifiedByExistingPackHelper": true
+    }
+  ],
+  "frozenSourceArchiveTransports": [
+    {
+      "original": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-freeze-01/source-archive.tar.gz",
+        "sha256": "1ecdc53115624ffadcfbf712a7eacbe8f2fcb320566cade6f2ee292720c421e0",
+        "bytes": 1926442
+      },
+      "sourceArchiveManifest": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-freeze-01/source-archive.json",
+        "sha256": "032607086a958eb15c7fbb8c5f201f28a1703ac14a2180902ad1d4eb66af5974",
+        "bytes": 39167
+      },
+      "partsManifest": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-freeze-01/source-archive-parts.json",
+        "sha256": "dec89ae8726bc23f8150abe2ec5491039633b6242a68a1e78f26f92520cabcc4",
+        "bytes": 1105
+      },
+      "parts": [
+        {
+          "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-freeze-01/source-archive.tar.gz.part000",
+          "sha256": "faa426181909ec26f552641d96cf0182827e5371c9c6bf6fdd4c1eb9c7736f22",
+          "bytes": 900000
+        },
+        {
+          "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-freeze-01/source-archive.tar.gz.part001",
+          "sha256": "9efad22eb17e44c25fd881e5f062d99f15ca0ccd223598ae2aa3e02c308ea63e",
+          "bytes": 900000
+        },
+        {
+          "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-freeze-01/source-archive.tar.gz.part002",
+          "sha256": "4f3baf4162f4eabcacfdc109cf482887cb9782f3980fc7906b81f463c9a8aa26",
+          "bytes": 126442
+        }
+      ],
+      "exactByteComparison": true,
+      "exactEof": true,
+      "reconstructedSha256": "1ecdc53115624ffadcfbf712a7eacbe8f2fcb320566cade6f2ee292720c421e0",
+      "reconstructedBytes": 1926442,
+      "sourceArchiveOpenedOrExtracted": false
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-01/source-archive.tar.gz",
+        "sha256": "9601129f8c958731801d4e895e7b16150e24eae80e61c8efb79678d559bb91e3",
+        "bytes": 3779332
+      },
+      "sourceArchiveManifest": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-01/source-archive.json",
+        "sha256": "7683dd983cad01037f72e7d79e10fba6dbd0322a5040acd7ef916dde8f07d9fb",
+        "bytes": 92042
+      },
+      "partsManifest": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-01/source-archive-parts.json",
+        "sha256": "0b850696d7b765be138e8447ace7ec4c0533ccdb0ac942f0d9ef35b9c9b29d6b",
+        "bytes": 1595
+      },
+      "parts": [
+        {
+          "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-01/source-archive.tar.gz.part000",
+          "sha256": "875ee09258a3ec462ff2c1874df613f34de5948207ef588e64519e170c576d5e",
+          "bytes": 900000
+        },
+        {
+          "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-01/source-archive.tar.gz.part001",
+          "sha256": "2716be624867babf55e4f0a21d76733bd085ef7345bc83e7d1d44278d7c5eb6c",
+          "bytes": 900000
+        },
+        {
+          "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-01/source-archive.tar.gz.part002",
+          "sha256": "af1716125fdec100696e5ed5f72cd0fe0364a6f488316af1a4bf6a49d5b6d984",
+          "bytes": 900000
+        },
+        {
+          "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-01/source-archive.tar.gz.part003",
+          "sha256": "47279396137b3cc88029998b1ef4ca5498c21feb94831b9747c69da27690aa32",
+          "bytes": 900000
+        },
+        {
+          "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-01/source-archive.tar.gz.part004",
+          "sha256": "b2e4a2f27cf23be387a5a5a22cffed49890369f6d5b15637bc5fd2862da28063",
+          "bytes": 179332
+        }
+      ],
+      "exactByteComparison": true,
+      "exactEof": true,
+      "reconstructedSha256": "9601129f8c958731801d4e895e7b16150e24eae80e61c8efb79678d559bb91e3",
+      "reconstructedBytes": 3779332,
+      "sourceArchiveOpenedOrExtracted": false
+    }
+  ],
+  "ignoredRestorableObjects": [
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json.gz",
+      "sha256": "928a2031fd48f98a87d0ccbb7fd21a447106e65cccaca50b8628781e4cb97348",
+      "bytes": 20775890,
+      "restoration": "ordered_json_gzip_parts",
+      "via": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json.gz.parts.json",
+        "sha256": "8be8ba7801f4d441970c1c6527dcfe3aff6a97b5e25329335318566f257b9235",
+        "bytes": 4375
+      }
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-actual-public-journal.jsonl",
+      "sha256": "bc5e5d58c05f9baac6b1b5b34c80e45d7379e50f45cd5e1c2b78298ba34595ec",
+      "bytes": 4075597,
+      "restoration": "gzip_stream",
+      "via": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-actual-public-journal.jsonl.gz",
+        "sha256": "d3a9535e50a66132e37bb3387bdc2c4c45cd0bd000c2a7bb2b819fa2e7de4a13",
+        "bytes": 38720
+      }
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json",
+      "sha256": "871f8cd0df7c74f0ce54bbe046f0e54f16d025686adf4fc7bbe8531f71c2fef0",
+      "bytes": 177532943,
+      "restoration": "gzip_stream",
+      "via": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json.gz",
+        "sha256": "928a2031fd48f98a87d0ccbb7fd21a447106e65cccaca50b8628781e4cb97348",
+        "bytes": 20775890
+      }
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-freeze-01/source-archive.tar.gz",
+      "sha256": "1ecdc53115624ffadcfbf712a7eacbe8f2fcb320566cade6f2ee292720c421e0",
+      "bytes": 1926442,
+      "restoration": "ordered_frozen_archive_parts",
+      "via": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-freeze-01/source-archive-parts.json",
+        "sha256": "dec89ae8726bc23f8150abe2ec5491039633b6242a68a1e78f26f92520cabcc4",
+        "bytes": 1105
+      }
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-01/source-archive.tar.gz",
+      "sha256": "9601129f8c958731801d4e895e7b16150e24eae80e61c8efb79678d559bb91e3",
+      "bytes": 3779332,
+      "restoration": "ordered_frozen_archive_parts",
+      "via": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-01/source-archive-parts.json",
+        "sha256": "0b850696d7b765be138e8447ace7ec4c0533ccdb0ac942f0d9ef35b9c9b29d6b",
+        "bytes": 1595
+      }
+    }
+  ],
+  "rawLogsRetainedWithExactUnignoreRules": [
+    {
+      "path": "docs/migration/lot10b-evidence/recovery/diagnostic/source-call-capture/capture-01.log",
+      "sha256": "6ea9cf1e361f87127d6e62e713190337927f798dfbd7b43ff0650d3445028e09",
+      "bytes": 290
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery/diagnostic/source-call-capture/capture-02.log",
+      "sha256": "a540ff07c1acc1507b15c2c6f2cd9c8b98001881903bb21d163fe1c8bb4829cd",
+      "bytes": 517
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery/diagnostic/source-call-capture/capture-03.log",
+      "sha256": "7e16d5aa1e6635699582e82f82323103aa7804dc8b73385971224705d08850c0",
+      "bytes": 517
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery/diagnostic/source-call-capture/parity-01.log",
+      "sha256": "216b8474b03551998216b228292a2d4cf50c6c1fdfb8b3ab87eb7020fa849a0d",
+      "bytes": 1331
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery/diagnostic/source-call-capture/parity-03.log",
+      "sha256": "20ecb2c394c566f8193f25baf1d9f799bd29af1ed2d60d74af93ee16b9f20d18",
+      "bytes": 1331
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery/diagnostic/window-oracle/checkpoint-47-first-abstention-01.log",
+      "sha256": "59ef7d88e0f7165fcd9e82a8114459348fdab32db3d629d8c5c28d82ffacc57f",
+      "bytes": 683
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery/diagnostic/window-oracle/export-01.log",
+      "sha256": "2cb558c130da5b0051107d7aa183cde88e2cbc539b7f2c11d1837f69b24164b8",
+      "bytes": 343
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery/diagnostic/window-oracle/export-02.log",
+      "sha256": "55fa496f672dc9426e7c11ee411496e5f2f7e8d49861d4feb205d17fed9cdd0a",
+      "bytes": 377
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/diagnostic/entry-audit-01.log",
+      "sha256": "b4113e1bfa759cfc63d90114cccdc5960cd98d0f925e2150a1f32a4fe05cf902",
+      "bytes": 294
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/diagnostic/kernel-01.log",
+      "sha256": "0688718f00818a7ba7e81a7f0bff976bb3f6b8c281303b068ec8b6ce412b6596",
+      "bytes": 1670
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/diagnostic/kernel-02.log",
+      "sha256": "639ddc26a4a8e72ff5df38cb500956528ed38ff7a82d61eae1f1866f92916fa1",
+      "bytes": 1172
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/diagnostic/lot10b-composed-typecheck-01.log",
+      "sha256": "617dc12a2c337d93b91e07bef62eae59b1abe157b737d909052c3e9d2db0d09d",
+      "bytes": 149
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/diagnostic/lot10b-composed-typecheck-02.log",
+      "sha256": "617dc12a2c337d93b91e07bef62eae59b1abe157b737d909052c3e9d2db0d09d",
+      "bytes": 149
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/diagnostic/migration-audit-01.log",
+      "sha256": "2ee3267c5c64afe7033ab0e419930e9fb9eb7a0786b73510950dcc6e8c4649fb",
+      "bytes": 622
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/diagnostic/migration-audit-02.log",
+      "sha256": "6d5177b6c515d2658a21f490af8f91ae8788054795173438c06e62ba762b56b3",
+      "bytes": 338
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/diagnostic/typecheck-01.log",
+      "sha256": "617dc12a2c337d93b91e07bef62eae59b1abe157b737d909052c3e9d2db0d09d",
+      "bytes": 149
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/diagnostic/typecheck-02.log",
+      "sha256": "617dc12a2c337d93b91e07bef62eae59b1abe157b737d909052c3e9d2db0d09d",
+      "bytes": 149
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/parity.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/writer.log",
+      "sha256": "73c6fe5a12226c9ad7253083c1377e677f5f59ef64e3b910fe540b7084bd01b0",
+      "bytes": 2217
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-02/parity.log",
+      "sha256": "3d1bae814fcee5bd85bbc18f40fe8f05226ce80e973af180c7c835bc95302c51",
+      "bytes": 259526
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-live.log",
+      "sha256": "ce8537a941808ac6aed22268f956f2ef195343d04412b684d5c2f3900f98a038",
+      "bytes": 159375
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/lossless-transport-01/pack-error.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/lossless-transport-01/verification-error.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  ],
+  "incompleteArtifactsRetained": [
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint-000048.inprogress.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  ],
+  "gitignoreBeforePack": {
+    "path": ".gitignore",
+    "sha256": "855577514c6e3c1f16c6fbd1b28c88cf0b19d7d9ce10f5dd130daab3bcc21014",
+    "bytes": 33195
+  },
+  "gitignoreBeforeRawRules": {
+    "path": ".gitignore",
+    "sha256": "3de055fcf7578afa4a07558184ad21e9d186feabd5beef110e160e7bca176eff",
+    "bytes": 33373
+  },
+  "gitignoreAfter": {
+    "path": ".gitignore",
+    "sha256": "2f2382f5526dc51e8f87ef44cd089d8c3361ee9669ca412ac79372dc4ae2268f",
+    "bytes": 35933
+  },
+  "exactIgnoreEntriesAdded": [
+    "/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json.gz",
+    "/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-actual-public-journal.jsonl",
+    "/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json",
+    "/docs/migration/lot10b-evidence/recovery-20261111/hpdl-freeze-01/source-archive.tar.gz",
+    "/docs/migration/lot10b-evidence/recovery-20261111/integrated-final-01/source-archive.tar.gz"
+  ],
+  "exactLogUnignoreEntriesAdded": [
+    "!/docs/migration/lot10b-evidence/recovery/diagnostic/source-call-capture/capture-01.log",
+    "!/docs/migration/lot10b-evidence/recovery/diagnostic/source-call-capture/capture-02.log",
+    "!/docs/migration/lot10b-evidence/recovery/diagnostic/source-call-capture/capture-03.log",
+    "!/docs/migration/lot10b-evidence/recovery/diagnostic/source-call-capture/parity-01.log",
+    "!/docs/migration/lot10b-evidence/recovery/diagnostic/source-call-capture/parity-03.log",
+    "!/docs/migration/lot10b-evidence/recovery/diagnostic/window-oracle/checkpoint-47-first-abstention-01.log",
+    "!/docs/migration/lot10b-evidence/recovery/diagnostic/window-oracle/export-01.log",
+    "!/docs/migration/lot10b-evidence/recovery/diagnostic/window-oracle/export-02.log",
+    "!/docs/migration/lot10b-evidence/recovery-20261111/diagnostic/entry-audit-01.log",
+    "!/docs/migration/lot10b-evidence/recovery-20261111/diagnostic/kernel-01.log",
+    "!/docs/migration/lot10b-evidence/recovery-20261111/diagnostic/kernel-02.log",
+    "!/docs/migration/lot10b-evidence/recovery-20261111/diagnostic/lot10b-composed-typecheck-01.log",
+    "!/docs/migration/lot10b-evidence/recovery-20261111/diagnostic/lot10b-composed-typecheck-02.log",
+    "!/docs/migration/lot10b-evidence/recovery-20261111/diagnostic/migration-audit-01.log",
+    "!/docs/migration/lot10b-evidence/recovery-20261111/diagnostic/migration-audit-02.log",
+    "!/docs/migration/lot10b-evidence/recovery-20261111/diagnostic/typecheck-01.log",
+    "!/docs/migration/lot10b-evidence/recovery-20261111/diagnostic/typecheck-02.log",
+    "!/docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/parity.log",
+    "!/docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/writer.log",
+    "!/docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-02/parity.log",
+    "!/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-live.log",
+    "!/docs/migration/lot10b-evidence/recovery-20261111/lossless-transport-01/pack-error.log",
+    "!/docs/migration/lot10b-evidence/recovery-20261111/lossless-transport-01/verification-error.log"
+  ],
+  "allLargeRetainedObjectsRepresented": true,
+  "originalsRemovedOrRewritten": false,
+  "largeCheckpointJsonDecoded": false,
+  "sourceArchiveContentDecoded": false,
+  "nativeAgentRun": false,
+  "originalComponentRun": false,
+  "gameRun": false,
+  "testsRun": false,
+  "buildRun": false,
+  "performanceMeasurementRun": false,
+  "verificationErrorLog": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/lossless-transport-01/verification-error.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "qualification": "This receipt establishes byte preservation and restoration paths only. It does not reinterpret, rerun or validate an HPDL outcome or component result; it does not assert a new native source freeze."
+}

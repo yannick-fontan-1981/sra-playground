@@ -1,0 +1,376 @@
+TAP version 13
+# Subtest: passive capture keeps synchronous return and argument identities, with detached evidence
+ok 1 - passive capture keeps synchronous return and argument identities, with detached evidence
+  ---
+  duration_ms: 2.132912
+  type: 'test'
+  ...
+# Subtest: proposal observer excludes execution capabilities and preserves the original promise
+ok 2 - proposal observer excludes execution capabilities and preserves the original promise
+  ---
+  duration_ms: 0.398492
+  type: 'test'
+  ...
+# Subtest: synchronous exceptions retain their identity and are observed once
+ok 3 - synchronous exceptions retain their identity and are observed once
+  ---
+  duration_ms: 0.559946
+  type: 'test'
+  ...
+# Subtest: asynchronous rejection retains the original promise and reason
+ok 4 - asynchronous rejection retains the original promise and reason
+  ---
+  duration_ms: 0.439675
+  type: 'test'
+  ...
+# Subtest: real nested restorations retain invocation order, depths and input identity
+ok 5 - real nested restorations retain invocation order, depths and input identity
+  ---
+  duration_ms: 0.387825
+  type: 'test'
+  ...
+# Subtest: failed state inspection is retained without changing a successful source call
+ok 6 - failed state inspection is retained without changing a successful source call
+  ---
+  duration_ms: 0.308847
+  type: 'test'
+  ...
+# Subtest: captured source arities exclude native-only arguments without altering actual calls
+ok 7 - captured source arities exclude native-only arguments without altering actual calls
+  ---
+  duration_ms: 0.420135
+  type: 'test'
+  ...
+# Subtest: an uncloneable evidence argument does not prevent or duplicate the actual invocation
+ok 8 - an uncloneable evidence argument does not prevent or duplicate the actual invocation
+  ---
+  duration_ms: 1.077548
+  type: 'test'
+  ...
+# Subtest: production factory installs one Preview owner at its declared goal entry without a new SRC program
+ok 9 - production factory installs one Preview owner at its declared goal entry without a new SRC program
+  ---
+  duration_ms: 163.055508
+  type: 'test'
+  ...
+# Subtest: real common caller selects, learns once, keeps a multi-action prefix and restores the original state through a natural boundary
+ok 10 - real common caller selects, learns once, keeps a multi-action prefix and restores the original state through a natural boundary
+  ---
+  duration_ms: 3038.306759
+  type: 'test'
+  ...
+# Subtest: foreign Word return does not invoke Preview acquisition and still restores its installed owner
+ok 11 - foreign Word return does not invoke Preview acquisition and still restores its installed owner
+  ---
+  duration_ms: 1546.126831
+  type: 'test'
+  ...
+# Subtest: a Preview blocking unknown closes the entire selection before a later group is consulted
+ok 12 - a Preview blocking unknown closes the entire selection before a later group is consulted
+  ---
+  duration_ms: 9.806383
+  type: 'test'
+  ...
+# Subtest: native checkpoint owns exactly the four source fields inside the explicit schema
+ok 13 - native checkpoint owns exactly the four source fields inside the explicit schema
+  ---
+  duration_ms: 3.944848
+  type: 'test'
+  ...
+# Subtest: cached abstention is retained for its epoch without inventing a new observation
+ok 14 - cached abstention is retained for its epoch without inventing a new observation
+  ---
+  duration_ms: 4.341498
+  type: 'test'
+  ...
+# Subtest: CPython dictionary construction preserves the source five-cell pop order
+ok 15 - CPython dictionary construction preserves the source five-cell pop order
+  ---
+  duration_ms: 0.643011
+  type: 'test'
+  ...
+# Subtest: native checkpoint restoration preserves a learned multi-action source decision
+ok 16 - native checkpoint restoration preserves a learned multi-action source decision
+  ---
+  duration_ms: 22.010047
+  type: 'test'
+  ...
+# Subtest: foreign mutable state and exported state are detached from the authoritative owner
+ok 17 - foreign mutable state and exported state are detached from the authoritative owner
+  ---
+  duration_ms: 12.104695
+  type: 'test'
+  ...
+# Subtest: identity and value restore fast paths preserve source fields and immutable ownership
+ok 18 - identity and value restore fast paths preserve source fields and immutable ownership
+  ---
+  duration_ms: 11.979816
+  type: 'test'
+  ...
+# Subtest: restoring an empty checkpoint actually removes a previous acquired model
+ok 19 - restoring an empty checkpoint actually removes a previous acquired model
+  ---
+  duration_ms: 3.853661
+  type: 'test'
+  ...
+# Subtest: source restoration recreates only present source fields and normalizes decimal cache keys
+ok 20 - source restoration recreates only present source fields and normalizes decimal cache keys
+  ---
+  duration_ms: 3.941013
+  type: 'test'
+  ...
+# Subtest: native restore rejects schema atomically
+ok 21 - native restore rejects schema atomically
+  ---
+  duration_ms: 7.012072
+  type: 'test'
+  ...
+# Subtest: native restore rejects missing source field atomically
+ok 22 - native restore rejects missing source field atomically
+  ---
+  duration_ms: 5.944239
+  type: 'test'
+  ...
+# Subtest: native restore rejects unexpected envelope field atomically
+ok 23 - native restore rejects unexpected envelope field atomically
+  ---
+  duration_ms: 5.275299
+  type: 'test'
+  ...
+# Subtest: native restore rejects noninteger epoch atomically
+ok 24 - native restore rejects noninteger epoch atomically
+  ---
+  duration_ms: 10.934737
+  type: 'test'
+  ...
+# Subtest: native restore rejects duplicate piece identity atomically
+ok 25 - native restore rejects duplicate piece identity atomically
+  ---
+  duration_ms: 9.0369
+  type: 'test'
+  ...
+# Subtest: native restore rejects duplicate full-mask cell atomically
+ok 26 - native restore rejects duplicate full-mask cell atomically
+  ---
+  duration_ms: 4.56091
+  type: 'test'
+  ...
+# Subtest: native restore rejects unnormalized full mask atomically
+ok 27 - native restore rejects unnormalized full mask atomically
+  ---
+  duration_ms: 4.724837
+  type: 'test'
+  ...
+# Subtest: native restore rejects unknown selected owner atomically
+ok 28 - native restore rejects unknown selected owner atomically
+  ---
+  duration_ms: 4.58086
+  type: 'test'
+  ...
+# Subtest: native restore rejects board outside current world atomically
+ok 29 - native restore rejects board outside current world atomically
+  ---
+  duration_ms: 4.698057
+  type: 'test'
+  ...
+# Subtest: native restore rejects unsupported learned transform atomically
+ok 30 - native restore rejects unsupported learned transform atomically
+  ---
+  duration_ms: 4.650925
+  type: 'test'
+  ...
+# Subtest: native restore rejects nonunit learned translation atomically
+ok 31 - native restore rejects nonunit learned translation atomically
+  ---
+  duration_ms: 5.809065
+  type: 'test'
+  ...
+# Subtest: native restore rejects cache epoch spelling atomically
+ok 32 - native restore rejects cache epoch spelling atomically
+  ---
+  duration_ms: 3.617655
+  type: 'test'
+  ...
+# Subtest: native restore rejects event owner kind atomically
+ok 33 - native restore rejects event owner kind atomically
+  ---
+  duration_ms: 2.894302
+  type: 'test'
+  ...
+# Subtest: native restore rejects source trial mask shape atomically
+ok 34 - native restore rejects source trial mask shape atomically
+  ---
+  duration_ms: 2.999651
+  type: 'test'
+  ...
+# Subtest: native restore rejects palette outside public domain atomically
+ok 35 - native restore rejects palette outside public domain atomically
+  ---
+  duration_ms: 2.571174
+  type: 'test'
+  ...
+# Subtest: native restore rejects nonfinite retained value atomically
+ok 36 - native restore rejects nonfinite retained value atomically
+  ---
+  duration_ms: 2.368237
+  type: 'test'
+  ...
+# Subtest: native restore does not execute foreign getters or admit cyclic state
+ok 37 - native restore does not execute foreign getters or admit cyclic state
+  ---
+  duration_ms: 5.285454
+  type: 'test'
+  ...
+# Subtest: selected acquisition creates a new checkpoint while all earlier snapshots remain unchanged
+ok 38 - selected acquisition creates a new checkpoint while all earlier snapshots remain unchanged
+  ---
+  duration_ms: 4.233886
+  type: 'test'
+  ...
+# Subtest: a foreign return cannot acquire a Preview event or change its current checkpoint
+ok 39 - a foreign return cannot acquire a Preview event or change its current checkpoint
+  ---
+  duration_ms: 1.715001
+  type: 'test'
+  ...
+# Subtest: an epoch boundary returns the source empty event without resetting learned controls
+ok 40 - an epoch boundary returns the source empty event without resetting learned controls
+  ---
+  duration_ms: 2.484503
+  type: 'test'
+  ...
+# Subtest: known source transport respects remaining actions and exact paired projections
+ok 41 - known source transport respects remaining actions and exact paired projections
+  ---
+  duration_ms: 3.204681
+  type: 'test'
+  ...
+# Subtest: exhausted nodeBound returns an explicit blocked unknown without a partial plan
+ok 42 - exhausted nodeBound returns an explicit blocked unknown without a partial plan
+  ---
+  duration_ms: 2.022615
+  type: 'test'
+  ...
+# Subtest: exhausted domainBound returns an explicit blocked unknown without a partial plan
+ok 43 - exhausted domainBound returns an explicit blocked unknown without a partial plan
+  ---
+  duration_ms: 1.426455
+  type: 'test'
+  ...
+# Subtest: exhausted depthBound returns an explicit blocked unknown without a partial plan
+ok 44 - exhausted depthBound returns an explicit blocked unknown without a partial plan
+  ---
+  duration_ms: 1.663803
+  type: 'test'
+  ...
+# Subtest: exhausted timeBoundMs returns an explicit blocked unknown without a partial plan
+ok 45 - exhausted timeBoundMs returns an explicit blocked unknown without a partial plan
+  ---
+  duration_ms: 0.929914
+  type: 'test'
+  ...
+# Subtest: transport-state exhaustion blocks without releasing an unfinished path or fallback probe
+ok 46 - transport-state exhaustion blocks without releasing an unfinished path or fallback probe
+  ---
+  duration_ms: 2.131049
+  type: 'test'
+  ...
+# Subtest: an already-aborted request leaves source memory untouched and blocks unrelated routing
+ok 47 - an already-aborted request leaves source memory untouched and blocks unrelated routing
+  ---
+  duration_ms: 0.287825
+  type: 'test'
+  ...
+# Subtest: the active request deadline is checked before any source measurement
+ok 48 - the active request deadline is checked before any source measurement
+  ---
+  duration_ms: 0.238901
+  type: 'test'
+  ...
+# Subtest: finite-domain construction yields and observes cancellation before publishing assignments
+ok 49 - finite-domain construction yields and observes cancellation before publishing assignments
+  ---
+  duration_ms: 0.763463
+  type: 'test'
+  ...
+# Subtest: a host cannot enlarge the source domainBound budget
+ok 50 - a host cannot enlarge the source domainBound budget
+  ---
+  duration_ms: 0.134563
+  type: 'test'
+  ...
+# Subtest: a host cannot enlarge the source depthBound budget
+ok 51 - a host cannot enlarge the source depthBound budget
+  ---
+  duration_ms: 0.081963
+  type: 'test'
+  ...
+# Subtest: a host cannot enlarge the source nodeBound budget
+ok 52 - a host cannot enlarge the source nodeBound budget
+  ---
+  duration_ms: 0.093711
+  type: 'test'
+  ...
+# Subtest: a host cannot enlarge the source timeBoundMs budget
+ok 53 - a host cannot enlarge the source timeBoundMs budget
+  ---
+  duration_ms: 1.547377
+  type: 'test'
+  ...
+# Subtest: a host cannot enlarge the source transportStates budget
+ok 54 - a host cannot enlarge the source transportStates budget
+  ---
+  duration_ms: 0.06013
+  type: 'test'
+  ...
+# Subtest: the checked search limits cannot be enlarged while a cooperative request is in flight
+ok 55 - the checked search limits cannot be enlarged while a cooperative request is in flight
+  ---
+  duration_ms: 0.55652
+  type: 'test'
+  ...
+# Subtest: learned command identifiers are dictionary keys, including a JavaScript prototype spelling
+ok 56 - learned command identifiers are dictionary keys, including a JavaScript prototype spelling
+  ---
+  duration_ms: 3.821042
+  type: 'test'
+  ...
+# Subtest: before-action binding rejects an invalid action index without consuming a return
+ok 57 - before-action binding rejects an invalid action index without consuming a return
+  ---
+  duration_ms: 1.937747
+  type: 'test'
+  ...
+# Subtest: Window has one cold owner, its exact DRM entry and the common stored workflow
+ok 58 - Window has one cold owner, its exact DRM entry and the common stored workflow
+  ---
+  duration_ms: 1716.65898
+  type: 'test'
+  ...
+# Subtest: cold common caller learns a foreign edit, executes window.select and uses its actual return at the next decision
+ok 59 - cold common caller learns a foreign edit, executes window.select and uses its actual return at the next decision
+  ---
+  duration_ms: 3016.10819
+  type: 'test'
+  ...
+# Subtest: an acquired no-effect setting is retained as an attempt and cannot immediately repeat
+ok 60 - an acquired no-effect setting is retained as an attempt and cannot immediately repeat
+  ---
+  duration_ms: 1824.689092
+  type: 'test'
+  ...
+# Subtest: launch packets and last alone survive the native checkpoint without inventing a source state publication
+ok 61 - launch packets and last alone survive the native checkpoint without inventing a source state publication
+  ---
+  duration_ms: 2168.656399
+  type: 'test'
+  ...
+1..61
+# tests 61
+# suites 0
+# pass 61
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 16349.942868

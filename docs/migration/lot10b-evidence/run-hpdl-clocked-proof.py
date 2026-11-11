@@ -38,6 +38,7 @@ SCHEMA = 'logos-engine.lot10b.hpdl-cumulative-clock.v1'
 HISTORICAL_SECONDS = Decimal('159.45478678199166')
 MAXIMUM_SECONDS = Decimal('2400')
 MAXIMUM_ATTEMPT_SECONDS = 600.0
+CHILD_OLD_SPACE_MIB = 1536
 RETENTION_RESERVE_SECONDS = 30.0
 STOP_MARGIN_SECONDS = 0.5
 RUNNER = EVIDENCE / 'run-hpdl-campaign.mjs'
@@ -45,6 +46,7 @@ REFERENCE = 'reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents
 REQUIRED_ARCHIVED_FILES = {
     'docs/migration/lot10b-evidence/run-hpdl-clocked-proof.py',
     'docs/migration/lot10b-evidence/run-hpdl-campaign.mjs',
+    'docs/migration/lot10b-evidence/stream-evidence-json.mjs',
     'tests/helpers/v6-live-game-campaign.ts',
     'tests/helpers/v6-window-question-capture.ts',
     'package.json', 'package-lock.json', 'tsconfig.json', '.openai/hosting.json',
@@ -420,6 +422,8 @@ def main():
     parser.add_argument('--directory', required=True, help='New exclusive repository-relative attempt directory')
     parser.add_argument('--source-manifest', required=True, help='Preexisting native freeze with adjacent source-archive.json')
     parser.add_argument('--timeout-seconds', type=float, default=600.0, help='Preparation plus child activity, at most 600 seconds')
+    parser.add_argument('--exclusive-resources', action='store_true',
+                        help='After a cooperative quiet agreement, retain the exclusive performance lock for this functional campaign; this is not a cost measurement.')
     args = parser.parse_args()
     if not math.isfinite(args.timeout_seconds) or not 0 < args.timeout_seconds <= MAXIMUM_ATTEMPT_SECONDS:
         parser.error('The activity ceiling must be finite, positive and at most 600 seconds')
@@ -454,7 +458,8 @@ def main():
         signal.signal(number, receive_signal)
 
     with ExitStack() as stack:
-        for path, mode in [(PERFORMANCE_LOCK, fcntl.LOCK_SH), (HPDL_LOCK, fcntl.LOCK_EX)]:
+        performance_mode = fcntl.LOCK_EX if args.exclusive_resources else fcntl.LOCK_SH
+        for path, mode in [(PERFORMANCE_LOCK, performance_mode), (HPDL_LOCK, fcntl.LOCK_EX)]:
             stream = stack.enter_context(path.open('a+b'))
             fcntl.flock(stream.fileno(), mode | fcntl.LOCK_NB)
         clock_bytes = clock_path.read_bytes()
@@ -471,6 +476,7 @@ def main():
                  'startedAt': started_at, 'admittedAt': now(), 'priorCumulativeSeconds': float(prior_total),
                  'remainingBeforeSeconds': float(remaining), 'activityCeilingSeconds': args.timeout_seconds,
                  'terminationMarginSeconds': STOP_MARGIN_SECONDS, 'retentionReserveSeconds': RETENTION_RESERVE_SECONDS,
+                 'performanceLockMode': 'exclusive_functional' if args.exclusive_resources else 'shared_functional',
                  'sourceManifestPath': name(manifest_path), 'chargedSeconds': None,
                  'qualification': 'Running was persisted before spawn. An unresolved entry blocks every subsequent attempt; no implicit refund.'}
         write_json(out / 'attempt-start.json', {'schema': 'logos-engine.lot10b.hpdl-attempt-start.v1',
@@ -483,7 +489,7 @@ def main():
 
         frozen = before = after = process = None
         errors, termination, child, lossless_archives = [], None, None, []
-        command = [node, str(RUNNER), str(out)]
+        command = [node, f'--max-old-space-size={CHILD_OLD_SPACE_MIB}', str(RUNNER), str(out)]
         outcome = 'preflight_failed'
         log_path = out / 'hpdl-live.log'
 
@@ -531,6 +537,7 @@ def main():
                                                    start_new_session=True, preexec_fn=parent_death_guard)
                         child = {'pid': process.pid, 'startedAt': child_started, 'startedElapsedSeconds': child_start_elapsed,
                                  'allowanceAfterPreflightSeconds': allowance, 'command': command,
+                                 'nodeOldSpaceMiB': CHILD_OLD_SPACE_MIB,
                                  'parentDeathSignal': 'SIGKILL', 'separateProcessGroup': True}
                         write_json(out / 'child-process.json', {'schema': 'logos-engine.lot10b.hpdl-child-process.v1', **child})
                         outcome = 'child_returned'

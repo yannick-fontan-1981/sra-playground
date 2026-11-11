@@ -1,0 +1,114 @@
+{
+  "schema": "logos-engine.source-syntax-check.v1",
+  "recordedAt": "2026-11-11T14:27:41.794124+00:00",
+  "status": "passed",
+  "pythonFiles": [
+    {
+      "path": "docs/migration/lot10b-evidence/browser-hpdl-clock.py",
+      "sha256": "d66acf82d4de25e9e5208957d750178f4dc0da9b65e727cda71e6e6d22debc2c",
+      "bytes": 34611,
+      "syntax": "passed"
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/check-cost-static-inputs.py",
+      "sha256": "e49e114e05eaef3d2e50bd6dc455ae4db58e0250d2e2b15273d5d7687d4c2568",
+      "bytes": 28882,
+      "syntax": "passed"
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/finalize-cost-readiness.py",
+      "sha256": "eaf76dd08542c47c3a56eaaafeb1b851e0d018e3882cf3755c16dd974026c90a",
+      "bytes": 53396,
+      "syntax": "passed"
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/finalize-hpdl-case-budget-review.py",
+      "sha256": "1d0e59ec00a48442482889b58ecfaf37a87c8246e9186d7bad94867652cd13cf",
+      "bytes": 76002,
+      "syntax": "passed"
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/freeze-source.py",
+      "sha256": "3b39a3d18025372749c9250539512616b10cb7400e57fe574dc1d58a6a74c065",
+      "bytes": 8139,
+      "syntax": "passed"
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/plan-bounded-source-transport.py",
+      "sha256": "e2276cfb71789414220628f6af0a453d6c57ce197740cd53c6ba279cb35b95b7",
+      "bytes": 31366,
+      "syntax": "passed"
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/prepare-cost-protocol.py",
+      "sha256": "4cd4f53e68b65ba61982010f4d148acf238f70560afa3a8aae3f6bef5ea69c1f",
+      "bytes": 35578,
+      "syntax": "passed"
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/prepare-owner-cost-contract.py",
+      "sha256": "2b20558afbefc9082b5968fc2f6ab5cb523527c9f9cf4f9558d4c4bce1a5c7e1",
+      "bytes": 21958,
+      "syntax": "passed"
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/record-hpdl-conservative-case-work.py",
+      "sha256": "909f887e458ef3c63ec4fca2f05e8cba28fadd797b606bb5941b82d1218bc04f",
+      "bytes": 12067,
+      "syntax": "passed"
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/record-publication-inputs.py",
+      "sha256": "450d8705f772ff876a3e0afd90eea06ef0448c65a727dda8528da3b2dbb4ed3a",
+      "bytes": 17885,
+      "syntax": "passed"
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/review-owner-costs.py",
+      "sha256": "e879fb58868fa753936ae1cdf8eb8801f66371e660404253439560d5af25558c",
+      "bytes": 68812,
+      "syntax": "passed"
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/run-hpdl-clocked-diagnostic.py",
+      "sha256": "5105c5b5c9e6b32aa735c1aaf77f951399e16110db5f51d91b6af2f2afeb569c",
+      "bytes": 26803,
+      "syntax": "passed"
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/run-hpdl-clocked-proof.py",
+      "sha256": "e959e8d9b7ed5875bc9843393aeae44586674229fccb951279097c4c75195971",
+      "bytes": 36304,
+      "syntax": "passed"
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/run-regressions.py",
+      "sha256": "937723459e728682a849a4bddb855d423c9b9c8e70d1627e8590b5be81709ab3",
+      "bytes": 10992,
+      "syntax": "passed"
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/run-release-checks.py",
+      "sha256": "7336d54fdcaa1865ccc7ce7139ed0a44f0fde828b28a64e3666e1e89cda88812",
+      "bytes": 13358,
+      "syntax": "passed"
+    },
+    {
+      "path": "scripts/compare-window-question-checkpoint-parity.py",
+      "sha256": "3d5378012a3db0cfe1e093fe34d0a24a006eeb6105948c11542337a9e0aac841",
+      "bytes": 22221,
+      "syntax": "passed"
+    },
+    {
+      "path": "scripts/compare-window-question-public-parity.py",
+      "sha256": "e85c16ef467a9305b669c6bb11a48d32c6f64c3df1aa0aac57aa089c76990951",
+      "bytes": 66251,
+      "syntax": "passed"
+    }
+  ],
+  "immutableHistoricalHelpers": {
+    "run-hpdl-clocked-proof.py": "e959e8d9b7ed5875bc9843393aeae44586674229fccb951279097c4c75195971",
+    "record-hpdl-conservative-case-work.py": "909f887e458ef3c63ec4fca2f05e8cba28fadd797b606bb5941b82d1218bc04f"
+  },
+  "qualification": "AST parsing only; no game, comparator, original module, native process or performance sample was executed."
+}

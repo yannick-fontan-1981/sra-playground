@@ -1,0 +1,26 @@
+{
+  "schema": "logos-engine.lot10b.lossless-pack-execution.v1",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "scripts/evidence-byte-parts.py",
+    "pack",
+    "docs/migration/lot10b-evidence"
+  ],
+  "startedAt": "2026-11-11T14:29:18.605426+00:00",
+  "finishedAt": "2026-11-11T14:29:19.383724+00:00",
+  "elapsedSeconds": 0.7680996540002525,
+  "exitCode": 0,
+  "stdout": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/lossless-transport-01/pack-output.json",
+    "sha256": "b05b3f4ea491de85390008ac16f1c9f0993415d17355bed34d47bdb3db4ff359",
+    "bytes": 729
+  },
+  "stderr": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/lossless-transport-01/pack-error.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "helpersUnchanged": true,
+  "sourceAndResultsReinterpreted": false
+}

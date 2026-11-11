@@ -1,0 +1,78 @@
+{
+  "schema": "logos-engine.lot10b.hpdl-cumulative-clock.v1",
+  "game": "HPDL",
+  "recordedAt": "2026-11-11T12:21:04Z",
+  "maximumCumulativeSeconds": 2400,
+  "clockReset": false,
+  "historicalDebit": {
+    "chargedSeconds": 159.45478678199166,
+    "actions": 40,
+    "provenance": "retained_conversation_and_environment_recovery_declaration",
+    "declarationPath": "docs/migration/lot10b-evidence/recovery-20261111/recovery-status.json",
+    "rawEvidenceRecovered": false,
+    "intervalsRecovered": false,
+    "qualification": "Historic elapsed time and actions remain charged. Their original raw ledger, intervals, reports and public journal were not recovered. This entry is a retained debit, not a newly reproduced execution or validation result."
+  },
+  "attempts": [
+    {
+      "attemptId": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01",
+      "status": "terminal",
+      "game": "HPDL",
+      "targetLevels": 6,
+      "startedAt": "2026-11-11T12:34:34.720866+00:00",
+      "admittedAt": "2026-11-11T12:34:34.744637+00:00",
+      "priorCumulativeSeconds": 159.45478678199166,
+      "remainingBeforeSeconds": 2240.5452132180085,
+      "activityCeilingSeconds": 600.0,
+      "terminationMarginSeconds": 0.5,
+      "retentionReserveSeconds": 30.0,
+      "sourceManifestPath": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-freeze-01/source-manifest.json",
+      "chargedSeconds": 315.682964465,
+      "qualification": "Every measured second is charged, including failure, timeout and retention; no refund or truncation.",
+      "finishedAt": "2026-11-11T12:39:50.403851+00:00",
+      "attemptOutcome": "child_returned",
+      "childExitCode": -9,
+      "campaignStatus": null,
+      "campaignPassedEstablished": false,
+      "observedActionReturns": 48,
+      "completeActionCountEstablished": false,
+      "executionReceipt": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/execution-hpdl.json",
+        "sha256": "f3fc927792b2574c32dd76aaa996b503b33925923051bf207a90f1cac4736e6f",
+        "bytes": 10116
+      },
+      "retentionSecondsAfterChild": 24.619446669000013
+    },
+    {
+      "attemptId": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01",
+      "kind": "conservative_case_work",
+      "game": "HPDL",
+      "status": "terminal",
+      "startedAt": "2026-11-11T12:39:50.403851Z",
+      "finishedAt": "2026-11-11T12:47:20.858378Z",
+      "debitedAt": "2026-11-11T13:32:33.110864+00:00",
+      "chargedSeconds": 451,
+      "priorCumulativeSeconds": 475.1377512469917,
+      "remainingBeforeSeconds": 1924.8622487530083,
+      "attemptOutcome": "observed_non_live_case_work_conservatively_charged",
+      "clockBasis": "observed_utc_wall_interval_conservative_upper_scope",
+      "monotoneMeasurement": false,
+      "campaignStatus": null,
+      "campaignPassedEstablished": false,
+      "observedActions": null,
+      "completeActionCountEstablished": false,
+      "executionReceipt": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/hpdl-conservative-case-work.json",
+        "sha256": "db9ea8ed4f30e2bb6995424bd730cbf870a0637bde754c0c2fa63c90f5091434",
+        "bytes": 3256
+      },
+      "qualification": "An already observed past work interval is charged, not admitted as a new game. No time, outcome or actions are reset or refunded."
+    }
+  ],
+  "cumulativeChargedSeconds": 926.1377512469917,
+  "remainingSeconds": 1473.8622487530083,
+  "budgetExceededSeconds": 0.0,
+  "budgetAvailability": "available",
+  "qualification": "No fresh HPDL attempt is represented by this initial ledger. Every admitted future interval, including failure, timeout and evidence retention, must be appended and charged. A running entry blocks further admission until its actual outcome is accounted for; it is never silently discarded or refunded. Browser gameplay shares this same 2400-second budget.",
+  "lastUpdatedAt": "2026-11-11T13:32:33.112444+00:00"
+}

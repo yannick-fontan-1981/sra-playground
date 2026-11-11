@@ -529,3 +529,37 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 /docs/migration/lot5b-evidence/diagnostic/addressed-reference-key-sorted.json.gz
 /docs/migration/lot5b-evidence/performance-integrated/functional-baseline.json.gz
 /docs/migration/lot5b-evidence/performance-integrated/functional-candidate.json.gz
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json.gz
+
+# Lot10B exact originals verified against retained gzip or frozen archive parts.
+/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-actual-public-journal.jsonl
+/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json
+/docs/migration/lot10b-evidence/recovery-20261111/hpdl-freeze-01/source-archive.tar.gz
+/docs/migration/lot10b-evidence/recovery-20261111/integrated-final-01/source-archive.tar.gz
+
+# Preserve exact Lot10B diagnostic logs, including failed or incomplete attempts.
+!/docs/migration/lot10b-evidence/recovery/diagnostic/source-call-capture/capture-01.log
+!/docs/migration/lot10b-evidence/recovery/diagnostic/source-call-capture/capture-02.log
+!/docs/migration/lot10b-evidence/recovery/diagnostic/source-call-capture/capture-03.log
+!/docs/migration/lot10b-evidence/recovery/diagnostic/source-call-capture/parity-01.log
+!/docs/migration/lot10b-evidence/recovery/diagnostic/source-call-capture/parity-03.log
+!/docs/migration/lot10b-evidence/recovery/diagnostic/window-oracle/checkpoint-47-first-abstention-01.log
+!/docs/migration/lot10b-evidence/recovery/diagnostic/window-oracle/export-01.log
+!/docs/migration/lot10b-evidence/recovery/diagnostic/window-oracle/export-02.log
+!/docs/migration/lot10b-evidence/recovery-20261111/diagnostic/entry-audit-01.log
+!/docs/migration/lot10b-evidence/recovery-20261111/diagnostic/kernel-01.log
+!/docs/migration/lot10b-evidence/recovery-20261111/diagnostic/kernel-02.log
+!/docs/migration/lot10b-evidence/recovery-20261111/diagnostic/lot10b-composed-typecheck-01.log
+!/docs/migration/lot10b-evidence/recovery-20261111/diagnostic/lot10b-composed-typecheck-02.log
+!/docs/migration/lot10b-evidence/recovery-20261111/diagnostic/migration-audit-01.log
+!/docs/migration/lot10b-evidence/recovery-20261111/diagnostic/migration-audit-02.log
+!/docs/migration/lot10b-evidence/recovery-20261111/diagnostic/typecheck-01.log
+!/docs/migration/lot10b-evidence/recovery-20261111/diagnostic/typecheck-02.log
+!/docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/parity.log
+!/docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/writer.log
+!/docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-02/parity.log
+!/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-live.log
+!/docs/migration/lot10b-evidence/recovery-20261111/lossless-transport-01/pack-error.log
+!/docs/migration/lot10b-evidence/recovery-20261111/lossless-transport-01/verification-error.log

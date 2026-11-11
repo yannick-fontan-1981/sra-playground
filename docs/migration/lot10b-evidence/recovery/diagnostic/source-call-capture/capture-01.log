@@ -1,0 +1,1 @@
+{"status":"passed","path":"docs/migration/lot10b-evidence/recovery/diagnostic/source-call-capture/synthetic-common-runtime-01.json.gz","bytes":69915,"sha256":"4d8a48dc2b073a3d000fa0535baa479898dbfdf5ff3108c161a68046f868677a","calls":10,"restores":7,"actions":3,"prefixes":3,"failure":null}
