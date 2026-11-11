@@ -1,0 +1,43 @@
+{
+  "schema": "logos-engine.lot10c.composed-functional-recovery-plan.v1",
+  "declaredAt": "2026-11-11T20:45:59.179845+00:00",
+  "nativeSourceDigest": "ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316",
+  "nativeFiles": 329,
+  "scope": {
+    "formalAffectedTests": 56,
+    "mainRecordedCases": 10,
+    "mainChecks": 170,
+    "additionalKataCases": 1,
+    "additionalKataChecks": 17
+  },
+  "maximumConcurrentReplays": 1,
+  "timingClaim": false,
+  "newLiveGameCurrentlyAuthorizedByThisPlan": false,
+  "existingSourceChecks": "docs/migration/lot10c-evidence/prepared-composition01/final-qualification-01/validation/checks-run.json",
+  "closedCaseExclusions": [
+    "tests/v6-ranked-workshop-kernel.test.ts",
+    "tests/v6-ranked-workshop-reference.test.ts",
+    "tests/v6-symbol-transactions-kernel.test.ts",
+    "tests/v6-framed-transfer-reference.test.ts"
+  ],
+  "budgetPolicy": "All case ledgers remain cumulative and unchanged by archived regression replays. LKEY stays closed. RECR and browser proof, if separately admitted later, must debit the same ledger.",
+  "performancePolicy": {
+    "metric": "median complete session",
+    "cases": [
+      "STCK",
+      "SMLP"
+    ],
+    "maximumPercentStrict": 10,
+    "phaseOver10AllowedIfSameGameGlobalPasses": true,
+    "noCrossGameCompensation": true
+  },
+  "publicationOrder": [
+    "5C/0.63",
+    "6B/0.64",
+    "8A/0.65",
+    "10C/0.66"
+  ],
+  "finalDeliveryAccepted": false,
+  "officialCostAccepted": false,
+  "qualification": "Fresh tests/replays on immutable prepared composition only. Prior four development batches remain historical. Actual predecessor reconciliation and final cost gates remain required. Main10 and KATA run separately; no eleven-case single execution claimed."
+}

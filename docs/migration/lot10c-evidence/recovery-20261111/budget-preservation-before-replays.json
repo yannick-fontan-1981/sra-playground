@@ -1,0 +1,14 @@
+{
+  "schema": "logos-engine.lot10c.recovery-budget-preservation.v1",
+  "observedAt": "2026-11-11T20:51:56.705705+00:00",
+  "case": "RECR",
+  "clockPath": "docs/migration/lot10c-evidence/case-clock.json",
+  "sourceCheckpoint": "3df0fc780f479e51f51aaceb2a32ec287b67671d",
+  "checkpointSha256": "a75cdfd0a131a555f8087c2b7c2625774a056b6b7eb8eea2d43dae6b503256d2",
+  "currentSha256": "a75cdfd0a131a555f8087c2b7c2625774a056b6b7eb8eea2d43dae6b503256d2",
+  "bytesIdentical": true,
+  "liveCampaignStarted": false,
+  "originalCaseComparisonStarted": false,
+  "browserStarted": false,
+  "qualification": "No new case-specific activity in this recovery; only declared source/tests and archived public regressions. The immutable prior case ledger is preserved, not reset."
+}

@@ -1,0 +1,9 @@
+{
+  "schema": "logos-engine.executor-command-handle.v1",
+  "sessionId": 82777,
+  "kind": "archived_kata_supplement",
+  "startedAt": "2026-11-11T20:55:15.039157+00:00",
+  "receipt": "docs/migration/lot10c-evidence/recovery-20261111/kata-supplement/replay01/regressions/regression-summary.json",
+  "nodeTimeoutSeconds": 600,
+  "noAutomaticFollowup": true
+}

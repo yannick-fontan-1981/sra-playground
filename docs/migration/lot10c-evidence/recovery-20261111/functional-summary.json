@@ -1,0 +1,246 @@
+{
+  "schema": "logos-engine.lot10c.composed-functional-milestone.v1",
+  "status": "functional_checks_and_integrity_passed",
+  "recordedAt": "2026-11-11T21:32:35.759299+00:00",
+  "candidate": {
+    "nativeFiles": 329,
+    "nativeSourceDigest": "ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316",
+    "proposedNativeVersion": "0.66.0",
+    "connectedEntries": 68,
+    "declaredEntries": 76,
+    "percent": 89.5,
+    "nativeSourceChangedInRecovery": false,
+    "fullCallerParity": false
+  },
+  "formalTests": {
+    "receipt": {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/validation/delta-tests-run.json",
+      "sha256": "44ba7bf9b2ef3494f5d8870b744b19b64d882a9b7de4f791bc7a1c5424e0bc8c",
+      "bytes": 188221
+    },
+    "review": {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/validation/formal-review.json",
+      "sha256": "560955b1f519eeff36d0949306bba7159c7f8f82a3e97e72a6aef8b97a6e4658",
+      "bytes": 1752
+    },
+    "files": 56,
+    "counts": {
+      "tests": 1767,
+      "pass": 1767,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "priorDevelopmentBatchesAdded": false,
+    "incomplete600sAttemptAccepted": false,
+    "incompleteAttemptRetained": {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional01/validation/delta-tests-run.json",
+      "sha256": "c3fcaa299c46569b77e60123517cd862b783128bf7ae456e237c33e8e1a18330",
+      "bytes": 188258
+    }
+  },
+  "projectChecks": {
+    "passed": 5,
+    "freshBuildExecuted": true,
+    "receipt": {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional01/validation/checks-run.json",
+      "sha256": "0e80441e35327795eed6c40458e598def32df0b6b63975650782100b69f2b4ce",
+      "bytes": 223253
+    },
+    "sameReceiptReusedInFunctional02": {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/validation/reused-project-checks.json",
+      "sha256": "c4715aaa12bf2178d635d1e84dc3ec7f69fb78d1df309dd56daa1a6174a8c5b6",
+      "bytes": 1481
+    },
+    "buildAssetMaterialization": {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/build-assets-materialization.json",
+      "sha256": "2813d9d45cc6291cec06cffef1c24d2cadb795b53cf0cfdb2b2372fa031016b0",
+      "bytes": 3262
+    },
+    "nativeWorker": {
+      "path": "dist/assets/v6-agent-worker-DW42rSkw.js",
+      "sha256": "59a0e378d31d4701270bcea5a95715db4f54b8b204112a0ec2660f7ff5c0ff26",
+      "bytes": 6995019
+    }
+  },
+  "recordedRegressions": {
+    "main": {
+      "cases": 10,
+      "comparisons": 170,
+      "review": {
+        "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regression-review.json",
+        "sha256": "d54e7dc61c76b5ad213e6519104bb779e5a681d296be8e9b3e54fe4d015b09c0",
+        "bytes": 5600
+      },
+      "summary": {
+        "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/regression-summary.json",
+        "sha256": "4e632558bdf6cf6a1a214f69fc640565ccd79e0c20014cfb120d217369b1389d",
+        "bytes": 218171
+      }
+    },
+    "kataSupplement": {
+      "cases": 1,
+      "comparisons": 17,
+      "review": {
+        "path": "docs/migration/lot10c-evidence/recovery-20261111/kata-supplement/review.json",
+        "sha256": "5d5e1747dcec686e71cea058947faf4c4ad75c0aececec2ad3d99cb7e0bdb7ff",
+        "bytes": 1876
+      }
+    },
+    "distinctCases": 11,
+    "combinedComparisons": 187,
+    "singleElevenCaseRunClaimed": false,
+    "newLiveSuccessClaimed": false
+  },
+  "integrity": {
+    "receipt": {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/delivery-integrity.json",
+      "sha256": "0585bd80041ffed160f2adf81dcb8d89e6aeaafb6ff60c60ec13d918f9cd4283",
+      "bytes": 11665
+    },
+    "inventories": {
+      "native": 329,
+      "archive": 816,
+      "sourceAndTests": 753,
+      "buildInputs": 394,
+      "regressionExecutionInputs": 10
+    },
+    "pinnedOriginalFilesUnchanged": 1786,
+    "storageReview": {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/storage-review.json",
+      "sha256": "0233c55c8d7d0fc6eb845b9180fb7fd16cf116a223eb2e0a09881cd83ecb87c9",
+      "bytes": 2388
+    },
+    "mainReportsRestored": 10,
+    "mainParts": 107,
+    "mainRestoredBytes": 91834393,
+    "kataReportsRestored": 1,
+    "kataParts": 11,
+    "kataRestoredBytes": 9774240
+  },
+  "ordinaryWorkPolicy": {
+    "globalLockRequired": false,
+    "peerQuietRequired": false,
+    "peerPublicationRequired": false,
+    "exclusiveOnlyForOfficialPerformanceAndPublication": true,
+    "caseScopedAccountingLockPreserved": true,
+    "historicalExecutedHelpersModified": false,
+    "shortSimulatedChecksPassed": 19,
+    "policyFiles": [
+      "docs/migration/lot10-ordinary-work-policy.md",
+      "docs/migration/lot10-ordinary-case-work-policy.md"
+    ],
+    "controlReceipts": [
+      {
+        "path": "docs/migration/lot10c-evidence/recovery-20261111/ordinary-policy/controls.json",
+        "sha256": "0748e64e78fc7c7a5d63a664647e92cdca5933cf544ff70bc1e336ee03e65826",
+        "bytes": 2020
+      },
+      {
+        "path": "docs/migration/lot10c-evidence/recovery-20261111/ordinary-policy/case-and-review-controls.json",
+        "sha256": "a5a6f952497306f9bcc6fcf27e48db7db25488cba155af36ea7c9005626a431d",
+        "bytes": 1387
+      }
+    ],
+    "heldLockFilesDeleted": false
+  },
+  "caseReservations": {
+    "recrClock": {
+      "path": "docs/migration/lot10c-evidence/case-clock.json",
+      "sha256": "a75cdfd0a131a555f8087c2b7c2625774a056b6b7eb8eea2d43dae6b503256d2",
+      "bytes": 13361
+    },
+    "recrSpentSeconds": 642.824027506,
+    "recrRemainingSeconds": 1757.175972494,
+    "recrClockUnchanged": true,
+    "historicalRecrAndBrowserNativeFiles": 315,
+    "historicalRecrAndBrowserDigestPrefix": "bb7d62",
+    "freshRecrOrBrowserOn329": false,
+    "hpdlSixLevelsEstablished": false,
+    "lkeyRemainsClosed": true,
+    "fourLkeyModulesExcluded": true
+  },
+  "officialQualification": {
+    "costMeasured": false,
+    "costAccepted": false,
+    "publicationPerformed": false,
+    "finalReleaseAccepted": false,
+    "requiredCostBaselineNativeVersion": "0.65.0",
+    "globalCompleteSessionMedianIncreaseMustBeBelowPercent": 10,
+    "evaluateGamesSeparately": [
+      "STCK",
+      "SMLP"
+    ],
+    "phaseAbove10AllowedIfSameGameGlobalPasses": true,
+    "publicationObservation": {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/publication-observation-final.json",
+      "sha256": "c34abcbef4e0ef083b7f1ce771618d7fc856709754c770503258ee6f7ae72393",
+      "bytes": 984
+    }
+  },
+  "sourceBackups": {
+    "payloadCheckpoint": "4622babc20ae32d9421d3cdeeaebaa84a48befac",
+    "ref": "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111",
+    "proofGroups": [
+      {
+        "index": 1,
+        "commit": "9bb75a1ec252f38cf3eae3dbe0d018d43b2c5856",
+        "files": 62,
+        "rawBytes": 20970697,
+        "remoteVerifiedAt": "2026-11-11T21:28:53.996Z"
+      },
+      {
+        "index": 2,
+        "commit": "f228e7255335bad5eebe350e082e6f1f896b5bb5",
+        "files": 60,
+        "rawBytes": 20578879,
+        "remoteVerifiedAt": "2026-11-11T21:29:02.096Z"
+      },
+      {
+        "index": 3,
+        "commit": "3d90f4a90675f479c8ee706b3ff8d925a42c4d58",
+        "files": 36,
+        "rawBytes": 19043286,
+        "remoteVerifiedAt": "2026-11-11T21:29:26.471Z"
+      },
+      {
+        "index": 4,
+        "commit": "229cea6d24f507a6274e1f6a45e3e03d7813b1c9",
+        "files": 25,
+        "rawBytes": 15798896,
+        "remoteVerifiedAt": "2026-11-11T21:29:34.963Z"
+      },
+      {
+        "index": 5,
+        "commit": "70fc9d1ba329142f2b5e1dc35f6899105e76359c",
+        "files": 25,
+        "rawBytes": 15519625,
+        "remoteVerifiedAt": "2026-11-11T21:30:00.160Z"
+      },
+      {
+        "index": 6,
+        "commit": "4622babc20ae32d9421d3cdeeaebaa84a48befac",
+        "files": 31,
+        "rawBytes": 21328808,
+        "remoteVerifiedAt": "2026-11-11T21:30:08.979Z"
+      }
+    ],
+    "proofFiles": 239,
+    "proofBytes": 113240191,
+    "transportReview": {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/transport/review.json",
+      "sha256": "05507e95969157a4aaf4bc0396adfd0d7964462ea5963f593b7ba3d8bcb30aa6",
+      "bytes": 1961
+    },
+    "qualification": "The payload checkpoint is already remotely verified. Subsequent documentation closure records this complete milestone and remains source-only."
+  },
+  "nextOrdinaryStep": {
+    "lot": "10D",
+    "component": "temporal_selection",
+    "action": "Create the independent Python reference exporter and initial geometry/selection corpus; then implement and connect the native owner against those source results.",
+    "preparationNote": "docs/migration/lot10d-temporal-selection-next-step.md",
+    "waitForOtherPublications": false
+  },
+  "qualification": "Formal functional checks and lossless proof integrity passed on the unchanged329candidate. Historical RECR/browser evidence remains315-only. This milestone does not establish official cost, publication0.66, complete caller parity or complete original migration."
+}

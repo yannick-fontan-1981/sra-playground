@@ -1,0 +1,22 @@
+{
+  "schema": "logos-engine.executor-command-terminal.v1",
+  "sessionId": 94287,
+  "exitCode": 0,
+  "status": "passed",
+  "summary": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/regression-summary.json",
+    "sha256": "4e632558bdf6cf6a1a214f69fc640565ccd79e0c20014cfb120d217369b1389d",
+    "bytes": 218171
+  },
+  "launcher": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regression-launch.json",
+    "sha256": "3220bcd08d779f732104a1edadc91dd656ac39ff36eab657b5225a9aee579e3e",
+    "bytes": 11606
+  },
+  "review": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regression-review.json",
+    "sha256": "d54e7dc61c76b5ad213e6519104bb779e5a681d296be8e9b3e54fe4d015b09c0",
+    "bytes": 5600
+  },
+  "lockRelease": "Legacy helper completed and left its own flock context normally; no lock file was deleted or replaced."
+}
