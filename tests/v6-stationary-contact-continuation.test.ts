@@ -61,7 +61,11 @@ function provider(id: string, calls: string[], options: OfferOptions = {}): Nati
       stop_group: group, source_entry: entry, release_authority: false, reason: 'synthetic_source_group_stop',
     }) } : {}),
     before: (...args) => {
-      assert.equal(args.length, 4, 'The existing four-argument current guard is preserved');
+      assert.equal(args.length, 5, 'Current guards receive the invocation execution context');
+      assert.equal(args[4]!.yieldControl, execution.yieldControl);
+      assert.equal(args[4]!.signal, execution.signal);
+      assert.equal(args[4]!.now!(), 0);
+      assert.equal(args[4]!.deadlineMs, 360_000);
       calls.push(`${id}:before`); guards++;
       return { admitted: !options.guardVeto && !(options.executionGuardVeto && guards > 1), reason: 'synthetic_current_guard' };
     },

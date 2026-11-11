@@ -1,0 +1,34 @@
+{
+  "schema": "logos-engine.lot10b.clock-origin-regression.v1",
+  "stage": "after-fix",
+  "startedAt": "2026-11-11T13:50:23.225434+00:00",
+  "finishedAt": "2026-11-11T13:50:24.722309+00:00",
+  "command": [
+    "node",
+    "--test",
+    "--test-name-pattern",
+    "native current deadlines convert caller clock",
+    "--test-reporter=tap",
+    "tests/v6-native-runtime.test.ts"
+  ],
+  "exitCode": 0,
+  "elapsedSeconds": 1.4959690079995198,
+  "counts": {
+    "tests": 2,
+    "pass": 2,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "inputsBefore": {
+    "src/logos-engine/v6-native-runtime.ts": "35ee423d3dbfd74b7969c568db48222260ef78dab8a75402a7f28d643a110438",
+    "tests/v6-native-runtime.test.ts": "8badc5aba5b71906da3d33bc323455b047721d5546c16fdbb20ac76d6eb8b7fc"
+  },
+  "inputsAfter": {
+    "src/logos-engine/v6-native-runtime.ts": "35ee423d3dbfd74b7969c568db48222260ef78dab8a75402a7f28d643a110438",
+    "tests/v6-native-runtime.test.ts": "8badc5aba5b71906da3d33bc323455b047721d5546c16fdbb20ac76d6eb8b7fc"
+  },
+  "inputsUnchanged": true,
+  "qualification": "Targeted public runtime clock-origin or existing cold Window caller verification after the narrow clock conversion fix; no game or performance claim."
+}

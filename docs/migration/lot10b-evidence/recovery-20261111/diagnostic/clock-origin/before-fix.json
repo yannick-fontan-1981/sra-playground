@@ -1,0 +1,34 @@
+{
+  "schema": "logos-engine.lot10b.clock-origin-regression.v1",
+  "stage": "before_fix",
+  "startedAt": "2026-11-11T13:49:57.173969+00:00",
+  "finishedAt": "2026-11-11T13:49:58.378734+00:00",
+  "command": [
+    "node",
+    "--test",
+    "--test-name-pattern",
+    "native current deadlines convert caller clock",
+    "--test-reporter=tap",
+    "tests/v6-native-runtime.test.ts"
+  ],
+  "exitCode": 1,
+  "elapsedSeconds": 1.203465963999406,
+  "counts": {
+    "tests": 2,
+    "pass": 0,
+    "fail": 2,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "inputsBefore": {
+    "src/logos-engine/v6-native-runtime.ts": "13a6bc9a9d80b18e31a31c38d0acab2eadbbcc16752b4c9262e0da1623f37288",
+    "tests/v6-native-runtime.test.ts": "8badc5aba5b71906da3d33bc323455b047721d5546c16fdbb20ac76d6eb8b7fc"
+  },
+  "inputsAfter": {
+    "src/logos-engine/v6-native-runtime.ts": "13a6bc9a9d80b18e31a31c38d0acab2eadbbcc16752b4c9262e0da1623f37288",
+    "tests/v6-native-runtime.test.ts": "8badc5aba5b71906da3d33bc323455b047721d5546c16fdbb20ac76d6eb8b7fc"
+  },
+  "inputsUnchanged": true,
+  "qualification": "Deliberate reproduction of the two clock-origin regressions on the historical native implementation; filtered tests, no game or performance claim."
+}

@@ -1,0 +1,19 @@
+{
+  "operation": "pack",
+  "directory": "docs/migration/lot10b-evidence",
+  "partBytes": 900000,
+  "verified": [
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json.gz",
+      "sha256": "928a2031fd48f98a87d0ccbb7fd21a447106e65cccaca50b8628781e4cb97348",
+      "bytes": 20775890,
+      "manifest": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json.gz.parts.json",
+      "parts": 24,
+      "restored": false
+    }
+  ],
+  "gitignoreEntriesAdded": [
+    "/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json.gz"
+  ],
+  "qualification": "Exact byte transport only; no agent result is regenerated or reinterpreted."
+}

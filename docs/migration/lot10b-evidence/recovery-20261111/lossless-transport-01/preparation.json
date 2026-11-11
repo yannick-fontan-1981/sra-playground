@@ -1,0 +1,156 @@
+{
+  "schema": "logos-engine.lot10b.lossless-transport-preparation.v1",
+  "startedAt": "2026-11-11T14:29:18.605426+00:00",
+  "inputsBefore": [
+    {
+      "path": "scripts/evidence-byte-parts.py",
+      "sha256": "fcc651b3d533a87805378c126b1253d40f343ccc51108a7881c3db33bf1f8350",
+      "bytes": 7210
+    },
+    {
+      "path": "scripts/restore-v53-evidence.py",
+      "sha256": "e0494dda3dd445e0db0bf04cccac27ad8d19c917ccd2b4b10c068df6faf7c23d",
+      "bytes": 3361
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "855577514c6e3c1f16c6fbd1b28c88cf0b19d7d9ce10f5dd130daab3bcc21014",
+      "bytes": 33195
+    }
+  ],
+  "terminalObjectInventory": [
+    {
+      "path": "docs/migration/lot10b-evidence/recovery/diagnostic/source-call-capture/capture-01.log",
+      "bytes": 290
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery/diagnostic/source-call-capture/capture-02.log",
+      "bytes": 517
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery/diagnostic/source-call-capture/capture-03.log",
+      "bytes": 517
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery/diagnostic/source-call-capture/parity-01.log",
+      "bytes": 1331
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery/diagnostic/source-call-capture/parity-03.log",
+      "bytes": 1331
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery/diagnostic/source-call-capture/synthetic-common-runtime-01.json.gz",
+      "bytes": 69915
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery/diagnostic/source-call-capture/synthetic-common-runtime-02-public-trace.json.gz",
+      "bytes": 713
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery/diagnostic/source-call-capture/synthetic-common-runtime-02.json.gz",
+      "bytes": 70133
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery/diagnostic/source-call-capture/synthetic-common-runtime-03-public-trace.json.gz",
+      "bytes": 712
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery/diagnostic/source-call-capture/synthetic-common-runtime-03.json.gz",
+      "bytes": 70159
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery/diagnostic/source-call-capture/synthetic-source-parity-01.json.gz",
+      "bytes": 68816
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery/diagnostic/source-call-capture/synthetic-source-parity-03.json.gz",
+      "bytes": 69186
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery/diagnostic/window-oracle/checkpoint-47-first-abstention-01.log",
+      "bytes": 683
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery/diagnostic/window-oracle/export-01.log",
+      "bytes": 343
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery/diagnostic/window-oracle/export-02.log",
+      "bytes": 377
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery/diagnostic/window-oracle/reference-01.json.gz",
+      "bytes": 125972
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery/diagnostic/window-oracle/reference-02.json.gz",
+      "bytes": 125943
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/diagnostic/entry-audit-01.log",
+      "bytes": 294
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/diagnostic/kernel-01.log",
+      "bytes": 1670
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/diagnostic/kernel-02.log",
+      "bytes": 1172
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/diagnostic/lot10b-composed-typecheck-01.log",
+      "bytes": 149
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/diagnostic/lot10b-composed-typecheck-02.log",
+      "bytes": 149
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/diagnostic/migration-audit-01.log",
+      "bytes": 622
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/diagnostic/migration-audit-02.log",
+      "bytes": 338
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/diagnostic/typecheck-01.log",
+      "bytes": 149
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/diagnostic/typecheck-02.log",
+      "bytes": 149
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/parity.log",
+      "bytes": 0
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/writer.log",
+      "bytes": 2217
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-02/parity.log",
+      "bytes": 259526
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-02/window-source-parity.PARTIAL.json.gz",
+      "bytes": 131853
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-freeze-01/source-archive.tar.gz",
+      "bytes": 1926442
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json.gz",
+      "bytes": 20775890
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-live.log",
+      "bytes": 159375
+    }
+  ],
+  "qualification": "Byte transport of retained terminal artifacts only. No checkpoint JSON decoding, original component, game, native execution or result regeneration."
+}

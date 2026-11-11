@@ -1,0 +1,17 @@
+{"case": "catr-051", "phase": "node_running", "elapsedSeconds": 0.0, "lastProgress": null, "nodeMemory": {"pid": 71, "VmSize": "112336 kB", "VmHWM": "1200 kB", "VmRSS": "1200 kB", "Threads": "1"}}
+{"case": "catr-051", "nodeProgress": {"phase": "baseline-released"}}
+{"case": "catr-051", "phase": "node_running", "elapsedSeconds": 15.04, "lastProgress": {"phase": "stopped", "levelsCompleted": 3}, "nodeMemory": {"pid": 71, "VmSize": "10672972 kB", "VmHWM": "656584 kB", "VmRSS": "656584 kB", "Threads": "11"}}
+{"case": "catr-051", "phase": "comparison_running", "nodeExitCode": 0}
+{"case": "catr-051", "phase": "completed", "passed": true, "actions": 12, "comparisonChecks": 17, "failedChecks": []}
+{"case": "rswp-051", "phase": "node_running", "elapsedSeconds": 0.0, "lastProgress": null, "nodeMemory": {"pid": 84, "VmSize": "112732 kB", "VmHWM": "3876 kB", "VmRSS": "3876 kB", "Threads": "1"}}
+{"case": "rswp-051", "nodeProgress": {"phase": "baseline-released"}}
+{"case": "rswp-051", "phase": "node_running", "elapsedSeconds": 15.04, "lastProgress": {"phase": "request", "operation": "advance", "sequence": 10}, "nodeMemory": {"pid": 84, "VmSize": "10608772 kB", "VmHWM": "607744 kB", "VmRSS": "597672 kB", "Threads": "11"}}
+{"case": "rswp-051", "phase": "node_running", "elapsedSeconds": 30.07, "lastProgress": {"phase": "request", "operation": "resume", "sequence": 18}, "nodeMemory": {"pid": 84, "VmSize": "10905276 kB", "VmHWM": "944880 kB", "VmRSS": "894528 kB", "Threads": "11"}}
+{"case": "rswp-051", "phase": "comparison_running", "nodeExitCode": 0}
+{"case": "rswp-051", "phase": "completed", "passed": true, "actions": 19, "comparisonChecks": 17, "failedChecks": []}
+{"case": "fogw-051", "phase": "node_running", "elapsedSeconds": 0.0, "lastProgress": null, "nodeMemory": {"pid": 97, "VmSize": "112344 kB", "VmHWM": "1768 kB", "VmRSS": "1768 kB", "Threads": "1"}}
+{"case": "fogw-051", "nodeProgress": {"phase": "baseline-released"}}
+{"case": "fogw-051", "phase": "node_running", "elapsedSeconds": 15.05, "lastProgress": {"phase": "request", "operation": "advance", "sequence": 15}, "nodeMemory": {"pid": 97, "VmSize": "10645152 kB", "VmHWM": "823032 kB", "VmRSS": "622544 kB", "Threads": "11"}}
+{"case": "fogw-051", "phase": "node_running", "elapsedSeconds": 30.08, "lastProgress": {"phase": "request", "operation": "advance", "sequence": 21}, "nodeMemory": {"pid": 97, "VmSize": "10820612 kB", "VmHWM": "877116 kB", "VmRSS": "800080 kB", "Threads": "11"}}
+{"case": "fogw-051", "phase": "node_running", "elapsedSeconds": 45.1, "lastProgress": {"phase": "request", "operation": "advance", "sequence": 28}, "nodeMemory": {"pid": 97, "VmSize": "11012628 kB", "VmHWM": "992380 kB", "VmRSS": "992380 kB", "Threads": "11"}}
+{"case": "fogw-051", "phase": "node_running", "elapsedSeconds": 60.13, "lastProgress": {"phase": "request", "operation": "advance", "sequence": 35}, "nodeMemory": {"pid": 97, "VmSize": "11131492 kB", "VmHWM": "1181040 kB", "VmRSS": "1111524 kB", "Threads": "11"}}

@@ -1,0 +1,327 @@
+{
+  "lot": "7 follow-up: Workshop stationary continuation",
+  "updated_at": "2026-11-11T16:03:36.401083+00:00",
+  "phase": "completed_native_cost_and_final_documentation_published",
+  "checkout": "/workspace/sites/sra-lot7-followup-recovery-20261111/.sites-checkout",
+  "stage": "Native0.61 and final clean-repeat qualification are complete; final documentation Site101 succeeded. Source, validated application and accepted measurement are bound.",
+  "heavy_work_started": false,
+  "heavy_execution_active": false,
+  "performance_started": true,
+  "publication_started": true,
+  "active_command": null,
+  "preview_stopped": true,
+  "case_clock_state": "closed",
+  "case_clock_cumulative_seconds": 2390.347106991,
+  "case_clock_remaining_seconds": 9.652893008999854,
+  "reserved_native_version": "0.61.0 delivered and qualified",
+  "publication_order": "6A0.60 completed Sites96/97 ->7followup0.61 ->10B0.62 ->5C0.63",
+  "request_to_other_lanes": "GO: final Site101 succeeded at15:43:52UTC; publication lock actually released15:46:06UTC. Source d75a36f0a99bf6c301034523a3138a64d2f6e744, native0.61/f8d5097…, clean-repeat cost accepted2/2. All own agents and compute terminal, no queued work. See final handoff. Next agreed delivery and exclusive functional slot belong to10B after coordination of other active lanes.",
+  "request_to_lot6a": "Read your successor6Bstatus, ACK startupGitreadexception plus5CI/O, new full ABBA planned. Require fresh actual6B quietACK; completed6Astatus will not substitute.",
+  "request_to_lot10b": "Bounded roadmap/register reads completed16:00:34UTC underSH,257150bytes. Fresh complete tool-idle ACK for lot10b-hpdl02-proof-qa remains valid. User requested next work; successor8A motif_conditioned_access is reserved in lot8a-status.json, also fully tool-idle. No source/Git/hash/test/build/replay job has started or is queued. After explicit release, use8Astatus for active successor coordination; completed7 status alone will not represent later successor work.",
+  "request_to_lot5c": "Final Site101/source d75a36f0a99bf6c301034523a3138a64d2f6e744 is complete, private, and cost-qualified. Publication lock released; all lot7 work terminal. Continue your0.63 preparation and coordinate next10B slot. First timing window remains ineligible.",
+  "branch": "lot7-followup-recovered-site95",
+  "source_checkpoint": {
+    "commit": "900febf8b165136be07663ee106de1747a1f1181",
+    "ref": "refs/heads/lot7-followup-recovery-checkpoint-20261111",
+    "pushedAndVerified": true,
+    "nativeDigest": "f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279",
+    "nativeFileCount": 306,
+    "publication": false
+  },
+  "source_docs_checkpoint": "d75a36f0a99bf6c301034523a3138a64d2f6e744",
+  "provisional_validation": {
+    "newSyntheticTestsPassed": 51,
+    "affectedTestsPassed": 196,
+    "typecheck": "passed",
+    "originalPythonSyntheticOperations": 24,
+    "originalSourceFilesVerified": 1786,
+    "finalIntegratedValidation": "pending6Astableintegration"
+  },
+  "formal_first_attempt": {
+    "tests": 5042,
+    "passed": 5040,
+    "failed": 2,
+    "retained": true
+  },
+  "prepared6ACheckpoint": "c263271442b8e8a8084c39c2f9301fd3163e7d29",
+  "testCorrectionCheckpoint": "900febf8b165136be07663ee106de1747a1f1181",
+  "buildGate": "5/5 passed on unchanged frozen source",
+  "quiet_request_id": "lot10b-hpdl02-proof-qa",
+  "quiet_request_observed_at": "2026-11-11T12:48:42.886940+00:00",
+  "quiet_acknowledged": true,
+  "recorded_regressions_completed": {
+    "cases": 11,
+    "comparisons": 187,
+    "status": "passed",
+    "exitCode": 0,
+    "session": 72585
+  },
+  "quiet_acknowledged_at": "2026-11-11T16:00:34.865856+00:00",
+  "quiet_scope": "Fresh tool-idle acknowledgment for next10B HPDL02 proof/QA: original comparison<=300s and planned browser controls<=180s, charged to the same case clock. Only tiny named coordination metadata until explicit release.",
+  "all_own_subagents_compute_idle": true,
+  "formal_retry": {
+    "status": "passed",
+    "tests": 5042,
+    "passed": 5042,
+    "failed": 0,
+    "skipped": 0,
+    "cancelled": 0,
+    "todo": 0,
+    "session": 8462,
+    "receipt": "docs/migration/lot7b-evidence/followup-recovery/integrated-final/verification-attempt-02/validation/delta-tests-run.json"
+  },
+  "next_requested_quiet_window": "lot7-followup-clean-repeat-f8d5097",
+  "quiet_release_observed_at": "2026-11-11T13:34:07.312970+00:00",
+  "quiet_requested": false,
+  "quiet_requested_at": "2026-11-11T15:07:59.348713+00:00",
+  "actualPublishedPredecessor": {
+    "siteVersion": 97,
+    "nativeVersion": "0.60.0",
+    "commit": "98336fba4e696a51c90ff7f7b37b8bdf95f34847",
+    "nativeDigest": "ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229",
+    "reconciled": true
+  },
+  "performance_lock_held": false,
+  "candidateWindowCommit": "965e2dbe38c1a484a3dc1f5d79e5dcec03d55b03",
+  "performance_completed": true,
+  "quiet_released_at": "2026-11-11T15:33:19.663958+00:00",
+  "source_transport": {
+    "steps": 5,
+    "finalCommit": "653e40a4f45df8ec8c6bda005004c7cdb8df074a",
+    "applicationComparisons": 375,
+    "recheck": "passed"
+  },
+  "cost_result": {
+    "status": "accepted_from_complete_clean_repeat",
+    "STCKRelativeIncrease": -0.02924029997654297,
+    "SMLPRelativeIncrease": 9.073896194578176e-05,
+    "measuredSessions": 32,
+    "measuredActions": 400,
+    "warmups": 8,
+    "warmupActions": 24,
+    "checkedTrials": 40,
+    "arithmeticChecks": 231,
+    "aggregateDiagnosticsWithinBudget": 14,
+    "aggregateDiagnostics": 16,
+    "firstWindowEligible": false,
+    "receipt": "/workspace/sites/sra-lot7-followup-recovery-20261111/.sites-checkout/docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/isolation-revalidation.json",
+    "receiptSha256": "028711ca50c8461f700c43cdaea02d1ac38190a669698621c903314b4b3777b0"
+  },
+  "published_native": {
+    "siteVersion": 98,
+    "nativeVersion": "0.61.0",
+    "commit": "653e40a4f45df8ec8c6bda005004c7cdb8df074a",
+    "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_b6a726c7545c819190323d5ac24110e6",
+    "deploymentId": "appgdep_6af47df68da08191bc9cd0290615b53d",
+    "status": "succeeded",
+    "url": "https://sra-playground.yannick-fontan.chatgpt.site"
+  },
+  "quiet_deviation_acknowledged": {
+    "at": "2026-11-11T14:55:16.567271+00:00",
+    "report": "/workspace/shared/sra-coordination/lot5c-quiet-deviation-20261111T1420.json",
+    "receipt": "/workspace/sites/sra-lot7-followup-recovery-20261111/.sites-checkout/docs/migration/lot7b-evidence/followup-recovery/coordination/quiet-deviation-acknowledgment.json",
+    "firstWindowEligibleForIsolatedCostGate": false
+  },
+  "published_documentation": {
+    "schema": "logos-engine.followup-documentation-publication.v1",
+    "recordedAt": "2026-11-11T14:50:48.354Z",
+    "status": "succeeded",
+    "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+    "siteVersion": 99,
+    "nativeVersion": "0.61.0",
+    "nativeDigest": "f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279",
+    "nativeFiles": 306,
+    "nativePublishedSiteVersion": 98,
+    "nativePublishedCommit": "653e40a4f45df8ec8c6bda005004c7cdb8df074a",
+    "documentationCommit": "61e176b42234db380f23aaace216e6bd2bfe7491",
+    "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_a924a91e4f948191b84244d927a000da",
+    "deploymentId": "appgdep_6af48081f4308191acf4b8d9cf41439c",
+    "deploymentStatus": "succeeded",
+    "deploymentUpdatedAt": "2026-11-11T14:49:50.757374+00:00",
+    "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "archive": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_0000000013e0820eae3b0919aca896ac",
+      "content_hash": "sha256:13a7d25939ceb816f8a20db7d398cf6bf3b760785f076f3bc86b07218ad11dbc",
+      "size_bytes": 29992960,
+      "file_count": 75
+    },
+    "access": {
+      "currentUserRole": "owner",
+      "accessMode": "custom",
+      "policyRevision": 3,
+      "allowedUserCount": 1,
+      "allowedGroupCount": 0,
+      "externalVisitorCount": 0
+    },
+    "unchangedValidatedApplication": {
+      "regularMemberCount": 75,
+      "regularMemberBytes": 29929130,
+      "nativeWorkerSha256": "531a5a14739622b50a92b10ffd8daa4dbec9b6a3a3e1314c5dd34949765ac6f1",
+      "hostingArchiveContentHashIdenticalToNativePublication": true
+    },
+    "evidence": {
+      "sourceCheck": "documentation-source-check.json",
+      "remoteBefore": "documentation-remote-before.json",
+      "sourceWorkflow": "documentation-workflow.json",
+      "applicationVerification": "documentation-application-verification.json",
+      "finalRecheck": "documentation-final-recheck.json"
+    },
+    "qualification": "Actual terminal Sites API result, followed by exact saved-version and private-access readback. Documentation-only source delta; no new native tests, build, replay, browser execution or cost measurement. This post-publication receipt is retained separately to avoid anticipating its own publication."
+  },
+  "request_to_lot6b": "Final Site101/source d75a36f0a99bf6c301034523a3138a64d2f6e744 is complete, private, and cost-qualified. Publication lock released; all lot7 work terminal. Continue6B preparation after planned10B/5C deliveries and honor next10B exclusive slot.",
+  "publication_lock_held": false,
+  "publication_lock_recovery": {
+    "oldSession": 54884,
+    "oldSessionUnavailableAfterDisconnection": true,
+    "newSession": 12280,
+    "newLockAcquiredAt": "2026-11-11T14:57:19.769665+00:00",
+    "scope": "corrected clean-repeat cost and documentation closure"
+  },
+  "startup_git_read_exception_acknowledged": true,
+  "first_window_completed": true,
+  "first_window_eligible_for_isolated_cost": false,
+  "previous_quiet_released_at": "2026-11-11T14:27:24.161342+00:00",
+  "quiet_preparation_exception": {
+    "issuedAt": "2026-11-11T15:02:35.087612+00:00",
+    "lane": "lot5c",
+    "scope": "One bounded documentation commit and own-branch source checkpoint push, about20–40s, under shared lock; no archive/build/test/game or other work. Complete before fresh quiet ACK. Official clean-repeat window has not started.",
+    "renewedAckRequiredAfterThisException": true
+  },
+  "temporary_premeasurement_release": {
+    "issuedAt": "2026-11-11T15:04:22.096246+00:00",
+    "lanes": [
+      "lot6b",
+      "lot10b",
+      "lot5c"
+    ],
+    "scope": "Bounded source-only preparation up to120s underSH while repeat tooling is independently reviewed. No runtime/test/build/replay/game/browser/large recursive scan. Existing5C checkpoint closure may finish. All subsequent officialwindowACKs must use a new final request ID.",
+    "futureFinalQuietRequestId": "lot7-followup-clean-repeat-f8d5097-final",
+    "closedAt": "2026-11-11T15:07:59.348713+00:00",
+    "status": "closed_before_any_official_repeat"
+  },
+  "final_status_guard": {
+    "requiredRequestId": "lot7-followup-clean-repeat-f8d5097-final",
+    "requiredAckAfter": "2026-11-11T15:07:59.348713+00:00",
+    "payloadMustStayStableExcept": [
+      "updated_at"
+    ],
+    "guardedLanes": [
+      "lot6b",
+      "lot10b",
+      "lot5c"
+    ],
+    "realExceptionsMustStillBeDisclosed": true,
+    "holdThrough": "official window, strict work verification, arithmetic and acceptance, then explicit release"
+  },
+  "repeat_declaration": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/repeat-declaration.json",
+    "sha256": "5dbecd1f377dd9d5e5eb64e8338510c2d48b3996b17d53b1fb4b41c3c2d90f7d",
+    "status": "declared_before_repeat"
+  },
+  "published_cost_qualification_correction": {
+    "siteVersion": 100,
+    "commit": "5f8ca04cbf69cf2ccf7d2aba64a4cfde2a280613",
+    "status": "succeeded"
+  },
+  "fresh_final_lane_acknowledgments": [
+    {
+      "lane": "lot6b",
+      "acknowledgedAt": "2026-11-11T15:08:21.385493+00:00"
+    },
+    {
+      "lane": "lot10b",
+      "acknowledgedAt": "2026-11-11T15:08:55.842748+00:00"
+    },
+    {
+      "lane": "lot5c",
+      "acknowledgedAt": "2026-11-11T15:16:27.841372+00:00"
+    }
+  ],
+  "exclusive_lock_owner": "repeat-evidence.py will acquire and retain actual EX through ABBA plus strict40 verification",
+  "performance_lock_acquired_at": "2026-11-11T15:22:07.828565+00:00",
+  "quiet_release_scope": "GO shared-lock functional/source work. Completed clean repeat and acceptance are terminal. Publication lock remains held only for final source/docs closure; a new exclusive interval requires ordinary coordination.",
+  "no_queued_commands": true,
+  "publication_completed": true,
+  "published_final_documentation": {
+    "schema": "logos-engine.followup-final-clean-repeat-publication.v1",
+    "recordedAt": "2026-11-11T15:46:05.531Z",
+    "status": "succeeded",
+    "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+    "siteVersion": 101,
+    "nativeVersion": "0.61.0",
+    "nativeFiles": 306,
+    "nativeDigest": "f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279",
+    "sourceCommit": "d75a36f0a99bf6c301034523a3138a64d2f6e744",
+    "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_48ccb50314448191a19781a9c89eb830",
+    "deploymentId": "appgdep_6af48d2be4908191bfe5398512c01bcb",
+    "deploymentUpdatedAt": "2026-11-11T15:43:52.515923+00:00",
+    "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "archive": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_000000002468820e9fe4411b13b99e20",
+      "content_hash": "sha256:13a7d25939ceb816f8a20db7d398cf6bf3b760785f076f3bc86b07218ad11dbc",
+      "size_bytes": 29992960,
+      "file_count": 75
+    },
+    "access": {
+      "role": "owner",
+      "accessMode": "custom",
+      "revision": 3,
+      "allowedUsers": 1,
+      "allowedGroups": 0,
+      "externalVisitors": 0
+    },
+    "measuredCandidateCommit": "965e2dbe38c1a484a3dc1f5d79e5dcec03d55b03",
+    "cleanRepeatAcceptance": {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/isolation-revalidation.json",
+      "sha256": "028711ca50c8461f700c43cdaea02d1ac38190a669698621c903314b4b3777b0",
+      "bytes": 722134,
+      "status": "accepted_from_complete_clean_repeat"
+    },
+    "globalResults": {
+      "STCKRelativeIncrease": -0.02924029997654297,
+      "SMLPRelativeIncrease": 9.073896194578176e-05,
+      "acceptedCases": 2,
+      "totalCases": 2
+    },
+    "evidence": {
+      "sourceCheck": "clean-repeat-final-source-check.json",
+      "sourceWorkflow": "clean-repeat-final-workflow.json",
+      "applicationVerification": "clean-repeat-final-application-verification.json",
+      "finalRecheck": "clean-repeat-final-recheck.json"
+    },
+    "qualifications": [
+      "The first complete timing window remains byte-for-byte retained and ineligible because of disclosed isolation incidents. Only the complete new ABBA window supplies the accepted timing evidence.",
+      "All32 measured sessions/400actions and8 warmups/24actions remain; all40 exact work identities and231 arithmetic checks passed. Phase overruns remain diagnostic under the user's separate per-game global rule.",
+      "The final committed source and75 application members are verified unchanged in their native/test/build inputs; the hosting archive content hash matches nativeSite98. No new build or test was needed for these documentation and evidence changes.",
+      "This terminal receipt is recorded after the actual Site101 deployment and readback, separately from its source commit, without anticipating its own publication."
+    ]
+  },
+  "publication_lock_released_at": "2026-11-11T15:46:06.504482+00:00",
+  "all_own_subagents_idle": true,
+  "final_handoff": "/workspace/shared/sra-coordination/lot7-followup-final-handoff-20261111.json",
+  "standing_tool_idle_acknowledgment": "Lot7 has no background workers or queued work after this handoff. The agreed next10B exclusive functional/cost slot can proceed after coordinating other active lanes. Any later resumed lot7 execution must first check and honor current shared coordination.",
+  "next_step_waiting_for_coordination": {
+    "requestedAt": "2026-11-11T15:57:53.950969+00:00",
+    "status": "context_only_pending_current_10b_exclusive_close",
+    "noNewExecutionStarted": true,
+    "requestedReadBudgetSeconds": 30,
+    "requestedReadPaths": [
+      "docs/migration/v6-delivery-roadmap.md",
+      "docs/migration/v6-entry-point-progress.json"
+    ]
+  },
+  "next_step_bounded_read": {
+    "startedAt": "2026-11-11T16:00:34.854976+00:00",
+    "finishedAt": "2026-11-11T16:00:34.865856+00:00",
+    "bytes": 257150,
+    "files": [
+      "/workspace/sites/sra-lot7-followup-recovery-20261111/.sites-checkout/docs/migration/v6-delivery-roadmap.md",
+      "/workspace/sites/sra-lot7-followup-recovery-20261111/.sites-checkout/docs/migration/v6-entry-point-progress.json"
+    ],
+    "newExecutionBeyondReads": false
+  },
+  "successor_lane_status": "/workspace/shared/sra-coordination/lot8a-status.json",
+  "successor_capability": "8A motif_conditioned_access; reserved, no execution until10B release"
+}
