@@ -1,5 +1,8 @@
 {
-  "qualification": "Inherited affected continuation, common selection and PreviewPacking tests from actual published0.62. No LKEY or HPDL game/replay/data analysis is added. Later actual published predecessor deltas must be reconciled before final10C qualification.",
+  "schema": "logos-engine.lot10c.prepared-integration-test-extension.v1",
+  "declaredAt": "2026-11-11T19:31:34.459175+00:00",
+  "sourceCompositionCommit": "dd864cc645b1e9789e51d1a6c1498f4d0b18aa6f",
+  "qualification": "Inherited actual0.62 affected contracts plus the added/modified executable tests of immutable prepared5C,6B,8A. Development-only prospective composition; actual publication reconciliation and final delivery acceptance remain pending. Closed modules stay excluded in full.",
   "testFiles": [
     "tests/v6-ranked-workshop-grounded-inquiry.test.ts",
     "tests/v6-stationary-contact-continuation.test.ts",
@@ -13,6 +16,16 @@
     "tests/v6-acquired-continuation-priority.test.ts",
     "tests/v6-learned-preparation-priority.test.ts",
     "tests/v6-material-recovery-priority.test.ts",
-    "tests/v6-coupled-pair-planning.test.ts"
+    "tests/v6-coupled-pair-planning.test.ts",
+    "tests/v6-motif-access-contract.test.ts",
+    "tests/v6-motif-access-kernel.test.ts",
+    "tests/v6-motif-access-reference.test.ts",
+    "tests/v6-object-binding-common.test.ts",
+    "tests/v6-observed-binding-reference.test.ts",
+    "tests/v6-observed-binding.test.ts",
+    "tests/v6-selected-rigid-capture.test.ts",
+    "tests/v6-selected-rigid-integration.test.ts",
+    "tests/v6-selected-rigid-native.test.ts",
+    "tests/v6-selected-rigid-reference.test.ts"
   ]
 }

@@ -1,0 +1,13 @@
+{"name": "accept_complete_synthetic_metadata", "passed": true, "expectedRejection": null, "observedError": null}
+{"name": "reject_duplicate_partition_member", "passed": true, "expectedRejection": "disjoint", "observedError": {"type": "ValueError", "message": "Batch partition must be disjoint and reproduce the full ordered scope exactly"}}
+{"name": "reject_missing_partition_batch", "passed": true, "expectedRejection": "four batches", "observedError": {"type": "ValueError", "message": "Exactly four batches are required"}}
+{"name": "reject_changed_source_input", "passed": true, "expectedRejection": "Changed source, runner or scope", "observedError": {"type": "ValueError", "message": "Changed source, runner or scope inputs between batches"}}
+{"name": "reject_failed_actual_batch", "passed": true, "expectedRejection": "Failed or incomplete", "observedError": {"type": "ValueError", "message": "Failed or incomplete actual batch"}}
+{"name": "reject_missing_actual_receipt", "passed": true, "expectedRejection": "Four distinct", "observedError": {"type": "ValueError", "message": "Four distinct actual batch receipts are required"}}
+{"name": "reject_duplicate_actual_receipt", "passed": true, "expectedRejection": "batch index or file coverage", "observedError": {"type": "ValueError", "message": "Receipt batch index or file coverage differs"}}
+{"name": "reject_changed_runner_input", "passed": true, "expectedRejection": "Changed source, runner or scope", "observedError": {"type": "ValueError", "message": "Changed source, runner or scope inputs between batches"}}
+{"name": "reject_skipped_or_false_tap_counts", "passed": true, "expectedRejection": "Declared counts differ", "observedError": {"type": "ValueError", "message": "Declared counts differ from actual raw TAP"}}
+{"name": "reject_test_name_filtering", "passed": true, "expectedRejection": "planned Node command", "observedError": {"type": "ValueError", "message": "Unexpected or filtered planned Node command"}}
+{"name": "reject_changed_retained_raw", "passed": true, "expectedRejection": "Changed retained synthetic bytes", "observedError": {"type": "ValueError", "message": "Changed retained synthetic bytes"}}
+{"name": "reject_fourteen_file_whole_scope_claim", "passed": true, "expectedRejection": "cannot claim whole-scope", "observedError": {"type": "ValueError", "message": "A batch cannot claim whole-scope or final-delivery execution"}}
+{"passed": true, "controls": 12, "receipt": {"path": "docs/migration/lot10c-evidence/prepared-composition01/batching-metadata-controls-02.json", "bytes": 4832, "sha256": "65d031a97b33ff774d9b804b79be0f5f3abb32877af01e58dc65104aa394000e"}}
