@@ -4784,6 +4784,47 @@
         "tests/v6-addressed-material-kernel.test.ts"
       ],
       "notes": "Lot5B transfers the complete consumed addressed-field/stock chain on its admitted public-observation domain. The independent unchanged original oracle covers 19 cold chains, 522 operations and 14 helpers; source results and complete state match through ordinary and native checkpoint restoration. Source empty event envelopes and truthy empty-action refusals remain distinct from abstention. Acquisition, empirical distance bounds, exact locus witnesses, per-step guards, scored prior retention, typed stock rules, lineages, minimum-count obligations and counterexamples are preserved. Checkpoints, owned immutable snapshots and cooperative work/deadline/abort incompletion are explicit native extensions; neither Python class supplies a checkpoint API. Four cold production-factory contracts cover one registered owner, passive envelopes and actual authoritative restoration. Selected full-common contribution and final integrated release gates are separate pending evidence at this development mapping update; this does not claim whole original caller selection parity or a new game success."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/morphology_policy/preview_packing/family.py",
+        "agents/yf_arc3_v6/morphology_policy/preview_packing/donor.py",
+        "agents/yf_arc3_v6/morphology_policy/preview_packing/base.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-preview-packing.ts",
+        "src/logos-engine/v6-preview-packing-types.ts",
+        "src/logos-engine/v6-preview-packing-geometry.ts",
+        "src/logos-engine/v6-preview-packing-calculus.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-preview-packing-reference.py",
+        "scripts/compare-v6-preview-packing-reference.ts",
+        "tests/fixtures/v6-preview-packing/reference.json.gz",
+        "tests/v6-preview-packing-native.test.ts",
+        "tests/v6-preview-packing-reference.test.ts",
+        "tests/v6-preview-packing-integration.test.ts",
+        "docs/migration/lot6a-evidence/recovery/native-source-review.json"
+      ],
+      "notes": "Fresh lot6A reconstruction from the immutable source after loss of the unpublished candidate. Component proposal, current point binding, guards, selected returns, source state and real caller restorations have independent synthetic checks. This does not establish whole-original-caller or complete-game parity. Current native bounds and explicit blocking incompletion preserve conservative action authority; source limitations remain documented."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v5/capabilities/preview_piece_packing.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-preview-packing-calculus.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-preview-packing-reference.py",
+        "scripts/compare-v6-preview-packing-reference.ts",
+        "tests/fixtures/v6-preview-packing/reference.json.gz",
+        "tests/v6-preview-packing-native.test.ts"
+      ],
+      "notes": "Only the V6 Preview donor consumed normalized transforms and finite residual assignment calculation are transferred and compared. The complete V5 mechanical service, movement command model and other public entry points remain outside this claim."
     }
   ],
   "scopeNotes": [

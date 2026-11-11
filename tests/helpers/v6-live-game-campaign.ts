@@ -6,7 +6,8 @@ import { loadPyodide } from '../../public/vendor/pyodide/pyodide.mjs';
 import { BrowserV6Agent } from '../../src/runtime/v6-agent.ts';
 import { V6AgentService } from '../../src/runtime/v6-agent-service.ts';
 import { V6_REFERENCE_COMMIT, toV6PublicObservation } from '../../src/runtime/v6-agent-protocol.ts';
-import { createNativeV6Runtime } from '../../src/logos-engine/v6-native-runtime.ts';
+import { createNativeV6Runtime, rawNativePreviewPacking } from '../../src/logos-engine/v6-native-runtime.ts';
+import { capturePreviewPacking } from './capture-preview-packing.ts';
 import { hydrateNativeState } from '../../src/logos-engine/v6-native-state-graph.ts';
 import type { NativeV6Declarations } from '../../src/logos-engine/v6-native-runtime.ts';
 import type { NativeCommand, NativePublicObservation } from '../../src/logos-engine/v6-native-types.ts';
@@ -89,7 +90,7 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
     status: 'running', referenceCommit: V6_REFERENCE_COMMIT,
     budget: { levelActionCaps: Array(targetLevels).fill(600), activeSecondsPerLevel: 360, clock: 'real active compute and native execution' },
     source: sourceBefore, gameAssets: {}, actions: [], boundaries: [], prefixes: [], requests: [], domainAssessments: [],
-    baseline: null, pythonAgentModules: null, failure: null, inventorySourceCalls: [], recolorSourceCalls: [], workshopSourceCalls: [], symbolSourceCalls: [], symbolRestoreCalls: [], feedbackSourceCalls: [], relativeArrangementSourceCalls: [], facetExampleSourceCalls: [], facetExampleRestoreCalls: [], motionSourceCalls: [], motionSnapshots: {}, morphologySourceCalls: [], controlAttentionSourceCalls: [],
+    baseline: null, pythonAgentModules: null, failure: null, inventorySourceCalls: [], recolorSourceCalls: [], workshopSourceCalls: [], symbolSourceCalls: [], symbolRestoreCalls: [], feedbackSourceCalls: [], relativeArrangementSourceCalls: [], facetExampleSourceCalls: [], facetExampleRestoreCalls: [], previewPackingEvents: [], motionSourceCalls: [], motionSnapshots: {}, morphologySourceCalls: [], controlAttentionSourceCalls: [],
   };
   if (options.recordedPublic) report.recordedPublicReplay = {
     trace: options.recordedPublic.trace, baseline: options.recordedPublic.baseline,
@@ -98,6 +99,7 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
   let runtime: Awaited<ReturnType<typeof createNativeV6Runtime>> | undefined;
   let symbolsOwner: R | undefined;
   let facetsOwner: R | undefined;
+  let previewOwner: R | undefined;
   let native: Awaited<ReturnType<typeof loadPyodide>> | undefined;
   let agent: BrowserV6Agent | undefined, current: GameObservation | undefined;
   let lastResponse: V6AgentResult | undefined, lastCycles = 0, previousActions = 0, previousSeconds = 0;
@@ -211,7 +213,7 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
           symbols[method] = function (...args: any[]) {
             if (sourceDepth) return original.apply(this, args);
             const event: R = { index: report.symbolSourceCalls.length, method,
-              arguments: structuredClone(args), sourceBefore: this.state() };
+              arguments: structuredClone(method === 'proposeSource' ? args.slice(0, 4) : args), sourceBefore: this.state() };
             sourceDepth++;
             const complete = (result: any): any => {
               event.result = structuredClone(result ?? null); event.sourceAfter = this.state();
@@ -330,6 +332,12 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
             } catch (error) { return failed(error); }
           };
         }
+      }
+      const previewAdapter = (runtime as unknown as { families: R[] }).families.find(f => f.id === 'preview_packing');
+      const preview = previewAdapter ? rawNativePreviewPacking(previewAdapter as any) : null;
+      if (preview) {
+        previewOwner = preview;
+        capturePreviewPacking(preview, report.previewPackingEvents);
       }
       // Observe the selected-only Facet owner and its actual restorations.
       // Inputs and results pass through unchanged; captured states never feed it.
@@ -585,6 +593,9 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
           const symbolsFacts = reasoningFacts
             .filter(fact => evidence.transitions.some((_: R, index: number) =>
               fact.key === `symbol_transaction_event:${evidence.decision_revision + index}`));
+          const previewFacts = reasoningFacts
+            .filter(fact => evidence.transitions.some((_: R, index: number) =>
+              fact.key === `preview_packing_event:${evidence.decision_revision + index}`));
           const anchors = (series.events as R[]).filter(event => event.kind === 'coupled_pair_epoch_anchor');
           const alternating = (series.events as R[]).filter(event => event.kind === 'alternating_graph_evidence');
           const graphEvidence = alternating.at(-1);
@@ -656,6 +667,14 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
               sourceCallsThrough: report.relativeArrangementSourceCalls.length,
               proposal: evidence.proposal.arrangement_plan ? evidence.proposal : null,
               qualification: 'Passive recorder of actual selected acquisition. The family receives no passive acquisition; this recorder supplies no state, action or return.',
+            } } : {}),
+            ...(graph.nodes['family_state:preview_packing'] ? { previewPacking: {
+              stateNode: 'family_state:preview_packing', state: read('family_state:preview_packing'),
+              eventsThrough: report.previewPackingEvents.length, instanceSourceState: previewOwner?.sourceState() ?? null,
+              proposal: evidence.proposal.preview_packing_plan ? evidence.proposal : null,
+              acquired: previewFacts.map(fact => ({ key: fact.key, evidence: fact.evidence, revision: fact.revision, result: fact.value })),
+              retainedSourceFact: reasoningFacts.find(fact => fact.key === 'preview_packing_state') ?? null,
+              qualification: 'Passive observation after the real selected return and restoration; no Preview passive acquisition or injected state.',
             } } : {}),
             ...(graph.nodes['family_state:facet_examples'] ? { facetExample: {
               stateNode: 'family_state:facet_examples', state: read('family_state:facet_examples'),
