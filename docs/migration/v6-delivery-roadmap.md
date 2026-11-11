@@ -1,5 +1,25 @@
 # Feuille de route V5/V6 vers Logos Engine TypeScript
 
+<!-- LOT5C_ROADMAP_CURRENT_START -->
+
+## Lot 5C : preuve commune validée, intégration finale à clôturer
+
+**5A et 5B restent livrés dans leurs périmètres annoncés.** La base récupérée est **Site 95 / native 0.58.0**, avec **62/76 entrées raccordées**. Le candidat préparé compose `observed_object_binding` avec les sources préparées de 6A, du suivi 7 et de 10B ; son [audit d'intégration](lot5c-evidence/recovery/preparation/integrated-entry-audit-01.execution.json) raccorde **65/76 entrées, avec 11 restantes**. Ces deux compteurs ont des portées distinctes. **5C n'est pas encore publié et son coût n'est pas encore accepté.** L'étiquette native **0.63.0** reste une version de travail.
+
+La [parité composant reconstruite](lot5c-evidence/recovery/source-oracle/parity-02-execution.json) passe **98/98**. La [preuve commune `common-02`](lot5c-evidence/recovery/common/common-02/summary.json) passe désormais **7/7 tests couvrant les huit scénarios déclarés**, sans échec, annulation, test ignoré ni TODO : réception positive, réfutation, ambiguïté, frontière, préservation d'un parent étranger, borne d'acquisition passive, borne sélectionnée et échéance calculée sur le temps actif du niveau. Les quatre comparaisons froides à l'original Python passent **6 818/6 818 contrôles**, sur **412 opérations et 80 retours réels**, dont 76 sélectionnés et quatre passifs. Les quatre autres scénarios sont des contrats natifs distincts. Cette preuve porte sur des retours publics synthétiques ; elle ne constitue ni une réussite en jeu ni une mesure de coût.
+
+Le premier passage natif commun reste réussi, mais sa [comparaison originale positive](lot5c-evidence/recovery/common/common-01/positive/original-comparison.json) reste **échouée : 121 écarts sur 1 852 contrôles**. L'oracle omettait l'aller-retour original `Memory.put → Memory.get → restore`, qui trie les clés de l'état mémorisé. Les outils corrigés exécutent cette branche depuis l'état calculé par Python ; les comparaisons de valeurs, d'ordre, d'attention et d'écritures effectives passent dans `common-02`. Le [premier export groupé de `common-02`](lot5c-evidence/recovery/common/common-02/export-scope-incident.json) conserve aussi ses **deux échecs de compteurs sur 1 895 contrôles** : le reviewer comparait les compteurs globaux des quatre chaînes à ceux de la seule chaîne positive. Les quatre exports par cas passent avec les mêmes outils, critères et journaux, sans nouveau passage natif.
+
+Le [contrôle d'intégrité final](lot5c-evidence/recovery/common/common-02/final-input-integrity.json) vérifie **318 fichiers natifs gelés et 1 074 entrées uniques**, sans différence. Chaque export Python vérifie les **1 786 fichiers originaux avant et après** ; aucune exception source n'est observée. Le gel commun reste `35e03bc9df42bb01762cc025d1e5faa838845637944f560a499fd8800df4e0ed`, sur le candidat préparé `d090c60aa07fb1ef7cb6e9a5b068840a3b81baec`. Ce gel intermédiaire ne remplace pas celui du candidat finalement intégré.
+
+La reprise a aussi identifié une confusion d'origine d'horloge dans le contexte d'exécution commun préparé : un délai absolu fourni par l'appelant était comparé directement à l'horloge du runtime. **Le fil 10B prend en charge cette correction générique et son test dédié.** Le chemin d'acquisition propre à 5C convertit déjà le temps restant et conserve le niveau du premier retour du préfixe. L'intégration du correctif 10B sera vérifiée avant le gel final 5C ; aucun résultat de test de ce correctif n'est anticipé.
+
+La clôture 5C exige ensuite la réconciliation des prédécesseurs **réellement publiés, dans l'ordre 6A → suivi 7 → 10B**, la validation du candidat final, les rejeux, la qualification structurelle, les mesures et leur revue, puis la publication. Le critère de coût reste la médiane groupée de session complète **strictement sous +10 % pour chacun de STCK et SMLP**. Une phase au-delà de +10 % peut être acceptée si ce global passe ; son diagnostic demeure visible. Les mesures historiques de 5B ne sont pas réutilisées comme verdict de coût 5C.
+
+Le suivi des sessions longues reste distinct : réduire les coûts encore proportionnels à l'historique, démontrer quelles données peuvent être compactées et propager génériquement les coups obligatoires. **WEAV niveau 6 reste une réserve**, sans nouveau lancement réel ni remise à zéro de son budget épuisé. Les blocs de livraison ci-dessous conservent les résultats historiques de leurs propres versions.
+
+<!-- LOT5C_ROADMAP_CURRENT_END -->
+
 <!-- LOT5B_ROADMAP_CURRENT_START -->
 
 <!-- LOT10B_CURRENT_BEGIN -->
@@ -54,7 +74,7 @@ Le [comparateur strict historique](lot5b-evidence/performance-integrated/aggrega
 
 | Voie | État courant et prochain travail |
 | --- | --- |
-| **Lot 5** | **5B livré dans Site 94, validé techniquement et au coût global.** **5C / `observed_object_binding`** est la prochaine capacité de ce fil. **Une entrée du lot 5 reste ouverte.** |
+| **Lot 5** | **5A et 5B livrés ; 5C / `observed_object_binding` raccordé dans le candidat préparé, encore non publié.** `common-02` passe : huit scénarios, **6 818/6 818 comparaisons originales**. Suite : intégrer les prédécesseurs réellement publiés et le correctif d'horloge 10B, puis validation finale, coût et publication. |
 | **Lot 4** | 4A, 4B et 4C livrés ; lot clos dans ses périmètres annoncés, Sites 92/93 conservés. |
 | **Lot 6** | **6A / `preview_packing` commencé dans une autre conversation** ; aucun résultat de ce chantier n'est attribué au gel 5B. |
 | **Lot 7** | Transferts 7A/7B clos ; **suivi LKEY niveau 3 séparé**, avec sa propre réserve et son horloge. |
@@ -837,14 +857,14 @@ Les preuves de développement gardent leur portée propre : **81 tests différen
 
 ## Lot 5 : temps, adressage et objets
 
-**État de ce fil :** 5A est publié dans Sites 84–85, fonctionnellement validé et son coût global qualifié est accepté dans le gel 0.53. **5B/native 0.58 est livré dans Site 94, après intégration des prédécesseurs Sites 92/93, avec validation technique, coût global accepté et publication privée confirmée.** Le registre du lot 5 conserve **une entrée restante : 5C, `observed_object_binding`**, prochaine capacité de ce fil. Les résultats 5B ne sont pas attribués rétroactivement à 4C.
+**État de ce fil :** 5A est publié dans Sites 84–85 et 5B dans Site 94 / native 0.58, avec validation et coût global acceptés ; la base récupérée Site 95 conserve cette livraison. **5C, `observed_object_binding`, est raccordé dans le candidat préparé et sa preuve commune `common-02` passe, mais sa clôture et sa publication restent à établir.** Le candidat intégrant les sources préparées de 6A, du suivi 7 et de 10B atteint **65/76 entrées** ; le compteur publié de cette base demeure **62/76**. Les huit scénarios communs et les **6 818/6 818 contrôles originaux** sont acquis. La prochaine étape est la réconciliation des prédécesseurs publiés et du correctif d'horloge 10B, puis la validation et le coût du candidat final. Les résultats 5B ne sont pas attribués rétroactivement à 4C.
 
 | Sous-lot | Périmètre | État et prochaine étape |
 | --- | --- | --- |
 | **5A** | `linked_temporal_preparation` | Propriétaire unique, contact lié, acquisition passive des phases, chemins bornés, restauration et influence du retour vérifiés. Qualification des graphes, fenêtre officielle et revue du coût terminées ; publication privée confirmée dans Site 84. |
 | **5B** | `observed_addressed_material` | **Livré dans Site 94, validé techniquement et au coût global.** 4 900 tests/125 fichiers, cinq contrôles, dix rejeux/170 comparaisons, TRIA trois niveaux/17 actions/17 plans. Source 522 opérations ; stock commun 8/17 étapes, une fusion/un déplacement puis refus préservé. Global STCK +3,780905 % / SMLP −1,556219 %, revue 11 865/11 865, diagnostics 14/16 conservés. |
-| **5C** | `observed_object_binding` | **Prochaine capacité de ce fil, une entrée restante.** Après les contrats consommés : conservation du parent, liaison observée, effet attesté, réfutation ou frontière ; restauration des obligations et influence sur la décision suivante. |
-| **Sessions longues** | Delta, mémoire active et coups obligatoires | Les premières copies répétées sont corrigées et 5B conserve ses snapshots selon la révision. Restent la compaction démontrée des données devenues inutiles, les coûts encore liés à l'historique et la propagation générale des domaines réduits à un seul choix. **WEAV niveau 6 reste réservé**, sans nouvel essai réel ni reset du budget épuisé ; le coût global accepté ne prouve pas une latence stable sur des sessions longues. |
+| **5C** | `observed_object_binding` | **Raccordé dans le candidat préparé, preuve commune passée, non publié.** Parité composant **98/98** ; huit scénarios `common-02`, **6 818/6 818 contrôles originaux**, 412 opérations et 80 retours réels. Échecs antérieurs conservés. Réconcilier les publications 6A, suivi 7 et 10B, dont le correctif d'horloge commun, avant gel final, validation, coût et publication. |
+| **Sessions longues** | Delta, mémoire active et coups obligatoires | Les optimisations déjà livrées sont conservées. Restent les coûts proportionnels à l'historique, la compaction prouvée des données devenues inutiles et la propagation générale des choix obligatoires. **WEAV niveau 6 reste réservé**, sans nouveau lancement réel ni reset du budget épuisé. Le coût global accepté des lots précédents ne prouve pas une latence stable au fil des niveaux. |
 
 **Entrées :** `linked_temporal_preparation`, `observed_addressed_material`, `observed_object_binding`.
 

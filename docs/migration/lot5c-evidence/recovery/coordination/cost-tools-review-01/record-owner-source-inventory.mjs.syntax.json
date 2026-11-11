@@ -1,0 +1,17 @@
+{
+  "file": {
+    "path": "docs/migration/lot5c-evidence/record-owner-source-inventory.mjs",
+    "bytes": 13603,
+    "sha256": "50c9275c331e1013b7d618dd93023f79826398aa191c34fb9c05680b01210d8d"
+  },
+  "command": [
+    "node",
+    "--check",
+    "docs/migration/lot5c-evidence/record-owner-source-inventory.mjs"
+  ],
+  "exitCode": 0,
+  "stdout": "",
+  "stderr": "",
+  "startedAt": "2026-11-11T12:30:13.780085+00:00",
+  "finishedAt": "2026-11-11T12:30:13.949234+00:00"
+}

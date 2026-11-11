@@ -1,0 +1,50 @@
+{
+  "schema": "logos-engine.lot5c.cost-owner-tools-syntax.v1",
+  "startedAt": "2026-11-11T12:17:43.517707+00:00",
+  "runtimeImportsExecuted": false,
+  "functionalCapturesExecuted": false,
+  "commands": [
+    {
+      "command": [
+        "flock",
+        "-s",
+        "/workspace/shared/sra-coordination/performance.lock",
+        "timeout",
+        "60s",
+        "node",
+        "--check",
+        "docs/migration/lot5c-evidence/capture-cost-owner-graphs.mjs"
+      ],
+      "source": {
+        "path": "docs/migration/lot5c-evidence/capture-cost-owner-graphs.mjs",
+        "bytes": 26174,
+        "sha256": "1d2b849b0c30fa369065d1b8443344051cecedae116893de62c3e92bb5c2d732"
+      },
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "flock",
+        "-s",
+        "/workspace/shared/sra-coordination/performance.lock",
+        "timeout",
+        "60s",
+        "node",
+        "--check",
+        "docs/migration/lot5c-evidence/qualify-cost-owner-graphs.mjs"
+      ],
+      "source": {
+        "path": "docs/migration/lot5c-evidence/qualify-cost-owner-graphs.mjs",
+        "bytes": 51086,
+        "sha256": "251c58530333dd686aded94b32431165c6de83d045dba0a8a97801480779189b"
+      },
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "finishedAt": "2026-11-11T12:17:43.738363+00:00",
+  "status": "passed"
+}

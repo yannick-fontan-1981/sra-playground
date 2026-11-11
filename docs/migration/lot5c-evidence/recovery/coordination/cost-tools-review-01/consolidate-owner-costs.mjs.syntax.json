@@ -1,0 +1,17 @@
+{
+  "file": {
+    "path": "docs/migration/lot5c-evidence/consolidate-owner-costs.mjs",
+    "bytes": 60732,
+    "sha256": "d7c093afc54683682311b6b0a1935bfbc7351ac787ba001827ebfc3543effed7"
+  },
+  "command": [
+    "node",
+    "--check",
+    "docs/migration/lot5c-evidence/consolidate-owner-costs.mjs"
+  ],
+  "exitCode": 0,
+  "stdout": "",
+  "stderr": "",
+  "startedAt": "2026-11-11T12:30:13.983919+00:00",
+  "finishedAt": "2026-11-11T12:30:14.124539+00:00"
+}

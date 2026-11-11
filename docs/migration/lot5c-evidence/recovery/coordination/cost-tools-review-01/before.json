@@ -1,0 +1,110 @@
+{
+  "schema": "logos-engine.lot5c-cost-tools-before-review.v1",
+  "recordedAt": "2026-11-11T12:19:19.182774+00:00",
+  "tools": [
+    {
+      "tool": {
+        "path": "docs/migration/lot5c-evidence/record-owner-source-inventory.mjs",
+        "bytes": 13189,
+        "sha256": "a8d7e6553957854f319e1c4515e26fec4536f920e8cbd0105f42d6a6e1e4504a"
+      },
+      "preservedBefore": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/before/record-owner-source-inventory.mjs",
+        "bytes": 13189,
+        "sha256": "a8d7e6553957854f319e1c4515e26fec4536f920e8cbd0105f42d6a6e1e4504a"
+      },
+      "direct5BSource": {
+        "path": "docs/migration/lot5b-evidence/record-owner-source-inventory.mjs",
+        "bytes": 12876,
+        "sha256": "fdfed96d27d08554a7a4ec6a50a68a4b65dd62001cd2fec057f2f580f1627ce2"
+      }
+    },
+    {
+      "tool": {
+        "path": "docs/migration/lot5c-evidence/prepare-cost-protocol.py",
+        "bytes": 30510,
+        "sha256": "d0f63652e768427c0d12555cd0a63d0d515891c2d5001dc08236dd714fd584a2"
+      },
+      "preservedBefore": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/before/prepare-cost-protocol.py",
+        "bytes": 30510,
+        "sha256": "d0f63652e768427c0d12555cd0a63d0d515891c2d5001dc08236dd714fd584a2"
+      },
+      "direct5BSource": {
+        "path": "docs/migration/lot5b-evidence/prepare-cost-protocol.py",
+        "bytes": 30134,
+        "sha256": "c53e6534b4f570c94610ca7c338462a1e4edc91975d9130a770dcee200811efe"
+      }
+    },
+    {
+      "tool": {
+        "path": "docs/migration/lot5c-evidence/finalize-owner-cost-contract.py",
+        "bytes": 16720,
+        "sha256": "87a2b979c7b8c208c80e8995accfc3bdcf09ad6f4c2f4692890984525ebe843c"
+      },
+      "preservedBefore": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/before/finalize-owner-cost-contract.py",
+        "bytes": 16720,
+        "sha256": "87a2b979c7b8c208c80e8995accfc3bdcf09ad6f4c2f4692890984525ebe843c"
+      },
+      "direct5BSource": {
+        "path": "docs/migration/lot5b-evidence/finalize-owner-cost-contract.py",
+        "bytes": 15763,
+        "sha256": "58fd6f433ee6043c3cd24f3c763f4ede265c4b2e60374a9916807bccc68c2997"
+      }
+    },
+    {
+      "tool": {
+        "path": "docs/migration/lot5c-evidence/check-cost-static-inputs.py",
+        "bytes": 27926,
+        "sha256": "7ce8ac48e3c509e0766941c27695a1bb5e576debb958a0d8eb68f47fd647287a"
+      },
+      "preservedBefore": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/before/check-cost-static-inputs.py",
+        "bytes": 27926,
+        "sha256": "7ce8ac48e3c509e0766941c27695a1bb5e576debb958a0d8eb68f47fd647287a"
+      },
+      "direct5BSource": {
+        "path": "docs/migration/lot5b-evidence/check-cost-static-inputs.py",
+        "bytes": 27635,
+        "sha256": "024c23aad5bae4b666cd2e47226b396a937a658a84a0d3cd927fcd1b9fa14cc1"
+      }
+    },
+    {
+      "tool": {
+        "path": "docs/migration/lot5c-evidence/consolidate-owner-costs.mjs",
+        "bytes": 53250,
+        "sha256": "db063492f84092280c51a71d7ae8bfd34a50b586ca545b24173cb78c1cdc625a"
+      },
+      "preservedBefore": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/before/consolidate-owner-costs.mjs",
+        "bytes": 53250,
+        "sha256": "db063492f84092280c51a71d7ae8bfd34a50b586ca545b24173cb78c1cdc625a"
+      },
+      "direct5BSource": {
+        "path": "docs/migration/lot5b-evidence/consolidate-owner-costs.mjs",
+        "bytes": 52981,
+        "sha256": "cccc02b44a500292ac64a62379270e4003d3430f8ac0b68c81eb89609fffef95"
+      }
+    },
+    {
+      "tool": {
+        "path": "docs/migration/lot5c-evidence/review-owner-costs.py",
+        "bytes": 70578,
+        "sha256": "056a188b8f91cb570d316a86eed6fd5c3166df56633d049cfb1dac2d44682ec2"
+      },
+      "preservedBefore": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/before/review-owner-costs.py",
+        "bytes": 70578,
+        "sha256": "056a188b8f91cb570d316a86eed6fd5c3166df56633d049cfb1dac2d44682ec2"
+      },
+      "direct5BSource": {
+        "path": "docs/migration/lot5b-evidence/review-owner-costs.py",
+        "bytes": 70321,
+        "sha256": "dd2524cbc52e51ed77a7393d4c4a044028f49c4a7fd6a36687534aeb1d8880e7"
+      }
+    }
+  ],
+  "functionalExecution": false,
+  "measurementsStarted": false
+}

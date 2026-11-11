@@ -1,0 +1,33 @@
+{
+  "schema": "logos-engine.lot5c.command-execution.v1",
+  "status": "passed",
+  "startedAt": "2026-11-11T13:34:17.585140+00:00",
+  "command": [
+    "node",
+    "--max-old-space-size=1536",
+    "--test",
+    "--test-concurrency=1",
+    "tests/v6-object-binding-common.test.ts"
+  ],
+  "cwd": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout",
+  "timeoutSeconds": 600.0,
+  "wrapper": {
+    "path": "docs/migration/lot5c-evidence/run-evidence-command.py",
+    "bytes": 3904,
+    "sha256": "99b16a35eac1f12acb3063e43d303ffc020b3339109e22eff1f807d1e87e47db"
+  },
+  "finishedAt": "2026-11-11T13:36:23.470624+00:00",
+  "durationSeconds": 125.88355182800024,
+  "exitCode": 0,
+  "timedOut": false,
+  "log": {
+    "path": "docs/migration/lot5c-evidence/recovery/common/common-02/native-tests.log",
+    "bytes": 1025,
+    "sha256": "4ee7408194eb070554daf01a648f133bc855b7e297319fbf3adbc08350cf57b9"
+  },
+  "compressedLog": {
+    "path": "docs/migration/lot5c-evidence/recovery/common/common-02/native-tests.log.gz",
+    "bytes": 564,
+    "sha256": "08ffd8e03fd59ff999bc876540d89980701ef42cd120680527851c5de4b6b781"
+  }
+}
