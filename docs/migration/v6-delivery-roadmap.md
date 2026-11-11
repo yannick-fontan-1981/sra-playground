@@ -6,7 +6,7 @@
 
 **Le candidat 6B réussit trois niveaux KLOT en 38 actions et 30 préfixes.** La campagne froide utilise le seul appelant TypeScript, sans plan, état appris ou agent Python fourni à ses décisions. La relecture indépendante du Python original compare **408 événements sans différence**, dont 38 retours sélectionnés, 35 événements acquis, trois retours de frontière de valeur `null` et 98 restaurations. **204 ablations, dont 63 changements d’action ou de refus**, établissent une contribution des connaissances acquises ; les deux corruptions sémantiques contrôlées sont rejetées.
 
-Ce résultat est un **jalon de développement sur Site 97**, avec la version **0.64 réservée**. Il ne constitue pas une livraison 6B finale. La documentation publiée de **Site 101 / native 0.61**, commit `d75a36f0a99bf6c301034523a3138a64d2f6e744`, est réconciliée ci-dessous ; ses sources natives ne sont pas encore fusionnées dans ce candidat. Les livraisons effectives 10B / 0.62 puis 5C / 0.63 restent les prédécesseurs requis avant le gel et la mesure finale 6B.
+Ce résultat est un **jalon de développement fondé sur les sources de Site 97**, avec la version **0.64 réservée**. Il ne constitue pas une livraison 6B finale. La documentation publiée de **Site 101 / native 0.61**, commit `d75a36f0a99bf6c301034523a3138a64d2f6e744`, est réconciliée ci-dessous ; ses sources natives ne sont pas encore fusionnées dans ce candidat. Les livraisons effectives 10B / 0.62 puis 5C / 0.63 restent les prédécesseurs requis avant le gel et la mesure finale 6B.
 
 | Vérification 6B acquise | Résultat et preuve |
 | --- | --- |
@@ -36,6 +36,10 @@ La fusion devra préserver le helper d’horloge `currentExecution` introduit pa
 **Aucun pourcentage de coût 6B n’est encore revendiqué.** Le critère autorisé reste la **médiane de session complète strictement inférieure à +10 % pour chaque jeu testé**. Une phase peut dépasser +10 % lorsque ce critère global passe ; tous les diagnostics et échantillons sont conservés, sans addition de phases imbriquées et sans compensation entre jeux.
 
 Les plafonds de recherche ne bornent pas le journal source complet. Le bouton Pause empêche les prochaines actions physiques et conserve le préfixe, mais ne préempte pas la recherche déjà engagée dans le worker. Ces réserves et la [filiation source → TypeScript → consommateur → preuve](lot6b-selected-rigid-lineage.md) demeurent explicites.
+
+### Sauvegarde distante du jalon 6B
+
+Le commit validé `e1f42dac8eb4226f8a3bc78d89d6bee6f463da1e` est conservé dans la branche `lot6b-selected-rigid-checkpoint-20261111`. Le commit de transport final `5b03fb53526d6016fde61db32a2d4fbb1de0f5bb` a le même arbre Git et conserve ce commit dans son ascendance. Le [reçu vérifié](lot6b-evidence/source-checkpoint-01/transport-receipt.json) et le [plan de transport](lot6b-evidence/source-checkpoint-01/transport-plan.json) documentent trois lots de 24 Mio bruts au maximum, puis la jonction d’historique. Le premier envoi de 111,2 Mio, refusé par la limite de 64 Mio par envoi, reste consigné. Cette sauvegarde de branche ne crée ni nouvelle version Site ni déploiement ; l’intégration et les portes finales 6B restent ouvertes.
 
 <!-- LOT6B_DEVELOPMENT_CURRENT_END -->
 
