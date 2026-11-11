@@ -1,0 +1,9 @@
+{
+  "schema": "logos-engine.lot6b-browser-root-source-review.v1",
+  "reviewedAt": "2026-11-11T20:10:55.899968+00:00",
+  "helperSha256": "56f3b263f3199778b359252aa43994c496df14d261cd012ba96c047f83183541",
+  "findings": [],
+  "reviewedLifecycle": "Popen remains alive at real URL readiness; root CUA closure attestation remains mandatory; stop and ownPopen reap are bounded and preserve actual exit/signal.",
+  "previousAttemptPreserved": "browser-qa-01",
+  "functionalQaNotYetExecuted": true
+}

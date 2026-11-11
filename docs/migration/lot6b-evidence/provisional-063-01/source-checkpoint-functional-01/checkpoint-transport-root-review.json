@@ -1,0 +1,50 @@
+{
+  "schema": "logos-engine.lot6b.transport-root-source-review.v1",
+  "recordedAt": "2026-11-11T20:42:22.902831+00:00",
+  "status": "source_reviewed_syntax_passed_not_executed",
+  "beforeSha256": "6a3bb1719395b02f157bdf4e6915e7077aec5f74c603c0e9365acc5fa10eb788",
+  "afterSha256": "0b1ec1bf251287395f0520eac80ff82a6a947faa89728b64fa85c211880990fa",
+  "rootCorrection": "Removed core.hooksPath=/dev/null and push --no-verify so existing Git hooks/settings are preserved. No hook bypass is authorized or needed for this source checkpoint.",
+  "diff": [
+    "--- prepared",
+    "+++ reviewed",
+    "@@ -139,7 +139,7 @@",
+    "     need(hosting.project_id === PROJECT, 'HOSTING_PROJECT_REFUSED'); hosting = null;",
+    "     const config = ['-C', ROOT, '-c', 'credential.helper=', '-c', 'http.extraHeader=',",
+    "       '-c', `http.${REMOTE}.extraHeader=`, '-c', 'http.followRedirects=false', '-c', `http.${REMOTE}.followRedirects=false`,",
+    "-      '-c', 'core.hooksPath=/dev/null', '-c', 'gc.auto=0', '-c', 'maintenance.auto=false',",
+    "+      '-c', 'gc.auto=0', '-c', 'maintenance.auto=false',",
+    "       '-c', 'fetch.recurseSubmodules=false', '-c', 'submodule.recurse=false', '-c', 'push.followTags=false'];",
+    "     if (request.credential.auth_mode === 'http_extra_header') {",
+    "       env.SRA_CHECKPOINT_AUTHORIZATION = 'Authorization: Bearer ' + request.credential.token;",
+    "@@ -195,7 +195,7 @@",
+    "     } else {",
+    "       need((await git('verify-declared-commit-type', ['cat-file', '-t', request.commit], { limitMs: 5000 })).text.trim() === 'commit', 'DECLARED_OBJECT_IS_NOT_COMMIT');",
+    "       const before = refs((await git('ls-remote-before-push', ['ls-remote', '--heads', REMOTE, OWN])).text, [OWN]);",
+    "-      await git('push-only-own-checkpoint', ['push', '--porcelain', '--no-verify', '--no-follow-tags', REMOTE, `${request.commit}:${OWN}`]);",
+    "+      await git('push-only-own-checkpoint', ['push', '--porcelain', '--no-follow-tags', REMOTE, `${request.commit}:${OWN}`]);",
+    "       const after = refs((await git('ls-remote-after-push', ['ls-remote', '--heads', REMOTE, OWN])).text, [OWN]);",
+    "       need(after[OWN] === request.commit, 'PUSH_REMOTE_VERIFICATION_FAILED');",
+    "       observation = { advertisedBefore: before, verifiedAfter: after, exactDeclaredCommit: request.commit, force: false, mainPushed: false };"
+  ],
+  "syntaxCheck": {
+    "argv": [
+      "node",
+      "--check",
+      "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/checkpoint-transport.mjs"
+    ],
+    "exitCode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "reviewedGuards": [
+    "Hidden input before any lock",
+    "Exact repository/project/own-checkpoint ref and non-publication credential",
+    "Token remains ephemeral; allowlisted metadata only",
+    "Fresh quiet guard before each Git command",
+    "Finite worker and Git subprocess limits",
+    "Whole owned flock/Git process group checked after normal completion and on errors",
+    "Residual process group refuses success even after cleanup"
+  ],
+  "functionalNetworkBehaviorTested": false
+}

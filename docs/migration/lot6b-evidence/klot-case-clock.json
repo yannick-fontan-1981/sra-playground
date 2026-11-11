@@ -4,8 +4,8 @@
   "status": "completed_within_budget",
   "limitSeconds": 2400,
   "priorChargedSeconds": 11.393673999999999,
-  "chargedSeconds": 350.8621536330002,
-  "remainingSeconds": 2049.137846367,
+  "chargedSeconds": 1221.0363642830062,
+  "remainingSeconds": 1178.9636357169938,
   "intervals": [
     {
       "label": "prior-public-history-reconciliation",
@@ -38,6 +38,134 @@
       "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
       "finishedAt": "2026-11-11T15:45:59.105711+00:00",
       "elapsedSeconds": 163.46985524900083
+    },
+    {
+      "label": "KLOT final-functional documentary readiness review read01",
+      "startedAt": "2026-11-11T19:18:45.873933+00:00",
+      "startedMonotonic": 27170.341720395,
+      "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+      "finishedAt": "2026-11-11T19:18:45.968477+00:00",
+      "elapsedSeconds": 0.09452525400047307
+    },
+    {
+      "label": "KLOT final-functional tooling and generic UI readiness read02",
+      "startedAt": "2026-11-11T19:19:42.009117+00:00",
+      "startedMonotonic": 27226.476905694,
+      "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+      "finishedAt": "2026-11-11T19:19:42.073603+00:00",
+      "elapsedSeconds": 0.06446251400120673
+    },
+    {
+      "label": "KLOT readiness closure and passive harness source read03",
+      "startedAt": "2026-11-11T19:20:39.914345+00:00",
+      "startedMonotonic": 27284.382132556,
+      "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+      "finishedAt": "2026-11-11T19:20:40.043476+00:00",
+      "elapsedSeconds": 0.1291095820015471
+    },
+    {
+      "label": "KLOT readiness review report preparation",
+      "startedAt": "2026-11-11T19:22:17.311636+00:00",
+      "startedMonotonic": 27381.779422104,
+      "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+      "finishedAt": "2026-11-11T19:22:17.406634+00:00",
+      "elapsedSeconds": 0.09497892100262106
+    },
+    {
+      "label": "klot-fa23-prospective-preparation",
+      "startedAt": "2026-11-11T19:33:32.767170+00:00",
+      "startedMonotonic": 28057.234953812,
+      "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+      "finishedAt": "2026-11-11T19:33:32.861934+00:00",
+      "elapsedSeconds": 0.09474572299950523
+    },
+    {
+      "label": "klot-fa23-cold-three-levels",
+      "startedAt": "2026-11-11T19:42:31.252453+00:00",
+      "startedMonotonic": 28595.720238913,
+      "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+      "finishedAt": "2026-11-11T19:44:14.956893+00:00",
+      "elapsedSeconds": 103.70441783800197
+    },
+    {
+      "label": "klot-fa23-capture-readback",
+      "startedAt": "2026-11-11T19:45:06.704538+00:00",
+      "startedMonotonic": 28751.172329316,
+      "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+      "finishedAt": "2026-11-11T19:45:17.577770+00:00",
+      "elapsedSeconds": 10.8732078489993
+    },
+    {
+      "label": "klot-fa23-display-capture-readback",
+      "startedAt": "2026-11-11T19:46:34.634647+00:00",
+      "startedMonotonic": 28839.102432066,
+      "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+      "finishedAt": "2026-11-11T19:46:34.670256+00:00",
+      "elapsedSeconds": 0.03558868799882475
+    },
+    {
+      "label": "klot-fa23-original-reader",
+      "startedAt": "2026-11-11T19:46:49.031749+00:00",
+      "startedMonotonic": 28853.499536769,
+      "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+      "finishedAt": "2026-11-11T19:47:56.619088+00:00",
+      "elapsedSeconds": 67.58731324300243
+    },
+    {
+      "label": "klot-fa23-negative-reader-qualification",
+      "startedAt": "2026-11-11T19:48:34.754584+00:00",
+      "startedMonotonic": 28959.222374307,
+      "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+      "finishedAt": "2026-11-11T19:51:33.367619+00:00",
+      "elapsedSeconds": 178.61300929199933
+    },
+    {
+      "label": "klot-fa23-independent-results-readback",
+      "startedAt": "2026-11-11T19:52:18.418640+00:00",
+      "startedMonotonic": 29182.886424811,
+      "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+      "finishedAt": "2026-11-11T19:52:18.491596+00:00",
+      "elapsedSeconds": 0.0729396850001649
+    },
+    {
+      "label": "klot-fa23-integrated-proof-summary",
+      "startedAt": "2026-11-11T19:53:44.019092+00:00",
+      "startedMonotonic": 29268.486875631,
+      "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+      "finishedAt": "2026-11-11T19:53:44.108006+00:00",
+      "elapsedSeconds": 0.08889625200026785
+    },
+    {
+      "label": "klot-fa23-browser-qa-01",
+      "startedAt": "2026-11-11T20:03:16.140557+00:00",
+      "startedMonotonic": 29840.608344395,
+      "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+      "finishedAt": "2026-11-11T20:04:16.323350+00:00",
+      "elapsedSeconds": 60.18277313699946
+    },
+    {
+      "label": "klot-fa23-browser-qa-02",
+      "startedAt": "2026-11-11T20:10:57.626647+00:00",
+      "startedMonotonic": 30302.094441725,
+      "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+      "finishedAt": "2026-11-11T20:17:56.300298+00:00",
+      "elapsedSeconds": 418.673619186
+    },
+    {
+      "label": "klot-fa23-browser-qa02-closure-readback-01",
+      "startedAt": "2026-11-11T20:19:49.950749+00:00",
+      "startedMonotonic": 30834.41853672,
+      "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+      "finishedAt": "2026-11-11T20:19:50.050860+00:00",
+      "elapsedSeconds": 0.10009051999804797
+    },
+    {
+      "label": "klot-browser-qa02-root-final-review",
+      "startedAt": "2026-11-11T20:31:34.612053+00:00",
+      "startedMonotonic": 31539.07984016,
+      "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+      "finishedAt": "2026-11-11T20:32:04.376607+00:00",
+      "elapsedSeconds": 29.764532966000843
     }
   ],
   "active": null,
@@ -51,7 +179,7 @@
     "sha256": "0dcb7199d327c6aced2671952a12d78c8136272de49a0bc17e6844a0f40285ee",
     "bytes": 3185
   },
-  "updatedAt": "2026-11-11T15:45:59.105723+00:00",
+  "updatedAt": "2026-11-11T20:32:04.376625+00:00",
   "priorCorrection": {
     "path": "docs/migration/lot6b-evidence/source-opening/klot-clock-before-prior-correction.json",
     "bytes": 1058,

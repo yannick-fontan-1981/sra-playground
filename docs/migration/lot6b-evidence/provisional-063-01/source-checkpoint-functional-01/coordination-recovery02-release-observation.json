@@ -1,0 +1,14 @@
+{
+  "schema": "logos-engine.lot6b.predecessor-coordination-release-observation.v1",
+  "observedAt": "2026-11-11T20:34:50.348992+00:00",
+  "source": "/workspace/shared/sra-coordination/lot5c-status.json",
+  "sourceUpdatedAt": "2026-11-11T20:31:17.228505+00:00",
+  "phase": "recovery02_closed_documentary_handoff",
+  "quietRequested": false,
+  "quietReleased": true,
+  "releasedRequestId": "lot5c-cost-a33a5f88-recovery-02",
+  "releasedAt": "2026-11-11T20:30:25.610691+00:00",
+  "performanceStarted": false,
+  "message": "Explicit RELEASE of lot5c-cost-a33a5f88-recovery-02 at 2026-11-11T20:30:25.610691+00:00. Reason: failed_or_expired. No automatic retry or new pause. Ordinary work under existing SH mutex may proceed. Publication order remains5C,6B,8A,10C; no publication is asserted by this release.",
+  "qualification": "Peer coordination metadata, not proof of completed cost or publication. Exact availability failure cause is not inferred."
+}

@@ -1,0 +1,34 @@
+{
+  "schema": "logos-engine.lot6b-browser-qa-static-preparation-check.v2",
+  "recordedAt": "2026-11-11T20:08:18.272435+00:00",
+  "status": "source_prepared_parses_not_executed",
+  "helper": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/hold-managed-preview.py",
+    "bytes": 12855,
+    "sha256": "5360790d59f4f71d12a4df050f9aff7bf8c1ba69a030d55759085080f8314476"
+  },
+  "declaration": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/execution-declaration.json",
+    "bytes": 5877,
+    "sha256": "69a3889807523a23395664e1255445ab86897263d9529f07de4b2beb053c9601"
+  },
+  "plan": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/plan.md",
+    "bytes": 6439,
+    "sha256": "3cc4247de434146bcaea9b62cf2aedf3610546a1641f4c995f91be6a5ee3f542"
+  },
+  "watch": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/browser-watch.json",
+    "bytes": 492742,
+    "sha256": "a1e86fd43b06fa16f0977e97deef67a8a4860e89354eb59f7064cc8b0b17d670"
+  },
+  "parentEntries": 3005,
+  "browserEntries": 3009,
+  "parentPinsChanged": [],
+  "helperAstParsedWithoutImport": true,
+  "runtimeOrCliExecuted": false,
+  "browserOpened": false,
+  "caseClockContentsRead": false,
+  "priorExecutionReceiptsRead": false,
+  "onlyNewDirectory": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02"
+}

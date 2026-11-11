@@ -1,0 +1,24 @@
+[
+  {
+    "argv": [
+      "sites-preview",
+      "stop"
+    ],
+    "startedAt": "2026-11-11T20:17:55.945929+00:00",
+    "endedAt": "2026-11-11T20:17:56.147549+00:00",
+    "exitCode": 0,
+    "stdout": "Sites preview stopped\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "sites-preview",
+      "status"
+    ],
+    "startedAt": "2026-11-11T20:17:56.147567+00:00",
+    "endedAt": "2026-11-11T20:17:56.148565+00:00",
+    "exitCode": 0,
+    "stdout": "Sites preview stopped\n",
+    "stderr": ""
+  }
+]

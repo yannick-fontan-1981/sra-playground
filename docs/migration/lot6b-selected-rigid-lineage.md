@@ -10,8 +10,9 @@ confirme **Site 103 / native 0.62**, commit
 revérifiés le 11 novembre 2026 à **14:05:12 UTC−03 (17:05:12 UTC)**.
 SelectedRigid est absent du registre publié et son entrée reste en attente.
 Aucun sélecteur d’un autre moteur n’est présent dans l’interface observée pour
-activer le candidat local. Ce constat établit l’écart de publication à prendre
-en compte dans le signalement utilisateur « KLOT ne réussit pas ».
+activer le candidat local. Ce constat établit un écart de publication.
+**La session exacte de l’échec utilisateur n’a pas été reproduite ; aucune
+causalité certaine n’est déduite de cette seule observation.**
 
 Les trois niveaux KLOT, les 38 actions, les 30 préfixes et la relecture originale
 sans différence restent les preuves du **gel historique sur Site 97 / native
@@ -23,10 +24,12 @@ exécuté et lié ci-dessous.**
 La source publiée exacte 103 est désormais fusionnée et vérifiée. Le
 raccordement de `currentExecution`, du cinquième argument des gardes et du
 quota `remainingLevelActions` conserve le délai hôte plus strict après
-conversion d’origine d’horloge. Aucun nouvel essai KLOT, résultat navigateur
-ou coût 6B n’est acquis à ce stade. La préparation de 5C reste provisoire ;
-0.63 n’est pas encore publié. Le gel final, ses régressions, le navigateur,
-le coût global et la publication 6B restent ouverts.
+conversion d’origine d’horloge. Ces preuves d’intégration restent distinctes
+de la nouvelle preuve KLOT fa23, dont la relecture et les qualifications sont désormais closes.
+La préparation de 5C reste provisoire ; 0.63 n’est pas encore publié.
+Les onze rejeux et la QA navigateur Vite sont désormais clos sur le candidat.
+La réconciliation du publié 0.63, le coût global et la publication 6B restent
+ouverts.
 ### Validation de l’intégration exacte de Site 103
 
 La fusion avec le publié 103 est maintenant vérifiée sur le
@@ -45,21 +48,187 @@ qui comprend **314 fichiers natifs**, digest
 Les entrées surveillées de ces exécutions sont inchangées. Ces résultats
 qualifient l’intégration exacte 103, y compris le raccordement courant de
 l’horloge et des gardes ; ils ne réattribuent pas l’ancienne campagne KLOT à
-ce nouveau gel. **Aucun nouvel essai KLOT, contrôle navigateur ou coût 6B
-n’est revendiqué.**
+ce nouveau gel. Ces reçus d’intégration 103 n’incluent pas de nouvelle
+preuve KLOT, de navigateur ou de coût ; les preuves ultérieures du candidat
+fa23 sont distinguées ci-dessous.
 
-La fusion de source **provisoire** du checkpoint immuable 5C
-`805b30297dc1b715dbfd9f1197a9a8ba7b361b90` est en cours pour le candidat
-**0.64.0**. Ce checkpoint 5C est **NON PUBLIÉ**. Le contrat du registre
-conserve WindowQuestion et SelectedRigid, et ajoute `observed_object_binding`
-à sa position déclarée. Ces changements de contrat attendent une nouvelle
-validation ; aucun résultat exécuté ni total audité du candidat fusionné
-n’est déduit de la seule lecture des définitions. Le jalon précédent,
-**33 + 9 tests et 65/76 entrées**, reste rattaché au commit
-`7696e0c0257c68890968f739f076fc5c14efdf54` et au gel `2e710bd…` documenté
-ci-dessus. La réconciliation exacte avec le futur 0.63 effectivement publié
-reste obligatoire avant le gel final 6B, ses régressions, le navigateur,
-le coût et la publication.
+### Candidat provisoire fa23 : suite, build et structure vérifiés
+
+La fusion du checkpoint 5C **non publié**
+`805b30297dc1b715dbfd9f1197a9a8ba7b361b90` / digest `a33a5f88…` avec 6B
+est réalisée. Le [manifeste du candidat provisoire](lot6b-evidence/provisional-063-01/frozen-candidate/source-manifest.json)
+retient **322 fichiers natifs**, digest
+`fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886`.
+WindowQuestion, Binding et SelectedRigid sont raccordés dans ce candidat ;
+cela ne constitue pas une publication 0.63 ou 0.64.
+
+| Contrôle effectivement acquis sur le candidat ou ses entrées déclarées | Résultat et limite |
+| --- | --- |
+| [Audits préalables](lot6b-evidence/provisional-063-01/preflight-attempt-01/entry-audit.json) et [migration préalable](lot6b-evidence/provisional-063-01/preflight-attempt-01/migration-audit.json) | **66/76 entrées, 86,8 % ; 208 composants vérifiés, 147 transferts partiels, 1 014 modules en attente.** Zéro module entièrement vérifié ; les six portes de migration complète restent fausses. |
+| [Suite de 142 fichiers, tentative 02 conservée](lot6b-evidence/provisional-063-01/frozen-candidate/test-attempt-02/summary.json) | **ÉCHEC TERMINAL historique : 5 404/5 405**, un échec, zéro annulation, ignoré ou TODO. Les quatre lots et leurs entrées restent conservés sous cette identité. |
+| [Correction ciblée du contrat d’arrêt](lot6b-evidence/provisional-063-01/stop-contract-targeted-attempt01/execution.json) et [journal](lot6b-evidence/provisional-063-01/stop-contract-targeted-attempt01/execution.log.gz) | Correction **du test seulement**, vérifiée **11/11 en 17,150 s** ; natif fa23 inchangé. |
+| [Suite complète, tentative 03](lot6b-evidence/provisional-063-01/frozen-candidate/test-attempt-03/summary.json) | **5 405/5 405 réussis sur les 142 fichiers déclarés**, avec **739 entrées src/tests identiques** entre les quatre groupes et encore actuelles lors de l’agrégation ; fa23/322 inchangé. Cette tentative réussie ne réécrit pas les échecs antérieurs. |
+| [Cinq contrôles de livraison et lecture sémantique](lot6b-evidence/provisional-063-01/final-functional-01/delivery-checks-semantic-summary.json), [commande conservée](lot6b-evidence/provisional-063-01/final-functional-01/delivery-checks-command.json) et [détail des contrôles](lot6b-evidence/provisional-063-01/final-functional-01/validation/checks-run.json) | **TypeScript, audit des entrées, audit de migration, diff et build réussis**, en **32,243 s**. **2 991 enregistrements surveillés inchangés** ; 66/76 entrées et migration **208/147/1 014, `failures: []`**, sans parité V6 complète. |
+| [Binding/common et original indépendant](lot6b-evidence/provisional-063-01/final-functional-01/summary-binding-original.json) | Les **sept tests Binding ont été rejoués** dans la suite de 142 fichiers, tentative 03. Les **huit scénarios, quatre exports et quatre revues originaux**, soit **6 818/6 818 contrôles**, restent les preuves conservées de la tentative 02, à entrées pertinentes inchangées, sans duplication. Ce total n’est pas exclusivement comportemental. |
+| Rejeux déjà clos : [CATR](lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/catr-051/regressions/regression-summary.json), [RSWP](lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/rswp-051/regressions/regression-summary.json), [FOGW](lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/fogw-051/regressions/regression-summary.json), [CONN](lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/conn-050/regressions/regression-summary.json) | **17/17 contrôles par cas**, sans réexécution des quatre réussites. |
+| [Nouvelle reprise VOIS](lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/oracle-execution-observation.json) | **17/17 réussis** avec le harnais 5C exact et **1 536 Mio** ; l’ancien dépassement mémoire reste un **échec conservé**, sans comparaison réussie réattribuée. |
+| [Nouvelle capture froide KLOT fa23](lot6b-evidence/provisional-063-01/klot-fa23-01/capture-readback.json) et [commande facturée](lot6b-evidence/provisional-063-01/klot-fa23-01/capture-case-command.json) | **Départ froid à zéro niveau, cible trois, trois niveaux atteints en 38 actions**, arrêt `target_levels_completed`. Sources natives et code d’exécution inchangés. La [preuve intégrée complète](lot6b-evidence/provisional-063-01/klot-fa23-01/integrated-proof-summary.json) et son [exécution facturée](lot6b-evidence/provisional-063-01/klot-fa23-01/integrated-proof-summary-execution.json) ferment désormais la relecture originale, les ablations et les deux qualifications négatives. |
+
+L’unique échec de la tentative 02 attendait l’ancien motif
+`level_active_time_budget`. Le contrat 5C conserve cette interruption dans la
+preuve du préfixe puis donne priorité au motif public
+`native_acquisition_incomplete` lorsqu’une acquisition Binding bornée demeure
+incomplète. La correction contrôle strictement cette distinction ; la nouvelle
+suite complète est désormais réussie sans modification native. Tous les essais
+antérieurs, dont les résultats incomplets, restent conservés.
+
+Le build produit **`dist/assets/v6-agent-worker-Cpjjo6tG.js`, 6 927 288 octets**,
+SHA-256 `a4f366ad2103b7413a111099827bfa2ba8cf0930b9c8f1e4ebb561aada7daa84`.
+Le [watch de livraison 03](lot6b-evidence/provisional-063-01/final-functional-01/build-watch-attempt03.json)
+conserve les 2 965 entrées d’attempt02 et ajoute 25 entrées nécessaires :
+**2 990 fichiers / 224 563 341 octets**. Le [précontrôle conservé](lot6b-evidence/provisional-063-01/final-functional-01/build-watch-attempt03-preparation.json)
+explicite la fermeture insuffisante d’attempt02 pour ce nouveau groupe :
+carte de transfert, contenus des générateurs, HTML statique et assets publics.
+Les anciens plans et watches restent inchangés.
+
+La [reprise déclarée des sept cas](lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/execution-declaration.json)
+utilise les lignes et pins d’origine, un cas à la fois et le harnais 5C exact
+à 1 536 Mio. L’[agrégat terminal des onze cas](lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/eleven-case-summary.json)
+confirme **11/11 rejeux, 187/187 contrôles et 390 actions**. Les **douze tentatives**
+sont conservées : les onze réussites et l’ancien **OOM VOIS**, qui reste
+un échec distinct. Aucun essai défavorable n’est effacé.
+
+Pour le coût, les [captures fonctionnelles conservées](lot6b-evidence/provisional-063-01/functional-805b/execution-summary.json)
+retiennent quatre formes et 31 actions par rôle, avec passage de 58 à 59
+propriétaires, le seul propriétaire ajouté étant SelectedRigid. Le refus
+initial de la différence `created` et le
+[diagnostic 03 complet mais non qualifiant](lot6b-evidence/provisional-063-01/functional-805b/hypothetical-common-difference-inventory-attempt03-summary.json)
+restent conservés. L’adaptation prospective est maintenant vérifiée par
+[24 tests locaux réussis](lot6b-evidence/provisional-063-01/cost-time-attribution-01/unit-tests-counts-02.json).
+La [qualification structurelle effective](lot6b-evidence/provisional-063-01/cost-time-attribution-01/qualification-result-summary-01.json)
+passe sur **58 points / 64 contrôles / 168 records temporels**, soit 84 par rôle,
+avec `failures: []` et les entrées inchangées.
+
+L’exception porte uniquement sur le float64 de
+`native_reasoning_trace /value/root/members/created/bits`, lié à l’horloge
+`Date.now() / 1000`, à la fenêtre de son rôle et à sa stabilité par session/trace.
+Les autres champs restent exacts ; `origin.source_digest` demeure une
+attribution distincte. Les quatre lecteurs aval passent
+[**204 tests — 51 scénarios × quatre consommateurs — et une compatibilité réelle 4/4**](lot6b-evidence/provisional-063-01/cost-time-attribution-01/downstream-01/validation-summary-01.json)
+sur l’attribution, la fixture et les reçus 805b/fa23. Il s’agit de leurs
+validateurs locaux : **aucun parcours CLI complet aval, contrat finalisé,
+précontrôle final ni mesure officielle de coût n’est revendiqué**.
+L’exhaustivité du parcours des graphes, les autres corps, les origines,
+les chaînes et les tickets restent liés au qualificatif et à ses empreintes ;
+aucune formule de nombre de traces ni normalisation générale n’est introduite.
+
+La **nouvelle capture froide KLOT fa23 est réussie**, avec une durée de driver
+de **103,245 s** et une commande encadrée de **103,664 s**. Son rapport conservé
+compte **11 699 122 octets**, SHA-256
+`dd24c51f21bbd382f57056076da7c6af7724d4c4183f458170a77e2dfec8563d`.
+Les trois niveaux historiques sur Site 97 gardent leur identité propre.
+La [preuve intégrée KLOT](lot6b-evidence/provisional-063-01/klot-fa23-01/integrated-proof-summary.json),
+consolidée dans son [intervalle facturé](lot6b-evidence/provisional-063-01/klot-fa23-01/integrated-proof-summary-execution.json),
+est désormais **entièrement close sur fa23** : **30 préfixes**, **408 événements
+originaux dont 340 racines**, **zéro différence**, **35 acquisitions et trois
+retours de frontière `null`**, **98 restaurations — 60 natives et 38 source**.
+Les **204 ablations** comprennent **63 effets**, **198 résultats non vides**
+et **zéro erreur**. Le pin original
+`786dcf51ca57773d8e3a8948ce9ea3655e7baf8e` est inchangé sur **1 786 fichiers**.
+
+Les **deux copies corrompues** sont d’abord acceptées structurellement puis
+rejetées sémantiquement, avec respectivement **14 et 1 118 différences**.
+Aucune interruption ne vaut rejet réussi et la référence positive n’a pas
+été réexécutée. Cette clôture est propre à la capture fa23 ; elle ne modifie
+pas l’identité ni la portée des reçus historiques Site 97.
+
+### QA navigateur KLOT : parcours observé et fermeture vérifiée
+
+La [QA navigateur 02](lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/browser-functional-summary.json)
+est **réellement réussie par observation CUA**, dans un nouvel onglet 7,
+en départ froid au niveau 1. Elle utilise **Vite et son worker TypeScript de
+développement**. Le bundle de production `dist` possède sa preuve de build
+distincte ; ce parcours UI ne prétend pas avoir testé ce bundle.
+
+Pause a été demandée pendant **Preparing agent**. Le message d’arrêt à la
+frontière d’action a été suivi de **Paused, zéro action**. Les deux observations
+à **20:14:54.732 UTC** et **20:15:11.006 UTC** confirment encore zéro action.
+**Run to next level** a ensuite repris réellement le parcours :
+
+| Point observé | Actions cumulées | Niveaux terminés | Plans affichés |
+| --- | ---: | ---: | ---: |
+| Fin du niveau 1 | 12 | 1 | 10 |
+| Fin du niveau 2 | 24 | 2 | 18 |
+| Fin de la cible de trois niveaux | 38 | 3 | 30 |
+
+L’URL finale porte **`level=4`**. La
+[capture d’écran réelle des trois niveaux terminés](lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/cua-evidence/three-levels-completed.png)
+est conservée. Cette vérification établit Pause avant le prochain envoi et
+la reprise observée ; elle ne revendique aucune préemption de la recherche
+interne déjà commencée dans le worker.
+
+La fermeture est effectivement vérifiée : le premier inventaire conservait
+encore l’onglet 7, le second constate son absence. Le preview a reçu son arrêt
+et son état est **`stopped`** ; le superviseur **98145** est terminal avec
+**exit 0**, et son groupe est récolté sans orphelin. La
+[relecture finale facturée](lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/root-final-review.json)
+contrôle le lease réel : **`reaped: true`**, aucun signal et aucune erreur.
+Le helper atteste cette exécution et cette fermeture ; le succès UI repose
+sur les observations CUA, pas sur une assertion du helper.
+Les **3 009 entrées surveillées restent inchangées**.
+
+La **cible de 360 secondes a été dépassée** : **418,633882138 s** pour le wrapper
+et **418,475255 s** jusqu’à la fermeture opérateur, sous son seuil de 480 s.
+La borne externe de **600 s** est respectée. Les interactions et le temps de
+compaction sont inclus dans le débit ; aucune correction de temps n’est
+soustraite.
+
+**QA01 reste un échec technique conservé de 60,152 s** : le CLI avait annoncé
+une URL prête puis restait vivant, alors que le helper attendait à tort la
+fin de sa commande. Aucune page n’avait été ouverte ; ce reçu ne décrit pas
+un échec du jeu.
+
+Après QA02 et sa **lecture finale facturée, vers 20:32 UTC le 11 novembre 2026**,
+l’horloge est **inactive**, à **1 221,0363642830062 secondes cumulées sur 2 400**,
+avec **1 178,9636357169938 secondes restantes**. Ce total remplace le point
+intermédiaire de 20:19:50 et comprend la clôture effective du navigateur.
+Le parcours final des outils de coût, la mesure officielle, la publication
+effective 0.63 et sa réconciliation, puis la publication 0.64 restent ouverts.
+
+Le [checkpoint de preuves effectivement poussé et vérifié](lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/core-checkpoint-summary.json)
+est désormais **`17d6c1aa3532e4ff74a98a309e4dfb9c3bc4fb59`**, sur la branche
+`lot6b-selected-rigid-checkpoint-20261111`, confirmé le **11 novembre 2026 à
+20:51:49.609783 UTC**. Les **sept lots de transport sont tous poussés et
+vérifiés** : **356 fichiers, 154 054 085 octets**, avec le natif
+**fa23 / 322 fichiers inchangé**. Il s’agit d’une sauvegarde de source privée,
+sans publication de Site.
+
+**Les compléments QA02, l’horloge, les trois documents et les métadonnées de
+clôture ne sont pas encore revendiqués comme inclus dans 17d6c1aa** : leur
+petit commit complémentaire reste à terminer. `a01e6faf330d82fa220feac0c9ad4632bb75a9de`,
+vérifié à 18:34:56 UTC, devient un jalon historique, comme le
+[checkpoint 17bba57a](lot6b-evidence/provisional-063-01/source-checkpoint-17bba57a.json).
+Le jalon antérieur 103 + 6B, **33 + 9 tests et 65/76 entrées**, conserve son
+identité `7696e0c…` / `2e710bd…`.
+
+La publication effective **5C / 0.63** demeure requise et doit être réconciliée
+avec les entrées de `805b3029`. Une identité démontrée des entrées pertinentes
+permettra de conserver les preuves correspondantes ; une différence exigera
+la qualification des contrôles affectés. **Aucun pourcentage de coût 6B ni
+publication 0.64 n’est acquis.**
+La [publication effectivement revérifiée](lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/publication-observation.json)
+à **20:34:24.999 UTC le 11 novembre 2026** reste **Site 103**, commit
+`4afcbfe6a25bd3a88223be543e443bc53b9c8814` / **native 0.62**, en accès
+propriétaire seul. **Ni 0.63 ni 0.64 ne sont publiées.** Ce constat actualisé
+reste distinct du parcours local Vite qualifié.
+
+Le créneau de coordination **`lot5c-cost-a33a5f88-recovery-02`** a été
+explicitement libéré le **11 novembre 2026 à 20:30:25.610691 UTC** :
+`quiet_requested: false`, `quiet_released: true`, motif déclaré
+`failed_or_expired` et `performance_started: false`. Aucune mesure officielle
+5C n’a démarré dans ce créneau. Cette issue ne précise pas sa cause et
+n’entraîne pas de nouvel essai automatique ; elle ne clôt ni 0.63 ni le coût 6B.
+L’ordre demeure **5C 0.63 → 6B 0.64 → 8A 0.65 → 10C**.
 
 <!-- LOT6B_SITE103_INTEGRATION_END -->
 
@@ -240,13 +409,14 @@ de refus**, 198 résultats non vides et zéro erreur. Ces résultats établissen
 une contribution sur cette campagne ; le retour étranger reste un cas
 synthétique, puisque les 30 préfixes de KLOT sont sélectionnés SelectedRigid.
 
-Le gel reste provisoire, issu de Site 97 / native 0.60, avec 0.64 réservé.
+Ce gel historique reste celui du développement issu de Site 97 / native 0.60, avec 0.64 réservé.
 La réconciliation et la qualification après le prédécesseur effectivement
 publié 0.63 restent à faire. La [qualification négative du lecteur](lot6b-evidence/development-freeze-01/reader-negative-attempt-01/results/qualification.json)
 a ensuite réussi **deux mutations sémantiques sur deux**. Le
 [reçu borné](lot6b-evidence/development-freeze-01/reader-negative-attempt-01/bounded-execution.json)
-conserve l’exécution et son débit. L’horloge du cas est fermée à
-**350,862153633 secondes**, avec **2 049,137846367 secondes restantes**.
+conserve l’exécution et son débit. À cette **clôture historique du
+développement**, l’horloge était fermée à **350,862153633 secondes**, avec
+**2 049,137846367 secondes restantes**. Ce n’est pas le solde courant.
 
 La contribution de développement, les cas contraires, le navigateur, les
 régressions finales, le coût officiel et la publication restent distincts. La règle de coût autorise un dépassement de
@@ -263,16 +433,32 @@ rend désormais un échec pour des références absentes. Les fixtures ont ensui
 erreur ; la clôture ci-dessous conserve les reçus distincts. Aucun bilan
 « cinq contrôles réussis » n’est attribué au premier passage.
 
-La publication au point de contrôle historique précédent était Site 101 / native 0.61, source
-`d75a36f0a99bf6c301034523a3138a64d2f6e744`. Le gel 6B présenté conserve
-sa base Site 97. Le checkpoint 5C `d54a58f2` ne vaut pas une publication
-0.63 ; l’intégration finale, le navigateur, les régressions, le coût officiel
-et la publication 6B restent ouverts.
+Site 101 / native 0.61 et le checkpoint 5C `d54a58f2` restent des jalons
+historiques. Le dernier constat publié est Site 103 / native 0.62, sans
+SelectedRigid ; son intégration 6B vérifie désormais `currentExecution`, le
+cinquième argument des gardes et la conversion du délai hôte plus strict.
+Le candidat courant fa23/322 intègre provisoirement `805b3029`. Sa suite
+complète **5 405/5 405**, ses cinq contrôles de livraison, son worker et sa
+structure de coût sont désormais vérifiés comme détaillé en tête, avec les
+échecs historiques conservés. La nouvelle preuve KLOT est close sur trois
+niveaux, 38 actions et 30 préfixes, avec 408 événements originaux sans
+différence, ablations et deux corruptions sémantiques qualifiées.
+Les **onze rejeux et 187/187 contrôles**, totalisant 390 actions, sont agrégés
+avec les douze tentatives conservées. La QA navigateur Vite est réussie sur
+le worker TypeScript de développement : Pause à zéro action observée deux fois,
+reprise, trois niveaux puis fermeture vérifiés. Elle ne qualifie pas un parcours
+UI du bundle de production. La publication 0.63 et sa réconciliation, le
+parcours CLI complet des outils de coût, la mesure officielle et la publication
+6B restent ouverts.
 
-Cette intégration devra transmettre `currentExecution` comme cinquième
-argument des appels communs et conserver le délai hôte plus strict grâce au
-helper d’horloge 10B revu. Ce raccordement n’est pas encore implémenté dans le
-gel de développement, et les preuves actuelles ne lui sont pas attribuées.
+La revue statique conserve deux limites distinctes : Pause ne préempte pas la
+recherche du worker ; le chemin asynchrone après autorisation n’établit pas de
+garde courante supplémentaire rafraîchie après sa suspension. Les surfaces de
+l’[appelant natif](../../src/logos-engine/v6-native-runtime.ts) et du
+[service d’agent](../../src/runtime/v6-agent-service.ts) restent à qualifier dans
+leur contexte effectif. **Aucune de ces limites n’est établie comme cause du
+signalement KLOT**. La capture fa23 réussie ne reproduit pas la session exacte
+signalée et ne transforme pas ces réserves en diagnostic causal.
 
 ## Clôture de la restauration des preuves héritées
 

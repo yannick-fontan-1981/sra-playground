@@ -1,0 +1,33 @@
+{
+  "schema": "logos-engine.lot6b-checkpoint-transport-source-preparation.v1",
+  "preparedAt": "2026-11-11T20:39:58.714400+00:00",
+  "status": "syntax_checked_not_executed",
+  "helper": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/checkpoint-transport.mjs",
+    "bytes": 19893,
+    "sha256": "6a3bb1719395b02f157bdf4e6915e7077aec5f74c603c0e9365acc5fa10eb788"
+  },
+  "syntaxCheck": {
+    "argv": [
+      "node",
+      "--check",
+      "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/checkpoint-transport.mjs"
+    ],
+    "exitCode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "helperExecuted": false,
+  "gitExecuted": false,
+  "networkUsed": false,
+  "credentialRequestedOrRead": false,
+  "indexCommitOrPushPerformed": false,
+  "inputDeadlineSeconds": 120,
+  "lockOnlyAfterInput": true,
+  "lockWaitSeconds": 2,
+  "gitCommandDeadlineSeconds": 50,
+  "workerDeadlineSeconds": 80,
+  "supervisorDeadlineSeconds": 85,
+  "cleanupTargetTotalSeconds": 90,
+  "environmentBoundary": "External Git/flock/Node/runtime image are not fully frozen. Explicit scoped command/proxy/auth rules are encoded. Shared lock file is never replaced."
+}

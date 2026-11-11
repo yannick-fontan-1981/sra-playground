@@ -1,0 +1,480 @@
+{
+  "schema": "logos-engine.lot6b.documentary-closure-plan.v1",
+  "recordedAt": "2026-11-11T20:53:33.634165+00:00",
+  "parent": "17d6c1aa3532e4ff74a98a309e4dfb9c3bc4fb59",
+  "label": "closure-01",
+  "files": [
+    {
+      "path": "docs/migration/lot6b-evidence/klot-case-clock.json",
+      "bytes": 7389,
+      "sha256": "ca34366ebe678fee5fefa6fdc7043fa45761219ce328d5083cbedaf2d2a410cf",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/browser-case-command.json",
+      "bytes": 670143,
+      "sha256": "5b29c7910bfe874d75e08815d99c7bbe9fa816f3bd8a9691a30ec45868dce938",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/browser-case-command.log",
+      "bytes": 3543,
+      "sha256": "aa3c5029bd409bc0afc5b4fe4e43eb831dc4bc2feb2012ca9676d26502f8e740",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/browser-case-command.log.gz",
+      "bytes": 1191,
+      "sha256": "ef0038424233b36d1814f42a15142cd41b1c0e6a6d5a4b86fe0219590b0f3474",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/browser-functional-summary.json",
+      "bytes": 6299,
+      "sha256": "48ec788e8a8132f9fb07dbb11465f1113a5056b3f860228a56fd37b40939116e",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/browser-watch.json",
+      "bytes": 492742,
+      "sha256": "d26a752f59fb1b638a39f121489c872f35723e3d0882a3dfbda359e242747ff2",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/closure-readback-command.json",
+      "bytes": 675932,
+      "sha256": "855f6cf6f13508cfded7521075f6ffb3d743a7f3bf6cd94abbc5785acf68c1b6",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/closure-readback-command.log",
+      "bytes": 4508,
+      "sha256": "a37bcb98942d76432d7b41872cd2838b2ab8a3386a95ef91f0f992bfff1b319f",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/closure-readback-command.log.gz",
+      "bytes": 1423,
+      "sha256": "ccb7fc9ba456210232e13b9cd8150eca72b1d5619e8d661e57201a2a716d5556",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/closure-readback-preparation-refusal-01.json",
+      "bytes": 560,
+      "sha256": "27bb6f25cc8de37708e4fbb2e2c94d06b881f5d1d34c1c495d6c44578659ef95",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/closure-required.json",
+      "bytes": 212,
+      "sha256": "04bbac1765e52c619f0d13af8669a7a41c4bfab6fdb71c40008b31b76dddb952",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/cua-evidence/board-progress.png",
+      "bytes": 67626,
+      "sha256": "0445bb98125882ce62b9741e924f58584a4530761d9e056ad5f9e3d78bc7cd2a",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/cua-evidence/level-02-completed.txt",
+      "bytes": 10078,
+      "sha256": "4558473e0be3cc7e5fba16e01c292d961e25161e4ebabe411b7d41d75d9f7653",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/cua-evidence/level-03-completed.txt",
+      "bytes": 10078,
+      "sha256": "47e13cc8ce64296a201dece474043cb0a1fb90f08c8da5772cc281438c438e50",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/cua-evidence/paused-state.txt",
+      "bytes": 10067,
+      "sha256": "20dba6856eccbeaae32ae4ece1e1f59d39ac70ab0816508bb5286d5f96eea93f",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/cua-evidence/progress-01.txt",
+      "bytes": 10078,
+      "sha256": "2ca1b5fc751f7969e1b7809bdb8d3eb15392cdd616593a1c30bd45076727d5da",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/cua-evidence/running.png",
+      "bytes": 97864,
+      "sha256": "899b791ba922e2b58db15b21a7f964cb02b0eb21da9024cfcbaf858c4e78fcad",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/cua-evidence/tab-closure.json",
+      "bytes": 278,
+      "sha256": "67680c0e0b0aa8d8222e0a5b7dffd15a832cb8ec83c59c3ddc8459e06c149cda",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/cua-evidence/three-levels-completed.png",
+      "bytes": 71263,
+      "sha256": "118d95dd1ca3080d5ed2ca89d4e8bd9fd9052605ebdec65a178d85c93d16cba2",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/execution-declaration.json",
+      "bytes": 5983,
+      "sha256": "0e976fbb6e86fa4124b4aa0c9836baa00dc0693e223a818198dcc08d6fe4e669",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/hold-managed-preview.py",
+      "bytes": 13477,
+      "sha256": "56f3b263f3199778b359252aa43994c496df14d261cd012ba96c047f83183541",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/operator-close.json",
+      "bytes": 252,
+      "sha256": "e715a5862ac2d0d7a565ec7abb88210db0d22c81cd8119b46b104f1b30a47c2c",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/operator-preview-stop.json",
+      "bytes": 499,
+      "sha256": "2c55043c139266545cbd4613377bb63537d7a0a7907e26e476cedd825e8f3875",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/plan.md",
+      "bytes": 6497,
+      "sha256": "3c26d0ffa35aab36ab0818099f8c55da5cc3e2212d2b843ee26cb3dee59cdce6",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/preparation-static-check-02.json",
+      "bytes": 1726,
+      "sha256": "61e44acf4461b7f2fe26e63b1be0da304f6486e0007db226fb8af2ffe8abcde6",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/preparation-static-check.json",
+      "bytes": 1505,
+      "sha256": "e2e8ee7e99aa2ad28724507e1b0a18e8b4cd8ac152644fcdf15a8ac5e661ecf6",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/preview-lease-terminal.json",
+      "bytes": 861,
+      "sha256": "fa986031905c847ae152b3e9b0793c8697605f715b5c3cc775875f28976194d3",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/preview-ready.json",
+      "bytes": 699,
+      "sha256": "60d3d5197182931afcff61b9d44fcfb8955a2cb7dece359d14d7590724220fbf",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/preview-session-result.json",
+      "bytes": 3046,
+      "sha256": "f82fc19082016598a310dfb84c8f0ed8dc379d14d285da5b1d49a7ac5b7b8332",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/preview-start.json",
+      "bytes": 691,
+      "sha256": "2a24e4e3a35a0f6c9fc3caf6e9c4785aaa0b9701bcc27e36e7cdcbcc10c71cb4",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/preview-start.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/preview-start.stdout.log",
+      "bytes": 48,
+      "sha256": "f9393e80b0c26ca24f28a0b25f4c1d032efe90dfc75ec07d9690b4627ec1d1a7",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/preview-stop-finally.json",
+      "bytes": 312,
+      "sha256": "f7be51d8e6832bef9928cef2a723e16931b6bc7ab6b858857a0e3f73594aa929",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/root-final-review.json",
+      "bytes": 2091,
+      "sha256": "2ad4ef381be152f3b7353a780b5fa4514e09f80f764556e3a3837c51bab1515f",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/root-source-review.json",
+      "bytes": 493,
+      "sha256": "36ae6d167d0417394555f57bf489558c51a69401d8bb2cac5a2a9bdf9ae49ae9",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/status-after-finally.json",
+      "bytes": 315,
+      "sha256": "e737672aa20c27fe84cadd2100027c27bf3e66d4f9d5932b83f7af10393430f5",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/status-before.json",
+      "bytes": 314,
+      "sha256": "4378379bda3ebbf1508ad3003730cf5b3b8821d57b51d2337b8dbfa5fe4f88e4",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/tab-closure-confirmed.json",
+      "bytes": 446,
+      "sha256": "5061bc413a823bec950956aed1492c4ccf1a4e051d985684b81bd8251c560581",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/bin-01-commit.json",
+      "bytes": 30966,
+      "sha256": "6f38d46643667d8a8699ded17fce2d638f73f4341a7d75db294aee024b28b0bb",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/bin-01-push.json",
+      "bytes": 859,
+      "sha256": "2c3d3bba75b4484270be34559fdf216cbb70a5ab1b6f4e54708001cb0b393f97",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/bin-01-transport.json",
+      "bytes": 30291,
+      "sha256": "080c31d60e7630f73b428ce599a1aab198352338a26dedd5d4b07c1b8bea12c2",
+      "mode": "0600"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/bin-02-commit-attempt-02.json",
+      "bytes": 43149,
+      "sha256": "0ab22b855c614e5a5ed80bbada55775e4e5b9bae216162864e8cc4dbdf7796ba",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/bin-02-commit.json",
+      "bytes": 11744,
+      "sha256": "97e7b8a833200636bc9866ac8a1674bc21b0310baf7d6abb079aad40459a5f9d",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/bin-02-push.json",
+      "bytes": 1112,
+      "sha256": "0be7a3ca01403aaee35c106fac1033de8e51fb980f51a5866cddaa211377ee5a",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/bin-02-transport.json",
+      "bytes": 30305,
+      "sha256": "6371ae574e1907a915341507081e5500a128d954958697ea4a95f0085d958f66",
+      "mode": "0600"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/bin-03-commit.json",
+      "bytes": 33809,
+      "sha256": "bb0787544761337e056c0eb719fd075638a87d7ba895325b39b1e89a5c1e44af",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/bin-03-push.json",
+      "bytes": 1101,
+      "sha256": "29d204b5edb8010899d9589192b86b40b387b62e713504334870e031826522a6",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/bin-03-transport.json",
+      "bytes": 30331,
+      "sha256": "3b04fdad8db940a9c097c498dc4ea88c3e56374b6379ef1b3c3238b25e7ebd5d",
+      "mode": "0600"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/bin-04-commit.json",
+      "bytes": 43277,
+      "sha256": "e81800377da97dd1b599f079935adb7f71fcc6475995931c46484d9e40be0aad",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/bin-04-push.json",
+      "bytes": 1101,
+      "sha256": "4c31b2ad916b87599b27abbb6b069c197f46c51aab01461f5098d9376c44273d",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/bin-04-transport.json",
+      "bytes": 30330,
+      "sha256": "689aeccf792044f7baf3376066184ea29f02090f9e91a20be76c16612e2c9c72",
+      "mode": "0600"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/bin-05-commit.json",
+      "bytes": 54024,
+      "sha256": "06085aeed7f21181d51cd1bcaf054e8260d239a6dba73da7cf962bbeacce26df",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/bin-05-push.json",
+      "bytes": 1102,
+      "sha256": "ec1e5b48d1d39a06b73c1eeb6ee26e6de3d263194ce1933504c87f334fa58917",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/bin-05-transport.json",
+      "bytes": 30315,
+      "sha256": "7e71f14b4962b0f7f29d65bced7ba171707c862bb32b825b0e5fc611a01467cc",
+      "mode": "0600"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/bin-06-commit.json",
+      "bytes": 202427,
+      "sha256": "1e4af44df4361e7e70b1a9b1b194880d62686a590290b751aab53b8228d6f294",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/bin-06-push.json",
+      "bytes": 1103,
+      "sha256": "83ece74254ffd3cf9471c8b7dfe213d6d7b03b1963211bd36b30c541d1426ddd",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/bin-06-transport.json",
+      "bytes": 30307,
+      "sha256": "d08ea71f56d6ea2a75862eabb5643377ca338af968b853ee0b3bc9128c3bb114",
+      "mode": "0600"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/bin-07-commit.json",
+      "bytes": 855349,
+      "sha256": "67b993803cd29e5b4c789ae435bcbaa8c6a3fbfadc8ac7d586219be5b3c28954",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/bin-07-push.json",
+      "bytes": 1103,
+      "sha256": "844886a96f3924f5210a39a33de54832e5ddf9ae0db1fcd4eda1b11c98c7af83",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/bin-07-transport.json",
+      "bytes": 30318,
+      "sha256": "f203f5a8a4afe5c872b9e35a95aadc231323b584483c2000eb68f6caa266c1ad",
+      "mode": "0600"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/checkpoint-transport-preparation.json",
+      "bytes": 1211,
+      "sha256": "47b3bd1fe6216d32917dd16a3db2eb865fc1993fe52c8247f3d524f9fa795804",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/checkpoint-transport-root-review.json",
+      "bytes": 3130,
+      "sha256": "9f54345aa65f11d9c2a4f9111d27d40da3f45879ad61c584d7e0eb04b7234e23",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/checkpoint-transport.mjs",
+      "bytes": 19844,
+      "sha256": "0b1ec1bf251287395f0520eac80ff82a6a947faa89728b64fa85c211880990fa",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/close-checkpoint.py",
+      "bytes": 6921,
+      "sha256": "f0c7d2d786fd04d73e5ae18dcb8285a14d90e57f22714cc55d4509da24b4715c",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/commit-bin-compatibility-correction.json",
+      "bytes": 3783,
+      "sha256": "0bc7f39f68d6c2201571088917d55c329df4867597ca89febde82c8a45b0f745",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/commit-bin-root-review.json",
+      "bytes": 932,
+      "sha256": "25e600aee4e740a9c2a74ad6e614fb1cc6d89c93799a9de504e1cb111a4f94a3",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/commit-bin.py",
+      "bytes": 18580,
+      "sha256": "748a370648f5df0e24c01bd2f5f4f1358283c4b764385f34788fbf96d8216705",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/coordination-recovery02-release-observation.json",
+      "bytes": 950,
+      "sha256": "41498890134e896776b3e1c298648c39c341117aba0204b478ae0bde90b9096a",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/core-checkpoint-summary.json",
+      "bytes": 4471,
+      "sha256": "493ed6c5365fe0683af0a9935ebee3a9f558645b4aeceb234c42b7b3f8b1ee91",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/fetch-01.json",
+      "bytes": 30574,
+      "sha256": "254d6db0538ee22c6271ccd9cd0375b7352f2e79c141d76d6cf2dff9abbbe283",
+      "mode": "0600"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/predecessor-final-status-observation.json",
+      "bytes": 1299,
+      "sha256": "2ee61b2590f8026c3f6429cdaa069673d052b48766a8b44af13f3aa557833d0a",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/publication-observation.json",
+      "bytes": 877,
+      "sha256": "b777f8e66e4cd21ad80c2ebb34406ca07408406e0ddb4da30f512b1e63b9bedc",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/qa02-closure-inventory.json",
+      "bytes": 10441,
+      "sha256": "fc64da04505a852f4c0cd370f4ef248878120fa00b5095f0a062840e8aed03ca",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/transport-plan.json",
+      "bytes": 264535,
+      "sha256": "39a6b0c8024fc7869acd4aeacc1438a1d68199fc4d9769bacac3a3bde66ed2d4",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-selected-rigid-lineage.md",
+      "bytes": 37725,
+      "sha256": "08e812cc37aa51e6ef7306bdcc7f22c42a3610f965f11dcf56fa1c90b69bbf26",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-selected-rigid.md",
+      "bytes": 38074,
+      "sha256": "10209da800f3cf8115e320ccd8071ffdeb57f5f747567dab8913f29e79fbecfe",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/v6-delivery-roadmap.md",
+      "bytes": 294863,
+      "sha256": "823acf101c8aa77181de98cebdbb6c48c442a6423574f964a4a6fd7f6356123c",
+      "mode": "0644"
+    }
+  ],
+  "fileCount": 77,
+  "rawBytes": 4413162,
+  "forceAddPaths": [
+    "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/browser-case-command.log",
+    "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/closure-readback-command.log",
+    "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/preview-start.stderr.log",
+    "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/preview-start.stdout.log"
+  ],
+  "manifestSelfExcluded": true,
+  "qualification": "The plan is staged in addition to the listed files; it does not claim its own hash. Only closed own evidence, metadata, final case clock and three documents are included."
+}

@@ -1,0 +1,11 @@
+{
+  "schema": "logos-engine.lot6b-preparation-refusal.v1",
+  "recordedAt": "2026-11-11T20:19:49.181344+00:00",
+  "status": "failed_before_case_launch",
+  "exitCode": 1,
+  "error": "SyntaxError: unterminated string literal in outer Python launcher",
+  "cause": "JavaScript String.replace replacement-string expansion corrupted the embedded reader at a dollar-and-quote regex sequence.",
+  "caseClockStarted": false,
+  "payloadExecuted": false,
+  "correction": "Reader passed as a separately shell-quoted argv value, without replacement-string interpolation."
+}

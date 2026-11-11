@@ -1,0 +1,87 @@
+{
+  "schema": "logos-engine.lot6b-browser-preview-supervision.v1",
+  "status": "operator_closed_preview_interval",
+  "startedAt": "2026-11-11T20:10:57.673884+00:00",
+  "finishedAt": "2026-11-11T20:17:56.238020+00:00",
+  "elapsedSeconds": 418.5641280989985,
+  "previewReady": {
+    "schema": "logos-engine.lot6b-browser-preview-ready.v1",
+    "status": "awaiting_root_cua",
+    "startedAt": "2026-11-11T20:10:57.673884+00:00",
+    "readyAt": "2026-11-11T20:10:58.779369+00:00",
+    "exactReturnedUrl": "http://127.0.0.1:4173/",
+    "qaUrl": "http://127.0.0.1:4173/?game=KLOT&level=1",
+    "leasePid": 11,
+    "leaseAliveAtReady": true,
+    "leaseEvidence": "preview-start.json",
+    "selection": "Only the explicitly authorized UI query game=KLOT&level=1 is appended; host/port/path remain exactly returned.",
+    "qaTargetSeconds": 360,
+    "operatorClosureDeadlineSeconds": 480,
+    "helperWaitLimitSeconds": 525,
+    "outerSupervisorLimitSeconds": 600,
+    "browserWorkerControllableByHelper": false
+  },
+  "commands": [
+    {
+      "file": "status-before.json",
+      "exitCode": 0,
+      "timedOut": false
+    },
+    {
+      "file": "preview-start.json",
+      "pid": 11,
+      "exitCode": null,
+      "timedOut": false
+    },
+    {
+      "file": "preview-stop-finally.json",
+      "exitCode": 0,
+      "timedOut": false
+    },
+    {
+      "file": "status-after-finally.json",
+      "exitCode": 0,
+      "timedOut": false
+    }
+  ],
+  "error": null,
+  "leaseTerminal": {
+    "schema": "logos-engine.lot6b-managed-preview-lease-terminal.v1",
+    "pid": 11,
+    "pidKind": "our sites-preview CLI lease process only",
+    "startedAt": "2026-11-11T20:10:57.675006+00:00",
+    "reapStartedAt": "2026-11-11T20:17:56.236918+00:00",
+    "terminalObservationAt": "2026-11-11T20:17:56.237046+00:00",
+    "exitCode": 0,
+    "exitSignal": null,
+    "signalsSentToOwnProcess": [],
+    "reaped": true,
+    "error": null,
+    "logs": {
+      "preview-start.stdout.log": {
+        "bytes": 48,
+        "sha256": "f9393e80b0c26ca24f28a0b25f4c1d032efe90dfc75ec07d9690b4627ec1d1a7"
+      },
+      "preview-start.stderr.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "browserWorkerClosedClaimed": false,
+    "qualification": "Controlled CLI lease cleanup is not proof of UI closure or functional QA success."
+  },
+  "operatorClosureAttestation": {
+    "schema": "logos-engine.lot6b-browser-qa-operator-close.v1",
+    "recordedAt": "2026-11-11T20:17:56.149139+00:00",
+    "tabId": "7",
+    "qaUrl": "http://127.0.0.1:4173/?game=KLOT&level=1",
+    "tabClosedObserved": true,
+    "previewStoppedObserved": true
+  },
+  "operatorClosureReceivedSeconds": 418.56039356399924,
+  "previewStoppedObservedByHelper": true,
+  "browserTabClosedByHelper": false,
+  "browserWorkerTerminationVerifiedByHelper": false,
+  "uiClosureProof": "Only root CUA observations plus its post-closure attestation; daemon stop or outer600s is never UI closure proof.",
+  "functionalQaPassedClaimed": false
+}
