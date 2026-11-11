@@ -1,0 +1,199 @@
+{
+  "schema": "logos-engine.lot5c-cost-renderer-preparation.v1",
+  "status": "source_preparation_validated_without_cost_measurement",
+  "recordedAt": "2026-11-11T16:49:29.610934+00:00",
+  "lot": "5C",
+  "adaptedFrom": {
+    "path": "docs/migration/lot5b-evidence/write-cost-results.py",
+    "bytes": 41726,
+    "sha256": "476076b107260a1617d1dad6e5043b29100e9d3af99465c80747e72279175bff"
+  },
+  "renderer": {
+    "path": "docs/migration/lot5c-evidence/write-cost-results.py",
+    "bytes": 50139,
+    "sha256": "16bf3b946dd2d30e582fec814f08a5abf75e8d8200bd3525ee1e466fa85e72a9"
+  },
+  "protocolPreparation": {
+    "path": "docs/migration/lot5c-evidence/prepare-cost-protocol.py",
+    "bytes": 34594,
+    "sha256": "b8f5096ae5521306904168da48b1ee3e69045384d5fb8c88dc4441e3efebfce8"
+  },
+  "scope": [
+    "Direct adaptation of 5B formatting and retained-evidence verification to actual 5C schemas.",
+    "Historical-strict and owner-qualified branches remain distinct.",
+    "Only public_observed_binding and v6.observed_binding.choose with their exact closed structural expectation may be qualified.",
+    "Qualified branch preserves historicalStrictPassed:false.",
+    "Native versions, source identities and measured values are read from the selected declaration and retained evidence.",
+    "Each STCK/SMLP pooled eight-session median must be strictly below +10%; exact equality is rejected.",
+    "Phase overruns and all measured sessions remain visible; no outlier removal.",
+    "Preparation script changed only the quiet-window wording."
+  ],
+  "validation": {
+    "kind": "syntax_cli_and_small_synthetic_formatter_cases_only",
+    "syntheticInputsWereClearlyMarked": true,
+    "temporarySyntheticFilesRemoved": true,
+    "checks": [
+      {
+        "name": "syntax:write-cost-results.py",
+        "status": "passed"
+      },
+      {
+        "name": "syntax:prepare-cost-protocol.py",
+        "status": "passed"
+      },
+      {
+        "name": "historical-strict branch selected",
+        "status": "passed"
+      },
+      {
+        "name": "owner-qualified branch selected",
+        "status": "passed"
+      },
+      {
+        "name": "unknown qualification refused",
+        "status": "passed"
+      },
+      {
+        "name": "accepted global in branch False",
+        "status": "passed"
+      },
+      {
+        "name": "exact +10 percent rejected in branch False",
+        "status": "passed"
+      },
+      {
+        "name": "above +10 percent rejected in branch False",
+        "status": "passed"
+      },
+      {
+        "name": "inconsistent boundary acceptance refused in branch False",
+        "status": "passed"
+      },
+      {
+        "name": "accepted global in branch True",
+        "status": "passed"
+      },
+      {
+        "name": "exact +10 percent rejected in branch True",
+        "status": "passed"
+      },
+      {
+        "name": "above +10 percent rejected in branch True",
+        "status": "passed"
+      },
+      {
+        "name": "inconsistent boundary acceptance refused in branch True",
+        "status": "passed"
+      },
+      {
+        "name": "rejected verdict displayed without acceptance",
+        "status": "passed"
+      },
+      {
+        "name": "missing global cases refused",
+        "status": "passed"
+      },
+      {
+        "name": "malformed global rows refused",
+        "status": "passed"
+      },
+      {
+        "name": "inconsistent source-bound ratio refused",
+        "status": "passed"
+      },
+      {
+        "name": "phase +50 percent retained with accepted globals",
+        "status": "passed"
+      },
+      {
+        "name": "historical-strict completed analysis accepted",
+        "status": "passed"
+      },
+      {
+        "name": "historical-strict missing review refused",
+        "status": "passed"
+      },
+      {
+        "name": "wrong native version refused",
+        "status": "passed"
+      },
+      {
+        "name": "owner-qualified completed analysis accepted",
+        "status": "passed"
+      },
+      {
+        "name": "qualified historicalStrictPassed inconsistency refused",
+        "status": "passed"
+      },
+      {
+        "name": "qualified structuralProof inconsistency refused",
+        "status": "passed"
+      },
+      {
+        "name": "qualified inputsUnchanged inconsistency refused",
+        "status": "passed"
+      },
+      {
+        "name": "CLI help",
+        "status": "passed"
+      },
+      {
+        "name": "CLI missing declaration refusal",
+        "status": "passed"
+      },
+      {
+        "name": "missing receipt refused",
+        "status": "passed"
+      },
+      {
+        "name": "duplicate JSON refused",
+        "status": "passed"
+      },
+      {
+        "name": "nonfinite JSON refused",
+        "status": "passed"
+      },
+      {
+        "name": "direct 5B provenance source fingerprint",
+        "status": "passed"
+      },
+      {
+        "name": "prepare-cost-protocol diff is one quiet-wording sentence only",
+        "status": "passed"
+      }
+    ],
+    "passedChecks": 32,
+    "cli": [
+      {
+        "arguments": [
+          "--help"
+        ],
+        "exitCode": 0,
+        "stdout": "usage: write-cost-results.py [-h] [--output-directory OUTPUT_DIRECTORY]\n                             [--candidate-source-directory CANDIDATE_SOURCE_DIRECTORY]\n                             [--baseline-manifest BASELINE_MANIFEST]\n\nRender only completed lot 5C cost receipts, without measuring anything. All\noutcomes and figures come from the future retained 5C reports. This renderer\ndoes not assume acceptance or copy any historical result. User-facing\ntimestamps use UTC−03; input receipts are not rewritten. The qualified 5C\nanalysis must use its predeclared generators, including their bounded\nbaseline-input reader. No post-measurement I/O variant is substituted. Select\na separate window with --output-directory. Source manifests are read from that\nwindow's declaration; optional source-path arguments must match it exactly.\n\noptions:\n  -h, --help            show this help message and exit\n  --output-directory OUTPUT_DIRECTORY, --performance-directory OUTPUT_DIRECTORY\n                        Completed receipt directory inside lot5c-evidence;\n                        results are written beside those receipts.\n  --candidate-source-directory CANDIDATE_SOURCE_DIRECTORY\n                        Optional assertion of the candidate freeze directory\n                        already bound by the declaration.\n  --baseline-manifest BASELINE_MANIFEST\n                        Optional assertion of the baseline manifest already\n                        bound by the declaration.\n",
+        "stderr": ""
+      },
+      {
+        "arguments": [
+          "--output-directory",
+          "docs/migration/lot5c-evidence/recovery/planning/SYNTHETIC-MISSING-COST-RECEIPTS"
+        ],
+        "exitCode": 1,
+        "stdout": "",
+        "stderr": "{\"schema\": \"logos-engine.lot5c-cost-report-render-error.v1\", \"status\": \"rendering_blocked\", \"error\": \"ValueError: The selected window needs its retained declaration\", \"runtimeOrGameExecuted\": false, \"measurementExecuted\": false}\n"
+      }
+    ],
+    "fullCompletedEvidenceRenderExecuted": false,
+    "failureHistory": []
+  },
+  "limits": [
+    "Actual published 0.62 source identity and final 5C evidence must be frozen before the official recipe.",
+    "No real cost receipts were rendered; no 5C measured results were generated.",
+    "Full retained-evidence rendering still requires completed declaration, window, structural qualification when applicable, comparisons, review, transport and actual source manifests.",
+    "Fresh quiet acknowledgements must cover every active lane and worker, including successor 8A; shared-lock reads stop on a new quiet request."
+  ],
+  "runtimeOrGameExecuted": false,
+  "measurementExecuted": false,
+  "archiveExecuted": false,
+  "acceptanceSemanticsChanged": false,
+  "commandsTerminal": true
+}
