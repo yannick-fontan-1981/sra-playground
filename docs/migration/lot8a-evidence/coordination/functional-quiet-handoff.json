@@ -1,0 +1,19 @@
+{
+  "schema": "sra.lot8a.functional-quiet-handoff.v1",
+  "requestId": "lot10c-recr01-bb7d62-functional",
+  "requestedAt": "2026-11-11T17:45:47.557963+00:00",
+  "acknowledgedAt": "2026-11-11T17:47:45.621077+00:00",
+  "releasedAt": "2026-11-11T17:53:53.132648+00:00",
+  "releaseObservedAt": "2026-11-11T17:55:29.893995+00:00",
+  "lastOwnSourceCommandBeforeQuietTerminalAt": "2026-11-11T17:44:31.027333+00:00",
+  "primaryCheckpointUnchanged": "c8401b9f4becb0d769bd1c4cfc4c1e8d89654dbe",
+  "allOwnWorkersIdleDuringWindow": true,
+  "queuedSourceOrExecutionCommands": false,
+  "onlyDuringWindowActivity": "Tiny named coordination metadata and waiting. A proposed source receipt copy stopped at its initial quiet guard before any source/Git access.",
+  "sourceCopyGuardFailureRetained": {
+    "error": "AssertionError: lot10c",
+    "qualification": "The rejected source command read only named coordination metadata before its guard stopped. No source file, proof file, Git command or lock was touched."
+  },
+  "release": "Explicit RELEASE observed from10C after its functional campaign and retention. This is not an8A cost or game proof.",
+  "codeTestsAuditsBuildChanged": false
+}

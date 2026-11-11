@@ -1,0 +1,95 @@
+{
+  "schema": "sra.lot8a.actual103-merge-review.v1",
+  "recordedAt": "2026-11-11T17:07:42.927262+00:00",
+  "publishedPredecessor": "4afcbfe6a25bd3a88223be543e443bc53b9c8814",
+  "nativeDeltas": [
+    "src/logos-engine/v6-field-constraints.ts",
+    "src/logos-engine/v6-motif-access-geometry.ts",
+    "src/logos-engine/v6-motif-access.ts",
+    "src/logos-engine/v6-native-runtime.ts"
+  ],
+  "fullMergeIndexDiffCheck": {
+    "command": [
+      "git",
+      "diff",
+      "--check",
+      "--cached"
+    ],
+    "exitCode": 2,
+    "stdout": "docs/migration/lot10b-evidence/recovery-20261111/diagnostic/clock-origin/before-fix.tap:12: trailing whitespace.\n+    \ndocs/migration/lot10b-evidence/recovery-20261111/diagnostic/clock-origin/before-fix.tap:15: trailing whitespace.\n+    \ndocs/migration/lot10b-evidence/recovery-20261111/diagnostic/clock-origin/before-fix.tap:36: trailing whitespace.\n+    \ndocs/migration/lot10b-evidence/recovery-20261111/diagnostic/clock-origin/before-fix.tap:41: trailing whitespace.\n+    \ndocs/migration/lot10b-evidence/recovery-20261111/diagnostic/lot10b-composed-typecheck-01.log:5: new blank line at EOF.\ndocs/migration/lot10b-evidence/recovery-20261111/diagnostic/lot10b-composed-typecheck-02.log:5: new blank line at EOF.\ndocs/migration/lot10b-evidence/recovery-20261111/diagnostic/typecheck-01.log:5: new blank line at EOF.\ndocs/migration/lot10b-evidence/recovery-20261111/diagnostic/typecheck-02.log:5: new blank line at EOF.\ndocs/migration/lot10b-evidence/recovery-20261111/integrated-final-01/validation/build-output.raw.txt:57: trailing whitespace.\n+[plugin builtin:vite-reporter] \ndocs/migration/lot10b-evidence/recovery-20261111/integrated-final-01/validation/typecheck-output.raw.txt:5: new blank line at EOF.\ndocs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/validation/build-output.raw.txt:57: trailing whitespace.\n+[plugin builtin:vite-reporter] \ndocs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/validation/typecheck-output.raw.txt:5: new blank line at EOF.\ndocs/migration/lot10b-evidence/review-owner-costs.py:915: new blank line at EOF.\n",
+    "qualification": "Failure retained; all reported bytes are unchanged inherited published logs or source, not newly introduced formatting."
+  },
+  "reportedInheritedFiles": [
+    {
+      "file": "docs/migration/lot10b-evidence/recovery-20261111/diagnostic/clock-origin/before-fix.tap",
+      "bytes": 1910,
+      "sha256": "16be88bf6fe6590baa40e87fe445bba393b7225b295b3f07958221c1e26eb682",
+      "identicalToPublishedPredecessor": true
+    },
+    {
+      "file": "docs/migration/lot10b-evidence/recovery-20261111/diagnostic/lot10b-composed-typecheck-01.log",
+      "bytes": 149,
+      "sha256": "617dc12a2c337d93b91e07bef62eae59b1abe157b737d909052c3e9d2db0d09d",
+      "identicalToPublishedPredecessor": true
+    },
+    {
+      "file": "docs/migration/lot10b-evidence/recovery-20261111/diagnostic/lot10b-composed-typecheck-02.log",
+      "bytes": 149,
+      "sha256": "617dc12a2c337d93b91e07bef62eae59b1abe157b737d909052c3e9d2db0d09d",
+      "identicalToPublishedPredecessor": true
+    },
+    {
+      "file": "docs/migration/lot10b-evidence/recovery-20261111/diagnostic/typecheck-01.log",
+      "bytes": 149,
+      "sha256": "617dc12a2c337d93b91e07bef62eae59b1abe157b737d909052c3e9d2db0d09d",
+      "identicalToPublishedPredecessor": true
+    },
+    {
+      "file": "docs/migration/lot10b-evidence/recovery-20261111/diagnostic/typecheck-02.log",
+      "bytes": 149,
+      "sha256": "617dc12a2c337d93b91e07bef62eae59b1abe157b737d909052c3e9d2db0d09d",
+      "identicalToPublishedPredecessor": true
+    },
+    {
+      "file": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-01/validation/build-output.raw.txt",
+      "bytes": 4628,
+      "sha256": "054328162550f39ce84a024a638a407e164829e2701e4f4bd5e6dd666b2f7516",
+      "identicalToPublishedPredecessor": true
+    },
+    {
+      "file": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-01/validation/typecheck-output.raw.txt",
+      "bytes": 149,
+      "sha256": "617dc12a2c337d93b91e07bef62eae59b1abe157b737d909052c3e9d2db0d09d",
+      "identicalToPublishedPredecessor": true
+    },
+    {
+      "file": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/validation/build-output.raw.txt",
+      "bytes": 4628,
+      "sha256": "054328162550f39ce84a024a638a407e164829e2701e4f4bd5e6dd666b2f7516",
+      "identicalToPublishedPredecessor": true
+    },
+    {
+      "file": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/validation/typecheck-output.raw.txt",
+      "bytes": 149,
+      "sha256": "617dc12a2c337d93b91e07bef62eae59b1abe157b737d909052c3e9d2db0d09d",
+      "identicalToPublishedPredecessor": true
+    },
+    {
+      "file": "docs/migration/lot10b-evidence/review-owner-costs.py",
+      "bytes": 68812,
+      "sha256": "e879fb58868fa753936ae1cdf8eb8801f66371e660404253439560d5af25558c",
+      "identicalToPublishedPredecessor": true
+    }
+  ],
+  "candidateDeltaDiffCheck": {
+    "command": [
+      "git",
+      "diff",
+      "--check",
+      "--cached",
+      "4afcbfe6a25bd3a88223be543e443bc53b9c8814"
+    ],
+    "exitCode": 0
+  },
+  "preserved": "All actual0.62 deadline/currentExecution and Window files are unchanged. Motif additions only affect the four declared native files."
+}

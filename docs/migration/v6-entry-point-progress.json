@@ -2,12 +2,12 @@
   "schema": "logos-engine.v6.declared-entry-coverage.v1",
   "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
   "strategySha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44",
-  "implementation": "logos-engine.typescript.v6.native-migration/0.64.0",
+  "implementation": "logos-engine.typescript.v6.native-migration/0.66.0",
   "metric": "Connection of the explicit subquestions in the four ordered source DRM lists",
-  "connected": 67,
+  "connected": 68,
   "partiallyConnected": 0,
   "declared": 76,
-  "percent": 88.2,
+  "percent": 89.5,
   "groups": [
     {
       "id": "goal_access",
@@ -251,7 +251,7 @@
     {
       "id": "factored_material_return",
       "declared": 33,
-      "connected": 24,
+      "connected": 25,
       "partiallyConnected": 0,
       "entries": [
         {
@@ -296,8 +296,8 @@
         },
         {
           "question": "motif_conditioned_access",
-          "family": null,
-          "status": "pending"
+          "family": "motif_access",
+          "status": "connected"
         },
         {
           "question": "parallel_branch_routing",
@@ -422,7 +422,7 @@
       ]
     }
   ],
-  "qualification": "Each declared entry has equal weight. This counts actual provider registrations, not code volume, game score, expected success, or complete V6 behavioral parity. An explicitly declared partial entry is reported with its connected and pending internal branches and does not increment the connected total. The common coordinator and direct groups are outside this denominator. Their own differential tests and live campaigns remain separate evidence. The prospective 5C+6B+10C source union preserves all three lots original component-proof provenance. Aggregate counters are a static merge reconciliation and remain provisional until final composed-source audits. No new runtime test, official cost or publication result is established by this merge.",
+  "qualification": "Each declared entry has equal weight. This counts actual provider registrations, not code volume, game score, expected success, or complete V6 behavioral parity. An explicitly declared partial entry is reported with its connected and pending internal branches and does not increment the connected total. The common coordinator and direct groups are outside this denominator. Their own differential tests and live campaigns remain separate evidence. The prospective 5C+6B+8A+10C source union preserves all four lots original component-proof provenance. Aggregate counters are a static merge reconciliation and remain provisional until final composed-source audits. No new runtime test, official cost or publication result is established by this merge. The 0.66.0 implementation identifier is proposed for this unpublished composed candidate; the actual published baseline remains Site103/native0.62. Final generated audits remain authoritative for this candidate identity and entry count.",
   "commonGroups": [
     {
       "id": "goal_access",
@@ -568,6 +568,7 @@
         "public_observed_binding",
         "public_observed_inventory",
         "factored_material_return",
+        "motif_access",
         "band_transfer",
         "reduction_transport",
         "sliding_cavity",
@@ -593,6 +594,7 @@
         "observed_symbol_transaction",
         "observed_object_binding",
         "observed_inventory_composition",
+        null,
         null,
         null,
         null,

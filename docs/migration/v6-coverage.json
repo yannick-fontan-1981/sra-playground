@@ -30,10 +30,10 @@
     "declaredClassesAndFunctions": 12857,
     "dataFiles": 417,
     "verifiedModules": 0,
-    "componentVerifiedModules": 213,
+    "componentVerifiedModules": 214,
     "partiallyTransferredModules": 147,
     "transferredUnverifiedModules": 0,
-    "pendingModules": 1009,
+    "pendingModules": 1008,
     "strategyFamilies": 16
   },
   "families": [
@@ -76870,9 +76870,22 @@
           "endLine": 290
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-motif-access.ts",
+        "src/logos-engine/v6-motif-access-geometry.ts"
+      ],
+      "proof": [
+        "scripts/check-v6-motif-access-reference.py",
+        "tests/fixtures/v6-motif-access-reference.json",
+        "tests/v6-motif-access-reference.test.ts",
+        "tests/v6-motif-access-contract.test.ts",
+        "tests/v6-motif-access-kernel.test.ts",
+        "docs/migration/lot8a-evidence/contract/reference-oracle.json",
+        "docs/migration/lot8a-evidence/contract/site103-integration-review.json",
+        "docs/migration/lot8a-evidence/development/component-proof.json",
+        "docs/migration/lot8a-motif-access-lineage.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_multiscale_constraints.py",
@@ -95261,7 +95274,9 @@
         "src/logos-engine/v6-native-caller.ts",
         "src/logos-engine/v6-morphology-family.ts",
         "src/logos-engine/v6-contextual-translation.ts",
-        "src/logos-engine/v6-ranked-workshop.ts"
+        "src/logos-engine/v6-ranked-workshop.ts",
+        "src/logos-engine/v6-motif-access.ts",
+        "src/logos-engine/v6-motif-access-geometry.ts"
       ],
       "proof": [
         "tests/v6-native-runtime.test.ts",
@@ -95304,7 +95319,10 @@
         "tests/v6-ranked-workshop-kernel.test.ts",
         "docs/migration/lot7a-ranked-workshop-lineage.md",
         "tests/v6-axial-question-kernel.test.ts",
-        "docs/migration/lot10a-axial-question-lineage.md"
+        "docs/migration/lot10a-axial-question-lineage.md",
+        "tests/v6-motif-access-kernel.test.ts",
+        "docs/migration/lot8a-evidence/development/component-proof.json",
+        "docs/migration/lot8a-motif-access-lineage.md"
       ]
     },
     {
@@ -99499,6 +99517,6 @@
     "No new game, live WEAV attempt, official cost decision or publication result is established by these mappings. The separate WEAV diagnostic retains its exhausted cumulative case clock and unmet six-level target. Common-loop contribution, merged-source functional gates, the predeclared global cost policy, final integrity and publication remain parent-owned evidence to be reviewed before any 5A closure.",
     "Lot10C connects ordered_recruitment at its original material-list position after window_question, through one public_ordered_recruitment owner. Source component and cold common-loop proofs are complete in their declared synthetic domains. Actual game contribution, final integrated delivery, costs and full strategic-caller parity are separate evidence and are not inferred from these mappings.",
     "Lot5C recovery reconstructs observed_object_binding from the pinned original with a single registered owner and shared caller attention. Fresh component proofs are retained under docs/migration/lot5c-evidence/recovery; lost historical5C evidence is not reused. Seven common scenarios passed on the first reconstructed runtime; the independent original replay and the subsequently added active-level deadline proof remain separately qualified. Publication, final integrated gates and official costs are still open. All six complete-migration gates remain false.",
-    "The prospective 5C+6B+10C source union preserves all three lots original component-proof provenance. Aggregate counters are a static merge reconciliation and remain provisional until final composed-source audits. No new runtime test, official cost or publication result is established by this merge."
+    "The prospective 5C+6B+8A+10C source union preserves all four lots original component-proof provenance. Aggregate counters are a static merge reconciliation and remain provisional until final composed-source audits. No new runtime test, official cost or publication result is established by this merge."
   ]
 }

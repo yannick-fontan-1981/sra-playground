@@ -1,0 +1,50 @@
+{
+  "schema": "logos-engine.v6.motif-access-source-oracle.v1",
+  "status": "passed_original_source_export",
+  "startedAt": "2026-11-11T16:46:26.414356+00:00",
+  "finishedAt": "2026-11-11T16:46:28.480673+00:00",
+  "command": [
+    "python",
+    "-B",
+    "scripts/check-v6-motif-access-reference.py"
+  ],
+  "pythonVersion": "3.12.14",
+  "generator": {
+    "path": "scripts/check-v6-motif-access-reference.py",
+    "sha256": "abb0e2d1d73f8e1fe8281954c3d48814464ea711b17176b158990ce57016e9b8",
+    "bytes": 29368
+  },
+  "fixture": {
+    "path": "tests/fixtures/v6-motif-access-reference.json",
+    "sha256": "627137ede2b5397eddf3d77455a8a7d70cdd88fcec872af8a84236b85a3f985c",
+    "bytes": 433673
+  },
+  "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "sourceManifest": {
+    "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/manifest.json",
+    "sha256": "491eb3b737bbb490a1b7c212f5b1e75f5a8f84b2124b95d9dd54a0d09eca85d6",
+    "bytes": 424024
+  },
+  "sourceFilesVerifiedBeforeAndAfter": [
+    1786,
+    1786
+  ],
+  "sourceModified": false,
+  "importedOriginalFiles": {
+    "agents/yf_arc3_v6/laya_proto/common_motif_access.py": "6f9662132299c51137531e9ae2df7df89bd079428ef465eaf3610d1dad22f346",
+    "agents/yf_arc3_v6/laya_proto/common_multiscale_constraints.py": "01da7c7f636ed2039a364188c7f4fedb2c4c0a0e8bb6b2ba7f22b1c259eaaf12",
+    "agents/yf_arc3_v6/laya_proto/geometric_observer.py": "1017b130cb91f799ab5bdb2f26789c2645078d9b9d226469b3915d4a7262eaac"
+  },
+  "geometryCases": 33,
+  "scenarios": 17,
+  "operations": 100,
+  "qualification": "Unmodified pinned component and independent synthetic geometry only; no game data, live dispatch, original caller integration or solved-level claim.",
+  "inputOrigin": {
+    "kind": "independently_constructed_contract_geometry",
+    "gamePayloadsInterpreted": 0,
+    "gameActionsDispatched": 0,
+    "nativeOracleAnswersInProduction": false,
+    "opaqueOriginalManifestIntegrityOnly": true
+  },
+  "nativeComparison": "pending targeted native reference test; not asserted by this export"
+}

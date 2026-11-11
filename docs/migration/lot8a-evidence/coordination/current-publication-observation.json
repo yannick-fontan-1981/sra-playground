@@ -1,0 +1,26 @@
+{
+  "schema": "sra.lot8a.current-publication-observation.v1",
+  "observedAtUTC": "2026-11-11 17:34:51 UTC",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "latestSavedVersion": 103,
+  "source": {
+    "commit_sha": "4afcbfe6a25bd3a88223be543e443bc53b9c8814"
+  },
+  "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_c8356cd5ad648191a646ac0a9c059a24",
+  "deployment": {
+    "id": "appgdep_6af49db69234819195c9c093cb79a7da",
+    "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_c8356cd5ad648191a646ac0a9c059a24",
+    "status": "succeeded",
+    "updatedAt": "2026-11-11T16:54:28.036164+00:00",
+    "url": "https://sra-playground.yannick-fontan.chatgpt.site"
+  },
+  "access": {
+    "currentRole": "owner",
+    "mode": "custom",
+    "revision": 3,
+    "allowedUsers": 1,
+    "allowedGroups": 0,
+    "externalVisitors": 0
+  },
+  "qualification": "Fresh Sites API observation during 8A development closure. Actual published predecessor remains native0.62/Site103. No8A Site publication has been performed; actual0.63/0.64 still precede its final qualification."
+}

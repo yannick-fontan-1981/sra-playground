@@ -1,0 +1,608 @@
+{
+  "schema": "logos-engine.v6.motif-access-development-closure-review.v1",
+  "status": "passed_bounded_development_closure_review",
+  "recordedAt": "2026-11-11T17:42:34.518883+00:00",
+  "reviewer": "audit_caller_contract",
+  "reviewOnly": true,
+  "qualification": "Independent bounded source/document/retained-receipt inspection. No test, gate, build, oracle, replay, game or performance execution by this reviewer.",
+  "developmentBase": {
+    "version": 103,
+    "nativeVersion": "0.62.0",
+    "publishedCommit": "4afcbfe6a25bd3a88223be543e443bc53b9c8814",
+    "qualification": "Actual published10B predecessor integrated before this development declaration. Later published0.63 and0.64 remain required before final8A qualification."
+  },
+  "candidateVersion": "0.65.0 reserved, unpublished",
+  "nativeSource": {
+    "fileCount": 312,
+    "digest": "a6ea3e5e8140b14aa260485ebd4192429a86c4d3ec02075f14043f215cc798e1"
+  },
+  "summary": {
+    "path": "docs/migration/lot8a-evidence/development/validation-summary.json",
+    "sha256": "f054a5a4cf476ee28aaaf2cf74cd1a16398dc21895e951aa5a126887fe8878d8",
+    "bytes": 7590
+  },
+  "componentProof": {
+    "path": "docs/migration/lot8a-evidence/development/component-proof.json",
+    "sha256": "e762866531acad720320199b2636663b8b79711cc6ba3e1d971e5ba2a30241cc",
+    "bytes": 5019
+  },
+  "executionReceipts": {
+    "tests": {
+      "path": "docs/migration/lot8a-evidence/development-site103-01/tests-run.json",
+      "sha256": "18458c942c457edb2e9796e9247279e5e975c1b7e210f2aa40b8afc3c2e96b7d",
+      "bytes": 1221815
+    },
+    "typecheck": {
+      "path": "docs/migration/lot8a-evidence/development-site103-01/typecheck-run.json",
+      "sha256": "a979b524ca6146a7e573117e2af5725f481ef37df3601027a31460502172e82c",
+      "bytes": 1421970
+    },
+    "entry-audit": {
+      "path": "docs/migration/lot8a-evidence/development-site103-01/entry-audit-run.json",
+      "sha256": "75ec7ded29fec5555b3498bff758e88c982140ca07431754ed571c5fd739d67a",
+      "bytes": 1422970
+    },
+    "migration-audit": {
+      "path": "docs/migration/lot8a-evidence/development-site103-01/migration-audit-run.json",
+      "sha256": "47b7e7069c5f858651ccb7af51f6c10eaf7f72e0ec4c4193c1e8cd64dadfa7d6",
+      "bytes": 1422764
+    },
+    "diff-check": {
+      "path": "docs/migration/lot8a-evidence/development-site103-01/diff-check-run.json",
+      "sha256": "c923b56effe975c2601a75c8573e1009c24baba6df2647667c6dc90d91f795fc",
+      "bytes": 1422354
+    },
+    "build": {
+      "path": "docs/migration/lot8a-evidence/development-site103-01/build-run.json",
+      "sha256": "1965c9be5b5af76f5b71c9b983861cc0956a33949a61e42409fc3ca83ff243b7",
+      "bytes": 1431422
+    }
+  },
+  "acceptedRecordedResults": {
+    "testFiles": 138,
+    "counts": {
+      "tests": 5422,
+      "pass": 5422,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "checksPassed": 5,
+    "entryCoverage": {
+      "connected": 65,
+      "declared": 76,
+      "percent": 85.5,
+      "fullV6Parity": false
+    },
+    "entryGroups": [
+      [
+        "goal_access",
+        11,
+        12
+      ],
+      [
+        "window_constraints",
+        21,
+        21
+      ],
+      [
+        "surface",
+        10,
+        10
+      ],
+      [
+        "factored_material_return",
+        23,
+        33
+      ]
+    ],
+    "componentCoverage": {
+      "pythonModules": 1369,
+      "pythonLines": 320375,
+      "declaredClassesAndFunctions": 12857,
+      "dataFiles": 417,
+      "verifiedModules": 0,
+      "componentVerifiedModules": 200,
+      "partiallyTransferredModules": 149,
+      "transferredUnverifiedModules": 0,
+      "pendingModules": 1020,
+      "strategyFamilies": 16
+    },
+    "migrationComplete": false,
+    "auditFailures": [],
+    "completeMigrationGates": {
+      "allRequiredCapabilitiesTransferred": false,
+      "fullCommonCallerDifferentialParity": false,
+      "allDeclaredFamiliesIntegrated": false,
+      "commonGraphEditingCoversExecutedPrograms": false,
+      "pythonNumericSemanticsCovered": false,
+      "fullCampaignRegression": false
+    }
+  },
+  "bindingsReviewed": {
+    "receiptBytesMatchSummary": true,
+    "unchangedInputMapsAcrossAllSixCommands": true,
+    "declaredPlanAndRunnerCurrent": true,
+    "testToCheckAndPrecedingCheckChainExact": true,
+    "transferMapChangedOnlyInDeclaredBetweenStageSlot": true,
+    "currentRelevantNativeFiles": [
+      {
+        "path": "src/logos-engine/v6-motif-access.ts",
+        "sha256": "2302d521959133b39560792d01ae4c2403a3b4b4a333ae10e089359a403394e0",
+        "bytes": 32665
+      },
+      {
+        "path": "src/logos-engine/v6-motif-access-geometry.ts",
+        "sha256": "36d5e1d51a1ebef5c82dea7951c18fe115af2067624447d39e37100c4a9de9b3",
+        "bytes": 15261
+      },
+      {
+        "path": "src/logos-engine/v6-native-runtime.ts",
+        "sha256": "26a7c34c97e76c0c4d73fac965314736cf887417b40e8a17a4a47806ce210e2a",
+        "bytes": 163567
+      },
+      {
+        "path": "src/logos-engine/v6-field-constraints.ts",
+        "sha256": "0d75ae535fb4e37c7e4ee28474e17e341afd5f436d717356a8f9b5617f1ae619",
+        "bytes": 35731
+      }
+    ],
+    "currentPreserved062Files": [
+      {
+        "path": "src/logos-engine/v6-native-types.ts",
+        "sha256": "7ce043684a9243224f845b97e7a3f22aa7c9348643d2af89316755d9e441c6ca",
+        "bytes": 13085
+      },
+      {
+        "path": "src/logos-engine/v6-window-question.ts",
+        "sha256": "e39796308982f8758e7cc8b3caf8f9eb52d59fadfacd0219202fde4520e57e79",
+        "bytes": 23042
+      },
+      {
+        "path": "src/logos-engine/v6-window-question-geometry.ts",
+        "sha256": "d3356acfd8f028cc126713eda521e05e817a11bdf569e5296a5638786e1e5e99",
+        "bytes": 16356
+      },
+      {
+        "path": "src/logos-engine/v6-window-question-policy.ts",
+        "sha256": "8ac176a9fd48676cba8ebfeb57b91f6bb27be0104969082ef9ba97edab6f703c",
+        "bytes": 3794
+      }
+    ],
+    "currentMotifTestFiles": [
+      {
+        "path": "tests/v6-motif-access-reference.test.ts",
+        "sha256": "57989c648156c9545bc43f43392886ad01c07d16893ae5bd0e20d061fea0c715",
+        "bytes": 12297
+      },
+      {
+        "path": "tests/v6-motif-access-contract.test.ts",
+        "sha256": "06898e719de4c9291bbdf2fa0ac99e6062c90d391764c6f77d52dddb7d011c98",
+        "bytes": 19736
+      },
+      {
+        "path": "tests/v6-motif-access-kernel.test.ts",
+        "sha256": "a6f21fbdf6305cec8d23a59076c45ef78bbcb5163434ae9151734287dcefee5b",
+        "bytes": 9890
+      }
+    ],
+    "worker": {
+      "path": "dist/assets/v6-agent-worker-DYDVdZ7n.js",
+      "sha256": "4df12f771f11b0ae6687bfdb140764e94dca590d4b18b527ca7930bb1405dc6e",
+      "bytes": 6879245
+    },
+    "buildInventoryRecordedFiles": 74,
+    "fullBuildInventoryRehashedByReviewer": false,
+    "fullNativeInventoryRehashedByReviewer": false,
+    "originalSourceRehashedByReviewer": false,
+    "scope": "Eight named native files, three Motif test modules and the worker rehashed directly; complete recorded source/test/build/original maps compared across receipts, without replaying their original verification."
+  },
+  "namedLogsReviewed": [
+    {
+      "name": "tests",
+      "raw": {
+        "path": "docs/migration/lot8a-evidence/development-site103-01/tests-stdout.log",
+        "sha256": "8352901f8fa2107d16f1cbc115fb8a657e79256882bc2bdf82356fe0af7bf7a9",
+        "bytes": 1095788
+      },
+      "storedGzip": {
+        "path": "docs/migration/lot8a-evidence/development-site103-01/tests-stdout.log.gz",
+        "sha256": "fa3aaa04c589ec551339578a6909825f6d3d15400bf81390d6f3fd1b6ba039a0",
+        "bytes": 152362
+      },
+      "rawBytesVerified": true,
+      "parsedSummaryMatchesReceipt": true
+    },
+    {
+      "name": "entry-audit",
+      "raw": {
+        "path": "docs/migration/lot8a-evidence/development-site103-01/entry-audit-stdout.log",
+        "sha256": "0ecbeca251bc0ee623433bc1800b5e553d5097111d4cbd07bdb8ce6a5d7e19fb",
+        "bytes": 294
+      },
+      "storedGzip": {
+        "path": "docs/migration/lot8a-evidence/development-site103-01/entry-audit-stdout.log.gz",
+        "sha256": "6b10a56cd6d347c5ef5629d10fed93d9339532d2ee55704b5e2a41bf21dd33c4",
+        "bytes": 180
+      },
+      "rawBytesVerified": true,
+      "parsedSummaryMatchesReceipt": true
+    },
+    {
+      "name": "migration-audit",
+      "raw": {
+        "path": "docs/migration/lot8a-evidence/development-site103-01/migration-audit-stdout.log",
+        "sha256": "04d5c4f2307b53725d7320f0c068078fea5f8b5515a38bb4fdc1943c9d987bc7",
+        "bytes": 338
+      },
+      "storedGzip": {
+        "path": "docs/migration/lot8a-evidence/development-site103-01/migration-audit-stdout.log.gz",
+        "sha256": "16b54055e453773a0588e998e497d70c68727c688543c5e22ca550255a8a30e5",
+        "bytes": 205
+      },
+      "rawBytesVerified": true,
+      "parsedSummaryMatchesReceipt": true
+    }
+  ],
+  "documents": [
+    {
+      "path": "docs/migration/lot8a-evidence/README.md",
+      "sha256": "e8065e4f8e95eff44c548ad103d9cc34ad096b870d92fc273fc06e80d9a3ac2e",
+      "bytes": 6801
+    },
+    {
+      "path": "docs/migration/lot8a-motif-access-lineage.md",
+      "sha256": "527d11c318720446403e819ef6cdcaf6ebc61c3ea3a1817f2639d0965ac87b4d",
+      "bytes": 13344
+    },
+    {
+      "path": "docs/migration/v6-delivery-roadmap.md",
+      "sha256": "d1c9a4cdfcbe869a830e86fabc20a358b66300cb95cdacd800570a977b8013ce",
+      "bytes": 260470
+    },
+    {
+      "path": "docs/migration/v6-native-transfer.md",
+      "sha256": "cd4dabca37c549e30e56f2bbbb9e15b1699dc447a3c4678631f68cdfc253d061",
+      "bytes": 258477
+    }
+  ],
+  "documentScope": {
+    "README": "Current entire lot8a evidence README",
+    "lineage": "Current entire Motif lineage note",
+    "roadmap": "LOT8A_START/END block plus updated final lot-summary row and footer; older historical rows not re-audited",
+    "transfer": "LOT8A_TRANSFER_START/END block only"
+  },
+  "localLinks": {
+    "checkedOccurrences": 44,
+    "broken": [],
+    "scope": "Local file targets in the reviewed current sections; no external URL or historical anchor audit."
+  },
+  "historicalEvidenceRetained": {
+    "initial182Comparison": {
+      "path": "docs/migration/lot8a-evidence/contract/reference-parity.json",
+      "sha256": "32fc45e9233d028690ca327a49041b8cb92786dd3f73ae6ae358fc1af74dc3b1",
+      "bytes": 4990
+    },
+    "firstExecutionRemainsHistorical": true,
+    "freshReferenceTestIncludedIn138": true,
+    "failureReceiptFingerprints": [
+      {
+        "path": "docs/migration/lot8a-evidence/development/typecheck-initial.json",
+        "sha256": "dd1a20e1b4b306a5c2289a89c098c85b60c083220c2d2e492846d8b86c8d0425",
+        "bytes": 310
+      },
+      {
+        "path": "docs/migration/lot8a-evidence/development/caller-probe-01.json",
+        "sha256": "0212900a263d3a0bbe5fc4e322856a82a7bf221392b39368e2a018897a114e8f",
+        "bytes": 337348
+      },
+      {
+        "path": "docs/migration/lot8a-evidence/coordination/site103-merge-review.json",
+        "sha256": "bee73fb9641bb2fa39f05c15ce22a58203282e9cc14cb4e3ec8affd1dd9bb9cc",
+        "bytes": 5361
+      }
+    ],
+    "mergeIndexExit2NotRelabeled": true,
+    "early14of15Then15of15QualifiedAsSessionObservationsWithoutRawLog": true
+  },
+  "publicationObservation": {
+    "path": "docs/migration/lot8a-evidence/coordination/current-publication-observation.json",
+    "sha256": "db5733f0cf4f3c7a9cdf33b592ee0340b57d6c5ce39611245641063eac80f502",
+    "bytes": 1096
+  },
+  "laneObservation": {
+    "path": "docs/migration/lot8a-evidence/coordination/next-lanes-observation.json",
+    "sha256": "b53dd0b1155a67cc8058078a6170d42ebec9d59e7566c4cdbe042ef52fe995b1",
+    "bytes": 5051
+  },
+  "coordination": [
+    {
+      "lane": "lot10b",
+      "path": "/workspace/shared/sra-coordination/lot10b-status.json",
+      "sha256": "eb86f1ef94ba42efc79c3a139362bd7afee59cd28d18457ccff212753e743604",
+      "bytes": 12350,
+      "quietRequested": false,
+      "performanceLockHeld": false,
+      "observedAt": "2026-11-11T17:42:34.495972+00:00"
+    },
+    {
+      "lane": "lot10c",
+      "path": "/workspace/shared/sra-coordination/lot10c-status.json",
+      "sha256": "466c97d8aa4146a5c42eb3c2fa5759ef7f6e5e4fecb6ee50880c6fabdae9df8e",
+      "bytes": 4224,
+      "quietRequested": false,
+      "performanceLockHeld": null,
+      "observedAt": "2026-11-11T17:42:34.496043+00:00"
+    },
+    {
+      "lane": "lot5c",
+      "path": "/workspace/shared/sra-coordination/lot5c-status.json",
+      "sha256": "41604624908e7f1c38f65fd418828462b5c139d39098f72475f2429a8d80380f",
+      "bytes": 11832,
+      "quietRequested": false,
+      "performanceLockHeld": null,
+      "observedAt": "2026-11-11T17:42:34.496121+00:00"
+    },
+    {
+      "lane": "lot6b",
+      "path": "/workspace/shared/sra-coordination/lot6b-status.json",
+      "sha256": "7d70e02d7d2bce80dceedaeb2b5b67e07e1cebd397579da49ca80a4446613cdb",
+      "bytes": 8218,
+      "quietRequested": null,
+      "performanceLockHeld": null,
+      "observedAt": "2026-11-11T17:42:34.496187+00:00"
+    }
+  ],
+  "coordinationQualification": "No active quiet request observed. The announced future lot10c-recr01-bb7d62-functional interval with quiet_requested=false was not treated as an active request.",
+  "blockingFindings": [],
+  "limits": {
+    "developmentOnly": true,
+    "finalActual063And064IntegrationPending": true,
+    "official8ACostAccepted": false,
+    "officialGameLevelsClaimed": 0,
+    "published065": false,
+    "wholeCallerParity": false,
+    "boundedSearchWorstCaseStoredPathMemory": "O(S^2)",
+    "LKEY": "Permanently closed; no payload decoding, original oracle, replay or game activity."
+  },
+  "reviewerActivity": {
+    "testsRun": 0,
+    "gatesRun": 0,
+    "buildsRun": 0,
+    "originalOraclesRun": 0,
+    "replaysRun": 0,
+    "gamesRun": 0,
+    "costMeasurementsRun": 0,
+    "projectModuleImports": 0,
+    "gitCommands": 0,
+    "sourceOrTestEdits": 0
+  },
+  "inputs": [
+    {
+      "path": "docs/migration/lot8a-evidence/development/validation-summary.json",
+      "sha256": "f054a5a4cf476ee28aaaf2cf74cd1a16398dc21895e951aa5a126887fe8878d8",
+      "bytes": 7590
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/development/component-proof.json",
+      "sha256": "e762866531acad720320199b2636663b8b79711cc6ba3e1d971e5ba2a30241cc",
+      "bytes": 5019
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/development-site103-01/tests-run.json",
+      "sha256": "18458c942c457edb2e9796e9247279e5e975c1b7e210f2aa40b8afc3c2e96b7d",
+      "bytes": 1221815
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/contract/development-validation-plan.json",
+      "sha256": "242a2ce36f8c901972923132b7af755241462ee3d663e1644d804d12927dd6ec",
+      "bytes": 48672
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/tools/validate-development.py",
+      "sha256": "3a6bef9102fbab20a8ecd31f49f7014f98517c6a1006a1e92fb7b09f068c1bf8",
+      "bytes": 27047
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/development-site103-01/typecheck-run.json",
+      "sha256": "a979b524ca6146a7e573117e2af5725f481ef37df3601027a31460502172e82c",
+      "bytes": 1421970
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/development-site103-01/entry-audit-run.json",
+      "sha256": "75ec7ded29fec5555b3498bff758e88c982140ca07431754ed571c5fd739d67a",
+      "bytes": 1422970
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/development-site103-01/migration-audit-run.json",
+      "sha256": "47b7e7069c5f858651ccb7af51f6c10eaf7f72e0ec4c4193c1e8cd64dadfa7d6",
+      "bytes": 1422764
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/development-site103-01/diff-check-run.json",
+      "sha256": "c923b56effe975c2601a75c8573e1009c24baba6df2647667c6dc90d91f795fc",
+      "bytes": 1422354
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/development-site103-01/build-run.json",
+      "sha256": "1965c9be5b5af76f5b71c9b983861cc0956a33949a61e42409fc3ca83ff243b7",
+      "bytes": 1431422
+    },
+    {
+      "path": "docs/migration/v6-entry-point-progress.json",
+      "sha256": "a54a765e3241099cb9b92b6d07bbdf4ea49949e263397d110b5fb8b71d357dca",
+      "bytes": 19518
+    },
+    {
+      "path": "docs/migration/v6-coverage.json",
+      "sha256": "c6723be7fb77382c3eb7d5bb6e4dc55643d5810511b9c2cf36367d606eb51751",
+      "bytes": 2562758
+    },
+    {
+      "path": "dist/assets/v6-agent-worker-DYDVdZ7n.js",
+      "sha256": "4df12f771f11b0ae6687bfdb140764e94dca590d4b18b527ca7930bb1405dc6e",
+      "bytes": 6879245
+    },
+    {
+      "path": "src/logos-engine/v6-motif-access.ts",
+      "sha256": "2302d521959133b39560792d01ae4c2403a3b4b4a333ae10e089359a403394e0",
+      "bytes": 32665
+    },
+    {
+      "path": "src/logos-engine/v6-motif-access-geometry.ts",
+      "sha256": "36d5e1d51a1ebef5c82dea7951c18fe115af2067624447d39e37100c4a9de9b3",
+      "bytes": 15261
+    },
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "sha256": "26a7c34c97e76c0c4d73fac965314736cf887417b40e8a17a4a47806ce210e2a",
+      "bytes": 163567
+    },
+    {
+      "path": "src/logos-engine/v6-field-constraints.ts",
+      "sha256": "0d75ae535fb4e37c7e4ee28474e17e341afd5f436d717356a8f9b5617f1ae619",
+      "bytes": 35731
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/contract/site103-integration-review.json",
+      "sha256": "f17676f4fd533da8d3ea797191e620d08dec17304733db047b1a2e1f6c7c2732",
+      "bytes": 11963
+    },
+    {
+      "path": "src/logos-engine/v6-native-types.ts",
+      "sha256": "7ce043684a9243224f845b97e7a3f22aa7c9348643d2af89316755d9e441c6ca",
+      "bytes": 13085
+    },
+    {
+      "path": "src/logos-engine/v6-window-question.ts",
+      "sha256": "e39796308982f8758e7cc8b3caf8f9eb52d59fadfacd0219202fde4520e57e79",
+      "bytes": 23042
+    },
+    {
+      "path": "src/logos-engine/v6-window-question-geometry.ts",
+      "sha256": "d3356acfd8f028cc126713eda521e05e817a11bdf569e5296a5638786e1e5e99",
+      "bytes": 16356
+    },
+    {
+      "path": "src/logos-engine/v6-window-question-policy.ts",
+      "sha256": "8ac176a9fd48676cba8ebfeb57b91f6bb27be0104969082ef9ba97edab6f703c",
+      "bytes": 3794
+    },
+    {
+      "path": "tests/v6-motif-access-reference.test.ts",
+      "sha256": "57989c648156c9545bc43f43392886ad01c07d16893ae5bd0e20d061fea0c715",
+      "bytes": 12297
+    },
+    {
+      "path": "tests/v6-motif-access-contract.test.ts",
+      "sha256": "06898e719de4c9291bbdf2fa0ac99e6062c90d391764c6f77d52dddb7d011c98",
+      "bytes": 19736
+    },
+    {
+      "path": "tests/v6-motif-access-kernel.test.ts",
+      "sha256": "a6f21fbdf6305cec8d23a59076c45ef78bbcb5163434ae9151734287dcefee5b",
+      "bytes": 9890
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/contract/reference-oracle.json",
+      "sha256": "398c868302d0612978dba2ecefef181a28e93d0ebd19c0a5f0fb4dc0714cb098",
+      "bytes": 2061
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/contract/reference-parity.json",
+      "sha256": "32fc45e9233d028690ca327a49041b8cb92786dd3f73ae6ae358fc1af74dc3b1",
+      "bytes": 4990
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/development/kernel-post-site103.json",
+      "sha256": "34beb5c7266ea1cb628b42544af3846a4a6be222b01ae64de417a7ef95448987",
+      "bytes": 1256
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/development/typecheck-initial.json",
+      "sha256": "dd1a20e1b4b306a5c2289a89c098c85b60c083220c2d2e492846d8b86c8d0425",
+      "bytes": 310
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/development/caller-probe-01.json",
+      "sha256": "0212900a263d3a0bbe5fc4e322856a82a7bf221392b39368e2a018897a114e8f",
+      "bytes": 337348
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/coordination/site103-merge-review.json",
+      "sha256": "bee73fb9641bb2fa39f05c15ce22a58203282e9cc14cb4e3ec8affd1dd9bb9cc",
+      "bytes": 5361
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/development/transfer-map-update.json",
+      "sha256": "52f9e6bfedb42e983a99af8094a182e603e8a634dbcf06014d3a76b2775b4a31",
+      "bytes": 958
+    },
+    {
+      "path": "migration/v6-transfer-map.json",
+      "sha256": "f8e77c3bdee0445787055110d2b13a4bc5c7c1754e81caafd9f13d935f29ac58",
+      "bytes": 424446
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/coordination/current-publication-observation.json",
+      "sha256": "db5733f0cf4f3c7a9cdf33b592ee0340b57d6c5ce39611245641063eac80f502",
+      "bytes": 1096
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/development-site103-01/tests-log-transport.json",
+      "sha256": "674bebdce6876321135d09d4c464bbee1de369802d44bf37bec051ef6d115163",
+      "bytes": 1672
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/development-site103-01/tests-stdout.log.gz",
+      "sha256": "fa3aaa04c589ec551339578a6909825f6d3d15400bf81390d6f3fd1b6ba039a0",
+      "bytes": 152362
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/development-site103-01/entry-audit-log-transport.json",
+      "sha256": "5895b362d746d59a35741630b51ef1666ada96fbff709604a1fbe3450c4313a6",
+      "bytes": 1697
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/development-site103-01/entry-audit-stdout.log.gz",
+      "sha256": "6b10a56cd6d347c5ef5629d10fed93d9339532d2ee55704b5e2a41bf21dd33c4",
+      "bytes": 180
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/development-site103-01/migration-audit-log-transport.json",
+      "sha256": "2f104bbf1635126cd466b43d7489f30cf8b9bbf072641af9bde9790d9ef11914",
+      "bytes": 1721
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/development-site103-01/migration-audit-stdout.log.gz",
+      "sha256": "16b54055e453773a0588e998e497d70c68727c688543c5e22ca550255a8a30e5",
+      "bytes": 205
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/README.md",
+      "sha256": "e8065e4f8e95eff44c548ad103d9cc34ad096b870d92fc273fc06e80d9a3ac2e",
+      "bytes": 6801
+    },
+    {
+      "path": "docs/migration/lot8a-motif-access-lineage.md",
+      "sha256": "527d11c318720446403e819ef6cdcaf6ebc61c3ea3a1817f2639d0965ac87b4d",
+      "bytes": 13344
+    },
+    {
+      "path": "docs/migration/v6-delivery-roadmap.md",
+      "sha256": "d1c9a4cdfcbe869a830e86fabc20a358b66300cb95cdacd800570a977b8013ce",
+      "bytes": 260470
+    },
+    {
+      "path": "docs/migration/v6-native-transfer.md",
+      "sha256": "cd4dabca37c549e30e56f2bbbb9e15b1699dc447a3c4678631f68cdfc253d061",
+      "bytes": 258477
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/coordination/next-lanes-observation.json",
+      "sha256": "b53dd0b1155a67cc8058078a6170d42ebec9d59e7566c4cdbe042ef52fe995b1",
+      "bytes": 5051
+    }
+  ]
+}

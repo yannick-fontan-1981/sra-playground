@@ -34,6 +34,8 @@ import { SymbolTransactions } from './v6-symbol-transactions.ts';
 import { AddressedMaterial, ADDRESSED_NATIVE_SEARCH_BOUNDS } from './v6-addressed-material.ts';
 import { ObservedBinding, OBSERVED_BINDING_NATIVE_SEARCH_BOUNDS } from './v6-observed-binding.ts';
 import { ReductionTransport } from './v6-reduction-transport.ts';
+import { MotifAccess, MOTIF_ACCESS_NATIVE_SEARCH_BOUNDS } from './v6-motif-access.ts';
+import { motifLattice, motifBody } from './v6-motif-access-geometry.ts';
 import { retainedReductionSuccess, reductionAcquiredContinuationWitness, continuationProposalDigest,
   CONTINUATION_PROPOSAL_DIGEST_PROFILE } from './v6-acquired-continuation.ts';
 import { createNativeSharedSeriesFamily, SHARED_SERIES_DIGEST_SCOPE } from './v6-shared-series.ts';
@@ -79,7 +81,7 @@ import type {
 } from './v6-native-types.ts';
 
 export const NATIVE_V6_REFERENCE_COMMIT = '786dcf51ca57773d8e3a8948ce9ea3655e7baf8e';
-export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.64.0';
+export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.66.0';
 // The implementation identity and public snapshot describe the same extensions.
 const NATIVE_CALLER_EXTENSIONS = ['current_epoch_axial_packet_attribution', 'native_feedback_search_cooperative_incompletion',
   'window_cooperative_current_execution', 'window_current_guard_execution',
@@ -123,6 +125,7 @@ const NATIVE_CALLER_EXTENSIONS = ['current_epoch_axial_packet_attribution', 'nat
   'transient_returned_unlearned_contact_refusal_scope',
   'current_point_witness_rebind_for_equivalent_descriptions',
   'bounded_reduction_search_retained_as_unknown',
+  'bounded_motif_access_paths_with_current_deadline',
   'observed_stationary_reception_from_public_packet_frames',
   'current_uniform_reception_and_required_control_questions',
   'current_typed_analogy_control_prerequisite_question',
@@ -1331,7 +1334,7 @@ export class NativeV6Runtime implements NativeV6Backend {
   private retainSelectedAcquisition(family: NativeFamily, record: NativeRecordResult, transition: WitnessedTransition): void {
     const memory = this.authority!.memory, after = transition.after;
     const singleEventKeys: Record<string, string> = { window_constraints: 'window_constraint', regular_field_correspondence: 'symmetric_field',
-      orbit_constraints: 'orbit_constraint', containment: 'containment', surface_program: 'surface', code_program: 'codes', band_transfer: 'bands', reduction_transport: 'reduction',
+      orbit_constraints: 'orbit_constraint', containment: 'containment', surface_program: 'surface', code_program: 'codes', band_transfer: 'bands', reduction_transport: 'reduction', motif_access: 'motif',
       visual_sequences: 'visual_sequence_event', feedback_sequences: 'feedback_sequence_event', relative_arrangements: 'relative_arrangement_event', facet_examples: 'facet_example_event', slot_substitution: 'slots', word_interface: 'words', port_assembly: 'ports', constellation_cover: 'constellations',
       public_framed_transfer: 'framed_transfer_event', public_outline_service: 'outline_service_event',
       public_observed_inventory: 'observed_inventory_event', public_ordered_reaction: 'reaction_event', public_reactive_contact: 'reactive_event',
@@ -1842,7 +1845,7 @@ function fieldFamily(field: WindowConstraints): NativeFamily {
 }
 
 /** These original families return one event and preserve absent action data. */
-function originalEventFamily(family: OrbitConstraints | Containment | SurfaceProgram | CodeProgram | BandTransfer | ReductionTransport): NativeFamily {
+function originalEventFamily(family: OrbitConstraints | Containment | SurfaceProgram | CodeProgram | BandTransfer | ReductionTransport | MotifAccess): NativeFamily {
   return {
     id: family.familyId,
     propose: async (observation, rows, inputs, remaining) => await family.propose(observation, rows, inputs, remaining) as NativeProposal | null,
@@ -2104,7 +2107,23 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   const facets = facetExampleFamily();
   const previewOwner = new NativePreviewPacking(), preview = previewPackingFamily(previewOwner);
   const selectedRigidOwner = new NativeSelectedRigid(configuration.selected_rigid_question), selectedRigid = selectedRigidFamily(selectedRigidOwner);
-  const windows = subquestionFamily(fieldFamily(new WindowConstraints()), 'field_subquestion', 'multiscale_constraints'), symmetric = fieldFamily(new SymmetricField(symmetry));
+  const windows = subquestionFamily(fieldFamily(new WindowConstraints()), 'field_subquestion', 'multiscale_constraints');
+  const symmetricSource = fieldFamily(new SymmetricField(symmetry));
+  // Original strategy.py excludes a uniquely observed motif-control interface
+  // only from this final field-repair fallback. Earlier field entries and later
+  // strategy groups retain their original positions and independent guards.
+  const symmetric: NativeFamily = { ...symmetricSource,
+    propose: async (observation, rows, inputs, remaining, execution) => {
+      if (symmetry.exclude_observed_control_interface) {
+        const field = motifLattice(observation, rows, inputs);
+        if (field) {
+          const top = Math.min(...field.cards.map(card => card.box[1]), ...field.points.map(point => point[1]));
+          if (motifBody(rows, top)) return null;
+        }
+      }
+      return symmetricSource.propose(observation, rows, inputs, remaining, execution);
+    },
+  };
   const orbit = originalEventFamily(new OrbitConstraints()), containment = originalEventFamily(new Containment());
   const surface = subquestionFamily(originalEventFamily(new SurfaceProgram()), 'program_subquestion', 'surface_rewrite');
   const code = subquestionFamily(originalEventFamily(new CodeProgram()), 'program_subquestion', 'learned_code_program');
@@ -2131,6 +2150,11 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     retainedSuccessWitness: observation => retainedReductionSuccess(reductionOwner.state(), observation),
     acquiredContinuationWitness: (proposal, observation) => reductionAcquiredContinuationWitness(reductionOwner.state(), proposal, observation),
   }, 'material_access_subquestion', 'supported_ternary_reduction');
+  const motifOwner = new MotifAccess({ boundedSearch: MOTIF_ACCESS_NATIVE_SEARCH_BOUNDS });
+  const motifs = subquestionFamily({ ...originalEventFamily(motifOwner),
+    propose: async (observation, rows, inputs, remaining, execution) => await motifOwner.propose(observation, rows, inputs, remaining, execution) as NativeProposal | null,
+    currentProposalRefusal: observation => motifOwner.currentProposalRefusal(observation),
+  }, 'material_access_subquestion', 'motif_conditioned_access');
   const visualContinuation = configuration.scored_local_rewrite.minimum_completed_rows_for_visual_continuation as number | undefined;
   const visual = visualFirst || visualContinuation ? visualSequenceFamily(new VisualSequences(), visualContinuation) : null;
   const interfaces = createNativeInterfaceFamilies();
@@ -2168,7 +2192,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     animated_contact: new AnimatedContact(policy.animated_contact_question),
   };
   const supports = new SupportNavigation(supportChildren, policy);
-  const families: NativeFamily[] = [windows, symmetric, orbit, containment, surface, code, band, framed, outline, inventory, reactive, reaction, recolor, axial, window, recruitment, workshop, symbols, fields, binding, morphology, reduction, recall, supports, feedback, arrangements, facets, preview, selectedRigid, linkedTemporal, ...Object.values(supportChildren), ...(visual ? [visual] : []), ...Object.values(interfaces)];
+  const families: NativeFamily[] = [windows, symmetric, orbit, containment, surface, code, band, framed, outline, inventory, reactive, reaction, recolor, axial, window, recruitment, workshop, symbols, fields, binding, morphology, reduction, motifs, recall, supports, feedback, arrangements, facets, preview, selectedRigid, linkedTemporal, ...Object.values(supportChildren), ...(visual ? [visual] : []), ...Object.values(interfaces)];
   const registeredSubquestions = (order: readonly string[], registered: Record<string, NativeFamily>): string[] =>
     order.flatMap(question => registered[question] ? [registered[question].id] : []);
   // The cell, occurrence and program source entries share one acquired journal, but
@@ -2204,7 +2228,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     scored_local_rewrite: ['scored_local_rewrite', ...(visual && visualContinuation ? [visual.id] : [])],
     factored_material_return: configuration.factored_material_return.ordered_subquestions.flatMap(question => {
       const registered: Record<string, string> = { factored_material_return: 'factored_material_return', conditional_transit: 'conditional_transit',
-        conserved_band_transfer: band.id, supported_ternary_reduction: reduction.id, ordered_support_transfer: ordered.id,
+        conserved_band_transfer: band.id, supported_ternary_reduction: reduction.id, motif_conditioned_access: motifs.id, ordered_support_transfer: ordered.id,
         observed_framed_transfer: framed.id, observed_outline_service: outline.id, observed_inventory_composition: inventory.id,
         reactive_contact_continuation: reactive.id, reactive_contact: reactive.id, ordered_reaction: reaction.id, topological_recolor: recolor.id,
         axial_question: axial.id, window_question: window.id, ordered_recruitment: recruitment.id, observed_ranked_workshop: workshop.id, observed_symbol_transaction: symbols.id, observed_addressed_material: fields.id, observed_object_binding: binding.id };
@@ -2224,7 +2248,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   });
   const materialEntryPoints = configuration.factored_material_return.ordered_subquestions.flatMap<string | null>(question => {
     if (['observed_framed_transfer', 'observed_inventory_composition', 'reactive_contact_continuation', 'reactive_contact', 'ordered_reaction', 'topological_recolor', 'axial_question', 'window_question', 'ordered_recruitment', 'observed_ranked_workshop', 'observed_symbol_transaction', 'observed_addressed_material', 'observed_object_binding'].includes(question)) return [question];
-    return ['factored_material_return', 'conditional_transit', 'conserved_band_transfer', 'supported_ternary_reduction', 'ordered_support_transfer', 'observed_outline_service'].includes(question)
+    return ['factored_material_return', 'conditional_transit', 'motif_conditioned_access', 'conserved_band_transfer', 'supported_ternary_reduction', 'ordered_support_transfer', 'observed_outline_service'].includes(question)
       || supportChildren[question] ? [null] : [];
   });
   const groups: NativeSelectionGroup[] = loaded.strategy.declarations[0]!.configuration.families.map(id => ({

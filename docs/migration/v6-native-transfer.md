@@ -1,5 +1,19 @@
 # Complete V6 capability transfer into the V7 architecture
 
+<!-- LOT8A_TRANSFER_START -->
+
+## Lot 8A development milestone: MotifAccess validated on actual Site 103
+
+**The development candidate passes 5,422/5,422 tests in 138 files and all five separate gates**, including the normal Sites build. The [validation summary](lot8a-evidence/development/validation-summary.json) binds unchanged native, test, build and original inputs. Its 312 native files have digest `a6ea3e5e8140b14aa260485ebd4192429a86c4d3ec02075f14043f215cc798e1`. Native 0.65.0 remains reserved and unpublished; actual published 0.63 and 0.64 must still be integrated before final qualification, cost and publication.
+
+The [source lineage](lot8a-motif-access-lineage.md) preserves one `motif_access` owner at `motif_conditioned_access`, selected-return acquisition, current guards and common-store restoration. Cold real-factory tests show the acquired command influencing the next decision; contrary and ablated returns change that behavior. The original synthetic expectations are freshly rerun in this suite. The historical 182-test reference receipt remains separately identified.
+
+The regenerated register reports **65/76 connected entries (85.5%)**, including 23/33 material entries; the actual published 0.62 predecessor has 64/76. Coverage is **200 component-verified modules, 149 partial transfers, 1,020 pending, 0 fully verified**, with `failures: []`. All six complete-migration gates remain false. State/frontier limits of 8,192/16,384 preserve explicit incomplete-search refusal, but full stored paths can still require O(S²) space; no universal memory-byte or latency bound is claimed.
+
+**No 8A official game success, official cost or Site publication is claimed.** Complete-session median increase must remain strictly below +10% for STCK and SMLP separately; phase overruns are admissible under that global rule, with every declared sample and diagnostic retained. LKEY is permanently closed. See the [evidence index](lot8a-evidence/README.md) and [updated roadmap](v6-delivery-roadmap.md). 8B `parallel_branch_routing` remains separate and open.
+
+<!-- LOT8A_TRANSFER_END -->
+
 <!-- LOT10B_TRANSFER_CURRENT_START -->
 
 ## Published lot 10B: WindowQuestion / native 0.62.0 / Site 102, with partial HPDL qualification

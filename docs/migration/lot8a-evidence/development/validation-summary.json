@@ -1,0 +1,204 @@
+{
+  "schema": "logos-engine.v6.motif-access-development-summary.v1",
+  "status": "development_validated_final_qualification_pending",
+  "recordedAt": "2026-11-11T17:37:12.298686+00:00",
+  "base": {
+    "version": 103,
+    "nativeVersion": "0.62.0",
+    "publishedCommit": "4afcbfe6a25bd3a88223be543e443bc53b9c8814",
+    "qualification": "Actual published10B predecessor integrated before this development declaration. Later published0.63 and0.64 remain required before final8A qualification."
+  },
+  "candidateVersion": "0.65.0 reserved, unpublished",
+  "nativeSource": {
+    "fileCount": 312,
+    "digest": "a6ea3e5e8140b14aa260485ebd4192429a86c4d3ec02075f14043f215cc798e1"
+  },
+  "sourceFilesVerifiedCurrent": 312,
+  "originalFilesVerifiedBeforeAndAfter": 1786,
+  "tests": {
+    "files": 138,
+    "tests": 5422,
+    "pass": 5422,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "startedAt": "2026-11-11T17:18:35.167110+00:00",
+    "finishedAt": "2026-11-11T17:32:48.708160+00:00",
+    "elapsedSeconds": 853.5410688699994,
+    "inputsUnchanged": true,
+    "receipt": {
+      "path": "docs/migration/lot8a-evidence/development-site103-01/tests-run.json",
+      "sha256": "18458c942c457edb2e9796e9247279e5e975c1b7e210f2aa40b8afc3c2e96b7d",
+      "bytes": 1221815
+    }
+  },
+  "checks": [
+    {
+      "name": "typecheck",
+      "status": "passed",
+      "exitCode": 0,
+      "semanticPassed": true,
+      "inputsUnchanged": true,
+      "receipt": {
+        "path": "docs/migration/lot8a-evidence/development-site103-01/typecheck-run.json",
+        "sha256": "a979b524ca6146a7e573117e2af5725f481ef37df3601027a31460502172e82c",
+        "bytes": 1421970
+      }
+    },
+    {
+      "name": "entry-audit",
+      "status": "passed",
+      "exitCode": 0,
+      "semanticPassed": true,
+      "inputsUnchanged": true,
+      "receipt": {
+        "path": "docs/migration/lot8a-evidence/development-site103-01/entry-audit-run.json",
+        "sha256": "75ec7ded29fec5555b3498bff758e88c982140ca07431754ed571c5fd739d67a",
+        "bytes": 1422970
+      }
+    },
+    {
+      "name": "migration-audit",
+      "status": "passed",
+      "exitCode": 0,
+      "semanticPassed": true,
+      "inputsUnchanged": true,
+      "receipt": {
+        "path": "docs/migration/lot8a-evidence/development-site103-01/migration-audit-run.json",
+        "sha256": "47b7e7069c5f858651ccb7af51f6c10eaf7f72e0ec4c4193c1e8cd64dadfa7d6",
+        "bytes": 1422764
+      }
+    },
+    {
+      "name": "diff-check",
+      "status": "passed",
+      "exitCode": 0,
+      "semanticPassed": true,
+      "inputsUnchanged": true,
+      "receipt": {
+        "path": "docs/migration/lot8a-evidence/development-site103-01/diff-check-run.json",
+        "sha256": "c923b56effe975c2601a75c8573e1009c24baba6df2647667c6dc90d91f795fc",
+        "bytes": 1422354
+      }
+    },
+    {
+      "name": "build",
+      "status": "passed",
+      "exitCode": 0,
+      "semanticPassed": true,
+      "inputsUnchanged": true,
+      "receipt": {
+        "path": "docs/migration/lot8a-evidence/development-site103-01/build-run.json",
+        "sha256": "1965c9be5b5af76f5b71c9b983861cc0956a33949a61e42409fc3ca83ff243b7",
+        "bytes": 1431422
+      }
+    }
+  ],
+  "entryCoverage": {
+    "connected": 65,
+    "declared": 76,
+    "percent": 85.5,
+    "fullV6Parity": false
+  },
+  "componentCoverage": {
+    "pythonModules": 1369,
+    "pythonLines": 320375,
+    "declaredClassesAndFunctions": 12857,
+    "dataFiles": 417,
+    "verifiedModules": 0,
+    "componentVerifiedModules": 200,
+    "partiallyTransferredModules": 149,
+    "transferredUnverifiedModules": 0,
+    "pendingModules": 1020,
+    "strategyFamilies": 16
+  },
+  "auditFailures": [],
+  "completeMigrationGates": {
+    "allRequiredCapabilitiesTransferred": false,
+    "fullCommonCallerDifferentialParity": false,
+    "allDeclaredFamiliesIntegrated": false,
+    "commonGraphEditingCoversExecutedPrograms": false,
+    "pythonNumericSemanticsCovered": false,
+    "fullCampaignRegression": false
+  },
+  "componentProof": {
+    "path": "docs/migration/lot8a-evidence/development/component-proof.json",
+    "sha256": "e762866531acad720320199b2636663b8b79711cc6ba3e1d971e5ba2a30241cc",
+    "bytes": 5019
+  },
+  "transferMapUpdate": {
+    "path": "docs/migration/lot8a-evidence/development/transfer-map-update.json",
+    "sha256": "52f9e6bfedb42e983a99af8094a182e603e8a634dbcf06014d3a76b2775b4a31",
+    "bytes": 958
+  },
+  "nativeAgentWorker": {
+    "path": "dist/assets/v6-agent-worker-DYDVdZ7n.js",
+    "sha256": "4df12f771f11b0ae6687bfdb140764e94dca590d4b18b527ca7930bb1405dc6e",
+    "bytes": 6879245
+  },
+  "validatedBuildFileCount": 74,
+  "currentPublishedObservation": {
+    "path": "docs/migration/lot8a-evidence/coordination/current-publication-observation.json",
+    "sha256": "db5733f0cf4f3c7a9cdf33b592ee0340b57d6c5ce39611245641063eac80f502",
+    "bytes": 1096
+  },
+  "contribution": "Cold real factory synthetic chain, contrary effect, selected-acquisition ablation and common-store restoration. No new official game campaign.",
+  "historicalObservations": {
+    "initialReference": {
+      "testsPassed": 182,
+      "receipt": {
+        "path": "docs/migration/lot8a-evidence/contract/reference-parity.json",
+        "sha256": "32fc45e9233d028690ca327a49041b8cb92786dd3f73ae6ae358fc1af74dc3b1",
+        "bytes": 4990
+      },
+      "qualification": "Historical initial execution, not relabeled. The unchanged reference tests are included in the fresh138-file passing suite."
+    },
+    "initialContractRun": {
+      "firstReported": "14/15",
+      "secondReported": "15/15",
+      "cause": "The initial cooperative-abort test scene completed before the128-transition yield; synthetic support was enlarged before the successful rerun.",
+      "provenance": "Agent report in the session; no raw log was persisted for these two early invocations. These are not counted as fresh acceptance evidence."
+    },
+    "retainedFailureReceipts": [
+      {
+        "path": "docs/migration/lot8a-evidence/development/typecheck-initial.json",
+        "sha256": "dd1a20e1b4b306a5c2289a89c098c85b60c083220c2d2e492846d8b86c8d0425",
+        "bytes": 310
+      },
+      {
+        "path": "docs/migration/lot8a-evidence/development/caller-probe-01.json",
+        "sha256": "0212900a263d3a0bbe5fc4e322856a82a7bf221392b39368e2a018897a114e8f",
+        "bytes": 337348
+      },
+      {
+        "path": "docs/migration/lot8a-evidence/coordination/site103-merge-review.json",
+        "sha256": "bee73fb9641bb2fa39f05c15ce22a58203282e9cc14cb4e3ec8affd1dd9bb9cc",
+        "bytes": 5361
+      }
+    ]
+  },
+  "costRule": {
+    "scope": "Complete-session pooled median per game separately, strictly below+10%.",
+    "cases": [
+      "STCK",
+      "SMLP"
+    ],
+    "phaseOverrunsAdmissibleWhenGlobalPasses": true,
+    "allDeclaredSamplesAndDiagnosticsRetained": true,
+    "eightACostMeasured": false
+  },
+  "limits": {
+    "officialGameLevelsClaimed": 0,
+    "wholeCallerParity": false,
+    "finalIntegratedQualification": false,
+    "published": false,
+    "requiredActualPredecessors": [
+      "0.63",
+      "0.64"
+    ],
+    "searchMemory": "State/frontier bounds are8192/16384; stored full paths may consumeO(S^2), not a universal byte-memory/latency guarantee.",
+    "LKEY": "Permanently closed. No payload analysis, original oracle, replay, game action or timer reset; four named loading test modules excluded."
+  },
+  "next": "Integrate actual published0.63 and0.64; freeze and validate affected final inputs, qualify work forms and complete-session cost, then publish in order.8B remains separate."
+}

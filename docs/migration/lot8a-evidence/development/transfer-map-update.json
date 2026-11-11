@@ -1,0 +1,25 @@
+{
+  "schema": "logos-engine.v6.motif-access-transfer-map-update.v1",
+  "recordedAt": "2026-11-11T17:33:11.397379+00:00",
+  "reason": "Fresh declared development suite passed before component classification; mapping update occurs before the first gate.",
+  "before": {
+    "path": "migration/v6-transfer-map.json",
+    "sha256": "003cb0de7ba38b2b36b83fdde4283b461eabd20cfd6c62e2abd6655508c5d79f",
+    "bytes": 421991
+  },
+  "after": {
+    "path": "migration/v6-transfer-map.json",
+    "sha256": "f8e77c3bdee0445787055110d2b13a4bc5c7c1754e81caafd9f13d935f29ac58",
+    "bytes": 424446
+  },
+  "newComponentSources": [
+    "agents/yf_arc3_v6/laya_proto/common_motif_access.py"
+  ],
+  "strategyStatus": "partial_transfer",
+  "componentProof": {
+    "path": "docs/migration/lot8a-evidence/development/component-proof.json",
+    "sha256": "e762866531acad720320199b2636663b8b79711cc6ba3e1d971e5ba2a30241cc",
+    "bytes": 5019
+  },
+  "completeMigrationClaim": false
+}
