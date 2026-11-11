@@ -1985,9 +1985,9 @@ modules and therefore exceeds the minimum semantic dependency closure. This
 upper bound must be refined through documented dependency analysis, not by
 silently dropping unimplemented capabilities.
 
-### Current frozen inventory: integrated lot 5A native 0.53.0
+### Historical frozen inventory: integrated lot 5A native 0.53.0
 
-The [current register](v6-entry-point-progress.json), [coverage](v6-coverage.json), [5A report](lot5a-linked-temporal-preparation.md) and exact final validation receipts above retain different scopes: **57/76 entries**, **19 remaining**, **174 component-verified / 145 partial / 1,050 pending modules**, **zero fully verified modules** and **all six global gates false**. Formal validation is **3,835/3,835 in 102 files**, with **5/5 checks**, **16/16 common-loop checks** and **119/119 comparisons across seven recorded cases**. The graph has **50 installed owners versus 49** and **21 family-installed programs in both versions**; installed programs are distinct from compiled workflow inventory. The global cost is accepted for both games under the qualified rule described above; the first private publication is verified in Site 84. WEAV6 and browser reservations remain explicit.
+The [5A report](lot5a-linked-temporal-preparation.md) and its exact final validation receipts retain the historical 0.53 milestone with different scopes: **57/76 entries**, **19 remaining**, **174 component-verified / 145 partial / 1,050 pending modules**, **zero fully verified modules** and **all six global gates false**. These historical counts do not describe the current register or coverage inventory, whose published 0.57 results are reported at the top of this document. Formal validation at the 5A milestone is **3,835/3,835 in 102 files**, with **5/5 checks**, **16/16 common-loop checks** and **119/119 comparisons across seven recorded cases**. The graph has **50 installed owners versus 49** and **21 family-installed programs in both versions**; installed programs are distinct from compiled workflow inventory. The global cost is accepted for both games under the qualified rule described above; the first private publication is verified in Site 84. WEAV6 and browser reservations remain explicit.
 
 ### Historical frozen inventory: integrated lot 7A native 0.52.0
 
