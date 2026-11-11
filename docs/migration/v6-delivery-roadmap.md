@@ -4,6 +4,54 @@
 
 ## Lot 6B : suite, rejeux, preuve froide et QA navigateur fa23 validés
 
+### Règle de travail prospective du 11 novembre 2026
+
+La nouvelle instruction utilisateur autorise **le développement, les tests
+fonctionnels, les commits et les push sans verrou global**, dans un checkout
+et une branche propres. Les sauvegardes doivent rester régulières, sans
+attendre la publication des autres lots. Cette règle s’applique aux travaux
+nouveaux ; les anciennes attentes, gardes et preuves de coordination demeurent
+des faits historiques et ne sont pas réécrites.
+
+**Seules les mesures officielles de coût et la publication nécessitent une
+courte exclusivité.** Aucun verrou détenu ne doit être supprimé ni remplacé.
+Le développement courant ne requiert ni verrou partagé global ni garde
+d’un ancien silence préparatoire. La publication effective 0.63 reste une
+condition de réconciliation pour l’acceptation finale 6B ; elle ne bloque pas
+la préparation, les tests fonctionnels ou les commits et push courants.
+La règle est explicitée par [addendum prospectif](lot6b-evidence/current-work-policy-20261111.md).
+La [prochaine préparation du contrat de coût](lot6b-evidence/source-workflow-20261111/next-cost-preflight-plan.md)
+précise les commandes et leurs prérequis réels. Les travaux préparatoires restent
+libres de verrou global ; les CLI officiels positifs attendent les identités du
+prédécesseur publié et les mesures réellement acquises.
+
+### Diagnostic source du message d’arrêt signalé
+
+Le [diagnostic de source générique](lot6b-evidence/user-stop-nested-control-01/source-diagnosis.json)
+identifie précisément **`FieldServiceMemory.applyEvent`**, dans
+[v6-field-service-access.ts](../../src/logos-engine/v6-field-service-access.ts).
+Pour un événement `nested_control_response` dont la disposition est différente
+de `local_no_visible_effect`, ce code fixe le motif
+**`nested_control_effect_requires_composition`**. Le chemin générique exige
+alors une composition explicite ; une composition de remplissage reconnue
+peut lever ce motif. Il ne transforme pas ce refus en réussite.
+
+**SelectedRigid est raccordé en amont dans le candidat fa23.** Le Site 103
+exact, commit `4afcbfe6a25bd3a88223be543e443bc53b9c8814`, encore observé
+**à 21:33 UTC**, dans le [nouveau constat d’hébergement](lot6b-evidence/source-workflow-20261111/publication-observation.json), reste en **native 0.62 sans raccordement SelectedRigid**.
+Cette différence est compatible avec le message fourni par l’utilisateur.
+**Le texte seul ne prouve ni la version chargée dans le navigateur, ni le
+niveau, ni l’historique d’actions de sa session.** La session exacte n’a pas
+été reproduite.
+
+Ce diagnostic n’exécute **aucun nouveau jeu ni parcours navigateur** et
+n’apporte **aucune modification native** : le gel demeure **fa23 / 322 fichiers**.
+Les validations fonctionnelles, les rejeux et les preuves KLOT/navigateur
+déjà closes restent inchangés. Après le diagnostic facturé, le compteur
+est **fermé à 1 424,8841320940055 / 2 400 secondes**, avec
+**975,1158679059945 secondes restantes**. Les points de clôture antérieurs,
+dont celui de QA02, restent historiques.
+
 **Après le signalement « KLOT ne réussit pas », la version publiée vérifiée
 est Site 103 / native 0.62 ; SelectedRigid 6B n’y est pas déployé.**
 La session exacte de l’échec signalé n’a pas été reproduite : cette observation
@@ -195,10 +243,13 @@ une URL prête puis restait vivant, alors que le helper attendait à tort la
 fin de sa commande. Aucune page n’avait été ouverte ; ce reçu ne décrit pas
 un échec du jeu.
 
-Après QA02 et sa **lecture finale facturée, vers 20:32 UTC le 11 novembre 2026**,
-l’horloge est **inactive**, à **1 221,0363642830062 secondes cumulées sur 2 400**,
-avec **1 178,9636357169938 secondes restantes**. Ce total remplace le point
-intermédiaire de 20:19:50 et comprend la clôture effective du navigateur.
+Au point historique suivant QA02 et sa **lecture finale facturée, vers
+20:32 UTC le 11 novembre 2026**, l’horloge était **inactive**, à
+**1 221,0363642830062 secondes cumulées sur 2 400**, avec
+**1 178,9636357169938 secondes restantes**. Ce point remplaçait celui de
+20:19:50 et comprenait la clôture effective du navigateur. Le diagnostic
+source ultérieur porte le dernier compteur fermé à **1 424,8841320940055 s**,
+avec **975,1158679059945 s restantes**, comme indiqué en tête.
 Le parcours final des outils de coût, la mesure officielle, la publication
 effective 0.63 et sa réconciliation, puis la publication 0.64 restent ouverts.
 
@@ -215,9 +266,14 @@ Ce checkpoint de preuves ne constitue pas une publication de Site.
 Le [checkpoint principal 17d6c1aa](lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/core-checkpoint-summary.json)
 reste conservé : **sept lots poussés et vérifiés, 356 fichiers /
 154 054 085 octets**, confirmation à **20:51:49.609783 UTC**.
-Un petit commit documentaire suivra pour nommer le checkpoint de preuves
-41cedc1f et conserver son reçu ; **41cedc1f n’est pas présenté comme le dernier
-HEAD distant final**.
+Le [checkpoint de la règle de travail courante](lot6b-evidence/source-workflow-20261111/policy-checkpoint-summary.json)
+**`2e555ec44e792c4f75d400205ead5de595e95791`** est poussé et vérifié sur la
+branche propre, sans verrou global. Les **38 tests de coordination passent** ;
+le transport direct est terminé, avec son groupe de processus absent.
+Le checkpoint précédent `1372d2df336f9919d7b5892160936d928720c24c` et le
+checkpoint de preuves `41cedc1f6a89b8639c19f0dc45eae24c264ad3c0` restent
+conservés. Cette sauvegarde de source ne publie pas de Site. La clôture
+documentaire qui cite ce nouveau checkpoint fait l’objet du commit suivant.
 
 `a01e6faf330d82fa220feac0c9ad4632bb75a9de`, vérifié à 18:34:56 UTC,
 reste un jalon historique, comme le
@@ -257,7 +313,7 @@ L’ordre demeure **5C 0.63 → 6B 0.64 → 8A 0.65 → 10C**.
 | Étape | État actuel | Prochaine opération |
 | --- | --- | --- |
 | 6A `preview_packing` | Livré, Sites 96–97 / native 0.60 | Conserver ses preuves et réserves. |
-| 6B `selected_rigid` | fa23/322 : **5 405/5 405**, cinq gates et worker ; sept tests Binding rejoués et 6 818 contrôles de scénarios conservés ; **11/11 rejeux, 187/187 contrôles, 390 actions** ; structure 58 points, preuve KLOT et **QA navigateur Vite** closes | Réconcilier le publié 0.63 effectif, finaliser les outils et le contrat de coût, effectuer les mesures selon le critère global par jeu, puis publier 0.64. |
+| 6B `selected_rigid` | fa23/322 : **5 405/5 405**, cinq gates et worker ; sept tests Binding rejoués et 6 818 contrôles de scénarios conservés ; **11/11 rejeux, 187/187 contrôles, 390 actions** ; structure 58 points, preuve KLOT et **QA navigateur Vite** closes | Préparer les outils et le contrat de coût, poursuivre tests fonctionnels et sauvegardes régulières sans verrou global ; réconcilier le publié 0.63 effectif avant la mesure officielle et la publication 0.64, chacune sous courte exclusivité. |
 | 6C `observed_rigid_cargo` | À transférer | Après la clôture intégrée de 6B. |
 | 6D `shared_settlement` | À transférer | Après 6C, avec les critères communs du lot. |
 
@@ -1345,7 +1401,7 @@ Les preuves de développement gardent leur portée propre : **81 tests différen
 
 ## Lot 6 : pièces rigides, cargaisons et stabilisation
 
-**Mise à jour 6B :** le candidat provisoire 805b + 6B reste gelé fa23/322, audité à 66/76 entrées (86,8 %), avec 208 composants vérifiés, 147 transferts partiels et 1 014 modules en attente ; zéro module entièrement vérifié et six portes complètes encore fausses. La tentative 03 de la suite de 142 fichiers réussit **5 405/5 405**. Les **11/11 rejeux, 187/187 contrôles et 390 actions** sont agrégés, avec les douze tentatives conservées, dont l’ancien OOM VOIS. Les sept tests Binding ont été rejoués ; les huit scénarios et leurs **6 818 contrôles** restent les preuves conservées de la tentative 02 à entrées pertinentes inchangées, sans duplication. La nouvelle preuve froide KLOT fa23 atteint **trois niveaux, 38 actions et 30 préfixes**, avec relecture originale sans différence, ablations et deux rejets sémantiques qualifiés. **QA02 est réellement réussie via CUA sur Vite et le worker TypeScript de développement**, avec Pause, reprise et fermeture vérifiées ; elle ne prétend pas tester le bundle de production. La structure de coût est qualifiée sur **64 contrôles, 58 points et 168 records temporels**, mais aucun parcours CLI complet aval ni coût officiel n’est acquis. Après la lecture finale QA02, l’horloge est inactive à **1 221,0363642830062/2 400 secondes**. La publication revérifiée à **20:34:24.999 UTC** reste **Site 103 / native 0.62**, sans SelectedRigid. Le coût officiel, la réconciliation du publié 0.63 et la publication 0.64 restent ouverts. Les reçus, limites et prochaines opérations font autorité dans le jalon 6B courant en tête.
+**Mise à jour 6B :** le candidat provisoire 805b + 6B reste gelé fa23/322, audité à 66/76 entrées (86,8 %), avec 208 composants vérifiés, 147 transferts partiels et 1 014 modules en attente ; zéro module entièrement vérifié et six portes complètes encore fausses. La tentative 03 de la suite de 142 fichiers réussit **5 405/5 405**. Les **11/11 rejeux, 187/187 contrôles et 390 actions** sont agrégés, avec les douze tentatives conservées, dont l’ancien OOM VOIS. Les sept tests Binding ont été rejoués ; les huit scénarios et leurs **6 818 contrôles** restent les preuves conservées de la tentative 02 à entrées pertinentes inchangées, sans duplication. La nouvelle preuve froide KLOT fa23 atteint **trois niveaux, 38 actions et 30 préfixes**, avec relecture originale sans différence, ablations et deux rejets sémantiques qualifiés. **QA02 est réellement réussie via CUA sur Vite et le worker TypeScript de développement**, avec Pause, reprise et fermeture vérifiées ; elle ne prétend pas tester le bundle de production. La structure de coût est qualifiée sur **64 contrôles, 58 points et 168 records temporels**, mais aucun parcours CLI complet aval ni coût officiel n’est acquis. Après le diagnostic source générique ultérieur, le compteur est fermé à **1 424,8841320940055/2 400 secondes**, avec **975,1158679059945 secondes restantes** ; les clôtures QA antérieures restent historiques. Le Site 103 exact encore observé **à 21:33 UTC**, dans le [nouveau constat d’hébergement](lot6b-evidence/source-workflow-20261111/publication-observation.json) reste en **native 0.62**, sans SelectedRigid ; le diagnostic du message d’arrêt reste une lecture de source, sans reproduction de la session utilisateur. Le coût officiel, la réconciliation du publié 0.63 et la publication 0.64 restent ouverts. Les reçus, limites et prochaines opérations font autorité dans le jalon 6B courant en tête.
 
 **Entrées :** `preview_packing`, `selected_rigid`, `observed_rigid_cargo`, `shared_settlement`.
 

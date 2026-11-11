@@ -1,0 +1,434 @@
+{
+  "schema": "logos-engine.lot6b-ordinary-source-commit.v1",
+  "startedAt": "2026-11-11T21:30:58.669981+00:00",
+  "ordinaryGlobalLockAcquired": false,
+  "publicationPerformed": false,
+  "status": "passed",
+  "commit": "2e555ec44e792c4f75d400205ead5de595e95791",
+  "parent": "1372d2df336f9919d7b5892160936d928720c24c",
+  "files": [
+    {
+      "path": "docs/migration/lot6b-evidence/current-work-policy-20261111.md",
+      "bytes": 4550,
+      "sha256": "0d8278ab03de01e8593648b4a3a61b57e209bc6e0901bd2603d8b16e075eb5c5"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/run-case-command.py",
+      "bytes": 7585,
+      "sha256": "b0926dcbef25b129470f1ffe20a76ceed5b640807457fadd9fe5881d7553af86"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/source-workflow-20261111/checkpoint-transport.mjs",
+      "bytes": 19595,
+      "sha256": "5d6e7b5763066503040bcdd5582065b75871240bd7b960e444f8a9583e6e321e"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/source-workflow-20261111/official-window-guard.mjs",
+      "bytes": 3912,
+      "sha256": "7303615cf7c0c140c7bff9ea797654a0c8df44befb88a0a3860fd32187496a63"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/source-workflow-20261111/official-window-guard.test.mjs",
+      "bytes": 7502,
+      "sha256": "70db98c06b0f0805cd818da5d902f354a052534122a499a2b1dd8c9318b3263b"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/source-workflow-20261111/guard-validation.json",
+      "bytes": 3720,
+      "sha256": "704733d245c18ec85c8455c805e6fd0160d2932ad89b08f2cc857b063aeedcd5"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/source-workflow-20261111/guard-validation.stdout.log",
+      "bytes": 6865,
+      "sha256": "cab702bdd86a2d6e11e5d912f9a74762ed5782af44ee444abd0d1a6f66f3441b"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/source-workflow-20261111/guard-validation.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/source-workflow-20261111/source-review.json",
+      "bytes": 2688,
+      "sha256": "c4668a19f762c139d0ed43022922e0a13b9ea40af14a61cdcbd4deae9e701892"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/closure-02-command.json",
+      "bytes": 27143,
+      "sha256": "d98c18d41178f00dd4229bb12140e42ce3eb129e0dd7c48c938d1e95f0aa48a6"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/closure-02-transport.json",
+      "bytes": 30324,
+      "sha256": "83e0205b10998a4cdcf20ac7ac9f7ba95c030df8681a587a5dec8039626569d3"
+    }
+  ],
+  "fileCount": 11,
+  "totalBytes": 113884,
+  "indexClean": true,
+  "finishedAt": "2026-11-11T21:30:59.429900+00:00",
+  "elapsedSeconds": 0.7599402129999362,
+  "commands": [
+    {
+      "argv": [
+        "node",
+        "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/source-workflow-20261111/official-window-guard.mjs"
+      ],
+      "pid": 5,
+      "exitCode": 0,
+      "timedOut": false,
+      "signals": [],
+      "processGroupAbsent": true,
+      "stdoutBytes": 433,
+      "stderrBytes": 0
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "gc.auto=0",
+        "-c",
+        "maintenance.auto=false",
+        "branch",
+        "--show-current"
+      ],
+      "pid": 13,
+      "exitCode": 0,
+      "timedOut": false,
+      "signals": [],
+      "processGroupAbsent": true,
+      "stdoutBytes": 25,
+      "stderrBytes": 0
+    },
+    {
+      "argv": [
+        "node",
+        "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/source-workflow-20261111/official-window-guard.mjs"
+      ],
+      "pid": 14,
+      "exitCode": 0,
+      "timedOut": false,
+      "signals": [],
+      "processGroupAbsent": true,
+      "stdoutBytes": 433,
+      "stderrBytes": 0
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "gc.auto=0",
+        "-c",
+        "maintenance.auto=false",
+        "rev-parse",
+        "HEAD"
+      ],
+      "pid": 22,
+      "exitCode": 0,
+      "timedOut": false,
+      "signals": [],
+      "processGroupAbsent": true,
+      "stdoutBytes": 41,
+      "stderrBytes": 0
+    },
+    {
+      "argv": [
+        "node",
+        "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/source-workflow-20261111/official-window-guard.mjs"
+      ],
+      "pid": 23,
+      "exitCode": 0,
+      "timedOut": false,
+      "signals": [],
+      "processGroupAbsent": true,
+      "stdoutBytes": 433,
+      "stderrBytes": 0
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "gc.auto=0",
+        "-c",
+        "maintenance.auto=false",
+        "diff",
+        "--cached",
+        "--name-only",
+        "-z"
+      ],
+      "pid": 31,
+      "exitCode": 0,
+      "timedOut": false,
+      "signals": [],
+      "processGroupAbsent": true,
+      "stdoutBytes": 0,
+      "stderrBytes": 0
+    },
+    {
+      "argv": [
+        "node",
+        "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/source-workflow-20261111/official-window-guard.mjs"
+      ],
+      "pid": 32,
+      "exitCode": 0,
+      "timedOut": false,
+      "signals": [],
+      "processGroupAbsent": true,
+      "stdoutBytes": 433,
+      "stderrBytes": 0
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "gc.auto=0",
+        "-c",
+        "maintenance.auto=false",
+        "add",
+        "--",
+        "docs/migration/lot6b-evidence/current-work-policy-20261111.md",
+        "docs/migration/lot6b-evidence/run-case-command.py",
+        "docs/migration/lot6b-evidence/source-workflow-20261111/checkpoint-transport.mjs",
+        "docs/migration/lot6b-evidence/source-workflow-20261111/official-window-guard.mjs",
+        "docs/migration/lot6b-evidence/source-workflow-20261111/official-window-guard.test.mjs",
+        "docs/migration/lot6b-evidence/source-workflow-20261111/guard-validation.json",
+        "docs/migration/lot6b-evidence/source-workflow-20261111/source-review.json",
+        "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/closure-02-command.json",
+        "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/closure-02-transport.json"
+      ],
+      "pid": 40,
+      "exitCode": 0,
+      "timedOut": false,
+      "signals": [],
+      "processGroupAbsent": true,
+      "stdoutBytes": 0,
+      "stderrBytes": 0
+    },
+    {
+      "argv": [
+        "node",
+        "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/source-workflow-20261111/official-window-guard.mjs"
+      ],
+      "pid": 61,
+      "exitCode": 0,
+      "timedOut": false,
+      "signals": [],
+      "processGroupAbsent": true,
+      "stdoutBytes": 433,
+      "stderrBytes": 0
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "gc.auto=0",
+        "-c",
+        "maintenance.auto=false",
+        "add",
+        "-f",
+        "--",
+        "docs/migration/lot6b-evidence/source-workflow-20261111/guard-validation.stdout.log",
+        "docs/migration/lot6b-evidence/source-workflow-20261111/guard-validation.stderr.log"
+      ],
+      "pid": 69,
+      "exitCode": 0,
+      "timedOut": false,
+      "signals": [],
+      "processGroupAbsent": true,
+      "stdoutBytes": 0,
+      "stderrBytes": 0
+    },
+    {
+      "argv": [
+        "node",
+        "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/source-workflow-20261111/official-window-guard.mjs"
+      ],
+      "pid": 90,
+      "exitCode": 0,
+      "timedOut": false,
+      "signals": [],
+      "processGroupAbsent": true,
+      "stdoutBytes": 433,
+      "stderrBytes": 0
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "gc.auto=0",
+        "-c",
+        "maintenance.auto=false",
+        "diff",
+        "--cached",
+        "--name-only",
+        "-z"
+      ],
+      "pid": 98,
+      "exitCode": 0,
+      "timedOut": false,
+      "signals": [],
+      "processGroupAbsent": true,
+      "stdoutBytes": 888,
+      "stderrBytes": 0
+    },
+    {
+      "argv": [
+        "node",
+        "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/source-workflow-20261111/official-window-guard.mjs"
+      ],
+      "pid": 99,
+      "exitCode": 0,
+      "timedOut": false,
+      "signals": [],
+      "processGroupAbsent": true,
+      "stdoutBytes": 433,
+      "stderrBytes": 0
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "gc.auto=0",
+        "-c",
+        "maintenance.auto=false",
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "pid": 107,
+      "exitCode": 0,
+      "timedOut": false,
+      "signals": [],
+      "processGroupAbsent": true,
+      "stdoutBytes": 0,
+      "stderrBytes": 0
+    },
+    {
+      "argv": [
+        "node",
+        "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/source-workflow-20261111/official-window-guard.mjs"
+      ],
+      "pid": 108,
+      "exitCode": 0,
+      "timedOut": false,
+      "signals": [],
+      "processGroupAbsent": true,
+      "stdoutBytes": 433,
+      "stderrBytes": 0
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "gc.auto=0",
+        "-c",
+        "maintenance.auto=false",
+        "commit",
+        "-m",
+        "chore(lot6b): remove global locks from ordinary source workflow"
+      ],
+      "pid": 116,
+      "exitCode": 0,
+      "timedOut": false,
+      "signals": [],
+      "processGroupAbsent": true,
+      "stdoutBytes": 1192,
+      "stderrBytes": 0
+    },
+    {
+      "argv": [
+        "node",
+        "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/source-workflow-20261111/official-window-guard.mjs"
+      ],
+      "pid": 157,
+      "exitCode": 0,
+      "timedOut": false,
+      "signals": [],
+      "processGroupAbsent": true,
+      "stdoutBytes": 433,
+      "stderrBytes": 0
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "gc.auto=0",
+        "-c",
+        "maintenance.auto=false",
+        "rev-parse",
+        "HEAD"
+      ],
+      "pid": 165,
+      "exitCode": 0,
+      "timedOut": false,
+      "signals": [],
+      "processGroupAbsent": true,
+      "stdoutBytes": 41,
+      "stderrBytes": 0
+    },
+    {
+      "argv": [
+        "node",
+        "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/source-workflow-20261111/official-window-guard.mjs"
+      ],
+      "pid": 166,
+      "exitCode": 0,
+      "timedOut": false,
+      "signals": [],
+      "processGroupAbsent": true,
+      "stdoutBytes": 433,
+      "stderrBytes": 0
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "gc.auto=0",
+        "-c",
+        "maintenance.auto=false",
+        "rev-parse",
+        "HEAD^"
+      ],
+      "pid": 174,
+      "exitCode": 0,
+      "timedOut": false,
+      "signals": [],
+      "processGroupAbsent": true,
+      "stdoutBytes": 41,
+      "stderrBytes": 0
+    },
+    {
+      "argv": [
+        "node",
+        "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/source-workflow-20261111/official-window-guard.mjs"
+      ],
+      "pid": 175,
+      "exitCode": 0,
+      "timedOut": false,
+      "signals": [],
+      "processGroupAbsent": true,
+      "stdoutBytes": 433,
+      "stderrBytes": 0
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "gc.auto=0",
+        "-c",
+        "maintenance.auto=false",
+        "diff",
+        "--cached",
+        "--name-only",
+        "-z"
+      ],
+      "pid": 183,
+      "exitCode": 0,
+      "timedOut": false,
+      "signals": [],
+      "processGroupAbsent": true,
+      "stdoutBytes": 0,
+      "stderrBytes": 0
+    }
+  ]
+}

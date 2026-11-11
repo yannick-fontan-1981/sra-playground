@@ -3,6 +3,54 @@
 <!-- LOT6B_SITE103_INTEGRATION_START -->
 ## Reprise après le signalement KLOT : publication et fusion
 
+### Règle de travail prospective du 11 novembre 2026
+
+La nouvelle instruction utilisateur autorise **le développement, les tests
+fonctionnels, les commits et les push sans verrou global**, dans un checkout
+et une branche propres. Les sauvegardes doivent rester régulières, sans
+attendre la publication des autres lots. Cette règle s’applique aux travaux
+nouveaux ; les anciennes attentes, gardes et preuves de coordination demeurent
+des faits historiques et ne sont pas réécrites.
+
+**Seules les mesures officielles de coût et la publication nécessitent une
+courte exclusivité.** Aucun verrou détenu ne doit être supprimé ni remplacé.
+Le développement courant ne requiert ni verrou partagé global ni garde
+d’un ancien silence préparatoire. La publication effective 0.63 reste une
+condition de réconciliation pour l’acceptation finale 6B ; elle ne bloque pas
+la préparation, les tests fonctionnels ou les commits et push courants.
+La règle est explicitée par [addendum prospectif](lot6b-evidence/current-work-policy-20261111.md).
+La [prochaine préparation du contrat de coût](lot6b-evidence/source-workflow-20261111/next-cost-preflight-plan.md)
+précise les commandes et leurs prérequis réels. Les travaux préparatoires restent
+libres de verrou global ; les CLI officiels positifs attendent les identités du
+prédécesseur publié et les mesures réellement acquises.
+
+### Diagnostic source du message d’arrêt signalé
+
+Le [diagnostic de source générique](lot6b-evidence/user-stop-nested-control-01/source-diagnosis.json)
+identifie précisément **`FieldServiceMemory.applyEvent`**, dans
+[v6-field-service-access.ts](../../src/logos-engine/v6-field-service-access.ts).
+Pour un événement `nested_control_response` dont la disposition est différente
+de `local_no_visible_effect`, ce code fixe le motif
+**`nested_control_effect_requires_composition`**. Le chemin générique exige
+alors une composition explicite ; une composition de remplissage reconnue
+peut lever ce motif. Il ne transforme pas ce refus en réussite.
+
+**SelectedRigid est raccordé en amont dans le candidat fa23.** Le Site 103
+exact, commit `4afcbfe6a25bd3a88223be543e443bc53b9c8814`, encore observé
+**à 21:33 UTC**, dans le [nouveau constat d’hébergement](lot6b-evidence/source-workflow-20261111/publication-observation.json), reste en **native 0.62 sans raccordement SelectedRigid**.
+Cette différence est compatible avec le message fourni par l’utilisateur.
+**Le texte seul ne prouve ni la version chargée dans le navigateur, ni le
+niveau, ni l’historique d’actions de sa session.** La session exacte n’a pas
+été reproduite.
+
+Ce diagnostic n’exécute **aucun nouveau jeu ni parcours navigateur** et
+n’apporte **aucune modification native** : le gel demeure **fa23 / 322 fichiers**.
+Les validations fonctionnelles, les rejeux et les preuves KLOT/navigateur
+déjà closes restent inchangés. Après le diagnostic facturé, le compteur
+est **fermé à 1 424,8841320940055 / 2 400 secondes**, avec
+**975,1158679059945 secondes restantes**. Les points de clôture antérieurs,
+dont celui de QA02, restent historiques.
+
 Le [constat courant du Site](lot6b-evidence/integration-site103-01/publication-observation.json)
 confirme **Site 103 / native 0.62**, commit
 `4afcbfe6a25bd3a88223be543e443bc53b9c8814`, déploiement
@@ -188,10 +236,13 @@ une URL prête puis restait vivant, alors que le helper attendait à tort la
 fin de sa commande. Aucune page n’avait été ouverte ; ce reçu ne décrit pas
 un échec du jeu.
 
-Après QA02 et sa **lecture finale facturée, vers 20:32 UTC le 11 novembre 2026**,
-l’horloge est **inactive**, à **1 221,0363642830062 secondes cumulées sur 2 400**,
-avec **1 178,9636357169938 secondes restantes**. Ce total remplace le point
-intermédiaire de 20:19:50 et comprend la clôture effective du navigateur.
+Au point historique suivant QA02 et sa **lecture finale facturée, vers
+20:32 UTC le 11 novembre 2026**, l’horloge était **inactive**, à
+**1 221,0363642830062 secondes cumulées sur 2 400**, avec
+**1 178,9636357169938 secondes restantes**. Ce point remplaçait celui de
+20:19:50 et comprenait la clôture effective du navigateur. Le diagnostic
+source ultérieur porte le dernier compteur fermé à **1 424,8841320940055 s**,
+avec **975,1158679059945 s restantes**, comme indiqué en tête.
 Le parcours final des outils de coût, la mesure officielle, la publication
 effective 0.63 et sa réconciliation, puis la publication 0.64 restent ouverts.
 
@@ -208,9 +259,14 @@ Ce checkpoint de preuves ne constitue pas une publication de Site.
 Le [checkpoint principal 17d6c1aa](lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/core-checkpoint-summary.json)
 reste conservé : **sept lots poussés et vérifiés, 356 fichiers /
 154 054 085 octets**, confirmation à **20:51:49.609783 UTC**.
-Un petit commit documentaire suivra pour nommer le checkpoint de preuves
-41cedc1f et conserver son reçu ; **41cedc1f n’est pas présenté comme le dernier
-HEAD distant final**.
+Le [checkpoint de la règle de travail courante](lot6b-evidence/source-workflow-20261111/policy-checkpoint-summary.json)
+**`2e555ec44e792c4f75d400205ead5de595e95791`** est poussé et vérifié sur la
+branche propre, sans verrou global. Les **38 tests de coordination passent** ;
+le transport direct est terminé, avec son groupe de processus absent.
+Le checkpoint précédent `1372d2df336f9919d7b5892160936d928720c24c` et le
+checkpoint de preuves `41cedc1f6a89b8639c19f0dc45eae24c264ad3c0` restent
+conservés. Cette sauvegarde de source ne publie pas de Site. La clôture
+documentaire qui cite ce nouveau checkpoint fait l’objet du commit suivant.
 
 `a01e6faf330d82fa220feac0c9ad4632bb75a9de`, vérifié à 18:34:56 UTC,
 reste un jalon historique, comme le

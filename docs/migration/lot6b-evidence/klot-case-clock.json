@@ -4,8 +4,8 @@
   "status": "completed_within_budget",
   "limitSeconds": 2400,
   "priorChargedSeconds": 11.393673999999999,
-  "chargedSeconds": 1221.0363642830062,
-  "remainingSeconds": 1178.9636357169938,
+  "chargedSeconds": 1424.8841320940055,
+  "remainingSeconds": 975.1158679059945,
   "intervals": [
     {
       "label": "prior-public-history-reconciliation",
@@ -166,6 +166,14 @@
       "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
       "finishedAt": "2026-11-11T20:32:04.376607+00:00",
       "elapsedSeconds": 29.764532966000843
+    },
+    {
+      "label": "klot-user-nested-control-stop-diagnosis-01",
+      "startedAt": "2026-11-11T21:13:40.805084+00:00",
+      "startedMonotonic": 34065.272869301,
+      "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+      "finishedAt": "2026-11-11T21:17:04.652869+00:00",
+      "elapsedSeconds": 203.84776781099936
     }
   ],
   "active": null,
@@ -179,7 +187,7 @@
     "sha256": "0dcb7199d327c6aced2671952a12d78c8136272de49a0bc17e6844a0f40285ee",
     "bytes": 3185
   },
-  "updatedAt": "2026-11-11T20:32:04.376625+00:00",
+  "updatedAt": "2026-11-11T21:17:04.652885+00:00",
   "priorCorrection": {
     "path": "docs/migration/lot6b-evidence/source-opening/klot-clock-before-prior-correction.json",
     "bytes": 1058,

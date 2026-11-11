@@ -1,0 +1,189 @@
+{
+  "schema": "logos-engine.lot6b.user-stop-source-diagnosis.v1",
+  "startedAt": "2026-11-11T21:17:04.596351+00:00",
+  "userMessage": "V6 stopped: nested_control_effect_requires_composition. Its acquired evidence is retained for inspection.",
+  "publishedCommit": "4afcbfe6a25bd3a88223be543e443bc53b9c8814",
+  "observations": [
+    {
+      "path": "src/runtime/v6-agent.ts",
+      "sha256": "cb01061771a29a2ad59b02560431be8adc8dae0ba3933a81358ba29dcb7789af",
+      "bytes": 22531,
+      "matchingLines": [
+        {
+          "line": 374,
+          "text": "    this.state('stopped', reason ? `V6 stopped: ${reason}. Its acquired evidence is retained for inspection.` : 'V6 completed its run. Its acquired evidence is retained for inspection.');"
+        }
+      ]
+    },
+    {
+      "path": "src/logos-engine/v6-field-service-access.ts",
+      "sha256": "0a4846ad10b1d1cacb3be947fc72e24e39a1ab1478e41e675d7e065544e95f1a",
+      "bytes": 35073,
+      "matchingLines": [
+        {
+          "line": 89,
+          "text": "        if (owned.disposition !== 'local_no_visible_effect') this.stopReason = 'nested_control_effect_requires_composition';"
+        }
+      ]
+    },
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "sha256": "267c976c386f6a459b0fc3edb05035d8b0c73173294f77a6534010dcea3ae972",
+      "bytes": 172627,
+      "matchingLines": [
+        {
+          "line": 87,
+          "text": "  'single_owner_selected_rigid_selected_acquisition', 'conditional_selected_rigid_checkpoint_restoration',"
+        },
+        {
+          "line": 88,
+          "text": "  'bounded_selected_rigid_search_with_current_active_deadline', 'selected_rigid_source_stop_before_dispatch',"
+        },
+        {
+          "line": 89,
+          "text": "  'atomic_selected_rigid_event_validation',"
+        },
+        {
+          "line": 436,
+          "text": "        const sourceStop = rawNativeSelectedRigid(family) && proposal.kind === 'native_current_proposal_refusal'"
+        },
+        {
+          "line": 1274,
+          "text": "    const sourceStop = this.families.map(family => family.requestedStopReason?.(this.observation!) ?? null)"
+        },
+        {
+          "line": 1334,
+          "text": "      public_symbol_transaction: 'symbol_transaction_event', public_addressed_material: 'addressed_material_event', public_observed_binding: 'object_binding_event', preview_packing: 'preview_packing_event', selected_rigid: 'selected_rigid_event', morphology: 'morphology_event' };"
+        },
+        {
+          "line": 1438,
+          "text": "      memory.put(EPISODE, 'selected_rigid_state', selectedRigid.sourceState(), after.observation_ref, after.revision);"
+        },
+        {
+          "line": 1439,
+          "text": "      selectedRigid.restoreSourceState(memory.get(EPISODE, 'selected_rigid_state').value);"
+        },
+        {
+          "line": 2009,
+          "text": "    proposeInSubquestion: (group, entry, ...args) => group === 'goal_access' && entry === 'selected_rigid' ? offer(...args) : null,"
+        },
+        {
+          "line": 2085,
+          "text": "  const selectedRigidOwner = new NativeSelectedRigid(configuration.selected_rigid_question), selectedRigid = selectedRigidFamily(selectedRigidOwner);"
+        },
+        {
+          "line": 2175,
+          "text": "      if (question === 'selected_rigid') return [selectedRigid.id];"
+        },
+        {
+          "line": 2200,
+          "text": "    if (question === 'observed_feedback_sequence' || question === 'preview_packing' || question === 'selected_rigid') return [question];"
+        }
+      ]
+    },
+    {
+      "path": "src/logos-engine/v6-shared-series.ts",
+      "sha256": "d9ef976e60120b6fb3c96956a2314c2e3550d463e004dbd9856dc5eb92d44701",
+      "bytes": 88590,
+      "matchingLines": []
+    },
+    {
+      "path": "src/logos-engine/v6-selected-rigid.ts",
+      "sha256": "767556eac7484145e40a00c191004de266aa2b952f12518e720f00a5925b1751",
+      "bytes": 29799,
+      "matchingLines": [
+        {
+          "line": 23,
+          "text": "export const SELECTED_RIGID_STATE_SCHEMA = 'native.selected_rigid.v1';"
+        },
+        {
+          "line": 31,
+          "text": "const initialSource = (): SelectedRigidSourceState => ({ format: 'selected_rigid_events.v1', events: [] });"
+        },
+        {
+          "line": 128,
+          "text": "  if (value.kind !== 'observed_selected_rigid') invalid('event kind');"
+        },
+        {
+          "line": 152,
+          "text": "  if (value.format !== 'selected_rigid_events.v1' || !Array.isArray(value.events)) invalid('source format/events');"
+        },
+        {
+          "line": 179,
+          "text": "  readonly id = 'selected_rigid';"
+        },
+        {
+          "line": 206,
+          "text": "      configuration = JSON.parse(source.text).declarations[0].configuration.selected_rigid_question;"
+        },
+        {
+          "line": 308,
+          "text": "    const proposal: SelectedRigidProposal = { status: 'proposed', kind: 'selected_rigid', proposal_id: ref,"
+        },
+        {
+          "line": 309,
+          "text": "      selected_rigid_plan: plan, actions, steps: actions.map(action => ({ action, expected_after: null })), facts,"
+        },
+        {
+          "line": 330,
+          "text": "    if (!proposal.actions?.length || proposal.actions.length > 16 || !proposal.selected_rigid_plan || !proposal.bundle_template"
+        },
+        {
+          "line": 331,
+          "text": "      || !proposal.steps || !equal(proposal.actions, proposal.selected_rigid_plan.commands)"
+        },
+        {
+          "line": 337,
+          "text": "    try { this.bind(proposal, null); } catch { return { admitted: false, reason: 'selected_rigid_exact_binding_changed' }; }"
+        },
+        {
+          "line": 339,
+          "text": "    const plan = proposal.selected_rigid_plan, scene = selectedRigidScene(publicPacket.frame_rows, plan.scene), action = proposal.actions[index];"
+        },
+        {
+          "line": 352,
+          "text": "    if (!proposal.selected_rigid_plan) return { matched: null, seal_prefix: true, reason: 'not_selected_rigid' };"
+        },
+        {
+          "line": 353,
+          "text": "    const plan = proposal.selected_rigid_plan, boundary = after.level_epoch !== plan.epoch || after.levels_completed !== plan.score;"
+        },
+        {
+          "line": 361,
+          "text": "    const plan = proposal?.selected_rigid_plan;"
+        },
+        {
+          "line": 378,
+          "text": "    const event: SelectedRigidEvent = plain({ kind: 'observed_selected_rigid', state, models, detail });"
+        },
+        {
+          "line": 380,
+          "text": "    this.install(retainNativeJson({ format: 'selected_rigid_events.v1', events: [...this.memory.events, owned] }), null);"
+        }
+      ]
+    }
+  ],
+  "gameExecuted": false,
+  "browserExecuted": false,
+  "hiddenGameEngineOrLevelRead": false,
+  "nativeCodeChanged": false,
+  "publishedRuntime": {
+    "sha256": "35ee423d3dbfd74b7969c568db48222260ef78dab8a75402a7f28d643a110438",
+    "selectedRigidRegistrationPresent": false,
+    "versionLines": [
+      {
+        "line": 78,
+        "text": "export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.62.0';"
+      }
+    ]
+  },
+  "findings": {
+    "exactProducer": "FieldServiceMemory.applyEvent rejects nested_control_response unless disposition is local_no_visible_effect.",
+    "reason": "An observed effect of a nested control needs an explicit composition; the generic field-service path refuses to invent one. A recognized field-fill composition may clear this reason.",
+    "selectedRigidRelationship": "SelectedRigid supplies an upstream specialized composition for selected pieces and directional movement; there is no named catch that treats this refusal as successful.",
+    "publishedCandidateGap": "Exact published0.62 runtime lacks SelectedRigid registration; current candidate has it.",
+    "userSessionCausality": "The message is compatible with the published old path but does not identify the browser-loaded version, level or action history. Exact user session was not reproduced."
+  },
+  "status": "source_diagnosed_session_not_reproduced",
+  "finishedAt": "2026-11-11T21:17:04.622445+00:00"
+}
