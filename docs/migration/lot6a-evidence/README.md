@@ -2,9 +2,9 @@
 
 ## État de cet index
 
-**Candidat native 0.60.0 validé, coût global accepté ; 4 795/4 795 tests réussis dans les 126 fichiers déclarés, cinq contrôles finaux réussis, validations ciblées, campagne KATA, lecture originale et contrôle navigateur terminés. La synthèse finale des rejeux a réussi : 11/11 résultats et 187/187 comparaisons selon la sélection 9 + 1 + 1. Les preuves de présence et d’intégrité ainsi que la readiness sont acquises. Le temps complet augmente de +6,094357 % pour STCK et de +3,262812 % pour SMLP ; chaque jeu reste strictement sous +10 %. La publication reste à confirmer.** La [fiche du lot](../lot6a-preview-packing.md) décrit le comportement, les conditions de clôture et les limites ; la [filiation](../lot6a-preview-packing-lineage.md) détaille les contrats effectivement consommés.
+**Moteur native 0.60.0 publié dans Site 96, coût global accepté ; 4 795/4 795 tests réussis dans les 126 fichiers déclarés, cinq contrôles finaux réussis, validations ciblées, campagne KATA, lecture originale et contrôle navigateur terminés. La synthèse finale des rejeux a réussi : 11/11 résultats et 187/187 comparaisons selon la sélection 9 + 1 + 1. Les preuves de présence et d’intégrité ainsi que la readiness sont acquises. Le temps complet augmente de +6,094357 % pour STCK et de +3,262812 % pour SMLP ; chaque jeu reste strictement sous +10 %.** Le [reçu réel de publication du moteur](publication/native-publication.json) porte le statut terminal `succeeded`. La [fiche du lot](../lot6a-preview-packing.md) décrit le comportement, la clôture et les limites ; la [filiation](../lot6a-preview-packing-lineage.md) détaille les contrats effectivement consommés.
 
-Le gel de livraison est **`integrated-final-02`**, digest natif `ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229`, avec **306 fichiers natifs et 322 fichiers archivés**. Le [prédécesseur publié vérifié](publication/published-baseline-site95.json) est Site 95 / native 0.58.0, commit `3a70463039768f7114edae7d94d7dd33b7f36aa8`. Ce reçu n'est pas une publication du candidat.
+Le gel de livraison est **`integrated-final-02`**, digest natif `ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229`, avec **306 fichiers natifs et 322 fichiers archivés**. Le [prédécesseur publié vérifié](publication/published-baseline-site95.json) est Site 95 / native 0.58.0, commit `3a70463039768f7114edae7d94d7dd33b7f36aa8`. Cette référence demeure celle des comparaisons de coût.
 
 La [constatation de reprise](recovery/recovery-observation.json) garde la perte de l'ancien candidat local. Les anciens 5 080 tests et anciens résultats de coût ne sont pas réutilisés. Les preuves de cette reconstruction ont leurs propres sources, entrées et dates.
 
@@ -126,10 +126,19 @@ La règle utilisateur autorise une phase au-delà de +10 % lorsque le temps comp
 
 Les huit mesures par jeu, dont `session_elapsed`, forment **16 diagnostics chronométriques agrégés : 11/16 dans le budget observé**. Les cinq dépassements de médiane de phase restent acceptés au titre de la règle globale et visibles dans le rapport : STCK `new_decision` **+14,980671 %**, STCK `acquisition_and_persistence` **+12,324410 %**, SMLP `new_decision` **+12,443161 %**, SMLP `known_prefix_service` **+11,550136 %** et SMLP `known_prefix_request` **+12,686196 %**. Les cohortes et p95 conservent leurs propres diagnostics, sans substitution au critère global.
 
-Le coût accepté porte sur les chemins communs STCK/SMLP sans acquisition Preview. Il ne mesure pas directement une recherche positive de partition et ne prouve pas une stabilité sur plusieurs heures. La publication de native 0.60.0 reste à confirmer.
+Le coût accepté porte sur les chemins communs STCK/SMLP sans acquisition Preview. Il ne mesure pas directement une recherche positive de partition et ne prouve pas une stabilité sur plusieurs heures.
 
 ## 7. Publication et suite
 
-Le [contrôle des entrées de publication](integrated-final-02/publication-inputs.json) a réussi : `status: passed`, `costAccepted: true`, `publicationExecuted: false`. Il lie les preuves terminées et les octets validés ; il n’exécute aucune publication. Le seul reçu de publication effective référencé ici reste celui du prédécesseur Site 95. La publication de 6A devra identifier le commit réellement livré, les artefacts validés, le statut terminal et l’audience conservée. Aucun numéro de Site candidat n’est anticipé.
+Le [contrôle des entrées de publication](integrated-final-02/publication-inputs.json) a réussi : `status: passed`, `costAccepted: true`, `publicationExecuted: false`. Ce contrôle préalable lie les preuves terminées et les octets validés ; la publication effective possède son reçu distinct.
 
-Après clôture effective de 6A, la capacité suivante est **6B — `selected_rigid`**. L'ordre des lots et les autres reprises restent dans la [feuille de route générale](../v6-delivery-roadmap.md). Les limites fonctionnelles, de restauration, de couverture et de latence demeurent dans la [fiche du lot](../lot6a-preview-packing.md) et son [contrat de filiation](../lot6a-preview-packing-lineage.md).
+Le [reçu terminal de publication du moteur](publication/native-publication.json) confirme **Site 96 / native 0.60.0**, commit `cdaceea1c8918430a70b95fa427b31fcd22d290c`, statut **`succeeded`**, le 11 novembre 2026. L’[application](https://sra-playground.yannick-fontan.chatgpt.site) conserve son URL et son audience limitée au propriétaire. Site 96 désigne ce jalon moteur, distinct des versions documentaires.
+
+| Preuve de transport et de publication | Résultat conservé |
+| --- | --- |
+| [Vérification finale du transport source et du build](publication/final-source-build-verification.json) | **`passed`** ; cinq reçus de poussée source, **375 comparaisons des 75 fichiers applicatifs de chacune des cinq archives**, tous identiques octet pour octet au build validé |
+| [Première préparation](publication/worktree-preparation-attempt-01.json) | **`failed`**, refus conservé de restaurer des preuves supplémentaires hors du périmètre 6A du helper |
+| [Restauration préalable des preuves](publication/preparation-prerequisite-restoration.json) | **158 fichiers de preuve restaurés à l’identique**, sources, tests et build inchangés |
+| [Préparation terminée](publication/worktree-preparation.json) | **`passed`**, inventaires et octets validés conservés, sans recompilation |
+
+La prochaine capacité est **6B — `selected_rigid`**. L’ordre des lots et les autres reprises restent dans la [feuille de route générale](../v6-delivery-roadmap.md). Les limites fonctionnelles, de restauration, de couverture et de latence demeurent dans la [fiche du lot](../lot6a-preview-packing.md) et son [contrat de filiation](../lot6a-preview-packing-lineage.md).

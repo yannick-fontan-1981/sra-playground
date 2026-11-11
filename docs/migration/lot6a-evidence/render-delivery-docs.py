@@ -29,6 +29,7 @@ def main():
     cost=read(E/'performance-integrated/owner-growth-review.json')
     aggregate=read(E/'performance-integrated/owner-growth-comparison.json')
     pub=read(E/'publication/native-publication.json')
+    transport=read(E/'publication/final-source-build-verification.json')
     clock=read(E/'case-clock.json')
     assert tests and tests['status']=='passed' and checks and checks['status']=='passed'
     count=tests['checks'][0]['counts']['pass'];files=len(tests['testFiles'])
@@ -59,6 +60,10 @@ def main():
     if publication_inputs and publication_inputs['status']=='passed':
         proof_rows.append("| [Entrées de publication](lot6a-evidence/integrated-final-02/publication-inputs.json) | **`passed`**, coût accepté et octets validés liés ; ce reçu n’exécute pas la publication |")
         english_proof_rows.append("| [Publication inputs](docs/migration/lot6a-evidence/integrated-final-02/publication-inputs.json) | **`passed`**, accepted cost and validated bytes bound; this receipt performs no publication |")
+    if pub_ok:
+        assert transport and transport['status']=='passed'
+        proof_rows.append(f"| [Transport effectivement vérifié](lot6a-evidence/publication/final-source-build-verification.json) | **{transport['workflowReceiptsVerified']} envois de sources**, 75 membres applicatifs par archive et **{transport['applicationMemberComparisons']} comparaisons exactes**, sans recompilation |")
+        english_proof_rows.append(f"| [Verified source transport](docs/migration/lot6a-evidence/publication/final-source-build-verification.json) | **{transport['workflowReceiptsVerified']} actual source pushes**, 75 application members per archive and **{transport['applicationMemberComparisons']} exact comparisons**, without rebuilding |")
     proof_rows='\n'.join(proof_rows); english_proof_rows='\n'.join(english_proof_rows)
     clock_text=(f"L’[horloge cumulative KATA](lot6a-evidence/case-clock.json) est clôturée dans son budget : **{clock['chargedSeconds']:.6f} s / 2 400 s**, avec **{clock['remainingSeconds']:.6f} s non consommées**. La charge antérieure et les tentatives restent incluses."
                 if clock['status']=='completed_within_budget' else f"L’horloge cumulative KATA porte **{clock['chargedSeconds']:.6f} s / 2 400 s**, avec **{clock['remainingSeconds']:.6f} s** restantes.")
@@ -109,7 +114,7 @@ La source transférée est la chaîne consommée `PreviewPacking → Donor → B
 
 Une recherche bornée incomplète produit un état inconnu bloquant. La limite résiduelle de 2 000 ms ne borne pas toute la proposition. Les contrôles source peuvent subsister après une frontière, le cache négatif reste lié à l’époque et une partition ne prouve pas la fin officielle d’un niveau. La compaction des historiques et une latence maximale de Pause ne sont pas établies. {clock_text}
 
-**La prochaine capacité de ce fil est 6B, `selected_rigid`, après clôture effective de 6A.** Le lot 6 garde ensuite `observed_rigid_cargo` puis `shared_settlement`. Les chantiers 7-followup, 10B et 5C restent séparés et doivent intégrer le prédécesseur effectivement publié. Les réserves CWSE, SK48, FramedWindow, LKEY et WEAV ne sont pas effacées par cette livraison.
+**{'6A est clôturé dans son périmètre. ' if pub_ok else ''}La prochaine capacité de ce fil est 6B, `selected_rigid`{'' if pub_ok else ', après clôture effective de 6A'}.** Le lot 6 garde ensuite `observed_rigid_cargo` puis `shared_settlement`. Les chantiers 7-followup, 10B et 5C restent séparés et doivent intégrer le prédécesseur effectivement publié. Les réserves CWSE, SK48, FramedWindow, LKEY et WEAV ne sont pas effacées par cette livraison.
 """
     path=ROOT/'docs/migration/v6-delivery-roadmap.md'
     block(path,'LOT6A_ROADMAP',section,'LOT5B_ROADMAP')
@@ -121,8 +126,27 @@ Une recherche bornée incomplète produit un état inconnu bloquant. La limite r
     s=re.sub(r'^\| 6 \|.*$',f'| 6 | Pièces rigides, cargaisons et stabilisation commune | **3** | Géométrie, contrôles, recherche bornée et interruption | **6A `preview_packing` : {status}.** Prochaine capacité : **6B `selected_rigid`**, puis 6C `observed_rigid_cargo` et 6D `shared_settlement`. |',s,flags=re.M)
     old='**Coordination courante : 6A, `preview_packing`, est commencé dans une autre conversation.** Ses résultats et sa publication restent propres à ce chantier ; les quatre entrées du lot 6 restent ouvertes dans le registre du gel 5B.'
     s=s.replace(old,f'**6A `preview_packing` : {status}.** Les preuves nouvelles sont présentées en tête de ce document. **Trois entrées restent ouvertes : 6B `selected_rigid`, prochaine capacité de ce fil ; 6C `observed_rigid_cargo` ; 6D `shared_settlement`.** Les critères ci-dessous restent des exigences pour le lot entier ; les limites source de 6A ne sont pas présentées comme une clôture universelle de ces exigences.')
+    s=re.sub(r'^\*\*6A `preview_packing` : .*?\.\*\* Les preuves nouvelles sont présentées en tête de ce document\.',
+             f'**6A `preview_packing` : {status}.** Les preuves nouvelles sont présentées en tête de ce document.',s,flags=re.M)
     s=s.replace('Sa publication distincte est confirmée dans Site 94. Les entrées sont détaillées ci-dessous.',
                 'Sa publication distincte est confirmée dans Site 94. Le gel 6A raccorde ensuite `preview_packing` : **63/76 entrées et 13 ouvertes**, réparties **0+1+3+0+2+3+4**. Les entrées sont détaillées ci-dessous.')
+    if pub_ok:
+        journal_row=(f'| Lot 6A / PreviewPacking, Site {pub["siteVersion"]} / native 0.60 | **Livré en privé, validation et coût global acceptés** | '
+                     '4 795/4 795 tests dans 126 fichiers, cinq contrôles, 187/187 comparaisons sur onze rapports ; KATA et navigateur trois niveaux/33 actions/14 plans ; '
+                     '1 288 vérifications de composant, 174 événements source sans différence. Global STCK +6,094357 % / SMLP +3,262812 %, revue 17 890 contrôles, cinq dépassements de phase acceptés. Registre 63/76, 13 entrées restantes ; prochaine capacité 6B. |')
+        if re.search(r'^\| Lot 6A / PreviewPacking,',s,flags=re.M):
+            s=re.sub(r'^\| Lot 6A / PreviewPacking,.*$',journal_row,s,flags=re.M)
+        else:
+            s=re.sub(r'(?=^\| Lots 4 à 10 \|)',journal_row+'\n',s,count=1,flags=re.M)
+        s=re.sub(r'^\| Lots 4 à 10 \|.*$',
+            f'| Lots 4 à 10 | **13 entrées restantes dans la publication 0.60 ; 14 au jalon 0.58 ; 15 au jalon 0.57 ; 16 au jalon 0.56** | Lots 4 et 7 clos dans leurs périmètres de transfert. 6A livré dans Site {pub["siteVersion"]}, **6B prochaine capacité du lot 6** ; 5C et 10B en cours séparément, suivi LKEY L3 distinct ; lots 8/9/11 planifiés. |',s,flags=re.M)
+        s=re.sub(r'^Les lots \*\*1, 2A, 2B, 2C,.*$',
+            f'Les lots **1, 2A, 2B, 2C, 3A, 3B, 3E, 3F, 3H, 3I, 4A, 7A, 5A, 4B, 7B, 10A, 4C, 5B et 6A sont livrés ou clôturés dans leurs périmètres annoncés**. La livraison courante **6A / Site {pub["siteVersion"]} / native 0.60** intègre le prédécesseur effectivement publié **Site 95 / native 0.58**. Elle compte **63/76 entrées raccordées et 13 restantes**, avec validation fonctionnelle, coût global accepté et publication privée confirmée. Les jalons précédents et leurs chiffres restent historiques dans le tableau ; leurs verdicts et réserves fonctionnelles ne sont pas effacés.',s,flags=re.M)
+        s=s.replace("6A / `preview_packing` et 10B / `window_question` sont commencés dans d'autres conversations ;",
+                    f"**6A / `preview_packing` est livré dans Site {pub['siteVersion']} / native 0.60 ; 6B / `selected_rigid` est la prochaine capacité de ce fil.** 10B / `window_question` reste commencé dans une autre conversation ;")
+        s=s.replace('**une entrée restante, 5C / `observed_object_binding`**, prochaine capacité de ce fil.',
+                    '**une entrée restante, 5C / `observed_object_binding`**, suivie dans un chantier séparé.')
+        s=re.sub(r'^(\| 5 \|.*?)Prochaine capacité de ce fil :',r'\1Prochaine capacité du lot 5 :',s,flags=re.M)
     # Repair the prose retained from an earlier render without touching links,
     # identifiers inside backticks, or the underlying receipt calculations.
     for before, after in [
@@ -171,7 +195,7 @@ The 126-file scope explicitly excludes three inherited modules that execute the 
 
 {english_clock}
 
-**Next in this lane after 6A closure: 6B `selected_rigid`**, followed by `observed_rigid_cargo` and `shared_settlement`. See the [updated roadmap](docs/migration/v6-delivery-roadmap.md), [6A report](docs/migration/lot6a-preview-packing.md), [source lineage](docs/migration/lot6a-preview-packing-lineage.md) and [evidence index](docs/migration/lot6a-evidence/README.md).
+**{'6A is closed within its stated scope. Next in this lane' if pub_ok else 'Next in this lane after 6A closure'}: 6B `selected_rigid`**, followed by `observed_rigid_cargo` and `shared_settlement`. See the [updated roadmap](docs/migration/v6-delivery-roadmap.md), [6A report](docs/migration/lot6a-preview-packing.md), [source lineage](docs/migration/lot6a-preview-packing-lineage.md) and [evidence index](docs/migration/lot6a-evidence/README.md).
 """
     p=ROOT/'README.md';block(p,'LOT6A_README',english,'LOT5B_README')
     p.write_text(p.read_text().replace('## Current publication: Site 94 / lot 5B','## Historical publication: Site 94 / lot 5B'))

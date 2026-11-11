@@ -1,0 +1,91 @@
+{
+  "schema": "logos-engine.lot6a.native-publication.v1",
+  "status": "succeeded",
+  "siteVersion": 96,
+  "nativeVersion": "0.60.0",
+  "commit": "cdaceea1c8918430a70b95fa427b31fcd22d290c",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "deploymentId": "appgdep_6af470b6d1948191b31946e4190a17a6",
+  "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_a7a406cef8e88191beac45e5b1bedbe4",
+  "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+  "updatedAt": "2026-11-11T13:42:33.125977+00:00",
+  "recordedAt": "2026-11-11T13:43:00.592Z",
+  "audienceRevision": 3,
+  "audience": {
+    "recordedAt": "2026-11-11T13:41:53.853Z",
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "version": 95,
+    "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "role": "owner",
+    "access_mode": "custom",
+    "audienceRevision": 3,
+    "allowed_account_user_ids": [
+      "3661d9ac-259d-4929-9330-7252c4ade156"
+    ],
+    "allowed_editors": [],
+    "allowed_tenant_group_ids": [],
+    "allowed_workspace_group_ids": [],
+    "external_visitor_count": 0
+  },
+  "archive": {
+    "path": "/workspace/sites/sra-lot6a-publication-artifacts-20261111/site-step-5.tar.gz",
+    "bytes": 14832691,
+    "sha256": "a22ad0a69af78c68492b8e0c899d543d2baa3987bc5275a517ac30a1c0b74328"
+  },
+  "finalSourceBuildVerification": {
+    "path": "/workspace/sites/sra-lot6a-publication-artifacts-20261111/final-source-build-verification.json",
+    "bytes": 1729281,
+    "sha256": "ba39674e590a6939106d73b11fd77ea04ad4103d04408e3eb60deac1613644bc"
+  },
+  "sourcePushPlan": {
+    "path": "/workspace/sites/sra-lot6a-publication-artifacts-20261111/lot6a-source-push-plan.json",
+    "bytes": 268084,
+    "sha256": "83f83aa08569c4ed19f27c40132deb85318b935e2ab21700c00f92b47c0f9176"
+  },
+  "preparation": {
+    "path": "/workspace/sites/sra-lot6a-publication-artifacts-20261111/worktree-preparation.json",
+    "bytes": 1163874,
+    "sha256": "76f72e9f739c176398df6573ccfeed7275444bf917e1144a3750476d830edb0b"
+  },
+  "actualRequest": {
+    "request": {
+      "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+      "commit_sha": "cdaceea1c8918430a70b95fa427b31fcd22d290c",
+      "archive": "/workspace/sites/sra-lot6a-publication-artifacts-20261111/site-step-5.tar.gz"
+    },
+    "startedAt": "2026-11-11T13:42:00.590Z"
+  },
+  "actualDeploymentResponse": {
+    "id": "appgdep_6af470b6d1948191b31946e4190a17a6",
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "title": "SRA Playground",
+    "version_id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_a7a406cef8e88191beac45e5b1bedbe4",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6adbc388d79081918581b93b919d7258",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-11-11T13:42:33.125977+00:00"
+  },
+  "actualSavedVersionResponse": {
+    "id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_a7a406cef8e88191beac45e5b1bedbe4",
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "version_number": 96,
+    "source": {
+      "commit_sha": "cdaceea1c8918430a70b95fa427b31fcd22d290c"
+    },
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_000000008a5c820e804598e6c778ac40",
+      "content_hash": "sha256:1e1fd813bb0c972fc17aae12ace6e7effdc2e8c0f2ae16f0712d3622303a1b93",
+      "size_bytes": 29992960,
+      "file_count": 75
+    },
+    "screenshot_url": null,
+    "deployment_id": "appgdep_6af470b6d1948191b31946e4190a17a6"
+  },
+  "publicationExecuted": true
+}

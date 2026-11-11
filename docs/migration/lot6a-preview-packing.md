@@ -1,8 +1,10 @@
 # Lot 6A — Prévisualisation et partition des pièces
 
-## État avant publication
+## Publication du moteur confirmée
 
-**Le candidat `preview_packing`, native 0.60.0, est validé et son coût global est accepté. La suite complète de 126 fichiers a réussi ses 4 795 tests, les cinq contrôles finaux sont réussis, et les preuves ciblées, la campagne froide KATA et le contrôle navigateur sont terminés. La synthèse finale des rejeux a réussi : 11/11 résultats et 187/187 comparaisons selon la sélection 9 + 1 + 1. La présence, l’intégrité et la readiness sont validées. La hausse du temps complet est de +6,094357 % pour STCK et +3,262812 % pour SMLP, sous le seuil strict de +10 % pour chaque jeu. La publication de native 0.60.0 reste à confirmer.** Cette version du document décrit les preuves disponibles le 11 novembre 2026 ; elle ne déclare pas le candidat publié.
+**Le moteur `preview_packing`, native 0.60.0, est publié dans Site 96 et son coût global est accepté. La suite complète de 126 fichiers a réussi ses 4 795 tests, les cinq contrôles finaux sont réussis, et les preuves ciblées, la campagne froide KATA et le contrôle navigateur sont terminés. La synthèse finale des rejeux a réussi : 11/11 résultats et 187/187 comparaisons selon la sélection 9 + 1 + 1. La présence, l’intégrité et la readiness sont validées. La hausse du temps complet est de +6,094357 % pour STCK et +3,262812 % pour SMLP, sous le seuil strict de +10 % pour chaque jeu.**
+
+Le [reçu réel de publication du moteur](lot6a-evidence/publication/native-publication.json) confirme **Site 96 / native 0.60.0**, commit `cdaceea1c8918430a70b95fa427b31fcd22d290c`, avec le statut terminal **`succeeded`** le 11 novembre 2026. L’[application](https://sra-playground.yannick-fontan.chatgpt.site) conserve son URL et son audience limitée au propriétaire. Site 96 identifie ce jalon de publication du moteur, distinct des versions documentaires.
 
 Le [prédécesseur réellement publié](lot6a-evidence/publication/published-baseline-site95.json) est **Site 95 / native 0.58.0**, commit `3a70463039768f7114edae7d94d7dd33b7f36aa8`, avec une audience limitée au propriétaire. La [reprise du travail](lot6a-evidence/recovery/recovery-observation.json) a constaté la perte du précédent candidat local 6A. Ses anciens **5 080 tests** annoncés et ses anciens résultats de coût restent historiques et ne qualifient pas cette reconstruction.
 
@@ -133,7 +135,7 @@ L’[échec réel du comparateur historique strict](lot6a-evidence/performance-i
 
 Le [rapport complet de coût](lot6a-evidence/performance-integrated/results.md) conserve tous les diagnostics agrégés, les deux cohortes, les dispersions, les p95 disponibles, l’inspection, la Pause et les échantillons mémoire. STCK/SMLP mesurent le chemin commun sans acquisition Preview ; leur résultat ne quantifie pas directement le coût d’une recherche positive de partition sur KATA et ne prouve pas une stabilité sur plusieurs heures.
 
-## 6. Limites conservées et conditions de clôture
+## 6. Limites conservées et clôture de livraison
 
 Le [contrat de filiation](lot6a-preview-packing-lineage.md) et la [revue indépendante](lot6a-evidence/recovery/native-source-review.json) conservent notamment les limites suivantes :
 
@@ -144,6 +146,10 @@ Le [contrat de filiation](lot6a-preview-packing-lineage.md) et la [revue indépe
 - Une sélection sans recoloration peut être reproposée. Le journal source et le cache ne sont pas compactés ; aucune performance constante sur plusieurs heures n'est établie.
 - La comparaison du composant, la campagne KATA, le navigateur, les rejeux et le coût ont chacun leur portée. Aucun de ces reçus ne constitue une parité globale avec l'appelant V6 complet.
 
-Les tests complets, les cinq contrôles finaux, la synthèse des onze rejeux, la présence, l’intégrité, la readiness et la décision de coût sont acquis. Le [contrôle des entrées de publication](lot6a-evidence/integrated-final-02/publication-inputs.json) a également réussi : `status: passed`, `costAccepted: true`, `publicationExecuted: false`. Il lie les preuves et les octets validés sans publier le candidat. La clôture de 6A exige encore un reçu terminal de publication. Les échecs et tentatives intermédiaires restent conservés : premier passage de tests à 4 793/4 795, trois SIGKILL de cause inconnue, quatrième échec de rejeu avec diagnostic d’épuisement du tas V8, première consolidation arrêtée sur un champ de provenance absent, échec du comparateur historique de coût et [capture synthétique 03](lot6a-evidence/recovery/native-presence-synthetic-03-02.json) échouée pour absence des faits mémoire. Les réussites ultérieures ne réécrivent aucun de ces échecs.
+Les tests complets, les cinq contrôles finaux, la synthèse des onze rejeux, la présence, l’intégrité, la readiness et la décision de coût sont acquis. Le [contrôle des entrées de publication](lot6a-evidence/integrated-final-02/publication-inputs.json) a également réussi : `status: passed`, `costAccepted: true`, `publicationExecuted: false`. Ce contrôle préalable lie les preuves et les octets validés ; la publication effective est attestée séparément par le [reçu terminal Site 96](lot6a-evidence/publication/native-publication.json), qui clôt la livraison du moteur 6A.
 
-La capacité suivante du lot 6 reste **6B — `selected_rigid`**, après clôture effective de 6A. La [feuille de route générale](v6-delivery-roadmap.md) porte l'ordre et l'état des autres lots ; l'[index de preuves 6A](lot6a-evidence/README.md) donne les pièces déjà disponibles.
+La [vérification finale du transport source et du build](lot6a-evidence/publication/final-source-build-verification.json) a réussi : **cinq reçus de poussée source et 375 comparaisons**, soit les **75 fichiers applicatifs de chacune des cinq archives**, identiques octet pour octet au build validé. Le [premier échec de préparation](lot6a-evidence/publication/worktree-preparation-attempt-01.json) reste conservé ; la [restauration préalable](lot6a-evidence/publication/preparation-prerequisite-restoration.json) a ensuite rétabli **158 fichiers de preuve à l’identique**, sans modifier les sources, les tests ni le build.
+
+Les autres échecs et tentatives intermédiaires restent conservés : premier passage de tests à 4 793/4 795, trois SIGKILL de cause inconnue, quatrième échec de rejeu avec diagnostic d’épuisement du tas V8, première consolidation arrêtée sur un champ de provenance absent, échec du comparateur historique de coût et [capture synthétique 03](lot6a-evidence/recovery/native-presence-synthetic-03-02.json) échouée pour absence des faits mémoire. Les réussites ultérieures ne réécrivent aucun de ces échecs.
+
+La prochaine capacité du lot 6 est **6B — `selected_rigid`**. La [feuille de route générale](v6-delivery-roadmap.md) porte l’ordre et l’état des autres lots ; l’[index de preuves 6A](lot6a-evidence/README.md) donne les pièces de cette livraison.

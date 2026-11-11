@@ -1,0 +1,18 @@
+{
+  "schema": "logos-engine.lot6a.actual-source-workflow.v1",
+  "step": 1,
+  "exitCode": 0,
+  "result": {
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "checkout_path": "/workspace/sites/sra-lot6a-publication-20261111/.sites-checkout",
+    "commit_sha": "71dbb3ce99442db32dc21ce9821d9f57e6cf5789",
+    "archive": "/workspace/sites/sra-lot6a-publication-artifacts-20261111/site-step-1.tar.gz"
+  },
+  "startedAt": "2026-11-11T13:40:58.440Z",
+  "finishedAt": "2026-11-11T13:41:05.119Z",
+  "outputChunks": [
+    "Ready for Site workflow JSON on stdin (input is hidden).\r\n",
+    "",
+    "/workspace/sites/sra-lot6a-publication-artifacts-20261111/site-step-1.tar.gz\r\n{\"project_id\":\"appgprj_6adbc388d79081918581b93b919d7258\",\"checkout_path\":\"/workspace/sites/sra-lot6a-publication-20261111/.sites-checkout\",\"commit_sha\":\"71dbb3ce99442db32dc21ce9821d9f57e6cf5789\",\"archive\":\"/workspace/sites/sra-lot6a-publication-artifacts-20261111/site-step-1.tar.gz\"}\r\n"
+  ]
+}

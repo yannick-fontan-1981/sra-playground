@@ -4,7 +4,7 @@
 
 ## Current migration: lot 6A PreviewPacking / native 0.60.0
 
-The reconstructed `preview_packing` owner is connected in the original strategy order, with selected-return acquisition, guarded commands and exact source-state restoration. Private publication is still pending; the actual published baseline is Site 95 / native 0.58.
+The reconstructed `preview_packing` owner is connected in the original strategy order, with selected-return acquisition, guarded commands and exact source-state restoration. Private native publication is confirmed in **Site 96**, commit `cdaceea1c8918430a70b95fa427b31fcd22d290c`, preserving the owner-only audience.
 
 The final freeze contains **306 native files**, digest `ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229`, and 322 archived native/execution inputs. This is a new reconstruction from immutable original source; lost earlier 6A results are historical only.
 
@@ -20,6 +20,7 @@ The final freeze contains **306 native files**, digest `ea2b52283409971cf6ce73b8
 | [Final integrity](docs/migration/lot6a-evidence/integrated-final-02/delivery-integrity.json) | **`passed`**, 703 source/test files, 371 build inputs, 13 regression execution inputs, 12 byte-identical restored reports |
 | [Pre-measurement readiness](docs/migration/lot6a-evidence/performance-integrated/readiness.json) | **`ready`**, actual evidence and prerequisites bound before measurement |
 | [Publication inputs](docs/migration/lot6a-evidence/integrated-final-02/publication-inputs.json) | **`passed`**, accepted cost and validated bytes bound; this receipt performs no publication |
+| [Verified source transport](docs/migration/lot6a-evidence/publication/final-source-build-verification.json) | **5 actual source pushes**, 75 application members per archive and **375 exact comparisons**, without rebuilding |
 
 The register now has **63/76 connected entries (82.9%), 13 remaining**. Coverage retains 195 component-verified modules, 148 partial transfers and 1,026 pending; no module is fully verified and all six full-migration gates remain false.
 
@@ -31,7 +32,7 @@ The 126-file scope explicitly excludes three inherited modules that execute the 
 
 The [cumulative KATA clock](docs/migration/lot6a-evidence/case-clock.json) is closed within budget at **2256.934540 / 2,400 seconds**, leaving **143.065460 seconds unused**; earlier charges and attempts remain included.
 
-**Next in this lane after 6A closure: 6B `selected_rigid`**, followed by `observed_rigid_cargo` and `shared_settlement`. See the [updated roadmap](docs/migration/v6-delivery-roadmap.md), [6A report](docs/migration/lot6a-preview-packing.md), [source lineage](docs/migration/lot6a-preview-packing-lineage.md) and [evidence index](docs/migration/lot6a-evidence/README.md).
+**6A is closed within its stated scope. Next in this lane: 6B `selected_rigid`**, followed by `observed_rigid_cargo` and `shared_settlement`. See the [updated roadmap](docs/migration/v6-delivery-roadmap.md), [6A report](docs/migration/lot6a-preview-packing.md), [source lineage](docs/migration/lot6a-preview-packing-lineage.md) and [evidence index](docs/migration/lot6a-evidence/README.md).
 
 <!-- LOT6A_README_CURRENT_END -->
 
