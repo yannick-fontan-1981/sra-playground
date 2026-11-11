@@ -1,0 +1,2104 @@
+{
+  "schema": "logos-engine.lot6b.qualified-eleven-recorded-regressions.v1",
+  "finishedAt": "2026-11-11T20:01:38.745293+00:00",
+  "status": "passed",
+  "scope": "Exact eleven-case archived public regression cohort using the selected successful attempts; prior failed attempt retained.",
+  "declaredCases": 11,
+  "casesPassed": 11,
+  "comparisonChecksPassed": 187,
+  "comparisonChecksExpected": 187,
+  "recordedActions": 390,
+  "sealedPrefixes": 289,
+  "selectedSuccessfulAttempts": 11,
+  "actualAttemptsRetained": 12,
+  "allExecutedAttemptsPassed": false,
+  "nativeDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+  "nativeFiles": 322,
+  "currentNativeMembershipAndBytesVerified": true,
+  "originalCaseDeclaration": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/recorded-regression-cases.json",
+    "bytes": 8489,
+    "sha256": "408324f914cc4c0f39f95a926967fa6685f347a264e499df507b78d2679f40c9"
+  },
+  "newAttemptDeclaration": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/execution-declaration.json",
+    "bytes": 20655,
+    "sha256": "8960a54fafce54041c98e65cb002cc4d9ca8d40b070bac2fa494b3f7135ed55a"
+  },
+  "nativeManifest": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/frozen-candidate/source-manifest.json",
+    "bytes": 38246,
+    "sha256": "2098197ea6c45c06bf42983bc1b47cd2dbe15a49f43b2f647d1884e591649f42"
+  },
+  "sourceIntegration": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/source-integration.json",
+    "bytes": 5942,
+    "sha256": "2a54bb7229c34a0eb529530c0719cc2d223dfd33f2efd5d1eae3235fcc9fea5f"
+  },
+  "oldWatchAddendum": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-watch-addendum-02.json",
+    "bytes": 24761,
+    "sha256": "bb1d74e455f11cd87f4aa18a6690408f2e57f235d726152b742ad554a89745ee"
+  },
+  "strictComparisonCheckNames": [
+    "both runs passed with the same declared game and target",
+    "same production budgets, source reference and opaque game asset provenance",
+    "same complete initial public packet hash and public state",
+    "every archived public packet independently hashes to the v53 baseline",
+    "every archived host-only command equals its prior baseline command",
+    "same commands, complete returned packet hashes, animation lengths and primitive boundaries",
+    "same selected family/group/kind/subquestion, acquired prefix lengths and retained solver scalars",
+    "same retained coordination source/preferred entries and current guard scope",
+    "same historical epoch anchors with session namespace normalized",
+    "same inherited source-series event counts on every sealed prefix",
+    "same common request outcomes and retained caller acquisition counters",
+    "same natural level boundaries and retained-session caller counters",
+    "same final public result and retained-session operation counts",
+    "same retained mechanical-domain assessments",
+    "both source runs remained unchanged and imported no Python agent module",
+    "current replay used the declared complete frozen native source",
+    "current replay identifies the exact host-only baseline and public trace"
+  ],
+  "passiveOwnerRequirements": [],
+  "newHarnessCases": [
+    "vois-051",
+    "mind-051",
+    "weav-051",
+    "tria-development-4b",
+    "craf-055",
+    "isos-development-4c",
+    "kata-060-self-consistency"
+  ],
+  "retainedLegacyHarnessCases": [
+    "catr-051",
+    "rswp-051",
+    "fogw-051",
+    "conn-050"
+  ],
+  "maximumConcurrentReplaysWithinLane": 1,
+  "nodeOldSpaceMiB": 1536,
+  "caseTimeoutSeconds": 600,
+  "outerCommandEnvelopeSeconds": 630,
+  "automaticallyQueuedNextCase": false,
+  "results": [
+    {
+      "case": "catr-051",
+      "game": "CATR",
+      "passed": true,
+      "comparisonChecksPassed": 17,
+      "comparisonChecksTotal": 17,
+      "harness": "original_legacy_replay",
+      "nativeDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+      "nativeFiles": 322,
+      "nativeSourceUnchanged": true,
+      "archivedPinsUnchanged": true,
+      "caseRowExactlyMatchesOriginalDeclaration": true,
+      "comparisonCheckNamesExactlyMatchOriginalDeclaration": true,
+      "actions": 12,
+      "prefixes": 8,
+      "nodeElapsedSeconds": 18.722003606002545,
+      "commandElapsedSeconds": 20.460767018998013,
+      "supervisedElapsedSeconds": null,
+      "startedAt": "2026-11-11T18:14:32.241656+00:00",
+      "finishedAt": "2026-11-11T18:14:53.156443+00:00",
+      "boundedReceipt": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/catr-051/bounded-command.json",
+        "bytes": 660145,
+        "sha256": "f4fbedb780a98d4aaa34e6b2ea8b4d9742d599fa72882e0f268e0978a655c686"
+      },
+      "regressionSummary": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/catr-051/regressions/regression-summary.json",
+        "bytes": 87881,
+        "sha256": "01dfd5b47a5cd9df40cb3af9a34c622e89075bf4773bc0104f7f470663789c44"
+      },
+      "watch": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/catr-051/replay-watch.json",
+        "bytes": 483162,
+        "sha256": "63ebe9d41732a72bac60b32b806851ebc05e8e2eeb803e0948e1b1de012678ee",
+        "declaredFiles": 2954,
+        "actualRecordedInputHashesMatch": true,
+        "commonPathDifferencesFromNewVoisWatch": [
+          {
+            "path": "tests/v6-selected-rigid-integration.test.ts",
+            "olderSha256": "4390b6a4d90784687c977d2aaa95d6b1e383e40a24b2e88d451163c532e5f3fa",
+            "laterSha256": "48da34d9c164b6462471c0f4b6a735757412d69d10fe3c367a0a043e2495d211"
+          }
+        ],
+        "explicitRuntimeAliasResolution": [
+          {
+            "publicPath": "public/vendor/pyodide/annotated_types-0.7.0-py3-none-any.whl",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/annotated_types-0.7.0-py3-none-any.whl",
+            "sha256": "6541523b4b16c1953d2fc9b82fb86c540eea9f78fca329ab371ed13a8b0faa51",
+            "bytes": 11963
+          },
+          {
+            "publicPath": "public/vendor/pyodide/numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "sha256": "a292c1f5d7d8a2208cd5e94fc467604c131cabcd2fc14fed6eefde121e7fabdf",
+            "bytes": 2960568
+          },
+          {
+            "publicPath": "public/vendor/pyodide/package.json",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/package.json",
+            "sha256": "40ca48e43ce4ddc68412d5b7a7ca9e2477cd4f0e672277ae468ac2245717079b",
+            "bytes": 2999
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pydantic-2.12.5-py3-none-any.whl",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pydantic-2.12.5-py3-none-any.whl",
+            "sha256": "04854875001e07a8a74d87b7c80296cba168773d8c9804e232d695f82484d7d7",
+            "bytes": 463578
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pydantic_core-2.41.5-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pydantic_core-2.41.5-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "sha256": "54703fa42a0d4d574283cfb8f08050ba7820c9a42b0a21bc1286407d9a9e54da",
+            "bytes": 1310164
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide-lock.json",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pyodide-lock.json",
+            "sha256": "5dc2fc119108bc148c7457dc86e7675b5c87e1cafd420b9c34c1eaef7b36c010",
+            "bytes": 119077
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide.asm.mjs",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pyodide.asm.mjs",
+            "sha256": "f7cdc8ece80678ceb712f8e65ebe6d3a83203a180c399865f49612a051693635",
+            "bytes": 1250344
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide.asm.wasm",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pyodide.asm.wasm",
+            "sha256": "cc36e3cab04fdfc9a63ff13eb52eae2b911bf46c025cc7b281f394bd3de1d5e6",
+            "bytes": 9598218
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide.mjs",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pyodide.mjs",
+            "sha256": "6f1d60f7bf529beb300f0f47983c921d3982363640ba20af0e38efdddbc66109",
+            "bytes": 17931
+          },
+          {
+            "publicPath": "public/vendor/pyodide/python_stdlib.zip",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/python_stdlib.zip",
+            "sha256": "fa1957e5777068fc4f7437f96d860ae2fbe9c19732ba06c84e004ec16dd7dd7a",
+            "bytes": 2545637
+          },
+          {
+            "publicPath": "public/vendor/pyodide/typing_extensions-4.15.0-py3-none-any.whl",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/typing_extensions-4.15.0-py3-none-any.whl",
+            "sha256": "4fec68770a05408e668a4fa53d6bf4f0f684b9dacf820c7c5d6e97d3ad225e29",
+            "bytes": 44613
+          },
+          {
+            "publicPath": "public/vendor/pyodide/typing_inspection-0.4.2-py3-none-any.whl",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/typing_inspection-0.4.2-py3-none-any.whl",
+            "sha256": "deb989630985f7a7296b90357a947a804a7612cecbb6439d6e71128e01f61051",
+            "bytes": 14610
+          }
+        ],
+        "runtimeAliasChronologyVerified": true
+      },
+      "caseManifest": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/catr-051/case-manifest.json",
+        "bytes": 3544,
+        "sha256": "50d29a6395981ffe95bb4b4fad38536c92aeadb6eb482c99cc2139e84fd5448c"
+      },
+      "nativeManifest": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/catr-051/source-manifest.json",
+        "bytes": 38246,
+        "sha256": "2098197ea6c45c06bf42983bc1b47cd2dbe15a49f43b2f647d1884e591649f42"
+      },
+      "baseline": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz",
+        "sha256": "379ce17151369af5ba39e205cc8b2882aa4e97a3dd8909b9c831a7b2b0ac7fb6",
+        "bytes": 1649205
+      },
+      "trace": {
+        "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-public-trace.json.gz",
+        "sha256": "e152eb2705947addd1506cb01872d23770d188cb1dd46c86dcbc9bdf7f4f2816",
+        "bytes": 24340
+      },
+      "report": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/catr-051/regressions/catr-051-replay.json.gz",
+        "sha256": "7c036b03dac45d7576697e087e4a5239d5c387362fd059a3c7659c7983e89d8f",
+        "bytes": 2240051
+      },
+      "comparison": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/catr-051/regressions/catr-051-comparison.json",
+        "sha256": "f72119ab4c01e9dc7ce21b33b4fa3c3c5dfbfa2a04fa655aeb405e54bbd568ff",
+        "bytes": 10688
+      },
+      "execution": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/catr-051/regressions/catr-051-execution.json",
+        "sha256": "f994be0763ea9f4b221278a78e8b2f2703f87da3f95c5237371234714a1a8055",
+        "bytes": 5168
+      },
+      "passiveOwnerPresence": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/catr-051/regressions/catr-051-passive-owner-presence.json",
+        "sha256": "bc08ba2618a2ca306ffc66dac74512114cdb66984cfa8f20045b80dee4c49cea",
+        "bytes": 1182
+      },
+      "oracleObservation": null,
+      "hostPreparation": null,
+      "historicalRootCollectedBeforeHarnessImport": null,
+      "nodeExitObservedBeforeComparison": null
+    },
+    {
+      "case": "rswp-051",
+      "game": "RSWP",
+      "passed": true,
+      "comparisonChecksPassed": 17,
+      "comparisonChecksTotal": 17,
+      "harness": "original_legacy_replay",
+      "nativeDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+      "nativeFiles": 322,
+      "nativeSourceUnchanged": true,
+      "archivedPinsUnchanged": true,
+      "caseRowExactlyMatchesOriginalDeclaration": true,
+      "comparisonCheckNamesExactlyMatchOriginalDeclaration": true,
+      "actions": 19,
+      "prefixes": 11,
+      "nodeElapsedSeconds": 32.09318083100152,
+      "commandElapsedSeconds": 35.861023433997616,
+      "supervisedElapsedSeconds": 36.88218261599832,
+      "startedAt": "2026-11-11T19:18:14.244884+00:00",
+      "finishedAt": "2026-11-11T19:18:50.530228+00:00",
+      "boundedReceipt": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/rswp-051/bounded-command.json",
+        "bytes": 660141,
+        "sha256": "cf7a4804ee3a4d85a4202103c9f1719df5b79a1f234e03ff18153683907ee2aa"
+      },
+      "regressionSummary": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/rswp-051/regressions/regression-summary.json",
+        "bytes": 87861,
+        "sha256": "7d09286065f983f604f79a03dcec2f18405837e2258f3fa3b15ee2886ae038d4"
+      },
+      "watch": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/rswp-051/replay-watch-attempt02.json",
+        "bytes": 483604,
+        "sha256": "4bfa11b7db8c70b673c9e669a24af05595f9ca2ccb6cac9eaf3e81cbd9f6b8f4",
+        "declaredFiles": 2954,
+        "actualRecordedInputHashesMatch": true,
+        "commonPathDifferencesFromNewVoisWatch": [],
+        "explicitRuntimeAliasResolution": [
+          {
+            "publicPath": "public/vendor/pyodide/annotated_types-0.7.0-py3-none-any.whl",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/annotated_types-0.7.0-py3-none-any.whl",
+            "sha256": "6541523b4b16c1953d2fc9b82fb86c540eea9f78fca329ab371ed13a8b0faa51",
+            "bytes": 11963
+          },
+          {
+            "publicPath": "public/vendor/pyodide/numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "sha256": "a292c1f5d7d8a2208cd5e94fc467604c131cabcd2fc14fed6eefde121e7fabdf",
+            "bytes": 2960568
+          },
+          {
+            "publicPath": "public/vendor/pyodide/package.json",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/package.json",
+            "sha256": "40ca48e43ce4ddc68412d5b7a7ca9e2477cd4f0e672277ae468ac2245717079b",
+            "bytes": 2999
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pydantic-2.12.5-py3-none-any.whl",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pydantic-2.12.5-py3-none-any.whl",
+            "sha256": "04854875001e07a8a74d87b7c80296cba168773d8c9804e232d695f82484d7d7",
+            "bytes": 463578
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pydantic_core-2.41.5-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pydantic_core-2.41.5-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "sha256": "54703fa42a0d4d574283cfb8f08050ba7820c9a42b0a21bc1286407d9a9e54da",
+            "bytes": 1310164
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide-lock.json",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pyodide-lock.json",
+            "sha256": "5dc2fc119108bc148c7457dc86e7675b5c87e1cafd420b9c34c1eaef7b36c010",
+            "bytes": 119077
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide.asm.mjs",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pyodide.asm.mjs",
+            "sha256": "f7cdc8ece80678ceb712f8e65ebe6d3a83203a180c399865f49612a051693635",
+            "bytes": 1250344
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide.asm.wasm",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pyodide.asm.wasm",
+            "sha256": "cc36e3cab04fdfc9a63ff13eb52eae2b911bf46c025cc7b281f394bd3de1d5e6",
+            "bytes": 9598218
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide.mjs",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pyodide.mjs",
+            "sha256": "6f1d60f7bf529beb300f0f47983c921d3982363640ba20af0e38efdddbc66109",
+            "bytes": 17931
+          },
+          {
+            "publicPath": "public/vendor/pyodide/python_stdlib.zip",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/python_stdlib.zip",
+            "sha256": "fa1957e5777068fc4f7437f96d860ae2fbe9c19732ba06c84e004ec16dd7dd7a",
+            "bytes": 2545637
+          },
+          {
+            "publicPath": "public/vendor/pyodide/typing_extensions-4.15.0-py3-none-any.whl",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/typing_extensions-4.15.0-py3-none-any.whl",
+            "sha256": "4fec68770a05408e668a4fa53d6bf4f0f684b9dacf820c7c5d6e97d3ad225e29",
+            "bytes": 44613
+          },
+          {
+            "publicPath": "public/vendor/pyodide/typing_inspection-0.4.2-py3-none-any.whl",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/typing_inspection-0.4.2-py3-none-any.whl",
+            "sha256": "deb989630985f7a7296b90357a947a804a7612cecbb6439d6e71128e01f61051",
+            "bytes": 14610
+          }
+        ],
+        "runtimeAliasChronologyVerified": true
+      },
+      "caseManifest": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/rswp-051/case-manifest.json",
+        "bytes": 3530,
+        "sha256": "3b440075515f026914fdadfc6b29b0c69846dba57500a5fe36628757b39d0819"
+      },
+      "nativeManifest": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/rswp-051/source-manifest.json",
+        "bytes": 38246,
+        "sha256": "2098197ea6c45c06bf42983bc1b47cd2dbe15a49f43b2f647d1884e591649f42"
+      },
+      "baseline": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz",
+        "sha256": "5de1bbc32db1a3dffdf5c350ef70ca90142007c6ebc7735f8b8c56e9fdfa00ba",
+        "bytes": 2585868
+      },
+      "trace": {
+        "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+        "sha256": "43f32a75b0d8cd747457602a3c3f113e5d63ec621e45bb2bc1d195f242997755",
+        "bytes": 41445
+      },
+      "report": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/rswp-051/regressions/rswp-051-replay.json.gz",
+        "sha256": "1567424240a8b97cbb17c45d9e87dcfa0794fd048c5e4237e85bdee372591ed4",
+        "bytes": 3463124
+      },
+      "comparison": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/rswp-051/regressions/rswp-051-comparison.json",
+        "sha256": "27fa3c10b4e42e9a5f46e7ee24b46013e5e90591d82a91c0f9003ce583a13fa4",
+        "bytes": 10675
+      },
+      "execution": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/rswp-051/regressions/rswp-051-execution.json",
+        "sha256": "28c7bf89c22fa59c99d96c416a1c63d012ec59b74d2bb31e064e653ea433128b",
+        "bytes": 5147
+      },
+      "passiveOwnerPresence": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/rswp-051/regressions/rswp-051-passive-owner-presence.json",
+        "sha256": "ba920a8f7ae867626adfe8851c8de678a4f2f26e86e429aee2062c6447398cba",
+        "bytes": 1182
+      },
+      "oracleObservation": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/rswp-051/oracle-execution-observation.json",
+        "bytes": 2453,
+        "sha256": "58f826a2eb8aadc92d046bf601b1092c136bfe2d2bd327cf149bf87dcf9c06e2"
+      },
+      "hostPreparation": null,
+      "historicalRootCollectedBeforeHarnessImport": null,
+      "nodeExitObservedBeforeComparison": null
+    },
+    {
+      "case": "fogw-051",
+      "game": "FOGW",
+      "passed": true,
+      "comparisonChecksPassed": 17,
+      "comparisonChecksTotal": 17,
+      "harness": "original_legacy_replay",
+      "nativeDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+      "nativeFiles": 322,
+      "nativeSourceUnchanged": true,
+      "archivedPinsUnchanged": true,
+      "caseRowExactlyMatchesOriginalDeclaration": true,
+      "comparisonCheckNamesExactlyMatchOriginalDeclaration": true,
+      "actions": 50,
+      "prefixes": 27,
+      "nodeElapsedSeconds": 103.92664741100089,
+      "commandElapsedSeconds": 112.40135632900274,
+      "supervisedElapsedSeconds": 113.4484505750006,
+      "startedAt": "2026-11-11T19:19:05.306564+00:00",
+      "finishedAt": "2026-11-11T19:20:58.237776+00:00",
+      "boundedReceipt": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/fogw-051/bounded-command.json",
+        "bytes": 660143,
+        "sha256": "995de86505979df08b9bc3955b0f5691ac7f8ca162ffc00aa771d67195a88448"
+      },
+      "regressionSummary": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/fogw-051/regressions/regression-summary.json",
+        "bytes": 87867,
+        "sha256": "e171be2ce1f9e4e6387a84fa0cb2b835486f36d8ee44f08754d90db2be29534a"
+      },
+      "watch": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/fogw-051/replay-watch-attempt02.json",
+        "bytes": 483606,
+        "sha256": "ba7eabc821b7443773ad1ada38f70aedebfc099d09d267570f8ae460663441ea",
+        "declaredFiles": 2954,
+        "actualRecordedInputHashesMatch": true,
+        "commonPathDifferencesFromNewVoisWatch": [],
+        "explicitRuntimeAliasResolution": [
+          {
+            "publicPath": "public/vendor/pyodide/annotated_types-0.7.0-py3-none-any.whl",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/annotated_types-0.7.0-py3-none-any.whl",
+            "sha256": "6541523b4b16c1953d2fc9b82fb86c540eea9f78fca329ab371ed13a8b0faa51",
+            "bytes": 11963
+          },
+          {
+            "publicPath": "public/vendor/pyodide/numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "sha256": "a292c1f5d7d8a2208cd5e94fc467604c131cabcd2fc14fed6eefde121e7fabdf",
+            "bytes": 2960568
+          },
+          {
+            "publicPath": "public/vendor/pyodide/package.json",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/package.json",
+            "sha256": "40ca48e43ce4ddc68412d5b7a7ca9e2477cd4f0e672277ae468ac2245717079b",
+            "bytes": 2999
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pydantic-2.12.5-py3-none-any.whl",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pydantic-2.12.5-py3-none-any.whl",
+            "sha256": "04854875001e07a8a74d87b7c80296cba168773d8c9804e232d695f82484d7d7",
+            "bytes": 463578
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pydantic_core-2.41.5-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pydantic_core-2.41.5-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "sha256": "54703fa42a0d4d574283cfb8f08050ba7820c9a42b0a21bc1286407d9a9e54da",
+            "bytes": 1310164
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide-lock.json",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pyodide-lock.json",
+            "sha256": "5dc2fc119108bc148c7457dc86e7675b5c87e1cafd420b9c34c1eaef7b36c010",
+            "bytes": 119077
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide.asm.mjs",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pyodide.asm.mjs",
+            "sha256": "f7cdc8ece80678ceb712f8e65ebe6d3a83203a180c399865f49612a051693635",
+            "bytes": 1250344
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide.asm.wasm",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pyodide.asm.wasm",
+            "sha256": "cc36e3cab04fdfc9a63ff13eb52eae2b911bf46c025cc7b281f394bd3de1d5e6",
+            "bytes": 9598218
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide.mjs",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pyodide.mjs",
+            "sha256": "6f1d60f7bf529beb300f0f47983c921d3982363640ba20af0e38efdddbc66109",
+            "bytes": 17931
+          },
+          {
+            "publicPath": "public/vendor/pyodide/python_stdlib.zip",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/python_stdlib.zip",
+            "sha256": "fa1957e5777068fc4f7437f96d860ae2fbe9c19732ba06c84e004ec16dd7dd7a",
+            "bytes": 2545637
+          },
+          {
+            "publicPath": "public/vendor/pyodide/typing_extensions-4.15.0-py3-none-any.whl",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/typing_extensions-4.15.0-py3-none-any.whl",
+            "sha256": "4fec68770a05408e668a4fa53d6bf4f0f684b9dacf820c7c5d6e97d3ad225e29",
+            "bytes": 44613
+          },
+          {
+            "publicPath": "public/vendor/pyodide/typing_inspection-0.4.2-py3-none-any.whl",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/typing_inspection-0.4.2-py3-none-any.whl",
+            "sha256": "deb989630985f7a7296b90357a947a804a7612cecbb6439d6e71128e01f61051",
+            "bytes": 14610
+          }
+        ],
+        "runtimeAliasChronologyVerified": true
+      },
+      "caseManifest": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/fogw-051/case-manifest.json",
+        "bytes": 3532,
+        "sha256": "ab9ea74eb95b79ac646098e6c5b90c32e45907f8805f036096116c75185ebf46"
+      },
+      "nativeManifest": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/fogw-051/source-manifest.json",
+        "bytes": 38246,
+        "sha256": "2098197ea6c45c06bf42983bc1b47cd2dbe15a49f43b2f647d1884e591649f42"
+      },
+      "baseline": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz",
+        "sha256": "fe037e48df8dd3a7c302a5e85355b2b9555daa6d9d8aa56f7772fc363732726c",
+        "bytes": 8174480
+      },
+      "trace": {
+        "path": "docs/migration/lot3e-evidence/final/fogw-reception-session/fogw-public-trace.json.gz",
+        "sha256": "1d4e92e6ef063e7799bfb4237b17beb148b49bde4ab46ef26ef91a3271d44b46",
+        "bytes": 39060
+      },
+      "report": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/fogw-051/regressions/fogw-051-replay.json.gz",
+        "sha256": "933b21b5ab81844a2d7bd720dbf83fd0118d95657be9bc346e9b92113af51747",
+        "bytes": 10856525
+      },
+      "comparison": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/fogw-051/regressions/fogw-051-comparison.json",
+        "sha256": "bdb82c05dd9b29db5860c6a7cf6f161be23f5de23db9199825cf9375dfe72eed",
+        "bytes": 10678
+      },
+      "execution": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/fogw-051/regressions/fogw-051-execution.json",
+        "sha256": "c4b93ff769e7cd0dde0148ec9c79d24d40a0c60ca1402e2473c0a96e45ae6b37",
+        "bytes": 5153
+      },
+      "passiveOwnerPresence": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/fogw-051/regressions/fogw-051-passive-owner-presence.json",
+        "sha256": "348ff820a4c9ad7a28278c9e1bc91f8baff5a314bbb629e23c595a00d5bdf184",
+        "bytes": 1183
+      },
+      "oracleObservation": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/fogw-051/oracle-execution-observation.json",
+        "bytes": 2454,
+        "sha256": "9b5860355e827953d9d4e8e61df4bb64d71483c8683853ba150e6f20a65fef96"
+      },
+      "hostPreparation": null,
+      "historicalRootCollectedBeforeHarnessImport": null,
+      "nodeExitObservedBeforeComparison": null
+    },
+    {
+      "case": "vois-051",
+      "game": "VOIS",
+      "passed": true,
+      "comparisonChecksPassed": 17,
+      "comparisonChecksTotal": 17,
+      "harness": "released_baseline_streamlog",
+      "nativeDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+      "nativeFiles": 322,
+      "nativeSourceUnchanged": true,
+      "archivedPinsUnchanged": true,
+      "caseRowExactlyMatchesOriginalDeclaration": true,
+      "comparisonCheckNamesExactlyMatchOriginalDeclaration": true,
+      "actions": 78,
+      "prefixes": 42,
+      "nodeElapsedSeconds": 173.86063695900157,
+      "commandElapsedSeconds": 184.31135274999906,
+      "supervisedElapsedSeconds": 185.64991487700172,
+      "startedAt": "2026-11-11T19:42:41.905056+00:00",
+      "finishedAt": "2026-11-11T19:45:46.856686+00:00",
+      "boundedReceipt": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/bounded-command.json",
+        "bytes": 664216,
+        "sha256": "2df926f97a177056f17702abd0dc296c3fcdd9f828b7ee3d34928aa0dee11cf2"
+      },
+      "regressionSummary": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/regressions/regression-summary.json",
+        "bytes": 101063,
+        "sha256": "96f33e1ce342c28052cb05b8379e9d24677a0a53eb06dbad558d811288e753dd"
+      },
+      "watch": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/replay-watch.json",
+        "bytes": 486670,
+        "sha256": "19cd3cda2c589438dfab91cc159dd49345b1cd3d66f0c6d4a24b6a88e2f58696",
+        "declaredFiles": 2974,
+        "actualRecordedInputHashesMatch": true,
+        "commonPathDifferencesFromNewVoisWatch": [],
+        "explicitRuntimeAliasResolution": [
+          {
+            "publicPath": "public/vendor/pyodide/annotated_types-0.7.0-py3-none-any.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/annotated_types-0.7.0-py3-none-any.whl",
+            "sha256": "6541523b4b16c1953d2fc9b82fb86c540eea9f78fca329ab371ed13a8b0faa51",
+            "bytes": 11963
+          },
+          {
+            "publicPath": "public/vendor/pyodide/numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "sha256": "a292c1f5d7d8a2208cd5e94fc467604c131cabcd2fc14fed6eefde121e7fabdf",
+            "bytes": 2960568
+          },
+          {
+            "publicPath": "public/vendor/pyodide/package.json",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/package.json",
+            "sha256": "40ca48e43ce4ddc68412d5b7a7ca9e2477cd4f0e672277ae468ac2245717079b",
+            "bytes": 2999
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pydantic-2.12.5-py3-none-any.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pydantic-2.12.5-py3-none-any.whl",
+            "sha256": "04854875001e07a8a74d87b7c80296cba168773d8c9804e232d695f82484d7d7",
+            "bytes": 463578
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pydantic_core-2.41.5-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pydantic_core-2.41.5-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "sha256": "54703fa42a0d4d574283cfb8f08050ba7820c9a42b0a21bc1286407d9a9e54da",
+            "bytes": 1310164
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide-lock.json",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pyodide-lock.json",
+            "sha256": "5dc2fc119108bc148c7457dc86e7675b5c87e1cafd420b9c34c1eaef7b36c010",
+            "bytes": 119077
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide.asm.mjs",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pyodide.asm.mjs",
+            "sha256": "f7cdc8ece80678ceb712f8e65ebe6d3a83203a180c399865f49612a051693635",
+            "bytes": 1250344
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide.asm.wasm",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pyodide.asm.wasm",
+            "sha256": "cc36e3cab04fdfc9a63ff13eb52eae2b911bf46c025cc7b281f394bd3de1d5e6",
+            "bytes": 9598218
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide.mjs",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pyodide.mjs",
+            "sha256": "6f1d60f7bf529beb300f0f47983c921d3982363640ba20af0e38efdddbc66109",
+            "bytes": 17931
+          },
+          {
+            "publicPath": "public/vendor/pyodide/python_stdlib.zip",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/python_stdlib.zip",
+            "sha256": "fa1957e5777068fc4f7437f96d860ae2fbe9c19732ba06c84e004ec16dd7dd7a",
+            "bytes": 2545637
+          },
+          {
+            "publicPath": "public/vendor/pyodide/typing_extensions-4.15.0-py3-none-any.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/typing_extensions-4.15.0-py3-none-any.whl",
+            "sha256": "4fec68770a05408e668a4fa53d6bf4f0f684b9dacf820c7c5d6e97d3ad225e29",
+            "bytes": 44613
+          },
+          {
+            "publicPath": "public/vendor/pyodide/typing_inspection-0.4.2-py3-none-any.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/typing_inspection-0.4.2-py3-none-any.whl",
+            "sha256": "deb989630985f7a7296b90357a947a804a7612cecbb6439d6e71128e01f61051",
+            "bytes": 14610
+          }
+        ],
+        "runtimeAliasChronologyVerified": true
+      },
+      "caseManifest": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/case-manifest.json",
+        "bytes": 3643,
+        "sha256": "d797ad03c58431ea3395432656e97fb13e100096cd1897664dea6559b089dc8f"
+      },
+      "nativeManifest": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/source-manifest.json",
+        "bytes": 38246,
+        "sha256": "2098197ea6c45c06bf42983bc1b47cd2dbe15a49f43b2f647d1884e591649f42"
+      },
+      "baseline": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz",
+        "sha256": "39a6e6551cf94a48842b154afdc2256dafd88fd93404e4776bd67b24d5a4796d",
+        "bytes": 10678168
+      },
+      "trace": {
+        "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+        "sha256": "d642c805485571c0e54ed3421644cbd8463ca3697ce135b223f635487b58069d",
+        "bytes": 19976
+      },
+      "report": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/regressions/vois-051-replay.json.gz",
+        "sha256": "80b76bf344f46023e2203e9cbf0e23276d6119a20af041f3fe4ef83dd15f132b",
+        "bytes": 14063217
+      },
+      "comparison": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/regressions/vois-051-comparison.json",
+        "sha256": "e335b33375a845786f69eb70eabc664bb199a4364fe38a84c308a319757b0b65",
+        "bytes": 11071
+      },
+      "execution": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/regressions/vois-051-execution.json",
+        "sha256": "4ceec41c9ceadffb274a301e5715a23e63d807ef90e7265f0ef79b4a839b8826",
+        "bytes": 15240
+      },
+      "passiveOwnerPresence": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/regressions/vois-051-passive-owner-presence.json",
+        "sha256": "0d6db4702c76e3024fe1294e519ef38c282dd5025355f25da4d50532cc94b569",
+        "bytes": 1225
+      },
+      "oracleObservation": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/oracle-execution-observation.json",
+        "bytes": 4192,
+        "sha256": "a6dbc2ad99d8eb06b76abad5f58c9309be786647d89d2f7a05f45c598d658a87"
+      },
+      "hostPreparation": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/regressions/vois-051-host-preparation.json",
+        "sha256": "5a9f3633b9676adeb000b85c9eff36d7f70116cfbbade3cae2f301f063fc4030",
+        "bytes": 18591
+      },
+      "historicalRootCollectedBeforeHarnessImport": true,
+      "nodeExitObservedBeforeComparison": true
+    },
+    {
+      "case": "conn-050",
+      "game": "CONN",
+      "passed": true,
+      "comparisonChecksPassed": 17,
+      "comparisonChecksTotal": 17,
+      "harness": "original_legacy_replay",
+      "nativeDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+      "nativeFiles": 322,
+      "nativeSourceUnchanged": true,
+      "archivedPinsUnchanged": true,
+      "caseRowExactlyMatchesOriginalDeclaration": true,
+      "comparisonCheckNamesExactlyMatchOriginalDeclaration": true,
+      "actions": 21,
+      "prefixes": 21,
+      "nodeElapsedSeconds": 56.49650877000022,
+      "commandElapsedSeconds": 61.100856850996934,
+      "supervisedElapsedSeconds": 62.29113870600122,
+      "startedAt": "2026-11-11T19:27:02.044469+00:00",
+      "finishedAt": "2026-11-11T19:28:03.611870+00:00",
+      "boundedReceipt": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/conn-050/bounded-command.json",
+        "bytes": 660157,
+        "sha256": "e60690b7323f52f67e9a27b8acd0e9e9ee76dc7e47bdcc638d006e87c265314e"
+      },
+      "regressionSummary": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/conn-050/regressions/regression-summary.json",
+        "bytes": 87893,
+        "sha256": "fe49d06cebbf2efe5780f492658e36a1b1e27a3a4948bc927ff945dc0ec6736d"
+      },
+      "watch": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/conn-050/replay-watch-attempt02.json",
+        "bytes": 483620,
+        "sha256": "493d2d4c2d545bac71365b60d72a6d53c353a08923765474f6a6e856b02d5679",
+        "declaredFiles": 2954,
+        "actualRecordedInputHashesMatch": true,
+        "commonPathDifferencesFromNewVoisWatch": [],
+        "explicitRuntimeAliasResolution": [
+          {
+            "publicPath": "public/vendor/pyodide/annotated_types-0.7.0-py3-none-any.whl",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/annotated_types-0.7.0-py3-none-any.whl",
+            "sha256": "6541523b4b16c1953d2fc9b82fb86c540eea9f78fca329ab371ed13a8b0faa51",
+            "bytes": 11963
+          },
+          {
+            "publicPath": "public/vendor/pyodide/numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "sha256": "a292c1f5d7d8a2208cd5e94fc467604c131cabcd2fc14fed6eefde121e7fabdf",
+            "bytes": 2960568
+          },
+          {
+            "publicPath": "public/vendor/pyodide/package.json",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/package.json",
+            "sha256": "40ca48e43ce4ddc68412d5b7a7ca9e2477cd4f0e672277ae468ac2245717079b",
+            "bytes": 2999
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pydantic-2.12.5-py3-none-any.whl",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pydantic-2.12.5-py3-none-any.whl",
+            "sha256": "04854875001e07a8a74d87b7c80296cba168773d8c9804e232d695f82484d7d7",
+            "bytes": 463578
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pydantic_core-2.41.5-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pydantic_core-2.41.5-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "sha256": "54703fa42a0d4d574283cfb8f08050ba7820c9a42b0a21bc1286407d9a9e54da",
+            "bytes": 1310164
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide-lock.json",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pyodide-lock.json",
+            "sha256": "5dc2fc119108bc148c7457dc86e7675b5c87e1cafd420b9c34c1eaef7b36c010",
+            "bytes": 119077
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide.asm.mjs",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pyodide.asm.mjs",
+            "sha256": "f7cdc8ece80678ceb712f8e65ebe6d3a83203a180c399865f49612a051693635",
+            "bytes": 1250344
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide.asm.wasm",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pyodide.asm.wasm",
+            "sha256": "cc36e3cab04fdfc9a63ff13eb52eae2b911bf46c025cc7b281f394bd3de1d5e6",
+            "bytes": 9598218
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide.mjs",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pyodide.mjs",
+            "sha256": "6f1d60f7bf529beb300f0f47983c921d3982363640ba20af0e38efdddbc66109",
+            "bytes": 17931
+          },
+          {
+            "publicPath": "public/vendor/pyodide/python_stdlib.zip",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/python_stdlib.zip",
+            "sha256": "fa1957e5777068fc4f7437f96d860ae2fbe9c19732ba06c84e004ec16dd7dd7a",
+            "bytes": 2545637
+          },
+          {
+            "publicPath": "public/vendor/pyodide/typing_extensions-4.15.0-py3-none-any.whl",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/typing_extensions-4.15.0-py3-none-any.whl",
+            "sha256": "4fec68770a05408e668a4fa53d6bf4f0f684b9dacf820c7c5d6e97d3ad225e29",
+            "bytes": 44613
+          },
+          {
+            "publicPath": "public/vendor/pyodide/typing_inspection-0.4.2-py3-none-any.whl",
+            "actualRecordedResolvedPath": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/typing_inspection-0.4.2-py3-none-any.whl",
+            "sha256": "deb989630985f7a7296b90357a947a804a7612cecbb6439d6e71128e01f61051",
+            "bytes": 14610
+          }
+        ],
+        "runtimeAliasChronologyVerified": true
+      },
+      "caseManifest": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/conn-050/case-manifest.json",
+        "bytes": 3546,
+        "sha256": "34d84cf8b212fa0c927a325e2a209c56dd5eb34ba9942d5f28f18d52f9bf81a4"
+      },
+      "nativeManifest": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/conn-050/source-manifest.json",
+        "bytes": 38246,
+        "sha256": "2098197ea6c45c06bf42983bc1b47cd2dbe15a49f43b2f647d1884e591649f42"
+      },
+      "baseline": {
+        "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz",
+        "sha256": "f3df06cff6d370874889f5183a77dd91ae585060c04ba052d0025cd2db9e3750",
+        "bytes": 2630905
+      },
+      "trace": {
+        "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-public-trace.json.gz",
+        "sha256": "fc8c7bf4529490e6e6ee04e7a5a51b389180e5fb5e35255145c59ecf4dd0f102",
+        "bytes": 56466
+      },
+      "report": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/conn-050/regressions/conn-050-replay.json.gz",
+        "sha256": "ef95bebc1c8f51b027407a5a2c74d690c9365ac91b00e747a18560e508a3eff4",
+        "bytes": 5081416
+      },
+      "comparison": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/conn-050/regressions/conn-050-comparison.json",
+        "sha256": "6ca5c75256cee0e4451d05d1f13c1b35de6765a8bc19beb03862700026f33484",
+        "bytes": 10691
+      },
+      "execution": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/conn-050/regressions/conn-050-execution.json",
+        "sha256": "3a7dfbcd7c2502e5432d10e791e090993ef75be42924340206c7dd7b8184bd21",
+        "bytes": 5179
+      },
+      "passiveOwnerPresence": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/conn-050/regressions/conn-050-passive-owner-presence.json",
+        "sha256": "52f380750af0e8a64815dba5bd1ba2c7a1b5e503107758e3a23fc4e468994368",
+        "bytes": 1182
+      },
+      "oracleObservation": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/conn-050/oracle-execution-observation.json",
+        "bytes": 2453,
+        "sha256": "e77c746584d16b421bab0fe3013eb46cc92f8dd3f70832926bc09920e581698a"
+      },
+      "hostPreparation": null,
+      "historicalRootCollectedBeforeHarnessImport": null,
+      "nodeExitObservedBeforeComparison": null
+    },
+    {
+      "case": "mind-051",
+      "game": "MIND",
+      "passed": true,
+      "comparisonChecksPassed": 17,
+      "comparisonChecksTotal": 17,
+      "harness": "released_baseline_streamlog",
+      "nativeDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+      "nativeFiles": 322,
+      "nativeSourceUnchanged": true,
+      "archivedPinsUnchanged": true,
+      "caseRowExactlyMatchesOriginalDeclaration": true,
+      "comparisonCheckNamesExactlyMatchOriginalDeclaration": true,
+      "actions": 31,
+      "prefixes": 20,
+      "nodeElapsedSeconds": 53.17519067200192,
+      "commandElapsedSeconds": 58.84340147200055,
+      "supervisedElapsedSeconds": 60.006455837999965,
+      "startedAt": "2026-11-11T19:45:58.384138+00:00",
+      "finishedAt": "2026-11-11T19:46:57.810796+00:00",
+      "boundedReceipt": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/bounded-command.json",
+        "bytes": 664212,
+        "sha256": "fc0cceeabc8f2e0b7ba67b7756ff14e1fe288a05eb3d33ff97249c358866825c"
+      },
+      "regressionSummary": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/regressions/regression-summary.json",
+        "bytes": 95850,
+        "sha256": "72401a72dab61fb0fece52f2d73f54ac4deb1e0004c73da137236bd2823cf0fe"
+      },
+      "watch": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/replay-watch.json",
+        "bytes": 486668,
+        "sha256": "5923362e23f5cb3095f6290d06a6d5ab55af9d37871857f1b5371769da1aa889",
+        "declaredFiles": 2974,
+        "actualRecordedInputHashesMatch": true,
+        "commonPathDifferencesFromNewVoisWatch": [],
+        "explicitRuntimeAliasResolution": [
+          {
+            "publicPath": "public/vendor/pyodide/annotated_types-0.7.0-py3-none-any.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/annotated_types-0.7.0-py3-none-any.whl",
+            "sha256": "6541523b4b16c1953d2fc9b82fb86c540eea9f78fca329ab371ed13a8b0faa51",
+            "bytes": 11963
+          },
+          {
+            "publicPath": "public/vendor/pyodide/numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "sha256": "a292c1f5d7d8a2208cd5e94fc467604c131cabcd2fc14fed6eefde121e7fabdf",
+            "bytes": 2960568
+          },
+          {
+            "publicPath": "public/vendor/pyodide/package.json",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/package.json",
+            "sha256": "40ca48e43ce4ddc68412d5b7a7ca9e2477cd4f0e672277ae468ac2245717079b",
+            "bytes": 2999
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pydantic-2.12.5-py3-none-any.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pydantic-2.12.5-py3-none-any.whl",
+            "sha256": "04854875001e07a8a74d87b7c80296cba168773d8c9804e232d695f82484d7d7",
+            "bytes": 463578
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pydantic_core-2.41.5-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pydantic_core-2.41.5-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "sha256": "54703fa42a0d4d574283cfb8f08050ba7820c9a42b0a21bc1286407d9a9e54da",
+            "bytes": 1310164
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide-lock.json",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pyodide-lock.json",
+            "sha256": "5dc2fc119108bc148c7457dc86e7675b5c87e1cafd420b9c34c1eaef7b36c010",
+            "bytes": 119077
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide.asm.mjs",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pyodide.asm.mjs",
+            "sha256": "f7cdc8ece80678ceb712f8e65ebe6d3a83203a180c399865f49612a051693635",
+            "bytes": 1250344
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide.asm.wasm",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pyodide.asm.wasm",
+            "sha256": "cc36e3cab04fdfc9a63ff13eb52eae2b911bf46c025cc7b281f394bd3de1d5e6",
+            "bytes": 9598218
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide.mjs",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pyodide.mjs",
+            "sha256": "6f1d60f7bf529beb300f0f47983c921d3982363640ba20af0e38efdddbc66109",
+            "bytes": 17931
+          },
+          {
+            "publicPath": "public/vendor/pyodide/python_stdlib.zip",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/python_stdlib.zip",
+            "sha256": "fa1957e5777068fc4f7437f96d860ae2fbe9c19732ba06c84e004ec16dd7dd7a",
+            "bytes": 2545637
+          },
+          {
+            "publicPath": "public/vendor/pyodide/typing_extensions-4.15.0-py3-none-any.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/typing_extensions-4.15.0-py3-none-any.whl",
+            "sha256": "4fec68770a05408e668a4fa53d6bf4f0f684b9dacf820c7c5d6e97d3ad225e29",
+            "bytes": 44613
+          },
+          {
+            "publicPath": "public/vendor/pyodide/typing_inspection-0.4.2-py3-none-any.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/typing_inspection-0.4.2-py3-none-any.whl",
+            "sha256": "deb989630985f7a7296b90357a947a804a7612cecbb6439d6e71128e01f61051",
+            "bytes": 14610
+          }
+        ],
+        "runtimeAliasChronologyVerified": true
+      },
+      "caseManifest": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/case-manifest.json",
+        "bytes": 3553,
+        "sha256": "203384273af497fe91f006374a41e4ca7e00addcb241795347c64c2d7cfb12f2"
+      },
+      "nativeManifest": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/source-manifest.json",
+        "bytes": 38246,
+        "sha256": "2098197ea6c45c06bf42983bc1b47cd2dbe15a49f43b2f647d1884e591649f42"
+      },
+      "baseline": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz",
+        "sha256": "6a187286069287a89cedb60ac0f206e0702abae5d8df0dd2615bd43c1bb5c75a",
+        "bytes": 4349054
+      },
+      "trace": {
+        "path": "docs/migration/lot7a-evidence/integrated-baseline/recorded/mind-public-trace.json.gz",
+        "sha256": "f74678fa4d9c1b5397545b648ab353c29fc0a5a4c0eb35ab36a5258bfa34ca0c",
+        "bytes": 17256
+      },
+      "report": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/regressions/mind-051-replay.json.gz",
+        "sha256": "80023012f0a10a1c48e12fa0217e6a0affc7858df4f459dddb9efa32075f3d42",
+        "bytes": 6115157
+      },
+      "comparison": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/regressions/mind-051-comparison.json",
+        "sha256": "794ffe5a71c48c23ed7108a86a99460b43782f0b47cea7dfb93d6d9496b4d895",
+        "bytes": 11067
+      },
+      "execution": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/regressions/mind-051-execution.json",
+        "sha256": "e9b07b50d78f551e5f96aacdee3f8d9c606707379f6db422bb2167b92fc5dddb",
+        "bytes": 10795
+      },
+      "passiveOwnerPresence": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/regressions/mind-051-passive-owner-presence.json",
+        "sha256": "f3a6363599f5a5225a8239da41e2be9540f73dafcdb96328d8be4664937e0609",
+        "bytes": 1224
+      },
+      "oracleObservation": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/oracle-execution-observation.json",
+        "bytes": 4188,
+        "sha256": "56a967bc3d962a823e5feec24ac4d34b2dfdc5ee4b2024c9c9fe0abea68c1992"
+      },
+      "hostPreparation": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/regressions/mind-051-host-preparation.json",
+        "sha256": "c4506b12b24d8a93c71aa546a95911553d24b2d52e9040f963994f5842d943a7",
+        "bytes": 8345
+      },
+      "historicalRootCollectedBeforeHarnessImport": true,
+      "nodeExitObservedBeforeComparison": true
+    },
+    {
+      "case": "weav-051",
+      "game": "WEAV",
+      "passed": true,
+      "comparisonChecksPassed": 17,
+      "comparisonChecksTotal": 17,
+      "harness": "released_baseline_streamlog",
+      "nativeDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+      "nativeFiles": 322,
+      "nativeSourceUnchanged": true,
+      "archivedPinsUnchanged": true,
+      "caseRowExactlyMatchesOriginalDeclaration": true,
+      "comparisonCheckNamesExactlyMatchOriginalDeclaration": true,
+      "actions": 81,
+      "prefixes": 81,
+      "nodeElapsedSeconds": 309.82305950299997,
+      "commandElapsedSeconds": 329.14830009300204,
+      "supervisedElapsedSeconds": 330.26076853799896,
+      "startedAt": "2026-11-11T19:47:05.419878+00:00",
+      "finishedAt": "2026-11-11T19:52:35.049688+00:00",
+      "boundedReceipt": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/weav-051/bounded-command.json",
+        "bytes": 664230,
+        "sha256": "3b6b925af6cdf4b9d66ac751daf24954752907534d2c75e88a0110149528e2b6"
+      },
+      "regressionSummary": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/weav-051/regressions/regression-summary.json",
+        "bytes": 106953,
+        "sha256": "7785f43da4a7dfb8706910f08477eb2f5976e09c1211ee9aaf0e697c79ca4c30"
+      },
+      "watch": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/weav-051/replay-watch.json",
+        "bytes": 486684,
+        "sha256": "2b48d9e26d7bdf5836416bb5fbc6cc7b672ea27b1ad75b8aa5a6ce5f41b76570",
+        "declaredFiles": 2974,
+        "actualRecordedInputHashesMatch": true,
+        "commonPathDifferencesFromNewVoisWatch": [],
+        "explicitRuntimeAliasResolution": [
+          {
+            "publicPath": "public/vendor/pyodide/annotated_types-0.7.0-py3-none-any.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/annotated_types-0.7.0-py3-none-any.whl",
+            "sha256": "6541523b4b16c1953d2fc9b82fb86c540eea9f78fca329ab371ed13a8b0faa51",
+            "bytes": 11963
+          },
+          {
+            "publicPath": "public/vendor/pyodide/numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "sha256": "a292c1f5d7d8a2208cd5e94fc467604c131cabcd2fc14fed6eefde121e7fabdf",
+            "bytes": 2960568
+          },
+          {
+            "publicPath": "public/vendor/pyodide/package.json",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/package.json",
+            "sha256": "40ca48e43ce4ddc68412d5b7a7ca9e2477cd4f0e672277ae468ac2245717079b",
+            "bytes": 2999
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pydantic-2.12.5-py3-none-any.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pydantic-2.12.5-py3-none-any.whl",
+            "sha256": "04854875001e07a8a74d87b7c80296cba168773d8c9804e232d695f82484d7d7",
+            "bytes": 463578
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pydantic_core-2.41.5-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pydantic_core-2.41.5-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "sha256": "54703fa42a0d4d574283cfb8f08050ba7820c9a42b0a21bc1286407d9a9e54da",
+            "bytes": 1310164
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide-lock.json",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pyodide-lock.json",
+            "sha256": "5dc2fc119108bc148c7457dc86e7675b5c87e1cafd420b9c34c1eaef7b36c010",
+            "bytes": 119077
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide.asm.mjs",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pyodide.asm.mjs",
+            "sha256": "f7cdc8ece80678ceb712f8e65ebe6d3a83203a180c399865f49612a051693635",
+            "bytes": 1250344
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide.asm.wasm",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pyodide.asm.wasm",
+            "sha256": "cc36e3cab04fdfc9a63ff13eb52eae2b911bf46c025cc7b281f394bd3de1d5e6",
+            "bytes": 9598218
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide.mjs",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pyodide.mjs",
+            "sha256": "6f1d60f7bf529beb300f0f47983c921d3982363640ba20af0e38efdddbc66109",
+            "bytes": 17931
+          },
+          {
+            "publicPath": "public/vendor/pyodide/python_stdlib.zip",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/python_stdlib.zip",
+            "sha256": "fa1957e5777068fc4f7437f96d860ae2fbe9c19732ba06c84e004ec16dd7dd7a",
+            "bytes": 2545637
+          },
+          {
+            "publicPath": "public/vendor/pyodide/typing_extensions-4.15.0-py3-none-any.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/typing_extensions-4.15.0-py3-none-any.whl",
+            "sha256": "4fec68770a05408e668a4fa53d6bf4f0f684b9dacf820c7c5d6e97d3ad225e29",
+            "bytes": 44613
+          },
+          {
+            "publicPath": "public/vendor/pyodide/typing_inspection-0.4.2-py3-none-any.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/typing_inspection-0.4.2-py3-none-any.whl",
+            "sha256": "deb989630985f7a7296b90357a947a804a7612cecbb6439d6e71128e01f61051",
+            "bytes": 14610
+          }
+        ],
+        "runtimeAliasChronologyVerified": true
+      },
+      "caseManifest": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/weav-051/case-manifest.json",
+        "bytes": 3569,
+        "sha256": "0f90bf3b33b1497f4d43fee1089dc8377cbbfc633167e5b68ebeb2deff2af471"
+      },
+      "nativeManifest": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/weav-051/source-manifest.json",
+        "bytes": 38246,
+        "sha256": "2098197ea6c45c06bf42983bc1b47cd2dbe15a49f43b2f647d1884e591649f42"
+      },
+      "baseline": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz",
+        "sha256": "114906e80b2ff5817adeaa105fd4e84ea2b057d8393b202dc03f35248b350fc3",
+        "bytes": 13577757
+      },
+      "trace": {
+        "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+        "sha256": "a46f6a331e8f98767ee709c2931edd6d0abde9cc636b93ef384509c04adface2",
+        "bytes": 26568
+      },
+      "report": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/weav-051/regressions/weav-051-replay.json.gz",
+        "sha256": "c4f2f0f055155fa3705184961894ecacdc090a47633be6032f999ff07de1582c",
+        "bytes": 19406827
+      },
+      "comparison": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/weav-051/regressions/weav-051-comparison.json",
+        "sha256": "1053faf3a63b3483f01aedc37cca821959a4d6a02012eaadec726d3e2a597f65",
+        "bytes": 11086
+      },
+      "execution": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/weav-051/regressions/weav-051-execution.json",
+        "sha256": "103eeb4adfb1626de22d1e7ea0d812c1fd584c0d3171d6216c2bab5ba6ff1146",
+        "bytes": 20265
+      },
+      "passiveOwnerPresence": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/weav-051/regressions/weav-051-passive-owner-presence.json",
+        "sha256": "145c583cd4896f61ab5e2beb43c7f69e4fafc0eeb5ad76bd945430ed7b196d6d",
+        "bytes": 1225
+      },
+      "oracleObservation": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/weav-051/oracle-execution-observation.json",
+        "bytes": 4192,
+        "sha256": "385421912aecdebec31deeef9048cf45dd9dc30979d61f35f5dbc88848cb9cef"
+      },
+      "hostPreparation": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/weav-051/regressions/weav-051-host-preparation.json",
+        "sha256": "9a6a1bb327d5c2acf5ee950a49b59bf224e3fd1783ba74bb47a90b8a814e4447",
+        "bytes": 19265
+      },
+      "historicalRootCollectedBeforeHarnessImport": true,
+      "nodeExitObservedBeforeComparison": true
+    },
+    {
+      "case": "tria-development-4b",
+      "game": "TRIA",
+      "passed": true,
+      "comparisonChecksPassed": 17,
+      "comparisonChecksTotal": 17,
+      "harness": "released_baseline_streamlog",
+      "nativeDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+      "nativeFiles": 322,
+      "nativeSourceUnchanged": true,
+      "archivedPinsUnchanged": true,
+      "caseRowExactlyMatchesOriginalDeclaration": true,
+      "comparisonCheckNamesExactlyMatchOriginalDeclaration": true,
+      "actions": 17,
+      "prefixes": 17,
+      "nodeElapsedSeconds": 48.168307384999935,
+      "commandElapsedSeconds": 54.85918940600095,
+      "supervisedElapsedSeconds": 56.03473367100014,
+      "startedAt": "2026-11-11T19:52:46.972316+00:00",
+      "finishedAt": "2026-11-11T19:53:42.422694+00:00",
+      "boundedReceipt": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/tria-development-4b/bounded-command.json",
+        "bytes": 664282,
+        "sha256": "47782b1a616e5469977ffff561b8c9734ef9a0086f7e575ffbbe389e29db6031"
+      },
+      "regressionSummary": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/tria-development-4b/regressions/regression-summary.json",
+        "bytes": 95972,
+        "sha256": "c625e79d35cba92e6c0b4efe7f2c84f98cf11aff9394dee1f7118fbdcc87fe66"
+      },
+      "watch": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/tria-development-4b/replay-watch.json",
+        "bytes": 486705,
+        "sha256": "34a31ca5193b4d6b2144f0f3006cdc41680e93cf983a071488926e3a10beb9de",
+        "declaredFiles": 2974,
+        "actualRecordedInputHashesMatch": true,
+        "commonPathDifferencesFromNewVoisWatch": [],
+        "explicitRuntimeAliasResolution": [
+          {
+            "publicPath": "public/vendor/pyodide/annotated_types-0.7.0-py3-none-any.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/annotated_types-0.7.0-py3-none-any.whl",
+            "sha256": "6541523b4b16c1953d2fc9b82fb86c540eea9f78fca329ab371ed13a8b0faa51",
+            "bytes": 11963
+          },
+          {
+            "publicPath": "public/vendor/pyodide/numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "sha256": "a292c1f5d7d8a2208cd5e94fc467604c131cabcd2fc14fed6eefde121e7fabdf",
+            "bytes": 2960568
+          },
+          {
+            "publicPath": "public/vendor/pyodide/package.json",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/package.json",
+            "sha256": "40ca48e43ce4ddc68412d5b7a7ca9e2477cd4f0e672277ae468ac2245717079b",
+            "bytes": 2999
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pydantic-2.12.5-py3-none-any.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pydantic-2.12.5-py3-none-any.whl",
+            "sha256": "04854875001e07a8a74d87b7c80296cba168773d8c9804e232d695f82484d7d7",
+            "bytes": 463578
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pydantic_core-2.41.5-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pydantic_core-2.41.5-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "sha256": "54703fa42a0d4d574283cfb8f08050ba7820c9a42b0a21bc1286407d9a9e54da",
+            "bytes": 1310164
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide-lock.json",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pyodide-lock.json",
+            "sha256": "5dc2fc119108bc148c7457dc86e7675b5c87e1cafd420b9c34c1eaef7b36c010",
+            "bytes": 119077
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide.asm.mjs",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pyodide.asm.mjs",
+            "sha256": "f7cdc8ece80678ceb712f8e65ebe6d3a83203a180c399865f49612a051693635",
+            "bytes": 1250344
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide.asm.wasm",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pyodide.asm.wasm",
+            "sha256": "cc36e3cab04fdfc9a63ff13eb52eae2b911bf46c025cc7b281f394bd3de1d5e6",
+            "bytes": 9598218
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide.mjs",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pyodide.mjs",
+            "sha256": "6f1d60f7bf529beb300f0f47983c921d3982363640ba20af0e38efdddbc66109",
+            "bytes": 17931
+          },
+          {
+            "publicPath": "public/vendor/pyodide/python_stdlib.zip",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/python_stdlib.zip",
+            "sha256": "fa1957e5777068fc4f7437f96d860ae2fbe9c19732ba06c84e004ec16dd7dd7a",
+            "bytes": 2545637
+          },
+          {
+            "publicPath": "public/vendor/pyodide/typing_extensions-4.15.0-py3-none-any.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/typing_extensions-4.15.0-py3-none-any.whl",
+            "sha256": "4fec68770a05408e668a4fa53d6bf4f0f684b9dacf820c7c5d6e97d3ad225e29",
+            "bytes": 44613
+          },
+          {
+            "publicPath": "public/vendor/pyodide/typing_inspection-0.4.2-py3-none-any.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/typing_inspection-0.4.2-py3-none-any.whl",
+            "sha256": "deb989630985f7a7296b90357a947a804a7612cecbb6439d6e71128e01f61051",
+            "bytes": 14610
+          }
+        ],
+        "runtimeAliasChronologyVerified": true
+      },
+      "caseManifest": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/tria-development-4b/case-manifest.json",
+        "bytes": 3557,
+        "sha256": "b39669250d7ebb6b89480d77fc89b0cb24413f75a01b3ce78bfe0dfa82653c47"
+      },
+      "nativeManifest": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/tria-development-4b/source-manifest.json",
+        "bytes": 38246,
+        "sha256": "2098197ea6c45c06bf42983bc1b47cd2dbe15a49f43b2f647d1884e591649f42"
+      },
+      "baseline": {
+        "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz",
+        "sha256": "e473af537c042d76ce98f13b2cc9be495e7b4ac08ca443251df7804d542bdbbe",
+        "bytes": 3161161
+      },
+      "trace": {
+        "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-public-trace.json.gz",
+        "sha256": "916d0f1cb1dcbfd9b7ba7624e7d3d4648a91ae7ef64583288af4711d2a955ac3",
+        "bytes": 13286
+      },
+      "report": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/tria-development-4b/regressions/tria-development-4b-replay.json.gz",
+        "sha256": "f0f65a86625efb7f01b9c775e2edc7af09d48bdb7e9379d92a8fa209e2c6a794",
+        "bytes": 4165019
+      },
+      "comparison": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/tria-development-4b/regressions/tria-development-4b-comparison.json",
+        "sha256": "8d724be367824532721001cbd8149e4b91d02bdfeed1424664a5354dd87ea319",
+        "bytes": 11081
+      },
+      "execution": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/tria-development-4b/regressions/tria-development-4b-execution.json",
+        "sha256": "78b956f9f28cd3eb8b8b8fecc687cf27b93d4ed366fc1220550a994e8629beda",
+        "bytes": 10862
+      },
+      "passiveOwnerPresence": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/tria-development-4b/regressions/tria-development-4b-passive-owner-presence.json",
+        "sha256": "868b3fb48ef6abfc4f719c42138272383f9f7fd34fda09223db697e1db751f8d",
+        "bytes": 1257
+      },
+      "oracleObservation": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/tria-development-4b/oracle-execution-observation.json",
+        "bytes": 4364,
+        "sha256": "b5ba3aa72e9250fd1dcda885321a6d7482895c03ccdab7f4963187eab363f92f"
+      },
+      "hostPreparation": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/tria-development-4b/regressions/tria-development-4b-host-preparation.json",
+        "sha256": "40b4f8851dc8025742348ae8804f0fe6f9cfa901cc29ca78f88dbe70d0322395",
+        "bytes": 5285
+      },
+      "historicalRootCollectedBeforeHarnessImport": true,
+      "nodeExitObservedBeforeComparison": true
+    },
+    {
+      "case": "craf-055",
+      "game": "CRAF",
+      "passed": true,
+      "comparisonChecksPassed": 17,
+      "comparisonChecksTotal": 17,
+      "harness": "released_baseline_streamlog",
+      "nativeDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+      "nativeFiles": 322,
+      "nativeSourceUnchanged": true,
+      "archivedPinsUnchanged": true,
+      "caseRowExactlyMatchesOriginalDeclaration": true,
+      "comparisonCheckNamesExactlyMatchOriginalDeclaration": true,
+      "actions": 36,
+      "prefixes": 36,
+      "nodeElapsedSeconds": 113.81917365000118,
+      "commandElapsedSeconds": 131.68088265299957,
+      "supervisedElapsedSeconds": 132.69901363200188,
+      "startedAt": "2026-11-11T19:53:49.291934+00:00",
+      "finishedAt": "2026-11-11T19:56:01.408004+00:00",
+      "boundedReceipt": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/bounded-command.json",
+        "bytes": 664191,
+        "sha256": "a120095b3b4eae4302006944dbbb2d5fdd553596c74217b3e8123bc8440c277a"
+      },
+      "regressionSummary": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/regressions/regression-summary.json",
+        "bytes": 98417,
+        "sha256": "79917e4d7ca045d70e219a911426bf0aa824fc4a71544d34806fddd48cd37bca"
+      },
+      "watch": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/replay-watch.json",
+        "bytes": 486645,
+        "sha256": "30a7c34c6f6d46a88f3f661733944ae66879f3242bea14584857ecf16c58cd2b",
+        "declaredFiles": 2974,
+        "actualRecordedInputHashesMatch": true,
+        "commonPathDifferencesFromNewVoisWatch": [],
+        "explicitRuntimeAliasResolution": [
+          {
+            "publicPath": "public/vendor/pyodide/annotated_types-0.7.0-py3-none-any.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/annotated_types-0.7.0-py3-none-any.whl",
+            "sha256": "6541523b4b16c1953d2fc9b82fb86c540eea9f78fca329ab371ed13a8b0faa51",
+            "bytes": 11963
+          },
+          {
+            "publicPath": "public/vendor/pyodide/numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "sha256": "a292c1f5d7d8a2208cd5e94fc467604c131cabcd2fc14fed6eefde121e7fabdf",
+            "bytes": 2960568
+          },
+          {
+            "publicPath": "public/vendor/pyodide/package.json",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/package.json",
+            "sha256": "40ca48e43ce4ddc68412d5b7a7ca9e2477cd4f0e672277ae468ac2245717079b",
+            "bytes": 2999
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pydantic-2.12.5-py3-none-any.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pydantic-2.12.5-py3-none-any.whl",
+            "sha256": "04854875001e07a8a74d87b7c80296cba168773d8c9804e232d695f82484d7d7",
+            "bytes": 463578
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pydantic_core-2.41.5-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pydantic_core-2.41.5-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "sha256": "54703fa42a0d4d574283cfb8f08050ba7820c9a42b0a21bc1286407d9a9e54da",
+            "bytes": 1310164
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide-lock.json",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pyodide-lock.json",
+            "sha256": "5dc2fc119108bc148c7457dc86e7675b5c87e1cafd420b9c34c1eaef7b36c010",
+            "bytes": 119077
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide.asm.mjs",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pyodide.asm.mjs",
+            "sha256": "f7cdc8ece80678ceb712f8e65ebe6d3a83203a180c399865f49612a051693635",
+            "bytes": 1250344
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide.asm.wasm",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pyodide.asm.wasm",
+            "sha256": "cc36e3cab04fdfc9a63ff13eb52eae2b911bf46c025cc7b281f394bd3de1d5e6",
+            "bytes": 9598218
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide.mjs",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pyodide.mjs",
+            "sha256": "6f1d60f7bf529beb300f0f47983c921d3982363640ba20af0e38efdddbc66109",
+            "bytes": 17931
+          },
+          {
+            "publicPath": "public/vendor/pyodide/python_stdlib.zip",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/python_stdlib.zip",
+            "sha256": "fa1957e5777068fc4f7437f96d860ae2fbe9c19732ba06c84e004ec16dd7dd7a",
+            "bytes": 2545637
+          },
+          {
+            "publicPath": "public/vendor/pyodide/typing_extensions-4.15.0-py3-none-any.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/typing_extensions-4.15.0-py3-none-any.whl",
+            "sha256": "4fec68770a05408e668a4fa53d6bf4f0f684b9dacf820c7c5d6e97d3ad225e29",
+            "bytes": 44613
+          },
+          {
+            "publicPath": "public/vendor/pyodide/typing_inspection-0.4.2-py3-none-any.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/typing_inspection-0.4.2-py3-none-any.whl",
+            "sha256": "deb989630985f7a7296b90357a947a804a7612cecbb6439d6e71128e01f61051",
+            "bytes": 14610
+          }
+        ],
+        "runtimeAliasChronologyVerified": true
+      },
+      "caseManifest": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/case-manifest.json",
+        "bytes": 3530,
+        "sha256": "425c76171e1c86d1179cc75fd76226f31f156096ca31718ab561e9c328a28d56"
+      },
+      "nativeManifest": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/source-manifest.json",
+        "bytes": 38246,
+        "sha256": "2098197ea6c45c06bf42983bc1b47cd2dbe15a49f43b2f647d1884e591649f42"
+      },
+      "baseline": {
+        "path": "docs/migration/lot7b-evidence/integrated-final/craf-campaign.json.gz",
+        "sha256": "78e86660961ed6d75707c001c021b8c223d205137d86288ac21d09a533b680f2",
+        "bytes": 12767727
+      },
+      "trace": {
+        "path": "docs/migration/lot7b-evidence/integrated-final/craf-public-trace.json.gz",
+        "sha256": "cf69ad941e80e17f8d6cd66edc0419a0c6ff7aa8d9bbdaf503cb56a49e8c3f98",
+        "bytes": 40777
+      },
+      "report": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/regressions/craf-055-replay.json.gz",
+        "sha256": "0aaca6f245b3d9bd1e3957f70c4ba2453b4f1ed820fec957ff1de52a9d0ef373",
+        "bytes": 14721207
+      },
+      "comparison": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/regressions/craf-055-comparison.json",
+        "sha256": "ccd3191d53f0cecc54cad8435220ba989c6d191b96e41910f8905160657d0e05",
+        "bytes": 11046
+      },
+      "execution": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/regressions/craf-055-execution.json",
+        "sha256": "64c5fd2f91dc9dd011d4aee86a8f7ba2b551138622eb33a1ac506f372428f732",
+        "bytes": 12978
+      },
+      "passiveOwnerPresence": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/regressions/craf-055-passive-owner-presence.json",
+        "sha256": "df84294c5ef175588eec26dd91d6888bee9e7ff27e7fe4d43474cc6dc5261d18",
+        "bytes": 1225
+      },
+      "oracleObservation": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/oracle-execution-observation.json",
+        "bytes": 4191,
+        "sha256": "5129fc60d673f746fd8219fb069b4271a9c38f7367bc6b71fdd305c03d6c03a6"
+      },
+      "hostPreparation": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/regressions/craf-055-host-preparation.json",
+        "sha256": "d51c10e5f33555f69920abd5bce05af12049e6cad09445733fe3d81dd88e4ffb",
+        "bytes": 9417
+      },
+      "historicalRootCollectedBeforeHarnessImport": true,
+      "nodeExitObservedBeforeComparison": true
+    },
+    {
+      "case": "isos-development-4c",
+      "game": "ISOS",
+      "passed": true,
+      "comparisonChecksPassed": 17,
+      "comparisonChecksTotal": 17,
+      "harness": "released_baseline_streamlog",
+      "nativeDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+      "nativeFiles": 322,
+      "nativeSourceUnchanged": true,
+      "archivedPinsUnchanged": true,
+      "caseRowExactlyMatchesOriginalDeclaration": true,
+      "comparisonCheckNamesExactlyMatchOriginalDeclaration": true,
+      "actions": 12,
+      "prefixes": 12,
+      "nodeElapsedSeconds": 28.609894009001437,
+      "commandElapsedSeconds": 32.23911020999731,
+      "supervisedElapsedSeconds": 33.76650857599816,
+      "startedAt": "2026-11-11T19:56:09.301296+00:00",
+      "finishedAt": "2026-11-11T19:56:41.993438+00:00",
+      "boundedReceipt": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/bounded-command.json",
+        "bytes": 664282,
+        "sha256": "295a1361f8a051a5c52f940548e71361a8e86eab1ea969614d84fb4e4a53b64f"
+      },
+      "regressionSummary": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/regressions/regression-summary.json",
+        "bytes": 95121,
+        "sha256": "03603f69f2d2350d9e8f037d2ee4c967949775668dfba6e4eba734981352afbb"
+      },
+      "watch": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/replay-watch.json",
+        "bytes": 486705,
+        "sha256": "412d56df825ff9c59534f884eea2fc5fa9bcad7cf039d955a59ecc936b74f8d2",
+        "declaredFiles": 2974,
+        "actualRecordedInputHashesMatch": true,
+        "commonPathDifferencesFromNewVoisWatch": [],
+        "explicitRuntimeAliasResolution": [
+          {
+            "publicPath": "public/vendor/pyodide/annotated_types-0.7.0-py3-none-any.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/annotated_types-0.7.0-py3-none-any.whl",
+            "sha256": "6541523b4b16c1953d2fc9b82fb86c540eea9f78fca329ab371ed13a8b0faa51",
+            "bytes": 11963
+          },
+          {
+            "publicPath": "public/vendor/pyodide/numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "sha256": "a292c1f5d7d8a2208cd5e94fc467604c131cabcd2fc14fed6eefde121e7fabdf",
+            "bytes": 2960568
+          },
+          {
+            "publicPath": "public/vendor/pyodide/package.json",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/package.json",
+            "sha256": "40ca48e43ce4ddc68412d5b7a7ca9e2477cd4f0e672277ae468ac2245717079b",
+            "bytes": 2999
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pydantic-2.12.5-py3-none-any.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pydantic-2.12.5-py3-none-any.whl",
+            "sha256": "04854875001e07a8a74d87b7c80296cba168773d8c9804e232d695f82484d7d7",
+            "bytes": 463578
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pydantic_core-2.41.5-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pydantic_core-2.41.5-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "sha256": "54703fa42a0d4d574283cfb8f08050ba7820c9a42b0a21bc1286407d9a9e54da",
+            "bytes": 1310164
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide-lock.json",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pyodide-lock.json",
+            "sha256": "5dc2fc119108bc148c7457dc86e7675b5c87e1cafd420b9c34c1eaef7b36c010",
+            "bytes": 119077
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide.asm.mjs",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pyodide.asm.mjs",
+            "sha256": "f7cdc8ece80678ceb712f8e65ebe6d3a83203a180c399865f49612a051693635",
+            "bytes": 1250344
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide.asm.wasm",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pyodide.asm.wasm",
+            "sha256": "cc36e3cab04fdfc9a63ff13eb52eae2b911bf46c025cc7b281f394bd3de1d5e6",
+            "bytes": 9598218
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide.mjs",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pyodide.mjs",
+            "sha256": "6f1d60f7bf529beb300f0f47983c921d3982363640ba20af0e38efdddbc66109",
+            "bytes": 17931
+          },
+          {
+            "publicPath": "public/vendor/pyodide/python_stdlib.zip",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/python_stdlib.zip",
+            "sha256": "fa1957e5777068fc4f7437f96d860ae2fbe9c19732ba06c84e004ec16dd7dd7a",
+            "bytes": 2545637
+          },
+          {
+            "publicPath": "public/vendor/pyodide/typing_extensions-4.15.0-py3-none-any.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/typing_extensions-4.15.0-py3-none-any.whl",
+            "sha256": "4fec68770a05408e668a4fa53d6bf4f0f684b9dacf820c7c5d6e97d3ad225e29",
+            "bytes": 44613
+          },
+          {
+            "publicPath": "public/vendor/pyodide/typing_inspection-0.4.2-py3-none-any.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/typing_inspection-0.4.2-py3-none-any.whl",
+            "sha256": "deb989630985f7a7296b90357a947a804a7612cecbb6439d6e71128e01f61051",
+            "bytes": 14610
+          }
+        ],
+        "runtimeAliasChronologyVerified": true
+      },
+      "caseManifest": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/case-manifest.json",
+        "bytes": 3557,
+        "sha256": "41078cb5f6948325411b07f75a68a5dc9259adfaac38c22ed676cfcc38f35c9c"
+      },
+      "nativeManifest": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/source-manifest.json",
+        "bytes": 38246,
+        "sha256": "2098197ea6c45c06bf42983bc1b47cd2dbe15a49f43b2f647d1884e591649f42"
+      },
+      "baseline": {
+        "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-campaign.json.gz",
+        "sha256": "93e59ab1146d4eef7c944a0e1fc0ab7b0d539cc90a074abe424742be011eec37",
+        "bytes": 3027289
+      },
+      "trace": {
+        "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-public-trace.json.gz",
+        "sha256": "5b302279efb140d1c549d9650d434efb38fde0b8bc5809ab072de66159c8c329",
+        "bytes": 11183
+      },
+      "report": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/regressions/isos-development-4c-replay.json.gz",
+        "sha256": "b80391fb9b97f123bf2f27c0d6442da0b9e6a9c309abcd790511651deac850e9",
+        "bytes": 3592527
+      },
+      "comparison": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/regressions/isos-development-4c-comparison.json",
+        "sha256": "fccb19ebdfdeccdf4cd8d5cdce7c2aa9ab8fc0f8c8367e50ce9ebc860133352e",
+        "bytes": 11081
+      },
+      "execution": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/regressions/isos-development-4c-execution.json",
+        "sha256": "f7269c9892196f5f142e34dbe42744ea9a15a343359005a3533b19401e084ed7",
+        "bytes": 10139
+      },
+      "passiveOwnerPresence": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/regressions/isos-development-4c-passive-owner-presence.json",
+        "sha256": "730c05319719738bee22e2e76485148f4103f64ddc79d85adb4233a1526800eb",
+        "bytes": 1257
+      },
+      "oracleObservation": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/oracle-execution-observation.json",
+        "bytes": 4364,
+        "sha256": "25d911b39a771354c77dd7c9b0af2ec0440b788d173d325e4434dc9dd10fbf23"
+      },
+      "hostPreparation": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/regressions/isos-development-4c-host-preparation.json",
+        "sha256": "7a471ac341bef6bc9038e96fea6b2df552623ef2e6f811bcf3e4459302b9aacb",
+        "bytes": 4192
+      },
+      "historicalRootCollectedBeforeHarnessImport": true,
+      "nodeExitObservedBeforeComparison": true
+    },
+    {
+      "case": "kata-060-self-consistency",
+      "game": "KATA",
+      "passed": true,
+      "comparisonChecksPassed": 17,
+      "comparisonChecksTotal": 17,
+      "harness": "released_baseline_streamlog",
+      "nativeDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+      "nativeFiles": 322,
+      "nativeSourceUnchanged": true,
+      "archivedPinsUnchanged": true,
+      "caseRowExactlyMatchesOriginalDeclaration": true,
+      "comparisonCheckNamesExactlyMatchOriginalDeclaration": true,
+      "actions": 33,
+      "prefixes": 14,
+      "nodeElapsedSeconds": 48.673588008998195,
+      "commandElapsedSeconds": 61.13544423100029,
+      "supervisedElapsedSeconds": 62.27556076899782,
+      "startedAt": "2026-11-11T19:57:23.787075+00:00",
+      "finishedAt": "2026-11-11T19:58:25.421134+00:00",
+      "boundedReceipt": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/bounded-command.json",
+        "bytes": 664314,
+        "sha256": "2742035a932ae6bec4bd9b59a21689dff84061b0847f011605697942b8b7af21"
+      },
+      "regressionSummary": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/regressions/regression-summary.json",
+        "bytes": 96151,
+        "sha256": "ddf91d7536ed02445daa9d8f1cd3bee20c0ac83fdf2c1f2778f7dc76f1b204c2"
+      },
+      "watch": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/replay-watch.json",
+        "bytes": 486719,
+        "sha256": "fc99948cb5b00f3e30ddc125278f634693b6f2adf5820d6fa6ddf23a2854bd87",
+        "declaredFiles": 2974,
+        "actualRecordedInputHashesMatch": true,
+        "commonPathDifferencesFromNewVoisWatch": [],
+        "explicitRuntimeAliasResolution": [
+          {
+            "publicPath": "public/vendor/pyodide/annotated_types-0.7.0-py3-none-any.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/annotated_types-0.7.0-py3-none-any.whl",
+            "sha256": "6541523b4b16c1953d2fc9b82fb86c540eea9f78fca329ab371ed13a8b0faa51",
+            "bytes": 11963
+          },
+          {
+            "publicPath": "public/vendor/pyodide/numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "sha256": "a292c1f5d7d8a2208cd5e94fc467604c131cabcd2fc14fed6eefde121e7fabdf",
+            "bytes": 2960568
+          },
+          {
+            "publicPath": "public/vendor/pyodide/package.json",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/package.json",
+            "sha256": "40ca48e43ce4ddc68412d5b7a7ca9e2477cd4f0e672277ae468ac2245717079b",
+            "bytes": 2999
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pydantic-2.12.5-py3-none-any.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pydantic-2.12.5-py3-none-any.whl",
+            "sha256": "04854875001e07a8a74d87b7c80296cba168773d8c9804e232d695f82484d7d7",
+            "bytes": 463578
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pydantic_core-2.41.5-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pydantic_core-2.41.5-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+            "sha256": "54703fa42a0d4d574283cfb8f08050ba7820c9a42b0a21bc1286407d9a9e54da",
+            "bytes": 1310164
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide-lock.json",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pyodide-lock.json",
+            "sha256": "5dc2fc119108bc148c7457dc86e7675b5c87e1cafd420b9c34c1eaef7b36c010",
+            "bytes": 119077
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide.asm.mjs",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pyodide.asm.mjs",
+            "sha256": "f7cdc8ece80678ceb712f8e65ebe6d3a83203a180c399865f49612a051693635",
+            "bytes": 1250344
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide.asm.wasm",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pyodide.asm.wasm",
+            "sha256": "cc36e3cab04fdfc9a63ff13eb52eae2b911bf46c025cc7b281f394bd3de1d5e6",
+            "bytes": 9598218
+          },
+          {
+            "publicPath": "public/vendor/pyodide/pyodide.mjs",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/pyodide.mjs",
+            "sha256": "6f1d60f7bf529beb300f0f47983c921d3982363640ba20af0e38efdddbc66109",
+            "bytes": 17931
+          },
+          {
+            "publicPath": "public/vendor/pyodide/python_stdlib.zip",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/python_stdlib.zip",
+            "sha256": "fa1957e5777068fc4f7437f96d860ae2fbe9c19732ba06c84e004ec16dd7dd7a",
+            "bytes": 2545637
+          },
+          {
+            "publicPath": "public/vendor/pyodide/typing_extensions-4.15.0-py3-none-any.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/typing_extensions-4.15.0-py3-none-any.whl",
+            "sha256": "4fec68770a05408e668a4fa53d6bf4f0f684b9dacf820c7c5d6e97d3ad225e29",
+            "bytes": 44613
+          },
+          {
+            "publicPath": "public/vendor/pyodide/typing_inspection-0.4.2-py3-none-any.whl",
+            "actualRecordedResolvedPath": ".openai/lot6b-runtime-cache/pyodide/typing_inspection-0.4.2-py3-none-any.whl",
+            "sha256": "deb989630985f7a7296b90357a947a804a7612cecbb6439d6e71128e01f61051",
+            "bytes": 14610
+          }
+        ],
+        "runtimeAliasChronologyVerified": true
+      },
+      "caseManifest": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/case-manifest.json",
+        "bytes": 3619,
+        "sha256": "cb0924ce3f1f670dbc3f5d1855c8da718214a2010f5c9e7e3cbc9f45691f2db2"
+      },
+      "nativeManifest": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/source-manifest.json",
+        "bytes": 38246,
+        "sha256": "2098197ea6c45c06bf42983bc1b47cd2dbe15a49f43b2f647d1884e591649f42"
+      },
+      "baseline": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/kata-campaign.json.gz",
+        "sha256": "a3318ed5f7d742f63b5923f3e1e46b0d9cfff1d18e767b45c522d61aa354e455",
+        "bytes": 8253174
+      },
+      "trace": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/kata-public-trace.json.gz",
+        "sha256": "c236c95ec0bdcb892a6940940098e4310eb35a6ae11acaf6b74545d09aa22daa",
+        "bytes": 12579
+      },
+      "report": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/regressions/kata-060-self-consistency-replay.json.gz",
+        "sha256": "0749f1b23833e6224194e5391fd813f9287ae02349e72e2ccbcc6e2827e97236",
+        "bytes": 9022072
+      },
+      "comparison": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/regressions/kata-060-self-consistency-comparison.json",
+        "sha256": "899ee8c90c21c304413c66e88c3a6070a26060cf43e847ea63bf5c725767229e",
+        "bytes": 11083
+      },
+      "execution": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/regressions/kata-060-self-consistency-execution.json",
+        "sha256": "aceb0f079c758c917d69167549ce2589bd2c8df67fd354080791564fa0a521dc",
+        "bytes": 10993
+      },
+      "passiveOwnerPresence": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/regressions/kata-060-self-consistency-passive-owner-presence.json",
+        "sha256": "1e24ae1c4fdde8a6b93f9a560bb2641b5db4c99f40b21e51b2f2873eb940c555",
+        "bytes": 1275
+      },
+      "oracleObservation": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/oracle-execution-observation.json",
+        "bytes": 4460,
+        "sha256": "1cd1098c0048a7ec0c6f8b80873ce89a847de5dd2b41edb3881e1c0bce380b6e"
+      },
+      "hostPreparation": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/regressions/kata-060-self-consistency-host-preparation.json",
+        "sha256": "30756f2fb85fb50b780b617e4163d3e1f8abf843b2cedea99a4ce8773ede2ae9",
+        "bytes": 8760
+      },
+      "historicalRootCollectedBeforeHarnessImport": true,
+      "nodeExitObservedBeforeComparison": true
+    }
+  ],
+  "retainedFailedAttempts": [
+    {
+      "case": "vois-051",
+      "status": "failed",
+      "failureKind": "JavaScript heap out of memory",
+      "nodeExitCode": -6,
+      "timedOut": false,
+      "nativeDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+      "comparisonChecksPassed": 0,
+      "fullReportProduced": false,
+      "preciseFatalAllocationSiteEstablished": false,
+      "qualification": "The last observed public event reached target_levels_completed. The log established heap exhaustion but did not locate the fatal allocation specifically in report serialization. This failed attempt is not reclassified by the later success.",
+      "boundedReceipt": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/vois-051/bounded-command.json",
+        "bytes": 660144,
+        "sha256": "4a174e9bc0caa31ffcf0d86c318f9d74c2f575487f81d30c2953e549f273f6e2"
+      },
+      "regressionSummary": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/vois-051/regressions/regression-summary.json",
+        "bytes": 83940,
+        "sha256": "6378adffbd75efe39504d937aa21dac7c0e7a56a5b3ce886e12d8b8ced102b43"
+      },
+      "diagnostic": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/vois-051/failure-diagnostic-01.json",
+        "bytes": 6012,
+        "sha256": "05c722cc5a94cda453209c57f67eba9a2122bb1880042e33b0292d26c6107e5b"
+      },
+      "oracleObservation": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/vois-051/oracle-execution-observation.json",
+        "bytes": 2459,
+        "sha256": "d536870711a2add79d0dd67eb01981511eb661ca4a2d05335f810a2827c74e55"
+      }
+    }
+  ],
+  "runtimeAssetRelocation": {
+    "receipt": {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/runtime-cache-materialization-01/result.json",
+      "bytes": 2078,
+      "sha256": "5acf1a4c0114615ba62eb3fe5071b6283293f8c6f91a1c845f709286e28e7b5d"
+    },
+    "count": 12,
+    "bytes": 18339702,
+    "identicalBytesVerified": true,
+    "originalAliasTarget": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide",
+    "currentAliasTarget": ".openai/lot6b-runtime-cache/pyodide",
+    "assets": [
+      {
+        "publicPath": "public/vendor/pyodide/annotated_types-0.7.0-py3-none-any.whl",
+        "resolvedPath": ".openai/lot6b-runtime-cache/pyodide/annotated_types-0.7.0-py3-none-any.whl",
+        "sha256": "6541523b4b16c1953d2fc9b82fb86c540eea9f78fca329ab371ed13a8b0faa51",
+        "bytes": 11963,
+        "previousTargetStillIdentical": {
+          "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/annotated_types-0.7.0-py3-none-any.whl",
+          "bytes": 11963,
+          "sha256": "6541523b4b16c1953d2fc9b82fb86c540eea9f78fca329ab371ed13a8b0faa51"
+        }
+      },
+      {
+        "publicPath": "public/vendor/pyodide/numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+        "resolvedPath": ".openai/lot6b-runtime-cache/pyodide/numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+        "sha256": "a292c1f5d7d8a2208cd5e94fc467604c131cabcd2fc14fed6eefde121e7fabdf",
+        "bytes": 2960568,
+        "previousTargetStillIdentical": {
+          "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+          "bytes": 2960568,
+          "sha256": "a292c1f5d7d8a2208cd5e94fc467604c131cabcd2fc14fed6eefde121e7fabdf"
+        }
+      },
+      {
+        "publicPath": "public/vendor/pyodide/package.json",
+        "resolvedPath": ".openai/lot6b-runtime-cache/pyodide/package.json",
+        "sha256": "40ca48e43ce4ddc68412d5b7a7ca9e2477cd4f0e672277ae468ac2245717079b",
+        "bytes": 2999,
+        "previousTargetStillIdentical": {
+          "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/package.json",
+          "bytes": 2999,
+          "sha256": "40ca48e43ce4ddc68412d5b7a7ca9e2477cd4f0e672277ae468ac2245717079b"
+        }
+      },
+      {
+        "publicPath": "public/vendor/pyodide/pydantic-2.12.5-py3-none-any.whl",
+        "resolvedPath": ".openai/lot6b-runtime-cache/pyodide/pydantic-2.12.5-py3-none-any.whl",
+        "sha256": "04854875001e07a8a74d87b7c80296cba168773d8c9804e232d695f82484d7d7",
+        "bytes": 463578,
+        "previousTargetStillIdentical": {
+          "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pydantic-2.12.5-py3-none-any.whl",
+          "bytes": 463578,
+          "sha256": "04854875001e07a8a74d87b7c80296cba168773d8c9804e232d695f82484d7d7"
+        }
+      },
+      {
+        "publicPath": "public/vendor/pyodide/pydantic_core-2.41.5-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+        "resolvedPath": ".openai/lot6b-runtime-cache/pyodide/pydantic_core-2.41.5-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+        "sha256": "54703fa42a0d4d574283cfb8f08050ba7820c9a42b0a21bc1286407d9a9e54da",
+        "bytes": 1310164,
+        "previousTargetStillIdentical": {
+          "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pydantic_core-2.41.5-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+          "bytes": 1310164,
+          "sha256": "54703fa42a0d4d574283cfb8f08050ba7820c9a42b0a21bc1286407d9a9e54da"
+        }
+      },
+      {
+        "publicPath": "public/vendor/pyodide/pyodide-lock.json",
+        "resolvedPath": ".openai/lot6b-runtime-cache/pyodide/pyodide-lock.json",
+        "sha256": "5dc2fc119108bc148c7457dc86e7675b5c87e1cafd420b9c34c1eaef7b36c010",
+        "bytes": 119077,
+        "previousTargetStillIdentical": {
+          "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pyodide-lock.json",
+          "bytes": 119077,
+          "sha256": "5dc2fc119108bc148c7457dc86e7675b5c87e1cafd420b9c34c1eaef7b36c010"
+        }
+      },
+      {
+        "publicPath": "public/vendor/pyodide/pyodide.asm.mjs",
+        "resolvedPath": ".openai/lot6b-runtime-cache/pyodide/pyodide.asm.mjs",
+        "sha256": "f7cdc8ece80678ceb712f8e65ebe6d3a83203a180c399865f49612a051693635",
+        "bytes": 1250344,
+        "previousTargetStillIdentical": {
+          "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pyodide.asm.mjs",
+          "bytes": 1250344,
+          "sha256": "f7cdc8ece80678ceb712f8e65ebe6d3a83203a180c399865f49612a051693635"
+        }
+      },
+      {
+        "publicPath": "public/vendor/pyodide/pyodide.asm.wasm",
+        "resolvedPath": ".openai/lot6b-runtime-cache/pyodide/pyodide.asm.wasm",
+        "sha256": "cc36e3cab04fdfc9a63ff13eb52eae2b911bf46c025cc7b281f394bd3de1d5e6",
+        "bytes": 9598218,
+        "previousTargetStillIdentical": {
+          "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pyodide.asm.wasm",
+          "bytes": 9598218,
+          "sha256": "cc36e3cab04fdfc9a63ff13eb52eae2b911bf46c025cc7b281f394bd3de1d5e6"
+        }
+      },
+      {
+        "publicPath": "public/vendor/pyodide/pyodide.mjs",
+        "resolvedPath": ".openai/lot6b-runtime-cache/pyodide/pyodide.mjs",
+        "sha256": "6f1d60f7bf529beb300f0f47983c921d3982363640ba20af0e38efdddbc66109",
+        "bytes": 17931,
+        "previousTargetStillIdentical": {
+          "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pyodide.mjs",
+          "bytes": 17931,
+          "sha256": "6f1d60f7bf529beb300f0f47983c921d3982363640ba20af0e38efdddbc66109"
+        }
+      },
+      {
+        "publicPath": "public/vendor/pyodide/python_stdlib.zip",
+        "resolvedPath": ".openai/lot6b-runtime-cache/pyodide/python_stdlib.zip",
+        "sha256": "fa1957e5777068fc4f7437f96d860ae2fbe9c19732ba06c84e004ec16dd7dd7a",
+        "bytes": 2545637,
+        "previousTargetStillIdentical": {
+          "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/python_stdlib.zip",
+          "bytes": 2545637,
+          "sha256": "fa1957e5777068fc4f7437f96d860ae2fbe9c19732ba06c84e004ec16dd7dd7a"
+        }
+      },
+      {
+        "publicPath": "public/vendor/pyodide/typing_extensions-4.15.0-py3-none-any.whl",
+        "resolvedPath": ".openai/lot6b-runtime-cache/pyodide/typing_extensions-4.15.0-py3-none-any.whl",
+        "sha256": "4fec68770a05408e668a4fa53d6bf4f0f684b9dacf820c7c5d6e97d3ad225e29",
+        "bytes": 44613,
+        "previousTargetStillIdentical": {
+          "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/typing_extensions-4.15.0-py3-none-any.whl",
+          "bytes": 44613,
+          "sha256": "4fec68770a05408e668a4fa53d6bf4f0f684b9dacf820c7c5d6e97d3ad225e29"
+        }
+      },
+      {
+        "publicPath": "public/vendor/pyodide/typing_inspection-0.4.2-py3-none-any.whl",
+        "resolvedPath": ".openai/lot6b-runtime-cache/pyodide/typing_inspection-0.4.2-py3-none-any.whl",
+        "sha256": "deb989630985f7a7296b90357a947a804a7612cecbb6439d6e71128e01f61051",
+        "bytes": 14610,
+        "previousTargetStillIdentical": {
+          "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/typing_inspection-0.4.2-py3-none-any.whl",
+          "bytes": 14610,
+          "sha256": "deb989630985f7a7296b90357a947a804a7612cecbb6439d6e71128e01f61051"
+        }
+      }
+    ]
+  },
+  "aggregationInspectionIncidents": [
+    {
+      "firstAttempt": {
+        "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/aggregation-watch-inspection-01.json",
+        "bytes": 4027,
+        "sha256": "4123a0f78c65d269253233179e2a4c3cb52d7ad5406a02bf346fa9821435b20d"
+      },
+      "resolution": "Only the twelve public Pyodide aliases are mapped to their exact recorded physical paths. Recorded and current SHA-256 and byte lengths match for all twelve; old command completion precedes the materialization receipt, new commands start after it. Watch files themselves also match hashes and sizes captured by each command. No generic hash-only or basename-only matching is allowed."
+    }
+  ],
+  "qualifications": [
+    "CATR, RSWP, FOGW and CONN retain their original legacy-harness commands, outputs and watches; they were not rerun or relabeled.",
+    "The seven new commands use exact scripts from immutable Git commit 501198d7638c7a56c3b85d357beb917469899402 at 1536 MiB with --expose-gc; historical preflight exits before Node and historical baseline collection is observed before current harness import. Current 6B capture helper is preserved.",
+    "CATR used its earlier exact watch. Its only common-path hash difference from the later cohort is tests/v6-selected-rigid-integration.test.ts, an assertion-only correction in a module not executed by these replay commands. The native files, replay machinery, adapters, Python reference and 17 comparison checks are unchanged.",
+    "The other three legacy successes retain attempt02 watches. The seven new watches preserve matching earlier input hashes and add their declared receipts/manifests and physical local runtime assets. Different watch identities are recorded explicitly.",
+    "The public Pyodide alias moved from the 6A checkout to a local 6B cache before the seven new attempts. All 12 files and 18339702 bytes are identical; prior results keep their original alias context.",
+    "The empty generic passiveOwnerRequirements list is preserved. This cohort alone does not establish complete Binding/SelectedRigid caller parity, full v6 parity, or a new live-game success.",
+    "The historical KATA self-consistency label and TRIA/ISOS development labels are retained exactly. No fresh self-comparison was substituted.",
+    "Functional elapsed times are not official cost measurements. No complete-session cost acceptance is inferred.",
+    "Source and runtime asset closure is recorded, not a closed container image. Actual published predecessor 0.63 reconciliation remains separate."
+  ],
+  "sourceTestsNativeOrCostHelpersChanged": false,
+  "liveGamesLaunched": 0,
+  "officialCostSamples": 0,
+  "reportPayloadsDecodedByAggregation": false,
+  "opaqueEvidenceFilesHashed": 535,
+  "aggregationElapsedSeconds": 0.5828284859999258
+}
