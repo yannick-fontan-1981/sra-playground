@@ -1,0 +1,26 @@
+{
+  "schema": "logos-engine.lot10c.recruitment-attempt-start.v1",
+  "attemptId": "docs/migration/lot10c-evidence/development/recr01",
+  "status": "running",
+  "game": "RECR",
+  "targetLevels": 3,
+  "startedAt": "2026-11-11T17:51:33.394937+00:00",
+  "admittedAt": "2026-11-11T17:51:33.440336+00:00",
+  "priorCumulativeSeconds": 0.210466935,
+  "remainingBeforeSeconds": 2399.789533065,
+  "activityCeilingSeconds": 300.0,
+  "terminationMarginSeconds": 0.5,
+  "retentionReserveSeconds": 30.0,
+  "performanceLockMode": "exclusive_functional",
+  "sourceManifestPath": "docs/migration/lot10c-evidence/development/recr01-source/source-manifest.json",
+  "chargedSeconds": null,
+  "qualification": "Running was persisted before spawn. An unresolved entry blocks every subsequent attempt; no implicit refund.",
+  "wrapperPid": 5,
+  "priorClock": {
+    "path": "docs/migration/lot10c-evidence/development/recr01/clock-before.json",
+    "sha256": "597d32a0a6646aaa71d8e5f55f62afd22a86fa03ee952d6de12f6c4f06091523",
+    "bytes": 1656
+  },
+  "performanceLock": "/workspace/shared/sra-coordination/performance.lock",
+  "caseLock": "/workspace/shared/sra-coordination/recr.lock"
+}

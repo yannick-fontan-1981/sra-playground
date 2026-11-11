@@ -1,0 +1,27 @@
+{
+  "attemptId": "docs/migration/lot10c-evidence/case-activities/recr01-parity-diagnosis",
+  "status": "running",
+  "kind": "diagnostic_or_browser",
+  "purpose": "Diagnose original public-parity reader crash on retained RECR01 trace without rerunning the game",
+  "game": "RECR",
+  "targetLevels": 3,
+  "startedAt": "2026-11-11T17:56:21.290251+00:00",
+  "monotonicStartNs": 22225758037800,
+  "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+  "priorCumulativeSeconds": 221.897369283,
+  "activityCeilingSeconds": 300.0,
+  "chargedSeconds": null,
+  "processPidAtAdmission": 5,
+  "executionHelpers": [
+    {
+      "path": "docs/migration/lot10c-evidence/case-activity.py",
+      "sha256": "c3a61752ff70eb6724a723a18c10fa4d445bf72d3d54011d7c2d7db6dbbe0681",
+      "bytes": 8126
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/run-clocked-proof.py",
+      "sha256": "530ed0272ac269340a28d9481c8db4188dc79cccdd85aa05c8a62570321ccbe3",
+      "bytes": 42344
+    }
+  ]
+}

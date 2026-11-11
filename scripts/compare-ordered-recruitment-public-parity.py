@@ -51,10 +51,8 @@ INTERVENTIONS = {'remove_methods': ['methods'], 'remove_portable': ['portable'],
 sys.dont_write_bytecode = True
 _PROGRESS_STARTED_NS = None
 _PROGRESS_WRITE_FAILED = False
-_TRACEBACK_TIMER_STARTED = False
 _OBSERVABILITY_ERRORS = []
 _OBSERVABILITY_ERROR_COUNT = 0
-TRACEBACK_INTERVAL_SECONDS = 30
 MAX_OBSERVABILITY_ERRORS = 8
 
 
@@ -97,7 +95,7 @@ def diagnostic_progress(stage, **fields):
 
 
 def start_diagnostics():
-    global _PROGRESS_STARTED_NS, _TRACEBACK_TIMER_STARTED
+    global _PROGRESS_STARTED_NS
     try:
         _PROGRESS_STARTED_NS = time.monotonic_ns()
     except Exception as error:
@@ -106,23 +104,14 @@ def start_diagnostics():
         faulthandler.enable(file=sys.stderr, all_threads=True)
     except Exception as error:
         _observability_error('faulthandler_enable', error)
-    try:
-        faulthandler.dump_traceback_later(TRACEBACK_INTERVAL_SECONDS, repeat=True, file=sys.stderr)
-        _TRACEBACK_TIMER_STARTED = True
-    except Exception as error:
-        _observability_error('faulthandler_timer_start', error)
-    diagnostic_progress('observability_started', tracebackIntervalSeconds=TRACEBACK_INTERVAL_SECONDS,
+    # Keep progress and fatal diagnostics without a concurrent periodic stack
+    # sampler. The enclosing proof process enforces the actual time bound.
+    diagnostic_progress('observability_started', periodicTracebackEnabled=False,
                         sourceProfilingUnchanged=True, progressIsNotAParityReceipt=True)
 
 
 def stop_diagnostics():
-    global _PROGRESS_STARTED_NS, _TRACEBACK_TIMER_STARTED
-    if _TRACEBACK_TIMER_STARTED:
-        try:
-            faulthandler.cancel_dump_traceback_later()
-        except Exception as error:
-            _observability_error('faulthandler_timer_stop', error)
-        _TRACEBACK_TIMER_STARTED = False
+    global _PROGRESS_STARTED_NS
     _PROGRESS_STARTED_NS = None
     if _OBSERVABILITY_ERRORS:
         try:

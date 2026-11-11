@@ -1,0 +1,36 @@
+{
+  "schema": "logos-engine.lot10c.case-activity-execution.v1",
+  "attemptId": "docs/migration/lot10c-evidence/case-activities/recr01-parity02",
+  "game": "RECR",
+  "purpose": "Repeat complete original parity on unchanged RECR01 trace after removing optional periodic stack sampler; no new game",
+  "startedAt": "2026-11-11T17:58:32.905420+00:00",
+  "finishedAt": "2026-11-11T18:00:33.636669+00:00",
+  "status": "completed",
+  "elapsedSecondsThroughCapture": 120.731231767,
+  "activityCeilingSeconds": 300.0,
+  "ceilingExceeded": false,
+  "evidence": [
+    {
+      "path": "docs/migration/lot10c-evidence/development/recr01-parity02/execution.json",
+      "sha256": "8a97e6d7f3ab87c0c1e25a6f0e818de7054546494d01bf7a82bb7088913e1818",
+      "bytes": 4100
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/development/recr01-parity02/output.raw.txt",
+      "sha256": "f3b9437b3d340622ab9ac2282b89a9a4349093bfc802d43dc3858b200aa5ef45",
+      "bytes": 117049
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/development/recr01-parity02/original-parity.json.gz",
+      "sha256": "90690a29a6e00747d58c0cfad3107c7c9b4cd925274dda9d42be33110caa235a",
+      "bytes": 141752
+    }
+  ],
+  "generator": {
+    "path": "docs/migration/lot10c-evidence/case-activity.py",
+    "sha256": "c3a61752ff70eb6724a723a18c10fa4d445bf72d3d54011d7c2d7db6dbbe0681",
+    "bytes": 8126
+  },
+  "executionHelpersUnchanged": true,
+  "qualification": "The entire observed diagnostic/browser interval is charged, including any ceiling excess. No new campaign or success is inferred."
+}

@@ -1,10 +1,12 @@
-# Lot 10C — OrderedRecruitment
+# Lot 10C : OrderedRecruitment
 
 ## État du travail
 
 Le composant `ordered_recruitment` est porté dans le moteur TypeScript et raccordé au propriétaire commun `public_ordered_recruitment`. Le développement part du moteur publié 0.62 / Site 103 et de son checkpoint documentaire `2981a62d456802d39dcde316734793e905fb0ebf`.
 
-Les **173 tests de référence** et les **quatre tests du noyau commun** passent. Ces preuves sont des contrats synthétiques de composant et de raccordement. La qualification finale sur les prédécesseurs effectivement publiés, les essais en jeu, le navigateur, les régressions, le coût officiel et la publication 10C restent à établir séparément.
+La [suite affectée de développement](lot10c-evidence/development/recr01-source/validation/delta-tests-run.json) passe **1 382/1 382 tests dans 46 fichiers**, dont **173 tests de référence originale et quatre tests du noyau commun**. Les **cinq contrôles du projet passent, compilation Sites effectivement exécutée comprise**. Les populations incluses ne sont pas additionnées. Le checkpoint source `17fdae6ec7d3544db1c69bef41d58a2deaa81a96` a été vérifié sur sa branche distante de sources le **11 novembre 2026 à 14:45:34 (UTC−03)**.
+
+La campagne réelle RECR01 atteint naturellement **trois niveaux en 17 actions** et la comparaison répétée avec l'original passe sur le composant. Le contrôle navigateur passe. Les dix régressions sont en cours ; la qualification finale après intégration des prédécesseurs publiés, le coût officiel et la publication 10C restent à établir. Le Site effectivement publié reste **103 / native 0.62** ; **0.66 est seulement proposée pour 10C**. La [feuille de route actualisée](v6-delivery-roadmap.md) conserve la file 5C / 0.63, 6B / 0.64 puis 8A / 0.65 avant cette finalisation.
 
 ## Sources et cible
 
@@ -63,9 +65,40 @@ La recherche native vérifie le signal et l'échéance du contexte d'exécution 
 
 Le domaine portable impose des entiers exactement représentables. Deux frontières sont explicitement testées : un entier dépassant la précision sûre JavaScript et le digest générique contenant `2.5`. Les sorties Python correspondantes sont conservées ; le refus natif reste une limite déclarée, sans égalité hors domaine inventée.
 
+## Campagne RECR01 et comparaison originale réelle
+
+RECR, « Recruit Army », a été choisi à partir du titre et de la description du catalogue public. Le [gel de développement](lot10c-evidence/development/recr01-source/source-manifest.json) lie **315 fichiers natifs** au digest `bb7d62b5823d76ae7a5ecd452cb622ebb04f2b85b20fb0d2f9a5c35a1535b361`. La [campagne réelle démarrée à froid](lot10c-evidence/development/recr01/execution-recruitment.json) est **PASS sur sa cible de trois niveaux, avec 17 actions**, pour **103,622933254 secondes débitées**. Le dernier état public est `levelsCompleted: 3`, `level: 4`, `reason: target_levels_completed`, `state: NOT_FINISHED`. La cible déclarée est atteinte ; la fin du jeu entier n'est pas revendiquée.
+
+La [première comparaison originale](lot10c-evidence/development/recr01-parity/execution.json) a terminé par `SIGSEGV` vers 90,25 secondes, pendant le troisième relevé périodique facultatif de traceback. Les 45 appels et 96 ablations en progression n'avaient rapporté aucune divergence, mais aucun rapport complet n'avait été produit. L'échec, ses sorties brutes et son débit de **118,063969094 secondes** sont conservés. Cette concomitance n'établit pas la cause du signal.
+
+Le relevé périodique facultatif et son nettoyage ont été retirés. La [revue statique indépendante](lot10c-evidence/development/recr01-parity-diagnosis/static-change-check.json) établit que **26 fonctions de comparaison sont inchangées par AST**. Les diagnostics fatals, la progression immédiatement écrite, le profilage original, les comparaisons source et la borne externe de 240 secondes sont maintenus. Cette modification contient le diagnostic facultatif ; son examen statique ne prouve pas la cause du crash.
+
+La [seconde comparaison](lot10c-evidence/development/recr01-parity02/original-parity.json.gz) est **PASS, code de sortie 0**, avec des entrées, originaux et liaison native inchangés. Son [reçu d'exécution](lot10c-evidence/development/recr01-parity02/execution.json) conserve **120,627604822 secondes de lecteur et 120,732553873 secondes débitées**.
+
+| Contrôle réel | Résultat |
+| --- | --- |
+| Appels source comparés | 50/50 |
+| Retours publics, actions et préfixes | 17/17 pour chaque compteur |
+| Acquisitions | 16 actives et une passive |
+| Restaurations natives | 34/34 |
+| Résultats après sélection | 16 |
+| Divergences et adaptations natives | Zéro pour chaque compteur |
+| Ablations exécutées/attendues | 102/102 |
+| Ablations appliquées | 72 |
+| Changements d'action ou de refus | 41 |
+| Erreurs d'ablation | Zéro |
+
+Les verdicts `exactOriginalReturnParityPassed` et `componentComparisonPassed` sont `true` ; **`fullCallerParity` reste `false`**. Les ablations établissent la contribution de l'état acquis aux décisions de ce composant. Elles ne démontrent pas une amélioration causale du résultat du jeu entier.
+
+Le [contrôle navigateur](lot10c-evidence/development/recr01-browser01/qa.json), sur le serveur Vite de développement, constate `Paused.`, puis exactement **3 → 4 actions** avec « One action », et une reprise jusqu’à **9 actions et deux niveaux résolus**. La [capture](lot10c-evidence/development/recr01-browser01/one-action.png) et les états accessibles sont conservés. Le premier clic Pause, arrivé après la fin du niveau, est conservé comme interaction infructueuse ; le second arrêt a bien été observé. Les dix erreurs de console conservées sont attribuées au script d’extension du navigateur. L’aperçu est arrêté et les 315 empreintes natives restent identiques.
+
+Le [registre unique du cas](lot10c-evidence/case-clock.json) conserve désormais **642,600846598 secondes cumulées et 1 757,399153402 secondes restantes sur 2 400**, après les **226,409458557 secondes** du navigateur. Admission, campagnes, diagnostics, échecs et rétention restent débités ; aucun redémarrage ne remet le compteur à zéro.
+
+Les [dix régressions enregistrées](lot10c-evidence/development/regressions01/regression-launch.json) sont lancées séquentiellement sur un nouveau gel complet `bb7…` / 315 fichiers natifs, avec 170 contrôles attendus. Elles réutilisent les dix rapports et dix traces historiques dont les empreintes ont été [vérifiées](lot10c-evidence/development/regression-preparation01/receipt.json), sans nouvelle partie. Leur résultat reste en cours.
+
 ## Qualification de livraison restant à établir
 
-RECR, « Recruit Army », a été proposé à partir du titre et de la description du catalogue public. Aucun résultat en jeu n'est déduit du scénario synthétique. Le cas aura un seul registre cumulé de 2 400 secondes pour les campagnes, diagnostics et essais navigateur ; les échecs et la rétention sont débités et aucun redémarrage ne remet le compteur à zéro.
+La référence publiée reste **Site 103 / native 0.62**. **5C / 0.63 et 6B / 0.64 sont en qualification ; 8A / 0.65 est préparé et attend leur publication.** Le candidat 10C devra intégrer ces prédécesseurs réellement publiés puis compléter sa qualification de livraison. Les preuves RECR ci-dessus portent sur le gel de développement `bb7…` ; elles ne constituent pas une publication 0.66. Aucun coût officiel final de 10C n'est encore établi.
 
 Le critère de coût demandé reste celui de la **médiane des sessions complètes, strictement sous +10 % pour chacun de STCK et SMLP**. Un dépassement de phase peut être accepté lorsque le critère global de ce même jeu passe. Toutes les sessions mesurées, les phases et les refus stricts réels restent conservés ; aucune compensation entre jeux n'est admise.
 

@@ -4,6 +4,9 @@ dist/
 .sites-runtime/
 artifacts/
 *.log
+
+# Exact gzip retained with a verified lossless transport receipt (raw object larger than32MiB).
+/docs/migration/lot10c-evidence/development/recr01/recruitment-checkpoint.json
 .DS_Store
 public/vendor/pyodide/
 /public/vendor/pyodide

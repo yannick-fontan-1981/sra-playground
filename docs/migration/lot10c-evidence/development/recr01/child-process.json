@@ -1,0 +1,16 @@
+{
+  "schema": "logos-engine.lot10c.recruitment-child-process.v1",
+  "pid": 6,
+  "startedAt": "2026-11-11T17:51:33.632961+00:00",
+  "startedElapsedSeconds": 0.238039537,
+  "allowanceAfterPreflightSeconds": 299.2620250740001,
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "--max-old-space-size=1536",
+    "/workspace/sites/sra-lot10c-20261111/.sites-checkout/docs/migration/lot10c-evidence/run-ordered-recruitment-campaign.mjs",
+    "/workspace/sites/sra-lot10c-20261111/.sites-checkout/docs/migration/lot10c-evidence/development/recr01"
+  ],
+  "nodeOldSpaceMiB": 1536,
+  "parentDeathSignal": "SIGKILL",
+  "separateProcessGroup": true
+}

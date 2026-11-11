@@ -1,0 +1,27 @@
+{
+  "attemptId": "docs/migration/lot10c-evidence/case-activities/recr01-browser01",
+  "status": "running",
+  "kind": "diagnostic_or_browser",
+  "purpose": "Development browser QA on actual bb7 build: cold RECR session, Pause, single action and Resume controls",
+  "game": "RECR",
+  "targetLevels": 3,
+  "startedAt": "2026-11-11T18:02:35.053306+00:00",
+  "monotonicStartNs": 22599521095075,
+  "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+  "priorCumulativeSeconds": 415.89174926,
+  "activityCeilingSeconds": 240.0,
+  "chargedSeconds": null,
+  "processPidAtAdmission": 6,
+  "executionHelpers": [
+    {
+      "path": "docs/migration/lot10c-evidence/case-activity.py",
+      "sha256": "c3a61752ff70eb6724a723a18c10fa4d445bf72d3d54011d7c2d7db6dbbe0681",
+      "bytes": 8126
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/run-clocked-proof.py",
+      "sha256": "530ed0272ac269340a28d9481c8db4188dc79cccdd85aa05c8a62570321ccbe3",
+      "bytes": 42344
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "logos-engine.lot10c.recruitment-cumulative-clock.v1",
+  "game": "RECR",
+  "maximumCumulativeSeconds": 2400,
+  "clockReset": false,
+  "initialAccounting": {
+    "newCase": true,
+    "chargedSeconds": 0,
+    "caseContract": {
+      "path": "docs/migration/lot10c-evidence/case-contract.json",
+      "sha256": "3b1bd39194961a4340a0dabcb733d0d447c3c495003ff6c510bbe0832faaccf7",
+      "bytes": 996
+    },
+    "admissionEvidence": {
+      "path": "docs/migration/lot10c-evidence/case-admission-review.json",
+      "sha256": "975cddde2c228f84d2132d8f76c4b8ca360b83a85f584926c350c2d32a268d2e",
+      "bytes": 4460
+    }
+  },
+  "attempts": [
+    {
+      "attemptId": "docs/migration/lot10c-evidence/case-activities/admission",
+      "status": "terminal",
+      "kind": "diagnostic_or_browser",
+      "purpose": "Public catalog selection and prior-case admission review",
+      "game": "RECR",
+      "targetLevels": 3,
+      "startedAt": "2026-11-11T17:28:05.269561+00:00",
+      "priorCumulativeSeconds": 0,
+      "activityCeilingSeconds": 60,
+      "chargedSeconds": 0.210466935,
+      "finishedAt": "2026-11-11T17:28:05.480026+00:00",
+      "outcome": "completed",
+      "executionReceipt": {
+        "path": "docs/migration/lot10c-evidence/case-activities/admission/execution.json",
+        "sha256": "abb04448d3d24e8b8a6f9e166a21523f79a5a59a69d316846d28df1c167e629b",
+        "bytes": 1726
+      },
+      "ceilingExceeded": false
+    }
+  ],
+  "cumulativeChargedSeconds": 0.210466935,
+  "remainingSeconds": 2399.789533065,
+  "budgetExceededSeconds": 0,
+  "budgetAvailability": "available",
+  "lastUpdatedAt": "2026-11-11T17:28:05.480035+00:00"
+}

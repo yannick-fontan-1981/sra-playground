@@ -1,0 +1,36 @@
+{
+  "schema": "logos-engine.lot10c.case-activity-execution.v1",
+  "attemptId": "docs/migration/lot10c-evidence/case-activities/recr01-browser01",
+  "game": "RECR",
+  "purpose": "Development browser QA on actual bb7 build: cold RECR session, Pause, single action and Resume controls",
+  "startedAt": "2026-11-11T18:02:35.053306+00:00",
+  "finishedAt": "2026-11-11T18:06:21.460643+00:00",
+  "status": "completed",
+  "elapsedSecondsThroughCapture": 226.407308281,
+  "activityCeilingSeconds": 240.0,
+  "ceilingExceeded": false,
+  "evidence": [
+    {
+      "path": "docs/migration/lot10c-evidence/development/recr01-browser01/qa.json",
+      "sha256": "bfc08eec143aeddd2ff2d893ccb8a3a21cb6dabe26d432f0a93ec93a8353621a",
+      "bytes": 1845
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/development/recr01-browser01/observations.json",
+      "sha256": "ddaa7d5c85322215e759e202871f5f990e1717e6b97141a1d3089e538ae08816",
+      "bytes": 37999
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/development/recr01-browser01/one-action.png",
+      "sha256": "ff8f711d402e66fcc1981777d6faf6002b121d986d9081d81172cc0af16a669e",
+      "bytes": 75540
+    }
+  ],
+  "generator": {
+    "path": "docs/migration/lot10c-evidence/case-activity.py",
+    "sha256": "c3a61752ff70eb6724a723a18c10fa4d445bf72d3d54011d7c2d7db6dbbe0681",
+    "bytes": 8126
+  },
+  "executionHelpersUnchanged": true,
+  "qualification": "The entire observed diagnostic/browser interval is charged, including any ceiling excess. No new campaign or success is inferred."
+}

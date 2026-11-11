@@ -1,0 +1,31 @@
+{
+  "schema": "logos-engine.lot10c.case-activity-execution.v1",
+  "attemptId": "docs/migration/lot10c-evidence/case-activities/recr01-parity",
+  "game": "RECR",
+  "purpose": "Compare complete real RECR01 public returns with the immutable original and measure acquired-state ablations",
+  "startedAt": "2026-11-11T17:53:53.214242+00:00",
+  "finishedAt": "2026-11-11T17:55:51.275801+00:00",
+  "status": "failed",
+  "elapsedSecondsThroughCapture": 118.061536228,
+  "activityCeilingSeconds": 300.0,
+  "ceilingExceeded": false,
+  "evidence": [
+    {
+      "path": "docs/migration/lot10c-evidence/development/recr01-parity/execution.json",
+      "sha256": "3698c713f3a6b54b18289c63d7bdcef39f0e6969391cb9313acc5d68f45fc7bb",
+      "bytes": 3895
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/development/recr01-parity/output.raw.txt",
+      "sha256": "a7d729accd23f505ae8de2200f6e6168f210538a99858b0e4e0b2e2a0129ba25",
+      "bytes": 104664
+    }
+  ],
+  "generator": {
+    "path": "docs/migration/lot10c-evidence/case-activity.py",
+    "sha256": "c3a61752ff70eb6724a723a18c10fa4d445bf72d3d54011d7c2d7db6dbbe0681",
+    "bytes": 8126
+  },
+  "executionHelpersUnchanged": true,
+  "qualification": "The entire observed diagnostic/browser interval is charged, including any ceiling excess. No new campaign or success is inferred."
+}

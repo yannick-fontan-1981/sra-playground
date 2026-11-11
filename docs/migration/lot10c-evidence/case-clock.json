@@ -37,11 +37,217 @@
         "bytes": 1726
       },
       "ceilingExceeded": false
+    },
+    {
+      "attemptId": "docs/migration/lot10c-evidence/development/recr01",
+      "status": "terminal",
+      "game": "RECR",
+      "targetLevels": 3,
+      "startedAt": "2026-11-11T17:51:33.394937+00:00",
+      "admittedAt": "2026-11-11T17:51:33.440336+00:00",
+      "priorCumulativeSeconds": 0.210466935,
+      "remainingBeforeSeconds": 2399.789533065,
+      "activityCeilingSeconds": 300.0,
+      "terminationMarginSeconds": 0.5,
+      "retentionReserveSeconds": 30.0,
+      "performanceLockMode": "exclusive_functional",
+      "sourceManifestPath": "docs/migration/lot10c-evidence/development/recr01-source/source-manifest.json",
+      "chargedSeconds": 103.622933254,
+      "qualification": "Every measured second is charged, including failure, timeout and retention; no refund or truncation.",
+      "finishedAt": "2026-11-11T17:53:17.017872+00:00",
+      "attemptOutcome": "child_returned",
+      "childExitCode": 0,
+      "campaignStatus": "passed",
+      "campaignPassedEstablished": true,
+      "cumulativeBudgetWithinLimit": true,
+      "observedActionReturns": 17,
+      "completeActionCountEstablished": true,
+      "executionReceipt": {
+        "path": "docs/migration/lot10c-evidence/development/recr01/execution-recruitment.json",
+        "sha256": "f39c9a6bfd89039a351643d398919b03e61e127610a6de5d9b433b71e3a66e7e",
+        "bytes": 15283
+      },
+      "retentionSecondsAfterChild": 12.478789704999997
+    },
+    {
+      "attemptId": "docs/migration/lot10c-evidence/case-activities/recr01-parity",
+      "status": "terminal",
+      "kind": "diagnostic_or_browser",
+      "purpose": "Compare complete real RECR01 public returns with the immutable original and measure acquired-state ablations",
+      "game": "RECR",
+      "targetLevels": 3,
+      "startedAt": "2026-11-11T17:53:53.214242+00:00",
+      "monotonicStartNs": 22077682028257,
+      "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+      "priorCumulativeSeconds": 103.833400189,
+      "activityCeilingSeconds": 300.0,
+      "chargedSeconds": 118.063969094,
+      "processPidAtAdmission": 2,
+      "executionHelpers": [
+        {
+          "path": "docs/migration/lot10c-evidence/case-activity.py",
+          "sha256": "c3a61752ff70eb6724a723a18c10fa4d445bf72d3d54011d7c2d7db6dbbe0681",
+          "bytes": 8126
+        },
+        {
+          "path": "docs/migration/lot10c-evidence/run-clocked-proof.py",
+          "sha256": "530ed0272ac269340a28d9481c8db4188dc79cccdd85aa05c8a62570321ccbe3",
+          "bytes": 42344
+        }
+      ],
+      "finishedAt": "2026-11-11T17:55:51.278228+00:00",
+      "executionReceipt": {
+        "path": "docs/migration/lot10c-evidence/case-activities/recr01-parity/execution.json",
+        "sha256": "62974a06375e77ec766708fd7770b41958e728f1a160bc9825dfed9b3034b29f",
+        "bytes": 1332
+      },
+      "outcome": "failed",
+      "ceilingExceeded": false
+    },
+    {
+      "attemptId": "docs/migration/lot10c-evidence/case-activities/recr01-parity-diagnosis",
+      "status": "terminal",
+      "kind": "diagnostic_or_browser",
+      "purpose": "Diagnose original public-parity reader crash on retained RECR01 trace without rerunning the game",
+      "game": "RECR",
+      "targetLevels": 3,
+      "startedAt": "2026-11-11T17:56:21.290251+00:00",
+      "monotonicStartNs": 22225758037800,
+      "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+      "priorCumulativeSeconds": 221.897369283,
+      "activityCeilingSeconds": 300.0,
+      "chargedSeconds": 73.261826104,
+      "processPidAtAdmission": 5,
+      "executionHelpers": [
+        {
+          "path": "docs/migration/lot10c-evidence/case-activity.py",
+          "sha256": "c3a61752ff70eb6724a723a18c10fa4d445bf72d3d54011d7c2d7db6dbbe0681",
+          "bytes": 8126
+        },
+        {
+          "path": "docs/migration/lot10c-evidence/run-clocked-proof.py",
+          "sha256": "530ed0272ac269340a28d9481c8db4188dc79cccdd85aa05c8a62570321ccbe3",
+          "bytes": 42344
+        }
+      ],
+      "finishedAt": "2026-11-11T17:57:34.552094+00:00",
+      "executionReceipt": {
+        "path": "docs/migration/lot10c-evidence/case-activities/recr01-parity-diagnosis/execution.json",
+        "sha256": "32f9be0bf9000d9b9cc46807b7bbb64e4d4b6890b15f17a38765ad88bc270e8a",
+        "bytes": 1582
+      },
+      "outcome": "completed",
+      "ceilingExceeded": false
+    },
+    {
+      "attemptId": "docs/migration/lot10c-evidence/case-activities/recr01-parity02",
+      "status": "terminal",
+      "kind": "diagnostic_or_browser",
+      "purpose": "Repeat complete original parity on unchanged RECR01 trace after removing optional periodic stack sampler; no new game",
+      "game": "RECR",
+      "targetLevels": 3,
+      "startedAt": "2026-11-11T17:58:32.905420+00:00",
+      "monotonicStartNs": 22357373204563,
+      "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+      "priorCumulativeSeconds": 295.159195387,
+      "activityCeilingSeconds": 300.0,
+      "chargedSeconds": 120.732553873,
+      "processPidAtAdmission": 7,
+      "executionHelpers": [
+        {
+          "path": "docs/migration/lot10c-evidence/case-activity.py",
+          "sha256": "c3a61752ff70eb6724a723a18c10fa4d445bf72d3d54011d7c2d7db6dbbe0681",
+          "bytes": 8126
+        },
+        {
+          "path": "docs/migration/lot10c-evidence/run-clocked-proof.py",
+          "sha256": "530ed0272ac269340a28d9481c8db4188dc79cccdd85aa05c8a62570321ccbe3",
+          "bytes": 42344
+        }
+      ],
+      "finishedAt": "2026-11-11T18:00:33.637989+00:00",
+      "executionReceipt": {
+        "path": "docs/migration/lot10c-evidence/case-activities/recr01-parity02/execution.json",
+        "sha256": "0f8f03a30dee6619a99295a7ad96f33ab2c0652166d8fc34f6cc3750b2f5827d",
+        "bytes": 1569
+      },
+      "outcome": "completed",
+      "ceilingExceeded": false
+    },
+    {
+      "attemptId": "docs/migration/lot10c-evidence/case-activities/recr01-browser01",
+      "status": "terminal",
+      "kind": "diagnostic_or_browser",
+      "purpose": "Development browser QA on actual bb7 build: cold RECR session, Pause, single action and Resume controls",
+      "game": "RECR",
+      "targetLevels": 3,
+      "startedAt": "2026-11-11T18:02:35.053306+00:00",
+      "monotonicStartNs": 22599521095075,
+      "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+      "priorCumulativeSeconds": 415.89174926,
+      "activityCeilingSeconds": 240.0,
+      "chargedSeconds": 226.409458557,
+      "processPidAtAdmission": 6,
+      "executionHelpers": [
+        {
+          "path": "docs/migration/lot10c-evidence/case-activity.py",
+          "sha256": "c3a61752ff70eb6724a723a18c10fa4d445bf72d3d54011d7c2d7db6dbbe0681",
+          "bytes": 8126
+        },
+        {
+          "path": "docs/migration/lot10c-evidence/run-clocked-proof.py",
+          "sha256": "530ed0272ac269340a28d9481c8db4188dc79cccdd85aa05c8a62570321ccbe3",
+          "bytes": 42344
+        }
+      ],
+      "finishedAt": "2026-11-11T18:06:21.462785+00:00",
+      "executionReceipt": {
+        "path": "docs/migration/lot10c-evidence/case-activities/recr01-browser01/execution.json",
+        "sha256": "d6dbfbff0f17211108c972ed16a6bf1621d44025265054e80e8ce00d1187f7cb",
+        "bytes": 1544
+      },
+      "outcome": "completed",
+      "ceilingExceeded": false
+    },
+    {
+      "attemptId": "docs/migration/lot10c-evidence/case-activities/recr01-transport-verification",
+      "status": "terminal",
+      "kind": "diagnostic_or_browser",
+      "purpose": "Verify exact lossless compressed transport of the retained large raw RECR checkpoint without semantic inspection",
+      "game": "RECR",
+      "targetLevels": 3,
+      "startedAt": "2026-11-11T18:11:33.144314+00:00",
+      "monotonicStartNs": 23137612101439,
+      "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+      "priorCumulativeSeconds": 642.301207817,
+      "activityCeilingSeconds": 60.0,
+      "chargedSeconds": 0.299638781,
+      "processPidAtAdmission": 7,
+      "executionHelpers": [
+        {
+          "path": "docs/migration/lot10c-evidence/case-activity.py",
+          "sha256": "c3a61752ff70eb6724a723a18c10fa4d445bf72d3d54011d7c2d7db6dbbe0681",
+          "bytes": 8126
+        },
+        {
+          "path": "docs/migration/lot10c-evidence/run-clocked-proof.py",
+          "sha256": "530ed0272ac269340a28d9481c8db4188dc79cccdd85aa05c8a62570321ccbe3",
+          "bytes": 42344
+        }
+      ],
+      "finishedAt": "2026-11-11T18:11:33.443970+00:00",
+      "executionReceipt": {
+        "path": "docs/migration/lot10c-evidence/case-activities/recr01-transport-verification/execution.json",
+        "sha256": "cf8fae342177c6233f28e8d0b991beb532de3e2de0f1443e6194f2fe182fb478",
+        "bytes": 1157
+      },
+      "outcome": "completed",
+      "ceilingExceeded": false
     }
   ],
-  "cumulativeChargedSeconds": 0.210466935,
-  "remainingSeconds": 2399.789533065,
-  "budgetExceededSeconds": 0,
+  "cumulativeChargedSeconds": 642.600846598,
+  "remainingSeconds": 1757.399153402,
+  "budgetExceededSeconds": 0.0,
   "budgetAvailability": "available",
-  "lastUpdatedAt": "2026-11-11T17:28:05.480035+00:00"
+  "lastUpdatedAt": "2026-11-11T18:11:33.443983+00:00"
 }
