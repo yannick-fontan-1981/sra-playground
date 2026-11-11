@@ -180,8 +180,8 @@
   },
   "recordedReplayScope": {
     "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/recorded-regression-cases.json",
-    "bytes": 9222,
-    "sha256": "b68b06b850e257b2dd63a2fc4fc3a30cd7a161a3d312b7540f39455435c57dea"
+    "bytes": 15556,
+    "sha256": "18684d23bf7122a9f88f85d8bdb6f557144f892e7f09f2ef7630cbb5a7e6bc33"
   },
   "recordedReplayCaseCount": 11,
   "recordedReplayExpectedChecks": 187,
@@ -214,5 +214,6 @@
     "HPDL": "Excluded from declared recorded regressions; partial published10B proof remains partial, closed clock unchanged."
   },
   "noNewLiveGame": true,
-  "qualification": "A declared gate contract, not an execution or acceptance receipt. Functional durations under shared load are not official performance measurements."
+  "qualification": "A declared gate contract, not an execution or acceptance receipt. Functional durations under shared load are not official performance measurements.",
+  "recordedReplayBindingQualification": "The retained historical recorder has no dedicated Binding prefix capture. These eleven replays do not assert passive Binding acquisition. Fresh common seven-test/eight-scenario proof and original comparisons establish the separately declared Binding coverage."
 }
