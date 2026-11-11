@@ -5055,9 +5055,10 @@
         "docs/migration/lot8a-evidence/contract/reference-oracle.json",
         "docs/migration/lot8a-evidence/contract/site103-integration-review.json",
         "docs/migration/lot8a-evidence/development/component-proof.json",
-        "docs/migration/lot8a-motif-access-lineage.md"
+        "docs/migration/lot8a-motif-access-lineage.md",
+        "docs/migration/lot8a-evidence/integration-provisional-063-064-01/component-proof.json"
       ],
-      "notes": "Lot8A transfers MotifAccess geometry, proposal ordering, current guards, selected-return acquisition and source state in the independently constructed synthetic domain. Fresh native reference, contract and cold common-factory tests pass on actual Site103 integration. One owner occupies motif_conditioned_access at its declared material position; restored acquired motion affects the next decision and contrary/ablated returns change behavior. Current deadline/abort, bounded incomplete-search refusal and validated detached native restoration are explicit native adaptations. Search bounds do not prove a byte-memory or universal latency limit: full paths can occupy O(S^2). These development component proofs do not establish official game success, whole-caller parity, final integration against actual0.63/0.64, cost or publication."
+      "notes": "Lot8A transfers MotifAccess geometry, proposal ordering, current guards, selected-return acquisition and source state in the independently constructed synthetic domain. Fresh native reference, contract and cold common-factory tests pass on actual Site103 integration. One owner occupies motif_conditioned_access at its declared material position; restored acquired motion affects the next decision and contrary/ablated returns change behavior. Current deadline/abort, bounded incomplete-search refusal and validated detached native restoration are explicit native adaptations. Search bounds do not prove a byte-memory or universal latency limit: full paths can occupy O(S^2). These development component proofs do not establish official game success, whole-caller parity, final integration against actual0.63/0.64, cost or publication. Fresh provisional composition on prepared5C/6B passes5606/5606 tests across145 declared files with324 native files (936fa2bf); the new component proof binds these unchanged inputs. Actual published0.63/0.64 and final common/regression/cost qualification remain required."
     }
   ],
   "scopeNotes": [

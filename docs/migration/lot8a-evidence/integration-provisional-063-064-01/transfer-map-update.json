@@ -1,0 +1,32 @@
+{
+  "schema": "logos-engine.v6.motif-access-composition-map-update.v1",
+  "recordedAt": "2026-11-11T20:00:03.909364+00:00",
+  "timing": "After successful tests, before first delivery gate, as declared by the frozen runner.",
+  "mappingBefore": {
+    "path": "migration/v6-transfer-map.json",
+    "sha256": "daf8b7ae80840ca830ef3f79f2c006e50bfb4a9522432cd763a8db8c8bf6347f",
+    "bytes": 435900
+  },
+  "mappingAfter": {
+    "path": "migration/v6-transfer-map.json",
+    "sha256": "b487ea74e43953519c61d792e79974b4e2723dc437c63ee5cceed355303a7b7b",
+    "bytes": 436268
+  },
+  "changedSources": [
+    "agents/yf_arc3_v6/laya_proto/common_motif_access.py"
+  ],
+  "statusBefore": "component_verified",
+  "statusAfter": "component_verified",
+  "addedProof": {
+    "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/component-proof.json",
+    "sha256": "f3d91975fc00e2bbb37b1c39866d5641dcddcf7c57bf193cf99f8607522bc15c",
+    "bytes": 6038
+  },
+  "freshTests": {
+    "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/validation-01/tests-run.json",
+    "sha256": "28ede04ed1f558f577333a5c158dc5ac50731fdcb74b51e8af6dd95fe81a926b",
+    "bytes": 1271939
+  },
+  "globalCompletionGatesUnchanged": true,
+  "nativeTestScriptBuildInputsChanged": false
+}

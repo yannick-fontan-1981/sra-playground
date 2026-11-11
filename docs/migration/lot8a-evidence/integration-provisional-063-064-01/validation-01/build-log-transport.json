@@ -1,0 +1,44 @@
+{
+  "schema": "logos-engine.v6.development-log-transport.v1",
+  "recordedAt": "2026-11-11T20:02:04.047750+00:00",
+  "status": "verified_byte_exact",
+  "entries": [
+    {
+      "raw": {
+        "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/validation-01/build-stdout.log",
+        "sha256": "ee874cc72f65546fcc32eaa06cdec0881e526953f295ee068cc080f657f0b9d0",
+        "bytes": 4169
+      },
+      "gzip": {
+        "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/validation-01/build-stdout.log.gz",
+        "sha256": "e1c19f228b5d5e03113a2ca81f24d2a1ce9473f8e7be313431c0d95c8b760328",
+        "bytes": 1313
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/validation-01/build-stderr.log",
+        "sha256": "f97a3e7c7d1a5fbe14acbdfa8bae8bcb510b12cfa0454f6aec301ba19b64467f",
+        "bytes": 459
+      },
+      "gzip": {
+        "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/validation-01/build-stderr.log.gz",
+        "sha256": "bfdfba173163f1bedff2f74f68093ed7f020cfce53b9b9e82568e66423c091a5",
+        "bytes": 316
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/validation-01/build-activity.jsonl",
+        "sha256": "e25098cd34bcf175d8b46c2b351869346e9cd43307ab09ed62f591078cd6b254",
+        "bytes": 1638
+      },
+      "gzip": {
+        "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/validation-01/build-activity.jsonl.gz",
+        "sha256": "2ffa32869e44817fa87768093e45f9dc3ad21bfa5cc642280baf558d5743ea9f",
+        "bytes": 298
+      }
+    }
+  ],
+  "qualification": "Complete stdout, stderr and activity, including failures; no filtering or newline normalization."
+}

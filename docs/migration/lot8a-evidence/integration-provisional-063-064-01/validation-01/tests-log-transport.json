@@ -1,0 +1,44 @@
+{
+  "schema": "logos-engine.v6.development-log-transport.v1",
+  "recordedAt": "2026-11-11T19:52:18.385082+00:00",
+  "status": "verified_byte_exact",
+  "entries": [
+    {
+      "raw": {
+        "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/validation-01/tests-stdout.log",
+        "sha256": "b2f09170c0c0fd1076ae2ff652619e6c60935b63de3f4b6dcac8c61d804cf4c8",
+        "bytes": 1133053
+      },
+      "gzip": {
+        "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/validation-01/tests-stdout.log.gz",
+        "sha256": "02110175a2d86eac521529c3ae94f4cb86eee4ac978204e1605668039b89213b",
+        "bytes": 158465
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/validation-01/tests-stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "gzip": {
+        "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/validation-01/tests-stderr.log.gz",
+        "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+        "bytes": 20
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/validation-01/tests-activity.jsonl",
+        "sha256": "9562de05ab56c25d686159fe3d082a0f30bfc415105ebf3c354d31bee4b6d700",
+        "bytes": 97981
+      },
+      "gzip": {
+        "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/validation-01/tests-activity.jsonl.gz",
+        "sha256": "329e83217098fa8914a1878338bc0e8420096aa8bcc459c37fe92f4415f2bb42",
+        "bytes": 11705
+      }
+    }
+  ],
+  "qualification": "Complete stdout, stderr and activity, including failures; no filtering or newline normalization."
+}

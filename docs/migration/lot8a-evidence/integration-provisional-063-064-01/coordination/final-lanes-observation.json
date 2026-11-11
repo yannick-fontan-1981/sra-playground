@@ -1,0 +1,54 @@
+{
+  "schema": "logos-engine.lot8a.final-lanes-observation.v1",
+  "observedAt": "2026-11-11T20:07:54.759630+00:00",
+  "qualification": "Peer declarations from named shared coordination files only; no independent functional, cost or publication acceptance is inferred. Exact published predecessor is separately observed through Sites.",
+  "lanes": {
+    "lot5c-status.json": {
+      "updated_at": "2026-11-11T20:04:44.908411+00:00",
+      "phase": "coordination_v2_tests_passed_independent_final_review",
+      "quiet_requested": false,
+      "quiet_request_id": "lot5c-cost-a33a5f88-final-01",
+      "quiet_released_at": "2026-11-11T19:08:34.656015+00:00",
+      "performance_started": false,
+      "publication_started": false,
+      "checkpoint_commit": "501198d7638c7a56c3b85d357beb917469899402",
+      "reserved_native_version": "0.63.0",
+      "proposed_native_version": null
+    },
+    "lot6b-status.json": {
+      "updated_at": "2026-11-11T20:07:43.132616+00:00",
+      "phase": "browser_retry_source_preparation_and_checkpoint_inventory",
+      "quiet_requested": false,
+      "quiet_request_id": "lot5c-cost-a33a5f88-final-01",
+      "quiet_released_at": null,
+      "performance_started": false,
+      "publication_started": false,
+      "checkpoint_commit": "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+      "reserved_native_version": null,
+      "proposed_native_version": null
+    },
+    "lot10c-status.json": {
+      "updated_at": "2026-11-11T20:01:17.074830+00:00",
+      "phase": "prepared-composition-documentary-closure",
+      "quiet_requested": false,
+      "quiet_request_id": "lot5c-cost-a33a5f88-final-01",
+      "quiet_released_at": "2026-11-11T17:53:53.132648+00:00",
+      "performance_started": false,
+      "publication_started": false,
+      "checkpoint_commit": null,
+      "reserved_native_version": null,
+      "proposed_native_version": null
+    }
+  },
+  "eightAFinalPredecessors": [
+    "actual published0.63",
+    "actual published0.64"
+  ],
+  "publicationOrder": [
+    "5C0.63",
+    "6B0.64",
+    "8A0.65",
+    "10C0.66"
+  ],
+  "coordinationPrinciple": "Prepared sources may be composed and functionally verified; each final delivery still reconciles its actual published predecessor."
+}
