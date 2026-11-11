@@ -1,0 +1,28 @@
+{
+  "schema": "logos-engine.lot10b.clock-origin-review.v1",
+  "recordedAt": "2026-11-11T13:52:17.643829+00:00",
+  "oldNativeDigest": "318153c14c7766c9d007f1b2ede4fa03ce940d62b1369251339e0174af79c306",
+  "newNativeDigest": "74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12",
+  "nativeFiles": 310,
+  "changedNativeFiles": [
+    "src/logos-engine/v6-native-runtime.ts"
+  ],
+  "rootRuntimeSha256": "35ee423d3dbfd74b7969c568db48222260ef78dab8a75402a7f28d643a110438",
+  "testSha256": "8badc5aba5b71906da3d33bc323455b047721d5546c16fdbb20ac76d6eb8b7fc",
+  "independentReviewer": "window_geometry",
+  "reviewType": "source_and_narrow_diff_only",
+  "materialIssueRemaining": false,
+  "beforeFixNamedTests": {
+    "passed": 0,
+    "failed": 2
+  },
+  "afterFixNamedTests": {
+    "passed": 2,
+    "failed": 0
+  },
+  "existingColdWindowTests": {
+    "passed": 4,
+    "failed": 0
+  },
+  "qualification": "The two public runtime regressions fail before and pass after conversion of caller remaining time into the runtime clock. Cancellation/yield identities, active-level bound and acquisition of the received return are retained. HPDL01 remains historical on its old digest; no game, browser or cost result is attributed to this corrected candidate."
+}

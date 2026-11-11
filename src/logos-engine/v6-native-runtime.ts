@@ -506,12 +506,19 @@ export class NativeV6Runtime implements NativeV6Backend {
   }
 
   /** Each invocation gets its current cancellation signal and remaining active
-   * level budget. No planning context is retained across requests or pauses. */
+   * level budget. Caller deadlines are translated from their own clock origin.
+   * No planning context is retained across requests or pauses. */
   private currentExecution(execution: NativeExecution): NativeExecution {
     if (!this.current) return execution;
-    const remainingActiveMs = Math.max(0, 360_000 - (this.levelMs.get(this.current.level) ?? 0) - this.runningMs(this.current.level));
+    const currentNow = this.now();
+    const runningActiveMs = this.computeStart !== null && this.computeLevel === this.current.level
+      ? Math.max(0, currentNow - this.computeStart) : 0;
+    const remainingActiveMs = Math.max(0, 360_000 - (this.levelMs.get(this.current.level) ?? 0)
+      - runningActiveMs);
+    const callerRemainingMs = execution.deadlineMs === undefined ? Infinity
+      : Math.max(0, execution.deadlineMs - (execution.now ?? (() => performance.now()))());
     return { ...execution, now: this.now,
-      deadlineMs: Math.min(execution.deadlineMs ?? Infinity, this.now() + remainingActiveMs) };
+      deadlineMs: currentNow + Math.min(remainingActiveMs, callerRemainingMs) };
   }
 
   /** Original V6 family-selection SRC tree, interpreted by the V7 TS engine. */
