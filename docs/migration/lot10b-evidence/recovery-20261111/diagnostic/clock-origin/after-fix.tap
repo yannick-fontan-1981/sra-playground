@@ -1,0 +1,22 @@
+TAP version 13
+# Subtest: native current deadlines convert caller clock 10 to runtime clock 1000
+ok 1 - native current deadlines convert caller clock 10 to runtime clock 1000
+  ---
+  duration_ms: 125.368364
+  type: 'test'
+  ...
+# Subtest: native current deadlines convert caller clock 1000 to runtime clock 10
+ok 2 - native current deadlines convert caller clock 1000 to runtime clock 10
+  ---
+  duration_ms: 108.888498
+  type: 'test'
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1385.449651

@@ -1,0 +1,76 @@
+{
+  "sourceInputs": {
+    "generator": {
+      "sourcePath": "docs/migration/lot10b-evidence/run-hpdl-clocked-diagnostic.py",
+      "sha256": "be12b3441d47ec4906c3648679c61b895b2cfef9be875d3fa1c3da5093bc3be7",
+      "bytes": 24526
+    },
+    "cumulativeClockReader": {
+      "sourcePath": "docs/migration/lot10b-evidence/run-hpdl-clocked-proof.py",
+      "sha256": "e959e8d9b7ed5875bc9843393aeae44586674229fccb951279097c4c75195971",
+      "bytes": 36304
+    },
+    "partialComparator": {
+      "sourcePath": "scripts/compare-window-question-checkpoint-parity.py",
+      "sha256": "3d5378012a3db0cfe1e093fe34d0a24a006eeb6105948c11542337a9e0aac841",
+      "bytes": 22221
+    },
+    "sharedComparisonCore": {
+      "sourcePath": "scripts/compare-window-question-public-parity.py",
+      "sha256": "e85c16ef467a9305b669c6bb11a48d32c6f64c3df1aa0aac57aa089c76990951",
+      "bytes": 66251
+    },
+    "checkpoint": {
+      "sourcePath": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json",
+      "sha256": "871f8cd0df7c74f0ce54bbe046f0e54f16d025686adf4fc7bbe8531f71c2fef0",
+      "bytes": 177532943
+    },
+    "diagnosedExecution": {
+      "sourcePath": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/execution-hpdl.json",
+      "sha256": "f3fc927792b2574c32dd76aaa996b503b33925923051bf207a90f1cac4736e6f",
+      "bytes": 10116
+    },
+    "publicJournal": {
+      "sourcePath": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-actual-public-journal.jsonl.gz",
+      "sha256": "d3a9535e50a66132e37bb3387bdc2c4c45cd0bd000c2a7bb2b819fa2e7de4a13",
+      "bytes": 38720
+    }
+  },
+  "retainedInputs": {
+    "generator": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-02/retained-inputs/generator.py",
+      "sha256": "be12b3441d47ec4906c3648679c61b895b2cfef9be875d3fa1c3da5093bc3be7",
+      "bytes": 24526
+    },
+    "cumulativeClockReader": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-02/retained-inputs/cumulativeClockReader.py",
+      "sha256": "e959e8d9b7ed5875bc9843393aeae44586674229fccb951279097c4c75195971",
+      "bytes": 36304
+    },
+    "partialComparator": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-02/retained-inputs/partialComparator.py",
+      "sha256": "3d5378012a3db0cfe1e093fe34d0a24a006eeb6105948c11542337a9e0aac841",
+      "bytes": 22221
+    },
+    "sharedComparisonCore": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-02/retained-inputs/sharedComparisonCore.py",
+      "sha256": "e85c16ef467a9305b669c6bb11a48d32c6f64c3df1aa0aac57aa089c76990951",
+      "bytes": 66251
+    },
+    "checkpoint": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json",
+      "sha256": "871f8cd0df7c74f0ce54bbe046f0e54f16d025686adf4fc7bbe8531f71c2fef0",
+      "bytes": 177532943
+    },
+    "diagnosedExecution": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/execution-hpdl.json",
+      "sha256": "f3fc927792b2574c32dd76aaa996b503b33925923051bf207a90f1cac4736e6f",
+      "bytes": 10116
+    },
+    "publicJournal": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-actual-public-journal.jsonl.gz",
+      "sha256": "d3a9535e50a66132e37bb3387bdc2c4c45cd0bd000c2a7bb2b819fa2e7de4a13",
+      "bytes": 38720
+    }
+  }
+}

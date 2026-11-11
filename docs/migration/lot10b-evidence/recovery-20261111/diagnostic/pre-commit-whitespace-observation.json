@@ -1,0 +1,20 @@
+{
+  "schema": "logos-engine.retained-formatting-observation.v1",
+  "recordedAt": "2026-11-11T14:35:31.637290+00:00",
+  "command": [
+    "git",
+    "diff",
+    "--cached",
+    "--check"
+  ],
+  "exitCode": 2,
+  "diagnostic": "new blank line at EOF",
+  "paths": [
+    "docs/migration/lot10b-evidence/recovery-20261111/diagnostic/lot10b-composed-typecheck-01.log",
+    "docs/migration/lot10b-evidence/recovery-20261111/diagnostic/lot10b-composed-typecheck-02.log",
+    "docs/migration/lot10b-evidence/recovery-20261111/diagnostic/typecheck-01.log",
+    "docs/migration/lot10b-evidence/recovery-20261111/diagnostic/typecheck-02.log",
+    "docs/migration/lot10b-evidence/review-owner-costs.py"
+  ],
+  "qualification": "Optional staged whitespace check retained as observed. Four immutable raw outputs and one already-frozen Python helper end with an extra blank line. Their exact bytes are preserved; this observation is not classified as a passing check and no validation receipt was changed. Ordinary source checkpoint commit follows without altering frozen execution inputs."
+}

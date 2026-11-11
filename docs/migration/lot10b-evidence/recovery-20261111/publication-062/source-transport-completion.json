@@ -1,0 +1,112 @@
+{
+  "schema": "logos-engine.lot10b-source-transport-completion.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-11T16:51:02.140484+00:00",
+  "plan": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/publication-062/source-transport-plan.json",
+    "bytes": 397704,
+    "sha256": "0d463897ff3eadf7bc105515a0f66b2d2007c65251b0c1d1fd1436b8a7f94c0b"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "actualSource": "a6e447a1b9497abcccb4dd68f08952fe0afe0741",
+      "workflow": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/publication-062/step-01-workflow.json",
+        "bytes": 904,
+        "sha256": "661b9f695bcd207b624825a206bf9bcab2ca9e226d3bd53c5f93a4f828091993"
+      },
+      "applicationVerification": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/publication-062/step-01-application-verification.json",
+        "bytes": 15974,
+        "sha256": "164c0d0420e5e22b8c68a8e8e12ebd888c34bde030319a84531bab4246c270c7"
+      }
+    },
+    {
+      "step": 2,
+      "actualSource": "fd2cba55b157b98968bb15daa1e62d6ae1bd1eb6",
+      "workflow": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/publication-062/step-02-workflow.json",
+        "bytes": 1845,
+        "sha256": "52fbaa5c751d1ee539070a69eeb451129f81ea3eb6c836dfc4a449475516d426"
+      },
+      "applicationVerification": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/publication-062/step-02-application-verification.json",
+        "bytes": 15974,
+        "sha256": "e29805c7d03590199fe0a5de8026b3cc80d0f2114d9de11117148dc933a4c176"
+      }
+    },
+    {
+      "step": 3,
+      "actualSource": "697c221c057b08901792d37cc09da263709eb5ee",
+      "workflow": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/publication-062/step-03-workflow.json",
+        "bytes": 1840,
+        "sha256": "3429999dc18061d077cf742f1d23df72826ea0b8d0fb1fa56648292f2e5ce7bf"
+      },
+      "applicationVerification": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/publication-062/step-03-application-verification.json",
+        "bytes": 15974,
+        "sha256": "f866d3d8c717e685ddb7d0665e1b92111024437db94f3b9e52007bf2920e8d5e"
+      }
+    },
+    {
+      "step": 4,
+      "actualSource": "0cf973819d548f79499d67a77133c0697c5f1c5b",
+      "workflow": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/publication-062/step-04-workflow.json",
+        "bytes": 1846,
+        "sha256": "b4448d93de1be4c54c9cdc60035eb538a17d20cec91292a084e9ca8066d85136"
+      },
+      "applicationVerification": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/publication-062/step-04-application-verification.json",
+        "bytes": 15974,
+        "sha256": "9ff5e2973d3cfef495ab0565ae76a07bdc3d5fa04ce0b5709473430ac2b56e4d"
+      }
+    },
+    {
+      "step": 5,
+      "actualSource": "7472f4daae5b1437fe278fccc7ade8ac2df187cc",
+      "workflow": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/publication-062/step-05-workflow.json",
+        "bytes": 1844,
+        "sha256": "e5515586023515dc61363d6bcc1f1303fe57535be782bd285e477edf2c797279"
+      },
+      "applicationVerification": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/publication-062/step-05-application-verification.json",
+        "bytes": 15974,
+        "sha256": "9ff31c25690b1cc0103593797850eaf22a3d5c0af838883d7d6d354545465f3b"
+      }
+    },
+    {
+      "step": 6,
+      "actualSource": "1019d2eb929d7dc201a5c1f6edce5aa1c5dfa464",
+      "workflow": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/publication-062/step-06-workflow.json",
+        "bytes": 1672,
+        "sha256": "e83409db10afbc931d013b5ec1caa5d35f289915eea2cc44dc9482cb583634c7"
+      },
+      "applicationVerification": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/publication-062/step-06-application-verification.json",
+        "bytes": 15974,
+        "sha256": "221c6452b22d13444372f631d0a6a95f3ac0db5144ad4d081b65283f0a78ea0e"
+      }
+    }
+  ],
+  "actualPushes": 6,
+  "forcePush": false,
+  "intermediateSiteDeployments": 0,
+  "finalSourceCommit": "1019d2eb929d7dc201a5c1f6edce5aa1c5dfa464",
+  "retainedOriginalHead": "970a2a2f2cf14d7d2bb001594c752a90b7886690",
+  "finalTreeExactlyEqualToRetainedTarget": true,
+  "allAncestryRetained": true,
+  "totalNewReachableRawObjectBytes": 168117359,
+  "maximumStepRawObjectBytes": 40740225,
+  "applicationMemberComparisons": 450,
+  "finalSourceRecheck": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/publication-062/final-source-recheck.json",
+    "bytes": 2623,
+    "sha256": "68c8b0a32df71844de2223417076fea6d45199aef014be486f04f267ea33a097"
+  },
+  "qualification": "All six official Site workflow executions completed ordinary source pushes and exact remote HEAD checks. Each actual application archive passed 75 exact member comparisons. Raw Git-object bytes are a planning bound, not measured network pack sizes. No Site deployment occurred between steps; native publication is separately recorded."
+}

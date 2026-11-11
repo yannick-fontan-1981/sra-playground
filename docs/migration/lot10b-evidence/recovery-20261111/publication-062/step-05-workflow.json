@@ -1,0 +1,39 @@
+{
+  "step": 5,
+  "workflow": {
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "checkout_path": "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout",
+    "commit_sha": "7472f4daae5b1437fe278fccc7ade8ac2df187cc",
+    "archive": "/workspace/sites/sra-lot10b-recovery-20261111/publication-native-062/step-05.tar.gz"
+  },
+  "terminalResult": {
+    "chunk_id": "707316",
+    "wall_time_seconds": 2.311843412,
+    "exit_code": 0,
+    "original_token_count": 94,
+    "output": "/workspace/sites/sra-lot10b-recovery-20261111/publication-native-062/step-05.tar.gz\r\n{\"project_id\":\"appgprj_6adbc388d79081918581b93b919d7258\",\"checkout_path\":\"/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout\",\"commit_sha\":\"7472f4daae5b1437fe278fccc7ade8ac2df187cc\",\"archive\":\"/workspace/sites/sra-lot10b-recovery-20261111/publication-native-062/step-05.tar.gz\"}\r\n",
+    "observations": [
+      {
+        "chunk_id": "0e6db7",
+        "wall_time_seconds": 1.000494764,
+        "session_id": 4797,
+        "original_token_count": 0,
+        "output": ""
+      },
+      {
+        "chunk_id": "11a555",
+        "wall_time_seconds": 5.000783371,
+        "session_id": 4797,
+        "original_token_count": 0,
+        "output": ""
+      },
+      {
+        "chunk_id": "707316",
+        "wall_time_seconds": 2.311843412,
+        "exit_code": 0,
+        "original_token_count": 94,
+        "output": "/workspace/sites/sra-lot10b-recovery-20261111/publication-native-062/step-05.tar.gz\r\n{\"project_id\":\"appgprj_6adbc388d79081918581b93b919d7258\",\"checkout_path\":\"/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout\",\"commit_sha\":\"7472f4daae5b1437fe278fccc7ade8ac2df187cc\",\"archive\":\"/workspace/sites/sra-lot10b-recovery-20261111/publication-native-062/step-05.tar.gz\"}\r\n"
+      }
+    ]
+  }
+}

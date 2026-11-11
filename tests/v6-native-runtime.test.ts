@@ -6,7 +6,7 @@ import type { NativeV6Declarations } from '../src/logos-engine/v6-native-runtime
 import { V6AgentService } from '../src/runtime/v6-agent-service.ts';
 import { BrowserV6Agent } from '../src/runtime/v6-agent.ts';
 import type { GameObservation } from '../src/runtime/browser-games.ts';
-import { emptyV6Snapshot, toV6PublicObservation, V6_REFERENCE_COMMIT } from '../src/runtime/v6-agent-protocol.ts';
+import { emptyV6Snapshot, toV6PublicObservation, V6_REFERENCE_COMMIT, v6FrameHash } from '../src/runtime/v6-agent-protocol.ts';
 import type { V6AgentOperation, V6AgentTransport } from '../src/runtime/v6-agent-protocol.ts';
 import type {
   NativeCommand, NativeExecution, NativeFamily, NativeInitialize, NativeOutcome, NativePublicObservation,
@@ -178,3 +178,60 @@ test('native runtime defers family recording until a sealed prefix and ignores p
   result = await service.handle({ type: 'advance', sessionId: 'native-test', sequence: 2, ticketId: result.ticket!.id, observation: toV6PublicObservation(board(2), 2), executionMs: 7 });
   assert.equal(result.kind, 'boundary'); assert.deepEqual(records, [0, 1]); assert.equal(result.snapshot.activeSeconds, 0.012);
 });
+
+for (const [runtimeOrigin, callerOrigin] of [[1000, 10], [10, 1000]] as const) {
+  test(`native current deadlines convert caller clock ${callerOrigin} to runtime clock ${runtimeOrigin}`, async () => {
+    let runtimeClock: number = runtimeOrigin, callerClock: number = callerOrigin;
+    const controller = new AbortController();
+    const yieldControl = async () => {};
+    const execution: NativeExecution = { now: () => callerClock, deadlineMs: callerOrigin + 50,
+      signal: controller.signal, yieldControl };
+    const planned: number[] = [], guarded: number[] = [], recorded: number[] = [];
+    const remaining = (context: NativeExecution | undefined): number => {
+      assert.ok(context?.now && context.deadlineMs !== undefined);
+      assert.equal(context.signal, controller.signal);
+      assert.equal(context.yieldControl, yieldControl);
+      return context.deadlineMs - context.now();
+    };
+    const family: NativeFamily = {
+      id: 'independent-clock-test',
+      propose: (_observation, _rows, _inputs, _remaining, context) => {
+        const time = remaining(context); planned.push(time);
+        if (time <= 0) return null;
+        runtimeClock += 10; callerClock += 10;
+        return { status: 'proposed', kind: 'public_test',
+          actions: [{ action_ref: 'ACTION1', data: {} }, { action_ref: 'ACTION1', data: {} }], steps: [{}, {}] };
+      },
+      before: (_proposal, _index, _packet, _observation, context) => {
+        const time = remaining(context); guarded.push(time);
+        return { admitted: time > 0, reason: time > 0 ? 'current' : 'caller_deadline' };
+      },
+      after: (_proposal, index) => ({ matched: true, seal_prefix: index === 1, reason: 'witnessed' }),
+      record: (_before, _after, _command, _first, _second, _proposal, index) => {
+        recorded.push(index); return { events: [] };
+      },
+      state: () => ({ recorded: [...recorded] }),
+      restore: state => { recorded.splice(0, recorded.length, ...(state.recorded as number[])); },
+    };
+    const rows = board().frame, frameHash = await v6FrameHash(rows);
+    const packet = (step_index: number): NativePublicObservation => ({ frame_rows: rows, frame_packet: [rows],
+      state: 'NOT_FINISHED', level: 1, levels_completed: 0, available_action_refs: ['ACTION1'], step_index, frame_hash: frameHash });
+    const runtime = new NativeV6Runtime({ families: [family], maxPointOccurrences: 250,
+      sourceDigest: 'independent-clock-test', now: () => runtimeClock });
+    try {
+      const first = await runtime.initialize({ sessionId: `offset-${runtimeOrigin}-${callerOrigin}`,
+        observation: packet(0), budgets: { targetLevels: 1, levelActionCaps: [600], maxActions: 600 } }, execution);
+      assert.equal(first.kind, 'action');
+      assert.deepEqual(planned, [50]); assert.deepEqual(guarded, [40]);
+      runtimeClock += 41; callerClock += 41;
+      const second = await runtime.advance({ command: first.command!, observation: packet(1), executionMs: 0 }, execution);
+      assert.notEqual(second.kind, 'action', 'An expired caller cannot authorize the second path action');
+      assert.deepEqual(guarded, [40, 0]);
+      assert.deepEqual(recorded, [0], 'The actual first return is acquired exactly once before the next decision');
+      const resumed = await runtime.resume(execution);
+      assert.notEqual(resumed.kind, 'action', 'Resume cannot refresh the expired request');
+      assert.equal(planned.at(-1), 0);
+      assert.deepEqual(recorded, [0]);
+    } finally { runtime.close('independent_clock_test_finished'); }
+  });
+}

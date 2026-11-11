@@ -1,0 +1,238 @@
+{
+  "case": "catr-051",
+  "game": "CATR",
+  "mode": "recorded-public-replay",
+  "command": [
+    "node",
+    "--expose-gc",
+    "--max-old-space-size=1536",
+    "scripts/replay-public-regression-released-baseline.mjs",
+    "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz",
+    "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-public-trace.json.gz",
+    "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/catr-051-replay.json.gz",
+    "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/catr-051-host-preparation.json"
+  ],
+  "startedAt": "2026-11-11T15:34:31.453821+00:00",
+  "timeoutSeconds": 2400,
+  "baseline": {
+    "path": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz",
+    "sha256": "379ce17151369af5ba39e205cc8b2882aa4e97a3dd8909b9c831a7b2b0ac7fb6",
+    "bytes": 1649205
+  },
+  "trace": {
+    "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-public-trace.json.gz",
+    "sha256": "e152eb2705947addd1506cb01872d23770d188cb1dd46c86dcbc9bdf7f4f2816",
+    "bytes": 24340
+  },
+  "expectedActions": 12,
+  "nodeOldSpaceMiB": 1536,
+  "preflight": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/preflight.json",
+    "sha256": "49427a3ce879134e24d2c549efffcc810c081b25448bd871660b572dab59eca4",
+    "bytes": 5814
+  },
+  "historicalReportProcessExitedBeforeNode": true,
+  "nativeSourceBeforeDigest": "74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12",
+  "executionInputsBefore": {
+    "scripts/run-released-public-regressions.py": "7988863afd2b171f31987434bb1176370be2e3afd49dead1edcdc59770d81909",
+    "scripts/run-recorded-public-regressions.py": "df19dc88ff29e78a1cb5935d445644e96cc9fb1ef90b73d802cf51868d2b2c40",
+    "scripts/compare-v54-regressions.py": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+    "scripts/replay-public-regression-released-baseline.mjs": "2ce2a0e1b8f969510373ae161156b2b163d208b4e426cb1f26218f9952b3b164",
+    "scripts/replay-v53-public-regression.mjs": "4359e008db8dadaac17f6504199ff20c752f40f1666ba527f1cd5f16df100a9e",
+    "scripts/run-v53-campaign-proof.py": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+    "tests/helpers/v6-live-game-campaign.ts": "5f82ca1f3c80a39983c5c14ee30a2ac6239822815a6641b1402bc29c2e1d32d4",
+    "docs/migration/lot10b-evidence/recorded-regression-cases.json": "a16f67724f53def79fe476716c12a61e8064df871911772731983fa2505da3a9",
+    "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/source-manifest.json": "846e38686406140e8f0c975836faadf646e4c20b0bcbc833fe4e228912535e93",
+    "scripts/run-released-public-regressions-streamlog.py": "b05b0e113c93696be45408e4c10549f2a379c22330efbddfcaa0f09cd51309b9"
+  },
+  "phase": "completed",
+  "finishedAt": "2026-11-11T15:34:49.528263+00:00",
+  "exitCode": 0,
+  "timedOut": false,
+  "passed": true,
+  "nodeExitObserved": true,
+  "rawOutputPath": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/catr-051-output.raw.log",
+  "driverPid": 5,
+  "nodePid": 7,
+  "memorySamples": [
+    {
+      "elapsedSeconds": 0.004174956000497332,
+      "pid": 7,
+      "VmSize": "112204 kB",
+      "VmHWM": "2504 kB",
+      "VmRSS": "2504 kB",
+      "Threads": "1"
+    },
+    {
+      "elapsedSeconds": 5.021026645999882,
+      "pid": 7,
+      "VmSize": "10387736 kB",
+      "VmHWM": "361120 kB",
+      "VmRSS": "361120 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 10.035698237999895,
+      "pid": 7,
+      "VmSize": "10480568 kB",
+      "VmHWM": "477268 kB",
+      "VmRSS": "460588 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 15.04537555800016,
+      "pid": 7,
+      "VmSize": "10560464 kB",
+      "VmHWM": "540484 kB",
+      "VmRSS": "540484 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 18.06967047500075,
+      "pid": 7,
+      "processPresent": false
+    }
+  ],
+  "lastObservedAt": "2026-11-11T15:34:49.526024+00:00",
+  "elapsedSeconds": 18.07271519099959,
+  "lastProgress": {
+    "status": "passed",
+    "failure": null
+  },
+  "rawOutputBytes": 39283,
+  "outputRaw": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/catr-051-output.raw.log",
+    "sha256": "f845f01313e2f06a7e826ed21ae71d621b96e7d9715075bacdddaefd89040a39",
+    "bytes": 39283
+  },
+  "output": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/catr-051-output.log.gz",
+    "sha256": "2cfbe0c803000e2ea1456ee611913174d74d0e89651fbcaf9221c7ab30ab6729",
+    "bytes": 2712
+  },
+  "startedReceipt": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/catr-051-execution-started.json",
+    "sha256": "86925fb40e6c5d8e690c576f79fb8a8980280ce211ff82d6293bf9992d55ff20",
+    "bytes": 3195
+  },
+  "nodeExitedBeforeComparison": true,
+  "hostPreparation": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/catr-051-host-preparation.json",
+    "sha256": "da28f496125420414d410d8e5c370aa3531ece2ab6ac85feeb7b8731ec5419c6",
+    "bytes": 4210
+  },
+  "hostPreparationPassed": true,
+  "report": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/catr-051-replay.json.gz",
+    "sha256": "6e9fc5bba3e4e92356ab4af96751b0db6e982e8a77694970369c10aae21457cd",
+    "bytes": 2232124
+  },
+  "status": "passed",
+  "actions": 12,
+  "prefixes": 8,
+  "final": {
+    "actions": 12,
+    "levelsCompleted": 3,
+    "level": 4,
+    "state": "NOT_FINISHED",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "activeSeconds": 14.819708228999998,
+    "prefixes": 8,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 12,
+      "boundaryReplays": 2,
+      "goalEvents": 6,
+      "frontierDeltas": 25,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 9
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 9
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 8
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 7
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 1
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 9
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 9
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology"
+      ],
+      "morphologyProvider": {
+        "status": "partial_current_measurements_control_attention_and_methods",
+        "state_owner": "family_state:morphology",
+        "motion_owner": "caller:goal",
+        "forecast_owner": "family_state:public_observed_inventory",
+        "current_decision_scope": "one_source_selection_cycle",
+        "attention_owner": "caller:attention",
+        "method_owner": "caller:counters.targetMethod",
+        "entry_return_owner": "family_state:morphology.entry_access_return",
+        "connected_methods": [
+          "retained_station_method",
+          "entry_access_return",
+          "entry_rebind",
+          "entry_probe",
+          "managed_capacity",
+          "target_extension_continuation"
+        ],
+        "pending": [
+          "complete_original_caller_parity_and_domain_closure"
+        ]
+      },
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 12,
+      "resume": 7
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.62.0"
+  },
+  "passiveOwnerPresence": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/catr-051-passive-owner-presence.json",
+    "sha256": "f356c7e1aca84fd3439b3cdfb6254b670ec6152024e396eaaa18ec15cef9fd96",
+    "bytes": 1112
+  },
+  "passiveOwnerPresencePassed": true,
+  "passiveOwnerPrefixesChecked": 0,
+  "passiveOwnerPrefixesPassed": 0,
+  "passiveOwnerTransitionsRetained": 0,
+  "comparison": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/catr-051-comparison.json",
+    "sha256": "a7e6bb0791eabba5fd4b77d0d2e13750b17874878324c7dbf2c71796f4c47525",
+    "bytes": 11036
+  },
+  "comparisonPassed": true,
+  "comparisonChecks": 17,
+  "failedChecks": [],
+  "nativeSourceAfterDigest": "74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12",
+  "nativeSourceUnchanged": true,
+  "immutableInputsUnchanged": true,
+  "postprocessingFinishedAt": "2026-11-11T15:34:50.514556+00:00"
+}

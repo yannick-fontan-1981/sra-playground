@@ -1,0 +1,43 @@
+{
+  "schema": "logos-engine.lot10b.hpdl-browser-begin.v1",
+  "attemptId": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-browser-01",
+  "game": "HPDL",
+  "kind": "browser_qa",
+  "startedAt": "2026-11-11T16:07:34.525677+00:00",
+  "admittedAt": "2026-11-11T16:07:34.564548+00:00",
+  "monotonicStartedNs": "15698993447805",
+  "declaredDeadlineMonotonicNs": "15878993447805",
+  "plannedIntervalSeconds": 180.0,
+  "retentionReserveSeconds": 30.0,
+  "holder": {
+    "pid": 2,
+    "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+    "processStartTicks": "1569897",
+    "pidNamespace": "pid:[4026532546]"
+  },
+  "priorCumulativeSeconds": 1581.2934951409916,
+  "remainingBeforeSeconds": 818.7065048590083,
+  "priorClock": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-browser-01/clock-before.json",
+    "sha256": "ea1537af00be802493387c96773f18ffcd8e7a6478fd0b5d25345cb553da9f99",
+    "bytes": 13306
+  },
+  "executionInputs": {
+    "browserClockHelper": {
+      "path": "docs/migration/lot10b-evidence/browser-hpdl-clock.py",
+      "sha256": "d66acf82d4de25e9e5208957d750178f4dc0da9b65e727cda71e6e6d22debc2c",
+      "bytes": 34611
+    },
+    "cumulativeClockReader": {
+      "path": "docs/migration/lot10b-evidence/run-hpdl-clocked-proof.py",
+      "sha256": "e959e8d9b7ed5875bc9843393aeae44586674229fccb951279097c4c75195971",
+      "bytes": 36304
+    }
+  },
+  "preActionEvidence": [],
+  "performanceLock": "/workspace/shared/sra-coordination/performance.lock",
+  "hpdlLock": "/workspace/shared/sra-coordination/hpdl.lock",
+  "ledgerMutationLock": "/workspace/shared/sra-coordination/hpdl-clock-ledger.lock",
+  "startsBrowserOrHost": false,
+  "qualification": "Admission precedes browser actions. The foreground holder only retains locks and observes time. No browser action, new host, learned state, reset, action count, level count or game result is supplied. The operator must pause the browser agent at the declared deadline and before end."
+}

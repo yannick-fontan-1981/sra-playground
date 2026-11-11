@@ -2,7 +2,7 @@
 
 ## État courant
 
-Travail en cours, candidat natif **0.65.0 réservé**, sans publication ni qualification de coût de ce lot. La source de départ est le Site 101 / native 0.61.0, commit `d75a36f0a99bf6c301034523a3138a64d2f6e744`. Le gel final doit intégrer les publications effectives 10B / 0.62, 5C / 0.63 et 6B / 0.64 dans l'ordre convenu ; ces numéros ne sont pas des attestations de déploiement.
+Travail en cours, candidat natif **0.65.0 réservé**, sans publication ni qualification de coût de ce lot. La source de départ est le Site 101 / native 0.61.0 ; le développement est maintenant réconcilié avec le **Site 103 / native 0.62**, commit `4afcbfe6a25bd3a88223be543e443bc53b9c8814`, effectivement déployé et [observé via Sites](coordination/published10b-site103.json). Le gel final doit intégrer les publications effectives restantes 5C / 0.63 et 6B / 0.64, après 10B / 0.62 déjà intégré dans l'ordre convenu ; ces numéros ne sont pas des attestations de déploiement.
 
 Le périmètre est la seule entrée `motif_conditioned_access`, dans `factored_material_return`. `parallel_branch_routing` reste le sous-lot 8B. Le [contrat source](contract/source-contract.md) distingue le comportement Python, l'adaptation native et les preuves encore à exécuter.
 

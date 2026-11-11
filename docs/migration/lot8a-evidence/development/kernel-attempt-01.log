@@ -1,0 +1,12 @@
+✔ the cold production caller acquires one motif response, restores it from common memory and rechecks access (2666.867664ms)
+✔ a contrary invocation response keeps access unresolved and changes the next current decision (4097.331338ms)
+✔ removing only selected motif acquisition prevents the measured calibration from becoming a motif decision (1321.47803ms)
+✔ the source motif-interface exclusion is local to the final symmetry fallback and requires an unambiguous body (133.345245ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8923.411276

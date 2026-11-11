@@ -1,0 +1,56 @@
+{
+  "schema": "logos-engine.coordinated-cost-acceptance.v1",
+  "recordedAt": "2026-11-11T16:35:26.168981+00:00",
+  "status": "accepted_after_complete_window_and_independent_review",
+  "requestId": "lot10b-cost-74143a-final-01",
+  "window": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01/window.json",
+    "bytes": 11565,
+    "sha256": "0bc513389610918a2a4686808755f7e5a75a44e501eaaf9c7657a4ff7737162f"
+  },
+  "independentReview": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01/owner-growth-review.json",
+    "bytes": 1693224,
+    "sha256": "b1b2956ea898a04a3630061d835eab3688ccdf39ef0d4e0fa59640d1069509e4"
+  },
+  "consolidation": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01/owner-growth-comparison.json",
+    "bytes": 246556,
+    "sha256": "918c7fa4a186c44f11e707059afdfc41c8bcccbe11ba733ed3e8a7dc2c7c8b3a"
+  },
+  "isolation": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/coordination/cost-final-01/isolation.json",
+    "bytes": 3970,
+    "sha256": "6e71eef7269205f04e9c3720ea23372c9f111e339b306d9d8c3c7884c4cb8258"
+  },
+  "coordinationObservations": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/coordination/cost-final-01/quiet-observations.jsonl",
+    "bytes": 5502,
+    "sha256": "f3969ea03439f1fb6a65dfd82e5d11774cf037431ceeb9f4a490f6d72a784334"
+  },
+  "afterReviewSnapshots": [
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/coordination/cost-final-01/lot5c-after-review.json",
+      "bytes": 9602,
+      "sha256": "8f4fe2bedada9c9cf9d4c7dc08caa3ac88a08471de5b2b4ae66749f0be6cd68e"
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/coordination/cost-final-01/lot6b-after-review.json",
+      "bytes": 4863,
+      "sha256": "e5001539c5b75bb334e4756c2173ad022ecc2c02cc530f234a767ccdd537ca56"
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/coordination/cost-final-01/lot8a-after-review.json",
+      "bytes": 3954,
+      "sha256": "104d9c407b461f3e75f8233bfc326061fedafd59fd0a885f0886bfc26a25567c"
+    }
+  ],
+  "observedSamples": 6,
+  "acknowledgedLanes": 3,
+  "retainedStatusPayloadsStableExceptTimestamp": true,
+  "allReviewedInputsUnchanged": true,
+  "globalAccepted": true,
+  "acceptedCases": 2,
+  "checkedCount": 10297,
+  "qualification": "All explicit lane acknowledgments precede the actual window. Recorded coordination samples and final snapshots retain the same idle payloads; no deviation was disclosed or observed. This is cooperative isolation evidence, not a claim of continuous operating-system process observation. All32 measured sessions and400actions,8 predeclared warmups and24warmup actions are retained. Historical strict refusal and phase overruns remain unchanged."
+}

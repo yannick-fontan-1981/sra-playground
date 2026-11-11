@@ -1,0 +1,66 @@
+{
+  "schema": "logos-engine.lot10b.hpdl-diagnostic-begin.v1",
+  "attemptId": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-02",
+  "status": "running",
+  "kind": "case_diagnostic",
+  "game": "HPDL",
+  "startedAt": "2026-11-11T13:45:08.120212+00:00",
+  "admittedAt": "2026-11-11T13:45:08.179942+00:00",
+  "monotonicStartedNs": "7152587981712",
+  "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+  "priorCumulativeSeconds": 1075.8581646789917,
+  "remainingBeforeSeconds": 1324.1418353210083,
+  "activityCeilingSeconds": 300.0,
+  "captureReserveSeconds": 30.0,
+  "childActivityCeilingSeconds": 269.5,
+  "terminationMarginSeconds": 0.5,
+  "mode": "parity",
+  "phasePlan": [
+    {
+      "name": "parity",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/scripts/compare-window-question-checkpoint-parity.py",
+        "--checkpoint",
+        "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json",
+        "--journal",
+        "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-actual-public-journal.jsonl.gz",
+        "--execution-receipt",
+        "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/execution-hpdl.json",
+        "--output",
+        "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-02/window-source-parity.PARTIAL.json.gz"
+      ],
+      "resultPath": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-02/window-source-parity.PARTIAL.json.gz",
+      "logPath": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-02/parity.log"
+    }
+  ],
+  "chargedSeconds": null,
+  "requiredConservativeDebit": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/hpdl-conservative-case-work.json",
+    "sha256": "db9ea8ed4f30e2bb6995424bd730cbf870a0637bde754c0c2fa63c90f5091434",
+    "bytes": 3256
+  },
+  "qualification": "A non-game diagnostic is running; unresolved admission blocks every later HPDL interval without refund.",
+  "holderPid": 2,
+  "checkoutRoot": "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout",
+  "pidNamespace": "pid:[4026532397]",
+  "priorClock": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-02/clock-before.json",
+    "sha256": "af95aca713050a56921858e8e8a05e6fee8f73a5f1cce1d9cee02c985c8ca23e",
+    "bytes": 8552
+  },
+  "inputPaths": {
+    "generator": "docs/migration/lot10b-evidence/run-hpdl-clocked-diagnostic.py",
+    "cumulativeClockReader": "docs/migration/lot10b-evidence/run-hpdl-clocked-proof.py",
+    "partialComparator": "scripts/compare-window-question-checkpoint-parity.py",
+    "sharedComparisonCore": "scripts/compare-window-question-public-parity.py",
+    "checkpoint": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json",
+    "diagnosedExecution": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/execution-hpdl.json",
+    "publicJournal": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-actual-public-journal.jsonl.gz"
+  },
+  "performanceLock": "/workspace/shared/sra-coordination/performance.lock",
+  "hpdlLock": "/workspace/shared/sra-coordination/hpdl.lock",
+  "ledgerMutationLock": "/workspace/shared/sra-coordination/hpdl-clock-ledger.lock",
+  "performanceLockMode": "shared_functional"
+}

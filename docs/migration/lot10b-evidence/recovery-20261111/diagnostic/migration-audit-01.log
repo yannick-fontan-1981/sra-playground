@@ -1,0 +1,18 @@
+{
+  "complete": false,
+  "pythonModules": 1369,
+  "pythonLines": 320375,
+  "declaredClassesAndFunctions": 12857,
+  "dataFiles": 417,
+  "verifiedModules": 0,
+  "componentVerifiedModules": 196,
+  "partiallyTransferredModules": 148,
+  "transferredUnverifiedModules": 0,
+  "pendingModules": 1025,
+  "strategyFamilies": 16,
+  "failures": [
+    "Missing differential evidence: tests/fixtures/v6-feedback-sequences-reference.json.gz",
+    "Missing differential evidence: tests/fixtures/v6-feedback-sequences-reference.json.gz",
+    "Missing differential evidence: tests/fixtures/v6-relative-arrangements-reference.json.gz"
+  ]
+}

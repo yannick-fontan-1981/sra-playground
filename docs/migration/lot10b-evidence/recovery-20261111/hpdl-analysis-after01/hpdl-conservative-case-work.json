@@ -1,0 +1,63 @@
+{
+  "schema": "logos-engine.lot10b.hpdl-conservative-case-work.v1",
+  "attemptId": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01",
+  "kind": "conservative_case_work",
+  "game": "HPDL",
+  "recordedAt": "2026-11-11T13:32:33.110864+00:00",
+  "startedAt": "2026-11-11T12:39:50.403851Z",
+  "captureFinishedAt": "2026-11-11T12:47:20.858378Z",
+  "timestampOrigin": "Previously observed UTC boundaries, not timestamps generated for a new live execution",
+  "elapsedSecondsThroughCapture": 450.454527,
+  "chargedSeconds": 451,
+  "elapsedBasis": "observed_utc_wall_interval_conservative_upper_scope",
+  "monotoneMeasurement": false,
+  "gameplayDurationMeasured": false,
+  "rounding": "ceil observed wall seconds to a whole second; no refund",
+  "priorCumulativeSeconds": 475.1377512469917,
+  "remainingBeforeSeconds": 1924.8622487530083,
+  "priorClock": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/hpdl-conservative-case-work.prior-clock.json",
+    "sha256": "567de5ff06b6a409c1bd7f7d64812ed8ab5297510d3fe81b5de7916dc65960a8",
+    "bytes": 2738
+  },
+  "inputs": {
+    "priorExecution": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/execution-hpdl.json",
+      "sha256": "f3fc927792b2574c32dd76aaa996b503b33925923051bf207a90f1cac4736e6f",
+      "bytes": 10116
+    },
+    "quietAcknowledgement": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/quiet-acknowledgement.json",
+      "sha256": "017757914605e3013801c5623a478ef107c21bed2cd847149b8035705d9b5a20",
+      "bytes": 3713
+    },
+    "quietRelease": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/quiet-release.json",
+      "sha256": "b04d5f6e1b3c74fa01e87cd880b3676a0857af35607e9a6db73db9a2abbd9fc2",
+      "bytes": 3747
+    },
+    "generator": {
+      "path": "docs/migration/lot10b-evidence/record-hpdl-conservative-case-work.py",
+      "sha256": "909f887e458ef3c63ec4fca2f05e8cba28fadd797b606bb5941b82d1218bc04f",
+      "bytes": 12067
+    },
+    "cumulativeClockReader": {
+      "path": "docs/migration/lot10b-evidence/run-hpdl-clocked-proof.py",
+      "sha256": "e959e8d9b7ed5875bc9843393aeae44586674229fccb951279097c4c75195971",
+      "bytes": 36304
+    }
+  },
+  "quietBoundary": {
+    "requestId": "lot6a-reconstruction-ea2b5228-final-window",
+    "acknowledgedAt": "2026-11-11T12:47:20.858378Z",
+    "releaseTimestampPointer": "/updated_at",
+    "actualReleaseTimestamp": "2026-11-11T13:31:51.371745+00:00",
+    "quietIntervalAfterAcknowledgementExcluded": true
+  },
+  "observedActions": null,
+  "observedLevelsCompleted": null,
+  "completeActionCountEstablished": false,
+  "campaignStatus": null,
+  "campaignPassedEstablished": false,
+  "qualification": "Conservative non-live case-work debit for diagnosis and the wider observed post-game work interval. The true UTC boundaries cover 450.454527 seconds; 451 seconds are charged irreversibly. This is not a gameplay duration or a monotone measurement, and no actions or levels are inferred. The subsequent 6A quiet interval is excluded. The entry is recorded only after the actual quiet release; the pre-existing HPDL01 receipt and prior cumulative clock remain intact."
+}

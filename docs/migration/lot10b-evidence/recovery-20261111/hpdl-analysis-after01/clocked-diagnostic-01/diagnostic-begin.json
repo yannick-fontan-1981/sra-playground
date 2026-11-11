@@ -1,0 +1,86 @@
+{
+  "schema": "logos-engine.lot10b.hpdl-diagnostic-begin.v1",
+  "attemptId": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01",
+  "status": "running",
+  "kind": "case_diagnostic",
+  "game": "HPDL",
+  "startedAt": "2026-11-11T13:32:40.470655+00:00",
+  "admittedAt": "2026-11-11T13:32:40.509171+00:00",
+  "monotonicStartedNs": "6404938426992",
+  "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+  "priorCumulativeSeconds": 926.1377512469917,
+  "remainingBeforeSeconds": 1473.8622487530083,
+  "activityCeilingSeconds": 180.0,
+  "captureReserveSeconds": 30.0,
+  "childActivityCeilingSeconds": 149.5,
+  "terminationMarginSeconds": 0.5,
+  "mode": "writer-parity",
+  "phasePlan": [
+    {
+      "name": "writer",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--max-old-space-size=1536",
+        "--expose-gc",
+        "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/check-stream-evidence-json.mjs",
+        "--checkpoint",
+        "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json",
+        "--execution-receipt",
+        "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/execution-hpdl.json",
+        "--output",
+        "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/writer-check.json"
+      ],
+      "resultPath": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/writer-check.json",
+      "logPath": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/writer.log"
+    },
+    {
+      "name": "parity",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/scripts/compare-window-question-checkpoint-parity.py",
+        "--checkpoint",
+        "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json",
+        "--journal",
+        "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-actual-public-journal.jsonl.gz",
+        "--execution-receipt",
+        "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/execution-hpdl.json",
+        "--output",
+        "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/window-source-parity.PARTIAL.json.gz"
+      ],
+      "resultPath": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/window-source-parity.PARTIAL.json.gz",
+      "logPath": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/parity.log"
+    }
+  ],
+  "chargedSeconds": null,
+  "requiredConservativeDebit": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/hpdl-conservative-case-work.json",
+    "sha256": "db9ea8ed4f30e2bb6995424bd730cbf870a0637bde754c0c2fa63c90f5091434",
+    "bytes": 3256
+  },
+  "qualification": "A non-game diagnostic is running; unresolved admission blocks every later HPDL interval without refund.",
+  "holderPid": 2,
+  "checkoutRoot": "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout",
+  "pidNamespace": "pid:[4026532396]",
+  "priorClock": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/clock-before.json",
+    "sha256": "a45abdc932923c3fcb931f747f0c906fe7a5bbbcaf6c375e0a8ae81a25ffe8b1",
+    "bytes": 3984
+  },
+  "inputPaths": {
+    "generator": "docs/migration/lot10b-evidence/run-hpdl-clocked-diagnostic.py",
+    "cumulativeClockReader": "docs/migration/lot10b-evidence/run-hpdl-clocked-proof.py",
+    "writerChecker": "docs/migration/lot10b-evidence/check-stream-evidence-json.mjs",
+    "streamWriter": "docs/migration/lot10b-evidence/stream-evidence-json.mjs",
+    "campaignWriterCaller": "docs/migration/lot10b-evidence/run-hpdl-campaign.mjs",
+    "partialComparator": "scripts/compare-window-question-checkpoint-parity.py",
+    "sharedComparisonCore": "scripts/compare-window-question-public-parity.py",
+    "checkpoint": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json",
+    "diagnosedExecution": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/execution-hpdl.json",
+    "publicJournal": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-actual-public-journal.jsonl.gz"
+  },
+  "performanceLock": "/workspace/shared/sra-coordination/performance.lock",
+  "hpdlLock": "/workspace/shared/sra-coordination/hpdl.lock",
+  "ledgerMutationLock": "/workspace/shared/sra-coordination/hpdl-clock-ledger.lock",
+  "performanceLockMode": "shared_functional"
+}

@@ -1,0 +1,20 @@
+{
+  "schema": "logos-engine.own-compute-closure.v1",
+  "recordedAt": "2026-11-11T16:23:21.275386+00:00",
+  "allOwnAgentsIdle": true,
+  "agents": [
+    "baseline_prepare",
+    "recovery_review",
+    "delivery_docs"
+  ],
+  "noQueuedCommands": true,
+  "previewStopped": true,
+  "previewStartSession37882ObservedExitCode": 0,
+  "browserHolderSession3462ObservedExitCode": 0,
+  "latestDiagnosticSession43207ObservedExitCode": 0,
+  "caseReviewSession61641ObservedExitCode": 0,
+  "allPriorTestReplayBuildAndGraphSessionsObservedTerminal": true,
+  "browserPage": "about:blank",
+  "nodeOptionsConfigured": false,
+  "qualification": "Actual completed tool results and explicit agent final messages establish closure. No process scan or lock is used as a substitute for the other lanes' acknowledgments."
+}

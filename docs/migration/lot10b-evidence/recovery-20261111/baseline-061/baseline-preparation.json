@@ -1,0 +1,70 @@
+{
+  "schema": "logos-engine.lot10b.published-cost-baseline-preparation.v1",
+  "status": "passed",
+  "startedAt": "2026-11-11T15:36:00.587415+00:00",
+  "recordedAt": "2026-11-11T15:36:00.665719+00:00",
+  "checkout": "/workspace/sites/sra-lot10b-baseline061-20261111/.sites-checkout",
+  "worktreeAlreadyPresent": true,
+  "head": "653e40a4f45df8ec8c6bda005004c7cdb8df074a",
+  "headAfter": "653e40a4f45df8ec8c6bda005004c7cdb8df074a",
+  "detached": true,
+  "nativeVersion": "0.61.0",
+  "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.61.0",
+  "versionDeclaration": {
+    "path": "src/logos-engine/v6-native-runtime.ts",
+    "sha256": "8c59f61db145352af7b98527c25684acf4ad13155c1db3e32a197fb4913e199c"
+  },
+  "nativeFiles": 306,
+  "nativeDigest": "f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279",
+  "nativeManifest": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/baseline-061/source-manifest.json",
+    "sha256": "c597c7629495e98fcfad64cdd827393bc58d2d8f26594474e60add601485e4de",
+    "bytes": 36332
+  },
+  "nativeStatusBefore": "",
+  "nativeStatusAfter": "",
+  "nativeDiffAgainstHeadExitCode": 0,
+  "dependencies": [
+    {
+      "path": "/workspace/sites/sra-lot10b-baseline061-20261111/.sites-checkout/node_modules",
+      "source": "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/node_modules",
+      "existedOnInitialInspection": false,
+      "createdDuringThisTask": true,
+      "symlink": true,
+      "resolvedTarget": "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/node_modules",
+      "ignoredByGit": true
+    },
+    {
+      "path": "/workspace/sites/sra-lot10b-baseline061-20261111/.sites-checkout/public/vendor/pyodide",
+      "source": "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/public/vendor/pyodide",
+      "existedOnInitialInspection": false,
+      "createdDuringThisTask": true,
+      "symlink": true,
+      "resolvedTarget": "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/public/vendor/pyodide",
+      "ignoredByGit": true
+    }
+  ],
+  "retainedPreparationAttempt": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/baseline-061/preparation-attempt-01-observation.json",
+    "sha256": "3e90d3ee9193bd6f89f501a97e5a55745f443112335d5e9e03a1e9ff490a60ae",
+    "bytes": 1085
+  },
+  "publication": {
+    "siteVersion": 98,
+    "commit": "653e40a4f45df8ec8c6bda005004c7cdb8df074a",
+    "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_b6a726c7545c819190323d5ac24110e6",
+    "deploymentId": "appgdep_6af47df68da08191bc9cd0290615b53d",
+    "deploymentStatus": "succeeded",
+    "deploymentUpdatedAt": "2026-11-11T14:39:04.455525+00:00",
+    "retainedActualObservation": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/published7-integration-01/native-publication-observation.json",
+      "sha256": "6b87ed67b288449934e889828677d34d705c2d225714422f2c2e445dc3073cf9",
+      "bytes": 1572
+    }
+  },
+  "coordination": {
+    "lock": "/workspace/shared/sra-coordination/performance.lock",
+    "mode": "shared_nonblocking"
+  },
+  "qualification": "Source-only preparation of the exact native0.61 published Site98 baseline. The detached worktree already existed and was verified without recreation. Only ignored dependency symlinks were added. No native import, game, test, build, replay, compression or cost session was run; no main checkout native source, index or commit was changed. Later documentation publications do not silently replace this declared baseline."
+}

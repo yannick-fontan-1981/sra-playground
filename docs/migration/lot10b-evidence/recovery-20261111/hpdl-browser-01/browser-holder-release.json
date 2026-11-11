@@ -1,0 +1,12 @@
+{
+  "schema": "logos-engine.lot10b.hpdl-browser-holder-release.v1",
+  "attemptId": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-browser-01",
+  "recordedAt": "2026-11-11T16:10:24.144487+00:00",
+  "observedClosure": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-browser-01/browser-closed.json",
+    "sha256": "b4763e8952a7610c9a5b294df927556a6bdc7dee3db69692907dcb02f12acf3d",
+    "bytes": 1174
+  },
+  "receivedSignals": [],
+  "qualification": "The foreground holder observed the actual terminal closure and is now releasing its locks. No browser state is inferred."
+}

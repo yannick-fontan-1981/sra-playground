@@ -1,0 +1,62 @@
+TAP version 13
+# Subtest: native current deadlines convert caller clock 10 to runtime clock 1000
+not ok 1 - native current deadlines convert caller clock 10 to runtime clock 1000
+  ---
+  duration_ms: 80.267276
+  type: 'test'
+  location: '/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/tests/v6-native-runtime.test.ts:183:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'stopped'
+    - 'action'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'action'
+  actual: 'stopped'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/tests/v6-native-runtime.test.ts:224:14)
+    async Test.run (node:internal/test_runner/test:1409:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+  ...
+# Subtest: native current deadlines convert caller clock 1000 to runtime clock 10
+not ok 2 - native current deadlines convert caller clock 1000 to runtime clock 10
+  ---
+  duration_ms: 48.35064
+  type: 'test'
+  location: '/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/tests/v6-native-runtime.test.ts:183:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+      [
+    +   1040
+    -   50
+      ]
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: 50
+  actual:
+    0: 1040
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/tests/v6-native-runtime.test.ts:225:14)
+    async Test.run (node:internal/test_runner/test:1409:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 0
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1088.480692

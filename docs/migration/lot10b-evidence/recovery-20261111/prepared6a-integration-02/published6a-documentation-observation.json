@@ -1,0 +1,37 @@
+{
+  "schema": "logos-engine.lot10b.published-predecessor-observation.v1",
+  "observedAt": "2026-11-11T13:57:04.037Z",
+  "version": {
+    "id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_3e011b170b888191a9dba77971f30bd2",
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "version_number": 97,
+    "source": {
+      "commit_sha": "98336fba4e696a51c90ff7f7b37b8bdf95f34847"
+    },
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_0000000016e4820e900c7d7a39461494",
+      "content_hash": "sha256:1e1fd813bb0c972fc17aae12ace6e7effdc2e8c0f2ae16f0712d3622303a1b93",
+      "size_bytes": 29992960,
+      "file_count": 75
+    },
+    "screenshot_url": "https://sdmntprwestus2.oaiusercontent.com/files/00000000-d1a0-81f8-a2a3-784971b759fe/raw?se=2026-11-11T14%3A56%3A46Z&sp=r&sv=2026-06-06&sr=b&scid=86a5c035-c806-42b8-8b3d-26beefcfbdf1&skoid=a6356955-0ca0-4033-9150-c0c162458498&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-11-11T12%3A03%3A41Z&ske=2026-11-12T12%3A03%3A41Z&sks=b&skv=2026-06-06&sig=s0XlimCJC00xvOMGhPud5vaKgRzuJbNglbXMq6F9DwY%3D",
+    "deployment_id": "appgdep_6af47200fa888191a71af4efc9880d52"
+  },
+  "deployment": {
+    "id": "appgdep_6af47200fa888191a71af4efc9880d52",
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "title": "SRA Playground",
+    "version_id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_3e011b170b888191a9dba77971f30bd2",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": "sediment://file_00000000d1a081f8a2a3784971b759fe",
+    "provider_deployment_id": "site---6adbc388d79081918581b93b919d7258",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-11-11T13:47:58.236930+00:00"
+  },
+  "qualification": "Actual Sites API observation of the completed6A documentation publication. Native reconciliation into10B remains pending."
+}

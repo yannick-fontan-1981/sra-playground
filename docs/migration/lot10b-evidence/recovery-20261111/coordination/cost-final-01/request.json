@@ -1,0 +1,13 @@
+{
+  "id": "lot10b-cost-74143a-final-01",
+  "requestedAt": "2026-11-11T16:19:49.894713+00:00",
+  "performanceDirectory": "docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01",
+  "nativeDigests": {
+    "baseline": "f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279",
+    "candidate": "74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12"
+  },
+  "allOwnPreparationClosed": true,
+  "allOwnAgentsIdle": true,
+  "previewStopped": true,
+  "scope": "Fresh explicit idle acknowledgments after this request are required from5C,6B and8A. Retain complete tool idle through the official A1/B1/B2/A2 window and its comparison/arithmetic review until explicit release. No source scans, Git, hashes, archives, tests, build, replay, browser, game, runtime or queued work. Only tiny named coordination reads/writes. No cost sample has begun."
+}
