@@ -1,0 +1,39 @@
+{
+  "schema": "logos-engine.lot4c.isos-active-interval.v1",
+  "interval": 4,
+  "status": "completed",
+  "startedAt": "2026-11-11T00:59:59.773927+00:00",
+  "openedAt": "2026-11-11T01:02:09.375558+00:00",
+  "priorChargedSeconds": 1110.272681409,
+  "maximumCumulativeSeconds": 2400,
+  "purpose": "Final native0.57 public replay and subsequent unchanged cold original FacetExamples comparison, including preparation and diagnosis.",
+  "startedAtOrigin": {
+    "path": "docs/migration/lot4c-evidence/integrated-final/regressions/isos-development-4c-execution.json",
+    "bytes": 8976,
+    "sha256": "b7cba61d25017fde00cea09f1364193cbe83f78afe3506c71ef543427e9a1824"
+  },
+  "replayFinishedAt": "2026-11-11T01:00:24.559939+00:00",
+  "caseClockModified": false,
+  "finishedAt": "2026-11-11T01:02:29.439690+00:00",
+  "chargedSeconds": 149.665763,
+  "chargedCumulativeSeconds": 1259.9384444089999,
+  "withinBudget": true,
+  "comparisonExecution": {
+    "path": "docs/migration/lot4c-evidence/integrated-final/isos-facet-source-parity-execution.json",
+    "bytes": 76557,
+    "sha256": "c65be3529535d79268a135dca1e3fbbf048b68b16f5267058f8dace10f0db423"
+  },
+  "comparisonDiagnostic": {
+    "path": "docs/migration/lot4c-evidence/integrated-final/isos-facet-source-parity-diagnostic.json",
+    "bytes": 6353,
+    "sha256": "92aee5748426dbf4193af94e643b6643e2b50f582e0230d14edccbe89d748828"
+  },
+  "report": {
+    "path": "docs/migration/lot4c-evidence/integrated-final/isos-facet-source-parity.json.gz",
+    "bytes": 80222,
+    "sha256": "4171b8bff1050ae05ee613351883ededfc199713da01b5996fc132d776a559f7"
+  },
+  "diagnosisIncludedThroughFinishedAt": true,
+  "newGameExecutions": 0,
+  "newNativeAgentExecutions": 0
+}

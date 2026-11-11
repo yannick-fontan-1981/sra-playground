@@ -1,0 +1,75 @@
+{
+  "schema": "logos-engine.lossless-log-transport.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-11T01:21:41.406634+00:00",
+  "generator": {
+    "path": "docs/migration/lot4c-evidence/record-cost-log-transport.py",
+    "bytes": 3763,
+    "sha256": "0540356b5dd797282cc2817d75b733810da43cc2975851285aded729c5eaecb3"
+  },
+  "mode": "cost-window",
+  "window": {
+    "path": "docs/migration/lot4c-evidence/performance-integrated/window.json",
+    "bytes": 10452,
+    "sha256": "5fe24aa83f63f6d3cf8d0ee209bf04ac7e67c33ee5dc3ad7e7efdd25a2c0091d"
+  },
+  "logs": [
+    {
+      "series": "A1",
+      "original": {
+        "path": "docs/migration/lot4c-evidence/performance-integrated/cohort1/baseline.log",
+        "bytes": 1581,
+        "sha256": "829219038c2e9c3892430cb41d8490ee029a937cca02dbd25e46c5bc9348a5e5"
+      },
+      "transport": {
+        "path": "docs/migration/lot4c-evidence/performance-integrated/cohort1/baseline.log.gz",
+        "bytes": 446,
+        "sha256": "8a02103ada097caaa7ea91eb2d636d7be544d3d87d32091a920e43d9e7edd6fb"
+      },
+      "byteIdentical": true
+    },
+    {
+      "series": "B1",
+      "original": {
+        "path": "docs/migration/lot4c-evidence/performance-integrated/cohort1/after.log",
+        "bytes": 1584,
+        "sha256": "8f1d0206cbb2525fe00dd776641a02f748e3451f4d7cc11ce1a73cc4de003288"
+      },
+      "transport": {
+        "path": "docs/migration/lot4c-evidence/performance-integrated/cohort1/after.log.gz",
+        "bytes": 445,
+        "sha256": "19b8f94a7513134c73cd179beeaa51c1acfd291c4ad2e0bbc1120daba8217304"
+      },
+      "byteIdentical": true
+    },
+    {
+      "series": "B2",
+      "original": {
+        "path": "docs/migration/lot4c-evidence/performance-integrated/cohort2/after.log",
+        "bytes": 1585,
+        "sha256": "1c6836f0077f8599d74cb581d122cf98a6576fb644588f2c7608525656752386"
+      },
+      "transport": {
+        "path": "docs/migration/lot4c-evidence/performance-integrated/cohort2/after.log.gz",
+        "bytes": 449,
+        "sha256": "007ed753afbbb17eb34b73e12ab3c82f15bcb90021c393f3712cddce1c6c3234"
+      },
+      "byteIdentical": true
+    },
+    {
+      "series": "A2",
+      "original": {
+        "path": "docs/migration/lot4c-evidence/performance-integrated/cohort2/baseline.log",
+        "bytes": 1570,
+        "sha256": "29da9263ffc628aae526da48e358fa2ee08b6dcc28c2d3c3c1dab4954c264903"
+      },
+      "transport": {
+        "path": "docs/migration/lot4c-evidence/performance-integrated/cohort2/baseline.log.gz",
+        "bytes": 441,
+        "sha256": "9da2d99c8a36b59ec317584c4a94acfc780ddc0cbfc9550b3a6faeafc698579b"
+      },
+      "byteIdentical": true
+    }
+  ],
+  "qualification": "All completed original logs remain available and unchanged. Deterministic gzip transport is decompressed and compared byte for byte. No log, sample or diagnostic is truncated, filtered or excluded."
+}

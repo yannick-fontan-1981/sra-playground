@@ -1,0 +1,55 @@
+{
+  "schema": "logos-engine.native-global-cost-policy.v1",
+  "declaredAt": "2026-11-10T22:02:46.977483-03:00",
+  "authorization": {
+    "source": "explicit lot4C user instructions before the official window",
+    "date": "2026-11-10",
+    "verbatim": "si le global reste en dessous de 10% d'augmentation alors une phase qui dépasse 10% peut être accepté."
+  },
+  "globalStage": "session_elapsed",
+  "statistic": "pooled median of complete measured-session durations per tested case",
+  "caseIds": [
+    "STCK",
+    "SMLP"
+  ],
+  "relativeIncreaseLimit": 0.1,
+  "comparison": "strictly_less_than",
+  "allCasesMustPass": true,
+  "crossCaseCompensation": false,
+  "phaseOverrunsMayBeAccepted": true,
+  "phasesAndP95RemainVisible": true,
+  "diagnosticPhasePolicy": "docs/migration/lot4c-evidence/performance-integrated/comparison-policy.json",
+  "plannedOrder": [
+    "A1",
+    "B1",
+    "B2",
+    "A2"
+  ],
+  "cohorts": 2,
+  "sessionsPerCaseVersionCohort": 4,
+  "measuredSessions": 32,
+  "measuredActions": 400,
+  "excludedWarmupSessions": 8,
+  "excludedWarmupActions": 24,
+  "excludedMeasuredSessions": 0,
+  "excludedOutliers": 0,
+  "baseline": {
+    "nativeVersion": "0.56.0",
+    "siteVersion": 91,
+    "commit": "5659ddc9420c7624df4865f0afc628782296a186",
+    "nativeDigest": "be11e761de3c0f3c7d50d10da47be9e0d7b4fc9c5b7d5002cc9272ffce85645a",
+    "nativeFiles": 294
+  },
+  "candidate": {
+    "nativeVersion": "0.57.0",
+    "nativeDigest": "eebd099808672be934389020c8f9061df4fdacab28cd7d60c00cd1b080464c04",
+    "nativeFiles": 298,
+    "sourceBaseCommit": "6065d67c18b1ad85bd62b60c36c6962f18bfeab3",
+    "checkoutHead": "026c4d2beb396de2cae8c1cbb61489fe492d78d8",
+    "nativeSourceCommit": "026c4d2beb396de2cae8c1cbb61489fe492d78d8",
+    "nativeWorktreeChanges": [],
+    "siteVersion": null,
+    "qualification": "The frozen digest and archive identify candidate bytes. A null source commit means the checkout HEAD is ancestry only. No candidate publication is asserted."
+  },
+  "qualification": "Declared before a new lot4C official window on exact retained source freezes. Each game must independently remain strictly below +10% complete-session median increase. All measured samples, phase results and available p95 remain. Readiness, isolation and functional evidence are separate."
+}

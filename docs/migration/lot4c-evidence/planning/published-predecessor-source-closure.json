@@ -1,0 +1,49 @@
+{
+  "schema": "logos-engine.published-source-documentation-closure.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-11T00:47:22.561156+00:00",
+  "firstPublication": {
+    "commit_sha": "617d1f607d37a6bba1f7ae8ffe1826806e6749a0"
+  },
+  "finalPublication": {
+    "commit_sha": "5659ddc9420c7624df4865f0afc628782296a186"
+  },
+  "sites": [
+    90,
+    91
+  ],
+  "bothDeploymentsSucceeded": true,
+  "identicalCanonicalApplicationArchive": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_000000008aa0820e8a6d0e39917b4282",
+    "content_hash": "sha256:11d54c5d3320c139561241638fdcbb9a33c0c2e895d9789a58c462d9c09b6072",
+    "size_bytes": 29880320,
+    "file_count": 75
+  },
+  "changedPaths": [
+    "README.md",
+    "docs/migration/lot10a-axial-question.md",
+    "docs/migration/lot10a-evidence/README.md",
+    "docs/migration/lot10a-evidence/publication/archive-representations.json",
+    "docs/migration/lot10a-evidence/publication/documentation-closure-plan.json",
+    "docs/migration/lot10a-evidence/publication/fixture-restore.json",
+    "docs/migration/lot10a-evidence/publication/lot10a-source-push-plan.json",
+    "docs/migration/lot10a-evidence/publication/native-publication.json",
+    "docs/migration/lot10a-evidence/publication/post-publication-input-integrity.json",
+    "docs/migration/lot10a-evidence/publication/source-archive-equality.json",
+    "docs/migration/lot10a-evidence/publication/source-push-step-1.json",
+    "docs/migration/lot10a-evidence/publication/source-push-step-2.json",
+    "docs/migration/lot10a-evidence/publication/source-push-step-3.json",
+    "docs/migration/lot10a-evidence/publication/source-push-step-4.json",
+    "docs/migration/lot10a-evidence/publication/source-push-step-5.json",
+    "docs/migration/lot10a-evidence/publication/source-transport.json",
+    "docs/migration/lot10a-evidence/publication/worktree-bootstrap.json",
+    "docs/migration/v6-delivery-roadmap.md",
+    "docs/migration/v6-native-transfer.md"
+  ],
+  "changedPathsOnlyDocumentation": true,
+  "candidateNativeDigest": "eebd099808672be934389020c8f9061df4fdacab28cd7d60c00cd1b080464c04",
+  "allCandidateNativeFilesStillMatchFreeze": true,
+  "candidateNativeFiles": 298,
+  "qualification": "The final published predecessor adds only retained documentation and publication receipts. No source, test, helper, package, public asset or content input changed between its two actual publications; the frozen candidate remains unchanged."
+}

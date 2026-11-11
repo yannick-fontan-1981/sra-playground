@@ -1,0 +1,177 @@
+{
+  "schema": "logos-engine.lot4c.bounded-published-reference-execution.v1",
+  "referenceCommit": "617d1f607d37a6bba1f7ae8ffe1826806e6749a0",
+  "referenceNativeVersion": "0.56",
+  "referenceNativeSourceDigest": "be11e761de3c0f3c7d50d10da47be9e0d7b4fc9c5b7d5002cc9272ffce85645a",
+  "recordedAt": "2026-11-11T00:51:57.422179+00:00",
+  "lock": {
+    "mode": "shared",
+    "nonblocking": true,
+    "path": "/workspace/shared/sra-coordination/performance.lock"
+  },
+  "intervalStartedAt": "2026-11-11T00:46:09.773531+00:00",
+  "phases": [
+    {
+      "phase": "freeze",
+      "command": [
+        "python",
+        "-B",
+        "scripts/freeze-v53-native-source.py",
+        "freeze",
+        "docs/migration/lot4c-evidence/reference-isos-056"
+      ],
+      "cwd": "/workspace/sites/sra-lot4c-reference-056",
+      "startedAt": "2026-11-11T00:51:34.660918+00:00",
+      "finishedAt": "2026-11-11T00:51:35.427281+00:00",
+      "elapsedSeconds": 0.7663674979994539,
+      "exitCode": 0,
+      "timedOut": false,
+      "stdout": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/freeze.stdout.log",
+        "sha256": "baa31dd7aa7205efcd449cef18ab7bbf1483a33b0bb0af2f5c3162f73644fa12",
+        "bytes": 235
+      },
+      "stdoutArchive": {
+        "compressed": {
+          "path": "docs/migration/lot4c-evidence/reference-isos-056/freeze.stdout.log.gz",
+          "sha256": "a9f2650cfcc828426ad90afc678c572fd1bd314e78d21877eee17e6596604adf",
+          "bytes": 197
+        },
+        "uncompressedBytes": 235,
+        "uncompressedSha256": "baa31dd7aa7205efcd449cef18ab7bbf1483a33b0bb0af2f5c3162f73644fa12",
+        "exactRoundTrip": true
+      }
+    },
+    {
+      "phase": "campaign",
+      "command": [
+        "python",
+        "-B",
+        "scripts/run-bounded-native-campaign-proof.py",
+        "ISOS",
+        "3",
+        "8",
+        "docs/migration/lot4c-evidence/reference-isos-056"
+      ],
+      "cwd": "/workspace/sites/sra-lot4c-reference-056",
+      "startedAt": "2026-11-11T00:51:35.428143+00:00",
+      "finishedAt": "2026-11-11T00:51:56.738364+00:00",
+      "elapsedSeconds": 21.310226410001633,
+      "exitCode": 1,
+      "timedOut": false,
+      "stdout": {
+        "path": "docs/migration/lot4c-evidence/reference-isos-056/campaign.stdout.log",
+        "sha256": "1d3931baee14946e4aec18af9195c0ca23e501be9257c9b8ddf883c3abb7cf49",
+        "bytes": 2321
+      },
+      "stdoutArchive": {
+        "compressed": {
+          "path": "docs/migration/lot4c-evidence/reference-isos-056/campaign.stdout.log.gz",
+          "sha256": "3be76625620e76ab576db02930ada2b91f389714c35553fd1ec08e716460303e",
+          "bytes": 1046
+        },
+        "uncompressedBytes": 2321,
+        "uncompressedSha256": "1d3931baee14946e4aec18af9195c0ca23e501be9257c9b8ddf883c3abb7cf49",
+        "exactRoundTrip": true
+      }
+    }
+  ],
+  "outcome": {
+    "status": "failed",
+    "campaignAttempted": true,
+    "campaignCount": 1,
+    "campaignExitCode": 1,
+    "final": {
+      "actions": 8,
+      "levelsCompleted": 0,
+      "level": 1,
+      "state": "NOT_FINISHED",
+      "status": "error",
+      "reason": null,
+      "activeSeconds": 13.431936865000004,
+      "prefixes": 7,
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 7,
+        "boundaryReplays": 0,
+        "goalEvents": 0,
+        "frontierDeltas": 23,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 8
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 16
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 2
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 8
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 2
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 1
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 16
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology"
+        ],
+        "morphologyProvider": {
+          "status": "partial_current_measurements_control_attention_and_methods",
+          "state_owner": "family_state:morphology",
+          "motion_owner": "caller:goal",
+          "forecast_owner": "family_state:public_observed_inventory",
+          "current_decision_scope": "one_source_selection_cycle",
+          "attention_owner": "caller:attention",
+          "method_owner": "caller:counters.targetMethod",
+          "entry_return_owner": "family_state:morphology.entry_access_return",
+          "connected_methods": [
+            "retained_station_method",
+            "entry_access_return",
+            "entry_rebind",
+            "entry_probe",
+            "managed_capacity",
+            "target_extension_continuation"
+          ],
+          "pending": [
+            "complete_original_caller_parity_and_domain_closure"
+          ]
+        },
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      },
+      "fullV6Parity": false,
+      "sessions": 1,
+      "operationCounts": {
+        "init": 1,
+        "advance": 8,
+        "resume": 7
+      },
+      "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.56.0"
+    },
+    "outerReferenceLimit": {
+      "maximumAcquiredActions": 8,
+      "actionCapReached": true,
+      "qualification": "A bounded development reference, not a complete production campaign. The unchanged common harness owns every decision. If the outer action cap is reached, the last response has acquired its transition but is not accepted by the browser controller; final controller/prefix summaries may therefore lag that response. All actual public returns remain in the journal."
+    },
+    "trackedReferenceSourceUnchanged": true,
+    "publishedRuntimeAssetsUnchanged": true
+  },
+  "qualification": "One cold reference with target 3 levels and cap 8 acquired actions. A cap or failed outcome is a bounded observation, not a global inability. No action or state injection, alternative case or rerun."
+}

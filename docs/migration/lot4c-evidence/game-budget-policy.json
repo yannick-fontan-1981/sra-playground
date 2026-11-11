@@ -1,0 +1,13 @@
+{
+  "schema": "logos-engine.facet-example-game-budget-policy.v1",
+  "declaredAt": "2026-11-11T00:31:05.070291+00:00",
+  "game": "ISOS",
+  "maximumSeconds": 2400,
+  "maximumCandidateActions": 48,
+  "maximumBaselineActions": 8,
+  "targetLevels": 3,
+  "selectorSecondsCharged": 5.134041409008205,
+  "clockWasReset": false,
+  "accounting": "Cumulative wall time of every interval devoted to this game, including cold attempts, interpretation, debugging, original-source comparisons and browser actions. Intervals spent only on unrelated integration, regression or publication do not reset or consume the game clock. Every attempt and failure is retained.",
+  "developmentQualification": "This first candidate is based on actual Site89/native0.55 plus the Facet source commit6aa488e. It is not the final integrated release. Later final-source recorded replay and browser evidence must remain distinct."
+}

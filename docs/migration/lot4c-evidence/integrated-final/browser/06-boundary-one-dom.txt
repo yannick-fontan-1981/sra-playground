@@ -1,0 +1,235 @@
+- link "Skip to the games":
+  - /url: "#game-select"
+- banner:
+  - link "SRA Playground — Symbolic Reasoning Agent home":
+    - /url: /
+    - generic: SRA Playground
+    - generic: SYMBOLIC REASONING AGENT
+    - generic: ARC AGI 3
+  - paragraph: Yannick Fontan
+  - paragraph: INTERACTIVE GAMES / INDEPENDENT RESEARCH
+  - navigation "Main navigation":
+    - link "Motivation":
+      - /url: /motivation.html
+    - link "Playground":
+      - /url: "#playground"
+    - link "75 New Games":
+      - /url: /gallery.html
+    - link "Reasoning Lab":
+      - /url: /reasoning-lab.html
+    - link "What is ARC-AGI-3?":
+      - /url: /arc-agi-3.html
+      - text: ARC-AGI-3
+    - link "Symbolic Reasoning":
+      - /url: /symbolic-reasoning.html
+    - link "Architecture":
+      - /url: /architecture.html
+    - link "Videos":
+      - /url: /videos.html
+    - link "Contact":
+      - /url: /contact.html
+    - link "SRA Playground source code on GitHub":
+      - /url: https://github.com/yannick-fontan-1981/sra-playground
+      - generic: GitHub
+- main:
+  - region "SRA Playground":
+    - heading "SRA Playground" [level=1]
+    - paragraph: Symbolic Reasoning Agent
+    - paragraph:
+      - text: Toward
+      - emphasis: Understandable Intelligence.
+    - link "Explore 75 New Games, followed by 25 official games":
+      - /url: /gallery.html
+      - img "A patchwork of custom game boards"
+      - text: EXPLORE 75 NEW GAMES
+  - complementary "DESIGN PREMISE":
+    - heading "DESIGN PREMISE" [level=2]
+    - paragraph:
+      - strong: The design of artificial intelligence should begin with ethical principles.
+      - text: Symbolic reasoning makes deliberate design possible through explicit concepts, relations, and reasoning structures rooted in human intelligence. SRA draws its meaning and purpose from this human source, enabling us to take responsibility for the intelligence we build and thereby fulfill the ethical principle that guides its design.
+    - 'link "Start here: Motivation"':
+      - /url: /motivation.html
+      - text: "Start here: Motivation"
+  - region "ARC AGI 3":
+    - heading "ARC AGI 3" [level=2]
+    - link "What is ARC-AGI-3?":
+      - /url: /arc-agi-3.html
+      - text: What is ARC-AGI-3?
+    - 'link "75 New Games and 25 official games: browse all 100 games"':
+      - /url: /gallery.html
+      - text: 100 GAMES/25 OFFICIAL + 75 CUSTOM
+    - paragraph:
+      - strong: 75 new custom games
+      - generic: created or compiled by Yannick Fontan.
+    - article:
+      - generic: ISOS
+      - heading "Isometric Sketch" [level=2]
+      - paragraph: Custom · Wave 2
+      - generic: CHOOSE A GAME
+      - generic: Ready
+      - combobox "CHOOSE A GAME":
+        - option "CASC — Cascade Routing"
+        - option "CLRS — RGB Glass"
+        - option "CONN — Connect Four"
+        - option "CRAF — Crafting Console"
+        - option "DNOI — Pattern Denoising"
+        - option "ESCT — Patrol Escort"
+        - option "FITE — Arena Survival"
+        - option "FOGW — Hidden Motion"
+        - option "GORI — Ballistic Aim"
+        - option "HANO — Tower of Hanoi"
+        - option "KEYD — Keys and Doors"
+        - option "LIFE — Life and Lineage"
+        - option "LOGI — Logic Circuits"
+        - option "LS19 — Shape Alignment (Legacy)"
+        - option "MEMO — Memory Recall"
+        - option "MIND — Code Breaker"
+        - option "PORT — Portal Topology"
+        - option "REGN — Gauge Balance"
+        - option "SEQN — Symbol Sequences"
+        - option "SIGN — Signal Seals"
+        - option "SKBN — Sokoban"
+        - option "STCK — Card Stack"
+        - option "SWCH — Switch Rooms"
+        - option "SYME — Symmetry Repair"
+        - option "VALV — Valve Flow"
+        - option "AS66 — Always Sliding"
+        - option "CGWL — Cabbage, Goat and Wolf"
+        - option "COLM — Falling Columns"
+        - option "COMB — Combina"
+        - option "ELAS — Elastic Grid"
+        - option "ETAG — Multi-floor Maze"
+        - option "FUIT — Fleeing Stones"
+        - option "GABA — Cargo Clearance"
+        - option "GARE — Rail Transfer"
+        - option "GLOB — Globe Track"
+        - option "GMAP — Engraved Map"
+        - option "GRAV — Gravity Box"
+        - option "HOLE — Nested Colour Palette"
+        - option "ISOS — Isometric Sketch" [selected]
+        - option "KATA — Pentomino Packing"
+        - option "LKEY — Lock and Key"
+        - option "POLA — Polarity"
+        - option "REWI — Rewind"
+        - option "SELE — Selene"
+        - option "SERI — Sequence Lab"
+        - option "TEQU — Tower Equilibrium"
+        - option "TICT — Tic-tac-toe"
+        - option "TRIA — Triade"
+        - option "VOIS — Neighbour Cubes"
+        - option "WEAV — Weave"
+        - option "AMZE — Arrow Maze"
+        - option "CATL — Caterpillar Logic"
+        - option "CATR — Configured Attraction"
+        - option "CAVA — Knight Maze"
+        - option "CWSE — Catching Without Seeing"
+        - option "DAME — Checkers Solitaire"
+        - option "DICO — Dichotomy"
+        - option "EVAS — Escape"
+        - option "GIGO — Nested Rooms"
+        - option "GRIL — Grille"
+        - option "HPDL — Homogeneous Pair Deletion"
+        - option "KLOT — Klotski"
+        - option "MOTO — Moto Orbit"
+        - option "ONDE — Wave Alignment"
+        - option "PIPE — Pipes"
+        - option "PRTL — Portal Chambers"
+        - option "RECR — Recruit Army"
+        - option "RSWP — Role Swap"
+        - option "SMLP — Same Length Path"
+        - option "SNAR — Sonar Maze"
+        - option "SPOR — Spore Lab"
+        - option "THER — Thermometers"
+        - option "TRCP — Tracing Path"
+        - option "UPST — Upset"
+        - option "ZIPP — Zip"
+        - option "AR25 — Official ARC-AGI-3 game"
+        - option "BP35 — Official ARC-AGI-3 game"
+        - option "CD82 — Official ARC-AGI-3 game"
+        - option "CN04 — Official ARC-AGI-3 game"
+        - option "DC22 — Official ARC-AGI-3 game"
+        - option "FT09 — Official ARC-AGI-3 game"
+        - option "G50T — Official ARC-AGI-3 game"
+        - option "KA59 — Official ARC-AGI-3 game"
+        - option "LF52 — Official ARC-AGI-3 game"
+        - option "LP85 — Official ARC-AGI-3 game"
+        - option "LS20 — Official ARC-AGI-3 game"
+        - option "M0R0 — Official ARC-AGI-3 game"
+        - option "R11L — Official ARC-AGI-3 game"
+        - option "RE86 — Official ARC-AGI-3 game"
+        - option "S5I5 — Official ARC-AGI-3 game"
+        - option "SB26 — Official ARC-AGI-3 game"
+        - option "SC25 — Official ARC-AGI-3 game"
+        - option "SK48 — Official ARC-AGI-3 game"
+        - option "SP80 — Official ARC-AGI-3 game"
+        - option "SU15 — Official ARC-AGI-3 game"
+        - option "TN36 — Official ARC-AGI-3 game"
+        - option "TR87 — Official ARC-AGI-3 game"
+        - option "TU93 — Official ARC-AGI-3 game"
+        - option "VC33 — Official ARC-AGI-3 game"
+        - option "WA30 — Official ARC-AGI-3 game"
+      - status: ISOS selected.
+      - tablist "Play mode":
+        - tab "Manual":
+          - text: Manual
+        - tab "SRA Agent Native TS" [selected]:
+          - text: SRA Agent
+          - generic: Native TS
+      - generic: In your browser
+      - button "Expand game board":
+      - application "ISOS game board. Use the arrow keys, Space, or click to interact.": Your browser must support canvas to play.
+      - complementary:
+        - tabpanel "SRA Agent Native TS":
+          - heading "Solve with SRA." [level=3]
+          - status: Level completed.
+          - button "Run to next level"
+          - button "Run 16 actions"
+          - button "One action"
+          - button "Pause" [disabled]
+          - generic "Agent session":
+            - strong: "3"
+            - text: actions
+            - strong: "1"
+            - text: levels solved
+            - strong: "3"
+            - text: completed plans
+          - button "New reasoning session"
+          - button "Return to Manual":
+            - text: Return to Manual
+      - group "Agent reasoning":
+        - generic "Inspect reasoning Open to display the current plan, trace and memory":
+          - text: Inspect reasoning
+          - generic: Open to display the current plan, trace and memory
+      - paragraph
+  - region "About SRA":
+    - paragraph: THE PROJECT
+    - heading "About SRA" [level=2]
+    - link "Motivation":
+      - /url: /motivation.html
+      - text: Motivation
+    - link "Architecture":
+      - /url: /architecture.html
+      - text: Architecture
+    - link "Video series":
+      - /url: /videos.html
+      - text: Video series
+    - paragraph:
+      - strong: Symbolic Reasoning Agent
+      - text: is Yannick Fontan’s research project for interactive games. The agent uses explicit representations of observations, mechanisms, and goals to organize its reasoning.
+    - paragraph:
+      - text: The 100 games on this page run locally in your browser. The ongoing SRA Agent migration transfers V6 capabilities into native TypeScript and the common V7 reasoning architecture. Coordinate inputs, guarded action sequences and memory across levels are connected. The original Python game engines remain isolated from the agent. Explore the shared reasoning syntax in the
+      - link "Logos Engine Reasoning Lab":
+        - /url: /reasoning-lab.html
+      - text: .
+- contentinfo:
+  - strong: SRA Playground
+  - text: /Independent research by Yannick Fontan
+  - link "Contact":
+    - /url: /contact.html
+    - text: Contact
+  - link "ARC Prize":
+    - /url: https://arcprize.org/arc-agi/3
+    - text: ARC Prize
+  - link "Licenses & notices":
+    - /url: https://github.com/yannick-fontan-1981/sra-playground/blob/main/THIRD_PARTY_NOTICES.md
+    - text: Licenses & notices

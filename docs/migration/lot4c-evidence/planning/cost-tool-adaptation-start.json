@@ -1,0 +1,68 @@
+{
+  "schema": "logos-engine.lot4c.cost-tool-adaptation.v1",
+  "status": "source_preparation_only",
+  "measurementExecuted": false,
+  "qualification": "Existing lot4B owner-cost tooling copied before measurement with owner/program/path labels changed; source-state qualification still to be adapted and verified for FacetExamples. No historical timing is reused.",
+  "files": [
+    {
+      "source": "docs/migration/lot4b-evidence/prepare-cost-protocol.py",
+      "sourceSha256": "f9dab9d3e94b51ebc75ce9e8ce192a0c8e23c26329714c00cfea8e8310f536e2",
+      "prepared": "docs/migration/lot4c-evidence/prepare-cost-protocol.py",
+      "preparedSha256": "7b0244de5e8a0a55a85490a69be7b772884967cdaeed55a21af2f1c458a2908f"
+    },
+    {
+      "source": "docs/migration/lot4b-evidence/check-cost-static-inputs.py",
+      "sourceSha256": "9cbe543d0166d366d4d8e576dcc8553c7a8116d4d657202c5be29a4d2607a121",
+      "prepared": "docs/migration/lot4c-evidence/check-cost-static-inputs.py",
+      "preparedSha256": "139ca0e24301561e8c7faf43524074b1f96288abecfbbf098692e187242ef16e"
+    },
+    {
+      "source": "docs/migration/lot4b-evidence/capture-cost-owner-graphs.mjs",
+      "sourceSha256": "13cc2498b7e27e7b90fe7216e91c4a329e8e9a37c7d7671b655039daead6f65f",
+      "prepared": "docs/migration/lot4c-evidence/capture-cost-owner-graphs.mjs",
+      "preparedSha256": "b6090778b4a82b80caf9ad4d21cf3e3b318b29be113ba5bdf4616ddae667b692"
+    },
+    {
+      "source": "docs/migration/lot4b-evidence/qualify-cost-owner-graphs.mjs",
+      "sourceSha256": "3b9f006424fa27080993271d57d086537665dc25a6926b2b2a9ec48e48220ad5",
+      "prepared": "docs/migration/lot4c-evidence/qualify-cost-owner-graphs.mjs",
+      "preparedSha256": "b7aff03e7b6da2d377b1e6f19fb208656d51b7d9cfc78004ebb69416afecf7b8"
+    },
+    {
+      "source": "docs/migration/lot4b-evidence/record-cost-owner-source-inventory.mjs",
+      "sourceSha256": "38077e5103a8657eec7dce1fdbc65506327e1a6f29a4bfcd622efb84119d73eb",
+      "prepared": "docs/migration/lot4c-evidence/record-cost-owner-source-inventory.mjs",
+      "preparedSha256": "4b2ede91b8e450d3cc9993ecadfbba6ed330097bdea7588b761582096ffe13ac"
+    },
+    {
+      "source": "docs/migration/lot4b-evidence/prepare-owner-cost-contract.py",
+      "sourceSha256": "b3916d2b48e8e7a0b61771a14ad7e911bfa9fd7691eb6ac9bcaf99c79897c9f4",
+      "prepared": "docs/migration/lot4c-evidence/prepare-owner-cost-contract.py",
+      "preparedSha256": "2c07f1342d15031e63f5f452607669f79f15438d5e1513b0ad6c4df59c8431ee"
+    },
+    {
+      "source": "docs/migration/lot4b-evidence/consolidate-owner-costs.mjs",
+      "sourceSha256": "7691a06e88d60139941ace27605aa319aa9a01e31a7e315630abb1d8cef7e123",
+      "prepared": "docs/migration/lot4c-evidence/consolidate-owner-costs.mjs",
+      "preparedSha256": "b3e6349cbc52076b2e6782f107dc89c0feb466a946a69390b1d62511749bf807"
+    },
+    {
+      "source": "docs/migration/lot4b-evidence/review-owner-costs.py",
+      "sourceSha256": "4e842901740ba1ac384df6198dabf766f7f7dfd6778917a183234ed9f02a994e",
+      "prepared": "docs/migration/lot4c-evidence/review-owner-costs.py",
+      "preparedSha256": "ac2b4d5478144736986d2c1a6e141cf823f547590acbe365822e4c77b7a26ab1"
+    },
+    {
+      "source": "docs/migration/lot4b-evidence/record-cost-log-transport.py",
+      "sourceSha256": "ced9c309bc72f791b3f451d4793e11a2830f414019c08aeb1df22522b671dc7a",
+      "prepared": "docs/migration/lot4c-evidence/record-cost-log-transport.py",
+      "preparedSha256": "0540356b5dd797282cc2817d75b733810da43cc2975851285aded729c5eaecb3"
+    },
+    {
+      "source": "docs/migration/lot4b-evidence/write-cost-results.py",
+      "sourceSha256": "0b4a31393535713d676a09a8b78ad67dbcbfeb2a0e835cabc4f6e709210afcc3",
+      "prepared": "docs/migration/lot4c-evidence/write-cost-results.py",
+      "preparedSha256": "ddb72eb50fa6745f87c53b30be307b7b5afab72b8361043831f8f70725c1646b"
+    }
+  ]
+}

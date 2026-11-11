@@ -1,0 +1,44 @@
+{
+  "schema": "logos-engine.lot4c.bounded-reference-public-diagnostic.v1",
+  "recordedAt": "2026-11-11T00:52:31.873717+00:00",
+  "referenceCommit": "617d1f607d37a6bba1f7ae8ffe1826806e6749a0",
+  "publicJournal": {
+    "path": "docs/migration/lot4c-evidence/reference-isos-056/isos-actual-public-journal.jsonl.gz",
+    "bytes": 1747,
+    "sha256": "8041d3f735c81250f701fb10e3548e216641eec0b2bf58af81c3a289156d3c9e"
+  },
+  "publicJournalUncompressedSha256": "4947c48803da1954d66a972375af7070cb2bcdeb6de153e3a9736ed9ddc8c22f",
+  "publicJournalUncompressedBytes": 152921,
+  "campaign": {
+    "path": "docs/migration/lot4c-evidence/reference-isos-056/isos-campaign.json.gz",
+    "bytes": 2354175,
+    "sha256": "bbb36a4f831e54a6f38a0aa472364cb9d161439e2ac9327d7e2de0013111e132"
+  },
+  "publicPackets": 9,
+  "initialPackets": 1,
+  "actualAcquiredTransitions": 8,
+  "finalActualPublicMetadata": {
+    "level": 1,
+    "levels_completed": 0,
+    "state": "NOT_FINISHED",
+    "step_index": 8,
+    "frame_hash": "2213b32effda75e6"
+  },
+  "allObservedFrameRowsEqualInitial": true,
+  "controllerSummary": {
+    "actions": 8,
+    "levelsCompleted": 0,
+    "prefixes": 7,
+    "sessions": 1,
+    "status": "error"
+  },
+  "controllerAcquiredTransitions": 7,
+  "outerReferenceLimit": {
+    "maximumAcquiredActions": 8,
+    "actionCapReached": true,
+    "qualification": "A bounded development reference, not a complete production campaign. The unchanged common harness owns every decision. If the outer action cap is reached, the last response has acquired its transition but is not accepted by the browser controller; final controller/prefix summaries may therefore lag that response. All actual public returns remain in the journal."
+  },
+  "qualification": "The journal retains the initial packet and all 8 actual public returns. The final public packet remains level 1, 0 completed levels, NOT_FINISHED. All observed public frame rows are equal to the initial rows. The outer cap interrupts acceptance of the eighth return by the browser controller, so its 7 prefixes/acquired transitions lag the journal. This is only the observed bounded cold reference; no complete-game inability is inferred.",
+  "newGameExecutions": 0,
+  "newAgentExecutions": 0
+}

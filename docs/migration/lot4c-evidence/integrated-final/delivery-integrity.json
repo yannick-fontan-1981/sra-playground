@@ -1,0 +1,268 @@
+{
+  "schema": "logos-engine.native-delivery-integrity.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-11T01:07:08.700407+00:00",
+  "directory": "docs/migration/lot4c-evidence/integrated-final",
+  "validationDirectory": "docs/migration/lot4c-evidence/integrated-final/validation",
+  "generator": {
+    "path": "scripts/verify-native-delivery.py",
+    "sha256": "ca36a235e5da8aa8abd963aaa6a282d90217ed58a721bfdbba361527dd48409a",
+    "bytes": 26494
+  },
+  "verificationHelpers": [
+    {
+      "path": "scripts/run-v53-campaign-proof.py",
+      "sha256": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+      "bytes": 5421
+    },
+    {
+      "path": "scripts/compare-v54-reactive-public-evidence.py",
+      "sha256": "3274acc5ed28a40f91ad0ee2e34c247ab160919ea43855cf514b4fbc22ef6a69",
+      "bytes": 18850
+    },
+    {
+      "path": "scripts/evidence-byte-parts.py",
+      "sha256": "fcc651b3d533a87805378c126b1253d40f343ccc51108a7881c3db33bf1f8350",
+      "bytes": 7210
+    },
+    {
+      "path": "scripts/restore-v53-evidence.py",
+      "sha256": "e0494dda3dd445e0db0bf04cccac27ad8d19c917ccd2b4b10c068df6faf7c23d",
+      "bytes": 3361
+    }
+  ],
+  "nativeSourceDigest": "eebd099808672be934389020c8f9061df4fdacab28cd7d60c00cd1b080464c04",
+  "matchedFileInventories": {
+    "native": 298,
+    "archive": 309,
+    "sourceAndTests": 684,
+    "buildInputs": 363,
+    "regressionExecutionInputs": 10
+  },
+  "originalSourceFilesUnchanged": 1786,
+  "originalSourceManifest": {
+    "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/manifest.json",
+    "sha256": "491eb3b737bbb490a1b7c212f5b1e75f5a8f84b2124b95d9dd54a0d09eca85d6",
+    "bytes": 424024
+  },
+  "tests": {
+    "tests": 4838,
+    "pass": 4838,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "regressions": {
+    "passed": 10,
+    "total": 10,
+    "comparisonChecksPassed": 170,
+    "comparisonChecksExpected": 170,
+    "passiveOwnerPrefixesChecked": 0,
+    "passiveOwnerPrefixesPassed": 0,
+    "passiveOwnerTransitionsRetained": 0,
+    "prevalidatedTotals": {
+      "commands": 357,
+      "completePublicPackets": 367,
+      "animationFrames": 1676,
+      "prefixes": 275,
+      "requests": 632,
+      "naturalLevelBoundaries": 30
+    }
+  },
+  "nativeAgentWorker": {
+    "path": "dist/assets/v6-agent-worker-C0LUXp35.js",
+    "sha256": "a42ffe6ff42420abbc3ee9d10e88b10286b6d31935a6a6921ac48132bf6d65be",
+    "bytes": 6737589
+  },
+  "sourceArchiveVerification": {
+    "files": 309,
+    "archive": {
+      "path": "docs/migration/lot4c-evidence/integrated-final/source-archive.tar.gz",
+      "sha256": "882798bdf88e5630adade738d68c486f2c2e99865b51b4ab1f611713d1b879fe",
+      "bytes": 1827651
+    },
+    "members": 309,
+    "parts": 3,
+    "byteIdentical": true
+  },
+  "byteStorage": {
+    "reports": 11,
+    "parts": 91,
+    "bytes": 77106524,
+    "originalsAbsentBeforeRestore": true,
+    "temporaryRootRemoved": true,
+    "originalsUnchanged": true,
+    "restoredByteIdentical": [
+      {
+        "path": "docs/migration/lot4c-evidence/integrated-final/lkey-partial/replay-campaign.json.gz",
+        "sha256": "188f961719d603a1cb58d25bc26c1aa5e2d878a24312d033ce0f3838a3d1b5f7",
+        "bytes": 6149900,
+        "manifest": "docs/migration/lot4c-evidence/integrated-final/lkey-partial/replay-campaign.json.gz.parts.json",
+        "parts": 7,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/lot4c-evidence/integrated-final/regressions/catr-051-replay.json.gz",
+        "sha256": "d64d8075ebea59fbc5b9b20464d3a4b113d856d535bb8810c6758c8652946fb8",
+        "bytes": 1932927,
+        "manifest": "docs/migration/lot4c-evidence/integrated-final/regressions/catr-051-replay.json.gz.parts.json",
+        "parts": 3,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/lot4c-evidence/integrated-final/regressions/conn-050-replay.json.gz",
+        "sha256": "d5d23ef87e954160d2d6ab96c62af4151c9a3f50fcaeec946c446f29961d78a1",
+        "bytes": 4080006,
+        "manifest": "docs/migration/lot4c-evidence/integrated-final/regressions/conn-050-replay.json.gz.parts.json",
+        "parts": 5,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/lot4c-evidence/integrated-final/regressions/craf-055-replay.json.gz",
+        "sha256": "cf98e5d09f5f8da4e0837ab3419f9fbb45cc4af461b5bb5fbbac3c9f67d58616",
+        "bytes": 13144474,
+        "manifest": "docs/migration/lot4c-evidence/integrated-final/regressions/craf-055-replay.json.gz.parts.json",
+        "parts": 15,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/lot4c-evidence/integrated-final/regressions/fogw-051-replay.json.gz",
+        "sha256": "fa1bc2d4999d26fcdc8b92be333bc54b5962b2045d459ae56c64e4616c5677ab",
+        "bytes": 9479003,
+        "manifest": "docs/migration/lot4c-evidence/integrated-final/regressions/fogw-051-replay.json.gz.parts.json",
+        "parts": 11,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/lot4c-evidence/integrated-final/regressions/isos-development-4c-replay.json.gz",
+        "sha256": "2e2647ca99fe23881c0280c09f947f29ccfe3c3a6a11c9cf45aabe6625bf98e9",
+        "bytes": 3027543,
+        "manifest": "docs/migration/lot4c-evidence/integrated-final/regressions/isos-development-4c-replay.json.gz.parts.json",
+        "parts": 4,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/lot4c-evidence/integrated-final/regressions/mind-051-replay.json.gz",
+        "sha256": "0e9a9c4abb6a1da5fc880a14223dfd1f0ef32d6cc3de7a68a96c9690d1757961",
+        "bytes": 4995992,
+        "manifest": "docs/migration/lot4c-evidence/integrated-final/regressions/mind-051-replay.json.gz.parts.json",
+        "parts": 6,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/lot4c-evidence/integrated-final/regressions/rswp-051-replay.json.gz",
+        "sha256": "5f9847fea8bce8343826242b803f15640e12f6078e62b217385a889286b4dfb6",
+        "bytes": 3000838,
+        "manifest": "docs/migration/lot4c-evidence/integrated-final/regressions/rswp-051-replay.json.gz.parts.json",
+        "parts": 4,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/lot4c-evidence/integrated-final/regressions/tria-development-4b-replay.json.gz",
+        "sha256": "9a7aebf6d5c8e4c4d685859c547ed0fc46387e2f5b1b9784dd5c359b408fb687",
+        "bytes": 3475995,
+        "manifest": "docs/migration/lot4c-evidence/integrated-final/regressions/tria-development-4b-replay.json.gz.parts.json",
+        "parts": 4,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/lot4c-evidence/integrated-final/regressions/vois-051-replay.json.gz",
+        "sha256": "10030236827a253a969c94fabbbad4286dd73828fe4e38bdb77d5f6288cda64f",
+        "bytes": 12362953,
+        "manifest": "docs/migration/lot4c-evidence/integrated-final/regressions/vois-051-replay.json.gz.parts.json",
+        "parts": 14,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/lot4c-evidence/integrated-final/regressions/weav-051-replay.json.gz",
+        "sha256": "553c5f5be92ea7b3fb6743280c2bf7acc4a8c62a7fd104cc190c519764174bf8",
+        "bytes": 15456893,
+        "manifest": "docs/migration/lot4c-evidence/integrated-final/regressions/weav-051-replay.json.gz.parts.json",
+        "parts": 18,
+        "restored": true,
+        "byteIdentical": true
+      }
+    ],
+    "generators": [
+      {
+        "path": "scripts/evidence-byte-parts.py",
+        "sha256": "fcc651b3d533a87805378c126b1253d40f343ccc51108a7881c3db33bf1f8350",
+        "bytes": 7210
+      },
+      {
+        "path": "scripts/restore-v53-evidence.py",
+        "sha256": "e0494dda3dd445e0db0bf04cccac27ad8d19c917ccd2b4b10c068df6faf7c23d",
+        "bytes": 3361
+      }
+    ]
+  },
+  "receipts": [
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/source-manifest.json",
+      "sha256": "453b773ee0b81364d44679b611214a527c008aab8f01ae2bf9cd402e7996f4aa",
+      "bytes": 35387
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/source-archive.json",
+      "sha256": "e612d906db5cef893c47a3cf30a1ef43289497a9613459c098f95cbb8fa137f8",
+      "bytes": 37029
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/source-archive-parts.json",
+      "sha256": "554449b50d696bf19bcdceda82f1025c5450d615bbc4aa2774f81ada5864f980",
+      "bytes": 1036
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/validation/delta-tests-run.json",
+      "sha256": "31c84cf8c1a2aa8a871107f358edc0acf041a9cc5771529af088f93958e06822",
+      "bytes": 130562
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/validation/checks-run.json",
+      "sha256": "701c404450fe60791ac4756a287308a66f59e6664c8e46cab14ec73b0361cc3b",
+      "bytes": 81433
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/regressions/regression-summary.json",
+      "sha256": "ccaaaf9794c26d35de02742ef51abb0507661e0a8c88e9ac1dd4a9d1c995c4cf",
+      "bytes": 204482
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/isos-facet-source-parity-execution.json",
+      "sha256": "c65be3529535d79268a135dca1e3fbbf048b68b16f5267058f8dace10f0db423",
+      "bytes": 76557
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/isos-facet-source-parity-diagnostic.json",
+      "sha256": "92aee5748426dbf4193af94e643b6643e2b50f582e0230d14edccbe89d748828",
+      "bytes": 6353
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/browser/browser-qa.json",
+      "sha256": "cb305c01c36dc94239e2514ceea5b3b61296d1f996a1c787534392daa1449861",
+      "bytes": 5471
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/lkey-partial/qualification.json",
+      "sha256": "4d8e16057ee5400b5960d2a2b1154929d53eaae2cbc5071b52cbac57ef06127d",
+      "bytes": 96074
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/lkey-partial-execution.json",
+      "sha256": "25b68abfa51a39b9b7f311784469a9a27fd3fecaea13ddca05bbf5297c23e64d",
+      "bytes": 1732
+    }
+  ],
+  "qualification": "Post-validation file integrity and lossless evidence transport only. Every completed JSON evidence parts manifest is checked with the existing transport helpers, restored into an initially empty temporary root and compared byte for byte with its unchanged original. Frozen source archive members, recorded native/source/test/build inputs and recorded validation status are checked without rerunning or reinterpreting a game, agent, source comparison, test or build. Additional receipts are fingerprinted only. This is not a new campaign, proof of causal game improvement or complete migration."
+}

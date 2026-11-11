@@ -1,0 +1,20 @@
+{
+  "schema": "logos-engine.site-audience-observation.v1",
+  "observedAt": "2026-11-11T01:23:20.147Z",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "latestVersionNumber": 91,
+  "currentLiveUrl": "https://sra-playground.yannick-fontan.chatgpt.site",
+  "currentUserRole": "owner",
+  "accessMode": "custom",
+  "accessPolicy": {
+    "revision": 3,
+    "access_mode": "custom",
+    "allowed_account_user_ids": [
+      "3661d9ac-259d-4929-9330-7252c4ade156"
+    ],
+    "allowed_workspace_group_ids": [],
+    "allowed_tenant_group_ids": [],
+    "external_visitor_count": 0
+  },
+  "qualification": "Existing owner-private audience observed immediately before lot4C publication preparation. No access policy change requested or made; no bearer or credential retained."
+}

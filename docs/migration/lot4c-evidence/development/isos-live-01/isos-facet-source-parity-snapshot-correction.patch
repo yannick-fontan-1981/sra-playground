@@ -1,0 +1,83 @@
+--- docs/migration/lot4c-evidence/development/isos-live-01/isos-facet-source-parity-attempt-01-generator.py
++++ scripts/compare-facet-example-public-parity.py
+@@ -25,6 +25,11 @@
+ Selected source plans are retained from this independent replay. Only exact
+ named top-level caller annotations have an explicit comparison scope. Both
+ source string sets must already have the source's sorted serialization.
++Native prefix evidence freezes the selected offer before acquisition. Those
++historical proofs are compared to a separately frozen original offer at its
++propose return, while the live original object remains in before/after/record.
++Later source-owned alias mutations are retained as explicit diagnostics rather
++than being mistaken for changes to an earlier immutable offer snapshot.
+ All five memory interventions are retained, including empty and unchanged ones.
+ This runs no game, native agent, original common caller or performance campaign.
+ """
+@@ -234,6 +239,7 @@
+         "initialSourceState": initial, "callChecks": [], "publicObservationChecks": [], "prefixChecks": [],
+         "guardCoverage": [], "nextChoiceChecks": [], "restorationChecks": [], "nativeRestorationChecks": [],
+         "sourceRestorationReplay": [], "ablations": [],
++        "immutableSelectedProposalChecks": [],
+         "callerAnnotations": [], "differences": [], "stop": None,
+         "normalizations": [{"field": "proposal.program_subquestion", "rule": "Remove only the exact value facet_example supplied by the source entry adapter"},
+                            {"field": "selected proposal.strategy_receipt / morphology / composition_target_tree",
+@@ -315,20 +321,36 @@
+                               if key == "composition_target_tree" else "NativeV6Runtime selection, outside FacetExamples"})
+         return result
+ 
+-    def source_proposal(native, where):
++    def source_proposal(native, where, *, selected_offer_snapshot=False):
+         core = proposal_core(native, where, selected=True)
+         require(isinstance(core, dict) and core.get("kind") == "public_facet_example"
+                 and "facet_plan" in core, "Selected facet call received a foreign proposal")
+         reference = core.get("binding", {}).get("observation_ref")
+         candidates = offers.get(reference, [])
+         require(candidates, "No earlier original offer binds the selected public observation")
+-        exact = [item for item in candidates if not differences(plain(item["proposal"]), core)]
++        # NativeV6Runtime freezes structuredClone(proposal) when the prefix is
++        # created, before the action or its response. Its later prefix_evidence
++        # retains that immutable offer. The live Python proposal deliberately
++        # retains portable aliases and can change during record at a boundary.
++        # Compare like capture times without dropping or rewriting any field.
++        def at_capture_time(item):
++            return item["offerSnapshot"] if selected_offer_snapshot else item["proposal"]
++        exact = [item for item in candidates if not differences(plain(at_capture_time(item)), core)]
+         chosen = (exact or candidates)[-1]
+-        compare(chosen["proposal"], core, where + ".sourceProposal")
++        source_value = at_capture_time(chosen)
++        compare(source_value, core, where + ".sourceProposal")
++        if selected_offer_snapshot:
++            report["immutableSelectedProposalChecks"].append({"path": where,
++                "sourceProposalCallIndex": chosen["index"],
++                "snapshotOrigin": "Complete independently produced original proposal frozen at its propose return, before acquisition",
++                "sourceOfferSnapshotDigest": digest(source_value), "nativeOfferSnapshotDigest": digest(core),
++                "currentOriginalProposalDigest": digest(chosen["proposal"]),
++                "offerSnapshotToCurrentOriginalDifferences": differences(plain(source_value), plain(chosen["proposal"])),
++                "qualification": "Native sealed-prefix proposal evidence is immutable pre-acquisition evidence. This check does not assert equality to the live Python proposal object after acquisition. All fields, including boundary_ref, remain compared at the matching capture time."})
+         # Keep this original object and its source-owned aliases. In particular
+         # compound.source_method points to portable, whose boundary_ref changes
+         # in record. Historical call results are separately frozen JSON values.
+-        return chosen["proposal"], chosen["index"], core
++        return source_value, chosen["index"], core
+ 
+     def public_observation(value, rows, call_index, side, explicit_packet=None):
+         require(isinstance(value, dict), "Missing public observation")
+@@ -423,7 +445,8 @@
+                 returned = plain(original_offer)
+                 native_result = proposal_core(captured.get("result"), f"calls[{index}].result")
+                 if returned is not None:
+-                    offers[returned["binding"]["observation_ref"]].append({"index": index, "proposal": original_offer})
++                    offers[returned["binding"]["observation_ref"]].append({"index": index,
++                        "proposal": original_offer, "offerSnapshot": deepcopy(returned)})
+                 counts["nonNullProposals" if returned is not None else "abstentions"] += 1
+                 extra = {"sourceDecision": decision(returned), "nativeDecision": decision(native_result),
+                          "sourceDiagnostic": diagnostic(family), "sourceRecognizedInterface": family.current is not None}
+@@ -591,7 +614,8 @@
+                         "Selected facet checkpoint restore does not match independently acquired source state")
+                 covered_restores.add(restore_through - 1)
+                 before_count = len(report["differences"])
+-                own, source_index, core = source_proposal(retained["proposal"], f"prefixes[{prefix_index}].proposal")
++                own, source_index, core = source_proposal(retained["proposal"], f"prefixes[{prefix_index}].proposal",
++                                                        selected_offer_snapshot=True)
+                 require(source_index == acquired[0]["proposalCallIndex"], "Checkpoint proposal and acquired original offer disagree")
+                 proposal_diff = report["differences"][before_count:]
+                 covered_records.add(acquired[0]["index"])

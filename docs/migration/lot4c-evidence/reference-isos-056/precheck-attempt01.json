@@ -1,0 +1,21 @@
+{
+  "schema": "logos-engine.lot4c.reference-precheck-failure.v1",
+  "observedAt": "2026-11-11T00:51:34.548415+00:00",
+  "actualFailureTime": null,
+  "exitCode": 1,
+  "failure": "Generated public/vendor/pyodide/pyodide.mjs absent in the reference checkout",
+  "originalOutputCapture": "Exact returned exec output retained after the observation; failure timestamp was not separately captured",
+  "helpersExecuted": 0,
+  "gamesExecuted": 0,
+  "intervalStartUnchanged": "2026-11-11T00:46:09.773531+00:00",
+  "output": {
+    "compressed": {
+      "path": "docs/migration/lot4c-evidence/reference-isos-056/precheck-attempt01.stdout.log.gz",
+      "sha256": "4d9525479c8aa6203178ca6add4fdd47affd13bc0300f63fd112e38f395f58f5",
+      "bytes": 103
+    },
+    "uncompressedBytes": 89,
+    "uncompressedSha256": "923e5b6b4550d666c9e907c8797442f5f78aee033b9e03df4c2b34f28810c91f",
+    "exactRoundTrip": true
+  }
+}

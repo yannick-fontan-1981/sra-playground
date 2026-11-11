@@ -1,0 +1,187 @@
+{
+  "schema": "logos-engine.lot4c.owner-cost-static-source-review.v1",
+  "recordedAt": "2026-11-11T00:10:07.731405+00:00",
+  "status": "static_review_complete_no_blocking_logic_finding",
+  "reviewer": "facet_source_audit",
+  "reviewedFiles": [
+    {
+      "path": "docs/migration/lot4c-evidence/prepare-cost-protocol.py",
+      "bytes": 28153,
+      "sha256": "ceee0810d39326e7050e966249f04ed7af9d12d228e5337b64f62c9ecb4ccdaa"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/check-cost-static-inputs.py",
+      "bytes": 23554,
+      "sha256": "139ca0e24301561e8c7faf43524074b1f96288abecfbbf098692e187242ef16e"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/capture-cost-owner-graphs.mjs",
+      "bytes": 23732,
+      "sha256": "3ad25bb203559fd60964fd98593b86b248b992436a94caf5709b06c61b428a52"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/qualify-cost-owner-graphs.mjs",
+      "bytes": 45033,
+      "sha256": "5a15c5d35f894d1ad35224465cf9ae50f73d6b56dc4c34dcb6074679915f4db0"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/record-cost-owner-source-inventory.mjs",
+      "bytes": 12483,
+      "sha256": "4b2ede91b8e450d3cc9993ecadfbba6ed330097bdea7588b761582096ffe13ac"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/prepare-owner-cost-contract.py",
+      "bytes": 13767,
+      "sha256": "2c07f1342d15031e63f5f452607669f79f15438d5e1513b0ad6c4df59c8431ee"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/consolidate-owner-costs.mjs",
+      "bytes": 52839,
+      "sha256": "b3e6349cbc52076b2e6782f107dc89c0feb466a946a69390b1d62511749bf807"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/review-owner-costs.py",
+      "bytes": 70741,
+      "sha256": "ac2b4d5478144736986d2c1a6e141cf823f547590acbe365822e4c77b7a26ab1"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/record-cost-log-transport.py",
+      "bytes": 3763,
+      "sha256": "0540356b5dd797282cc2817d75b733810da43cc2975851285aded729c5eaecb3"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/write-cost-results.py",
+      "bytes": 40675,
+      "sha256": "a152c9d82cb463a77799e90748878d34031b7d7d76cba6e0f9129c43519d5829"
+    }
+  ],
+  "displayOnlyRefresh": {
+    "change": "After the original static review, only timestamp display was changed to UTC-03:00. prepare-cost-protocol.py uses timezone(timedelta(hours=-3)); write-cost-results.py renders UTC-03:00 and records timezone='Etc/GMT+3'.",
+    "previousFingerprints": [
+      {
+        "path": "docs/migration/lot4c-evidence/prepare-cost-protocol.py",
+        "bytes": 28136,
+        "sha256": "bbcc4daa988acb0563b465415969bc631aa985a24f52e2a023eefea8d903a23b"
+      },
+      {
+        "path": "docs/migration/lot4c-evidence/write-cost-results.py",
+        "bytes": 40605,
+        "sha256": "ff5dc655b4b8a4a16d4352c356a7b7340e577636cb6d0f2884afa1b0e9c68029"
+      }
+    ],
+    "scope": "Current fingerprints of these two helpers replace their prior entries above. Raw input receipts, cost calculations, comparators, acceptance rules and captures are unchanged. The original recordedAt and static review conclusions are retained.",
+    "validation": "Source text read and file byte counts and SHA-256 values refreshed only. No helper import or execution, syntax check, test, capture, archive, game or measurement."
+  },
+  "reviewMode": "Read source and the systematic 4B to 4C diff only. No helper execution, imports, syntax check, tests, capture, archive, game or measurement.",
+  "execution": {
+    "costHelpersExecuted": false,
+    "nativeExecuted": false,
+    "originalExecuted": false,
+    "testsExecuted": false,
+    "measurementExecuted": false
+  },
+  "scope": {
+    "sourceHelpers": 10,
+    "originalToolingOrigin": "Copied 4B helpers, preserving earlier 7A lineage comments; direct copy hashes are retained in planning/cost-tool-adaptation-start.json.",
+    "functionalContract": "Only reference forms with zero Facet offers and zero Facet selected records. Active Facet work must fail and requires a new contract before any measurement.",
+    "owner": "facet_examples",
+    "program": "v6.facet_examples.choose",
+    "entry": [
+      "surface",
+      "facet_example"
+    ],
+    "durableFields": [
+      "failed",
+      "events",
+      "method",
+      "epoch",
+      "portable",
+      "compound_methods",
+      "refuted_compounds"
+    ],
+    "epochClears": [
+      "failed",
+      "method",
+      "compound_methods",
+      "refuted_compounds"
+    ],
+    "epochRetains": [
+      "events",
+      "portable"
+    ],
+    "allowedCrossVersionPaths": [
+      "observations[*].nodeCount",
+      "inspection[*].graphNodes",
+      "final.nodeCount",
+      "final.graphRevision"
+    ]
+  },
+  "reviewedProperties": [
+    {
+      "id": "owner-and-program-exact-addition",
+      "assessment": "Actual factories and family-installed programs are inspected. Duplicate IDs, removals and other additions fail. Exactly one Facet workflow registration is required."
+    },
+    {
+      "id": "prospective-source-freeze",
+      "assessment": "The declaration, candidate archive, native manifests, historical tools, cases and trace bytes are bound. Measured outputs and readiness may not precede contract finalization."
+    },
+    {
+      "id": "inactive-owner-source-transition",
+      "assessment": "The qualifier compares a cold seven-field owner and chronological operations. Proposals may only reset the declared local fields at a new epoch. Every offer and record is rejected."
+    },
+    {
+      "id": "structural-attribution",
+      "assessment": "Complete capture graphs are rebuilt from exact Kernel delta chains. Added installations, source owner states and reachable fragments are attributed. Count and revision differences must equal actual attributed nodes and deltas; no constant delta is assumed."
+    },
+    {
+      "id": "structural-limits-explicit",
+      "assessment": "Common node identities and metadata, delta causes and delta order are compared, with the runtime source digest difference qualified. Common private values are retained but are not claimed equal. Matching measured structural forms does not prove uncaptured private leaves."
+    },
+    {
+      "id": "actual-reference-work",
+      "assessment": "Untimed forms require STCK 3/10 and SMLP 3/15 actions with exact current trace commands and public packets. Raw timed trials must match their own version form. Changed actions, cycles, requests or acquisitions cannot be hidden as allowed structure."
+    },
+    {
+      "id": "global-rule",
+      "assessment": "A1/B1/B2/A2 covers 32 measured sessions and 400 actions. Eight warmups and 24 actions are excluded in advance; no measured session or outlier is excluded. Eight complete session elapsed values per game and version are pooled before the median. Each game must satisfy strict after < 1.1 * before independently. No cross-game compensation or average of cohort ratios is used."
+    },
+    {
+      "id": "diagnostics-preserved",
+      "assessment": "Phase and p95 results remain visible. Global acceptance depends on both global cases, not phaseStatus. The independent Python review reproduces the decimal global criterion and diagnostic metrics."
+    },
+    {
+      "id": "historical-failure-retained",
+      "assessment": "The original strict aggregator must actually run. Its nonzero exit, exact command, input hashes and complete expected metadata refusal are verified. A qualified consolidation does not relabel that failure."
+    },
+    {
+      "id": "immutable-lossless-output",
+      "assessment": "Outputs are exclusive and inputs are rechecked. All four logs are retained; gzip transport is compared byte for byte after decompression. The renderer binds results to actual frozen identities and preserves unresolved phases."
+    }
+  ],
+  "findings": [
+    {
+      "id": "cost-report-family-label",
+      "severity": "editorial",
+      "file": "docs/migration/lot4c-evidence/write-cost-results.py",
+      "observedText": "propre des facets relatifs",
+      "expectedChange": "Use exemples de faces in the generated French report.",
+      "presentAtReceipt": false,
+      "costAcceptanceImpact": false
+    },
+    {
+      "id": "owner-state-set-comment",
+      "severity": "editorial",
+      "file": "docs/migration/lot4c-evidence/qualify-cost-owner-graphs.mjs",
+      "observedText": "Only the source Python set is unordered",
+      "expectedChange": "Describe both Facet source sets or the actual failed-only transport normalization; both remain empty under the inactive-owner qualification.",
+      "presentAtReceipt": false,
+      "costAcceptanceImpact": false
+    }
+  ],
+  "externalReadinessObligations": [
+    "The actual published baseline Site version and commit require the server publication receipt; the helper accepts a supplied positive version and verifies its commit/native manifests but does not query hosting.",
+    "Source-only review does not establish successful helper parsing/execution, prospective graph qualification, final readiness, cross-thread quiet, measured costs or publication.",
+    "Final tool hashes must be declared after any editorial correction; the initial adaptation receipt is a historical start snapshot, not the final freeze."
+  ],
+  "blockingLogicFindings": []
+}

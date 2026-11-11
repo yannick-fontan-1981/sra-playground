@@ -1,0 +1,40 @@
+{
+  "command": [
+    "flock",
+    "-s",
+    "/workspace/shared/sra-coordination/performance.lock",
+    "python",
+    "-B",
+    "docs/migration/lot4c-evidence/finalize-cost-readiness.py",
+    "--performance-directory",
+    "docs/migration/lot4c-evidence/performance-integrated",
+    "--final-directory",
+    "docs/migration/lot4c-evidence/integrated-final",
+    "--published-predecessor",
+    "docs/migration/lot4c-evidence/planning/published-predecessor-site91.json",
+    "--parity",
+    "docs/migration/lot4c-evidence/integrated-final/isos-facet-source-parity.json.gz",
+    "--browser",
+    "docs/migration/lot4c-evidence/integrated-final/browser/browser-qa.json",
+    "--case-clock",
+    "docs/migration/lot4c-evidence/case-clock.json",
+    "--integrity",
+    "docs/migration/lot4c-evidence/integrated-final/delivery-integrity.json",
+    "--partial-regression",
+    "docs/migration/lot4c-evidence/integrated-final/lkey-partial/qualification.json"
+  ],
+  "startedAt": "2026-11-11T01:09:44.315421+00:00",
+  "finishedAt": "2026-11-11T01:09:46.253340+00:00",
+  "exitCode": 0,
+  "stdout": {
+    "path": "docs/migration/lot4c-evidence/planning/readiness-execution-attempt-01/stdout.log",
+    "bytes": 684,
+    "sha256": "a67bdbaaf1d8f804165beb6475590ee40c5372f1ab92255220e19ce4c0e02c6b"
+  },
+  "stderr": {
+    "path": "docs/migration/lot4c-evidence/planning/readiness-execution-attempt-01/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "measurementExecuted": false
+}

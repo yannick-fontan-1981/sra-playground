@@ -1,0 +1,47 @@
+{
+  "schema": "logos-engine.lot5a-documentation-publication.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T22:19:50.863Z",
+  "nativeVersion": "0.53.0",
+  "nativeDigest": "d30dedc767c588b0fdf33ea398a4ad207b07b027e8b3642b3b262c625c52387f",
+  "source": {
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "checkout_path": "/workspace/sites/sra-lot5-20261110/.sites-checkout",
+    "commit_sha": "a009e1f138bb18251d697f49647bacc615ee514f",
+    "archive": "/workspace/sites/sra-lot5-20261110/lot5a-documentation-closure.tar.gz"
+  },
+  "version": {
+    "id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_b11e67b1a2fc819192e7c9e7df191805",
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "version_number": 85,
+    "source": {
+      "commit_sha": "a009e1f138bb18251d697f49647bacc615ee514f"
+    },
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_000000009264820e8868c538f4b0ea40",
+      "content_hash": "sha256:f07512c1a623ae69644a85fff0a4ae69884066fe4b21da5bc2c6a64e6a9ccfa0",
+      "size_bytes": 29808640,
+      "file_count": 75
+    },
+    "screenshot_url": null,
+    "deployment_id": "appgdep_6af39846f57881918f4cc499b8376aa0"
+  },
+  "deployment": {
+    "id": "appgdep_6af39846f57881918f4cc499b8376aa0",
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "title": "SRA Playground",
+    "version_id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_b11e67b1a2fc819192e7c9e7df191805",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6adbc388d79081918581b93b919d7258",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-11-10T22:18:59.858962+00:00"
+  },
+  "firstNativePublication": 84,
+  "qualification": "Documentation closure only; all75compiled archive files exactly match the firstSite84native0.53publication. The repository contains its first actual publication receipt, transport reconstruction, original source history bundle, final costs and updated roadmap."
+}

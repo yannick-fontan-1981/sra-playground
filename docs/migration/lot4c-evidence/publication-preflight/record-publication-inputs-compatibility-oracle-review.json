@@ -1,0 +1,190 @@
+{
+  "schema": "logos-engine.lot4c.publication-recorder-compatibility-source-review.v1",
+  "recordedAt": "2026-11-11T01:28:51.572330+00:00",
+  "status": "source_review_passed",
+  "reviewer": "facet_oracle",
+  "inputs": [
+    {
+      "path": "docs/migration/lot4c-evidence/publication-preflight/record-publication-inputs-before.py",
+      "bytes": 17876,
+      "sha256": "bd8070cc153351d59914ef3a3d9f72b9f5040ac5f23380dc5b95fb196de64c91"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/record-publication-inputs.py",
+      "bytes": 23139,
+      "sha256": "3314d92dfba0efc0694ef65ac0fe2b2a068cd505a655df5a4de26ff44f075cbf"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/publication-preflight/record-publication-inputs-compatibility.patch",
+      "bytes": 8113,
+      "sha256": "cae2c542b2f3681f6c65a3f4bf03c96ff448a4784b4ab3c3de1b5c8f4d22aa35"
+    },
+    {
+      "path": "scripts/verify-native-delivery.py",
+      "bytes": 26494,
+      "sha256": "ca36a235e5da8aa8abd963aaa6a282d90217ed58a721bfdbba361527dd48409a"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/validation/delta-tests-run.json",
+      "bytes": 130562,
+      "sha256": "31c84cf8c1a2aa8a871107f358edc0acf041a9cc5771529af088f93958e06822"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/validation/checks-run.json",
+      "bytes": 81433,
+      "sha256": "701c404450fe60791ac4756a287308a66f59e6664c8e46cab14ec73b0361cc3b"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/validation/entry-audit-output.log.gz",
+      "bytes": 179,
+      "sha256": "c7a045a68458e7c6e7d597b27eb64e1f9d7e9fcd768347f8d632fb5eb263f2b4"
+    },
+    {
+      "path": "docs/migration/v6-entry-point-progress.json",
+      "bytes": 19215,
+      "sha256": "c4ef0ef123ebad3d616b4b97e41089cccade73a1c4ad8390f5bd729e871518ba"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/validation/migration-audit-output.log.gz",
+      "bytes": 205,
+      "sha256": "4d15208928ca75b486fc735e5d086bd53e65dcb4b1b27af9a5e25f1cd1b214bd"
+    },
+    {
+      "path": "docs/migration/v6-coverage.json",
+      "bytes": 2555816,
+      "sha256": "4c9e80f30cf4e5b8e05ba28567c5ef78816b1effabbaa449968eaad8bff11a6c"
+    }
+  ],
+  "checks": [
+    {
+      "name": "exact_retained_diff",
+      "passed": true,
+      "reason": "Independent unified diff of retained before/current bytes equals the saved patch exactly."
+    },
+    {
+      "name": "mandatory_tests_gate_preserved",
+      "passed": true,
+      "reason": "VERIFY.verify_tests remains unconditional before the compatibility branch; it verifies all 684 current source/test members, their hashes, native freeze, complete TAP and exact test list."
+    },
+    {
+      "name": "mandatory_build_and_five_gates_preserved",
+      "passed": true,
+      "reason": "VERIFY.verify_build remains unconditional and binds the current build inputs, unique compiled worker, native freeze and exact ordered five checks with exit0 and retained output hashes."
+    },
+    {
+      "name": "mandatory_regressions_and_frozen_inventories_preserved",
+      "passed": true,
+      "reason": "Both native inventories and VERIFY.verify_regressions remain unconditional; formal_inputs is still run twice and compared to delivery-integrity."
+    },
+    {
+      "name": "snapshot_omission_narrowly_scoped",
+      "passed": true,
+      "reason": "Only both snapshot fields absent in the exact official checks-only schema, generator path and ordered five gates is accepted. Partial fields, false unchanged flag, mismatched snapshot, or extra schema keys in the omission branch fail."
+    },
+    {
+      "name": "shared_source_bytes_bound",
+      "passed": true,
+      "reason": "The complete src mappings in the verified test and build inventories must be exactly equal."
+    },
+    {
+      "name": "semantic_failure_not_ignored",
+      "passed": true,
+      "reason": "A present semanticPassed must be true; its absence is allowed only in checks-only mode and requires the original fingerprinted gzip gate summary. Migration failures must remain empty; fullV6Parity and complete must remain false."
+    },
+    {
+      "name": "closure_provenance_limited_and_explicit",
+      "passed": true,
+      "reason": "Current detailed audit reports are bound now and their JSON summaries match the historical gate logs exactly. Facet surface entry must occur once with actual owner and connected status. No missing historical detailed-report fingerprint is inferred."
+    },
+    {
+      "name": "binding_rechecked",
+      "passed": true,
+      "reason": "The new validationInputBinding is retained and must remain identical across both formal_inputs calls. Existing retained-file checks remain unchanged."
+    }
+  ],
+  "actualValidationSchema": {
+    "sourceAndTestInputsInTests": 684,
+    "snapshotAbsentFromChecks": true,
+    "fiveGates": [
+      "typecheck",
+      "entry-audit",
+      "migration-audit",
+      "diff-check",
+      "build"
+    ],
+    "nativeSourceDigest": "eebd099808672be934389020c8f9061df4fdacab28cd7d60c00cd1b080464c04"
+  },
+  "auditClosureBindingsObserved": {
+    "entry-audit": {
+      "frozenLog": {
+        "path": "docs/migration/lot4c-evidence/integrated-final/validation/entry-audit-output.log.gz",
+        "bytes": 179,
+        "sha256": "c7a045a68458e7c6e7d597b27eb64e1f9d7e9fcd768347f8d632fb5eb263f2b4"
+      },
+      "currentClosureReport": {
+        "path": "docs/migration/v6-entry-point-progress.json",
+        "bytes": 19215,
+        "sha256": "c4ef0ef123ebad3d616b4b97e41089cccade73a1c4ad8390f5bd729e871518ba"
+      },
+      "exactSummaryMatched": true,
+      "summary": {
+        "connected": 61,
+        "declared": 76,
+        "percent": 80.3,
+        "groups": [
+          {
+            "id": "goal_access",
+            "connected": 10,
+            "declared": 12
+          },
+          {
+            "id": "window_constraints",
+            "connected": 21,
+            "declared": 21
+          },
+          {
+            "id": "surface",
+            "connected": 10,
+            "declared": 10
+          },
+          {
+            "id": "factored_material_return",
+            "connected": 20,
+            "declared": 33
+          }
+        ],
+        "fullV6Parity": false
+      },
+      "historicalDetailedReportHashClaimed": false
+    },
+    "migration-audit": {
+      "frozenLog": {
+        "path": "docs/migration/lot4c-evidence/integrated-final/validation/migration-audit-output.log.gz",
+        "bytes": 205,
+        "sha256": "4d15208928ca75b486fc735e5d086bd53e65dcb4b1b27af9a5e25f1cd1b214bd"
+      },
+      "currentClosureReport": {
+        "path": "docs/migration/v6-coverage.json",
+        "bytes": 2555816,
+        "sha256": "4c9e80f30cf4e5b8e05ba28567c5ef78816b1effabbaa449968eaad8bff11a6c"
+      },
+      "exactSummaryMatched": true,
+      "summary": {
+        "complete": false,
+        "pythonModules": 1369,
+        "pythonLines": 320375,
+        "declaredClassesAndFunctions": 12857,
+        "dataFiles": 417,
+        "verifiedModules": 0,
+        "componentVerifiedModules": 189,
+        "partiallyTransferredModules": 147,
+        "transferredUnverifiedModules": 0,
+        "pendingModules": 1033,
+        "strategyFamilies": 16,
+        "failures": []
+      },
+      "historicalDetailedReportHashClaimed": false
+    }
+  },
+  "qualification": "Source-only compatibility review and existing evidence reads. The modified recorder was not executed by this review; no test, build, benchmark, original oracle or publication was run. Existing gates remain mandatory. Current closure report provenance is deliberately weaker than a historical detailed-report hash and is explicitly qualified, as authorized by the delivery owner."
+}
