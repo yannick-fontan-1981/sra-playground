@@ -1,0 +1,47 @@
+{
+  "recordedAt": "2026-11-11T13:18:39.307924+00:00",
+  "lanes": [
+    {
+      "lot": "7-followup",
+      "observedAt": "2026-11-11T13:18:39.306438+00:00",
+      "acknowledgedAt": "2026-11-11T12:59:07.412337+00:00",
+      "acknowledgementTimestampField": "quiet_acknowledged_at",
+      "activeCommand": null,
+      "executionStopped": true,
+      "terminalRelease": false,
+      "evidence": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/isolation/quiet-lot7-followup-status.json",
+        "bytes": 5214,
+        "sha256": "5eec737fe109b9676cf48045991669e18d90fd62cc8f0faaf502c5f4fbd84043"
+      }
+    },
+    {
+      "lot": "10B",
+      "observedAt": "2026-11-11T13:18:39.307164+00:00",
+      "acknowledgedAt": "2026-11-11T12:47:20.858378+00:00",
+      "acknowledgementTimestampField": "quiet_acknowledged_at",
+      "activeCommand": null,
+      "executionStopped": true,
+      "terminalRelease": false,
+      "evidence": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/isolation/quiet-lot10b-status.json",
+        "bytes": 4309,
+        "sha256": "68f81342afe2cdfa0dd0fa91b24bd9f510c4cbc7fb73101576fa13f7a5f9eba1"
+      }
+    },
+    {
+      "lot": "5C",
+      "observedAt": "2026-11-11T13:18:39.307469+00:00",
+      "acknowledgedAt": "2026-11-11T13:18:04.811641+00:00",
+      "acknowledgementTimestampField": "updated_at of the observed status asserting quiet",
+      "activeCommand": null,
+      "executionStopped": true,
+      "terminalRelease": false,
+      "evidence": {
+        "path": "docs/migration/lot6a-evidence/performance-integrated/isolation/quiet-lot5c-status.json",
+        "bytes": 4124,
+        "sha256": "ba604fb0a74e5ec52bc42913b5e4a95635f05bfa40e163afc1444b4a1519d92f"
+      }
+    }
+  ]
+}

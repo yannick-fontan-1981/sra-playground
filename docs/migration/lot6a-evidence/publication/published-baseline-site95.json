@@ -1,0 +1,32 @@
+{
+  "schema": "logos-engine.lot6a.actual-published-predecessor.v1",
+  "recordedAt": "2026-11-11T12:09:31.187362+00:00",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "siteVersion": 95,
+  "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_05826322bc088191a15d01f8e209bcce",
+  "commit": "3a70463039768f7114edae7d94d7dd33b7f36aa8",
+  "nativeVersion": "0.58.0",
+  "nativeDigest": "099444085f0579ce60e226c9dece42110c577538f5f337579305a2e5f65483c4",
+  "nativeManifest": {
+    "path": "docs/migration/lot6a-evidence/baseline/source-manifest.json",
+    "bytes": 35852,
+    "sha256": "2a0101b7cf56ce98a82e27e36d5ab78b53c297ca54b82c638a168be4560643bd"
+  },
+  "sourceOpening": {
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "checkout_path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout",
+    "commit_sha": "3a70463039768f7114edae7d94d7dd33b7f36aa8"
+  },
+  "audience": {
+    "ownerOnly": true,
+    "accessMode": "custom",
+    "revision": 3
+  },
+  "archive": {
+    "archive_format": "tar",
+    "content_hash": "sha256:9f793af6b1a0f94db4f7213ac2e9580a973731172f96efb9df7a7de3d3fa08ad",
+    "size_bytes": 29962240,
+    "file_count": 75
+  },
+  "qualification": "Actual get_site/get_site_version and standard source-helper opening observed in this recovery. No candidate publication is inferred."
+}

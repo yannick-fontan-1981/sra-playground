@@ -1,0 +1,66 @@
+{
+  "schema": "logos-engine.lot6a.weav-memory-diagnostic.v1",
+  "recordedAt": "2026-11-11T13:06:34.011938+00:00",
+  "status": "diagnostic_completed_no_success_promoted",
+  "own1024Execution": {
+    "path": "docs/migration/lot6a-evidence/integrated-final-02/released-weav-1024/regressions/weav-051-execution.json",
+    "bytes": 15014,
+    "sha256": "25173a0eeb57c4ac90d0036b643533f03dc3e20d53ccac4f79f378c06bf2a842"
+  },
+  "own1536Execution": {
+    "path": "docs/migration/lot6a-evidence/integrated-final-02/released-recovery/regressions/weav-051-execution.json",
+    "bytes": 15666,
+    "sha256": "c176e39284f2c6cf61c1549d0f466af78b5bc92e8ab460bb1f273e1f8dd0cac0"
+  },
+  "peerExecutionOriginal": {
+    "path": "/workspace/sites/sra-lot7-followup-recovery-20261111/.sites-checkout/docs/migration/lot7b-evidence/followup-recovery/integrated-final/regressions/regressions/weav-051-execution.json",
+    "bytes": 19039,
+    "sha256": "65aa76d29d4b300cde56328519e4acd6446b74baa1dbd5c45bde33fba78c48a5"
+  },
+  "peerExecutionRetained": {
+    "path": "docs/migration/lot6a-evidence/recovery/weav-memory/peer-7-followup-execution.json",
+    "bytes": 19039,
+    "sha256": "65aa76d29d4b300cde56328519e4acd6446b74baa1dbd5c45bde33fba78c48a5"
+  },
+  "sharedDriverHostHarness": {
+    "scripts/run-released-public-regressions-streamlog.py": "b05b0e113c93696be45408e4c10549f2a379c22330efbddfcaa0f09cd51309b9",
+    "scripts/replay-public-regression-released-baseline.mjs": "2ce2a0e1b8f969510373ae161156b2b163d208b4e426cb1f26218f9952b3b164",
+    "tests/helpers/v6-live-game-campaign.ts": "62a29629b68b316dafd2a5a0868fc16409b5805591ad4849888107d94ce0e50a"
+  },
+  "sameBaselineAndTrace": true,
+  "observations": [
+    {
+      "scope": "own1024exclusive",
+      "exitCode": -6,
+      "lastActions": 73,
+      "maximumObservedHwmKiB": 1305040,
+      "fatalDiagnostic": "FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory"
+    },
+    {
+      "scope": "own1536previous",
+      "exitCode": -9,
+      "lastProgress": {
+        "phase": "stopped",
+        "levelsCompleted": 3
+      },
+      "maximumObservedHwmKiB": 1767424,
+      "fatalDiagnostic": null,
+      "signalCause": "unknown"
+    },
+    {
+      "scope": "peer1536differentNative",
+      "exitCode": 0,
+      "actions": 81,
+      "maximumObservedHwmKiB": 2172020,
+      "maximumObservedRssKiB": 1943976,
+      "nativeDigest": "f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279"
+    }
+  ],
+  "memoryLimitObservation": {
+    "procSelfCgroup": "0::/",
+    "cgroupMemoryFilesAvailable": false,
+    "knownCgroupHeadroom": null
+  },
+  "decision": "One unchanged-host WEAV replay at1536MiB under exclusive performance.lock; same native freeze, packets and17comparisons.1024MiB is demonstrably insufficient. The successful peer provides workload/host evidence only, not a 6A regression result. No native/harness/comparator edit or cost sample is made.",
+  "qualification": "Serialization/compression retains gzipSync(JSON.stringify(report)+newline); a final RSS increase is plausible and observed in the peer, but no cgroup/OS cause is inferred for previous SIGKILL. Exclusivity removes known parallel compute; capacity is not claimed as measured."
+}

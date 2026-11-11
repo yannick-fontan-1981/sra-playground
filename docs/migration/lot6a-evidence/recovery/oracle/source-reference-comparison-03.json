@@ -1,0 +1,29 @@
+{
+  "startedAt": "2026-11-11T12:05:21.899Z",
+  "schema": "sra.preview-packing-independent-source-comparison.v1",
+  "status": "passed",
+  "checks": 1236,
+  "sourceFiles": 724,
+  "initialCases": 14,
+  "sessions": 9,
+  "sourceSteps": 29,
+  "helpers": {
+    "normalized": 4,
+    "transforms": 16,
+    "scenes": 5,
+    "points": 6,
+    "samples": 1,
+    "poses": 4,
+    "assignments": 5
+  },
+  "guards": 17,
+  "stateVariants": 9,
+  "gameExecution": false,
+  "historicalResultsReused": false,
+  "fixture": {
+    "bytes": 121310,
+    "sha256": "558a1ea317e27a39058ee5e44414b65990db6d965a5405f1b940b0fd9ffe2938"
+  },
+  "elapsedMilliseconds": 727.6673539999999,
+  "finishedAt": "2026-11-11T12:05:22.628Z"
+}

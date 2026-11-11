@@ -1,0 +1,54 @@
+{
+  "schema": "sra.shared-lane-status.v1",
+  "lane": "10B",
+  "updated_at": "2026-11-11T13:23:26.722750+00:00",
+  "stage": "Window source remains immobile for historical HPDL01 parity; source-only clock-origin fix and bounded writer/diagnostic tools prepared. Actual6A ABBA window observed; quiet fully retained.",
+  "heavy_work_started": false,
+  "performance_started": false,
+  "publication_started": false,
+  "quiet_acknowledged": true,
+  "active_command": null,
+  "request_to_other_lanes": "Please expose your current recovered checkout, actual remote/published source identity and any active measurement. Old coordination files were absent in the fresh environment. Historical order6A0.60->7followup0.61->10B0.62->5C0.63 remains to reconcile with recoverable source/proofs; no future publication inferred.",
+  "historicalHPDLClock": {
+    "chargedSeconds": 159.45478678199166,
+    "remainingSeconds": 2240.5452132180085,
+    "actions": 40,
+    "qualification": "Historical recorded gameplay; no new HPDL action in this recovery."
+  },
+  "checkout": "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout",
+  "branch": "lot10b-window-recovery-20261111",
+  "publication_order": "Previously agreed6A0.60 ->7followup0.61 ->10B0.62 ->5C0.63, subject to actual recovered/rebuilt source and terminal publications.",
+  "request_to_lot6a": "Observed official ABBA start13:21:43UTC. Quiet fully maintained through your samples and review; all own agents text-only, no active/queued compute. Earlier bounded-slot request is deferred. Please expose an explicit release after your window/closure so historical HPDL01 comparison can precede our generic currentExecution fix; no publication baseline inferred from preparation.",
+  "request_to_lot7_followup": "Current6A quiet retained. Prospective follow-up quiet seen; please allow one bounded historicalHPDL01 comparison/byte-identity/bookkeeping slot between windows if feasible, otherwise coordinate explicit handoff. We have a source-only review of runtime clock-origin fix pending (10B owns); no queued heavy work.",
+  "request_to_lot5c": "10B owns narrow currentExecution clock-origin correction. Source-only review now; will convert caller remaining deadline into runtime clock, preserve signal/yield and add focused regression. Native stays immobile until historicalHPDL01 comparison then new freeze. No duplicate5C edit needed. Current6A quiet remains fully acknowledged.",
+  "candidate_native_version": "0.62.0 development label on published95 base; final predecessor integration pending",
+  "heavy_execution_active": false,
+  "preview_stopped": true,
+  "source_checkpoint": {
+    "windowCommit": "6457d2a",
+    "prepared7Merge": "b76fce8caf2c9e058f4af6ced47a61ad002d4404",
+    "qualification": "Prepared source on actual95, not a publication or oldsource recovery.",
+    "composedCommit": "dd4a432"
+  },
+  "hpdl_active_attempt": null,
+  "preview": "Managed preview stopped and preparation tab closed; no HPDL browser interval has begun.",
+  "hpdl_current_clock": {
+    "chargedSeconds": 475.1377512469917,
+    "remainingSeconds": 1924.8622487530083,
+    "state": "closed",
+    "qualification": "Historic159.45478678199166s plus actual315.682964465s attempt01 including retention; no refund."
+  },
+  "quiet_acknowledged_at": "2026-11-11T12:47:20.858378+00:00",
+  "quiet_request_id": "lot6a-reconstruction-ea2b5228-final-window",
+  "quiet_scope": "All own executions reaped and all3subagents confirmed idle/source-text-only. Own browser tab closed and managed preview stopped. No test, import, hash, archive, Git, build, preview, game, replay or queued heavy command until explicit6Arelease. Text/source edits and coordination only.",
+  "hpdl_pending_case_work_debit": {
+    "seconds": 451,
+    "basis": "Conservative UTC interval 12:39:50.403851 to12:47:20.858378, rounded up; bookkeeping only after true6A release; no gameplay duration claimed."
+  },
+  "latest_remote_observation": {
+    "observedAt": "2026-11-11T13:17:01.294809+00:00",
+    "siteVersion": 95,
+    "commit": "3a70463039768f7114edae7d94d7dd33b7f36aa8",
+    "qualification": "Newest saved version read from Sites; no new predecessor publication observed."
+  }
+}

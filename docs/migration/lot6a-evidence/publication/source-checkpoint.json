@@ -1,0 +1,12 @@
+{
+  "schema": "logos-engine.lot6a.source-checkpoint.v1",
+  "recordedAt": "2026-11-11T12:37:00.902589+00:00",
+  "status": "source_checkpoint_pushed",
+  "commit": "c263271442b8e8a8084c39c2f9301fd3163e7d29",
+  "ref": "refs/heads/lot6a-recovery-checkpoint-20261111",
+  "remoteAdvertisedCommit": "c263271442b8e8a8084c39c2f9301fd3163e7d29",
+  "nativeDigest": "ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229",
+  "nativeFiles": 306,
+  "publication": false,
+  "qualification": "Fresh reconstruction source, oracle fixture and tests saved by ordinary non-forced Git branch push; exact ls-remote result matches. No Site save/deployment occurred. Complete delivery evidence and final functional/cost gates remain separate."
+}

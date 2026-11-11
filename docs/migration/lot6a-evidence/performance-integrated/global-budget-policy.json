@@ -1,0 +1,61 @@
+{
+  "schema": "logos-engine.native-global-cost-policy.v1",
+  "declaredAt": "2026-11-11T09:18:26.548339-03:00",
+  "authorization": {
+    "source": "retained explicit user global-cost instruction, applied unchanged to lot6A before its official window",
+    "date": "2026-11-11",
+    "verbatim": "si le global reste en dessous de 10% d'augmentation alors une phase qui dépasse 10% peut être accepté."
+  },
+  "globalStage": "session_elapsed",
+  "statistic": "pooled median of complete measured-session durations per tested case",
+  "caseIds": [
+    "STCK",
+    "SMLP"
+  ],
+  "relativeIncreaseLimit": 0.1,
+  "comparison": "strictly_less_than",
+  "allCasesMustPass": true,
+  "crossCaseCompensation": false,
+  "phaseOverrunsMayBeAccepted": true,
+  "phasesAndP95RemainVisible": true,
+  "diagnosticPhasePolicy": "docs/migration/lot6a-evidence/performance-integrated/comparison-policy.json",
+  "plannedOrder": [
+    "A1",
+    "B1",
+    "B2",
+    "A2"
+  ],
+  "cohorts": 2,
+  "sessionsPerCaseVersionCohort": 4,
+  "measuredSessions": 32,
+  "measuredActions": 400,
+  "excludedWarmupSessions": 8,
+  "excludedWarmupActions": 24,
+  "excludedMeasuredSessions": 0,
+  "excludedOutliers": 0,
+  "baseline": {
+    "nativeVersion": "0.58.0",
+    "siteVersion": 95,
+    "commit": "3a70463039768f7114edae7d94d7dd33b7f36aa8",
+    "nativeDigest": "099444085f0579ce60e226c9dece42110c577538f5f337579305a2e5f65483c4",
+    "nativeFiles": 302
+  },
+  "candidate": {
+    "nativeVersion": "0.60.0",
+    "nativeDigest": "ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229",
+    "nativeFiles": 306,
+    "sourceBaseCommit": "3a70463039768f7114edae7d94d7dd33b7f36aa8",
+    "checkoutHead": "3a70463039768f7114edae7d94d7dd33b7f36aa8",
+    "nativeSourceCommit": null,
+    "nativeWorktreeChanges": [
+      "M src/logos-engine/v6-native-runtime.ts",
+      "?? src/logos-engine/v6-preview-packing-calculus.ts",
+      "?? src/logos-engine/v6-preview-packing-geometry.ts",
+      "?? src/logos-engine/v6-preview-packing-types.ts",
+      "?? src/logos-engine/v6-preview-packing.ts"
+    ],
+    "siteVersion": null,
+    "qualification": "The frozen digest and archive identify candidate bytes. A null source commit means the checkout HEAD is ancestry only. No candidate publication is asserted."
+  },
+  "qualification": "Declared before a new lot6A official window on exact retained source freezes. Each game must independently remain strictly below +10% complete-session median increase. All measured samples, phase results and available p95 remain. Readiness, isolation and functional evidence are separate."
+}

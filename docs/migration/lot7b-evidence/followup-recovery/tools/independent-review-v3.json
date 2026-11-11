@@ -1,0 +1,324 @@
+{
+  "schema": "sra.lot7.followup-independent-tool-review.v3",
+  "status": "passed_source_review_only",
+  "reviewMode": "source_review_only",
+  "reviewer": "/root/audit_caller_contract",
+  "recordedAt": "2026-11-11T12:49:08.923711+00:00",
+  "scope": "Independent source review of the confined validation receipt selector, its immutable retry amendment, prepared checkpoint adoption and continuity of the full formal scope. Source-only closed-case loader inspection covers the selected tests and their test/script helpers.",
+  "historicalReviews": [
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/tools/independent-review.json",
+      "sha256": "9838a672587b03e8c8e379cb69d898a4f45a466fe7d113e498049d13953077ea",
+      "bytes": 7357
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/tools/independent-review-v2.json",
+      "sha256": "4ebd79d1bd45bbfbb7597290405b4ddce1717030dc0fc2385f45e79c662e791c",
+      "bytes": 10095
+    }
+  ],
+  "historicalReviewsPreservedUnchanged": true,
+  "retryAmendment": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/tools/validation-retry-amendment.json",
+    "sha256": "a0994baf5bf179e6ddb24f4a11e23bd73fe832dc89773582bffa6f80a4b41728",
+    "bytes": 7484
+  },
+  "priorRegressionScopeAmendment": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/tools/readiness-scope-amendment.json",
+    "sha256": "4a229bad726205ffd29bcc7fd8603593bb4902abf0fec04216d2c23df11aa98f",
+    "bytes": 4789
+  },
+  "tools": [
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/tools/capture-strict-cost-forms.mjs",
+      "sha256": "8e269df48afbfea2991e976a252bf49e95cd15207b2442794078454c9fc8a568",
+      "bytes": 12545
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/tools/verify-strict-cost-forms.mjs",
+      "sha256": "07276dd501a919c97d3f53b7ea594eed8029b5a363f2a498515c1a304551a22b",
+      "bytes": 7759
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/tools/finalize-cost-readiness.py",
+      "sha256": "4ed625736afbb76f5412af5c2b9518e3ce4f0d817e06a361a33e1bf58ca7cc21",
+      "bytes": 40411
+    }
+  ],
+  "reviewedBeforeHelper": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/tools/history/finalize-cost-readiness-11-case-v2.py",
+    "sha256": "1cee23b5aace9a7bbed096d498a0c6255842f28dfd7e9dfc4760a67859a5e913",
+    "bytes": 36312
+  },
+  "completeHelperDeltaReviewed": true,
+  "syntaxChecks": [
+    {
+      "kind": "syntax_only",
+      "tool": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/tools/finalize-cost-readiness.py",
+        "sha256": "4ed625736afbb76f5412af5c2b9518e3ce4f0d817e06a361a33e1bf58ca7cc21",
+        "bytes": 40411
+      },
+      "method": "Python ast.parse of source text without import or module execution",
+      "startedAt": "2026-11-11T12:48:06.326800+00:00",
+      "finishedAt": "2026-11-11T12:48:06.333936+00:00",
+      "status": "passed",
+      "moduleExecuted": false
+    }
+  ],
+  "toolBytesUnchangedDuringReview": true,
+  "validationSelectorReview": {
+    "defaultDirectory": "validation",
+    "selectedDirectory": "verification-attempt-02/validation",
+    "resolvedPathMustRemainInsideCandidateDirectory": true,
+    "requiresFreshPassedTestsAndAllFiveGates": true,
+    "requiresExactCurrentSourceTestAndBuildInputInventories": true,
+    "requiresSameFullOrderedTestFilesAndTestCountAsRetainedFirstAttempt": true,
+    "sourceTestInputsMayDifferOnlyInTwoPinnedCorrectedFiles": true,
+    "requiresIntegritySelectedDirectoryAndBothExactReceiptFingerprints": true,
+    "requiresOriginalElevenCaseAmendmentBeforeEveryRegression": true,
+    "requiresRetryAmendmentBeforeFunctionalCostCapture": true,
+    "claimsRetryAmendmentPrecededAlreadyRunningRegressions": false,
+    "strictComparisonRulesChanged": false,
+    "failureWaiverAdded": false
+  },
+  "retainedInitialAttempt": {
+    "receipt": {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/integrated-final/validation/delta-tests-run.json",
+      "sha256": "e8acfc1e234d3a5cb89b7651d215729d0c0896095b62cf5d03c06b36530fe565",
+      "bytes": 135748
+    },
+    "status": "failed",
+    "counts": {
+      "tests": 5042,
+      "pass": 5040,
+      "fail": 2,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "output": {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/integrated-final/validation/delta-tests-output.log.gz",
+      "sha256": "24d8f7ea487e31de485d24c3dc380ded21f1ce2077cfeaa180ec6a6991e6e2c6",
+      "bytes": 144095
+    },
+    "outputBytesFingerprintVerified": true,
+    "outputDecodedByReviewer": false,
+    "substitutedAsPassingProof": false
+  },
+  "checkpointAdoptionReview": {
+    "preparedCheckpoint": "c263271442b8e8a8084c39c2f9301fd3163e7d29",
+    "adoptionCommit": "900febf8b165136be07663ee106de1747a1f1181",
+    "receipt": {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/coordination/prepared-6a-checkpoint-adoption.json",
+      "sha256": "c019c6852315918593cda7a99baa0b12b1b83dcd56d0972095b5fd0065457e63",
+      "bytes": 1936
+    },
+    "files": [
+      {
+        "path": "tests/v6-coupled-pair-planning.test.ts",
+        "sha256": "94d74c6d50892bd3ce05579fdf71b36b648bdfedf7dc6663c8d67a9125e31ee1",
+        "bytes": 15869,
+        "byteIdenticalToPreparedCheckpoint": true,
+        "byteIdenticalToAdoptionCommit": true
+      },
+      {
+        "path": "tests/v6-radial-port-integration.test.ts",
+        "sha256": "0faea483ab4037f420eac59d76ac52281be3358187d600ead878024ff559f461",
+        "bytes": 28617,
+        "byteIdenticalToPreparedCheckpoint": true,
+        "byteIdenticalToAdoptionCommit": true
+      },
+      {
+        "path": "scripts/verify-preview-packing-presence.py",
+        "sha256": "4bf800fe0f570ef275b361d4b837dc4e9df4fb3bbb18f5600ba60f59bd43f362",
+        "bytes": 50666,
+        "byteIdenticalToPreparedCheckpoint": true,
+        "byteIdenticalToAdoptionCommit": true
+      }
+    ],
+    "testChanges": "The coupled-pair registry expectation adds preview_packing. The radial-port registry expectation includes the inherited facet/addressed owners and Preview, and updates the exact connected-entry counts from 60 to 63. No test is removed or skipped.",
+    "presenceVerifierReview": "Exact byte adoption from the prepared checkpoint was verified; this review did not run the verifier.",
+    "adoptionCommitNativeFileChanges": [],
+    "nativeWorkingTreeChangesAtReview": [],
+    "currentNativeInventoryVerifiedAgainstFreeze": true,
+    "nativeSourceManifestDigest": "f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279",
+    "nativeFileCount": 306,
+    "replayHarness": {
+      "path": "tests/helpers/v6-live-game-campaign.ts",
+      "sha256": "62a29629b68b316dafd2a5a0868fc16409b5805591ad4849888107d94ce0e50a",
+      "bytes": 87376
+    },
+    "replayHarnessSha256MatchesAdoption": true
+  },
+  "formalScopeContinuity": {
+    "initialScope": {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/contract/test-scope.json",
+      "sha256": "2cecca0a3969206a5a6a4111f4447bddf21cdf4d77121d15fa6741a57c7d2fa3",
+      "bytes": 8080
+    },
+    "selectedScope": {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/contract/test-scope-final.json",
+      "sha256": "edfd5f06e5c07271e5a480977a0f23dee07fc05be1d98e96187d71fd69b768c4",
+      "bytes": 24017
+    },
+    "uniqueTestFiles": 133,
+    "sameExactOrderedFilesAsInitialScope": true,
+    "allCurrentSelectedTestCodeHashesMatchFinalScope": true,
+    "safeInheritedFiles": 122,
+    "previewFiles": 4,
+    "followupNewOrAffectedFiles": 7,
+    "selectedClosedCaseModules": [],
+    "freshFormalExecutionPassedVerifiedByThisReview": false
+  },
+  "closedCaseLoaderReview": {
+    "mode": "source_only_no_fixture_read",
+    "selectedTestFilesInspected": 133,
+    "importedTestAndScriptHelpers": [
+      {
+        "path": "scripts/compare-v6-preview-packing-reference.ts",
+        "sha256": "413df36916c95308b1c1bc62e43a5bc4e968f4b84b43a5216b94f0a84ef20fff",
+        "bytes": 11455
+      },
+      {
+        "path": "tests/helpers/capture-preview-packing.ts",
+        "sha256": "5c5e9cba61c5157c761dadf0d4385fbe342210419305c023760edf0c0154b835",
+        "bytes": 2645
+      },
+      {
+        "path": "tests/helpers/chunked-evidence.ts",
+        "sha256": "bde1969c36a5ddf47a24daf24d5240705da3bae4c39dbac74af15b1e053b9276",
+        "bytes": 1495
+      },
+      {
+        "path": "tests/helpers/v6-caller-differential.ts",
+        "sha256": "2e8065fea9a4085cfdbbcbd5dae191107f5059e791f50b74ada3a76bd8821e6b",
+        "bytes": 10206
+      },
+      {
+        "path": "tests/helpers/v6-exposed-reception-raster.ts",
+        "sha256": "e6d7303747da0ba180fc86602a65e49080f6cca147ba27297472a6c78402be5b",
+        "bytes": 2408
+      },
+      {
+        "path": "tests/helpers/v6-synthetic-workshop.ts",
+        "sha256": "9d58d6b0483c73bcf04a3e7d8a5094f36816d61bb9f2c00734727f4609ad83fb",
+        "bytes": 2504
+      }
+    ],
+    "broadDirectoryLoaderFound": false,
+    "dynamicModuleLoaderFound": false,
+    "directClosedCaseFixtureReferenceFound": false,
+    "genericLoaders": "Relational-chamber and typed-material filename helpers have only fixed literal callers. Preview reference uses its fixed default fixture when imported by the test; the CLI override is entrypoint-guarded. Chunked-evidence reads only the requested path or its validated basename-only parts, without directory enumeration.",
+    "computedProvenancePaths": "Computed original-source and input-corpus paths used by the reviewed tests are byte/hash checks, without payload decompression or JSON interpretation of those indirect inputs.",
+    "fixturesOpenedOrDecoded": false,
+    "concreteIndirectClosedCaseDecodeRiskFound": false,
+    "qualification": "Code-level scope inspection only. Fixture contents and case provenance were not reanalyzed, and no module or test was executed."
+  },
+  "unchangedRequirements": {
+    "regressions": {
+      "cases": 11,
+      "strictChecksPerCase": 17,
+      "strictChecksTotal": 187
+    },
+    "actualPublishedBaselineReconciliationRequiredBeforeCost": true,
+    "strictCostForms": {
+      "functionalSessions": 8,
+      "functionalActions": 62,
+      "officialTrials": 40,
+      "measuredSessions": 32,
+      "measuredActions": 400,
+      "excludedWarmupSessions": 8,
+      "excludedWarmupActions": 24,
+      "structuralExemptions": []
+    },
+    "globalRule": "Pooled complete-session median strictly below +10% separately for STCK and SMLP. Phase excess is diagnostic; no post-measurement exclusions.",
+    "strictPostWindowVerification": "The separate verify-strict-cost-forms.mjs passed receipt remains mandatory before delivery for the same official window.",
+    "lkeyClockClosed": true,
+    "lkeyClockReset": false,
+    "newLkeyCaseActivity": false
+  },
+  "chronology": {
+    "observedAt": "2026-11-11T12:48:06.335732+00:00",
+    "beforeAnyOwnRegression": false,
+    "observedRegressionStartedReceipts": [
+      "docs/migration/lot7b-evidence/followup-recovery/integrated-final/regressions/regressions/catr-051-execution-started.json",
+      "docs/migration/lot7b-evidence/followup-recovery/integrated-final/regressions/regressions/mind-051-execution-started.json",
+      "docs/migration/lot7b-evidence/followup-recovery/integrated-final/regressions/regressions/weav-051-execution-started.json",
+      "docs/migration/lot7b-evidence/followup-recovery/integrated-final/regressions/regressions/vois-051-execution-started.json",
+      "docs/migration/lot7b-evidence/followup-recovery/integrated-final/regressions/regressions/fogw-051-execution-started.json",
+      "docs/migration/lot7b-evidence/followup-recovery/integrated-final/regressions/regressions/rswp-051-execution-started.json",
+      "docs/migration/lot7b-evidence/followup-recovery/integrated-final/regressions/regressions/conn-050-execution-started.json"
+    ],
+    "formalRetryAlreadyRunningAsReportedByOwner": true,
+    "completedFormalRetryReceiptPresentAtObservation": false,
+    "observedAbsentCostReceipts": {
+      "window.json": [],
+      "readiness.json": [],
+      "strict-work-capture.json": []
+    },
+    "qualification": "The validation retry and regressions were already active. This source review is prior to the observed functional cost capture and official timing window, and does not redate the earlier work."
+  },
+  "findingsClosed": [
+    {
+      "id": "selected_validation_integrity_binding",
+      "finding": "A validation selector must not permit an integrity receipt for a different attempt with matching totals.",
+      "resolution": "The finalizer requires the resolved selected validation directory and both exact selected test/check fingerprints in the delivery-integrity receipt."
+    }
+  ],
+  "metadataInputs": [
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/contract/test-scope.json",
+      "sha256": "2cecca0a3969206a5a6a4111f4447bddf21cdf4d77121d15fa6741a57c7d2fa3",
+      "bytes": 8080
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/contract/test-scope-final.json",
+      "sha256": "edfd5f06e5c07271e5a480977a0f23dee07fc05be1d98e96187d71fd69b768c4",
+      "bytes": 24017
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/coordination/prepared-6a-checkpoint-adoption.json",
+      "sha256": "c019c6852315918593cda7a99baa0b12b1b83dcd56d0972095b5fd0065457e63",
+      "bytes": 1936
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/integrated-final/source-manifest.json",
+      "sha256": "c597c7629495e98fcfad64cdd827393bc58d2d8f26594474e60add601485e4de",
+      "bytes": 36332
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/tools/readiness-scope-amendment.json",
+      "sha256": "4a229bad726205ffd29bcc7fd8603593bb4902abf0fec04216d2c23df11aa98f",
+      "bytes": 4789
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/tools/history/finalize-cost-readiness-11-case-v2.py",
+      "sha256": "1cee23b5aace9a7bbed096d498a0c6255842f28dfd7e9dfc4760a67859a5e913",
+      "bytes": 36312
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/integrated-final/validation/delta-tests-run.json",
+      "sha256": "e8acfc1e234d3a5cb89b7651d215729d0c0896095b62cf5d03c06b36530fe565",
+      "bytes": 135748
+    }
+  ],
+  "remainingBlockingSourceFindings": [],
+  "executionLimits": {
+    "syntaxChecksOnly": true,
+    "sourceAndMetadataHashChecks": true,
+    "testsExecuted": false,
+    "gameExecuted": false,
+    "replayExecuted": false,
+    "oracleExecuted": false,
+    "nativeWorkerStarted": false,
+    "functionalCaptureExecuted": false,
+    "officialCostWindowExecuted": false,
+    "fixturesOpenedOrDecoded": false,
+    "lkeyPayloadDecoded": false,
+    "helperEditsMadeByReviewer": false,
+    "sourceOrTestEditsMadeByReviewer": false,
+    "newArtifactOnly": "docs/migration/lot7b-evidence/followup-recovery/tools/independent-review-v3.json"
+  },
+  "qualification": "Source review, metadata verification and one Python syntax check only. Passing formal retry, completed regressions, actual predecessor publication, readiness, numerical cost acceptance and gameplay success remain separate gates. Historical reviews and failed validation evidence are retained."
+}

@@ -1,0 +1,39 @@
+{
+  "schema": "logos-engine.lot6a.cumulative-case-clock.v1",
+  "case": "KATA",
+  "status": "completed_within_budget",
+  "limitSeconds": 2400,
+  "priorChargedSeconds": 1489.2254091450009,
+  "chargedSeconds": 2256.9345399270005,
+  "remainingSeconds": 143.06546007299949,
+  "intervals": [
+    {
+      "label": "frozen-cold-campaign-browser-and-cold-parity",
+      "startedAt": "2026-11-11T12:22:32.271564+00:00",
+      "startedMonotonic": 2196.739355472,
+      "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+      "finishedAt": "2026-11-11T12:34:17.886653+00:00",
+      "elapsedSeconds": 705.6150632029999
+    },
+    {
+      "label": "final-owner-presence-review",
+      "startedAt": "2026-11-11T13:18:11.917355+00:00",
+      "startedMonotonic": 5536.385145884,
+      "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+      "finishedAt": "2026-11-11T13:19:14.011445+00:00",
+      "elapsedSeconds": 62.094067578999784
+    }
+  ],
+  "active": null,
+  "priorObservation": {
+    "path": "docs/migration/lot6a-evidence/recovery/recovery-observation.json",
+    "sha256": "97c5c7c62d854dc39cd2c0065b28bcf0695d0bd450411d242f6ec5b43d04b2b1",
+    "bytes": 2392
+  },
+  "generator": {
+    "path": "docs/migration/lot6a-evidence/case-clock.py",
+    "sha256": "c26732268405a4aba559986586e7c80eaf399bdeb9792c276c8409aa37eab280",
+    "bytes": 3185
+  },
+  "updatedAt": "2026-11-11T13:19:14.011460+00:00"
+}

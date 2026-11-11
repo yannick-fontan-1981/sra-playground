@@ -1,0 +1,8 @@
+{
+  "status": "exact_bytes_retained",
+  "originalReceipt": "export-attempt-02.json",
+  "retainedFile": "fixture-export-attempt-02.json.gz",
+  "bytes": 120112,
+  "sha256": "8bd88de3a7d818501187339c79f23e2876ee263dfe9065331a4e23bbf817358d",
+  "method": "The current fixture has exactly two additional geometry scenes; removing only those additions yields the byte-identical gzip hash recorded by export attempt02. This retains a fresh recovery fixture, not any lost historical6A evidence."
+}

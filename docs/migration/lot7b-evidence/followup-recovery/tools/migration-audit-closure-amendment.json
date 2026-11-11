@@ -1,0 +1,155 @@
+{
+  "schema": "logos-engine.followup-migration-audit-closure-amendment.v1",
+  "recordedAt": "2026-11-11T14:14:14.713163+00:00",
+  "status": "prospective_before_official_window",
+  "reason": "The unchanged migration audit exited zero during the retained five-check run but reported exactly one missing published6A differential-evidence file. The first readiness attempt correctly refused it. Actual Site97 subsequently supplied that exact committed file; a standalone unchanged audit now closes only that missing-file failure without changing source, tests, build or functional work.",
+  "before": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/tools/finalize-cost-readiness.py",
+    "sha256": "4ed625736afbb76f5412af5c2b9518e3ce4f0d817e06a361a33e1bf58ca7cc21",
+    "bytes": 40411
+  },
+  "beforeRetainedCopy": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/tools/history/finalize-cost-readiness-validation-retry-v3.py",
+    "sha256": "4ed625736afbb76f5412af5c2b9518e3ce4f0d817e06a361a33e1bf58ca7cc21",
+    "bytes": 40411
+  },
+  "after": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/tools/finalize-cost-readiness.py",
+    "sha256": "7e2cee8c0f4ab9821ab17fbf642a75a7492c8e8ce783ac8f3869b10941da01a1",
+    "bytes": 51683
+  },
+  "publicationWrapperBefore": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/tools/record-publication-inputs.py",
+    "sha256": "1302d84691ec50710b0e6d4442cce80e10fe018efba92fa65ae01b51967ca307",
+    "bytes": 40082
+  },
+  "publicationWrapperBeforeRetainedCopy": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/tools/history/record-publication-inputs-v1.py",
+    "sha256": "1302d84691ec50710b0e6d4442cce80e10fe018efba92fa65ae01b51967ca307",
+    "bytes": 40082
+  },
+  "publicationWrapperAfter": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/tools/record-publication-inputs.py",
+    "sha256": "d2d000492902cac9e8812c49fa6f588b11e410f5c9b4dd34561d40e8441b9f8b",
+    "bytes": 44812
+  },
+  "priorValidationRetryAmendment": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/tools/validation-retry-amendment.json",
+    "sha256": "a0994baf5bf179e6ddb24f4a11e23bd73fe832dc89773582bffa6f80a4b41728",
+    "bytes": 7484
+  },
+  "historicalReadinessReview": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/tools/independent-review-v3.json",
+    "sha256": "567fdce42622c68d8fba9e132af48712812da4e2ba61f746151f6e18223282d8",
+    "bytes": 15278
+  },
+  "historicalPublicationReview": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/tools/independent-publication-review.json",
+    "sha256": "d6caed72e98cafcb698796bc0bd9b7596557aae0ea05dcaa5f75c978e2fce1f5",
+    "bytes": 10654
+  },
+  "originalPublicationDeclaration": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/contract/publication-verifier-declaration.json",
+    "sha256": "89124ff2db4ee21fc38fcd685bc8048a51f676ed740ee2d055d972a09febc9fd",
+    "bytes": 4924
+  },
+  "replacementPublicationDeclarationPath": "docs/migration/lot7b-evidence/followup-recovery/contract/publication-verifier-declaration-v2.json",
+  "reviewReceiptPath": "docs/migration/lot7b-evidence/followup-recovery/tools/independent-audit-closure-review.json",
+  "nativeSourceManifestDigest": "f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279",
+  "nativeSourceManifest": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/integrated-final/source-manifest.json",
+    "sha256": "c597c7629495e98fcfad64cdd827393bc58d2d8f26594474e60add601485e4de",
+    "bytes": 36332
+  },
+  "beforeAnyOfficialCost": true,
+  "functionalFormsAlreadyCompleted": true,
+  "functionalForms": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/performance/strict-work-forms.json",
+    "sha256": "825546ffc4f061a1063fbeea4c52c89c2d7a79dbc3dee02e11ab6c1de0ca6637",
+    "bytes": 255907
+  },
+  "functionalCapture": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/performance/strict-work-capture.json",
+    "sha256": "e5b15a6882ab1c1ec183c7b4a7ce1b125527ecc4a5bf8d2179d99c7518998a67",
+    "bytes": 3485
+  },
+  "functionalFormsFinishedAt": "2026-11-11T13:55:57.316Z",
+  "auditClosure": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/integrated-final/post-publication-audit/closure.json",
+    "sha256": "2c4251de16e5135bc471ade760aaf0a79fabcb7e450093882aaa14eeb237ac64",
+    "bytes": 569385
+  },
+  "failedReadinessObservation": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/performance/premeasurement-attempts/readiness-attempt-01.json",
+    "sha256": "04c93bf3ac53f1c7925a176a033d925c47e6837240d239c1e0bea466c61535dc",
+    "bytes": 1449
+  },
+  "originalChecks": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/integrated-final/verification-attempt-02/validation/checks-run.json",
+    "sha256": "3add31397dbdd3dca742617fe93cc9169049f3baff0f33697586e8957f245611",
+    "bytes": 83549
+  },
+  "originalAuditOutput": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/integrated-final/verification-attempt-02/validation/migration-audit-output.log.gz",
+    "sha256": "b5cc04994aefd7ab76c786f85a68556b89104f6c4ad30c0af283653f6396302d",
+    "bytes": 273
+  },
+  "originalFailures": [
+    "Missing differential evidence: docs/migration/lot6a-evidence/recovery/native-source-review.json"
+  ],
+  "freshAuditOutput": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/integrated-final/post-publication-audit/migration-audit-output.log.gz",
+    "sha256": "15ec531477193eb4e5b44a29970fa4b659296efc9e67a9d5a1822ea7abe0a509",
+    "bytes": 205
+  },
+  "freshAuditStartedAt": "2026-11-11T14:02:18.024585+00:00",
+  "freshAuditFinishedAt": "2026-11-11T14:02:24.615083+00:00",
+  "publishedEvidence": {
+    "path": "docs/migration/lot6a-evidence/recovery/native-source-review.json",
+    "sha256": "66233d1a4b346b751725e68fb4f2b8ad70d7c45bf822eb9c659eb8b428d39fa6",
+    "bytes": 10203,
+    "publishedCommit": "98336fba4e696a51c90ff7f7b37b8bdf95f34847",
+    "gitBlobSha256": "66233d1a4b346b751725e68fb4f2b8ad70d7c45bf822eb9c659eb8b428d39fa6"
+  },
+  "baselinePublication": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/coordination/baseline-publication.json",
+    "sha256": "778259eca36fec01e8cd1fde4d387cfee810442988a8abfca106d68df6ab6d50",
+    "bytes": 2595
+  },
+  "unchangedProtocol": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/performance/declaration.json",
+    "sha256": "f8042743a42a93769de12e804d0b3590d844f94c5013cb4f54cf05772698ad14",
+    "bytes": 4969
+  },
+  "unchangedWorkDeclaration": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/performance/strict-work-declaration.json",
+    "sha256": "82716bdccf2578c9adf818d388a6c947ffc9dc2da71e17cafb271f2680220ed2",
+    "bytes": 2118
+  },
+  "unchangedCaptureTool": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/tools/capture-strict-cost-forms.mjs",
+    "sha256": "8e269df48afbfea2991e976a252bf49e95cd15207b2442794078454c9fc8a568",
+    "bytes": 12545
+  },
+  "unchangedStrictVerifier": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/tools/verify-strict-cost-forms.mjs",
+    "sha256": "07276dd501a919c97d3f53b7ea594eed8029b5a363f2a498515c1a304551a22b",
+    "bytes": 7759
+  },
+  "preservedRequirements": {
+    "formalTestFiles": 133,
+    "formalTests": 5042,
+    "strictRegressions": 11,
+    "strictRegressionChecks": 187,
+    "functionalSessions": 8,
+    "functionalActions": 62,
+    "officialMeasuredSessions": 32,
+    "officialMeasuredActions": 400,
+    "excludedWarmupSessions": 8,
+    "excludedWarmupActions": 24,
+    "strictPostWindowTrials": 40,
+    "structuralExemptions": [],
+    "perCasePooledCompleteSessionMedianLimit": "strictly_less_than_10_percent"
+  },
+  "qualification": "This amendment follows the completed functional forms and standalone audit; it makes no claim to predate them. It predates every official cost sample. The initial failed readiness observation, old audit output, all original validation receipts, v3 retry amendment, old helpers/reviews and first publication declaration remain immutable. The fresh full coverage and stdout may differ only by removal of the one exact historical failure. No runtime, test, build, replay, comparator, budget or work-signature rule is changed. The independent review is a path-only forward reference so it can pin this immutable amendment without a hash cycle."
+}

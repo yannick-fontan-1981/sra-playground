@@ -1,0 +1,25 @@
+{
+  "schema": "logos-engine.published-predecessor-reconciliation.v1",
+  "recordedAt": "2026-11-11T13:52:11.956402+00:00",
+  "status": "passed",
+  "previousHead": "94ffd529c27963f44a0591061ebeab4d25d858e2",
+  "publishedPredecessorCommit": "98336fba4e696a51c90ff7f7b37b8bdf95f34847",
+  "publishedSiteVersion": 97,
+  "publishedNativeVersion": "0.60.0",
+  "publishedNativeSiteVersion": 96,
+  "mergeCommit": "8b592b799d5dfaf8b176de79001966e4c76ac0d3",
+  "preparedSourceExactlyMatchesPublished": true,
+  "preparedRegressionCasesExactlyMatchPublished": true,
+  "regressionCases": 11,
+  "sourceAndTestFilesUnchanged": 709,
+  "buildInputsUnchanged": 371,
+  "candidateNativeFiles": 306,
+  "candidateNativeDigest": "f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279",
+  "baselineNativeDigest": "ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229",
+  "identicalNativeFiles": 304,
+  "changedNativeFiles": [
+    "src/logos-engine/v6-native-runtime.ts",
+    "src/logos-engine/v6-ranked-workshop.ts"
+  ],
+  "qualification": "Normal merge of the actually published Site97 commit. All previously validated candidate source/test/build bytes remain unchanged. No test, replay, oracle or build repeated."
+}

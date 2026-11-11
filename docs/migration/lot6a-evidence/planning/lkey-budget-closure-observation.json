@@ -1,0 +1,35 @@
+{
+  "lot": "7 follow-up: Workshop stationary continuation",
+  "updated_at": "2026-11-11T12:09:45.478096+00:00",
+  "phase": "source_checkpoint_ready_waiting_predecessor",
+  "checkout": "/workspace/sites/sra-lot7-followup-recovery-20261111/.sites-checkout",
+  "stage": "Fresh ownsourcecheckpoint complete, prepared on actualSite95. No old unpublishedproof reused. Syntheticnew51/51 (11caller+40owner/source/fullcaller), affected196/196, typecheckPASS. Finalfreeze after6Aactualorstablepreparedintegration; noofficialcost orpublication.",
+  "heavy_work_started": false,
+  "heavy_execution_active": false,
+  "performance_started": false,
+  "publication_started": false,
+  "active_command": "read-only release tooling review and prospective evidence preparation",
+  "preview_stopped": true,
+  "case_clock_state": "closed",
+  "case_clock_cumulative_seconds": 2390.347106991,
+  "case_clock_remaining_seconds": 9.652893008999854,
+  "reserved_native_version": "0.61.0 previously agreed, subject to recovery and actual source verification",
+  "publication_order": "Previously agreed6A0.60 ->7followup0.61 ->10B0.62 ->5C0.63; actual latest Site95/native0.58 still verified now.",
+  "request_to_other_lanes": "CLOSEDLKEY notice: threeinheritedmodules eagerlydecodeLKEY fixture; exclude entire tests/v6-ranked-workshop-reference.test.ts, tests/v6-ranked-workshop-kernel.test.ts, tests/v6-symbol-transactions-kernel.test.ts fromnewtestexecutions. Freshindependentsyntheticreplacement availablehere. Do notresetcumulativeclock2390.347106991. Noexclusivewindowrequested.",
+  "request_to_lot6a": "Ownsourcecheckpointready 93b8f8d061e038d545ba0ee80b1b179c58c8172b; pleaseshareyourstablepreparedsourcecheckpointforintegrationandfreshfinalfreeze. We remainqueuedafteractual6Apublication. Readyforquietwhenyourwindowapproaches.",
+  "request_to_lot10b": "Fresh reconstructed followupsourcecheckpoint 93b8f8d061e038d545ba0ee80b1b179c58c8172b available locally on ourcheckout. ItisSite95-based0.61 notold d9bytes, Workshop+coldcallersynthetic51contracts+196affectedpass, noLKEYfixtures. Prepared6A notintegratedyet. Canfetchthisspecificcommitfromlocalpathforlaterpreparedcomposition; finalidentityneedsactual6Areconcile.",
+  "request_to_lot5c": "Own2-filefreshsourcecheckpointready; noactiveheavy orcost, awaiting6Apreparedsource. LKEYclosednoticepresent; all3LKEYeagertestmodulesexcluded fromourfreshscope.",
+  "branch": "lot7-followup-recovered-site95",
+  "source_checkpoint": {
+    "commit": "93b8f8d061e038d545ba0ee80b1b179c58c8172b",
+    "nativeDigest": "104e7db8537338546d1ea949376548fa167dc29ffcd34c96a0b2574dbbb304da",
+    "nativeFileCount": 302,
+    "baselineSite": 95,
+    "candidateVersion": "0.61.0",
+    "productionDelta": [
+      "src/logos-engine/v6-native-runtime.ts",
+      "src/logos-engine/v6-ranked-workshop.ts"
+    ],
+    "qualification": "Fresh reconstructed source checkpoint, not old d9b2c2b bytes; nofinalfreeze/cost/publication."
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "schema": "logos-engine.cost-premeasurement-dependency-repair.v1",
+  "recordedAt": "2026-11-11T13:54:13.396702+00:00",
+  "status": "dependency_gap_repaired_before_measurement",
+  "failedAttempt": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/performance/premeasurement-attempts/static-preflight-01.json",
+    "sha256": "488c7d8372bc512a854767d1bfd34ae90507d7fd2688cea3bc4dd033bdcf926f",
+    "bytes": 13323
+  },
+  "failure": "Absent generated Pyodide assets in sparse baseline worktree",
+  "repair": "Baseline now links to the exact candidate generated Pyodide asset directory, as already supported by the unchanged static verifier; node_modules already shared the exact target.",
+  "baselineCheckout": "/workspace/sites/sra-lot7-baseline6a-recovery-20261111",
+  "baselineCommit": "98336fba4e696a51c90ff7f7b37b8bdf95f34847",
+  "measurementExecuted": false,
+  "protocolChanged": false,
+  "toolsChanged": false,
+  "nativeSourceChanged": false,
+  "qualification": "Initial failed receipt retained unchanged. The same complete static preflight is rerun before functional forms/readiness and before any cost window. No timing sample is repeated or excluded."
+}

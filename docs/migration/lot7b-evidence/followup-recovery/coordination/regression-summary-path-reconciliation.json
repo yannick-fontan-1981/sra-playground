@@ -1,0 +1,19 @@
+{
+  "schema": "logos-engine.regression-summary-path-reconciliation.v1",
+  "recordedAt": "2026-11-11T13:34:07.312970+00:00",
+  "status": "byte_identical_copy",
+  "original": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/integrated-final/regressions/regressions/regression-summary.json",
+    "sha256": "2db0b600d2dd15b054ef86678bc4529f4c55835631d7ee25fd47c36d82a5638f",
+    "bytes": 227159
+  },
+  "canonical": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/integrated-final/regressions/regression-summary.json",
+    "sha256": "2db0b600d2dd15b054ef86678bc4529f4c55835631d7ee25fd47c36d82a5638f",
+    "bytes": 227159
+  },
+  "reason": "The unchanged replay driver appends its own regressions directory. The invocation supplied that directory already, so original outputs are retained under the doubled path. This byte-identical summary copy supplies the existing delivery/readiness path; all result paths inside it still name the unchanged original outputs.",
+  "replayRepeated": false,
+  "summaryContentChanged": false,
+  "nativeDigest": "f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279"
+}

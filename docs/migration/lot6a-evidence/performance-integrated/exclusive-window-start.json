@@ -1,0 +1,33 @@
+{
+  "schema": "logos-engine.lot6a.exclusive-cost-start.v1",
+  "recordedAt": "2026-11-11T13:21:43.463515+00:00",
+  "lock": "/workspace/shared/sra-coordination/performance.lock",
+  "lockMode": "exclusive",
+  "nodeOptions": null,
+  "laneRechecks": [
+    {
+      "file": "lot7-followup-status.json",
+      "observedAt": "2026-11-11T13:21:43.462265+00:00",
+      "quietAcknowledged": true,
+      "activeCommand": null,
+      "heavyExecutionActive": false,
+      "statusUpdatedAt": "2026-11-11T13:13:52.465138+00:00"
+    },
+    {
+      "file": "lot10b-status.json",
+      "observedAt": "2026-11-11T13:21:43.462492+00:00",
+      "quietAcknowledged": true,
+      "activeCommand": null,
+      "heavyExecutionActive": false,
+      "statusUpdatedAt": "2026-11-11T13:17:01.294809+00:00"
+    },
+    {
+      "file": "lot5c-status.json",
+      "observedAt": "2026-11-11T13:21:43.462534+00:00",
+      "quietAcknowledged": true,
+      "activeCommand": null,
+      "heavyExecutionActive": false,
+      "statusUpdatedAt": "2026-11-11T13:18:04.811641+00:00"
+    }
+  ]
+}

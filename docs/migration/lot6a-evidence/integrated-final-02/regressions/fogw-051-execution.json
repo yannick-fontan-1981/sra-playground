@@ -1,0 +1,147 @@
+{
+  "case": "fogw-051",
+  "game": "FOGW",
+  "mode": "recorded-public-replay",
+  "command": [
+    "node",
+    "scripts/replay-v53-public-regression.mjs",
+    "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz",
+    "docs/migration/lot3e-evidence/final/fogw-reception-session/fogw-public-trace.json.gz",
+    "docs/migration/lot6a-evidence/integrated-final-02/regressions/fogw-051-replay.json.gz"
+  ],
+  "startedAt": "2026-11-11T12:25:23.709374+00:00",
+  "finishedAt": "2026-11-11T12:27:17.765578+00:00",
+  "elapsedSeconds": 114.05620259699981,
+  "exitCode": 0,
+  "timeoutSeconds": 600,
+  "timedOut": false,
+  "baseline": {
+    "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz",
+    "sha256": "fe037e48df8dd3a7c302a5e85355b2b9555daa6d9d8aa56f7772fc363732726c",
+    "bytes": 8174480
+  },
+  "trace": {
+    "path": "docs/migration/lot3e-evidence/final/fogw-reception-session/fogw-public-trace.json.gz",
+    "sha256": "1d4e92e6ef063e7799bfb4237b17beb148b49bde4ab46ef26ef91a3271d44b46",
+    "bytes": 39060
+  },
+  "output": {
+    "path": "docs/migration/lot6a-evidence/integrated-final-02/regressions/fogw-051-output.log.gz",
+    "sha256": "6569e27ee003751d857ca27063516d292f63fb76b23fbeebe4453b98440ab847",
+    "bytes": 5307
+  },
+  "passed": true,
+  "report": {
+    "path": "docs/migration/lot6a-evidence/integrated-final-02/regressions/fogw-051-replay.json.gz",
+    "sha256": "02396dc28a0bf2b2f258514bd89428a32d016575254cc42dab922d62018bef13",
+    "bytes": 9482675
+  },
+  "status": "passed",
+  "actions": 50,
+  "prefixes": 27,
+  "final": {
+    "actions": 50,
+    "levelsCompleted": 3,
+    "level": 4,
+    "state": "NOT_FINISHED",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "activeSeconds": 95.297357712,
+    "prefixes": 27,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 50,
+      "boundaryReplays": 2,
+      "goalEvents": 3,
+      "frontierDeltas": 101,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 28
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 28
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 28
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 22
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 1
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 1
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 28
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology"
+      ],
+      "morphologyProvider": {
+        "status": "partial_current_measurements_control_attention_and_methods",
+        "state_owner": "family_state:morphology",
+        "motion_owner": "caller:goal",
+        "forecast_owner": "family_state:public_observed_inventory",
+        "current_decision_scope": "one_source_selection_cycle",
+        "attention_owner": "caller:attention",
+        "method_owner": "caller:counters.targetMethod",
+        "entry_return_owner": "family_state:morphology.entry_access_return",
+        "connected_methods": [
+          "retained_station_method",
+          "entry_access_return",
+          "entry_rebind",
+          "entry_probe",
+          "managed_capacity",
+          "target_extension_continuation"
+        ],
+        "pending": [
+          "complete_original_caller_parity_and_domain_closure"
+        ]
+      },
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 50,
+      "resume": 26
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.60.0"
+  },
+  "passiveOwnerPresence": {
+    "path": "docs/migration/lot6a-evidence/integrated-final-02/regressions/fogw-051-passive-owner-presence.json",
+    "sha256": "6fe08a125123c44ee562652c9459de94a8184b5828e701c33fd90e2926538f15",
+    "bytes": 1103
+  },
+  "passiveOwnerPresencePassed": true,
+  "passiveOwnerPrefixesChecked": 0,
+  "passiveOwnerPrefixesPassed": 0,
+  "passiveOwnerTransitionsRetained": 0,
+  "comparison": {
+    "path": "docs/migration/lot6a-evidence/integrated-final-02/regressions/fogw-051-comparison.json",
+    "sha256": "77f4c4898553041898e5bc7bd7813872b77957ad1b20197b89dc613db7c4f8af",
+    "bytes": 10636
+  },
+  "comparisonPassed": true,
+  "comparisonChecks": 17,
+  "failedChecks": [],
+  "nativeSourceBeforeDigest": "ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229",
+  "nativeSourceAfterDigest": "ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229",
+  "nativeSourceUnchanged": true,
+  "immutableInputsUnchanged": true
+}

@@ -1,0 +1,56 @@
+{
+  "schema": "sra.preview-packing-recovery-oracle-execution.v1",
+  "startedAt": "2026-11-11T12:11:08.006371+00:00",
+  "python": "3.12.14",
+  "pythonHashSeed": "0",
+  "script": {
+    "bytes": 30417,
+    "sha256": "2a6823ddcef78a7b898c9cb30635af6f7aae912984f914050d1bd999fcddfb79"
+  },
+  "sourceBefore": {
+    "commit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+    "files": 1786,
+    "manifest": {
+      "bytes": 424024,
+      "sha256": "491eb3b737bbb490a1b7c212f5b1e75f5a8f84b2124b95d9dd54a0d09eca85d6"
+    },
+    "unchanged": true
+  },
+  "historicalReceiptsRecreated": false,
+  "gameExecution": false,
+  "status": "passed",
+  "output": {
+    "path": "docs/migration/lot6a-evidence/recovery/oracle/fixture-export-attempt-04.json.gz",
+    "bytes": 121310,
+    "sha256": "558a1ea317e27a39058ee5e44414b65990db6d965a5405f1b940b0fd9ffe2938"
+  },
+  "rawBytes": 2341860,
+  "importedSourceFiles": 724,
+  "initialCases": 14,
+  "sessions": 9,
+  "sourceSteps": 29,
+  "helpers": {
+    "normalized": 4,
+    "transforms": 16,
+    "scenes": 5,
+    "points": 6,
+    "samples": 1,
+    "poses": 4,
+    "assignments": 5
+  },
+  "guards": 11,
+  "records": 2,
+  "stateVariants": 9,
+  "sourceAfter": {
+    "commit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+    "files": 1786,
+    "manifest": {
+      "bytes": 424024,
+      "sha256": "491eb3b737bbb490a1b7c212f5b1e75f5a8f84b2124b95d9dd54a0d09eca85d6"
+    },
+    "unchanged": true
+  },
+  "elapsedSeconds": 1.811283683000056,
+  "finishedAt": "2026-11-11T12:11:09.817656+00:00",
+  "exitCode": 0
+}
