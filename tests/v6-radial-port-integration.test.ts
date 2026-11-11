@@ -321,7 +321,7 @@ test('the revalidation question still requires the exact current frame and avail
   assert.deepEqual(family.state(), retained, 'Neither admission nor refusal acquires a current method');
 });
 
-test('declared source order registers 63 of 76 entries with all six observed-composition branches', async () => {
+test('declared source order registers 64 of 76 entries with all six observed-composition branches', async () => {
   const runtime = await createNativeV6Runtime(declarations, { now: () => 0 });
   const coverage = runtime.snapshot().coverage as R, groups = coverage.sourceGroups as R[];
   const configuration = declarations.strategy.declarations[0]!.configuration as R;
@@ -363,6 +363,7 @@ test('declared source order registers 63 of 76 entries with all six observed-com
     typed_word_interface: 'word_interface', rigid_port_assembly: 'port_assembly',
     controlled_constellation_cover: 'constellation_cover', conserved_band_transfer: 'band_transfer',
     supported_ternary_reduction: 'reduction_transport',
+    motif_conditioned_access: 'motif_access',
   };
   const lists: [string, string[]][] = [
     ['goal_access', configuration.goal_access_subquestions],
@@ -384,8 +385,8 @@ test('declared source order registers 63 of 76 entries with all six observed-com
     });
     return [connected.length, declared.length];
   });
-  assert.deepEqual(counts, [[11, 12], [21, 21], [10, 10], [21, 33]]);
-  assert.equal(counts.reduce((sum, count) => sum + count[0]!, 0), 63);
+  assert.deepEqual(counts, [[11, 12], [21, 21], [10, 10], [22, 33]]);
+  assert.equal(counts.reduce((sum, count) => sum + count[0]!, 0), 64);
   assert.deepEqual(Object.keys(coverage.partialEntryPoints), []);
   assert.equal(coverage.observedCompositionBranches.connectedBranches.length, 6);
   assert.deepEqual(coverage.observedCompositionBranches.pendingBranches, []);

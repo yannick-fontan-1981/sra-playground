@@ -1,0 +1,23 @@
+{
+  "schema": "sra.lot8a.targeted-kernel-test.v1",
+  "startedAt": "2026-11-11T16:55:44.447176+00:00",
+  "finishedAt": "2026-11-11T16:55:53.447276+00:00",
+  "elapsedSeconds": 8.997488693999912,
+  "exitCode": 0,
+  "command": [
+    "node",
+    "--test",
+    "tests/v6-motif-access-kernel.test.ts"
+  ],
+  "inputs": {
+    "src/logos-engine/v6-motif-access.ts": "dc87c171776c06b18514faa908ccab237c719f2ae5ecce527fe0b737c7be8817",
+    "src/logos-engine/v6-motif-access-geometry.ts": "36d5e1d51a1ebef5c82dea7951c18fe115af2067624447d39e37100c4a9de9b3",
+    "src/logos-engine/v6-native-runtime.ts": "cdad467a35c9e9cbd9c5c4640deef7b5a1b3e66ff6b750a22052417b93eda800",
+    "src/logos-engine/v6-field-constraints.ts": "0d75ae535fb4e37c7e4ee28474e17e341afd5f436d717356a8f9b5617f1ae619",
+    "tests/v6-motif-access-kernel.test.ts": "a6f21fbdf6305cec8d23a59076c45ef78bbcb5163434ae9151734287dcefee5b",
+    "tests/fixtures/v6-motif-access-reference.json": "627137ede2b5397eddf3d77455a8a7d70cdd88fcec872af8a84236b85a3f985c"
+  },
+  "inputsUnchanged": true,
+  "log": "kernel-attempt-01.log",
+  "qualification": "Development test on isolated Site101 source plus8A; not a live game or final predecessor integration."
+}

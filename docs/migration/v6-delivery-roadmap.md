@@ -1,5 +1,17 @@
 # Feuille de route V5/V6 vers Logos Engine TypeScript
 
+<!-- LOT8A_START -->
+
+## Fil 8A : accès conditionné par un motif, implémentation en cours
+
+Le sous-lot **8A `motif_conditioned_access`** est réservé et démarré depuis le Site 101 / native 0.61.0 (`d75a36f0a99bf6c301034523a3138a64d2f6e744`). Le candidat porte provisoirement **0.65.0**, après les publications effectives attendues **10B / 0.62 → 5C / 0.63 → 6B / 0.64**. Aucun déploiement 8A, coût qualifié ou succès de jeu n'est encore revendiqué. L'[index 8A](lot8a-evidence/README.md) et son [contrat source](lot8a-evidence/contract/source-contract.md) décrivent le périmètre et les validations à produire.
+
+Le port conserve le propriétaire `MotifAccess`, les mesures de motifs et de commandes, l'acquisition sélectionnée unique, les gardes de pose/bits/époque, la restauration et la règle source excluant une interface à motifs du dernier fallback de correction par symétrie. La recherche native bornée doit déclarer son incomplet. Les attentes seront comparées au Python original inchangé sur des scènes synthétiques indépendantes, puis exercées dans le moteur commun. **8B `parallel_branch_routing` reste à faire ; le lot 8 entier reste ouvert.** Le compteur publié de départ reste **63/76** tant que l'attestation du candidat n'est pas régénérée et vérifiée ; le raccordement ne vaut pas migration complète.
+
+La règle de coût retenue est celle autorisée : **médiane globale des sessions strictement sous +10 % pour chacun des deux cas STCK et SMLP**, avec dépassements de phase acceptables et diagnostics conservés. Le coût devra comparer le gel 8A au prédécesseur effectivement publié. LKEY reste définitivement fermé, sans nouvel essai ni remise à zéro.
+
+<!-- LOT8A_END -->
+
 <!-- LOT7_FOLLOWUP_RECOVERY_START -->
 
 ## Fil 7 : native 0.61 publié et qualifié après répétition propre du coût
@@ -994,6 +1006,8 @@ Le [rapport 7A](lot7a-ranked-workshop.md) et la [filiation source → TypeScript
 **Critères de fin :** mode observé ou méthode revalidée donnant une proposition sélectionnée ; transaction liée à l'entité/point courants ; retour révisant méthode/conditions/réfutation et décision suivante ; absence d'effet ou contexte changé empêchant la répétition aveugle ; méthodes transportables conservées aux frontières avec autorisations renouvelées.
 
 ## Lot 8 : accès conditionné et branches
+
+**État courant :** 8A `motif_conditioned_access` en cours ; 8B `parallel_branch_routing` planifié. Voir le [contrat 8A](lot8a-evidence/contract/source-contract.md). La fin de 8A ne clôture pas le lot entier.
 
 **Entrées :** `motif_conditioned_access`, `parallel_branch_routing`.
 

@@ -434,7 +434,7 @@ export function* periodicHypotheses(field: RegularField, maximumOmitted: number)
     }
   }
 }
-export interface SymmetryPolicy { isometries: string[]; maximum_hypothetically_omitted_values?: number; question: string }
+export interface SymmetryPolicy { isometries: string[]; maximum_hypothetically_omitted_values?: number; question: string; exclude_observed_control_interface?: boolean }
 export class SymmetricField extends WindowConstraints {
   override readonly familyId = 'regular_field_correspondence';
   private readonly policy: SymmetryPolicy;

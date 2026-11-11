@@ -1,0 +1,13 @@
+{
+  "startedAt": "2026-11-11T16:57:18.866004+00:00",
+  "finishedAt": "2026-11-11T16:57:32.608088+00:00",
+  "command": [
+    "npm",
+    "run",
+    "typecheck"
+  ],
+  "exitCode": 2,
+  "elapsedSeconds": 13.742088860999502,
+  "log": "typecheck-initial.log",
+  "qualification": "Pre-freeze development typecheck"
+}
