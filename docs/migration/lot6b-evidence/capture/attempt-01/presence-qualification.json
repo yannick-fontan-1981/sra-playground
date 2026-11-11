@@ -1,0 +1,548 @@
+{
+  "schema": "logos-engine.lot6b.selected-rigid-owner-presence.v1",
+  "mode": "synthetic_qualification",
+  "recordedAt": "2026-11-11T14:41:30.570145+00:00",
+  "generator": {
+    "path": "scripts/verify-selected-rigid-presence.py",
+    "sha256": "91a1b0ded6d4b303ded74218a714ff042dcb35cf756bbe68b654f1d8003357b5",
+    "bytes": 65174
+  },
+  "inputs": [
+    {
+      "path": "docs/migration/lot6b-evidence/capture/attempt-01/synthetic-report.json",
+      "sha256": "c0bf2692ab212b959b2f8aa286c5f7afbfa2951d2591121c852de5c80ef7e34c",
+      "bytes": 306328
+    }
+  ],
+  "caseManifest": null,
+  "regressionSummary": null,
+  "nativeDigest": "c893cbe12d50e3bc539cb57384f5effcfbc57b4f5b244f114ac0254ceb231f91",
+  "status": "passed",
+  "cases": [
+    {
+      "case": "synthetic",
+      "status": "passed",
+      "prefixes": 3,
+      "selectedPrefixes": 2,
+      "foreignPrefixes": 1,
+      "physicalReturns": 3,
+      "selectedReturns": 2,
+      "foreignReturns": 1,
+      "selectedRecords": 2,
+      "passiveReturns": 0,
+      "events": 25,
+      "proposalCalls": 3,
+      "actualRestores": 6,
+      "nativeRestores": 3,
+      "sourceRestores": 3,
+      "sourceFactsRetainedPrefixes": 3,
+      "acquiredSourceFacts": 2,
+      "coldPrefixes": 0,
+      "completedEventCursors": 3,
+      "budgetCalls": 6,
+      "bindCalls": 4,
+      "nullSelectedReturns": 1,
+      "acquiredEvents": 1,
+      "errors": [],
+      "nativeDigest": "c893cbe12d50e3bc539cb57384f5effcfbc57b4f5b244f114ac0254ceb231f91",
+      "prefixChecks": [
+        {
+          "id": "synthetic-prefix-1",
+          "eventsFrom": 0,
+          "eventsThrough": 11,
+          "selected": true,
+          "returns": 1,
+          "records": 1,
+          "sourceRestores": 1,
+          "stateDigest": "ee2222eb399a4a69c7631a4091df696fe965353d412f9990da592dc9a1f55441"
+        },
+        {
+          "id": "synthetic-prefix-2",
+          "eventsFrom": 11,
+          "eventsThrough": 14,
+          "selected": false,
+          "returns": 1,
+          "records": 0,
+          "sourceRestores": 1,
+          "stateDigest": "ee2222eb399a4a69c7631a4091df696fe965353d412f9990da592dc9a1f55441"
+        },
+        {
+          "id": "synthetic-prefix-3",
+          "eventsFrom": 14,
+          "eventsThrough": 25,
+          "selected": true,
+          "returns": 1,
+          "records": 1,
+          "sourceRestores": 1,
+          "stateDigest": "ee2222eb399a4a69c7631a4091df696fe965353d412f9990da592dc9a1f55441"
+        }
+      ],
+      "game": "SYN6B",
+      "report": {
+        "path": "docs/migration/lot6b-evidence/capture/attempt-01/synthetic-report.json",
+        "sha256": "c0bf2692ab212b959b2f8aa286c5f7afbfa2951d2591121c852de5c80ef7e34c",
+        "bytes": 306328
+      }
+    }
+  ],
+  "errors": [],
+  "qualification": "Read-only consistency of one captured native SelectedRigid owner, complete call journal, physical-return selection, retained source facts and actual restorations. No Python/original-source parity, game execution, new live success, cost result or complete-caller equivalence is claimed. Earlier source fact writes overwritten by the last fact are represented by the observed source-restoration calls, not reconstructed as retained facts.",
+  "pythonParityClaimed": false,
+  "gameExecution": false,
+  "negativeQualification": {
+    "status": "passed",
+    "baselineMustPass": true,
+    "cases": [
+      {
+        "case": "event-sequence-gap",
+        "expectedError": "event_sequence",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "event_sequence",
+            "where": "selectedRigidEvents[1]",
+            "message": "Invocation sequence is not complete and ordered"
+          }
+        ],
+        "mutatedEvidenceDigest": "aee8bed18db07e0131b95b924dd5e7df38cfc09cc6ff15cc277e94f5c8fd532b"
+      },
+      {
+        "case": "boolean-sequence",
+        "expectedError": "event_sequence",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "event_sequence",
+            "where": "selectedRigidEvents[1]",
+            "message": "Invocation sequence is not complete and ordered"
+          }
+        ],
+        "mutatedEvidenceDigest": "af5e88b6c0ede41119169de2b0adcab00de957eee098e1284c7bf9eb640e5642"
+      },
+      {
+        "case": "unfinished-call",
+        "expectedError": "event_completion",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "event_completion",
+            "where": "selectedRigidEvents[0]",
+            "message": "Pending, failed or missing call result"
+          }
+        ],
+        "mutatedEvidenceDigest": "dfec5f195becb9a811b2794231f15fd9d9373ce09d0acc298cd4205f69577239"
+      },
+      {
+        "case": "observation-error",
+        "expectedError": "event_observation_error",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "event_observation_error",
+            "where": "selectedRigidEvents[0]",
+            "message": "Passive observation failed or its error inventory is missing"
+          }
+        ],
+        "mutatedEvidenceDigest": "2d3df44c0aaabd28badab68a799ee5ab711c50d4ae1674e9710139498ad56b0b"
+      },
+      {
+        "case": "unqualified-nesting",
+        "expectedError": "event_depth",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "event_depth",
+            "where": "selectedRigidEvents[0]",
+            "message": "Malformed nesting depth"
+          }
+        ],
+        "mutatedEvidenceDigest": "9213d1f492bc83575f5e3a7f1c1702b99040b05322f90b748befcca153c5a9de"
+      },
+      {
+        "case": "missing-restore-result",
+        "expectedError": "event_completion",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "event_completion",
+            "where": "selectedRigidEvents[10]",
+            "message": "Pending, failed or missing call result"
+          }
+        ],
+        "mutatedEvidenceDigest": "20f7ad37ac21332d0952802a26a9aba356d6ad70b1cf4a5ad6f0ccceaae2c49f"
+      },
+      {
+        "case": "restore-schema",
+        "expectedError": "native_state_schema",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "native_state_schema",
+            "where": "selectedRigidEvents[10].arguments[0]",
+            "message": "Expected exact native.selected_rigid.v1 envelope"
+          }
+        ],
+        "mutatedEvidenceDigest": "6271c750ec1ae9ed0b818a451ab553a759e9c81c1f2687cd90ebb8641b65ee03"
+      },
+      {
+        "case": "boolean-prefix-cursor",
+        "expectedError": "event_cursor",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "event_cursor",
+            "where": "prefixes[0]",
+            "message": "Cursor must end complete calls and cover ordered new events"
+          }
+        ],
+        "mutatedEvidenceDigest": "b1097ccb00892e2cd04a753fca15a13e21681b4ef39b4ed55e0a18eb00006b55"
+      },
+      {
+        "case": "boolean-prefix-return-count",
+        "expectedError": "prefix_return_coverage",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "prefix_return_coverage",
+            "where": "prefixes[0]",
+            "message": "Common prefix does not cover exactly its physical returns"
+          }
+        ],
+        "mutatedEvidenceDigest": "2a260f739985bd27d8b3dff223a0c691610035da76767ee91b9c574e03e029a1"
+      },
+      {
+        "case": "missing-final-cursor",
+        "expectedError": "uncovered_events",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "uncovered_events",
+            "where": "prefixes",
+            "message": "Journal events remain outside sealed prefix cursors"
+          }
+        ],
+        "mutatedEvidenceDigest": "8ff442b548755784b818dd65dbba3f67aac3dbeab89f33b50427c8202cf35382"
+      },
+      {
+        "case": "changed-prefix-state",
+        "expectedError": "prefix_state",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "prefix_state",
+            "where": "prefixes[0]",
+            "message": "Retained envelope, actual instance and journal state differ"
+          }
+        ],
+        "mutatedEvidenceDigest": "4f602761cc7386eda42270b5d95818a0d7e372ec5bf3f52ce4d625094bc95524"
+      },
+      {
+        "case": "extra-native-field",
+        "expectedError": "native_state_schema",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "native_state_schema",
+            "where": "prefixes[0].state",
+            "message": "Expected exact native.selected_rigid.v1 envelope"
+          }
+        ],
+        "mutatedEvidenceDigest": "a286722d030925b9f6292a63da7f44aca0988fa495d8bc61a6780b6b24a3671d"
+      },
+      {
+        "case": "physical-order",
+        "expectedError": "physical_sequence",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "physical_sequence",
+            "where": "actions",
+            "message": "Physical sequence is not complete and ordered"
+          }
+        ],
+        "mutatedEvidenceDigest": "fff0ba284c3328f9802b3b6e6bab3901de77feced9f23706f92288b374769fe0"
+      },
+      {
+        "case": "physical-packet",
+        "expectedError": "physical_packet_binding",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "physical_packet_binding",
+            "where": "prefixes[0]",
+            "message": "Recorded return differs from the physical complete packet"
+          }
+        ],
+        "mutatedEvidenceDigest": "f46beee2cd8936bb637481933d197334620f1ce60f57f78165a4e623643441fc"
+      },
+      {
+        "case": "missing-source-facts",
+        "expectedError": "missing_source_facts",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "missing_source_facts",
+            "where": "prefixes[0]",
+            "message": "Recorder did not retain actual SelectedRigid source facts"
+          }
+        ],
+        "mutatedEvidenceDigest": "b4da5031437a83b11733226cd8b12a13625eb82a9b9a7036e4e84a108191be82"
+      },
+      {
+        "case": "changed-retained-source-fact",
+        "expectedError": "retained_source_fact",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "retained_source_fact",
+            "where": "prefixes[0]",
+            "message": "Retained model lacks its actual last source fact and matching restoration"
+          }
+        ],
+        "mutatedEvidenceDigest": "7fb2b6b9429ac829cd8bfb5f2f4beeb2ead294bac70315fbbd19e8ad6be214c8"
+      },
+      {
+        "case": "missing-selected-envelope",
+        "expectedError": "acquired_source_fact",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "acquired_source_fact",
+            "where": "prefixes[0]",
+            "message": "Retained selected source envelopes differ from actual records or contain foreign records"
+          }
+        ],
+        "mutatedEvidenceDigest": "0ef5ae9d5a6fde9e9d415bd164c305bea3def1f24e18bc5bdab7d488332900f6"
+      },
+      {
+        "case": "null-return-misreported-as-void",
+        "expectedError": "record_return",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "record_return",
+            "where": "selectedRigidEvents[22]",
+            "message": "A selected null return cannot be replaced by a void/missing return"
+          }
+        ],
+        "mutatedEvidenceDigest": "9e648d8865a028c40cbdb42e0346828f4ffd95a58eb280ddd3fbd9ba51bc284b"
+      },
+      {
+        "case": "missing-null-return",
+        "expectedError": "event_completion",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "event_completion",
+            "where": "selectedRigidEvents[22]",
+            "message": "Pending, failed or missing call result"
+          }
+        ],
+        "mutatedEvidenceDigest": "3cacc6d7ead60e9ad82251f81030f41a49cbf93df106c854c2a67067216c0430"
+      },
+      {
+        "case": "unscoped-clock",
+        "expectedError": "capture_surface",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "capture_surface",
+            "where": "selectedRigidCapture",
+            "message": "Complete unique-owner clock/call observation is not established"
+          }
+        ],
+        "mutatedEvidenceDigest": "87b79222852b8884ca18d35b187c91a8caecea96a8b3f38d2993f8788edaf344"
+      },
+      {
+        "case": "missing-clock-surface",
+        "expectedError": "capture_surface",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "capture_surface",
+            "where": "selectedRigidCapture",
+            "message": "Complete unique-owner clock/call observation is not established"
+          }
+        ],
+        "mutatedEvidenceDigest": "e96fb7c353530a3bbf0648d6dca7b1a9c90eaa73bee04c05ad3162de62bca435"
+      },
+      {
+        "case": "missing-clock-list",
+        "expectedError": "clock_reads",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "clock_reads",
+            "where": "selectedRigidEvents[1]",
+            "message": "Consumed clock reads are missing, unordered or inconsistent"
+          }
+        ],
+        "mutatedEvidenceDigest": "42016da47e0ad43eca05ebd803f24c259610f1967dc760921c935e063084a75e"
+      },
+      {
+        "case": "invented-last-clock",
+        "expectedError": "clock_reads",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "clock_reads",
+            "where": "selectedRigidEvents[1]",
+            "message": "Consumed clock reads are missing, unordered or inconsistent"
+          }
+        ],
+        "mutatedEvidenceDigest": "5494efdd3458df773e7c69961e41cf3d63a567ca7d2b2d28eb61d99159a31a7e"
+      },
+      {
+        "case": "budget-mismatch",
+        "expectedError": "budget_state",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "budget_state",
+            "where": "selectedRigidEvents[0]",
+            "message": "Budget setter changed source state or did not retain its actual inputs"
+          }
+        ],
+        "mutatedEvidenceDigest": "7b13456721bca37770b3cb4c7933c4916b75aab8d5212904e2963bb7a46a874b"
+      },
+      {
+        "case": "record-on-foreign-return",
+        "expectedError": "foreign_record",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "foreign_record",
+            "where": "prefixes[0]",
+            "message": "A foreign physical return acquired a SelectedRigid record"
+          }
+        ],
+        "mutatedEvidenceDigest": "d304f1f4917a9128c62cc71b33135908ebdd7772264e89df796ec3dc94b0102a"
+      },
+      {
+        "case": "extra-after-with-renumbered-events",
+        "expectedError": "selected_guard_inventory",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "selected_guard_inventory",
+            "where": "prefixes[0]",
+            "message": "Extra selected guard has no corresponding physical return"
+          }
+        ],
+        "mutatedEvidenceDigest": "c81fd7fed6c6a76a9651f555d2ff04893c4bc24f36250debb8b1aa198b9a46a4"
+      },
+      {
+        "case": "missing-source-restore-with-renumbered-events",
+        "expectedError": "source_restore_coverage",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "source_restore_coverage",
+            "where": "prefixes[0]",
+            "message": "Each physical return with a retained journal needs its actual source checkpoint restoration"
+          }
+        ],
+        "mutatedEvidenceDigest": "407e620198569c727889dd5dd9446f5151fbfb4467a5b019d1fd307a7d71d176"
+      },
+      {
+        "case": "missing-native-restore-with-renumbered-events",
+        "expectedError": "prefix_actual_restore",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "prefix_actual_restore",
+            "where": "prefixes[0]",
+            "message": "No actual final native restore of the retained checkpoint"
+          }
+        ],
+        "mutatedEvidenceDigest": "561f06e2c296646b341f1fb1ba84cbb6341888c60726e4efe2b000b39912f208"
+      },
+      {
+        "case": "missing-selected-bind-with-renumbered-events",
+        "expectedError": "selected_bind_missing",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "selected_bind_missing",
+            "where": "prefixes[0]",
+            "message": "Selected proposal was not actually bound by its unique owner"
+          }
+        ],
+        "mutatedEvidenceDigest": "a196f3283fe60ef7d2aa2cc1762aa97af3a1ca3cd5f24ec3b3c754ee6cfc1aa9"
+      },
+      {
+        "case": "missing-foreign-checkpoint-with-renumbered-events",
+        "expectedError": "foreign_restore_coverage",
+        "rejected": true,
+        "expectedErrorObserved": true,
+        "errors": [
+          {
+            "code": "foreign_restore_coverage",
+            "where": "prefixes[1]",
+            "message": "Foreign retained-model returns lack exact source restorations"
+          }
+        ],
+        "mutatedEvidenceDigest": "866e5da8c10e8520f61cb0373b2dffcc705810c29737375db053e13b4004ec90"
+      }
+    ],
+    "mutations": 30,
+    "rejected": 30,
+    "expectedErrorsObserved": 30,
+    "scope": "Detached synthetic evidence mutations only; no capture rewrite, source import, game or parity execution."
+  },
+  "inputsUnchanged": true,
+  "totals": {
+    "prefixes": 3,
+    "selectedPrefixes": 2,
+    "foreignPrefixes": 1,
+    "physicalReturns": 3,
+    "selectedReturns": 2,
+    "foreignReturns": 1,
+    "selectedRecords": 2,
+    "passiveReturns": 0,
+    "events": 25,
+    "proposalCalls": 3,
+    "actualRestores": 6,
+    "nativeRestores": 3,
+    "sourceRestores": 3,
+    "sourceFactsRetainedPrefixes": 3,
+    "acquiredSourceFacts": 2,
+    "coldPrefixes": 0,
+    "completedEventCursors": 3,
+    "budgetCalls": 6,
+    "bindCalls": 4,
+    "nullSelectedReturns": 1,
+    "acquiredEvents": 1,
+    "cases": 1,
+    "passedCases": 1
+  }
+}

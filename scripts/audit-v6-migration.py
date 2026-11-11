@@ -73,4 +73,5 @@ def catalogue():
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--require-complete',action='store_true');args=parser.parse_args()
     report=catalogue();print(json.dumps({'complete':report['complete'],**report['summary'],'failures':report['failures']},indent=2))
+    if report['failures']:raise SystemExit('V6 migration inventory is invalid. Repair the reported source, target or evidence references.')
     if args.require_complete and not report['complete']:raise SystemExit('V6 migration is incomplete. A partial family implementation cannot pass the complete-port gate.')

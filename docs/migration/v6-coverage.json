@@ -30,10 +30,10 @@
     "declaredClassesAndFunctions": 12857,
     "dataFiles": 417,
     "verifiedModules": 0,
-    "componentVerifiedModules": 195,
+    "componentVerifiedModules": 198,
     "partiallyTransferredModules": 148,
     "transferredUnverifiedModules": 0,
-    "pendingModules": 1026,
+    "pendingModules": 1023,
     "strategyFamilies": 16
   },
   "families": [
@@ -94187,9 +94187,34 @@
           "endLine": 9
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-selected-rigid.ts",
+        "src/logos-engine/v6-selected-rigid-types.ts",
+        "src/logos-engine/v6-selected-rigid-geometry.ts",
+        "src/logos-engine/v6-selected-rigid-search.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-selected-rigid-reference.py",
+        "scripts/compare-v6-selected-rigid-reference.ts",
+        "tests/fixtures/v6-selected-rigid/reference.json.gz",
+        "tests/v6-selected-rigid-native.test.ts",
+        "tests/v6-selected-rigid-reference.test.ts",
+        "tests/v6-selected-rigid-integration.test.ts",
+        "tests/v6-selected-rigid-capture.test.ts",
+        "docs/migration/lot6b-evidence/oracle/attempt-04/export-execution.json",
+        "docs/migration/lot6b-evidence/oracle/attempt-04/native-comparison.json",
+        "docs/migration/lot6b-evidence/integration/attempt-02/execution.json",
+        "docs/migration/lot6b-evidence/capture/attempt-01/presence-qualification.json",
+        "docs/migration/lot6b-selected-rigid-lineage.md",
+        "scripts/compare-selected-rigid-public-parity.py",
+        "docs/migration/lot6b-evidence/development-freeze-01/bounded-execution.json",
+        "docs/migration/lot6b-evidence/development-freeze-01/source-parity-attempt-01/reader-execution.json",
+        "docs/migration/lot6b-evidence/development-freeze-01/source-parity-attempt-01/result.json.gz",
+        "docs/migration/lot6b-evidence/development-freeze-01/reader-negative-attempt-01/results/qualification.json",
+        "docs/migration/lot6b-evidence/development-freeze-01/reader-negative-attempt-01/bounded-execution.json"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/selected_rigid/family.py",
@@ -94252,9 +94277,34 @@
           "endLine": 43
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-selected-rigid.ts",
+        "src/logos-engine/v6-selected-rigid-types.ts",
+        "src/logos-engine/v6-selected-rigid-geometry.ts",
+        "src/logos-engine/v6-selected-rigid-search.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-selected-rigid-reference.py",
+        "scripts/compare-v6-selected-rigid-reference.ts",
+        "tests/fixtures/v6-selected-rigid/reference.json.gz",
+        "tests/v6-selected-rigid-native.test.ts",
+        "tests/v6-selected-rigid-reference.test.ts",
+        "tests/v6-selected-rigid-integration.test.ts",
+        "tests/v6-selected-rigid-capture.test.ts",
+        "docs/migration/lot6b-evidence/oracle/attempt-04/export-execution.json",
+        "docs/migration/lot6b-evidence/oracle/attempt-04/native-comparison.json",
+        "docs/migration/lot6b-evidence/integration/attempt-02/execution.json",
+        "docs/migration/lot6b-evidence/capture/attempt-01/presence-qualification.json",
+        "docs/migration/lot6b-selected-rigid-lineage.md",
+        "scripts/compare-selected-rigid-public-parity.py",
+        "docs/migration/lot6b-evidence/development-freeze-01/bounded-execution.json",
+        "docs/migration/lot6b-evidence/development-freeze-01/source-parity-attempt-01/reader-execution.json",
+        "docs/migration/lot6b-evidence/development-freeze-01/source-parity-attempt-01/result.json.gz",
+        "docs/migration/lot6b-evidence/development-freeze-01/reader-negative-attempt-01/results/qualification.json",
+        "docs/migration/lot6b-evidence/development-freeze-01/reader-negative-attempt-01/bounded-execution.json"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/selected_rigid/mechanism.py",
@@ -94353,9 +94403,34 @@
           "endLine": 159
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-selected-rigid.ts",
+        "src/logos-engine/v6-selected-rigid-types.ts",
+        "src/logos-engine/v6-selected-rigid-geometry.ts",
+        "src/logos-engine/v6-selected-rigid-search.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-selected-rigid-reference.py",
+        "scripts/compare-v6-selected-rigid-reference.ts",
+        "tests/fixtures/v6-selected-rigid/reference.json.gz",
+        "tests/v6-selected-rigid-native.test.ts",
+        "tests/v6-selected-rigid-reference.test.ts",
+        "tests/v6-selected-rigid-integration.test.ts",
+        "tests/v6-selected-rigid-capture.test.ts",
+        "docs/migration/lot6b-evidence/oracle/attempt-04/export-execution.json",
+        "docs/migration/lot6b-evidence/oracle/attempt-04/native-comparison.json",
+        "docs/migration/lot6b-evidence/integration/attempt-02/execution.json",
+        "docs/migration/lot6b-evidence/capture/attempt-01/presence-qualification.json",
+        "docs/migration/lot6b-selected-rigid-lineage.md",
+        "scripts/compare-selected-rigid-public-parity.py",
+        "docs/migration/lot6b-evidence/development-freeze-01/bounded-execution.json",
+        "docs/migration/lot6b-evidence/development-freeze-01/source-parity-attempt-01/reader-execution.json",
+        "docs/migration/lot6b-evidence/development-freeze-01/source-parity-attempt-01/result.json.gz",
+        "docs/migration/lot6b-evidence/development-freeze-01/reader-negative-attempt-01/results/qualification.json",
+        "docs/migration/lot6b-evidence/development-freeze-01/reader-negative-attempt-01/bounded-execution.json"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/shared_settlement/__init__.py",

@@ -1,0 +1,10 @@
+{
+  "observedAt": "2026-11-11T16:02:13.728425+00:00",
+  "siteVersion": 101,
+  "nativeVersion": "0.61.0",
+  "commit": "d75a36f0a99bf6c301034523a3138a64d2f6e744",
+  "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_48ccb50314448191a19781a9c89eb830",
+  "deploymentId": "appgdep_6af48d2be4908191bfe5398512c01bcb",
+  "sourceRoadmapSha256": "36433efdeacf48f5cc997ef87bc6d3f6cab5e5f26d0b8d7bd3be1dec2821f34c",
+  "qualification": "Sites list/get confirms the saved version and current live private Site. Published roadmap bytes read from exact Git commit. This reconciles documentation only, not the development native source."
+}

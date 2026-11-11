@@ -1,0 +1,157 @@
+{
+  "schema": "sra.exact-inherited-fixture-restoration.v1",
+  "status": "passed",
+  "startedAt": "2026-11-11T16:02:59.147076+00:00",
+  "finishedAt": "2026-11-11T16:02:59.262157+00:00",
+  "published6ACommit": "98336fba4e696a51c90ff7f7b37b8bdf95f34847",
+  "publishedValidationReceipt": {
+    "path": "/workspace/sites/sra-lot6a-publication-20261111/.sites-checkout/docs/migration/lot6a-evidence/integrated-final-02/validation-final/validation/delta-tests-run.json",
+    "bytes": 134242,
+    "sha256": "6bf083f944fcc12a065a64ab9bcef630f42683a79684156b68ba7f96aded2ad5"
+  },
+  "inheritedValidationReceipt": {
+    "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6a-evidence/integrated-final-02/validation-final/validation/delta-tests-run.json",
+    "bytes": 134242,
+    "sha256": "6bf083f944fcc12a065a64ab9bcef630f42683a79684156b68ba7f96aded2ad5"
+  },
+  "validationReceiptsByteIdentical": true,
+  "priorAuditFailures": [
+    "Missing differential evidence: tests/fixtures/v6-feedback-sequences-reference.json.gz",
+    "Missing differential evidence: tests/fixtures/v6-feedback-sequences-reference.json.gz",
+    "Missing differential evidence: tests/fixtures/v6-relative-arrangements-reference.json.gz"
+  ],
+  "retainedPreRestorationEvidence": [
+    {
+      "source": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/audit-guard/expected-missing-evidence.json",
+        "bytes": 717,
+        "sha256": "96f2b9f07e57c933fd2cff0ebb3e485d28cc7592b9ffdbfac9e82f047296aa2a"
+      },
+      "retainedCopy": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/fixture-restoration/attempt-01/before-expected-missing-evidence.json",
+        "bytes": 717,
+        "sha256": "96f2b9f07e57c933fd2cff0ebb3e485d28cc7592b9ffdbfac9e82f047296aa2a"
+      }
+    },
+    {
+      "source": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/development-freeze-01/validation/checks-run.json",
+        "bytes": 82786,
+        "sha256": "f682f93c2ba884c3e4784f2a3f705f516b5c0ad25e7b4a5d9aafa5d13c3687c3"
+      },
+      "retainedCopy": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/fixture-restoration/attempt-01/before-checks-run.json",
+        "bytes": 82786,
+        "sha256": "f682f93c2ba884c3e4784f2a3f705f516b5c0ad25e7b4a5d9aafa5d13c3687c3"
+      }
+    },
+    {
+      "source": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/v6-coverage.json",
+        "bytes": 2564129,
+        "sha256": "fde50f7de12b52cd0093f776325d281becfa449486c174f4aaf557ad8329189f"
+      },
+      "retainedCopy": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/fixture-restoration/attempt-01/before-v6-coverage.json",
+        "bytes": 2564129,
+        "sha256": "fde50f7de12b52cd0093f776325d281becfa449486c174f4aaf557ad8329189f"
+      }
+    },
+    {
+      "source": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/development-freeze-01/validation/migration-audit-output.log.gz",
+        "bytes": 289,
+        "sha256": "bbcaa0789772dcb09ecb63d5a817040dfa0e1b3c322378cc94824176dfed3e5e"
+      },
+      "retainedCopy": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/fixture-restoration/attempt-01/before-migration-audit-output.log.gz",
+        "bytes": 289,
+        "sha256": "bbcaa0789772dcb09ecb63d5a817040dfa0e1b3c322378cc94824176dfed3e5e"
+      }
+    }
+  ],
+  "fixtures": [
+    {
+      "path": "tests/fixtures/v6-feedback-sequences-reference.json.gz",
+      "priorAbsent": true,
+      "expectedFromPublished6A": "d1bf31b8fbf899aa9d85baa5fdaf9549b7c6f6a786fab43d7ac9f88af3231b6d",
+      "expectedFromParts": {
+        "file": "v6-feedback-sequences-reference.json.gz",
+        "sha256": "d1bf31b8fbf899aa9d85baa5fdaf9549b7c6f6a786fab43d7ac9f88af3231b6d",
+        "bytes": 1032946
+      },
+      "partManifest": {
+        "path": "tests/fixtures/v6-feedback-sequences-reference.json.gz.parts.json",
+        "bytes": 727,
+        "sha256": "a6d353cf9a13e583498c56b94da769b843af22f203289ebfe6a955fae7425f0b"
+      },
+      "parts": [
+        {
+          "path": "tests/fixtures/v6-feedback-sequences-reference.json.gz.part000",
+          "bytes": 900000,
+          "sha256": "df621f5beaabd752efc8576eb269bd773e39bff3cd34b8388a23f120144dca08"
+        },
+        {
+          "path": "tests/fixtures/v6-feedback-sequences-reference.json.gz.part001",
+          "bytes": 132946,
+          "sha256": "e610682240f1221de0fa5324ff28bf639012ea80756d851af758ea45c30da6b1"
+        }
+      ],
+      "verifiedBeforeWrite": {
+        "bytes": 1032946,
+        "sha256": "d1bf31b8fbf899aa9d85baa5fdaf9549b7c6f6a786fab43d7ac9f88af3231b6d"
+      },
+      "method": "Exact byte concatenation in the immutable part manifest order; no decompression, regeneration or expectation editing.",
+      "restored": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/tests/fixtures/v6-feedback-sequences-reference.json.gz",
+        "bytes": 1032946,
+        "sha256": "d1bf31b8fbf899aa9d85baa5fdaf9549b7c6f6a786fab43d7ac9f88af3231b6d"
+      },
+      "verifiedAfterWrite": true
+    },
+    {
+      "path": "tests/fixtures/v6-relative-arrangements-reference.json.gz",
+      "priorAbsent": true,
+      "expectedFromPublished6A": "fa52436d34ee32e7fcf4e30f67122c5bede6823d0ff2cb34980cdc4885c3f933",
+      "expectedFromParts": {
+        "file": "v6-relative-arrangements-reference.json.gz",
+        "sha256": "fa52436d34ee32e7fcf4e30f67122c5bede6823d0ff2cb34980cdc4885c3f933",
+        "bytes": 1099570
+      },
+      "partManifest": {
+        "path": "tests/fixtures/v6-relative-arrangements-reference.json.gz.parts.json",
+        "bytes": 736,
+        "sha256": "8143217aa3cd4398e74d6fa85698f40f3afadfc96eddd9118d2af80f780ee28f"
+      },
+      "parts": [
+        {
+          "path": "tests/fixtures/v6-relative-arrangements-reference.json.gz.part000",
+          "bytes": 900000,
+          "sha256": "32120859b8da92edde3c1668345cf3ebeb6b183959e8f61da34c093aa64db519"
+        },
+        {
+          "path": "tests/fixtures/v6-relative-arrangements-reference.json.gz.part001",
+          "bytes": 199570,
+          "sha256": "f2b55c493b9d18600e7a7edbc7eac363fb1c6fa4f7c04ae7055affee3b2a3f5f"
+        }
+      ],
+      "verifiedBeforeWrite": {
+        "bytes": 1099570,
+        "sha256": "fa52436d34ee32e7fcf4e30f67122c5bede6823d0ff2cb34980cdc4885c3f933"
+      },
+      "method": "Exact byte concatenation in the immutable part manifest order; no decompression, regeneration or expectation editing.",
+      "restored": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/tests/fixtures/v6-relative-arrangements-reference.json.gz",
+        "bytes": 1099570,
+        "sha256": "fa52436d34ee32e7fcf4e30f67122c5bede6823d0ff2cb34980cdc4885c3f933"
+      },
+      "verifiedAfterWrite": true
+    }
+  ],
+  "nativeExecution": false,
+  "gameExecution": false,
+  "testsExecuted": false,
+  "auditRerun": false,
+  "originalPythonModified": false,
+  "qualification": "Only two missing full fixture files restored from their exact immutable byte parts, matching published6A sourceAndTestInputs. Prior semantic audit failure remains preserved. No claim about the pending audit rerun."
+}

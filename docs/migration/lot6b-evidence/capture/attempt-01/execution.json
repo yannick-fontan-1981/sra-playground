@@ -1,0 +1,133 @@
+{
+  "schema": "logos-engine.lot6b.capture-functional-attempt.v1",
+  "startedAt": "2026-11-11T14:41:29.735046+00:00",
+  "scope": "Independent observer and synthetic evidence-reader qualification only; no provider, game, replay host, build or cost.",
+  "sharedPerformanceLock": true,
+  "inputsBefore": [
+    {
+      "path": "tests/helpers/capture-selected-rigid.ts",
+      "bytes": 5958,
+      "sha256": "fd1408b3c6df71cd694774abcf1ddbd445269d23c02afd45838aab8fa7ca6bdf"
+    },
+    {
+      "path": "tests/helpers/v6-live-game-campaign.ts",
+      "bytes": 89344,
+      "sha256": "849c000d0dd0233ac22d486efa3122944dd95fcf323b7c67b81c78318579d782"
+    },
+    {
+      "path": "tests/v6-selected-rigid-capture.test.ts",
+      "bytes": 9408,
+      "sha256": "ff0c4b83a3d17b4a582448e89fefa0a0390e7b5df2b8330fc1e1fb06df829910"
+    },
+    {
+      "path": "scripts/verify-selected-rigid-presence.py",
+      "bytes": 65174,
+      "sha256": "91a1b0ded6d4b303ded74218a714ff042dcb35cf756bbe68b654f1d8003357b5"
+    },
+    {
+      "path": "scripts/tests/qualify-selected-rigid-presence.py",
+      "bytes": 12648,
+      "sha256": "173ebc00395e99ae11aacb6bfdf4106b88e63fbe8feac060c4a0227b7b00feae"
+    }
+  ],
+  "commands": [
+    {
+      "command": [
+        "python3",
+        "-c",
+        "import ast,pathlib; [ast.parse(pathlib.Path(p).read_text(),filename=p) for p in [\"scripts/verify-selected-rigid-presence.py\",\"scripts/tests/qualify-selected-rigid-presence.py\"]]; print(\"2 Python syntax trees parsed\")"
+      ],
+      "startedAt": "2026-11-11T14:41:29.735790+00:00",
+      "finishedAt": "2026-11-11T14:41:29.850126+00:00",
+      "elapsedSeconds": 0.11436910500015074,
+      "exitCode": 0,
+      "log": {
+        "path": "docs/migration/lot6b-evidence/capture/attempt-01/command-01.log",
+        "bytes": 29,
+        "sha256": "2fa5729744ec9abf6960f67d86f50bbf619736c492b1807982316d3ecb0e1e68"
+      }
+    },
+    {
+      "command": [
+        "node",
+        "--test",
+        "tests/v6-selected-rigid-capture.test.ts"
+      ],
+      "startedAt": "2026-11-11T14:41:29.850524+00:00",
+      "finishedAt": "2026-11-11T14:41:30.165457+00:00",
+      "elapsedSeconds": 0.31494675499925506,
+      "exitCode": 0,
+      "log": {
+        "path": "docs/migration/lot6b-evidence/capture/attempt-01/command-02.log",
+        "bytes": 1096,
+        "sha256": "e9f8e2787939da94229f0dabd88dd5ec485ca4f95ea179900298f4bce3e4967d"
+      }
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/tests/qualify-selected-rigid-presence.py",
+        "--report-output",
+        "docs/migration/lot6b-evidence/capture/attempt-01/synthetic-report.json"
+      ],
+      "startedAt": "2026-11-11T14:41:30.165739+00:00",
+      "finishedAt": "2026-11-11T14:41:30.531593+00:00",
+      "elapsedSeconds": 0.36586896300104854,
+      "exitCode": 0,
+      "log": {
+        "path": "docs/migration/lot6b-evidence/capture/attempt-01/command-03.log",
+        "bytes": 16961,
+        "sha256": "8a2748fd31e69d3eb282871f848ac628e55664f313e007fe181aefff5f0cc413"
+      }
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/verify-selected-rigid-presence.py",
+        "--report",
+        "docs/migration/lot6b-evidence/capture/attempt-01/synthetic-report.json",
+        "--output",
+        "docs/migration/lot6b-evidence/capture/attempt-01/presence-qualification.json"
+      ],
+      "startedAt": "2026-11-11T14:41:30.532083+00:00",
+      "finishedAt": "2026-11-11T14:41:30.847079+00:00",
+      "elapsedSeconds": 0.315008598001441,
+      "exitCode": 0,
+      "log": {
+        "path": "docs/migration/lot6b-evidence/capture/attempt-01/command-04.log",
+        "bytes": 1031,
+        "sha256": "a3cef7c6768c0d5854148ed25ed67a1427ee53712f36ab1666a7f8b3380d2a21"
+      }
+    }
+  ],
+  "status": "passed",
+  "inputsAfter": [
+    {
+      "path": "tests/helpers/capture-selected-rigid.ts",
+      "bytes": 5958,
+      "sha256": "fd1408b3c6df71cd694774abcf1ddbd445269d23c02afd45838aab8fa7ca6bdf"
+    },
+    {
+      "path": "tests/helpers/v6-live-game-campaign.ts",
+      "bytes": 89344,
+      "sha256": "849c000d0dd0233ac22d486efa3122944dd95fcf323b7c67b81c78318579d782"
+    },
+    {
+      "path": "tests/v6-selected-rigid-capture.test.ts",
+      "bytes": 9408,
+      "sha256": "ff0c4b83a3d17b4a582448e89fefa0a0390e7b5df2b8330fc1e1fb06df829910"
+    },
+    {
+      "path": "scripts/verify-selected-rigid-presence.py",
+      "bytes": 65174,
+      "sha256": "91a1b0ded6d4b303ded74218a714ff042dcb35cf756bbe68b654f1d8003357b5"
+    },
+    {
+      "path": "scripts/tests/qualify-selected-rigid-presence.py",
+      "bytes": 12648,
+      "sha256": "173ebc00395e99ae11aacb6bfdf4106b88e63fbe8feac060c4a0227b7b00feae"
+    }
+  ],
+  "inputsUnchanged": true,
+  "finishedAt": "2026-11-11T14:41:30.847759+00:00"
+}

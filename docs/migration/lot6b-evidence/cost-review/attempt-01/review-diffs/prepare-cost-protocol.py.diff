@@ -1,0 +1,44 @@
+--- 6b-before-review/prepare-cost-protocol.py
++++ 6b-reviewed/prepare-cost-protocol.py
+@@ -15,8 +15,8 @@
+ copies historical input bytes, writes an immutable declaration, and invokes only
+ the unchanged read-only protocol checker. It never starts the cost runner.
+ """
+-# Directly adapted from the immutable published lot5B tool. Exact source bytes,
+-# fingerprints and the complete diff are in recovery/cost-tools-adaptation.json.
++# Directly adapted from the immutable published lot6A tool. Exact source bytes,
++# fingerprints and review diffs are retained in cost-review/attempt-01.
+ # No predecessor measurements are reused.
+ from __future__ import annotations
+ import argparse
+@@ -194,6 +194,7 @@
+     parser.add_argument('--finalize', action='store_true', help='Finalize only after the retained source manifests and archive exist.')
+     args = parser.parse_args()
+     require(args.finalize, 'This is a one-shot finalizer; pass --finalize after freezing both source identities')
++    require(args.owner_cost_qualification, '6B requires --owner-cost-qualification before any official window')
+     require(args.baseline_site_version > 0, 'A positive published Site version is required')
+     OUT = (ROOT / args.output_directory).resolve()
+     require(OUT.is_relative_to(EVIDENCE.resolve()), 'Protocol outputs must stay inside lot6b-evidence')
+@@ -217,6 +218,8 @@
+     baseline_status = git(baseline_checkout, 'status', '--porcelain=v1', '--untracked-files=all', '--', 'src/logos-engine', 'src/runtime')
+     require(not baseline_status, 'The published baseline native source must match its Git commit')
+     baseline_version, candidate_version = native_version(baseline_checkout), native_version(ROOT)
++    require(baseline_version == '0.63.0' and candidate_version == '0.64.0',
++            '6B must compare the actually published 0.63 predecessor with its final 0.64 candidate')
+     require(candidate_version == args.candidate_version, 'Candidate runtime version differs from --candidate-version')
+     require(archive['nativeSourceManifestDigest'] == candidate['digest'], 'Candidate archive binds a different native freeze')
+     require(re.fullmatch(r'[0-9a-f]{40}', archive['baseCommit']), 'Archive must retain its exact Git base commit')
+@@ -325,6 +328,13 @@
+ Les compteurs viennent des graphes capturés ; aucune formule constante de croissance
+ du graphe n'est supposée.
+ 
++Les valeurs des nœuds communs des captures fonctionnelles sont comparées exactement.
++Seule la métadonnée `origin.source_digest` possède ici une correspondance explicite
++entre les deux rôles. Une identité calculée présente dans une valeur, ou toute autre
++différence, bloque cette qualification tant qu'une attribution précise n'a pas été
++déclarée et vérifiée avant la mesure. Cette portée 6B plus stricte ne modifie pas la
++qualification historique 6A.
++
+ Chaque session future est vérifiée contre les valeurs publiques exactes de sa
+ forme pré-déclarée ; les compteurs de coût ne prétendent pas exposer ses feuilles
+ privées. Chaque valeur A/B et chaque différence sont conservées, chauffes

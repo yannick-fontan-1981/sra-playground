@@ -1,0 +1,17 @@
+{
+  "qualification": "Targeted component-development inputs, not the final delivery freeze.",
+  "files": {
+    "src/logos-engine/v6-selected-rigid.ts": "117e6191517b2126a6df4cb8dbc0f77acb7fa5da7f1c3bcbbcc838cd1545437b",
+    "src/logos-engine/v6-selected-rigid-types.ts": "dace249fcb41ed2e54b87cd65e733d23bfbbb76ac65bd5f1562aaa19736710a5",
+    "src/logos-engine/v6-selected-rigid-geometry.ts": "c381780144d2c159f52767b5b9b4f3731023bf37379e000b8e95c8dbb59fce66",
+    "src/logos-engine/v6-selected-rigid-search.ts": "7ae7af82dc952cdc5f0c511c656e5502f60619cdf5c4deaf9711494d86fb5f33",
+    "tests/v6-selected-rigid-native.test.ts": "b4007a8c135a763544b133adab34f3aaca92c403c307c1ecda0954a3837f41d7",
+    "src/logos-engine/v6-native-types.ts": "f73bde1b8f2acd291aeee32536f5e08839dcba79e470d6f435c17c79696d9887",
+    "src/logos-engine/v6-native-observer.ts": "1a0ffa26548bf6c1ebbd22724731c2238dc24c84074885e832b671dbbe8dfe02",
+    "src/logos-engine/v6-native-owned.ts": "b4a1eeb1cf43bb04695bce8267903cd122fe778b4b938a98b1640a9ba6ee4839",
+    "src/logos-engine/v6-hash.ts": "6b86db7b533d55da900a3c65a06ec1e18547180245b3e3a2eaa837be09c669f5",
+    "src/logos-engine/v6-operations.ts": "4aad959893595a1844721b93ec8897479536f95ccfa890be045656fa1e96fa06",
+    "src/logos-engine/canonical.ts": "5c2884287aed82d97e7a85c905db5fb800a7e58a523c3ba128a1b61db5069cc1",
+    "src/logos-engine/v6-src-program.ts": "d41717575e252784a81519e8c7853853af3c2d7372b86ecb7efb3655c3e3df77"
+  }
+}

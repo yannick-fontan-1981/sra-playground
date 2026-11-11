@@ -1,0 +1,63 @@
+--- immutable-6a/finalize-measured-cost.py
++++ 6b-reviewed/finalize-measured-cost.py
+@@ -1,9 +1,9 @@
+ #!/usr/bin/env python3
+-"""Finalize one completed 6A cost window; never measure, retry or overwrite.
+-
+-Usage: python -B docs/migration/lot6a-evidence/finalize-measured-cost.py PERF_DIR
++"""Finalize one completed 6B cost window; never measure, retry or overwrite.
++
++Usage: python -B docs/migration/lot6b-evidence/finalize-measured-cost.py PERF_DIR
+        --baseline-manifest BASELINE_MANIFEST
+-       [--candidate-source-directory docs/migration/lot6a-evidence/integrated-final-02]
++       [--candidate-source-directory docs/migration/lot6b-evidence/integrated-final-02]
+ 
+ Exit 0: completed and global budget accepted; 2: completed and budget refused;
+ 1: stopped on incomplete/pre-existing/inconsistent evidence or a command error.
+@@ -89,7 +89,7 @@
+     parser.add_argument('--candidate-source-directory', type=Path, default=BASE / 'integrated-final-02')
+     args = parser.parse_args()
+     perf, candidate, baseline = map(local, (args.performance_directory, args.candidate_source_directory, args.baseline_manifest))
+-    require(perf.is_relative_to(BASE) and perf.is_dir(), 'Use a prepared 6A performance directory')
++    require(perf.is_relative_to(BASE) and perf.is_dir(), 'Use a prepared 6B performance directory')
+     window_path, declaration_path, contract_path = [perf / name for name in ('window.json', 'declaration.json', 'owner-growth-contract.json')]
+     window, declaration, contract = map(read, (window_path, declaration_path, contract_path))
+     require(window['schema'] == 'logos-engine.native-cost-window.v1'
+@@ -100,7 +100,9 @@
+             <= datetime.now(timezone.utc), 'Invalid completed-window chronology')
+     require(declaration['schema'] == 'logos-engine.native-cost-protocol-declaration.v2'
+             and declaration['status'] == 'declared_before_official_window', 'Wrong protocol declaration')
+-    require(contract['schema'] == 'logos-engine.lot6a-owner-cost-contract.v2' and contract['lot'] == '6A'
++    require(declaration['baseline']['nativeVersion'] == '0.63.0' and declaration['candidate']['nativeVersion'] == '0.64.0',
++            '6B finalization requires its actually declared 0.63 predecessor and frozen 0.64 candidate')
++    require(contract['schema'] == 'logos-engine.lot6b-owner-cost-contract.v2' and contract['lot'] == '6B'
+             and contract['performanceDirectory'] == rel(perf) and contract['declaration'] == fp(declaration_path),
+             'Wrong predeclared owner contract')
+     for key, path in [('baselineManifest', baseline), ('candidateManifest', candidate / 'source-manifest.json'),
+@@ -114,7 +116,7 @@
+     consolidate, review, transport, render = [BASE / name for name in
+         ('consolidate-owner-costs.mjs', 'review-owner-costs.py', 'record-cost-log-transport.py', 'write-cost-results.py')]
+     require(declaration['ownerCostQualification'] == {
+-        'schema': 'logos-engine.lot6a-owner-cost-qualification.v1', 'contractPath': rel(contract_path), 'tools': contract['tools']},
++        'schema': 'logos-engine.lot6b-owner-cost-qualification.v1', 'contractPath': rel(contract_path), 'tools': contract['tools']},
+         'Owner tool declaration differs')
+     require(contract['tools'] == {'consolidator': fp(consolidate), 'reviewer': fp(review)}, 'Qualified tools changed')
+     for record in [*declaration['officialTools'], declaration['globalDecisionTool'], declaration['globalCalculationTool']]:
+@@ -154,7 +156,7 @@
+     base_inputs += [perf / name for name in ('comparison-policy.json', 'global-budget-policy.json', 'cases.json',
+                                            'readiness.json', 'static-preflight.json', 'preparation.json', 'protocol-check.json')]
+     watched = {rel(path): fp(path) for path in base_inputs}
+-    outcome = {'schema': 'logos-engine.lot6a-measured-cost-finalization.v1', 'startedAt': now(),
++    outcome = {'schema': 'logos-engine.lot6b-measured-cost-finalization.v1', 'startedAt': now(),
+                'generator': fp(SCRIPT), 'window': fp(window_path), 'status': 'running', 'accepted': None,
+                'commands': [], 'measurementExecuted': False, 'retryPerformed': False, 'measuredSamplesExcluded': 0}
+     exit_code = 1
+@@ -235,7 +237,7 @@
+             run([sys.executable, '-B', rel(review), rel(contract_path), rel(aggregate), rel(reviewed)], extra_logs[1],
+                 [review, contract_path, aggregate], [reviewed])
+             value, combined = read(reviewed), read(aggregate)
+-            require(value['schema'] == 'logos-engine.lot6a-owner-cost-review.v2'
++            require(value['schema'] == 'logos-engine.lot6b-owner-cost-review.v2'
+                     and value['status'] == 'qualified_owner_cost_review_passed'
+                     and type(value['globalAccepted']) is bool and value['accepted'] is value['globalAccepted']
+                     and combined['globalAccepted'] is value['globalAccepted'], 'Independent review and aggregate disagree')

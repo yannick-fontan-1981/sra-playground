@@ -1,0 +1,186 @@
+--- immutable-6a/capture-cost-owner-graphs.mjs
++++ 6b-reviewed/capture-cost-owner-graphs.mjs
+@@ -15,16 +15,18 @@
+ import { createGzip, gunzipSync } from 'node:zlib';
+ 
+ const SCRIPT = fileURLToPath(import.meta.url), ROOT = resolve(dirname(SCRIPT), '../../..');
+-const BASE = resolve(ROOT, 'docs/migration/lot6a-evidence');
+-const DERIVED_FROM = resolve(ROOT, 'docs/migration/lot5b-evidence/capture-cost-owner-graphs.mjs');
+-const OWNER = 'preview_packing';
++const BASE = resolve(ROOT, 'docs/migration/lot6b-evidence');
++const DERIVED_FROM = resolve(ROOT, 'docs/migration/lot6a-evidence/capture-cost-owner-graphs.mjs');
++const OWNER = 'selected_rigid';
+ // The later qualifier imports each side's real store validator. Bind those
+ // external baseline paths in this capture before the analyzer's closed access
+ // list is frozen; an inventory digest alone is not an input-path permission.
+ const ROLE_VALIDATORS = ['src/logos-engine/kernel.ts', 'src/logos-engine/v6-knowledge-store.ts'];
+ const REFERENCE = 'reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6';
+ const DECLARATIONS = [`${REFERENCE}/laya_proto/common_frontier_policy.drm.json`, `${REFERENCE}/morphology_policy/strategy.drm`];
+-const PREVIEW_POLICY = `${REFERENCE}/morphology_policy/preview_packing/preview.drm`;
++const SELECTED_RIGID_POLICY = `${REFERENCE}/morphology_policy/strategy.drm`;
++const VERSIONS = { baseline: '0.63.0', candidate: '0.64.0' };
++const coldSource = () => ({ format: 'selected_rigid_events.v1', events: [] });
+ const HASH = bytes => createHash('sha256').update(bytes).digest('hex');
+ const copy = value => JSON.parse(JSON.stringify(value));
+ const label = path => path.startsWith(ROOT + sep) ? relative(ROOT, path) : path;
+@@ -94,7 +96,7 @@
+   const casesPath = resolve(ROOT, casesArgument), manifestPath = resolve(ROOT, manifestArgument);
+   const output = resolve(ROOT, outputArgument), receiptPath = output.replace(/\.json\.gz$/, '.receipt.json');
+   assert.ok(inside(BASE, casesPath) && inside(BASE, output) && output.endsWith('.json.gz'),
+-    'Cases and exclusive capture output must belong to lot6a-evidence');
++    'Cases and exclusive capture output must belong to lot6b-evidence');
+   for (const path of [output, receiptPath, resolve(dirname(casesPath), 'window.json'), resolve(dirname(casesPath), 'readiness.json')]) await absent(path);
+   await mkdir(dirname(output), { recursive: true });
+   const receiptFile = await open(receiptPath, 'wx'), gzip = createGzip({ level: 6 });
+@@ -117,14 +119,14 @@
+     if (expected) assert.equal(record.sha256, typeof expected === 'string' ? expected : expected.sha256);
+     return bytes;
+   }
+-  const receipt = { schema: 'logos-engine.lot6a-owner-cost-functional-capture-receipt.v1', status: 'running', role, checkout,
++  const receipt = { schema: 'logos-engine.lot6b-owner-cost-functional-capture-receipt.v1', status: 'running', role, checkout,
+     ownerId: OWNER, acquisitionMode: 'selected_only_source_owner_no_passive_returns',
+     startedAt: new Date().toISOString(), sessions: [], failures: [], inputsBefore: [], inputsAfter: [],
+     nativeSourceUnchanged: false, inputsUnchanged: false, generatorUnchanged: false,
+     measuredCostSessions: 0, timingReportsRead: 0, timingMetricsProduced: 0 };
+   let before = null, generator = null;
+   try {
+-    await write(`${JSON.stringify({ schema: 'logos-engine.lot6a-owner-cost-functional-capture.v1', role, checkout,
++    await write(`${JSON.stringify({ schema: 'logos-engine.lot6b-owner-cost-functional-capture.v1', role, checkout,
+       startedAt: receipt.startedAt }).slice(0, -1)},"records":[\n`);
+     generator = await fp(SCRIPT); receipt.generator = generator; await input(SCRIPT, generator);
+     receipt.derivedFrom = await fp(DERIVED_FROM); await input(DERIVED_FROM, receipt.derivedFrom);
+@@ -135,12 +137,17 @@
+     const frozen = JSON.parse(await input(manifestPath)); receipt.nativeSourceBefore = await fp(manifestPath);
+     before = await inventory(checkout); receipt.nativeInventoryBefore = before; receipt.nativeDigest = before.digest;
+     assert.deepEqual(before, frozen, 'Checkout differs from the supplied source freeze');
++    const runtimeSource = (await input(resolve(checkout, 'src/logos-engine/v6-native-runtime.ts'),
++      before.files['src/logos-engine/v6-native-runtime.ts'])).toString('utf8');
++    const versions = [...runtimeSource.matchAll(/NATIVE_V6_IMPLEMENTATION\s*=\s*['"]logos-engine\.typescript\.v6\.native-migration\/([^'"]+)['"]/g)].map(match => match[1]);
++    assert.deepEqual(versions, [VERSIONS[role]], '6B requires its actual 0.63 predecessor and frozen 0.64 candidate');
++    receipt.nativeVersion = versions[0];
+     for (const path of ROLE_VALIDATORS) await input(resolve(checkout, path), before.files[path]);
+     const harness = 'scripts/measure-native-loop-costs.mjs';
+     await input(resolve(checkout, harness), await fp(resolve(ROOT, harness)));
+     const declarations = { common: JSON.parse(await input(resolve(checkout, DECLARATIONS[0]))),
+       strategy: JSON.parse(await input(resolve(checkout, DECLARATIONS[1]))) };
+-    await input(resolve(checkout, PREVIEW_POLICY));
++    await input(resolve(checkout, SELECTED_RIGID_POLICY));
+     const traces = new Map();
+     for (const item of cases.cases) {
+       const bytes = await input(resolve(checkout, item.trace), item.traceSha256);
+@@ -151,29 +158,39 @@
+     receipt.inputsBefore = [...inputs.values()];
+     await emit({ type: 'preflight', nativeSource: before, manifest: receipt.nativeSourceBefore, generator, cases: receipt.cases,
+       inputs: receipt.inputsBefore, plannedSessions: 4, plannedActions: 31, measuredCostSessions: 0 });
+-    const [{ createNativeV6Runtime }, { V6AgentService }] = await Promise.all([
++    const [runtimeModule, { V6AgentService }] = await Promise.all([
+       import(pathToFileURL(resolve(checkout, 'src/logos-engine/v6-native-runtime.ts')).href),
+       import(pathToFileURL(resolve(checkout, 'src/runtime/v6-agent-service.ts')).href),
+     ]);
+     for (const item of cases.cases) for (const form of ['warmup', 'measured']) {
+       const trace = traces.get(item.id), limit = form === 'warmup' ? item.warmupActions : item.actions;
+-      const sessionId = `lot6a-owner-cost-${item.id.toLowerCase()}-${form}`;
++      const sessionId = `lot6b-owner-cost-${item.id.toLowerCase()}-${form}`;
+       const identity = { case: item.id, form, sessionId };
+       const budgets = { targetLevels: item.targetLevels, levelActionCaps: Array(item.targetLevels).fill(600) };
+       const session = { ...identity, status: 'running', actionsLimit: limit, commands: 0, captures: 0,
+-        terminalInspections: 0, previewPackingRecordCalls: 0, previewPackingProposalCalls: 0, previewPackingCheckpoints: 0, shape: null };
++        terminalInspections: 0, selectedRigidRecordCalls: 0, selectedRigidProposalCalls: 0, selectedRigidCheckpoints: 0, shape: null };
+       receipt.sessions.push(session);
+       await emit({ type: 'session_start', ...identity, actionsLimit: limit, budgets, coldKnowledge: true,
+         checkpointSupplied: false, trace: item.trace, traceSha256: item.traceSha256,
+         initialPublicPacket: trace.packets[0].packet, nativeDigest: before.digest });
+       let runtime = null, revision = 0, chain = null, pointIndex = 0, last = null;
+-      const reconstructed = {}, pendingPreviewPackingCalls = [], pendingPreviewPackingProposals = [], pendingPreviewPackingCheckpoints = [];
++      const reconstructed = {}, pendingSelectedRigidCalls = [], pendingSelectedRigidProposals = [], pendingSelectedRigidCheckpoints = [];
+       const shape = { actions: 0, cycles: 0, levelsCompleted: 0, requests: [], observations: [], inspection: [], final: null };
+       const service = new V6AgentService(async () => {
+         assert.equal(runtime, null, 'Only one cold runtime per session');
+-        runtime = await createNativeV6Runtime(declarations);
+-        const owner = runtime.acquisitionFamilies?.preview;
+-        assert.equal(Boolean(owner), role === 'candidate', 'PreviewPacking owner differs from declared capture side');
++        runtime = await runtimeModule.createNativeV6Runtime(declarations);
++        const owner = runtime.acquisitionFamilies?.selectedRigid;
++        assert.equal(Boolean(owner), role === 'candidate', 'SelectedRigid owner differs from declared capture side');
++        const registered = runtime.families.filter(family => family.id === OWNER);
++        assert.equal(registered.length, role === 'candidate' ? 1 : 0, 'Exactly one registered SelectedRigid owner is required only in the candidate');
++        if (role === 'candidate') {
++          assert.equal(typeof runtimeModule.rawNativeSelectedRigid, 'function');
++          assert.equal(runtimeModule.rawNativeSelectedRigid(registered[0]), owner,
++            'The observed acquisition owner must be the actual registered family instance');
++          assert.deepEqual(owner.sourceState(), coldSource(), 'The cost capture must begin with the exact empty source journal');
++        }
++        session.selectedRigidOwnerBinding = { registeredInstances: registered.length,
++          acquisitionMatchesRegisteredOwner: role === 'candidate' ? true : null };
+         if (owner) {
+           assert.equal(owner.id, OWNER);
+           // Observe actual immutable checkpoints produced by the registered
+@@ -182,7 +199,7 @@
+           owner.nativeState = (...args) => {
+             const state = nativeState(...args);
+             if (state !== retainedCheckpoint) {
+-              pendingPreviewPackingCheckpoints.push({ index: session.previewPackingCheckpoints++, state });
++              pendingSelectedRigidCheckpoints.push({ index: session.selectedRigidCheckpoints++, state });
+               retainedCheckpoint = state;
+             }
+             return state;
+@@ -191,7 +208,7 @@
+           owner.propose = (...args) => {
+             const sourceBefore = owner.sourceState();
+             const observe = result => {
+-              pendingPreviewPackingProposals.push({ index: session.previewPackingProposalCalls++,
++              pendingSelectedRigidProposals.push({ index: session.selectedRigidProposalCalls++,
+                 observation: observedIdentity(args[0]), rows: copy(args[1]), remaining: args[3],
+                 sourceBefore, returnValue: copy(result), sourceAfter: owner.sourceState() });
+               return result;
+@@ -203,7 +220,7 @@
+           owner.record = (...args) => {
+             const sourceBefore = owner.sourceState();
+             const observe = result => {
+-              pendingPreviewPackingCalls.push({ index: session.previewPackingRecordCalls++, before: observedIdentity(args[0]),
++              pendingSelectedRigidCalls.push({ index: session.selectedRigidRecordCalls++, before: observedIdentity(args[0]),
+                 after: observedIdentity(args[1]), command: copy(args[2]), selected: args[5] != null,
+                 sourceBefore, returnValue: copy(result), sourceAfter: owner.sourceState() });
+               return result;
+@@ -216,6 +233,9 @@
+       });
+       async function handle(request, packet = null, checkedCommandRecord = null, terminalInspection = false) {
+         const response = await service.handle(request), snapshot = structuralSnapshot(response.snapshot);
++        const selectedRigidSourceState = runtime.acquisitionFamilies?.selectedRigid?.sourceState() ?? null;
++        assert.deepEqual(selectedRigidSourceState, role === 'candidate' ? coldSource() : null,
++          'Foreign cost traces must retain the exact empty SelectedRigid source state at every captured point');
+         assert.equal(snapshot.actions, request.sequence);
+         assert.equal(snapshot.whyAct.enabled, true); assert.equal(snapshot.caller.enabled, true);
+         const memory = runtime.inspectKnowledge(), deltasAdded = memory.deltas.slice(revision);
+@@ -241,9 +261,10 @@
+         await emit({ type: terminalInspection ? 'terminal_inspection' : 'capture', ...identity, pointIndex: pointIndex++,
+           request, publicPacket: packet, checkedCommandRecord, result, snapshot,
+           knowledge: { chain: memory.chain, nodeCount: snapshot.nodeCount, fromRevision: revision,
+-            toRevision: memory.deltas.length, deltasAdded }, previewPackingCalls: pendingPreviewPackingCalls.splice(0),
+-          previewPackingProposals: pendingPreviewPackingProposals.splice(0),
+-          previewPackingCheckpoints: pendingPreviewPackingCheckpoints.splice(0) });
++            toRevision: memory.deltas.length, deltasAdded }, selectedRigidOwnerBinding: session.selectedRigidOwnerBinding,
++          selectedRigidSourceState, selectedRigidCalls: pendingSelectedRigidCalls.splice(0),
++          selectedRigidProposals: pendingSelectedRigidProposals.splice(0),
++          selectedRigidCheckpoints: pendingSelectedRigidCheckpoints.splice(0) });
+         revision = memory.deltas.length;
+         return response;
+       }
+@@ -276,13 +297,13 @@
+         await handle({ type: 'inspect', sessionId, sequence: limit }, null, null, true);
+       }
+       assert.equal(shape.inspection.length, form === 'warmup' ? 0 : 3);
+-      assert.equal(session.previewPackingRecordCalls, 0, 'The fixed cost traces must never acquire a PreviewPacking return');
++      assert.equal(session.selectedRigidRecordCalls, 0, 'The fixed cost traces must never acquire a SelectedRigid return');
+       session.status = 'captured_functional_structure'; session.shape = shape;
+       await emit({ type: 'session_end', ...identity, status: session.status, shape,
+         commands: session.commands, captures: session.captures, terminalInspections: session.terminalInspections,
+-        previewPackingRecordCalls: session.previewPackingRecordCalls,
+-        previewPackingProposalCalls: session.previewPackingProposalCalls,
+-        previewPackingCheckpoints: session.previewPackingCheckpoints, terminalResumePerformed: false });
++        selectedRigidRecordCalls: session.selectedRigidRecordCalls,
++        selectedRigidProposalCalls: session.selectedRigidProposalCalls,
++        selectedRigidCheckpoints: session.selectedRigidCheckpoints, terminalResumePerformed: false });
+       await service.handle({ type: 'close', sessionId, sequence: limit });
+     }
+   } catch (error) {

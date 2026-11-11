@@ -1,0 +1,29 @@
+{
+  "schema": "logos-engine.actual-command-execution.v1",
+  "status": "failed",
+  "command": [
+    "node",
+    "--test",
+    "--test-concurrency=1",
+    "tests/v6-selected-rigid-integration.test.ts",
+    "tests/v6-preview-packing-integration.test.ts",
+    "tests/v6-radial-port-integration.test.ts"
+  ],
+  "startedAt": "2026-11-11T14:43:51.154606+00:00",
+  "finishedAt": "2026-11-11T14:44:38.850191+00:00",
+  "elapsedSeconds": 47.6943339139998,
+  "exitCode": 1,
+  "inputs": [
+    {
+      "path": "docs/migration/lot6b-evidence/record-command.py",
+      "bytes": 3056,
+      "sha256": "da05ed5bfb355afc29a9d20e79e19e51e695f39781ece9068ce0ba0e14b7d420"
+    }
+  ],
+  "inputsUnchanged": true,
+  "output": {
+    "path": "docs/migration/lot6b-evidence/integration/attempt-01/factory-and-adjacent.log.gz",
+    "bytes": 1662,
+    "sha256": "b10809d1408c7a00d9f4d193388f6f5e1e0d4a9ff24ee2528fcf70e6281e2558"
+  }
+}
