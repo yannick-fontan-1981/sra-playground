@@ -1,0 +1,48 @@
+{
+  "schema": "logos-engine.lot8a.prepared-baseline-support-materialization.v1",
+  "recordedAt": "2026-11-11T22:10:57.928489+00:00",
+  "baselineCommit": "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+  "materialized": {
+    "path": "/workspace/sites/sra-lot8a-prepared6b-20261111/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/composition_target_tree.json",
+    "sha256": "2a1e4f20eccb89ba2eca9f2b6cfe0e33528c283251453853f0a8a80b43d96635",
+    "bytes": 5341
+  },
+  "matchingCandidate": {
+    "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/composition_target_tree.json",
+    "sha256": "2a1e4f20eccb89ba2eca9f2b6cfe0e33528c283251453853f0a8a80b43d96635",
+    "bytes": 5341
+  },
+  "source": "Exact Git blob from the same detached prepared baseline commit; sparse-checkout pattern expanded only for the missing declarative JSON import.",
+  "baselineGitClean": true,
+  "nativeFiles": 322,
+  "nativeDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+  "nativeFilesUnchanged": true,
+  "retainedFailedInventory": {
+    "path": "docs/migration/lot8a-evidence/qualification-provisional-02/stages/work-form-owner-inventory/receipt.json",
+    "sha256": "f08b0693fc828a1fa77cf81cd3ecd9ad3d718756b8ca18bdee6f47ed281ced93",
+    "bytes": 1160838
+  },
+  "runtimeSessionsDuringMaterialization": 0,
+  "independentStaticReview": {
+    "agent": "coordination_audit",
+    "moduleRoots": 4,
+    "filesReached": 295,
+    "relativeImports": 1594,
+    "missingExternalImports": 1,
+    "note": "Read-only static module-closure review; no native import or session executed."
+  },
+  "preparatoryCliErrorsRetained": [
+    {
+      "command": "git sparse-checkout add --no-cone --stdin",
+      "exitCode": 129,
+      "diagnostic": "unknown option no-cone; add inherits the existing non-cone configuration",
+      "effects": "no materialization occurred"
+    },
+    {
+      "command": "qualify-composition-v2.py using not-yet-created work-form-capture-plan-v2.json",
+      "exitCode": 1,
+      "diagnostic": "FileNotFoundError before stage start",
+      "effects": "no command or native session launched"
+    }
+  ]
+}
