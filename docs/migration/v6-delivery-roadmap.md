@@ -2,6 +2,15 @@
 
 <!-- LOT5C_ROADMAP_CURRENT_START -->
 
+<!-- LOT5C_PRIORITY_PUBLICATION_CURRENT_START -->
+### Publication prioritaire 0.63 explicitement demandée
+
+La [nouvelle instruction utilisateur](lot5c-evidence/recovery/publication-063-priority/authorization.json) autorise la publication prioritaire de **native 0.63 sans attendre la disponibilité ni les ACK de 6B, 8A et 10C**. Elle remplace, pour cette publication, la condition antérieure d’acceptation préalable du coût. Les validations fonctionnelles restent acquises et réutilisées ; **le coût officiel STCK et SMLP reste non mesuré et non accepté**. Le critère futur strictement inférieur à +10 % par jeu et la conservation des dépassements de phase ne changent pas.
+
+Le prédécesseur effectivement publié a été [recontrôlé](lot5c-evidence/recovery/publication-063-priority/predecessor-readback.json) : Site 103 / native 0.62, audience privée propriétaire inchangée. La publication est maintenant prioritaire, sous le seul gardien de publication borné, sans demande de calme aux autres lots. **La réussite effective sera établie par le reçu natif de déploiement.** Les états de blocage et tentatives ci-dessous sont conservés comme historique antérieur à cette décision.
+<!-- LOT5C_PRIORITY_PUBLICATION_CURRENT_END -->
+
+
 ## Lot 5C : validé fonctionnellement, coût 0.63 bloqué avant mesure
 
 **Clôture du 11 novembre 2026 à 21:58:17 UTC : le cycle unique `available-03` a expiré faute des ACK frais de 6B, 8A et 10C. La demande de calme est explicitement levée, la session 71059 est terminale et son nettoyage est confirmé. Aucun EX n’a été tenté, aucune readiness 04 ni mesure officielle n’a été produite et 0.63 n’a pas été publiée.** Le [reçu de clôture](lot5c-evidence/recovery/coordination/recovery-03/available03-closure.json) conserve les faits et leurs limites. Le travail courant s’effectue désormais **sans verrou global**, dans le checkout et la branche propres à 5C ; commits et push n’attendent aucune publication étrangère.

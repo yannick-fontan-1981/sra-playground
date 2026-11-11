@@ -1,0 +1,37 @@
+{
+  "schema": "logos-engine.lot5c-priority-publication-authorization.v1",
+  "recordedAt": "2026-11-11T22:20:06.987679+00:00",
+  "authority": "Latest explicit user instruction in this conversation",
+  "userInstruction": "fait la publication de manière prioritaire est forcé de0.63 sans attendre une disponibilité de6B,8A et10C",
+  "nativeVersion": "0.63.0",
+  "sourceCheckpointBeforeAuthorization": "21d3e6ad59fec7370a71885e7ab1353e48d0254b",
+  "publicationPriorityAuthorized": true,
+  "publicationBeforeOfficialCostAcceptanceAuthorized": true,
+  "peerAvailabilityOrAckRequiredForThisPublication": false,
+  "officialCostMeasured": false,
+  "officialCostAccepted": false,
+  "costStatusByGame": {
+    "STCK": "not_measured",
+    "SMLP": "not_measured"
+  },
+  "futureCostCriterionUnchanged": "For each game separately, the pooled median complete-session duration increase must be strictly below+10%. Phase exceedances remain visible and are acceptable only if that same game global passes.",
+  "publicationMutexPreserved": true,
+  "publicationMutexPath": "/workspace/shared/sra-coordination/publication.lock",
+  "performanceMutexUsed": false,
+  "requestForPeerQuiet": false,
+  "audienceChangeAuthorizedOrPerformed": false,
+  "nativeAndBenchmarkChangesRequired": false,
+  "functionalEvidenceReused": {
+    "testCount": 5339,
+    "testFiles": 138,
+    "deliveryChecks": 5,
+    "commonComparisons": 6818,
+    "recordedCases": 11,
+    "recordedComparisons": 187
+  },
+  "supersededPublicationPrerequisitesOnly": [
+    "publication-coordination-v1/README.md historical cost-before-publication requirement",
+    "coordination-tools-v3/operator-contract.json historical stageAuthorization cost-before-publication text"
+  ],
+  "qualification": "The user explicitly prioritizes release despite unavailable official performance qualification. This is an authorized publication exception, not an accepted cost result. No runtime protection or provider access control is disabled. Existing exclusive publication guardian and exact source/archive checks remain in force."
+}
