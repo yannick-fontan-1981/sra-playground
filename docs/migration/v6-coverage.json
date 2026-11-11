@@ -30,10 +30,10 @@
     "declaredClassesAndFunctions": 12857,
     "dataFiles": 417,
     "verifiedModules": 0,
-    "componentVerifiedModules": 199,
+    "componentVerifiedModules": 200,
     "partiallyTransferredModules": 149,
     "transferredUnverifiedModules": 0,
-    "pendingModules": 1021,
+    "pendingModules": 1020,
     "strategyFamilies": 16
   },
   "families": [
@@ -76870,9 +76870,22 @@
           "endLine": 290
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-motif-access.ts",
+        "src/logos-engine/v6-motif-access-geometry.ts"
+      ],
+      "proof": [
+        "scripts/check-v6-motif-access-reference.py",
+        "tests/fixtures/v6-motif-access-reference.json",
+        "tests/v6-motif-access-reference.test.ts",
+        "tests/v6-motif-access-contract.test.ts",
+        "tests/v6-motif-access-kernel.test.ts",
+        "docs/migration/lot8a-evidence/contract/reference-oracle.json",
+        "docs/migration/lot8a-evidence/contract/site103-integration-review.json",
+        "docs/migration/lot8a-evidence/development/component-proof.json",
+        "docs/migration/lot8a-motif-access-lineage.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_multiscale_constraints.py",
@@ -95068,7 +95081,9 @@
         "src/logos-engine/v6-native-caller.ts",
         "src/logos-engine/v6-morphology-family.ts",
         "src/logos-engine/v6-contextual-translation.ts",
-        "src/logos-engine/v6-ranked-workshop.ts"
+        "src/logos-engine/v6-ranked-workshop.ts",
+        "src/logos-engine/v6-motif-access.ts",
+        "src/logos-engine/v6-motif-access-geometry.ts"
       ],
       "proof": [
         "tests/v6-native-runtime.test.ts",
@@ -95111,7 +95126,10 @@
         "tests/v6-ranked-workshop-kernel.test.ts",
         "docs/migration/lot7a-ranked-workshop-lineage.md",
         "tests/v6-axial-question-kernel.test.ts",
-        "docs/migration/lot10a-axial-question-lineage.md"
+        "docs/migration/lot10a-axial-question-lineage.md",
+        "tests/v6-motif-access-kernel.test.ts",
+        "docs/migration/lot8a-evidence/development/component-proof.json",
+        "docs/migration/lot8a-motif-access-lineage.md"
       ]
     },
     {
