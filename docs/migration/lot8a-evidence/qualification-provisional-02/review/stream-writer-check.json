@@ -1,0 +1,276 @@
+{
+  "schema": "logos-engine.lot8a.stream-writer-check-attributed-receipt.v1",
+  "recordedAt": "2026-11-11T21:39:45.892875+00:00",
+  "status": "passed_attributed_execution_report",
+  "author": "/root/capture_diagnosis",
+  "command": {
+    "argv": [
+      "node",
+      "docs/migration/lot8a-evidence/tools/check-streamed-evidence-gzip.mjs"
+    ],
+    "cwd": "/workspace/sites/sra-lot8a-motif-20261111/.sites-checkout",
+    "explicitEnvironmentOverrides": {},
+    "shellCommand": "node docs/migration/lot8a-evidence/tools/check-streamed-evidence-gzip.mjs"
+  },
+  "execution": {
+    "tool": "exec_command",
+    "toolOutputChunkId": "9cabdd",
+    "exitCode": 0,
+    "wallTimeSeconds": 0.097208085,
+    "executedEarlierInThisAgentTurn": true,
+    "rerunForThisReceipt": false
+  },
+  "provenance": {
+    "rawStdoutPersistedAtExecution": false,
+    "rawStderrPersistedAtExecution": false,
+    "source": "Parsed successful tool stdout visible in the executing agent conversation; transcribed below without rerunning the checker.",
+    "byteExactRawLogClaimed": false,
+    "fixtureFilesRetained": false,
+    "fixtureCleanup": "The checker removed its own temporary fixture directory in finally.",
+    "fingerprintTiming": "Tool hashes were printed after the successful run in tool chunk a62625; all pins were rechecked while writing this attributed receipt."
+  },
+  "inputs": [
+    {
+      "path": "docs/migration/lot8a-evidence/tools/write-streamed-evidence-gzip.mjs",
+      "sha256": "bd07e39ee109fd3c714a755fa68799012f25187ee441f72f5fc4544c1742da12",
+      "bytes": 3300
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/tools/replay-recorded-public-streaming.mjs",
+      "sha256": "5e5904fc83e0ffb9ee2bc99fdb91c58605206d647cb3eadcf60bf64d939b07f8",
+      "bytes": 2917
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/tools/run-recorded-public-regressions-streaming.py",
+      "sha256": "842359989e9e136c261a4d633c2f69ce3a0fcde8fc6262b0aaac0a942ebd5aa8",
+      "bytes": 2754
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/tools/check-streamed-evidence-gzip.mjs",
+      "sha256": "cf034edce73f22d216d74fee4aa1bab0b674b5e870ad34a1a0edc1f7221e739f",
+      "bytes": 7668
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/stream-evidence-json.mjs",
+      "sha256": "96ac2ddbaac8cc62126f6674301b2362301895f44ce90e5dbd1dec9fb6fc87ca",
+      "bytes": 6601
+    }
+  ],
+  "observedResult": {
+    "schema": "logos-engine.lot8a.streamed-evidence-gzip-check.v1",
+    "status": "passed",
+    "gameHostRun": false,
+    "nativeAgentRun": false,
+    "originalComponentRun": false,
+    "harnessImported": false,
+    "smallLimitBytes": 262144,
+    "passedCases": 10,
+    "passedErrors": 9,
+    "cases": [
+      {
+        "name": "report_fields",
+        "passed": true,
+        "bytes": 259,
+        "rawBytes": 259,
+        "rawSha256": "0ff5a32f31a86a963dc18f1ccafd2129036cd319f3ca5a56451ed14807447a23",
+        "chunks": 1,
+        "maximumChunkBytes": 259,
+        "gzipBytes": 203,
+        "completeBeforeFinalPath": true,
+        "replacesExistingEvidence": false
+      },
+      {
+        "name": "empty_values",
+        "passed": true,
+        "bytes": 68,
+        "rawBytes": 68,
+        "rawSha256": "6241f7ab432ea39868b113462cd9b990dc3fd10630d15b2d3aaf9b19fe4da48e",
+        "chunks": 1,
+        "maximumChunkBytes": 68,
+        "gzipBytes": 84,
+        "completeBeforeFinalPath": true,
+        "replacesExistingEvidence": false
+      },
+      {
+        "name": "property_order",
+        "passed": true,
+        "bytes": 49,
+        "rawBytes": 49,
+        "rawSha256": "365cc210ac2055ad202e59b544d97cb05f80ecd210cc649af716fb603d14042b",
+        "chunks": 1,
+        "maximumChunkBytes": 49,
+        "gzipBytes": 65,
+        "completeBeforeFinalPath": true,
+        "replacesExistingEvidence": false
+      },
+      {
+        "name": "array_and_object_omissions",
+        "passed": true,
+        "bytes": 38,
+        "rawBytes": 38,
+        "rawSha256": "f60d6c86f2d71fa98624690cffd918a7153e991dfeb5e476915e2a33ba6aa9ff",
+        "chunks": 1,
+        "maximumChunkBytes": 38,
+        "gzipBytes": 41,
+        "completeBeforeFinalPath": true,
+        "replacesExistingEvidence": false
+      },
+      {
+        "name": "numbers",
+        "passed": true,
+        "bytes": 85,
+        "rawBytes": 85,
+        "rawSha256": "01edc529179758474666340d4adc81d1f3a0aa6bbab972464fa5b172d2e185ed",
+        "chunks": 1,
+        "maximumChunkBytes": 85,
+        "gzipBytes": 78,
+        "completeBeforeFinalPath": true,
+        "replacesExistingEvidence": false
+      },
+      {
+        "name": "unicode_chunk_boundaries",
+        "passed": true,
+        "bytes": 92117,
+        "rawBytes": 92117,
+        "rawSha256": "a4ded1be2d4a444bfe68a48c5112085bd44442f5e03eed3ca14e3c106c4cc067",
+        "chunks": 5,
+        "maximumChunkBytes": 38916,
+        "gzipBytes": 264,
+        "completeBeforeFinalPath": true,
+        "replacesExistingEvidence": false
+      },
+      {
+        "name": "multiple_chunks",
+        "passed": true,
+        "bytes": 131102,
+        "rawBytes": 131102,
+        "rawSha256": "eec851ed2eee285cc50e4daed80033d55bd3b1af22f3702fbaecf06b641ebf58",
+        "chunks": 9,
+        "maximumChunkBytes": 16384,
+        "gzipBytes": 193,
+        "completeBeforeFinalPath": true,
+        "replacesExistingEvidence": false
+      },
+      {
+        "name": "shared_acyclic_reference",
+        "passed": true,
+        "bytes": 57,
+        "rawBytes": 57,
+        "rawSha256": "86ce8a852833a71642073d11a9888c8aa051ecb01df2bd47ec12082cf2b1ffb8",
+        "chunks": 1,
+        "maximumChunkBytes": 57,
+        "gzipBytes": 59,
+        "completeBeforeFinalPath": true,
+        "replacesExistingEvidence": false
+      },
+      {
+        "name": "getter_tojson_order",
+        "passed": true,
+        "bytes": 10,
+        "rawBytes": 10,
+        "rawSha256": "69cd59393b9dbcbd16de778de3dc626b6964b32a2f6ae031d54e6711219bcd7e",
+        "chunks": 1,
+        "maximumChunkBytes": 10,
+        "gzipBytes": 30,
+        "completeBeforeFinalPath": true,
+        "replacesExistingEvidence": false
+      },
+      {
+        "name": "native_wrappers",
+        "passed": true,
+        "bytes": 66,
+        "rawBytes": 66,
+        "rawSha256": "ecbf1ba6c366d83df62078c9f9bf78c590ef7a332d04f7cfd78b29dd6c81010f",
+        "chunks": 1,
+        "maximumChunkBytes": 66,
+        "gzipBytes": 86,
+        "completeBeforeFinalPath": true,
+        "replacesExistingEvidence": false
+      }
+    ],
+    "errors": [
+      {
+        "name": "ancestor_cycle",
+        "passed": true,
+        "noFinalReport": true,
+        "temporaryRemoved": true
+      },
+      {
+        "name": "array_cycle",
+        "passed": true,
+        "noFinalReport": true,
+        "temporaryRemoved": true
+      },
+      {
+        "name": "bigint",
+        "passed": true,
+        "noFinalReport": true,
+        "temporaryRemoved": true
+      },
+      {
+        "name": "undefined_root",
+        "passed": true,
+        "noFinalReport": true,
+        "temporaryRemoved": true
+      },
+      {
+        "name": "getter_after_partial_bytes",
+        "passed": true,
+        "noFinalReport": true,
+        "temporaryRemoved": true
+      },
+      {
+        "name": "tojson_error",
+        "passed": true,
+        "noFinalReport": true,
+        "temporaryRemoved": true
+      },
+      {
+        "name": "existing_report_unchanged",
+        "passed": true
+      },
+      {
+        "name": "concurrent_final_path_no_replace",
+        "passed": true
+      },
+      {
+        "name": "abort_after_partial_bytes",
+        "passed": true,
+        "noFinalReport": true,
+        "temporaryRemoved": true
+      }
+    ]
+  },
+  "priorFailedCheck": {
+    "retainedAsHistory": true,
+    "toolOutputChunkId": "308335",
+    "exitCode": 1,
+    "command": [
+      "node",
+      "docs/migration/lot8a-evidence/tools/check-streamed-evidence-gzip.mjs"
+    ],
+    "rawFailureOutputPersisted": false,
+    "cause": "The first small-check script aborted synchronously inside a getter while the generator was running; Node produced AggregateError: Generator is already running containing AbortError, rather than the single AbortError the assertion required.",
+    "prospectiveCorrection": "The checker schedules cancellation with queueMicrotask so it occurs between chunks. The writer was not changed to hide an error.",
+    "scope": "Test injection/expected-error mismatch; not a game or original-agent execution failure.",
+    "supersededCheckerBytesRetained": false
+  },
+  "additionalReadOnlyChecks": {
+    "toolOutputChunkId": "77a633",
+    "status": "passed",
+    "gameExecution": false,
+    "nativeExecution": false,
+    "unchangedDriverMain": true,
+    "unchangedComparator": true,
+    "inventoryEntries": 11,
+    "replaySyntaxToolOutputChunkId": "9efc9f",
+    "replaySyntaxExitCode": 0
+  },
+  "limitations": [
+    "Attributed execution record, not a hash-verifiable byte-for-byte saved stdout log.",
+    "No game, campaign, original component, eleven-case regression or performance sample was executed by these checks.",
+    "The report object remains in memory; bounded JSON/gzip output does not bound complete process RSS.",
+    "Only decompressed JSON bytes, field content and order are compared with JSON.stringify; historical gzip archive byte identity is not claimed.",
+    "A killed process can leave its unique in-progress directory; the final report pathname is installed only after complete output and fsync."
+  ]
+}
