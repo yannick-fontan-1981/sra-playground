@@ -1,0 +1,46 @@
+{
+  "schema": "lot10c.prepared-dependency-fetch.v1",
+  "startedAt": "2026-11-11T19:11:01.365056+00:00",
+  "sourceOnly": true,
+  "actualPublicationEstablished": false,
+  "baseHead": "3ea5e39b7c3f18ea84baf485a2494a9b948e0984",
+  "scope": "Prospective composition from immutable source checkpoints; final actual publication reconciliation remains required.",
+  "entries": [
+    {
+      "lane": "5c",
+      "checkout": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout",
+      "commit": "722c949e8800b580742f10a9a97751578b9cc419",
+      "targetRef": "refs/remotes/lot10c-prepared/5c-722c949e",
+      "exitCode": 0,
+      "seconds": 10.20640863600056,
+      "stdout": "",
+      "stderr": "From /workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout\n * [new ref]         722c949e8800b580742f10a9a97751578b9cc419 -> lot10c-prepared/5c-722c949e\n",
+      "exactRefVerified": true
+    },
+    {
+      "lane": "6b",
+      "checkout": "/workspace/sites/sra-lot6b-20261111/.sites-checkout",
+      "commit": "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+      "targetRef": "refs/remotes/lot10c-prepared/6b-a01e6faf",
+      "exitCode": 0,
+      "seconds": 5.685995454001386,
+      "stdout": "",
+      "stderr": "From /workspace/sites/sra-lot6b-20261111/.sites-checkout\n * [new ref]         a01e6faf330d82fa220feac0c9ad4632bb75a9de -> lot10c-prepared/6b-a01e6faf\n",
+      "exactRefVerified": true
+    },
+    {
+      "lane": "8a",
+      "checkout": "/workspace/sites/sra-lot8a-motif-20261111/.sites-checkout",
+      "commit": "7c10456a675f0e9a93089a0f679e96677ede03af",
+      "targetRef": "refs/remotes/lot10c-prepared/8a-7c10456a",
+      "exitCode": 0,
+      "seconds": 0.40553722999902675,
+      "stdout": "",
+      "stderr": "From /workspace/sites/sra-lot8a-motif-20261111/.sites-checkout\n * [new ref]           7c10456a675f0e9a93089a0f679e96677ede03af -> lot10c-prepared/8a-7c10456a\n",
+      "exactRefVerified": true
+    }
+  ],
+  "status": "passed",
+  "finishedAt": "2026-11-11T19:11:17.671536+00:00",
+  "seconds": 16.306501675997424
+}

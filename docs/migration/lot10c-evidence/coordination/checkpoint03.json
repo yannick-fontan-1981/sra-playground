@@ -1,0 +1,317 @@
+{
+  "schema": "logos-engine.lot10c.source-checkpoint-closure.v1",
+  "recordedAt": "2026-11-11T19:11:43.248790+00:00",
+  "sourceOnly": true,
+  "published": false,
+  "baseHead": "649789e7ff519396bec6ad2b6e4572fb6ee6765f",
+  "head": "3ea5e39b7c3f18ea84baf485a2494a9b948e0984",
+  "remoteHead": "3ea5e39b7c3f18ea84baf485a2494a9b948e0984",
+  "remoteVerified": true,
+  "verifiedAt": "2026-11-11T18:33:49.901Z",
+  "remoteVerificationQualification": "Retained actual ordinary push receipts; no new network verification in this closure.",
+  "workingTreeCleanAtOriginalVerification": true,
+  "workingTreeStatusBeforeThisClosure": [
+    "?? docs/migration/lot10c-evidence/prepared-composition01/"
+  ],
+  "workingTreeQualification": "Concurrent prospective composition metadata is separate from the completed historical checkpoint; no cleanliness claim for the checkout after this documentary closure.",
+  "preservedPaths": 87,
+  "plannedRawBytes": 90297853,
+  "plan": {
+    "path": "docs/migration/lot10c-evidence/coordination/checkpoint03-plan.json",
+    "sha256": "71c336e4906fd791a0a0bf101b6a396614055807cc3323b311b7686cb51c1199",
+    "bytes": 46654,
+    "byteIdenticalToOriginal": true,
+    "original": {
+      "path": "/workspace/scratch/059a057ef035/lot10c-final-checkpoint-plan.json",
+      "sha256": "71c336e4906fd791a0a0bf101b6a396614055807cc3323b311b7686cb51c1199",
+      "bytes": 46654
+    }
+  },
+  "batches": [
+    {
+      "number": 1,
+      "commit": {
+        "schema": "lot10c.checkpoint-batch-commit.v1",
+        "batch": 1,
+        "plannedRawBytes": 23421432,
+        "fileCount": 43,
+        "previousHead": "649789e7ff519396bec6ad2b6e4572fb6ee6765f",
+        "head": "c29848d3d66ff615845cdab00843d7f364268d3d",
+        "committedAt": "2026-11-11T18:32:27.564906+00:00",
+        "published": false
+      },
+      "push": {
+        "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+        "ref": "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111",
+        "head": "c29848d3d66ff615845cdab00843d7f364268d3d",
+        "remote": "c29848d3d66ff615845cdab00843d7f364268d3d",
+        "remoteVerified": true,
+        "sourceOnly": true,
+        "published": false,
+        "pendingRegressionEvidenceFiles": 44,
+        "workingTreeQualification": "Only declared terminal regression evidence remains untracked for a later transport batch",
+        "verifiedAt": "2026-11-11T18:32:41.557Z"
+      },
+      "commitReceipt": {
+        "path": "/workspace/scratch/059a057ef035/lot10c-final-checkpoint-batch-1-commit.json",
+        "sha256": "05557f5c48505dac837683a98db13e1fd0df737c95c237bb8ca32dd1c71eb0e0",
+        "bytes": 307
+      },
+      "pushReceipt": {
+        "path": "/workspace/scratch/059a057ef035/lot10c-final-checkpoint-batch-1-push.json",
+        "sha256": "ef926c97dd014f74942b125df2fca68fb8ef3549988a00deb068704ccbf076ba",
+        "bytes": 477
+      },
+      "plannedPathsExactlyMatchCommittedDiff": true
+    },
+    {
+      "number": 2,
+      "commit": {
+        "schema": "lot10c.checkpoint-batch-commit.v1",
+        "batch": 2,
+        "plannedRawBytes": 22685793,
+        "fileCount": 22,
+        "previousHead": "c29848d3d66ff615845cdab00843d7f364268d3d",
+        "head": "a81673bd080c917155105c8236e2fe205a8c8472",
+        "committedAt": "2026-11-11T18:32:47.684495+00:00",
+        "published": false
+      },
+      "push": {
+        "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+        "ref": "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111",
+        "head": "a81673bd080c917155105c8236e2fe205a8c8472",
+        "remote": "a81673bd080c917155105c8236e2fe205a8c8472",
+        "remoteVerified": true,
+        "sourceOnly": true,
+        "published": false,
+        "pendingRegressionEvidenceFiles": 22,
+        "workingTreeQualification": "Only declared terminal regression evidence remains untracked for a later transport batch",
+        "verifiedAt": "2026-11-11T18:32:58.525Z"
+      },
+      "commitReceipt": {
+        "path": "/workspace/scratch/059a057ef035/lot10c-final-checkpoint-batch-2-commit.json",
+        "sha256": "db3d31f8e591d9d04f8f4da57bc02dffa82222618ff53246f99beed7f64f499d",
+        "bytes": 307
+      },
+      "pushReceipt": {
+        "path": "/workspace/scratch/059a057ef035/lot10c-final-checkpoint-batch-2-push.json",
+        "sha256": "6d4969aaa78eea6c3f1637d0e90d152283ec1d5e13c5d00b180347c5353822ad",
+        "bytes": 477
+      },
+      "plannedPathsExactlyMatchCommittedDiff": true
+    },
+    {
+      "number": 3,
+      "commit": {
+        "schema": "lot10c.checkpoint-batch-commit.v1",
+        "batch": 3,
+        "plannedRawBytes": 24044573,
+        "fileCount": 21,
+        "previousHead": "a81673bd080c917155105c8236e2fe205a8c8472",
+        "head": "91f59cef7db1e4697cf80324e41ef48635d7c63f",
+        "committedAt": "2026-11-11T18:33:21.334896+00:00",
+        "published": false
+      },
+      "push": {
+        "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+        "ref": "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111",
+        "head": "91f59cef7db1e4697cf80324e41ef48635d7c63f",
+        "remote": "91f59cef7db1e4697cf80324e41ef48635d7c63f",
+        "remoteVerified": true,
+        "sourceOnly": true,
+        "published": false,
+        "pendingRegressionEvidenceFiles": 1,
+        "workingTreeQualification": "Only declared terminal regression evidence remains untracked for a later transport batch",
+        "verifiedAt": "2026-11-11T18:33:32.181Z"
+      },
+      "commitReceipt": {
+        "path": "/workspace/scratch/059a057ef035/lot10c-final-checkpoint-batch-3-commit.json",
+        "sha256": "eacaf1eaf51871da397b586f6a150803ded4d8fe03c4564873be73d367d3f83a",
+        "bytes": 307
+      },
+      "pushReceipt": {
+        "path": "/workspace/scratch/059a057ef035/lot10c-final-checkpoint-batch-3-push.json",
+        "sha256": "27b768c49cd87855055bc538153ea059f1bbc0588ec23b30b4bd0569991b2434",
+        "bytes": 476
+      },
+      "plannedPathsExactlyMatchCommittedDiff": true
+    },
+    {
+      "number": 4,
+      "commit": {
+        "schema": "lot10c.checkpoint-batch-commit.v1",
+        "batch": 4,
+        "plannedRawBytes": 20146055,
+        "fileCount": 1,
+        "previousHead": "91f59cef7db1e4697cf80324e41ef48635d7c63f",
+        "head": "3ea5e39b7c3f18ea84baf485a2494a9b948e0984",
+        "committedAt": "2026-11-11T18:33:38.073371+00:00",
+        "published": false
+      },
+      "push": {
+        "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+        "ref": "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111",
+        "head": "3ea5e39b7c3f18ea84baf485a2494a9b948e0984",
+        "remote": "3ea5e39b7c3f18ea84baf485a2494a9b948e0984",
+        "remoteVerified": true,
+        "sourceOnly": true,
+        "published": false,
+        "pendingRegressionEvidenceFiles": 0,
+        "workingTreeQualification": "clean",
+        "verifiedAt": "2026-11-11T18:33:49.901Z"
+      },
+      "commitReceipt": {
+        "path": "/workspace/scratch/059a057ef035/lot10c-final-checkpoint-batch-4-commit.json",
+        "sha256": "5d17614ff9bb161ffac08ecbae2526bd22efb84a328e084ddb0fc5b1d5938911",
+        "bytes": 306
+      },
+      "pushReceipt": {
+        "path": "/workspace/scratch/059a057ef035/lot10c-final-checkpoint-batch-4-push.json",
+        "sha256": "a8c58692edf64baab549d7dced7f2536afcb955ee0862d79012c655e54c5afdd",
+        "bytes": 393
+      },
+      "plannedPathsExactlyMatchCommittedDiff": true
+    }
+  ],
+  "pathVerification": {
+    "status": "passed",
+    "range": "649789e7ff519396bec6ad2b6e4572fb6ee6765f..3ea5e39b7c3f18ea84baf485a2494a9b948e0984",
+    "method": "git diff --name-only --no-renames for whole range and each batch; git ls-tree size metadata only",
+    "planPathCount": 87,
+    "committedPathCount": 87,
+    "unionExactlyMatchesCommittedDiff": true,
+    "everyBatchExactlyMatchesCommittedDiff": true,
+    "committedSizesExactlyMatchPlan": true,
+    "committedRawBytes": 90297853
+  },
+  "nativeVerification": {
+    "status": "passed",
+    "method": "Exact Git subtree identities between transport commits; no native payload read or execution.",
+    "sourceSubtree": "src",
+    "baseSourceTree": "eaeb2429ec72cee741fbeada98ff3160629f7e31",
+    "finalSourceTree": "eaeb2429ec72cee741fbeada98ff3160629f7e31",
+    "nativeSubtree": "src/logos-engine",
+    "baseNativeTree": "6f307966d6a6a83cee616040158f7485bda59f2f",
+    "finalNativeTree": "6f307966d6a6a83cee616040158f7485bda59f2f",
+    "sourceUnchanged": true,
+    "nativeUnchanged": true
+  },
+  "latestSiteObservation": {
+    "schema": "lot10c.site-final-source-checkpoint-observation.v1",
+    "observedAt": "2026-11-11T18:34:39.992Z",
+    "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+    "status": "active",
+    "latestVersionNumber": 103,
+    "accessMode": "custom",
+    "currentUserRole": "owner",
+    "externalVisitorInvitesEnabled": true,
+    "sourceOnlyCheckpoint": true,
+    "lot10cPublished": false
+  },
+  "siteObservationReceipt": {
+    "path": "/workspace/scratch/059a057ef035/lot10c-final-site-observation.json",
+    "sha256": "41c21dee8cc0064660105bfdcf6a8c333f13e797c52bd16be07d51aef120fc06",
+    "bytes": 340
+  },
+  "historicalHandoff": {
+    "schema": "lot10c.development-checkpoint-handoff.v1",
+    "sourceOnly": true,
+    "published": false,
+    "head": "3ea5e39b7c3f18ea84baf485a2494a9b948e0984",
+    "remoteHead": "3ea5e39b7c3f18ea84baf485a2494a9b948e0984",
+    "remoteVerified": true,
+    "verifiedAt": "2026-11-11T18:33:49.901Z",
+    "workingTreeCleanAtVerification": true,
+    "pendingFilesPreserved": 87,
+    "plannedRawBytes": 90297853,
+    "pushes": [
+      {
+        "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+        "ref": "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111",
+        "head": "c29848d3d66ff615845cdab00843d7f364268d3d",
+        "remote": "c29848d3d66ff615845cdab00843d7f364268d3d",
+        "remoteVerified": true,
+        "sourceOnly": true,
+        "published": false,
+        "pendingRegressionEvidenceFiles": 44,
+        "workingTreeQualification": "Only declared terminal regression evidence remains untracked for a later transport batch",
+        "verifiedAt": "2026-11-11T18:32:41.557Z"
+      },
+      {
+        "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+        "ref": "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111",
+        "head": "a81673bd080c917155105c8236e2fe205a8c8472",
+        "remote": "a81673bd080c917155105c8236e2fe205a8c8472",
+        "remoteVerified": true,
+        "sourceOnly": true,
+        "published": false,
+        "pendingRegressionEvidenceFiles": 22,
+        "workingTreeQualification": "Only declared terminal regression evidence remains untracked for a later transport batch",
+        "verifiedAt": "2026-11-11T18:32:58.525Z"
+      },
+      {
+        "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+        "ref": "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111",
+        "head": "91f59cef7db1e4697cf80324e41ef48635d7c63f",
+        "remote": "91f59cef7db1e4697cf80324e41ef48635d7c63f",
+        "remoteVerified": true,
+        "sourceOnly": true,
+        "published": false,
+        "pendingRegressionEvidenceFiles": 1,
+        "workingTreeQualification": "Only declared terminal regression evidence remains untracked for a later transport batch",
+        "verifiedAt": "2026-11-11T18:33:32.181Z"
+      },
+      {
+        "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+        "ref": "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111",
+        "head": "3ea5e39b7c3f18ea84baf485a2494a9b948e0984",
+        "remote": "3ea5e39b7c3f18ea84baf485a2494a9b948e0984",
+        "remoteVerified": true,
+        "sourceOnly": true,
+        "published": false,
+        "pendingRegressionEvidenceFiles": 0,
+        "workingTreeQualification": "clean",
+        "verifiedAt": "2026-11-11T18:33:49.901Z"
+      }
+    ],
+    "latestSiteObservation": {
+      "schema": "lot10c.site-final-source-checkpoint-observation.v1",
+      "observedAt": "2026-11-11T18:34:39.992Z",
+      "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+      "status": "active",
+      "latestVersionNumber": 103,
+      "accessMode": "custom",
+      "currentUserRole": "owner",
+      "externalVisitorInvitesEnabled": true,
+      "sourceOnlyCheckpoint": true,
+      "lot10cPublished": false
+    },
+    "browserCleanup": {
+      "tabId": "6",
+      "closed": true,
+      "verification": "Fresh tab inventory contains only existing about:blank tab2; no game action or reload executed."
+    },
+    "postPushDocumentaryReceiptAddition": {
+      "status": "stopped_by_fresh_5c_quiet_guard",
+      "repositoryReadOrMutationPerformed": false,
+      "allQualificationFilesAlreadyCommittedAndPushed": true
+    },
+    "nextWork": "Await actual published0.63,0.64,0.65 before final10C integration/cost/publication; no queued or automatic work."
+  },
+  "historicalHandoffReceipt": {
+    "path": "/workspace/shared/sra-coordination/lot10c-checkpoint-3ea5e39b-handoff.json",
+    "sha256": "36e334fd6b21808605f61d36e8a2f85aaac3254cbcfa64f14dd538ff847e0fd4",
+    "bytes": 3009
+  },
+  "scope": {
+    "metadataOnly": true,
+    "casePayloadContentsRead": false,
+    "caseClockContentsRead": false,
+    "archiveContentsRead": false,
+    "nativeExecuted": false,
+    "testsExecuted": false,
+    "networkUsed": false,
+    "gitMutationsPerformed": false
+  },
+  "qualification": "Closes the already verified 87-path source checkpoint. The earlier optional closure was stopped by the fresh 5C quiet guard before repository reads or mutations. Prospective source composition is starting; actual 0.63, 0.64 and 0.65 publications remain required for final reconciliation. Final 10C cost and publication remain pending; observed published baseline is Site 103 / native 0.62."
+}
