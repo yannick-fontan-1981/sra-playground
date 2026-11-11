@@ -1,0 +1,85 @@
+{
+  "schema": "logos-engine.lot8a.final-summary-documentary-review.v1",
+  "status": "passed",
+  "reviewedAt": "2026-11-11T22:25:18.044744+00:00",
+  "reviewer": "proof_review",
+  "scope": "Bounded documentary consistency review of the qualification summary and current LOT8A integration roadmap block; prior detailed evidence reviews are reused without repeating capture or native hashing.",
+  "inputs": {
+    "qualificationSummary": {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/qualification-summary.json",
+      "bytes": 19453,
+      "sha256": "0b6b27f7a8e65d8dde4f55d9fcf857a6dd8a4a9b6371b9287d140cd2696626da"
+    },
+    "roadmapBlock": {
+      "path": "docs/migration/v6-delivery-roadmap.md",
+      "startMarker": "<!-- LOT8A_INTEGRATION_START -->",
+      "endMarker": "<!-- LOT8A_INTEGRATION_END -->",
+      "includesMarkers": true,
+      "bytes": 10529,
+      "sha256": "a5a4b09b89b706feb657278f85f9f724495a61d75cab98cf0c461e0a69768123"
+    },
+    "prospectiveCostPlan": {
+      "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/contract/cost-qualification-plan.json",
+      "bytes": 8575,
+      "sha256": "ae8fcf8d1eeca229a882f9d60d4e7744985572f2ed38e8a11741ae51f4a94f47"
+    }
+  },
+  "findings": [
+    {
+      "topic": "Inherited functional freeze",
+      "result": "consistent",
+      "detail": "145 files and 5,606 passed tests remain inherited evidence for the unchanged freeze. The closure does not claim a fresh full suite. Entry coverage 67/76 (88.2%), 209 component-verified modules, 147 partial and 1,013 pending are separate populations; all six complete-migration gates remain false."
+    },
+    {
+      "topic": "Common component proofs",
+      "result": "consistent",
+      "detail": "Binding 6,818/6,818, Motif 20/20 and SelectedRigid 56 events, 22 ablations and 7 action-changing ablations agree with reviewed evidence and are not added to the 5,606-test population."
+    },
+    {
+      "topic": "Recorded regressions",
+      "result": "consistent",
+      "detail": "11 cases and 187 checks are reconciled from ten successful series-02 cases plus WEAV-03. Failed series 02 remains 10/11 and 170/187. WEAV 81 actions, 81 prefixes and 3 levels is a functional recovery; 1,536 MiB is the Node old-space budget, not an RSS ceiling or an official cost result."
+    },
+    {
+      "topic": "Prepared work forms and graph qualification",
+      "result": "consistent",
+      "detail": "Four sessions and 31 actions per role give eight sessions and 62 actions. The 64 reader checks, 58 paired graph points, 116 role observations, 168 trace-clock bounds and 290 checkpoint coverage entries remain distinct. All 21,956 recorded differences are retained: 20,893 source digests, 1,055 exact created timestamp occurrences and eight Motif node additions; zero are unattributed."
+    },
+    {
+      "topic": "Qualification limits",
+      "result": "consistent",
+      "detail": "The prepared parent is not actual published 0.64. preparedOnly=true, officialPerformanceEligible=false and strictCommonGraphParity=false remain explicit. No official cost session, final publication, full original caller parity or general three-active-owner episode proof is asserted."
+    },
+    {
+      "topic": "Performance decision",
+      "result": "consistent",
+      "detail": "The prospective protocol has 40 ABBA trials: 32 measured sessions/400 actions and eight excluded warmups/24 actions. Each game must independently stay strictly below +10% in complete-session median duration; phase overruns may be accepted if both global criteria pass, with all samples and diagnostics retained."
+    },
+    {
+      "topic": "Ordinary work and next steps",
+      "result": "consistent",
+      "detail": "Ordinary work proceeds in the dedicated checkout and branch without a global lock or waiting for other publications. 8B remains source preparation only, with its transfer contract and independent component corpus next. Final 8A release still requires the actual 0.63/0.64 lineage, affected final qualification, official cost acceptance and private publication under short exclusivity."
+    },
+    {
+      "topic": "Retained initial inventory failure",
+      "result": "corrected",
+      "detail": "The roadmap now says JSON matérialisé après l’échec du premier inventaire, accurately describing the retained terminal missing-module failure rather than an interrupted process."
+    }
+  ],
+  "priorReviewsReliedUpon": [
+    "docs/migration/lot8a-evidence/qualification-provisional-02/review/common-integrity-review.json",
+    "docs/migration/lot8a-evidence/qualification-provisional-02/review/recorded-regression-reconciliation-review.json",
+    "docs/migration/lot8a-evidence/qualification-provisional-02/review/work-form-qualification-review.json"
+  ],
+  "execution": {
+    "gamesOrNativeSessionsRun": 0,
+    "qualificationReruns": 0,
+    "largeArtifactVerificationRepeated": false,
+    "locksAcquired": false,
+    "commitsMade": false,
+    "modifiedExistingFiles": false,
+    "newArtifactOnly": "review/final-summary-review.json"
+  },
+  "remainingCorrections": [],
+  "blockers": []
+}
