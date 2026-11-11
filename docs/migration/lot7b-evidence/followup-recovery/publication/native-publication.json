@@ -1,0 +1,45 @@
+{
+  "schema": "logos-engine.followup-native-publication.v1",
+  "recordedAt": "2026-11-11T14:41:01.402Z",
+  "status": "succeeded",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "siteVersion": 98,
+  "nativeVersion": "0.61.0",
+  "nativeDigest": "f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279",
+  "nativeFiles": 306,
+  "commit": "653e40a4f45df8ec8c6bda005004c7cdb8df074a",
+  "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_b6a726c7545c819190323d5ac24110e6",
+  "deploymentId": "appgdep_6af47df68da08191bc9cd0290615b53d",
+  "deploymentStatus": "succeeded",
+  "deploymentUpdatedAt": "2026-11-11T14:39:04.455525+00:00",
+  "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+  "archive": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_00000000558c820e928ddebdaf899a7e",
+    "content_hash": "sha256:13a7d25939ceb816f8a20db7d398cf6bf3b760785f076f3bc86b07218ad11dbc",
+    "size_bytes": 29992960,
+    "file_count": 75
+  },
+  "envSetRevision": 0,
+  "access": {
+    "currentUserRole": "owner",
+    "accessMode": "custom",
+    "policyRevision": 3,
+    "allowedUsers": 1,
+    "allowedGroups": 0,
+    "externalVisitors": 0,
+    "preservedOwnerOnly": true
+  },
+  "predecessor": {
+    "siteVersion": 97,
+    "nativeVersion": "0.60.0",
+    "commit": "98336fba4e696a51c90ff7f7b37b8bdf95f34847"
+  },
+  "evidence": {
+    "publicationInputs": "docs/migration/lot7b-evidence/followup-recovery/integrated-final/publication-inputs.json",
+    "transport": "docs/migration/lot7b-evidence/followup-recovery/publication/source-transport-completion.json",
+    "finalRecheck": "docs/migration/lot7b-evidence/followup-recovery/publication/final-source-recheck.json",
+    "globalCost": "docs/migration/lot7b-evidence/followup-recovery/performance/global-budget-decision.json"
+  },
+  "qualification": "Actual terminal private Site deployment, saved-version source and post-publication owner-only access were retrieved from Sites. Native0.61 and its complete fresh evidence are published; documentation closure is a separate subsequent source publication."
+}

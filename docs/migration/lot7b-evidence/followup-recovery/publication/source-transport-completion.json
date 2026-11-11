@@ -1,0 +1,164 @@
+{
+  "schema": "logos-engine.followup-source-transport-completion.v1",
+  "recordedAt": "2026-11-11T14:41:01.195948+00:00",
+  "status": "passed",
+  "plan": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/publication/source-transport-plan.json",
+    "sha256": "8c3dcd7708004828a6af0917c47b3cb77032e4725e2f6bfc3c1424587ca9a3c6",
+    "bytes": 215498
+  },
+  "steps": [
+    {
+      "step": 1,
+      "kind": "complete_source",
+      "commit": "c7cff23a15898d581a47ec4a849ae87281d97183",
+      "tree": "20c1d77570cf87705e086979beab8371ed9bf0ac",
+      "previousRemoteCommitVerified": "98336fba4e696a51c90ff7f7b37b8bdf95f34847",
+      "rawMissingObjectBytes": 4545501,
+      "remoteCheck": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/publication/source-step-01-remote-before.json",
+        "sha256": "39b57979fa95c63eb2a80e5c8ab7bdcd613a63bdfe9e65e35014a7f3612b3f8b",
+        "bytes": 469
+      },
+      "standardSourceHelperResult": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/publication/source-step-01-workflow.json",
+        "sha256": "67e79a9e2ee1ccc63ab18a7d731da2cdad0f70d5ca6069f8f15001c7f9776ebd",
+        "bytes": 318
+      },
+      "applicationVerification": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/publication/source-step-01-application-verification.json",
+        "sha256": "414b94c76f655a001135a71474dfe72d1b50b22c51ec2ca7539b3db556246491",
+        "bytes": 14612
+      },
+      "archiveSha256": "a822e5d0a1127cefa85f53ce20f8849e3b2a1a6a97622862b9ef3a2e29924be9",
+      "regularMembersVerified": 75
+    },
+    {
+      "step": 2,
+      "kind": "evidence",
+      "commit": "c22331e9f8fba3d4d6b5f5e210ce2885b6b08864",
+      "tree": "56f2b6a38737c94843dc91d62e32dd33fb53e876",
+      "previousRemoteCommitVerified": "c7cff23a15898d581a47ec4a849ae87281d97183",
+      "rawMissingObjectBytes": 40277531,
+      "remoteCheck": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/publication/source-step-02-remote-before.json",
+        "sha256": "aa3db546ad184fdf16256c027663654c52a4aba28e35a471cad32d595336fa67",
+        "bytes": 469
+      },
+      "standardSourceHelperResult": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/publication/source-step-02-workflow.json",
+        "sha256": "877aea139519820a3902e66a6d273eb25b821c00d7123742f715a41969a941d9",
+        "bytes": 318
+      },
+      "applicationVerification": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/publication/source-step-02-application-verification.json",
+        "sha256": "45f870828d45f20cf4a29e3fd3e885f6e6667f84e93d5e56a0d277ad74414fd4",
+        "bytes": 14612
+      },
+      "archiveSha256": "1871db79441356dd7ee6772f500c770a2b62ff96177e193e9ddcc2a5f02968dc",
+      "regularMembersVerified": 75
+    },
+    {
+      "step": 3,
+      "kind": "evidence",
+      "commit": "0750ff3ed11b72441e642ddd17efdd66e83795cd",
+      "tree": "e15e4569278e9ab1497ad73613d80a008e43e332",
+      "previousRemoteCommitVerified": "c22331e9f8fba3d4d6b5f5e210ce2885b6b08864",
+      "rawMissingObjectBytes": 40400843,
+      "remoteCheck": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/publication/source-step-03-remote-before.json",
+        "sha256": "be2a777325fa0d8e726d6402d5c2cdebe4816d4fbe9308308726139197782b60",
+        "bytes": 469
+      },
+      "standardSourceHelperResult": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/publication/source-step-03-workflow.json",
+        "sha256": "8ff7e7f540eeb321d8b8259772a36951ebe0681b0f825ca54a7e050e9995d288",
+        "bytes": 318
+      },
+      "applicationVerification": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/publication/source-step-03-application-verification.json",
+        "sha256": "b6e67f5833b8493507d9d9e7d3bd3ee38d45b22a231bf151ca98da5541a2e77d",
+        "bytes": 14612
+      },
+      "archiveSha256": "80a4aaeb48cd00d3f315ffaf59e0b9f7ab63feeba27359067aaf57b4b0659506",
+      "regularMembersVerified": 75
+    },
+    {
+      "step": 4,
+      "kind": "evidence",
+      "commit": "7b97e67d07c93d6ad499a6b9c2ecda773d030d0c",
+      "tree": "b9645f3ce7b5e2322d20980412e7743f95b87ca3",
+      "previousRemoteCommitVerified": "0750ff3ed11b72441e642ddd17efdd66e83795cd",
+      "rawMissingObjectBytes": 10642506,
+      "remoteCheck": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/publication/source-step-04-remote-before.json",
+        "sha256": "b4ed734bfe787c3c2156f6a43bc2b48740195b69441364219aad2c309e0fc74d",
+        "bytes": 469
+      },
+      "standardSourceHelperResult": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/publication/source-step-04-workflow.json",
+        "sha256": "9275573bcbf647ed2fcb425488258582102b2871208cc8a2f0061cc32c1225c7",
+        "bytes": 318
+      },
+      "applicationVerification": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/publication/source-step-04-application-verification.json",
+        "sha256": "17a87b9158b5c5f097ce49783df4eab2f08cd32f82b719aa48b030acaecbf213",
+        "bytes": 14612
+      },
+      "archiveSha256": "5e53e55566d1b418bc2ec1a70f9936cc7a0602d44f642a3a4040f0fa703f573a",
+      "regularMembersVerified": 75
+    },
+    {
+      "step": 5,
+      "kind": "final_history_merge",
+      "commit": "653e40a4f45df8ec8c6bda005004c7cdb8df074a",
+      "tree": "b9645f3ce7b5e2322d20980412e7743f95b87ca3",
+      "previousRemoteCommitVerified": "7b97e67d07c93d6ad499a6b9c2ecda773d030d0c",
+      "rawMissingObjectBytes": 1328397,
+      "remoteCheck": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/publication/source-step-05-remote-before.json",
+        "sha256": "c4a01bdc367fdf1deff121d8613f0ab270a917dbf876628794fa01496ef3617b",
+        "bytes": 469
+      },
+      "standardSourceHelperResult": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/publication/source-step-05-workflow.json",
+        "sha256": "e490f14ebf467af324972fa6988bff7d40c2c5fef2ea98ac2756c9b804c0edc1",
+        "bytes": 318
+      },
+      "applicationVerification": {
+        "path": "docs/migration/lot7b-evidence/followup-recovery/publication/source-step-05-application-verification.json",
+        "sha256": "a8031142742f26d98f1f0fb5a48654db5c13e5f356aa59e20022eceb12221c23",
+        "bytes": 14612
+      },
+      "archiveSha256": "75dca9fb72b42929c852dac75f61247dc537293ad4f1f5dc369ab3a281158909",
+      "regularMembersVerified": 75
+    }
+  ],
+  "sourcePushes": 5,
+  "forcePush": false,
+  "intermediateSiteDeployments": 0,
+  "applicationMemberComparisons": 375,
+  "allArchivesMatchValidatedBuild": true,
+  "finalCommit": "653e40a4f45df8ec8c6bda005004c7cdb8df074a",
+  "retainedOriginalTargetCommit": "51ee27c1be6664d7edf2efa1b0daed7c8e8c86b1",
+  "finalTreeExactlyMatchesRetainedTarget": true,
+  "totalNewReachableRawObjectBytes": 97194778,
+  "maximumStepRawObjectBytes": 40400843,
+  "rawBytesAreNotNetworkWireBytes": true,
+  "finalSourceRecheck": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/publication/final-source-recheck.json",
+    "sha256": "3f01653cebd36329052a3f9bb902294a2a620cdb764171236eaa60441613a39c",
+    "bytes": 1627
+  },
+  "applicationVerifierRetainedCopy": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/publication/verify-application-tar.py",
+    "sha256": "d26a508c8878a462dff2193ac1c287bb7258914367918c60cec1beb7ffc9e9e7",
+    "bytes": 14492
+  },
+  "remoteCheckRetainedCopy": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/publication/check-remote-head.py",
+    "sha256": "c2f36bf7ac0e85d7bebe6ac89f597c6b9d9e8373d1c82dbf51d844bde03912e5",
+    "bytes": 2906
+  },
+  "qualification": "Executed the immutable five-step plan using complete detached checkouts and the standard Sites helper. Each step first verified exact HEAD/tree, clean state and expected remote main; each push was ordinary/non-forced and was verified by the helper. Every application tar was independently compared to all75 pinned build members. No intermediate Site deployment occurred."
+}

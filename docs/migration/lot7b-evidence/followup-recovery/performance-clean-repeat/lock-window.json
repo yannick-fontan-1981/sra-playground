@@ -1,0 +1,57 @@
+{
+  "schema": "logos-engine.followup-repeat-exclusive-window.v1",
+  "status": "passed",
+  "generator": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/tools/repeat-evidence.py",
+    "sha256": "6dbf91bfad102dcd5b576fa00a8f36972ebfeed2d29fcf33aefdfae9fef4f517",
+    "bytes": 41745
+  },
+  "requestId": "lot7-followup-clean-repeat-f8d5097-final",
+  "lockPath": "/workspace/shared/sra-coordination/performance.lock",
+  "mode": "exclusive",
+  "acquiredAt": "2026-11-11T15:22:07.828565+00:00",
+  "readiness": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/readiness.json",
+    "sha256": "42e6765ca914e1f30c92deb0cf86b1b7792cd11bc671fe591b7f3610595c78b3",
+    "bytes": 726412
+  },
+  "declaration": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/repeat-declaration.json",
+    "sha256": "5dbecd1f377dd9d5e5eb64e8338510c2d48b3996b17d53b1fb4b41c3c2d90f7d",
+    "bytes": 20270
+  },
+  "laneStatusStart": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/lane-status-start.json",
+    "sha256": "403ddf1c9c2b3f85e38465940f8f3fdde064d1b4e699fb611e4c215dff568736",
+    "bytes": 1382
+  },
+  "command": [
+    "python",
+    "-B",
+    "/workspace/sites/sra-lot7-followup-recovery-20261111/.sites-checkout/scripts/run-native-cost-window.py",
+    "/workspace/sites/sra-lot7-baseline6a-recovery-20261111",
+    "/workspace/sites/sra-lot7-followup-recovery-20261111/.sites-checkout/docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat",
+    "/workspace/sites/sra-lot7-followup-recovery-20261111/.sites-checkout/docs/migration/lot6a-evidence/integrated-final-02/source-manifest.json",
+    "/workspace/sites/sra-lot7-followup-recovery-20261111/.sites-checkout/docs/migration/lot7b-evidence/followup-recovery/integrated-final/source-manifest.json"
+  ],
+  "windowExitCode": 0,
+  "strictExitCode": 0,
+  "window": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/window.json",
+    "sha256": "4359b2eb47e7aaa291eca139f741f9d1faede407c24ea79c828ef11c06b80f9a",
+    "bytes": 11539
+  },
+  "strictVerification": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/strict-work-verification.json",
+    "sha256": "6565e260b6b0fb4152b159b28f13a2aa102be4490e44023bc8eedfeb8aebb58a",
+    "bytes": 17139
+  },
+  "heldThroughStrictVerification": true,
+  "laneStatusEnd": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/lane-status-end.json",
+    "sha256": "64e7554bff1a4f977094be8497ecf0762156b7db2717ae46bf6f8f8b16811a18",
+    "bytes": 1374
+  },
+  "laneStatusPayloadsUnchanged": true,
+  "finishedHoldingAt": "2026-11-11T15:31:04.872630+00:00"
+}
