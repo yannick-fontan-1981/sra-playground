@@ -1,0 +1,196 @@
+{
+  "schema": "logos-engine.lot8a.targeted-materialization.v1",
+  "startedAt": "2026-11-11T20:49:37.441150+00:00",
+  "plan": {
+    "path": "docs/migration/lot8a-evidence/qualification-provisional-01/preparation/materialization-plan.json",
+    "sha256": "48c0884c934d7ef4ba61ac408a45faeac55e1427c3886f15b75275b9926d1345",
+    "bytes": 9877
+  },
+  "status": "passed",
+  "results": [
+    {
+      "case": "catr-051",
+      "result": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz",
+        "sha256": "379ce17151369af5ba39e205cc8b2882aa4e97a3dd8909b9c831a7b2b0ac7fb6",
+        "bytes": 1649205,
+        "manifest": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz.parts.json",
+        "parts": 2,
+        "restored": true
+      },
+      "restoredBaseline": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz",
+        "sha256": "379ce17151369af5ba39e205cc8b2882aa4e97a3dd8909b9c831a7b2b0ac7fb6",
+        "bytes": 1649205
+      }
+    },
+    {
+      "case": "rswp-051",
+      "result": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz",
+        "sha256": "5de1bbc32db1a3dffdf5c350ef70ca90142007c6ebc7735f8b8c56e9fdfa00ba",
+        "bytes": 2585868,
+        "manifest": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz.parts.json",
+        "parts": 3,
+        "restored": true
+      },
+      "restoredBaseline": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz",
+        "sha256": "5de1bbc32db1a3dffdf5c350ef70ca90142007c6ebc7735f8b8c56e9fdfa00ba",
+        "bytes": 2585868
+      }
+    },
+    {
+      "case": "fogw-051",
+      "result": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz",
+        "sha256": "fe037e48df8dd3a7c302a5e85355b2b9555daa6d9d8aa56f7772fc363732726c",
+        "bytes": 8174480,
+        "manifest": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz.parts.json",
+        "parts": 10,
+        "restored": true
+      },
+      "restoredBaseline": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz",
+        "sha256": "fe037e48df8dd3a7c302a5e85355b2b9555daa6d9d8aa56f7772fc363732726c",
+        "bytes": 8174480
+      }
+    },
+    {
+      "case": "vois-051",
+      "result": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz",
+        "sha256": "39a6e6551cf94a48842b154afdc2256dafd88fd93404e4776bd67b24d5a4796d",
+        "bytes": 10678168,
+        "manifest": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.parts.json",
+        "parts": 12,
+        "restored": true
+      },
+      "restoredBaseline": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz",
+        "sha256": "39a6e6551cf94a48842b154afdc2256dafd88fd93404e4776bd67b24d5a4796d",
+        "bytes": 10678168
+      }
+    },
+    {
+      "case": "conn-050",
+      "result": {
+        "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz",
+        "sha256": "f3df06cff6d370874889f5183a77dd91ae585060c04ba052d0025cd2db9e3750",
+        "bytes": 2630905,
+        "manifest": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz.parts.json",
+        "parts": 3,
+        "restored": true
+      },
+      "restoredBaseline": {
+        "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz",
+        "sha256": "f3df06cff6d370874889f5183a77dd91ae585060c04ba052d0025cd2db9e3750",
+        "bytes": 2630905
+      }
+    },
+    {
+      "case": "mind-051",
+      "result": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz",
+        "sha256": "6a187286069287a89cedb60ac0f206e0702abae5d8df0dd2615bd43c1bb5c75a",
+        "bytes": 4349054,
+        "manifest": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz.parts.json",
+        "parts": 5,
+        "restored": true
+      },
+      "restoredBaseline": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz",
+        "sha256": "6a187286069287a89cedb60ac0f206e0702abae5d8df0dd2615bd43c1bb5c75a",
+        "bytes": 4349054
+      }
+    },
+    {
+      "case": "weav-051",
+      "result": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz",
+        "sha256": "114906e80b2ff5817adeaa105fd4e84ea2b057d8393b202dc03f35248b350fc3",
+        "bytes": 13577757,
+        "manifest": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.parts.json",
+        "parts": 16,
+        "restored": true
+      },
+      "restoredBaseline": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz",
+        "sha256": "114906e80b2ff5817adeaa105fd4e84ea2b057d8393b202dc03f35248b350fc3",
+        "bytes": 13577757
+      }
+    },
+    {
+      "case": "tria-development-4b",
+      "result": {
+        "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz",
+        "sha256": "e473af537c042d76ce98f13b2cc9be495e7b4ac08ca443251df7804d542bdbbe",
+        "bytes": 3161161,
+        "manifest": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz.parts.json",
+        "parts": 4,
+        "restored": true
+      },
+      "restoredBaseline": {
+        "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz",
+        "sha256": "e473af537c042d76ce98f13b2cc9be495e7b4ac08ca443251df7804d542bdbbe",
+        "bytes": 3161161
+      }
+    },
+    {
+      "case": "craf-055",
+      "result": {
+        "path": "docs/migration/lot7b-evidence/integrated-final/craf-campaign.json.gz",
+        "sha256": "78e86660961ed6d75707c001c021b8c223d205137d86288ac21d09a533b680f2",
+        "bytes": 12767727,
+        "manifest": "docs/migration/lot7b-evidence/integrated-final/craf-campaign.json.gz.parts.json",
+        "parts": 15,
+        "restored": true
+      },
+      "restoredBaseline": {
+        "path": "docs/migration/lot7b-evidence/integrated-final/craf-campaign.json.gz",
+        "sha256": "78e86660961ed6d75707c001c021b8c223d205137d86288ac21d09a533b680f2",
+        "bytes": 12767727
+      }
+    },
+    {
+      "case": "isos-development-4c",
+      "result": {
+        "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-campaign.json.gz",
+        "sha256": "93e59ab1146d4eef7c944a0e1fc0ab7b0d539cc90a074abe424742be011eec37",
+        "bytes": 3027289,
+        "manifest": "docs/migration/lot4c-evidence/development/isos-live-01/isos-campaign.json.gz.parts.json",
+        "parts": 4,
+        "restored": true
+      },
+      "restoredBaseline": {
+        "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-campaign.json.gz",
+        "sha256": "93e59ab1146d4eef7c944a0e1fc0ab7b0d539cc90a074abe424742be011eec37",
+        "bytes": 3027289
+      }
+    },
+    {
+      "case": "kata-060-self-consistency",
+      "result": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/kata-campaign.json.gz",
+        "sha256": "a3318ed5f7d742f63b5923f3e1e46b0d9cfff1d18e767b45c522d61aa354e455",
+        "bytes": 8253174,
+        "manifest": "docs/migration/lot6a-evidence/integrated-final-02/kata-campaign.json.gz.parts.json",
+        "parts": 10,
+        "restored": true
+      },
+      "restoredBaseline": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/kata-campaign.json.gz",
+        "sha256": "a3318ed5f7d742f63b5923f3e1e46b0d9cfff1d18e767b45c522d61aa354e455",
+        "bytes": 8253174
+      }
+    }
+  ],
+  "runtimeExecutions": 0,
+  "oracleExecutions": 0,
+  "replays": 0,
+  "liveGameActions": 0,
+  "partsVerified": 84,
+  "restoredBytes": 70854788,
+  "finishedAt": "2026-11-11T20:49:38.050844+00:00",
+  "elapsedSeconds": 0.6095866739997291
+}

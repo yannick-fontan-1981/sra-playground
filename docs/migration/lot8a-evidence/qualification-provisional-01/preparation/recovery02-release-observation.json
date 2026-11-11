@@ -1,0 +1,41 @@
+{
+  "schema": "logos-engine.lot8a.released-coordination-observation.v1",
+  "observedAt": "2026-11-11T21:02:20.985839+00:00",
+  "lanes": {
+    "lot5c-status.json": {
+      "updated_at": "2026-11-11T20:58:33.876808+00:00",
+      "phase": "available03_preparation_after_new_exclusive_availability_evidence",
+      "quiet_requested": false,
+      "quiet_request_id": "lot5c-cost-a33a5f88-recovery-02",
+      "quiet_released_at": "2026-11-11T20:30:25.610691+00:00",
+      "performance_started": false,
+      "publication_started": false,
+      "request_to_lot8a": "New user continuation:5C observes actual EX availability receipt from10C20:42:14.650043Z on unchanged mutex. Preparing a possible single fresh bounded cycle available03, no request for quiet yet. Finish useful current commands normally. Please retain real execution handles and report terminal/all-worker availability when done. Old recovery02 remains explicitly released; no old ACK will be reused.",
+      "checkpoint_commit": "37f3dabeaf8807045effb81cc3437da53f10ee97"
+    },
+    "lot6b-status.json": {
+      "updated_at": "2026-11-11T21:00:45.570451+00:00",
+      "phase": "functional_proofs_and_final_source_checkpoint_closed_waiting_actual_063",
+      "quiet_requested": false,
+      "quiet_request_id": "lot5c-cost-a33a5f88-recovery-02",
+      "quiet_released_at": null,
+      "performance_started": false,
+      "publication_started": false,
+      "request_to_lot8a": "Final6B source checkpoint1372d2df336f9919d7b5892160936d928720c24c remotely verified; complete proofs parent41cedc1f, core17d6c1aa. Same native322/fa23,5405/5405,11/187 replays390actions, KLOT cold plus original408events/0difference and2semantic negatives, real Vite UI3levels/38actions/30plans and startup Pause/Resume. All root sessions, workers, tab and preview terminal; no queued work. Site rechecked20:59:42 remains103/native0.62 owner-only. No official6B cost or0.64 publication before actual0.63 reconciliation.",
+      "checkpoint_commit": "1372d2df336f9919d7b5892160936d928720c24c"
+    },
+    "lot10c-status.json": {
+      "updated_at": "2026-11-11T21:00:51.169251+00:00",
+      "phase": "formal_tests_and_archived_replays_interruptible",
+      "quiet_requested": false,
+      "quiet_request_id": null,
+      "quiet_released_at": null,
+      "performance_started": false,
+      "publication_started": false,
+      "request_to_lot8a": "No preview held. 10C native329 unchanged; preparing main10case regression plus separateKATA supplement. Actual0.65 still needed after0.63/0.64.",
+      "checkpoint_commit": null
+    }
+  },
+  "qualification": "Named coordination metadata only.5C explicitly released recovery02 at20:30:25.610691UTC after its single600s cycle expired before fresh8A/10C acknowledgments;0EX attempts,0samples,0publication. No new cycle is started by8A.",
+  "next": "Ordinary shared-lock source/functional qualification; final8A cost requires actual0.64, fresh readiness and the existing exclusive mutex."
+}
