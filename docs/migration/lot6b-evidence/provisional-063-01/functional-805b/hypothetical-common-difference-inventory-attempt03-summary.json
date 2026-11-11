@@ -1,0 +1,358 @@
+{
+  "schema": "logos-engine.lot6b-common-diagnostic-summary.v1",
+  "complete": true,
+  "officialQualification": false,
+  "report": "hypothetical-common-difference-inventory-attempt03.json",
+  "execution": "hypothetical-common-difference-inventory-attempt03-execution.json",
+  "sessions": [
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "sessionId": "lot6b-owner-cost-stck-warmup",
+      "points": 6,
+      "commands": 3,
+      "runtimeDigests": [
+        "5471e681af744c14aca5a0777278a711fd21a34c63f2fe03aab1cac6658831df",
+        "38723a2f1b6a933d6052223eae75972c410139c02fe84778b27ffdee9ad9a34f"
+      ]
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "sessionId": "lot6b-owner-cost-stck-measured",
+      "points": 19,
+      "commands": 10,
+      "runtimeDigests": [
+        "5471e681af744c14aca5a0777278a711fd21a34c63f2fe03aab1cac6658831df",
+        "38723a2f1b6a933d6052223eae75972c410139c02fe84778b27ffdee9ad9a34f"
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "sessionId": "lot6b-owner-cost-smlp-warmup",
+      "points": 6,
+      "commands": 3,
+      "runtimeDigests": [
+        "5471e681af744c14aca5a0777278a711fd21a34c63f2fe03aab1cac6658831df",
+        "38723a2f1b6a933d6052223eae75972c410139c02fe84778b27ffdee9ad9a34f"
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "sessionId": "lot6b-owner-cost-smlp-measured",
+      "points": 27,
+      "commands": 15,
+      "runtimeDigests": [
+        "5471e681af744c14aca5a0777278a711fd21a34c63f2fe03aab1cac6658831df",
+        "38723a2f1b6a933d6052223eae75972c410139c02fe84778b27ffdee9ad9a34f"
+      ]
+    }
+  ],
+  "expectedPoints": {
+    "baseline": 58,
+    "candidate": 58
+  },
+  "observedPoints": 58,
+  "commonNodes": 17331,
+  "commonDeltas": 3417,
+  "rawDifferences": 35769,
+  "residualAfterCreatedOnly": 34714,
+  "commonNodeOrCauseResidualExcludingDeclaredOrigin": 0,
+  "categories": {
+    "origin_source_digest_bound_to_role": 20748,
+    "hypothetical_created_envelope_timestamp": 1055,
+    "derived_identity_or_structural_count": 13966
+  },
+  "domains": {
+    "common_node": 18302,
+    "common_delta_node": 3501,
+    "common_delta_identity": 13448,
+    "point_graph_identity": 518
+  },
+  "baselineOnlyNodeOccurrences": 0,
+  "baselineOnlyDeltaOccurrences": 0,
+  "candidateOnlyNodeIds": [
+    "family_state:selected_rigid",
+    "family_activation:selected_rigid"
+  ],
+  "candidateOnlyDeltaGroups": [
+    {
+      "key": [
+        "candidate",
+        "family_state:selected_rigid",
+        {
+          "statement": "family.install",
+          "step": "initialize",
+          "workflow": "v6.composition_strategy.choose"
+        }
+      ],
+      "count": 4
+    },
+    {
+      "key": [
+        "candidate",
+        "family_activation:selected_rigid",
+        {
+          "statement": "family.install",
+          "step": "initialize",
+          "workflow": "v6.composition_strategy.choose"
+        }
+      ],
+      "count": 4
+    },
+    {
+      "key": [
+        "candidate",
+        "family_state:selected_rigid",
+        {
+          "statement": "outcome.acquire",
+          "step": "sealed_prefix",
+          "workflow": "v6.composition_strategy.choose"
+        }
+      ],
+      "count": 21
+    }
+  ],
+  "differencePathGroups": [
+    {
+      "key": [
+        "common_node",
+        "/origin/source_digest",
+        "origin_source_digest_bound_to_role"
+      ],
+      "count": 17331
+    },
+    {
+      "key": [
+        "common_node",
+        "/value/root/members/created/bits",
+        "hypothetical_created_envelope_timestamp"
+      ],
+      "count": 971
+    },
+    {
+      "key": [
+        "common_delta_node",
+        "/origin/source_digest",
+        "origin_source_digest_bound_to_role"
+      ],
+      "count": 3417
+    },
+    {
+      "key": [
+        "common_delta_identity",
+        "/digest",
+        "derived_identity_or_structural_count"
+      ],
+      "count": 3417
+    },
+    {
+      "key": [
+        "common_delta_identity",
+        "/source_digest",
+        "derived_identity_or_structural_count"
+      ],
+      "count": 3417
+    },
+    {
+      "key": [
+        "common_delta_identity",
+        "/previous",
+        "derived_identity_or_structural_count"
+      ],
+      "count": 3413
+    },
+    {
+      "key": [
+        "common_delta_identity",
+        "/sequence",
+        "derived_identity_or_structural_count"
+      ],
+      "count": 3201
+    },
+    {
+      "key": [
+        "common_delta_node",
+        "/value/root/members/created/bits",
+        "hypothetical_created_envelope_timestamp"
+      ],
+      "count": 84
+    },
+    {
+      "key": [
+        "point_graph_identity",
+        "/knowledge/chain",
+        "derived_identity_or_structural_count"
+      ],
+      "count": 58
+    },
+    {
+      "key": [
+        "point_graph_identity",
+        "/knowledge/nodeCount",
+        "derived_identity_or_structural_count"
+      ],
+      "count": 58
+    },
+    {
+      "key": [
+        "point_graph_identity",
+        "/knowledge/toRevision",
+        "derived_identity_or_structural_count"
+      ],
+      "count": 58
+    },
+    {
+      "key": [
+        "point_graph_identity",
+        "/snapshot/graphChain",
+        "derived_identity_or_structural_count"
+      ],
+      "count": 58
+    },
+    {
+      "key": [
+        "point_graph_identity",
+        "/snapshot/graphRevision",
+        "derived_identity_or_structural_count"
+      ],
+      "count": 58
+    },
+    {
+      "key": [
+        "point_graph_identity",
+        "/snapshot/nativeExecutionDigest",
+        "derived_identity_or_structural_count"
+      ],
+      "count": 58
+    },
+    {
+      "key": [
+        "point_graph_identity",
+        "/snapshot/nodeCount",
+        "derived_identity_or_structural_count"
+      ],
+      "count": 58
+    },
+    {
+      "key": [
+        "point_graph_identity",
+        "/snapshot/sourceDigest",
+        "derived_identity_or_structural_count"
+      ],
+      "count": 58
+    },
+    {
+      "key": [
+        "point_graph_identity",
+        "/knowledge/fromRevision",
+        "derived_identity_or_structural_count"
+      ],
+      "count": 54
+    }
+  ],
+  "inputs": {
+    "baseline": {
+      "file": "owner-baseline.json.gz",
+      "bytes": 5114146,
+      "mtimeMsBefore": 1794420025986.9404,
+      "mtimeMsAfter": 1794420025986.9404,
+      "sizeAfter": 5114146,
+      "unchangedStat": true,
+      "completeRead": true,
+      "sha256": "c87bd33945a9240a98260fe1753f4e1c553453c1ca161b688a34936c9790a255"
+    },
+    "candidate": {
+      "file": "owner-candidate.json.gz",
+      "bytes": 5123898,
+      "mtimeMsBefore": 1794420072668.2751,
+      "mtimeMsAfter": 1794420072668.2751,
+      "sizeAfter": 5123898,
+      "unchangedStat": true,
+      "completeRead": true,
+      "sha256": "637c30a2dce3e6e002b432d346beeac1a1a05aa96d2cc007313dcb061aed43f9"
+    }
+  },
+  "outputs": {
+    "raw": {
+      "file": "hypothetical-common-difference-inventory-attempt03-raw.jsonl.gz",
+      "rows": 35769,
+      "uncompressedBytes": 15584808,
+      "compressedBytes": 1100229
+    },
+    "residual": {
+      "file": "hypothetical-common-difference-inventory-attempt03-residual.jsonl.gz",
+      "rows": 34714,
+      "uncompressedBytes": 15058629,
+      "compressedBytes": 1025480
+    },
+    "origin": {
+      "file": "hypothetical-common-difference-inventory-attempt03-origin.jsonl.gz",
+      "rows": 20748,
+      "uncompressedBytes": 9227423,
+      "compressedBytes": 516795
+    },
+    "unexplained": {
+      "file": "hypothetical-common-difference-inventory-attempt03-unexplained.jsonl.gz",
+      "rows": 0,
+      "uncompressedBytes": 0,
+      "compressedBytes": 0
+    },
+    "coverage": {
+      "file": "hypothetical-common-difference-inventory-attempt03-coverage.jsonl.gz",
+      "rows": 17331,
+      "uncompressedBytes": 3891584,
+      "compressedBytes": 392257
+    },
+    "unmatched": {
+      "file": "hypothetical-common-difference-inventory-attempt03-unmatched.jsonl.gz",
+      "rows": 145,
+      "uncompressedBytes": 123737,
+      "compressedBytes": 7019
+    }
+  },
+  "limitations": [
+    "No native validation/codec imported and no native hash derivation certified.",
+    "Created exclusion is an explicit diagnostic hypothesis restricted to the one exact trace envelope path.",
+    "Origin digests and all derived identity differences remain retained.",
+    "The zero-row unexplained output is a zero-byte file; the explicit zero count is authoritative in this summary and is not an official pass.",
+    "Added nodes/deltas are inventoried; official owner attribution remains separate and unqualified."
+  ],
+  "derivedIdentityClarification": {
+    "count": 13966,
+    "allOutsideCommonNodeFields": true,
+    "allOutsideCommonNodeValue": true,
+    "commonDeltaWrapperDifferences": 13448,
+    "pointGraphAndSnapshotIdentityDifferences": 518,
+    "commonDeltaCausesAndOrderDifferences": 0,
+    "newCommonNodeValueAttributionRequiredForThese13966": false,
+    "officialCodeContract": {
+      "qualifier": "docs/migration/lot6b-evidence/qualify-cost-owner-graphs.mjs",
+      "graph": "Checks contiguous sequence/previous chain, source_digest and node origin bound to the role, node revision, recomputed delta digest, reconstructed chain/revision/nodeCount, snapshot identities, and recomputed nativeExecutionDigest from executable nodes.",
+      "command": "Checks command ticket against the captured point ticket, current graph chain and nativeExecutionDigest, then matches actual/expected public command and return.",
+      "attribute": "Requires common delta identities/cause/order and common nodes to remain exact; added nodes/deltas require explicit owner attribution and actual count reconciliation."
+    },
+    "executionQualification": "These are existing validator requirements, not an assertion that the official run checked all 58 points: it stopped at the first common created-envelope difference. Attempt03 does not independently certify native hash derivation.",
+    "observedCommonNodePolicy": "Only origin.source_digest and the exact created-envelope bits differed in all common node comparisons; every other common node field/value and every common delta cause/order compared without difference."
+  },
+  "prospectiveMinimalCreatedRule": {
+    "implemented": false,
+    "officialQualifierUnchanged": true,
+    "scope": "native_reasoning_trace component, reasoning:trace integer identifier, exact /value/root/members/created/bits envelope path only",
+    "requiredBeforeAcceptance": [
+      "Validate each captured float64 timestamp against that role capture start/finish interval.",
+      "Require stability for the same trace identity within its role and session.",
+      "Retain source_digest as a separately bound role identity.",
+      "Compare every other node field, nested value, cause and common ordering exactly.",
+      "Execute unchanged per-role chain, delta, executable identity and ticket validation over every point.",
+      "Keep all earlier failure receipts and never infer official success from diagnostic completeness."
+    ],
+    "contraindications": [
+      "No recursive created-key removal or whole-trace/subtree exclusion.",
+      "No blanket normalization of hashes, identifiers, chains, origin objects, counters or unrelated metadata.",
+      "No native code or frozen test input change for this diagnostic."
+    ]
+  }
+}

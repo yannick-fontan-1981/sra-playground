@@ -1,0 +1,15 @@
+{
+  "schema": "logos-engine.source-preparation-deviation.v1",
+  "recordedAt": "2026-11-11T18:05:53.092856+00:00",
+  "agent": "oracle_review",
+  "declaredMaximumSeconds": 120,
+  "agentReportedInterval": {
+    "start": "2026-11-11T17:55:05Z",
+    "end": "2026-11-11T17:59:08Z",
+    "elapsedSeconds": 243,
+    "excessSeconds": 123
+  },
+  "scope": "Source-only command-plan preparation; only final-functional-execution-plan.md created. No native import/test/replay/game/cost/Git.",
+  "outcome": "Declared source-preparation duration exceeded; not represented as compliant. No official cost or acknowledged quiet interval was active during the reported interval.",
+  "originalFailurePreserved": true
+}

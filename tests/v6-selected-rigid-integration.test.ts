@@ -324,20 +324,66 @@ test('a known prefix survives a long inactive pause with a refreshed deadline, t
     assert.deepEqual(continued.clockReads, [clock]);
     assert.equal(raw.captureContext().remainingLevelActions, 77);
     const beforeCount = events.filter(event => event.method === 'before').length;
+    const binding = (runtime as unknown as R).acquisitionFamilies.binding;
+    assert.ok(binding, 'The ordinary factory must retain its real passive Binding owner');
+    assert.equal(binding.id, 'public_observed_binding');
+    const bindingStateBefore = copy(binding.state());
+    const facts = (): R[] => graphValue(runtime, 'reasoning:memory').facts.map((id: string) => graphValue(runtime, id));
+    const bindingFactsBefore = copy(facts().filter(fact => fact.key === 'observed_object_binding_state'));
     // This is the host's actual active-action duration input, not a mutation of
     // private runtime counters. The controlled clock advances by the same amount.
     clock += 360_000;
     result = await runtime.advance({ command: result.command!,
       observation: copy(source.returns[1].afterPublic), executionMs: 360_000 }, execution);
     retainReturnReference(result, source.returns[1], learned.references);
-    assert.equal(result.kind, 'stopped'); assert.equal(result.reason, 'level_active_time_budget');
-    assert.equal(result.command, null); assert.equal(result.snapshot.activeSeconds, 360);
+    // 5C retains the bounded passive-acquisition refusal as the final stop.
+    // The prefix proof below must still identify active time as its cause.
+    assert.equal(result.kind, 'stopped'); assert.equal(result.reason, 'native_acquisition_incomplete');
+    assert.equal(result.command, null); assert.equal(result.authorization, null);
+    assert.equal(result.snapshot.activeSeconds, 360);
     assert.equal(result.snapshot.actions, 4);
     assert.equal(events.filter(event => event.method === 'before').length, beforeCount,
       'Exhausted active time prevents any third path authorization');
     assert.equal(proposals(events).length, proposalCount);
     assert.equal(records(events).length, 4, 'Both actual known-path returns are acquired once when the budget seals their prefix');
     retainedState(runtime, raw, rebind(source.returns[1].stateAfter, learned.references));
+
+    const sealed = graphValue(runtime, `prefix_evidence:${original.authorization!.decision_revision}`);
+    assert.equal(sealed.composed_reconciliation.interruption, 'level_active_time_budget');
+    assert.equal(sealed.composed_reconciliation.executed_prefix_count, 2);
+    assert.ok(sealed.composed_reconciliation.released_actions_count > 2,
+      'The active-time stop leaves a planned third action undispatched');
+    const acquired = records(events).slice(recordCount), incomplete = sealed.native_acquisitions_incomplete;
+    assert.equal(acquired.length, 2);
+    assert.ok(Array.isArray(incomplete)); assert.equal(incomplete.length, 2);
+    const retainedFacts = facts();
+    for (const [index, record] of acquired.entries()) {
+      const [before, after, command] = record.arguments, receipt = incomplete[index];
+      assert.deepEqual(command, source.returns[index].command);
+      assert.equal(before.observation_ref, index === 0 ? original.authorization!.observation_ref
+        : learned.references.get(source.returns[index - 1].afterObservation.observation_ref));
+      assert.equal(after.observation_ref, learned.references.get(source.returns[index].afterObservation.observation_ref));
+      assert.deepEqual({ family: receipt.family, mode: receipt.mode, before: receipt.before,
+        after: receipt.after, command: receipt.command }, {
+        family: 'public_observed_binding', mode: 'passive', before: before.observation_ref,
+        after: after.observation_ref, command,
+      });
+      const refusal = receipt.refusal;
+      assert.equal(refusal.reason, 'observed_binding_acquisition_work_bound');
+      assert.equal(refusal.status, 'unknown'); assert.equal(refusal.exhausted_bound, 'deadline');
+      assert.equal(refusal.observation_ref, after.observation_ref);
+      assert.equal(refusal.level_epoch, after.level_epoch); assert.equal(refusal.frame_hash, after.frame_hash);
+      assert.equal(refusal.release_authority, false); assert.equal(refusal.block_unrelated_probe, true);
+      assert.equal(refusal.frontier.complete, false); assert.equal(refusal.frontier.deadline_ms, clock);
+      assert.equal(refusal.frontier.nodes, 0); assert.equal(refusal.frontier.work, 0);
+      assert.deepEqual(retainedFacts.filter(fact => fact.key === `object_binding_event:${before.revision}`), [],
+        'An expired passive acquisition must not fabricate a completed Binding source event');
+    }
+    assert.deepEqual((result.snapshot as R).trace.filter((row: R) => row.kind === 'native_acquisition_incomplete')
+      .map(({ kind: _kind, ...receipt }: R) => receipt), incomplete);
+    assert.equal((runtime as unknown as R).acquisitionFamilies.binding, binding);
+    assert.deepEqual(binding.state(), bindingStateBefore);
+    assert.deepEqual(retainedFacts.filter(fact => fact.key === 'observed_object_binding_state'), bindingFactsBefore);
     assert.ok(events.every(event => event.returnedNormally && event.observationErrors.length === 0));
   } finally { runtime.close('selected_rigid_pause_active_budget_contract_complete'); }
 });

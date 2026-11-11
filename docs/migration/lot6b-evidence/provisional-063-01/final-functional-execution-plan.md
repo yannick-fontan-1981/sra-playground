@@ -1,0 +1,175 @@
+# Plan d’exécution fonctionnelle finale 6B sur le candidat fa23
+
+## Statut et prérequis
+
+Préparation par lecture de sources seulement : aucune commande ci-dessous n’a été exécutée pour rédiger ce plan, aucun moteur caché ni donnée de niveau n’a été ouvert. Le gel natif déclaré est `docs/migration/lot6b-evidence/provisional-063-01/frozen-candidate/source-manifest.json`, **322 fichiers**, digest `fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886`. Le prédécesseur 5C `805b30297dc1b715dbfd9f1197a9a8ba7b361b90` reste provisoire jusqu’à réconciliation de sa publication effective.
+
+La suite de 142 fichiers reste celle de `validation-scope-plan.json`, exécutée par les quatre lots déclarés dans `frozen-candidate/test-attempt-02/test-declaration.json`. Conserver l’échec de la tentative 01 et toutes les traces de la tentative 02. L’agrégation exige quatre reçus réussis, l’union exacte des 142 fichiers, la même carte complète d’entrées avant/après et entre lots, ainsi que zéro échec, annulation, test ignoré ou todo. Les quatre modules LKEY fermés demeurent exclus entiers.
+
+Toutes les commandes sont lancées depuis `/workspace/sites/sra-lot6b-20261111/.sites-checkout`. Avant CHAQUE lancement, lire les demandes actuelles de silence 5C, 8A et 10C ; obtenir le créneau requis, puis tenir le verrou partagé `/workspace/shared/sra-coordination/performance.lock`. Une demande fraîche arrête les nouveaux lancements ; aucun ACK d’inactivité pendant une commande ou sa conservation. Les lanceurs génériques ne surveillent pas tous la coordination : organiser une durée de créneau suffisante ou un arrêt externe conservant l’issue, sans reprendre partiellement une commande interrompue.
+
+Variables de travail proposées, sans modifier les entrées déjà gelées :
+
+```bash
+SRA6B_FREEZE=docs/migration/lot6b-evidence/provisional-063-01/frozen-candidate
+SRA6B_FUNCTIONAL=docs/migration/lot6b-evidence/provisional-063-01/final-functional-01
+SRA6B_KLOT=docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01
+SRA6B_CLOCK=docs/migration/lot6b-evidence/klot-case-clock.json
+SRA6B_WATCH=docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/functional-watch.json
+SRA6B_COMMON=docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01
+SRA6B_BUILD_HELPER=/home/agent/.codex/plugins/cache/openai-curated-remote/sites/1.1.6/scripts/build-site.mjs
+```
+
+**À matérialiser avant exécution, par le responsable du gel :** répertoires neufs ; copie exacte du manifeste fa23 dans `SRA6B_FUNCTIONAL` et `SRA6B_KLOT` ; manifeste de rejeu `SRA6B_FUNCTIONAL/recorded-regression-cases.json` issu des onze `recordedRegressions.cases` du plan de portée, sans changer aucune ligne ni pin ; inventaire `SRA6B_WATCH` accepté par les wrappers (`files: {chemin: sha256}`). Ce dernier doit couvrir les 322 sources, les adaptateurs Preview/SelectedRigid/Window, le harnais, les lanceurs, les lecteurs/exporteurs/qualificateurs réellement utilisés, leurs dépendances et le plan exécuté. Les empreintes doivent être actuelles et vérifiées, sans attribuer au gel étroit la clôture 5C complète de 867 fichiers. Les dépendances hôte/Pyodide, tests, fixtures et source originale restent à identifier dans la fermeture pertinente ; le manifeste natif seul ne les atteste pas. Les scripts de preuve contrôlent leurs entrées spécifiques en complément. Vérifier aussi l’identité et la présence du helper de build externe avant son usage.
+
+## 1. Onze rejeux archivés et 187 contrôles
+
+Le manifeste dérivé doit garder le schéma `logos-engine.recorded-public-regression-cases.v1`, les onze lignes exactes du plan de portée, les dix-sept noms de comparaison et la qualification des exigences passives héritées. CATR, RSWP, FOGW, VOIS, CONN, MIND, WEAV, TRIA, CRAF, ISOS et KATA restent les onze cas. Les références ne sont pas remplacées par de nouveaux rapports. Le libellé historique KATA reste de la provenance ; il ne désigne pas une nouvelle auto-comparaison.
+
+Commande unique, un worker, plafond mémoire réservé aux rejeux, timeout de 300 secondes PAR CAS :
+
+```bash
+flock -s -n /workspace/shared/sra-coordination/performance.lock \
+  env NODE_OPTIONS=--max-old-space-size=1536 \
+  python -B docs/migration/lot6b-evidence/record-command.py \
+  --receipt "$SRA6B_FUNCTIONAL/recorded-regressions-command.json" \
+  --watch-manifest "$SRA6B_WATCH" -- \
+  python -B scripts/run-recorded-public-regressions.py \
+  "$SRA6B_FUNCTIONAL/recorded-regression-cases.json" "$SRA6B_FUNCTIONAL" \
+  --workers 1 --timeout-seconds 300
+```
+
+Le timeout du driver est individuel, **pas une limite globale de 300 secondes pour les onze cas**. Réserver un créneau adapté ; ce driver n’offre pas de pause automatique entre cas. Examiner `SRA6B_FUNCTIONAL/regressions/regression-summary.json` et chaque comparaison : onze cas réussis, 17 contrôles chacun, 187 au total, entrées et gel inchangés, aucune exemption. Les contrôles passifs hérités ne prouvent pas à eux seuls l’acquisition Binding ou SelectedRigid. WEAV reste un rejeu historique ; aucun LKEY, HPDL ou nouveau jeu live n’entre dans cette portée.
+
+## 2. Cinq contrôles de livraison, une fois sur les entrées closes
+
+Le lanceur ci-dessous exécute exactement TypeScript, audit des entrées, audit de migration, diff et build. Le helper est celui de la commande historique retenue ; le vérifier avant lancement.
+
+```bash
+flock -s -n /workspace/shared/sra-coordination/performance.lock \
+  python -B docs/migration/lot6b-evidence/record-command.py \
+  --receipt "$SRA6B_FUNCTIONAL/delivery-checks-command.json" \
+  --watch-manifest "$SRA6B_WATCH" -- \
+  python -B scripts/verify-native-delta.py "$SRA6B_FUNCTIONAL" \
+  --build-script "$SRA6B_BUILD_HELPER"
+```
+
+Les cinq argv internes, conservés dans `validation/checks-run.json`, sont :
+
+```text
+npm run typecheck
+node scripts/audit-v6-entry-points.ts
+python scripts/audit-v6-migration.py
+git diff --check
+node /home/agent/.codex/plugins/cache/openai-curated-remote/sites/1.1.6/scripts/build-site.mjs
+```
+
+Exiger les cinq commandes terminées à zéro, le gel inchangé et le worker construit identifié. Lire explicitement les listes `failures` des audits : zéro sémantique, couverture déclarée de 66 entrées sur 76, sans déclaration de parité complète. Le garde d’audit doit continuer à échouer sur une erreur sémantique. Les premiers contrôles déjà réussis sur fa23 peuvent être conservés si leurs entrées exactes, outils, preuves d’audit et helper sont toujours qualifiés ; ne pas lancer ce groupe uniquement pour obtenir un reçu plus récent. Si un groupe neuf est nécessaire, l’exécuter une fois après fermeture des modifications qui touchent ses entrées. Une interruption ou un échec est conservé, jamais écrasé.
+
+## 3. Requalification Binding/common
+
+Le contrat 5C impose sept tests et huit scénarios, plus les comparaisons originales des quatre cas positive/refutation/ambiguity/boundary. Son manifeste de rejeu laisse les exigences passives génériques vides : les onze rejeux ne remplacent donc pas cette preuve. Le scénario foreign-parent emploie un retour public LIFE archivé ; il ne constitue pas une nouvelle partie. Les trois scénarios de limite d’acquisition sont des adaptations natives, pas une équivalence à la source Python non bornée.
+
+**Éviter un doublon utilement :** si le lot des 142 fichiers contenant `tests/v6-object-binding-common.test.ts` n’a pas encore été lancé, déclarer avant son lancement `LOGOS_LOT5C_COMMON_EVIDENCE_DIR=$SRA6B_COMMON` dans son environnement et le reçu de commande. L’exécution du module entier y produira les huit scénarios. La variable ne doit pas être ajoutée rétroactivement à un reçu. Si le module a déjà été exécuté sans conserver cette preuve et qu’aucune preuve ancienne n’est réutilisable à entrées pertinentes identiques, la commande ciblée justifiée est :
+
+```bash
+flock -s -n /workspace/shared/sra-coordination/performance.lock \
+  python -B docs/migration/lot6b-evidence/record-command.py \
+  --receipt "$SRA6B_FUNCTIONAL/binding-common-command.json" \
+  --watch-manifest "$SRA6B_WATCH" -- \
+  env LOGOS_LOT5C_COMMON_EVIDENCE_DIR="$SRA6B_COMMON" \
+  node --test --test-concurrency=1 --test-reporter=tap \
+  tests/v6-object-binding-common.test.ts
+```
+
+Le chemin sous `lot5c-evidence/recovery/common` est imposé par le sink existant ; le suffixe `lot6b-fa23-common-01` attribue sans ambiguïté ces nouvelles sorties à 6B. Ne pas modifier le sink pour déplacer ces sorties. Vérifier les sept tests, les huit scénarios, les identités d’acquisition/restauration, les événements `null` sélectionnés et les entrées inchangées.
+
+Pour CHACUN des quatre cas originaux, affecter explicitement `SRA6B_BINDING_CASE` à `positive`, `refutation`, `ambiguity`, puis `boundary`, en vérifiant la coordination entre commandes ; aucun lancement automatique des cas suivants :
+
+```bash
+SRA6B_BINDING_CASE=positive
+flock -s -n /workspace/shared/sra-coordination/performance.lock \
+  python -B docs/migration/lot6b-evidence/record-command.py \
+  --receipt "$SRA6B_FUNCTIONAL/binding-$SRA6B_BINDING_CASE-export-command.json" \
+  --watch-manifest "$SRA6B_WATCH" -- \
+  python -B scripts/export-observed-binding-reference.py \
+  --journal "$SRA6B_COMMON/$SRA6B_BINDING_CASE/actual-operations.json" \
+  --fixture "$SRA6B_COMMON/$SRA6B_BINDING_CASE/original-replay.json.gz" \
+  --receipt "$SRA6B_COMMON/$SRA6B_BINDING_CASE/original-export.json"
+
+flock -s -n /workspace/shared/sra-coordination/performance.lock \
+  python -B docs/migration/lot6b-evidence/record-command.py \
+  --receipt "$SRA6B_FUNCTIONAL/binding-$SRA6B_BINDING_CASE-review-command.json" \
+  --watch-manifest "$SRA6B_WATCH" -- \
+  python -B scripts/review-observed-binding-common-replay.py \
+  "$SRA6B_COMMON/$SRA6B_BINDING_CASE" \
+  --fixture "$SRA6B_COMMON/$SRA6B_BINDING_CASE/original-replay.json.gz" \
+  --export-receipt "$SRA6B_COMMON/$SRA6B_BINDING_CASE/original-export.json" \
+  --output "$SRA6B_COMMON/$SRA6B_BINDING_CASE/original-comparison.json"
+```
+
+Les comparaisons froides dérivent leurs propres états/propositions de la source originale épinglée ; aucun état natif n’est une attente. Réutiliser un reçu 5C est possible seulement après comparaison explicite de sa fermeture pertinente, y compris runtime, harnais, module, fixtures, outils, source originale et contrat d’attention. Le seul digest du composant Binding ne suffit pas lorsque le runtime commun a changé.
+
+## 4. Nouvelle capture froide KLOT, trois niveaux
+
+Le registre UNIQUE est `docs/migration/lot6b-evidence/klot-case-clock.json` : **350.862153633 secondes déjà débitées sur 2400**, soit environ **2049.137846367 secondes restantes** au début déclaré. Ne jamais initialiser un nouveau registre, remettre le compteur à zéro ou faire disparaître les diagnostics échoués. Vérifier l’absence d’intervalle actif et le solde réel avant chaque tâche ; le wrapper exige au moins la limite annoncée plus 20 secondes de réserve.
+
+La nouvelle capture vise trois niveaux, départ froid et aucune connaissance injectée, avec borne externe déclarée de 120 actions et limite de commande de 360 secondes. Atteindre la borne d’actions n’est pas une réussite sur trois niveaux. Cette référence bornée ne représente pas une résolution intégrale du jeu.
+
+```bash
+flock -s -n /workspace/shared/sra-coordination/performance.lock \
+  python -B docs/migration/lot6b-evidence/run-case-command.py \
+  --clock "$SRA6B_CLOCK" --label klot-fa23-cold-three-levels \
+  --limit-seconds 360 --receipt "$SRA6B_KLOT/capture-case-command.json" \
+  --watch-manifest "$SRA6B_WATCH" -- \
+  python -B scripts/run-bounded-native-campaign-proof.py \
+  KLOT 3 120 "$SRA6B_KLOT"
+```
+
+Le gel doit être copié dans ce répertoire avant la commande, jamais substitué après coup. Les sorties attendues portent notamment les noms `klot-campaign.json.gz`, `klot-public-trace.json.gz`, `klot-actual-public-journal.jsonl.gz` et `execution-klot.json`. Conserver toutes les commandes et tous les retours, y compris en arrêt. Qualifier réellement les trois niveaux, le gel fa23/322, la présence SelectedRigid et la chaîne sélection → commande → retour → acquisition → restauration. Le contexte courant doit conserver le minimum entre budget actif et délai de l’appelant, ainsi que le quota de niveau séparé du préfixe. Le setter de budget reste avant `raw.before` dans l’adaptateur.
+
+## 5. Lecteur original indépendant et deux corruptions
+
+L’examen du rapport, les comparaisons et les qualifications négatives sont des activités KLOT : les exécuter dans le même registre, puis y imputer aussi la QA et les diagnostics ultérieurs. Le wrapper borne le groupe de processus et conserve l’issue. Les vérifications opaques d’entrées source du wrapper ne doivent pas devenir un prétexte pour examiner le rapport hors intervalle facturé.
+
+Lecture positive avec ablations conservées par défaut, limite 300 secondes :
+
+```bash
+flock -s -n /workspace/shared/sra-coordination/performance.lock \
+  python -B docs/migration/lot6b-evidence/run-case-command.py \
+  --clock "$SRA6B_CLOCK" --label klot-fa23-original-reader \
+  --limit-seconds 300 --receipt "$SRA6B_KLOT/original-reader-case-command.json" \
+  --watch-manifest "$SRA6B_WATCH" -- \
+  env PYTHONHASHSEED=0 python -B scripts/compare-selected-rigid-public-parity.py \
+  --root /workspace/sites/sra-lot6b-20261111/.sites-checkout \
+  --report "$SRA6B_KLOT/klot-campaign.json.gz" \
+  --output "$SRA6B_KLOT/original-comparison.json.gz" \
+  --receipt "$SRA6B_KLOT/original-comparison-receipt.json" --require-prefixes
+```
+
+Exiger lecture complète, source originale `786dcf51ca57773d8e3a8948ce9ea3655e7baf8e` inchangée, aucun écart ni arrêt, préfixes et acquisitions réellement présents, compte des événements comparés explicite et ablations rapportées. Les propositions et restaurations originales doivent venir des propres états du lecteur, jamais de valeurs attendues natives. Le lecteur ne compare pas automatiquement les fichiers TypeScript actuels au manifeste du rapport : l’identité au gel fa23 doit donc être prouvée séparément par la capture et les inventaires.
+
+Puis réutiliser ce reçu positif sans relancer une lecture de référence ; deux copies indépendantes du rapport sont modifiées et rejetées sémantiquement :
+
+```bash
+flock -s -n /workspace/shared/sra-coordination/performance.lock \
+  python -B docs/migration/lot6b-evidence/run-case-command.py \
+  --clock "$SRA6B_CLOCK" --label klot-fa23-negative-reader-qualification \
+  --limit-seconds 300 --receipt "$SRA6B_KLOT/negative-reader-case-command.json" \
+  --watch-manifest "$SRA6B_WATCH" -- \
+  env PYTHONHASHSEED=0 python -B scripts/tests/qualify-selected-rigid-cold-reader.py \
+  --report "$SRA6B_KLOT/klot-campaign.json.gz" \
+  --positive-result "$SRA6B_KLOT/original-comparison.json.gz" \
+  --positive-receipt "$SRA6B_KLOT/original-comparison-receipt.json" \
+  --output-dir "$SRA6B_KLOT/negative-reader-01" --timeout-seconds 120
+```
+
+Les 120 secondes sont une borne pour chaque sous-lecteur ; l’enveloppe cumulée reste 300 secondes. Exiger deux rejets pour les différences sémantiques prévues, présence/journal structurel valide, rejouage complet et rapport original inchangé. Un timeout, une exception ou un journal illisible ne qualifie pas un rejet. La première mutation conserve l’identité du plan et modifie un fait de proposition ; la seconde modifie le détail d’une acquisition/restauration. Le qualificateur consigne les chemins exacts et les résultats complets. Ne pas utiliser `verify-selected-rigid-presence.py --report` comme raccourci sur une campagne live : cette entrée CLI est déclarée pour les rapports synthétiques.
+
+## 6. Portée des preuves et réconciliation de publication
+
+Les 18 cas/7 sessions froides synthétiques et les 1082 comparaisons comportementales de composant restent une preuve de leur propre fermeture ; les 2511 contrôles de provenance ne deviennent pas des comparaisons comportementales. L’ancienne capture KLOT trois niveaux sur Site97/native0.60 reste liée au digest de développement `7f30c635…`, non au candidat intégré fa23. Les anciennes réussites ne remplacent pas une capture intégrée et ses contrôles nécessaires.
+
+La future publication effective 5C/0.63 peut être réconciliée avec `805b3029` sans réexécuter automatiquement toutes les commandes si les entrées pertinentes sont strictement identiques et la publication terminale observée. Une évolution purement documentaire s’atteste par comparaison des inventaires appropriés ; elle ne change pas rétroactivement les reçus. Toute modification native, de harnais, de tests, de source originale, d’outils ou de preuves d’audit impose d’identifier les contrôles affectés, de geler les nouvelles entrées et de refaire ces contrôles. Conserver les tentatives antérieures sous leur identité initiale.
+
+La validation fonctionnelle ne vaut pas acceptation du coût ni publication. Les mesures officielles attendent le prédécesseur réellement publié et une fenêtre isolée distincte. La règle utilisateur reste une médiane de session complète strictement sous +10 % pour chacun des jeux ; une phase peut dépasser +10 % si le global du jeu respecte cette limite, sans compensation entre jeux.

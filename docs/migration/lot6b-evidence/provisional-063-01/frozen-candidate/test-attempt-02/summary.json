@@ -1,0 +1,97 @@
+{
+  "schema": "logos-engine.lot6b.complete-four-batch-result.v1",
+  "recordedAt": "2026-11-11T18:24:53.506465+00:00",
+  "status": "failed",
+  "testAttempt": 2,
+  "nativeDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+  "testFiles": 142,
+  "exactDeclaredFileUnion": true,
+  "allFullSourceAndTestInputMapsIdentical": true,
+  "allInputsUnchangedDuringRuns": true,
+  "completeTapSummaries": true,
+  "counts": {
+    "tests": 5405,
+    "pass": 5404,
+    "fail": 1,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "batches": [
+    {
+      "batch": "batch-01",
+      "status": "passed",
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/frozen-candidate/test-attempt-02/batch-01/validation/delta-tests-run.json",
+      "sha256": "34144785b1530dcdfcdcab19a9f65dd83e7878c092f17719e8cefe1cea74f4bf",
+      "counts": {
+        "tests": 1817,
+        "pass": 1817,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "elapsedSeconds": 139.8046691419986
+    },
+    {
+      "batch": "batch-02",
+      "status": "passed",
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/frozen-candidate/test-attempt-02/batch-02/validation/delta-tests-run.json",
+      "sha256": "fc7c1899e252fa64cf4b2b4048707042d4a7e819a0b0ed89151f6e4923142b32",
+      "counts": {
+        "tests": 875,
+        "pass": 875,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "elapsedSeconds": 294.2234902599994
+    },
+    {
+      "batch": "batch-03",
+      "status": "passed",
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/frozen-candidate/test-attempt-02/batch-03/validation/delta-tests-run.json",
+      "sha256": "4a23b7337fb9f180ec3db71c480cd8eec09d8b6ecd9d9cf49a9964c6c3afe994",
+      "counts": {
+        "tests": 1099,
+        "pass": 1099,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "elapsedSeconds": 391.92704188100106
+    },
+    {
+      "batch": "batch-04",
+      "status": "failed",
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/frozen-candidate/test-attempt-02/batch-04/validation/delta-tests-run.json",
+      "sha256": "e99d2bb78dda141cd0866767e085c363b82f1c396352aefaf4194f343a60859c",
+      "counts": {
+        "tests": 1614,
+        "pass": 1613,
+        "fail": 1,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "elapsedSeconds": 167.39792287900127
+    }
+  ],
+  "failure": {
+    "path": "tests/v6-selected-rigid-integration.test.ts",
+    "test": "a known prefix survives a long inactive pause with a refreshed deadline, then active execution time stops before its next action",
+    "expectedReason": "level_active_time_budget",
+    "actualReason": "native_acquisition_incomplete",
+    "sourceDiagnosis": "5C retains the active-time interruption in prefix evidence, then prioritizes incomplete bounded Binding acquisition as the public stop reason. A strict test-only update is being prepared; no native change is authorized by this diagnosis."
+  },
+  "preparationIncident": {
+    "initialSummaryAssemblyExitCode": 1,
+    "error": "KeyError: testFiles",
+    "cause": "The overall test list belongs to validation-scope-plan.json; the four-batch declaration stores the lists per batch.",
+    "summaryWrittenByFailedAssembly": false,
+    "correction": "Compare the exact concatenated batch union against the original scope list; all other input/result checks retained."
+  },
+  "qualification": "All four commands are terminal. The142-file suite did not pass. Every failure remains retained; no failed batch or test is reclassified. A corrected prospective validation is separate."
+}
