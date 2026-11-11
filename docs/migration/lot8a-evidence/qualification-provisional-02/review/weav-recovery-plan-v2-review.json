@@ -1,0 +1,169 @@
+{
+  "schema": "logos-engine.lot8a.weav-recovery-plan-review.v1",
+  "status": "no_remaining_static_blocker_in_corrected_plan",
+  "reviewedAt": "2026-11-11T22:04:11.690301+00:00",
+  "reviewer": "proof_review",
+  "method": "Independent source and evidence inspection; SHA256 and size checks; no qualification runner, preparation host, native harness, oracle or game execution.",
+  "reviewIsExecutionReceipt": false,
+  "plan": {
+    "path": "docs/migration/lot8a-evidence/qualification-provisional-02/contract/weav-released-host-recovery-plan-v2.json",
+    "bytes": 22389,
+    "sha256": "202b7645f321a8da78c75e9bc0fd7290da6307e1ce6efe8b441ccc003956e868"
+  },
+  "previousPlan": {
+    "path": "docs/migration/lot8a-evidence/qualification-provisional-02/contract/weav-released-host-recovery-plan.json",
+    "bytes": 20985,
+    "sha256": "4bef41c9726ce4ed7de95b1e8127a910e7b6109f6017bc5ff30c55712deb4fd9"
+  },
+  "previousPreflightRefusal": {
+    "receipt": {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/stages/weav-released-host-recovery-03/receipt.json",
+      "bytes": 585585,
+      "sha256": "78f65fedf880d02e2726ea6460e037f6d0729b0454285c6dfd9ebf43461ed7a9"
+    },
+    "status": "failed",
+    "exitCode": null,
+    "error": {
+      "type": "ValueError",
+      "message": "Unpinned argv input"
+    },
+    "commandRecorded": false,
+    "rawLogsRecorded": false,
+    "commandOutputsRecorded": false,
+    "finding": "The original argv --source-manifest file was checked as top-level nativeManifest but was absent from inputFiles and all frozen argv inventories; qualify-composition-v2.py refused it before Popen.",
+    "correction": "The corrected plan explicitly adds the identical source-manifest fingerprint to inputFiles, uses a distinct wrapper stage name, pins the prior refused receipt and preserves the old plan."
+  },
+  "fingerprintChecks": {
+    "planReferencesChecked": 64,
+    "distinctPlanPathsChecked": 59,
+    "failures": [],
+    "existingArgvInputs": [
+      {
+        "path": "docs/migration/lot8a-evidence/tools/run-recorded-public-released-streamlog-v2.py",
+        "declaredInput": true,
+        "frozenInput": false
+      },
+      {
+        "path": "docs/migration/lot8a-evidence/qualification-provisional-02/contract/weav-recovery-cases.json",
+        "declaredInput": true,
+        "frozenInput": false
+      },
+      {
+        "path": "docs/migration/lot8a-evidence/qualification-provisional-01/contract/source-manifest.json",
+        "declaredInput": true,
+        "frozenInput": false
+      }
+    ],
+    "resolvedExecutable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+    "executableExplicitlyPinned": true,
+    "nativeManifestFilesReadAndHashedDuringReview": 324,
+    "nativeManifestFileHashFailures": [],
+    "nativeDigest": "936fa2bf81965272b1ddbab4a5c01f98aeb6a48188c1f7a8c91de226598c5e43"
+  },
+  "scope": {
+    "qualification": "functional_only",
+    "exactOriginalWeavCase": true,
+    "recoveryManifest": {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/contract/weav-recovery-cases.json",
+      "bytes": 3171,
+      "sha256": "1036055a04da5c4fd1949c75ce73a0be68cd52c9923b59b2007ca95428d412b9"
+    },
+    "unchangedNativeEngine": true,
+    "unchangedHistoricalComparator": true,
+    "expectedOriginalChecks": 17,
+    "passiveOwnerRequirements": [],
+    "fullCallerParity": false,
+    "sameEpisodeThreeOwnerActivation": false,
+    "officialPerformanceQualification": false,
+    "newLiveGameSuccess": false
+  },
+  "staticDriverContract": {
+    "stage": "weav-released-host-recovery-03-pinned",
+    "command": [
+      "python",
+      "-B",
+      "docs/migration/lot8a-evidence/tools/run-recorded-public-released-streamlog-v2.py",
+      "docs/migration/lot8a-evidence/qualification-provisional-02/contract/weav-recovery-cases.json",
+      "docs/migration/lot8a-evidence/qualification-provisional-02/weav-recovery-03",
+      "--source-manifest",
+      "docs/migration/lot8a-evidence/qualification-provisional-01/contract/source-manifest.json",
+      "--node-old-space-mib",
+      "1536",
+      "--timeout-seconds",
+      "600"
+    ],
+    "environment": {
+      "NODE_OPTIONS": "--max-old-space-size=1536",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONHASHSEED": "0"
+    },
+    "assertionsReviewed": 14,
+    "assertionPathsAndTypesMatchPinnedDriver": true,
+    "caseCount": 1,
+    "game": "WEAV",
+    "maximumConcurrentReplays": 1,
+    "nodeOldSpaceMiB": 1536,
+    "nodeTimeoutSeconds": 600,
+    "wrapperCommandTimeoutSeconds": 800,
+    "wrapperTotalTimeoutSeconds": 900,
+    "originalPrevalidationEndsBeforeNode": true,
+    "nodeExitRequiredBeforeOriginalComparison": true,
+    "sevenDesignatedHostRootsMustBeCollectedBeforeHarnessImport": true,
+    "completeRecordedPacketArrayRetained": true,
+    "completeCurrentReportRetained": true,
+    "reportInstalledOnlyAfterCompleteStreamingWrite": true,
+    "existingReportsNeverOverwritten": true,
+    "successRequiresZeroExitOriginalComparisonAndImmutableInputs": true,
+    "failedPreparationOrInterruptedProcessCannotQualify": true,
+    "writerScopeDescriptionCorrected": true
+  },
+  "preservedAttempt02": {
+    "summary": {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/regression-summary.json",
+      "bytes": 145843,
+      "sha256": "f2d0ab8fc08ee34c64059295d9bcbe729851f6f84987bf81aae99ec77719fce2"
+    },
+    "wrapperReceipt": {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-02/stages/recorded-regressions-stream-02/receipt.json",
+      "bytes": 1162565,
+      "sha256": "8385ebaeddf58a36de009b3b51c18b3f3916746ce666ad612d3e8941b6c2fff2"
+    },
+    "status": "failed",
+    "passed": 10,
+    "total": 11,
+    "comparisonChecksPassed": 170,
+    "comparisonChecksExpected": 187,
+    "summaryReferencedEvidenceFilesHashed": 75,
+    "summaryReferencedEvidenceFingerprintFailures": [],
+    "tenPassingComparisonFilesRead": true,
+    "eachHasSeventeenPassedOriginalLabels": true,
+    "eachUsesSamePinnedComparatorAndFrozenNativeDigest": true,
+    "wrapperBeforeEqualsAfter": true,
+    "weavFailure": {
+      "exitCode": -6,
+      "timedOut": false,
+      "lastCompletedActions": 58,
+      "lastRequestSequence": 59,
+      "retainedDiagnostic": "FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory"
+    }
+  },
+  "reconciliationCheckpoints": [
+    "Wait for a terminal successful corrected wrapper receipt and a complete WEAV03 summary; do not infer success from progress or host preparation.",
+    "Verify the corrected plan fingerprint, unchanged freeze and all new report, comparison, execution, preparation and log fingerprints; require exitCode=0, no interruption, 17/17 original checks and all declared assertions.",
+    "Require the WEAV03 id, baseline, full public trace, native digest and comparator identity to match the original weav-051 case exactly.",
+    "Select exactly the ten passing distinct original case ids from attempt02 plus weav-051 from recovery03; verify set equality with the original eleven-case manifest and count each case once.",
+    "Re-read and pin all eleven selected comparison receipts and retain their full referenced reports; require 187/187 checks across exactly eleven distinct cases.",
+    "Create a new reconciliation receipt linking both attempts and the corrected plan; retain attempt02 failed summary and both initial plan/refused receipt byte-for-byte.",
+    "Describe combined qualification across separate attempts and host variants; do not claim one uniformly passed eleven-case run, a new live-game success, full graph/caller parity or an official performance result."
+  ],
+  "limits": [
+    "Static review and existing evidence checks do not establish successful WEAV03 completion.",
+    "1536 MiB is a Node old-space cap, not a total RSS or Python comparison memory bound.",
+    "WeakRef checks establish collection of the designated roots, not collection of every possible descendant or a bound on the retained current native report.",
+    "The corrected declaration is single-use. The parent reports native session93762 already active; this reviewer neither starts nor restarts it."
+  ],
+  "writesByReviewer": [
+    "docs/migration/lot8a-evidence/qualification-provisional-02/review/weav-recovery-plan-v2-review.json"
+  ],
+  "blockers": []
+}

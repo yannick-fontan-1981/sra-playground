@@ -11,7 +11,7 @@ These tools prepare functional evidence only. They do not create an official cos
 
 The inventory and captures record HEAD separately from native-byte identity. Keep the same candidate checkpoint throughout this bounded preparation; do not commit between inventory and captures. The baseline is a separate sparse checkout; no baseline native files belong in the candidate.
 
-The native manifest and owner inventory use the complete `src/logos-engine` and `src/runtime` trees. The sparse baseline also needs `package.json`, `scripts/measure-native-loop-costs.mjs` (fingerprinted, never executed here), both source declarations under `reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/` (`laya_proto/common_frontier_policy.drm.json` and `morphology_policy/strategy.drm`), and the two exact archived public traces named by `cases.json`. No public game engine, browser, test suite, dist tree or historical proof archive is required.
+Capture manifests contain exactly `fileCount`, `digest`, and `files`; the historical envelopes with publication metadata are kept separately and must not be passed as the capture manifest. The native manifest and owner inventory use the complete `src/logos-engine` and `src/runtime` trees. The sparse baseline also needs `package.json`, `scripts/measure-native-loop-costs.mjs` (fingerprinted, never executed here), both source declarations under `reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/` (`laya_proto/common_frontier_policy.drm.json` and `morphology_policy/strategy.drm`), and the two exact archived public traces named by `cases.json`. No public game engine, browser, test suite, dist tree or historical proof archive is required.
 
 ## Tools
 
@@ -45,13 +45,13 @@ node docs/migration/lot8a-evidence/tools/work-forms/record-owner-source-inventor
 node docs/migration/lot8a-evidence/tools/work-forms/capture-cost-owner-graphs.mjs baseline \
   /workspace/sites/sra-lot8a-prepared6b-20261111 \
   docs/migration/lot8a-evidence/work-forms-prepared-01/cases.json \
-  docs/migration/lot8a-evidence/integration-provisional-063-064-01/contract/prepared6b-source-manifest.json \
+  docs/migration/lot8a-evidence/qualification-provisional-02/work-forms-01/baseline-native.json \
   docs/migration/lot8a-evidence/work-forms-prepared-01/baseline.json.gz
 
 node docs/migration/lot8a-evidence/tools/work-forms/capture-cost-owner-graphs.mjs candidate \
   /workspace/sites/sra-lot8a-motif-20261111/.sites-checkout \
   docs/migration/lot8a-evidence/work-forms-prepared-01/cases.json \
-  docs/migration/lot8a-evidence/integration-provisional-063-064-01/contract/source-manifest.json \
+  docs/migration/lot8a-evidence/qualification-provisional-02/work-forms-01/candidate-native.json \
   docs/migration/lot8a-evidence/work-forms-prepared-01/candidate.json.gz
 
 node docs/migration/lot8a-evidence/tools/work-forms/qualify-cost-owner-graphs.mjs \

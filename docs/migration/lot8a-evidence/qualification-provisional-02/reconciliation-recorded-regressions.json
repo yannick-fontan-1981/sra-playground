@@ -1,0 +1,665 @@
+{
+  "schema": "logos-engine.lot8a.recorded-regression-reconciliation.v1",
+  "recordedAt": "2026-11-11T22:08:02.298700+00:00",
+  "status": "passed_across_retained_attempts",
+  "singleCampaignPass": false,
+  "selectedCases": [
+    {
+      "case": "catr-051",
+      "game": "CATR",
+      "attempt": "recorded-regressions-02",
+      "sourceSummary": {
+        "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/regression-summary.json",
+        "sha256": "f2d0ab8fc08ee34c64059295d9bcbe729851f6f84987bf81aae99ec77719fce2",
+        "bytes": 145843
+      },
+      "passed": true,
+      "comparisonChecksPassed": 17,
+      "comparisonChecksExpected": 17,
+      "actions": 12,
+      "prefixes": 8,
+      "levelsCompleted": 3,
+      "baseline": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz",
+        "sha256": "379ce17151369af5ba39e205cc8b2882aa4e97a3dd8909b9c831a7b2b0ac7fb6",
+        "bytes": 1649205
+      },
+      "trace": {
+        "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-public-trace.json.gz",
+        "sha256": "e152eb2705947addd1506cb01872d23770d188cb1dd46c86dcbc9bdf7f4f2816",
+        "bytes": 24340
+      },
+      "evidence": {
+        "comparison": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/catr-051-comparison.json",
+          "sha256": "f98d7c9ee3d9a9bb7bd15958e29574c5d175a3785b7c1e6865be147a1d26cc41",
+          "bytes": 10680
+        },
+        "report": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/catr-051-replay.json.gz",
+          "sha256": "a1eaa61f59a7e20b0c58e3ce06206ec6726e90569ee6bcbeac800ef4291af1f5",
+          "bytes": 2239945
+        },
+        "execution": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/catr-051-execution.json",
+          "sha256": "1e86fe5bef86fd6f89e92dcf42bd8953de0f454bd3a7c6a443a430c582ae2c2b",
+          "bytes": 5159
+        },
+        "passiveOwnerPresence": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/catr-051-passive-owner-presence.json",
+          "sha256": "99ccd26158738d991aa5dda34ac79e0e4f58244ebb450c01ce0fe388e8d638fe",
+          "bytes": 1163
+        },
+        "output": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/catr-051-output.log.gz",
+          "sha256": "bda73dcedd306f15d9d113727827b4ed68f4cbf7116f88e853ef870fb41ed234",
+          "bytes": 2668
+        }
+      }
+    },
+    {
+      "case": "rswp-051",
+      "game": "RSWP",
+      "attempt": "recorded-regressions-02",
+      "sourceSummary": {
+        "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/regression-summary.json",
+        "sha256": "f2d0ab8fc08ee34c64059295d9bcbe729851f6f84987bf81aae99ec77719fce2",
+        "bytes": 145843
+      },
+      "passed": true,
+      "comparisonChecksPassed": 17,
+      "comparisonChecksExpected": 17,
+      "actions": 19,
+      "prefixes": 11,
+      "levelsCompleted": 3,
+      "baseline": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz",
+        "sha256": "5de1bbc32db1a3dffdf5c350ef70ca90142007c6ebc7735f8b8c56e9fdfa00ba",
+        "bytes": 2585868
+      },
+      "trace": {
+        "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+        "sha256": "43f32a75b0d8cd747457602a3c3f113e5d63ec621e45bb2bc1d195f242997755",
+        "bytes": 41445
+      },
+      "evidence": {
+        "comparison": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/rswp-051-comparison.json",
+          "sha256": "039f5beb0b574df30b170864d9a1b0c1a2bf30cea7f9b684eaa5ee8dcb813737",
+          "bytes": 10667
+        },
+        "report": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/rswp-051-replay.json.gz",
+          "sha256": "e99ddfc95f46d778a934bcc0ccb14de53bdf0407e125c3e01c3033b991a78259",
+          "bytes": 3463524
+        },
+        "execution": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/rswp-051-execution.json",
+          "sha256": "fef211d0b9291db7ab72742fd321c4372e1c7e6fcba036147df8db5c60a891db",
+          "bytes": 5139
+        },
+        "passiveOwnerPresence": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/rswp-051-passive-owner-presence.json",
+          "sha256": "708ac8eb2ef9b6aa037df3a9a1acf7263af961844cd6762f595e589b707c4261",
+          "bytes": 1163
+        },
+        "output": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/rswp-051-output.log.gz",
+          "sha256": "34aa7438910ff44b1e3c09a766971715cec9cac1c31bedef8434078962622e58",
+          "bytes": 3168
+        }
+      }
+    },
+    {
+      "case": "fogw-051",
+      "game": "FOGW",
+      "attempt": "recorded-regressions-02",
+      "sourceSummary": {
+        "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/regression-summary.json",
+        "sha256": "f2d0ab8fc08ee34c64059295d9bcbe729851f6f84987bf81aae99ec77719fce2",
+        "bytes": 145843
+      },
+      "passed": true,
+      "comparisonChecksPassed": 17,
+      "comparisonChecksExpected": 17,
+      "actions": 50,
+      "prefixes": 27,
+      "levelsCompleted": 3,
+      "baseline": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz",
+        "sha256": "fe037e48df8dd3a7c302a5e85355b2b9555daa6d9d8aa56f7772fc363732726c",
+        "bytes": 8174480
+      },
+      "trace": {
+        "path": "docs/migration/lot3e-evidence/final/fogw-reception-session/fogw-public-trace.json.gz",
+        "sha256": "1d4e92e6ef063e7799bfb4237b17beb148b49bde4ab46ef26ef91a3271d44b46",
+        "bytes": 39060
+      },
+      "evidence": {
+        "comparison": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/fogw-051-comparison.json",
+          "sha256": "23b30f28523b3bdaed540f2582f8d261f4dff0f52825dcb2a05c452334f2a54a",
+          "bytes": 10670
+        },
+        "report": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/fogw-051-replay.json.gz",
+          "sha256": "0af4a35c2dd1bcefc385184c808a25e20c746f8e899b35b4f13952764d4fea9e",
+          "bytes": 10856259
+        },
+        "execution": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/fogw-051-execution.json",
+          "sha256": "f2ea3501fda3118af6d77c52d5a7962d5c044732ebfd1762d2166bf2c7f0b853",
+          "bytes": 5145
+        },
+        "passiveOwnerPresence": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/fogw-051-passive-owner-presence.json",
+          "sha256": "c5c5f4671ef3522795d6f82ebecd383cb28a205326a19c77e267777699089975",
+          "bytes": 1164
+        },
+        "output": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/fogw-051-output.log.gz",
+          "sha256": "e0d809f6c115e28b2b082d28c35144c57808b5661aba4b29611f29eb4b38776a",
+          "bytes": 5550
+        }
+      }
+    },
+    {
+      "case": "vois-051",
+      "game": "VOIS",
+      "attempt": "recorded-regressions-02",
+      "sourceSummary": {
+        "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/regression-summary.json",
+        "sha256": "f2d0ab8fc08ee34c64059295d9bcbe729851f6f84987bf81aae99ec77719fce2",
+        "bytes": 145843
+      },
+      "passed": true,
+      "comparisonChecksPassed": 17,
+      "comparisonChecksExpected": 17,
+      "actions": 78,
+      "prefixes": 42,
+      "levelsCompleted": 3,
+      "baseline": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz",
+        "sha256": "39a6e6551cf94a48842b154afdc2256dafd88fd93404e4776bd67b24d5a4796d",
+        "bytes": 10678168
+      },
+      "trace": {
+        "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+        "sha256": "d642c805485571c0e54ed3421644cbd8463ca3697ce135b223f635487b58069d",
+        "bytes": 19976
+      },
+      "evidence": {
+        "comparison": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/vois-051-comparison.json",
+          "sha256": "c06a1418e4277c647488fe8d75e0be4aa308db8ab64297e529dd253898bf73e9",
+          "bytes": 10672
+        },
+        "report": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/vois-051-replay.json.gz",
+          "sha256": "e30a5e0fe24047a52e739bd453f7e5ebc56ec60557cddd386545021b90ea61b2",
+          "bytes": 14061387
+        },
+        "execution": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/vois-051-execution.json",
+          "sha256": "497e0c9a60710284730602474a4f08e3666f0e7f7ce8f941912601535369d19d",
+          "bytes": 5149
+        },
+        "passiveOwnerPresence": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/vois-051-passive-owner-presence.json",
+          "sha256": "356cce13b649810192769986844f30010065c6e8f77a360d4ec977e5d1a3cca0",
+          "bytes": 1164
+        },
+        "output": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/vois-051-output.log.gz",
+          "sha256": "4a079b827b9301184d41e1f42f09dd821495a6d59a82dd2ffe88493122c4433c",
+          "bytes": 7616
+        }
+      }
+    },
+    {
+      "case": "conn-050",
+      "game": "CONN",
+      "attempt": "recorded-regressions-02",
+      "sourceSummary": {
+        "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/regression-summary.json",
+        "sha256": "f2d0ab8fc08ee34c64059295d9bcbe729851f6f84987bf81aae99ec77719fce2",
+        "bytes": 145843
+      },
+      "passed": true,
+      "comparisonChecksPassed": 17,
+      "comparisonChecksExpected": 17,
+      "actions": 21,
+      "prefixes": 21,
+      "levelsCompleted": 3,
+      "baseline": {
+        "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz",
+        "sha256": "f3df06cff6d370874889f5183a77dd91ae585060c04ba052d0025cd2db9e3750",
+        "bytes": 2630905
+      },
+      "trace": {
+        "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-public-trace.json.gz",
+        "sha256": "fc8c7bf4529490e6e6ee04e7a5a51b389180e5fb5e35255145c59ecf4dd0f102",
+        "bytes": 56466
+      },
+      "evidence": {
+        "comparison": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/conn-050-comparison.json",
+          "sha256": "59b69ea6ca068816eb429adaccf98af07b16d77718a15fc347c91c5953ebaad2",
+          "bytes": 10683
+        },
+        "report": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/conn-050-replay.json.gz",
+          "sha256": "a0c124c47a11195c647399ea362195b844b2d8da900680c1e57ab42bed4868c7",
+          "bytes": 5081385
+        },
+        "execution": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/conn-050-execution.json",
+          "sha256": "17f81bc99c77f8ad263b549d68c5b28a8d7bbf59677d4519ba4a71ec21d459ca",
+          "bytes": 5172
+        },
+        "passiveOwnerPresence": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/conn-050-passive-owner-presence.json",
+          "sha256": "6568be9b8ba9304f29a23fe7ef7f924a090956e093bd53b37451b01853afd6f7",
+          "bytes": 1163
+        },
+        "output": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/conn-050-output.log.gz",
+          "sha256": "2df3c4fa4cbf6fd3f6d0450192ea558386422d49da431fab33f650f425008af9",
+          "bytes": 4064
+        }
+      }
+    },
+    {
+      "case": "mind-051",
+      "game": "MIND",
+      "attempt": "recorded-regressions-02",
+      "sourceSummary": {
+        "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/regression-summary.json",
+        "sha256": "f2d0ab8fc08ee34c64059295d9bcbe729851f6f84987bf81aae99ec77719fce2",
+        "bytes": 145843
+      },
+      "passed": true,
+      "comparisonChecksPassed": 17,
+      "comparisonChecksExpected": 17,
+      "actions": 31,
+      "prefixes": 20,
+      "levelsCompleted": 3,
+      "baseline": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz",
+        "sha256": "6a187286069287a89cedb60ac0f206e0702abae5d8df0dd2615bd43c1bb5c75a",
+        "bytes": 4349054
+      },
+      "trace": {
+        "path": "docs/migration/lot7a-evidence/integrated-baseline/recorded/mind-public-trace.json.gz",
+        "sha256": "f74678fa4d9c1b5397545b648ab353c29fc0a5a4c0eb35ab36a5258bfa34ca0c",
+        "bytes": 17256
+      },
+      "evidence": {
+        "comparison": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/mind-051-comparison.json",
+          "sha256": "476f6c490b07f68cf39d9904a5b0b5ed336bf65f6f5a663303112aeaf19319ab",
+          "bytes": 10668
+        },
+        "report": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/mind-051-replay.json.gz",
+          "sha256": "f9688c28cb7b6ef9b5aac9717ec7ec67c7df555d7912f75eaa629c007963249c",
+          "bytes": 6115821
+        },
+        "execution": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/mind-051-execution.json",
+          "sha256": "b21e13c793bccc6a3d1bedcb7a05c85d29da9bad7d87a148391ef42f83467974",
+          "bytes": 5136
+        },
+        "passiveOwnerPresence": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/mind-051-passive-owner-presence.json",
+          "sha256": "9f4d463f3a43a8586a63f29a8d8047181063c08e4b1ff9af37e0473b0db1782b",
+          "bytes": 1163
+        },
+        "output": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/mind-051-output.log.gz",
+          "sha256": "d434d6cca438e9758ef0d2d8b3bec4c4429528b8f83b1e13c3d7e673a53b8204",
+          "bytes": 4289
+        }
+      }
+    },
+    {
+      "case": "tria-development-4b",
+      "game": "TRIA",
+      "attempt": "recorded-regressions-02",
+      "sourceSummary": {
+        "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/regression-summary.json",
+        "sha256": "f2d0ab8fc08ee34c64059295d9bcbe729851f6f84987bf81aae99ec77719fce2",
+        "bytes": 145843
+      },
+      "passed": true,
+      "comparisonChecksPassed": 17,
+      "comparisonChecksExpected": 17,
+      "actions": 17,
+      "prefixes": 17,
+      "levelsCompleted": 3,
+      "baseline": {
+        "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz",
+        "sha256": "e473af537c042d76ce98f13b2cc9be495e7b4ac08ca443251df7804d542bdbbe",
+        "bytes": 3161161
+      },
+      "trace": {
+        "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-public-trace.json.gz",
+        "sha256": "916d0f1cb1dcbfd9b7ba7624e7d3d4648a91ae7ef64583288af4711d2a955ac3",
+        "bytes": 13286
+      },
+      "evidence": {
+        "comparison": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/tria-development-4b-comparison.json",
+          "sha256": "64b9e989b92563fa75c6ba42fa1062aeb77b3750c3f59670faa89e7ec78668ec",
+          "bytes": 10671
+        },
+        "report": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/tria-development-4b-replay.json.gz",
+          "sha256": "8f4bb5726f1827de5d390bbdcc431754509c8fce8c1ffb50085d404ef10bdf17",
+          "bytes": 4165836
+        },
+        "execution": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/tria-development-4b-execution.json",
+          "sha256": "5f636c4a2a395bf057f8762c6ebc853ff6a0d4b4af1af54064ccbbc549a13262",
+          "bytes": 5193
+        },
+        "passiveOwnerPresence": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/tria-development-4b-passive-owner-presence.json",
+          "sha256": "965511c11c742d2aa36e3c337ad646bed4b34962406c8adb44976c132bcc78a2",
+          "bytes": 1174
+        },
+        "output": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/tria-development-4b-output.log.gz",
+          "sha256": "85a48dbe3a02c892bea8c01de639f46775aef3abc2318c3eabb0bb92dd080675",
+          "bytes": 3569
+        }
+      }
+    },
+    {
+      "case": "craf-055",
+      "game": "CRAF",
+      "attempt": "recorded-regressions-02",
+      "sourceSummary": {
+        "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/regression-summary.json",
+        "sha256": "f2d0ab8fc08ee34c64059295d9bcbe729851f6f84987bf81aae99ec77719fce2",
+        "bytes": 145843
+      },
+      "passed": true,
+      "comparisonChecksPassed": 17,
+      "comparisonChecksExpected": 17,
+      "actions": 36,
+      "prefixes": 36,
+      "levelsCompleted": 3,
+      "baseline": {
+        "path": "docs/migration/lot7b-evidence/integrated-final/craf-campaign.json.gz",
+        "sha256": "78e86660961ed6d75707c001c021b8c223d205137d86288ac21d09a533b680f2",
+        "bytes": 12767727
+      },
+      "trace": {
+        "path": "docs/migration/lot7b-evidence/integrated-final/craf-public-trace.json.gz",
+        "sha256": "cf69ad941e80e17f8d6cd66edc0419a0c6ff7aa8d9bbdaf503cb56a49e8c3f98",
+        "bytes": 40777
+      },
+      "evidence": {
+        "comparison": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/craf-055-comparison.json",
+          "sha256": "a6729f60ba4bd15b392ff3637f35a8d3eef673c55f79e6491208aeb9b83f581f",
+          "bytes": 10647
+        },
+        "report": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/craf-055-replay.json.gz",
+          "sha256": "534ddd30bfcf05f360326ce380923be12b2432a4b5a2bd2a4620d140c64db97d",
+          "bytes": 14724157
+        },
+        "execution": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/craf-055-execution.json",
+          "sha256": "2fbfe62bc9faa14df9fe81a50d9eedfc56200461762d3a6afa1bb41101c2ee64",
+          "bytes": 5097
+        },
+        "passiveOwnerPresence": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/craf-055-passive-owner-presence.json",
+          "sha256": "1c67ab1dd0496418ba3701e107dc99e9f945bd844a24ffaf5a2f90e0952b7e80",
+          "bytes": 1164
+        },
+        "output": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/craf-055-output.log.gz",
+          "sha256": "8dab695171289189d2238131d1e443b0e06dd8d0fb81aff969e66dc73c0c537f",
+          "bytes": 5716
+        }
+      }
+    },
+    {
+      "case": "isos-development-4c",
+      "game": "ISOS",
+      "attempt": "recorded-regressions-02",
+      "sourceSummary": {
+        "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/regression-summary.json",
+        "sha256": "f2d0ab8fc08ee34c64059295d9bcbe729851f6f84987bf81aae99ec77719fce2",
+        "bytes": 145843
+      },
+      "passed": true,
+      "comparisonChecksPassed": 17,
+      "comparisonChecksExpected": 17,
+      "actions": 12,
+      "prefixes": 12,
+      "levelsCompleted": 3,
+      "baseline": {
+        "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-campaign.json.gz",
+        "sha256": "93e59ab1146d4eef7c944a0e1fc0ab7b0d539cc90a074abe424742be011eec37",
+        "bytes": 3027289
+      },
+      "trace": {
+        "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-public-trace.json.gz",
+        "sha256": "5b302279efb140d1c549d9650d434efb38fde0b8bc5809ab072de66159c8c329",
+        "bytes": 11183
+      },
+      "evidence": {
+        "comparison": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/isos-development-4c-comparison.json",
+          "sha256": "35001df62d45685e2ee779da28756841ff73bc1e5eb0c1b0826a1bb0063d5c8f",
+          "bytes": 10671
+        },
+        "report": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/isos-development-4c-replay.json.gz",
+          "sha256": "5d1f2fc703c86a794b1b812da847f9726e3715bc65dbfb0265c4d8f701985b67",
+          "bytes": 3593064
+        },
+        "execution": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/isos-development-4c-execution.json",
+          "sha256": "a551962cbf9cb203677c36a38e2b407d5051e3d1190167b63fea3a965fd27307",
+          "bytes": 5188
+        },
+        "passiveOwnerPresence": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/isos-development-4c-passive-owner-presence.json",
+          "sha256": "46ef9f304ed65131e709ec3ee6c4b925e99e84813ee8528c3d0cef705f4d051d",
+          "bytes": 1174
+        },
+        "output": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/isos-development-4c-output.log.gz",
+          "sha256": "3fbc3d66f51cf06b32974b59c6c78190dde9f1023920ad61b3cbc7d62c51427c",
+          "bytes": 2977
+        }
+      }
+    },
+    {
+      "case": "kata-060-self-consistency",
+      "game": "KATA",
+      "attempt": "recorded-regressions-02",
+      "sourceSummary": {
+        "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/regression-summary.json",
+        "sha256": "f2d0ab8fc08ee34c64059295d9bcbe729851f6f84987bf81aae99ec77719fce2",
+        "bytes": 145843
+      },
+      "passed": true,
+      "comparisonChecksPassed": 17,
+      "comparisonChecksExpected": 17,
+      "actions": 33,
+      "prefixes": 14,
+      "levelsCompleted": 3,
+      "baseline": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/kata-campaign.json.gz",
+        "sha256": "a3318ed5f7d742f63b5923f3e1e46b0d9cfff1d18e767b45c522d61aa354e455",
+        "bytes": 8253174
+      },
+      "trace": {
+        "path": "docs/migration/lot6a-evidence/integrated-final-02/kata-public-trace.json.gz",
+        "sha256": "c236c95ec0bdcb892a6940940098e4310eb35a6ae11acaf6b74545d09aa22daa",
+        "bytes": 12579
+      },
+      "evidence": {
+        "comparison": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/kata-060-self-consistency-comparison.json",
+          "sha256": "5e872aebf9638c9d21684560a96468fb350ff551a421468a1c5a02b1b3414528",
+          "bytes": 10667
+        },
+        "report": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/kata-060-self-consistency-replay.json.gz",
+          "sha256": "48a2c509b7f7fdec459072f89a917d2608918858e136134e0dfcb4cf9f793057",
+          "bytes": 9023093
+        },
+        "execution": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/kata-060-self-consistency-execution.json",
+          "sha256": "d41642e70096c9e69f89a428ed7f86a9dc792e733dce70d8a1586cba2cc1cab2",
+          "bytes": 5210
+        },
+        "passiveOwnerPresence": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/kata-060-self-consistency-passive-owner-presence.json",
+          "sha256": "759973a6e0bb57b07b18ead9fa76f44783471f5076164ff0818550dc3157fb64",
+          "bytes": 1180
+        },
+        "output": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/kata-060-self-consistency-output.log.gz",
+          "sha256": "cc4635a05d54d02940f5329133d875fcd79345dc11608fdc144294eb23dadea9",
+          "bytes": 3973
+        }
+      }
+    },
+    {
+      "case": "weav-051",
+      "game": "WEAV",
+      "attempt": "weav-recovery-03",
+      "sourceSummary": {
+        "path": "docs/migration/lot8a-evidence/qualification-provisional-02/weav-recovery-03/regressions/regression-summary.json",
+        "sha256": "701311b3bb606f639f0fe35dfb2835a381c7bbd8e7628cd840fc0d3b6825be1b",
+        "bytes": 107189
+      },
+      "passed": true,
+      "comparisonChecksPassed": 17,
+      "comparisonChecksExpected": 17,
+      "actions": 81,
+      "prefixes": 81,
+      "levelsCompleted": 3,
+      "baseline": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz",
+        "sha256": "114906e80b2ff5817adeaa105fd4e84ea2b057d8393b202dc03f35248b350fc3",
+        "bytes": 13577757
+      },
+      "trace": {
+        "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+        "sha256": "a46f6a331e8f98767ee709c2931edd6d0abde9cc636b93ef384509c04adface2",
+        "bytes": 26568
+      },
+      "evidence": {
+        "comparison": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/weav-recovery-03/regressions/weav-051-comparison.json",
+          "sha256": "7d316dab00b92479035020c6f1a0dba7c5286e5a4e331e5fc9018f5c324137e3",
+          "bytes": 11050
+        },
+        "report": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/weav-recovery-03/regressions/weav-051-replay.json.gz",
+          "sha256": "987b6ea534fd935b7ea7820a9c44fbb2e7b1fa2ccbc63ffbc34691849ba0d6fa",
+          "bytes": 19404498
+        },
+        "execution": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/weav-recovery-03/regressions/weav-051-execution.json",
+          "sha256": "4234291c55298213a2223f14fa0b2f28242cad6cc9f7d61b5e1cdac97da36404",
+          "bytes": 19113
+        },
+        "passiveOwnerPresence": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/weav-recovery-03/regressions/weav-051-passive-owner-presence.json",
+          "sha256": "9d948de1e0693c06385a262dcceb3bcd4aad9fad51a15d4e20f5f91c62ea68af",
+          "bytes": 1151
+        },
+        "output": {
+          "path": "docs/migration/lot8a-evidence/qualification-provisional-02/weav-recovery-03/regressions/weav-051-output.log.gz",
+          "sha256": "cf89afb4bfbad405da7161c6ca89ef565382fb6c790eaeea488545b2a311af2f",
+          "bytes": 10467
+        }
+      }
+    }
+  ],
+  "passed": 11,
+  "total": 11,
+  "comparisonChecksPassed": 187,
+  "comparisonChecksExpected": 187,
+  "caseManifest": {
+    "path": "docs/migration/lot8a-evidence/qualification-provisional-01/contract/recorded-regression-cases.json",
+    "sha256": "2f2ead27c4a0b4e149baefd7a991ca0e8faf3cbab331f2aad498f9b295b12946",
+    "bytes": 8214
+  },
+  "comparator": {
+    "path": "scripts/compare-v54-regressions.py",
+    "sha256": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+    "bytes": 18166
+  },
+  "nativeSource": {
+    "fileCount": 324,
+    "digest": "936fa2bf81965272b1ddbab4a5c01f98aeb6a48188c1f7a8c91de226598c5e43"
+  },
+  "nativeInputsUnchanged": true,
+  "sameDeclaredCasesAndPublicTraces": true,
+  "maximumConcurrentReplays": 1,
+  "nodeOldSpaceMiB": 1536,
+  "attempts": [
+    {
+      "name": "recorded-regressions-02",
+      "status": "failed",
+      "passed": 10,
+      "total": 11,
+      "summary": {
+        "path": "docs/migration/lot8a-evidence/qualification-provisional-02/recorded-regressions-02/regressions/regression-summary.json",
+        "sha256": "f2d0ab8fc08ee34c64059295d9bcbe729851f6f84987bf81aae99ec77719fce2",
+        "bytes": 145843
+      },
+      "receipt": {
+        "path": "docs/migration/lot8a-evidence/qualification-provisional-02/stages/recorded-regressions-stream-02/receipt.json",
+        "sha256": "8385ebaeddf58a36de009b3b51c18b3f3916746ce666ad612d3e8941b6c2fff2",
+        "bytes": 1162565
+      }
+    },
+    {
+      "name": "weav-recovery-03",
+      "status": "passed",
+      "passed": 1,
+      "total": 1,
+      "summary": {
+        "path": "docs/migration/lot8a-evidence/qualification-provisional-02/weav-recovery-03/regressions/regression-summary.json",
+        "sha256": "701311b3bb606f639f0fe35dfb2835a381c7bbd8e7628cd840fc0d3b6825be1b",
+        "bytes": 107189
+      },
+      "receipt": {
+        "path": "docs/migration/lot8a-evidence/qualification-provisional-02/stages/weav-released-host-recovery-03-pinned/receipt.json",
+        "sha256": "77ed546dc5f93fc85fa08e5d380cd8de2eadcbf3d24281458a7154a1cc73b34e",
+        "bytes": 1168271
+      }
+    }
+  ],
+  "retainedPreflightRefusal": {
+    "path": "docs/migration/lot8a-evidence/qualification-provisional-02/stages/weav-released-host-recovery-03/receipt.json",
+    "sha256": "78f65fedf880d02e2726ea6460e037f6d0729b0454285c6dfd9ebf43461ed7a9",
+    "bytes": 585585
+  },
+  "retainedInterruptedFirstCampaignDirectory": "docs/migration/lot8a-evidence/qualification-provisional-02/retained-interruption",
+  "hostRecovery": {
+    "nativeChanges": false,
+    "baselineAndTemporaryHostRootsReleasedBeforeHarnessImport": true,
+    "completeReportRetained": true,
+    "validationNodeComparisonHaveDisjointProcessLifetimes": true,
+    "originalComparatorChecksUnchanged": true
+  },
+  "qualification": "Exactly ten successful cases from terminal attempt02 plus the single successful WEAV recovery03, with11 distinct declared IDs and187 original comparisons. Failed and interrupted attempts remain retained. This is recorded-public replay parity, not full original caller parity, a new live campaign, a performance measurement, or publication.",
+  "officialPerformanceEligible": false,
+  "newLiveGames": 0,
+  "sitePublicationPerformed": false,
+  "globalLockUsed": false
+}
