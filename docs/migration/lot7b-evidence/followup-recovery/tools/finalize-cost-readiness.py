@@ -47,6 +47,11 @@ REGRESSION_TOOLS = {'scripts/run-released-public-regressions.py', 'scripts/run-r
                     'scripts/compare-v54-regressions.py', 'scripts/replay-public-regression-released-baseline.mjs',
                     'scripts/replay-v53-public-regression.mjs', 'scripts/run-v53-campaign-proof.py',
                     'tests/helpers/v6-live-game-campaign.ts', 'scripts/run-released-public-regressions-streamlog.py'}
+AUDIT_TOOL = 'scripts/audit-v6-migration.py'
+AUDIT_CONFIG = 'migration/v6-transfer-map.json'
+RESTORED_AUDIT_PROOF = 'docs/migration/lot6a-evidence/recovery/native-source-review.json'
+HISTORICAL_AUDIT_FAILURE = 'Missing differential evidence: ' + RESTORED_AUDIT_PROOF
+ORIGINAL_MANIFEST = 'reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/manifest.json'
 
 
 def require(condition, message):
@@ -91,6 +96,100 @@ def inventory(checkout=ROOT):
                         for p in (checkout / folder).rglob('*')
                         if p.is_file() and p.suffix in ('.ts', '.json', '.drm')))
     return {'fileCount': len(files), 'digest': hashlib.sha256(json.dumps(files, separators=(',', ':')).encode()).hexdigest(), 'files': files}
+
+
+def verify_migration_audit_closure(directory, validation, native, tests, checks, archive,
+                                   publication, publication_record, amendment, load, checked):
+    """Verify the exact missing-published-proof closure; execute no audit/game.
+
+    Readiness and publication both call this same prospective verifier. Declared
+    proof paths are checked for file existence only, as in the original audit;
+    no historical game evidence or fixture payload is decoded here.
+    """
+    closure_path = directory / 'post-publication-audit/closure.json'
+    closure = load(closure_path)
+    old_check = checks['checks'][2]
+    require(closure['schema'] == 'logos-engine.followup-post-publication-audit-closure.v1'
+            and closure['status'] == 'passed' and type(closure['exitCode']) is int and closure['exitCode'] == 0
+            and closure['command'] == old_check['command'] == ['python', AUDIT_TOOL]
+            and closure['generator'] == fp(AUDIT_TOOL)
+            and closure['originalChecks'] == fp(validation / 'checks-run.json')
+            and closure['originalAuditOutput'] == old_check['output']
+            and closure['originalFailures'] == [HISTORICAL_AUDIT_FAILURE]
+            and closure['nativeSourceManifestDigest'] == native['digest']
+            and closure['baselinePublication'] == publication_record
+            and amendment['auditClosure'] == fp(closure_path), 'Standalone audit closure identifies other inputs or failure')
+    require(all(closure[key] is True for key in ('sourceAndTestInputsUnchanged', 'buildInputsUnchanged',
+                'originalSourceInputsUnchanged', 'auditInputsUnchanged', 'proofExistenceUnchanged', 'nativeSourceUnchanged'))
+            and all(closure[key] is False for key in ('measurementExecuted', 'testsRepeated', 'buildRepeated', 'regressionsRepeated'))
+            and closure['sourceAndTestInputs'] == tests['sourceAndTestInputs']
+            and closure['buildInputs'] == checks['buildInputs'] and closure['newFailures'] == [],
+            'Audit closure changed validated inputs, repeated unrelated work or introduced a failure')
+    for key in ('generator', 'originalChecks', 'originalAuditOutput', 'baselinePublication', 'output',
+                'coverageBefore', 'coverageAfter', 'originalSourceManifest', 'initialExecutionReceipt', 'failedReadinessObservation'):
+        checked(closure[key])
+    require(local(closure['output']['path']) == directory / 'post-publication-audit/migration-audit-output.log.gz'
+            and local(closure['coverageBefore']['path']) == directory / 'post-publication-audit/coverage-before.json'
+            and closure['coverageAfter']['path'] == 'docs/migration/v6-coverage.json'
+            and closure['originalSourceManifest']['path'] == ORIGINAL_MANIFEST,
+            'Audit closure must retain its separate output, coverage history and unchanged original source pin')
+    old_output, new_output = read(closure['originalAuditOutput']['path']), read(closure['output']['path'])
+    require(old_output['failures'] == [HISTORICAL_AUDIT_FAILURE]
+            and new_output == {**old_output, 'failures': []},
+            'Only the exact historical missing-evidence failure may be resolved by the fresh audit')
+    before_coverage, after_coverage = read(closure['coverageBefore']['path']), read(closure['coverageAfter']['path'])
+    require(before_coverage['schema'] == after_coverage['schema'] == 'logos-engine.native-migration-report.v1'
+            and before_coverage['failures'] == old_output['failures']
+            and after_coverage == {**before_coverage, 'failures': []}
+            and new_output == {'complete': after_coverage['complete'], **after_coverage['summary'], 'failures': []},
+            'The fresh full coverage must differ only by removal of the exact historical failure')
+    supplemental = {'auditInputCommit', 'originalSourceManifest', 'initialExecutionReceipt', 'supplementalCommitBindingVerifiedAt'}
+    initial = load(closure['initialExecutionReceipt']['path'])
+    require(initial == {key: value for key, value in closure.items() if key not in supplemental},
+            'Supplemental commit binding rewrote the original standalone audit execution receipt')
+    observation = load(closure['failedReadinessObservation']['path'])
+    require(observation['schema'] == 'logos-engine.followup-readiness-failed-observation.v1'
+            and observation['status'] == 'failed' and observation['toolReturnedExitCode'] == 1
+            and observation['helper'] == amendment['before']
+            and observation['reportedException'] == 'ValueError: Migration audit has unresolved failures'
+            and observation['originalAuditOutput'] == closure['originalAuditOutput']
+            and observation['originalFailures'] == closure['originalFailures']
+            and observation['officialWindowExists'] is False and observation['readinessCreated'] is False
+            and amendment['failedReadinessObservation'] == closure['failedReadinessObservation'],
+            'The failed original readiness observation was not preserved exactly')
+    require(instant(old_check['finishedAt']) <= instant(observation['observedAt']) <= instant(closure['startedAt'])
+            <= instant(closure['finishedAt']) <= instant(closure['supplementalCommitBindingVerifiedAt'])
+            <= instant(amendment['recordedAt']), 'Audit closure and prospective amendment chronology differs')
+    require(closure['auditInputCommit'] == archive['baseCommit']
+            and re.fullmatch(r'[0-9a-f]{40}', closure['auditInputCommit'])
+            and set(closure['auditInputs']) == {AUDIT_TOOL, AUDIT_CONFIG}, 'Audit tool/config historical identity differs')
+    for name, expected in closure['auditInputs'].items():
+        checked({'path': name, 'sha256': expected, 'bytes': local(name).stat().st_size})
+        committed = subprocess.check_output(['git', 'show', closure['auditInputCommit'] + ':' + name], cwd=ROOT)
+        require(hashlib.sha256(committed).hexdigest() == expected,
+                'The original audit tool/config differs from its historical source commit: ' + name)
+    restored = closure['publishedEvidence']
+    require(restored['path'] == RESTORED_AUDIT_PROOF and restored['publishedCommit'] == publication['commit']
+            and restored['gitBlobSha256'] == restored['sha256'], 'Restored evidence does not identify actual published 6A')
+    checked({key: restored[key] for key in ('path', 'sha256', 'bytes')})
+    published_bytes = subprocess.check_output(['git', 'show', publication['commit'] + ':' + RESTORED_AUDIT_PROOF], cwd=ROOT)
+    require(published_bytes == local(RESTORED_AUDIT_PROOF).read_bytes()
+            and hashlib.sha256(published_bytes).hexdigest() == restored['gitBlobSha256'],
+            'Restored evidence bytes differ from actual published 6A')
+    original = load(ORIGINAL_MANIFEST)
+    source_root = Path(ORIGINAL_MANIFEST).parent / 'source'
+    original_inputs = {(source_root / name).as_posix(): item['sha256'] for name, item in original['files'].items()}
+    require(len(original_inputs) == 1786 and closure['originalSourceInputs'] == original_inputs,
+            'Standalone audit did not retain the exact complete original source inventory')
+    for name, expected in original_inputs.items():
+        checked({'path': name, 'sha256': expected, 'bytes': local(name).stat().st_size})
+    config = load(AUDIT_CONFIG)
+    proof_names = {name for item in config['mappings'] for key in ('targets', 'proof') for name in item[key]}
+    proof_names |= {(source_root / name).as_posix() for item in config['mappings'] for name in item['sources']}
+    require(set(closure['proofExistence']) == proof_names and RESTORED_AUDIT_PROOF in proof_names
+            and all(value is True and local(name).is_file() for name, value in closure['proofExistence'].items()),
+            'The exact original audit target/source/evidence existence set differs')
+    return closure
 
 
 def main():
@@ -247,8 +346,32 @@ def main():
 
     validation_retry_path = BASE / 'tools/validation-retry-amendment.json'
     validation_retry = load(validation_retry_path)
+    audit_amendment_path = BASE / 'tools/migration-audit-closure-amendment.json'
+    audit_amendment = load(audit_amendment_path)
+    require(audit_amendment['schema'] == 'logos-engine.followup-migration-audit-closure-amendment.v1'
+            and audit_amendment['before'] == validation_retry['after']
+            and audit_amendment['after'] == fp(Path(__file__))
+            and audit_amendment['priorValidationRetryAmendment'] == fp(validation_retry_path)
+            and audit_amendment['nativeSourceManifestDigest'] == digest
+            and audit_amendment['beforeAnyOfficialCost'] is True
+            and audit_amendment['functionalFormsAlreadyCompleted'] is True,
+            'The post-publication audit amendment does not preserve the existing helper chain and chronology')
+    checked(audit_amendment['beforeRetainedCopy'])
+    require(all(audit_amendment['beforeRetainedCopy'][key] == audit_amendment['before'][key] for key in ('sha256', 'bytes')),
+            'The exact pre-amendment readiness source was not retained')
+    checked(audit_amendment['historicalReadinessReview'])
+    require(audit_amendment['reviewReceiptPath'] == (BASE / 'tools/independent-audit-closure-review.json').relative_to(ROOT).as_posix(),
+            'Unexpected current audit-closure review path')
+    audit_review = load(audit_amendment['reviewReceiptPath'])
+    require(audit_review['status'] == 'passed_source_review_only'
+            and audit_review['readinessHelper'] == audit_amendment['after']
+            and audit_review['publicationHelper'] == audit_amendment['publicationWrapperAfter']
+            and audit_review['amendment'] == fp(audit_amendment_path)
+            and instant(audit_amendment['recordedAt']) <= instant(audit_review['recordedAt']),
+            'Independent audit-closure source review does not bind the exact prospective amendment and helpers')
+    checked(audit_review['publicationHelper'])
     require(validation_retry['schema'] == 'logos-engine.followup-validation-retry-amendment.v1'
-            and validation_retry['after'] == fp(Path(__file__))
+            and validation_retry['after'] == audit_amendment['before']
             and validation_retry['beforeAnyOfficialCost'] is True
             and validation_retry['beforeAnyFunctionalCostCapture'] is True
             and validation_retry['nativeSourceManifestDigest'] == digest
@@ -320,8 +443,8 @@ def main():
             and tests['checks'][0]['tapSummaryComplete'] is True, 'Fresh TAP summary is not a full pass')
     tap = gzip.decompress(local(tests['checks'][0]['output']['path']).read_bytes()).decode()
     require(all(re.findall(r'^# ' + key + r' (\d+)\s*$', tap, re.M) == [str(counts[key])] for key in COUNT_KEYS), 'Fresh TAP totals differ from retained output')
-    audit = read(checks['checks'][2]['output']['path'])
-    require(audit['failures'] == [], 'Migration audit has unresolved failures')
+    audit_closure = verify_migration_audit_closure(candidate_dir, validation_dir, candidate, tests, checks, archive,
+        publication, fp(args.baseline_publication_receipt), audit_amendment, load, checked)
     checked(checks['nativeAgentWorker'])
     require({p.resolve() for p in (ROOT / 'dist/assets').glob('v6-agent-worker-*.js')} == {
         local(checks['nativeAgentWorker']['path'])}, 'Built native worker set changed')
@@ -450,6 +573,10 @@ def main():
             'Work-form declaration does not precede the matching capture')
     require(instant(validation_retry['recordedAt']) <= instant(forms['startedAt']),
             'Validation receipt selection must be declared before the functional cost capture')
+    require(audit_amendment['functionalForms'] == fp(forms_path)
+            and instant(forms['finishedAt']) <= instant(audit_closure['startedAt'])
+            and instant(forms['finishedAt']) <= instant(audit_amendment['recordedAt']),
+            'The audit closure amendment must honestly follow the unchanged completed functional forms')
     expected_forms = [('STCK', True, 3), ('STCK', False, 10), ('SMLP', True, 3), ('SMLP', False, 15)]
     require([(row['case'], row['warmup'], row['actions']) for row in forms['forms']] == expected_forms, 'Missing exact warmup/full work forms')
     for form in forms['forms']:
@@ -482,7 +609,9 @@ def main():
     for record in isolation.get('evidence', []):
         checked(record)
     finalized = datetime.now(timezone.utc)
-    completed = [instant(forms['finishedAt']), instant(integrity['recordedAt'])]
+    completed = [instant(forms['finishedAt']), instant(integrity['recordedAt']), instant(audit_amendment['recordedAt']),
+                 instant(audit_review['recordedAt']),
+                 instant(audit_closure['supplementalCommitBindingVerifiedAt'])]
     completed += [instant(row['finishedAt']) for value in (tests, checks) for row in value['checks']]
     completed += [instant(row.get('postprocessingFinishedAt', row['finishedAt'])) for row in regression['results']]
     require(max(completed) <= instant(isolation['recordedAt']) <= finalized,
@@ -500,6 +629,7 @@ def main():
             and set(checks['buildInputs']) == input_names(('src', 'public', 'content'), BUILD_EXTRAS),
             'Source/test/build membership changed during readiness')
     require(candidate == inventory() and inventory(baseline_checkout) == baseline
+            and all(local(name).is_file() for name in audit_closure['proofExistence'])
             and subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=baseline_checkout, text=True).strip() == publication['commit']
             and not output.exists() and not (perf / 'window.json').exists(), 'Source changed or measurement started during verification')
     finalized = datetime.now(timezone.utc)
@@ -509,6 +639,11 @@ def main():
         'baseline': policy['baseline'], 'candidate': policy['candidate'], 'nativeChanges': sorted(changes),
         'formalTests': counts, 'formalTestFiles': len(test_files), 'regressionChecks': REGRESSION_CHECKS,
         'validationDirectory': validation_dir.relative_to(ROOT).as_posix(), 'validationRetryAmendment': fp(validation_retry_path),
+        'migrationAuditClosure': fp(candidate_dir / 'post-publication-audit/closure.json'),
+        'migrationAuditAmendment': fp(audit_amendment_path),
+        'migrationAuditReview': fp(audit_amendment['reviewReceiptPath']),
+        'historicalMigrationAuditFailures': [HISTORICAL_AUDIT_FAILURE],
+        'migrationAuditStatus': 'passed_after_published_evidence_restoration',
         'regressionScopeAmendment': fp(amendment_path), 'preparedRegressionManifest': fp(prepared_regression_path),
         'baselineRegressionManifest': fp(baseline_regression_path),
         'preparedNativeManifest': fp(prepared_native_path), 'preparedSourceObservation': fp(args.prepared_source_observation),

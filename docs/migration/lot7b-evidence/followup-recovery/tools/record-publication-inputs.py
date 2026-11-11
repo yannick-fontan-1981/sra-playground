@@ -173,7 +173,7 @@ def main():
     parser.add_argument('--validation-directory', type=Path, default=Path('verification-attempt-02/validation'))
     parser.add_argument('--test-scope-plan', type=Path, default=BASE / 'contract/test-scope-final.json')
     parser.add_argument('--baseline-publication-receipt', type=Path, default=BASE / 'coordination/baseline-publication.json')
-    parser.add_argument('--declaration', type=Path, default=BASE / 'contract/publication-verifier-declaration.json')
+    parser.add_argument('--declaration', type=Path, default=BASE / 'contract/publication-verifier-declaration-v2.json')
     args = parser.parse_args()
     perf, final = local(args.performance_directory, BASE), local(args.candidate_source_directory, BASE)
     validation = local(final / args.validation_directory, final)
@@ -187,6 +187,20 @@ def main():
              'testScopePlan': local(args.test_scope_plan, BASE).relative_to(ROOT).as_posix(),
              'baselinePublicationReceipt': local(args.baseline_publication_receipt, BASE).relative_to(ROOT).as_posix()}
     tool_records = {name: fp(path) for name, path in TOOLS.items()}
+    audit_amendment_path = BASE / 'tools/migration-audit-closure-amendment.json'
+    audit_amendment_value = json_file(audit_amendment_path)
+    old_declaration_path = BASE / 'contract/publication-verifier-declaration.json'
+    old_declaration = json_file(old_declaration_path)
+    require(audit_amendment_value['schema'] == 'logos-engine.followup-migration-audit-closure-amendment.v1'
+            and audit_amendment_value['publicationWrapperBefore'] == old_declaration['generator']
+            and audit_amendment_value['publicationWrapperAfter'] == fp(SCRIPT)
+            and audit_amendment_value['before'] == old_declaration['tools']['readiness']
+            and audit_amendment_value['after'] == tool_records['readiness']
+            and audit_amendment_value['originalPublicationDeclaration'] == fp(old_declaration_path)
+            and local(audit_amendment_value['replacementPublicationDeclarationPath']) == declaration_path
+            and old_declaration['paths'] == paths
+            and all(tool_records[name] == old_declaration['tools'][name] for name in TOOLS if name != 'readiness'),
+            'Publication v2 must preserve the initial declaration and every unchanged cost/delivery tool')
     if args.declare:
         require(not declaration_path.exists(), 'Publication verifier declaration already exists')
         require(all(not (perf / name).exists() for name in
@@ -196,6 +210,8 @@ def main():
                  'status': 'declared_before_official_window', 'recordedAt': datetime.now(timezone.utc).isoformat(),
                  'generator': fp(SCRIPT), 'tools': tool_records, 'paths': paths,
                  'candidateManifest': fp(final / 'source-manifest.json'), 'testScopePlan': fp(args.test_scope_plan),
+                 'supersedes': fp(old_declaration_path), 'migrationAuditAmendment': fp(audit_amendment_path),
+                 'migrationAuditClosure': fp(final / 'post-publication-audit/closure.json'),
                  'population': POPULATION, 'structuralExemptions': [],
                  'globalRule': 'pooled_complete_session_median_strictly_below_plus_10_percent_per_case',
                  'requiredChronology': ['publication_declaration', 'readiness', 'official_window',
@@ -233,11 +249,24 @@ def main():
         git('merge-base', '--is-ancestor', prior['currentSourceCommit'], 'HEAD')
 
     prospective = read(declaration_path)
+    audit_amendment = read(audit_amendment_path)
+    read(old_declaration_path)
     require(prospective['schema'] == 'logos-engine.followup-publication-verifier-declaration.v1'
             and prospective['status'] == 'declared_before_official_window'
             and prospective['generator'] == keep(SCRIPT) and prospective['tools'] == tool_records
             and prospective['paths'] == paths and prospective['population'] == POPULATION
-            and prospective['structuralExemptions'] == [], 'Prospective publication verifier differs')
+            and prospective['structuralExemptions'] == []
+            and prospective['supersedes'] == keep(old_declaration_path)
+            and prospective['migrationAuditAmendment'] == keep(audit_amendment_path)
+            and prospective['migrationAuditClosure'] == audit_amendment['auditClosure']
+                == keep(final / 'post-publication-audit/closure.json')
+            and prospective['candidateManifest'] == old_declaration['candidateManifest']
+            and prospective['testScopePlan'] == old_declaration['testScopePlan'], 'Prospective publication verifier differs')
+    for key in ('publicationWrapperBeforeRetainedCopy', 'historicalPublicationReview', 'beforeRetainedCopy', 'historicalReadinessReview'):
+        checked(audit_amendment[key])
+    require(all(audit_amendment['publicationWrapperBeforeRetainedCopy'][key]
+                == audit_amendment['publicationWrapperBefore'][key] for key in ('sha256', 'bytes')),
+            'The exact original publication verifier source was not retained')
     for record in tool_records.values():
         checked(record)
     delivery = load_helper('followup_retained_delivery', TOOLS['delivery'])
@@ -308,6 +337,22 @@ def main():
     archive, archive_check = delivery.verify_source_archive(final, native)
     test_inventory_count, counts = delivery.verify_tests(tests, native)
     build_inventory_count, worker = delivery.verify_build(checks, native)
+    audit_verifier = load_helper('followup_retained_readiness_audit_closure', TOOLS['readiness'])
+    audit_closure = audit_verifier.verify_migration_audit_closure(final, validation, native, tests, checks, archive,
+        publication, keep(args.baseline_publication_receipt), audit_amendment, read, checked)
+    require(readiness['migrationAuditClosure'] == prospective['migrationAuditClosure']
+            and readiness['migrationAuditAmendment'] == prospective['migrationAuditAmendment']
+            and readiness['migrationAuditStatus'] == 'passed_after_published_evidence_restoration'
+            and readiness['historicalMigrationAuditFailures'] == [audit_verifier.HISTORICAL_AUDIT_FAILURE],
+            'Readiness does not bind the exact preserved audit failure and fresh complete closure')
+    audit_review = read(audit_amendment['reviewReceiptPath'])
+    require(readiness['migrationAuditReview'] == keep(audit_amendment['reviewReceiptPath'])
+            and audit_review['status'] == 'passed_source_review_only'
+            and audit_review['readinessHelper'] == tool_records['readiness']
+            and audit_review['publicationHelper'] == keep(SCRIPT)
+            and audit_review['amendment'] == keep(audit_amendment_path)
+            and instant(audit_amendment['recordedAt']) <= instant(audit_review['recordedAt'])
+                <= instant(readiness['isolation']['recordedAt']), 'Audit closure source review or quiet chronology differs')
     require(tests['testFiles'] == scope['testFiles'] and len(tests['testFiles']) == scope['testFileCount']
             == readiness['formalTestFiles'] and counts == readiness['formalTests'], 'Selected formal test scope differs')
     failed = read(final / 'validation/delta-tests-run.json')
@@ -411,6 +456,8 @@ def main():
             and decision['diagnosticArithmeticReview']['status'] == 'passed', 'Phase diagnostics were reclassified')
 
     prospective_records = list({record['path']: record for record in [keep(SCRIPT), keep(declaration_path),
+        prospective['supersedes'], prospective['migrationAuditAmendment'], prospective['migrationAuditClosure'],
+        readiness['migrationAuditReview'],
         *tool_records.values(), *protocol_records, keep(perf / 'readiness.json'), keep(perf / 'strict-work-forms.json'),
         checked(forms['declaration'])]}.values())
     reports, ledger, warmups, strict_rows, candidate_commits = {}, [], [], [], []
@@ -518,6 +565,7 @@ def main():
             and delivery.verify_pinned_source(original) == (pinned_source, pinned_manifest),
             'Verified source, tests, build, regressions or original source changed during review')
     delivery.check_map(archive['files'], 'publication archive inputs')
+    require(all(local(name).is_file() for name in audit_closure['proofExistence']), 'Audit existence inputs changed during publication review')
     checked(archive['archive'])
     for record in list(retained.values()):
         require(fp(record['path']) == record, 'Local publication input changed before finalization: ' + record['path'])
@@ -534,6 +582,11 @@ def main():
               'validationDirectory': paths['validationDirectory'], 'formalTests': counts,
               'formalTestFiles': len(tests['testFiles']), 'testScopePlan': keep(args.test_scope_plan),
               'preservedFailedAttempt': keep(final / 'validation/delta-tests-run.json'),
+              'migrationAuditClosure': prospective['migrationAuditClosure'],
+              'migrationAuditAmendment': prospective['migrationAuditAmendment'],
+              'migrationAuditReview': readiness['migrationAuditReview'],
+              'historicalMigrationAuditFailures': readiness['historicalMigrationAuditFailures'],
+              'migrationAuditStatus': readiness['migrationAuditStatus'],
               'regressions': {'passed': 11, 'total': 11, 'comparisonChecksPassed': 187},
               'fileInventories': inventories, 'nativeAgentWorker': worker, 'sourceArchiveVerification': archive_check,
               'byteStorage': byte_storage, 'strictWorkVerification': keep(perf / 'strict-work-verification.json'),
@@ -551,6 +604,8 @@ def main():
         equal_fields = ['prospectiveDeclaration', 'candidateMeasurementCommits', 'nativeVersion', 'nativeSourceDigest',
             'baseline', 'baselinePublication', 'validationDirectory', 'formalTests', 'formalTestFiles', 'testScopePlan',
             'preservedFailedAttempt', 'regressions', 'fileInventories', 'nativeAgentWorker', 'sourceArchiveVerification',
+            'migrationAuditClosure', 'migrationAuditAmendment', 'migrationAuditReview',
+            'historicalMigrationAuditFailures', 'migrationAuditStatus',
             'byteStorage', 'strictWorkVerification', 'strictVerificationPrecededRendering', 'checkedTrials',
             *POPULATION, 'structuralExemptions', 'costGlobalStatus', 'globalCases', 'diagnosticPhaseRule']
         require(all(prior[key] == result[key] for key in equal_fields), 'A previously accepted publication input differs')

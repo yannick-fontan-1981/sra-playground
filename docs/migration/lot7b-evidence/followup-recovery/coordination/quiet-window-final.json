@@ -1,0 +1,88 @@
+{
+  "schema": "logos-engine.followup-coordinated-quiet.v1",
+  "recordedAt": "2026-11-11T14:16:37.908200+00:00",
+  "requestId": "lot7-followup-f8d5097-strict-window",
+  "status": "acknowledged_quiet_before_window",
+  "otherLaneAcknowledged": true,
+  "ownTrackedComputeEnded": true,
+  "previewStopped": true,
+  "costNodeOptionsOverride": null,
+  "nativeDigests": {
+    "baseline": "ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229",
+    "candidate": "f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279"
+  },
+  "performanceDirectory": "docs/migration/lot7b-evidence/followup-recovery/performance",
+  "acknowledgedLanes": [
+    "6A",
+    "10B",
+    "5C"
+  ],
+  "laneAcknowledgmentKinds": {
+    "6A": "Completed native and documentation publication; explicit GO handoff to follow-up, no active work, costs and publication closed. Exact final owner status retained.",
+    "10B": "Fresh explicit quiet acknowledgment for this request after bounded diagnostic and focused tests completed.",
+    "5C": "Fresh explicit quiet acknowledgment for this request after common proof and checkpoint completed; quiet_scope expressly excludes previews and all queued compute."
+  },
+  "ownAgentsComputeIdle": [
+    "audit_caller_contract",
+    "audit_recovery_release",
+    "rebuild_workshop_witness"
+  ],
+  "functionalCaptureFinishedAt": "2026-11-11T13:55:57.316Z",
+  "exclusiveLockAcquiredAt": "2026-11-11T13:56:47.227929+00:00",
+  "evidence": [
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/coordination/quiet-evidence-6a-final.json",
+      "sha256": "d2d0d8de5c270f72030681f373448fdd82bb2d8a7596acf0a36e7bd511288918",
+      "bytes": 5266
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/coordination/quiet-evidence-10b-final.json",
+      "sha256": "b8dc78c20b975d4939ed68223a3019009ef02f26016ec0b8f320240baa50e48c",
+      "bytes": 4305
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/coordination/quiet-evidence-5c-final.json",
+      "sha256": "07602bad3aaa8b73364ecb7e48557fa6360cb2390e3094918f0edb862f9105b7",
+      "bytes": 4530
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/tools/migration-audit-closure-amendment.json",
+      "sha256": "7041103d6587be4a5ffa3271dd6befb4609c56b3f47b7a9236638256fae5e351",
+      "bytes": 8412
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/tools/independent-audit-closure-review.json",
+      "sha256": "bf4ea186b4f829e56c36688686d8e8d26aef2f4e2ee025096d56bbf72188b548",
+      "bytes": 13728
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/coordination/exclusive-window-lock-acquired.json",
+      "sha256": "a3a218c933c91ec9e90603ae74ceac4ce94418d7592f7ffdf0f928efb88eba4a",
+      "bytes": 383
+    }
+  ],
+  "qualification": "Fresh final isolation record after successful standalone audit, reviewed prospective helper amendment, independent source review and publication-v2 declaration. Exact final6A completion handoff and current request-specific10B/5C quiet statuses are retained. All three own agents explicitly compute-idle. Both root lock-holder sessions are live and nonblocking exclusive-lock checks confirm locks held. Earlier preparation quiet remains immutable; no official sampling has occurred.",
+  "previousPreparationQuiet": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/coordination/quiet-window.json",
+    "sha256": "32159e56c5570c50311ada2f086a26d5da2d56231c3c9e5034aba5ba020760aa",
+    "bytes": 2805
+  },
+  "standaloneAuditClosure": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/integrated-final/post-publication-audit/closure.json",
+    "sha256": "2c4251de16e5135bc471ade760aaf0a79fabcb7e450093882aaa14eeb237ac64",
+    "bytes": 569385
+  },
+  "publicationVerifierDeclaration": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/contract/publication-verifier-declaration-v2.json",
+    "sha256": "7442f3f6bd749c290e2021ec723ce55e3faa0e341f1f9c158c215d71cbe81005",
+    "bytes": 5653
+  },
+  "sourceReviewComplete": true,
+  "allOwnAgentsConfirmedComputeIdle": true,
+  "rootLockHolderSessionsConfirmedAlive": [
+    54884,
+    75840
+  ],
+  "exclusiveLockStillHeld": true,
+  "publicationLockStillHeld": true
+}
