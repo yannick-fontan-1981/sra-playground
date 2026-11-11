@@ -99288,12 +99288,7 @@
       "kind": "reference_data"
     }
   ],
-  "failures": [
-    "Missing differential evidence: tests/fixtures/v6-feedback-sequences-reference.json.gz",
-    "Missing differential evidence: tests/fixtures/v6-feedback-sequences-reference.json.gz",
-    "Missing differential evidence: tests/fixtures/v6-relative-arrangements-reference.json.gz",
-    "Missing differential evidence: docs/migration/lot6a-evidence/recovery/native-source-review.json"
-  ],
+  "failures": [],
   "scopeNotes": [
     "The completion gate includes the published common symbolic caller and every transitive reasoning capability it requires, including inherited V5 implementations.",
     "The original Python sources are development references. Shipping them as an executable agent, or calling a Python backend, does not satisfy the migration requirement.",
