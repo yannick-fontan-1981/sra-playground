@@ -1,0 +1,51 @@
+{
+  "schema": "logos-engine.lot8a-source-checkpoint-transport.v1",
+  "recordedAt": "2026-11-11T20:08:44.877282+00:00",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "ref": "refs/heads/lot8a-motif-checkpoint-20261111",
+  "expectedCommit": "5e58345ff8f4b7461088cda9ed352596045f6878",
+  "expectedRemoteBefore": "30c9a8944f1ffd3b76df14a5d5515c3ae9520e3d",
+  "status": "pushed_and_verified",
+  "pushCommandStarted": true,
+  "pushSucceeded": true,
+  "ordinaryPush": true,
+  "forceUsed": false,
+  "fetchPerformed": true,
+  "fetchSucceeded": true,
+  "fetchSourceBranchRequested": true,
+  "commitCreated": false,
+  "sitePublicationPerformed": false,
+  "credentialPersisted": false,
+  "inputDeadlineSeconds": 45,
+  "inputWaitHoldsPerformanceLock": false,
+  "generatorSha256": "aaf6e73040de866bc78417d8396abb31fd487e00eda88c3de8c4c28689384492",
+  "qualification": "Git source checkpoint only. Native version, functional gates, cost and Site publication require their own evidence.",
+  "returnedSourceBranch": "main",
+  "authenticationMode": "http_extra_header",
+  "authenticationTransport": "hidden_stdin_then_process_environment_only",
+  "sourceRemoteCommitFetched": "2981a62d456802d39dcde316734793e905fb0ebf",
+  "headAndWorktreeUnchangedAfterFetch": true,
+  "verifiedExistingRemoteAncestors": [
+    {
+      "ref": "refs/heads/lot8a-motif-checkpoint-20261111",
+      "remoteCommit": "30c9a8944f1ffd3b76df14a5d5515c3ae9520e3d",
+      "verifiedExistingAncestor": "30c9a8944f1ffd3b76df14a5d5515c3ae9520e3d",
+      "additionalFetch": false
+    }
+  ],
+  "objectInventoryExclusions": [
+    "2981a62d456802d39dcde316734793e905fb0ebf",
+    "30c9a8944f1ffd3b76df14a5d5515c3ae9520e3d"
+  ],
+  "sourceMissingObjectCount": 50,
+  "sourceMissingRawBytes": 13269105,
+  "sourceMissingLargestObjectBytes": 2571393,
+  "sourceMissingObjectsAtLeast32MiB": [],
+  "sourceMissingRawLimitBytes": 41943040,
+  "objectInventoryQualification": "Raw object headers only, excluding only the freshly fetched main and ancestors independently verified on this same remote; not a measured pack size. All proof objects remain retained in remote history.",
+  "remoteCommitBefore": "30c9a8944f1ffd3b76df14a5d5515c3ae9520e3d",
+  "remoteCommitAfter": "5e58345ff8f4b7461088cda9ed352596045f6878",
+  "localCommitAfter": "5e58345ff8f4b7461088cda9ed352596045f6878",
+  "localCleanAfter": true,
+  "finishedAt": "2026-11-11T20:08:50.926286+00:00"
+}

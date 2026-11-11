@@ -16,6 +16,8 @@ Le [dernier constat de publication](integration-provisional-063-064-01/coordinat
 
 La [suite déclarée](integration-provisional-063-064-01/validation-summary.json) est de réconcilier les publications effectives 0.63 puis 0.64, geler les entrées finales affectées, qualifier les preuves communes des trois propriétaires et les **11 régressions enregistrées**, puis les formes de travail hors chronométrage et la provenance des graphes. Le [protocole prospectif](integration-provisional-063-064-01/contract/cost-qualification-plan.json) prévoit **40 essais ABBA : 32 sessions mesurées/400 actions, plus 8 préchauffages/24 actions exclus**. La médiane des sessions complètes doit augmenter de **strictement moins de +10 % pour STCK et pour SMLP séparément** ; une phase au-delà de +10 % peut être acceptée si les deux critères globaux passent, en conservant tous les échantillons et diagnostics. Publication 0.65 seulement après acceptation ; **8B reste distinct et ouvert**, comme le précise le [bilan](integration-provisional-063-064-01/validation-summary.json).
 
+Le jalon validé et ses preuves sont [sauvegardés et vérifiés à distance](integration-provisional-063-064-01/coordination/source-checkpoint-validation.json) au commit `5e58345ff8f4b7461088cda9ed352596045f6878`, branche `lot8a-motif-checkpoint-20261111`.
+
 <!-- LOT8A_INTEGRATION_END -->
 
 ## Jalon de développement antérieur conservé sur Site 103
