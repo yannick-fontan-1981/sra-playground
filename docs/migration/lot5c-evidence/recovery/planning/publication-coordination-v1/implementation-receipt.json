@@ -1,0 +1,58 @@
+{
+  "schema": "logos-engine.lot5c.publication-guardian-implementation.v1",
+  "status": "implemented_temporary_tests_passed_pending_independent_review",
+  "recordedAt": "2026-11-11T21:07:14.521220+00:00",
+  "files": [
+    {
+      "file": "README.md",
+      "bytes": 10098,
+      "sha256": "0abf9647265cc95b1b33e6cae54160c3858eb568a1b68427ab904f8f5e9dc637"
+    },
+    {
+      "file": "operator-contract.json",
+      "bytes": 2441,
+      "sha256": "c6613a9b095222e72ae3b221dd59d142d368700506f34541d4d2271be335c98f"
+    },
+    {
+      "file": "publication-guard.py",
+      "bytes": 19869,
+      "sha256": "0cb8b31989e167a5776206fc89c3efb8031688a1c539c569dc9169d674876deb"
+    },
+    {
+      "file": "test-execution-01.json",
+      "bytes": 20030,
+      "sha256": "616174b67063b5902c868dec142d3cab93b4710ea066a7b9d6776092f7289194"
+    },
+    {
+      "file": "test-publication-guard.py",
+      "bytes": 11963,
+      "sha256": "9684752fa90a6bb9df4c4c5793680aab368ce4cfc597176abf1826d3ca6bfcb7"
+    }
+  ],
+  "guardian": {
+    "file": "publication-guard.py",
+    "bytes": 19869,
+    "sha256": "0cb8b31989e167a5776206fc89c3efb8031688a1c539c569dc9169d674876deb"
+  },
+  "tests": {
+    "file": "test-execution-01.json",
+    "status": "passed",
+    "cases": 10,
+    "checksPassed": 54,
+    "checksTotal": 54,
+    "allOwnedTestProcessesTerminal": true
+  },
+  "toolSession": {
+    "realSessionId": 1846,
+    "terminalChunkId": "9ef66d",
+    "exitCode": 0
+  },
+  "actualProductionPublicationMutexAcquired": false,
+  "actualProviderCalls": 0,
+  "actualCredentialsUsed": false,
+  "actualGitOrBuildOrCostCalls": 0,
+  "oldWrapperCostAndNativeFilesModified": false,
+  "guardProductionLaunchPerformed": false,
+  "writesOutsideNewScope": "only explicitly required real session start/terminal metadata under shared coordination and automatically removed TEMP test fixtures",
+  "preflight227SecondOverrunPreserved": true
+}

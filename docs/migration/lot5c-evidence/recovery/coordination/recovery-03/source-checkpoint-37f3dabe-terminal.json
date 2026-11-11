@@ -1,0 +1,12 @@
+{
+  "schema": "logos-engine.lot5c-execution-terminal.v1",
+  "sessionId": 20136,
+  "observedAt": "2026-11-11T20:39:04.511712+00:00",
+  "terminal": {
+    "chunk_id": "52a6dd",
+    "wall_time_seconds": 2.4956e-05,
+    "exit_code": 0,
+    "original_token_count": 34,
+    "output": "{\"schema\": \"logos-engine.lot5c.bounded-locked-command.v2\", \"status\": \"passed\", \"reason\": null, \"exitCode\": 0, \"cleanupComplete\": true}\r\n"
+  }
+}

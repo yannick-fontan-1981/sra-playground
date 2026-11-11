@@ -1,0 +1,68 @@
+{
+  "schema": "logos-engine.lot5c-orchestrator-v3-targeted-tests.v1",
+  "startedAt": "2026-11-11T20:53:31.417551+00:00",
+  "finishedAt": "2026-11-11T20:53:34.425357+00:00",
+  "elapsedSeconds": 3.007801,
+  "status": "passed",
+  "casesPassed": 3,
+  "casesTotal": 3,
+  "configurationAssertions": 8,
+  "exactOldRequestACKsRejected": [
+    "lot5c-cost-a33a5f88-final-01",
+    "lot5c-cost-a33a5f88-recovery-02"
+  ],
+  "inputsBefore": [
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/test-orchestrator-v3-rebinding.py",
+      "bytes": 3300,
+      "sha256": "5a563f40dbdf6826f1e7f39a5c58e60d087956a98cd30e5bb40c2223f3a39bdc"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/orchestrate-cost-available-03.py",
+      "bytes": 22795,
+      "sha256": "9cf2dde454d17cc24d0b6e7900e57badbc623d5283a64138c7d6db589ffb6b04"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/test-orchestrate-cost-recovery-02.py",
+      "bytes": 14675,
+      "sha256": "1c16c2fa8e189ed1facfc9234cec8585b1c27cd12fdf8809b794608569635dbc"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/cost-process-control-v2.py",
+      "bytes": 8499,
+      "sha256": "7e5fa20cdc5590cb28fdfbda24a9f493ec3e24534b9866fa366221a1a3a5a24c"
+    }
+  ],
+  "inputsAfter": [
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/test-orchestrator-v3-rebinding.py",
+      "bytes": 3300,
+      "sha256": "5a563f40dbdf6826f1e7f39a5c58e60d087956a98cd30e5bb40c2223f3a39bdc"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/orchestrate-cost-available-03.py",
+      "bytes": 22795,
+      "sha256": "9cf2dde454d17cc24d0b6e7900e57badbc623d5283a64138c7d6db589ffb6b04"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/test-orchestrate-cost-recovery-02.py",
+      "bytes": 14675,
+      "sha256": "1c16c2fa8e189ed1facfc9234cec8585b1c27cd12fdf8809b794608569635dbc"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/cost-process-control-v2.py",
+      "bytes": 8499,
+      "sha256": "7e5fa20cdc5590cb28fdfbda24a9f493ec3e24534b9866fa366221a1a3a5a24c"
+    }
+  ],
+  "inputsUnchanged": true,
+  "testNames": [
+    "test_old_incomplete_future_ack_refused",
+    "test_timeout_releases_and_one_cycle_only",
+    "test_fresh_raw_acks_then_controller_refusal_release"
+  ],
+  "log": "test_old_incomplete_future_ack_refused (lot5c_reused_temporary_fixture.Cases.test_old_incomplete_future_ack_refused) ... ok\ntest_timeout_releases_and_one_cycle_only (lot5c_reused_temporary_fixture.Cases.test_timeout_releases_and_one_cycle_only) ... ok\ntest_fresh_raw_acks_then_controller_refusal_release (lot5c_reused_temporary_fixture.Cases.test_fresh_raw_acks_then_controller_refusal_release) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 2.899s\n\nOK\n",
+  "temporaryMutexOnly": true,
+  "realQuietOrEXOrBenchmarkLaunched": false,
+  "qualification": "Only changed namespace wiring and authorization boundary retested. The remaining unchanged process/signal cleanup cases reuse the exact v2 source proof and retained13/13 result."
+}

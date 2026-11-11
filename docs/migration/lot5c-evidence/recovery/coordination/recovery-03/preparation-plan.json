@@ -1,0 +1,30 @@
+{
+  "schema": "logos-engine.lot5c-available03-preparation-plan.v1",
+  "recordedAt": "2026-11-11T20:52:50.652863+00:00",
+  "requestId": "lot5c-cost-a33a5f88-available-03",
+  "status": "ordinary_preparation_not_a_quiet_request",
+  "newUserInstruction": "il y a eu une interruption, continue",
+  "materiallyChangedCondition": {
+    "receipt": "lot10c-exclusive-availability-observed.json",
+    "observedAt": "2026-11-11T20:42:14.650043+00:00",
+    "actualEXAcquisitionAndRelease": true,
+    "sameExistingMutex": true,
+    "holderIdentityNotEstablished": true
+  },
+  "priorRecovery02ClosedAndNotReopened": true,
+  "initialCheckpoint": "501198d7638c7a56c3b85d357beb917469899402",
+  "currentVerifiedCheckpoint": "37f3dabeaf8807045effb81cc3437da53f10ee97",
+  "singleFutureCycleMaximum": 1,
+  "availabilityMaximumSeconds": 600,
+  "activeWindowMaximumSeconds": 5400,
+  "maximumExclusiveAttempts": 1,
+  "currentPeerWorkMayFinishNormally": true,
+  "freshAllWorkerACKRequired": true,
+  "oldACKAndReadinessForbidden": true,
+  "temporaryMutexOnlyPreparationTests": true,
+  "nativeTestsAndReplaysReused": true,
+  "benchmarkUnchanged": true,
+  "noAutomaticRetryAfterThisCycle": true,
+  "ordinaryCommandGuard": "bounded timeout plus flock --close --shared --nonblock; real helper input before its own mutex",
+  "quietRequested": false
+}

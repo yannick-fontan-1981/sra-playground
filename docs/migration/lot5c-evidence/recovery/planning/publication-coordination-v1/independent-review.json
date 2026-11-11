@@ -1,0 +1,281 @@
+{
+  "schema": "logos-engine.lot5c.publication-guard-independent-review.v1",
+  "status": "passed_source_review",
+  "reviewer": "lot5_site101_merge_audit",
+  "guard": {
+    "path": "docs/migration/lot5c-evidence/recovery/planning/publication-coordination-v1/publication-guard.py",
+    "bytes": 20084,
+    "sha256": "cab500c5aa0495af077e5961ce15a2c56f2c2ba650ffb4d9605c615f454198b9"
+  },
+  "subjects": [
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/publication-coordination-v1/implementation-receipt-02.json",
+      "bytes": 2205,
+      "sha256": "e3c481e2cc58cc89037eeb89a8a0385963639f24c9abaaca8b9486804b28a05c"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/publication-coordination-v1/implementation-receipt.json",
+      "bytes": 1897,
+      "sha256": "2107cd8987b8022bdab58bb786809d20b55f2d0d013e639d581792e254c1a5c3"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/publication-coordination-v1/operator-contract.json",
+      "bytes": 2773,
+      "sha256": "dcc1106d48f8c43d0d1d3f6c81b1129abb1444ad754fe30815e5d9f681ef4f89"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/publication-coordination-v1/publication-guard-before-pid-namespace-fix.py",
+      "bytes": 19869,
+      "sha256": "0cb8b31989e167a5776206fc89c3efb8031688a1c539c569dc9169d674876deb"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/publication-coordination-v1/publication-guard.py",
+      "bytes": 20084,
+      "sha256": "cab500c5aa0495af077e5961ce15a2c56f2c2ba650ffb4d9605c615f454198b9"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/publication-coordination-v1/README.md",
+      "bytes": 10378,
+      "sha256": "246a47078cc0dc9c15bde246dc18f451c1ef198d1d2c6e0e1dcbaf3224b9ad6d"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/publication-coordination-v1/test-execution-01.json",
+      "bytes": 20030,
+      "sha256": "616174b67063b5902c868dec142d3cab93b4710ea066a7b9d6776092f7289194"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/publication-coordination-v1/test-execution-02.json",
+      "bytes": 2025,
+      "sha256": "239d2c95cef2f919df93b36cc9b209dc88bcb17b9982a5c186bf4f0c36487626"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/publication-coordination-v1/test-publication-guard.py",
+      "bytes": 11963,
+      "sha256": "9684752fa90a6bb9df4c4c5793680aab368ce4cfc597176abf1826d3ca6bfcb7"
+    }
+  ],
+  "checks": [
+    {
+      "id": "exact_guard_final_hash",
+      "passed": true,
+      "detail": "Final20084-byte source; original19869-byte source preserved separately."
+    },
+    {
+      "id": "existing_mutex_no_creation_or_replacement",
+      "passed": true,
+      "detail": "Production identity fixed to publication.lock device27/inode1971855; regular-file validation precedes acquisition."
+    },
+    {
+      "id": "one_ex_nb_attempt",
+      "passed": true,
+      "detail": "Single nonblocking acquisition; no retry or alternative mutex path in public CLI."
+    },
+    {
+      "id": "lock_descriptor_noninheritable",
+      "passed": true,
+      "detail": "O_CLOEXEC plus explicit noninheritability; no child that could retain the descriptor."
+    },
+    {
+      "id": "no_stdin_child_or_provider_call",
+      "passed": true,
+      "detail": "Metadata-only guardian; external source/API operations remain under root's separate authorization and actual tool-handle checks."
+    },
+    {
+      "id": "fixed600_no_cli_override",
+      "passed": true,
+      "detail": "Total monotonic deadline begins before setup; heartbeats cannot renew it."
+    },
+    {
+      "id": "deadline_expiry_releases",
+      "passed": true,
+      "detail": "Retained TEMP proof verifies exit124, unlock and reacquisition."
+    },
+    {
+      "id": "signals_use_common_cleanup",
+      "passed": true,
+      "detail": "TERM/INT retained TEMP proofs; HUP shares the same inspected flag/cleanup path. No new signal/probe was executed."
+    },
+    {
+      "id": "unlock_before_terminal_journals",
+      "passed": true,
+      "detail": "finally unlock/close precedes best-effort terminal writes; journal failure cannot keep an owned live FD."
+    },
+    {
+      "id": "journal_failure_cleanup_proved",
+      "passed": true,
+      "detail": "Retained case proves failed journal, fallback terminal and reacquirable TEMP lock."
+    },
+    {
+      "id": "durable_intent_before_ack",
+      "passed": true,
+      "detail": "The global intent ledger is file-fsynced and directory-fsynced before accepted sequence is exposed; no ACK means no external API call."
+    },
+    {
+      "id": "atomic_metadata_writes",
+      "passed": true,
+      "detail": "Exclusive numbered progress and terminal files; atomic replacement for mutable ledger/journal; bounded JSON."
+    },
+    {
+      "id": "ack_bound_to_request_sequence_operation",
+      "passed": true,
+      "detail": "Progress helper waits up to3seconds for the exact operation ACK and keeps checking metadata lease conditions."
+    },
+    {
+      "id": "root_session_check_required_before_each_phase",
+      "passed": true,
+      "detail": "Actual execution-service session_id is an explicit operator precondition; guardian PID is never a substitute."
+    },
+    {
+      "id": "cross_namespace_pid_probe_removed",
+      "passed": true,
+      "detail": "Resolved false-negative/false-positive PID liveness inference."
+    },
+    {
+      "id": "pid_fix_scope_minimal",
+      "passed": true,
+      "detail": "Hold adds only diagnostic/required-check flags; inspect removes PID probe. Mutex, ledger, ACK, deadline and cleanup bodies otherwise unchanged."
+    },
+    {
+      "id": "targeted_pid_contract_8_of_8",
+      "passed": true,
+      "detail": "Pure TEMP metadata/trap test covers inaccessible or reused local PID plus unchanged request/heartbeat/deadline checks."
+    },
+    {
+      "id": "targeted_test_no_guard_or_real_probe",
+      "passed": true,
+      "detail": "No new guard process, signal, namespace inspection, production EX or provider call."
+    },
+    {
+      "id": "original_source_and_ten_case_receipt_preserved",
+      "passed": true,
+      "detail": "Historical source is explicitly mapped to the archived pre-fix file; old test result is unchanged."
+    },
+    {
+      "id": "ten_cases_54_checks_retained",
+      "passed": true,
+      "detail": "Existing lifecycle tests were read/bound, not repeated."
+    },
+    {
+      "id": "unresolved_ledger_survives_local_release",
+      "passed": true,
+      "detail": "Local timeout/release is not remote cancellation; persistent shared unresolved state blocks a normal later guardian."
+    },
+    {
+      "id": "begin_cannot_overwrite_unresolved",
+      "passed": true,
+      "detail": "Further begin refused while prior operation remains unresolved."
+    },
+    {
+      "id": "reconciliation_cannot_begin",
+      "passed": true,
+      "detail": "Reconciliation mode permits only updates to the matching existing unresolved operation, never a new save or source operation."
+    },
+    {
+      "id": "native_ids_and_source_identity_stable",
+      "passed": true,
+      "detail": "Updates must keep the same operation ID and cannot alter already-bound commit/archive/version/deployment identities."
+    },
+    {
+      "id": "terminal_evidence_required",
+      "passed": true,
+      "detail": "Terminal clear requires a regular sanitized evidence file with exactSHA256 and bounded size; operator verifies its provider meaning."
+    },
+    {
+      "id": "not_started_requires_reconciliation",
+      "passed": true,
+      "detail": "A claim of no external start cannot clear the block through ordinary mode."
+    },
+    {
+      "id": "normal_run_reuse_refused",
+      "passed": true,
+      "detail": "Fresh external run directory required; old journal/terminal remains preserved."
+    },
+    {
+      "id": "unknown_result_blocks_repetition_tested",
+      "passed": true,
+      "detail": "Retained fixture verifies native IDs, unresolved status, next normal refusal and unchanged ledger."
+    },
+    {
+      "id": "production_defaults_fixed_and_external",
+      "passed": true,
+      "detail": "Public CLI has no custom lock/inode/ledger/duration override; production journals stay outside checkout."
+    },
+    {
+      "id": "temporary_results_not_publication_evidence",
+      "passed": true,
+      "detail": "All test IDs/provider receipts are TEMP protocol fixtures; no production publishing or audience mutation test."
+    }
+  ],
+  "checksPassed": 30,
+  "checksTotal": 30,
+  "resolvedFindings": [
+    {
+      "id": "cross_execution_pid_liveness_inference",
+      "severity": "blocking_before_fix",
+      "originalSourceSHA256": "0cb8b31989e167a5776206fc89c3efb8031688a1c539c569dc9169d674876deb",
+      "finding": "The guardian PID belongs to another execution namespace. os.kill(pid,0) from a later inspect command could reject a live guardian or accept an unrelated local PID.",
+      "resolution": "Removed all PID probing; PID is diagnostic only. Inspect checks held state, exact request, fresh heartbeat and unexpired deadline, and explicitly requires the root's independent real tool-session check.",
+      "fixedSourceSHA256": "cab500c5aa0495af077e5961ce15a2c56f2c2ba650ffb4d9605c615f454198b9",
+      "targetedChecksPassed": 8
+    }
+  ],
+  "unresolvedFindings": [],
+  "retainedTests": {
+    "cases": 10,
+    "checksPassed": 54,
+    "checksTotal": 54,
+    "realToolSessionId": 1846,
+    "terminalChunkId": "9ef66d",
+    "exitCode": 0,
+    "reexecuted": false,
+    "sourceBeforeFixPreserved": true
+  },
+  "targetedCorrectionTest": {
+    "checksPassed": 8,
+    "checksTotal": 8,
+    "realToolSessionId": null,
+    "completedWithoutYield": true,
+    "terminalChunkId": "244b30",
+    "exitCode": 0,
+    "guardProcessesLaunched": 0,
+    "actualPidProbesOrSignals": 0,
+    "productionExclusiveLockAttempts": 0
+  },
+  "operatorRequirements": [
+    "Use only after actual5Ccost acceptance, release of its cost quiet request and the required final source/build/evidence gates.",
+    "Record the real execution-service session_id from the hold launch and verify that actual session is alive before each source/API/poll phase. inspect alone is metadata validation, not execution-service liveness.",
+    "Wait for the successful exact begin ACK, then recheck actual session and fresh request/heartbeat/deadline before making the separate external call. No ACK or insufficient remaining lease means no call.",
+    "Persist actual provider version/deployment IDs and observed states. A pending deployment or uncertain transport response never authorizes repeating save/deploy.",
+    "After local expiry, error or release, retain unresolved shared ledger state. Obtain actual read-only provider observations and use reconciliation-only to update the matching existing operation before considering a new operation.",
+    "Collect actual guard terminal tool output and terminal metadata after release; a release request alone is not completion.",
+    "Keep the existing publication mutex and unresolved ledger intact; do not delete, replace or bypass either to obtain another attempt."
+  ],
+  "scopeLimits": [
+    "This is independent source/receipt review, not a production guardian launch or provider-publication result.",
+    "No EX on the production publication mutex, source opening, credential input, API call, Git/build/cost/native operation, process signal or /proc inspection was performed by this reviewer.",
+    "The ten lifecycle cases are retained evidence for unchanged bodies. The narrow PID correction is covered by the separate8-check pure test; neither set was rerun by this reviewer.",
+    "Only cooperative publishers obeying the same shared ledger are contained. The guardian cannot fence an already issued remote request or stop an API running elsewhere.",
+    "The guardian checks terminal evidence bytes/identity, not the semantic truth of a provider response; the operator must retain and correctly interpret actual provider observations.",
+    "Monotonic deadline handling bounds normal operation; hard real-time filesystem persistence cannot be guaranteed. Optional outer watchdog and actual terminal collection remain appropriate as documented.",
+    "Historical implementation-receipt.json binds the pre-fix version. The old guard source and original test receipt are preserved explicitly; README and operator-contract were intentionally corrected and are pinned in their final versions.",
+    "Publication review is separate from the already completed93-subject coordination-v3 cost review. No cost input or earlier review was changed."
+  ],
+  "productionPublicationMutexAcquired": false,
+  "actualProviderCalls": 0,
+  "guardProcessesLaunchedByReviewer": 0,
+  "testsExecutedByReviewer": 0,
+  "existingFilesModifiedByReviewer": false,
+  "actualToolSessionCheckRequired": true,
+  "pidLivenessInferenceUsed": false,
+  "allPriorReviewerCommandsTerminal": true,
+  "liveReviewerSessionIds": [],
+  "lastSourceReadAt": "2026-11-11T21:11:45.986130+00:00",
+  "qualification": "The corrected helper is suitable for the documented cooperative publication protocol, conditional on real tool-session checks and observed provider evidence. This review does not authorize a provider call, establish cost acceptance or assert a publication outcome.",
+  "recordedAt": "2026-11-11T21:14:00.659592+00:00",
+  "finalQuietCheck": {
+    "lot5c": false,
+    "lot6b": false,
+    "lot8a": null,
+    "lot10c": false
+  }
+}

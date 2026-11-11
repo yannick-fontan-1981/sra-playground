@@ -1,0 +1,47 @@
+{
+  "schema": "logos-engine.lot5c.publication-guardian-operator-contract.v1",
+  "productionLock": {
+    "path": "/workspace/shared/sra-coordination/publication.lock",
+    "device": 27,
+    "inode": 1971855,
+    "create": false,
+    "replace": false,
+    "acquisition": "EX|NB once",
+    "inheritable": false
+  },
+  "productionDeadlineSeconds": 600,
+  "durationOverrideInPublicCLI": false,
+  "stdinUsed": false,
+  "childProcesses": 0,
+  "providerCallsByGuardian": 0,
+  "globalLedger": "/workspace/shared/sra-coordination/publication-operation-state.json",
+  "realToolSessionId": "Root records the actual exec tool ID separately before any operation and verifies it remains alive before every phase. Never infer it from pid.",
+  "runDirectory": "fresh external directory under /workspace/shared/sra-coordination",
+  "progressFormat": {
+    "schema": "logos-engine.publication-progress.v1",
+    "requestId": "exact guard request ID",
+    "sequence": "next integer1..128, chosen by progress CLI",
+    "event": "begin or update",
+    "operationId": "stable exact operation ID",
+    "operation": "for begin only:prepare_source|save_version|save_and_deploy_private|deploy_version|publish_on_push",
+    "status": "for update only:pending|building|publishing|unknown|saved|succeeded|failed|not_started",
+    "commitSha": "exact40hex when required",
+    "archiveSha256": "optional exact64hex",
+    "versionId": "exact native saved-version ID if observed",
+    "deploymentId": "exact native deployment ID if observed",
+    "evidencePath": "absolute regular sanitized evidence file, required for terminal update",
+    "evidenceSha256": "exact64hex of that evidence file, required for terminal update"
+  },
+  "releaseFormat": {
+    "schema": "logos-engine.publication-release.v1",
+    "requestId": "exact guard request ID",
+    "reason": "completed or abort"
+  },
+  "beforeProviderCall": "wait for progress CLI success and accepted sequence; inspect fresh guard liveness/deadline; only then make the external call",
+  "unknownProviderRule": "preserve the unresolved shared ledger across local timeout/release; no new operation until actual provider reconciliation",
+  "reconcileOnly": "permits evidence-bound update of an existing unresolved operation, never begin",
+  "audienceBasis": "root-supplied previous successful private publications at revision3 and unchanged current metadata; no native mutation probe",
+  "testsAreProductionEvidence": false,
+  "pidQualification": "Diagnostic within the guardian execution namespace only; inspect never probes this PID. Root must verify the actual tool session separately before every phase.",
+  "inspectScope": "held-state metadata, exact request, fresh heartbeat and unexpired deadline only; returns actualToolSessionCheckRequired:true."
+}

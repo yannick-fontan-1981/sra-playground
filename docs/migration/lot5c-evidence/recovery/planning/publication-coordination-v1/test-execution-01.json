@@ -1,0 +1,628 @@
+{
+  "schema": "logos-engine.lot5c.publication-guard-independent-tests.v1",
+  "status": "passed",
+  "startedAt": "2026-11-11T21:04:25.947103+00:00",
+  "guardian": {
+    "file": "publication-guard.py",
+    "bytes": 19869,
+    "sha256": "0cb8b31989e167a5776206fc89c3efb8031688a1c539c569dc9169d674876deb"
+  },
+  "harness": {
+    "file": "test-publication-guard.py",
+    "bytes": 11963,
+    "sha256": "9684752fa90a6bb9df4c4c5793680aab368ce4cfc597176abf1826d3ca6bfcb7"
+  },
+  "temporaryMutexOnly": true,
+  "productionPublicationMutexAcquired": false,
+  "actualProviderCalls": 0,
+  "actualSourceOrGitCommands": 0,
+  "productionEvidenceCreated": false,
+  "cases": [
+    {
+      "name": "one_nonblocking_refusal",
+      "passed": true,
+      "checks": [
+        {
+          "name": "exit_nonzero",
+          "passed": true
+        },
+        {
+          "name": "one_attempt",
+          "passed": true
+        },
+        {
+          "name": "never_acquired",
+          "passed": true
+        },
+        {
+          "name": "exact_reason",
+          "passed": true
+        },
+        {
+          "name": "no_provider_record",
+          "passed": true
+        }
+      ],
+      "details": {
+        "acceptedProgressSequence": 0,
+        "apiCallsMade": false,
+        "childProcessesSpawned": false,
+        "deadlineAt": "2026-11-11T21:04:26.796295+00:00",
+        "durationLimitSeconds": 0.8,
+        "durationSeconds": 0.00037,
+        "exceptionClass": "GuardError",
+        "exitCode": 1,
+        "finishedAt": "2026-11-11T21:04:25.996657+00:00",
+        "followUpRequired": false,
+        "lockAcquired": false,
+        "lockAttemptCount": 1,
+        "lockDescriptorInheritable": false,
+        "lockReleased": false,
+        "pid": 7,
+        "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+        "providerCancellationClaimed": false,
+        "providerUnresolved": false,
+        "reason": "publication_lock_unavailable",
+        "reconcileOnly": false,
+        "requestId": "test-only-refused",
+        "schema": "logos-engine.lot5c.publication-guard.v1",
+        "startedAt": "2026-11-11T21:04:25.996295+00:00",
+        "state": "failed",
+        "toolSessionBinding": "root_records_actual_tool_id_separately_before_first_operation",
+        "toolSessionId": null
+      }
+    },
+    {
+      "name": "absent_mutex_never_created",
+      "passed": true,
+      "checks": [
+        {
+          "name": "exit_nonzero",
+          "passed": true
+        },
+        {
+          "name": "absent_still",
+          "passed": true
+        },
+        {
+          "name": "zero_attempts",
+          "passed": true
+        },
+        {
+          "name": "never_acquired",
+          "passed": true
+        }
+      ],
+      "details": {
+        "acceptedProgressSequence": 0,
+        "apiCallsMade": false,
+        "childProcessesSpawned": false,
+        "deadlineAt": "2026-11-11T21:04:26.851106+00:00",
+        "durationLimitSeconds": 0.8,
+        "durationSeconds": 0.003317,
+        "errno": 2,
+        "exceptionClass": "FileNotFoundError",
+        "exitCode": 1,
+        "finishedAt": "2026-11-11T21:04:26.054403+00:00",
+        "followUpRequired": false,
+        "lockAcquired": false,
+        "lockAttemptCount": 0,
+        "lockReleased": false,
+        "pid": 8,
+        "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+        "providerCancellationClaimed": false,
+        "providerUnresolved": false,
+        "reason": "journal_or_system_error",
+        "reconcileOnly": false,
+        "requestId": "test-only-missing",
+        "schema": "logos-engine.lot5c.publication-guard.v1",
+        "startedAt": "2026-11-11T21:04:26.051106+00:00",
+        "state": "failed",
+        "toolSessionBinding": "root_records_actual_tool_id_separately_before_first_operation",
+        "toolSessionId": null
+      }
+    },
+    {
+      "name": "fixed_deadline_and_unlock",
+      "passed": true,
+      "checks": [
+        {
+          "name": "held_exclusively",
+          "passed": true
+        },
+        {
+          "name": "exit124",
+          "passed": true
+        },
+        {
+          "name": "expired",
+          "passed": true
+        },
+        {
+          "name": "released",
+          "passed": true
+        },
+        {
+          "name": "reacquired",
+          "passed": true
+        },
+        {
+          "name": "no_child",
+          "passed": true
+        },
+        {
+          "name": "fd_noninheritable",
+          "passed": true
+        },
+        {
+          "name": "provider_not_cancelled",
+          "passed": true
+        }
+      ],
+      "details": {
+        "acceptedProgressSequence": 0,
+        "apiCallsMade": false,
+        "childProcessesSpawned": false,
+        "deadlineAt": "2026-11-11T21:04:26.384277+00:00",
+        "durationLimitSeconds": 0.25,
+        "durationSeconds": 0.250219,
+        "exitCode": 124,
+        "finishedAt": "2026-11-11T21:04:26.384484+00:00",
+        "followUpRequired": false,
+        "heartbeatAt": "2026-11-11T21:04:26.134919+00:00",
+        "lockAcquired": true,
+        "lockAcquiredAt": "2026-11-11T21:04:26.134862+00:00",
+        "lockAttemptCount": 1,
+        "lockDescriptorInheritable": false,
+        "lockReleased": true,
+        "lockReleasedAt": "2026-11-11T21:04:26.384447+00:00",
+        "pid": 9,
+        "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+        "providerCancellationClaimed": false,
+        "providerUnresolved": false,
+        "reconcileOnly": false,
+        "requestId": "test-only-deadline",
+        "schema": "logos-engine.lot5c.publication-guard.v1",
+        "startedAt": "2026-11-11T21:04:26.134277+00:00",
+        "state": "expired",
+        "toolSessionBinding": "root_records_actual_tool_id_separately_before_first_operation",
+        "toolSessionId": null
+      }
+    },
+    {
+      "name": "catch_SIGTERM",
+      "passed": true,
+      "checks": [
+        {
+          "name": "exact_exit",
+          "passed": true
+        },
+        {
+          "name": "interrupted",
+          "passed": true
+        },
+        {
+          "name": "signal_recorded",
+          "passed": true
+        },
+        {
+          "name": "released",
+          "passed": true
+        },
+        {
+          "name": "reacquired",
+          "passed": true
+        }
+      ],
+      "details": {
+        "acceptedProgressSequence": 0,
+        "apiCallsMade": false,
+        "childProcessesSpawned": false,
+        "deadlineAt": "2026-11-11T21:04:28.456088+00:00",
+        "durationLimitSeconds": 2,
+        "durationSeconds": 0.050942,
+        "exceptionClass": "GuardError",
+        "exitCode": 143,
+        "finishedAt": "2026-11-11T21:04:26.507018+00:00",
+        "followUpRequired": false,
+        "heartbeatAt": "2026-11-11T21:04:26.456653+00:00",
+        "lockAcquired": true,
+        "lockAcquiredAt": "2026-11-11T21:04:26.456603+00:00",
+        "lockAttemptCount": 1,
+        "lockDescriptorInheritable": false,
+        "lockReleased": true,
+        "lockReleasedAt": "2026-11-11T21:04:26.506961+00:00",
+        "pid": 10,
+        "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+        "providerCancellationClaimed": false,
+        "providerUnresolved": false,
+        "reason": "interrupted",
+        "receivedSignal": "SIGTERM",
+        "reconcileOnly": false,
+        "requestId": "test-only-signal-SIGTERM",
+        "schema": "logos-engine.lot5c.publication-guard.v1",
+        "startedAt": "2026-11-11T21:04:26.456088+00:00",
+        "state": "interrupted",
+        "toolSessionBinding": "root_records_actual_tool_id_separately_before_first_operation",
+        "toolSessionId": null
+      }
+    },
+    {
+      "name": "catch_SIGINT",
+      "passed": true,
+      "checks": [
+        {
+          "name": "exact_exit",
+          "passed": true
+        },
+        {
+          "name": "interrupted",
+          "passed": true
+        },
+        {
+          "name": "signal_recorded",
+          "passed": true
+        },
+        {
+          "name": "released",
+          "passed": true
+        },
+        {
+          "name": "reacquired",
+          "passed": true
+        }
+      ],
+      "details": {
+        "acceptedProgressSequence": 0,
+        "apiCallsMade": false,
+        "childProcessesSpawned": false,
+        "deadlineAt": "2026-11-11T21:04:28.573527+00:00",
+        "durationLimitSeconds": 2,
+        "durationSeconds": 0.050845,
+        "exceptionClass": "GuardError",
+        "exitCode": 130,
+        "finishedAt": "2026-11-11T21:04:26.624362+00:00",
+        "followUpRequired": false,
+        "heartbeatAt": "2026-11-11T21:04:26.574035+00:00",
+        "lockAcquired": true,
+        "lockAcquiredAt": "2026-11-11T21:04:26.573982+00:00",
+        "lockAttemptCount": 1,
+        "lockDescriptorInheritable": false,
+        "lockReleased": true,
+        "lockReleasedAt": "2026-11-11T21:04:26.624311+00:00",
+        "pid": 11,
+        "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+        "providerCancellationClaimed": false,
+        "providerUnresolved": false,
+        "reason": "interrupted",
+        "receivedSignal": "SIGINT",
+        "reconcileOnly": false,
+        "requestId": "test-only-signal-SIGINT",
+        "schema": "logos-engine.lot5c.publication-guard.v1",
+        "startedAt": "2026-11-11T21:04:26.573527+00:00",
+        "state": "interrupted",
+        "toolSessionBinding": "root_records_actual_tool_id_separately_before_first_operation",
+        "toolSessionId": null
+      }
+    },
+    {
+      "name": "journal_failure_still_unlocks",
+      "passed": true,
+      "checks": [
+        {
+          "name": "failed",
+          "passed": true
+        },
+        {
+          "name": "fallback_terminal_exists",
+          "passed": true
+        },
+        {
+          "name": "reason_retained",
+          "passed": true
+        },
+        {
+          "name": "released",
+          "passed": true
+        },
+        {
+          "name": "reacquired",
+          "passed": true
+        }
+      ],
+      "details": {
+        "acceptedProgressSequence": 0,
+        "apiCallsMade": false,
+        "childProcessesSpawned": false,
+        "deadlineAt": "2026-11-11T21:04:28.684920+00:00",
+        "durationLimitSeconds": 2,
+        "durationSeconds": 0.504042,
+        "errno": 21,
+        "exceptionClass": "IsADirectoryError",
+        "exitCode": 1,
+        "finishedAt": "2026-11-11T21:04:27.188954+00:00",
+        "followUpRequired": false,
+        "heartbeatAt": "2026-11-11T21:04:27.188704+00:00",
+        "lockAcquired": true,
+        "lockAcquiredAt": "2026-11-11T21:04:26.685344+00:00",
+        "lockAttemptCount": 1,
+        "lockDescriptorInheritable": false,
+        "lockReleased": true,
+        "lockReleasedAt": "2026-11-11T21:04:27.188947+00:00",
+        "pid": 12,
+        "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+        "providerCancellationClaimed": false,
+        "providerUnresolved": false,
+        "reason": "journal_or_system_error",
+        "reconcileOnly": false,
+        "requestId": "test-only-journal-error",
+        "schema": "logos-engine.lot5c.publication-guard.v1",
+        "startedAt": "2026-11-11T21:04:26.684920+00:00",
+        "state": "failed",
+        "toolSessionBinding": "root_records_actual_tool_id_separately_before_first_operation",
+        "toolSessionId": null
+      }
+    },
+    {
+      "name": "normal_release_and_reuse_refusal",
+      "passed": true,
+      "checks": [
+        {
+          "name": "release_success",
+          "passed": true
+        },
+        {
+          "name": "released",
+          "passed": true
+        },
+        {
+          "name": "reuse_refused",
+          "passed": true
+        },
+        {
+          "name": "old_journal_unchanged",
+          "passed": true
+        },
+        {
+          "name": "old_terminal_unchanged",
+          "passed": true
+        }
+      ],
+      "details": {
+        "acceptedProgressSequence": 0,
+        "apiCallsMade": false,
+        "childProcessesSpawned": false,
+        "deadlineAt": "2026-11-11T21:04:29.249683+00:00",
+        "durationLimitSeconds": 2,
+        "durationSeconds": 0.051094,
+        "exitCode": 0,
+        "finishedAt": "2026-11-11T21:04:27.300769+00:00",
+        "followUpRequired": false,
+        "heartbeatAt": "2026-11-11T21:04:27.250164+00:00",
+        "lockAcquired": true,
+        "lockAcquiredAt": "2026-11-11T21:04:27.250111+00:00",
+        "lockAttemptCount": 1,
+        "lockDescriptorInheritable": false,
+        "lockReleased": true,
+        "lockReleasedAt": "2026-11-11T21:04:27.300747+00:00",
+        "pid": 13,
+        "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+        "providerCancellationClaimed": false,
+        "providerUnresolved": false,
+        "reconcileOnly": false,
+        "releaseReason": "completed",
+        "requestId": "test-only-normal-release",
+        "schema": "logos-engine.lot5c.publication-guard.v1",
+        "startedAt": "2026-11-11T21:04:27.249683+00:00",
+        "state": "released",
+        "toolSessionBinding": "root_records_actual_tool_id_separately_before_first_operation",
+        "toolSessionId": null
+      }
+    },
+    {
+      "name": "uncertain_provider_operation_retained_and_blocks_repeat",
+      "passed": true,
+      "checks": [
+        {
+          "name": "begin_ack",
+          "passed": true
+        },
+        {
+          "name": "durable_before_any_simulated_provider_step",
+          "passed": true
+        },
+        {
+          "name": "native_ids_retained",
+          "passed": true
+        },
+        {
+          "name": "expired",
+          "passed": true
+        },
+        {
+          "name": "follow_up_required",
+          "passed": true
+        },
+        {
+          "name": "next_run_refused",
+          "passed": true
+        },
+        {
+          "name": "ledger_unchanged_by_refusal",
+          "passed": true
+        },
+        {
+          "name": "expired_not_provider_cancellation",
+          "passed": true
+        }
+      ],
+      "details": {
+        "acceptedProgressSequence": 2,
+        "apiCallsMade": false,
+        "childProcessesSpawned": false,
+        "deadlineAt": "2026-11-11T21:04:28.080792+00:00",
+        "durationLimitSeconds": 0.65,
+        "durationSeconds": 0.650198,
+        "exitCode": 124,
+        "finishedAt": "2026-11-11T21:04:28.080982+00:00",
+        "followUpRequired": true,
+        "heartbeatAt": "2026-11-11T21:04:28.036296+00:00",
+        "lockAcquired": true,
+        "lockAcquiredAt": "2026-11-11T21:04:27.431381+00:00",
+        "lockAttemptCount": 1,
+        "lockDescriptorInheritable": false,
+        "lockReleased": true,
+        "lockReleasedAt": "2026-11-11T21:04:28.080944+00:00",
+        "operation": {
+          "archiveSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "begunAt": "2026-11-11T21:04:27.482099+00:00",
+          "commitSha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "deploymentId": "test-only-deployment",
+          "kind": "save_and_deploy_private",
+          "observedAt": "2026-11-11T21:04:27.532814+00:00",
+          "operationId": "test-only-publication-operation",
+          "ownerRequestId": "test-only-uncertain",
+          "status": "publishing",
+          "versionId": "test-only-version"
+        },
+        "pid": 15,
+        "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+        "providerCancellationClaimed": false,
+        "providerUnresolved": true,
+        "reconcileOnly": false,
+        "requestId": "test-only-uncertain",
+        "schema": "logos-engine.lot5c.publication-guard.v1",
+        "startedAt": "2026-11-11T21:04:27.430792+00:00",
+        "state": "expired",
+        "toolSessionBinding": "root_records_actual_tool_id_separately_before_first_operation",
+        "toolSessionId": null
+      }
+    },
+    {
+      "name": "explicit_reconciliation_metadata_protocol",
+      "passed": true,
+      "checks": [
+        {
+          "name": "update_ack",
+          "passed": true
+        },
+        {
+          "name": "known_result_clears_block",
+          "passed": true
+        },
+        {
+          "name": "release_success",
+          "passed": true
+        },
+        {
+          "name": "no_actual_provider",
+          "passed": true
+        },
+        {
+          "name": "evidence_fingerprint_bound",
+          "passed": true
+        }
+      ],
+      "details": {
+        "acceptedProgressSequence": 1,
+        "apiCallsMade": false,
+        "childProcessesSpawned": false,
+        "deadlineAt": "2026-11-11T21:04:30.216849+00:00",
+        "durationLimitSeconds": 2,
+        "durationSeconds": 0.101965,
+        "exitCode": 0,
+        "finishedAt": "2026-11-11T21:04:28.318807+00:00",
+        "followUpRequired": false,
+        "heartbeatAt": "2026-11-11T21:04:28.268324+00:00",
+        "lockAcquired": true,
+        "lockAcquiredAt": "2026-11-11T21:04:28.217181+00:00",
+        "lockAttemptCount": 1,
+        "lockDescriptorInheritable": false,
+        "lockReleased": true,
+        "lockReleasedAt": "2026-11-11T21:04:28.318790+00:00",
+        "operation": {
+          "archiveSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "begunAt": "2026-11-11T21:04:27.482099+00:00",
+          "commitSha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "deploymentId": "test-only-deployment",
+          "evidence": {
+            "path": "/tmp/lot5-publication-guard-temporary-rdp09kwm/explicitly-test-only-provider-receipt.json",
+            "sha256": "67f8ede51a5c4179cedc03f210c79f441b55c2cd1f8bd603b260f76bd7f6c95a"
+          },
+          "kind": "save_and_deploy_private",
+          "observedAt": "2026-11-11T21:04:28.268013+00:00",
+          "operationId": "test-only-publication-operation",
+          "ownerRequestId": "test-only-uncertain",
+          "status": "failed",
+          "versionId": "test-only-version"
+        },
+        "pid": 17,
+        "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+        "providerCancellationClaimed": false,
+        "providerUnresolved": false,
+        "reconcileOnly": true,
+        "releaseReason": "completed",
+        "requestId": "test-only-reconcile",
+        "schema": "logos-engine.lot5c.publication-guard.v1",
+        "startedAt": "2026-11-11T21:04:28.216849+00:00",
+        "state": "released",
+        "toolSessionBinding": "root_records_actual_tool_id_separately_before_first_operation",
+        "toolSessionId": null
+      }
+    },
+    {
+      "name": "existing_mutex_identity_mismatch_refused",
+      "passed": true,
+      "checks": [
+        {
+          "name": "failed",
+          "passed": true
+        },
+        {
+          "name": "zero_lock_attempts",
+          "passed": true
+        },
+        {
+          "name": "not_acquired",
+          "passed": true
+        },
+        {
+          "name": "reason",
+          "passed": true
+        }
+      ],
+      "details": {
+        "acceptedProgressSequence": 0,
+        "apiCallsMade": false,
+        "childProcessesSpawned": false,
+        "deadlineAt": "2026-11-11T21:04:28.887935+00:00",
+        "durationLimitSeconds": 0.5,
+        "durationSeconds": 0.000399,
+        "exceptionClass": "GuardError",
+        "exitCode": 1,
+        "finishedAt": "2026-11-11T21:04:28.388324+00:00",
+        "followUpRequired": false,
+        "lockAcquired": false,
+        "lockAttemptCount": 0,
+        "lockReleased": false,
+        "pid": 18,
+        "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+        "providerCancellationClaimed": false,
+        "providerUnresolved": false,
+        "reason": "existing_mutex_identity_mismatch",
+        "reconcileOnly": false,
+        "requestId": "test-only-wrong-inode",
+        "schema": "logos-engine.lot5c.publication-guard.v1",
+        "startedAt": "2026-11-11T21:04:28.387935+00:00",
+        "state": "failed",
+        "toolSessionBinding": "root_records_actual_tool_id_separately_before_first_operation",
+        "toolSessionId": null
+      }
+    }
+  ],
+  "allOwnedTestProcessesTerminal": true,
+  "finishedAt": "2026-11-11T21:04:28.418117+00:00",
+  "caseCount": 10,
+  "passedChecks": 54,
+  "totalChecks": 54
+}

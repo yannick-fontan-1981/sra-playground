@@ -1,0 +1,563 @@
+{
+  "schema": "logos-engine.native-cost-static-preflight.v1",
+  "recordedAt": "2026-11-11T20:52:17.260773+00:00",
+  "startedAt": "2026-11-11T20:52:16.883412+00:00",
+  "status": "static_inputs_checked",
+  "measurementExecuted": false,
+  "baselineCheckout": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout",
+  "candidateCheckout": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout",
+  "nodeVersion": "v24.22.1",
+  "checkedCount": 76,
+  "checks": [
+    {
+      "name": "direct_5b_derivation_unchanged",
+      "satisfied": true
+    },
+    {
+      "name": "distinct_checkouts",
+      "satisfied": true
+    },
+    {
+      "name": "declared_checkouts",
+      "satisfied": true
+    },
+    {
+      "name": "baseline_published_commit",
+      "satisfied": true,
+      "commit": "1019d2eb929d7dc201a5c1f6edce5aa1c5dfa464",
+      "siteVersion": 102
+    },
+    {
+      "name": "baseline_native_worktree_clean",
+      "satisfied": true
+    },
+    {
+      "name": "distinct_native_digests",
+      "satisfied": true
+    },
+    {
+      "name": "baseline_actual_native_inventory",
+      "satisfied": true,
+      "digest": "74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12",
+      "fileCount": 310
+    },
+    {
+      "name": "baseline_declared_native_identity",
+      "satisfied": true
+    },
+    {
+      "name": "baseline_actual_version",
+      "satisfied": true,
+      "versions": [
+        "0.62.0"
+      ]
+    },
+    {
+      "name": "candidate_actual_native_inventory",
+      "satisfied": true,
+      "digest": "a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57",
+      "fileCount": 318
+    },
+    {
+      "name": "candidate_declared_native_identity",
+      "satisfied": true
+    },
+    {
+      "name": "candidate_actual_version",
+      "satisfied": true,
+      "versions": [
+        "0.63.0"
+      ]
+    },
+    {
+      "name": "declared_fingerprint_protocol",
+      "satisfied": true
+    },
+    {
+      "name": "declared_fingerprint_cases",
+      "satisfied": true
+    },
+    {
+      "name": "declared_fingerprint_diagnosticComparisonPolicy",
+      "satisfied": true
+    },
+    {
+      "name": "declared_fingerprint_globalBudgetPolicy",
+      "satisfied": true
+    },
+    {
+      "name": "declared_fingerprint_baselineManifest",
+      "satisfied": true
+    },
+    {
+      "name": "declared_fingerprint_candidateManifest",
+      "satisfied": true
+    },
+    {
+      "name": "declared_fingerprint_candidateArchiveManifest",
+      "satisfied": true
+    },
+    {
+      "name": "declared_fingerprint_globalDecisionTool",
+      "satisfied": true
+    },
+    {
+      "name": "declared_fingerprint_globalCalculationTool",
+      "satisfied": true
+    },
+    {
+      "name": "exact_seven_historical_tools",
+      "satisfied": true,
+      "count": 7
+    },
+    {
+      "name": "unchanged_tool_scripts/run-native-cost-window.py",
+      "satisfied": true
+    },
+    {
+      "name": "unchanged_tool_scripts/measure-native-loop-costs.mjs",
+      "satisfied": true
+    },
+    {
+      "name": "unchanged_tool_scripts/compare-native-loop-costs.mjs",
+      "satisfied": true
+    },
+    {
+      "name": "unchanged_tool_scripts/compare-native-cost-cohorts.mjs",
+      "satisfied": true
+    },
+    {
+      "name": "unchanged_tool_scripts/review-native-cost-consolidation.py",
+      "satisfied": true
+    },
+    {
+      "name": "unchanged_tool_scripts/review-native-global-cost-window.py",
+      "satisfied": true
+    },
+    {
+      "name": "unchanged_tool_scripts/review-native-global-cost-budget.py",
+      "satisfied": true
+    },
+    {
+      "name": "historical_input_cases.json",
+      "satisfied": true,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "name": "historical_input_comparison-policy.json",
+      "satisfied": true,
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+    },
+    {
+      "name": "same_measurement_runner",
+      "satisfied": true
+    },
+    {
+      "name": "same_source_declaration_laya_proto/common_frontier_policy.drm.json",
+      "satisfied": true,
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+    },
+    {
+      "name": "same_source_declaration_morphology_policy/strategy.drm",
+      "satisfied": true,
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    },
+    {
+      "name": "baseline_trace_STCK",
+      "satisfied": true,
+      "path": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "name": "candidate_trace_STCK",
+      "satisfied": true,
+      "path": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "name": "baseline_trace_SMLP",
+      "satisfied": true,
+      "path": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    },
+    {
+      "name": "candidate_trace_SMLP",
+      "satisfied": true,
+      "path": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    },
+    {
+      "name": "wrapper_order",
+      "satisfied": true,
+      "plans": [
+        [
+          "A1",
+          "baseline",
+          "cohort1/baseline"
+        ],
+        [
+          "B1",
+          "ROOT",
+          "cohort1/after"
+        ],
+        [
+          "B2",
+          "ROOT",
+          "cohort2/after"
+        ],
+        [
+          "A2",
+          "baseline",
+          "cohort2/baseline"
+        ]
+      ]
+    },
+    {
+      "name": "exact_case_schedule",
+      "satisfied": true
+    },
+    {
+      "name": "declared_order_and_cohorts",
+      "satisfied": true
+    },
+    {
+      "name": "cohort_counts_calculated_from_cases",
+      "satisfied": true,
+      "measuredSessions": 32,
+      "measuredActions": 400,
+      "excludedWarmupSessions": 8,
+      "excludedWarmupActions": 24
+    },
+    {
+      "name": "strict_per_game_global_gate",
+      "satisfied": true
+    },
+    {
+      "name": "finalization_is_explicit",
+      "satisfied": true
+    },
+    {
+      "name": "declared_chronology",
+      "satisfied": true,
+      "finalizedAt": "2026-11-11T17:52:06.585050-03:00"
+    },
+    {
+      "name": "baseline_input_copy_cases.json",
+      "satisfied": true,
+      "state": "absent_runner_will_copy"
+    },
+    {
+      "name": "baseline_input_copy_comparison-policy.json",
+      "satisfied": true,
+      "state": "absent_runner_will_copy"
+    },
+    {
+      "name": "baseline_input_copy_protocol.md",
+      "satisfied": true,
+      "state": "absent_runner_will_copy"
+    },
+    {
+      "name": "exclusive_measurement_outputs_absent",
+      "satisfied": true,
+      "existing": []
+    },
+    {
+      "name": "baseline_dependency_equivalence_node_modules",
+      "satisfied": true
+    },
+    {
+      "name": "baseline_dependency_equivalence_public/vendor/pyodide",
+      "satisfied": true
+    },
+    {
+      "name": "candidate_archive_identity",
+      "satisfied": true,
+      "files": 867
+    },
+    {
+      "name": "all_frozen_archive_inputs_current",
+      "satisfied": true,
+      "mismatched": []
+    },
+    {
+      "name": "archived_bytes_match_manifest",
+      "satisfied": true,
+      "archivedFiles": 867
+    },
+    {
+      "name": "retained_protocol_contract_checker",
+      "satisfied": true,
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "scripts/review-native-global-cost-window.py",
+        "--check-protocol",
+        "docs/migration/lot5c-evidence/recovery/performance-integrated-04/declaration.json"
+      ],
+      "exitCode": 0,
+      "stdout": "{\"status\": \"protocol_contract_passed\", \"declaration\": \"docs/migration/lot5c-evidence/recovery/performance-integrated-04/declaration.json\", \"finalizedAt\": \"2026-11-11T17:52:06.585050-03:00\", \"nativeDigests\": {\"baseline\": \"74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12\", \"candidate\": \"a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57\"}, \"caseIds\": [\"STCK\", \"SMLP\"], \"measurementExecuted\": false}\n",
+      "stderr": ""
+    },
+    {
+      "name": "owner_contract_declared_inside_window",
+      "satisfied": true
+    },
+    {
+      "name": "owner_source_domain_declared_exactly",
+      "satisfied": true
+    },
+    {
+      "name": "owner_contract_generator_and_derivation",
+      "satisfied": true
+    },
+    {
+      "name": "owner_tools_unchanged",
+      "satisfied": true
+    },
+    {
+      "name": "owner_structural_rule_fixed",
+      "satisfied": true
+    },
+    {
+      "name": "owner_attribution_source_domain",
+      "satisfied": true
+    },
+    {
+      "name": "owner_exact_source_fact_coverage",
+      "satisfied": true,
+      "error": null
+    },
+    {
+      "name": "owner_baseline_capture_io_predeclared",
+      "satisfied": true,
+      "baselineCheckout": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout",
+      "externalPaths": [
+        "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout/src/logos-engine/kernel.ts",
+        "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout/src/logos-engine/v6-knowledge-store.ts",
+        "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout/scripts/measure-native-loop-costs.mjs",
+        "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+        "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+        "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+        "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz"
+      ]
+    },
+    {
+      "name": "owner_baseline_capture_inputs_unchanged",
+      "satisfied": true
+    },
+    {
+      "name": "owner_attribution_external_inputs_exact",
+      "satisfied": true
+    },
+    {
+      "name": "functional_structure_fingerprints",
+      "satisfied": true
+    },
+    {
+      "name": "functional_structure_identity",
+      "satisfied": true
+    },
+    {
+      "name": "owner_capture_source_domain_baseline",
+      "satisfied": true
+    },
+    {
+      "name": "owner_capture_source_domain_candidate",
+      "satisfied": true
+    },
+    {
+      "name": "functional_structure_predeclared",
+      "satisfied": true
+    },
+    {
+      "name": "owner_source_inventory_bound",
+      "satisfied": true
+    },
+    {
+      "name": "owner_inventory_exact_addition_owners",
+      "satisfied": true
+    },
+    {
+      "name": "owner_inventory_exact_addition_programs",
+      "satisfied": true
+    },
+    {
+      "name": "owner_inventory_existing_order_unchanged",
+      "satisfied": true
+    },
+    {
+      "name": "owner_contract_chronology",
+      "satisfied": true
+    },
+    {
+      "name": "owner_outputs_absent",
+      "satisfied": true
+    }
+  ],
+  "unsatisfied": [],
+  "declaration": {
+    "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-04/declaration.json",
+    "sha256": "e25bdadd4227edbb7f1fc11a56e61dfa87a10c4814e3c07ef4fc20dd592fb306",
+    "bytes": 5661
+  },
+  "traces": [
+    {
+      "role": "baseline",
+      "case": "STCK",
+      "path": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "bytes": 53583,
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b",
+      "expectedSha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "role": "candidate",
+      "case": "STCK",
+      "path": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "bytes": 53583,
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b",
+      "expectedSha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "role": "baseline",
+      "case": "SMLP",
+      "path": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "bytes": 111624,
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9",
+      "expectedSha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    },
+    {
+      "role": "candidate",
+      "case": "SMLP",
+      "path": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "bytes": 111624,
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9",
+      "expectedSha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    }
+  ],
+  "dependencyLinks": [
+    {
+      "path": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout/node_modules",
+      "candidatePath": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/node_modules",
+      "isSymlink": true,
+      "target": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/node_modules",
+      "targetExists": true,
+      "candidateExists": true,
+      "sameTargetAsCandidate": true
+    },
+    {
+      "path": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout/public/vendor/pyodide",
+      "candidatePath": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/public/vendor/pyodide",
+      "isSymlink": true,
+      "target": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/public/vendor/pyodide",
+      "targetExists": true,
+      "candidateExists": true,
+      "sameTargetAsCandidate": true
+    }
+  ],
+  "protocolCheck": {
+    "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-04/protocol-check.json",
+    "sha256": "7e668df42982501de068a138cd76d85369b852aea68e3d1eeb2ffd73acfd8e70",
+    "bytes": 429
+  },
+  "readinessCreated": false,
+  "isolationChecked": false,
+  "functionalReadinessChecked": false,
+  "generator": {
+    "path": "docs/migration/lot5c-evidence/check-cost-static-inputs.py",
+    "sha256": "5564a925956a16eefd011deb107e05f42687f7a04e224d37c6a0bac259374168",
+    "bytes": 38502
+  },
+  "adaptedFrom": {
+    "path": "docs/migration/lot5b-evidence/check-cost-static-inputs.py",
+    "sha256": "024c23aad5bae4b666cd2e47226b396a937a658a84a0d3cd927fcd1b9fa14cc1",
+    "bytes": 27635
+  },
+  "historicalOrigin": {
+    "path": "docs/migration/lot3h-evidence/check-cost-static-inputs.py",
+    "sha256": "6aaa8170be30bd4c69f3af5ad2d501475d3967a00fa96e6f5843ecee4357039e",
+    "bytes": 16713
+  },
+  "candidateFreeze": {
+    "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/source-manifest.json",
+    "sha256": "6fd96a8c19867ee6740db8293c14bf241d9929a31e24f391e95d3aee4c6fab66",
+    "bytes": 37772
+  },
+  "preparationTool": {
+    "path": "docs/migration/lot5c-evidence/prepare-cost-protocol.py",
+    "sha256": "b8f5096ae5521306904168da48b1ee3e69045384d5fb8c88dc4441e3efebfce8",
+    "bytes": 34594
+  },
+  "supersession": null,
+  "qualification": "Static inventory, archive, fingerprint, AST and dependency inspection only. The retained protocol checker performs no measurement. No runtime worker, game, replay, test or build was started. Dependency gaps and cache differences are retained, not repaired or treated as equivalent. This receipt neither authorizes a superseded window nor asserts functional readiness, isolation or a game outcome. The owner must separately bind actual completed evidence and cross-thread coordination before any official window.",
+  "ownerCostContract": {
+    "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-04/owner-growth-contract.json",
+    "sha256": "b6a039ec4725d6ac408147149faf180d31cf089b0e2097e27c45727848112fcc",
+    "bytes": 6009
+  },
+  "ownerCostTools": {
+    "consolidator": {
+      "path": "docs/migration/lot5c-evidence/consolidate-owner-costs.mjs",
+      "sha256": "69957840c81d50e3d7b68dedf4293b5aa9c4072f882fe1fc858f5e03815330b7",
+      "bytes": 61449
+    },
+    "reviewer": {
+      "path": "docs/migration/lot5c-evidence/review-owner-costs.py",
+      "sha256": "452ccf903970230f5855458cd35f2f3f30224307026663ebd865b494986371df",
+      "bytes": 81151
+    }
+  },
+  "ownerSourceDomain": {
+    "domainReview": {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-domain-source-review.json",
+      "sha256": "ad027c2327b0b073c75deaa48cd9d27e90e5909066beb78a94973d706565f626",
+      "bytes": 5584
+    },
+    "sourceEvidencePaths": {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-source-evidence-paths.json",
+      "sha256": "4960a996175c03c0ce92365bda7f3dcaf747f1c7fd8467e34a84584816a87b62",
+      "bytes": 528
+    }
+  },
+  "ownerStructuralFixture": {
+    "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-04/owner-structural-fixture.json",
+    "bytes": 60104,
+    "sha256": "49e5f031252281da4d49e58d40d6ffaac6d67a0f3c356b409541cb333199b939"
+  },
+  "ownerStructuralExternalInputs": [
+    {
+      "path": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout/src/logos-engine/kernel.ts",
+      "bytes": 23637,
+      "sha256": "1cac40f5f9a3356d31ae0fd5247709eb82c5f6402aae3cb68d8edc54c838f207"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout/src/logos-engine/v6-knowledge-store.ts",
+      "bytes": 14849,
+      "sha256": "035d41597a5831bfa65bb1f627e3a0d05b84cc44cfda05566359873ef8c5af08"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout/scripts/measure-native-loop-costs.mjs",
+      "bytes": 20670,
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "bytes": 48531,
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "bytes": 46966,
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "bytes": 53583,
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "bytes": 111624,
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    }
+  ]
+}

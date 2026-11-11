@@ -1,0 +1,16 @@
+{
+  "schema": "logos-engine.lot5c-ordinary-work-policy.v1",
+  "recordedAt": "2026-11-11T21:21:11.672601+00:00",
+  "authority": "Latest explicit user instruction in this conversation",
+  "instruction": "Supprime l’obligation du verrou global pour le travail courant : développement, tests fonctionnels, commits et push. Travaille dans ton propre checkout et sur ta propre branche. Conserve une exclusivité courte uniquement pendant les mesures officielles de performance et la publication.",
+  "ordinaryWorkRequiresGlobalLock": false,
+  "ordinarySourceWorkWaitsForOtherPublications": false,
+  "ownCheckout": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout",
+  "remoteBackupBranch": "lot5c-recovery-checkpoint-20261111",
+  "performanceExclusivity": "Existing performance mutex only for actual official measurement; fresh isolation remains required. Release after terminal measured work before ordinary postprocessing.",
+  "publicationExclusivity": "Existing publication mutex only for the actual publication transaction, with fixed deadline and durable operation state. Own branch checkpoints do not require it.",
+  "existingMutexFilesPreserved": true,
+  "preparedV3RetainedAsHistoricalEvidence": true,
+  "newOrdinaryWrapperAndCostV4": "being implemented in separate files; unchanged native/benchmark inputs reused",
+  "noQuietRequestIssued": true
+}
