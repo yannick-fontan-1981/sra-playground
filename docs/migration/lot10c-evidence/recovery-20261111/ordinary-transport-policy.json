@@ -1,0 +1,22 @@
+{
+  "schema": "logos-engine.lot10c.ordinary-source-transport-policy.v1",
+  "recordedAt": "2026-11-11T21:19:45.389057+00:00",
+  "userInstruction": "Ordinary development,functionaltests,commits,sourcepush use owncheckout/branch withoutglobalmutexorpeerpublicationwait; shortexclusiveonlyofficialperformance/publication. Neverunlinkaheldmutex.",
+  "historicalHelper": {
+    "path": "docs/migration/lot10c-evidence/coordination/checkpoint04-ancestor-helper-02.mjs",
+    "sha256": "32ad0e51920fc6dee19f0fedd0342e57630c5060dda6a37abbc2ac3d39760928"
+  },
+  "newHelper": {
+    "path": "docs/migration/lot10c-evidence/coordination/push-ordinary-checkpoint.mjs",
+    "sha256": "9773b6235e3d60fa35eea9d78cc602410cbdf17ac4a770a3e754be4fbab1e736"
+  },
+  "historicalHelperUnchanged": true,
+  "globalLockUsed": false,
+  "peerQuietGuardUsed": false,
+  "immutableCommitOnly": true,
+  "uncommittedWorkIsNotPublishedOrIncluded": true,
+  "authenticationAndProjectAndRefChecksPreserved": true,
+  "forcePushAllowed": false,
+  "publicationAllowed": false,
+  "credentialPersistenceAllowed": false
+}

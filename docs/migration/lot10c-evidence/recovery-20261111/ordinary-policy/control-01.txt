@@ -1,0 +1,16 @@
+test_batch_admission_without_peer_state (__main__.OrdinaryEntryPointChecks.test_batch_admission_without_peer_state) ... ok
+test_build_admission (__main__.OrdinaryEntryPointChecks.test_build_admission) ... ok
+test_extended_tests_admission (__main__.OrdinaryEntryPointChecks.test_extended_tests_admission) ... ok
+test_original_invalid_mode_guards_remain (__main__.OrdinaryEntryPointChecks.test_original_invalid_mode_guards_remain) ... ok
+test_receipts_record_ordinary_unlocked_mode (__main__.OrdinaryEntryPointChecks.test_receipts_record_ordinary_unlocked_mode) ... ok
+test_regular_tests_admission (__main__.OrdinaryEntryPointChecks.test_regular_tests_admission) ... ok
+test_removed_coordination_option_is_rejected (__main__.OrdinaryEntryPointChecks.test_removed_coordination_option_is_rejected) ... ok
+test_replay_admission (__main__.OrdinaryEntryPointChecks.test_replay_admission) ... ok
+test_replay_case_contract_is_unchanged (__main__.OrdinaryEntryPointChecks.test_replay_case_contract_is_unchanged) ... ok
+test_sources_compile_without_coordination_dependency (__main__.OrdinaryEntryPointChecks.test_sources_compile_without_coordination_dependency) ... ok
+test_unchanged_checks_replay_retention_and_supervision (__main__.OrdinaryEntryPointChecks.test_unchanged_checks_replay_retention_and_supervision) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.065s
+
+OK
