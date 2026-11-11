@@ -52,12 +52,18 @@ function rebind(value: any, refs: Map<string, string>): any {
   return value;
 }
 
-interface Call { owner: string; method: string; argc: number; before: string; after: string; selected: boolean }
+interface Call {
+  owner: string; method: string; argc: number; before: string; after: string; selected: boolean;
+  args?: unknown[];
+}
 function watch(runtime: Runtime) {
   const internal = runtime as unknown as R, owners = internal.families.filter((family: R) => family.id === 'facet_examples');
   assert.equal(owners.length, 1, 'The production factory retains exactly one Facet owner');
   const facet = owners[0]!, acquired = internal.acquisitionFamilies as R, calls: Call[] = [], facetRestores: R[] = [];
   assert.equal(Object.values(acquired).includes(facet), false, 'Facet is not a passive acquisition registration');
+  const axialOwners = internal.families.filter((family: R) => family.id === 'public_axial_question');
+  assert.equal(axialOwners.length, 1, 'The production factory retains exactly one Axial owner');
+  assert.equal(acquired.axial, axialOwners[0], 'Axial passive acquisition uses its registered owner');
   assert.deepEqual(facet.state(), coldFacet());
   const observe = (owner: R, name: string, method: string): void => {
     assert.equal(typeof owner?.[method], 'function', `Existing ${name}.${method} hook`);
@@ -66,7 +72,8 @@ function watch(runtime: Runtime) {
     // each hook's synchronous/asynchronous return contract and real acquisition.
     owner[method] = (...args: any[]) => {
       calls.push({ owner: name, method, argc: args.length, before: args[0].observation_ref,
-        after: args[1].observation_ref, selected: args[5] !== undefined && args[5] !== null });
+        after: args[1].observation_ref, selected: args[5] !== undefined && args[5] !== null,
+        ...(name === 'axial' ? { args: copy(args) } : {}) });
       return original(...args);
     };
   };
@@ -77,6 +84,7 @@ function watch(runtime: Runtime) {
   // Recolor and Symbols remain selected-only and are not falsely included.
   for (const [owner, method] of [
     ['supports', 'record'], ['preparations', 'recordSource'], ['recall', 'record'], ['workshop', 'recordSource'],
+    ['axial', 'recordObserved'],
     ['framed', 'recordPublicTransition'], ['outline', 'recordPublicTransition'], ['inventory', 'recordSource'],
     ['reaction', 'recordSource'], ['reactive', 'recordSource'], ['feedback', 'record'], ['morphology', 'observeDepartures'],
   ]) observe(acquired[owner!]!, owner!, method!);
@@ -85,7 +93,18 @@ function watch(runtime: Runtime) {
   return { facet, feedback: acquired.feedback as R, calls, facetRestores };
 }
 const passiveOrder = ['supports', ...supportOrder.map(child => `support:${child}`), 'preparations', 'recall',
-  'workshop', 'framed', 'outline', 'inventory', 'reaction', 'reactive', 'feedback', 'morphology'];
+  'workshop', 'axial', 'framed', 'outline', 'inventory', 'reaction', 'reactive', 'feedback', 'morphology'];
+function assertPassiveAxial(calls: Call[], row: R, command: NativeCommand, refs: Map<string, string>): void {
+  const axial = calls.filter(call => call.owner === 'axial');
+  assert.equal(axial.length, 1, 'Each foreign selected return reaches the existing Axial owner exactly once');
+  const call = axial[0]!;
+  assert.equal(call.method, 'recordObserved'); assert.equal(call.argc, 8); assert.equal(call.selected, false);
+  assert.deepEqual([call.before, call.after], [refs.get(row.beforeObservation.observation_ref), refs.get(row.afterObservation.observation_ref)],
+    'Axial observes the same sealed transition');
+  assert.ok(call.args);
+  assert.deepEqual(call.args.slice(2), [command, row.beforePublic.frame_rows, row.afterPublic.frame_rows, null, 0, row.afterPublic.frame_packet],
+    'Axial receives the actual command, both public scenes, null foreign attribution, prefix index zero and the complete returned packet');
+}
 function assertReleased(result: NativeRuntimeYield, family: string): void {
   const snapshot = result.snapshot as R;
   assert.equal(result.kind, 'action', String(result.reason)); assert.equal(snapshot.lastDecision, family);
@@ -128,6 +147,7 @@ test('a genuinely selected Feedback return leaves Facet unacquired while every e
     assert.deepEqual(calls.map(call => call.owner), ['feedback', ...passiveOrder.filter(owner => owner !== 'feedback')],
       'Selected Feedback is recorded first and once; other passive acquisitions keep their source order');
     assert.equal(calls[0]!.argc, 8); assert.equal(calls[0]!.selected, true);
+    assertPassiveAxial(calls, row, selected.command!, refs);
     assert.deepEqual(feedback.state(), rebind(row.stateAfter, refs), 'The selected foreign family still learns its exact source response');
     assertUnacquiredFacet(runtime, facet, before, calls);
     assert.ok(facetRestores.length > 0, 'The real common lifecycle restores the retained Facet owner');
@@ -151,15 +171,16 @@ test('real frontier returns still teach passive Feedback, with no Facet acquisit
       assert.equal((selected.snapshot as R).proposal.strategy_receipt.selected, 'observed_frontier');
       assert.deepEqual(commandValue(selected.command!), commandValue(row.command), 'Compute the frontier input before giving its public return');
       refs.set(row.beforeObservation.observation_ref, selected.authorization!.observation_ref);
-      const before = copy(facet.state()); assert.deepEqual(before, coldFacet(row.beforePublic.level));
+      const before = copy(facet.state()), command = copy(selected.command!); assert.deepEqual(before, coldFacet(row.beforePublic.level));
       const count = calls.length;
-      selected = await runtime.advance({ command: selected.command!, observation: copy(row.afterPublic), executionMs: 0 }, execution);
+      selected = await runtime.advance({ command, observation: copy(row.afterPublic), executionMs: 0 }, execution);
       assert.equal(selected.kind, 'boundary'); assert.equal(selected.snapshot.actions, index + 1);
       const outcome = (selected.snapshot.trace as R[]).findLast(entry => entry.kind === 'actual_outcome');
       assert.ok(outcome); refs.set(row.afterObservation.observation_ref, outcome.observation_ref);
       assert.deepEqual(calls.slice(count).map(call => call.owner), passiveOrder, 'Every existing passive owner sees the sealed public return once in source order');
       const passiveFeedback = calls.slice(count).find(call => call.owner === 'feedback')!;
       assert.equal(passiveFeedback.argc, 5); assert.equal(passiveFeedback.selected, false);
+      assertPassiveAxial(calls.slice(count), row, command, refs);
       assert.deepEqual(feedback.state(), rebind(row.stateAfter, refs));
       assertUnacquiredFacet(runtime, facet, before, calls);
     }
