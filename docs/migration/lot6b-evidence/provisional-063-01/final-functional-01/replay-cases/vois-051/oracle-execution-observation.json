@@ -1,0 +1,68 @@
+{
+  "schema": "logos-engine.lot6b.single-replay-terminal-observation.v1",
+  "case": "vois-051",
+  "game": "VOIS",
+  "startedAt": "2026-11-11T19:21:13.195628+00:00",
+  "finishedAt": "2026-11-11T19:24:21.324157+00:00",
+  "elapsedSeconds": 188.12526540899853,
+  "exitCode": 1,
+  "command": [
+    "flock",
+    "-s",
+    "-n",
+    "/workspace/shared/sra-coordination/performance.lock",
+    "python",
+    "-B",
+    "docs/migration/lot6b-evidence/record-command.py",
+    "--receipt",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/vois-051/bounded-command.json",
+    "--watch-manifest",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/vois-051/replay-watch-attempt02.json",
+    "--",
+    "timeout",
+    "--signal=KILL",
+    "630s",
+    "env",
+    "NODE_OPTIONS=--max-old-space-size=1536",
+    "python",
+    "-B",
+    "scripts/run-recorded-public-regressions.py",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/vois-051/case-manifest.json",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/vois-051",
+    "--workers",
+    "1",
+    "--timeout-seconds",
+    "600"
+  ],
+  "declaredBy": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-watch-addendum-02.json",
+  "quietSeenDuringCase": [],
+  "nextCaseQueued": false,
+  "passed": false,
+  "boundedReceipt": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/vois-051/bounded-command.json",
+    "status": "failed",
+    "exitCode": 1,
+    "inputsUnchanged": true,
+    "elapsedSeconds": 186.7074072430005
+  },
+  "regressionSummary": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/vois-051/regressions/regression-summary.json",
+    "status": "failed",
+    "executionInputsUnchanged": true,
+    "results": [
+      {
+        "case": "vois-051",
+        "passed": false,
+        "comparisonPassed": null,
+        "comparisonChecks": null,
+        "failedChecks": null,
+        "nativeSourceBeforeDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+        "nativeSourceAfterDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+        "nativeSourceUnchanged": true,
+        "immutableInputsUnchanged": true,
+        "elapsedSeconds": 179.6522238990001,
+        "timedOut": false
+      }
+    ]
+  }
+}
