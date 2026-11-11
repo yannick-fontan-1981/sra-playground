@@ -1,0 +1,124 @@
+{
+  "schema": "logos-engine.lot8a-work-form-tools-static-preparation.v1",
+  "recordedAt": "2026-11-11T21:49:02.059604+00:00",
+  "status": "syntax_passed_unexecuted",
+  "tools": [
+    {
+      "path": "docs/migration/lot8a-evidence/tools/work-forms/record-owner-source-inventory.mjs",
+      "bytes": 14440,
+      "sha256": "bb39e7055a29a78e3fe644c7171520fb35187dc5ce802a3fa03e2f032699486d"
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/tools/work-forms/capture-cost-owner-graphs.mjs",
+      "bytes": 29563,
+      "sha256": "fa7c225349ad2652ff0b45cd53b7f8de7ac94d4131363e5f3c1568340d0a600f"
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/tools/work-forms/qualify-cost-owner-graphs.mjs",
+      "bytes": 50186,
+      "sha256": "558f476a9b1743905c60ca0cc8bed28b4a1691e6d658ecec565bbb450e8f3057"
+    }
+  ],
+  "readme": {
+    "path": "docs/migration/lot8a-evidence/tools/work-forms/README.md",
+    "bytes": 7877,
+    "sha256": "0a889b22af2a386712e328355abeefaa64c41441966d48d3d27f1c84cb588687"
+  },
+  "derivedFrom": [
+    {
+      "path": "docs/migration/lot6b-evidence/record-owner-source-inventory.mjs",
+      "bytes": 13205,
+      "sha256": "f394f733ab6a6bb719e6986797578015bfccd47a1b257113140697371aed3979"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/capture-cost-owner-graphs.mjs",
+      "bytes": 25111,
+      "sha256": "6b567b2bdd39309f951e510e7e6c14fa4aade1f09f08e17961744adfa71315ed"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/qualify-cost-owner-graphs.mjs",
+      "bytes": 42632,
+      "sha256": "bbc882a92a4f30d110a4040c453b3d8437ba55362343e01baf5a07152ed801ab"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/capture-cost-owner-graphs.mjs",
+      "bytes": 28139,
+      "sha256": "177354ff2120fcd148688365c62b854a81ca30a49999f5d9e85a451171a3150d"
+    }
+  ],
+  "syntaxChecks": [
+    {
+      "command": [
+        "node",
+        "--check",
+        "/workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/docs/migration/lot8a-evidence/tools/work-forms/record-owner-source-inventory.mjs"
+      ],
+      "startedAt": "2026-11-11T21:49:01.969542+00:00",
+      "finishedAt": "2026-11-11T21:49:02.052206+00:00",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "",
+      "nativeImportsExecuted": false
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "/workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/docs/migration/lot8a-evidence/tools/work-forms/capture-cost-owner-graphs.mjs"
+      ],
+      "startedAt": "2026-11-11T21:49:01.969892+00:00",
+      "finishedAt": "2026-11-11T21:49:02.035478+00:00",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "",
+      "nativeImportsExecuted": false
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "/workspace/sites/sra-lot8a-motif-20261111/.sites-checkout/docs/migration/lot8a-evidence/tools/work-forms/qualify-cost-owner-graphs.mjs"
+      ],
+      "startedAt": "2026-11-11T21:49:01.970542+00:00",
+      "finishedAt": "2026-11-11T21:49:02.052023+00:00",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "",
+      "nativeImportsExecuted": false
+    }
+  ],
+  "nativeWorkingTreeDiff": {
+    "command": [
+      "git",
+      "diff",
+      "--name-only",
+      "--",
+      "src/logos-engine",
+      "src/runtime"
+    ],
+    "exitCode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "executions": {
+    "ownerInventory": false,
+    "nativeFactory": false,
+    "capture": false,
+    "nativeSession": false,
+    "game": false,
+    "officialMeasurement": false,
+    "publication": false
+  },
+  "constraints": {
+    "globalLockUsed": false,
+    "historicalToolsChanged": false,
+    "nativeSourcesChanged": false,
+    "officialPerformanceEligible": false,
+    "commitOrPushPerformed": false
+  },
+  "limits": [
+    "Syntax and source review do not establish runtime success.",
+    "The parent must declare and supervise the exact frozen tools before functional execution.",
+    "Every prepared capture and reader output remains ineligible for official measurement until actual published predecessor reconciliation and final qualification."
+  ]
+}
