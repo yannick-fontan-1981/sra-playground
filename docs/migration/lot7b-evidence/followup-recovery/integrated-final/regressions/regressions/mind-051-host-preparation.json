@@ -1,0 +1,196 @@
+{
+  "schema": "logos-engine.released-baseline-replay-preparation.v1",
+  "status": "passed",
+  "game": "MIND",
+  "targetLevels": 3,
+  "expectedActions": 31,
+  "completePublicPackets": 32,
+  "baselineDecodedBytes": 31404933,
+  "baseline": {
+    "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz",
+    "sha256": "6a187286069287a89cedb60ac0f206e0702abae5d8df0dd2615bd43c1bb5c75a",
+    "bytes": 4349054
+  },
+  "trace": {
+    "path": "docs/migration/lot7a-evidence/integrated-baseline/recorded/mind-public-trace.json.gz",
+    "sha256": "f74678fa4d9c1b5397545b648ab353c29fc0a5a4c0eb35ab36a5258bfa34ca0c",
+    "bytes": 17256
+  },
+  "exactExpectationSha256": "757ecc8e4d4ab2c9ac2ff847ec5077781639b4746d729fde5760e90e9f0bf3f8",
+  "initialPublicPacketSha256": "3d1f99e34b104afc67f2e35d4fc3574c7836e06604bfece221c2879485e7305d",
+  "packetStreamSha256": "78ee0ceb1ddfbda0654e117e7153332cafa9aebd8ad2c71e82e28fb2d9bb515c",
+  "actions": [
+    {
+      "index": 1,
+      "commandSha256": "d72c570f83a14252f2e60d7f6f531cfc81cf8f40e0ac02509b1174cc326fdd94",
+      "publicPacketSha256": "defcd5522f475111483bd8d902cc5c66475a18cad0034f707f92cf6abe11e0da"
+    },
+    {
+      "index": 2,
+      "commandSha256": "d72c570f83a14252f2e60d7f6f531cfc81cf8f40e0ac02509b1174cc326fdd94",
+      "publicPacketSha256": "6ceeff4ddf2c1e4fe7e518464bdc0aa31d01e36f1c6849aa49e4977e600be0eb"
+    },
+    {
+      "index": 3,
+      "commandSha256": "d72c570f83a14252f2e60d7f6f531cfc81cf8f40e0ac02509b1174cc326fdd94",
+      "publicPacketSha256": "1c1ac48bed76e5b373051ec5932a097eac2b9c015d5b83fb015e64802db8c2b1"
+    },
+    {
+      "index": 4,
+      "commandSha256": "dcc2d4153d5cdcd5534fa71091e86ae5da637688925f993ec20721838d5c5df1",
+      "publicPacketSha256": "1dfecafc3cf78e73c13f3255924bc590eb13b437ec9fd5f81a1317b56adb12d6"
+    },
+    {
+      "index": 5,
+      "commandSha256": "d72c570f83a14252f2e60d7f6f531cfc81cf8f40e0ac02509b1174cc326fdd94",
+      "publicPacketSha256": "2ee7de64c170ead1967d8ef7d98f255639f8322e5bab203d6f04213d75078df2"
+    },
+    {
+      "index": 6,
+      "commandSha256": "da9be8702a66856f21a81c65d6d6255c4d2463884f4e7fcb52fb5e55121eaee1",
+      "publicPacketSha256": "80e3bdf29d71037edc30e0c3508a111af9a4adef449fbf99dfe3591a692bd4fa"
+    },
+    {
+      "index": 7,
+      "commandSha256": "d72c570f83a14252f2e60d7f6f531cfc81cf8f40e0ac02509b1174cc326fdd94",
+      "publicPacketSha256": "ec12c06812fac6204c92abcbc2d00005b976587a4f7c60a957ffd7f56454d800"
+    },
+    {
+      "index": 8,
+      "commandSha256": "dcc2d4153d5cdcd5534fa71091e86ae5da637688925f993ec20721838d5c5df1",
+      "publicPacketSha256": "285f0124f4d3dcf07920697f3366031a05e5ff616a94e4348660367b496c2067"
+    },
+    {
+      "index": 9,
+      "commandSha256": "d72c570f83a14252f2e60d7f6f531cfc81cf8f40e0ac02509b1174cc326fdd94",
+      "publicPacketSha256": "75d9ffecce093e4ac1510d3d4778c1923a6173635c5e5171a5b93b49f483d10a"
+    },
+    {
+      "index": 10,
+      "commandSha256": "d72c570f83a14252f2e60d7f6f531cfc81cf8f40e0ac02509b1174cc326fdd94",
+      "publicPacketSha256": "33d648f0b03df1dd5c1180bc8f78c95422f272cc8b8c008b792b46930ddfde69"
+    },
+    {
+      "index": 11,
+      "commandSha256": "da9be8702a66856f21a81c65d6d6255c4d2463884f4e7fcb52fb5e55121eaee1",
+      "publicPacketSha256": "3aa5b859ac07bac749c9085aa4af350955f178f1e7fad5c7c21055344a3efd80"
+    },
+    {
+      "index": 12,
+      "commandSha256": "dcc2d4153d5cdcd5534fa71091e86ae5da637688925f993ec20721838d5c5df1",
+      "publicPacketSha256": "418ae8b05fd8dfc9045502fc50514274325c9742bf548938b0b64745faf345c6"
+    },
+    {
+      "index": 13,
+      "commandSha256": "da9be8702a66856f21a81c65d6d6255c4d2463884f4e7fcb52fb5e55121eaee1",
+      "publicPacketSha256": "5c73648a55b5371c4e9a602c988baac6b0155f9175bbf5035e5bd7d4f567e227"
+    },
+    {
+      "index": 14,
+      "commandSha256": "dffb1c30a346f4ed37fb28f7b9877b82aa1c74390030678cd47b56fe274ad8aa",
+      "publicPacketSha256": "20683ff77448654ff84ff0fd12ec7c06098f2f801acb982c0bbea322a038726f"
+    },
+    {
+      "index": 15,
+      "commandSha256": "d72c570f83a14252f2e60d7f6f531cfc81cf8f40e0ac02509b1174cc326fdd94",
+      "publicPacketSha256": "1df2a86ec3182850fb5eae7bd71cad85af71bc4cfa6366a36372fec48c9db6e5"
+    },
+    {
+      "index": 16,
+      "commandSha256": "dcc2d4153d5cdcd5534fa71091e86ae5da637688925f993ec20721838d5c5df1",
+      "publicPacketSha256": "5b4d49dfe12276560dc887ee67b336c72e711923aa608241b2083f268f8a1aae"
+    },
+    {
+      "index": 17,
+      "commandSha256": "d72c570f83a14252f2e60d7f6f531cfc81cf8f40e0ac02509b1174cc326fdd94",
+      "publicPacketSha256": "18e6e53b262fefd79d88914115a51c15cefaecf670228e5e74a5095b83ebbd4e"
+    },
+    {
+      "index": 18,
+      "commandSha256": "d72c570f83a14252f2e60d7f6f531cfc81cf8f40e0ac02509b1174cc326fdd94",
+      "publicPacketSha256": "91bdd0907db77b38a301cb3aa9cd638d864ac302f926eb49531e544d4e6fcf8c"
+    },
+    {
+      "index": 19,
+      "commandSha256": "da9be8702a66856f21a81c65d6d6255c4d2463884f4e7fcb52fb5e55121eaee1",
+      "publicPacketSha256": "53cf0e0645e544776317e9935aed208abb6e64866856d2d39b5e2dc93110b3a8"
+    },
+    {
+      "index": 20,
+      "commandSha256": "d72c570f83a14252f2e60d7f6f531cfc81cf8f40e0ac02509b1174cc326fdd94",
+      "publicPacketSha256": "1f0d1b9dc46a66040715429675615d9fdbead36198d4de94380e72d5b95eca21"
+    },
+    {
+      "index": 21,
+      "commandSha256": "dcc2d4153d5cdcd5534fa71091e86ae5da637688925f993ec20721838d5c5df1",
+      "publicPacketSha256": "5f3a09893eb936f9d3f3a64199c2bcdd574d368de0ae7b8a725b98d3b5e16079"
+    },
+    {
+      "index": 22,
+      "commandSha256": "da9be8702a66856f21a81c65d6d6255c4d2463884f4e7fcb52fb5e55121eaee1",
+      "publicPacketSha256": "586b0d0cd9da2393b4d0d0851852875a0a4f71d1b9ff788534239b47dec705f3"
+    },
+    {
+      "index": 23,
+      "commandSha256": "da9be8702a66856f21a81c65d6d6255c4d2463884f4e7fcb52fb5e55121eaee1",
+      "publicPacketSha256": "375ec8dc0f7290e159237f362f66d025dfda6d3381f7eb9dc4294ddd8403d69a"
+    },
+    {
+      "index": 24,
+      "commandSha256": "da9be8702a66856f21a81c65d6d6255c4d2463884f4e7fcb52fb5e55121eaee1",
+      "publicPacketSha256": "5bd1734065617b7572596b2c4e6303407642d1829e4248e5ca3e3303e8d51012"
+    },
+    {
+      "index": 25,
+      "commandSha256": "d72c570f83a14252f2e60d7f6f531cfc81cf8f40e0ac02509b1174cc326fdd94",
+      "publicPacketSha256": "531eb061dedc70b67133fba817d73a6c30724230d203a96d08ad2ce76256fac6"
+    },
+    {
+      "index": 26,
+      "commandSha256": "dcc2d4153d5cdcd5534fa71091e86ae5da637688925f993ec20721838d5c5df1",
+      "publicPacketSha256": "e8c0017d4403e5952ed546211532b72d4709caff7b5349a3f788cd951f990807"
+    },
+    {
+      "index": 27,
+      "commandSha256": "dffb1c30a346f4ed37fb28f7b9877b82aa1c74390030678cd47b56fe274ad8aa",
+      "publicPacketSha256": "d85df46726b1add8f87b1daa936e459d92ba90455ba44f5110fe7ee18dadb3ea"
+    },
+    {
+      "index": 28,
+      "commandSha256": "d72c570f83a14252f2e60d7f6f531cfc81cf8f40e0ac02509b1174cc326fdd94",
+      "publicPacketSha256": "96180e8dd2f963972cc6129a5544fdb242d6189c2a32ed0125bd2a8723e6d45c"
+    },
+    {
+      "index": 29,
+      "commandSha256": "da9be8702a66856f21a81c65d6d6255c4d2463884f4e7fcb52fb5e55121eaee1",
+      "publicPacketSha256": "540bcf44b7efc673d8ad71a6afa1e798417007ac3e689bc614611d44827f7224"
+    },
+    {
+      "index": 30,
+      "commandSha256": "d72c570f83a14252f2e60d7f6f531cfc81cf8f40e0ac02509b1174cc326fdd94",
+      "publicPacketSha256": "1b31339a86ccdee4c6784561127351acb4504cf87f2757fc38767ebf3dbbfded"
+    },
+    {
+      "index": 31,
+      "commandSha256": "dcc2d4153d5cdcd5534fa71091e86ae5da637688925f993ec20721838d5c5df1",
+      "publicPacketSha256": "81fe99483baadf2da5f265fe903c4a171eb1fe93cfb2df804eee96851b3b575b"
+    }
+  ],
+  "validation": "The unchanged historical host checks are performed for every command and complete packet hash before release. Only baseline game/target/assets, provenance and trace packets reach the unchanged harness.",
+  "memoryBeforeRelease": {
+    "rss": 454242304,
+    "heapTotal": 288903168,
+    "heapUsed": 230455728,
+    "external": 106998898,
+    "arrayBuffers": 38864718
+  },
+  "baselineRootCollectedBeforeHarnessImport": true,
+  "memoryAfterRelease": {
+    "rss": 388059136,
+    "heapTotal": 150786048,
+    "heapUsed": 13473768,
+    "external": 42751216,
+    "arrayBuffers": 31699840
+  },
+  "preparationOnly": false
+}

@@ -1,0 +1,32 @@
+{
+  "schema": "logos-engine.followup-readiness-failed-observation.v1",
+  "observedAt": "2026-11-11T14:02:16.890465+00:00",
+  "status": "failed",
+  "toolReturnedExitCode": 1,
+  "command": [
+    "python",
+    "-B",
+    "docs/migration/lot7b-evidence/followup-recovery/tools/finalize-cost-readiness.py",
+    "--validation-directory",
+    "verification-attempt-02/validation",
+    "--test-scope-plan",
+    "docs/migration/lot7b-evidence/followup-recovery/contract/test-scope-final.json"
+  ],
+  "helper": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/tools/finalize-cost-readiness.py",
+    "sha256": "4ed625736afbb76f5412af5c2b9518e3ce4f0d817e06a361a33e1bf58ca7cc21",
+    "bytes": 40411
+  },
+  "reportedException": "ValueError: Migration audit has unresolved failures",
+  "originalAuditOutput": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/integrated-final/verification-attempt-02/validation/migration-audit-output.log.gz",
+    "sha256": "b5cc04994aefd7ab76c786f85a68556b89104f6c4ad30c0af283653f6396302d",
+    "bytes": 273
+  },
+  "originalFailures": [
+    "Missing differential evidence: docs/migration/lot6a-evidence/recovery/native-source-review.json"
+  ],
+  "officialWindowExists": false,
+  "readinessCreated": false,
+  "qualification": "Retained from the actual tool-returned exit1. The verifier writes no readiness receipt on failure. observedAt records this retention, not an invented child start/finish time."
+}

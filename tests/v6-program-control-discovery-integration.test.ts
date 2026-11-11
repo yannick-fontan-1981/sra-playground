@@ -337,9 +337,11 @@ test('cold common acquisition scopes a contact refusal and measures a conditiona
       const value = Reflect.get(target, property, target);
       return typeof value === 'function' ? value.bind(target) : value;
     } });
-    internal.planning = { execution, inputs, offers: new Map(), entryOffers: new Map(), coordination: [] };
+    internal.planning = { execution, inputs, offers: new Map(), entryOffers: new Map(), sourceStops: new Map(), coordination: [], refusals: [] };
     try {
-      const admitted = await internal.scopeStationaryContactRefusal(contact, refusal);
+      const groupIndex = internal.groups.findIndex((group: R) => group.id === 'goal_access');
+      const entryIndex = internal.groups[groupIndex].families.indexOf(contact.id);
+      const admitted = await internal.scopeStationaryContactRefusal(contact, refusal, groupIndex, entryIndex);
       assert.deepEqual(internal.planning.coordination, [], 'A rejected deferral must not publish a priority receipt');
       return admitted;
     } finally { internal.knowledge = store; internal.planning = null; }

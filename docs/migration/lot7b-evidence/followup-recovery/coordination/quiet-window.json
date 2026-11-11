@@ -1,0 +1,55 @@
+{
+  "schema": "logos-engine.followup-coordinated-quiet.v1",
+  "recordedAt": "2026-11-11T13:58:17.607032+00:00",
+  "requestId": "lot7-followup-f8d5097-strict-window",
+  "status": "acknowledged_quiet_before_window",
+  "otherLaneAcknowledged": true,
+  "ownTrackedComputeEnded": true,
+  "previewStopped": true,
+  "costNodeOptionsOverride": null,
+  "nativeDigests": {
+    "baseline": "ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229",
+    "candidate": "f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279"
+  },
+  "performanceDirectory": "docs/migration/lot7b-evidence/followup-recovery/performance",
+  "acknowledgedLanes": [
+    "6A",
+    "10B",
+    "5C"
+  ],
+  "laneAcknowledgmentKinds": {
+    "6A": "Completed native and documentation publication; explicit GO handoff to follow-up, no active work, costs and publication closed. Exact final owner status retained.",
+    "10B": "Fresh explicit quiet acknowledgment for this request after bounded diagnostic and focused tests completed.",
+    "5C": "Fresh explicit quiet acknowledgment for this request after common proof and checkpoint completed; quiet_scope expressly excludes previews and all queued compute."
+  },
+  "ownAgentsComputeIdle": [
+    "audit_caller_contract",
+    "audit_recovery_release",
+    "rebuild_workshop_witness"
+  ],
+  "functionalCaptureFinishedAt": "2026-11-11T13:55:57.316Z",
+  "exclusiveLockAcquiredAt": "2026-11-11T13:56:47.227929+00:00",
+  "evidence": [
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/coordination/quiet-evidence-6a.json",
+      "sha256": "d2d0d8de5c270f72030681f373448fdd82bb2d8a7596acf0a36e7bd511288918",
+      "bytes": 5266
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/coordination/quiet-evidence-10b.json",
+      "sha256": "7702e75dc73f68c4b2a4bb25f4887807945661247e4e94e5681ecc794070d2ac",
+      "bytes": 3923
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/coordination/quiet-evidence-5c.json",
+      "sha256": "07602bad3aaa8b73364ecb7e48557fa6360cb2390e3094918f0edb862f9105b7",
+      "bytes": 4530
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/coordination/exclusive-window-lock-acquired.json",
+      "sha256": "a3a218c933c91ec9e90603ae74ceac4ce94418d7592f7ffdf0f928efb88eba4a",
+      "bytes": 383
+    }
+  ],
+  "qualification": "Current terminal owner handoff from6A and explicit request-specific quiet acknowledgments from10B/5C are retained without rewriting their assertions. An actual exclusive flock is already held through final readiness and the subsequent complete ABBA window; cooperative future heavy work cannot enter. Passive coordination/publication lock-holder processes are not compute work. No machine-wide quiet is inferred from a process listing."
+}

@@ -1,0 +1,24 @@
+{
+  "schema": "sra.lot7.closed-case-clock-recovery.v1",
+  "recordedAt": "2026-11-11T12:05:46.515336+00:00",
+  "case": "LKEY",
+  "state": "closed",
+  "budgetSeconds": 2400,
+  "cumulativeSeconds": 2390.347106991,
+  "remainingSeconds": 9.652893009,
+  "clockReset": false,
+  "newCaseActivity": false,
+  "qualification": "Conversation-derived cumulative checkpoint recorded after environment replacement. This is not the original timing receipt; original unpublished clock/proof bytes were not recovered.",
+  "originalUnpublishedReceiptRecovered": false,
+  "eligibleAsNewGameProof": false,
+  "prohibitedNewActivity": [
+    "live execution",
+    "replay",
+    "case payload analysis",
+    "case oracle",
+    "new attempt"
+  ],
+  "historicalPublished7AClockIsNotRestartPoint": true,
+  "historicalPublished7ACumulativeSeconds": 1341.622741991,
+  "rule": "Preserve the later cumulative clock. Do not reset to the older published 7A checkpoint and do not spend the residual interval on another case operation."
+}

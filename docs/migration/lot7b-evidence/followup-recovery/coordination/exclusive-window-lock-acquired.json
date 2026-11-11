@@ -1,0 +1,10 @@
+{
+  "schema": "sra.coordinated-exclusive-lock.v1",
+  "requestId": "lot7-followup-f8d5097-strict-window",
+  "status": "held",
+  "lock": "/workspace/shared/sra-coordination/performance.lock",
+  "lockMode": "exclusive",
+  "holderPid": 2,
+  "acquiredAt": "2026-11-11T13:56:47.227929+00:00",
+  "releaseCondition": "Controller signals only after the official ABBA runner has terminated"
+}
