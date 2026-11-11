@@ -2,8 +2,8 @@
 """Freeze the selected-rigid native candidate and its passive execution adapters.
 
 Derived from scripts/freeze-v53-native-source.py. The same native inventory and
-byte-parts schema are used. The additional SelectedRigid evidence adapter is included
-explicitly. No game, native runtime, oracle or measurement is executed.
+byte-parts schema are used. Preview, SelectedRigid and inherited Window passive
+evidence adapters are included explicitly. No game, native runtime, oracle or measurement is executed.
 """
 from pathlib import Path
 import gzip, hashlib, importlib.util, io, json, subprocess, sys, tarfile
@@ -23,6 +23,7 @@ def main():
         raise FileExistsError('A source freeze is immutable')
     native = proof.native_source(); files = dict(native['files'])
     inputs = ['tests/helpers/v6-live-game-campaign.ts', 'tests/helpers/capture-preview-packing.ts', 'tests/helpers/capture-selected-rigid.ts',
+              'tests/helpers/v6-window-question-capture.ts',
               'scripts/run-v53-journaled-campaign.mjs', 'scripts/run-v53-campaign-proof.py',
               'scripts/replay-v53-public-regression.mjs', 'scripts/run-v53-regression-checks.py',
               'scripts/run-v53-release-checks.py', 'scripts/freeze-v53-native-source.py',

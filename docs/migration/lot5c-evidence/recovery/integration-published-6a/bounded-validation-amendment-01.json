@@ -1,0 +1,24 @@
+{
+  "schema": "logos-engine.lot5c.bounded-validation-invocation-amendment.v1",
+  "declaredAt": "2026-11-11T14:42:53.012907+00:00",
+  "failedReceipt": "docs/migration/lot5c-evidence/recovery/integration-published-6a/binding-acquisition-bounds.execution.json",
+  "failedTests": 3,
+  "failedBeforeRuntime": true,
+  "cause": "commonProofInputs requires evidence directories inside docs/migration/lot5c-evidence/recovery/common. The invocation pointed to integration-published-6a/binding-acquisition-bounds, so all three tests failed at the directory guard before an agent transition.",
+  "change": "Use a new directory inside the original allowed common evidence root. Preserve native source, test code, name pattern, expectations and initial failure.",
+  "correctedEvidenceDirectory": "docs/migration/lot5c-evidence/recovery/common/clock-integration-acquisition-01",
+  "retryReceiptStem": "docs/migration/lot5c-evidence/recovery/integration-published-6a/binding-acquisition-bounds-retry-01",
+  "sameNamePattern": "an incomplete (passive|selected) binding acquisition|the ordinary level clock bounds",
+  "preservedSuccessfulReceipts": [
+    "docs/migration/lot5c-evidence/recovery/integration-published-6a/native-runtime-tests.execution.json",
+    "docs/migration/lot5c-evidence/recovery/integration-published-6a/window-kernel-tests.execution.json"
+  ],
+  "nativeRuntimeTestsPassed": 9,
+  "windowTestsPassed": 4,
+  "remainingChecks": [
+    "typecheck",
+    "entry-audit",
+    "migration-audit"
+  ],
+  "qualification": "A correction to the evidence-output argument, not a weakened directory guard or changed test criteria. The four nonselected common cases remain outside this predeclared bounded run; Node reports only three selected tests rather than four additional skips."
+}

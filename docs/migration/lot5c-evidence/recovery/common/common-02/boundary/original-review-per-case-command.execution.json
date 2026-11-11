@@ -1,0 +1,37 @@
+{
+  "schema": "logos-engine.lot5c.command-execution.v1",
+  "status": "passed",
+  "startedAt": "2026-11-11T13:38:32.276417+00:00",
+  "command": [
+    "python",
+    "scripts/review-observed-binding-common-replay.py",
+    "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/common/common-02/boundary",
+    "--fixture",
+    "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/common/common-02/boundary/original-replay-per-case.json.gz",
+    "--export-receipt",
+    "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/common/common-02/boundary/original-export-per-case.json",
+    "--output",
+    "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/common/common-02/boundary/original-comparison-per-case.json"
+  ],
+  "cwd": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout",
+  "timeoutSeconds": 180.0,
+  "wrapper": {
+    "path": "docs/migration/lot5c-evidence/run-evidence-command.py",
+    "bytes": 3904,
+    "sha256": "99b16a35eac1f12acb3063e43d303ffc020b3339109e22eff1f807d1e87e47db"
+  },
+  "finishedAt": "2026-11-11T13:38:33.506100+00:00",
+  "durationSeconds": 1.222389640000074,
+  "exitCode": 0,
+  "timedOut": false,
+  "log": {
+    "path": "docs/migration/lot5c-evidence/recovery/common/common-02/boundary/original-review-per-case-command.log",
+    "bytes": 218,
+    "sha256": "95e306d225b0019a152d1977b24bd3c3a24a9df9a3d4c82f66b2666162e5ecb7"
+  },
+  "compressedLog": {
+    "path": "docs/migration/lot5c-evidence/recovery/common/common-02/boundary/original-review-per-case-command.log.gz",
+    "bytes": 179,
+    "sha256": "6e745f251553e19abc4ae4d9b2c94f2b38c8ce337df668a66d3c389587bf6bdd"
+  }
+}

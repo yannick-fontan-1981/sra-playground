@@ -1,0 +1,172 @@
+{
+  "schema": "logos-engine.lot5c.published6a-clock-integration-summary.v1",
+  "recordedAt": "2026-11-11T14:50:30.664598+00:00",
+  "status": "passed_within_declared_scope",
+  "published6AMergeCommit": "6f4a746cfeae3dc971b9b3354f04ea3a9702a21d",
+  "candidateCommitBeforeTests": "72397e46d746dfbc76e3d0d1818ff1b6b2b9cd64",
+  "importedClockFixCommit": "4e7e4742b997128346e84f62b7a4fb8b5d4e47c5",
+  "nativeFiles": 318,
+  "nativeDigest": "a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57",
+  "nativeFilesUnchangedSinceFreeze": true,
+  "nativeDifferencesFromCommon02": [
+    "src/logos-engine/v6-native-runtime.ts"
+  ],
+  "testInputsVerifiedAgainstPreexecutionCommit": {
+    "tests/v6-native-runtime.test.ts": {
+      "bytes": 15869,
+      "sha256": "8badc5aba5b71906da3d33bc323455b047721d5546c16fdbb20ac76d6eb8b7fc",
+      "matchesPreexecutionCommit": true
+    },
+    "tests/v6-window-question-kernel.test.ts": {
+      "bytes": 14388,
+      "sha256": "a6dfb97cb28d1a1f872b1e8068790d3d4716cbe6c4fa65f8501b4525968d2c06",
+      "matchesPreexecutionCommit": true
+    },
+    "tests/v6-object-binding-common.test.ts": {
+      "bytes": 30310,
+      "sha256": "eef0085a5b311ceba63f67fc19fceab19b8f1c961874c802951c42a11af646a8",
+      "matchesPreexecutionCommit": true
+    },
+    "scripts/native-object-binding-common-loop.ts": {
+      "bytes": 30696,
+      "sha256": "fc2dc72f18cd48ff6fd78492d5d9737a8ff3880b85fbc18b3cc888fc2ee1c0e6",
+      "matchesPreexecutionCommit": true
+    }
+  },
+  "tests": [
+    {
+      "name": "native-runtime-tests",
+      "receipt": "docs/migration/lot5c-evidence/recovery/integration-published-6a/native-runtime-tests.execution.json",
+      "counts": {
+        "tests": 9,
+        "pass": 9,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "durationSeconds": 110.85792654599936
+    },
+    {
+      "name": "window-kernel-tests",
+      "receipt": "docs/migration/lot5c-evidence/recovery/integration-published-6a/window-kernel-tests.execution.json",
+      "counts": {
+        "tests": 4,
+        "pass": 4,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "durationSeconds": 7.601990134000516
+    },
+    {
+      "name": "binding-acquisition-bounds-retry-01",
+      "receipt": "docs/migration/lot5c-evidence/recovery/integration-published-6a/binding-acquisition-bounds-retry-01.execution.json",
+      "counts": {
+        "tests": 3,
+        "pass": 3,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "durationSeconds": 7.407402009999714
+    }
+  ],
+  "testsPassed": 16,
+  "testsTotal": 16,
+  "checks": [
+    {
+      "name": "typecheck",
+      "receipt": "docs/migration/lot5c-evidence/recovery/integration-published-6a/typecheck.execution.json",
+      "durationSeconds": 9.69914369899925
+    },
+    {
+      "name": "entry-audit",
+      "receipt": "docs/migration/lot5c-evidence/recovery/integration-published-6a/entry-audit.execution.json",
+      "durationSeconds": 0.8338348359993688
+    },
+    {
+      "name": "migration-audit-retry-01",
+      "receipt": "docs/migration/lot5c-evidence/recovery/integration-published-6a/migration-audit-retry-01.execution.json",
+      "durationSeconds": 6.746798457001205
+    }
+  ],
+  "semanticMigrationFailures": [],
+  "entryCoverage": {
+    "implementation": "logos-engine.typescript.v6.native-migration/0.63.0",
+    "connected": 65,
+    "partiallyConnected": 0,
+    "declared": 76,
+    "percent": 85.5
+  },
+  "moduleCoverage": {
+    "pythonModules": 1369,
+    "pythonLines": 320375,
+    "declaredClassesAndFunctions": 12857,
+    "dataFiles": 417,
+    "verifiedModules": 0,
+    "componentVerifiedModules": 205,
+    "partiallyTransferredModules": 147,
+    "transferredUnverifiedModules": 0,
+    "pendingModules": 1017,
+    "strategyFamilies": 16
+  },
+  "completionGates": {
+    "allRequiredCapabilitiesTransferred": false,
+    "fullCommonCallerDifferentialParity": false,
+    "allDeclaredFamiliesIntegrated": false,
+    "commonGraphEditingCoversExecutedPrograms": false,
+    "pythonNumericSemanticsCovered": false,
+    "fullCampaignRegression": false
+  },
+  "bindingAcquisitionReports": [
+    {
+      "mode": "passive-acquisition-bound",
+      "report": "docs/migration/lot5c-evidence/recovery/common/clock-integration-acquisition-01/passive-acquisition-bound/common-loop.json.gz",
+      "bytes": 14391,
+      "sha256": "26fb6958a611fe356fb202efbc89ba95e4abe208029082e0a2832574293e5d54"
+    },
+    {
+      "mode": "selected-acquisition-bound",
+      "report": "docs/migration/lot5c-evidence/recovery/common/clock-integration-acquisition-01/selected-acquisition-bound/common-loop.json.gz",
+      "bytes": 11759,
+      "sha256": "8aeadbe9705e4dea1d0311aa20f3ee97bf6264f1ef3775e1e33768beacd67481"
+    },
+    {
+      "mode": "level-clock-acquisition-bound",
+      "report": "docs/migration/lot5c-evidence/recovery/common/clock-integration-acquisition-01/level-clock-acquisition-bound/common-loop.json.gz",
+      "bytes": 11929,
+      "sha256": "70071c87e2909287ee5a0ba1bd42bf3cbf05e78f0dc6140f6cb97ffa7d7eaa85"
+    }
+  ],
+  "inheritedCommon02": {
+    "summary": "docs/migration/lot5c-evidence/recovery/common/common-02/summary.json",
+    "checksPassed": 6818,
+    "nativeDigest": "35e03bc9df42bb01762cc025d1e5faa838845637944f560a499fd8800df4e0ed",
+    "reexecutedAgainstCurrentFreeze": false,
+    "qualification": "The four other common native tests and four Python comparisons retain their earlier declared scope. This bounded integration run reexecutes only the three actual acquisition-bound cases; it does not relabel common02."
+  },
+  "retainedFailures": [
+    {
+      "receipt": "docs/migration/lot5c-evidence/recovery/integration-published-6a/binding-acquisition-bounds.execution.json",
+      "failedTests": 3,
+      "cause": "Output-directory guard rejected the invocation before runtime; unchanged tests pass on the allowed output path.",
+      "amendment": "docs/migration/lot5c-evidence/recovery/integration-published-6a/bounded-validation-amendment-01.json"
+    },
+    {
+      "receipt": "docs/migration/lot5c-evidence/recovery/integration-published-6a/migration-audit.execution.json",
+      "commandExit": 0,
+      "semanticStatus": "failed",
+      "missingEvidenceEntries": 3,
+      "uniqueMissingFixtures": 2,
+      "cause": "Inherited fixtures were available as tracked byte parts but not materialized; exact published bytes restored.",
+      "repair": "docs/migration/lot5c-evidence/recovery/integration-published-6a/inherited-fixture-materialization.json"
+    }
+  ],
+  "liveGamesLaunched": 0,
+  "officialCostMeasured": false,
+  "sitePublishedBy5C": false,
+  "qualification": "Actual published6A source and exact independently tested10B clock correction integrated. NativeRuntime includes three existing recorded HANO/SYME/DNOI replay tests. Functional durations were collected under shared concurrent load and are not performance measurements. Final5C scope/freeze/cost still requires actualpublished followup7 and10B reconciliation."
+}

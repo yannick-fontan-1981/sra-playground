@@ -1,0 +1,213 @@
+--- before/check-cost-static-inputs.py
++++ after/check-cost-static-inputs.py
+@@ -8,6 +8,7 @@
+ Functional readiness, cross-thread coordination and isolation remain separate.
+ """
+ # Copied and adapted from docs/migration/lot5b-evidence/check-cost-static-inputs.py.
++# Direct 5B source SHA-256: 024c23aad5bae4b666cd2e47226b396a937a658a84a0d3cd927fcd1b9fa14cc1.
+ # No predecessor measurements or outcomes are reused.
+ from __future__ import annotations
+ import argparse
+@@ -23,6 +24,19 @@
+ 
+ ROOT = Path(__file__).resolve().parents[3]
+ EVIDENCE = ROOT / 'docs/migration/lot5c-evidence'
++DOMAIN_REVIEW = EVIDENCE / 'recovery/coordination/cost-domain-source-review.json'
++SOURCE_PATH_LIST = EVIDENCE / 'recovery/coordination/cost-source-evidence-paths.json'
++ACQUISITION_DOMAIN = {
++    'acquisitionMode': 'passive_nonadmitted_source_binding', 'contextAdmission': False,
++    'core': None, 'methods': [], 'attentionMutation': False, 'nativeAcquisitionIncomplete': False,
++    'recordOutsideOfficialBoundary': None,
++    'recordAtOfficialBoundary': {'status': 'scope_changed_preserving_conditional_methods',
++                                'evidence': ['before.observation_ref', 'after.observation_ref']},
++    'recordPayloadKeys': ['status', 'evidence'],
++    'officialBoundaryPredicate': 'before.level_epoch != after.level_epoch or after.levels_completed > before.levels_completed',
++    'factCoverage': 'One exact passive source fact for each actually captured nonnull boundary return; no fact for a null return. sourceCallIndices covers every acquired return; sourceEventCallIndices is exactly the ordered nonnull subset.',
++}
++SOURCES = ["src/logos-engine/v6-native-runtime.ts", "src/logos-engine/v6-observed-binding.ts", "src/logos-engine/v6-observed-binding-state.ts", "src/logos-engine/v6-object-binding-common.ts", "src/logos-engine/v6-object-binding-geometry.ts", "src/logos-engine/v6-object-binding-identity.ts", "src/logos-engine/v6-object-binding-planning.ts", "src/logos-engine/v6-object-binding-reception.ts", "src/logos-engine/v6-object-binding-tracker.ts", "src/logos-engine/v6-knowledge-store.ts", "src/logos-engine/kernel.ts"]
+ HISTORY = ROOT / 'docs/migration/lot3h-evidence/performance'
+ EXPECTED_TOOLS = [
+     'scripts/run-native-cost-window.py', 'scripts/measure-native-loop-costs.mjs',
+@@ -32,9 +46,64 @@
+ ]
+ 
+ 
++def require(condition, message):
++    if not condition:
++        raise ValueError(message)
++
++def validate_source_coverage(fixture, attribution):
++    coverage, points = attribution['sourceFactCoverage'], attribution['points']
++    expected = [(form['case'], form['form'], index) for form in fixture['forms']
++                for index in range(len(form['candidate']['requests']) + len(form['candidate']['inspection']))]
++    require([(row['case'], row['form'], row['pointIndex']) for row in coverage] == expected
++            and [(row['case'], row['form'], row['pointIndex']) for row in points] == expected,
++            'Every ordered capture/inspection must have exactly one source-fact coverage row')
++    for form in fixture['forms']:
++        identity = (form['case'], form['form'])
++        rows = [row for row in coverage if (row['case'], row['form']) == identity]
++        observed = [row for row in points if (row['case'], row['form']) == identity]
++        sequences = [row['sequence'] for row in form['candidate']['requests']] + [form['candidate']['actions']] * len(form['candidate']['inspection'])
++        event_indices = []
++        for index, (row, point, sequence) in enumerate(zip(rows, observed, sequences)):
++            require(set(row) == {'case', 'form', 'pointIndex', 'acquiredReturns', 'persistedSourceFacts', 'sourceCallIndices', 'sourceEventCallIndices'},
++                    'Unknown or missing source coverage field')
++            require(all(type(value) is int and value >= 0 for value in (row['pointIndex'], point['pointIndex'], sequence, point['sequence'], row['acquiredReturns'], row['persistedSourceFacts']))
++                    and row['pointIndex'] == point['pointIndex'] == index
++                    and row['acquiredReturns'] == point['sequence'] == sequence,
++                    'Source coverage counters must equal the actual ordered request sequence')
++            require(type(row['sourceCallIndices']) is list and all(type(value) is int for value in row['sourceCallIndices'])
++                    and row['sourceCallIndices'] == list(range(row['acquiredReturns'])), 'Actual returns are omitted, duplicated or reordered')
++            current = point['officialBoundarySourceCalls']
++            require(type(current) is list and all(type(value) is int and 0 <= value < row['acquiredReturns'] for value in current)
++                    and current == sorted(set(current)) and not set(current).intersection(event_indices), 'Invalid or repeated actual boundary call')
++            event_indices.extend(current)
++            require(type(row['sourceEventCallIndices']) is list and all(type(value) is int for value in row['sourceEventCallIndices'])
++                    and event_indices == sorted(set(event_indices)) and row['sourceEventCallIndices'] == event_indices
++                    and row['persistedSourceFacts'] == len(event_indices), 'Only the complete actual nonnull boundary subset may create facts')
++            facts = [item for item in attribution['nodeAttributions'] if (item['case'], item['form'], item['pointIndex']) == (*identity, index)
++                     and item['category'] == 'observedBinding_source_event_fact']
++            require(all(type(item['pointIndex']) is int and type(item['sourceCallIndex']) is int and type(item['sourceEventCount']) is int and item['sourceEventCount'] == 1
++                        and item['officialBoundary'] is True and item['sourceStatus'] == ACQUISITION_DOMAIN['recordAtOfficialBoundary']['status'] for item in facts)
++                    and sorted(item['sourceCallIndex'] for item in facts) == current,
++                    'Coverage must match the exact source event facts attributed at this point')
++        require(rows[-1]['acquiredReturns'] == form['candidate']['actions'], 'Final coverage omits acquired source returns')
++
++def exact(a, b):
++    """JSON equality that cannot equate false/true with integer 0/1."""
++    return json.dumps(a, sort_keys=True, separators=(',', ':'), allow_nan=False) == json.dumps(b, sort_keys=True, separators=(',', ':'), allow_nan=False)
++
+ def now(): return datetime.now(timezone.utc).isoformat()
+ def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
+-def read(path): return json.loads(path.read_bytes())
++def unique_object(pairs):
++    value = {}
++    for key, item in pairs:
++        require(key not in value, 'Duplicate JSON object key: ' + key)
++        value[key] = item
++    return value
++
++def invalid_constant(value):
++    raise ValueError('Non-finite JSON constant: ' + value)
++
++def read(path): return json.loads(path.read_bytes(), object_pairs_hook=unique_object, parse_constant=invalid_constant)
+ def fp(path):
+     data = path.read_bytes()
+     return {'path': path.resolve().relative_to(ROOT).as_posix(),
+@@ -84,6 +153,8 @@
+     def check(name, predicate, **detail):
+         checks.append({'name': name, 'satisfied': bool(predicate), **detail})
+ 
++    check('direct_5b_derivation_unchanged', sha(ROOT / 'docs/migration/lot5b-evidence/check-cost-static-inputs.py')
++          == '024c23aad5bae4b666cd2e47226b396a937a658a84a0d3cd927fcd1b9fa14cc1')
+     check('distinct_checkouts', ROOT.resolve() != base)
+     check('declared_checkouts', prep['baselineCheckout'] == str(base)
+           and prep['candidateCheckout'] == str(ROOT))
+@@ -155,7 +226,7 @@
+               'excludedWarmupSessions': len(cases['cases']) * 2 * 2,
+               'excludedWarmupActions': sum(case['warmupActions'] for case in cases['cases']) * 2 * 2}
+     check('cohort_counts_calculated_from_cases', list(counts.values()) == [32, 400, 8, 24]
+-          and all(declared[key] == policy[key] == value for key, value in counts.items()), **counts)
++          and all(type(declared[key]) is int and type(policy[key]) is int and declared[key] == policy[key] == value for key, value in counts.items()), **counts)
+     check('strict_per_game_global_gate', policy['globalStage'] == 'session_elapsed'
+           and policy['statistic'] == 'pooled median of complete measured-session durations per tested case'
+           and policy['relativeIncreaseLimit'] == declared['relativeGlobalBudget'] == 0.1
+@@ -164,6 +235,7 @@
+           and policy['crossCaseCompensation'] is declared['crossCaseCompensation'] is False
+           and policy['phaseOverrunsMayBeAccepted'] is True and policy['phasesAndP95RemainVisible'] is True
+           and declared['phaseOverrunsBlockAcceptance'] is False
++          and type(policy['excludedMeasuredSessions']) is int and type(policy['excludedOutliers']) is int
+           and policy['excludedMeasuredSessions'] == policy['excludedOutliers'] == 0)
+     check('finalization_is_explicit', declared['status'] == 'declared_before_official_window'
+           and declared['noOfficialWindowAtDeclaration'] is True and declared['functionalReadinessNotAnticipated'] is True
+@@ -235,6 +307,26 @@
+               and contract['lot'] == '5C' and contract['performanceDirectory'] == relative_perf.as_posix()
+               and contract['declaration'] == fp(perf / 'declaration.json')
+               and contract['tools'] == owner_tools)
++        domain = read(DOMAIN_REVIEW)
++        domain_record, source_paths_record = fp(DOMAIN_REVIEW), fp(SOURCE_PATH_LIST)
++        check('owner_source_domain_declared_exactly', exact(contract['domainReview'], domain_record)
++              and exact(contract['sourceEvidencePaths'], source_paths_record)
++              and exact(contract['acquisitionDomain'], ACQUISITION_DOMAIN)
++              and domain['schema'] == 'logos-engine.lot5c.cost-domain-source-review.v1'
++              and domain['status'] == 'superseded_before_capture'
++              and all(domain[key] is False for key in ['functionalCapturesStarted', 'costMeasurementsStarted', 'executionFailureClaimed'])
++              and exact(domain['revisedDomain'], ACQUISITION_DOMAIN)
++              and exact(read(SOURCE_PATH_LIST), SOURCES) and exact(domain['sourceEvidencePaths'], SOURCES)
++              and any(exact(item, source_paths_record) for item in domain['evidenceInputs'])
++              and all(type(item['bytes']) is int and exact(fp(ROOT / item['path']), item) for item in domain['evidenceInputs'])
++              and exact(prep['ownerSourceDomain'], {'domainReview': domain_record, 'sourceEvidencePaths': source_paths_record})
++              and datetime.fromisoformat(domain['recordedAt']) <= datetime.fromisoformat(declared['finalizedAt']))
++        check('owner_contract_generator_and_derivation',
++              contract['generator']['path'] == 'docs/migration/lot5c-evidence/finalize-owner-cost-contract.py'
++              and exact(fp(ROOT / contract['generator']['path']), contract['generator'])
++              and contract['derivedFrom']['path'] == 'docs/migration/lot5b-evidence/finalize-owner-cost-contract.py'
++              and contract['derivedFrom']['sha256'] == '58fd6f433ee6043c3cd24f3c763f4ede265c4b2e60374a9916807bccc68c2997'
++              and exact(fp(ROOT / contract['derivedFrom']['path']), contract['derivedFrom']))
+         check('owner_tools_unchanged', set(owner_tools) == {'consolidator', 'reviewer'}
+               and owner_tools['consolidator']['path'] == 'docs/migration/lot5c-evidence/consolidate-owner-costs.mjs'
+               and owner_tools['reviewer']['path'] == 'docs/migration/lot5c-evidence/review-owner-costs.py'
+@@ -249,6 +341,16 @@
+             'qualification': 'functional_structure_frozen_before_measurement'})
+         fixture = read(ROOT / contract['structuralFixture']['path'])
+         attribution = read(ROOT / fixture['attribution']['path'])
++        check('owner_attribution_source_domain', exact(attribution['domainReview'], domain_record)
++              and attribution['acquisitionMode'] == ACQUISITION_DOMAIN['acquisitionMode']
++              and exact(attribution['acceptedBoundaryReturn'], ACQUISITION_DOMAIN['recordAtOfficialBoundary'])
++              and all(any(exact(item, required) for item in attribution['inputs']) for required in [domain_record, source_paths_record]))
++        coverage_error = None
++        try:
++            validate_source_coverage(fixture, attribution)
++        except (ValueError, KeyError, TypeError, IndexError) as error:
++            coverage_error = str(error)
++        check('owner_exact_source_fact_coverage', coverage_error is None, error=coverage_error)
+         baseline_capture_record = fixture['captures']['baseline']['receipt']
+         baseline_capture = read(ROOT / baseline_capture_record['path'])
+         baseline_capture_inputs = baseline_capture['inputsBefore']
+@@ -311,8 +413,16 @@
+                   [('STCK', 'warmup'), ('STCK', 'measured'), ('SMLP', 'warmup'), ('SMLP', 'measured')]
+               and attribution['formsSha256'] == hashlib.sha256(json.dumps(fixture['forms'], sort_keys=True,
+                   separators=(',', ':'), ensure_ascii=False, allow_nan=False).encode()).hexdigest()
+-              and attribution['checkedCount'] == len(attribution['checks']) > 0
++              and type(attribution['checkedCount']) is int and attribution['checkedCount'] == len(attribution['checks']) > 0
+               and all(row['passed'] is True for row in attribution['checks']))
++        for role in ('baseline', 'candidate'):
++            captured = read(ROOT / fixture['captures'][role]['receipt']['path'])
++            check('owner_capture_source_domain_' + role, captured['ownerId'] == 'public_observed_binding'
++                  and captured['acquisitionMode'] == ACQUISITION_DOMAIN['acquisitionMode']
++                  and exact(captured['domainReview'], domain_record)
++                  and all(type(captured[key]) is int and captured[key] == 0 for key in ['measuredCostSessions', 'timingReportsRead', 'timingMetricsProduced'])
++                  and all(any(exact(item, required) for item in captured['inputsBefore']) for required in [domain_record, source_paths_record])
++                  and datetime.fromisoformat(domain['recordedAt']) <= datetime.fromisoformat(captured['startedAt']))
+         check('functional_structure_predeclared', datetime.fromisoformat(attribution['recordedAt'])
+               <= datetime.fromisoformat(fixture['recordedAt'])
+               <= datetime.fromisoformat(contract['declaredAt']))
+@@ -321,13 +431,18 @@
+               and source_inventory['schema'] == 'logos-engine.lot5c-owner-cost-source-inventory.v1'
+               and source_inventory['nativeDigests'] == declared['nativeDigests']
+               and source_inventory['programScope'] == 'family-installed programs'
+-              and sorted(item['path'] for item in contract['sourceEvidence']) == sorted(["src/logos-engine/v6-native-runtime.ts", "src/logos-engine/v6-observed-binding.ts", "src/logos-engine/v6-observed-binding-state.ts", "src/logos-engine/v6-object-binding-common.ts", "src/logos-engine/v6-object-binding-geometry.ts", "src/logos-engine/v6-object-binding-identity.ts", "src/logos-engine/v6-object-binding-planning.ts", "src/logos-engine/v6-object-binding-reception.ts", "src/logos-engine/v6-object-binding-tracker.ts", "src/logos-engine/v6-knowledge-store.ts", "src/logos-engine/kernel.ts"])
++              and [item['path'] for item in contract['sourceEvidence']] == SOURCES
+               and all(fp(ROOT / item['path']) == item for item in contract['sourceEvidence']))
+         for key, addition in [('owners', 'public_observed_binding'), ('programs', 'v6.observed_binding.choose')]:
+             a, b = source_inventory[key]['baseline'], source_inventory[key]['candidate']
+             check('owner_inventory_exact_addition_' + key,
+-                  len(a) == len(set(a)) and len(b) == len(set(b))
++                  type(a) is list and type(b) is list and all(type(value) is str and bool(value) for value in a + b)
++                  and len(a) == len(set(a)) and len(b) == len(set(b))
+                   and set(b) - set(a) == (set() if addition is None else {addition}) and not set(a) - set(b))
++        check('owner_inventory_existing_order_unchanged',
++              [owner for owner in source_inventory['owners']['candidate'] if owner != 'public_observed_binding'] == source_inventory['owners']['baseline']
++              and [row for row in source_inventory['sourceInventory']['candidate']['installations'] if row['owner'] != 'public_observed_binding']
++                  == source_inventory['sourceInventory']['baseline']['installations'])
+         check('owner_contract_chronology', datetime.fromisoformat(declared['finalizedAt'])
+               <= datetime.fromisoformat(contract['declaredAt']) <= datetime.fromisoformat(started)
+               and datetime.fromisoformat(source_inventory['recordedAt']) <= datetime.fromisoformat(contract['declaredAt']))
+@@ -357,6 +472,7 @@
+             'The owner must separately bind actual completed evidence and cross-thread coordination before any official window.'}
+     if owner_contract_record is not None:
+         receipt.update(ownerCostContract=owner_contract_record, ownerCostTools=owner_tools)
++        receipt['ownerSourceDomain'] = {'domainReview': domain_record, 'sourceEvidencePaths': source_paths_record}
+         receipt['ownerStructuralFixture'] = contract['structuralFixture']
+         receipt['ownerStructuralExternalInputs'] = list({item['path']: item
+             for item in [*structural_records, *baseline_capture_inputs]

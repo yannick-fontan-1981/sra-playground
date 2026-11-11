@@ -1,0 +1,34 @@
+{
+  "schema": "logos-engine.lot5c.command-execution.v1",
+  "status": "passed",
+  "startedAt": "2026-11-11T14:40:47.733559+00:00",
+  "command": [
+    "node",
+    "--max-old-space-size=768",
+    "--test",
+    "--test-reporter=tap",
+    "--test-concurrency=1",
+    "tests/v6-window-question-kernel.test.ts"
+  ],
+  "cwd": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout",
+  "timeoutSeconds": 120.0,
+  "wrapper": {
+    "path": "docs/migration/lot5c-evidence/run-evidence-command.py",
+    "bytes": 3904,
+    "sha256": "99b16a35eac1f12acb3063e43d303ffc020b3339109e22eff1f807d1e87e47db"
+  },
+  "finishedAt": "2026-11-11T14:40:55.336851+00:00",
+  "durationSeconds": 7.601990134000516,
+  "exitCode": 0,
+  "timedOut": false,
+  "log": {
+    "path": "docs/migration/lot5c-evidence/recovery/integration-published-6a/window-kernel-tests.log",
+    "bytes": 1172,
+    "sha256": "f308d5a7dd469a955ad555a19e7973729515067f535fda11a7e48705a1d77d0b"
+  },
+  "compressedLog": {
+    "path": "docs/migration/lot5c-evidence/recovery/integration-published-6a/window-kernel-tests.log.gz",
+    "bytes": 457,
+    "sha256": "6e9da12eacc007b0b7321ae1ea7f9c5de134faa40ce594368ab6c95a8d988b5f"
+  }
+}

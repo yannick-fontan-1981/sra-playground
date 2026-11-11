@@ -1,0 +1,554 @@
+{
+  "schema": "logos-engine.followup-strict-work-verification.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-11T15:31:04.765Z",
+  "generator": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/tools/verify-strict-cost-forms.mjs",
+    "sha256": "07276dd501a919c97d3f53b7ea594eed8029b5a363f2a498515c1a304551a22b",
+    "bytes": 7759
+  },
+  "nativeDigests": {
+    "baseline": "ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229",
+    "candidate": "f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279"
+  },
+  "forms": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/strict-work-forms.json",
+    "sha256": "825546ffc4f061a1063fbeea4c52c89c2d7a79dbc3dee02e11ab6c1de0ca6637",
+    "bytes": 255907
+  },
+  "checkedTrials": 40,
+  "measuredSessions": 32,
+  "measuredActions": 400,
+  "excludedWarmupSessions": 8,
+  "excludedWarmupActions": 24,
+  "structuralExemptions": [],
+  "excludedMeasuredSessions": 0,
+  "excludedOutliers": 0,
+  "checks": [
+    {
+      "label": "A1",
+      "role": "baseline",
+      "case": "STCK",
+      "round": 0,
+      "warmup": true,
+      "actions": 3,
+      "signatureSha256": "15f5c5dcedb4a74ef2d5bb58dc353114c10bcc2b281f62c19587b7f2b07dc8e9",
+      "passed": true
+    },
+    {
+      "label": "A1",
+      "role": "baseline",
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "actions": 10,
+      "signatureSha256": "1426b79020ff0f8a15f7f6be78927c27adc42dee61bc503b413ba2cb5d636eb1",
+      "passed": true
+    },
+    {
+      "label": "A1",
+      "role": "baseline",
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "actions": 10,
+      "signatureSha256": "1426b79020ff0f8a15f7f6be78927c27adc42dee61bc503b413ba2cb5d636eb1",
+      "passed": true
+    },
+    {
+      "label": "A1",
+      "role": "baseline",
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "actions": 10,
+      "signatureSha256": "1426b79020ff0f8a15f7f6be78927c27adc42dee61bc503b413ba2cb5d636eb1",
+      "passed": true
+    },
+    {
+      "label": "A1",
+      "role": "baseline",
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "actions": 10,
+      "signatureSha256": "1426b79020ff0f8a15f7f6be78927c27adc42dee61bc503b413ba2cb5d636eb1",
+      "passed": true
+    },
+    {
+      "label": "A1",
+      "role": "baseline",
+      "case": "SMLP",
+      "round": 0,
+      "warmup": true,
+      "actions": 3,
+      "signatureSha256": "cd863ebf2cc4bf7261d55feb768181085509517d920a0ed3a3e7a52e310b2403",
+      "passed": true
+    },
+    {
+      "label": "A1",
+      "role": "baseline",
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "actions": 15,
+      "signatureSha256": "b9d7030833c18d97a60df75ca10837ea950a53d8f47b869e8852023ae3f88d26",
+      "passed": true
+    },
+    {
+      "label": "A1",
+      "role": "baseline",
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "actions": 15,
+      "signatureSha256": "b9d7030833c18d97a60df75ca10837ea950a53d8f47b869e8852023ae3f88d26",
+      "passed": true
+    },
+    {
+      "label": "A1",
+      "role": "baseline",
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "actions": 15,
+      "signatureSha256": "b9d7030833c18d97a60df75ca10837ea950a53d8f47b869e8852023ae3f88d26",
+      "passed": true
+    },
+    {
+      "label": "A1",
+      "role": "baseline",
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "actions": 15,
+      "signatureSha256": "b9d7030833c18d97a60df75ca10837ea950a53d8f47b869e8852023ae3f88d26",
+      "passed": true
+    },
+    {
+      "label": "B1",
+      "role": "candidate",
+      "case": "STCK",
+      "round": 0,
+      "warmup": true,
+      "actions": 3,
+      "signatureSha256": "15f5c5dcedb4a74ef2d5bb58dc353114c10bcc2b281f62c19587b7f2b07dc8e9",
+      "passed": true
+    },
+    {
+      "label": "B1",
+      "role": "candidate",
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "actions": 10,
+      "signatureSha256": "1426b79020ff0f8a15f7f6be78927c27adc42dee61bc503b413ba2cb5d636eb1",
+      "passed": true
+    },
+    {
+      "label": "B1",
+      "role": "candidate",
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "actions": 10,
+      "signatureSha256": "1426b79020ff0f8a15f7f6be78927c27adc42dee61bc503b413ba2cb5d636eb1",
+      "passed": true
+    },
+    {
+      "label": "B1",
+      "role": "candidate",
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "actions": 10,
+      "signatureSha256": "1426b79020ff0f8a15f7f6be78927c27adc42dee61bc503b413ba2cb5d636eb1",
+      "passed": true
+    },
+    {
+      "label": "B1",
+      "role": "candidate",
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "actions": 10,
+      "signatureSha256": "1426b79020ff0f8a15f7f6be78927c27adc42dee61bc503b413ba2cb5d636eb1",
+      "passed": true
+    },
+    {
+      "label": "B1",
+      "role": "candidate",
+      "case": "SMLP",
+      "round": 0,
+      "warmup": true,
+      "actions": 3,
+      "signatureSha256": "cd863ebf2cc4bf7261d55feb768181085509517d920a0ed3a3e7a52e310b2403",
+      "passed": true
+    },
+    {
+      "label": "B1",
+      "role": "candidate",
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "actions": 15,
+      "signatureSha256": "b9d7030833c18d97a60df75ca10837ea950a53d8f47b869e8852023ae3f88d26",
+      "passed": true
+    },
+    {
+      "label": "B1",
+      "role": "candidate",
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "actions": 15,
+      "signatureSha256": "b9d7030833c18d97a60df75ca10837ea950a53d8f47b869e8852023ae3f88d26",
+      "passed": true
+    },
+    {
+      "label": "B1",
+      "role": "candidate",
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "actions": 15,
+      "signatureSha256": "b9d7030833c18d97a60df75ca10837ea950a53d8f47b869e8852023ae3f88d26",
+      "passed": true
+    },
+    {
+      "label": "B1",
+      "role": "candidate",
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "actions": 15,
+      "signatureSha256": "b9d7030833c18d97a60df75ca10837ea950a53d8f47b869e8852023ae3f88d26",
+      "passed": true
+    },
+    {
+      "label": "B2",
+      "role": "candidate",
+      "case": "STCK",
+      "round": 0,
+      "warmup": true,
+      "actions": 3,
+      "signatureSha256": "15f5c5dcedb4a74ef2d5bb58dc353114c10bcc2b281f62c19587b7f2b07dc8e9",
+      "passed": true
+    },
+    {
+      "label": "B2",
+      "role": "candidate",
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "actions": 10,
+      "signatureSha256": "1426b79020ff0f8a15f7f6be78927c27adc42dee61bc503b413ba2cb5d636eb1",
+      "passed": true
+    },
+    {
+      "label": "B2",
+      "role": "candidate",
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "actions": 10,
+      "signatureSha256": "1426b79020ff0f8a15f7f6be78927c27adc42dee61bc503b413ba2cb5d636eb1",
+      "passed": true
+    },
+    {
+      "label": "B2",
+      "role": "candidate",
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "actions": 10,
+      "signatureSha256": "1426b79020ff0f8a15f7f6be78927c27adc42dee61bc503b413ba2cb5d636eb1",
+      "passed": true
+    },
+    {
+      "label": "B2",
+      "role": "candidate",
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "actions": 10,
+      "signatureSha256": "1426b79020ff0f8a15f7f6be78927c27adc42dee61bc503b413ba2cb5d636eb1",
+      "passed": true
+    },
+    {
+      "label": "B2",
+      "role": "candidate",
+      "case": "SMLP",
+      "round": 0,
+      "warmup": true,
+      "actions": 3,
+      "signatureSha256": "cd863ebf2cc4bf7261d55feb768181085509517d920a0ed3a3e7a52e310b2403",
+      "passed": true
+    },
+    {
+      "label": "B2",
+      "role": "candidate",
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "actions": 15,
+      "signatureSha256": "b9d7030833c18d97a60df75ca10837ea950a53d8f47b869e8852023ae3f88d26",
+      "passed": true
+    },
+    {
+      "label": "B2",
+      "role": "candidate",
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "actions": 15,
+      "signatureSha256": "b9d7030833c18d97a60df75ca10837ea950a53d8f47b869e8852023ae3f88d26",
+      "passed": true
+    },
+    {
+      "label": "B2",
+      "role": "candidate",
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "actions": 15,
+      "signatureSha256": "b9d7030833c18d97a60df75ca10837ea950a53d8f47b869e8852023ae3f88d26",
+      "passed": true
+    },
+    {
+      "label": "B2",
+      "role": "candidate",
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "actions": 15,
+      "signatureSha256": "b9d7030833c18d97a60df75ca10837ea950a53d8f47b869e8852023ae3f88d26",
+      "passed": true
+    },
+    {
+      "label": "A2",
+      "role": "baseline",
+      "case": "STCK",
+      "round": 0,
+      "warmup": true,
+      "actions": 3,
+      "signatureSha256": "15f5c5dcedb4a74ef2d5bb58dc353114c10bcc2b281f62c19587b7f2b07dc8e9",
+      "passed": true
+    },
+    {
+      "label": "A2",
+      "role": "baseline",
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "actions": 10,
+      "signatureSha256": "1426b79020ff0f8a15f7f6be78927c27adc42dee61bc503b413ba2cb5d636eb1",
+      "passed": true
+    },
+    {
+      "label": "A2",
+      "role": "baseline",
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "actions": 10,
+      "signatureSha256": "1426b79020ff0f8a15f7f6be78927c27adc42dee61bc503b413ba2cb5d636eb1",
+      "passed": true
+    },
+    {
+      "label": "A2",
+      "role": "baseline",
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "actions": 10,
+      "signatureSha256": "1426b79020ff0f8a15f7f6be78927c27adc42dee61bc503b413ba2cb5d636eb1",
+      "passed": true
+    },
+    {
+      "label": "A2",
+      "role": "baseline",
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "actions": 10,
+      "signatureSha256": "1426b79020ff0f8a15f7f6be78927c27adc42dee61bc503b413ba2cb5d636eb1",
+      "passed": true
+    },
+    {
+      "label": "A2",
+      "role": "baseline",
+      "case": "SMLP",
+      "round": 0,
+      "warmup": true,
+      "actions": 3,
+      "signatureSha256": "cd863ebf2cc4bf7261d55feb768181085509517d920a0ed3a3e7a52e310b2403",
+      "passed": true
+    },
+    {
+      "label": "A2",
+      "role": "baseline",
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "actions": 15,
+      "signatureSha256": "b9d7030833c18d97a60df75ca10837ea950a53d8f47b869e8852023ae3f88d26",
+      "passed": true
+    },
+    {
+      "label": "A2",
+      "role": "baseline",
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "actions": 15,
+      "signatureSha256": "b9d7030833c18d97a60df75ca10837ea950a53d8f47b869e8852023ae3f88d26",
+      "passed": true
+    },
+    {
+      "label": "A2",
+      "role": "baseline",
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "actions": 15,
+      "signatureSha256": "b9d7030833c18d97a60df75ca10837ea950a53d8f47b869e8852023ae3f88d26",
+      "passed": true
+    },
+    {
+      "label": "A2",
+      "role": "baseline",
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "actions": 15,
+      "signatureSha256": "b9d7030833c18d97a60df75ca10837ea950a53d8f47b869e8852023ae3f88d26",
+      "passed": true
+    }
+  ],
+  "inputs": [
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/strict-work-forms.json",
+      "sha256": "825546ffc4f061a1063fbeea4c52c89c2d7a79dbc3dee02e11ab6c1de0ca6637",
+      "bytes": 255907
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/window.json",
+      "sha256": "4359b2eb47e7aaa291eca139f741f9d1faede407c24ea79c828ef11c06b80f9a",
+      "bytes": 11539
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/declaration.json",
+      "sha256": "727a4956837421892edfd1f04c649cef4004d0128d056150b3cbd560735e3132",
+      "bytes": 5021
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/readiness.json",
+      "sha256": "42e6765ca914e1f30c92deb0cf86b1b7792cd11bc671fe591b7f3610595c78b3",
+      "bytes": 726412
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance/strict-work-declaration.json",
+      "sha256": "82716bdccf2578c9adf818d388a6c947ffc9dc2da71e17cafb271f2680220ed2",
+      "bytes": 2118
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/tools/capture-strict-cost-forms.mjs",
+      "sha256": "8e269df48afbfea2991e976a252bf49e95cd15207b2442794078454c9fc8a568",
+      "bytes": 12545
+    },
+    {
+      "path": "scripts/compare-native-cost-cohorts.mjs",
+      "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34",
+      "bytes": 19460
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance/cases.json",
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d",
+      "bytes": 1451
+    },
+    {
+      "path": "docs/migration/lot6a-evidence/integrated-final-02/source-manifest.json",
+      "sha256": "52f3624d419cb8209e6545274b3867b5f150d8630a0daa05369fd7613ed435fe",
+      "bytes": 36332
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/integrated-final/source-manifest.json",
+      "sha256": "c597c7629495e98fcfad64cdd827393bc58d2d8f26594474e60add601485e4de",
+      "bytes": 36332
+    },
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59",
+      "bytes": 20670
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f",
+      "bytes": 48531
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44",
+      "bytes": 46966
+    },
+    {
+      "path": "docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b",
+      "bytes": 53583
+    },
+    {
+      "path": "docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9",
+      "bytes": 111624
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/cohort1/baseline.json",
+      "sha256": "c03b9c9ac37d8fc89a4ba059db338a0d0ecfb2c0174fe2fd6ff92a10570536d3",
+      "bytes": 433001
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/cohort1/after.json",
+      "sha256": "947358e92f49a299fe71a0afa21e3075b691aeae1315039dca6e538583aff784",
+      "bytes": 433045
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/cohort2/after.json",
+      "sha256": "b0d37373f37df792a24149b82912e92a3168f384b531c42dd034bfc1f0495a2c",
+      "bytes": 433083
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/cohort2/baseline.json",
+      "sha256": "c84a9c13a5c5a703576770851c3ba74718e8218c8384153a33ac7b4f34d57170",
+      "bytes": 433015
+    }
+  ],
+  "watchedExternalInputs": [
+    {
+      "path": "/workspace/sites/sra-lot7-baseline6a-recovery-20261111/scripts/measure-native-loop-costs.mjs",
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59",
+      "bytes": 20670
+    },
+    {
+      "path": "/workspace/sites/sra-lot7-baseline6a-recovery-20261111/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f",
+      "bytes": 48531
+    },
+    {
+      "path": "/workspace/sites/sra-lot7-baseline6a-recovery-20261111/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44",
+      "bytes": 46966
+    },
+    {
+      "path": "/workspace/sites/sra-lot7-baseline6a-recovery-20261111/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b",
+      "bytes": 53583
+    },
+    {
+      "path": "/workspace/sites/sra-lot7-baseline6a-recovery-20261111/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9",
+      "bytes": 111624
+    }
+  ],
+  "qualification": "Every official measured and warmup trial has the exact work signature declared by the earlier functional capture. This validates work identity, not the numerical budget; the unchanged global-cost tools decide that separately."
+}

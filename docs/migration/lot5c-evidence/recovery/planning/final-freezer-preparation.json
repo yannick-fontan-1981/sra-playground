@@ -1,0 +1,212 @@
+{
+  "schema": "logos-engine.lot5c-final-freezer-preparation.v1",
+  "status": "source_preparation_validated_without_freeze",
+  "recordedAt": "2026-11-11T17:11:56.098663+00:00",
+  "adaptedFrom": {
+    "path": "docs/migration/lot10b-evidence/freeze-source.py",
+    "bytes": 8139,
+    "sha256": "3b39a3d18025372749c9250539512616b10cb7400e57fe574dc1d58a6a74c065"
+  },
+  "freezer": {
+    "path": "docs/migration/lot5c-evidence/freeze-source.py",
+    "bytes": 13726,
+    "sha256": "7932c4dc4b5f825a1bb0e148744d10e52c30675dd9992b7568b3ea432d0626c0"
+  },
+  "scopeReviewed": {
+    "path": "docs/migration/lot5c-evidence/recovery/integration-published-10b/final-scope-reconciliation.json",
+    "bytes": 25572,
+    "sha256": "d59fefa24a468ac17aa512507a6e4a04b40b6fa2a41f9e3f9fd8d24c9c7e274d"
+  },
+  "explicitFreezeArguments": [
+    "--test-scope",
+    "--replay-scope",
+    "--contract"
+  ],
+  "archiveContract": {
+    "nativeManifestSchema": "unchanged native_source fileCount/digest/files shape",
+    "archiveSchema": "logos-engine.v53.frozen-source-archive.v1",
+    "partsSchema": "logos-engine.v53.frozen-source-parts.v1",
+    "partSizeBytes": 900000,
+    "exactTestFiles": 138,
+    "exactReplayRows": 11,
+    "expectedComparisonChecks": 187,
+    "fourWholeModuleExclusions": [
+      "tests/v6-framed-transfer-reference.test.ts",
+      "tests/v6-ranked-workshop-kernel.test.ts",
+      "tests/v6-ranked-workshop-reference.test.ts",
+      "tests/v6-symbol-transactions-kernel.test.ts"
+    ],
+    "commonPlan": "docs/migration/lot5c-evidence/recovery/common/common-plan.json",
+    "bindingFixture": "tests/fixtures/v6-observed-binding-reference.json.gz",
+    "topLevelHelperFileCountsAtPreparation": {
+      "scripts": 373,
+      "tests/helpers": 9,
+      "docs/migration/lot5c-evidence": 11
+    },
+    "otherDeclarations": "The final scope, executable replay manifest, validation contract and this preparation receipt are frozen as exact inputs.",
+    "journalPolicy": "Historical replay baseline/trace files and actual-operation journals are neither opened nor archived by scope validation; only the explicit Binding fixture is included.",
+    "sourceIntegrity": "Declaration SHA256 values bind the exact bounded bytes validated; the first archive baseline must match them. All member hashes are checked during writing and after writing. Final helper membership and declaration pins are rechecked, and native_source must remain equal.",
+    "immutability": "Existing manifest/archive/parts are refused. Every output is exclusive. Ordered900000-byte parts reconstruct exact original bytes."
+  },
+  "validation": {
+    "checks": [
+      {
+        "name": "in-memory Python syntax compilation",
+        "status": "passed"
+      },
+      {
+        "name": "proof module stays unloaded during source-only validation",
+        "status": "passed"
+      },
+      {
+        "name": "actual reconciled138 scope accepted",
+        "status": "passed"
+      },
+      {
+        "name": "SYNTHETIC refusal: one missing test",
+        "status": "passed"
+      },
+      {
+        "name": "SYNTHETIC refusal: duplicate test",
+        "status": "passed"
+      },
+      {
+        "name": "SYNTHETIC refusal: closed-budget module included",
+        "status": "passed"
+      },
+      {
+        "name": "SYNTHETIC refusal: missing exclusion",
+        "status": "passed"
+      },
+      {
+        "name": "source-bound eleven replay rows accepted without reading their journals",
+        "status": "passed"
+      },
+      {
+        "name": "SYNTHETIC refusal: missing KATA row",
+        "status": "passed"
+      },
+      {
+        "name": "SYNTHETIC refusal: changed baseline pin",
+        "status": "passed"
+      },
+      {
+        "name": "SYNTHETIC refusal: different order",
+        "status": "passed"
+      },
+      {
+        "name": "SYNTHETIC unsafe path refused: ../outside",
+        "status": "passed"
+      },
+      {
+        "name": "SYNTHETIC unsafe path refused: /tmp/outside",
+        "status": "passed"
+      },
+      {
+        "name": "SYNTHETIC unsafe path refused: project_sources/SYNTHETIC.json",
+        "status": "passed"
+      },
+      {
+        "name": "SYNTHETIC unsafe path refused: docs//SYNTHETIC.json",
+        "status": "passed"
+      },
+      {
+        "name": "top-level helper JSON members stay within128KiB bound (metadata only)",
+        "status": "passed"
+      },
+      {
+        "name": "required Binding fixture/common plan/declarative sources exist (metadata only)",
+        "status": "passed"
+      },
+      {
+        "name": "CLI help",
+        "status": "passed"
+      },
+      {
+        "name": "CLI missing explicit inputs refused before freeze",
+        "status": "passed"
+      },
+      {
+        "name": "CLI refusal created no output directory or archive",
+        "status": "passed"
+      },
+      {
+        "name": "no proof module loaded by declaration checks",
+        "status": "passed"
+      },
+      {
+        "name": "git diff --check for new helper",
+        "status": "passed"
+      },
+      {
+        "name": "SYNTHETIC validated bytes are pinned exactly",
+        "status": "passed"
+      },
+      {
+        "name": "SYNTHETIC identical archive baseline accepted",
+        "status": "passed"
+      },
+      {
+        "name": "SYNTHETIC whitespace-only mutation changes validation pin",
+        "status": "passed"
+      },
+      {
+        "name": "SYNTHETIC changed baseline refused",
+        "status": "passed"
+      },
+      {
+        "name": "SYNTHETIC missing baseline refused",
+        "status": "passed"
+      },
+      {
+        "name": "SYNTHETIC oversized declaration refused after bounded read",
+        "status": "passed"
+      }
+    ],
+    "passedChecks": 28,
+    "cli": [
+      {
+        "arguments": [
+          "--help"
+        ],
+        "exitCode": 0,
+        "stdout": "usage: freeze-source.py [-h] [--test-scope TEST_SCOPE]\n                        [--replay-scope REPLAY_SCOPE] [--contract CONTRACT]\n                        {freeze,split,restore,verify} directory\n\npositional arguments:\n  {freeze,split,restore,verify}\n  directory\n\noptions:\n  -h, --help            show this help message and exit\n  --test-scope TEST_SCOPE\n                        Explicit 5C reconciliation JSON containing\n                        testScope.testFiles (exactly 138).\n  --replay-scope REPLAY_SCOPE\n                        Explicit runnable eleven-case manifest matching the\n                        reconciliation exactly.\n  --contract CONTRACT   Explicit validation-contract JSON whose exact bytes\n                        are frozen.\n",
+        "stderr": ""
+      },
+      {
+        "arguments": [
+          "freeze",
+          "docs/migration/lot5c-evidence/recovery/planning/SYNTHETIC-NOT-A-FREEZE"
+        ],
+        "exitCode": 2,
+        "stdout": "",
+        "stderr": "usage: freeze-source.py [-h] [--test-scope TEST_SCOPE]\n                        [--replay-scope REPLAY_SCOPE] [--contract CONTRACT]\n                        {freeze,split,restore,verify} directory\nfreeze-source.py: error: freeze requires --test-scope, --replay-scope and --contract\n"
+      }
+    ],
+    "nativeRuntimeExecuted": false,
+    "testSuiteExecuted": false,
+    "freezeExecuted": false,
+    "archiveExecuted": false,
+    "fixturesDecoded": false,
+    "failureHistory": [],
+    "temporarySyntheticFilesRemoved": true
+  },
+  "limits": [
+    "The executable eleven-case replay manifest and validation contract are supplied explicitly by the delivery owner before the actual freeze.",
+    "The validation contract is frozen exactly; this freezer does not execute or claim satisfaction of its gates.",
+    "Other fixtures and the immutable original source inventory retain their own hashes in actual test/replay/oracle receipts.",
+    "No native-version label, source digest, final commit or measurement result is invented by this preparation.",
+    "All active-lane quiet requests must be checked before actual use."
+  ],
+  "commandsTerminal": true,
+  "updatedAt": "2026-11-11T17:13:20.106490+00:00",
+  "reviewCorrections": [
+    {
+      "status": "corrected_before_any_freeze",
+      "finding": "Declaration bytes were validated before their first archive hash; concurrent changes could have substituted unvalidated declaration bytes.",
+      "correction": "Carry exact validated declaration SHA256 pins into archive-baseline verification; repeat declaration-pin and helper-membership equality after archive writing.",
+      "initialSourceSha256": "c92779de25942533023cac12bcca47ac2c2d29148d6bdd3a8426ae454d98bd14",
+      "actualFreezeAffected": false
+    }
+  ]
+}

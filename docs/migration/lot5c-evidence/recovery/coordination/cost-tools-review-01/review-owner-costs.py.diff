@@ -1,0 +1,224 @@
+--- before/review-owner-costs.py
++++ after/review-owner-costs.py
+@@ -31,6 +31,19 @@
+ 
+ 
+ ROOT = Path(__file__).resolve().parents[3]
++EVIDENCE = ROOT / 'docs/migration/lot5c-evidence'
++DOMAIN_REVIEW = EVIDENCE / 'recovery/coordination/cost-domain-source-review.json'
++SOURCE_PATH_LIST = EVIDENCE / 'recovery/coordination/cost-source-evidence-paths.json'
++ACQUISITION_DOMAIN = {
++    'acquisitionMode': 'passive_nonadmitted_source_binding', 'contextAdmission': False,
++    'core': None, 'methods': [], 'attentionMutation': False, 'nativeAcquisitionIncomplete': False,
++    'recordOutsideOfficialBoundary': None,
++    'recordAtOfficialBoundary': {'status': 'scope_changed_preserving_conditional_methods',
++                                'evidence': ['before.observation_ref', 'after.observation_ref']},
++    'recordPayloadKeys': ['status', 'evidence'],
++    'officialBoundaryPredicate': 'before.level_epoch != after.level_epoch or after.levels_completed > before.levels_completed',
++    'factCoverage': 'One exact passive source fact for each actually captured nonnull boundary return; no fact for a null return. sourceCallIndices covers every acquired return; sourceEventCallIndices is exactly the ordered nonnull subset.',
++}
+ PHASES = ["session_elapsed", "new_decision", "known_prefix_service", "known_prefix_request",
+           "known_prefix_guard", "acquisition_and_persistence", "persistence", "restoration"]
+ CASE_IDS = ["STCK", "SMLP"]
+@@ -57,6 +70,47 @@
+ ]
+ 
+ 
++def require(condition, message):
++    if not condition:
++        raise ValueError(message)
++
++def validate_source_coverage(fixture, attribution):
++    coverage, points = attribution['sourceFactCoverage'], attribution['points']
++    expected = [(form['case'], form['form'], index) for form in fixture['forms']
++                for index in range(len(form['candidate']['requests']) + len(form['candidate']['inspection']))]
++    require([(row['case'], row['form'], row['pointIndex']) for row in coverage] == expected
++            and [(row['case'], row['form'], row['pointIndex']) for row in points] == expected,
++            'Every ordered capture/inspection must have exactly one source-fact coverage row')
++    for form in fixture['forms']:
++        identity = (form['case'], form['form'])
++        rows = [row for row in coverage if (row['case'], row['form']) == identity]
++        observed = [row for row in points if (row['case'], row['form']) == identity]
++        sequences = [row['sequence'] for row in form['candidate']['requests']] + [form['candidate']['actions']] * len(form['candidate']['inspection'])
++        event_indices = []
++        for index, (row, point, sequence) in enumerate(zip(rows, observed, sequences)):
++            require(set(row) == {'case', 'form', 'pointIndex', 'acquiredReturns', 'persistedSourceFacts', 'sourceCallIndices', 'sourceEventCallIndices'},
++                    'Unknown or missing source coverage field')
++            require(all(type(value) is int and value >= 0 for value in (row['pointIndex'], point['pointIndex'], sequence, point['sequence'], row['acquiredReturns'], row['persistedSourceFacts']))
++                    and row['pointIndex'] == point['pointIndex'] == index
++                    and row['acquiredReturns'] == point['sequence'] == sequence,
++                    'Source coverage counters must equal the actual ordered request sequence')
++            require(type(row['sourceCallIndices']) is list and all(type(value) is int for value in row['sourceCallIndices'])
++                    and row['sourceCallIndices'] == list(range(row['acquiredReturns'])), 'Actual returns are omitted, duplicated or reordered')
++            current = point['officialBoundarySourceCalls']
++            require(type(current) is list and all(type(value) is int and 0 <= value < row['acquiredReturns'] for value in current)
++                    and current == sorted(set(current)) and not set(current).intersection(event_indices), 'Invalid or repeated actual boundary call')
++            event_indices.extend(current)
++            require(type(row['sourceEventCallIndices']) is list and all(type(value) is int for value in row['sourceEventCallIndices'])
++                    and event_indices == sorted(set(event_indices)) and row['sourceEventCallIndices'] == event_indices
++                    and row['persistedSourceFacts'] == len(event_indices), 'Only the complete actual nonnull boundary subset may create facts')
++            facts = [item for item in attribution['nodeAttributions'] if (item['case'], item['form'], item['pointIndex']) == (*identity, index)
++                     and item['category'] == 'observedBinding_source_event_fact']
++            require(all(type(item['pointIndex']) is int and type(item['sourceCallIndex']) is int and type(item['sourceEventCount']) is int and item['sourceEventCount'] == 1
++                        and item['officialBoundary'] is True and item['sourceStatus'] == ACQUISITION_DOMAIN['recordAtOfficialBoundary']['status'] for item in facts)
++                    and sorted(item['sourceCallIndex'] for item in facts) == current,
++                    'Coverage must match the exact source event facts attributed at this point')
++        require(rows[-1]['acquiredReturns'] == form['candidate']['actions'], 'Final coverage omits acquired source returns')
++
+ def same(left, right):
+     """JSON structural equality with booleans distinct from numeric 0 and 1."""
+     if isinstance(left, bool) or isinstance(right, bool):
+@@ -248,6 +302,30 @@
+         contract, contract_record = self.read(contract_path)
+         self.check("contract_schema", contract["schema"] == "logos-engine.lot5c-owner-cost-contract.v2" and contract["lot"] == "5C")
+         self.equal("four_structural_paths_and_functional_fixture", contract["structuralExpectation"], STRUCTURAL_EXPECTATION)
++        self.direct_source = self.fingerprint('docs/migration/lot5b-evidence/review-owner-costs.py')
++        self.equal('direct_5b_derivation', self.direct_source['sha256'], 'dd2524cbc52e51ed77a7393d4c4a044028f49c4a7fd6a36687534aeb1d8880e7')
++        self.equal('contract_generator_path', contract['generator']['path'], 'docs/migration/lot5c-evidence/finalize-owner-cost-contract.py')
++        self.verify(contract['generator']); self.verify(contract['derivedFrom'])
++        self.equal('contract_direct_5b_source', contract['derivedFrom']['path'], 'docs/migration/lot5b-evidence/finalize-owner-cost-contract.py')
++        self.equal('contract_direct_5b_hash', contract['derivedFrom']['sha256'], '58fd6f433ee6043c3cd24f3c763f4ede265c4b2e60374a9916807bccc68c2997')
++        self.verify(contract['domainReview']); self.verify(contract['sourceEvidencePaths'])
++        self.equal('domain_review_declared_path', contract['domainReview']['path'], DOMAIN_REVIEW.relative_to(ROOT).as_posix())
++        self.equal('source_path_list_declared_path', contract['sourceEvidencePaths']['path'], SOURCE_PATH_LIST.relative_to(ROOT).as_posix())
++        self.equal('exact_acquisition_domain', contract['acquisitionDomain'], ACQUISITION_DOMAIN)
++        domain, _ = self.read(DOMAIN_REVIEW)
++        path_list, _ = self.read(SOURCE_PATH_LIST)
++        self.check('domain_review_source_only', domain['schema'] == 'logos-engine.lot5c.cost-domain-source-review.v1'
++                   and domain['status'] == 'superseded_before_capture'
++                   and all(domain[key] is False for key in ['functionalCapturesStarted', 'costMeasurementsStarted', 'executionFailureClaimed']))
++        self.equal('revised_source_domain', domain['revisedDomain'], ACQUISITION_DOMAIN)
++        self.equal('canonical_source_paths', path_list, SOURCE_PATHS)
++        self.equal('domain_source_paths', domain['sourceEvidencePaths'], SOURCE_PATHS)
++        self.check('source_path_list_bound_by_domain', any(same(item, contract['sourceEvidencePaths']) for item in domain['evidenceInputs']))
++        for record in domain['evidenceInputs']:
++            self.verify(record)
++        self.domain = domain
++        self.domain_record = contract['domainReview']
++        self.source_paths_record = contract['sourceEvidencePaths']
+         directory = self.local(contract["performanceDirectory"])
+         self.check("performance_directory", directory.is_dir() and directory.is_relative_to(ROOT / "docs/migration/lot5c-evidence"))
+         self.verify(contract["declaration"])
+@@ -255,6 +333,7 @@
+         self.equal("declaration_location", declaration_record, self.fingerprint(directory / "declaration.json"))
+         self.check("predeclared_declaration", declaration["schema"] == "logos-engine.native-cost-protocol-declaration.v2"
+                    and declaration["status"] == "declared_before_official_window" and declaration["noOfficialWindowAtDeclaration"] is True)
++        self.check('source_domain_before_declaration', instant(domain['recordedAt']) <= instant(declaration['finalizedAt']))
+         self.equal("owner_qualification", declaration["ownerCostQualification"], {
+             "schema": "logos-engine.lot5c-owner-cost-qualification.v1", "contractPath": contract_record["path"], "tools": contract["tools"]})
+         self.equal("owner_tool_roles", sorted(contract["tools"]), ["consolidator", "reviewer"])
+@@ -316,8 +395,7 @@
+         for needle in [contract_record["path"], *[record["sha256"] for record in contract["tools"].values()],
+                        *[declaration[key]["sha256"] for key in ("globalBudgetPolicy", "globalDecisionTool", "globalCalculationTool")]]:
+             self.check("watched_protocol_binding/" + needle, needle in protocol_text)
+-        self.check("complete_source_evidence_files", len(contract["sourceEvidence"]) == len(SOURCE_PATHS)
+-                   and {record["path"] for record in contract["sourceEvidence"]} == set(SOURCE_PATHS))
++        self.equal("complete_canonical_source_evidence_files", [record['path'] for record in contract['sourceEvidence']], SOURCE_PATHS)
+         for record in contract["sourceEvidence"]:
+             self.verify(record)
+             self.equal("source_evidence_native_identity/" + record["path"], candidate["files"][record["path"]], record["sha256"])
+@@ -332,6 +410,11 @@
+                        and all(isinstance(value, str) and value for value in old + new)
+                        and len(set(old)) == len(old) and len(set(new)) == len(new))
+             self.check("inventory_exact_addition/" + key, (addition is None or addition not in old) and set(new) == set(old) | (set() if addition is None else {addition}))
++        self.equal('existing_owner_registration_order', [owner for owner in inventory['owners']['candidate'] if owner != OWNER], inventory['owners']['baseline'])
++        self.equal('existing_program_installations', [row for row in inventory['sourceInventory']['candidate']['installations'] if row['owner'] != OWNER],
++                   inventory['sourceInventory']['baseline']['installations'])
++        self.equal('binding_program_installation', [row for row in inventory['sourceInventory']['candidate']['installations'] if row['owner'] == OWNER],
++                   [{'owner': OWNER, 'workflowId': PROGRAM, 'nodeId': 'program:' + PROGRAM}])
+         fixture = self.load_structural_fixture(contract, declaration, {"baseline": baseline, "candidate": candidate})
+         static, static_record = self.read(directory / "static-preflight.json")
+         readiness, readiness_record = self.read(directory / "readiness.json")
+@@ -340,11 +423,12 @@
+                    and all(item["satisfied"] is True for item in static["checks"]))
+         self.equal("static_owner_contract", static["ownerCostContract"], contract_record)
+         self.equal("static_owner_tools", static["ownerCostTools"], contract["tools"])
++        self.equal('static_owner_source_domain', static['ownerSourceDomain'], {'domainReview': contract['domainReview'], 'sourceEvidencePaths': contract['sourceEvidencePaths']})
+         self.check("readiness_authorized", readiness["measurementAuthorized"] is True and readiness["pendingRequirements"] == []
+                    and readiness["nativeSourceDigest"] == candidate["digest"])
+         for record in readiness["inputs"]:
+             self.verify(record)
+-        for record in [contract_record, static_record, declaration_record, *contract["tools"].values()]:
++        for record in [contract_record, static_record, declaration_record, contract['domainReview'], contract['sourceEvidencePaths'], *contract["tools"].values()]:
+             self.check("readiness_binding/" + record["path"], record in readiness["inputs"])
+         self.check("predeclaration_chronology", instant(policy["declaredAt"]) <= instant(declaration["recordedAt"])
+                    <= instant(declaration["finalizedAt"]) <= instant(contract["declaredAt"]) <= instant(static["recordedAt"])
+@@ -359,9 +443,13 @@
+         old_tools = {record["path"]: record for record in tools}
+         self.equal("aggregate_derivation", aggregate["derivedFrom"], [old_tools["scripts/compare-native-cost-cohorts.mjs"],
+                                                                     old_tools["scripts/compare-native-loop-costs.mjs"]])
++        direct_consolidator = self.fingerprint('docs/migration/lot5b-evidence/consolidate-owner-costs.mjs')
++        self.equal('consolidator_direct_5b_hash', direct_consolidator['sha256'], 'cccc02b44a500292ac64a62379270e4003d3430f8ac0b68c81eb89609fffef95')
++        self.equal('consolidator_direct_derivation', aggregate['directlyAdaptedFrom'], direct_consolidator)
+         expected_inputs = {"policy": declaration["diagnosticComparisonPolicy"], "window": window_record,
+                            "readiness": readiness_record, "staticPreflight": static_record,
+                            "sourceInventory": contract["ownerInventory"], "sourceEvidence": contract["sourceEvidence"],
++                           'domainReview': contract['domainReview'], 'sourceEvidencePaths': contract['sourceEvidencePaths'],
+                            "structuralFixture": contract["structuralFixture"], "structuralAttribution": fixture["attribution"]}
+         for key, value in expected_inputs.items():
+             self.equal("aggregate_input/" + key, aggregate["inputs"][key], value)
+@@ -382,7 +470,7 @@
+         self.verify(fixture["cases"])
+         self.verify(fixture["captureTool"])
+         self.equal("functional_fixture_capture_roles", sorted(fixture["captures"]), ["baseline", "candidate"])
+-        required_inputs = [fixture["captureTool"], fixture["cases"], *contract["sourceEvidence"]]
++        required_inputs = [fixture["captureTool"], fixture["cases"], contract['domainReview'], contract['sourceEvidencePaths'], *contract["sourceEvidence"]]
+         capture_finishes = []
+         for role in ("baseline", "candidate"):
+             capture = fixture["captures"][role]
+@@ -434,11 +522,16 @@
+         self.check("functional_attribution_schema", attribution["schema"] == "logos-engine.lot5c-owner-cost-structural-attribution.v1"
+                    and attribution["status"] == "qualified_functional_structure")
+         self.equal("functional_attribution_native_identities", attribution["nativeDigests"], declaration["nativeDigests"])
++        self.equal('attribution_domain_review', attribution['domainReview'], contract['domainReview'])
++        self.equal('attribution_acquisition_mode', attribution['acquisitionMode'], ACQUISITION_DOMAIN['acquisitionMode'])
++        self.equal('attribution_exact_boundary_return', attribution['acceptedBoundaryReturn'], ACQUISITION_DOMAIN['recordAtOfficialBoundary'])
+         self.verify(attribution["generator"])
+         self.check("functional_attribution_checks", type(attribution["checkedCount"]) is int
+                    and attribution["checkedCount"] == len(attribution["checks"]) > 0
+                    and all(row["passed"] is True for row in attribution["checks"]))
+         self.check("functional_node_attribution_register", isinstance(attribution["nodeAttributions"], list) and bool(attribution["nodeAttributions"]))
++        validate_source_coverage(fixture, attribution)
++        self.check('complete_actual_source_fact_coverage', True)
+         self.check("unique_functional_attribution_inputs", len(attribution["inputs"]) == len({row["path"] for row in attribution["inputs"]}))
+         for record in attribution["inputs"]:
+             self.verify_attribution_input(record)
+@@ -492,6 +585,11 @@
+         self.check("functional_capture_schema/" + role,
+                    receipt["schema"] == "logos-engine.lot5c-owner-cost-functional-capture-receipt.v1"
+                    and receipt["status"] == "captured_functional_structure" and receipt["role"] == role)
++        self.equal('capture_owner/' + role, receipt['ownerId'], OWNER)
++        self.equal('capture_acquisition_mode/' + role, receipt['acquisitionMode'], ACQUISITION_DOMAIN['acquisitionMode'])
++        self.equal('capture_domain_review/' + role, receipt['domainReview'], self.domain_record)
++        for key in ['measuredCostSessions', 'timingReportsRead', 'timingMetricsProduced']:
++            self.check('capture_no_timing/' + role + '/' + key, type(receipt[key]) is int and receipt[key] == 0)
+         self.equal("functional_capture_native_digest/" + role, receipt["nativeDigest"], fixture["nativeDigests"][role])
+         for key in ("nativeSourceBefore", "nativeSourceAfter"):
+             self.verify_capture_input(receipt[key])
+@@ -513,6 +611,8 @@
+             self.verify_capture_input(record)
+         self.check("functional_capture_source_input/" + role, receipt["nativeSourceBefore"] in receipt["inputsBefore"])
+         self.check("functional_capture_case_input/" + role, receipt["cases"] in receipt["inputsBefore"])
++        for record in [self.domain_record, self.source_paths_record]:
++            self.check('capture_source_domain_input/' + role + '/' + record['path'], any(same(item, record) for item in receipt['inputsBefore']))
+         self.check("functional_capture_totals/" + role, type(receipt["sessionCount"]) is int and receipt["sessionCount"] == 4
+                    and type(receipt["actions"]) is int and receipt["actions"] == 31 and len(receipt["sessions"]) == 4)
+         self.equal("functional_capture_form_order/" + role, [(row["case"], row["form"]) for row in receipt["sessions"]],
+@@ -520,7 +620,7 @@
+         for session, form in zip(receipt["sessions"], fixture["forms"]):
+             self.equal("functional_capture_shape/" + role + "/" + session["case"] + "/" + session["form"], session["shape"], form[role])
+         self.check("functional_capture_action_sum/" + role, sum(row["shape"]["actions"] for row in receipt["sessions"]) == 31)
+-        self.check("functional_capture_chronology/" + role, instant(receipt["startedAt"]) <= instant(receipt["finishedAt"])
++        self.check("functional_capture_chronology/" + role, instant(self.domain['recordedAt']) <= instant(receipt["startedAt"]) <= instant(receipt["finishedAt"])
+                    <= instant(fixture["recordedAt"]))
+ 
+     def load_window(self, context):
+@@ -880,6 +980,8 @@
+                 "recordedAt": datetime.now(timezone.utc).isoformat(), "lot": "5C",
+                 "nativeVersion": context["policy"]["candidate"]["nativeVersion"],
+                 "generator": context["contract"]["tools"]["reviewer"], "derivedFrom": DERIVED_FROM,
++                'directlyAdaptedFrom': self.direct_source,
++                'domainReview': context['contract']['domainReview'], 'sourceEvidencePaths': context['contract']['sourceEvidencePaths'],
+                 "contract": context["contractRecord"], "aggregate": context["aggregateRecord"],
+                 "declaration": context["declarationRecord"], "inputs": inputs, "watchedExternalInputs": external,
+                 "structuralFixture": context["contract"]["structuralFixture"], "structuralAttribution": context["structuralFixture"]["attribution"],

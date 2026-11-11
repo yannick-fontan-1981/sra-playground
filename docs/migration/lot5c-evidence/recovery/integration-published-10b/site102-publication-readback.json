@@ -1,0 +1,29 @@
+{
+  "schema": "logos-engine.lot5c-published-site102-readback.v1",
+  "recordedAt": "2026-11-11T16:56:00.042Z",
+  "status": "provider_publication_verified_source_reconciliation_pending",
+  "version": {
+    "id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_ebb6198d3844819188b9db25c43aaa31",
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "version_number": 102,
+    "source": {
+      "commit_sha": "1019d2eb929d7dc201a5c1f6edce5aa1c5dfa464"
+    },
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_000000009d00820e941cc03425f73077",
+      "content_hash": "sha256:9724c4bbc91636ebb8e008466b01fcf980fdc86edc46073555aa4e179946e386",
+      "size_bytes": 30023680,
+      "file_count": 75
+    },
+    "deployment_id": "appgdep_6af49caf0b808191a14190d3261b6f9d"
+  },
+  "deployment": {
+    "id": "appgdep_6af49caf0b808191a14190d3261b6f9d",
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "version_id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_ebb6198d3844819188b9db25c43aaa31",
+    "status": "succeeded",
+    "updated_at": "2026-11-11T16:50:10.918057+00:00"
+  },
+  "qualification": "Actual published native predecessor confirmed through Sites provider version and terminal deployment APIs. No source merge, native digest equivalence, final test scope or Lot 5C cost acceptance is inferred from this receipt."
+}

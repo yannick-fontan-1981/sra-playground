@@ -17,7 +17,7 @@ Les trois niveaux KLOT, les 38 actions, les 30 préfixes et la relecture origina
 sans différence restent les preuves du **gel historique sur Site 97 / native
 0.60**, pas celles du nouveau code fusionné. Le publié 103 et cet ancien
 candidat totalisent chacun 64/76 entrées, mais WindowQuestion est présent dans
-le premier et SelectedRigid dans le second. **La fusion exacte atteint maintenant 65/76 (85,5 %), selon le nouvel audit
+le premier et SelectedRigid dans le second. **Le jalon d’intégration exacte de Site 103 atteint 65/76 (85,5 %), selon l’audit
 exécuté et lié ci-dessous.**
 
 La source publiée exacte 103 est désormais fusionnée et vérifiée. Le
@@ -48,11 +48,18 @@ l’horloge et des gardes ; ils ne réattribuent pas l’ancienne campagne KLOT 
 ce nouveau gel. **Aucun nouvel essai KLOT, contrôle navigateur ou coût 6B
 n’est revendiqué.**
 
-La prochaine préparation est la fusion **provisoire** du checkpoint immuable
-5C `805b30297dc1b715dbfd9f1197a9a8ba7b361b90`. Ce checkpoint n’est pas encore
-publié. La réconciliation exacte avec le futur 0.63 effectivement publié reste
-obligatoire avant le gel final 6B, ses régressions, le navigateur, le coût et
-la publication.
+La fusion de source **provisoire** du checkpoint immuable 5C
+`805b30297dc1b715dbfd9f1197a9a8ba7b361b90` est en cours pour le candidat
+**0.64.0**. Ce checkpoint 5C est **NON PUBLIÉ**. Le contrat du registre
+conserve WindowQuestion et SelectedRigid, et ajoute `observed_object_binding`
+à sa position déclarée. Ces changements de contrat attendent une nouvelle
+validation ; aucun résultat exécuté ni total audité du candidat fusionné
+n’est déduit de la seule lecture des définitions. Le jalon précédent,
+**33 + 9 tests et 65/76 entrées**, reste rattaché au commit
+`7696e0c0257c68890968f739f076fc5c14efdf54` et au gel `2e710bd…` documenté
+ci-dessus. La réconciliation exacte avec le futur 0.63 effectivement publié
+reste obligatoire avant le gel final 6B, ses régressions, le navigateur,
+le coût et la publication.
 
 <!-- LOT6B_SITE103_INTEGRATION_END -->
 

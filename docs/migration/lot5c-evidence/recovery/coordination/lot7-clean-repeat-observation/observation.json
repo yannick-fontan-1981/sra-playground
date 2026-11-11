@@ -1,0 +1,115 @@
+{
+  "schema": "logos-engine.lot5c-peer-clean-repeat-observation.v1",
+  "recordedAt": "2026-11-11T15:37:27.328327+00:00",
+  "qualification": "Read-only observation of exact retained Lot 7 receipts after explicit release. This imports neither a new native source nor the final published documentation closure, and is not a Lot 5C cost measurement.",
+  "status": "peer_complete_clean_repeat_accepted",
+  "peerNativeVersion": "0.61.0",
+  "peerNativeDigest": "f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279",
+  "peerMeasurementSourceCommit": "965e2dbe38c1a484a3dc1f5d79e5dcec03d55b03",
+  "firstWindowRemainsIneligible": true,
+  "newWindow": {
+    "status": "passed",
+    "startedAt": "2026-11-11T15:22:07.889158+00:00",
+    "finishedAt": "2026-11-11T15:31:04.565927+00:00"
+  },
+  "releasedAt": "2026-11-11T15:33:19.663958+00:00",
+  "globalCases": [
+    {
+      "case": "STCK",
+      "sessionsPerVersion": 8,
+      "beforeMedianMs": 11303.262202000002,
+      "afterMedianMs": 10972.751424500002,
+      "medianRelativeIncrease": -0.02924029997654297,
+      "accepted": true,
+      "result": "within_user_global_budget"
+    },
+    {
+      "case": "SMLP",
+      "sessionsPerVersion": 8,
+      "beforeMedianMs": 16919.6392275,
+      "afterMedianMs": 16921.174498,
+      "medianRelativeIncrease": 9.073896194578176e-05,
+      "accepted": true,
+      "result": "within_user_global_budget"
+    }
+  ],
+  "measuredSessions": 32,
+  "measuredActions": 400,
+  "strictWorkTrials": 40,
+  "arithmeticChecks": 231,
+  "diagnosticPhaseRule": {
+    "status": "budget_review_required",
+    "budgetMetricCount": 16,
+    "withinObservedBudget": 14,
+    "unresolved": [
+      {
+        "case": "STCK",
+        "stage": "restoration",
+        "result": "over_budget_with_noise_unresolved",
+        "medianRelativeIncrease": 0.19386243543314952
+      },
+      {
+        "case": "SMLP",
+        "stage": "restoration",
+        "result": "over_budget_with_noise_unresolved",
+        "medianRelativeIncrease": 0.1733194222696599
+      }
+    ]
+  },
+  "retainedReceipts": [
+    {
+      "peerPath": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/global-budget-decision.json",
+      "originalBytes": 30873,
+      "originalSha256": "83d8f9d82e24e6652176d193b4ce0e53730d8f5b30b1896fa9e373f057d198d8",
+      "retainedPath": "docs/migration/lot5c-evidence/recovery/coordination/lot7-clean-repeat-observation/global-budget-decision.json",
+      "retainedBytes": 30873,
+      "retainedSha256": "83d8f9d82e24e6652176d193b4ce0e53730d8f5b30b1896fa9e373f057d198d8",
+      "encoding": "exact original bytes"
+    },
+    {
+      "peerPath": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/consolidation-review.json",
+      "originalBytes": 46013,
+      "originalSha256": "7ec48a45f97707855a1d122991038ae9d3498cb4794da8e25726be76cc46748e",
+      "retainedPath": "docs/migration/lot5c-evidence/recovery/coordination/lot7-clean-repeat-observation/consolidation-review.json",
+      "retainedBytes": 46013,
+      "retainedSha256": "7ec48a45f97707855a1d122991038ae9d3498cb4794da8e25726be76cc46748e",
+      "encoding": "exact original bytes"
+    },
+    {
+      "peerPath": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/window.json",
+      "originalBytes": 11539,
+      "originalSha256": "4359b2eb47e7aaa291eca139f741f9d1faede407c24ea79c828ef11c06b80f9a",
+      "retainedPath": "docs/migration/lot5c-evidence/recovery/coordination/lot7-clean-repeat-observation/window.json",
+      "retainedBytes": 11539,
+      "retainedSha256": "4359b2eb47e7aaa291eca139f741f9d1faede407c24ea79c828ef11c06b80f9a",
+      "encoding": "exact original bytes"
+    },
+    {
+      "peerPath": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/strict-work-verification.json",
+      "originalBytes": 17139,
+      "originalSha256": "6565e260b6b0fb4152b159b28f13a2aa102be4490e44023bc8eedfeb8aebb58a",
+      "retainedPath": "docs/migration/lot5c-evidence/recovery/coordination/lot7-clean-repeat-observation/strict-work-verification.json",
+      "retainedBytes": 17139,
+      "retainedSha256": "6565e260b6b0fb4152b159b28f13a2aa102be4490e44023bc8eedfeb8aebb58a",
+      "encoding": "exact original bytes"
+    },
+    {
+      "peerPath": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/coordination-release.json",
+      "originalBytes": 810,
+      "originalSha256": "ce80d909da4f985f52df702ff1679072afc40fcaed23feb330ab50ce321c69ad",
+      "retainedPath": "docs/migration/lot5c-evidence/recovery/coordination/lot7-clean-repeat-observation/coordination-release.json",
+      "retainedBytes": 810,
+      "retainedSha256": "ce80d909da4f985f52df702ff1679072afc40fcaed23feb330ab50ce321c69ad",
+      "encoding": "exact original bytes"
+    },
+    {
+      "peerPath": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/isolation-revalidation.json",
+      "originalBytes": 722134,
+      "originalSha256": "028711ca50c8461f700c43cdaea02d1ac38190a669698621c903314b4b3777b0",
+      "retainedPath": "docs/migration/lot5c-evidence/recovery/coordination/lot7-clean-repeat-observation/isolation-revalidation.json.gz",
+      "retainedBytes": 170660,
+      "retainedSha256": "51bbe92009724e7de223b4f0ed82af5fabc76c834aa2edc13e730e7201818fe7",
+      "encoding": "gzip of exact original bytes"
+    }
+  ]
+}

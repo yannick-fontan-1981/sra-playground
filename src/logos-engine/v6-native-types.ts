@@ -150,7 +150,8 @@ export interface NativeFamily<P extends NativeProposal = NativeProposal> {
     firstRows: NativeRows, secondRows: NativeRows): NativeMaybePromise<NativeAfterResult>;
   record(before: NativeObservation, after: NativeObservation, command: NativeCommand,
     firstRows: NativeRows, secondRows: NativeRows, proposal: P, index: number,
-    frames: readonly NativeRows[]): NativeMaybePromise<NativeRecordResult>;
+    frames: readonly NativeRows[], execution?: NativeExecution): NativeMaybePromise<NativeRecordResult>;
+  // execution is native scheduling context, never an extra Python source datum.
   /** Source refusal, read only after the real prefix has been fully acquired. */
   requestedStopReason?(observation: NativeObservation): string | null;
   /** Read-only: proves acquisition separately from the current before-action guard. */

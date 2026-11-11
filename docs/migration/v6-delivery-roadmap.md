@@ -2,7 +2,7 @@
 
 <!-- LOT6B_DEVELOPMENT_CURRENT_START -->
 
-## Reprise du lot 6B : écart de publication identifié, intégration 103 vérifiée
+## Reprise du lot 6B : intégration 103 vérifiée, fusion 5C provisoire
 
 **Le signalement « KLOT ne réussit pas » concerne le Site actuellement publié,
 Site 103 / native 0.62. Le candidat SelectedRigid 6B n’y est pas déployé.**
@@ -19,7 +19,7 @@ fusionné n’est attribué à cette constatation.
 
 **Le gel historique de développement 6B, fondé sur Site 97 / native 0.60, a réussi trois niveaux KLOT en 38 actions et 30 préfixes.** La campagne froide utilise le seul appelant TypeScript, sans plan, état appris ou agent Python fourni à ses décisions. La relecture indépendante du Python original compare **408 événements sans différence**, dont 38 retours sélectionnés, 35 événements acquis, trois retours de frontière de valeur `null` et 98 restaurations. **204 ablations, dont 63 changements d’action ou de refus**, établissent une contribution des connaissances acquises ; les deux corruptions sémantiques contrôlées sont rejetées.
 
-Ce résultat reste attaché au **gel historique de développement fondé sur Site 97 / native 0.60**, avec la version **0.64 réservée**. Les preuves ci-dessous ne sont pas réattribuées au nouveau code en fusion. **Le prédécesseur 10B / 0.62 est réellement publié dans Sites 102–103 et son commit documentaire exact est désormais intégré et vérifié.** 5C / 0.63 reste non publié ; sa livraison effective demeure requise avant le gel et la mesure finale 6B. La fusion des horloges et de la garde courante est vérifiée par les contrôles d’intégration 103 ci-dessous. La préparation du checkpoint 5C reste provisoire ; aucun nouveau KLOT, navigateur ni coût 6B n’est validé.
+Ce résultat reste attaché au **gel historique de développement fondé sur Site 97 / native 0.60**, avec la version **0.64 réservée**. Les preuves ci-dessous ne sont pas réattribuées au nouveau code en fusion. **Le prédécesseur 10B / 0.62 est réellement publié dans Sites 102–103 et son commit documentaire exact est désormais intégré et vérifié.** 5C / 0.63 reste non publié ; sa livraison effective demeure requise avant le gel et la mesure finale 6B. La fusion des horloges et de la garde courante est vérifiée par les contrôles d’intégration 103 ci-dessous. La fusion du checkpoint 5C reste provisoire ; aucun nouveau KLOT, navigateur ni coût 6B n’est validé.
 
 | Vérification 6B acquise | Résultat et preuve |
 | --- | --- |
@@ -31,7 +31,7 @@ Ce résultat reste attaché au **gel historique de développement fondé sur Sit
 | Budget cumulé KLOT | **350,862154 s / 2 400 s**, horloge fermée, **2 049,137846 s restantes** ; antécédents et diagnostics inclus. [Horloge](lot6b-evidence/klot-case-clock.json). |
 | Inventaire historique du candidat sur base Site 97 | **64/76 entrées raccordées (84,2 %), 12 restantes** ; **198 composants vérifiés**, 148 transferts partiels, 1 023 modules en attente. Zéro module entièrement vérifié et six portes de migration complète encore fausses. |
 
-Le **publié Site 103 / native 0.62 compte 64/76 entrées**, avec WindowQuestion et sans SelectedRigid. Le **candidat historique 6B sur base Site 97 compte lui aussi 64/76**, avec SelectedRigid mais sans WindowQuestion : ces totaux égaux recouvrent des entrées différentes. La fusion 103 + 6B atteint maintenant **65/76 (85,5 %)**, selon le [nouvel audit exécuté](lot6b-evidence/integration-site103-01/checks-attempt-01/entry-audit.json). L’entrée future de 5C n’est pas comptée par anticipation. Les échecs antérieurs **21/22** et **53/54** restent conservés. Le dernier échec portait sur une attente de conservation de Preview antérieure à la création de son cache d’époque ; le test corrigé vérifie l’état exact présent avant le retour étranger.
+Le **publié Site 103 / native 0.62 compte 64/76 entrées**, avec WindowQuestion et sans SelectedRigid. Le **candidat historique 6B sur base Site 97 compte lui aussi 64/76**, avec SelectedRigid mais sans WindowQuestion : ces totaux égaux recouvrent des entrées différentes. Le jalon vérifié 103 + 6B atteint **65/76 (85,5 %)**, selon le [nouvel audit exécuté](lot6b-evidence/integration-site103-01/checks-attempt-01/entry-audit.json). L’entrée future de 5C n’est pas comptée par anticipation. Les échecs antérieurs **21/22** et **53/54** restent conservés. Le dernier échec portait sur une attente de conservation de Preview antérieure à la création de son cache d’époque ; le test corrigé vérifie l’état exact présent avant le retour étranger.
 
 Le premier passage des cinq commandes techniques a renvoyé zéro, mais l’audit de migration signalait trois références vers **deux fixtures historiques absentes**. Ce succès de processus n’est pas présenté comme une validation sémantique. Le garde générique de l’audit a été corrigé et refuse désormais ces références manquantes ; la [restauration exacte](lot6b-evidence/fixture-restoration/attempt-01/recovery.json) puis le [nouvel audit sémantique](lot6b-evidence/audit-guard/restored-inventory.json) sont réussis, avec zéro erreur. Les autres contrôles et la compilation restent valables sur les mêmes sources natives.
 
@@ -56,18 +56,25 @@ l’horloge et des gardes ; ils ne réattribuent pas l’ancienne campagne KLOT 
 ce nouveau gel. **Aucun nouvel essai KLOT, contrôle navigateur ou coût 6B
 n’est revendiqué.**
 
-La prochaine préparation est la fusion **provisoire** du checkpoint immuable
-5C `805b30297dc1b715dbfd9f1197a9a8ba7b361b90`. Ce checkpoint n’est pas encore
-publié. La réconciliation exacte avec le futur 0.63 effectivement publié reste
-obligatoire avant le gel final 6B, ses régressions, le navigateur, le coût et
-la publication.
+La fusion de source **provisoire** du checkpoint immuable 5C
+`805b30297dc1b715dbfd9f1197a9a8ba7b361b90` est en cours pour le candidat
+**0.64.0**. Ce checkpoint 5C est **NON PUBLIÉ**. Le contrat du registre
+conserve WindowQuestion et SelectedRigid, et ajoute `observed_object_binding`
+à sa position déclarée. Ces changements de contrat attendent une nouvelle
+validation ; aucun résultat exécuté ni total audité du candidat fusionné
+n’est déduit de la seule lecture des définitions. Le jalon précédent,
+**33 + 9 tests et 65/76 entrées**, reste rattaché au commit
+`7696e0c0257c68890968f739f076fc5c14efdf54` et au gel `2e710bd…` documenté
+ci-dessus. La réconciliation exacte avec le futur 0.63 effectivement publié
+reste obligatoire avant le gel final 6B, ses régressions, le navigateur,
+le coût et la publication.
 
 ### Suite du lot 6 et critère de coût
 
 | Étape | État actuel | Prochaine opération |
 | --- | --- | --- |
 | 6A `preview_packing` | Livré, Sites 96–97 / native 0.60 | Conserver ses preuves et réserves. |
-| 6B `selected_rigid` | Contribution KLOT historique sur base Site 97 ; intégration exacte 103 vérifiée, 65/76 auditées | Préparer le checkpoint 5C provisoire, puis réconcilier le futur publié 0.63 avant les qualifications finales. |
+| 6B `selected_rigid` | Contribution KLOT historique sur base Site 97 ; intégration exacte 103 vérifiée, 65/76 auditées | Achever et vérifier la fusion du checkpoint 5C provisoire, puis réconcilier le futur publié 0.63 avant les qualifications finales. |
 | 6C `observed_rigid_cargo` | À transférer | Après la clôture intégrée de 6B. |
 | 6D `shared_settlement` | À transférer | Après 6C, avec les critères communs du lot. |
 
@@ -82,6 +89,46 @@ Les plafonds de recherche ne bornent pas le journal source complet. Le bouton Pa
 Le commit validé `e1f42dac8eb4226f8a3bc78d89d6bee6f463da1e` est conservé dans la branche `lot6b-selected-rigid-checkpoint-20261111`. Le commit de transport final `5b03fb53526d6016fde61db32a2d4fbb1de0f5bb` a le même arbre Git et conserve ce commit dans son ascendance. Le [reçu vérifié](lot6b-evidence/source-checkpoint-01/transport-receipt.json) et le [plan de transport](lot6b-evidence/source-checkpoint-01/transport-plan.json) documentent trois lots de 24 Mio bruts au maximum, puis la jonction d’historique. Le premier envoi de 111,2 Mio, refusé par la limite de 64 Mio par envoi, reste consigné. Cette sauvegarde de branche ne crée ni nouvelle version Site ni déploiement ; l’intégration et les portes finales 6B restent ouvertes. La [note de reproduction](lot6b-evidence/source-checkpoint-01/README.md) précise la reconstruction préalable des fixtures héritées sur un checkout neuf. Le contrôle historique effectué après ce transport constatait Site 101 et l’accès privé inchangé. Le constat courant de Site 103 est consigné en tête ; il ne modifie ni les octets ni la portée du checkpoint de développement.
 
 <!-- LOT6B_DEVELOPMENT_CURRENT_END -->
+
+> **Périmètre 5C conservé :** la section suivante reproduit son état au checkpoint
+> `805b30297dc1b715dbfd9f1197a9a8ba7b361b90`, **non publié**. Ses décomptes et
+> preuves qualifient le candidat 5C dans son propre périmètre ; ils ne valent
+> pas un audit neuf de la fusion avec SelectedRigid.
+
+<!-- LOT5C_ROADMAP_CURRENT_START -->
+
+## Lot 5C : prédécesseur 0.62 publié intégré, validation finale déclarée
+
+**5A et 5B restent livrés. Le candidat 5C intègre les sources réellement publiées de 6A, Sites 96–97 / native 0.60.0, du suivi 7, Sites 98–101 / native 0.61.0, puis de 10B, Sites 102–103 / native 0.62.0.** La [réconciliation 10B](lot5c-evidence/recovery/integration-published-10b/site103-reconciliation.json) prend pour prédécesseur natif exact le Site 102, source `1019d2eb929d7dc201a5c1f6edce5aa1c5dfa464`, et fusionne la clôture documentaire réellement publiée dans le Site 103, source `4afcbfe6a25bd3a88223be543e443bc53b9c8814`. Les **318 fichiers natifs** du candidat restent identiques au gel `a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57` : les 308 fichiers partagés hors runtime/types sont égaux au prédécesseur, les deux différences partagées et les huit fichiers supplémentaires portent Binding. La [revue indépendante](lot5c-evidence/recovery/integration-published-10b/native-integration-independent-review.json) confirme la conservation des correctifs d’horloge 10B et de l’acquisition Binding. Le candidat **0.63.0** conserve **65/76 entrées raccordées, zéro partielle et 11 restantes** ; native 0.62 en raccorde 64/76. **5C n’est pas encore publié et son coût propre n’est pas encore mesuré.**
+
+Le correctif générique d’origine d’horloge pris en charge par 10B est maintenant intégré depuis le commit `4e7e4742b997128346e84f62b7a4fb8b5d4e47c5`, avec ses tests et sa provenance. Le caller calcule la durée restante dans l’horloge de l’appelant, puis la reporte dans celle du runtime. Une échéance expirée ne peut plus être prolongée par un décalage d’origine. Le mécanisme d’acquisition de Binding, qui conserve le niveau du premier retour réel, reste préservé.
+
+| Vérification ciblée antérieure, conservée dans son périmètre | Résultat acquis |
+| --- | --- |
+| [Tests du runtime](lot5c-evidence/recovery/integration-published-6a/native-runtime-tests.execution.json) | **9/9**, dont les deux sens de décalage d’horloge et les rejeux publics HANO, SYME et DNOI déjà enregistrés |
+| [Contrats Window](lot5c-evidence/recovery/integration-published-6a/window-kernel-tests.execution.json) | **4/4** |
+| [Bornes d’acquisition Binding](lot5c-evidence/recovery/integration-published-6a/binding-acquisition-bounds-retry-01.execution.json) | **3/3** : acquisition passive, sélectionnée et échéance du niveau ; les quatre autres tests communs ne sont pas réexécutés dans ce passage ciblé |
+| [Bilan et intégrité](lot5c-evidence/recovery/integration-published-6a/summary.json) | **16/16 tests**, contrôle TypeScript, audit des entrées et audit sémantique de migration réussis ; **318 fichiers natifs inchangés depuis le gel**, digest `a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57` |
+
+Un seul fichier natif diffère du gel `common-02` : `v6-native-runtime.ts`, pour la correction d’horloge. La [parité composant 98/98](lot5c-evidence/recovery/source-oracle/parity-02-execution.json) et la [preuve commune `common-02`](lot5c-evidence/recovery/common/common-02/summary.json), huit scénarios et **6 818/6 818 contrôles Python sur 412 opérations et 80 retours**, conservent leur provenance et leur portée antérieures. Elles ne sont pas réétiquetées comme un nouveau passage complet sur le gel actuel. Les audits maintiennent **205 composants vérifiés, 147 transferts partiels, 1 017 modules en attente et zéro module entièrement vérifié** ; les six portes de migration globale restent fausses.
+
+Les tentatives antérieures restent conservées. L’[erreur initiale de répertoire](lot5c-evidence/recovery/integration-published-6a/bounded-validation-amendment-01.json) a arrêté les trois tests Binding avant le runtime ; le même code passe après correction du seul chemin de sortie. Le premier audit de migration a terminé avec un code 0 mais signalait trois preuves manquantes pour deux fixtures. Leur [reconstitution exacte depuis les fragments publiés](lot5c-evidence/recovery/integration-published-6a/inherited-fixture-materialization.json), vérifiée contre l’inventaire 6A, permet la reprise sans erreur sémantique. Les échecs `common-01` et du premier comparateur groupé `common-02` restent également conservés.
+
+**Mesure du suivi 7 : première fenêtre retirée, répétition complète propre acceptée.** Deux lectures trop volumineuses lancées par les revues 5C ont chevauché sa première fenêtre A1/B1/B2/A2. L’[incident conservé](lot5c-evidence/recovery/coordination/lot7-quiet-io-deviation-20261111.json) a été [reconnu par le fil 7](lot5c-evidence/recovery/coordination/lot7-isolation-withdrawal-observation.json). Les anciens échantillons et résultats numériques restent inchangés, mais leur acceptation comme mesure isolée est retirée.
+
+L’[observation des reçus de la répétition propre](lot5c-evidence/recovery/coordination/lot7-clean-repeat-observation/observation.json) conserve la nouvelle série complète : **32 sessions, 400 actions, 40/40 identités de travail et 231/231 contrôles arithmétiques**, sur le même gel natif 0.61. Le coût global accepté est **STCK −2,924030 % et SMLP +0,009074 %**. Les restaurations **STCK +19,386244 % et SMLP +17,331942 %** restent des dépassements de phase visibles, acceptables selon la règle globale utilisateur. La libération explicite intervient après acceptation. Les six reçus exacts de cette observation sont maintenant complétés par l’intégration de la [clôture réellement publiée dans le Site 101](lot5c-evidence/recovery/integration-published-7/site101/publication-readback.json), source `d75a36f0a99bf6c301034523a3138a64d2f6e744`. Les empreintes des 318 fichiers natifs et les entrées de code, tests et scripts sont inchangées ; cette fusion documentaire ne déclenche aucun nouveau test et ne constitue aucun verdict de coût 5C. Le [point de reprise 5C `2b0ea701`](lot5c-evidence/recovery/coordination/checkpoint-transport-2b0ea701.json) et son rejet de transport antérieur restent conservés.
+
+**Prochaine étape : geler et exécuter la validation finale déclarée**, après la [réconciliation exacte du périmètre avec le Site 102](lot5c-evidence/recovery/integration-published-10b/final-scope-reconciliation.json). Le [contrat intégré](lot5c-evidence/recovery/integrated-final-01/validation-contract.json) prévoit les tests, le renouvellement complet de la preuve commune Binding, les audits sémantiques, le build et les rejeux. Le test de comptage des entrées conserve WindowQuestion et exige maintenant le propriétaire Binding à sa position déclarée : **23/33 entrées FMR et 65/76 au total**. Il s’agit d’une mise à jour de contrat vérifiée à la lecture ; elle attend encore son exécution fraîche. Après ces portes viennent la qualification structurelle, la mesure officielle 5C, sa revue et la publication 0.63.
+
+Le [périmètre final](lot5c-evidence/recovery/integrated-final-01/test-scope.json) conserve **138 fichiers de tests** : les 133 fichiers déclarés du suivi 7, les trois suites Binding et deux suites WindowQuestion supplémentaires, après déduplication avec les 44 fichiers déclarés par le **10B réellement publié**. Les déclarations et leurs empreintes sont identiques aux entrées du [plan prospectif historique](lot5c-evidence/recovery/planning/prospective-final-scope-site101.json), conservé sans réécriture. Ce total est déclaré avant exécution et ne constitue aucun résultat de test. Les quatre exclusions LKEY restent explicites. Les **11 rejeux hérités / 187 contrôles prévus** conservent les mêmes lignes et empreintes, notamment le point de comparaison KATA 0.60. **HPDL n’est pas ajouté comme régression complète** : sa preuve 10B reste partielle, avec 38 préfixes acquis pour 39 retours publics complets et trois niveaux observés. Les horloges closes et les portées distinctes des preuves sont conservées.
+
+L’[outil de restitution du coût 5C](lot5c-evidence/write-cost-results.py) est maintenant préparé, avec [32 contrôles de syntaxe, CLI et cas synthétiques](lot5c-evidence/recovery/planning/cost-renderer-preparation.json), puis une [revue indépendante](lot5c-evidence/recovery/planning/cost-renderer-independent-review.json). Il distingue les branches historique stricte et qualifiée, refuse les preuves manquantes ou contradictoires et conserve les dépassements de phase. Un global exactement à +10 % reste refusé. Aucun rapport de coût réel 5C n’est produit par ces contrôles ; son rendu complet attend les véritables reçus de la future fenêtre. Le protocole précise maintenant l’arrêt de toutes les voies et de leurs travailleurs, avec seuls les petits fichiers de coordination nommés consultables jusqu’à libération explicite.
+
+Le critère de coût reste la médiane groupée de session complète **strictement sous +10 % pour chacun de STCK et SMLP**, contre le prédécesseur réellement publié contenant 6A, le suivi 7 et 10B. Une phase au-delà de +10 % peut être acceptée si ce global passe ; tous les diagnostics et échantillons restent conservés. Les durées fonctionnelles partagées de cette étape ne sont pas des mesures de performance.
+
+Les sessions longues restent un chantier distinct : traitement en delta, compaction démontrée des données devenues inutiles, chemins continus et propagation générique des coups obligatoires. **WEAV niveau 6 reste une réserve**, avec son budget épuisé conservé. Aucun nouveau lancement réel de jeu n’a été effectué dans cette étape.
+
+<!-- LOT5C_ROADMAP_CURRENT_END -->
 
 <!-- LOT10B_CURRENT_BEGIN -->
 ## Jalon 10B livré : Site 102 / native 0.62, coût accepté et réserve HPDL partielle
@@ -219,7 +266,7 @@ Le [registre retenu au jalon 7 / 0.61](lot7b-evidence/followup-recovery/integrat
 | **Lots 7A/7B et lot 4** | Clos dans leurs périmètres déjà publiés ; aucune preuve historique perdue n'est réattribuée au candidat actuel. |
 | **Lots 8, 9 et 11 ; sessions longues** | Restent planifiés selon leurs contrats. Les réserves de parité complète, de compaction et de latence des sessions longues restent ouvertes. |
 
-La séquence convenue est **6A / 0.60 → complément 7 / 0.61 → 10B / 0.62 → 5C / 0.63 → 6B / `selected_rigid`**, avec publication et fenêtre de coût sérialisées. **6A, native 0.61 et 10B / 0.62 sont publiés et qualifiés ; les prochaines clôtures intégrées sont 5C puis 6B.** Les sections suivantes conservent les faits des jalons antérieurs dans leurs périmètres propres.
+La séquence convenue est **6A / 0.60 → complément 7 / 0.61 → 10B / 0.62 → 5C / 0.63 → 6B / `selected_rigid`**, avec publication et fenêtre de coût sérialisées. **6A, native 0.61 et 10B / native 0.62 sont publiés et qualifiés dans leurs périmètres ; les prochaines publications sont 5C / 0.63, puis 6B / 0.64 et 8A / 0.65.** Les sections suivantes conservent les faits des jalons antérieurs dans leurs périmètres propres.
 
 <!-- LOT7_FOLLOWUP_RECOVERY_END -->
 
@@ -250,7 +297,7 @@ Le [plan de tests](lot6a-evidence/planning/final-test-scope.json) conserve le p�
 
 Le [premier bilan des rejeux](lot6a-evidence/integrated-final-02/regressions/regression-summary.json) reste `failed` : neuf résultats réussis et deux échecs d’exécution, WEAV et CRAF. La [première reprise](lot6a-evidence/integrated-final-02/released-recovery/regressions/regression-summary.json) conserve CRAF réussi et un nouvel arrêt de WEAV. Ces **trois sorties `-9` (SIGKILL)** restent attribuées à leurs exécutions réelles ; elles ne prouvent pas à elles seules une cause mémoire. La reprise WEAV à **1 024 Mio** a ensuite échoué par **`-6` après 73 actions**, avec un [diagnostic explicite d’épuisement du tas V8](lot6a-evidence/recovery/weav-memory/diagnostic.json). Ce quatrième échec ne requalifie pas les trois SIGKILL antérieurs. La [reprise finale exclusive à 1 536 Mio](lot6a-evidence/integrated-final-02/released-weav-exclusive-1536/regressions/regression-summary.json) a réussi : **81 actions et 17/17 contrôles**. La composition **9 + 1 + 1** est liée à son [bilan final réussi](lot6a-evidence/integrated-final-02/regressions-final/regression-summary.json), avec provenance de chaque résultat, empreintes et 17 contrôles inchangés par cas. La [première consolidation échouée](lot6a-evidence/recovery/consolidation-attempt-01.json) reste conservée ; la liaison `actual_retained_child_execution_inputs` utilise les entrées réellement enregistrées par le driver enfant, sans inventer un inventaire parent avant lancement. Aucun rejeu n’a été répété pour cette correction.
 
-Le [registre](v6-entry-point-progress.json) atteint **63/76 entrées raccordées, 82,9 %, zéro partielle et 13 restantes** : `goal_access` 11/12, `window_constraints` 21/21, `surface` 10/10, `factored_material_return` 21/33. L’[audit](v6-coverage.json) conserve **195 composants vérifiés, 148 transferts partiels, 1 026 modules en attente et zéro module entièrement vérifié**, sur 1 369 modules Python et 417 fichiers de données. **Les six portes de migration complète restent fausses.**
+Le [registre de cette livraison](lot6a-evidence/integrated-final-02/validation-final/validation/checks-run.json) atteint **63/76 entrées raccordées, 82,9 %, zéro partielle et 13 restantes** : `goal_access` 11/12, `window_constraints` 21/21, `surface` 10/10, `factored_material_return` 21/33. L’[audit de cette livraison](lot6a-evidence/integrated-final-02/validation-final/validation/checks-run.json) conserve **195 composants vérifiés, 148 transferts partiels, 1 026 modules en attente et zéro module entièrement vérifié**, sur 1 369 modules Python et 417 fichiers de données. **Les six portes de migration complète restent fausses.**
 
 ### Coût global et diagnostics de phase
 
@@ -274,6 +321,8 @@ Une recherche bornée incomplète produit un état inconnu bloquant. La limite r
 **6A est clôturé dans son périmètre. La prochaine capacité de ce fil est 6B, `selected_rigid`.** Le lot 6 garde ensuite `observed_rigid_cargo` puis `shared_settlement`. Les chantiers 7-followup, 10B et 5C restent séparés et doivent intégrer le prédécesseur effectivement publié. Les réserves CWSE, SK48, FramedWindow, LKEY et WEAV ne sont pas effacées par cette livraison.
 
 <!-- LOT6A_ROADMAP_CURRENT_END -->
+
+
 
 <!-- LOT5B_ROADMAP_HISTORICAL_START -->
 
@@ -313,7 +362,7 @@ Le [comparateur strict historique](lot5b-evidence/performance-integrated/aggrega
 
 | Voie | État courant et prochain travail |
 | --- | --- |
-| **Lot 5** | **5B livré dans Site 94, validé techniquement et au coût global.** **5C / `observed_object_binding`** est la prochaine capacité de ce fil. **Une entrée du lot 5 reste ouverte.** |
+| **Lot 5** | **5A et 5B livrés ; 5C raccordé, encore non publié.** Publications 6A et suivi 7 intégrées, correctif d’horloge vérifié par **16/16 tests et trois contrôles**. Suite : publication réelle 10B, périmètre et gel finaux, validation, coût puis publication 5C. |
 | **Lot 4** | 4A, 4B et 4C livrés ; lot clos dans ses périmètres annoncés, Sites 92/93 conservés. |
 | **Lot 6** | **6A / `preview_packing` commencé dans une autre conversation** ; aucun résultat de ce chantier n'est attribué au gel 5B. |
 | **Lot 7** | Transferts 7A/7B clos ; **suivi LKEY niveau 3 séparé**, avec sa propre réserve et son horloge. |
@@ -1096,14 +1145,14 @@ Les preuves de développement gardent leur portée propre : **81 tests différen
 
 ## Lot 5 : temps, adressage et objets
 
-**État de ce fil :** 5A est publié dans Sites 84–85, fonctionnellement validé et son coût global qualifié est accepté dans le gel 0.53. **5B/native 0.58 est livré dans Site 94, après intégration des prédécesseurs Sites 92/93, avec validation technique, coût global accepté et publication privée confirmée.** Le registre du lot 5 conserve **une entrée restante : 5C, `observed_object_binding`**, prochaine capacité de ce fil. Les résultats 5B ne sont pas attribués rétroactivement à 4C.
+**État de ce fil :** 5A et 5B restent publiés dans leurs périmètres. **5C intègre les publications 6A (Sites 96–97), le suivi 7 (Site 98 et clôture Site 101), ainsi que le correctif d’horloge testé de 10B.** La preuve commune `common-02` conserve ses huit scénarios et **6 818/6 818 contrôles originaux** sur son gel ; l’intégration du correctif passe **16/16 tests ciblés et trois contrôles**, avec sources et entrées d’exécution identiques après réconciliation des Sites 98 et 101. Le candidat garde **65/76 entrées**, contre **63/76** dans la publication 0.61. La publication réelle 10B et le périmètre final 5C restent à réconcilier avant coût et publication. La première mesure du suivi 7 reste retirée des preuves de coût isolées ; sa [répétition complète propre est acceptée](lot5c-evidence/recovery/coordination/lot7-clean-repeat-observation/observation.json), **STCK −2,924030 % et SMLP +0,009074 %**, avec les dépassements de phase conservés.
 
 | Sous-lot | Périmètre | État et prochaine étape |
 | --- | --- | --- |
 | **5A** | `linked_temporal_preparation` | Propriétaire unique, contact lié, acquisition passive des phases, chemins bornés, restauration et influence du retour vérifiés. Qualification des graphes, fenêtre officielle et revue du coût terminées ; publication privée confirmée dans Site 84. |
 | **5B** | `observed_addressed_material` | **Livré dans Site 94, validé techniquement et au coût global.** 4 900 tests/125 fichiers, cinq contrôles, dix rejeux/170 comparaisons, TRIA trois niveaux/17 actions/17 plans. Source 522 opérations ; stock commun 8/17 étapes, une fusion/un déplacement puis refus préservé. Global STCK +3,780905 % / SMLP −1,556219 %, revue 11 865/11 865, diagnostics 14/16 conservés. |
-| **5C** | `observed_object_binding` | **Prochaine capacité de ce fil, une entrée restante.** Après les contrats consommés : conservation du parent, liaison observée, effet attesté, réfutation ou frontière ; restauration des obligations et influence sur la décision suivante. |
-| **Sessions longues** | Delta, mémoire active et coups obligatoires | Les premières copies répétées sont corrigées et 5B conserve ses snapshots selon la révision. Restent la compaction démontrée des données devenues inutiles, les coûts encore liés à l'historique et la propagation générale des domaines réduits à un seul choix. **WEAV niveau 6 reste réservé**, sans nouvel essai réel ni reset du budget épuisé ; le coût global accepté ne prouve pas une latence stable sur des sessions longues. |
+| **5C** | `observed_object_binding` | **Raccordé, non publié.** Parité composant **98/98** et `common-02` **6 818/6 818** conservés. Publications 6A et suivi 7 intégrées ; correctif d’horloge **16/16 tests ciblés + trois contrôles**. Suite : intégrer la publication réelle 10B, arrêter le périmètre final, valider et mesurer le candidat, puis publier. |
+| **Sessions longues** | Delta, mémoire active et coups obligatoires | Les optimisations déjà livrées sont conservées. Restent les coûts proportionnels à l'historique, la compaction prouvée des données devenues inutiles et la propagation générale des choix obligatoires. **WEAV niveau 6 reste réservé**, sans nouveau lancement réel ni reset du budget épuisé. Le coût global accepté des lots précédents ne prouve pas une latence stable au fil des niveaux. |
 
 **Entrées :** `linked_temporal_preparation`, `observed_addressed_material`, `observed_object_binding`.
 

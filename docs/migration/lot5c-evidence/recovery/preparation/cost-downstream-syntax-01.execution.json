@@ -1,0 +1,31 @@
+{
+  "schema": "logos-engine.lot5c.command-execution.v1",
+  "status": "passed",
+  "startedAt": "2026-11-11T12:03:35.652905+00:00",
+  "command": [
+    "python",
+    "-c",
+    "import ast,pathlib,subprocess; b=pathlib.Path(\"docs/migration/lot5c-evidence\"); p=[\"prepare-cost-protocol.py\",\"finalize-owner-cost-contract.py\",\"check-cost-static-inputs.py\",\"review-owner-costs.py\"]; [ast.parse((b/n).read_text(),filename=str(b/n)) for n in p]; [subprocess.run([\"node\",\"--check\",str(b/n)],check=True) for n in [\"record-owner-source-inventory.mjs\",\"consolidate-owner-costs.mjs\"]]; print(\"Six downstream syntax checks passed\")"
+  ],
+  "cwd": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout",
+  "timeoutSeconds": 30.0,
+  "wrapper": {
+    "path": "docs/migration/lot5c-evidence/run-evidence-command.py",
+    "bytes": 3904,
+    "sha256": "99b16a35eac1f12acb3063e43d303ffc020b3339109e22eff1f807d1e87e47db"
+  },
+  "finishedAt": "2026-11-11T12:03:35.976392+00:00",
+  "durationSeconds": 0.3198222200001055,
+  "exitCode": 0,
+  "timedOut": false,
+  "log": {
+    "path": "docs/migration/lot5c-evidence/recovery/preparation/cost-downstream-syntax-01.log",
+    "bytes": 36,
+    "sha256": "b63e4de2c833421de31d937c9b2136bec1a12db7f035d48bf0a51e2092efc388"
+  },
+  "compressedLog": {
+    "path": "docs/migration/lot5c-evidence/recovery/preparation/cost-downstream-syntax-01.log.gz",
+    "bytes": 56,
+    "sha256": "ece90488c96c6b58663e568652deb02b564b9d7983aa6d92e15c4e6a9cff3bdd"
+  }
+}

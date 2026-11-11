@@ -1,0 +1,14 @@
+{
+  "schema": "logos-engine.followup-clean-repeat-coordination-release.v1",
+  "releasedAt": "2026-11-11T15:33:19.663958+00:00",
+  "requestId": "lot7-followup-clean-repeat-f8d5097-final",
+  "status": "released_after_acceptance",
+  "acceptance": {
+    "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/isolation-revalidation.json",
+    "sha256": "028711ca50c8461f700c43cdaea02d1ac38190a669698621c903314b4b3777b0",
+    "bytes": 722134
+  },
+  "exclusiveLockFinishedHoldingAt": "2026-11-11T15:31:04.872630+00:00",
+  "scope": "GO shared-lock functional/source work. Completed clean repeat and acceptance are terminal. Publication lock remains held only for final source/docs closure; a new exclusive interval requires ordinary coordination.",
+  "firstWindowRemainsIneligible": true
+}

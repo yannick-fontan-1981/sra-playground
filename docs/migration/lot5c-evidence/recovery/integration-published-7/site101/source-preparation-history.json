@@ -1,0 +1,53 @@
+{
+  "recordedAt": "2026-11-11T16:22:29.980791+00:00",
+  "sourcePreparation": {
+    "providerVersion": 101,
+    "providerStatus": "succeeded",
+    "publishedCommit": "d75a36f0a99bf6c301034523a3138a64d2f6e744",
+    "fetchSession": 18054,
+    "fetchExitCode": 0,
+    "fetchedMain": "d75a36f0a99bf6c301034523a3138a64d2f6e744",
+    "mergeCommandCompletedAt": "2026-11-11T16:17:51.407004+00:00",
+    "unresolvedFiles": [
+      "docs/migration/v6-delivery-roadmap.md"
+    ],
+    "sourceReviewerTerminalAt": "2026-11-11T16:17:25.182678+00:00",
+    "sourceSlotExpiredGuard": "No source work started by guarded command after 16:18:29 deadline"
+  },
+  "slot": {
+    "startedAt": "2026-11-11T16:16:29.052925+00:00",
+    "deadline": "2026-11-11T16:18:29.052925+00:00",
+    "permissionIssuedAt": "2026-11-11T16:14:39.360572+00:00",
+    "lastSourceCommandEndedAt": "2026-11-11T16:17:51.407004+00:00",
+    "status": "closed_with_pending_roadmap_merge_conflict"
+  },
+  "incidents": [
+    {
+      "kind": "bounded_manifest_inspection_invocation",
+      "error": "KeyError: 0",
+      "cause": "The reader treated the manifest files mapping as a list.",
+      "initialExitCode": 1,
+      "correctedReadExitCode": 0,
+      "occurredWithin": [
+        "2026-11-11T16:16:29.052925+00:00",
+        "2026-11-11T16:17:51.407004+00:00"
+      ],
+      "nativeCodeModified": false,
+      "testExecuted": false
+    },
+    {
+      "kind": "late_slot_guard",
+      "at": "2026-11-11T16:19:24.112091+00:00",
+      "result": "source_slot_elapsed_no_more_work_started",
+      "sourceReadsOrMutationsPerformed": false
+    },
+    {
+      "kind": "stale_coordination_status",
+      "actualLastSourceCommandEndedAt": "2026-11-11T16:17:51.407004+00:00",
+      "statusCorrectedAt": "2026-11-11T16:21:16.747440+00:00",
+      "actualSourceWorkBeyondDeclaredSlot": false
+    }
+  ],
+  "remoteCheckpoint": "d54a58f2a03b36027e4da75c8eba12299c08b676",
+  "nextAction": "Resume only after explicit 10B official-cost release; resolve the single roadmap conflict, verify input identity, commit and synchronize."
+}

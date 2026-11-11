@@ -1,0 +1,64 @@
+{
+  "schema": "logos-engine.lot5c.merge-staging-check.v1",
+  "recordedAt": "2026-11-11T17:12:03.486213+00:00",
+  "command": [
+    "git",
+    "diff",
+    "--cached",
+    "--check"
+  ],
+  "exitCode": 2,
+  "stdout": "docs/migration/lot10b-evidence/recovery-20261111/diagnostic/lot10b-composed-typecheck-01.log:5: new blank line at EOF.\ndocs/migration/lot10b-evidence/recovery-20261111/diagnostic/lot10b-composed-typecheck-02.log:5: new blank line at EOF.\ndocs/migration/lot10b-evidence/recovery-20261111/diagnostic/typecheck-01.log:5: new blank line at EOF.\ndocs/migration/lot10b-evidence/recovery-20261111/diagnostic/typecheck-02.log:5: new blank line at EOF.\ndocs/migration/lot10b-evidence/recovery-20261111/integrated-final-01/validation/build-output.raw.txt:57: trailing whitespace.\n+[plugin builtin:vite-reporter] \ndocs/migration/lot10b-evidence/recovery-20261111/integrated-final-01/validation/typecheck-output.raw.txt:5: new blank line at EOF.\ndocs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/validation/build-output.raw.txt:57: trailing whitespace.\n+[plugin builtin:vite-reporter] \ndocs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/validation/typecheck-output.raw.txt:5: new blank line at EOF.\ndocs/migration/lot10b-evidence/review-owner-costs.py:915: new blank line at EOF.\n",
+  "stderr": "",
+  "qualification": "The original full staging check exit2 is retained. Every reported whitespace item is byte-identical to actual published103, comprising eight raw historical logs and one historical10Breview script. They are retained without rewriting frozen evidence. Own5Csource/documentary/test delta passes its explicit staging diff check. This is not a native test failure or proof that the full staging check returned0.",
+  "reviewedAt": "2026-11-11T17:12:29.546816+00:00",
+  "status": "inherited_published_whitespace_preserved_own_delta_clean",
+  "reportedFiles": [
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/diagnostic/lot10b-composed-typecheck-01.log",
+      "sha256": "617dc12a2c337d93b91e07bef62eae59b1abe157b737d909052c3e9d2db0d09d",
+      "exactlyEqualActualPublished103": true
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/diagnostic/lot10b-composed-typecheck-02.log",
+      "sha256": "617dc12a2c337d93b91e07bef62eae59b1abe157b737d909052c3e9d2db0d09d",
+      "exactlyEqualActualPublished103": true
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/diagnostic/typecheck-01.log",
+      "sha256": "617dc12a2c337d93b91e07bef62eae59b1abe157b737d909052c3e9d2db0d09d",
+      "exactlyEqualActualPublished103": true
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/diagnostic/typecheck-02.log",
+      "sha256": "617dc12a2c337d93b91e07bef62eae59b1abe157b737d909052c3e9d2db0d09d",
+      "exactlyEqualActualPublished103": true
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-01/validation/build-output.raw.txt",
+      "sha256": "054328162550f39ce84a024a638a407e164829e2701e4f4bd5e6dd666b2f7516",
+      "exactlyEqualActualPublished103": true
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-01/validation/typecheck-output.raw.txt",
+      "sha256": "617dc12a2c337d93b91e07bef62eae59b1abe157b737d909052c3e9d2db0d09d",
+      "exactlyEqualActualPublished103": true
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/validation/build-output.raw.txt",
+      "sha256": "054328162550f39ce84a024a638a407e164829e2701e4f4bd5e6dd666b2f7516",
+      "exactlyEqualActualPublished103": true
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/validation/typecheck-output.raw.txt",
+      "sha256": "617dc12a2c337d93b91e07bef62eae59b1abe157b737d909052c3e9d2db0d09d",
+      "exactlyEqualActualPublished103": true
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/review-owner-costs.py",
+      "sha256": "e879fb58868fa753936ae1cdf8eb8801f66371e660404253439560d5af25558c",
+      "exactlyEqualActualPublished103": true
+    }
+  ],
+  "ownDeltaDiffCheckExitCode": 0
+}

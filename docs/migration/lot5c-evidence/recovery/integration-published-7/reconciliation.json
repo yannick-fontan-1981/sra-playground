@@ -1,0 +1,36 @@
+{
+  "schema": "logos-engine.lot5c.published-followup7-reconciliation.v1",
+  "recordedAt": "2026-11-11T14:54:54.477798+00:00",
+  "status": "source_reconciled_native_and_targeted_test_inputs_unchanged",
+  "beforeMergeCommit": "fdb5a3745251216c14b1e489a5ffbd40ffd88dc2",
+  "publishedPredecessorCommit": "653e40a4f45df8ec8c6bda005004c7cdb8df074a",
+  "siteVersion": 98,
+  "nativeVersion": "0.61.0",
+  "publishedNativeDigest": "f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279",
+  "publishedNativeFiles": 306,
+  "nativePublicationReceipt": "docs/migration/lot5c-evidence/recovery/integration-published-7/native-publication-site98.json",
+  "nativePublicationReceiptSha256": "caa14f222e456e421af01fc3277629ef721a25d5f83bbdc82d87de4087989bd7",
+  "candidateNativeFiles": 318,
+  "candidateNativeDigest": "a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57",
+  "candidateNativeDifferencesFromValidatedFreeze": [],
+  "validatedTestInputsUnchanged": [
+    "tests/v6-native-runtime.test.ts",
+    "tests/v6-window-question-kernel.test.ts",
+    "tests/v6-object-binding-common.test.ts",
+    "scripts/native-object-binding-common-loop.ts"
+  ],
+  "inheritedTargetedValidation": "docs/migration/lot5c-evidence/recovery/integration-published-6a/summary.json",
+  "targetedTestsReexecutedForMetadataMerge": false,
+  "sourceConflictsResolved": [
+    "Keep development0.63 implementation identity in runtime and audit metadata.",
+    "Preserve current5C roadmap and append actualfollowup7 source/evidence block."
+  ],
+  "costQualificationReservation": {
+    "incident": "docs/migration/lot5c-evidence/recovery/coordination/lot7-quiet-io-deviation-20261111.json",
+    "status": "reported_to_owner_no_acknowledgment_observed_yet",
+    "rawPeerStatus": "accepted",
+    "qualification": "Published source identity is established. Ownreviewers generated largeI/O during the peerABBA. Its cost numbers are not reused as5C performance evidence; isolation qualification/review remains explicitly reserved."
+  },
+  "documentationClosure": "not_yet_observed_at_this_source_merge",
+  "qualification": "The actual nativeSite98 commit is merged, not only a prepared branch. All318candidate native bytes andfour bounded-test input files match the already validated clockintegration. The future actual10Bpublication remains required before final5Cfreeze/cost/publication."
+}

@@ -1,0 +1,192 @@
+{
+  "schema": "logos-engine.native-cost-window.v1",
+  "status": "passed",
+  "startedAt": "2026-11-11T15:22:07.889158+00:00",
+  "plannedOrder": [
+    "A1",
+    "B1",
+    "B2",
+    "A2"
+  ],
+  "baselineCheckout": "/workspace/sites/sra-lot7-baseline6a-recovery-20261111",
+  "correctionCheckout": "/workspace/sites/sra-lot7-followup-recovery-20261111/.sites-checkout",
+  "executions": [
+    {
+      "label": "A1",
+      "checkout": "/workspace/sites/sra-lot7-baseline6a-recovery-20261111",
+      "command": [
+        "node",
+        "scripts/measure-native-loop-costs.mjs",
+        "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/cases.json",
+        "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/cohort1/baseline.json"
+      ],
+      "nativeDigest": "ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229",
+      "startedAt": "2026-11-11T15:22:07.998654+00:00",
+      "status": "passed",
+      "output": "/workspace/sites/sra-lot7-baseline6a-recovery-20261111/docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/cohort1/baseline.json",
+      "log": "/workspace/sites/sra-lot7-followup-recovery-20261111/.sites-checkout/docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/cohort1/baseline.log",
+      "finishedAt": "2026-11-11T15:24:24.686801+00:00",
+      "elapsedMs": 136687.763371001,
+      "exitCode": 0,
+      "logSha256": "dd5ffea2b81b53233e59dd7cea44551047607ddf6970beabae2f5d4664945a10",
+      "reportSha256": "c03b9c9ac37d8fc89a4ba059db338a0d0ecfb2c0174fe2fd6ff92a10570536d3",
+      "copiedOutput": "/workspace/sites/sra-lot7-followup-recovery-20261111/.sites-checkout/docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/cohort1/baseline.json",
+      "copiedReportSha256": "c03b9c9ac37d8fc89a4ba059db338a0d0ecfb2c0174fe2fd6ff92a10570536d3"
+    },
+    {
+      "label": "B1",
+      "checkout": "/workspace/sites/sra-lot7-followup-recovery-20261111/.sites-checkout",
+      "command": [
+        "node",
+        "scripts/measure-native-loop-costs.mjs",
+        "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/cases.json",
+        "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/cohort1/after.json"
+      ],
+      "nativeDigest": "f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279",
+      "startedAt": "2026-11-11T15:24:24.779784+00:00",
+      "status": "passed",
+      "output": "/workspace/sites/sra-lot7-followup-recovery-20261111/.sites-checkout/docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/cohort1/after.json",
+      "log": "/workspace/sites/sra-lot7-followup-recovery-20261111/.sites-checkout/docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/cohort1/after.log",
+      "finishedAt": "2026-11-11T15:26:36.025136+00:00",
+      "elapsedMs": 131245.06241999916,
+      "exitCode": 0,
+      "logSha256": "f24c97c2896bab9d9461f47d71e0b8801485699636a750edfb8efaa2adcd4907",
+      "reportSha256": "947358e92f49a299fe71a0afa21e3075b691aeae1315039dca6e538583aff784"
+    },
+    {
+      "label": "B2",
+      "checkout": "/workspace/sites/sra-lot7-followup-recovery-20261111/.sites-checkout",
+      "command": [
+        "node",
+        "scripts/measure-native-loop-costs.mjs",
+        "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/cases.json",
+        "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/cohort2/after.json"
+      ],
+      "nativeDigest": "f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279",
+      "startedAt": "2026-11-11T15:26:36.133814+00:00",
+      "status": "passed",
+      "output": "/workspace/sites/sra-lot7-followup-recovery-20261111/.sites-checkout/docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/cohort2/after.json",
+      "log": "/workspace/sites/sra-lot7-followup-recovery-20261111/.sites-checkout/docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/cohort2/after.log",
+      "finishedAt": "2026-11-11T15:28:49.090116+00:00",
+      "elapsedMs": 132956.0165620005,
+      "exitCode": 0,
+      "logSha256": "bf7eb6cf37b7fea2b29b809f5303c6d34d2a10ae40f3cbfa610f51cf19332d48",
+      "reportSha256": "b0d37373f37df792a24149b82912e92a3168f384b531c42dd034bfc1f0495a2c"
+    },
+    {
+      "label": "A2",
+      "checkout": "/workspace/sites/sra-lot7-baseline6a-recovery-20261111",
+      "command": [
+        "node",
+        "scripts/measure-native-loop-costs.mjs",
+        "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/cases.json",
+        "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/cohort2/baseline.json"
+      ],
+      "nativeDigest": "ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229",
+      "startedAt": "2026-11-11T15:28:49.182823+00:00",
+      "status": "passed",
+      "output": "/workspace/sites/sra-lot7-baseline6a-recovery-20261111/docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/cohort2/baseline.json",
+      "log": "/workspace/sites/sra-lot7-followup-recovery-20261111/.sites-checkout/docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/cohort2/baseline.log",
+      "finishedAt": "2026-11-11T15:31:04.433021+00:00",
+      "elapsedMs": 135249.87215700094,
+      "exitCode": 0,
+      "logSha256": "b2c9268de1dae7b0dae802ae2224e737cedeaa906e564724e9d2ea61387233c1",
+      "reportSha256": "c84a9c13a5c5a703576770851c3ba74718e8218c8384153a33ac7b4f34d57170",
+      "copiedOutput": "/workspace/sites/sra-lot7-followup-recovery-20261111/.sites-checkout/docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/cohort2/baseline.json",
+      "copiedReportSha256": "c84a9c13a5c5a703576770851c3ba74718e8218c8384153a33ac7b4f34d57170"
+    }
+  ],
+  "nativeDigests": {
+    "baseline": "ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229",
+    "correction": "f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279"
+  },
+  "runnerSha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59",
+  "inputs": [
+    {
+      "path": "/workspace/sites/sra-lot7-followup-recovery-20261111/.sites-checkout/docs/migration/lot6a-evidence/integrated-final-02/source-manifest.json",
+      "sha256": "52f3624d419cb8209e6545274b3867b5f150d8630a0daa05369fd7613ed435fe"
+    },
+    {
+      "path": "/workspace/sites/sra-lot7-followup-recovery-20261111/.sites-checkout/docs/migration/lot7b-evidence/followup-recovery/integrated-final/source-manifest.json",
+      "sha256": "c597c7629495e98fcfad64cdd827393bc58d2d8f26594474e60add601485e4de"
+    },
+    {
+      "path": "/workspace/sites/sra-lot7-followup-recovery-20261111/.sites-checkout/scripts/measure-native-loop-costs.mjs",
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "/workspace/sites/sra-lot7-baseline6a-recovery-20261111/scripts/measure-native-loop-costs.mjs",
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "/workspace/sites/sra-lot7-followup-recovery-20261111/.sites-checkout/scripts/compare-native-loop-costs.mjs",
+      "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb"
+    },
+    {
+      "path": "/workspace/sites/sra-lot7-followup-recovery-20261111/.sites-checkout/scripts/compare-native-cost-cohorts.mjs",
+      "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34"
+    },
+    {
+      "path": "/workspace/sites/sra-lot7-followup-recovery-20261111/.sites-checkout/scripts/run-native-cost-window.py",
+      "sha256": "0ec9c69c859d0555e963643010d2254caee8c63d1c9a98ec07cd9af0ce0ce613"
+    },
+    {
+      "path": "/workspace/sites/sra-lot7-followup-recovery-20261111/.sites-checkout/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+    },
+    {
+      "path": "/workspace/sites/sra-lot7-baseline6a-recovery-20261111/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+    },
+    {
+      "path": "/workspace/sites/sra-lot7-followup-recovery-20261111/.sites-checkout/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    },
+    {
+      "path": "/workspace/sites/sra-lot7-baseline6a-recovery-20261111/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    },
+    {
+      "path": "/workspace/sites/sra-lot7-followup-recovery-20261111/.sites-checkout/docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/cases.json",
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "path": "/workspace/sites/sra-lot7-baseline6a-recovery-20261111/docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/cases.json",
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "path": "/workspace/sites/sra-lot7-followup-recovery-20261111/.sites-checkout/docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/comparison-policy.json",
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+    },
+    {
+      "path": "/workspace/sites/sra-lot7-baseline6a-recovery-20261111/docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/comparison-policy.json",
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+    },
+    {
+      "path": "/workspace/sites/sra-lot7-followup-recovery-20261111/.sites-checkout/docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/protocol.md",
+      "sha256": "3891258b8d0d2a6f9de0bc3c700b77430afaaf5f71fab5dc85dcca5a540f40b5"
+    },
+    {
+      "path": "/workspace/sites/sra-lot7-baseline6a-recovery-20261111/docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/protocol.md",
+      "sha256": "3891258b8d0d2a6f9de0bc3c700b77430afaaf5f71fab5dc85dcca5a540f40b5"
+    },
+    {
+      "path": "/workspace/sites/sra-lot7-baseline6a-recovery-20261111/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "path": "/workspace/sites/sra-lot7-followup-recovery-20261111/.sites-checkout/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "path": "/workspace/sites/sra-lot7-baseline6a-recovery-20261111/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    },
+    {
+      "path": "/workspace/sites/sra-lot7-followup-recovery-20261111/.sites-checkout/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    }
+  ],
+  "finalIntegrity": "passed",
+  "finishedAt": "2026-11-11T15:31:04.565927+00:00"
+}
