@@ -1,0 +1,398 @@
+{
+  "case": "craf-055",
+  "game": "CRAF",
+  "mode": "recorded-public-replay",
+  "command": [
+    "node",
+    "--expose-gc",
+    "--max-old-space-size=1536",
+    "scripts/replay-public-regression-released-baseline.mjs",
+    "docs/migration/lot7b-evidence/integrated-final/craf-campaign.json.gz",
+    "docs/migration/lot7b-evidence/integrated-final/craf-public-trace.json.gz",
+    "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/craf-055-replay.json.gz",
+    "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/craf-055-host-preparation.json"
+  ],
+  "startedAt": "2026-11-11T21:14:17.462646+00:00",
+  "timeoutSeconds": 1200,
+  "baseline": {
+    "path": "docs/migration/lot7b-evidence/integrated-final/craf-campaign.json.gz",
+    "sha256": "78e86660961ed6d75707c001c021b8c223d205137d86288ac21d09a533b680f2",
+    "bytes": 12767727
+  },
+  "trace": {
+    "path": "docs/migration/lot7b-evidence/integrated-final/craf-public-trace.json.gz",
+    "sha256": "cf69ad941e80e17f8d6cd66edc0419a0c6ff7aa8d9bbdaf503cb56a49e8c3f98",
+    "bytes": 40777
+  },
+  "expectedActions": 36,
+  "nodeOldSpaceMiB": 1536,
+  "preflight": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/preflight.json",
+    "sha256": "74eb7a4dffac49f6c5773701be308b720a3b9acee247952126336af456551deb",
+    "bytes": 5814
+  },
+  "historicalReportProcessExitedBeforeNode": true,
+  "nativeSourceBeforeDigest": "ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316",
+  "executionInputsBefore": {
+    "scripts/run-released-public-regressions.py": "7988863afd2b171f31987434bb1176370be2e3afd49dead1edcdc59770d81909",
+    "scripts/run-recorded-public-regressions.py": "df19dc88ff29e78a1cb5935d445644e96cc9fb1ef90b73d802cf51868d2b2c40",
+    "scripts/compare-v54-regressions.py": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+    "scripts/replay-public-regression-released-baseline.mjs": "2ce2a0e1b8f969510373ae161156b2b163d208b4e426cb1f26218f9952b3b164",
+    "scripts/replay-v53-public-regression.mjs": "4359e008db8dadaac17f6504199ff20c752f40f1666ba527f1cd5f16df100a9e",
+    "scripts/run-v53-campaign-proof.py": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+    "tests/helpers/v6-live-game-campaign.ts": "e446fce35d192e902de2aa50c611f2224a9dbe925e59d20c10b8e964ed194ae2",
+    "docs/migration/lot10c-evidence/recorded-regression-cases.json": "a16f67724f53def79fe476716c12a61e8064df871911772731983fa2505da3a9",
+    "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/source-manifest.json": "6926e8abdcf9232e4e6d06ad4b60d59e4a8fa473b56a627dc17b7f8ac18d2ac7",
+    "scripts/run-released-public-regressions-streamlog.py": "b05b0e113c93696be45408e4c10549f2a379c22330efbddfcaa0f09cd51309b9"
+  },
+  "phase": "completed",
+  "finishedAt": "2026-11-11T21:16:13.092880+00:00",
+  "exitCode": 0,
+  "timedOut": false,
+  "passed": true,
+  "nodeExitObserved": true,
+  "rawOutputPath": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/craf-055-output.raw.log",
+  "driverPid": 6,
+  "nodePid": 112,
+  "memorySamples": [
+    {
+      "elapsedSeconds": 0.001190136004879605,
+      "pid": 112,
+      "VmSize": "106544 kB",
+      "VmHWM": "180 kB",
+      "VmRSS": "180 kB",
+      "Threads": "1"
+    },
+    {
+      "elapsedSeconds": 5.021204672004387,
+      "pid": 112,
+      "VmSize": "10960184 kB",
+      "VmHWM": "1261916 kB",
+      "VmRSS": "942684 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 10.05389508799999,
+      "pid": 112,
+      "VmSize": "10966332 kB",
+      "VmHWM": "1261916 kB",
+      "VmRSS": "953636 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 15.105605861004733,
+      "pid": 112,
+      "VmSize": "10965720 kB",
+      "VmHWM": "1261916 kB",
+      "VmRSS": "954072 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 20.121607597000548,
+      "pid": 112,
+      "VmSize": "10985260 kB",
+      "VmHWM": "1261916 kB",
+      "VmRSS": "975488 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 25.134584414001438,
+      "pid": 112,
+      "VmSize": "11005228 kB",
+      "VmHWM": "1261916 kB",
+      "VmRSS": "1005224 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 30.16060675799963,
+      "pid": 112,
+      "VmSize": "11025272 kB",
+      "VmHWM": "1261916 kB",
+      "VmRSS": "1026788 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 35.18632900300145,
+      "pid": 112,
+      "VmSize": "11025096 kB",
+      "VmHWM": "1261916 kB",
+      "VmRSS": "1026700 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 40.19708097400144,
+      "pid": 112,
+      "VmSize": "11057116 kB",
+      "VmHWM": "1261916 kB",
+      "VmRSS": "1058416 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 45.205658500002755,
+      "pid": 112,
+      "VmSize": "11110720 kB",
+      "VmHWM": "1261916 kB",
+      "VmRSS": "1112180 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 50.21463200799917,
+      "pid": 112,
+      "VmSize": "11180392 kB",
+      "VmHWM": "1261916 kB",
+      "VmRSS": "1181512 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 55.22233600600157,
+      "pid": 112,
+      "VmSize": "11239416 kB",
+      "VmHWM": "1261916 kB",
+      "VmRSS": "1241112 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 60.23659247899923,
+      "pid": 112,
+      "VmSize": "11296432 kB",
+      "VmHWM": "1373312 kB",
+      "VmRSS": "1297948 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 65.24817132400494,
+      "pid": 112,
+      "VmSize": "11351788 kB",
+      "VmHWM": "1373312 kB",
+      "VmRSS": "1353580 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 70.26668551900366,
+      "pid": 112,
+      "VmSize": "11392196 kB",
+      "VmHWM": "1446540 kB",
+      "VmRSS": "1394232 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 75.27453407400026,
+      "pid": 112,
+      "VmSize": "11435780 kB",
+      "VmHWM": "1446540 kB",
+      "VmRSS": "1437960 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 80.2811878950015,
+      "pid": 112,
+      "VmSize": "11447032 kB",
+      "VmHWM": "1462500 kB",
+      "VmRSS": "1449508 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 85.2925885010045,
+      "pid": 112,
+      "VmSize": "11481952 kB",
+      "VmHWM": "1521668 kB",
+      "VmRSS": "1484592 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 90.30074473100103,
+      "pid": 112,
+      "VmSize": "11481356 kB",
+      "VmHWM": "1549508 kB",
+      "VmRSS": "1484108 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 95.31393556900002,
+      "pid": 112,
+      "VmSize": "11543756 kB",
+      "VmHWM": "1549508 kB",
+      "VmRSS": "1546640 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 100.33412279700133,
+      "pid": 112,
+      "VmSize": "11566104 kB",
+      "VmHWM": "1600260 kB",
+      "VmRSS": "1568932 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 105.34837053000228,
+      "pid": 112,
+      "VmSize": "11590412 kB",
+      "VmHWM": "1600260 kB",
+      "VmRSS": "1593188 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 110.36337647500477,
+      "pid": 112,
+      "VmSize": "12316652 kB",
+      "VmHWM": "1910300 kB",
+      "VmRSS": "1910300 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 115.37268790600501,
+      "pid": 112,
+      "VmSize": "3024536 kB",
+      "VmHWM": "2332116 kB",
+      "VmRSS": "1292396 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 115.62664763499924,
+      "pid": 112,
+      "processPresent": false
+    }
+  ],
+  "lastObservedAt": "2026-11-11T21:16:13.090564+00:00",
+  "elapsedSeconds": 115.62921266500052,
+  "lastProgress": {
+    "status": "passed",
+    "failure": null
+  },
+  "rawOutputBytes": 123416,
+  "outputRaw": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/craf-055-output.raw.log",
+    "sha256": "1991810985344796b5ba0f733d0bf5d5b51859198f9320ac44c4ebade2c076fb",
+    "bytes": 123416
+  },
+  "output": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/craf-055-output.log.gz",
+    "sha256": "98401fecae57ba124e0675b38fe6277bc83f0c9bab68dbc147bd190dab063e0f",
+    "bytes": 5785
+  },
+  "startedReceipt": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/craf-055-execution-started.json",
+    "sha256": "274c8b1f61184f6143ccc2a64c76073f642d3d164bf6744a75a5a12e88167216",
+    "bytes": 3134
+  },
+  "nodeExitedBeforeComparison": true,
+  "hostPreparation": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/craf-055-host-preparation.json",
+    "sha256": "9f51153ab131957c976b1a631e9321630c52dd9595af1f7a61f7672f01fc6086",
+    "bytes": 9417
+  },
+  "hostPreparationPassed": true,
+  "report": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/craf-055-replay.json.gz",
+    "sha256": "685a690a2e92be2d30b2cf46a7e980144ef8d811a67b403c15a4db63a18cb4a3",
+    "bytes": 15473171
+  },
+  "status": "passed",
+  "actions": 36,
+  "prefixes": 36,
+  "final": {
+    "actions": 36,
+    "levelsCompleted": 3,
+    "level": 4,
+    "state": "NOT_FINISHED",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "activeSeconds": 93.33415879500002,
+    "prefixes": 36,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 36,
+      "boundaryReplays": 2,
+      "goalEvents": 3,
+      "frontierDeltas": 73,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 37
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 37
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 35
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 34
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 1
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 31
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 38
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology"
+      ],
+      "morphologyProvider": {
+        "status": "partial_current_measurements_control_attention_and_methods",
+        "state_owner": "family_state:morphology",
+        "motion_owner": "caller:goal",
+        "forecast_owner": "family_state:public_observed_inventory",
+        "current_decision_scope": "one_source_selection_cycle",
+        "attention_owner": "caller:attention",
+        "method_owner": "caller:counters.targetMethod",
+        "entry_return_owner": "family_state:morphology.entry_access_return",
+        "connected_methods": [
+          "retained_station_method",
+          "entry_access_return",
+          "entry_rebind",
+          "entry_probe",
+          "managed_capacity",
+          "target_extension_continuation"
+        ],
+        "pending": [
+          "complete_original_caller_parity_and_domain_closure"
+        ]
+      },
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 36,
+      "resume": 35
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.66.0"
+  },
+  "passiveOwnerPresence": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/craf-055-passive-owner-presence.json",
+    "sha256": "b0e5757efed7f82766fc2c541dbe66cb3dac5798efc3a677cb2abef334094094",
+    "bytes": 1115
+  },
+  "passiveOwnerPresencePassed": true,
+  "passiveOwnerPrefixesChecked": 0,
+  "passiveOwnerPrefixesPassed": 0,
+  "passiveOwnerTransitionsRetained": 0,
+  "comparison": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/craf-055-comparison.json",
+    "sha256": "1c95ef2d8bfb59a3ecf444168593854e39035efceb2bba69607971fc5a4968e5",
+    "bytes": 11005
+  },
+  "comparisonPassed": true,
+  "comparisonChecks": 17,
+  "failedChecks": [],
+  "nativeSourceAfterDigest": "ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316",
+  "nativeSourceUnchanged": true,
+  "immutableInputsUnchanged": true,
+  "postprocessingFinishedAt": "2026-11-11T21:16:25.328385+00:00"
+}
