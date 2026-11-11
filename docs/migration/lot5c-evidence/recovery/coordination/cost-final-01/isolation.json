@@ -1,0 +1,109 @@
+{
+  "schema": "logos-engine.coordinated-cost-isolation.v1",
+  "status": "acknowledged_quiet_before_window",
+  "recordedAt": "2026-11-11T18:57:48.408904+00:00",
+  "requestId": "lot5c-cost-a33a5f88-final-01",
+  "otherLaneAcknowledged": true,
+  "ownTrackedComputeEnded": true,
+  "previewStopped": true,
+  "costNodeOptionsOverride": null,
+  "performanceDirectory": "docs/migration/lot5c-evidence/recovery/performance-integrated-02",
+  "nativeDigests": {
+    "baseline": "74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12",
+    "candidate": "a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57"
+  },
+  "declaration": {
+    "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/declaration.json",
+    "bytes": 5661,
+    "sha256": "b63f8d61f27ce9d6401c0015ecf2888cd947f504bfbdbfb954e799c28f8a7c8e"
+  },
+  "request": {
+    "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-final-01/request.json",
+    "bytes": 1868,
+    "sha256": "b3da2add5362ebe397b1032a2bbc9824b5c7abcd0fd79c01bfabd9196aee7761"
+  },
+  "knownLanes": [
+    {
+      "lane": "lot6b",
+      "activeCommand": null,
+      "updatedAt": "2026-11-11T18:49:54.347046+00:00",
+      "acknowledgedAt": "2026-11-11T18:38:07.186379+00:00",
+      "requestId": "lot5c-cost-a33a5f88-final-01",
+      "evidence": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-final-01/lot6b-ack.json",
+        "bytes": 9269,
+        "sha256": "a702d6938ca6d7ebd54d33544b4c7a2fe633a4c99826b52bf908b39146503390"
+      },
+      "liveSnapshotObservedAt": "2026-11-11T18:57:48.408904+00:00"
+    },
+    {
+      "lane": "lot8a",
+      "activeCommand": null,
+      "updatedAt": "2026-11-11T18:50:33.217492+00:00",
+      "acknowledgedAt": "2026-11-11T18:35:44.230663+00:00",
+      "requestId": "lot5c-cost-a33a5f88-final-01",
+      "evidence": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-final-01/lot8a-ack.json",
+        "bytes": 9280,
+        "sha256": "67457e6b78c69e333d30ee2583d324ee58f7b766b8a2ea4019fac81736856ebc"
+      },
+      "liveSnapshotObservedAt": "2026-11-11T18:57:48.408904+00:00"
+    },
+    {
+      "lane": "lot10c",
+      "activeCommand": null,
+      "updatedAt": "2026-11-11T18:53:47.412449+00:00",
+      "acknowledgedAt": "2026-11-11T18:36:58.444829+00:00",
+      "requestId": "lot5c-cost-a33a5f88-final-01",
+      "evidence": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-final-01/lot10c-ack.json",
+        "bytes": 7205,
+        "sha256": "37eacee7f022269210e176120a5dab007279382f63962a6eb49b5d0312e9c6e4"
+      },
+      "liveSnapshotObservedAt": "2026-11-11T18:57:48.408904+00:00"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-final-01/lot6b-ack.json",
+      "bytes": 9269,
+      "sha256": "a702d6938ca6d7ebd54d33544b4c7a2fe633a4c99826b52bf908b39146503390"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-final-01/lot8a-ack.json",
+      "bytes": 9280,
+      "sha256": "67457e6b78c69e333d30ee2583d324ee58f7b766b8a2ea4019fac81736856ebc"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-final-01/lot10c-ack.json",
+      "bytes": 7205,
+      "sha256": "37eacee7f022269210e176120a5dab007279382f63962a6eb49b5d0312e9c6e4"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-final-01/request.json",
+      "bytes": 1868,
+      "sha256": "b3da2add5362ebe397b1032a2bbc9824b5c7abcd0fd79c01bfabd9196aee7761"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-final-01/own-closure-final.json",
+      "bytes": 2008,
+      "sha256": "8a18dbaaf61de7d899ced8ecbb5c28db440d19f642a35a2e027c0b67a91ea13b"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/finalize-readiness-5c-independent-review.json",
+      "bytes": 20160,
+      "sha256": "94f1451c32bf25bfe9bac5e40e1a92161356cf6063c0d96649dec1ca6da11b6a"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/coordinated-cost-controller-review.json",
+      "bytes": 14690,
+      "sha256": "36c20fd902531396299b44493d6cd72215029591f5ad12ff7f41f907b12cbc4f"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/withdrawn-ack-field-resolution/withdrawal.json",
+      "bytes": 2736,
+      "sha256": "58a24d8877b8c7f5b82eff1a7314565ff0d8490e74bfbdbcf16cd5728aea21ae"
+    }
+  ],
+  "qualification": "Three actual peer-authored fresh exact ACKs follow the actual18:34:20 request and completed functional evidence. The10C peer itself corrected stale fields at18:53:47 without retiming its18:36:58 ACK; the retained snapshot is raw and all strict fields now agree. Root never modifies peer status. All proposed adapters remain unused and withdrawn; original reviewed three-ACK guards apply. Root and all workers are terminal, preview/browser closed. Only tiny named coordination metadata until explicit release after ABBA/comparisons/review. No official sample has started."
+}

@@ -1,0 +1,56 @@
+{
+  "schema": "logos-engine.lot5c-ack-resolution-withdrawal.v1",
+  "status": "unused_resolution_withdrawn_after_peer_correction",
+  "recordedAt": "2026-11-11T18:56:50.529773+00:00",
+  "peerCorrectionUpdatedAt": "2026-11-11T18:53:47.412449+00:00",
+  "originalPeerAckAt": "2026-11-11T18:36:58.444829+00:00",
+  "peerCorrectionSnapshot": {
+    "path": "docs/migration/lot5c-evidence/recovery/planning/withdrawn-ack-field-resolution/peer-corrected-10c-status.json",
+    "bytes": 7205,
+    "sha256": "37eacee7f022269210e176120a5dab007279382f63962a6eb49b5d0312e9c6e4"
+  },
+  "withdrawnDrafts": [
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/withdrawn-ack-field-resolution/finalize-readiness-5c.py",
+      "bytes": 56303,
+      "sha256": "7734db7f697f2a5aafde8504cefca2c91c471171694af99e96e1b11f8863e494"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/withdrawn-ack-field-resolution/run-coordinated-cost-5c.py",
+      "bytes": 18470,
+      "sha256": "67f0938e866f50265d707eb0464a56714b8465a7f58d91ac013702a80c1140be"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/withdrawn-ack-field-resolution/resolve-quiet-ack-5c.py",
+      "bytes": 3971,
+      "sha256": "cc716492817bf5c38e097b2f7602db46f67637482a10a8a208856f62ac0d746f"
+    }
+  ],
+  "restoredOperationalSources": [
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/finalize-readiness-5c.py",
+      "bytes": 51023,
+      "sha256": "715b8d1b6a92c2cee3ef9c5049201298468ee6bee55f7ceb2556bf927d98c55e"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/planning/run-coordinated-cost-5c.py",
+      "bytes": 16154,
+      "sha256": "0967fd35e3727c9e7c3354d330665bc601eb8c88fb49af3eeee35879eb2b7e58"
+    }
+  ],
+  "originalStrictIndependentReviewsApplicable": true,
+  "resolutionReceipt": {
+    "path": "docs/migration/lot5c-evidence/recovery/planning/quiet-ack-field-resolution-01.json",
+    "bytes": 4181,
+    "sha256": "4df26fa565ae7f49beb4f6037b975a569da9dfe9efb62563e1a9297c1df154d9"
+  },
+  "rawEarlierAck": {
+    "path": "docs/migration/lot5c-evidence/recovery/planning/lot10c-quiet-ack-raw-01.json",
+    "bytes": 6558,
+    "sha256": "6c361b848909bda5bae35208ebebd0827c466e6ab72a6bf54af8a2b5f1a34ad7"
+  },
+  "readinessCreated": false,
+  "measurementExecuted": false,
+  "peerStatusModifiedByRoot": false,
+  "qualification": "The peer itself corrected active_command and no_queued_commands before any measurement. Original already-reviewed strict three-ACK guards are restored byte-for-byte. Proposed interpretation drafts and original raw evidence remain preserved but are never used to authorize this window. No source, benchmark tool, sample, policy or budget is changed."
+}
