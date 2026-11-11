@@ -1,0 +1,56 @@
+{
+  "schema": "logos-engine.followup-quiet-deviation-acknowledgment.v1",
+  "recordedAt": "2026-11-11T14:55:16.567271+00:00",
+  "status": "first_window_ineligible_for_isolated_cost_acceptance",
+  "reportedAt": "2026-11-11T14:21:24.082639+00:00",
+  "incidentReceipt": "lot5c-quiet-deviation-20261111T1420.json",
+  "incidentSha256": "8bec4c8bb8d3b9c705c0bf3de2578dca70663e541aedbef2ae624ee47b8c7ea7",
+  "firstOfficialWindow": "../performance/window.json",
+  "firstOfficialWindowSha256": "c40f04f8f212c7f66812f217786f4c41726caf56d00efd3b5827e0ab31a2f9cb",
+  "affectedInterval": {
+    "start": "2026-11-11T14:19:51+00:00",
+    "end": "2026-11-11T14:22:52.050157+00:00"
+  },
+  "finding": "Two concurrent recursive text scans with approximately175–178MB output each overlapped the official ABBA window. The exclusive advisory performance lock and earlier quiet acknowledgments did not prevent this I/O. The first window must not be represented as fully isolated.",
+  "ownerCorrection": "The report was not incorporated before native Site98 and documentation Site99 publication. Their real publication identity and functional validation remain, but isolated cost-delivery acceptance is withdrawn pending a complete valid repeat.",
+  "firstWindowDisposition": "Retain every raw trial, warmup, log, comparator result, numerical decision, readiness and publication receipt unchanged. No sample or cohort is selectively removed. Numerical medians remain historical observations, not the currently eligible isolated cost gate.",
+  "repeatPolicy": {
+    "directory": "../performance-clean-repeat",
+    "entireWindow": "fresh A1/B1/B2/A2",
+    "baseline": "actual Site97/native0.60.0",
+    "candidate": "unchanged published native0.61.0",
+    "measuredSessions": 32,
+    "measuredActions": 400,
+    "warmupSessions": 8,
+    "warmupActions": 24,
+    "rule": "Each game separately: pooled complete-session median increase strictly below0.10. Phase overruns retained and allowed only if both global cases pass. No additional noise allowance or changed work signatures.",
+    "functionalForms": "Reuse only if exact bytes and all source/work identities are reverified before measurement.",
+    "quiet": "Fresh explicit all-lane/all-agent tool-idle acknowledgment and exclusive performance lock, continuously held for the entire repeat; metadata-only root coordination.",
+    "repetitionBoundary": "The complete first window is disqualified for isolation before any repeat sample. Do not pool or select between windows.",
+    "requiredActiveLaneAcknowledgments": [
+      "lot6b",
+      "lot10b",
+      "lot5c"
+    ],
+    "completed6aStatusIsNotSuccessorQuietAcknowledgment": true
+  },
+  "nativePublication": {
+    "siteVersion": 98,
+    "commit": "653e40a4f45df8ec8c6bda005004c7cdb8df074a",
+    "status": "succeeded"
+  },
+  "documentationPublication": {
+    "siteVersion": 99,
+    "commit": "61e176b42234db380f23aaace216e6bd2bfe7491",
+    "status": "succeeded"
+  },
+  "lkey": "remains closed; no new action, replay, oracle, payload analysis or browser work",
+  "additionalStartupException": {
+    "statusSnapshot": "lot6b-startup-exception-status-snapshot.json",
+    "sha256": "1b296c0555540d055ee88172c84cd7dd08ccbe7aa7470a86be72f11ab0498a1c",
+    "observedAt": "2026-11-11T14:57:19.414128+00:00",
+    "startupObservation": "A new user turn requested6B. Before observing the current quiet request, startup performed one file-name search and git rev-parse HEAD, git status --short, git log -4 --oneline on the completed6Acheckout (recorded tool command walltime0.020982s). It also read lane status files. No tests, builds, games, hashes, archives or native/Python proofs ran. This is a real in-window Git-read exception, not a claim of uninterrupted quiet; lot7 must preserve it when reviewing isolation.",
+    "earlierAcknowledgment": "2026-11-11 14:21:27 UTC",
+    "qualification": "A separate real in-window startup read exception. This adds to the already-withdrawn first-window isolation; no estimate of its performance effect is claimed."
+  }
+}

@@ -1,0 +1,204 @@
+{
+  "schema": "logos-engine.followup-documentation-source-check.v1",
+  "recordedAt": "2026-11-11T14:48:21.171766+00:00",
+  "status": "passed",
+  "nativePublishedCommit": "653e40a4f45df8ec8c6bda005004c7cdb8df074a",
+  "documentationCommit": "61e176b42234db380f23aaace216e6bd2bfe7491",
+  "tree": "025f7b4b8abec463c1e3d22d222337144b52b0b6",
+  "changedFiles": [
+    "README.md",
+    "docs/migration/lot7b-evidence/followup-recovery/README.md",
+    "docs/migration/lot7b-evidence/followup-recovery/publication/check-remote-head.py",
+    "docs/migration/lot7b-evidence/followup-recovery/publication/final-source-recheck.json",
+    "docs/migration/lot7b-evidence/followup-recovery/publication/native-publication.json",
+    "docs/migration/lot7b-evidence/followup-recovery/publication/source-step-01-application-verification.json",
+    "docs/migration/lot7b-evidence/followup-recovery/publication/source-step-01-remote-before.json",
+    "docs/migration/lot7b-evidence/followup-recovery/publication/source-step-01-workflow.json",
+    "docs/migration/lot7b-evidence/followup-recovery/publication/source-step-02-application-verification.json",
+    "docs/migration/lot7b-evidence/followup-recovery/publication/source-step-02-remote-before.json",
+    "docs/migration/lot7b-evidence/followup-recovery/publication/source-step-02-workflow.json",
+    "docs/migration/lot7b-evidence/followup-recovery/publication/source-step-03-application-verification.json",
+    "docs/migration/lot7b-evidence/followup-recovery/publication/source-step-03-remote-before.json",
+    "docs/migration/lot7b-evidence/followup-recovery/publication/source-step-03-workflow.json",
+    "docs/migration/lot7b-evidence/followup-recovery/publication/source-step-04-application-verification.json",
+    "docs/migration/lot7b-evidence/followup-recovery/publication/source-step-04-remote-before.json",
+    "docs/migration/lot7b-evidence/followup-recovery/publication/source-step-04-workflow.json",
+    "docs/migration/lot7b-evidence/followup-recovery/publication/source-step-05-application-verification.json",
+    "docs/migration/lot7b-evidence/followup-recovery/publication/source-step-05-remote-before.json",
+    "docs/migration/lot7b-evidence/followup-recovery/publication/source-step-05-workflow.json",
+    "docs/migration/lot7b-evidence/followup-recovery/publication/source-transport-completion.json",
+    "docs/migration/lot7b-evidence/followup-recovery/publication/source-transport-plan.json",
+    "docs/migration/lot7b-evidence/followup-recovery/publication/verify-application-tar.py",
+    "docs/migration/v6-delivery-roadmap.md",
+    "docs/migration/v6-native-transfer.md"
+  ],
+  "changedFileCount": 25,
+  "nativeAndTestAndBuildChanges": 0,
+  "newReachableObjectCount": 32,
+  "newReachableRawObjectBytes": 907996,
+  "maximumIndividualRawObjectBytes": 247628,
+  "rawStepBoundBytes": 41943040,
+  "objects": [
+    {
+      "object": "61e176b42234db380f23aaace216e6bd2bfe7491",
+      "type": "commit",
+      "bytes": 260
+    },
+    {
+      "object": "025f7b4b8abec463c1e3d22d222337144b52b0b6",
+      "type": "tree",
+      "bytes": 1179
+    },
+    {
+      "object": "f2248825efdfffd21e5cfae44d861d89cff92c95",
+      "type": "blob",
+      "bytes": 72016
+    },
+    {
+      "object": "8f707ab6bb024e3dff154d66453a1a7f858bfb51",
+      "type": "tree",
+      "bytes": 1563
+    },
+    {
+      "object": "dbeab20f9fec40a19daed1305a477febd83007d1",
+      "type": "tree",
+      "bytes": 7543
+    },
+    {
+      "object": "3e0f8cd6b03294d4c428ce342f0f714f805d0c38",
+      "type": "tree",
+      "bytes": 1286
+    },
+    {
+      "object": "5e94e14173ad9dffbe21f6fd2d01f5d0066bb5e9",
+      "type": "tree",
+      "bytes": 262
+    },
+    {
+      "object": "f3098eb1c27d2814f7fb0d01b3e796f4f8a3bfdc",
+      "type": "blob",
+      "bytes": 21384
+    },
+    {
+      "object": "6cdbf8d01074ab800ce9fdb46867f0076e15c44f",
+      "type": "tree",
+      "bytes": 1264
+    },
+    {
+      "object": "8ccca4174732e48c28111c9a05786b939fd14132",
+      "type": "blob",
+      "bytes": 2906
+    },
+    {
+      "object": "d77558e4987925afd82e193705ffadf49bbf71e7",
+      "type": "blob",
+      "bytes": 1627
+    },
+    {
+      "object": "28b940a42761190945061f9be3e1a4d1fb73e42e",
+      "type": "blob",
+      "bytes": 2093
+    },
+    {
+      "object": "5bac68da00aa4fb43597b5fe2ea8a6a042e0d6d8",
+      "type": "blob",
+      "bytes": 14612
+    },
+    {
+      "object": "4bd92d0951bad0daac4dd996adf1b1a9a12ae894",
+      "type": "blob",
+      "bytes": 469
+    },
+    {
+      "object": "2b400168c7cd1528633abba99705506d5e5f60f3",
+      "type": "blob",
+      "bytes": 318
+    },
+    {
+      "object": "b4800f7b1c0ed1f2d6f6bf5fa8c184b64daed603",
+      "type": "blob",
+      "bytes": 14612
+    },
+    {
+      "object": "db433c59e0c61684098f9cdd579178031f18f41c",
+      "type": "blob",
+      "bytes": 469
+    },
+    {
+      "object": "1854b7f340a568378087fe38ecfbf9c3cca4d722",
+      "type": "blob",
+      "bytes": 318
+    },
+    {
+      "object": "db2504497598e0f7033773447c4a62a53c05d24f",
+      "type": "blob",
+      "bytes": 14612
+    },
+    {
+      "object": "775c6e60f04d36ec99fd7eb52d05810915e94144",
+      "type": "blob",
+      "bytes": 469
+    },
+    {
+      "object": "1c30d26689fe10ced544ea3ccfda0d1882b20906",
+      "type": "blob",
+      "bytes": 318
+    },
+    {
+      "object": "0f388a1ff3a35a521a5b72960d076317878a9114",
+      "type": "blob",
+      "bytes": 14612
+    },
+    {
+      "object": "2394e9adc6120cd0b2e6efbd08dcd2801f905cab",
+      "type": "blob",
+      "bytes": 469
+    },
+    {
+      "object": "3d087cba11e230bf8526aa0604fc326686fc17fd",
+      "type": "blob",
+      "bytes": 318
+    },
+    {
+      "object": "ad4413399a9eb27701aff09cf16fe9d2babf788c",
+      "type": "blob",
+      "bytes": 14612
+    },
+    {
+      "object": "d512e6135dadcad569505212d3a4e71c92dcd6e7",
+      "type": "blob",
+      "bytes": 469
+    },
+    {
+      "object": "6614b3798b72cf744a2368a2367ecc1cea3fdb89",
+      "type": "blob",
+      "bytes": 318
+    },
+    {
+      "object": "5d5a59e89ee3eeb69d66c5916be3ec6679e0ea7f",
+      "type": "blob",
+      "bytes": 8050
+    },
+    {
+      "object": "139fdd43bf1db5aea29256298f412f1a4bc14b65",
+      "type": "blob",
+      "bytes": 215498
+    },
+    {
+      "object": "a30402b4b67d5cc11fafb86bcb238cab824fe35c",
+      "type": "blob",
+      "bytes": 14492
+    },
+    {
+      "object": "28e344ae76f9345d41f28ec51c79e90b4de32430",
+      "type": "blob",
+      "bytes": 231950
+    },
+    {
+      "object": "c944e0116dacaa94aa5d8cfc26305d9f2acf3942",
+      "type": "blob",
+      "bytes": 247628
+    }
+  ],
+  "qualification": "Documentation and native-publication receipts only; raw Git object bytes are not wire transport bytes. No test, build, replay, measurement, source push or Site publication performed by this check."
+}
