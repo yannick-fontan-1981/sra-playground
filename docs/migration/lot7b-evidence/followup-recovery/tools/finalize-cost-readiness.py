@@ -37,7 +37,9 @@ REQUIRED_TESTS = {
 }
 COUNT_KEYS = {'tests', 'pass', 'fail', 'cancelled', 'skipped', 'todo'}
 GATES = ['typecheck', 'entry-audit', 'migration-audit', 'diff-check', 'build']
-REGRESSION_GAMES = ['CATR', 'RSWP', 'FOGW', 'VOIS', 'CONN', 'MIND', 'WEAV', 'TRIA', 'CRAF', 'ISOS']
+INHERITED_REGRESSION_GAMES = ['CATR', 'RSWP', 'FOGW', 'VOIS', 'CONN', 'MIND', 'WEAV', 'TRIA', 'CRAF', 'ISOS']
+REGRESSION_GAMES = [*INHERITED_REGRESSION_GAMES, 'KATA']
+REGRESSION_COUNT, REGRESSION_CHECKS = 11, 187
 BUILD_EXTRAS = ['package.json', 'package-lock.json', 'vite.config.ts', 'tsconfig.json', 'index.html', '.openai/hosting.json',
                 'scripts/prepare-python.mjs', 'scripts/python-runtime-assets.json',
                 'scripts/generate-content-pages.mjs', 'scripts/generate-game-gallery.mjs']
@@ -95,7 +97,19 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--performance-directory', type=Path, default=BASE / 'performance')
     parser.add_argument('--candidate-source-directory', type=Path, default=BASE / 'integrated-final')
+    parser.add_argument('--validation-directory', type=Path, default=Path('validation'),
+                        help='Completed test/build receipt directory confined inside the candidate source directory.')
     parser.add_argument('--baseline-publication-receipt', type=Path, default=BASE / 'coordination/baseline-publication.json')
+    parser.add_argument('--baseline-regression-manifest', type=Path,
+                        default=ROOT / 'docs/migration/lot6a-evidence/integrated-final-02/regression-cases.json',
+                        help='Exact regression declaration tracked by the actual published baseline commit.')
+    parser.add_argument('--prepared-regression-manifest', type=Path,
+                        default=BASE / 'coordination/prepared-6a-regression-cases.json',
+                        help='Retained exact eleven-case 6A declaration observed before follow-up replay.')
+    parser.add_argument('--prepared-native-manifest', type=Path,
+                        default=BASE / 'coordination/prepared-6a-source-manifest.json')
+    parser.add_argument('--prepared-source-observation', type=Path,
+                        default=BASE / 'coordination/prepared-6a-source-observation.json')
     parser.add_argument('--test-scope-plan', type=Path, default=BASE / 'contract/test-scope.json')
     parser.add_argument('--recovery-record', type=Path, default=BASE / 'coordination/recovery.json')
     parser.add_argument('--case-clock-record', type=Path, default=BASE / 'coordination/lkey-closed-clock.json')
@@ -103,6 +117,8 @@ def main():
     args = parser.parse_args()
     perf, candidate_dir = local(args.performance_directory), local(args.candidate_source_directory)
     require(perf.is_relative_to(BASE) and candidate_dir.is_relative_to(BASE), 'Follow-up outputs must remain in their own evidence directory')
+    validation_dir = (candidate_dir / args.validation_directory).resolve()
+    require(validation_dir.is_relative_to(candidate_dir), 'Validation receipts escape the candidate directory')
     output = perf / 'readiness.json'
     require(not output.exists() and not (perf / 'window.json').exists(), 'Readiness or official window already exists')
     require(not any(perf.glob('cohort*/*.json')), 'Official measurements already exist')
@@ -200,6 +216,25 @@ def main():
         path = (baseline_checkout / name).resolve()
         require(path.is_relative_to(baseline_checkout) and sha(path) == expected, 'Baseline native input changed: ' + name)
         external_inputs[str(path)] = {'path': str(path), 'sha256': expected, 'bytes': path.stat().st_size}
+    prepared_native_path = local(args.prepared_native_manifest)
+    prepared_native = load(prepared_native_path)
+    prepared_source_observation = load(args.prepared_source_observation)
+    require(prepared_source_observation['schema'] == 'logos-engine.followup-prepared-predecessor-snapshot.v1'
+            and prepared_source_observation['status'] == 'prepared_source_snapshot_only'
+            and prepared_source_observation['predecessorLane'] == '6A'
+            and prepared_source_observation['sourceStableBeforeAndAfterCapture'] is True,
+            'Prepared6A source observation is missing or not a stable snapshot')
+    require(prepared_native == baseline
+            and prepared_source_observation['frozenNativeDigest'] == baseline['digest'] == publication['nativeDigest']
+            and prepared_source_observation['nativeFileCount'] == baseline['fileCount']
+            and prepared_source_observation['nativeVersion'] == publication['nativeVersion']
+            and prepared_source_observation['sourceFreeze']['sha256'] == fp(prepared_native_path)['sha256'],
+            'Actual published baseline native source differs from the exact prepared6A source integrated and tested by this candidate')
+    prepared_freeze_name = prepared_source_observation['sourceFreeze']['path']
+    published_native_manifest_bytes = subprocess.check_output(
+        ['git', 'show', publication['commit'] + ':' + prepared_freeze_name], cwd=baseline_checkout)
+    require(published_native_manifest_bytes == prepared_native_path.read_bytes(),
+            'Prepared6A native manifest is not the exact freeze tracked by its actual published commit')
 
     recovery = load(args.recovery_record)
     require(recovery['unpublishedSourceRecovered'] is False and recovery['unpublishedRawProofsRecovered'] is False
@@ -210,9 +245,30 @@ def main():
     require(math.isclose(clock['cumulativeSeconds'], 2390.347106991, abs_tol=1e-9, rel_tol=0)
             and math.isclose(clock['remainingSeconds'], 9.652893009, abs_tol=1e-8, rel_tol=0), 'Cumulative LKEY budget changed or reset')
 
+    validation_retry_path = BASE / 'tools/validation-retry-amendment.json'
+    validation_retry = load(validation_retry_path)
+    require(validation_retry['schema'] == 'logos-engine.followup-validation-retry-amendment.v1'
+            and validation_retry['after'] == fp(Path(__file__))
+            and validation_retry['beforeAnyOfficialCost'] is True
+            and validation_retry['beforeAnyFunctionalCostCapture'] is True
+            and validation_retry['nativeSourceManifestDigest'] == digest
+            and validation_retry['selectedValidationDirectory'] == validation_dir.relative_to(candidate_dir).as_posix(),
+            'Validation retry amendment does not identify this helper, source or selected receipt directory')
+    checked(validation_retry['beforeRetainedCopy'])
+    require(validation_retry['beforeRetainedCopy']['sha256'] == validation_retry['before']['sha256'],
+            'The audited pre-retry helper bytes were not retained exactly')
+    checked(validation_retry['historicalReview'])
+    failed_tests = load(checked(validation_retry['failedValidationReceipt']))
+    require(failed_tests['schema'] == 'logos-engine.native-delta-verification.v1'
+            and failed_tests['status'] == 'failed' and failed_tests['nativeSource'] == candidate
+            and failed_tests['nativeSourceUnchanged'] is True
+            and failed_tests['sourceAndTestInputsUnchanged'] is True
+            and failed_tests['checks'][0]['counts'] == validation_retry['failedCounts'],
+            'The preserved first validation failure differs or used another native source')
+    checked(failed_tests['checks'][0]['output'])
     scope = load(args.test_scope_plan)
-    tests = load(candidate_dir / 'validation/delta-tests-run.json')
-    checks = load(candidate_dir / 'validation/checks-run.json')
+    tests = load(validation_dir / 'delta-tests-run.json')
+    checks = load(validation_dir / 'checks-run.json')
     for value, names in [(tests, ['delta-tests']), (checks, GATES)]:
         require(value['schema'] == 'logos-engine.native-delta-verification.v1' and value['status'] == 'passed'
                 and value['nativeSource'] == candidate and value['nativeSourceManifestDigest'] == digest
@@ -223,6 +279,17 @@ def main():
             require(row['exitCode'] == 0, 'A formal verification failed')
             checked(row['output'])
     test_files = tests['testFiles']
+    require(test_files == failed_tests['testFiles'], 'Validation retry must preserve the exact full test-file scope')
+    before_test_inputs, after_test_inputs = failed_tests['sourceAndTestInputs'], tests['sourceAndTestInputs']
+    require(set(before_test_inputs) == set(after_test_inputs), 'Validation retry changed source/test inventory membership')
+    changed_test_inputs = {name for name in before_test_inputs if before_test_inputs[name] != after_test_inputs[name]}
+    expected_test_changes = validation_retry['correctedTestFiles']
+    require(changed_test_inputs == set(expected_test_changes)
+            == {'tests/v6-coupled-pair-planning.test.ts', 'tests/v6-radial-port-integration.test.ts'},
+            'Validation retry must change only the two declared stale registry assertions')
+    for name, change in expected_test_changes.items():
+        require(before_test_inputs[name] == change['beforeSha256'] and after_test_inputs[name] == change['afterSha256'],
+                'Corrected test bytes differ from the declared predecessor checkpoint: ' + name)
     require(scope['testFiles'] == test_files and scope.get('nativeSourceManifestDigest', scope.get('frozenDigest')) == digest,
             'Formal tests differ from the prospective source-bound scope')
     require(instant(scope['declaredAt']) <= instant(tests['checks'][0]['startedAt']), 'Test scope was not declared before formal execution')
@@ -247,6 +314,7 @@ def main():
     require(set(checks['buildInputs']) == input_names(('src', 'public', 'content'), BUILD_EXTRAS), 'Build input membership changed')
     checked_map(checks['buildInputs'], 'Build')
     counts = tests['checks'][0]['counts']
+    require(counts['tests'] == failed_tests['checks'][0]['counts']['tests'], 'Validation retry changed the number of executed tests')
     require(set(counts) == COUNT_KEYS and all(type(n) is int and n >= 0 for n in counts.values())
             and counts['tests'] == counts['pass'] > 0 and all(counts[k] == 0 for k in COUNT_KEYS - {'tests', 'pass'})
             and tests['checks'][0]['tapSummaryComplete'] is True, 'Fresh TAP summary is not a full pass')
@@ -262,9 +330,9 @@ def main():
     require(regression['schema'] == 'logos-engine.recorded-public-regressions.v1' and regression['status'] == 'passed'
             and regression['nativeSource'] == regression['nativeSourceAfter'] == candidate
             and regression['executionInputsUnchanged'] is True and regression['maximumConcurrentReplays'] == 1
-            and regression['passed'] == regression['total'] == len(regression['results']) == 10
-            and regression['comparisonChecksPassed'] == regression['comparisonChecksExpected'] == 170,
-            'Ten fresh strict public regressions are incomplete')
+            and regression['passed'] == regression['total'] == len(regression['results']) == REGRESSION_COUNT
+            and regression['comparisonChecksPassed'] == regression['comparisonChecksExpected'] == REGRESSION_CHECKS,
+            'Eleven fresh strict public regressions are incomplete')
     regression_manifest = load(checked(regression['caseManifest']))
     expected_regression_inputs = REGRESSION_TOOLS | {regression['caseManifest']['path'], declaration['candidateManifest']['path']}
     require(set(regression['executionInputs']) == expected_regression_inputs
@@ -273,7 +341,57 @@ def main():
     require([row['game'] for row in regression_manifest['cases']] == REGRESSION_GAMES,
             'Regression declaration changed or includes the closed case')
     inherited_manifest = load(ROOT / 'docs/migration/lot5b-evidence/integrated-final/regression-cases.json')
-    require(regression_manifest['cases'] == inherited_manifest['cases'], 'Historical public regression inputs must remain exact')
+    require([row['game'] for row in inherited_manifest['cases']] == INHERITED_REGRESSION_GAMES
+            and regression_manifest['cases'][:10] == inherited_manifest['cases'],
+            'The ten published Site95 public regression inputs must remain exact')
+    prepared_regression_path = local(args.prepared_regression_manifest)
+    prepared_regression = load(prepared_regression_path)
+    amendment_path = BASE / 'tools/readiness-scope-amendment.json'
+    amendment = load(amendment_path)
+    require(amendment['schema'] == 'logos-engine.followup-readiness-scope-amendment.v1'
+            and amendment['beforeAnyOwnRegression'] is True and amendment['beforeAnyOfficialCost'] is True
+            and amendment['after'] == validation_retry['before']
+            and amendment['after']['sha256'] != amendment['before']['sha256'],
+            'Prospective eleven-case readiness amendment is missing or identifies another helper')
+    require(validation_retry['priorScopeAmendment'] == fp(amendment_path)
+            and instant(amendment['recordedAt']) <= instant(validation_retry['recordedAt']),
+            'Validation retry does not preserve the original eleven-case amendment chain')
+    require(amendment['prepared6aRegressionManifest']['retainedCopy'] == fp(prepared_regression_path),
+            'Retained prepared6A declaration differs from the prospective amendment')
+    checked(amendment['historicalReview'])
+    require(prepared_regression['schema'] == regression_manifest['schema'] == 'logos-engine.recorded-public-regression-cases.v1'
+            and regression_manifest['cases'] == prepared_regression['cases']
+            and prepared_regression['cases'][-1]['id'] == 'kata-060-self-consistency'
+            and prepared_regression['cases'][-1]['game'] == 'KATA'
+            and prepared_regression['cases'][-1]['comparisonBasis'] == 'fresh_current_native_self_consistency',
+            'KATA must preserve the exact prepared6A public trajectory and its qualified comparison basis')
+    baseline_regression_path = local(args.baseline_regression_manifest)
+    baseline_regression = load(baseline_regression_path)
+    require(baseline_regression['schema'] == prepared_regression['schema']
+            and baseline_regression['cases'] == regression_manifest['cases'] == prepared_regression['cases'],
+            'Actual published baseline regression declaration differs from the prepared and replayed eleven cases')
+    baseline_regression_name = baseline_regression_path.relative_to(ROOT).as_posix()
+    baseline_regression_actual = (baseline_checkout / baseline_regression_name).resolve()
+    require(baseline_regression_actual.is_relative_to(baseline_checkout)
+            and baseline_regression_actual.read_bytes() == baseline_regression_path.read_bytes(),
+            'Retained baseline regression declaration differs from actual baseline checkout bytes')
+    published_regression_bytes = subprocess.check_output(
+        ['git', 'show', publication['commit'] + ':' + baseline_regression_name], cwd=baseline_checkout)
+    require(published_regression_bytes == baseline_regression_path.read_bytes(),
+            'Baseline regression declaration is not the exact file tracked by its actual published commit')
+    external_inputs[str(baseline_regression_actual)] = {
+        'path': str(baseline_regression_actual), 'sha256': sha(baseline_regression_actual),
+        'bytes': baseline_regression_actual.stat().st_size}
+    for value in (regression_manifest, prepared_regression, baseline_regression):
+        require(value['expectedChecksPerCase'] == 17 and value['expectedComparisonChecks'] == REGRESSION_CHECKS
+                and value['strictComparator'] == inherited_manifest['strictComparator']
+                and value['strictComparisonCheckNames'] == inherited_manifest['strictComparisonCheckNames']
+                and value['passiveOwnerRequirements'] == inherited_manifest['passiveOwnerRequirements'],
+                'Eleven-case extension must preserve all seventeen strict comparisons without exemptions')
+    first_regression_start = min(instant(row['startedAt']) for row in regression['results'])
+    require(instant(amendment['recordedAt']) <= first_regression_start
+            and instant(regression_manifest['declaredAt']) <= first_regression_start,
+            'The eleven-case scope and helper amendment must precede every fresh regression execution')
     require([row['game'] for row in regression['results']] == REGRESSION_GAMES
             and [row['case'] for row in regression['results']] == [row['id'] for row in regression_manifest['cases']],
             'Fresh regression results omit, duplicate or reorder a declared case')
@@ -296,9 +414,13 @@ def main():
     integrity = load(candidate_dir / 'delivery-integrity.json')
     require(integrity['schema'] == 'logos-engine.native-delivery-integrity.v1' and integrity['status'] == 'passed'
             and integrity['nativeSourceDigest'] == digest and integrity['tests'] == counts
+            and integrity['validationDirectory'] == validation_dir.relative_to(ROOT).as_posix()
             and integrity['originalSourceFilesUnchanged'] == 1786
-            and integrity['regressions']['passed'] == 10 and integrity['regressions']['comparisonChecksPassed'] == 170,
+            and integrity['regressions']['passed'] == REGRESSION_COUNT
+            and integrity['regressions']['comparisonChecksPassed'] == REGRESSION_CHECKS,
             'Final delivery integrity does not bind all fresh evidence')
+    require(all(fp(validation_dir / name) in integrity['receipts'] for name in ('delta-tests-run.json', 'checks-run.json')),
+            'Delivery integrity does not bind the exact selected validation attempt receipts')
     for record in [integrity['generator'], *integrity['verificationHelpers'], *integrity['receipts']]:
         checked(record)
     original_manifest_path = checked(integrity['originalSourceManifest'])
@@ -326,6 +448,8 @@ def main():
             and work_declaration['comparison'] == forms['comparison']
             and instant(work_declaration['declaredAt']) <= instant(forms['startedAt']) <= instant(forms['finishedAt']),
             'Work-form declaration does not precede the matching capture')
+    require(instant(validation_retry['recordedAt']) <= instant(forms['startedAt']),
+            'Validation receipt selection must be declared before the functional cost capture')
     expected_forms = [('STCK', True, 3), ('STCK', False, 10), ('SMLP', True, 3), ('SMLP', False, 15)]
     require([(row['case'], row['warmup'], row['actions']) for row in forms['forms']] == expected_forms, 'Missing exact warmup/full work forms')
     for form in forms['forms']:
@@ -383,9 +507,13 @@ def main():
         'finalizedAt': finalized.isoformat(), 'measurementAuthorized': True, 'pendingRequirements': [],
         'generator': fp(Path(__file__)), 'nativeVersion': policy['candidate']['nativeVersion'], 'nativeSourceDigest': digest,
         'baseline': policy['baseline'], 'candidate': policy['candidate'], 'nativeChanges': sorted(changes),
-        'formalTests': counts, 'formalTestFiles': len(test_files), 'regressionChecks': 170,
+        'formalTests': counts, 'formalTestFiles': len(test_files), 'regressionChecks': REGRESSION_CHECKS,
+        'validationDirectory': validation_dir.relative_to(ROOT).as_posix(), 'validationRetryAmendment': fp(validation_retry_path),
+        'regressionScopeAmendment': fp(amendment_path), 'preparedRegressionManifest': fp(prepared_regression_path),
+        'baselineRegressionManifest': fp(baseline_regression_path),
+        'preparedNativeManifest': fp(prepared_native_path), 'preparedSourceObservation': fp(args.prepared_source_observation),
         'strictWorkForms': fp(forms_path), 'strictPostWindowVerifier': fp(BASE / 'tools/verify-strict-cost-forms.mjs'),
-        'functionalScope': 'Fresh generic synthetic Workshop/current-caller contracts plus inherited safe tests and ten strict public regressions.',
+        'functionalScope': 'Fresh generic synthetic Workshop/current-caller contracts plus inherited safe tests and eleven strict public regressions, including the exact new6A KATA public trajectory.',
         'closedCase': clock, 'recoveryDisclosure': recovery,
         'reserves': ['Unpublished pre-replacement source and raw evidence were not recovered; historical chat observations are not proof of these bytes.',
                      'No fresh LKEY action, replay, oracle, fixture payload analysis, browser proof or complete original-caller parity is claimed.',
@@ -398,7 +526,7 @@ def main():
         json.dump(result, stream, indent=2, ensure_ascii=False, allow_nan=False)
         stream.write('\n')
     print(json.dumps({'status': result['status'], 'output': output.relative_to(ROOT).as_posix(),
-                      'testFiles': len(test_files), 'tests': counts['pass'], 'regressionChecks': 170,
+                      'testFiles': len(test_files), 'tests': counts['pass'], 'regressionChecks': REGRESSION_CHECKS,
                       'functionalSessions': 8, 'measurementExecuted': False}))
 
 
