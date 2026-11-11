@@ -1,0 +1,54 @@
+{
+  "schema": "logos-engine.lot8a.functional-plan-independent-review.v1",
+  "status": "passed_source_review_before_execution",
+  "recordedAt": "2026-11-11T21:04:54.573623+00:00",
+  "reviewer": "/root/audit_recovery_release",
+  "provenance": "Independent bounded read-only agent review recorded by root; no functional execution is implied.",
+  "plan": {
+    "path": "docs/migration/lot8a-evidence/qualification-provisional-01/contract/capture-regression-plan.json",
+    "sha256": "de60bc3c2b0196826a7ead64e366af18b5fb59bf0c5b01324275342f17293a92",
+    "bytes": 32447
+  },
+  "runner": {
+    "path": "docs/migration/lot8a-evidence/tools/qualify-composition.py",
+    "sha256": "998714cb34bf6ff01951429f50c21b9226cabb9b63e93e7edd67008bae4850e3",
+    "bytes": 23792
+  },
+  "freeze": {
+    "path": "docs/migration/lot8a-evidence/qualification-provisional-01/contract/input-freeze.json",
+    "sha256": "072b5e52b1dc24a74c7bd2d19d0e6850191441b38005d884d3dc395e180225d4",
+    "bytes": 564572
+  },
+  "canonicalNativeManifest": {
+    "path": "docs/migration/lot8a-evidence/qualification-provisional-01/contract/source-manifest.json",
+    "sha256": "325268f8cd80b67996ab2d4a05df5203247257bc603f1cf29f63f0d9165d7167",
+    "bytes": 38477
+  },
+  "blockingFindings": [],
+  "priorFindingsClosedBeforeExecution": [
+    {
+      "runnerSha": "d9df806cc8fdc9e17bc374b156921f184f0aefd0da74631c94d9c7dad5cbc3dd",
+      "finding": "Missing SIGTERM handler could bypass process-group cleanup.",
+      "resolution": "SIGINT/SIGTERM controlled handling, deferred raise through Popen, groupTERM/KILL/reap and retained signal receipt verified in corrected998714cb runner.",
+      "executionsUnderPriorRunner": 0
+    },
+    {
+      "finding": "Inherited documentary native manifest carried schema/qualification keys incompatible with strict native_source equality.",
+      "resolution": "Document preserved byte-exact; canonical projection retained separately with identical324-file map/digest and frozen inventory equality.",
+      "executionsUnderIncompatibleManifest": 0
+    }
+  ],
+  "verified": [
+    "Exact705d5c7 parent and145-file5606-test five-gate summary required.",
+    "Complete freeze equals before/after tests and each of five prior gates; native324/936 unchanged.",
+    "Eight stages and33 input files match declared commands/executables, new output paths and allowed environment.",
+    "Four independent Binding sinks, cold SelectedRigid five-return passive instrumentation, Motif capture counts/restore, and11/187 strict recorded regressions.",
+    "One stage per explicit invocation, no automatic retry, shared existing mutex and one native qualification at a time."
+  ],
+  "limits": [
+    "Capture plan launches no new original oracle; independent comparisons need a later plan that pins actual capture bytes.",
+    "Motif complete state/value review remains a separate stage.",
+    "Empty passive-owner requirements do not establish three-owner graph/state parity; historical17 projections remain strict.",
+    "Prepared5C/6B only; no final0.65,cost or publication acceptance."
+  ]
+}

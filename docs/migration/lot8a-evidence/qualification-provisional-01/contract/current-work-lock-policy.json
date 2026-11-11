@@ -1,0 +1,26 @@
+{
+  "schema": "logos-engine.current-work-lock-policy.v1",
+  "effectiveAt": "2026-11-11T21:18:24.372336+00:00",
+  "authority": "Explicit user instruction in current conversation",
+  "scope": "ARC-3-AGENT lot8A current work in its own checkout and branch",
+  "ordinaryWork": {
+    "development": "no_global_lock",
+    "functionalTests": "no_global_lock",
+    "commits": "no_global_lock",
+    "pushes": "no_global_lock",
+    "waitForOtherLotPublication": false,
+    "quietRequestsAreNotOrdinaryWorkGates": true
+  },
+  "exclusiveWork": {
+    "officialPerformanceMeasurements": "short_bounded_exclusive_window",
+    "sitePublication": "short_bounded_exclusive_window",
+    "releaseOwnedHandlesInFinally": true,
+    "deleteOrReplaceHeldLockFile": false
+  },
+  "checkout": "/workspace/sites/sra-lot8a-motif-20261111/.sites-checkout",
+  "localBranch": "lot8a-integrated-20261111",
+  "remoteBranch": "lot8a-motif-checkpoint-20261111",
+  "publicationDependencies": "Actual predecessor publication remains necessary for final publication and official cost reference; it does not gate ordinary work or source backups.",
+  "historicalEvidence": "Previously executed wrappers, plans, failures and receipts remain immutable. New plans and tools apply this policy prospectively.",
+  "performanceAcceptance": "Complete-session pooled median strictly below +10 percent independently for STCK and SMLP; phase increases above +10 percent may pass when both game-level global criteria pass; retain all samples and phase/cohort diagnostics."
+}

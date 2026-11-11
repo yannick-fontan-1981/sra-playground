@@ -1,5 +1,15 @@
 # Feuille de route V5/V6 vers Logos Engine TypeScript
 
+<!-- CURRENT_WORK_POLICY_START -->
+
+## Règle de travail courant actualisée
+
+À la demande explicite de l’utilisateur, **développement, tests fonctionnels, commits et push se poursuivent sans verrou global**, dans le checkout et la branche propres au lot. Ils n’attendent pas la publication des autres lots. Les sauvegardes distantes sont faites par commits cohérents et vérifiées.
+
+Une **exclusivité courte et bornée** reste réservée aux mesures officielles de performance et à la publication. Chaque détenteur libère ses propres handles ; aucun fichier de verrou encore détenu n’est supprimé ni remplacé. Les anciens plans et reçus restent historiques et immuables ; les nouvelles exécutions suivent la [politique explicite](lot8a-evidence/qualification-provisional-01/contract/current-work-lock-policy.json). Les prédécesseurs réellement publiés restent nécessaires à la référence de coût et à la livraison finale, sans bloquer l’avancement courant.
+
+<!-- CURRENT_WORK_POLICY_END -->
+
 <!-- LOT8A_INTEGRATION_START -->
 
 ## Jalon composé 8A validé ; qualification finale encore ouverte

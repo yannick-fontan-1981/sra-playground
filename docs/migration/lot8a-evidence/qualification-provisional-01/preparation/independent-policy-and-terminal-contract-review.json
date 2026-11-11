@@ -1,0 +1,66 @@
+{
+  "schema": "logos-engine.lot8a.independent-prospective-review.v1",
+  "recordedAt": "2026-11-11T21:21:57.090279+00:00",
+  "reviewer": "/root/audit_recovery_release",
+  "rootReview": true,
+  "scope": "Static prospective review; no runtime/oracle/replay was executed by the reviewer. Root had separately completed Motif review and Binding exports while review proceeded.",
+  "status": "passed_static_review_runtime_results_separate",
+  "files": [
+    {
+      "path": "docs/migration/lot8a-evidence/tools/qualify-composition-v2.py",
+      "sha256": "f7ad2afe5a7c80c08aa23497f2f53224413cf76e5c7a215baadd842c7f3516ed",
+      "bytes": 24513
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/tools/push-source-checkpoint.py",
+      "sha256": "79cbf12486949c54600d1127eb36e1b1d58a2a01d7007f6288a816d7c2e6fefe",
+      "bytes": 18636
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/tools/export-selected-rigid-synthetic-common-v3.mjs",
+      "sha256": "e0145fcd95011cfcd4e1a86a2a81996cbb76454b9496ad30c9cecf23f1f29cd7",
+      "bytes": 21161
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/tools/compare-selected-rigid-synthetic-terminal-parity.py",
+      "sha256": "d464b7c3ace185230ef16d49a449247004ff6ee64466f2dced350ffd903fe579",
+      "bytes": 51706
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-01/contract/current-work-lock-policy.json",
+      "sha256": "95d81233c9a267fc07df4ded2f764c059b47c1498bb369955e2cb5fcc2587914",
+      "bytes": 1522
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-01/contract/original-export-and-motif-review-plan-v2.json",
+      "sha256": "e783709cd13ede63c8989d9033b5f19a87bb8289af6cf70ffa5536e1e02efbb7",
+      "bytes": 30263
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-01/contract/recorded-regression-plan-v2.json",
+      "sha256": "02a31d2eefce7aefd4849b39820b3544fd8e07c9fa6a99242bf99f8f946c14d0",
+      "bytes": 14185
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/qualification-provisional-01/contract/selected-rigid-capture-02-plan.json",
+      "sha256": "d8a670b2c516de98969b048b63aff93118691f89cb1f1935c979c5b296960ed0",
+      "bytes": 17146
+    }
+  ],
+  "findings": [
+    "Functional wrapper removes global mutex and quiet blocking only; deadlines, signals, exact inventory/pins, semantics and new outputs retained.",
+    "Original-export/Motif and regression stage payloads match prior plans exactly. No old plan or executed tool changed.",
+    "Push helper has no global lock or quiet requirement. Hidden credential, no-force, committed HEAD, clean tree, exact remote verification retained.",
+    "Prospective push signal cleanup corrected before first use; child assignment is covered, signal deferred until known PID, cleanup ignores repeat signals and reaps own process group.",
+    "SelectedRigid cold interpreter, sealed-prefix checks and ablations preserved. Terminal observation partitions the full journal contiguously, with zero acquisition/return and independent state, context, common-store, offer, command, guard and six-model checks.",
+    "No new normalization, state seed, fake prefix, extended prefix cursor or removed event.",
+    "Initial SelectedRigid capture failure and blocked unexecutedv2 remain preserved."
+  ],
+  "limitations": [
+    "Static review is not executed functional proof.",
+    "Selected capture and cold comparison must remain separate and bind actual captured bytes.",
+    "Ordinary elapsed times cannot qualify official performance."
+  ],
+  "reviewerLastReport": "All review commands terminal; TOOL-IDLE.",
+  "rootOnlyReviewedPlan": "selected-rigid-capture-02-plan.json was constructed and reviewed by root after the independent tool review; no independent review of that plan is claimed."
+}
