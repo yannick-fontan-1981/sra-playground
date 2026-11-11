@@ -1,0 +1,11 @@
+{
+  "schema": "logos-engine.lot10b.predecessor-acceptance-import.v1",
+  "recordedAt": "2026-11-11T15:38:08.298561+00:00",
+  "sourcePath": "/workspace/sites/sra-lot7-followup-recovery-20261111/.sites-checkout/docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/isolation-revalidation.json",
+  "copyPath": "docs/migration/lot10b-evidence/recovery-20261111/published7-integration-01/predecessor-clean-repeat-acceptance.json",
+  "sha256": "028711ca50c8461f700c43cdaea02d1ac38190a669698621c903314b4b3777b0",
+  "bytes": 722134,
+  "byteIdentical": true,
+  "status": "accepted_from_complete_clean_repeat",
+  "qualification": "Byte-identical import of the real predecessor clean-repeat acceptance receipt after explicit functional release. Its complete linked evidence and terminal documentation source still await Git reconciliation. No rerun, relabelling or claim of independent full validation of the predecessor is introduced."
+}

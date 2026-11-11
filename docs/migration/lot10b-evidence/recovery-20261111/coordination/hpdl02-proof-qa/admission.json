@@ -1,0 +1,51 @@
+{
+  "schema": "logos-engine.functional-proof-coordination.v1",
+  "recordedAt": "2026-11-11T16:07:34.169506+00:00",
+  "requestId": "lot10b-hpdl02-proof-qa",
+  "scope": "Browser controls planned180s, then original comparison at most300s; same cumulative HPDL clock; no new CLI campaign and no cost timing.",
+  "mode": "shared_functional_proof",
+  "completeCrossLaneQuietEstablished": false,
+  "qualification": "5C and8A expressly idle.6B source-only closure is still announced active after its bounded release; its fresh terminal acknowledgment has not been received. No claim of isolated cost measurement or complete cross-lane quiet is made. Browser controls can be checked under the shared functional lock; any pending original comparison is separately admitted.",
+  "snapshots": [
+    {
+      "laneStatus": "lot5c-status.json",
+      "updatedAt": "2026-11-11T16:06:50.765681+00:00",
+      "activeCommand": null,
+      "snapshot": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/coordination/hpdl02-proof-qa/lot5c-status.json",
+        "bytes": 6994,
+        "sha256": "0c33c7b01cddf1eda09252254a02b48b316f5e36c28561c06fc3a4911d89b3e1"
+      }
+    },
+    {
+      "laneStatus": "lot6b-status.json",
+      "updatedAt": "2026-11-11T16:07:00.581117+00:00",
+      "activeCommand": null,
+      "snapshot": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/coordination/hpdl02-proof-qa/lot6b-status.json",
+        "bytes": 3922,
+        "sha256": "fb9ad663b18ce1d4ee781602c4ad534566ece38c1e98d7fcdf0f8e1324b41a95"
+      }
+    },
+    {
+      "laneStatus": "lot7-followup-status.json",
+      "updatedAt": "2026-11-11T16:03:36.401083+00:00",
+      "activeCommand": null,
+      "snapshot": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/coordination/hpdl02-proof-qa/lot7-followup-status.json",
+        "bytes": 16967,
+        "sha256": "bda1a1127d6379f5d1729df6c8d823def0bf4f36a3de6c2a8f04f3b8f4f94446"
+      }
+    },
+    {
+      "laneStatus": "lot8a-status.json",
+      "updatedAt": "2026-11-11T16:03:36.401083+00:00",
+      "activeCommand": null,
+      "snapshot": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/coordination/hpdl02-proof-qa/lot8a-status.json",
+        "bytes": 2588,
+        "sha256": "2a016a3bb6b08777a54d719e464394fe710bcc771767d22cbd03c8ff112c95cc"
+      }
+    }
+  ]
+}

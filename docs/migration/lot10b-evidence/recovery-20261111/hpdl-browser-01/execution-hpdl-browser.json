@@ -1,0 +1,94 @@
+{
+  "schema": "logos-engine.lot10b.hpdl-browser-execution.v1",
+  "attemptId": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-browser-01",
+  "game": "HPDL",
+  "kind": "browser_qa",
+  "startedAt": "2026-11-11T16:07:34.525677+00:00",
+  "captureFinishedAt": "2026-11-11T16:10:24.133737+00:00",
+  "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+  "holder": {
+    "pid": 2,
+    "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+    "processStartTicks": "1569897",
+    "pidNamespace": "pid:[4026532546]"
+  },
+  "monotonicStartedNs": "15698993447805",
+  "monotonicCaptureStoppedNs": "15868601495699",
+  "elapsedSecondsThroughCapture": 169.608047894,
+  "plannedIntervalSeconds": 180.0,
+  "elapsedPastDeclaredIntervalSeconds": 0.0,
+  "priorCumulativeSeconds": 1581.2934951409916,
+  "remainingBeforeSeconds": 818.7065048590083,
+  "beginReceipt": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-browser-01/browser-begin.json",
+    "sha256": "1f1ec38fb0a657f9b7033fabf4dcd8336127c3d413c349e3b75de33710ff5c52",
+    "bytes": 1972
+  },
+  "endRequest": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-browser-01/browser-end-request-b96d6324d5b34d0db17bd285334f3faa.json",
+    "sha256": "fc265e60766389b3ca4dde0c43ba90d6c84f3b4e8e9543f5a38db34d0a9f9389",
+    "bytes": 2203
+  },
+  "clockClosureExecutedByOriginalHolder": true,
+  "holderIdentityScope": "Verified locally inside the original holder PID namespace; no external PID lookup",
+  "executionInputs": {
+    "browserClockHelper": {
+      "path": "docs/migration/lot10b-evidence/browser-hpdl-clock.py",
+      "sha256": "d66acf82d4de25e9e5208957d750178f4dc0da9b65e727cda71e6e6d22debc2c",
+      "bytes": 34611
+    },
+    "cumulativeClockReader": {
+      "path": "docs/migration/lot10b-evidence/run-hpdl-clocked-proof.py",
+      "sha256": "e959e8d9b7ed5875bc9843393aeae44586674229fccb951279097c4c75195971",
+      "bytes": 36304
+    }
+  },
+  "executionInputsAfter": {
+    "browserClockHelper": {
+      "path": "docs/migration/lot10b-evidence/browser-hpdl-clock.py",
+      "sha256": "d66acf82d4de25e9e5208957d750178f4dc0da9b65e727cda71e6e6d22debc2c",
+      "bytes": 34611
+    },
+    "cumulativeClockReader": {
+      "path": "docs/migration/lot10b-evidence/run-hpdl-clocked-proof.py",
+      "sha256": "e959e8d9b7ed5875bc9843393aeae44586674229fccb951279097c4c75195971",
+      "bytes": 36304
+    }
+  },
+  "observation": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-browser-01/observed-cua.json",
+    "sha256": "f89365b6f5e705c6b0eaecf9e56b35ef45a3a3e69dcacb286c8512bedeae3333",
+    "bytes": 65311
+  },
+  "artifacts": [
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-browser-01/observed-cua.json",
+      "sha256": "f89365b6f5e705c6b0eaecf9e56b35ef45a3a3e69dcacb286c8512bedeae3333",
+      "bytes": 65311
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-browser-01/hpdl-paused.png",
+      "sha256": "1046bd19258b87e66ef1097919175bcd3990fc25a508e89c42ba05f7fbaeca44",
+      "bytes": 66459
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-browser-01/hpdl-one-action.png",
+      "sha256": "b3296b2958dc35de61ebd44fb5bbbbe36980691adf02e09dc45818a026d3c277",
+      "bytes": 66316
+    }
+  ],
+  "artifactsVerifiedUnchanged": true,
+  "reportedObservation": {
+    "actionsDuringInterval": 7,
+    "levelsCompletedAtEnd": 1,
+    "actionsKnown": true,
+    "levelsKnown": true,
+    "provenance": "Explicit operator declaration from the retained actual CUA observation; unknown remains null.",
+    "countsAutomaticallyInferred": false
+  },
+  "endReason": "qa_finished",
+  "browserStopAutomaticallyEnforced": false,
+  "campaignStatus": null,
+  "campaignPassedEstablished": false,
+  "qualification": "This closes one observed browser QA interval in the existing shared HPDL clock. All monotone time, including pauses, debugging and capture, is charged. No action, level, game result or new host is invented. The operator supplies actual CUA counts or unknown. A missed declared deadline does not establish game failure. Receipt writing and hashing are additionally charged before the atomic terminal ledger update."
+}

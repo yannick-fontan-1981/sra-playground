@@ -202,12 +202,140 @@
       "observedActions": null,
       "observedLevelsCompleted": null,
       "completeActionCountEstablished": false
+    },
+    {
+      "attemptId": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-02",
+      "status": "terminal",
+      "game": "HPDL",
+      "targetLevels": 6,
+      "startedAt": "2026-11-11T15:51:56.417519+00:00",
+      "admittedAt": "2026-11-11T15:51:56.456216+00:00",
+      "priorCumulativeSeconds": 1263.3446460859916,
+      "remainingBeforeSeconds": 1136.6553539140084,
+      "activityCeilingSeconds": 300.0,
+      "terminationMarginSeconds": 0.5,
+      "retentionReserveSeconds": 30.0,
+      "performanceLockMode": "exclusive_functional",
+      "sourceManifestPath": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/source-manifest.json",
+      "chargedSeconds": 317.948849055,
+      "qualification": "Every measured second is charged, including failure, timeout and retention; no refund or truncation.",
+      "finishedAt": "2026-11-11T15:57:14.366376+00:00",
+      "attemptOutcome": "activity_timeout",
+      "childExitCode": -9,
+      "campaignStatus": null,
+      "campaignPassedEstablished": false,
+      "observedActionReturns": 39,
+      "completeActionCountEstablished": false,
+      "executionReceipt": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-02/execution-hpdl.json",
+        "sha256": "53eaaaa9277dc36fac5d699c3d2fca17da0197418a5eff9aebdf8cab18286675",
+        "bytes": 11611
+      },
+      "retentionSecondsAfterChild": 18.379304725999987
+    },
+    {
+      "attemptId": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-browser-01",
+      "kind": "browser_qa",
+      "game": "HPDL",
+      "status": "terminal",
+      "startedAt": "2026-11-11T16:07:34.525677+00:00",
+      "admittedAt": "2026-11-11T16:07:34.564548+00:00",
+      "priorCumulativeSeconds": 1581.2934951409916,
+      "remainingBeforeSeconds": 818.7065048590083,
+      "plannedIntervalSeconds": 180.0,
+      "chargedSeconds": 169.609669038,
+      "holder": {
+        "pid": 2,
+        "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+        "processStartTicks": "1569897",
+        "pidNamespace": "pid:[4026532546]"
+      },
+      "beginReceipt": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-browser-01/browser-begin.json",
+        "sha256": "1f1ec38fb0a657f9b7033fabf4dcd8336127c3d413c349e3b75de33710ff5c52",
+        "bytes": 1972
+      },
+      "qualification": "The whole same-boot monotone interval is debited without refund. CUA counts are declared observations, not synthetic game events or an automatically established completion.",
+      "finishedAt": "2026-11-11T16:10:24.135362+00:00",
+      "monotonicChargeStoppedNs": "15868603116843",
+      "attemptOutcome": "browser_interval_closed",
+      "endReason": "qa_finished",
+      "elapsedPastDeclaredIntervalSeconds": 0.0,
+      "campaignStatus": null,
+      "campaignPassedEstablished": false,
+      "observedActionsDeclaredFromCUA": 7,
+      "observedLevelsCompletedDeclaredFromCUA": 1,
+      "completeActionCountEstablished": false,
+      "executionReceipt": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-browser-01/execution-hpdl-browser.json",
+        "sha256": "6a3084fb460e4fc18c30096a889511dc93a54d3be40738fcca88c96092482b4a",
+        "bytes": 4197
+      }
+    },
+    {
+      "attemptId": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after02/clocked-diagnostic-01",
+      "status": "terminal",
+      "kind": "case_diagnostic",
+      "game": "HPDL",
+      "startedAt": "2026-11-11T16:11:30.024323+00:00",
+      "admittedAt": "2026-11-11T16:11:30.078249+00:00",
+      "monotonicStartedNs": "15934492093587",
+      "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+      "priorCumulativeSeconds": 1750.9031641789916,
+      "remainingBeforeSeconds": 649.0968358210083,
+      "activityCeilingSeconds": 300.0,
+      "captureReserveSeconds": 30.0,
+      "childActivityCeilingSeconds": 269.5,
+      "terminationMarginSeconds": 0.5,
+      "mode": "parity",
+      "phasePlan": [
+        {
+          "name": "parity",
+          "command": [
+            "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "-B",
+            "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/scripts/compare-window-question-checkpoint-parity.py",
+            "--checkpoint",
+            "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-02/hpdl-checkpoint.json",
+            "--journal",
+            "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-02/hpdl-actual-public-journal.jsonl.gz",
+            "--execution-receipt",
+            "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-02/execution-hpdl.json",
+            "--output",
+            "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after02/clocked-diagnostic-01/window-source-parity.PARTIAL.json.gz"
+          ],
+          "resultPath": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after02/clocked-diagnostic-01/window-source-parity.PARTIAL.json.gz",
+          "logPath": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after02/clocked-diagnostic-01/parity.log"
+        }
+      ],
+      "chargedSeconds": 158.238133855,
+      "requiredConservativeDebit": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/hpdl-conservative-case-work.json",
+        "sha256": "db9ea8ed4f30e2bb6995424bd730cbf870a0637bde754c0c2fa63c90f5091434",
+        "bytes": 3256
+      },
+      "qualification": "Every measured diagnostic second is charged; no game was executed and no prior debit is refunded.",
+      "finishedAt": "2026-11-11T16:14:08.262457+00:00",
+      "monotonicChargeStoppedNs": "16092730227442",
+      "executionReceipt": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after02/clocked-diagnostic-01/execution-hpdl-diagnostic.json",
+        "sha256": "ad0c23fed6bf6fa92de859b175600fbba2bf99607f10b816839e99346acec4b0",
+        "bytes": 14713
+      },
+      "attemptOutcome": "children_returned",
+      "diagnosedExecutionValidated": true,
+      "clockBasis": "same_process_monotonic_elapsed",
+      "monotoneMeasurement": true,
+      "campaignPassedEstablished": false,
+      "observedActions": null,
+      "observedLevelsCompleted": null,
+      "completeActionCountEstablished": false
     }
   ],
-  "cumulativeChargedSeconds": 1263.3446460859916,
-  "remainingSeconds": 1136.6553539140084,
+  "cumulativeChargedSeconds": 1909.1412980339917,
+  "remainingSeconds": 490.85870196600837,
   "budgetExceededSeconds": 0.0,
   "budgetAvailability": "available",
   "qualification": "No fresh HPDL attempt is represented by this initial ledger. Every admitted future interval, including failure, timeout and evidence retention, must be appended and charged. A running entry blocks further admission until its actual outcome is accounted for; it is never silently discarded or refunded. Browser gameplay shares this same 2400-second budget.",
-  "lastUpdatedAt": "2026-11-11T13:48:15.606709+00:00"
+  "lastUpdatedAt": "2026-11-11T16:14:08.262475+00:00"
 }

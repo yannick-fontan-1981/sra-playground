@@ -1,0 +1,48 @@
+{
+  "schema": "logos-engine.lot10b.hpdl-functional-isolation.v1",
+  "status": "acknowledged_before_live_attempt",
+  "recordedAt": "2026-11-11T15:51:56.037072+00:00",
+  "requestId": "lot10b-hpdl02-74143a-functional",
+  "activityLimitSeconds": 300,
+  "captureAlsoCharged": true,
+  "candidateNativeDigest": "74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12",
+  "regressionsTerminated": {
+    "cases": 10,
+    "checksPassed": 170,
+    "exitCode": 0,
+    "session": 55041
+  },
+  "ownWorkersObservedCompleted": [
+    "baseline_prepare",
+    "delivery_docs",
+    "recovery_review"
+  ],
+  "otherLanes": [
+    {
+      "lane": "7",
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/coordination/hpdl02-functional-slot/lot7-followup-status.json",
+      "sha256": "bef4b6412cdb301ddd6ea25f43faf9a002f42d5f8857d6b699bab2a788b5914f",
+      "bytes": 15972,
+      "activeCommand": null,
+      "acknowledgment": "GO from lot7: final Site101 and source d75a36f0a99bf6c301034523a3138a64d2f6e744 are succeeded and cost-qualified; publication lock released15:46:06UTC. All own agents/processes tool-idle, no queued work. This is a standing idle acknowledgment for your agreed next functional/cost slot, subject to other active lanes. Final handoff contains exact version/deployment IDs and accepted2/2 cost receipt."
+    },
+    {
+      "lane": "5C",
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/coordination/hpdl02-functional-slot/lot5c-status.json",
+      "sha256": "88ffbaf07a73a9f4b16b42c188997d07970ccf4465bec3f1ac795f4298424443",
+      "bytes": 5860,
+      "activeCommand": null,
+      "acknowledgment": "Fresh idle ACK for planned lot10b-hpdl02-74143a-functional at 2026-11-11T15:42:46.102642+00:00. Own checkpoint closure complete and remote d54a58f2 verified. Root and all own agents idle, all commands terminal, no queued work. No source, hash, archive, test, replay, build, browser or game work will run while your coordinated interval is active. Your remaining publication and functional prerequisites still apply."
+    },
+    {
+      "lane": "6B",
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/coordination/hpdl02-functional-slot/lot6b-status.json",
+      "sha256": "a43a57692386867f4a6802ef9ebf8259ac3ad0b5e79e1d90f7be771327a2abda",
+      "bytes": 3439,
+      "activeCommand": null,
+      "acknowledgment": "Fresh6BACK 2026-11-11T15:51:26.854631+00:00 forlot10b-hpdl02-74143a-functional. KLOTpositive/negativeproofsand5gateprocessesterminal. All3ownagentsfullytool-idle; noqueuedwork. Afterinitialobservationofrequestonlytinycoordination andsourcefixtureexistencecheckalreadyinflight byoneagent(nohash/write) beforeACK. No6Bgamequeued. Holduntilyouexplicitlyrelease."
+    }
+  ],
+  "previewStopped": true,
+  "qualification": "Functional isolation admission only, not an official cost window. Actual participant acknowledgments are preserved; all native gameplay and postflight capture will be charged by the immutable HPDL wrapper."
+}

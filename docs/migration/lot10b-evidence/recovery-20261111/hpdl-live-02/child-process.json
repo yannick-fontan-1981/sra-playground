@@ -1,0 +1,16 @@
+{
+  "schema": "logos-engine.lot10b.hpdl-child-process.v1",
+  "pid": 5,
+  "startedAt": "2026-11-11T15:51:56.857009+00:00",
+  "startedElapsedSeconds": 0.439504404,
+  "allowanceAfterPreflightSeconds": 299.06054538399985,
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "--max-old-space-size=1536",
+    "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/run-hpdl-campaign.mjs",
+    "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-02"
+  ],
+  "nodeOldSpaceMiB": 1536,
+  "parentDeathSignal": "SIGKILL",
+  "separateProcessGroup": true
+}

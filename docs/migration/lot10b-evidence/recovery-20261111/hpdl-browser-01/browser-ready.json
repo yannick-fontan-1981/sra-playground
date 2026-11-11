@@ -1,0 +1,17 @@
+{
+  "schema": "logos-engine.lot10b.hpdl-browser-ready.v1",
+  "attemptId": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-browser-01",
+  "beginReceipt": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-browser-01/browser-begin.json",
+    "sha256": "1f1ec38fb0a657f9b7033fabf4dcd8336127c3d413c349e3b75de33710ff5c52",
+    "bytes": 1972
+  },
+  "readyAt": "2026-11-11T16:07:34.569557+00:00",
+  "monotonicObservedNs": "15699037339768",
+  "remainingUntilDeclaredDeadlineSeconds": 179.956107025,
+  "locksHeld": [
+    "performance:shared",
+    "hpdl:exclusive"
+  ],
+  "qualification": "Clock admitted and locks retained. No browser action has been performed by this script."
+}
