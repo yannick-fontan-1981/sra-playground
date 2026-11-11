@@ -493,3 +493,9 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 /docs/migration/lot10b-evidence/recovery-20261111/integrated-final-01/regressions/rswp-051-replay.json.gz
 
 !/docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01/aggregation-failure.log
+
+# Preserve the four actual ABBA execution logs for lot 10B.
+!docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01/cohort1/baseline.log
+!docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01/cohort1/after.log
+!docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01/cohort2/baseline.log
+!docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01/cohort2/after.log
