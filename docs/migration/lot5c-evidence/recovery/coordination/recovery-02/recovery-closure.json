@@ -1,0 +1,182 @@
+{
+  "schema": "logos-engine.lot5c-recovery-closure.v2",
+  "recordedAt": "2026-11-11T20:36:08.370350+00:00",
+  "status": "coordination_hardened_cost_unmeasured_publication_pending",
+  "originalCheckpointPreserved": "501198d7638c7a56c3b85d357beb917469899402",
+  "reviewedPreparationCheckpointRemotelyVerified": "34d919cb059322bdecc160606faac0bccd23c75b",
+  "branch": "lot5c-recovery-checkpoint-20261111",
+  "candidate": {
+    "version": "0.63.0",
+    "nativeFiles": 318,
+    "nativeDigest": "a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57",
+    "entriesConnected": 65,
+    "entriesDeclared": 76
+  },
+  "reusedFunctionalProof": {
+    "frozenInputs": 867,
+    "testsPassed": 5339,
+    "testFiles": 138,
+    "deliveryChecksPassed": 5,
+    "commonComparisonsPassed": 6818,
+    "recordedCasesPassed": 11,
+    "recordedComparisonsPassed": 187,
+    "newNativeTestOrReplayRuns": 0,
+    "budgetsReset": false,
+    "newGameCommands": 0
+  },
+  "targetedRecovery": {
+    "budgetSeconds": 180,
+    "elapsedSeconds": 106.57683,
+    "holderIdentified": false,
+    "originalUsableSessionHandleRecovered": false,
+    "oldSessionActuallyClosed": false,
+    "unidentifiedProcessesSignaled": false,
+    "procInspectionsRepeated": false,
+    "qualification": "No present holder is proved or excluded by this limited search. No responsibility is assigned to another lane."
+  },
+  "verifiedProtections": {
+    "wrapperScenarios": 18,
+    "wrapperAssertions": 239,
+    "controllerHelperScenarios": 8,
+    "orchestratorScenarios": 13,
+    "additionalIndependentAssertions": 25,
+    "globalReviewChecks": 58,
+    "globalReviewSubjects": 52,
+    "terminalReviewChecks": 19,
+    "temporaryMutexTestsOnly": true,
+    "nativeAndBenchmarkCriteriaChanged": false
+  },
+  "oneCycle": {
+    "requestId": "lot5c-cost-a33a5f88-recovery-02",
+    "requestedAt": "2026-11-11T20:20:25.609789+00:00",
+    "availabilityDeadline": "2026-11-11T20:30:25.609789+00:00",
+    "availabilityMaximumSeconds": 600,
+    "freshAckLanes": [
+      "lot6b"
+    ],
+    "missingFreshAckLanesAtDeadline": [
+      "lot8a",
+      "lot10c"
+    ],
+    "failureReason": "availability_deadline_before_fresh_acks",
+    "exclusiveAttempts": 0,
+    "readinessCreated": false,
+    "officialSamples": 0,
+    "toolSessionId": 17255,
+    "terminalExitCode": 124,
+    "terminalChunk": "614492",
+    "cleanupConfirmed": true,
+    "explicitReleaseAt": "2026-11-11T20:30:25.610691+00:00",
+    "quietRequestedNow": false,
+    "noAutomaticRetry": true,
+    "secondCycleLaunched": false,
+    "qualification": "Expiry happened before fresh isolation/readiness/controller. This cycle neither confirms nor excludes persistence of the historical lock holder."
+  },
+  "absentCostArtifacts": {
+    "readiness03": {
+      "path": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/performance-integrated-03/readiness.json",
+      "exists": false
+    },
+    "window03": {
+      "path": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/performance-integrated-03/window.json",
+      "exists": false
+    },
+    "exclusiveWindowLease": {
+      "path": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/coordination/cost-final-02/window-lease.json",
+      "exists": false
+    },
+    "controllerExecution": {
+      "path": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/recovery/coordination/cost-final-02/controller-execution.json",
+      "exists": false
+    },
+    "childRegistry": {
+      "path": "/workspace/shared/sra-coordination/lot5c-recovery-02-active-children.json",
+      "exists": false
+    }
+  },
+  "costByGame": {
+    "STCK": {
+      "measured": false,
+      "accepted": false,
+      "requiredCompleteSessionMedianIncreaseStrictlyBelowPercent": 10,
+      "phaseAbove10AllowedOnlyIfSameGameGlobalPasses": true
+    },
+    "SMLP": {
+      "measured": false,
+      "accepted": false,
+      "requiredCompleteSessionMedianIncreaseStrictlyBelowPercent": 10,
+      "phaseAbove10AllowedOnlyIfSameGameGlobalPasses": true
+    }
+  },
+  "actualPublication": {
+    "latestSite": 103,
+    "nativeVersion": "0.62.0",
+    "nativeSite": 102,
+    "candidate063Published": false,
+    "publicationPerformedDuringRecovery": false,
+    "sourceEvidence": "site-readback-after-recovery02.json",
+    "providerReadbackAt": "2026-11-11T20:31:48.933Z"
+  },
+  "mutex": {
+    "path": "/workspace/shared/sra-coordination/performance.lock",
+    "device": 27,
+    "inode": 1971854,
+    "deleted": false,
+    "replaced": false,
+    "pathChanged": false,
+    "guardDisabled": false
+  },
+  "administrationRequired": {
+    "availableToolsLimit": "exec_command/write_stdin expose exact observed handles only; no global execution inventory or supported close-by-lock API is exposed. The original usable handle was not recovered.",
+    "action": "Inspect the actual execution service inventory and exact descriptors for the existing device27/inode1971854 mutex. Determine whether a current holder exists. If it exists, identify that exact execution/process group and establish whether useful work continues. Close it through the supported runtime lifecycle only if abandonment or safe completion is established; observe actual terminal state and retain the closure receipt. Preserve the mutex. Obtain current root/all-worker availability from8A and10C before planning any later measurement coordination.",
+    "automaticFurtherPause": false,
+    "doNotInferAbandonmentFromFileAgeOrMissingVisiblePid": true
+  },
+  "peerStatusesAfterRelease": [
+    {
+      "lane": "lot6b",
+      "observedAt": "2026-11-11T20:36:08.370350+00:00",
+      "updatedAt": "2026-11-11T20:31:07.200353+00:00",
+      "requestId": "lot5c-cost-a33a5f88-recovery-02",
+      "acknowledged": false,
+      "acknowledgedAt": "2026-11-11T20:22:15.406525+00:00",
+      "activeCommand": "Source-only checkpoint transport preparation and documentary closure. KLOT readback only if separately charged; no new game or cost.",
+      "noQueuedCommands": true,
+      "snapshotSha256": "31e94059f9373fca5254126e33de50123d0aef3bfa1e184c64f92a2d21330adf"
+    },
+    {
+      "lane": "lot8a",
+      "observedAt": "2026-11-11T20:36:08.370350+00:00",
+      "updatedAt": "2026-11-11T20:11:32.565538+00:00",
+      "requestId": "lot5c-cost-a33a5f88-final-01",
+      "acknowledged": false,
+      "acknowledgedAt": "2026-11-11T18:35:44.230663+00:00",
+      "activeCommand": null,
+      "noQueuedCommands": true,
+      "snapshotSha256": "afd9862ab1e35729961ef530e402cf6565cce998c587b06e21dfca84aefdbc55"
+    },
+    {
+      "lane": "lot10c",
+      "observedAt": "2026-11-11T20:36:08.370350+00:00",
+      "updatedAt": "2026-11-11T20:01:17.074830+00:00",
+      "requestId": "lot5c-cost-a33a5f88-final-01",
+      "acknowledged": false,
+      "acknowledgedAt": "2026-11-11T19:05:59.348551+00:00",
+      "activeCommand": "Source-only ancestor transport:18 declared sequential steps,one verified; each<=180s under SH with fresh quiet checks and exact advertised/ref verification. No automatic next step, no main update or publication.",
+      "noQueuedCommands": true,
+      "snapshotSha256": "0944ff0d0e1f2448431470e9dbf8ed23807566b36fbcc2a115e16474fc46317f"
+    }
+  ],
+  "publicationOrder": [
+    "5C",
+    "6B",
+    "8A",
+    "10C"
+  ],
+  "independentTerminalReview": {
+    "path": "terminal-independent-review.json",
+    "bytes": 14736,
+    "sha256": "a0be86344fcb91cd83350319e92d28de219cdd84b32c8bb1c9d08107a01dcda6"
+  },
+  "qualification": "This closure reports actual recovery results. It is neither a cost acceptance nor a site publication. Ordinary work is explicitly released; subsequent documentary checkpoint work remains separately bounded and tracked."
+}

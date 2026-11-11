@@ -1,0 +1,10 @@
+{
+  "sessionId": 47365,
+  "terminal": {
+    "chunk_id": "c3bc88",
+    "wall_time_seconds": 1.8839e-05,
+    "exit_code": 124,
+    "original_token_count": 38,
+    "output": "{\"schema\": \"logos-engine.lot5c.bounded-locked-command.v2\", \"status\": \"failed\", \"reason\": \"input_timeout\", \"exitCode\": 124, \"cleanupComplete\": true}\r\n"
+  }
+}
