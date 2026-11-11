@@ -1,0 +1,18 @@
+{
+  "startedAt": "2026-11-11T02:48:30.175234+00:00",
+  "finishedAt": "2026-11-11T02:48:32.682194+00:00",
+  "command": [
+    "python",
+    "-B",
+    "/workspace/sites/sra-lot5b-publication-artifacts-20261111/prepare-worktree.py",
+    "--plan",
+    "/workspace/sites/sra-lot5b-publication-artifacts-20261111/lot5b-source-push-plan.json",
+    "--plan-sha256",
+    "eca4adc3e93aba189854511a15b3f96f7132f1042b2dd790056ee6ea1695492f",
+    "--publication-inputs-sha256",
+    "e945c30b23d02d1a704e15997c0f4fe0a538ef774b80ee3d2a021f09e6b42f04"
+  ],
+  "exitCode": 0,
+  "stdout": "{\"status\": \"passed\", \"receipt\": {\"path\": \"/workspace/sites/sra-lot5b-publication-artifacts-20261111/worktree-preparation.json\", \"bytes\": 213420, \"sha256\": \"1fdf316ee992aa1dcbb7693a308c79138895070da2142654f8ce60297ba653bd\"}, \"sourceCommit\": \"929e979b631b208b92248fd938172d2a7b5e79db\", \"expectedFrozenInputs\": 755, \"applicationMemberCount\": 75, \"error\": null}\n",
+  "stderr": ""
+}

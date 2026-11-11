@@ -1,0 +1,17 @@
+{
+  "step": 4,
+  "startedAt": "2026-11-11T02:50:06.834Z",
+  "finishedAt": "2026-11-11T02:50:16.746Z",
+  "exitCode": 0,
+  "outputChunks": [
+    "Ready for Site workflow JSON on stdin (input is hidden).\r\n",
+    "Previous HEAD position was d7c1b68 Transport lot 5B evidence batch 3\r\nHEAD is now at d01475d Transport lot 5B evidence batch 4\r\n",
+    "/workspace/sites/sra-lot5b-publication-artifacts-20261111/site-step-4.tar.gz\r\n{\"project_id\":\"appgprj_6adbc388d79081918581b93b919d7258\",\"checkout_path\":\"/workspace/sites/sra-lot5b-publication-20261111/.sites-checkout\",\"commit_sha\":\"d01475d6d0962508e9695ed086c91676a2b7a079\",\"archive\":\"/workspace/sites/sra-lot5b-publication-artifacts-20261111/site-step-4.tar.gz\"}\r\n"
+  ],
+  "result": {
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "checkout_path": "/workspace/sites/sra-lot5b-publication-20261111/.sites-checkout",
+    "commit_sha": "d01475d6d0962508e9695ed086c91676a2b7a079",
+    "archive": "/workspace/sites/sra-lot5b-publication-artifacts-20261111/site-step-4.tar.gz"
+  }
+}

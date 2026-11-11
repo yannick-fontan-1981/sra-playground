@@ -2,7 +2,7 @@
 
 ## État de livraison
 
-**Le transfert de `observed_addressed_material` est intégré et gelé en native 0.58.0 ; sa validation fonctionnelle et son budget global sont acceptés. La publication 5B reste en attente.** Le candidat intègre le lot 4C réellement publié dans Site 92, après 10A dans Sites 90/91, ainsi que la clôture documentaire Site 93. Les **4 900 tests finaux**, les cinq contrôles incluant la compilation, les **dix rejeux et leurs 170/170 comparaisons**, les preuves communes et leur comparaison originale ainsi que le contrôle navigateur sont terminés. La fenêtre officielle accepte **STCK à +3,780905 %** et **SMLP à −1,556219 %** selon le critère global autorisé ; les deux dépassements de phase et le refus du comparateur structurel strict restent conservés.
+**Le transfert de `observed_addressed_material` est livré dans Site 94 / native 0.58.0, avec validation fonctionnelle, budget global accepté et publication privée confirmée.** Le [reçu terminal](lot5b-evidence/publication/native-publication.json) identifie le commit `fbd968f7c194575777965219f64fa78d3460b08e`, déployé `succeeded` le **11 novembre 2026 à 02:52:58.534517 UTC**, avec audience propriétaire seul, révision **3**, préservée. Cette livraison intègre les prédécesseurs Sites 92/93 après 10A/Sites 90–91. Les **4 900 tests finaux**, les cinq contrôles incluant la compilation, les **dix rejeux et leurs 170/170 comparaisons**, les preuves communes et leur comparaison originale ainsi que le contrôle navigateur sont terminés. La fenêtre officielle accepte **STCK à +3,780905 %** et **SMLP à −1,556219 %** selon le critère global autorisé ; les deux dépassements de phase et le refus du comparateur structurel strict restent conservés.
 
 Le [gel final](lot5b-evidence/integrated-final/source-manifest.json) contient **302 fichiers natifs**, de digest `099444085f0579ce60e226c9dece42110c577538f5f337579305a2e5f65483c4`. Son [archive de sources](lot5b-evidence/integrated-final/source-archive.json) épingle **313 fichiers**. Le [registre du candidat](v6-entry-point-progress.json) compte **62/76 entrées raccordées**, soit **81,6 %**, zéro partielle et 14 ouvertes. Ce compteur décrit le raccordement des entrées ; il ne constitue pas une déclaration de parité globale avec V6.
 
@@ -69,9 +69,15 @@ Le [plan intégré](lot5b-evidence/coordination/integrated-test-scope-plan.json)
 
 Les [dix rejeux publics](lot5b-evidence/integrated-final/regressions/regression-summary.json) passent **170/170 contrôles** sur les [cas déclarés](lot5b-evidence/integrated-final/regression-cases.json) : **357 actions, 275 préfixes, 632 requêtes, 30 frontières naturelles de niveau, 367 paquets publics complets et 1 676 images d'animation**. Le moteur recalcule chaque commande avant de recevoir le retour public archivé. Les comparaisons gardent les commandes, sélections, gardes, frontières et résultats publics de leur contrat historique ; elles ne prétendent pas comparer tous les contenus privés, le graphe complet ou le routeur Python entier. Ces rejeux de traces ne constituent ni de nouvelles réussites en jeu ni une mesure d'accélération.
 
-### Publication 5B — en attente
+### Publication 5B — Site 94 confirmé
 
-La publication 5B n'est pas encore déclarée. Son état, sa version Site et le commit effectivement déployé seront renseignés à partir du reçu réel, après vérification des sources, du build et des entrées de publication. Les publications 92/93 décrites ici sont celles du prédécesseur 4C.
+La [publication réelle Site 94](lot5b-evidence/publication/native-publication.json) confirme native **0.58.0**, le commit `fbd968f7c194575777965219f64fa78d3460b08e` et le statut terminal `succeeded` du **11 novembre 2026 à 02:52:58.534517 UTC**. L'URL existante et l'audience propriétaire seul, révision **3**, sont conservées. Sites 92/93 restent les prédécesseurs 4C ; la référence du coût reste Site 92.
+
+Le [plan de transport](lot5b-evidence/publication/lot5b-source-push-plan.json) conserve **cinq envois sources**. La [vérification finale réussie](lot5b-evidence/publication/final-source-build-verification-02.json) confirme **755 fichiers gelés par checkout**, dans les deux checkouts, et **75 membres applicatifs dans chacune des cinq archives locales**, soit **375 comparaisons exactes** avec le build déjà validé, sans recompilation. Les sources, tests, entrées de build et worker sont inchangés. Le tar conservé par le serveur est identifié par le reçu Sites ; il n'a pas été téléchargé pour une comparaison indépendante de ses membres.
+
+Le [premier contrôle](lot5b-evidence/publication/final-source-build-verification.json) reste **échoué, code 1**, avec son [reçu d'exécution](lot5b-evidence/publication/verifier-attempt01-execution.json) : le journal brut `aggregation-failure.log`, ignoré par Git, manquait dans le checkout de publication. Sa [restauration octet pour octet](lot5b-evidence/publication/ignored-proof-restoration.json) a permis le second contrôle sans modifier aucune source, aucun test, aucun build ni aucune donnée de coût. Ce premier échec et le refus strict de coût restent deux preuves distinctes, toutes deux conservées.
+
+La clôture documentaire de ces reçus conserve le moteur publié. Son éventuelle publication ultérieure sera identifiée séparément à partir de son reçu réel.
 
 ## 5. Règle et mesure du coût
 
@@ -106,8 +112,8 @@ Le budget cumulatif WEAV antérieur reste épuisé : aucune nouvelle exécution 
 
 | Priorité | Travail | Condition de sortie |
 | --- | --- | --- |
-| En cours | Publier le lot 5B validé sur le gel intégré à Sites 92/93 | Vérifier sources, build et entrées de publication, puis conserver le reçu de déploiement réel ; 4 900 tests, 170 contrôles de rejeu, cinq contrôles incluant la compilation, preuves communes bornées, navigateur et budget global déjà acquis |
-| Ensuite | 5C — `observed_object_binding` | Liaison de l’objet courant, conservation et retours de composition, avec restauration et frontières |
+| Livré | 5B — Site 94 / native 0.58.0 | Publication privée et intégrité sources/build vérifiées ; 4 900 tests, 170 contrôles de rejeu, cinq contrôles incluant la compilation, preuves communes bornées, navigateur et budget global acceptés |
+| Prochaine étape | 5C — `observed_object_binding` | Une entrée restante dans le lot 5 : liaison de l'objet courant, conservation et retours de composition, avec restauration et frontières |
 | Réserve explicite | Coordination après le préfixe stock | Un parcours commun peut continuer en respectant les obligations ; aucun contournement du refus source |
 | Suivi transversal | Temps de décision, persistance, restauration, pointes de latence et données des anciens niveaux | Suivre notamment la restauration STCK et les gardes SMLP ; mesurer des parcours assez longs et attribuer les gains, sans déduire une accélération générale du budget global accepté |
 | WEAV | Niveau 6 et croissance de la latence | Budget et campagne distincts établis ; aucune réussite anticipée |

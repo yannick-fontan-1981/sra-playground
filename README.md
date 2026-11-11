@@ -5,11 +5,15 @@ Fontan's **Symbolic Reasoning Agent** research.
 
 <!-- LOT5B_README_CURRENT_START -->
 
-## Current validated candidate: lot 5B / native 0.58.0 — publication pending
+## Current publication: Site 94 / lot 5B / native 0.58.0
 
 **AddressedMaterial / lot 5B is functionally validated and its global cost is
-accepted. Its Site publication is still pending; no new Site version is claimed.**
-The candidate integrates the actual Site 92 / native 0.57.0 predecessor and its
+accepted. Its private publication is confirmed in
+[Site 94](docs/migration/lot5b-evidence/publication/native-publication.json).**
+Commit `fbd968f7c194575777965219f64fa78d3460b08e` reached terminal deployment
+`succeeded` on **11 November 2026 at 02:52:58.534517 UTC**, preserving the
+owner-only audience, revision **3**, and existing URL.
+The release integrates the actual Site 92 / native 0.57.0 predecessor and its
 [Site 93 documentation closure](docs/migration/lot5b-evidence/coordination/published-4c-documentation-closure-reconciliation.json).
 The closure preserves the native and build inputs; Site 92 remains the declared
 cost reference. The [candidate freeze](docs/migration/lot5b-evidence/integrated-final/source-manifest.json)
@@ -68,8 +72,21 @@ This accepted budget does not establish general acceleration, constant
 long-session latency or a solution to **WEAV level 6**. Its exhausted cumulative
 clock remains unchanged, with no new live WEAV attempt or reset.
 
-The next step in this conversation is **5C / `observed_object_binding`**, after
-the real 5B publication is recorded; **lot 5 has one registry entry remaining**.
+The [five source pushes](docs/migration/lot5b-evidence/publication/lot5b-source-push-plan.json)
+and [successful final verification](docs/migration/lot5b-evidence/publication/final-source-build-verification-02.json)
+preserve **755 frozen inputs per checkout** and **75 application members in each
+of five local archives**, for **375 exact comparisons**, without rebuilding.
+The [first check](docs/migration/lot5b-evidence/publication/final-source-build-verification.json)
+remains failed with [exit 1](docs/migration/lot5b-evidence/publication/verifier-attempt01-execution.json):
+the Git-ignored raw strict-failure log was absent from the publication checkout.
+Its [byte-identical restoration](docs/migration/lot5b-evidence/publication/ignored-proof-restoration.json)
+allowed the second check to pass without changing source, tests, build or cost
+inputs. The server-stored tar is identified by Sites and was not independently
+downloaded for member comparison. A later documentation-closure publication,
+if completed, will have its own actual receipt.
+
+The next step in this conversation is **5C / `observed_object_binding`**;
+**lot 5 has one registry entry remaining**.
 Lot 4 is closed within its delivered scopes. Lot 7's transfers are closed, with
 the **LKEY level-3 follow-up** handled separately. Other conversations have
 started **6A / `preview_packing`** and **10B / `window_question`** after completed
@@ -85,7 +102,7 @@ started **6A / `preview_packing`** and **10B / `window_question`** after complet
 ## Published predecessor: Site 92 / native 0.57.0, FacetExamples delivered
 
 The following section preserves the 4C publication milestone. Its documentation
-closure is now published in Site 93 and reconciled by the current 5B candidate
+closure is now published in Site 93 and reconciled by the current 5B release
 above; the results and next-step statements below retain their historical scope.
 
 **Lot 4C is delivered, with functional validation, accepted global cost and actual
