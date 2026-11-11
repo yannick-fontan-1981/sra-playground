@@ -1,0 +1,20 @@
+--- 6b-before-review/record-cost-log-transport.py
++++ 6b-reviewed/record-cost-log-transport.py
+@@ -5,7 +5,7 @@
+        docs/migration/lot6b-evidence/performance-integrated
+ No measurement, comparison, exclusion or verdict is changed by this command.
+ """
+-# Directly adapted from docs/migration/lot5b-evidence/record-cost-log-transport.py.
++# Directly adapted from docs/migration/lot6a-evidence/record-cost-log-transport.py.
+ # Only 6B location/provenance metadata changes; transport bytes and checks are unchanged.
+ from __future__ import annotations
+ 
+@@ -68,7 +68,7 @@
+     receipt = {'schema': 'logos-engine.lossless-log-transport.v1', 'status': 'passed',
+                'recordedAt': datetime.now(timezone.utc).isoformat(),
+                'generator': fingerprint(Path(__file__)), 'mode': 'cost-window',
+-               'adaptedFrom': fingerprint(ROOT / 'docs/migration/lot5b-evidence/record-cost-log-transport.py'),
++               'adaptedFrom': fingerprint(ROOT / 'docs/migration/lot6a-evidence/record-cost-log-transport.py'),
+                'window': original_window, 'logs': logs,
+                'qualification': 'All completed original logs remain available and unchanged. '
+                    'Deterministic gzip transport is decompressed and compared byte for byte. '

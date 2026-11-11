@@ -1,0 +1,905 @@
+{
+  "schema": "logos-engine.lot6b-cost-tools-static-review.v1",
+  "startedAt": "2026-11-11T14:50:45.628500+00:00",
+  "finishedAt": "2026-11-11T14:50:45.968668+00:00",
+  "status": "static_review_complete",
+  "generator": {
+    "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/verify-review.py",
+    "bytes": 9994,
+    "sha256": "4c8159d9e03926a6dd0d64966a85565478ff790bedfd4b9c061a2e89f29cb068"
+  },
+  "sourcePin": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "inputsBefore": {
+    "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/inputs-before.json",
+    "bytes": 30806,
+    "sha256": "8f447f96c91776b0e1c4564e7d6b8f06ad1573e9ad6d2a1fcbf9766d93ce7e83"
+  },
+  "coordination": {
+    "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/coordination-before-syntax.json",
+    "bytes": 20278,
+    "sha256": "9ffcddb6d450b416f943a5b8ad67d2ff9815dce9d5e56c0a73bdc457744ddd95"
+  },
+  "reviewNotes": {
+    "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/review.md",
+    "bytes": 7662,
+    "sha256": "31bb08fc9dcd04b2166c07d89b9a778fe5c7ea0af5a76b8285f4ffe898144237"
+  },
+  "files": [
+    {
+      "file": "capture-cost-owner-graphs.mjs",
+      "original6A": {
+        "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/docs/migration/lot6a-evidence/capture-cost-owner-graphs.mjs",
+        "bytes": 23229,
+        "sha256": "bdeb730acce872041354d30085c7703e111bf52056bdad07e6f7d52ea0a2be64"
+      },
+      "before": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/capture-cost-owner-graphs.mjs",
+        "bytes": 23192,
+        "sha256": "bb285d2fe6ae03300c1f50a78dae71bfb096aafc8d93ba7f3400d389e417b217"
+      },
+      "after": {
+        "path": "docs/migration/lot6b-evidence/capture-cost-owner-graphs.mjs",
+        "bytes": 25111,
+        "sha256": "6b567b2bdd39309f951e510e7e6c14fa4aade1f09f08e17961744adfa71315ed"
+      },
+      "reviewDiff": {
+        "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/review-diffs/capture-cost-owner-graphs.mjs.diff",
+        "bytes": 6423,
+        "sha256": "9ef7efcafc0f961cc528fddf9f9868a84eb6af8d71f7e9fc3353e28bacee106b"
+      },
+      "completeDerivationDiff": {
+        "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/capture-cost-owner-graphs.mjs.diff",
+        "bytes": 14242,
+        "sha256": "4d7ecd8867522031a4f2f072b83f2a35e427d40e032afccb107303f0061ac4e0"
+      }
+    },
+    {
+      "file": "record-owner-source-inventory.mjs",
+      "original6A": {
+        "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/docs/migration/lot6a-evidence/record-owner-source-inventory.mjs",
+        "bytes": 12847,
+        "sha256": "060686d8390807d6000caadae0f89bff9240bc3f4d7be094045ff8ff15c9a509"
+      },
+      "before": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/record-owner-source-inventory.mjs",
+        "bytes": 12842,
+        "sha256": "d2608ea5a6b38a503e9fab6a72ebcdf68c4059f3ffb095974dd4a86e4980f7df"
+      },
+      "after": {
+        "path": "docs/migration/lot6b-evidence/record-owner-source-inventory.mjs",
+        "bytes": 13205,
+        "sha256": "f394f733ab6a6bb719e6986797578015bfccd47a1b257113140697371aed3979"
+      },
+      "reviewDiff": {
+        "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/review-diffs/record-owner-source-inventory.mjs.diff",
+        "bytes": 1949,
+        "sha256": "27519b5d888dccd0271a90cef5872bd1d938520386fd3115ce47cf6055ad9d4f"
+      },
+      "completeDerivationDiff": {
+        "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/record-owner-source-inventory.mjs.diff",
+        "bytes": 5283,
+        "sha256": "41851a85d425fe82666c1547507c9af6d473c35c6befeee9522d6c019ce32134"
+      }
+    },
+    {
+      "file": "qualify-cost-owner-graphs.mjs",
+      "original6A": {
+        "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/docs/migration/lot6a-evidence/qualify-cost-owner-graphs.mjs",
+        "bytes": 40668,
+        "sha256": "284e3fc3fa0ea2cb0513e6ecaf920598a5a1baa546723b0a69e0de124f0035d5"
+      },
+      "before": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/qualify-cost-owner-graphs.mjs",
+        "bytes": 40340,
+        "sha256": "4515e538c42ab86eb23d56d8ea7dd2e8bb76c7510d69d5c33e2c022c817a0441"
+      },
+      "after": {
+        "path": "docs/migration/lot6b-evidence/qualify-cost-owner-graphs.mjs",
+        "bytes": 42632,
+        "sha256": "bbc882a92a4f30d110a4040c453b3d8437ba55362343e01baf5a07152ed801ab"
+      },
+      "reviewDiff": {
+        "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/review-diffs/qualify-cost-owner-graphs.mjs.diff",
+        "bytes": 9796,
+        "sha256": "c57a978e1ff8a9e08a1060b119ec065d13815c87a0aaa5af302c802dd8adc128"
+      },
+      "completeDerivationDiff": {
+        "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/qualify-cost-owner-graphs.mjs.diff",
+        "bytes": 27368,
+        "sha256": "2a56aa7b60e3455455565110e6aeaa8a727fc454f1b4dd4f46eafd494b0b514f"
+      }
+    },
+    {
+      "file": "finalize-owner-cost-contract.py",
+      "original6A": {
+        "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/docs/migration/lot6a-evidence/finalize-owner-cost-contract.py",
+        "bytes": 15735,
+        "sha256": "2036fcca3c380dae7b8e55d1c71cedbd41cf78b980c6b50768ee820776335dc0"
+      },
+      "before": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/finalize-owner-cost-contract.py",
+        "bytes": 15727,
+        "sha256": "74f719543cd6c40ec70b8fc9bba5c7d0a1ea68aab8ba11947c352f6c5eceedcf"
+      },
+      "after": {
+        "path": "docs/migration/lot6b-evidence/finalize-owner-cost-contract.py",
+        "bytes": 16988,
+        "sha256": "56c590f57adf2c4ca79f7d5320e9c18f4b4e2b201d1c10598752ef3aff206b08"
+      },
+      "reviewDiff": {
+        "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/review-diffs/finalize-owner-cost-contract.py.diff",
+        "bytes": 4039,
+        "sha256": "927c4417b6c714f80148e4fb57124a4f7960566b5194b13eb8da5ff8aa7ad4a8"
+      },
+      "completeDerivationDiff": {
+        "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/finalize-owner-cost-contract.py.diff",
+        "bytes": 10639,
+        "sha256": "403322c78dd0861690898c854834f6f5ece8a964235148f20da30ff1ed133089"
+      }
+    },
+    {
+      "file": "prepare-cost-protocol.py",
+      "original6A": {
+        "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/docs/migration/lot6a-evidence/prepare-cost-protocol.py",
+        "bytes": 30307,
+        "sha256": "48229486f8c41b9c74393de8d5ed006862ee6854a18271edf7be015d8fd6cadc"
+      },
+      "before": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/prepare-cost-protocol.py",
+        "bytes": 30301,
+        "sha256": "dcfc49c4731305d3e27d4fb08de5e96b7f4887ef7c54f107c279910ceac3c304"
+      },
+      "after": {
+        "path": "docs/migration/lot6b-evidence/prepare-cost-protocol.py",
+        "bytes": 31051,
+        "sha256": "0eef9c2ddb40bca54b0abd3ffc0aec97e03d50b720decb556b344114b85f33ef"
+      },
+      "reviewDiff": {
+        "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/review-diffs/prepare-cost-protocol.py.diff",
+        "bytes": 3113,
+        "sha256": "19e228b6f4656b78c32b235dbff85857426b6aab194a229b88a4fc5e7259a545"
+      },
+      "completeDerivationDiff": {
+        "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/prepare-cost-protocol.py.diff",
+        "bytes": 12996,
+        "sha256": "8bb8b0d7e6e46ead183732be4211021de3c145136641f5fc196315b5ff747ba0"
+      }
+    },
+    {
+      "file": "check-cost-static-inputs.py",
+      "original6A": {
+        "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/docs/migration/lot6a-evidence/check-cost-static-inputs.py",
+        "bytes": 27608,
+        "sha256": "28eb3b63af5ab9e145e877b0a2eb882f5e89eb326fc5517347d2b76918dca47a"
+      },
+      "before": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/check-cost-static-inputs.py",
+        "bytes": 27598,
+        "sha256": "2cc65d51dce90466ab478a42daaeb4bf22c53307d5059cc828f66d5e1746bf9d"
+      },
+      "after": {
+        "path": "docs/migration/lot6b-evidence/check-cost-static-inputs.py",
+        "bytes": 28667,
+        "sha256": "a44cbdd7cd965a7b1aab2746a1a13d17195900ca8711595f67d6dade281c2b78"
+      },
+      "reviewDiff": {
+        "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/review-diffs/check-cost-static-inputs.py.diff",
+        "bytes": 3745,
+        "sha256": "9f5b1907d174e9200e9266096706d34ada08200380c4f3ebdb95ff85fab155ae"
+      },
+      "completeDerivationDiff": {
+        "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/check-cost-static-inputs.py.diff",
+        "bytes": 11026,
+        "sha256": "cc8686829b2aace09a8c3724d35f2e4e0ec044bb3b3f2d9577408a81b4b83e31"
+      }
+    },
+    {
+      "file": "consolidate-owner-costs.mjs",
+      "original6A": {
+        "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/docs/migration/lot6a-evidence/consolidate-owner-costs.mjs",
+        "bytes": 52958,
+        "sha256": "6ef8481b3187edb8d6e14d2ea2a3ea40673106dcad180025deec975446a9597f"
+      },
+      "before": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/consolidate-owner-costs.mjs",
+        "bytes": 52949,
+        "sha256": "e9992b42deff28d7d5dff04272eea4a65c17a1c056db2afa94a0b432e1776ceb"
+      },
+      "after": {
+        "path": "docs/migration/lot6b-evidence/consolidate-owner-costs.mjs",
+        "bytes": 53741,
+        "sha256": "e19b2a1a0fb954fd80563ca4e45c586a6f99e499bb1b8278009bfb18c21720a8"
+      },
+      "reviewDiff": {
+        "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/review-diffs/consolidate-owner-costs.mjs.diff",
+        "bytes": 2636,
+        "sha256": "6aa5e86c773b99165a127cb89ae3eece2ae5a8a641111beddd280101110cc6a9"
+      },
+      "completeDerivationDiff": {
+        "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/consolidate-owner-costs.mjs.diff",
+        "bytes": 11061,
+        "sha256": "ac7b13a906a9f7ee3de6fc3b44a244c50168c47f73c32de08c43ec40de368583"
+      }
+    },
+    {
+      "file": "review-owner-costs.py",
+      "original6A": {
+        "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/docs/migration/lot6a-evidence/review-owner-costs.py",
+        "bytes": 70329,
+        "sha256": "13b6585d87fc2306e9652d70e64fdefc7a8499f141216dc65ba67295c235bc20"
+      },
+      "before": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/review-owner-costs.py",
+        "bytes": 70322,
+        "sha256": "f913ab3c9a06ded40443cf8111221de33d3dc23b954c99e3141171213b721c3e"
+      },
+      "after": {
+        "path": "docs/migration/lot6b-evidence/review-owner-costs.py",
+        "bytes": 71359,
+        "sha256": "215cb38020652242e08d703a3a34526831c5e6fd4e70b7bab6c8593567fc08f3"
+      },
+      "reviewDiff": {
+        "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/review-diffs/review-owner-costs.py.diff",
+        "bytes": 3031,
+        "sha256": "23b3d0e951278e95f3657312348cff8c7e84eb826c09fbefc9c8629fdefdb172"
+      },
+      "completeDerivationDiff": {
+        "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/review-owner-costs.py.diff",
+        "bytes": 11474,
+        "sha256": "d268cfd82baa71eef547430bc4e4697091b03db2304c4fc34a3836196f842f74"
+      }
+    },
+    {
+      "file": "record-cost-log-transport.py",
+      "original6A": {
+        "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/docs/migration/lot6a-evidence/record-cost-log-transport.py",
+        "bytes": 3889,
+        "sha256": "80309f5db053e850ea410dd1d855a4627deb6edca97758587deecf76ad173f52"
+      },
+      "before": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/record-cost-log-transport.py",
+        "bytes": 3889,
+        "sha256": "40ced75679068cf2c52c3ff27cc33afb6a6db03c8cbb24190cfca46e562300da"
+      },
+      "after": {
+        "path": "docs/migration/lot6b-evidence/record-cost-log-transport.py",
+        "bytes": 3889,
+        "sha256": "c57a9955be82288befc38148a4e513d9cd25aaa3e546c26ac658879de3d56e5f"
+      },
+      "reviewDiff": {
+        "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/review-diffs/record-cost-log-transport.py.diff",
+        "bytes": 1286,
+        "sha256": "7bdc61a87b51a21e55e5529cf210d30d08c66eb9ed6201592e91a03347598831"
+      },
+      "completeDerivationDiff": {
+        "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/record-cost-log-transport.py.diff",
+        "bytes": 2138,
+        "sha256": "d8b1014b4cb38ff295ac5eff0cd87cebf25add773c5205603e02104424fd0120"
+      }
+    },
+    {
+      "file": "write-cost-results.py",
+      "original6A": {
+        "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/docs/migration/lot6a-evidence/write-cost-results.py",
+        "bytes": 41898,
+        "sha256": "810de6a13a0288488f12f370a98b9ff61443aa988f17535d352388d18cda4b96"
+      },
+      "before": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/write-cost-results.py",
+        "bytes": 41895,
+        "sha256": "ad2143c2f963191bbd074d2ec72cadc0f0eba7a571f37c7b764c1af9b1f306d1"
+      },
+      "after": {
+        "path": "docs/migration/lot6b-evidence/write-cost-results.py",
+        "bytes": 42206,
+        "sha256": "b3a4c13b039acea372b9fa0c1d03c3aa813d7d49d031388b85731aa6c57fb6ac"
+      },
+      "reviewDiff": {
+        "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/review-diffs/write-cost-results.py.diff",
+        "bytes": 2238,
+        "sha256": "9a97e915f522cefe619d1a83e76d16a0835f390baf8c5f34895e7ed580a44cc8"
+      },
+      "completeDerivationDiff": {
+        "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/write-cost-results.py.diff",
+        "bytes": 12272,
+        "sha256": "a65f08196ba0c9d6e6fd7a2cb1d9bc31b683ed6d63e06d528538f4fbc716d7d5"
+      }
+    },
+    {
+      "file": "finalize-measured-cost.py",
+      "original6A": {
+        "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/docs/migration/lot6a-evidence/finalize-measured-cost.py",
+        "bytes": 16709,
+        "sha256": "7bb153c1967572826fdf1fc1771090023b2da42e56b816f511baca7773a48c53"
+      },
+      "before": {
+        "path": "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/finalize-measured-cost.py",
+        "bytes": 16709,
+        "sha256": "eb48dba03603ebd9a72e4598646ea54cdeac6322b7d5cefad9fe4f5a37dee4d3"
+      },
+      "after": {
+        "path": "docs/migration/lot6b-evidence/finalize-measured-cost.py",
+        "bytes": 16938,
+        "sha256": "f4522bad0cd43bcb42d5db6261757484bdba2189936e46739ec3b13c59feebe2"
+      },
+      "reviewDiff": {
+        "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/review-diffs/finalize-measured-cost.py.diff",
+        "bytes": 891,
+        "sha256": "ec901454611c4a83272456c47ac410af7fde2aef4a015d9adf3c136e2b8da971"
+      },
+      "completeDerivationDiff": {
+        "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/finalize-measured-cost.py.diff",
+        "bytes": 5002,
+        "sha256": "03adef94541d7f7f2ef2eb727273fb67468cc046585e89c870e5b27d0bc20631"
+      }
+    }
+  ],
+  "commands": [
+    {
+      "command": [
+        "node",
+        "--check",
+        "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/capture-cost-owner-graphs.mjs"
+      ],
+      "startedAt": "2026-11-11T14:50:45.633663+00:00",
+      "finishedAt": "2026-11-11T14:50:45.687540+00:00",
+      "exitCode": 0,
+      "log": {
+        "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/capture-cost-owner-graphs.mjs.syntax.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/record-owner-source-inventory.mjs"
+      ],
+      "startedAt": "2026-11-11T14:50:45.689536+00:00",
+      "finishedAt": "2026-11-11T14:50:45.744352+00:00",
+      "exitCode": 0,
+      "log": {
+        "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/record-owner-source-inventory.mjs.syntax.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/qualify-cost-owner-graphs.mjs"
+      ],
+      "startedAt": "2026-11-11T14:50:45.748178+00:00",
+      "finishedAt": "2026-11-11T14:50:45.807656+00:00",
+      "exitCode": 0,
+      "log": {
+        "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/qualify-cost-owner-graphs.mjs.syntax.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/consolidate-owner-costs.mjs"
+      ],
+      "startedAt": "2026-11-11T14:50:45.829754+00:00",
+      "finishedAt": "2026-11-11T14:50:45.881552+00:00",
+      "exitCode": 0,
+      "log": {
+        "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/consolidate-owner-costs.mjs.syntax.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "checkedCount": 102,
+  "checks": [
+    {
+      "name": "immutable_6A_original/capture-cost-owner-graphs.mjs",
+      "passed": true
+    },
+    {
+      "name": "retained_6A_copy/capture-cost-owner-graphs.mjs",
+      "passed": true
+    },
+    {
+      "name": "preserved_initial_draft/capture-cost-owner-graphs.mjs",
+      "passed": true
+    },
+    {
+      "name": "no_wrong_owner_or_replacement_residue/capture-cost-owner-graphs.mjs",
+      "passed": true,
+      "forbidden": []
+    },
+    {
+      "name": "node_syntax/capture-cost-owner-graphs.mjs",
+      "passed": true
+    },
+    {
+      "name": "immutable_6A_original/record-owner-source-inventory.mjs",
+      "passed": true
+    },
+    {
+      "name": "retained_6A_copy/record-owner-source-inventory.mjs",
+      "passed": true
+    },
+    {
+      "name": "preserved_initial_draft/record-owner-source-inventory.mjs",
+      "passed": true
+    },
+    {
+      "name": "no_wrong_owner_or_replacement_residue/record-owner-source-inventory.mjs",
+      "passed": true,
+      "forbidden": []
+    },
+    {
+      "name": "node_syntax/record-owner-source-inventory.mjs",
+      "passed": true
+    },
+    {
+      "name": "immutable_6A_original/qualify-cost-owner-graphs.mjs",
+      "passed": true
+    },
+    {
+      "name": "retained_6A_copy/qualify-cost-owner-graphs.mjs",
+      "passed": true
+    },
+    {
+      "name": "preserved_initial_draft/qualify-cost-owner-graphs.mjs",
+      "passed": true
+    },
+    {
+      "name": "no_wrong_owner_or_replacement_residue/qualify-cost-owner-graphs.mjs",
+      "passed": true,
+      "forbidden": []
+    },
+    {
+      "name": "node_syntax/qualify-cost-owner-graphs.mjs",
+      "passed": true
+    },
+    {
+      "name": "immutable_6A_original/finalize-owner-cost-contract.py",
+      "passed": true
+    },
+    {
+      "name": "retained_6A_copy/finalize-owner-cost-contract.py",
+      "passed": true
+    },
+    {
+      "name": "preserved_initial_draft/finalize-owner-cost-contract.py",
+      "passed": true
+    },
+    {
+      "name": "no_wrong_owner_or_replacement_residue/finalize-owner-cost-contract.py",
+      "passed": true,
+      "forbidden": []
+    },
+    {
+      "name": "python_AST/finalize-owner-cost-contract.py",
+      "passed": true
+    },
+    {
+      "name": "immutable_6A_original/prepare-cost-protocol.py",
+      "passed": true
+    },
+    {
+      "name": "retained_6A_copy/prepare-cost-protocol.py",
+      "passed": true
+    },
+    {
+      "name": "preserved_initial_draft/prepare-cost-protocol.py",
+      "passed": true
+    },
+    {
+      "name": "no_wrong_owner_or_replacement_residue/prepare-cost-protocol.py",
+      "passed": true,
+      "forbidden": []
+    },
+    {
+      "name": "python_AST/prepare-cost-protocol.py",
+      "passed": true
+    },
+    {
+      "name": "immutable_6A_original/check-cost-static-inputs.py",
+      "passed": true
+    },
+    {
+      "name": "retained_6A_copy/check-cost-static-inputs.py",
+      "passed": true
+    },
+    {
+      "name": "preserved_initial_draft/check-cost-static-inputs.py",
+      "passed": true
+    },
+    {
+      "name": "no_wrong_owner_or_replacement_residue/check-cost-static-inputs.py",
+      "passed": true,
+      "forbidden": []
+    },
+    {
+      "name": "python_AST/check-cost-static-inputs.py",
+      "passed": true
+    },
+    {
+      "name": "immutable_6A_original/consolidate-owner-costs.mjs",
+      "passed": true
+    },
+    {
+      "name": "retained_6A_copy/consolidate-owner-costs.mjs",
+      "passed": true
+    },
+    {
+      "name": "preserved_initial_draft/consolidate-owner-costs.mjs",
+      "passed": true
+    },
+    {
+      "name": "no_wrong_owner_or_replacement_residue/consolidate-owner-costs.mjs",
+      "passed": true,
+      "forbidden": []
+    },
+    {
+      "name": "node_syntax/consolidate-owner-costs.mjs",
+      "passed": true
+    },
+    {
+      "name": "immutable_6A_original/review-owner-costs.py",
+      "passed": true
+    },
+    {
+      "name": "retained_6A_copy/review-owner-costs.py",
+      "passed": true
+    },
+    {
+      "name": "preserved_initial_draft/review-owner-costs.py",
+      "passed": true
+    },
+    {
+      "name": "no_wrong_owner_or_replacement_residue/review-owner-costs.py",
+      "passed": true,
+      "forbidden": []
+    },
+    {
+      "name": "python_AST/review-owner-costs.py",
+      "passed": true
+    },
+    {
+      "name": "immutable_6A_original/record-cost-log-transport.py",
+      "passed": true
+    },
+    {
+      "name": "retained_6A_copy/record-cost-log-transport.py",
+      "passed": true
+    },
+    {
+      "name": "preserved_initial_draft/record-cost-log-transport.py",
+      "passed": true
+    },
+    {
+      "name": "no_wrong_owner_or_replacement_residue/record-cost-log-transport.py",
+      "passed": true,
+      "forbidden": []
+    },
+    {
+      "name": "python_AST/record-cost-log-transport.py",
+      "passed": true
+    },
+    {
+      "name": "immutable_6A_original/write-cost-results.py",
+      "passed": true
+    },
+    {
+      "name": "retained_6A_copy/write-cost-results.py",
+      "passed": true
+    },
+    {
+      "name": "preserved_initial_draft/write-cost-results.py",
+      "passed": true
+    },
+    {
+      "name": "no_wrong_owner_or_replacement_residue/write-cost-results.py",
+      "passed": true,
+      "forbidden": []
+    },
+    {
+      "name": "python_AST/write-cost-results.py",
+      "passed": true
+    },
+    {
+      "name": "immutable_6A_original/finalize-measured-cost.py",
+      "passed": true
+    },
+    {
+      "name": "retained_6A_copy/finalize-measured-cost.py",
+      "passed": true
+    },
+    {
+      "name": "preserved_initial_draft/finalize-measured-cost.py",
+      "passed": true
+    },
+    {
+      "name": "no_wrong_owner_or_replacement_residue/finalize-measured-cost.py",
+      "passed": true,
+      "forbidden": []
+    },
+    {
+      "name": "python_AST/finalize-measured-cost.py",
+      "passed": true
+    },
+    {
+      "name": "python_arithmetic_population_signature_unchanged/same",
+      "passed": true
+    },
+    {
+      "name": "python_arithmetic_population_signature_unchanged/numeric",
+      "passed": true
+    },
+    {
+      "name": "python_arithmetic_population_signature_unchanged/distribution",
+      "passed": true
+    },
+    {
+      "name": "python_arithmetic_population_signature_unchanged/samples",
+      "passed": true
+    },
+    {
+      "name": "python_arithmetic_population_signature_unchanged/calculate",
+      "passed": true
+    },
+    {
+      "name": "python_arithmetic_population_signature_unchanged/metric",
+      "passed": true
+    },
+    {
+      "name": "python_arithmetic_population_signature_unchanged/unresolved_for",
+      "passed": true
+    },
+    {
+      "name": "python_arithmetic_population_signature_unchanged/within_decimal",
+      "passed": true
+    },
+    {
+      "name": "python_arithmetic_population_signature_unchanged/work",
+      "passed": true
+    },
+    {
+      "name": "python_arithmetic_population_signature_unchanged/functional_shape",
+      "passed": true
+    },
+    {
+      "name": "python_arithmetic_population_signature_unchanged/Review.load_window",
+      "passed": true
+    },
+    {
+      "name": "python_arithmetic_population_signature_unchanged/Review.structural_pair",
+      "passed": true
+    },
+    {
+      "name": "python_arithmetic_population_signature_unchanged/Review.verify_structure_and_ledgers",
+      "passed": true
+    },
+    {
+      "name": "python_arithmetic_population_signature_unchanged/Review.verify_historical_failure",
+      "passed": true
+    },
+    {
+      "name": "python_arithmetic_population_signature_unchanged/Review.recalculate",
+      "passed": true
+    },
+    {
+      "name": "javascript_arithmetic_population_signature_unchanged/unresolvedFor",
+      "passed": true
+    },
+    {
+      "name": "javascript_arithmetic_population_signature_unchanged/strictDecimalBudget",
+      "passed": true
+    },
+    {
+      "name": "javascript_arithmetic_population_signature_unchanged/canonical",
+      "passed": true
+    },
+    {
+      "name": "javascript_arithmetic_population_signature_unchanged/functionalShape",
+      "passed": true
+    },
+    {
+      "name": "javascript_arithmetic_population_signature_unchanged/structuralExpectations",
+      "passed": true
+    },
+    {
+      "name": "javascript_arithmetic_population_signature_unchanged/compareQualifiedStructure",
+      "passed": true
+    },
+    {
+      "name": "javascript_arithmetic_population_signature_unchanged/compareOwnerWork",
+      "passed": true
+    },
+    {
+      "name": "javascript_arithmetic_population_signature_unchanged/distribution",
+      "passed": true
+    },
+    {
+      "name": "javascript_arithmetic_population_signature_unchanged/valuesFor",
+      "passed": true
+    },
+    {
+      "name": "javascript_arithmetic_population_signature_unchanged/metricFor",
+      "passed": true
+    },
+    {
+      "name": "javascript_arithmetic_population_signature_unchanged/comparisonMetrics",
+      "passed": true
+    },
+    {
+      "name": "javascript_arithmetic_population_signature_unchanged/workSignature",
+      "passed": true
+    },
+    {
+      "name": "javascript_arithmetic_population_signature_unchanged/validateTrial",
+      "passed": true
+    },
+    {
+      "name": "exact_seven_retained_central_tools",
+      "passed": true
+    },
+    {
+      "name": "central_tool_byte_identity/scripts/run-native-cost-window.py",
+      "passed": true
+    },
+    {
+      "name": "central_tool_byte_identity/scripts/measure-native-loop-costs.mjs",
+      "passed": true
+    },
+    {
+      "name": "central_tool_byte_identity/scripts/compare-native-loop-costs.mjs",
+      "passed": true
+    },
+    {
+      "name": "central_tool_byte_identity/scripts/compare-native-cost-cohorts.mjs",
+      "passed": true
+    },
+    {
+      "name": "central_tool_byte_identity/scripts/review-native-cost-consolidation.py",
+      "passed": true
+    },
+    {
+      "name": "central_tool_byte_identity/scripts/review-native-global-cost-window.py",
+      "passed": true
+    },
+    {
+      "name": "central_tool_byte_identity/scripts/review-native-global-cost-budget.py",
+      "passed": true
+    },
+    {
+      "name": "reviewed_tool_unchanged_during_syntax/capture-cost-owner-graphs.mjs",
+      "passed": true
+    },
+    {
+      "name": "reviewed_tool_unchanged_during_syntax/record-owner-source-inventory.mjs",
+      "passed": true
+    },
+    {
+      "name": "reviewed_tool_unchanged_during_syntax/qualify-cost-owner-graphs.mjs",
+      "passed": true
+    },
+    {
+      "name": "reviewed_tool_unchanged_during_syntax/finalize-owner-cost-contract.py",
+      "passed": true
+    },
+    {
+      "name": "reviewed_tool_unchanged_during_syntax/prepare-cost-protocol.py",
+      "passed": true
+    },
+    {
+      "name": "reviewed_tool_unchanged_during_syntax/check-cost-static-inputs.py",
+      "passed": true
+    },
+    {
+      "name": "reviewed_tool_unchanged_during_syntax/consolidate-owner-costs.mjs",
+      "passed": true
+    },
+    {
+      "name": "reviewed_tool_unchanged_during_syntax/review-owner-costs.py",
+      "passed": true
+    },
+    {
+      "name": "reviewed_tool_unchanged_during_syntax/record-cost-log-transport.py",
+      "passed": true
+    },
+    {
+      "name": "reviewed_tool_unchanged_during_syntax/write-cost-results.py",
+      "passed": true
+    },
+    {
+      "name": "reviewed_tool_unchanged_during_syntax/finalize-measured-cost.py",
+      "passed": true
+    }
+  ],
+  "syntax": {
+    "pythonASTFiles": 7,
+    "nodeCheckFiles": 4
+  },
+  "arithmeticComparison": {
+    "pythonASTFunctions": [
+      "same",
+      "numeric",
+      "distribution",
+      "samples",
+      "calculate",
+      "metric",
+      "unresolved_for",
+      "within_decimal",
+      "work",
+      "functional_shape",
+      "Review.load_window",
+      "Review.structural_pair",
+      "Review.verify_structure_and_ledgers",
+      "Review.verify_historical_failure",
+      "Review.recalculate"
+    ],
+    "javascriptExactFunctions": [
+      "unresolvedFor",
+      "strictDecimalBudget",
+      "canonical",
+      "functionalShape",
+      "structuralExpectations",
+      "compareQualifiedStructure",
+      "compareOwnerWork",
+      "distribution",
+      "valuesFor",
+      "metricFor",
+      "comparisonMetrics",
+      "workSignature",
+      "validateTrial"
+    ]
+  },
+  "centralTools": [
+    {
+      "path": "scripts/run-native-cost-window.py",
+      "sha256": "0ec9c69c859d0555e963643010d2254caee8c63d1c9a98ec07cd9af0ce0ce613",
+      "bytes": 8933
+    },
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59",
+      "bytes": 20670
+    },
+    {
+      "path": "scripts/compare-native-loop-costs.mjs",
+      "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb",
+      "bytes": 9861
+    },
+    {
+      "path": "scripts/compare-native-cost-cohorts.mjs",
+      "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34",
+      "bytes": 19460
+    },
+    {
+      "path": "scripts/review-native-cost-consolidation.py",
+      "sha256": "b13174cec5befbb816e70554fd5d47da215eae941b983e66f05b9dd4417b3bd4",
+      "bytes": 17810
+    },
+    {
+      "path": "scripts/review-native-global-cost-window.py",
+      "sha256": "9ab2ecd9d6ddf234e96332421a6e55937a766495c1a20dd223f4441d6b516940",
+      "bytes": 22204
+    },
+    {
+      "path": "scripts/review-native-global-cost-budget.py",
+      "sha256": "b4312bcdae058ba58c16b4e5e24cb53626496b38f8a154834e0452a43e97d341",
+      "bytes": 8476
+    }
+  ],
+  "costCaptureExecuted": false,
+  "performanceMeasured": false,
+  "runtimeImported": false,
+  "gameExecuted": false,
+  "testsExecuted": false,
+  "buildExecuted": false,
+  "functionalQualification": "pending_real_frozen_0.63_baseline_and_final_0.64_captures",
+  "noFuturePassAsserted": true,
+  "qualification": "Text audit plus Python AST parsing and Node --check only. The 11 cost tools were not executed. Six-A sources remain byte-identical. Arithmetic, population, strict failure handling and measured signatures listed here retain their exact source/AST; all seven central tools retain their historical bytes. New six-B common-value equality is a stricter prospective contract and does not reinterpret the explicit limited scope of six-A. No published 0.63 baseline, actual graph attribution, real cost window, global acceptance, runtime parity or successful future qualification is asserted."
+}

@@ -1,0 +1,126 @@
+--- lot6a/review-owner-costs.py
++++ lot6b-before-review/review-owner-costs.py
+@@ -1,7 +1,7 @@
+ #!/usr/bin/env python3
+-"""Independently review the predeclared lot 6A owner-qualified cost evidence.
+-
+-Usage: python -B docs/migration/lot6a-evidence/review-owner-costs.py CONTRACT AGGREGATE OUTPUT
++"""Independently review the predeclared lot 6B owner-qualified cost evidence.
++
++Usage: python -B docs/migration/lot6b-evidence/review-owner-costs.py CONTRACT AGGREGATE OUTPUT
+ 
+ This standard-library implementation reads retained evidence only. It never
+ imports the JavaScript consolidator or another review helper, starts a process,
+@@ -38,7 +38,7 @@
+ CASE_IDS = ["STCK", "SMLP"]
+ ACTIONS = {"STCK": 10, "SMLP": 15}
+ ORDER = ["A1", "B1", "B2", "A2"]
+-OWNER = "preview_packing"
++OWNER = "selected_rigid"
+ PROGRAM = None
+ STRUCTURAL_EXPECTATION = {
+     "ownerId": OWNER, "programId": PROGRAM,
+@@ -47,7 +47,7 @@
+     "mode": "predeclared_functional_fixture",
+     "qualification": "functional_structure_frozen_before_measurement",
+ }
+-SOURCE_PATHS = ['src/logos-engine/v6-native-runtime.ts', 'src/logos-engine/v6-preview-packing.ts', 'src/logos-engine/v6-preview-packing-types.ts', 'src/logos-engine/v6-preview-packing-geometry.ts', 'src/logos-engine/v6-preview-packing-calculus.ts', 'src/logos-engine/v6-knowledge-store.ts', 'src/logos-engine/kernel.ts']
++SOURCE_PATHS = ['src/logos-engine/v6-native-runtime.ts', 'src/logos-engine/v6-selected-rigid.ts', 'src/logos-engine/v6-selected-rigid-types.ts', 'src/logos-engine/v6-selected-rigid-geometry.ts', 'src/logos-engine/v6-selected-rigid-search.ts', 'src/logos-engine/v6-knowledge-store.ts', 'src/logos-engine/kernel.ts']
+ USER_QUOTE = "si le global reste en dessous de 10% d'augmentation alors une phase qui dépasse 10% peut être accepté."
+ DERIVED_FROM = [
+     {"path": "scripts/review-native-cost-consolidation.py", "bytes": 17810,
+@@ -184,7 +184,7 @@
+         # Premeasurement adaptation of the bounded path handling in 7A io-v1
+         # (reviewer SHA-256 c95fd37389b7af18c049b6264fab968a52d4055f7c590004ecd4877d8b65044e).
+         # The immutable baseline capture supplies the exact whitelist. There is
+-        # no 6A post-measurement correction receipt or alternate declared tool.
++        # no 6B post-measurement correction receipt or alternate declared tool.
+         self.baseline_attribution_root = None
+         self.baseline_attribution_inputs = {}
+ 
+@@ -248,17 +248,17 @@
+ 
+     def load_protocol(self, contract_path, aggregate_path):
+         contract, contract_record = self.read(contract_path)
+-        self.check("contract_schema", contract["schema"] == "logos-engine.lot6a-owner-cost-contract.v2" and contract["lot"] == "6A")
++        self.check("contract_schema", contract["schema"] == "logos-engine.lot6b-owner-cost-contract.v2" and contract["lot"] == "6B")
+         self.equal("four_structural_paths_and_functional_fixture", contract["structuralExpectation"], STRUCTURAL_EXPECTATION)
+         directory = self.local(contract["performanceDirectory"])
+-        self.check("performance_directory", directory.is_dir() and directory.is_relative_to(ROOT / "docs/migration/lot6a-evidence"))
++        self.check("performance_directory", directory.is_dir() and directory.is_relative_to(ROOT / "docs/migration/lot6b-evidence"))
+         self.verify(contract["declaration"])
+         declaration, declaration_record = self.read(contract["declaration"]["path"])
+         self.equal("declaration_location", declaration_record, self.fingerprint(directory / "declaration.json"))
+         self.check("predeclared_declaration", declaration["schema"] == "logos-engine.native-cost-protocol-declaration.v2"
+                    and declaration["status"] == "declared_before_official_window" and declaration["noOfficialWindowAtDeclaration"] is True)
+         self.equal("owner_qualification", declaration["ownerCostQualification"], {
+-            "schema": "logos-engine.lot6a-owner-cost-qualification.v1", "contractPath": contract_record["path"], "tools": contract["tools"]})
++            "schema": "logos-engine.lot6b-owner-cost-qualification.v1", "contractPath": contract_record["path"], "tools": contract["tools"]})
+         self.equal("owner_tool_roles", sorted(contract["tools"]), ["consolidator", "reviewer"])
+         for record in contract["tools"].values():
+             self.verify(record)
+@@ -325,7 +325,7 @@
+             self.equal("source_evidence_native_identity/" + record["path"], candidate["files"][record["path"]], record["sha256"])
+         self.verify(contract["ownerInventory"])
+         inventory, _ = self.read(contract["ownerInventory"]["path"])
+-        self.check("owner_inventory_schema", inventory["schema"] == "logos-engine.lot6a-owner-cost-source-inventory.v1"
++        self.check("owner_inventory_schema", inventory["schema"] == "logos-engine.lot6b-owner-cost-source-inventory.v1"
+                    and inventory["programScope"] == "family-installed programs")
+         self.equal("inventory_native_digests", inventory["nativeDigests"], declaration["nativeDigests"])
+         for key, addition in (("owners", OWNER), ("programs", PROGRAM)):
+@@ -353,7 +353,7 @@
+                    <= instant(readiness["finalizedAt"]) < instant(window["startedAt"]))
+         self.check("inventory_before_contract", instant(inventory["recordedAt"]) <= instant(contract["declaredAt"]))
+         aggregate, aggregate_record = self.read(aggregate_path)
+-        self.check("qualified_aggregate_schema", aggregate["schema"] == "logos-engine.lot6a-owner-cost-consolidation.v2"
++        self.check("qualified_aggregate_schema", aggregate["schema"] == "logos-engine.lot6b-owner-cost-consolidation.v2"
+                    and aggregate["status"] == "qualified_consolidation_complete")
+         self.equal("aggregate_generator", aggregate["generator"], contract["tools"]["consolidator"])
+         self.equal("aggregate_contract", aggregate["contract"], contract_record)
+@@ -377,7 +377,7 @@
+     def load_structural_fixture(self, contract, declaration, manifests):
+         self.verify(contract["structuralFixture"])
+         fixture, _ = self.read(contract["structuralFixture"]["path"])
+-        self.check("functional_fixture_schema", fixture["schema"] == "logos-engine.lot6a-owner-cost-structural-fixture.v1"
++        self.check("functional_fixture_schema", fixture["schema"] == "logos-engine.lot6b-owner-cost-structural-fixture.v1"
+                    and fixture["status"] == "qualified_functional_structure")
+         self.equal("functional_fixture_native_identities", fixture["nativeDigests"], declaration["nativeDigests"])
+         self.equal("functional_fixture_cases_bytes", without(fixture["cases"], {"path"}), without(declaration["cases"], {"path"}))
+@@ -433,7 +433,7 @@
+                            and shape["final"]["levelsCompleted"] == shape["levelsCompleted"])
+         self.verify(fixture["attribution"])
+         attribution, _ = self.read(fixture["attribution"]["path"])
+-        self.check("functional_attribution_schema", attribution["schema"] == "logos-engine.lot6a-owner-cost-structural-attribution.v1"
++        self.check("functional_attribution_schema", attribution["schema"] == "logos-engine.lot6b-owner-cost-structural-attribution.v1"
+                    and attribution["status"] == "qualified_functional_structure")
+         self.equal("functional_attribution_native_identities", attribution["nativeDigests"], declaration["nativeDigests"])
+         self.verify(attribution["generator"])
+@@ -492,7 +492,7 @@
+ 
+     def validate_capture_receipt(self, receipt, role, fixture, capture, manifest, manifest_record):
+         self.check("functional_capture_schema/" + role,
+-                   receipt["schema"] == "logos-engine.lot6a-owner-cost-functional-capture-receipt.v1"
++                   receipt["schema"] == "logos-engine.lot6b-owner-cost-functional-capture-receipt.v1"
+                    and receipt["status"] == "captured_functional_structure" and receipt["role"] == role)
+         self.equal("functional_capture_native_digest/" + role, receipt["nativeDigest"], fixture["nativeDigests"][role])
+         for key in ("nativeSourceBefore", "nativeSourceAfter"):
+@@ -878,8 +878,8 @@
+         external = [record for path, record in self.retained.items() if not path.is_relative_to(ROOT)]
+         self.check("unique_final_input_paths", len(inputs) == len({record["path"] for record in inputs}))
+         accepted = context["globalAccepted"]
+-        return {"schema": "logos-engine.lot6a-owner-cost-review.v2", "status": "qualified_owner_cost_review_passed",
+-                "recordedAt": datetime.now(timezone.utc).isoformat(), "lot": "6A",
++        return {"schema": "logos-engine.lot6b-owner-cost-review.v2", "status": "qualified_owner_cost_review_passed",
++                "recordedAt": datetime.now(timezone.utc).isoformat(), "lot": "6B",
+                 "nativeVersion": context["policy"]["candidate"]["nativeVersion"],
+                 "generator": context["contract"]["tools"]["reviewer"], "derivedFrom": DERIVED_FROM,
+                 "contract": context["contractRecord"], "aggregate": context["aggregateRecord"],
+@@ -932,7 +932,7 @@
+     try:
+         main()
+     except Exception as error:
+-        print(json.dumps({"schema": "logos-engine.lot6a-owner-cost-review-error.v2", "status": "owner_cost_review_failed",
++        print(json.dumps({"schema": "logos-engine.lot6b-owner-cost-review-error.v2", "status": "owner_cost_review_failed",
+                           "structuralProof": False, "historicalStrictPassed": False,
+                           "error": type(error).__name__ + ": " + str(error)}), file=sys.stderr)
+         raise SystemExit(1)

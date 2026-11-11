@@ -1,0 +1,54 @@
+--- 6b-before-review/check-cost-static-inputs.py
++++ 6b-reviewed/check-cost-static-inputs.py
+@@ -7,7 +7,7 @@
+ paths before measurement; no post-measurement I/O correction is assumed.
+ Functional readiness, cross-thread coordination and isolation remain separate.
+ """
+-# Directly adapted from docs/migration/lot5b-evidence/check-cost-static-inputs.py.
++# Directly adapted from docs/migration/lot6a-evidence/check-cost-static-inputs.py.
+ # No predecessor measurements or outcomes are reused.
+ from __future__ import annotations
+ import argparse
+@@ -87,6 +87,8 @@
+     check('distinct_checkouts', ROOT.resolve() != base)
+     check('declared_checkouts', prep['baselineCheckout'] == str(base)
+           and prep['candidateCheckout'] == str(ROOT))
++    check('actual_6B_predecessor_and_candidate_versions',
++          declared['baseline']['nativeVersion'] == '0.63.0' and declared['candidate']['nativeVersion'] == '0.64.0')
+     check('baseline_published_commit', git(base, 'rev-parse', 'HEAD') == policy['baseline']['commit']
+           and type(policy['baseline']['siteVersion']) is int and policy['baseline']['siteVersion'] > 0,
+           commit=git(base, 'rev-parse', 'HEAD'), siteVersion=policy['baseline']['siteVersion'])
+@@ -225,6 +227,7 @@
+           command=command, exitCode=result.returncode, stdout=result.stdout, stderr=result.stderr)
+     owner_contract_record, owner_tools = None, None
+     qualification = declared.get('ownerCostQualification')
++    check('owner_qualification_required_for_6B', qualification is not None)
+     if qualification is not None:
+         contract_path = (ROOT / qualification['contractPath']).resolve()
+         contract = read(contract_path)
+@@ -316,6 +319,16 @@
+         check('functional_structure_predeclared', datetime.fromisoformat(attribution['recordedAt'])
+               <= datetime.fromisoformat(fixture['recordedAt'])
+               <= datetime.fromisoformat(contract['declaredAt']))
++        check('common_value_comparison_fully_bound', attribution['failures'] == []
++              and attribution['commonValuePolicy'] == {'comparison': 'exact',
++                  'permittedMetadataDifference': 'origin.source_digest',
++                  'identityValueAttributions': [], 'unattributedDifferencesAllowed': 0}
++              and len(attribution['commonValueCoverage']) == len(attribution['points']) > 0
++              and all(row == {**{key: point[key] for key in ('case', 'form', 'pointIndex')},
++                  'commonNodesCompared': point['baselineNodeCount'],
++                  'commonDeltasCompared': point['baselineDeltaCount'],
++                  'comparison': 'exact', 'unattributedDifferences': 0}
++                  for row, point in zip(attribution['commonValueCoverage'], attribution['points'])))
+         source_inventory = read(ROOT / contract['ownerInventory']['path'])
+         check('owner_source_inventory_bound', fp(ROOT / contract['ownerInventory']['path']) == contract['ownerInventory']
+               and source_inventory['schema'] == 'logos-engine.lot6b-owner-cost-source-inventory.v1'
+@@ -345,7 +358,7 @@
+         'protocolCheck': fp(perf / 'protocol-check.json'), 'readinessCreated': False,
+         'isolationChecked': False, 'functionalReadinessChecked': False,
+         'generator': fp(Path(__file__).resolve()),
+-        'adaptedFrom': fp(ROOT / 'docs/migration/lot5b-evidence/check-cost-static-inputs.py'),
++        'adaptedFrom': fp(ROOT / 'docs/migration/lot6a-evidence/check-cost-static-inputs.py'),
+         'historicalOrigin': fp(ROOT / 'docs/migration/lot3h-evidence/check-cost-static-inputs.py'),
+         'candidateFreeze': fp(candidate_manifest_path),
+         'preparationTool': fp(ROOT / 'docs/migration/lot6b-evidence/prepare-cost-protocol.py'),

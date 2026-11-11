@@ -1,0 +1,136 @@
+--- lot6a/capture-cost-owner-graphs.mjs
++++ lot6b-before-review/capture-cost-owner-graphs.mjs
+@@ -15,16 +15,16 @@
+ import { createGzip, gunzipSync } from 'node:zlib';
+ 
+ const SCRIPT = fileURLToPath(import.meta.url), ROOT = resolve(dirname(SCRIPT), '../../..');
+-const BASE = resolve(ROOT, 'docs/migration/lot6a-evidence');
+-const DERIVED_FROM = resolve(ROOT, 'docs/migration/lot5b-evidence/capture-cost-owner-graphs.mjs');
+-const OWNER = 'preview_packing';
++const BASE = resolve(ROOT, 'docs/migration/lot6b-evidence');
++const DERIVED_FROM = resolve(ROOT, 'docs/migration/lot6a-evidence/capture-cost-owner-graphs.mjs');
++const OWNER = 'selected_rigid';
+ // The later qualifier imports each side's real store validator. Bind those
+ // external baseline paths in this capture before the analyzer's closed access
+ // list is frozen; an inventory digest alone is not an input-path permission.
+ const ROLE_VALIDATORS = ['src/logos-engine/kernel.ts', 'src/logos-engine/v6-knowledge-store.ts'];
+ const REFERENCE = 'reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6';
+ const DECLARATIONS = [`${REFERENCE}/laya_proto/common_frontier_policy.drm.json`, `${REFERENCE}/morphology_policy/strategy.drm`];
+-const PREVIEW_POLICY = `${REFERENCE}/morphology_policy/preview_packing/preview.drm`;
++const PREVIEW_POLICY = `${REFERENCE}/morphology_policy/strategy.drm`;
+ const HASH = bytes => createHash('sha256').update(bytes).digest('hex');
+ const copy = value => JSON.parse(JSON.stringify(value));
+ const label = path => path.startsWith(ROOT + sep) ? relative(ROOT, path) : path;
+@@ -94,7 +94,7 @@
+   const casesPath = resolve(ROOT, casesArgument), manifestPath = resolve(ROOT, manifestArgument);
+   const output = resolve(ROOT, outputArgument), receiptPath = output.replace(/\.json\.gz$/, '.receipt.json');
+   assert.ok(inside(BASE, casesPath) && inside(BASE, output) && output.endsWith('.json.gz'),
+-    'Cases and exclusive capture output must belong to lot6a-evidence');
++    'Cases and exclusive capture output must belong to lot6b-evidence');
+   for (const path of [output, receiptPath, resolve(dirname(casesPath), 'window.json'), resolve(dirname(casesPath), 'readiness.json')]) await absent(path);
+   await mkdir(dirname(output), { recursive: true });
+   const receiptFile = await open(receiptPath, 'wx'), gzip = createGzip({ level: 6 });
+@@ -117,14 +117,14 @@
+     if (expected) assert.equal(record.sha256, typeof expected === 'string' ? expected : expected.sha256);
+     return bytes;
+   }
+-  const receipt = { schema: 'logos-engine.lot6a-owner-cost-functional-capture-receipt.v1', status: 'running', role, checkout,
++  const receipt = { schema: 'logos-engine.lot6b-owner-cost-functional-capture-receipt.v1', status: 'running', role, checkout,
+     ownerId: OWNER, acquisitionMode: 'selected_only_source_owner_no_passive_returns',
+     startedAt: new Date().toISOString(), sessions: [], failures: [], inputsBefore: [], inputsAfter: [],
+     nativeSourceUnchanged: false, inputsUnchanged: false, generatorUnchanged: false,
+     measuredCostSessions: 0, timingReportsRead: 0, timingMetricsProduced: 0 };
+   let before = null, generator = null;
+   try {
+-    await write(`${JSON.stringify({ schema: 'logos-engine.lot6a-owner-cost-functional-capture.v1', role, checkout,
++    await write(`${JSON.stringify({ schema: 'logos-engine.lot6b-owner-cost-functional-capture.v1', role, checkout,
+       startedAt: receipt.startedAt }).slice(0, -1)},"records":[\n`);
+     generator = await fp(SCRIPT); receipt.generator = generator; await input(SCRIPT, generator);
+     receipt.derivedFrom = await fp(DERIVED_FROM); await input(DERIVED_FROM, receipt.derivedFrom);
+@@ -157,23 +157,23 @@
+     ]);
+     for (const item of cases.cases) for (const form of ['warmup', 'measured']) {
+       const trace = traces.get(item.id), limit = form === 'warmup' ? item.warmupActions : item.actions;
+-      const sessionId = `lot6a-owner-cost-${item.id.toLowerCase()}-${form}`;
++      const sessionId = `lot6b-owner-cost-${item.id.toLowerCase()}-${form}`;
+       const identity = { case: item.id, form, sessionId };
+       const budgets = { targetLevels: item.targetLevels, levelActionCaps: Array(item.targetLevels).fill(600) };
+       const session = { ...identity, status: 'running', actionsLimit: limit, commands: 0, captures: 0,
+-        terminalInspections: 0, previewPackingRecordCalls: 0, previewPackingProposalCalls: 0, previewPackingCheckpoints: 0, shape: null };
++        terminalInspections: 0, selectedRigidRecordCalls: 0, selectedRigidProposalCalls: 0, selectedRigidCheckpoints: 0, shape: null };
+       receipt.sessions.push(session);
+       await emit({ type: 'session_start', ...identity, actionsLimit: limit, budgets, coldKnowledge: true,
+         checkpointSupplied: false, trace: item.trace, traceSha256: item.traceSha256,
+         initialPublicPacket: trace.packets[0].packet, nativeDigest: before.digest });
+       let runtime = null, revision = 0, chain = null, pointIndex = 0, last = null;
+-      const reconstructed = {}, pendingPreviewPackingCalls = [], pendingPreviewPackingProposals = [], pendingPreviewPackingCheckpoints = [];
++      const reconstructed = {}, pendingSelectedRigidCalls = [], pendingSelectedRigidProposals = [], pendingSelectedRigidCheckpoints = [];
+       const shape = { actions: 0, cycles: 0, levelsCompleted: 0, requests: [], observations: [], inspection: [], final: null };
+       const service = new V6AgentService(async () => {
+         assert.equal(runtime, null, 'Only one cold runtime per session');
+         runtime = await createNativeV6Runtime(declarations);
+-        const owner = runtime.acquisitionFamilies?.preview;
+-        assert.equal(Boolean(owner), role === 'candidate', 'PreviewPacking owner differs from declared capture side');
++        const owner = runtime.acquisitionFamilies?.selectedRigid;
++        assert.equal(Boolean(owner), role === 'candidate', 'SelectedRigid owner differs from declared capture side');
+         if (owner) {
+           assert.equal(owner.id, OWNER);
+           // Observe actual immutable checkpoints produced by the registered
+@@ -182,7 +182,7 @@
+           owner.nativeState = (...args) => {
+             const state = nativeState(...args);
+             if (state !== retainedCheckpoint) {
+-              pendingPreviewPackingCheckpoints.push({ index: session.previewPackingCheckpoints++, state });
++              pendingSelectedRigidCheckpoints.push({ index: session.selectedRigidCheckpoints++, state });
+               retainedCheckpoint = state;
+             }
+             return state;
+@@ -191,7 +191,7 @@
+           owner.propose = (...args) => {
+             const sourceBefore = owner.sourceState();
+             const observe = result => {
+-              pendingPreviewPackingProposals.push({ index: session.previewPackingProposalCalls++,
++              pendingSelectedRigidProposals.push({ index: session.selectedRigidProposalCalls++,
+                 observation: observedIdentity(args[0]), rows: copy(args[1]), remaining: args[3],
+                 sourceBefore, returnValue: copy(result), sourceAfter: owner.sourceState() });
+               return result;
+@@ -203,7 +203,7 @@
+           owner.record = (...args) => {
+             const sourceBefore = owner.sourceState();
+             const observe = result => {
+-              pendingPreviewPackingCalls.push({ index: session.previewPackingRecordCalls++, before: observedIdentity(args[0]),
++              pendingSelectedRigidCalls.push({ index: session.selectedRigidRecordCalls++, before: observedIdentity(args[0]),
+                 after: observedIdentity(args[1]), command: copy(args[2]), selected: args[5] != null,
+                 sourceBefore, returnValue: copy(result), sourceAfter: owner.sourceState() });
+               return result;
+@@ -241,9 +241,9 @@
+         await emit({ type: terminalInspection ? 'terminal_inspection' : 'capture', ...identity, pointIndex: pointIndex++,
+           request, publicPacket: packet, checkedCommandRecord, result, snapshot,
+           knowledge: { chain: memory.chain, nodeCount: snapshot.nodeCount, fromRevision: revision,
+-            toRevision: memory.deltas.length, deltasAdded }, previewPackingCalls: pendingPreviewPackingCalls.splice(0),
+-          previewPackingProposals: pendingPreviewPackingProposals.splice(0),
+-          previewPackingCheckpoints: pendingPreviewPackingCheckpoints.splice(0) });
++            toRevision: memory.deltas.length, deltasAdded }, selectedRigidCalls: pendingSelectedRigidCalls.splice(0),
++          selectedRigidProposals: pendingSelectedRigidProposals.splice(0),
++          selectedRigidCheckpoints: pendingSelectedRigidCheckpoints.splice(0) });
+         revision = memory.deltas.length;
+         return response;
+       }
+@@ -276,13 +276,13 @@
+         await handle({ type: 'inspect', sessionId, sequence: limit }, null, null, true);
+       }
+       assert.equal(shape.inspection.length, form === 'warmup' ? 0 : 3);
+-      assert.equal(session.previewPackingRecordCalls, 0, 'The fixed cost traces must never acquire a PreviewPacking return');
++      assert.equal(session.selectedRigidRecordCalls, 0, 'The fixed cost traces must never acquire a SelectedRigid return');
+       session.status = 'captured_functional_structure'; session.shape = shape;
+       await emit({ type: 'session_end', ...identity, status: session.status, shape,
+         commands: session.commands, captures: session.captures, terminalInspections: session.terminalInspections,
+-        previewPackingRecordCalls: session.previewPackingRecordCalls,
+-        previewPackingProposalCalls: session.previewPackingProposalCalls,
+-        previewPackingCheckpoints: session.previewPackingCheckpoints, terminalResumePerformed: false });
++        selectedRigidRecordCalls: session.selectedRigidRecordCalls,
++        selectedRigidProposalCalls: session.selectedRigidProposalCalls,
++        selectedRigidCheckpoints: session.selectedRigidCheckpoints, terminalResumePerformed: false });
+       await service.handle({ type: 'close', sessionId, sequence: limit });
+     }
+   } catch (error) {

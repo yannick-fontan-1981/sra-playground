@@ -1,0 +1,73 @@
+--- immutable-6a/record-owner-source-inventory.mjs
++++ 6b-reviewed/record-owner-source-inventory.mjs
+@@ -1,6 +1,6 @@
+ #!/usr/bin/env node
+ /** Record the actual factories' owners and family-installed programs, without a session.
+- * Derived from the retained 7B inventory, with both generator identities bound.
++ * Derived from the retained 6A inventory, with both generator identities bound.
+  * Usage: node SCRIPT BASELINE_CHECKOUT OUTPUT.json
+  * No runtime initialize, observation, proposal, action or workflow execution is requested.
+  */
+@@ -12,7 +12,7 @@
+ 
+ const SCRIPT = fileURLToPath(import.meta.url);
+ const ROOT = resolve(dirname(SCRIPT), '../../..');
+-const DERIVED_FROM = 'docs/migration/lot5b-evidence/record-owner-source-inventory.mjs';
++const DERIVED_FROM = 'docs/migration/lot6a-evidence/record-owner-source-inventory.mjs';
+ const REFERENCE = 'reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6';
+ const RUNTIME = 'src/logos-engine/v6-native-runtime.ts';
+ const STORE = 'src/logos-engine/v6-knowledge-store.ts';
+@@ -76,6 +76,9 @@
+   const inputs = {};
+   for (const name of [RUNTIME, STORE, PROGRAMS, ...DECLARATIONS]) inputs[name] = await fingerprint(checkout, name);
+   const runtimeSource = await readFile(resolve(checkout, RUNTIME), 'utf8');
++  const versions = [...runtimeSource.matchAll(/NATIVE_V6_IMPLEMENTATION\s*=\s*['"]logos-engine\.typescript\.v6\.native-migration\/([^'"]+)['"]/g)].map(match => match[1]);
++  assert.deepEqual(versions, [role === 'baseline' ? '0.63.0' : '0.64.0'],
++    '6B owner inventory requires its actual 0.63 predecessor and frozen 0.64 candidate');
+   assert.ok(runtimeSource.includes('id: `family_state:${family.id}`')
+     && runtimeSource.includes('id: `family_activation:${family.id}`')
+     && runtimeSource.includes('for (const family of this.families) await family.attachPrograms?.(this.knowledge)'),
+@@ -94,7 +97,7 @@
+   assert.match(runtime.sourceDigest, /^[0-9a-f]{64}$/, 'Factory sourceDigest is missing');
+   const owners = runtime.families.map(family => family.id);
+   uniqueIds(owners, `${role} owners`);
+-  const scope = `lot6a-owner-source-inventory:${role}`;
++  const scope = `lot6b-owner-source-inventory:${role}`;
+   const store = new NativeKnowledgeStore(runtime.sourceDigest, scope);
+   const installations = [];
+   const registerProgram = store.registerProgram.bind(store);
+@@ -132,7 +135,7 @@
+   for (const [name, expected] of Object.entries(inputs)) {
+     assert.deepEqual(await fingerprint(checkout, name), expected, 'Factory input changed: ' + name);
+   }
+-  return { checkout, native: before, owners, programs, programNodeIds, installations,
++  return { checkout, nativeVersion: versions[0], native: before, owners, programs, programNodeIds, installations,
+     factorySourceDigest: runtime.sourceDigest, storeScope: scope, sourceInputs: Object.values(inputs),
+     runtimeUninitializedBeforeAndAfter: true,
+     sourceDeclaredNodeIds: {
+@@ -166,20 +169,20 @@
+     ownersAdded: difference(candidate.owners, baseline.owners), ownersRemoved: difference(baseline.owners, candidate.owners),
+     programsAdded: difference(candidate.programs, baseline.programs), programsRemoved: difference(baseline.programs, candidate.programs),
+   };
+-  assert.deepEqual(changes.ownersAdded, ['preview_packing'], 'Only the PreviewPacking owner may be added');
++  assert.deepEqual(changes.ownersAdded, ['selected_rigid'], 'Only the SelectedRigid owner may be added');
+   assert.deepEqual(changes.ownersRemoved, [], 'No registered baseline owner may be removed');
+-  assert.deepEqual(changes.programsAdded, [], 'PreviewPacking installs no separate source workflow');
++  assert.deepEqual(changes.programsAdded, [], 'SelectedRigid installs no separate source workflow');
+   assert.deepEqual(changes.programsRemoved, [], 'No installed baseline program may be removed');
+-  assert.deepEqual(candidate.owners.filter(id => id !== 'preview_packing'), baseline.owners,
++  assert.deepEqual(candidate.owners.filter(id => id !== 'selected_rigid'), baseline.owners,
+     'Existing owner registration order must remain exact');
+   assert.deepEqual(candidate.installations, baseline.installations,
+-    'Adding PreviewPacking must not change existing family program registrations');
++    'Adding SelectedRigid must not change existing family program registrations');
+   assert.deepEqual(await inventory(baselineCheckout), baseline.native, 'Baseline source changed after its inspection');
+   assert.deepEqual(await inventory(candidateCheckout), candidate.native, 'Candidate source changed after its inspection');
+   assert.deepEqual(await fingerprint(ROOT, relative(ROOT, SCRIPT)), generator, 'Inventory generator changed');
+   assert.deepEqual(await fingerprint(ROOT, DERIVED_FROM), derivedFrom, 'Retained derivation source changed');
+   const result = {
+-    schema: 'logos-engine.lot6a-owner-cost-source-inventory.v1', recordedAt: new Date().toISOString(),
++    schema: 'logos-engine.lot6b-owner-cost-source-inventory.v1', recordedAt: new Date().toISOString(),
+     nativeDigests: { baseline: baseline.native.digest, candidate: candidate.native.digest },
+     owners: { baseline: baseline.owners, candidate: candidate.owners },
+     programs: { baseline: baseline.programs, candidate: candidate.programs },

@@ -1,0 +1,60 @@
+{
+  "schema": "logos-engine.lot6b.cumulative-case-clock.v1",
+  "case": "KLOT",
+  "status": "completed_within_budget",
+  "limitSeconds": 2400,
+  "priorChargedSeconds": 11.393673999999999,
+  "chargedSeconds": 350.8621536330002,
+  "remainingSeconds": 2049.137846367,
+  "intervals": [
+    {
+      "label": "prior-public-history-reconciliation",
+      "startedAt": "2026-11-11T14:37:27.145099+00:00",
+      "startedMonotonic": 10291.612885606,
+      "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+      "finishedAt": "2026-11-11T14:37:40.694417+00:00",
+      "elapsedSeconds": 13.549298560999887
+    },
+    {
+      "label": "cold-development-klot-01",
+      "startedAt": "2026-11-11T15:37:33.876908+00:00",
+      "startedMonotonic": 13898.34469436,
+      "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+      "finishedAt": "2026-11-11T15:39:14.302898+00:00",
+      "elapsedSeconds": 100.42597186500097
+    },
+    {
+      "label": "klot-original-parity-01",
+      "startedAt": "2026-11-11T15:41:22.318303+00:00",
+      "startedMonotonic": 14126.786093623,
+      "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+      "finishedAt": "2026-11-11T15:42:24.341679+00:00",
+      "elapsedSeconds": 62.02335395799855
+    },
+    {
+      "label": "klot-reader-negative-01",
+      "startedAt": "2026-11-11T15:43:15.635840+00:00",
+      "startedMonotonic": 14240.103624008,
+      "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+      "finishedAt": "2026-11-11T15:45:59.105711+00:00",
+      "elapsedSeconds": 163.46985524900083
+    }
+  ],
+  "active": null,
+  "priorObservation": {
+    "path": "docs/migration/lot6b-evidence/source-opening/klot-prior-observation-reconciled.json",
+    "bytes": 7490,
+    "sha256": "accf391dd05739482dc9ef6147525a8c3e978f7740f7ef517a6106fa7b23835b"
+  },
+  "generator": {
+    "path": "docs/migration/lot6b-evidence/case-clock.py",
+    "sha256": "0dcb7199d327c6aced2671952a12d78c8136272de49a0bc17e6844a0f40285ee",
+    "bytes": 3185
+  },
+  "updatedAt": "2026-11-11T15:45:59.105723+00:00",
+  "priorCorrection": {
+    "path": "docs/migration/lot6b-evidence/source-opening/klot-clock-before-prior-correction.json",
+    "bytes": 1058,
+    "sha256": "abb0932eda3c4e07a95a3c76bb9c9386b5d2b609adeb01ed14501bf945b980ab"
+  }
+}

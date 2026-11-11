@@ -1,0 +1,105 @@
+{
+  "schema": "logos-engine.lot6b.bounded-case-command.v1",
+  "status": "passed",
+  "command": [
+    "python",
+    "-B",
+    "scripts/tests/qualify-selected-rigid-cold-reader.py",
+    "--report",
+    "docs/migration/lot6b-evidence/development-freeze-01/klot-campaign.json.gz",
+    "--positive-result",
+    "docs/migration/lot6b-evidence/development-freeze-01/source-parity-attempt-01/result.json.gz",
+    "--positive-receipt",
+    "docs/migration/lot6b-evidence/development-freeze-01/source-parity-attempt-01/reader-execution.json",
+    "--output-dir",
+    "docs/migration/lot6b-evidence/development-freeze-01/reader-negative-attempt-01/results",
+    "--timeout-seconds",
+    "120"
+  ],
+  "case": "KLOT",
+  "label": "klot-reader-negative-01",
+  "startedAt": "2026-11-11T15:43:15.640300+00:00",
+  "finishedAt": "2026-11-11T15:45:59.080221+00:00",
+  "elapsedSeconds": 163.43994378099887,
+  "limitSeconds": 300.0,
+  "timedOut": false,
+  "exitCode": 0,
+  "interruption": null,
+  "childProcessGroupReaped": true,
+  "orphanProcessGroupTerminated": false,
+  "inputs": [
+    {
+      "path": "docs/migration/lot6b-evidence/run-case-command.py",
+      "bytes": 7433,
+      "sha256": "f50b1e34f1fba9d104ab37c58f5adf6be2bb4fa8ee73bb74ecdcc81085fa1517"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/case-clock.py",
+      "bytes": 3185,
+      "sha256": "0dcb7199d327c6aced2671952a12d78c8136272de49a0bc17e6844a0f40285ee"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/development-freeze-01/reader-negative-attempt-01/watch.json",
+      "bytes": 998,
+      "sha256": "52ad2c9a57494bbf7609d3b4b23691c3941e5d905800497ac0fbf26d749210c4"
+    },
+    {
+      "path": "scripts/tests/qualify-selected-rigid-cold-reader.py",
+      "bytes": 16714,
+      "sha256": "0375b132bf7c4fbc798ac4384c96c6d9134c512289d98d0ec67d877c89465f47"
+    },
+    {
+      "path": "scripts/compare-selected-rigid-public-parity.py",
+      "bytes": 43759,
+      "sha256": "d77b4fbec377668f8673c39cb1401bcbce86cd11323a2ef0671f757df24e8f38"
+    },
+    {
+      "path": "scripts/export-v6-selected-rigid-reference.py",
+      "bytes": 48745,
+      "sha256": "90df08227717a2c23aa1550f105935ed8812815622f069941344fa2c91e0fc16"
+    },
+    {
+      "path": "scripts/verify-selected-rigid-presence.py",
+      "bytes": 65174,
+      "sha256": "91a1b0ded6d4b303ded74218a714ff042dcb35cf756bbe68b654f1d8003357b5"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/development-freeze-01/klot-campaign.json.gz",
+      "bytes": 10936146,
+      "sha256": "2bc1788e3fc0b3494a447de208ba0705f2b8c58c10b34d6d706826720d99c5f6"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/development-freeze-01/source-parity-attempt-01/result.json.gz",
+      "bytes": 108787,
+      "sha256": "8fbf8afc04b850c2d1ed9e8ff8a35a584376c937d05175b44bf6df9decb79d49"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/development-freeze-01/source-parity-attempt-01/reader-execution.json",
+      "bytes": 2851,
+      "sha256": "ed1658a0f84f04a6840f3416fcb0b51d353dff70509c0e9e534e63fa41e62ab9"
+    }
+  ],
+  "inputsUnchanged": true,
+  "output": {
+    "path": "docs/migration/lot6b-evidence/development-freeze-01/reader-negative-attempt-01/bounded-execution.log.gz",
+    "bytes": 241,
+    "sha256": "1eadb30a78c1fe33d5d096294a5354dffc1d6edd9b9cf6b991dedc88e1bf8532"
+  },
+  "caseClock": {
+    "path": "docs/migration/lot6b-evidence/klot-case-clock.json",
+    "bytes": 2235,
+    "sha256": "ce2345c824155ad4e0660c04e613bd376c43da9c2d63cb2d2f3cad8208e48f7c"
+  },
+  "chargedInterval": {
+    "label": "klot-reader-negative-01",
+    "startedAt": "2026-11-11T15:43:15.635840+00:00",
+    "startedMonotonic": 14240.103624008,
+    "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+    "finishedAt": "2026-11-11T15:45:59.105711+00:00",
+    "elapsedSeconds": 163.46985524900083
+  },
+  "chargedSeconds": 350.8621536330002,
+  "remainingSeconds": 2049.137846367,
+  "clockCloseExitCode": 0,
+  "qualification": "One actual bounded task, including failed or timed out work, charged to the same cumulative case clock. Existing logs and physical public journals are retained; no outcome is reclassified."
+}

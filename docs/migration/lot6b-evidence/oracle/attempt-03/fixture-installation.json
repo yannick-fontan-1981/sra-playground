@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "source": {
+    "path": "docs/migration/lot6b-evidence/oracle/attempt-03/reference.json.gz",
+    "bytes": 1727762,
+    "sha256": "0bbb3017d111fa27e2928d0e7c07246b1bd28d7b1e2d4776db69522ac14dccfe"
+  },
+  "target": {
+    "path": "tests/fixtures/v6-selected-rigid/reference.json.gz",
+    "bytes": 1727762,
+    "sha256": "0bbb3017d111fa27e2928d0e7c07246b1bd28d7b1e2d4776db69522ac14dccfe"
+  },
+  "recordedAt": "2026-11-11T14:46:32.302566+00:00"
+}
