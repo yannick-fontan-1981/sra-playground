@@ -1,0 +1,28 @@
+{
+  "name": "parity",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/scripts/compare-window-question-checkpoint-parity.py",
+    "--checkpoint",
+    "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json",
+    "--journal",
+    "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-actual-public-journal.jsonl.gz",
+    "--execution-receipt",
+    "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/execution-hpdl.json",
+    "--output",
+    "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/window-source-parity.PARTIAL.json.gz"
+  ],
+  "resultPath": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/window-source-parity.PARTIAL.json.gz",
+  "logPath": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/parity.log",
+  "status": "running",
+  "startedAt": "2026-11-11T13:33:01.569416+00:00",
+  "monotonicStartedNs": "6426037197474",
+  "exitCode": null,
+  "childSpawnEstablished": true,
+  "termination": null,
+  "pid": 16,
+  "processGroupId": 16,
+  "parentDeathSignal": "SIGKILL",
+  "separateProcessGroup": true
+}

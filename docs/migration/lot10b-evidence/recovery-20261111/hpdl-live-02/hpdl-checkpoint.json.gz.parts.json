@@ -1,0 +1,106 @@
+{
+  "schema": "logos-engine.evidence-byte-parts.v1",
+  "original": {
+    "file": "hpdl-checkpoint.json.gz",
+    "sha256": "1b3702fc75b104f769eba925dcfb4e69aa3244258e4097091e415a5a7d8207a1",
+    "bytes": 16326392
+  },
+  "parts": [
+    {
+      "file": "hpdl-checkpoint.json.gz.part000",
+      "sha256": "c31c7f087f11a1302c6a32ffcb937c35b9c701806bc7ecab58a9178c23741cff",
+      "bytes": 900000
+    },
+    {
+      "file": "hpdl-checkpoint.json.gz.part001",
+      "sha256": "3a00542efce304c3c9f128271c14c703f521b8d60f44ee2269680864f897a55c",
+      "bytes": 900000
+    },
+    {
+      "file": "hpdl-checkpoint.json.gz.part002",
+      "sha256": "a22f7afb6e93edd1fafd4a5377f1b387cb8f8bc7c165ec69eeedaeedca1daa28",
+      "bytes": 900000
+    },
+    {
+      "file": "hpdl-checkpoint.json.gz.part003",
+      "sha256": "324cdbdde340ac8bfe544edd42e5c1df33e5c7a0b47b02b747b56fc02b25f1ac",
+      "bytes": 900000
+    },
+    {
+      "file": "hpdl-checkpoint.json.gz.part004",
+      "sha256": "be6f4cf7a799b14064c5dedb7ed876f20886cbf60d2c0f28eba339a506375540",
+      "bytes": 900000
+    },
+    {
+      "file": "hpdl-checkpoint.json.gz.part005",
+      "sha256": "40b3207ed9009a90cd94f016a181206da077642db4af9776f5a8c6b6e6ba9bf9",
+      "bytes": 900000
+    },
+    {
+      "file": "hpdl-checkpoint.json.gz.part006",
+      "sha256": "0525f00b6b698077df2c43901f368d7b93b0357093c84b98870a30f346aecba1",
+      "bytes": 900000
+    },
+    {
+      "file": "hpdl-checkpoint.json.gz.part007",
+      "sha256": "acecc6b97b4c987d80cc435bbf0ea90a1edb20a04cfddfc12c34fd97d1ce9048",
+      "bytes": 900000
+    },
+    {
+      "file": "hpdl-checkpoint.json.gz.part008",
+      "sha256": "f0f6063d78859521ccef1a101ac65cf817b236cb9f9b0306bb99bc473b519522",
+      "bytes": 900000
+    },
+    {
+      "file": "hpdl-checkpoint.json.gz.part009",
+      "sha256": "4c92613177aafab29f667e2cce5e973c91a3609790e77ebe9b6177cff9080981",
+      "bytes": 900000
+    },
+    {
+      "file": "hpdl-checkpoint.json.gz.part010",
+      "sha256": "8d792d98693d049c1193e0e7a609b4c454c660a97f2b67c407efd374932f7cb1",
+      "bytes": 900000
+    },
+    {
+      "file": "hpdl-checkpoint.json.gz.part011",
+      "sha256": "ffed0e9906316792c3fb2cb8e721bf37d5ca711e5de868e3c60b8f25f90e786b",
+      "bytes": 900000
+    },
+    {
+      "file": "hpdl-checkpoint.json.gz.part012",
+      "sha256": "1fb1bc932685198b5d21d656dd6bfb86430de373820a8411fd44dda0b1a41e27",
+      "bytes": 900000
+    },
+    {
+      "file": "hpdl-checkpoint.json.gz.part013",
+      "sha256": "c44f87de2788a12ce8d5d4b910fa06e7245bf04d9bf8f75a7fb841d007ea7764",
+      "bytes": 900000
+    },
+    {
+      "file": "hpdl-checkpoint.json.gz.part014",
+      "sha256": "c93006dadb694290db9efd497dd1db7d609b2caa5a288970efb2879968779765",
+      "bytes": 900000
+    },
+    {
+      "file": "hpdl-checkpoint.json.gz.part015",
+      "sha256": "c6509b22d8aa709b6fc90b9e2017de42dfcf0774b19cd32b8da6eae403200f29",
+      "bytes": 900000
+    },
+    {
+      "file": "hpdl-checkpoint.json.gz.part016",
+      "sha256": "ec198def778922c5f5f93bfc67f472e00f0bf63ed35a59ea25782c3df207ef0b",
+      "bytes": 900000
+    },
+    {
+      "file": "hpdl-checkpoint.json.gz.part017",
+      "sha256": "3b959c56bd77b57761d81ae0ada323918fe688818ea2887ac77769715cd9cf6a",
+      "bytes": 900000
+    },
+    {
+      "file": "hpdl-checkpoint.json.gz.part018",
+      "sha256": "b43199001c04c4028d45bff28823ab6042f53a6883297aee0695e7965c3d3ee0",
+      "bytes": 126392
+    }
+  ],
+  "qualification": "Exact byte partitions of immutable evidence; original data and checksum are unchanged."
+}

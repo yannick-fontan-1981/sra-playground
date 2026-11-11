@@ -1,0 +1,51 @@
+{
+  "schema": "logos-engine.browser-qa.v1",
+  "game": "HPDL",
+  "nativeDigest": "74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12",
+  "nativeVersion": "0.62.0",
+  "status": "passed",
+  "qualification": "Cold browser control QA only: Pause at2actions, exactly one action to3, then resumed session naturally completed first level at7actions. This does not establish six-level success, full caller parity, or a second Paused status. The second pause/wait tool timed out and its actual recovery observation is retained. Unmeasured shared functional work; no complete cross-lane-quiet or performance result is claimed.",
+  "startedAt": "2026-11-11T16:07:51.135Z",
+  "finishedAt": "2026-11-11T16:10:23.654309+00:00",
+  "recordedAt": "2026-11-11T16:11:01.645078+00:00",
+  "learnedStateInjected": false,
+  "pause": {
+    "observed": "Paused.",
+    "actions": 2
+  },
+  "oneAction": {
+    "observed": "One action completed.",
+    "actions": 3
+  },
+  "resume": {
+    "control": "Run 16 actions",
+    "observed": "Reading the board and planning… then Level completed.",
+    "actionsBefore": 3,
+    "actionsAfter": 7,
+    "levelsSolvedAfter": 1
+  },
+  "actionsObserved": 7,
+  "levelsCompletedObserved": 1,
+  "artifacts": [
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-browser-01/execution-hpdl-browser.json",
+      "bytes": 4197,
+      "sha256": "6a3084fb460e4fc18c30096a889511dc93a54d3be40738fcca88c96092482b4a"
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-browser-01/observed-cua.json",
+      "bytes": 65311,
+      "sha256": "f89365b6f5e705c6b0eaecf9e56b35ef45a3a3e69dcacb286c8512bedeae3333"
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-browser-01/hpdl-paused.png",
+      "bytes": 66459,
+      "sha256": "1046bd19258b87e66ef1097919175bcd3990fc25a508e89c42ba05f7fbaeca44"
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-browser-01/hpdl-one-action.png",
+      "bytes": 66316,
+      "sha256": "b3296b2958dc35de61ebd44fb5bbbbe36980691adf02e09dc45818a026d3c277"
+    }
+  ]
+}

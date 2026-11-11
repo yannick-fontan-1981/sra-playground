@@ -1,0 +1,197 @@
+{
+  "schema": "logos-engine.lot10b.javascript-syntax-check.v1",
+  "status": "passed",
+  "startedAt": "2026-11-11T14:29:33.673412+00:00",
+  "finishedAt": "2026-11-11T14:29:34.213833+00:00",
+  "elapsedSeconds": 0.5404118579990609,
+  "declaredGlobalCeilingSeconds": 30,
+  "perFileTimeoutMaximumSeconds": 5,
+  "coordination": {
+    "lock": "/workspace/shared/sra-coordination/performance.lock",
+    "mode": "shared_nonblocking",
+    "authorization": "Explicit lot7 quiet release followed by bounded JavaScript syntax review"
+  },
+  "fileCount": 7,
+  "filesBefore": [
+    {
+      "path": "docs/migration/lot10b-evidence/capture-cost-owner-graphs.mjs",
+      "sha256": "d0a6d94571ebdbc62c9caef22aef76ecdcd25a6a08054305a728dc9e2996baa4",
+      "bytes": 20264
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/check-stream-evidence-json.mjs",
+      "sha256": "0511eb7eebe0313386db269f2cbee2f019d8e3f2a7397728fcdd5500162733eb",
+      "bytes": 19528
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/consolidate-owner-costs.mjs",
+      "sha256": "bb954e5fac683e27c4176fa693b69861340136da9f77c4e477c2291722ff0c71",
+      "bytes": 51262
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/qualify-cost-owner-graphs.mjs",
+      "sha256": "9b6d83c8c1c392f3c3a9f2d901e41b87891f8becc4f7e0614aaae04539cd8703",
+      "bytes": 46289
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/record-owner-source-inventory.mjs",
+      "sha256": "3769e1e3ce2dd9238d6d621bdbe04cd0dd95b9de90b1f4d9fbdc6edc77954613",
+      "bytes": 12316
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/run-hpdl-campaign.mjs",
+      "sha256": "ddb3bf22034b8210303b487c9d0eed9bbef5d5f864e0dc184907b6c2b9538799",
+      "bytes": 8285
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/stream-evidence-json.mjs",
+      "sha256": "96ac2ddbaac8cc62126f6674301b2362301895f44ce90e5dbd1dec9fb6fc87ca",
+      "bytes": 6601
+    }
+  ],
+  "filesAfter": [
+    {
+      "path": "docs/migration/lot10b-evidence/capture-cost-owner-graphs.mjs",
+      "sha256": "d0a6d94571ebdbc62c9caef22aef76ecdcd25a6a08054305a728dc9e2996baa4",
+      "bytes": 20264
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/check-stream-evidence-json.mjs",
+      "sha256": "0511eb7eebe0313386db269f2cbee2f019d8e3f2a7397728fcdd5500162733eb",
+      "bytes": 19528
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/consolidate-owner-costs.mjs",
+      "sha256": "bb954e5fac683e27c4176fa693b69861340136da9f77c4e477c2291722ff0c71",
+      "bytes": 51262
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/qualify-cost-owner-graphs.mjs",
+      "sha256": "9b6d83c8c1c392f3c3a9f2d901e41b87891f8becc4f7e0614aaae04539cd8703",
+      "bytes": 46289
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/record-owner-source-inventory.mjs",
+      "sha256": "3769e1e3ce2dd9238d6d621bdbe04cd0dd95b9de90b1f4d9fbdc6edc77954613",
+      "bytes": 12316
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/run-hpdl-campaign.mjs",
+      "sha256": "ddb3bf22034b8210303b487c9d0eed9bbef5d5f864e0dc184907b6c2b9538799",
+      "bytes": 8285
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/stream-evidence-json.mjs",
+      "sha256": "96ac2ddbaac8cc62126f6674301b2362301895f44ce90e5dbd1dec9fb6fc87ca",
+      "bytes": 6601
+    }
+  ],
+  "inputFilesUnchanged": true,
+  "checks": [
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--check",
+        "docs/migration/lot10b-evidence/capture-cost-owner-graphs.mjs"
+      ],
+      "startedAt": "2026-11-11T14:29:33.675927+00:00",
+      "exitCode": 0,
+      "status": "passed",
+      "stdout": "",
+      "stderr": "",
+      "finishedAt": "2026-11-11T14:29:33.781262+00:00",
+      "durationSeconds": 0.10534413299865264
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--check",
+        "docs/migration/lot10b-evidence/check-stream-evidence-json.mjs"
+      ],
+      "startedAt": "2026-11-11T14:29:33.781281+00:00",
+      "exitCode": 0,
+      "status": "passed",
+      "stdout": "",
+      "stderr": "",
+      "finishedAt": "2026-11-11T14:29:33.843790+00:00",
+      "durationSeconds": 0.06252349900023546
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--check",
+        "docs/migration/lot10b-evidence/consolidate-owner-costs.mjs"
+      ],
+      "startedAt": "2026-11-11T14:29:33.843810+00:00",
+      "exitCode": 0,
+      "status": "passed",
+      "stdout": "",
+      "stderr": "",
+      "finishedAt": "2026-11-11T14:29:33.931046+00:00",
+      "durationSeconds": 0.08724895699924673
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--check",
+        "docs/migration/lot10b-evidence/qualify-cost-owner-graphs.mjs"
+      ],
+      "startedAt": "2026-11-11T14:29:33.931063+00:00",
+      "exitCode": 0,
+      "status": "passed",
+      "stdout": "",
+      "stderr": "",
+      "finishedAt": "2026-11-11T14:29:33.989205+00:00",
+      "durationSeconds": 0.058154684000328416
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--check",
+        "docs/migration/lot10b-evidence/record-owner-source-inventory.mjs"
+      ],
+      "startedAt": "2026-11-11T14:29:33.989222+00:00",
+      "exitCode": 0,
+      "status": "passed",
+      "stdout": "",
+      "stderr": "",
+      "finishedAt": "2026-11-11T14:29:34.081902+00:00",
+      "durationSeconds": 0.09269666699947265
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--check",
+        "docs/migration/lot10b-evidence/run-hpdl-campaign.mjs"
+      ],
+      "startedAt": "2026-11-11T14:29:34.081925+00:00",
+      "exitCode": 0,
+      "status": "passed",
+      "stdout": "",
+      "stderr": "",
+      "finishedAt": "2026-11-11T14:29:34.135727+00:00",
+      "durationSeconds": 0.05381680199934635
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--check",
+        "docs/migration/lot10b-evidence/stream-evidence-json.mjs"
+      ],
+      "startedAt": "2026-11-11T14:29:34.135747+00:00",
+      "exitCode": 0,
+      "status": "passed",
+      "stdout": "",
+      "stderr": "",
+      "finishedAt": "2026-11-11T14:29:34.213509+00:00",
+      "durationSeconds": 0.07777707800050848
+    }
+  ],
+  "nodeExecutable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+  "applicationModulesExecuted": false,
+  "nativeTestsRun": false,
+  "originalModulesImported": false,
+  "writersExecuted": false,
+  "gamesRun": false,
+  "qualification": "Node --check parses these seven current helper modules only. It does not execute their bodies or resolve and execute their application imports. No native behavior, writer output, game result or performance verdict is established."
+}

@@ -1,0 +1,26 @@
+{
+  "schema": "logos-engine.lot10b.hpdl-attempt-start.v1",
+  "attemptId": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-02",
+  "status": "running",
+  "game": "HPDL",
+  "targetLevels": 6,
+  "startedAt": "2026-11-11T15:51:56.417519+00:00",
+  "admittedAt": "2026-11-11T15:51:56.456216+00:00",
+  "priorCumulativeSeconds": 1263.3446460859916,
+  "remainingBeforeSeconds": 1136.6553539140084,
+  "activityCeilingSeconds": 300.0,
+  "terminationMarginSeconds": 0.5,
+  "retentionReserveSeconds": 30.0,
+  "performanceLockMode": "exclusive_functional",
+  "sourceManifestPath": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/source-manifest.json",
+  "chargedSeconds": null,
+  "qualification": "Running was persisted before spawn. An unresolved entry blocks every subsequent attempt; no implicit refund.",
+  "wrapperPid": 2,
+  "priorClock": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-02/clock-before.json",
+    "sha256": "c18dd914ff7735d662b7e8ecf5fdf764c3b9d5e8616f6ba1e5d7a5f33d76bd9e",
+    "bytes": 11880
+  },
+  "performanceLock": "/workspace/shared/sra-coordination/performance.lock",
+  "hpdlLock": "/workspace/shared/sra-coordination/hpdl.lock"
+}

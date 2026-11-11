@@ -1,0 +1,115 @@
+{
+  "schema": "logos-engine.native-cost-protocol-preparation.v1",
+  "preparedAt": "2026-11-11T12:36:53.648813-03:00",
+  "status": "source_freezes_verified_not_functional_readiness",
+  "measurementExecuted": false,
+  "baselineCheckout": "/workspace/sites/sra-lot10b-baseline061-20261111/.sites-checkout",
+  "candidateCheckout": "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout",
+  "baseline": {
+    "nativeVersion": "0.61.0",
+    "siteVersion": 98,
+    "commit": "653e40a4f45df8ec8c6bda005004c7cdb8df074a",
+    "nativeDigest": "f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279",
+    "nativeFiles": 306
+  },
+  "candidate": {
+    "nativeVersion": "0.62.0",
+    "nativeDigest": "74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12",
+    "nativeFiles": 310,
+    "sourceBaseCommit": "4e7e4742b997128346e84f62b7a4fb8b5d4e47c5",
+    "checkoutHead": "9ef8eec3d899bfb12b9f0b5cbc42e83b6820b991",
+    "nativeSourceCommit": "9ef8eec3d899bfb12b9f0b5cbc42e83b6820b991",
+    "nativeWorktreeChanges": [],
+    "siteVersion": null,
+    "qualification": "The frozen digest and archive identify candidate bytes. A null source commit means the checkout HEAD is ancestry only. No candidate publication is asserted."
+  },
+  "outputDirectory": "docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01",
+  "candidateSourceDirectory": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02",
+  "baselineManifest": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/baseline-061/source-manifest.json",
+    "sha256": "c597c7629495e98fcfad64cdd827393bc58d2d8f26594474e60add601485e4de",
+    "bytes": 36332
+  },
+  "candidateManifest": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/source-manifest.json",
+    "sha256": "846e38686406140e8f0c975836faadf646e4c20b0bcbc833fe4e228912535e93",
+    "bytes": 36806
+  },
+  "candidateArchiveManifest": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/source-archive.json",
+    "sha256": "2311a3818e65f99874345f37889a81e740003a33c08c86b3deaa3d0c9dd10d4a",
+    "bytes": 92042
+  },
+  "retainedTools": [
+    {
+      "path": "scripts/run-native-cost-window.py",
+      "sha256": "0ec9c69c859d0555e963643010d2254caee8c63d1c9a98ec07cd9af0ce0ce613",
+      "bytes": 8933
+    },
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59",
+      "bytes": 20670
+    },
+    {
+      "path": "scripts/compare-native-loop-costs.mjs",
+      "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb",
+      "bytes": 9861
+    },
+    {
+      "path": "scripts/compare-native-cost-cohorts.mjs",
+      "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34",
+      "bytes": 19460
+    },
+    {
+      "path": "scripts/review-native-cost-consolidation.py",
+      "sha256": "b13174cec5befbb816e70554fd5d47da215eae941b983e66f05b9dd4417b3bd4",
+      "bytes": 17810
+    },
+    {
+      "path": "scripts/review-native-global-cost-window.py",
+      "sha256": "9ab2ecd9d6ddf234e96332421a6e55937a766495c1a20dd223f4441d6b516940",
+      "bytes": 22204
+    },
+    {
+      "path": "scripts/review-native-global-cost-budget.py",
+      "sha256": "b4312bcdae058ba58c16b4e5e24cb53626496b38f8a154834e0452a43e97d341",
+      "bytes": 8476
+    }
+  ],
+  "preparationTools": [
+    {
+      "path": "docs/migration/lot10b-evidence/prepare-cost-protocol.py",
+      "sha256": "4cd4f53e68b65ba61982010f4d148acf238f70560afa3a8aae3f6bef5ea69c1f",
+      "bytes": 35578
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/prepare-owner-cost-contract.py",
+      "sha256": "2b20558afbefc9082b5968fc2f6ab5cb523527c9f9cf4f9558d4c4bce1a5c7e1",
+      "bytes": 21958
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/check-cost-static-inputs.py",
+      "sha256": "e49e114e05eaef3d2e50bd6dc455ae4db58e0250d2e2b15273d5d7687d4c2568",
+      "bytes": 28882
+    }
+  ],
+  "ownerEvidenceTools": [
+    {
+      "path": "docs/migration/lot10b-evidence/record-owner-source-inventory.mjs",
+      "sha256": "3769e1e3ce2dd9238d6d621bdbe04cd0dd95b9de90b1f4d9fbdc6edc77954613",
+      "bytes": 12316
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/capture-cost-owner-graphs.mjs",
+      "sha256": "d0a6d94571ebdbc62c9caef22aef76ecdcd25a6a08054305a728dc9e2996baa4",
+      "bytes": 20264
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/qualify-cost-owner-graphs.mjs",
+      "sha256": "9b6d83c8c1c392f3c3a9f2d901e41b87891f8becc4f7e0614aaae04539cd8703",
+      "bytes": 46289
+    }
+  ],
+  "qualification": "Local source identities verified. No tests, builds, game, browser, benchmark, readiness or isolation claims are produced."
+}

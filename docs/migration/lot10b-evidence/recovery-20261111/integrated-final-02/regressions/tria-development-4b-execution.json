@@ -1,0 +1,286 @@
+{
+  "case": "tria-development-4b",
+  "game": "TRIA",
+  "mode": "recorded-public-replay",
+  "command": [
+    "node",
+    "--expose-gc",
+    "--max-old-space-size=1536",
+    "scripts/replay-public-regression-released-baseline.mjs",
+    "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz",
+    "docs/migration/lot4b-evidence/development/tria-live-01/tria-public-trace.json.gz",
+    "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/tria-development-4b-replay.json.gz",
+    "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/tria-development-4b-host-preparation.json"
+  ],
+  "startedAt": "2026-11-11T15:46:26.195269+00:00",
+  "timeoutSeconds": 2400,
+  "baseline": {
+    "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz",
+    "sha256": "e473af537c042d76ce98f13b2cc9be495e7b4ac08ca443251df7804d542bdbbe",
+    "bytes": 3161161
+  },
+  "trace": {
+    "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-public-trace.json.gz",
+    "sha256": "916d0f1cb1dcbfd9b7ba7624e7d3d4648a91ae7ef64583288af4711d2a955ac3",
+    "bytes": 13286
+  },
+  "expectedActions": 17,
+  "nodeOldSpaceMiB": 1536,
+  "preflight": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/preflight.json",
+    "sha256": "49427a3ce879134e24d2c549efffcc810c081b25448bd871660b572dab59eca4",
+    "bytes": 5814
+  },
+  "historicalReportProcessExitedBeforeNode": true,
+  "nativeSourceBeforeDigest": "74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12",
+  "executionInputsBefore": {
+    "scripts/run-released-public-regressions.py": "7988863afd2b171f31987434bb1176370be2e3afd49dead1edcdc59770d81909",
+    "scripts/run-recorded-public-regressions.py": "df19dc88ff29e78a1cb5935d445644e96cc9fb1ef90b73d802cf51868d2b2c40",
+    "scripts/compare-v54-regressions.py": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+    "scripts/replay-public-regression-released-baseline.mjs": "2ce2a0e1b8f969510373ae161156b2b163d208b4e426cb1f26218f9952b3b164",
+    "scripts/replay-v53-public-regression.mjs": "4359e008db8dadaac17f6504199ff20c752f40f1666ba527f1cd5f16df100a9e",
+    "scripts/run-v53-campaign-proof.py": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+    "tests/helpers/v6-live-game-campaign.ts": "5f82ca1f3c80a39983c5c14ee30a2ac6239822815a6641b1402bc29c2e1d32d4",
+    "docs/migration/lot10b-evidence/recorded-regression-cases.json": "a16f67724f53def79fe476716c12a61e8064df871911772731983fa2505da3a9",
+    "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/source-manifest.json": "846e38686406140e8f0c975836faadf646e4c20b0bcbc833fe4e228912535e93",
+    "scripts/run-released-public-regressions-streamlog.py": "b05b0e113c93696be45408e4c10549f2a379c22330efbddfcaa0f09cd51309b9"
+  },
+  "phase": "completed",
+  "finishedAt": "2026-11-11T15:47:14.192720+00:00",
+  "exitCode": 0,
+  "timedOut": false,
+  "passed": true,
+  "nodeExitObserved": true,
+  "rawOutputPath": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/tria-development-4b-output.raw.log",
+  "driverPid": 5,
+  "nodePid": 98,
+  "memorySamples": [
+    {
+      "elapsedSeconds": 0.001935510001203511,
+      "pid": 98,
+      "VmSize": "112336 kB",
+      "VmHWM": "1072 kB",
+      "VmRSS": "1072 kB",
+      "Threads": "1"
+    },
+    {
+      "elapsedSeconds": 5.035728623999603,
+      "pid": 98,
+      "VmSize": "10473520 kB",
+      "VmHWM": "496512 kB",
+      "VmRSS": "443924 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 10.059397848999652,
+      "pid": 98,
+      "VmSize": "10498420 kB",
+      "VmHWM": "496512 kB",
+      "VmRSS": "472020 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 15.096826715000134,
+      "pid": 98,
+      "VmSize": "10547676 kB",
+      "VmHWM": "539336 kB",
+      "VmRSS": "522028 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 20.14137559700066,
+      "pid": 98,
+      "VmSize": "10644996 kB",
+      "VmHWM": "668496 kB",
+      "VmRSS": "619480 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 25.16390708400104,
+      "pid": 98,
+      "VmSize": "10686244 kB",
+      "VmHWM": "693608 kB",
+      "VmRSS": "663220 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 30.18585504800103,
+      "pid": 98,
+      "VmSize": "10743584 kB",
+      "VmHWM": "779852 kB",
+      "VmRSS": "720840 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 35.195657311000105,
+      "pid": 98,
+      "VmSize": "10793428 kB",
+      "VmHWM": "800848 kB",
+      "VmRSS": "771272 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 40.205798693999895,
+      "pid": 98,
+      "VmSize": "10867124 kB",
+      "VmHWM": "890992 kB",
+      "VmRSS": "845956 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 45.232282095999835,
+      "pid": 98,
+      "VmSize": "10889496 kB",
+      "VmHWM": "937400 kB",
+      "VmRSS": "868656 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 47.99363788099981,
+      "pid": 98,
+      "processPresent": false
+    }
+  ],
+  "lastObservedAt": "2026-11-11T15:47:14.190704+00:00",
+  "elapsedSeconds": 47.99595215199952,
+  "lastProgress": {
+    "status": "passed",
+    "failure": null
+  },
+  "rawOutputBytes": 61770,
+  "outputRaw": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/tria-development-4b-output.raw.log",
+    "sha256": "1ecf92a7c0869fcf2f95131c7c4d8121578a2a284a4e744bdc4ea073146a121d",
+    "bytes": 61770
+  },
+  "output": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/tria-development-4b-output.log.gz",
+    "sha256": "522cc328e72e1a6c69f898d9884a4abed713f02443341e59da0f056a1c39e72c",
+    "bytes": 3586
+  },
+  "startedReceipt": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/tria-development-4b-execution-started.json",
+    "sha256": "9727fe91f93a430f5747a27b1268156e420d903ddbb696a8ef1cda543be199e8",
+    "bytes": 3199
+  },
+  "nodeExitedBeforeComparison": true,
+  "hostPreparation": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/tria-development-4b-host-preparation.json",
+    "sha256": "ae5d2e11ed1a5d34fdba2a253ac87dce23866c2c4661d0793eb805daaa8e9e6c",
+    "bytes": 5285
+  },
+  "hostPreparationPassed": true,
+  "report": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/tria-development-4b-replay.json.gz",
+    "sha256": "e94ab9f8aa5c0c884fd8169ad875e3f4d21ac585b5b575d74008a379e4675cc0",
+    "bytes": 3963108
+  },
+  "status": "passed",
+  "actions": 17,
+  "prefixes": 17,
+  "final": {
+    "actions": 17,
+    "levelsCompleted": 3,
+    "level": 4,
+    "state": "NOT_FINISHED",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "activeSeconds": 39.31977796,
+    "prefixes": 17,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 17,
+      "boundaryReplays": 2,
+      "goalEvents": 3,
+      "frontierDeltas": 35,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 18
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 18
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 11
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 15
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 1
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 18
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 19
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology"
+      ],
+      "morphologyProvider": {
+        "status": "partial_current_measurements_control_attention_and_methods",
+        "state_owner": "family_state:morphology",
+        "motion_owner": "caller:goal",
+        "forecast_owner": "family_state:public_observed_inventory",
+        "current_decision_scope": "one_source_selection_cycle",
+        "attention_owner": "caller:attention",
+        "method_owner": "caller:counters.targetMethod",
+        "entry_return_owner": "family_state:morphology.entry_access_return",
+        "connected_methods": [
+          "retained_station_method",
+          "entry_access_return",
+          "entry_rebind",
+          "entry_probe",
+          "managed_capacity",
+          "target_extension_continuation"
+        ],
+        "pending": [
+          "complete_original_caller_parity_and_domain_closure"
+        ]
+      },
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 17,
+      "resume": 16
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.62.0"
+  },
+  "passiveOwnerPresence": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/tria-development-4b-passive-owner-presence.json",
+    "sha256": "4f9869a7a849973bec4fd75ac9af0f8e30b7df66b00fe1bc7dab3d28f2243ec9",
+    "bytes": 1123
+  },
+  "passiveOwnerPresencePassed": true,
+  "passiveOwnerPrefixesChecked": 0,
+  "passiveOwnerPrefixesPassed": 0,
+  "passiveOwnerTransitionsRetained": 0,
+  "comparison": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/tria-development-4b-comparison.json",
+    "sha256": "a8425e58f145ee266cb4658d457ffe59ebbf2428777bc443132f20d1ae4472ab",
+    "bytes": 11027
+  },
+  "comparisonPassed": true,
+  "comparisonChecks": 17,
+  "failedChecks": [],
+  "nativeSourceAfterDigest": "74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12",
+  "nativeSourceUnchanged": true,
+  "immutableInputsUnchanged": true,
+  "postprocessingFinishedAt": "2026-11-11T15:47:17.595555+00:00"
+}

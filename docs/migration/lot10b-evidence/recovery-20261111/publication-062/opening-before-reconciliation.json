@@ -1,0 +1,19 @@
+{
+  "schema": "logos-engine.source-opening-observation.v1",
+  "observedAt": "2026-11-11T16:37:39.917Z",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "command": [
+    "node",
+    "/home/agent/.codex/plugins/cache/openai-curated-remote/sites/1.1.6/scripts/site-workflow.mjs",
+    "--project-id",
+    "appgprj_6adbc388d79081918581b93b919d7258"
+  ],
+  "terminalToolResult": {
+    "chunk_id": "52cc10",
+    "wall_time_seconds": 0.000018444,
+    "exit_code": 1,
+    "original_token_count": 27,
+    "output": "Local and remote Site history diverged. Reconcile the changes before retrying; no history was overwritten.\r\n"
+  },
+  "qualification": "Actual source-opening guard refused divergent histories after fetching the remote. No source was overwritten, no build or publication occurred. The existing local work is retained for explicit reconciliation."
+}

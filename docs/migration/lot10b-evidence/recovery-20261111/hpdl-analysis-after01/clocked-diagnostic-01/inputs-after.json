@@ -1,0 +1,54 @@
+{
+  "sourceInputs": {
+    "generator": {
+      "sourcePath": "docs/migration/lot10b-evidence/run-hpdl-clocked-diagnostic.py",
+      "sha256": "552394fac5d15de668a48b34b2a55f79859d2b40fcaa0de20af3f3c011ea5975",
+      "bytes": 24462
+    },
+    "cumulativeClockReader": {
+      "sourcePath": "docs/migration/lot10b-evidence/run-hpdl-clocked-proof.py",
+      "sha256": "e959e8d9b7ed5875bc9843393aeae44586674229fccb951279097c4c75195971",
+      "bytes": 36304
+    },
+    "writerChecker": {
+      "sourcePath": "docs/migration/lot10b-evidence/check-stream-evidence-json.mjs",
+      "sha256": "0511eb7eebe0313386db269f2cbee2f019d8e3f2a7397728fcdd5500162733eb",
+      "bytes": 19528
+    },
+    "streamWriter": {
+      "sourcePath": "docs/migration/lot10b-evidence/stream-evidence-json.mjs",
+      "sha256": "96ac2ddbaac8cc62126f6674301b2362301895f44ce90e5dbd1dec9fb6fc87ca",
+      "bytes": 6601
+    },
+    "campaignWriterCaller": {
+      "sourcePath": "docs/migration/lot10b-evidence/run-hpdl-campaign.mjs",
+      "sha256": "ddb3bf22034b8210303b487c9d0eed9bbef5d5f864e0dc184907b6c2b9538799",
+      "bytes": 8285
+    },
+    "partialComparator": {
+      "sourcePath": "scripts/compare-window-question-checkpoint-parity.py",
+      "sha256": "44ab7c0be31efb257353733ec443e5f1969e79ace911061fb19d573bcb751e9c",
+      "bytes": 20790
+    },
+    "sharedComparisonCore": {
+      "sourcePath": "scripts/compare-window-question-public-parity.py",
+      "sha256": "0809463252156d4459123e469809222dcd0ead583c57f2003ad9e169f4e662e6",
+      "bytes": 59673
+    },
+    "checkpoint": {
+      "sourcePath": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json",
+      "sha256": "871f8cd0df7c74f0ce54bbe046f0e54f16d025686adf4fc7bbe8531f71c2fef0",
+      "bytes": 177532943
+    },
+    "diagnosedExecution": {
+      "sourcePath": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/execution-hpdl.json",
+      "sha256": "f3fc927792b2574c32dd76aaa996b503b33925923051bf207a90f1cac4736e6f",
+      "bytes": 10116
+    },
+    "publicJournal": {
+      "sourcePath": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-actual-public-journal.jsonl.gz",
+      "sha256": "d3a9535e50a66132e37bb3387bdc2c4c45cd0bd000c2a7bb2b819fa2e7de4a13",
+      "bytes": 38720
+    }
+  }
+}

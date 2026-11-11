@@ -1,13 +1,15 @@
 /** Actual cold HPDL campaign. Invoke through run-hpdl-clocked-proof.py only. */
 import { createReadStream, createWriteStream, closeSync, existsSync, fsyncSync,
-  openSync, realpathSync, renameSync, statSync, writeSync } from 'node:fs';
+  openSync, realpathSync, renameSync, statSync } from 'node:fs';
 import { dirname, relative, resolve, sep } from 'node:path';
+import { performance } from 'node:perf_hooks';
 import { fileURLToPath } from 'node:url';
 import { createInterface } from 'node:readline';
 import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
-import { createGzip, gzipSync } from 'node:zlib';
+import { createGzip } from 'node:zlib';
 import { runNativeGameCampaign } from '../../../tests/helpers/v6-live-game-campaign.ts';
+import { evidenceJsonChunks, writeEvidenceJsonSync } from './stream-evidence-json.mjs';
 
 const ROOT = realpathSync(resolve(dirname(fileURLToPath(import.meta.url)), '../../..'));
 const EVIDENCE = resolve(ROOT, 'docs/migration/lot10b-evidence');
@@ -41,20 +43,18 @@ function syncDirectory() {
   const fd = openSync(out, 'r');
   try { fsyncSync(fd); } finally { closeSync(fd); }
 }
-function writeAll(fd, bytes) {
-  const data = Buffer.isBuffer(bytes) ? bytes : Buffer.from(bytes);
-  for (let offset = 0; offset < data.length;) {
-    offset += writeSync(fd, data, offset, data.length - offset);
-  }
-}
-function writeFresh(path, bytes) {
+function writeFreshJson(path, value) {
   const fd = openSync(path, 'wx', 0o600);
-  try { writeAll(fd, bytes); fsyncSync(fd); } finally { closeSync(fd); }
+  let bytes;
+  try {
+    bytes = writeEvidenceJsonSync(fd, value, { trailingNewline: true });
+    fsyncSync(fd);
+  } finally { closeSync(fd); }
   syncDirectory();
+  return bytes;
 }
-function writeFreshJson(path, value) { writeFresh(path, `${JSON.stringify(value)}\n`); }
 function appendJson(fd, value) {
-  writeAll(fd, `${JSON.stringify(value)}\n`);
+  writeEvidenceJsonSync(fd, value, { trailingNewline: true });
   fsyncSync(fd);
 }
 function commitFile(temporary, destination) {
@@ -91,7 +91,10 @@ try {
       const sequence = ++checkpointSequence;
       const recordedAt = new Date().toISOString();
       const temporary = resolve(out, `hpdl-checkpoint-${String(sequence).padStart(6, '0')}.inprogress.json`);
-      writeFreshJson(temporary, {
+      const memoryBeforeCapture = process.memoryUsage();
+      const processLifetimeMaxRssBeforeCaptureKilobytes = process.resourceUsage().maxRSS;
+      const captureStarted = performance.now();
+      const checkpointBytes = writeFreshJson(temporary, {
         schema: 'logos-engine.lot10b.hpdl-campaign-checkpoint.v1',
         game: 'HPDL', targetLevels: 6, sequence, recordedAt,
         completeCampaign: false,
@@ -99,12 +102,22 @@ try {
         report: partialReport,
       });
       commitFile(temporary, paths.checkpoint);
+      const serializationAndCommitElapsedMs = performance.now() - captureStarted;
+      const memoryAfterCapture = process.memoryUsage();
+      const processLifetimeMaxRssAfterCaptureKilobytes = process.resourceUsage().maxRSS;
       appendJson(checkpointsFd, {
         sequence, recordedAt, completeCampaign: false,
         reportStatus: partialReport.status,
         recordedActions: partialReport.actions.length,
         recordedPrefixes: partialReport.prefixes.length,
         packetsObserved, actionReturnsObserved,
+        captureDiagnostics: {
+          serialization: 'incremental_json_v1', checkpointBytes,
+          serializationAndCommitElapsedMs,
+          memoryBeforeCapture, memoryAfterCapture,
+          processLifetimeMaxRssBeforeCaptureKilobytes, processLifetimeMaxRssAfterCaptureKilobytes,
+          qualification: 'Elapsed time uses a monotonic clock and covers serialization and commit. maxRSS values are cumulative process-lifetime maxima in kilobytes, not peaks attributable to this capture. Process memory samples surround serialization and commit only. No cause of an earlier process termination is inferred.',
+        },
       });
     },
   });
@@ -116,7 +129,8 @@ try {
   }
   // A partial checkpoint is never promoted to either of these final artifacts.
   const reportTemporary = `${paths.report}.inprogress`;
-  writeFresh(reportTemporary, gzipSync(`${JSON.stringify(report)}\n`, { mtime: 0 }));
+  await pipeline(Readable.from(evidenceJsonChunks(report, { trailingNewline: true }), { objectMode: false }),
+    createGzip({ mtime: 0 }), createWriteStream(reportTemporary, { flags: 'wx', mode: 0o600 }));
   commitFile(reportTemporary, paths.report);
   const traceTemporary = `${paths.trace}.inprogress`;
   async function* traceChunks() {

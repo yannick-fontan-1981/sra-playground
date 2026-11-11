@@ -1,0 +1,230 @@
+{
+  "schema": "logos-engine.lot10b.hpdl-clocked-execution.v1",
+  "attemptId": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01",
+  "game": "HPDL",
+  "targetLevels": 6,
+  "startedAt": "2026-11-11T12:34:34.720866+00:00",
+  "captureFinishedAt": "2026-11-11T12:39:50.401112+00:00",
+  "elapsedSecondsThroughCapture": 315.68024082,
+  "activityCeilingSeconds": 600.0,
+  "terminationMarginSeconds": 0.5,
+  "retentionReserveSeconds": 30.0,
+  "priorCumulativeSeconds": 159.45478678199166,
+  "remainingBeforeSeconds": 2240.5452132180085,
+  "child": {
+    "pid": 3,
+    "startedAt": "2026-11-11T12:34:34.829954+00:00",
+    "startedElapsedSeconds": 0.109100886,
+    "allowanceAfterPreflightSeconds": 599.3909501510002,
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/run-hpdl-campaign.mjs",
+      "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout/docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01"
+    ],
+    "parentDeathSignal": "SIGKILL",
+    "separateProcessGroup": true,
+    "finishedAt": "2026-11-11T12:39:25.784351+00:00",
+    "finishedElapsedSeconds": 291.063517796,
+    "exitCode": -9
+  },
+  "exitCode": -9,
+  "attemptOutcome": "child_returned",
+  "termination": null,
+  "receivedSignals": [],
+  "nativeSourceManifestDigest": "318153c14c7766c9d007f1b2ede4fa03ce940d62b1369251339e0174af79c306",
+  "sourceInputsUnchanged": true,
+  "capture": {
+    "errors": [],
+    "publicJournal": {
+      "present": true,
+      "completeRecords": 49,
+      "initialReturns": 1,
+      "observedActionReturns": 48,
+      "malformedCompleteRecords": [],
+      "trailingPartialBytes": 0,
+      "traceMatchesCompleteRecords": null,
+      "lastObservedPublicFields": {
+        "level": 4,
+        "levels_completed": 3,
+        "state": "NOT_FINISHED",
+        "step_index": 48,
+        "frame_hash": "b2e679ad801c60e6"
+      },
+      "qualification": "Counts only complete observed public returns. An interrupted or in-flight action is not invented."
+    },
+    "lastCheckpoint": {
+      "sequence": 47,
+      "recordedAt": "2026-11-11T12:39:12.069Z",
+      "completeCampaign": false,
+      "reportStatus": "running",
+      "recordedActions": 47,
+      "recordedPrefixes": 47
+    },
+    "checkpointIndex": {
+      "present": true,
+      "completeRecords": 47,
+      "lastCompleteRecord": {
+        "sequence": 47,
+        "recordedAt": "2026-11-11T12:39:12.069Z",
+        "completeCampaign": false,
+        "reportStatus": "running",
+        "recordedActions": 47,
+        "recordedPrefixes": 47,
+        "packetsObserved": 48,
+        "actionReturnsObserved": 47
+      },
+      "trailingPartialBytes": 0,
+      "malformedCompleteRecords": []
+    },
+    "campaignStatus": null,
+    "actualFinal": null,
+    "actualFailure": null,
+    "finalCaptureComplete": false,
+    "reportCountsMatchJournal": false,
+    "qualification": "A missing/partial capture is an evidence limitation, never an inferred game failure or campaign success."
+  },
+  "finalExecutionEvidenceComplete": false,
+  "campaignPassedEstablished": false,
+  "completeActionCountEstablished": false,
+  "errors": [],
+  "artifacts": {
+    "attempt-start.json": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/attempt-start.json",
+      "sha256": "335a9a7b2b43d1ccf0c2c095a4fa2ecab8c1e57083763dbf3ef57de68a0bfb9e",
+      "bytes": 1150
+    },
+    "child-process.json": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/child-process.json",
+      "sha256": "6efbd350d70b32687559d1da120c3e97106d6e97c1fee066753a38ab21f69209",
+      "bytes": 632
+    },
+    "clock-before.json": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/clock-before.json",
+      "sha256": "0166b02872edffa81af5c24a588e2de19e959c3fdfdbe5a903c834207cd4b019",
+      "bytes": 1313
+    },
+    "hpdl-actual-public-journal.jsonl": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-actual-public-journal.jsonl",
+      "sha256": "bc5e5d58c05f9baac6b1b5b34c80e45d7379e50f45cd5e1c2b78298ba34595ec",
+      "bytes": 4075597
+    },
+    "hpdl-actual-public-journal.jsonl.gz": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-actual-public-journal.jsonl.gz",
+      "sha256": "d3a9535e50a66132e37bb3387bdc2c4c45cd0bd000c2a7bb2b819fa2e7de4a13",
+      "bytes": 38720
+    },
+    "hpdl-checkpoint-000048.inprogress.json": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint-000048.inprogress.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "hpdl-checkpoint.json": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json",
+      "sha256": "871f8cd0df7c74f0ce54bbe046f0e54f16d025686adf4fc7bbe8531f71c2fef0",
+      "bytes": 177532943
+    },
+    "hpdl-checkpoint.json.gz": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json.gz",
+      "sha256": "928a2031fd48f98a87d0ccbb7fd21a447106e65cccaca50b8628781e4cb97348",
+      "bytes": 20775890
+    },
+    "hpdl-checkpoints.jsonl": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoints.jsonl",
+      "sha256": "432209ff14163ec6673d3426ee9e5645f8e173d15a26969c63e251dd1ee1b9b5",
+      "bytes": 9215
+    },
+    "hpdl-checkpoints.jsonl.gz": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoints.jsonl.gz",
+      "sha256": "3aee66bf1bc0f7cd30f0bb689e5f77d76c4b95c6f9d4772fd2b76b8e50dd7b69",
+      "bytes": 1052
+    },
+    "hpdl-child-start.json": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-child-start.json",
+      "sha256": "dbed9e50cb5d5dd5b34c5e6b06edc61e1f53e8915894b7e6cc68c9b1f8a62408",
+      "bytes": 342
+    },
+    "hpdl-live.log": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-live.log",
+      "sha256": "ce8537a941808ac6aed22268f956f2ef195343d04412b684d5c2f3900f98a038",
+      "bytes": 159375
+    },
+    "hpdl-live.log.gz": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-live.log.gz",
+      "sha256": "d3214a5c9a1750daf9e058ad00c1018ffb4766458e4e94d3862b35f6d3fb4289",
+      "bytes": 6468
+    },
+    "postflight.json": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/postflight.json",
+      "sha256": "41eb39b51fad844dbfedb8cd0fe1bfc3732182ce0d49f076cb3004ebbb3af30c",
+      "bytes": 111376
+    },
+    "preflight.json": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/preflight.json",
+      "sha256": "bd82b679b7379d522a09bcd743df5d090ab9230de47bf901093cb08bec66ae03",
+      "bytes": 112091
+    }
+  },
+  "losslessArchives": [
+    {
+      "original": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-live.log",
+        "sha256": "ce8537a941808ac6aed22268f956f2ef195343d04412b684d5c2f3900f98a038",
+        "bytes": 159375
+      },
+      "compressed": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-live.log.gz",
+        "sha256": "d3214a5c9a1750daf9e058ad00c1018ffb4766458e4e94d3862b35f6d3fb4289",
+        "bytes": 6468
+      },
+      "roundtripVerified": true,
+      "restoredSha256": "ce8537a941808ac6aed22268f956f2ef195343d04412b684d5c2f3900f98a038",
+      "restoredBytes": 159375
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-actual-public-journal.jsonl",
+        "sha256": "bc5e5d58c05f9baac6b1b5b34c80e45d7379e50f45cd5e1c2b78298ba34595ec",
+        "bytes": 4075597
+      },
+      "compressed": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-actual-public-journal.jsonl.gz",
+        "sha256": "d3a9535e50a66132e37bb3387bdc2c4c45cd0bd000c2a7bb2b819fa2e7de4a13",
+        "bytes": 38720
+      },
+      "roundtripVerified": true,
+      "restoredSha256": "bc5e5d58c05f9baac6b1b5b34c80e45d7379e50f45cd5e1c2b78298ba34595ec",
+      "restoredBytes": 4075597
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoints.jsonl",
+        "sha256": "432209ff14163ec6673d3426ee9e5645f8e173d15a26969c63e251dd1ee1b9b5",
+        "bytes": 9215
+      },
+      "compressed": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoints.jsonl.gz",
+        "sha256": "3aee66bf1bc0f7cd30f0bb689e5f77d76c4b95c6f9d4772fd2b76b8e50dd7b69",
+        "bytes": 1052
+      },
+      "roundtripVerified": true,
+      "restoredSha256": "432209ff14163ec6673d3426ee9e5645f8e173d15a26969c63e251dd1ee1b9b5",
+      "restoredBytes": 9215
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json",
+        "sha256": "871f8cd0df7c74f0ce54bbe046f0e54f16d025686adf4fc7bbe8531f71c2fef0",
+        "bytes": 177532943
+      },
+      "compressed": {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/hpdl-checkpoint.json.gz",
+        "sha256": "928a2031fd48f98a87d0ccbb7fd21a447106e65cccaca50b8628781e4cb97348",
+        "bytes": 20775890
+      },
+      "roundtripVerified": true,
+      "restoredSha256": "871f8cd0df7c74f0ce54bbe046f0e54f16d025686adf4fc7bbe8531f71c2fef0",
+      "restoredBytes": 177532943
+    }
+  ],
+  "qualification": "One admitted cold production campaign, target six, without any additional action cap. The monotone charge includes wrapper preparation, full child lifetime and post-stop retention. The final ledger additionally charges receipt writing/hashing before its atomic terminal update. Historical time is retained despite unrecovered raw evidence. Partial checkpoints and clock/capture failures do not establish campaign success or game failure. No source/function/full-caller parity is inferred."
+}

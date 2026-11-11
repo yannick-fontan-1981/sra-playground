@@ -1,0 +1,15 @@
+{
+  "workflow": {
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "checkout_path": "/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout",
+    "commit_sha": "4afcbfe6a25bd3a88223be543e443bc53b9c8814",
+    "archive": "/workspace/sites/sra-lot10b-recovery-20261111/publication-native-062/documentation.tar.gz"
+  },
+  "terminalResult": {
+    "chunk_id": "043e9d",
+    "wall_time_seconds": 0.000018883,
+    "exit_code": 0,
+    "original_token_count": 97,
+    "output": "/workspace/sites/sra-lot10b-recovery-20261111/publication-native-062/documentation.tar.gz\r\n{\"project_id\":\"appgprj_6adbc388d79081918581b93b919d7258\",\"checkout_path\":\"/workspace/sites/sra-lot10b-recovery-20261111/.sites-checkout\",\"commit_sha\":\"4afcbfe6a25bd3a88223be543e443bc53b9c8814\",\"archive\":\"/workspace/sites/sra-lot10b-recovery-20261111/publication-native-062/documentation.tar.gz\"}\r\n"
+  }
+}

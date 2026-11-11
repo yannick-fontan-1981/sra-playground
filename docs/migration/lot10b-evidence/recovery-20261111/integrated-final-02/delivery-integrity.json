@@ -1,0 +1,239 @@
+{
+  "schema": "logos-engine.native-delivery-integrity.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-11T16:03:36.586468+00:00",
+  "directory": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02",
+  "validationDirectory": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/validation",
+  "generator": {
+    "path": "scripts/verify-native-delivery.py",
+    "sha256": "ca36a235e5da8aa8abd963aaa6a282d90217ed58a721bfdbba361527dd48409a",
+    "bytes": 26494
+  },
+  "verificationHelpers": [
+    {
+      "path": "scripts/run-v53-campaign-proof.py",
+      "sha256": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+      "bytes": 5421
+    },
+    {
+      "path": "scripts/compare-v54-reactive-public-evidence.py",
+      "sha256": "3274acc5ed28a40f91ad0ee2e34c247ab160919ea43855cf514b4fbc22ef6a69",
+      "bytes": 18850
+    },
+    {
+      "path": "scripts/evidence-byte-parts.py",
+      "sha256": "fcc651b3d533a87805378c126b1253d40f343ccc51108a7881c3db33bf1f8350",
+      "bytes": 7210
+    },
+    {
+      "path": "scripts/restore-v53-evidence.py",
+      "sha256": "e0494dda3dd445e0db0bf04cccac27ad8d19c917ccd2b4b10c068df6faf7c23d",
+      "bytes": 3361
+    }
+  ],
+  "nativeSourceDigest": "74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12",
+  "matchedFileInventories": {
+    "native": 310,
+    "archive": 768,
+    "sourceAndTests": 717,
+    "buildInputs": 375,
+    "regressionExecutionInputs": 10
+  },
+  "originalSourceFilesUnchanged": 1786,
+  "originalSourceManifest": {
+    "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/manifest.json",
+    "sha256": "491eb3b737bbb490a1b7c212f5b1e75f5a8f84b2124b95d9dd54a0d09eca85d6",
+    "bytes": 424024
+  },
+  "tests": {
+    "tests": 1205,
+    "pass": 1205,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "regressions": {
+    "passed": 10,
+    "total": 10,
+    "comparisonChecksPassed": 170,
+    "comparisonChecksExpected": 170,
+    "passiveOwnerPrefixesChecked": 0,
+    "passiveOwnerPrefixesPassed": 0,
+    "passiveOwnerTransitionsRetained": 0,
+    "prevalidatedTotals": {
+      "commands": 357,
+      "completePublicPackets": 367,
+      "animationFrames": 1676,
+      "prefixes": 275,
+      "requests": 632,
+      "naturalLevelBoundaries": 30
+    }
+  },
+  "nativeAgentWorker": {
+    "path": "dist/assets/v6-agent-worker-BiLC_SOD.js",
+    "sha256": "12e1b91d18af5f9dbf1e534ad7f3cebb1d692d314bc43fd667581b32a7412aa5",
+    "bytes": 6854175
+  },
+  "sourceArchiveVerification": {
+    "files": 768,
+    "archive": {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/source-archive.tar.gz",
+      "sha256": "9601129f8c958731801d4e895e7b16150e24eae80e61c8efb79678d559bb91e3",
+      "bytes": 3779332
+    },
+    "members": 768,
+    "parts": 5,
+    "byteIdentical": true
+  },
+  "byteStorage": {
+    "reports": 10,
+    "parts": 95,
+    "bytes": 81197034,
+    "originalsAbsentBeforeRestore": true,
+    "temporaryRootRemoved": true,
+    "originalsUnchanged": true,
+    "restoredByteIdentical": [
+      {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/catr-051-replay.json.gz",
+        "sha256": "6e9fc5bba3e4e92356ab4af96751b0db6e982e8a77694970369c10aae21457cd",
+        "bytes": 2232124,
+        "manifest": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/catr-051-replay.json.gz.parts.json",
+        "parts": 3,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/conn-050-replay.json.gz",
+        "sha256": "7b6b41e223b66ad7e36bb2577b3cf03f58599eb4a7160119f595ef359bd83187",
+        "bytes": 4827098,
+        "manifest": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/conn-050-replay.json.gz.parts.json",
+        "parts": 6,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/craf-055-replay.json.gz",
+        "sha256": "f74d85701772fdad04156124384899c2b726f14c3a7246235cc952ed8f0807da",
+        "bytes": 14271610,
+        "manifest": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/craf-055-replay.json.gz.parts.json",
+        "parts": 16,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/fogw-051-replay.json.gz",
+        "sha256": "f44a617b180dbab529dcbdb09696143afa549d1855fb9211406baaf20957db7a",
+        "bytes": 10831269,
+        "manifest": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/fogw-051-replay.json.gz.parts.json",
+        "parts": 13,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/isos-development-4c-replay.json.gz",
+        "sha256": "dbe53afe040a8d8841c95084b0082af1bad8552fccc88fe3e0e2de0fc30a0622",
+        "bytes": 3429850,
+        "manifest": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/isos-development-4c-replay.json.gz.parts.json",
+        "parts": 4,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/mind-051-replay.json.gz",
+        "sha256": "9ba87ccaceba02d7f15974aa9096d3f00b6ecce01535857391aa818d3099c2fd",
+        "bytes": 5862269,
+        "manifest": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/mind-051-replay.json.gz.parts.json",
+        "parts": 7,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/rswp-051-replay.json.gz",
+        "sha256": "b72418ec7fb4766b3c710eec7f1b25a13bf49c28bbc6a4cdf92880a3403274a9",
+        "bytes": 3453663,
+        "manifest": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/rswp-051-replay.json.gz.parts.json",
+        "parts": 4,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/tria-development-4b-replay.json.gz",
+        "sha256": "e94ab9f8aa5c0c884fd8169ad875e3f4d21ac585b5b575d74008a379e4675cc0",
+        "bytes": 3963108,
+        "manifest": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/tria-development-4b-replay.json.gz.parts.json",
+        "parts": 5,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/vois-051-replay.json.gz",
+        "sha256": "8801d42855550a870a43031abc32e724afd8a66ab4fdf95dde0d63fc1382615d",
+        "bytes": 14033061,
+        "manifest": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/vois-051-replay.json.gz.parts.json",
+        "parts": 16,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/weav-051-replay.json.gz",
+        "sha256": "3a5c02119bd41460af88e02873d9f814d130bd67b3da6d025ae1316cf1a5e02a",
+        "bytes": 18292982,
+        "manifest": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/weav-051-replay.json.gz.parts.json",
+        "parts": 21,
+        "restored": true,
+        "byteIdentical": true
+      }
+    ],
+    "generators": [
+      {
+        "path": "scripts/evidence-byte-parts.py",
+        "sha256": "fcc651b3d533a87805378c126b1253d40f343ccc51108a7881c3db33bf1f8350",
+        "bytes": 7210
+      },
+      {
+        "path": "scripts/restore-v53-evidence.py",
+        "sha256": "e0494dda3dd445e0db0bf04cccac27ad8d19c917ccd2b4b10c068df6faf7c23d",
+        "bytes": 3361
+      }
+    ]
+  },
+  "receipts": [
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/source-manifest.json",
+      "sha256": "846e38686406140e8f0c975836faadf646e4c20b0bcbc833fe4e228912535e93",
+      "bytes": 36806
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/source-archive.json",
+      "sha256": "2311a3818e65f99874345f37889a81e740003a33c08c86b3deaa3d0c9dd10d4a",
+      "bytes": 92042
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/source-archive-parts.json",
+      "sha256": "e31c03bf75e36e1ea39c277ac8b28b330490c6589428e0a15168d559915892d4",
+      "bytes": 1595
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/validation/delta-tests-run.json",
+      "sha256": "ccaa0f7a20b8d84f26735bf248b2c8d33aaddcafdb2914483cd7715e19405534",
+      "bytes": 176137
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/validation/checks-run.json",
+      "sha256": "9a14f9faa9e3dc41b0e2d089c267c6c7b61e3783b38bbd5d6e81601b77453516",
+      "bytes": 211971
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/regressions/regression-summary.json",
+      "sha256": "37abf373e1d22055b43897e4a4b2bb5f93d3bd11ba17b43ad4c766b22038b77e",
+      "bytes": 212373
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/freeze-copy-provenance.json",
+      "sha256": "4ea552814670016f93d6deed77c47bfd5c7de3afdd9d6246e5fd1fab5e48bc89",
+      "bytes": 12630
+    }
+  ],
+  "qualification": "Post-validation file integrity and lossless evidence transport only. Every completed JSON evidence parts manifest is checked with the existing transport helpers, restored into an initially empty temporary root and compared byte for byte with its unchanged original. Frozen source archive members, recorded native/source/test/build inputs and recorded validation status are checked without rerunning or reinterpreting a game, agent, source comparison, test or build. Additional receipts are fingerprinted only. This is not a new campaign, proof of causal game improvement or complete migration."
+}

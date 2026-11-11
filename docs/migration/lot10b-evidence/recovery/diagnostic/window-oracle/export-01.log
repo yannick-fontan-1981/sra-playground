@@ -1,0 +1,1 @@
+{"path": "tests/fixtures/v6-window-question-reference.json.gz", "bytes": 125972, "sha256": "6f55d5f380b9e25b570ea913daa6f3d30dfb2e5113257097101bc711eee67b43", "groupCounts": {"geometryCases": 45, "cases": 41, "policyCases": 17, "kernelCases": 29, "constructorCases": 24, "nativeAdaptationCases": 4}, "sourceFilesVerifiedBeforeAndAfter": 1786}

@@ -108,6 +108,7 @@ def freeze(out, campaign_only=False):
                   'tests/helpers/capture-preview-packing.ts',
                   'docs/migration/lot10b-evidence/freeze-source.py',
                   'docs/migration/lot10b-evidence/run-hpdl-campaign.mjs',
+                  'docs/migration/lot10b-evidence/stream-evidence-json.mjs',
                   'docs/migration/lot10b-evidence/run-hpdl-clocked-proof.py',
                   reference + 'laya_proto/common_frontier_policy.drm.json',
                   reference + 'morphology_policy/strategy.drm']

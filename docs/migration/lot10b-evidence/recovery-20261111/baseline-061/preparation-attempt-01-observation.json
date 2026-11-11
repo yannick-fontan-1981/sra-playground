@@ -1,0 +1,16 @@
+{
+  "schema": "logos-engine.lot10b.baseline-preparation-observation.v1",
+  "recordedAt": "2026-11-11T15:36:00.656418+00:00",
+  "status": "failed_ad_hoc_dependency_assumption",
+  "toolChunk": "24f879",
+  "exitCode": 1,
+  "diagnostic": "Traceback (most recent call last):\n  File \"<stdin>\", line 35, in <module>\nAssertionError\n",
+  "failedCheck": "Existence of node_modules/.bin/tsx",
+  "actualPathExists": false,
+  "sideEffectsBeforeFailure": [
+    "Added ignored baseline node_modules symlink to candidate dependencies",
+    "Added ignored baseline public/vendor/pyodide symlink to candidate assets"
+  ],
+  "artifactsWrittenBeforeFailure": false,
+  "qualification": "The preparer incorrectly added an extra tsx entry-point assumption not required by the retained cost static checker. The actual dependency contract is equality of the existing shared dependency targets. No dependency was installed or repaired and no runtime, test or cost execution occurred. This real failed source-preparation check is retained separately from the subsequent successful contract verification."
+}

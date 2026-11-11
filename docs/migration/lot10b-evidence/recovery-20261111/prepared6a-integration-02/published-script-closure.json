@@ -1,0 +1,39 @@
+{
+  "schema": "logos-engine.published-source-script-closure.v1",
+  "recordedAt": "2026-11-11T14:30:16.024418+00:00",
+  "publishedCommit": "98336fba4e696a51c90ff7f7b37b8bdf95f34847",
+  "siteVersion": 97,
+  "files": [
+    {
+      "path": "scripts/capture-preview-packing-synthetic.ts",
+      "sha256": "5104c389cdb7cd4571a5efad0a393ec2a96c12b0df2320bb36a754ba760bb793",
+      "bytes": 2473,
+      "alreadyIdentical": false
+    },
+    {
+      "path": "scripts/qualify-preview-packing-capture.ts",
+      "sha256": "913a1b393fcede5ade3f6e114b04338cc47c5a456f734bd82929b1defae47906",
+      "bytes": 2765,
+      "alreadyIdentical": false
+    },
+    {
+      "path": "scripts/qualify-preview-packing-reader.py",
+      "sha256": "00161d49c826a0d2e5f259dfa5d6b6e2f49b3c10711d3d2774e9a00ca3ec0096",
+      "bytes": 8065,
+      "alreadyIdentical": false
+    },
+    {
+      "path": "scripts/verify-preview-packing-presence.py",
+      "sha256": "4bf800fe0f570ef275b361d4b837dc4e9df4fb3bbb18f5600ba60f59bd43f362",
+      "bytes": 50666,
+      "alreadyIdentical": false
+    },
+    {
+      "path": "docs/migration/lot6a-evidence/recovery/native-source-review.json",
+      "sha256": "66233d1a4b346b751725e68fb4f2b8ad70d7c45bf822eb9c659eb8b428d39fa6",
+      "bytes": 10203,
+      "alreadyIdentical": true
+    }
+  ],
+  "qualification": "Exact Git blobs of the actually observed6A publication. No runtime, case, oracle or benchmark was executed."
+}

@@ -1,0 +1,34 @@
+{
+  "schema": "logos-engine.lot10b.published-predecessor-documentation-observation.v1",
+  "recordedAt": "2026-11-11T15:35:54.444Z",
+  "status": "succeeded",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "siteVersion": 100,
+  "sourceCommit": "5f8ca04cbf69cf2ccf7d2aba64a4cfde2a280613",
+  "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_ddf97f19ecd0819195a414899b483c34",
+  "deploymentId": "appgdep_6af486e34c788191bd1d38bc9cba6bdf",
+  "deploymentUpdatedAt": "2026-11-11T15:17:03.733262+00:00",
+  "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+  "archive": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_000000007524820ea8e101bafb6b41a2",
+    "content_hash": "sha256:13a7d25939ceb816f8a20db7d398cf6bf3b760785f076f3bc86b07218ad11dbc",
+    "size_bytes": 29992960,
+    "file_count": 75
+  },
+  "nativeBaselineUnchanged": {
+    "siteVersion": 98,
+    "commit": "653e40a4f45df8ec8c6bda005004c7cdb8df074a",
+    "nativeVersion": "0.61.0",
+    "nativeDigest": "f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279"
+  },
+  "access": {
+    "role": "owner",
+    "mode": "custom",
+    "revision": 3,
+    "allowedUsers": 1,
+    "allowedGroups": 0,
+    "externalVisitors": 0
+  },
+  "qualification": "Observed direct terminal Sites deployment and saved-version readback. Site100 predates the accepted clean repeat and is an intermediate documentation publication; later documentation handoff remains pending. Cost baseline remains actual native Site98/653e40a, without relabelling."
+}
