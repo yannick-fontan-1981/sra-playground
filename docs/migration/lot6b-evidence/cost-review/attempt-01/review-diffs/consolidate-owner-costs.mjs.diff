@@ -1,0 +1,37 @@
+--- 6b-before-review/consolidate-owner-costs.mjs
++++ 6b-reviewed/consolidate-owner-costs.mjs
+@@ -7,8 +7,8 @@
+  * Historical tools, failures and raw inputs remain unchanged. This schema never
+  * asserts that the historical strict graph-identity comparison passed.
+  */
+-// Directly adapted from the immutable published lot5B tool. Source fingerprints
+-// and complete diffs are retained in recovery/cost-tools-adaptation.json.
++// Directly adapted from the immutable published lot6A tool. Source fingerprints
++// and review diffs are retained in cost-review/attempt-01.
+ // No predecessor measurements are reused.
+ import assert from 'node:assert/strict';
+ import { createHash } from 'node:crypto';
+@@ -271,6 +271,14 @@
+   const attribution = (await readEvidence(fixture.attribution.path)).value;
+   assert.equal(attribution.schema, 'logos-engine.lot6b-owner-cost-structural-attribution.v1');
+   assert.equal(attribution.status, 'qualified_functional_structure'); assert.deepEqual(attribution.nativeDigests, declaration.nativeDigests);
++  assert.deepEqual(attribution.failures, []);
++  assert.deepEqual(attribution.commonValuePolicy, { comparison: 'exact', permittedMetadataDifference: 'origin.source_digest',
++    identityValueAttributions: [], unattributedDifferencesAllowed: 0 });
++  assert.ok(attribution.points.length > 0);
++  assert.deepEqual(attribution.commonValueCoverage, attribution.points.map(point => ({ case: point.case, form: point.form,
++    pointIndex: point.pointIndex, commonNodesCompared: point.baselineNodeCount,
++    commonDeltasCompared: point.baselineDeltaCount, comparison: 'exact', unattributedDifferences: 0 })),
++    'Every common graph node and delta value must be qualified before measurement');
+   await verify(attribution.generator);
+   assert.ok(Number.isSafeInteger(attribution.checkedCount) && attribution.checkedCount > 0);
+   assert.equal(attribution.checkedCount, attribution.checks.length); assert.ok(attribution.checks.every(row => row.passed === true));
+@@ -403,6 +411,8 @@
+   const declaration = (await readEvidence(contract.declaration.path)).value;
+   assert.equal(declaration.schema, 'logos-engine.native-cost-protocol-declaration.v2');
+   assert.equal(declaration.status, 'declared_before_official_window');
++  assert.equal(declaration.baseline.nativeVersion, '0.63.0');
++  assert.equal(declaration.candidate.nativeVersion, '0.64.0');
+   assert.equal(declaration.noOfficialWindowAtDeclaration, true);
+   assert.deepEqual(declaration.ownerCostQualification, {
+     schema: 'logos-engine.lot6b-owner-cost-qualification.v1', contractPath: contractFile.fingerprint.path, tools: contract.tools,

@@ -1,0 +1,1248 @@
+{
+  "schema": "sra.source-checkpoint-transport.v1",
+  "createdAt": "2026-11-11T16:17:33.983618+00:00",
+  "base": "98336fba4e696a51c90ff7f7b37b8bdf95f34847",
+  "observedRemoteMain": "d75a36f0a99bf6c301034523a3138a64d2f6e744",
+  "originalCommit": "e1f42dac8eb4226f8a3bc78d89d6bee6f463da1e",
+  "originalTree": "b2bcebe1de58e4536a37e6949a922694c1f9c4ed",
+  "targetBranch": "lot6b-selected-rigid-checkpoint-20261111",
+  "maximumBatchRawBytes": 25165824,
+  "priorRejectedPushBytes": 116566738,
+  "serverPerPushLimitBytes": 67108864,
+  "batches": [
+    {
+      "bytes": 25165823,
+      "files": [
+        {
+          "path": "docs/migration/lot6b-evidence/development-freeze-01/klot-campaign.json.gz",
+          "mode": "100644",
+          "oid": "5920695f9d1c9c5041c771a23151e8cd8fc8997f",
+          "bytes": 10936146
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/development-freeze-01/reader-negative-attempt-01/results/acquired-selection-detail/report.json.gz",
+          "mode": "100644",
+          "oid": "04d2509eeffb68b12b87401f7d3217acd1147157",
+          "bytes": 10773024
+        },
+        {
+          "path": "docs/migration/v6-coverage.json",
+          "mode": "100644",
+          "oid": "e67abfbe384af42cface3b60232cafd95277bc73",
+          "bytes": 2564535
+        },
+        {
+          "path": "migration/v6-transfer-map.json",
+          "mode": "100644",
+          "oid": "3ab370dabfd23d9de5375493ce4032c5faca57a7",
+          "bytes": 421253
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/capture/attempt-01/synthetic-report.json",
+          "mode": "100644",
+          "oid": "6ec876a729d98e4e073c20cad52db8d25cc93f4e",
+          "bytes": 306328
+        },
+        {
+          "path": "src/logos-engine/v6-native-runtime.ts",
+          "mode": "100644",
+          "oid": "b77202d7e4b30894b37cb07a89a55beb37cbc132",
+          "bytes": 163333
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/development-freeze-01/source-parity-attempt-01/bounded-execution.log.gz",
+          "mode": "100644",
+          "oid": "47e1c642631e31cae4bff394a5960aeef5164a64",
+          "bytes": 1204
+        }
+      ],
+      "commit": "4fbf518f292d77d3876da1a3dac7d63dc1a1be19",
+      "tree": "41a860ca7dbc646fc0b93081b5244e8c40e8b655",
+      "parent": "98336fba4e696a51c90ff7f7b37b8bdf95f34847"
+    },
+    {
+      "bytes": 25165819,
+      "files": [
+        {
+          "path": "docs/migration/lot6b-evidence/development-freeze-01/reader-negative-attempt-01/results/proposal-measured-mask-fact/report.json.gz",
+          "mode": "100644",
+          "oid": "82bef9dd4979b2e9d6e3483485cb0aabd903147c",
+          "bytes": 10767534
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/audit-guard/coverage-before-repair.json",
+          "mode": "100644",
+          "oid": "4f6747bc79724150a9168b1772b62c924e397447",
+          "bytes": 2564129
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/fixture-restoration/attempt-01/before-v6-coverage.json",
+          "mode": "100644",
+          "oid": "4f6747bc79724150a9168b1772b62c924e397447",
+          "bytes": 2564129
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/oracle/attempt-04/reference.json.gz",
+          "mode": "100644",
+          "oid": "e42d8ef8ab62dfab7eb90a9e1030845eada7d0bd",
+          "bytes": 2049970
+        },
+        {
+          "path": "tests/fixtures/v6-selected-rigid/reference.json.gz",
+          "mode": "100644",
+          "oid": "e42d8ef8ab62dfab7eb90a9e1030845eada7d0bd",
+          "bytes": 2049970
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/development-freeze-01/source-archive.tar.gz",
+          "mode": "100644",
+          "oid": "32cce46b0c16aa54d7dd2803b41d9c9a2171d501",
+          "bytes": 1896373
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/oracle/attempt-03/reference.json.gz",
+          "mode": "100644",
+          "oid": "fb897674fb5239927d724f4a2dec122234cb3c58",
+          "bytes": 1727762
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/development-freeze-01/source-archive.tar.gz.part000",
+          "mode": "100644",
+          "oid": "991a61a5f47a1097277242bc70d0492f50915373",
+          "bytes": 900000
+        },
+        {
+          "path": "docs/migration/v6-delivery-roadmap.md",
+          "mode": "100644",
+          "oid": "5508d3d606aec26d46ed7b6264a79f61f33332f5",
+          "bytes": 243969
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/coordination/site101-roadmap-source.md",
+          "mode": "100644",
+          "oid": "ab3f9457ec3c043423ce9a09f57c2d1458d10d8d",
+          "bytes": 237765
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/development-freeze-01/source-parity-attempt-01/result.json.gz",
+          "mode": "100644",
+          "oid": "d2fb17c9f0e597cc3d89dd3fce7917098b048cb8",
+          "bytes": 108787
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/consolidate-owner-costs.mjs",
+          "mode": "100644",
+          "oid": "2343f7fa8820e7e36a7b674235982a7c1b9be6c8",
+          "bytes": 53741
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/integration/attempt-01/factory-and-adjacent.log.gz",
+          "mode": "100644",
+          "oid": "3617f6cdd658776ac3549369da60981cc15b3a0d",
+          "bytes": 1662
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/development-freeze-01/validation/diff-check-output.log.gz",
+          "mode": "100644",
+          "oid": "d4b9926df0b7defceb6caf0b474c4a190c5ca8f0",
+          "bytes": 20
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/oracle/attempt-01/export-exit-code.txt",
+          "mode": "100644",
+          "oid": "d00491fd7e5bb6fa28c517a0bb32b8b506539d4d",
+          "bytes": 2
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/oracle/attempt-02/export-exit-code.txt",
+          "mode": "100644",
+          "oid": "d00491fd7e5bb6fa28c517a0bb32b8b506539d4d",
+          "bytes": 2
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/oracle/attempt-03/export-exit-code.txt",
+          "mode": "100644",
+          "oid": "573541ac9702dd3969c9bc859d2b91ec1f7e6e56",
+          "bytes": 2
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/oracle/attempt-04/export-exit-code.txt",
+          "mode": "100644",
+          "oid": "573541ac9702dd3969c9bc859d2b91ec1f7e6e56",
+          "bytes": 2
+        }
+      ],
+      "commit": "5c1b2c9f53f8a5f12526e665f82e9f84260b74b5",
+      "tree": "f467209a1b6be867159a952734f6ab0b9adfc178",
+      "parent": "4fbf518f292d77d3876da1a3dac7d63dc1a1be19"
+    },
+    {
+      "bytes": 7231667,
+      "files": [
+        {
+          "path": "docs/migration/lot6b-evidence/oracle/attempt-02/reference.json.gz",
+          "mode": "100644",
+          "oid": "17612b772e67ac2edc3b584cfef9dcead124be2d",
+          "bytes": 1647034
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/oracle/attempt-01/reference.json.gz",
+          "mode": "100644",
+          "oid": "e11ad2ffac1cc431fc9e052aa0274144a4af825d",
+          "bytes": 1573573
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/development-freeze-01/source-archive.tar.gz.part001",
+          "mode": "100644",
+          "oid": "29cc29b5bebaff8c75e49325b9d6d456071fcdd4",
+          "bytes": 900000
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/development-freeze-01/reader-negative-attempt-01/results/qualification.json",
+          "mode": "100644",
+          "oid": "235843513cb424932fb5692df4c646ce47583582",
+          "bytes": 217233
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/development-freeze-01/source-archive.tar.gz.part002",
+          "mode": "100644",
+          "oid": "e79fa1c76ddce4d309fae8666a977d9fb7cfd9bf",
+          "bytes": 96373
+        },
+        {
+          "path": "tests/helpers/v6-live-game-campaign.ts",
+          "mode": "100644",
+          "oid": "26c1ab22caaedda5023564263bb31023eb25cf1c",
+          "bytes": 89344
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/development-freeze-01/validation/checks-run.json",
+          "mode": "100644",
+          "oid": "3a4610ecd51519db902bd958a4954942f768e52d",
+          "bytes": 82786
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/fixture-restoration/attempt-01/before-checks-run.json",
+          "mode": "100644",
+          "oid": "3a4610ecd51519db902bd958a4954942f768e52d",
+          "bytes": 82786
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/development-freeze-01/execution-klot.json",
+          "mode": "100644",
+          "oid": "a692aae00a3324380d7ed1b2e6235f4d3a9662ba",
+          "bytes": 78235
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/review-owner-costs.py",
+          "mode": "100644",
+          "oid": "250e7d8ad029ed67f8a6c446de34c626f4a36d18",
+          "bytes": 71359
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/original-6a/review-owner-costs.py",
+          "mode": "100644",
+          "oid": "c719f80ebb496d29dc1996e1d00d533d362cd7a6",
+          "bytes": 70329
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/before/review-owner-costs.py",
+          "mode": "100644",
+          "oid": "7a503e537703ef7eebfe2bb2376e0d392ab4bd3a",
+          "bytes": 70322
+        },
+        {
+          "path": "scripts/verify-selected-rigid-presence.py",
+          "mode": "100644",
+          "oid": "abeea590e43058c42b40294754135aac4080fc6f",
+          "bytes": 65174
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/development-freeze-01/bounded-execution.json",
+          "mode": "100644",
+          "oid": "76383966db36edf2653da24c660d76ef420fcf9e",
+          "bytes": 60644
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/component/attempt-03/execution.json",
+          "mode": "100644",
+          "oid": "5bb9a8dfe57de87151de5454a068d2e26614aad5",
+          "bytes": 57399
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/integration/attempt-02/execution.json",
+          "mode": "100644",
+          "oid": "98ea348c5ed71669fdff1b6f3b607b614b2967d7",
+          "bytes": 57385
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/development-freeze-01/reader-negative-attempt-01/results/acquired-selection-detail/source-comparison.json.gz",
+          "mode": "100644",
+          "oid": "5f08d3e863b333669c39199087b2c52f9ff4961b",
+          "bytes": 56086
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/original-6a/consolidate-owner-costs.mjs",
+          "mode": "100644",
+          "oid": "1f2b12922a03085d83114f49240ac0477eee88e7",
+          "bytes": 52958
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/before/consolidate-owner-costs.mjs",
+          "mode": "100644",
+          "oid": "363da6b87055ff698d7ec73810b0a60f257aec72",
+          "bytes": 52949
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/development-freeze-01/reader-negative-attempt-01/results/proposal-measured-mask-fact/source-comparison.json.gz",
+          "mode": "100644",
+          "oid": "ab00ecf12d78f5f8d21145b02d849256cc6317e7",
+          "bytes": 52563
+        },
+        {
+          "path": "scripts/export-v6-selected-rigid-reference.py",
+          "mode": "100644",
+          "oid": "9eb73ec9fd5983d0f28aa44e2bb160eac36e8a2a",
+          "bytes": 48745
+        },
+        {
+          "path": "scripts/compare-selected-rigid-public-parity.py",
+          "mode": "100644",
+          "oid": "2b5e1b493ae0960bca07d17fa0cca875f9bc8330",
+          "bytes": 43759
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/qualify-cost-owner-graphs.mjs",
+          "mode": "100644",
+          "oid": "11f64006c9a9ea817096aa53688c7ae488afc52e",
+          "bytes": 42632
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/write-cost-results.py",
+          "mode": "100644",
+          "oid": "d826088d89f62da94f1adf04e36f879a4832cfad",
+          "bytes": 42206
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/original-6a/write-cost-results.py",
+          "mode": "100644",
+          "oid": "8d6202d89d2bff7cb92b9ed4b054a4f3ab7dfc94",
+          "bytes": 41898
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/before/write-cost-results.py",
+          "mode": "100644",
+          "oid": "7ac76f5222cd42ededd1f03da9e2156d39becab8",
+          "bytes": 41895
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/original-6a/qualify-cost-owner-graphs.mjs",
+          "mode": "100644",
+          "oid": "f9ef3317cd6aeed1a831c3e66bce90259ffe9729",
+          "bytes": 40668
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/before/qualify-cost-owner-graphs.mjs",
+          "mode": "100644",
+          "oid": "68028a3a71e4e016eaf8fbdaed18d0260db93d6d",
+          "bytes": 40340
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/development-freeze-01/source-archive.json",
+          "mode": "100644",
+          "oid": "436223a674cb518b5e4c2a5108f8fdf5e3fb7bee",
+          "bytes": 39592
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/component/attempt-03/watch.json",
+          "mode": "100644",
+          "oid": "f4981b3d795e414f896a332a2b93c5a0cc5710ff",
+          "bytes": 37435
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/integration/attempt-02/watch.json",
+          "mode": "100644",
+          "oid": "d5e7b4b124ef6071f8e5c9fb1e37018313342e4f",
+          "bytes": 37435
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/development-freeze-01/source-manifest.json",
+          "mode": "100644",
+          "oid": "f9c0f385eeae69d3c1b3e48c36e2029d120b5151",
+          "bytes": 36806
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/review.json",
+          "mode": "100644",
+          "oid": "39c57998386b81d2c92eb472d95c9ea9032de468",
+          "bytes": 32622
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/prepare-cost-protocol.py",
+          "mode": "100644",
+          "oid": "bd86287f77b2c353c2944e899c2a68c7de0d5d71",
+          "bytes": 31051
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/inputs-before.json",
+          "mode": "100644",
+          "oid": "787c75032a5e1db9eaef57a80a710c8532dc8311",
+          "bytes": 30806
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/original-6a/prepare-cost-protocol.py",
+          "mode": "100644",
+          "oid": "c257dc84da24e1f3e21b433199228ad34dcde688",
+          "bytes": 30307
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/before/prepare-cost-protocol.py",
+          "mode": "100644",
+          "oid": "c8cf7f35b12928ba22e2b15f40121e0991656b10",
+          "bytes": 30301
+        },
+        {
+          "path": "src/logos-engine/v6-selected-rigid.ts",
+          "mode": "100644",
+          "oid": "fffe20aaed9de5ed079ec2a4fe40a3c2a2279042",
+          "bytes": 29799
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/check-cost-static-inputs.py",
+          "mode": "100644",
+          "oid": "0df2d1333a310c0ff77639e41b04dbc26e44aed4",
+          "bytes": 28667
+        },
+        {
+          "path": "tests/v6-radial-port-integration.test.ts",
+          "mode": "100644",
+          "oid": "1b7c5c5192e3a329b2c373b99ba801929dc48636",
+          "bytes": 28648
+        },
+        {
+          "path": "tests/v6-selected-rigid-native.test.ts",
+          "mode": "100644",
+          "oid": "e17e0d56eb713ef2d5a02c4cebae2bfccba57bc4",
+          "bytes": 28487
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/original-6a/check-cost-static-inputs.py",
+          "mode": "100644",
+          "oid": "40feb5893de3987edfc7394055bf51df47edfe72",
+          "bytes": 27608
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/before/check-cost-static-inputs.py",
+          "mode": "100644",
+          "oid": "42024c98692fabb199ff9cb7298a5244106db887",
+          "bytes": 27598
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/qualify-cost-owner-graphs.mjs.diff",
+          "mode": "100644",
+          "oid": "5eafc0b6601644c9254cb4c4852b24cd8df377c5",
+          "bytes": 27368
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/capture-cost-owner-graphs.mjs",
+          "mode": "100644",
+          "oid": "ee6c1d16b7770a50d3cdf89808017c13cc536159",
+          "bytes": 25111
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/development-freeze-01/klot-public-trace.json.gz",
+          "mode": "100644",
+          "oid": "7761fbbc6dc00d9a7845926ed98993a8d5c040f4",
+          "bytes": 24719
+        },
+        {
+          "path": "tests/v6-selected-rigid-integration.test.ts",
+          "mode": "100644",
+          "oid": "643c3924af1f9fe6c0ae5d7c6dccda491482786d",
+          "bytes": 24497
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/original-6a/capture-cost-owner-graphs.mjs",
+          "mode": "100644",
+          "oid": "d2367e93a0bcc00e33471332ab966fccb2a8c388",
+          "bytes": 23229
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/before/capture-cost-owner-graphs.mjs",
+          "mode": "100644",
+          "oid": "75395bddf6dc4c7f1678eb10fc246b5f9a820b31",
+          "bytes": 23192
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/qualify-cost-owner-graphs.mjs.diff",
+          "mode": "100644",
+          "oid": "34997e683d3d91a4354eee87f691374323226ca3",
+          "bytes": 21860
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/coordination-before-syntax.json",
+          "mode": "100644",
+          "oid": "e371ca00908a177dbb29c7fc651b6794f42d82bf",
+          "bytes": 20278
+        },
+        {
+          "path": "docs/migration/v6-entry-point-progress.json",
+          "mode": "100644",
+          "oid": "f58534eba764a432ce4dd3fad1b5f03b465e6ba3",
+          "bytes": 19451
+        },
+        {
+          "path": "scripts/compare-v6-selected-rigid-reference.ts",
+          "mode": "100644",
+          "oid": "77d003b9660345c73f5d2d3ff86280ffeb869dfd",
+          "bytes": 19118
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/capture/attempt-01/presence-qualification.json",
+          "mode": "100644",
+          "oid": "51082008addedf7dc3ff3bf0d1604e9571d5f607",
+          "bytes": 18943
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/development-freeze-01/klot-actual-public-journal.jsonl.gz",
+          "mode": "100644",
+          "oid": "1b9144566e7437c02003ce71887a98023f9718dc",
+          "bytes": 18878
+        },
+        {
+          "path": "docs/migration/lot6b-selected-rigid.md",
+          "mode": "100644",
+          "oid": "ea036beb29feb05911df783800717914bac398a7",
+          "bytes": 17502
+        },
+        {
+          "path": "docs/migration/lot6b-selected-rigid-lineage.md",
+          "mode": "100644",
+          "oid": "134a80637b6a515cb04b00188e37d18a5b693495",
+          "bytes": 17187
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/finalize-owner-cost-contract.py",
+          "mode": "100644",
+          "oid": "2faf2c7d555d8c4b74974646c089fa80adafb706",
+          "bytes": 16988
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/finalize-measured-cost.py",
+          "mode": "100644",
+          "oid": "41332e6e24732afc838fcaae697df4e8c0eb9d56",
+          "bytes": 16938
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/component/attempt-03/coordination-before.json",
+          "mode": "100644",
+          "oid": "c71143d88a3c2f1e10a68f205ae8873a005d5ac9",
+          "bytes": 16916
+        },
+        {
+          "path": "scripts/tests/qualify-selected-rigid-cold-reader.py",
+          "mode": "100644",
+          "oid": "d1ef057cc5cb5e88f457f2563eebfaa94639a4df",
+          "bytes": 16714
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/before/finalize-measured-cost.py",
+          "mode": "100644",
+          "oid": "d7cd91f5dc41dd848a88b531cc19a560b20fffd8",
+          "bytes": 16709
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/original-6a/finalize-measured-cost.py",
+          "mode": "100644",
+          "oid": "70bf38aa2fc5b5d2b3386ec341de405cfd173751",
+          "bytes": 16709
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/component/attempt-01/coordination-before.json",
+          "mode": "100644",
+          "oid": "df77ee73afea887c3582b40f2049dd6c3b282968",
+          "bytes": 15936
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/component/attempt-02/coordination-before.json",
+          "mode": "100644",
+          "oid": "df77ee73afea887c3582b40f2049dd6c3b282968",
+          "bytes": 15936
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/original-6a/finalize-owner-cost-contract.py",
+          "mode": "100644",
+          "oid": "7729c7bf554d51489f25e9041a08266e567084f5",
+          "bytes": 15735
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/before/finalize-owner-cost-contract.py",
+          "mode": "100644",
+          "oid": "be9009b43a8f021b34a9fb57f4e9d55d40912fee",
+          "bytes": 15727
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/capture/attempt-01/coordination-before.json",
+          "mode": "100644",
+          "oid": "562888b65b5b288bf5a9a97f080c175d43ab7002",
+          "bytes": 15535
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/capture-cost-owner-graphs.mjs.diff",
+          "mode": "100644",
+          "oid": "8b03cee3e5cd891d0f15f292d1b581636fee361f",
+          "bytes": 14242
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/record-owner-source-inventory.mjs",
+          "mode": "100644",
+          "oid": "ce8d173cff130a74075a495047bf1aac46ba7c49",
+          "bytes": 13205
+        },
+        {
+          "path": "src/logos-engine/v6-native-types.ts",
+          "mode": "100644",
+          "oid": "c42ad2006af868334c70c4d644368cea9ca4f20c",
+          "bytes": 13179
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/prepare-cost-protocol.py.diff",
+          "mode": "100644",
+          "oid": "bf1bd1c846a7a456ed3bcf7a099b4eb52c716c26",
+          "bytes": 12996
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/original-6a/record-owner-source-inventory.mjs",
+          "mode": "100644",
+          "oid": "039a46c8396ccbb759c7cbef28f980c364b6cedc",
+          "bytes": 12847
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/before/record-owner-source-inventory.mjs",
+          "mode": "100644",
+          "oid": "d892a509d3d31a35938ff4358ba460e1c4bcc904",
+          "bytes": 12842
+        },
+        {
+          "path": "scripts/tests/qualify-selected-rigid-presence.py",
+          "mode": "100644",
+          "oid": "2c62b6c675c202efccc3dd34012135edec983050",
+          "bytes": 12648
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/write-cost-results.py.diff",
+          "mode": "100644",
+          "oid": "56f0c5a8e905fd6d984ff50e9898ee6728a3c2fd",
+          "bytes": 12272
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/review-owner-costs.py.diff",
+          "mode": "100644",
+          "oid": "e783355cc851f7eb7d48fce379487fed6dc829ca",
+          "bytes": 11474
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/consolidate-owner-costs.mjs.diff",
+          "mode": "100644",
+          "oid": "73fa3500ea16505410c255b6398e1496930b70a7",
+          "bytes": 11061
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/check-cost-static-inputs.py.diff",
+          "mode": "100644",
+          "oid": "cf389543e39af1f66e852d0570f74426b721530a",
+          "bytes": 11026
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/write-cost-results.py.diff",
+          "mode": "100644",
+          "oid": "66c4aec548f2803b5eba0ee8c299dbc11f863f05",
+          "bytes": 10686
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/finalize-owner-cost-contract.py.diff",
+          "mode": "100644",
+          "oid": "3a27d8c2055567e6580d9d07b5d3a9872734de85",
+          "bytes": 10639
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/prepare-cost-protocol.py.diff",
+          "mode": "100644",
+          "oid": "cbcf595c43e35a8a9e183ad7365cf7d08902471e",
+          "bytes": 10572
+        },
+        {
+          "path": "tests/v6-preview-packing-integration.test.ts",
+          "mode": "100644",
+          "oid": "7c58bfd2b244a31a3356b22933a0d04ff98c8411",
+          "bytes": 10533
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/capture-cost-owner-graphs.mjs.diff",
+          "mode": "100644",
+          "oid": "ae18d09a037e6cd49e2db22ea2b63a8549a5f7fd",
+          "bytes": 10083
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/verify-review.py",
+          "mode": "100644",
+          "oid": "95eea2477c6430e31ac067ed060ca8d6fb7fc8d4",
+          "bytes": 9994
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/review-diffs/qualify-cost-owner-graphs.mjs.diff",
+          "mode": "100644",
+          "oid": "18bfbfe36c9f186b422152fa2e9f64bbb5e6461b",
+          "bytes": 9796
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/review-owner-costs.py.diff",
+          "mode": "100644",
+          "oid": "cc519e1d635927d51d73a4f324d6a69e5b7aaab3",
+          "bytes": 9657
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/consolidate-owner-costs.mjs.diff",
+          "mode": "100644",
+          "oid": "5bc3c60daaa86b5f00812a931b2880de6f73568c",
+          "bytes": 9431
+        },
+        {
+          "path": "tests/v6-selected-rigid-capture.test.ts",
+          "mode": "100644",
+          "oid": "8f4ce51886efcdc12130ceedd8dd53df23201ff9",
+          "bytes": 9408
+        },
+        {
+          "path": "src/logos-engine/v6-selected-rigid-search.ts",
+          "mode": "100644",
+          "oid": "ee47f9fba68cf15cf5192e33ca0b6d017ba0c7b9",
+          "bytes": 8844
+        },
+        {
+          "path": "src/logos-engine/v6-selected-rigid-geometry.ts",
+          "mode": "100644",
+          "oid": "9902e2b498b9a7fcb46bd60f1fb6421466c57839",
+          "bytes": 8625
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/check-cost-static-inputs.py.diff",
+          "mode": "100644",
+          "oid": "ad4a18bcfe8d19490ef0f53eac77a8023e777de3",
+          "bytes": 8279
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/review.md",
+          "mode": "100644",
+          "oid": "63dfa954e72148df210b9601052b008b360f2d7c",
+          "bytes": 7662
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/finalize-owner-cost-contract.py.diff",
+          "mode": "100644",
+          "oid": "75c77a7578678db8c2ab321afdf812a0fdfc8445",
+          "bytes": 7651
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/source-opening/klot-prior-observation-reconciled.json",
+          "mode": "100644",
+          "oid": "8772e502cd1c794569832b6e9795d1b5b428bb7b",
+          "bytes": 7490
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/fixture-restoration/attempt-01/recovery.json",
+          "mode": "100644",
+          "oid": "6f795be5fa10844c58cea376ba376afd7c330b34",
+          "bytes": 7447
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/run-case-command.py",
+          "mode": "100644",
+          "oid": "a0d642a01523597b622b69570a39d94e0d70f248",
+          "bytes": 7433
+        },
+        {
+          "path": "scripts/audit-v6-entry-points.ts",
+          "mode": "100644",
+          "oid": "0e86ced0cb983f581e29235b03b4d25a44aef534",
+          "bytes": 7305
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/review-diffs/capture-cost-owner-graphs.mjs.diff",
+          "mode": "100644",
+          "oid": "a26da20acd7c2bc84e36b86fff9a8dde03ee4561",
+          "bytes": 6423
+        },
+        {
+          "path": "tests/helpers/capture-selected-rigid.ts",
+          "mode": "100644",
+          "oid": "97bc4c3dfde2ce09a5c2ecb8bd88fbb0979220ed",
+          "bytes": 5958
+        },
+        {
+          "path": "scripts/audit-v6-migration.py",
+          "mode": "100644",
+          "oid": "242e7d31af0053b9cb6acc4001a5e2f7b5151962",
+          "bytes": 5646
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/audit-guard/audit-before.py",
+          "mode": "100644",
+          "oid": "51e551467631fb61a1c78d76f4077e7d7161a4e9",
+          "bytes": 5506
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/source-opening/cost-tools-initial-derivation.json",
+          "mode": "100644",
+          "oid": "6460353be5a8d4036246c4053c277a9f4adf8be2",
+          "bytes": 5297
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/record-owner-source-inventory.mjs.diff",
+          "mode": "100644",
+          "oid": "c4dba2e3939a9b7e76fda205c552881377fbb931",
+          "bytes": 5283
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/finalize-measured-cost.py.diff",
+          "mode": "100644",
+          "oid": "8343594def4e166ddd88d4f71ed826a0dd9326ae",
+          "bytes": 5002
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/development-freeze-01/klot-output.log.gz",
+          "mode": "100644",
+          "oid": "3c43a073a903dc284295856ef69ec322b21b50c5",
+          "bytes": 4957
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/reconcile-klot-prior-clock.py",
+          "mode": "100644",
+          "oid": "066a4f50fa8af78b40cb12f935b9dcd36380c93c",
+          "bytes": 4830
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/finalize-measured-cost.py.diff",
+          "mode": "100644",
+          "oid": "fec596543c0ea9ca25276d6a145f26a11563bac9",
+          "bytes": 4772
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/capture/attempt-01/execution.json",
+          "mode": "100644",
+          "oid": "07afb44ac317e5919ff3b0de9372d104c38c9157",
+          "bytes": 4760
+        },
+        {
+          "path": "src/logos-engine/v6-selected-rigid-types.ts",
+          "mode": "100644",
+          "oid": "8b44cd81d7e66d0cf02cb9eeb8bed63bf0d667c9",
+          "bytes": 4586
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/development-freeze-01/reader-negative-attempt-01/bounded-execution.json",
+          "mode": "100644",
+          "oid": "146e4da9069e0c27965c094833c4878a9c21bb25",
+          "bytes": 4132
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/review-diffs/finalize-owner-cost-contract.py.diff",
+          "mode": "100644",
+          "oid": "e44be4d05319d0a88c55d8ef3e8cd5216a8d86ba",
+          "bytes": 4039
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/before/record-cost-log-transport.py",
+          "mode": "100644",
+          "oid": "d53450bc85574bc57fb1499c5b71e933ab838f90",
+          "bytes": 3889
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/original-6a/record-cost-log-transport.py",
+          "mode": "100644",
+          "oid": "c13329824cff7ab8e9c13e833d3885e30f8012a0",
+          "bytes": 3889
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/record-cost-log-transport.py",
+          "mode": "100644",
+          "oid": "2aaeba390bfc699f1edc55681c036d814cb9af22",
+          "bytes": 3889
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/development-freeze-01/source-parity-attempt-01/bounded-execution.json",
+          "mode": "100644",
+          "oid": "66fa4256b09d852be512ebe432d941be7db55ebb",
+          "bytes": 3825
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/freeze-source.py",
+          "mode": "100644",
+          "oid": "5f4d474d148549b2a931827165646f222c76fc93",
+          "bytes": 3747
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/review-diffs/check-cost-static-inputs.py.diff",
+          "mode": "100644",
+          "oid": "f9183bc92f53ecf76be8244e72f0960286ef115b",
+          "bytes": 3745
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/record-owner-source-inventory.mjs.diff",
+          "mode": "100644",
+          "oid": "9e38517f4ebd1b6478f3cfcacb949aedbca51df8",
+          "bytes": 3440
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/development-freeze-01/reader-negative-attempt-01/results/proposal-measured-mask-fact/source-execution.json",
+          "mode": "100644",
+          "oid": "ae3fb2d9b123213800c47d6e5769b9561f1199af",
+          "bytes": 3429
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/development-freeze-01/reader-negative-attempt-01/results/acquired-selection-detail/source-execution.json",
+          "mode": "100644",
+          "oid": "5e715cf411fac8d5336adc1eab09263e2ead410f",
+          "bytes": 3420
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/case-clock.py",
+          "mode": "100644",
+          "oid": "bac9c28f57cd3e7f780309873faf50f917e78284",
+          "bytes": 3185
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/review-diffs/prepare-cost-protocol.py.diff",
+          "mode": "100644",
+          "oid": "61d887e181b26a006ec463f53070f8fc9b2a21e5",
+          "bytes": 3113
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/component/attempt-01/execution.json",
+          "mode": "100644",
+          "oid": "e320caa30edb2812ddfd310bdf16d620547201a2",
+          "bytes": 3092
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/component/attempt-02/execution.json",
+          "mode": "100644",
+          "oid": "7dcf6a64f1decf62b4fea57a3a9db485bcd7cbfb",
+          "bytes": 3092
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/record-command.py",
+          "mode": "100644",
+          "oid": "ae752d56baf659290deb79de4dc5236b29985df7",
+          "bytes": 3056
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/review-diffs/review-owner-costs.py.diff",
+          "mode": "100644",
+          "oid": "1e1931b632244efb2b5431f603aabc4f94b4aba9",
+          "bytes": 3031
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/component/attempt-03/execution.log.gz",
+          "mode": "100644",
+          "oid": "9a88c2949622d8f0290a2827abeb78cc94c1bca8",
+          "bytes": 2943
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/oracle/attempt-04/native-comparison.json",
+          "mode": "100644",
+          "oid": "580d591e4547ae6198f0df17520d210c9d4ee798",
+          "bytes": 2930
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/oracle/attempt-03/native-comparison.json",
+          "mode": "100644",
+          "oid": "ecc8a5b94dd62f2816f2267b11121babfa596325",
+          "bytes": 2929
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/development-freeze-01/source-parity-attempt-01/reader-execution.json",
+          "mode": "100644",
+          "oid": "00445a9e678015abec1dc309261b5c62bd6daeb5",
+          "bytes": 2851
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/review-diffs/consolidate-owner-costs.mjs.diff",
+          "mode": "100644",
+          "oid": "608302ec67669511a9489e930318ca74f0f6e943",
+          "bytes": 2636
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/derive-cost-tools.py",
+          "mode": "100644",
+          "oid": "79749e0486846402bd21077e05a7526b17026dc6",
+          "bytes": 2482
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/oracle/attempt-02/export-execution.json",
+          "mode": "100644",
+          "oid": "777091e32f7cf7f6614816b0e7c479dd08ab23d9",
+          "bytes": 2243
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/review-diffs/write-cost-results.py.diff",
+          "mode": "100644",
+          "oid": "c42269c6834ee9bfb0e9ff8f9908b08154a4582c",
+          "bytes": 2238
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/oracle/attempt-01/export-execution.json",
+          "mode": "100644",
+          "oid": "887fb2e79ae39042c6b0f7cd734340fd23336796",
+          "bytes": 2237
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/klot-case-clock.json",
+          "mode": "100644",
+          "oid": "3ed3205c71f058bf3ddcf80ae780925eb8f5b8dc",
+          "bytes": 2235
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/oracle/attempt-03/native-comparison-execution.json",
+          "mode": "100644",
+          "oid": "9e09516e6b256ff3de5748a200d9faa3513e2595",
+          "bytes": 2189
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/oracle/attempt-04/native-comparison-execution.json",
+          "mode": "100644",
+          "oid": "2080ad7e387652394094a8c8bc43b31d72a65fd6",
+          "bytes": 2161
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/record-cost-log-transport.py.diff",
+          "mode": "100644",
+          "oid": "c4329619566cc2de3e50438d184e5d323581087e",
+          "bytes": 2138
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/review-diffs/record-owner-source-inventory.mjs.diff",
+          "mode": "100644",
+          "oid": "74594a63b8ff4a4fb4156b6cd39f1e81b9a95861",
+          "bytes": 1949
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/component/attempt-02/execution.log.gz",
+          "mode": "100644",
+          "oid": "a73554a6a5b0fcdd378ac0384887c39af596bb8b",
+          "bytes": 1870
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/development-freeze-01/validation/build-output.log.gz",
+          "mode": "100644",
+          "oid": "ab80c431727dfcd2d1f1e1df5ca6d39853e0c459",
+          "bytes": 1588
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/component/attempt-01/watch.json",
+          "mode": "100644",
+          "oid": "965058e9965a999e462e2e770b569e3f14fe5a48",
+          "bytes": 1463
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/component/attempt-02/watch.json",
+          "mode": "100644",
+          "oid": "615516a19543411b64df6b8271b2c178a5374832",
+          "bytes": 1463
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/oracle/attempt-03/export-execution.json",
+          "mode": "100644",
+          "oid": "82566374d685fb4f76d6b9a809c929f711a2646b",
+          "bytes": 1431
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/oracle/attempt-04/export-execution.json",
+          "mode": "100644",
+          "oid": "416d0d3d91fa4fcaca6bc18d5bd5c58fb490cab3",
+          "bytes": 1431
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/record-cost-log-transport.py.diff",
+          "mode": "100644",
+          "oid": "011b066f667b175a70e187db9db06f38f451018f",
+          "bytes": 1322
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/review-diffs/record-cost-log-transport.py.diff",
+          "mode": "100644",
+          "oid": "2f2343d199f9681796bb74e44c93342d12859d7e",
+          "bytes": 1286
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/planning/development-campaign-01.json",
+          "mode": "100644",
+          "oid": "7db6abebd1c802275bc10489d122cb1dfc8cec17",
+          "bytes": 1101
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/development-freeze-01/bounded-execution.log.gz",
+          "mode": "100644",
+          "oid": "23411cc88c2569dce5bc53d2ed9bc789bb73aeea",
+          "bytes": 1063
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/source-opening/klot-clock-before-prior-correction.json",
+          "mode": "100644",
+          "oid": "cc8e163475c2f1bd47f5b42842e30ad67bcdf7d6",
+          "bytes": 1058
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/development-freeze-01/source-archive-parts.json",
+          "mode": "100644",
+          "oid": "1dae16f0a7beae15cf4fe919af2be63be1dc446e",
+          "bytes": 1056
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/development-freeze-01/reader-negative-attempt-01/watch.json",
+          "mode": "100644",
+          "oid": "5720c68214c7ccd76f037a86e491c5c824ad6598",
+          "bytes": 998
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/source-opening/klot-prior-observation.json",
+          "mode": "100644",
+          "oid": "e84a8720908674cd5b483e90b518895132a2e1e9",
+          "bytes": 930
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/audit-guard/restored-inventory.json",
+          "mode": "100644",
+          "oid": "9240e5f636d4fa89d46d19e1e54a9cfbadffde22",
+          "bytes": 926
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/integration/attempt-01/factory-and-adjacent.json",
+          "mode": "100644",
+          "oid": "ac8001e87b09e4c2e3e81b035f68f5bc2588f73d",
+          "bytes": 905
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/review-diffs/finalize-measured-cost.py.diff",
+          "mode": "100644",
+          "oid": "22b49d0712bb7e6ac04f6d6261b191145306ec92",
+          "bytes": 891
+        },
+        {
+          "path": "tests/v6-selected-rigid-reference.test.ts",
+          "mode": "100644",
+          "oid": "64eeb6f07bacc7800309832a521e5e12ae002848",
+          "bytes": 826
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/development-freeze-01/source-parity-attempt-01/watch.json",
+          "mode": "100644",
+          "oid": "f58ae39ac9a6f8ced01c38a21e47185d80507dd3",
+          "bytes": 825
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/component/attempt-01/execution.log.gz",
+          "mode": "100644",
+          "oid": "64e82cb8826b2a7173ec70b79d1e7d4d5c87be3e",
+          "bytes": 787
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/verification-execution.json",
+          "mode": "100644",
+          "oid": "b4852364bf7fd8b8882264cffb7f0b71759e0564",
+          "bytes": 772
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/oracle/attempt-04/fixture-installation.json",
+          "mode": "100644",
+          "oid": "3aff2d2dcf5c2eb5af23d576043abc7f8357c92c",
+          "bytes": 757
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/integration/attempt-01/typecheck.json",
+          "mode": "100644",
+          "oid": "72d367169dc03f791bf5e2cffd3753e5b92513a6",
+          "bytes": 729
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/audit-guard/expected-missing-evidence.json",
+          "mode": "100644",
+          "oid": "b174b6d5748641cf71f20d048e538db9ae3d1d5f",
+          "bytes": 717
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/fixture-restoration/attempt-01/before-expected-missing-evidence.json",
+          "mode": "100644",
+          "oid": "b174b6d5748641cf71f20d048e538db9ae3d1d5f",
+          "bytes": 717
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/integration/attempt-02/execution.log.gz",
+          "mode": "100644",
+          "oid": "06554ba336d5c47434e3fddc0028f17fbe435d91",
+          "bytes": 641
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/coordination/site101-observation.json",
+          "mode": "100644",
+          "oid": "c15e5785dbe3258dc804c5740a860f3be381f167",
+          "bytes": 635
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/oracle/attempt-03/fixture-installation.json",
+          "mode": "100644",
+          "oid": "e36aa5001c3296c507fc35af2643398ca3e33c23",
+          "bytes": 467
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/development-freeze-01/validation/migration-audit-output.log.gz",
+          "mode": "100644",
+          "oid": "e75906c6cbaaaa954feefc172ff2310e43daba91",
+          "bytes": 289
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/fixture-restoration/attempt-01/before-migration-audit-output.log.gz",
+          "mode": "100644",
+          "oid": "e75906c6cbaaaa954feefc172ff2310e43daba91",
+          "bytes": 289
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/development-freeze-01/reader-negative-attempt-01/bounded-execution.log.gz",
+          "mode": "100644",
+          "oid": "1b76451c2700c00c78c8c7600f05a15f6b0f0de0",
+          "bytes": 241
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/source-opening/sites-open-result.json",
+          "mode": "100644",
+          "oid": "327f041b144d86d4fc32383eb8ececd72c29163f",
+          "bytes": 197
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/development-freeze-01/validation/entry-audit-output.log.gz",
+          "mode": "100644",
+          "oid": "bcc725a1b8e6792096d9e80a35a4134a7e027c2f",
+          "bytes": 180
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/development-freeze-01/validation/typecheck-output.log.gz",
+          "mode": "100644",
+          "oid": "9708d648435c089ccd7aa7be6bf7901c84d01cab",
+          "bytes": 141
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/integration/attempt-01/typecheck.log.gz",
+          "mode": "100644",
+          "oid": "9708d648435c089ccd7aa7be6bf7901c84d01cab",
+          "bytes": 141
+        }
+      ],
+      "commit": "49233ebbf1c5161ec91fe970e0a17d90d0f461d3",
+      "tree": "b2bcebe1de58e4536a37e6949a922694c1f9c4ed",
+      "parent": "5c1b2c9f53f8a5f12526e665f82e9f84260b74b5"
+    }
+  ],
+  "finalMergeCommit": "5b03fb53526d6016fde61db32a2d4fbb1de0f5bb",
+  "finalTree": "b2bcebe1de58e4536a37e6949a922694c1f9c4ed",
+  "preservesOriginalCommitAncestry": true,
+  "publication": false
+}

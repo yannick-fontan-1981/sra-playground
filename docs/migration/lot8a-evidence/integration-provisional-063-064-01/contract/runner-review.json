@@ -1,0 +1,135 @@
+{
+  "schema": "logos-engine.lot8a.provisional-composition-runner-review.v1",
+  "status": "passed_source_review_only",
+  "recordedAt": "2026-11-11T19:27:55.085959+00:00",
+  "reviewer": "audit_recovery_release",
+  "qualification": "provisional_063_064_composition_not_final_065_or_cost",
+  "runner": {
+    "path": "docs/migration/lot8a-evidence/tools/validate-composition.py",
+    "sha256": "3d58f82af41a4c467077f2cb1210347989c8ffac9f008da094b3891272be3e3d",
+    "bytes": 34550
+  },
+  "compositionReview": {
+    "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/contract/composition-review.json",
+    "sha256": "6babc802ae2547419547bb301dc453c7efafb6764ca1f4035c72f69d10070cc5",
+    "bytes": 4465
+  },
+  "nativeManifest": {
+    "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/contract/source-manifest.json",
+    "sha256": "9737642215681078a374f6b9bed31c40bb72e143f38858e3a743654af221a397",
+    "bytes": 38589
+  },
+  "preparedNativeSource": {
+    "fileCount": 324,
+    "digest": "936fa2bf81965272b1ddbab4a5c01f98aeb6a48188c1f7a8c91de226598c5e43"
+  },
+  "testScope": {
+    "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/contract/test-scope.json",
+    "sha256": "0f815c502aafbecb6a56047d4506bd56edc86add17ab10f769e208a1f2feb4ab",
+    "bytes": 23681
+  },
+  "testFileCount": 145,
+  "wholeModuleExclusions": [
+    "tests/v6-ranked-workshop-reference.test.ts",
+    "tests/v6-ranked-workshop-kernel.test.ts",
+    "tests/v6-symbol-transactions-kernel.test.ts",
+    "tests/v6-framed-transfer-reference.test.ts"
+  ],
+  "initialStaticReview": {
+    "status": "blocked_source_review",
+    "runner": {
+      "path": "docs/migration/lot8a-evidence/tools/validate-composition.py",
+      "sha256": "3b7ba7566389a49316e3a80efb490deb98fa38b037b7b28da1a162bae91e6a9a",
+      "bytes": 32944
+    },
+    "finding": "The previous code accepted a fingerprinted review with status.startswith(passed), with optional sourceCommit checks and no binding between the reviewed native identity and preparedNativeSource. An old passed review could therefore satisfy the source-review gate.",
+    "executionOccurred": false,
+    "chronology": "Observed and reported to the parent and author before the corrected helper. No invented execution timestamps."
+  },
+  "correctionReview": {
+    "status": "closed",
+    "checkedConditions": [
+      "Exact source-review schema and exact passed_source_composition_review status.",
+      "Review qualification and composition parents equal the prospective plan; plan parents remain fixed to own7c10456 and prepared6B a01e6faf with published=false.",
+      "Review fileCount and digest equal plan.preparedNativeSource.",
+      "Referenced native manifest is fingerprint-checked; the complete files map has SHA256 values.",
+      "Manifest fileCount equals complete map length and planned count; canonical sorted-map SHA256 equals manifest digest and planned digest.",
+      "Actual supplied composition-review.json and linked source-manifest.json carry the expected 324-file / 936fa2bf identity."
+    ],
+    "remainingBlockingFindings": []
+  },
+  "retainedOriginalReviewConclusions": [
+    "Exact union138+142=145 and the four whole-module LKEY exclusions remain enforced.",
+    "Five fixed commands, stable input maps, immutable failures and raw-log transport remain enforced.",
+    "Four-lane quiet monitoring once per second during subprocess activity and interruption behavior remain inherited.",
+    "No old validation or provisional predecessor receipt is promoted to an actual publication or fresh145 execution."
+  ],
+  "compositionParents": {
+    "own": {
+      "commit": "7c10456a675f0e9a93089a0f679e96677ede03af"
+    },
+    "prepared6B": {
+      "commit": "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+      "nativeVersion": "0.64.0",
+      "published": false
+    }
+  },
+  "patchTransport": {
+    "receipt": {
+      "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/contract/native-delta-log-transport.json",
+      "sha256": "b4ac2dbe24da0f8d75bf9c1be4b9a4dea25e6bfbbb096e3eae33118a524e2379",
+      "bytes": 820
+    },
+    "gzip": {
+      "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/contract/motif-delta-on-prepared6b.patch.gz",
+      "sha256": "6a16322615ca048b972ebe893234b7927e2add1ceec2f55b07b6536197a234e5",
+      "bytes": 16352
+    },
+    "decompressedIdentity": {
+      "sha256": "d4f4d65628e9baa93f1a8207f3de4855b7518817f2f5678f2829ca2b4dad10e6",
+      "bytes": 61016
+    },
+    "qualification": "Source delta patch only; no game payload or oracle was opened."
+  },
+  "prospectivePlanObservation": {
+    "existsAtReview": false,
+    "qualification": "Source review of enforcement and supplied composition evidence. The final plan must bind this exact corrected helper and the exact composition-review fingerprint; no runner or prospective plan was executed."
+  },
+  "coordination": {
+    "lot10b": {
+      "updatedAt": "2026-11-11T17:02:12.064269+00:00",
+      "quietRequested": false,
+      "performanceLockHeld": false
+    },
+    "lot10c": {
+      "updatedAt": "2026-11-11T19:26:21.957375+00:00",
+      "quietRequested": false,
+      "performanceLockHeld": null
+    },
+    "lot5c": {
+      "updatedAt": "2026-11-11T19:16:00.226786+00:00",
+      "quietRequested": false,
+      "performanceLockHeld": null
+    },
+    "lot6b": {
+      "updatedAt": "2026-11-11T19:24:12.311904+00:00",
+      "quietRequested": false,
+      "performanceLockHeld": null
+    }
+  },
+  "execution": {
+    "runnerImported": false,
+    "runnerExecuted": false,
+    "testsExecuted": 0,
+    "gatesExecuted": 0,
+    "originalOraclesExecuted": 0,
+    "replaysExecuted": 0,
+    "costExecuted": false,
+    "gitMutation": false,
+    "nativeSourceFilesRehashed": false
+  },
+  "limits": [
+    "Static source review and small metadata fingerprints only; no claim of a fresh145 PASS.",
+    "Actual0.63/0.64 publication reconciliation and final0.65 qualification remain pending."
+  ]
+}

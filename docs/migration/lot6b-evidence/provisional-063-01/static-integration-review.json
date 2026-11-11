@@ -1,0 +1,35 @@
+{
+  "schema": "logos-engine.lot6b.static-integration-review.v1",
+  "recordedAt": "2026-11-11T18:05:53.092856+00:00",
+  "reviewer": "selected_rigid_review_plan",
+  "reviewEndedAt": "2026-11-11T17:59:41Z",
+  "nativeDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+  "method": "Source-only independent review; no execution and no files changed.",
+  "blockingDefectEstablished": false,
+  "preserved": [
+    "caller/runtime clock-origin conversion and tighter deadline",
+    "separate remainingLevelActions quota",
+    "current fifth before argument and setter outside raw.before",
+    "unique SelectedRigid owner and selected null-return acquisition fact",
+    "SelectedRigid restoration before PreviewPacking, without passive SelectedRigid acquisition",
+    "Binding acquisition scope anchored on first actual return level",
+    "BrowserV6 worker constructs the composed native runtime"
+  ],
+  "knownLimitations": [
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "symbol": "authorize",
+      "finding": "The code checks the budget before asynchronous authority.release and sets action after awaiting release without a new temporal budget check. Static sequence permits expiration during release.",
+      "qualification": "Existing temporal revalidation gap, not a demonstrated KLOT cause or merge regression; no strict deadline-until-dispatch guarantee claimed."
+    },
+    {
+      "path": "src/runtime/v6-agent-worker.ts",
+      "finding": "Pause prevents subsequent physical dispatch, without preempting an already running search.",
+      "qualification": "Existing documented limit."
+    },
+    {
+      "finding": "Incomplete passive Binding acquisition can intentionally stop the caller.",
+      "qualification": "No evidence in this review establishes that this happens on KLOT."
+    }
+  ]
+}

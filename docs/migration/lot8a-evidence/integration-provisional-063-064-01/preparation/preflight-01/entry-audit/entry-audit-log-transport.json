@@ -1,0 +1,44 @@
+{
+  "schema": "logos-engine.v6.development-log-transport.v1",
+  "recordedAt": "2026-11-11T19:18:53.523757+00:00",
+  "status": "verified_byte_exact",
+  "entries": [
+    {
+      "raw": {
+        "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/preparation/preflight-01/entry-audit/entry-audit-stdout.log",
+        "sha256": "bfd27eae33c855778ee89f7cdd0fa9a31d78e972c94cf851e1955af385344c70",
+        "bytes": 294
+      },
+      "gzip": {
+        "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/preparation/preflight-01/entry-audit/entry-audit-stdout.log.gz",
+        "sha256": "7a79cf3e95c091113ab0e65e59a465e84dd099d4ef1f66f6c860eeca4ff3e150",
+        "bytes": 181
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/preparation/preflight-01/entry-audit/entry-audit-stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "gzip": {
+        "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/preparation/preflight-01/entry-audit/entry-audit-stderr.log.gz",
+        "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+        "bytes": 20
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/preparation/preflight-01/entry-audit/entry-audit-activity.jsonl",
+        "sha256": "a6add11878ae87d4d06a53e39610e9b96ae687eb5e5fd7bbe6b2ee8f8dd1d844",
+        "bytes": 102
+      },
+      "gzip": {
+        "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/preparation/preflight-01/entry-audit/entry-audit-activity.jsonl.gz",
+        "sha256": "aebb779549cf348d6e0ecb4bbea5fd08df4ad287fd5c9106666a69d44a068de4",
+        "bytes": 113
+      }
+    }
+  ],
+  "qualification": "Complete stdout, stderr and activity, including failures; no filtering or newline normalization."
+}

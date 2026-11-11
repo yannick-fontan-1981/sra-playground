@@ -1,0 +1,15 @@
+{
+  "schema": "sra.migration-audit-reference-guard.v1",
+  "startedAt": "2026-11-11T16:01:51.237273+00:00",
+  "finishedAt": "2026-11-11T16:01:58.306115+00:00",
+  "exitCode": 1,
+  "expectedExitCode": 1,
+  "guardPassed": true,
+  "failures": [
+    "Missing differential evidence: tests/fixtures/v6-feedback-sequences-reference.json.gz",
+    "Missing differential evidence: tests/fixtures/v6-feedback-sequences-reference.json.gz",
+    "Missing differential evidence: tests/fixtures/v6-relative-arrangements-reference.json.gz"
+  ],
+  "nativeExecution": false,
+  "qualification": "Real existing missing inherited fixtures rejected after the generic audit gate correction; initial exit-zero result is retained separately."
+}

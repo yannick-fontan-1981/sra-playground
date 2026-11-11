@@ -1,0 +1,67 @@
+{
+  "schema": "logos-engine.recorded-public-regression-cases.v1",
+  "declaredAt": "2026-11-11T18:07:06.929943+00:00",
+  "declarationOwner": "lot6b",
+  "status": "prospective_not_executed",
+  "cases": [
+    {
+      "id": "craf-055",
+      "game": "CRAF",
+      "baseline": {
+        "path": "docs/migration/lot7b-evidence/integrated-final/craf-campaign.json.gz",
+        "sha256": "78e86660961ed6d75707c001c021b8c223d205137d86288ac21d09a533b680f2"
+      },
+      "trace": {
+        "path": "docs/migration/lot7b-evidence/integrated-final/craf-public-trace.json.gz",
+        "sha256": "cf69ad941e80e17f8d6cd66edc0419a0c6ff7aa8d9bbdaf503cb56a49e8c3f98"
+      }
+    }
+  ],
+  "passiveOwnerRequirements": [],
+  "strictComparator": {
+    "path": "scripts/compare-v54-regressions.py",
+    "sha256": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+    "bytes": 18166
+  },
+  "strictComparisonCheckNames": [
+    "both runs passed with the same declared game and target",
+    "same production budgets, source reference and opaque game asset provenance",
+    "same complete initial public packet hash and public state",
+    "every archived public packet independently hashes to the v53 baseline",
+    "every archived host-only command equals its prior baseline command",
+    "same commands, complete returned packet hashes, animation lengths and primitive boundaries",
+    "same selected family/group/kind/subquestion, acquired prefix lengths and retained solver scalars",
+    "same retained coordination source/preferred entries and current guard scope",
+    "same historical epoch anchors with session namespace normalized",
+    "same inherited source-series event counts on every sealed prefix",
+    "same common request outcomes and retained caller acquisition counters",
+    "same natural level boundaries and retained-session caller counters",
+    "same final public result and retained-session operation counts",
+    "same retained mechanical-domain assessments",
+    "both source runs remained unchanged and imported no Python agent module",
+    "current replay used the declared complete frozen native source",
+    "current replay identifies the exact host-only baseline and public trace"
+  ],
+  "expectedChecksPerCase": 17,
+  "expectedComparisonChecks": 17,
+  "inheritedSource": {
+    "commit": "805b30297dc1b715dbfd9f1197a9a8ba7b361b90",
+    "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/recorded-regression-cases.json",
+    "bytes": 15556,
+    "sha256": "18684d23bf7122a9f88f85d8bdb6f557144f892e7f09f2ef7630cbb5a7e6bc33"
+  },
+  "originalElevenCaseSource": {
+    "readAtCommit": "805b30297dc1b715dbfd9f1197a9a8ba7b361b90",
+    "path": "docs/migration/lot7b-evidence/followup-recovery/contract/regression-cases-final.json",
+    "bytes": 9035,
+    "sha256": "612786e95a3cd6c98c7a0ccd4bd5e616ff5b54d1de18f7962aae79d50faf4f36"
+  },
+  "frozenNativeSource": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/frozen-candidate/source-manifest.json",
+    "fileCount": 322,
+    "digest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886"
+  },
+  "provisionalPredecessor": "805b30297dc1b715dbfd9f1197a9a8ba7b361b90",
+  "actualPublished063Reconciliation": "pending",
+  "qualification": "Lignes et pins historiques inchangés. Déclaration prospective, sans rejeu exécuté. KATA garde son libellé historique ; aucune nouvelle auto-comparaison ni réussite live. Les exigences passives génériques vides ne prouvent pas Binding ou SelectedRigid."
+}

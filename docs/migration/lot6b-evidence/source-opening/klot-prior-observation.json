@@ -1,0 +1,16 @@
+{
+  "schema": "logos-engine.lot6b.case-prior-observation.v1",
+  "case": "KLOT",
+  "priorChargedSeconds": 0,
+  "basis": "No retained KLOT attempt or cumulative case clock found in the actual Site97 migration evidence and shared lane coordination. The only textual KLOT migration match at preparation is the new lot6b scope document; no case evidence filename matches KLOT.",
+  "publishedSourceCommit": "98336fba4e696a51c90ff7f7b37b8bdf95f34847",
+  "catalogue": "src/games/catalog.ts",
+  "catalogueObservation": {
+    "code": "KLOT",
+    "id": "klot-c3000001",
+    "name": "Klotski",
+    "family": "simple_klotski",
+    "levels": 6
+  },
+  "qualification": "Public catalogue metadata only. No game engine, authored level, route or solution inspected. Zero is the observed retained prior charge, not a claim about unavailable external history. Any newly discovered prior charge must be carried forward before another case attempt."
+}

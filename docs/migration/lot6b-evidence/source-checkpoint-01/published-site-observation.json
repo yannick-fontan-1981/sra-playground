@@ -1,0 +1,15 @@
+{
+  "id": "appgprj_6adbc388d79081918581b93b919d7258",
+  "current_live_url": "https://sra-playground.yannick-fontan.chatgpt.site",
+  "latest_version_number": 101,
+  "status": "active",
+  "access_mode": "custom",
+  "access_revision": 3,
+  "allowed_users": [
+    {
+      "role": "owner"
+    }
+  ],
+  "external_visitor_count": 0,
+  "observedAt": "2026-11-11T16:37:27.811Z"
+}

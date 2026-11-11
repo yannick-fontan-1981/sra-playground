@@ -1,0 +1,94 @@
+{
+  "schema": "logos-engine.lot8a.provisional-composition-source-review.v1",
+  "status": "passed_source_composition_review",
+  "reviewedAt": "2026-11-11T19:23:04.279158+00:00",
+  "qualification": "provisional_063_064_composition_not_final_065_or_cost",
+  "compositionParents": {
+    "own": {
+      "commit": "7c10456a675f0e9a93089a0f679e96677ede03af"
+    },
+    "prepared6B": {
+      "commit": "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+      "nativeVersion": "0.64.0",
+      "published": false
+    }
+  },
+  "actualPublishedBase": {
+    "site": 103,
+    "nativeVersion": "0.62.0",
+    "sourceCommit": "4afcbfe6a25bd3a88223be543e443bc53b9c8814"
+  },
+  "prepared5CIncluded": {
+    "commit": "805b30297dc1b715dbfd9f1197a9a8ba7b361b90",
+    "published": false
+  },
+  "preparedNativeSource": {
+    "fileCount": 324,
+    "digest": "936fa2bf81965272b1ddbab4a5c01f98aeb6a48188c1f7a8c91de226598c5e43"
+  },
+  "nativeManifest": {
+    "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/contract/source-manifest.json",
+    "sha256": "9737642215681078a374f6b9bed31c40bb72e143f38858e3a743654af221a397",
+    "bytes": 38589
+  },
+  "prepared6BNativeManifest": {
+    "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/contract/prepared6b-source-manifest.json",
+    "sha256": "6f23c135107ae67789602850d63f6366407d6b4aabfcaea7af388130ae26728d",
+    "bytes": 38378
+  },
+  "ownNativeVerifiedFromGit": {
+    "fileCount": 312,
+    "digest": "a6ea3e5e8140b14aa260485ebd4192429a86c4d3ec02075f14043f215cc798e1"
+  },
+  "nativeDeltasComparedWithPrepared6B": [
+    "src/logos-engine/v6-field-constraints.ts",
+    "src/logos-engine/v6-motif-access-geometry.ts",
+    "src/logos-engine/v6-motif-access.ts",
+    "src/logos-engine/v6-native-runtime.ts"
+  ],
+  "unchangedPrepared6BNativeFiles": 320,
+  "ownMotifFilesByteExact": {
+    "src/logos-engine/v6-field-constraints.ts": true,
+    "src/logos-engine/v6-motif-access-geometry.ts": true,
+    "src/logos-engine/v6-motif-access.ts": true
+  },
+  "nativeDeltaPatch": {
+    "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/contract/motif-delta-on-prepared6b.patch.gz",
+    "sha256": "6a16322615ca048b972ebe893234b7927e2add1ceec2f55b07b6536197a234e5",
+    "bytes": 16352
+  },
+  "reviewAssertions": [
+    "Current execution, remaining-level-actions and clock/deadline conversion are unchanged from prepared6B.",
+    "Binding acquisition budget, incomplete receipts and stop semantics are unchanged from prepared6B.",
+    "SelectedRigid passive checkpoint/restore remains unchanged; Motif remains selected-only.",
+    "Binding, SelectedRigid and Motif owners and event keys each remain unique; source contributor order is preserved.",
+    "Motif remains a null material entry handled through its source subquestion wrapper; its local symmetric fallback exclusion is preserved.",
+    "The runtime delta against prepared6B consists only of Motif additions and reserved candidate version0.65."
+  ],
+  "preparedChecks": {
+    "typecheck": {
+      "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/preparation/preflight-01/typecheck/result.json",
+      "sha256": "37450feb48279679378e03be0411362313946f0395168c4ddb5dead951691c42",
+      "bytes": 40998
+    },
+    "entry-audit": {
+      "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/preparation/preflight-01/entry-audit/result.json",
+      "sha256": "27c564a6fa14c58d4edb237eb3e83759caaf0906dc468eafa6916243dc081a87",
+      "bytes": 41794
+    },
+    "migration-audit": {
+      "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/preparation/preflight-01/migration-audit/result.json",
+      "sha256": "fd849f326bb324a02c24f2159f9133d734c6752a414b55418724a33663679b91",
+      "bytes": 41652
+    }
+  },
+  "full145ValidationExecuted": false,
+  "officialCostExecuted": false,
+  "finalPredecessorReconciliation": "pending actual published0.63 and0.64; no provisional receipt will be relabeled as publication",
+  "nativeDeltaPatchTransport": {
+    "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/contract/native-delta-log-transport.json",
+    "sha256": "b4ac2dbe24da0f8d75bf9c1be4b9a4dea25e6bfbbb096e3eae33118a524e2379",
+    "bytes": 820
+  },
+  "transportQualification": "Exact raw patch bytes retained in deterministic gzip; its diff context blank lines are not whitespace defects in production. Initial full diff-preflight exit2 is retained."
+}

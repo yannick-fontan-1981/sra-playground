@@ -1,0 +1,487 @@
+{
+  "schema": "logos-engine.lot5c-cost-tools-source-review.v1",
+  "status": "source_review_and_syntax_passed",
+  "startedAt": "2026-11-11T12:42:38.843124+00:00",
+  "finishedAt": "2026-11-11T12:42:39.105899+00:00",
+  "durationSeconds": 0.26278297900034886,
+  "priorReviewPreserved": {
+    "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/review.json",
+    "bytes": 20005,
+    "sha256": "c5b6df66ad47cc497075a373df58767ad50bbb112ce8dee2446b08c3a8ba6139"
+  },
+  "sourceCorrection": {
+    "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-02/source-correction.md",
+    "bytes": 2226,
+    "sha256": "a4f46c0f842afc4362a36a99a4b5a54e21dc98a58cb761de84677da52df77050"
+  },
+  "coordinationAtAdmission": {
+    "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-02/coordination-before.json",
+    "bytes": 3794,
+    "sha256": "64d174194c7e9ca89d9992b6ce14d7d49917fc6a393e37a607b97c8de30e89e6"
+  },
+  "independentTextReview": {
+    "agent": "/root/addressed_contract",
+    "reportedResult": "Four coverage functions now agree: acquisition observations, monotone count <= sequence, terminal acquisition count and exact source fact subset. No additional concrete defect found in this delta.",
+    "functionalExecution": false
+  },
+  "tools": [
+    {
+      "tool": {
+        "path": "docs/migration/lot5c-evidence/record-owner-source-inventory.mjs",
+        "bytes": 13603,
+        "sha256": "50c9275c331e1013b7d618dd93023f79826398aa191c34fb9c05680b01210d8d"
+      },
+      "preservedBefore": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/after/record-owner-source-inventory.mjs",
+        "bytes": 13603,
+        "sha256": "50c9275c331e1013b7d618dd93023f79826398aa191c34fb9c05680b01210d8d"
+      },
+      "preservedAfter": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-02/after/record-owner-source-inventory.mjs",
+        "bytes": 13603,
+        "sha256": "50c9275c331e1013b7d618dd93023f79826398aa191c34fb9c05680b01210d8d"
+      },
+      "change": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-02/record-owner-source-inventory.mjs.diff",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "direct5BSource": {
+        "path": "docs/migration/lot5b-evidence/record-owner-source-inventory.mjs",
+        "bytes": 12876,
+        "sha256": "fdfed96d27d08554a7a4ec6a50a68a4b65dd62001cd2fec057f2f580f1627ce2"
+      },
+      "direct5BUnchanged": true
+    },
+    {
+      "tool": {
+        "path": "docs/migration/lot5c-evidence/prepare-cost-protocol.py",
+        "bytes": 34082,
+        "sha256": "4de15b6ceada24443592515c6c5efd9af5ac278b2343424555fc8e4bd607a229"
+      },
+      "preservedBefore": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/after/prepare-cost-protocol.py",
+        "bytes": 34082,
+        "sha256": "4de15b6ceada24443592515c6c5efd9af5ac278b2343424555fc8e4bd607a229"
+      },
+      "preservedAfter": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-02/after/prepare-cost-protocol.py",
+        "bytes": 34082,
+        "sha256": "4de15b6ceada24443592515c6c5efd9af5ac278b2343424555fc8e4bd607a229"
+      },
+      "change": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-02/prepare-cost-protocol.py.diff",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "direct5BSource": {
+        "path": "docs/migration/lot5b-evidence/prepare-cost-protocol.py",
+        "bytes": 30134,
+        "sha256": "c53e6534b4f570c94610ca7c338462a1e4edc91975d9130a770dcee200811efe"
+      },
+      "direct5BUnchanged": true
+    },
+    {
+      "tool": {
+        "path": "docs/migration/lot5c-evidence/finalize-owner-cost-contract.py",
+        "bytes": 27103,
+        "sha256": "07a88bb23c8b7c4d95aab4cdde613f933d97023f03209abbc1783e2d257a07ed"
+      },
+      "preservedBefore": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/after/finalize-owner-cost-contract.py",
+        "bytes": 26586,
+        "sha256": "cf55728cecbe12181c8694d3b18faedfc5aaec47448ff4de80ec45f989fc86e8"
+      },
+      "preservedAfter": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-02/after/finalize-owner-cost-contract.py",
+        "bytes": 27103,
+        "sha256": "07a88bb23c8b7c4d95aab4cdde613f933d97023f03209abbc1783e2d257a07ed"
+      },
+      "change": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-02/finalize-owner-cost-contract.py.diff",
+        "bytes": 3417,
+        "sha256": "08c2abe1ee86e9ab0c40fc618345cfe0971807615ea74f2a5ffae9e15ecd8270"
+      },
+      "direct5BSource": {
+        "path": "docs/migration/lot5b-evidence/finalize-owner-cost-contract.py",
+        "bytes": 15763,
+        "sha256": "58fd6f433ee6043c3cd24f3c763f4ede265c4b2e60374a9916807bccc68c2997"
+      },
+      "direct5BUnchanged": true
+    },
+    {
+      "tool": {
+        "path": "docs/migration/lot5c-evidence/check-cost-static-inputs.py",
+        "bytes": 38502,
+        "sha256": "5564a925956a16eefd011deb107e05f42687f7a04e224d37c6a0bac259374168"
+      },
+      "preservedBefore": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/after/check-cost-static-inputs.py",
+        "bytes": 37985,
+        "sha256": "b0c188b44acc886aba4a1d3539f4b9fb48eb66cb5cc5a50f2de111b9c209ca27"
+      },
+      "preservedAfter": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-02/after/check-cost-static-inputs.py",
+        "bytes": 38502,
+        "sha256": "5564a925956a16eefd011deb107e05f42687f7a04e224d37c6a0bac259374168"
+      },
+      "change": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-02/check-cost-static-inputs.py.diff",
+        "bytes": 3471,
+        "sha256": "471e900d4963a78ed731afa5d2e084d07ed00457a6a82ee88812995309bd2672"
+      },
+      "direct5BSource": {
+        "path": "docs/migration/lot5b-evidence/check-cost-static-inputs.py",
+        "bytes": 27635,
+        "sha256": "024c23aad5bae4b666cd2e47226b396a937a658a84a0d3cd927fcd1b9fa14cc1"
+      },
+      "direct5BUnchanged": true
+    },
+    {
+      "tool": {
+        "path": "docs/migration/lot5c-evidence/consolidate-owner-costs.mjs",
+        "bytes": 61449,
+        "sha256": "69957840c81d50e3d7b68dedf4293b5aa9c4072f882fe1fc858f5e03815330b7"
+      },
+      "preservedBefore": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/after/consolidate-owner-costs.mjs",
+        "bytes": 60732,
+        "sha256": "d7c093afc54683682311b6b0a1935bfbc7351ac787ba001827ebfc3543effed7"
+      },
+      "preservedAfter": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-02/after/consolidate-owner-costs.mjs",
+        "bytes": 61449,
+        "sha256": "69957840c81d50e3d7b68dedf4293b5aa9c4072f882fe1fc858f5e03815330b7"
+      },
+      "change": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-02/consolidate-owner-costs.mjs.diff",
+        "bytes": 2968,
+        "sha256": "4a35f77a8052ae3af9506d457d03d26b725c496808ff41faf741b6d6a258fc70"
+      },
+      "direct5BSource": {
+        "path": "docs/migration/lot5b-evidence/consolidate-owner-costs.mjs",
+        "bytes": 52981,
+        "sha256": "cccc02b44a500292ac64a62379270e4003d3430f8ac0b68c81eb89609fffef95"
+      },
+      "direct5BUnchanged": true
+    },
+    {
+      "tool": {
+        "path": "docs/migration/lot5c-evidence/review-owner-costs.py",
+        "bytes": 81151,
+        "sha256": "452ccf903970230f5855458cd35f2f3f30224307026663ebd865b494986371df"
+      },
+      "preservedBefore": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/after/review-owner-costs.py",
+        "bytes": 80634,
+        "sha256": "ade4fe2d921b7417b37aaade9d2c62e981fec79c056119cecf9439e5e078048e"
+      },
+      "preservedAfter": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-02/after/review-owner-costs.py",
+        "bytes": 81151,
+        "sha256": "452ccf903970230f5855458cd35f2f3f30224307026663ebd865b494986371df"
+      },
+      "change": {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-02/review-owner-costs.py.diff",
+        "bytes": 3475,
+        "sha256": "d17439d4b527c7f32754c8af0524a38211c627c41ce6cde51f08aec76f52abbf"
+      },
+      "direct5BSource": {
+        "path": "docs/migration/lot5b-evidence/review-owner-costs.py",
+        "bytes": 70321,
+        "sha256": "dd2524cbc52e51ed77a7393d4c4a044028f49c4a7fd6a36687534aeb1d8880e7"
+      },
+      "direct5BUnchanged": true
+    }
+  ],
+  "syntax": [
+    {
+      "file": {
+        "path": "docs/migration/lot5c-evidence/record-owner-source-inventory.mjs",
+        "bytes": 13603,
+        "sha256": "50c9275c331e1013b7d618dd93023f79826398aa191c34fb9c05680b01210d8d"
+      },
+      "command": [
+        "node",
+        "--check",
+        "docs/migration/lot5c-evidence/record-owner-source-inventory.mjs"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "",
+      "startedAt": "2026-11-11T12:42:38.843852+00:00",
+      "finishedAt": "2026-11-11T12:42:38.904909+00:00"
+    },
+    {
+      "file": {
+        "path": "docs/migration/lot5c-evidence/prepare-cost-protocol.py",
+        "bytes": 34082,
+        "sha256": "4de15b6ceada24443592515c6c5efd9af5ac278b2343424555fc8e4bd607a229"
+      },
+      "method": "Python ast.parse(source); no import or execution",
+      "exitCode": 0,
+      "startedAt": "2026-11-11T12:42:38.905168+00:00",
+      "finishedAt": "2026-11-11T12:42:38.908483+00:00"
+    },
+    {
+      "file": {
+        "path": "docs/migration/lot5c-evidence/finalize-owner-cost-contract.py",
+        "bytes": 27103,
+        "sha256": "07a88bb23c8b7c4d95aab4cdde613f933d97023f03209abbc1783e2d257a07ed"
+      },
+      "method": "Python ast.parse(source); no import or execution",
+      "exitCode": 0,
+      "startedAt": "2026-11-11T12:42:38.908614+00:00",
+      "finishedAt": "2026-11-11T12:42:38.914481+00:00"
+    },
+    {
+      "file": {
+        "path": "docs/migration/lot5c-evidence/check-cost-static-inputs.py",
+        "bytes": 38502,
+        "sha256": "5564a925956a16eefd011deb107e05f42687f7a04e224d37c6a0bac259374168"
+      },
+      "method": "Python ast.parse(source); no import or execution",
+      "exitCode": 0,
+      "startedAt": "2026-11-11T12:42:38.914627+00:00",
+      "finishedAt": "2026-11-11T12:42:38.921747+00:00"
+    },
+    {
+      "file": {
+        "path": "docs/migration/lot5c-evidence/consolidate-owner-costs.mjs",
+        "bytes": 61449,
+        "sha256": "69957840c81d50e3d7b68dedf4293b5aa9c4072f882fe1fc858f5e03815330b7"
+      },
+      "command": [
+        "node",
+        "--check",
+        "docs/migration/lot5c-evidence/consolidate-owner-costs.mjs"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "",
+      "startedAt": "2026-11-11T12:42:38.921877+00:00",
+      "finishedAt": "2026-11-11T12:42:38.983001+00:00"
+    },
+    {
+      "file": {
+        "path": "docs/migration/lot5c-evidence/review-owner-costs.py",
+        "bytes": 81151,
+        "sha256": "452ccf903970230f5855458cd35f2f3f30224307026663ebd865b494986371df"
+      },
+      "method": "Python ast.parse(source); no import or execution",
+      "exitCode": 0,
+      "startedAt": "2026-11-11T12:42:38.983280+00:00",
+      "finishedAt": "2026-11-11T12:42:38.997266+00:00"
+    }
+  ],
+  "statisticalSourceComparisons": [
+    {
+      "tool": "review-owner-costs.py",
+      "function": "same",
+      "byteIdenticalToDirect5B": true,
+      "currentSha256": "8400d2a8a33477a885ee13192717fc7e572074b20f151e4d091525faa196cc79",
+      "direct5BSha256": "8400d2a8a33477a885ee13192717fc7e572074b20f151e4d091525faa196cc79"
+    },
+    {
+      "tool": "review-owner-costs.py",
+      "function": "without",
+      "byteIdenticalToDirect5B": true,
+      "currentSha256": "36476235e8a5574552a9ac4ae9eb28d0c570829a357c1099aea89b0f5fef96e0",
+      "direct5BSha256": "36476235e8a5574552a9ac4ae9eb28d0c570829a357c1099aea89b0f5fef96e0"
+    },
+    {
+      "tool": "review-owner-costs.py",
+      "function": "numeric",
+      "byteIdenticalToDirect5B": true,
+      "currentSha256": "c1e3750ac9af8504250b2138d5813e776d3f04f2bfd2590eaa98a4f7d76f4484",
+      "direct5BSha256": "c1e3750ac9af8504250b2138d5813e776d3f04f2bfd2590eaa98a4f7d76f4484"
+    },
+    {
+      "tool": "review-owner-costs.py",
+      "function": "distribution",
+      "byteIdenticalToDirect5B": true,
+      "currentSha256": "2890f4dd166cbbb24978659da6a0cc3274fb9073ec249b177d05917794cebd27",
+      "direct5BSha256": "2890f4dd166cbbb24978659da6a0cc3274fb9073ec249b177d05917794cebd27"
+    },
+    {
+      "tool": "review-owner-costs.py",
+      "function": "samples",
+      "byteIdenticalToDirect5B": true,
+      "currentSha256": "4fcd7521fea4d27ff3f0d6870f3cf888a72057d36eb0ff283a0821c42b0bc002",
+      "direct5BSha256": "4fcd7521fea4d27ff3f0d6870f3cf888a72057d36eb0ff283a0821c42b0bc002"
+    },
+    {
+      "tool": "review-owner-costs.py",
+      "function": "calculate",
+      "byteIdenticalToDirect5B": true,
+      "currentSha256": "dfd87f31a198ce250f16b68107998fd8348493c4d179843391bca76aa29bdea2",
+      "direct5BSha256": "dfd87f31a198ce250f16b68107998fd8348493c4d179843391bca76aa29bdea2"
+    },
+    {
+      "tool": "review-owner-costs.py",
+      "function": "metric",
+      "byteIdenticalToDirect5B": true,
+      "currentSha256": "d51e12dcb1ea759740d718776aa70fa42179e6dc148212e88ff11c59ccfeb1b3",
+      "direct5BSha256": "d51e12dcb1ea759740d718776aa70fa42179e6dc148212e88ff11c59ccfeb1b3"
+    },
+    {
+      "tool": "review-owner-costs.py",
+      "function": "unresolved_for",
+      "byteIdenticalToDirect5B": true,
+      "currentSha256": "533aa3a1f63de8472512a0ee474db26b0fe3ab48a1a61bbb6cea39694b8f578e",
+      "direct5BSha256": "533aa3a1f63de8472512a0ee474db26b0fe3ab48a1a61bbb6cea39694b8f578e"
+    },
+    {
+      "tool": "review-owner-costs.py",
+      "function": "within_decimal",
+      "byteIdenticalToDirect5B": true,
+      "currentSha256": "fcfb7c8d1df901a26e83742b27856d6892a316b357c14d808fed5670341dc677",
+      "direct5BSha256": "fcfb7c8d1df901a26e83742b27856d6892a316b357c14d808fed5670341dc677"
+    },
+    {
+      "tool": "review-owner-costs.py",
+      "function": "work",
+      "byteIdenticalToDirect5B": true,
+      "currentSha256": "88506e18b67aae49aaac884bfbc1f4eeafad9dbc57122363e8bc0eac1cd6a390",
+      "direct5BSha256": "88506e18b67aae49aaac884bfbc1f4eeafad9dbc57122363e8bc0eac1cd6a390"
+    },
+    {
+      "tool": "review-owner-costs.py",
+      "function": "functional_shape",
+      "byteIdenticalToDirect5B": true,
+      "currentSha256": "60d94d3118e58722ee467c3e5eabe29ef2d02a40d46f830ecab2be39f514ed77",
+      "direct5BSha256": "60d94d3118e58722ee467c3e5eabe29ef2d02a40d46f830ecab2be39f514ed77"
+    },
+    {
+      "tool": "consolidate-owner-costs.mjs",
+      "function": "unresolvedFor",
+      "byteIdenticalToDirect5B": true,
+      "currentSha256": "9fa920d824d1b7b5877b67ed94a69f06d849603375ccb11b96005903026db223",
+      "direct5BSha256": "9fa920d824d1b7b5877b67ed94a69f06d849603375ccb11b96005903026db223"
+    },
+    {
+      "tool": "consolidate-owner-costs.mjs",
+      "function": "strictDecimalBudget",
+      "byteIdenticalToDirect5B": true,
+      "currentSha256": "2b24983f605ab50b14e7a6e9bfd0519a837ab77e6e7cccd5d0c3895e1b01d649",
+      "direct5BSha256": "2b24983f605ab50b14e7a6e9bfd0519a837ab77e6e7cccd5d0c3895e1b01d649"
+    },
+    {
+      "tool": "consolidate-owner-costs.mjs",
+      "function": "distribution",
+      "byteIdenticalToDirect5B": true,
+      "currentSha256": "2bc773a4f0fc3fde21238ec2093161538e0a39b93339be2d41455af84ef23ab7",
+      "direct5BSha256": "2bc773a4f0fc3fde21238ec2093161538e0a39b93339be2d41455af84ef23ab7"
+    },
+    {
+      "tool": "consolidate-owner-costs.mjs",
+      "function": "valuesFor",
+      "byteIdenticalToDirect5B": true,
+      "currentSha256": "b080aa4537ea35a9d846a09bab841299a594a7ad9372db76b4a24fb87cea9a69",
+      "direct5BSha256": "b080aa4537ea35a9d846a09bab841299a594a7ad9372db76b4a24fb87cea9a69"
+    },
+    {
+      "tool": "consolidate-owner-costs.mjs",
+      "function": "metricFor",
+      "byteIdenticalToDirect5B": true,
+      "currentSha256": "de400988009e0e81fed631523b1510083689abcaf8b097f4e5448075fe7e92ee",
+      "direct5BSha256": "de400988009e0e81fed631523b1510083689abcaf8b097f4e5448075fe7e92ee"
+    },
+    {
+      "tool": "consolidate-owner-costs.mjs",
+      "function": "comparisonMetrics",
+      "byteIdenticalToDirect5B": true,
+      "currentSha256": "b36f39cf24017ff75fe89da7977be53cea74a6e77b19773daa9b5ea81d1dbacf",
+      "direct5BSha256": "b36f39cf24017ff75fe89da7977be53cea74a6e77b19773daa9b5ea81d1dbacf"
+    },
+    {
+      "tool": "consolidate-owner-costs.mjs",
+      "function": "workSignature",
+      "byteIdenticalToDirect5B": true,
+      "currentSha256": "218d3596575fe8cd1f4f8abb2767c3b7b67f7b6efaf2a12f445c850641baa328",
+      "direct5BSha256": "218d3596575fe8cd1f4f8abb2767c3b7b67f7b6efaf2a12f445c850641baa328"
+    },
+    {
+      "tool": "consolidate-owner-costs.mjs",
+      "function": "validateTrial",
+      "byteIdenticalToDirect5B": true,
+      "currentSha256": "0b20179dcc50d8a9d0da28f79c9d1adc0b4bd73c91cef75a762c5af7962f0ee8",
+      "direct5BSha256": "0b20179dcc50d8a9d0da28f79c9d1adc0b4bd73c91cef75a762c5af7962f0ee8"
+    }
+  ],
+  "closedPythonDomainConstants": [
+    {
+      "tool": "docs/migration/lot5c-evidence/prepare-cost-protocol.py",
+      "matchesDeclaredRevisedDomain": true
+    },
+    {
+      "tool": "docs/migration/lot5c-evidence/finalize-owner-cost-contract.py",
+      "matchesDeclaredRevisedDomain": true
+    },
+    {
+      "tool": "docs/migration/lot5c-evidence/check-cost-static-inputs.py",
+      "matchesDeclaredRevisedDomain": true
+    },
+    {
+      "tool": "docs/migration/lot5c-evidence/review-owner-costs.py",
+      "matchesDeclaredRevisedDomain": true
+    }
+  ],
+  "coverageSourceChecks": [
+    {
+      "tool": "docs/migration/lot5c-evidence/finalize-owner-cost-contract.py",
+      "helperSha256": "3ef48c35d3f26f819f3dff58871f16813d229ff654e800d8039e65338302a24e",
+      "acquiredCounterSource": "candidate.observations[i].acquiredTransitions; candidate.final.acquiredTransitions for terminal inspection",
+      "actualPointSequenceRetained": true,
+      "acquiredBoundedAndMonotone": true,
+      "exactAllReturnsRetained": true,
+      "exactEventSubsetRetained": true
+    },
+    {
+      "tool": "docs/migration/lot5c-evidence/check-cost-static-inputs.py",
+      "helperSha256": "3ef48c35d3f26f819f3dff58871f16813d229ff654e800d8039e65338302a24e",
+      "acquiredCounterSource": "candidate.observations[i].acquiredTransitions; candidate.final.acquiredTransitions for terminal inspection",
+      "actualPointSequenceRetained": true,
+      "acquiredBoundedAndMonotone": true,
+      "exactAllReturnsRetained": true,
+      "exactEventSubsetRetained": true
+    },
+    {
+      "tool": "docs/migration/lot5c-evidence/review-owner-costs.py",
+      "helperSha256": "3ef48c35d3f26f819f3dff58871f16813d229ff654e800d8039e65338302a24e",
+      "acquiredCounterSource": "candidate.observations[i].acquiredTransitions; candidate.final.acquiredTransitions for terminal inspection",
+      "actualPointSequenceRetained": true,
+      "acquiredBoundedAndMonotone": true,
+      "exactAllReturnsRetained": true,
+      "exactEventSubsetRetained": true
+    },
+    {
+      "tool": "docs/migration/lot5c-evidence/consolidate-owner-costs.mjs",
+      "helperSha256": "99765504c92b3281ee96babd1fbb9c092aa6ffcc4958340fd5254bbbfce0d00b",
+      "acquiredCounterSource": "candidate.observations[i].acquiredTransitions; candidate.final.acquiredTransitions for terminal inspection",
+      "actualPointSequenceRetained": true,
+      "acquiredBoundedAndMonotone": true,
+      "exactAllReturnsRetained": true,
+      "exactEventSubsetRetained": true
+    }
+  ],
+  "inputsUnchangedDuringSyntax": true,
+  "domainReview": {
+    "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-domain-source-review.json",
+    "bytes": 5584,
+    "sha256": "ad027c2327b0b073c75deaa48cd9d27e90e5909066beb78a94973d706565f626"
+  },
+  "canonicalSourcePaths": {
+    "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-source-evidence-paths.json",
+    "bytes": 528,
+    "sha256": "4960a996175c03c0ce92365bda7f3dcaf747f1c7fd8467e34a84584816a87b62"
+  },
+  "functionalToolsImported": false,
+  "factoryExecutions": 0,
+  "functionalCaptures": 0,
+  "costMeasurements": 0,
+  "timingMetricsCalculated": 0,
+  "historicalResultsReused": false,
+  "futureCaptureOrBudgetVerdictClaimed": false,
+  "qualification": "Syntax and text comparison only following explicit 6A quiet withdrawal. Review 01 remains historical. This revision corrects command/acquisition counter confusion while preserving all actual returns, nonnull boundary facts and statistical estimators. No future capture, measurement, final freeze, published predecessor or budget verdict is claimed."
+}

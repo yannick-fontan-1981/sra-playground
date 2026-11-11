@@ -1,0 +1,144 @@
+{
+  "schema": "logos-engine.lot6b.cost-tools-text-derivation.v1",
+  "status": "draft_pending_selected_rigid_contract_review",
+  "measurementExecuted": false,
+  "files": [
+    {
+      "source": {
+        "path": "docs/migration/lot6a-evidence/capture-cost-owner-graphs.mjs",
+        "bytes": 23229,
+        "sha256": "bdeb730acce872041354d30085c7703e111bf52056bdad07e6f7d52ea0a2be64"
+      },
+      "initialAdaptation": {
+        "path": "docs/migration/lot6b-evidence/capture-cost-owner-graphs.mjs",
+        "bytes": 23186,
+        "sha256": "114c5c8709bafb2f60b20a6290ae52c5b4250b6209a0e531452c13d51c3df0d4"
+      }
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot6a-evidence/record-owner-source-inventory.mjs",
+        "bytes": 12847,
+        "sha256": "060686d8390807d6000caadae0f89bff9240bc3f4d7be094045ff8ff15c9a509"
+      },
+      "initialAdaptation": {
+        "path": "docs/migration/lot6b-evidence/record-owner-source-inventory.mjs",
+        "bytes": 12842,
+        "sha256": "d2608ea5a6b38a503e9fab6a72ebcdf68c4059f3ffb095974dd4a86e4980f7df"
+      }
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot6a-evidence/qualify-cost-owner-graphs.mjs",
+        "bytes": 40668,
+        "sha256": "284e3fc3fa0ea2cb0513e6ecaf920598a5a1baa546723b0a69e0de124f0035d5"
+      },
+      "initialAdaptation": {
+        "path": "docs/migration/lot6b-evidence/qualify-cost-owner-graphs.mjs",
+        "bytes": 40619,
+        "sha256": "a23a19e8f20a5e1c4aa86b870cddd27bafc651f03f3de9e4453ccb40162e28f5"
+      }
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot6a-evidence/finalize-owner-cost-contract.py",
+        "bytes": 15735,
+        "sha256": "2036fcca3c380dae7b8e55d1c71cedbd41cf78b980c6b50768ee820776335dc0"
+      },
+      "initialAdaptation": {
+        "path": "docs/migration/lot6b-evidence/finalize-owner-cost-contract.py",
+        "bytes": 15727,
+        "sha256": "74f719543cd6c40ec70b8fc9bba5c7d0a1ea68aab8ba11947c352f6c5eceedcf"
+      }
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot6a-evidence/prepare-cost-protocol.py",
+        "bytes": 30307,
+        "sha256": "48229486f8c41b9c74393de8d5ed006862ee6854a18271edf7be015d8fd6cadc"
+      },
+      "initialAdaptation": {
+        "path": "docs/migration/lot6b-evidence/prepare-cost-protocol.py",
+        "bytes": 30303,
+        "sha256": "b1eed145e60e38782804859a0f240c74179ad7169fd4ce1ca450269533a58edf"
+      }
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot6a-evidence/check-cost-static-inputs.py",
+        "bytes": 27608,
+        "sha256": "28eb3b63af5ab9e145e877b0a2eb882f5e89eb326fc5517347d2b76918dca47a"
+      },
+      "initialAdaptation": {
+        "path": "docs/migration/lot6b-evidence/check-cost-static-inputs.py",
+        "bytes": 27598,
+        "sha256": "2cc65d51dce90466ab478a42daaeb4bf22c53307d5059cc828f66d5e1746bf9d"
+      }
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot6a-evidence/consolidate-owner-costs.mjs",
+        "bytes": 52958,
+        "sha256": "6ef8481b3187edb8d6e14d2ea2a3ea40673106dcad180025deec975446a9597f"
+      },
+      "initialAdaptation": {
+        "path": "docs/migration/lot6b-evidence/consolidate-owner-costs.mjs",
+        "bytes": 52949,
+        "sha256": "e9992b42deff28d7d5dff04272eea4a65c17a1c056db2afa94a0b432e1776ceb"
+      }
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot6a-evidence/review-owner-costs.py",
+        "bytes": 70329,
+        "sha256": "13b6585d87fc2306e9652d70e64fdefc7a8499f141216dc65ba67295c235bc20"
+      },
+      "initialAdaptation": {
+        "path": "docs/migration/lot6b-evidence/review-owner-costs.py",
+        "bytes": 70322,
+        "sha256": "f913ab3c9a06ded40443cf8111221de33d3dc23b954c99e3141171213b721c3e"
+      }
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot6a-evidence/record-cost-log-transport.py",
+        "bytes": 3889,
+        "sha256": "80309f5db053e850ea410dd1d855a4627deb6edca97758587deecf76ad173f52"
+      },
+      "initialAdaptation": {
+        "path": "docs/migration/lot6b-evidence/record-cost-log-transport.py",
+        "bytes": 3889,
+        "sha256": "40ced75679068cf2c52c3ff27cc33afb6a6db03c8cbb24190cfca46e562300da"
+      }
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot6a-evidence/write-cost-results.py",
+        "bytes": 41898,
+        "sha256": "810de6a13a0288488f12f370a98b9ff61443aa988f17535d352388d18cda4b96"
+      },
+      "initialAdaptation": {
+        "path": "docs/migration/lot6b-evidence/write-cost-results.py",
+        "bytes": 41895,
+        "sha256": "ad2143c2f963191bbd074d2ec72cadc0f0eba7a571f37c7b764c1af9b1f306d1"
+      }
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot6a-evidence/finalize-measured-cost.py",
+        "bytes": 16709,
+        "sha256": "7bb153c1967572826fdf1fc1771090023b2da42e56b816f511baca7773a48c53"
+      },
+      "initialAdaptation": {
+        "path": "docs/migration/lot6b-evidence/finalize-measured-cost.py",
+        "bytes": 16709,
+        "sha256": "eb48dba03603ebd9a72e4598646ea54cdeac6322b7d5cefad9fe4f5a37dee4d3"
+      }
+    }
+  ],
+  "generator": {
+    "path": "docs/migration/lot6b-evidence/derive-cost-tools.py",
+    "bytes": 2528,
+    "sha256": "c6bcc4af35facf4ad24cf6912b5bc1a06a81108520a393168abf4caa22653cda"
+  }
+}

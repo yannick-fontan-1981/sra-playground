@@ -1,5 +1,19 @@
 # Lot 8A — Filiation de `motif_conditioned_access`
 
+<!-- LOT8A_INTEGRATION_START -->
+
+## Composition préparatoire 5C, 6B et 8A
+
+La composition réunit `public_observed_binding`, `selected_rigid` et `motif_access`, à partir du jalon 8A antérieur et du checkpoint 6B `a01e6faf330d82fa220feac0c9ad4632bb75a9de` incluant la préparation 5C. **145 fichiers de tests et 67/76 entrées sont des périmètres attendus, non des résultats exécutés sur cette composition.** Les validations propres aux parents, notamment le jalon 8A de 5 422 tests sur Site 103, restent conservées ci-dessous avec leur portée historique.
+
+**0.63 et 0.64 ne sont pas publiées ; 0.65 reste réservée.** La tentative de coût 5C a été bloquée avant toute mesure, avec zéro échantillon, puis la fenêtre a été libérée explicitement le 11 novembre à 19:08:34 UTC. **Aucun coût 8A n’est mesuré ou accepté.** Le gel et les validations de cette composition restent à renseigner après exécution.
+
+Le [plan prospectif de coût](lot8a-evidence/integration-provisional-063-064-01/contract/cost-qualification-plan.json) exige la publication réelle 0.64 comme baseline, des captures hors chronométrage des formes de travail et de la provenance des graphes, puis une fenêtre ABBA isolée. Pour chacun de STCK et SMLP, la hausse du coût global doit être strictement inférieure à +10 % ; des phases au-delà de +10 % sont admises si cette condition globale est satisfaite, et restent consignées. Ce plan ne contient aucune fixture, empreinte ni acceptation inventée.
+
+<!-- LOT8A_INTEGRATION_END -->
+
+## Jalon de développement antérieur conservé sur Site 103
+
 Point documentaire actualisé le 11 novembre 2026 à 14:37:12 UTC−03. La suite déclarée de **138 fichiers** a terminé avec **5 422/5 422 tests passés**, sans échec, annulation ou test ignoré ; les cinq contrôles séparés passent également. Le [bilan de développement](lot8a-evidence/development/validation-summary.json) lie ces résultats aux octets intégrés après Site 103. Cette validation ne constitue pas la qualification finale ni la publication de 0.65.
 
 Le candidat porte la version **0.65.0 réservée**. Son état intégré examiné est `df30bfd35396737f483b61ddff628f8396a9f54a`, après adoption de la publication réelle **Site 103 / native 0.62**, commit `4afcbfe6a25bd3a88223be543e443bc53b9c8814`. Le [reçu d’observation de Site 103](lot8a-evidence/coordination/published10b-site103.json) atteste ce prédécesseur. Aucun coût 8A, jeu réel gagné ni publication de 0.65 n’est établi ici.

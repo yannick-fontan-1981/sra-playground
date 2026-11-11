@@ -1,0 +1,1237 @@
+{
+  "schema": "logos-engine.lot6b-common-difference-diagnostic.v3",
+  "attempt": 3,
+  "status": "diagnostic_only_not_qualification",
+  "complete": true,
+  "officialQualification": false,
+  "startedAt": "2026-11-11T18:18:25.004Z",
+  "internalBoundSeconds": 115,
+  "externalTimeoutSeconds": 120,
+  "hypothesis": {
+    "name": "created_envelope_timestamp_only",
+    "scope": "Only the float64 bits at /value/root/members/created/bits of a reasoning:trace:<integer> component_state/native_reasoning_trace envelope. No nested created field, hash, reference, chain, source digest, subtree or other metadata is normalized.",
+    "sourceDigest": "origin.source_digest remains a distinct raw/residual difference, checked against its own captured runtime digest; never silently removed.",
+    "derivedIdentities": "All delta sequence/previous/digest/source_digest and graph/execution identities remain explicit; this reader does not certify their derivation or recompute native hashes."
+  },
+  "limits": {
+    "maxLineBytes": 67108864,
+    "maxOutputUncompressedBytes": 536870912
+  },
+  "recordsPerRole": {
+    "baseline": 98,
+    "candidate": 98
+  },
+  "inputs": {
+    "baseline": {
+      "file": "owner-baseline.json.gz",
+      "bytes": 5114146,
+      "mtimeMsBefore": 1794420025986.9404,
+      "mtimeMsAfter": 1794420025986.9404,
+      "sizeAfter": 5114146,
+      "unchangedStat": true,
+      "completeRead": true,
+      "sha256": "c87bd33945a9240a98260fe1753f4e1c553453c1ca161b688a34936c9790a255"
+    },
+    "candidate": {
+      "file": "owner-candidate.json.gz",
+      "bytes": 5123898,
+      "mtimeMsBefore": 1794420072668.2751,
+      "mtimeMsAfter": 1794420072668.2751,
+      "sizeAfter": 5123898,
+      "unchangedStat": true,
+      "completeRead": true,
+      "sha256": "637c30a2dce3e6e002b432d346beeac1a1a05aa96d2cc007313dcb061aed43f9"
+    }
+  },
+  "sessions": [
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "sessionId": "lot6b-owner-cost-stck-warmup",
+      "points": 6,
+      "commands": 3,
+      "runtimeDigests": [
+        "5471e681af744c14aca5a0777278a711fd21a34c63f2fe03aab1cac6658831df",
+        "38723a2f1b6a933d6052223eae75972c410139c02fe84778b27ffdee9ad9a34f"
+      ]
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "sessionId": "lot6b-owner-cost-stck-measured",
+      "points": 19,
+      "commands": 10,
+      "runtimeDigests": [
+        "5471e681af744c14aca5a0777278a711fd21a34c63f2fe03aab1cac6658831df",
+        "38723a2f1b6a933d6052223eae75972c410139c02fe84778b27ffdee9ad9a34f"
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "sessionId": "lot6b-owner-cost-smlp-warmup",
+      "points": 6,
+      "commands": 3,
+      "runtimeDigests": [
+        "5471e681af744c14aca5a0777278a711fd21a34c63f2fe03aab1cac6658831df",
+        "38723a2f1b6a933d6052223eae75972c410139c02fe84778b27ffdee9ad9a34f"
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "sessionId": "lot6b-owner-cost-smlp-measured",
+      "points": 27,
+      "commands": 15,
+      "runtimeDigests": [
+        "5471e681af744c14aca5a0777278a711fd21a34c63f2fe03aab1cac6658831df",
+        "38723a2f1b6a933d6052223eae75972c410139c02fe84778b27ffdee9ad9a34f"
+      ]
+    }
+  ],
+  "points": [
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 0,
+      "type": "capture",
+      "recordIndex": 2,
+      "commonNodes": 182,
+      "baselineNodes": 182,
+      "candidateNodes": 184,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 192,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 2
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 1,
+      "type": "capture",
+      "recordIndex": 4,
+      "commonNodes": 211,
+      "baselineNodes": 211,
+      "candidateNodes": 213,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 113,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 1
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 2,
+      "type": "capture",
+      "recordIndex": 5,
+      "commonNodes": 213,
+      "baselineNodes": 213,
+      "candidateNodes": 215,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 10,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 0
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 3,
+      "type": "capture",
+      "recordIndex": 7,
+      "commonNodes": 236,
+      "baselineNodes": 236,
+      "candidateNodes": 238,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 110,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 1
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 4,
+      "type": "capture",
+      "recordIndex": 8,
+      "commonNodes": 238,
+      "baselineNodes": 238,
+      "candidateNodes": 240,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 10,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 0
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 5,
+      "type": "capture",
+      "recordIndex": 10,
+      "commonNodes": 262,
+      "baselineNodes": 262,
+      "candidateNodes": 264,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 106,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 1
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 0,
+      "type": "capture",
+      "recordIndex": 13,
+      "commonNodes": 182,
+      "baselineNodes": 182,
+      "candidateNodes": 184,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 192,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 2
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 1,
+      "type": "capture",
+      "recordIndex": 15,
+      "commonNodes": 211,
+      "baselineNodes": 211,
+      "candidateNodes": 213,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 113,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 1
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 2,
+      "type": "capture",
+      "recordIndex": 16,
+      "commonNodes": 213,
+      "baselineNodes": 213,
+      "candidateNodes": 215,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 10,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 3,
+      "type": "capture",
+      "recordIndex": 18,
+      "commonNodes": 236,
+      "baselineNodes": 236,
+      "candidateNodes": 238,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 110,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 1
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 4,
+      "type": "capture",
+      "recordIndex": 19,
+      "commonNodes": 238,
+      "baselineNodes": 238,
+      "candidateNodes": 240,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 10,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 5,
+      "type": "capture",
+      "recordIndex": 21,
+      "commonNodes": 262,
+      "baselineNodes": 262,
+      "candidateNodes": 264,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 106,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 1
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 6,
+      "type": "capture",
+      "recordIndex": 22,
+      "commonNodes": 264,
+      "baselineNodes": 264,
+      "candidateNodes": 266,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 13,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 7,
+      "type": "capture",
+      "recordIndex": 24,
+      "commonNodes": 287,
+      "baselineNodes": 287,
+      "candidateNodes": 289,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 110,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 1
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 8,
+      "type": "capture",
+      "recordIndex": 25,
+      "commonNodes": 289,
+      "baselineNodes": 289,
+      "candidateNodes": 291,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 11,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 9,
+      "type": "capture",
+      "recordIndex": 27,
+      "commonNodes": 289,
+      "baselineNodes": 289,
+      "candidateNodes": 291,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 0,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 10,
+      "type": "capture",
+      "recordIndex": 29,
+      "commonNodes": 289,
+      "baselineNodes": 289,
+      "candidateNodes": 291,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 0,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 11,
+      "type": "capture",
+      "recordIndex": 31,
+      "commonNodes": 289,
+      "baselineNodes": 289,
+      "candidateNodes": 291,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 0,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 12,
+      "type": "capture",
+      "recordIndex": 33,
+      "commonNodes": 289,
+      "baselineNodes": 289,
+      "candidateNodes": 291,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 0,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 13,
+      "type": "capture",
+      "recordIndex": 35,
+      "commonNodes": 373,
+      "baselineNodes": 373,
+      "candidateNodes": 375,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 172,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 1
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 14,
+      "type": "capture",
+      "recordIndex": 36,
+      "commonNodes": 375,
+      "baselineNodes": 375,
+      "candidateNodes": 377,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 10,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 15,
+      "type": "capture",
+      "recordIndex": 38,
+      "commonNodes": 397,
+      "baselineNodes": 397,
+      "candidateNodes": 399,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 109,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 1
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 16,
+      "type": "terminal_inspection",
+      "recordIndex": 39,
+      "commonNodes": 397,
+      "baselineNodes": 397,
+      "candidateNodes": 399,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 0,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 17,
+      "type": "terminal_inspection",
+      "recordIndex": 40,
+      "commonNodes": 397,
+      "baselineNodes": 397,
+      "candidateNodes": 399,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 0,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 0
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 18,
+      "type": "terminal_inspection",
+      "recordIndex": 41,
+      "commonNodes": 397,
+      "baselineNodes": 397,
+      "candidateNodes": 399,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 0,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 0,
+      "type": "capture",
+      "recordIndex": 44,
+      "commonNodes": 187,
+      "baselineNodes": 187,
+      "candidateNodes": 189,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 222,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 2
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 1,
+      "type": "capture",
+      "recordIndex": 46,
+      "commonNodes": 206,
+      "baselineNodes": 206,
+      "candidateNodes": 208,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 100,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 1
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 2,
+      "type": "capture",
+      "recordIndex": 47,
+      "commonNodes": 208,
+      "baselineNodes": 208,
+      "candidateNodes": 210,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 10,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 3,
+      "type": "capture",
+      "recordIndex": 49,
+      "commonNodes": 224,
+      "baselineNodes": 224,
+      "candidateNodes": 226,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 102,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 1
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 4,
+      "type": "capture",
+      "recordIndex": 50,
+      "commonNodes": 226,
+      "baselineNodes": 226,
+      "candidateNodes": 228,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 10,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 5,
+      "type": "capture",
+      "recordIndex": 52,
+      "commonNodes": 253,
+      "baselineNodes": 253,
+      "candidateNodes": 255,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 109,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 1
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 0,
+      "type": "capture",
+      "recordIndex": 55,
+      "commonNodes": 187,
+      "baselineNodes": 187,
+      "candidateNodes": 189,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 222,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 2
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 1,
+      "type": "capture",
+      "recordIndex": 57,
+      "commonNodes": 206,
+      "baselineNodes": 206,
+      "candidateNodes": 208,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 100,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 1
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 2,
+      "type": "capture",
+      "recordIndex": 58,
+      "commonNodes": 208,
+      "baselineNodes": 208,
+      "candidateNodes": 210,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 10,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 3,
+      "type": "capture",
+      "recordIndex": 60,
+      "commonNodes": 224,
+      "baselineNodes": 224,
+      "candidateNodes": 226,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 102,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 1
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 4,
+      "type": "capture",
+      "recordIndex": 61,
+      "commonNodes": 226,
+      "baselineNodes": 226,
+      "candidateNodes": 228,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 10,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 5,
+      "type": "capture",
+      "recordIndex": 63,
+      "commonNodes": 253,
+      "baselineNodes": 253,
+      "candidateNodes": 255,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 109,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 1
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 6,
+      "type": "capture",
+      "recordIndex": 64,
+      "commonNodes": 255,
+      "baselineNodes": 255,
+      "candidateNodes": 257,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 22,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 7,
+      "type": "capture",
+      "recordIndex": 66,
+      "commonNodes": 270,
+      "baselineNodes": 270,
+      "candidateNodes": 272,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 100,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 1
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 8,
+      "type": "capture",
+      "recordIndex": 67,
+      "commonNodes": 272,
+      "baselineNodes": 272,
+      "candidateNodes": 274,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 10,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 9,
+      "type": "capture",
+      "recordIndex": 69,
+      "commonNodes": 272,
+      "baselineNodes": 272,
+      "candidateNodes": 274,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 0,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 10,
+      "type": "capture",
+      "recordIndex": 71,
+      "commonNodes": 272,
+      "baselineNodes": 272,
+      "candidateNodes": 274,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 0,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 11,
+      "type": "capture",
+      "recordIndex": 73,
+      "commonNodes": 323,
+      "baselineNodes": 323,
+      "candidateNodes": 325,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 138,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 1
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 12,
+      "type": "capture",
+      "recordIndex": 74,
+      "commonNodes": 325,
+      "baselineNodes": 325,
+      "candidateNodes": 327,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 12,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 13,
+      "type": "capture",
+      "recordIndex": 76,
+      "commonNodes": 345,
+      "baselineNodes": 345,
+      "candidateNodes": 347,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 106,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 1
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 14,
+      "type": "capture",
+      "recordIndex": 77,
+      "commonNodes": 347,
+      "baselineNodes": 347,
+      "candidateNodes": 349,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 18,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 15,
+      "type": "capture",
+      "recordIndex": 79,
+      "commonNodes": 367,
+      "baselineNodes": 367,
+      "candidateNodes": 369,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 104,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 1
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 16,
+      "type": "capture",
+      "recordIndex": 80,
+      "commonNodes": 369,
+      "baselineNodes": 369,
+      "candidateNodes": 371,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 10,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 17,
+      "type": "capture",
+      "recordIndex": 82,
+      "commonNodes": 369,
+      "baselineNodes": 369,
+      "candidateNodes": 371,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 0,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 18,
+      "type": "capture",
+      "recordIndex": 84,
+      "commonNodes": 405,
+      "baselineNodes": 405,
+      "candidateNodes": 407,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 122,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 1
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 19,
+      "type": "capture",
+      "recordIndex": 85,
+      "commonNodes": 407,
+      "baselineNodes": 407,
+      "candidateNodes": 409,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 10,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 20,
+      "type": "capture",
+      "recordIndex": 87,
+      "commonNodes": 407,
+      "baselineNodes": 407,
+      "candidateNodes": 409,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 0,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 21,
+      "type": "capture",
+      "recordIndex": 89,
+      "commonNodes": 407,
+      "baselineNodes": 407,
+      "candidateNodes": 409,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 0,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 22,
+      "type": "capture",
+      "recordIndex": 91,
+      "commonNodes": 407,
+      "baselineNodes": 407,
+      "candidateNodes": 409,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 0,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 23,
+      "type": "capture",
+      "recordIndex": 93,
+      "commonNodes": 472,
+      "baselineNodes": 472,
+      "candidateNodes": 474,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 152,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 1
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 24,
+      "type": "terminal_inspection",
+      "recordIndex": 94,
+      "commonNodes": 472,
+      "baselineNodes": 472,
+      "candidateNodes": 474,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 0,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 25,
+      "type": "terminal_inspection",
+      "recordIndex": 95,
+      "commonNodes": 472,
+      "baselineNodes": 472,
+      "candidateNodes": 474,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 0,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 0
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 26,
+      "type": "terminal_inspection",
+      "recordIndex": 96,
+      "commonNodes": 472,
+      "baselineNodes": 472,
+      "candidateNodes": 474,
+      "baselineOnlyNodeIds": [],
+      "candidateOnlyNodeIds": [
+        "family_state:selected_rigid",
+        "family_activation:selected_rigid"
+      ],
+      "commonDeltas": 0,
+      "baselineOnlyDeltas": 0,
+      "candidateOnlyDeltas": 0
+    }
+  ],
+  "counts": {
+    "commonNodeComparisons": 17331,
+    "rawDifferences": 35769,
+    "residualAfterCreatedOnly": 34714,
+    "originSourceDigestDifferences": 20748,
+    "candidateOnlyNodeOccurrences": 116,
+    "commonDeltaComparisons": 3417,
+    "candidateOnlyDeltaOccurrences": 29,
+    "pointsCompared": 58
+  },
+  "categoryCounts": {
+    "origin_source_digest_bound_to_role": 20748,
+    "hypothetical_created_envelope_timestamp": 1055,
+    "derived_identity_or_structural_count": 13966
+  },
+  "domainCounts": {
+    "common_node": 18302,
+    "common_delta_node": 3501,
+    "common_delta_identity": 13448,
+    "point_graph_identity": 518
+  },
+  "errors": [],
+  "validationScope": "Framing, contiguous records/delta sequence, previous-chain links, per-node revisions, scope/runtime-origin binding, graph/snapshot counts; no native codec/kernel import, no official semantic validator.",
+  "priorAttemptsUnchanged": true,
+  "expectedSessions": 4,
+  "expectedPointsPerRole": {
+    "baseline": 58,
+    "candidate": 58
+  },
+  "captureHeaders": {
+    "baseline": {
+      "schema": "logos-engine.lot6b-owner-cost-functional-capture.v1",
+      "role": "baseline",
+      "checkout": "/workspace/sites/sra-lot6b-baseline-063-20261111/.sites-checkout",
+      "startedAt": "2026-11-11T17:59:38.443Z",
+      "records": []
+    },
+    "candidate": {
+      "schema": "logos-engine.lot6b-owner-cost-functional-capture.v1",
+      "role": "candidate",
+      "checkout": "/workspace/sites/sra-lot6b-20261111/.sites-checkout",
+      "startedAt": "2026-11-11T18:00:26.181Z",
+      "records": []
+    }
+  },
+  "captureFooters": {
+    "baseline": {
+      "status": "captured_functional_structure",
+      "finishedAt": "2026-11-11T18:00:25.990Z",
+      "recordCount": 98
+    },
+    "candidate": {
+      "status": "captured_functional_structure",
+      "finishedAt": "2026-11-11T18:01:12.672Z",
+      "recordCount": 98
+    }
+  },
+  "scopeConclusion": "All expected capture/inspection points and every common node at each point were inventoried; differences remain diagnostic and no official qualification is issued.",
+  "outputs": {
+    "raw": {
+      "file": "hypothetical-common-difference-inventory-attempt03-raw.jsonl.gz",
+      "rows": 35769,
+      "uncompressedBytes": 15584808,
+      "compressedBytes": 1100229
+    },
+    "residual": {
+      "file": "hypothetical-common-difference-inventory-attempt03-residual.jsonl.gz",
+      "rows": 34714,
+      "uncompressedBytes": 15058629,
+      "compressedBytes": 1025480
+    },
+    "origin": {
+      "file": "hypothetical-common-difference-inventory-attempt03-origin.jsonl.gz",
+      "rows": 20748,
+      "uncompressedBytes": 9227423,
+      "compressedBytes": 516795
+    },
+    "unexplained": {
+      "file": "hypothetical-common-difference-inventory-attempt03-unexplained.jsonl.gz",
+      "rows": 0,
+      "uncompressedBytes": 0,
+      "compressedBytes": 0
+    },
+    "coverage": {
+      "file": "hypothetical-common-difference-inventory-attempt03-coverage.jsonl.gz",
+      "rows": 17331,
+      "uncompressedBytes": 3891584,
+      "compressedBytes": 392257
+    },
+    "unmatched": {
+      "file": "hypothetical-common-difference-inventory-attempt03-unmatched.jsonl.gz",
+      "rows": 145,
+      "uncompressedBytes": 123737,
+      "compressedBytes": 7019
+    }
+  },
+  "finishedAt": "2026-11-11T18:18:37.912Z",
+  "elapsedSeconds": 12.907743175,
+  "uniqueDifferencePaths": 3546
+}

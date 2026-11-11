@@ -1,0 +1,14 @@
+{
+  "schema": "logos-engine.lot6b.provisional-predecessor.v1",
+  "observedAt": "2026-11-11T17:21:07.104033+00:00",
+  "sourceCommit": "805b30297dc1b715dbfd9f1197a9a8ba7b361b90",
+  "sourceCheckout": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout",
+  "nativeSource": {
+    "fileCount": 318,
+    "digest": "a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57"
+  },
+  "frozenManifestSha256": "6fd96a8c19867ee6740db8293c14bf241d9929a31e24f391e95d3aee4c6fab66",
+  "allManifestFilesMatchCommit": true,
+  "published": false,
+  "qualification": "Immutable5C final candidate used only for provisional6B preparation. Actual published0.63 and exact source reconciliation remain required before final6B cost/publication. No upstream working-tree edit or native execution."
+}

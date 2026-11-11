@@ -1,0 +1,44 @@
+{
+  "schema": "logos-engine.v6.development-log-transport.v1",
+  "recordedAt": "2026-11-11T19:19:03.247403+00:00",
+  "status": "verified_byte_exact",
+  "entries": [
+    {
+      "raw": {
+        "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/preparation/preflight-01/typecheck/typecheck-stdout.log",
+        "sha256": "7c10b60a29f7baa63e0e264f7ddcb45830e743c1b1392f8954a77efb9531681d",
+        "bytes": 50
+      },
+      "gzip": {
+        "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/preparation/preflight-01/typecheck/typecheck-stdout.log.gz",
+        "sha256": "5da9dcc80386aac121186848b6907701dca00eb475920c9a50350a5af1aa8bf9",
+        "bytes": 70
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/preparation/preflight-01/typecheck/typecheck-stderr.log",
+        "sha256": "7125f194612fcff2f454c05d848e7cb71facc1967b4d5017e25b34fdee3ba74f",
+        "bytes": 99
+      },
+      "gzip": {
+        "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/preparation/preflight-01/typecheck/typecheck-stderr.log.gz",
+        "sha256": "934a9d56e1b77b540f21becd97102d1b7088e8e2eba852118cfc29df5c6f4bb7",
+        "bytes": 101
+      }
+    },
+    {
+      "raw": {
+        "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/preparation/preflight-01/typecheck/typecheck-activity.jsonl",
+        "sha256": "e0d7e4db517b13823c291d73133c799f80b08c23bc9a829d9efb667ea02d9af5",
+        "bytes": 1100
+      },
+      "gzip": {
+        "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/preparation/preflight-01/typecheck/typecheck-activity.jsonl.gz",
+        "sha256": "dfbf3ddbaec8011cb02d4d20ed156f8b19a993ed329893ea174ccd9038482831",
+        "bytes": 231
+      }
+    }
+  ],
+  "qualification": "Complete stdout, stderr and activity, including failures; no filtering or newline normalization."
+}

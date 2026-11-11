@@ -1,0 +1,35 @@
+{
+  "schema": "logos-engine.lot5c.command-execution.v1",
+  "status": "failed",
+  "startedAt": "2026-11-11T14:40:55.381440+00:00",
+  "command": [
+    "node",
+    "--max-old-space-size=768",
+    "--test",
+    "--test-reporter=tap",
+    "--test-concurrency=1",
+    "--test-name-pattern=an incomplete (passive|selected) binding acquisition|the ordinary level clock bounds",
+    "tests/v6-object-binding-common.test.ts"
+  ],
+  "cwd": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout",
+  "timeoutSeconds": 180.0,
+  "wrapper": {
+    "path": "docs/migration/lot5c-evidence/run-evidence-command.py",
+    "bytes": 3904,
+    "sha256": "99b16a35eac1f12acb3063e43d303ffc020b3339109e22eff1f807d1e87e47db"
+  },
+  "finishedAt": "2026-11-11T14:40:56.863018+00:00",
+  "durationSeconds": 1.4803170509985648,
+  "exitCode": 1,
+  "timedOut": false,
+  "log": {
+    "path": "docs/migration/lot5c-evidence/recovery/integration-published-6a/binding-acquisition-bounds.log",
+    "bytes": 3379,
+    "sha256": "125720895af02dc23e6e647b4cabd306c2cfcfc426d5688aa65b8538accb4dd6"
+  },
+  "compressedLog": {
+    "path": "docs/migration/lot5c-evidence/recovery/integration-published-6a/binding-acquisition-bounds.log.gz",
+    "bytes": 782,
+    "sha256": "aa2db4ed32e5c4e30510d52698de2cc06dcb10fa8fd5dcfc5ee64e5b6a969313"
+  }
+}

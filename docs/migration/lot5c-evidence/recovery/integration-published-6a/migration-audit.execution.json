@@ -1,0 +1,30 @@
+{
+  "schema": "logos-engine.lot5c.command-execution.v1",
+  "status": "passed",
+  "startedAt": "2026-11-11T14:43:12.067831+00:00",
+  "command": [
+    "python",
+    "scripts/audit-v6-migration.py"
+  ],
+  "cwd": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout",
+  "timeoutSeconds": 180.0,
+  "wrapper": {
+    "path": "docs/migration/lot5c-evidence/run-evidence-command.py",
+    "bytes": 3904,
+    "sha256": "99b16a35eac1f12acb3063e43d303ffc020b3339109e22eff1f807d1e87e47db"
+  },
+  "finishedAt": "2026-11-11T14:43:18.768616+00:00",
+  "durationSeconds": 6.699322739999843,
+  "exitCode": 0,
+  "timedOut": false,
+  "log": {
+    "path": "docs/migration/lot5c-evidence/recovery/integration-published-6a/migration-audit.log",
+    "bytes": 622,
+    "sha256": "dc1f664e887f8b22390721b905c2347c4dcc77477a56337343b8907b8f37c02e"
+  },
+  "compressedLog": {
+    "path": "docs/migration/lot5c-evidence/recovery/integration-published-6a/migration-audit.log.gz",
+    "bytes": 285,
+    "sha256": "8ee3ee143ee1ff801815348cde17d790579c9ac79c260ce7a641af0ec6c0888a"
+  }
+}

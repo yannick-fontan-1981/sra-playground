@@ -1,0 +1,37 @@
+{
+  "schema": "logos-engine.lot5c-published-site103-readback.v1",
+  "recordedAt": "2026-11-11T17:04:28.389Z",
+  "status": "actual_published_documentary_closure_verified",
+  "version": {
+    "id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_c8356cd5ad648191a646ac0a9c059a24",
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "version_number": 103,
+    "source": {
+      "commit_sha": "4afcbfe6a25bd3a88223be543e443bc53b9c8814"
+    },
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_000000007d5c820eb673da4e6931b5a4",
+      "content_hash": "sha256:9724c4bbc91636ebb8e008466b01fcf980fdc86edc46073555aa4e179946e386",
+      "size_bytes": 30023680,
+      "file_count": 75
+    },
+    "deployment_id": "appgdep_6af49db69234819195c9c093cb79a7da"
+  },
+  "deployment": {
+    "id": "appgdep_6af49db69234819195c9c093cb79a7da",
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "title": "SRA Playground",
+    "version_id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_c8356cd5ad648191a646ac0a9c059a24",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": "sediment://file_0000000051b481f8bd01cfe7c5e447de",
+    "provider_deployment_id": "site---6adbc388d79081918581b93b919d7258",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-11-11T16:54:28.036164+00:00"
+  },
+  "qualification": "Direct Sites version and terminal deployment readback. Native 0.62 baseline remains exact Site 102/source 1019d2eb929d7dc201a5c1f6edce5aa1c5dfa464. No Lot 5C cost or publication is claimed."
+}

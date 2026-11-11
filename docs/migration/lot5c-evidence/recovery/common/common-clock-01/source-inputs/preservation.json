@@ -1,0 +1,31 @@
+{
+  "schema": "logos-engine.lot5c.executed-common-input-preservation.v1",
+  "status": "preserved_exact_executed_inputs",
+  "sourceReport": "docs/migration/lot5c-evidence/recovery/common/common-clock-01/level-clock-acquisition-bound/common-loop.json.gz",
+  "inputs": [
+    {
+      "executionInput": {
+        "path": "docs/migration/lot5c-evidence/recovery/common/common-plan.json",
+        "bytes": 8640,
+        "sha256": "465186d015ba2d9d43d624d632a1988e01ab703777ba4151dd39dff99644ea8d"
+      },
+      "preservedPath": "docs/migration/lot5c-evidence/recovery/common/common-clock-01/source-inputs/docs/migration/lot5c-evidence/recovery/common/common-plan.json"
+    },
+    {
+      "executionInput": {
+        "path": "scripts/native-object-binding-common-loop.ts",
+        "bytes": 28528,
+        "sha256": "2b95a7a49864c430afbf6c1ed14dfba35a66a4aae78efd050dce7d815a1cba85"
+      },
+      "preservedPath": "docs/migration/lot5c-evidence/recovery/common/common-clock-01/source-inputs/scripts/native-object-binding-common-loop.ts"
+    },
+    {
+      "executionInput": {
+        "path": "tests/v6-object-binding-common.test.ts",
+        "bytes": 30310,
+        "sha256": "eef0085a5b311ceba63f67fc19fceab19b8f1c961874c802951c42a11af646a8"
+      },
+      "preservedPath": "docs/migration/lot5c-evidence/recovery/common/common-clock-01/source-inputs/tests/v6-object-binding-common.test.ts"
+    }
+  ]
+}

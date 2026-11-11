@@ -1,0 +1,41 @@
+--- before/record-owner-source-inventory.mjs
++++ after/record-owner-source-inventory.mjs
+@@ -1,6 +1,7 @@
+ #!/usr/bin/env node
+ /** Record the actual factories' owners and family-installed programs, without a session.
+- * Derived from the retained 7B inventory, with both generator identities bound.
++ * Directly adapted from the retained 5B inventory (SHA-256
++ * fdfed96d27d08554a7a4ec6a50a68a4b65dd62001cd2fec057f2f580f1627ce2), with both identities bound.
+  * Usage: node SCRIPT BASELINE_CHECKOUT OUTPUT.json
+  * No runtime initialize, observation, proposal, action or workflow execution is requested.
+  */
+@@ -146,18 +147,22 @@
+   assert.equal(process.argv.length, 4, 'Usage: node SCRIPT BASELINE_CHECKOUT OUTPUT.json');
+   const generator = await fingerprint(ROOT, relative(ROOT, SCRIPT));
+   const derivedFrom = await fingerprint(ROOT, DERIVED_FROM);
++  assert.equal(derivedFrom.sha256, 'fdfed96d27d08554a7a4ec6a50a68a4b65dd62001cd2fec057f2f580f1627ce2', 'Direct 5B derivation changed');
+   const baselineCheckout = await realpath(resolve(process.argv[2]));
+   const candidateCheckout = await realpath(ROOT);
+   assert.notEqual(baselineCheckout, candidateCheckout, 'Baseline and candidate checkouts must differ');
+   const output = resolve(process.argv[3]);
+   const outputRelative = relative(candidateCheckout, output);
+-  assert.ok(outputRelative && outputRelative !== '..' && !outputRelative.startsWith(`..${sep}`),
+-    'Output must be a new file inside the candidate checkout');
+-  try {
+-    await access(output);
+-    throw new Error('Output already exists; refusing overwrite: ' + output);
+-  } catch (error) {
+-    if (error.code !== 'ENOENT') throw error;
++  assert.ok(outputRelative.startsWith('docs/migration/lot5c-evidence/'),
++    'Output must be a new file inside the lot 5C evidence tree');
++  for (const path of [output, resolve(dirname(output), 'window.json'), resolve(dirname(output), 'readiness.json'),
++    resolve(dirname(output), 'owner-growth-contract.json')]) {
++    try {
++      await access(path);
++      throw new Error('Inventory must precede a finalized/measured window; refusing existing path: ' + path);
++    } catch (error) {
++      if (error.code !== 'ENOENT') throw error;
++    }
+   }
+   const baseline = await inspect(baselineCheckout, 'baseline');
+   const candidate = await inspect(candidateCheckout, 'candidate');

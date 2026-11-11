@@ -1,5 +1,19 @@
 # Lot 8A — accès conditionné par un motif
 
+<!-- LOT8A_INTEGRATION_START -->
+
+## Composition préparatoire 5C, 6B et 8A
+
+La composition réunit `public_observed_binding`, `selected_rigid` et `motif_access`, à partir du jalon 8A antérieur et du checkpoint 6B `a01e6faf330d82fa220feac0c9ad4632bb75a9de` incluant la préparation 5C. **145 fichiers de tests et 67/76 entrées sont des périmètres attendus, non des résultats exécutés sur cette composition.** Les validations propres aux parents, notamment le jalon 8A de 5 422 tests sur Site 103, restent conservées ci-dessous avec leur portée historique.
+
+**0.63 et 0.64 ne sont pas publiées ; 0.65 reste réservée.** La tentative de coût 5C a été bloquée avant toute mesure, avec zéro échantillon, puis la fenêtre a été libérée explicitement le 11 novembre à 19:08:34 UTC. **Aucun coût 8A n’est mesuré ou accepté.** Le gel et les validations de cette composition restent à renseigner après exécution.
+
+Le [plan prospectif de coût](integration-provisional-063-064-01/contract/cost-qualification-plan.json) exige la publication réelle 0.64 comme baseline, des captures hors chronométrage des formes de travail et de la provenance des graphes, puis une fenêtre ABBA isolée. Pour chacun de STCK et SMLP, la hausse du coût global doit être strictement inférieure à +10 % ; des phases au-delà de +10 % sont admises si cette condition globale est satisfaite, et restent consignées. Ce plan ne contient aucune fixture, empreinte ni acceptation inventée.
+
+<!-- LOT8A_INTEGRATION_END -->
+
+## Jalon de développement antérieur conservé sur Site 103
+
 ## État courant
 
 **Le jalon de développement est validé : 5 422/5 422 tests dans 138 fichiers et cinq contrôles passés.** Le [bilan vérifié](development/validation-summary.json) conserve les reçus, empreintes et limites de cette validation. Le candidat natif **0.65.0 est réservé**, sans publication ni qualification de coût de ce lot. La source de départ était le Site 101 / native 0.61.0 ; le développement intègre maintenant le **Site 103 / native 0.62**, commit `4afcbfe6a25bd3a88223be543e443bc53b9c8814`, effectivement déployé et [observé via Sites](coordination/published10b-site103.json). Le gel de développement comprend 312 fichiers natifs, digest `a6ea3e5e8140b14aa260485ebd4192429a86c4d3ec02075f14043f215cc798e1`.

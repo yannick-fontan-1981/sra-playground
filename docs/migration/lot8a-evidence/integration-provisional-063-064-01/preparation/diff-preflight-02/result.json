@@ -1,0 +1,17 @@
+{
+  "schema": "lot8a.composition-diff-preflight.v1",
+  "observedAt": "2026-11-11T19:28:57.866756+00:00",
+  "command": [
+    "git",
+    "diff",
+    "--check",
+    "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+    "--"
+  ],
+  "exitCode": 0,
+  "stdout": "",
+  "stderr": "",
+  "priorFailureRetained": "preparation/diff-preflight-01/result.json",
+  "resolution": "Lossless gzip transport of the native delta patch; no production whitespace or proof bytes changed.",
+  "qualification": "Preparatory only; final gate still required after new145suite"
+}

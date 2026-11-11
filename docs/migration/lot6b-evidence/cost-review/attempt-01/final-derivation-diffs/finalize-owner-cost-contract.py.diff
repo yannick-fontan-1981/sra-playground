@@ -1,0 +1,147 @@
+--- immutable-6a/finalize-owner-cost-contract.py
++++ 6b-reviewed/finalize-owner-cost-contract.py
+@@ -1,7 +1,7 @@
+ #!/usr/bin/env python3
+-"""Bind existing frozen lot6A inputs before any official cost window.
+-
+-Usage: python -B docs/migration/lot6a-evidence/finalize-owner-cost-contract.py PERFORMANCE_DIRECTORY
++"""Bind existing frozen lot6B inputs before any official cost window.
++
++Usage: python -B docs/migration/lot6b-evidence/finalize-owner-cost-contract.py PERFORMANCE_DIRECTORY
+ 
+ This command reads completed captures, attribution, fixture, source inventory
+ and declaration. It creates one exclusive contract; it runs no other script,
+@@ -16,13 +16,13 @@
+ from pathlib import Path
+ 
+ ROOT = Path(__file__).resolve().parents[3]
+-EVIDENCE = ROOT / 'docs/migration/lot6a-evidence'
+-OWNER = 'preview_packing'
++EVIDENCE = ROOT / 'docs/migration/lot6b-evidence'
++OWNER = 'selected_rigid'
+ REFERENCE = 'reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6'
+ INVENTORY_INPUTS = {'src/logos-engine/v6-native-runtime.ts', 'src/logos-engine/v6-knowledge-store.ts',
+                     'src/logos-engine/v6-src-program.ts', REFERENCE + '/laya_proto/common_frontier_policy.drm.json',
+                     REFERENCE + '/morphology_policy/strategy.drm'}
+-SOURCES = ['src/logos-engine/v6-native-runtime.ts', 'src/logos-engine/v6-preview-packing.ts', 'src/logos-engine/v6-preview-packing-types.ts', 'src/logos-engine/v6-preview-packing-geometry.ts', 'src/logos-engine/v6-preview-packing-calculus.ts', 'src/logos-engine/v6-knowledge-store.ts', 'src/logos-engine/kernel.ts']
++SOURCES = ['src/logos-engine/v6-native-runtime.ts', 'src/logos-engine/v6-selected-rigid.ts', 'src/logos-engine/v6-selected-rigid-types.ts', 'src/logos-engine/v6-selected-rigid-geometry.ts', 'src/logos-engine/v6-selected-rigid-search.ts', 'src/logos-engine/v6-knowledge-store.ts', 'src/logos-engine/kernel.ts']
+ TOUCHED = {}
+ EXPECTATION = {
+     'ownerId': OWNER, 'programId': None,
+@@ -102,7 +102,7 @@
+     generator = fingerprint(Path(__file__))
+     remember(generator)
+     perf = (ROOT / args.performance_directory).resolve()
+-    require(perf.is_relative_to(EVIDENCE) and perf.is_dir(), 'Performance directory must already exist inside lot6a-evidence')
++    require(perf.is_relative_to(EVIDENCE) and perf.is_dir(), 'Performance directory must already exist inside lot6b-evidence')
+     output = perf / 'owner-growth-contract.json'
+     for name in ['window.json', 'readiness.json', 'static-preflight.json', 'owner-growth-contract.json',
+                  'owner-growth-comparison.json', 'owner-growth-review.json', 'aggregation-failure.json', 'aggregation-failure.log']:
+@@ -112,18 +112,19 @@
+     declaration_path = perf / 'declaration.json'
+     declaration = read(declaration_path)
+     require(declaration['schema'] == 'logos-engine.native-cost-protocol-declaration.v2',
+-            'Need the actual finalized lot6A declaration')
++            'Need the actual finalized lot6B declaration')
+     require(declaration['status'] == 'declared_before_official_window'
+             and declaration['noOfficialWindowAtDeclaration'] is True, 'Declaration is not premeasurement')
+-    require(isinstance(declaration['baseline']['nativeVersion'], str)
+-            and isinstance(declaration['baseline']['siteVersion'], int) and declaration['baseline']['siteVersion'] > 0,
+-            'The responsible owner must identify the actually published predecessor')
++    require(declaration['baseline']['nativeVersion'] == '0.63.0'
++            and declaration['candidate']['nativeVersion'] == '0.64.0'
++            and type(declaration['baseline']['siteVersion']) is int and declaration['baseline']['siteVersion'] > 0,
++            'The responsible owner must identify the actually published 0.63 predecessor and frozen 0.64 candidate')
+     tools = {
+         'consolidator': fingerprint(EVIDENCE / 'consolidate-owner-costs.mjs'),
+         'reviewer': fingerprint(EVIDENCE / 'review-owner-costs.py'),
+     }
+     require(declaration['ownerCostQualification'] == {
+-        'schema': 'logos-engine.lot6a-owner-cost-qualification.v1',
++        'schema': 'logos-engine.lot6b-owner-cost-qualification.v1',
+         'contractPath': output.relative_to(ROOT).as_posix(), 'tools': tools,
+     }, 'The declared contract or tools differ')
+     manifests = {}
+@@ -137,7 +138,7 @@
+ 
+     inventory_path = perf / 'owner-source-inventory.json'
+     inventory = read(inventory_path)
+-    require(inventory['schema'] == 'logos-engine.lot6a-owner-cost-source-inventory.v1'
++    require(inventory['schema'] == 'logos-engine.lot6b-owner-cost-source-inventory.v1'
+             and inventory['programScope'] == 'family-installed programs'
+             and inventory['nativeDigests'] == declaration['nativeDigests'], 'Incorrect factory inventory')
+     verify(inventory['generator'])
+@@ -152,6 +153,7 @@
+             'Existing owner registration order changed')
+     for role in ('baseline', 'candidate'):
+         source = inventory['sourceInventory'][role]
++        require(source['nativeVersion'] == declaration[role]['nativeVersion'], 'Factory inventory version differs from the declaration')
+         require(source['native'] == manifests[role] and source['owners'] == inventory['owners'][role]
+                 and source['programs'] == inventory['programs'][role]
+                 and source['programNodeIds'] == inventory['programNodeIds'][role], 'Factory inventory is not bound to its source freeze')
+@@ -175,7 +177,7 @@
+ 
+     fixture_path = perf / 'owner-structural-fixture.json'
+     fixture = read(fixture_path)
+-    require(fixture['schema'] == 'logos-engine.lot6a-owner-cost-structural-fixture.v1'
++    require(fixture['schema'] == 'logos-engine.lot6b-owner-cost-structural-fixture.v1'
+             and fixture['status'] == 'qualified_functional_structure'
+             and fixture['nativeDigests'] == declaration['nativeDigests'], 'Missing qualified functional fixture')
+     require([(row['case'], row['form']) for row in fixture['forms']] ==
+@@ -189,12 +191,25 @@
+             (declaration['cases']['bytes'], declaration['cases']['sha256']), 'Functional and measured cases differ')
+     verify(fixture['captureTool']); verify(fixture['attribution'])
+     attribution = read(ROOT / fixture['attribution']['path'])
+-    require(attribution['schema'] == 'logos-engine.lot6a-owner-cost-structural-attribution.v1'
++    require(attribution['schema'] == 'logos-engine.lot6b-owner-cost-structural-attribution.v1'
+             and attribution['status'] == 'qualified_functional_structure'
+             and attribution['nativeDigests'] == declaration['nativeDigests'], 'Missing successful graph attribution')
+     require(attribution['checkedCount'] == len(attribution['checks']) > 0
+             and all(row['passed'] is True for row in attribution['checks'])
+             and attribution['nodeAttributions'], 'Graph attribution is incomplete')
++    require(attribution['failures'] == [] and attribution['commonValuePolicy'] == {
++        'comparison': 'exact', 'permittedMetadataDifference': 'origin.source_digest',
++        'identityValueAttributions': [], 'unattributedDifferencesAllowed': 0},
++        '6B common values cannot carry an undeclared identity exception')
++    common = attribution['commonValueCoverage']
++    require(len(common) == len(attribution['points']) and len(common) > 0,
++            'Common-value coverage omits captured graph points')
++    for row, point in zip(common, attribution['points']):
++        require(row == {**{key: point[key] for key in ('case', 'form', 'pointIndex')},
++                        'commonNodesCompared': point['baselineNodeCount'],
++                        'commonDeltasCompared': point['baselineDeltaCount'],
++                        'comparison': 'exact', 'unattributedDifferences': 0},
++                'A common node or delta value is unqualified')
+     coverage = attribution['sourceFactCoverage']
+     require([(row['case'], row['form'], row['pointIndex']) for row in coverage] ==
+             [(row['case'], row['form'], row['pointIndex']) for row in attribution['points']], 'Source-fact coverage omits a captured point')
+@@ -206,7 +221,7 @@
+             require(type(row['acquiredReturns']) is int and row['acquiredReturns'] == 0
+                     and row['persistedSourceFacts'] == 0 and row['sourceCallIndices'] == []
+                     and type(row['capturedNegativeProposals']) is int and row['capturedNegativeProposals'] >= 0,
+-                    'PreviewPacking must not acquire any selected or passive return in the fixed common-loop cost traces')
++                    'SelectedRigid must not acquire any selected or passive return in the fixed common-loop cost traces')
+     forms_hash = hashlib.sha256(json.dumps(fixture['forms'], sort_keys=True, separators=(',', ':'),
+                                           ensure_ascii=False, allow_nan=False).encode()).hexdigest()
+     require(attribution['formsSha256'] == forms_hash, 'Fixture forms differ from their attribution')
+@@ -218,9 +233,10 @@
+         capture = fixture['captures'][role]
+         verify(capture['report']); verify(capture['receipt'])
+         receipt = read(ROOT / capture['receipt']['path'])
+-        require(receipt['schema'] == 'logos-engine.lot6a-owner-cost-functional-capture-receipt.v1'
++        require(receipt['schema'] == 'logos-engine.lot6b-owner-cost-functional-capture-receipt.v1'
+                 and receipt['role'] == role and receipt['status'] == 'captured_functional_structure'
+                 and receipt['nativeDigest'] == declaration['nativeDigests'][role]
++                and receipt['nativeVersion'] == declaration[role]['nativeVersion']
+                 and receipt['ownerId'] == OWNER and receipt['acquisitionMode'] == 'selected_only_source_owner_no_passive_returns'
+                 and receipt['report'] == capture['report'] and receipt['generator'] == fixture['captureTool']
+                 and receipt['sessionCount'] == 4 and receipt['actions'] == 31 and not receipt['failures'],
+@@ -242,7 +258,7 @@
+     for record in list(TOUCHED.values()):
+         verify(record)
+     result = {
+-        'schema': 'logos-engine.lot6a-owner-cost-contract.v2', 'lot': '6A', 'declaredAt': now,
++        'schema': 'logos-engine.lot6b-owner-cost-contract.v2', 'lot': '6B', 'declaredAt': now,
+         'performanceDirectory': perf.relative_to(ROOT).as_posix(), 'declaration': fingerprint(declaration_path),
+         'tools': tools, 'structuralExpectation': EXPECTATION, 'sourceEvidence': sources,
+         'ownerInventory': fingerprint(inventory_path), 'structuralFixture': fingerprint(fixture_path),

@@ -1,0 +1,43 @@
+{
+  "schema": "logos-engine.lot6b-hypothetical-common-difference-inventory.v2",
+  "status": "diagnostic_only_not_qualification",
+  "attempt": 2,
+  "complete": false,
+  "error": {
+    "type": "JSONDecodeError",
+    "message": "Expecting value: line 2 column 1 (char 211)",
+    "lastContext": null,
+    "traceback": "Traceback (most recent call last):\n  File \"/workspace/sites/sra-lot6b-20261111/.sites-checkout/docs/migration/lot6b-evidence/provisional-063-01/functional-805b/inventory-common-differences-attempt02.py\", line 104, in <module>\n    a=json.loads(al);b=json.loads(bl)\n      ^^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/__init__.py\", line 346, in loads\n    return _default_decoder.decode(s)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py\", line 338, in decode\n    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py\", line 356, in raw_decode\n    raise JSONDecodeError(\"Expecting value\", s, err.value) from None\njson.decoder.JSONDecodeError: Expecting value: line 2 column 1 (char 211)\n"
+  },
+  "startedAt": "2026-11-11T18:10:39.086295+00:00",
+  "finishedAt": "2026-11-11T18:10:39.089762+00:00",
+  "elapsedSeconds": 0.0034765830023388844,
+  "internalBoundSeconds": 115.0,
+  "externalTimeoutSeconds": 120,
+  "rowsReadPerRole": 1,
+  "pointsCompared": 0,
+  "counts": {},
+  "rawNodeAndCauseDifferences": 0,
+  "nodeAndCauseDifferencesAfterHypotheticalCreatedOnly": 0,
+  "nodeAndCauseDifferencesAfterExistingOriginRuleAndHypotheticalCreated": 0,
+  "deltaEnvelopeDifferencesSeparatelyRetained": 0,
+  "hypothesis": {
+    "created": "Only the float64 created entry of an encoded reasoning:trace:N object with exactly id/episode/kind/body/created, matching numeric id, matching component/profile and object root is hypothetically excluded. No other timestamp or subtree is omitted.",
+    "origin": "Existing official origin.source_digest metadata exception is counted separately from the created hypothesis.",
+    "deltaEnvelope": "Common delta sequence, previous, digest and source_digest are inventoried separately, not declared equivalent or qualified."
+  },
+  "limits": [
+    "No native module imports or new captures.",
+    "Raw retained deltas reconstruct node tables; hash chains and source semantics are not requalified.",
+    "All common current nodes and matching common delta occurrences are compared; missing identities and ordering differences are retained.",
+    "No official refusal, helper, source or captured byte is modified.",
+    "A complete diagnostic inventory is not an official qualification pass."
+  ],
+  "points": [],
+  "structuralEvents": [],
+  "createdEnvelopePaths": [],
+  "differencePatterns": [],
+  "exactDifferencePaths": [],
+  "rawDifferencesFile": "hypothetical-common-differences-attempt02.jsonl",
+  "script": "inventory-common-differences-attempt02.py"
+}

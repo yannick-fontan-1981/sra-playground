@@ -1,0 +1,206 @@
+{
+  "schema": "lot8a-cost-qualification-plan/v1",
+  "status": "prospective_not_executed",
+  "preparedAt": "2026-11-11T19:17:30.167055+00:00",
+  "scope": {
+    "entry": "motif_conditioned_access",
+    "owner": "motif_access",
+    "reservedCandidateVersion": "0.65",
+    "compositionOwners": [
+      "public_observed_binding",
+      "selected_rigid",
+      "motif_access"
+    ],
+    "prospectiveTestFileCount": 145,
+    "expectedEntryAudit": {
+      "covered": 67,
+      "total": 76,
+      "executed": false
+    }
+  },
+  "execution": {
+    "costExecuted": false,
+    "accepted": null,
+    "measuredSessions": 0,
+    "publicationClaim": null,
+    "currentBlocker": "5C exclusive lock acquisition failed before measurement; explicit quiet release permits preparation only."
+  },
+  "baseline": {
+    "requiredVersion": "0.64",
+    "requiredStatus": "actual_published_and_verified",
+    "status": "awaiting_actual_publication",
+    "publicationReceipt": null,
+    "sourceCommit": null,
+    "nativeDigest": null,
+    "requirements": [
+      "Actual 0.63 publication must precede actual 0.64 publication.",
+      "Verify published source, application and native identity before capturing baseline work forms.",
+      "Neither provisional 0.64 nor published 0.62 is an admissible replacement for the official 8A baseline."
+    ]
+  },
+  "candidate": {
+    "requiredVersion": "0.65",
+    "status": "composition_in_preparation",
+    "sourceCommit": null,
+    "nativeDigest": null,
+    "validationReceipt": null,
+    "requirements": [
+      "Freeze the complete composed source and exact validation scope.",
+      "Run fresh functional gates against the frozen bytes; parent receipts remain historical.",
+      "Pin all inputs and tools used for work forms, provenance checks and official timing before readiness."
+    ]
+  },
+  "ownerContract": {
+    "expectedAddedOwner": "motif_access",
+    "expectedRemovedOwners": [],
+    "expectedAddedProgram": null,
+    "requirements": [
+      "Compare actual owner and program inventories: baseline 0.64 already contains public_observed_binding and selected_rigid.",
+      "Only motif_access may be newly added for the 8A comparison; preserve the order and identities of other owners and programs.",
+      "Verify source-produced selected-only record routing and common-store restoration; no passive Motif record is admitted.",
+      "Capture proposal/start state changes on each foreign work form; do not assume Motif state is empty, constant, or unselected.",
+      "If the observed work form contains no Motif selection, verify no Motif record or acquired fact was fabricated.",
+      "Preserve learned, motion, passed and events across epochs according to the source; remeasure the current context.",
+      "Any bounded-search interruption must refuse an incomplete result without partial route or fallback."
+    ],
+    "selectedRecordKey": "common-observation-frontier/motif:{revision}",
+    "anticipatedGraphNodeRoles": [
+      "family_state:motif_access",
+      "family_activation:motif_access"
+    ],
+    "searchProfileToVerify": {
+      "maxStates": 8192,
+      "maxFrontier": 16384,
+      "status": "must_be_confirmed_against_frozen_candidate"
+    },
+    "limits": [
+      "No constant graph-growth formula is accepted without actual work-form evidence.",
+      "The STCK/SMLP global loop does not establish worst-case Motif search latency or stable long-session memory."
+    ]
+  },
+  "untimedWorkForms": {
+    "status": "not_captured_for_final_versions",
+    "fixture": null,
+    "fixtureDigest": null,
+    "formsPerVersion": [
+      {
+        "game": "STCK",
+        "kind": "warmup",
+        "actions": 3
+      },
+      {
+        "game": "STCK",
+        "kind": "measured",
+        "actions": 10
+      },
+      {
+        "game": "SMLP",
+        "kind": "warmup",
+        "actions": 3
+      },
+      {
+        "game": "SMLP",
+        "kind": "measured",
+        "actions": 15
+      }
+    ],
+    "sessionsPerVersion": 4,
+    "actionsPerVersion": 31,
+    "combinedSessions": 8,
+    "combinedActions": 62,
+    "terminalInspectionsPerFullForm": 3,
+    "requirements": [
+      "Capture both actual published 0.64 and the frozen 0.65 candidate before official timing.",
+      "Pin the real source identities, traces, harness and captured values; no invented fixtures or digests.",
+      "Each of all 40 official trials, including warmups, must match its own version and exact declared work form.",
+      "Compare all nonstructural work fields exactly; an unexpected difference blocks qualification."
+    ],
+    "onlyCandidateStructuralPaths": [
+      "observations[*].nodeCount",
+      "inspection[*].graphNodes",
+      "final.nodeCount",
+      "final.graphRevision"
+    ],
+    "structuralValues": "Must come from the actual untimed captures, not a fixed +2 assumption."
+  },
+  "graphProvenance": {
+    "status": "pending_actual_captures",
+    "receipt": null,
+    "requirements": [
+      "Compare common private values and deltas leaf by leaf.",
+      "Preserve content-addressed fragment identities and hydrate every changed native graph root.",
+      "Link each new owner fragment to the exact observed Motif checkpoint and source-derived state.",
+      "Explain execution/source identity and Kernel chain changes by precise independent role derivation for each version before timing.",
+      "Never strip origins, remove subtrees or apply arbitrary normalization to make graphs compare.",
+      "Bind all manifests, provenance tools, frozen inputs and work forms before readiness."
+    ]
+  },
+  "comparisonAndReview": {
+    "requirements": [
+      "Keep the ordinary strict comparator output and exit status exactly as executed.",
+      "If a genuine structural refusal occurs, retain it; never manufacture a failure or overwrite the receipt.",
+      "Use separate supplemental qualification outputs limited to the predeclared owner delta and an independent review.",
+      "If the strict comparator unexpectedly succeeds, retain and explain that result rather than forcing the refusal branch.",
+      "All 40 work-form comparisons must pass the declared contract before acceptance."
+    ]
+  },
+  "officialProtocol": {
+    "status": "not_started",
+    "order": [
+      "A1",
+      "B1",
+      "B2",
+      "A2"
+    ],
+    "cohorts": 2,
+    "games": [
+      "STCK",
+      "SMLP"
+    ],
+    "measuredSessions": 32,
+    "measuredActions": 400,
+    "warmupSessions": 8,
+    "excludedWarmupActions": 24,
+    "allTrials": 40,
+    "durationsPerGamePerVersion": 8,
+    "requirements": [
+      "Use identical completed-session boundaries and action workloads for A and B.",
+      "Keep all measured samples; exclude only the prospectively declared warmups.",
+      "Do not select a cohort, discard outliers, pool different official windows or compensate one game with the other.",
+      "Do not average cohort percentage changes or add nested phase durations."
+    ]
+  },
+  "globalDecision": {
+    "status": "pending",
+    "accepted": null,
+    "metric": "complete_session_duration_median",
+    "formula": "100 * (median_B / median_A - 1)",
+    "strictUpperBoundPercent": 10,
+    "perGameIndependent": true,
+    "allGamesMustPass": true,
+    "phaseOverrunsAllowedIfGlobalPasses": true,
+    "requirements": [
+      "Pool the eight eligible measured durations for each game/version to compute that game’s global median.",
+      "Each game must independently have a global increase strictly below 10 percent.",
+      "Retain phase, cohort, p95, pause and memory diagnostics, including every overrun; these are not hidden by global acceptance."
+    ]
+  },
+  "isolation": {
+    "status": "not_ready",
+    "requirements": [
+      "Obtain fresh acknowledgments from all active lanes and the existing exclusive performance mutex before taking any sample.",
+      "Do not replace, unlink or bypass the existing mutex.",
+      "Stop on a new quiet request; retain any blocked attempt as zero-sample evidence.",
+      "Hold the isolated window through the 40-trial work-form checks and acceptance evidence required by the protocol.",
+      "Record actual start, end and acceptance times only after they exist."
+    ]
+  },
+  "closedBudgets": {
+    "LKEY": "closed_no_payload_oracle_replay_game_browser",
+    "otherClosedGames": "no_new_attempt_authorized_by_this_plan"
+  },
+  "nonClaims": [
+    "No final fixture, digest, validation result, cost acceptance or publication is asserted by this prospective plan.",
+    "Earlier development and parent-source proofs are preserved and do not substitute for the composed candidate’s fresh qualification."
+  ]
+}

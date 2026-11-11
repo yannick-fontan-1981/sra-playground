@@ -1,0 +1,26 @@
+{
+  "schema": "logos-engine.lot5c-checkpoint-transport-recovery.v1",
+  "recordedAt": "2026-11-11T15:37:27.328327+00:00",
+  "branch": "refs/heads/lot5c-recovery-checkpoint-20261111",
+  "previousVerifiedRemote": "403cf3ad9cdaa8a0a17f8780ce2668c32909d3ce",
+  "rejectedAttempt": {
+    "commit": "2b0ea7011045ea7d549b18128956d6a8b59817b9",
+    "session": 21944,
+    "exitCode": 1,
+    "packBytes": 154088994,
+    "serverLimitBytes": 67108864,
+    "errorCode": "artifacts_git_receive_pack_request_too_large",
+    "remoteAdvancementClaimed": false
+  },
+  "successfulRecovery": {
+    "session": 24900,
+    "exitCode": 0,
+    "status": "pushed_and_verified",
+    "commit": "2b0ea7011045ea7d549b18128956d6a8b59817b9",
+    "remoteHead": "2b0ea7011045ea7d549b18128956d6a8b59817b9",
+    "fetchedMain": "965e2dbe38c1a484a3dc1f5d79e5dcec03d55b03",
+    "method": "Authenticated fetch of current remote main without merge, then ordinary push to the existing checkpoint branch and exact ls-remote verification. No force push.",
+    "sitePublicationPerformed": false
+  },
+  "secretsRetained": false
+}

@@ -1,0 +1,62 @@
+{
+  "schema": "logos-engine.lot6b-provisional-functional-preparation.v1",
+  "recordedAt": "2026-11-11T17:59:36.062592+00:00",
+  "status": "provisional_sources_verified_no_published_baseline_claim",
+  "baseline": {
+    "checkout": "/workspace/sites/sra-lot6b-baseline-063-20261111/.sites-checkout",
+    "commitDeclaredByCoordinator": "805b30297dc1b715dbfd9f1197a9a8ba7b361b90",
+    "gitExecuted": false,
+    "publishedSiteVersion": null,
+    "actualPublishedCommit": null,
+    "nativeVersion": "0.63.0",
+    "nativeDigest": "a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57",
+    "nativeFiles": 318,
+    "manifest": {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/functional-805b/baseline-source-manifest.json",
+      "bytes": 37772,
+      "sha256": "6fd96a8c19867ee6740db8293c14bf241d9929a31e24f391e95d3aee4c6fab66"
+    }
+  },
+  "candidate": {
+    "checkout": "/workspace/sites/sra-lot6b-20261111/.sites-checkout",
+    "nativeVersion": "0.64.0",
+    "nativeDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+    "nativeFiles": 322,
+    "frozenManifest": {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/frozen-candidate/source-manifest.json",
+      "bytes": 38246,
+      "sha256": "2098197ea6c45c06bf42983bc1b47cd2dbe15a49f43b2f647d1884e591649f42"
+    }
+  },
+  "cases": {
+    "source": {
+      "path": "docs/migration/lot3h-evidence/performance/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    "copy": {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/functional-805b/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    "byteIdentical": true
+  },
+  "helpers": [
+    {
+      "path": "docs/migration/lot6b-evidence/record-owner-source-inventory.mjs",
+      "bytes": 13205,
+      "sha256": "f394f733ab6a6bb719e6986797578015bfccd47a1b257113140697371aed3979"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/capture-cost-owner-graphs.mjs",
+      "bytes": 25111,
+      "sha256": "6b567b2bdd39309f951e510e7e6c14fa4aade1f09f08e17961744adfa71315ed"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/qualify-cost-owner-graphs.mjs",
+      "bytes": 42632,
+      "sha256": "bbc882a92a4f30d110a4040c453b3d8437ba55362343e01baf5a07152ed801ab"
+    }
+  ],
+  "qualification": "Untimed functional rehearsal against the coordinator-identified provisional 805b source. Native bytes and 318/322 inventories verified; publication is not inferred. No protocol, contract, readiness or official cost window created."
+}

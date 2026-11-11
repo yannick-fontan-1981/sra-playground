@@ -1,0 +1,17 @@
+{
+  "schema": "logos-engine.lot6b-hypothetical-common-difference-inventory.v1",
+  "status": "diagnostic_only_not_qualification",
+  "startedEpochSeconds": 1794420382.5309505,
+  "finishedEpochSeconds": 1794420382.5345209,
+  "complete": false,
+  "error": "90-second review bound reached",
+  "points": [],
+  "commonNodeComparisons": 0,
+  "commonDeltaComparisons": 0,
+  "hypotheticalCreatedExclusions": 0,
+  "hypotheticalCreatedPaths": {},
+  "permittedOriginSourceDigestDifferences": 0,
+  "otherDifferences": 0,
+  "otherDifferencePaths": [],
+  "hypothesis": "Only fields named created inside encoded values of reasoning:trace:* nodes were skipped hypothetically; source_digest differences at origin are separately allowed by the existing official contract. Official refusal and captures are unchanged. No native imports, no hash-chain validation, no attributed pass; node and delta values are inspected from retained streams only."
+}

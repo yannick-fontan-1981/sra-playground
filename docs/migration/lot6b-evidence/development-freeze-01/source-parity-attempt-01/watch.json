@@ -1,0 +1,10 @@
+{
+  "files": {
+    "scripts/compare-selected-rigid-public-parity.py": "d77b4fbec377668f8673c39cb1401bcbce86cd11323a2ef0671f757df24e8f38",
+    "scripts/export-v6-selected-rigid-reference.py": "90df08227717a2c23aa1550f105935ed8812815622f069941344fa2c91e0fc16",
+    "scripts/verify-selected-rigid-presence.py": "91a1b0ded6d4b303ded74218a714ff042dcb35cf756bbe68b654f1d8003357b5",
+    "docs/migration/lot6b-evidence/development-freeze-01/klot-campaign.json.gz": "2bc1788e3fc0b3494a447de208ba0705f2b8c58c10b34d6d706826720d99c5f6",
+    "docs/migration/lot6b-evidence/development-freeze-01/source-manifest.json": "a74ae8574bd1087f2b463034efbb401784817e8192c7724c297255d5d46ee9ab",
+    "docs/migration/lot6b-evidence/development-freeze-01/source-archive.json": "16c5c2500eb3729b5997ce311e6af1d574030b5df0fd8e6e3f5f278eb0bde483"
+  }
+}

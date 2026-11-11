@@ -1,0 +1,81 @@
+{
+  "schema": "logos-engine.lot5c-published-site101-readback.v1",
+  "recordedAt": "2026-11-11T16:39:49.230683+00:00",
+  "peerTerminalReceipt": {
+    "schema": "logos-engine.followup-final-clean-repeat-publication.v1",
+    "recordedAt": "2026-11-11T15:46:05.531Z",
+    "status": "succeeded",
+    "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+    "siteVersion": 101,
+    "nativeVersion": "0.61.0",
+    "nativeFiles": 306,
+    "nativeDigest": "f8d5097ab63a1c7464479afc5772724ee26578916a4f22a643a5f08f65c27279",
+    "sourceCommit": "d75a36f0a99bf6c301034523a3138a64d2f6e744",
+    "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_48ccb50314448191a19781a9c89eb830",
+    "deploymentId": "appgdep_6af48d2be4908191bfe5398512c01bcb",
+    "deploymentUpdatedAt": "2026-11-11T15:43:52.515923+00:00",
+    "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "archive": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_000000002468820e9fe4411b13b99e20",
+      "content_hash": "sha256:13a7d25939ceb816f8a20db7d398cf6bf3b760785f076f3bc86b07218ad11dbc",
+      "size_bytes": 29992960,
+      "file_count": 75
+    },
+    "access": {
+      "role": "owner",
+      "accessMode": "custom",
+      "revision": 3,
+      "allowedUsers": 1,
+      "allowedGroups": 0,
+      "externalVisitors": 0
+    },
+    "measuredCandidateCommit": "965e2dbe38c1a484a3dc1f5d79e5dcec03d55b03",
+    "cleanRepeatAcceptance": {
+      "path": "docs/migration/lot7b-evidence/followup-recovery/performance-clean-repeat/isolation-revalidation.json",
+      "sha256": "028711ca50c8461f700c43cdaea02d1ac38190a669698621c903314b4b3777b0",
+      "bytes": 722134,
+      "status": "accepted_from_complete_clean_repeat"
+    },
+    "globalResults": {
+      "STCKRelativeIncrease": -0.02924029997654297,
+      "SMLPRelativeIncrease": 9.073896194578176e-05,
+      "acceptedCases": 2,
+      "totalCases": 2
+    },
+    "evidence": {
+      "sourceCheck": "clean-repeat-final-source-check.json",
+      "sourceWorkflow": "clean-repeat-final-workflow.json",
+      "applicationVerification": "clean-repeat-final-application-verification.json",
+      "finalRecheck": "clean-repeat-final-recheck.json"
+    },
+    "qualifications": [
+      "The first complete timing window remains byte-for-byte retained and ineligible because of disclosed isolation incidents. Only the complete new ABBA window supplies the accepted timing evidence.",
+      "All32 measured sessions/400actions and8 warmups/24actions remain; all40 exact work identities and231 arithmetic checks passed. Phase overruns remain diagnostic under the user's separate per-game global rule.",
+      "The final committed source and75 application members are verified unchanged in their native/test/build inputs; the hosting archive content hash matches nativeSite98. No new build or test was needed for these documentation and evidence changes.",
+      "This terminal receipt is recorded after the actual Site101 deployment and readback, separately from its source commit, without anticipating its own publication."
+    ]
+  },
+  "providerReadback": {
+    "observedDuring": [
+      "2026-11-11T16:16:29.052925+00:00",
+      "2026-11-11T16:17:51.407004+00:00"
+    ],
+    "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_48ccb50314448191a19781a9c89eb830",
+    "versionNumber": 101,
+    "sourceCommit": "d75a36f0a99bf6c301034523a3138a64d2f6e744",
+    "deploymentId": "appgdep_6af48d2be4908191bfe5398512c01bcb",
+    "deploymentStatus": "succeeded",
+    "deploymentUpdatedAt": "2026-11-11T15:43:52.515923+00:00",
+    "applicationContentHash": "sha256:13a7d25939ceb816f8a20db7d398cf6bf3b760785f076f3bc86b07218ad11dbc"
+  },
+  "authenticatedFetch": {
+    "status": "fetched_and_verified",
+    "exitCode": 0,
+    "session": 18054,
+    "candidateBeforeFetch": "d54a58f2a03b36027e4da75c8eba12299c08b676",
+    "fetchedMain": "d75a36f0a99bf6c301034523a3138a64d2f6e744",
+    "sourceMergedByFetch": false,
+    "sitePublicationPerformed": false
+  }
+}

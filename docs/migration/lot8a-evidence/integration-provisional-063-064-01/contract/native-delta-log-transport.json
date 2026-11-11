@@ -1,0 +1,20 @@
+{
+  "schema": "logos-engine.v6.development-log-transport.v1",
+  "recordedAt": "2026-11-11T19:25:23.909735+00:00",
+  "status": "verified_byte_exact",
+  "entries": [
+    {
+      "raw": {
+        "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/contract/motif-delta-on-prepared6b.patch",
+        "sha256": "d4f4d65628e9baa93f1a8207f3de4855b7518817f2f5678f2829ca2b4dad10e6",
+        "bytes": 61016
+      },
+      "gzip": {
+        "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/contract/motif-delta-on-prepared6b.patch.gz",
+        "sha256": "6a16322615ca048b972ebe893234b7927e2add1ceec2f55b07b6536197a234e5",
+        "bytes": 16352
+      }
+    }
+  ],
+  "qualification": "Complete stdout, stderr and activity, including failures; no filtering or newline normalization."
+}

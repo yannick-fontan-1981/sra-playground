@@ -321,7 +321,7 @@ test('the revalidation question still requires the exact current frame and avail
   assert.deepEqual(family.state(), retained, 'Neither admission nor refusal acquires a current method');
 });
 
-test('declared source order registers 65 of 76 entries with all six observed-composition branches', async () => {
+test('declared source order registers 67 of 76 entries with all six observed-composition branches', async () => {
   const runtime = await createNativeV6Runtime(declarations, { now: () => 0 });
   const coverage = runtime.snapshot().coverage as R, groups = coverage.sourceGroups as R[];
   const configuration = declarations.strategy.declarations[0]!.configuration as R;
@@ -345,6 +345,7 @@ test('declared source order registers 65 of 76 entries with all six observed-com
     window_question: 'public_window_question',
     facet_example: 'facet_examples',
     observed_addressed_material: 'public_addressed_material',
+    observed_object_binding: 'public_observed_binding',
     observed_composition_services: 'public_occurrence_recall',
     coupled_support_composition: 'public_occurrence_recall', alternating_graph_composition: 'public_occurrence_recall',
     occluded_catalogue_composition: 'public_occurrence_recall', queued_field_composition: 'public_occurrence_recall',
@@ -380,14 +381,14 @@ test('declared source order registers 65 of 76 entries with all six observed-com
       const family = aliases[question] ?? question;
       const explicitEntry = family === 'public_occurrence_recall' || family === 'public_ranked_workshop' || family === 'public_axial_question' || family === 'public_window_question'
         || family === 'public_symbol_transaction' || family === 'feedback_sequences' || family === 'relative_arrangements'
-        || family === 'facet_examples' || family === 'public_addressed_material' || family === 'preview_packing';
+        || family === 'facet_examples' || family === 'public_addressed_material' || family === 'public_observed_binding' || family === 'preview_packing' || family === 'selected_rigid';
       return group.families.includes(family) && (!explicitEntry
         || group.entryPoints?.some((entry: string | null, index: number) => entry === question && group.families[index] === family));
     });
     return [connected.length, declared.length];
   });
-  assert.deepEqual(counts, [[11, 12], [21, 21], [10, 10], [23, 33]]);
-  assert.equal(counts.reduce((sum, count) => sum + count[0]!, 0), 65);
+  assert.deepEqual(counts, [[12, 12], [21, 21], [10, 10], [24, 33]]);
+  assert.equal(counts.reduce((sum, count) => sum + count[0]!, 0), 67);
   assert.deepEqual(Object.keys(coverage.partialEntryPoints), []);
   assert.equal(coverage.observedCompositionBranches.connectedBranches.length, 6);
   assert.deepEqual(coverage.observedCompositionBranches.pendingBranches, []);

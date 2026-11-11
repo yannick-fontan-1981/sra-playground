@@ -1,0 +1,11 @@
+{
+  "file": {
+    "path": "docs/migration/lot5c-evidence/prepare-cost-protocol.py",
+    "bytes": 34082,
+    "sha256": "4de15b6ceada24443592515c6c5efd9af5ac278b2343424555fc8e4bd607a229"
+  },
+  "method": "Python ast.parse(source); no import or execution",
+  "exitCode": 0,
+  "startedAt": "2026-11-11T12:30:13.950274+00:00",
+  "finishedAt": "2026-11-11T12:30:13.955487+00:00"
+}

@@ -1,0 +1,165 @@
+--- immutable-6a/prepare-cost-protocol.py
++++ 6b-reviewed/prepare-cost-protocol.py
+@@ -1,8 +1,8 @@
+ #!/usr/bin/env python3
+-"""Bind the lot6A cost protocol to completed source freezes; run no measurement.
++"""Bind the lot6B cost protocol to completed source freezes; run no measurement.
+ 
+ One-shot use after baseline and final candidate manifests exist:
+-  python -B docs/migration/lot6a-evidence/prepare-cost-protocol.py --finalize \
++  python -B docs/migration/lot6b-evidence/prepare-cost-protocol.py --finalize \
+     --baseline-checkout /absolute/published/checkout --baseline-site-version N \
+     --candidate-version X.Y.Z
+ 
+@@ -15,8 +15,8 @@
+ copies historical input bytes, writes an immutable declaration, and invokes only
+ the unchanged read-only protocol checker. It never starts the cost runner.
+ """
+-# Directly adapted from the immutable published lot5B tool. Exact source bytes,
+-# fingerprints and the complete diff are in recovery/cost-tools-adaptation.json.
++# Directly adapted from the immutable published lot6A tool. Exact source bytes,
++# fingerprints and review diffs are retained in cost-review/attempt-01.
+ # No predecessor measurements are reused.
+ from __future__ import annotations
+ import argparse
+@@ -31,7 +31,7 @@
+ import sys
+ 
+ ROOT = Path(__file__).resolve().parents[3]
+-EVIDENCE = ROOT / 'docs/migration/lot6a-evidence'
++EVIDENCE = ROOT / 'docs/migration/lot6b-evidence'
+ OUT = EVIDENCE / 'performance-integrated'
+ HISTORICAL = ROOT / 'docs/migration/lot3h-evidence/performance'
+ QUOTE = "si le global reste en dessous de 10% d'augmentation alors une phase qui dépasse 10% peut être accepté."
+@@ -86,8 +86,8 @@
+     consolidation_command = shlex.join(['python', '-B', 'scripts/review-native-cost-consolidation.py', relative(OUT)])
+     global_command = shlex.join(['python', '-B', 'scripts/review-native-global-cost-window.py',
+         relative(OUT / 'combined-comparison.json'), relative(OUT / 'declaration.json'),
+-        relative(OUT / 'global-budget-decision.json'), '--lot', '6A', '--native-version', b['nativeVersion']])
+-    return f'''# Lot 6A : protocole de coût de native {b['nativeVersion']}
++        relative(OUT / 'global-budget-decision.json'), '--lot', '6B', '--native-version', b['nativeVersion']])
++    return f'''# Lot 6B : protocole de coût de native {b['nativeVersion']}
+ 
+ Déclaration finalisée le **{stamp}**, après vérification des gels et avant toute fenêtre officielle de ce lot. La préparation n'exécute aucune mesure. Le [reçu de préparation](preparation.json) et la [déclaration](declaration.json) lient les identités réellement vérifiées. La readiness et l'isolation de la machine sont établies séparément par le responsable de livraison.
+ 
+@@ -106,7 +106,7 @@
+ | --- | ---: | ---: | --- | --- |
+ {case_rows}
+ 
+-Le moteur recalcule chaque commande avant de recevoir son retour enregistré. Aucun état appris ni trajet ne préinitialise la décision. Ces parcours mesurent le chemin commun ; ils n'établissent pas la contribution propre de PreviewPacking ni le coût de ses recherches de transport et ne fournissent pas une mesure du moteur de jeu, du réseau de production ou du rendu navigateur.
++Le moteur recalcule chaque commande avant de recevoir son retour enregistré. Aucun état appris ni trajet ne préinitialise la décision. Ces parcours mesurent le chemin commun ; ils n'établissent pas la contribution propre de SelectedRigid ni le coût de ses recherches de transport et ne fournissent pas une mesure du moteur de jeu, du réseau de production ou du rendu navigateur.
+ 
+ ## Effectifs et ordre fixés
+ 
+@@ -184,7 +184,7 @@
+     parser.add_argument('--baseline-site-version', type=int, required=True)
+     parser.add_argument('--candidate-version', required=True)
+     parser.add_argument('--output-directory', type=Path, default=OUT,
+-                        help='New protocol directory inside lot6a-evidence; relative paths start at the checkout root.')
++                        help='New protocol directory inside lot6b-evidence; relative paths start at the checkout root.')
+     parser.add_argument('--candidate-source-directory', type=Path, default=EVIDENCE / 'integrated-final',
+                         help='Frozen candidate directory containing source-manifest.json and source-archive.json.')
+     parser.add_argument('--baseline-manifest', type=Path, default=EVIDENCE / 'baseline/source-manifest.json',
+@@ -194,9 +194,10 @@
+     parser.add_argument('--finalize', action='store_true', help='Finalize only after the retained source manifests and archive exist.')
+     args = parser.parse_args()
+     require(args.finalize, 'This is a one-shot finalizer; pass --finalize after freezing both source identities')
++    require(args.owner_cost_qualification, '6B requires --owner-cost-qualification before any official window')
+     require(args.baseline_site_version > 0, 'A positive published Site version is required')
+     OUT = (ROOT / args.output_directory).resolve()
+-    require(OUT.is_relative_to(EVIDENCE.resolve()), 'Protocol outputs must stay inside lot6a-evidence')
++    require(OUT.is_relative_to(EVIDENCE.resolve()), 'Protocol outputs must stay inside lot6b-evidence')
+     baseline_checkout = args.baseline_checkout.resolve()
+     require(baseline_checkout != ROOT, 'Baseline and candidate must use different checkouts')
+     baseline_path = (ROOT / args.baseline_manifest).resolve()
+@@ -217,6 +218,8 @@
+     baseline_status = git(baseline_checkout, 'status', '--porcelain=v1', '--untracked-files=all', '--', 'src/logos-engine', 'src/runtime')
+     require(not baseline_status, 'The published baseline native source must match its Git commit')
+     baseline_version, candidate_version = native_version(baseline_checkout), native_version(ROOT)
++    require(baseline_version == '0.63.0' and candidate_version == '0.64.0',
++            '6B must compare the actually published 0.63 predecessor with its final 0.64 candidate')
+     require(candidate_version == args.candidate_version, 'Candidate runtime version differs from --candidate-version')
+     require(archive['nativeSourceManifestDigest'] == candidate['digest'], 'Candidate archive binds a different native freeze')
+     require(re.fullmatch(r'[0-9a-f]{40}', archive['baseCommit']), 'Archive must retain its exact Git base commit')
+@@ -251,7 +254,7 @@
+     owner_qualification = None
+     if args.owner_cost_qualification:
+         owner_qualification = {
+-            'schema': 'logos-engine.lot6a-owner-cost-qualification.v1',
++            'schema': 'logos-engine.lot6b-owner-cost-qualification.v1',
+             'contractPath': relative(OUT / 'owner-growth-contract.json'),
+             'tools': {
+                 'consolidator': fingerprint(EVIDENCE / 'consolidate-owner-costs.mjs'),
+@@ -270,7 +273,7 @@
+         'candidateArchiveManifest': fingerprint(archive_path), 'retainedTools': retained,
+         'qualification': 'Local source identities verified. No tests, builds, game, browser, benchmark, readiness or isolation claims are produced.'})
+     write(OUT / 'global-budget-policy.json', {'schema': 'logos-engine.native-global-cost-policy.v1', 'declaredAt': stamp,
+-        'authorization': {'source': 'retained explicit user global-cost instruction, applied unchanged to lot6A before its official window', 'date': '2026-11-11', 'verbatim': QUOTE},
++        'authorization': {'source': 'retained explicit user global-cost instruction, applied unchanged to lot6B before its official window', 'date': '2026-11-11', 'verbatim': QUOTE},
+         'globalStage': 'session_elapsed', 'statistic': 'pooled median of complete measured-session durations per tested case',
+         'caseIds': ['STCK', 'SMLP'], 'relativeIncreaseLimit': 0.1, 'comparison': 'strictly_less_than',
+         'allCasesMustPass': True, 'crossCaseCompensation': False, 'phaseOverrunsMayBeAccepted': True,
+@@ -278,7 +281,7 @@
+         'plannedOrder': ['A1', 'B1', 'B2', 'A2'], 'cohorts': 2, 'sessionsPerCaseVersionCohort': 4,
+         'measuredSessions': 32, 'measuredActions': 400, 'excludedWarmupSessions': 8, 'excludedWarmupActions': 24,
+         'excludedMeasuredSessions': 0, 'excludedOutliers': 0, 'baseline': a, 'candidate': b,
+-        'qualification': 'Declared before a new lot6A official window on exact retained source freezes. Each game must independently remain strictly below +10% complete-session median increase. All measured samples, phase results and available p95 remain. Readiness, isolation and functional evidence are separate.'})
++        'qualification': 'Declared before a new lot6B official window on exact retained source freezes. Each game must independently remain strictly below +10% complete-session median increase. All measured samples, phase results and available p95 remain. Readiness, isolation and functional evidence are separate.'})
+     protocol_text = protocol(stamp, baseline_checkout, a, b, archive, retained, baseline_path, candidate_path, archive_path)
+     if owner_qualification is not None:
+         protocol_text += f'''
+@@ -290,8 +293,8 @@
+ puis la consolidation et la revue complémentaires suivantes portent la décision :
+ 
+ ```sh
+-node docs/migration/lot6a-evidence/consolidate-owner-costs.mjs {relative(OUT / 'owner-growth-contract.json')} {relative(OUT / 'owner-growth-comparison.json')}
+-python -B docs/migration/lot6a-evidence/review-owner-costs.py {relative(OUT / 'owner-growth-contract.json')} {relative(OUT / 'owner-growth-comparison.json')} {relative(OUT / 'owner-growth-review.json')}
++node docs/migration/lot6b-evidence/consolidate-owner-costs.mjs {relative(OUT / 'owner-growth-contract.json')} {relative(OUT / 'owner-growth-comparison.json')}
++python -B docs/migration/lot6b-evidence/review-owner-costs.py {relative(OUT / 'owner-growth-contract.json')} {relative(OUT / 'owner-growth-comparison.json')} {relative(OUT / 'owner-growth-review.json')}
+ ```
+ 
+ Les revues historiques sur `combined-comparison.json` exigent que ce fichier
+@@ -301,7 +304,7 @@
+ précise la capture fidèle du résultat strict et la liaison de chaque sortie.
+ Aucun échec ni succès futur n'est fabriqué pour choisir une branche.
+ 
+-Cette fenêtre ajoute le propriétaire `preview_packing`, sans programme
++Cette fenêtre ajoute le propriétaire `selected_rigid`, sans programme
+ séparé installé par cette famille. L'identité intégrale des compteurs de graphe entre
+ les deux versions n'est donc pas une prémisse de cette analyse complémentaire.
+ Le contrôle historique reste exécuté et son refus, son journal complet et ses
+@@ -316,14 +319,21 @@
+ coût, réalisées sur les deux gels avant cette fenêtre : STCK et SMLP, chacun
+ en forme chauffe puis session complète. La fixture fermée lie leurs graphes,
+ leurs trois inspections terminales pour les sessions complètes, l'attribution
+-des nouveaux nœuds PreviewPacking et les sources correspondantes. Elle distingue
++des nouveaux nœuds SelectedRigid et les sources correspondantes. Elle distingue
+ les nœuds installés et les checkpoints effectivement produits après les propositions
+-négatives. PreviewPacking acquiert uniquement ses retours sélectionnés ; les parcours
++négatives. SelectedRigid acquiert uniquement ses retours sélectionnés ; les parcours
+ STCK/SMLP doivent conserver zéro appel record et zéro fait source supplémentaire pour
+-ce propriétaire. Les seules évolutions de son état admises ici sont les entrées nulles
+-du cache de scène, liées aux propositions réellement capturées dans l'epoch courant.
++ce propriétaire. Son état reste exactement le journal source vide, sans cache de
++scène ni état acquis. Chaque checkpoint est lié à la même instance réellement capturée.
+ Les compteurs viennent des graphes capturés ; aucune formule constante de croissance
+ du graphe n'est supposée.
++
++Les valeurs des nœuds communs des captures fonctionnelles sont comparées exactement.
++Seule la métadonnée `origin.source_digest` possède ici une correspondance explicite
++entre les deux rôles. Une identité calculée présente dans une valeur, ou toute autre
++différence, bloque cette qualification tant qu'une attribution précise n'a pas été
++déclarée et vérifiée avant la mesure. Cette portée 6B plus stricte ne modifie pas la
++qualification historique 6A.
+ 
+ Chaque session future est vérifiée contre les valeurs publiques exactes de sa
+ forme pré-déclarée ; les compteurs de coût ne prétendent pas exposer ses feuilles
+@@ -337,7 +347,7 @@
+ chaque entrée doit être exactement fingerprintée dans le reçu de capture
+ baseline pré-déclaré et se résoudre réellement dans son checkout gelé, lequel
+ doit être celui de la fenêtre. Les lecteurs généraux restent locaux. Cette
+-adaptation d'E/S précède la mesure 6A et ne repose sur aucun reçu de correction
++adaptation d'E/S précède la mesure 6B et ne repose sur aucun reçu de correction
+ post-mesure. Les données brutes ne sont ni normalisées ni réécrites.
+ 
+ | Outil complémentaire | SHA-256 pré-déclaré |

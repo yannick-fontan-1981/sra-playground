@@ -1,0 +1,52 @@
+--- 6b-before-review/finalize-owner-cost-contract.py
++++ 6b-reviewed/finalize-owner-cost-contract.py
+@@ -115,9 +115,10 @@
+             'Need the actual finalized lot6B declaration')
+     require(declaration['status'] == 'declared_before_official_window'
+             and declaration['noOfficialWindowAtDeclaration'] is True, 'Declaration is not premeasurement')
+-    require(isinstance(declaration['baseline']['nativeVersion'], str)
+-            and isinstance(declaration['baseline']['siteVersion'], int) and declaration['baseline']['siteVersion'] > 0,
+-            'The responsible owner must identify the actually published predecessor')
++    require(declaration['baseline']['nativeVersion'] == '0.63.0'
++            and declaration['candidate']['nativeVersion'] == '0.64.0'
++            and type(declaration['baseline']['siteVersion']) is int and declaration['baseline']['siteVersion'] > 0,
++            'The responsible owner must identify the actually published 0.63 predecessor and frozen 0.64 candidate')
+     tools = {
+         'consolidator': fingerprint(EVIDENCE / 'consolidate-owner-costs.mjs'),
+         'reviewer': fingerprint(EVIDENCE / 'review-owner-costs.py'),
+@@ -152,6 +153,7 @@
+             'Existing owner registration order changed')
+     for role in ('baseline', 'candidate'):
+         source = inventory['sourceInventory'][role]
++        require(source['nativeVersion'] == declaration[role]['nativeVersion'], 'Factory inventory version differs from the declaration')
+         require(source['native'] == manifests[role] and source['owners'] == inventory['owners'][role]
+                 and source['programs'] == inventory['programs'][role]
+                 and source['programNodeIds'] == inventory['programNodeIds'][role], 'Factory inventory is not bound to its source freeze')
+@@ -195,6 +197,19 @@
+     require(attribution['checkedCount'] == len(attribution['checks']) > 0
+             and all(row['passed'] is True for row in attribution['checks'])
+             and attribution['nodeAttributions'], 'Graph attribution is incomplete')
++    require(attribution['failures'] == [] and attribution['commonValuePolicy'] == {
++        'comparison': 'exact', 'permittedMetadataDifference': 'origin.source_digest',
++        'identityValueAttributions': [], 'unattributedDifferencesAllowed': 0},
++        '6B common values cannot carry an undeclared identity exception')
++    common = attribution['commonValueCoverage']
++    require(len(common) == len(attribution['points']) and len(common) > 0,
++            'Common-value coverage omits captured graph points')
++    for row, point in zip(common, attribution['points']):
++        require(row == {**{key: point[key] for key in ('case', 'form', 'pointIndex')},
++                        'commonNodesCompared': point['baselineNodeCount'],
++                        'commonDeltasCompared': point['baselineDeltaCount'],
++                        'comparison': 'exact', 'unattributedDifferences': 0},
++                'A common node or delta value is unqualified')
+     coverage = attribution['sourceFactCoverage']
+     require([(row['case'], row['form'], row['pointIndex']) for row in coverage] ==
+             [(row['case'], row['form'], row['pointIndex']) for row in attribution['points']], 'Source-fact coverage omits a captured point')
+@@ -221,6 +236,7 @@
+         require(receipt['schema'] == 'logos-engine.lot6b-owner-cost-functional-capture-receipt.v1'
+                 and receipt['role'] == role and receipt['status'] == 'captured_functional_structure'
+                 and receipt['nativeDigest'] == declaration['nativeDigests'][role]
++                and receipt['nativeVersion'] == declaration[role]['nativeVersion']
+                 and receipt['ownerId'] == OWNER and receipt['acquisitionMode'] == 'selected_only_source_owner_no_passive_returns'
+                 and receipt['report'] == capture['report'] and receipt['generator'] == fixture['captureTool']
+                 and receipt['sessionCount'] == 4 and receipt['actions'] == 31 and not receipt['failures'],

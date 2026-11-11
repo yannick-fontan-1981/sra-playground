@@ -31,6 +31,7 @@ import { WindowQuestion } from './v6-window-question.ts';
 import { RankedWorkshop } from './v6-ranked-workshop.ts';
 import { SymbolTransactions } from './v6-symbol-transactions.ts';
 import { AddressedMaterial, ADDRESSED_NATIVE_SEARCH_BOUNDS } from './v6-addressed-material.ts';
+import { ObservedBinding, OBSERVED_BINDING_NATIVE_SEARCH_BOUNDS } from './v6-observed-binding.ts';
 import { ReductionTransport } from './v6-reduction-transport.ts';
 import { MotifAccess, MOTIF_ACCESS_NATIVE_SEARCH_BOUNDS } from './v6-motif-access.ts';
 import { motifLattice, motifBody } from './v6-motif-access-geometry.ts';
@@ -46,6 +47,8 @@ import { FixedOrigin } from './v6-fixed-origin.ts';
 import { SubsetDiagnosis } from './v6-subset-diagnosis.ts';
 import { NativePreviewPacking } from './v6-preview-packing.ts';
 import type { PreviewPackingProposal } from './v6-preview-packing.ts';
+import { NativeSelectedRigid } from './v6-selected-rigid.ts';
+import type { SelectedRigidProposal } from './v6-selected-rigid.ts';
 import { PeriodicSums } from './v6-periodic-sums.ts';
 import { ReflectedCover } from './v6-reflected-cover.ts';
 import { OrientedCoupling } from './v6-oriented-coupling.ts';
@@ -83,6 +86,9 @@ const NATIVE_CALLER_EXTENSIONS = ['current_epoch_axial_packet_attribution', 'nat
   'window_cooperative_current_execution', 'window_current_guard_execution',
   'window_incomplete_search_diagnostic', 'window_exact_truncated_domain_integer',
   'window_validated_complete_checkpoint', 'window_native_guard_refusal', 'window_json_projection_domain',
+  'single_owner_selected_rigid_selected_acquisition', 'conditional_selected_rigid_checkpoint_restoration',
+  'bounded_selected_rigid_search_with_current_active_deadline', 'selected_rigid_source_stop_before_dispatch',
+  'atomic_selected_rigid_event_validation',
   'single_owner_preview_packing_selected_acquisition', 'conditional_preview_packing_checkpoint_restoration',
   'bounded_preview_packing_calculus_with_current_deadline',
   'native_crossed_prefix_assignment_bounds', 'native_atomic_crossed_prefix_event_validation',
@@ -92,6 +98,10 @@ const NATIVE_CALLER_EXTENSIONS = ['current_epoch_axial_packet_attribution', 'nat
   'bounded_linked_temporal_paths_with_current_deadline', 'single_owner_linked_temporal_passive_acquisition',
   'single_owner_addressed_material_acquisition', 'validated_addressed_material_checkpoint',
   'bounded_addressed_field_and_stock_search_with_current_deadline',
+  'single_owner_observed_binding_with_shared_caller_attention',
+  'validated_object_binding_checkpoint_without_duplicate_attention',
+  'bounded_object_binding_search_retained_as_incomplete',
+  'observed_binding_acquisition_deadline_uses_active_level_budget',
   TEMPORAL_FRAGMENT_NATIVE_INTERRUPTION,
   'atomic_framed_window_response_validation',
   'bounded_reference_population_paths_and_matching_with_current_level_deadline',
@@ -181,7 +191,7 @@ export interface NativeV6RuntimeConfiguration {
   /** Same source policy drives the native common caller's retained components. */
   callerStrategy?: R;
   /** The same registered instances acquire passive evidence in source order. */
-  acquisitionFamilies?: { supports: SupportNavigation; recall: NativeFamily; framed?: FramedTransfer; outline?: OutlineService; inventory?: ObservedInventory; reaction?: OrderedReaction; reactive?: ReactiveContact; recolor?: TopologicalRecolor; axial?: AxialQuestion; window?: WindowQuestion; workshop?: RankedWorkshop; symbols?: SymbolTransactions; morphology?: NativeMorphologyFamily; feedback?: NativeFeedbackFamily; fields?: AddressedMaterial; preparations?: LinkedTemporalPreparation; preview?: NativePreviewPacking };
+  acquisitionFamilies?: { supports: SupportNavigation; recall: NativeFamily; framed?: FramedTransfer; outline?: OutlineService; inventory?: ObservedInventory; reaction?: OrderedReaction; reactive?: ReactiveContact; recolor?: TopologicalRecolor; axial?: AxialQuestion; window?: WindowQuestion; workshop?: RankedWorkshop; symbols?: SymbolTransactions; morphology?: NativeMorphologyFamily; feedback?: NativeFeedbackFamily; fields?: AddressedMaterial; binding?: ObservedBinding; preparations?: LinkedTemporalPreparation; preview?: NativePreviewPacking; selectedRigid?: NativeSelectedRigid };
 }
 
 export class NativeV6Runtime implements NativeV6Backend {
@@ -195,7 +205,7 @@ export class NativeV6Runtime implements NativeV6Backend {
   private authority: NativeCompositionAuthority | null = null;
   private caller: NativeCallerCoordinator | null = null;
   private readonly callerStrategy?: R;
-  private readonly acquisitionFamilies?: { supports: SupportNavigation; recall: NativeFamily; framed?: FramedTransfer; outline?: OutlineService; inventory?: ObservedInventory; reaction?: OrderedReaction; reactive?: ReactiveContact; recolor?: TopologicalRecolor; axial?: AxialQuestion; window?: WindowQuestion; workshop?: RankedWorkshop; symbols?: SymbolTransactions; morphology?: NativeMorphologyFamily; feedback?: NativeFeedbackFamily; fields?: AddressedMaterial; preparations?: LinkedTemporalPreparation; preview?: NativePreviewPacking };
+  private readonly acquisitionFamilies?: { supports: SupportNavigation; recall: NativeFamily; framed?: FramedTransfer; outline?: OutlineService; inventory?: ObservedInventory; reaction?: OrderedReaction; reactive?: ReactiveContact; recolor?: TopologicalRecolor; axial?: AxialQuestion; window?: WindowQuestion; workshop?: RankedWorkshop; symbols?: SymbolTransactions; morphology?: NativeMorphologyFamily; feedback?: NativeFeedbackFamily; fields?: AddressedMaterial; binding?: ObservedBinding; preparations?: LinkedTemporalPreparation; preview?: NativePreviewPacking; selectedRigid?: NativeSelectedRigid };
   private callerAcquisitions = 0;
   private callerBoundaryReplays = 0;
   private sessionId = '';
@@ -257,6 +267,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       ...(this.acquisitionFamilies.morphology ? [this.acquisitionFamilies.morphology] : []),
       ...(this.acquisitionFamilies.feedback ? [this.acquisitionFamilies.feedback] : []),
       ...(this.acquisitionFamilies.fields ? [this.acquisitionFamilies.fields] : []),
+      ...(this.acquisitionFamilies.binding ? [this.acquisitionFamilies.binding] : []),
       ...(this.acquisitionFamilies.preparations ? [this.acquisitionFamilies.preparations] : []),
       ...Object.values(this.acquisitionFamilies.supports.acquiredCompositions)].every(family => this.families.some(registered => registered.id === family.id)))) {
       throw new TypeError('Passive acquisition requires the registered common caller families');
@@ -276,8 +287,18 @@ export class NativeV6Runtime implements NativeV6Backend {
     if (this.acquisitionFamilies?.fields && !this.families.includes(this.acquisitionFamilies.fields)) {
       throw new TypeError('Addressed material passive acquisition requires its single registered owner');
     }
+    if (this.acquisitionFamilies?.binding && !this.families.includes(this.acquisitionFamilies.binding)) {
+      throw new TypeError('Observed binding acquisition requires its single registered owner');
+    }
+    this.acquisitionFamilies?.binding?.enableCallerContext({ attention: () => {
+      if (!this.caller) throw new Error('Observed binding requires the initialized common caller');
+      return this.caller.attention;
+    } });
     if (this.acquisitionFamilies?.preview && !this.families.some(family => rawNativePreviewPacking(family) === this.acquisitionFamilies!.preview)) {
       throw new TypeError('Preview packing retention requires its single registered owner');
+    }
+    if (this.acquisitionFamilies?.selectedRigid && !this.families.some(family => rawNativeSelectedRigid(family) === this.acquisitionFamilies!.selectedRigid)) {
+      throw new TypeError('Selected rigid retention requires its single registered owner');
     }
     this.acquisitionFamilies?.inventory?.enableCallerContext(() => {
       if (!this.caller) throw new Error('Inventory context requires the initialized common caller');
@@ -333,6 +354,10 @@ export class NativeV6Runtime implements NativeV6Backend {
     if (!this.current || !this.budgets) return 0;
     const total = this.budgets.maxActions ?? this.budgets.levelActionCaps.reduce((sum, cap) => sum + cap, 0);
     return Math.max(0, Math.min(total - this.actions, (this.budgets.levelActionCaps[this.current.level - 1] ?? 0) - (this.levelActions.get(this.current.level) ?? 0)));
+  }
+  private remainingLevelActions(): number {
+    if (!this.current || !this.budgets) return 0;
+    return Math.max(0, (this.budgets.levelActionCaps[this.current.level - 1] ?? 0) - (this.levelActions.get(this.current.level) ?? 0));
   }
   private stop(reason: string): void { this.kind = 'stopped'; this.reason = reason; this.note({ kind: 'stop', reason }); }
 
@@ -409,7 +434,12 @@ export class NativeV6Runtime implements NativeV6Backend {
       const { family } = selected; let { proposal } = selected;
       if (proposal.status !== 'proposed') {
         await this.persistFamilies({ workflow: SELECTION_PROGRAM, step: 'selection', statement: 'source.refusal' }, this.authority?.checkpointWrites() ?? []);
-        this.stop(`frontier_${proposal.status ?? 'unknown'}`); return;
+        // SelectedRigid's source caller stops on its current blocking reason
+        // before any lower-priority question can dispatch an unrelated probe.
+        const sourceStop = rawNativeSelectedRigid(family) && proposal.kind === 'native_current_proposal_refusal'
+          && proposal.release_authority === false && proposal.block_unrelated_probe === true
+          && typeof proposal.source_stop_reason === 'string' ? proposal.source_stop_reason : null;
+        this.stop(sourceStop ?? `frontier_${proposal.status ?? 'unknown'}`); return;
       }
       // Source selection still chooses the family/entry. This explicit native
       // facade constrains its material question to the pending parent instead
@@ -508,7 +538,8 @@ export class NativeV6Runtime implements NativeV6Backend {
     const callerRemainingMs = execution.deadlineMs === undefined ? Infinity
       : Math.max(0, execution.deadlineMs - (execution.now ?? (() => performance.now()))());
     return { ...execution, now: this.now,
-      deadlineMs: currentNow + Math.min(remainingActiveMs, callerRemainingMs) };
+      deadlineMs: currentNow + Math.min(remainingActiveMs, callerRemainingMs),
+      remainingLevelActions: this.remainingLevelActions() };
   }
 
   /** Original V6 family-selection SRC tree, interpreted by the V7 TS engine. */
@@ -1178,20 +1209,42 @@ export class NativeV6Runtime implements NativeV6Backend {
   private async seal(execution: NativeExecution): Promise<void> {
     const prefix = this.prefix;
     if (!prefix) throw new Error('No native prefix to seal');
+    // A boundary may already expose the next level. Acquisition still belongs
+    // to the level whose actual primitive(s) formed this sealed prefix.
+    const acquisitionLevel = prefix.witnessed[0]?.first.level ?? this.computeLevel;
+    const acquisitionNow = this.now();
+    const runningActiveMs = this.computeStart !== null && this.computeLevel === acquisitionLevel
+      ? Math.max(0, acquisitionNow - this.computeStart) : 0;
+    const remainingActiveMs = Math.max(0, 360_000 - (this.levelMs.get(acquisitionLevel) ?? 0)
+      - runningActiveMs);
+    const callerRemainingMs = execution.deadlineMs === undefined ? Infinity
+      : Math.max(0, execution.deadlineMs - (execution.now ?? (() => performance.now()))());
+    const acquisitionExecution: NativeExecution = { ...execution, now: this.now,
+      deadlineMs: acquisitionNow + Math.min(remainingActiveMs, callerRemainingMs) };
     const compositionReturns: R[] = [];
+    const nativeAcquisitionsIncomplete: R[] = [];
     const recordSelected = async (transition: WitnessedTransition): Promise<R | null> => {
       this.check(execution);
       const common = this.caller && CALLER_PROVIDERS.includes(prefix.family.id as typeof CALLER_PROVIDERS[number]);
       const selectedSupport = this.acquisitionFamilies && Boolean(prefix.proposal.support_plan);
       const selectedFamily = selectedSupport ? this.acquisitionFamilies!.supports : prefix.family;
-      const record = common ? null : await selectedFamily.record(transition.before, transition.after, transition.command,
-        transition.first.frame_rows, transition.second.frame_rows, prefix.proposal, transition.index, transition.second.frame_packet);
+      // Only the bounded binding owner consumes the native scheduling argument.
+      // Other source adapters retain their exact historical argument lists.
+      const record = common ? null : selectedFamily === this.acquisitionFamilies?.binding
+        ? await selectedFamily.record(transition.before, transition.after, transition.command,
+          transition.first.frame_rows, transition.second.frame_rows, prefix.proposal, transition.index, transition.second.frame_packet, acquisitionExecution)
+        : await selectedFamily.record(transition.before, transition.after, transition.command,
+          transition.first.frame_rows, transition.second.frame_rows, prefix.proposal, transition.index, transition.second.frame_packet);
       // Preserve the former detached-record validation, but release that copy
       // immediately: this collection was read only for its cumulative count.
       freeze(structuredClone(record));
       this.acquiredRecordCount += 1;
-      if (record && this.caller && this.authority) this.retainSelectedAcquisition(selectedFamily, record, transition);
-      if (this.acquisitionFamilies) await this.acquirePassiveFamilies(transition, prefix.proposal, Boolean(selectedSupport), prefix.family.id);
+      const selectedIncomplete = record?.native_acquisition_incomplete === true;
+      if (selectedIncomplete) nativeAcquisitionsIncomplete.push(this.acquisitionIncompletionReceipt(selectedFamily, 'selected', transition,
+        record.native_acquisition_refusal as NativeRecord));
+      if (!selectedIncomplete && record && this.caller && this.authority) this.retainSelectedAcquisition(selectedFamily, record, transition);
+      if (this.acquisitionFamilies) nativeAcquisitionsIncomplete.push(...await this.acquirePassiveFamilies(transition,
+        prefix.proposal, Boolean(selectedSupport), prefix.family.id, acquisitionExecution, selectedIncomplete ? selectedFamily.id : null));
       const parentFamily = this.typedMaterialParentFamily();
       if (this.caller && parentFamily) {
         const result = recordTypedMaterialParent(this.caller.attention, parentFamily.compositionDependencyState!(), prefix.proposal, transition, record);
@@ -1226,7 +1279,8 @@ export class NativeV6Runtime implements NativeV6Backend {
     const parent = this.caller?.attention.composition;
     const parentStop = parent?.owner === TYPED_MATERIAL_COMPOSITION_OWNER && parent.status === 'pending' && parent.binding?.phase === 'suspended'
       ? `composition_dependency_${parent.binding.suspension_reason}` : null;
-    const stopReason = officialStop ? this.budgetReason() : sourceStop ?? parentStop ?? this.budgetReason();
+    const incompleteStop = nativeAcquisitionsIncomplete.length ? 'native_acquisition_incomplete' : null;
+    const stopReason = officialStop ? this.budgetReason() : sourceStop ?? incompleteStop ?? parentStop ?? this.budgetReason();
     let transfer: R | null = null;
     if (this.caller) {
       this.callerAcquisitions += prefix.witnessed.length;
@@ -1234,7 +1288,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       const boundary = last.after.level_epoch !== last.before.level_epoch || last.after.levels_completed > last.before.levels_completed || ['WIN', 'GAME_OVER'].includes(last.after.state);
       // The source stops immediately after the requested score / GAME_OVER.
       // Replay is for continuation into the next natural level only.
-      if (boundary && !sourceStop && last.after.state !== 'GAME_OVER' && last.after.levels_completed < this.budgets!.targetLevels) {
+      if (boundary && !sourceStop && !incompleteStop && last.after.state !== 'GAME_OVER' && last.after.levels_completed < this.budgets!.targetLevels) {
         transfer = await this.caller.replayBoundary(last.after); this.callerBoundaryReplays += 1;
       }
       if (stopReason) this.caller.close(last.after, stopReason);
@@ -1261,6 +1315,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       value: { decision_revision: prefix.revision, proposal: prefix.proposal, selection: this.selectionReceipt,
         ...(prefix.nativeBindings.length ? { native_bindings: prefix.nativeBindings } : {}),
         ...(compositionReturns.length ? { composition_dependency_returns: compositionReturns } : {}),
+        ...(nativeAcquisitionsIncomplete.length ? { native_acquisitions_incomplete: nativeAcquisitionsIncomplete } : {}),
         composed_reconciliation: composed, caller_transfer: transfer,
         transitions: prefix.witnessed.map(transition => ({ command: transition.command,
           before: transition.before.observation_ref, after: transition.after.observation_ref, outcome: transition.outcome })) },
@@ -1279,7 +1334,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       public_framed_transfer: 'framed_transfer_event', public_outline_service: 'outline_service_event',
       public_observed_inventory: 'observed_inventory_event', public_ordered_reaction: 'reaction_event', public_reactive_contact: 'reactive_event',
       public_topological_recolor: 'topological_recolor_event', public_axial_question: 'axial_question_event', public_window_question: 'window_question_event', public_ranked_workshop: 'ranked_workshop_event',
-      public_symbol_transaction: 'symbol_transaction_event', public_addressed_material: 'addressed_material_event', preview_packing: 'preview_packing_event', morphology: 'morphology_event' };
+      public_symbol_transaction: 'symbol_transaction_event', public_addressed_material: 'addressed_material_event', public_observed_binding: 'object_binding_event', preview_packing: 'preview_packing_event', selected_rigid: 'selected_rigid_event', morphology: 'morphology_event' };
     const key = singleEventKeys[family.id];
     if (key) memory.put(EPISODE, `${key}:${transition.before.revision}`, record.events[0] ?? null, after.observation_ref, after.revision);
     // LinkedPreparation.record returns its full list, including an empty list.
@@ -1321,9 +1376,25 @@ export class NativeV6Runtime implements NativeV6Backend {
   }
 
   /** Source common_frontier_runtime.py acquisitions, once per sealed transition. */
-  private async acquirePassiveFamilies(transition: WitnessedTransition, proposal: NativeProposal, selectedSupport: boolean, selectedId: string): Promise<void> {
-    const { supports, recall, framed, outline, inventory, reaction, reactive, recolor, axial, window, workshop, symbols, morphology, feedback, fields, preparations, preview } = this.acquisitionFamilies!, { before, after, command, first, second, index } = transition;
+  private acquisitionIncompletionReceipt(family: NativeFamily, mode: 'selected' | 'passive',
+    transition: WitnessedTransition, refusal: NativeRecord | null | undefined): R {
+    const after = transition.after, frontier = refusal?.frontier as R | undefined;
+    if (!refusal || refusal.status !== 'unknown' || refusal.observation_ref !== after.observation_ref
+      || refusal.level_epoch !== after.level_epoch || refusal.frame_hash !== after.frame_hash
+      || refusal.release_authority !== false || frontier?.complete !== false) {
+      throw new TypeError('An incomplete acquisition must bind its actual return without action authority');
+    }
+    const receipt = { family: family.id, mode, before: transition.before.observation_ref,
+      after: after.observation_ref, command: structuredClone(transition.command), refusal: structuredClone(refusal) };
+    this.note({ kind: 'native_acquisition_incomplete', ...receipt });
+    return receipt;
+  }
+
+  private async acquirePassiveFamilies(transition: WitnessedTransition, proposal: NativeProposal, selectedSupport: boolean,
+    selectedId: string, execution: NativeExecution, incompleteSelectedId: string | null): Promise<R[]> {
+    const { supports, recall, framed, outline, inventory, reaction, reactive, recolor, axial, window, workshop, symbols, morphology, feedback, fields, binding, preparations, preview, selectedRigid } = this.acquisitionFamilies!, { before, after, command, first, second, index } = transition;
     const memory = this.authority!.memory;
+    const incomplete: R[] = [];
     if (!selectedSupport) {
       const result = await supports.record(before, after, command, first.frame_rows, second.frame_rows, undefined, undefined, second.frame_packet);
       if (result.events.length) memory.put(EPISODE, `support_navigation_event:${before.revision}`, result, after.observation_ref, after.revision);
@@ -1363,6 +1434,12 @@ export class NativeV6Runtime implements NativeV6Backend {
     if (workshop && selectedId !== workshop.id) {
       const result = workshop.recordSource(before, after, command, first.frame_rows, second.frame_rows);
       if (result) memory.put(EPISODE, `ranked_workshop_event:${before.revision}`, result, after.observation_ref, after.revision);
+    }
+    // Source order: retained rigid events are checkpointed before Preview,
+    // including after foreign actions. This does not acquire a passive return.
+    if (selectedRigid?.hasRetainedEvents()) {
+      memory.put(EPISODE, 'selected_rigid_state', selectedRigid.sourceState(), after.observation_ref, after.revision);
+      selectedRigid.restoreSourceState(memory.get(EPISODE, 'selected_rigid_state').value);
     }
     // Preview has no passive record path. The original caller nevertheless
     // retains and actually restores its acquired model after every action.
@@ -1497,6 +1574,26 @@ export class NativeV6Runtime implements NativeV6Backend {
       memory.put(EPISODE, 'observed_ranked_workshop_state', state, after.observation_ref, after.revision);
       workshop.restore(memory.get(EPISODE, 'observed_ranked_workshop_state').value);
     }
+    // Original order: Workshop state, ObservedBinding, then Cargo (pending)
+    // and Feedback. Foreign returns have no selected binding proposal/index.
+    if (binding) {
+      let acquisitionIncomplete = incompleteSelectedId === binding.id;
+      if (selectedId !== binding.id) {
+        const result = await binding.recordSource(before, after, command, first.frame_rows, second.frame_rows, undefined, 0, execution);
+        const refusal = binding.currentProposalRefusal(after);
+        if (refusal) {
+          acquisitionIncomplete = true;
+          incomplete.push(this.acquisitionIncompletionReceipt(binding, 'passive', transition, refusal));
+        } else if (result) memory.put(EPISODE, `object_binding_event:${before.revision}`, result, after.observation_ref, after.revision);
+      }
+      if (!acquisitionIncomplete) {
+        const state = binding.state();
+        if (state.core || state.methods.length) {
+          memory.put(EPISODE, 'observed_object_binding_state', state, after.observation_ref, after.revision);
+          binding.restore(memory.get(EPISODE, 'observed_object_binding_state').value);
+        }
+      }
+    }
     // Feedback owns its ordered interface independently of SharedSeries. The
     // source passively observes foreign actions at this position, but selected
     // Feedback returns have already been acquired above and must not be replayed.
@@ -1517,6 +1614,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       const departures = await morphology.observeDepartures(before, after, first.frame_rows, second.frame_rows, command);
       if (departures.length) memory.put(EPISODE, `morphology_departure:${before.revision}`, departures, after.observation_ref, after.revision);
     }
+    return incomplete;
   }
 
   async resume(execution: NativeExecution): Promise<NativeRuntimeYield> {
@@ -1885,6 +1983,55 @@ export function previewPackingFamily(preview = new NativePreviewPacking()): Nati
   return family;
 }
 
+const selectedRigidOwners = new WeakMap<NativeFamily, NativeSelectedRigid>();
+
+/** Diagnostic access to the same owner that selects, acquires and restores. */
+export function rawNativeSelectedRigid(family: NativeFamily): NativeSelectedRigid | null {
+  return selectedRigidOwners.get(family) ?? null;
+}
+
+/** Source refusals retain their exact stop reason without action authority. */
+export function selectedRigidFamily(rigid = new NativeSelectedRigid()): NativeFamily {
+  let refusal: R | null = null;
+  const sourceProposal = (value: NativeProposal) => value as unknown as SelectedRigidProposal;
+  const offer: NativeFamily['propose'] = async (observation, rows, inputs, remaining, execution) => {
+    refusal = null;
+    rigid.setCurrentBudget(execution, execution?.remainingLevelActions ?? remaining);
+    const value = await rigid.propose(observation, rows, inputs, remaining, execution);
+    if (value?.status === 'unknown' && value.block_unrelated_probe === true) {
+      refusal = { ...structuredClone(value), source_stop_reason: value.reason,
+        observation_ref: observation.observation_ref, level_epoch: observation.level_epoch,
+        frame_hash: observation.frame_hash, release_authority: false };
+      return null;
+    }
+    return value as unknown as NativeProposal | null;
+  };
+  const family: NativeFamily = {
+    id: rigid.id,
+    propose: offer,
+    proposeInSubquestion: (group, entry, ...args) => group === 'goal_access' && entry === 'selected_rigid' ? offer(...args) : null,
+    currentProposalRefusal: observation => refusal?.observation_ref === observation.observation_ref
+      && refusal.level_epoch === observation.level_epoch && refusal.frame_hash === observation.frame_hash
+      ? structuredClone(refusal) : null,
+    bind: (value, domain) => rigid.bind(sourceProposal(value), domain),
+    before: (value, index, publicPacket, observation, execution) => {
+      // Use the common caller's current clock conversion and tighter deadline.
+      // A paused prefix retains its source evidence, not an old wall-clock limit.
+      if (execution !== undefined) rigid.setCurrentBudget(execution, execution.remainingLevelActions ?? null);
+      return rigid.before(sourceProposal(value), index, publicPacket, observation);
+    },
+    after: (value, index, before, after, firstRows, secondRows) => rigid.after(sourceProposal(value), index, before, after, firstRows, secondRows),
+    record: async (before, after, command, firstRows, secondRows, value, index, frames) => {
+      const result = await rigid.record(before, after, command, firstRows, secondRows, sourceProposal(value), index, frames);
+      return { events: result == null ? [] : [result] };
+    },
+    state: () => rigid.state(), restore: state => rigid.restore(state),
+    nativeState: () => rigid.nativeState(), restoreNative: state => rigid.restoreNative(state),
+  };
+  selectedRigidOwners.set(family, rigid);
+  return family;
+}
+
 /** FacetExamples observes only its selected experiment. A null proposal lets
  * the remaining source program-construction providers continue. */
 export function facetExampleFamily(facets = new NativeFacetExamples()): NativeFamily {
@@ -1938,6 +2085,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   const arrangements = relativeArrangementFamily();
   const facets = facetExampleFamily();
   const previewOwner = new NativePreviewPacking(), preview = previewPackingFamily(previewOwner);
+  const selectedRigidOwner = new NativeSelectedRigid(configuration.selected_rigid_question), selectedRigid = selectedRigidFamily(selectedRigidOwner);
   const windows = subquestionFamily(fieldFamily(new WindowConstraints()), 'field_subquestion', 'multiscale_constraints');
   const symmetricSource = fieldFamily(new SymmetricField(symmetry));
   // Original strategy.py excludes a uniquely observed motif-control interface
@@ -2002,6 +2150,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     configuration.window_constraints as R, configuration.window_constraints as R);
   const policy = loaded.common as R;
   const fields = new AddressedMaterial(policy.addressed_field, { boundedSearch: ADDRESSED_NATIVE_SEARCH_BOUNDS });
+  const binding = new ObservedBinding({ boundedSearch: OBSERVED_BINDING_NATIVE_SEARCH_BOUNDS });
   const preparations = new LinkedTemporalPreparation(policy.linked_contact,
     { boundedSearch: LINKED_TEMPORAL_NATIVE_SEARCH_BOUNDS });
   const linkedTemporal = subquestionFamily(preparations, 'program_subquestion', 'linked_temporal_preparation');
@@ -2021,7 +2170,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     animated_contact: new AnimatedContact(policy.animated_contact_question),
   };
   const supports = new SupportNavigation(supportChildren, policy);
-  const families: NativeFamily[] = [windows, symmetric, orbit, containment, surface, code, band, framed, outline, inventory, reactive, reaction, recolor, axial, window, workshop, symbols, fields, morphology, reduction, motifs, recall, supports, feedback, arrangements, facets, preview, linkedTemporal, ...Object.values(supportChildren), ...(visual ? [visual] : []), ...Object.values(interfaces)];
+  const families: NativeFamily[] = [windows, symmetric, orbit, containment, surface, code, band, framed, outline, inventory, reactive, reaction, recolor, axial, window, workshop, symbols, fields, binding, morphology, reduction, motifs, recall, supports, feedback, arrangements, facets, preview, selectedRigid, linkedTemporal, ...Object.values(supportChildren), ...(visual ? [visual] : []), ...Object.values(interfaces)];
   const registeredSubquestions = (order: readonly string[], registered: Record<string, NativeFamily>): string[] =>
     order.flatMap(question => registered[question] ? [registered[question].id] : []);
   // The cell, occurrence and program source entries share one acquired journal, but
@@ -2047,6 +2196,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
       if (question === 'observed_support_access') return [supports.id];
       if (question === 'observed_feedback_sequence') return [feedback.id];
       if (question === 'preview_packing') return [preview.id];
+      if (question === 'selected_rigid') return [selectedRigid.id];
       return supportChildren[question] ? [supportChildren[question]!.id] : [];
     }),
     window_constraints: [...windowEntries.map(question => windowProviders[question]!.id), symmetric.id],
@@ -2059,7 +2209,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
         conserved_band_transfer: band.id, supported_ternary_reduction: reduction.id, motif_conditioned_access: motifs.id, ordered_support_transfer: ordered.id,
         observed_framed_transfer: framed.id, observed_outline_service: outline.id, observed_inventory_composition: inventory.id,
         reactive_contact_continuation: reactive.id, reactive_contact: reactive.id, ordered_reaction: reaction.id, topological_recolor: recolor.id,
-        axial_question: axial.id, window_question: window.id, observed_ranked_workshop: workshop.id, observed_symbol_transaction: symbols.id, observed_addressed_material: fields.id };
+        axial_question: axial.id, window_question: window.id, observed_ranked_workshop: workshop.id, observed_symbol_transaction: symbols.id, observed_addressed_material: fields.id, observed_object_binding: binding.id };
       return registered[question] ? [registered[question]!] : supportChildren[question] ? [supportChildren[question]!.id] : [];
     }),
     returned_branch_contrast: ['returned_branch_contrast'],
@@ -2071,11 +2221,11 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   };
   const goalEntryPoints = (configuration.goal_access_subquestions as string[]).flatMap<string | null>(question => {
     if (['observed_composition_services', 'coupled_support_composition', 'alternating_graph_composition'].includes(question)) return [question];
-    if (question === 'observed_feedback_sequence' || question === 'preview_packing') return [question];
+    if (question === 'observed_feedback_sequence' || question === 'preview_packing' || question === 'selected_rigid') return [question];
     return ['scored_relation_access', 'observed_support_access'].includes(question) || supportChildren[question] ? [null] : [];
   });
   const materialEntryPoints = configuration.factored_material_return.ordered_subquestions.flatMap<string | null>(question => {
-    if (['observed_framed_transfer', 'observed_inventory_composition', 'reactive_contact_continuation', 'reactive_contact', 'ordered_reaction', 'topological_recolor', 'axial_question', 'window_question', 'observed_ranked_workshop', 'observed_symbol_transaction', 'observed_addressed_material'].includes(question)) return [question];
+    if (['observed_framed_transfer', 'observed_inventory_composition', 'reactive_contact_continuation', 'reactive_contact', 'ordered_reaction', 'topological_recolor', 'axial_question', 'window_question', 'observed_ranked_workshop', 'observed_symbol_transaction', 'observed_addressed_material', 'observed_object_binding'].includes(question)) return [question];
     return ['factored_material_return', 'conditional_transit', 'motif_conditioned_access', 'conserved_band_transfer', 'supported_ternary_reduction', 'ordered_support_transfer', 'observed_outline_service'].includes(question)
       || supportChildren[question] ? [null] : [];
   });
@@ -2095,6 +2245,6 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     fullV6Parity: false };
   const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
   const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
-  return new NativeV6Runtime({ sourceDigest, families, groups, authorityPolicy: loaded.common, callerStrategy: configuration, acquisitionFamilies: { supports, recall, framed, outline: outlineOwner, inventory, reaction, reactive, recolor, axial, window, workshop, symbols, morphology, feedback, fields, preparations, preview: previewOwner },
+  return new NativeV6Runtime({ sourceDigest, families, groups, authorityPolicy: loaded.common, callerStrategy: configuration, acquisitionFamilies: { supports, recall, framed, outline: outlineOwner, inventory, reaction, reactive, recolor, axial, window, workshop, symbols, morphology, feedback, fields, binding, preparations, preview: previewOwner, selectedRigid: selectedRigidOwner },
     maxPointOccurrences: loaded.common.input_domain.max_point_occurrences, ...(options.now ? { now: options.now } : {}) });
 }

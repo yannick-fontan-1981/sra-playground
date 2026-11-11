@@ -1,0 +1,45 @@
+{
+  "schema": "logos-engine.lot5c.recovery.v1",
+  "started_at": "2026-11-11T11:51:55.614672+00:00",
+  "base_site_version": 95,
+  "base_native_version": "0.58.0",
+  "base_commit": "3a70463039768f7114edae7d94d7dd33b7f36aa8",
+  "checkout": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout",
+  "previous_checkout": "/workspace/sites/sra-lot5c-20261111/.sites-checkout",
+  "previous_checkout_found": false,
+  "recovery_kind": "reconstruction_from_immutable_original_and_retained_contract_context",
+  "prior_test_receipts_recovered": false,
+  "prior_cgwl_public_journal_recovered": false,
+  "prior_results_are_historical_only": true,
+  "original_commit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "original_file_count_expected": 1786,
+  "no_game_engine_or_solution_inspection": true,
+  "historical_case_clocks_from_conversation": {
+    "CGWL": {
+      "charged_seconds": 1177.604336,
+      "remaining_seconds": 1222.395664,
+      "no_new_live_planned": true
+    },
+    "WEAV": {
+      "charged_seconds": 2401.227841,
+      "budget_exhausted": true,
+      "no_live_or_reset": true
+    }
+  },
+  "cost_rule": {
+    "metric": "pooled_complete_session_median",
+    "maximum_increase_exclusive_percent": 10,
+    "per_game": [
+      "STCK",
+      "SMLP"
+    ],
+    "phase_over_10_allowed_if_global_passes": true
+  },
+  "reserved_native_version": "0.63.0",
+  "other_lanes_prior_unpublished_queue": [
+    "6A0.60",
+    "7followup0.61",
+    "10B0.62"
+  ],
+  "other_lanes_integration_requires_actual_published_source": true
+}

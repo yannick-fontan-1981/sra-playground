@@ -1,0 +1,108 @@
+--- lot6a/check-cost-static-inputs.py
++++ lot6b-before-review/check-cost-static-inputs.py
+@@ -1,7 +1,7 @@
+ #!/usr/bin/env python3
+-"""Inspect finalized lot 6A cost inputs without starting measured work.
+-
+-The default receipt belongs to the future integrated 6A window. A separate
++"""Inspect finalized lot 6B cost inputs without starting measured work.
++
++The default receipt belongs to the future integrated 6B window. A separate
+ declaration may be selected with --performance-directory; existing receipts
+ are never replaced. The declared baseline capture bounds external attribution
+ paths before measurement; no post-measurement I/O correction is assumed.
+@@ -22,7 +22,7 @@
+ import tarfile
+ 
+ ROOT = Path(__file__).resolve().parents[3]
+-EVIDENCE = ROOT / 'docs/migration/lot6a-evidence'
++EVIDENCE = ROOT / 'docs/migration/lot6b-evidence'
+ HISTORY = ROOT / 'docs/migration/lot3h-evidence/performance'
+ EXPECTED_TOOLS = [
+     'scripts/run-native-cost-window.py', 'scripts/measure-native-loop-costs.mjs',
+@@ -57,11 +57,11 @@
+ def main():
+     parser = argparse.ArgumentParser(description=__doc__)
+     parser.add_argument('--performance-directory', type=Path, default=EVIDENCE / 'performance-integrated',
+-                        help='Finalized declaration directory inside the lot 6A evidence tree.')
++                        help='Finalized declaration directory inside the lot 6B evidence tree.')
+     args = parser.parse_args()
+     perf = args.performance_directory.resolve()
+     if not perf.is_relative_to(EVIDENCE.resolve()):
+-        raise ValueError('The static receipt must stay inside lot6a-evidence')
++        raise ValueError('The static receipt must stay inside lot6b-evidence')
+     output_path = perf / 'static-preflight.json'
+     if output_path.exists():
+         raise FileExistsError(output_path)
+@@ -230,19 +230,19 @@
+         contract = read(contract_path)
+         owner_contract_record, owner_tools = fp(contract_path), qualification['tools']
+         check('owner_contract_declared_inside_window', contract_path.parent == perf
+-              and qualification['schema'] == 'logos-engine.lot6a-owner-cost-qualification.v1'
+-              and contract['schema'] == 'logos-engine.lot6a-owner-cost-contract.v2'
+-              and contract['lot'] == '6A' and contract['performanceDirectory'] == relative_perf.as_posix()
++              and qualification['schema'] == 'logos-engine.lot6b-owner-cost-qualification.v1'
++              and contract['schema'] == 'logos-engine.lot6b-owner-cost-contract.v2'
++              and contract['lot'] == '6B' and contract['performanceDirectory'] == relative_perf.as_posix()
+               and contract['declaration'] == fp(perf / 'declaration.json')
+               and contract['tools'] == owner_tools)
+         check('owner_tools_unchanged', set(owner_tools) == {'consolidator', 'reviewer'}
+-              and owner_tools['consolidator']['path'] == 'docs/migration/lot6a-evidence/consolidate-owner-costs.mjs'
+-              and owner_tools['reviewer']['path'] == 'docs/migration/lot6a-evidence/review-owner-costs.py'
++              and owner_tools['consolidator']['path'] == 'docs/migration/lot6b-evidence/consolidate-owner-costs.mjs'
++              and owner_tools['reviewer']['path'] == 'docs/migration/lot6b-evidence/review-owner-costs.py'
+               and all(fp(ROOT / item['path']) == item for item in owner_tools.values()))
+         expectation = contract['structuralExpectation']
+         check('owner_structural_rule_fixed', expectation == {
+-            'ownerId': 'preview_packing', 'programId': None,
+-            'installedNodeIds': ['family_state:preview_packing', 'family_activation:preview_packing'],
++            'ownerId': 'selected_rigid', 'programId': None,
++            'installedNodeIds': ['family_state:selected_rigid', 'family_activation:selected_rigid'],
+             'allowedPaths': ['observations[*].nodeCount', 'inspection[*].graphNodes',
+                              'final.nodeCount', 'final.graphRevision'],
+             'mode': 'predeclared_functional_fixture',
+@@ -256,7 +256,7 @@
+         baseline_whitelist = {item['path']: item for item in baseline_external}
+         check('owner_baseline_capture_io_predeclared',
+               fp(ROOT / baseline_capture_record['path']) == baseline_capture_record
+-              and baseline_capture['schema'] == 'logos-engine.lot6a-owner-cost-functional-capture-receipt.v1'
++              and baseline_capture['schema'] == 'logos-engine.lot6b-owner-cost-functional-capture-receipt.v1'
+               and baseline_capture['status'] == 'captured_functional_structure'
+               and baseline_capture['role'] == 'baseline'
+               and Path(baseline_capture['checkout']).is_absolute()
+@@ -302,8 +302,8 @@
+         check('functional_structure_fingerprints',
+               all(structural_fingerprint(item) == item for item in structural_records))
+         check('functional_structure_identity',
+-              fixture['schema'] == 'logos-engine.lot6a-owner-cost-structural-fixture.v1'
+-              and attribution['schema'] == 'logos-engine.lot6a-owner-cost-structural-attribution.v1'
++              fixture['schema'] == 'logos-engine.lot6b-owner-cost-structural-fixture.v1'
++              and attribution['schema'] == 'logos-engine.lot6b-owner-cost-structural-attribution.v1'
+               and fixture['status'] == attribution['status'] == 'qualified_functional_structure'
+               and fixture['nativeDigests'] == attribution['nativeDigests'] == declared['nativeDigests']
+               and fixture['cases'] == declared['cases']
+@@ -318,12 +318,12 @@
+               <= datetime.fromisoformat(contract['declaredAt']))
+         source_inventory = read(ROOT / contract['ownerInventory']['path'])
+         check('owner_source_inventory_bound', fp(ROOT / contract['ownerInventory']['path']) == contract['ownerInventory']
+-              and source_inventory['schema'] == 'logos-engine.lot6a-owner-cost-source-inventory.v1'
++              and source_inventory['schema'] == 'logos-engine.lot6b-owner-cost-source-inventory.v1'
+               and source_inventory['nativeDigests'] == declared['nativeDigests']
+               and source_inventory['programScope'] == 'family-installed programs'
+-              and sorted(item['path'] for item in contract['sourceEvidence']) == sorted(['src/logos-engine/v6-native-runtime.ts', 'src/logos-engine/v6-preview-packing.ts', 'src/logos-engine/v6-preview-packing-types.ts', 'src/logos-engine/v6-preview-packing-geometry.ts', 'src/logos-engine/v6-preview-packing-calculus.ts', 'src/logos-engine/v6-knowledge-store.ts', 'src/logos-engine/kernel.ts'])
++              and sorted(item['path'] for item in contract['sourceEvidence']) == sorted(['src/logos-engine/v6-native-runtime.ts', 'src/logos-engine/v6-selected-rigid.ts', 'src/logos-engine/v6-selected-rigid-types.ts', 'src/logos-engine/v6-selected-rigid-geometry.ts', 'src/logos-engine/v6-selected-rigid-search.ts', 'src/logos-engine/v6-knowledge-store.ts', 'src/logos-engine/kernel.ts'])
+               and all(fp(ROOT / item['path']) == item for item in contract['sourceEvidence']))
+-        for key, addition in [('owners', 'preview_packing'), ('programs', None)]:
++        for key, addition in [('owners', 'selected_rigid'), ('programs', None)]:
+             a, b = source_inventory[key]['baseline'], source_inventory[key]['candidate']
+             check('owner_inventory_exact_addition_' + key,
+                   len(a) == len(set(a)) and len(b) == len(set(b))
+@@ -348,7 +348,7 @@
+         'adaptedFrom': fp(ROOT / 'docs/migration/lot5b-evidence/check-cost-static-inputs.py'),
+         'historicalOrigin': fp(ROOT / 'docs/migration/lot3h-evidence/check-cost-static-inputs.py'),
+         'candidateFreeze': fp(candidate_manifest_path),
+-        'preparationTool': fp(ROOT / 'docs/migration/lot6a-evidence/prepare-cost-protocol.py'),
++        'preparationTool': fp(ROOT / 'docs/migration/lot6b-evidence/prepare-cost-protocol.py'),
+         'supersession': fp(superseded) if superseded.is_file() else None,
+         'qualification': 'Static inventory, archive, fingerprint, AST and dependency inspection only. '
+             'The retained protocol checker performs no measurement. No runtime worker, game, replay, test or build was started. '
