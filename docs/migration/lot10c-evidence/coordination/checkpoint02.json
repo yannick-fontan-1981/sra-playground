@@ -1,0 +1,12 @@
+{
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "ref": "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111",
+  "head": "649789e7ff519396bec6ad2b6e4572fb6ee6765f",
+  "remote": "649789e7ff519396bec6ad2b6e4572fb6ee6765f",
+  "remoteVerified": true,
+  "sourceOnly": true,
+  "published": false,
+  "activeRegressionEvidenceExcluded": 27,
+  "workingTreeQualification": "Only declared untracked running regression outputs remain outside this source checkpoint",
+  "verifiedAt": "2026-11-11T18:13:10.373Z"
+}

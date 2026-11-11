@@ -1,0 +1,215 @@
+{
+  "schema": "logos-engine.lot10c.development-case-summary.v1",
+  "recordedAt": "2026-11-11T18:28:27.754911+00:00",
+  "status": "development_target_and_component_parity_passed",
+  "game": "RECR",
+  "nativeDigest": "bb7d62b5823d76ae7a5ecd452cb622ebb04f2b85b20fb0d2f9a5c35a1535b361",
+  "nativeFiles": 315,
+  "campaignFinal": {
+    "actions": 17,
+    "activeSeconds": 41.507245301000026,
+    "caller": {
+      "acquiredTransitions": 17,
+      "boundaryReplays": 2,
+      "components": {
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 1
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 19
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 2
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 19
+        },
+        "goal": {
+          "id": "caller:goal",
+          "revision": 18
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 14
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 18
+        }
+      },
+      "enabled": true,
+      "frontierDeltas": 36,
+      "goalEvents": 3,
+      "morphologyProvider": {
+        "attention_owner": "caller:attention",
+        "connected_methods": [
+          "retained_station_method",
+          "entry_access_return",
+          "entry_rebind",
+          "entry_probe",
+          "managed_capacity",
+          "target_extension_continuation"
+        ],
+        "current_decision_scope": "one_source_selection_cycle",
+        "entry_return_owner": "family_state:morphology.entry_access_return",
+        "forecast_owner": "family_state:public_observed_inventory",
+        "method_owner": "caller:counters.targetMethod",
+        "motion_owner": "caller:goal",
+        "pending": [
+          "complete_original_caller_parity_and_domain_closure"
+        ],
+        "state_owner": "family_state:morphology",
+        "status": "partial_current_measurements_control_attention_and_methods"
+      },
+      "pendingSourceProviders": [
+        "morphology"
+      ],
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "level": 4,
+    "levelsCompleted": 3,
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.62.0",
+    "operationCounts": {
+      "advance": 17,
+      "init": 1,
+      "resume": 16
+    },
+    "prefixes": 17,
+    "reason": "target_levels_completed",
+    "sessions": 1,
+    "state": "NOT_FINISHED",
+    "status": "stopped"
+  },
+  "originalParity": {
+    "status": "passed",
+    "coldStart": true,
+    "exactOriginalReturnParityPassed": true,
+    "componentComparisonPassed": true,
+    "fullCallerParity": false,
+    "counts": {
+      "acquiredPublicReturns": 17,
+      "activeRecords": 16,
+      "differences": 0,
+      "methods": {
+        "before": 16,
+        "propose": 17,
+        "recordSource": 17
+      },
+      "nativeAdaptations": 0,
+      "nativeRestoresCompared": 34,
+      "nativeRestoresExpected": 34,
+      "passiveRecords": 1,
+      "physicalActionsCompared": 17,
+      "physicalActionsExpected": 17,
+      "prefixesCompared": 17,
+      "prefixesExpected": 17,
+      "proposedOriginalOffers": 16,
+      "publicObservationsRecomputed": 34,
+      "records": 17,
+      "recordsCoveredBySealedPrefixes": 17,
+      "recordsWithNullResult": 0,
+      "selectedAfterResultsCompared": 16,
+      "selectedAfterResultsExpected": 16,
+      "selectedRecruitmentPrefixes": 16,
+      "sourceCallsCompared": 50,
+      "sourceCallsExpected": 50,
+      "uniquePublicScopes": 1
+    },
+    "ablationCounts": {
+      "actionOrRefusalChanged": 41,
+      "applied": 72,
+      "byIntervention": {
+        "remove_all_methods": {
+          "actionOrRefusalChanged": 16,
+          "applied": 16,
+          "total": 17
+        },
+        "remove_attempts": {
+          "actionOrRefusalChanged": 0,
+          "applied": 13,
+          "total": 17
+        },
+        "remove_continuation": {
+          "actionOrRefusalChanged": 0,
+          "applied": 13,
+          "total": 17
+        },
+        "remove_methods": {
+          "actionOrRefusalChanged": 2,
+          "applied": 2,
+          "total": 17
+        },
+        "remove_order": {
+          "actionOrRefusalChanged": 9,
+          "applied": 14,
+          "total": 17
+        },
+        "remove_portable": {
+          "actionOrRefusalChanged": 14,
+          "applied": 14,
+          "total": 17
+        }
+      },
+      "errors": 0,
+      "expected": 102,
+      "total": 102
+    }
+  },
+  "browser": {
+    "status": "passed",
+    "pause": {
+      "observed": "Paused.",
+      "actions": 3,
+      "observedAt": "2026-11-11T18:04:31.805Z"
+    },
+    "oneAction": {
+      "observed": "One action completed.",
+      "actions": 4,
+      "observedAt": "2026-11-11T18:04:52.201Z"
+    },
+    "resume": {
+      "observed": "Level completed.",
+      "actions": 9,
+      "levelsCompleted": 2,
+      "observedAt": "2026-11-11T18:05:31.971Z"
+    },
+    "developmentOnly": true
+  },
+  "retainedFailedReaderAttempt": {
+    "path": "docs/migration/lot10c-evidence/development/recr01-parity/execution.json",
+    "bytes": 3895,
+    "sha256": "3698c713f3a6b54b18289c63d7bdcef39f0e6969391cb9313acc5d68f45fc7bb"
+  },
+  "artifacts": [
+    {
+      "path": "docs/migration/lot10c-evidence/development/recr01-parity02/original-parity.json.gz",
+      "bytes": 141752,
+      "sha256": "90690a29a6e00747d58c0cfad3107c7c9b4cd925274dda9d42be33110caa235a"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/development/recr01/execution-recruitment.json",
+      "bytes": 15283,
+      "sha256": "f39c9a6bfd89039a351643d398919b03e61e127610a6de5d9b433b71e3a66e7e"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/development/recr01-parity02/execution.json",
+      "bytes": 4100,
+      "sha256": "8a97e6d7f3ab87c0c1e25a6f0e818de7054546494d01bf7a82bb7088913e1818"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/development/recr01-browser01/browser-qa.json",
+      "bytes": 1778,
+      "sha256": "78c1b03a4ed5842c0d6c616c521e7193a660278a125058d83cd9d142d92f571f"
+    }
+  ],
+  "qualification": "Development on the actual0.62base plus OrderedRecruitment. Three target levels reached, not all six. Ablations establish effects on the component decisions, not whole-game causal improvement or full original-caller parity. Actual published0.63/0.64/0.65 integration, final qualification, official cost and publication remain pending."
+}

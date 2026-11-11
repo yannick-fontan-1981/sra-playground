@@ -243,11 +243,81 @@
       },
       "outcome": "completed",
       "ceilingExceeded": false
+    },
+    {
+      "attemptId": "docs/migration/lot10c-evidence/case-activities/recr01-browser-envelope",
+      "status": "terminal",
+      "kind": "diagnostic_or_browser",
+      "purpose": "Bind retained actual browser observations to the canonical QA receipt without opening or rerunning the game",
+      "game": "RECR",
+      "targetLevels": 3,
+      "startedAt": "2026-11-11T18:24:25.056423+00:00",
+      "monotonicStartNs": 23909524212176,
+      "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+      "priorCumulativeSeconds": 642.600846598,
+      "activityCeilingSeconds": 60.0,
+      "chargedSeconds": 0.087487787,
+      "processPidAtAdmission": 7,
+      "executionHelpers": [
+        {
+          "path": "docs/migration/lot10c-evidence/case-activity.py",
+          "sha256": "c3a61752ff70eb6724a723a18c10fa4d445bf72d3d54011d7c2d7db6dbbe0681",
+          "bytes": 8126
+        },
+        {
+          "path": "docs/migration/lot10c-evidence/run-clocked-proof.py",
+          "sha256": "530ed0272ac269340a28d9481c8db4188dc79cccdd85aa05c8a62570321ccbe3",
+          "bytes": 42344
+        }
+      ],
+      "finishedAt": "2026-11-11T18:24:25.143930+00:00",
+      "executionReceipt": {
+        "path": "docs/migration/lot10c-evidence/case-activities/recr01-browser-envelope/execution.json",
+        "sha256": "19ef80560535e8aa41d940513e8339435ea79c1ab6dd4a1df7f4167655d79c17",
+        "bytes": 1137
+      },
+      "outcome": "completed",
+      "ceilingExceeded": false
+    },
+    {
+      "attemptId": "docs/migration/lot10c-evidence/case-activities/recr01-summary-binding",
+      "status": "terminal",
+      "kind": "diagnostic_or_browser",
+      "purpose": "Bind final development case summary to retained exact original comparison and actual browser receipts without rerunning the game",
+      "game": "RECR",
+      "targetLevels": 3,
+      "startedAt": "2026-11-11T18:28:27.661639+00:00",
+      "monotonicStartNs": 24152129425880,
+      "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+      "priorCumulativeSeconds": 642.688334385,
+      "activityCeilingSeconds": 60.0,
+      "chargedSeconds": 0.135693121,
+      "processPidAtAdmission": 7,
+      "executionHelpers": [
+        {
+          "path": "docs/migration/lot10c-evidence/case-activity.py",
+          "sha256": "c3a61752ff70eb6724a723a18c10fa4d445bf72d3d54011d7c2d7db6dbbe0681",
+          "bytes": 8126
+        },
+        {
+          "path": "docs/migration/lot10c-evidence/run-clocked-proof.py",
+          "sha256": "530ed0272ac269340a28d9481c8db4188dc79cccdd85aa05c8a62570321ccbe3",
+          "bytes": 42344
+        }
+      ],
+      "finishedAt": "2026-11-11T18:28:27.797348+00:00",
+      "executionReceipt": {
+        "path": "docs/migration/lot10c-evidence/case-activities/recr01-summary-binding/execution.json",
+        "sha256": "9419082ffc2365bbc198d7e7643cbd77f486d8e8d9f216244dd8035b26ac8e46",
+        "bytes": 1150
+      },
+      "outcome": "completed",
+      "ceilingExceeded": false
     }
   ],
-  "cumulativeChargedSeconds": 642.600846598,
-  "remainingSeconds": 1757.399153402,
+  "cumulativeChargedSeconds": 642.824027506,
+  "remainingSeconds": 1757.175972494,
   "budgetExceededSeconds": 0.0,
   "budgetAvailability": "available",
-  "lastUpdatedAt": "2026-11-11T18:11:33.443983+00:00"
+  "lastUpdatedAt": "2026-11-11T18:28:27.797360+00:00"
 }

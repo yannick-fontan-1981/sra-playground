@@ -1,0 +1,85 @@
+{
+  "schema": "logos-engine.lot10c.development-milestone.v1",
+  "recordedAt": "2026-11-11T18:28:27.806567+00:00",
+  "status": "development_validation_passed",
+  "sourceDigest": "bb7d62b5823d76ae7a5ecd452cb622ebb04f2b85b20fb0d2f9a5c35a1535b361",
+  "nativeFiles": 315,
+  "publishedBase": {
+    "siteVersion": 103,
+    "nativeVersion": "0.62.0",
+    "sourceCommit": "4afcbfe6a25bd3a88223be543e443bc53b9c8814"
+  },
+  "nativeTests": {
+    "passed": 1382,
+    "failed": 0,
+    "files": 46,
+    "includedOriginalReferenceTests": 173,
+    "includedColdKernelTests": 4
+  },
+  "projectGatesPassed": 5,
+  "recordedRegressions": {
+    "status": "passed",
+    "passed": 10,
+    "total": 10,
+    "comparisonChecksPassed": 170,
+    "comparisonChecksExpected": 170,
+    "prevalidatedTotals": {
+      "commands": 357,
+      "completePublicPackets": 367,
+      "animationFrames": 1676,
+      "prefixes": 275,
+      "requests": 632,
+      "naturalLevelBoundaries": 30
+    }
+  },
+  "caseSummary": {
+    "path": "docs/migration/lot10c-evidence/development/recr01-proof-summary.json",
+    "bytes": 6642,
+    "sha256": "acd5a2405a00df1ebffe8f5613c78f6ca92ae82a4a4317450238b0519480e2d0"
+  },
+  "caseClock": {
+    "path": "docs/migration/lot10c-evidence/case-clock.json",
+    "bytes": 13361,
+    "sha256": "a75cdfd0a131a555f8087c2b7c2625774a056b6b7eb8eea2d43dae6b503256d2"
+  },
+  "publishedStateObservation": {
+    "path": "docs/migration/lot10c-evidence/coordination/publication-observation01.json",
+    "bytes": 1600,
+    "sha256": "5fd5069268fb3e12022958ea01d5b05bb86b4e08287b7f39c030ca67a9d011d7"
+  },
+  "artifacts": [
+    {
+      "path": "docs/migration/lot10c-evidence/development/recr01-source/validation/delta-tests-run.json",
+      "bytes": 178997,
+      "sha256": "e82df26d9cab4a781e6f2e16c0f508ba580508fa043b8a83c935cf8b2a278ce9"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/development/validation01/validation/checks-run.json",
+      "bytes": 213103,
+      "sha256": "8e025b9b8c2a77567d36277bb96d1036c1fd6715c8b10c3283cccfc3be3fb989"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regression-launch.json",
+      "bytes": 11494,
+      "sha256": "2a7fc6c989f7e11cb6747f16ef9feefb3c0f992d29dbbe30fbea38e9e8ef6ab2"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/regression-summary.json",
+      "bytes": 215275,
+      "sha256": "6197dd39fa4d05e0781552d3a97d27e777a9833ea41813a316c2adbbd9241ffc"
+    }
+  ],
+  "officialCostMeasured": false,
+  "lot10cPublished": false,
+  "proposedNativeVersion": "0.66.0",
+  "pending": [
+    "Integrate actual published0.63,0.64and0.65",
+    "Freeze and qualify the composed native candidate, retaining historical development proofs",
+    "Measure complete-session medians forSTCKandSMLP against actual0.65, each strictly below+10%; retain phase overruns",
+    "Publish the accepted source and update the roadmap with terminal provider receipts"
+  ],
+  "priorReservationsPreserved": [
+    "HPDL partial",
+    "LKEY closed"
+  ]
+}
