@@ -1,0 +1,38 @@
+{
+  "case": "vois-051",
+  "game": "VOIS",
+  "mode": "recorded-public-replay",
+  "command": [
+    "node",
+    "scripts/replay-v53-public-regression.mjs",
+    "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz",
+    "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+    "docs/migration/lot8a-evidence/qualification-provisional-01/recorded-regressions-01/regressions/vois-051-replay.json.gz"
+  ],
+  "startedAt": "2026-11-11T21:30:03.389954+00:00",
+  "finishedAt": "2026-11-11T21:33:19.496531+00:00",
+  "elapsedSeconds": 196.10657748200174,
+  "exitCode": -6,
+  "timeoutSeconds": 600,
+  "timedOut": false,
+  "baseline": {
+    "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz",
+    "sha256": "39a6e6551cf94a48842b154afdc2256dafd88fd93404e4776bd67b24d5a4796d",
+    "bytes": 10678168
+  },
+  "trace": {
+    "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+    "sha256": "d642c805485571c0e54ed3421644cbd8463ca3697ce135b223f635487b58069d",
+    "bytes": 19976
+  },
+  "output": {
+    "path": "docs/migration/lot8a-evidence/qualification-provisional-01/recorded-regressions-01/regressions/vois-051-output.log.gz",
+    "sha256": "31680d592a63523be990cecb605e84f005efc7e245315725d5a5097e3a89f48c",
+    "bytes": 7630
+  },
+  "passed": false,
+  "nativeSourceBeforeDigest": "936fa2bf81965272b1ddbab4a5c01f98aeb6a48188c1f7a8c91de226598c5e43",
+  "nativeSourceAfterDigest": "936fa2bf81965272b1ddbab4a5c01f98aeb6a48188c1f7a8c91de226598c5e43",
+  "nativeSourceUnchanged": true,
+  "immutableInputsUnchanged": true
+}

@@ -1,0 +1,80 @@
+{
+  "schema": "logos-engine.lot8a-regression-resumption-disposition.v1",
+  "recordedAt": "2026-11-11T21:38:53.997802+00:00",
+  "status": "incomplete_previous_campaign_preserved",
+  "previousWrapperReceiptPresent": false,
+  "previousSummaryPresent": false,
+  "terminalCasesObserved": [
+    {
+      "receipt": {
+        "path": "docs/migration/lot8a-evidence/qualification-provisional-01/recorded-regressions-01/regressions/catr-051-execution.json",
+        "sha256": "d43690a6815307348aad58210b76e5ce0372b998e18947f4844658bbaa2dbc9f",
+        "bytes": 5127
+      },
+      "case": "catr-051",
+      "passed": true,
+      "exitCode": 0,
+      "nativeSourceUnchanged": true,
+      "finishedAt": "2026-11-11T21:27:32.260485+00:00",
+      "actions": 12,
+      "comparisonChecks": 17,
+      "failedChecks": []
+    },
+    {
+      "receipt": {
+        "path": "docs/migration/lot8a-evidence/qualification-provisional-01/recorded-regressions-01/regressions/fogw-051-execution.json",
+        "sha256": "bc346a1dfa641b6f61b6fdd8c9bb5d27627ba1a47df058f8ee3fd641e8b824e2",
+        "bytes": 5108
+      },
+      "case": "fogw-051",
+      "passed": true,
+      "exitCode": 0,
+      "nativeSourceUnchanged": true,
+      "finishedAt": "2026-11-11T21:29:57.643642+00:00",
+      "actions": 50,
+      "comparisonChecks": 17,
+      "failedChecks": []
+    },
+    {
+      "receipt": {
+        "path": "docs/migration/lot8a-evidence/qualification-provisional-01/recorded-regressions-01/regressions/rswp-051-execution.json",
+        "sha256": "c5d041534385acbcef1d17421a0423d896b1e74a9d2de5dc5d26f188fec17fe5",
+        "bytes": 5108
+      },
+      "case": "rswp-051",
+      "passed": true,
+      "exitCode": 0,
+      "nativeSourceUnchanged": true,
+      "finishedAt": "2026-11-11T21:28:05.259004+00:00",
+      "actions": 19,
+      "comparisonChecks": 17,
+      "failedChecks": []
+    },
+    {
+      "receipt": {
+        "path": "docs/migration/lot8a-evidence/qualification-provisional-01/recorded-regressions-01/regressions/vois-051-execution.json",
+        "sha256": "ecaab5232e44fea766819a72e77ead21dec5de64f515e9e7500bb6c203ebf275",
+        "bytes": 1648
+      },
+      "case": "vois-051",
+      "passed": false,
+      "exitCode": -6,
+      "nativeSourceUnchanged": true,
+      "finishedAt": "2026-11-11T21:33:19.496531+00:00",
+      "actions": null,
+      "comparisonChecks": null,
+      "failedChecks": null
+    }
+  ],
+  "priorExecutionSession": 96236,
+  "priorExecutionSessionRecovery": "write_stdin reports Unknown process id; whole campaign terminal exit is not inferred",
+  "stdoutSnapshot": {
+    "path": "docs/migration/lot8a-evidence/qualification-provisional-02/retained-interruption/regression01-stdout-at-resumption.log.gz",
+    "sha256": "415839264c58f3e5a3c02e9fe5fb93e3dd359de58fac256f5d4e45bcb6f7dac0",
+    "bytes": 294
+  },
+  "observedFailure": "VOIS exit -6 with retained Node heap exhaustion diagnostic during complete-report export; gameplay target reached in log is not sufficient to mark the regression passed.",
+  "newAttempt": "A new output directory and prospective streaming transport plan retain original case membership/order, native bytes, heap1536 and all17 comparisons.",
+  "officialCost": false,
+  "liveGame": false
+}
