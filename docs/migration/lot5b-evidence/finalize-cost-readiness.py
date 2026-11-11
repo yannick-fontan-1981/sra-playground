@@ -9,7 +9,9 @@ come from fingerprinted receipts; no future version or result is assumed.
 Small input contracts in addition to the existing verification receipts:
 
 * --publication-chain: logos-engine.lot5b-published-predecessor-chain.v1,
-  status=verified, recordedAt, projectId, candidateSourceBaseCommit, and
+  status=verified, recordedAt, projectId, candidateSourceBaseCommit,
+  publishedPredecessorCommit, publishedPredecessorIsAncestorOfCandidateBase=true,
+  candidateBaseAncestry:FP, and
   predecessors in order [{lot:10A|4C, publication:FP, sourceManifest:FP,
   sourceVerification:FP}]. Each actual publication contains version (or
   siteVersionReceipt) and deployment objects returned by Sites. Each source
@@ -17,6 +19,25 @@ Small input contracts in addition to the existing verification receipts:
   publishedNativeSource, actualGitBlobHashesMatchManifest=true and
   nativeSourceMemberSetExact=true. The 4C verification additionally binds
   previousPublishedCommit and previousPublishedCommitIsAncestor=true.
+  publishedPredecessorCommit is the actual final 4C publication. In contrast,
+  candidateSourceBaseCommit is the exact candidate archive.baseCommit and
+  policy.candidate.sourceBaseCommit: the real HEAD captured by the freezer,
+  which may contain 5B commits and an integration merge. Equality with the
+  published predecessor is neither required nor synthesized.
+  candidateBaseAncestry references logos-engine.lot5b-candidate-base-ancestry.v1:
+  status=passed, recordedAt, checkout, candidateArchiveManifest:FP,
+  candidateSourceBaseCommit, publishedPredecessorCommit,
+  publishedPredecessorIsAncestorOfCandidateBase=true, commands=[...].
+  Each command has command (argument array), startedAt, finishedAt, exitCode,
+  stdout and stderr (complete captured strings). The three commands, in order,
+  are [git,rev-parse,--verify,CANDIDATE^{commit}],
+  [git,rev-parse,--verify,PREDECESSOR^{commit}], and
+  [git,merge-base,--is-ancestor,PREDECESSOR,CANDIDATE]. Their exit codes must be
+  zero, stderr empty, and stdout respectively CANDIDATE + newline,
+  PREDECESSOR + newline, and empty. checkout is this actual checkout. The
+  commands address immutable commits, so a later documentation-only HEAD
+  does not replace the recorded freeze base. This finalizer checks retained
+  commands/results and their fingerprints; it does not execute Git.
 * --test-scope-plan: logos-engine.lot5b.integrated-test-scope-plan.v1,
   declaredAt, inherited=[{lot:7B|10A|4C,receipt:FP}], addedTestFiles (the four
   5B contracts), testFiles (first-seen ordered union), testFileCount. The 7B
@@ -257,7 +278,7 @@ def no_window(perf, baseline=None):
     require(not existing, 'Readiness/measurement outputs already exist: ' + ', '.join(existing))
 
 
-def publication_chain(e, path, baseline, policy):
+def publication_chain(e, path, baseline, policy, archive, archive_record):
     chain = e.load(path)
     require(chain.get('schema') == 'logos-engine.lot5b-published-predecessor-chain.v1'
             and chain.get('status') == 'verified', 'Actual predecessor chain is not verified')
@@ -306,12 +327,49 @@ def publication_chain(e, path, baseline, policy):
     require(all(previous[key] == policy['baseline'][key]
                 for key in ('siteVersion', 'commit', 'nativeVersion', 'nativeDigest', 'nativeFiles'))
             and previous['nativeDigest'] == baseline['digest']
-            and chain.get('candidateSourceBaseCommit') == policy['candidate']['sourceBaseCommit'] == previous['commit'],
-            'Final baseline/candidate base is not the actual published 4C predecessor')
+            and chain.get('publishedPredecessorCommit') == previous['commit'],
+            'Final baseline is not the actual published 4C predecessor')
+    candidate_base = chain.get('candidateSourceBaseCommit')
+    require(isinstance(candidate_base, str) and re.fullmatch(r'[0-9a-f]{40}', candidate_base)
+            and candidate_base == archive.get('baseCommit') == policy['candidate']['sourceBaseCommit'],
+            'Candidate base differs from the true frozen archive/protocol Git base')
+    ancestry_record = chain.get('candidateBaseAncestry')
+    ancestry = e.referenced(ancestry_record)
+    require(ancestry.get('schema') == 'logos-engine.lot5b-candidate-base-ancestry.v1'
+            and ancestry.get('status') == 'passed' and ancestry.get('checkout') == str(ROOT)
+            and ancestry.get('candidateArchiveManifest') == archive_record
+            and ancestry.get('candidateSourceBaseCommit') == candidate_base
+            and ancestry.get('publishedPredecessorCommit') == previous['commit']
+            and ancestry.get('publishedPredecessorIsAncestorOfCandidateBase') is True
+            and chain.get('publishedPredecessorIsAncestorOfCandidateBase') is True,
+            'Candidate base ancestry is not bound to the actual archive and published predecessor')
+    e.checked(ancestry['candidateArchiveManifest'])
+    expected_commands = [
+        (['git', 'rev-parse', '--verify', candidate_base + '^{commit}'], candidate_base + '\n'),
+        (['git', 'rev-parse', '--verify', previous['commit'] + '^{commit}'], previous['commit'] + '\n'),
+        (['git', 'merge-base', '--is-ancestor', previous['commit'], candidate_base], ''),
+    ]
+    commands = ancestry.get('commands')
+    require(isinstance(commands, list) and len(commands) == len(expected_commands),
+            'Candidate ancestry proof omits an actual Git identity or ancestry command')
+    prior_finish = None
+    for row, (command, stdout) in zip(commands, expected_commands):
+        require(row.get('command') == command and type(row.get('exitCode')) is int and row['exitCode'] == 0
+                and row.get('stdout') == stdout and row.get('stderr') == '',
+                'Retained Git command/result does not verify the declared candidate ancestry')
+        started = e.at(row['startedAt'], 'candidate base Git command start')
+        finished = e.at(row['finishedAt'], 'candidate base Git command finish')
+        require((prior_finish is None or prior_finish <= started) and started <= finished,
+                'Candidate ancestry command chronology differs')
+        prior_finish = finished
+    require(prior_finish <= e.at(ancestry['recordedAt'], 'candidate base ancestry proof') <= recorded,
+            'Candidate ancestry proof must precede the completed publication chain')
     versions = [tuple(map(int, row['nativeVersion'].split('.'))) for row in identities]
     versions.append(tuple(map(int, policy['candidate']['nativeVersion'].split('.'))))
     require(versions[0] < versions[1] < versions[2], 'Native versions do not follow the publication order')
-    return {'receipt': e.keep(path), 'predecessors': identities, 'candidateSourceBaseCommit': previous['commit']}
+    return {'receipt': e.keep(path), 'predecessors': identities, 'candidateSourceBaseCommit': candidate_base,
+            'publishedPredecessorCommit': previous['commit'], 'publishedPredecessorIsAncestorOfCandidateBase': True,
+            'candidateBaseAncestry': ancestry_record}
 
 
 def verify_scope(e, path, tests, native_digest, published):
@@ -718,8 +776,8 @@ def main():
     versions = re.findall(r"NATIVE_V6_IMPLEMENTATION\s*=\s*['\"]logos-engine\.typescript\.v6\.native-migration/([^'\"]+)['\"]",
                           e.text('src/logos-engine/v6-native-runtime.ts'))
     require(versions == [policy['candidate']['nativeVersion']], 'Actual native version differs from the declaration')
-    published = publication_chain(e, args.publication_chain, baseline, policy)
     archive = e.referenced(declaration['candidateArchiveManifest'])
+    published = publication_chain(e, args.publication_chain, baseline, policy, archive, declaration['candidateArchiveManifest'])
     parts = e.load(candidate_dir / 'source-archive-parts.json')
     require(archive.get('nativeSourceManifestDigest') == digest
             and archive.get('baseCommit') == policy['candidate']['sourceBaseCommit']

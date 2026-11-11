@@ -112,6 +112,14 @@ def main():
     scope = e.referenced(readiness['testScope']['receipt'])
     require(scope['testFiles'] == tests['testFiles'] and scope['testFileCount'] == len(tests['testFiles']), 'Test union changed')
     e.checked(readiness['publishedPredecessors']['receipt'])
+    predecessor = readiness['publishedPredecessors']
+    require(predecessor.get('publishedPredecessorCommit') == policy['baseline']['commit']
+            and predecessor.get('candidateSourceBaseCommit') == archive['baseCommit'] == policy['candidate']['sourceBaseCommit']
+            and predecessor.get('publishedPredecessorIsAncestorOfCandidateBase') is True,
+            'Publication conflates the actual published baseline with the candidate freeze base')
+    e.checked(predecessor['candidateBaseAncestry'])
+    require(predecessor['candidateBaseAncestry'] in readiness['inputs'],
+            'Readiness omits the retained candidate base Git ancestry proof')
     require(readiness['newGameSuccessClaimed'] is False and readiness['weav']['clockReset'] is False
             and readiness['weav']['newLiveExecutions'] == 0 and readiness['weav']['remainingSeconds'] == 0,
             'Publication broadened the functional or exhausted WEAV qualification')
