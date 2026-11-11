@@ -1,0 +1,169 @@
+{
+  "schema": "logos-engine.lot6a-recovery-native-source-review.v1",
+  "recordedAtUtc": "2026-11-11T12:08:36.654955Z",
+  "reviewer": "/root/recover_6a_files",
+  "status": "reviewed_no_concrete_defect_found",
+  "reviewType": "bounded_static_source_and_integration_review",
+  "baseline": {
+    "site": "Site95",
+    "nativeVersion": "0.58",
+    "commit": "3a70463039768f7114edae7d94d7dd33b7f36aa8",
+    "checkoutHeadAtReceipt": "3a70463039768f7114edae7d94d7dd33b7f36aa8"
+  },
+  "referenceSourcePin": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "candidateContext": {
+    "lot": "6A",
+    "family": "preview_packing",
+    "nativeVersion": "0.60",
+    "provenance": "reconstructed_candidate_new_freeze_required",
+    "historicalLostCandidateEvidenceRequalified": false,
+    "publicationOrCostAcceptanceClaim": false
+  },
+  "nativeInputs": [
+    {
+      "path": "src/logos-engine/v6-preview-packing.ts",
+      "bytes": 27050,
+      "sha256": "f4ca39b35d6cd8acf14f9efbab6f1de0f7f4694906e4383d53cbec1d6dc9b450"
+    },
+    {
+      "path": "src/logos-engine/v6-preview-packing-types.ts",
+      "bytes": 4879,
+      "sha256": "93ef62ff8da9990f6a25ede4ed29b16ccd2fafa94771c06db93887d2cd324e10"
+    },
+    {
+      "path": "src/logos-engine/v6-preview-packing-geometry.ts",
+      "bytes": 8121,
+      "sha256": "bd2dbde5a5975b611e627171e46b9f4a7c418d0341b4c6ef653eb11bb707adc2"
+    },
+    {
+      "path": "src/logos-engine/v6-preview-packing-calculus.ts",
+      "bytes": 13276,
+      "sha256": "ca48f8b5622fe65ea71c54fe0d31e9171280a85154cad3719d10da3523cc2b75"
+    },
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "bytes": 157861,
+      "sha256": "6a6a52060c9202f8cf64b252bb849b6bf569a78b50a2e17adc4bd495471fecbd"
+    }
+  ],
+  "supportingDeltaReviewInputs": [
+    {
+      "path": "src/logos-engine/v6-native-owned.ts",
+      "bytes": 6626,
+      "sha256": "b4a1eeb1cf43bb04695bce8267903cd122fe778b4b938a98b1640a9ba6ee4839"
+    }
+  ],
+  "scope": {
+    "native": [
+      "Four PreviewPacking modules read for consumed source behavior, state, geometry and bounded calculus.",
+      "Lot6A runtime diff and relevant existing selection, acquisition and checkpoint restoration paths read.",
+      "Final delta reread limited to frozen per-instance limits and own data properties for learned controls, with the existing native copy helper checked for preservation of literal __proto__ keys."
+    ],
+    "pinnedSourceRead": [
+      "PreviewPacking family.py, donor.py, base.py and preview.drm.",
+      "Strategy selection/final-return paths and strategy.drm priority order.",
+      "Common frontier selected acquisition, checkpoint ordering and surrounding acquisition paths.",
+      "Consumed geometric observer, preview_piece_packing calculus/model helpers and DWorkBudget interruption behavior."
+    ],
+    "exclusions": [
+      "Private game sources and game execution.",
+      "Whole-caller equivalence, whole-game completion and terminal success proofs.",
+      "Official cost measurements, browser QA, build verification or publication verification."
+    ]
+  },
+  "criteriaReviewed": [
+    {
+      "id": "owner_and_priority",
+      "observation": "One raw preview_packing owner and one wrapper are linked by the runtime adapter. The existing policy priority places PreviewPacking after subset and before selected_rigid. No new SRC program is introduced."
+    },
+    {
+      "id": "selected_only_record",
+      "observation": "Source record requires a selected proposal carrying preview_packing_plan. Native acquisition invokes raw record only for selected PreviewPacking actions; the passive path does not invoke raw PreviewPacking record."
+    },
+    {
+      "id": "conditional_source_checkpoint",
+      "observation": "The caller stores and actually restores the exact four-field source state after actions when a model is retained, including actions selected by another family. The checkpoint remains after Workshop and before Axial."
+    },
+    {
+      "id": "native_and_source_state",
+      "observation": "sourceState exposes packing_events, packing_model, packing_controls and _packing_scene_cache. nativeState uses the flat native.preview_packing.v1 envelope. Validation, detached copies, immutable memoized snapshots and equivalent-state restore fast paths were read."
+    },
+    {
+      "id": "unknown_propagation",
+      "observation": "A blocking PreviewPacking refusal propagates through currentProposalRefusal to a blocking unknown frontier offer and stops selection before an action. Refusal state is reset for each proposal."
+    },
+    {
+      "id": "proposal_and_step_guards",
+      "observation": "Plan commands, steps, offered actions, policy identity and source policy hash are checked. The first step binds raster digest, observation reference, epoch/score and current availability; later steps use the observed preview pose guard."
+    },
+    {
+      "id": "point_binding",
+      "observation": "Point selection binds exactly one currently observed entity and its signature, bounds, frame, epoch, palette and point. It is not an unbound coordinate action."
+    },
+    {
+      "id": "after_and_record_boundaries",
+      "observation": "An epoch or score boundary seals the step without a matched result. Source record treats an epoch boundary as an empty return envelope without resetting retained model or controls; score-only change is not silently treated as an epoch reset."
+    },
+    {
+      "id": "actual_return_learning",
+      "observation": "The model, controls and events are acquired from selected actual returns. Only a unit translation or a unique matching transform is learned; propose itself only changes the scene cache."
+    },
+    {
+      "id": "scene_cache",
+      "observation": "Null scene results may be retained for the entire epoch. A new epoch permits scene measurement while learned controls remain retained. State changes invalidate the retained snapshot."
+    },
+    {
+      "id": "geometry_and_ordering",
+      "observation": "Consumed partition and shape-orbit behavior, lexicographic piece order, fixed interior poses, equal-cost tie behavior and Manhattan-plus-mask-difference cost were compared with the pinned source."
+    },
+    {
+      "id": "cpython_dict_set_order",
+      "observation": "The local dictionary-to-point-set helper accounts for CPython set(dict) presizing rather than assuming sequential set insertion gives the same traversal. The shared point-set helper is unchanged."
+    },
+    {
+      "id": "source_and_native_bounds",
+      "observation": "The consumed piece, mask and world/pose limits and residual domain/depth/node/time bounds were reviewed, together with the bounded control search, current deadline, abort checks and bounded command prefix."
+    },
+    {
+      "id": "interruption_semantics",
+      "observation": "Bound, deadline and cancellation interruptions become explicit blocking unknown outcomes. They do not authorize a partial plan or claim that the remaining problem is impossible."
+    },
+    {
+      "id": "final_delta_frozen_limits",
+      "observation": "Both NativePreviewPacking and PreviewPackingWork now store Object.freeze(previewPackingLimits(...)) as Readonly<PreviewPackingLimits>; the final constructor deltas were reread."
+    },
+    {
+      "id": "final_delta_own_control_properties",
+      "observation": "Both learned translation and transform controls are installed with Object.defineProperty as enumerable own data properties. The existing copy helper uses Object.fromEntries for certified JSON objects and structuredClone otherwise, preserving a literal __proto__ control key as data."
+    }
+  ],
+  "conclusion": {
+    "concreteContractualDefectsFoundInReviewedScope": [],
+    "statement": "No concrete contractual defect found in the bounded static review. This is a source-review receipt, not an execution or equivalence certificate."
+  },
+  "limitations": [
+    "The source 2000 ms residual budget is not a 2000 ms bound on the complete proposal call.",
+    "Geometry measurement is finite and synchronous; this review does not establish a hard latency bound or immediate pause responsiveness.",
+    "Blocking at bounded control-search exhaustion before unknown-control fallback is an explicit native safety adaptation; the source can reach fallback after its search cap.",
+    "Later-step revalidation is pose-based rather than a fresh full-raster equality proof.",
+    "An epoch-local null scene cache can suppress later measurement in that same epoch.",
+    "Learned controls are not universally retracted after divergence, and selection without recoloring may repeat, consistent with the reviewed source limitations.",
+    "Source history and scene cache are not compacted; this review does not prove performance over hours of use.",
+    "A geometric partition is not proof of physical transport or of an official terminal success condition.",
+    "The component and integration review is bounded and does not establish whole-caller parity, all possible environment behavior or whole-game completion.",
+    "The lost historical 0.60 candidate and its observations remain historical; this reconstructed candidate requires its own freeze and qualification.",
+    "These fingerprints identify the inputs at receipt creation. Any subsequent change to an audited input requires explicit revalidation before treating this receipt as applicable."
+  ],
+  "operations": {
+    "repositoryTestsExecutedByThisReviewerForThisAudit": false,
+    "candidateComponentOrRuntimeExecutedByThisReviewerForThisAudit": false,
+    "gameLogicExecutedByThisReviewerForThisAudit": false,
+    "privateGameSourceReadByThisReviewerForThisAudit": false,
+    "officialCostMeasurementExecutedByThisReviewerForThisAudit": false,
+    "codeOrTestFilesModifiedByThisReview": false,
+    "finalDeltaVerification": "Read-only source excerpts and SHA-256 calculation; no new tests or game execution.",
+    "earlierNarrowLanguageCheck": "A small Python builtins-only set(dict) traversal/presizing check informed the earlier static comparison. It did not import candidate code or execute game logic.",
+    "receiptIsOnlyWriteInThisFinalReviewStep": true
+  },
+  "inputSnapshotCheckedImmediatelyBeforeWrite": true
+}

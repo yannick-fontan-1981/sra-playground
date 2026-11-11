@@ -1,0 +1,81 @@
+{
+  "schema": "logos-engine.recorded-public-regression-cases.v1",
+  "declaredAt": "2026-11-11T12:34:17.920351+00:00",
+  "cases": [
+    {
+      "id": "weav-051",
+      "game": "WEAV",
+      "baseline": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz",
+        "sha256": "114906e80b2ff5817adeaa105fd4e84ea2b057d8393b202dc03f35248b350fc3"
+      },
+      "trace": {
+        "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+        "sha256": "a46f6a331e8f98767ee709c2931edd6d0abde9cc636b93ef384509c04adface2"
+      }
+    },
+    {
+      "id": "craf-055",
+      "game": "CRAF",
+      "baseline": {
+        "path": "docs/migration/lot7b-evidence/integrated-final/craf-campaign.json.gz",
+        "sha256": "78e86660961ed6d75707c001c021b8c223d205137d86288ac21d09a533b680f2"
+      },
+      "trace": {
+        "path": "docs/migration/lot7b-evidence/integrated-final/craf-public-trace.json.gz",
+        "sha256": "cf69ad941e80e17f8d6cd66edc0419a0c6ff7aa8d9bbdaf503cb56a49e8c3f98"
+      }
+    }
+  ],
+  "passiveOwnerRequirements": [],
+  "inheritedCaseManifest": {
+    "path": "docs/migration/lot5b-evidence/integrated-final/regression-cases.json",
+    "sha256": "a16f67724f53def79fe476716c12a61e8064df871911772731983fa2505da3a9",
+    "bytes": 8305
+  },
+  "inheritedRegressionSummary": {
+    "path": "docs/migration/lot5b-evidence/integrated-final/regressions/regression-summary.json",
+    "sha256": "e1656a5ada566f7ecfaac76c044f7ccd12dad1104a984a91f1fef673c81d74b9"
+  },
+  "publishedProvenance": {
+    "siteVersion": 95,
+    "nativeVersion": "0.58.0",
+    "commit": "3a70463039768f7114edae7d94d7dd33b7f36aa8",
+    "publication": {
+      "path": "docs/migration/lot6a-evidence/publication/published-baseline-site95.json",
+      "sha256": "9cbd902227685d8679d5876cd9ce66fc333044d56d10123c15d9ff011c05a0cb"
+    }
+  },
+  "strictComparator": {
+    "path": "scripts/compare-v54-regressions.py",
+    "sha256": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+    "bytes": 18166
+  },
+  "strictComparisonCheckNames": [
+    "both runs passed with the same declared game and target",
+    "same production budgets, source reference and opaque game asset provenance",
+    "same complete initial public packet hash and public state",
+    "every archived public packet independently hashes to the v53 baseline",
+    "every archived host-only command equals its prior baseline command",
+    "same commands, complete returned packet hashes, animation lengths and primitive boundaries",
+    "same selected family/group/kind/subquestion, acquired prefix lengths and retained solver scalars",
+    "same retained coordination source/preferred entries and current guard scope",
+    "same historical epoch anchors with session namespace normalized",
+    "same inherited source-series event counts on every sealed prefix",
+    "same common request outcomes and retained caller acquisition counters",
+    "same natural level boundaries and retained-session caller counters",
+    "same final public result and retained-session operation counts",
+    "same retained mechanical-domain assessments",
+    "both source runs remained unchanged and imported no Python agent module",
+    "current replay used the declared complete frozen native source",
+    "current replay identifies the exact host-only baseline and public trace"
+  ],
+  "expectedChecksPerCase": 17,
+  "expectedComparisonChecks": 34,
+  "qualification": "Exactly the two uncompleted SIGKILL(-9) recorded replays from the first eleven-case attempt. Retains original inputs and all17 comparison labels. Released-baseline host avoids retaining the historical report in the native process; sequential1536MiB run. No native/harness or case behavior change; no new live game and no KATA retry.",
+  "recoveryOf": {
+    "path": "docs/migration/lot6a-evidence/integrated-final-02/regression-cases.json",
+    "sha256": "dc84ecc83902ecb71865710220b593df351dc0ca7ae6885561e986a509df7ea1",
+    "bytes": 8422
+  }
+}

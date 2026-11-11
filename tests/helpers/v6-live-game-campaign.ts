@@ -599,6 +599,9 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
           const symbolsFacts = reasoningFacts
             .filter(fact => evidence.transitions.some((_: R, index: number) =>
               fact.key === `symbol_transaction_event:${evidence.decision_revision + index}`));
+          const previewFacts = reasoningFacts
+            .filter(fact => evidence.transitions.some((_: R, index: number) =>
+              fact.key === `preview_packing_event:${evidence.decision_revision + index}`));
           const anchors = (series.events as R[]).filter(event => event.kind === 'coupled_pair_epoch_anchor');
           const alternating = (series.events as R[]).filter(event => event.kind === 'alternating_graph_evidence');
           const graphEvidence = alternating.at(-1);
@@ -677,6 +680,8 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
               stateNode: 'family_state:preview_packing', state: read('family_state:preview_packing'),
               eventsThrough: report.previewPackingEvents.length, instanceSourceState: previewOwner?.sourceState() ?? null,
               proposal: evidence.proposal.preview_packing_plan ? evidence.proposal : null,
+              acquired: previewFacts.map(fact => ({ key: fact.key, evidence: fact.evidence, revision: fact.revision, result: fact.value })),
+              retainedSourceFact: reasoningFacts.find(fact => fact.key === 'preview_packing_state') ?? null,
               qualification: 'Passive observation after the real selected return and restoration; no Preview passive acquisition or injected state.',
             } } : {}),
             ...(graph.nodes['family_state:facet_examples'] ? { facetExample: {

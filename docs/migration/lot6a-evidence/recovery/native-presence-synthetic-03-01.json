@@ -1,0 +1,89 @@
+{
+  "schema": "logos-engine.lot6a.preview-owner-presence.v1",
+  "mode": "synthetic_qualification",
+  "recordedAt": "2026-11-11T12:23:05.287243+00:00",
+  "generator": {
+    "path": "scripts/verify-preview-packing-presence.py",
+    "sha256": "6702438d10baa72d7d59a09e58cc610852e46d80fefd8968443fecd953e190cc",
+    "bytes": 48162
+  },
+  "inputs": [
+    {
+      "path": "docs/migration/lot6a-evidence/recovery/oracle/runtime-synthetic-capture-03.json.gz",
+      "sha256": "fe3a2fe01432560697b081d82b9ed91ac7f42f787035b22ecd0758ebcee46576",
+      "bytes": 861945
+    }
+  ],
+  "caseManifest": null,
+  "regressionSummary": null,
+  "nativeDigest": "ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229",
+  "status": "failed",
+  "cases": [
+    {
+      "case": "synthetic",
+      "status": "failed",
+      "prefixes": 3,
+      "selectedPrefixes": 1,
+      "foreignPrefixes": 0,
+      "physicalReturns": 4,
+      "selectedReturns": 1,
+      "foreignReturns": 0,
+      "selectedRecords": 1,
+      "passiveReturns": 0,
+      "events": 25,
+      "proposalCalls": 3,
+      "actualRestores": 10,
+      "nativeRestores": 6,
+      "sourceRestores": 4,
+      "sourceFactsRetainedPrefixes": 0,
+      "acquiredSourceFacts": 0,
+      "coldPrefixes": 0,
+      "completedEventCursors": 0,
+      "errors": [
+        {
+          "code": "missing_source_facts",
+          "where": "prefixes[0]",
+          "message": "Recorder did not retain actual Preview source facts"
+        }
+      ],
+      "nativeDigest": "ea2b52283409971cf6ce73b8b7970576651bfb3c78a681fc741a13f432050229",
+      "game": "SYN1",
+      "report": {
+        "path": "docs/migration/lot6a-evidence/recovery/oracle/runtime-synthetic-capture-03.json.gz",
+        "sha256": "fe3a2fe01432560697b081d82b9ed91ac7f42f787035b22ecd0758ebcee46576",
+        "bytes": 861945
+      }
+    }
+  ],
+  "errors": [],
+  "qualification": "Read-only consistency of one captured native Preview owner, complete call journal, physical-return selection, retained source facts and actual restorations. No Python/original-source parity, game execution, new live success, cost result or complete-caller equivalence is claimed. Earlier source fact writes overwritten by the last fact are represented by the observed source-restoration calls, not reconstructed as retained facts.",
+  "pythonParityClaimed": false,
+  "gameExecution": false,
+  "negativeQualification": {
+    "status": "not_run",
+    "reason": "Unchanged report fails; no passing baseline is invented",
+    "cases": []
+  },
+  "inputsUnchanged": true,
+  "totals": {
+    "prefixes": 3,
+    "selectedPrefixes": 1,
+    "foreignPrefixes": 0,
+    "physicalReturns": 4,
+    "selectedReturns": 1,
+    "foreignReturns": 0,
+    "selectedRecords": 1,
+    "passiveReturns": 0,
+    "events": 25,
+    "proposalCalls": 3,
+    "actualRestores": 10,
+    "nativeRestores": 6,
+    "sourceRestores": 4,
+    "sourceFactsRetainedPrefixes": 0,
+    "acquiredSourceFacts": 0,
+    "coldPrefixes": 0,
+    "completedEventCursors": 0,
+    "cases": 1,
+    "passedCases": 0
+  }
+}
