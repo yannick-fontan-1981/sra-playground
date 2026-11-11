@@ -1,0 +1,2463 @@
+{
+  "schema": "logos-engine.lot4c-owner-cost-structural-attribution.v1",
+  "status": "qualified_functional_structure",
+  "startedAt": "2026-11-11T01:08:41.733Z",
+  "checks": [
+    {
+      "name": "immutable_capture_provenance_before_measurement",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:warmup:0",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:warmup:1",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:warmup:2",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:warmup:3",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:warmup:4",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:warmup:5",
+      "passed": true
+    },
+    {
+      "name": "shape:STCK:warmup",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:0",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:1",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:2",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:3",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:4",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:5",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:6",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:7",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:8",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:9",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:10",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:11",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:12",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:13",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:14",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:15",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:16",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:17",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:18",
+      "passed": true
+    },
+    {
+      "name": "shape:STCK:measured",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:warmup:0",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:warmup:1",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:warmup:2",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:warmup:3",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:warmup:4",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:warmup:5",
+      "passed": true
+    },
+    {
+      "name": "shape:SMLP:warmup",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:0",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:1",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:2",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:3",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:4",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:5",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:6",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:7",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:8",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:9",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:10",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:11",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:12",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:13",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:14",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:15",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:16",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:17",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:18",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:19",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:20",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:21",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:22",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:23",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:24",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:25",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:26",
+      "passed": true
+    },
+    {
+      "name": "shape:SMLP:measured",
+      "passed": true
+    },
+    {
+      "name": "all_inputs_unchanged_and_no_window_started",
+      "passed": true
+    }
+  ],
+  "nodeAttributions": [
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 45,
+      "nodeId": "family_state:facet_examples",
+      "kind": "family_state",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "e09b9f6e34359ef2da1dc5d643f06080c88da82f8bfce2e8a2cc0870b822cc07",
+      "category": "facet_owner_state",
+      "sourceStateSha256": "38de4a59f244202bc04a1f3d2484c785accb5ad2ffed00d1105d474b0979107b",
+      "epoch": null,
+      "actualPersistence": null,
+      "retainedEvents": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 46,
+      "nodeId": "family_activation:facet_examples",
+      "kind": "family_activation",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "1eb9013233cf1830095c98ce5c12f1aa0bbb5a337666c7974ef8423ab06b6edf",
+      "category": "facet_installation"
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 133,
+      "nodeId": "program:v6.facet_examples.choose",
+      "kind": "program",
+      "revision": 1,
+      "cause": {
+        "statement": "program.install",
+        "step": "native_store",
+        "workflow": "v6.facet_examples.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "0e1c1a86717dc4a667be3760f53e94cbb311d47312b6e47c5999b64380330564",
+      "category": "facet_installation"
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 1,
+      "request": "advance",
+      "requestSequence": 1,
+      "deltaSequence": 258,
+      "nodeId": "family_state:facet_examples",
+      "kind": "family_state",
+      "revision": 2,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:1"
+      ],
+      "nodeSha256": "e483a795aa4b01145c013140dc1f3b902ea1045b776a6aea2731195680df0d2d",
+      "category": "facet_owner_state",
+      "sourceStateSha256": "38de4a59f244202bc04a1f3d2484c785accb5ad2ffed00d1105d474b0979107b",
+      "epoch": null,
+      "actualPersistence": {
+        "index": 2,
+        "operationBoundary": 1,
+        "beforeRevision": 216,
+        "afterRevision": 289
+      },
+      "retainedEvents": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 3,
+      "request": "advance",
+      "requestSequence": 2,
+      "deltaSequence": 371,
+      "nodeId": "family_state:facet_examples",
+      "kind": "family_state",
+      "revision": 3,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:2"
+      ],
+      "nodeSha256": "ec37c9d991477514ef9a3d1651b007b1fc59129b4067121c76480d7bdf2527f8",
+      "category": "facet_owner_state",
+      "sourceStateSha256": "38de4a59f244202bc04a1f3d2484c785accb5ad2ffed00d1105d474b0979107b",
+      "epoch": null,
+      "actualPersistence": {
+        "index": 4,
+        "operationBoundary": 3,
+        "beforeRevision": 338,
+        "afterRevision": 404
+      },
+      "retainedEvents": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 5,
+      "request": "advance",
+      "requestSequence": 3,
+      "deltaSequence": 480,
+      "nodeId": "family_state:facet_examples",
+      "kind": "family_state",
+      "revision": 4,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:3"
+      ],
+      "nodeSha256": "86eb9e68c83666daca210b2dbfa6173a77d10eb73665a5de6035774de2a23f69",
+      "category": "facet_owner_state",
+      "sourceStateSha256": "38de4a59f244202bc04a1f3d2484c785accb5ad2ffed00d1105d474b0979107b",
+      "epoch": null,
+      "actualPersistence": {
+        "index": 6,
+        "operationBoundary": 5,
+        "beforeRevision": 450,
+        "afterRevision": 514
+      },
+      "retainedEvents": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 45,
+      "nodeId": "family_state:facet_examples",
+      "kind": "family_state",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "75e9a3653533e9699250c6f3665c54b0e467812116efa11bd333c875516d8386",
+      "category": "facet_owner_state",
+      "sourceStateSha256": "38de4a59f244202bc04a1f3d2484c785accb5ad2ffed00d1105d474b0979107b",
+      "epoch": null,
+      "actualPersistence": null,
+      "retainedEvents": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 46,
+      "nodeId": "family_activation:facet_examples",
+      "kind": "family_activation",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "f3e82e6d3262f4e58b4d256201599f22aa53fd541d295e43fc15e90e29c461a5",
+      "category": "facet_installation"
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 133,
+      "nodeId": "program:v6.facet_examples.choose",
+      "kind": "program",
+      "revision": 1,
+      "cause": {
+        "statement": "program.install",
+        "step": "native_store",
+        "workflow": "v6.facet_examples.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "d1469e407d6bb3546792a5dc54a4fe4985f9eef28349461aa9e066f435733fc5",
+      "category": "facet_installation"
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 1,
+      "request": "advance",
+      "requestSequence": 1,
+      "deltaSequence": 258,
+      "nodeId": "family_state:facet_examples",
+      "kind": "family_state",
+      "revision": 2,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:1"
+      ],
+      "nodeSha256": "769c6a3a593e2c9620c88f32075c04fbef69faa43a889ca2851d89db448fe390",
+      "category": "facet_owner_state",
+      "sourceStateSha256": "38de4a59f244202bc04a1f3d2484c785accb5ad2ffed00d1105d474b0979107b",
+      "epoch": null,
+      "actualPersistence": {
+        "index": 2,
+        "operationBoundary": 1,
+        "beforeRevision": 216,
+        "afterRevision": 289
+      },
+      "retainedEvents": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 3,
+      "request": "advance",
+      "requestSequence": 2,
+      "deltaSequence": 371,
+      "nodeId": "family_state:facet_examples",
+      "kind": "family_state",
+      "revision": 3,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:2"
+      ],
+      "nodeSha256": "6d3ec1708853392a302bc29867d2e9e17472d22050a1a41b6d13c81f6868d32c",
+      "category": "facet_owner_state",
+      "sourceStateSha256": "38de4a59f244202bc04a1f3d2484c785accb5ad2ffed00d1105d474b0979107b",
+      "epoch": null,
+      "actualPersistence": {
+        "index": 4,
+        "operationBoundary": 3,
+        "beforeRevision": 338,
+        "afterRevision": 404
+      },
+      "retainedEvents": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 5,
+      "request": "advance",
+      "requestSequence": 3,
+      "deltaSequence": 480,
+      "nodeId": "family_state:facet_examples",
+      "kind": "family_state",
+      "revision": 4,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:3"
+      ],
+      "nodeSha256": "34e6903606c9a20df6b7ce241e47013434263de001e3ac8d14963d79769953f8",
+      "category": "facet_owner_state",
+      "sourceStateSha256": "38de4a59f244202bc04a1f3d2484c785accb5ad2ffed00d1105d474b0979107b",
+      "epoch": null,
+      "actualPersistence": {
+        "index": 6,
+        "operationBoundary": 5,
+        "beforeRevision": 450,
+        "afterRevision": 514
+      },
+      "retainedEvents": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 7,
+      "request": "advance",
+      "requestSequence": 4,
+      "deltaSequence": 600,
+      "nodeId": "family_state:facet_examples",
+      "kind": "family_state",
+      "revision": 5,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:4"
+      ],
+      "nodeSha256": "69b3acfb1ff393f0f8210e79bdb67102851b0e73a3ce3c61f0766579348edd98",
+      "category": "facet_owner_state",
+      "sourceStateSha256": "38de4a59f244202bc04a1f3d2484c785accb5ad2ffed00d1105d474b0979107b",
+      "epoch": null,
+      "actualPersistence": {
+        "index": 8,
+        "operationBoundary": 7,
+        "beforeRevision": 565,
+        "afterRevision": 631
+      },
+      "retainedEvents": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 13,
+      "request": "advance",
+      "requestSequence": 9,
+      "deltaSequence": 770,
+      "nodeId": "family_state:facet_examples",
+      "kind": "family_state",
+      "revision": 6,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:5"
+      ],
+      "nodeSha256": "253cf3e1608a4a7fba020221f140bac22c59aa654b7fcbf21d286b0899bf99f5",
+      "category": "facet_owner_state",
+      "sourceStateSha256": "38de4a59f244202bc04a1f3d2484c785accb5ad2ffed00d1105d474b0979107b",
+      "epoch": null,
+      "actualPersistence": {
+        "index": 10,
+        "operationBoundary": 9,
+        "beforeRevision": 727,
+        "afterRevision": 805
+      },
+      "retainedEvents": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 15,
+      "request": "advance",
+      "requestSequence": 10,
+      "deltaSequence": 885,
+      "nodeId": "family_state:facet_examples",
+      "kind": "family_state",
+      "revision": 7,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:10"
+      ],
+      "nodeSha256": "632937b8b0b7c30c61dee0b77b14a33e9d7bd733812cd42054337acfff63cd4d",
+      "category": "facet_owner_state",
+      "sourceStateSha256": "38de4a59f244202bc04a1f3d2484c785accb5ad2ffed00d1105d474b0979107b",
+      "epoch": null,
+      "actualPersistence": {
+        "index": 12,
+        "operationBoundary": 11,
+        "beforeRevision": 852,
+        "afterRevision": 918
+      },
+      "retainedEvents": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 45,
+      "nodeId": "family_state:facet_examples",
+      "kind": "family_state",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "50b5ed07eed45bf100ca62bbe0ec7dcca6b025a0f1db067f7a12e9b7f597c590",
+      "category": "facet_owner_state",
+      "sourceStateSha256": "38de4a59f244202bc04a1f3d2484c785accb5ad2ffed00d1105d474b0979107b",
+      "epoch": null,
+      "actualPersistence": null,
+      "retainedEvents": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 46,
+      "nodeId": "family_activation:facet_examples",
+      "kind": "family_activation",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "25877d58aff31b32e3a258505023ea6fa4882ac9d8e6e85d6c8e69282cce1858",
+      "category": "facet_installation"
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 133,
+      "nodeId": "program:v6.facet_examples.choose",
+      "kind": "program",
+      "revision": 1,
+      "cause": {
+        "statement": "program.install",
+        "step": "native_store",
+        "workflow": "v6.facet_examples.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "3b2f5aa75174eb9e10d7139efb33de7be30a1183ccee2b9b36da81c1a150d885",
+      "category": "facet_installation"
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 197,
+      "nodeId": "family_state:facet_examples",
+      "kind": "family_state",
+      "revision": 2,
+      "cause": {
+        "statement": "caller.prepare",
+        "step": "selection",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "e6431221ab22d4678e2f42ca2affc3963fbf69db7736eeb9e11e3c6ee518dd53",
+      "category": "facet_owner_state",
+      "sourceStateSha256": "1bd226563194733f1137e05e6fbe32759a15e75e38cd53c4c8c6324d6a9f8e43",
+      "epoch": 1,
+      "actualPersistence": {
+        "index": 1,
+        "operationBoundary": 2,
+        "beforeRevision": 168,
+        "afterRevision": 200
+      },
+      "retainedEvents": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 1,
+      "request": "advance",
+      "requestSequence": 1,
+      "deltaSequence": 274,
+      "nodeId": "family_state:facet_examples",
+      "kind": "family_state",
+      "revision": 3,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:1"
+      ],
+      "nodeSha256": "47c52b09511c97bac69a81b3bb77f1abaae04ce6df37cb0342dd8aae2692c14f",
+      "category": "facet_owner_state",
+      "sourceStateSha256": "1bd226563194733f1137e05e6fbe32759a15e75e38cd53c4c8c6324d6a9f8e43",
+      "epoch": 1,
+      "actualPersistence": {
+        "index": 2,
+        "operationBoundary": 2,
+        "beforeRevision": 244,
+        "afterRevision": 305
+      },
+      "retainedEvents": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 3,
+      "request": "advance",
+      "requestSequence": 2,
+      "deltaSequence": 381,
+      "nodeId": "family_state:facet_examples",
+      "kind": "family_state",
+      "revision": 4,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:2"
+      ],
+      "nodeSha256": "6edb1d8ddef4f5a5804901cbffedcd95b7d3a04582eb754d5b865a63c7ff4d5a",
+      "category": "facet_owner_state",
+      "sourceStateSha256": "1bd226563194733f1137e05e6fbe32759a15e75e38cd53c4c8c6324d6a9f8e43",
+      "epoch": 1,
+      "actualPersistence": {
+        "index": 4,
+        "operationBoundary": 5,
+        "beforeRevision": 349,
+        "afterRevision": 412
+      },
+      "retainedEvents": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 5,
+      "request": "advance",
+      "requestSequence": 3,
+      "deltaSequence": 488,
+      "nodeId": "family_state:facet_examples",
+      "kind": "family_state",
+      "revision": 5,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:3"
+      ],
+      "nodeSha256": "39a8356f8163a341bf910d61a584b33445294999ac59665def73b5c2fa02efc1",
+      "category": "facet_owner_state",
+      "sourceStateSha256": "1bd226563194733f1137e05e6fbe32759a15e75e38cd53c4c8c6324d6a9f8e43",
+      "epoch": 1,
+      "actualPersistence": {
+        "index": 6,
+        "operationBoundary": 8,
+        "beforeRevision": 457,
+        "afterRevision": 525
+      },
+      "retainedEvents": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 45,
+      "nodeId": "family_state:facet_examples",
+      "kind": "family_state",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "a851f806c908f97f63a98ed8eebfe4b53a10cad269d902aa998300ce0a0f2a02",
+      "category": "facet_owner_state",
+      "sourceStateSha256": "38de4a59f244202bc04a1f3d2484c785accb5ad2ffed00d1105d474b0979107b",
+      "epoch": null,
+      "actualPersistence": null,
+      "retainedEvents": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 46,
+      "nodeId": "family_activation:facet_examples",
+      "kind": "family_activation",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "b6771b756167297cb94ea39caac6a5885aa5a63564eb8473d98425e3f7b8bd04",
+      "category": "facet_installation"
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 133,
+      "nodeId": "program:v6.facet_examples.choose",
+      "kind": "program",
+      "revision": 1,
+      "cause": {
+        "statement": "program.install",
+        "step": "native_store",
+        "workflow": "v6.facet_examples.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "ed22e57e74cfb1bae0d4d240d2d9898fc05176b768a2542d5c7087222ceb8986",
+      "category": "facet_installation"
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 197,
+      "nodeId": "family_state:facet_examples",
+      "kind": "family_state",
+      "revision": 2,
+      "cause": {
+        "statement": "caller.prepare",
+        "step": "selection",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "22feb5852c1ab4768ade35e2e8677ba3adf20e4ea7fbfc113252dc6b251bfc3c",
+      "category": "facet_owner_state",
+      "sourceStateSha256": "1bd226563194733f1137e05e6fbe32759a15e75e38cd53c4c8c6324d6a9f8e43",
+      "epoch": 1,
+      "actualPersistence": {
+        "index": 1,
+        "operationBoundary": 2,
+        "beforeRevision": 168,
+        "afterRevision": 200
+      },
+      "retainedEvents": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 1,
+      "request": "advance",
+      "requestSequence": 1,
+      "deltaSequence": 274,
+      "nodeId": "family_state:facet_examples",
+      "kind": "family_state",
+      "revision": 3,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:1"
+      ],
+      "nodeSha256": "add83e0ec6caa2579d00b560a1f5595254229c9c29b6e1c8d1c62e1b1db2d78e",
+      "category": "facet_owner_state",
+      "sourceStateSha256": "1bd226563194733f1137e05e6fbe32759a15e75e38cd53c4c8c6324d6a9f8e43",
+      "epoch": 1,
+      "actualPersistence": {
+        "index": 2,
+        "operationBoundary": 2,
+        "beforeRevision": 244,
+        "afterRevision": 305
+      },
+      "retainedEvents": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 3,
+      "request": "advance",
+      "requestSequence": 2,
+      "deltaSequence": 381,
+      "nodeId": "family_state:facet_examples",
+      "kind": "family_state",
+      "revision": 4,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:2"
+      ],
+      "nodeSha256": "83fea63671b3aefe47169781dae23419eb26146e121cca0255714f02e8362cad",
+      "category": "facet_owner_state",
+      "sourceStateSha256": "1bd226563194733f1137e05e6fbe32759a15e75e38cd53c4c8c6324d6a9f8e43",
+      "epoch": 1,
+      "actualPersistence": {
+        "index": 4,
+        "operationBoundary": 5,
+        "beforeRevision": 349,
+        "afterRevision": 412
+      },
+      "retainedEvents": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 5,
+      "request": "advance",
+      "requestSequence": 3,
+      "deltaSequence": 488,
+      "nodeId": "family_state:facet_examples",
+      "kind": "family_state",
+      "revision": 5,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:3"
+      ],
+      "nodeSha256": "e5c8f6aa844619c675e15c278a052779316e33e52b628630cb8d70425ee65371",
+      "category": "facet_owner_state",
+      "sourceStateSha256": "1bd226563194733f1137e05e6fbe32759a15e75e38cd53c4c8c6324d6a9f8e43",
+      "epoch": 1,
+      "actualPersistence": {
+        "index": 6,
+        "operationBoundary": 8,
+        "beforeRevision": 457,
+        "afterRevision": 525
+      },
+      "retainedEvents": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 6,
+      "request": "resume",
+      "requestSequence": 3,
+      "deltaSequence": 533,
+      "nodeId": "family_state:facet_examples",
+      "kind": "family_state",
+      "revision": 6,
+      "cause": {
+        "statement": "caller.prepare",
+        "step": "selection",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:3"
+      ],
+      "nodeSha256": "69a6c51d8619aeeea24131e9a4c5a3812a001f174aea1385c4377ebefce4031c",
+      "category": "facet_owner_state",
+      "sourceStateSha256": "594b7b472f76023f964e62aa4e058de42789c2d32883193ed1979dd0b88e3592",
+      "epoch": 2,
+      "actualPersistence": {
+        "index": 7,
+        "operationBoundary": 11,
+        "beforeRevision": 525,
+        "afterRevision": 536
+      },
+      "retainedEvents": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 7,
+      "request": "advance",
+      "requestSequence": 4,
+      "deltaSequence": 610,
+      "nodeId": "family_state:facet_examples",
+      "kind": "family_state",
+      "revision": 7,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:4"
+      ],
+      "nodeSha256": "207ea4a13ae81f1bfafc4ba028017ab0bb00bf22d6a4d080d4bfca658ded59f3",
+      "category": "facet_owner_state",
+      "sourceStateSha256": "594b7b472f76023f964e62aa4e058de42789c2d32883193ed1979dd0b88e3592",
+      "epoch": 2,
+      "actualPersistence": {
+        "index": 8,
+        "operationBoundary": 11,
+        "beforeRevision": 580,
+        "afterRevision": 641
+      },
+      "retainedEvents": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 11,
+      "request": "advance",
+      "requestSequence": 7,
+      "deltaSequence": 745,
+      "nodeId": "family_state:facet_examples",
+      "kind": "family_state",
+      "revision": 8,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:5"
+      ],
+      "nodeSha256": "928625373de28db26d3c4b9b28bdac1cd7fed0ef173df4b99218386b8976018f",
+      "category": "facet_owner_state",
+      "sourceStateSha256": "594b7b472f76023f964e62aa4e058de42789c2d32883193ed1979dd0b88e3592",
+      "epoch": 2,
+      "actualPersistence": {
+        "index": 10,
+        "operationBoundary": 14,
+        "beforeRevision": 712,
+        "afterRevision": 781
+      },
+      "retainedEvents": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 13,
+      "request": "advance",
+      "requestSequence": 8,
+      "deltaSequence": 862,
+      "nodeId": "family_state:facet_examples",
+      "kind": "family_state",
+      "revision": 9,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:8"
+      ],
+      "nodeSha256": "e7e11ed552d51f746b7cb5ccc4748c225c1f5c3602aa74b6e61251f10a0eaeb4",
+      "category": "facet_owner_state",
+      "sourceStateSha256": "594b7b472f76023f964e62aa4e058de42789c2d32883193ed1979dd0b88e3592",
+      "epoch": 2,
+      "actualPersistence": {
+        "index": 12,
+        "operationBoundary": 16,
+        "beforeRevision": 832,
+        "afterRevision": 893
+      },
+      "retainedEvents": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 14,
+      "request": "resume",
+      "requestSequence": 8,
+      "deltaSequence": 900,
+      "nodeId": "family_state:facet_examples",
+      "kind": "family_state",
+      "revision": 10,
+      "cause": {
+        "statement": "caller.prepare",
+        "step": "selection",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:8"
+      ],
+      "nodeSha256": "188c6644678e7b503e2259db34aeb89f0a20911d34ca42e2f53cffeb76f45b7c",
+      "category": "facet_owner_state",
+      "sourceStateSha256": "d71f473dfd6c6b82eb39e6b8dc4b4b16739d0f77286d782e496826e8482c1873",
+      "epoch": 3,
+      "actualPersistence": {
+        "index": 13,
+        "operationBoundary": 19,
+        "beforeRevision": 893,
+        "afterRevision": 901
+      },
+      "retainedEvents": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 15,
+      "request": "advance",
+      "requestSequence": 9,
+      "deltaSequence": 977,
+      "nodeId": "family_state:facet_examples",
+      "kind": "family_state",
+      "revision": 11,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:9"
+      ],
+      "nodeSha256": "b65ae2e098d615ca0ab8b2f34405b1dd7cbb1ff62a7116cfaea8011985565feb",
+      "category": "facet_owner_state",
+      "sourceStateSha256": "d71f473dfd6c6b82eb39e6b8dc4b4b16739d0f77286d782e496826e8482c1873",
+      "epoch": 3,
+      "actualPersistence": {
+        "index": 14,
+        "operationBoundary": 19,
+        "beforeRevision": 945,
+        "afterRevision": 1010
+      },
+      "retainedEvents": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 18,
+      "request": "advance",
+      "requestSequence": 11,
+      "deltaSequence": 1103,
+      "nodeId": "family_state:facet_examples",
+      "kind": "family_state",
+      "revision": 12,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:10"
+      ],
+      "nodeSha256": "b1cfa6baa7b802fd3f46f3baae6438ac64099b357c9ffc8c71833439adbdd023",
+      "category": "facet_owner_state",
+      "sourceStateSha256": "d71f473dfd6c6b82eb39e6b8dc4b4b16739d0f77286d782e496826e8482c1873",
+      "epoch": 3,
+      "actualPersistence": {
+        "index": 16,
+        "operationBoundary": 22,
+        "beforeRevision": 1067,
+        "afterRevision": 1136
+      },
+      "retainedEvents": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 23,
+      "request": "advance",
+      "requestSequence": 15,
+      "deltaSequence": 1254,
+      "nodeId": "family_state:facet_examples",
+      "kind": "family_state",
+      "revision": 13,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:12"
+      ],
+      "nodeSha256": "d986b05dd1e4a561b0014d1aad926355cea61a41c9f5bac96aeb2661ab3fa8d2",
+      "category": "facet_owner_state",
+      "sourceStateSha256": "d71f473dfd6c6b82eb39e6b8dc4b4b16739d0f77286d782e496826e8482c1873",
+      "epoch": 3,
+      "actualPersistence": {
+        "index": 18,
+        "operationBoundary": 25,
+        "beforeRevision": 1220,
+        "afterRevision": 1289
+      },
+      "retainedEvents": []
+    }
+  ],
+  "points": [
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "sequence": 0,
+      "baselineNodeCount": 169,
+      "candidateNodeCount": 172,
+      "baselineGraphRevision": 178,
+      "candidateGraphRevision": 181,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 3,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 1,
+      "request": "advance",
+      "sequence": 1,
+      "baselineNodeCount": 197,
+      "candidateNodeCount": 200,
+      "baselineGraphRevision": 285,
+      "candidateGraphRevision": 289,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 4,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 2,
+      "request": "resume",
+      "sequence": 1,
+      "baselineNodeCount": 199,
+      "candidateNodeCount": 202,
+      "baselineGraphRevision": 295,
+      "candidateGraphRevision": 299,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 4,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 3,
+      "request": "advance",
+      "sequence": 2,
+      "baselineNodeCount": 221,
+      "candidateNodeCount": 224,
+      "baselineGraphRevision": 399,
+      "candidateGraphRevision": 404,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 5,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 4,
+      "request": "resume",
+      "sequence": 2,
+      "baselineNodeCount": 223,
+      "candidateNodeCount": 226,
+      "baselineGraphRevision": 409,
+      "candidateGraphRevision": 414,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 5,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 5,
+      "request": "advance",
+      "sequence": 3,
+      "baselineNodeCount": 245,
+      "candidateNodeCount": 248,
+      "baselineGraphRevision": 508,
+      "candidateGraphRevision": 514,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 6,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "sequence": 0,
+      "baselineNodeCount": 169,
+      "candidateNodeCount": 172,
+      "baselineGraphRevision": 178,
+      "candidateGraphRevision": 181,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 3,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 1,
+      "request": "advance",
+      "sequence": 1,
+      "baselineNodeCount": 197,
+      "candidateNodeCount": 200,
+      "baselineGraphRevision": 285,
+      "candidateGraphRevision": 289,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 4,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 2,
+      "request": "resume",
+      "sequence": 1,
+      "baselineNodeCount": 199,
+      "candidateNodeCount": 202,
+      "baselineGraphRevision": 295,
+      "candidateGraphRevision": 299,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 4,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 3,
+      "request": "advance",
+      "sequence": 2,
+      "baselineNodeCount": 221,
+      "candidateNodeCount": 224,
+      "baselineGraphRevision": 399,
+      "candidateGraphRevision": 404,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 5,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 4,
+      "request": "resume",
+      "sequence": 2,
+      "baselineNodeCount": 223,
+      "candidateNodeCount": 226,
+      "baselineGraphRevision": 409,
+      "candidateGraphRevision": 414,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 5,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 5,
+      "request": "advance",
+      "sequence": 3,
+      "baselineNodeCount": 245,
+      "candidateNodeCount": 248,
+      "baselineGraphRevision": 508,
+      "candidateGraphRevision": 514,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 6,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 6,
+      "request": "resume",
+      "sequence": 3,
+      "baselineNodeCount": 247,
+      "candidateNodeCount": 250,
+      "baselineGraphRevision": 520,
+      "candidateGraphRevision": 526,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 6,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 7,
+      "request": "advance",
+      "sequence": 4,
+      "baselineNodeCount": 269,
+      "candidateNodeCount": 272,
+      "baselineGraphRevision": 624,
+      "candidateGraphRevision": 631,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 7,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 8,
+      "request": "resume",
+      "sequence": 4,
+      "baselineNodeCount": 271,
+      "candidateNodeCount": 274,
+      "baselineGraphRevision": 635,
+      "candidateGraphRevision": 642,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 7,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 9,
+      "request": "advance",
+      "sequence": 5,
+      "baselineNodeCount": 271,
+      "candidateNodeCount": 274,
+      "baselineGraphRevision": 635,
+      "candidateGraphRevision": 642,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 7,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 10,
+      "request": "advance",
+      "sequence": 6,
+      "baselineNodeCount": 271,
+      "candidateNodeCount": 274,
+      "baselineGraphRevision": 635,
+      "candidateGraphRevision": 642,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 7,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 11,
+      "request": "advance",
+      "sequence": 7,
+      "baselineNodeCount": 271,
+      "candidateNodeCount": 274,
+      "baselineGraphRevision": 635,
+      "candidateGraphRevision": 642,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 7,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 12,
+      "request": "advance",
+      "sequence": 8,
+      "baselineNodeCount": 271,
+      "candidateNodeCount": 274,
+      "baselineGraphRevision": 635,
+      "candidateGraphRevision": 642,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 7,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 13,
+      "request": "advance",
+      "sequence": 9,
+      "baselineNodeCount": 350,
+      "candidateNodeCount": 353,
+      "baselineGraphRevision": 797,
+      "candidateGraphRevision": 805,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 8,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 14,
+      "request": "resume",
+      "sequence": 9,
+      "baselineNodeCount": 352,
+      "candidateNodeCount": 355,
+      "baselineGraphRevision": 807,
+      "candidateGraphRevision": 815,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 8,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 15,
+      "request": "advance",
+      "sequence": 10,
+      "baselineNodeCount": 372,
+      "candidateNodeCount": 375,
+      "baselineGraphRevision": 909,
+      "candidateGraphRevision": 918,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 9,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 16,
+      "request": "inspect",
+      "sequence": 10,
+      "baselineNodeCount": 372,
+      "candidateNodeCount": 375,
+      "baselineGraphRevision": 909,
+      "candidateGraphRevision": 918,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 9,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 17,
+      "request": "inspect",
+      "sequence": 10,
+      "baselineNodeCount": 372,
+      "candidateNodeCount": 375,
+      "baselineGraphRevision": 909,
+      "candidateGraphRevision": 918,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 9,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 18,
+      "request": "inspect",
+      "sequence": 10,
+      "baselineNodeCount": 372,
+      "candidateNodeCount": 375,
+      "baselineGraphRevision": 909,
+      "candidateGraphRevision": 918,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 9,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "sequence": 0,
+      "baselineNodeCount": 174,
+      "candidateNodeCount": 177,
+      "baselineGraphRevision": 206,
+      "candidateGraphRevision": 210,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 4,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 1,
+      "request": "advance",
+      "sequence": 1,
+      "baselineNodeCount": 192,
+      "candidateNodeCount": 195,
+      "baselineGraphRevision": 300,
+      "candidateGraphRevision": 305,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 5,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 2,
+      "request": "resume",
+      "sequence": 1,
+      "baselineNodeCount": 194,
+      "candidateNodeCount": 197,
+      "baselineGraphRevision": 310,
+      "candidateGraphRevision": 315,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 5,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 3,
+      "request": "advance",
+      "sequence": 2,
+      "baselineNodeCount": 209,
+      "candidateNodeCount": 212,
+      "baselineGraphRevision": 406,
+      "candidateGraphRevision": 412,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 6,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 4,
+      "request": "resume",
+      "sequence": 2,
+      "baselineNodeCount": 211,
+      "candidateNodeCount": 214,
+      "baselineGraphRevision": 416,
+      "candidateGraphRevision": 422,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 6,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 5,
+      "request": "advance",
+      "sequence": 3,
+      "baselineNodeCount": 236,
+      "candidateNodeCount": 239,
+      "baselineGraphRevision": 518,
+      "candidateGraphRevision": 525,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 7,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "sequence": 0,
+      "baselineNodeCount": 174,
+      "candidateNodeCount": 177,
+      "baselineGraphRevision": 206,
+      "candidateGraphRevision": 210,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 4,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 1,
+      "request": "advance",
+      "sequence": 1,
+      "baselineNodeCount": 192,
+      "candidateNodeCount": 195,
+      "baselineGraphRevision": 300,
+      "candidateGraphRevision": 305,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 5,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 2,
+      "request": "resume",
+      "sequence": 1,
+      "baselineNodeCount": 194,
+      "candidateNodeCount": 197,
+      "baselineGraphRevision": 310,
+      "candidateGraphRevision": 315,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 5,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 3,
+      "request": "advance",
+      "sequence": 2,
+      "baselineNodeCount": 209,
+      "candidateNodeCount": 212,
+      "baselineGraphRevision": 406,
+      "candidateGraphRevision": 412,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 6,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 4,
+      "request": "resume",
+      "sequence": 2,
+      "baselineNodeCount": 211,
+      "candidateNodeCount": 214,
+      "baselineGraphRevision": 416,
+      "candidateGraphRevision": 422,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 6,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 5,
+      "request": "advance",
+      "sequence": 3,
+      "baselineNodeCount": 236,
+      "candidateNodeCount": 239,
+      "baselineGraphRevision": 518,
+      "candidateGraphRevision": 525,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 7,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 6,
+      "request": "resume",
+      "sequence": 3,
+      "baselineNodeCount": 238,
+      "candidateNodeCount": 241,
+      "baselineGraphRevision": 538,
+      "candidateGraphRevision": 546,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 8,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 7,
+      "request": "advance",
+      "sequence": 4,
+      "baselineNodeCount": 252,
+      "candidateNodeCount": 255,
+      "baselineGraphRevision": 632,
+      "candidateGraphRevision": 641,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 9,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 8,
+      "request": "resume",
+      "sequence": 4,
+      "baselineNodeCount": 254,
+      "candidateNodeCount": 257,
+      "baselineGraphRevision": 642,
+      "candidateGraphRevision": 651,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 9,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 9,
+      "request": "advance",
+      "sequence": 5,
+      "baselineNodeCount": 254,
+      "candidateNodeCount": 257,
+      "baselineGraphRevision": 642,
+      "candidateGraphRevision": 651,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 9,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 10,
+      "request": "advance",
+      "sequence": 6,
+      "baselineNodeCount": 254,
+      "candidateNodeCount": 257,
+      "baselineGraphRevision": 642,
+      "candidateGraphRevision": 651,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 9,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 11,
+      "request": "advance",
+      "sequence": 7,
+      "baselineNodeCount": 301,
+      "candidateNodeCount": 304,
+      "baselineGraphRevision": 771,
+      "candidateGraphRevision": 781,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 10,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 12,
+      "request": "resume",
+      "sequence": 7,
+      "baselineNodeCount": 303,
+      "candidateNodeCount": 306,
+      "baselineGraphRevision": 782,
+      "candidateGraphRevision": 792,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 10,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 13,
+      "request": "advance",
+      "sequence": 8,
+      "baselineNodeCount": 322,
+      "candidateNodeCount": 325,
+      "baselineGraphRevision": 882,
+      "candidateGraphRevision": 893,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 11,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 14,
+      "request": "resume",
+      "sequence": 8,
+      "baselineNodeCount": 324,
+      "candidateNodeCount": 327,
+      "baselineGraphRevision": 899,
+      "candidateGraphRevision": 911,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 12,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 15,
+      "request": "advance",
+      "sequence": 9,
+      "baselineNodeCount": 343,
+      "candidateNodeCount": 346,
+      "baselineGraphRevision": 997,
+      "candidateGraphRevision": 1010,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 13,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 16,
+      "request": "resume",
+      "sequence": 9,
+      "baselineNodeCount": 345,
+      "candidateNodeCount": 348,
+      "baselineGraphRevision": 1007,
+      "candidateGraphRevision": 1020,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 13,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 17,
+      "request": "advance",
+      "sequence": 10,
+      "baselineNodeCount": 345,
+      "candidateNodeCount": 348,
+      "baselineGraphRevision": 1007,
+      "candidateGraphRevision": 1020,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 13,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 18,
+      "request": "advance",
+      "sequence": 11,
+      "baselineNodeCount": 379,
+      "candidateNodeCount": 382,
+      "baselineGraphRevision": 1122,
+      "candidateGraphRevision": 1136,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 14,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 19,
+      "request": "resume",
+      "sequence": 11,
+      "baselineNodeCount": 381,
+      "candidateNodeCount": 384,
+      "baselineGraphRevision": 1132,
+      "candidateGraphRevision": 1146,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 14,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 20,
+      "request": "advance",
+      "sequence": 12,
+      "baselineNodeCount": 381,
+      "candidateNodeCount": 384,
+      "baselineGraphRevision": 1132,
+      "candidateGraphRevision": 1146,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 14,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 21,
+      "request": "advance",
+      "sequence": 13,
+      "baselineNodeCount": 381,
+      "candidateNodeCount": 384,
+      "baselineGraphRevision": 1132,
+      "candidateGraphRevision": 1146,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 14,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 22,
+      "request": "advance",
+      "sequence": 14,
+      "baselineNodeCount": 381,
+      "candidateNodeCount": 384,
+      "baselineGraphRevision": 1132,
+      "candidateGraphRevision": 1146,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 14,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 23,
+      "request": "advance",
+      "sequence": 15,
+      "baselineNodeCount": 441,
+      "candidateNodeCount": 444,
+      "baselineGraphRevision": 1274,
+      "candidateGraphRevision": 1289,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 15,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 24,
+      "request": "inspect",
+      "sequence": 15,
+      "baselineNodeCount": 441,
+      "candidateNodeCount": 444,
+      "baselineGraphRevision": 1274,
+      "candidateGraphRevision": 1289,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 15,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 25,
+      "request": "inspect",
+      "sequence": 15,
+      "baselineNodeCount": 441,
+      "candidateNodeCount": 444,
+      "baselineGraphRevision": 1274,
+      "candidateGraphRevision": 1289,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 15,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 26,
+      "request": "inspect",
+      "sequence": 15,
+      "baselineNodeCount": 441,
+      "candidateNodeCount": 444,
+      "baselineGraphRevision": 1274,
+      "candidateGraphRevision": 1289,
+      "addedNodeIds": [
+        "family_activation:facet_examples",
+        "family_state:facet_examples",
+        "program:v6.facet_examples.choose"
+      ],
+      "attributedCumulativeDeltas": 15,
+      "officialBoundarySourceCalls": []
+    }
+  ],
+  "failures": [],
+  "commandBoundaryProjections": [],
+  "generator": {
+    "path": "docs/migration/lot4c-evidence/qualify-cost-owner-graphs.mjs",
+    "bytes": 45033,
+    "sha256": "5a15c5d35f894d1ad35224465cf9ae50f73d6b56dc4c34dcb6074679915f4db0"
+  },
+  "nativeDigests": {
+    "baseline": "be11e761de3c0f3c7d50d10da47be9e0d7b4fc9c5b7d5002cc9272ffce85645a",
+    "candidate": "eebd099808672be934389020c8f9061df4fdacab28cd7d60c00cd1b080464c04"
+  },
+  "recordedAt": "2026-11-11T01:08:56.977Z",
+  "inputs": [
+    {
+      "path": "docs/migration/lot4c-evidence/qualify-cost-owner-graphs.mjs",
+      "bytes": 45033,
+      "sha256": "5a15c5d35f894d1ad35224465cf9ae50f73d6b56dc4c34dcb6074679915f4db0"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/capture-cost-owner-graphs.mjs",
+      "bytes": 23732,
+      "sha256": "3ad25bb203559fd60964fd98593b86b248b992436a94caf5709b06c61b428a52"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/performance-integrated/owner-graphs-baseline.receipt.json",
+      "bytes": 107599,
+      "sha256": "438dfd46337ec9864a4fda1df705ddc3b85c479e1d95f3d74e1586f4b84dd1f3"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/reference-isos-056/source-manifest.json",
+      "bytes": 34908,
+      "sha256": "55b78bacc97745a6b8b1bde35156ec0f7184a6ad1cf4a637d35a81b82abec42f"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/performance-integrated/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/performance-integrated/owner-graphs-baseline.json.gz",
+      "bytes": 5035997,
+      "sha256": "fce5a112c89dabf3c4a45fac08552b167efaf90519ecc2a0e2623625623f6276"
+    },
+    {
+      "path": "/workspace/sites/sra-lot4c-reference-056/scripts/measure-native-loop-costs.mjs",
+      "bytes": 20670,
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "/workspace/sites/sra-lot4c-reference-056/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "bytes": 48531,
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+    },
+    {
+      "path": "/workspace/sites/sra-lot4c-reference-056/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "bytes": 46966,
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    },
+    {
+      "path": "/workspace/sites/sra-lot4c-reference-056/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "bytes": 53583,
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "path": "/workspace/sites/sra-lot4c-reference-056/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "bytes": 111624,
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/performance-integrated/owner-graphs-candidate.receipt.json",
+      "bytes": 108172,
+      "sha256": "0de84a036c64b799abfdcd0033e138cce15b0375efcfa897d7a0568cc5ff1d2b"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/integrated-final/source-manifest.json",
+      "bytes": 35387,
+      "sha256": "453b773ee0b81364d44679b611214a527c008aab8f01ae2bf9cd402e7996f4aa"
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/performance-integrated/owner-graphs-candidate.json.gz",
+      "bytes": 5052386,
+      "sha256": "7e436a875a38e47a7056a74b22094079e214202aed38043a874cc817e9ffd722"
+    },
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "bytes": 20670,
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "bytes": 48531,
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "bytes": 46966,
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    },
+    {
+      "path": "docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "bytes": 53583,
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "path": "docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "bytes": 111624,
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    },
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "bytes": 152854,
+      "sha256": "e966b28840a05b3755c6f5ff2c3ec2b02075e943699232d5aacfd3de76d964e4"
+    },
+    {
+      "path": "src/logos-engine/v6-facet-examples.ts",
+      "bytes": 20780,
+      "sha256": "577d3a3850c2bfac2a3daddfdabf419cac0b31a8912455f8102b4d4790ccbc8c"
+    },
+    {
+      "path": "src/logos-engine/v6-knowledge-store.ts",
+      "bytes": 14849,
+      "sha256": "035d41597a5831bfa65bb1f627e3a0d05b84cc44cfda05566359873ef8c5af08"
+    },
+    {
+      "path": "src/logos-engine/kernel.ts",
+      "bytes": 23637,
+      "sha256": "1cac40f5f9a3356d31ae0fd5247709eb82c5f6402aae3cb68d8edc54c838f207"
+    },
+    {
+      "path": "src/logos-engine/canonical.ts",
+      "bytes": 11291,
+      "sha256": "5c2884287aed82d97e7a85c905db5fb800a7e58a523c3ba128a1b61db5069cc1"
+    },
+    {
+      "path": "src/logos-engine/v6-native-state-graph.ts",
+      "bytes": 21947,
+      "sha256": "b739db6d6066a06f4175b4377f0d0ae1f351b708e5d27fbdb99c9de7e6ed0b4d"
+    },
+    {
+      "path": "src/logos-engine/v6-hash.ts",
+      "bytes": 2842,
+      "sha256": "6b86db7b533d55da900a3c65a06ec1e18547180245b3e3a2eaa837be09c669f5"
+    },
+    {
+      "path": "src/logos-engine/v6-src-program.ts",
+      "bytes": 5903,
+      "sha256": "d41717575e252784a81519e8c7853853af3c2d7372b86ecb7efb3655c3e3df77"
+    },
+    {
+      "path": "src/logos-engine/v6/programs.json",
+      "bytes": 1502394,
+      "sha256": "e006723f49460276a0753c1977ab0eabb30775409b37ba7d7af8b0b8b8527834"
+    },
+    {
+      "path": "src/runtime/v6-agent-service.ts",
+      "bytes": 18195,
+      "sha256": "02ce41d5e014fcc06f85371f552f949b9dfce56093afae4bc0fcb7aad2f60d96"
+    }
+  ],
+  "checkedCount": 64,
+  "formsSha256": "0ce395b5e5936e167e90cfa243992797b9f2fbc67205f7a221e93a4e558a3134",
+  "qualification": "Every captured graph reconstructs from its exact complete Kernel delta chain. Added candidate nodes/deltas receive explicit installation, FacetExamples state, observed source event/state-fact or reachable-fragment attribution. Common node identities/metadata and common delta identity/cause/order remain exact apart from their declared runtime source digest; private value equality across versions is not asserted. Structural counts come from the captures, without an added-node or cycle formula. The forms are fixed before any cost window and every future raw trial must match its own form exactly. No cost values, timing correction, future-run success or full graph/caller semantic parity is inferred."
+}

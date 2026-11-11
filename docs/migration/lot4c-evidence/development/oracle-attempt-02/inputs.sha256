@@ -1,0 +1,3 @@
+a7a874c41df45e07c7e9aef91f409487f9b1f81a179c6e9a1fb28dde78c5a444  scripts/export-v6-facet-examples-reference.py
+6eb5f73b4b1331f97efff459d454ae4d8b7d174dffce49c3945084041ed60e52  tests/v6-facet-examples.test.ts
+0bf086c58a8779dd3b64042f5c1fa65260e54ed0f7270c52f8f6e4e67b1f75ac  tests/fixtures/v6-facet-examples-reference.json.gz

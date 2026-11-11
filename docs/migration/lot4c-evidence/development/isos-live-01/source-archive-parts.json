@@ -1,0 +1,26 @@
+{
+  "schema": "logos-engine.v53.frozen-source-parts.v1",
+  "original": {
+    "path": "docs/migration/lot4c-evidence/development/isos-live-01/source-archive.tar.gz",
+    "sha256": "d82196024ed56ec73d7141110ec34edc159525d9ab6d74ccc77852902d37718a",
+    "bytes": 1817880
+  },
+  "parts": [
+    {
+      "path": "docs/migration/lot4c-evidence/development/isos-live-01/source-archive.tar.gz.part000",
+      "sha256": "1630f38cffefcf453e98d6a742435461141a21e039ae859643cbd7be32b475c3",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/development/isos-live-01/source-archive.tar.gz.part001",
+      "sha256": "bd53497f95f2c2f6779fa48648ad150c44adb580529056056cfaae16c52fe440",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4c-evidence/development/isos-live-01/source-archive.tar.gz.part002",
+      "sha256": "1d109a5e40840119453acc3db40c1eeaf6f5023ee5c3f5c90bb3899b1e5473b7",
+      "bytes": 17880
+    }
+  ],
+  "qualification": "Ordered byte slices of the exact frozen gzip archive. No source or evidence content changes."
+}

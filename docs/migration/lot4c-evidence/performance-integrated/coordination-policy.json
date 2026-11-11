@@ -1,0 +1,195 @@
+{
+  "schema": "logos-engine.coordinated-cost-isolation-policy.v1",
+  "declaredAt": "2026-11-11T01:10:44.271708+00:00",
+  "lock": "/workspace/shared/sra-coordination/performance.lock",
+  "lanes": [
+    {
+      "name": "lot4a",
+      "path": "/workspace/shared/sra-coordination/lot4a-status.json",
+      "mode": "completed_no_further_execution",
+      "requiredSignals": {
+        "quiet_acknowledged": true,
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "active_command": null
+      },
+      "terminalStatement": "Delivered. Native0.51 deployed in Site80, then documentation closure in Site81; both terminal succeeded and deployment archive byte-identical. Source worktree clean. Slot released to7A.",
+      "completionEvidence": [
+        {
+          "path": "docs/migration/lot4c-evidence/performance-integrated/isolation-declaration-evidence/lot4a-status.json",
+          "bytes": 7341,
+          "sha256": "110a35288d6d7644ddb16c80554ae33605e4e9117bf8cbda4b781e878d4a8830"
+        }
+      ]
+    },
+    {
+      "name": "lot4b",
+      "path": "/workspace/shared/sra-coordination/lot4b-status.json",
+      "mode": "completed_no_further_execution",
+      "requiredSignals": {
+        "quiet_acknowledged": true,
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "active_command": null
+      },
+      "terminalStatement": "Completed: first native0.54 publication Site86 and documentation closure Site87 both succeeded privately. Final source dd355400264b50942486559b8ca56ee6dfc6a3cc. All native/test/build/cost inputs unchanged; roadmap current. No further4B execution; releasing publication lock.",
+      "completionEvidence": [
+        {
+          "path": "docs/migration/lot4c-evidence/performance-integrated/isolation-declaration-evidence/lot4b-status.json",
+          "bytes": 4153,
+          "sha256": "e6b2cc3277cc11b0012858734688da427127782ca5457c1034c23836a55f4da3"
+        },
+        {
+          "path": "docs/migration/lot4c-evidence/performance-integrated/isolation-declaration-evidence/published-4b-site87.json",
+          "bytes": 3286,
+          "sha256": "4df50c60317a05d87f64f7ff8cb7da1e9e3055b813955e5ba985f9fdd8992a3a"
+        }
+      ]
+    },
+    {
+      "name": "lot5a",
+      "path": "/workspace/shared/sra-coordination/lot5a-status.json",
+      "mode": "completed_no_further_execution",
+      "requiredSignals": {
+        "quiet_acknowledged": true,
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "active_command": null
+      },
+      "terminalStatement": "Completed: first native0.53publication Site84 and documentation closure Site85 both succeeded privately. Final source a009e1f138bb18251d697f49647bacc615ee514f. Native/test/build/costs unchanged, all evidence retained. No further5Aexecution; releasing publication lock.",
+      "completionEvidence": [
+        {
+          "path": "docs/migration/lot4c-evidence/performance-integrated/isolation-declaration-evidence/lot5a-status.json",
+          "bytes": 5578,
+          "sha256": "4fac6b06f74a1b03d3f7fd0ef3e2a34532fccf77df98a35a8339003ff0b66ae2"
+        },
+        {
+          "path": "docs/migration/lot4c-evidence/performance-integrated/isolation-declaration-evidence/published-5a-site85.json",
+          "bytes": 2158,
+          "sha256": "69ff774948182e009ff9492b888f8e633b7d51500d54e70aba9d01478892dc12"
+        }
+      ]
+    },
+    {
+      "name": "lot7a",
+      "path": "/workspace/shared/sra-coordination/lot7a-status.json",
+      "mode": "completed_no_further_execution",
+      "requiredSignals": {
+        "quiet_acknowledged": true,
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "active_command": null
+      },
+      "terminalStatement": "Delivered:7A native0.52 firstpublishedSite82 then documentationclosureSite83, bothsucceeded. Finalsourceclean. Publicationandcomputeslotsreleasedto5A.",
+      "completionEvidence": [
+        {
+          "path": "docs/migration/lot4c-evidence/performance-integrated/isolation-declaration-evidence/lot7a-status.json",
+          "bytes": 6045,
+          "sha256": "e9c395a90dcfee739a1d52342878ef24739bf1b2d97307eab1f8f6a22ac2fad0"
+        }
+      ]
+    },
+    {
+      "name": "lot7b",
+      "path": "/workspace/shared/sra-coordination/lot7b-status.json",
+      "mode": "completed_no_further_execution",
+      "requiredSignals": {
+        "quiet_acknowledged": true,
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "active_command": null
+      },
+      "terminalStatement": "COMPLETE: 7B native 0.55 privately published in Site 88, documentation closure in Site 89; both terminal succeeded, exact same saved build archive.",
+      "completionEvidence": [
+        {
+          "path": "docs/migration/lot4c-evidence/performance-integrated/isolation-declaration-evidence/lot7b-status.json",
+          "bytes": 3991,
+          "sha256": "0aeae41dd69aa0f0e543c3ef72700e21500a9b83b5369a78c1f1018ef2293f2b"
+        },
+        {
+          "path": "docs/migration/lot4c-evidence/performance-integrated/isolation-declaration-evidence/published-7b-site89.json",
+          "bytes": 8854,
+          "sha256": "d9290df94c1abb1823b114880fa3267d7d2b2c7451461cd30f3e37f0489590dd"
+        }
+      ]
+    },
+    {
+      "name": "lot10a",
+      "path": "/workspace/shared/sra-coordination/lot10a-status.json",
+      "mode": "completed_no_further_execution",
+      "requiredSignals": {
+        "quiet_acknowledged": true,
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "active_command": null
+      },
+      "terminalStatement": "10A delivered, verified, integrated and privately published: native0.56 first in Site90; final documentation closure Site91 at commit5659ddc9420c7624df4865f0afc628782296a186. All own agents and compute complete. Both remaining locks released with observed exit0.",
+      "completionEvidence": [
+        {
+          "path": "docs/migration/lot4c-evidence/performance-integrated/isolation-declaration-evidence/lot10a-status.json",
+          "bytes": 7473,
+          "sha256": "944d8396db73c4ae348e4fd2de89ae518d0f65d36811c4cafbd25cfd35bf1129"
+        },
+        {
+          "path": "docs/migration/lot4c-evidence/performance-integrated/isolation-declaration-evidence/published-10a-site91.json",
+          "bytes": 4445,
+          "sha256": "97a7b22e7b2b29b7b0eea5fabd45b5fec4938fe8239efda7ef17b692fc52c9d7"
+        }
+      ]
+    },
+    {
+      "name": "lot5b",
+      "path": "/workspace/shared/sra-coordination/lot5b-status.json",
+      "mode": "explicit_quiet",
+      "requiredSignals": {
+        "quiet_acknowledged": true,
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "active_command": null
+      },
+      "acknowledgedAt": "2026-11-11T01:08:32.603053+00:00",
+      "predeclarationEvidence": {
+        "path": "docs/migration/lot4c-evidence/performance-integrated/isolation-declaration-evidence/lot5b-status.json",
+        "bytes": 2183,
+        "sha256": "c81467c40212e70d4e7c0df2fc5e8dbe95b068c1376c0c8e1a76f7ecdbb339fd"
+      }
+    },
+    {
+      "name": "lot4c_auxiliary",
+      "path": "/workspace/shared/sra-coordination/lot4c-auxiliary-status.json",
+      "mode": "explicit_quiet",
+      "requiredSignals": {
+        "quiet_acknowledged": true,
+        "heavy_work_started": false,
+        "performance_started": false,
+        "publication_started": false,
+        "active_command": null
+      },
+      "predeclarationEvidence": {
+        "path": "docs/migration/lot4c-evidence/performance-integrated/isolation-declaration-evidence/lot4c-auxiliary-status.json",
+        "bytes": 789,
+        "sha256": "6c328bcede2c31c0e8948dfd9ddfee11c0167cc8d7704bc1123ff765b38ec92e"
+      }
+    }
+  ],
+  "historicalTerminalOutsideCurrentLanes": [
+    {
+      "lot": "3I",
+      "evidence": {
+        "path": "docs/migration/lot4c-evidence/performance-integrated/isolation-declaration-evidence/lot3-status.json",
+        "bytes": 4769,
+        "sha256": "f397d6076b5fde6775fe5056c48e3b69dd10110fcd68d0d627f0849d2a4a8076"
+      },
+      "reason": "This earlier completed publication transferred its slot to4A; its legacy schema lacks quiet_acknowledged and retains historical publication_started=true together with publication_completed=true. These exact bytes are preserved, never rewritten as fresh quiet. Current successor lanes are independently included above."
+    }
+  ],
+  "ownerExcluded": "lot4c-status.json is the official window owner and must truthfully advertise performance_started=true; its non-measuring auxiliary workers have their own declared quiet lane.",
+  "qualification": "Cooperative activity signals and the shared exclusive flock cover these declared project lanes. Text-only document/source reviews may continue; no guarantee is asserted about unrelated uninstrumented host processes. All start/end raw status bytes will be retained by the unchanged launcher."
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "logos-engine.lot4c.literal-input-scan-correction.v1",
+  "reviewedAt": "2026-11-11T00:44:50.507190+00:00",
+  "originalPlan": {
+    "path": "docs/migration/lot4c-evidence/planning/integrated-test-scope-plan-static-scan-attempt01.json",
+    "bytes": 13163,
+    "sha256": "3b374eca150697e209df928d9a5e23c8c3c59e4dbeb729eea2170e2f9301fc0b"
+  },
+  "originalRestorationReceipt": {
+    "path": "docs/migration/lot4c-evidence/planning/integrated-fixture-restoration/execution.json",
+    "bytes": 3490,
+    "sha256": "eb7f52febb1f56ea657ddc4738b037711bf9100848ad7975a5454586b90f04ac"
+  },
+  "correction": "Constrain each literal URL string to one quoted token. The prior non-greedy wildcard could cross intervening quote delimiters while searching for import.meta.url and falsely concatenate unrelated source lines into a path.",
+  "originalFalsePositiveEntries": [
+    {
+      "source": "tests/v6-outline-arbitration.test.ts",
+      "literal": "original-caller-prefix1/bounded-public-trace.json.gz', evidenceRoot))).toString()) as R;\nconst secondWitnessed = JSON.parse(gunzipSync(readEvidenceSync(new URL('../docs/migration/native-campaigns-v53/attempt2/esct-public-trace.json.gz",
+      "resolved": "/workspace/sites/sra-lot4a-20261110/.sites-checkout/tests/original-caller-prefix1/bounded-public-trace.json.gz', evidenceRoot))).toString()) as R;\nconst secondWitnessed = JSON.parse(gunzipSync(readEvidenceSync(new URL('../docs/migration/native-campaigns-v53/attempt2/esct-public-trace.json.gz"
+    },
+    {
+      "source": "tests/v6-native-transition-domain-integration.test.ts",
+      "literal": "laya_proto/common_frontier_policy.drm.json', source), 'utf8'));\nconst strategy = JSON.parse(await readFile(new URL('morphology_policy/strategy.drm', source), 'utf8'));\nconst witness = JSON.parse(gunzipSync(await readFile(new URL(\n  '../docs/migration/native-campaigns-v35/dico-domain-public-witness.json.gz",
+      "resolved": "/workspace/sites/sra-lot4a-20261110/.sites-checkout/tests/laya_proto/common_frontier_policy.drm.json', source), 'utf8'));\nconst strategy = JSON.parse(await readFile(new URL('morphology_policy/strategy.drm', source), 'utf8'));\nconst witness = JSON.parse(gunzipSync(await readFile(new URL(\n  '../docs/migration/native-campaigns-v35/dico-domain-public-witness.json.gz"
+    }
+  ],
+  "literalPattern": "new\\s+URL\\(\\s*([\\'\\\"])([^\\'\\\"\\r\\n]*)\\1\\s*,\\s*import\\.meta\\.url\\s*\\)",
+  "filesReviewed": 124,
+  "missingLiteralUrlInputs": [],
+  "literalUrlInputsAvailableAsPartsOnly": [],
+  "testOrGeneratorSourceModified": false,
+  "newTestOracleOrGameExecution": false,
+  "restorationRerun": false,
+  "qualification": "This corrects only a static readiness diagnostic. Existing helper execution, exit0, byte verification and its stdout remain unchanged. Indirect/dynamic URL bases are outside this bounded literal-path scan."
+}

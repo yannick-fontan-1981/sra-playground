@@ -1,0 +1,177 @@
+{
+  "schema": "logos-engine.lot4c.facet-source-static-review.v1",
+  "recordedAt": "2026-11-11T00:02:54.711185+00:00",
+  "status": "source_contract_review_and_proof_plan_only",
+  "originalCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "execution": {
+    "originalImports": false,
+    "oracleRun": false,
+    "nativeRun": false,
+    "testsRun": false,
+    "gameRun": false,
+    "costRun": false
+  },
+  "sourceFiles": [
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/facet_examples/family.py",
+      "bytes": 11006,
+      "sha256": "fb567ddc4e4cb8208d831c76dfbb917a37d78477f9324b22fc069480ac9bd468"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/facet_examples/geometry.py",
+      "bytes": 5714,
+      "sha256": "1abffb8a2614b893a07fbea895ed465c6e8ce697e6734cac88b47f9039b48a09"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/facet_examples/compound.py",
+      "bytes": 8625,
+      "sha256": "739515f16471899a8ae2f648686e5022a43b67d9dc98c7fff56255842e21d51e"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/facet_examples/stencils.py",
+      "bytes": 3598,
+      "sha256": "72651d31600551d97ba4830e199d5849ef4e2fa3b2bc95f4c73d6185b9df9d17"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/facet_examples/facet_examples.drm",
+      "bytes": 1967,
+      "sha256": "45eecb21a708a21a82dc6a265417d342354831be26bed596a30e8f9b7803cfe0"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/facet_examples/facet_examples.src",
+      "bytes": 292,
+      "sha256": "3a7ef1b93988619cd23690b00c0791793657799f32ff12afed11e94adde79ddf"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.py",
+      "bytes": 34610,
+      "sha256": "425aca6c30e7abb38a537dfcef38f92c418bc4dfa35201ae52dc42ba4390fa55"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "bytes": 46966,
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_runtime.py",
+      "bytes": 97217,
+      "sha256": "bcc9bc79d04287c830efedce48b4cc2ab89b5600b8a77fe09782c35d1c05c064"
+    }
+  ],
+  "lineage": "docs/migration/lot4c-facet-examples-lineage.md",
+  "contracts": {
+    "entry": [
+      "surface",
+      "facet_example"
+    ],
+    "entryOrder": 0,
+    "workflow": "v6.facet_examples.choose",
+    "callbacks": [
+      "facet.measure",
+      "facet.bind"
+    ],
+    "ownerCount": 1,
+    "selectedAcquisitionOnly": true,
+    "passiveAcquisition": false,
+    "recognitionStopsFollowingSurfaceProviders": false,
+    "durableFields": [
+      "failed",
+      "events",
+      "method",
+      "epoch",
+      "portable",
+      "compound_methods",
+      "refuted_compounds"
+    ],
+    "epochClears": [
+      "failed",
+      "method",
+      "compound_methods",
+      "refuted_compounds"
+    ],
+    "epochRetains": [
+      "events",
+      "portable"
+    ],
+    "nonPersistent": [
+      "compound_cache",
+      "context",
+      "current",
+      "trial",
+      "src",
+      "last"
+    ],
+    "compoundEnabled": true,
+    "compoundBounds": {
+      "maximum_units": 5,
+      "maximum_states": 1024,
+      "maximum_sample_denominator": 8,
+      "sample_offsets": [
+        -0.5,
+        0,
+        0.5
+      ]
+    },
+    "compoundRequiredAcquisitions": [
+      "observed_seed",
+      "up_shift",
+      "official_boundary"
+    ],
+    "officialBoundaryHasPriority": true,
+    "visualCompleteWithoutOfficialProgressRefutesScope": true,
+    "simpleMethodChanges": [
+      "proposal.method",
+      "proposal.evidence"
+    ],
+    "compoundMethodsChanges": [
+      "proposal.method",
+      "proposal.evidence",
+      "compound.port_status"
+    ],
+    "potentialActionOrRefusalInterventions": [
+      "portable",
+      "failed",
+      "refuted_compounds"
+    ],
+    "scopeOnlyClaims": [
+      "visible_2d_stencil",
+      "conditional_lateral_offset",
+      "unknown_hidden_occupancy"
+    ]
+  },
+  "proofObligations": [
+    "simple_positive_and_ambiguity",
+    "selected_source_bound_command_and_current_pixel_guard",
+    "one_action_then_measure",
+    "seed_exact_colored_render_acquisition",
+    "vertical_cap_shift_with_side_extension",
+    "outside_region_change_refusal",
+    "no_effect_failed_trial_and_next_choice",
+    "portable_revalidation_and_epoch_scope",
+    "compound_unique_minimal_vs_ambiguous_vs_bounded_incomplete",
+    "compound_current_prefix_exact_render",
+    "compound_extension_acquisition",
+    "visual_complete_not_officially_accepted_refutation",
+    "official_boundary_priority",
+    "restoration_exact_seven_fields_and_real_native_restore",
+    "foreign_selected_return_does_not_acquire_facet",
+    "whole_source_proposals_and_next_decisions",
+    "memory_interventions_empty_and_unchanged_retained"
+  ],
+  "publicCandidate": {
+    "game": "ISOS",
+    "id": "isos-c0000001",
+    "basis": "src/games/catalog.ts:773-781 public description only",
+    "existingPublicCorpus": "tests/fixtures/v6-linked-packet-initial-public.json.gz games[game=ISOS]",
+    "existingResolutionClockLocated": false,
+    "gameImplementationRead": false,
+    "candidateQualificationRun": false,
+    "targetLevels": 3,
+    "blockedCaseBudgetSeconds": 2400
+  },
+  "limits": [
+    "This static review is not executed verification.",
+    "Current catalogue and archived public observation establish relevance only, not native recognition or contribution.",
+    "Later formal result must keep uncovered compound or game branches explicit."
+  ]
+}

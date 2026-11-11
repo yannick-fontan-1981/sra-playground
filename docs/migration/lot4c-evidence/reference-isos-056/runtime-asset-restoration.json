@@ -1,0 +1,208 @@
+{
+  "schema": "logos-engine.lot4c.published-runtime-asset-restoration.v1",
+  "recordedAt": "2026-11-11T00:51:34.660195+00:00",
+  "referenceCommit": "617d1f607d37a6bba1f7ae8ffe1826806e6749a0",
+  "publishedInputReceipt": {
+    "path": "docs/migration/lot10a-evidence/integrated-final/publication-inputs.json",
+    "sha256": "968377bf4065b468b2ecf3046f0458d0b8e931f6b936549eefd7c752f62a8e33",
+    "bytes": 177739
+  },
+  "publishedReceiptMatchesCommit": true,
+  "publishedNativeSourceDigest": "be11e761de3c0f3c7d50d10da47be9e0d7b4fc9c5b7d5002cc9272ffce85645a",
+  "publishedAssetCollection": "inputs entries with public/vendor/pyodide/ prefix",
+  "assets": [
+    {
+      "published": {
+        "path": "public/vendor/pyodide/annotated_types-0.7.0-py3-none-any.whl",
+        "sha256": "6541523b4b16c1953d2fc9b82fb86c540eea9f78fca329ab371ed13a8b0faa51",
+        "bytes": 11963
+      },
+      "candidate": {
+        "path": "public/vendor/pyodide/annotated_types-0.7.0-py3-none-any.whl",
+        "sha256": "6541523b4b16c1953d2fc9b82fb86c540eea9f78fca329ab371ed13a8b0faa51",
+        "bytes": 11963
+      },
+      "identical": true
+    },
+    {
+      "published": {
+        "path": "public/vendor/pyodide/numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+        "sha256": "a292c1f5d7d8a2208cd5e94fc467604c131cabcd2fc14fed6eefde121e7fabdf",
+        "bytes": 2960568
+      },
+      "candidate": {
+        "path": "public/vendor/pyodide/numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+        "sha256": "a292c1f5d7d8a2208cd5e94fc467604c131cabcd2fc14fed6eefde121e7fabdf",
+        "bytes": 2960568
+      },
+      "identical": true
+    },
+    {
+      "published": {
+        "path": "public/vendor/pyodide/package.json",
+        "sha256": "40ca48e43ce4ddc68412d5b7a7ca9e2477cd4f0e672277ae468ac2245717079b",
+        "bytes": 2999
+      },
+      "candidate": {
+        "path": "public/vendor/pyodide/package.json",
+        "sha256": "40ca48e43ce4ddc68412d5b7a7ca9e2477cd4f0e672277ae468ac2245717079b",
+        "bytes": 2999
+      },
+      "identical": true
+    },
+    {
+      "published": {
+        "path": "public/vendor/pyodide/pydantic-2.12.5-py3-none-any.whl",
+        "sha256": "04854875001e07a8a74d87b7c80296cba168773d8c9804e232d695f82484d7d7",
+        "bytes": 463578
+      },
+      "candidate": {
+        "path": "public/vendor/pyodide/pydantic-2.12.5-py3-none-any.whl",
+        "sha256": "04854875001e07a8a74d87b7c80296cba168773d8c9804e232d695f82484d7d7",
+        "bytes": 463578
+      },
+      "identical": true
+    },
+    {
+      "published": {
+        "path": "public/vendor/pyodide/pydantic_core-2.41.5-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+        "sha256": "54703fa42a0d4d574283cfb8f08050ba7820c9a42b0a21bc1286407d9a9e54da",
+        "bytes": 1310164
+      },
+      "candidate": {
+        "path": "public/vendor/pyodide/pydantic_core-2.41.5-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+        "sha256": "54703fa42a0d4d574283cfb8f08050ba7820c9a42b0a21bc1286407d9a9e54da",
+        "bytes": 1310164
+      },
+      "identical": true
+    },
+    {
+      "published": {
+        "path": "public/vendor/pyodide/pyodide-lock.json",
+        "sha256": "5dc2fc119108bc148c7457dc86e7675b5c87e1cafd420b9c34c1eaef7b36c010",
+        "bytes": 119077
+      },
+      "candidate": {
+        "path": "public/vendor/pyodide/pyodide-lock.json",
+        "sha256": "5dc2fc119108bc148c7457dc86e7675b5c87e1cafd420b9c34c1eaef7b36c010",
+        "bytes": 119077
+      },
+      "identical": true
+    },
+    {
+      "published": {
+        "path": "public/vendor/pyodide/pyodide.asm.mjs",
+        "sha256": "f7cdc8ece80678ceb712f8e65ebe6d3a83203a180c399865f49612a051693635",
+        "bytes": 1250344
+      },
+      "candidate": {
+        "path": "public/vendor/pyodide/pyodide.asm.mjs",
+        "sha256": "f7cdc8ece80678ceb712f8e65ebe6d3a83203a180c399865f49612a051693635",
+        "bytes": 1250344
+      },
+      "identical": true
+    },
+    {
+      "published": {
+        "path": "public/vendor/pyodide/pyodide.asm.wasm",
+        "sha256": "cc36e3cab04fdfc9a63ff13eb52eae2b911bf46c025cc7b281f394bd3de1d5e6",
+        "bytes": 9598218
+      },
+      "candidate": {
+        "path": "public/vendor/pyodide/pyodide.asm.wasm",
+        "sha256": "cc36e3cab04fdfc9a63ff13eb52eae2b911bf46c025cc7b281f394bd3de1d5e6",
+        "bytes": 9598218
+      },
+      "identical": true
+    },
+    {
+      "published": {
+        "path": "public/vendor/pyodide/pyodide.mjs",
+        "sha256": "6f1d60f7bf529beb300f0f47983c921d3982363640ba20af0e38efdddbc66109",
+        "bytes": 17931
+      },
+      "candidate": {
+        "path": "public/vendor/pyodide/pyodide.mjs",
+        "sha256": "6f1d60f7bf529beb300f0f47983c921d3982363640ba20af0e38efdddbc66109",
+        "bytes": 17931
+      },
+      "identical": true
+    },
+    {
+      "published": {
+        "path": "public/vendor/pyodide/python_stdlib.zip",
+        "sha256": "fa1957e5777068fc4f7437f96d860ae2fbe9c19732ba06c84e004ec16dd7dd7a",
+        "bytes": 2545637
+      },
+      "candidate": {
+        "path": "public/vendor/pyodide/python_stdlib.zip",
+        "sha256": "fa1957e5777068fc4f7437f96d860ae2fbe9c19732ba06c84e004ec16dd7dd7a",
+        "bytes": 2545637
+      },
+      "identical": true
+    },
+    {
+      "published": {
+        "path": "public/vendor/pyodide/typing_extensions-4.15.0-py3-none-any.whl",
+        "sha256": "4fec68770a05408e668a4fa53d6bf4f0f684b9dacf820c7c5d6e97d3ad225e29",
+        "bytes": 44613
+      },
+      "candidate": {
+        "path": "public/vendor/pyodide/typing_extensions-4.15.0-py3-none-any.whl",
+        "sha256": "4fec68770a05408e668a4fa53d6bf4f0f684b9dacf820c7c5d6e97d3ad225e29",
+        "bytes": 44613
+      },
+      "identical": true
+    },
+    {
+      "published": {
+        "path": "public/vendor/pyodide/typing_inspection-0.4.2-py3-none-any.whl",
+        "sha256": "deb989630985f7a7296b90357a947a804a7612cecbb6439d6e71128e01f61051",
+        "bytes": 14610
+      },
+      "candidate": {
+        "path": "public/vendor/pyodide/typing_inspection-0.4.2-py3-none-any.whl",
+        "sha256": "deb989630985f7a7296b90357a947a804a7612cecbb6439d6e71128e01f61051",
+        "bytes": 14610
+      },
+      "identical": true
+    }
+  ],
+  "assetCount": 12,
+  "completeRuntimeFileSetIdentical": true,
+  "repair": {
+    "operation": "directory_symlink",
+    "path": "/workspace/sites/sra-lot4c-reference-056/public/vendor/pyodide",
+    "target": "/workspace/sites/sra-lot4a-20261110/.sites-checkout/public/vendor/pyodide"
+  },
+  "nodeModulesSameResolvedDirectory": true,
+  "packageLockIdentical": true,
+  "unchangedPublishedHelpers": [
+    {
+      "path": "scripts/freeze-v53-native-source.py",
+      "sha256": "f5ef4f4734ce2b53a162dee60a23ce7ca43931e10bdbc08a04e4316c374d5bd4",
+      "bytes": 5719
+    },
+    {
+      "path": "scripts/run-bounded-native-campaign-proof.py",
+      "sha256": "14d6ca22cd21601adf1a52a395ec90e6ed50a7fdc420fd3e845d1b568f23b32f",
+      "bytes": 5681
+    },
+    {
+      "path": "scripts/run-bounded-native-campaign.mjs",
+      "sha256": "721b80e65ead16eec13390d5d75d40fe4c2c70d0c5036e944daf8e3b6768515b",
+      "bytes": 2942
+    },
+    {
+      "path": "tests/helpers/v6-live-game-campaign.ts",
+      "sha256": "dfc77470fe8050033cd9b13df5386e0689babac9b3d37d1c4d7b1f3d71199cb9",
+      "bytes": 80281
+    },
+    {
+      "path": "scripts/run-v53-campaign-proof.py",
+      "sha256": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+      "bytes": 5421
+    }
+  ],
+  "qualification": "Restores generated runtime assets omitted from this checkout. No tracked reference code, agent state, command or rule is changed."
+}

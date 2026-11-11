@@ -1,0 +1,9 @@
+{
+  "status": "failed",
+  "recordedAt": "2026-11-11T00:59:22.989241+00:00",
+  "stage": "case-clock aggregation after successful browser evidence and closed interval03",
+  "error": "AssertionError: aggregator expected interval02.status == closed; retained agent interval02 uses completed and its own receipt fields.",
+  "unchangedBrowserResult": "passed",
+  "gameRerun": false,
+  "qualification": "Metadata integration mismatch only. The browser receipt, all captured UI artifacts and both completed intervals remain unchanged. No failed game outcome is relabeled."
+}

@@ -1,0 +1,61 @@
+{
+  "schema": "logos-engine.lot4c.integrated-fixture-restoration.v1",
+  "startedAt": "2026-11-11T00:43:45.974244+00:00",
+  "finishedAt": "2026-11-11T00:43:46.180844+00:00",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "scripts/evidence-byte-parts.py",
+    "restore",
+    "tests/fixtures"
+  ],
+  "exitCode": 0,
+  "elapsedSeconds": 0.14543065401085187,
+  "lock": "/workspace/shared/sra-coordination/performance.lock",
+  "lockMode": "shared-nonblocking",
+  "timingClaim": false,
+  "helper": {
+    "path": "scripts/evidence-byte-parts.py",
+    "bytes": 7210,
+    "sha256": "fcc651b3d533a87805378c126b1253d40f343ccc51108a7881c3db33bf1f8350"
+  },
+  "underlyingHelper": {
+    "path": "scripts/restore-v53-evidence.py",
+    "bytes": 3361,
+    "sha256": "e0494dda3dd445e0db0bf04cccac27ad8d19c917ccd2b4b10c068df6faf7c23d"
+  },
+  "rawLog": {
+    "path": "docs/migration/lot4c-evidence/planning/integrated-fixture-restoration/restore.log",
+    "bytes": 1200,
+    "sha256": "c72c67ab063ff72082d15aa98f3b1f1f1d0c6c23b85be72523665a6603bbe0d8"
+  },
+  "gzipLog": {
+    "path": "docs/migration/lot4c-evidence/planning/integrated-fixture-restoration/restore.log.gz",
+    "bytes": 478,
+    "sha256": "673b1e6fa7dc8c52a39ab1fb756c25bb226eb139f490391fcd7de5ea959cd2f1"
+  },
+  "logRoundTripExact": true,
+  "manifestCount": 3,
+  "missingPartsBefore": [],
+  "missingOriginalsBefore": [],
+  "restored": [],
+  "verifiedManifestCount": 3,
+  "missingCapturedInputsBefore": [],
+  "missingCapturedInputsAfter": [],
+  "missingCapturedFixturesAfter": [],
+  "literalUrlsReviewedFiles": 124,
+  "missingLiteralUrlInputs": [
+    {
+      "source": "tests/v6-outline-arbitration.test.ts",
+      "literal": "original-caller-prefix1/bounded-public-trace.json.gz', evidenceRoot))).toString()) as R;\nconst secondWitnessed = JSON.parse(gunzipSync(readEvidenceSync(new URL('../docs/migration/native-campaigns-v53/attempt2/esct-public-trace.json.gz",
+      "resolved": "/workspace/sites/sra-lot4a-20261110/.sites-checkout/tests/original-caller-prefix1/bounded-public-trace.json.gz', evidenceRoot))).toString()) as R;\nconst secondWitnessed = JSON.parse(gunzipSync(readEvidenceSync(new URL('../docs/migration/native-campaigns-v53/attempt2/esct-public-trace.json.gz"
+    },
+    {
+      "source": "tests/v6-native-transition-domain-integration.test.ts",
+      "literal": "laya_proto/common_frontier_policy.drm.json', source), 'utf8'));\nconst strategy = JSON.parse(await readFile(new URL('morphology_policy/strategy.drm', source), 'utf8'));\nconst witness = JSON.parse(gunzipSync(await readFile(new URL(\n  '../docs/migration/native-campaigns-v35/dico-domain-public-witness.json.gz",
+      "resolved": "/workspace/sites/sra-lot4a-20261110/.sites-checkout/tests/laya_proto/common_frontier_policy.drm.json', source), 'utf8'));\nconst strategy = JSON.parse(await readFile(new URL('morphology_policy/strategy.drm', source), 'utf8'));\nconst witness = JSON.parse(gunzipSync(await readFile(new URL(\n  '../docs/migration/native-campaigns-v35/dico-domain-public-witness.json.gz"
+    }
+  ],
+  "testFilesUnchangedDuringRestoration": true,
+  "qualification": "Existing helper reconstructs only missing originals from unchanged byte parts and refuses differing existing bytes. No test, oracle, game, or result regeneration is performed. Literal URL scanning is bounded to declared tests and their direct/transitive test helpers; dynamic paths are not claimed exhaustively resolved."
+}

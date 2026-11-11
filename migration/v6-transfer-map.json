@@ -4702,6 +4702,32 @@
         "tests/v6-symbol-geometry-reference.test.ts"
       ],
       "notes": "Only the frame, context and candidate measurements consumed by Symbols are transferred and compared to original source, with source bounds4096area/512components/32frames and the empty result above32frames. Symbols always supplies additions=(). The unused spaced wrapper, predecessor translation reasoning and additions-history updater remain outside this module transfer. Immutable FrameGrid-keyed measurement caching is bounded to8entries and carries no learned state or authorization."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/morphology_policy/facet_examples/family.py",
+        "agents/yf_arc3_v6/morphology_policy/facet_examples/geometry.py",
+        "agents/yf_arc3_v6/morphology_policy/facet_examples/compound.py",
+        "agents/yf_arc3_v6/morphology_policy/facet_examples/stencils.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-facet-examples.ts",
+        "src/logos-engine/v6-facet-examples-geometry.ts",
+        "src/logos-engine/v6-facet-examples-compound.ts",
+        "src/logos-engine/v6-facet-examples-stencils.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-facet-examples-reference.py",
+        "tests/fixtures/v6-facet-examples-reference.json.gz",
+        "tests/v6-facet-examples.test.ts",
+        "tests/v6-facet-examples-integration.test.ts",
+        "tests/v6-facet-examples-foreign-acquisition.test.ts",
+        "docs/migration/lot4c-facet-examples-lineage.md",
+        "docs/migration/lot4c-evidence/development/oracle-attempt-03/resume-run.json"
+      ],
+      "notes": "Lot4C transfers all four own FacetExamples modules, including simple correspondences and configured compound synthesis, through the existing v6.facet_examples.choose SRC. Unchanged-original component expectations pass99tests, preserving ordered geometry, Python floor and compensated mean, current exact guards, selected-only records, seven durable source fields, portable and scoped compound methods, failed trials, outside-change refutation and visual completion without official acceptance. Method and compound-method ablations may affect metadata only; portable/failed/refuted states can affect eligibility. The ephemeral compound cache remains outside durable state, with source bounds and bounded_incomplete refusal preserved. Common runtime, live contribution, release and cost evidence remain separate; this module status does not claim full original-caller or unrestricted-input parity."
     }
   ],
   "scopeNotes": [

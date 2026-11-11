@@ -1,0 +1,17 @@
+{
+  "schema": "logos-engine.migration-map-integration.v1",
+  "recordedAt": "2026-11-11T00:41:08.156505+00:00",
+  "publishedPredecessorCommit": "617d1f607d37a6bba1f7ae8ffe1826806e6749a0",
+  "baseSha256": "15aea9746cd2adfe4c88f5d4f08eaa1aa13db2da56e760aa5161c57ae4d1b2b1",
+  "oursSha256": "26a930437178484a8a824214cff4e3fa1f832382a0c11144696b538cf134849a",
+  "publishedSha256": "701bb932c6209bf7a4b2fc6bc99cbd72ab6c5fed2910b3c38ef664bc966bdf71",
+  "oursDeltaIsOnlyOneFacetMapping": true,
+  "allPublishedEntriesAndNotesPreserved": true,
+  "mappingCounts": {
+    "base": 220,
+    "ours": 221,
+    "published": 224,
+    "merged": 225
+  },
+  "qualification": "Merge resolution preserves every field of the actual published mapping and appends only the independently verified Facet own-module entry."
+}

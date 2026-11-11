@@ -1,0 +1,10 @@
+Browser tab: 17, Title: "SRA Playground · ISOS — Symbolic Reasoning Agent", URL: "http://127.0.0.1:4173/?game=ISOS&level=2".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+~0 AXWebArea SRA Playground · ISOS — Symbolic Reasoning Agent, URL: 127.0.0.1:4173/?game=ISOS&level=2
+~		2 link Description: Skip to the games, Value: 127.0.0.1:4173/?game=ISOS&level=2#game-select
+~				8 link Description: PLAYGROUND, Value: 127.0.0.1:4173/?game=ISOS&level=2#playground
+~						228 text Level completed.
+~							229 text 3
+~							230 text 1
+~							231 text 3
+The focused UI element is 0 AXWebArea SRA Playground · ISOS — Symbolic Reasoning Agent, URL: 127.0.0.1:4173/?game=ISOS&level=2

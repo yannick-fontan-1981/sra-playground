@@ -1,0 +1,56 @@
+{
+  "schema": "logos-engine.lot4c-publication-tools-adaptation.v1",
+  "recordedAt": "2026-11-11T01:07:57.482064+00:00",
+  "status": "adapted_for_source_review",
+  "files": [
+    {
+      "source": {
+        "path": "docs/migration/lot10a-evidence/record-publication-inputs.py",
+        "bytes": 17885,
+        "sha256": "b2fd1c374ea57b73db70eea12677c70de719859fe1b0a190d4a17b62f21bae24"
+      },
+      "adapted": {
+        "path": "docs/migration/lot4c-evidence/record-publication-inputs.py",
+        "bytes": 17876,
+        "sha256": "bd8070cc153351d59914ef3a3d9f72b9f5040ac5f23380dc5b95fb196de64c91"
+      },
+      "transformations": [
+        {
+          "from": "lot10a",
+          "to": "lot4c"
+        },
+        {
+          "from": "10A",
+          "to": "4C"
+        }
+      ],
+      "syntax": "ast_parse_passed",
+      "logicChanged": false
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot10a-evidence/plan-bounded-source-transport.py",
+        "bytes": 31366,
+        "sha256": "384d76d90e648468844813ccc8f68cba4e674c08a77aac55f2892ba2ee375421"
+      },
+      "adapted": {
+        "path": "docs/migration/lot4c-evidence/plan-bounded-source-transport.py",
+        "bytes": 31356,
+        "sha256": "7bc08600b0b1a46cea1629e86158a762462c0cbcecf5ab07b5e9b4a7671b5e97"
+      },
+      "transformations": [
+        {
+          "from": "lot10a",
+          "to": "lot4c"
+        },
+        {
+          "from": "10A",
+          "to": "4C"
+        }
+      ],
+      "syntax": "ast_parse_passed",
+      "logicChanged": false
+    }
+  ],
+  "qualification": "Literal lot namespace/path adaptation only from actual published10A. No publication, Git object creation, push, test, build, native source modification or cost measurement executed."
+}

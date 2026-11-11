@@ -1,0 +1,19 @@
+{
+  "operation": "pack",
+  "directory": "docs/migration/lot4c-evidence/development/isos-live-01",
+  "partBytes": 900000,
+  "verified": [
+    {
+      "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-campaign.json.gz",
+      "sha256": "93e59ab1146d4eef7c944a0e1fc0ab7b0d539cc90a074abe424742be011eec37",
+      "bytes": 3027289,
+      "manifest": "docs/migration/lot4c-evidence/development/isos-live-01/isos-campaign.json.gz.parts.json",
+      "parts": 4,
+      "restored": false
+    }
+  ],
+  "gitignoreEntriesAdded": [
+    "/docs/migration/lot4c-evidence/development/isos-live-01/isos-campaign.json.gz"
+  ],
+  "qualification": "Exact byte transport only; no agent result is regenerated or reinterpreted."
+}

@@ -1,0 +1,140 @@
+{
+  "schema": "logos-engine.native-cost-protocol-declaration.v2",
+  "recordedAt": "2026-11-10T22:02:46.977483-03:00",
+  "status": "declared_before_official_window",
+  "protocol": {
+    "path": "docs/migration/lot4c-evidence/performance-integrated/protocol.md",
+    "sha256": "f5584ab57668bf598d90da921a29b521ac22564dd2f1bb0e84537a8fae873305",
+    "bytes": 12529
+  },
+  "cases": {
+    "path": "docs/migration/lot4c-evidence/performance-integrated/cases.json",
+    "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d",
+    "bytes": 1451
+  },
+  "diagnosticComparisonPolicy": {
+    "path": "docs/migration/lot4c-evidence/performance-integrated/comparison-policy.json",
+    "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68",
+    "bytes": 991
+  },
+  "globalBudgetPolicy": {
+    "path": "docs/migration/lot4c-evidence/performance-integrated/global-budget-policy.json",
+    "sha256": "c82b0a4f15b8c4e0e27ae91810d08bcf9d3eb6b793cf46d12e8527f68878944d",
+    "bytes": 2293
+  },
+  "baselineManifest": {
+    "path": "docs/migration/lot4c-evidence/reference-isos-056/source-manifest.json",
+    "sha256": "55b78bacc97745a6b8b1bde35156ec0f7184a6ad1cf4a637d35a81b82abec42f",
+    "bytes": 34908
+  },
+  "candidateManifest": {
+    "path": "docs/migration/lot4c-evidence/integrated-final/source-manifest.json",
+    "sha256": "453b773ee0b81364d44679b611214a527c008aab8f01ae2bf9cd402e7996f4aa",
+    "bytes": 35387
+  },
+  "candidateArchiveManifest": {
+    "path": "docs/migration/lot4c-evidence/integrated-final/source-archive.json",
+    "sha256": "e612d906db5cef893c47a3cf30a1ef43289497a9613459c098f95cbb8fa137f8",
+    "bytes": 37029
+  },
+  "nativeDigests": {
+    "baseline": "be11e761de3c0f3c7d50d10da47be9e0d7b4fc9c5b7d5002cc9272ffce85645a",
+    "candidate": "eebd099808672be934389020c8f9061df4fdacab28cd7d60c00cd1b080464c04"
+  },
+  "officialTools": [
+    {
+      "path": "scripts/run-native-cost-window.py",
+      "sha256": "0ec9c69c859d0555e963643010d2254caee8c63d1c9a98ec07cd9af0ce0ce613",
+      "bytes": 8933
+    },
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59",
+      "bytes": 20670
+    },
+    {
+      "path": "scripts/compare-native-loop-costs.mjs",
+      "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb",
+      "bytes": 9861
+    },
+    {
+      "path": "scripts/compare-native-cost-cohorts.mjs",
+      "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34",
+      "bytes": 19460
+    },
+    {
+      "path": "scripts/review-native-cost-consolidation.py",
+      "sha256": "b13174cec5befbb816e70554fd5d47da215eae941b983e66f05b9dd4417b3bd4",
+      "bytes": 17810
+    }
+  ],
+  "globalDecisionTool": {
+    "path": "scripts/review-native-global-cost-window.py",
+    "sha256": "9ab2ecd9d6ddf234e96332421a6e55937a766495c1a20dd223f4441d6b516940",
+    "bytes": 22204
+  },
+  "globalCalculationTool": {
+    "path": "scripts/review-native-global-cost-budget.py",
+    "sha256": "b4312bcdae058ba58c16b4e5e24cb53626496b38f8a154834e0452a43e97d341",
+    "bytes": 8476
+  },
+  "plannedOrder": [
+    "A1",
+    "B1",
+    "B2",
+    "A2"
+  ],
+  "cohorts": 2,
+  "sessionsPerCaseVersionCohort": 4,
+  "measuredSessions": 32,
+  "measuredActions": 400,
+  "excludedWarmupSessions": 8,
+  "excludedWarmupActions": 24,
+  "globalBudgetCases": 2,
+  "diagnosticMetrics": 16,
+  "relativeGlobalBudget": 0.1,
+  "globalComparison": "strictly_less_than",
+  "phaseOverrunsBlockAcceptance": false,
+  "allCasesMustPass": true,
+  "crossCaseCompensation": false,
+  "inputsByteIdenticalToHistorical": true,
+  "officialToolsByteIdenticalToHistorical": true,
+  "noOfficialWindowAtDeclaration": true,
+  "functionalReadinessNotAnticipated": true,
+  "finalizedAt": "2026-11-10T22:02:46.977483-03:00",
+  "baseline": {
+    "nativeVersion": "0.56.0",
+    "siteVersion": 91,
+    "commit": "5659ddc9420c7624df4865f0afc628782296a186",
+    "nativeDigest": "be11e761de3c0f3c7d50d10da47be9e0d7b4fc9c5b7d5002cc9272ffce85645a",
+    "nativeFiles": 294
+  },
+  "candidate": {
+    "nativeVersion": "0.57.0",
+    "nativeDigest": "eebd099808672be934389020c8f9061df4fdacab28cd7d60c00cd1b080464c04",
+    "nativeFiles": 298,
+    "sourceBaseCommit": "6065d67c18b1ad85bd62b60c36c6962f18bfeab3",
+    "checkoutHead": "026c4d2beb396de2cae8c1cbb61489fe492d78d8",
+    "nativeSourceCommit": "026c4d2beb396de2cae8c1cbb61489fe492d78d8",
+    "nativeWorktreeChanges": [],
+    "siteVersion": null,
+    "qualification": "The frozen digest and archive identify candidate bytes. A null source commit means the checkout HEAD is ancestry only. No candidate publication is asserted."
+  },
+  "qualification": "This declaration binds actual baseline and candidate source identities before any official measurement. It asserts no test outcome, game success, machine isolation, publication or functional readiness.",
+  "ownerCostQualification": {
+    "schema": "logos-engine.lot4c-owner-cost-qualification.v1",
+    "contractPath": "docs/migration/lot4c-evidence/performance-integrated/owner-growth-contract.json",
+    "tools": {
+      "consolidator": {
+        "path": "docs/migration/lot4c-evidence/consolidate-owner-costs.mjs",
+        "sha256": "b3e6349cbc52076b2e6782f107dc89c0feb466a946a69390b1d62511749bf807",
+        "bytes": 52839
+      },
+      "reviewer": {
+        "path": "docs/migration/lot4c-evidence/review-owner-costs.py",
+        "sha256": "ac2b4d5478144736986d2c1a6e141cf823f547590acbe365822e4c77b7a26ab1",
+        "bytes": 70741
+      }
+    }
+  }
+}

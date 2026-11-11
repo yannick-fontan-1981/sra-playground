@@ -1,0 +1,60 @@
+{
+  "schema": "logos-engine.lot4c.comparator-capture-time-correction.v1",
+  "priorReport": {
+    "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-facet-source-parity-attempt-01.json.gz",
+    "bytes": 78894,
+    "sha256": "53228c8a74d9f23ee762444be6d1ad99bef52dedd4feb5519a01c8aef2c447a1"
+  },
+  "priorStatus": "failed",
+  "priorDifferences": [
+    {
+      "native": "sra-v6-aec05333-8d44-41cf-b5db-5bdc492c6389:epoch:2:revision:4:frame:65d0e43fa61b6784",
+      "path": "prefixes[6].proposal.sourceProposal.facet_plan.projection.compound.source_method.boundary_ref",
+      "source": "sra-v6-aec05333-8d44-41cf-b5db-5bdc492c6389:epoch:3:revision:8:frame:fd4f2adcd02e7db3"
+    },
+    {
+      "native": "sra-v6-aec05333-8d44-41cf-b5db-5bdc492c6389:epoch:3:revision:8:frame:fd4f2adcd02e7db3",
+      "path": "prefixes[11].proposal.sourceProposal.facet_plan.projection.compound.source_method.boundary_ref",
+      "source": "sra-v6-aec05333-8d44-41cf-b5db-5bdc492c6389:epoch:4:revision:13:frame:f82850d1031dec22"
+    }
+  ],
+  "cause": "The native prefix stores freeze(structuredClone(proposal)) before acquisition; the original family later mutates compound.source_method.boundary_ref through its portable alias during official-boundary record. Prior comparator used that later live object for retrospective comparison to the frozen earlier offer.",
+  "fix": "Retain a complete independently generated original offer snapshot at propose return for immutable selected-prefix evidence only. Keep the live original proposal for before/after/record and source-owned restores. Preserve every field and report every snapshot-to-later-alias difference separately.",
+  "scopeQualification": "No equality is claimed between immutable prefix proposal evidence and the live original post-acquisition proposal object. Call results, state, guards, actual restores and subsequent choices are still compared unchanged.",
+  "productionSourceChanged": false,
+  "captureHelperChanged": false,
+  "nativeStatePriming": false,
+  "fieldNormalizationOrDeletion": false,
+  "patch": {
+    "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-facet-source-parity-snapshot-correction.patch",
+    "bytes": 6435,
+    "sha256": "c5b3d018d0933836d90afb86322649681e0d707399eb300c3133ede06ce3611f"
+  },
+  "oldComparator": {
+    "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-facet-source-parity-attempt-01-generator.py",
+    "bytes": 53713,
+    "sha256": "7114e3526abe3b50c453165b87694f46b34f8b8e834c761ec9f96ebe199c1465"
+  },
+  "newComparator": {
+    "path": "scripts/compare-facet-example-public-parity.py",
+    "bytes": 55787,
+    "sha256": "2d7af5de0cc530cc9203ce56613fd43d727e7086bfac9aa56d024b941c4919ee"
+  },
+  "contractFiles": [
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "bytes": 151230,
+      "sha256": "dd7d3e08198132f41ba3cafa8d3841c6ed5f6ebfb415599d6ddca3938055f8f9"
+    },
+    {
+      "path": "tests/helpers/v6-live-game-campaign.ts",
+      "bytes": 85791,
+      "sha256": "c020a1346db8660f477dee9b40e86698914ab43be020a8ea826a9aac3038f6de"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/facet_examples/family.py",
+      "bytes": 11006,
+      "sha256": "fb567ddc4e4cb8208d831c76dfbb917a37d78477f9324b22fc069480ac9bd468"
+    }
+  ]
+}

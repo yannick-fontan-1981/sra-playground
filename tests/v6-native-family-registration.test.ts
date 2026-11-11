@@ -77,7 +77,7 @@ test('real factory registers the four interfaces in DRM order and executes Word 
     assert.equal(snapshot.coverage.fullV6Parity, false);
     assert.deepEqual(snapshot.coverage.sourceGroups.map((group: R) => group.id), policy.families);
 
-    const available = { surface_rewrite: 'surface_program', learned_code_program: 'code_program', ...interfaceIds,
+    const available = { facet_example: 'facet_examples', surface_rewrite: 'surface_program', learned_code_program: 'code_program', ...interfaceIds,
       configured_arrivals: 'configured_arrivals', fixed_origin: 'fixed_origin',
       linked_temporal_preparation: 'linked_temporal_preparation' } as Record<string, string>;
     const expected = policy.program_construction.ordered_subquestions.flatMap(question => available[question] ? [available[question]] : []);
