@@ -202,18 +202,25 @@ intermédiaire de 20:19:50 et comprend la clôture effective du navigateur.
 Le parcours final des outils de coût, la mesure officielle, la publication
 effective 0.63 et sa réconciliation, puis la publication 0.64 restent ouverts.
 
-Le [checkpoint de preuves effectivement poussé et vérifié](lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/core-checkpoint-summary.json)
-est désormais **`17d6c1aa3532e4ff74a98a309e4dfb9c3bc4fb59`**, sur la branche
+Le [checkpoint de preuves complet, effectivement poussé et vérifié](lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/complete-checkpoint-summary.json)
+est **`41cedc1f6a89b8639c19f0dc45eae24c264ad3c0`**, sur la branche
 `lot6b-selected-rigid-checkpoint-20261111`, confirmé le **11 novembre 2026 à
-20:51:49.609783 UTC**. Les **sept lots de transport sont tous poussés et
-vérifiés** : **356 fichiers, 154 054 085 octets**, avec le natif
-**fa23 / 322 fichiers inchangé**. Il s’agit d’une sauvegarde de source privée,
-sans publication de Site.
+20:55:52.559017 UTC**. Son parent est
+`17d6c1aa3532e4ff74a98a309e4dfb9c3bc4fb59`. Le complément réellement poussé
+comprend **78 fichiers supplémentaires / 4 433 894 octets** : QA02 complète
+avec capture et fermetures, horloge finale, trois documents dans leur état
+de clôture et métadonnées. Le natif reste **fa23 / 322 fichiers inchangé**.
+Ce checkpoint de preuves ne constitue pas une publication de Site.
 
-**Les compléments QA02, l’horloge, les trois documents et les métadonnées de
-clôture ne sont pas encore revendiqués comme inclus dans 17d6c1aa** : leur
-petit commit complémentaire reste à terminer. `a01e6faf330d82fa220feac0c9ad4632bb75a9de`,
-vérifié à 18:34:56 UTC, devient un jalon historique, comme le
+Le [checkpoint principal 17d6c1aa](lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/core-checkpoint-summary.json)
+reste conservé : **sept lots poussés et vérifiés, 356 fichiers /
+154 054 085 octets**, confirmation à **20:51:49.609783 UTC**.
+Un petit commit documentaire suivra pour nommer le checkpoint de preuves
+41cedc1f et conserver son reçu ; **41cedc1f n’est pas présenté comme le dernier
+HEAD distant final**.
+
+`a01e6faf330d82fa220feac0c9ad4632bb75a9de`, vérifié à 18:34:56 UTC,
+reste un jalon historique, comme le
 [checkpoint 17bba57a](lot6b-evidence/provisional-063-01/source-checkpoint-17bba57a.json).
 Le jalon antérieur 103 + 6B, **33 + 9 tests et 65/76 entrées**, conserve son
 identité `7696e0c…` / `2e710bd…`.
@@ -235,6 +242,14 @@ explicitement libéré le **11 novembre 2026 à 20:30:25.610691 UTC** :
 `failed_or_expired` et `performance_started: false`. Aucune mesure officielle
 5C n’a démarré dans ce créneau. Cette issue ne précise pas sa cause et
 n’entraîne pas de nouvel essai automatique ; elle ne clôt ni 0.63 ni le coût 6B.
+
+La [dernière observation du statut 5C](lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/predecessor-final-status-observation.json)
+rapporte la phase **`cost_unmeasured_publication_pending`**. La cause
+explicitement rapportée pour ce créneau est **600 secondes sans accusés
+d’inactivité frais de 8A et 10C** : **zéro tentative de verrou exclusif,
+zéro échantillon officiel et zéro publication**, sans nouvel essai automatique.
+Ce constat ne diagnostique pas un ancien détenteur de verrou.
+La publication effective 0.63 et le coût officiel 6B restent donc ouverts.
 L’ordre demeure **5C 0.63 → 6B 0.64 → 8A 0.65 → 10C**.
 
 ### Suite du lot 6 et critère de coût
@@ -242,7 +257,7 @@ L’ordre demeure **5C 0.63 → 6B 0.64 → 8A 0.65 → 10C**.
 | Étape | État actuel | Prochaine opération |
 | --- | --- | --- |
 | 6A `preview_packing` | Livré, Sites 96–97 / native 0.60 | Conserver ses preuves et réserves. |
-| 6B `selected_rigid` | fa23/322 : **5 405/5 405**, cinq gates et worker ; sept tests Binding rejoués et 6 818 contrôles de scénarios conservés ; **11/11 rejeux, 187/187 contrôles, 390 actions** ; structure 58 points, preuve KLOT et **QA navigateur Vite** closes | Terminer le complément de clôture ; réconcilier le publié 0.63 effectif, fermer les outils et le contrat de coût, mesurer selon le critère global par jeu, puis publier 0.64. |
+| 6B `selected_rigid` | fa23/322 : **5 405/5 405**, cinq gates et worker ; sept tests Binding rejoués et 6 818 contrôles de scénarios conservés ; **11/11 rejeux, 187/187 contrôles, 390 actions** ; structure 58 points, preuve KLOT et **QA navigateur Vite** closes | Réconcilier le publié 0.63 effectif, finaliser les outils et le contrat de coût, effectuer les mesures selon le critère global par jeu, puis publier 0.64. |
 | 6C `observed_rigid_cargo` | À transférer | Après la clôture intégrée de 6B. |
 | 6D `shared_settlement` | À transférer | Après 6C, avec les critères communs du lot. |
 
