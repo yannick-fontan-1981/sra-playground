@@ -6,8 +6,9 @@ import { loadPyodide } from '../../public/vendor/pyodide/pyodide.mjs';
 import { BrowserV6Agent } from '../../src/runtime/v6-agent.ts';
 import { V6AgentService } from '../../src/runtime/v6-agent-service.ts';
 import { V6_REFERENCE_COMMIT, toV6PublicObservation } from '../../src/runtime/v6-agent-protocol.ts';
-import { createNativeV6Runtime, rawNativePreviewPacking } from '../../src/logos-engine/v6-native-runtime.ts';
+import { createNativeV6Runtime, rawNativePreviewPacking, rawNativeSelectedRigid } from '../../src/logos-engine/v6-native-runtime.ts';
 import { capturePreviewPacking } from './capture-preview-packing.ts';
+import { captureSelectedRigid } from './capture-selected-rigid.ts';
 import { hydrateNativeState } from '../../src/logos-engine/v6-native-state-graph.ts';
 import type { NativeV6Declarations } from '../../src/logos-engine/v6-native-runtime.ts';
 import type { NativeCommand, NativePublicObservation } from '../../src/logos-engine/v6-native-types.ts';
@@ -106,6 +107,8 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
   let windowCapture: WindowQuestionCapture | undefined;
   let recruitmentCapture: OrderedRecruitmentCapture | undefined;
   let previewOwner: R | undefined;
+  let selectedRigidOwner: R | undefined;
+  report.selectedRigidEvents = [];
   let native: Awaited<ReturnType<typeof loadPyodide>> | undefined;
   let agent: BrowserV6Agent | undefined, current: GameObservation | undefined;
   let lastResponse: V6AgentResult | undefined, lastCycles = 0, previousActions = 0, previousSeconds = 0;
@@ -349,6 +352,12 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
       if (preview) {
         previewOwner = preview;
         capturePreviewPacking(preview, report.previewPackingEvents);
+      }
+      const selectedRigidAdapter = (runtime as unknown as { families: R[] }).families.find(f => f.id === 'selected_rigid');
+      const selectedRigid = selectedRigidAdapter ? rawNativeSelectedRigid(selectedRigidAdapter as any) : null;
+      if (selectedRigid) {
+        selectedRigidOwner = selectedRigid;
+        report.selectedRigidCapture = captureSelectedRigid(selectedRigid, report.selectedRigidEvents);
       }
       // Observe the selected-only Facet owner and its actual restorations.
       // Inputs and results pass through unchanged; captured states never feed it.
@@ -607,6 +616,9 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
           const previewFacts = reasoningFacts
             .filter(fact => evidence.transitions.some((_: R, index: number) =>
               fact.key === `preview_packing_event:${evidence.decision_revision + index}`));
+          const selectedRigidFacts = reasoningFacts
+            .filter(fact => evidence.transitions.some((_: R, index: number) =>
+              fact.key === `selected_rigid_event:${evidence.decision_revision + index}`));
           const anchors = (series.events as R[]).filter(event => event.kind === 'coupled_pair_epoch_anchor');
           const alternating = (series.events as R[]).filter(event => event.kind === 'alternating_graph_evidence');
           const graphEvidence = alternating.at(-1);
@@ -690,6 +702,17 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
               acquired: previewFacts.map(fact => ({ key: fact.key, evidence: fact.evidence, revision: fact.revision, result: fact.value })),
               retainedSourceFact: reasoningFacts.find(fact => fact.key === 'preview_packing_state') ?? null,
               qualification: 'Passive observation after the real selected return and restoration; no Preview passive acquisition or injected state.',
+            } } : {}),
+            ...(graph.nodes['family_state:selected_rigid'] ? { selectedRigid: {
+              stateNode: 'family_state:selected_rigid', state: read('family_state:selected_rigid'),
+              eventsThrough: report.selectedRigidEvents.length,
+              instanceSourceState: selectedRigidOwner?.sourceState() ?? null,
+              instanceContext: selectedRigidOwner?.captureContext() ?? null,
+              proposal: evidence.proposal.selected_rigid_plan ? evidence.proposal : null,
+              acquired: selectedRigidFacts.map(fact => ({ key: fact.key, evidence: fact.evidence, revision: fact.revision, result: fact.value })),
+              retainedSourceFact: reasoningFacts.find(fact => fact.key === 'selected_rigid_state') ?? null,
+              transitions: evidence.transitions,
+              qualification: 'Passive capture of the unique SelectedRigid owner after actual selected acquisition and restoration. A null selected return remains an observed call. Foreign returns never invoke record; an existing source journal is nevertheless checkpointed and restored. No state, proposal, command or clock value is injected.',
             } } : {}),
             ...(graph.nodes['family_state:facet_examples'] ? { facetExample: {
               stateNode: 'family_state:facet_examples', state: read('family_state:facet_examples'),

@@ -1,0 +1,38 @@
+--- 6b-before-review/review-owner-costs.py
++++ 6b-reviewed/review-owner-costs.py
+@@ -13,8 +13,8 @@
+ whose separate causal qualification is retained without reloading its graphs.
+ Failure writes no receipt and reports structuralProof:false on standard error.
+ """
+-# Directly adapted from the immutable published lot5B tool. Exact source bytes,
+-# fingerprints and the complete diff are in recovery/cost-tools-adaptation.json.
++# Directly adapted from the immutable published lot6A tool. Exact source bytes,
++# fingerprints and review diffs are retained in cost-review/attempt-01.
+ # No predecessor measurements are reused.
+ from __future__ import annotations
+ 
+@@ -257,6 +257,8 @@
+         self.equal("declaration_location", declaration_record, self.fingerprint(directory / "declaration.json"))
+         self.check("predeclared_declaration", declaration["schema"] == "logos-engine.native-cost-protocol-declaration.v2"
+                    and declaration["status"] == "declared_before_official_window" and declaration["noOfficialWindowAtDeclaration"] is True)
++        self.check("actual_6B_predecessor_and_candidate_versions", declaration["baseline"]["nativeVersion"] == "0.63.0"
++                   and declaration["candidate"]["nativeVersion"] == "0.64.0")
+         self.equal("owner_qualification", declaration["ownerCostQualification"], {
+             "schema": "logos-engine.lot6b-owner-cost-qualification.v1", "contractPath": contract_record["path"], "tools": contract["tools"]})
+         self.equal("owner_tool_roles", sorted(contract["tools"]), ["consolidator", "reviewer"])
+@@ -436,6 +438,15 @@
+         self.check("functional_attribution_schema", attribution["schema"] == "logos-engine.lot6b-owner-cost-structural-attribution.v1"
+                    and attribution["status"] == "qualified_functional_structure")
+         self.equal("functional_attribution_native_identities", attribution["nativeDigests"], declaration["nativeDigests"])
++        self.equal("functional_attribution_no_failures", attribution["failures"], [])
++        self.equal("common_value_policy", attribution["commonValuePolicy"], {
++            "comparison": "exact", "permittedMetadataDifference": "origin.source_digest",
++            "identityValueAttributions": [], "unattributedDifferencesAllowed": 0})
++        self.check("common_value_points_nonempty", isinstance(attribution["points"], list) and bool(attribution["points"]))
++        self.equal("complete_common_value_coverage", attribution["commonValueCoverage"], [
++            {**{key: point[key] for key in ("case", "form", "pointIndex")},
++             "commonNodesCompared": point["baselineNodeCount"], "commonDeltasCompared": point["baselineDeltaCount"],
++             "comparison": "exact", "unattributedDifferences": 0} for point in attribution["points"]])
+         self.verify(attribution["generator"])
+         self.check("functional_attribution_checks", type(attribution["checkedCount"]) is int
+                    and attribution["checkedCount"] == len(attribution["checks"]) > 0

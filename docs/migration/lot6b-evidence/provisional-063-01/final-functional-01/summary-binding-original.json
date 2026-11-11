@@ -1,0 +1,1017 @@
+{
+  "schema": "logos-engine.lot6b.binding-original-requalification.v1",
+  "startedAt": "2026-11-11T18:15:35.546158+00:00",
+  "finishedAt": "2026-11-11T18:18:08.904429+00:00",
+  "status": "passed",
+  "totalBudgetSeconds": 600,
+  "maximumCommandSeconds": 120,
+  "failure": null,
+  "quietStop": false,
+  "nativeManifestDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+  "nativeFiles": 322,
+  "commonNativeExecution": "Existing whole-file module execution in terminal batch03, 1099/1099 at batch scope; no common test rerun by this task.",
+  "expectedScenarios": [
+    "positive",
+    "refutation",
+    "ambiguity",
+    "boundary",
+    "foreign-parent",
+    "passive-acquisition-bound",
+    "selected-acquisition-bound",
+    "level-clock-acquisition-bound"
+  ],
+  "scenarioCount": 8,
+  "scenarios": [
+    {
+      "case": "positive",
+      "report": {
+        "path": "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/positive/common-loop.json.gz",
+        "sha256": "eb2f5b144b21b563635965ba18119b44a1d2db53d2abb53c5649a7ba00c0595e",
+        "bytes": 30335
+      },
+      "journal": {
+        "path": "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/positive/actual-operations.json",
+        "sha256": "115986db3a75316bbbc18a9e3ac0f570238a0abf8ee1b11a05577f6ca45289ff",
+        "bytes": 4197296
+      },
+      "status": "passed",
+      "checksPassed": 9,
+      "checksFailures": [],
+      "failures": [],
+      "executionInputs": [
+        {
+          "path": "docs/migration/lot5c-evidence/recovery/common/common-plan.json",
+          "bytes": 9417,
+          "sha256": "5fc5b041ac24551549ad6d4cc79ce5e97d6c4710f7510b341da45e3febbfc41e"
+        },
+        {
+          "path": "scripts/native-object-binding-common-loop.ts",
+          "bytes": 30696,
+          "sha256": "fc2dc72f18cd48ff6fd78492d5d9737a8ff3880b85fbc18b3cc888fc2ee1c0e6"
+        },
+        {
+          "path": "tests/v6-object-binding-common.test.ts",
+          "bytes": 30310,
+          "sha256": "eef0085a5b311ceba63f67fc19fceab19b8f1c961874c802951c42a11af646a8"
+        },
+        {
+          "path": "scripts/review-observed-binding-common-replay.py",
+          "bytes": 26266,
+          "sha256": "5703fae25c0ca3101d01d847a14bd57c0dfe5af33ec77f6265fb6ecac67c62d2"
+        }
+      ],
+      "executionInputsUnchangedDuringRun": true,
+      "capturedBeforeAfterEqual": true,
+      "watchMissingCapturedPaths": [
+        "docs/migration/lot5c-evidence/recovery/common/common-plan.json"
+      ],
+      "nativeSourceDeclarationsModified": false,
+      "completeOriginalCallerReplayClaimed": false,
+      "qualification": "Synthetic cold ordinary caller proof, not a game result or cost measurement. Exact source parity requires independent unchanged-Python replay of the actual public-operation journal. Native tracker restoration is separate from shared caller-attention restoration."
+    },
+    {
+      "case": "refutation",
+      "report": {
+        "path": "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/refutation/common-loop.json.gz",
+        "sha256": "96266ed0fd80f807838f925b5d116689e54282854b1b6ebe805efb6212bc0f2a",
+        "bytes": 30530
+      },
+      "journal": {
+        "path": "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/refutation/actual-operations.json",
+        "sha256": "51e5878ceb62ebb4a14a77c2b2b437e014f87c1d2e013dbc87390c66e41f5c23",
+        "bytes": 4215444
+      },
+      "status": "passed",
+      "checksPassed": 9,
+      "checksFailures": [],
+      "failures": [],
+      "executionInputs": [
+        {
+          "path": "docs/migration/lot5c-evidence/recovery/common/common-plan.json",
+          "bytes": 9417,
+          "sha256": "5fc5b041ac24551549ad6d4cc79ce5e97d6c4710f7510b341da45e3febbfc41e"
+        },
+        {
+          "path": "scripts/native-object-binding-common-loop.ts",
+          "bytes": 30696,
+          "sha256": "fc2dc72f18cd48ff6fd78492d5d9737a8ff3880b85fbc18b3cc888fc2ee1c0e6"
+        },
+        {
+          "path": "tests/v6-object-binding-common.test.ts",
+          "bytes": 30310,
+          "sha256": "eef0085a5b311ceba63f67fc19fceab19b8f1c961874c802951c42a11af646a8"
+        },
+        {
+          "path": "scripts/review-observed-binding-common-replay.py",
+          "bytes": 26266,
+          "sha256": "5703fae25c0ca3101d01d847a14bd57c0dfe5af33ec77f6265fb6ecac67c62d2"
+        }
+      ],
+      "executionInputsUnchangedDuringRun": true,
+      "capturedBeforeAfterEqual": true,
+      "watchMissingCapturedPaths": [
+        "docs/migration/lot5c-evidence/recovery/common/common-plan.json"
+      ],
+      "nativeSourceDeclarationsModified": false,
+      "completeOriginalCallerReplayClaimed": false,
+      "qualification": "Synthetic cold ordinary caller proof, not a game result or cost measurement. Exact source parity requires independent unchanged-Python replay of the actual public-operation journal. Native tracker restoration is separate from shared caller-attention restoration."
+    },
+    {
+      "case": "ambiguity",
+      "report": {
+        "path": "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/ambiguity/common-loop.json.gz",
+        "sha256": "541bbf548c746bb9b16d0fa00ec9bafeddad6957074195a2bbaf8c5852b2071c",
+        "bytes": 20722
+      },
+      "journal": {
+        "path": "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/ambiguity/actual-operations.json",
+        "sha256": "20cb0948e00f535ec971ef29ab8d5aa44c3f492af3f3eb918a1dec177539015f",
+        "bytes": 1488335
+      },
+      "status": "passed",
+      "checksPassed": 8,
+      "checksFailures": [],
+      "failures": [],
+      "executionInputs": [
+        {
+          "path": "docs/migration/lot5c-evidence/recovery/common/common-plan.json",
+          "bytes": 9417,
+          "sha256": "5fc5b041ac24551549ad6d4cc79ce5e97d6c4710f7510b341da45e3febbfc41e"
+        },
+        {
+          "path": "scripts/native-object-binding-common-loop.ts",
+          "bytes": 30696,
+          "sha256": "fc2dc72f18cd48ff6fd78492d5d9737a8ff3880b85fbc18b3cc888fc2ee1c0e6"
+        },
+        {
+          "path": "tests/v6-object-binding-common.test.ts",
+          "bytes": 30310,
+          "sha256": "eef0085a5b311ceba63f67fc19fceab19b8f1c961874c802951c42a11af646a8"
+        },
+        {
+          "path": "scripts/review-observed-binding-common-replay.py",
+          "bytes": 26266,
+          "sha256": "5703fae25c0ca3101d01d847a14bd57c0dfe5af33ec77f6265fb6ecac67c62d2"
+        }
+      ],
+      "executionInputsUnchangedDuringRun": true,
+      "capturedBeforeAfterEqual": true,
+      "watchMissingCapturedPaths": [
+        "docs/migration/lot5c-evidence/recovery/common/common-plan.json"
+      ],
+      "nativeSourceDeclarationsModified": false,
+      "completeOriginalCallerReplayClaimed": false,
+      "qualification": "Synthetic cold ordinary caller proof, not a game result or cost measurement. Exact source parity requires independent unchanged-Python replay of the actual public-operation journal. Native tracker restoration is separate from shared caller-attention restoration."
+    },
+    {
+      "case": "boundary",
+      "report": {
+        "path": "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/boundary/common-loop.json.gz",
+        "sha256": "d753e07d2db87ee2c17e7f53ef5ff937edd71f7527ea4f7ba5d3e0f79fa2ac22",
+        "bytes": 28893
+      },
+      "journal": {
+        "path": "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/boundary/actual-operations.json",
+        "sha256": "993337bab2b311f9b773c5f915d272be96524c31951fae1246ae62b9c62a087a",
+        "bytes": 3834331
+      },
+      "status": "passed",
+      "checksPassed": 8,
+      "checksFailures": [],
+      "failures": [],
+      "executionInputs": [
+        {
+          "path": "docs/migration/lot5c-evidence/recovery/common/common-plan.json",
+          "bytes": 9417,
+          "sha256": "5fc5b041ac24551549ad6d4cc79ce5e97d6c4710f7510b341da45e3febbfc41e"
+        },
+        {
+          "path": "scripts/native-object-binding-common-loop.ts",
+          "bytes": 30696,
+          "sha256": "fc2dc72f18cd48ff6fd78492d5d9737a8ff3880b85fbc18b3cc888fc2ee1c0e6"
+        },
+        {
+          "path": "tests/v6-object-binding-common.test.ts",
+          "bytes": 30310,
+          "sha256": "eef0085a5b311ceba63f67fc19fceab19b8f1c961874c802951c42a11af646a8"
+        },
+        {
+          "path": "scripts/review-observed-binding-common-replay.py",
+          "bytes": 26266,
+          "sha256": "5703fae25c0ca3101d01d847a14bd57c0dfe5af33ec77f6265fb6ecac67c62d2"
+        }
+      ],
+      "executionInputsUnchangedDuringRun": true,
+      "capturedBeforeAfterEqual": true,
+      "watchMissingCapturedPaths": [
+        "docs/migration/lot5c-evidence/recovery/common/common-plan.json"
+      ],
+      "nativeSourceDeclarationsModified": false,
+      "completeOriginalCallerReplayClaimed": false,
+      "qualification": "Synthetic cold ordinary caller proof, not a game result or cost measurement. Exact source parity requires independent unchanged-Python replay of the actual public-operation journal. Native tracker restoration is separate from shared caller-attention restoration."
+    },
+    {
+      "case": "foreign-parent",
+      "report": {
+        "path": "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/foreign-parent/common-loop.json.gz",
+        "sha256": "681e7a0e8f51a335e763d1847dfd48ccfb4cd6cb760988d109037209e7aacc33",
+        "bytes": 53590
+      },
+      "journal": {
+        "path": "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/foreign-parent/actual-operations.json",
+        "sha256": "4abdbbde2fdfef646bda241e055db95d9d9cfe5c64b883784947e58b3e1a9642",
+        "bytes": 11235905
+      },
+      "status": "passed",
+      "checksPassed": null,
+      "checksFailures": [],
+      "failures": [],
+      "executionInputs": [
+        {
+          "path": "docs/migration/lot5c-evidence/recovery/common/common-plan.json",
+          "bytes": 9417,
+          "sha256": "5fc5b041ac24551549ad6d4cc79ce5e97d6c4710f7510b341da45e3febbfc41e"
+        },
+        {
+          "path": "scripts/native-object-binding-common-loop.ts",
+          "bytes": 30696,
+          "sha256": "fc2dc72f18cd48ff6fd78492d5d9737a8ff3880b85fbc18b3cc888fc2ee1c0e6"
+        },
+        {
+          "path": "tests/v6-object-binding-common.test.ts",
+          "bytes": 30310,
+          "sha256": "eef0085a5b311ceba63f67fc19fceab19b8f1c961874c802951c42a11af646a8"
+        },
+        {
+          "path": "scripts/review-observed-binding-common-replay.py",
+          "bytes": 26266,
+          "sha256": "5703fae25c0ca3101d01d847a14bd57c0dfe5af33ec77f6265fb6ecac67c62d2"
+        },
+        {
+          "path": "tests/helpers/native-composition-loop.ts",
+          "bytes": 5398,
+          "sha256": "eaeaa708a74ffab39d37715c66cb9fa88882504873173f0164fd15c4c6979906"
+        },
+        {
+          "path": "tests/fixtures/v6-typed-material-original-public.json.gz",
+          "bytes": 1743614,
+          "sha256": "3b8447ca844aacecd3c088307f7ba0d3fffd6eac26101915cc4e38da5451a1da"
+        },
+        {
+          "path": "docs/migration/native-campaigns-v50/life-public-trace-final.json.gz",
+          "bytes": 39361,
+          "sha256": "8c2e1b67af1c827d2a132c211d71b6e25158a5db1e9b236e4d0d92e912fe7c84"
+        }
+      ],
+      "executionInputsUnchangedDuringRun": true,
+      "capturedBeforeAfterEqual": true,
+      "watchMissingCapturedPaths": [
+        "docs/migration/lot5c-evidence/recovery/common/common-plan.json",
+        "docs/migration/native-campaigns-v50/life-public-trace-final.json.gz"
+      ],
+      "nativeSourceDeclarationsModified": null,
+      "completeOriginalCallerReplayClaimed": false,
+      "qualification": "Existing public LIFE returns through the ordinary factory establish the foreign typed-material parent without injected tracker or parent state. This proves shared native attention ownership and preservation. Typed-material parent revisions are a native extension, not a claim of complete original StrategyRouter replay."
+    },
+    {
+      "case": "passive-acquisition-bound",
+      "report": {
+        "path": "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/passive-acquisition-bound/common-loop.json.gz",
+        "sha256": "661020268ceab636d3a45270e79ba9782945bbe8d7dfc0260fade14b3636dcb6",
+        "bytes": 14452
+      },
+      "journal": {
+        "path": "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/passive-acquisition-bound/actual-operations.json",
+        "sha256": "9cf64eda4c74dc90699436db9d0c65f6012f28c9b36aa18b75a17ebb97195201",
+        "bytes": 237579
+      },
+      "status": "passed",
+      "checksPassed": null,
+      "checksFailures": [],
+      "failures": [],
+      "executionInputs": [
+        {
+          "path": "docs/migration/lot5c-evidence/recovery/common/common-plan.json",
+          "bytes": 9417,
+          "sha256": "5fc5b041ac24551549ad6d4cc79ce5e97d6c4710f7510b341da45e3febbfc41e"
+        },
+        {
+          "path": "scripts/native-object-binding-common-loop.ts",
+          "bytes": 30696,
+          "sha256": "fc2dc72f18cd48ff6fd78492d5d9737a8ff3880b85fbc18b3cc888fc2ee1c0e6"
+        },
+        {
+          "path": "tests/v6-object-binding-common.test.ts",
+          "bytes": 30310,
+          "sha256": "eef0085a5b311ceba63f67fc19fceab19b8f1c961874c802951c42a11af646a8"
+        },
+        {
+          "path": "scripts/review-observed-binding-common-replay.py",
+          "bytes": 26266,
+          "sha256": "5703fae25c0ca3101d01d847a14bd57c0dfe5af33ec77f6265fb6ecac67c62d2"
+        }
+      ],
+      "executionInputsUnchangedDuringRun": true,
+      "capturedBeforeAfterEqual": true,
+      "watchMissingCapturedPaths": [
+        "docs/migration/lot5c-evidence/recovery/common/common-plan.json"
+      ],
+      "nativeSourceDeclarationsModified": null,
+      "completeOriginalCallerReplayClaimed": false,
+      "qualification": "Native execution-bound contract, not original unbounded-source equivalence. The ordinary factory selects both commands. Only the second passive binding acquisition receives an expired execution deadline; no owner result, tracker state, proposal, family priority or public command is fabricated."
+    },
+    {
+      "case": "selected-acquisition-bound",
+      "report": {
+        "path": "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/selected-acquisition-bound/common-loop.json.gz",
+        "sha256": "bed87c04471b4ead57e765444fb4d94b6e62692e743be8b1df4abb842c93f78a",
+        "bytes": 11825
+      },
+      "journal": {
+        "path": "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/selected-acquisition-bound/actual-operations.json",
+        "sha256": "5c61964c78c0ec1fea8ec2b439186d7202fc4b0c71db38e4eae1edab3403fdef",
+        "bytes": 310252
+      },
+      "status": "passed",
+      "checksPassed": null,
+      "checksFailures": [],
+      "failures": [],
+      "executionInputs": [
+        {
+          "path": "docs/migration/lot5c-evidence/recovery/common/common-plan.json",
+          "bytes": 9417,
+          "sha256": "5fc5b041ac24551549ad6d4cc79ce5e97d6c4710f7510b341da45e3febbfc41e"
+        },
+        {
+          "path": "scripts/native-object-binding-common-loop.ts",
+          "bytes": 30696,
+          "sha256": "fc2dc72f18cd48ff6fd78492d5d9737a8ff3880b85fbc18b3cc888fc2ee1c0e6"
+        },
+        {
+          "path": "tests/v6-object-binding-common.test.ts",
+          "bytes": 30310,
+          "sha256": "eef0085a5b311ceba63f67fc19fceab19b8f1c961874c802951c42a11af646a8"
+        },
+        {
+          "path": "scripts/review-observed-binding-common-replay.py",
+          "bytes": 26266,
+          "sha256": "5703fae25c0ca3101d01d847a14bd57c0dfe5af33ec77f6265fb6ecac67c62d2"
+        }
+      ],
+      "executionInputsUnchangedDuringRun": true,
+      "capturedBeforeAfterEqual": true,
+      "watchMissingCapturedPaths": [
+        "docs/migration/lot5c-evidence/recovery/common/common-plan.json"
+      ],
+      "nativeSourceDeclarationsModified": null,
+      "completeOriginalCallerReplayClaimed": false,
+      "qualification": "Native selected-acquisition bound after an actual ordinary Binding release. Only the acquisition execution deadline changes; no proposal, command, public return or learned state is injected. This is not unbounded Python equivalence."
+    },
+    {
+      "case": "level-clock-acquisition-bound",
+      "report": {
+        "path": "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/level-clock-acquisition-bound/common-loop.json.gz",
+        "sha256": "ab8508b192ae58a6983cd4083ef19e6b4931b802389cdcb7e9ca145c9375f616",
+        "bytes": 11988
+      },
+      "journal": {
+        "path": "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/level-clock-acquisition-bound/actual-operations.json",
+        "sha256": "17abf9331ca8df975183c3ebe2039702a147c3172df8030b079dec11403e520b",
+        "bytes": 310703
+      },
+      "status": "passed",
+      "checksPassed": null,
+      "checksFailures": [],
+      "failures": [],
+      "executionInputs": [
+        {
+          "path": "docs/migration/lot5c-evidence/recovery/common/common-plan.json",
+          "bytes": 9417,
+          "sha256": "5fc5b041ac24551549ad6d4cc79ce5e97d6c4710f7510b341da45e3febbfc41e"
+        },
+        {
+          "path": "scripts/native-object-binding-common-loop.ts",
+          "bytes": 30696,
+          "sha256": "fc2dc72f18cd48ff6fd78492d5d9737a8ff3880b85fbc18b3cc888fc2ee1c0e6"
+        },
+        {
+          "path": "tests/v6-object-binding-common.test.ts",
+          "bytes": 30310,
+          "sha256": "eef0085a5b311ceba63f67fc19fceab19b8f1c961874c802951c42a11af646a8"
+        },
+        {
+          "path": "scripts/review-observed-binding-common-replay.py",
+          "bytes": 26266,
+          "sha256": "5703fae25c0ca3101d01d847a14bd57c0dfe5af33ec77f6265fb6ecac67c62d2"
+        }
+      ],
+      "executionInputsUnchangedDuringRun": true,
+      "capturedBeforeAfterEqual": true,
+      "watchMissingCapturedPaths": [
+        "docs/migration/lot5c-evidence/recovery/common/common-plan.json"
+      ],
+      "nativeSourceDeclarationsModified": null,
+      "completeOriginalCallerReplayClaimed": false,
+      "qualification": "The ordinary runtime clock advances only after the actual selected after guard returned unchanged. The caller deadline remains longer than the expired level allowance. The runtime derives the acquisition deadline; recordSource receives no injected argument or result. This is a native scheduling proof, not original unbounded-source equivalence or measured latency."
+    }
+  ],
+  "expectedOriginalCases": [
+    "positive",
+    "refutation",
+    "ambiguity",
+    "boundary"
+  ],
+  "originalComparisonCount": 4,
+  "originalComparisons": [
+    {
+      "case": "positive",
+      "comparison": {
+        "path": "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/positive/original-comparison.json",
+        "sha256": "d25138b257d7cb7107e7be3c6efd6ce17ef8bc5c77d282d85bfb0206d7ddf6f1",
+        "bytes": 463416
+      },
+      "exportReceipt": {
+        "path": "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/positive/original-export.json",
+        "sha256": "2007ecd9b9564ca0d46d088a46d86bff0b411e57cff2b059044611aaa471d4ce",
+        "bytes": 226550
+      },
+      "fixture": {
+        "path": "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/positive/original-replay.json.gz",
+        "sha256": "b254022d0278ac8630d38fbf5d6281ad7e6f9d4844ef9726d017e74c39f58db5",
+        "bytes": 584015
+      },
+      "status": "passed",
+      "inputsUnchanged": true,
+      "checks": {
+        "total": 1895,
+        "passed": 1895,
+        "failed": 0
+      },
+      "failedChecks": [],
+      "resultKeys": [
+        "schema",
+        "status",
+        "recordedAt",
+        "chainId",
+        "mode",
+        "referenceCommit",
+        "operations",
+        "operationPopulation",
+        "actualReturns",
+        "selectedReturns",
+        "passiveReturns",
+        "sourceMemoryPuts",
+        "nativeMemoryPuts",
+        "sourceStateRetention",
+        "sourceStateRetentionChecks",
+        "sourceStateRetentions",
+        "nativeRestoreOrders",
+        "commonPrefixPublicReturns",
+        "commonPrefixPublicSha256",
+        "nextOriginalAction",
+        "nextOriginalFrame",
+        "nextActualCommand",
+        "coldOriginal",
+        "nativeResultsUsedAsOracleInputs",
+        "qualification",
+        "reviewer",
+        "preservedReviewerSource",
+        "inputs",
+        "inputsUnchanged",
+        "checks"
+      ]
+    },
+    {
+      "case": "refutation",
+      "comparison": {
+        "path": "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/refutation/original-comparison.json",
+        "sha256": "c6a455463333d1518474b1b5457e39673fe9c96af5f80c3ca1ae2bb15f856dfd",
+        "bytes": 463455
+      },
+      "exportReceipt": {
+        "path": "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/refutation/original-export.json",
+        "sha256": "aaed8952c7550e2331cc290a4e18bff30f026d54690cf1397a34b4b0bfca3889",
+        "bytes": 226554
+      },
+      "fixture": {
+        "path": "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/refutation/original-replay.json.gz",
+        "sha256": "584a93e5fc1abb1ea1d4a597dafc36cff5c31ed010ff856eefc36297ef14e268",
+        "bytes": 584175
+      },
+      "status": "passed",
+      "inputsUnchanged": true,
+      "checks": {
+        "total": 1895,
+        "passed": 1895,
+        "failed": 0
+      },
+      "failedChecks": [],
+      "resultKeys": [
+        "schema",
+        "status",
+        "recordedAt",
+        "chainId",
+        "mode",
+        "referenceCommit",
+        "operations",
+        "operationPopulation",
+        "actualReturns",
+        "selectedReturns",
+        "passiveReturns",
+        "sourceMemoryPuts",
+        "nativeMemoryPuts",
+        "sourceStateRetention",
+        "sourceStateRetentionChecks",
+        "sourceStateRetentions",
+        "nativeRestoreOrders",
+        "commonPrefixPublicReturns",
+        "commonPrefixPublicSha256",
+        "nextOriginalAction",
+        "nextOriginalFrame",
+        "nextActualCommand",
+        "coldOriginal",
+        "nativeResultsUsedAsOracleInputs",
+        "qualification",
+        "reviewer",
+        "preservedReviewerSource",
+        "inputs",
+        "inputsUnchanged",
+        "checks"
+      ]
+    },
+    {
+      "case": "ambiguity",
+      "comparison": {
+        "path": "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/ambiguity/original-comparison.json",
+        "sha256": "b8f928564ce7ef431d263ca32878c576c4906e91fb70de524f3e3a156797e45c",
+        "bytes": 388196
+      },
+      "exportReceipt": {
+        "path": "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/ambiguity/original-export.json",
+        "sha256": "f0cbfbfa579f361923ece7add5536e90460341b9020f4c32c415fcba6238946f",
+        "bytes": 226549
+      },
+      "fixture": {
+        "path": "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/ambiguity/original-replay.json.gz",
+        "sha256": "9a5ea777e86bc10ae60ff9365884487baf7be72ae172c71d4a2bf6c10c2d0864",
+        "bytes": 182240
+      },
+      "status": "passed",
+      "inputsUnchanged": true,
+      "checks": {
+        "total": 1229,
+        "passed": 1229,
+        "failed": 0
+      },
+      "failedChecks": [],
+      "resultKeys": [
+        "schema",
+        "status",
+        "recordedAt",
+        "chainId",
+        "mode",
+        "referenceCommit",
+        "operations",
+        "operationPopulation",
+        "actualReturns",
+        "selectedReturns",
+        "passiveReturns",
+        "sourceMemoryPuts",
+        "nativeMemoryPuts",
+        "sourceStateRetention",
+        "sourceStateRetentionChecks",
+        "sourceStateRetentions",
+        "nativeRestoreOrders",
+        "commonPrefixPublicReturns",
+        "commonPrefixPublicSha256",
+        "nextOriginalAction",
+        "nextOriginalFrame",
+        "nextActualCommand",
+        "coldOriginal",
+        "nativeResultsUsedAsOracleInputs",
+        "qualification",
+        "reviewer",
+        "preservedReviewerSource",
+        "inputs",
+        "inputsUnchanged",
+        "checks"
+      ]
+    },
+    {
+      "case": "boundary",
+      "comparison": {
+        "path": "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/boundary/original-comparison.json",
+        "sha256": "25d7d6cca9d146fff66faa4cc9348f34cd2ec54186478a04abe77a219c6cbf37",
+        "bytes": 449540
+      },
+      "exportReceipt": {
+        "path": "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/boundary/original-export.json",
+        "sha256": "21ff93aa40dc3ea7762e8edfa664d4809be9e9913870e99aaf3bc7fc354bf028",
+        "bytes": 226550
+      },
+      "fixture": {
+        "path": "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/boundary/original-replay.json.gz",
+        "sha256": "4ed97e01e307c39fe8fbd5c7884caea1775cd5eb2c012830a6baebf38ac7ef8d",
+        "bytes": 535839
+      },
+      "status": "passed",
+      "inputsUnchanged": true,
+      "checks": {
+        "total": 1799,
+        "passed": 1799,
+        "failed": 0
+      },
+      "failedChecks": [],
+      "resultKeys": [
+        "schema",
+        "status",
+        "recordedAt",
+        "chainId",
+        "mode",
+        "referenceCommit",
+        "operations",
+        "operationPopulation",
+        "actualReturns",
+        "selectedReturns",
+        "passiveReturns",
+        "sourceMemoryPuts",
+        "nativeMemoryPuts",
+        "sourceStateRetention",
+        "sourceStateRetentionChecks",
+        "sourceStateRetentions",
+        "nativeRestoreOrders",
+        "commonPrefixPublicReturns",
+        "commonPrefixPublicSha256",
+        "nextOriginalAction",
+        "nextOriginalFrame",
+        "nextActualCommand",
+        "coldOriginal",
+        "nativeResultsUsedAsOracleInputs",
+        "qualification",
+        "reviewer",
+        "preservedReviewerSource",
+        "inputs",
+        "inputsUnchanged",
+        "checks"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "case": "positive",
+      "stage": "export",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "docs/migration/lot6b-evidence/record-command.py",
+        "--receipt",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/binding-positive-export-command.json",
+        "--watch-manifest",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/functional-watch.json",
+        "--",
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "scripts/export-observed-binding-reference.py",
+        "--journal",
+        "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/positive/actual-operations.json",
+        "--fixture",
+        "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/positive/original-replay.json.gz",
+        "--receipt",
+        "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/positive/original-export.json"
+      ],
+      "receipt": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/binding-positive-export-command.json",
+      "startedAt": "2026-11-11T18:17:27.758703+00:00",
+      "timeoutSeconds": 120,
+      "timedOut": false,
+      "exitCode": 0,
+      "finishedAt": "2026-11-11T18:17:36.211902+00:00",
+      "elapsedSeconds": 8.4532070690002,
+      "recordedStatus": "passed",
+      "recordedInputsUnchanged": true,
+      "recordedElapsedSeconds": 7.311727401000098
+    },
+    {
+      "case": "positive",
+      "stage": "review",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "docs/migration/lot6b-evidence/record-command.py",
+        "--receipt",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/binding-positive-review-command.json",
+        "--watch-manifest",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/functional-watch.json",
+        "--",
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "scripts/review-observed-binding-common-replay.py",
+        "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/positive",
+        "--fixture",
+        "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/positive/original-replay.json.gz",
+        "--export-receipt",
+        "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/positive/original-export.json",
+        "--output",
+        "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/positive/original-comparison.json"
+      ],
+      "receipt": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/binding-positive-review-command.json",
+      "startedAt": "2026-11-11T18:17:36.216760+00:00",
+      "timeoutSeconds": 120,
+      "timedOut": false,
+      "exitCode": 0,
+      "finishedAt": "2026-11-11T18:17:38.348579+00:00",
+      "elapsedSeconds": 2.1316721990006045,
+      "recordedStatus": "passed",
+      "recordedInputsUnchanged": true,
+      "recordedElapsedSeconds": 1.074174168999889
+    },
+    {
+      "case": "refutation",
+      "stage": "export",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "docs/migration/lot6b-evidence/record-command.py",
+        "--receipt",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/binding-refutation-export-command.json",
+        "--watch-manifest",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/functional-watch.json",
+        "--",
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "scripts/export-observed-binding-reference.py",
+        "--journal",
+        "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/refutation/actual-operations.json",
+        "--fixture",
+        "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/refutation/original-replay.json.gz",
+        "--receipt",
+        "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/refutation/original-export.json"
+      ],
+      "receipt": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/binding-refutation-export-command.json",
+      "startedAt": "2026-11-11T18:17:38.356099+00:00",
+      "timeoutSeconds": 120,
+      "timedOut": false,
+      "exitCode": 0,
+      "finishedAt": "2026-11-11T18:17:46.614426+00:00",
+      "elapsedSeconds": 8.258281541999168,
+      "recordedStatus": "passed",
+      "recordedInputsUnchanged": true,
+      "recordedElapsedSeconds": 7.203211276999355
+    },
+    {
+      "case": "refutation",
+      "stage": "review",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "docs/migration/lot6b-evidence/record-command.py",
+        "--receipt",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/binding-refutation-review-command.json",
+        "--watch-manifest",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/functional-watch.json",
+        "--",
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "scripts/review-observed-binding-common-replay.py",
+        "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/refutation",
+        "--fixture",
+        "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/refutation/original-replay.json.gz",
+        "--export-receipt",
+        "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/refutation/original-export.json",
+        "--output",
+        "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/refutation/original-comparison.json"
+      ],
+      "receipt": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/binding-refutation-review-command.json",
+      "startedAt": "2026-11-11T18:17:46.617319+00:00",
+      "timeoutSeconds": 120,
+      "timedOut": false,
+      "exitCode": 0,
+      "finishedAt": "2026-11-11T18:17:48.798175+00:00",
+      "elapsedSeconds": 2.1809518029986066,
+      "recordedStatus": "passed",
+      "recordedInputsUnchanged": true,
+      "recordedElapsedSeconds": 1.0482398209969688
+    },
+    {
+      "case": "ambiguity",
+      "stage": "export",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "docs/migration/lot6b-evidence/record-command.py",
+        "--receipt",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/binding-ambiguity-export-command.json",
+        "--watch-manifest",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/functional-watch.json",
+        "--",
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "scripts/export-observed-binding-reference.py",
+        "--journal",
+        "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/ambiguity/actual-operations.json",
+        "--fixture",
+        "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/ambiguity/original-replay.json.gz",
+        "--receipt",
+        "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/ambiguity/original-export.json"
+      ],
+      "receipt": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/binding-ambiguity-export-command.json",
+      "startedAt": "2026-11-11T18:17:48.805536+00:00",
+      "timeoutSeconds": 120,
+      "timedOut": false,
+      "exitCode": 0,
+      "finishedAt": "2026-11-11T18:17:56.927910+00:00",
+      "elapsedSeconds": 8.122207587999583,
+      "recordedStatus": "passed",
+      "recordedInputsUnchanged": true,
+      "recordedElapsedSeconds": 7.06463182600055
+    },
+    {
+      "case": "ambiguity",
+      "stage": "review",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "docs/migration/lot6b-evidence/record-command.py",
+        "--receipt",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/binding-ambiguity-review-command.json",
+        "--watch-manifest",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/functional-watch.json",
+        "--",
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "scripts/review-observed-binding-common-replay.py",
+        "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/ambiguity",
+        "--fixture",
+        "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/ambiguity/original-replay.json.gz",
+        "--export-receipt",
+        "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/ambiguity/original-export.json",
+        "--output",
+        "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/ambiguity/original-comparison.json"
+      ],
+      "receipt": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/binding-ambiguity-review-command.json",
+      "startedAt": "2026-11-11T18:17:56.931364+00:00",
+      "timeoutSeconds": 120,
+      "timedOut": false,
+      "exitCode": 0,
+      "finishedAt": "2026-11-11T18:17:58.615837+00:00",
+      "elapsedSeconds": 1.6844541740028944,
+      "recordedStatus": "passed",
+      "recordedInputsUnchanged": true,
+      "recordedElapsedSeconds": 0.7070302889987943
+    },
+    {
+      "case": "boundary",
+      "stage": "export",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "docs/migration/lot6b-evidence/record-command.py",
+        "--receipt",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/binding-boundary-export-command.json",
+        "--watch-manifest",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/functional-watch.json",
+        "--",
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "scripts/export-observed-binding-reference.py",
+        "--journal",
+        "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/boundary/actual-operations.json",
+        "--fixture",
+        "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/boundary/original-replay.json.gz",
+        "--receipt",
+        "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/boundary/original-export.json"
+      ],
+      "receipt": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/binding-boundary-export-command.json",
+      "startedAt": "2026-11-11T18:17:58.621760+00:00",
+      "timeoutSeconds": 120,
+      "timedOut": false,
+      "exitCode": 0,
+      "finishedAt": "2026-11-11T18:18:06.617818+00:00",
+      "elapsedSeconds": 7.996040284997434,
+      "recordedStatus": "passed",
+      "recordedInputsUnchanged": true,
+      "recordedElapsedSeconds": 6.934735086997534
+    },
+    {
+      "case": "boundary",
+      "stage": "review",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "docs/migration/lot6b-evidence/record-command.py",
+        "--receipt",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/binding-boundary-review-command.json",
+        "--watch-manifest",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/functional-watch.json",
+        "--",
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "scripts/review-observed-binding-common-replay.py",
+        "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/boundary",
+        "--fixture",
+        "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/boundary/original-replay.json.gz",
+        "--export-receipt",
+        "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/boundary/original-export.json",
+        "--output",
+        "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/boundary/original-comparison.json"
+      ],
+      "receipt": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/binding-boundary-review-command.json",
+      "startedAt": "2026-11-11T18:18:06.622068+00:00",
+      "timeoutSeconds": 120,
+      "timedOut": false,
+      "exitCode": 0,
+      "finishedAt": "2026-11-11T18:18:08.897334+00:00",
+      "elapsedSeconds": 2.2752376400021603,
+      "recordedStatus": "passed",
+      "recordedInputsUnchanged": true,
+      "recordedElapsedSeconds": 1.1447010689989838
+    }
+  ],
+  "originalComparisonChecks": {
+    "total": 6818,
+    "passed": 6818,
+    "failed": 0
+  },
+  "watchManifest": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/functional-watch.json",
+  "watchMembershipCount": 2952,
+  "supplementalCapturedCommonInputsBefore": {
+    "docs/migration/lot5c-evidence/recovery/common/common-plan.json": {
+      "path": "docs/migration/lot5c-evidence/recovery/common/common-plan.json",
+      "sha256": "5fc5b041ac24551549ad6d4cc79ce5e97d6c4710f7510b341da45e3febbfc41e",
+      "bytes": 9417
+    },
+    "scripts/native-object-binding-common-loop.ts": {
+      "path": "scripts/native-object-binding-common-loop.ts",
+      "sha256": "fc2dc72f18cd48ff6fd78492d5d9737a8ff3880b85fbc18b3cc888fc2ee1c0e6",
+      "bytes": 30696
+    },
+    "tests/v6-object-binding-common.test.ts": {
+      "path": "tests/v6-object-binding-common.test.ts",
+      "sha256": "eef0085a5b311ceba63f67fc19fceab19b8f1c961874c802951c42a11af646a8",
+      "bytes": 30310
+    },
+    "scripts/review-observed-binding-common-replay.py": {
+      "path": "scripts/review-observed-binding-common-replay.py",
+      "sha256": "5703fae25c0ca3101d01d847a14bd57c0dfe5af33ec77f6265fb6ecac67c62d2",
+      "bytes": 26266
+    },
+    "tests/helpers/native-composition-loop.ts": {
+      "path": "tests/helpers/native-composition-loop.ts",
+      "sha256": "eaeaa708a74ffab39d37715c66cb9fa88882504873173f0164fd15c4c6979906",
+      "bytes": 5398
+    },
+    "tests/fixtures/v6-typed-material-original-public.json.gz": {
+      "path": "tests/fixtures/v6-typed-material-original-public.json.gz",
+      "sha256": "3b8447ca844aacecd3c088307f7ba0d3fffd6eac26101915cc4e38da5451a1da",
+      "bytes": 1743614
+    },
+    "docs/migration/native-campaigns-v50/life-public-trace-final.json.gz": {
+      "path": "docs/migration/native-campaigns-v50/life-public-trace-final.json.gz",
+      "sha256": "8c2e1b67af1c827d2a132c211d71b6e25158a5db1e9b236e4d0d92e912fe7c84",
+      "bytes": 39361
+    }
+  },
+  "supplementalCapturedCommonInputsAfter": {
+    "docs/migration/lot5c-evidence/recovery/common/common-plan.json": {
+      "path": "docs/migration/lot5c-evidence/recovery/common/common-plan.json",
+      "sha256": "5fc5b041ac24551549ad6d4cc79ce5e97d6c4710f7510b341da45e3febbfc41e",
+      "bytes": 9417
+    },
+    "scripts/native-object-binding-common-loop.ts": {
+      "path": "scripts/native-object-binding-common-loop.ts",
+      "sha256": "fc2dc72f18cd48ff6fd78492d5d9737a8ff3880b85fbc18b3cc888fc2ee1c0e6",
+      "bytes": 30696
+    },
+    "tests/v6-object-binding-common.test.ts": {
+      "path": "tests/v6-object-binding-common.test.ts",
+      "sha256": "eef0085a5b311ceba63f67fc19fceab19b8f1c961874c802951c42a11af646a8",
+      "bytes": 30310
+    },
+    "scripts/review-observed-binding-common-replay.py": {
+      "path": "scripts/review-observed-binding-common-replay.py",
+      "sha256": "5703fae25c0ca3101d01d847a14bd57c0dfe5af33ec77f6265fb6ecac67c62d2",
+      "bytes": 26266
+    },
+    "tests/helpers/native-composition-loop.ts": {
+      "path": "tests/helpers/native-composition-loop.ts",
+      "sha256": "eaeaa708a74ffab39d37715c66cb9fa88882504873173f0164fd15c4c6979906",
+      "bytes": 5398
+    },
+    "tests/fixtures/v6-typed-material-original-public.json.gz": {
+      "path": "tests/fixtures/v6-typed-material-original-public.json.gz",
+      "sha256": "3b8447ca844aacecd3c088307f7ba0d3fffd6eac26101915cc4e38da5451a1da",
+      "bytes": 1743614
+    },
+    "docs/migration/native-campaigns-v50/life-public-trace-final.json.gz": {
+      "path": "docs/migration/native-campaigns-v50/life-public-trace-final.json.gz",
+      "sha256": "8c2e1b67af1c827d2a132c211d71b6e25158a5db1e9b236e4d0d92e912fe7c84",
+      "bytes": 39361
+    }
+  },
+  "supplementalInputsUnchanged": true,
+  "qualification": [
+    "Eight existing common scenarios plus four independent original comparisons, all attributed to their actual recorded inputs; incomplete work is not accepted.",
+    "The common plan and archived LIFE trace are pinned in the common reports but absent from the 2952-file generic watch; their exact relevant input identities are checked additionally before and after this task without changing that watch.",
+    "Four original cases establish the declared component/common source comparison. Foreign-parent and acquisition-bound cases retain their native-extension qualification; no entire original StrategyRouter replay is claimed.",
+    "No native test rerun, KLOT, live game, browser, official cost, source mutation, plan/watch mutation or Git command was launched. Actual published0.63 reconciliation remains pending."
+  ]
+}

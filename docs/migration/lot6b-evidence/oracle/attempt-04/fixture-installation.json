@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "source": {
+    "path": "docs/migration/lot6b-evidence/oracle/attempt-04/reference.json.gz",
+    "bytes": 2049970,
+    "sha256": "9880febf669bf13f8640149f2231e07e8ec50de14a1c5e20884cac415e4c0f87"
+  },
+  "previousCanonical": {
+    "path": "tests/fixtures/v6-selected-rigid/reference.json.gz",
+    "bytes": 1727762,
+    "sha256": "0bbb3017d111fa27e2928d0e7c07246b1bd28d7b1e2d4776db69522ac14dccfe"
+  },
+  "previousRetained": "docs/migration/lot6b-evidence/oracle/attempt-03/reference.json.gz",
+  "target": {
+    "path": "tests/fixtures/v6-selected-rigid/reference.json.gz",
+    "bytes": 2049970,
+    "sha256": "9880febf669bf13f8640149f2231e07e8ec50de14a1c5e20884cac415e4c0f87"
+  },
+  "recordedAt": "2026-11-11T14:52:47.966954+00:00"
+}

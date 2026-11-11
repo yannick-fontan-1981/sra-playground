@@ -52,7 +52,7 @@ test('production factory installs one Preview owner at its declared goal entry w
     const { raw } = owner(runtime), snapshot = runtime.snapshot() as R;
     const goal = snapshot.coverage.sourceGroups.find((group: R) => group.id === 'goal_access');
     const index = goal.families.indexOf('preview_packing');
-    assert.deepEqual(goal.families.slice(index - 1, index + 2), ['subset_diagnosis', 'preview_packing', 'invited_reduction']);
+    assert.deepEqual(goal.families.slice(index - 1, index + 3), ['subset_diagnosis', 'preview_packing', 'selected_rigid', 'invited_reduction']);
     assert.equal(goal.entryPoints[index], 'preview_packing');
     assert.equal(snapshot.coverage.registeredFamilies.filter((id: string) => id === 'preview_packing').length, 1);
     assert.equal(snapshot.coverage.fullV6Parity, false);

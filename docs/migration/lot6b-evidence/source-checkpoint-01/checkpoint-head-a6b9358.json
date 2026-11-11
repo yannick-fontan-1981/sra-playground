@@ -1,0 +1,57 @@
+{
+  "schema": "sra.source-checkpoint-transport-receipt.v1",
+  "startedAt": "2026-11-11T16:36:41.375Z",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "branch": "lot6b-selected-rigid-checkpoint-20261111",
+  "originalCommit": "e1f42dac8eb4226f8a3bc78d89d6bee6f463da1e",
+  "originalTree": "b2bcebe1de58e4536a37e6949a922694c1f9c4ed",
+  "priorRejectedPushBytes": 116566738,
+  "serverPerPushLimitBytes": 67108864,
+  "publication": false,
+  "steps": [
+    {
+      "index": 1,
+      "commit": "4fbf518f292d77d3876da1a3dac7d63dc1a1be19",
+      "verifiedRemoteCommit": "4fbf518f292d77d3876da1a3dac7d63dc1a1be19",
+      "rawBatchBytes": 25165823,
+      "elapsedSeconds": 4.647,
+      "verifiedAt": "2026-11-11T16:36:47.380Z"
+    },
+    {
+      "index": 2,
+      "commit": "5c1b2c9f53f8a5f12526e665f82e9f84260b74b5",
+      "verifiedRemoteCommit": "5c1b2c9f53f8a5f12526e665f82e9f84260b74b5",
+      "rawBatchBytes": 25165819,
+      "elapsedSeconds": 3.583,
+      "verifiedAt": "2026-11-11T16:36:50.964Z"
+    },
+    {
+      "index": 3,
+      "commit": "49233ebbf1c5161ec91fe970e0a17d90d0f461d3",
+      "verifiedRemoteCommit": "49233ebbf1c5161ec91fe970e0a17d90d0f461d3",
+      "rawBatchBytes": 7231667,
+      "elapsedSeconds": 2.907,
+      "verifiedAt": "2026-11-11T16:36:53.871Z"
+    },
+    {
+      "index": 4,
+      "commit": "5b03fb53526d6016fde61db32a2d4fbb1de0f5bb",
+      "verifiedRemoteCommit": "5b03fb53526d6016fde61db32a2d4fbb1de0f5bb",
+      "rawBatchBytes": 0,
+      "elapsedSeconds": 1.011,
+      "verifiedAt": "2026-11-11T16:36:54.883Z"
+    }
+  ],
+  "observedRemoteMain": "d75a36f0a99bf6c301034523a3138a64d2f6e744",
+  "remoteBefore": null,
+  "finalTransportCommit": "5b03fb53526d6016fde61db32a2d4fbb1de0f5bb",
+  "finalTree": "b2bcebe1de58e4536a37e6949a922694c1f9c4ed",
+  "originalAncestryPreserved": true,
+  "exactTreeVerified": true,
+  "completedAt": "2026-11-11T16:36:54.964Z",
+  "documentationCommit": "a6b935886948c693a5ba1dcccbd75c05fb828eac",
+  "verifiedRemoteHead": "a6b935886948c693a5ba1dcccbd75c05fb828eac",
+  "workingTreeClean": true,
+  "finalVerifiedAt": "2026-11-11T16:36:56.218Z",
+  "totalElapsedSeconds": 14.843
+}

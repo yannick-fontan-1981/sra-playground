@@ -1,0 +1,25 @@
+/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/qualify-cost-owner-graphs.mjs:140: function commonNode(a, b, digestA, digestB) {
+/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/qualify-cost-owner-graphs.mjs:512:       nodeValue(right.nodes['caller:attention'], right.nodes), 'Persisted common attention differs between roles');
+/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot5c-evidence/qualify-cost-owner-graphs.mjs:664:   audit.result.qualification = 'Every captured graph reconstructs from its exact complete Kernel delta chain using the validator bound to its own source freeze and identical value codecs. The declared nonadmitted Binding domain requires no context, core, methods, native refusal, attention mutation or attention write. Each actual passive record is null except for the exact original official-boundary event, and only those nonnull returns create facts. Added candidate nodes/deltas receive explicit family installation, exact source-program installation, actual ObservedBinding checkpoint, boundary-event fact or reachable-fragment attribution. Actual common attention and persisted attention values are compared exactly across roles. Other common node identities/metadata and common delta identity/cause/order remain exact apart from their declared runtime source digest; general private-value equality across versions is not asserted. Structural counts come from the captures, without an added-node or cycle formula. The forms are fixed before any cost window and every future raw trial must match its own form exactly. No cost values, timing correction, future-run success or full graph/caller semantic parity is inferred.';
+src/logos-engine/v6-reasoning-memory.ts:17:   operations: CatalogOperation[]; facts: ReasoningFact[]; traces: ReasoningTrace[];
+src/logos-engine/v6-reasoning-memory.ts:24:   readonly traces: readonly { readonly version: number; readonly record: ReasoningTrace }[];
+src/logos-engine/v6-reasoning-memory.ts:57:   private traces: ReasoningTrace[] = [];
+src/logos-engine/v6-reasoning-memory.ts:63:   private traceVersions = new Map<number, number>();
+src/logos-engine/v6-reasoning-memory.ts:123:     this.available(); const id = (this.traces[this.traces.length - 1]?.id ?? 0) + 1;
+src/logos-engine/v6-reasoning-memory.ts:124:     this.traces.push(freezeOwned({ id, episode, kind, body: copy(value), created: this.clock() }));
+src/logos-engine/v6-reasoning-memory.ts:125:     this.traceVersions.set(id, ++this.nativeRevision);
+src/logos-engine/v6-reasoning-memory.ts:142:       facts: this.facts.size, traces: this.traces.length, archive: this.archive.size };
+src/logos-engine/v6-reasoning-memory.ts:147:       facts: [...this.facts.values()], traces: this.traces, archive: [...this.archive.values()] });
+src/logos-engine/v6-reasoning-memory.ts:151:     this.available(); return copy({ facts: [...this.facts.values()], traces: this.traces });
+src/logos-engine/v6-reasoning-memory.ts:161:       traces: Object.freeze(this.traces.map(record => Object.freeze({ version: this.traceVersions.get(record.id)!, record }))),
+src/logos-engine/v6-reasoning-memory.ts:165:     this.factVersions.clear(); this.traceVersions.clear(); ++this.nativeRevision;
+src/logos-engine/v6-reasoning-memory.ts:167:     for (const trace of this.traces) { freezeOwned(trace); this.traceVersions.set(trace.id, ++this.nativeRevision); }
+src/logos-engine/v6-reasoning-memory.ts:179:     if (!Array.isArray(input.traces) || input.traces.some((trace, i) => !Number.isSafeInteger(trace.id) || trace.id <= (input.traces[i - 1]?.id ?? 0))) throw new TypeError('Invalid reasoning trace sequence');
+src/logos-engine/v6-reasoning-memory.ts:180:     this.facts = facts; this.traces = input.traces; this.markRestoredTables();
+src/logos-engine/v6-reasoning-memory.ts:197:     if (!Array.isArray(input.traces) || input.traces.some((trace, i) => !Number.isSafeInteger(trace.id) || trace.id <= (input.traces[i - 1]?.id ?? 0))) throw new TypeError('Invalid reasoning trace sequence');
+src/logos-engine/v6-reasoning-memory.ts:199:     this.facts = facts; this.traces = input.traces; this.archive = archive;
+src/logos-engine/v6-native-authority.ts:19: const traceId = (id: number): string => `reasoning:trace:${id}`;
+src/logos-engine/v6-native-authority.ts:51:   readonly memory = new NativeReasoningMemory();
+src/logos-engine/v6-native-authority.ts:73:     const state = this.memory.state(), { facts: _facts, traces: _traces, ...catalog } = state;
+src/logos-engine/v6-native-authority.ts:115:       if (id !== traceId(trace.id)) throw new TypeError('Reasoning trace reference has a different identity');
+src/logos-engine/v6-native-authority.ts:158:     const facts: string[] = [], traces: string[] = [];

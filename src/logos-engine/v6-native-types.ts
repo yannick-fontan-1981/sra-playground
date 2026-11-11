@@ -108,6 +108,8 @@ export interface NativeExecution {
   /** Same active-level budget as the runtime, expressed on the supplied clock. */
   readonly deadlineMs?: number;
   readonly now?: () => number;
+  /** Current level quota, separate from the remaining session/prefix allowance. */
+  readonly remainingLevelActions?: number;
 }
 
 export interface NativeProgramHandle {

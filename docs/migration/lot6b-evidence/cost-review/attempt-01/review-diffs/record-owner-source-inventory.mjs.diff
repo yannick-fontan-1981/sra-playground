@@ -1,0 +1,29 @@
+--- 6b-before-review/record-owner-source-inventory.mjs
++++ 6b-reviewed/record-owner-source-inventory.mjs
+@@ -1,6 +1,6 @@
+ #!/usr/bin/env node
+ /** Record the actual factories' owners and family-installed programs, without a session.
+- * Derived from the retained 7B inventory, with both generator identities bound.
++ * Derived from the retained 6A inventory, with both generator identities bound.
+  * Usage: node SCRIPT BASELINE_CHECKOUT OUTPUT.json
+  * No runtime initialize, observation, proposal, action or workflow execution is requested.
+  */
+@@ -76,6 +76,9 @@
+   const inputs = {};
+   for (const name of [RUNTIME, STORE, PROGRAMS, ...DECLARATIONS]) inputs[name] = await fingerprint(checkout, name);
+   const runtimeSource = await readFile(resolve(checkout, RUNTIME), 'utf8');
++  const versions = [...runtimeSource.matchAll(/NATIVE_V6_IMPLEMENTATION\s*=\s*['"]logos-engine\.typescript\.v6\.native-migration\/([^'"]+)['"]/g)].map(match => match[1]);
++  assert.deepEqual(versions, [role === 'baseline' ? '0.63.0' : '0.64.0'],
++    '6B owner inventory requires its actual 0.63 predecessor and frozen 0.64 candidate');
+   assert.ok(runtimeSource.includes('id: `family_state:${family.id}`')
+     && runtimeSource.includes('id: `family_activation:${family.id}`')
+     && runtimeSource.includes('for (const family of this.families) await family.attachPrograms?.(this.knowledge)'),
+@@ -132,7 +135,7 @@
+   for (const [name, expected] of Object.entries(inputs)) {
+     assert.deepEqual(await fingerprint(checkout, name), expected, 'Factory input changed: ' + name);
+   }
+-  return { checkout, native: before, owners, programs, programNodeIds, installations,
++  return { checkout, nativeVersion: versions[0], native: before, owners, programs, programNodeIds, installations,
+     factorySourceDigest: runtime.sourceDigest, storeScope: scope, sourceInputs: Object.values(inputs),
+     runtimeUninitializedBeforeAndAfter: true,
+     sourceDeclaredNodeIds: {

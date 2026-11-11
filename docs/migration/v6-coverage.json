@@ -30,10 +30,10 @@
     "declaredClassesAndFunctions": 12857,
     "dataFiles": 417,
     "verifiedModules": 0,
-    "componentVerifiedModules": 210,
+    "componentVerifiedModules": 213,
     "partiallyTransferredModules": 147,
     "transferredUnverifiedModules": 0,
-    "pendingModules": 1012,
+    "pendingModules": 1009,
     "strategyFamilies": 16
   },
   "families": [
@@ -94314,9 +94314,34 @@
           "endLine": 9
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-selected-rigid.ts",
+        "src/logos-engine/v6-selected-rigid-types.ts",
+        "src/logos-engine/v6-selected-rigid-geometry.ts",
+        "src/logos-engine/v6-selected-rigid-search.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-selected-rigid-reference.py",
+        "scripts/compare-v6-selected-rigid-reference.ts",
+        "tests/fixtures/v6-selected-rigid/reference.json.gz",
+        "tests/v6-selected-rigid-native.test.ts",
+        "tests/v6-selected-rigid-reference.test.ts",
+        "tests/v6-selected-rigid-integration.test.ts",
+        "tests/v6-selected-rigid-capture.test.ts",
+        "docs/migration/lot6b-evidence/oracle/attempt-04/export-execution.json",
+        "docs/migration/lot6b-evidence/oracle/attempt-04/native-comparison.json",
+        "docs/migration/lot6b-evidence/integration/attempt-02/execution.json",
+        "docs/migration/lot6b-evidence/capture/attempt-01/presence-qualification.json",
+        "docs/migration/lot6b-selected-rigid-lineage.md",
+        "scripts/compare-selected-rigid-public-parity.py",
+        "docs/migration/lot6b-evidence/development-freeze-01/bounded-execution.json",
+        "docs/migration/lot6b-evidence/development-freeze-01/source-parity-attempt-01/reader-execution.json",
+        "docs/migration/lot6b-evidence/development-freeze-01/source-parity-attempt-01/result.json.gz",
+        "docs/migration/lot6b-evidence/development-freeze-01/reader-negative-attempt-01/results/qualification.json",
+        "docs/migration/lot6b-evidence/development-freeze-01/reader-negative-attempt-01/bounded-execution.json"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/selected_rigid/family.py",
@@ -94379,9 +94404,34 @@
           "endLine": 43
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-selected-rigid.ts",
+        "src/logos-engine/v6-selected-rigid-types.ts",
+        "src/logos-engine/v6-selected-rigid-geometry.ts",
+        "src/logos-engine/v6-selected-rigid-search.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-selected-rigid-reference.py",
+        "scripts/compare-v6-selected-rigid-reference.ts",
+        "tests/fixtures/v6-selected-rigid/reference.json.gz",
+        "tests/v6-selected-rigid-native.test.ts",
+        "tests/v6-selected-rigid-reference.test.ts",
+        "tests/v6-selected-rigid-integration.test.ts",
+        "tests/v6-selected-rigid-capture.test.ts",
+        "docs/migration/lot6b-evidence/oracle/attempt-04/export-execution.json",
+        "docs/migration/lot6b-evidence/oracle/attempt-04/native-comparison.json",
+        "docs/migration/lot6b-evidence/integration/attempt-02/execution.json",
+        "docs/migration/lot6b-evidence/capture/attempt-01/presence-qualification.json",
+        "docs/migration/lot6b-selected-rigid-lineage.md",
+        "scripts/compare-selected-rigid-public-parity.py",
+        "docs/migration/lot6b-evidence/development-freeze-01/bounded-execution.json",
+        "docs/migration/lot6b-evidence/development-freeze-01/source-parity-attempt-01/reader-execution.json",
+        "docs/migration/lot6b-evidence/development-freeze-01/source-parity-attempt-01/result.json.gz",
+        "docs/migration/lot6b-evidence/development-freeze-01/reader-negative-attempt-01/results/qualification.json",
+        "docs/migration/lot6b-evidence/development-freeze-01/reader-negative-attempt-01/bounded-execution.json"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/selected_rigid/mechanism.py",
@@ -94480,9 +94530,34 @@
           "endLine": 159
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-selected-rigid.ts",
+        "src/logos-engine/v6-selected-rigid-types.ts",
+        "src/logos-engine/v6-selected-rigid-geometry.ts",
+        "src/logos-engine/v6-selected-rigid-search.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-selected-rigid-reference.py",
+        "scripts/compare-v6-selected-rigid-reference.ts",
+        "tests/fixtures/v6-selected-rigid/reference.json.gz",
+        "tests/v6-selected-rigid-native.test.ts",
+        "tests/v6-selected-rigid-reference.test.ts",
+        "tests/v6-selected-rigid-integration.test.ts",
+        "tests/v6-selected-rigid-capture.test.ts",
+        "docs/migration/lot6b-evidence/oracle/attempt-04/export-execution.json",
+        "docs/migration/lot6b-evidence/oracle/attempt-04/native-comparison.json",
+        "docs/migration/lot6b-evidence/integration/attempt-02/execution.json",
+        "docs/migration/lot6b-evidence/capture/attempt-01/presence-qualification.json",
+        "docs/migration/lot6b-selected-rigid-lineage.md",
+        "scripts/compare-selected-rigid-public-parity.py",
+        "docs/migration/lot6b-evidence/development-freeze-01/bounded-execution.json",
+        "docs/migration/lot6b-evidence/development-freeze-01/source-parity-attempt-01/reader-execution.json",
+        "docs/migration/lot6b-evidence/development-freeze-01/source-parity-attempt-01/result.json.gz",
+        "docs/migration/lot6b-evidence/development-freeze-01/reader-negative-attempt-01/results/qualification.json",
+        "docs/migration/lot6b-evidence/development-freeze-01/reader-negative-attempt-01/bounded-execution.json"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/shared_settlement/__init__.py",
@@ -99424,6 +99499,6 @@
     "No new game, live WEAV attempt, official cost decision or publication result is established by these mappings. The separate WEAV diagnostic retains its exhausted cumulative case clock and unmet six-level target. Common-loop contribution, merged-source functional gates, the predeclared global cost policy, final integrity and publication remain parent-owned evidence to be reviewed before any 5A closure.",
     "Lot10C connects ordered_recruitment at its original material-list position after window_question, through one public_ordered_recruitment owner. Source component and cold common-loop proofs are complete in their declared synthetic domains. Actual game contribution, final integrated delivery, costs and full strategic-caller parity are separate evidence and are not inferred from these mappings.",
     "Lot5C recovery reconstructs observed_object_binding from the pinned original with a single registered owner and shared caller attention. Fresh component proofs are retained under docs/migration/lot5c-evidence/recovery; lost historical5C evidence is not reused. Seven common scenarios passed on the first reconstructed runtime; the independent original replay and the subsequently added active-level deadline proof remain separately qualified. Publication, final integrated gates and official costs are still open. All six complete-migration gates remain false.",
-    "The prospective 5C+10C source union preserves both lots original component-proof provenance. Aggregate counters are a static merge reconciliation and remain provisional until final composed-source audits. No new runtime test, official cost or publication result is established by this merge."
+    "The prospective 5C+6B+10C source union preserves all three lots original component-proof provenance. Aggregate counters are a static merge reconciliation and remain provisional until final composed-source audits. No new runtime test, official cost or publication result is established by this merge."
   ]
 }

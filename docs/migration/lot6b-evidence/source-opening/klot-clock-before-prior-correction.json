@@ -1,0 +1,31 @@
+{
+  "schema": "logos-engine.lot6b.cumulative-case-clock.v1",
+  "case": "KLOT",
+  "status": "completed_within_budget",
+  "limitSeconds": 2400,
+  "priorChargedSeconds": 0.0,
+  "chargedSeconds": 13.549298560999887,
+  "remainingSeconds": 2386.450701439,
+  "intervals": [
+    {
+      "label": "prior-public-history-reconciliation",
+      "startedAt": "2026-11-11T14:37:27.145099+00:00",
+      "startedMonotonic": 10291.612885606,
+      "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+      "finishedAt": "2026-11-11T14:37:40.694417+00:00",
+      "elapsedSeconds": 13.549298560999887
+    }
+  ],
+  "active": null,
+  "priorObservation": {
+    "path": "docs/migration/lot6b-evidence/source-opening/klot-prior-observation.json",
+    "sha256": "f2d5b180ee44d497843e9aa76f3949570c70b28f1dc448aba06b95bca9cea05f",
+    "bytes": 930
+  },
+  "generator": {
+    "path": "docs/migration/lot6b-evidence/case-clock.py",
+    "sha256": "0dcb7199d327c6aced2671952a12d78c8136272de49a0bc17e6844a0f40285ee",
+    "bytes": 3185
+  },
+  "updatedAt": "2026-11-11T14:37:40.694435+00:00"
+}

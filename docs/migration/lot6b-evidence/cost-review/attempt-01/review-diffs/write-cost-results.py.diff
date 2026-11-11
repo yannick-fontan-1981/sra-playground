@@ -1,0 +1,31 @@
+--- 6b-before-review/write-cost-results.py
++++ 6b-reviewed/write-cost-results.py
+@@ -12,7 +12,7 @@
+ Select a separate window with --output-directory. Source manifests are read from
+ that window's declaration; optional source-path arguments must match it exactly.
+ """
+-# Copied and adapted from docs/migration/lot5b-evidence/write-cost-results.py.
++# Copied and adapted from docs/migration/lot6a-evidence/write-cost-results.py.
+ # No predecessor measurements or outcomes are reused.
+ from __future__ import annotations
+ import argparse
+@@ -152,7 +152,10 @@
+     require(not destination.exists() and not render_path.exists(), 'A rendered report already exists; refusing overwrite')
+     require((PERF / 'declaration.json').is_file(), 'The selected window needs its retained declaration')
+     declaration = read(PERF / 'declaration.json')
++    require(declaration['baseline']['nativeVersion'] == '0.63.0' and declaration['candidate']['nativeVersion'] == '0.64.0',
++            '6B rendering requires its actually declared 0.63 predecessor and frozen 0.64 candidate')
+     qualified = declaration.get('ownerCostQualification') is not None
++    require(qualified, '6B requires the separately predeclared owner-cost analysis')
+     aggregate_name = 'owner-growth-comparison.json' if qualified else 'combined-comparison.json'
+     review_name = 'owner-growth-review.json' if qualified else 'consolidation-review.json'
+     decision_name = review_name if qualified else 'global-budget-decision.json'
+@@ -529,7 +532,7 @@
+         stream.write(document)
+     receipt = {'schema': 'logos-engine.lot6b-cost-report-render.v1',
+                'recordedAt': datetime.now(USER_TIMEZONE).isoformat(), 'status': 'rendered_retained_receipts',
+-               'adaptedFrom': fp(ROOT / 'docs/migration/lot5b-evidence/write-cost-results.py'),
++               'adaptedFrom': fp(ROOT / 'docs/migration/lot6a-evidence/write-cost-results.py'),
+                'generator': fp(Path(__file__)), 'report': fp(destination), 'inputs': records,
+                'aggregateDiagnostics': 16, 'cohortDiagnostics': 32, 'displayedMeasuredSessions': len(session_rows), 'timezone': 'UTC−03',
+                'inputReceiptsUnchanged': True, 'localLinksChecked': len(links),

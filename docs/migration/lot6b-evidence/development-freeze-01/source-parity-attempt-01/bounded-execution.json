@@ -1,0 +1,99 @@
+{
+  "schema": "logos-engine.lot6b.bounded-case-command.v1",
+  "status": "passed",
+  "command": [
+    "python",
+    "-B",
+    "scripts/compare-selected-rigid-public-parity.py",
+    "--root",
+    "/workspace/sites/sra-lot6b-20261111/.sites-checkout",
+    "--report",
+    "docs/migration/lot6b-evidence/development-freeze-01/klot-campaign.json.gz",
+    "--output",
+    "docs/migration/lot6b-evidence/development-freeze-01/source-parity-attempt-01/result.json.gz",
+    "--receipt",
+    "docs/migration/lot6b-evidence/development-freeze-01/source-parity-attempt-01/reader-execution.json",
+    "--require-prefixes"
+  ],
+  "case": "KLOT",
+  "label": "klot-original-parity-01",
+  "startedAt": "2026-11-11T15:41:22.325029+00:00",
+  "finishedAt": "2026-11-11T15:42:24.314049+00:00",
+  "elapsedSeconds": 61.9890241030007,
+  "limitSeconds": 300.0,
+  "timedOut": false,
+  "exitCode": 0,
+  "interruption": null,
+  "childProcessGroupReaped": true,
+  "orphanProcessGroupTerminated": false,
+  "inputs": [
+    {
+      "path": "docs/migration/lot6b-evidence/run-case-command.py",
+      "bytes": 7433,
+      "sha256": "f50b1e34f1fba9d104ab37c58f5adf6be2bb4fa8ee73bb74ecdcc81085fa1517"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/case-clock.py",
+      "bytes": 3185,
+      "sha256": "0dcb7199d327c6aced2671952a12d78c8136272de49a0bc17e6844a0f40285ee"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/development-freeze-01/source-parity-attempt-01/watch.json",
+      "bytes": 825,
+      "sha256": "2d4130584abf216b6637faa678be9106edfa3242f51271755545a22c1725210a"
+    },
+    {
+      "path": "scripts/compare-selected-rigid-public-parity.py",
+      "bytes": 43759,
+      "sha256": "d77b4fbec377668f8673c39cb1401bcbce86cd11323a2ef0671f757df24e8f38"
+    },
+    {
+      "path": "scripts/export-v6-selected-rigid-reference.py",
+      "bytes": 48745,
+      "sha256": "90df08227717a2c23aa1550f105935ed8812815622f069941344fa2c91e0fc16"
+    },
+    {
+      "path": "scripts/verify-selected-rigid-presence.py",
+      "bytes": 65174,
+      "sha256": "91a1b0ded6d4b303ded74218a714ff042dcb35cf756bbe68b654f1d8003357b5"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/development-freeze-01/klot-campaign.json.gz",
+      "bytes": 10936146,
+      "sha256": "2bc1788e3fc0b3494a447de208ba0705f2b8c58c10b34d6d706826720d99c5f6"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/development-freeze-01/source-manifest.json",
+      "bytes": 36806,
+      "sha256": "a74ae8574bd1087f2b463034efbb401784817e8192c7724c297255d5d46ee9ab"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/development-freeze-01/source-archive.json",
+      "bytes": 39592,
+      "sha256": "16c5c2500eb3729b5997ce311e6af1d574030b5df0fd8e6e3f5f278eb0bde483"
+    }
+  ],
+  "inputsUnchanged": true,
+  "output": {
+    "path": "docs/migration/lot6b-evidence/development-freeze-01/source-parity-attempt-01/bounded-execution.log.gz",
+    "bytes": 1204,
+    "sha256": "d88347e2ca7497288ecbf3fc29ac175f156c371bf05410d7443c353c7645b43e"
+  },
+  "caseClock": {
+    "path": "docs/migration/lot6b-evidence/klot-case-clock.json",
+    "bytes": 1932,
+    "sha256": "46fd9878d2011ee2a612257ee31bf9064868b29b1e15d044670b9f0913c9cd01"
+  },
+  "chargedInterval": {
+    "label": "klot-original-parity-01",
+    "startedAt": "2026-11-11T15:41:22.318303+00:00",
+    "startedMonotonic": 14126.786093623,
+    "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+    "finishedAt": "2026-11-11T15:42:24.341679+00:00",
+    "elapsedSeconds": 62.02335395799855
+  },
+  "chargedSeconds": 187.39229838399942,
+  "remainingSeconds": 2212.6077016160007,
+  "clockCloseExitCode": 0,
+  "qualification": "One actual bounded task, including failed or timed out work, charged to the same cumulative case clock. Existing logs and physical public journals are retained; no outcome is reclassified."
+}
