@@ -1,0 +1,78 @@
+{
+  "schema": "logos-engine.lot5c.oracle-fixture-promotion.v1",
+  "recordedAt": "2026-11-11T12:11:55.440058+00:00",
+  "status": "promoted_exact_original_export",
+  "oldCanonical": {
+    "path": "tests/fixtures/v6-observed-binding-reference.json.gz",
+    "bytes": 3453990,
+    "sha256": "8ea3768c3f240707c8c0d6988125fe525709414f008484baa9816174928ea3a8"
+  },
+  "oldPreserved": {
+    "path": "docs/migration/lot5c-evidence/recovery/source-oracle/fixture-export-01.json.gz",
+    "bytes": 3453990,
+    "sha256": "8ea3768c3f240707c8c0d6988125fe525709414f008484baa9816174928ea3a8"
+  },
+  "newExport": {
+    "path": "docs/migration/lot5c-evidence/recovery/source-oracle/fixture-export-02.json.gz",
+    "bytes": 3454135,
+    "sha256": "eacefcf58171fbaa4c9bce248210ab0fb105a067ec92981ca2d21f0a057747d9"
+  },
+  "newCanonical": {
+    "path": "tests/fixtures/v6-observed-binding-reference.json.gz",
+    "bytes": 3454135,
+    "sha256": "eacefcf58171fbaa4c9bce248210ab0fb105a067ec92981ca2d21f0a057747d9"
+  },
+  "originalExportReceipt": "docs/migration/lot5c-evidence/recovery/source-oracle/export-02.json",
+  "projectionIncident": "docs/migration/lot5c-evidence/recovery/source-oracle/export-01-projection-incident.json",
+  "comparison": {
+    "unchangedHelperCases": 78,
+    "changedHelperCases": [
+      {
+        "id": "locate-base",
+        "jsonArgumentsUnchanged": true,
+        "oldOriginalResult": null,
+        "newOriginalResult": [
+          4,
+          10,
+          5,
+          11
+        ]
+      },
+      {
+        "id": "locate-shifted",
+        "jsonArgumentsUnchanged": true,
+        "oldOriginalResult": null,
+        "newOriginalResult": [
+          6,
+          11,
+          7,
+          12
+        ]
+      },
+      {
+        "id": "locate-recoloured",
+        "jsonArgumentsUnchanged": true,
+        "oldOriginalResult": null,
+        "newOriginalResult": [
+          4,
+          10,
+          5,
+          11
+        ]
+      },
+      {
+        "id": "locate-odd-body",
+        "jsonArgumentsUnchanged": true,
+        "oldOriginalResult": null,
+        "newOriginalResult": [
+          4,
+          10,
+          6,
+          12
+        ]
+      }
+    ],
+    "allChainsAndOtherFixtureFieldsUnchanged": true
+  },
+  "qualification": "Corrected helper inputs are constructed as the consumed source lists of lists before calling immutable Python; no result is copied from native code. The first fixture and failed parity remain retained."
+}

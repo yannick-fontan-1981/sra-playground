@@ -1,0 +1,52 @@
+{
+  "schema": "logos-engine.lot5c.bounded-integration-validation-plan.v1",
+  "declaredAt": "2026-11-11T14:38:55.154590+00:00",
+  "candidateCommit": "72397e46d746dfbc76e3d0d1818ff1b6b2b9cd64",
+  "published6ACommit": "98336fba4e696a51c90ff7f7b37b8bdf95f34847",
+  "importedClockFixCommit": "4e7e4742b997128346e84f62b7a4fb8b5d4e47c5",
+  "scope": "Bounded integration validation, not the final5C delivery suite. Only currentExecution changed among318native files; originalcommon02 remains attached to its originalfreeze.",
+  "tests": [
+    {
+      "path": "tests/v6-native-runtime.test.ts",
+      "selection": "entire_module",
+      "requiredNewCases": [
+        "native current deadlines convert caller clock 10 to runtime clock 1000",
+        "native current deadlines convert caller clock 1000 to runtime clock 10"
+      ]
+    },
+    {
+      "path": "tests/v6-window-question-kernel.test.ts",
+      "selection": "entire_module"
+    },
+    {
+      "path": "tests/v6-object-binding-common.test.ts",
+      "selection": "three_explicit_acquisition_bound_cases",
+      "namePattern": "an incomplete (passive|selected) binding acquisition|the ordinary level clock bounds",
+      "expectedPassed": 3,
+      "expectedFiltered": 4,
+      "deferredUnchangedCases": [
+        "positive_and_refutation",
+        "ambiguity",
+        "boundary",
+        "foreign-parent"
+      ]
+    }
+  ],
+  "checks": [
+    "TypeScript noEmit",
+    "declared entry audit",
+    "migration source audit"
+  ],
+  "sourceFreeze": "source-after-clock",
+  "closedCaseModuleExclusions": [
+    "tests/v6-ranked-workshop-reference.test.ts",
+    "tests/v6-ranked-workshop-kernel.test.ts",
+    "tests/v6-symbol-transactions-kernel.test.ts",
+    "tests/v6-framed-transfer-reference.test.ts"
+  ],
+  "noLiveGames": true,
+  "noOfficialPerformanceClaim": true,
+  "noFinalFreezeClaim": true,
+  "preserveAllAttempts": true,
+  "rationale": "The two independently originated deadline regressions and three actual acquisition-bound paths target the changed callerclock and the existing5Cseal mechanism. ExistingWindow guards exercise its originalconsumer. Broader finalcommon, test and replay scope will be declared from actualpublished10B; no oldcommon receipt is relabeled."
+}

@@ -1,0 +1,88 @@
+{
+  "schema": "logos-engine.lot5c.actual-published10b-reconciliation.v1",
+  "recordedAt": "2026-11-11T17:09:18.776679+00:00",
+  "status": "source_reconciled_pending_fresh_integrated_validation",
+  "candidateBeforeMerge": "670892410f136da67d4e05ec1251c5770f7825b0",
+  "actualMergedPublishedCommit": "4afcbfe6a25bd3a88223be543e443bc53b9c8814",
+  "actualNativeBaselineCommit": "1019d2eb929d7dc201a5c1f6edce5aa1c5dfa464",
+  "mergeBase": "d75a36f0a99bf6c301034523a3138a64d2f6e744",
+  "nativeManifestDigest": "a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57",
+  "nativeFileCount": 318,
+  "all318NativeFileSha256MatchedPremergeManifest": true,
+  "sharedPublishedNativeFiles": 310,
+  "sharedIdenticalNativeFiles": 308,
+  "twoAuthorizedSharedFileDeltas": [
+    "src/logos-engine/v6-native-runtime.ts",
+    "src/logos-engine/v6-native-types.ts"
+  ],
+  "candidateOnlyNativeFiles": [
+    "src/logos-engine/v6-object-binding-common.ts",
+    "src/logos-engine/v6-object-binding-geometry.ts",
+    "src/logos-engine/v6-object-binding-identity.ts",
+    "src/logos-engine/v6-object-binding-planning.ts",
+    "src/logos-engine/v6-object-binding-reception.ts",
+    "src/logos-engine/v6-object-binding-tracker.ts",
+    "src/logos-engine/v6-observed-binding-state.ts",
+    "src/logos-engine/v6-observed-binding.ts"
+  ],
+  "conflictsResolved": {
+    "src/logos-engine/v6-native-runtime.ts": "All six conflict hunks retain Binding integration. Complete result equals6708924. Current10Bexecution clock/deadline handoffs remain byte-identical to102.",
+    "scripts/audit-v6-entry-points.ts": "Retain Binding explicit-entry condition with Window and other existing owners.",
+    "migration/v6-transfer-map.json": "Retain Binding mappings and all nonconflicting published Window evidence.",
+    "docs/migration/v6-entry-point-progress.json": "Retain0.63identity and65/76=85.5%; formal audit will regenerate during finalchecks.",
+    "docs/migration/v6-coverage.json": "Retain205component/147partial/1017pending/0verified summary and nonconflicting incoming data; formal semantic audit remains required.",
+    "docs/migration/v6-delivery-roadmap.md": "Retain owncurrent5Cblock and exactpublished10Bcurrentblock; no overwrite of published7/6Ablocks."
+  },
+  "newInheritedExecutionInputs": [
+    "scripts/compare-window-question-checkpoint-parity.py",
+    "scripts/compare-window-question-public-parity.py",
+    "scripts/diagnose-window-question-checkpoint.py"
+  ],
+  "registrationTestAdaptation": {
+    "file": {
+      "path": "tests/v6-radial-port-integration.test.ts",
+      "bytes": 28799,
+      "sha256": "0746c7f0725a6172b78b1d3b0c9c9014dd47d37d3bfa2585362fea07d83eb719"
+    },
+    "reason": "Actual0.62 adds Window registration. Final0.63 explicit registration test additionally counts observed_object_binding at its source position: FMR23/33, total65/76. Native registration itself is unchanged.",
+    "independentSourceReview": "passed; Window alias retained, exact Binding owner and entry required; denominator and no-full-parity guards retained."
+  },
+  "terminalDocumentaryReceiptImport": {
+    "sourceCheckpoint": "2981a62d456802d39dcde316734793e905fb0ebf",
+    "qualification": "Checkpoint differs from actually published103 in exactly these three terminal publication proof files. It is not relabeled as a published source.",
+    "files": [
+      {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/publication-062/documentation-application-verification.json",
+        "bytes": 15986,
+        "sha256": "e3cb4b498386bcc74008de0c8f93e3ee378dc2b6b1b8cc42492e83362e24a17a"
+      },
+      {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/publication-062/documentation-publication.json",
+        "bytes": 2403,
+        "sha256": "e5a6b13a3e3df4a23bee0c47b91fe58c1c9451e1ebfc78cd8e45b0dcd8aeb8ef"
+      },
+      {
+        "path": "docs/migration/lot10b-evidence/recovery-20261111/publication-062/documentation-workflow.json",
+        "bytes": 909,
+        "sha256": "235a104b3f4ea8344c1f4d117bc57403c80db08c0fa30e52bd87e4b106af1995"
+      }
+    ]
+  },
+  "finalScope": {
+    "path": "docs/migration/lot5c-evidence/recovery/integration-published-10b/final-scope-reconciliation.json",
+    "bytes": 25572,
+    "sha256": "d59fefa24a468ac17aa512507a6e4a04b40b6fa2a41f9e3f9fd8d24c9c7e274d"
+  },
+  "freshNativeTestsExecutedByThisReconciliation": 0,
+  "freshRecordedReplaysExecutedByThisReconciliation": 0,
+  "officialCostMeasured": false,
+  "sitePublishedBy5C": false,
+  "roadmapCurrentBlockReconciliation": {
+    "published10bBlockRetainedExactly": true,
+    "published10bBlockSha256": "9501f6265e4b89ac58267404cab70932478a7c849e1c7983fa894b9f42f63862",
+    "supersededDuplicateBlockRemoved": true,
+    "supersededBlockSha256": "ad361fa09c27b9d6bbd1331013e3b8ec434b470ed64aac24f8c01541d164e084",
+    "supersededBlockRetainedInGitCommit": "670892410f136da67d4e05ec1251c5770f7825b0",
+    "reason": "Old recovered prepublication block duplicated the current marker and still described10B as pending. The exact actualpublished103 block replaces that current status; historical receipts remain intact."
+  }
+}

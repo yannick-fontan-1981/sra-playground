@@ -1,0 +1,11 @@
+{
+  "schema": "logos-engine.lot5c.private-source-checkpoint.v1",
+  "recordedAt": "2026-11-11T12:13:08.544540+00:00",
+  "status": "pushed_and_verified",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "commit": "d6772376858ce0659346e674034ff1f379f950f5",
+  "branch": "lot5c-recovery-checkpoint-20261111",
+  "remoteHeadVerified": "d6772376858ce0659346e674034ff1f379f950f5",
+  "sitePublicationPerformed": false,
+  "qualification": "Intermediate source recovery checkpoint; not a completed validation or Site deployment."
+}

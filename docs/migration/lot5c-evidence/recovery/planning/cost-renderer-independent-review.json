@@ -1,0 +1,28 @@
+{
+  "schema": "logos-engine.lot5c-cost-renderer-independent-review.v1",
+  "recordedAt": "2026-11-11T16:56:00.042Z",
+  "reviewer": "/root/lot5_site101_merge_audit",
+  "status": "passed",
+  "renderer": "docs/migration/lot5c-evidence/write-cost-results.py",
+  "rendererSha256": "16bf3b946dd2d30e582fec814f08a5abf75e8d8200bd3525ee1e466fa85e72a9",
+  "commandsTerminalAt": "2026-11-11T16:53:56Z",
+  "checks": {
+    "actual5cQualifiedProducerSchemasMatch": true,
+    "branchSelectionExplicit": true,
+    "historicalStrictPassedFalseRequiredAndPreserved": true,
+    "structuralProofAndUnchangedInputsRequired": true,
+    "strictGlobalLessThanTenPercent": true,
+    "phaseOverrunsRemainDiagnostic": true,
+    "eightSessionsPerCaseVersionAnd32MeasuredSessionsRequired": true,
+    "mediansRecomputedFromRetainedDurations": true,
+    "missingMalformedContradictoryChangedEvidenceBlocksRendering": true,
+    "sourceAndVersionLabelsFromReceipts": true,
+    "onlyQuietSentenceChangedInProtocol": true
+  },
+  "limits": [
+    "Source-only independent review of exact renderer and bounded producer sections.",
+    "No renderer, runtime, native tests, replay or measurement executed by this reviewer.",
+    "Complete rendering against final real 5C cost receipts remains to be performed when those receipts exist."
+  ],
+  "allCommandsTerminal": true
+}

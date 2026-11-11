@@ -1,0 +1,55 @@
+{
+  "schema": "logos-engine.lot5c.cost-tool-derivations.v1",
+  "created_at": "2026-11-11T11:57:51.023606+00:00",
+  "tools": [
+    {
+      "source": "docs/migration/lot5b-evidence/capture-cost-owner-graphs.mjs",
+      "sourceSha256": "36fc06114430aa31df284eb14c456a2dfd185edec1430d8b3a7c97e5d65d7b57",
+      "target": "docs/migration/lot5c-evidence/capture-cost-owner-graphs.mjs",
+      "status": "mechanical_derivation_requires_owner_specific_adaptation_and_validation"
+    },
+    {
+      "source": "docs/migration/lot5b-evidence/record-owner-source-inventory.mjs",
+      "sourceSha256": "fdfed96d27d08554a7a4ec6a50a68a4b65dd62001cd2fec057f2f580f1627ce2",
+      "target": "docs/migration/lot5c-evidence/record-owner-source-inventory.mjs",
+      "status": "mechanical_derivation_requires_owner_specific_adaptation_and_validation"
+    },
+    {
+      "source": "docs/migration/lot5b-evidence/qualify-cost-owner-graphs.mjs",
+      "sourceSha256": "69306a171896e8cd4947ba2b6c118f6a542bbd4f804c1841fc0b584e1086261f",
+      "target": "docs/migration/lot5c-evidence/qualify-cost-owner-graphs.mjs",
+      "status": "mechanical_derivation_requires_owner_specific_adaptation_and_validation"
+    },
+    {
+      "source": "docs/migration/lot5b-evidence/prepare-cost-protocol.py",
+      "sourceSha256": "c53e6534b4f570c94610ca7c338462a1e4edc91975d9130a770dcee200811efe",
+      "target": "docs/migration/lot5c-evidence/prepare-cost-protocol.py",
+      "status": "mechanical_derivation_requires_owner_specific_adaptation_and_validation"
+    },
+    {
+      "source": "docs/migration/lot5b-evidence/finalize-owner-cost-contract.py",
+      "sourceSha256": "58fd6f433ee6043c3cd24f3c763f4ede265c4b2e60374a9916807bccc68c2997",
+      "target": "docs/migration/lot5c-evidence/finalize-owner-cost-contract.py",
+      "status": "mechanical_derivation_requires_owner_specific_adaptation_and_validation"
+    },
+    {
+      "source": "docs/migration/lot5b-evidence/check-cost-static-inputs.py",
+      "sourceSha256": "024c23aad5bae4b666cd2e47226b396a937a658a84a0d3cd927fcd1b9fa14cc1",
+      "target": "docs/migration/lot5c-evidence/check-cost-static-inputs.py",
+      "status": "mechanical_derivation_requires_owner_specific_adaptation_and_validation"
+    },
+    {
+      "source": "docs/migration/lot5b-evidence/consolidate-owner-costs.mjs",
+      "sourceSha256": "cccc02b44a500292ac64a62379270e4003d3430f8ac0b68c81eb89609fffef95",
+      "target": "docs/migration/lot5c-evidence/consolidate-owner-costs.mjs",
+      "status": "mechanical_derivation_requires_owner_specific_adaptation_and_validation"
+    },
+    {
+      "source": "docs/migration/lot5b-evidence/review-owner-costs.py",
+      "sourceSha256": "dd2524cbc52e51ed77a7393d4c4a044028f49c4a7fd6a36687534aeb1d8880e7",
+      "target": "docs/migration/lot5c-evidence/review-owner-costs.py",
+      "status": "mechanical_derivation_requires_owner_specific_adaptation_and_validation"
+    }
+  ],
+  "measurements_started": false
+}

@@ -1,0 +1,38 @@
+--- review-01/check-cost-static-inputs.py
++++ review-02/check-cost-static-inputs.py
+@@ -61,15 +61,20 @@
+         identity = (form['case'], form['form'])
+         rows = [row for row in coverage if (row['case'], row['form']) == identity]
+         observed = [row for row in points if (row['case'], row['form']) == identity]
+-        sequences = [row['sequence'] for row in form['candidate']['requests']] + [form['candidate']['actions']] * len(form['candidate']['inspection'])
+-        event_indices = []
+-        for index, (row, point, sequence) in enumerate(zip(rows, observed, sequences)):
++        shape = form['candidate']
++        require(len(shape['observations']) == len(shape['requests']), 'Every request must retain its actual acquisition observation')
++        sequences = [row['sequence'] for row in shape['requests']] + [shape['actions']] * len(shape['inspection'])
++        acquisitions = [row['acquiredTransitions'] for row in shape['observations']] + [shape['final']['acquiredTransitions']] * len(shape['inspection'])
++        event_indices, previous_acquired = [], 0
++        for index, (row, point, sequence, acquired) in enumerate(zip(rows, observed, sequences, acquisitions)):
+             require(set(row) == {'case', 'form', 'pointIndex', 'acquiredReturns', 'persistedSourceFacts', 'sourceCallIndices', 'sourceEventCallIndices'},
+                     'Unknown or missing source coverage field')
+-            require(all(type(value) is int and value >= 0 for value in (row['pointIndex'], point['pointIndex'], sequence, point['sequence'], row['acquiredReturns'], row['persistedSourceFacts']))
++            require(all(type(value) is int and value >= 0 for value in (row['pointIndex'], point['pointIndex'], sequence, point['sequence'], acquired, row['acquiredReturns'], row['persistedSourceFacts']))
+                     and row['pointIndex'] == point['pointIndex'] == index
+-                    and row['acquiredReturns'] == point['sequence'] == sequence,
+-                    'Source coverage counters must equal the actual ordered request sequence')
++                    and point['sequence'] == sequence and row['acquiredReturns'] == acquired
++                    and previous_acquired <= acquired <= sequence,
++                    'Source coverage must match monotone acquired transitions, which may trail an open prefix sequence')
++            previous_acquired = acquired
+             require(type(row['sourceCallIndices']) is list and all(type(value) is int for value in row['sourceCallIndices'])
+                     and row['sourceCallIndices'] == list(range(row['acquiredReturns'])), 'Actual returns are omitted, duplicated or reordered')
+             current = point['officialBoundarySourceCalls']
+@@ -85,7 +90,7 @@
+                         and item['officialBoundary'] is True and item['sourceStatus'] == ACQUISITION_DOMAIN['recordAtOfficialBoundary']['status'] for item in facts)
+                     and sorted(item['sourceCallIndex'] for item in facts) == current,
+                     'Coverage must match the exact source event facts attributed at this point')
+-        require(rows[-1]['acquiredReturns'] == form['candidate']['actions'], 'Final coverage omits acquired source returns')
++        require(rows[-1]['acquiredReturns'] == shape['final']['acquiredTransitions'] == shape['actions'], 'Final coverage omits acquired source returns')
+ 
+ def exact(a, b):
+     """JSON equality that cannot equate false/true with integer 0/1."""

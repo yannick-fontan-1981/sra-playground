@@ -30,10 +30,10 @@
     "declaredClassesAndFunctions": 12857,
     "dataFiles": 417,
     "verifiedModules": 0,
-    "componentVerifiedModules": 204,
-    "partiallyTransferredModules": 149,
+    "componentVerifiedModules": 210,
+    "partiallyTransferredModules": 147,
     "transferredUnverifiedModules": 0,
-    "pendingModules": 1016,
+    "pendingModules": 1012,
     "strategyFamilies": 16
   },
   "families": [
@@ -89358,11 +89358,14 @@
           "endLine": 70
         }
       ],
-      "status": "partial_transfer",
+      "status": "component_verified",
       "targets": [
         "src/logos-engine/v6-inventory-measurements.ts",
         "src/logos-engine/v6-inventory-continuation.ts",
-        "src/logos-engine/v6-inventory-context-intervention.ts"
+        "src/logos-engine/v6-inventory-context-intervention.ts",
+        "src/logos-engine/v6-observed-binding.ts",
+        "src/logos-engine/v6-observed-binding-state.ts",
+        "src/logos-engine/v6-native-runtime.ts"
       ],
       "proof": [
         "scripts/export-v6-inventory-observation-reference.py",
@@ -89370,7 +89373,14 @@
         "tests/v6-inventory-observation-reference.test.ts",
         "scripts/export-v6-inventory-helpers-reference.py",
         "tests/fixtures/v6-inventory-helpers-reference.json.gz",
-        "tests/v6-inventory-helpers-reference.test.ts"
+        "tests/v6-inventory-helpers-reference.test.ts",
+        "scripts/export-observed-binding-reference.py",
+        "tests/fixtures/v6-observed-binding-reference.json.gz",
+        "tests/v6-observed-binding-reference.test.ts",
+        "tests/v6-observed-binding.test.ts",
+        "scripts/native-object-binding-common-loop.ts",
+        "tests/v6-object-binding-common.test.ts",
+        "docs/migration/lot5c-observed-object-binding-lineage.md"
       ]
     },
     {
@@ -89452,14 +89462,23 @@
           "endLine": 88
         }
       ],
-      "status": "partial_transfer",
+      "status": "component_verified",
       "targets": [
-        "src/logos-engine/v6-inventory-measurements.ts"
+        "src/logos-engine/v6-inventory-measurements.ts",
+        "src/logos-engine/v6-object-binding-geometry.ts",
+        "src/logos-engine/v6-object-binding-common.ts"
       ],
       "proof": [
         "scripts/export-v6-inventory-observation-reference.py",
         "tests/fixtures/v6-inventory-observation-reference.json.gz",
-        "tests/v6-inventory-observation-reference.test.ts"
+        "tests/v6-inventory-observation-reference.test.ts",
+        "scripts/export-observed-binding-reference.py",
+        "tests/fixtures/v6-observed-binding-reference.json.gz",
+        "tests/v6-observed-binding-reference.test.ts",
+        "tests/v6-observed-binding.test.ts",
+        "scripts/native-object-binding-common-loop.ts",
+        "tests/v6-object-binding-common.test.ts",
+        "docs/migration/lot5c-observed-object-binding-lineage.md"
       ]
     },
     {
@@ -89487,9 +89506,19 @@
           "endLine": 11
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-object-binding-identity.ts"
+      ],
+      "proof": [
+        "scripts/export-observed-binding-reference.py",
+        "tests/fixtures/v6-observed-binding-reference.json.gz",
+        "tests/v6-observed-binding-reference.test.ts",
+        "tests/v6-observed-binding.test.ts",
+        "scripts/native-object-binding-common-loop.ts",
+        "tests/v6-object-binding-common.test.ts",
+        "docs/migration/lot5c-observed-object-binding-lineage.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/guarded_binding/planning.py",
@@ -89522,9 +89551,19 @@
           "endLine": 61
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-object-binding-planning.ts"
+      ],
+      "proof": [
+        "scripts/export-observed-binding-reference.py",
+        "tests/fixtures/v6-observed-binding-reference.json.gz",
+        "tests/v6-observed-binding-reference.test.ts",
+        "tests/v6-observed-binding.test.ts",
+        "scripts/native-object-binding-common-loop.ts",
+        "tests/v6-object-binding-common.test.ts",
+        "docs/migration/lot5c-observed-object-binding-lineage.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/guarded_binding/reception.py",
@@ -89557,9 +89596,19 @@
           "endLine": 28
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-object-binding-reception.ts"
+      ],
+      "proof": [
+        "scripts/export-observed-binding-reference.py",
+        "tests/fixtures/v6-observed-binding-reference.json.gz",
+        "tests/v6-observed-binding-reference.test.ts",
+        "tests/v6-observed-binding.test.ts",
+        "scripts/native-object-binding-common-loop.ts",
+        "tests/v6-object-binding-common.test.ts",
+        "docs/migration/lot5c-observed-object-binding-lineage.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/guarded_binding/tracker.py",
@@ -89634,9 +89683,20 @@
           "endLine": 112
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-object-binding-tracker.ts",
+        "src/logos-engine/v6-observed-binding-state.ts"
+      ],
+      "proof": [
+        "scripts/export-observed-binding-reference.py",
+        "tests/fixtures/v6-observed-binding-reference.json.gz",
+        "tests/v6-observed-binding-reference.test.ts",
+        "tests/v6-observed-binding.test.ts",
+        "scripts/native-object-binding-common-loop.ts",
+        "tests/v6-object-binding-common.test.ts",
+        "docs/migration/lot5c-observed-object-binding-lineage.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/invited_endpoints/__init__.py",
@@ -99362,6 +99422,8 @@
     "Cold temporal chains demonstrate calibrated, guarded key prefixes of up to min(16, remaining), contrasted effects and subsequent component decisions. The separate key/click/key controller proof uses a declared synthetic family and is not a temporal click-policy transfer. A component source match, a legacy guard component or a present runtime registration does not certify complete production-priority selection, WHY/ACT authority or contribution to a real game. The 5B addressed-material and 5C object-binding entries remain separate and open.",
     "The portable native constructor initializes local fields eagerly, whereas the Python constructor initially holds only prior and the consumed boundary immediately calls reset_epoch. Direct from_boundary cases therefore compare prior; actual cold boundaries compare the full reset/acquisition state. Portable templates retain conditional source references without old-epoch raster lists. Native safe-integer and uint8 public-raster contracts do not claim arbitrary Python numeric or malformed-input coercion equivalence.",
     "No new game, live WEAV attempt, official cost decision or publication result is established by these mappings. The separate WEAV diagnostic retains its exhausted cumulative case clock and unmet six-level target. Common-loop contribution, merged-source functional gates, the predeclared global cost policy, final integrity and publication remain parent-owned evidence to be reviewed before any 5A closure.",
-    "Lot10C connects ordered_recruitment at its original material-list position after window_question, through one public_ordered_recruitment owner. Source component and cold common-loop proofs are complete in their declared synthetic domains. Actual game contribution, final integrated delivery, costs and full strategic-caller parity are separate evidence and are not inferred from these mappings."
+    "Lot10C connects ordered_recruitment at its original material-list position after window_question, through one public_ordered_recruitment owner. Source component and cold common-loop proofs are complete in their declared synthetic domains. Actual game contribution, final integrated delivery, costs and full strategic-caller parity are separate evidence and are not inferred from these mappings.",
+    "Lot5C recovery reconstructs observed_object_binding from the pinned original with a single registered owner and shared caller attention. Fresh component proofs are retained under docs/migration/lot5c-evidence/recovery; lost historical5C evidence is not reused. Seven common scenarios passed on the first reconstructed runtime; the independent original replay and the subsequently added active-level deadline proof remain separately qualified. Publication, final integrated gates and official costs are still open. All six complete-migration gates remain false.",
+    "The prospective 5C+10C source union preserves both lots original component-proof provenance. Aggregate counters are a static merge reconciliation and remain provisional until final composed-source audits. No new runtime test, official cost or publication result is established by this merge."
   ]
 }

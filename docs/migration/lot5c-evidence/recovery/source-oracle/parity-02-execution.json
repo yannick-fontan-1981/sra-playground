@@ -1,0 +1,163 @@
+{
+  "schema": "logos-engine.lot5c.recovery-proof-execution.v1",
+  "startedAt": "2026-11-11T12:12:19.528948+00:00",
+  "finishedAt": "2026-11-11T12:12:26.376859+00:00",
+  "elapsedSeconds": 6.84791967000001,
+  "command": [
+    "flock",
+    "-s",
+    "/workspace/shared/sra-coordination/performance.lock",
+    "timeout",
+    "180s",
+    "node",
+    "--test",
+    "tests/v6-observed-binding-reference.test.ts"
+  ],
+  "exitCode": 0,
+  "inputsBefore": [
+    {
+      "path": "tests/v6-observed-binding-reference.test.ts",
+      "bytes": 12539,
+      "sha256": "77d234873fabc1010e17d6b20480506c729e4c43b80a64fcc27b68caf31f29f6"
+    },
+    {
+      "path": "tests/fixtures/v6-observed-binding-reference.json.gz",
+      "bytes": 3454135,
+      "sha256": "eacefcf58171fbaa4c9bce248210ab0fb105a067ec92981ca2d21f0a057747d9"
+    },
+    {
+      "path": "src/logos-engine/v6-observed-binding.ts",
+      "bytes": 22934,
+      "sha256": "f7ed39d3215339e0facc33db3ab2ed81e6fe7afaf049f8ab148dadff590f5e73"
+    },
+    {
+      "path": "src/logos-engine/v6-observed-binding-state.ts",
+      "bytes": 17300,
+      "sha256": "43e3f0e95af3ee9f39dbe7fcaf22b6af5fc1b4603b7c00a1765d6786517f7558"
+    },
+    {
+      "path": "src/logos-engine/v6-attention-memory.ts",
+      "bytes": 8146,
+      "sha256": "b922090ca85bf7a4e8c0e523bbb4aadf8565fac9330da7ddcd22d42c8d07cc74"
+    },
+    {
+      "path": "src/logos-engine/v6-src-program.ts",
+      "bytes": 5903,
+      "sha256": "d41717575e252784a81519e8c7853853af3c2d7372b86ecb7efb3655c3e3df77"
+    },
+    {
+      "path": "src/logos-engine/v6/programs.json",
+      "bytes": 1502394,
+      "sha256": "e006723f49460276a0753c1977ab0eabb30775409b37ba7d7af8b0b8b8527834"
+    },
+    {
+      "path": "src/logos-engine/v6-object-binding-common.ts",
+      "bytes": 3431,
+      "sha256": "b35a0a3941bcd0056417acfc59ca23a49bbacc372d4556088652ffa9c62a99c5"
+    },
+    {
+      "path": "src/logos-engine/v6-object-binding-geometry.ts",
+      "bytes": 11470,
+      "sha256": "37963dc265701b7d9c6951ca768f0e21b5f42be118362257e09dd714678199bc"
+    },
+    {
+      "path": "src/logos-engine/v6-object-binding-identity.ts",
+      "bytes": 2829,
+      "sha256": "e7e1aa6365c6cc8c4a834e59bd8d9fa00c254608b6cb55dbbce04e0c6ed7d4d2"
+    },
+    {
+      "path": "src/logos-engine/v6-object-binding-planning.ts",
+      "bytes": 8856,
+      "sha256": "a5925aedf7fe772ed96825bf14e113281b704d416ad1d37e0996a6ca85a98d2f"
+    },
+    {
+      "path": "src/logos-engine/v6-object-binding-reception.ts",
+      "bytes": 4750,
+      "sha256": "d39cb08e4003ad1ab026167da9eb9a6fd371c651304f1946afeb5b05a89507fc"
+    },
+    {
+      "path": "src/logos-engine/v6-object-binding-tracker.ts",
+      "bytes": 16082,
+      "sha256": "e80c8b7da07a952d8dde240ef35989a9c00a2c264a3ff90bddf23e0761da63d4"
+    }
+  ],
+  "inputsAfter": [
+    {
+      "path": "tests/v6-observed-binding-reference.test.ts",
+      "bytes": 12539,
+      "sha256": "77d234873fabc1010e17d6b20480506c729e4c43b80a64fcc27b68caf31f29f6"
+    },
+    {
+      "path": "tests/fixtures/v6-observed-binding-reference.json.gz",
+      "bytes": 3454135,
+      "sha256": "eacefcf58171fbaa4c9bce248210ab0fb105a067ec92981ca2d21f0a057747d9"
+    },
+    {
+      "path": "src/logos-engine/v6-observed-binding.ts",
+      "bytes": 22934,
+      "sha256": "f7ed39d3215339e0facc33db3ab2ed81e6fe7afaf049f8ab148dadff590f5e73"
+    },
+    {
+      "path": "src/logos-engine/v6-observed-binding-state.ts",
+      "bytes": 17300,
+      "sha256": "43e3f0e95af3ee9f39dbe7fcaf22b6af5fc1b4603b7c00a1765d6786517f7558"
+    },
+    {
+      "path": "src/logos-engine/v6-attention-memory.ts",
+      "bytes": 8146,
+      "sha256": "b922090ca85bf7a4e8c0e523bbb4aadf8565fac9330da7ddcd22d42c8d07cc74"
+    },
+    {
+      "path": "src/logos-engine/v6-src-program.ts",
+      "bytes": 5903,
+      "sha256": "d41717575e252784a81519e8c7853853af3c2d7372b86ecb7efb3655c3e3df77"
+    },
+    {
+      "path": "src/logos-engine/v6/programs.json",
+      "bytes": 1502394,
+      "sha256": "e006723f49460276a0753c1977ab0eabb30775409b37ba7d7af8b0b8b8527834"
+    },
+    {
+      "path": "src/logos-engine/v6-object-binding-common.ts",
+      "bytes": 3431,
+      "sha256": "b35a0a3941bcd0056417acfc59ca23a49bbacc372d4556088652ffa9c62a99c5"
+    },
+    {
+      "path": "src/logos-engine/v6-object-binding-geometry.ts",
+      "bytes": 11470,
+      "sha256": "37963dc265701b7d9c6951ca768f0e21b5f42be118362257e09dd714678199bc"
+    },
+    {
+      "path": "src/logos-engine/v6-object-binding-identity.ts",
+      "bytes": 2829,
+      "sha256": "e7e1aa6365c6cc8c4a834e59bd8d9fa00c254608b6cb55dbbce04e0c6ed7d4d2"
+    },
+    {
+      "path": "src/logos-engine/v6-object-binding-planning.ts",
+      "bytes": 8856,
+      "sha256": "a5925aedf7fe772ed96825bf14e113281b704d416ad1d37e0996a6ca85a98d2f"
+    },
+    {
+      "path": "src/logos-engine/v6-object-binding-reception.ts",
+      "bytes": 4750,
+      "sha256": "d39cb08e4003ad1ab026167da9eb9a6fd371c651304f1946afeb5b05a89507fc"
+    },
+    {
+      "path": "src/logos-engine/v6-object-binding-tracker.ts",
+      "bytes": 16082,
+      "sha256": "e80c8b7da07a952d8dde240ef35989a9c00a2c264a3ff90bddf23e0761da63d4"
+    }
+  ],
+  "inputsUnchanged": true,
+  "preservedSourceDirectory": "docs/migration/lot5c-evidence/recovery/source-oracle/parity-02-inputs",
+  "log": {
+    "path": "docs/migration/lot5c-evidence/recovery/source-oracle/parity-02.log",
+    "bytes": 5664,
+    "sha256": "5e359f8d4ee956ae8ca92eb720f903ebadcdef950db4fe619848ec7b1464339b"
+  },
+  "compressedLog": {
+    "path": "docs/migration/lot5c-evidence/recovery/source-oracle/parity-02.log.gz",
+    "bytes": 1355,
+    "sha256": "c74fa9fc9f888f1cdbee162dd5434dd03fefb132b3fd2670c3d0ba54036d3100"
+  }
+}

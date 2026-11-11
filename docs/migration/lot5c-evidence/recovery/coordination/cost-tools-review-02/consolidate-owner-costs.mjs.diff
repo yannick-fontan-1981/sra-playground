@@ -1,0 +1,36 @@
+--- review-01/consolidate-owner-costs.mjs
++++ review-02/consolidate-owner-costs.mjs
+@@ -163,13 +163,20 @@
+   for (const form of fixture.forms) {
+     const matches = row => row.case === form.case && row.form === form.form;
+     const rows = attribution.sourceFactCoverage.filter(matches), points = attribution.points.filter(matches), events = [];
++    assert.equal(form.candidate.observations.length, form.candidate.requests.length, 'Every request must retain its actual acquisition observation');
+     const sequences = [...form.candidate.requests.map(row => row.sequence), ...form.candidate.inspection.map(() => form.candidate.actions)];
++    const acquisitions = [...form.candidate.observations.map(row => row.acquiredTransitions),
++      ...form.candidate.inspection.map(() => form.candidate.final.acquiredTransitions)];
++    let previousAcquired = 0;
+     for (let index = 0; index < rows.length; index++) {
+-      const row = rows[index], point = points[index], sequence = sequences[index];
++      const row = rows[index], point = points[index], sequence = sequences[index], acquired = acquisitions[index];
+       assert.deepEqual(Object.keys(row).sort(), ['case', 'form', 'pointIndex', 'acquiredReturns', 'persistedSourceFacts', 'sourceCallIndices', 'sourceEventCallIndices'].sort());
+-      assert.ok([row.pointIndex, point.pointIndex, sequence, point.sequence, row.acquiredReturns, row.persistedSourceFacts].every(value => Number.isSafeInteger(value) && value >= 0));
++      assert.ok([row.pointIndex, point.pointIndex, sequence, point.sequence, acquired, row.acquiredReturns, row.persistedSourceFacts].every(value => Number.isSafeInteger(value) && value >= 0));
+       assert.equal(row.pointIndex, index); assert.equal(point.pointIndex, index);
+-      assert.equal(row.acquiredReturns, sequence); assert.equal(point.sequence, sequence);
++      assert.equal(point.sequence, sequence); assert.equal(row.acquiredReturns, acquired);
++      assert.ok(previousAcquired <= acquired && acquired <= sequence,
++        'Acquired returns are monotone but may trail the command sequence while a prefix remains open');
++      previousAcquired = acquired;
+       assert.deepEqual(row.sourceCallIndices, Array.from({ length: row.acquiredReturns }, (_, i) => i));
+       const current = point.officialBoundarySourceCalls;
+       assert.ok(Array.isArray(current) && current.every(value => Number.isSafeInteger(value) && value >= 0 && value < row.acquiredReturns));
+@@ -183,7 +190,8 @@
+       assert.deepEqual(facts.map(item => item.sourceCallIndex).sort((a, b) => a - b), current,
+         'Coverage must equal the exact source event facts attributed at the same point');
+     }
+-    assert.equal(rows.at(-1).acquiredReturns, form.candidate.actions);
++    assert.equal(rows.at(-1).acquiredReturns, form.candidate.final.acquiredTransitions);
++    assert.equal(form.candidate.final.acquiredTransitions, form.candidate.actions);
+   }
+ }
+ function structuralExpectations(form) {

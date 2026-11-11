@@ -1,0 +1,51 @@
+{
+  "schema": "logos-engine.v53.frozen-source-parts.v1",
+  "original": {
+    "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/source-archive.tar.gz",
+    "sha256": "daa818bcf00c288efbd5638ca8218865fcdc5c43927fb7c343edc9eeb7341141",
+    "bytes": 6466073
+  },
+  "parts": [
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/source-archive.tar.gz.part000",
+      "sha256": "b06919bf294f173d05d60c1a7bb4960651b4b650eae17ef5955a00eefacc4739",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/source-archive.tar.gz.part001",
+      "sha256": "ed66a1a4dcb012e70f51af1070bff2e200186cbb5e3ac715d65aee607fe201d8",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/source-archive.tar.gz.part002",
+      "sha256": "1ae50e7fb42792fba043447b601afd6d017dffbdbb2643548b03e24a9b4700af",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/source-archive.tar.gz.part003",
+      "sha256": "5ac7425bf3d48ae8224fbd5f19eb71c9b4cc20a342751a5365f5a2e481db0a9d",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/source-archive.tar.gz.part004",
+      "sha256": "e0a01d3b96555d4fa8ff4e16a838bbedf80ad79af01b301aaf21e748227f61c3",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/source-archive.tar.gz.part005",
+      "sha256": "69cc931a37158fa0bf6db1bb57f32ab057b5c87757c44f05650b80cc2b84f5b6",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/source-archive.tar.gz.part006",
+      "sha256": "fd8dde7d29b7f29c39ecb1bb2adcb0f7acbf47d64b2e337dcbfde506f8f5cc65",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/source-archive.tar.gz.part007",
+      "sha256": "2eea745c6cbf319cb295cb55db3747ed9347d219aa6758bfd81a576299172bc5",
+      "bytes": 166073
+    }
+  ],
+  "qualification": "Ordered byte slices of the exact frozen gzip archive. No source or evidence content changes."
+}

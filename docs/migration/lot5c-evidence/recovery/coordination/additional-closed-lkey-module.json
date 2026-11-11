@@ -1,0 +1,13 @@
+{
+  "schema": "sra.closed-case-source-discovery.v1",
+  "from": "lot5c",
+  "recorded_at": "2026-11-11T12:36:44.159087+00:00",
+  "case": "LKEY",
+  "source_only": true,
+  "payloads_opened": false,
+  "additionalEagerModule": "tests/v6-framed-transfer-reference.test.ts",
+  "finding": "Independent source-only review identifies top-level decompression of fixture, originalPublicProbes and initialDiscovery, including an explicitly named LKEY probe and100 initial public scenes. Test-name filtering cannot prevent payload loading.",
+  "request": "Please check formal test argv/scope and exclude this additional eager module from new runs under the closedLKEY notice. Preserve any already-started execution truthfully and reconcile its own case-clock implications; no past result is silently rewritten.",
+  "existingNotice": "/workspace/shared/sra-coordination/lot7-closed-lkey-recovery-notice.json",
+  "noPeerProcessInterrupted": true
+}

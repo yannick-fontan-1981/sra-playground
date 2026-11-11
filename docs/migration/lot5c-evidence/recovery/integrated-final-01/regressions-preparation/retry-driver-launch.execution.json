@@ -1,0 +1,45 @@
+{
+  "schema": "logos-engine.lot5c.recorded-regression-launch-observation.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-11T18:09:31.023114+00:00",
+  "startedAt": "2026-11-11T18:02:42.294355+00:00",
+  "launchToolChunk": "c497cc",
+  "toolSessionId": 21691,
+  "exitCode": 0,
+  "terminalObservedAt": "2026-11-11T18:21:07.551785+00:00",
+  "performanceLock": "shared_nonblocking",
+  "command": [
+    "python",
+    "-B",
+    "scripts/run-released-public-regressions-streamlog.py",
+    "docs/migration/lot5c-evidence/recovery/integrated-final-01/recorded-regression-cases.json",
+    "docs/migration/lot5c-evidence/recovery/integrated-final-01",
+    "--source-manifest",
+    "docs/migration/lot5c-evidence/recovery/integrated-final-01/source-manifest.json",
+    "--node-old-space-mib",
+    "1536",
+    "--timeout-seconds",
+    "2400"
+  ],
+  "caseManifest": {
+    "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/recorded-regression-cases.json",
+    "bytes": 15556,
+    "sha256": "18684d23bf7122a9f88f85d8bdb6f557144f892e7f09f2ef7630cbb5a7e6bc33"
+  },
+  "sourceManifest": {
+    "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/source-manifest.json",
+    "bytes": 37772,
+    "sha256": "6fd96a8c19867ee6740db8293c14bf241d9929a31e24f391e95d3aee4c6fab66"
+  },
+  "regressionSummary": {
+    "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/regressions/regression-summary.json",
+    "bytes": 227733,
+    "sha256": "632ed89d8d25722605a430bf53a29a8b682d9212081b351e6a8ed98ca41b21d7"
+  },
+  "qualification": "Observed root launch receipt. No outer run-evidence-command wrapper or global raw log is claimed. The unchanged durable driver retains each actual child started/execution/raw-log/comparison receipt. This receipt is finalized only after the tool session reports its actual terminal exit.",
+  "terminalToolChunk": "3ba576",
+  "lastRetainedPostprocessingFinishedAt": "2026-11-11T18:20:23.274378+00:00",
+  "casesPassed": 11,
+  "comparisonChecksPassed": 187,
+  "recordedActions": 390
+}

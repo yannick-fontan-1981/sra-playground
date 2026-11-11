@@ -1,0 +1,57 @@
+{
+  "schema": "logos-engine.lot5c-produced-build-browser-qa.v1",
+  "recordedAt": "2026-11-11T17:44:37.379593+00:00",
+  "status": "passed_within_static_ui_smoke_scope",
+  "nativeVersion": "0.63.0",
+  "nativeDigest": "a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57",
+  "distributionFileCount": 74,
+  "staging": {
+    "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/browser-qa/produced-build-staging.json",
+    "sha256": "80dac70694687eec4e48fb6fc84e242e19a13a7d86e6110de7854b6f0868b32f"
+  },
+  "observedUrl": "http://127.0.0.1:4173/?game=CASC&level=1",
+  "observedTitle": "SRA Playground \u00b7 CASC \u2014 Symbolic Reasoning Agent",
+  "observed": [
+    "Built distribution renders the public CASC default page and board",
+    "Native TS tab is selectable and renders its controls",
+    "Ready to run from level1 is visible",
+    "Agent counters remain0 actions,0 solved levels,0 completed plans",
+    "Pause remains disabled before execution"
+  ],
+  "agentActions": 0,
+  "agentLevelsSolved": 0,
+  "newGameCampaign": false,
+  "defaultGameInitialization": "Public CASC initial page loaded automatically; no command, reset, level change or native agent run was requested. Closed cases were not selected.",
+  "applicationConsoleErrorsObserved": [],
+  "retainedBrowserExtensionDiagnostics": [
+    {
+      "level": "error",
+      "message": "Error sending browser metadata to extension: Object",
+      "timestamp": "2026-11-11T17:42:17.093Z",
+      "url": "chrome-extension://kcdongibgcplmaagnmgpjhpjgmmaaaaa/content-script.bundle.js"
+    },
+    {
+      "level": "error",
+      "message": "Error sending browser metadata to extension: Object",
+      "timestamp": "2026-11-11T17:42:37.687Z",
+      "url": "chrome-extension://kcdongibgcplmaagnmgpjhpjgmmaaaaa/content-script.bundle.js"
+    }
+  ],
+  "screenshot": {
+    "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/browser-qa/produced-build-ui.png",
+    "sha256": "deafcb6c7748978519a182c3752cfd2ae55b124fb5e95eb7f84b410d1acdfb11"
+  },
+  "browserTabClosed": true,
+  "previewStop": {
+    "exitCode": 0,
+    "stdout": "Sites preview stopped\n",
+    "stderr": ""
+  },
+  "previewStatusAfterStop": "Sites preview stopped\n",
+  "stagingToClosureWallSeconds": 270.393167,
+  "qualification": "Actual production build copied and verified byte-for-byte before managed static preview. UI readiness and rendering only; no new native gameplay, Pause latency, complete caller parity, cost measurement or publication is established. Two retained diagnostics are from the browser extension, not the application origin.",
+  "declaredBrowserQaWallBudgetSeconds": 180,
+  "declaredBrowserQaWallBudgetExceeded": true,
+  "declaredBrowserQaWallBudgetOverrunSeconds": 90.393167,
+  "timingQualification": "The complete staging-to-preview-closure interval exceeded the announced180s planning allowance. This overrun is retained; no official cost window, requested game action or closed-case campaign occurred during this UI-only check. No earlier closure is claimed."
+}

@@ -1,0 +1,641 @@
+{
+  "schema": "logos-engine.lot5c-readiness-and-official-window-plan.v1",
+  "recordedAt": "2026-11-11T18:05:15.383732+00:00",
+  "status": "planned_not_ready",
+  "readinessCreated": false,
+  "measurementExecuted": false,
+  "measurementAuthorized": false,
+  "publicationAuthorized": false,
+  "gameActionsAuthorized": false,
+  "performanceDirectory": "docs/migration/lot5c-evidence/recovery/performance-integrated-02",
+  "candidate": {
+    "nativeVersion": "0.63.0",
+    "nativeDigest": "a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57",
+    "nativeFiles": 318,
+    "sourceBaseCommit": "805b30297dc1b715dbfd9f1197a9a8ba7b361b90",
+    "checkoutHead": "c8ff4f2b4d495e12494130112258b7a62281d93c",
+    "nativeSourceCommit": "c8ff4f2b4d495e12494130112258b7a62281d93c",
+    "nativeWorktreeChanges": [],
+    "siteVersion": null,
+    "qualification": "The frozen digest and archive identify candidate bytes. A null source commit means the checkout HEAD is ancestry only. No candidate publication is asserted."
+  },
+  "baseline": {
+    "nativeVersion": "0.62.0",
+    "siteVersion": 102,
+    "commit": "1019d2eb929d7dc201a5c1f6edce5aa1c5dfa464",
+    "nativeDigest": "74143a7a8f7e1d434a9284b34665f30f9c2b0d8d68191d9405b3af7d39815d12",
+    "nativeFiles": 310
+  },
+  "declaration": {
+    "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/declaration.json",
+    "bytes": 5661,
+    "sha256": "b63f8d61f27ce9d6401c0015ecf2888cd947f504bfbdbfb954e799c28f8a7c8e"
+  },
+  "validationContract": {
+    "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/validation-contract.json",
+    "bytes": 10771,
+    "sha256": "4a57ed369cc5e314a7a4f6babf61e51aa7b70e171c2b2a3586d296b79f8013ff"
+  },
+  "completedEvidence": {
+    "formalTests": {
+      "receipt": {
+        "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/validation/delta-tests-run.json",
+        "bytes": 139954,
+        "sha256": "ce85bdbe5c2f15848a016c2168872676ec442dfc9e6d918205e6d21188fde62a"
+      },
+      "status": "passed",
+      "counts": {
+        "tests": 5339,
+        "pass": 5339,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "testFiles": 138,
+      "sourceAndTestInputs": 728,
+      "nativeSourceUnchanged": true,
+      "sourceAndTestInputsUnchanged": true
+    },
+    "common": {
+      "receipt": {
+        "path": "docs/migration/lot5c-evidence/recovery/common/common-final-01/summary.json",
+        "bytes": 9900,
+        "sha256": "972ca6380cbb6cb605cac36d3bc6e8c18d60834a3935d5ec1f7c16a669c6b72a"
+      },
+      "nativeCommonTests": 7,
+      "declaredScenarios": 8,
+      "independentOriginalCases": [
+        "positive",
+        "refutation",
+        "ambiguity",
+        "boundary"
+      ],
+      "checksPassed": 6818,
+      "checksTotal": 6818,
+      "operations": 412,
+      "actualReturns": 80,
+      "selectedReturns": 76,
+      "passiveReturns": 4,
+      "sourceStateRetentions": 80,
+      "sourceMemoryPuts": 6,
+      "nativeMemoryPuts": 6,
+      "sourceExceptions": 0,
+      "all867FrozenExecutionInputsUnchanged": true,
+      "qualification": "Fresh native common tests and independent cold original Binding/AttentionMemory comparisons on the finala33 freeze. Four synthetic declared source cases and their actual retention are compared separately. The foreign-parent public LIFE prefix and three acquisition-bound scenarios retain their own native scope. This does not establish entire original StrategyRouter parity, a new live-game campaign, acceptable cost or publication."
+    },
+    "projectGates": {
+      "receipt": {
+        "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/validation/checks-run.json",
+        "bytes": 86303,
+        "sha256": "f55a87ecbd4c363e77bdd967638402f5dde9695df0408bcb77d98c8a25673067"
+      },
+      "gates": [
+        {
+          "name": "typecheck",
+          "exitCode": 0,
+          "finishedAt": "2026-11-11T17:35:45.604568+00:00"
+        },
+        {
+          "name": "entry-audit",
+          "exitCode": 0,
+          "finishedAt": "2026-11-11T17:35:46.566081+00:00"
+        },
+        {
+          "name": "migration-audit",
+          "exitCode": 0,
+          "finishedAt": "2026-11-11T17:35:52.972027+00:00"
+        },
+        {
+          "name": "diff-check",
+          "exitCode": 0,
+          "finishedAt": "2026-11-11T17:35:53.011635+00:00"
+        },
+        {
+          "name": "build",
+          "exitCode": 0,
+          "finishedAt": "2026-11-11T17:36:05.613055+00:00"
+        }
+      ],
+      "buildInputs": 383,
+      "entryAudit": {
+        "connected": 65,
+        "declared": 76,
+        "fullV6Parity": false
+      },
+      "migrationAudit": {
+        "failures": [],
+        "complete": false
+      },
+      "qualification": "Small retained audit summaries were read; zero semantic failures does not mean complete migration."
+    },
+    "browserQa": {
+      "receipt": {
+        "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/browser-qa/summary.json",
+        "bytes": 3044,
+        "sha256": "8d106adc160048899bbf90a17d85c891b8517ecc778347e36ab31ab331d81d80"
+      },
+      "status": "passed_within_static_ui_smoke_scope",
+      "nativeDigest": "a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57",
+      "scope": "Produced-build static CASC UI smoke only",
+      "agentActions": 0,
+      "agentLevelsSolved": 0,
+      "newGameCampaign": false,
+      "browserTabClosed": true,
+      "previewStopped": true,
+      "declaredWallBudgetSeconds": 180,
+      "actualWallSeconds": 270.393167,
+      "wallBudgetExceeded": true,
+      "wallOverrunSeconds": 90.393167,
+      "qualification": "Actual production build copied and verified byte-for-byte before managed static preview. UI readiness and rendering only; no new native gameplay, Pause latency, complete caller parity, cost measurement or publication is established. Two retained diagnostics are from the browser extension, not the application origin.",
+      "timingQualification": "The complete staging-to-preview-closure interval exceeded the announced180s planning allowance. This overrun is retained; no official cost window, requested game action or closed-case campaign occurred during this UI-only check. No earlier closure is claimed."
+    },
+    "staticPreflight": {
+      "receipt": {
+        "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/static-preflight.json",
+        "bytes": 19919,
+        "sha256": "2bed63fe86914300d5933c98ed65cc0e222df308f44336836414603a5cd0e46b"
+      },
+      "status": "static_inputs_checked",
+      "checksPassed": 76,
+      "unsatisfied": [],
+      "functionalReadinessChecked": false,
+      "isolationChecked": false
+    },
+    "independentPreparationReview": {
+      "receipt": {
+        "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/independent-readiness-input-review.json",
+        "bytes": 36942,
+        "sha256": "17118655a5e4803b2e965de673ef6b055ca965c21617ed5520e31fb44a39e70c"
+      },
+      "status": "passed_inputs_only_readiness_not_asserted",
+      "checksPassed": 84,
+      "readinessAsserted": false,
+      "isolationAsserted": false
+    },
+    "ownerCostContract": {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/owner-growth-contract.json",
+      "bytes": 6009,
+      "sha256": "08dc46007afbb0b54f219fc519f4bb7b8239a59c9263a2714aa60a61d0537c5f"
+    },
+    "priorAttemptPreservation": {
+      "inventory": {
+        "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/prior-attempt-inventory.json",
+        "bytes": 6350,
+        "sha256": "0d5f1a51c7c413664459adb2e46a8b8078f0a0c25cb4e93acd4180ea6ae12698"
+      },
+      "repair": {
+        "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/dependency-repair.json",
+        "bytes": 4511,
+        "sha256": "606e2655c472d11823c3367f6a7213df318c24bbf3527f0c9a462e36854fa101"
+      },
+      "supersession": {
+        "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/superseded-before-measurement.json",
+        "bytes": 3297,
+        "sha256": "1d3f45d98ae9dcd142953a60e5bd0b122a00e0ee53f433a0e0f9c4dc751eae8f"
+      },
+      "priorDirectory": "docs/migration/lot5c-evidence/recovery/performance-integrated-01",
+      "retainedFiles": 39,
+      "allListedFilesByteIdenticalAtIndependentReview": true,
+      "qualification": "Attempt01 failed static receipt and all wrappers remain intact. The supersession names the old attempt only; no official sample existed."
+    }
+  },
+  "pendingRequirements": [
+    {
+      "id": "recorded_replays",
+      "status": "pending_actual_complete_evidence",
+      "cases": 11,
+      "checksPerCase": 17,
+      "expectedChecks": 187,
+      "manifest": {
+        "path": "docs/migration/lot5c-evidence/recovery/integrated-final-01/recorded-regression-cases.json",
+        "bytes": 15556,
+        "sha256": "18684d23bf7122a9f88f85d8bdb6f557144f892e7f09f2ef7630cbb5a7e6bc33"
+      },
+      "reportedExecution": "Parent reports unchanged restart active since 2026-11-11T18:02:42Z after all22 pinned compressed historical inputs were restored. The first prepare-manifest failure preceded any replay. Completion is not asserted by this plan.",
+      "bindingCoverage": "The retained historical recorder has no dedicated Binding prefix capture. These eleven replays do not assert passive Binding acquisition. Fresh common seven-test/eight-scenario proof and original comparisons establish the separately declared Binding coverage.",
+      "baselineQualification": "Ten historical rows retain exact baseline and public-trace pins; none is rebased to a newer replay output. KATA remains the eleventh inherited row with its original 0.60 fresh-current-native-self-consistency provenance label, serving as a fixed inherited baseline for 5C. This does not claim that the 10B ten-case fresh campaign included KATA or that a new self-comparison or live contribution was performed. The 187 checks are planned checks, not executed successes."
+    },
+    {
+      "id": "final_delivery_integrity",
+      "status": "pending_after_all_evidence",
+      "requirement": "Recheck actual final native318 and all867 frozen execution inputs, test/build/source memberships, eleven complete replay receipts and exact comparator/input hashes; bind the terminal proof receipts."
+    },
+    {
+      "id": "five_c_specific_readiness_finalizer",
+      "status": "source_preparation_authorized_not_executed",
+      "path": "docs/migration/lot5c-evidence/recovery/planning/finalize-readiness-5c.py",
+      "reason": "The historical10B finalizer hardcodes its driver/test/Window/10replay proof schemas and rejects any supersession receipt. It cannot be run unchanged for actual5C inputs."
+    },
+    {
+      "id": "fresh_quiet_and_exclusive_lock",
+      "status": "not_requested_by_this_plan",
+      "requestId": "lot5c-cost-a33a5f88-final-01",
+      "requirement": "Finish all functional gates first, collect new ACKs from every active lane and its workers, then obtain nonblocking EX and recheck the ACKs at actual opening. Historical10B/10C ACKs are not reusable."
+    }
+  ],
+  "readinessContract": {
+    "schema": "logos-engine.native-cost-window-readiness.v1",
+    "status": "ready",
+    "requiredScalarFields": {
+      "measurementAuthorized": true,
+      "authorizationScope": "cost_measurement_only",
+      "publicationAuthorized": false,
+      "gameActionsAuthorized": false,
+      "pendingRequirements": [],
+      "nativeVersion": "0.63.0",
+      "nativeSourceDigest": "a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57",
+      "historicalStrictIdentityNotAnticipated": true
+    },
+    "requiredMetadata": [
+      "startedAt",
+      "finalizedAt",
+      "generator",
+      "baseline",
+      "candidate",
+      "formalTests",
+      "formalTestFiles",
+      "formalTestFileNames",
+      "projectGates",
+      "regressionCases",
+      "regressionChecks",
+      "regressionComparator",
+      "common",
+      "browser",
+      "functionalReservations",
+      "ownerCostContract",
+      "isolation",
+      "isolationReceipt",
+      "inputs",
+      "watchedExternalInputs",
+      "qualification"
+    ],
+    "exactMandatoryInputFingerprints": [
+      {
+        "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/owner-growth-contract.json",
+        "bytes": 6009,
+        "sha256": "08dc46007afbb0b54f219fc519f4bb7b8239a59c9263a2714aa60a61d0537c5f"
+      },
+      {
+        "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/static-preflight.json",
+        "bytes": 19919,
+        "sha256": "2bed63fe86914300d5933c98ed65cc0e222df308f44336836414603a5cd0e46b"
+      },
+      {
+        "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/declaration.json",
+        "bytes": 5661,
+        "sha256": "b63f8d61f27ce9d6401c0015ecf2888cd947f504bfbdbfb954e799c28f8a7c8e"
+      },
+      {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-domain-source-review.json",
+        "bytes": 5584,
+        "sha256": "ad027c2327b0b073c75deaa48cd9d27e90e5909066beb78a94973d706565f626"
+      },
+      {
+        "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-source-evidence-paths.json",
+        "bytes": 528,
+        "sha256": "4960a996175c03c0ce92365bda7f3dcaf747f1c7fd8467e34a84584816a87b62"
+      },
+      {
+        "path": "docs/migration/lot5c-evidence/consolidate-owner-costs.mjs",
+        "bytes": 61449,
+        "sha256": "69957840c81d50e3d7b68dedf4293b5aa9c4072f882fe1fc858f5e03815330b7"
+      },
+      {
+        "path": "docs/migration/lot5c-evidence/review-owner-costs.py",
+        "bytes": 81151,
+        "sha256": "452ccf903970230f5855458cd35f2f3f30224307026663ebd865b494986371df"
+      }
+    ],
+    "allInputs": "Bind actual completed proof receipts, scope and immutable source/tool manifests, their required file inventories, existing owner fixture/source evidence and all external baseline files actually verified. Every input path/bytes/sha256 must remain exact through review; root-relative inputs and canonical absolute baseline external inputs are separate.",
+    "chronology": "policy.declaredAt <= declaration.recordedAt <= declaration.finalizedAt <= contract.declaredAt <= static.recordedAt <= readiness.finalizedAt < window.startedAt; each completed gate and exact fresh isolation acknowledgement precedes readiness finalization.",
+    "lockObservation": "Finalizer may validate the supplied cooperative isolation receipt but must not assert that it observed or owns the OS lock. The delivery controller must obtain EX and revalidate fresh ACKs at actual window opening."
+  },
+  "isolationContract": {
+    "schema": "logos-engine.coordinated-cost-isolation.v1",
+    "status": "acknowledged_quiet_before_window",
+    "requestId": "lot5c-cost-a33a5f88-final-01",
+    "requiredFields": [
+      "recordedAt",
+      "otherLaneAcknowledged=true",
+      "ownTrackedComputeEnded=true",
+      "previewStopped=true",
+      "costNodeOptionsOverride=null",
+      "performanceDirectory",
+      "nativeDigests",
+      "declaration",
+      "knownLanes",
+      "evidence",
+      "qualification"
+    ],
+    "knownLanes": "At least current6B,8A and10C plus any newly active lane, with exact requestId, activeCommand:null, fresh updatedAt/acknowledgedAt and hashed retained ACK evidence; root and own workers are also terminal and have no queued work.",
+    "lock": "The runner does not acquire a lock or inspect readiness. A single outer controller obtains flock --exclusive --nonblock on /workspace/shared/sra-coordination/performance.lock and holds it continuously through ABBA, comparisons, qualified consolidation, independent review and explicit coordination release. Do not reacquire SH inside the held EX controller.",
+    "quietScope": "All other workers remain idle without queued commands until explicit release; only small named coordination metadata are allowed. No source/doc reads, edits, rg, Git, hashes, archives, builds, tests, replays, games or browser work by other lanes.",
+    "openingFailure": "If EX cannot be acquired or any ACK is absent, stale, wrong-window or retains active work, stop before invoking the runner. The runner creates window.json before its own source validation and is not a readiness checker.",
+    "retention": "Retain request, every ACK, own closure, named periodic coordination observations, actual deviations and final isolation review. Cooperative evidence is not continuous OS observation."
+  },
+  "officialCommandOrder": [
+    {
+      "order": 1,
+      "purpose": "Official measured window; only after all gates, reviewed readiness and fresh isolation/EX ownership",
+      "argv": [
+        "python",
+        "-B",
+        "scripts/run-native-cost-window.py",
+        "/workspace/sites/sra-lot5c-baseline-site102-1019d2e/.sites-checkout",
+        "docs/migration/lot5c-evidence/recovery/performance-integrated-02",
+        "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/source-manifest.json",
+        "docs/migration/lot5c-evidence/recovery/integrated-final-01/source-manifest.json"
+      ]
+    },
+    {
+      "order": 2,
+      "purpose": "Retain historical phase diagnostics for complete cohort 1",
+      "argv": [
+        "node",
+        "scripts/compare-native-loop-costs.mjs",
+        "docs/migration/lot5c-evidence/recovery/performance-integrated-02/comparison-policy.json",
+        "docs/migration/lot5c-evidence/recovery/performance-integrated-02/cohort1/baseline.json",
+        "docs/migration/lot5c-evidence/recovery/performance-integrated-02/cohort1/after.json",
+        "docs/migration/lot5c-evidence/recovery/performance-integrated-02/cohort1/comparison.json"
+      ]
+    },
+    {
+      "order": 3,
+      "purpose": "Retain historical phase diagnostics for complete cohort 2",
+      "argv": [
+        "node",
+        "scripts/compare-native-loop-costs.mjs",
+        "docs/migration/lot5c-evidence/recovery/performance-integrated-02/comparison-policy.json",
+        "docs/migration/lot5c-evidence/recovery/performance-integrated-02/cohort2/baseline.json",
+        "docs/migration/lot5c-evidence/recovery/performance-integrated-02/cohort2/after.json",
+        "docs/migration/lot5c-evidence/recovery/performance-integrated-02/cohort2/comparison.json"
+      ]
+    },
+    {
+      "order": 4,
+      "purpose": "Execute unchanged historical strict aggregator and retain actual result; do not fabricate a refusal",
+      "argv": [
+        "node",
+        "scripts/compare-native-cost-cohorts.mjs",
+        "docs/migration/lot5c-evidence/recovery/performance-integrated-02/comparison-policy.json",
+        "docs/migration/lot5c-evidence/recovery/performance-integrated-02/cohort1/baseline.json",
+        "docs/migration/lot5c-evidence/recovery/performance-integrated-02/cohort1/after.json",
+        "docs/migration/lot5c-evidence/recovery/performance-integrated-02/cohort1/comparison.json",
+        "docs/migration/lot5c-evidence/recovery/performance-integrated-02/cohort2/baseline.json",
+        "docs/migration/lot5c-evidence/recovery/performance-integrated-02/cohort2/after.json",
+        "docs/migration/lot5c-evidence/recovery/performance-integrated-02/cohort2/comparison.json",
+        "docs/migration/lot5c-evidence/recovery/performance-integrated-02/combined-comparison.json"
+      ]
+    },
+    {
+      "order": 5,
+      "purpose": "Only after actual eligible strict work-metadata refusal",
+      "argv": [
+        "node",
+        "docs/migration/lot5c-evidence/consolidate-owner-costs.mjs",
+        "docs/migration/lot5c-evidence/recovery/performance-integrated-02/owner-growth-contract.json",
+        "docs/migration/lot5c-evidence/recovery/performance-integrated-02/owner-growth-comparison.json"
+      ]
+    },
+    {
+      "order": 6,
+      "purpose": "Independent complete qualified arithmetic/structure review; global rejection remains rejection",
+      "argv": [
+        "python",
+        "-B",
+        "docs/migration/lot5c-evidence/review-owner-costs.py",
+        "docs/migration/lot5c-evidence/recovery/performance-integrated-02/owner-growth-contract.json",
+        "docs/migration/lot5c-evidence/recovery/performance-integrated-02/owner-growth-comparison.json",
+        "docs/migration/lot5c-evidence/recovery/performance-integrated-02/owner-growth-review.json"
+      ]
+    },
+    {
+      "order": 7,
+      "purpose": "After lossless log transport and reviewed cost/isolation conclusion",
+      "argv": [
+        "python",
+        "-B",
+        "docs/migration/lot5c-evidence/write-cost-results.py",
+        "--output-directory",
+        "docs/migration/lot5c-evidence/recovery/performance-integrated-02"
+      ]
+    }
+  ],
+  "commandReceiptPolicy": {
+    "wrapper": "docs/migration/lot5c-evidence/run-evidence-command.py",
+    "pattern": [
+      "python",
+      "-B",
+      "docs/migration/lot5c-evidence/run-evidence-command.py",
+      "--stem",
+      "FRESH_EXCLUSIVE_STEM",
+      "--timeout",
+      "DECLARED_BOUND_SECONDS",
+      "--",
+      "ACTUAL_ARGV"
+    ],
+    "qualification": "Use fresh immutable durable receipts and actual exit codes; the wrapper does not replace the outer EX controller. No command in this plan was run."
+  },
+  "strictFailureRetention": {
+    "receiptPath": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/aggregation-failure.json",
+    "logPath": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/aggregation-failure.log",
+    "historicalOutputMustRemainAbsent": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/combined-comparison.json",
+    "schema": "logos-engine.retained-tool-failure.v1",
+    "exactCommand": [
+      "node",
+      "scripts/compare-native-cost-cohorts.mjs",
+      "docs/migration/lot5c-evidence/recovery/performance-integrated-02/comparison-policy.json",
+      "docs/migration/lot5c-evidence/recovery/performance-integrated-02/cohort1/baseline.json",
+      "docs/migration/lot5c-evidence/recovery/performance-integrated-02/cohort1/after.json",
+      "docs/migration/lot5c-evidence/recovery/performance-integrated-02/cohort1/comparison.json",
+      "docs/migration/lot5c-evidence/recovery/performance-integrated-02/cohort2/baseline.json",
+      "docs/migration/lot5c-evidence/recovery/performance-integrated-02/cohort2/after.json",
+      "docs/migration/lot5c-evidence/recovery/performance-integrated-02/cohort2/comparison.json",
+      "docs/migration/lot5c-evidence/recovery/performance-integrated-02/combined-comparison.json"
+    ],
+    "requiredFields": [
+      "actual nonzero integer exitCode",
+      "inputsUnchanged:true from before/after fingerprints",
+      "outputExists:false observed after execution",
+      "actual startedAt",
+      "actual finishedAt",
+      "inputs in exact declared order",
+      "log:{path,bytes,sha256}"
+    ],
+    "orderedInputs": [
+      "historical aggregator tool",
+      "comparison-policy.json",
+      "cohort1 baseline/after/comparison",
+      "cohort2 baseline/after/comparison"
+    ],
+    "eligibleFailureText": "Within-cohort work metadata changed",
+    "chronology": "window.finishedAt <= failure.startedAt <= failure.finishedAt <= qualifiedAggregate.recordedAt",
+    "wrongOutcome": "Unexpected historical success, a different failure, changed input or partial aggregate must stop the qualified branch for review; never manufacture a refusal or erase a historical output.",
+    "qualification": "The aggregate and review must retain historicalStrictPassed:false / historicalStrict.passed:false. No historical pass is claimed."
+  },
+  "qualifiedDecision": {
+    "addedOwner": "public_observed_binding",
+    "addedProgram": "v6.observed_binding.choose",
+    "acquisitionDomain": "passive_nonadmitted_source_binding",
+    "contextAdmission": false,
+    "core": null,
+    "methods": [],
+    "attentionMutation": false,
+    "allowedStructuralPaths": [
+      "observations[*].nodeCount",
+      "inspection[*].graphNodes",
+      "final.nodeCount",
+      "final.graphRevision"
+    ],
+    "fixture": {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/owner-structural-fixture.json",
+      "bytes": 60104,
+      "sha256": "6f8d45dc8d68e8d3a67c45a66ac1045d12d123c43c02ab66e4ac1a09b63191d5"
+    },
+    "contract": {
+      "path": "docs/migration/lot5c-evidence/recovery/performance-integrated-02/owner-growth-contract.json",
+      "bytes": 6009,
+      "sha256": "08dc46007afbb0b54f219fc519f4bb7b8239a59c9263a2714aa60a61d0537c5f"
+    },
+    "preserveExistingOwnerAndProgramOrder": true,
+    "readinessIsNotCostAcceptance": true,
+    "rule": "Separately for STCK and SMLP pool all8 A and all8 B complete measured-session durations, require median(B) < median(A)*1.10. Equality at +10% is rejected. Both games must pass; no cross-game compensation, averaging cohort ratios, added noise allowance, outlier filtering or measured-session exclusions.",
+    "phaseDiagnostics": "Retain all16 pooled and32 cohort diagnostics, unresolved phase overruns, distributions and available p95. A phase overrun is acceptable only when both global budgets pass.",
+    "schedule": {
+      "order": [
+        "A1",
+        "B1",
+        "B2",
+        "A2"
+      ],
+      "cohorts": 2,
+      "measuredSessions": 32,
+      "measuredActions": 400,
+      "excludedWarmupSessions": 8,
+      "excludedWarmupActions": 24,
+      "excludedMeasuredSessions": 0,
+      "excludedOutliers": 0
+    },
+    "rejection": "A well-formed completed review may reject the global budget. Retain and render that rejection; do not treat it as malformed evidence or rerun/select samples to obtain acceptance."
+  },
+  "rendererInputs": {
+    "requiredFiles": [
+      "docs/migration/lot5c-evidence/recovery/performance-integrated-02/window.json",
+      "docs/migration/lot5c-evidence/recovery/performance-integrated-02/declaration.json",
+      "docs/migration/lot5c-evidence/recovery/performance-integrated-02/global-budget-policy.json",
+      "docs/migration/lot5c-evidence/recovery/performance-integrated-02/cases.json",
+      "docs/migration/lot5c-evidence/recovery/performance-integrated-02/comparison-policy.json",
+      "docs/migration/lot5c-evidence/recovery/performance-integrated-02/readiness.json",
+      "docs/migration/lot5c-evidence/recovery/performance-integrated-02/static-preflight.json",
+      "docs/migration/lot5c-evidence/recovery/performance-integrated-02/owner-growth-comparison.json",
+      "docs/migration/lot5c-evidence/recovery/performance-integrated-02/owner-growth-review.json",
+      "docs/migration/lot5c-evidence/recovery/performance-integrated-02/log-transport.json",
+      "docs/migration/lot5c-evidence/recovery/performance-integrated-02/preparation.json",
+      "docs/migration/lot5c-evidence/recovery/performance-integrated-02/protocol-check.json",
+      "docs/migration/lot5c-evidence/recovery/performance-integrated-02/cohort1/baseline.json",
+      "docs/migration/lot5c-evidence/recovery/performance-integrated-02/cohort1/after.json",
+      "docs/migration/lot5c-evidence/recovery/performance-integrated-02/cohort1/comparison.json",
+      "docs/migration/lot5c-evidence/recovery/performance-integrated-02/cohort2/baseline.json",
+      "docs/migration/lot5c-evidence/recovery/performance-integrated-02/cohort2/after.json",
+      "docs/migration/lot5c-evidence/recovery/performance-integrated-02/cohort2/comparison.json"
+    ],
+    "boundAdditionalInputs": "Declared source manifests/archive, contract, fixture, attribution, owner-source inventory and evidence/domain proofs, actual strict failure/log, and every reviewed external input.",
+    "losslessLogTransport": {
+      "status": "passed",
+      "window": "exact current window fingerprint",
+      "logs": "Four records ordered A1/B1/B2/A2; each has series and original/transport {path,bytes,sha256}; gzip decompression equals the entire retained original log byte-for-byte."
+    },
+    "outputs": [
+      "docs/migration/lot5c-evidence/recovery/performance-integrated-02/results.md",
+      "docs/migration/lot5c-evidence/recovery/performance-integrated-02/results-render.json"
+    ],
+    "failurePolicy": "Missing/inconsistent evidence fails clearly. No substitute old baseline/version/result, fabricated5C outcome or hidden phase overrun."
+  },
+  "closedBudgetsAndReservations": {
+    "wholeModuleExclusions": [
+      "tests/v6-ranked-workshop-reference.test.ts",
+      "tests/v6-ranked-workshop-kernel.test.ts",
+      "tests/v6-symbol-transactions-kernel.test.ts",
+      "tests/v6-framed-transfer-reference.test.ts"
+    ],
+    "closedCases": {
+      "LKEY": "Four entire eager-loading test modules excluded; no action/replay/oracle/payload analysis/browser. Closed budget preserved.",
+      "WEAV": "No new live or reset. Historical public regression only; level6 remains open and exhausted budget preserved.",
+      "CGWL": "No new live; historical missing raw evidence is not regenerated as fresh proof.",
+      "HPDL": "Excluded from declared recorded regressions; partial published10B proof remains partial, closed clock unchanged."
+    },
+    "noNewLiveGame": true,
+    "fullStrategyRouterParity": false,
+    "originalCommonScope": "Four declared synthetic original comparisons only; the four other scenarios retain their native extension scope.",
+    "entryAndMigrationAudit": "65/76 entries connected and fullV6Parity=false; migration complete=false with failures=[].",
+    "HPDLInherited": "Published10B remains partial:38 sealed prefixes versus39 complete public returns,3 levels; cumulative1909.1412980339917/2400 seconds retained without reset/refund or reopening.",
+    "KATA": "Inherited fixed0.60 self-consistency baseline provenance retained; no new self-comparison.",
+    "browserWallOverrunRetained": true
+  },
+  "sourceRecipeReferences": [
+    {
+      "path": "scripts/run-native-cost-window.py",
+      "bytes": 8933,
+      "sha256": "0ec9c69c859d0555e963643010d2254caee8c63d1c9a98ec07cd9af0ce0ce613"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/consolidate-owner-costs.mjs",
+      "bytes": 61449,
+      "sha256": "69957840c81d50e3d7b68dedf4293b5aa9c4072f882fe1fc858f5e03815330b7"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/review-owner-costs.py",
+      "bytes": 81151,
+      "sha256": "452ccf903970230f5855458cd35f2f3f30224307026663ebd865b494986371df"
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/write-cost-results.py",
+      "bytes": 50139,
+      "sha256": "16bf3b946dd2d30e582fec814f08a5abf75e8d8200bd3525ee1e466fa85e72a9"
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/finalize-cost-readiness.py",
+      "bytes": 53396,
+      "sha256": "eaf76dd08542c47c3a56eaaafeb1b851e0d018e3882cf3755c16dd974026c90a"
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/performance-integrated-01/readiness.json",
+      "bytes": 360928,
+      "sha256": "a4944fe4ab87c43fef7443aa2a0b66f85c5c66ec10406abae19d66e5d007f0f9"
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/coordination/cost-final-01/isolation.json",
+      "bytes": 3970,
+      "sha256": "6e71eef7269205f04e9c3720ea23372c9f111e339b306d9d8c3c7884c4cb8258"
+    },
+    {
+      "path": "docs/migration/lot10b-evidence/recovery-20261111/coordination/cost-final-01/isolation-review.json",
+      "bytes": 2842,
+      "sha256": "dad8a645f8b4d282d9b198e7560da07b9d69c20b3641f6fe07d3228c1dab3e0b"
+    }
+  ],
+  "coordinationObservedBeforePlanningWrite": [
+    {
+      "path": "/workspace/shared/sra-coordination/lot10c-status.json",
+      "quietRequested": false,
+      "activePerformance": false
+    },
+    {
+      "path": "/workspace/shared/sra-coordination/lot10b-status.json",
+      "quietRequested": false,
+      "activePerformance": false
+    },
+    {
+      "path": "/workspace/shared/sra-coordination/lot8a-status.json",
+      "quietRequested": false,
+      "activePerformance": false
+    },
+    {
+      "path": "/workspace/shared/sra-coordination/lot6b-status.json",
+      "quietRequested": false,
+      "activePerformance": false
+    }
+  ],
+  "qualification": "Source-only plan. No readiness, game, replay, build, profile, capture, benchmark or official cost measurement is executed by this planning step. Missing historical10B log-transport.json was observed as an absent optional recipe example, without editing any input; current5C renderer requirements above come from its actual source."
+}

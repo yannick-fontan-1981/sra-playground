@@ -1,0 +1,11 @@
+{
+  "file": {
+    "path": "docs/migration/lot5c-evidence/finalize-owner-cost-contract.py",
+    "bytes": 27103,
+    "sha256": "07a88bb23c8b7c4d95aab4cdde613f933d97023f03209abbc1783e2d257a07ed"
+  },
+  "method": "Python ast.parse(source); no import or execution",
+  "exitCode": 0,
+  "startedAt": "2026-11-11T12:42:38.908614+00:00",
+  "finishedAt": "2026-11-11T12:42:38.914481+00:00"
+}

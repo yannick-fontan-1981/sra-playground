@@ -1,0 +1,29 @@
+{
+  "schema": "logos-engine.lot5c-common-test-execution.v1",
+  "startedAt": "2026-11-11T12:25:42.799703+00:00",
+  "cwd": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout",
+  "command": [
+    "flock",
+    "-s",
+    "/workspace/shared/sra-coordination/performance.lock",
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "120s",
+    "node",
+    "--max-old-space-size=1536",
+    "--test",
+    "--test-concurrency=1",
+    "--test-name-pattern=the ordinary level clock",
+    "tests/v6-object-binding-common.test.ts"
+  ],
+  "evidenceDirectory": "docs/migration/lot5c-evidence/recovery/common/common-clock-01",
+  "status": "running",
+  "liveGameExecution": false,
+  "costMeasurement": false,
+  "runtimeBefore": {
+    "path": "src/logos-engine/v6-native-runtime.ts",
+    "bytes": 159540,
+    "sha256": "0a0a2197e1bf9b92caf53bfaa32f7e55b9ff79b31f675c8d0164b9eef5fcbefe"
+  }
+}

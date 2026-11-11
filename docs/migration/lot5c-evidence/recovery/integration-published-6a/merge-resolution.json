@@ -1,0 +1,49 @@
+{
+  "schema": "logos-engine.lot5c.published6a-merge-resolution.v1",
+  "recordedAt": "2026-11-11T14:32:19.236766+00:00",
+  "status": "source_conflicts_resolved_validation_pending",
+  "beforeCommit": "403cf3ad9cdaa8a0a17f8780ce2668c32909d3ce",
+  "publishedPredecessorCommit": "98336fba4e696a51c90ff7f7b37b8bdf95f34847",
+  "publishedSiteVersion": 97,
+  "publishedNativeVersion": "0.60.0",
+  "conflicts": [
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "conflicts": 9,
+      "resolution": "Retain composed candidate additions; retain all automatic upstream changes outside these conflicts."
+    },
+    {
+      "path": "scripts/audit-v6-entry-points.ts",
+      "conflicts": 1,
+      "resolution": "Retain composed candidate additions; retain all automatic upstream changes outside these conflicts."
+    },
+    {
+      "path": "migration/v6-transfer-map.json",
+      "conflicts": 1,
+      "resolution": "Retain composed candidate additions; retain all automatic upstream changes outside these conflicts."
+    },
+    {
+      "path": "docs/migration/v6-coverage.json",
+      "conflicts": 1,
+      "resolution": "Retain composed candidate additions; retain all automatic upstream changes outside these conflicts."
+    },
+    {
+      "path": "docs/migration/v6-entry-point-progress.json",
+      "conflicts": 1,
+      "resolution": "Retain composed candidate additions; retain all automatic upstream changes outside these conflicts."
+    },
+    {
+      "path": "tests/helpers/v6-live-game-campaign.ts",
+      "conflicts": 3,
+      "resolution": "Retain Window capture and symbol-before serialization; integrate actual6A Preview acquired facts and retained source fact."
+    },
+    {
+      "path": "docs/migration/v6-delivery-roadmap.md",
+      "conflicts": 1,
+      "resolution": "Keep current5C proof, add published6A closure, preserve10B current block independently, retain historical5B section and upstream document corrections."
+    }
+  ],
+  "nativeFilesCompared": 318,
+  "nativeDifferences": [],
+  "qualification": "Source reconciliation retains all318 previously validated native bytes. Public capture harness gains actual6A evidence fields. No runtime test, officialcost or5Cpublication is claimed by this source merge."
+}

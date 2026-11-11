@@ -1,0 +1,34 @@
+{
+  "schema": "logos-engine.lot5c.recovery-proof-execution.v1",
+  "startedAt": "2026-11-11T12:19:49.790803+00:00",
+  "finishedAt": "2026-11-11T12:19:50.735427+00:00",
+  "elapsedSeconds": 0.9446420229999148,
+  "command": [
+    "flock",
+    "-s",
+    "/workspace/shared/sra-coordination/performance.lock",
+    "timeout",
+    "180s",
+    "python3",
+    "scripts/review-observed-binding-common-replay.py",
+    "docs/migration/lot5c-evidence/recovery/common/common-01/positive"
+  ],
+  "exitCode": 1,
+  "log": {
+    "path": "docs/migration/lot5c-evidence/recovery/common/common-01/positive/original-review.log",
+    "bytes": 2448,
+    "sha256": "8142ef2dac5ba07cbca13d6d6ad654ba3b87bf34bbc52d8c26f0b148dff67794"
+  },
+  "compressedLog": {
+    "path": "docs/migration/lot5c-evidence/recovery/common/common-01/positive/original-review.log.gz",
+    "bytes": 405,
+    "sha256": "fa6c8bebdd56fa5989dbdb9c88497c8e0d38817866b9ab2415f1842c14b72920"
+  },
+  "preservedCommonInputsDirectory": "docs/migration/lot5c-evidence/recovery/common/common-01/positive/original-comparison-input-sources",
+  "commonSourcePreservationPhase": "after_capture_verified_against_before_and_after_pins",
+  "preservedExporterSource": {
+    "path": "docs/migration/lot5c-evidence/recovery/common/common-01/positive/original-exporter-source.py",
+    "bytes": 33863,
+    "sha256": "2305f9ef35741aca63be8eea24042853dc8c8ded7eb9a72bcdbc51989d8387ff"
+  }
+}

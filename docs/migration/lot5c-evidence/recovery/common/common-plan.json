@@ -1,0 +1,108 @@
+{
+  "schema": "logos-engine.lot5c-common-proof-plan.v1",
+  "status": "source_preparation_not_executed",
+  "declaredAt": "2026-11-11T12:29:21Z",
+  "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "owner": "public_observed_binding",
+  "entryPoint": "observed_object_binding",
+  "attentionOwner": "object_frame_binding",
+  "sourceStateRetention": "core_or_methods_memory_roundtrip",
+  "reconstruction": {
+    "status": "functional_reconstruction_not_historical_byte_recovery",
+    "basis": "Retained source excerpts and task context, reviewed against the published original agent interfaces",
+    "priorExecutionReceiptsReused": false,
+    "qualification": "The former environment and its unpublished proof files disappeared. This declaration starts new evidence; prior reported successes are not substituted for new execution or source comparison."
+  },
+  "publicScene": {
+    "width": 40,
+    "height": 36,
+    "background": 0,
+    "body": { "bbox": [3, 10, 4, 11], "palette": 9 },
+    "primaryObject": { "bbox": [10, 10, 13, 13], "palette": 4 },
+    "primaryFrame": { "bbox": [22, 7, 30, 15], "palette": 4, "interior": [23, 8, 29, 14], "corners": "background" },
+    "secondaryObject": { "bbox": [4, 25, 6, 27], "palette": 6 },
+    "secondaryFrame": { "bbox": [27, 24, 33, 30], "palette": 6, "corners": "background" },
+    "drawOrder": ["frames_without_corners", "objects", "body"],
+    "initialAvailable": ["ACTION4"],
+    "afterFirstCalibrationAvailable": ["ACTION3"],
+    "remainingAvailable": ["ACTION3", "ACTION4", "ACTION5"]
+  },
+  "publicResponseTable": {
+    "matching": "Exact current public rows, frame hash, level, completed levels, public state, available actions, and actual released primitive command",
+    "otherwise": "Return the identical public scene with the next actual step index",
+    "maximumActualReturnsPerSyntheticRun": 96,
+    "positiveStages": 24,
+    "refutationStages": 24,
+    "ambiguityStages": 9,
+    "boundaryStages": 23,
+    "construction": "The table uses only declared public geometry and commands. It never receives the current owner, proposal, tracker state or native expected result."
+  },
+  "cases": [
+    {
+      "id": "positive",
+      "publicPath": "Right then left calibration; approach body x=9; ACTION5 moves the object to x=4,y=10; right joint transport to body x=22; ACTION5 puts the object at [25,9,28,12]; ACTION3 moves the body left while the object stays fixed",
+      "required": ["Cold ordinary selection", "Selected and passive acquisition once", "Arrival remains pending before separation", "Observed separation affects the next actual common target and command", "Checkpoint and shared caller-attention restoration"]
+    },
+    {
+      "id": "refutation",
+      "publicPath": "The first 23 public returns equal the positive case; the final ACTION3 moves the object left to [24,9,27,12] together with the body",
+      "required": ["The same actual separation command receives a contrary public result", "Refutation is retained in tracker events even if the direct source return is another motion event", "The original parent remains pending", "The next actual common decision differs from the positive case"]
+    },
+    {
+      "id": "ambiguity",
+      "publicPath": "At the first ACTION5 contact, two compatible 4x4 objects appear at [4,10,7,13] and [12,10,15,13]",
+      "required": ["Identity remains unresolved", "No held object is invented", "The selected-frame parent is not silently replaced", "The source owner abstains at the next decision"]
+    },
+    {
+      "id": "boundary",
+      "publicPath": "The selected-site ACTION5 returns the initial scene at level 2 with one completed level and available ACTION4",
+      "required": ["Natural boundary witnessed through the ordinary caller", "Local core/moves/held/pending/observed-frame state is cleared", "Conditional methods and goal evidence survive", "Fresh caller attention and owner restoration preserve their separate responsibilities"]
+    },
+    {
+      "id": "foreign-parent",
+      "publicTrace": "docs/migration/native-campaigns-v50/life-public-trace-final.json.gz",
+      "publicPath": "Use the existing cold CommonMaterialReplay until a real typed-material pose-control parent with rule=null exists; acquire its recorded public return",
+      "required": ["No learned tracker or parent state is injected", "Binding acquires passively", "The other family's pending parent identity and owner remain intact", "The owner rejoins the newly restored caller attention"],
+      "qualification": "Native ownership/preservation extension. Typed-material parent revisions do not establish a replay of the entire original StrategyRouter."
+    },
+    {
+      "id": "passive-acquisition-bound",
+      "publicPath": "The first real right translation establishes body knowledge, then the public interface offers only ACTION6. On the actual foreign click return, only the passive binding acquisition receives an expired NativeExecution deadline",
+      "required": ["Actual owner knowledge exists before the bound", "No partial tracker or attention commit", "Old observed_object_binding_state evidence is not marked fresh", "The incomplete receipt binds the actual command and return", "OP29/OP30/OP31 complete before stopping", "Advance and resume release no further action"],
+      "qualification": "Native execution-bound extension, not equivalence to the unbounded Python source. No result, proposal or learned state is injected."
+    },
+    {
+      "id": "selected-acquisition-bound",
+      "publicPath": "After the first actual calibration return, the ordinary factory releases the first Binding ACTION3. Its declared public return is supplied, but only its selected recordSource call receives an expired NativeExecution deadline",
+      "required": ["The selected Binding action was ordinarily released before the bound is injected", "No partial tracker or attention commit", "No selected object_binding_event:null is invented for the incomplete source acquisition", "Old observed_object_binding_state evidence is not marked fresh", "The incomplete receipt has mode selected and binds the actual return", "OP29/OP30/OP31 complete before stop", "Resume releases no action"],
+      "qualification": "Native selected-acquisition bound extension. The actual selected proposal and command remain unchanged; this is not an unbounded original-source equivalence claim."
+    },
+    {
+      "id": "level-clock-acquisition-bound",
+      "publicPath": "The ordinary factory uses a shared controllable runtime clock, initially zero. After its actual first Binding ACTION3 return has passed the real after guard, the clock advances to 360001 ms. The caller execution deadline stays 900000 ms, and recordSource is left unchanged.",
+      "required": ["The action and public return are the same declared calibration transition", "The real after result is returned unchanged before the clock advances", "The runtime derives the acquisition bound from the exhausted 360000 ms level allowance", "The refusal has exhausted_bound=deadline and belongs to the actual selected acquisition", "No partial tracker, attention or fresh source fact is committed", "OP29/OP30/OP31 complete before stopping", "Resume releases no further action"],
+      "qualification": "Native runtime scheduling proof with a declared controllable clock; no deadline, state, proposal or result is injected into recordSource. This is not unbounded original-source parity or a measured latency result."
+    }
+  ],
+  "callerEventContract": "The original caller retains a selected object_binding_event even when its value is null; a passive null return does not create an event. Native incomplete acquisitions have their separate refusal receipt and do not count as completed source acquisitions.",
+  "journalContract": {
+    "schema": "logos-engine.v6.observed-binding-public-operations.v1",
+    "cold": true,
+    "nativeAnnotationsUsedAsOracleInputs": false,
+    "sourceStateRetention": "core_or_methods_memory_roundtrip",
+    "sourceStateRetentionContract": "After each original record, if its own source tracker has core or methods, the original caller stores that local state through its actual Memory.put/pack(sort_keys=True), reads it through Memory.get and restores it. Record annotations remain before this roundtrip. No native checkpoint or state is supplied as original input.",
+    "nativeRestoration": "Each actual restoreNative capture retains beforeSource and afterSource with operationCount counting every source/Attention call. The original replay derives its own post-roundtrip state at that operation count; it never consumes the native restore argument.",
+    "selectedCalls": "The independent original replay uses its own latest proposal",
+    "attention": "External caller AttentionMemory calls are captured separately; calls inside a captured owner operation are not replayed twice",
+    "memoryPuts": "Native annotations contain per-call deltas; the original may expose a cumulative journal whose exact prefix and delta must both be checked"
+  },
+  "executionPolicy": {
+    "requiresExplicitRuntimeReadySignal": true,
+    "performanceLock": "/workspace/shared/sra-coordination/performance.lock",
+    "lockMode": "shared",
+    "preserveEveryFailure": true,
+    "liveGameExecution": false,
+    "historicalCGWLJournalRecreated": false,
+    "newEvidenceRoot": "docs/migration/lot5c-evidence/recovery/common"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "schema": "logos-engine.v53.frozen-source-parts.v1",
+  "original": {
+    "path": "docs/migration/lot5c-evidence/recovery/integration-published-6a/source-after-clock/source-archive.tar.gz",
+    "sha256": "c7aa14e3bfd2535b2122ca162b2e6993db685329f8a67df999c6b3cadfe50416",
+    "bytes": 1909908
+  },
+  "parts": [
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/integration-published-6a/source-after-clock/source-archive.tar.gz.part000",
+      "sha256": "1393ab331345d48ad9644afde30e43869fe0ac319cfe5d7be6182f58bf02b4f6",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/integration-published-6a/source-after-clock/source-archive.tar.gz.part001",
+      "sha256": "9f73415d172652d3067d66f7a0a59f1f1090388f15673e0e0d65a63aafe2b527",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/integration-published-6a/source-after-clock/source-archive.tar.gz.part002",
+      "sha256": "d51c8986d3121981d62dffe36aa7fa8143ef49d8fdcba64aebae08298d9693cd",
+      "bytes": 109908
+    }
+  ],
+  "qualification": "Ordered byte slices of the exact frozen gzip archive. No source or evidence content changes."
+}

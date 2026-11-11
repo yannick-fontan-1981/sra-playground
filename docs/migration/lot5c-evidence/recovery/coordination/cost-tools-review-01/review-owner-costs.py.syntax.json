@@ -1,0 +1,11 @@
+{
+  "file": {
+    "path": "docs/migration/lot5c-evidence/review-owner-costs.py",
+    "bytes": 80634,
+    "sha256": "ade4fe2d921b7417b37aaade9d2c62e981fec79c056119cecf9439e5e078048e"
+  },
+  "method": "Python ast.parse(source); no import or execution",
+  "exitCode": 0,
+  "startedAt": "2026-11-11T12:30:14.124723+00:00",
+  "finishedAt": "2026-11-11T12:30:14.152023+00:00"
+}

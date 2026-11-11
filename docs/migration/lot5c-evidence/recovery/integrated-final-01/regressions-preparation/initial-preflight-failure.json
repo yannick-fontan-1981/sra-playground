@@ -1,0 +1,30 @@
+{
+  "schema": "logos-engine.lot5c-recorded-regression-preflight-failure.v1",
+  "recordedAt": "2026-11-11T17:58:40.073440+00:00",
+  "startedAt": "2026-11-11T17:55:24.491992+00:00",
+  "status": "failed_before_any_replay",
+  "exitCode": 1,
+  "toolOutputChunk": "497b78",
+  "command": [
+    "python",
+    "-B",
+    "scripts/run-released-public-regressions-streamlog.py",
+    "docs/migration/lot5c-evidence/recovery/integrated-final-01/recorded-regression-cases.json",
+    "docs/migration/lot5c-evidence/recovery/integrated-final-01",
+    "--source-manifest",
+    "docs/migration/lot5c-evidence/recovery/integrated-final-01/source-manifest.json",
+    "--node-old-space-mib",
+    "1536",
+    "--timeout-seconds",
+    "2400"
+  ],
+  "failedStage": "BASE.child(--prepare-manifest) -> RUNNER.prepare -> pinned_file -> PROOF.sha",
+  "exceptionType": "FileNotFoundError",
+  "missingPinnedPath": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz",
+  "errorExcerpt": "FileNotFoundError: [Errno 2] No such file or directory: '/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout/docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz'",
+  "replayChildrenStarted": 0,
+  "currentReplayOutputFiles": [],
+  "nativeDigest": "a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57",
+  "sourceOrComparatorChanged": false,
+  "remediation": "Verify all22 declared baseline/trace pins and materialize only missing exact baseline byte concatenations from retained published fragments. Preserve all original declarations and this initial failed preparation. No new gameplay or replacement evidence."
+}
