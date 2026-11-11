@@ -2,9 +2,9 @@
 
 <!-- LOT10B_TRANSFER_CURRENT_START -->
 
-## Current candidate: lot 10B WindowQuestion / native 0.62.0, global cost accepted
+## Published lot 10B: WindowQuestion / native 0.62.0 / Site 102, with partial HPDL qualification
 
-**WindowQuestion is functionally validated and its complete-session cost is accepted; native 0.62 publication is still being prepared.** The candidate preserves the actual published native 0.61 predecessor from Site 98 and the [effective Site 101 documentation closure](lot10b-evidence/recovery-20261111/published7-integration-01/documentation101-observation.json), source `d75a36f0a99bf6c301034523a3138a64d2f6e744`. That predecessor closure is merged locally in `866dc5f`. No future Site number or successful 0.62 deployment is implied. The existing owner-private audience must be preserved.
+**WindowQuestion / native 0.62.0 is actually published in [Site 102](lot10b-evidence/recovery-20261111/publication-062/native-publication.json)**, source `1019d2eb929d7dc201a5c1f6edce5aa1c5dfa464`, terminal deployment **`succeeded` on 11 November 2026 at 13:50:10.918057 UTC−03**. Functional validation and complete-session cost are accepted, with the explicit partial HPDL qualification preserved. The published native preserves the actual published native 0.61 predecessor from Site 98 and the [effective Site 101 documentation closure](lot10b-evidence/recovery-20261111/published7-integration-01/documentation101-observation.json), source `d75a36f0a99bf6c301034523a3138a64d2f6e744`. That predecessor closure is merged locally in `866dc5f`. The owner-private audience and access revision 3 are unchanged. This documentation closure brings together the actual native publication evidence and the updated roadmap.
 
 | Current 10B evidence | Result and qualification |
 | --- | --- |
@@ -28,7 +28,7 @@ The [complete cost report](lot10b-evidence/recovery-20261111/performance-integra
 
 **SMLP restoration increases by +26.3436295523%**. That phase overrun remains visible and is admissible under the user's rule because the complete-session global criterion passes for SMLP. No measured session is removed, no time is subtracted and no game offsets another. The historical strict aggregator retains its real **exit 1** and `Within-cohort work metadata changed` refusal; acceptance is separately supported by the contract declared before measurement and its qualified review. It is not a fabricated success of that strict aggregator.
 
-**Publication 0.62 remains pending.** HPDL retains its three-level partial result and full-caller limitation. The next capability in lot 10 is **10C / `ordered_recruitment` after 10B delivery closure**, followed by 10D / `temporal_selection` and 10E / `invited_endpoints`. See the [current roadmap](v6-delivery-roadmap.md), [WindowQuestion lineage](lot10b-window-question-lineage.md) and [10B evidence index](lot10b-evidence/README.md).
+**Native 0.62 is delivered in Site 102 with its partial HPDL qualification retained.** HPDL retains its three-level partial result and full-caller limitation. The next capability in lot 10 is **10C / `ordered_recruitment`**, followed by 10D / `temporal_selection` and 10E / `invited_endpoints`. See the [current roadmap](v6-delivery-roadmap.md), [WindowQuestion lineage](lot10b-window-question-lineage.md) and [10B evidence index](lot10b-evidence/README.md).
 
 <!-- LOT10B_TRANSFER_CURRENT_END -->
 

@@ -1,0 +1,56 @@
+{
+  "schema": "logos-engine.lot10b-final-source-recheck.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-11T16:49:25.898512+00:00",
+  "head": "1019d2eb929d7dc201a5c1f6edce5aa1c5dfa464",
+  "tree": "591f75ac3f2f75b67dd8a34d077021726aab65e3",
+  "retainedTargetCommit": "970a2a2f2cf14d7d2bb001594c752a90b7886690",
+  "targetTreeExactlyPreserved": true,
+  "checkoutClean": true,
+  "publicationInputs": {
+    "path": "docs/migration/lot10b-evidence/recovery-20261111/integrated-final-02/publication-inputs.json",
+    "bytes": 279230,
+    "sha256": "c5784d09f28b67fd964abe2079ddf1419f3a13c95867b52197d9cdd780f2ce15"
+  },
+  "boundInputsRechecked": 1445,
+  "changedInputs": [],
+  "applicationVerifications": [
+    {
+      "path": "/workspace/sites/sra-lot10b-recovery-20261111/publication-native-062/step-01-application-verification.json",
+      "bytes": 15974,
+      "sha256": "164c0d0420e5e22b8c68a8e8e12ebd888c34bde030319a84531bab4246c270c7"
+    },
+    {
+      "path": "/workspace/sites/sra-lot10b-recovery-20261111/publication-native-062/step-02-application-verification.json",
+      "bytes": 15974,
+      "sha256": "e29805c7d03590199fe0a5de8026b3cc80d0f2114d9de11117148dc933a4c176"
+    },
+    {
+      "path": "/workspace/sites/sra-lot10b-recovery-20261111/publication-native-062/step-03-application-verification.json",
+      "bytes": 15974,
+      "sha256": "f866d3d8c717e685ddb7d0665e1b92111024437db94f3b9e52007bf2920e8d5e"
+    },
+    {
+      "path": "/workspace/sites/sra-lot10b-recovery-20261111/publication-native-062/step-04-application-verification.json",
+      "bytes": 15974,
+      "sha256": "9ff5e2973d3cfef495ab0565ae76a07bdc3d5fa04ce0b5709473430ac2b56e4d"
+    },
+    {
+      "path": "/workspace/sites/sra-lot10b-recovery-20261111/publication-native-062/step-05-application-verification.json",
+      "bytes": 15974,
+      "sha256": "9ff31c25690b1cc0103593797850eaf22a3d5c0af838883d7d6d354545465f3b"
+    },
+    {
+      "path": "/workspace/sites/sra-lot10b-recovery-20261111/publication-native-062/step-06-application-verification.json",
+      "bytes": 15974,
+      "sha256": "221c6452b22d13444372f631d0a6a95f3ac0db5144ad4d081b65283f0a78ea0e"
+    }
+  ],
+  "applicationMemberComparisons": 450,
+  "nativeAgentWorker": {
+    "path": "dist/assets/v6-agent-worker-BiLC_SOD.js",
+    "sha256": "12e1b91d18af5f9dbf1e534ad7f3cebb1d692d314bc43fd667581b32a7412aa5",
+    "bytes": 6854175
+  },
+  "qualification": "Read-only verification after six actual ordinary source pushes. No build, game, replay, measurement or publication performed. Official workflow source receipts separately verify actual remote HEAD after each push."
+}
