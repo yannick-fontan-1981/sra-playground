@@ -1,5 +1,21 @@
 # Feuille de route V5/V6 vers Logos Engine TypeScript
 
+<!-- LOT7_FOLLOWUP_RECOVERY_START -->
+
+## Travail courant du fil 7 : continuation Workshop, candidat 0.61 reconstruit
+
+**La publication vérifiée reste Site 95 / native 0.58.0, clôture documentaire de 5B. Le complément Workshop 0.61 est en préparation et n'est pas publié.** Après le remplacement de l'environnement, la base publiée a été récupérée au commit `3a70463039768f7114edae7d94d7dd33b7f36aa8`. Les anciens fichiers non publiés et leurs preuves brutes n'ont pas été retrouvés. Le [constat de récupération](lot7b-evidence/followup-recovery/coordination/recovery.json) conserve les observations historiques avec `eligibleForGates: false` ; une validation neuve est exigée sur les octets reconstruits.
+
+Le [contrat du complément](lot7b-evidence/followup-recovery/contract/source-contract.md) porte sur deux fichiers de production : l'appelant natif et le propriétaire RankedWorkshop. Après une invitation de contact acquise comme stationnaire, l'appelant consulte le reste du groupe puis les groupes suivants dans leur ordre déclaré. La première proposition non nulle doit posséder son propre témoin acquis et passer sa garde actuelle. Les refus globaux, les arrêts locaux de groupe, la préservation, la liaison et WHY/ACT conservent leur portée. Le témoin Workshop ne modifie ni les onze champs de sa proposition source ni son état persistant ; il atteste le contexte d'une question dont l'effet reste inconnu. Il s'agit d'une extension native explicite, sans nouvelle entrée, nouveau propriétaire ou nouveau workflow, et sans revendication de parité de tout l'appelant Python.
+
+La validation reconstruite utilise des scènes synthétiques indépendantes et les [dix régressions publiques déclarées](lot7b-evidence/followup-recovery/contract/regression-cases.json), sans nouveau cas LKEY. Les trois modules de tests qui chargent la géométrie LKEY historique seront exclus du périmètre frais ; leurs résultats publiés restent historiques. L'[horloge LKEY](lot7b-evidence/followup-recovery/coordination/lkey-closed-clock.json) reste fermée à **2 390,347106991 s cumulées**, sans remise à zéro ni nouvel essai. L'ancien résultat navigateur de trois niveaux en 44 actions n'est pas une preuve du nouveau gel.
+
+**Le critère de coût est fixé avant la mesure : pour chacun de STCK et SMLP, la médiane des sessions complètes regroupées doit rester strictement sous +10 %.** Une phase au-delà de +10 % est acceptable si ce critère global passe pour les deux jeux ; son résultat et ses valeurs défavorables restent visibles. La fenêtre prévue conserve 32 sessions mesurées et 400 actions ; seules huit chauffes et leurs 24 actions sont exclues. Le contrôle de travail identique précède la fenêtre officielle et aucune exemption ne sera ajoutée après mesure.
+
+La séquence convenue reste **6A / 0.60 → complément 7 / 0.61 → 10B / 0.62 → 5C / 0.63**, à réconcilier avec les sources et publications réellement disponibles. Les lots 7A et 7B demeurent clos dans leurs périmètres déjà publiés. Le gel final, les contrôles frais, le coût et la publication du complément restent à terminer.
+
+<!-- LOT7_FOLLOWUP_RECOVERY_END -->
+
 <!-- LOT5B_ROADMAP_CURRENT_START -->
 
 ## Jalon courant : lot 5B livré dans Site 94 / native 0.58, validation et coût global acceptés
