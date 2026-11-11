@@ -1,0 +1,37 @@
+{
+  "schema": "logos-engine.lot8a.binding-common-capture.v1",
+  "status": "passed",
+  "mode": "ambiguity",
+  "synthetic": true,
+  "returned": 9,
+  "ownReturns": 8,
+  "sourceStages": 9,
+  "declaredStages": 9,
+  "sourceDeclarationsModified": false,
+  "executionInputsUnchangedDuringRun": true,
+  "checks": {
+    "passed": 8,
+    "names": [
+      "cold_unique_owner_and_original_material_subquestion_order",
+      "two_compatible_relocations_do_not_create_an_attachment_or_replace_the_parent",
+      "one_selected_or_passive_acquisition_per_actual_return",
+      "authoritative_checkpoint_and_fresh_owner_restoration",
+      "source_selected_null_retained_and_passive_null_not_retained",
+      "caller_attention_restoration_has_one_shared_owner",
+      "ordinary_why_act_authorizes_every_released_step",
+      "public_response_never_depends_on_owner_or_expected_native_result"
+    ],
+    "failures": []
+  },
+  "actualJournal": {
+    "path": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-ambiguity-01/ambiguity/actual-operations.json",
+    "bytes": 1488335,
+    "sha256": "20cb0948e00f535ec971ef29ab8d5aa44c3f492af3f3eb918a1dec177539015f"
+  },
+  "fullReport": {
+    "path": "docs/migration/lot5c-evidence/recovery/common/lot8a-936fa2bf-ambiguity-01/ambiguity/common-loop.json.gz",
+    "bytes": 20749,
+    "sha256": "94595120dcf3493cfec36c32c5f3917cc1faa542c0c273723b0129f52ff2b4b7"
+  },
+  "qualification": "Fresh synthetic Binding common capture on the unchanged prepared5C/6B/Motif composition. Original comparison is a separate declared stage. No live game, official cost or publication."
+}

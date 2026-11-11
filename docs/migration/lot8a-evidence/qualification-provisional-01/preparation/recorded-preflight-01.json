@@ -1,0 +1,16 @@
+{
+  "schema": "logos-engine.lot8a.recorded-preflight.v1",
+  "status": "passed",
+  "replaysExecuted": 0,
+  "liveGamesLaunched": 0,
+  "cases": 11,
+  "totals": {
+    "commands": 390,
+    "completePublicPackets": 401,
+    "animationFrames": 1755,
+    "prefixes": 289,
+    "requests": 679,
+    "naturalLevelBoundaries": 33
+  },
+  "passiveOwnerRequirements": []
+}
