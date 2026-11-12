@@ -48,17 +48,20 @@
     "src/logos-engine/v6-temporal-memory-contract.ts",
     "tests/v6-temporal-memory-contract.test.ts",
     "docs/recovery/lot10d-temporal-selection-contract.md",
-    "docs/recovery/lot10d-temporal-memory-contract.md"
+    "docs/recovery/lot10d-temporal-memory-contract.md",
+    "src/logos-engine/v6-temporal-return-contract.ts",
+    "tests/v6-temporal-return-contract.test.ts",
+    "docs/recovery/lot10d-temporal-return-contract.md"
   ],
   "functional_qualification": {
-    "command": "node --experimental-strip-types --test tests/v6-temporal-selection-contract.test.ts tests/v6-temporal-memory-contract.test.ts",
-    "tests_passed": 15,
+    "command": "node --experimental-strip-types --test tests/v6-temporal-selection-contract.test.ts tests/v6-temporal-memory-contract.test.ts tests/v6-temporal-return-contract.test.ts",
+    "tests_passed": 23,
     "tests_failed": 0,
-    "status": "contract_layer_qualified",
+    "status": "contract_and_return_identity_layer_qualified",
     "historical_selector_reconstructed": false,
     "historical_state_machine_reconstructed": false
   },
-  "next_step": "reconstruct a minimal local observation memory state only from durable producer/acquisition/restore/consumer evidence",
+  "next_step": "assemble the qualified contracts into a minimal TemporalSelection observation state without introducing undocumented historical fields",
   "working_branch": "recovery/lot10d-temporal-selection-restart2-20261112",
   "previous_recovery_branch": "recovery/lot10d-temporal-selection-restart-20261112"
 }
