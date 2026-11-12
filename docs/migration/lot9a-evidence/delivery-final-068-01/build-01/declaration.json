@@ -1,0 +1,41 @@
+{
+  "schema": "logos-engine.lot9a.functional-command.v1",
+  "key": "build",
+  "attempt": "build-01",
+  "plan": {
+    "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/build-execution-plan.json",
+    "bytes": 66475,
+    "sha256": "3ab2480c94795d72fb1d2d9530ded5cc1d20c379fc07ad8db40f728fa1be8721"
+  },
+  "command": [
+    "npm",
+    "run",
+    "build"
+  ],
+  "cwd": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout",
+  "startedAt": "2026-11-12T14:39:32.057616+00:00",
+  "timeoutSeconds": 120,
+  "budgetKey": "build",
+  "attemptNumber": 1,
+  "priorCumulativeSeconds": 0,
+  "maximumCumulativeSeconds": 240,
+  "correctiveReason": null,
+  "declaredMaximumSessionsThisLaunch": 0,
+  "declaredMaximumReturnsThisLaunch": 0,
+  "generator": {
+    "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/tools/delivery/run-functional-command.py",
+    "bytes": 9355,
+    "sha256": "dcd3d8f56c75c44036a9ab7d14ef92aec367db7eb8c5b30fae59d63dd30a6045"
+  },
+  "derivedFrom": {
+    "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot8b-evidence/tools/final-functional/run-functional-command.py",
+    "bytes": 7698,
+    "sha256": "a49a62551f757750a9598b2ea3a36d0c214ded79f150e3c65bddc74a83103fe9"
+  },
+  "headBefore": "dcd6b5b7027615ae37eb5afd02d704987f12702f",
+  "globalLockAcquired": false,
+  "officialPerformanceMeasurement": false,
+  "gameEngineExecuted": false,
+  "published": false,
+  "status": "running"
+}
