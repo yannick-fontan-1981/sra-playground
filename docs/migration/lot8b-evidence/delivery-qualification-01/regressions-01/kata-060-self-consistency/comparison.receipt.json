@@ -1,0 +1,40 @@
+{
+  "schema": "logos-engine.lot8b.recorded-process.v1",
+  "name": "comparison",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "scripts/run-released-public-regressions.py",
+    "--compare-case",
+    "{\"baseline\":\"docs/migration/lot6a-evidence/integrated-final-02/kata-campaign.json.gz\",\"trace\":\"docs/migration/lot6a-evidence/integrated-final-02/kata-public-trace.json.gz\",\"report\":\"docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/kata-060-self-consistency/replay.json.gz\",\"sourceManifest\":\"docs/migration/lot8b-evidence/delivery-qualification-01/candidate-native.json\",\"caseManifest\":\"docs/migration/lot8b-evidence/tools/delivery/regressions/cases.json\",\"comparison\":\"docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/kata-060-self-consistency/comparison.json\",\"presence\":\"docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/kata-060-self-consistency/passive-owner-presence.json\",\"requirements\":[]}"
+  ],
+  "cwd": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+  "startedAt": "2026-11-12T05:12:26.275749+00:00",
+  "phaseTimeoutSeconds": 180,
+  "effectiveTimeoutSeconds": 180,
+  "environment": {
+    "NODE_OPTIONS": "--max-old-space-size=1536",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONHASHSEED": "0"
+  },
+  "status": "passed",
+  "pid": 149,
+  "processGroup": 149,
+  "exitCode": 0,
+  "timedOut": false,
+  "interrupted": false,
+  "automaticRetry": false,
+  "processGroupStopped": true,
+  "finishedAt": "2026-11-12T05:12:32.086493+00:00",
+  "elapsedSeconds": 5.810765235997678,
+  "stdout": {
+    "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/kata-060-self-consistency/comparison.stdout.log",
+    "bytes": 2727,
+    "sha256": "6bc1bb54f559639565125c32523d8c5c5e6d224302f574923e9bdabde1ea080f"
+  },
+  "stderr": {
+    "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/kata-060-self-consistency/comparison.stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

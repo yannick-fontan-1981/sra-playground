@@ -1,0 +1,210 @@
+{
+  "case": "craf-055",
+  "game": "CRAF",
+  "passed": true,
+  "baseline": {
+    "path": "docs/migration/lot7b-evidence/integrated-final/craf-campaign.json.gz",
+    "sha256": "78e86660961ed6d75707c001c021b8c223d205137d86288ac21d09a533b680f2"
+  },
+  "trace": {
+    "path": "docs/migration/lot7b-evidence/integrated-final/craf-public-trace.json.gz",
+    "sha256": "cf69ad941e80e17f8d6cd66edc0419a0c6ff7aa8d9bbdaf503cb56a49e8c3f98"
+  },
+  "replay": {
+    "schema": "logos-engine.lot8b.recorded-process.v1",
+    "name": "replay",
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "docs/migration/lot8a-evidence/tools/replay-recorded-public-streaming.mjs",
+      "docs/migration/lot7b-evidence/integrated-final/craf-campaign.json.gz",
+      "docs/migration/lot7b-evidence/integrated-final/craf-public-trace.json.gz",
+      "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/craf-055/replay.json.gz"
+    ],
+    "cwd": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+    "startedAt": "2026-11-12T05:08:35.626264+00:00",
+    "phaseTimeoutSeconds": 600,
+    "effectiveTimeoutSeconds": 600,
+    "environment": {
+      "NODE_OPTIONS": "--max-old-space-size=1536",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONHASHSEED": "0"
+    },
+    "status": "passed",
+    "pid": 111,
+    "processGroup": 111,
+    "exitCode": 0,
+    "timedOut": false,
+    "interrupted": false,
+    "automaticRetry": false,
+    "elapsedSeconds": 140.56684453699927,
+    "lastObservedAt": "2026-11-12T05:10:50.784416+00:00",
+    "stdoutBytes": 121121,
+    "stderrBytes": 0,
+    "processGroupStopped": true,
+    "finishedAt": "2026-11-12T05:10:56.193083+00:00",
+    "stdout": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/craf-055/replay.stdout.log",
+      "bytes": 123419,
+      "sha256": "f17181dd08c0f4121b27f8ded49056010fcab94bf617d27b1499285d6ca1ac47"
+    },
+    "stderr": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/craf-055/replay.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "hostPreparationPassed": true,
+  "comparisonProcess": {
+    "schema": "logos-engine.lot8b.recorded-process.v1",
+    "name": "comparison",
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+      "-B",
+      "scripts/run-released-public-regressions.py",
+      "--compare-case",
+      "{\"baseline\":\"docs/migration/lot7b-evidence/integrated-final/craf-campaign.json.gz\",\"trace\":\"docs/migration/lot7b-evidence/integrated-final/craf-public-trace.json.gz\",\"report\":\"docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/craf-055/replay.json.gz\",\"sourceManifest\":\"docs/migration/lot8b-evidence/delivery-qualification-01/candidate-native.json\",\"caseManifest\":\"docs/migration/lot8b-evidence/tools/delivery/regressions/cases.json\",\"comparison\":\"docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/craf-055/comparison.json\",\"presence\":\"docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/craf-055/passive-owner-presence.json\",\"requirements\":[]}"
+    ],
+    "cwd": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+    "startedAt": "2026-11-12T05:10:56.194909+00:00",
+    "phaseTimeoutSeconds": 180,
+    "effectiveTimeoutSeconds": 180,
+    "environment": {
+      "NODE_OPTIONS": "--max-old-space-size=1536",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONHASHSEED": "0"
+    },
+    "status": "passed",
+    "pid": 123,
+    "processGroup": 123,
+    "exitCode": 0,
+    "timedOut": false,
+    "interrupted": false,
+    "automaticRetry": false,
+    "processGroupStopped": true,
+    "finishedAt": "2026-11-12T05:11:05.616013+00:00",
+    "elapsedSeconds": 9.421130276998156,
+    "stdout": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/craf-055/comparison.stdout.log",
+      "bytes": 2678,
+      "sha256": "8343d90e245351e6032c91bf4e1ab3d670ce150ec8a92e15edd2413070ec6ceb"
+    },
+    "stderr": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/craf-055/comparison.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "comparisonResult": {
+    "report": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/craf-055/replay.json.gz",
+      "sha256": "5581f04c88344f4e34bf0f270a2bee7244dc500deab257858a03f6768629eae3",
+      "bytes": 15471761
+    },
+    "status": "passed",
+    "actions": 36,
+    "prefixes": 36,
+    "final": {
+      "actions": 36,
+      "levelsCompleted": 3,
+      "level": 4,
+      "state": "NOT_FINISHED",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "activeSeconds": 104.99501719900003,
+      "prefixes": 36,
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 36,
+        "boundaryReplays": 2,
+        "goalEvents": 3,
+        "frontierDeltas": 73,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 37
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 37
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 35
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 34
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 31
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 38
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology"
+        ],
+        "morphologyProvider": {
+          "status": "partial_current_measurements_control_attention_and_methods",
+          "state_owner": "family_state:morphology",
+          "motion_owner": "caller:goal",
+          "forecast_owner": "family_state:public_observed_inventory",
+          "current_decision_scope": "one_source_selection_cycle",
+          "attention_owner": "caller:attention",
+          "method_owner": "caller:counters.targetMethod",
+          "entry_return_owner": "family_state:morphology.entry_access_return",
+          "connected_methods": [
+            "retained_station_method",
+            "entry_access_return",
+            "entry_rebind",
+            "entry_probe",
+            "managed_capacity",
+            "target_extension_continuation"
+          ],
+          "pending": [
+            "complete_original_caller_parity_and_domain_closure"
+          ]
+        },
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      },
+      "fullV6Parity": false,
+      "sessions": 1,
+      "operationCounts": {
+        "init": 1,
+        "advance": 36,
+        "resume": 35
+      },
+      "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.66.0"
+    },
+    "passiveOwnerPresence": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/craf-055/passive-owner-presence.json",
+      "sha256": "dc0b6f0d54814b925eb89fb66ccdf0eb09e4b7f5b6e0616ca2932c843544473f",
+      "bytes": 1110
+    },
+    "passiveOwnerPresencePassed": true,
+    "passiveOwnerPrefixesChecked": 0,
+    "passiveOwnerPrefixesPassed": 0,
+    "passiveOwnerTransitionsRetained": 0,
+    "comparison": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/craf-055/comparison.json",
+      "sha256": "3e71fb509ca30f27b19d63edf02bc61cb28bb97da6329b0d931d7f9e1ea27f0c",
+      "bytes": 10993
+    },
+    "comparisonPassed": true,
+    "comparisonChecks": 17,
+    "failedChecks": []
+  },
+  "originalCheckNamesPreserved": true,
+  "inputsUnchanged": true
+}

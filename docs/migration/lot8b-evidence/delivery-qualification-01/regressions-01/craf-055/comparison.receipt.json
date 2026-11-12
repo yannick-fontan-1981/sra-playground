@@ -1,0 +1,40 @@
+{
+  "schema": "logos-engine.lot8b.recorded-process.v1",
+  "name": "comparison",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "scripts/run-released-public-regressions.py",
+    "--compare-case",
+    "{\"baseline\":\"docs/migration/lot7b-evidence/integrated-final/craf-campaign.json.gz\",\"trace\":\"docs/migration/lot7b-evidence/integrated-final/craf-public-trace.json.gz\",\"report\":\"docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/craf-055/replay.json.gz\",\"sourceManifest\":\"docs/migration/lot8b-evidence/delivery-qualification-01/candidate-native.json\",\"caseManifest\":\"docs/migration/lot8b-evidence/tools/delivery/regressions/cases.json\",\"comparison\":\"docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/craf-055/comparison.json\",\"presence\":\"docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/craf-055/passive-owner-presence.json\",\"requirements\":[]}"
+  ],
+  "cwd": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+  "startedAt": "2026-11-12T05:10:56.194909+00:00",
+  "phaseTimeoutSeconds": 180,
+  "effectiveTimeoutSeconds": 180,
+  "environment": {
+    "NODE_OPTIONS": "--max-old-space-size=1536",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONHASHSEED": "0"
+  },
+  "status": "passed",
+  "pid": 123,
+  "processGroup": 123,
+  "exitCode": 0,
+  "timedOut": false,
+  "interrupted": false,
+  "automaticRetry": false,
+  "processGroupStopped": true,
+  "finishedAt": "2026-11-12T05:11:05.616013+00:00",
+  "elapsedSeconds": 9.421130276998156,
+  "stdout": {
+    "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/craf-055/comparison.stdout.log",
+    "bytes": 2678,
+    "sha256": "8343d90e245351e6032c91bf4e1ab3d670ce150ec8a92e15edd2413070ec6ceb"
+  },
+  "stderr": {
+    "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/craf-055/comparison.stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

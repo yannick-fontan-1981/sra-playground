@@ -1,0 +1,27 @@
+{
+  "schema": "logos-engine.lot8b.recorded-process.v1",
+  "name": "replay",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "docs/migration/lot8a-evidence/tools/replay-recorded-public-streaming.mjs",
+    "docs/migration/lot7b-evidence/integrated-final/craf-campaign.json.gz",
+    "docs/migration/lot7b-evidence/integrated-final/craf-public-trace.json.gz",
+    "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/craf-055/replay.json.gz"
+  ],
+  "cwd": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+  "startedAt": "2026-11-12T05:08:35.626264+00:00",
+  "phaseTimeoutSeconds": 600,
+  "effectiveTimeoutSeconds": 600,
+  "environment": {
+    "NODE_OPTIONS": "--max-old-space-size=1536",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONHASHSEED": "0"
+  },
+  "status": "started",
+  "pid": null,
+  "processGroup": null,
+  "exitCode": null,
+  "timedOut": false,
+  "interrupted": false,
+  "automaticRetry": false
+}
