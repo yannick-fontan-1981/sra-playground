@@ -1159,3 +1159,26 @@ Les dispositions C0–C7 restent inchangées sur ce point :
 Merge de la couverture finale :
 PR #10, merge commit
 `54c7009fce238b694e7d8058d5e195f502378ac0`.
+
+
+## Chemin runtime Region — équivalents spécialisés OP06 / OP29 / OP30
+
+Preuve détaillée :
+`docs/recovery/op01-op31-region-specialized-proof.md`.
+
+Chaîne démontrée :
+
+**méthode Region apprise → proposition sur nouveau séparateur → sélection unique →
+retour acquis → comparaison au modèle → confirmation/contradiction → effet sur les
+propositions futures**.
+
+Dispositions :
+- OP06 : fonction spécialisée équivalente démontrée ;
+- OP29 : fonction spécialisée équivalente démontrée sur la famille Region ;
+- OP30 : fonction spécialisée équivalente démontrée, avec effet décisionnel futur.
+
+Le chemin générique reste inchangé :
+- OP29 générique = `information_only` ;
+- OP30 générique = `persisted_only`.
+
+Aucun appel OP générique n'est ajouté.
