@@ -19,9 +19,9 @@ export interface XYActionData {
 
 export type ActionData = XYActionData | undefined;
 
-export interface DispatchPorts {
-  action(action: number, data?: XYActionData): Promise<ProductObservation>;
-  present(observation: ProductObservation, generation: number): Promise<void>;
+export interface DispatchPorts<TObservation extends ProductObservation = ProductObservation> {
+  action(action: number, data?: XYActionData): Promise<TObservation>;
+  present(observation: TObservation, generation: number): Promise<void>;
   now(): number;
   generation(): number;
   setBusy(value: boolean): void;
@@ -64,11 +64,11 @@ export function canDispatchAction(state: ProductReadinessState, action: number):
  * before presentation begins. A response from an older selection generation is
  * rejected and never presented.
  */
-export async function dispatchProductAction(
+export async function dispatchProductAction<TObservation extends ProductObservation>(
   state: ProductReadinessState,
   action: number,
   data: XYActionData | undefined,
-  ports: DispatchPorts,
+  ports: DispatchPorts<TObservation>,
 ): Promise<DispatchResult> {
   if (!canDispatchAction(state, action)) {
     return { accepted: false, stale: false, elapsedMs: null };
