@@ -537,3 +537,15 @@ Aucun changement runtime ; aucun coût ajouté.
 ### Prochaine étape concrète
 
 Produire C7 provisoire : une matrice finale des 31 OP avec disposition, niveau de preuve, fonction spécialisée éventuelle, dette exacte et statut performance. C7 ne sera pas déclaré complètement clos tant que C1 n'aura pas instrumenté le port TypeScript et que les performances consolidées n'auront pas été mesurées.
+
+
+## C3 — complément OP04/09/11/14
+
+Le détail est enregistré dans `docs/migration/op01-op31-c3-specialized-overlap-complement.md`.
+
+- **OP04** : recouvrement fort par le target tree, mais aucun consommateur générique transversal démontré.
+- **OP09** : aucun équivalent ; le donneur ne confond pas alternatives connues et domaine complet. OP09 reste invalide sans `alternatives_complete=True`.
+- **OP11** : recouvrement familial par parent/enfant/routes/conditions du target tree ; réseau générique de déblocage non démontré.
+- **OP14** : consommation réelle dans `operation_admission()` et contribution à la garde de release démontrées ; la couche `common_preservation.py` reste l'autorité plus forte pour les témoins, révisions et inconnues.
+
+C3 possède maintenant une disposition explicite pour ses huit OP.
