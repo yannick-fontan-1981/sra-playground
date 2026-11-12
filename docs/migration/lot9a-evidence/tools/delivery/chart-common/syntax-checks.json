@@ -1,0 +1,41 @@
+{
+  "schema": "logos-engine.lot9a.chart-common-syntax-checks.v1",
+  "checkedAt": "2026-11-12T14:57:29.262028+00:00",
+  "scope": "Node parse-only checks; neither file was imported or executed.",
+  "checks": [
+    {
+      "command": [
+        "node",
+        "--check",
+        "docs/migration/lot9a-evidence/tools/delivery/chart-common/capture.mjs"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "",
+      "input": {
+        "path": "docs/migration/lot9a-evidence/tools/delivery/chart-common/capture.mjs",
+        "bytes": 34753,
+        "sha256": "096311ef408c20f70061ca5d67ec97ccf779327091c5b8416e828521b6d2b9ac"
+      },
+      "runtimeExecuted": false,
+      "importsExecuted": false
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "docs/migration/lot9a-evidence/tools/delivery/chart-common/qualify.mjs"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "",
+      "input": {
+        "path": "docs/migration/lot9a-evidence/tools/delivery/chart-common/qualify.mjs",
+        "bytes": 39886,
+        "sha256": "edc24c0c2896cb0497606810ba06bb58fbf815c9690ae0f2834126359eb4b638"
+      },
+      "runtimeExecuted": false,
+      "importsExecuted": false
+    }
+  ]
+}

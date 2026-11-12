@@ -1,0 +1,136 @@
+{
+  "schema": "logos-engine.lot9a.chart-common-tool-provenance.v1",
+  "preparedOnly": true,
+  "runtimeExecutedDuringPreparation": false,
+  "sourceOracleExecutedDuringPreparation": false,
+  "fixtureModified": false,
+  "nativeProductionModifiedByTheseTools": false,
+  "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.68.0",
+  "candidateNative": {
+    "fileCount": 334,
+    "digest": "e7a94fbc7cdcb19d8704b5d4120f27a858cbcd07e455084711510ee147f4e653"
+  },
+  "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "fixture": {
+    "path": "docs/migration/lot9a-evidence/reference-01/reference.json.gz",
+    "bytes": 2053926,
+    "sha256": "0770706db16249ac4ab1c7c8b9533d571f2fc2cdaeaf5dae2d990806e412cfe8"
+  },
+  "caseDefinitionSource": {
+    "path": "tests/v6-chart-navigation-kernel.test.ts",
+    "bytes": 15491,
+    "sha256": "f15c0d6f01ff9f565d5407628f2d27d5309d0e574cb7d26d7ff016e8dff91914"
+  },
+  "preparationPlan": {
+    "path": "docs/migration/lot9a-evidence/tools/delivery/chart-common/preparation-plan.json",
+    "bytes": 5738,
+    "sha256": "0129015a8a56c0000f69ac4cd10f270ab0e050e8bd143b3d0d08a0d66e3136d9"
+  },
+  "readme": {
+    "path": "docs/migration/lot9a-evidence/tools/delivery/chart-common/README.md",
+    "bytes": 10075,
+    "sha256": "62d87c395c59c0f77d2fb12820800038b9b136325fba7ab8bd1627f47b88f052"
+  },
+  "syntaxChecks": {
+    "path": "docs/migration/lot9a-evidence/tools/delivery/chart-common/syntax-checks.json",
+    "bytes": 1221,
+    "sha256": "d7589ca5a17bb8e13a122d1541f6898ecc3a0becec935c236be3cb4e52614410"
+  },
+  "authorScope": {
+    "captureAndReader": "chart_contract",
+    "chartOwner": "chart_contract",
+    "nativeContractTests": "chart_contract",
+    "independentToolReview": "chart_geometry; separate retained review by root",
+    "independentOwnerReviewClaimed": false
+  },
+  "derivationModel": "New Chart-specific tools following the listed 8B capture/reader mechanisms; full source-to-target unified diffs retain every changed line for each primary and secondary reference.",
+  "semanticChanges": [
+    "Pin native334 at 0.68 and the immutable 9A reference corpus; eliminate 8B branch case names, budgets and reference rebinding.",
+    "Five complete unfiltered common instances use the unchanged chart:synthetic observations and 64x64 full returned frame packets.",
+    "Exactly nine physical returns, with six active recordSource calls, two passive calls and one explicit suppressed acquisition; nested record wrappers never double the physical count.",
+    "Two primary cold source resets are interventions, separately repaired by actual historical native graph restorations; source put/get/restore calls are separately linked to committed facts.",
+    "Retain every native API argument/result, both complete snapshots, proposal/decision/authorization, public packet, full source state and actual complete graph.",
+    "SHA-addressed lossless gzip graphs share only identical raw JSON graphs; reader verifies gzip/raw bytes and every full graph delta, node, fragment, chain and execution digest.",
+    "Root frozen declaration and complete tool/source pins precede the first native runtime import; attempt01/02 and inherited accounting remain explicit, with no automatic retry.",
+    "Pure qualification creates no runtime/owner/game/oracle session; it compares all snapshot fields and the exact ordered 52 work forms, linking header, session ledger, footer and receipts.",
+    "No browser, public worker facade, service ticket, official solved level or performance measurement is qualified by this common tool."
+  ],
+  "derivations": [
+    {
+      "source": {
+        "path": "docs/migration/lot8b-evidence/tools/final-functional/branch-common-capture-v2.mjs",
+        "bytes": 32919,
+        "sha256": "2005fd55c998dea8409dc72b462031a605bd673a04727c513b7f0826e6d43120"
+      },
+      "target": {
+        "path": "docs/migration/lot9a-evidence/tools/delivery/chart-common/capture.mjs",
+        "bytes": 34753,
+        "sha256": "096311ef408c20f70061ca5d67ec97ccf779327091c5b8416e828521b6d2b9ac"
+      },
+      "basis": "Full common factory capture, owner instrumentation, session work forms and failed-attempt accounting",
+      "completeUnifiedDiff": {
+        "path": "docs/migration/lot9a-evidence/tools/delivery/chart-common/derivation-diffs/capture-vs-branch-common-capture-v2.diff",
+        "bytes": 68011,
+        "sha256": "2887f39d2c376e4218b9d6a4007db20b0be71373070a853d0651dc56ace68cb3"
+      },
+      "omittedChangedLines": false
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot8b-evidence/tools/public-boundary/capture-v2.mjs",
+        "bytes": 37495,
+        "sha256": "8031b380541207104d78a149c71abdef4556ce6d6aef8e4ce57d9cfe49df67d4"
+      },
+      "target": {
+        "path": "docs/migration/lot9a-evidence/tools/delivery/chart-common/capture.mjs",
+        "bytes": 34753,
+        "sha256": "096311ef408c20f70061ca5d67ec97ccf779327091c5b8416e828521b6d2b9ac"
+      },
+      "basis": "Complete lossless SHA-addressed graph blob encoding pattern; no public worker facade is reused",
+      "completeUnifiedDiff": {
+        "path": "docs/migration/lot9a-evidence/tools/delivery/chart-common/derivation-diffs/capture-vs-public-boundary-capture-v2.diff",
+        "bytes": 72955,
+        "sha256": "2ebf260cddbae7df5d643e161bb6fa55a82e2c88078f44ed29838cacbf2171da"
+      },
+      "omittedChangedLines": false
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot8b-evidence/tools/final-functional/branch-common-qualify-v2.mjs",
+        "bytes": 59211,
+        "sha256": "c896643777572d4628fbeab0c9819fd22fe0f02111008c5958204a632b4b428b"
+      },
+      "target": {
+        "path": "docs/migration/lot9a-evidence/tools/delivery/chart-common/qualify.mjs",
+        "bytes": 39886,
+        "sha256": "edc24c0c2896cb0497606810ba06bb58fbf815c9690ae0f2834126359eb4b638"
+      },
+      "basis": "Read-only graph delta reconstruction, typed state hydration, source-fact/restore linkage and work-form validation",
+      "completeUnifiedDiff": {
+        "path": "docs/migration/lot9a-evidence/tools/delivery/chart-common/derivation-diffs/qualify-vs-branch-common-qualify-v2.diff",
+        "bytes": 99643,
+        "sha256": "1289fff2d417e3eca25d11500f0cd2da940b60065ec25029bf9d8351ca63c393"
+      },
+      "omittedChangedLines": false
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot8b-evidence/tools/public-boundary/qualify-v2.mjs",
+        "bytes": 75842,
+        "sha256": "ea00321ca3f27500ce4405f908329c8bf205cb52193be3b054e9dcefba3da3a5"
+      },
+      "target": {
+        "path": "docs/migration/lot9a-evidence/tools/delivery/chart-common/qualify.mjs",
+        "bytes": 39886,
+        "sha256": "edc24c0c2896cb0497606810ba06bb58fbf815c9690ae0f2834126359eb4b638"
+      },
+      "basis": "Hash-addressed graph blob integrity and complete graph reader pattern; no public ticket claim",
+      "completeUnifiedDiff": {
+        "path": "docs/migration/lot9a-evidence/tools/delivery/chart-common/derivation-diffs/qualify-vs-public-boundary-qualify-v2.diff",
+        "bytes": 115937,
+        "sha256": "5a92771a30741475fc32fc8058c4519d3c2bec3b6209bc080b3da2b4e258da75"
+      },
+      "omittedChangedLines": false
+    }
+  ]
+}
