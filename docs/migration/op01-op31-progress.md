@@ -833,3 +833,41 @@ Le noyau C1 couvre maintenant réellement :
 - déduplication.
 
 Prochaine étape : brancher un cache d'opérations réel dans l'autorité pour démontrer `executed` vs `cache_reused` et invalidation précise, puis qualifier son coût.
+
+
+## C1 — cache réel et invalidation précise
+
+Ajout : `src/logos-engine/v6-operation-cache.ts`.
+
+Preuves fonctionnelles locales :
+- même identité exacte => `executed` puis `cache_reused` ;
+- nouvelle observation/révision => nouvelle exécution ;
+- cache borné avec éviction ;
+- garde de release revalidée même sur cache hit.
+
+Typecheck strict : **OK**.
+Suite complète : **24/24 tests passent**.
+
+Commit local :
+- `8754f91` — cache pur indexé par dépendances ;
+- `c401975` — suivi local.
+
+Sauvegardes GitHub :
+- `514688f2ed66d2dac6be65559f715e8e86269cba` — cache ;
+- `904e7828a42a664acc43356a79d1b08f47908ae2` — composition engine cache-aware ;
+- `ff711ac9f60c99ee41db6c89975a5409bea6e161` — native authority cache identity ;
+- `af4c2952989134bff67f12b1ac40fa17ffc11d7a` — tests cache.
+
+Micro-mesure isolée cache, 501 échantillons :
+- cache miss médian ~12,188 µs/release ;
+- cache hit médian ~8,743 µs/release.
+
+Cette mesure reste interne au noyau Logos. Elle ne remplace pas STCK/SMLP.
+
+### Statut C1
+
+Les preuves fonctionnelles ciblées C1 sont maintenant présentes sur le noyau Logos :
+besoin, appel, non-appel, blocage, cache hit, invalidation, consommation, restauration et déduplication.
+
+Statut performance officiel :
+**intégration fonctionnelle C1 terminée sur le noyau Logos, coût session complète à confirmer.**
