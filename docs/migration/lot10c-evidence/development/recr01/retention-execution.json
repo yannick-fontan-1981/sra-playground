@@ -1,0 +1,12 @@
+{
+  "schema": "logos-engine.lot10c.bounded-retention.v1",
+  "startedAt": "2026-11-11T17:53:04.539125+00:00",
+  "allowanceSeconds": 30.0,
+  "maximumAddressSpaceBytes": 2147483648,
+  "rawEvidencePreserved": true,
+  "termination": null,
+  "pid": 18,
+  "finishedAt": "2026-11-11T17:53:17.012998+00:00",
+  "elapsedSeconds": 12.473895286999323,
+  "exitCode": 0
+}

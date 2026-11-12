@@ -1,0 +1,7 @@
+{"name":"reject_passive_event_as_active","passed":true,"comparisonPassed":false,"exactParityPassed":false,"stop":null}
+{"name":"reject_active_event_as_passive","passed":true,"comparisonPassed":false,"exactParityPassed":false,"stop":null}
+{"name":"reject_selected_offer_same_action","passed":true,"comparisonPassed":false,"exactParityPassed":false,"stop":null}
+{"name":"reject_missing_return_animation_frame","passed":true,"comparisonPassed":false,"exactParityPassed":false,"stop":null}
+{"name":"qualify_refusal_without_exact_parity","passed":true,"comparisonPassed":true,"exactParityPassed":false,"stop":null}
+{"name":"reject_refusal_with_release_authority","passed":true,"comparisonPassed":false,"exactParityPassed":false,"stop":null}
+{"passed": true, "tests": 9, "output": "docs/migration/lot10c-evidence/development/parity-readers-attempt04-binding/results", "originalsVerifiedBeforeAndAfter": 1786, "consumedOriginalHashes": 726}

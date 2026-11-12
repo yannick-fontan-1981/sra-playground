@@ -1,0 +1,54 @@
+{
+  "schema": "logos-engine.lot10c.recovery-storage-review.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-11T21:25:53.259050+00:00",
+  "mainDeliveryIntegrity": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/delivery-integrity.json",
+    "sha256": "0585bd80041ffed160f2adf81dcb8d89e6aeaafb6ff60c60ec13d918f9cd4283",
+    "bytes": 11665
+  },
+  "separateKataStorage": {
+    "reports": 1,
+    "parts": 11,
+    "bytes": 9774240,
+    "originalsAbsentBeforeRestore": true,
+    "temporaryRootRemoved": true,
+    "originalsUnchanged": true,
+    "restoredByteIdentical": [
+      {
+        "path": "docs/migration/lot10c-evidence/recovery-20261111/kata-supplement/replay01/regressions/kata-060-self-consistency-replay.json.gz",
+        "sha256": "76f120865e3210ed160b41b9635e53323f16c6439d1890896485e9fa2f18e298",
+        "bytes": 9774240,
+        "manifest": "docs/migration/lot10c-evidence/recovery-20261111/kata-supplement/replay01/regressions/kata-060-self-consistency-replay.json.gz.parts.json",
+        "parts": 11,
+        "restored": true,
+        "byteIdentical": true
+      }
+    ]
+  },
+  "frozenSourceArchives": [
+    {
+      "directory": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional01",
+      "archive": {
+        "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional01/source-archive.tar.gz",
+        "sha256": "8646a5a715ffc5de3c822241d0a49bb78de56854f11685f38a622d19d3291012",
+        "bytes": 4597355
+      },
+      "parts": 6,
+      "byteIdentical": true
+    },
+    {
+      "directory": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02",
+      "archive": {
+        "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/source-archive.tar.gz",
+        "sha256": "8646a5a715ffc5de3c822241d0a49bb78de56854f11685f38a622d19d3291012",
+        "bytes": 4597355
+      },
+      "parts": 6,
+      "byteIdentical": true
+    }
+  ],
+  "globalLockAcquired": false,
+  "originalsDeleted": false,
+  "qualification": "Main10 report reconstruction is recorded by unchanged native delivery verifier. KATA is independently restored from exact retained parts in an empty temporary directory and compared byte for byte. Both frozen archives retain their exact six ordered parts. Working originals remain present; exact ignore entries avoid duplicate transport."
+}

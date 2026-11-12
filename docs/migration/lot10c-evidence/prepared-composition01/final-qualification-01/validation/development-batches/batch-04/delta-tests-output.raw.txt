@@ -1,0 +1,3413 @@
+TAP version 13
+# Subtest: the exact acquired candidate replaces an earlier unacquired offer, retaining the real source cursor separately
+ok 1 - the exact acquired candidate replaces an earlier unacquired offer, retaining the real source cursor separately
+  ---
+  duration_ms: 1257.980069
+  type: 'test'
+  ...
+# Subtest: a cold caller without an acquired success keeps the ordinary exploration
+ok 2 - a cold caller without an acquired success keeps the ordinary exploration
+  ---
+  duration_ms: 866.871081
+  type: 'test'
+  ...
+# Subtest: two owners with the same entry name cannot share or substitute their cached proposals
+ok 3 - two owners with the same entry name cannot share or substitute their cached proposals
+  ---
+  duration_ms: 816.978369
+  type: 'test'
+  ...
+# Subtest: a runtime without the native common caller keeps source order even when hooks exist
+ok 4 - a runtime without the native common caller keeps source order even when hooks exist
+  ---
+  duration_ms: 20.613726
+  type: 'test'
+  ...
+# Subtest: source exploration retains priority with missing attestation
+ok 5 - source exploration retains priority with missing attestation
+  ---
+  duration_ms: 669.201897
+  type: 'test'
+  ...
+# Subtest: source exploration retains priority with wrong status
+ok 6 - source exploration retains priority with wrong status
+  ---
+  duration_ms: 783.353782
+  type: 'test'
+  ...
+# Subtest: source exploration retains priority with old observation
+ok 7 - source exploration retains priority with old observation
+  ---
+  duration_ms: 639.099755
+  type: 'test'
+  ...
+# Subtest: source exploration retains priority with any acquired event evidence
+ok 8 - source exploration retains priority with any acquired event evidence
+  ---
+  duration_ms: 795.611797
+  type: 'test'
+  ...
+# Subtest: source exploration retains priority with missing evidence array
+ok 9 - source exploration retains priority with missing evidence array
+  ---
+  duration_ms: 668.857821
+  type: 'test'
+  ...
+# Subtest: retained continuation preflight refuses missing success
+ok 10 - retained continuation preflight refuses missing success
+  ---
+  duration_ms: 805.121405
+  type: 'test'
+  ...
+# Subtest: retained continuation preflight refuses unqualified status
+ok 11 - retained continuation preflight refuses unqualified status
+  ---
+  duration_ms: 939.752593
+  type: 'test'
+  ...
+# Subtest: retained continuation preflight refuses old observation
+ok 12 - retained continuation preflight refuses old observation
+  ---
+  duration_ms: 894.326278
+  type: 'test'
+  ...
+# Subtest: retained continuation preflight refuses old score
+ok 13 - retained continuation preflight refuses old score
+  ---
+  duration_ms: 762.513744
+  type: 'test'
+  ...
+# Subtest: retained continuation preflight refuses missing success reference
+ok 14 - retained continuation preflight refuses missing success reference
+  ---
+  duration_ms: 744.78449
+  type: 'test'
+  ...
+# Subtest: retained continuation preflight refuses success without evidence
+ok 15 - retained continuation preflight refuses success without evidence
+  ---
+  duration_ms: 830.361139
+  type: 'test'
+  ...
+# Subtest: retained continuation preflight refuses unrelated evidence
+ok 16 - retained continuation preflight refuses unrelated evidence
+  ---
+  duration_ms: 613.135538
+  type: 'test'
+  ...
+# Subtest: retained continuation preflight refuses invented but internally consistent success reference
+ok 17 - retained continuation preflight refuses invented but internally consistent success reference
+  ---
+  duration_ms: 762.356522
+  type: 'test'
+  ...
+# Subtest: fresh continuation validation refuses missing current attestation
+ok 18 - fresh continuation validation refuses missing current attestation
+  ---
+  duration_ms: 789.53617
+  type: 'test'
+  ...
+# Subtest: fresh continuation validation refuses wrong current status
+ok 19 - fresh continuation validation refuses wrong current status
+  ---
+  duration_ms: 752.686135
+  type: 'test'
+  ...
+# Subtest: fresh continuation validation refuses old current observation
+ok 20 - fresh continuation validation refuses old current observation
+  ---
+  duration_ms: 752.571343
+  type: 'test'
+  ...
+# Subtest: fresh continuation validation refuses old current score
+ok 21 - fresh continuation validation refuses old current score
+  ---
+  duration_ms: 704.135171
+  type: 'test'
+  ...
+# Subtest: fresh continuation validation refuses missing current evidence
+ok 22 - fresh continuation validation refuses missing current evidence
+  ---
+  duration_ms: 652.223272
+  type: 'test'
+  ...
+# Subtest: fresh continuation validation refuses different success from preflight
+ok 23 - fresh continuation validation refuses different success from preflight
+  ---
+  duration_ms: 629.288529
+  type: 'test'
+  ...
+# Subtest: coordination is opt-in and refuses an absent unacquiredInquiryWitness
+ok 24 - coordination is opt-in and refuses an absent unacquiredInquiryWitness
+  ---
+  duration_ms: 716.341882
+  type: 'test'
+  ...
+# Subtest: coordination is opt-in and refuses an absent retainedSuccessWitness
+ok 25 - coordination is opt-in and refuses an absent retainedSuccessWitness
+  ---
+  duration_ms: 798.277705
+  type: 'test'
+  ...
+# Subtest: coordination is opt-in and refuses an absent acquiredContinuationWitness
+ok 26 - coordination is opt-in and refuses an absent acquiredContinuationWitness
+  ---
+  duration_ms: 770.473463
+  type: 'test'
+  ...
+# Subtest: the current proposal and guard reject no candidate
+ok 27 - the current proposal and guard reject no candidate
+  ---
+  duration_ms: 713.197938
+  type: 'test'
+  ...
+# Subtest: the current proposal and guard reject source refusal
+ok 28 - the current proposal and guard reject source refusal
+  ---
+  duration_ms: 764.898735
+  type: 'test'
+  ...
+# Subtest: the current proposal and guard reject empty physical prefix
+ok 29 - the current proposal and guard reject empty physical prefix
+  ---
+  duration_ms: 729.722477
+  type: 'test'
+  ...
+# Subtest: the current proposal and guard reject another kind on the same owner
+ok 30 - the current proposal and guard reject another kind on the same owner
+  ---
+  duration_ms: 718.814921
+  type: 'test'
+  ...
+# Subtest: the current proposal and guard reject old epoch binding
+ok 31 - the current proposal and guard reject old epoch binding
+  ---
+  duration_ms: 644.74144
+  type: 'test'
+  ...
+# Subtest: the current proposal and guard reject old observation binding
+ok 32 - the current proposal and guard reject old observation binding
+  ---
+  duration_ms: 748.872172
+  type: 'test'
+  ...
+# Subtest: the current proposal and guard reject old score binding
+ok 33 - the current proposal and guard reject old score binding
+  ---
+  duration_ms: 1048.152037
+  type: 'test'
+  ...
+# Subtest: the current proposal and guard reject unavailable input
+ok 34 - the current proposal and guard reject unavailable input
+  ---
+  duration_ms: 696.615089
+  type: 'test'
+  ...
+# Subtest: an epoch change without a public score increase cannot corroborate a forged success preflight
+ok 35 - an epoch change without a public score increase cannot corroborate a forged success preflight
+  ---
+  duration_ms: 736.302231
+  type: 'test'
+  ...
+# Subtest: a real public score increase is sufficient even when the level epoch does not change
+ok 36 - a real public score increase is sufficient even when the level epoch does not change
+  ---
+  duration_ms: 1319.281715
+  type: 'test'
+  ...
+# Subtest: a single provider without explicit group entries retains its proposal subquestion identity
+ok 37 - a single provider without explicit group entries retains its proposal subquestion identity
+  ---
+  duration_ms: 717.791537
+  type: 'test'
+  ...
+# Subtest: a shared owner cannot lend a successful entry to another entry before proposing it
+ok 38 - a shared owner cannot lend a successful entry to another entry before proposing it
+  ---
+  duration_ms: 702.100038
+  type: 'test'
+  ...
+# Subtest: proposal provenance preserves Float64 values and distinguishes negative zero through the native codec
+ok 39 - proposal provenance preserves Float64 values and distinguishes negative zero through the native codec
+  ---
+  duration_ms: 931.372827
+  type: 'test'
+  ...
+# Subtest: a current guard veto leaves the exploration available and acquires nothing
+ok 40 - a current guard veto leaves the exploration available and acquires nothing
+  ---
+  duration_ms: 681.245754
+  type: 'test'
+  ...
+# Subtest: a later normal before-action guard still vetoes an already preferred candidate
+ok 41 - a later normal before-action guard still vetoes an already preferred candidate
+  ---
+  duration_ms: 588.122331
+  type: 'test'
+  ...
+# Subtest: a disabled acquired provider is never proposed for arbitration
+ok 42 - a disabled acquired provider is never proposed for arbitration
+  ---
+  duration_ms: 1077.453786
+  type: 'test'
+  ...
+# Subtest: an already selected hard refusal is not weakened by acquired-continuation arbitration
+ok 43 - an already selected hard refusal is not weakened by acquired-continuation arbitration
+  ---
+  duration_ms: 664.035191
+  type: 'test'
+  ...
+# Subtest: WHY/ACT can refuse the preferred candidate through its real edited SRC node
+ok 44 - WHY/ACT can refuse the preferred candidate through its real edited SRC node
+  ---
+  duration_ms: 665.791664
+  type: 'test'
+  ...
+# Subtest: a caller preservation veto remains effective after native priority
+ok 45 - a caller preservation veto remains effective after native priority
+  ---
+  duration_ms: 623.018622
+  type: 'test'
+  ...
+# Subtest: a measured preservation obligation rejects a preferred revision input on both selection attempts
+ok 46 - a measured preservation obligation rejects a preferred revision input on both selection attempts
+  ---
+  duration_ms: 1006.546446
+  type: 'test'
+  ...
+# Subtest: exhausting the active budget during continuation search releases no action
+ok 47 - exhausting the active budget during continuation search releases no action
+  ---
+  duration_ms: 698.009278
+  type: 'test'
+  ...
+# Subtest: cancellation during lookahead cannot release or acquire a candidate
+ok 48 - cancellation during lookahead cannot release or acquire a candidate
+  ---
+  duration_ms: 691.065045
+  type: 'test'
+  ...
+# Subtest: pair planning oracle identifies unchanged originals and keeps ancestral fallbacks explicit
+ok 49 - pair planning oracle identifies unchanged originals and keeps ancestral fallbacks explicit
+  ---
+  duration_ms: 26.422178
+  type: 'test'
+  ...
+# Subtest: complete common envelope learns the controls before planning: small
+ok 50 - complete common envelope learns the controls before planning: small
+  ---
+  duration_ms: 108.664031
+  type: 'test'
+  ...
+# Subtest: complete common envelope learns the controls before planning: long
+ok 51 - complete common envelope learns the controls before planning: long
+  ---
+  duration_ms: 183.568356
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: learned_cardinal_controls_produce_a_real_route
+ok 52 - original pair proposal contract: learned_cardinal_controls_produce_a_real_route
+  ---
+  duration_ms: 6.709734
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: long_route_keeps_21_steps_behind_a_16_action_prefix
+ok 53 - original pair proposal contract: long_route_keeps_21_steps_behind_a_16_action_prefix
+  ---
+  duration_ms: 7.907566
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: one_action_prefix_keeps_the_complete_route
+ok 54 - original pair proposal contract: one_action_prefix_keeps_the_complete_route
+  ---
+  duration_ms: 5.213823
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: large_prefix_does_not_extend_route
+ok 55 - original pair proposal contract: large_prefix_does_not_extend_route
+  ---
+  duration_ms: 7.896598
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: remaining_route_budget_is_separate_from_prefix
+ok 56 - original pair proposal contract: remaining_route_budget_is_separate_from_prefix
+  ---
+  duration_ms: 4.500234
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: remaining_route_budget_at_exact_distance
+ok 57 - original pair proposal contract: remaining_route_budget_at_exact_distance
+  ---
+  duration_ms: 4.978196
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: no_pair_state
+ok 58 - original pair proposal contract: no_pair_state
+  ---
+  duration_ms: 2.16956
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: missing_configuration
+ok 59 - original pair proposal contract: missing_configuration
+  ---
+  duration_ms: 5.140321
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: empty_configuration
+ok 60 - original pair proposal contract: empty_configuration
+  ---
+  duration_ms: 5.426184
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: no_prefix_budget
+ok 61 - original pair proposal contract: no_prefix_budget
+  ---
+  duration_ms: 5.506996
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: negative_prefix_budget
+ok 62 - original pair proposal contract: negative_prefix_budget
+  ---
+  duration_ms: 4.245889
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: old_epoch_is_not_a_current_pair
+ok 63 - original pair proposal contract: old_epoch_is_not_a_current_pair
+  ---
+  duration_ms: 4.747107
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: unavailable_horizontal_control_is_not_reused
+ok 64 - original pair proposal contract: unavailable_horizontal_control_is_not_reused
+  ---
+  duration_ms: 4.898406
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: unavailable_vertical_control_is_not_required_for_this_route
+ok 65 - original pair proposal contract: unavailable_vertical_control_is_not_required_for_this_route
+  ---
+  duration_ms: 13.485188
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: current_member_missing_does_not_match_retained_pair
+ok 66 - original pair proposal contract: current_member_missing_does_not_match_retained_pair
+  ---
+  duration_ms: 6.694531
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: current_member_palette_does_not_match_retained_pair
+ok 67 - original pair proposal contract: current_member_palette_does_not_match_retained_pair
+  ---
+  duration_ms: 5.835663
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: current_member_size_does_not_match_retained_pair
+ok 68 - original pair proposal contract: current_member_size_does_not_match_retained_pair
+  ---
+  duration_ms: 7.385156
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: current_member_moved_does_not_match_retained_pair
+ok 69 - original pair proposal contract: current_member_moved_does_not_match_retained_pair
+  ---
+  duration_ms: 6.756144
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: no_sign_row
+ok 70 - original pair proposal contract: no_sign_row
+  ---
+  duration_ms: 5.195765
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: no_sign_column
+ok 71 - original pair proposal contract: no_sign_column
+  ---
+  duration_ms: 6.909457
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: ambiguous_sign_row
+ok 72 - original pair proposal contract: ambiguous_sign_row
+  ---
+  duration_ms: 8.708006
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: ambiguous_sign_column
+ok 73 - original pair proposal contract: ambiguous_sign_column
+  ---
+  duration_ms: 5.467707
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: ambiguous_translation
+ok 74 - original pair proposal contract: ambiguous_translation
+  ---
+  duration_ms: 5.247694
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: non_pitch_translation
+ok 75 - original pair proposal contract: non_pitch_translation
+  ---
+  duration_ms: 5.276517
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: no_floor
+ok 76 - original pair proposal contract: no_floor
+  ---
+  duration_ms: 5.783724
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: unknown_floor
+ok 77 - original pair proposal contract: unknown_floor
+  ---
+  duration_ms: 5.817175
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: zero_effect
+ok 78 - original pair proposal contract: zero_effect
+  ---
+  duration_ms: 5.496811
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: one_sided_sample
+ok 79 - original pair proposal contract: one_sided_sample
+  ---
+  duration_ms: 5.871598
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: unequal_magnitudes
+ok 80 - original pair proposal contract: unequal_magnitudes
+  ---
+  duration_ms: 5.863956
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: unique_but_unsupported_sign
+ok 81 - original pair proposal contract: unique_but_unsupported_sign
+  ---
+  duration_ms: 9.340722
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: exact_refused_trial_is_not_proposed_again
+ok 82 - original pair proposal contract: exact_refused_trial_is_not_proposed_again
+  ---
+  duration_ms: 6.536143
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: a_different_refused_trial_does_not_block_this_one
+ok 83 - original pair proposal contract: a_different_refused_trial_does_not_block_this_one
+  ---
+  duration_ms: 5.459434
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: one_step_trial_differs_from_the_refused_two_step_trial
+ok 84 - original pair proposal contract: one_step_trial_differs_from_the_refused_two_step_trial
+  ---
+  duration_ms: 4.976344
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: refuted_projection_blocks_unrelated_probe
+ok 85 - original pair proposal contract: refuted_projection_blocks_unrelated_probe
+  ---
+  duration_ms: 5.291821
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: unresolved_blocks_before_current_pair_measurement
+ok 86 - original pair proposal contract: unresolved_blocks_before_current_pair_measurement
+  ---
+  duration_ms: 7.66209
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: old_unresolved_state_does_not_block_new_epoch
+ok 87 - original pair proposal contract: old_unresolved_state_does_not_block_new_epoch
+  ---
+  duration_ms: 6.828425
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: unresolved_still_requires_enabled_question
+ok 88 - original pair proposal contract: unresolved_still_requires_enabled_question
+  ---
+  duration_ms: 6.34295
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: unresolved_still_requires_prefix_budget
+ok 89 - original pair proposal contract: unresolved_still_requires_prefix_budget
+  ---
+  duration_ms: 12.429733
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: plan_retains_only_the_last_24_evidence_references
+ok 90 - original pair proposal contract: plan_retains_only_the_last_24_evidence_references
+  ---
+  duration_ms: 18.748216
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: common_adapter_adds_expected_before_and_source_subquestion
+ok 91 - original pair proposal contract: common_adapter_adds_expected_before_and_source_subquestion
+  ---
+  duration_ms: 7.34849
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: common_adapter_limits_long_prefix_to_16
+ok 92 - original pair proposal contract: common_adapter_limits_long_prefix_to_16
+  ---
+  duration_ms: 12.584106
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: common_remaining_shorter_than_whole_route
+ok 93 - original pair proposal contract: common_remaining_shorter_than_whole_route
+  ---
+  duration_ms: 17.56713
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: common_remaining_equal_to_whole_route
+ok 94 - original pair proposal contract: common_remaining_equal_to_whole_route
+  ---
+  duration_ms: 12.204843
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: common_zero_remaining_precedes_missing_deadline
+ok 95 - original pair proposal contract: common_zero_remaining_precedes_missing_deadline
+  ---
+  duration_ms: 7.510715
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: common_negative_remaining_precedes_missing_deadline
+ok 96 - original pair proposal contract: common_negative_remaining_precedes_missing_deadline
+  ---
+  duration_ms: 6.373946
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: common_positive_budget_requires_current_deadline
+ok 97 - original pair proposal contract: common_positive_budget_requires_current_deadline
+  ---
+  duration_ms: 6.742645
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: common_absent_pair_yields_no_candidate
+ok 98 - original pair proposal contract: common_absent_pair_yields_no_candidate
+  ---
+  duration_ms: 3.153819
+  type: 'test'
+  ...
+# Subtest: original pair proposal contract: common_preserves_causal_block_without_annotation
+ok 99 - original pair proposal contract: common_preserves_causal_block_without_annotation
+  ---
+  duration_ms: 10.862172
+  type: 'test'
+  ...
+# Subtest: original coupled before guard: first_bound_members_and_command_are_admitted
+ok 100 - original coupled before guard: first_bound_members_and_command_are_admitted
+  ---
+  duration_ms: 5.828192
+  type: 'test'
+  ...
+# Subtest: original coupled before guard: first_changed_epoch
+ok 101 - original coupled before guard: first_changed_epoch
+  ---
+  duration_ms: 4.870153
+  type: 'test'
+  ...
+# Subtest: original coupled before guard: first_changed_score
+ok 102 - original coupled before guard: first_changed_score
+  ---
+  duration_ms: 9.595488
+  type: 'test'
+  ...
+# Subtest: original coupled before guard: first_changed_observation_ref
+ok 103 - original coupled before guard: first_changed_observation_ref
+  ---
+  duration_ms: 6.098821
+  type: 'test'
+  ...
+# Subtest: original coupled before guard: first_changed_available
+ok 104 - original coupled before guard: first_changed_available
+  ---
+  duration_ms: 4.786707
+  type: 'test'
+  ...
+# Subtest: original coupled before guard: first_missing_member
+ok 105 - original coupled before guard: first_missing_member
+  ---
+  duration_ms: 4.784228
+  type: 'test'
+  ...
+# Subtest: original coupled before guard: first_changed_frame_even_outside_members
+ok 106 - original coupled before guard: first_changed_frame_even_outside_members
+  ---
+  duration_ms: 4.911776
+  type: 'test'
+  ...
+# Subtest: original coupled before guard: first_actions_must_equal_retained_commands
+ok 107 - original coupled before guard: first_actions_must_equal_retained_commands
+  ---
+  duration_ms: 4.116589
+  type: 'test'
+  ...
+# Subtest: original coupled before guard: first_bundle_must_equal_actions
+ok 108 - original coupled before guard: first_bundle_must_equal_actions
+  ---
+  duration_ms: 3.753424
+  type: 'test'
+  ...
+# Subtest: original coupled before guard: first_discrete_empty_payload_still_changes_full_command
+ok 109 - original coupled before guard: first_discrete_empty_payload_still_changes_full_command
+  ---
+  duration_ms: 3.485951
+  type: 'test'
+  ...
+# Subtest: original coupled before guard: first_discrete_nonempty_payload_changes_full_command
+ok 110 - original coupled before guard: first_discrete_nonempty_payload_changes_full_command
+  ---
+  duration_ms: 4.363327
+  type: 'test'
+  ...
+# Subtest: original coupled before guard: later_current_members_admit_the_remaining_command
+ok 111 - original coupled before guard: later_current_members_admit_the_remaining_command
+  ---
+  duration_ms: 4.106969
+  type: 'test'
+  ...
+# Subtest: original coupled before guard: later_reference_may_change
+ok 112 - original coupled before guard: later_reference_may_change
+  ---
+  duration_ms: 3.905104
+  type: 'test'
+  ...
+# Subtest: original coupled before guard: later_before_guard_only_binds_members_not_initial_frame
+ok 113 - original coupled before guard: later_before_guard_only_binds_members_not_initial_frame
+  ---
+  duration_ms: 3.898094
+  type: 'test'
+  ...
+# Subtest: original coupled before guard: later_member_disappearance_is_rejected
+ok 114 - original coupled before guard: later_member_disappearance_is_rejected
+  ---
+  duration_ms: 4.026829
+  type: 'test'
+  ...
+# Subtest: original coupled before guard: later_epoch_still_bound
+ok 115 - original coupled before guard: later_epoch_still_bound
+  ---
+  duration_ms: 10.209896
+  type: 'test'
+  ...
+# Subtest: original coupled before guard: later_score_still_bound
+ok 116 - original coupled before guard: later_score_still_bound
+  ---
+  duration_ms: 3.809179
+  type: 'test'
+  ...
+# Subtest: original coupled before guard: later_command_availability_still_bound
+ok 117 - original coupled before guard: later_command_availability_still_bound
+  ---
+  duration_ms: 4.865637
+  type: 'test'
+  ...
+# Subtest: original common coupled binder: unchanged_discrete_proposal
+ok 118 - original common coupled binder: unchanged_discrete_proposal
+  ---
+  duration_ms: 5.585264
+  type: 'test'
+  ...
+# Subtest: original common coupled binder: empty_discrete_payload_is_allowed_by_binder
+ok 119 - original common coupled binder: empty_discrete_payload_is_allowed_by_binder
+  ---
+  duration_ms: 4.863533
+  type: 'test'
+  ...
+# Subtest: original common coupled binder: nonempty_discrete_payload_is_rejected_by_binder
+ok 120 - original common coupled binder: nonempty_discrete_payload_is_rejected_by_binder
+  ---
+  duration_ms: 4.525903
+  type: 'test'
+  ...
+# Subtest: original common coupled binder: current_point_support_is_copied_to_binding
+ok 121 - original common coupled binder: current_point_support_is_copied_to_binding
+  ---
+  duration_ms: 5.975855
+  type: 'test'
+  ...
+# Subtest: original common coupled binder: changed_current_point_is_rejected
+ok 122 - original common coupled binder: changed_current_point_is_rejected
+  ---
+  duration_ms: 5.695881
+  type: 'test'
+  ...
+# Subtest: one shared family selects coupled planning in goal_access and occurrence recall in window_constraints
+ok 123 - one shared family selects coupled planning in goal_access and occurrence recall in window_constraints
+  ---
+  duration_ms: 152.53421
+  type: 'test'
+  ...
+# Subtest: observed, coupled and graph source entries share one retained public_occurrence_recall owner
+ok 124 - observed, coupled and graph source entries share one retained public_occurrence_recall owner
+  ---
+  duration_ms: 112.425042
+  type: 'test'
+  ...
+# Subtest: real common SRC caller stops on causal pair refusal before window recall or unrelated probing
+ok 125 - real common SRC caller stops on causal pair refusal before window recall or unrelated probing
+  ---
+  duration_ms: 1187.454323
+  type: 'test'
+  ...
+# Subtest: real common SRC caller releases the measured pair action through the same family and WHY/ACT
+ok 126 - real common SRC caller releases the measured pair action through the same family and WHY/ACT
+  ---
+  duration_ms: 905.598099
+  type: 'test'
+  ...
+# Subtest: cold public recall acquisition defers the seventh unlearned invitation through the ordinary window order
+ok 127 - cold public recall acquisition defers the seventh unlearned invitation through the ordinary window order
+  ---
+  duration_ms: 12814.761449
+  type: 'test'
+  ...
+# Subtest: the same current raster without acquired recall evidence retains invitation priority
+ok 128 - the same current raster without acquired recall evidence retains invitation priority
+  ---
+  duration_ms: 1102.60444
+  type: 'test'
+  ...
+# Subtest: a veto by the current recall guard preserves the unlearned invitation and acquires nothing
+ok 129 - a veto by the current recall guard preserves the unlearned invitation and acquires nothing
+  ---
+  duration_ms: 9745.708015
+  type: 'test'
+  ...
+# Subtest: an earlier unlearned window proposal cannot borrow priority from the later learned recall
+ok 130 - an earlier unlearned window proposal cannot borrow priority from the later learned recall
+  ---
+  duration_ms: 11115.882112
+  type: 'test'
+  ...
+# Subtest: recall proof is derived from qualified retained models, including the exclusion of refuted rivals
+ok 131 - recall proof is derived from qualified retained models, including the exclusion of refuted rivals
+  ---
+  duration_ms: 103.101627
+  type: 'test'
+  ...
+# Subtest: retained recall priority refuses no retained models
+ok 132 - retained recall priority refuses no retained models
+  ---
+  duration_ms: 82.811574
+  type: 'test'
+  ...
+# Subtest: retained recall priority refuses threshold not reached
+ok 133 - retained recall priority refuses threshold not reached
+  ---
+  duration_ms: 60.366596
+  type: 'test'
+  ...
+# Subtest: retained recall priority refuses counts without acquired evidence
+ok 134 - retained recall priority refuses counts without acquired evidence
+  ---
+  duration_ms: 57.695059
+  type: 'test'
+  ...
+# Subtest: retained recall priority refuses counterexamples on every supported hypothesis
+ok 135 - retained recall priority refuses counterexamples on every supported hypothesis
+  ---
+  duration_ms: 70.332587
+  type: 'test'
+  ...
+# Subtest: retained recall priority refuses old memory epoch
+ok 136 - retained recall priority refuses old memory epoch
+  ---
+  duration_ms: 75.839023
+  type: 'test'
+  ...
+# Subtest: retained recall priority refuses missing active antecedent
+ok 137 - retained recall priority refuses missing active antecedent
+  ---
+  duration_ms: 76.153398
+  type: 'test'
+  ...
+# Subtest: retained recall priority refuses a changed proposal observation
+ok 138 - retained recall priority refuses a changed proposal observation
+  ---
+  duration_ms: 85.221506
+  type: 'test'
+  ...
+# Subtest: retained recall priority refuses a changed proposal epoch
+ok 139 - retained recall priority refuses a changed proposal epoch
+  ---
+  duration_ms: 69.596379
+  type: 'test'
+  ...
+# Subtest: retained recall priority refuses a changed antecedent
+ok 140 - retained recall priority refuses a changed antecedent
+  ---
+  duration_ms: 69.72271
+  type: 'test'
+  ...
+# Subtest: retained recall priority refuses a changed source policy
+ok 141 - retained recall priority refuses a changed source policy
+  ---
+  duration_ms: 63.262948
+  type: 'test'
+  ...
+# Subtest: retained recall priority refuses a changed selected occurrence
+ok 142 - retained recall priority refuses a changed selected occurrence
+  ---
+  duration_ms: 69.479451
+  type: 'test'
+  ...
+# Subtest: retained recall priority refuses a changed supporting model list
+ok 143 - retained recall priority refuses a changed supporting model list
+  ---
+  duration_ms: 65.662068
+  type: 'test'
+  ...
+# Subtest: retained recall priority refuses a changed emphasis instead of retained correspondence
+ok 144 - retained recall priority refuses a changed emphasis instead of retained correspondence
+  ---
+  duration_ms: 56.651772
+  type: 'test'
+  ...
+# Subtest: a competing qualified current prediction vetoes priority even if proposal diagnostics claim agreement
+ok 145 - a competing qualified current prediction vetoes priority even if proposal diagnostics claim agreement
+  ---
+  duration_ms: 72.693194
+  type: 'test'
+  ...
+# Subtest: learned occurrence priority is independent of palette names, horizontal position and session identity
+ok 146 - learned occurrence priority is independent of palette names, horizontal position and session identity
+  ---
+  duration_ms: 85.190409
+  type: 'test'
+  ...
+# Subtest: a real restored transient invitation releases a current measured material question through normal authorization
+ok 147 - a real restored transient invitation releases a current measured material question through normal authorization
+  ---
+  duration_ms: 3610.65807
+  type: 'test'
+  ...
+# Subtest: controlled public boundary changes do not receive restored-transient recovery
+    # Subtest: changed final raster
+    ok 1 - changed final raster
+      ---
+      duration_ms: 2623.658354
+      type: 'test'
+      ...
+    # Subtest: changed action domain
+    ok 2 - changed action domain
+      ---
+      duration_ms: 2937.208083
+      type: 'test'
+      ...
+    # Subtest: changed epoch
+    ok 3 - changed epoch
+      ---
+      duration_ms: 2225.762189
+      type: 'test'
+      ...
+    # Subtest: official score increase
+    ok 4 - official score increase
+      ---
+      duration_ms: 2772.42797
+      type: 'test'
+      ...
+    # Subtest: terminal public state
+    ok 5 - terminal public state
+      ---
+      duration_ms: 2215.479707
+      type: 'test'
+      ...
+    # Subtest: packet ends before displayed restoration
+    ok 6 - packet ends before displayed restoration
+      ---
+      duration_ms: 2273.682179
+      type: 'test'
+      ...
+    1..6
+ok 148 - controlled public boundary changes do not receive restored-transient recovery
+  ---
+  duration_ms: 15050.780683
+  type: 'test'
+  ...
+# Subtest: the complete returned packet distinguishes a stationary return, a transient restoration and an incomplete report
+ok 149 - the complete returned packet distinguishes a stationary return, a transient restoration and an incomplete report
+  ---
+  duration_ms: 46.229105
+  type: 'test'
+  ...
+# Subtest: a restored contact refusal remains local, acquired, corroborated and subject to current evidence
+    # Subtest: missing or stationary scope cannot use the transient rule
+    ok 1 - missing or stationary scope cannot use the transient rule
+      ---
+      duration_ms: 0.850115
+      type: 'test'
+      ...
+    # Subtest: scope refuses old epoch
+    ok 2 - scope refuses old epoch
+      ---
+      duration_ms: 0.867841
+      type: 'test'
+      ...
+    # Subtest: scope refuses other score
+    ok 3 - scope refuses other score
+      ---
+      duration_ms: 0.790274
+      type: 'test'
+      ...
+    # Subtest: scope refuses other public state
+    ok 4 - scope refuses other public state
+      ---
+      duration_ms: 0.796133
+      type: 'test'
+      ...
+    # Subtest: scope refuses other input domain
+    ok 5 - scope refuses other input domain
+      ---
+      duration_ms: 0.980241
+      type: 'test'
+      ...
+    # Subtest: scope refuses other contact evidence
+    ok 6 - scope refuses other contact evidence
+      ---
+      duration_ms: 0.933841
+      type: 'test'
+      ...
+    # Subtest: scope refuses other contact point
+    ok 7 - scope refuses other contact point
+      ---
+      duration_ms: 0.859739
+      type: 'test'
+      ...
+    # Subtest: scope refuses other final image
+    ok 8 - scope refuses other final image
+      ---
+      duration_ms: 0.992269
+      type: 'test'
+      ...
+    # Subtest: scope refuses other starting image digest
+    ok 9 - scope refuses other starting image digest
+      ---
+      duration_ms: 10.430088
+      type: 'test'
+      ...
+    # Subtest: scope refuses missing public return
+    ok 10 - scope refuses missing public return
+      ---
+      duration_ms: 0.933931
+      type: 'test'
+      ...
+    # Subtest: scope refuses missing transition
+    ok 11 - scope refuses missing transition
+      ---
+      duration_ms: 10.141823
+      type: 'test'
+      ...
+    # Subtest: scope refuses unaccounted returned frame
+    ok 12 - scope refuses unaccounted returned frame
+      ---
+      duration_ms: 13.998219
+      type: 'test'
+      ...
+    # Subtest: scope refuses unaccounted returned digest
+    ok 13 - scope refuses unaccounted returned digest
+      ---
+      duration_ms: 11.251339
+      type: 'test'
+      ...
+    # Subtest: scope refuses suppressed transient pixel
+    ok 14 - scope refuses suppressed transient pixel
+      ---
+      duration_ms: 9.891626
+      type: 'test'
+      ...
+    # Subtest: scope refuses altered retained public return
+    ok 15 - scope refuses altered retained public return
+      ---
+      duration_ms: 10.703381
+      type: 'test'
+      ...
+    # Subtest: scope refuses malformed retained public packet
+    ok 16 - scope refuses malformed retained public packet
+      ---
+      duration_ms: 3.161436
+      type: 'test'
+      ...
+    # Subtest: scope refuses falsified returned protocol
+    ok 17 - scope refuses falsified returned protocol
+      ---
+      duration_ms: 11.961273
+      type: 'test'
+      ...
+    # Subtest: transition provenance is corroborated independently of the scope summary
+    ok 18 - transition provenance is corroborated independently of the scope summary
+      ---
+      duration_ms: 20.861239
+      type: 'test'
+      ...
+    # Subtest: an acquired contact model, later evidence or a non-invitation retains its refusal
+    ok 19 - an acquired contact model, later evidence or a non-invitation retains its refusal
+      ---
+      duration_ms: 0.880861
+      type: 'test'
+      ...
+    # Subtest: the current material guard can veto recovery
+    ok 20 - the current material guard can veto recovery
+      ---
+      duration_ms: 47.75475
+      type: 'test'
+      ...
+    # Subtest: a cold witness must be disjoint from all transient pixels and the original point
+    ok 21 - a cold witness must be disjoint from all transient pixels and the original point
+      ---
+      duration_ms: 89.657511
+      type: 'test'
+      ...
+    # Subtest: a cold relation cannot pretend to contain acquired context or skip evidence
+    ok 22 - a cold relation cannot pretend to contain acquired context or skip evidence
+      ---
+      duration_ms: 224.52091
+      type: 'test'
+      ...
+    # Subtest: the first unsupported window cannot borrow a later material witness
+    ok 23 - the first unsupported window cannot borrow a later material witness
+      ---
+      duration_ms: 16.496143
+      type: 'test'
+      ...
+    1..23
+ok 150 - a restored contact refusal remains local, acquired, corroborated and subject to current evidence
+  ---
+  duration_ms: 2532.919426
+  type: 'test'
+  ...
+# Subtest: motif geometry measures a unique input lattice, cards, composite body and framed target
+ok 151 - motif geometry measures a unique input lattice, cards, composite body and framed target
+  ---
+  duration_ms: 50.188499
+  type: 'test'
+  ...
+# Subtest: predicted balanced footprint survives merging while an untracked ambiguous body abstains
+ok 152 - predicted balanced footprint survives merging while an untracked ambiguous body abstains
+  ---
+  duration_ms: 9.312249
+  type: 'test'
+  ...
+# Subtest: actual calibration acquires motion, with prefix capped by 16 and remaining
+ok 153 - actual calibration acquires motion, with prefix capped by 16 and remaining
+  ---
+  duration_ms: 43.768372
+  type: 'test'
+  ...
+# Subtest: before rechecks pose, pattern, epoch, score, first observation and current action domain
+ok 154 - before rechecks pose, pattern, epoch, score, first observation and current action domain
+  ---
+  duration_ms: 16.638438
+  type: 'test'
+  ...
+# Subtest: contrary pose seals the prefix and records a projection-bound obstruction without inventing an effect
+ok 155 - contrary pose seals the prefix and records a projection-bound obstruction without inventing an effect
+  ---
+  duration_ms: 24.252016
+  type: 'test'
+  ...
+# Subtest: point binding preserves the whole witness and addresses the current cell projection
+ok 156 - point binding preserves the whole witness and addresses the current cell projection
+  ---
+  duration_ms: 19.296655
+  type: 'test'
+  ...
+# Subtest: toggle contradiction retires current context; invoke remains an unknown effect
+ok 157 - toggle contradiction retires current context; invoke remains an unknown effect
+  ---
+  duration_ms: 60.252523
+  type: 'test'
+  ...
+# Subtest: source learning and history cross epochs while current context is remapped and unknown cards rank first
+ok 158 - source learning and history cross epochs while current context is remapped and unknown cards rank first
+  ---
+  duration_ms: 40.187969
+  type: 'test'
+  ...
+# Subtest: official completion appends passed alone; measured motion persists when starting a new epoch
+ok 159 - official completion appends passed alone; measured motion persists when starting a new epoch
+  ---
+  duration_ms: 22.797003
+  type: 'test'
+  ...
+# Subtest: state restores tuples by value, detaches snapshots, and rejects invalid snapshots atomically
+ok 160 - state restores tuples by value, detaches snapshots, and rejects invalid snapshots atomically
+  ---
+  duration_ms: 27.119734
+  type: 'test'
+  ...
+# Subtest: BFS preserves last-input states, first shortest-path order and a zero-length route
+ok 161 - BFS preserves last-input states, first shortest-path order and a zero-length route
+  ---
+  duration_ms: 1.281607
+  type: 'test'
+  ...
+# Subtest: a blocked translation applies only to the same current destination projection
+ok 162 - a blocked translation applies only to the same current destination projection
+  ---
+  duration_ms: 0.609341
+  type: 'test'
+  ...
+# Subtest: state/frontier bounds expose incomplete search and never a partial route
+ok 163 - state/frontier bounds expose incomplete search and never a partial route
+  ---
+  duration_ms: 0.769552
+  type: 'test'
+  ...
+# Subtest: bounded owner refuses fallback on incomplete search with read-only current diagnostics
+ok 164 - bounded owner refuses fallback on incomplete search with read-only current diagnostics
+  ---
+  duration_ms: 15.386517
+  type: 'test'
+  ...
+# Subtest: deadline applies before calibration and cooperative abort never emits a fallback
+ok 165 - deadline applies before calibration and cooperative abort never emits a fallback
+  ---
+  duration_ms: 7.915871
+  type: 'test'
+  ...
+# Subtest: the cold production caller acquires one motif response, restores it from common memory and rechecks access
+ok 166 - the cold production caller acquires one motif response, restores it from common memory and rechecks access
+  ---
+  duration_ms: 3272.273909
+  type: 'test'
+  ...
+# Subtest: a contrary invocation response keeps access unresolved and changes the next current decision
+ok 167 - a contrary invocation response keeps access unresolved and changes the next current decision
+  ---
+  duration_ms: 5431.917269
+  type: 'test'
+  ...
+# Subtest: removing only selected motif acquisition prevents the measured calibration from becoming a motif decision
+ok 168 - removing only selected motif acquisition prevents the measured calibration from becoming a motif decision
+  ---
+  duration_ms: 1458.69644
+  type: 'test'
+  ...
+# Subtest: the source motif-interface exclusion is local to the final symmetry fallback and requires an unambiguous body
+ok 169 - the source motif-interface exclusion is local to the final symmetry fallback and requires an unambiguous body
+  ---
+  duration_ms: 165.51057
+  type: 'test'
+  ...
+# Subtest: Motif oracle pins the unmodified original and discloses synthetic scope and state normalization
+ok 170 - Motif oracle pins the unmodified original and discloses synthetic scope and state normalization
+  ---
+  duration_ms: 11.127678
+  type: 'test'
+  ...
+# Subtest: independent Motif public entities and frame identity: base
+ok 171 - independent Motif public entities and frame identity: base
+  ---
+  duration_ms: 5.134422
+  type: 'test'
+  ...
+# Subtest: independent Motif public entities and frame identity: moved
+ok 172 - independent Motif public entities and frame identity: moved
+  ---
+  duration_ms: 1.43757
+  type: 'test'
+  ...
+# Subtest: independent Motif public entities and frame identity: toggled
+ok 173 - independent Motif public entities and frame identity: toggled
+  ---
+  duration_ms: 1.565894
+  type: 'test'
+  ...
+# Subtest: independent Motif public entities and frame identity: open
+ok 174 - independent Motif public entities and frame identity: open
+  ---
+  duration_ms: 2.480044
+  type: 'test'
+  ...
+# Subtest: independent Motif public entities and frame identity: walked
+ok 175 - independent Motif public entities and frame identity: walked
+  ---
+  duration_ms: 1.343108
+  type: 'test'
+  ...
+# Subtest: independent Motif public entities and frame identity: walked9
+ok 176 - independent Motif public entities and frame identity: walked9
+  ---
+  duration_ms: 1.481436
+  type: 'test'
+  ...
+# Subtest: independent Motif public entities and frame identity: walked11
+ok 177 - independent Motif public entities and frame identity: walked11
+  ---
+  duration_ms: 1.16581
+  type: 'test'
+  ...
+# Subtest: independent Motif public entities and frame identity: next_epoch
+ok 178 - independent Motif public entities and frame identity: next_epoch
+  ---
+  duration_ms: 1.955052
+  type: 'test'
+  ...
+# Subtest: independent Motif public entities and frame identity: same_pose
+ok 179 - independent Motif public entities and frame identity: same_pose
+  ---
+  duration_ms: 1.175455
+  type: 'test'
+  ...
+# Subtest: independent Motif public entities and frame identity: diagonal
+ok 180 - independent Motif public entities and frame identity: diagonal
+  ---
+  duration_ms: 1.294404
+  type: 'test'
+  ...
+# Subtest: independent Motif public entities and frame identity: body_missing
+ok 181 - independent Motif public entities and frame identity: body_missing
+  ---
+  duration_ms: 1.573816
+  type: 'test'
+  ...
+# Subtest: independent Motif public entities and frame identity: invoke_missing_body
+ok 182 - independent Motif public entities and frame identity: invoke_missing_body
+  ---
+  duration_ms: 1.064887
+  type: 'test'
+  ...
+# Subtest: independent Motif public entities and frame identity: official_score
+ok 183 - independent Motif public entities and frame identity: official_score
+  ---
+  duration_ms: 1.087923
+  type: 'test'
+  ...
+# Subtest: independent Motif public entities and frame identity: official_epoch
+ok 184 - independent Motif public entities and frame identity: official_epoch
+  ---
+  duration_ms: 1.176075
+  type: 'test'
+  ...
+# Subtest: independent Motif public entities and frame identity: official_state
+ok 185 - independent Motif public entities and frame identity: official_state
+  ---
+  duration_ms: 1.398121
+  type: 'test'
+  ...
+# Subtest: independent Motif public entities and frame identity: open_base_pose
+ok 186 - independent Motif public entities and frame identity: open_base_pose
+  ---
+  duration_ms: 1.001833
+  type: 'test'
+  ...
+# Subtest: independent Motif public entities and frame identity: far_goal
+ok 187 - independent Motif public entities and frame identity: far_goal
+  ---
+  duration_ms: 2.153461
+  type: 'test'
+  ...
+# Subtest: independent Motif public entities and frame identity: ray_before
+ok 188 - independent Motif public entities and frame identity: ray_before
+  ---
+  duration_ms: 1.403809
+  type: 'test'
+  ...
+# Subtest: independent Motif public entities and frame identity: ray_after
+ok 189 - independent Motif public entities and frame identity: ray_after
+  ---
+  duration_ms: 1.383749
+  type: 'test'
+  ...
+# Subtest: independent Motif public entities and frame identity: missing_click
+ok 190 - independent Motif public entities and frame identity: missing_click
+  ---
+  duration_ms: 1.361866
+  type: 'test'
+  ...
+# Subtest: independent Motif public entities and frame identity: missing_cell
+ok 191 - independent Motif public entities and frame identity: missing_cell
+  ---
+  duration_ms: 1.413063
+  type: 'test'
+  ...
+# Subtest: independent Motif public entities and frame identity: two_bodies
+ok 192 - independent Motif public entities and frame identity: two_bodies
+  ---
+  duration_ms: 1.183778
+  type: 'test'
+  ...
+# Subtest: independent Motif public entities and frame identity: merged_body
+ok 193 - independent Motif public entities and frame identity: merged_body
+  ---
+  duration_ms: 0.755841
+  type: 'test'
+  ...
+# Subtest: independent Motif public entities and frame identity: target_missing
+ok 194 - independent Motif public entities and frame identity: target_missing
+  ---
+  duration_ms: 0.971557
+  type: 'test'
+  ...
+# Subtest: independent Motif public entities and frame identity: two_targets
+ok 195 - independent Motif public entities and frame identity: two_targets
+  ---
+  duration_ms: 1.726757
+  type: 'test'
+  ...
+# Subtest: independent Motif public entities and frame identity: blocked_changed
+ok 196 - independent Motif public entities and frame identity: blocked_changed
+  ---
+  duration_ms: 1.131899
+  type: 'test'
+  ...
+# Subtest: independent Motif public entities and frame identity: two_lattices
+ok 197 - independent Motif public entities and frame identity: two_lattices
+  ---
+  duration_ms: 1.394435
+  type: 'test'
+  ...
+# Subtest: independent Motif public entities and frame identity: new_epoch_without_grid
+ok 198 - independent Motif public entities and frame identity: new_epoch_without_grid
+  ---
+  duration_ms: 1.030686
+  type: 'test'
+  ...
+# Subtest: independent Motif public entities and frame identity: ray_projectile_a
+ok 199 - independent Motif public entities and frame identity: ray_projectile_a
+  ---
+  duration_ms: 1.313352
+  type: 'test'
+  ...
+# Subtest: independent Motif public entities and frame identity: ray_projectile_b
+ok 200 - independent Motif public entities and frame identity: ray_projectile_b
+  ---
+  duration_ms: 0.531813
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif geometry lattice: base
+ok 201 - exact pinned Motif geometry lattice: base
+  ---
+  duration_ms: 2.809702
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif geometry lattice: missing_click
+ok 202 - exact pinned Motif geometry lattice: missing_click
+  ---
+  duration_ms: 0.294805
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif geometry lattice: missing_cell
+ok 203 - exact pinned Motif geometry lattice: missing_cell
+  ---
+  duration_ms: 0.16537
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif geometry lattice: two_lattices
+ok 204 - exact pinned Motif geometry lattice: two_lattices
+  ---
+  duration_ms: 1.939639
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif geometry body: base:4
+ok 205 - exact pinned Motif geometry body: base:4
+  ---
+  duration_ms: 1.61019
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif geometry body: body_missing:5
+ok 206 - exact pinned Motif geometry body: body_missing:5
+  ---
+  duration_ms: 1.415978
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif geometry body: two_bodies:6
+ok 207 - exact pinned Motif geometry body: two_bodies:6
+  ---
+  duration_ms: 1.392453
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif geometry body: merged_body:7
+ok 208 - exact pinned Motif geometry body: merged_body:7
+  ---
+  duration_ms: 1.725415
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif geometry body: merged_body:8
+ok 209 - exact pinned Motif geometry body: merged_body:8
+  ---
+  duration_ms: 0.215105
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif geometry body: base:9
+ok 210 - exact pinned Motif geometry body: base:9
+  ---
+  duration_ms: 0.096726
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif geometry body: base:10
+ok 211 - exact pinned Motif geometry body: base:10
+  ---
+  duration_ms: 1.089675
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif geometry body: base:11
+ok 212 - exact pinned Motif geometry body: base:11
+  ---
+  duration_ms: 1.153321
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif geometry body: base:12
+ok 213 - exact pinned Motif geometry body: base:12
+  ---
+  duration_ms: 1.179771
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif geometry target: base:(3, 4)
+ok 214 - exact pinned Motif geometry target: base:(3, 4)
+  ---
+  duration_ms: 1.477971
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif geometry target: base:(8, 12)
+ok 215 - exact pinned Motif geometry target: base:(8, 12)
+  ---
+  duration_ms: 1.648959
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif geometry target: target_missing:(3, 4)
+ok 216 - exact pinned Motif geometry target: target_missing:(3, 4)
+  ---
+  duration_ms: 1.498792
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif geometry target: two_targets:(3, 4)
+ok 217 - exact pinned Motif geometry target: two_targets:(3, 4)
+  ---
+  duration_ms: 1.481346
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif geometry paths: base:17
+ok 218 - exact pinned Motif geometry paths: base:17
+  ---
+  duration_ms: 0.804224
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif geometry route: base:18
+ok 219 - exact pinned Motif geometry route: base:18
+  ---
+  duration_ms: 0.333092
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif geometry paths: open_base_pose:19
+ok 220 - exact pinned Motif geometry paths: open_base_pose:19
+  ---
+  duration_ms: 1.063656
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif geometry route: open_base_pose:20
+ok 221 - exact pinned Motif geometry route: open_base_pose:20
+  ---
+  duration_ms: 0.253343
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif geometry paths: open_base_pose:21
+ok 222 - exact pinned Motif geometry paths: open_base_pose:21
+  ---
+  duration_ms: 0.651354
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif geometry route: open_base_pose:22
+ok 223 - exact pinned Motif geometry route: open_base_pose:22
+  ---
+  duration_ms: 0.240143
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif geometry paths: open_base_pose:23
+ok 224 - exact pinned Motif geometry paths: open_base_pose:23
+  ---
+  duration_ms: 0.255286
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif geometry route: open_base_pose:24
+ok 225 - exact pinned Motif geometry route: open_base_pose:24
+  ---
+  duration_ms: 0.209936
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif geometry paths: base:25
+ok 226 - exact pinned Motif geometry paths: base:25
+  ---
+  duration_ms: 0.22503
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif geometry route: base:26
+ok 227 - exact pinned Motif geometry route: base:26
+  ---
+  duration_ms: 0.157729
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif geometry paths: base:27
+ok 228 - exact pinned Motif geometry paths: base:27
+  ---
+  duration_ms: 0.117828
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif geometry route: base:28
+ok 229 - exact pinned Motif geometry route: base:28
+  ---
+  duration_ms: 0.063115
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif geometry paths: base:29
+ok 230 - exact pinned Motif geometry paths: base:29
+  ---
+  duration_ms: 0.138379
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif geometry route: base:30
+ok 231 - exact pinned Motif geometry route: base:30
+  ---
+  duration_ms: 0.063336
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif geometry paths: base:31
+ok 232 - exact pinned Motif geometry paths: base:31
+  ---
+  duration_ms: 0.14599
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif geometry route: base:32
+ok 233 - exact pinned Motif geometry route: base:32
+  ---
+  duration_ms: 0.14568
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif stateful contract: cold_calibrate_toggle_invoke_effect_access_epoch
+    # Subtest: 1 propose
+    ok 1 - 1 propose
+      ---
+      duration_ms: 7.220772
+      type: 'test'
+      ...
+    # Subtest: 2 record
+    ok 2 - 2 record
+      ---
+      duration_ms: 2.575148
+      type: 'test'
+      ...
+    # Subtest: 3 propose
+    ok 3 - 3 propose
+      ---
+      duration_ms: 7.611913
+      type: 'test'
+      ...
+    # Subtest: 4 bind
+    ok 4 - 4 bind
+      ---
+      duration_ms: 0.933439
+      type: 'test'
+      ...
+    # Subtest: 5 after
+    ok 5 - 5 after
+      ---
+      duration_ms: 1.090606
+      type: 'test'
+      ...
+    # Subtest: 6 record
+    ok 6 - 6 record
+      ---
+      duration_ms: 0.874249
+      type: 'test'
+      ...
+    # Subtest: 7 restore
+    ok 7 - 7 restore
+      ---
+      duration_ms: 2.721449
+      type: 'test'
+      ...
+    # Subtest: 8 propose
+    ok 8 - 8 propose
+      ---
+      duration_ms: 3.550921
+      type: 'test'
+      ...
+    # Subtest: 9 bind
+    ok 9 - 9 bind
+      ---
+      duration_ms: 0.714328
+      type: 'test'
+      ...
+    # Subtest: 10 before
+    ok 10 - 10 before
+      ---
+      duration_ms: 0.608649
+      type: 'test'
+      ...
+    # Subtest: 11 after
+    ok 11 - 11 after
+      ---
+      duration_ms: 0.367034
+      type: 'test'
+      ...
+    # Subtest: 12 record
+    ok 12 - 12 record
+      ---
+      duration_ms: 4.94143
+      type: 'test'
+      ...
+    # Subtest: 13 propose
+    ok 13 - 13 propose
+      ---
+      duration_ms: 4.14664
+      type: 'test'
+      ...
+    # Subtest: 14 before
+    ok 14 - 14 before
+      ---
+      duration_ms: 1.048684
+      type: 'test'
+      ...
+    # Subtest: 15 after
+    ok 15 - 15 after
+      ---
+      duration_ms: 0.591894
+      type: 'test'
+      ...
+    # Subtest: 16 record
+    ok 16 - 16 record
+      ---
+      duration_ms: 0.865507
+      type: 'test'
+      ...
+    # Subtest: 17 propose
+    ok 17 - 17 propose
+      ---
+      duration_ms: 2.619014
+      type: 'test'
+      ...
+    # Subtest: 18 before
+    ok 18 - 18 before
+      ---
+      duration_ms: 0.801861
+      type: 'test'
+      ...
+    # Subtest: 19 after
+    ok 19 - 19 after
+      ---
+      duration_ms: 0.641719
+      type: 'test'
+      ...
+    # Subtest: 20 record
+    ok 20 - 20 record
+      ---
+      duration_ms: 0.525484
+      type: 'test'
+      ...
+    # Subtest: 21 before
+    ok 21 - 21 before
+      ---
+      duration_ms: 1.143326
+      type: 'test'
+      ...
+    # Subtest: 22 after
+    ok 22 - 22 after
+      ---
+      duration_ms: 0.519394
+      type: 'test'
+      ...
+    # Subtest: 23 record
+    ok 23 - 23 record
+      ---
+      duration_ms: 1.122845
+      type: 'test'
+      ...
+    # Subtest: 24 restore
+    ok 24 - 24 restore
+      ---
+      duration_ms: 1.358461
+      type: 'test'
+      ...
+    # Subtest: 25 propose
+    ok 25 - 25 propose
+      ---
+      duration_ms: 2.866648
+      type: 'test'
+      ...
+    # Subtest: 26 propose
+    ok 26 - 26 propose
+      ---
+      duration_ms: 6.655357
+      type: 'test'
+      ...
+    # Subtest: 27 restore
+    ok 27 - 27 restore
+      ---
+      duration_ms: 1.004055
+      type: 'test'
+      ...
+    # Subtest: 28 propose
+    ok 28 - 28 propose
+      ---
+      duration_ms: 0.488437
+      type: 'test'
+      ...
+    1..28
+ok 234 - exact pinned Motif stateful contract: cold_calibrate_toggle_invoke_effect_access_epoch
+  ---
+  duration_ms: 66.246884
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif stateful contract: remaining_zero_is_caller_boundary_not_source_calibration
+    # Subtest: 1 propose
+    ok 1 - 1 propose
+      ---
+      duration_ms: 3.718243
+      type: 'test'
+      ...
+    # Subtest: 2 record
+    ok 2 - 2 record
+      ---
+      duration_ms: 1.64304
+      type: 'test'
+      ...
+    # Subtest: 3 propose
+    ok 3 - 3 propose
+      ---
+      duration_ms: 1.753868
+      type: 'test'
+      ...
+    # Subtest: 4 restore
+    ok 4 - 4 restore
+      ---
+      duration_ms: 0.636551
+      type: 'test'
+      ...
+    1..4
+ok 235 - exact pinned Motif stateful contract: remaining_zero_is_caller_boundary_not_source_calibration
+  ---
+  duration_ms: 8.663319
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif stateful contract: long_measured_route_caps_at_sixteen
+    # Subtest: 1 propose
+    ok 1 - 1 propose
+      ---
+      duration_ms: 4.450389
+      type: 'test'
+      ...
+    # Subtest: 2 restore
+    ok 2 - 2 restore
+      ---
+      duration_ms: 0.54959
+      type: 'test'
+      ...
+    # Subtest: 3 propose
+    ok 3 - 3 propose
+      ---
+      duration_ms: 3.17256
+      type: 'test'
+      ...
+    # Subtest: 4 propose
+    ok 4 - 4 propose
+      ---
+      duration_ms: 2.474866
+      type: 'test'
+      ...
+    1..4
+ok 236 - exact pinned Motif stateful contract: long_measured_route_caps_at_sixteen
+  ---
+  duration_ms: 12.030242
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif stateful contract: cold_unique_acquisition:missing_click
+    # Subtest: 1 propose
+    ok 1 - 1 propose
+      ---
+      duration_ms: 0.262557
+      type: 'test'
+      ...
+    1..1
+ok 237 - exact pinned Motif stateful contract: cold_unique_acquisition:missing_click
+  ---
+  duration_ms: 0.505934
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif stateful contract: cold_unique_acquisition:missing_cell
+    # Subtest: 1 propose
+    ok 1 - 1 propose
+      ---
+      duration_ms: 0.554026
+      type: 'test'
+      ...
+    1..1
+ok 238 - exact pinned Motif stateful contract: cold_unique_acquisition:missing_cell
+  ---
+  duration_ms: 0.718515
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif stateful contract: cold_unique_acquisition:two_lattices
+    # Subtest: 1 propose
+    ok 1 - 1 propose
+      ---
+      duration_ms: 2.048472
+      type: 'test'
+      ...
+    1..1
+ok 239 - exact pinned Motif stateful contract: cold_unique_acquisition:two_lattices
+  ---
+  duration_ms: 2.42409
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif stateful contract: cold_unique_acquisition:two_bodies
+    # Subtest: 1 propose
+    ok 1 - 1 propose
+      ---
+      duration_ms: 2.723542
+      type: 'test'
+      ...
+    1..1
+ok 240 - exact pinned Motif stateful contract: cold_unique_acquisition:two_bodies
+  ---
+  duration_ms: 3.230257
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif stateful contract: cold_unique_acquisition:body_missing
+    # Subtest: 1 propose
+    ok 1 - 1 propose
+      ---
+      duration_ms: 4.422868
+      type: 'test'
+      ...
+    1..1
+ok 241 - exact pinned Motif stateful contract: cold_unique_acquisition:body_missing
+  ---
+  duration_ms: 4.937314
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif stateful contract: calibration_non_axial_response_is_not_motion
+    # Subtest: 1 propose
+    ok 1 - 1 propose
+      ---
+      duration_ms: 3.639314
+      type: 'test'
+      ...
+    # Subtest: 2 after
+    ok 2 - 2 after
+      ---
+      duration_ms: 0.793258
+      type: 'test'
+      ...
+    # Subtest: 3 record
+    ok 3 - 3 record
+      ---
+      duration_ms: 1.54366
+      type: 'test'
+      ...
+    # Subtest: 4 propose
+    ok 4 - 4 propose
+      ---
+      duration_ms: 2.348125
+      type: 'test'
+      ...
+    # Subtest: 5 restore
+    ok 5 - 5 restore
+      ---
+      duration_ms: 0.457561
+      type: 'test'
+      ...
+    1..5
+ok 242 - exact pinned Motif stateful contract: calibration_non_axial_response_is_not_motion
+  ---
+  duration_ms: 10.075011
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif stateful contract: toggle_contrary_effect_retires_owner
+    # Subtest: 1 propose
+    ok 1 - 1 propose
+      ---
+      duration_ms: 5.296647
+      type: 'test'
+      ...
+    # Subtest: 2 record
+    ok 2 - 2 record
+      ---
+      duration_ms: 2.237108
+      type: 'test'
+      ...
+    # Subtest: 3 propose
+    ok 3 - 3 propose
+      ---
+      duration_ms: 1.59588
+      type: 'test'
+      ...
+    # Subtest: 4 after
+    ok 4 - 4 after
+      ---
+      duration_ms: 0.484872
+      type: 'test'
+      ...
+    # Subtest: 5 record
+    ok 5 - 5 record
+      ---
+      duration_ms: 0.343008
+      type: 'test'
+      ...
+    # Subtest: 6 restore
+    ok 6 - 6 restore
+      ---
+      duration_ms: 1.174804
+      type: 'test'
+      ...
+    # Subtest: 7 propose
+    ok 7 - 7 propose
+      ---
+      duration_ms: 0.425462
+      type: 'test'
+      ...
+    1..7
+ok 243 - exact pinned Motif stateful contract: toggle_contrary_effect_retires_owner
+  ---
+  duration_ms: 12.80395
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif stateful contract: invoke_unmeasurable_body_is_source_body_change_true
+    # Subtest: 1 propose
+    ok 1 - 1 propose
+      ---
+      duration_ms: 2.494225
+      type: 'test'
+      ...
+    # Subtest: 2 record
+    ok 2 - 2 record
+      ---
+      duration_ms: 1.25219
+      type: 'test'
+      ...
+    # Subtest: 3 propose
+    ok 3 - 3 propose
+      ---
+      duration_ms: 2.467134
+      type: 'test'
+      ...
+    # Subtest: 4 bind
+    ok 4 - 4 bind
+      ---
+      duration_ms: 0.537562
+      type: 'test'
+      ...
+    # Subtest: 5 after
+    ok 5 - 5 after
+      ---
+      duration_ms: 0.498493
+      type: 'test'
+      ...
+    # Subtest: 6 record
+    ok 6 - 6 record
+      ---
+      duration_ms: 0.381116
+      type: 'test'
+      ...
+    # Subtest: 7 restore
+    ok 7 - 7 restore
+      ---
+      duration_ms: 0.568578
+      type: 'test'
+      ...
+    # Subtest: 8 propose
+    ok 8 - 8 propose
+      ---
+      duration_ms: 1.369328
+      type: 'test'
+      ...
+    # Subtest: 9 bind
+    ok 9 - 9 bind
+      ---
+      duration_ms: 0.335116
+      type: 'test'
+      ...
+    # Subtest: 10 after
+    ok 10 - 10 after
+      ---
+      duration_ms: 0.468648
+      type: 'test'
+      ...
+    # Subtest: 11 record
+    ok 11 - 11 record
+      ---
+      duration_ms: 2.597742
+      type: 'test'
+      ...
+    # Subtest: 12 propose
+    ok 12 - 12 propose
+      ---
+      duration_ms: 1.289547
+      type: 'test'
+      ...
+    # Subtest: 13 restore
+    ok 13 - 13 restore
+      ---
+      duration_ms: 0.672375
+      type: 'test'
+      ...
+    1..13
+ok 244 - exact pinned Motif stateful contract: invoke_unmeasurable_body_is_source_body_change_true
+  ---
+  duration_ms: 17.024542
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif stateful contract: guards_and_official_boundary_are_separate_from_geometry
+    # Subtest: 1 propose
+    ok 1 - 1 propose
+      ---
+      duration_ms: 3.53049
+      type: 'test'
+      ...
+    # Subtest: 2 before
+    ok 2 - 2 before
+      ---
+      duration_ms: 0.486475
+      type: 'test'
+      ...
+    # Subtest: 3 before
+    ok 3 - 3 before
+      ---
+      duration_ms: 0.498102
+      type: 'test'
+      ...
+    # Subtest: 4 before
+    ok 4 - 4 before
+      ---
+      duration_ms: 0.275536
+      type: 'test'
+      ...
+    # Subtest: 5 before
+    ok 5 - 5 before
+      ---
+      duration_ms: 0.269777
+      type: 'test'
+      ...
+    # Subtest: 6 before
+    ok 6 - 6 before
+      ---
+      duration_ms: 0.240593
+      type: 'test'
+      ...
+    # Subtest: 7 before
+    ok 7 - 7 before
+      ---
+      duration_ms: 1.935402
+      type: 'test'
+      ...
+    # Subtest: 8 before
+    ok 8 - 8 before
+      ---
+      duration_ms: 1.011808
+      type: 'test'
+      ...
+    # Subtest: 9 after
+    ok 9 - 9 after
+      ---
+      duration_ms: 0.41724
+      type: 'test'
+      ...
+    # Subtest: 10 after
+    ok 10 - 10 after
+      ---
+      duration_ms: 0.376598
+      type: 'test'
+      ...
+    # Subtest: 11 after
+    ok 11 - 11 after
+      ---
+      duration_ms: 0.744824
+      type: 'test'
+      ...
+    # Subtest: 12 record
+    ok 12 - 12 record
+      ---
+      duration_ms: 1.579184
+      type: 'test'
+      ...
+    # Subtest: 13 restore
+    ok 13 - 13 restore
+      ---
+      duration_ms: 0.793137
+      type: 'test'
+      ...
+    # Subtest: 14 propose
+    ok 14 - 14 propose
+      ---
+      duration_ms: 3.714338
+      type: 'test'
+      ...
+    1..14
+ok 245 - exact pinned Motif stateful contract: guards_and_official_boundary_are_separate_from_geometry
+  ---
+  duration_ms: 18.572168
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif stateful contract: walk_refutation_digest:same_pose
+    # Subtest: 1 propose
+    ok 1 - 1 propose
+      ---
+      duration_ms: 1.505453
+      type: 'test'
+      ...
+    # Subtest: 2 after
+    ok 2 - 2 after
+      ---
+      duration_ms: 2.303607
+      type: 'test'
+      ...
+    # Subtest: 3 record
+    ok 3 - 3 record
+      ---
+      duration_ms: 1.242205
+      type: 'test'
+      ...
+    # Subtest: 4 restore
+    ok 4 - 4 restore
+      ---
+      duration_ms: 0.859387
+      type: 'test'
+      ...
+    # Subtest: 5 propose
+    ok 5 - 5 propose
+      ---
+      duration_ms: 3.021382
+      type: 'test'
+      ...
+    1..5
+ok 246 - exact pinned Motif stateful contract: walk_refutation_digest:same_pose
+  ---
+  duration_ms: 10.16079
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif stateful contract: walk_refutation_digest:blocked_changed
+    # Subtest: 1 propose
+    ok 1 - 1 propose
+      ---
+      duration_ms: 55.199485
+      type: 'test'
+      ...
+    # Subtest: 2 after
+    ok 2 - 2 after
+      ---
+      duration_ms: 13.157514
+      type: 'test'
+      ...
+    # Subtest: 3 record
+    ok 3 - 3 record
+      ---
+      duration_ms: 1.799977
+      type: 'test'
+      ...
+    # Subtest: 4 restore
+    ok 4 - 4 restore
+      ---
+      duration_ms: 1.407365
+      type: 'test'
+      ...
+    # Subtest: 5 propose
+    ok 5 - 5 propose
+      ---
+      duration_ms: 2.915131
+      type: 'test'
+      ...
+    1..5
+ok 247 - exact pinned Motif stateful contract: walk_refutation_digest:blocked_changed
+  ---
+  duration_ms: 77.548846
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif stateful contract: alignment_cardinal_and_opposite
+    # Subtest: 1 aligned
+    ok 1 - 1 aligned
+      ---
+      duration_ms: 0.806517
+      type: 'test'
+      ...
+    # Subtest: 2 aligned
+    ok 2 - 2 aligned
+      ---
+      duration_ms: 0.313713
+      type: 'test'
+      ...
+    # Subtest: 3 aligned
+    ok 3 - 3 aligned
+      ---
+      duration_ms: 0.536039
+      type: 'test'
+      ...
+    # Subtest: 4 aligned
+    ok 4 - 4 aligned
+      ---
+      duration_ms: 0.680417
+      type: 'test'
+      ...
+    1..4
+ok 248 - exact pinned Motif stateful contract: alignment_cardinal_and_opposite
+  ---
+  duration_ms: 4.321103
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif stateful contract: synthetic_linked_ray_witness_and_ambiguous_boundary
+    # Subtest: 1 propose
+    ok 1 - 1 propose
+      ---
+      duration_ms: 2.306993
+      type: 'test'
+      ...
+    # Subtest: 2 record
+    ok 2 - 2 record
+      ---
+      duration_ms: 5.162824
+      type: 'test'
+      ...
+    # Subtest: 3 restore
+    ok 3 - 3 restore
+      ---
+      duration_ms: 1.624673
+      type: 'test'
+      ...
+    # Subtest: 4 propose
+    ok 4 - 4 propose
+      ---
+      duration_ms: 3.515477
+      type: 'test'
+      ...
+    1..4
+ok 249 - exact pinned Motif stateful contract: synthetic_linked_ray_witness_and_ambiguous_boundary
+  ---
+  duration_ms: 14.217805
+  type: 'test'
+  ...
+# Subtest: exact pinned Motif stateful contract: empty_aim_path_falls_back_to_card_not_official_success
+    # Subtest: 1 propose
+    ok 1 - 1 propose
+      ---
+      duration_ms: 2.561497
+      type: 'test'
+      ...
+    # Subtest: 2 restore
+    ok 2 - 2 restore
+      ---
+      duration_ms: 0.620898
+      type: 'test'
+      ...
+    1..2
+ok 250 - exact pinned Motif stateful contract: empty_aim_path_falls_back_to_card_not_official_success
+  ---
+  duration_ms: 4.069875
+  type: 'test'
+  ...
+# Subtest: fixture explicitly exercises causal limits, full cold chain and retained epoch memory
+ok 251 - fixture explicitly exercises causal limits, full cold chain and retained epoch memory
+  ---
+  duration_ms: 0.911586
+  type: 'test'
+  ...
+# Subtest: cold ordinary object binding distinguishes a detached reception from an object still following the body
+ok 252 - cold ordinary object binding distinguishes a detached reception from an object still following the body
+  ---
+  duration_ms: 17154.769883
+  type: 'test'
+  ...
+# Subtest: two compatible public relocations keep attachment unresolved and do not silently replace the selected-frame parent
+ok 253 - two compatible public relocations keep attachment unresolved and do not silently replace the selected-frame parent
+  ---
+  duration_ms: 4250.360145
+  type: 'test'
+  ...
+# Subtest: an official boundary during selected reception clears local binding geometry and keeps conditional methods through restoration
+ok 254 - an official boundary during selected reception clears local binding geometry and keeps conditional methods through restoration
+  ---
+  duration_ms: 7823.694123
+  type: 'test'
+  ...
+# Subtest: passive object binding shares restored caller attention without replacing a real parent retained by another family
+ok 255 - passive object binding shares restored caller attention without replacing a real parent retained by another family
+  ---
+  duration_ms: 96370.153615
+  type: 'test'
+  ...
+# Subtest: an incomplete passive binding acquisition keeps its old knowledge and stops the common caller after assessment
+ok 256 - an incomplete passive binding acquisition keeps its old knowledge and stops the common caller after assessment
+  ---
+  duration_ms: 2099.351485
+  type: 'test'
+  ...
+# Subtest: an incomplete selected binding acquisition cannot invent a null source fact or release another action
+ok 257 - an incomplete selected binding acquisition cannot invent a null source fact or release another action
+  ---
+  duration_ms: 1619.00254
+  type: 'test'
+  ...
+# Subtest: the ordinary level clock bounds an actual selected acquisition after its real public return
+ok 258 - the ordinary level clock bounds an actual selected acquisition after its real public return
+  ---
+  duration_ms: 1644.409558
+  type: 'test'
+  ...
+# Subtest: original recovery fixture has a complete, independent cold contract
+ok 259 - original recovery fixture has a complete, independent cold contract
+  ---
+  duration_ms: 2.936744
+  type: 'test'
+  ...
+# Subtest: original helper: digest-integers
+ok 260 - original helper: digest-integers
+  ---
+  duration_ms: 1.129134
+  type: 'test'
+  ...
+# Subtest: original helper: digest-unicode
+ok 261 - original helper: digest-unicode
+  ---
+  duration_ms: 0.270068
+  type: 'test'
+  ...
+# Subtest: original helper: digest-python-integral-centres
+ok 262 - original helper: digest-python-integral-centres
+  ---
+  duration_ms: 0.192781
+  type: 'test'
+  ...
+# Subtest: original helper: digest-python-half-centres
+ok 263 - original helper: digest-python-half-centres
+  ---
+  duration_ms: 0.306963
+  type: 'test'
+  ...
+# Subtest: original helper: center-integer
+ok 264 - original helper: center-integer
+  ---
+  duration_ms: 0.142776
+  type: 'test'
+  ...
+# Subtest: original helper: center-half
+ok 265 - original helper: center-half
+  ---
+  duration_ms: 0.128584
+  type: 'test'
+  ...
+# Subtest: original helper: contains-contained
+ok 266 - original helper: contains-contained
+  ---
+  duration_ms: 0.120011
+  type: 'test'
+  ...
+# Subtest: original helper: intersects-contained
+ok 267 - original helper: intersects-contained
+  ---
+  duration_ms: 0.151429
+  type: 'test'
+  ...
+# Subtest: original helper: near-contained
+ok 268 - original helper: near-contained
+  ---
+  duration_ms: 0.913569
+  type: 'test'
+  ...
+# Subtest: original helper: contains-overlap
+ok 269 - original helper: contains-overlap
+  ---
+  duration_ms: 0.130236
+  type: 'test'
+  ...
+# Subtest: original helper: intersects-overlap
+ok 270 - original helper: intersects-overlap
+  ---
+  duration_ms: 0.074843
+  type: 'test'
+  ...
+# Subtest: original helper: near-overlap
+ok 271 - original helper: near-overlap
+  ---
+  duration_ms: 0.056315
+  type: 'test'
+  ...
+# Subtest: original helper: contains-adjacent
+ok 272 - original helper: contains-adjacent
+  ---
+  duration_ms: 0.048193
+  type: 'test'
+  ...
+# Subtest: original helper: intersects-adjacent
+ok 273 - original helper: intersects-adjacent
+  ---
+  duration_ms: 0.04669
+  type: 'test'
+  ...
+# Subtest: original helper: near-adjacent
+ok 274 - original helper: near-adjacent
+  ---
+  duration_ms: 0.085049
+  type: 'test'
+  ...
+# Subtest: original helper: contains-separate
+ok 275 - original helper: contains-separate
+  ---
+  duration_ms: 0.054743
+  type: 'test'
+  ...
+# Subtest: original helper: intersects-separate
+ok 276 - original helper: intersects-separate
+  ---
+  duration_ms: 0.047602
+  type: 'test'
+  ...
+# Subtest: original helper: near-separate
+ok 277 - original helper: near-separate
+  ---
+  duration_ms: 0.049695
+  type: 'test'
+  ...
+# Subtest: original helper: unique-base
+ok 278 - original helper: unique-base
+  ---
+  duration_ms: 1.870043
+  type: 'test'
+  ...
+# Subtest: original helper: empty-frames-base
+ok 279 - original helper: empty-frames-base
+  ---
+  duration_ms: 1.266772
+  type: 'test'
+  ...
+# Subtest: original helper: correspondence-base
+ok 280 - original helper: correspondence-base
+  ---
+  duration_ms: 1.260863
+  type: 'test'
+  ...
+# Subtest: original helper: moved-core-base
+ok 281 - original helper: moved-core-base
+  ---
+  duration_ms: 1.364821
+  type: 'test'
+  ...
+# Subtest: original helper: preferred-core-base
+ok 282 - original helper: preferred-core-base
+  ---
+  duration_ms: 1.056885
+  type: 'test'
+  ...
+# Subtest: original helper: find-body-base
+ok 283 - original helper: find-body-base
+  ---
+  duration_ms: 0.568007
+  type: 'test'
+  ...
+# Subtest: original helper: enclosing-contours-base
+ok 284 - original helper: enclosing-contours-base
+  ---
+  duration_ms: 0.639756
+  type: 'test'
+  ...
+# Subtest: original helper: locate-base
+ok 285 - original helper: locate-base
+  ---
+  duration_ms: 18.073784
+  type: 'test'
+  ...
+# Subtest: original helper: revalidate-frame-base
+ok 286 - original helper: revalidate-frame-base
+  ---
+  duration_ms: 0.415628
+  type: 'test'
+  ...
+# Subtest: original helper: contradicted-frame-base
+ok 287 - original helper: contradicted-frame-base
+  ---
+  duration_ms: 0.106591
+  type: 'test'
+  ...
+# Subtest: original helper: corner-contradiction-base
+ok 288 - original helper: corner-contradiction-base
+  ---
+  duration_ms: 0.25791
+  type: 'test'
+  ...
+# Subtest: original helper: occluded-corner-base
+ok 289 - original helper: occluded-corner-base
+  ---
+  duration_ms: 0.195975
+  type: 'test'
+  ...
+# Subtest: original helper: unique-shifted
+ok 290 - original helper: unique-shifted
+  ---
+  duration_ms: 0.987971
+  type: 'test'
+  ...
+# Subtest: original helper: empty-frames-shifted
+ok 291 - original helper: empty-frames-shifted
+  ---
+  duration_ms: 1.283438
+  type: 'test'
+  ...
+# Subtest: original helper: correspondence-shifted
+ok 292 - original helper: correspondence-shifted
+  ---
+  duration_ms: 0.565524
+  type: 'test'
+  ...
+# Subtest: original helper: moved-core-shifted
+ok 293 - original helper: moved-core-shifted
+  ---
+  duration_ms: 0.897665
+  type: 'test'
+  ...
+# Subtest: original helper: preferred-core-shifted
+ok 294 - original helper: preferred-core-shifted
+  ---
+  duration_ms: 0.684163
+  type: 'test'
+  ...
+# Subtest: original helper: find-body-shifted
+ok 295 - original helper: find-body-shifted
+  ---
+  duration_ms: 0.630953
+  type: 'test'
+  ...
+# Subtest: original helper: enclosing-contours-shifted
+ok 296 - original helper: enclosing-contours-shifted
+  ---
+  duration_ms: 0.503079
+  type: 'test'
+  ...
+# Subtest: original helper: locate-shifted
+ok 297 - original helper: locate-shifted
+  ---
+  duration_ms: 11.896258
+  type: 'test'
+  ...
+# Subtest: original helper: revalidate-frame-shifted
+ok 298 - original helper: revalidate-frame-shifted
+  ---
+  duration_ms: 0.302516
+  type: 'test'
+  ...
+# Subtest: original helper: contradicted-frame-shifted
+ok 299 - original helper: contradicted-frame-shifted
+  ---
+  duration_ms: 0.216917
+  type: 'test'
+  ...
+# Subtest: original helper: corner-contradiction-shifted
+ok 300 - original helper: corner-contradiction-shifted
+  ---
+  duration_ms: 0.11256
+  type: 'test'
+  ...
+# Subtest: original helper: occluded-corner-shifted
+ok 301 - original helper: occluded-corner-shifted
+  ---
+  duration_ms: 0.103366
+  type: 'test'
+  ...
+# Subtest: original helper: unique-recoloured
+ok 302 - original helper: unique-recoloured
+  ---
+  duration_ms: 0.816242
+  type: 'test'
+  ...
+# Subtest: original helper: empty-frames-recoloured
+ok 303 - original helper: empty-frames-recoloured
+  ---
+  duration_ms: 0.494687
+  type: 'test'
+  ...
+# Subtest: original helper: correspondence-recoloured
+ok 304 - original helper: correspondence-recoloured
+  ---
+  duration_ms: 0.622991
+  type: 'test'
+  ...
+# Subtest: original helper: moved-core-recoloured
+ok 305 - original helper: moved-core-recoloured
+  ---
+  duration_ms: 0.691334
+  type: 'test'
+  ...
+# Subtest: original helper: preferred-core-recoloured
+ok 306 - original helper: preferred-core-recoloured
+  ---
+  duration_ms: 0.795811
+  type: 'test'
+  ...
+# Subtest: original helper: find-body-recoloured
+ok 307 - original helper: find-body-recoloured
+  ---
+  duration_ms: 0.320274
+  type: 'test'
+  ...
+# Subtest: original helper: enclosing-contours-recoloured
+ok 308 - original helper: enclosing-contours-recoloured
+  ---
+  duration_ms: 1.174192
+  type: 'test'
+  ...
+# Subtest: original helper: locate-recoloured
+ok 309 - original helper: locate-recoloured
+  ---
+  duration_ms: 8.069271
+  type: 'test'
+  ...
+# Subtest: original helper: revalidate-frame-recoloured
+ok 310 - original helper: revalidate-frame-recoloured
+  ---
+  duration_ms: 0.168795
+  type: 'test'
+  ...
+# Subtest: original helper: contradicted-frame-recoloured
+ok 311 - original helper: contradicted-frame-recoloured
+  ---
+  duration_ms: 0.083947
+  type: 'test'
+  ...
+# Subtest: original helper: corner-contradiction-recoloured
+ok 312 - original helper: corner-contradiction-recoloured
+  ---
+  duration_ms: 0.089085
+  type: 'test'
+  ...
+# Subtest: original helper: occluded-corner-recoloured
+ok 313 - original helper: occluded-corner-recoloured
+  ---
+  duration_ms: 0.085229
+  type: 'test'
+  ...
+# Subtest: original helper: unique-odd-body
+ok 314 - original helper: unique-odd-body
+  ---
+  duration_ms: 1.095544
+  type: 'test'
+  ...
+# Subtest: original helper: empty-frames-odd-body
+ok 315 - original helper: empty-frames-odd-body
+  ---
+  duration_ms: 0.685505
+  type: 'test'
+  ...
+# Subtest: original helper: correspondence-odd-body
+ok 316 - original helper: correspondence-odd-body
+  ---
+  duration_ms: 0.570251
+  type: 'test'
+  ...
+# Subtest: original helper: moved-core-odd-body
+ok 317 - original helper: moved-core-odd-body
+  ---
+  duration_ms: 0.882051
+  type: 'test'
+  ...
+# Subtest: original helper: preferred-core-odd-body
+ok 318 - original helper: preferred-core-odd-body
+  ---
+  duration_ms: 0.961671
+  type: 'test'
+  ...
+# Subtest: original helper: find-body-odd-body
+ok 319 - original helper: find-body-odd-body
+  ---
+  duration_ms: 0.321015
+  type: 'test'
+  ...
+# Subtest: original helper: enclosing-contours-odd-body
+ok 320 - original helper: enclosing-contours-odd-body
+  ---
+  duration_ms: 0.296928
+  type: 'test'
+  ...
+# Subtest: original helper: locate-odd-body
+ok 321 - original helper: locate-odd-body
+  ---
+  duration_ms: 7.953006
+  type: 'test'
+  ...
+# Subtest: original helper: revalidate-frame-odd-body
+ok 322 - original helper: revalidate-frame-odd-body
+  ---
+  duration_ms: 0.17215
+  type: 'test'
+  ...
+# Subtest: original helper: contradicted-frame-odd-body
+ok 323 - original helper: contradicted-frame-odd-body
+  ---
+  duration_ms: 49.469067
+  type: 'test'
+  ...
+# Subtest: original helper: corner-contradiction-odd-body
+ok 324 - original helper: corner-contradiction-odd-body
+  ---
+  duration_ms: 0.153622
+  type: 'test'
+  ...
+# Subtest: original helper: occluded-corner-odd-body
+ok 325 - original helper: occluded-corner-odd-body
+  ---
+  duration_ms: 0.087312
+  type: 'test'
+  ...
+# Subtest: original helper: cold-positive-shape-compatible
+ok 326 - original helper: cold-positive-shape-compatible
+  ---
+  duration_ms: 1.122795
+  type: 'test'
+  ...
+# Subtest: original helper: cold-positive-unchanged
+ok 327 - original helper: cold-positive-unchanged
+  ---
+  duration_ms: 0.77462
+  type: 'test'
+  ...
+# Subtest: original helper: cold-positive-pending-offers
+ok 328 - original helper: cold-positive-pending-offers
+  ---
+  duration_ms: 2.526931
+  type: 'test'
+  ...
+# Subtest: original helper: cold-positive-separation-offers
+ok 329 - original helper: cold-positive-separation-offers
+  ---
+  duration_ms: 0.971727
+  type: 'test'
+  ...
+# Subtest: original helper: cold-positive-separation
+ok 330 - original helper: cold-positive-separation
+  ---
+  duration_ms: 0.88092
+  type: 'test'
+  ...
+# Subtest: original helper: cold-positive-unvalidated-separation
+ok 331 - original helper: cold-positive-unvalidated-separation
+  ---
+  duration_ms: 0.508578
+  type: 'test'
+  ...
+# Subtest: original helper: cold-refutation-shape-compatible
+ok 332 - original helper: cold-refutation-shape-compatible
+  ---
+  duration_ms: 0.807299
+  type: 'test'
+  ...
+# Subtest: original helper: cold-refutation-unchanged
+ok 333 - original helper: cold-refutation-unchanged
+  ---
+  duration_ms: 0.313062
+  type: 'test'
+  ...
+# Subtest: original helper: cold-refutation-pending-offers
+ok 334 - original helper: cold-refutation-pending-offers
+  ---
+  duration_ms: 1.204919
+  type: 'test'
+  ...
+# Subtest: original helper: cold-refutation-separation-offers
+ok 335 - original helper: cold-refutation-separation-offers
+  ---
+  duration_ms: 1.287023
+  type: 'test'
+  ...
+# Subtest: original helper: cold-refutation-separation
+ok 336 - original helper: cold-refutation-separation
+  ---
+  duration_ms: 0.594387
+  type: 'test'
+  ...
+# Subtest: original helper: cold-refutation-unvalidated-separation
+ok 337 - original helper: cold-refutation-unvalidated-separation
+  ---
+  duration_ms: 0.462058
+  type: 'test'
+  ...
+# Subtest: original helper: coloured-clipped-box
+ok 338 - original helper: coloured-clipped-box
+  ---
+  duration_ms: 0.179961
+  type: 'test'
+  ...
+# Subtest: original helper: point-in-box
+ok 339 - original helper: point-in-box
+  ---
+  duration_ms: 0.054562
+  type: 'test'
+  ...
+# Subtest: original helper: distance
+ok 340 - original helper: distance
+  ---
+  duration_ms: 0.044347
+  type: 'test'
+  ...
+# Subtest: original helper: shift
+ok 341 - original helper: shift
+  ---
+  duration_ms: 0.040912
+  type: 'test'
+  ...
+# Subtest: original chain: cold-positive
+ok 342 - original chain: cold-positive
+  ---
+  duration_ms: 1008.37027
+  type: 'test'
+  ...
+# Subtest: original chain: cold-refutation
+ok 343 - original chain: cold-refutation
+  ---
+  duration_ms: 1374.063695
+  type: 'test'
+  ...
+# Subtest: original chain: cold-ambiguity
+ok 344 - original chain: cold-ambiguity
+  ---
+  duration_ms: 227.509983
+  type: 'test'
+  ...
+# Subtest: original chain: cold-official-boundary
+ok 345 - original chain: cold-official-boundary
+  ---
+  duration_ms: 799.615363
+  type: 'test'
+  ...
+# Subtest: original chain: cold-translated-recoloured
+ok 346 - original chain: cold-translated-recoloured
+  ---
+  duration_ms: 1556.022522
+  type: 'test'
+  ...
+# Subtest: original chain: cold-foreign-attention-parent
+ok 347 - original chain: cold-foreign-attention-parent
+  ---
+  duration_ms: 858.252124
+  type: 'test'
+  ...
+# Subtest: original chain: cold-context-changed-corner
+ok 348 - original chain: cold-context-changed-corner
+  ---
+  duration_ms: 197.099472
+  type: 'test'
+  ...
+# Subtest: original chain: cold-context-missing-frame
+ok 349 - original chain: cold-context-missing-frame
+  ---
+  duration_ms: 153.01269
+  type: 'test'
+  ...
+# Subtest: original chain: cold-context-out-of-view
+ok 350 - original chain: cold-context-out-of-view
+  ---
+  duration_ms: 153.050038
+  type: 'test'
+  ...
+# Subtest: original chain: cold-blocked-motion
+ok 351 - original chain: cold-blocked-motion
+  ---
+  duration_ms: 15.173185
+  type: 'test'
+  ...
+# Subtest: original chain: cold-changed-local-delta
+ok 352 - original chain: cold-changed-local-delta
+  ---
+  duration_ms: 15.045362
+  type: 'test'
+  ...
+# Subtest: original chain: cold-body-missing
+ok 353 - original chain: cold-body-missing
+  ---
+  duration_ms: 11.933154
+  type: 'test'
+  ...
+# Subtest: original chain: cold-body-three-by-three
+ok 354 - original chain: cold-body-three-by-three
+  ---
+  duration_ms: 18.148315
+  type: 'test'
+  ...
+# Subtest: original chain: cold-guard-and-budget
+ok 355 - original chain: cold-guard-and-budget
+  ---
+  duration_ms: 56.295721
+  type: 'test'
+  ...
+# Subtest: original chain: isolated-source-restore-merge
+ok 356 - original chain: isolated-source-restore-merge
+  ---
+  duration_ms: 1.130947
+  type: 'test'
+  ...
+# Subtest: shared attention registration is lazy and resolves the current caller on propose and record
+ok 357 - shared attention registration is lazy and resolves the current caller on propose and record
+  ---
+  duration_ms: 7.237195
+  type: 'test'
+  ...
+# Subtest: passive source null remains an empty native event and unchanged cold state reuses its snapshot
+ok 358 - passive source null remains an empty native event and unchanged cold state reuses its snapshot
+  ---
+  duration_ms: 1.58337
+  type: 'test'
+  ...
+# Subtest: learned checkpoints are deeply immutable and cached while public source snapshots are detached
+ok 359 - learned checkpoints are deeply immutable and cached while public source snapshots are detached
+  ---
+  duration_ms: 169.221798
+  type: 'test'
+  ...
+# Subtest: restoration owns the acquired input without repeating source acquisition or duplicating attention
+ok 360 - restoration owns the acquired input without repeating source acquisition or duplicating attention
+  ---
+  duration_ms: 44.68812
+  type: 'test'
+  ...
+# Subtest: deep and superficially frozen corruptions fail closed without changing tracker or attention
+ok 361 - deep and superficially frozen corruptions fail closed without changing tracker or attention
+  ---
+  duration_ms: 46.677832
+  type: 'test'
+  ...
+# Subtest: acquired pending reception and portable methods restore with their exact deep relationships
+ok 362 - acquired pending reception and portable methods restore with their exact deep relationships
+  ---
+  duration_ms: 634.993153
+  type: 'test'
+  ...
+# Subtest: source restore merges extra keys and reset preserves them while native checkpoints remain closed
+ok 363 - source restore merges extra keys and reset preserves them while native checkpoints remain closed
+  ---
+  duration_ms: 0.78867
+  type: 'test'
+  ...
+# Subtest: node, work, deadline and abort bounds yield scoped unknown refusals without partial acquisition
+ok 364 - node, work, deadline and abort bounds yield scoped unknown refusals without partial acquisition
+  ---
+  duration_ms: 1.898255
+  type: 'test'
+  ...
+# Subtest: an interruption after compositionFor discards its staged boundary fact and attention change
+ok 365 - an interruption after compositionFor discards its staged boundary fact and attention change
+  ---
+  duration_ms: 1.698213
+  type: 'test'
+  ...
+# Subtest: an interruption after retainComposition discards both acquired motion and the actual staged put
+ok 366 - an interruption after retainComposition discards both acquired motion and the actual staged put
+  ---
+  duration_ms: 17.405265
+  type: 'test'
+  ...
+# Subtest: SRC wrapped bounds remain unknown but a real source error propagates despite late deadline expiry
+ok 367 - SRC wrapped bounds remain unknown but a real source error propagates despite late deadline expiry
+  ---
+  duration_ms: 13.019344
+  type: 'test'
+  ...
+# Subtest: native ninth execution argument distinguishes incomplete acquisition from a completed source null
+ok 368 - native ninth execution argument distinguishes incomplete acquisition from a completed source null
+  ---
+  duration_ms: 0.709271
+  type: 'test'
+  ...
+# Subtest: conditional movement prefixes obey remaining budget and the original sixteen-action maximum
+ok 369 - conditional movement prefixes obey remaining budget and the original sixteen-action maximum
+  ---
+  duration_ms: 16.174395
+  type: 'test'
+  ...
+# Subtest: SelectedRigid capture preserves input, output, domain and receiver identity
+ok 370 - SelectedRigid capture preserves input, output, domain and receiver identity
+  ---
+  duration_ms: 2.373203
+  type: 'test'
+  ...
+# Subtest: SelectedRigid capture observes actual budgets without invoking clock or scheduler
+ok 371 - SelectedRigid capture observes actual budgets without invoking clock or scheduler
+  ---
+  duration_ms: 0.502458
+  type: 'test'
+  ...
+# Subtest: SelectedRigid capture keeps a null selected return distinct from a void bind
+ok 372 - SelectedRigid capture keeps a null selected return distinct from a void bind
+  ---
+  duration_ms: 0.241624
+  type: 'test'
+  ...
+# Subtest: SelectedRigid capture preserves thrown errors and rejected promise identity
+ok 373 - SelectedRigid capture preserves thrown errors and rejected promise identity
+  ---
+  duration_ms: 0.773388
+  type: 'test'
+  ...
+# Subtest: SelectedRigid capture preserves real nested binds and restorations
+ok 374 - SelectedRigid capture preserves real nested binds and restorations
+  ---
+  duration_ms: 1.089064
+  type: 'test'
+  ...
+# Subtest: SelectedRigid capture observes contexts without acquiring or manufacturing clock values
+ok 375 - SelectedRigid capture observes contexts without acquiring or manufacturing clock values
+  ---
+  duration_ms: 0.23793
+  type: 'test'
+  ...
+# Subtest: SelectedRigid capture cannot attach twice or partially attach to an incomplete owner
+ok 376 - SelectedRigid capture cannot attach twice or partially attach to an incomplete owner
+  ---
+  duration_ms: 0.202836
+  type: 'test'
+  ...
+# Subtest: SelectedRigid observation failures do not suppress or repeat a physical acquisition
+ok 377 - SelectedRigid observation failures do not suppress or repeat a physical acquisition
+  ---
+  duration_ms: 0.249417
+  type: 'test'
+  ...
+# Subtest: SelectedRigid capture preserves all actual arguments while recording source arities
+ok 378 - SelectedRigid capture preserves all actual arguments while recording source arities
+  ---
+  duration_ms: 0.380014
+  type: 'test'
+  ...
+# Subtest: SelectedRigid capture journals only already-consumed clock reads, including missing scope
+ok 379 - SelectedRigid capture journals only already-consumed clock reads, including missing scope
+  ---
+  duration_ms: 0.393644
+  type: 'test'
+  ...
+# Subtest: production installs one SelectedRigid owner at the exact source goal entry
+ok 380 - production installs one SelectedRigid owner at the exact source goal entry
+  ---
+  duration_ms: 151.17838
+  type: 'test'
+  ...
+# Subtest: current source refusal stops before any lower-priority action: rigid_direction_domain_incomplete
+ok 381 - current source refusal stops before any lower-priority action: rigid_direction_domain_incomplete
+  ---
+  duration_ms: 20.505657
+  type: 'test'
+  ...
+# Subtest: current source refusal stops before any lower-priority action: rigid_control_or_collision_model_refuted
+ok 382 - current source refusal stops before any lower-priority action: rigid_control_or_collision_model_refuted
+  ---
+  duration_ms: 16.069265
+  type: 'test'
+  ...
+# Subtest: current source refusal stops before any lower-priority action: rigid_conditional_configuration_search_incomplete
+ok 383 - current source refusal stops before any lower-priority action: rigid_conditional_configuration_search_incomplete
+  ---
+  duration_ms: 11.263734
+  type: 'test'
+  ...
+# Subtest: current source refusal stops before any lower-priority action: rigid_receptacle_matched_terminal_unknown
+ok 384 - current source refusal stops before any lower-priority action: rigid_receptacle_matched_terminal_unknown
+  ---
+  duration_ms: 19.150551
+  type: 'test'
+  ...
+# Subtest: current source refusal stops before any lower-priority action: rigid_control_discrimination_exhausted
+ok 385 - current source refusal stops before any lower-priority action: rigid_control_discrimination_exhausted
+  ---
+  duration_ms: 6.931134
+  type: 'test'
+  ...
+# Subtest: the real caller keeps source priority and WHY/ACT, acquires each return once at seal, then restores controls across the epoch
+ok 386 - the real caller keeps source priority and WHY/ACT, acquires each return once at seal, then restores controls across the epoch
+  ---
+  duration_ms: 5012.174872
+  type: 'test'
+  ...
+# Subtest: a foreign Word return after real rigid acquisition checkpoints the rigid owner before restored Preview without passive acquisition
+ok 387 - a foreign Word return after real rigid acquisition checkpoints the rigid owner before restored Preview without passive acquisition
+  ---
+  duration_ms: 3907.817338
+  type: 'test'
+  ...
+# Subtest: a known prefix survives a long inactive pause with a refreshed deadline, then active execution time stops before its next action
+ok 388 - a known prefix survives a long inactive pause with a refreshed deadline, then active execution time stops before its next action
+  ---
+  duration_ms: 3550.714782
+  type: 'test'
+  ...
+# Subtest: a paused known prefix preserves a tighter caller deadline on a different clock and refuses the next expired action
+ok 389 - a paused known prefix preserves a tighter caller deadline on a different clock and refuses the next expired action
+  ---
+  duration_ms: 3809.0089
+  type: 'test'
+  ...
+# Subtest: the adapter passes the current zero level quota separately from its positive prefix allowance
+ok 390 - the adapter passes the current zero level quota separately from its positive prefix allowance
+  ---
+  duration_ms: 8.43108
+  type: 'test'
+  ...
+# Subtest: explicit empty configuration abstains while omitted configuration and limits-only options retain source defaults
+ok 391 - explicit empty configuration abstains while omitted configuration and limits-only options retain source defaults
+  ---
+  duration_ms: 51.700103
+  type: 'test'
+  ...
+# Subtest: source and native checkpoints have only their exact declared fields
+ok 392 - source and native checkpoints have only their exact declared fields
+  ---
+  duration_ms: 1.207974
+  type: 'test'
+  ...
+# Subtest: measurement retains numeric body order, complete concave masks and the single outlined prior
+ok 393 - measurement retains numeric body order, complete concave masks and the single outlined prior
+  ---
+  duration_ms: 6.805075
+  type: 'test'
+  ...
+# Subtest: scene reuse measures current bodies in the old geometry instead of granting a fresh frame proof
+ok 394 - scene reuse measures current bodies in the old geometry instead of granting a fresh frame proof
+  ---
+  duration_ms: 5.822802
+  type: 'test'
+  ...
+# Subtest: full-mask displacement admits an absent concave corner and rejects occupied cells
+ok 395 - full-mask displacement admits an absent concave corner and rejects occupied cells
+  ---
+  duration_ms: 1.58943
+  type: 'test'
+  ...
+# Subtest: only the homologous body receives the measured target-cell boundary exception
+ok 396 - only the homologous body receives the measured target-cell boundary exception
+  ---
+  duration_ms: 1.577571
+  type: 'test'
+  ...
+# Subtest: A* retains the source four-step route and exact expanded-node accounting
+ok 397 - A* retains the source four-step route and exact expanded-node accounting
+  ---
+  duration_ms: 2.037486
+  type: 'test'
+  ...
+# Subtest: route source bounds return no partial path and do not count stale/ungenerated work as expanded nodes
+ok 398 - route source bounds return no partial path and do not count stale/ungenerated work as expanded nodes
+  ---
+  duration_ms: 1.99345
+  type: 'test'
+  ...
+# Subtest: cooperative route cancellation rejects without returning a partial solution
+ok 399 - cooperative route cancellation rejects without returning a partial solution
+  ---
+  duration_ms: 2.193682
+  type: 'test'
+  ...
+# Subtest: retainedStateBound is an explicit native incomplete result, never an impossibility
+ok 400 - retainedStateBound is an explicit native incomplete result, never an impossibility
+  ---
+  duration_ms: 5.915081
+  type: 'test'
+  ...
+# Subtest: queuedStateBound is an explicit native incomplete result, never an impossibility
+ok 401 - queuedStateBound is an explicit native incomplete result, never an impossibility
+  ---
+  duration_ms: 4.437991
+  type: 'test'
+  ...
+# Subtest: source/native nodeBound cannot be enlarged through qualification options
+ok 402 - source/native nodeBound cannot be enlarged through qualification options
+  ---
+  duration_ms: 0.355938
+  type: 'test'
+  ...
+# Subtest: source/native timeBoundMs cannot be enlarged through qualification options
+ok 403 - source/native timeBoundMs cannot be enlarged through qualification options
+  ---
+  duration_ms: 0.094392
+  type: 'test'
+  ...
+# Subtest: source/native retainedStateBound cannot be enlarged through qualification options
+ok 404 - source/native retainedStateBound cannot be enlarged through qualification options
+  ---
+  duration_ms: 0.069375
+  type: 'test'
+  ...
+# Subtest: source/native queuedStateBound cannot be enlarged through qualification options
+ok 405 - source/native queuedStateBound cannot be enlarged through qualification options
+  ---
+  duration_ms: 0.116957
+  type: 'test'
+  ...
+# Subtest: source/native yieldInterval cannot be enlarged through qualification options
+ok 406 - source/native yieldInterval cannot be enlarged through qualification options
+  ---
+  duration_ms: 0.092089
+  type: 'test'
+  ...
+# Subtest: missing and expired deadlines abstain, while a missing current action budget raises only after admission
+ok 407 - missing and expired deadlines abstain, while a missing current action budget raises only after admission
+  ---
+  duration_ms: 8.079811
+  type: 'test'
+  ...
+# Subtest: budget and capture access consume no extra clock readings and restoration preserves ephemeral context
+ok 408 - budget and capture access consume no extra clock readings and restoration preserves ephemeral context
+  ---
+  duration_ms: 5.608588
+  type: 'test'
+  ...
+# Subtest: the actual level action budget takes precedence over a smaller session remainder
+ok 409 - the actual level action budget takes precedence over a smaller session remainder
+  ---
+  duration_ms: 13.270628
+  type: 'test'
+  ...
+# Subtest: a point selection remains hypothetical when the public raster does not change
+ok 410 - a point selection remains hypothetical when the public raster does not change
+  ---
+  duration_ms: 30.683009
+  type: 'test'
+  ...
+# Subtest: control ties select the lexicographically last action and displacement retains six hypotheses
+ok 411 - control ties select the lexicographically last action and displacement retains six hypotheses
+  ---
+  duration_ms: 20.970854
+  type: 'test'
+  ...
+# Subtest: known paths obey remaining actions and compare the complete current population at each step
+ok 412 - known paths obey remaining actions and compare the complete current population at each step
+  ---
+  duration_ms: 38.231327
+  type: 'test'
+  ...
+# Subtest: a mixed known-then-probe prefix does not seal its successful known step just because mode is probe
+ok 413 - a mixed known-then-probe prefix does not seal its successful known step just because mode is probe
+  ---
+  duration_ms: 24.726456
+  type: 'test'
+  ...
+# Subtest: empty data takes the direction branch and cannot silently reaffirm selection
+ok 414 - empty data takes the direction branch and cannot silently reaffirm selection
+  ---
+  duration_ms: 19.94133
+  type: 'test'
+  ...
+# Subtest: epoch changes acquire nothing; a score-only change still acquires the selected source return
+ok 415 - epoch changes acquire nothing; a score-only change still acquires the selected source return
+  ---
+  duration_ms: 18.034861
+  type: 'test'
+  ...
+# Subtest: WIN alone does not change the source after guard when epoch, score and poses are unchanged
+ok 416 - WIN alone does not change the source after guard when epoch, score and poses are unchanged
+  ---
+  duration_ms: 29.510529
+  type: 'test'
+  ...
+# Subtest: a foreign return and an unselected proposal cannot create a source event
+ok 417 - a foreign return and an unselected proposal cannot create a source event
+  ---
+  duration_ms: 12.640497
+  type: 'test'
+  ...
+# Subtest: point binding needs exactly one current entity and a currently available ACTION6
+ok 418 - point binding needs exactly one current entity and a currently available ACTION6
+  ---
+  duration_ms: 9.817774
+  type: 'test'
+  ...
+# Subtest: source guards reject altered exact commands and identity but do not claim an extra point/facts guard
+ok 419 - source guards reject altered exact commands and identity but do not claim an extra point/facts guard
+  ---
+  duration_ms: 14.919046
+  type: 'test'
+  ...
+# Subtest: before uses the freshly supplied deadline and rejects an invalid action index
+ok 420 - before uses the freshly supplied deadline and rejects an invalid action index
+  ---
+  duration_ms: 13.766827
+  type: 'test'
+  ...
+# Subtest: retained empty controls survive epoch changes and the stop reason clears on the next proposal attempt
+ok 421 - retained empty controls survive epoch changes and the stop reason clears on the next proposal attempt
+  ---
+  duration_ms: 23.071567
+  type: 'test'
+  ...
+# Subtest: actual native/source restores reconstruct the last event without retaining stale models or sharing mutable inputs
+ok 422 - actual native/source restores reconstruct the last event without retaining stale models or sharing mutable inputs
+  ---
+  duration_ms: 30.147822
+  type: 'test'
+  ...
+# Subtest: acquisition owns its event while earlier snapshots and returned mutable events remain independent
+ok 423 - acquisition owns its event while earlier snapshots and returned mutable events remain independent
+  ---
+  duration_ms: 20.975301
+  type: 'test'
+  ...
+# Subtest: native ingress rejects schema atomically without claiming Python has the same validation
+ok 424 - native ingress rejects schema atomically without claiming Python has the same validation
+  ---
+  duration_ms: 12.596941
+  type: 'test'
+  ...
+# Subtest: native ingress rejects format atomically without claiming Python has the same validation
+ok 425 - native ingress rejects format atomically without claiming Python has the same validation
+  ---
+  duration_ms: 15.587266
+  type: 'test'
+  ...
+# Subtest: native ingress rejects missing events atomically without claiming Python has the same validation
+ok 426 - native ingress rejects missing events atomically without claiming Python has the same validation
+  ---
+  duration_ms: 8.875215
+  type: 'test'
+  ...
+# Subtest: native ingress rejects invented cached source field atomically without claiming Python has the same validation
+ok 427 - native ingress rejects invented cached source field atomically without claiming Python has the same validation
+  ---
+  duration_ms: 13.036404
+  type: 'test'
+  ...
+# Subtest: native ingress rejects foreign owner event atomically without claiming Python has the same validation
+ok 428 - native ingress rejects foreign owner event atomically without claiming Python has the same validation
+  ---
+  duration_ms: 7.623561
+  type: 'test'
+  ...
+# Subtest: native ingress rejects duplicate full-mask cell atomically without claiming Python has the same validation
+ok 429 - native ingress rejects duplicate full-mask cell atomically without claiming Python has the same validation
+  ---
+  duration_ms: 8.747849
+  type: 'test'
+  ...
+# Subtest: native ingress rejects unknown control direction atomically without claiming Python has the same validation
+ok 430 - native ingress rejects unknown control direction atomically without claiming Python has the same validation
+  ---
+  duration_ms: 6.605593
+  type: 'test'
+  ...
+# Subtest: native ingress rejects nonnumeric epoch atomically without claiming Python has the same validation
+ok 431 - native ingress rejects nonnumeric epoch atomically without claiming Python has the same validation
+  ---
+  duration_ms: 7.891126
+  type: 'test'
+  ...
+# Subtest: native ingress rejects invented role status atomically without claiming Python has the same validation
+ok 432 - native ingress rejects invented role status atomically without claiming Python has the same validation
+  ---
+  duration_ms: 8.355716
+  type: 'test'
+  ...
+# Subtest: restoration does not execute foreign getters, accept cyclic state or transport runtime budgets
+ok 433 - restoration does not execute foreign getters, accept cyclic state or transport runtime budgets
+  ---
+  duration_ms: 9.274865
+  type: 'test'
+  ...
+# Subtest: an aborted proposal and a zero source search budget preserve the complete acquired memory
+ok 434 - an aborted proposal and a zero source search budget preserve the complete acquired memory
+  ---
+  duration_ms: 16.015482
+  type: 'test'
+  ...
+# Subtest: SelectedRigid matches independently executed original public geometry, proposals, acquisition and event replay
+ok 435 - SelectedRigid matches independently executed original public geometry, proposals, acquisition and event replay
+  ---
+  duration_ms: 3068.748194
+  type: 'test'
+  ...
+1..435
+# tests 564
+# suites 0
+# pass 564
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 278190.383823

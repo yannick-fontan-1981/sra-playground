@@ -1,0 +1,1048 @@
+TAP version 13
+# Subtest: ordered original geometry: measured_combat
+ok 1 - ordered original geometry: measured_combat
+  ---
+  duration_ms: 35.828227
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: measured_calibrated_recruit
+ok 2 - ordered original geometry: measured_calibrated_recruit
+  ---
+  duration_ms: 20.032131
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: measured_next_combat
+ok 3 - ordered original geometry: measured_next_combat
+  ---
+  duration_ms: 241.44844
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: measured_vertical
+ok 4 - ordered original geometry: measured_vertical
+  ---
+  duration_ms: 21.089055
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: measured_three_rooms
+ok 5 - ordered original geometry: measured_three_rooms
+  ---
+  duration_ms: 18.692907
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: measured_next_with_retained_order
+ok 6 - ordered original geometry: measured_next_with_retained_order
+  ---
+  duration_ms: 6.986116
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: reversed_valid_order
+ok 7 - ordered original geometry: reversed_valid_order
+  ---
+  duration_ms: 5.950162
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: missing_order_member
+ok 8 - ordered original geometry: missing_order_member
+  ---
+  duration_ms: 3.724558
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: duplicate_order_member
+ok 9 - ordered original geometry: duplicate_order_member
+  ---
+  duration_ms: 2.773579
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: filled_connector
+ok 10 - ordered original geometry: filled_connector
+  ---
+  duration_ms: 3.211942
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: reverse_connector_direction_is_not_progression_law
+ok 11 - ordered original geometry: reverse_connector_direction_is_not_progression_law
+  ---
+  duration_ms: 2.73514
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: translated_scene
+ok 12 - ordered original geometry: translated_scene
+  ---
+  duration_ms: 3.639379
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: two_pair_legend
+ok 13 - ordered original geometry: two_pair_legend
+  ---
+  duration_ms: 2.04109
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: multiple_active_rooms
+ok 14 - ordered original geometry: multiple_active_rooms
+  ---
+  duration_ms: 2.632926
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: no_active_room
+ok 15 - ordered original geometry: no_active_room
+  ---
+  duration_ms: 2.79447
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: interior_active_without_order
+ok 16 - ordered original geometry: interior_active_without_order
+  ---
+  duration_ms: 4.654366
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: interior_active_with_retained_order
+ok 17 - ordered original geometry: interior_active_with_retained_order
+  ---
+  duration_ms: 3.218412
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: empty_frame
+ok 18 - ordered original geometry: empty_frame
+  ---
+  duration_ms: 0.169898
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: zero_width_frame
+ok 19 - ordered original geometry: zero_width_frame
+  ---
+  duration_ms: 0.093992
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: missing_first_legend_relation
+ok 20 - ordered original geometry: missing_first_legend_relation
+  ---
+  duration_ms: 3.095756
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: missing_button_field
+ok 21 - ordered original geometry: missing_button_field
+  ---
+  duration_ms: 2.931147
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: missing_front_marker
+ok 22 - ordered original geometry: missing_front_marker
+  ---
+  duration_ms: 4.105605
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: extra_front_marker
+ok 23 - ordered original geometry: extra_front_marker
+  ---
+  duration_ms: 3.163469
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: missing_third_lattice_point
+ok 24 - ordered original geometry: missing_third_lattice_point
+  ---
+  duration_ms: 4.665612
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: queue_hole_before_later_item
+ok 25 - ordered original geometry: queue_hole_before_later_item
+  ---
+  duration_ms: 3.083407
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: missing_chain_connector
+ok 26 - ordered original geometry: missing_chain_connector
+  ---
+  duration_ms: 3.882768
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: spiral_0
+ok 27 - ordered original geometry: spiral_0
+  ---
+  duration_ms: 0.101153
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: spiral_1
+ok 28 - ordered original geometry: spiral_1
+  ---
+  duration_ms: 0.07249
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: spiral_2
+ok 29 - ordered original geometry: spiral_2
+  ---
+  duration_ms: 0.077217
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: spiral_3
+ok 30 - ordered original geometry: spiral_3
+  ---
+  duration_ms: 0.073201
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: spiral_4
+ok 31 - ordered original geometry: spiral_4
+  ---
+  duration_ms: 0.076415
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: spiral_5
+ok 32 - ordered original geometry: spiral_5
+  ---
+  duration_ms: 0.10557
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: spiral_6
+ok 33 - ordered original geometry: spiral_6
+  ---
+  duration_ms: 0.090026
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: spiral_7
+ok 34 - ordered original geometry: spiral_7
+  ---
+  duration_ms: 0.09224
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: spiral_8
+ok 35 - ordered original geometry: spiral_8
+  ---
+  duration_ms: 0.109596
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: complete_two_camp_lattice
+ok 36 - ordered original geometry: complete_two_camp_lattice
+  ---
+  duration_ms: 0.21769
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: two_front_markers_missing_from_lattice
+ok 37 - ordered original geometry: two_front_markers_missing_from_lattice
+  ---
+  duration_ms: 0.14548
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: three_lattice_points_missing
+ok 38 - ordered original geometry: three_lattice_points_missing
+  ---
+  duration_ms: 0.780822
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: rectangles_current_scene
+ok 39 - ordered original geometry: rectangles_current_scene
+  ---
+  duration_ms: 0.79941
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: legend_from_actual_components
+ok 40 - ordered original geometry: legend_from_actual_components
+  ---
+  duration_ms: 1.666693
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: horizontal_connector
+ok 41 - ordered original geometry: horizontal_connector
+  ---
+  duration_ms: 0.501679
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: wrong_connector_axis
+ok 42 - ordered original geometry: wrong_connector_axis
+  ---
+  duration_ms: 0.48878
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: mixed_connector_colors
+ok 43 - ordered original geometry: mixed_connector_colors
+  ---
+  duration_ms: 0.083857
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: integer_type_keys_in_complete_measurement_digest
+ok 44 - ordered original geometry: integer_type_keys_in_complete_measurement_digest
+  ---
+  duration_ms: 4.331187
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: integer_type_keys_in_offer_digest
+ok 45 - ordered original geometry: integer_type_keys_in_offer_digest
+  ---
+  duration_ms: 1.722137
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: json_scalar_types_digest
+ok 46 - ordered original geometry: json_scalar_types_digest
+  ---
+  duration_ms: 0.250469
+  type: 'test'
+  ...
+# Subtest: ordered original summary: combat
+ok 47 - ordered original summary: combat
+  ---
+  duration_ms: 0.448579
+  type: 'test'
+  ...
+# Subtest: ordered original summary: recruit
+ok 48 - ordered original summary: recruit
+  ---
+  duration_ms: 0.2572
+  type: 'test'
+  ...
+# Subtest: ordered original summary: next_combat
+ok 49 - ordered original summary: next_combat
+  ---
+  duration_ms: 0.301216
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: current_combat_all_visible_rooms
+ok 50 - ordered original complete projection: current_combat_all_visible_rooms
+  ---
+  duration_ms: 17.189732
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: recruitment_unique_surviving_append
+ok 51 - ordered original complete projection: recruitment_unique_surviving_append
+  ---
+  duration_ms: 11.510545
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: continuation_combat_last_room
+ok 52 - ordered original complete projection: continuation_combat_last_room
+  ---
+  duration_ms: 6.440489
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: remaining_0
+ok 53 - ordered original complete projection: remaining_0
+  ---
+  duration_ms: 4.520202
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: remaining_1
+ok 54 - ordered original complete projection: remaining_1
+  ---
+  duration_ms: 6.305185
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: unsupported_queue_order_hypothesis
+ok 55 - ordered original complete projection: unsupported_queue_order_hypothesis
+  ---
+  duration_ms: 3.969829
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: unsupported_append_hypothesis
+ok 56 - ordered original complete projection: unsupported_append_hypothesis
+  ---
+  duration_ms: 3.987145
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: unsupported_winner_hypothesis
+ok 57 - ordered original complete projection: unsupported_winner_hypothesis
+  ---
+  duration_ms: 5.270378
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: quota_None
+ok 58 - ordered original complete projection: quota_None
+  ---
+  duration_ms: 6.053765
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: quota_0
+ok 59 - ordered original complete projection: quota_0
+  ---
+  duration_ms: 5.696944
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: quota_9
+ok 60 - ordered original complete projection: quota_9
+  ---
+  duration_ms: 5.038807
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: incomplete_type_relation_is_not_impossibility
+ok 61 - ordered original complete projection: incomplete_type_relation_is_not_impossibility
+  ---
+  duration_ms: 3.331414
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: declared_tie_REMOVE_BOTH
+ok 62 - ordered original complete projection: declared_tie_REMOVE_BOTH
+  ---
+  duration_ms: 4.406751
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: declared_tie_KEEP_LEFT
+ok 63 - ordered original complete projection: declared_tie_KEEP_LEFT
+  ---
+  duration_ms: 9.019364
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: declared_tie_KEEP_RIGHT
+ok 64 - ordered original complete projection: declared_tie_KEEP_RIGHT
+  ---
+  duration_ms: 5.643433
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: declared_tie_STOP
+ok 65 - ordered original complete projection: declared_tie_STOP
+  ---
+  duration_ms: 6.59901
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: search_bound_0
+ok 66 - ordered original complete projection: search_bound_0
+  ---
+  duration_ms: 6.244474
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: search_bound_1
+ok 67 - ordered original complete projection: search_bound_1
+  ---
+  duration_ms: 6.682437
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: search_bound_2
+ok 68 - ordered original complete projection: search_bound_2
+  ---
+  duration_ms: 6.383383
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: search_bound_3
+ok 69 - ordered original complete projection: search_bound_3
+  ---
+  duration_ms: 7.125387
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: search_bound_4
+ok 70 - ordered original complete projection: search_bound_4
+  ---
+  duration_ms: 7.248593
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: three_visible_rooms_included
+ok 71 - ordered original complete projection: three_visible_rooms_included
+  ---
+  duration_ms: 8.111549
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: same_survivor_queues_reuse_current_call_cache
+ok 72 - ordered original complete projection: same_survivor_queues_reuse_current_call_cache
+  ---
+  duration_ms: 13.492084
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: future_room_quota_missing_blocks_whole_chain
+ok 73 - ordered original complete projection: future_room_quota_missing_blocks_whole_chain
+  ---
+  duration_ms: 7.990807
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: button_input_order_does_not_replace_type_enumeration
+ok 74 - ordered original complete projection: button_input_order_does_not_replace_type_enumeration
+  ---
+  duration_ms: 8.992512
+  type: 'test'
+  ...
+# Subtest: ordered original family: cold_no_actual_contrast_no_proposal
+ok 75 - ordered original family: cold_no_actual_contrast_no_proposal
+  ---
+  duration_ms: 53.234336
+  type: 'test'
+  ...
+# Subtest: ordered original family: foreign_single_enemy_return_calibrates
+ok 76 - ordered original family: foreign_single_enemy_return_calibrates
+  ---
+  duration_ms: 10.620177
+  type: 'test'
+  ...
+# Subtest: ordered original family: calibration_normalized_empty_command_data_source_boundary
+ok 77 - ordered original family: calibration_normalized_empty_command_data_source_boundary
+  ---
+  duration_ms: 9.899375
+  type: 'test'
+  ...
+# Subtest: ordered original family: unchanged_return_does_not_calibrate
+ok 78 - ordered original family: unchanged_return_does_not_calibrate
+  ---
+  duration_ms: 10.928334
+  type: 'test'
+  ...
+# Subtest: ordered original family: kernel_passive_no_change_revision2
+ok 79 - ordered original family: kernel_passive_no_change_revision2
+  ---
+  duration_ms: 9.81627
+  type: 'test'
+  ...
+# Subtest: ordered original family: foreign_command_identity_is_not_method_authority
+ok 80 - ordered original family: foreign_command_identity_is_not_method_authority
+  ---
+  duration_ms: 10.531753
+  type: 'test'
+  ...
+# Subtest: ordered original family: cold_recruit_without_contrast_no_offer
+ok 81 - ordered original family: cold_recruit_without_contrast_no_offer
+  ---
+  duration_ms: 7.623651
+  type: 'test'
+  ...
+# Subtest: ordered original family: all_current_offers
+ok 82 - ordered original family: all_current_offers
+  ---
+  duration_ms: 9.182169
+  type: 'test'
+  ...
+# Subtest: ordered original family: calibrated_current_recruitment_proposal
+ok 83 - ordered original family: calibrated_current_recruitment_proposal
+  ---
+  duration_ms: 11.884231
+  type: 'test'
+  ...
+# Subtest: ordered original family: current_guard_recomputes_exact_offer
+ok 84 - ordered original family: current_guard_recomputes_exact_offer
+  ---
+  duration_ms: 9.693514
+  type: 'test'
+  ...
+# Subtest: ordered original family: duplicate_exact_offer_guard_refuses
+ok 85 - ordered original family: duplicate_exact_offer_guard_refuses
+  ---
+  duration_ms: 17.866927
+  type: 'test'
+  ...
+# Subtest: ordered original family: guard_changed_observation_ref
+ok 86 - ordered original family: guard_changed_observation_ref
+  ---
+  duration_ms: 3.398414
+  type: 'test'
+  ...
+# Subtest: ordered original family: guard_changed_level_epoch
+ok 87 - ordered original family: guard_changed_level_epoch
+  ---
+  duration_ms: 3.447528
+  type: 'test'
+  ...
+# Subtest: ordered original family: guard_changed_frame_hash
+ok 88 - ordered original family: guard_changed_frame_hash
+  ---
+  duration_ms: 2.116574
+  type: 'test'
+  ...
+# Subtest: ordered original family: guard_nonzero_index
+ok 89 - ordered original family: guard_nonzero_index
+  ---
+  duration_ms: 2.494356
+  type: 'test'
+  ...
+# Subtest: ordered original family: guard_changed_actual_scene
+ok 90 - ordered original family: guard_changed_actual_scene
+  ---
+  duration_ms: 8.565827
+  type: 'test'
+  ...
+# Subtest: ordered original family: bind_rejects_inexact_action
+ok 91 - ordered original family: bind_rejects_inexact_action
+  ---
+  duration_ms: 1.950823
+  type: 'test'
+  ...
+# Subtest: ordered original family: after_never_promises_success_or_preservation
+ok 92 - ordered original family: after_never_promises_success_or_preservation
+  ---
+  duration_ms: 3.738915
+  type: 'test'
+  ...
+# Subtest: ordered original family: unavailable_current_point_action
+ok 93 - ordered original family: unavailable_current_point_action
+  ---
+  duration_ms: 6.00516
+  type: 'test'
+  ...
+# Subtest: ordered original family: no_remaining_action
+ok 94 - ordered original family: no_remaining_action
+  ---
+  duration_ms: 2.277748
+  type: 'test'
+  ...
+# Subtest: ordered original family: actual_append_reconciles_and_retains_suffix
+ok 95 - ordered original family: actual_append_reconciles_and_retains_suffix
+  ---
+  duration_ms: 9.412889
+  type: 'test'
+  ...
+# Subtest: ordered original family: continuation_reuses_validated_suffix
+ok 96 - ordered original family: continuation_reuses_validated_suffix
+  ---
+  duration_ms: 6.772091
+  type: 'test'
+  ...
+# Subtest: ordered original family: continuation_current_guard
+ok 97 - ordered original family: continuation_current_guard
+  ---
+  duration_ms: 7.151576
+  type: 'test'
+  ...
+# Subtest: ordered original family: actual_no_effect_reconciles_false
+ok 98 - ordered original family: actual_no_effect_reconciles_false
+  ---
+  duration_ms: 9.556016
+  type: 'test'
+  ...
+# Subtest: ordered original family: kernel_actual_no_effect_revision3
+ok 99 - ordered original family: kernel_actual_no_effect_revision3
+  ---
+  duration_ms: 8.302919
+  type: 'test'
+  ...
+# Subtest: ordered original family: tried_context_does_not_offer_again
+ok 100 - ordered original family: tried_context_does_not_offer_again
+  ---
+  duration_ms: 5.872339
+  type: 'test'
+  ...
+# Subtest: ordered original family: unmeasured_return_resets_order_and_continuation
+ok 101 - ordered original family: unmeasured_return_resets_order_and_continuation
+  ---
+  duration_ms: 9.232461
+  type: 'test'
+  ...
+# Subtest: ordered original family: unsupported_first_frame_is_passive_abstention
+ok 102 - ordered original family: unsupported_first_frame_is_passive_abstention
+  ---
+  duration_ms: 2.824105
+  type: 'test'
+  ...
+# Subtest: ordered original family: actual_boundary_preserves_method_not_permit
+ok 103 - ordered original family: actual_boundary_preserves_method_not_permit
+  ---
+  duration_ms: 5.422394
+  type: 'test'
+  ...
+# Subtest: ordered original family: portable_method_requires_new_current_binding
+ok 104 - ordered original family: portable_method_requires_new_current_binding
+  ---
+  duration_ms: 6.639101
+  type: 'test'
+  ...
+# Subtest: ordered original family: old_guard_refuses_new_epoch
+ok 105 - ordered original family: old_guard_refuses_new_epoch
+  ---
+  duration_ms: 2.732086
+  type: 'test'
+  ...
+# Subtest: ordered original family: restore_partial_source_fields
+ok 106 - ordered original family: restore_partial_source_fields
+  ---
+  duration_ms: 1.991214
+  type: 'test'
+  ...
+# Subtest: ordered original family: state_exact_all_seven_fields
+ok 107 - ordered original family: state_exact_all_seven_fields
+  ---
+  duration_ms: 1.521504
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: empty_abstention
+ok 108 - ordered original DRM and SRC: empty_abstention
+  ---
+  duration_ms: 1.328271
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: continuation_priority_before_cost
+ok 109 - ordered original DRM and SRC: continuation_priority_before_cost
+  ---
+  duration_ms: 1.498669
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: cost_before_survivors
+ok 110 - ordered original DRM and SRC: cost_before_survivors
+  ---
+  duration_ms: 1.512289
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: more_survivors_before_enumeration
+ok 111 - ordered original DRM and SRC: more_survivors_before_enumeration
+  ---
+  duration_ms: 1.704641
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: equal_priority_cost_survivors_keeps_first
+ok 112 - ordered original DRM and SRC: equal_priority_cost_survivors_keeps_first
+  ---
+  duration_ms: 1.115959
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: unknown_kind_refused
+ok 113 - ordered original DRM and SRC: unknown_kind_refused
+  ---
+  duration_ms: 1.038922
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: missing_fact_actual_interface_contrast
+ok 114 - ordered original DRM and SRC: missing_fact_actual_interface_contrast
+  ---
+  duration_ms: 1.377656
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: false_fact_actual_interface_contrast
+ok 115 - ordered original DRM and SRC: false_fact_actual_interface_contrast
+  ---
+  duration_ms: 1.635346
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: missing_fact_current_scene_revalidated
+ok 116 - ordered original DRM and SRC: missing_fact_current_scene_revalidated
+  ---
+  duration_ms: 1.353258
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: false_fact_current_scene_revalidated
+ok 117 - ordered original DRM and SRC: false_fact_current_scene_revalidated
+  ---
+  duration_ms: 1.385988
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: missing_fact_conditional_parent_survival
+ok 118 - ordered original DRM and SRC: missing_fact_conditional_parent_survival
+  ---
+  duration_ms: 1.47913
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: false_fact_conditional_parent_survival
+ok 119 - ordered original DRM and SRC: false_fact_conditional_parent_survival
+  ---
+  duration_ms: 1.840026
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: missing_fact_untried_context
+ok 120 - ordered original DRM and SRC: missing_fact_untried_context
+  ---
+  duration_ms: 1.302592
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: false_fact_untried_context
+ok 121 - ordered original DRM and SRC: false_fact_untried_context
+  ---
+  duration_ms: 1.203312
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: python_bool_numeric_equality
+ok 122 - ordered original DRM and SRC: python_bool_numeric_equality
+  ---
+  duration_ms: 1.316713
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: string_true_is_not_boolean_true
+ok 123 - ordered original DRM and SRC: string_true_is_not_boolean_true
+  ---
+  duration_ms: 2.148102
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: left_wins
+ok 124 - ordered consumed original V5 reduction: left_wins
+  ---
+  duration_ms: 1.511008
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: right_wins
+ok 125 - ordered consumed original V5 reduction: right_wins
+  ---
+  duration_ms: 0.923237
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: both_empty
+ok 126 - ordered consumed original V5 reduction: both_empty
+  ---
+  duration_ms: 0.784147
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: empty_left
+ok 127 - ordered consumed original V5 reduction: empty_left
+  ---
+  duration_ms: 0.845549
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: empty_right
+ok 128 - ordered consumed original V5 reduction: empty_right
+  ---
+  duration_ms: 0.807413
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: consumed_prefix_preserves_order
+ok 129 - ordered consumed original V5 reduction: consumed_prefix_preserves_order
+  ---
+  duration_ms: 1.121447
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: rank_add_one
+ok 130 - ordered consumed original V5 reduction: rank_add_one
+  ---
+  duration_ms: 0.930909
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: rank_set
+ok 131 - ordered consumed original V5 reduction: rank_set
+  ---
+  duration_ms: 1.773174
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: single_duel_scope
+ok 132 - ordered consumed original V5 reduction: single_duel_scope
+  ---
+  duration_ms: 3.031589
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: signature_mismatch
+ok 133 - ordered consumed original V5 reduction: signature_mismatch
+  ---
+  duration_ms: 0.780111
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: requested_type_mismatch
+ok 134 - ordered consumed original V5 reduction: requested_type_mismatch
+  ---
+  duration_ms: 0.704446
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: domain_bound
+ok 135 - ordered consumed original V5 reduction: domain_bound
+  ---
+  duration_ms: 0.729024
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: node_bound
+ok 136 - ordered consumed original V5 reduction: node_bound
+  ---
+  duration_ms: 1.188509
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: depth_bound
+ok 137 - ordered consumed original V5 reduction: depth_bound
+  ---
+  duration_ms: 0.951009
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: tie_REMOVE_BOTH
+ok 138 - ordered consumed original V5 reduction: tie_REMOVE_BOTH
+  ---
+  duration_ms: 0.837278
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: tie_KEEP_LEFT
+ok 139 - ordered consumed original V5 reduction: tie_KEEP_LEFT
+  ---
+  duration_ms: 0.83868
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: tie_KEEP_RIGHT
+ok 140 - ordered consumed original V5 reduction: tie_KEEP_RIGHT
+  ---
+  duration_ms: 0.818969
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: tie_STOP
+ok 141 - ordered consumed original V5 reduction: tie_STOP
+  ---
+  duration_ms: 0.795454
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: head_relation_not_bound
+ok 142 - ordered consumed original V5 reduction: head_relation_not_bound
+  ---
+  duration_ms: 0.916337
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: input_domain_incomplete
+ok 143 - ordered consumed original V5 reduction: input_domain_incomplete
+  ---
+  duration_ms: 0.775183
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: time_bound_before_visit
+ok 144 - ordered consumed original V5 reduction: time_bound_before_visit
+  ---
+  duration_ms: 1.046865
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: time_bound_on_final_finish
+ok 145 - ordered consumed original V5 reduction: time_bound_on_final_finish
+  ---
+  duration_ms: 0.999924
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: resume_exact_consumed_prefix
+ok 146 - ordered consumed original V5 reduction: resume_exact_consumed_prefix
+  ---
+  duration_ms: 1.679773
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: resume_wrong_command
+ok 147 - ordered consumed original V5 reduction: resume_wrong_command
+  ---
+  duration_ms: 1.540441
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: resume_wrong_digest
+ok 148 - ordered consumed original V5 reduction: resume_wrong_digest
+  ---
+  duration_ms: 1.348371
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: resume_wrong_cursor
+ok 149 - ordered consumed original V5 reduction: resume_wrong_cursor
+  ---
+  duration_ms: 1.432358
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: resume_wrong_ordered_suffix
+ok 150 - ordered consumed original V5 reduction: resume_wrong_ordered_suffix
+  ---
+  duration_ms: 1.178243
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: occurrence
+ok 151 - ordered original V5 model: occurrence
+  ---
+  duration_ms: 0.146152
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: numeric_rank_coercion
+ok 152 - ordered original V5 model: numeric_rank_coercion
+  ---
+  duration_ms: 0.195126
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: boolean_rank_coercion
+ok 153 - ordered original V5 model: boolean_rank_coercion
+  ---
+  duration_ms: 0.094704
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: rule
+ok 154 - ordered original V5 model: rule
+  ---
+  duration_ms: 0.096046
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: request_defaults
+ok 155 - ordered original V5 model: request_defaults
+  ---
+  duration_ms: 0.240544
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: null_resume_frontier_normalizes_empty_mapping
+ok 156 - ordered original V5 model: null_resume_frontier_normalizes_empty_mapping
+  ---
+  duration_ms: 0.22503
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: null_observation_normalizes_empty_mapping
+ok 157 - ordered original V5 model: null_observation_normalizes_empty_mapping
+  ---
+  duration_ms: 0.235286
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: duplicate_occurrence_identity
+ok 158 - ordered original V5 model: duplicate_occurrence_identity
+  ---
+  duration_ms: 0.673019
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: wrong_occurrence_camp
+ok 159 - ordered original V5 model: wrong_occurrence_camp
+  ---
+  duration_ms: 0.246693
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: duplicate_relation
+ok 160 - ordered original V5 model: duplicate_relation
+  ---
+  duration_ms: 0.144258
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: set_without_value
+ok 161 - ordered original V5 model: set_without_value
+  ---
+  duration_ms: 0.191851
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: zero_node_bound
+ok 162 - ordered original V5 model: zero_node_bound
+  ---
+  duration_ms: 0.109185
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: invalid_tie_rule
+ok 163 - ordered original V5 model: invalid_tie_rule
+  ---
+  duration_ms: 0.172211
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: negative_cursor
+ok 164 - ordered original V5 model: negative_cursor
+  ---
+  duration_ms: 0.20445
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: extra_request_key
+ok 165 - ordered original V5 model: extra_request_key
+  ---
+  duration_ms: 0.134373
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: empty_occurrence_identity
+ok 166 - ordered original V5 model: empty_occurrence_identity
+  ---
+  duration_ms: 0.1187
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: extra_occurrence_key
+ok 167 - ordered original V5 model: extra_occurrence_key
+  ---
+  duration_ms: 0.114163
+  type: 'test'
+  ...
+# Subtest: ordered named native boundary: non_integer_digest_native_boundary
+ok 168 - ordered named native boundary: non_integer_digest_native_boundary
+  ---
+  duration_ms: 0.252723
+  type: 'test'
+  ...
+# Subtest: ordered named native boundary: unsafe_integer_rank_boundary
+ok 169 - ordered named native boundary: unsafe_integer_rank_boundary
+  ---
+  duration_ms: 0.074493
+  type: 'test'
+  ...
+# Subtest: ordered reference binds its generator, all checked originals and consumed source functions
+ok 170 - ordered reference binds its generator, all checked originals and consumed source functions
+  ---
+  duration_ms: 55.001212
+  type: 'test'
+  ...
+# Subtest: ordered cache coverage comes from actual original calls within one conditional projection
+ok 171 - ordered cache coverage comes from actual original calls within one conditional projection
+  ---
+  duration_ms: 0.199833
+  type: 'test'
+  ...
+# Subtest: ordered cold method comes from actual public contrast and portable methods grant no current permit
+ok 172 - ordered cold method comes from actual public contrast and portable methods grant no current permit
+  ---
+  duration_ms: 0.274125
+  type: 'test'
+  ...
+# Subtest: ordered complete source restoration detaches caller state and returned state
+ok 173 - ordered complete source restoration detaches caller state and returned state
+  ---
+  duration_ms: 24.173754
+  type: 'test'
+  ...
+1..173
+# tests 173
+# suites 0
+# pass 173
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1469.120703

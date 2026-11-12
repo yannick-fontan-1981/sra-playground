@@ -1,0 +1,28 @@
+test_actual_js_admission_rejects_missing_stale_and_nonrunning_parent (__main__.ProofControlTests.test_actual_js_admission_rejects_missing_stale_and_nonrunning_parent)
+Execute only real admission statements, with no harness import or call. ... ok
+test_changed_activity_helper_is_charged_then_blocks_new_admission (__main__.ProofControlTests.test_changed_activity_helper_is_charged_then_blocks_new_admission)
+Changed execution code cannot erase its debit or authorize another interval. ... FAIL
+test_checkpoint_cannot_be_promoted_to_terminal_result (__main__.ProofControlTests.test_checkpoint_cannot_be_promoted_to_terminal_result)
+Even a checkpoint report labelled passed is still only a checkpoint. ... ok
+test_hard_retention_deadline_kills_and_reaps_sleeping_worker (__main__.ProofControlTests.test_hard_retention_deadline_kills_and_reaps_sleeping_worker)
+The actual controller kills an actual child; it keeps raw evidence partial. ... ok
+test_ledger_rejects_running_broken_prior_undercharge_and_changed_receipt (__main__.ProofControlTests.test_ledger_rejects_running_broken_prior_undercharge_and_changed_receipt)
+A terminal debit is admissible; incomplete or rewritten accounting is not. ... ok
+test_optional_action_data_and_actual_final_matching (__main__.ProofControlTests.test_optional_action_data_and_actual_final_matching)
+A real ACTION5-shaped return may omit data; three final fields must agree. ... ok
+
+======================================================================
+FAIL: test_changed_activity_helper_is_charged_then_blocks_new_admission (__main__.ProofControlTests.test_changed_activity_helper_is_charged_then_blocks_new_admission)
+Changed execution code cannot erase its debit or authorize another interval.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/sites/sra-lot10c-20261111/.sites-checkout/docs/migration/lot10c-evidence/test-proof-controls.py", line 241, in test_changed_activity_helper_is_charged_then_blocks_new_admission
+    with self.assertRaises(ValueError, msg='A retained changed-helper receipt must block the next campaign admission'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised : A retained changed-helper receipt must block the next campaign admission
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.939s
+
+FAILED (failures=1)
+PROOF_CONTROLS_SUMMARY {"actualCaseLedgerReadOrWritten": false, "errors": 0, "failures": 1, "observations": [{"excludedNonNodeImports": 2, "nativeHarnessCalled": false, "nativeHarnessImported": false, "rejected": ["missing_admission", "stale_parent", "terminal_entry", "wrong_contract"], "test": "actual_js_admission_prefix", "validControlPassed": true}, {"allowanceSeconds": 0.1, "elapsedSeconds": 0.10137234700232511, "exitCode": -9, "partialResult": true, "rawBytesPreserved": true, "reaped": true, "test": "actual_sleeping_retention"}], "qualification": "Synthetic proof-control regressions only, including one supervised sleeping process and an AST-isolated admission prefix. No case, gameplay, source parity, cost or release outcome is established.", "realGames": 0, "schema": "logos-engine.lot10c.synthetic-proof-controls.v1", "sourceInputsUnchanged": true, "sourceSha256": {"case-activity.py": "c3a61752ff70eb6724a723a18c10fa4d445bf72d3d54011d7c2d7db6dbbe0681", "run-clocked-proof.py": "8e3ed676c8c247fdb2e02f56dd75c3ea90658675bb83012bbf8aa6e520f208b5", "run-ordered-recruitment-campaign.mjs": "2bf91f553494206356abff91fd9ec58c7c281ea73cf045d1bb2e8b9527d80c3d"}, "status": "failed", "testsRun": 6}

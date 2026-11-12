@@ -1,0 +1,24 @@
+{
+  "schema": "logos-engine.lot10c.supplement-link.v1",
+  "recordedAt": "2026-11-11T21:25:11.937521+00:00",
+  "originalReview": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/kata-supplement/review.json",
+    "sha256": "5d5e1747dcec686e71cea058947faf4c4ad75c0aececec2ad3d99cb7e0bdb7ff",
+    "bytes": 1876
+  },
+  "exactReviewCopy": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/kata-supplement-review.json",
+    "sha256": "5d5e1747dcec686e71cea058947faf4c4ad75c0aececec2ad3d99cb7e0bdb7ff",
+    "bytes": 1876
+  },
+  "sameFrozenNativeDigest": "ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316",
+  "sameSourceManifestBytes": true,
+  "mainCases": 10,
+  "mainComparisonChecks": 170,
+  "separateKataCases": 1,
+  "separateKataComparisonChecks": 17,
+  "distinctGames": 11,
+  "combinedCoverageChecks": 187,
+  "singleElevenCaseRunClaimed": false,
+  "qualification": "KATA remains a separate declared execution. Its historical comparisonBasis names 6A/native0.60 provenance, not a newly invented self-comparison on0.66."
+}

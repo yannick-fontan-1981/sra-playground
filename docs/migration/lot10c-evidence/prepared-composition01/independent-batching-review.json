@@ -1,0 +1,19 @@
+{
+  "schema": "lot10c.development-batch-helper-review.v1",
+  "at": "2026-11-11T19:33:31.019709+00:00",
+  "reviewer": "/root/delivery_docs",
+  "status": "no_blocking_discrepancy_found",
+  "sourceHashes": {
+    "run-release-checks.py": "fdbb1f797453233fdf20e4fe9bb50c76a614ebfb358c85026ca7d5b4958d61dd",
+    "review-test-batches.py": "ca0c7c3b32a0cde671fbdd9f575363e704988b96162b7f3a4123f5013c5886fb"
+  },
+  "scope": "Independent static review; previously retained12metadata controls and3harmless process controls remain separate actual executions.",
+  "findings": [
+    "Four actual distinct serial receipts must cover exact56 files in4x14 partition, closed3excluded and no test-name filter.",
+    "Native/source/tests/helpers/scopes, exact raw/gzip retention and TAP counts checked before derived summary.",
+    "Only the owned process group is signaled/reaped; a descendant deliberately leaving the group is outside this guarantee.",
+    "300second child bound is followed by cleanup under SH until actual group disappearance.",
+    "Unbatched runner unchanged; finalDeliveryAccepted and officialCostAccepted remain false."
+  ],
+  "testsExecutedByReviewer": false
+}

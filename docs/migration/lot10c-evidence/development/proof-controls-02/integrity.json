@@ -1,0 +1,83 @@
+{
+  "schema": "logos-engine.lot10c.proof-controls-integrity.v1",
+  "status": "passed",
+  "checkedAt": "2026-11-11T17:22:56.101156+00:00",
+  "inputsBefore": [
+    {
+      "path": "docs/migration/lot10c-evidence/test-proof-controls.py",
+      "sha256": "ef19004a339385aae01b646b7d534371ad1db5cdd90f50c5f7afb18026bede2d",
+      "bytes": 20258
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/run-clocked-proof.py",
+      "sha256": "da8fc65a8be4ea375cf90f0aabf3b354407ba287a4b302d51186a2821c0c655a",
+      "bytes": 42292
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/case-activity.py",
+      "sha256": "c3a61752ff70eb6724a723a18c10fa4d445bf72d3d54011d7c2d7db6dbbe0681",
+      "bytes": 8126
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/run-ordered-recruitment-campaign.mjs",
+      "sha256": "2bf91f553494206356abff91fd9ec58c7c281ea73cf045d1bb2e8b9527d80c3d",
+      "bytes": 10496
+    }
+  ],
+  "inputsAfter": [
+    {
+      "path": "docs/migration/lot10c-evidence/test-proof-controls.py",
+      "sha256": "ef19004a339385aae01b646b7d534371ad1db5cdd90f50c5f7afb18026bede2d",
+      "bytes": 20258
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/run-clocked-proof.py",
+      "sha256": "da8fc65a8be4ea375cf90f0aabf3b354407ba287a4b302d51186a2821c0c655a",
+      "bytes": 42292
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/case-activity.py",
+      "sha256": "c3a61752ff70eb6724a723a18c10fa4d445bf72d3d54011d7c2d7db6dbbe0681",
+      "bytes": 8126
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/run-ordered-recruitment-campaign.mjs",
+      "sha256": "2bf91f553494206356abff91fd9ec58c7c281ea73cf045d1bb2e8b9527d80c3d",
+      "bytes": 10496
+    }
+  ],
+  "inputsFinal": [
+    {
+      "path": "docs/migration/lot10c-evidence/test-proof-controls.py",
+      "sha256": "ef19004a339385aae01b646b7d534371ad1db5cdd90f50c5f7afb18026bede2d",
+      "bytes": 20258
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/run-clocked-proof.py",
+      "sha256": "da8fc65a8be4ea375cf90f0aabf3b354407ba287a4b302d51186a2821c0c655a",
+      "bytes": 42292
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/case-activity.py",
+      "sha256": "c3a61752ff70eb6724a723a18c10fa4d445bf72d3d54011d7c2d7db6dbbe0681",
+      "bytes": 8126
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/run-ordered-recruitment-campaign.mjs",
+      "sha256": "2bf91f553494206356abff91fd9ec58c7c281ea73cf045d1bb2e8b9527d80c3d",
+      "bytes": 10496
+    }
+  ],
+  "inputsUnchanged": true,
+  "rawOutput": {
+    "path": "docs/migration/lot10c-evidence/development/proof-controls-02/raw.txt",
+    "sha256": "0a5d601eada22959fb5d93a9ad7c0294945d5c066b32f10898abebde6cc26b31",
+    "bytes": 2714
+  },
+  "executionReceipt": {
+    "path": "docs/migration/lot10c-evidence/development/proof-controls-02/execution.json",
+    "sha256": "2d41b0b0021fa31c4b3878a9dcd7f1f2693f30478cad8e7bb036f33418671188",
+    "bytes": 4189
+  },
+  "scope": "Four exact helper/test inputs and the two newly retained output files. No prior run output modified."
+}

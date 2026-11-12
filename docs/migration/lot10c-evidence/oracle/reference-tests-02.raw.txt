@@ -1,0 +1,2133 @@
+TAP version 13
+# Subtest: ordered original geometry: measured_combat
+ok 1 - ordered original geometry: measured_combat
+  ---
+  duration_ms: 14.402208
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: measured_calibrated_recruit
+ok 2 - ordered original geometry: measured_calibrated_recruit
+  ---
+  duration_ms: 11.249733
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: measured_next_combat
+ok 3 - ordered original geometry: measured_next_combat
+  ---
+  duration_ms: 7.00719
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: measured_vertical
+ok 4 - ordered original geometry: measured_vertical
+  ---
+  duration_ms: 4.756604
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: measured_three_rooms
+ok 5 - ordered original geometry: measured_three_rooms
+  ---
+  duration_ms: 5.499043
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: measured_next_with_retained_order
+ok 6 - ordered original geometry: measured_next_with_retained_order
+  ---
+  duration_ms: 4.997507
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: reversed_valid_order
+ok 7 - ordered original geometry: reversed_valid_order
+  ---
+  duration_ms: 3.783577
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: missing_order_member
+ok 8 - ordered original geometry: missing_order_member
+  ---
+  duration_ms: 4.151072
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: duplicate_order_member
+ok 9 - ordered original geometry: duplicate_order_member
+  ---
+  duration_ms: 3.380539
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: filled_connector
+ok 10 - ordered original geometry: filled_connector
+  ---
+  duration_ms: 5.956243
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: reverse_connector_direction_is_not_progression_law
+ok 11 - ordered original geometry: reverse_connector_direction_is_not_progression_law
+  ---
+  duration_ms: 3.698247
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: translated_scene
+ok 12 - ordered original geometry: translated_scene
+  ---
+  duration_ms: 5.016336
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: two_pair_legend
+ok 13 - ordered original geometry: two_pair_legend
+  ---
+  duration_ms: 1.993016
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: multiple_active_rooms
+ok 14 - ordered original geometry: multiple_active_rooms
+  ---
+  duration_ms: 3.373478
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: no_active_room
+ok 15 - ordered original geometry: no_active_room
+  ---
+  duration_ms: 1.848528
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: interior_active_without_order
+ok 16 - ordered original geometry: interior_active_without_order
+  ---
+  duration_ms: 4.469451
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: interior_active_with_retained_order
+ok 17 - ordered original geometry: interior_active_with_retained_order
+  ---
+  duration_ms: 3.243953
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: empty_frame
+ok 18 - ordered original geometry: empty_frame
+  ---
+  duration_ms: 0.06603
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: zero_width_frame
+ok 19 - ordered original geometry: zero_width_frame
+  ---
+  duration_ms: 0.114813
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: missing_first_legend_relation
+ok 20 - ordered original geometry: missing_first_legend_relation
+  ---
+  duration_ms: 1.953636
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: missing_button_field
+ok 21 - ordered original geometry: missing_button_field
+  ---
+  duration_ms: 1.736529
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: missing_front_marker
+ok 22 - ordered original geometry: missing_front_marker
+  ---
+  duration_ms: 2.440281
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: extra_front_marker
+ok 23 - ordered original geometry: extra_front_marker
+  ---
+  duration_ms: 1.787496
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: missing_third_lattice_point
+ok 24 - ordered original geometry: missing_third_lattice_point
+  ---
+  duration_ms: 5.451052
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: queue_hole_before_later_item
+ok 25 - ordered original geometry: queue_hole_before_later_item
+  ---
+  duration_ms: 2.348202
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: missing_chain_connector
+ok 26 - ordered original geometry: missing_chain_connector
+  ---
+  duration_ms: 2.476605
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: spiral_0
+ok 27 - ordered original geometry: spiral_0
+  ---
+  duration_ms: 0.154654
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: spiral_1
+ok 28 - ordered original geometry: spiral_1
+  ---
+  duration_ms: 0.057867
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: spiral_2
+ok 29 - ordered original geometry: spiral_2
+  ---
+  duration_ms: 0.045229
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: spiral_3
+ok 30 - ordered original geometry: spiral_3
+  ---
+  duration_ms: 0.042534
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: spiral_4
+ok 31 - ordered original geometry: spiral_4
+  ---
+  duration_ms: 0.042254
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: spiral_5
+ok 32 - ordered original geometry: spiral_5
+  ---
+  duration_ms: 0.043315
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: spiral_6
+ok 33 - ordered original geometry: spiral_6
+  ---
+  duration_ms: 0.050186
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: spiral_7
+ok 34 - ordered original geometry: spiral_7
+  ---
+  duration_ms: 0.05262
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: spiral_8
+ok 35 - ordered original geometry: spiral_8
+  ---
+  duration_ms: 0.060812
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: complete_two_camp_lattice
+ok 36 - ordered original geometry: complete_two_camp_lattice
+  ---
+  duration_ms: 0.148434
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: two_front_markers_missing_from_lattice
+ok 37 - ordered original geometry: two_front_markers_missing_from_lattice
+  ---
+  duration_ms: 0.13929
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: three_lattice_points_missing
+ok 38 - ordered original geometry: three_lattice_points_missing
+  ---
+  duration_ms: 0.07979
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: rectangles_current_scene
+ok 39 - ordered original geometry: rectangles_current_scene
+  ---
+  duration_ms: 0.337569
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: legend_from_actual_components
+ok 40 - ordered original geometry: legend_from_actual_components
+  ---
+  duration_ms: 1.006548
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: horizontal_connector
+ok 41 - ordered original geometry: horizontal_connector
+  ---
+  duration_ms: 0.273623
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: wrong_connector_axis
+ok 42 - ordered original geometry: wrong_connector_axis
+  ---
+  duration_ms: 0.431351
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: mixed_connector_colors
+ok 43 - ordered original geometry: mixed_connector_colors
+  ---
+  duration_ms: 0.049695
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: integer_type_keys_in_complete_measurement_digest
+ok 44 - ordered original geometry: integer_type_keys_in_complete_measurement_digest
+  ---
+  duration_ms: 2.253369
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: integer_type_keys_in_offer_digest
+ok 45 - ordered original geometry: integer_type_keys_in_offer_digest
+  ---
+  duration_ms: 1.062753
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: json_scalar_types_digest
+not ok 46 - ordered original geometry: json_scalar_types_digest
+  ---
+  duration_ms: 0.314484
+  type: 'test'
+  location: '/workspace/sites/sra-lot10c-20261111/.sites-checkout/tests/v6-ordered-recruitment-reference.test.ts:34:42'
+  failureType: 'testCodeFailure'
+  error: 'Portable V7 numbers must be safe integers, without negative zero'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    assertPortableNumber (file:///workspace/sites/sra-lot10c-20261111/.sites-checkout/src/logos-engine/canonical.ts:102:11)
+    encode (file:///workspace/sites/sra-lot10c-20261111/.sites-checkout/src/logos-engine/canonical.ts:190:37)
+    canonical (file:///workspace/sites/sra-lot10c-20261111/.sites-checkout/src/logos-engine/canonical.ts:222:10)
+    encode (file:///workspace/sites/sra-lot10c-20261111/.sites-checkout/src/logos-engine/v6-ordered-recruitment-geometry.ts:29:53)
+    file:///workspace/sites/sra-lot10c-20261111/.sites-checkout/src/logos-engine/v6-ordered-recruitment-geometry.ts:35:35
+    Array.map (<anonymous>)
+    encode (file:///workspace/sites/sra-lot10c-20261111/.sites-checkout/src/logos-engine/v6-ordered-recruitment-geometry.ts:35:22)
+    Module.recruitmentDigest (file:///workspace/sites/sra-lot10c-20261111/.sites-checkout/src/logos-engine/v6-ordered-recruitment-geometry.ts:49:47)
+    run (file:///workspace/sites/sra-lot10c-20261111/.sites-checkout/tests/v6-ordered-recruitment-reference.test.ts:36:62)
+    TestContext.<anonymous> (file:///workspace/sites/sra-lot10c-20261111/.sites-checkout/tests/v6-ordered-recruitment-reference.test.ts:38:25)
+  ...
+# Subtest: ordered original summary: combat
+ok 47 - ordered original summary: combat
+  ---
+  duration_ms: 0.1793
+  type: 'test'
+  ...
+# Subtest: ordered original summary: recruit
+ok 48 - ordered original summary: recruit
+  ---
+  duration_ms: 0.135404
+  type: 'test'
+  ...
+# Subtest: ordered original summary: next_combat
+ok 49 - ordered original summary: next_combat
+  ---
+  duration_ms: 0.091778
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: current_combat_all_visible_rooms
+ok 50 - ordered original complete projection: current_combat_all_visible_rooms
+  ---
+  duration_ms: 9.831017
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: recruitment_unique_surviving_append
+ok 51 - ordered original complete projection: recruitment_unique_surviving_append
+  ---
+  duration_ms: 7.498079
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: continuation_combat_last_room
+ok 52 - ordered original complete projection: continuation_combat_last_room
+  ---
+  duration_ms: 4.935594
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: remaining_0
+ok 53 - ordered original complete projection: remaining_0
+  ---
+  duration_ms: 3.96491
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: remaining_1
+ok 54 - ordered original complete projection: remaining_1
+  ---
+  duration_ms: 5.691895
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: unsupported_queue_order_hypothesis
+ok 55 - ordered original complete projection: unsupported_queue_order_hypothesis
+  ---
+  duration_ms: 3.781414
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: unsupported_append_hypothesis
+ok 56 - ordered original complete projection: unsupported_append_hypothesis
+  ---
+  duration_ms: 3.582383
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: unsupported_winner_hypothesis
+ok 57 - ordered original complete projection: unsupported_winner_hypothesis
+  ---
+  duration_ms: 3.42118
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: quota_None
+ok 58 - ordered original complete projection: quota_None
+  ---
+  duration_ms: 4.5016
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: quota_0
+ok 59 - ordered original complete projection: quota_0
+  ---
+  duration_ms: 5.312993
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: quota_9
+ok 60 - ordered original complete projection: quota_9
+  ---
+  duration_ms: 3.735283
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: incomplete_type_relation_is_not_impossibility
+ok 61 - ordered original complete projection: incomplete_type_relation_is_not_impossibility
+  ---
+  duration_ms: 3.20261
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: declared_tie_REMOVE_BOTH
+ok 62 - ordered original complete projection: declared_tie_REMOVE_BOTH
+  ---
+  duration_ms: 4.204041
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: declared_tie_KEEP_LEFT
+ok 63 - ordered original complete projection: declared_tie_KEEP_LEFT
+  ---
+  duration_ms: 4.302339
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: declared_tie_KEEP_RIGHT
+ok 64 - ordered original complete projection: declared_tie_KEEP_RIGHT
+  ---
+  duration_ms: 4.365434
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: declared_tie_STOP
+ok 65 - ordered original complete projection: declared_tie_STOP
+  ---
+  duration_ms: 5.698565
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: search_bound_0
+ok 66 - ordered original complete projection: search_bound_0
+  ---
+  duration_ms: 3.987574
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: search_bound_1
+ok 67 - ordered original complete projection: search_bound_1
+  ---
+  duration_ms: 3.7924
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: search_bound_2
+ok 68 - ordered original complete projection: search_bound_2
+  ---
+  duration_ms: 3.932331
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: search_bound_3
+ok 69 - ordered original complete projection: search_bound_3
+  ---
+  duration_ms: 4.190241
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: search_bound_4
+ok 70 - ordered original complete projection: search_bound_4
+  ---
+  duration_ms: 4.067685
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: three_visible_rooms_included
+ok 71 - ordered original complete projection: three_visible_rooms_included
+  ---
+  duration_ms: 4.812959
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: future_room_quota_missing_blocks_whole_chain
+ok 72 - ordered original complete projection: future_room_quota_missing_blocks_whole_chain
+  ---
+  duration_ms: 5.271691
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: button_input_order_does_not_replace_type_enumeration
+ok 73 - ordered original complete projection: button_input_order_does_not_replace_type_enumeration
+  ---
+  duration_ms: 4.159754
+  type: 'test'
+  ...
+# Subtest: ordered original family: cold_no_actual_contrast_no_proposal
+ok 74 - ordered original family: cold_no_actual_contrast_no_proposal
+  ---
+  duration_ms: 26.143331
+  type: 'test'
+  ...
+# Subtest: ordered original family: foreign_single_enemy_return_calibrates
+ok 75 - ordered original family: foreign_single_enemy_return_calibrates
+  ---
+  duration_ms: 14.618089
+  type: 'test'
+  ...
+# Subtest: ordered original family: unchanged_return_does_not_calibrate
+ok 76 - ordered original family: unchanged_return_does_not_calibrate
+  ---
+  duration_ms: 7.625321
+  type: 'test'
+  ...
+# Subtest: ordered original family: kernel_passive_no_change_revision2
+ok 77 - ordered original family: kernel_passive_no_change_revision2
+  ---
+  duration_ms: 7.221422
+  type: 'test'
+  ...
+# Subtest: ordered original family: foreign_command_identity_is_not_method_authority
+ok 78 - ordered original family: foreign_command_identity_is_not_method_authority
+  ---
+  duration_ms: 8.026256
+  type: 'test'
+  ...
+# Subtest: ordered original family: cold_recruit_without_contrast_no_offer
+ok 79 - ordered original family: cold_recruit_without_contrast_no_offer
+  ---
+  duration_ms: 4.108366
+  type: 'test'
+  ...
+# Subtest: ordered original family: all_current_offers
+ok 80 - ordered original family: all_current_offers
+  ---
+  duration_ms: 8.605939
+  type: 'test'
+  ...
+# Subtest: ordered original family: calibrated_current_recruitment_proposal
+ok 81 - ordered original family: calibrated_current_recruitment_proposal
+  ---
+  duration_ms: 8.204225
+  type: 'test'
+  ...
+# Subtest: ordered original family: current_guard_recomputes_exact_offer
+ok 82 - ordered original family: current_guard_recomputes_exact_offer
+  ---
+  duration_ms: 6.985747
+  type: 'test'
+  ...
+# Subtest: ordered original family: duplicate_exact_offer_guard_refuses
+ok 83 - ordered original family: duplicate_exact_offer_guard_refuses
+  ---
+  duration_ms: 8.517195
+  type: 'test'
+  ...
+# Subtest: ordered original family: guard_changed_observation_ref
+ok 84 - ordered original family: guard_changed_observation_ref
+  ---
+  duration_ms: 4.323441
+  type: 'test'
+  ...
+# Subtest: ordered original family: guard_changed_level_epoch
+ok 85 - ordered original family: guard_changed_level_epoch
+  ---
+  duration_ms: 3.783627
+  type: 'test'
+  ...
+# Subtest: ordered original family: guard_changed_frame_hash
+ok 86 - ordered original family: guard_changed_frame_hash
+  ---
+  duration_ms: 2.195561
+  type: 'test'
+  ...
+# Subtest: ordered original family: guard_nonzero_index
+ok 87 - ordered original family: guard_nonzero_index
+  ---
+  duration_ms: 4.254207
+  type: 'test'
+  ...
+# Subtest: ordered original family: guard_changed_actual_scene
+ok 88 - ordered original family: guard_changed_actual_scene
+  ---
+  duration_ms: 7.186008
+  type: 'test'
+  ...
+# Subtest: ordered original family: bind_rejects_inexact_action
+ok 89 - ordered original family: bind_rejects_inexact_action
+  ---
+  duration_ms: 1.585441
+  type: 'test'
+  ...
+# Subtest: ordered original family: after_never_promises_success_or_preservation
+ok 90 - ordered original family: after_never_promises_success_or_preservation
+  ---
+  duration_ms: 3.898214
+  type: 'test'
+  ...
+# Subtest: ordered original family: unavailable_current_point_action
+ok 91 - ordered original family: unavailable_current_point_action
+  ---
+  duration_ms: 5.611955
+  type: 'test'
+  ...
+# Subtest: ordered original family: no_remaining_action
+ok 92 - ordered original family: no_remaining_action
+  ---
+  duration_ms: 2.2604
+  type: 'test'
+  ...
+# Subtest: ordered original family: actual_append_reconciles_and_retains_suffix
+ok 93 - ordered original family: actual_append_reconciles_and_retains_suffix
+  ---
+  duration_ms: 9.170251
+  type: 'test'
+  ...
+# Subtest: ordered original family: continuation_reuses_validated_suffix
+ok 94 - ordered original family: continuation_reuses_validated_suffix
+  ---
+  duration_ms: 5.607787
+  type: 'test'
+  ...
+# Subtest: ordered original family: continuation_current_guard
+ok 95 - ordered original family: continuation_current_guard
+  ---
+  duration_ms: 6.434506
+  type: 'test'
+  ...
+# Subtest: ordered original family: actual_no_effect_reconciles_false
+ok 96 - ordered original family: actual_no_effect_reconciles_false
+  ---
+  duration_ms: 6.088684
+  type: 'test'
+  ...
+# Subtest: ordered original family: kernel_actual_no_effect_revision3
+ok 97 - ordered original family: kernel_actual_no_effect_revision3
+  ---
+  duration_ms: 7.43933
+  type: 'test'
+  ...
+# Subtest: ordered original family: tried_context_does_not_offer_again
+ok 98 - ordered original family: tried_context_does_not_offer_again
+  ---
+  duration_ms: 5.07945
+  type: 'test'
+  ...
+# Subtest: ordered original family: unmeasured_return_resets_order_and_continuation
+ok 99 - ordered original family: unmeasured_return_resets_order_and_continuation
+  ---
+  duration_ms: 7.417888
+  type: 'test'
+  ...
+# Subtest: ordered original family: unsupported_first_frame_is_passive_abstention
+ok 100 - ordered original family: unsupported_first_frame_is_passive_abstention
+  ---
+  duration_ms: 3.255961
+  type: 'test'
+  ...
+# Subtest: ordered original family: actual_boundary_preserves_method_not_permit
+ok 101 - ordered original family: actual_boundary_preserves_method_not_permit
+  ---
+  duration_ms: 4.789494
+  type: 'test'
+  ...
+# Subtest: ordered original family: portable_method_requires_new_current_binding
+ok 102 - ordered original family: portable_method_requires_new_current_binding
+  ---
+  duration_ms: 7.796829
+  type: 'test'
+  ...
+# Subtest: ordered original family: old_guard_refuses_new_epoch
+ok 103 - ordered original family: old_guard_refuses_new_epoch
+  ---
+  duration_ms: 2.028169
+  type: 'test'
+  ...
+# Subtest: ordered original family: restore_partial_source_fields
+ok 104 - ordered original family: restore_partial_source_fields
+  ---
+  duration_ms: 2.188752
+  type: 'test'
+  ...
+# Subtest: ordered original family: state_exact_all_seven_fields
+ok 105 - ordered original family: state_exact_all_seven_fields
+  ---
+  duration_ms: 1.622187
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: empty_abstention
+ok 106 - ordered original DRM and SRC: empty_abstention
+  ---
+  duration_ms: 1.156655
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: continuation_priority_before_cost
+ok 107 - ordered original DRM and SRC: continuation_priority_before_cost
+  ---
+  duration_ms: 1.177606
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: cost_before_survivors
+ok 108 - ordered original DRM and SRC: cost_before_survivors
+  ---
+  duration_ms: 1.274252
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: more_survivors_before_enumeration
+ok 109 - ordered original DRM and SRC: more_survivors_before_enumeration
+  ---
+  duration_ms: 0.988581
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: equal_priority_cost_survivors_keeps_first
+ok 110 - ordered original DRM and SRC: equal_priority_cost_survivors_keeps_first
+  ---
+  duration_ms: 0.931966
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: unknown_kind_refused
+ok 111 - ordered original DRM and SRC: unknown_kind_refused
+  ---
+  duration_ms: 0.917995
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: missing_fact_actual_interface_contrast
+ok 112 - ordered original DRM and SRC: missing_fact_actual_interface_contrast
+  ---
+  duration_ms: 0.971896
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: false_fact_actual_interface_contrast
+ok 113 - ordered original DRM and SRC: false_fact_actual_interface_contrast
+  ---
+  duration_ms: 2.225432
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: missing_fact_current_scene_revalidated
+ok 114 - ordered original DRM and SRC: missing_fact_current_scene_revalidated
+  ---
+  duration_ms: 1.33259
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: false_fact_current_scene_revalidated
+ok 115 - ordered original DRM and SRC: false_fact_current_scene_revalidated
+  ---
+  duration_ms: 1.442241
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: missing_fact_conditional_parent_survival
+ok 116 - ordered original DRM and SRC: missing_fact_conditional_parent_survival
+  ---
+  duration_ms: 1.032798
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: false_fact_conditional_parent_survival
+ok 117 - ordered original DRM and SRC: false_fact_conditional_parent_survival
+  ---
+  duration_ms: 1.197226
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: missing_fact_untried_context
+ok 118 - ordered original DRM and SRC: missing_fact_untried_context
+  ---
+  duration_ms: 0.883943
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: false_fact_untried_context
+ok 119 - ordered original DRM and SRC: false_fact_untried_context
+  ---
+  duration_ms: 0.886076
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: python_bool_numeric_equality
+ok 120 - ordered original DRM and SRC: python_bool_numeric_equality
+  ---
+  duration_ms: 1.03424
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: string_true_is_not_boolean_true
+ok 121 - ordered original DRM and SRC: string_true_is_not_boolean_true
+  ---
+  duration_ms: 1.182043
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: left_wins
+ok 122 - ordered consumed original V5 reduction: left_wins
+  ---
+  duration_ms: 1.252529
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: right_wins
+ok 123 - ordered consumed original V5 reduction: right_wins
+  ---
+  duration_ms: 0.620245
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: both_empty
+ok 124 - ordered consumed original V5 reduction: both_empty
+  ---
+  duration_ms: 0.677562
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: empty_left
+ok 125 - ordered consumed original V5 reduction: empty_left
+  ---
+  duration_ms: 0.833928
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: empty_right
+ok 126 - ordered consumed original V5 reduction: empty_right
+  ---
+  duration_ms: 0.613775
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: consumed_prefix_preserves_order
+ok 127 - ordered consumed original V5 reduction: consumed_prefix_preserves_order
+  ---
+  duration_ms: 0.790843
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: rank_add_one
+ok 128 - ordered consumed original V5 reduction: rank_add_one
+  ---
+  duration_ms: 0.913467
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: rank_set
+ok 129 - ordered consumed original V5 reduction: rank_set
+  ---
+  duration_ms: 2.713483
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: single_duel_scope
+ok 130 - ordered consumed original V5 reduction: single_duel_scope
+  ---
+  duration_ms: 0.633887
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: signature_mismatch
+ok 131 - ordered consumed original V5 reduction: signature_mismatch
+  ---
+  duration_ms: 0.593214
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: requested_type_mismatch
+ok 132 - ordered consumed original V5 reduction: requested_type_mismatch
+  ---
+  duration_ms: 0.445932
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: domain_bound
+ok 133 - ordered consumed original V5 reduction: domain_bound
+  ---
+  duration_ms: 0.473864
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: node_bound
+ok 134 - ordered consumed original V5 reduction: node_bound
+  ---
+  duration_ms: 0.968161
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: depth_bound
+ok 135 - ordered consumed original V5 reduction: depth_bound
+  ---
+  duration_ms: 0.707367
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: tie_REMOVE_BOTH
+ok 136 - ordered consumed original V5 reduction: tie_REMOVE_BOTH
+  ---
+  duration_ms: 0.50386
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: tie_KEEP_LEFT
+ok 137 - ordered consumed original V5 reduction: tie_KEEP_LEFT
+  ---
+  duration_ms: 0.73576
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: tie_KEEP_RIGHT
+ok 138 - ordered consumed original V5 reduction: tie_KEEP_RIGHT
+  ---
+  duration_ms: 0.530169
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: tie_STOP
+ok 139 - ordered consumed original V5 reduction: tie_STOP
+  ---
+  duration_ms: 0.647517
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: head_relation_not_bound
+ok 140 - ordered consumed original V5 reduction: head_relation_not_bound
+  ---
+  duration_ms: 0.62968
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: input_domain_incomplete
+ok 141 - ordered consumed original V5 reduction: input_domain_incomplete
+  ---
+  duration_ms: 0.469307
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: time_bound_before_visit
+ok 142 - ordered consumed original V5 reduction: time_bound_before_visit
+  ---
+  duration_ms: 0.764503
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: time_bound_on_final_finish
+ok 143 - ordered consumed original V5 reduction: time_bound_on_final_finish
+  ---
+  duration_ms: 0.906467
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: resume_exact_consumed_prefix
+ok 144 - ordered consumed original V5 reduction: resume_exact_consumed_prefix
+  ---
+  duration_ms: 1.148403
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: resume_wrong_command
+ok 145 - ordered consumed original V5 reduction: resume_wrong_command
+  ---
+  duration_ms: 0.993729
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: resume_wrong_digest
+ok 146 - ordered consumed original V5 reduction: resume_wrong_digest
+  ---
+  duration_ms: 1.198688
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: resume_wrong_cursor
+ok 147 - ordered consumed original V5 reduction: resume_wrong_cursor
+  ---
+  duration_ms: 1.229935
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: resume_wrong_ordered_suffix
+ok 148 - ordered consumed original V5 reduction: resume_wrong_ordered_suffix
+  ---
+  duration_ms: 0.989653
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: occurrence
+ok 149 - ordered original V5 model: occurrence
+  ---
+  duration_ms: 0.122856
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: numeric_rank_coercion
+ok 150 - ordered original V5 model: numeric_rank_coercion
+  ---
+  duration_ms: 0.121253
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: boolean_rank_coercion
+ok 151 - ordered original V5 model: boolean_rank_coercion
+  ---
+  duration_ms: 0.054132
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: rule
+ok 152 - ordered original V5 model: rule
+  ---
+  duration_ms: 0.078439
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: request_defaults
+ok 153 - ordered original V5 model: request_defaults
+  ---
+  duration_ms: 0.186531
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: duplicate_occurrence_identity
+ok 154 - ordered original V5 model: duplicate_occurrence_identity
+  ---
+  duration_ms: 0.446354
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: wrong_occurrence_camp
+ok 155 - ordered original V5 model: wrong_occurrence_camp
+  ---
+  duration_ms: 0.136216
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: duplicate_relation
+ok 156 - ordered original V5 model: duplicate_relation
+  ---
+  duration_ms: 0.129014
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: set_without_value
+ok 157 - ordered original V5 model: set_without_value
+  ---
+  duration_ms: 0.152641
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: zero_node_bound
+ok 158 - ordered original V5 model: zero_node_bound
+  ---
+  duration_ms: 0.135104
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: invalid_tie_rule
+ok 159 - ordered original V5 model: invalid_tie_rule
+  ---
+  duration_ms: 0.222666
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: negative_cursor
+ok 160 - ordered original V5 model: negative_cursor
+  ---
+  duration_ms: 0.126321
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: extra_request_key
+ok 161 - ordered original V5 model: extra_request_key
+  ---
+  duration_ms: 0.119049
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: empty_occurrence_identity
+ok 162 - ordered original V5 model: empty_occurrence_identity
+  ---
+  duration_ms: 0.057817
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: extra_occurrence_key
+ok 163 - ordered original V5 model: extra_occurrence_key
+  ---
+  duration_ms: 0.060391
+  type: 'test'
+  ...
+# Subtest: ordered named native boundary: unsafe_integer_rank_boundary
+ok 164 - ordered named native boundary: unsafe_integer_rank_boundary
+  ---
+  duration_ms: 0.2389
+  type: 'test'
+  ...
+# Subtest: ordered reference binds its generator, all checked originals and consumed source functions
+ok 165 - ordered reference binds its generator, all checked originals and consumed source functions
+  ---
+  duration_ms: 35.027652
+  type: 'test'
+  ...
+# Subtest: ordered cold method comes from actual public contrast and portable methods grant no current permit
+ok 166 - ordered cold method comes from actual public contrast and portable methods grant no current permit
+  ---
+  duration_ms: 0.262767
+  type: 'test'
+  ...
+# Subtest: ordered complete source restoration detaches caller state and returned state
+not ok 167 - ordered complete source restoration detaches caller state and returned state
+  ---
+  duration_ms: 31.551258
+  type: 'test'
+  location: '/workspace/sites/sra-lot10c-20261111/.sites-checkout/tests/v6-ordered-recruitment-reference.test.ts:159:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+    + Promise {
+    +   <pending>,
+    +   Symbol(async_id_symbol): 17858,
+    +   Symbol(trigger_async_id_symbol): 17838
+    - {
+    -   actions: [
+    -     {
+    -       action_ref: 'ACTION5'
+    -     }
+    -   ],
+    -   binding: {
+    -     frame_hash: '6a0b55118aa05ddc',
+    -     level_epoch: 1,
+    -     levels_completed: 0,
+    -     observation_ref: 'ordered:synthetic:epoch:1:revision:3:frame:6a0b55118aa05ddc'
+    -   },
+    -   bundle_template: {
+    -     actions: [
+    -       {
+    -         action_ref: 'ACTION5'
+    -       }
+    -     ],
+    -     composition_ref: 'composition:ordered_replenishment:d59f0966f856a0d4e3d143b0e3582552dcad705147e03c1d4bcf3343bb2b18f9',
+    -     evidence: [
+    -       'ordered:synthetic:epoch:1:revision:3:frame:6a0b55118aa05ddc',
+    -       'ordered:synthetic:epoch:1:revision:1:frame:d5f0d4bb9b92bc61',
+    -       'ordered:synthetic:epoch:1:revision:2:frame:1ec35e58a98ee9ff'
+    -     ],
+    -     objective_ref: 'G_official_completion',
+    -     operation_key: 'OP18',
+    -     outcome_guard: {
+    -       contains: 'composition:ordered_replenishment:d59f0966f856a0d4e3d143b0e3582552dcad705147e03c1d4bcf3343bb2b18f9',
+    -       path: [
+    -         'value'
+    -       ]
+    -     },
+    -     preconditions: {
+    -       ordered_recruitment_current: true
+    -     },
+    -     preservation_evidence: {},
+    -     preserve_refs: [],
+    -     purpose: 'continue_current_validated_suffix_toward_parent_survival'
+    -   },
+    -   compositions: [
+    -     {
+    -       id: 'composition:ordered_replenishment:d59f0966f856a0d4e3d143b0e3582552dcad705147e03c1d4bcf3343bb2b18f9',
+    -       observed: false,
+    -       open_question: 'continue_current_validated_suffix_toward_parent_survival',
+    -       properties: {
+    -         hypotheses: [
+    -           'paired_legend_colors_may_be_camp_equivalent_types',
+    -           'calibrated_legend_direction_may_extend_to_other_rows',
+    -           'front_anchored_spiral_order_not_private_path',
+    -           'equal_types_may_remove_both_alternatives_retained',
+    -           'button_may_append_one_occurrence_and_exhaust_quota',
+    -           'engagement_may_reduce_heads_to_closure',
+    -           'all_visible_rooms_contribute_to_terminal_survival'
+    -         ],
+    -         method_revalidation: {
+    -           current_epoch: 1,
+    -           current_observation: 'ordered:synthetic:epoch:1:revision:3:frame:6a0b55118aa05ddc',
+    -           methods: [
+    -             {
+    -               command: {
+    -                 action_ref: 'ACTION5'
+    -               },
+    -               evidence: [
+    -                 'ordered:synthetic:epoch:1:revision:1:frame:d5f0d4bb9b92bc61',
+    -                 'ordered:synthetic:epoch:1:revision:2:frame:1ec35e58a98ee9ff'
+    -               ],
+    -               kind: 'legend_direction_calibrated_by_actual_single_enemy_return',
+    -               observed_pair: [
+    -                 0,
+    -                 1
+    -               ],
+    -               signature: {
+    -                 grid_pitch: 2,
+    -                 grid_side: 3,
+    -                 legend_pair_count: 3,
+    -                 room_shape: [
+    -                   21,
+    -                   13
+    -                 ]
+    -               },
+    -               source_epoch: 1,
+    -               unknown: [
+    -                 'other_relation_outcomes',
+    -                 'tie_outcome',
+    -                 'full_queue_order'
+    -               ]
+    -             }
+    -           ],
+    -           release_authority: false,
+    -           signature: {
+    -             grid_pitch: 2,
+    -             grid_side: 3,
+    -             legend_pair_count: 3,
+    -             room_shape: [
+    -               21,
+    -               13
+    -             ]
+    -           }
+    -         },
+    -         projection: {
+    -           cost: 2,
+    -           evidence: [
+    -             'ordered:synthetic:epoch:1:revision:2:frame:1ec35e58a98ee9ff',
+    -             'ordered:synthetic:epoch:1:revision:3:frame:6a0b55118aa05ddc'
+    -           ],
+    -           legend: {
+    -             pairs: [
+    -               [
+    -                 2,
+    -                 3
+    -               ],
+    -               [
+    -                 10,
+    -                 11
+    -               ],
+    -               [
+    -                 12,
+    -                 13
+    -               ]
+    -             ],
+    -             relations: [
+    -               {
+    -                 evidence_boxes: [
+    -                   [
+    -                     1,
+    -                     1,
+    -                     3,
+    -                     3
+    -                   ],
+    -                   [
+    -                     5,
+    -                     1,
+    -                     7,
+    -                     3
+    -                   ],
+    -                   [
+    -                     14,
+    -                     1,
+    -                     15,
+    -                     2
+    -                   ],
+    -                   [
+    -                     18,
+    -                     1,
+    -                     19,
+    -                     2
+    -                   ]
+    -                 ],
+    -                 glyph: [
+    -                   10,
+    -                   1,
+    -                   11,
+    -                   3,
+    -                   5
+    -                 ],
+    -                 left: [
+    -                   2,
+    -                   3
+    -                 ],
+    -                 right: [
+    -                   10,
+    -                   11
+    -                 ]
+    -               },
+    -               {
+    -                 evidence_boxes: [
+    -                   [
+    -                     1,
+    -                     6,
+    -                     3,
+    -                     8
+    -                   ],
+    -                   [
+    -                     5,
+    -                     6,
+    -                     7,
+    -                     8
+    -                   ],
+    -                   [
+    -                     14,
+    -                     6,
+    -                     15,
+    -                     7
+    -                   ],
+    -                   [
+    -                     18,
+    -                     6,
+    -                     19,
+    -                     7
+    -                   ]
+    -                 ],
+    -                 glyph: [
+    -                   10,
+    -                   6,
+    -                   11,
+    -                   8,
+    -                   5
+    -                 ],
+    -                 left: [
+    -                   10,
+    -                   11
+    -                 ],
+    -                 right: [
+    -                   12,
+    -                   13
+    -                 ]
+    -               },
+    -               {
+    -                 evidence_boxes: [
+    -                   [
+    -                     1,
+    -                     11,
+    -                     3,
+    -                     13
+    -                   ],
+    -                   [
+    -                     5,
+    -                     11,
+    -                     7,
+    -                     13
+    -                   ],
+    -                   [
+    -                     14,
+    -                     11,
+    -                     15,
+    -                     12
+    -                   ],
+    -                   [
+    -                     18,
+    -                     11,
+    -                     19,
+    -                     12
+    -                   ]
+    -                 ],
+    -                 glyph: [
+    -                   10,
+    -                   11,
+    -                   11,
+    -                   13,
+    -                   5
+    -                 ],
+    -                 left: [
+    -                   12,
+    -                   13
+    -                 ],
+    -                 right: [
+    -                   2,
+    -                   3
+    -                 ]
+    -               }
+    -             ]
+    -           },
+    -           order: [
+    -             [
+    -               2,
+    -               18,
+    -               22,
+    -               30
+    -             ],
+    -             [
+    -               30,
+    -               18,
+    -               50,
+    -               30
+    -             ]
+    -           ],
+    -           status: 'conditional_all_visible_stages_not_actual_success',
+    -           steps: [
+    -             {
+    -               action: {
+    -                 action_ref: 'ACTION5'
+    -               },
+    -               expected_context: {
+    -                 enemy: [
+    -                   2
+    -                 ],
+    -                 phase: 'COMBAT',
+    -                 queue: [
+    -                   0,
+    -                   1
+    -                 ],
+    -                 quota: null,
+    -                 room: 1
+    -               },
+    -               kind: 'engage',
+    -               projected_context: null,
+    -               type: null
+    -             }
+    -           ],
+    -           survivors: 1,
+    -           trace: [
+    -             {
+    -               consumed_occurrence_refs: [
+    -                 'ally:0'
+    -               ],
+    -               duel_cursor: 0,
+    -               law_evidence_ref: 'hypothesis:current_legend:450f15bdb4bae1eca4842c70121556e8007c17e29addb71fd643a942bbcba9d6',
+    -               left_head_ref: 'ally:0',
+    -               outcome: 'RIGHT',
+    -               right_head_ref: 'enemy:0'
+    -             },
+    -             {
+    -               consumed_occurrence_refs: [
+    -                 'enemy:0'
+    -               ],
+    -               duel_cursor: 1,
+    -               law_evidence_ref: 'hypothesis:current_legend:450f15bdb4bae1eca4842c70121556e8007c17e29addb71fd643a942bbcba9d6',
+    -               left_head_ref: 'ally:1',
+    -               outcome: 'LEFT',
+    -               right_head_ref: 'enemy:0'
+    -             }
+    -           ]
+    -         },
+    -         unknown: [
+    -           'unseen_relation_outcomes',
+    -           'tie_outcome',
+    -           'full_folded_order',
+    -           'all_future_phase_boundaries',
+    -           'final_goal_law'
+    -         ]
+    -       },
+    -       relations: [
+    -         'contributes_to:G_official_completion'
+    -       ],
+    -       role: 'conditional_ordered_survival_and_replenishment',
+    -       things: [
+    -         'rooms:0a71a3d68227afd30b24e65daa0511381ac79bae666ae463719ed6e085d8caab',
+    -         'queue:9ed98088ce2c3f96d6dce94601db473fac90bd6d11bb5121194cbabaf6836879'
+    -       ]
+    -     }
+    -   ],
+    -   facts: {
+    -     ordered_recruitment_current: true
+    -   },
+    -   kind: 'public_ordered_recruitment',
+    -   question: {
+    -     hypothesis_refs: [
+    -       'paired_legend_colors_may_be_camp_equivalent_types',
+    -       'calibrated_legend_direction_may_extend_to_other_rows',
+    -       'front_anchored_spiral_order_not_private_path',
+    -       'equal_types_may_remove_both_alternatives_retained',
+    -       'button_may_append_one_occurrence_and_exhaust_quota',
+    -       'engagement_may_reduce_heads_to_closure',
+    -       'all_visible_rooms_contribute_to_terminal_survival'
+    -     ],
+    -     reason: 'continue_current_validated_suffix_toward_parent_survival'
+    -   },
+    -   recruitment_plan: {
+    -     choice: {
+    -       hypotheses: [
+    -         'paired_legend_colors_may_be_camp_equivalent_types',
+    -         'calibrated_legend_direction_may_extend_to_other_rows',
+    -         'front_anchored_spiral_order_not_private_path',
+    -         'equal_types_may_remove_both_alternatives_retained',
+    -         'button_may_append_one_occurrence_and_exhaust_quota',
+    -         'engagement_may_reduce_heads_to_closure',
+    -         'all_visible_rooms_contribute_to_terminal_survival'
+    -       ],
+    -       index: 0,
+    -       reason: 'continue_current_validated_suffix_toward_parent_survival',
+    -       release_authority: false,
+    -       status: 'selected'
+    -     },
+    -     drm_hash: '40a0f6e1be6348cd3b8066734f8dedc325ec85bcf36fe1321f5b84cbc3390369',
+    -     offer: {
+    -       action: {
+    -         action_ref: 'ACTION5'
+    -       },
+    -       cost: 1,
+    -       facts: {
+    -         actual_interface_contrast: true,
+    -         conditional_parent_survival: true,
+    -         current_scene_revalidated: true,
+    -         untried_context: true
+    -       },
+    -       key: '422ce133644f82599f006a1424ebccd9cfc9851e3c04b251e95526001c4ad3ae',
+    -       kind: 'continuation',
+    -       measurement: {
+    -         buttons: [
+    -           {
+    -             base: 0,
+    -             bbox: [
+    -               2,
+    -               42,
+    -               7,
+    -               51
+    -             ],
+    -             border: 8,
+    -             point: [
+    -               4,
+    -               46
+    -             ],
+    -             type: 0,
+    -             value: 2
+    -           },
+    -           {
+    -             base: 0,
+    -             bbox: [
+    -               12,
+    -               42,
+    -               17,
+    -               51
+    -             ],
+    -             border: 8,
+    -             point: [
+    -               14,
+    -               46
+    -             ],
+    -             type: 1,
+    -             value: 10
+    -           },
+    -           {
+    -             base: 0,
+    -             bbox: [
+    -               22,
+    -               42,
+    -               27,
+    -               51
+    -             ],
+    -             border: 8,
+    -             point: [
+    -               24,
+    -               46
+    -             ],
+    -             type: 2,
+    -             value: 12
+    -           }
+    -         ],
+    -         current: 1,
+    -         enemy_values: [
+    -           3,
+    -           11,
+    -           13
+    -         ],
+    -         legend: {
+    -           pairs: [
+    -             [
+    -               2,
+    -               3
+    -             ],
+    -             [
+    -               10,
+    -               11
+    -             ],
+    -             [
+    -               12,
+    -               13
+    -             ]
+    -           ],
+    -           relations: [
+    -             {
+    -               evidence_boxes: [
+    -                 [
+    -                   1,
+    -                   1,
+    -                   3,
+    -                   3
+    -                 ],
+    -                 [
+    -                   5,
+    -                   1,
+    -                   7,
+    -                   3
+    -                 ],
+    -                 [
+    -                   14,
+    -                   1,
+    -                   15,
+    -                   2
+    -                 ],
+    -                 [
+    -                   18,
+    -                   1,
+    -                   19,
+    -                   2
+    -                 ]
+    -               ],
+    -               glyph: [
+    -                 10,
+    -                 1,
+    -                 11,
+    -                 3,
+    -                 5
+    -               ],
+    -               left: [
+    -                 2,
+    -                 3
+    -               ],
+    -               right: [
+    -                 10,
+    -                 11
+    -               ]
+    -             },
+    -             {
+    -               evidence_boxes: [
+    -                 [
+    -                   1,
+    -                   6,
+    -                   3,
+    -                   8
+    -                 ],
+    -                 [
+    -                   5,
+    -                   6,
+    -                   7,
+    -                   8
+    -                 ],
+    -                 [
+    -                   14,
+    -                   6,
+    -                   15,
+    -                   7
+    -                 ],
+    -                 [
+    -                   18,
+    -                   6,
+    -                   19,
+    -                   7
+    -                 ]
+    -               ],
+    -               glyph: [
+    -                 10,
+    -                 6,
+    -                 11,
+    -                 8,
+    -                 5
+    -               ],
+    -               left: [
+    -                 10,
+    -                 11
+    -               ],
+    -               right: [
+    -                 12,
+    -                 13
+    -               ]
+    -             },
+    -             {
+    -               evidence_boxes: [
+    -                 [
+    -                   1,
+    -                   11,
+    -                   3,
+    -                   13
+    -                 ],
+    -                 [
+    -                   5,
+    -                   11,
+    -                   7,
+    -                   13
+    -                 ],
+    -                 [
+    -                   14,
+    -                   11,
+    -                   15,
+    -                   12
+    -                 ],
+    -                 [
+    -                   18,
+    -                   11,
+    -                   19,
+    -                   12
+    -                 ]
+    -               ],
+    -               glyph: [
+    -                 10,
+    -                 11,
+    -                 11,
+    -                 13,
+    -                 5
+    -               ],
+    -               left: [
+    -                 12,
+    -                 13
+    -               ],
+    -               right: [
+    -                 2,
+    -                 3
+    -               ]
+    -             }
+    -           ]
+    -         },
+    -         links: [
+    -           {
+    -             meaning: 'chain_link_hypothesis_not_progression_law',
+    -             rooms: [
+    -               [
+    -                 2,
+    -                 18,
+    -                 22,
+    -                 30
+    -               ],
+    -               [
+    -                 30,
+    -                 18,
+    -                 50,
+    -                 30
+    -               ]
+    -             ],
+    -             witness: {
+    -               axis: 'horizontal',
+    -               cells: [
+    -                 [
+    -                   26,
+    -                   23
+    -                 ],
+    -                 [
+    -                   26,
+    -                   25
+    -                 ],
+    -                 [
+    -                   27,
+    -                   24
+    -                 ]
+    -               ],
+    -               center_filled: false,
+    -               direction: 1,
+    -               tip: [
+    -                 27,
+    -                 24
+    -               ],
+    -               wings: [
+    -                 [
+    -                   26,
+    -                   23
+    -                 ],
+    -                 [
+    -                   26,
+    -                   25
+    -                 ]
+    -               ]
+    -             }
+    -           }
+    -         ],
+    -         order: [
+    -           [
+    -             2,
+    -             18,
+    -             22,
+    -             30
+    -           ],
+    -           [
+    -             30,
+    -             18,
+    -             50,
+    -             30
+    -           ]
+    -         ],
+    -         phase_hypothesis: 'COMBAT',
+    -         player_values: [
+    -           2,
+    -           10,
+    -           12
+    -         ],
+    -         quota: null,
+    -         rooms: [
+    -           {
+    -             base: 0,
+    -             bbox: [
+    -               2,
+    -               18,
+    -               22,
+    -               30
+    -             ],
+    -             border: 7,
+    -             empty_value: 1,
+    -             front_markers: [],
+    -             grid: {
+    -               left: [
+    -                 5,
+    -                 7,
+    -                 9
+    -               ],
+    -               pitch: 2,
+    -               right: [
+    -                 15,
+    -                 17,
+    -                 19
+    -               ],
+    -               ys: [
+    -                 21,
+    -                 23,
+    -                 25
+    -               ]
+    -             },
+    -             left: [],
+    -             order_status: 'front_anchored_inward_spiral_hypothesis_not_full_order_law',
+    -             quota_hypothesis: 1,
+    -             right: []
+    -           },
+    -           {
+    -             base: 0,
+    -             bbox: [
+    -               30,
+    -               18,
+    -               50,
+    -               30
+    -             ],
+    -             border: 7,
+    -             empty_value: 1,
+    -             front_markers: [
+    -               {
+    -                 point: [
+    -                   37,
+    -                   21
+    -                 ],
+    -                 value: 14
+    -               },
+    -               {
+    -                 point: [
+    -                   43,
+    -                   21
+    -                 ],
+    -                 value: 14
+    -               }
+    -             ],
+    -             grid: {
+    -               left: [
+    -                 33,
+    -                 35,
+    -                 37
+    -               ],
+    -               pitch: 2,
+    -               right: [
+    -                 43,
+    -                 45,
+    -                 47
+    -               ],
+    -               ys: [
+    -                 21,
+    -                 23,
+    -                 25
+    -               ]
+    -             },
+    -             left: [
+    -               {
+    -                 point: [
+    -                   36,
+    -                   20
+    -                 ],
+    -                 type: 0,
+    -                 value: 2
+    -               },
+    -               {
+    -                 point: [
+    -                   34,
+    -                   20
+    -                 ],
+    -                 type: 1,
+    -                 value: 10
+    -               }
+    -             ],
+    -             order_status: 'front_anchored_inward_spiral_hypothesis_not_full_order_law',
+    -             quota_hypothesis: 1,
+    -             right: [
+    -               {
+    -                 point: [
+    -                   42,
+    -                   20
+    -                 ],
+    -                 type: 2,
+    -                 value: 13
+    -               }
+    -             ]
+    -           }
+    -         ],
+    -         signature: {
+    -           grid_pitch: 2,
+    -           grid_side: 3,
+    -           legend_pair_count: 3,
+    -           room_shape: [
+    -             21,
+    -             13
+    -           ]
+    -         },
+    -         types: {
+    -           '10': 1,
+    -           '11': 1,
+    -           '12': 2,
+    -           '13': 2,
+    -           '2': 0,
+    -           '3': 0
+    -         }
+    -       },
+    -       method_revalidation: {
+    -         current_epoch: 1,
+    -         current_observation: 'ordered:synthetic:epoch:1:revision:3:frame:6a0b55118aa05ddc',
+    -         methods: [
+    -           {
+    -             command: {
+    -               action_ref: 'ACTION5'
+    -             },
+    -             evidence: [
+    -               'ordered:synthetic:epoch:1:revision:1:frame:d5f0d4bb9b92bc61',
+    -               'ordered:synthetic:epoch:1:revision:2:frame:1ec35e58a98ee9ff'
+    -             ],
+    -             kind: 'legend_direction_calibrated_by_actual_single_enemy_return',
+    -             observed_pair: [
+    -               0,
+    -               1
+    -             ],
+    -             signature: {
+    -               grid_pitch: 2,
+    -               grid_side: 3,
+    -               legend_pair_count: 3,
+    -               room_shape: [
+    -                 21,
+    -                 13
+    -               ]
+    -             },
+    -             source_epoch: 1,
+    -             unknown: [
+    -               'other_relation_outcomes',
+    -               'tie_outcome',
+    -               'full_queue_order'
+    -             ]
+    -           }
+    -         ],
+    -         release_authority: false,
+    -         signature: {
+    -           grid_pitch: 2,
+    -           grid_side: 3,
+    -           legend_pair_count: 3,
+    -           room_shape: [
+    -             21,
+    -             13
+    -           ]
+    -         }
+    -       },
+    -       plan: {
+    -         cost: 2,
+    -         evidence: [
+    -           'ordered:synthetic:epoch:1:revision:2:frame:1ec35e58a98ee9ff',
+    -           'ordered:synthetic:epoch:1:revision:3:frame:6a0b55118aa05ddc'
+    -         ],
+    -         legend: {
+    -           pairs: [
+    -             [
+    -               2,
+    -               3
+    -             ],
+    -             [
+    -               10,
+    -               11
+    -             ],
+    -             [
+    -               12,
+    -               13
+    -             ]
+    -           ],
+    -           relations: [
+    -             {
+    -               evidence_boxes: [
+    -                 [
+    -                   1,
+    -                   1,
+    -                   3,
+    -                   3
+    -                 ],
+    -                 [
+    -                   5,
+    -                   1,
+    -                   7,
+    -                   3
+    -                 ],
+    -                 [
+    -                   14,
+    -                   1,
+    -                   15,
+    -                   2
+    -                 ],
+    -                 [
+    -                   18,
+    -                   1,
+    -                   19,
+    -                   2
+    -                 ]
+    -               ],
+    -               glyph: [
+    -                 10,
+    -                 1,
+    -                 11,
+    -                 3,
+    -                 5
+    -               ],
+    -               left: [
+    -                 2,
+    -                 3
+    -               ],
+    -               right: [
+    -                 10,
+    -                 11
+    -               ]
+    -             },
+    -             {
+    -               evidence_boxes: [
+    -                 [
+    -                   1,
+    -                   6,
+    -                   3,
+    -                   8
+    -                 ],
+    -                 [
+    -                   5,
+    -                   6,
+    -                   7,
+    -                   8
+    -                 ],
+    -                 [
+    -                   14,
+    -                   6,
+    -                   15,
+    -                   7
+    -                 ],
+    -                 [
+    -                   18,
+    -                   6,
+    -                   19,
+    -                   7
+    -                 ]
+    -               ],
+    -               glyph: [
+    -                 10,
+    -                 6,
+    -                 11,
+    -                 8,
+    -                 5
+    -               ],
+    -               left: [
+    -                 10,
+    -                 11
+    -               ],
+    -               right: [
+    -                 12,
+    -                 13
+    -               ]
+    -             },
+    -             {
+    -               evidence_boxes: [
+    -                 [
+    -                   1,
+    -                   11,
+    -                   3,
+    -                   13
+    -                 ],
+    -                 [
+    -                   5,
+    -                   11,
+    -                   7,
+    -                   13
+    -                 ],
+    -                 [
+    -                   14,
+    -                   11,
+    -                   15,
+    -                   12
+    -                 ],
+    -                 [
+    -                   18,
+    -                   11,
+    -                   19,
+    -                   12
+    -                 ]
+    -               ],
+    -               glyph: [
+    -                 10,
+    -                 11,
+    -                 11,
+    -                 13,
+    -                 5
+    -               ],
+    -               left: [
+    -                 12,
+    -                 13
+    -               ],
+    -               right: [
+    -                 2,
+    -                 3
+    -               ]
+    -             }
+    -           ]
+    -         },
+    -         order: [
+    -           [
+    -             2,
+    -             18,
+    -             22,
+    -             30
+    -           ],
+    -           [
+    -             30,
+    -             18,
+    -             50,
+    -             30
+    -           ]
+    -         ],
+    -         status: 'conditional_all_visible_stages_not_actual_success',
+    -         steps: [
+    -           {
+    -             action: {
+    -               action_ref: 'ACTION5'
+    -             },
+    -             expected_context: {
+    -               enemy: [
+    -                 2
+    -               ],
+    -               phase: 'COMBAT',
+    -               queue: [
+    -                 0,
+    -                 1
+    -               ],
+    -               quota: null,
+    -               room: 1
+    -             },
+    -             kind: 'engage',
+    -             projected_context: null,
+    -             type: null
+    -           }
+    -         ],
+    -         survivors: 1,
+    -         trace: [
+    -           {
+    -             consumed_occurrence_refs: [
+    -               'ally:0'
+    -             ],
+    -             duel_cursor: 0,
+    -             law_evidence_ref: 'hypothesis:current_legend:450f15bdb4bae1eca4842c70121556e8007c17e29addb71fd643a942bbcba9d6',
+    -             left_head_ref: 'ally:0',
+    -             outcome: 'RIGHT',
+    -             right_head_ref: 'enemy:0'
+    -           },
+    -           {
+    -             consumed_occurrence_refs: [
+    -               'enemy:0'
+    -             ],
+    -             duel_cursor: 1,
+    -             law_evidence_ref: 'hypothesis:current_legend:450f15bdb4bae1eca4842c70121556e8007c17e29addb71fd643a942bbcba9d6',
+    -             left_head_ref: 'ally:1',
+    -             outcome: 'LEFT',
+    -             right_head_ref: 'enemy:0'
+    -           }
+    -         ]
+    -       },
+    -       search: {
+    -         status: 'validated_suffix_retained_no_new_search'
+    -       },
+    -       step: {
+    -         action: {
+    -           action_ref: 'ACTION5'
+    -         },
+    -         expected_context: {
+    -           enemy: [
+    -             2
+    -           ],
+    -           phase: 'COMBAT',
+    -           queue: [
+    -             0,
+    -             1
+    -           ],
+    -           quota: null,
+    -           room: 1
+    -         },
+    -         kind: 'engage',
+    -         projected_context: null,
+    -         type: null
+    -       },
+    -       survivors: 1
+    -     },
+    -     remaining: 7,
+    -     workflow: {
+    -       executed_statements: [
+    -         'v6.ordered_recruitment.choose.select.s0000',
+    -         'v6.ordered_recruitment.choose.select.s0001'
+    -       ],
+    -       src_hash: 'b96b3324cf24f3326e17c5dc60d6032a02b2c30919c968f72fc4cc2f692385d5',
+    -       src_status: 'completed',
+    -       workflow: 'v6.ordered_recruitment.choose'
+    -     }
+    -   },
+    -   route_refs: [
+    -     'ordered:synthetic:epoch:1:revision:3:frame:6a0b55118aa05ddc',
+    -     'ordered:synthetic:epoch:1:revision:1:frame:d5f0d4bb9b92bc61',
+    -     'ordered:synthetic:epoch:1:revision:2:frame:1ec35e58a98ee9ff'
+    -   ],
+    -   status: 'proposed',
+    -   steps: [
+    -     {
+    -       action: {
+    -         action_ref: 'ACTION5'
+    -       },
+    -       expected_after: null
+    -     }
+    -   ]
+      }
+    
+  code: 'ERR_TEST_FAILURE'
+  ...
+1..167
+# tests 167
+# suites 0
+# pass 165
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1026.202709

@@ -16,6 +16,8 @@ import type { GameObservation } from '../../src/runtime/browser-games.ts';
 import type { V6AgentResult, V6AgentTransport, V6PublicObservation } from '../../src/runtime/v6-agent-protocol.ts';
 import { installWindowQuestionCapture } from './v6-window-question-capture.ts';
 import type { WindowQuestionCapture } from './v6-window-question-capture.ts';
+import { installOrderedRecruitmentCapture } from './v6-ordered-recruitment-capture.ts';
+import type { OrderedRecruitmentCapture } from './v6-ordered-recruitment-capture.ts';
 
 type R = Record<string, any>;
 const ROOT = new URL('../../', import.meta.url);
@@ -103,6 +105,7 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
   let symbolsOwner: R | undefined;
   let facetsOwner: R | undefined;
   let windowCapture: WindowQuestionCapture | undefined;
+  let recruitmentCapture: OrderedRecruitmentCapture | undefined;
   let previewOwner: R | undefined;
   let selectedRigidOwner: R | undefined;
   report.selectedRigidEvents = [];
@@ -126,6 +129,8 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
       runtime = await createNativeV6Runtime(declarations);
       const windowOwner = (runtime as unknown as { families: R[] }).families.find(family => family.id === 'public_window_question');
       if (windowOwner) windowCapture = installWindowQuestionCapture(windowOwner, report);
+      const recruitmentOwner = (runtime as unknown as { families: R[] }).families.find(family => family.id === 'public_ordered_recruitment');
+      if (recruitmentOwner) recruitmentCapture = installOrderedRecruitmentCapture(recruitmentOwner, report);
       // Evidence-only source-call observer. It preserves the method's sync or
       // async return, inputs, ordering and state, and never supplies a decision.
       // Inventory propose() can acquire memories even when another provider
@@ -677,6 +682,8 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
             selectionGroup: evidence.proposal.strategy_receipt?.selected ?? null,
             ...(windowCapture ? { windowQuestion: windowCapture.prefixSnapshot({ read, facts: reasoningFacts,
               transitions: evidence.transitions, proposal: evidence.proposal, selectedFamily: snapshot.lastDecision }) } : {}),
+            ...(recruitmentCapture ? { orderedRecruitment: recruitmentCapture.prefixSnapshot({ read, facts: reasoningFacts,
+              transitions: evidence.transitions, proposal: evidence.proposal, selectedFamily: snapshot.lastDecision }) } : {}),
             ...(graph.nodes['family_state:feedback_sequences'] ? { observedFeedbackSequence: {
               stateNode: 'family_state:feedback_sequences', state: read('family_state:feedback_sequences'),
               proposal: evidence.proposal.feedback_plan ? evidence.proposal : null,
@@ -1118,5 +1125,6 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
     nativeImplementation: (lastResponse?.snapshot as R | undefined)?.implementation ?? null };
   report.elapsedSeconds = (performance.now() - started) / 1000;
   windowCapture?.dispose();
+  recruitmentCapture?.dispose();
   return report;
 }

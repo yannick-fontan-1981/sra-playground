@@ -1,0 +1,123 @@
+{
+  "schema": "logos-engine.lot10c.batch-process-group-controls.v1",
+  "recordedAt": "2026-11-11T19:29:41.562472+00:00",
+  "passed": true,
+  "controls": [
+    {
+      "name": "normal_exit",
+      "passed": true,
+      "expectedException": null,
+      "observedException": null,
+      "supervision": {
+        "schema": "logos-engine.owned-process-group-supervision.v1",
+        "startNewSession": true,
+        "childSubreaper": true,
+        "terminal": true,
+        "directChildReaped": true,
+        "ownedGroupGone": true,
+        "signalsSent": [],
+        "reapedDescendants": [],
+        "timeoutSeconds": 2,
+        "pid": 7,
+        "processGroupId": 7,
+        "completionReason": "child_exit",
+        "directChildExitCode": 0,
+        "cleanupSeconds": 2.3685999622102827e-05
+      },
+      "durationSeconds": 0.020060087997990195,
+      "raw": {
+        "path": "/workspace/sites/sra-lot10c-20261111/.sites-checkout/docs/migration/lot10c-evidence/prepared-composition01/batching-process-group-controls-01-normal_exit.raw.txt",
+        "bytes": 21,
+        "sha256": "40c751a63abebf65141b25384bcd2f2096dd1d710a64a02ca5d2953cdbaffe20"
+      }
+    },
+    {
+      "name": "timeout_descendant",
+      "passed": true,
+      "expectedException": "TimeoutExpired",
+      "observedException": "TimeoutExpired",
+      "supervision": {
+        "schema": "logos-engine.owned-process-group-supervision.v1",
+        "startNewSession": true,
+        "childSubreaper": true,
+        "terminal": true,
+        "directChildReaped": true,
+        "ownedGroupGone": true,
+        "signalsSent": [
+          "SIGTERM",
+          "SIGKILL"
+        ],
+        "reapedDescendants": [
+          {
+            "pid": 9,
+            "waitStatus": 9
+          }
+        ],
+        "timeoutSeconds": 0.4,
+        "pid": 8,
+        "processGroupId": 8,
+        "completionReason": "timeout",
+        "directChildExitCode": -15,
+        "cleanupSeconds": 1.0480370759978541
+      },
+      "durationSeconds": 1.448834098999214,
+      "raw": {
+        "path": "/workspace/sites/sra-lot10c-20261111/.sites-checkout/docs/migration/lot10c-evidence/prepared-composition01/batching-process-group-controls-01-timeout_descendant.raw.txt",
+        "bytes": 48,
+        "sha256": "284496de93317f01dcd9f35e89464d6e617163dcd5676adb2e1ced22f174bf37"
+      }
+    },
+    {
+      "name": "interrupt_descendant",
+      "passed": true,
+      "expectedException": "KeyboardInterrupt",
+      "observedException": "KeyboardInterrupt",
+      "supervision": {
+        "schema": "logos-engine.owned-process-group-supervision.v1",
+        "startNewSession": true,
+        "childSubreaper": true,
+        "terminal": true,
+        "directChildReaped": true,
+        "ownedGroupGone": true,
+        "signalsSent": [
+          "SIGTERM",
+          "SIGKILL"
+        ],
+        "reapedDescendants": [
+          {
+            "pid": 12,
+            "waitStatus": 9
+          }
+        ],
+        "timeoutSeconds": 3,
+        "pid": 11,
+        "processGroupId": 11,
+        "completionReason": "interrupted",
+        "directChildExitCode": -15,
+        "cleanupSeconds": 1.0507497699982196
+      },
+      "durationSeconds": 1.5054557799994654,
+      "raw": {
+        "path": "/workspace/sites/sra-lot10c-20261111/.sites-checkout/docs/migration/lot10c-evidence/prepared-composition01/batching-process-group-controls-01-interrupt_descendant.raw.txt",
+        "bytes": 48,
+        "sha256": "284496de93317f01dcd9f35e89464d6e617163dcd5676adb2e1ced22f174bf37"
+      }
+    }
+  ],
+  "runnerBefore": {
+    "path": "/workspace/sites/sra-lot10c-20261111/.sites-checkout/docs/migration/lot10c-evidence/run-release-checks.py",
+    "bytes": 21396,
+    "sha256": "fdbb1f797453233fdf20e4fe9bb50c76a614ebfb358c85026ca7d5b4958d61dd"
+  },
+  "runnerAfter": {
+    "path": "/workspace/sites/sra-lot10c-20261111/.sites-checkout/docs/migration/lot10c-evidence/run-release-checks.py",
+    "bytes": 21396,
+    "sha256": "fdbb1f797453233fdf20e4fe9bb50c76a614ebfb358c85026ca7d5b4958d61dd"
+  },
+  "runnerUnchanged": true,
+  "nativeTestsExecuted": 0,
+  "gamesExecuted": 0,
+  "actualDevelopmentBatchesExecuted": 0,
+  "allOwnedGroupsTerminal": true,
+  "qualification": "Exact isolated supervisor function with harmless Python child/grandchild processes only; no native proof or final delivery acceptance."
+}

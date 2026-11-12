@@ -1,0 +1,234 @@
+{
+  "schema": "lot10c.prepared-import-whitespace-review.v1",
+  "at": "2026-11-11T19:22:36.397488+00:00",
+  "originalExitCode": 2,
+  "originalDiagnostics": [
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/capture-cost-owner-graphs.mjs.diff:5: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/check-cost-static-inputs.py.diff:16: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/consolidate-owner-costs.mjs.diff:15: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/finalize-measured-cost.py.diff:14: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/finalize-owner-cost-contract.py.diff:11: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/finalize-owner-cost-contract.py.diff:16: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/finalize-owner-cost-contract.py.diff:59: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/finalize-owner-cost-contract.py.diff:68: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/prepare-cost-protocol.py.diff:7: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/prepare-cost-protocol.py.diff:13: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/prepare-cost-protocol.py.diff:16: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/prepare-cost-protocol.py.diff:31: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/prepare-cost-protocol.py.diff:33: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/prepare-cost-protocol.py.diff:37: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/prepare-cost-protocol.py.diff:40: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/prepare-cost-protocol.py.diff:42: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/prepare-cost-protocol.py.diff:90: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/prepare-cost-protocol.py.diff:97: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/prepare-cost-protocol.py.diff:102: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/prepare-cost-protocol.py.diff:124: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/prepare-cost-protocol.py.diff:132: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/qualify-cost-owner-graphs.mjs.diff:12: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/record-cost-log-transport.py.diff:6: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/record-cost-log-transport.py.diff:17: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/record-owner-source-inventory.mjs.diff:4: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/review-owner-costs.py.diff:11: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/review-owner-costs.py.diff:40: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/review-owner-costs.py.diff:42: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/review-owner-costs.py.diff:99: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/write-cost-results.py.diff:19: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/capture-cost-owner-graphs.mjs.diff:5: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/check-cost-static-inputs.py.diff:23: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/consolidate-owner-costs.mjs.diff:24: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/finalize-measured-cost.py.diff:14: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/finalize-owner-cost-contract.py.diff:11: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/finalize-owner-cost-contract.py.diff:16: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/finalize-owner-cost-contract.py.diff:66: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/finalize-owner-cost-contract.py.diff:83: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/prepare-cost-protocol.py.diff:7: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/prepare-cost-protocol.py.diff:13: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/prepare-cost-protocol.py.diff:27: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/prepare-cost-protocol.py.diff:42: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/prepare-cost-protocol.py.diff:44: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/prepare-cost-protocol.py.diff:48: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/prepare-cost-protocol.py.diff:51: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/prepare-cost-protocol.py.diff:53: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/prepare-cost-protocol.py.diff:113: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/prepare-cost-protocol.py.diff:120: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/prepare-cost-protocol.py.diff:125: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/prepare-cost-protocol.py.diff:154: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/prepare-cost-protocol.py.diff:164: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/qualify-cost-owner-graphs.mjs.diff:12: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/record-cost-log-transport.py.diff:6: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/record-cost-log-transport.py.diff:18: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/record-owner-source-inventory.mjs.diff:12: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/review-owner-costs.py.diff:11: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/review-owner-costs.py.diff:24: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/review-owner-costs.py.diff:51: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/review-owner-costs.py.diff:53: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/review-owner-costs.py.diff:123: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/write-cost-results.py.diff:28: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/review-diffs/prepare-cost-protocol.py.diff:34: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/review-diffs/record-cost-log-transport.py.diff:11: trailing whitespace.",
+    "docs/migration/lot6b-evidence/cost-review/attempt-01/review-diffs/review-owner-costs.py.diff:13: trailing whitespace."
+  ],
+  "preservedPatchArtifacts": [
+    {
+      "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/capture-cost-owner-graphs.mjs.diff",
+      "blob": "ae18d09a037e6cd49e2db22ea2b63a8549a5f7fd",
+      "unchangedFromPrepared6b": true
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/check-cost-static-inputs.py.diff",
+      "blob": "ad4a18bcfe8d19490ef0f53eac77a8023e777de3",
+      "unchangedFromPrepared6b": true
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/consolidate-owner-costs.mjs.diff",
+      "blob": "5bc3c60daaa86b5f00812a931b2880de6f73568c",
+      "unchangedFromPrepared6b": true
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/finalize-measured-cost.py.diff",
+      "blob": "fec596543c0ea9ca25276d6a145f26a11563bac9",
+      "unchangedFromPrepared6b": true
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/finalize-owner-cost-contract.py.diff",
+      "blob": "75c77a7578678db8c2ab321afdf812a0fdfc8445",
+      "unchangedFromPrepared6b": true
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/prepare-cost-protocol.py.diff",
+      "blob": "cbcf595c43e35a8a9e183ad7365cf7d08902471e",
+      "unchangedFromPrepared6b": true
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/qualify-cost-owner-graphs.mjs.diff",
+      "blob": "34997e683d3d91a4354eee87f691374323226ca3",
+      "unchangedFromPrepared6b": true
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/record-cost-log-transport.py.diff",
+      "blob": "011b066f667b175a70e187db9db06f38f451018f",
+      "unchangedFromPrepared6b": true
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/record-owner-source-inventory.mjs.diff",
+      "blob": "9e38517f4ebd1b6478f3cfcacb949aedbca51df8",
+      "unchangedFromPrepared6b": true
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/review-owner-costs.py.diff",
+      "blob": "cc519e1d635927d51d73a4f324d6a69e5b7aaab3",
+      "unchangedFromPrepared6b": true
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/write-cost-results.py.diff",
+      "blob": "66c4aec548f2803b5eba0ee8c299dbc11f863f05",
+      "unchangedFromPrepared6b": true
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/capture-cost-owner-graphs.mjs.diff",
+      "blob": "8b03cee3e5cd891d0f15f292d1b581636fee361f",
+      "unchangedFromPrepared6b": true
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/check-cost-static-inputs.py.diff",
+      "blob": "cf389543e39af1f66e852d0570f74426b721530a",
+      "unchangedFromPrepared6b": true
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/consolidate-owner-costs.mjs.diff",
+      "blob": "73fa3500ea16505410c255b6398e1496930b70a7",
+      "unchangedFromPrepared6b": true
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/finalize-measured-cost.py.diff",
+      "blob": "8343594def4e166ddd88d4f71ed826a0dd9326ae",
+      "unchangedFromPrepared6b": true
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/finalize-owner-cost-contract.py.diff",
+      "blob": "3a27d8c2055567e6580d9d07b5d3a9872734de85",
+      "unchangedFromPrepared6b": true
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/prepare-cost-protocol.py.diff",
+      "blob": "bf1bd1c846a7a456ed3bcf7a099b4eb52c716c26",
+      "unchangedFromPrepared6b": true
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/qualify-cost-owner-graphs.mjs.diff",
+      "blob": "5eafc0b6601644c9254cb4c4852b24cd8df377c5",
+      "unchangedFromPrepared6b": true
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/record-cost-log-transport.py.diff",
+      "blob": "c4329619566cc2de3e50438d184e5d323581087e",
+      "unchangedFromPrepared6b": true
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/record-owner-source-inventory.mjs.diff",
+      "blob": "c4dba2e3939a9b7e76fda205c552881377fbb931",
+      "unchangedFromPrepared6b": true
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/review-owner-costs.py.diff",
+      "blob": "e783355cc851f7eb7d48fce379487fed6dc829ca",
+      "unchangedFromPrepared6b": true
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/write-cost-results.py.diff",
+      "blob": "56f0c5a8e905fd6d984ff50e9898ee6728a3c2fd",
+      "unchangedFromPrepared6b": true
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/review-diffs/prepare-cost-protocol.py.diff",
+      "blob": "61d887e181b26a006ec463f53070f8fc9b2a21e5",
+      "unchangedFromPrepared6b": true
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/review-diffs/record-cost-log-transport.py.diff",
+      "blob": "2f2343d199f9681796bb74e44c93342d12859d7e",
+      "unchangedFromPrepared6b": true
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/cost-review/attempt-01/review-diffs/review-owner-costs.py.diff",
+      "blob": "1e1931b632244efb2b5431f603aabc4f94b4aba9",
+      "unchangedFromPrepared6b": true
+    }
+  ],
+  "scopedCommand": [
+    "git",
+    "diff",
+    "--cached",
+    "--check",
+    "--",
+    ".",
+    ":(exclude)*.raw.txt",
+    ":(exclude)docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/capture-cost-owner-graphs.mjs.diff",
+    ":(exclude)docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/check-cost-static-inputs.py.diff",
+    ":(exclude)docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/consolidate-owner-costs.mjs.diff",
+    ":(exclude)docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/finalize-measured-cost.py.diff",
+    ":(exclude)docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/finalize-owner-cost-contract.py.diff",
+    ":(exclude)docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/prepare-cost-protocol.py.diff",
+    ":(exclude)docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/qualify-cost-owner-graphs.mjs.diff",
+    ":(exclude)docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/record-cost-log-transport.py.diff",
+    ":(exclude)docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/record-owner-source-inventory.mjs.diff",
+    ":(exclude)docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/review-owner-costs.py.diff",
+    ":(exclude)docs/migration/lot6b-evidence/cost-review/attempt-01/derivation-diffs/write-cost-results.py.diff",
+    ":(exclude)docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/capture-cost-owner-graphs.mjs.diff",
+    ":(exclude)docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/check-cost-static-inputs.py.diff",
+    ":(exclude)docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/consolidate-owner-costs.mjs.diff",
+    ":(exclude)docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/finalize-measured-cost.py.diff",
+    ":(exclude)docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/finalize-owner-cost-contract.py.diff",
+    ":(exclude)docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/prepare-cost-protocol.py.diff",
+    ":(exclude)docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/qualify-cost-owner-graphs.mjs.diff",
+    ":(exclude)docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/record-cost-log-transport.py.diff",
+    ":(exclude)docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/record-owner-source-inventory.mjs.diff",
+    ":(exclude)docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/review-owner-costs.py.diff",
+    ":(exclude)docs/migration/lot6b-evidence/cost-review/attempt-01/final-derivation-diffs/write-cost-results.py.diff",
+    ":(exclude)docs/migration/lot6b-evidence/cost-review/attempt-01/review-diffs/prepare-cost-protocol.py.diff",
+    ":(exclude)docs/migration/lot6b-evidence/cost-review/attempt-01/review-diffs/record-cost-log-transport.py.diff",
+    ":(exclude)docs/migration/lot6b-evidence/cost-review/attempt-01/review-diffs/review-owner-costs.py.diff"
+  ],
+  "scopedExitCode": 0,
+  "qualification": "Only exact unchanged retained unified-diff artifacts from6B are excluded from this import whitespace check. Source/code checks and official gate scripts unchanged."
+}

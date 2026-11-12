@@ -1,0 +1,35 @@
+{
+  "schema": "logos-engine.lot10c.browser-control-qa.v1",
+  "status": "passed",
+  "developmentOnly": true,
+  "nativeDigest": "bb7d62b5823d76ae7a5ecd452cb622ebb04f2b85b20fb0d2f9a5c35a1535b361",
+  "coldSession": true,
+  "game": "RECR",
+  "pauseObserved": true,
+  "actionCountBeforeSingleStep": 3,
+  "actionCountAfterSingleStep": 4,
+  "singleStepDelta": 1,
+  "resumeObserved": true,
+  "resumedSessionActions": 9,
+  "resumedSessionLevelsCompleted": 2,
+  "finalState": "Level completed.",
+  "initialPauseClickIssue": "The first attempt arrived after the first level had already completed and the control was disabled; retained as an unsuccessful click. The subsequent active run accepted Pause and reached Paused before the single step.",
+  "observations": {
+    "path": "docs/migration/lot10c-evidence/development/recr01-browser01/observations.json",
+    "bytes": 37999,
+    "sha256": "ddaa7d5c85322215e759e202871f5f990e1717e6b97141a1d3089e538ae08816"
+  },
+  "screenshot": {
+    "path": "docs/migration/lot10c-evidence/development/recr01-browser01/one-action.png",
+    "bytes": 75540,
+    "sha256": "ff8f711d402e66fcc1981777d6faf6002b121d986d9081d81172cc0af16a669e"
+  },
+  "previewStopped": true,
+  "consoleEntriesRetained": 10,
+  "scope": "Actual browser controls on development preview; not a claim of production publication or a complete six-level game.",
+  "completedAt": "2026-11-11T18:06:21.369773+00:00",
+  "previewMode": "managed Vite development server from current checkout; compiled distribution was verified separately",
+  "nativeFilesVerifiedAfterBrowser": 315,
+  "nativeFilesMismatchedAfterBrowser": [],
+  "consoleQualification": "The ten retained error entries all originate from the browser extension content script, not the application. This is a bounded console sample, not an assertion about every possible browser log entry."
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "lot10c.prepared-merge-resolution.v1",
+  "stage": "6b",
+  "resolvedAt": "2026-11-11T19:20:07.460938+00:00",
+  "ownParent": "75fed144acb5a717f39d3f8b38f44659409bcce3",
+  "incoming": "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+  "sourceOnly": true,
+  "published": false,
+  "integrationTestsExecuted": false,
+  "resolvedPaths": [
+    "docs/migration/v6-coverage.json",
+    "docs/migration/v6-delivery-roadmap.md",
+    "scripts/audit-v6-entry-points.ts",
+    "src/logos-engine/v6-native-runtime.ts",
+    "tests/v6-radial-port-integration.test.ts"
+  ],
+  "runtimeConflicts": 7,
+  "decisions": [
+    "registered_acquisition_types",
+    "registered_acquisition_types",
+    "selected_event_keys",
+    "same_owner_instances",
+    "workshop_then_recruitment_then_rigid_then_preview",
+    "registered_selected_rigid",
+    "selected_rigid_owner_checkpoint"
+  ],
+  "captureHelpers": "Recruitment and SelectedRigid passive capture hooks retained together; no case executed."
+}

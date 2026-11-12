@@ -1,0 +1,61 @@
+{
+  "schema": "logos-engine.lot10c.ordinary-transport-review.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-11T21:31:21.157121+00:00",
+  "sourceOnly": true,
+  "published": false,
+  "globalLockAcquired": false,
+  "peerQuietGateUsed": false,
+  "checkpoint": "4622babc20ae32d9421d3cdeeaebaa84a48befac",
+  "ref": "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111",
+  "groups": [
+    {
+      "index": 1,
+      "commit": "9bb75a1ec252f38cf3eae3dbe0d018d43b2c5856",
+      "files": 62,
+      "rawBytes": 20970697,
+      "remoteVerifiedAt": "2026-11-11T21:28:53.996Z"
+    },
+    {
+      "index": 2,
+      "commit": "f228e7255335bad5eebe350e082e6f1f896b5bb5",
+      "files": 60,
+      "rawBytes": 20578879,
+      "remoteVerifiedAt": "2026-11-11T21:29:02.096Z"
+    },
+    {
+      "index": 3,
+      "commit": "3d90f4a90675f479c8ee706b3ff8d925a42c4d58",
+      "files": 36,
+      "rawBytes": 19043286,
+      "remoteVerifiedAt": "2026-11-11T21:29:26.471Z"
+    },
+    {
+      "index": 4,
+      "commit": "229cea6d24f507a6274e1f6a45e3e03d7813b1c9",
+      "files": 25,
+      "rawBytes": 15798896,
+      "remoteVerifiedAt": "2026-11-11T21:29:34.963Z"
+    },
+    {
+      "index": 5,
+      "commit": "70fc9d1ba329142f2b5e1dc35f6899105e76359c",
+      "files": 25,
+      "rawBytes": 15519625,
+      "remoteVerifiedAt": "2026-11-11T21:30:00.160Z"
+    },
+    {
+      "index": 6,
+      "commit": "4622babc20ae32d9421d3cdeeaebaa84a48befac",
+      "files": 31,
+      "rawBytes": 21328808,
+      "remoteVerifiedAt": "2026-11-11T21:30:08.979Z"
+    }
+  ],
+  "files": 239,
+  "rawBytes": 113240191,
+  "committedBytesMatchPlan": true,
+  "srcAndTestTreesUnchangedSincePriorCheckpoint": true,
+  "recrLedgerUnchanged": true,
+  "qualification": "Six ordinary, sequential, remotely verified fast-forward pushes retain the exact immutable proof payloads. Final metadata, history and roadmap are closed by a subsequent ordinary documentation commit; these are not publication commits."
+}

@@ -1,0 +1,286 @@
+{
+  "case": "kata-060-self-consistency",
+  "game": "KATA",
+  "mode": "recorded-public-replay",
+  "command": [
+    "node",
+    "--expose-gc",
+    "--max-old-space-size=1536",
+    "scripts/replay-public-regression-released-baseline.mjs",
+    "docs/migration/lot6a-evidence/integrated-final-02/kata-campaign.json.gz",
+    "docs/migration/lot6a-evidence/integrated-final-02/kata-public-trace.json.gz",
+    "docs/migration/lot10c-evidence/recovery-20261111/kata-supplement/replay01/regressions/kata-060-self-consistency-replay.json.gz",
+    "docs/migration/lot10c-evidence/recovery-20261111/kata-supplement/replay01/regressions/kata-060-self-consistency-host-preparation.json"
+  ],
+  "startedAt": "2026-11-11T20:55:07.344167+00:00",
+  "timeoutSeconds": 600,
+  "baseline": {
+    "path": "docs/migration/lot6a-evidence/integrated-final-02/kata-campaign.json.gz",
+    "sha256": "a3318ed5f7d742f63b5923f3e1e46b0d9cfff1d18e767b45c522d61aa354e455",
+    "bytes": 8253174
+  },
+  "trace": {
+    "path": "docs/migration/lot6a-evidence/integrated-final-02/kata-public-trace.json.gz",
+    "sha256": "c236c95ec0bdcb892a6940940098e4310eb35a6ae11acaf6b74545d09aa22daa",
+    "bytes": 12579
+  },
+  "expectedActions": 33,
+  "nodeOldSpaceMiB": 1536,
+  "preflight": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/kata-supplement/replay01/preflight.json",
+    "sha256": "c537411902a4178e147c5e25b51873ab34bbaa2fa6a0ff41901879f3cb4bab96",
+    "bytes": 1396
+  },
+  "historicalReportProcessExitedBeforeNode": true,
+  "nativeSourceBeforeDigest": "ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316",
+  "executionInputsBefore": {
+    "scripts/run-released-public-regressions.py": "7988863afd2b171f31987434bb1176370be2e3afd49dead1edcdc59770d81909",
+    "scripts/run-recorded-public-regressions.py": "df19dc88ff29e78a1cb5935d445644e96cc9fb1ef90b73d802cf51868d2b2c40",
+    "scripts/compare-v54-regressions.py": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+    "scripts/replay-public-regression-released-baseline.mjs": "2ce2a0e1b8f969510373ae161156b2b163d208b4e426cb1f26218f9952b3b164",
+    "scripts/replay-v53-public-regression.mjs": "4359e008db8dadaac17f6504199ff20c752f40f1666ba527f1cd5f16df100a9e",
+    "scripts/run-v53-campaign-proof.py": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+    "tests/helpers/v6-live-game-campaign.ts": "e446fce35d192e902de2aa50c611f2224a9dbe925e59d20c10b8e964ed194ae2",
+    "docs/migration/lot10c-evidence/recovery-20261111/kata-supplement/recorded-regression-case-kata.json": "23ddc58b54e5ad3657ada016daa88466244dc951d1a6f57f90aeae9a38717f66",
+    "docs/migration/lot10c-evidence/recovery-20261111/composed-functional01/source-manifest.json": "6926e8abdcf9232e4e6d06ad4b60d59e4a8fa473b56a627dc17b7f8ac18d2ac7",
+    "scripts/run-released-public-regressions-streamlog.py": "b05b0e113c93696be45408e4c10549f2a379c22330efbddfcaa0f09cd51309b9"
+  },
+  "phase": "completed",
+  "finishedAt": "2026-11-11T20:55:56.232300+00:00",
+  "exitCode": 0,
+  "timedOut": false,
+  "passed": true,
+  "nodeExitObserved": true,
+  "rawOutputPath": "docs/migration/lot10c-evidence/recovery-20261111/kata-supplement/replay01/regressions/kata-060-self-consistency-output.raw.log",
+  "driverPid": 5,
+  "nodePid": 7,
+  "memorySamples": [
+    {
+      "elapsedSeconds": 0.002036133002548013,
+      "pid": 7,
+      "VmSize": "109160 kB",
+      "VmHWM": "288 kB",
+      "VmRSS": "288 kB",
+      "Threads": "1"
+    },
+    {
+      "elapsedSeconds": 5.008422799000982,
+      "pid": 7,
+      "VmSize": "10754960 kB",
+      "VmHWM": "907392 kB",
+      "VmRSS": "733896 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 10.02425065600255,
+      "pid": 7,
+      "VmSize": "10756820 kB",
+      "VmHWM": "907392 kB",
+      "VmRSS": "737328 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 15.041739211003005,
+      "pid": 7,
+      "VmSize": "10773224 kB",
+      "VmHWM": "907392 kB",
+      "VmRSS": "755016 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 20.056879105002736,
+      "pid": 7,
+      "VmSize": "10827876 kB",
+      "VmHWM": "907392 kB",
+      "VmRSS": "809788 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 25.066608362998522,
+      "pid": 7,
+      "VmSize": "10931736 kB",
+      "VmHWM": "961392 kB",
+      "VmRSS": "916780 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 30.076041175998398,
+      "pid": 7,
+      "VmSize": "11062932 kB",
+      "VmHWM": "1159168 kB",
+      "VmRSS": "1050080 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 35.09405160800088,
+      "pid": 7,
+      "VmSize": "11168336 kB",
+      "VmHWM": "1159168 kB",
+      "VmRSS": "1155868 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 40.11081118800212,
+      "pid": 7,
+      "VmSize": "11217676 kB",
+      "VmHWM": "1280216 kB",
+      "VmRSS": "1204560 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 45.120985245004704,
+      "pid": 7,
+      "VmSize": "11395604 kB",
+      "VmHWM": "1382768 kB",
+      "VmRSS": "1382768 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 48.88241192900023,
+      "pid": 7,
+      "processPresent": false
+    }
+  ],
+  "lastObservedAt": "2026-11-11T20:55:56.229722+00:00",
+  "elapsedSeconds": 48.88585759700072,
+  "lastProgress": {
+    "status": "passed",
+    "failure": null
+  },
+  "rawOutputBytes": 82457,
+  "outputRaw": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/kata-supplement/replay01/regressions/kata-060-self-consistency-output.raw.log",
+    "sha256": "20a4a816b63fea2f99978a1b89827ab97cb527ac8b7e1624f7b54b1f560521cb",
+    "bytes": 82457
+  },
+  "output": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/kata-supplement/replay01/regressions/kata-060-self-consistency-output.log.gz",
+    "sha256": "d0a658e0fcde6d9b216a03c812836f4f7f338fcb9a898bf728afcf6ce73c598f",
+    "bytes": 4011
+  },
+  "startedReceipt": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/kata-supplement/replay01/regressions/kata-060-self-consistency-execution-started.json",
+    "sha256": "7f8237b45a4809ea88033de4749582fc96a69dbb49400c8d18ddc89a192aef4a",
+    "bytes": 3262
+  },
+  "nodeExitedBeforeComparison": true,
+  "hostPreparation": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/kata-supplement/replay01/regressions/kata-060-self-consistency-host-preparation.json",
+    "sha256": "2e460247fcfc4d5ad2dec8c5c2ab1e47abb06f38acecbfbcab832e08dc4f2dcf",
+    "bytes": 8760
+  },
+  "hostPreparationPassed": true,
+  "report": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/kata-supplement/replay01/regressions/kata-060-self-consistency-replay.json.gz",
+    "sha256": "76f120865e3210ed160b41b9635e53323f16c6439d1890896485e9fa2f18e298",
+    "bytes": 9774240
+  },
+  "status": "passed",
+  "actions": 33,
+  "prefixes": 14,
+  "final": {
+    "actions": 33,
+    "levelsCompleted": 3,
+    "level": 4,
+    "state": "NOT_FINISHED",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "activeSeconds": 34.543588395,
+    "prefixes": 14,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 33,
+      "boundaryReplays": 2,
+      "goalEvents": 3,
+      "frontierDeltas": 67,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 15
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 15
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 15
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 11
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 1
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 9
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 16
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology"
+      ],
+      "morphologyProvider": {
+        "status": "partial_current_measurements_control_attention_and_methods",
+        "state_owner": "family_state:morphology",
+        "motion_owner": "caller:goal",
+        "forecast_owner": "family_state:public_observed_inventory",
+        "current_decision_scope": "one_source_selection_cycle",
+        "attention_owner": "caller:attention",
+        "method_owner": "caller:counters.targetMethod",
+        "entry_return_owner": "family_state:morphology.entry_access_return",
+        "connected_methods": [
+          "retained_station_method",
+          "entry_access_return",
+          "entry_rebind",
+          "entry_probe",
+          "managed_capacity",
+          "target_extension_continuation"
+        ],
+        "pending": [
+          "complete_original_caller_parity_and_domain_closure"
+        ]
+      },
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 33,
+      "resume": 13
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.66.0"
+  },
+  "passiveOwnerPresence": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/kata-supplement/replay01/regressions/kata-060-self-consistency-passive-owner-presence.json",
+    "sha256": "d73e82097275992ebbc9c4802dd52973fd511116c9d3faeb5e2772e70d250ae8",
+    "bytes": 1172
+  },
+  "passiveOwnerPresencePassed": true,
+  "passiveOwnerPrefixesChecked": 0,
+  "passiveOwnerPrefixesPassed": 0,
+  "passiveOwnerTransitionsRetained": 0,
+  "comparison": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/kata-supplement/replay01/regressions/kata-060-self-consistency-comparison.json",
+    "sha256": "bbddb38d6caa41aa55f575d18ba54283ae7ad4763931a904d6aacbfe415d8ca8",
+    "bytes": 11028
+  },
+  "comparisonPassed": true,
+  "comparisonChecks": 17,
+  "failedChecks": [],
+  "nativeSourceAfterDigest": "ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316",
+  "nativeSourceUnchanged": true,
+  "immutableInputsUnchanged": true,
+  "postprocessingFinishedAt": "2026-11-11T20:56:02.885776+00:00"
+}

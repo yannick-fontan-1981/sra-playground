@@ -1,214 +1,99 @@
 # Feuille de route V5/V6 vers Logos Engine TypeScript
 
-<!-- LOT8A_PRIORITY_PUBLICATION_065_START -->
+<!-- LOT10C_PRIORITY_PUBLICATION_066_BEGIN -->
+## Publication prioritaire 0.66 : candidat prêt, déploiement en cours de préparation
 
-## Lot 8A : publication prioritaire 0.65 demandée
+La demande explicite de l’utilisateur est de publier **0.66 en priorité, sans attendre la disponibilité des autres lots**. Le candidat 10C qualifié `547025a637ffbfeae23c15d54c96100ad8d3df5f` est réconcilié avec **0.65 réellement publiée, Site 106**, source `b9555039d60d5d9f771dd96b763c40f389dc62dd`. Le travail s’effectue dans le checkout propre `/workspace/sites/sra-lot10c-priority066-20261112`, branche `lot10c-priority066-20261112`.
 
-La demande explicite de l’utilisateur autorise **0.65 en priorité, sans attendre la disponibilité des autres lots**. Le candidat sauvegardé `c58d82e0` est restauré dans un checkout propre, sur la branche `lot8a-priority065-20261111`, puis fusionné avec la **0.64 réellement publiée dans Site 105**, source `deb9ebbbb06a8a35940b2e8f3fefdbed690ce772`.
+La [réconciliation](lot10c-evidence/priority-publication-066-20261112/source-reconciliation.json) confirme l’identité du code, des tests, des scripts et des autres entrées de compilation avec le candidat qualifié. Le natif reste **329 fichiers**, digest `ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316`, et raccorde **68/76 entrées (89,5 %)**. Les seules métadonnées supplémentaires du plan de transfert sont un lien de preuve et des notes 8A déjà présents dans 0.65. Le [build frais](lot10c-evidence/priority-publication-066-20261112/build-execution.json) et les deux audits passent ; le worker compilé contient bien **0.66.0**.
 
-Le natif 0.65 reste gelé à **324 fichiers / `936fa2bf81965272b1ddbab4a5c01f98aeb6a48188c1f7a8c91de226598c5e43`**. Le publié 0.64 conserve exactement les sources du baseline préparé 6B `a01e6faf`, **322 fichiers / fa23** : la réconciliation préserve donc les preuves fonctionnelles existantes. Les **5 606/5 606 tests sur 145 fichiers**, les **11 régressions réconciliées / 187 contrôles**, les preuves communes et les formes/graphes restent des résultats acquis dans leur périmètre. Les anciens reçus préparatoires sont conservés sans changement ni nouvelle exécution attribuée.
+La [revue indépendante](lot10c-evidence/priority-publication-066-20261112/qualification-reuse-review.json) retrouve **753 entrées source/tests**, **394 entrées de compilation** et **1 786 originaux** sans divergence. Les preuves fonctionnelles 10C conservées restent **1 767/1 767 tests dans 56 modules**, dix rejeux principaux / 170 contrôles et le complément KATA / 17 contrôles, soit **11 jeux distincts / 187 contrôles**. Leur réutilisation repose sur l’identité des entrées, sans présenter ces résultats comme une nouvelle exécution. Les preuves RECR restent attachées à leur gel historique 315, distinct du candidat 329. HPDL reste partiel et LKEY définitivement fermé.
 
-**Le coût officiel 0.65 n’est ni mesuré ni accepté.** La publication prioritaire est autorisée avant cette mesure. Le critère ultérieur reste une augmentation de la médiane globale des sessions complètes **strictement inférieure à 10 % pour STCK et pour SMLP séparément** ; une phase peut dépasser 10 % si ces deux critères globaux sont respectés. Cette livraison ne clôture ni les six portes de migration globale ni la parité stricte des graphes.
+**Le coût officiel 0.66 n’est ni mesuré ni accepté. La publication prioritaire précède cette qualification, conformément à la demande courante.** Le critère futur reste une augmentation de la médiane des sessions complètes strictement inférieure à +10 % pour STCK et SMLP séparément ; une phase peut dépasser +10 % si le global du même jeu passe. Les six portes de migration globale et la parité complète restent ouvertes.
 
-Le build 0.65 est reconstruit dans le checkout propre à partir des entrées gelées. Préparation, build, commits et sauvegardes de branche restent sans verrou global. Seule la publication utilise une exclusivité courte, sans ACK de disponibilité des autres lots ; son détenteur libère son descripteur sans supprimer le fichier de verrou.
-
-À ce stade du commit, la publication est **demandée, non encore constatée**. Les reçus de source, build et hébergement sont conservés dans le [dossier de publication prioritaire 0.65](lot8a-evidence/priority-publication-065-20261111).
-
-Prochain travail courant après publication : **8B `parallel_branch_routing`**, contrat de transfert et petit corpus indépendant issu de `BranchRouting`, puis port natif. Aucune entrée 8B n’est comptée comme raccordée. **LKEY demeure définitivement fermé.**
-
-<!-- LOT8A_PRIORITY_PUBLICATION_065_END -->
-
-<!-- CURRENT_WORK_POLICY_START -->
-
-## Règle de travail courant actualisée
-
-À la demande explicite de l’utilisateur, **développement, tests fonctionnels, commits et push se poursuivent sans verrou global**, dans le checkout et la branche propres au lot. Ils n’attendent pas la publication des autres lots. Les sauvegardes distantes sont faites par commits cohérents et vérifiées.
-
-Une **exclusivité courte et bornée** reste réservée aux mesures officielles de performance et à la publication. Chaque détenteur libère ses propres handles ; aucun fichier de verrou encore détenu n’est supprimé ni remplacé. Les anciens plans et reçus restent historiques et immuables ; les nouvelles exécutions suivent la [politique explicite](lot8a-evidence/qualification-provisional-01/contract/current-work-lock-policy.json). Les prédécesseurs réellement publiés restent nécessaires à la référence de coût et à la livraison finale, sans bloquer l’avancement courant.
-
-<!-- CURRENT_WORK_POLICY_END -->
-
-<!-- LOT8A_INTEGRATION_START -->
-
-## Lot 8A : preuves communes et régressions qualifiées sur la composition préparée
-
-**Les trois preuves communes sont vérifiées et les 11 régressions enregistrées sont qualifiées, avec 187/187 contrôles. Les quatre formes de travail sont capturées sur chacun des deux rôles puis qualifiées hors chronométrage.** Le [bilan courant réconcilié](lot8a-evidence/integration-published-063-01/summary.json) distingue ces résultats préparatoires de la future qualification contre le véritable 0.64 publié.
-
-Le candidat conserve **324 fichiers natifs**, digest `936fa2bf81965272b1ddbab4a5c01f98aeb6a48188c1f7a8c91de226598c5e43`. La [composition 5C + 6B + 8A](lot8a-evidence/integration-provisional-063-064-01/contract/composition-review.json) et le [gel validé](lot8a-evidence/integration-provisional-063-064-01/validation-summary.json) restent inchangés : **5 606/5 606 tests dans 145 fichiers**, aucun échec, annulation, cas ignoré ni `todo`, et cinq contrôles passés (typage, audit des entrées, audit de migration, diff, compilation). Ces résultats restent attachés à leur exécution déclarée ; ils ne sont pas présentés comme une nouvelle relance des tests. Les enveloppes fonctionnelles récentes vérifient les mêmes entrées gelées, dont les **1 786 fichiers originaux**.
-
-L’[audit du candidat](v6-entry-point-progress.json) conserve **67/76 entrées raccordées (88,2 %), neuf restantes** : `goal_access` 12/12, `window_constraints` 21/21, `surface` 10/10 et `factored_material_return` 24/33. L’[inventaire](v6-coverage.json) conserve 209 composants vérifiés, 147 transferts partiels, 1 013 modules en attente, zéro module entièrement vérifié et aucun échec d’audit. Les **six portes de migration complète restent fausses**.
-
-### Preuves acquises sur le même natif
-
-| Périmètre | Résultat établi | Portée |
+| Étape | État courant avant le déploiement 0.66 | Suite |
 | --- | --- | --- |
-| Binding 5C | **6 818/6 818 comparaisons originales**, quatre scénarios | Positif, réfutation, ambiguïté et frontière ; états, mémoire, acquisition et restauration. |
-| Motif 8A | **20/20 contrôles** du parcours commun | Acquisition sélectionnée et restitution depuis la mémoire commune ; les preuves contraires et d’ablation restent liées à la suite validée. |
-| SelectedRigid 6B | **56 événements comparés sans différence**, 22 ablations, dont sept changent l’action ou le refus | Cinq retours physiques et trois préfixes ; observation terminale conservée sans acquisition inventée. |
-| Régressions enregistrées | **11/11 cas, 187/187 contrôles** | Dix réussites de la série02, puis WEAV03 ; mêmes traces, même comparateur, mêmes octets natifs. |
+| 5C / 0.63 | Publié, Site 104 | Coût officiel encore ouvert |
+| 6B / 0.64 | Publié, Site 105 | Coût officiel encore ouvert ; développement 6C sur sa branche |
+| 8A / 0.65 | Publié, Site 106 | Coût officiel encore ouvert ; développement 8B sur sa branche |
+| **10C / 0.66** | **Qualification fonctionnelle conservée, réconciliation et build frais passés** | **Publication prioritaire, sans attente de disponibilité** |
+| 10D / TemporalSelection | Référence indépendante de 105 cas, deux générations identiques et sept corruptions rejetées, sauvegardées sur le checkpoint `feab56d88718ef3b9ae9fd4798254934c09ad3f3` | Reprendre le port natif des primitives, de la géométrie et de la politique ; compléter le second locus et le cycle de famille avant raccordement |
+| Autres entrées | Huit restent ouvertes au registre 68/76 | Poursuivre les lots propriétaires et la consolidation globale |
 
-La [revue commune](lot8a-evidence/qualification-provisional-02/review/common-integrity-review.json) conserve les limites des scénarios synthétiques distincts. La [réconciliation des régressions](lot8a-evidence/qualification-provisional-02/reconciliation-recorded-regressions.json) et sa [revue indépendante](lot8a-evidence/qualification-provisional-02/review/recorded-regression-reconciliation-review.json) vérifient onze identifiants distincts. Ces populations ne sont pas additionnées aux 5 606 tests. Elles n’établissent ni la parité de l’appelant complet ni une nouvelle réussite de jeu réel.
+Le développement, les builds, les commits et les sauvegardes de branche avancent sans verrou global. Une fenêtre exclusive courte, non bloquante et bornée protège seulement la publication ; aucun ACK de disponibilité n’est demandé, aucun fichier de verrou détenu n’est supprimé. L’accès privé au propriétaire est conservé. Les reçus sont rassemblés dans le [dossier de publication 0.66](lot10c-evidence/priority-publication-066-20261112).
 
-Deux corrections d’outillage rendent les rapports complets disponibles. VOIS termine 78 actions et trois niveaux après passage à l’écriture JSON/gzip par flux. WEAV termine **81 actions, 81 préfixes et trois niveaux** après libération des gros objets de référence avant l’import du moteur, puis séparation des durées de vie de la prévalidation, du moteur et du comparateur. Le **plafond d’old space V8 reste 1 536 MiB** ; le RSS total observé peut le dépasser. Aucun état natif, budget du moteur ou champ du rapport n’est supprimé. La série02 reste conservée au statut `failed`, 10/11 et 170/187 ; la réussite finale est une réconciliation de tentatives, sans réécriture de cet échec. L’interruption antérieure, les diagnostics et les refus de préparation sont conservés.
+À ce commit de préparation, aucun succès de déploiement 0.66 n’est encore revendiqué. **Les sections suivantes conservent leurs constats historiques ; le présent tableau fixe l’état courant.**
 
-### Formes de travail et graphes préparatoires
+<!-- LOT10C_PRIORITY_PUBLICATION_066_END -->
 
-Le parent préparé est le commit **`a01e6faf330d82fa220feac0c9ad4632bb75a9de`**, 322 fichiers natifs, digest `fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886`. Son checkout séparé contient les déclarations exactes de cette source, dont le [JSON matérialisé après l’échec du premier inventaire](lot8a-evidence/qualification-provisional-02/work-forms-01/baseline-support-materialization.json). Il reste **non publié**. L’inventaire et les deux captures utilisent le même HEAD candidat `7c8f43365a277406e95c898165d01a7bf6e19772`.
+<!-- LOT10C_CURRENT_BEGIN -->
+## Historique 10C : qualification fonctionnelle avant publication
 
-Les [captures complètes et formes qualifiées](lot8a-evidence/qualification-provisional-02/work-forms-01/work-forms.json) couvrent **huit sessions / 62 actions** : STCK sur trois puis dix actions, SMLP sur trois puis quinze, pour chaque rôle. Les formes complètes conservent trois inspections terminales. L’[inventaire des propriétaires](lot8a-evidence/qualification-provisional-02/work-forms-01/owner-inventory.json) confirme l’ajout du seul `motif_access`, sans retrait de propriétaire ni ajout/retrait de programme installé. Binding et SelectedRigid sont observés dans les deux rôles, Motif dans le candidat.
+**La composition 10C passe désormais sa suite formelle de 1 767/1 767 tests dans 56 modules, les cinq contrôles du projet, dix rejeux principaux et le complément KATA séparé. L'intégrité complète des preuves passe.** Le [bilan de qualification fonctionnelle](lot10c-evidence/recovery-20261111/functional-qualification.md) et son [reçu structuré](lot10c-evidence/recovery-20261111/functional-summary.json) donnent les empreintes et les limites de ce jalon. **Le coût officiel et la publication 10C restent à établir ; 0.66 demeure proposée.**
 
-La [qualification des graphes](lot8a-evidence/qualification-provisional-02/work-forms-01/owner-graph-attribution.json) passe **64 contrôles sur 58 points appariés**. Les **21 956 différences brutes** sont toutes conservées dans le journal : 20 893 différences d’identifiant de source validées par leur Kernel propre, 1 055 différences d’horodatage `created` rattachées à l’horloge source et à leurs véritables intervalles d’appel, et huit ajouts des deux nœuds Motif sur les quatre formes. **Zéro différence ne reste sans attribution.** Les valeurs privées et fragments ne sont pas masqués ; les horloges ne sont pas remplacées.
+Le [gel de cette qualification](lot10c-evidence/recovery-20261111/composed-functional02/source-manifest.json) conserve **329 fichiers natifs**, digest `ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316`, et une archive de **816 fichiers**. Il reprend la [composition préparée](lot10c-evidence/prepared-composition01/composition-summary.json) des sources 5C `722c949e…`, 6B `a01e6faf…` et 8A `7c10456a…`, sans changement natif pendant cette reprise. Le registre reste **68/76 entrées, soit 89,5 %, avec huit restantes** : 12/12 `goal_access`, 21/21 `window_constraints`, 10/10 `surface`, 25/33 `factored_material_return`.
 
-La [revue indépendante de cette qualification](lot8a-evidence/qualification-provisional-02/review/work-form-qualification-review.json) en précise la portée. Les sorties restent volontairement **`preparedOnly: true`, `officialPerformanceEligible: false` et `strictCommonGraphParity: false`**. Elles ne deviennent pas une preuve de coût ou une autorisation de publication par le seul passage des contrôles.
-
-### Publication, coût et travail courant
-
-Le [constat Sites 104](lot8a-evidence/integration-published-063-01/publication-observation.json) confirme **native 0.63 publiée**, source `bc53ddf36f0379be24cfc0667f8f8d6fdd650032`, déploiement `succeeded`, accès privé au propriétaire et révision 3. Cette [publication prioritaire 5C](lot5c-evidence/recovery/publication-063-priority/authorization.json) conserve explicitement un **coût officiel non mesuré et non accepté** pour STCK et SMLP. Cette exception ne s’étend pas à 8A. **Le véritable 0.63 est réconcilié dans la branche 8A ; 0.64 et 0.65 restent non publiées au constat de cette étape.** Le [bilan de réconciliation](lot8a-evidence/integration-published-063-01/summary.json) vérifie que les fichiers natifs, de tests, de scripts, de compilation et originaux restent exactement ceux du gel qualifié. Les sauvegardes de `lot8a-motif-checkpoint-20261111` demeurent distinctes d’une publication du Site.
-
-Le développement, les tests fonctionnels, les commits et les push continuent **sans verrou global et sans attendre les publications des autres lots**, conformément à la [politique courante](lot8a-evidence/qualification-provisional-01/contract/current-work-lock-policy.json). Une exclusivité courte reste réservée aux mesures officielles et à la publication. Aucun verrou global n’a été acquis pour les présentes qualifications ; aucun fichier de verrou détenu n’a été supprimé.
-
-Le [protocole officiel prospectif](lot8a-evidence/integration-provisional-063-064-01/contract/cost-qualification-plan.json) prévoit 40 essais ABBA : **32 sessions mesurées / 400 actions, plus huit préchauffages / 24 actions exclus**. Le critère reste la médiane des **sessions complètes strictement sous +10 % pour STCK et pour SMLP séparément**. Une phase au-dessus de +10 % est recevable lorsque les deux critères globaux passent. Tous les échantillons, diagnostics et cohortes restent conservés, sans compensation entre jeux. Aucune mesure officielle 8A n’a été exécutée ici.
-
-### Feuille de route actualisée
-
-| Étape | État établi | Prochaine action |
+| Contrôle de la composition 329 | Résultat établi | Reçu |
 | --- | --- | --- |
-| 10B / 0.62 | Publié, Site 103 ; réserve HPDL partielle conservée | Conserver le prédécesseur exact et ses limites. |
-| 5C / 0.63 | **Publié prioritairement dans Site 104 ; coût officiel non mesuré et non accepté** | Conserver cette réserve et ses preuves ; la qualification future du coût garde son critère global. |
-| 6B / 0.64 | Préparation sauvegardée, non publiée au constat de cette étape | Intégrer le 0.63 désormais publié, puis fermer la qualification finale et le coût avant sa publication. |
-| **8A / 0.65** | **0.63 publié réconcilié ; natif validé, preuves communes, 11 régressions et formes/graphes préparatoires qualifiés** | Réconcilier le véritable 0.64 publié, vérifier les différences avec le gel préparé et renouveler les qualifications affectées ; mesure officielle puis publication après acceptation. |
-| **8B** | `parallel_branch_routing` reste ouvert ; [préparation source établie](lot8b-evidence/preparation-20261111/README.md) | Écrire le contrat de transfert et le corpus original indépendant, puis porter le propriétaire et ses dépendances consommées, sans attendre la publication pour ce travail courant. |
-| 6C / 6D | `observed_rigid_cargo` et `shared_settlement` ouverts | Transférer puis qualifier leurs capacités dans leurs propres périmètres. |
-| Lot 9 | `chart_navigation`, `region_intervention`, `joint_channels` ouverts | Traiter navigation, régions et canaux ; conserver `discrete_network` hors du compteur 76. |
-| 10C / 10D / 10E | La coordination signale le jalon fonctionnel 10C sauvegardé et une préparation source 10D ; 10E reste ouvert | Poursuivre ces branches sans verrou courant ; réconcilier leurs prédécesseurs réels avant qualification finale et publication. |
-| Lot 11 | Consolidation ouverte ; six portes globales encore fausses | Parité commune complète, graphes, restauration, sessions longues, coûts et lisibilité. |
+| Suite formelle, 56 modules | **1 767/1 767**, zéro échec, annulation, test ignoré ou `todo` | [Revue formelle](lot10c-evidence/recovery-20261111/composed-functional02/validation/formal-review.json) |
+| TypeScript, audits des entrées et de migration, différences, compilation Sites | **5/5**, compilation fraîche réellement exécutée | [Contrôles](lot10c-evidence/recovery-20261111/composed-functional01/validation/checks-run.json) |
+| Dix rejeux déclarés | **10 cas / 170 contrôles réussis** | [Revue des rejeux](lot10c-evidence/recovery-20261111/composed-functional02/regression-review.json) |
+| KATA complémentaire, exécution distincte | **1 cas / 17 contrôles réussis** | [Revue KATA](lot10c-evidence/recovery-20261111/kata-supplement/review.json) |
+| Couverture réunie des deux exécutions | **11 jeux distincts / 187 contrôles**, sans inventer une suite unique | [Liaison des populations](lot10c-evidence/recovery-20261111/composed-functional02/kata-supplement-link.json) |
+| Intégrité des sources, tests, build et rapports | **PASS** : 329 natifs, 816 archivés, 753 entrées sources/tests, 394 entrées de compilation ; 1 786 originaux inchangés | [Intégrité](lot10c-evidence/recovery-20261111/composed-functional02/delivery-integrity.json) |
 
-Les états des autres fils sont issus d’une [observation de coordination](lot8a-evidence/qualification-provisional-02/coordination/lanes-observation-02.json), pas d’une nouvelle certification de leurs preuves dans ce lot. **LKEY reste définitivement fermé**, sans nouveau jeu, rejeu, oracle ou remise à zéro. Les sections historiques suivantes conservent leurs propres dates, gels et limites.
+La première tentative formelle, arrêtée à 600 secondes avec sortie 124 et TAP incomplet, reste conservée et non acceptée. La suivante a réellement terminé en **616,718965502 secondes**. Les quatre anciens groupes de développement restent historiques et ne s'ajoutent pas à ces 1 767 tests. Les actifs Pyodide épinglés ont été matérialisés localement avant le nouveau build ; le même reçu frais a ensuite été réutilisé à l'identique après vérification des inventaires et du worker.
 
-<!-- LOT8A_INTEGRATION_END -->
+La [conservation vérifiée](lot10c-evidence/recovery-20261111/storage-review.json) restaure à l'identique les dix rapports depuis **107 fragments / 91 834 393 octets**, et KATA depuis **11 fragments / 9 774 240 octets**. Les [six commits de preuves poussés et vérifiés](lot10c-evidence/recovery-20261111/transport/review.json) conservent **239 fichiers / 113 240 191 octets bruts**, jusqu'au checkpoint `4622babc20ae32d9421d3cdeeaebaa84a48befac`, après les deux commits de politique. Ces sauvegardes sont des pushs de sources, avec `published:false`.
 
-<!-- LOT8A_START -->
+**Consigne courante : développement, tests fonctionnels, builds, revues, commits et pushs avancent dans le checkout et sur la branche du lot 10, sans verrou global, attente de calme ni attente de publication des autres lots.** La [politique ordinaire](lot10-ordinary-work-policy.md) et son [complément de cas](lot10-ordinary-case-work-policy.md) désignent les nouveaux helpers ; leurs 19 contrôles courts simulés passent. Les anciens helpers restent immuables pour conserver les preuves. Seules les mesures officielles et la publication effective conservent une exclusivité globale courte. Les protections propres aux registres de cas restent en place ; aucun fichier de verrou détenu n'a été supprimé.
 
-## Jalon 8A antérieur sur Site 103 : développement validé, qualification finale après 0.63 et 0.64
+Les nouveaux rejeux sont liés au gel **329 / `ab674682…`**. RECR, sa comparaison originale et son navigateur restent liés au gel historique **315 / `bb7…`**, décrit ci-dessous ; aucun résultat de ces catégories n'est transféré au candidat 329. Le budget RECR reste **642,824027506 secondes consommées / 1 757,175972494 restantes**, HPDL partiel, LKEY définitivement fermé, les quatre modules LKEY exclus. `fullCallerParity` demeure `false`.
 
-**8A `motif_conditioned_access` est implémenté et validé en développement : 5 422/5 422 tests dans 138 fichiers, cinq contrôles passés, compilation comprise.** Les entrées sont restées inchangées pendant chaque commande ; les sorties complètes et leurs empreintes sont conservées dans le [bilan de validation](lot8a-evidence/development/validation-summary.json). Le candidat porte **0.65.0 réservé** et contient **312 fichiers natifs**, digest `a6ea3e5e8140b14aa260485ebd4192429a86c4d3ec02075f14043f215cc798e1`.
+La [publication fraîchement reconsultée](lot10c-evidence/recovery-20261111/publication-observation-final.json) reste **Site 103 / native 0.62**, source `4afcbfe6a25bd3a88223be543e443bc53b9c8814`, accès existant et révision 3 conservés. La qualification officielle 10C doit encore réconcilier les prédécesseurs effectivement publiés, établir le contrat de coût **0.65 → 0.66** et compléter les portes finales. Cela ne bloque plus le développement ordinaire de **10D / `temporal_selection`**, dont la [préparation du premier changement](lot10d-temporal-selection-next-step.md) est terminée.
 
-Ce travail est parti du Site 101 / native 0.61, puis a intégré le **Site 103 / native 0.62 effectivement publié**, source `4afcbfe6a25bd3a88223be543e443bc53b9c8814`. Une [observation Sites fraîche](lot8a-evidence/coordination/current-publication-observation.json) confirme le déploiement `succeeded`, l'accès privé au propriétaire et la révision d'accès **3**. **Aucun coût 8A, niveau officiel ni déploiement 0.65 n'est revendiqué.** Les publications effectives **5C / 0.63 → 6B / 0.64** restent à intégrer avant son gel final, ses non-régressions, sa qualification de coût et sa publication.
+### Jalon historique 10C : gel 315 fichiers natifs / `bb7…`
 
-La [filiation source](lot8a-motif-access-lineage.md) et l'[index des preuves](lot8a-evidence/README.md) décrivent le propriétaire unique, la position source, les gardes courantes, l'acquisition sélectionnée et la restauration. Le parcours froid du moteur commun acquiert une commande, bascule et active un motif, puis utilise le retour pour le choix suivant. Un effet contraire modifie cette décision ; retirer l'acquisition empêche l'enchaînement appris. Les comparaisons originales et ces scénarios sont inclus dans le passage frais ; les **182/182 comparaisons initiales** restent des preuves historiques distinctes, sans addition des populations.
+Le développement part de **Site 103 / native 0.62**, checkpoint documentaire `2981a62d456802d39dcde316734793e905fb0ebf`, et conserve les corrections d'horloge, la livraison 10B et ses réserves. Le [checkpoint complet de sources et de preuves](lot10c-evidence/coordination/checkpoint03.json), `3ea5e39b7c3f18ea84baf485a2494a9b948e0984`, a été vérifié sur sa branche distante le **11 novembre 2026 à 15:33:49,901 (UTC−03)**. Les **87 chemins en attente, soit 90 297 853 octets bruts**, sont conservés par **quatre envois ordinaires séquentiels vérifiés**, conformément au [plan exact](lot10c-evidence/coordination/checkpoint03-plan.json). Leur union correspond exactement au différentiel depuis le [checkpoint intermédiaire](lot10c-evidence/coordination/checkpoint02.json) `649789e7…` ; les arbres Git des sources et du moteur natif sont identiques entre `649789e7…` et `3ea5e39b…`, avant la composition actuelle. Le dépôt était propre à la vérification finale. Le [bilan du jalon](lot10c-evidence/development/milestone-summary.json) rassemble les résultats terminaux ; aucune publication native 10C n’est revendiquée.
 
-Le [bilan historique de développement](lot8a-evidence/development/validation-summary.json) conserve l’audit de ce candidat sur Site 103 : **65/76 raccordées (85,5 %), 11 restantes**, dont **23/33** pour `factored_material_return`. La publication 0.62 de référence en compte **64/76**. L’inventaire de ce même jalon compte **200 composants vérifiés, 149 transferts partiels et 1 020 modules en attente**, zéro module entièrement vérifié et **aucun échec d’audit**. Ces chiffres historiques ne désignent pas les rapports courants. Les six portes de migration complète restent `false` ; le raccordement n’établit pas une parité complète du moteur.
+La [suite affectée de développement](lot10c-evidence/development/recr01-source/validation/delta-tests-run.json) passe **1 382/1 382 tests dans 46 fichiers**, dont **173 tests de référence originale et quatre tests du noyau commun**. Les [cinq contrôles du projet](lot10c-evidence/development/validation01/validation/checks-run.json) **passent, avec une compilation Sites effectivement exécutée**. Ces populations se recouvrent et ne sont pas additionnées. La boucle commune part sans méthode acquise, apprend d'un retour étranger, exécute `recruitment.select` puis WHY/ACT, acquiert le retour sélectionné une seule fois et restaure la continuation depuis le graphe partagé. Les sept champs source et les clés originales `window_constraint` pour le retour actif et `recruitment_event` pour le passif sont conservés. La [filiation 10C](lot10c-ordered-recruitment-lineage.md) et le [contrat source](lot10c-evidence/source-contract.md) détaillent ces preuves et les adaptations natives explicites.
 
-La recherche bornée déclare l'incomplet après interruption ou dépassement, sans route partielle. Ses bornes de **8 192 états / 16 384 éléments de frontière** ne constituent pas une preuve universelle de mémoire ou de latence : conserver les chemins complets peut coûter **O(S²)** en espace. **8B `parallel_branch_routing` reste à réaliser et le lot 8 entier reste ouvert.**
+Le registre du **jalon historique `315 / bb7…`** atteint **65/76 entrées, soit 85,5 %, et 11 restantes** ; l'inventaire de ce même jalon compte **204 composants vérifiés, 149 transferts partiels et 1 016 modules en attente**, zéro module entièrement vérifié. Les six portes de migration complète restent `false`. Ces compteurs ne remplacent pas les chiffres du Site 103 effectivement publié.
 
-**Règle de coût confirmée : la médiane des sessions complètes doit augmenter de moins de +10 % pour STCK et pour SMLP séparément.** Une phase dépassant +10 % peut être acceptée lorsque les deux critères globaux passent ; tous les échantillons, diagnostics et cohortes sont conservés. Le coût 8A devra être mesuré contre son prédécesseur effectivement publié. Les coûts acceptés de 0.61 et 0.62 ne sont pas réutilisés comme preuves de 8A. LKEY demeure définitivement fermé, sans nouvel essai ni remise à zéro.
+Le [gel RECR01](lot10c-evidence/development/recr01-source/source-manifest.json) conserve **315 fichiers natifs**, digest `bb7d62b5823d76ae7a5ecd452cb622ebb04f2b85b20fb0d2f9a5c35a1535b361`, dans une [archive de 334 entrées d'exécution](lot10c-evidence/development/recr01-source/source-archive.json). La [campagne réelle à froid](lot10c-evidence/development/recr01/execution-recruitment.json) a **réussi naturellement la cible de trois niveaux en 17 actions**, avec **103,622933254 secondes débitées**. Son dernier état public conserve `levelsCompleted: 3`, `level: 4`, `reason: target_levels_completed` et `state: NOT_FINISHED` : la cible de trois niveaux est atteinte, sans revendiquer la fin du jeu entier.
 
-### État historique de la feuille de route au 11 novembre 2026 à 14:37:12 UTC−03
+La [première comparaison originale](lot10c-evidence/development/recr01-parity/execution.json) reste un **échec technique conservé et débité de 118,063969094 secondes**. Le lecteur a reçu un `SIGSEGV` vers 90,25 secondes, pendant le troisième relevé périodique facultatif de traceback. Ses 45 appels et 96 ablations en progression, sans divergence rapportée, ne constituaient pas une preuve complète. Le relevé périodique a été retiré ; la [revue AST indépendante](lot10c-evidence/development/recr01-parity-diagnosis/static-change-check.json) constate **26 fonctions de comparaison inchangées**, avec maintien des diagnostics fatals, de la progression, du profilage original et de la borne externe. La cause du signal n'est pas établie.
 
-| Étape | État observé à ce jalon historique | Prochaine action alors prévue |
+La [comparaison originale répétée](lot10c-evidence/development/recr01-parity02/original-parity.json.gz) est **PASS, code de sortie 0** : **50/50 appels source, 17/17 retours/actions/préfixes, 16 acquisitions actives et une passive, 34/34 restaurations natives et 16 résultats après sélection**, avec **zéro divergence et zéro adaptation native**. Les **102 ablations exécutées sur 102 attendues** comprennent **72 interventions appliquées et 41 changements d'action ou de refus**, sans erreur. Les entrées, originaux et liaison au natif `bb7…` restent inchangés. Le [reçu de l'essai 02](lot10c-evidence/development/recr01-parity02/execution.json) conserve **120,627604822 secondes de lecteur et 120,732553873 secondes débitées**. La parité exacte du retour original et la comparaison du composant passent ; **`fullCallerParity` reste `false`**. L'apport de l'état acquis aux décisions du composant est établi ; une amélioration causale du jeu entier n'est pas démontrée.
+
+Le [contrôle navigateur de développement](lot10c-evidence/development/recr01-browser01/qa.json) passe : arrêt observé sur `Paused.`, action unique **3 → 4**, puis reprise jusqu’au niveau suivant avec **9 actions et deux niveaux résolus**. La [capture de l’action unique](lot10c-evidence/development/recr01-browser01/one-action.png) et les observations brutes sont conservées. Le contrôle a utilisé le serveur Vite de développement ; la compilation est qualifiée séparément. Les dix messages de console retenus proviennent du script d’extension du navigateur. L’aperçu est arrêté.
+
+Après les contrôles et la conservation finale des preuves, le [registre RECR unique](lot10c-evidence/case-clock.json) cumule **642,824027506 secondes débitées et 1 757,175972494 secondes restantes sur 2 400**, admission, première comparaison interrompue, diagnostic et navigateur compris, sans remise à zéro.
+
+Les [dix régressions enregistrées](lot10c-evidence/development/regressions01/regression-launch.json) sont **PASS : 170/170 contrôles**, avec **357 commandes, 367 paquets publics complets, 1 676 images d’animation, 275 préfixes et 30 frontières naturelles de niveau**. Le [rapport complet](lot10c-evidence/development/regressions01/regressions/regression-summary.json) conserve les dix populations et des entrées inchangées. Le [gel complet](lot10c-evidence/development/regressions01/source-manifest.json) reste `bb7…` / 315 fichiers natifs et 779 fichiers d’exécution. Les [références historiques](lot10c-evidence/development/regression-preparation01/receipt.json) ont été restaurées à l’identique depuis 74 fragments. Ces relectures utilisent les retours archivés et ne constituent ni de nouvelles réussites en jeu ni une mesure de vitesse.
+
+### Livraison et prochaines étapes
+
+| Sous-lot 10 | État actuel | Suite |
 | --- | --- | --- |
-| 10B / 0.62 | Publié dans Site 102, clôture documentaire Site 103 ; réserve HPDL partielle conservée | Prédécesseur réellement intégré dans 8A |
-| 5C / `observed_object_binding` / 0.63 | Validation du candidat intégré en cours dans son fil | Terminer sa qualification et publier 0.63 |
-| 6B / `selected_rigid` / 0.64 | Jalon de développement acquis ; intégration préparatoire de 5C en cours | Réconcilier la publication réelle 0.63, puis qualifier et publier 0.64 |
-| **8A / `motif_conditioned_access` / 0.65** | **Développement validé : 5 422 tests, cinq contrôles, 65/76 entrées sur la base 103** | Intégrer 0.63/0.64, valider le gel final et son coût, puis publier |
-| 6C / 6D | `observed_rigid_cargo`, `shared_settlement` restent ouverts | Transférer et qualifier chaque capacité |
-| 8B | `parallel_branch_routing` reste à réaliser | Étape suivante du lot 8 après 8A |
-| Lot 9 | `chart_navigation`, `region_intervention`, `joint_channels` restent ouverts | Navigation, régions et canaux ; `discrete_network` reste suivi hors compteur 76 |
-| 10C / 10D / 10E | 10C `ordered_recruitment` en développement parallèle ; `temporal_selection` et `invited_endpoints` à réaliser | Qualifier et coordonner les publications suivantes |
-| Lot 11 | Consolidation finale ouverte | Parité commune, graphes, restauration, sessions longues, coûts et lisibilité |
+| **10A : `axial_question`** | Livré dans Sites 90–91 / 0.56 ; réserve d'apport propre conservée. | Aucun changement dans cette étape. |
+| **10B : `window_question`** | Livré dans Sites 102–103 / 0.62 ; coût global accepté et réserve HPDL partielle. | La réussite des six niveaux HPDL reste non établie. |
+| **10C : `ordered_recruitment`** | **Qualification fonctionnelle et intégrité passées sur 329 natifs** : suite formelle 1 767/56 modules, cinq contrôles, dix rejeux/170 plus KATA/17, registre 68/76. RECR et navigateur restent historiques sur 315. | Réconcilier les prédécesseurs publiés, compléter les portes de réception du gel final, mesurer le coût officiel puis publier 0.66. |
+| **10D : `temporal_selection`** | **Préparation statique terminée** : contrats, dépendances, état et points d’intégration identifiés. | Créer le générateur de référence indépendante et son corpus géométrie/politique, puis porter le composant ; travail courant sans attendre les autres publications. |
+| **10E : `invited_endpoints`** | Planifié. | Après 10D. |
 
-Les états des autres fils proviennent de la [coordination observée](lot8a-evidence/coordination/next-lanes-observation.json) ; ils ne constituent pas des attestations de publication. Les lots antérieurs conservent ci-dessous leurs périmètres livrés et leurs réserves.
+La [dernière publication directement vérifiée](lot10c-evidence/recovery-20261111/publication-observation-final.json) reste **Site 103 / native 0.62**. La file **0.63 → 0.64 → 0.65 → 0.66** concerne la qualification officielle et la publication ; le développement et les sauvegardes de branche avancent indépendamment. Le gel final 10C devra être réconcilié avec la vraie référence 0.65 et satisfaire ses portes de réception et de coût. **0.66 est seulement proposée.**
 
-<!-- LOT8A_END -->
+**Règle de coût confirmée : médiane des sessions complètes strictement inférieure à +10 % pour chacun de STCK et SMLP.** Une phase peut dépasser +10 % si le global de ce même jeu passe. Toutes les sessions mesurées et tous les diagnostics de phase seront conservés, sans compensation entre jeux. **Aucun coût officiel final ni publication 10C ne sont encore établis.**
 
-<!-- LOT6B_PRIORITY_PUBLICATION_064_START -->
-
-## Publication prioritaire 0.64 demandée le 11 novembre 2026
-
-L'instruction courante demande de publier **0.64 en priorité, sans attendre une
-disponibilité d'autres lots**. La livraison utilise le candidat **SelectedRigid
-6B fa23 / 322 fichiers**, sauvegardé dans `b55fcb8f`, et son prédécesseur
-réellement publié **Site 104 / native 0.63**, source
-`bc53ddf36f0379be24cfc0667f8f8d6fdd650032`. Les développements Cargo 6C restent
-sur leur branche distincte et ne sont pas inclus dans cette publication.
-
-Le code natif et les entrées de construction du prédécesseur publié sont
-identiques à ceux du checkpoint 5C `805b3029` déjà intégré et testé. La fusion
-ajoute l'historique et les preuves documentaires 5C ; elle préserve le natif
-6B fa23. Les 5 405 tests, onze rejeux, preuve froide et QA déjà clos gardent
-leur identité et leur portée, sans nouvelle partie ni nouvelle mesure.
-
-**Le coût officiel 6B n'est pas mesuré ni accepté.** La publication prioritaire
-suit la nouvelle instruction utilisateur ; elle ne transforme pas cette
-absence de mesure en réussite. Le critère reste un surcoût médian de session
-complète strictement inférieur à +10 % pour chaque jeu testé. Une phase peut
-dépasser +10 % si le global de ce jeu passe ; aucune compensation entre jeux.
-
-La sauvegarde et la préparation n'acquièrent aucun verrou global. La poussée
-vers la branche de publication et le déploiement utilisent une exclusivité
-courte, acquise sans attente et libérée par son détenteur. Aucun fichier de
-verrou détenu n'est supprimé. L'état terminal de Sites sera conservé dans le
-[dossier de livraison prioritaire](lot6b-evidence/priority-publication-064-20261111).
-État historique à la création de ce jalon : publication 0.64 demandée. **Constat actualisé du lot 8A : publication 0.64 réussie dans Site 105**, source `deb9ebbb`, avec coût officiel toujours non mesuré et non accepté. Voir le reçu [du prédécesseur réellement publié](lot8a-evidence/priority-publication-065-20261111/actual-publication-064-observation.json).
-
-<!-- LOT6B_PRIORITY_PUBLICATION_064_END -->
+<!-- LOT10C_CURRENT_END -->
 
 <!-- LOT6B_DEVELOPMENT_CURRENT_START -->
 
-## Lot 6B : suite, rejeux, preuve froide et QA navigateur fa23 validés
+## Reprise du lot 6B : intégration 103 vérifiée, fusion 5C provisoire
 
-### Règle de travail prospective du 11 novembre 2026
-
-La nouvelle instruction utilisateur autorise **le développement, les tests
-fonctionnels, les commits et les push sans verrou global**, dans un checkout
-et une branche propres. Les sauvegardes doivent rester régulières, sans
-attendre la publication des autres lots. Cette règle s’applique aux travaux
-nouveaux ; les anciennes attentes, gardes et preuves de coordination demeurent
-des faits historiques et ne sont pas réécrites.
-
-**Seules les mesures officielles de coût et la publication nécessitent une
-courte exclusivité.** Aucun verrou détenu ne doit être supprimé ni remplacé.
-Le développement courant ne requiert ni verrou partagé global ni garde
-d’un ancien silence préparatoire. La publication effective 0.63 reste une
-condition de réconciliation pour l’acceptation finale 6B ; elle ne bloque pas
-la préparation, les tests fonctionnels ou les commits et push courants.
-La règle est explicitée par [addendum prospectif](lot6b-evidence/current-work-policy-20261111.md).
-La [prochaine préparation du contrat de coût](lot6b-evidence/source-workflow-20261111/next-cost-preflight-plan.md)
-précise les commandes et leurs prérequis réels. Les travaux préparatoires restent
-libres de verrou global ; les CLI officiels positifs attendent les identités du
-prédécesseur publié et les mesures réellement acquises.
-
-### Diagnostic source du message d’arrêt signalé
-
-Le [diagnostic de source générique](lot6b-evidence/user-stop-nested-control-01/source-diagnosis.json)
-identifie précisément **`FieldServiceMemory.applyEvent`**, dans
-[v6-field-service-access.ts](../../src/logos-engine/v6-field-service-access.ts).
-Pour un événement `nested_control_response` dont la disposition est différente
-de `local_no_visible_effect`, ce code fixe le motif
-**`nested_control_effect_requires_composition`**. Le chemin générique exige
-alors une composition explicite ; une composition de remplissage reconnue
-peut lever ce motif. Il ne transforme pas ce refus en réussite.
-
-**SelectedRigid est raccordé en amont dans le candidat fa23.** Le Site 103
-exact, commit `4afcbfe6a25bd3a88223be543e443bc53b9c8814`, encore observé
-**à 21:33 UTC**, dans le [nouveau constat d’hébergement](lot6b-evidence/source-workflow-20261111/publication-observation.json), reste en **native 0.62 sans raccordement SelectedRigid**.
-Cette différence est compatible avec le message fourni par l’utilisateur.
-**Le texte seul ne prouve ni la version chargée dans le navigateur, ni le
-niveau, ni l’historique d’actions de sa session.** La session exacte n’a pas
-été reproduite.
-
-Ce diagnostic n’exécute **aucun nouveau jeu ni parcours navigateur** et
-n’apporte **aucune modification native** : le gel demeure **fa23 / 322 fichiers**.
-Les validations fonctionnelles, les rejeux et les preuves KLOT/navigateur
-déjà closes restent inchangés. Après le diagnostic facturé, le compteur
-est **fermé à 1 424,8841320940055 / 2 400 secondes**, avec
-**975,1158679059945 secondes restantes**. Les points de clôture antérieurs,
-dont celui de QA02, restent historiques.
-
-**Après le signalement « KLOT ne réussit pas », la version publiée vérifiée
-est Site 103 / native 0.62 ; SelectedRigid 6B n’y est pas déployé.**
-La session exacte de l’échec signalé n’a pas été reproduite : cette observation
-établit un écart de publication, sans établir une causalité certaine.
+**Le signalement « KLOT ne réussit pas » concerne le Site actuellement publié,
+Site 103 / native 0.62. Le candidat SelectedRigid 6B n’y est pas déployé.**
 Le [constat de publication vérifié](lot6b-evidence/integration-site103-01/publication-observation.json)
 lie le commit exact `4afcbfe6a25bd3a88223be543e443bc53b9c8814`, le déploiement
 `appgdep_6af49db69234819195c9c093cb79a7da` au statut `succeeded` et l’accès
@@ -217,12 +102,12 @@ UTC−03 (17:05:12 UTC)**. Dans cette source publiée, `selected_rigid` reste
 absent du registre des fournisseurs et en attente dans l’inventaire.
 L’interface observée ne propose pas de sélecteur d’un autre moteur permettant
 d’activer le candidat local. L’écart entre le gel de développement et le Site
-servi est établi. Cette constatation ne remplace ni une reproduction de
-la session utilisateur ni les preuves propres du candidat fusionné.
+servi est établi ; aucun nouvel essai de KLOT ni preuve navigateur du candidat
+fusionné n’est attribué à cette constatation.
 
 **Le gel historique de développement 6B, fondé sur Site 97 / native 0.60, a réussi trois niveaux KLOT en 38 actions et 30 préfixes.** La campagne froide utilise le seul appelant TypeScript, sans plan, état appris ou agent Python fourni à ses décisions. La relecture indépendante du Python original compare **408 événements sans différence**, dont 38 retours sélectionnés, 35 événements acquis, trois retours de frontière de valeur `null` et 98 restaurations. **204 ablations, dont 63 changements d’action ou de refus**, établissent une contribution des connaissances acquises ; les deux corruptions sémantiques contrôlées sont rejetées.
 
-Ce résultat reste attaché au **gel historique de développement fondé sur Site 97 / native 0.60**, avec la version **0.64 réservée**. Les preuves ci-dessous ne sont pas réattribuées au nouveau code en fusion. **Le prédécesseur 10B / 0.62 est réellement publié dans Sites 102–103 et son commit documentaire exact est désormais intégré et vérifié.** 5C / 0.63 reste non publié ; sa livraison effective demeure requise avant le gel et la mesure finale 6B. La fusion des horloges et de la garde courante est vérifiée par les contrôles d’intégration 103 ci-dessous. La fusion du checkpoint 5C reste provisoire. La nouvelle preuve froide fa23, sa relecture originale, les onze rejeux et la QA navigateur Vite sont désormais clos séparément ; le coût officiel et la réconciliation du prédécesseur publié restent ouverts.
+Ce résultat reste attaché au **gel historique de développement fondé sur Site 97 / native 0.60**, avec la version **0.64 réservée**. Les preuves ci-dessous ne sont pas réattribuées au nouveau code en fusion. **Le prédécesseur 10B / 0.62 est réellement publié dans Sites 102–103 et son commit documentaire exact est désormais intégré et vérifié.** 5C / 0.63 reste non publié ; sa livraison effective demeure requise avant le gel et la mesure finale 6B. La fusion des horloges et de la garde courante est vérifiée par les contrôles d’intégration 103 ci-dessous. La fusion du checkpoint 5C reste provisoire ; aucun nouveau KLOT, navigateur ni coût 6B n’est validé.
 
 | Vérification 6B acquise | Résultat et preuve |
 | --- | --- |
@@ -231,10 +116,10 @@ Ce résultat reste attaché au **gel historique de développement fondé sur Sit
 | Campagne froide KLOT | **3 niveaux / 38 actions / 30 préfixes**, gel de 310 fichiers natifs ; [exécution bornée](lot6b-evidence/development-freeze-01/bounded-execution.json). |
 | Original Python sur KLOT | **408 événements / zéro différence**, 98 restaurations, 204 ablations dont 63 modifient une action ou un refus. [Reçu indépendant](lot6b-evidence/development-freeze-01/source-parity-attempt-01/reader-execution.json). |
 | Qualification du lecteur | **Deux corruptions sémantiques rejetées**, sans nouvelle partie, sans exception ni dépassement valant réussite. [Qualification](lot6b-evidence/development-freeze-01/reader-negative-attempt-01/results/qualification.json). |
-| Budget KLOT à la clôture historique du développement | **350,862154 s / 2 400 s**, avec **2 049,137846 s restantes à cette clôture historique** ; antécédents et diagnostics inclus. Ce point n’est pas le solde courant. [Horloge conservée](lot6b-evidence/klot-case-clock.json). |
+| Budget cumulé KLOT | **350,862154 s / 2 400 s**, horloge fermée, **2 049,137846 s restantes** ; antécédents et diagnostics inclus. [Horloge](lot6b-evidence/klot-case-clock.json). |
 | Inventaire historique du candidat sur base Site 97 | **64/76 entrées raccordées (84,2 %), 12 restantes** ; **198 composants vérifiés**, 148 transferts partiels, 1 023 modules en attente. Zéro module entièrement vérifié et six portes de migration complète encore fausses. |
 
-Le **publié Site 103 / native 0.62 compte 64/76 entrées**, avec WindowQuestion et sans SelectedRigid. Le **candidat historique 6B sur base Site 97 compte lui aussi 64/76**, avec SelectedRigid mais sans WindowQuestion : ces totaux égaux recouvrent des entrées différentes. Le jalon vérifié 103 + 6B atteint **65/76 (85,5 %)**, selon le [nouvel audit exécuté](lot6b-evidence/integration-site103-01/checks-attempt-01/entry-audit.json). Ce jalon historique ne comptait pas encore Binding ; le nouvel audit du candidat fa23, présenté ci-dessous, atteint effectivement 66/76. Les échecs antérieurs **21/22** et **53/54** restent conservés. Le dernier échec portait sur une attente de conservation de Preview antérieure à la création de son cache d’époque ; le test corrigé vérifie l’état exact présent avant le retour étranger.
+Le **publié Site 103 / native 0.62 compte 64/76 entrées**, avec WindowQuestion et sans SelectedRigid. Le **candidat historique 6B sur base Site 97 compte lui aussi 64/76**, avec SelectedRigid mais sans WindowQuestion : ces totaux égaux recouvrent des entrées différentes. Le jalon vérifié 103 + 6B atteint **65/76 (85,5 %)**, selon le [nouvel audit exécuté](lot6b-evidence/integration-site103-01/checks-attempt-01/entry-audit.json). L’entrée future de 5C n’est pas comptée par anticipation. Les échecs antérieurs **21/22** et **53/54** restent conservés. Le dernier échec portait sur une attente de conservation de Preview antérieure à la création de son cache d’époque ; le test corrigé vérifie l’état exact présent avant le retour étranger.
 
 Le premier passage des cinq commandes techniques a renvoyé zéro, mais l’audit de migration signalait trois références vers **deux fixtures historiques absentes**. Ce succès de processus n’est pas présenté comme une validation sémantique. Le garde générique de l’audit a été corrigé et refuse désormais ces références manquantes ; la [restauration exacte](lot6b-evidence/fixture-restoration/attempt-01/recovery.json) puis le [nouvel audit sémantique](lot6b-evidence/audit-guard/restored-inventory.json) sont réussis, avec zéro erreur. Les autres contrôles et la compilation restent valables sur les mêmes sources natives.
 
@@ -256,225 +141,36 @@ qui comprend **314 fichiers natifs**, digest
 Les entrées surveillées de ces exécutions sont inchangées. Ces résultats
 qualifient l’intégration exacte 103, y compris le raccordement courant de
 l’horloge et des gardes ; ils ne réattribuent pas l’ancienne campagne KLOT à
-ce nouveau gel. Ces reçus d’intégration 103 n’incluent pas de nouvelle
-preuve KLOT, de navigateur ou de coût ; les preuves ultérieures du candidat
-fa23 sont distinguées ci-dessous.
+ce nouveau gel. **Aucun nouvel essai KLOT, contrôle navigateur ou coût 6B
+n’est revendiqué.**
 
-### Candidat provisoire fa23 : suite, build et structure vérifiés
-
-La fusion du checkpoint 5C **non publié**
-`805b30297dc1b715dbfd9f1197a9a8ba7b361b90` / digest `a33a5f88…` avec 6B
-est réalisée. Le [manifeste du candidat provisoire](lot6b-evidence/provisional-063-01/frozen-candidate/source-manifest.json)
-retient **322 fichiers natifs**, digest
-`fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886`.
-WindowQuestion, Binding et SelectedRigid sont raccordés dans ce candidat ;
-cela ne constitue pas une publication 0.63 ou 0.64.
-
-| Contrôle effectivement acquis sur le candidat ou ses entrées déclarées | Résultat et limite |
-| --- | --- |
-| [Audits préalables](lot6b-evidence/provisional-063-01/preflight-attempt-01/entry-audit.json) et [migration préalable](lot6b-evidence/provisional-063-01/preflight-attempt-01/migration-audit.json) | **66/76 entrées, 86,8 % ; 208 composants vérifiés, 147 transferts partiels, 1 014 modules en attente.** Zéro module entièrement vérifié ; les six portes de migration complète restent fausses. |
-| [Suite de 142 fichiers, tentative 02 conservée](lot6b-evidence/provisional-063-01/frozen-candidate/test-attempt-02/summary.json) | **ÉCHEC TERMINAL historique : 5 404/5 405**, un échec, zéro annulation, ignoré ou TODO. Les quatre lots et leurs entrées restent conservés sous cette identité. |
-| [Correction ciblée du contrat d’arrêt](lot6b-evidence/provisional-063-01/stop-contract-targeted-attempt01/execution.json) et [journal](lot6b-evidence/provisional-063-01/stop-contract-targeted-attempt01/execution.log.gz) | Correction **du test seulement**, vérifiée **11/11 en 17,150 s** ; natif fa23 inchangé. |
-| [Suite complète, tentative 03](lot6b-evidence/provisional-063-01/frozen-candidate/test-attempt-03/summary.json) | **5 405/5 405 réussis sur les 142 fichiers déclarés**, avec **739 entrées src/tests identiques** entre les quatre groupes et encore actuelles lors de l’agrégation ; fa23/322 inchangé. Cette tentative réussie ne réécrit pas les échecs antérieurs. |
-| [Cinq contrôles de livraison et lecture sémantique](lot6b-evidence/provisional-063-01/final-functional-01/delivery-checks-semantic-summary.json), [commande conservée](lot6b-evidence/provisional-063-01/final-functional-01/delivery-checks-command.json) et [détail des contrôles](lot6b-evidence/provisional-063-01/final-functional-01/validation/checks-run.json) | **TypeScript, audit des entrées, audit de migration, diff et build réussis**, en **32,243 s**. **2 991 enregistrements surveillés inchangés** ; 66/76 entrées et migration **208/147/1 014, `failures: []`**, sans parité V6 complète. |
-| [Binding/common et original indépendant](lot6b-evidence/provisional-063-01/final-functional-01/summary-binding-original.json) | Les **sept tests Binding ont été rejoués** dans la suite de 142 fichiers, tentative 03. Les **huit scénarios, quatre exports et quatre revues originaux**, soit **6 818/6 818 contrôles**, restent les preuves conservées de la tentative 02, à entrées pertinentes inchangées, sans duplication. Ce total n’est pas exclusivement comportemental. |
-| Rejeux déjà clos : [CATR](lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/catr-051/regressions/regression-summary.json), [RSWP](lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/rswp-051/regressions/regression-summary.json), [FOGW](lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/fogw-051/regressions/regression-summary.json), [CONN](lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/conn-050/regressions/regression-summary.json) | **17/17 contrôles par cas**, sans réexécution des quatre réussites. |
-| [Nouvelle reprise VOIS](lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/oracle-execution-observation.json) | **17/17 réussis** avec le harnais 5C exact et **1 536 Mio** ; l’ancien dépassement mémoire reste un **échec conservé**, sans comparaison réussie réattribuée. |
-| [Nouvelle capture froide KLOT fa23](lot6b-evidence/provisional-063-01/klot-fa23-01/capture-readback.json) et [commande facturée](lot6b-evidence/provisional-063-01/klot-fa23-01/capture-case-command.json) | **Départ froid à zéro niveau, cible trois, trois niveaux atteints en 38 actions**, arrêt `target_levels_completed`. Sources natives et code d’exécution inchangés. La [preuve intégrée complète](lot6b-evidence/provisional-063-01/klot-fa23-01/integrated-proof-summary.json) et son [exécution facturée](lot6b-evidence/provisional-063-01/klot-fa23-01/integrated-proof-summary-execution.json) ferment désormais la relecture originale, les ablations et les deux qualifications négatives. |
-
-L’unique échec de la tentative 02 attendait l’ancien motif
-`level_active_time_budget`. Le contrat 5C conserve cette interruption dans la
-preuve du préfixe puis donne priorité au motif public
-`native_acquisition_incomplete` lorsqu’une acquisition Binding bornée demeure
-incomplète. La correction contrôle strictement cette distinction ; la nouvelle
-suite complète est désormais réussie sans modification native. Tous les essais
-antérieurs, dont les résultats incomplets, restent conservés.
-
-Le build produit **`dist/assets/v6-agent-worker-Cpjjo6tG.js`, 6 927 288 octets**,
-SHA-256 `a4f366ad2103b7413a111099827bfa2ba8cf0930b9c8f1e4ebb561aada7daa84`.
-Le [watch de livraison 03](lot6b-evidence/provisional-063-01/final-functional-01/build-watch-attempt03.json)
-conserve les 2 965 entrées d’attempt02 et ajoute 25 entrées nécessaires :
-**2 990 fichiers / 224 563 341 octets**. Le [précontrôle conservé](lot6b-evidence/provisional-063-01/final-functional-01/build-watch-attempt03-preparation.json)
-explicite la fermeture insuffisante d’attempt02 pour ce nouveau groupe :
-carte de transfert, contenus des générateurs, HTML statique et assets publics.
-Les anciens plans et watches restent inchangés.
-
-La [reprise déclarée des sept cas](lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/execution-declaration.json)
-utilise les lignes et pins d’origine, un cas à la fois et le harnais 5C exact
-à 1 536 Mio. L’[agrégat terminal des onze cas](lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/eleven-case-summary.json)
-confirme **11/11 rejeux, 187/187 contrôles et 390 actions**. Les **douze tentatives**
-sont conservées : les onze réussites et l’ancien **OOM VOIS**, qui reste
-un échec distinct. Aucun essai défavorable n’est effacé.
-
-Pour le coût, les [captures fonctionnelles conservées](lot6b-evidence/provisional-063-01/functional-805b/execution-summary.json)
-retiennent quatre formes et 31 actions par rôle, avec passage de 58 à 59
-propriétaires, le seul propriétaire ajouté étant SelectedRigid. Le refus
-initial de la différence `created` et le
-[diagnostic 03 complet mais non qualifiant](lot6b-evidence/provisional-063-01/functional-805b/hypothetical-common-difference-inventory-attempt03-summary.json)
-restent conservés. L’adaptation prospective est maintenant vérifiée par
-[24 tests locaux réussis](lot6b-evidence/provisional-063-01/cost-time-attribution-01/unit-tests-counts-02.json).
-La [qualification structurelle effective](lot6b-evidence/provisional-063-01/cost-time-attribution-01/qualification-result-summary-01.json)
-passe sur **58 points / 64 contrôles / 168 records temporels**, soit 84 par rôle,
-avec `failures: []` et les entrées inchangées.
-
-L’exception porte uniquement sur le float64 de
-`native_reasoning_trace /value/root/members/created/bits`, lié à l’horloge
-`Date.now() / 1000`, à la fenêtre de son rôle et à sa stabilité par session/trace.
-Les autres champs restent exacts ; `origin.source_digest` demeure une
-attribution distincte. Les quatre lecteurs aval passent
-[**204 tests — 51 scénarios × quatre consommateurs — et une compatibilité réelle 4/4**](lot6b-evidence/provisional-063-01/cost-time-attribution-01/downstream-01/validation-summary-01.json)
-sur l’attribution, la fixture et les reçus 805b/fa23. Il s’agit de leurs
-validateurs locaux : **aucun parcours CLI complet aval, contrat finalisé,
-précontrôle final ni mesure officielle de coût n’est revendiqué**.
-L’exhaustivité du parcours des graphes, les autres corps, les origines,
-les chaînes et les tickets restent liés au qualificatif et à ses empreintes ;
-aucune formule de nombre de traces ni normalisation générale n’est introduite.
-
-La **nouvelle capture froide KLOT fa23 est réussie**, avec une durée de driver
-de **103,245 s** et une commande encadrée de **103,664 s**. Son rapport conservé
-compte **11 699 122 octets**, SHA-256
-`dd24c51f21bbd382f57056076da7c6af7724d4c4183f458170a77e2dfec8563d`.
-Les trois niveaux historiques sur Site 97 gardent leur identité propre.
-La [preuve intégrée KLOT](lot6b-evidence/provisional-063-01/klot-fa23-01/integrated-proof-summary.json),
-consolidée dans son [intervalle facturé](lot6b-evidence/provisional-063-01/klot-fa23-01/integrated-proof-summary-execution.json),
-est désormais **entièrement close sur fa23** : **30 préfixes**, **408 événements
-originaux dont 340 racines**, **zéro différence**, **35 acquisitions et trois
-retours de frontière `null`**, **98 restaurations — 60 natives et 38 source**.
-Les **204 ablations** comprennent **63 effets**, **198 résultats non vides**
-et **zéro erreur**. Le pin original
-`786dcf51ca57773d8e3a8948ce9ea3655e7baf8e` est inchangé sur **1 786 fichiers**.
-
-Les **deux copies corrompues** sont d’abord acceptées structurellement puis
-rejetées sémantiquement, avec respectivement **14 et 1 118 différences**.
-Aucune interruption ne vaut rejet réussi et la référence positive n’a pas
-été réexécutée. Cette clôture est propre à la capture fa23 ; elle ne modifie
-pas l’identité ni la portée des reçus historiques Site 97.
-
-### QA navigateur KLOT : parcours observé et fermeture vérifiée
-
-La [QA navigateur 02](lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/browser-functional-summary.json)
-est **réellement réussie par observation CUA**, dans un nouvel onglet 7,
-en départ froid au niveau 1. Elle utilise **Vite et son worker TypeScript de
-développement**. Le bundle de production `dist` possède sa preuve de build
-distincte ; ce parcours UI ne prétend pas avoir testé ce bundle.
-
-Pause a été demandée pendant **Preparing agent**. Le message d’arrêt à la
-frontière d’action a été suivi de **Paused, zéro action**. Les deux observations
-à **20:14:54.732 UTC** et **20:15:11.006 UTC** confirment encore zéro action.
-**Run to next level** a ensuite repris réellement le parcours :
-
-| Point observé | Actions cumulées | Niveaux terminés | Plans affichés |
-| --- | ---: | ---: | ---: |
-| Fin du niveau 1 | 12 | 1 | 10 |
-| Fin du niveau 2 | 24 | 2 | 18 |
-| Fin de la cible de trois niveaux | 38 | 3 | 30 |
-
-L’URL finale porte **`level=4`**. La
-[capture d’écran réelle des trois niveaux terminés](lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/cua-evidence/three-levels-completed.png)
-est conservée. Cette vérification établit Pause avant le prochain envoi et
-la reprise observée ; elle ne revendique aucune préemption de la recherche
-interne déjà commencée dans le worker.
-
-La fermeture est effectivement vérifiée : le premier inventaire conservait
-encore l’onglet 7, le second constate son absence. Le preview a reçu son arrêt
-et son état est **`stopped`** ; le superviseur **98145** est terminal avec
-**exit 0**, et son groupe est récolté sans orphelin. La
-[relecture finale facturée](lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/root-final-review.json)
-contrôle le lease réel : **`reaped: true`**, aucun signal et aucune erreur.
-Le helper atteste cette exécution et cette fermeture ; le succès UI repose
-sur les observations CUA, pas sur une assertion du helper.
-Les **3 009 entrées surveillées restent inchangées**.
-
-La **cible de 360 secondes a été dépassée** : **418,633882138 s** pour le wrapper
-et **418,475255 s** jusqu’à la fermeture opérateur, sous son seuil de 480 s.
-La borne externe de **600 s** est respectée. Les interactions et le temps de
-compaction sont inclus dans le débit ; aucune correction de temps n’est
-soustraite.
-
-**QA01 reste un échec technique conservé de 60,152 s** : le CLI avait annoncé
-une URL prête puis restait vivant, alors que le helper attendait à tort la
-fin de sa commande. Aucune page n’avait été ouverte ; ce reçu ne décrit pas
-un échec du jeu.
-
-Au point historique suivant QA02 et sa **lecture finale facturée, vers
-20:32 UTC le 11 novembre 2026**, l’horloge était **inactive**, à
-**1 221,0363642830062 secondes cumulées sur 2 400**, avec
-**1 178,9636357169938 secondes restantes**. Ce point remplaçait celui de
-20:19:50 et comprenait la clôture effective du navigateur. Le diagnostic
-source ultérieur porte le dernier compteur fermé à **1 424,8841320940055 s**,
-avec **975,1158679059945 s restantes**, comme indiqué en tête.
-Le parcours final des outils de coût, la mesure officielle, la publication
-effective 0.63 et sa réconciliation, puis la publication 0.64 restent ouverts.
-
-Le [checkpoint de preuves complet, effectivement poussé et vérifié](lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/complete-checkpoint-summary.json)
-est **`41cedc1f6a89b8639c19f0dc45eae24c264ad3c0`**, sur la branche
-`lot6b-selected-rigid-checkpoint-20261111`, confirmé le **11 novembre 2026 à
-20:55:52.559017 UTC**. Son parent est
-`17d6c1aa3532e4ff74a98a309e4dfb9c3bc4fb59`. Le complément réellement poussé
-comprend **78 fichiers supplémentaires / 4 433 894 octets** : QA02 complète
-avec capture et fermetures, horloge finale, trois documents dans leur état
-de clôture et métadonnées. Le natif reste **fa23 / 322 fichiers inchangé**.
-Ce checkpoint de preuves ne constitue pas une publication de Site.
-
-Le [checkpoint principal 17d6c1aa](lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/core-checkpoint-summary.json)
-reste conservé : **sept lots poussés et vérifiés, 356 fichiers /
-154 054 085 octets**, confirmation à **20:51:49.609783 UTC**.
-Le [checkpoint de la règle de travail courante](lot6b-evidence/source-workflow-20261111/policy-checkpoint-summary.json)
-**`2e555ec44e792c4f75d400205ead5de595e95791`** est poussé et vérifié sur la
-branche propre, sans verrou global. Les **38 tests de coordination passent** ;
-le transport direct est terminé, avec son groupe de processus absent.
-Le checkpoint précédent `1372d2df336f9919d7b5892160936d928720c24c` et le
-checkpoint de preuves `41cedc1f6a89b8639c19f0dc45eae24c264ad3c0` restent
-conservés. Cette sauvegarde de source ne publie pas de Site. La clôture
-documentaire qui cite ce nouveau checkpoint fait l’objet du commit suivant.
-
-`a01e6faf330d82fa220feac0c9ad4632bb75a9de`, vérifié à 18:34:56 UTC,
-reste un jalon historique, comme le
-[checkpoint 17bba57a](lot6b-evidence/provisional-063-01/source-checkpoint-17bba57a.json).
-Le jalon antérieur 103 + 6B, **33 + 9 tests et 65/76 entrées**, conserve son
-identité `7696e0c…` / `2e710bd…`.
-
-La publication effective **5C / 0.63** demeure requise et doit être réconciliée
-avec les entrées de `805b3029`. Une identité démontrée des entrées pertinentes
-permettra de conserver les preuves correspondantes ; une différence exigera
-la qualification des contrôles affectés. **Aucun pourcentage de coût 6B ni
-publication 0.64 n’est acquis.**
-La [publication effectivement revérifiée](lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/publication-observation.json)
-à **20:34:24.999 UTC le 11 novembre 2026** reste **Site 103**, commit
-`4afcbfe6a25bd3a88223be543e443bc53b9c8814` / **native 0.62**, en accès
-propriétaire seul. **Ni 0.63 ni 0.64 ne sont publiées.** Ce constat actualisé
-reste distinct du parcours local Vite qualifié.
-
-Le créneau de coordination **`lot5c-cost-a33a5f88-recovery-02`** a été
-explicitement libéré le **11 novembre 2026 à 20:30:25.610691 UTC** :
-`quiet_requested: false`, `quiet_released: true`, motif déclaré
-`failed_or_expired` et `performance_started: false`. Aucune mesure officielle
-5C n’a démarré dans ce créneau. Cette issue ne précise pas sa cause et
-n’entraîne pas de nouvel essai automatique ; elle ne clôt ni 0.63 ni le coût 6B.
-
-La [dernière observation du statut 5C](lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/predecessor-final-status-observation.json)
-rapporte la phase **`cost_unmeasured_publication_pending`**. La cause
-explicitement rapportée pour ce créneau est **600 secondes sans accusés
-d’inactivité frais de 8A et 10C** : **zéro tentative de verrou exclusif,
-zéro échantillon officiel et zéro publication**, sans nouvel essai automatique.
-Ce constat ne diagnostique pas un ancien détenteur de verrou.
-La publication effective 0.63 et le coût officiel 6B restent donc ouverts.
-L’ordre demeure **5C 0.63 → 6B 0.64 → 8A 0.65 → 10C**.
+La fusion de source **provisoire** du checkpoint immuable 5C
+`805b30297dc1b715dbfd9f1197a9a8ba7b361b90` est en cours pour le candidat
+**0.64.0**. Ce checkpoint 5C est **NON PUBLIÉ**. Le contrat du registre
+conserve WindowQuestion et SelectedRigid, et ajoute `observed_object_binding`
+à sa position déclarée. Ces changements de contrat attendent une nouvelle
+validation ; aucun résultat exécuté ni total audité du candidat fusionné
+n’est déduit de la seule lecture des définitions. Le jalon précédent,
+**33 + 9 tests et 65/76 entrées**, reste rattaché au commit
+`7696e0c0257c68890968f739f076fc5c14efdf54` et au gel `2e710bd…` documenté
+ci-dessus. La réconciliation exacte avec le futur 0.63 effectivement publié
+reste obligatoire avant le gel final 6B, ses régressions, le navigateur,
+le coût et la publication.
 
 ### Suite du lot 6 et critère de coût
 
 | Étape | État actuel | Prochaine opération |
 | --- | --- | --- |
 | 6A `preview_packing` | Livré, Sites 96–97 / native 0.60 | Conserver ses preuves et réserves. |
-| 6B `selected_rigid` | fa23/322 : **5 405/5 405**, cinq gates et worker ; sept tests Binding rejoués et 6 818 contrôles de scénarios conservés ; **11/11 rejeux, 187/187 contrôles, 390 actions** ; structure 58 points, preuve KLOT et **QA navigateur Vite** closes | Préparer les outils et le contrat de coût, poursuivre tests fonctionnels et sauvegardes régulières sans verrou global ; réconcilier le publié 0.63 effectif avant la mesure officielle et la publication 0.64, chacune sous courte exclusivité. |
+| 6B `selected_rigid` | Contribution KLOT historique sur base Site 97 ; intégration exacte 103 vérifiée, 65/76 auditées | Achever et vérifier la fusion du checkpoint 5C provisoire, puis réconcilier le futur publié 0.63 avant les qualifications finales. |
 | 6C `observed_rigid_cargo` | À transférer | Après la clôture intégrée de 6B. |
 | 6D `shared_settlement` | À transférer | Après 6C, avec les critères communs du lot. |
 
-Le candidat intégré conserve le helper `currentExecution`, le cinquième argument courant de la garde SelectedRigid et le quota `remainingLevelActions`, avec le délai plus court du demandeur après conversion d’origine d’horloge. Ces propriétés et les entrées pertinentes devront être réconciliées avec la publication réelle 0.63. La tentative 03 clôt désormais la suite déclarée sur ce gel provisoire ; les opérations restantes du tableau ne sont pas anticipées.
+L’intégration 103 vérifiée conserve le helper `currentExecution`, le cinquième argument courant de la garde SelectedRigid et le quota `remainingLevelActions`. Elle préserve le délai plus court du demandeur après conversion de son origine d’horloge. Ces propriétés devront rester conservées lors de la fusion provisoire 5C puis de la réconciliation du publié 0.63. Restent ensuite les régressions déclarées sur le gel intégré, le contrôle navigateur, la qualification des graphes communs, la fenêtre officielle de coût et la publication privée coordonnée.
 
 **Aucun pourcentage de coût 6B n’est encore revendiqué.** Le critère autorisé reste la **médiane de session complète strictement inférieure à +10 % pour chaque jeu testé**. Une phase peut dépasser +10 % lorsque ce critère global passe ; tous les diagnostics et échantillons sont conservés, sans addition de phases imbriquées et sans compensation entre jeux.
 
-Les plafonds de recherche ne bornent pas le journal source complet. Pause ne préempte pas la recherche déjà engagée dans le worker. La revue statique conserve également une réserve sur le chemin asynchrone après autorisation, sans nouvelle garde rafraîchie avant son étape suivante. Ces limites ne sont pas une cause établie du signalement KLOT ; la [filiation source → TypeScript → consommateur → preuve](lot6b-selected-rigid-lineage.md) les distingue de l’écart de publication effectivement constaté.
+Les plafonds de recherche ne bornent pas le journal source complet. Le bouton Pause empêche les prochaines actions physiques et conserve le préfixe, mais ne préempte pas la recherche déjà engagée dans le worker. Ces réserves et la [filiation source → TypeScript → consommateur → preuve](lot6b-selected-rigid-lineage.md) demeurent explicites.
 
 ### Sauvegarde distante du jalon 6B
 
@@ -482,29 +178,20 @@ Le commit validé `e1f42dac8eb4226f8a3bc78d89d6bee6f463da1e` est conservé dans 
 
 <!-- LOT6B_DEVELOPMENT_CURRENT_END -->
 
-> **Périmètre 5C conservé :** la section suivante reproduit son état au checkpoint
-> `805b30297dc1b715dbfd9f1197a9a8ba7b361b90`, **non publié**. Ses décomptes et
-> preuves qualifient le candidat 5C dans son propre périmètre ; ils ne valent
-> pas un audit neuf de la fusion avec SelectedRigid.
+> **Périmètre 5C conservé :** l'intégration provisoire du jalon 6B ci-dessus
+> porte sur le checkpoint `805b30297dc1b715dbfd9f1197a9a8ba7b361b90`, **non publié**.
+> La section 5C suivante conserve son propre état ultérieur, importé depuis
+> `722c949e8800b580742f10a9a97751578b9cc419`, également sans publication 0.63.
+> Ses décomptes et preuves qualifient 5C dans son propre périmètre ; ils ne
+> valent pas un audit neuf de la fusion avec SelectedRigid ni de 10C.
 
 <!-- LOT5C_ROADMAP_CURRENT_START -->
 
-<!-- LOT5C_PRIORITY_PUBLICATION_CURRENT_START -->
-### Publication prioritaire 0.63 explicitement demandée
-
-La [nouvelle instruction utilisateur](lot5c-evidence/recovery/publication-063-priority/authorization.json) autorise la publication prioritaire de **native 0.63 sans attendre la disponibilité ni les ACK de 6B, 8A et 10C**. Elle remplace, pour cette publication, la condition antérieure d’acceptation préalable du coût. Les validations fonctionnelles restent acquises et réutilisées ; **le coût officiel STCK et SMLP reste non mesuré et non accepté**. Le critère futur strictement inférieur à +10 % par jeu et la conservation des dépassements de phase ne changent pas.
-
-Le prédécesseur effectivement publié a été [recontrôlé](lot5c-evidence/recovery/publication-063-priority/predecessor-readback.json) : Site 103 / native 0.62, audience privée propriétaire inchangée. La publication est maintenant prioritaire, sous le seul gardien de publication borné, sans demande de calme aux autres lots. **La réussite effective sera établie par le reçu natif de déploiement.** Les états de blocage et tentatives ci-dessous sont conservés comme historique antérieur à cette décision.
-<!-- LOT5C_PRIORITY_PUBLICATION_CURRENT_END -->
-
-
-## Lot 5C : validé fonctionnellement, coût 0.63 bloqué avant mesure
-
-**Clôture du 11 novembre 2026 à 21:58:17 UTC : le cycle unique `available-03` a expiré faute des ACK frais de 6B, 8A et 10C. La demande de calme est explicitement levée, la session 71059 est terminale et son nettoyage est confirmé. Aucun EX n’a été tenté, aucune readiness 04 ni mesure officielle n’a été produite et 0.63 n’a pas été publiée.** Le [reçu de clôture](lot5c-evidence/recovery/coordination/recovery-03/available03-closure.json) conserve les faits et leurs limites. Le travail courant s’effectue désormais **sans verrou global**, dans le checkout et la branche propres à 5C ; commits et push n’attendent aucune publication étrangère.
+## Lot 5C : validation fonctionnelle complète, mesure du coût 0.63 à exécuter
 
 **5A et 5B restent livrés. Le candidat 5C intègre les sources réellement publiées de 6A, Sites 96–97 / native 0.60.0, du suivi 7, Sites 98–101 / native 0.61.0, puis de 10B, Sites 102–103 / native 0.62.0.** La [réconciliation 10B](lot5c-evidence/recovery/integration-published-10b/site103-reconciliation.json) prend pour prédécesseur natif exact le Site 102, source `1019d2eb929d7dc201a5c1f6edce5aa1c5dfa464`, et fusionne la clôture documentaire réellement publiée dans le Site 103, source `4afcbfe6a25bd3a88223be543e443bc53b9c8814`. Les **318 fichiers natifs** du candidat restent identiques au gel `a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57` : les 308 fichiers partagés hors runtime/types sont égaux au prédécesseur, les deux différences partagées et les huit fichiers supplémentaires portent Binding. La [revue indépendante](lot5c-evidence/recovery/integration-published-10b/native-integration-independent-review.json) confirme la conservation des correctifs d’horloge 10B et de l’acquisition Binding. Le candidat **0.63.0** conserve **65/76 entrées raccordées, zéro partielle et 11 restantes** ; native 0.62 en raccorde 64/76. **5C n’est pas encore publié et son coût propre n’est pas encore mesuré.**
 
-Le [gel final](lot5c-evidence/recovery/integrated-final-01/source-freeze-binding.json), base source `805b30297dc1b715dbfd9f1197a9a8ba7b361b90`, archive **867 entrées** dont les **318 fichiers natifs et 138 fichiers de tests**. Il est sauvegardé sur la branche de reprise au commit `c8ff4f2b4d495e12494130112258b7a62281d93c`, vérifié à distance. Les preuves fonctionnelles finales et les **106 fragments exacts des rapports de rejeu** ont ensuite été sauvegardés par six envois bornés jusqu’au [checkpoint `722c949e`](lot5c-evidence/recovery/coordination/checkpoint-transport-722c949e.json), également vérifié à distance ; ces envois ne sont pas des publications du site. La préparation complète, le refus du verrou et cette feuille de route sont ensuite conservés dans le [checkpoint `5d6184f7`](lot5c-evidence/recovery/coordination/checkpoint-transport-5d6184f7.json), vérifié à distance, sans publication.
+Le [gel final](lot5c-evidence/recovery/integrated-final-01/source-freeze-binding.json), base source `805b30297dc1b715dbfd9f1197a9a8ba7b361b90`, archive **867 entrées** dont les **318 fichiers natifs et 138 fichiers de tests**. Il est sauvegardé sur la branche de reprise au commit `c8ff4f2b4d495e12494130112258b7a62281d93c`, vérifié à distance.
 
 | Porte fraîche sur le gel final | Résultat acquis |
 | --- | --- |
@@ -515,11 +202,6 @@ Le [gel final](lot5c-evidence/recovery/integrated-final-01/source-freeze-binding
 | [Contrôle du build dans le navigateur](lot5c-evidence/recovery/integrated-final-01/browser-qa/summary.json) | Interface native prête, zéro action d’agent, aucune erreur de l’application observée ; page CASC par défaut initialisée, sans campagne ; onglet et preview fermés |
 | [Qualification structurelle 01](lot5c-evidence/recovery/performance-integrated-01/owner-qualification-independent-review.json) | **64 contrôles du qualificateur et 92 contrôles indépendants**, 58 points et 40 deltas attribués uniquement à Binding |
 | [Précontrôle statique corrigé 02](lot5c-evidence/recovery/performance-integrated-02/static-preflight.json) | **76/76 conditions**, après deux liens de dépendances manquants dans la baseline ; captures fraîches, qualification **64/64** et équivalence de répétition **29/29**. [Revue indépendante de 02](lot5c-evidence/recovery/performance-integrated-02/independent-readiness-input-review.json) : **84/84 contrôles**, aucun échantillon officiel mesuré. |
-| [Préparation complète avant mesure](lot5c-evidence/recovery/performance-integrated-02/readiness.json) | **`ready` obtenu le 11 novembre à 15:57:56 UTC−03**, après rattachement aux preuves terminales et aux trois accusés réels ; cette preuve historique ne vaut ni mesure ni publication. |
-| [Ouverture de la fenêtre de coût](lot5c-evidence/recovery/coordination/cost-final-01/controller-lock-refusal-01.json) | **Refus du verrou exclusif avant tout échantillon** ; zéro session de coût, aucune fenêtre créée. [Blocage et libération](lot5c-evidence/recovery/coordination/cost-final-01/lock-blocker-and-quiet-release.json) : attente des autres lots explicitement libérée à **16:08:34 UTC−03** ; nouvelle isolation et nouvelle préparation exigées avant reprise. |
-| [Reprise coordonnée 02](lot5c-evidence/recovery/coordination/cost-final-02/attempt-result.json) | **Fenêtre de disponibilité expirée après 600 secondes** : ACK frais 6B reçu, 8A/10C manquants ; zéro EX tenté, aucune readiness 03 et aucun coût. Demande explicitement levée à **17:30:25 UTC−03**, session terminée, aucune relance automatique. |
-| [Coordination conforme à la nouvelle règle](lot5c-evidence/recovery/planning/coordination-v4-independent-review.json) | **48/48 contrôles, 122 sujets exacts** ; 7/7 tests ciblés du coût et 4 scénarios / 69 contrôles du wrapper ordinaire. Aucun mutex global pour développement, tests, commits et push ; EX limité à l’ABBA et son intégrité terminale. |
-| [Cycle unique disponible 03](lot5c-evidence/recovery/coordination/cost-final-03/attempt-result.json) | **Expiration après 600 secondes**, sans ACK frais 6B/8A/10C. Libération effective à **21:58:17,652553 UTC**, soit 600,002472 secondes après la demande ; session 71059 terminale, code 124, nettoyage confirmé. Aucun EX, readiness 04, échantillon ou publication ; aucune relance automatique. |
 
 La première [tentative de précontrôle 01](lot5c-evidence/recovery/performance-integrated-01/static-preflight.json) reste intacte avec ses **deux refus sur 76 conditions**. La [réparation](lot5c-evidence/recovery/performance-integrated-02/dependency-repair.json) partage les dépendances déjà présentes avec la copie 0.62, après vérification des manifestes identiques ; aucun octet natif n’a changé. Le contrôle navigateur a duré **270,393 secondes de préparation à fermeture**, au-delà de l’allocation annoncée de 180 secondes ; cet écart est conservé sans lui attribuer une mesure officielle ou une action de jeu.
 
@@ -542,13 +224,7 @@ L’[observation des reçus de la répétition propre](lot5c-evidence/recovery/c
 
 **Les onze rejeux sont terminés avec succès.** Le [premier arrêt de préparation](lot5c-evidence/recovery/integrated-final-01/regressions-preparation/initial-preflight-failure.json) précède tout rejeu : les onze baselines compressées étaient absentes. Leur [reconstitution exacte](lot5c-evidence/recovery/integrated-final-01/regressions-preparation/pinned-input-materialization.json) utilise 84 fragments identiques aux octets publiés, puis vérifie les **22/22 empreintes** de baselines et traces. Le [lancement de reprise réellement terminé](lot5c-evidence/recovery/integrated-final-01/regressions-preparation/retry-driver-launch.execution.json) conserve le code de sortie 0 et les 187 comparaisons, sans substituer de nouveaux résultats aux références.
 
-**La préparation complète avant mesure a réellement terminé avec le statut `ready`, puis le premier lancement du contrôleur a refusé le verrou exclusif à 15:58:08 UTC−03.** Le refus intervient avant la création de toute fenêtre ou cohorte : **zéro échantillon officiel**, aucun verdict de coût et aucune publication 0.63. Les vérifications bornées de 5C, 6B, 8A et 10C ne trouvent aucun ancien détenteur dans leurs vues de processus limitées. Une ancienne tentative d’outil 8A sans identifiant de session récupéré demeure une piste non confirmée ; elle n’est pas déclarée responsable. Aucun processus inconnu n’a été arrêté et le verrou commun n’a été ni supprimé ni recréé.
-
-La [libération explicite à 16:08:34 UTC−03](lot5c-evidence/recovery/coordination/cost-final-01/lock-blocker-and-quiet-release.json) avait permis la reprise du travail ordinaire sous le même verrou partagé. Cette obligation historique de SH est maintenant supprimée par l’instruction utilisateur ; les preuves de l’ancienne règle restent conservées. La readiness et les premiers accusés restent intacts comme preuves historiques ; **ils ne peuvent pas autoriser une nouvelle fenêtre après cette libération**. Les deux projets d’assouplissement documentaire des attestations ont été retirés sans exécution ; le [dernier retrait](lot5c-evidence/recovery/planning/withdrawn-ack-field-resolution/withdrawal.json) conserve les versions examinées, tandis que les gardes strictes originales sont rétablies.
-
-**Prochaine étape après la clôture de `available-03` :** obtenir une disponibilité contemporaine et des confirmations fraîches de 6B, 8A et 10C, incluant leurs travailleurs, pour une future fenêtre explicitement coordonnée. Aucun cycle supplémentaire n’est lancé automatiquement dans cette reprise. Les demandes 01, 02 et 03 sont levées ; leurs ACK et readiness historiques ne valent pas autorisation future. Le reçu 10C établit seulement la disponibilité EX instantanée du même mutex à 17:42:14 UTC−03, sans identifier l’ancien détenteur. Une nouvelle isolation, une readiness fraîche et une acquisition EX réelle restent obligatoires avant l’ABBA inchangé. La publication 0.63 attend l’acceptation réelle du global de STCK et de SMLP séparément, puis le contrôle du prédécesseur effectivement publié. Le développement, les tests et les sauvegardes de branche continuent indépendamment de cet ordre de publication.
-
-La [revue documentaire de clôture](lot5c-evidence/recovery/coordination/cost-final-01/documentary-closure-review.json) précise une phrase prospective recopiée dans la readiness : les « 187 contrôles prévus » décrivent le contrat au moment du gel. Les reçus terminaux établissent ensuite **187/187 comparaisons effectivement réussies**. Le contrat et la readiness d’origine restent inchangés, avec les réserves KATA et la portée distincte de la preuve Binding.
+**Prochaine étape : finaliser la readiness sur les preuves réelles, obtenir les accusés frais de 6B, 8A et 10C avec tous leurs travailleurs arrêtés, puis mesurer et revoir le coût 5C.** Le [contrôleur dédié](lot5c-evidence/recovery/planning/coordinated-cost-controller-review.json) a passé **36 contrôles de revue source** ; son verrou exclusif couvre les quatre séries, les comparaisons, le refus historique strict conservé, la qualification, la revue arithmétique et le rapport. Le transport vérifié des quatre journaux est déclaré avant mesure. La publication **0.63** attend le verdict réel. Aucun échantillon officiel n’a encore commencé.
 
 Le [périmètre final](lot5c-evidence/recovery/integrated-final-01/test-scope.json) conserve **138 fichiers de tests** : les 133 fichiers déclarés du suivi 7, les trois suites Binding et deux suites WindowQuestion supplémentaires, après déduplication avec les 44 fichiers déclarés par le **10B réellement publié**. Les déclarations et leurs empreintes sont identiques aux entrées du [plan prospectif historique](lot5c-evidence/recovery/planning/prospective-final-scope-site101.json), conservé sans réécriture. Ce périmètre a été déclaré avant exécution ; son nouveau passage complet donne les 5 339 résultats ci-dessus. Les quatre exclusions LKEY restent explicites. Les **11 rejeux hérités / 187 contrôles réussis** conservent les mêmes lignes et empreintes, notamment le point de comparaison KATA 0.60. **HPDL n’est pas ajouté comme régression complète** : sa preuve 10B reste partielle, avec 38 préfixes acquis pour 39 retours publics complets et trois niveaux observés. Les horloges closes et les portées distinctes des preuves sont conservées.
 
@@ -558,83 +234,41 @@ Le critère de coût reste la médiane groupée de session complète **stricteme
 
 Les sessions longues restent un chantier distinct : traitement en delta, compaction démontrée des données devenues inutiles, chemins continus et propagation générique des coups obligatoires. **WEAV niveau 6 reste une réserve**, avec son budget épuisé conservé. Aucun nouveau lancement réel de jeu n’a été effectué dans cette étape.
 
-<!-- LOT5C_RECOVERY02_CURRENT_START -->
-
-### Reprise 02 close : protections vérifiées, disponibilité non obtenue
-
-La [recherche ciblée](lot5c-evidence/recovery/coordination/recovery-02/targeted-recovery.json) a duré **106,577 secondes pour un budget annoncé de 180 secondes**. Aucun identifiant exploitable du détenteur n'a été retrouvé ; **aucune ancienne session n'a été fermée**. Les inspections `/proc` déjà connues n'ont pas été répétées. Le mutex existant, device **27** / inode **1971854**, est préservé. L'hypothèse d'une ancienne commande attendant une saisie reste non confirmée et n'est attribuée à aucun lot.
-
-Les **867 entrées gelées restent inchangées**, ce qui permet la [réutilisation des preuves fonctionnelles](lot5c-evidence/recovery/coordination/recovery-02/functional-proof-reuse-review.json). Le nouvel [auxiliaire borné](lot5c-evidence/recovery/planning/coordination-tools-v2/README.md) reçoit l'entrée avant SH, recontrôle les états après saisie et après acquisition, borne les attentes et le travail, empêche l'héritage du descripteur et termine ses groupes enfants avant libération. Il passe **18/18 scénarios et 239/239 vérifications sur des mutex temporaires**. Les anciens lanceurs Scratch [refusent immédiatement](lot5c-evidence/recovery/coordination/recovery-02/retired-interactive-launchers.json) ; leurs originaux et leurs échecs restent conservés. Ces corrections préviennent une récidive sans fermer une ancienne exécution inaccessible.
-
-Le [contrôleur et son helper](lot5c-evidence/recovery/planning/coordination-v2-preparation-03.json) passent **8/8 scénarios temporaires** ; le [coordinateur parent](lot5c-evidence/recovery/planning/orchestrator-v2-tests-02.execution.json), **13/13**. Ils couvrent notamment expiration, interruption, échec, descendant survivant au leader, non-héritage du verrou et libération malgré une erreur de journal. La [revue indépendante globale](lot5c-evidence/recovery/planning/coordination-v2-independent-review.json) passe **58/58 contrôles**, épingle **52 fichiers** et ajoute **25 assertions indépendantes**. Les premiers échecs de fixtures restent intacts. La [préparation 03](lot5c-evidence/recovery/performance-integrated-03/coordination-repreparation.json) passe **76/76 conditions statiques** : les captures et populations sont réutilisées, seule leur liaison documentaire `cases.path` change. Le protocole ABBA et ses critères sont inchangés.
-
-Le checkpoint initial **`501198d7638c7a56c3b85d357beb917469899402`** est conservé dans l'ascendance. Les corrections et leur revue sont [sauvegardées et vérifiées à distance](lot5c-evidence/recovery/coordination/recovery-02/source-checkpoint-34d919cb-retry01-live.json) au commit **`34d919cb059322bdecc160606faac0bccd23c75b`**, sur la même branche de récupération. Le premier lancement réel du nouvel auxiliaire a expiré après **45,005 secondes avant toute prise de verrou et tout enfant** ; son reçu est conservé. Le transfert suivant a réellement terminé, code 0, groupe enfant fermé et SH libéré. Ces sauvegardes ne publient pas le site.
-
-**L'unique [demande neuve](lot5c-evidence/recovery/coordination/cost-final-02/request.json), `lot5c-cost-a33a5f88-recovery-02`, a été émise le 11 novembre 2026 à 17:20:25,609789 UTC−03, avec une échéance de 600 secondes.** Le lot 6B a fourni son ACK frais à **17:22:15,406525** après fermeture réelle de ses commandes et travailleurs. Les ACK frais de **8A et 10C manquaient à l'échéance** ; leurs anciens états n'ont pas été réutilisés. Le [reçu terminal](lot5c-evidence/recovery/coordination/cost-final-02/attempt-result.json) établit l'expiration `availability_deadline_before_fresh_acks`, la levée explicite à **17:30:25,610691 UTC−03** et le nettoyage confirmé. La session outil **17255** est réellement terminée, code **124**.
-
-| Résultat de la reprise 02 | État effectivement constaté |
-| --- | --- |
-| Nouvelle readiness / fenêtre officielle | **Aucune créée** |
-| Nouvelle tentative de verrou exclusif | **Zéro** : les trois ACK frais n'étaient pas réunis |
-| STCK : médiane de sessions complètes | **Non mesurée, non acceptée** |
-| SMLP : médiane de sessions complètes | **Non mesurée, non acceptée** |
-| Coordination | **Demande explicitement levée ; travaux ordinaires autorisés ; aucune relance automatique** |
-| Publication 5C / 0.63 | **Non effectuée** ; [dernière publication recontrôlée](lot5c-evidence/recovery/coordination/recovery-02/site-readback-after-recovery02.json) : Site 103, même native 0.62 que Site 102 |
-
-La [clôture vérifiée](lot5c-evidence/recovery/coordination/recovery-02/recovery-closure.json) distingue ce manque de confirmations du **refus EX historique de la tentative 01**. Ce nouveau cycle ne prouve pas que le verrou demeure détenu : aucun EX n'a été tenté. Le détenteur ancien reste inconnu, aucun processus non identifié n'a été arrêté, et aucune règle de coût n'a été assouplie.
-
-**Suite prévue lors de la clôture02, désormais réévaluée par le constat de disponibilité ci-dessous :** Les outils disponibles n'exposent pas l'inventaire global des exécutions et ne permettent pas de fermer une session dont le véritable identifiant est perdu. L'administrateur du service d'exécutions doit consulter l'inventaire réel et déterminer s'il subsiste un détenteur du mutex existant. Si un détenteur est identifié, il doit établir si son travail utile est terminé, puis fermer cette exécution précise par le mécanisme de cycle de vie pris en charge seulement lorsque cette fermeture est justifiée, et fournir son reçu terminal. Il faut également obtenir la disponibilité actuelle de 8A et 10C, racines et sous-agents compris. **Le cycle autorisé est clos ; aucune nouvelle fenêtre n'est lancée dans cette reprise.** Après résolution, une coordination fraîche et une readiness nouvelle resteront nécessaires avant ABBA, revue du coût et publication dans l'ordre **5C → 6B → 8A → 10C**.
-
-<!-- LOT5C_RECOVERY02_CURRENT_END -->
-
-<!-- LOT5C_AVAILABLE03_CURRENT_START -->
-
-### Reprise 03 close : préparation revue, disponibilité non confirmée
-
-Un [nouveau reçu du lot 10C](lot5c-evidence/recovery/coordination/recovery-03/lot10c-exclusive-availability-observed.json), observé le **11 novembre 2026 à 17:42:14,650043 UTC−03**, établit une acquisition exclusive suivie d'une libération immédiate du **même mutex, device 27 / inode 1971854**, sans remplacement ni processus tué. La [revue indépendante de ce fait nouveau](lot5c-evidence/recovery/coordination/recovery-03/new-availability-review.json) passe **13/13 contrôles**. L'ancien détenteur reste inconnu ; aucune ancienne session n'est déclarée fermée. Cette disponibilité instantanée ne prouve ni l'isolation future ni un coût accepté. Elle retire toutefois la justification de présenter le verrou comme actuellement bloqué ou d'exiger l'identité de son ancien détenteur avant une nouvelle acquisition effective.
-
-La nouvelle continuation demandée par l'utilisateur reprend depuis le checkpoint vérifié **`37f3dabeaf8807045effb81cc3437da53f10ee97`**, avec conservation de la clôture 02. Le [plan](lot5c-evidence/recovery/coordination/recovery-03/preparation-plan.json) prépare **un seul cycle nouveau** `lot5c-cost-a33a5f88-available-03`, motivé par ce changement matériel. Aucun ACK ni readiness ancien n’a été réutilisé. La durée de disponibilité reste **600 secondes**, avec **une seule EX non bloquante**, puis **5 400 secondes maximum** pour la fenêtre réellement acquise et ses analyses. Les travaux utiles déjà engagés peuvent se terminer normalement ; aucun arrêt de commande étrangère n'est demandé.
-
-La [préparation 04](lot5c-evidence/recovery/planning/coordination-v3-preparation-01.json) passe **76/76 conditions statiques**. Les seules différences de fixture portent sur `cases.path` ; octets des cas, captures, formes, attributions et dates historiques restent identiques. La validation documentaire passe **28/28**, sur **179 entrées**. Les [trois tests ciblés du parent](lot5c-evidence/recovery/planning/orchestrator-v3-targeted-tests.execution.json) passent, avec refus explicite des ACK 01/02, expiration unique et libération après refus du contrôleur, sur mutex temporaires. Les autres preuves des gardes inchangés sont réutilisées.
-
-La [revue globale v3](lot5c-evidence/recovery/planning/coordination-v3-independent-review.json) passe **44/44 contrôles**, sur **93 sujets uniques**. Les corps fonctionnels, l'ABBA, ses populations, ses chauffes et le critère global par jeu restent inchangés. Le [précontrôle de publication](lot5c-evidence/recovery/coordination/recovery-03/publication-preflight.json) confirme toujours **Site 103 / native 0.62**, après Site 102. Cette préparation est conservée comme étape historique. La nouvelle règle ordinaire a ensuite produit les versions v3/v4 décrites ci-dessous.
-
-La [demande fraîche](lot5c-evidence/recovery/coordination/cost-final-03/request.json) a réellement été émise à **21:48:17,650081 UTC**, après fermeture des trois travailleurs propres à 5C et du transfert de sources. Elle a expiré à **21:58:17,650081 UTC** sans les trois ACK requis. Le [résultat terminal](lot5c-evidence/recovery/coordination/cost-final-03/attempt-result.json) conserve `availability_deadline_before_fresh_acks` ; la [session réelle 71059](lot5c-evidence/recovery/coordination/recovery-03/available03-orchestrator-terminal.json) a terminé avec le code 124 et nettoyage confirmé. La libération est enregistrée à **21:58:17,652553 UTC**, soit **2,472 millisecondes** de délai de dispatch après l’échéance, sans prolongation de travail protégé. **Aucune acquisition EX, aucune readiness 04, aucun échantillon et aucune publication n’ont eu lieu.** Les trois messages RELEASE permettent la poursuite du travail ordinaire sans mutex ; aucune nouvelle pause automatique n’est prévue.
-
-<!-- LOT5C_AVAILABLE03_CURRENT_END -->
-
-<!-- LOT5C_ORDINARY_UNLOCKED_CURRENT_START -->
-
-### Nouvelle règle utilisateur : travail courant sans verrou global
-
-L’[instruction explicite conservée](lot5c-evidence/recovery/coordination/recovery-03/ordinary-work-policy.json) retire l’obligation du verrou global pour le développement, les tests fonctionnels, les commits et les push. Le lot 5 travaille dans son checkout dédié et sur **`lot5c-recovery-checkpoint-20261111`** ; ses sauvegardes de branche n’attendent pas les publications des autres lots. Les fichiers de mutex existants restent intacts.
-
-Le nouvel [auxiliaire ordinaire v3](lot5c-evidence/recovery/planning/coordination-tools-v3/README.md) ne prend aucun mutex global dans ses trois modes. Les délais d’entrée/travail, l’assainissement des résultats, les identifiants réels et le nettoyage des enfants sont conservés. **4 scénarios ciblés / 69 contrôles** passent, dont un transport sous mutex temporaire tenu EX, malgré une demande prospective et une publication en attente. Seule une véritable fenêtre officielle de performance active est respectée ; la publication dispose de son gardien distinct.
-
-Le [premier transfert réel sans mutex](lot5c-evidence/recovery/coordination/recovery-03/source-checkpoint-unlocked-v3-live.json) a poussé puis vérifié les commits **`2ada5045fb94c4e34bd68f1ecd6f1f73aa778bd5`** et **`a59abde5a714e566962568f492598a2522562871`** le 11 novembre 2026 à **18:28:14 UTC−03**. La session réelle 96368 est terminale, code 0, nettoyage complet, **`lockAcquired: false`**. Aucune publication de site n’en résulte.
-
-La coordination de coût v4 est **terminée et vérifiée** : [7 tests temporaires sur 7](lot5c-evidence/recovery/planning/v4-coordination-scope-tests-01.execution.json), puis [48 contrôles indépendants sur 48 et 122 sujets exacts](lot5c-evidence/recovery/planning/coordination-v4-independent-review.json). EX et le calme sont réservés à l’**ABBA effectivement mesuré et à son intégrité terminale** ; les transports de preuves, comparaisons, revues et rapports suivent sans mutex global. Le protocole et les preuves antérieurs restent conservés ; l’[amendement explicite](lot5c-evidence/recovery/planning/coordination-v4-policy-amendment.json) remplace la seule prolongation du calme prévue au protocole historique. Les populations, chauffes, commandes ABBA et critères de coût ne changent pas. Ces corrections ont été [poussées et vérifiées](lot5c-evidence/recovery/coordination/recovery-03/source-checkpoint-v4-preparation-live.json) dans **`ed983a15f718bd00fac41c867c1b6b9320c7ea95`**, sans mutex global, puis la fermeture réelle des préparations a précédé le cycle 03. Celui-ci est maintenant **clos et libéré sans coût ni publication**, comme détaillé ci-dessus. La publication conserve son [gardien distinct et borné](lot5c-evidence/recovery/planning/publication-coordination-v1/independent-review.json), qui ne constitue aucun prérequis pour les sauvegardes ordinaires.
-
-<!-- LOT5C_ORDINARY_UNLOCKED_CURRENT_END -->
-
-La [revue indépendante de clôture](lot5c-evidence/recovery/coordination/recovery-03/available03-terminal-independent-review.json) confirme **18/18 contrôles**, dont la session terminale, la libération, l’absence de fenêtre et la conservation des mutex. Sa durée documentaire d’environ **185 secondes pour 90 secondes annoncées** et la correction unique d’une assertion trop stricte sur `null`/`false` restent consignées. Cette revue intervient après la levée du calme, sans test, benchmark ni nouvelle demande.
-
-### État publié et prochaine séquence
-
-Le [recontrôle API final du 11 novembre à 22:00:34 UTC](lot5c-evidence/recovery/coordination/recovery-03/publication-final-observation.json) confirme **Site 103 actif, native 0.62 issue de Site 102**, avec les deux déploiements `succeeded`. La source de Site 103 reste `4afcbfe6a25bd3a88223be543e443bc53b9c8814` ; celle de Site 102 reste `1019d2eb929d7dc201a5c1f6edce5aa1c5dfa464`. L’audience et sa révision 3 sont inchangées. **Les sauvegardes de la branche 5C n’ont publié aucune version du site.**
-
-| Étape | État actuel | Suite nécessaire |
-| --- | --- | --- |
-| 5C, preuves fonctionnelles | **Terminé** : 5 339 tests, cinq contrôles, 6 818 comparaisons communes et onze rejeux / 187 comparaisons | Réutiliser les résultats tant que leurs entrées restent identiques |
-| Travail courant et sauvegardes | **Corrigé, vérifié et appliqué** sans mutex global, checkout et branche dédiés | Continuer les commits cohérents et push indépendamment des publications étrangères |
-| Coordination de mesure | **Préparée et revue ; cycle 03 clos** sans confirmations fraîches suffisantes | Attendre une disponibilité réelle et renouveler explicitement les attestations ; aucune pause automatique restante |
-| Coût officiel 5C | **Non mesuré** pour STCK et SMLP | ABBA inchangé sous EX court ; médiane complète strictement sous +10 % pour chaque jeu, dépassements de phase conservés |
-| Publication 5C / 0.63 | **Non effectuée** | Accepter le coût, recontrôler le prédécesseur réellement publié, publier sous le gardien dédié puis constater `succeeded` |
-| 6B / 0.64, puis 8A / 0.65, puis 10C / 0.66 | **Ordre de publication conservé** | Développement, tests et sauvegardes ordinaires indépendants ; qualification finale et publication contre le prédécesseur effectivement livré |
-
-
-
 <!-- LOT5C_ROADMAP_CURRENT_END -->
+
+<!-- LOT8A_START -->
+
+## Jalon 8A : développement validé, qualification finale après 0.63 et 0.64
+
+**8A `motif_conditioned_access` est implémenté et validé en développement : 5 422/5 422 tests dans 138 fichiers, cinq contrôles passés, compilation comprise.** Les entrées sont restées inchangées pendant chaque commande ; les sorties complètes et leurs empreintes sont conservées dans le [bilan de validation](lot8a-evidence/development/validation-summary.json). Le candidat porte **0.65.0 réservé** et contient **312 fichiers natifs**, digest `a6ea3e5e8140b14aa260485ebd4192429a86c4d3ec02075f14043f215cc798e1`.
+
+Ce travail est parti du Site 101 / native 0.61, puis a intégré le **Site 103 / native 0.62 effectivement publié**, source `4afcbfe6a25bd3a88223be543e443bc53b9c8814`. Une [observation Sites fraîche](lot8a-evidence/coordination/current-publication-observation.json) confirme le déploiement `succeeded`, l'accès privé au propriétaire et la révision d'accès **3**. **Aucun coût 8A, niveau officiel ni déploiement 0.65 n'est revendiqué.** Les publications effectives **5C / 0.63 → 6B / 0.64** restent à intégrer avant son gel final, ses non-régressions, sa qualification de coût et sa publication.
+
+La [filiation source](lot8a-motif-access-lineage.md) et l'[index des preuves](lot8a-evidence/README.md) décrivent le propriétaire unique, la position source, les gardes courantes, l'acquisition sélectionnée et la restauration. Le parcours froid du moteur commun acquiert une commande, bascule et active un motif, puis utilise le retour pour le choix suivant. Un effet contraire modifie cette décision ; retirer l'acquisition empêche l'enchaînement appris. Les comparaisons originales et ces scénarios sont inclus dans le passage frais ; les **182/182 comparaisons initiales** restent des preuves historiques distinctes, sans addition des populations.
+
+L'[audit des entrées](v6-entry-point-progress.json) du candidat confirme **65/76 raccordées (85,5 %), 11 restantes**, dont **23/33** pour `factored_material_return`. La publication 0.62 de référence en compte **64/76**. L'[inventaire](v6-coverage.json) atteint **200 composants vérifiés, 149 transferts partiels et 1 020 modules en attente**, zéro module entièrement vérifié et **aucun échec d'audit**. Les six portes de migration complète restent `false` ; le raccordement n'établit pas une parité complète du moteur.
+
+La recherche bornée déclare l'incomplet après interruption ou dépassement, sans route partielle. Ses bornes de **8 192 états / 16 384 éléments de frontière** ne constituent pas une preuve universelle de mémoire ou de latence : conserver les chemins complets peut coûter **O(S²)** en espace. **8B `parallel_branch_routing` reste à réaliser et le lot 8 entier reste ouvert.**
+
+**Règle de coût confirmée : la médiane des sessions complètes doit augmenter de moins de +10 % pour STCK et pour SMLP séparément.** Une phase dépassant +10 % peut être acceptée lorsque les deux critères globaux passent ; tous les échantillons, diagnostics et cohortes sont conservés. Le coût 8A devra être mesuré contre son prédécesseur effectivement publié. Les coûts acceptés de 0.61 et 0.62 ne sont pas réutilisés comme preuves de 8A. LKEY demeure définitivement fermé, sans nouvel essai ni remise à zéro.
+
+### Suite de la feuille de route au 11 novembre 2026 à 14:37:12 UTC−03
+
+| Étape | État actualisé | Prochaine action |
+| --- | --- | --- |
+| 10B / 0.62 | Publié dans Site 102, clôture documentaire Site 103 ; réserve HPDL partielle conservée | Prédécesseur réellement intégré dans 8A |
+| 5C / `observed_object_binding` / 0.63 | Validation du candidat intégré en cours dans son fil | Terminer sa qualification et publier 0.63 |
+| 6B / `selected_rigid` / 0.64 | Jalon de développement acquis ; intégration préparatoire de 5C en cours | Réconcilier la publication réelle 0.63, puis qualifier et publier 0.64 |
+| **8A / `motif_conditioned_access` / 0.65** | **Développement validé : 5 422 tests, cinq contrôles, 65/76 entrées sur la base 103** | Intégrer 0.63/0.64, valider le gel final et son coût, puis publier |
+| 6C / 6D | `observed_rigid_cargo`, `shared_settlement` restent ouverts | Transférer et qualifier chaque capacité |
+| 8B | `parallel_branch_routing` reste à réaliser | Étape suivante du lot 8 après 8A |
+| Lot 9 | `chart_navigation`, `region_intervention`, `joint_channels` restent ouverts | Navigation, régions et canaux ; `discrete_network` reste suivi hors compteur 76 |
+| 10C / 10D / 10E | 10C : qualification fonctionnelle de la composition acquise, coût/publication ouverts ; 10D : préparation statique terminée ; 10E à réaliser | Développer et sauvegarder en parallèle ; réserver les fenêtres exclusives aux mesures officielles et aux publications |
+| Lot 11 | Consolidation finale ouverte | Parité commune, graphes, restauration, sessions longues, coûts et lisibilité |
+
+Les états des autres fils proviennent de la [coordination observée](lot8a-evidence/coordination/next-lanes-observation.json) ; ils ne constituent pas des attestations de publication. Les lots antérieurs conservent ci-dessous leurs périmètres livrés et leurs réserves.
+
+<!-- LOT8A_END -->
 
 <!-- LOT10B_CURRENT_BEGIN -->
 ## Jalon 10B livré : Site 102 / native 0.62, coût accepté et réserve HPDL partielle
@@ -1284,7 +918,7 @@ La **correction `0.42.0`, publiée avant le présent port**, gel **`2de70025`**,
 
 Une dépendance désigne un contrat réellement consommé. Les numéros indiquent la priorité proposée, pas une obligation de terminer tous les lots précédents. Les familles autonomes peuvent être préparées dès que leurs propres contrats sont disponibles.
 
-Les entrées restantes du tableau se réfèrent au **dernier prédécesseur natif publié, Site 102 / native 0.62 : 64/76 entrées raccordées, 12 restantes**, avec clôture documentaire Site 103. Le candidat **5C / 0.63 atteint 65/76 et 11 restantes**, avec validations fonctionnelles complètes, mais sans coût mesuré ni publication. Les branches de développement parallèles conservent leurs propres compteurs ; ils ne sont pas additionnés à ceux de la version publiée. Les publications réelles Site 92/native 0.57 et Site 91/native 0.56 conservent leurs compteurs historiques de 61/76 et 60/76.
+Les entrées restantes du tableau décrivent le **gel 6A / native 0.60 : 63/76 entrées raccordées, 13 restantes**. Son état de publication et de coût est indiqué en tête de cette feuille de route. Les publications réelles Site 92/native 0.57 et Site 91/native 0.56 conservent leurs compteurs historiques de 61/76 et 60/76.
 
 | Lot | Résultat attendu | Entrées restantes | Dépendance nécessaire | Statut courant |
 | --- | --- | ---: | --- | --- |
@@ -1292,15 +926,15 @@ Les entrées restantes du tableau se réfèrent au **dernier prédécesseur nati
 | 2 | Stratégie morphologique et fournisseurs communs | Hors compteur | Cycle validé du lot 1, mesures et mémoire courantes | **2A et 2B livrés ; 2C clôturé dans son périmètre annoncé, coût validé avec `0.36.0`** ; fermeture de domaine et parité globale ouvertes |
 | 3 | Mémoire commune et compositions | **0 au registre** | Propriétaire commun, acquisition et contrats de continuation | **3A, 3B, 3E, 3F, 3H et 3I clôturés dans leurs périmètres.** 3C/3D conservent CWSE/SK48 ; 3G garde sa réserve de contribution propre en jeu. **3I / 0.50 : RecurrentSeries et son repli SupportedLine, CONN trois niveaux/21 actions, validation formelle, cinq rejeux, intégrité et coût global acceptés.** Publication confirmée : Site 79. Façade à six branches sur six ; aucune réserve historique effacée. |
 | 4 | Exemples, correspondances et retours discriminants | **0 au registre** | Observations, callbacks SRC, gardes et mémoire propre | **4A, 4B et 4C livrés ; lot 4 clos dans ses périmètres annoncés**, 4C publié dans Site 92/native 0.57, branches simples et composées, ISOS trois niveaux/douze actions. **Coût global accepté et publication privée confirmée.** |
-| 5 | Temps, adressage et liaisons | **0 au registre publié** | Historique public ; contrat de conservation pour les consommateurs concernés | **5A et 5B livrés ; 5C / native 0.63 publié prioritairement dans Site 104**, avec coût officiel non mesuré et non accepté. La validation fonctionnelle est conservée ; les sessions longues et WEAV6 restent réservés. |
-| 6 | Pièces rigides, cargaisons et stabilisation commune | **2 ouvertes au registre publié** | Géométrie, contrôles, recherche bornée et interruption | **6A livré ; 6B `selected_rigid` publié prioritairement dans Site 105 / native 0.64**, source `deb9ebbb`, 322 fichiers/fa23 et 66/76 entrées. Ses sources sont identiques au baseline préparé des preuves 8A. Le coût officiel demeure non mesuré et non accepté. Puis 6C `observed_rigid_cargo` et 6D `shared_settlement`. |
+| 5 | Temps, adressage et liaisons | **1** | Historique public ; contrat de conservation pour les consommateurs concernés | **5A publié dans Sites 84–85 / 0.53. 5B/native 0.58 est livré dans Site 94, intègre les prédécesseurs Sites 92/93 et conserve sa validation technique ainsi que son coût global accepté.** Prochaine capacité du lot 5 : **5C, `observed_object_binding`**. Stock commun borné à 8/17 étapes ; sessions longues et WEAV6 restent réservés. |
+| 6 | Pièces rigides, cargaisons et stabilisation commune | **3 ouvertes à la publication ; 2 sans raccordement dans le candidat historique 6B** | Géométrie, contrôles, recherche bornée et interruption | **6A livré. 6B `selected_rigid` : développement fonctionnel vérifié sur base Site 97**, KLOT trois niveaux/38 actions. Le publié Site 103 ne contient pas cette capacité ; intégration 103 vérifiée, 0.63, qualification finale et coût attendus. Puis 6C `observed_rigid_cargo` et 6D `shared_settlement`. |
 | 7 | Ateliers et transactions symboliques | **0 au registre** | Interfaces mesurées, SRC et mémoire des méthodes | **Transferts 7A/7B clos** : 7A Sites 82–83/native 0.52, 7B Sites 88–89/native 0.55, coûts acceptés et propriétaires distincts. **Suivi LKEY L3 séparé**, sans requalifier les échecs ni effacer la réserve de continuation. |
-| 8 | Accès conditionné et routage de branches | **2 à la publication ; 1 sans raccordement dans le candidat 8A** | Calibration des commandes et préfixes gardés | **8A : preuves communes, 11 régressions et formes/graphes préparatoires qualifiés**, natif inchangé après intégration du vrai 0.63 publié. Finalisation contre le vrai 0.64 puis coût et publication 0.65 restent ouverts. **8B : préparation source établie, sans raccordement.** |
+| 8 | Accès conditionné et routage de branches | 2 | Calibration des commandes et préfixes gardés | Planifié |
 | 9 | Navigation, régions et canaux | 3 | Graphes, retours publics et budgets courants | Planifié ; Recolor déjà acquis |
-| 10 | Questions d'axe, de fenêtre, d'ordre et de temps | 3 | Observations, séquences et méthodes revalidées | **10A clos, publié dans Sites 90–91 / 0.56** : 1 538 tests, cinq contrôles, 119 comparaisons et QA TRIA trois niveaux/17 actions/17 plans ; coût global accepté et réserve d'apport propre conservée. **10B, `window_question`, fonctionnellement validé avec réserve HPDL partielle ; coût global accepté, publication native 0.62 effective dans Site 102** ; **10C `ordered_recruitment` dispose de validations de développement et poursuit l’intégration de ses prédécesseurs** ; coût et publication restent à établir après 0.63, 0.64 et 0.65. **10D et 10E restent planifiés.** |
+| 10 | Questions d'axe, de fenêtre, d'ordre et de temps | 4 | Observations, séquences et méthodes revalidées | **10A livré dans Sites 90–91 / 0.56 ; 10B livré dans Sites 102–103 / 0.62 avec réserve HPDL partielle. 10C fonctionnellement qualifié sur 329 natifs : 1 767 tests formels, cinq contrôles, 10 rejeux/170 plus KATA/17 et intégrité passée**, coût et publication encore ouverts. **10D préparé**, premier oracle indépendant à développer sans attendre les publications ; 10E à réaliser. |
 | 11 | Consolidation, couverture et lisibilité | Hors compteur | Résultats et preuves des lots précédents | Planifié |
 
-La réconciliation initiale avec le registre de la base 59 conserve **26 noms planifiés, 26 noms distincts, aucun nom absent et aucun nom supplémentaire**. Depuis 3F, `observed_composition_services` est raccordé ; 3G ajoute `framed_window_composition`, 3H `coupled_prefix_reference`, 3I `recurrent_series`, 4A `observed_feedback_sequence`, 7A `observed_ranked_workshop`, 5A `linked_temporal_preparation`, 4B `relative_arrangement` et 7B `observed_symbol_transaction`. **17 noms restaient ouverts** dans le gel historique 7B publié Site 88 / native 0.55, répartis dans les lots 4 à 10 : **1 + 2 + 4 + 0 + 2 + 3 + 5**. Le gel 10A / 0.56 publié dans Site 90 raccorde en plus `axial_question` : **60/76 entrées et 16 ouvertes**, réparties **1 + 2 + 4 + 0 + 2 + 3 + 4**. L'identité octet pour octet de ses entrées gelées est vérifiée après fusion des Sites 88 et 89. 4C publié raccorde ensuite `facet_example`, puis 5B publié dans Site 94 raccorde `observed_addressed_material` : **62/76 entrées et 14 ouvertes**, réparties **0 + 1 + 4 + 0 + 2 + 3 + 4**. Sa publication distincte est confirmée dans Site 94. Le gel 6A raccorde ensuite `preview_packing` : **63/76 entrées et 13 ouvertes**, réparties **0+1+3+0+2+3+4**. Le 10B réellement publié dans Site 102 ajoute `window_question` : **64/76 et 12 ouvertes**, réparties **0+1+3+0+2+3+3**. Le 5C publié dans Site 104 ajoute `observed_object_binding` : **65/76 et 11 ouvertes**, réparties **0+0+3+0+2+3+3**, avec réserve de coût officiel non mesuré. Les entrées sont détaillées ci-dessous. Les chemins directs et les fournisseurs communs gardent leur propre bilan hors registre.
+La réconciliation initiale avec le registre de la base 59 conserve **26 noms planifiés, 26 noms distincts, aucun nom absent et aucun nom supplémentaire**. Depuis 3F, `observed_composition_services` est raccordé ; 3G ajoute `framed_window_composition`, 3H `coupled_prefix_reference`, 3I `recurrent_series`, 4A `observed_feedback_sequence`, 7A `observed_ranked_workshop`, 5A `linked_temporal_preparation`, 4B `relative_arrangement` et 7B `observed_symbol_transaction`. **17 noms restaient ouverts** dans le gel historique 7B publié Site 88 / native 0.55, répartis dans les lots 4 à 10 : **1 + 2 + 4 + 0 + 2 + 3 + 5**. Le gel 10A / 0.56 publié dans Site 90 raccorde en plus `axial_question` : **60/76 entrées et 16 ouvertes**, réparties **1 + 2 + 4 + 0 + 2 + 3 + 4**. L'identité octet pour octet de ses entrées gelées est vérifiée après fusion des Sites 88 et 89. 4C publié raccorde ensuite `facet_example`, puis 5B publié dans Site 94 raccorde `observed_addressed_material` : **62/76 entrées et 14 ouvertes**, réparties **0 + 1 + 4 + 0 + 2 + 3 + 4**. Sa publication distincte est confirmée dans Site 94. Le gel 6A raccorde ensuite `preview_packing` : **63/76 entrées et 13 ouvertes**, réparties **0+1+3+0+2+3+4**. Les entrées sont détaillées ci-dessous. Les chemins directs et les fournisseurs communs gardent leur propre bilan hors registre.
 
 ## Règles communes de livraison
 
@@ -1651,14 +1285,14 @@ Les preuves de développement gardent leur portée propre : **81 tests différen
 
 ## Lot 5 : temps, adressage et objets
 
-**État de ce fil :** 5A et 5B restent publiés dans leurs périmètres. **5C a intégré et réconcilié les publications réelles 6A, suivi 7 et 10B, jusqu’aux Sites 102–103 / native 0.62.** Le candidat 0.63 conserve **65/76 entrées raccordées**, contre **64/76 dans le prédécesseur publié 0.62**. Son gel final passe **5 339 tests dans 138 fichiers, cinq contrôles, la preuve commune fraîche à 6 818 comparaisons et onze rejeux à 187 comparaisons**. La readiness préalable est conservée, mais le verrou exclusif a été refusé avant toute mesure. La reprise 02 a ensuite expiré après 600 secondes faute d’ACK frais de 8A et 10C, sans nouvel EX ; elle est explicitement levée. Les protections de coordination sont corrigées et revues. Le reçu10C de17:42:14 UTC−03 a ensuite établi une disponibilité exclusive du même mutex. La préparation04 est revue44/44 ; un seul cycle nouveau est préparé après cette nouvelle continuation, sans ancien ACK ni mesure déjà acquise. **5C reste non publié.** La première mesure du suivi 7 reste retirée des preuves de coût isolées ; sa [répétition complète propre est acceptée](lot5c-evidence/recovery/coordination/lot7-clean-repeat-observation/observation.json), **STCK −2,924030 % et SMLP +0,009074 %**, avec les dépassements de phase conservés.
+**État de ce fil :** 5A et 5B restent publiés dans leurs périmètres. **5C intègre les publications 6A (Sites 96–97), le suivi 7 (Site 98 et clôture Site 101), ainsi que le correctif d’horloge testé de 10B.** La preuve commune `common-02` conserve ses huit scénarios et **6 818/6 818 contrôles originaux** sur son gel ; l’intégration du correctif passe **16/16 tests ciblés et trois contrôles**, avec sources et entrées d’exécution identiques après réconciliation des Sites 98 et 101. Le candidat garde **65/76 entrées**, contre **63/76** dans la publication 0.61. La publication réelle 10B et le périmètre final 5C restent à réconcilier avant coût et publication. La première mesure du suivi 7 reste retirée des preuves de coût isolées ; sa [répétition complète propre est acceptée](lot5c-evidence/recovery/coordination/lot7-clean-repeat-observation/observation.json), **STCK −2,924030 % et SMLP +0,009074 %**, avec les dépassements de phase conservés.
 
 | Sous-lot | Périmètre | État et prochaine étape |
 | --- | --- | --- |
 | **5A** | `linked_temporal_preparation` | Propriétaire unique, contact lié, acquisition passive des phases, chemins bornés, restauration et influence du retour vérifiés. Qualification des graphes, fenêtre officielle et revue du coût terminées ; publication privée confirmée dans Site 84. |
 | **5B** | `observed_addressed_material` | **Livré dans Site 94, validé techniquement et au coût global.** 4 900 tests/125 fichiers, cinq contrôles, dix rejeux/170 comparaisons, TRIA trois niveaux/17 actions/17 plans. Source 522 opérations ; stock commun 8/17 étapes, une fusion/un déplacement puis refus préservé. Global STCK +3,780905 % / SMLP −1,556219 %, revue 11 865/11 865, diagnostics 14/16 conservés. |
-| **5C** | `observed_object_binding` | **Publié prioritairement dans Site 104 / native 0.63, avec coût officiel non mesuré et non accepté.** Le gel conserve 5 339 tests / 138 fichiers, cinq contrôles, 6 818 comparaisons communes et 11 régressions / 187 comparaisons. Les fenêtres de coût interrompues ou abandonnées restent conservées ; cette publication exceptionnelle ne fournit aucun échantillon ni verdict de coût et ne change pas le critère global futur. |
-| **Sessions longues** | Delta, mémoire active et coups obligatoires | Les premières copies répétées sont corrigées, 5B conserve ses snapshots selon la révision et les optimisations déjà livrées sont préservées. Restent les coûts proportionnels à l’historique, la compaction démontrée des données devenues inutiles et la propagation générale des domaines réduits à un seul choix. **WEAV niveau 6 reste réservé**, sans nouvel essai réel ni reset du budget épuisé ; le coût global accepté des lots précédents ne prouve pas une latence stable au fil des niveaux. |
+| **5C** | `observed_object_binding` | **Raccordé, 0.63 non publié et aucun échantillon officiel de coût acquis.** Les preuves historiques de composant **98/98**, `common-02` **6 818/6 818** et d'horloge **16/16 tests ciblés + trois contrôles** restent attachées à leurs gels. Le jalon courant 5C en tête conserve son intégration de Site 103, **5 339/5 339 tests et 187/187 comparaisons** dans son propre périmètre ; ils ne qualifient pas la nouvelle composition 10C. Conservation du parent, liaison observée, effet attesté, réfutation/frontière, restauration et décision suivante restent les contrats. Suite : mesure et revue du coût, puis publication réelle. |
+| **Sessions longues** | Delta, mémoire active et coups obligatoires | Les optimisations déjà livrées sont conservées : premières copies répétées corrigées et snapshots 5B conservés selon la révision. Restent les coûts liés à l'historique, la compaction démontrée des données devenues inutiles et la propagation générale des choix obligatoires. **WEAV niveau 6 reste réservé**, sans nouvel essai réel ni remise à zéro du budget épuisé. Le coût global accepté des lots précédents ne prouve pas une latence stable sur les sessions longues. |
 
 **Entrées :** `linked_temporal_preparation`, `observed_addressed_material`, `observed_object_binding`.
 
@@ -1668,11 +1302,11 @@ Les preuves de développement gardent leur portée propre : **81 tests différen
 
 ## Lot 6 : pièces rigides, cargaisons et stabilisation
 
-**Mise à jour 6B :** le candidat provisoire 805b + 6B reste gelé fa23/322, audité à 66/76 entrées (86,8 %), avec 208 composants vérifiés, 147 transferts partiels et 1 014 modules en attente ; zéro module entièrement vérifié et six portes complètes encore fausses. La tentative 03 de la suite de 142 fichiers réussit **5 405/5 405**. Les **11/11 rejeux, 187/187 contrôles et 390 actions** sont agrégés, avec les douze tentatives conservées, dont l’ancien OOM VOIS. Les sept tests Binding ont été rejoués ; les huit scénarios et leurs **6 818 contrôles** restent les preuves conservées de la tentative 02 à entrées pertinentes inchangées, sans duplication. La nouvelle preuve froide KLOT fa23 atteint **trois niveaux, 38 actions et 30 préfixes**, avec relecture originale sans différence, ablations et deux rejets sémantiques qualifiés. **QA02 est réellement réussie via CUA sur Vite et le worker TypeScript de développement**, avec Pause, reprise et fermeture vérifiées ; elle ne prétend pas tester le bundle de production. La structure de coût est qualifiée sur **64 contrôles, 58 points et 168 records temporels**, mais aucun parcours CLI complet aval ni coût officiel n’est acquis. Après le diagnostic source générique ultérieur, le compteur est fermé à **1 424,8841320940055/2 400 secondes**, avec **975,1158679059945 secondes restantes** ; les clôtures QA antérieures restent historiques. Le Site 103 exact encore observé **à 21:33 UTC**, dans le [nouveau constat d’hébergement](lot6b-evidence/source-workflow-20261111/publication-observation.json) reste en **native 0.62**, sans SelectedRigid ; le diagnostic du message d’arrêt reste une lecture de source, sans reproduction de la session utilisateur. Le coût officiel, la réconciliation du publié 0.63 et la publication 0.64 restent ouverts. Les reçus, limites et prochaines opérations font autorité dans le jalon 6B courant en tête.
+**Mise à jour 6B :** la réussite de trois niveaux KLOT et sa comparaison originale sont attachées au gel de développement sur Site 97 / native 0.60. Le Site 103 / native 0.62 publié ne contient pas SelectedRigid. Sa fusion exacte avec 6B est vérifiée : 33 tests ciblés, neuf tests du runtime commun, 65/76 entrées auditées et audit de migration sans erreur. Ces résultats ne réattribuent pas la campagne KLOT historique au nouveau gel ; 5C / 0.63, les portes finales, le navigateur, le coût et la publication restent ouverts. Voir le jalon courant en tête.
 
 **Entrées :** `preview_packing`, `selected_rigid`, `observed_rigid_cargo`, `shared_settlement`.
 
-**6A `preview_packing` livré dans Sites 96–97 / native 0.60 ; 6B `selected_rigid` publié dans Site 105 / native 0.64.** Deux entrées restent ouvertes : 6C `observed_rigid_cargo` et 6D `shared_settlement`. La publication prioritaire 6B conserve sa réserve de coût officiel non mesuré et non accepté. Les critères ci-dessous restent des exigences pour le lot entier.
+**6A `preview_packing` : livré dans Site 96.** Les preuves nouvelles sont présentées en tête de ce document. **Trois entrées restent ouvertes : 6B `selected_rigid`, dont le jalon de développement est acquis mais la qualification finale attend 0.63 ; 6C `observed_rigid_cargo` ; 6D `shared_settlement`.** Les critères ci-dessous restent des exigences pour le lot entier ; les limites source de 6A ne sont pas présentées comme une clôture universelle de ces exigences.
 
 **Dépendances :** géométrie, commandes acquises, effets vérifiés, primitives V5 consommées et recherche interruptible. Le lot 5 peut fournir des contrats, sans constituer un prérequis global.
 
@@ -1696,7 +1330,7 @@ Le [rapport 7A](lot7a-ranked-workshop.md) et la [filiation source → TypeScript
 
 ## Lot 8 : accès conditionné et branches
 
-**État courant :** le [jalon composé provisoire 8A](lot8a-evidence/integration-provisional-063-064-01/validation-summary.json) passe **5 606/5 606 tests dans 145 fichiers et 5/5 contrôles**, avec **67/76 entrées raccordées**. Il intègre les préparations non publiées de 5C et 6B ; sa qualification finale, son coût et sa publication 0.65 exigent encore les publications effectives 0.63/0.64 et les preuves restantes déclarées. Le [jalon antérieur de 5 422 tests sur Site 103](lot8a-evidence/development/validation-summary.json) est conservé séparément. **8B `parallel_branch_routing` reste ouvert ; le lot 8 entier reste ouvert.** Voir la [filiation](lot8a-motif-access-lineage.md).
+**État courant :** 8A `motif_conditioned_access` a franchi son jalon de développement sur Site 103 : **5 422 tests dans 138 fichiers et 5/5 contrôles passés**, 65/76 entrées raccordées. Son intégration finale, son coût et sa publication 0.65 attendent les publications effectives 0.63/0.64. **8B `parallel_branch_routing` reste planifié et le lot 8 reste ouvert.** Voir le [bilan 8A](lot8a-evidence/development/validation-summary.json) et sa [filiation](lot8a-motif-access-lineage.md).
 
 **Entrées :** `motif_conditioned_access`, `parallel_branch_routing`.
 
@@ -1720,8 +1354,8 @@ Le [rapport 7A](lot7a-ranked-workshop.md) et la [filiation source → TypeScript
 | --- | --- | --- |
 | 10A | `axial_question` / `v6.axial_question.choose` | Publié dans Sites 90–91 / 0.56, intégré et fonctionnel vérifié : 1 538 tests, 5 contrôles, 119 comparaisons et QA TRIA trois niveaux/17 actions/17 plans ; publications 7B/Sites 88–89 réconciliées, coût global accepté et entrées de publication vérifiées ; publication privée confirmée, contribution propre en partie ouverte |
 | 10B | `window_question` / `v6.window_question.choose` | **Livré dans Site 102 / native 0.62, avec réserve HPDL partielle** : 310 natifs/ 768 entrées gelées, digest `74143a7…`, registre 64/76 ; 1 205 tests, 5 contrôles, 10 rejeux/ 170 comparaisons passés. HPDL02 : 3 niveaux, 39 retours, arrêt 300 s ; PARTIAL 93 appels/ 76 restaurations/ 38 préfixes sans divergence, 152 ablations dont 95 appliquées et 23 changements. QA pause 2/action 3/reprise jusqu’à 7 actions et 1 niveau ; seconde attente de pause expirée conservée. Apport propre observé, réussite six niveaux et full caller non établis. Horloge 1 909,1412980339917 s débités / 490,85870196600837 s restants. Structure 8 formes/ 62 actions, préflight 77/77 et intégrité passés ; **coût global accepté : STCK +5,400572929772963 %, SMLP −1,7989027140400675 %**, revue 10 297/10 297 passée. Phase restauration SMLP +26,34362955231715 % conservée ; agrégateur historique strict sorti 1 et qualification déclarée distincte. Publication native 0.62 effective dans Site 102. Prochaine étape : 10C / `ordered_recruitment`, puis 10D / `temporal_selection` et 10E / `invited_endpoints`. |
-| 10C | `ordered_recruitment` / `v6.ordered_recruitment.choose` | Développement parallèle en cours ; qualification et publication non attestées à ce point de coordination |
-| 10D | `temporal_selection` / `v6.temporal_selection.choose` | À réaliser |
+| 10C | `ordered_recruitment` / `v6.ordered_recruitment.choose` | **Composition 329 / `ab674682…` fonctionnellement qualifiée** : 1 767/1 767 tests formels dans 56 modules, cinq contrôles, 10 rejeux/170 plus KATA séparé/17, intégrité et 68/76 entrées. Les anciens groupes de développement ne s’ajoutent pas à cette population. RECR trois niveaux/17 actions, parité du composant et navigateur restent historiques sur 315 / `bb7…`. Réconciliation des publications réelles 0.63/0.64/0.65, portes finales, coût et publication 10C ouverts ; 0.66 seulement proposée. Travail courant sans verrou global. |
+| 10D | `temporal_selection` / `v6.temporal_selection.choose` | **Préparation statique terminée**, [contrats et premier changement définis](lot10d-temporal-selection-next-step.md). Créer le générateur de référence indépendante pour les mesures, les primitives consommées et la sélection ; puis porter/raccorder le propriétaire. Aucune entrée supplémentaire ni exécution 10D revendiquée. |
 | 10E | `invited_endpoints` / `v6.invited_endpoints.choose` | À réaliser |
 
 **Dépendances :** observations, commandes, retours de séquence, méthodes revalidées et contrats communs. La [lecture des dépendances et contrats des cinq sous-lots](lot10-source-dependencies.md) identifie les primitives V5 effectivement consommées, les choix distincts et les conditions source de sauvegarde. La ressemblance des noms n'établit pas une dépendance : `window_question` n'attend pas automatiquement `framed_window_composition`.
@@ -1787,12 +1421,12 @@ Avant modification, mesurer continuation connue, nouvelle décision, acquisition
 | Lot 4C / FacetExamples, Site 92/native 0.57 | **Livré en privé ; fonctionnel intégré validé et coût accepté** | 4 838/4 838 tests dans 121 fichiers, 5/5 contrôles, dix rejeux/170 comparaisons. ISOS navigateur trois niveaux/douze actions/douze plans ; 48 appels et 36 restaurations source sans différence ; 60 ablations. LKEY partiel 157/157 et horloge ISOS 1 259,938444409 s conservés. Coût STCK −1,833520 % / SMLP −0,156096 %, revue 7 630/7 630 ; diagnostic 15/16 et p95 conservés. |
 | Lot 5B / AddressedMaterial, Site 94 / native 0.58 | **Livré en privé, validé techniquement et au coût global** | 4 900/4 900 tests dans 125 fichiers, cinq contrôles, dix rejeux/170 comparaisons ; TRIA trois niveaux/17 actions/17 plans ; comparaisons communes 169/164/199 et préservation 835. Stock commun borné à 8/17 étapes. Global STCK +3,780905 % / SMLP −1,556219 %, revue 11 865/11 865, diagnostics 14/16 et refus strict conservés. |
 | Lot 6A / PreviewPacking, Site 96 / native 0.60 | **Livré en privé, validation et coût global acceptés** | 4 795/4 795 tests dans 126 fichiers, cinq contrôles, 187/187 comparaisons sur onze rapports ; KATA et navigateur trois niveaux/33 actions/14 plans ; 1 288 vérifications de composant, 174 événements source sans différence. Global STCK +6,094357 % / SMLP +3,262812 %, revue 17 890 contrôles, cinq dépassements de phase acceptés. Registre 63/76, 13 entrées restantes ; prochaine capacité 6B. |
-| Lots 4 à 10 | **12 entrées restantes dans la publication 0.62 ; neuf dans le jalon composé provisoire 8A** | Le [bilan composé](lot8a-evidence/integration-provisional-063-064-01/validation-summary.json) atteste 5 606 tests dans 145 fichiers et 5/5 contrôles ; qualification finale, coût et publication attendent les véritables 0.63/0.64 et les preuves déclarées. Le [jalon antérieur](lot8a-evidence/development/validation-summary.json) conserve 5 422/138 et 11 entrées restantes. 5C, 6B et 10C poursuivent leurs qualifications ; 8B, 6C/6D, le lot 9 et la consolidation 11 restent ouverts dans le [registre](v6-entry-point-progress.json). |
+| Lots 4 à 10 | **12 entrées restantes dans la publication 0.62 ; 11 dans le jalon de développement 8A sur Site 103 ; huit dans la composition 10C qualifiée fonctionnellement** | 8A conserve ses preuves propres. 10C passe 1 767 tests formels, cinq contrôles, dix rejeux/170 plus KATA/17 et l’intégrité ; coût et publication encore ouverts. 10D est préparé et avance sans attente des publications. 5C et 6B continuent dans leurs fils ; 8B, 6C/6D, le lot 9 et la consolidation 11 restent ouverts. Les compteurs publiés et candidats demeurent distincts. |
 
-Les lots **1, 2A, 2B, 2C, 3A, 3B, 3E, 3F, 3H, 3I, 4A, 7A, 5A, 4B, 7B, 10A, 4C, 5B et 6A sont livrés ou clôturés dans leurs périmètres annoncés** ; le complément 7/0.61 et 10B/0.62 sont également livrés avec leurs réserves explicites. Le [prédécesseur désormais publié et réconcilié](lot8a-evidence/integration-published-063-01/summary.json) est **Site 104 / native 0.63**, avec 65/76 entrées raccordées ; son coût officiel reste non mesuré et non accepté. Le [jalon composé provisoire 8A](lot8a-evidence/integration-provisional-063-064-01/validation-summary.json) atteint **67/76 entrées, 5 606 tests et cinq contrôles réussis** ; ses **209 composants vérifiés, 147 transferts partiels, 1 013 modules en attente et zéro module entièrement vérifié** ne clôturent aucune des six portes de migration complète. Son coût et sa publication restent ouverts. Les verdicts et réserves historiques sont conservés.
+Les lots **1, 2A, 2B, 2C, 3A, 3B, 3E, 3F, 3H, 3I, 4A, 7A, 5A, 4B, 7B, 10A, 4C, 5B et 6A sont livrés ou clôturés dans leurs périmètres annoncés** ; le complément 7/0.61 et 10B/0.62 sont également livrés avec leurs réserves explicites. Le **prédécesseur actuellement observé est Site 103 / native 0.62**, avec 64/76 entrées raccordées. Le **jalon 8A de développement**, avec 65/76 entrées et 5 422 tests passés, reste distinct de sa qualification et de sa publication finales. Les verdicts et réserves des jalons historiques ci-dessus sont conservés.
 
 L’audit historique du gel 7B publié recense **181 composants vérifiés**, **146 transferts partiels**, **1 042 modules en attente** et **aucun module déclaré complètement vérifié**, dans le périmètre de **1 369 modules Python et 417 fichiers de données**. Les six conditions de migration complète restent fausses. Ces catégories restent distinctes du compteur des 76 entrées, des 37 workflows et des contributions réellement observées en jeu. Les lots 3 et 7 comptent zéro entrée ouverte au registre, sans effacer leurs réserves fonctionnelles ni établir la parité de tout l’appelant. Le prédécesseur 10A publié dans Sites 90–91 conserve **60/76 entrées, 16 ouvertes, 185 composants vérifiés, 147 transferts partiels et 1 037 modules en attente** ; son coût global contre Site 88/native 0.55 est accepté. La publication 4C/Site 92/native 0.57 atteint **61/76 entrées, 15 ouvertes, 189 composants vérifiés, 147 transferts partiels et 1 033 modules en attente**, avec zéro module entièrement vérifié et six portes globales toujours fausses. Le coût global 4C est accepté séparément pour 2/2 jeux et sa publication privée est confirmée ; la clôture documentaire conserve ces mêmes entrées.
 
-**La suite de livraison reste 6B/0.64 → 8A/0.65**, le véritable 5C/0.63 étant maintenant publié dans Site 104 et intégré à cette branche. Les [preuves préparatoires 8A](lot8a-evidence/qualification-provisional-02/qualification-summary.json) conservent les trois propriétaires, les 11 régressions et les formes/graphes qualifiés ; le [bilan de réconciliation](lot8a-evidence/integration-published-063-01/summary.json) vérifie l’identité de tous les profils gelés après intégration documentaire. Restent le véritable 0.64, le renouvellement des qualifications affectées, le coût officiel 8A et sa publication après acceptation. **8B, 6C/6D, le lot 9, 10D/10E et la consolidation 11 restent ouverts**, avec 10C en développement parallèle. La publication prioritaire 0.63 ne vaut pas acceptation de son coût et ne dispense pas 8A de son critère. Les suivis Population, Reception, RootedLine, les sessions longues et HPDL partiel restent explicites ; LKEY demeure définitivement fermé.
+**La suite de publication qualifiée reste 5C/0.63 → 6B/0.64 → 8A/0.65 → 10C/0.66**, chaque gel final intégrant le prédécesseur réellement publié. 10B est livré dans Sites 102–103. La composition 10C passe sa suite formelle de 1 767 tests, cinq contrôles, dix rejeux/170 plus KATA/17 et l’intégrité, avec 68/76 entrées ; son coût officiel et sa publication restent ouverts. **Le développement, les tests fonctionnels, les commits et les pushs ne sont plus sérialisés par cette file ni par un verrou global.** La prochaine étape du lot 10 est l’oracle indépendant de TemporalSelection, dont la préparation est terminée. 8B, 6C/6D, le lot 9, 10E et la consolidation 11 restent ouverts. Les suivis et réserves historiques sont conservés ; LKEY demeure définitivement fermé.
 
 **Les horloges suivantes conservent leurs jalons historiques ; elles n'autorisent aucune remise à zéro.** Le contre-exemple SK48 et **1 732,64556 secondes restantes** sont conservés, sans remise à zéro. La cible CWSE non atteinte et ses **2 399,683865 secondes** restent consignées, sans nouvel essai sur ce gel. FOGW, VOIS, WEAV et CONN gardent leurs campagnes réussies et leurs horloges cumulées ; MIND ajoute sa réussite de trois niveaux avec **886,070349 secondes cumulées**. TRIA ajoute les trois niveaux de 4B avec **763,736664 secondes cumulées**, résolution initiale et QA finale incluses sans remise à zéro. La QA navigateur 10A porte ensuite le cumul TRIA à **895,795295 secondes**, sans remise à zéro ni preuve d’apport propre Axial. CRAF ajoute trois niveaux en 36 actions avec **1 646,100543 secondes cumulées** et **753,899457 secondes restantes**. LKEY conserve au jalon 7A **1 341,622742 secondes cumulées** et sa réserve L3 ; son suivi ultérieur maintient sa propre horloge cumulative, sans réinterpréter ce reçu. Le diagnostic WEAV du lot 5 reste distinct des rejeux bornés de 7A ; son budget épuisé reste inchangé dans 5B, sans nouvel essai réel. ISOS ajoute la validation fonctionnelle 4C et sa QA réelle de trois niveaux/douze actions ; son horloge reste à **1 259,938444409 secondes cumulées sur 2 400**, sans reset. La réserve de contribution FramedWindow demeure ouverte. Aucun de ces résultats ne clôt la parité complète de l’appelant ou la migration globale.

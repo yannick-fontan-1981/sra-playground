@@ -1,0 +1,42 @@
+{
+  "schema": "logos-engine.lot10c.formal-test-recovery-review.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-11T21:10:49.276814+00:00",
+  "receipt": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/validation/delta-tests-run.json",
+    "sha256": "44ba7bf9b2ef3494f5d8870b744b19b64d882a9b7de4f791bc7a1c5424e0bc8c",
+    "bytes": 188221
+  },
+  "unchangedVerifier": {
+    "path": "scripts/verify-native-delivery.py",
+    "sha256": "ca36a235e5da8aa8abd963aaa6a282d90217ed58a721bfdbba361527dd48409a",
+    "bytes": 26494
+  },
+  "nativeSourceDigest": "ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316",
+  "sourceAndTestInputsMatched": 753,
+  "testFiles": 56,
+  "counts": {
+    "tests": 1767,
+    "pass": 1767,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "excludedClosedCaseModules": [
+    "tests/v6-ranked-workshop-kernel.test.ts",
+    "tests/v6-ranked-workshop-reference.test.ts",
+    "tests/v6-symbol-transactions-kernel.test.ts",
+    "tests/v6-framed-transfer-reference.test.ts"
+  ],
+  "allFourExclusionsRespected": true,
+  "firstIncompleteAttempt": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional01/validation/delta-tests-run.json",
+    "sha256": "c3fcaa299c46569b77e60123517cd862b783128bf7ae456e237c33e8e1a18330",
+    "bytes": 188258
+  },
+  "firstAttemptAccepted": false,
+  "priorDevelopmentBatchesAddedToCounts": false,
+  "durationSeconds": 616.7189655019974,
+  "qualification": "The existing formal native-delta schema passed on exactly the declared56module scope. This actual monolithic execution is distinct from the earlier4development batches and600s incomplete attempt. Only this successful population is reported here."
+}

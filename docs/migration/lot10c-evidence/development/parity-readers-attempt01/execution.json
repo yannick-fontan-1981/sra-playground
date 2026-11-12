@@ -1,0 +1,27 @@
+{
+  "schema": "logos-engine.lot10c.synthetic-reader-test-execution.v1",
+  "startedAt": "2026-11-11T17:29:01.079649+00:00",
+  "completedAt": "2026-11-11T17:29:46.216345+00:00",
+  "elapsedSeconds": 45.13670393000211,
+  "command": [
+    "python3",
+    "-B",
+    "scripts/test-ordered-recruitment-parity-readers.py",
+    "--output-dir",
+    "/workspace/sites/sra-lot10c-20261111/.sites-checkout/docs/migration/lot10c-evidence/development/parity-readers-attempt01/results",
+    "--max-seconds",
+    "45"
+  ],
+  "status": "completed",
+  "exitCode": -14,
+  "syntheticOnly": true,
+  "gameHostRun": false,
+  "nativeAgentRun": false,
+  "actualCaseContractLoaded": false,
+  "coordination": "shared nonblocking performance.lock held for complete wrapper",
+  "raw": {
+    "path": "docs/migration/lot10c-evidence/development/parity-readers-attempt01/output.raw.txt",
+    "bytes": 1651,
+    "sha256": "0d6b07232b0802f1580e356cd0df9f69d1707a3b7fb65467c330bad4d256ac5f"
+  }
+}

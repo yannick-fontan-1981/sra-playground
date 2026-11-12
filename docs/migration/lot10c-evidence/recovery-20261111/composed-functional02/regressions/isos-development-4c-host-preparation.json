@@ -1,0 +1,101 @@
+{
+  "schema": "logos-engine.released-baseline-replay-preparation.v1",
+  "status": "passed",
+  "game": "ISOS",
+  "targetLevels": 3,
+  "expectedActions": 12,
+  "completePublicPackets": 13,
+  "baselineDecodedBytes": 33997685,
+  "baseline": {
+    "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-campaign.json.gz",
+    "sha256": "93e59ab1146d4eef7c944a0e1fc0ab7b0d539cc90a074abe424742be011eec37",
+    "bytes": 3027289
+  },
+  "trace": {
+    "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-public-trace.json.gz",
+    "sha256": "5b302279efb140d1c549d9650d434efb38fde0b8bc5809ab072de66159c8c329",
+    "bytes": 11183
+  },
+  "exactExpectationSha256": "fb80d92383e82429ba9a7df46f772ddbd6864393373e53a83e61814c57fc63ff",
+  "initialPublicPacketSha256": "f8006a829ecbca505f3f8e5a02cc57618c9a8718c2b310c50ab708f20ce0a2f9",
+  "packetStreamSha256": "a3806cfd9899e5c98d82f3ee992b8c9696eb2b77e9e9d685e3cf1300fbbe58cf",
+  "actions": [
+    {
+      "index": 1,
+      "commandSha256": "36c492229de0f96cc7e48fcb4b68d0dce50a97be4d918cf0a2c3f43fc965c30b",
+      "publicPacketSha256": "8ee5ce55e98be952335fb9322c03209ef7a02b14468416444407ccc9231ac644"
+    },
+    {
+      "index": 2,
+      "commandSha256": "36c492229de0f96cc7e48fcb4b68d0dce50a97be4d918cf0a2c3f43fc965c30b",
+      "publicPacketSha256": "e5ec6d3c9ed6e094a8437ef30c1f0e55660737626c0d285c2be86a8281a7ed92"
+    },
+    {
+      "index": 3,
+      "commandSha256": "9e599ab67c970560c80e26e30348291d2cc5d297e73aaaa50c8e517e09fd66c0",
+      "publicPacketSha256": "0a11f646a1014fd1702816e86dd65ff3143f2b75103276f9a0d32214d5a8e204"
+    },
+    {
+      "index": 4,
+      "commandSha256": "4a9eb78e2db865fdc7c73a2b16827ebd4c8f41d99b8890cd0797d8721062e477",
+      "publicPacketSha256": "ccd1f382e97230b13d80f62ef26533ec7940e43bbbe4779bd77e9eec4f1874c9"
+    },
+    {
+      "index": 5,
+      "commandSha256": "4a9eb78e2db865fdc7c73a2b16827ebd4c8f41d99b8890cd0797d8721062e477",
+      "publicPacketSha256": "a6af905d535076019a3361470e3dcf06670033c4bd772ca44f8e0d17ce3099a7"
+    },
+    {
+      "index": 6,
+      "commandSha256": "02e77f9a8476fd81ee611636acd7470df9024e70449b8d8bf4f1dd625d09fc2b",
+      "publicPacketSha256": "6b44c1742830cca2c01a8ea162dcebd1830267ae08db1e97a90ac5a6638985c9"
+    },
+    {
+      "index": 7,
+      "commandSha256": "bb106a1dfe0e8a55eb019d66b6d8b01797b05638c6174d80f96a46b23d20c908",
+      "publicPacketSha256": "0e497d2092074ebbec325930d71d783e0959745101f6590228c9afa95450fc34"
+    },
+    {
+      "index": 8,
+      "commandSha256": "36c492229de0f96cc7e48fcb4b68d0dce50a97be4d918cf0a2c3f43fc965c30b",
+      "publicPacketSha256": "9ebc64d2939182f1729c748b0da23238c3f286efeb1b5dcc786e01aa8ab87caa"
+    },
+    {
+      "index": 9,
+      "commandSha256": "36c492229de0f96cc7e48fcb4b68d0dce50a97be4d918cf0a2c3f43fc965c30b",
+      "publicPacketSha256": "c51d6d08bb93af975e6dc68d322f82cbbc56837e57388f9bcb98546926ec4fec"
+    },
+    {
+      "index": 10,
+      "commandSha256": "e65a4e46f46acb1765e1e78c1de8e28fade136c06f238e6822b8bf012357cc7e",
+      "publicPacketSha256": "121f3dfaa686cb93e9deccd8c18df65416c56342242058538501f93f18ab19a0"
+    },
+    {
+      "index": 11,
+      "commandSha256": "9e599ab67c970560c80e26e30348291d2cc5d297e73aaaa50c8e517e09fd66c0",
+      "publicPacketSha256": "d9f9e25313fdab50cee96ffc824cefbe9fb6ce092113cd51a87cd5cef993560a"
+    },
+    {
+      "index": 12,
+      "commandSha256": "13f6fdfd960bfa3aa1b50282e3abdd2bb4b52fbca545ad851edf43ccd48746b9",
+      "publicPacketSha256": "ccc484a161ecbb53a8beda0e05a183f253e73d8c1e08bdbc1229e79eb76edf54"
+    }
+  ],
+  "validation": "The unchanged historical host checks are performed for every command and complete packet hash before release. Only baseline game/target/assets, provenance and trace packets reach the unchanged harness.",
+  "memoryBeforeRelease": {
+    "rss": 355319808,
+    "heapTotal": 221065216,
+    "heapUsed": 147618832,
+    "external": 109923319,
+    "arrayBuffers": 38044563
+  },
+  "baselineRootCollectedBeforeHarnessImport": true,
+  "memoryAfterRelease": {
+    "rss": 224047104,
+    "heapTotal": 143970304,
+    "heapUsed": 8942664,
+    "external": 4098613,
+    "arrayBuffers": 212115
+  },
+  "preparationOnly": false
+}

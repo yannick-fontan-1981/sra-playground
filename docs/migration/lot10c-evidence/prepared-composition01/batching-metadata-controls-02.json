@@ -1,0 +1,153 @@
+{
+  "schema": "logos-engine.lot10c.development-batch-metadata-controls.v1",
+  "recordedAt": "2026-11-11T19:29:41.623501+00:00",
+  "passed": true,
+  "testCount": 12,
+  "controls": [
+    {
+      "name": "accept_complete_synthetic_metadata",
+      "passed": true,
+      "expectedRejection": null,
+      "observedError": null
+    },
+    {
+      "name": "reject_duplicate_partition_member",
+      "passed": true,
+      "expectedRejection": "disjoint",
+      "observedError": {
+        "type": "ValueError",
+        "message": "Batch partition must be disjoint and reproduce the full ordered scope exactly"
+      }
+    },
+    {
+      "name": "reject_missing_partition_batch",
+      "passed": true,
+      "expectedRejection": "four batches",
+      "observedError": {
+        "type": "ValueError",
+        "message": "Exactly four batches are required"
+      }
+    },
+    {
+      "name": "reject_changed_source_input",
+      "passed": true,
+      "expectedRejection": "Changed source, runner or scope",
+      "observedError": {
+        "type": "ValueError",
+        "message": "Changed source, runner or scope inputs between batches"
+      }
+    },
+    {
+      "name": "reject_failed_actual_batch",
+      "passed": true,
+      "expectedRejection": "Failed or incomplete",
+      "observedError": {
+        "type": "ValueError",
+        "message": "Failed or incomplete actual batch"
+      }
+    },
+    {
+      "name": "reject_missing_actual_receipt",
+      "passed": true,
+      "expectedRejection": "Four distinct",
+      "observedError": {
+        "type": "ValueError",
+        "message": "Four distinct actual batch receipts are required"
+      }
+    },
+    {
+      "name": "reject_duplicate_actual_receipt",
+      "passed": true,
+      "expectedRejection": "batch index or file coverage",
+      "observedError": {
+        "type": "ValueError",
+        "message": "Receipt batch index or file coverage differs"
+      }
+    },
+    {
+      "name": "reject_changed_runner_input",
+      "passed": true,
+      "expectedRejection": "Changed source, runner or scope",
+      "observedError": {
+        "type": "ValueError",
+        "message": "Changed source, runner or scope inputs between batches"
+      }
+    },
+    {
+      "name": "reject_skipped_or_false_tap_counts",
+      "passed": true,
+      "expectedRejection": "Declared counts differ",
+      "observedError": {
+        "type": "ValueError",
+        "message": "Declared counts differ from actual raw TAP"
+      }
+    },
+    {
+      "name": "reject_test_name_filtering",
+      "passed": true,
+      "expectedRejection": "planned Node command",
+      "observedError": {
+        "type": "ValueError",
+        "message": "Unexpected or filtered planned Node command"
+      }
+    },
+    {
+      "name": "reject_changed_retained_raw",
+      "passed": true,
+      "expectedRejection": "Changed retained synthetic bytes",
+      "observedError": {
+        "type": "ValueError",
+        "message": "Changed retained synthetic bytes"
+      }
+    },
+    {
+      "name": "reject_fourteen_file_whole_scope_claim",
+      "passed": true,
+      "expectedRejection": "cannot claim whole-scope",
+      "observedError": {
+        "type": "ValueError",
+        "message": "A batch cannot claim whole-scope or final-delivery execution"
+      }
+    }
+  ],
+  "inputsBefore": [
+    {
+      "path": "docs/migration/lot10c-evidence/test-development-batch-metadata.py",
+      "bytes": 9733,
+      "sha256": "8c005e4d4ed5c9c2c6004005763824e7d3c682ee82407e0de250a31ff6a6f327"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/review-test-batches.py",
+      "bytes": 18385,
+      "sha256": "ca0c7c3b32a0cde671fbdd9f575363e704988b96162b7f3a4123f5013c5886fb"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/run-release-checks.py",
+      "bytes": 21396,
+      "sha256": "fdbb1f797453233fdf20e4fe9bb50c76a614ebfb358c85026ca7d5b4958d61dd"
+    }
+  ],
+  "inputsAfter": [
+    {
+      "path": "docs/migration/lot10c-evidence/test-development-batch-metadata.py",
+      "bytes": 9733,
+      "sha256": "8c005e4d4ed5c9c2c6004005763824e7d3c682ee82407e0de250a31ff6a6f327"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/review-test-batches.py",
+      "bytes": 18385,
+      "sha256": "ca0c7c3b32a0cde671fbdd9f575363e704988b96162b7f3a4123f5013c5886fb"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/run-release-checks.py",
+      "bytes": 21396,
+      "sha256": "fdbb1f797453233fdf20e4fe9bb50c76a614ebfb358c85026ca7d5b4958d61dd"
+    }
+  ],
+  "inputsUnchanged": true,
+  "syntheticMetadataOnly": true,
+  "nativeTestProcessesExecuted": 0,
+  "gameProcessesExecuted": 0,
+  "actualDevelopmentBatchesExecuted": 0,
+  "qualification": "In-memory artificial receipt/TAP metadata exercises rejection logic only. No synthetic batch is presented as an actual native execution or final delivery gate."
+}

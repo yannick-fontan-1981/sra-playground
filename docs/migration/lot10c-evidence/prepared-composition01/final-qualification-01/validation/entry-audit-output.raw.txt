@@ -1,0 +1,1 @@
+{"connected":68,"declared":76,"percent":89.5,"groups":[{"id":"goal_access","connected":12,"declared":12},{"id":"window_constraints","connected":21,"declared":21},{"id":"surface","connected":10,"declared":10},{"id":"factored_material_return","connected":25,"declared":33}],"fullV6Parity":false}

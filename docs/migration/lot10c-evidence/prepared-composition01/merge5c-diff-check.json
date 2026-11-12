@@ -1,0 +1,90 @@
+{
+  "schema": "lot10c.prepared-import-whitespace-review.v1",
+  "at": "2026-11-11T19:17:24.758515+00:00",
+  "originalExitCode": 2,
+  "originalDiagnostics": [
+    "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/check-cost-static-inputs.py.diff:12: trailing whitespace.",
+    "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/check-cost-static-inputs.py.diff:33: trailing whitespace.",
+    "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/check-cost-static-inputs.py.diff:34: trailing whitespace.",
+    "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/check-cost-static-inputs.py.diff:100: trailing whitespace.",
+    "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/finalize-owner-cost-contract.py.diff:9: trailing whitespace.",
+    "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/finalize-owner-cost-contract.py.diff:16: trailing whitespace.",
+    "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/finalize-owner-cost-contract.py.diff:89: trailing whitespace.",
+    "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/finalize-owner-cost-contract.py.diff:90: trailing whitespace.",
+    "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/finalize-owner-cost-contract.py.diff:93: trailing whitespace.",
+    "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/finalize-owner-cost-contract.py.diff:94: trailing whitespace.",
+    "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/finalize-owner-cost-contract.py.diff:117: trailing whitespace.",
+    "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/finalize-owner-cost-contract.py.diff:118: trailing whitespace.",
+    "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/finalize-owner-cost-contract.py.diff:158: trailing whitespace.",
+    "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/finalize-owner-cost-contract.py.diff:274: trailing whitespace.",
+    "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/prepare-cost-protocol.py.diff:4: trailing whitespace.",
+    "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/prepare-cost-protocol.py.diff:23: trailing whitespace.",
+    "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/prepare-cost-protocol.py.diff:39: trailing whitespace.",
+    "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/prepare-cost-protocol.py.diff:86: trailing whitespace.",
+    "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/prepare-cost-protocol.py.diff:100: trailing whitespace.",
+    "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/review-owner-costs.py.diff:4: trailing whitespace.",
+    "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/review-owner-costs.py.diff:5: trailing whitespace.",
+    "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/review-owner-costs.py.diff:25: trailing whitespace.",
+    "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/review-owner-costs.py.diff:26: trailing whitespace.",
+    "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/review-owner-costs.py.diff:214: trailing whitespace.",
+    "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-02/check-cost-static-inputs.py.diff:36: trailing whitespace.",
+    "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-02/finalize-owner-cost-contract.py.diff:36: trailing whitespace.",
+    "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-02/finalize-owner-cost-contract.py.diff:37: trailing whitespace.",
+    "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-02/review-owner-costs.py.diff:36: trailing whitespace."
+  ],
+  "preservedPatchArtifacts": [
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/check-cost-static-inputs.py.diff",
+      "blob": "2d51fb1f72cc0c8b3e428c22d70857ed98dc15e0",
+      "unchangedFromPrepared5c": true
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/finalize-owner-cost-contract.py.diff",
+      "blob": "3f379723dd862fe7c57699d872e75c8096c837e7",
+      "unchangedFromPrepared5c": true
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/prepare-cost-protocol.py.diff",
+      "blob": "9788d32300dc64d21a7d9c0c5d15edb8d3000efe",
+      "unchangedFromPrepared5c": true
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/review-owner-costs.py.diff",
+      "blob": "8c2f422e01319936ab73fe0058b08516a5d161ed",
+      "unchangedFromPrepared5c": true
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-02/check-cost-static-inputs.py.diff",
+      "blob": "6023cb9c1d35064785edc41eea6432420791f55f",
+      "unchangedFromPrepared5c": true
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-02/finalize-owner-cost-contract.py.diff",
+      "blob": "686e191c41796da7eb4d7a446ea485f486dd5209",
+      "unchangedFromPrepared5c": true
+    },
+    {
+      "path": "docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-02/review-owner-costs.py.diff",
+      "blob": "422d73e236838ae4d5030a2a61a3b1e99a01bd72",
+      "unchangedFromPrepared5c": true
+    }
+  ],
+  "scopedCommand": [
+    "git",
+    "diff",
+    "--cached",
+    "--check",
+    "--",
+    ".",
+    ":(exclude)*.raw.txt",
+    ":(exclude)docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/check-cost-static-inputs.py.diff",
+    ":(exclude)docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/finalize-owner-cost-contract.py.diff",
+    ":(exclude)docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/prepare-cost-protocol.py.diff",
+    ":(exclude)docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-01/review-owner-costs.py.diff",
+    ":(exclude)docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-02/check-cost-static-inputs.py.diff",
+    ":(exclude)docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-02/finalize-owner-cost-contract.py.diff",
+    ":(exclude)docs/migration/lot5c-evidence/recovery/coordination/cost-tools-review-02/review-owner-costs.py.diff"
+  ],
+  "scopedExitCode": 0,
+  "qualification": "Whitespace diagnostics concern unchanged retained unified-diff artifacts from5C, whose context marker is significant. Those exact artifacts remain byte-identical. Source files and all other imported changes remain in the scoped check; no global gate script is weakened."
+}

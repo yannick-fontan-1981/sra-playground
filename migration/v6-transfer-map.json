@@ -552,73 +552,6 @@
     },
     {
       "sources": [
-        "agents/yf_arc3_v6/morphology_policy/strategy.py"
-      ],
-      "targets": [
-        "src/logos-engine/v6-native-runtime.ts",
-        "src/logos-engine/v6-learned-preparation.ts",
-        "src/logos-engine/v6-reactive-contact.ts",
-        "src/logos-engine/v6-ordered-reaction.ts",
-        "src/logos-engine/v6-topological-recolor.ts",
-        "src/logos-engine/v6-motion-contrast.ts",
-        "src/logos-engine/v6-native-caller.ts",
-        "src/logos-engine/v6-morphology-family.ts",
-        "src/logos-engine/v6-contextual-translation.ts",
-        "src/logos-engine/v6-ranked-workshop.ts",
-        "src/logos-engine/v6-motif-access.ts",
-        "src/logos-engine/v6-motif-access-geometry.ts"
-      ],
-      "status": "partial_transfer",
-      "proof": [
-        "tests/v6-native-runtime.test.ts",
-        "tests/v6-program-priority.test.ts",
-        "tests/fixtures/v6-program-priority-public.json.gz",
-        "docs/migration/native-campaigns-v39/diagnostics/stck-original-caller-collision.json",
-        "tests/v6-learned-preparation-priority.test.ts",
-        "docs/migration/native-campaigns-v40/memo-three-levels.json",
-        "docs/migration/native-campaigns-v40/memo-v39-baseline.json",
-        "tests/v6-radial-port-integration.test.ts",
-        "tests/v6-program-control-discovery-integration.test.ts",
-        "scripts/replay-v6-original-public-caller.py",
-        "docs/migration/native-campaigns-v41/diagnostics/pipe-original-caller-collision.json",
-        "docs/migration/native-campaigns-v41/diagnostics/pipe-original-caller-oracle.json.gz",
-        "docs/migration/native-campaigns-v41/diagnostics/pipe-original-caller-report.json.gz",
-        "scripts/export-v6-reactive-contact-family-reference.py",
-        "tests/fixtures/v6-reactive-contact-family-reference.json.gz",
-        "tests/v6-reactive-contact-family-reference.test.ts",
-        "tests/v6-reactive-contact-kernel.test.ts",
-        "docs/migration/v54-reactive-contact-and-declared-selection.md",
-        "docs/migration/v6-entry-point-progress.json",
-        "scripts/export-v6-ordered-reaction-family-reference.py",
-        "tests/fixtures/v6-ordered-reaction-family-reference.json.gz",
-        "tests/v6-ordered-reaction-family-reference.test.ts",
-        "tests/v6-ordered-reaction-kernel.test.ts",
-        "docs/migration/v55-ordered-reactions-and-public-animations.md",
-        "scripts/export-v6-topological-recolor-reference.py",
-        "tests/fixtures/v6-topological-recolor-reference.json.gz",
-        "tests/v6-topological-recolor-reference.test.ts",
-        "tests/v6-topological-recolor-kernel.test.ts",
-        "scripts/export-v6-motion-contrast-reference.py",
-        "tests/fixtures/v6-motion-contrast-reference.json.gz",
-        "tests/v6-motion-contrast.test.ts",
-        "tests/v6-motion-caller-integration.test.ts",
-        "scripts/export-v6-control-attention-reference.py",
-        "tests/fixtures/v6-control-attention-reference.json.gz",
-        "tests/v6-control-attention-reference.test.ts",
-        "tests/v6-control-attention-kernel.test.ts",
-        "docs/migration/lot2b-control-attention-lineage.md",
-        "tests/v6-ranked-workshop-kernel.test.ts",
-        "docs/migration/lot7a-ranked-workshop-lineage.md",
-        "tests/v6-axial-question-kernel.test.ts",
-        "docs/migration/lot10a-axial-question-lineage.md",
-        "tests/v6-motif-access-kernel.test.ts",
-        "docs/migration/lot8a-evidence/development/component-proof.json",
-        "docs/migration/lot8a-motif-access-lineage.md"
-      ],
-      "notes": "Sixteen outer strategy groups and implemented subgroup ordering are retained. All remaining providers, parent returns and cross-family interactions remain pending. The v39 retained_program_preparation_before_unlearned_invitation extension is broadened in v40 to retained_learned_preparation_before_unlearned_invitation. A read-only acquired witness and current guard must belong to the first non-null window candidate in declared order; an earlier unsupported candidate cannot borrow a later model. Unsupported providers are not speculatively crossed. The candidate remains subject to ordinary selection and WHY/ACT, and the receipt identifies its actual source family_state revision. Declared list order is preserved, but these native coordination extensions deliberately change selection relative to the original Python caller; no complete original selection parity is claimed. v41 registers radial_port_composition in its real window position and retains the same shared provider. Acquired radial preparation, measured_program_control_discovery and stationary_unlearned_contact_refusal_scope remain explicitly native coordination/inquiry behavior with ordinary authorization; they do not make this partial strategy mapping complete. The original full caller seven-command replay diagnoses its own invitation collision rather than proving native selection parity. V54 registers reactive_contact_continuation and reactive_contact at their two exact material positions through one owner. The early entry preserves the original pre-call retained-dependency gate, allowed kinds and all four declared conditions; the later entry retains ordinary source proposal semantics. This adds two connected declarations (47/76, 61.8%) and no native priority rule. Other providers and whole strategic caller parity remain pending. V55 registers ordered_reaction exactly after reactive_contact in the material list, through one public_ordered_reaction owner. The original cover/protected/continue/probe priority stays local to that family. The regenerated four-list audit records 48/76 (63.2%); no native priority rule or cold control acquisition is added. Full strategy selection and pending providers remain outside this partial mapping. V57 connects topological_recolor at material position 18, after observed_framed_transfer and before axial_question, through the single public_topological_recolor owner. The declared connection count is now 50/76 (65.8%), including 17/33 material entries; regenerated entry-point attestation is tracked separately from these bounded component proofs. No priority rule or compiled entry is added. The current information-goal caller assembles points, displays and motion contrast in original order, then elects using only an existing measured meter forecast; it performs no planning-time meter observation. The full MorphologyAdapter, attention-parent/control-target providers, pending declared families and complete strategic selection closure remain pending. Lot 2B supersedes the parent/control gap described at the earlier milestones: the current morphology decision is forwarded within one selection cycle, including retained decisions without a route. attention_parent_return and acquire_control_for_target occupy their unchanged DRM positions. The caller preserves the three source experiments, recalled-axis and focus ordering, both information-goal deferrals, shared control questions and single-use attention returns. The original strategy-consumer oracle has explicit morphology/frontier boundary doubles; a separate real factory/WHY-ACT test acquires control from public pixels with initially empty knowledge. The bounded morphology producer refusal remains authoritative outside its transferred domain. Station/entry continuation and all other incomplete families remain open; full strategic parity is not claimed. Lot7A registers observed_ranked_workshop at its declared material position through a distinct public_ranked_workshop owner. Foreign actual returns acquire its contrasts after shared-series feedback; selected returns are excluded from the passive pass. Source observed_ranked_workshop_state remains distinct from the atomic native checkpoint. Cold factory tests establish passive activation, source callbacks, OP18/29/30/31, rejection and portable revalidation without seeding learned state. Whole-caller selection parity remains partial; real LKEY L3 is preempted before workshop evaluation. Lot10A connects axial_question after topological_recolor in the unchanged DRM material order. Its unique owner acquires each return exactly once, using the native current-epoch packet adapter; foreign returns may attest selection but never a rotation law. Source reasoning state persists only when selection, rotations or portable methods exist, while the native owner checkpoint remains a separate complete envelope. Compiled workflows and full caller parity remain separate metrics. Lot8A connects motif_conditioned_access through one motif_access owner in its unchanged material position, with source-simple wrapper semantics and selected-only acquisition. The source observed-control-interface exclusion applies only to the final SymmetricField fallback. Exact published0.62 Window/currentExecution behavior remains preserved. Current development coverage is65/76 on Site103 plus8A; final integration after actual0.63/0.64 and full strategic parity remain open."
-    },
-    {
-      "sources": [
         "agents/yf_arc3_v6/laya_proto/target_method.py"
       ],
       "targets": [
@@ -5039,6 +4972,132 @@
     },
     {
       "sources": [
+        "agents/yf_arc3_v6/morphology_policy/ordered_recruitment/geometry.py",
+        "agents/yf_arc3_v6/morphology_policy/ordered_recruitment/projection.py",
+        "agents/yf_arc3_v6/morphology_policy/ordered_recruitment/policy.py",
+        "agents/yf_arc3_v6/morphology_policy/ordered_recruitment/family.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-ordered-recruitment-geometry.ts",
+        "src/logos-engine/v6-ordered-recruitment-projection.ts",
+        "src/logos-engine/v6-ordered-recruitment-policy.ts",
+        "src/logos-engine/v6-ordered-recruitment.ts",
+        "src/logos-engine/v5-ordered-front-reduction.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-ordered-recruitment-reference.py",
+        "tests/fixtures/v6-ordered-recruitment-reference.json.gz",
+        "tests/v6-ordered-recruitment-reference.test.ts",
+        "tests/v6-ordered-recruitment-kernel.test.ts",
+        "docs/migration/lot10c-ordered-recruitment-lineage.md"
+      ],
+      "notes": "Lot10C independent original-source oracle: 173 contracts compare complete geometry/projections, policy/SRC, all seven source fields and the consumed actual V5 ordered-front reducer. Four cold common-kernel tests acquire a real foreign contrast, execute the actual SRC callback and OP18/WHY-ACT, reconcile one selected return and restore its continuation. Active events preserve the original window_constraint fallback; passive events use recruitment_event. Source methods/portable/attempts persistence differs from the complete checkpoint. Cooperative incomplete-search refusal and the portable safe-integer domain are named native adaptations. This is bounded component verification, not an official RECR success, final integrated delivery or full caller parity."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/morphology_policy/ordered_recruitment/__init__.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-ordered-recruitment.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "tests/v6-ordered-recruitment-reference.test.ts",
+        "tests/v6-ordered-recruitment-kernel.test.ts",
+        "docs/migration/lot10c-ordered-recruitment-lineage.md"
+      ],
+      "notes": "The pinned original initializer is empty. Cold common tests execute native imports and register one actual owner at the declared source entry."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/morphology_policy/ordered_recruitment/recruitment.drm",
+        "agents/yf_arc3_v6/morphology_policy/ordered_recruitment/recruitment.src"
+      ],
+      "targets": [
+        "src/logos-engine/v6-ordered-recruitment-policy.ts",
+        "src/logos-engine/v6/programs.json"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-ordered-recruitment-reference.py",
+        "tests/fixtures/v6-ordered-recruitment-reference.json.gz",
+        "tests/v6-ordered-recruitment-reference.test.ts",
+        "tests/v6-ordered-recruitment-kernel.test.ts",
+        "docs/migration/lot10c-ordered-recruitment-lineage.md"
+      ],
+      "notes": "The previously compiled v6.ordered_recruitment.choose workflow now executes recruitment.select through the authoritative common registry. Source priority, cost, negative survivors and enumeration order remain exact. Compilation and actual invocation remain distinct metrics."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/morphology_policy/strategy.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-native-runtime.ts",
+        "src/logos-engine/v6-learned-preparation.ts",
+        "src/logos-engine/v6-reactive-contact.ts",
+        "src/logos-engine/v6-ordered-reaction.ts",
+        "src/logos-engine/v6-topological-recolor.ts",
+        "src/logos-engine/v6-motion-contrast.ts",
+        "src/logos-engine/v6-native-caller.ts",
+        "src/logos-engine/v6-morphology-family.ts",
+        "src/logos-engine/v6-contextual-translation.ts",
+        "src/logos-engine/v6-ranked-workshop.ts",
+        "src/logos-engine/v6-motif-access.ts",
+        "src/logos-engine/v6-motif-access-geometry.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "tests/v6-native-runtime.test.ts",
+        "tests/v6-program-priority.test.ts",
+        "tests/fixtures/v6-program-priority-public.json.gz",
+        "docs/migration/native-campaigns-v39/diagnostics/stck-original-caller-collision.json",
+        "tests/v6-learned-preparation-priority.test.ts",
+        "docs/migration/native-campaigns-v40/memo-three-levels.json",
+        "docs/migration/native-campaigns-v40/memo-v39-baseline.json",
+        "tests/v6-radial-port-integration.test.ts",
+        "tests/v6-program-control-discovery-integration.test.ts",
+        "scripts/replay-v6-original-public-caller.py",
+        "docs/migration/native-campaigns-v41/diagnostics/pipe-original-caller-collision.json",
+        "docs/migration/native-campaigns-v41/diagnostics/pipe-original-caller-oracle.json.gz",
+        "docs/migration/native-campaigns-v41/diagnostics/pipe-original-caller-report.json.gz",
+        "scripts/export-v6-reactive-contact-family-reference.py",
+        "tests/fixtures/v6-reactive-contact-family-reference.json.gz",
+        "tests/v6-reactive-contact-family-reference.test.ts",
+        "tests/v6-reactive-contact-kernel.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md",
+        "docs/migration/v6-entry-point-progress.json",
+        "scripts/export-v6-ordered-reaction-family-reference.py",
+        "tests/fixtures/v6-ordered-reaction-family-reference.json.gz",
+        "tests/v6-ordered-reaction-family-reference.test.ts",
+        "tests/v6-ordered-reaction-kernel.test.ts",
+        "docs/migration/v55-ordered-reactions-and-public-animations.md",
+        "scripts/export-v6-topological-recolor-reference.py",
+        "tests/fixtures/v6-topological-recolor-reference.json.gz",
+        "tests/v6-topological-recolor-reference.test.ts",
+        "tests/v6-topological-recolor-kernel.test.ts",
+        "scripts/export-v6-motion-contrast-reference.py",
+        "tests/fixtures/v6-motion-contrast-reference.json.gz",
+        "tests/v6-motion-contrast.test.ts",
+        "tests/v6-motion-caller-integration.test.ts",
+        "scripts/export-v6-control-attention-reference.py",
+        "tests/fixtures/v6-control-attention-reference.json.gz",
+        "tests/v6-control-attention-reference.test.ts",
+        "tests/v6-control-attention-kernel.test.ts",
+        "docs/migration/lot2b-control-attention-lineage.md",
+        "tests/v6-ranked-workshop-kernel.test.ts",
+        "docs/migration/lot7a-ranked-workshop-lineage.md",
+        "tests/v6-axial-question-kernel.test.ts",
+        "docs/migration/lot10a-axial-question-lineage.md",
+        "tests/v6-motif-access-kernel.test.ts",
+        "docs/migration/lot8a-evidence/development/component-proof.json",
+        "docs/migration/lot8a-motif-access-lineage.md"
+      ],
+      "notes": "Sixteen outer strategy groups and implemented subgroup ordering are retained. All remaining providers, parent returns and cross-family interactions remain pending. The v39 retained_program_preparation_before_unlearned_invitation extension is broadened in v40 to retained_learned_preparation_before_unlearned_invitation. A read-only acquired witness and current guard must belong to the first non-null window candidate in declared order; an earlier unsupported candidate cannot borrow a later model. Unsupported providers are not speculatively crossed. The candidate remains subject to ordinary selection and WHY/ACT, and the receipt identifies its actual source family_state revision. Declared list order is preserved, but these native coordination extensions deliberately change selection relative to the original Python caller; no complete original selection parity is claimed. v41 registers radial_port_composition in its real window position and retains the same shared provider. Acquired radial preparation, measured_program_control_discovery and stationary_unlearned_contact_refusal_scope remain explicitly native coordination/inquiry behavior with ordinary authorization; they do not make this partial strategy mapping complete. The original full caller seven-command replay diagnoses its own invitation collision rather than proving native selection parity. V54 registers reactive_contact_continuation and reactive_contact at their two exact material positions through one owner. The early entry preserves the original pre-call retained-dependency gate, allowed kinds and all four declared conditions; the later entry retains ordinary source proposal semantics. This adds two connected declarations (47/76, 61.8%) and no native priority rule. Other providers and whole strategic caller parity remain pending. V55 registers ordered_reaction exactly after reactive_contact in the material list, through one public_ordered_reaction owner. The original cover/protected/continue/probe priority stays local to that family. The regenerated four-list audit records 48/76 (63.2%); no native priority rule or cold control acquisition is added. Full strategy selection and pending providers remain outside this partial mapping. V57 connects topological_recolor at material position 18, after observed_framed_transfer and before axial_question, through the single public_topological_recolor owner. The declared connection count is now 50/76 (65.8%), including 17/33 material entries; regenerated entry-point attestation is tracked separately from these bounded component proofs. No priority rule or compiled entry is added. The current information-goal caller assembles points, displays and motion contrast in original order, then elects using only an existing measured meter forecast; it performs no planning-time meter observation. The full MorphologyAdapter, attention-parent/control-target providers, pending declared families and complete strategic selection closure remain pending. Lot 2B supersedes the parent/control gap described at the earlier milestones: the current morphology decision is forwarded within one selection cycle, including retained decisions without a route. attention_parent_return and acquire_control_for_target occupy their unchanged DRM positions. The caller preserves the three source experiments, recalled-axis and focus ordering, both information-goal deferrals, shared control questions and single-use attention returns. The original strategy-consumer oracle has explicit morphology/frontier boundary doubles; a separate real factory/WHY-ACT test acquires control from public pixels with initially empty knowledge. The bounded morphology producer refusal remains authoritative outside its transferred domain. Station/entry continuation and all other incomplete families remain open; full strategic parity is not claimed. Lot7A registers observed_ranked_workshop at its declared material position through a distinct public_ranked_workshop owner. Foreign actual returns acquire its contrasts after shared-series feedback; selected returns are excluded from the passive pass. Source observed_ranked_workshop_state remains distinct from the atomic native checkpoint. Cold factory tests establish passive activation, source callbacks, OP18/29/30/31, rejection and portable revalidation without seeding learned state. Whole-caller selection parity remains partial; real LKEY L3 is preempted before workshop evaluation. Lot10A connects axial_question after topological_recolor in the unchanged DRM material order. Its unique owner acquires each return exactly once, using the native current-epoch packet adapter; foreign returns may attest selection but never a rotation law. Source reasoning state persists only when selection, rotations or portable methods exist, while the native owner checkpoint remains a separate complete envelope. Compiled workflows and full caller parity remain separate metrics. Lot8A connects motif_conditioned_access through one motif_access owner in its unchanged material position, with source-simple wrapper semantics and selected-only acquisition. The source observed-control-interface exclusion applies only to the final SymmetricField fallback. Exact published0.62 Window/currentExecution behavior remains preserved. Current development coverage is65/76 on Site103 plus8A; final integration after actual0.63/0.64 and full strategic parity remain open."
+    },
+    {
+      "sources": [
         "agents/yf_arc3_v6/laya_proto/common_motif_access.py"
       ],
       "targets": [
@@ -5136,7 +5195,9 @@
     "Cold temporal chains demonstrate calibrated, guarded key prefixes of up to min(16, remaining), contrasted effects and subsequent component decisions. The separate key/click/key controller proof uses a declared synthetic family and is not a temporal click-policy transfer. A component source match, a legacy guard component or a present runtime registration does not certify complete production-priority selection, WHY/ACT authority or contribution to a real game. The 5B addressed-material and 5C object-binding entries remain separate and open.",
     "The portable native constructor initializes local fields eagerly, whereas the Python constructor initially holds only prior and the consumed boundary immediately calls reset_epoch. Direct from_boundary cases therefore compare prior; actual cold boundaries compare the full reset/acquisition state. Portable templates retain conditional source references without old-epoch raster lists. Native safe-integer and uint8 public-raster contracts do not claim arbitrary Python numeric or malformed-input coercion equivalence.",
     "No new game, live WEAV attempt, official cost decision or publication result is established by these mappings. The separate WEAV diagnostic retains its exhausted cumulative case clock and unmet six-level target. Common-loop contribution, merged-source functional gates, the predeclared global cost policy, final integrity and publication remain parent-owned evidence to be reviewed before any 5A closure.",
-    "Lot5C recovery reconstructs observed_object_binding from the pinned original with a single registered owner and shared caller attention. Fresh component proofs are retained under docs/migration/lot5c-evidence/recovery; lost historical5C evidence is not reused. Seven common scenarios passed on the first reconstructed runtime; the independent original replay and the subsequently added active-level deadline proof remain separately qualified. Publication, final integrated gates and official costs are still open. All six complete-migration gates remain false."
+    "Lot10C connects ordered_recruitment at its original material-list position after window_question, through one public_ordered_recruitment owner. Source component and cold common-loop proofs are complete in their declared synthetic domains. Actual game contribution, final integrated delivery, costs and full strategic-caller parity are separate evidence and are not inferred from these mappings.",
+    "Lot5C recovery reconstructs observed_object_binding from the pinned original with a single registered owner and shared caller attention. Fresh component proofs are retained under docs/migration/lot5c-evidence/recovery; lost historical5C evidence is not reused. Seven common scenarios passed on the first reconstructed runtime; the independent original replay and the subsequently added active-level deadline proof remain separately qualified. Publication, final integrated gates and official costs are still open. All six complete-migration gates remain false.",
+    "The prospective 5C+6B+8A+10C source union preserves all four lots original component-proof provenance. Aggregate counters are a static merge reconciliation and remain provisional until final composed-source audits. No new runtime test, official cost or publication result is established by this merge."
   ],
   "completionGates": {
     "allRequiredCapabilitiesTransferred": false,

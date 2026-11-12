@@ -1,0 +1,39 @@
+{
+  "schema": "logos-engine.lot10c.verbatim-output-whitespace-review.v1",
+  "recordedAt": "2026-11-11T21:28:34.376153+00:00",
+  "initialCommand": [
+    "git",
+    "diff",
+    "--cached",
+    "--check"
+  ],
+  "initialExitCode": 2,
+  "findings": [
+    {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional01/validation/build-output.raw.txt",
+      "line": 57,
+      "finding": "trailing whitespace in original Vite reporter output"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional01/validation/typecheck-output.raw.txt",
+      "line": 5,
+      "finding": "original compiler stdout has a blank final line"
+    }
+  ],
+  "rawOutputsModified": false,
+  "rawOutputHashes": {
+    "docs/migration/lot10c-evidence/recovery-20261111/composed-functional01/validation/build-output.raw.txt": "07b64a473d5bd26ca681a1e3534a19edfd88d32fd16c3d4441104b81129c005f",
+    "docs/migration/lot10c-evidence/recovery-20261111/composed-functional01/validation/typecheck-output.raw.txt": "617dc12a2c337d93b91e07bef62eae59b1abe157b737d909052c3e9d2db0d09d"
+  },
+  "followupCommand": [
+    "git",
+    "diff",
+    "--cached",
+    "--check",
+    "--",
+    ".",
+    ":(exclude)docs/migration/lot10c-evidence/recovery-20261111/composed-functional01/validation/build-output.raw.txt",
+    ":(exclude)docs/migration/lot10c-evidence/recovery-20261111/composed-functional01/validation/typecheck-output.raw.txt"
+  ],
+  "qualification": "The exact captured raw outputs are preserved. Whitespace checking remains required for every other staged path; no runtime, generator, functional comparator or delivery verifier is changed."
+}

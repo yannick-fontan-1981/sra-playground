@@ -1,0 +1,1762 @@
+TAP version 13
+# Subtest: original DRM projection parity: scalar_types
+ok 1 - original DRM projection parity: scalar_types
+  ---
+  duration_ms: 4.846745
+  type: 'test'
+  ...
+# Subtest: original DRM projection parity: false_vs_zero
+ok 2 - original DRM projection parity: false_vs_zero
+  ---
+  duration_ms: 1.236296
+  type: 'test'
+  ...
+# Subtest: original DRM projection parity: missing_and_none
+ok 3 - original DRM projection parity: missing_and_none
+  ---
+  duration_ms: 2.362045
+  type: 'test'
+  ...
+# Subtest: original DRM projection parity: keyed_evidence
+ok 4 - original DRM projection parity: keyed_evidence
+  ---
+  duration_ms: 0.599826
+  type: 'test'
+  ...
+# Subtest: original DRM projection parity: sequence_affine_template_contract
+ok 5 - original DRM projection parity: sequence_affine_template_contract
+  ---
+  duration_ms: 1.838464
+  type: 'test'
+  ...
+# Subtest: original DRM projection parity: preserve_contains_all
+ok 6 - original DRM projection parity: preserve_contains_all
+  ---
+  duration_ms: 2.148162
+  type: 'test'
+  ...
+# Subtest: original DRM projection parity: contract_refuted
+ok 7 - original DRM projection parity: contract_refuted
+  ---
+  duration_ms: 2.660866
+  type: 'test'
+  ...
+# Subtest: original DRM projection parity: no_truncation
+ok 8 - original DRM projection parity: no_truncation
+  ---
+  duration_ms: 0.76839
+  type: 'test'
+  ...
+# Subtest: original DRM projection parity: affine_indivisible
+ok 9 - original DRM projection parity: affine_indivisible
+  ---
+  duration_ms: 0.430911
+  type: 'test'
+  ...
+# Subtest: original DRM projection parity: affine_bounded
+ok 10 - original DRM projection parity: affine_bounded
+  ---
+  duration_ms: 0.45741
+  type: 'test'
+  ...
+# Subtest: original DRM projection parity: affine_rejects_boolean
+ok 11 - original DRM projection parity: affine_rejects_boolean
+  ---
+  duration_ms: 0.374375
+  type: 'test'
+  ...
+# Subtest: original DRM projection parity: template_unbound
+ok 12 - original DRM projection parity: template_unbound
+  ---
+  duration_ms: 0.236677
+  type: 'test'
+  ...
+# Subtest: original DRM projection parity: declared_empty_domain
+ok 13 - original DRM projection parity: declared_empty_domain
+  ---
+  duration_ms: 0.195505
+  type: 'test'
+  ...
+# Subtest: original DRM projection parity: undeclared_empty_with_evidence
+ok 14 - original DRM projection parity: undeclared_empty_with_evidence
+  ---
+  duration_ms: 0.118088
+  type: 'test'
+  ...
+# Subtest: original MorphologyPolicy + real SRC parity: empty_measurement
+ok 15 - original MorphologyPolicy + real SRC parity: empty_measurement
+  ---
+  duration_ms: 4.895759
+  type: 'test'
+  ...
+# Subtest: original MorphologyPolicy + real SRC parity: retained_no_route
+ok 16 - original MorphologyPolicy + real SRC parity: retained_no_route
+  ---
+  duration_ms: 1.388936
+  type: 'test'
+  ...
+# Subtest: original MorphologyPolicy + real SRC parity: modifier_bound
+ok 17 - original MorphologyPolicy + real SRC parity: modifier_bound
+  ---
+  duration_ms: 2.369697
+  type: 'test'
+  ...
+# Subtest: original MorphologyPolicy + real SRC parity: modifier_no_forecast_reserve
+ok 18 - original MorphologyPolicy + real SRC parity: modifier_no_forecast_reserve
+  ---
+  duration_ms: 1.138869
+  type: 'test'
+  ...
+# Subtest: original MorphologyPolicy + real SRC parity: modifier_stale
+ok 19 - original MorphologyPolicy + real SRC parity: modifier_stale
+  ---
+  duration_ms: 0.853268
+  type: 'test'
+  ...
+# Subtest: original MorphologyPolicy + real SRC parity: peer_bound
+ok 20 - original MorphologyPolicy + real SRC parity: peer_bound
+  ---
+  duration_ms: 1.169154
+  type: 'test'
+  ...
+# Subtest: original MorphologyPolicy + real SRC parity: peer_no_forecast_reserve
+ok 21 - original MorphologyPolicy + real SRC parity: peer_no_forecast_reserve
+  ---
+  duration_ms: 2.217937
+  type: 'test'
+  ...
+# Subtest: original MorphologyPolicy + real SRC parity: peer_stale
+ok 22 - original MorphologyPolicy + real SRC parity: peer_stale
+  ---
+  duration_ms: 0.943384
+  type: 'test'
+  ...
+# Subtest: original MorphologyPolicy + real SRC parity: peer_access_probe_bound
+ok 23 - original MorphologyPolicy + real SRC parity: peer_access_probe_bound
+  ---
+  duration_ms: 0.972017
+  type: 'test'
+  ...
+# Subtest: original MorphologyPolicy + real SRC parity: peer_access_probe_no_forecast_reserve
+ok 24 - original MorphologyPolicy + real SRC parity: peer_access_probe_no_forecast_reserve
+  ---
+  duration_ms: 0.783222
+  type: 'test'
+  ...
+# Subtest: original MorphologyPolicy + real SRC parity: peer_access_probe_stale
+ok 25 - original MorphologyPolicy + real SRC parity: peer_access_probe_stale
+  ---
+  duration_ms: 0.81525
+  type: 'test'
+  ...
+# Subtest: original MorphologyPolicy + real SRC parity: feature_probe_bound
+ok 26 - original MorphologyPolicy + real SRC parity: feature_probe_bound
+  ---
+  duration_ms: 3.37886
+  type: 'test'
+  ...
+# Subtest: original MorphologyPolicy + real SRC parity: feature_probe_no_forecast_reserve
+ok 27 - original MorphologyPolicy + real SRC parity: feature_probe_no_forecast_reserve
+  ---
+  duration_ms: 4.227981
+  type: 'test'
+  ...
+# Subtest: original MorphologyPolicy + real SRC parity: feature_probe_stale
+ok 28 - original MorphologyPolicy + real SRC parity: feature_probe_stale
+  ---
+  duration_ms: 4.106107
+  type: 'test'
+  ...
+# Subtest: original MorphologyPolicy + real SRC parity: capacity_probe_bound
+ok 29 - original MorphologyPolicy + real SRC parity: capacity_probe_bound
+  ---
+  duration_ms: 3.165207
+  type: 'test'
+  ...
+# Subtest: original MorphologyPolicy + real SRC parity: capacity_probe_no_forecast_reserve
+ok 30 - original MorphologyPolicy + real SRC parity: capacity_probe_no_forecast_reserve
+  ---
+  duration_ms: 3.527194
+  type: 'test'
+  ...
+# Subtest: original MorphologyPolicy + real SRC parity: capacity_probe_stale
+ok 31 - original MorphologyPolicy + real SRC parity: capacity_probe_stale
+  ---
+  duration_ms: 0.811856
+  type: 'test'
+  ...
+# Subtest: original MorphologyPolicy + real SRC parity: capacity_access_probe_bound
+ok 32 - original MorphologyPolicy + real SRC parity: capacity_access_probe_bound
+  ---
+  duration_ms: 0.798565
+  type: 'test'
+  ...
+# Subtest: original MorphologyPolicy + real SRC parity: capacity_access_probe_no_forecast_reserve
+ok 33 - original MorphologyPolicy + real SRC parity: capacity_access_probe_no_forecast_reserve
+  ---
+  duration_ms: 0.664954
+  type: 'test'
+  ...
+# Subtest: original MorphologyPolicy + real SRC parity: capacity_access_probe_stale
+ok 34 - original MorphologyPolicy + real SRC parity: capacity_access_probe_stale
+  ---
+  duration_ms: 0.746327
+  type: 'test'
+  ...
+# Subtest: original MorphologyPolicy + real SRC parity: managed_access_bound
+ok 35 - original MorphologyPolicy + real SRC parity: managed_access_bound
+  ---
+  duration_ms: 0.905297
+  type: 'test'
+  ...
+# Subtest: original MorphologyPolicy + real SRC parity: managed_access_no_forecast_reserve
+ok 36 - original MorphologyPolicy + real SRC parity: managed_access_no_forecast_reserve
+  ---
+  duration_ms: 3.095602
+  type: 'test'
+  ...
+# Subtest: original MorphologyPolicy + real SRC parity: managed_access_stale
+ok 37 - original MorphologyPolicy + real SRC parity: managed_access_stale
+  ---
+  duration_ms: 2.885285
+  type: 'test'
+  ...
+# Subtest: original MorphologyPolicy + real SRC parity: entry_rebind_bound
+ok 38 - original MorphologyPolicy + real SRC parity: entry_rebind_bound
+  ---
+  duration_ms: 3.157436
+  type: 'test'
+  ...
+# Subtest: original MorphologyPolicy + real SRC parity: entry_rebind_no_forecast_reserve
+ok 39 - original MorphologyPolicy + real SRC parity: entry_rebind_no_forecast_reserve
+  ---
+  duration_ms: 4.352038
+  type: 'test'
+  ...
+# Subtest: original MorphologyPolicy + real SRC parity: entry_rebind_stale
+ok 40 - original MorphologyPolicy + real SRC parity: entry_rebind_stale
+  ---
+  duration_ms: 3.106218
+  type: 'test'
+  ...
+# Subtest: original MorphologyPolicy + real SRC parity: entry_probe_bound
+ok 41 - original MorphologyPolicy + real SRC parity: entry_probe_bound
+  ---
+  duration_ms: 1.446954
+  type: 'test'
+  ...
+# Subtest: original MorphologyPolicy + real SRC parity: entry_probe_no_forecast_reserve
+ok 42 - original MorphologyPolicy + real SRC parity: entry_probe_no_forecast_reserve
+  ---
+  duration_ms: 0.976604
+  type: 'test'
+  ...
+# Subtest: original MorphologyPolicy + real SRC parity: entry_probe_stale
+ok 43 - original MorphologyPolicy + real SRC parity: entry_probe_stale
+  ---
+  duration_ms: 0.718103
+  type: 'test'
+  ...
+# Subtest: original MorphologyPolicy + real SRC parity: refuted
+ok 44 - original MorphologyPolicy + real SRC parity: refuted
+  ---
+  duration_ms: 0.740809
+  type: 'test'
+  ...
+# Subtest: original MorphologyPolicy + real SRC parity: ambiguous_orientation
+ok 45 - original MorphologyPolicy + real SRC parity: ambiguous_orientation
+  ---
+  duration_ms: 0.652565
+  type: 'test'
+  ...
+# Subtest: original MorphologyPolicy + real SRC parity: chromatic_nonunique_pose
+ok 46 - original MorphologyPolicy + real SRC parity: chromatic_nonunique_pose
+  ---
+  duration_ms: 0.94764
+  type: 'test'
+  ...
+# Subtest: original MorphologyPolicy + real SRC parity: invalid_numeric_boolean
+ok 47 - original MorphologyPolicy + real SRC parity: invalid_numeric_boolean
+  ---
+  duration_ms: 0.560926
+  type: 'test'
+  ...
+# Subtest: original MorphologyPolicy + real SRC parity: invalid_scope_boolean
+ok 48 - original MorphologyPolicy + real SRC parity: invalid_scope_boolean
+  ---
+  duration_ms: 0.078398
+  type: 'test'
+  ...
+# Subtest: source-hashed registry rejects altered bytes and its sealed domain remains fixed
+ok 49 - source-hashed registry rejects altered bytes and its sealed domain remains fixed
+  ---
+  duration_ms: 10.328458
+  type: 'test'
+  ...
+# Subtest: native fact deltas share retained branches while public reads and snapshots remain independent
+ok 50 - native fact deltas share retained branches while public reads and snapshots remain independent
+  ---
+  duration_ms: 2.974139
+  type: 'test'
+  ...
+# Subtest: a shallow frozen container cannot conceal a mutable descendant from retained ownership
+ok 51 - a shallow frozen container cannot conceal a mutable descendant from retained ownership
+  ---
+  duration_ms: 0.203587
+  type: 'test'
+  ...
+# Subtest: retained native values reject malformed graphs without getters, partial writes or warmed depth bypasses
+ok 52 - retained native values reject malformed graphs without getters, partial writes or warmed depth bypasses
+  ---
+  duration_ms: 1.598162
+  type: 'test'
+  ...
+# Subtest: incremental native rule evidence equals unchanged original: duplicate_transition_not_independent
+ok 53 - incremental native rule evidence equals unchanged original: duplicate_transition_not_independent
+  ---
+  duration_ms: 6.436194
+  type: 'test'
+  ...
+# Subtest: incremental native rule evidence equals unchanged original: new_provenance_same_position_not_acquired
+ok 54 - incremental native rule evidence equals unchanged original: new_provenance_same_position_not_acquired
+  ---
+  duration_ms: 3.510258
+  type: 'test'
+  ...
+# Subtest: incremental native rule evidence equals unchanged original: changed_positions_acquire_translation
+ok 55 - incremental native rule evidence equals unchanged original: changed_positions_acquire_translation
+  ---
+  duration_ms: 2.006368
+  type: 'test'
+  ...
+# Subtest: incremental native rule evidence equals unchanged original: failed_frozen_translation_refutes
+ok 56 - incremental native rule evidence equals unchanged original: failed_frozen_translation_refutes
+  ---
+  duration_ms: 2.29921
+  type: 'test'
+  ...
+# Subtest: incremental native rule evidence equals unchanged original: registry_retains_contradictory_candidate
+ok 57 - incremental native rule evidence equals unchanged original: registry_retains_contradictory_candidate
+  ---
+  duration_ms: 5.273269
+  type: 'test'
+  ...
+# Subtest: incremental native rule evidence equals unchanged original: library_rigid_movement
+ok 58 - incremental native rule evidence equals unchanged original: library_rigid_movement
+  ---
+  duration_ms: 1.820327
+  type: 'test'
+  ...
+# Subtest: incremental native rule evidence equals unchanged original: contact_push_is_compatibility_not_cause
+ok 59 - incremental native rule evidence equals unchanged original: contact_push_is_compatibility_not_cause
+  ---
+  duration_ms: 2.949511
+  type: 'test'
+  ...
+# Subtest: incremental native rule evidence equals unchanged original: contacted_support_did_not_move
+ok 60 - incremental native rule evidence equals unchanged original: contacted_support_did_not_move
+  ---
+  duration_ms: 6.04966
+  type: 'test'
+  ...
+# Subtest: incremental native rule evidence equals unchanged original: failed_acquired_motion_with_contact
+ok 61 - incremental native rule evidence equals unchanged original: failed_acquired_motion_with_contact
+  ---
+  duration_ms: 4.216574
+  type: 'test'
+  ...
+# Subtest: incremental native rule evidence equals unchanged original: stationarity_does_not_prove_blocking
+ok 62 - incremental native rule evidence equals unchanged original: stationarity_does_not_prove_blocking
+  ---
+  duration_ms: 3.539572
+  type: 'test'
+  ...
+# Subtest: incremental native rule evidence equals unchanged original: bounding_boxes_do_not_prove_contact
+ok 63 - incremental native rule evidence equals unchanged original: bounding_boxes_do_not_prove_contact
+  ---
+  duration_ms: 1.866397
+  type: 'test'
+  ...
+# Subtest: incremental native rule evidence equals unchanged original: same_signature_distorted_support
+ok 64 - incremental native rule evidence equals unchanged original: same_signature_distorted_support
+  ---
+  duration_ms: 2.814237
+  type: 'test'
+  ...
+# Subtest: incremental native rule evidence equals unchanged original: coordinate_basis_unknown
+ok 65 - incremental native rule evidence equals unchanged original: coordinate_basis_unknown
+  ---
+  duration_ms: 2.44479
+  type: 'test'
+  ...
+# Subtest: incremental native rule evidence equals unchanged original: sweep_bound_retains_unknown
+ok 66 - incremental native rule evidence equals unchanged original: sweep_bound_retains_unknown
+  ---
+  duration_ms: 4.143945
+  type: 'test'
+  ...
+# Subtest: incremental native rule evidence equals unchanged original: pair_catalogue_bound_is_visible
+ok 67 - incremental native rule evidence equals unchanged original: pair_catalogue_bound_is_visible
+  ---
+  duration_ms: 10.067765
+  type: 'test'
+  ...
+# Subtest: incremental native rule evidence equals unchanged original: literal_replay_never_becomes_mechanism
+ok 68 - incremental native rule evidence equals unchanged original: literal_replay_never_becomes_mechanism
+  ---
+  duration_ms: 2.686475
+  type: 'test'
+  ...
+# Subtest: incremental native rule evidence equals unchanged original: same_conditions_conflicting_outputs_are_retained
+ok 69 - incremental native rule evidence equals unchanged original: same_conditions_conflicting_outputs_are_retained
+  ---
+  duration_ms: 6.261971
+  type: 'test'
+  ...
+# Subtest: incremental native rule evidence equals unchanged original: actual_public_HANO_0_mechanisms
+ok 70 - incremental native rule evidence equals unchanged original: actual_public_HANO_0_mechanisms
+  ---
+  duration_ms: 301.56472
+  type: 'test'
+  ...
+# Subtest: incremental native rule evidence equals unchanged original: actual_public_HANO_1_mechanisms
+ok 71 - incremental native rule evidence equals unchanged original: actual_public_HANO_1_mechanisms
+  ---
+  duration_ms: 172.019232
+  type: 'test'
+  ...
+# Subtest: incremental native rule evidence equals unchanged original: actual_public_SYME_0_mechanisms
+ok 72 - incremental native rule evidence equals unchanged original: actual_public_SYME_0_mechanisms
+  ---
+  duration_ms: 200.761902
+  type: 'test'
+  ...
+# Subtest: incremental native rule evidence equals unchanged original: actual_public_SYME_1_mechanisms
+ok 73 - incremental native rule evidence equals unchanged original: actual_public_SYME_1_mechanisms
+  ---
+  duration_ms: 272.631471
+  type: 'test'
+  ...
+# Subtest: incremental native rule evidence equals unchanged original: actual_public_DNOI_0_mechanisms
+ok 74 - incremental native rule evidence equals unchanged original: actual_public_DNOI_0_mechanisms
+  ---
+  duration_ms: 283.511397
+  type: 'test'
+  ...
+# Subtest: incremental native rule evidence equals unchanged original: actual_public_DNOI_1_mechanisms
+ok 75 - incremental native rule evidence equals unchanged original: actual_public_DNOI_1_mechanisms
+  ---
+  duration_ms: 238.277984
+  type: 'test'
+  ...
+# Subtest: incremental state encoding preserves canonical fragment identities and complete exports
+ok 76 - incremental state encoding preserves canonical fragment identities and complete exports
+  ---
+  duration_ms: 10.900392
+  type: 'test'
+  ...
+# Subtest: native Float64 leaves round-trip fractional evidence, negative zero and reserved object keys
+ok 77 - native Float64 leaves round-trip fractional evidence, negative zero and reserved object keys
+  ---
+  duration_ms: 3.214511
+  type: 'test'
+  ...
+# Subtest: native state rejects executable/nonfinite input and malformed tagged values
+ok 78 - native state rejects executable/nonfinite input and malformed tagged values
+  ---
+  duration_ms: 0.637282
+  type: 'test'
+  ...
+# Subtest: the larger native Kernel profile leaves the ordinary V7 ceiling unchanged
+ok 79 - the larger native Kernel profile leaves the ordinary V7 ceiling unchanged
+  ---
+  duration_ms: 0.781519
+  type: 'test'
+  ...
+# Subtest: native store commits actual V7 revisions and rolls back a failed multi-node transaction
+ok 80 - native store commits actual V7 revisions and rolls back a failed multi-node transaction
+  ---
+  duration_ms: 10.131952
+  type: 'test'
+  ...
+# Subtest: native state fragments retain an entire large episode and reuse immutable frames across revisions
+ok 81 - native state fragments retain an entire large episode and reuse immutable frames across revisions
+  ---
+  duration_ms: 73.554813
+  type: 'test'
+  ...
+# Subtest: reasoning dynamic restore preserves the real catalog and rolls back malformed table updates
+ok 82 - reasoning dynamic restore preserves the real catalog and rolls back malformed table updates
+  ---
+  duration_ms: 113.98233
+  type: 'test'
+  ...
+# Subtest: family state is read from the Kernel graph before the next real plan
+ok 83 - family state is read from the Kernel graph before the next real plan
+  ---
+  duration_ms: 53.07255
+  type: 'test'
+  ...
+# Subtest: edits reject an active prefix even when its caller is paused
+ok 84 - edits reject an active prefix even when its caller is paused
+  ---
+  duration_ms: 32.570477
+  type: 'test'
+  ...
+# Subtest: a boundary activation edit changes actual selection without resetting evidence
+ok 85 - a boundary activation edit changes actual selection without resetting evidence
+  ---
+  duration_ms: 22.325315
+  type: 'test'
+  ...
+# Subtest: stored SRC edits execute the revised tree and preserve separate original provenance
+ok 86 - stored SRC edits execute the revised tree and preserve separate original provenance
+  ---
+  duration_ms: 39.673177
+  type: 'test'
+  ...
+# Subtest: a family-internal SRC program reads its actual edited node from the same store
+ok 87 - a family-internal SRC program reads its actual edited node from the same store
+  ---
+  duration_ms: 38.391833
+  type: 'test'
+  ...
+# Subtest: stale and invalid multi-node edits roll back and preserve a usable session
+ok 88 - stale and invalid multi-node edits roll back and preserve a usable session
+  ---
+  duration_ms: 46.726974
+  type: 'test'
+  ...
+# Subtest: the browser edit/inspection API changes no game state and resumes from revised nodes
+ok 89 - the browser edit/inspection API changes no game state and resumes from revised nodes
+  ---
+  duration_ms: 34.217538
+  type: 'test'
+  ...
+# Subtest: an action ticket from another graph never reaches the native game
+ok 90 - an action ticket from another graph never reaches the native game
+  ---
+  duration_ms: 16.16869
+  type: 'test'
+  ...
+# Subtest: the real common runtime retains shared state through the opt-in immutable path
+ok 91 - the real common runtime retains shared state through the opt-in immutable path
+  ---
+  duration_ms: 2194.696115
+  type: 'test'
+  ...
+# Subtest: trusted detached copies preserve scalar representation, member order and literal special keys
+ok 92 - trusted detached copies preserve scalar representation, member order and literal special keys
+  ---
+  duration_ms: 3.855364
+  type: 'test'
+  ...
+# Subtest: copying trusted canonical and hydrated DAGs preserves aliases only within one detached copy
+ok 93 - copying trusted canonical and hydrated DAGs preserves aliases only within one detached copy
+  ---
+  duration_ms: 6.198113
+  type: 'test'
+  ...
+# Subtest: foreign, shallow-frozen and retained-only objects keep the ordinary clone path
+ok 94 - foreign, shallow-frozen and retained-only objects keep the ordinary clone path
+  ---
+  duration_ms: 0.789743
+  type: 'test'
+  ...
+# Subtest: foreign proxies, functions and symbols keep structuredClone rejection
+ok 95 - foreign proxies, functions and symbols keep structuredClone rejection
+  ---
+  duration_ms: 0.471793
+  type: 'test'
+  ...
+# Subtest: all cloneable primitive source values remain exact without JSON coercion
+ok 96 - all cloneable primitive source values remain exact without JSON coercion
+  ---
+  duration_ms: 0.151308
+  type: 'test'
+  ...
+# Subtest: retained validation snapshots every parent descriptor before visiting a child
+ok 97 - retained validation snapshots every parent descriptor before visiting a child
+  ---
+  duration_ms: 0.186642
+  type: 'test'
+  ...
+# Subtest: retained per-key validation still rejects non-data, hidden, symbolic and decorated members
+ok 98 - retained per-key validation still rejects non-data, hidden, symbolic and decorated members
+  ---
+  duration_ms: 0.994883
+  type: 'test'
+  ...
+# Subtest: retained validation preserves integer-key normalization for valid reordered Proxy descriptors
+ok 99 - retained validation preserves integer-key normalization for valid reordered Proxy descriptors
+  ---
+  duration_ms: 0.374306
+  type: 'test'
+  ...
+# Subtest: the canonical ownership predicate cannot certify foreign shallow or deep freezes
+ok 100 - the canonical ownership predicate cannot certify foreign shallow or deep freezes
+  ---
+  duration_ms: 1.876255
+  type: 'test'
+  ...
+# Subtest: a real Kernel state change retains a validated leaf while rebuilding the current root
+ok 101 - a real Kernel state change retains a validated leaf while rebuilding the current root
+  ---
+  duration_ms: 16.724754
+  type: 'test'
+  ...
+# Subtest: every hydration resolves a retained leaf once per id before reusing it
+ok 102 - every hydration resolves a retained leaf once per id before reusing it
+  ---
+  duration_ms: 0.623862
+  type: 'test'
+  ...
+# Subtest: a retained leaf cannot bypass a resolver rejecting the current fragment authority
+ok 103 - a retained leaf cannot bypass a resolver rejecting the current fragment authority
+  ---
+  duration_ms: 0.494397
+  type: 'test'
+  ...
+# Subtest: composite fragments keep reading all transitive dependencies across root changes
+ok 104 - composite fragments keep reading all transitive dependencies across root changes
+  ---
+  duration_ms: 1.819839
+  type: 'test'
+  ...
+# Subtest: a certificate binds the exact content address as well as the immutable fragment identity
+ok 105 - a certificate binds the exact content address as well as the immutable fragment identity
+  ---
+  duration_ms: 0.554007
+  type: 'test'
+  ...
+# Subtest: a mutable or shallow frozen fragment is always revalidated and decoded
+ok 106 - a mutable or shallow frozen fragment is always revalidated and decoded
+  ---
+  duration_ms: 1.192601
+  type: 'test'
+  ...
+# Subtest: deeply frozen foreign JSON remains outside the owned-fragment cache
+ok 107 - deeply frozen foreign JSON remains outside the owned-fragment cache
+  ---
+  duration_ms: 0.488578
+  type: 'test'
+  ...
+# Subtest: cross-root reuse reapplies the complete decoded height at the new insertion depth
+ok 108 - cross-root reuse reapplies the complete decoded height at the new insertion depth
+  ---
+  duration_ms: 3.512125
+  type: 'test'
+  ...
+# Subtest: local repeated references also retain transitive height at a deeper occurrence
+ok 109 - local repeated references also retain transitive height at a deeper occurrence
+  ---
+  duration_ms: 1.631885
+  type: 'test'
+  ...
+# Subtest: cached leaves preserve typed Float64 bits, literal tag keys, Unicode order and null
+ok 110 - cached leaves preserve typed Float64 bits, literal tag keys, Unicode order and null
+  ---
+  duration_ms: 0.805597
+  type: 'test'
+  ...
+# Subtest: bounded leaf eviction changes only reusable identity, not values or fragment validation
+ok 111 - bounded leaf eviction changes only reusable identity, not values or fragment validation
+  ---
+  duration_ms: 15.732596
+  type: 'test'
+  ...
+# Subtest: pinned Python V6/V5 observation parity: irregular_repeated
+ok 112 - pinned Python V6/V5 observation parity: irregular_repeated
+  ---
+  duration_ms: 13.481906
+  type: 'test'
+  ...
+# Subtest: pinned Python V6/V5 observation parity: diagonal_connectivity
+ok 113 - pinned Python V6/V5 observation parity: diagonal_connectivity
+  ---
+  duration_ms: 8.049289
+  type: 'test'
+  ...
+# Subtest: pinned Python V6/V5 observation parity: centroid_hole
+ok 114 - pinned Python V6/V5 observation parity: centroid_hole
+  ---
+  duration_ms: 5.770517
+  type: 'test'
+  ...
+# Subtest: pinned Python V6/V5 observation parity: scaled_components
+ok 115 - pinned Python V6/V5 observation parity: scaled_components
+  ---
+  duration_ms: 19.683093
+  type: 'test'
+  ...
+# Subtest: geometric transition correspondence keeps original ambiguity rules
+ok 116 - geometric transition correspondence keeps original ambiguity rules
+  ---
+  duration_ms: 1.599476
+  type: 'test'
+  ...
+# Subtest: geometric connectivity preserves diagonal separation, ordering and edge coordinates
+ok 117 - geometric connectivity preserves diagonal separation, ordering and edge coordinates
+  ---
+  duration_ms: 0.991317
+  type: 'test'
+  ...
+# Subtest: V6 canonical strings use Python ASCII escapes and unsupported rasters fail explicitly
+ok 118 - V6 canonical strings use Python ASCII escapes and unsupported rasters fail explicitly
+  ---
+  duration_ms: 1.052129
+  type: 'test'
+  ...
+# Subtest: private component signatures retain the original generic digest: palette-extremes-and-many-components
+ok 119 - private component signatures retain the original generic digest: palette-extremes-and-many-components
+  ---
+  duration_ms: 95.161292
+  type: 'test'
+  ...
+# Subtest: private component signatures retain the original generic digest: scaled-blocks-with-duplicate-signatures
+ok 120 - private component signatures retain the original generic digest: scaled-blocks-with-duplicate-signatures
+  ---
+  duration_ms: 13.409216
+  type: 'test'
+  ...
+# Subtest: private component signatures retain the original generic digest: irregular-masks-and-holes
+ok 121 - private component signatures retain the original generic digest: irregular-masks-and-holes
+  ---
+  duration_ms: 8.992484
+  type: 'test'
+  ...
+# Subtest: private component signatures retain the original generic digest: maximum-public-one-dimensional-raster
+ok 122 - private component signatures retain the original generic digest: maximum-public-one-dimensional-raster
+  ---
+  duration_ms: 371.412674
+  type: 'test'
+  ...
+# Subtest: closed observation signatures preserve portable palette and raster refusals
+ok 123 - closed observation signatures preserve portable palette and raster refusals
+  ---
+  duration_ms: 1.36416
+  type: 'test'
+  ...
+# Subtest: a palette getter cannot substitute a nonportable scalar after raster validation
+ok 124 - a palette getter cannot substitute a nonportable scalar after raster validation
+  ---
+  duration_ms: 0.33777
+  type: 'test'
+  ...
+# Subtest: unchanged encoded subtrees stay shared across real historical commits with the same canonical chains
+ok 125 - unchanged encoded subtrees stay shared across real historical commits with the same canonical chains
+  ---
+  duration_ms: 18.202907
+  type: 'test'
+  ...
+# Subtest: owned encoded children do not bypass complete canonical nesting validation or publish partial writes
+ok 126 - owned encoded children do not bypass complete canonical nesting validation or publish partial writes
+  ---
+  duration_ms: 2.735753
+  type: 'test'
+  ...
+# Subtest: immutable hydration observes root revisions and ignores a rolled-back write
+ok 127 - immutable hydration observes root revisions and ignores a rolled-back write
+  ---
+  duration_ms: 20.516212
+  type: 'test'
+  ...
+# Subtest: metadata-only revisions retain exact chains and one immutable hydration without losing evidence
+ok 128 - metadata-only revisions retain exact chains and one immutable hydration without losing evidence
+  ---
+  duration_ms: 6.338385
+  type: 'test'
+  ...
+# Subtest: changed payloads, including Float64 bits and mutable inputs, invalidate metadata-only sharing
+ok 129 - changed payloads, including Float64 bits and mutable inputs, invalidate metadata-only sharing
+  ---
+  duration_ms: 4.919151
+  type: 'test'
+  ...
+# Subtest: a failed metadata transaction leaves its node, cache and subsequent exact write intact
+ok 130 - a failed metadata transaction leaves its node, cache and subsequent exact write intact
+  ---
+  duration_ms: 6.876628
+  type: 'test'
+  ...
+# Subtest: metadata-only hydration still rejects a changed fragment under an unchanged root
+ok 131 - metadata-only hydration still rejects a changed fragment under an unchanged root
+  ---
+  duration_ms: 10.683368
+  type: 'test'
+  ...
+# Subtest: metadata-only hydration still rejects a profile fragment under an unchanged root
+ok 132 - metadata-only hydration still rejects a profile fragment under an unchanged root
+  ---
+  duration_ms: 4.920193
+  type: 'test'
+  ...
+# Subtest: metadata-only hydration still rejects a kind fragment under an unchanged root
+ok 133 - metadata-only hydration still rejects a kind fragment under an unchanged root
+  ---
+  duration_ms: 5.722494
+  type: 'test'
+  ...
+# Subtest: metadata-only hydration still rejects a missing fragment under an unchanged root
+ok 134 - metadata-only hydration still rejects a missing fragment under an unchanged root
+  ---
+  duration_ms: 6.240387
+  type: 'test'
+  ...
+# Subtest: a cached root never hides a changed content-addressed fragment
+ok 135 - a cached root never hides a changed content-addressed fragment
+  ---
+  duration_ms: 2.456281
+  type: 'test'
+  ...
+# Subtest: shared frozen rasters still export complete fragments into another store
+ok 136 - shared frozen rasters still export complete fragments into another store
+  ---
+  duration_ms: 3.370772
+  type: 'test'
+  ...
+# Subtest: a frozen raster container does not conceal a mutable row change
+ok 137 - a frozen raster container does not conceal a mutable row change
+  ---
+  duration_ms: 2.25046
+  type: 'test'
+  ...
+# Subtest: GoalAccessAdapter native checkpoints share only immutable observation data
+ok 138 - GoalAccessAdapter native checkpoints share only immutable observation data
+  ---
+  duration_ms: 2.40297
+  type: 'test'
+  ...
+# Subtest: ProspectiveContactAdapter native checkpoints share only immutable observation data
+ok 139 - ProspectiveContactAdapter native checkpoints share only immutable observation data
+  ---
+  duration_ms: 2.606707
+  type: 'test'
+  ...
+# Subtest: service checks live authority with snapshot fallback and still validates outgoing snapshots
+ok 140 - service checks live authority with snapshot fallback and still validates outgoing snapshots
+  ---
+  duration_ms: 11.282934
+  type: 'test'
+  ...
+# Subtest: snapshot fallback rejects a live graphChain change before acquisition without burning the pending ticket
+ok 141 - snapshot fallback rejects a live graphChain change before acquisition without burning the pending ticket
+  ---
+  duration_ms: 7.691334
+  type: 'test'
+  ...
+# Subtest: snapshot fallback rejects a live nativeExecutionDigest change before acquisition without burning the pending ticket
+ok 142 - snapshot fallback rejects a live nativeExecutionDigest change before acquisition without burning the pending ticket
+  ---
+  duration_ms: 2.090163
+  type: 'test'
+  ...
+# Subtest: service checks live authority with identity opt-in and still validates outgoing snapshots
+ok 143 - service checks live authority with identity opt-in and still validates outgoing snapshots
+  ---
+  duration_ms: 2.04851
+  type: 'test'
+  ...
+# Subtest: identity opt-in rejects a live graphChain change before acquisition without burning the pending ticket
+ok 144 - identity opt-in rejects a live graphChain change before acquisition without burning the pending ticket
+  ---
+  duration_ms: 2.005396
+  type: 'test'
+  ...
+# Subtest: identity opt-in rejects a live nativeExecutionDigest change before acquisition without burning the pending ticket
+ok 145 - identity opt-in rejects a live nativeExecutionDigest change before acquisition without burning the pending ticket
+  ---
+  duration_ms: 1.657561
+  type: 'test'
+  ...
+# Subtest: malformed opted-in authority closes the session before acquisition: null
+ok 146 - malformed opted-in authority closes the session before acquisition: null
+  ---
+  duration_ms: 1.467144
+  type: 'test'
+  ...
+# Subtest: malformed opted-in authority closes the session before acquisition: {}
+ok 147 - malformed opted-in authority closes the session before acquisition: {}
+  ---
+  duration_ms: 1.049093
+  type: 'test'
+  ...
+# Subtest: malformed opted-in authority closes the session before acquisition: {"graphChain":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}
+ok 148 - malformed opted-in authority closes the session before acquisition: {"graphChain":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}
+  ---
+  duration_ms: 0.999528
+  type: 'test'
+  ...
+# Subtest: malformed opted-in authority closes the session before acquisition: {"graphChain":"invalid","nativeExecutionDigest":"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"}
+ok 149 - malformed opted-in authority closes the session before acquisition: {"graphChain":"invalid","nativeExecutionDigest":"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"}
+  ---
+  duration_ms: 0.992548
+  type: 'test'
+  ...
+# Subtest: the lightweight identity check never replaces validation of a returned backend snapshot
+ok 150 - the lightweight identity check never replaces validation of a returned backend snapshot
+  ---
+  duration_ms: 2.415104
+  type: 'test'
+  ...
+# Subtest: real runtime identity tracks graph edits and snapshots safely share only owned frozen trace entries
+ok 151 - real runtime identity tracks graph edits and snapshots safely share only owned frozen trace entries
+  ---
+  duration_ms: 67.536037
+  type: 'test'
+  ...
+# Subtest: native SHA-256 matches the standard at padding, block and multi-block boundaries
+ok 152 - native SHA-256 matches the standard at padding, block and multi-block boundaries
+  ---
+  duration_ms: 11.742857
+  type: 'test'
+  ...
+# Subtest: large full episodes exceed a single V7 value while lossless bounded fragments restore every observation
+ok 153 - large full episodes exceed a single V7 value while lossless bounded fragments restore every observation
+  ---
+  duration_ms: 330.582026
+  type: 'test'
+  ...
+# Subtest: fragment identity is stable across component roots and a new episode keeps previous frame identities
+ok 154 - fragment identity is stable across component roots and a new episode keeps previous frame identities
+  ---
+  duration_ms: 30.68627
+  type: 'test'
+  ...
+# Subtest: typed reference envelopes preserve reserved user fields, Unicode and Float64 bits
+ok 155 - typed reference envelopes preserve reserved user fields, Unicode and Float64 bits
+  ---
+  duration_ms: 2.674065
+  type: 'test'
+  ...
+# Subtest: oversized flat arrays and objects bound the reference fanout without dropping or reordering entries
+ok 156 - oversized flat arrays and objects bound the reference fanout without dropping or reordering entries
+  ---
+  duration_ms: 85.18373
+  type: 'test'
+  ...
+# Subtest: missing and tampered persisted fragments cannot be hydrated
+ok 157 - missing and tampered persisted fragments cannot be hydrated
+  ---
+  duration_ms: 1.025688
+  type: 'test'
+  ...
+# Subtest: unsupported native values are rejected without invoking getters or accepting cycles
+ok 158 - unsupported native values are rejected without invoking getters or accepting cycles
+  ---
+  duration_ms: 0.645585
+  type: 'test'
+  ...
+# Subtest: native state property snapshots precede child traversal
+ok 159 - native state property snapshots precede child traversal
+  ---
+  duration_ms: 0.393414
+  type: 'test'
+  ...
+# Subtest: native state snapshots acquire array length descriptors and normalize proxy key order
+ok 160 - native state snapshots acquire array length descriptors and normalize proxy key order
+  ---
+  duration_ms: 0.727963
+  type: 'test'
+  ...
+# Subtest: native state reuses only private immutable ingress property validation
+ok 161 - native state reuses only private immutable ingress property validation
+  ---
+  duration_ms: 43.861934
+  type: 'test'
+  ...
+# Subtest: hydration ownership marks only closed decoder outputs, including assembled groups
+ok 162 - hydration ownership marks only closed decoder outputs, including assembled groups
+  ---
+  duration_ms: 15.221866
+  type: 'test'
+  ...
+# Subtest: raw graph collection methods and species cannot supply a hydration-owned container
+ok 163 - raw graph collection methods and species cannot supply a hydration-owned container
+  ---
+  duration_ms: 0.627987
+  type: 'test'
+  ...
+# Subtest: raw hydration snapshots collection length before decoding children
+ok 164 - raw hydration snapshots collection length before decoding children
+  ---
+  duration_ms: 0.313754
+  type: 'test'
+  ...
+# Subtest: the real authority retains the complete over-domain DICO transition without validating rules and can release again
+ok 165 - the real authority retains the complete over-domain DICO transition without validating rules and can release again
+  ---
+  duration_ms: 2388.131601
+  type: 'test'
+  ...
+# Subtest: working witnesses require the same containers and exact scalar values
+ok 166 - working witnesses require the same containers and exact scalar values
+  ---
+  duration_ms: 1.413225
+  type: 'test'
+  ...
+# Subtest: Map keys, values and insertion order remain part of the working witness
+ok 167 - Map keys, values and insertion order remain part of the working witness
+  ---
+  duration_ms: 0.199992
+  type: 'test'
+  ...
+# Subtest: Set entries stay observed even when the Set object is frozen
+ok 168 - Set entries stay observed even when the Set object is frozen
+  ---
+  duration_ms: 0.239211
+  type: 'test'
+  ...
+# Subtest: shallow freezing cannot hide mutable descendants behind an identity leaf
+ok 169 - shallow freezing cannot hide mutable descendants behind an identity leaf
+  ---
+  duration_ms: 0.478784
+  type: 'test'
+  ...
+# Subtest: replacing a mutable container prototype invalidates its witness
+ok 170 - replacing a mutable container prototype invalidates its witness
+  ---
+  duration_ms: 0.263247
+  type: 'test'
+  ...
+# Subtest: an enumeration change invalidates the witness even when the property value is unchanged
+ok 171 - an enumeration change invalidates the witness even when the property value is unchanged
+  ---
+  duration_ms: 0.699306
+  type: 'test'
+  ...
+# Subtest: field substitutions, hidden additions and array holes cannot preserve a working witness
+ok 172 - field substitutions, hidden additions and array holes cannot preserve a working witness
+  ---
+  duration_ms: 0.246052
+  type: 'test'
+  ...
+# Subtest: custom collection iteration never receives a reusable structural certificate
+ok 173 - custom collection iteration never receives a reusable structural certificate
+  ---
+  duration_ms: 0.260904
+  type: 'test'
+  ...
+# Subtest: callable fields and customized array prototypes cannot hide changing projection closures
+ok 174 - callable fields and customized array prototypes cannot hide changing projection closures
+  ---
+  duration_ms: 0.346523
+  type: 'test'
+  ...
+# Subtest: an inherited iterator invalidates capture and reuse without invoking its getter
+ok 175 - an inherited iterator invalidates capture and reuse without invoking its getter
+  ---
+  duration_ms: 0.389668
+  type: 'test'
+  ...
+# Subtest: unsupported structure does not execute getters or silently certify cycles and symbols
+ok 176 - unsupported structure does not execute getters or silently certify cycles and symbols
+  ---
+  duration_ms: 0.739918
+  type: 'test'
+  ...
+# Subtest: SELECT comparison fixture records exact original source bytes
+ok 177 - SELECT comparison fixture records exact original source bytes
+  ---
+  duration_ms: 3.242779
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_single
+ok 178 - SELECT unchanged source evaluator and output source_single
+  ---
+  duration_ms: 2.294025
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_canonical_tie
+ok 179 - SELECT unchanged source evaluator and output source_canonical_tie
+  ---
+  duration_ms: 1.016125
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_hashed_reference_unresolved
+ok 180 - SELECT unchanged source evaluator and output source_hashed_reference_unresolved
+  ---
+  duration_ms: 1.407306
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_composition_access_admissible_0
+ok 181 - SELECT unchanged source evaluator and output source_composition_access_admissible_0
+  ---
+  duration_ms: 0.455518
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_composition_access_admissible_1
+ok 182 - SELECT unchanged source evaluator and output source_composition_access_admissible_1
+  ---
+  duration_ms: 0.46314
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_composition_access_admissible_2
+ok 183 - SELECT unchanged source evaluator and output source_composition_access_admissible_2
+  ---
+  duration_ms: 0.422248
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_composition_access_admissible_3
+ok 184 - SELECT unchanged source evaluator and output source_composition_access_admissible_3
+  ---
+  duration_ms: 0.369849
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_composition_relation_count_0
+ok 185 - SELECT unchanged source evaluator and output source_composition_relation_count_0
+  ---
+  duration_ms: 0.592225
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_composition_relation_count_1
+ok 186 - SELECT unchanged source evaluator and output source_composition_relation_count_1
+  ---
+  duration_ms: 0.659616
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_composition_relation_count_2
+ok 187 - SELECT unchanged source evaluator and output source_composition_relation_count_2
+  ---
+  duration_ms: 0.338522
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_composition_relation_count_3
+ok 188 - SELECT unchanged source evaluator and output source_composition_relation_count_3
+  ---
+  duration_ms: 0.296708
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_composition_relation_count_4
+ok 189 - SELECT unchanged source evaluator and output source_composition_relation_count_4
+  ---
+  duration_ms: 0.184128
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_composition_relation_count_5
+ok 190 - SELECT unchanged source evaluator and output source_composition_relation_count_5
+  ---
+  duration_ms: 0.182335
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_total_primitive_distance_0
+ok 191 - SELECT unchanged source evaluator and output source_total_primitive_distance_0
+  ---
+  duration_ms: 0.494957
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_total_primitive_distance_1
+ok 192 - SELECT unchanged source evaluator and output source_total_primitive_distance_1
+  ---
+  duration_ms: 0.61624
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_total_primitive_distance_2
+ok 193 - SELECT unchanged source evaluator and output source_total_primitive_distance_2
+  ---
+  duration_ms: 0.561809
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_total_primitive_distance_3
+ok 194 - SELECT unchanged source evaluator and output source_total_primitive_distance_3
+  ---
+  duration_ms: 0.285361
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_total_primitive_distance_4
+ok 195 - SELECT unchanged source evaluator and output source_total_primitive_distance_4
+  ---
+  duration_ms: 0.210708
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_total_primitive_distance_5
+ok 196 - SELECT unchanged source evaluator and output source_total_primitive_distance_5
+  ---
+  duration_ms: 0.323118
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_access_distance_0
+ok 197 - SELECT unchanged source evaluator and output source_access_distance_0
+  ---
+  duration_ms: 0.368457
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_access_distance_1
+ok 198 - SELECT unchanged source evaluator and output source_access_distance_1
+  ---
+  duration_ms: 0.4436
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_access_distance_2
+ok 199 - SELECT unchanged source evaluator and output source_access_distance_2
+  ---
+  duration_ms: 0.302276
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_access_distance_3
+ok 200 - SELECT unchanged source evaluator and output source_access_distance_3
+  ---
+  duration_ms: 0.171189
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_access_distance_4
+ok 201 - SELECT unchanged source evaluator and output source_access_distance_4
+  ---
+  duration_ms: 0.193042
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_direct_single_input_previously_executed_0
+ok 202 - SELECT unchanged source evaluator and output source_direct_single_input_previously_executed_0
+  ---
+  duration_ms: 0.354675
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_direct_single_input_previously_executed_1
+ok 203 - SELECT unchanged source evaluator and output source_direct_single_input_previously_executed_1
+  ---
+  duration_ms: 0.248826
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_direct_single_input_previously_executed_2
+ok 204 - SELECT unchanged source evaluator and output source_direct_single_input_previously_executed_2
+  ---
+  duration_ms: 0.189256
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_conditional_peer_response_exit_upper_bound_0
+ok 205 - SELECT unchanged source evaluator and output source_conditional_peer_response_exit_upper_bound_0
+  ---
+  duration_ms: 0.335928
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_conditional_peer_response_exit_upper_bound_1
+ok 206 - SELECT unchanged source evaluator and output source_conditional_peer_response_exit_upper_bound_1
+  ---
+  duration_ms: 0.421617
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_conditional_peer_response_exit_upper_bound_2
+ok 207 - SELECT unchanged source evaluator and output source_conditional_peer_response_exit_upper_bound_2
+  ---
+  duration_ms: 0.505313
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_grip_row_0
+ok 208 - SELECT unchanged source evaluator and output source_grip_row_0
+  ---
+  duration_ms: 0.368046
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_grip_row_1
+ok 209 - SELECT unchanged source evaluator and output source_grip_row_1
+  ---
+  duration_ms: 0.279932
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_grip_row_2
+ok 210 - SELECT unchanged source evaluator and output source_grip_row_2
+  ---
+  duration_ms: 0.342517
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_grip_col_0
+ok 211 - SELECT unchanged source evaluator and output source_grip_col_0
+  ---
+  duration_ms: 0.271971
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_grip_col_1
+ok 212 - SELECT unchanged source evaluator and output source_grip_col_1
+  ---
+  duration_ms: 0.261895
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_grip_col_2
+ok 213 - SELECT unchanged source evaluator and output source_grip_col_2
+  ---
+  duration_ms: 1.724004
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_missing_composition_relation_count
+ok 214 - SELECT unchanged source evaluator and output source_missing_composition_relation_count
+  ---
+  duration_ms: 0.583341
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_missing_total_primitive_distance
+ok 215 - SELECT unchanged source evaluator and output source_missing_total_primitive_distance
+  ---
+  duration_ms: 0.294385
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_missing_access_distance
+ok 216 - SELECT unchanged source evaluator and output source_missing_access_distance
+  ---
+  duration_ms: 0.259322
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_missing_direct_single_input_previously_executed
+ok 217 - SELECT unchanged source evaluator and output source_missing_direct_single_input_previously_executed
+  ---
+  duration_ms: 0.292192
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_missing_conditional_peer_response_exit_upper_bound
+ok 218 - SELECT unchanged source evaluator and output source_missing_conditional_peer_response_exit_upper_bound
+  ---
+  duration_ms: 0.254604
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_context_fallback
+ok 219 - SELECT unchanged source evaluator and output source_context_fallback
+  ---
+  duration_ms: 0.319824
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_explicit_null_overrides_context
+ok 220 - SELECT unchanged source evaluator and output source_explicit_null_overrides_context
+  ---
+  duration_ms: 0.440055
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_empty_facts_error
+ok 221 - SELECT unchanged source evaluator and output source_empty_facts_error
+  ---
+  duration_ms: 0.137418
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_missing_fact_inventory_error
+ok 222 - SELECT unchanged source evaluator and output source_missing_fact_inventory_error
+  ---
+  duration_ms: 0.124889
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output source_duplicate_alternative_error
+ok 223 - SELECT unchanged source evaluator and output source_duplicate_alternative_error
+  ---
+  duration_ms: 0.115985
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output single_admissible_1
+ok 224 - SELECT unchanged source evaluator and output single_admissible_1
+  ---
+  duration_ms: 0.226773
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output single_admissible_2
+ok 225 - SELECT unchanged source evaluator and output single_admissible_2
+  ---
+  duration_ms: 0.276097
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output single_admissible_3
+ok 226 - SELECT unchanged source evaluator and output single_admissible_3
+  ---
+  duration_ms: 0.435898
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output single_admissible_ineligible
+ok 227 - SELECT unchanged source evaluator and output single_admissible_ineligible
+  ---
+  duration_ms: 0.385453
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output declared_eligibility_single_1
+ok 228 - SELECT unchanged source evaluator and output declared_eligibility_single_1
+  ---
+  duration_ms: 0.427505
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output declared_eligibility_single_2
+ok 229 - SELECT unchanged source evaluator and output declared_eligibility_single_2
+  ---
+  duration_ms: 0.340014
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output declared_eligibility_single_3
+ok 230 - SELECT unchanged source evaluator and output declared_eligibility_single_3
+  ---
+  duration_ms: 0.361696
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output declared_eligibility_single_ineligible
+ok 231 - SELECT unchanged source evaluator and output declared_eligibility_single_ineligible
+  ---
+  duration_ms: 0.270348
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output symbolic_partial_order_1
+ok 232 - SELECT unchanged source evaluator and output symbolic_partial_order_1
+  ---
+  duration_ms: 0.233943
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output symbolic_partial_order_2
+ok 233 - SELECT unchanged source evaluator and output symbolic_partial_order_2
+  ---
+  duration_ms: 0.362618
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output symbolic_partial_order_3
+ok 234 - SELECT unchanged source evaluator and output symbolic_partial_order_3
+  ---
+  duration_ms: 0.212752
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output symbolic_partial_order_ineligible
+ok 235 - SELECT unchanged source evaluator and output symbolic_partial_order_ineligible
+  ---
+  duration_ms: 0.21871
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output dominance_direct
+ok 236 - SELECT unchanged source evaluator and output dominance_direct
+  ---
+  duration_ms: 0.368517
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output dominance_reversed
+ok 237 - SELECT unchanged source evaluator and output dominance_reversed
+  ---
+  duration_ms: 0.276648
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output dominance_equal
+ok 238 - SELECT unchanged source evaluator and output dominance_equal
+  ---
+  duration_ms: 0.241995
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output dominance_conflicting
+ok 239 - SELECT unchanged source evaluator and output dominance_conflicting
+  ---
+  duration_ms: 0.249457
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output dominance_undeclared_error
+ok 240 - SELECT unchanged source evaluator and output dominance_undeclared_error
+  ---
+  duration_ms: 0.318501
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output canonical_debt_False
+ok 241 - SELECT unchanged source evaluator and output canonical_debt_False
+  ---
+  duration_ms: 0.47025
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output canonical_debt_True
+ok 242 - SELECT unchanged source evaluator and output canonical_debt_True
+  ---
+  duration_ms: 0.28499
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output tier_first_match
+ok 243 - SELECT unchanged source evaluator and output tier_first_match
+  ---
+  duration_ms: 0.380685
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output tier_fallback
+ok 244 - SELECT unchanged source evaluator and output tier_fallback
+  ---
+  duration_ms: 0.266854
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source evaluator and output unicode_scalar_order
+ok 245 - SELECT unchanged source evaluator and output unicode_scalar_order
+  ---
+  duration_ms: 0.745196
+  type: 'test'
+  ...
+# Subtest: SELECT interpreter binds the complete declared assessment and emits its statement trace
+ok 246 - SELECT interpreter binds the complete declared assessment and emits its statement trace
+  ---
+  duration_ms: 32.201701
+  type: 'test'
+  ...
+# Subtest: SELECT unresolved equality retains the exact refusal without continuing the workflow
+ok 247 - SELECT unresolved equality retains the exact refusal without continuing the workflow
+  ---
+  duration_ms: 4.003327
+  type: 'test'
+  ...
+# Subtest: SELECT malformed IR fails before callbacks: missing clause
+ok 248 - SELECT malformed IR fails before callbacks: missing clause
+  ---
+  duration_ms: 0.707609
+  type: 'test'
+  ...
+# Subtest: SELECT malformed IR fails before callbacks: duplicate clause
+ok 249 - SELECT malformed IR fails before callbacks: duplicate clause
+  ---
+  duration_ms: 0.355126
+  type: 'test'
+  ...
+# Subtest: SELECT malformed IR fails before callbacks: unknown clause
+ok 250 - SELECT malformed IR fails before callbacks: unknown clause
+  ---
+  duration_ms: 0.392262
+  type: 'test'
+  ...
+# Subtest: SELECT malformed IR fails before callbacks: undefined clause expression
+ok 251 - SELECT malformed IR fails before callbacks: undefined clause expression
+  ---
+  duration_ms: 0.311451
+  type: 'test'
+  ...
+# Subtest: SELECT malformed IR fails before callbacks: malformed clause expression
+ok 252 - SELECT malformed IR fails before callbacks: malformed clause expression
+  ---
+  duration_ms: 0.39053
+  type: 'test'
+  ...
+# Subtest: SELECT malformed IR fails before callbacks: callback inside clause
+ok 253 - SELECT malformed IR fails before callbacks: callback inside clause
+  ---
+  duration_ms: 0.371491
+  type: 'test'
+  ...
+# Subtest: SELECT malformed IR fails before callbacks: missing target
+ok 254 - SELECT malformed IR fails before callbacks: missing target
+  ---
+  duration_ms: 0.300163
+  type: 'test'
+  ...
+# Subtest: SELECT malformed IR fails before callbacks: expression alongside SELECT
+ok 255 - SELECT malformed IR fails before callbacks: expression alongside SELECT
+  ---
+  duration_ms: 0.354075
+  type: 'test'
+  ...
+# Subtest: SELECT malformed IR fails before callbacks: CALL-style result binding
+ok 256 - SELECT malformed IR fails before callbacks: CALL-style result binding
+  ---
+  duration_ms: 0.385412
+  type: 'test'
+  ...
+# Subtest: SELECT malformed IR fails before callbacks: unexpected body
+ok 257 - SELECT malformed IR fails before callbacks: unexpected body
+  ---
+  duration_ms: 0.643742
+  type: 'test'
+  ...
+# Subtest: SELECT absent authority and authority rebinding cannot call an evaluator
+ok 258 - SELECT absent authority and authority rebinding cannot call an evaluator
+  ---
+  duration_ms: 3.227775
+  type: 'test'
+  ...
+# Subtest: SelectionInput preserves source data while SelectRequest enforces request-only uniqueness and witness scope
+ok 259 - SelectionInput preserves source data while SelectRequest enforces request-only uniqueness and witness scope
+  ---
+  duration_ms: 4.091821
+  type: 'test'
+  ...
+# Subtest: SelectionInput rejects explicit null instead of defaulting sequence requirement_refs
+ok 260 - SelectionInput rejects explicit null instead of defaulting sequence requirement_refs
+  ---
+  duration_ms: 0.290168
+  type: 'test'
+  ...
+# Subtest: SelectionInput rejects explicit null instead of defaulting sequence preserve_refs
+ok 261 - SelectionInput rejects explicit null instead of defaulting sequence preserve_refs
+  ---
+  duration_ms: 0.074012
+  type: 'test'
+  ...
+# Subtest: SelectionInput rejects explicit null instead of defaulting sequence dominance_witnesses
+ok 262 - SelectionInput rejects explicit null instead of defaulting sequence dominance_witnesses
+  ---
+  duration_ms: 0.063556
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source builder admission explicit_empty_optionals
+ok 263 - SELECT unchanged source builder admission explicit_empty_optionals
+  ---
+  duration_ms: 0.568068
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source builder admission omitted_optionals
+ok 264 - SELECT unchanged source builder admission omitted_optionals
+  ---
+  duration_ms: 0.366834
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source builder admission single_string_refs
+ok 265 - SELECT unchanged source builder admission single_string_refs
+  ---
+  duration_ms: 0.327184
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source builder admission scalar_reference_spellings
+ok 266 - SELECT unchanged source builder admission scalar_reference_spellings
+  ---
+  duration_ms: 0.480025
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source builder admission trimmed_refs
+ok 267 - SELECT unchanged source builder admission trimmed_refs
+  ---
+  duration_ms: 0.263909
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source builder admission null_DOMINANCE
+ok 268 - SELECT unchanged source builder admission null_DOMINANCE
+  ---
+  duration_ms: 0.359083
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source builder admission null_FACTS
+ok 269 - SELECT unchanged source builder admission null_FACTS
+  ---
+  duration_ms: 0.399424
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source builder admission null_CONTEXT
+ok 270 - SELECT unchanged source builder admission null_CONTEXT
+  ---
+  duration_ms: 0.395848
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source builder admission empty_FROM
+ok 271 - SELECT unchanged source builder admission empty_FROM
+  ---
+  duration_ms: 0.356338
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source builder admission null_FROM
+ok 272 - SELECT unchanged source builder admission null_FROM
+  ---
+  duration_ms: 0.270238
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source builder admission duplicate_FROM
+ok 273 - SELECT unchanged source builder admission duplicate_FROM
+  ---
+  duration_ms: 0.270539
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source builder admission empty_REQUIRE
+ok 274 - SELECT unchanged source builder admission empty_REQUIRE
+  ---
+  duration_ms: 0.23192
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source builder admission null_REQUIRE
+ok 275 - SELECT unchanged source builder admission null_REQUIRE
+  ---
+  duration_ms: 0.289888
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source builder admission duplicate_REQUIRE
+ok 276 - SELECT unchanged source builder admission duplicate_REQUIRE
+  ---
+  duration_ms: 0.341756
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source builder admission empty_PRESERVE
+ok 277 - SELECT unchanged source builder admission empty_PRESERVE
+  ---
+  duration_ms: 0.247775
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source builder admission null_PRESERVE
+ok 278 - SELECT unchanged source builder admission null_PRESERVE
+  ---
+  duration_ms: 0.294075
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source builder admission duplicate_PRESERVE
+ok 279 - SELECT unchanged source builder admission duplicate_PRESERVE
+  ---
+  duration_ms: 0.305622
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source builder admission mapping_FROM
+ok 280 - SELECT unchanged source builder admission mapping_FROM
+  ---
+  duration_ms: 0.295586
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source builder admission mapping_DOMINANCE
+ok 281 - SELECT unchanged source builder admission mapping_DOMINANCE
+  ---
+  duration_ms: 0.266402
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source builder admission sequence_FACTS
+ok 282 - SELECT unchanged source builder admission sequence_FACTS
+  ---
+  duration_ms: 0.263678
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source builder admission sequence_CONTEXT
+ok 283 - SELECT unchanged source builder admission sequence_CONTEXT
+  ---
+  duration_ms: 0.230989
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source builder admission undeclared_fact
+ok 284 - SELECT unchanged source builder admission undeclared_fact
+  ---
+  duration_ms: 0.276488
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source builder admission scalar_alternative_fact
+ok 285 - SELECT unchanged source builder admission scalar_alternative_fact
+  ---
+  duration_ms: 0.440325
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source builder admission undeclared_witness
+ok 286 - SELECT unchanged source builder admission undeclared_witness
+  ---
+  duration_ms: 0.333554
+  type: 'test'
+  ...
+# Subtest: SELECT unchanged source builder admission valid_witness
+ok 287 - SELECT unchanged source builder admission valid_witness
+  ---
+  duration_ms: 0.450059
+  type: 'test'
+  ...
+# Subtest: direct SelectRequest accepts empty requirements and null fact maps while the source builder rejects those clauses
+ok 288 - direct SelectRequest accepts empty requirements and null fact maps while the source builder rejects those clauses
+  ---
+  duration_ms: 0.181815
+  type: 'test'
+  ...
+# Subtest: SELECT refuses unsupported Python container repr and nonexact scalar references before callbacks
+ok 289 - SELECT refuses unsupported Python container repr and nonexact scalar references before callbacks
+  ---
+  duration_ms: 1.85415
+  type: 'test'
+  ...
+# Subtest: actual Source81 compiled SELECT executes unchanged through the common native program store
+ok 290 - actual Source81 compiled SELECT executes unchanged through the common native program store
+  ---
+  duration_ms: 27.350073
+  type: 'test'
+  ...
+# Subtest: all transferred SRC programs validate their exact source, semantic and transitive identities
+ok 291 - all transferred SRC programs validate their exact source, semantic and transitive identities
+  ---
+  duration_ms: 120.211981
+  type: 'test'
+  ...
+# Subtest: a transferred tree cannot resolve an inherited or missing capability
+ok 292 - a transferred tree cannot resolve an inherited or missing capability
+  ---
+  duration_ms: 21.235336
+  type: 'test'
+  ...
+1..292
+# tests 292
+# suites 0
+# pass 292
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 12590.758312

@@ -1,0 +1,66 @@
+--- push-lot10c-checkpoint.before-hardening-01.mjs
++++ push-lot10c-checkpoint.mjs
+@@ -9,16 +9,46 @@
+ const input = await new Promise((resolve, reject) => {
+   let text = '';
++  let settled = false;
++  const wasRaw = process.stdin.isTTY ? process.stdin.isRaw : false;
++  const cleanup = () => {
++    clearTimeout(deadline);
++    process.stdin.removeListener('data', receive);
++    process.stdin.removeListener('end', finish);
++    process.stdin.removeListener('error', fail);
++    for (const signal of ['SIGINT', 'SIGTERM', 'SIGHUP']) process.removeListener(signal, cancel);
++    process.stdin.pause();
++    if (process.stdin.isTTY) process.stdin.setRawMode(Boolean(wasRaw));
++  };
++  const settle = (error, value) => {
++    if (settled) return;
++    settled = true;
++    text = '';
++    try { cleanup(); } catch { error = new Error('Failed to restore hidden input terminal'); }
++    if (error) reject(error); else resolve(value);
++  };
++  const fail = () => settle(new Error('Hidden input stream failed'));
++  const cancel = () => settle(new Error('Hidden input cancelled'));
+   const finish = () => {
+-    process.stdin.removeListener('data', receive);
+-    process.stdin.pause();
+-    if (process.stdin.isTTY) process.stdin.setRawMode(false);
+-    try { resolve(JSON.parse(text)); } catch { reject(new Error('Invalid hidden input')); }
++    let value;
++    try { value = JSON.parse(text); } catch { settle(new Error('Invalid hidden input')); return; }
++    settle(null, value);
+   };
+-  const receive = chunk => { text += chunk; if (text.length > 65536) reject(new Error('Input too large')); else if (/[\r\n]/.test(text)) finish(); };
+-  if (process.stdin.isTTY) process.stdin.setRawMode(true);
+-  process.stdin.setEncoding('utf8');
+-  process.stdin.on('data', receive);
+-  process.stdin.resume();
+-  process.stderr.write('Ready for checkpoint credential JSON on stdin (input is hidden).\n');
++  const receive = chunk => {
++    text += chunk;
++    if (text.length > 65536) settle(new Error('Input too large'));
++    else if (process.stdin.isTTY && text.includes('\u0003')) cancel();
++    else if (/[\r\n]/.test(text)) finish();
++  };
++  const deadline = setTimeout(() => settle(new Error('Timed out waiting for hidden input after 30 seconds')), 30000);
++  try {
++    if (process.stdin.isTTY) process.stdin.setRawMode(true);
++    process.stdin.setEncoding('utf8');
++    process.stdin.on('data', receive);
++    process.stdin.once('end', finish);
++    process.stdin.once('error', fail);
++    for (const signal of ['SIGINT', 'SIGTERM', 'SIGHUP']) process.once(signal, cancel);
++    process.stdin.resume();
++    process.stderr.write('Ready for checkpoint credential JSON on stdin (input is hidden).\n');
++  } catch { settle(new Error('Unable to initialize hidden input')); }
+ });
+ const credential = input.credential;
+@@ -32,5 +62,5 @@
+ function git(args, network = false, check = true) {
+   const env = { ...process.env, GIT_TERMINAL_PROMPT: '0' };
+-  const extra = [];
++  const extra = ['-c', 'gc.auto=0', '-c', 'maintenance.auto=false'];
+   for (const key of Object.keys(env)) if (key.startsWith('GIT_TRACE') || key === 'GIT_CURL_VERBOSE') delete env[key];
+   if (network) {

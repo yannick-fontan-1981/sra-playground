@@ -1,0 +1,37 @@
+{
+  "recordedAt": "2026-11-11T19:37:34.992526+00:00",
+  "before": {
+    "path": "/workspace/scratch/059a057ef035/push-lot10c-checkpoint.before-hardening-01.mjs",
+    "bytes": 5469,
+    "sha256": "80103f16531518778454658ec0ac1a2da16a775b5dd6e2d9e9fc26c49570badb"
+  },
+  "after": {
+    "path": "/workspace/scratch/059a057ef035/push-lot10c-checkpoint.mjs",
+    "bytes": 6764,
+    "sha256": "f6e4f2d6d75db468ff3ae6ae30021cda92a5cb303874b7b4de3ce5b9b28379df"
+  },
+  "diff": {
+    "path": "/workspace/scratch/059a057ef035/push-lot10c-checkpoint.hardening-01.diff",
+    "bytes": 3175,
+    "sha256": "19befbf065aae39efb6bf4ce1598a1f7a0be21a4522676050c34cd528c292404"
+  },
+  "syntaxCheck": {
+    "command": [
+      "node",
+      "--check",
+      "/workspace/scratch/059a057ef035/push-lot10c-checkpoint.mjs"
+    ],
+    "exitCode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "helperExecuted": false,
+  "credentialAccessed": false,
+  "networkUsed": false,
+  "checkoutModified": false,
+  "changes": [
+    "30-second bounded hidden JSON input with shared cleanup and terminal restoration",
+    "All Git invocations disable automatic GC and maintenance"
+  ],
+  "guardAuthProxyExpiryRefPublicationAndWorktreeLogicUnchanged": true
+}

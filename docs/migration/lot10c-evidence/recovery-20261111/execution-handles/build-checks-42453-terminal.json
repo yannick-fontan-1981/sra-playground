@@ -1,0 +1,11 @@
+{
+  "schema": "logos-engine.executor-command-terminal.v1",
+  "sessionId": 42453,
+  "exitCode": 0,
+  "status": "passed",
+  "receipt": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional01/validation/checks-run.json",
+    "sha256": "0e80441e35327795eed6c40458e598def32df0b6b63975650782100b69f2b4ce",
+    "bytes": 223253
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "schema": "logos-engine.lot10c.case-activity-execution.v1",
+  "attemptId": "docs/migration/lot10c-evidence/case-activities/recr01-transport-verification",
+  "game": "RECR",
+  "purpose": "Verify exact lossless compressed transport of the retained large raw RECR checkpoint without semantic inspection",
+  "startedAt": "2026-11-11T18:11:33.144314+00:00",
+  "finishedAt": "2026-11-11T18:11:33.442363+00:00",
+  "status": "completed",
+  "elapsedSecondsThroughCapture": 0.298027567,
+  "activityCeilingSeconds": 60.0,
+  "ceilingExceeded": false,
+  "evidence": [
+    {
+      "path": "docs/migration/lot10c-evidence/development/recr01-transport-verification/receipt.json",
+      "sha256": "f7d5cf7d9e81de00cc1aa71862600ce41d24716f4927e7ec07f403a403c7e929",
+      "bytes": 968
+    }
+  ],
+  "generator": {
+    "path": "docs/migration/lot10c-evidence/case-activity.py",
+    "sha256": "c3a61752ff70eb6724a723a18c10fa4d445bf72d3d54011d7c2d7db6dbbe0681",
+    "bytes": 8126
+  },
+  "executionHelpersUnchanged": true,
+  "qualification": "The entire observed diagnostic/browser interval is charged, including any ceiling excess. No new campaign or success is inferred."
+}
