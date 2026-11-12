@@ -25,6 +25,16 @@ function sameValue(a: any, b: any): boolean {
   return canonical(a) === canonical(b);
 }
 
+/** Match Python container truthiness used by the V6 donor implementation. */
+export function pythonTruthy(value: any): boolean {
+  if (value === null || value === undefined || value === false) return false;
+  if (typeof value === 'number' || typeof value === 'bigint') return value !== 0;
+  if (typeof value === 'string' || Array.isArray(value)) return value.length > 0;
+  if (value instanceof Map || value instanceof Set) return value.size > 0;
+  if (typeof value === 'object') return Object.keys(value).length > 0;
+  return Boolean(value);
+}
+
 export function executeOperation(key: OperationKey, state: SymbolicRecord): OperationResult {
   const cs = (state.compositions ?? []) as SymbolicRecord[];
   const facts = (state.facts ?? {}) as SymbolicRecord;
@@ -109,7 +119,7 @@ export function executeOperation(key: OperationKey, state: SymbolicRecord): Oper
     }
     case 'OP07':
       result.value = ((state.frontiers ?? []) as SymbolicRecord[]).filter(frontier =>
-        frontier.reachable === true && frontier.visited !== true && frontier.open_goal_evidence);
+        frontier.reachable === true && frontier.visited !== true && pythonTruthy(frontier.open_goal_evidence));
       break;
     case 'OP08':
       result.value = cs.filter(composition => links(composition).includes(String(focus.id))).map(composition => composition.id);
@@ -127,7 +137,7 @@ export function executeOperation(key: OperationKey, state: SymbolicRecord): Oper
       break;
     }
     case 'OP10':
-      result.value = ((state.goals ?? []) as SymbolicRecord[]).filter(goal => goal.terminal).map(goal => goal.composition);
+      result.value = ((state.goals ?? []) as SymbolicRecord[]).filter(goal => pythonTruthy(goal.terminal)).map(goal => goal.composition);
       break;
     case 'OP11':
       result.value = Object.fromEntries(cs.map(composition => [composition.id, links(composition)]).filter(([, opened]) => opened.length > 0));
@@ -163,23 +173,23 @@ export function executeOperation(key: OperationKey, state: SymbolicRecord): Oper
         sameValue(Object.hasOwn(composition.effect ?? {}, name) ? composition.effect[name] : facts[name], expected))).map(c => c.id);
       break;
     case 'OP15':
-      result.value = ((state.goals ?? []) as SymbolicRecord[]).filter(goal => !goal.terminal && !goal.completed &&
+      result.value = ((state.goals ?? []) as SymbolicRecord[]).filter(goal => !pythonTruthy(goal.terminal) && !pythonTruthy(goal.completed) &&
         Object.entries(goal.requires ?? {}).every(([name, expected]) => sameValue(facts[name], expected))).map(goal => goal.id);
       break;
     case 'OP16':
-      result.value = ((state.deadlocks ?? []) as SymbolicRecord[]).filter(deadlock => deadlock.proof && deadlock.scope === 'global');
+      result.value = ((state.deadlocks ?? []) as SymbolicRecord[]).filter(deadlock => pythonTruthy(deadlock.proof) && deadlock.scope === 'global');
       result.completeness = 'only supplied proved deadlocks; absence does not prove safety';
       break;
     case 'OP17':
       result.value = ((state.recovery ?? []) as SymbolicRecord[]).filter(recovery => recovery.authorized === true && recovery.preserve_verified === true);
       break;
     case 'OP18':
-      result.value = cs.filter(composition => !composition.observed && composition.open_question).map(composition => composition.id);
+      result.value = cs.filter(composition => !pythonTruthy(composition.observed) && pythonTruthy(composition.open_question)).map(composition => composition.id);
       break;
     case 'OP19': {
       const actions: any[] = [];
       for (const step of (state.forced ?? []) as SymbolicRecord[]) {
-        if (!step.proof || step.constraints_verified !== true) {
+        if (!pythonTruthy(step.proof) || step.constraints_verified !== true) {
           result.status = 'incomplete';
           break;
         }
@@ -197,15 +207,15 @@ export function executeOperation(key: OperationKey, state: SymbolicRecord): Oper
         .map(space => ({ space: space.id, status: 'utility_hypothesis', question: space.question }));
       break;
     case 'OP22':
-      result.value = ((state.remote_effects ?? []) as SymbolicRecord[]).filter(effect => effect.observation);
+      result.value = ((state.remote_effects ?? []) as SymbolicRecord[]).filter(effect => pythonTruthy(effect.observation));
       break;
     case 'OP23':
       result.value = ((state.entities ?? []) as SymbolicRecord[]).flatMap(entity => {
-        if (entity.cycle && entity.cycle_proof) {
+        if (pythonTruthy(entity.cycle) && pythonTruthy(entity.cycle_proof)) {
           const cycle = entity.cycle as any[];
           return [{ entity: entity.id, next: cycle[((entity.phase ?? 0) + 1) % cycle.length], evidence: entity.cycle_proof }];
         }
-        if (entity.autonomous) return [{ entity: entity.id, next: 'unknown', evidence: undefined }];
+        if (pythonTruthy(entity.autonomous)) return [{ entity: entity.id, next: 'unknown', evidence: undefined }];
         return [];
       });
       break;
@@ -214,7 +224,7 @@ export function executeOperation(key: OperationKey, state: SymbolicRecord): Oper
         sameValue(path.post_state, state.desired_post_state) && path.constraints_verified === true).map(path => path.id);
       break;
     case 'OP25':
-      result.value = cs.filter(composition => composition.candidate_objective && composition.feasibility !== 'refuted').map(c => c.id);
+      result.value = cs.filter(composition => pythonTruthy(composition.candidate_objective) && composition.feasibility !== 'refuted').map(c => c.id);
       break;
     case 'OP26':
       result.value = ((state.accesses ?? []) as SymbolicRecord[]).filter(access =>
@@ -243,7 +253,7 @@ export function executeOperation(key: OperationKey, state: SymbolicRecord): Oper
     }
     case 'OP30':
       result.value = ((state.knowledge_updates ?? []) as SymbolicRecord[]).filter(update =>
-        update.composition_ref === focus.id && update.evidence && update.revision === state.observation_revision);
+        update.composition_ref === focus.id && pythonTruthy(update.evidence) && update.revision === state.observation_revision);
       break;
     case 'OP31':
       result.value = ((state.objective_assessments ?? []) as SymbolicRecord[]).map(assessment => ({
