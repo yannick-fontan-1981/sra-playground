@@ -1,5 +1,42 @@
 # Feuille de route V5/V6 vers Logos Engine TypeScript
 
+<!-- LOT9A_COMMON_QUALIFIED_START -->
+
+## Lot 9A : ChartNavigation raccordé, candidat à 70/76
+
+**Le port du composant et son raccordement commun sont qualifiés dans le périmètre synthétique déclaré.** Le [bilan 9A](lot9a-evidence/README.md) et sa [synthèse vérifiable](lot9a-evidence/validation-summary.json) conservent **175 tests passés dans huit modules** : 134 de référence, 11 de frontière native, six du caller commun et 24 régressions affectées. Le build final avec TypeScript et les deux audits passent.
+
+Le candidat est à **70/76 entrées raccordées (92,1 %), dont 27/33 matérielles**. Son code est sauvegardé au commit `9cabf9b98a5421c5541351d94788105f6b442ce2`. Le gel contient **334 fichiers natifs**, digest `80173ed808e90e721939070f4d0087cba1d51fd396cc700dede3699333215bb7`. Trois fichiers Chart sont ajoutés ; seul le runtime commun change parmi les anciens fichiers natifs. Aucun nouveau numéro de publication n'est réservé.
+
+**Le publié observé reste Site 108 / native 0.67.0, à 69/76**, source `8462204043aa368faa7df280d796bb706eb53b38`. Son accès propriétaire privé est conservé. Le coût officiel et la publication de 9A ne sont pas encore acquis ; le résultat 0.67 contre 0.66 ne leur est pas attribué.
+
+Le corpus original indépendant compte **29 observations 64 × 64, 30 cas géométriques, 80 opérations du propriétaire et 15 cas DRM/SRC**. Les 14 champs source, les positions ambiguës, l'inventaire, les permissions locales et les images intermédiaires sont conservés. Le passage commun qualifié comprend **neuf retours physiques : six acquisitions Chart actives, deux passives et une ablatée**. La sélection de production reste dans l'ordre source, sans injection d'état appris. L'ablation retire la continuation apprise et les deux retours étrangers passent par le propriétaire conservé après désactivation de sa sélection. Aucun niveau de jeu résolu n'est revendiqué.
+
+Les deux échecs de clôture de l'oracle, la première tentative du lecteur commun et le premier audit de migration restent conservés. La récupération du corpus a été revue indépendamment, sans troisième oracle. Le libellé `maximumSessions: 8` reste une réserve de protocole : cinq sessions par lancement, dix cumulées, sans réinterprétation rétroactive ; les 14 retours cumulés et les deux délais restent conformes à leurs bornes explicites. La validation des checkpoints reste structurelle, sans garantie d'authenticité ou de bornes supérieures contre une future trame artificiellement incompatible.
+
+### Feuille de route courante
+
+| Lot ou étape | État établi | Prochaine étape |
+| --- | --- | --- |
+| **Lot 7** | **7A et 7B livrés ; complément Workshop clôturé dans Site 101 ; aucune entrée ouverte du lot 7 au registre** | Conserver les réserves historiques. LKEY reste définitivement fermé. |
+| 8A / 0.65 et 10C / 0.66 | Publiés dans Sites 106 et 107 | Conserver leurs réserves de coût historiques distinctes. |
+| 8B / 0.67 | Publié dans Site 108 ; coût officiel accepté ; complément public BranchRouting qualifié dans son périmètre révisé | Conserver la réserve distincte de récupération après erreur structurelle et les limites de transport navigateur. |
+| **9A `chart_navigation` : composant et caller** | **Qualifiés : 175 tests, build, audits ; candidat 70/76** | Conserver le gel, le corpus, les preuves contraires et les réserves de protocole. |
+| **9A : qualification de livraison** | **Prochaine étape** | Qualifier les formes et graphes exécutés, puis réserver l'identité finale distincte. Les plafonds par lancement et cumulés seront explicites. |
+| **9A : coût officiel et publication** | **Non effectués ; aucun coût accepté** | Mesurer contre le véritable publié sous exclusivité courte, appliquer le seuil global, puis publier sous exclusivité courte. |
+| **9B / 9C** | `region_intervention`, `joint_channels` restent ouverts | Transférer et qualifier leurs propriétaires et acquisitions après 9A. `discrete_network` reste hors compteur 76. |
+| 6C / 6D | `observed_rigid_cargo`, `shared_settlement` restent ouverts au registre intégré | Continuer les branches et qualifications propres, sans présumer un avancement parallèle non observé. |
+| 10D / 10E | `temporal_selection`, `invited_endpoints` restent ouverts au registre intégré | Continuer leurs qualifications propres. |
+| **Lot 11** | **Consolidation ouverte ; six portes globales toujours fausses** | Parité complète, graphes, restauration, sessions longues, coût et lisibilité, après les capacités encore ouvertes des lots 6, 9 et 10. |
+
+Il reste **six entrées ouvertes dans le candidat** et sept dans le publié 0.67. L'audit conserve 219 composants vérifiés, 149 transferts partiels, 1 001 modules en attente et zéro module entièrement vérifié. Le compteur de raccordement ne mesure ni le volume de code ni la parité comportementale complète.
+
+**Règle de coût : chaque médiane globale de session complète doit augmenter de strictement moins de +10 %, pour STCK et SMLP séparément. Une phase au-dessus de +10 % est acceptable si les deux globaux passent, sans suppression d'échantillon ni compensation entre jeux.** Développement, tests fonctionnels, commits et push restent sans verrou global ni attente de disponibilité. Une exclusivité courte demeure réservée aux mesures officielles et à la publication, avec libération propre par le détenteur et sans suppression de fichier détenu.
+
+Les sections suivantes conservent les jalons antérieurs et leurs périmètres historiques.
+
+<!-- LOT9A_COMMON_QUALIFIED_END -->
+
 <!-- LOT8B_FINAL067_START -->
 
 ## Lot 8B : native 0.67 publiée dans Site 108, coût officiel accepté

@@ -1,0 +1,271 @@
+{
+  "schema": "logos-engine.lot9a.functional-integration-summary.v1",
+  "recordedAt": "2026-11-12T14:07:04.762893+00:00",
+  "status": "qualified_component_and_common_integration_with_retained_protocol_reservations",
+  "qualifiedSourceCheckpoint": "9cabf9b98a5421c5541351d94788105f6b442ce2",
+  "branch": "lot9a-chart-navigation-checkpoint-20261112",
+  "candidate": {
+    "nativeImplementationLiteral": "logos-engine.typescript.v6.native-migration/0.67.0",
+    "developmentIdentityOnly": true,
+    "nativeFiles": 334,
+    "nativeDigest": "80173ed808e90e721939070f4d0087cba1d51fd396cc700dede3699333215bb7",
+    "connected": 70,
+    "declared": 76,
+    "percent": 92.1,
+    "materialConnected": 27,
+    "materialDeclared": 33,
+    "fullV6Parity": false,
+    "addedNativeFiles": [
+      "src/logos-engine/v6-chart-navigation-geometry.ts",
+      "src/logos-engine/v6-chart-navigation-policy.ts",
+      "src/logos-engine/v6-chart-navigation.ts"
+    ],
+    "changedPriorNativeFiles": [
+      "src/logos-engine/v6-native-runtime.ts"
+    ],
+    "removedNativeFiles": []
+  },
+  "publishedBaseline": {
+    "siteVersion": 108,
+    "nativeVersion": "0.67.0",
+    "sourceCommit": "8462204043aa368faa7df280d796bb706eb53b38",
+    "connected": 69,
+    "materialConnected": 26,
+    "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "accessPreserved": true
+  },
+  "sourceCorpus": {
+    "frames": 29,
+    "width": 64,
+    "height": 64,
+    "geometryCases": 30,
+    "ownerOperations": 80,
+    "policyCases": 15,
+    "coldComponentSequences": 4,
+    "sourceFilesVerified": 723,
+    "fixtureSha256": "0770706db16249ac4ab1c7c8b9533d571f2fc2cdaeaf5dae2d990806e412cfe8",
+    "originalWrapperStatuses": [
+      "failed",
+      "failed"
+    ],
+    "recoveredCorpusIndependentlyVerified": true,
+    "oracleAttempts": 2,
+    "oracleCumulativeSeconds": 90.42335,
+    "thirdOracleExecuted": false
+  },
+  "freshPassingTests": {
+    "reference": 134,
+    "nativeBoundary": 11,
+    "commonKernel": 6,
+    "affectedRegressions": 24,
+    "total": 175,
+    "modules": 8,
+    "qualification": "Counts from final passing runs only. Failed attempts are retained separately; historical suites and original oracle cases are not added to the test total."
+  },
+  "commonPassedAttempt": {
+    "initializedSessions": 5,
+    "registrationOnlyFactories": 1,
+    "physicalReturns": 9,
+    "activeChartAcquisitions": 6,
+    "passiveChartAcquisitions": 2,
+    "ablatedAcquisitions": 1,
+    "sourceFactRestoresInPrimary": 3,
+    "controlledColdResetsInPrimary": 2,
+    "nativeRestoreCallsInPrimary": 6,
+    "officialSolvedLevelsClaimed": 0,
+    "sourceGroupsFilteredForPositiveSequence": false
+  },
+  "commonCumulativeAttempts": {
+    "attempts": 2,
+    "initializedSessions": 10,
+    "registrationOnlyFactories": 2,
+    "physicalReturns": 14,
+    "activeChartAcquisitions": 10,
+    "passiveChartAcquisitions": 2,
+    "ablatedAcquisitions": 2,
+    "sessionBoundWordingReservation": "maximumSessions:8 was not explicitly scoped per attempt or cumulatively. Five initialized sessions per attempt, ten cumulatively. No retrospective claim of compliance with an eight-session cumulative cap."
+  },
+  "migrationAudit": {
+    "pythonModules": 1369,
+    "componentVerifiedModules": 219,
+    "partiallyTransferredModules": 149,
+    "pendingModules": 1001,
+    "verifiedModules": 0,
+    "completionGates": {
+      "allRequiredCapabilitiesTransferred": false,
+      "fullCommonCallerDifferentialParity": false,
+      "allDeclaredFamiliesIntegrated": false,
+      "commonGraphEditingCoversExecutedPrograms": false,
+      "pythonNumericSemanticsCovered": false,
+      "fullCampaignRegression": false
+    },
+    "finalFailures": []
+  },
+  "commands": [
+    {
+      "kind": "affected-regressions",
+      "attempt": 1,
+      "status": "passed",
+      "exitCode": 0,
+      "elapsedSeconds": 108.61496577200069,
+      "cumulativeSeconds": 108.61496577200069,
+      "inputsUnchanged": true,
+      "headUnchanged": true,
+      "receipt": "docs/migration/lot9a-evidence/integration-runs/affected-regressions-01/receipt.json"
+    },
+    {
+      "kind": "build",
+      "attempt": 1,
+      "status": "passed",
+      "exitCode": 0,
+      "elapsedSeconds": 11.65156329399997,
+      "cumulativeSeconds": 11.65156329399997,
+      "inputsUnchanged": true,
+      "headUnchanged": true,
+      "receipt": "docs/migration/lot9a-evidence/integration-runs/build-01/receipt.json"
+    },
+    {
+      "kind": "chart-common",
+      "attempt": 1,
+      "status": "failed",
+      "exitCode": 1,
+      "elapsedSeconds": 9.623157513000479,
+      "cumulativeSeconds": 9.623157513000479,
+      "inputsUnchanged": true,
+      "headUnchanged": true,
+      "receipt": "docs/migration/lot9a-evidence/integration-runs/chart-common-01/receipt.json"
+    },
+    {
+      "kind": "chart-common",
+      "attempt": 2,
+      "status": "passed",
+      "exitCode": 0,
+      "elapsedSeconds": 12.997527649999938,
+      "cumulativeSeconds": 22.620685163000417,
+      "inputsUnchanged": true,
+      "headUnchanged": true,
+      "receipt": "docs/migration/lot9a-evidence/integration-runs/chart-common-02/receipt.json"
+    },
+    {
+      "kind": "chart-native-contract",
+      "attempt": 1,
+      "status": "passed",
+      "exitCode": 0,
+      "elapsedSeconds": 1.0823951269994723,
+      "cumulativeSeconds": 1.0823951269994723,
+      "inputsUnchanged": true,
+      "headUnchanged": true,
+      "receipt": "docs/migration/lot9a-evidence/integration-runs/chart-native-contract-01/receipt.json"
+    },
+    {
+      "kind": "entry-audit",
+      "attempt": 1,
+      "status": "passed",
+      "exitCode": 0,
+      "elapsedSeconds": 1.0401286550004443,
+      "cumulativeSeconds": 1.0401286550004443,
+      "inputsUnchanged": true,
+      "headUnchanged": true,
+      "receipt": "docs/migration/lot9a-evidence/integration-runs/entry-audit-01/receipt.json"
+    },
+    {
+      "kind": "migration-audit",
+      "attempt": 1,
+      "status": "failed",
+      "exitCode": 1,
+      "elapsedSeconds": 5.851279604999945,
+      "cumulativeSeconds": 5.851279604999945,
+      "inputsUnchanged": true,
+      "headUnchanged": true,
+      "receipt": "docs/migration/lot9a-evidence/integration-runs/migration-audit-01/receipt.json"
+    },
+    {
+      "kind": "migration-audit",
+      "attempt": 2,
+      "status": "passed",
+      "exitCode": 0,
+      "elapsedSeconds": 5.488844064000659,
+      "cumulativeSeconds": 11.340123669000604,
+      "inputsUnchanged": true,
+      "headUnchanged": true,
+      "receipt": "docs/migration/lot9a-evidence/integration-runs/migration-audit-02/receipt.json"
+    },
+    {
+      "kind": "typecheck",
+      "attempt": 1,
+      "status": "passed",
+      "exitCode": 0,
+      "elapsedSeconds": 9.761837905999528,
+      "cumulativeSeconds": 9.761837905999528,
+      "inputsUnchanged": true,
+      "headUnchanged": true,
+      "receipt": "docs/migration/lot9a-evidence/integration-runs/typecheck-01/receipt.json"
+    }
+  ],
+  "build": {
+    "status": "passed",
+    "includesFinalTypecheck": true,
+    "nativeDigest": "80173ed808e90e721939070f4d0087cba1d51fd396cc700dede3699333215bb7",
+    "worker": {
+      "path": "dist/assets/v6-agent-worker-CHbq5p5y.js",
+      "bytes": 7044703,
+      "sha256": "87e4e87e3d676c8556dfdbb23d34e7611dd87643825d7fccd2beb8d961112d65"
+    },
+    "fileCount": 74,
+    "bytes": 30149887
+  },
+  "retainedFailures": [
+    {
+      "scope": "oracle01",
+      "cause": "Late source imports appeared only after corpus execution; old equality check refused closure.",
+      "retained": "reference-01/attempt-01.json"
+    },
+    {
+      "scope": "oracle02",
+      "cause": "Corpus and source integrity checks completed and gzip written; relative output path failed final fingerprint metadata.",
+      "retained": "reference-01/attempt-02.json",
+      "recovery": "reference-01/independent-recovery-review.json"
+    },
+    {
+      "scope": "common01",
+      "cause": "Restoration instrumentation compared object-member order using JSON.stringify. Full source state equalities had passed.",
+      "retained": "integration-runs/chart-common-01/receipt.json",
+      "correction": "common-reader-correction-02.json"
+    },
+    {
+      "scope": "migrationAudit01",
+      "cause": "Two preexisting ignored complete reference gzip archives absent in fresh checkout.",
+      "retained": "integration-runs/migration-audit-01/generated-coverage.json",
+      "correction": "reference-materialization.json"
+    }
+  ],
+  "limits": [
+    "Bounded synthetic component and common-caller qualification only; no fresh live-game success.",
+    "No new Chart facade/worker/browser transport qualification; existing BranchRouting public proof is not assigned to Chart.",
+    "No full common graph differential campaign or long-session qualification.",
+    "Native checkpoint validation is structural, not authenticity/provenance; positive forged coordinates may exceed a future raster.",
+    "No new runtime release identity reserved, no official cost measurement, no9A Site save or deployment.",
+    "LKEY remains permanently closed."
+  ],
+  "officialCost": {
+    "measured": false,
+    "accepted": false,
+    "eachGlobalStrictlyBelowPercent": 10,
+    "games": [
+      "STCK",
+      "SMLP"
+    ],
+    "phaseOverrunsAllowedIfEachGlobalPasses": true,
+    "dropMeasuredSamples": false,
+    "crossGameCompensation": false
+  },
+  "coordination": {
+    "ordinaryWorkRequiresGlobalLock": false,
+    "globalLockAcquired": false,
+    "publicationLockAcquired": false,
+    "performanceLockAcquired": false,
+    "peerAvailabilityWait": false,
+    "lockFileDeleted": false
+  },
+  "nextStep": "Qualify lot9A delivery forms and executed graphs from the actual published baseline, declare unequivocal per-attempt and cumulative bounds retaining this history, reserve a distinct runtime version, then measure official per-game cost and publish under short exclusive ownership. Continue9B region_intervention and9C joint_channels afterward."
+}

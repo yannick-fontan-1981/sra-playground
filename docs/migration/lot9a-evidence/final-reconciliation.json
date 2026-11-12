@@ -1,0 +1,70 @@
+{
+  "schema": "logos-engine.lot9a.final-reconciliation.v1",
+  "verifiedAt": "2026-11-12T14:08:58.916693+00:00",
+  "status": "passed_for_retained_functional_scope",
+  "nativeFiles": 334,
+  "nativeDigest": "80173ed808e90e721939070f4d0087cba1d51fd396cc700dede3699333215bb7",
+  "buildFiles": 74,
+  "buildHashesMatch": true,
+  "sourceCodeCheckpoint": "9cabf9b98a5421c5541351d94788105f6b442ce2",
+  "sourceAndBuildUnchangedAfterPassingCommands": true,
+  "commandComparisons": [
+    {
+      "attempt": "chart-native-contract-01",
+      "inputsStableDuringCommand": true,
+      "laterChangedPaths": [
+        "migration/v6-transfer-map.json",
+        "tests/v6-chart-navigation-kernel.test.ts"
+      ],
+      "productionStillIdentical": true
+    },
+    {
+      "attempt": "chart-common-02",
+      "inputsStableDuringCommand": true,
+      "laterChangedPaths": [
+        "migration/v6-transfer-map.json"
+      ],
+      "productionStillIdentical": true
+    },
+    {
+      "attempt": "affected-regressions-01",
+      "inputsStableDuringCommand": true,
+      "laterChangedPaths": [
+        "migration/v6-transfer-map.json"
+      ],
+      "productionStillIdentical": true
+    },
+    {
+      "attempt": "entry-audit-01",
+      "inputsStableDuringCommand": true,
+      "laterChangedPaths": [],
+      "productionStillIdentical": true
+    },
+    {
+      "attempt": "migration-audit-02",
+      "inputsStableDuringCommand": true,
+      "laterChangedPaths": [],
+      "productionStillIdentical": true
+    },
+    {
+      "attempt": "build-01",
+      "inputsStableDuringCommand": true,
+      "laterChangedPaths": [],
+      "productionStillIdentical": true
+    }
+  ],
+  "firstTypecheckScope": "The first typecheck predates the final negative-coordinate ingress fix; the passing build includes a fresh TypeScript check of the final source.",
+  "lateMetadataQualification": "The transfer map is a post-qualification inventory update. It is not native execution input. The common matcher correction is captured separately and the passing common02 binds its final file. No runtime/fixture changed after the final passing functional runs.",
+  "referenceTestSourceTiming": {
+    "startedAt": "2026-11-12T13:58:45.000938+00:00",
+    "finalOwnerLastModifiedAt": "2026-11-12T13:57:18.369805+00:00",
+    "qualification": "Observed local file metadata supplements the retained source commit and the independently captured native/common command inputs; it is not an external timestamp attestation."
+  },
+  "retainedOracleFailures": 2,
+  "retainedCommonFailures": 1,
+  "retainedMigrationAuditFailures": 1,
+  "protocolSessionBoundReservationRetained": true,
+  "officialPerformanceAccepted": false,
+  "publicationPerformed": false,
+  "failures": []
+}
