@@ -1,6 +1,7 @@
 import { executeBundleOperation, type CompositionBundle } from './v6-composition-engine.ts';
 import type { SymbolicRecord } from './v6-operations.ts';
 import type { OperationCompleteness, OperationTraceSink } from './v6-operation-trace.ts';
+import type { OperationResultCache } from './v6-operation-cache.ts';
 
 export interface AuthorityObservationIdentity {
   episodeId: string;
@@ -81,6 +82,7 @@ export function releaseBundle(
   state: SymbolicRecord,
   identity: AuthorityObservationIdentity,
   trace?: OperationTraceSink,
+  cache?: OperationResultCache,
 ): { need: ReleaseNeed; releaseAllowed: boolean; result?: ReturnType<typeof executeBundleOperation> } {
   const need = assessReleaseNeed(bundle, state, identity, trace);
   if (need.status !== 'needed') {
@@ -94,7 +96,14 @@ export function releaseBundle(
   }
 
   const result = executeBundleOperation(bundle, state, identity.observationRevision, {
-    needId: need.needId, caller: 'nativeAuthority.release', decisionRef: `release:${bundle.id}:${identity.observationId}`, trace,
+    needId: need.needId, caller: 'nativeAuthority.release', decisionRef: `release:${bundle.id}:${identity.observationId}`, trace, cache,
+    cacheIdentity: {
+      op: bundle.operation_key, focusRef: bundle.composition_ref, levelEpoch: identity.levelEpoch,
+      observationId: identity.observationId, observationRevision: identity.observationRevision,
+      inputRefs: [bundle.id, bundle.composition_ref],
+      dependencyRevisions: { observation: identity.observationRevision, bundle: bundle.observation_revision },
+      objectiveRef: bundle.objective_ref,
+    },
   });
   return { need, releaseAllowed: result.releaseAllowed, result };
 }
