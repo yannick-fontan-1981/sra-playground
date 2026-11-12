@@ -1,0 +1,29 @@
+{
+  "schema": "logos-engine.lot8b.publication-observation-at-functional-closure.v1",
+  "observedAt": "2026-11-12 05:30:44 UTC",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "status": "active",
+  "currentLiveUrl": "https://sra-playground.yannick-fontan.chatgpt.site",
+  "latestSavedVersion": 107,
+  "observedVersion": {
+    "id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_94f341f3a7188191b79c05be4f3820f1",
+    "number": 107,
+    "sourceCommit": "4ff7bf45286a8a19d34401988adca587253ae41e",
+    "deploymentId": "appgdep_6af5171c53b08191ad6f80c0e52b41b7"
+  },
+  "previouslyVerifiedPublishedVersion": 107,
+  "previouslyVerifiedNativeVersion": "0.66.0",
+  "publicationEvidence": "docs/migration/lot10c-evidence/priority-publication-066-20261112/publication-result.json",
+  "access": {
+    "mode": "custom",
+    "revision": 3,
+    "explicitAllowedUserCount": 1,
+    "allowedGroupCount": 0,
+    "externalVisitorCount": 0
+  },
+  "readsOnly": true,
+  "successfulDeploymentNotPolledAgain": true,
+  "publicationPerformed": false,
+  "accessModified": false,
+  "qualification": "Fresh get_site and latest-version provenance observation, linked to the retained successful Site107 publication. No new version or deployment was created."
+}

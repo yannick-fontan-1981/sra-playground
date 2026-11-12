@@ -1,0 +1,639 @@
+{
+  "schema": "logos-engine.lot8b.branch-runtime-results-independent-review.v1",
+  "reviewDate": "2026-11-12",
+  "reviewer": "/root/branch_routing_source",
+  "status": "reviewed_completed_native_runtime_results_no_blocking_objection",
+  "verdictReviewed": "qualified_synthetic_common_work_forms_and_graphs",
+  "qualification": "Read-only independent review of the completed capture02 and reader02 results, their raw byte pins, final source states, counts and retained graph links. Execution belongs to the parent agent. This reviewer did not rerun or import either tool, the native runtime or an original oracle.",
+  "basis": {
+    "staticReviewV2": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-tools-v2-independent-review.json",
+      "bytes": 23663,
+      "sha256": "6973e5c948f0883ad530694737155183608c4d097fbfcf35be56945a2e85ccd6"
+    },
+    "staticReviewV2Author": "branch_routing_native",
+    "reliance": "The existing independent static review establishes the v1-to-v2 boundary change and the frozen reader assertions. This results review verifies the actual artifacts and pins rather than re-executing the graph validation.",
+    "independenceLimit": "Internal review, not an external provenance authentication. This reviewer previously authored the generic component oracle exporter/corpus and reviewed v1 tools; the v2 static review was performed by branch_routing_native."
+  },
+  "actualBoundary": {
+    "entryBoundary": "NativeV6Runtime",
+    "methods": [
+      "initialize",
+      "advance",
+      "resume",
+      "inspectKnowledge",
+      "close"
+    ],
+    "realFactoryCalls": 5,
+    "publicServiceQualified": false,
+    "publicWorkerQualified": false,
+    "publicTicketsQualified": false,
+    "noManufacturedServiceTickets": true,
+    "noRasterPadding": true,
+    "acquiredStateInjected": false,
+    "qualification": "Five cold sessions use the production native runtime factory and its actual commands, authorizations and separately observed authorizationIdentity. inspectKnowledge is actual memory; close returns undefined. These results do not establish the public 64x64 service boundary, palette validation, worker transport or service-ticket behavior."
+  },
+  "observedCounts": {
+    "sessions": 5,
+    "physicalReturns": 26,
+    "completedSourceAcquisitions": 23,
+    "ablatedReturns": 1,
+    "incompleteReturns": 2,
+    "wrapperRecordCalls": 25,
+    "nativeAdapterRecordInvocations": 24,
+    "executedModes": {
+      "calibrate": 17,
+      "move": 6,
+      "propagate": 1,
+      "select": 2
+    },
+    "unexecutedAuthorizedQuestions": 3,
+    "officialSolvedLevels": 0
+  },
+  "observedContribution": {
+    "positiveAndContraryShareFourAcquisitionsAndMoveCommand": true,
+    "contraryChangesMeasuredMotionAndNextQuestion": true,
+    "nextActionNameAloneDoesNotDistinguishCalibrateFromPropagate": true,
+    "ablationSharesFirstCommandAndPublicReturn": true,
+    "ablationLeavesControlUnlearnedAndRepeatsAction1": true,
+    "commonRestoreReadsActuallyPersistedOwner": true,
+    "incompletePrefixRetainsTwoUnacquiredPublicTransitions": true
+  },
+  "graphEvidence": {
+    "checkedCallPoints": 64,
+    "failedCallPoints": 0,
+    "requestsByMethod": {
+      "initialize": 5,
+      "advance": 26,
+      "resume": 23,
+      "inspectKnowledge": 5,
+      "close": 5
+    },
+    "allFiveFormsRetainCompleteRawGraph": true,
+    "allFiveFormsReportedIndependentlyValidatedGraph": true,
+    "terminalGraphChainRevisionAndNodeCountMatchCaptureReceipt": true,
+    "finalSourceEventCountsSum": 23,
+    "retainedLinks": "Current native authorization, graphChain/nativeExecutionDigest, guard, WHY/ACT, state/prediction, selected common program, owner root, prefix and returned transition remain linked in work-forms.json and the complete capture.",
+    "restoreScope": "Ordinary common runtime restoration reads the actually persisted family_state:branch_routing root. This does not add a deliberate erase-and-rehydrate exercise or a universal serialization/provenance claim.",
+    "readerRuntimeSessions": 0,
+    "graphValidationRerunByThisReviewer": false,
+    "compressedCaptureDecodedByThisReviewer": false,
+    "qualification": "The parent-run reader used the pinned real Kernel/store validators and state codecs. This reviewer inspected its 64 successful checkpoints and the five complete form summaries, compared terminal states with capture receipts, and verified capture/output byte hashes without reconstructing the entire graph validation."
+  },
+  "perSession": [
+    {
+      "id": "single-positive",
+      "physicalReturns": 6,
+      "sourceAcquisitionsCompleted": 6,
+      "wrapperRecordCalls": 6,
+      "nativeAdapterRecordInvocations": 6,
+      "executedModes": [
+        "calibrate",
+        "calibrate",
+        "calibrate",
+        "calibrate",
+        "move",
+        "propagate"
+      ],
+      "unexecutedAuthorizedQuestions": [],
+      "nodeCount": 278,
+      "graphRevision": 872,
+      "graphChain": "ce6b912844e6d02369c7831c00c2ab6a4afedae966d43c8a058f4e50e9dd4d4e",
+      "completeRawGraphRetainedInCapture": true,
+      "independentlyValidatedGraph": true,
+      "factoryCalls": 1,
+      "capturesReviewed": 14,
+      "recordedRestoreLinks": 12,
+      "authorityAndReturnLinks": 12,
+      "terminalKind": "boundary",
+      "terminalReason": null,
+      "commonAcquiredTransitions": 6,
+      "sourceEventCount": 6,
+      "ownerFinished": true,
+      "ownerPassed": [],
+      "motion": {
+        "ACTION1": [
+          0,
+          -2
+        ],
+        "ACTION2": [
+          0,
+          2
+        ],
+        "ACTION3": [
+          -2,
+          0
+        ],
+        "ACTION4": [
+          2,
+          0
+        ]
+      },
+      "intervention": null
+    },
+    {
+      "id": "triple-prefix",
+      "physicalReturns": 7,
+      "sourceAcquisitionsCompleted": 7,
+      "wrapperRecordCalls": 7,
+      "nativeAdapterRecordInvocations": 7,
+      "executedModes": [
+        "calibrate",
+        "calibrate",
+        "calibrate",
+        "calibrate",
+        "select",
+        "move",
+        "move"
+      ],
+      "unexecutedAuthorizedQuestions": [
+        {
+          "mode": "propagate",
+          "command": {
+            "action_ref": "ACTION5"
+          }
+        }
+      ],
+      "nodeCount": 294,
+      "graphRevision": 902,
+      "graphChain": "8a4a393c633043db8123b8791ba3ddff2d3f2e06f369e45ef702832622b61696",
+      "completeRawGraphRetainedInCapture": true,
+      "independentlyValidatedGraph": true,
+      "factoryCalls": 1,
+      "capturesReviewed": 16,
+      "recordedRestoreLinks": 13,
+      "authorityAndReturnLinks": 15,
+      "terminalKind": "action",
+      "terminalReason": null,
+      "commonAcquiredTransitions": 7,
+      "sourceEventCount": 7,
+      "ownerFinished": false,
+      "ownerPassed": [],
+      "motion": {
+        "ACTION1": [
+          0,
+          -2
+        ],
+        "ACTION2": [
+          0,
+          2
+        ],
+        "ACTION3": [
+          -2,
+          0
+        ],
+        "ACTION4": [
+          2,
+          0
+        ]
+      },
+      "intervention": null
+    },
+    {
+      "id": "contrary-return",
+      "physicalReturns": 5,
+      "sourceAcquisitionsCompleted": 5,
+      "wrapperRecordCalls": 5,
+      "nativeAdapterRecordInvocations": 5,
+      "executedModes": [
+        "calibrate",
+        "calibrate",
+        "calibrate",
+        "calibrate",
+        "move"
+      ],
+      "unexecutedAuthorizedQuestions": [
+        {
+          "mode": "calibrate",
+          "command": {
+            "action_ref": "ACTION5"
+          }
+        }
+      ],
+      "nodeCount": 270,
+      "graphRevision": 775,
+      "graphChain": "fd6f5f872c93828a851b1ab6513f9aecec75ff080c6c8d8409928340a1b26c1d",
+      "completeRawGraphRetainedInCapture": true,
+      "independentlyValidatedGraph": true,
+      "factoryCalls": 1,
+      "capturesReviewed": 13,
+      "recordedRestoreLinks": 11,
+      "authorityAndReturnLinks": 11,
+      "terminalKind": "action",
+      "terminalReason": null,
+      "commonAcquiredTransitions": 5,
+      "sourceEventCount": 5,
+      "ownerFinished": false,
+      "ownerPassed": [],
+      "motion": {
+        "ACTION1": [
+          0,
+          2
+        ],
+        "ACTION2": [
+          0,
+          2
+        ],
+        "ACTION3": [
+          -2,
+          0
+        ],
+        "ACTION4": [
+          2,
+          0
+        ]
+      },
+      "intervention": null
+    },
+    {
+      "id": "selected-acquisition-ablation",
+      "physicalReturns": 1,
+      "sourceAcquisitionsCompleted": 0,
+      "wrapperRecordCalls": 1,
+      "nativeAdapterRecordInvocations": 0,
+      "executedModes": [
+        "calibrate"
+      ],
+      "unexecutedAuthorizedQuestions": [
+        {
+          "mode": "calibrate",
+          "command": {
+            "action_ref": "ACTION1"
+          }
+        }
+      ],
+      "nodeCount": 214,
+      "graphRevision": 333,
+      "graphChain": "a2b21c6de2e644d87b12ae2b0f82b3ef1cecf3c34346b185582f71d22fde84ec",
+      "completeRawGraphRetainedInCapture": true,
+      "independentlyValidatedGraph": true,
+      "factoryCalls": 1,
+      "capturesReviewed": 5,
+      "recordedRestoreLinks": 3,
+      "authorityAndReturnLinks": 3,
+      "terminalKind": "action",
+      "terminalReason": null,
+      "commonAcquiredTransitions": 1,
+      "sourceEventCount": 0,
+      "ownerFinished": false,
+      "ownerPassed": [],
+      "motion": {},
+      "intervention": "registered_record_returns_empty_events_without_calling_original"
+    },
+    {
+      "id": "incomplete-prefix",
+      "physicalReturns": 7,
+      "sourceAcquisitionsCompleted": 5,
+      "wrapperRecordCalls": 6,
+      "nativeAdapterRecordInvocations": 6,
+      "executedModes": [
+        "calibrate",
+        "calibrate",
+        "calibrate",
+        "calibrate",
+        "select",
+        "move",
+        "move"
+      ],
+      "unexecutedAuthorizedQuestions": [],
+      "nodeCount": 290,
+      "graphRevision": 890,
+      "graphChain": "6298da456bda5ee61b2afb3a23364e1c46fda83990f86a036a19bf5d87061269",
+      "completeRawGraphRetainedInCapture": true,
+      "independentlyValidatedGraph": true,
+      "factoryCalls": 1,
+      "capturesReviewed": 16,
+      "recordedRestoreLinks": 12,
+      "authorityAndReturnLinks": 14,
+      "terminalKind": "stopped",
+      "terminalReason": "native_acquisition_incomplete",
+      "commonAcquiredTransitions": 7,
+      "sourceEventCount": 5,
+      "ownerFinished": false,
+      "ownerPassed": [],
+      "motion": {
+        "ACTION1": [
+          0,
+          -2
+        ],
+        "ACTION2": [
+          0,
+          2
+        ],
+        "ACTION3": [
+          -2,
+          0
+        ],
+        "ACTION4": [
+          2,
+          0
+        ]
+      },
+      "intervention": "runtime_level_clock_expires_after_actual_second_move_after_guard",
+      "twoIncompleteReturnLinks": [
+        {
+          "kind": "actual_prefix_relations_and_checked_return",
+          "prefixNode": "prefix_evidence:6",
+          "transitionNode": "reasoning:transition:6",
+          "ownerNode": "family_state:branch_routing",
+          "selectedBy": "program:v6.composition_strategy.choose",
+          "action": 6,
+          "mode": "move",
+          "recordOperation": 42
+        },
+        {
+          "kind": "actual_prefix_relations_and_checked_return",
+          "prefixNode": "prefix_evidence:6",
+          "transitionNode": "reasoning:transition:7",
+          "ownerNode": "family_state:branch_routing",
+          "selectedBy": "program:v6.composition_strategy.choose",
+          "action": 7,
+          "mode": "move",
+          "recordOperation": null
+        }
+      ]
+    }
+  ],
+  "sourceAndExpectations": {
+    "native": {
+      "fileCount": 331,
+      "digest": "3ff1d9ad56e22aedc0fee3a0da6a3af50a1da0bc14a0ba01cb38272ba85234be"
+    },
+    "validatedSourceCommit": "4d84045a6e485c412c0114de75edd216c329a90b",
+    "nativeSourceAndCapturedCommitUnchangedDuringCapture": true,
+    "all331CurrentNativeFileHashesVerified": true,
+    "fixture": {
+      "path": "tests/fixtures/v6-branch-routing-reference.json",
+      "bytes": 542660,
+      "sha256": "e6ae197b7b982bd41f561b9df8e458436d7ce0797f39bbf86d972e55472b6769"
+    },
+    "exporter": {
+      "path": "scripts/export-v6-branch-routing-reference.py",
+      "bytes": 26287,
+      "sha256": "7def846785568c7afad5786437c2ad2f2dce82e5348a37be569a38e8f6c7ef89"
+    },
+    "originalOracleRegenerated": false,
+    "originalOraclesExecutedByCaptureOrReader": 0,
+    "runtimeSessionsExecutedByReader": 0,
+    "expectedValueScope": "Retained independent corpus03 states/events on unchanged synthetic rasters, with explicit observation-reference transport and common selected point (6,13), distinct from the manual component point (7,13). Missing calibration after-guards use the already-declared source rule; this is not a new original invocation.",
+    "tools": [
+      {
+        "path": "docs/migration/lot8b-evidence/tools/delivery/branch-common-capture-v2.mjs",
+        "bytes": 32210,
+        "sha256": "98c4a0af05e929807723669baefd27bc5b7ae30acb60e07c84625a8b420e4eb5"
+      },
+      {
+        "path": "docs/migration/lot8b-evidence/tools/delivery/branch-common-qualify-v2.mjs",
+        "bytes": 58745,
+        "sha256": "dce80476cad9bcb0db4e838f944692565ae652ed1b7874a6abb153dc9893a457"
+      },
+      {
+        "path": "docs/migration/lot8b-evidence/tools/delivery/README-branch-common-v2.md",
+        "bytes": 12915,
+        "sha256": "37519bf3b2aa3c7ac2e28d007571645eefbf08cba9fc189a73d9d3818955397c"
+      }
+    ]
+  },
+  "resultPins": {
+    "capture": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-02/capture.jsonl.gz",
+      "bytes": 5258556,
+      "sha256": "7edfd483ffedc5536fd12cb4c14ce799c84d7e54404ba4517b2dc0968e1cad99"
+    },
+    "captureReceipt": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-02/capture.receipt.json",
+      "bytes": 129766,
+      "sha256": "284df02f147a44a7233b0a41d44ae1377acd6b2c35f45be366c9ae436da82bbe"
+    },
+    "graphReview": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-qualify-02/graph-review.json",
+      "bytes": 59736,
+      "sha256": "e65982c42c20ab45387de4c28b6225b4fb889252dd0600c8fdcfb54a882a1044"
+    },
+    "workForms": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-qualify-02/work-forms.json",
+      "bytes": 159888,
+      "sha256": "74eaf26e106a6f5aaec610cf299f8c8b61729a6b519fab7a3e67e68a1c3cd1c5"
+    },
+    "crossLinksAndCompressedBytePinsVerified": true
+  },
+  "executionReceipts": [
+    {
+      "attempt": "branch-capture-02",
+      "receipt": {
+        "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-02/receipt.json",
+        "bytes": 2296,
+        "sha256": "2df9b92b6a6d298160c6b9ad79a4252fefc9c2874b1090908f1859ab4a18a9c0"
+      },
+      "status": "passed",
+      "exitCode": 0,
+      "startedAt": "2026-11-12T05:24:24.710356+00:00",
+      "finishedAt": "2026-11-12T05:24:40.400644+00:00",
+      "elapsedSeconds": 15.688077242000873,
+      "timeoutSeconds": 300,
+      "childProcessReaped": true,
+      "inputsBefore": {
+        "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-02/inputs-before.json",
+        "bytes": 69042,
+        "sha256": "d4be40d8d11dc6ab8c25e2685c91967a58c6ab8dd4267bcc2ffffcd9de092138"
+      },
+      "inputsAfter": {
+        "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-02/inputs-after.json",
+        "bytes": 69042,
+        "sha256": "d4be40d8d11dc6ab8c25e2685c91967a58c6ab8dd4267bcc2ffffcd9de092138"
+      },
+      "inputPinCount": 369,
+      "log": {
+        "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-02/output.log.gz",
+        "bytes": 258,
+        "sha256": "b2bd7326b07c7a111f95053852427004991d6c0ec5c5c1e81fa03f3d3d014f0a"
+      },
+      "outputs": [
+        {
+          "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-02/capture.jsonl.gz",
+          "bytes": 5258556,
+          "sha256": "7edfd483ffedc5536fd12cb4c14ce799c84d7e54404ba4517b2dc0968e1cad99"
+        },
+        {
+          "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-02/capture.receipt.json",
+          "bytes": 129766,
+          "sha256": "284df02f147a44a7233b0a41d44ae1377acd6b2c35f45be366c9ae436da82bbe"
+        }
+      ]
+    },
+    {
+      "attempt": "branch-qualify-02",
+      "receipt": {
+        "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-qualify-02/receipt.json",
+        "bytes": 2494,
+        "sha256": "42e151b3b31b19cf5e8f4de7db85c4c587f99c0203feea5f5f131fef398cc692"
+      },
+      "status": "passed",
+      "exitCode": 0,
+      "startedAt": "2026-11-12T05:25:03.223029+00:00",
+      "finishedAt": "2026-11-12T05:25:12.235555+00:00",
+      "elapsedSeconds": 9.01006227399921,
+      "timeoutSeconds": 300,
+      "childProcessReaped": true,
+      "inputsBefore": {
+        "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-qualify-02/inputs-before.json",
+        "bytes": 69508,
+        "sha256": "2391ec9815625cd85c2041df8012a07e63098067c8a05e12ac5e643b49859010"
+      },
+      "inputsAfter": {
+        "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-qualify-02/inputs-after.json",
+        "bytes": 69508,
+        "sha256": "2391ec9815625cd85c2041df8012a07e63098067c8a05e12ac5e643b49859010"
+      },
+      "inputPinCount": 371,
+      "log": {
+        "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-qualify-02/output.log.gz",
+        "bytes": 359,
+        "sha256": "759e0647e076a426ac8cbd9e79ab24c91159dc207be8f5551aad98c15f55285e"
+      },
+      "outputs": [
+        {
+          "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-qualify-02/graph-review.json",
+          "bytes": 59736,
+          "sha256": "e65982c42c20ab45387de4c28b6225b4fb889252dd0600c8fdcfb54a882a1044"
+        },
+        {
+          "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-qualify-02/work-forms.json",
+          "bytes": 159888,
+          "sha256": "74eaf26e106a6f5aaec610cf299f8c8b61729a6b519fab7a3e67e68a1c3cd1c5"
+        }
+      ]
+    }
+  ],
+  "previousFailurePreserved": {
+    "receipt": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-01/capture.receipt.json",
+      "bytes": 90621,
+      "sha256": "30b8fe8dc5ca2369981d9e271834913e94f5da1ffc395eb5494993fa732d90a5"
+    },
+    "failureStage": "public_service_validation_before_runtime_factory",
+    "factoryCalls": 0,
+    "physicalReturns": 0,
+    "reason": "The public game frame must be 64 × 64.",
+    "priorArtifactsPreserved": true,
+    "supervisor": {
+      "attempt": "branch-capture-01",
+      "receipt": {
+        "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-01/receipt.json",
+        "bytes": 2287,
+        "sha256": "e0de9145ba5cf54d4326cc1a87a44d479d1824e984fc7ec191d510379ecad731"
+      },
+      "status": "failed",
+      "exitCode": 1,
+      "startedAt": "2026-11-12T05:13:32.925878+00:00",
+      "finishedAt": "2026-11-12T05:13:33.961322+00:00",
+      "elapsedSeconds": 1.0332434869997087,
+      "timeoutSeconds": 300,
+      "childProcessReaped": true,
+      "inputsBefore": {
+        "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-01/inputs-before.json",
+        "bytes": 65631,
+        "sha256": "81892fe0caa4ba7751cbd3dcfb4b16ee40e4143af812d248308bf9d5dd4332a3"
+      },
+      "inputsAfter": {
+        "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-01/inputs-after.json",
+        "bytes": 65631,
+        "sha256": "81892fe0caa4ba7751cbd3dcfb4b16ee40e4143af812d248308bf9d5dd4332a3"
+      },
+      "inputPinCount": 354,
+      "log": {
+        "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-01/output.log.gz",
+        "bytes": 239,
+        "sha256": "c162ff4d499dfc41e307ea5a499e97eb55bdf76ea52866b6493576ad34686ada"
+      },
+      "outputs": [
+        {
+          "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-01/capture.jsonl.gz",
+          "bytes": 18204,
+          "sha256": "2ad3cd4f0a589c67c33b0f5251370162b75c0d20b6084b7808c8789b4bb15f81"
+        },
+        {
+          "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-01/capture.receipt.json",
+          "bytes": 90621,
+          "sha256": "30b8fe8dc5ca2369981d9e271834913e94f5da1ffc395eb5494993fa732d90a5"
+        }
+      ]
+    },
+    "actualStatus": "failed",
+    "actualFactoryCalls": 0,
+    "actualPhysicalReturns": 0,
+    "qualification": "Attempt01 failed at the service frame-size validation before creating the native runtime. Its failed receipt, compressed capture and log remain separate. Attempt02 changes only the harness entry boundary; it does not convert that service rejection into a public-service success."
+  },
+  "historicalPreparationPinReconciliation": {
+    "finding": "The v2 static review pins the syntax-preparation record before a later additive fixture-label check. The current preparation file therefore has a different size and SHA from that historical reference.",
+    "current": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-tools-v2-static-preparation.json",
+      "bytes": 1404,
+      "sha256": "f9eebfc17faafb23d7ce91efecb126ce38240a48359f12901a09d7aabb8349f3"
+    },
+    "historicalPinInStaticReview": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-tools-v2-static-preparation.json",
+      "bytes": 956,
+      "sha256": "26f0cfde9aab74073ba28070088ecd40142609fbe66ca114c32d16ea6750d250"
+    },
+    "removedField": "fixtureLabelStaticCheck",
+    "addedCheck": {
+      "recordedAt": "2026-11-12T05:22:40.469885+00:00",
+      "fixture": "tests/fixtures/v6-branch-routing-reference.json",
+      "sha256": "e6ae197b7b982bd41f561b9df8e458436d7ce0797f39bbf86d972e55472b6769",
+      "frameCount": 37,
+      "compactJsonSha256Prefix16MatchesLabels": true,
+      "lastPacketFrameMatchesCurrentRows": true,
+      "nativeExecution": false,
+      "oracleExecution": false,
+      "fixtureModified": false
+    },
+    "historicalBytesReconstructedInMemory": {
+      "bytes": 956,
+      "sha256": "26f0cfde9aab74073ba28070088ecd40142609fbe66ca114c32d16ea6750d250"
+    },
+    "reconstructedBytesMatchHistoricalPin": true,
+    "fileWritten": false,
+    "actualExecutionPins": "Both attempt02 input inventories and its execution plan already pin the current 1404-byte f9eebfc17faafb23d7ce91efecb126ce38240a48359f12901a09d7aabb8349f3 record, unchanged before/after.",
+    "resolution": "Removing only fixtureLabelStaticCheck from the current JSON in memory and serializing with the original two-space indentation plus newline reproduces exactly the historical 956-byte SHA 26f0cfde9aab74073ba28070088ecd40142609fbe66ca114c32d16ea6750d250. No tool, production file, corpus or old receipt was modified.",
+    "blocking": false
+  },
+  "qualifications": [
+    "The 26 returned transitions are not 26 successful source acquisitions: 23 complete, one declared record ablation and two incomplete returns are separate.",
+    "The 25 wrapper calls include the ablation; 24 actual adapter invocations include the first rejected incomplete acquisition. The second incomplete return has recordOperation:null and remains linked to the same prefix.",
+    "caller.acquiredTransitions counts reconciled returned transitions, including ablated and incomplete owner effects. It is not a learning-success counter.",
+    "The positive single chain finishes with no score increase and an empty passed list. officialSolvedLevels remains zero.",
+    "The contrary return changes ACTION1 from [0,-2] to [0,2] and changes the next question to calibration. ACTION5 alone cannot distinguish the contrary calibration from the other chain's propagation question.",
+    "Three authorized questions remain unexecuted: triple-prefix propagation ACTION5, contrary-return calibration ACTION5 and ablation calibration ACTION1.",
+    "Ablation and runtime-clock expiry are explicit harness interventions. The two incomplete returns remain retained with terminal native_acquisition_incomplete; terminal resume does not authorize reacquisition.",
+    "The reported 15.688077242-second capture and 9.010062274-second reader durations are supervised functional runtimes, not official performance samples. The 1536-MiB V8 setting does not bound total RSS.",
+    "These results establish bounded synthetic common-runtime contribution and retained graph structure. They do not establish a new official game result, whole original-caller parity, cross-version graph equality, STCK/SMLP cost acceptance, a new published version or publication."
+  ],
+  "runtimeExecutionConfiguration": {
+    "yieldControl": "setTimeout(resolve, 0)",
+    "signalProvided": false,
+    "nowProvided": false,
+    "deadlineMsProvided": false,
+    "remainingLevelActionsProvided": false,
+    "runtimeClock": "factory_default_performance_now_except_declared_incomplete_case",
+    "supervisorTimeoutSeconds": 300,
+    "v8OldSpaceMiB": 1536,
+    "officialPerformanceEligible": false
+  },
+  "officialPerformanceEligible": false,
+  "wholeCallerParity": false,
+  "strictCrossVersionGraphParity": false,
+  "publicationEstablished": false,
+  "blockingObjections": [],
+  "reviewerActions": {
+    "metadataAndRawBytesReadOnly": true,
+    "projectRuntimeImported": false,
+    "toolsOrTestsExecuted": false,
+    "oracleOrGameExecuted": false,
+    "captureReplayed": false,
+    "LKEYAccessed": false,
+    "lockAcquired": false,
+    "commitOrPushPerformed": false,
+    "onlyFileWritten": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-runtime-results-independent-review.json"
+  }
+}

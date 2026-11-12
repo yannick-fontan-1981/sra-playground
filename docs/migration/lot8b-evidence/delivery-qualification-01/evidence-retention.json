@@ -1,0 +1,1291 @@
+{
+  "schema": "logos-engine.lot8b.delivery-evidence-retention.v1",
+  "recordedAt": "2026-11-12T05:33:04.707266+00:00",
+  "status": "all_declared_evidence_retained_with_explicit_historical_pin_reconciliation",
+  "retainedFileCount": 234,
+  "retainedBytes": 127104229,
+  "retainedFiles": [
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/README.md",
+      "bytes": 15714,
+      "sha256": "01dea39277c8b740f42e947af5422ceaf4684ab94d57e148033aa640ee6f0afa"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/baseline-native.json",
+      "bytes": 39098,
+      "sha256": "6926e8abdcf9232e4e6d06ad4b60d59e4a8fa473b56a627dc17b7f8ac18d2ac7"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/baseline-preparation-attempt-01.json",
+      "bytes": 493,
+      "sha256": "3eb404818589a97ab08f6653509c9eb76e2d42c1e14fc4aaed7580e782ec64c2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/baseline-preparation-attempt-02.json",
+      "bytes": 682,
+      "sha256": "d5d17656d6f09b92455a90806b1a097c7c8966a216d2c7cddaf3f6401b631d90"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/baseline-preparation.json",
+      "bytes": 1486,
+      "sha256": "5b73e0fe6813dd86bae092ae261054538b6a4d246b0f75f6533f5f303056a6a2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-01/capture.jsonl.gz",
+      "bytes": 18204,
+      "sha256": "2ad3cd4f0a589c67c33b0f5251370162b75c0d20b6084b7808c8789b4bb15f81"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-01/capture.receipt.json",
+      "bytes": 90621,
+      "sha256": "30b8fe8dc5ca2369981d9e271834913e94f5da1ffc395eb5494993fa732d90a5"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-01/declaration.json",
+      "bytes": 1201,
+      "sha256": "a7db80c190e0e61148ba0993ea8c66bb1137e910ddbceef15b6da5a1243ee8c7"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-01/inputs-after.json",
+      "bytes": 65631,
+      "sha256": "81892fe0caa4ba7751cbd3dcfb4b16ee40e4143af812d248308bf9d5dd4332a3"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-01/inputs-before.json",
+      "bytes": 65631,
+      "sha256": "81892fe0caa4ba7751cbd3dcfb4b16ee40e4143af812d248308bf9d5dd4332a3"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-01/output.log.gz",
+      "bytes": 239,
+      "sha256": "c162ff4d499dfc41e307ea5a499e97eb55bdf76ea52866b6493576ad34686ada"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-01/receipt.json",
+      "bytes": 2287,
+      "sha256": "e0de9145ba5cf54d4326cc1a87a44d479d1824e984fc7ec191d510379ecad731"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-01-diagnosis.json",
+      "bytes": 4341,
+      "sha256": "2663996f626dc8015d5127e2e531e6b14291133f95fe5ba420bc6864955940b4"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-02/capture.jsonl.gz",
+      "bytes": 5258556,
+      "sha256": "7edfd483ffedc5536fd12cb4c14ce799c84d7e54404ba4517b2dc0968e1cad99"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-02/capture.receipt.json",
+      "bytes": 129766,
+      "sha256": "284df02f147a44a7233b0a41d44ae1377acd6b2c35f45be366c9ae436da82bbe"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-02/declaration.json",
+      "bytes": 1207,
+      "sha256": "91004d1f7fb1541bfb1ce0fd34d9a667bac38576c430ba3f71318703a3c2b404"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-02/inputs-after.json",
+      "bytes": 69042,
+      "sha256": "d4be40d8d11dc6ab8c25e2685c91967a58c6ab8dd4267bcc2ffffcd9de092138"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-02/inputs-before.json",
+      "bytes": 69042,
+      "sha256": "d4be40d8d11dc6ab8c25e2685c91967a58c6ab8dd4267bcc2ffffcd9de092138"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-02/output.log.gz",
+      "bytes": 258,
+      "sha256": "b2bd7326b07c7a111f95053852427004991d6c0ec5c5c1e81fa03f3d3d014f0a"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-02/receipt.json",
+      "bytes": 2296,
+      "sha256": "2df9b92b6a6d298160c6b9ad79a4252fefc9c2874b1090908f1859ab4a18a9c0"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-execution-plan-02.json",
+      "bytes": 70213,
+      "sha256": "0d5a16b191c0bf40b76ad59bf5bb3ed76341fdff20ae0404b6c60b64851aa976"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-execution-plan.json",
+      "bytes": 66064,
+      "sha256": "cefd65a1a79daa6d48a33dd93aa48087e6a46b7e4f0811056baaf86f885af56f"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-qualify-02/declaration.json",
+      "bytes": 1413,
+      "sha256": "05ea82af5a265df6509e692b9cd612815630a6210e2c0bfe3c9f3b5cfcaa6183"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-qualify-02/graph-review.json",
+      "bytes": 59736,
+      "sha256": "e65982c42c20ab45387de4c28b6225b4fb889252dd0600c8fdcfb54a882a1044"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-qualify-02/inputs-after.json",
+      "bytes": 69508,
+      "sha256": "2391ec9815625cd85c2041df8012a07e63098067c8a05e12ac5e643b49859010"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-qualify-02/inputs-before.json",
+      "bytes": 69508,
+      "sha256": "2391ec9815625cd85c2041df8012a07e63098067c8a05e12ac5e643b49859010"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-qualify-02/output.log.gz",
+      "bytes": 359,
+      "sha256": "759e0647e076a426ac8cbd9e79ab24c91159dc207be8f5551aad98c15f55285e"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-qualify-02/receipt.json",
+      "bytes": 2494,
+      "sha256": "42e151b3b31b19cf5e8f4de7db85c4c587f99c0203feea5f5f131fef398cc692"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-qualify-02/work-forms.json",
+      "bytes": 159888,
+      "sha256": "74eaf26e106a6f5aaec610cf299f8c8b61729a6b519fab7a3e67e68a1c3cd1c5"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-runtime-result-summary.json",
+      "bytes": 8715,
+      "sha256": "e9e5779557b9300398f6e9924ad44781c1efe8099201ec13856ed6f096a66284"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-runtime-results-independent-review.json",
+      "bytes": 25877,
+      "sha256": "5fe1055d858ce680b7a4063e778b32c5a99d43ba1474c1fe1faf2ae18f4b7de4"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-scope-amendment-02.json",
+      "bytes": 4684,
+      "sha256": "e735325038f7546fb097de00757b716a13c210e36b9ba1b0dac4f78ac4583e82"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-tools-independent-review.json",
+      "bytes": 11501,
+      "sha256": "53ca261da069b208fce7dbba8b579ab7502220f2f1a14ee4ac6d0b05b76d00f4"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-tools-static-preparation.json",
+      "bytes": 796,
+      "sha256": "d735435a6605fe64006e2cf255b092a6c50caa2392518d00f5f9256b8a6d0204"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-tools-v2-independent-review.json",
+      "bytes": 23663,
+      "sha256": "6973e5c948f0883ad530694737155183608c4d097fbfcf35be56945a2e85ccd6"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-tools-v2-static-preparation-initial.json",
+      "bytes": 956,
+      "sha256": "26f0cfde9aab74073ba28070088ecd40142609fbe66ca114c32d16ea6750d250"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-tools-v2-static-preparation.json",
+      "bytes": 1404,
+      "sha256": "f9eebfc17faafb23d7ce91efecb126ce38240a48359f12901a09d7aabb8349f3"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/candidate-native.json",
+      "bytes": 39333,
+      "sha256": "56e7533fca83f222b866ce73478a1f925bddb8c7b7c79718e9b99d0c888dc095"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/checkpoint-branch-tools-push-10.json",
+      "bytes": 4252,
+      "sha256": "f0c8b12a94d8583ae7dcbfd97cfa23b2ea4d21cf0151717f2564c23760d4d04d"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/checkpoint-capture-diagnosis-push-14.json",
+      "bytes": 4252,
+      "sha256": "2b89234777f5d6a176ce9e95300042dc10bc765c96d0a1547a36bbbfe83b331d"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/checkpoint-plan-push-07.json",
+      "bytes": 4251,
+      "sha256": "aa1c8e792ed8e2d52bf28174c8040f64bd71d95a0463740681e143fc09a3abbf"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/checkpoint-regressions-complete-push-13.json",
+      "bytes": 4247,
+      "sha256": "6774e818440f798ddbb769887e9cfae2a9cdfe63cccf47ad0aeac8ab2eece98d"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/checkpoint-regressions-part1-push-11.json",
+      "bytes": 4257,
+      "sha256": "e9a07a3806d750f86f956b822e56b4380369ddc83cd1640d0c3b0f8ba6efc4a3"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/checkpoint-regressions-part2-push-12.json",
+      "bytes": 4257,
+      "sha256": "be5e1dd3dd8000c3d72855d87e882c69b9ce6c661ec3b2d70a7198338ffc626c"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/checkpoint-runtime-tools-push-15.json",
+      "bytes": 4244,
+      "sha256": "2da2d5ba63db05b798c2544f469f88aeed863848a52b4f3738abbc3124991ec8"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/checkpoint-work-results-push-09.json",
+      "bytes": 4256,
+      "sha256": "681fe61032a9499294130a1e88f952d10091893cc9680a7a60194c1437967a3d"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/checkpoint-work-tools-push-08.json",
+      "bytes": 4253,
+      "sha256": "47d23f15c544a85fe1b1eece07573dacdf5ae048e1ab9df886569921a51083e5"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/plan.json",
+      "bytes": 5707,
+      "sha256": "48cd44844ff49a3763db6a9b39088c6ddfc8e85d8ceaa922a752789b037e27d4"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/publication-observation-at-closure.json",
+      "bytes": 1248,
+      "sha256": "280ea0cf05d65a4ac98eba1f089346bdac8e66555922a646e957b4b5ddfb4849"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regression-checkpoint-part-01.json",
+      "bytes": 16292,
+      "sha256": "11f8d9a2f6335c6a7c78385ed87904ec1d580e297799d8b4432ca67efb950878"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regression-checkpoint-part-02.json",
+      "bytes": 9573,
+      "sha256": "ce70378c3b85d44e63e94233bce87c8f616fc939127f1c1484a122b00bae017d"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regression-checkpoint-part-03.json",
+      "bytes": 10265,
+      "sha256": "6f07ad484fd4654a62c55f58e83f989aaf85ee57f96cce53649a23e5ae910604"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regression-launch.json",
+      "bytes": 976,
+      "sha256": "ca1f3c7a26d53649ec17f22835fc17a03fc0f6aebed7195d5e801b74aa5c3623"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regression-reference-materialization.json",
+      "bytes": 30212,
+      "sha256": "7d6e7fbb0c3b20989959ba5d21ab4a70f506b7b244e516648959eb00e96b5860"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regression-static-preparation.json",
+      "bytes": 787,
+      "sha256": "c715ae8502b759413846dc332771032f1adc8da69859c3b26fbb792ef74a5671"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/catr-051/comparison.json",
+      "bytes": 11026,
+      "sha256": "69ea31460f760b6a5ee5d129e8ac47c64e491b2ea8ad15167464f2a1b0c4ec6f"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/catr-051/comparison.receipt.json",
+      "bytes": 2107,
+      "sha256": "2fbf496c4c1e0a388ddd08110d6b0a8e41ca961ec2d34e313b06007dd5608b12"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/catr-051/comparison.started.json",
+      "bytes": 1523,
+      "sha256": "67d2cadc05d7680dc43cbd6b71f73a3aab56485d52b6ebe95dc6f229362a4a06"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/catr-051/comparison.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/catr-051/comparison.stdout.log",
+      "bytes": 2662,
+      "sha256": "e078ad301399797e58e05deca1364812df1459effca0a861c598816e80957a77"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/catr-051/passive-owner-presence.json",
+      "bytes": 1109,
+      "sha256": "deddd0d05fa2c190fa5082a6b766af9b1b9bb4fae368281e78752614391fcb1d"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/catr-051/replay.json.gz",
+      "bytes": 2540076,
+      "sha256": "99a4cf5e9d94afb1ca4852c3699cd00b638a80f07e99d41735157c169bb3f8e6"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/catr-051/replay.receipt.json",
+      "bytes": 1704,
+      "sha256": "e51dc6299912956570d91bdf7527f6ce1820b6ef99fd77103a054816175527ec"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/catr-051/replay.started.json",
+      "bytes": 1029,
+      "sha256": "ca8ca9b89c16d8cf913e622ad2527d9831753dbdfbba67e5cce03c33acca65e0"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/catr-051/replay.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/catr-051/replay.stdout.log",
+      "bytes": 39237,
+      "sha256": "1e6cfa2551eb2d07fc002ed3089e04f56a864749663b1de39ec5eeea8e875ded"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/catr-051/result.json",
+      "bytes": 8208,
+      "sha256": "934682525305ed183f1bbcc3e0ceebe66b46a4fb148cbe5b614d6552b99ac128"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/conn-050/comparison.json",
+      "bytes": 11029,
+      "sha256": "f77b3088c34bdbeaf196eb47cc4670b5fd90243e9483139fc61c9c9b6298274d"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/conn-050/comparison.receipt.json",
+      "bytes": 2109,
+      "sha256": "5d17a80252df4f4d884f3dcaf6e335c941734c6d201503c977b66f1df49e61c8"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/conn-050/comparison.started.json",
+      "bytes": 1525,
+      "sha256": "55a8d5091742279ab797a172be27453de6f7751449abc681039ae89707bb29b2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/conn-050/comparison.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/conn-050/comparison.stdout.log",
+      "bytes": 2676,
+      "sha256": "5c1bec6064806d566fe0d2d8773dc42722c956e93241f78d2a7897774a844d48"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/conn-050/passive-owner-presence.json",
+      "bytes": 1109,
+      "sha256": "f9aeb0639494c649a2c35bf60a92c1f0fc52d1977df358940d780316db96792a"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/conn-050/replay.json.gz",
+      "bytes": 5614955,
+      "sha256": "6de77f075b22e097db3e708d953e6dfaf124990ab2338099ed64a5a48dcebc8b"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/conn-050/replay.receipt.json",
+      "bytes": 1707,
+      "sha256": "983d4c9248de8703fcf5a8fc6c6d41a4d68aa5cd2bab228a560b10dc8e7117d6"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/conn-050/replay.started.json",
+      "bytes": 1031,
+      "sha256": "18c89560a04231b70e0f75e7a4c46892107f58dbe048db8cc6f022efab773bce"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/conn-050/replay.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/conn-050/replay.stdout.log",
+      "bytes": 74715,
+      "sha256": "f4eed1dd5a0957d6dfd6712c52ed6d7953bf909c2ef6174afba7f9203bba04f2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/conn-050/result.json",
+      "bytes": 8229,
+      "sha256": "624960d9f9853a731e33f5a5d3ad3a0eb0896256cea4ce17939a5ce4431885f5"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/craf-055/comparison.json",
+      "bytes": 10993,
+      "sha256": "3e71fb509ca30f27b19d63edf02bc61cb28bb97da6329b0d931d7f9e1ea27f0c"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/craf-055/comparison.receipt.json",
+      "bytes": 2072,
+      "sha256": "2df85b26c5ccae0d5ab3c61656990de0d955efdec0550ffa6382dfd053dc64fa"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/craf-055/comparison.started.json",
+      "bytes": 1487,
+      "sha256": "2cfffb6898e354adf27a48422569564ad0ca28ea2fee9175abee9de89b995435"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/craf-055/comparison.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/craf-055/comparison.stdout.log",
+      "bytes": 2678,
+      "sha256": "8343d90e245351e6032c91bf4e1ab3d670ce150ec8a92e15edd2413070ec6ceb"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/craf-055/passive-owner-presence.json",
+      "bytes": 1110,
+      "sha256": "dc0b6f0d54814b925eb89fb66ccdf0eb09e4b7f5b6e0616ca2932c843544473f"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/craf-055/replay.json.gz",
+      "bytes": 15471761,
+      "sha256": "5581f04c88344f4e34bf0f270a2bee7244dc500deab257858a03f6768629eae3"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/craf-055/replay.receipt.json",
+      "bytes": 1674,
+      "sha256": "3c14f4469d8a5bbb260db1b4ab68c345bdfa9316fc163e6b28b8f6b7ab2792b6"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/craf-055/replay.started.json",
+      "bytes": 993,
+      "sha256": "e5ccecfa847b99e62713fd633a3c3a207f82d4c36a0096fb93aa7cb34a027afd"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/craf-055/replay.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/craf-055/replay.stdout.log",
+      "bytes": 123419,
+      "sha256": "f17181dd08c0f4121b27f8ded49056010fcab94bf617d27b1499285d6ca1ac47"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/craf-055/result.json",
+      "bytes": 8123,
+      "sha256": "3be1c1053431ec8e334bf3c2df6591d0cf774ca87c631a516497bbeb371253a2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/fogw-051/comparison.json",
+      "bytes": 11016,
+      "sha256": "36f4371e9be1e04f736219f5691c5b653139b7771c371badf419a77c987afbc2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/fogw-051/comparison.receipt.json",
+      "bytes": 2094,
+      "sha256": "2b0321ec5aaf3cacf0ae0fecd64f472ab1592ae24895bfec0e1237fa635cc2c8"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/fogw-051/comparison.started.json",
+      "bytes": 1511,
+      "sha256": "a024553b52172bd882d852021ea3ff7ebc05b69d39617d77f189e93bb4d0ac63"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/fogw-051/comparison.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/fogw-051/comparison.stdout.log",
+      "bytes": 2677,
+      "sha256": "5bc5050d204ceacf38c2537d707b4750ed0db096f80d30f5fdbb88c351ca5006"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/fogw-051/passive-owner-presence.json",
+      "bytes": 1110,
+      "sha256": "09d81507689fe50888ed174116f06d007edd91aa21fb1fe7b00affbc2ef0ea22"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/fogw-051/replay.json.gz",
+      "bytes": 12185989,
+      "sha256": "44e7c5f5363a8a6a0519c4a45c42146a14769e5b7e6c10441a99efcdba3a19c9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/fogw-051/replay.receipt.json",
+      "bytes": 1695,
+      "sha256": "175de5a0d002417478a3b657df097c8ff79f6604d87a0adb12033f5f86b193fd"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/fogw-051/replay.started.json",
+      "bytes": 1017,
+      "sha256": "1ee3ef264ceea0dc6c1dee225d13de9a13c78b60e6aeab50e20cd280df8d995b"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/fogw-051/replay.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/fogw-051/replay.stdout.log",
+      "bytes": 131371,
+      "sha256": "b85adfa529875c69be5d715042c2430167171e126297071283393a4195412a39"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/fogw-051/result.json",
+      "bytes": 8189,
+      "sha256": "65626c1f94eb3c54691ce3df89a98aa5f0566fc4b679ac2c0ecb851d89ac4697"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/inputs-after.json",
+      "bytes": 7796,
+      "sha256": "f2a0fbfba83fcdb737682d7f7dffe058b90090d71b0287e4de44b7a78cc1ed7f"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/inputs-before.json",
+      "bytes": 7796,
+      "sha256": "f2a0fbfba83fcdb737682d7f7dffe058b90090d71b0287e4de44b7a78cc1ed7f"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/isos-development-4c/comparison.json",
+      "bytes": 11017,
+      "sha256": "d7c12104fb169ae456e30a928350d336b7fe7e61eebcc98bf7ddae9605ac1d0e"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/isos-development-4c/comparison.receipt.json",
+      "bytes": 2144,
+      "sha256": "9bc0edbb650b976a5a60d3ae1f88fee846e6713bab093400c1b95f205ccda27b"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/isos-development-4c/comparison.started.json",
+      "bytes": 1536,
+      "sha256": "93f1a9c57ff838df4a9fb4faf7df3dd73d3c7e2125adc2eaef9f36d19d1d2d6f"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/isos-development-4c/comparison.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/isos-development-4c/comparison.stdout.log",
+      "bytes": 2704,
+      "sha256": "be297ea14dec375c81d835375bfefda91e57f71f173a167513ba06ba158b04d9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/isos-development-4c/passive-owner-presence.json",
+      "bytes": 1120,
+      "sha256": "9a5b1af0359d67d0b0fb2b0e4219706812aed309d67a7f6dcf8150a952708a36"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/isos-development-4c/replay.json.gz",
+      "bytes": 3849926,
+      "sha256": "133d5bdc7f1015bc33e72053bc955f13566dc14c1082d85bd2b71758c86af360"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/isos-development-4c/replay.receipt.json",
+      "bytes": 1721,
+      "sha256": "33d64221206bb83878f6f92243bba91075c54303d2ce44ab659a8e2397744335"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/isos-development-4c/replay.started.json",
+      "bytes": 1020,
+      "sha256": "501c6efec55998fd2bd338e4be873470f2801054a7880f50346e21d8999ef59b"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/isos-development-4c/replay.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/isos-development-4c/replay.stdout.log",
+      "bytes": 45484,
+      "sha256": "75c61cf3b4118d0bec418d538f6ae60b2f710369efa1b3e22d1392665bd6d361"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/isos-development-4c/result.json",
+      "bytes": 8295,
+      "sha256": "722b7e0fba122acc6fe2659a1e5d19c42780328468cd9305ab613ef554ca636e"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/kata-060-self-consistency/comparison.json",
+      "bytes": 11013,
+      "sha256": "cf64a153d7690a3d016aee25cc932dd3b55acd2d1522321260e5cfcf69984bcb"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/kata-060-self-consistency/comparison.receipt.json",
+      "bytes": 2163,
+      "sha256": "aab40837c0bceec77de8bafd8029721520eb6b3cb6260db5dc08601c22b891ec"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/kata-060-self-consistency/comparison.started.json",
+      "bytes": 1544,
+      "sha256": "9072b68884911496ef25ebfb250908529ad3c3dd2a9ef0bf9738e7da0760698a"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/kata-060-self-consistency/comparison.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/kata-060-self-consistency/comparison.stdout.log",
+      "bytes": 2727,
+      "sha256": "6bc1bb54f559639565125c32523d8c5c5e6d224302f574923e9bdabde1ea080f"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/kata-060-self-consistency/passive-owner-presence.json",
+      "bytes": 1126,
+      "sha256": "25f922652e13e9f65edf1de3c6629342591f43545448e03cfa60b6fc1fb3cca9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/kata-060-self-consistency/replay.json.gz",
+      "bytes": 9774469,
+      "sha256": "bcc066633c817bbadf006d3852fead49b72ff40795eed3942adb0d49a7de3bdb"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/kata-060-self-consistency/replay.receipt.json",
+      "bytes": 1728,
+      "sha256": "ee7c313ff2993d37508a1faa0bc2156ab213e33e7a540224af3f48fa2458039b"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/kata-060-self-consistency/replay.started.json",
+      "bytes": 1016,
+      "sha256": "c33d39c56df2ca1064f920d16a21ea55157f4375ef6db0353449ddd5d2095f01"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/kata-060-self-consistency/replay.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/kata-060-self-consistency/replay.stdout.log",
+      "bytes": 82520,
+      "sha256": "f6003f405e009b42200fedb6f6973b9fdfe6ff24155038e349a98a2edd51eaa9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/kata-060-self-consistency/result.json",
+      "bytes": 8340,
+      "sha256": "6c3232ce41ccdfab5729aa226c069b97d7872043e423055cd473cc54ad25b811"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/mind-051/comparison.json",
+      "bytes": 11014,
+      "sha256": "9dc3a53144e639c9d5eca786fda42c059924d05774f7d7bec8d2734087c41f19"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/mind-051/comparison.receipt.json",
+      "bytes": 2093,
+      "sha256": "aef7c80b43b9a81fea15ac040b7b1a2047071511ed6e2b2ddd6a47ae85a424cd"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/mind-051/comparison.started.json",
+      "bytes": 1510,
+      "sha256": "b20cedb0640ec58f88eed36167b98fae05ca11dedeaa245cc4ff19c79aec330f"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/mind-051/comparison.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/mind-051/comparison.stdout.log",
+      "bytes": 2676,
+      "sha256": "36dbe60b6c97927d703341be2c1246487d794cf70b1cc55fdf31987ecfb42231"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/mind-051/passive-owner-presence.json",
+      "bytes": 1109,
+      "sha256": "c717e0c917283646f629152b3189a1859c3e4c1c00dc635c4c900ffcb0184aa0"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/mind-051/replay.json.gz",
+      "bytes": 6769763,
+      "sha256": "df7a2e9638240e38259d063719127bac7c52add15c457fdbcc7f1b6d6bfd7664"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/mind-051/replay.receipt.json",
+      "bytes": 1692,
+      "sha256": "efdb8665f7ab86756561dfeab0cf14615de654ab369a9fb151d83ca37720e19d"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/mind-051/replay.started.json",
+      "bytes": 1016,
+      "sha256": "9c974aa13c4e5d853ffcd87b0137a2d7ec5a75c0355e65756b1a29fa739a37a7"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/mind-051/replay.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/mind-051/replay.stdout.log",
+      "bytes": 89140,
+      "sha256": "fa1efba250e9269c503cb5238a648ea6bc71bf72c80d95a47e6116d99e835d33"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/mind-051/result.json",
+      "bytes": 8183,
+      "sha256": "c974de48e61f7cd85ff9adc7736a6a68aa799842ea64bb552672adb16d41eef9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/native-after.json",
+      "bytes": 39333,
+      "sha256": "56e7533fca83f222b866ce73478a1f925bddb8c7b7c79718e9b99d0c888dc095"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/native-before.json",
+      "bytes": 39333,
+      "sha256": "56e7533fca83f222b866ce73478a1f925bddb8c7b7c79718e9b99d0c888dc095"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/prevalidation.receipt.json",
+      "bytes": 1493,
+      "sha256": "a37f2eb07673ef68d615e349eabb5a32e17ee81f3d8d513010d984d9669e0ce1"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/prevalidation.started.json",
+      "bytes": 827,
+      "sha256": "a9b08cd81b26225e1cf8ee4662c151922932eb7a634f165cdd194fe2321906e4"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/prevalidation.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/prevalidation.stdout.log",
+      "bytes": 4962,
+      "sha256": "0dccb1d17b1e13ddb4e74a2e6b78bbc4e5f391b3f6c42d1f858c83f25b36c4d4"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/regression-summary.json",
+      "bytes": 103935,
+      "sha256": "7938ecd3370f48db6b1d5e5e0ec1db8b56d448d8435c8381672b4296d1f3322f"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/rswp-051/comparison.json",
+      "bytes": 11013,
+      "sha256": "be4c36e957fc84705fe332cac83702d3e24094681b2d8c4b02fb913fd7aad8aa"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/rswp-051/comparison.receipt.json",
+      "bytes": 2092,
+      "sha256": "cbb1fe455717b6105f577d73a56ae738d05de20564c3ef790ffcfb8cdfa7b948"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/rswp-051/comparison.started.json",
+      "bytes": 1509,
+      "sha256": "93adfa82fd24baf8b8a1ed503cb865eb8fbc9f8ca57fe8e2482542029db92ee4"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/rswp-051/comparison.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/rswp-051/comparison.stdout.log",
+      "bytes": 2676,
+      "sha256": "04e5951b175e703bedb2e056aca10d6fe6d6b23fa59b2d5dfd5e0d999a0b1991"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/rswp-051/passive-owner-presence.json",
+      "bytes": 1109,
+      "sha256": "0e2a35379a80097e40755a7c5628708df5700a77cd31262eab8a5afc1760342f"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/rswp-051/replay.json.gz",
+      "bytes": 3917912,
+      "sha256": "2773a3b791b2b5e05c2dcee1edbf0b0f966c25be24db74f5afb56473d03eab9f"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/rswp-051/replay.receipt.json",
+      "bytes": 1692,
+      "sha256": "18c3b08d23e28f76430f42c98d315ed721033c5a93eeed0a4f0dcab5a69347ae"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/rswp-051/replay.started.json",
+      "bytes": 1015,
+      "sha256": "d763724bdab1f8185e85258a69eca6303392003500047811165563457ad40e50"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/rswp-051/replay.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/rswp-051/replay.stdout.log",
+      "bytes": 55419,
+      "sha256": "50afc02d1f65304fde0a723e90fc898c67bdf1d44e8f17d496450d54977d92a9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/rswp-051/result.json",
+      "bytes": 8181,
+      "sha256": "782085f891b4bf933c97ae09fafe8f93fb208ffa8520a6a572b48904ae3ee149"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/run.started.json",
+      "bytes": 1067,
+      "sha256": "deb939bf01b4feed3bfff51b20c30d51781c6ca0c38da28d07911499867952b5"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/tria-development-4b/comparison.json",
+      "bytes": 11017,
+      "sha256": "bb8d51ce9285e7fdec8bdb7ad2ba275ae00090f199151bf26613add8ed55adfb"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/tria-development-4b/comparison.receipt.json",
+      "bytes": 2144,
+      "sha256": "da00e4d12893141866d32e05c9130a4dc04b026d14529c171fa1f422d6e9be5c"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/tria-development-4b/comparison.started.json",
+      "bytes": 1536,
+      "sha256": "2b1fefd5c5ce478e56d3fb2225634a7da2946dc3f3cfa22f10ee90d9f5790e9f"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/tria-development-4b/comparison.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/tria-development-4b/comparison.stdout.log",
+      "bytes": 2709,
+      "sha256": "2420033b4436e42a4a979b6271a1744048a90ea6d394958abed26cf5e242282e"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/tria-development-4b/passive-owner-presence.json",
+      "bytes": 1120,
+      "sha256": "e7d8c0f23632803628293316c462b2b5f4b532e134b3e458e21b97577c453b73"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/tria-development-4b/replay.json.gz",
+      "bytes": 4482711,
+      "sha256": "1c878a37499d1059f343f5a6b478e71f4e87e37df2331f62e840402f8cbc7cb0"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/tria-development-4b/replay.receipt.json",
+      "bytes": 1718,
+      "sha256": "47c1d553ee822ca98fa013a674845e1ed1984ae270cd0a687ff7fa314ce87079"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/tria-development-4b/replay.started.json",
+      "bytes": 1020,
+      "sha256": "9d3364f34f45bb873e691e96e1501d998a70f3663f14672aceac23f0ca69363a"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/tria-development-4b/replay.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/tria-development-4b/replay.stdout.log",
+      "bytes": 61845,
+      "sha256": "e7237368269f4ae99566d461902ff6aa49d832c87efa8ed059852a91bfecd837"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/tria-development-4b/result.json",
+      "bytes": 8297,
+      "sha256": "c8da616ee5e4a9ce674ce069f51f63de687c770b4515fb3b05d529db5011271a"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/vois-051/comparison.json",
+      "bytes": 11018,
+      "sha256": "0a955d9cc7a0b59029ca7db7f6adfcb18b384319c2fa69df4003b4d9d42cc917"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/vois-051/comparison.receipt.json",
+      "bytes": 2095,
+      "sha256": "0837ec1ad8dbaaa758585fcf478ed0f6d3b43bfe5a21189261d07a698e684fdb"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/vois-051/comparison.started.json",
+      "bytes": 1512,
+      "sha256": "fc0bccddda475d6bc71e7db3e0840c52a4992a6819b9e74a493e152ae12c8a13"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/vois-051/comparison.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/vois-051/comparison.stdout.log",
+      "bytes": 2679,
+      "sha256": "f56d19233768bd53e4d99a7ccad6f07499212110d5dbb60998a872bf9b099943"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/vois-051/passive-owner-presence.json",
+      "bytes": 1110,
+      "sha256": "759a5fc786c53d7be672e5fa4309df187b77db8bd34d9a2cfc6d409c6941f986"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/vois-051/replay.json.gz",
+      "bytes": 15739119,
+      "sha256": "6422f3152130774f5dceee6105abbf5c19a0ed89b75de3c6495561a5ba30752d"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/vois-051/replay.receipt.json",
+      "bytes": 1696,
+      "sha256": "62cc498f6a768b95b639c52b1ecbb7cc671a4fa49d82ee6479f8d3c4dd9ce759"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/vois-051/replay.started.json",
+      "bytes": 1018,
+      "sha256": "f569b3331c1fbb61597b27d8fed48191610f6aeffdbaf077494e620b0dba4274"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/vois-051/replay.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/vois-051/replay.stdout.log",
+      "bytes": 200881,
+      "sha256": "0eefa1b89f14f1806d4aeb2ce1ffcd9148e4f8b07cef4db9e8f0dc672b9f7903"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/vois-051/result.json",
+      "bytes": 8194,
+      "sha256": "15ed077c7e11115d3d1c419d0278f06dce33ad84e5cd722d1da11b128b14a55b"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/comparison.json",
+      "bytes": 11033,
+      "sha256": "52cd9bcb6f9c16808f6e7335285b48980b413f2829894d42de28a3a237f0c523"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/comparison.receipt.json",
+      "bytes": 2108,
+      "sha256": "937b1f11dbfb20a82fad516075e49ca71720bbec7c253a75d35b2b0365fe7253"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/comparison.started.json",
+      "bytes": 1526,
+      "sha256": "453670bef3543183bb26e0d92d7a22c84f82508e2e3ec686fb6454934779ea49"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/comparison.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/comparison.stdout.log",
+      "bytes": 2678,
+      "sha256": "7be160ffb3f76f7ab565a75334d75fd70c7b95958d1e6c253ecb851330974b44"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/host-preparation.json",
+      "bytes": 19683,
+      "sha256": "7a5464b7916b0935beaabc875300a84784828ca30a7cae96875ced570a4cd090"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/passive-owner-presence.json",
+      "bytes": 1110,
+      "sha256": "a72dcd581e6c2c48738938cc21d3166aa727b0eca2e09a637fe4b217e10124e0"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/replay.json.gz",
+      "bytes": 21259326,
+      "sha256": "81bc6c842ea8564703f8aad5e36702a2674065419004544ab007bebe12b0641f"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/replay.receipt.json",
+      "bytes": 1884,
+      "sha256": "a8417a0d6ce3b982ec5c2ab4d4a9bfa43653e6e228e51e0d5ccfcd59eec23929"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/replay.started.json",
+      "bytes": 1205,
+      "sha256": "e5e71f872533e94fef51705d4428f49c3ce4d60aca5fc6530d38d6f165ed18ec"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/replay.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/replay.stdout.log",
+      "bytes": 268939,
+      "sha256": "a498e220fe3bad93a7a02069bb626305a58448941218557dd86567c32ef63f91"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/result.json",
+      "bytes": 8660,
+      "sha256": "63510b237d5a07bdc3f2ff1f196825db5bcf1ca3e268da10a73c75c78dd2b2f3"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-independent-review.json",
+      "bytes": 79205,
+      "sha256": "6f40da88e9e0078aafec490fc71ba7807fdf5d4e46c262d5ecb8eede3b0dbd84"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/source-digest-reconciliation.json",
+      "bytes": 1363,
+      "sha256": "b3193ed5b91fb2faf6c9e5d8622f2387b779adc9660e00d46096d68749df6874"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/static-preparation-review-pin-reconciliation.json",
+      "bytes": 2641,
+      "sha256": "e5905e2c70809c7ea631e0d3f2bd046d6b4628b280be2e8a10cd95f9c42761b2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/validation-summary.json",
+      "bytes": 11858,
+      "sha256": "43b74aaa0e7c4ea8e0a40206975df520398d3b7132b94837122ae908fb582665"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-baseline-01/baseline.json.gz",
+      "bytes": 7212928,
+      "sha256": "384a5f5bb3e00174e8113e35387132284e90a6d5a1af5303ecfe9ed0db3df893"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-baseline-01/baseline.receipt.json",
+      "bytes": 127765,
+      "sha256": "5aebb7ab6f603f305b28bb3ffd262fc4103f433ea4ac7b0e0db051d75036d084"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-baseline-01/declaration.json",
+      "bytes": 1291,
+      "sha256": "4e842100dbc0cd79c9e28d2a88a660e4a5fafba311263b80b8936dcf70c85d89"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-baseline-01/inputs-after.json",
+      "bytes": 121085,
+      "sha256": "3a891bb17aebc9cb11e1e0a7ea8f4325d0228c2e53aedfaefdca1842900027b9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-baseline-01/inputs-before.json",
+      "bytes": 121085,
+      "sha256": "3a891bb17aebc9cb11e1e0a7ea8f4325d0228c2e53aedfaefdca1842900027b9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-baseline-01/output.log.gz",
+      "bytes": 232,
+      "sha256": "d16319298f5d34cdef91407f69f95586882d28c8ed835fbd76a85559ea76d0fa"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-baseline-01/receipt.json",
+      "bytes": 2377,
+      "sha256": "62a81c5166d1305de8a3f6d06fa76e74193410b3a3decf6c2124609ce830c866"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-candidate-01/candidate.json.gz",
+      "bytes": 7261822,
+      "sha256": "79cda8310e4bdf51d0d9a9f20eb05836592b27ef4d5dfa65ca89e2165cbd0ec3"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-candidate-01/candidate.receipt.json",
+      "bytes": 127504,
+      "sha256": "1540cf0493b947bcd03459b8aae3237b0e4214f5add1376b4e16f8c1ed0b69f7"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-candidate-01/declaration.json",
+      "bytes": 1316,
+      "sha256": "4abd4380be5690109dd46e198482033d3f130b2308f4a356405c497b91a8ac6a"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-candidate-01/inputs-after.json",
+      "bytes": 121085,
+      "sha256": "3a891bb17aebc9cb11e1e0a7ea8f4325d0228c2e53aedfaefdca1842900027b9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-candidate-01/inputs-before.json",
+      "bytes": 121085,
+      "sha256": "3a891bb17aebc9cb11e1e0a7ea8f4325d0228c2e53aedfaefdca1842900027b9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-candidate-01/output.log.gz",
+      "bytes": 229,
+      "sha256": "f6ec610925a79e470ad389e9fc2384449d3032b388c01e5f383c139d62b94103"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-candidate-01/receipt.json",
+      "bytes": 2407,
+      "sha256": "25ab7112342d19169a84386f8430d141a32828cf2890afe858dea78a3db2bfb9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-forms-execution-plan.json",
+      "bytes": 143646,
+      "sha256": "11b072a46926116d1bb65cbf9848bf3e5e4a3567c914d1fbe98530c85b1cb193"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-forms-independent-review.json",
+      "bytes": 19212,
+      "sha256": "c234cb918fffab408af6305dc182b3e4d8860aeeeff003d98fa9b564c890ee65"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-forms-result-summary.json",
+      "bytes": 4593,
+      "sha256": "58d9d69b8faeac81b9fc879877ea331631fd2c0c18725e77773431dd169a208a"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-forms-static-preparation.json",
+      "bytes": 1457,
+      "sha256": "f9907197fd16edf3ea7d236496080a823cea0572fd6786e99b6e1e0b5ab5aeff"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-inventory-01/declaration.json",
+      "bytes": 1201,
+      "sha256": "073fc66cabf432359e1b63ccd08cc2c82f217b69832a8ecda12a9c198d38eddf"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-inventory-01/inputs-after.json",
+      "bytes": 121085,
+      "sha256": "3a891bb17aebc9cb11e1e0a7ea8f4325d0228c2e53aedfaefdca1842900027b9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-inventory-01/inputs-before.json",
+      "bytes": 121085,
+      "sha256": "3a891bb17aebc9cb11e1e0a7ea8f4325d0228c2e53aedfaefdca1842900027b9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-inventory-01/output.log.gz",
+      "bytes": 349,
+      "sha256": "9ac2e408980a25117768498a455155070cab93bffe45b57181765df21018c4a1"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-inventory-01/owner-source-inventory.json",
+      "bytes": 130688,
+      "sha256": "5c742dbad9abe0b7564a1e04df20975f13a5880e1f59214b48d1305f39ea175a"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-inventory-01/receipt.json",
+      "bytes": 2001,
+      "sha256": "f694035fbfea1bd07bc9ba36a28753522ec629efe37c7f30699867e0fd547d24"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-qualify-01/declaration.json",
+      "bytes": 1732,
+      "sha256": "53ff6af70e6445d8c235fea14fe0137833fa2fd564113638572c2b4862a431a8"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-qualify-01/graph-review.differences.jsonl.gz",
+      "bytes": 722427,
+      "sha256": "722e90bb92944b1704e4db4f2c6cf71fd61d87cc88808855c076e143fa665219"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-qualify-01/graph-review.json",
+      "bytes": 314458,
+      "sha256": "1407f3e42d31a80f73262426e7c2f27dfb8c5a4cc46a6272cef8c438798cd6de"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-qualify-01/inputs-after.json",
+      "bytes": 122261,
+      "sha256": "ddaf6a063516de2054d45d129f36ee633cbe9e5b5d3891b1da0d1280d3ad4424"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-qualify-01/inputs-before.json",
+      "bytes": 122261,
+      "sha256": "ddaf6a063516de2054d45d129f36ee633cbe9e5b5d3891b1da0d1280d3ad4424"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-qualify-01/output.log.gz",
+      "bytes": 211,
+      "sha256": "e813479f109bde0b198c5debf3d7d4e3cfde05bd3924ad2151b784427ad07a89"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-qualify-01/receipt.json",
+      "bytes": 3117,
+      "sha256": "767517b91da0bda33ec7660e01ebb886192b05d297994f1df8de0cf19f23d200"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-qualify-01/work-forms.json",
+      "bytes": 60626,
+      "sha256": "380bd1076a8d2a5d8ac6f9b2b1a9ba986a012af02813414a562361cd0f2ba0c1"
+    }
+  ],
+  "rawLogDuplicatesRetainedExactlyAsGzip": [
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-01/output.raw.log",
+      "bytes": 381,
+      "sha256": "b623e164891f9a893a447ba25935280fbc24a4be6959e18ff9bc926e6dc99df3",
+      "exactCompressedRetention": {
+        "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-01/output.log.gz",
+        "bytes": 239,
+        "sha256": "c162ff4d499dfc41e307ea5a499e97eb55bdf76ea52866b6493576ad34686ada"
+      }
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-02/output.raw.log",
+      "bytes": 411,
+      "sha256": "6e5362088a410fffdd8c9001ce3f3abda3c18c5cd034a2210cb26814f5f32326",
+      "exactCompressedRetention": {
+        "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-02/output.log.gz",
+        "bytes": 258,
+        "sha256": "b2bd7326b07c7a111f95053852427004991d6c0ec5c5c1e81fa03f3d3d014f0a"
+      }
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-qualify-02/output.raw.log",
+      "bytes": 619,
+      "sha256": "bf912d76166d78a0a8bf9f1f181469ae7b300fb15a7ba158e1e7c08b08dc066f",
+      "exactCompressedRetention": {
+        "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-qualify-02/output.log.gz",
+        "bytes": 359,
+        "sha256": "759e0647e076a426ac8cbd9e79ab24c91159dc207be8f5551aad98c15f55285e"
+      }
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-baseline-01/output.raw.log",
+      "bytes": 377,
+      "sha256": "a3799a3f3062c227aca400802e95afe6d879a467bc2f6d425211e2e099b4e054",
+      "exactCompressedRetention": {
+        "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-baseline-01/output.log.gz",
+        "bytes": 232,
+        "sha256": "d16319298f5d34cdef91407f69f95586882d28c8ed835fbd76a85559ea76d0fa"
+      }
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-candidate-01/output.raw.log",
+      "bytes": 382,
+      "sha256": "0a1f973fe1dc0dc1c95f5f811fdf9405e9b556c68d9f1c399cdb29fd8785d107",
+      "exactCompressedRetention": {
+        "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-candidate-01/output.log.gz",
+        "bytes": 229,
+        "sha256": "f6ec610925a79e470ad389e9fc2384449d3032b388c01e5f383c139d62b94103"
+      }
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-inventory-01/output.raw.log",
+      "bytes": 556,
+      "sha256": "4c8a35114a78b547e6db1d06374032bf3cfefd171d8d18a563691450a953af4f",
+      "exactCompressedRetention": {
+        "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-inventory-01/output.log.gz",
+        "bytes": 349,
+        "sha256": "9ac2e408980a25117768498a455155070cab93bffe45b57181765df21018c4a1"
+      }
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-qualify-01/output.raw.log",
+      "bytes": 276,
+      "sha256": "6f2b6b3206988342f5225ba85ea3478dff2ab5e3d19dd08895451cc4bb0052a5",
+      "exactCompressedRetention": {
+        "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-qualify-01/output.log.gz",
+        "bytes": 211,
+        "sha256": "e813479f109bde0b198c5debf3d7d4e3cfde05bd3924ad2151b784427ad07a89"
+      }
+    }
+  ],
+  "proofReferenceReview": {
+    "documents": [
+      "work-forms-independent-review.json",
+      "regressions-independent-review.json",
+      "branch-tools-v2-independent-review.json",
+      "branch-runtime-results-independent-review.json",
+      "validation-summary.json"
+    ],
+    "checkedUniqueExistingPaths": 261,
+    "missingPaths": [],
+    "unexplainedMismatches": 0,
+    "explainedHistoricalPinOccurrences": [
+      {
+        "document": "branch-tools-v2-independent-review.json",
+        "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-tools-v2-static-preparation.json",
+        "historicalSha256": "26f0cfde9aab74073ba28070088ecd40142609fbe66ca114c32d16ea6750d250",
+        "currentSha256": "f9eebfc17faafb23d7ce91efecb126ce38240a48359f12901a09d7aabb8349f3"
+      },
+      {
+        "document": "branch-tools-v2-independent-review.json",
+        "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-tools-v2-static-preparation.json",
+        "historicalSha256": "26f0cfde9aab74073ba28070088ecd40142609fbe66ca114c32d16ea6750d250",
+        "currentSha256": "f9eebfc17faafb23d7ce91efecb126ce38240a48359f12901a09d7aabb8349f3"
+      },
+      {
+        "document": "branch-runtime-results-independent-review.json",
+        "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-tools-v2-static-preparation.json",
+        "historicalSha256": "26f0cfde9aab74073ba28070088ecd40142609fbe66ca114c32d16ea6750d250",
+        "currentSha256": "f9eebfc17faafb23d7ce91efecb126ce38240a48359f12901a09d7aabb8349f3"
+      }
+    ],
+    "reconciliation": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/static-preparation-review-pin-reconciliation.json",
+      "bytes": 2641,
+      "sha256": "e5905e2c70809c7ea631e0d3f2bd046d6b4628b280be2e8a10cd95f9c42761b2"
+    }
+  },
+  "retentionScope": "All files in this delivery-qualification directory except this self-inventory and exact raw-log duplicates. Tool sources and current roadmap/contract/lineage are retained separately in the same Git checkpoint. Historical full regression baselines are retained in their existing Git byte parts; no duplicate whole baseline archive is added.",
+  "currentSourceStillValidated": true,
+  "officialPerformanceMeasurement": false
+}
