@@ -1,0 +1,90 @@
+{
+  "schema": "logos-engine.lot8b.paired-functional-work-form-summary.v1",
+  "recordedAt": "2026-11-12T04:55:47.821842+00:00",
+  "status": "qualified_functional_work_forms_and_individual_graphs",
+  "captureCheckpoint": "0830ca822e2e4330fa3ffb68d333167b3389fc26",
+  "publishedBaseline": {
+    "site": 107,
+    "sourceCommit": "4ff7bf45286a8a19d34401988adca587253ae41e",
+    "nativeVersion": "0.66.0"
+  },
+  "nativeDigests": {
+    "baseline": "ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316",
+    "candidate": "3ff1d9ad56e22aedc0fee3a0da6a3af50a1da0bc14a0ba01cb38272ba85234be"
+  },
+  "commands": [
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-inventory-01/receipt.json",
+      "bytes": 2001,
+      "sha256": "f694035fbfea1bd07bc9ba36a28753522ec629efe37c7f30699867e0fd547d24"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-baseline-01/receipt.json",
+      "bytes": 2377,
+      "sha256": "62a81c5166d1305de8a3f6d06fa76e74193410b3a3decf6c2124609ce830c866"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-candidate-01/receipt.json",
+      "bytes": 2407,
+      "sha256": "25ab7112342d19169a84386f8430d141a32828cf2890afe858dea78a3db2bfb9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-qualify-01/receipt.json",
+      "bytes": 3117,
+      "sha256": "767517b91da0bda33ec7660e01ebb886192b05d297994f1df8de0cf19f23d200"
+    }
+  ],
+  "checks": {
+    "passed": 64,
+    "failed": 0
+  },
+  "pairedPoints": 58,
+  "sessionsPerRole": 4,
+  "archivedReturnsPerRole": 31,
+  "totalArchivedReturns": 62,
+  "commonValueComparisonPoints": 58,
+  "differences": {
+    "count": 22312,
+    "unattributed": 0,
+    "classes": {
+      "attributed_role_source_digest": 21249,
+      "attributed_exact_trace_created_wall_clock": 1055,
+      "attributed_branch_routing_owner_or_reachable_fragment": 8
+    },
+    "artifact": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-qualify-01/graph-review.differences.jsonl.gz",
+      "bytes": 722427,
+      "sha256": "722e90bb92944b1704e4db4f2c6cf71fd61d87cc88808855c076e143fa665219"
+    }
+  },
+  "privateComparison": "all_observed_common_differences_attributed_functional_only_requires_final_review",
+  "graphReview": {
+    "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-qualify-01/graph-review.json",
+    "bytes": 314458,
+    "sha256": "1407f3e42d31a80f73262426e7c2f27dfb8c5a4cc46a6272cef8c438798cd6de"
+  },
+  "workForms": {
+    "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-qualify-01/work-forms.json",
+    "bytes": 60626,
+    "sha256": "380bd1076a8d2a5d8ac6f9b2b1a9ba986a012af02813414a562361cd0f2ba0c1"
+  },
+  "sourceFixtureCases": {
+    "path": "docs/migration/lot8b-evidence/tools/delivery/work-forms/cases.json",
+    "bytes": 1498,
+    "sha256": "65e27dbcc2f5871ab259358cc46576b2671058630be0b37c643eadad66593173"
+  },
+  "newOwnerCount": 1,
+  "newOwner": "branch_routing",
+  "existingOwnersAndInstalledProgramsPreserved": true,
+  "positiveBranchRoutingAcquisitionsInTheseForms": 0,
+  "qualification": "Functional preservation in observed STCK/SMLP forms; BranchRouting positive contribution is a separate synthetic common-caller proof. All raw differences retained with narrow source-identity, clock and new-owner attribution.",
+  "historicalLabels": "warmup and measured denote work-form lengths only; no official timings are produced.",
+  "independentReview": "pending",
+  "officialPerformanceEligible": false,
+  "officialCostMeasured": false,
+  "strictCommonGraphParity": false,
+  "fullOriginalCallerParity": false,
+  "published": false,
+  "globalLockAcquired": false,
+  "nativeSourceChanged": false
+}

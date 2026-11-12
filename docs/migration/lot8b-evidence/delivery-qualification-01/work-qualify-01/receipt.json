@@ -1,0 +1,58 @@
+{
+  "schema": "logos-engine.lot8b.functional-command.v1",
+  "key": "paired-qualify",
+  "attempt": "work-qualify-01",
+  "plan": {
+    "path": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/delivery-qualification-01/work-forms-execution-plan.json",
+    "bytes": 143646,
+    "sha256": "11b072a46926116d1bb65cbf9848bf3e5e4a3567c914d1fbe98530c85b1cb193"
+  },
+  "command": [
+    "node",
+    "docs/migration/lot8b-evidence/tools/delivery/work-forms/qualify-cost-owner-graphs.mjs",
+    "docs/migration/lot8b-evidence/delivery-qualification-01/work-inventory-01/owner-source-inventory.json",
+    "docs/migration/lot8b-evidence/delivery-qualification-01/work-baseline-01/baseline.json.gz",
+    "docs/migration/lot8b-evidence/delivery-qualification-01/work-baseline-01/baseline.receipt.json",
+    "docs/migration/lot8b-evidence/delivery-qualification-01/work-candidate-01/candidate.json.gz",
+    "docs/migration/lot8b-evidence/delivery-qualification-01/work-candidate-01/candidate.receipt.json",
+    "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/delivery-qualification-01/work-qualify-01/graph-review.json",
+    "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/delivery-qualification-01/work-qualify-01/work-forms.json"
+  ],
+  "cwd": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+  "startedAt": "2026-11-12T04:53:58.745210+00:00",
+  "timeoutSeconds": 600,
+  "headBefore": "0830ca822e2e4330fa3ffb68d333167b3389fc26",
+  "globalLockAcquired": false,
+  "officialPerformanceMeasurement": false,
+  "gameEngineExecuted": false,
+  "published": false,
+  "status": "passed",
+  "exitCode": 0,
+  "finishedAt": "2026-11-12T04:54:42.721797+00:00",
+  "elapsedSeconds": 43.97452181400149,
+  "inputsUnchanged": true,
+  "changedInputPaths": [],
+  "log": {
+    "path": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/delivery-qualification-01/work-qualify-01/output.log.gz",
+    "bytes": 211,
+    "sha256": "e813479f109bde0b198c5debf3d7d4e3cfde05bd3924ad2151b784427ad07a89"
+  },
+  "childProcessReaped": true,
+  "outputs": [
+    {
+      "path": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/delivery-qualification-01/work-qualify-01/graph-review.differences.jsonl.gz",
+      "bytes": 722427,
+      "sha256": "722e90bb92944b1704e4db4f2c6cf71fd61d87cc88808855c076e143fa665219"
+    },
+    {
+      "path": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/delivery-qualification-01/work-qualify-01/graph-review.json",
+      "bytes": 314458,
+      "sha256": "1407f3e42d31a80f73262426e7c2f27dfb8c5a4cc46a6272cef8c438798cd6de"
+    },
+    {
+      "path": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/delivery-qualification-01/work-qualify-01/work-forms.json",
+      "bytes": 60626,
+      "sha256": "380bd1076a8d2a5d8ac6f9b2b1a9ba986a012af02813414a562361cd0f2ba0c1"
+    }
+  ]
+}

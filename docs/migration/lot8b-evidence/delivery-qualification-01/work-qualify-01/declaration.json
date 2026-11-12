@@ -1,0 +1,30 @@
+{
+  "schema": "logos-engine.lot8b.functional-command.v1",
+  "key": "paired-qualify",
+  "attempt": "work-qualify-01",
+  "plan": {
+    "path": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/delivery-qualification-01/work-forms-execution-plan.json",
+    "bytes": 143646,
+    "sha256": "11b072a46926116d1bb65cbf9848bf3e5e4a3567c914d1fbe98530c85b1cb193"
+  },
+  "command": [
+    "node",
+    "docs/migration/lot8b-evidence/tools/delivery/work-forms/qualify-cost-owner-graphs.mjs",
+    "docs/migration/lot8b-evidence/delivery-qualification-01/work-inventory-01/owner-source-inventory.json",
+    "docs/migration/lot8b-evidence/delivery-qualification-01/work-baseline-01/baseline.json.gz",
+    "docs/migration/lot8b-evidence/delivery-qualification-01/work-baseline-01/baseline.receipt.json",
+    "docs/migration/lot8b-evidence/delivery-qualification-01/work-candidate-01/candidate.json.gz",
+    "docs/migration/lot8b-evidence/delivery-qualification-01/work-candidate-01/candidate.receipt.json",
+    "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/delivery-qualification-01/work-qualify-01/graph-review.json",
+    "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/delivery-qualification-01/work-qualify-01/work-forms.json"
+  ],
+  "cwd": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+  "startedAt": "2026-11-12T04:53:58.745210+00:00",
+  "timeoutSeconds": 600,
+  "headBefore": "0830ca822e2e4330fa3ffb68d333167b3389fc26",
+  "globalLockAcquired": false,
+  "officialPerformanceMeasurement": false,
+  "gameEngineExecuted": false,
+  "published": false,
+  "status": "running"
+}

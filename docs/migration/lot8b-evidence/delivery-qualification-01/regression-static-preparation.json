@@ -1,0 +1,23 @@
+{
+  "schema": "logos-engine.lot8b.regression-tool-preparation.v1",
+  "recordedAt": "2026-11-12T04:53:54.671855+00:00",
+  "staticParsePassed": true,
+  "files": [
+    {
+      "path": "docs/migration/lot8b-evidence/tools/delivery/regressions/run.py",
+      "bytes": 23045,
+      "sha256": "9e15b1fb791d0d5ab16eb2de16cabf98462dbcea15f2b14c84aa3d76ea920912"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/delivery/regressions/cases.json",
+      "bytes": 11729,
+      "sha256": "25ca0c851b31e79a2394ef0c9486a5824222179dc466727e71790590199865c2"
+    }
+  ],
+  "historicalCasesExactlyPreserved": true,
+  "historicalCheckNamesExactlyPreserved": true,
+  "verifiedBaselines": 11,
+  "verifiedTraces": 11,
+  "nativeOrReplayExecutedByThisCheck": false,
+  "globalLockAcquired": false
+}
