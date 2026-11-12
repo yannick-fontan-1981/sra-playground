@@ -1,0 +1,43 @@
+{
+  "schema": "logos-engine.lot8b.recorded-process.v1",
+  "name": "prevalidation",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "scripts/run-released-public-regressions.py",
+    "--prepare-manifest",
+    "docs/migration/lot8b-evidence/tools/delivery/regressions/cases.json"
+  ],
+  "cwd": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+  "startedAt": "2026-11-12T04:56:22.521646+00:00",
+  "phaseTimeoutSeconds": 300,
+  "effectiveTimeoutSeconds": 300,
+  "environment": {
+    "NODE_OPTIONS": "--max-old-space-size=1536",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONHASHSEED": "0"
+  },
+  "status": "passed",
+  "pid": 6,
+  "processGroup": 6,
+  "exitCode": 0,
+  "timedOut": false,
+  "interrupted": false,
+  "automaticRetry": false,
+  "elapsedSeconds": 21.241890653000155,
+  "lastObservedAt": "2026-11-12T04:56:37.547511+00:00",
+  "stdoutBytes": 0,
+  "stderrBytes": 0,
+  "processGroupStopped": true,
+  "finishedAt": "2026-11-12T04:56:43.763511+00:00",
+  "stdout": {
+    "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/prevalidation.stdout.log",
+    "bytes": 4962,
+    "sha256": "0dccb1d17b1e13ddb4e74a2e6b78bbc4e5f391b3f6c42d1f858c83f25b36c4d4"
+  },
+  "stderr": {
+    "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/prevalidation.stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

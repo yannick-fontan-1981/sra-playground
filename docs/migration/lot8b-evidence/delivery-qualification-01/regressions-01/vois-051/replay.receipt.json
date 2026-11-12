@@ -1,0 +1,43 @@
+{
+  "schema": "logos-engine.lot8b.recorded-process.v1",
+  "name": "replay",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "docs/migration/lot8a-evidence/tools/replay-recorded-public-streaming.mjs",
+    "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz",
+    "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+    "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/vois-051/replay.json.gz"
+  ],
+  "cwd": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+  "startedAt": "2026-11-12T04:59:13.335388+00:00",
+  "phaseTimeoutSeconds": 600,
+  "effectiveTimeoutSeconds": 600,
+  "environment": {
+    "NODE_OPTIONS": "--max-old-space-size=1536",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONHASHSEED": "0"
+  },
+  "status": "passed",
+  "pid": 46,
+  "processGroup": 46,
+  "exitCode": 0,
+  "timedOut": false,
+  "interrupted": false,
+  "automaticRetry": false,
+  "elapsedSeconds": 167.5793346600003,
+  "lastObservedAt": "2026-11-12T05:01:58.510634+00:00",
+  "stdoutBytes": 198583,
+  "stderrBytes": 0,
+  "processGroupStopped": true,
+  "finishedAt": "2026-11-12T05:02:00.914698+00:00",
+  "stdout": {
+    "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/vois-051/replay.stdout.log",
+    "bytes": 200881,
+    "sha256": "0eefa1b89f14f1806d4aeb2ce1ffcd9148e4f8b07cef4db9e8f0dc672b9f7903"
+  },
+  "stderr": {
+    "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/vois-051/replay.stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

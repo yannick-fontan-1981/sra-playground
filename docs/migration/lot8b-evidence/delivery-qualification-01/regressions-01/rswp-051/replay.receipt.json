@@ -1,0 +1,43 @@
+{
+  "schema": "logos-engine.lot8b.recorded-process.v1",
+  "name": "replay",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "docs/migration/lot8a-evidence/tools/replay-recorded-public-streaming.mjs",
+    "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz",
+    "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+    "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/rswp-051/replay.json.gz"
+  ],
+  "cwd": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+  "startedAt": "2026-11-12T04:57:00.438107+00:00",
+  "phaseTimeoutSeconds": 600,
+  "effectiveTimeoutSeconds": 600,
+  "environment": {
+    "NODE_OPTIONS": "--max-old-space-size=1536",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONHASHSEED": "0"
+  },
+  "status": "passed",
+  "pid": 20,
+  "processGroup": 20,
+  "exitCode": 0,
+  "timedOut": false,
+  "interrupted": false,
+  "automaticRetry": false,
+  "elapsedSeconds": 29.437253213000076,
+  "lastObservedAt": "2026-11-12T04:57:15.462336+00:00",
+  "stdoutBytes": 32170,
+  "stderrBytes": 0,
+  "processGroupStopped": true,
+  "finishedAt": "2026-11-12T04:57:29.875332+00:00",
+  "stdout": {
+    "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/rswp-051/replay.stdout.log",
+    "bytes": 55419,
+    "sha256": "50afc02d1f65304fde0a723e90fc898c67bdf1d44e8f17d496450d54977d92a9"
+  },
+  "stderr": {
+    "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/rswp-051/replay.stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}
