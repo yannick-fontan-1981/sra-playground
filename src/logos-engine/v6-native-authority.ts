@@ -1,5 +1,5 @@
 import { executeBundleOperation, type CompositionBundle } from './v6-composition-engine.ts';
-import type { SymbolicRecord } from './v6-operations.ts';
+import { pythonTruthy, type SymbolicRecord } from './v6-operations.ts';
 import type { OperationCompleteness, OperationTraceSink } from './v6-operation-trace.ts';
 import type { OperationResultCache } from './v6-operation-cache.ts';
 
@@ -42,7 +42,7 @@ export function assessReleaseNeed(
       });
       return { status: 'blocked', needId: id, reason: 'focus composition unavailable', completeness: 'unknown' };
     }
-    if (focus.observed || !focus.open_question) {
+    if (pythonTruthy(focus.observed) || !pythonTruthy(focus.open_question)) {
       return { status: 'not_required', needId: id, reason: 'no unresolved open question for this composition', completeness: 'not_produced' };
     }
     trace?.record({

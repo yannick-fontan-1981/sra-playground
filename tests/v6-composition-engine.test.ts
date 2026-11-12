@@ -31,6 +31,9 @@ test('bundle validation rejects stale revision and missing preservation proof', 
   const missing = bundle('OP18');
   missing.preservation_evidence = {};
   assert.equal(validateBundle(missing, state(), 1), false);
+  const empty = bundle('OP18');
+  empty.preservation_evidence = { A: [] };
+  assert.equal(validateBundle(empty, state(), 1), false);
 });
 
 test('operation admission consumes the actual OP18 result rather than invocation alone', () => {

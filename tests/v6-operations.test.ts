@@ -20,6 +20,7 @@ function state() {
     knowledge_updates: [
       { composition_ref: 'B', property: 'color', value: 'red', revision: 1, evidence: 'obs1' },
       { composition_ref: 'B', property: 'door', value: 'open', revision: 0, evidence: 'old' },
+      { composition_ref: 'B', property: 'empty-proof', value: true, revision: 1, evidence: [] },
     ],
     objective_assessments: [{ composition_ref: 'G', satisfied: false, feasible: 'unknown', new_evidence: ['obs1'] }],
   };
@@ -125,4 +126,164 @@ test('OP25 retains non-refuted candidate objectives but does not prove feasibili
   const s = state();
   s.compositions[2] = { ...s.compositions[2], candidate_objective: true, feasibility: 'refuted' };
   assert.deepEqual(executeOperation('OP25', s).value, ['B']);
+});
+
+
+test('OP06 detects attributed effect exceptions without inventing a cause', () => {
+  const s = state();
+  Object.assign(s, {
+    observations: [
+      { composition: 'B', after: { color: 'red' } },
+      { composition: 'B', after: { color: 'blue' } },
+      { composition: 'C', after: { door: 'closed' } },
+    ],
+  });
+  assert.deepEqual(executeOperation('OP06', s).value, [
+    { composition: 'B', after: { color: 'red' } },
+  ]);
+});
+
+test('OP07 selects only reachable unvisited frontiers linked to an open goal', () => {
+  const s = state();
+  Object.assign(s, {
+    frontiers: [
+      { id: 'f1', reachable: true, visited: false, open_goal_evidence: ['g'] },
+      { id: 'f2', reachable: false, visited: false, open_goal_evidence: ['g'] },
+      { id: 'f3', reachable: true, visited: true, open_goal_evidence: ['g'] },
+      { id: 'f4', reachable: true, visited: false, open_goal_evidence: [] },
+    ],
+  });
+  assert.deepEqual(executeOperation('OP07', s).value, [
+    { id: 'f1', reachable: true, visited: false, open_goal_evidence: ['g'] },
+  ]);
+});
+
+test('OP13 preserves unknown extent beyond observed effects', () => {
+  const s = state();
+  Object.assign(s, {
+    observations: [
+      { composition: 'B', after: { color: 'red' } },
+      { composition: 'C', after: { door: 'open' } },
+    ],
+  });
+  assert.deepEqual(executeOperation('OP13', s).value, {
+    observed_effects: [{ color: 'red' }],
+    unobserved_extent: 'unknown',
+  });
+});
+
+test('OP20 and OP21 expose only unknown utility hypotheses', () => {
+  const s = state();
+  Object.assign(s, {
+    entities: [
+      { id: 'e1', utility: 'unknown', question: 'useful?' },
+      { id: 'e2', utility: 'known', question: 'irrelevant' },
+    ],
+    spaces: [
+      { id: 's1', utility: 'unknown', question: 'worth exploring?' },
+      { id: 's2', utility: 'known' },
+    ],
+  });
+  assert.deepEqual(executeOperation('OP20', s).value, [
+    { entity: 'e1', status: 'utility_hypothesis', question: 'useful?' },
+  ]);
+  assert.deepEqual(executeOperation('OP21', s).value, [
+    { space: 's1', status: 'utility_hypothesis', question: 'worth exploring?' },
+  ]);
+});
+
+test('OP22 retains only remote effects with an observation', () => {
+  const s = state();
+  Object.assign(s, {
+    remote_effects: [
+      { id: 'r1', observation: 'obs-1', effect: 'door-open' },
+      { id: 'r2', effect: 'light-change' },
+    ],
+  });
+  assert.deepEqual(executeOperation('OP22', s).value, [
+    { id: 'r1', observation: 'obs-1', effect: 'door-open' },
+  ]);
+});
+
+test('OP23 predicts only proved cycles and keeps unproved autonomy unknown', () => {
+  const s = state();
+  Object.assign(s, {
+    entities: [
+      { id: 'clock', cycle: ['a', 'b', 'c'], cycle_proof: 'obs-cycle', phase: 0 },
+      { id: 'wanderer', autonomous: true },
+      { id: 'empty-cycle', cycle: [], cycle_proof: 'claimed' },
+      { id: 'static' },
+    ],
+  });
+  assert.deepEqual(executeOperation('OP23', s).value, [
+    { entity: 'clock', next: 'b', evidence: 'obs-cycle' },
+    { entity: 'wanderer', next: 'unknown', evidence: undefined },
+  ]);
+});
+
+test('OP16 accepts only proved global deadlocks and states its completeness limit', () => {
+  const s = state();
+  Object.assign(s, {
+    deadlocks: [
+      { id: 'd1', proof: 'p', scope: 'global' },
+      { id: 'd2', proof: 'p', scope: 'local' },
+      { id: 'd3', scope: 'global' },
+    ],
+  });
+  const result = executeOperation('OP16', s);
+  assert.deepEqual(result.value, [{ id: 'd1', proof: 'p', scope: 'global' }]);
+  assert.equal(result.completeness, 'only supplied proved deadlocks; absence does not prove safety');
+});
+
+test('OP17 accepts only authorized recoveries with verified preservation', () => {
+  const s = state();
+  Object.assign(s, {
+    recovery: [
+      { id: 'r1', authorized: true, preserve_verified: true },
+      { id: 'r2', authorized: true, preserve_verified: false },
+      { id: 'r3', authorized: false, preserve_verified: true },
+    ],
+  });
+  assert.deepEqual(executeOperation('OP17', s).value, [
+    { id: 'r1', authorized: true, preserve_verified: true },
+  ]);
+});
+
+test('OP19 returns only the proved forced prefix and becomes incomplete at the first gap', () => {
+  const s = state();
+  Object.assign(s, {
+    forced: [
+      { action: 'ACTION1', proof: 'p1', constraints_verified: true },
+      { action: 'ACTION2', proof: '', constraints_verified: true },
+      { action: 'ACTION3', proof: 'p3', constraints_verified: true },
+    ],
+  });
+  const result = executeOperation('OP19', s);
+  assert.equal(result.status, 'incomplete');
+  assert.deepEqual(result.value, ['ACTION1']);
+});
+
+test('OP24 selects only verified paths reaching the desired post-state', () => {
+  const s = state();
+  Object.assign(s, {
+    desired_post_state: { room: 2 },
+    paths: [
+      { id: 'p1', post_state: { room: 2 }, constraints_verified: true },
+      { id: 'p2', post_state: { room: 2 }, constraints_verified: false },
+      { id: 'p3', post_state: { room: 3 }, constraints_verified: true },
+    ],
+  });
+  assert.deepEqual(executeOperation('OP24', s).value, ['p1']);
+});
+
+test('OP27 requires target, verified constraints and every protected reference', () => {
+  const s = state();
+  s.preserve_refs = ['A', 'C'];
+  s.permutations = [
+    { id: 'ok', target: 'B', constraints_verified: true, preserved_refs: ['A', 'C'] },
+    { id: 'missing', target: 'B', constraints_verified: true, preserved_refs: ['A'] },
+    { id: 'unverified', target: 'B', constraints_verified: false, preserved_refs: ['A', 'C'] },
+    { id: 'other', target: 'C', constraints_verified: true, preserved_refs: ['A', 'C'] },
+  ];
+  assert.deepEqual(executeOperation('OP27', s).value, ['ok']);
 });

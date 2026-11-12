@@ -1,4 +1,4 @@
-import { executeOperation, type OperationKey, type OperationResult, type SymbolicRecord } from './v6-operations.ts';
+import { executeOperation, pythonTruthy, type OperationKey, type OperationResult, type SymbolicRecord } from './v6-operations.ts';
 import { type OperationCacheIdentity, type OperationTraceSink } from './v6-operation-trace.ts';
 import type { OperationResultCache } from './v6-operation-cache.ts';
 
@@ -35,7 +35,7 @@ export function validateBundle(bundle: CompositionBundle, state: SymbolicRecord,
   const facts = (state.facts ?? {}) as SymbolicRecord;
   const conditions = Object.entries(bundle.preconditions).every(([key, expected]) =>
     Object.hasOwn(facts, key) && JSON.stringify(facts[key]) === JSON.stringify(expected));
-  const preservation = bundle.preserve_refs.every(ref => Boolean(bundle.preservation_evidence?.[ref]));
+  const preservation = bundle.preserve_refs.every(ref => pythonTruthy(bundle.preservation_evidence?.[ref]));
   return Boolean(conditions && preservation && bundle.evidence.length > 0);
 }
 

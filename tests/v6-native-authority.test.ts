@@ -67,3 +67,13 @@ test('OP28 admitted bundle reaches operation admission and release', () => {
   assert.equal(outcome.releaseAllowed, true);
   assert.equal(outcome.result?.operationAdmission?.accepted, true);
 });
+
+
+test('OP18 treats an empty container question as absent like the Python donor', () => {
+  const state: any = baseState();
+  state.compositions[1] = { id: 'B', observed: false, open_question: [] };
+  const trace = new OperationTraceSink();
+  const outcome = releaseBundle(bundle('OP18'), state, identity, trace);
+  assert.equal(outcome.need.status, 'not_required');
+  assert.equal(trace.snapshot().events.some(event => event.kind === 'operation' && event.mode === 'executed'), false);
+});
