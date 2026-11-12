@@ -1,4 +1,8 @@
 /** Browser-only bridge. Game state and history stay inside a dedicated worker. */
+export function buildActionRequest(actionId: number, data?: { x: number; y: number }): GameRuntimeRequest {
+  return { type: 'action', actionId, ...(data === undefined ? {} : { data }) };
+}
+
 export interface GameObservation {
   gameCode: string;
   frame: number[][];
@@ -15,7 +19,7 @@ export interface GameObservation {
   palette?: string[];
 }
 
-type Request = { type: 'load'; code: string; level?: number }
+export type GameRuntimeRequest = { type: 'load'; code: string; level?: number }
   | { type: 'action'; actionId: number; data?: { x: number; y: number } }
   | { type: 'undo' | 'reset' | 'restart' }
   | { type: 'selectLevel'; level: number };
@@ -62,7 +66,7 @@ export class BrowserGameRuntime {
     this.pending.clear();
   }
 
-  private request(request: Request): Promise<GameObservation> {
+  private request(request: GameRuntimeRequest): Promise<GameObservation> {
     return new Promise((resolve, reject) => {
       const worker = this.getWorker();
       const id = ++this.nextId;
@@ -76,7 +80,7 @@ export class BrowserGameRuntime {
     return this.request({ type: 'load', code, ...(level === undefined ? {} : { level }) });
   }
   action(actionId: number, data?: { x: number; y: number }): Promise<GameObservation> {
-    return this.request({ type: 'action', actionId, ...(data ? { data } : {}) });
+    return this.request(buildActionRequest(actionId, data));
   }
   undo(): Promise<GameObservation> { return this.request({ type: 'undo' }); }
   reset(): Promise<GameObservation> { return this.request({ type: 'reset' }); }
