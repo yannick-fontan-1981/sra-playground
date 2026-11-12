@@ -20,6 +20,7 @@ function state() {
     knowledge_updates: [
       { composition_ref: 'B', property: 'color', value: 'red', revision: 1, evidence: 'obs1' },
       { composition_ref: 'B', property: 'door', value: 'open', revision: 0, evidence: 'old' },
+      { composition_ref: 'B', property: 'empty-proof', value: true, revision: 1, evidence: [] },
     ],
     objective_assessments: [{ composition_ref: 'G', satisfied: false, feasible: 'unknown', new_evidence: ['obs1'] }],
   };
@@ -210,6 +211,7 @@ test('OP23 predicts only proved cycles and keeps unproved autonomy unknown', () 
     entities: [
       { id: 'clock', cycle: ['a', 'b', 'c'], cycle_proof: 'obs-cycle', phase: 0 },
       { id: 'wanderer', autonomous: true },
+      { id: 'empty-cycle', cycle: [], cycle_proof: 'claimed' },
       { id: 'static' },
     ],
   });
