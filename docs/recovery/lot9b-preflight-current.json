@@ -19,20 +19,20 @@
   "region_reconstructed": true,
   "region_component_path": "src/logos-engine/v6-region-intervention.ts",
   "region_owner_path": "src/logos-engine/v6-region-intervention-owner.ts",
+  "neutral_caller_path": "src/logos-engine/v6-neutral-common-caller.ts",
+  "region_caller_adapter_path": "src/logos-engine/v6-region-caller-adapter.ts",
   "region_contract_path": "docs/recovery/lot9b-region-reconstruction-contract.md",
   "region_functional_tests": {
     "component_tests": 13,
     "owner_tests": 6,
-    "combined_tests": 19,
-    "passed": 19,
-    "failed": 0,
+    "caller_tests": 9,
+    "caller_region_integration_tests": 3,
     "selected_return_acquisition": true,
     "passive_return_acquisition": true,
     "duplicate_return_guard": true,
-    "snapshot_restore": true,
-    "caller_integration_qualified": false
+    "ambiguous_multi_owner_selection_is_not_auto_resolved": true,
+    "snapshot_restore": true
   },
-  "ready_for_region_functional_qualification": true,
   "official_069_prerequisites": {
     "missing": [
       "scripts/measure-native-loop-costs.mjs",
@@ -53,10 +53,15 @@
       "passed": 19,
       "failed": 0
     },
-    "total_unique_targeted_tests": 46,
-    "total_unique_targeted_passed": 46,
+    "neutral_caller_and_region_integration": {
+      "tests": 12,
+      "passed": 12,
+      "failed": 0
+    },
+    "total_unique_targeted_tests": 58,
+    "total_unique_targeted_passed": 58,
     "total_unique_targeted_failed": 0
   },
-  "status": "fonctionnellement qualifié pour le noyau V6 reconstruit et la frontière owner Region; caller commun et performance officielle à confirmer",
-  "note": "Region and its owner are new evidence-bounded reconstructions. They are not claimed to be the historical 0.69 source or caller."
+  "status": "fonctionnellement qualifié pour le noyau V6 reconstruit, Region, son owner et le caller neutre; worker public, campagne live et performance officielle à confirmer",
+  "note": "The neutral caller intentionally does not reconstruct historical priorities: multiple proposals remain ambiguous until an external policy is justified."
 }
