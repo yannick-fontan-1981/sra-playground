@@ -1,0 +1,30 @@
+{
+  "benchmark_contract": {
+    "cross_game_compensation_allowed": false,
+    "games": ["STCK", "SMLP"],
+    "global_threshold_percent": 10.0,
+    "measured_actions": 400,
+    "measured_sessions": 32,
+    "order": ["A1", "B1", "B2", "A2"],
+    "phase_overrun_allowed_when_same_game_global_passes": true,
+    "sample_removal_allowed": false,
+    "threshold_is_strict": true,
+    "warmup_actions": 24,
+    "warmup_sessions": 8
+  },
+  "missing_required_files": [
+    "scripts/measure-native-loop-costs.mjs",
+    "tests/helpers/v6-live-game-campaign.ts",
+    "src/runtime/v6-agent-worker.ts",
+    "docs/migration/v6-delivery-roadmap.md"
+  ],
+  "ready_for_official_069_benchmark": false,
+  "region_hits": [],
+  "required_files": [
+    "scripts/measure-native-loop-costs.mjs",
+    "tests/helpers/v6-live-game-campaign.ts",
+    "src/runtime/v6-agent-worker.ts",
+    "docs/migration/v6-delivery-roadmap.md"
+  ],
+  "source_note": "Generated from the recovery checkout. Recovery files themselves are excluded from Region integration detection."
+}
