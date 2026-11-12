@@ -1,0 +1,19 @@
+{
+  "schema": "logos-engine.lot8b.native-version-reservation.v1",
+  "declaredAt": "2026-11-12T12:07:26.276985+00:00",
+  "owner": "lot8b",
+  "nativeVersion": "0.67.0",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "sourceBranch": "lot8b-branch-routing-20261112",
+  "checkpointBranch": "lot8b-branch-routing-checkpoint-20261112",
+  "parentCheckpoint": "8918de66cee81b8d20a75a5780ea9aab075aba68",
+  "observedPublished": {
+    "siteVersion": 107,
+    "nativeVersion": "0.66.0",
+    "commit": "4ff7bf45286a8a19d34401988adca587253ae41e"
+  },
+  "scope": "Prospective own-candidate reservation visible in shared coordination; no previously established cross-lane allocator is claimed. Recheck actual publication and collisions inside the short publication lease.",
+  "globalLockAcquired": false,
+  "peerAvailabilityWait": false,
+  "publicationPerformed": false
+}

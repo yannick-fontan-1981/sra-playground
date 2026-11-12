@@ -1,0 +1,15 @@
+{
+  "schema": "lot8b-checkout-recovery.v1",
+  "recordedAt": "2026-11-12T12:04:32.338803+00:00",
+  "status": "restored_exact_remote_checkpoint",
+  "checkout": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+  "branch": "lot8b-branch-routing-20261112",
+  "remoteBranch": "refs/heads/lot8b-branch-routing-checkpoint-20261112",
+  "commit": "8918de66cee81b8d20a75a5780ea9aab075aba68",
+  "worktreeClean": true,
+  "ordinaryWork": true,
+  "globalLockAcquired": false,
+  "sourcePushPerformed": false,
+  "sitePublicationPerformed": false,
+  "credentialsPersisted": false
+}
