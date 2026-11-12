@@ -6,7 +6,7 @@ import { KnowledgeStore } from '../../src/logos-engine/v6-target-binding.ts';
 
 export interface SyntheticSessionOptions {
   cycles: number;
-  trace: boolean;
+  trace: false | 'counters' | 'full';
   cache: boolean;
 }
 
@@ -76,7 +76,7 @@ export function runSyntheticOperationSession(options: SyntheticSessionOptions): 
   if (!Number.isInteger(options.cycles) || options.cycles < 1 || options.cycles > 10_000) {
     throw new RangeError('Synthetic cycle count must be in [1, 10000].');
   }
-  const trace = options.trace ? new OperationTraceSink(Math.min(4096, options.cycles * 8)) : undefined;
+  const trace = options.trace ? new OperationTraceSink(Math.min(4096, options.cycles * 8), options.trace) : undefined;
   const cache = options.cache ? new OperationResultCache(Math.min(1024, options.cycles * 2)) : undefined;
   const knowledge = new KnowledgeStore();
   let released = 0;
