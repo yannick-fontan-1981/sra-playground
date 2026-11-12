@@ -1,0 +1,98 @@
+--- docs/migration/lot8b-evidence/tools/final-functional/run-functional-command.py
++++ docs/migration/lot9a-evidence/tools/delivery/run-functional-command.py
+@@ -14,9 +14,9 @@
+ import traceback
+ 
+ ROOT = Path(__file__).resolve().parents[5]
+-STAGE = ROOT / 'docs/migration/lot8b-evidence/final-version-067-01'
+-DERIVED_FROM = ROOT / 'docs/migration/lot8b-evidence/tools/delivery/run-functional-command.py'
+-DERIVED_FROM_SHA256 = '7d1c35fb1a9fe30f1eb0be80f4c60a0f547f6257dd24ac68e88f0ade0a2514f9'
++STAGE = ROOT / 'docs/migration/lot9a-evidence/delivery-final-068-01'
++DERIVED_FROM = ROOT / 'docs/migration/lot8b-evidence/tools/final-functional/run-functional-command.py'
++DERIVED_FROM_SHA256 = 'a49a62551f757750a9598b2ea3a36d0c214ded79f150e3c65bddc74a83103fe9'
+ 
+ 
+ def now():
+@@ -47,13 +47,30 @@
+     parser.add_argument('--plan', required=True)
+     parser.add_argument('--key', required=True)
+     parser.add_argument('--attempt', required=True)
++    parser.add_argument('--corrective-reason')
+     args = parser.parse_args()
+     assert re.fullmatch(r'[a-z0-9-]+', args.attempt)
+     plan_path = (ROOT / args.plan).resolve()
+     plan = json.loads(plan_path.read_text())
+-    assert plan['schema'] == 'logos-engine.lot8b.functional-execution-plan.v1'
++    assert plan['schema'] == 'logos-engine.lot9a.functional-execution-plan.v1'
+     spec = plan['commands'][args.key]
+     assert 1 <= spec['timeoutSeconds'] <= 300
++    budget_key = spec.get('budgetKey', args.key)
++    history = []
++    for previous in sorted(STAGE.glob('*/declaration.json')):
++        declared_previous = json.loads(previous.read_text())
++        if declared_previous.get('budgetKey', declared_previous.get('key')) != budget_key:
++            continue
++        receipt_path = previous.parent / 'receipt.json'
++        assert receipt_path.is_file(), 'Previous operation has no terminal receipt'
++        history.append(json.loads(receipt_path.read_text()))
++    assert len(history) < spec['maximumAttempts'], 'Declared cumulative launch bound reached'
++    spent = sum(item['elapsedSeconds'] for item in history)
++    active_budget = spec['maximumCumulativeSeconds'] - spent
++    assert active_budget > 0, 'Cumulative command time exhausted'
++    deadline = min(spec['timeoutSeconds'], active_budget)
++    if history:
++        assert args.corrective_reason, 'A corrective launch needs its observed reason'
+     attempt = STAGE / args.attempt
+     attempt.mkdir(exist_ok=False)
+     replacements = {'{attempt}': str(attempt), '{root}': str(ROOT),
+@@ -75,16 +92,21 @@
+ 
+     before = inventory()
+     dump(attempt / 'inputs-before.json', before)
+-    record = {'schema': 'logos-engine.lot8b.functional-command.v1', 'key': args.key,
++    record = {'schema': 'logos-engine.lot9a.functional-command.v1', 'key': args.key,
+               'attempt': args.attempt, 'plan': file_info(plan_path), 'command': command,
+-              'cwd': str(ROOT), 'startedAt': now(), 'timeoutSeconds': spec['timeoutSeconds'],
++              'cwd': str(ROOT), 'startedAt': now(), 'timeoutSeconds': deadline,
++              'budgetKey': budget_key, 'attemptNumber': len(history) + 1, 'priorCumulativeSeconds': spent,
++              'maximumCumulativeSeconds': spec['maximumCumulativeSeconds'],
++              'correctiveReason': args.corrective_reason,
++              'declaredMaximumSessionsThisLaunch': spec.get('maximumSessionsPerLaunch', 0),
++              'declaredMaximumReturnsThisLaunch': spec.get('maximumReturnsPerLaunch', 0),
+               'generator': file_info(Path(__file__).resolve()), 'derivedFrom': file_info(DERIVED_FROM),
+               'headBefore': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
+               'globalLockAcquired': False, 'officialPerformanceMeasurement': False,
+               'gameEngineExecuted': False, 'published': False, 'status': 'running'}
+     dump(attempt / 'declaration.json', record)
+     print(json.dumps({'started': args.key, 'attempt': args.attempt,
+-                      'timeoutSeconds': spec['timeoutSeconds']}), flush=True)
++                      'timeoutSeconds': deadline}), flush=True)
+     child = None
+     start = time.monotonic()
+     raw_path = attempt / 'output.raw.log'
+@@ -107,11 +129,11 @@
+             last_update = start
+             while child.poll() is None:
+                 elapsed = time.monotonic() - start
+-                if elapsed >= spec['timeoutSeconds']:
++                if elapsed >= deadline:
+                     record['timedOut'] = True
+                     raise TimeoutError('Declared functional command deadline exceeded')
+                 try:
+-                    child.wait(timeout=min(10, spec['timeoutSeconds'] - elapsed))
++                    child.wait(timeout=min(10, deadline - elapsed))
+                 except subprocess.TimeoutExpired:
+                     pass
+                 if child.poll() is None and time.monotonic() - last_update >= 30:
+@@ -149,7 +171,10 @@
+                       inputsUnchanged=before == after,
+                       changedInputPaths=[path for path in paths if before[path] != after[path]],
+                       log=file_info(compressed), childProcessReaped=child is None or child.poll() is not None)
+-        record['status'] = 'passed' if record['exitCode'] == 0 and before == after else 'failed'
++        record['headAfter'] = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
++        record['headUnchanged'] = record['headBefore'] == record['headAfter']
++        record['cumulativeSeconds'] = spent + record['elapsedSeconds']
++        record['status'] = 'passed' if record['exitCode'] == 0 and before == after and record['headUnchanged'] else 'failed'
+         exclusions = {'declaration.json', 'inputs-before.json', 'inputs-after.json',
+                       'output.raw.log', 'output.log.gz', 'receipt.json'}
+         record['outputs'] = [file_info(path) for path in sorted(attempt.rglob('*'))

@@ -1,0 +1,20 @@
+{
+  "schema": "logos-engine.lot9a.native-version-reservation.v1",
+  "declaredAt": "2026-11-12T14:38:17.397154+00:00",
+  "owner": "lot9a",
+  "nativeVersion": "0.68.0",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "sourceBranch": "lot9a-chart-navigation-20261112",
+  "checkpointBranch": "lot9a-chart-navigation-checkpoint-20261112",
+  "parentCheckpoint": "b53e9826d25335cc2749a3b5447923ba4cc8c2ce",
+  "observedPublished": {
+    "siteVersion": 108,
+    "nativeVersion": "0.67.0",
+    "commit": "8462204043aa368faa7df280d796bb706eb53b38"
+  },
+  "scope": "Prospective own-candidate reservation, created exclusively. Recheck actual publication and collisions inside the short publication lease; no cross-lane allocator is claimed.",
+  "globalLockAcquired": false,
+  "peerAvailabilityWait": false,
+  "publicationPerformed": false,
+  "status": "reserved_for_final_delivery_qualification"
+}
