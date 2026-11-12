@@ -111,6 +111,32 @@ Le candidat historique canonical-buffer est documenté mais son diff exact n'est
 
 Aucune équivalence exacte avec Site 109 n'est revendiquée.
 
+## 5B — garde d'adresse et de contexte récupérée
+
+Donneur :
+- `agents/yf_arc3_v6/laya_proto/common_addressed_field.py`
+- méthodes récupérées : `footprint_matches`, `before`, `after`.
+
+Port :
+- `src/logos-engine/addressed-field-guard.ts`
+- `tests/addressed-field-guard.test.ts`
+
+Comportement couvert :
+- empreinte complète de l'objet dans la grille courante ;
+- niveau et compteur de progression liés ;
+- première étape liée à l'observation d'origine ;
+- action encore disponible ;
+- exemplaire et ombre de référence inchangés ;
+- frontière officielle scelle immédiatement le préfixe ;
+- prédiction non finale conforme maintient le préfixe ouvert ;
+- mismatch ou étape finale scelle le préfixe.
+
+Chemin stock, fit/calibration, proposition et restauration d'un champ retenu restent explicitement hors de ce sous-port.
+
+Commits GitHub :
+- code : `e145c517bded20537cfe11e9922252a4b2f2852b`
+- tests : `2ca7606e16e4292e29ed3ac3d8869920dfd6a5aa`
+
 ## Qualification sur la nouvelle baseline
 
 Checkout local :
@@ -121,7 +147,7 @@ Tests ciblés exécutés :
 - linked-preparation : 7 cas ;
 - addressed-material : 2 cas ;
 - observed-object-binding : 5 cas ;
-- total : **14/14 réussis**.
+- total après ajout de la garde AddressedField : **19/19 réussis**.
 
 Typecheck :
 - `tsc --noEmit` : **réussi**.
