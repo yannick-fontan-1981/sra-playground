@@ -211,3 +211,28 @@ test('restoration rejects duplicate measured return boundaries', () => {
     /duplicate measured returns/,
   );
 });
+
+test('restoration rejects memory bound to a different observation', () => {
+  const state = createTemporalObservationState(selectionRequest(), authority);
+  const { proofs, intent } = memory();
+  const withMemory = attachTemporalMemoryReuse(state, intent, proofs);
+  const corrupted = {
+    ...withMemory,
+    memoryReuseContract: { ...withMemory.memoryReuseContract!, observationRef: 'obs-4' },
+  };
+  assert.throws(
+    () => restoreTemporalObservationState(corrupted, authority),
+    /memory belongs to a different observation/,
+  );
+});
+
+test('restoration rejects memory proof refs that differ from the contract', () => {
+  const state = createTemporalObservationState(selectionRequest(), authority);
+  const { proofs, intent } = memory();
+  const withMemory = attachTemporalMemoryReuse(state, intent, proofs);
+  const corrupted = { ...withMemory, memoryProofRefs: ['old'] };
+  assert.throws(
+    () => restoreTemporalObservationState(corrupted, authority),
+    /memory proof refs differ from the memory contract/,
+  );
+});
