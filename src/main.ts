@@ -3,6 +3,11 @@ import { renderSiteHeader } from './site-header';
 import { BrowserGameRuntime, type GameObservation } from './runtime/browser-games';
 import { AGENT_STATUS } from './runtime/contracts';
 import { GAME_CATALOG, PUBLIC_SOURCE_BASE, getGameByCode, type GameCatalogEntry } from './games/catalog';
+import {
+  dispatchProductAction,
+  ready as productReady,
+  type ProductReadinessState,
+} from './agent-product-dispatch';
 
 const websiteRepo = 'https://github.com/yannick-fontan-1981/sra-playground';
 const agentSources = `${PUBLIC_SOURCE_BASE}/README.md`;
@@ -224,8 +229,18 @@ function paint(frame: readonly (readonly number[])[], palette: readonly string[]
   context.putImageData(image, 0, 0);
 }
 
+function productReadinessState(): ProductReadinessState {
+  return {
+    observation,
+    selectedGameCode: selectedGame.code,
+    busy,
+    loading,
+    failed,
+  };
+}
+
 function ready(): boolean {
-  return Boolean(observation && observation.gameCode === selectedGame.code && !busy && !loading && !failed);
+  return productReady(productReadinessState());
 }
 
 function updateInterface(): void {
@@ -317,8 +332,20 @@ async function run(operation: () => Promise<GameObservation>, announcement = '')
 }
 
 function perform(action: number, data?: { x: number; y: number }): void {
-  if (!observation?.availableActionIds.includes(action) || ['WIN', 'LEVEL_COMPLETE', 'GAME_OVER', 'GAMEOVER'].includes(observation.state)) return;
-  void run(() => runtime.action(action, data));
+  const state = productReadinessState();
+  void dispatchProductAction(state, action, data, {
+    action: (nextAction, nextData) => runtime.action(nextAction, nextData),
+    present,
+    now: () => performance.now(),
+    generation: () => selectionGeneration,
+    setBusy: value => {
+      busy = value;
+      updateInterface();
+    },
+    onError: (error, generation) => showFailure(error, generation),
+  }).catch(() => {
+    // showFailure is invoked by the dispatch port and owns the product error state.
+  });
 }
 function undo(): void {
   if (!observation?.canUndo) return;
