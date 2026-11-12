@@ -37,30 +37,28 @@ Au minimum, les éléments historiquement utilisés par les lots doivent être r
 
 ## Progression Lot 9 - reprise 9B
 
-Branche de reprise documentaire intégrée :
-`recovery/lot9b-region-intervention-restart-20261112`
-
-Branche de reconstruction Region intégrée :
-`recovery/lot9b-region-reconstruction-v2-20261112`
-
-Branche owner Region :
-`recovery/lot9b-region-owner-integration-20261112`
+Branches intégrées/préparées :
+- `recovery/lot9b-region-intervention-restart-20261112`
+- `recovery/lot9b-region-reconstruction-v2-20261112`
+- `recovery/lot9b-region-owner-integration-20261112`
+- `recovery/lot9b-neutral-caller-20261112`
 
 État vérifié :
-- l'ancienne branche `lot9b-github-recovery-20261112` ne contient que des documents et garde-fous de récupération ; aucun runtime Region historique n'y est récupéré ;
-- le noyau V6 reconstruit présent sur la baseline (operations, composition, authority, target-binding, cache, cycle, trace) a été exercé sur un checkout local matérialisé depuis GitHub : **27/27 tests ciblés passent** après compilation TypeScript ;
-- une nouvelle reconstruction comportementale Region, explicitement distincte de l'ancien 0.69, est définie dans `src/logos-engine/v6-region-intervention.ts` ;
-- son contrat durable est `docs/recovery/lot9b-region-reconstruction-contract.md` ;
-- le coeur Region est qualifié par **13/13 tests** ;
-- une frontière owner neutre est reconstruite dans `src/logos-engine/v6-region-intervention-owner.ts` pour acquisition sélectionnée ou passive, déduplication des retours et restauration ;
-- le coeur Region + owner passent **19/19 tests** ;
-- total unique observé pour noyau V6 + Region + owner : **46/46 tests ciblés réussis** ;
-- le caller agent commun historique n'est pas reconstruit ; le dispatch produit/UI existant n'est pas traité comme son substitut ;
-- le worker public et les campagnes live ne sont pas encore qualifiés ;
+- l'ancienne branche `lot9b-github-recovery-20261112` ne contient pas le runtime Region historique ;
+- le noyau V6 reconstruit (operations, composition, authority, target-binding, cache, cycle, trace) a passé **27/27 tests ciblés** ;
+- le coeur Region reconstruit, explicitement distinct de l'ancien 0.69, passe **13/13 tests** ;
+- la frontière owner Region pour acquisition sélectionnée/passive, déduplication et restauration porte le total Region + owner à **19/19 tests** ;
+- un caller commun neutre est reconstruit dans `src/logos-engine/v6-neutral-common-caller.ts` ;
+- ce caller ne départage jamais plusieurs propositions : 0 -> none, 1 -> selected, >1 -> ambiguous ;
+- l'adaptateur `src/logos-engine/v6-region-caller-adapter.ts` relie Region au caller sans modifier le coeur Region ;
+- caller neutre + intégration Region passent **12/12 tests** ;
+- total unique ciblé observé pour noyau V6 + Region + owner + caller : **58/58 tests réussis** ;
+- le dispatch produit/UI reste distinct du caller agent ;
+- le worker public, la campagne live et le harness officiel de coût restent absents ;
 - aucun compteur historique 70/76 ou candidat 71/76 n'est promu au statut de la reconstruction actuelle.
 
 Statut Lot 9 :
-**noyau V6, coeur Region et frontière owner reconstruits fonctionnellement qualifiés dans leurs périmètres ; caller commun et performance officielle à confirmer.**
+**noyau V6, coeur Region, owner et caller neutre fonctionnellement qualifiés dans leurs périmètres ; worker public, campagne live et performance officielle à confirmer.**
 
 ## Branches de récupération conservées
 
