@@ -2,19 +2,33 @@
 
 <!-- LOT8A_PRIORITY_PUBLICATION_065_START -->
 
-## Lot 8A : publication prioritaire 0.65 demandée
+## Lot 8A : 0.65 publiée dans Site 106
 
-La demande explicite de l’utilisateur autorise **0.65 en priorité, sans attendre la disponibilité des autres lots**. Le candidat sauvegardé `c58d82e0` est restauré dans un checkout propre, sur la branche `lot8a-priority065-20261111`, puis fusionné avec la **0.64 réellement publiée dans Site 105**, source `deb9ebbbb06a8a35940b2e8f3fefdbed690ce772`.
+**Publication privée réussie le 11/11/2026 à 22:11:05 UTC−03** : [SRA Playground](https://sra-playground.yannick-fontan.chatgpt.site), **Site 106 / native 0.65.0**, source `b9555039d60d5d9f771dd96b763c40f389dc62dd`. La demande explicite de l’utilisateur a été exécutée **en priorité, sans attendre la disponibilité des autres lots**. Le candidat sauvegardé `c58d82e0` est restauré dans un checkout propre, sur la branche `lot8a-priority065-20261111`, puis fusionné avec la **0.64 réellement publiée dans Site 105**, source `deb9ebbbb06a8a35940b2e8f3fefdbed690ce772`.
 
 Le natif 0.65 reste gelé à **324 fichiers / `936fa2bf81965272b1ddbab4a5c01f98aeb6a48188c1f7a8c91de226598c5e43`**. Le publié 0.64 conserve exactement les sources du baseline préparé 6B `a01e6faf`, **322 fichiers / fa23** : la réconciliation préserve donc les preuves fonctionnelles existantes. Les **5 606/5 606 tests sur 145 fichiers**, les **11 régressions réconciliées / 187 contrôles**, les preuves communes et les formes/graphes restent des résultats acquis dans leur périmètre. Les anciens reçus préparatoires sont conservés sans changement ni nouvelle exécution attribuée.
 
 **Le coût officiel 0.65 n’est ni mesuré ni accepté.** La publication prioritaire est autorisée avant cette mesure. Le critère ultérieur reste une augmentation de la médiane globale des sessions complètes **strictement inférieure à 10 % pour STCK et pour SMLP séparément** ; une phase peut dépasser 10 % si ces deux critères globaux sont respectés. Cette livraison ne clôture ni les six portes de migration globale ni la parité stricte des graphes.
 
-Le build 0.65 est reconstruit dans le checkout propre à partir des entrées gelées. Préparation, build, commits et sauvegardes de branche restent sans verrou global. Seule la publication utilise une exclusivité courte, sans ACK de disponibilité des autres lots ; son détenteur libère son descripteur sans supprimer le fichier de verrou.
+Le build 0.65 a réussi dans le checkout propre, avec entrées gelées identiques avant et après. Son worker est identique octet pour octet à celui du build qualifié. Préparation, build, commits et sauvegardes de branche sont restés sans verrou global. La publication a utilisé une exclusivité de **62,072 secondes**, sans ACK de disponibilité des autres lots ; le détenteur a libéré son descripteur et conservé le même fichier de verrou.
 
-À ce stade du commit, la publication est **demandée, non encore constatée**. Les reçus de source, build et hébergement sont conservés dans le [dossier de publication prioritaire 0.65](lot8a-evidence/priority-publication-065-20261111).
+Le [reçu de publication](lot8a-evidence/priority-publication-065-20261111/publication-result.json) confirme `succeeded`, Site 106, le commit exact et un accès privé inchangé, révision 3. Le [bilan de livraison](lot8a-evidence/priority-publication-065-20261111/publication-summary.json) conserve la filiation, le build et les réserves. Le registre désormais publié compte **67/76 entrées raccordées, soit 88,2 %, avec neuf restantes**.
 
 Prochain travail courant après publication : **8B `parallel_branch_routing`**, contrat de transfert et petit corpus indépendant issu de `BranchRouting`, puis port natif. Aucune entrée 8B n’est comptée comme raccordée. **LKEY demeure définitivement fermé.**
+
+### Feuille de route courante après Site 106
+
+| Étape | État établi | Prochaine action |
+| --- | --- | --- |
+| 5C / 0.63 | Publiée dans Site 104 ; coût officiel non mesuré et non accepté | Conserver les preuves et traiter la réserve de coût. |
+| 6B / 0.64 | Publiée dans Site 105 ; sources réconciliées dans 0.65 | Conserver la réserve de coût officiel non mesuré et non accepté. |
+| **8A / 0.65** | **Publiée dans Site 106 ; 67/76 entrées, natif 324/936fa2, validation fonctionnelle conservée** | Qualifier ultérieurement le coût officiel contre 0.64, avec le critère global strict sous +10 % par jeu. |
+| **8B** | Préparation source acquise ; aucun raccordement déclaré | **Écrire le contrat BranchRouting et le corpus original indépendant, puis porter le propriétaire.** |
+| 6C / 6D | `observed_rigid_cargo` et `shared_settlement` ouverts | Poursuivre leurs transferts et qualifications dans leurs branches. |
+| Lot 9 | Navigation, interventions régionales et canaux ouverts | Transférer puis qualifier ; `discrete_network` reste hors compteur 76. |
+| 10C / 10D / 10E | Travaux parallèles, sans nouvelle publication attestée par ce lot | Réconcilier désormais le vrai 0.65 publié et poursuivre les capacités propres. |
+| Lot 11 | Consolidation ouverte ; six portes globales encore fausses | Parité complète, graphes, restauration, sessions longues, coûts et lisibilité. |
+
 
 <!-- LOT8A_PRIORITY_PUBLICATION_065_END -->
 
@@ -30,7 +44,9 @@ Une **exclusivité courte et bornée** reste réservée aux mesures officielles 
 
 <!-- LOT8A_INTEGRATION_START -->
 
-## Lot 8A : preuves communes et régressions qualifiées sur la composition préparée
+## Jalon historique 8A avant publication : qualification de la composition préparée
+
+**Cette section conserve le constat antérieur à Site 106. La publication effective et la feuille de route courante figurent en tête ; les anciens états « non publié » et opérations alors prévues restent historiques.**
 
 **Les trois preuves communes sont vérifiées et les 11 régressions enregistrées sont qualifiées, avec 187/187 contrôles. Les quatre formes de travail sont capturées sur chacun des deux rôles puis qualifiées hors chronométrage.** Le [bilan courant réconcilié](lot8a-evidence/integration-published-063-01/summary.json) distingue ces résultats préparatoires de la future qualification contre le véritable 0.64 publié.
 
@@ -1295,7 +1311,7 @@ Les entrées restantes du tableau se réfèrent au **dernier prédécesseur nati
 | 5 | Temps, adressage et liaisons | **0 au registre publié** | Historique public ; contrat de conservation pour les consommateurs concernés | **5A et 5B livrés ; 5C / native 0.63 publié prioritairement dans Site 104**, avec coût officiel non mesuré et non accepté. La validation fonctionnelle est conservée ; les sessions longues et WEAV6 restent réservés. |
 | 6 | Pièces rigides, cargaisons et stabilisation commune | **2 ouvertes au registre publié** | Géométrie, contrôles, recherche bornée et interruption | **6A livré ; 6B `selected_rigid` publié prioritairement dans Site 105 / native 0.64**, source `deb9ebbb`, 322 fichiers/fa23 et 66/76 entrées. Ses sources sont identiques au baseline préparé des preuves 8A. Le coût officiel demeure non mesuré et non accepté. Puis 6C `observed_rigid_cargo` et 6D `shared_settlement`. |
 | 7 | Ateliers et transactions symboliques | **0 au registre** | Interfaces mesurées, SRC et mémoire des méthodes | **Transferts 7A/7B clos** : 7A Sites 82–83/native 0.52, 7B Sites 88–89/native 0.55, coûts acceptés et propriétaires distincts. **Suivi LKEY L3 séparé**, sans requalifier les échecs ni effacer la réserve de continuation. |
-| 8 | Accès conditionné et routage de branches | **2 à la publication ; 1 sans raccordement dans le candidat 8A** | Calibration des commandes et préfixes gardés | **8A : preuves communes, 11 régressions et formes/graphes préparatoires qualifiés**, natif inchangé après intégration du vrai 0.63 publié. Finalisation contre le vrai 0.64 puis coût et publication 0.65 restent ouverts. **8B : préparation source établie, sans raccordement.** |
+| 8 | Accès conditionné et routage de branches | **1 ouverte au registre publié** | Calibration des commandes et préfixes gardés | **8A `motif_conditioned_access` publié prioritairement dans Site 106 / native 0.65**, 67/76 entrées, preuves communes, 11 régressions et formes/graphes conservés. Coût officiel non mesuré et non accepté. **8B `parallel_branch_routing` : contrat et corpus indépendant à écrire après préparation source.** |
 | 9 | Navigation, régions et canaux | 3 | Graphes, retours publics et budgets courants | Planifié ; Recolor déjà acquis |
 | 10 | Questions d'axe, de fenêtre, d'ordre et de temps | 3 | Observations, séquences et méthodes revalidées | **10A clos, publié dans Sites 90–91 / 0.56** : 1 538 tests, cinq contrôles, 119 comparaisons et QA TRIA trois niveaux/17 actions/17 plans ; coût global accepté et réserve d'apport propre conservée. **10B, `window_question`, fonctionnellement validé avec réserve HPDL partielle ; coût global accepté, publication native 0.62 effective dans Site 102** ; **10C `ordered_recruitment` dispose de validations de développement et poursuit l’intégration de ses prédécesseurs** ; coût et publication restent à établir après 0.63, 0.64 et 0.65. **10D et 10E restent planifiés.** |
 | 11 | Consolidation, couverture et lisibilité | Hors compteur | Résultats et preuves des lots précédents | Planifié |

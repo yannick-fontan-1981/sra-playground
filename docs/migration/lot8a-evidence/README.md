@@ -1,5 +1,19 @@
 # Lot 8A : accès conditionné par un motif
 
+## Publication courante : Site 106 / native 0.65.0
+
+La publication prioritaire demandée est réussie, en accès privé inchangé, source `b9555039d60d5d9f771dd96b763c40f389dc62dd`. La 0.64 publiée dans Site 105 est réconciliée à natif candidat inchangé. Le nouveau build produit le même worker que la qualification conservée. **Le coût officiel reste non mesuré et non accepté** ; la publication ne clôture pas les six portes globales.
+
+- [Bilan de livraison et prochaine étape](priority-publication-065-20261111/publication-summary.json)
+- [Reçu natif de publication](priority-publication-065-20261111/publication-result.json)
+- [Réconciliation de source](priority-publication-065-20261111/source-reconciliation.json)
+- [Revue indépendante de réutilisation des qualifications](priority-publication-065-20261111/qualification-reuse-review.json)
+- [Build reconstruit](priority-publication-065-20261111/build-execution.json)
+- [Libération du verrou de publication](priority-publication-065-20261111/publication-lock-released.json)
+
+Prochain travail courant : **8B BranchRouting, contrat de transfert et petit corpus original indépendant**, puis port natif. Les sections et reçus précédents ci-dessous gardent leur périmètre historique.
+
+
 <!-- LOT8A_INTEGRATION_START -->
 
 ## Lot 8A : preuves communes et régressions qualifiées sur la composition préparée
