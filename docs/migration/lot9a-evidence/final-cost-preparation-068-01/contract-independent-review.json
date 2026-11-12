@@ -1,0 +1,397 @@
+{
+  "schema": "logos-engine.lot9a.independent-final-cost-preparation-review.v1",
+  "reviewedAt": "2026-11-12T15:32:44.156112+00:00",
+  "status": "passed",
+  "reviewer": "/root/lot9a_perf_review",
+  "scope": "Prospective final0.68 cost tools, actual declaration and future controller-plan writer; no official measurement result.",
+  "independence": {
+    "costToolsAuthor": false,
+    "coordinationToolsAuthor": false,
+    "nativeSourceChanged": false,
+    "toolsChanged": false,
+    "nativeExecutionPerformed": false,
+    "functionalGraphReaderRerun": false,
+    "benchmarkPerformed": false,
+    "gameOrOracleExecuted": false,
+    "lockAcquired": false,
+    "sharedStatusModified": false,
+    "postprocessingExecuted": false
+  },
+  "contract": {
+    "path": "docs/migration/lot9a-evidence/final-performance-068-01/contract.json",
+    "bytes": 182234,
+    "sha256": "53058883838c3ac9d3c384db528bb687b6ecadf605f514682ecd7f4932776e6b"
+  },
+  "declaration": {
+    "status": "declared_before_official_window",
+    "recordedAt": "2026-11-12T15:31:46.817216+00:00",
+    "sourceNativeVersions": {
+      "baseline": "0.67.0",
+      "candidate": "0.68.0"
+    },
+    "sourceNativeFiles": {
+      "baseline": 331,
+      "candidate": 334
+    },
+    "nativeDigests": {
+      "baseline": "c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a",
+      "candidate": "e7a94fbc7cdcb19d8704b5d4120f27a858cbcd07e455084711510ee147f4e653"
+    },
+    "baselineSourceCommit": "8462204043aa368faa7df280d796bb706eb53b38",
+    "candidateSourceCommit": "6f98d0651a6692e9967627ff45ba5b2c7976ac58",
+    "baselineSiteVersion": 108,
+    "actualLivePublicationReadByReviewer": false,
+    "inputFingerprintsVerified": 806,
+    "allInputFingerprintsExact": true,
+    "distinctResolvedInputPaths": 806,
+    "nativeManifestsIndependentlyRecomputed": true,
+    "fourExpectedFormsCopiedExactly": true,
+    "casesAndComparisonPolicyByteExactFromHistorical3H": true,
+    "performanceWindowAbsentAtReview": true
+  },
+  "preparationExecution": {
+    "receipt": {
+      "path": "docs/migration/lot9a-evidence/final-cost-preparation-068-01/prepare-attempt-01/receipt.json",
+      "bytes": 2175,
+      "sha256": "268a548af8f3ab3538de5f7449b43115c2604fb98a1a1ecae8623d78e0fa6a90"
+    },
+    "status": "passed",
+    "exitCode": 0,
+    "elapsedSeconds": 0.5793061789991043,
+    "timeoutSeconds": 120,
+    "rawAndGzipLogsExactlyEqual": true,
+    "childReaped": true,
+    "noNativeExecution": true,
+    "noLock": true
+  },
+  "functionalBasis": {
+    "actualFinal9AReviewSchemaUsed": true,
+    "independentDeliveryEvidencePinsVerified": 94,
+    "originalFunctionalScopeFlagsPreserved": true,
+    "qualifiedWorkForms": 4,
+    "pairedChecks": 64,
+    "pairedPoints": 58,
+    "differences": 28279,
+    "unattributedDifferences": 0,
+    "workFormsHash": "3f9211aaa9055bdd3f772608e457e53d319c812058a2e8493ec184de7c7908f4",
+    "nativeOwnerPopulation": {
+      "baseline": 62,
+      "candidate": 63,
+      "added": [
+        "public_chart_navigation"
+      ]
+    },
+    "nativeProgramPopulation": {
+      "baseline": 28,
+      "candidate": 29,
+      "added": [
+        "v6.chart_navigation.choose"
+      ]
+    },
+    "roleScopedInventoryPathsPreserved": true,
+    "sixExecutionCaseFieldsExact": true,
+    "purposeDescriptionIdentityNotClaimed": true,
+    "newCommonSessions": 5,
+    "newCommonReturns": 9,
+    "newCommonPoints": 52,
+    "newUniqueCompleteGraphs": 21,
+    "positiveChartPublicServiceWorkerTicketsQualified": false,
+    "workReaderAttemptsConsumed": 2,
+    "workReaderAttemptsRemaining": 0,
+    "firstReaderFailureRetained": true,
+    "onlyNewTimingAttributionPath": "/whyAct/decision/total_ms",
+    "timingAttribution": "Bounded creation interval with exact persisted semantic decision and exact complete report retention, not reconstruction of internal timestamps.",
+    "durationCreationCountsPerRole": 21,
+    "durationRetentionCountsPerRole": 37,
+    "originalOracleAdditionalExecutionAllowed": false,
+    "historicalCommonMaximumSessions8AmbiguityRetained": true,
+    "LKEY": "permanently_closed"
+  },
+  "measurementDesign": {
+    "order": [
+      "A1",
+      "B1",
+      "B2",
+      "A2"
+    ],
+    "rounds": 4,
+    "measuredSessions": 32,
+    "measuredActions": 400,
+    "warmupSessions": 8,
+    "warmupActions": 24,
+    "sessionsPerCaseVersion": 8,
+    "excludedMeasuredSessions": 0,
+    "excludedOutliers": 0,
+    "command": [
+      "python",
+      "-B",
+      "scripts/run-native-cost-window.py",
+      "/workspace/sites/sra-lot9a-baseline067-20261112",
+      "docs/migration/lot9a-evidence/final-performance-068-01",
+      "docs/migration/lot9a-evidence/delivery-final-068-01/baseline-native.json",
+      "docs/migration/lot9a-evidence/delivery-final-068-01/candidate-native.json"
+    ],
+    "proposedMaximumActiveSeconds": 1800
+  },
+  "globalRule": {
+    "authorization": "si le global reste en dessous de 10% d'augmentation alors une phase qui dépasse 10% peut être accepté.",
+    "stage": "session_elapsed",
+    "relativeIncreaseLimit": 0.1,
+    "comparison": "strictly_less_than",
+    "allCasesMustPass": true,
+    "crossCaseCompensation": false,
+    "phaseOverrunsMayBeAccepted": true
+  },
+  "strictDecisionReview": {
+    "globalComparison": "Median candidate strictly less than 1.1 times median baseline independently for STCK and SMLP.",
+    "javascriptDecision": "Exact rational cross multiplication from the finite serialized median values.",
+    "independentPythonDecision": "Decimal(str(median)) with strict < and Decimal(1.1).",
+    "phaseDiagnosticsDoNotOverridePassingGlobals": true,
+    "noiseNeverRaisesBudget": true,
+    "allMeasuredSamplesIncluded": true,
+    "excludedMeasuredOutliers": 0,
+    "crossGameCompensation": false,
+    "pooledBeforeCalculation": true,
+    "globalP95NotReportedForEightSamples": true,
+    "nestedPhasesNotAddedTogether": true
+  },
+  "functionalWorkComparison": {
+    "fortyFutureTrialsMustMatchRoleSpecificFinalForms": true,
+    "fullHistoricalWorkSignatureComparedWithinAndAcrossCohorts": true,
+    "nativeVersionLiteralCheckedSeparatelyFromHistoricalSignature": true,
+    "onlyCrossRoleStructuralPaths": [
+      "observations[*].nodeCount",
+      "inspection[*].graphNodes",
+      "final.nodeCount",
+      "final.graphRevision"
+    ],
+    "allowedValues": "Exact predeclared functional values at each occurrence. No arbitrary numeric tolerance.",
+    "unattributedDifferencesAllowed": 0,
+    "STCKMeasuredShape": {
+      "actions": 10,
+      "cycles": 6,
+      "levelsCompleted": 2,
+      "targetLevels": 3
+    },
+    "SMLPMeasuredShape": {
+      "actions": 15,
+      "cycles": 9,
+      "levelsCompleted": 3,
+      "targetLevels": 3
+    },
+    "targetIsNotClaimedSuccess": true
+  },
+  "postprocessingReview": {
+    "allFourToolSourceTargetAndUnifiedDiffHashesVerified": true,
+    "threePostprocessorsEqualHistoricalAfterOnlyLaneDesignationSchemaPathSubstitutions": true,
+    "sevenHistoricalOfficialToolsPinnedUnchanged": true,
+    "historicalArithmeticImportsUnchanged": true,
+    "postprocessorRunsTwoPairComparatorsThenHistoricalStrictComparator": true,
+    "eachComparatorTimeoutSeconds": 120,
+    "strictHistoricalFailureMustActuallyOccur": true,
+    "onlyAdmissibleStrictFailure": "AssertionError: Within-cohort work metadata changed; exit1 and no combined output.",
+    "strictSuccessOrDifferentFailureRequiresReview": true,
+    "failureIsRetainedNotRelabeledSuccess": true,
+    "javascriptAnalysisRequiresAll40ShapesAndWorkSignatures": true,
+    "pythonReviewerRecomputesAll40ShapesSignatures16PooledMetrics32PairMetricsAndBothGlobalMedians": true,
+    "analysisPassedDoesNotMeanGlobalBudgetAccepted": true,
+    "analysisOutsidePerformanceLock": true
+  },
+  "prospectivePlanWriter": {
+    "file": {
+      "path": "docs/migration/lot9a-evidence/tools/prepare-official-window.py",
+      "bytes": 8083,
+      "sha256": "ebae2a978c47aa0fdea80bb4cd10d1cc1ed9566d8c781c0175ee171144672bcd"
+    },
+    "pythonAstParsedWithoutImport": true,
+    "actualCoordinationReviewStatusAccepted": true,
+    "allContractPinsCopiedIntoRoleScopedImmutableInputs": true,
+    "writerAndAllCoordinationToolsPinned": true,
+    "readinessAndPlanNewFilesOnly": true,
+    "prospectiveOwnClosureMustBeTruthful": true,
+    "closedAgentNamesAreOwnerDeclarationNotAutomaticAgentInspection": true,
+    "freshOwnProcessAndStatusObservationsCreatedOnlyAtFutureInvocation": true,
+    "freshPublicationObservationPinned": true,
+    "localIsolationScopeExplicit": true,
+    "flockAloneIsEvidence": false,
+    "globalHostQuietClaimed": false,
+    "peerAvailabilityWait": false,
+    "futureControllerDoesNonblockingAcquireAnd30SecondMonitoring": true
+  },
+  "inspectionNote": {
+    "oneDisplayOnlyCommandExit": 1,
+    "reason": "After all806 input fingerprints and expected forms were verified, an optional substring extraction for displaying the updated plan-writer gate used the previous text and raised ValueError: substring not found. The actual updated source was then read directly; its two exact review statuses are correct. No integrity assertion failed, no artifact or tool was changed, and no native execution or functional reader occurred."
+  },
+  "blockingObjections": [],
+  "remainingBeforeMeasurement": [
+    "Root must confirm all preparation agents and commands terminal, update own status truthfully and create the fresh scoped readiness.",
+    "The published predecessor and owner-private audience must be freshly observed and unchanged for the selected baseline.",
+    "The declared controller must acquire its short exclusive mutex without blocking and reverify frozen inputs before launch."
+  ],
+  "officialMeasurementPerformedByThisReview": false,
+  "officialPerformanceAccepted": false,
+  "publicationAuthorizedByThisReview": false,
+  "publicationPerformed": false,
+  "evidence": [
+    {
+      "path": "docs/migration/lot9a-evidence/final-performance-068-01/contract.json",
+      "bytes": 182234,
+      "sha256": "53058883838c3ac9d3c384db528bb687b6ecadf605f514682ecd7f4932776e6b"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/final-performance-068-01/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/final-performance-068-01/comparison-policy.json",
+      "bytes": 991,
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/final-performance-068-01/expected-forms.json",
+      "bytes": 58687,
+      "sha256": "69b79abed6ec6753d2f181c1e3d71e1ffcada41af7824488b69de800d714c215"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/final-performance-068-01/protocol.md",
+      "bytes": 3506,
+      "sha256": "f9161792c57d369149e77afa19ae35d062cc29692862e7f1090a6f1f78868d39"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/final-cost/syntax-checks.json",
+      "bytes": 1605,
+      "sha256": "755b1e85cceccfae0371736ff55e5ebeb62eea4ad75c989c8d7065ec5119838a"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/final-cost/analyze.mjs",
+      "bytes": 19756,
+      "sha256": "aea39b1d10babd9e8c7dafd01c0626ec3fce81b2ded910b2bfb3712324f77840"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/final-cost/postprocess.py",
+      "bytes": 5810,
+      "sha256": "747c5509bfe491ed51607cd27b0cd86b94c69aa64a6167051c12ad3dadb18ead"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/final-cost/provenance.json",
+      "bytes": 4427,
+      "sha256": "1f74e20b23e786ffd5979f7c02f0cc8b05710d4db17a71c9e26ba858bd3f64db"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/final-cost/prepare.py",
+      "bytes": 30228,
+      "sha256": "34a35bc110961d93102f17fdac1a6c853f22dbade58676c2c0c06c141db4def9"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/final-cost/review.py",
+      "bytes": 21232,
+      "sha256": "c86a789b0acc8a746ec97098133816ce225f479e306db088c872bb88106ab221"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/final-cost/README.md",
+      "bytes": 10094,
+      "sha256": "32b9ba70bf377e35045b89c73d6ae5b1f37d66ca17f394c85016177f94977125"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/final-cost/derivation-diffs/prepare.py.diff",
+      "bytes": 27077,
+      "sha256": "f7838b28c4a2058a2a76c02dfbd123cf70507284b06807541a52bf5abf8e6426"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/final-cost/derivation-diffs/review.py.diff",
+      "bytes": 2910,
+      "sha256": "e81d6058bb475117c5fcc40d1772256c181b10788f0574a2d3f8f0fda4c94fc6"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/final-cost/derivation-diffs/postprocess.py.diff",
+      "bytes": 1098,
+      "sha256": "dd34c2c1ebcfbfdb442e808af65576db46d1a02b7dc0c4ad937de5d7027f4cce"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/final-cost/derivation-diffs/analyze.mjs.diff",
+      "bytes": 3200,
+      "sha256": "d5903a7bfd21e14ba55e18a430b35af9b4d2b2fd9995b52d3ef4bf2dda13b340"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/delivery-final-068-01/final-reconciliation.json",
+      "bytes": 659,
+      "sha256": "fdc95f05df1b29881d4e8e905584671a9b6a3187353881c5de42dcf559469f9f"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/delivery-final-068-01/independent-delivery-review.json",
+      "bytes": 41738,
+      "sha256": "264db5ad57e16beab648d819a732f5c0a1df4cf262559160e79818a8fa59ffcb"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/delivery-final-068-01/baseline-native.json",
+      "bytes": 39333,
+      "sha256": "18fcc15c6e57f1bf6aab33cc62498e6a5a76836d85b890378be957a0e6da1c57"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/delivery-final-068-01/candidate-native.json",
+      "bytes": 39694,
+      "sha256": "10ef61a1b937cbfca47332f7138a4bd1872323434eee2c3b41c0d0fea81f5379"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/delivery-final-068-01/work-qualify-02/work-forms.json",
+      "bytes": 61124,
+      "sha256": "444e916596bd648052c8438909cf3cd2d38e3f337332406b042320d11b4ae3b9"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/delivery-final-068-01/work-qualify-02/graph-review.json",
+      "bytes": 629755,
+      "sha256": "a75a32907a316b63366c4640c456e8918ece9fda37b545ba5afcf97e394148a4"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/delivery-final-068-01/work-inventory-01/owner-source-inventory.json",
+      "bytes": 2088532,
+      "sha256": "8f66337db0df5f90146442667bd650126b29c59f069f6cad4902240ccc6f88db"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/delivery-final-068-01/common-capture-01/capture/receipt.json",
+      "bytes": 988901,
+      "sha256": "b354121caab89b64b49a25e4ad5887b5e5b48c6f23bdc8da21ed4632814ddbaa"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/delivery-final-068-01/common-qualify-01/review/qualification.json",
+      "bytes": 8573,
+      "sha256": "7a2c60bdf6e64c30e6ad63c85c329d8c448782e139e94da0ce4887b3036936ac"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/final-cost-preparation-068-01/prepare-attempt-01/stdout.log.gz",
+      "bytes": 221,
+      "sha256": "f53ecf0d215f0c5953b81bf3727b7cf1a84a17cee73d013a18b08f902342b1d2"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/final-cost-preparation-068-01/prepare-attempt-01/stdout.log",
+      "bytes": 265,
+      "sha256": "62970ba81f9994b6d9ce8e53a783c805983f0fa8c6d784ee40ea79e931569e90"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/final-cost-preparation-068-01/prepare-attempt-01/receipt.json",
+      "bytes": 2175,
+      "sha256": "268a548af8f3ab3538de5f7449b43115c2604fb98a1a1ecae8623d78e0fa6a90"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/final-cost-preparation-068-01/prepare-attempt-01/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/final-cost-preparation-068-01/prepare-attempt-01/stderr.log.gz",
+      "bytes": 20,
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/final-cost-preparation-068-01/coordination-independent-review.json",
+      "bytes": 10559,
+      "sha256": "95f66a703038463efa64699ce8815ae099f31a7e08e30fbc95d52bd7b1d9d849"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/prepare-official-window.py",
+      "bytes": 8083,
+      "sha256": "ebae2a978c47aa0fdea80bb4cd10d1cc1ed9566d8c781c0175ee171144672bcd"
+    }
+  ]
+}
