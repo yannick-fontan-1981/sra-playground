@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "lot": "10D",
+  "capability": "TemporalSelection",
+  "baseline_branch": "recovery/site109-reconstruction-20261112",
+  "baseline_commit": "658b89cfe77887eb720c95f0e6e6f8595beffdbd",
+  "recovery_source_branch": "lot10d-temporal-selection-github-20261112",
+  "recovery_source_compare": {
+    "merge_base": "2c9e8b45555fa21dbc4cb22a2cc66c7efb1383ac",
+    "ahead_by": 0,
+    "behind_by": 30,
+    "recoverable_changed_files": []
+  },
+  "expected_present": [
+    "src/logos-engine/v6-operations.ts",
+    "src/logos-engine/v6-composition-engine.ts",
+    "src/logos-engine/v6-native-authority.ts",
+    "src/logos-engine/v6-operation-trace.ts",
+    "src/logos-engine/v6-operation-cache.ts",
+    "src/logos-engine/v6-operation-cycle.ts",
+    "src/logos-engine/v6-target-binding.ts",
+    "tests/v6-operations.test.ts",
+    "tests/v6-composition-engine.test.ts",
+    "tests/v6-native-authority.test.ts",
+    "tests/v6-operation-cycle.test.ts",
+    "tests/v6-target-binding.test.ts"
+  ],
+  "expected_missing_before_temporal_reconstruction": [
+    "src/logos-engine/v6-temporal-selection.ts",
+    "src/logos-engine/v6-native-runtime.ts",
+    "docs/migration/lot10d-temporal-selection-next-step.md",
+    "docs/migration/v6-delivery-roadmap.md",
+    "docs/migration/v6-entry-point-progress.json",
+    "src/runtime/v6-agent-worker.ts",
+    "tests/helpers/v6-live-game-campaign.ts",
+    "scripts/measure-native-loop-costs.mjs"
+  ],
+  "performance": {
+    "stck_global_max_increase_percent_exclusive": 10,
+    "smlp_global_max_increase_percent_exclusive": 10,
+    "cross_game_compensation": false,
+    "internal_phase_may_exceed_if_game_global_passes": true,
+    "official_status": "to_confirm_harness_missing"
+  }
+}
