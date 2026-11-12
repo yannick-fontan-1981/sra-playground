@@ -208,6 +208,39 @@ export function restoreTemporalObservationState(
     throw new Error('restored temporal state contains duplicate measured returns');
   }
 
+  uniqueStrings(snapshot.requirementRefs, 'requirementRefs');
+
+  if (snapshot.memoryReuseContract === null) {
+    if (snapshot.memoryProofRefs.length !== 0) {
+      throw new Error('restored temporal state has memory proof refs without a memory contract');
+    }
+  } else {
+    if (snapshot.memoryReuseContract.observationRef !== snapshot.identity.observationId) {
+      throw new Error('restored temporal memory belongs to a different observation');
+    }
+    const memoryRefs = [
+      ...snapshot.memoryReuseContract.recalledClaimRefs,
+      ...snapshot.memoryReuseContract.currentSupportClaimRefs,
+    ];
+    if (
+      snapshot.memoryReuseContract.recalledClaimRefs.length < 1
+      || snapshot.memoryReuseContract.recalledClaimRefs.length > 32
+      || snapshot.memoryReuseContract.currentSupportClaimRefs.length < 1
+      || snapshot.memoryReuseContract.currentSupportClaimRefs.length > 32
+      || new Set(memoryRefs).size !== memoryRefs.length
+    ) {
+      throw new Error('restored temporal memory contract has an invalid bounded proof domain');
+    }
+    const expectedProofRefs = [...memoryRefs].sort();
+    const restoredProofRefs = uniqueStrings(snapshot.memoryProofRefs, 'memoryProofRefs').sort();
+    if (JSON.stringify(expectedProofRefs) !== JSON.stringify(restoredProofRefs)) {
+      throw new Error('restored temporal memory proof refs differ from the memory contract');
+    }
+    if (memoryRefs.some(ref => typeof snapshot.memoryReuseContract?.claimDigests[ref] !== 'string')) {
+      throw new Error('restored temporal memory contract is missing a proof digest');
+    }
+  }
+
   const consumed = uniqueStrings(snapshot.consumedReturnIdentityKeys, 'consumedReturnIdentityKeys');
   const available = new Set(returnKeys);
   if (consumed.some(key => !available.has(key))) {
