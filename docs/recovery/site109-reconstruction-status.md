@@ -37,21 +37,24 @@ Au minimum, les éléments historiquement utilisés par les lots doivent être r
 
 ## Progression Lot 9 — reprise 9B
 
-Branche de reprise :
+Branche de reprise documentaire intégrée :
 `recovery/lot9b-region-intervention-restart-20261112`
+
+Branche de reconstruction Region :
+`recovery/lot9b-region-reconstruction-v2-20261112`
 
 État vérifié :
 - l'ancienne branche `lot9b-github-recovery-20261112` ne contient que des documents et garde-fous de récupération ; aucun runtime Region historique n'y est récupéré ;
 - le noyau V6 reconstruit présent sur la baseline (operations, composition, authority, target-binding, cache, cycle, trace) a été exercé sur un checkout local matérialisé depuis GitHub : **27/27 tests ciblés passent** après compilation TypeScript ;
-- la tentative directe `node --test *.ts` a échoué avant exécution des tests à cause du Node local 22.16, inférieur au minimum repo >=22.18 ; cet échec est environnemental ;
-- aucun chemin `region_intervention`, `chart_navigation`, `joint_channels` ou `yf_arc3_v6` n'est présent dans l'arbre canonique inspecté ;
-- le donneur exact Region n'est donc pas reconstructible actuellement avec identité historique ;
+- une nouvelle reconstruction comportementale Region, explicitement distincte de l'ancien 0.69, est maintenant définie dans `src/logos-engine/v6-region-intervention.ts` ;
+- son contrat durable est `docs/recovery/lot9b-region-reconstruction-contract.md` ;
+- ce cœur Region est qualifié par **13/13 tests** : pas de proposition avant observation, réutilisation seulement via `methodRef` explicite, portée par époque, contradiction invalidante, bornes et snapshot/restauration ;
+- total des tests ciblés V6 + Region observés : **40/40 réussis** ;
+- le raccordement Region au caller commun, au worker public et aux campagnes live n'est pas encore qualifié ;
 - aucun compteur historique 70/76 ou candidat 71/76 n'est promu au statut de la reconstruction actuelle.
 
 Statut Lot 9 :
-**noyau V6 reconstruit fonctionnellement qualifié dans le périmètre ciblé ; Region non récupéré ; performance officielle à confirmer.**
-
-La suite sûre est de récupérer une source/corpus Region exact et durable, ou de définir explicitement une nouvelle reconstruction comportementale distincte de l'ancien code avant toute qualification Region.
+**noyau V6 et cœur Region reconstruit fonctionnellement qualifiés dans leurs périmètres ; raccordement caller et performance officielle à confirmer.**
 
 ## Branches de récupération conservées
 
