@@ -61,3 +61,27 @@ test('OP30 filters stale updates and OP31 preserves unknown feasibility', () => 
     { composition_ref: 'G', satisfied: false, feasible: 'unknown', new_evidence: ['obs1'] },
   ]);
 });
+
+
+test('OP08 finds only compositions whose effects satisfy a requirement of the focus', () => {
+  assert.deepEqual(executeOperation('OP08', state()).value, ['A']);
+});
+
+test('OP12 preserves unknown requirements while traversing declared dependencies', () => {
+  const s = state();
+  s.compositions[1] = { ...s.compositions[1], depends_on: ['C'] };
+  assert.deepEqual(executeOperation('OP12', s).value, {
+    unknowns: { B: ['key'] },
+    visited: ['B', 'C'],
+  });
+});
+
+test('OP26 selects only verified accesses targeting the focused composition', () => {
+  const s = state();
+  s.accesses = [
+    { id: 'route', target: 'B', constraints_verified: true },
+    { id: 'unverified', target: 'B', constraints_verified: false },
+    { id: 'other-target', target: 'C', constraints_verified: true },
+  ];
+  assert.deepEqual(executeOperation('OP26', s).value, ['route']);
+});
