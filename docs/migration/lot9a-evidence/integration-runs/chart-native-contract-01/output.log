@@ -1,0 +1,19 @@
+✔ Chart public snapshots and restored source inputs cannot mutate the retained owner (29.000953ms)
+✔ Chart native snapshots are deeply immutable, reusable and sensitive to typed nested changes (20.072763ms)
+✔ Chart restores a healthy retained checkpoint after external corruption of mutable working fields (35.520486ms)
+✔ Chart rejects corrupt native envelopes and consumed chart structures atomically (75.18577ms)
+✔ Chart source restoration is partial over all fourteen fields and rejects malformed updates before mutation (11.383777ms)
+✔ Chart source-fact retention remains distinct from its complete native checkpoint (17.128663ms)
+✔ Chart pre-abort leaves source state untouched and its detached refusal expires with observation or retry (12.07852ms)
+✔ Chart an already reached deadline prevents geometry and SRC without persisting scheduling context (1.69543ms)
+✔ Chart deadline reached during measurement withholds source selection without converting measurement into acquisition (7.327391ms)
+✔ Chart an abort during the actual SRC selection cannot release its resulting proposal (8.594967ms)
+✔ Chart native entry admits only its original group and subquestion (5.080893ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 802.565974

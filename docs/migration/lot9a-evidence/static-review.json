@@ -1,0 +1,147 @@
+{
+  "schema_version": "lot9a.static_source_review.v1",
+  "lot": "9A",
+  "family": "chart_navigation",
+  "reviewer": "/root/chart_geometry",
+  "review_date_utc": "2026-11-12",
+  "method": "lecture statique ciblée des sources; aucun runtime, test, oracle ou mesure de performance exécuté par cette revue",
+  "worktree": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout",
+  "branch": "lot9a-chart-navigation-20261112",
+  "worktree_head_at_review": "d38a37bc5a589d3eea8e2b30d43725ea961e49d2",
+  "pinned_python_source_revision": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "independence": {
+    "owner_policy_runtime_authored_by_other_agents": true,
+    "reviewer_authored_geometry_module": true,
+    "geometry_review_scope_here": "signature chartEdgeKey uniquement; aucune prétention de revue indépendante de tout le module géométrique",
+    "runtime_or_oracle_results_consulted": false
+  },
+  "production_files_at_review": [
+    {
+      "path": "src/logos-engine/v6-chart-navigation.ts",
+      "sha256": "096e66abbdbe23622b0c9609145d0cea06938255d207fecd1f1237ced296d0a7",
+      "lines": 456
+    },
+    {
+      "path": "src/logos-engine/v6-chart-navigation-policy.ts",
+      "sha256": "1d2f95c0119f3674683808065796012dca2dfa9ca039f20f8e797781e9dfbb76"
+    },
+    {
+      "path": "src/logos-engine/v6-chart-navigation-geometry.ts",
+      "sha256": "a9c007b2ab79cb7cb69d0fde51beb4adfef4745cbf8e8d8bf2752cf177c11c7a"
+    },
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "sha256": "13204361c93cd6baa71e229451c944f11cbdbab63855e1e38c2cde77df07f166"
+    }
+  ],
+  "reviewed_symbols": [
+    "v6-chart-navigation.ts:isPixelPoint",
+    "v6-chart-navigation.ts:isRectangle",
+    "v6-chart-navigation.ts:isChart",
+    "v6-chart-navigation.ts:isViews",
+    "v6-chart-navigation.ts:validateState",
+    "v6-chart-navigation.ts:sameState",
+    "ChartNavigation.nativeState",
+    "ChartNavigation.restore",
+    "ChartNavigation.restoreNative",
+    "ChartNavigation.sourceStateShouldPersist",
+    "ChartNavigation.currentProposalRefusal",
+    "ChartNavigation.proposeInSubquestion",
+    "ChartPolicy.select",
+    "ChartPolicy.choose",
+    "NativeV6Runtime.retainSelectedAcquisition",
+    "NativeV6Runtime.acquirePassiveFamilies",
+    "createNativeV6Runtime"
+  ],
+  "finding_followup": [
+    {
+      "id": "checkpoint_nested_shapes",
+      "status": "closed_for_reported_structural_cases",
+      "previous_problem": "Un simple objet JSON chart, notamment {} ou {nodes:null,slots:[]}, et des vues sans tableau de pixels pouvaient être restaurés puis consommés.",
+      "correction_observed": [
+        "isChart exige des listes non vides de nœuds et slots validés, une liste de liens, des points, un pitch positif, les champs numériques requis et des références d'évidence.",
+        "isRectangle contrôle dimensions, centre, taille impaire positive, coordonnées de raster non négatives et champs entiers.",
+        "Les liens contrôlent extrémités présentes, direction cardinale et déplacement compatible avec le pitch.",
+        "Les positions current/origin appartiennent au graphe; les nœuds et slots sont placés de part et d'autre de field_bottom.",
+        "isViews contrôle les mappings imbriqués, pixels comme tableau de couples entiers non négatifs, observation_ref et edge comme chaînes.",
+        "validateState précède toute affectation de champs dans restore et restoreNative."
+      ],
+      "qualification": "Validation de forme et de certaines cohérences locales; les bornes supérieures du raster et l'authenticité des témoins ne sont pas garanties."
+    },
+    {
+      "id": "source_persistence_truthiness",
+      "status": "closed",
+      "previous_problem": "chart !== null ne reproduisait pas bool(chart) pour une carte vide.",
+      "correction_observed": "sourceStateShouldPersist retourne truthy(this.chart) || this.portable.length > 0.",
+      "source_contract": "common_frontier_runtime.py: if strategy_router.chart.chart or strategy_router.chart.portable",
+      "nominal_impact": "Aucune différence attendue sur les cartes non vides produites par la mesure source."
+    },
+    {
+      "id": "negative_raster_coordinates",
+      "status": "closed_by_followup_source_inspection",
+      "previous_problem": "Les couples entiers de pixels et rectangles autorisaient des coordonnées négatives, pouvant conduire à un accès de ligne invalide dans une vue restaurée.",
+      "correction_observed": "isPixelPoint exige des coordonnées non négatives et est appliqué aux centres des rectangles et aux pixels des vues; les quatre coordonnées bbox sont aussi non négatives.",
+      "source_direction_compatibility": "isPoint général reste signé, ce qui conserve les deltas cardinaux négatifs.",
+      "execution_check_performed": false
+    },
+    {
+      "id": "chart_edge_key_types",
+      "status": "closed_by_signature_inspection",
+      "previous_problem": "Un Record<string,any> de l'owner ne satisfaisait pas la signature imposant from/to.",
+      "correction_observed": "chartEdgeKey accepte {from: readonly number[]; to: readonly number[]} | ChartRecord.",
+      "runtime_change": false,
+      "typecheck_executed_by_reviewer": false
+    }
+  ],
+  "checkpoint_inspection": {
+    "status": "no_additional_alias_or_partial_assignment_defect_found_statically",
+    "observations": [
+      "retainNativeJson crée des copies immuables validées sans geler les objets mutables vivants.",
+      "sameState utilise l'identité JSON typée, distincte de l'égalité Python employée par l'algorithme source.",
+      "Le retour rapide restoreNative vérifie encore l'état vivant; une mutation invalide ne bénéficie pas du seul fait que le checkpoint fourni est identique.",
+      "Le format natif et les deux champs d'enveloppe sont vérifiés avant restauration.",
+      "Les tableaux et objets restaurés sont détachés par copie après validation."
+    ]
+  },
+  "owner_policy_runtime_inspection": {
+    "status": "no_additional_valid_state_source_divergence_found_statically",
+    "observations": [
+      "Sous-question factored_material_return/chart_navigation et material_access_subquestion conformes à strategy.py.",
+      "Ordre des propriétaires obtenu par les ordered_subquestions source, avec entryPoints correspondants.",
+      "Acquisition passive Chart avant Recolor; Channels et Regions restent explicitement à venir.",
+      "Le constructeur exige la même instance enregistrée pour l'acquisition passive Chart.",
+      "Le propriétaire actif est acquis une fois puis exclu du passage passif de sa propre famille.",
+      "Les acquisitions active et passive reçoivent frame_packet; le retour étranger est acquis avec proposition null.",
+      "Les clés chart_navigation_event et chart_navigation_state suivent le common caller source.",
+      "Le state traverse réellement memory.put/get puis restore.",
+      "Le refus natif est lié à observation_ref, level_epoch et frame_hash, avec release_authority=false."
+    ]
+  },
+  "remaining_limits": [
+    {
+      "id": "raster_upper_bounds",
+      "status": "concrete_residual_limit_on_externally_modified_state",
+      "detail": "La validation d'un checkpoint n'a pas les dimensions de sa future trame. Une vue artificielle ayant pixels:[[0,1000000]] reste structurellement admissible. Si recordSource consomme cette vue sur une trame plus petite lors d'une perte d'inventaire, l'accès second[y][x] peut déréférencer une ligne absente. Des rectangles ou slots cohérents mais au-delà des dimensions de la trame présentent la même classe de risque.",
+      "normal_source_producer_reachability": "Non identifié dans les états produits par les mesures de pixels et transitions source valides.",
+      "unexecuted_reasoning_example": true,
+      "targeted_followup": "Si l'import d'états externes arbitraires devient un contrat requis, vérifier les bornes effectives de la trame au point de consommation, sans transformer ce contrôle en preuve de provenance. Les coordonnées négatives signalées précédemment sont déjà rejetées."
+    },
+    {
+      "id": "witness_authenticity",
+      "status": "not_claimed",
+      "detail": "La validation ne prouve ni l'origine d'un checkpoint, ni la vérité des liens, références d'évidence, grants, gains, portable ou vues. Elle ne constitue pas une autorisation d'action ni une preuve universelle de correspondance entre carte et monde."
+    },
+    {
+      "id": "execution_validation",
+      "status": "not_performed",
+      "detail": "Aucun résultat de compilation, test différentiel, oracle, intégration ou performance n'est établi par cette revue statique."
+    }
+  ],
+  "disposition": {
+    "reported_shape_and_truthiness_findings": "closed_with_explicit_frame_relative_upper_bound_limit",
+    "production_changes_made_during_this_review": [],
+    "only_file_written": "docs/migration/lot9a-evidence/static-review.json",
+    "release_authority": false,
+    "universal_checkpoint_validity_claim": false
+  }
+}

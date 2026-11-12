@@ -4,10 +4,10 @@
   "strategySha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44",
   "implementation": "logos-engine.typescript.v6.native-migration/0.67.0",
   "metric": "Connection of the explicit subquestions in the four ordered source DRM lists",
-  "connected": 69,
+  "connected": 70,
   "partiallyConnected": 0,
   "declared": 76,
-  "percent": 90.8,
+  "percent": 92.1,
   "groups": [
     {
       "id": "goal_access",
@@ -251,7 +251,7 @@
     {
       "id": "factored_material_return",
       "declared": 33,
-      "connected": 26,
+      "connected": 27,
       "partiallyConnected": 0,
       "entries": [
         {
@@ -371,8 +371,8 @@
         },
         {
           "question": "chart_navigation",
-          "family": null,
-          "status": "pending"
+          "family": "public_chart_navigation",
+          "status": "connected"
         },
         {
           "question": "region_intervention",
@@ -583,6 +583,7 @@
         "public_ordered_recruitment",
         "public_reactive_contact",
         "public_ordered_reaction",
+        "public_chart_navigation",
         "oriented_coupling",
         "metric_composition",
         "contextual_compartments",
@@ -611,6 +612,7 @@
         "ordered_recruitment",
         "reactive_contact",
         "ordered_reaction",
+        "chart_navigation",
         null,
         null,
         null,

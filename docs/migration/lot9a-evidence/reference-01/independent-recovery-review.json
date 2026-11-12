@@ -1,0 +1,273 @@
+{
+  "schema": "logos-engine.v6.chart-navigation-independent-recovery-review.v1",
+  "status": "recovered_synthetic_reference_data_verified",
+  "reviewer": "/root/chart_geometry",
+  "reviewDateUtc": "2026-11-12",
+  "independentOfReferenceGeneratorAuthor": true,
+  "worktree": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout",
+  "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "disposition": {
+    "recoveredCorpusUsableForDeclaredSyntheticComponentComparison": true,
+    "originalWrapperPassed": false,
+    "originalWrapperStatuses": [
+      "failed",
+      "failed"
+    ],
+    "failedReceiptsPreserved": true,
+    "thirdOracleExecutionPerformed": false,
+    "sourceCallsDuringReview": 0,
+    "sourceModulesImportedDuringReview": 0,
+    "nativeImportsDuringReview": 0,
+    "gameActionsDuringReview": 0,
+    "productionFilesModifiedDuringReview": [],
+    "existingReferenceArtifactsModifiedDuringReview": [],
+    "onlyFileWritten": "docs/migration/lot9a-evidence/reference-01/independent-recovery-review.json",
+    "releaseAuthority": false
+  },
+  "method": {
+    "executedWork": "Lecteurs standard-library de données JSON/gzip, calcul SHA-256 des octets, comparaison récursive typée et parsing AST statique des générateurs.",
+    "excludedWork": "Aucun import/exécution du source de référence, du moteur natif, des méthodes de famille ou d'un jeu; aucun nouvel appel d'oracle.",
+    "comparison": "type-sensitive recursive JSON equality, ordered arrays, duplicate-key rejection",
+    "rawRecordKinds": [
+      "frame",
+      "geometry",
+      "owner",
+      "policy"
+    ],
+    "nativeTestResultsConsulted": false
+  },
+  "exactDataComparison": {
+    "counts": {
+      "frame": 29,
+      "geometry": 30,
+      "owner": 80,
+      "policy": 15
+    },
+    "rawRecordCount": 154,
+    "decompressedFixtureBytes": 9986286,
+    "framesMatchRawExactly": true,
+    "geometryCasesMatchRawExactly": true,
+    "ownerCasesMatchRawExactly": true,
+    "policyCasesMatchRawExactly": true,
+    "orderedCaseArraysPreserved": true,
+    "frameRegistrationOrderPreserved": true,
+    "duplicateJsonObjectKeysRejectedByReader": true,
+    "duplicateCaseIdsAbsent": true,
+    "rawAttempt01And02ByteIdentical": true,
+    "sequences": {
+      "count": 4,
+      "derivedStepOccurrences": 9,
+      "allFieldsDerivedFromRaw": true,
+      "causalSeedsVerified": true,
+      "returnedFramesVerified": true
+    },
+    "sequenceTraceability": [
+      {
+        "sequence": "primary",
+        "sourceCasePrefixes": [
+          "primary_1",
+          "primary_2",
+          "primary_3"
+        ]
+      },
+      {
+        "sequence": "ambiguousBoundary",
+        "sourceCasePrefixes": [
+          "primary_1",
+          "boundary_anchor",
+          "boundary_anchor_final"
+        ]
+      },
+      {
+        "sequence": "contraryAnchor",
+        "sourceCasePrefixes": [
+          "contrary_anchor"
+        ]
+      },
+      {
+        "sequence": "incompatibleDirections",
+        "sourceCasePrefixes": [
+          "branch_1",
+          "branch_2"
+        ]
+      }
+    ],
+    "sequenceDerivationDetail": "Chaque champ d'étape, les seedState, le chaînage afterState→seedState, la proposition et les frames retournées ont été reconstruits depuis les cas bruts et les frames déclarées puis comparés exactement."
+  },
+  "sourceIntegrity": {
+    "allSourceFiles": 723,
+    "beforeInventory": 721,
+    "verifiedBeforeEachImport": 721,
+    "lateImports": [
+      "agents/yf_arc3_v5/state/conscious_experiment_feedback.py",
+      "agents/yf_arc3_v5/state/conscious_symbolic_memory.py"
+    ],
+    "executedFunctionEntries": 422,
+    "allHashesAndBytesMatchManifest": true,
+    "allReceiptHashMapsMatchCurrentManifestFiles": true,
+    "executedFunctionLogEqualsAttempt02": true,
+    "manifestCommitMatchesDeclarationAndPayload": true,
+    "manifestHashMatchesBothDeclarations": true,
+    "currentGeneratorAndDeclarationFingerprintsMatchAttempt02PayloadReceiptAndRecovery": true,
+    "originalDeclarationArchiveMatchesAttempt01Receipt": true,
+    "originalGeneratorReconstructionMatchesAttempt01Receipt": true,
+    "allSourcePathsContainedWithinPinnedSourceTree": true,
+    "closedGameImplementationOrLkeyPathsEncountered": false,
+    "sourceHashQualification": "Toutes les empreintes et tailles actuellement présentes ont été comparées au manifeste immuable et aux tables du corpus/reçus. La journalisation avant import et après calcul est conservée; cette revue ne rejoue pas l'exécution."
+  },
+  "generatorRecoveryAnalysis": {
+    "originalGenerator01": {
+      "fingerprint": {
+        "path": "docs/migration/lot9a-evidence/reference-01/export-reference-attempt-01.py",
+        "bytes": 33246,
+        "sha256": "e417bf07dae07cb7dd76b654001975f22cff03d9c642e63c26e59d75a4a21eb3"
+      },
+      "matchesOriginalReceipt": true,
+      "nonMainHelperAstEqualToAttempt02": true,
+      "provenanceRecord": {
+        "path": "docs/migration/lot9a-evidence/reference-01/generator-attempt-01-reconstruction.json",
+        "bytes": 728,
+        "sha256": "74697b2f1feaf2bd02f2b36e65c1f16aa5287875d9c41cdfe596597b3d3e5259"
+      },
+      "captureAtOriginalExecution": false,
+      "reconstructedFromDocumentedCorrection": true,
+      "exactHashVerifiedIndependently": true,
+      "executionPerformedDuringReconstructionReview": false
+    },
+    "declarationChangedKeys": [
+      "correctiveAttempt",
+      "sourceIntegrity"
+    ],
+    "boundsAndCaseGroupsUnchangedBetweenAttempts": true,
+    "corpusAndAllNonMainHelperAstUnchangedBetweenGenerator01And02": true,
+    "exportOrder": [
+      {
+        "line": 424,
+        "operation": "make_corpus termine et le flux raw est fermé"
+      },
+      {
+        "line": 428,
+        "operation": "contrôle que chaque import source final avait été vérifié avant exécution"
+      },
+      {
+        "line": 429,
+        "operation": "revérification de tous les fichiers de l'union initiale et tardive"
+      },
+      {
+        "line": 430,
+        "operation": "égalité des empreintes avant/après"
+      },
+      {
+        "line": 441,
+        "operation": "ouverture exclusive du fichier de sortie"
+      },
+      {
+        "line": 442,
+        "operation": "écriture du gzip complet puis fermeture du contexte fichier"
+      },
+      {
+        "line": 443,
+        "operation": "construction des métadonnées finales; fp(args.output) échoue sur chemin relatif"
+      }
+    ],
+    "metadataFailure": {
+      "attempt01": "Échec de clôture de provenance pour imports tardifs après achèvement des cas; le reçu reste failed.",
+      "attempt02": "ValueError de pathlib.relative_to dans fp(args.output), appelé après l'écriture et la fermeture du gzip. La comparaison indépendante retrouve le contenu complet du raw.",
+      "wrapperUpdateNotCompleted": "Les arguments de record.update, dont fixture=fp(args.output), sont évalués avant l'appel. L'échec de cet argument n'est donc pas un passage réussi du wrapper; except/finally enregistrent failed.",
+      "recoveredObject": "Le corpus gzip existant, contrôlé contre le raw et les empreintes, sans recalcul source ni remplacement de résultat."
+    }
+  },
+  "declaredBoundsAndCases": {
+    "allRegisteredFrames64x64Palette0to15": true,
+    "allSectionCountsWithinDeclaration": true,
+    "attemptElapsedSeconds": [
+      45.87184218699986,
+      44.55150775200036
+    ],
+    "cumulativeOracleSeconds": 90.42334993900022,
+    "maximumCumulativeOracleSeconds": 120,
+    "decodeExactBudget": 4,
+    "decodeCutBudget": 3,
+    "maxLocationCounterfactual": 33,
+    "maximumMeasuredNodes": 4,
+    "maximumMeasuredDirectedLinks": 6,
+    "maximumDeclaredDecodeEvaluations": 4096,
+    "frameHashesRecomputedFromPublicRows": true,
+    "publicFramePacketsEqualRegisteredRows": true,
+    "exactFractionStringsAndCoincidentNodesChecked": true,
+    "multipleMarkersAndPartialDisclosureRetained": true,
+    "callerCompleteScopeCaseChecked": true,
+    "zeroEvaluationEmptyDomainSimpleNamespaceCaseChecked": true,
+    "emptyRasterAndTruncatedIntermediateAreExplicitNegatives": true,
+    "counterfactualCaseIds": [
+      "missing_link_cannot_refute_location",
+      "contrary_anchor_retracts_prior_permission",
+      "maximum_location_alternatives"
+    ],
+    "allCounterfactualsMarkedNotColdPhysical": true
+  },
+  "fingerprints": {
+    "fixture": {
+      "path": "docs/migration/lot9a-evidence/reference-01/reference.json.gz",
+      "bytes": 2053926,
+      "sha256": "0770706db16249ac4ab1c7c8b9533d571f2fc2cdaeaf5dae2d990806e412cfe8"
+    },
+    "raw01": {
+      "path": "docs/migration/lot9a-evidence/reference-01/attempt-01-raw.jsonl",
+      "bytes": 8920490,
+      "sha256": "82c1cd6cf05d6644ed6583db2bb12c0f65e74783b54530aaf6fc6bbe86cecd5c"
+    },
+    "raw02": {
+      "path": "docs/migration/lot9a-evidence/reference-01/attempt-02-raw.jsonl",
+      "bytes": 8920490,
+      "sha256": "82c1cd6cf05d6644ed6583db2bb12c0f65e74783b54530aaf6fc6bbe86cecd5c"
+    },
+    "attempt01": {
+      "path": "docs/migration/lot9a-evidence/reference-01/attempt-01.json",
+      "bytes": 190845,
+      "sha256": "1f18475ea728ffa5f6ca1847b654d357f8af29e7c258566b2f40aa1620b94f9c"
+    },
+    "attempt02": {
+      "path": "docs/migration/lot9a-evidence/reference-01/attempt-02.json",
+      "bytes": 354858,
+      "sha256": "162a36d170cef9c1dc832de79b6b477999d3f4e8a796a84d70c06ec56f7d4cc4"
+    },
+    "declaration": {
+      "path": "docs/migration/lot9a-evidence/reference-01/declaration.json",
+      "bytes": 4922,
+      "sha256": "35d495721efa864acfceaf7abd26e1588038a1babd12b59364d9022e861f0339"
+    },
+    "declaration01": {
+      "path": "docs/migration/lot9a-evidence/reference-01/declaration-attempt-01.json",
+      "bytes": 4513,
+      "sha256": "ded5c1b0df67edc1937b8a6a90c3d5c5914fbe5c8021421f10b84a599d364525"
+    },
+    "generator02": {
+      "path": "docs/migration/lot9a-evidence/tools/export-reference.py",
+      "bytes": 34872,
+      "sha256": "30bc414e1ab6c7be209d0c726f7a3df47f8208ea1c708f2cf2804fc9677182ef"
+    },
+    "sourceManifest": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/manifest.json",
+      "bytes": 424024,
+      "sha256": "491eb3b737bbb490a1b7c212f5b1e75f5a8f84b2124b95d9dd54a0d09eca85d6"
+    },
+    "recovery": {
+      "path": "docs/migration/lot9a-evidence/reference-01/recovery-02.json",
+      "bytes": 2848,
+      "sha256": "ea93e274a47f53b22bcfd3f7216159981e47802fc5e93655c1de5a57b1e27ede"
+    },
+    "correction02": {
+      "path": "docs/migration/lot9a-evidence/reference-01/oracle-correction-02.json",
+      "bytes": 1077,
+      "sha256": "e7ca542d61d677834e828c6bae0e04ab7d2d4abbc3a1876ad3c2bc5c1ab9bdf5"
+    }
+  },
+  "qualification": "Synthetic component parity only. Cold common integration must use unchanged public rasters and actual returned frames, never an injected component state. An independently supplied synthetic official boundary is not a solved live level.",
+  "limitations": [
+    "Les deux tentatives d'oracle restent des exécutions de wrapper échouées. Ce rapport qualifie une récupération contrôlée de données complètes; il ne les requalifie pas en wrapper passed.",
+    "La concordance des sections brutes, séquences, empreintes et bornes ne démontre pas une partie réelle résolue, une parité V6 globale, une performance officielle ou une publication.",
+    "Le générateur01 est une reconstruction dont les octets retrouvent l'empreinte du reçu d'origine; il ne s'agit pas d'une capture du fichier faite lors de la tentative01.",
+    "Les états contre-factuels restent limités aux composants. Une intégration common à froid doit utiliser les rasters et retours publics sans injection d'état."
+  ]
+}

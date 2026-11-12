@@ -1,0 +1,14 @@
+{"status": "failed", "attempt": 2, "elapsedSeconds": 44.55150775200036, "frameCount": null, "geometryCount": null, "ownerOperationCount": null, "policyCaseCount": null}
+Traceback (most recent call last):
+  File "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/tools/export-reference.py", line 462, in <module>
+    if __name__ == '__main__': main()
+                               ^^^^^^
+  File "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/tools/export-reference.py", line 443, in main
+    record.update(status='passed', fixture=fp(args.output), raw=fp(raw_path), sourceAfter=hashes_after,
+                                           ^^^^^^^^^^^^^^^
+  File "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/tools/export-reference.py", line 44, in fp
+    return {'path': p.relative_to(ROOT).as_posix(), 'bytes': p.stat().st_size, 'sha256': sha(p)}
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 682, in relative_to
+    raise ValueError(f"{str(self)!r} is not in the subpath of {str(other)!r}")
+ValueError: 'docs/migration/lot9a-evidence/reference-01/reference.json.gz' is not in the subpath of '/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout'

@@ -1,0 +1,13 @@
+{
+  "schema": "logos-engine.lot9a.common-reader-correction.v1",
+  "declaredAt": "2026-11-12T13:59:39.081960+00:00",
+  "firstAttempt": "integration-runs/chart-common-01/receipt.json",
+  "statusOfFirstAttempt": "failed",
+  "observedFailure": "Four cases reached complete acquired source-state and graph-state equality then failed the restoration instrumentation matcher, which compared JSON object member order as text. Registration and acquisition-ablation passed.",
+  "correction": "Use node:util isDeepStrictEqual to compare the complete instrumented restored object with the complete independent source state. No field omitted, no native production or reference fixture changed.",
+  "scope": "Same six tests, same input frames and cases, second and final declared common attempt. No extra oracle.",
+  "testBeforeSha256": "75dee87df11e242dee38a4e5b2ef3cb95cdcbf69483da224f27a43f4cde64911",
+  "testAfterSha256": "f15c0d6f01ff9f565d5407628f2d27d5309d0e574cb7d26d7ff016e8dff91914",
+  "productionChanged": false,
+  "fixtureChanged": false
+}

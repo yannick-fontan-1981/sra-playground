@@ -1,0 +1,19 @@
+✔ Chart registers one cold owner at source position 24, with one shared SRC program and the same passive owner (263.829186ms)
+✔ cold production caller acquires gain, intermediate boundary loss and the next conditional route once (3789.753232ms)
+ℹ {"physicalReturns":3,"sourceAcquisitions":3,"sourceRestores":5,"nativeRestores":6,"solvedLevels":0}
+✔ a contrary current anchor revises the actual common owner and retains its source refutation (1725.65687ms)
+ℹ {"physicalReturns":1,"sourceAcquisitions":1,"contraryAnchor":true}
+✔ ablating the selected acquisition preserves the physical return but removes the learned continuation (1963.44734ms)
+ℹ {"physicalReturns":1,"sourceAcquisitions":0,"suppressedAcquisitions":1,"changedContinuation":true,"commandChangeClaimed":false}
+✔ a retained Chart owner acquires one foreign return after its selection is disabled (scene changed: false) (2086.944039ms)
+ℹ {"physicalReturns":2,"activeChartAcquisitions":1,"passiveChartCalls":1,"foreignSelectedOwner":"observed_frontier","selectionDisabledThroughSupportedGraphEdit":true}
+✔ a retained Chart owner acquires one foreign return after its selection is disabled (scene changed: true) (1869.370079ms)
+ℹ {"physicalReturns":2,"activeChartAcquisitions":1,"passiveChartCalls":1,"foreignSelectedOwner":"observed_frontier","selectionDisabledThroughSupportedGraphEdit":true}
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 12836.783851

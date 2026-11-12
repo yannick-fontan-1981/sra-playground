@@ -26,6 +26,7 @@ import { ReactiveContact } from './v6-reactive-contact.ts';
 import { OrderedReaction } from './v6-ordered-reaction.ts';
 import { ObservedInventory } from './v6-observed-inventory.ts';
 import { TopologicalRecolor } from './v6-topological-recolor.ts';
+import { ChartNavigation } from './v6-chart-navigation.ts';
 import { AxialQuestion } from './v6-axial-question.ts';
 import { WindowQuestion } from './v6-window-question.ts';
 import { OrderedRecruitment } from './v6-ordered-recruitment.ts';
@@ -131,6 +132,9 @@ const NATIVE_CALLER_EXTENSIONS = ['current_epoch_axial_packet_attribution', 'nat
   'validated_branch_routing_public_checkpoint',
   'single_owner_branch_routing_selected_acquisition',
   'branch_routing_incomplete_public_return_and_suffix_retention',
+  'single_owner_chart_navigation_selected_and_passive_acquisition',
+  'validated_chart_navigation_checkpoint',
+  'current_execution_chart_navigation_refusal',
   'observed_stationary_reception_from_public_packet_frames',
   'current_uniform_reception_and_required_control_questions',
   'current_typed_analogy_control_prerequisite_question',
@@ -197,7 +201,7 @@ export interface NativeV6RuntimeConfiguration {
   /** Same source policy drives the native common caller's retained components. */
   callerStrategy?: R;
   /** The same registered instances acquire passive evidence in source order. */
-  acquisitionFamilies?: { supports: SupportNavigation; recall: NativeFamily; framed?: FramedTransfer; outline?: OutlineService; inventory?: ObservedInventory; reaction?: OrderedReaction; reactive?: ReactiveContact; recolor?: TopologicalRecolor; axial?: AxialQuestion; window?: WindowQuestion; recruitment?: OrderedRecruitment; workshop?: RankedWorkshop; symbols?: SymbolTransactions; morphology?: NativeMorphologyFamily; feedback?: NativeFeedbackFamily; fields?: AddressedMaterial; binding?: ObservedBinding; preparations?: LinkedTemporalPreparation; preview?: NativePreviewPacking; selectedRigid?: NativeSelectedRigid };
+  acquisitionFamilies?: { supports: SupportNavigation; recall: NativeFamily; framed?: FramedTransfer; outline?: OutlineService; inventory?: ObservedInventory; reaction?: OrderedReaction; reactive?: ReactiveContact; chart?: ChartNavigation; recolor?: TopologicalRecolor; axial?: AxialQuestion; window?: WindowQuestion; recruitment?: OrderedRecruitment; workshop?: RankedWorkshop; symbols?: SymbolTransactions; morphology?: NativeMorphologyFamily; feedback?: NativeFeedbackFamily; fields?: AddressedMaterial; binding?: ObservedBinding; preparations?: LinkedTemporalPreparation; preview?: NativePreviewPacking; selectedRigid?: NativeSelectedRigid };
 }
 
 export class NativeV6Runtime implements NativeV6Backend {
@@ -211,7 +215,7 @@ export class NativeV6Runtime implements NativeV6Backend {
   private authority: NativeCompositionAuthority | null = null;
   private caller: NativeCallerCoordinator | null = null;
   private readonly callerStrategy?: R;
-  private readonly acquisitionFamilies?: { supports: SupportNavigation; recall: NativeFamily; framed?: FramedTransfer; outline?: OutlineService; inventory?: ObservedInventory; reaction?: OrderedReaction; reactive?: ReactiveContact; recolor?: TopologicalRecolor; axial?: AxialQuestion; window?: WindowQuestion; recruitment?: OrderedRecruitment; workshop?: RankedWorkshop; symbols?: SymbolTransactions; morphology?: NativeMorphologyFamily; feedback?: NativeFeedbackFamily; fields?: AddressedMaterial; binding?: ObservedBinding; preparations?: LinkedTemporalPreparation; preview?: NativePreviewPacking; selectedRigid?: NativeSelectedRigid };
+  private readonly acquisitionFamilies?: { supports: SupportNavigation; recall: NativeFamily; framed?: FramedTransfer; outline?: OutlineService; inventory?: ObservedInventory; reaction?: OrderedReaction; reactive?: ReactiveContact; chart?: ChartNavigation; recolor?: TopologicalRecolor; axial?: AxialQuestion; window?: WindowQuestion; recruitment?: OrderedRecruitment; workshop?: RankedWorkshop; symbols?: SymbolTransactions; morphology?: NativeMorphologyFamily; feedback?: NativeFeedbackFamily; fields?: AddressedMaterial; binding?: ObservedBinding; preparations?: LinkedTemporalPreparation; preview?: NativePreviewPacking; selectedRigid?: NativeSelectedRigid };
   private callerAcquisitions = 0;
   private callerBoundaryReplays = 0;
   private sessionId = '';
@@ -265,6 +269,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       ...(this.acquisitionFamilies.inventory ? [this.acquisitionFamilies.inventory] : []),
       ...(this.acquisitionFamilies.reaction ? [this.acquisitionFamilies.reaction] : []),
       ...(this.acquisitionFamilies.reactive ? [this.acquisitionFamilies.reactive] : []),
+      ...(this.acquisitionFamilies.chart ? [this.acquisitionFamilies.chart] : []),
       ...(this.acquisitionFamilies.recolor ? [this.acquisitionFamilies.recolor] : []),
       ...(this.acquisitionFamilies.axial ? [this.acquisitionFamilies.axial] : []),
       ...(this.acquisitionFamilies.window ? [this.acquisitionFamilies.window] : []),
@@ -290,6 +295,9 @@ export class NativeV6Runtime implements NativeV6Backend {
     }
     if (this.acquisitionFamilies?.recruitment && !this.families.includes(this.acquisitionFamilies.recruitment)) {
       throw new TypeError('Recruitment passive acquisition requires its single registered owner');
+    }
+    if (this.acquisitionFamilies?.chart && !this.families.includes(this.acquisitionFamilies.chart)) {
+      throw new TypeError('Chart passive acquisition must use the same registered owner');
     }
     if (this.acquisitionFamilies?.symbols && !this.families.includes(this.acquisitionFamilies.symbols)) {
       throw new TypeError('Symbol transaction state retention requires its single registered owner');
@@ -1356,7 +1364,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       visual_sequences: 'visual_sequence_event', feedback_sequences: 'feedback_sequence_event', relative_arrangements: 'relative_arrangement_event', facet_examples: 'facet_example_event', slot_substitution: 'slots', word_interface: 'words', port_assembly: 'ports', constellation_cover: 'constellations',
       public_framed_transfer: 'framed_transfer_event', public_outline_service: 'outline_service_event',
       public_observed_inventory: 'observed_inventory_event', public_ordered_reaction: 'reaction_event', public_reactive_contact: 'reactive_event',
-      public_topological_recolor: 'topological_recolor_event', public_axial_question: 'axial_question_event', public_window_question: 'window_question_event', public_ordered_recruitment: 'window_constraint', public_ranked_workshop: 'ranked_workshop_event',
+      public_chart_navigation: 'chart_navigation_event', public_topological_recolor: 'topological_recolor_event', public_axial_question: 'axial_question_event', public_window_question: 'window_question_event', public_ordered_recruitment: 'window_constraint', public_ranked_workshop: 'ranked_workshop_event',
       public_symbol_transaction: 'symbol_transaction_event', public_addressed_material: 'addressed_material_event', public_observed_binding: 'object_binding_event', preview_packing: 'preview_packing_event', selected_rigid: 'selected_rigid_event', morphology: 'morphology_event' };
     const key = singleEventKeys[family.id];
     // The original selected-return key has no recruitment_plan branch, so
@@ -1423,7 +1431,7 @@ export class NativeV6Runtime implements NativeV6Backend {
 
   private async acquirePassiveFamilies(transition: WitnessedTransition, proposal: NativeProposal, selectedSupport: boolean,
     selectedId: string, execution: NativeExecution, incompleteSelectedId: string | null): Promise<R[]> {
-    const { supports, recall, framed, outline, inventory, reaction, reactive, recolor, axial, window, recruitment, workshop, symbols, morphology, feedback, fields, binding, preparations, preview, selectedRigid } = this.acquisitionFamilies!, { before, after, command, first, second, index } = transition;
+    const { supports, recall, framed, outline, inventory, reaction, reactive, chart, recolor, axial, window, recruitment, workshop, symbols, morphology, feedback, fields, binding, preparations, preview, selectedRigid } = this.acquisitionFamilies!, { before, after, command, first, second, index } = transition;
     const memory = this.authority!.memory;
     const incomplete: R[] = [];
     if (!selectedSupport) {
@@ -1506,7 +1514,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       }
     }
     // Original Axial follows Window and the still pending settlement acquisition
-    // and precedes Recolor. Its passive path only acquires supported selection
+    // and precedes the Channels/Regions/Chart chain. Its passive path acquires selection
     // contrasts; an active rotation return has already been recorded once.
     if (axial) {
       if (selectedId !== axial.id) {
@@ -1519,6 +1527,19 @@ export class NativeV6Runtime implements NativeV6Backend {
         const state = axial.state();
         memory.put(EPISODE, 'axial_question_state', state, after.observation_ref, after.revision);
         axial.restore(memory.get(EPISODE, 'axial_question_state').value);
+      }
+    }
+    // Source order is Channels -> Regions -> Chart -> Recolor. Channels and
+    // Regions are still pending. A selected chart return was acquired above;
+    // a foreign return reaches the same owner once with all intermediate frames.
+    if (chart) {
+      if (selectedId !== chart.id) {
+        const result = chart.recordSource(before, after, command, first.frame_rows, second.frame_rows, null, index, second.frame_packet);
+        if (result) memory.put(EPISODE, `chart_navigation_event:${before.revision}`, result, after.observation_ref, after.revision);
+      }
+      if (chart.sourceStateShouldPersist()) {
+        memory.put(EPISODE, 'chart_navigation_state', chart.state(), after.observation_ref, after.revision);
+        chart.restore(memory.get(EPISODE, 'chart_navigation_state').value);
       }
     }
     // Source Recolor retains selected evidence before FramedTransfer. It does
@@ -2199,6 +2220,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   const reactive = await ReactiveContact.create(configuration.reactive_contact_continuation);
   const reaction = await OrderedReaction.create();
   const inventory = await ObservedInventory.create();
+  const chart = await ChartNavigation.create();
   const recolor = await TopologicalRecolor.create();
   const axial = await AxialQuestion.create();
   const window = await WindowQuestion.create();
@@ -2256,7 +2278,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     animated_contact: new AnimatedContact(policy.animated_contact_question),
   };
   const supports = new SupportNavigation(supportChildren, policy);
-  const families: NativeFamily[] = [windows, symmetric, orbit, containment, surface, code, band, framed, outline, inventory, reactive, reaction, recolor, axial, window, recruitment, workshop, symbols, fields, binding, morphology, reduction, motifs, branches, recall, supports, feedback, arrangements, facets, preview, selectedRigid, linkedTemporal, ...Object.values(supportChildren), ...(visual ? [visual] : []), ...Object.values(interfaces)];
+  const families: NativeFamily[] = [windows, symmetric, orbit, containment, surface, code, band, framed, outline, inventory, reactive, reaction, chart, recolor, axial, window, recruitment, workshop, symbols, fields, binding, morphology, reduction, motifs, branches, recall, supports, feedback, arrangements, facets, preview, selectedRigid, linkedTemporal, ...Object.values(supportChildren), ...(visual ? [visual] : []), ...Object.values(interfaces)];
   const registeredSubquestions = (order: readonly string[], registered: Record<string, NativeFamily>): string[] =>
     order.flatMap(question => registered[question] ? [registered[question].id] : []);
   // The cell, occurrence and program source entries share one acquired journal, but
@@ -2294,7 +2316,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
       const registered: Record<string, string> = { factored_material_return: 'factored_material_return', conditional_transit: 'conditional_transit',
         conserved_band_transfer: band.id, supported_ternary_reduction: reduction.id, motif_conditioned_access: motifs.id, parallel_branch_routing: branches.id, ordered_support_transfer: ordered.id,
         observed_framed_transfer: framed.id, observed_outline_service: outline.id, observed_inventory_composition: inventory.id,
-        reactive_contact_continuation: reactive.id, reactive_contact: reactive.id, ordered_reaction: reaction.id, topological_recolor: recolor.id,
+        reactive_contact_continuation: reactive.id, reactive_contact: reactive.id, ordered_reaction: reaction.id, chart_navigation: chart.id, topological_recolor: recolor.id,
         axial_question: axial.id, window_question: window.id, ordered_recruitment: recruitment.id, observed_ranked_workshop: workshop.id, observed_symbol_transaction: symbols.id, observed_addressed_material: fields.id, observed_object_binding: binding.id };
       return registered[question] ? [registered[question]!] : supportChildren[question] ? [supportChildren[question]!.id] : [];
     }),
@@ -2311,7 +2333,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     return ['scored_relation_access', 'observed_support_access'].includes(question) || supportChildren[question] ? [null] : [];
   });
   const materialEntryPoints = configuration.factored_material_return.ordered_subquestions.flatMap<string | null>(question => {
-    if (['observed_framed_transfer', 'observed_inventory_composition', 'reactive_contact_continuation', 'reactive_contact', 'ordered_reaction', 'topological_recolor', 'axial_question', 'window_question', 'ordered_recruitment', 'observed_ranked_workshop', 'observed_symbol_transaction', 'observed_addressed_material', 'observed_object_binding'].includes(question)) return [question];
+    if (['observed_framed_transfer', 'observed_inventory_composition', 'reactive_contact_continuation', 'reactive_contact', 'ordered_reaction', 'chart_navigation', 'topological_recolor', 'axial_question', 'window_question', 'ordered_recruitment', 'observed_ranked_workshop', 'observed_symbol_transaction', 'observed_addressed_material', 'observed_object_binding'].includes(question)) return [question];
     return ['factored_material_return', 'conditional_transit', 'motif_conditioned_access', 'parallel_branch_routing', 'conserved_band_transfer', 'supported_ternary_reduction', 'ordered_support_transfer', 'observed_outline_service'].includes(question)
       || supportChildren[question] ? [null] : [];
   });
@@ -2331,6 +2353,6 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     fullV6Parity: false };
   const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
   const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
-  return new NativeV6Runtime({ sourceDigest, families, groups, authorityPolicy: loaded.common, callerStrategy: configuration, acquisitionFamilies: { supports, recall, framed, outline: outlineOwner, inventory, reaction, reactive, recolor, axial, window, recruitment, workshop, symbols, morphology, feedback, fields, binding, preparations, preview: previewOwner, selectedRigid: selectedRigidOwner },
+  return new NativeV6Runtime({ sourceDigest, families, groups, authorityPolicy: loaded.common, callerStrategy: configuration, acquisitionFamilies: { supports, recall, framed, outline: outlineOwner, inventory, reaction, reactive, chart, recolor, axial, window, recruitment, workshop, symbols, morphology, feedback, fields, binding, preparations, preview: previewOwner, selectedRigid: selectedRigidOwner },
     maxPointOccurrences: loaded.common.input_domain.max_point_occurrences, ...(options.now ? { now: options.now } : {}) });
 }

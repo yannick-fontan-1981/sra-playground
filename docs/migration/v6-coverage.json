@@ -30,10 +30,10 @@
     "declaredClassesAndFunctions": 12857,
     "dataFiles": 417,
     "verifiedModules": 0,
-    "componentVerifiedModules": 215,
-    "partiallyTransferredModules": 147,
+    "componentVerifiedModules": 219,
+    "partiallyTransferredModules": 149,
     "transferredUnverifiedModules": 0,
-    "pendingModules": 1007,
+    "pendingModules": 1001,
     "strategyFamilies": 16
   },
   "families": [
@@ -25776,9 +25776,16 @@
           "endLine": 256
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-chart-navigation-geometry.ts"
+      ],
+      "proof": [
+        "docs/migration/lot9a-evidence/tools/export-reference.py",
+        "docs/migration/lot9a-evidence/reference-01/reference.json.gz",
+        "docs/migration/lot9a-evidence/reference-01/recovery-02.json",
+        "tests/v6-chart-navigation.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/inventory_release_domain_d.py",
@@ -29678,9 +29685,16 @@
           "endLine": 96
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-chart-navigation-geometry.ts"
+      ],
+      "proof": [
+        "docs/migration/lot9a-evidence/tools/export-reference.py",
+        "docs/migration/lot9a-evidence/reference-01/reference.json.gz",
+        "docs/migration/lot9a-evidence/reference-01/recovery-02.json",
+        "tests/v6-chart-navigation.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/mechanical_family_contracts_d.py",
@@ -75799,7 +75813,8 @@
         "src/logos-engine/v6-motion-contrast.ts",
         "src/logos-engine/v6-ranked-workshop.ts",
         "src/logos-engine/v6-branch-routing.ts",
-        "src/logos-engine/v6-branch-routing-geometry.ts"
+        "src/logos-engine/v6-branch-routing-geometry.ts",
+        "src/logos-engine/v6-chart-navigation.ts"
       ],
       "proof": [
         "scripts/export-v6-target-reference.py",
@@ -75896,7 +75911,9 @@
         "tests/v6-branch-routing-public-boundary.test.ts",
         "docs/migration/lot8b-evidence/common-integration-01/contract-review.md",
         "docs/migration/lot8b-evidence/common-integration-01/validation-summary.json",
-        "docs/migration/lot8b-branch-routing-lineage.md"
+        "docs/migration/lot8b-branch-routing-lineage.md",
+        "tests/v6-chart-navigation-kernel.test.ts",
+        "docs/migration/lot9a-evidence/integration-runs/chart-common-02/receipt.json"
       ]
     },
     {
@@ -87641,9 +87658,16 @@
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "lines": 0,
       "definitions": [],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-chart-navigation.ts"
+      ],
+      "proof": [
+        "docs/migration/lot9a-evidence/tools/export-reference.py",
+        "docs/migration/lot9a-evidence/reference-01/reference.json.gz",
+        "docs/migration/lot9a-evidence/reference-01/recovery-02.json",
+        "tests/v6-chart-navigation.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/chart_navigation/family.py",
@@ -87736,9 +87760,19 @@
           "endLine": 123
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-chart-navigation.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "docs/migration/lot9a-evidence/tools/export-reference.py",
+        "docs/migration/lot9a-evidence/reference-01/reference.json.gz",
+        "docs/migration/lot9a-evidence/reference-01/recovery-02.json",
+        "tests/v6-chart-navigation.test.ts",
+        "tests/v6-chart-navigation-kernel.test.ts",
+        "tests/v6-chart-navigation-native-contract.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/chart_navigation/geometry.py",
@@ -87789,9 +87823,16 @@
           "endLine": 71
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-chart-navigation-geometry.ts"
+      ],
+      "proof": [
+        "docs/migration/lot9a-evidence/tools/export-reference.py",
+        "docs/migration/lot9a-evidence/reference-01/reference.json.gz",
+        "docs/migration/lot9a-evidence/reference-01/recovery-02.json",
+        "tests/v6-chart-navigation.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/chart_navigation/policy.py",
@@ -87824,9 +87865,16 @@
           "endLine": 15
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-chart-navigation-policy.ts"
+      ],
+      "proof": [
+        "docs/migration/lot9a-evidence/tools/export-reference.py",
+        "docs/migration/lot9a-evidence/reference-01/reference.json.gz",
+        "docs/migration/lot9a-evidence/reference-01/recovery-02.json",
+        "tests/v6-chart-navigation.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/collection_evidence.py",

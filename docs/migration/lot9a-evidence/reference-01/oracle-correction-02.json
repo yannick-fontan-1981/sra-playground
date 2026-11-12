@@ -1,0 +1,17 @@
+{
+  "schema": "logos-engine.v6.chart-navigation-reference-correction.v1",
+  "failedAttempt": 1,
+  "elapsedSecondsRetained": 45.87184218699986,
+  "rawRecordsRetained": 154,
+  "previousDeclarationSha256": "ded5c1b0df67edc1937b8a6a90c3d5c5914fbe5c8021421f10b84a599d364525",
+  "previousGeneratorSha256": "e417bf07dae07cb7dd76b654001975f22cff03d9c642e63c26e59d75a4a21eb3",
+  "cause": "All case assertions completed. Final integrity assertion required identical eager and final module inventories, but original DRM/SRC execution loads additional original modules lazily.",
+  "correction": "A manifest-verifying import finder checks every original source module before Python executes it, including late imports. The final check covers the complete union. No original module is edited or monkey-patched.",
+  "originalDeclarationPreserved": "declaration-attempt-01.json",
+  "caseInputsChanged": false,
+  "caseGroupsChanged": false,
+  "boundsChanged": false,
+  "remainingOracleAttempts": 1,
+  "remainingCumulativeOracleSeconds": 74.12815781300014,
+  "secondAttemptMaximumSeconds": 60
+}

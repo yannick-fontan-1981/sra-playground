@@ -1,0 +1,23 @@
+{
+  "schema": "logos-engine.v6.chart-navigation-native-test-execution.v1",
+  "attempt": 1,
+  "status": "passed",
+  "command": [
+    "node",
+    "--test",
+    "tests/v6-chart-navigation.test.ts"
+  ],
+  "timeoutSeconds": 30,
+  "startedAt": "2026-11-12T13:58:45.000938+00:00",
+  "sourceOracleCalls": 0,
+  "globalLockAcquired": false,
+  "performanceMeasurement": false,
+  "exitCode": 0,
+  "elapsedSeconds": 1.4268474340005923,
+  "finishedAt": "2026-11-12T13:58:46.428313+00:00",
+  "log": {
+    "path": "docs/migration/lot9a-evidence/reference-01/native-tests-01.log",
+    "bytes": 10300,
+    "sha256": "ef03e274b70a65d13a62a5b4f961d6f1be9b60cd9f0ae6440959bbf17424d7e0"
+  }
+}

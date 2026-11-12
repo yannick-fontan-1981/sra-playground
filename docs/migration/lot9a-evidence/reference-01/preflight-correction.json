@@ -1,0 +1,11 @@
+{
+  "schema": "logos-engine.v6.chart-navigation-reference-preflight-correction.v1",
+  "executionsBeforeCorrection": 0,
+  "previousDeclarationSha256": "b2ad1f0d5c90bcebdb970dd25f23ba6a8a5bb58e46e3c6a6b06e684999f8cac8",
+  "previousGeneratorSha256": "a8450a2b8029f0ced83588bf1c1c88250de7145eda3516b464543e3d04e2790f",
+  "cause": "Static independent review of original offers: every unvisited node with inside not None can be excluded, including uniform inside=0. The traversable intermediate must therefore have genuinely mixed interior pixels.",
+  "change": "Draw C in the line and B in the branch with mixed interior pixels so original measure records inside=None.",
+  "evidenceOrigin": "Original family.py excluded-node comprehension; no native output and no oracle output.",
+  "boundsChanged": false,
+  "caseGroupsChanged": false
+}
