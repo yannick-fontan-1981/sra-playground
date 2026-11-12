@@ -305,7 +305,8 @@ Tests ciblés de ce slice :
 
 Nouveaux commits GitHub :
 - `04c6300058e89a7437d1c32ba7653fc344f617fd` — corps, guards et record FieldStock ;
-- `cfae80db4bc75ef225edab777539b03c8e5c0124` — délégation runtime seulement après revalidation ;
+- `cfae80db4bc75ef225edab777539b03c8e5c0124` — préparation du raccord runtime ;
+- `a3ff37199a2efe7f41f2d53fce490d5d9be9a7c1` — correction vérifiée du raccord `beforeStock/afterStock/recordStock` ;
 - `cd784241b1703b624c0191ce518b31aec17ca0f9` — tests guards/record/scénario intégré.
 
 Limites restantes de 5B :
