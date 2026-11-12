@@ -1,0 +1,93 @@
+{
+  "schema": "logos-engine.lot8b.public-boundary-declaration.v1",
+  "scope": "Lot8B followup: public64x64 BranchRouting through unchanged published worker, service, tickets, client and controller",
+  "publishedSourceCommit": "8462204043aa368faa7df280d796bb706eb53b38",
+  "publishedNativeVersion": "0.67.0",
+  "publishedSiteVersion": 108,
+  "candidateNativePath": "docs/migration/lot8b-evidence/final-version-067-01/candidate-native.json",
+  "buildManifestPath": "docs/migration/lot8b-evidence/final-version-067-01/build-manifest.json",
+  "caseIds": [
+    "single-positive",
+    "triple-prefix",
+    "contrary-return"
+  ],
+  "plannedSessions": 3,
+  "plannedPhysicalReturns": 18,
+  "limits": {
+    "rpcTimeoutMs": 45000,
+    "globalTimeoutMs": 360000,
+    "maxRawBytes": 536870912
+  },
+  "publicBudgets": {
+    "targetLevels": 3,
+    "levelActionCaps": [
+      24,
+      24,
+      24
+    ],
+    "maxActions": 72
+  },
+  "inputs": [
+    "docs/migration/lot8b-evidence/tools/public-boundary/presentation.mjs",
+    "docs/migration/lot8b-evidence/tools/public-boundary/worker-transport.mjs",
+    "docs/migration/lot8b-evidence/tools/public-boundary/worker-bootstrap.mjs",
+    "docs/migration/lot8b-evidence/tools/public-boundary/capture.mjs",
+    "docs/migration/lot8b-evidence/tools/public-boundary/qualify.mjs",
+    "docs/migration/lot8b-evidence/tools/public-boundary/run.py",
+    "tests/fixtures/v6-branch-routing-reference.json",
+    "src/runtime/v6-agent.ts",
+    "src/runtime/v6-agent-client.ts",
+    "src/runtime/v6-agent-protocol.ts",
+    "src/runtime/contracts.ts",
+    "src/runtime/v6-agent-worker.ts",
+    "src/runtime/v6-agent-service.ts",
+    "docs/migration/lot8b-evidence/public-boundary-01/presentation-declared.json"
+  ],
+  "presentation": {
+    "origin": "Retained synthetic BranchRouting component corpus, unchanged",
+    "padding": "Zero only at right and bottom of every frame; original coordinates retained",
+    "size": [
+      64,
+      64
+    ],
+    "sourceLimit": 14,
+    "publicLimit": 32,
+    "fullOriginalModelIdentityClaimed": false,
+    "mirroredCasesIncluded": false
+  },
+  "negativeProtocolCases": [
+    "wrong_ticket",
+    "wrong_session",
+    "wrong_sequence",
+    "step_index_mismatch",
+    "invalid_frame_dimensions",
+    "invalid_palette",
+    "inconsistent_animation",
+    "negative_execution_duration",
+    "consumed_ticket"
+  ],
+  "pauseCases": [
+    "before_dispatch",
+    "during_engaged_dispatch"
+  ],
+  "assertions": [
+    "Actual commands and positive family selection match the explicitly declared public presentation",
+    "Real service tickets bind current session, frame, observation, graph, executable, decision and prefix action",
+    "Exactly18 valid physical returns are supplied only after the corresponding authorised host dispatch",
+    "Triple action6 is retained as witnessed prefix; caller and owner acquisitions become7 only on action7 sealing",
+    "Rejected protocol operations do not consume the pending valid ticket or change the acquired graph",
+    "Pause preserves an unexecuted ticket; an engaged return is retained before pausing",
+    "Full public graph deltas, nodes, executable digest and owner transitions reconcile independently",
+    "Every created worker is explicitly terminated and every opened session is closed where reachable",
+    "Published production sources, bundle, assets, immutable fixture and frozen tools remain unchanged"
+  ],
+  "officialPerformanceMeasurement": false,
+  "globalLockRequired": false,
+  "newSitePublicationPlanned": false,
+  "realGameEngineExecuted": false,
+  "browserEnvironmentQualified": false,
+  "internalRestoreCallCountClaimed": false,
+  "fullV6ParityClaimed": false,
+  "LKEY": "permanently_closed",
+  "declaredPresentationPath": "docs/migration/lot8b-evidence/public-boundary-01/presentation-declared.json"
+}

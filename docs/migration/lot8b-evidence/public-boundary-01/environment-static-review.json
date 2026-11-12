@@ -1,0 +1,121 @@
+{
+  "schema": "logos-engine.lot8b.public-worker-environment-static-review.v1",
+  "reviewedAtUtc": "2026-11-12 13:15:28 UTC",
+  "reviewer": "/root/branch_public_transport",
+  "status": "passed_static_review",
+  "runtimeExecuted": false,
+  "scope": "Lot8B public boundary environment adapter and capture supervisor only",
+  "inputs": [
+    {
+      "path": "docs/migration/lot8b-evidence/tools/public-boundary/worker-transport.mjs",
+      "bytes": 13131,
+      "sha256": "0db239232e1403a6eb9f9b0e7ef7395f90621bcd63764ebe8d611ba9b5f1e82b"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/public-boundary/worker-bootstrap.mjs",
+      "bytes": 5107,
+      "sha256": "a9b61490c8904b97366a88210344c24b9822dc84ec969a5fb46c9c745dd0aef9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/public-boundary/run.py",
+      "bytes": 8088,
+      "sha256": "62372bc0854bab3126aeca396c8a731678a421330831dc706c539535e3c68701"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/declaration.json",
+      "bytes": 3819,
+      "sha256": "07385b3089657c7688fc41d7789ac83683baee0f90579a6ab19018486ef40d95"
+    }
+  ],
+  "checks": [
+    {
+      "kind": "javascript_syntax_only",
+      "command": "node --check docs/migration/lot8b-evidence/tools/public-boundary/worker-transport.mjs",
+      "exitCode": 0
+    },
+    {
+      "kind": "javascript_syntax_only",
+      "command": "node --check docs/migration/lot8b-evidence/tools/public-boundary/worker-bootstrap.mjs",
+      "exitCode": 0
+    },
+    {
+      "kind": "python_ast_only",
+      "path": "docs/migration/lot8b-evidence/tools/public-boundary/run.py",
+      "passed": true,
+      "moduleImported": false,
+      "moduleExecuted": false
+    },
+    {
+      "kind": "json_parse_only",
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/declaration.json",
+      "passed": true
+    }
+  ],
+  "reviewedProperties": {
+    "importAndPreparationStartWorker": false,
+    "explicitFactoryCreatesActualNodeWorker": true,
+    "publishedWorkerPath": "dist/assets/v6-agent-worker-XfSw5eyq.js",
+    "publishedWorkerSha256": "9c114f84e769879507618de08c9872020e8c65d33dc317dfe7ee959b6495a38f",
+    "workerEntryPointImportedUnchanged": true,
+    "nativeServiceFactorySubstituted": false,
+    "nativeRuntimeFactorySubstituted": false,
+    "internalNativeStateInjected": false,
+    "allowedFetchAssets": [
+      "dist/assets/common_frontier_policy.drm-Dl1WBFy2.json",
+      "dist/assets/strategy-g4UuL-Tb.drm"
+    ],
+    "assetFingerprintsVerifiedBeforeImportAndOnFetch": true,
+    "externalFetchFallback": false,
+    "everyFetchInvocationNumbered": true,
+    "actualInterthreadPayloadUsesStructuredClone": true,
+    "rawRpcCaptureIsDetachedJsonProjection": true,
+    "capturesRequestAndResponseEnvelopes": true,
+    "asyncCaptureWritesDrainedOnClose": true,
+    "closeAwaitsActualWorkerExitAndTerminateAcknowledgement": true,
+    "unexpectedWorkerExitOrEnvironmentErrorFailsClose": true,
+    "startupTimeoutDefaultMs": 30000,
+    "workerOldGenerationLimitMb": 1536,
+    "declaredRpcTimeoutMs": 45000,
+    "declaredCaptureTimeoutMs": 360000,
+    "supervisorCaptureTimeoutSeconds": 390,
+    "supervisorQualificationTimeoutSeconds": 180,
+    "supervisorTargetsOnlyOwnedChildProcessGroup": true,
+    "supervisorRetainsPostLaunchFailureReceipt": true,
+    "noGlobalLockAcquisition": true
+  },
+  "findingsResolved": [
+    "supervisor_process_exit_race",
+    "supervisor_post_input_read_failure"
+  ],
+  "findings": [
+    {
+      "id": "supervisor_process_exit_race",
+      "status": "corrected_in_reviewed_version",
+      "detail": "SIGTERM and SIGKILL handle ProcessLookupError; termination/wait errors are retained and fail the receipt."
+    },
+    {
+      "id": "supervisor_post_input_read_failure",
+      "status": "corrected_in_reviewed_version",
+      "detail": "Post-run inventory retains inaccessible input errors rather than aborting receipt creation; final Git lookup is also protected."
+    }
+  ],
+  "limitations": [
+    "Static inspection and syntax checks only. No qualification, replay, probe or runtime was executed.",
+    "The factory is intended for the production BrowserV6WorkerClient; caller capture independently binds production client/controller source fingerprints and proves their actual use.",
+    "This adapter qualifies no browser DOM, browser Worker construction, network HTTP/CSP, or real game engine.",
+    "JSON capture omits undefined object properties. Actual interthread messages remain structured clones, not reconstructions from the JSON projection.",
+    "Worker readiness proves imported entrypoint registration, not successful native session initialization.",
+    "Functional instrumentation and timeout bounds are not official performance measurements.",
+    "Receipt retention relies on writable evidence storage; it cannot guarantee persistence after supervisor SIGKILL or filesystem failure."
+  ],
+  "reviewExecution": {
+    "workerThreadsStarted": 0,
+    "nativeRuntimeCalls": 0,
+    "replayOrOracleCalls": 0,
+    "officialPerformanceMeasurements": 0,
+    "publicationActions": 0,
+    "commits": 0,
+    "locksAcquired": 0,
+    "LKEY": "permanently_closed_no_case_code_or_data_read"
+  }
+}
