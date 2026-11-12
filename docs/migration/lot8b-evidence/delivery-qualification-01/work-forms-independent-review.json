@@ -1,0 +1,417 @@
+{
+  "schema": "logos-engine.lot8b.work-forms-independent-review.v1",
+  "status": "reviewed_functional_scope_no_blocking_objection",
+  "reviewedAt": "2026-11-12 04:56:16 UTC",
+  "reviewer": "/root/branch_routing_native",
+  "reviewMethod": "Lecture statique des trois outils, du manifeste, de leur documentation et des reçus terminés. Lecture des huit lignes brutes d'ajout BranchRouting et de deux exemples d'horloge dans le journal des différences. Empreintes SHA-256 calculées sur les octets présents. Aucune nouvelle exécution native, capture, qualification, mesure, compilation ou test.",
+  "newExecutionPerformed": false,
+  "existingQualifierRerun": false,
+  "nativeGraphValidationRerunByReviewer": false,
+  "officialPerformanceEligible": false,
+  "officialPerformanceMeasurement": false,
+  "strictCommonGraphParity": false,
+  "fullOriginalCallerParity": false,
+  "positiveBranchRoutingContributionEstablishedByTheseForms": false,
+  "publicationAuthorizedByThisReview": false,
+  "candidatePublished": false,
+  "LKEY": "Fermé. Aucun payload, source, oracle ou rejeu LKEY lu ou exécuté.",
+  "sources": {
+    "baseline": {
+      "sourceCommit": "4ff7bf45286a8a19d34401988adca587253ae41e",
+      "role": "Source publiée Site 107, native 0.66.0",
+      "fileCount": 329,
+      "nativeDigest": "ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316"
+    },
+    "candidate": {
+      "sourceCommitRecordedByInventoryAndCapture": "0830ca822e2e4330fa3ffb68d333167b3389fc26",
+      "role": "Candidat de développement non publié, littéral native 0.66.0 conservé",
+      "fileCount": 331,
+      "nativeDigest": "3ff1d9ad56e22aedc0fee3a0da6a3af50a1da0bc14a0ba01cb38272ba85234be"
+    }
+  },
+  "recordedResult": {
+    "inventoryOwners": {
+      "baseline": 61,
+      "candidate": 62
+    },
+    "familyInstalledPrograms": {
+      "baseline": 28,
+      "candidate": 28
+    },
+    "ownersAdded": [
+      "branch_routing"
+    ],
+    "ownersRemoved": [],
+    "programsAdded": [],
+    "programsRemoved": [],
+    "captureStatusByRole": {
+      "baseline": "captured_functional_structure",
+      "candidate": "captured_functional_structure"
+    },
+    "sessionsPerRole": 4,
+    "actionsPerRole": 31,
+    "measuredCostSessionsPerRole": 0,
+    "timingReportsReadPerRole": 0,
+    "timingMetricsProducedPerRole": 0,
+    "qualifierStatus": "qualified_functional_work_forms_and_individual_graphs",
+    "privateComparison": "all_observed_common_differences_attributed_functional_only_requires_final_review",
+    "checks": 64,
+    "pairedPoints": 58,
+    "ownerCheckpointCoverageEntries": 522,
+    "differences": 22312,
+    "unattributedDifferences": 0,
+    "differenceClasses": {
+      "attributed_role_source_digest": 21249,
+      "attributed_exact_trace_created_wall_clock": 1055,
+      "attributed_branch_routing_owner_or_reachable_fragment": 8
+    },
+    "failures": [],
+    "differenceCountQualification": "Occurrences conservées aux points observés, dans les nœuds courants et les deltas. Ce total ne compte pas des nœuds distincts, des régressions ou des changements de source distincts."
+  },
+  "forms": [
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "baseline": {
+        "actions": 3,
+        "cycles": 3,
+        "levelsCompleted": 1,
+        "requests": 6,
+        "inspections": 0,
+        "final": {
+          "actions": 3,
+          "levelsCompleted": 1,
+          "reason": null,
+          "graphRevision": 557,
+          "nodeCount": 269,
+          "acquiredTransitions": 3,
+          "implementation": "logos-engine.typescript.v6.native-migration/0.66.0"
+        }
+      },
+      "candidate": {
+        "actions": 3,
+        "cycles": 3,
+        "levelsCompleted": 1,
+        "requests": 6,
+        "inspections": 0,
+        "final": {
+          "actions": 3,
+          "levelsCompleted": 1,
+          "reason": null,
+          "graphRevision": 562,
+          "nodeCount": 271,
+          "acquiredTransitions": 3,
+          "implementation": "logos-engine.typescript.v6.native-migration/0.66.0"
+        }
+      }
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "baseline": {
+        "actions": 10,
+        "cycles": 6,
+        "levelsCompleted": 2,
+        "requests": 16,
+        "inspections": 3,
+        "final": {
+          "actions": 10,
+          "levelsCompleted": 2,
+          "reason": null,
+          "graphRevision": 991,
+          "nodeCount": 404,
+          "acquiredTransitions": 10,
+          "implementation": "logos-engine.typescript.v6.native-migration/0.66.0"
+        }
+      },
+      "candidate": {
+        "actions": 10,
+        "cycles": 6,
+        "levelsCompleted": 2,
+        "requests": 16,
+        "inspections": 3,
+        "final": {
+          "actions": 10,
+          "levelsCompleted": 2,
+          "reason": null,
+          "graphRevision": 999,
+          "nodeCount": 406,
+          "acquiredTransitions": 10,
+          "implementation": "logos-engine.typescript.v6.native-migration/0.66.0"
+        }
+      }
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "baseline": {
+        "actions": 3,
+        "cycles": 3,
+        "levelsCompleted": 1,
+        "requests": 6,
+        "inspections": 0,
+        "final": {
+          "actions": 3,
+          "levelsCompleted": 1,
+          "reason": null,
+          "graphRevision": 571,
+          "nodeCount": 260,
+          "acquiredTransitions": 3,
+          "implementation": "logos-engine.typescript.v6.native-migration/0.66.0"
+        }
+      },
+      "candidate": {
+        "actions": 3,
+        "cycles": 3,
+        "levelsCompleted": 1,
+        "requests": 6,
+        "inspections": 0,
+        "final": {
+          "actions": 3,
+          "levelsCompleted": 1,
+          "reason": null,
+          "graphRevision": 577,
+          "nodeCount": 262,
+          "acquiredTransitions": 3,
+          "implementation": "logos-engine.typescript.v6.native-migration/0.66.0"
+        }
+      }
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "baseline": {
+        "actions": 15,
+        "cycles": 9,
+        "levelsCompleted": 3,
+        "requests": 24,
+        "inspections": 3,
+        "final": {
+          "actions": 15,
+          "levelsCompleted": 3,
+          "reason": "target_levels_completed",
+          "graphRevision": 1393,
+          "nodeCount": 479,
+          "acquiredTransitions": 15,
+          "implementation": "logos-engine.typescript.v6.native-migration/0.66.0"
+        }
+      },
+      "candidate": {
+        "actions": 15,
+        "cycles": 9,
+        "levelsCompleted": 3,
+        "requests": 24,
+        "inspections": 3,
+        "final": {
+          "actions": 15,
+          "levelsCompleted": 3,
+          "reason": "target_levels_completed",
+          "graphRevision": 1405,
+          "nodeCount": 481,
+          "acquiredTransitions": 15,
+          "implementation": "logos-engine.typescript.v6.native-migration/0.66.0"
+        }
+      }
+    }
+  ],
+  "ownerReview": {
+    "bothRoles": [
+      "public_observed_binding",
+      "selected_rigid",
+      "motif_access",
+      "public_ordered_recruitment"
+    ],
+    "candidateOnly": [
+      "branch_routing"
+    ],
+    "registration": "Les factories réelles sont inventoriées sans session initialisée. BranchRouting est l'unique ajout, immédiatement après Motif. L'ordre des propriétaires existants et les registrations de leurs programmes restent identiques.",
+    "binding": "Le hook utilise runtime.acquisitionFamilies.binding et vérifie son identité avec l'instance enregistrée.",
+    "selectedRigid": "Le propriétaire brut est relié au wrapper enregistré par rawNativeSelectedRigid. Le journal observé reste exactement vide sur ces formes; aucun record SelectedRigid n'est revendiqué.",
+    "motifAndBranch": "Leurs wrappers enregistrés réels, state et restore sont observés. Les méthodes originales reçoivent les arguments inchangés et leur résultat est retourné. Aucun état de substitution n'est injecté.",
+    "recruitment": {
+      "realMethod": "OrderedRecruitment.recordSource",
+      "actualRegisteredInstanceVerified": "runtime.acquisitionFamilies.recruitment === registered.recruitment[0]",
+      "selectedPath": "OrderedRecruitment.record appelle this.recordSource avec before, after, command, les deux rasters, proposal, index et frames.",
+      "passivePath": "NativeV6Runtime.acquirePassiveFamilies appelle recruitment.recordSource uniquement si selectedId diffère de recruitment.id, avec proposal=null, index et second.frame_packet.",
+      "interception": "Le captureur remplace la méthode sur cette instance par un wrapper qui appelle l'original lié avec les mêmes arguments et conserve avant/après/résultat. nativeState, restoreNative, restore et currentProposalRefusal sont également observés.",
+      "recordCallsPerRole": [
+        {
+          "case": "STCK",
+          "form": "warmup",
+          "calls": 3
+        },
+        {
+          "case": "STCK",
+          "form": "measured",
+          "calls": 10
+        },
+        {
+          "case": "SMLP",
+          "form": "warmup",
+          "calls": 3
+        },
+        {
+          "case": "SMLP",
+          "form": "measured",
+          "calls": 15
+        }
+      ],
+      "totalRecordCallsPerRole": 31,
+      "sourceFileIdenticalBetweenRoles": true,
+      "qualification": "Ces appels réels établissent la couverture des retours passifs sur les formes déclarées. Leur nombre ne prouve pas une acquisition positive de règles ou une parité universelle du propriétaire."
+    },
+    "selectedMotifRecordsPerRole": 0,
+    "selectedBranchRoutingRecordsCandidate": 0,
+    "branchRoutingCandidateProposalsByForm": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "branchRoutingCandidateSourceFacts": 0
+  },
+  "graphReview": {
+    "reconstruction": "Le lecteur reconstruit chaque graphe depuis tous ses deltas, contrôle séquences, chaînes et hashes, valide les nœuds avec le Kernel/store du rôle, contrôle les identifiants de fragments et hydrate les racines modifiées.",
+    "roleValidators": "Les deux rôles utilisent leurs validateurs capturés. Les codecs communs et leurs octets sont vérifiés. L'identité native complète est distincte du sourceDigest du runtime.",
+    "checkpoints": "Chaque family_state des propriétaires observés est rapproché d'un checkpoint réellement enregistré de valeur identique. Ceci est une liaison de valeur et de provenance observée, pas une nouvelle preuve indépendante de toute la causalité interne du caller.",
+    "commonComparison": "Les valeurs brutes des nœuds communs, les deltas communs avec identité/révision/cause/ordre et les états des quatre propriétaires préexistants sont comparés. Les exclusions de la forme de travail concernent les identités et comptes structurels déjà conservés et examinés séparément.",
+    "sourceDigestAttribution": "Seul origin.source_digest reçoit cette attribution, lorsque ses deux valeurs correspondent aux identités runtime validées de leurs rôles.",
+    "clockAttribution": "Seul created, ou son encodage float64 exact, d'un reasoning:trace:<id> source-vérifié est attribué à l'horloge. La valeur doit correspondre à Date.now()/1000 et appartenir aux bornes réelles du service.handle observé. Aucun autre timestamp ni node.value entier n'est supprimé.",
+    "branchPopulation": "Les huit lignes brutes examinées sont exactement family_state:branch_routing et family_activation:branch_routing au point initial de chacune des quatre sessions. Aucun autre identifiant n'est assimilé ici à cet ajout.",
+    "rawDifferenceEvidenceRetained": true
+  },
+  "blockingObjections": [],
+  "requiredQualifications": [
+    {
+      "id": "functional_only",
+      "text": "Conserver preparedOnly=true, officialPerformanceEligible=false et strictCommonGraphParity=false. Le succès du lecteur établit les quatre formes observées et la validité individuelle des graphes selon ce lecteur. Il n'établit aucune médiane, aucun respect du seuil de +10 %, aucune disponibilité de fenêtre officielle, ni une publication."
+    },
+    {
+      "id": "no_positive_branch_claim",
+      "text": "BranchRouting a zéro record sélectionné et zéro fait acquis sur ces formes. Ses propositions SMLP et sa présence/restauration ne prouvent pas une contribution positive. La preuve positive synthétique reste séparée."
+    },
+    {
+      "id": "stck_target_distinction",
+      "text": "STCK à dix actions se termine avec deux niveaux acquis, reason=null, malgré targetLevels=3. SMLP à quinze actions se termine avec trois niveaux et target_levels_completed. Ne pas présenter STCK comme une réussite à trois niveaux."
+    },
+    {
+      "id": "no_elapsed_time_inference",
+      "text": "Les durées du superviseur comprennent hooks, copies d'état, sérialisation, compression et lecture fonctionnelle. Les labels warmup/measured sont historiques et n'en font pas des échantillons de coût officiel."
+    },
+    {
+      "id": "bounded_observed_scope",
+      "text": "Les quatre sessions sont froides, avec STCK 3/10 et SMLP 3/15 actions, six inspections finales au total et 31 retours par rôle. Toute future session mesurée devra établir son propre accord avec les formes déclarées; aucune identité avec une exécution future n'est présumée."
+    },
+    {
+      "id": "qualifier_status_is_not_strict_gate",
+      "text": "Le code du lecteur peut sortir avec succès en présence de différences non attribuées, en laissant privateComparison en attente. Dans les reçus examinés, ce compteur vaut zéro. Les consommateurs doivent continuer à lire les champs de qualification, pas seulement le code de sortie."
+    },
+    {
+      "id": "original_semantics_not_reproved",
+      "text": "Le lecteur relie les graphes et checkpoints aux observations des appels réels, mais ne rejoue pas un oracle Python pour chaque opération et ne démontre pas la parité complète de tous les états/callers. Cette revue statique ne réexécute aucun des 64 contrôles du lecteur."
+    }
+  ],
+  "sourceRuleForFutureOfficialCosts": "La règle utilisateur reste une augmentation globale strictement inférieure à 10 % sur les sessions complètes, séparément pour STCK et SMLP; une phase au-dessus de 10 % peut être admise si les deux globaux satisfont la règle. Aucun résultat de ces captures ne décide cette condition.",
+  "inputPins": [
+    {
+      "path": "docs/migration/lot8b-evidence/tools/delivery/work-forms/record-owner-source-inventory.mjs",
+      "sha256": "073cec941143449697c06d979c07675d177d53fafd0d7d82abfeb6c446c41eb9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/delivery/work-forms/capture-cost-owner-graphs.mjs",
+      "sha256": "def20965d488ff15cf225961f407853b29cee0eb22e9119cfe9f1611dcc73a3a"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/delivery/work-forms/qualify-cost-owner-graphs.mjs",
+      "sha256": "56c73ed40f8b88ce9c7f02300cf4acede74eb37bacfdc94b9542c4a2a21bb662"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/delivery/work-forms/cases.json",
+      "sha256": "65e27dbcc2f5871ab259358cc46576b2671058630be0b37c643eadad66593173"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/delivery/work-forms/README.md",
+      "sha256": "65fe0f251d0c01382061f7eeeed0bebaf11d917e38c37f233ca26b728e3cae3a"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-inventory-01/owner-source-inventory.json",
+      "sha256": "5c742dbad9abe0b7564a1e04df20975f13a5880e1f59214b48d1305f39ea175a"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-inventory-01/receipt.json",
+      "sha256": "f694035fbfea1bd07bc9ba36a28753522ec629efe37c7f30699867e0fd547d24"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-baseline-01/baseline.receipt.json",
+      "sha256": "5aebb7ab6f603f305b28bb3ffd262fc4103f433ea4ac7b0e0db051d75036d084"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-baseline-01/receipt.json",
+      "sha256": "62a81c5166d1305de8a3f6d06fa76e74193410b3a3decf6c2124609ce830c866"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-candidate-01/candidate.receipt.json",
+      "sha256": "1540cf0493b947bcd03459b8aae3237b0e4214f5add1376b4e16f8c1ed0b69f7"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-candidate-01/receipt.json",
+      "sha256": "25ab7112342d19169a84386f8430d141a32828cf2890afe858dea78a3db2bfb9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-qualify-01/graph-review.json",
+      "sha256": "1407f3e42d31a80f73262426e7c2f27dfb8c5a4cc46a6272cef8c438798cd6de"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-qualify-01/graph-review.differences.jsonl.gz",
+      "sha256": "722e90bb92944b1704e4db4f2c6cf71fd61d87cc88808855c076e143fa665219"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-qualify-01/work-forms.json",
+      "sha256": "380bd1076a8d2a5d8ac6f9b2b1a9ba986a012af02813414a562361cd0f2ba0c1"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-qualify-01/receipt.json",
+      "sha256": "767517b91da0bda33ec7660e01ebb886192b05d297994f1df8de0cf19f23d200"
+    },
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "sha256": "cfa07cd87b939e528696c07486777ef597ca3e5033f80d5333e78ab6b1e0868e"
+    },
+    {
+      "path": "src/logos-engine/v6-ordered-recruitment.ts",
+      "sha256": "045ba6a18532b230568af4f12ba377e8b25a9bde31a69553e06277a0c9400b58"
+    },
+    {
+      "path": "src/logos-engine/v6-reasoning-memory.ts",
+      "sha256": "b55c186c99636f28c9e6e9c657b9bb50892eac06a3306be197503188069d901a"
+    },
+    {
+      "path": "src/logos-engine/v6-native-authority.ts",
+      "sha256": "f5a54ecac86fb097ee739dc6e4f8b4729819d58c9992fee92188527a1544b3ff"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-baseline-01/baseline.json.gz",
+      "sha256": "384a5f5bb3e00174e8113e35387132284e90a6d5a1af5303ecfe9ed0db3df893"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-candidate-01/candidate.json.gz",
+      "sha256": "79cda8310e4bdf51d0d9a9f20eb05836592b27ef4d5dfa65ca89e2165cbd0ec3"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/baseline-native.json",
+      "sha256": "6926e8abdcf9232e4e6d06ad4b60d59e4a8fa473b56a627dc17b7f8ac18d2ac7"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/candidate-native.json",
+      "sha256": "56e7533fca83f222b866ce73478a1f925bddb8c7b7c79718e9b99d0c888dc095"
+    },
+    {
+      "path": "/workspace/sites/sra-lot8b-baseline066-20261112/src/logos-engine/v6-native-runtime.ts",
+      "sha256": "ccf30009dd69f4ca717ea14259cb844884972d3c6ae93c61f2a1702edff5c8c9"
+    },
+    {
+      "path": "/workspace/sites/sra-lot8b-baseline066-20261112/src/logos-engine/v6-ordered-recruitment.ts",
+      "sha256": "045ba6a18532b230568af4f12ba377e8b25a9bde31a69553e06277a0c9400b58"
+    }
+  ]
+}

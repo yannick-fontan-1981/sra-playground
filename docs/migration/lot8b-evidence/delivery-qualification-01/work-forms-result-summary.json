@@ -79,12 +79,18 @@
   "positiveBranchRoutingAcquisitionsInTheseForms": 0,
   "qualification": "Functional preservation in observed STCK/SMLP forms; BranchRouting positive contribution is a separate synthetic common-caller proof. All raw differences retained with narrow source-identity, clock and new-owner attribution.",
   "historicalLabels": "warmup and measured denote work-form lengths only; no official timings are produced.",
-  "independentReview": "pending",
+  "independentReview": {
+    "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-forms-independent-review.json",
+    "sha256": "c234cb918fffab408af6305dc182b3e4d8860aeeeff003d98fa9b564c890ee65",
+    "status": "reviewed_functional_scope_no_blocking_objection",
+    "reviewMethod": "Lecture statique des trois outils, du manifeste, de leur documentation et des reçus terminés. Lecture des huit lignes brutes d'ajout BranchRouting et de deux exemples d'horloge dans le journal des différences. Empreintes SHA-256 calculées sur les octets présents. Aucune nouvelle exécution native, capture, qualification, mesure, compilation ou test."
+  },
   "officialPerformanceEligible": false,
   "officialCostMeasured": false,
   "strictCommonGraphParity": false,
   "fullOriginalCallerParity": false,
   "published": false,
   "globalLockAcquired": false,
-  "nativeSourceChanged": false
+  "nativeSourceChanged": false,
+  "workloadOutcomeQualification": "STCK complete declared form has10 actions and2 completed levels for target3; SMLP has15 actions and3 completed levels. No new live game success is claimed."
 }

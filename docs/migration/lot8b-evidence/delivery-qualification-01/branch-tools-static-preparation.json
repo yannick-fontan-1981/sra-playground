@@ -1,0 +1,30 @@
+{
+  "schema": "logos-engine.lot8b.static-tool-checks.v1",
+  "recordedAt": "2026-11-12T04:59:21.385090+00:00",
+  "checks": [
+    {
+      "command": [
+        "node",
+        "--check",
+        "docs/migration/lot8b-evidence/tools/delivery/branch-common-capture.mjs"
+      ],
+      "sha256": "aa9dc3e0ecaefea6f90f7be2d2e2ab88324cc5c655677514fee7cb6bdb1923eb",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "docs/migration/lot8b-evidence/tools/delivery/branch-common-qualify.mjs"
+      ],
+      "sha256": "8e22c4b444b6e2e7d93d37dbb54dbbfa147218fb421d18fb40e81ba98444610a",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "nativeImportsExecuted": false,
+  "globalLockAcquired": false
+}
