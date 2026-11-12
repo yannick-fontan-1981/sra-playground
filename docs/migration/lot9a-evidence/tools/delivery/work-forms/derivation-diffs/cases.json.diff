@@ -1,0 +1,36 @@
+--- docs/migration/lot8b-evidence/tools/delivery/work-forms/cases.json
++++ docs/migration/lot9a-evidence/tools/delivery/work-forms/cases.json
+@@ -1,11 +1,11 @@
+ {
+-  "schema": "logos-engine.lot8b-functional-work-cases.v1",
+-  "qualificationStage": "functional_preparation_against_published_066_not_official_cost",
++  "schema": "logos-engine.lot9a-functional-work-cases.v1",
++  "qualificationStage": "functional_preparation_against_published_067_not_official_cost",
+   "officialPerformanceEligible": false,
+   "plannedSessionsPerRole": 4,
+   "plannedActionsPerRole": 31,
+-  "historicalCaseSource": "docs/migration/lot6b-evidence/provisional-063-01/functional-805b/cases.json",
+-  "historicalReuse": "Only case order, trace paths and hashes, actions, targetLevels and warmupActions are reused. The old 0.38/0.40 budget and rounds are not part of this functional declaration. Labels warmup and measured identify the two historical work forms; this preparation measures no cost.",
++  "historicalCaseSource": "docs/migration/lot8b-evidence/tools/delivery/work-forms/cases.json",
++  "historicalReuse": "Exact prior STCK/SMLP case order, trace hashes, actions, warmupActions and targetLevels. Fresh 0.67/0.68 captures, no timing budget or repetitions. All sessions are cold.",
+   "cases": [
+     {
+       "id": "STCK",
+@@ -14,7 +14,7 @@
+       "actions": 10,
+       "targetLevels": 3,
+       "warmupActions": 3,
+-      "purpose": "Common-work regression through two natural level boundaries; any BranchRouting contribution remains separately attributed."
++      "purpose": "Common-work regression through two natural level boundaries; any Chart contribution remains separately attributed."
+     },
+     {
+       "id": "SMLP",
+@@ -23,7 +23,7 @@
+       "actions": 15,
+       "targetLevels": 3,
+       "warmupActions": 3,
+-      "purpose": "Ordinary three-level common-work regression; any BranchRouting contribution remains separately attributed."
++      "purpose": "Ordinary three-level common-work regression; any Chart contribution remains separately attributed."
+     }
+   ]
+ }

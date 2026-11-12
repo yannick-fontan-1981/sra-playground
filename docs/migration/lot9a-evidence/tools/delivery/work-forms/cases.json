@@ -1,0 +1,29 @@
+{
+  "schema": "logos-engine.lot9a-functional-work-cases.v1",
+  "qualificationStage": "functional_preparation_against_published_067_not_official_cost",
+  "officialPerformanceEligible": false,
+  "plannedSessionsPerRole": 4,
+  "plannedActionsPerRole": 31,
+  "historicalCaseSource": "docs/migration/lot8b-evidence/tools/delivery/work-forms/cases.json",
+  "historicalReuse": "Exact prior STCK/SMLP case order, trace hashes, actions, warmupActions and targetLevels. Fresh 0.67/0.68 captures, no timing budget or repetitions. All sessions are cold.",
+  "cases": [
+    {
+      "id": "STCK",
+      "trace": "docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "traceSha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b",
+      "actions": 10,
+      "targetLevels": 3,
+      "warmupActions": 3,
+      "purpose": "Common-work regression through two natural level boundaries; any Chart contribution remains separately attributed."
+    },
+    {
+      "id": "SMLP",
+      "trace": "docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "traceSha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9",
+      "actions": 15,
+      "targetLevels": 3,
+      "warmupActions": 3,
+      "purpose": "Ordinary three-level common-work regression; any Chart contribution remains separately attributed."
+    }
+  ]
+}
