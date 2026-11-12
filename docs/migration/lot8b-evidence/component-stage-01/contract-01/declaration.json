@@ -1,0 +1,21 @@
+{
+  "schema": "logos-engine.lot8b.component-command.v1",
+  "status": "running",
+  "kind": "contract",
+  "command": [
+    "node",
+    "--test",
+    "--test-concurrency=1",
+    "--test-reporter=tap",
+    "tests/v6-branch-routing-contract.test.ts"
+  ],
+  "cwd": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+  "startedAt": "2026-11-12T03:38:42.639008+00:00",
+  "timeoutSeconds": 120,
+  "globalLockAcquired": false,
+  "performanceMeasurement": false,
+  "gameExecution": false,
+  "published": false,
+  "headBefore": "255b26069d38acf27f7e7cf7ac138a0423d1238b",
+  "inputCount": 349
+}
