@@ -997,3 +997,31 @@ Le diagnostic ne remplace pas STCK/SMLP et n'autorise aucune revendication Site 
 
 Détail :
 `docs/recovery/op01-op31-c7-diagnostic-status.md`.
+
+
+## C7 — garde-fou de readiness performance officielle
+
+Ajout :
+`scripts/check-op01-op31-c7-readiness.mjs`.
+
+Le contrôle refuse une qualification de performance officielle tant que les cinq
+composants requis ne sont pas présents :
+
+- `scripts/measure-native-loop-costs.mjs` ;
+- `tests/helpers/v6-live-game-campaign.ts` ;
+- `src/runtime/v6-agent-worker.ts` ;
+- `docs/migration/v6-delivery-roadmap.md` ;
+- `docs/migration/v6-entry-point-progress.json`.
+
+Tests du garde-fou : **2/2**.
+
+Sur la reconstruction canonique actuelle :
+- `ready=false` ;
+- exit code attendu : `2` ;
+- statut : `functionally-qualified-official-performance-to-confirm`.
+
+Ce garde-fou empêche de transformer le diagnostic synthétique C7 en preuve
+officielle STCK/SMLP.
+
+Statut performance :
+**fonctionnellement qualifié, performance officielle à confirmer**.
