@@ -1,0 +1,72 @@
+{
+  "schema": "logos-engine.lot9a.functional-command.v1",
+  "key": "work-candidate",
+  "attempt": "work-candidate-01",
+  "plan": {
+    "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/work-execution-plan.json",
+    "bytes": 74970,
+    "sha256": "97cbaffa21c2cd4c33c866a681153e8bf1abbbffcd050b69c263e0e6f39c5527"
+  },
+  "command": [
+    "node",
+    "--max-old-space-size=1536",
+    "docs/migration/lot9a-evidence/tools/delivery/work-forms/capture-cost-owner-graphs.mjs",
+    "candidate",
+    "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout",
+    "docs/migration/lot9a-evidence/tools/delivery/work-forms/cases.json",
+    "docs/migration/lot9a-evidence/delivery-final-068-01/candidate-native.json",
+    "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/work-candidate-01/candidate.json.gz"
+  ],
+  "cwd": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout",
+  "startedAt": "2026-11-12T14:52:37.487907+00:00",
+  "timeoutSeconds": 300,
+  "budgetKey": "work-candidate",
+  "attemptNumber": 1,
+  "priorCumulativeSeconds": 0,
+  "maximumCumulativeSeconds": 600,
+  "correctiveReason": null,
+  "declaredMaximumSessionsThisLaunch": 4,
+  "declaredMaximumReturnsThisLaunch": 31,
+  "generator": {
+    "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/tools/delivery/run-functional-command.py",
+    "bytes": 9355,
+    "sha256": "dcd3d8f56c75c44036a9ab7d14ef92aec367db7eb8c5b30fae59d63dd30a6045"
+  },
+  "derivedFrom": {
+    "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot8b-evidence/tools/final-functional/run-functional-command.py",
+    "bytes": 7698,
+    "sha256": "a49a62551f757750a9598b2ea3a36d0c214ded79f150e3c65bddc74a83103fe9"
+  },
+  "headBefore": "79be6e16000fba5933b210b1a91c6410d589bcd1",
+  "globalLockAcquired": false,
+  "officialPerformanceMeasurement": false,
+  "gameEngineExecuted": false,
+  "published": false,
+  "status": "passed",
+  "exitCode": 0,
+  "finishedAt": "2026-11-12T14:53:17.879393+00:00",
+  "elapsedSeconds": 40.38879395599906,
+  "inputsUnchanged": true,
+  "changedInputPaths": [],
+  "log": {
+    "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/work-candidate-01/output.log.gz",
+    "bytes": 229,
+    "sha256": "5bd35f9b3eea63afdbff6f3f0daf0061bea7282d9f924fea5380af9fc43337fb"
+  },
+  "childProcessReaped": true,
+  "headAfter": "79be6e16000fba5933b210b1a91c6410d589bcd1",
+  "headUnchanged": true,
+  "cumulativeSeconds": 40.38879395599906,
+  "outputs": [
+    {
+      "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/work-candidate-01/candidate.json.gz",
+      "bytes": 8867554,
+      "sha256": "f2e7a8f8d8487c92dc5bdc55ce6cbf90c6a0ab5ce9aace0c63d16bfa9dbf0732"
+    },
+    {
+      "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/work-candidate-01/candidate.receipt.json",
+      "bytes": 129952,
+      "sha256": "5cc993587c85e801ab5b56500ed44f6e19c205cb8e40bbe43e74cb475195d51e"
+    }
+  ]
+}

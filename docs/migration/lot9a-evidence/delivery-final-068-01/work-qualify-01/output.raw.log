@@ -1,0 +1,1 @@
+{"status":"functional_structure_qualification_failed","review":"docs/migration/lot9a-evidence/delivery-final-068-01/work-qualify-01/graph-review.json","forms":4,"differences":28279,"unattributedDifferences":58,"officialPerformanceEligible":false,"failures":[{"name":"AssertionError","message":"Unattributed differences prevent functional delivery qualification\n\n58 !== 0\n"}]}
