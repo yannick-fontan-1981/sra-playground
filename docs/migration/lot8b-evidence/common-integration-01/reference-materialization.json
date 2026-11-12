@@ -1,0 +1,101 @@
+{
+  "schema": "logos-engine.lot8b.existing-reference-materialization.v1",
+  "recordedAt": "2026-11-12T04:32:32.642415+00:00",
+  "reason": "The first migration audit found two preexisting ignored reference archives absent from this independent checkout.",
+  "files": [
+    {
+      "path": "tests/fixtures/v6-feedback-sequences-reference.json.gz",
+      "bytes": 1032946,
+      "sha256": "d1bf31b8fbf899aa9d85baa5fdaf9549b7c6f6a786fab43d7ac9f88af3231b6d",
+      "sourceOwnCheckout": "/workspace/sites/sra-lot8a-publish065-20261111/.sites-checkout",
+      "decoded": false,
+      "regenerated": false
+    },
+    {
+      "path": "tests/fixtures/v6-relative-arrangements-reference.json.gz",
+      "bytes": 1099570,
+      "sha256": "fa52436d34ee32e7fcf4e30f67122c5bede6823d0ff2cb34980cdc4885c3f933",
+      "sourceOwnCheckout": "/workspace/sites/sra-lot8a-publish065-20261111/.sites-checkout",
+      "decoded": false,
+      "regenerated": false
+    }
+  ],
+  "priorPassingEvidence": {
+    "path": "docs/migration/lot8a-evidence/integration-provisional-063-064-01/validation-01/tests-run.json",
+    "sha256": "28ede04ed1f558f577333a5c158dc5ac50731fdcb74b51e8af6dd95fe81a926b"
+  },
+  "failedAuditPreserved": {
+    "receipt": "docs/migration/lot8b-evidence/common-integration-01/migration-audit-01/receipt.json",
+    "generatedReport": "docs/migration/lot8b-evidence/common-integration-01/migration-audit-01/generated-coverage.json",
+    "sha256": "f10ecef12c438539b34cb0f328dd5767244c3eae08efb56238771f3a8023b79c"
+  },
+  "qualification": "Opaque copies after all functional test commands completed. No native source, selected test, or captured existing input was changed. These archives are proof existence dependencies of the migration inventory; they were not required by the 23 declared passing test modules.",
+  "originalSourceExecuted": false,
+  "gameExecuted": false,
+  "gamePayloadDecoded": false,
+  "globalLockAcquired": false,
+  "gitPersistence": {
+    "verifiedAt": "2026-11-12T04:38:01.478563+00:00",
+    "status": "Existing tracked byte parts reproduce both archives exactly. No forced addition of ignored complete gzip files.",
+    "proofs": [
+      {
+        "original": "tests/fixtures/v6-feedback-sequences-reference.json.gz",
+        "manifest": {
+          "path": "tests/fixtures/v6-feedback-sequences-reference.json.gz.parts.json",
+          "sha256": "a6d353cf9a13e583498c56b94da769b843af22f203289ebfe6a955fae7425f0b",
+          "trackedInGit": true
+        },
+        "parts": [
+          {
+            "path": "tests/fixtures/v6-feedback-sequences-reference.json.gz.part000",
+            "bytes": 900000,
+            "sha256": "df621f5beaabd752efc8576eb269bd773e39bff3cd34b8388a23f120144dca08",
+            "trackedInGit": true
+          },
+          {
+            "path": "tests/fixtures/v6-feedback-sequences-reference.json.gz.part001",
+            "bytes": 132946,
+            "sha256": "e610682240f1221de0fa5324ff28bf639012ea80756d851af758ea45c30da6b1",
+            "trackedInGit": true
+          }
+        ],
+        "orderedConcatenationMatchesOriginal": true,
+        "decoded": false
+      },
+      {
+        "original": "tests/fixtures/v6-relative-arrangements-reference.json.gz",
+        "manifest": {
+          "path": "tests/fixtures/v6-relative-arrangements-reference.json.gz.parts.json",
+          "sha256": "8143217aa3cd4398e74d6fa85698f40f3afadfc96eddd9118d2af80f780ee28f",
+          "trackedInGit": true
+        },
+        "parts": [
+          {
+            "path": "tests/fixtures/v6-relative-arrangements-reference.json.gz.part000",
+            "bytes": 900000,
+            "sha256": "32120859b8da92edde3c1668345cf3ebeb6b183959e8f61da34c093aa64db519",
+            "trackedInGit": true
+          },
+          {
+            "path": "tests/fixtures/v6-relative-arrangements-reference.json.gz.part001",
+            "bytes": 199570,
+            "sha256": "f2b55c493b9d18600e7a7edbc7eac363fb1c6fa4f7c04ae7055affee3b2a3f5f",
+            "trackedInGit": true
+          }
+        ],
+        "orderedConcatenationMatchesOriginal": true,
+        "decoded": false
+      }
+    ],
+    "existingMaterializationCommand": [
+      "python",
+      "scripts/evidence-byte-parts.py",
+      "restore",
+      "tests/fixtures"
+    ],
+    "commandScope": "All manifests under tests/fixtures; missing originals only; divergent existing originals refused.",
+    "commandExecutedThisMilestone": false,
+    "readOnlySecondReviewer": "branch_routing_source",
+    "newCheckoutRequirement": "Materialize required reference archives before running the migration inventory audit."
+  }
+}

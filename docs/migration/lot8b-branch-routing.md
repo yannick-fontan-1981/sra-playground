@@ -2,19 +2,31 @@
 
 ## Périmètre et statut de cette étape
 
-Le lot 8B porte l’entrée originale **`parallel_branch_routing`** vers un propriétaire TypeScript distinct, **`branch_routing`**. Ce contrat fixe le comportement du composant, les preuves de référence et les adaptations de calcul borné avant son raccordement au moteur commun.
+Le lot 8B porte l’entrée originale **`parallel_branch_routing`** vers un propriétaire TypeScript distinct, **`branch_routing`**. Ce contrat décrit le composant, ses preuves de référence et son raccordement borné au moteur commun, qualifié sur les sources et tests figés au commit **`2583d81d856c13295040db88f5df8b3a99906bdc`**.
 
 La base de travail est le commit `c87c132a0353a8c6138ad090495f98698ef7ca6f`, qui intègre la source réellement publiée **Site 107 / native 0.66.0**, `4ff7bf45286a8a19d34401988adca587253ae41e`, et les reçus de publication 8A. La [préparation source antérieure](lot8b-evidence/preparation-20261111/README.md) et la [filiation détaillée](lot8b-branch-routing-lineage.md) restent les références de provenance.
 
-**Cette étape livre un contrat, un corpus original indépendant et un port de composant qualifié sur son domaine déclaré.** Le [bilan du jalon](lot8b-evidence/component-stage-01/README.md) relie les reçus : 37 observations, 20 cas géométriques et 12 scénarios comprenant 83 opérations originales ; 249 tests et sous-tests de référence passés dans les modes natifs exact et borné complet, 17 tests de contrat passés et typage passé. Les 83 opérations sont rejouées dans les deux modes natifs ; elles ne deviennent pas 166 opérations originales indépendantes. Les tentatives antérieures restent conservées.
+Le [bilan de composant](lot8b-evidence/component-stage-01/README.md) conserve la première qualification : 37 observations, 20 cas géométriques et 12 scénarios comprenant 83 opérations originales ; 249 tests et sous-tests de référence passés dans les modes natifs exact et borné complet, 17 tests de contrat passés et typage passé. Les 83 opérations sont rejouées dans les deux modes natifs ; elles ne deviennent pas 166 opérations originales indépendantes. Les tentatives antérieures restent conservées.
 
-Le composant n’est pas encore raccordé à `NativeV6Runtime`. La version publiée reste 0.66.0 et le registre 68/76 ; aucun compteur de transfert ni numéro de version n’est augmenté par cette preuve. Les critères ci-dessous demeurent le contrat prospectif de cette étape, et le bilan distingue les résultats acquis des obligations du prochain raccordement.
+**Le raccordement commun est maintenant qualifié sur son périmètre déclaré.** Le [bilan commun](lot8b-evidence/common-integration-01/README.md) et la [synthèse de validation](lot8b-evidence/common-integration-01/validation-summary.json) relient les sept contrôles finaux passés :
+
+| Contrôle | Résultat acquis |
+| --- | --- |
+| BranchRouting | 281 tests et sous-tests sur 4 modules : 249 de référence, 17 de contrat, 7 de frontière publique et 8 de parcours/intégration communs. |
+| Régressions du runtime | 160 tests et sous-tests sur 15 modules déclarés. |
+| Régressions des voisins | 83 tests et sous-tests sur 4 modules déclarés. |
+| Typage | Passé. |
+| Audit des entrées | Candidat raccordé à 69/76, dont 26/33 pour `factored_material_return`. |
+| Audit de migration, exécution `migration-audit-02` | 215 modules `component_verified`, 147 `partial_transfer`, 1 007 `pending`, 0 `verified` ; les six portes globales restent fausses. |
+| Build | Passé. |
+
+Cela représente **524 tests et sous-tests Node sur 23 modules déclarés**, sans constituer toute la suite ni une campagne générale. Les huit tests communs comprennent des chaînes froides et des contrôles de registre, de refus et d’isolation. Le candidat 69/76 n’est pas publié. **Site 107 / native 0.66.0 reste la livraison publiée, à 68/76** ; aucun nouveau numéro de version n’est réservé. Le littéral de version du candidat demeure 0.66.0 pendant ce jalon de développement ; son commit, son registre et son digest de source le distinguent du publié.
 
 ## Propriétaire et domaine
 
 L’API native implémentée est la classe `BranchRouting`, avec `id` et `familyId` égaux à `branch_routing`. Elle reproduit les méthodes source `propose`, `bind`, `before`, `after` et `record`, puis ajoute `state`, `restore` et le diagnostic de calcul incomplet nécessaires au transport natif de l’état. Les fonctions géométriques suivent les cinq fonctions originales : `layout`, `bbox`, `read_state`, `observed_state` et `propagated`.
 
-Les entrées sont des observations génériques mesurées : raster rectangulaire non vide, palette uint8, entités avec boîte et masque relatif, commandes disponibles, époque, référence d’observation, état officiel et compteur de niveaux. Les positions, dimensions, scores et indices appartiennent au domaine des entiers sûrs du runtime. Aucun nom de jeu, identifiant d’instance ou résultat caché n’intervient dans la décision.
+Les entrées sont des observations génériques mesurées : raster rectangulaire non vide, palette uint8, entités avec boîte et masque relatif, commandes disponibles, époque, référence d’observation, état officiel et compteur de niveaux. La frontière native `validateRows` limite la **surface totale à 65 536 pixels**, sans imposer une forme carrée ni un budget indépendant de 65 536 par axe. Les positions, dimensions, scores et indices appartiennent au domaine des entiers sûrs du runtime ; les contraintes géométriques de restauration sont précisées ci-dessous. Aucun nom de jeu, identifiant d’instance ou résultat caché n’intervient dans la décision.
 
 Les clés d’action du caller observé sont des noms non numériques de la famille `ACTION1` à `ACTION6`. Leur ordre doit être celui de Python lorsque la source trie les commandes ou conserve l’ordre d’insertion. La présente parité ne revendique pas l’ordre d’énumération d’objets JavaScript pour des clés arbitraires qui seraient des indices numériques. Les éventuelles entrées contrefactuelles du corpus déclarent leur domaine séparément.
 
@@ -67,7 +79,7 @@ Une affectation est admissible lorsque l’ensemble des fronts visibles propagé
 | La barre active doit bouger | Un préfixe `move` utilisant l’unique clé connue correspondant au déplacement demandé. |
 | Aucune solution, commande absente ou ambiguë | Aucune proposition dans le calcul exact complet. |
 
-Le préfixe `move` contient au plus `min(distance / unit, remaining, 16)` actions. Il est réduit à une action si sa clé n’a pas encore été vérifiée pendant l’époque courante. La source applique `remaining` directement à ce mode seulement : les propositions `calibrate`, `select` et `propagate` peuvent encore être construites avec `remaining == 0`. L’admission physique du caller devra les refuser lorsque le budget réel ne permet pas leur exécution. Le port de composant ne doit pas confondre ces deux responsabilités.
+Le préfixe `move` contient au plus `min(distance / unit, remaining, 16)` actions. Il est réduit à une action si sa clé n’a pas encore été vérifiée pendant l’époque courante. La source applique `remaining` directement à ce mode seulement : les propositions `calibrate`, `select` et `propagate` peuvent encore être construites avec `remaining == 0`. L’admission physique et le budget réel restent contrôlés par le caller commun ; le composant conserve cette distinction entre proposition source et autorisation d’exécution.
 
 ### Champs conservés
 
@@ -81,9 +93,11 @@ Les références sont dédupliquées dans leur ordre d’insertion : observation
 
 `before` exige l’époque et le compteur de niveaux du binding, la disponibilité actuelle de la commande, la même référence d’observation pour le premier pas, et la lecture de toutes les poses avec la sélection attendue. Les pas suivants ne réutilisent pas la référence d’observation initiale comme autorité, mais leurs poses et leur sélection doivent toujours être mesurées à nouveau.
 
+La garde commune `ObservedInputDomain.pointGuard` vérifie séparément la liaison du point et la projection courante. Le test d’intégration utilise le domaine réellement produit par le caller : pour la sélection triple, il choisit `(6, 13)`, alors que la liste manuelle du corpus de composant proposait d’abord `(7, 13)`. Les références d’observation sont également rattachées à l’observateur commun réel. Cette preuve qualifie le domaine pointé commun ; elle ne présente pas cette sélection comme un rejeu identique de la liste manuelle ni comme une parité du caller Python complet.
+
 `after` ferme immédiatement le préfixe si l’époque, l’état officiel ou le compteur de niveaux change. Sinon il compare la pose attendue lorsque la prédiction existe. Un résultat autre que `True`, ou le dernier pas du préfixe, ferme le préfixe. Un mode sans prédiction n’invente pas de correspondance positive.
 
-`record` observe le retour sélectionné une seule fois dans le futur caller. Ses branches sont conservées :
+Le caller commun appelle `record` pour le seul propriétaire sélectionné et conserve les acquisitions source réussies sous `branches:<revision>`. BranchRouting n’est pas acquis passivement sur l’action d’un autre propriétaire. Les branches du composant sont conservées :
 
 1. Si le compteur de niveaux augmente, ajouter le témoin à `passed` et retourner `official_boundary` **avant** la lecture ordinaire, avant tout ajout à `events`, et avant une éventuelle mise à `finished`.
 2. Sinon, relire l’état observé et construire `measured_response` avec l’ancien état, le nouvel état éventuel et la référence du retour.
@@ -106,13 +120,15 @@ L’absence de modèle est un état valide, avec `model: null` et `current: []` 
 
 `state()` retourne une copie détachée. Les ensembles Python sont représentés par des tableaux explicitement normalisés pour la comparaison, sans changer leur sens. `restore()` valide la totalité d’une copie détachée avant de remplacer le moindre champ du propriétaire. Un snapshot invalide doit laisser l’état courant inchangé. La restauration conserve les méthodes acquises mais ne constitue pas une nouvelle observation autorisant une action : `propose` et les gardes doivent relire le champ courant.
 
-**Limite du domaine restaurable :** `restore()` vérifie la forme, la cohérence et les entiers sûrs, mais ne borne pas encore `unit`, `limit` ou les coordonnées aux dimensions de la frontière publique. Le présent jalon porte sur des snapshots issus d’observations publiques du domaine déclaré ; il ne qualifie pas l’import arbitraire de valeurs potentiellement immenses. L’adaptateur de restauration commun devra fermer cette limite avant le raccordement au runtime.
+**Frontière de restauration fermée pour les conditions numériques nécessaires :** `restore()` dérive ses contrôles du budget public total de 65 536 pixels, avec vérification des quotients avant multiplication. Le modèle initial doit respecter les surfaces des barres et sources, l’étendue `unit * limit`, les indices de sources/cavités et le rectangle englobant sa géométrie. `current` doit représenter des rectangles complets mesurés dans un raster public possible, dont la forme peut différer de celle du modèle initial. Les poses prédites de `seen` et `event.before` ne requièrent que des origines compatibles avec des découpes non vides : une boîte complète débordante reste permise. Chaque état historique est vérifié indépendamment du modèle courant. Les déplacements appris restent axiaux et non nuls, sans norme imposée par `unit`, avec une amplitude compatible avec la différence de coordonnées publiques.
+
+Les [sept tests de frontière publique](../../tests/v6-branch-routing-public-boundary.test.ts) qualifient notamment les rasters minces, les produits excessifs, le rejet atomique, les changements de forme, les coupes partielles et les histoires d’autres époques. Ces contrôles sont des conditions nécessaires de représentabilité numérique. Ils **n’authentifient pas la provenance** d’un snapshot et ne bornent pas globalement la quantité d’historique conservée.
 
 ## Extension native de calcul borné
 
-La source réalise deux produits cartésiens sans borne explicite : affectation des identités et recherche des placements. Le mode exact direct sert exclusivement à la parité sur le petit domaine annoncé du corpus. Le futur moteur commun utilisera un mode explicitement borné et coopératif.
+La source réalise deux produits cartésiens sans borne explicite : affectation des identités et recherche des placements. Le mode exact direct sert exclusivement à la parité sur le petit domaine annoncé du corpus. La factory commune utilise le mode explicitement borné et coopératif.
 
-| Borne native maximale proposée | Valeur |
+| Borne native maximale appliquée | Valeur |
 | --- | ---: |
 | Affectations d’identité examinées | 16 384 |
 | Placements examinés | 65 536 |
@@ -120,15 +136,17 @@ La source réalise deux produits cartésiens sans borne explicite : affectation 
 
 Ces valeurs peuvent être réduites explicitement pour vérifier les refus ; elles ne doivent pas être relevées silencieusement. Les compteurs et motifs de refus doivent distinguer le domaine complètement examiné, la borne de ressources, l’échéance et l’interruption. L’annulation est vérifiée aux points de coopération ; aucune exploration partielle ne peut devenir une impossibilité démontrée ou un optimum source.
 
-**Portée des bornes :** ces plafonds limitent les produits d’affectations d’identité et de placements. Ils ne constituent pas une borne générale du temps ou de la mémoire du composant. En particulier, `layout` reste une opération synchrone non coopérative ; la construction des listes d’options, la validation des entrées, les copies et digests d’état ainsi que l’historique retenu ne sont pas bornés globalement par ces deux compteurs. Leur coût réel et les exigences de réactivité du futur caller devront être qualifiés séparément.
+**Portée des bornes :** ces plafonds limitent les produits d’affectations d’identité et de placements. Ils ne constituent pas une borne générale du temps ou de la mémoire du composant. En particulier, `layout` reste une opération synchrone non coopérative ; la construction des listes d’options, la validation des entrées, les copies et digests d’état ainsi que l’historique retenu ne sont pas bornés globalement par ces deux compteurs. Leur coût réel et la réactivité globale restent à qualifier séparément.
 
-**Stabilité des entrées pendant une cession :** la garde coopérative contrôle que l’état du propriétaire n’a pas changé pendant un `await`. Elle ne protège pas contre une mutation externe de l’observation JSON ou des autres entrées pendant cette attente. Le futur caller doit fournir un instantané d’entrée stable pour toute la proposition et garantir que ses références d’observation correspondent à ces mêmes données. Cette étape ne revendique pas une isolation transactionnelle des objets d’entrée partagés.
+**Stabilité des entrées pendant une cession :** l’adaptateur commun `branchRoutingFamily` clone ensemble l’observation, le raster et les commandes, puis les gèle récursivement **avant le premier `await`** du propriétaire. Les références et données de la proposition restent ainsi celles de cet instantané. La garde coopérative du composant continue de détecter une mutation de son propre état pendant une cession. Le test d’isolation qualifie ce chemin commun ; il ne transforme pas les appels directs au composant en transactions générales sur des objets partagés.
 
 Pour `propose`, un calcul incomplet ne retourne aucun meilleur préfixe partiel. Le diagnostic est transitoire et annonce une recherche incomplète. Les changements d’état autorisés par la source avant la recherche, tels que l’ouverture de l’époque ou une identité complètement relue, doivent être distingués des résultats non obtenus de la recherche interrompue.
 
 Pour `record`, la méthode de composant reste synchrone, comme l’original ; elle utilise une limite explicite d’affectations et ne promet pas de cession asynchrone pendant cette acquisition. Une identité incomplètement explorée ne peut pas être convertie en `after: null`, ce dernier désignant un résultat source complet. Le composant borné lève **`BranchRoutingIncomplete` avant les mutations de cette acquisition**. L’exception de frontière officielle avec score accru demeure prioritaire et n’exige pas cette énumération.
 
-**Obligation du futur raccordement :** lorsqu’une acquisition est différée, le caller doit retenir le retour physique officiel, marquer son acquisition comme non effectuée et reprendre ou terminer proprement son traitement. Il ne doit ni perdre le retour, ni l’acquérir deux fois, ni classifier une limite de calcul comme réfutation physique. Cette gestion n’est pas intégrée ni qualifiée par la présente étape de composant.
+**Traitement commun d’une acquisition incomplète :** l’adaptateur attrape uniquement `BranchRoutingIncomplete`, retourne une liste d’événements vide et un refus `unknown` sans autorité, lié aux identités du retour `after`. Le caller conserve durablement la transition publique complète, incluant les observations mesurées, les packets avant/après, leurs rasters et animations, la commande, l’index et le résultat du garde après action. Le reçu porte `acquired: false`, `release_authority: false` et un lien à `prefix_evidence:<revision>`, qui conserve la proposition complète.
+
+La première lacune suspend les acquisitions BranchRouting suivantes du même préfixe : chaque retour du suffixe reste intégralement conservé et explicitement non acquis, sans rappeler `record` au-dessus de cette lacune. Les autres acquisitions communes et passives poursuivent leur passage unique. Le runtime termine avec `native_acquisition_incomplete`, sous réserve de la priorité d’une fin officielle. `resume()` ne relance ni l’acquisition métier ni une commande physique sur cet arrêt terminal. **Aucune reprise automatique n’est implémentée.** Les compteurs communs de callbacks/retours réconciliés ne sont donc pas, à eux seuls, des compteurs d’acquisitions BranchRouting réussies.
 
 ## Corpus indépendant et critères de preuve
 
@@ -143,10 +161,10 @@ Les observations et résultats de l’oracle proviennent du composant Python ép
 
 La couverture doit comporter les quatre modes, une identité ambiguë, un retour contraire, une sélection non unique, une frontière officielle, une nouvelle époque et des sorties hors champ. Le label d’état officiel d’une fixture n’est pas une partie réelle ni un niveau officiel réussi. **LKEY reste définitivement fermé** ; aucun jeu, oracle ou payload de ce cas ne fait partie de ce lot.
 
-## Suite du raccordement et règle de coût
+## Raccordement acquis, suite et règle de coût
 
-L’intégration ultérieure devra préserver la position source dans `factored_material_return`, immédiatement après `motif_conditioned_access` et avant `conserved_band_transfer`, le propriétaire unique, l’acquisition sélectionnée `branches:<revision>`, le diagnostic `branch_routing`, les gardes courantes et la restauration du runtime. Le programme commun `v6.composition_strategy.choose` reste le point de décision existant. La preuve de composant ne suffit pas à déclarer cette entrée raccordée.
+La factory commune enregistre un seul propriétaire dans `factored_material_return`, immédiatement après `motif_conditioned_access` et avant `conserved_band_transfer`. Le slot du provider de matériau reste `null` pour cette entrée directe. L’acquisition sélectionnée utilise `branches:<revision>` et le diagnostic `branch_routing`. Les parcours communs qualifient les gardes courantes, les acquisitions froides, la restauration, l’effet contraire, les refus, l’isolation des entrées et la conservation d’un préfixe incomplet sur leur périmètre déclaré. Le programme existant `v6.composition_strategy.choose` reste le point de décision ; ce raccordement n’ajoute aucun nouveau programme compilé.
 
-Après raccordement viennent les preuves communes, les régressions affectées, les formes de travail et graphes, puis la qualification du coût et la publication de la version réservée à ce moment. **Aucun coût officiel 8B n’est acquis par cette étape.** Le critère reste une augmentation de la médiane globale des sessions complètes strictement inférieure à 10 % pour STCK et pour SMLP séparément. Une phase peut dépasser 10 % si les deux critères globaux passent ; aucune compensation entre jeux n’est admise.
+Les preuves communes et les régressions ciblées déclarées sont passées. La qualification des formes de travail et des graphes, la campagne générale et le coût officiel demeurent des étapes distinctes. **Ce jalon ne comprend aucun jeu, rejeu de jeu, coût officiel 8B ou publication.** La publication éventuelle nécessitera sa propre qualification et sa réservation de version ; aucun nouveau numéro n’est réservé ici. Le critère de coût reste une augmentation de la médiane globale des sessions complètes strictement inférieure à 10 % pour STCK et pour SMLP séparément. Une phase peut dépasser 10 % si les deux critères globaux passent ; aucune compensation entre jeux n’est admise.
 
 Le développement, les tests fonctionnels, les commits et les push se poursuivent sans verrou global dans le checkout et la branche propres au lot. Seules les mesures officielles et la publication utilisent l’exclusivité courte encore demandée. Aucun fichier de verrou détenu ne doit être supprimé ou remplacé.

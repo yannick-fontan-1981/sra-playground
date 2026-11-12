@@ -30,10 +30,10 @@
     "declaredClassesAndFunctions": 12857,
     "dataFiles": 417,
     "verifiedModules": 0,
-    "componentVerifiedModules": 214,
+    "componentVerifiedModules": 215,
     "partiallyTransferredModules": 147,
     "transferredUnverifiedModules": 0,
-    "pendingModules": 1008,
+    "pendingModules": 1007,
     "strategyFamilies": 16
   },
   "families": [
@@ -74018,9 +74018,28 @@
           "endLine": 208
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-branch-routing.ts",
+        "src/logos-engine/v6-branch-routing-geometry.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-branch-routing-reference.py",
+        "tests/fixtures/v6-branch-routing-reference.json",
+        "tests/v6-branch-routing-reference.test.ts",
+        "tests/v6-branch-routing-contract.test.ts",
+        "tests/v6-branch-routing-public-boundary.test.ts",
+        "tests/v6-branch-routing-kernel.test.ts",
+        "docs/migration/lot8b-evidence/component-reference-03/execution.json",
+        "docs/migration/lot8b-evidence/component-reference-03/attempt-index.json",
+        "docs/migration/lot8b-evidence/component-stage-01/validation-summary.json",
+        "docs/migration/lot8b-evidence/component-stage-01/source-review.json",
+        "docs/migration/lot8b-evidence/common-integration-01/contract-review.md",
+        "docs/migration/lot8b-evidence/common-integration-01/validation-summary.json",
+        "docs/migration/lot8b-branch-routing.md",
+        "docs/migration/lot8b-branch-routing-lineage.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_cavity_clock.py",
@@ -75778,7 +75797,9 @@
         "src/logos-engine/v6-ordered-reaction.ts",
         "src/logos-engine/v6-topological-recolor.ts",
         "src/logos-engine/v6-motion-contrast.ts",
-        "src/logos-engine/v6-ranked-workshop.ts"
+        "src/logos-engine/v6-ranked-workshop.ts",
+        "src/logos-engine/v6-branch-routing.ts",
+        "src/logos-engine/v6-branch-routing-geometry.ts"
       ],
       "proof": [
         "scripts/export-v6-target-reference.py",
@@ -75870,7 +75891,12 @@
         "tests/v6-ranked-workshop-kernel.test.ts",
         "docs/migration/lot7a-ranked-workshop-lineage.md",
         "tests/v6-axial-question-kernel.test.ts",
-        "docs/migration/lot10a-axial-question-lineage.md"
+        "docs/migration/lot10a-axial-question-lineage.md",
+        "tests/v6-branch-routing-kernel.test.ts",
+        "tests/v6-branch-routing-public-boundary.test.ts",
+        "docs/migration/lot8b-evidence/common-integration-01/contract-review.md",
+        "docs/migration/lot8b-evidence/common-integration-01/validation-summary.json",
+        "docs/migration/lot8b-branch-routing-lineage.md"
       ]
     },
     {
@@ -95277,7 +95303,9 @@
         "src/logos-engine/v6-contextual-translation.ts",
         "src/logos-engine/v6-ranked-workshop.ts",
         "src/logos-engine/v6-motif-access.ts",
-        "src/logos-engine/v6-motif-access-geometry.ts"
+        "src/logos-engine/v6-motif-access-geometry.ts",
+        "src/logos-engine/v6-branch-routing.ts",
+        "src/logos-engine/v6-branch-routing-geometry.ts"
       ],
       "proof": [
         "tests/v6-native-runtime.test.ts",
@@ -95323,7 +95351,12 @@
         "docs/migration/lot10a-axial-question-lineage.md",
         "tests/v6-motif-access-kernel.test.ts",
         "docs/migration/lot8a-evidence/development/component-proof.json",
-        "docs/migration/lot8a-motif-access-lineage.md"
+        "docs/migration/lot8a-motif-access-lineage.md",
+        "tests/v6-branch-routing-kernel.test.ts",
+        "tests/v6-branch-routing-public-boundary.test.ts",
+        "docs/migration/lot8b-evidence/common-integration-01/contract-review.md",
+        "docs/migration/lot8b-evidence/common-integration-01/validation-summary.json",
+        "docs/migration/lot8b-branch-routing-lineage.md"
       ]
     },
     {

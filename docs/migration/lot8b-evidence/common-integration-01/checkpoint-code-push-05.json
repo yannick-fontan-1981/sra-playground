@@ -1,0 +1,100 @@
+{
+  "schema": "logos-engine.lot8b-source-checkpoint-transport.v1",
+  "recordedAt": "2026-11-12T04:29:28.375019+00:00",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "ref": "refs/heads/lot8b-branch-routing-checkpoint-20261112",
+  "expectedCommit": "2583d81d856c13295040db88f5df8b3a99906bdc",
+  "expectedRemoteBefore": "b5d34121d6d1e79ae673372b5969d4883dcd9de8",
+  "status": "pushed_and_verified",
+  "pushCommandStarted": true,
+  "pushSucceeded": true,
+  "ordinaryPush": true,
+  "forceUsed": false,
+  "fetchPerformed": true,
+  "fetchSucceeded": true,
+  "fetchSourceBranchRequested": true,
+  "allowUncommittedWork": true,
+  "worktreeCleanBefore": false,
+  "worktreeCleanAfter": false,
+  "committedCheckpointOnly": true,
+  "uncommittedWorkIncluded": false,
+  "worktreeContentsCompared": false,
+  "checkpointObservations": [
+    {
+      "stage": "local_preflight",
+      "observedAt": "2026-11-12T04:29:32.552148+00:00",
+      "commit": "2583d81d856c13295040db88f5df8b3a99906bdc",
+      "worktreeClean": false
+    },
+    {
+      "stage": "source_branch_fetch",
+      "observedAt": "2026-11-12T04:29:32.597086+00:00",
+      "commit": "2583d81d856c13295040db88f5df8b3a99906bdc",
+      "worktreeClean": false
+    },
+    {
+      "stage": "source_branch_fetch",
+      "observedAt": "2026-11-12T04:29:33.348546+00:00",
+      "commit": "2583d81d856c13295040db88f5df8b3a99906bdc",
+      "worktreeClean": false
+    },
+    {
+      "stage": "missing_object_inventory",
+      "observedAt": "2026-11-12T04:29:34.118596+00:00",
+      "commit": "2583d81d856c13295040db88f5df8b3a99906bdc",
+      "worktreeClean": false
+    },
+    {
+      "stage": "remote_before",
+      "observedAt": "2026-11-12T04:29:34.849391+00:00",
+      "commit": "2583d81d856c13295040db88f5df8b3a99906bdc",
+      "worktreeClean": false
+    },
+    {
+      "stage": "remote_exact_verification",
+      "observedAt": "2026-11-12T04:29:37.025444+00:00",
+      "commit": "2583d81d856c13295040db88f5df8b3a99906bdc",
+      "worktreeClean": false
+    }
+  ],
+  "commitCreated": false,
+  "sitePublicationPerformed": false,
+  "credentialPersisted": false,
+  "inputDeadlineSeconds": 45,
+  "inputWaitHoldsPerformanceLock": false,
+  "globalLockRequired": false,
+  "globalLockAcquired": false,
+  "coordinationPolicy": "Explicit user instruction: ordinary source pushes require no global lock or predecessor publication.",
+  "generatorSha256": "fecbee359023edba25b00358aa545b2060c6eca1ccfe2cd60a9ce940a3e00d19",
+  "qualification": "Only expectedCommit, the exact already committed HEAD, is backed up. Uncommitted or untracked work is not included or claimed saved, even when explicitly allowed. Native version, functional gates, cost and Site publication require their own evidence.",
+  "localCommitBefore": "2583d81d856c13295040db88f5df8b3a99906bdc",
+  "returnedSourceBranch": "main",
+  "authenticationMode": "http_extra_header",
+  "authenticationTransport": "hidden_stdin_then_process_environment_only",
+  "sourceRemoteCommitFetched": "4ff7bf45286a8a19d34401988adca587253ae41e",
+  "headUnchangedAfterFetch": true,
+  "worktreeCleanAfterFetch": false,
+  "verifiedExistingRemoteAncestors": [
+    {
+      "ref": "refs/heads/lot8b-branch-routing-checkpoint-20261112",
+      "remoteCommit": "b5d34121d6d1e79ae673372b5969d4883dcd9de8",
+      "verifiedExistingAncestor": "b5d34121d6d1e79ae673372b5969d4883dcd9de8",
+      "additionalFetch": false
+    }
+  ],
+  "objectInventoryExclusions": [
+    "4ff7bf45286a8a19d34401988adca587253ae41e",
+    "b5d34121d6d1e79ae673372b5969d4883dcd9de8"
+  ],
+  "sourceMissingObjectCount": 28,
+  "sourceMissingRawBytes": 1664802,
+  "sourceMissingLargestObjectBytes": 446566,
+  "sourceMissingObjectsAtLeast32MiB": [],
+  "sourceMissingRawLimitBytes": 41943040,
+  "objectInventoryQualification": "Raw object headers only, excluding only the freshly fetched main and ancestors independently verified on this same remote; not a measured pack size. All proof objects remain retained in remote history.",
+  "remoteCommitBefore": "b5d34121d6d1e79ae673372b5969d4883dcd9de8",
+  "remoteCommitAfter": "2583d81d856c13295040db88f5df8b3a99906bdc",
+  "localCommitAfter": "2583d81d856c13295040db88f5df8b3a99906bdc",
+  "localCleanAfter": false,
+  "finishedAt": "2026-11-12T04:29:37.025488+00:00"
+}

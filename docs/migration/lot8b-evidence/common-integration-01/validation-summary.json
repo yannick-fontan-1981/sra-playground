@@ -1,14 +1,17 @@
 {
   "schema": "logos-engine.lot8b.common-integration-summary.v1",
-  "recordedAt": "2026-11-12T04:28:46.219217+00:00",
-  "status": "common_path_validated_regressions_and_audits_pending",
+  "recordedAt": "2026-11-12T04:36:25.932838+00:00",
+  "status": "common_integration_functionally_qualified_targeted_scope",
   "declaredPlanCommit": "b5d34121d6d1e79ae673372b5969d4883dcd9de8",
   "publishedBase": {
     "siteVersion": 107,
     "nativeVersion": "0.66.0",
-    "commit": "4ff7bf45286a8a19d34401988adca587253ae41e"
+    "commit": "4ff7bf45286a8a19d34401988adca587253ae41e",
+    "connectedEntries": 68,
+    "declaredEntries": 76,
+    "changedByThisMilestone": false
   },
-  "codeVersionQualification": "Development candidate; the published version literal remains0.66.0. Changed family registration, extensions and sourceDigest identify this candidate. No new publication version reserved.",
+  "codeVersionQualification": "Unpublished development candidate; the implementation version literal remains 0.66.0. Changed family registration, extensions and sourceDigest distinguish the candidate from Site 107. No new publication version is reserved.",
   "nativeSource": {
     "fileCount": 331,
     "digest": "76a403016d2b28287194b7498f10e14727b7e3fb3f214d2f79cb0292390d54bf",
@@ -363,7 +366,21 @@
         "skipped": 0,
         "todo": 0
       },
+      "testModuleCount": 4,
       "inputsUnchanged": true,
+      "inputCount": 2447,
+      "inputManifests": [
+        {
+          "path": "docs/migration/lot8b-evidence/common-integration-01/branch-01/inputs-before.json",
+          "bytes": 419537,
+          "sha256": "a2c5bd3fbf93993d27fc12837f60214bd34fc0f05b2820604e14c3cb49523015"
+        },
+        {
+          "path": "docs/migration/lot8b-evidence/common-integration-01/branch-01/inputs-after.json",
+          "bytes": 419537,
+          "sha256": "a2c5bd3fbf93993d27fc12837f60214bd34fc0f05b2820604e14c3cb49523015"
+        }
+      ],
       "command": [
         "node",
         "--test",
@@ -373,7 +390,108 @@
         "tests/v6-branch-routing-contract.test.ts",
         "tests/v6-branch-routing-public-boundary.test.ts",
         "tests/v6-branch-routing-kernel.test.ts"
-      ]
+      ],
+      "elapsedSeconds": 13.498214327999449,
+      "durationQualification": "Command trace only; not an official performance sample."
+    },
+    "runtime-regression-01": {
+      "status": "passed",
+      "receipt": {
+        "path": "docs/migration/lot8b-evidence/common-integration-01/runtime-regression-01/receipt.json",
+        "bytes": 1824,
+        "sha256": "7fdcc5fd1b7456a738c3697b9e58572c87c60da194f2147179723e42e6e47810"
+      },
+      "testCounts": {
+        "tests": 160,
+        "suites": 0,
+        "pass": 160,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "testModuleCount": 15,
+      "inputsUnchanged": true,
+      "inputCount": 2458,
+      "inputManifests": [
+        {
+          "path": "docs/migration/lot8b-evidence/common-integration-01/runtime-regression-01/inputs-before.json",
+          "bytes": 420746,
+          "sha256": "e25dc38961f72a5d6fe6c49b22b79f1c5f56cdd7f21ce16ab294f4d12e8e1bd4"
+        },
+        {
+          "path": "docs/migration/lot8b-evidence/common-integration-01/runtime-regression-01/inputs-after.json",
+          "bytes": 420746,
+          "sha256": "e25dc38961f72a5d6fe6c49b22b79f1c5f56cdd7f21ce16ab294f4d12e8e1bd4"
+        }
+      ],
+      "command": [
+        "node",
+        "--test",
+        "--test-concurrency=1",
+        "--test-reporter=tap",
+        "tests/v6-native-runtime.test.ts",
+        "tests/v6-native-family-registration.test.ts",
+        "tests/v6-source-entry-routing.test.ts",
+        "tests/v6-native-caller.test.ts",
+        "tests/v6-caller-integration.test.ts",
+        "tests/v6-native-authority.test.ts",
+        "tests/v6-native-copy.test.ts",
+        "tests/v6-native-persistence.test.ts",
+        "tests/v6-native-state-graph.test.ts",
+        "tests/v6-native-checkpoint-integration.test.ts",
+        "tests/v6-native-snapshot-identity.test.ts",
+        "tests/v6-native-transition-domain.test.ts",
+        "tests/v6-native-transition-domain-integration.test.ts",
+        "tests/v6-native-mixed-path.test.ts",
+        "tests/v6-v45-kernel-integration.test.ts"
+      ],
+      "elapsedSeconds": 215.36226347900083,
+      "durationQualification": "Command trace only; not an official performance sample."
+    },
+    "neighbor-regression-01": {
+      "status": "passed",
+      "receipt": {
+        "path": "docs/migration/lot8b-evidence/common-integration-01/neighbor-regression-01/receipt.json",
+        "bytes": 1325,
+        "sha256": "ffb12f7ad7e59d0e0fbb22331220763dfdd9f22f521c34ee9bbd941a95babb60"
+      },
+      "testCounts": {
+        "tests": 83,
+        "suites": 0,
+        "pass": 83,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "testModuleCount": 4,
+      "inputsUnchanged": true,
+      "inputCount": 2447,
+      "inputManifests": [
+        {
+          "path": "docs/migration/lot8b-evidence/common-integration-01/neighbor-regression-01/inputs-before.json",
+          "bytes": 419521,
+          "sha256": "d588e39662f38dec410fdecf5a9895ff2ce8f19a73555bac7744262428d87f92"
+        },
+        {
+          "path": "docs/migration/lot8b-evidence/common-integration-01/neighbor-regression-01/inputs-after.json",
+          "bytes": 419521,
+          "sha256": "d588e39662f38dec410fdecf5a9895ff2ce8f19a73555bac7744262428d87f92"
+        }
+      ],
+      "command": [
+        "node",
+        "--test",
+        "--test-concurrency=1",
+        "--test-reporter=tap",
+        "tests/v6-object-binding-common.test.ts",
+        "tests/v6-selected-rigid-integration.test.ts",
+        "tests/v6-motif-access-kernel.test.ts",
+        "tests/v6-program-families.test.ts"
+      ],
+      "elapsedSeconds": 121.80769695699928,
+      "durationQualification": "Command trace only; not an official performance sample."
     },
     "typecheck-01": {
       "status": "passed",
@@ -383,23 +501,124 @@
         "sha256": "36924d5de99e6f3fa301759be4a9e12c97e0b3cca0cd586db3ba05b9c87b403a"
       },
       "testCounts": {},
+      "testModuleCount": 0,
       "inputsUnchanged": true,
+      "inputCount": 2443,
+      "inputManifests": [
+        {
+          "path": "docs/migration/lot8b-evidence/common-integration-01/typecheck-01/inputs-before.json",
+          "bytes": 419075,
+          "sha256": "ea3a427a18e0741530e65fc0314b09188447e1b032f32e62e1e701053312cace"
+        },
+        {
+          "path": "docs/migration/lot8b-evidence/common-integration-01/typecheck-01/inputs-after.json",
+          "bytes": 419075,
+          "sha256": "ea3a427a18e0741530e65fc0314b09188447e1b032f32e62e1e701053312cace"
+        }
+      ],
       "command": [
         "node",
         "node_modules/typescript/bin/tsc",
         "--noEmit"
-      ]
+      ],
+      "elapsedSeconds": 9.006518691001475,
+      "durationQualification": "Command trace only; not an official performance sample."
+    },
+    "entry-audit-01": {
+      "status": "passed",
+      "receipt": {
+        "path": "docs/migration/lot8b-evidence/common-integration-01/entry-audit-01/receipt.json",
+        "bytes": 1158,
+        "sha256": "1c644b34069ae18f48b04dbf4f60f3a6aa29ed5d668285b6568ff645c202b362"
+      },
+      "testCounts": {},
+      "testModuleCount": 0,
+      "inputsUnchanged": true,
+      "inputCount": 2443,
+      "inputManifests": [
+        {
+          "path": "docs/migration/lot8b-evidence/common-integration-01/entry-audit-01/inputs-before.json",
+          "bytes": 419075,
+          "sha256": "ea3a427a18e0741530e65fc0314b09188447e1b032f32e62e1e701053312cace"
+        },
+        {
+          "path": "docs/migration/lot8b-evidence/common-integration-01/entry-audit-01/inputs-after.json",
+          "bytes": 419075,
+          "sha256": "ea3a427a18e0741530e65fc0314b09188447e1b032f32e62e1e701053312cace"
+        }
+      ],
+      "command": [
+        "node",
+        "scripts/audit-v6-entry-points.ts"
+      ],
+      "elapsedSeconds": 1.1137009979993309,
+      "durationQualification": "Command trace only; not an official performance sample."
+    },
+    "migration-audit-02": {
+      "status": "passed",
+      "receipt": {
+        "path": "docs/migration/lot8b-evidence/common-integration-01/migration-audit-02/receipt.json",
+        "bytes": 1164,
+        "sha256": "7ef4ebcf51fb628da27a2a9d98021fcf2a44ae7d48f93ad8bce07edaf0f06f42"
+      },
+      "testCounts": {},
+      "testModuleCount": 0,
+      "inputsUnchanged": true,
+      "inputCount": 2445,
+      "inputManifests": [
+        {
+          "path": "docs/migration/lot8b-evidence/common-integration-01/migration-audit-02/inputs-before.json",
+          "bytes": 419334,
+          "sha256": "1ad53860cea56a078678cad8da9bd6734cfa9e05db998cf97bf664f419651065"
+        },
+        {
+          "path": "docs/migration/lot8b-evidence/common-integration-01/migration-audit-02/inputs-after.json",
+          "bytes": 419334,
+          "sha256": "1ad53860cea56a078678cad8da9bd6734cfa9e05db998cf97bf664f419651065"
+        }
+      ],
+      "command": [
+        "python",
+        "-B",
+        "scripts/audit-v6-migration.py"
+      ],
+      "elapsedSeconds": 5.963397900999553,
+      "durationQualification": "Command trace only; not an official performance sample."
+    },
+    "build-01": {
+      "status": "passed",
+      "receipt": {
+        "path": "docs/migration/lot8b-evidence/common-integration-01/build-01/receipt.json",
+        "bytes": 13529,
+        "sha256": "c49a19bb0257b1fbfb86b09e015e125b42879b20e3f13b1c6bc0e9da66a12a7d"
+      },
+      "testCounts": {},
+      "testModuleCount": 0,
+      "inputsUnchanged": true,
+      "inputCount": 2445,
+      "inputManifests": [
+        {
+          "path": "docs/migration/lot8b-evidence/common-integration-01/build-01/inputs-before.json",
+          "bytes": 419334,
+          "sha256": "1ad53860cea56a078678cad8da9bd6734cfa9e05db998cf97bf664f419651065"
+        },
+        {
+          "path": "docs/migration/lot8b-evidence/common-integration-01/build-01/inputs-after.json",
+          "bytes": 419334,
+          "sha256": "1ad53860cea56a078678cad8da9bd6734cfa9e05db998cf97bf664f419651065"
+        }
+      ],
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "elapsedSeconds": 11.42615820300125,
+      "durationQualification": "Command trace only; not an official performance sample."
     }
   },
-  "pendingChecks": [
-    "runtime-regression",
-    "neighbor-regression",
-    "entry-audit",
-    "migration-audit",
-    "build"
-  ],
+  "pendingChecks": [],
   "scope": {
-    "coldCommonCallerTestsPassed": 8,
     "publicBoundaryTestsPassed": 7,
     "componentReferenceTestsAndSubtestsPassed": 249,
     "componentContractTestsPassed": 17,
@@ -410,12 +629,50 @@
     "wholeCallerParity": false,
     "officialPerformanceMeasured": false,
     "officialPerformanceAccepted": false,
-    "published": false
+    "published": false,
+    "commonIntegrationTestsPassed": 8,
+    "testsAndSubtests": {
+      "tests": 524,
+      "pass": 524,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "testModules": 23,
+    "testModulePaths": [
+      "tests/v6-branch-routing-contract.test.ts",
+      "tests/v6-branch-routing-kernel.test.ts",
+      "tests/v6-branch-routing-public-boundary.test.ts",
+      "tests/v6-branch-routing-reference.test.ts",
+      "tests/v6-caller-integration.test.ts",
+      "tests/v6-motif-access-kernel.test.ts",
+      "tests/v6-native-authority.test.ts",
+      "tests/v6-native-caller.test.ts",
+      "tests/v6-native-checkpoint-integration.test.ts",
+      "tests/v6-native-copy.test.ts",
+      "tests/v6-native-family-registration.test.ts",
+      "tests/v6-native-mixed-path.test.ts",
+      "tests/v6-native-persistence.test.ts",
+      "tests/v6-native-runtime.test.ts",
+      "tests/v6-native-snapshot-identity.test.ts",
+      "tests/v6-native-state-graph.test.ts",
+      "tests/v6-native-transition-domain-integration.test.ts",
+      "tests/v6-native-transition-domain.test.ts",
+      "tests/v6-object-binding-common.test.ts",
+      "tests/v6-program-families.test.ts",
+      "tests/v6-selected-rigid-integration.test.ts",
+      "tests/v6-source-entry-routing.test.ts",
+      "tests/v6-v45-kernel-integration.test.ts"
+    ],
+    "wholeSuiteExecuted": false,
+    "successfulCheckGroups": 7,
+    "failedPriorAttemptsRetained": 1
   },
   "limits": [
     "Component source parity remains on the declared small independent domain.",
     "Common tests explicitly rebind observation references and use the actual common point domain; the triple selection point differs from the manual component input list.",
-    "Bounds are derived from total public raster surface65536, not65536 per axis; snapshots are checked for necessary numeric consistency, not authenticated provenance.",
+    "Bounds are derived from total public raster surface 65536, not 65536 per axis; snapshots are checked for necessary numeric consistency, not authenticated provenance.",
     "Incomplete BranchRouting acquisitions stop terminally with full public transition retention and no automatic retry; later returns in the prefix remain explicitly unacquired.",
     "Common acquiredRecords/acquiredTransitions count reconciled callbacks/returns including incomplete markers, not successful BranchRouting events.",
     "Enumeration bounds do not bound total layout, clone, digest or history time/memory.",
@@ -430,7 +687,8 @@
     ],
     "eachGameIndependent": true,
     "phaseAbove10PercentAcceptedIfBothGlobalsPass": true,
-    "crossGameCompensation": false
+    "crossGameCompensation": false,
+    "allSamplesRetained": true
   },
   "workPolicy": {
     "ordinaryWorkGlobalLockRequired": false,
@@ -438,5 +696,136 @@
     "heldLockFileDeleted": false,
     "shortExclusivityOnlyForOfficialPerformanceAndPublication": true,
     "LKEY": "permanently_closed"
-  }
+  },
+  "validatedCodeCommit": "2583d81d856c13295040db88f5df8b3a99906bdc",
+  "entryAudit": {
+    "artifact": {
+      "path": "docs/migration/v6-entry-point-progress.json",
+      "bytes": 19826,
+      "sha256": "355ce2d6f0eac0e861a604072f7657be1de29653103071094a263575e87e304c"
+    },
+    "connected": 69,
+    "declared": 76,
+    "percent": 90.8,
+    "candidatePublished": false,
+    "fullV6Parity": false,
+    "groups": [
+      {
+        "id": "goal_access",
+        "connected": 12,
+        "declared": 12
+      },
+      {
+        "id": "window_constraints",
+        "connected": 21,
+        "declared": 21
+      },
+      {
+        "id": "surface",
+        "connected": 10,
+        "declared": 10
+      },
+      {
+        "id": "factored_material_return",
+        "connected": 26,
+        "declared": 33
+      }
+    ],
+    "pendingEntries": [
+      "observed_rigid_cargo",
+      "chart_navigation",
+      "region_intervention",
+      "temporal_selection",
+      "invited_endpoints",
+      "joint_channels",
+      "shared_settlement"
+    ]
+  },
+  "migrationAudit": {
+    "artifact": {
+      "path": "docs/migration/v6-coverage.json",
+      "bytes": 2577071,
+      "sha256": "65773bd96ebafb867495d47d1ab008340dcf9386c6d2acef9ac631dcada1c30b"
+    },
+    "summary": {
+      "pythonModules": 1369,
+      "pythonLines": 320375,
+      "declaredClassesAndFunctions": 12857,
+      "dataFiles": 417,
+      "verifiedModules": 0,
+      "componentVerifiedModules": 215,
+      "partiallyTransferredModules": 147,
+      "transferredUnverifiedModules": 0,
+      "pendingModules": 1007,
+      "strategyFamilies": 16
+    },
+    "failures": [],
+    "complete": false,
+    "completionGates": {
+      "allRequiredCapabilitiesTransferred": false,
+      "fullCommonCallerDifferentialParity": false,
+      "allDeclaredFamiliesIntegrated": false,
+      "commonGraphEditingCoversExecutedPrograms": false,
+      "pythonNumericSemanticsCovered": false,
+      "fullCampaignRegression": false
+    }
+  },
+  "build": {
+    "artifactCount": 74,
+    "allRecordedArtifactsMatchCurrentBytes": true,
+    "nativeWorker": {
+      "path": "dist/assets/v6-agent-worker-BmtBfUWE.js",
+      "bytes": 7016605,
+      "sha256": "7fa86f61da1d4b4cc3e666664549eb16d4d4149aab1130f1bb373e7c07834791"
+    },
+    "artifactManifestInReceipt": "docs/migration/lot8b-evidence/common-integration-01/build-01/receipt.json"
+  },
+  "integrity": {
+    "currentCapturedInputCount": 2468,
+    "allCapturedExistingInputsMatchCurrentBytes": true,
+    "crossCheckHashConflicts": [],
+    "allBeforeAfterInventoriesEqual": true,
+    "nativeProfileMatchesDeclaredCandidate": true,
+    "newInputFilesAfterFunctionalChecks": [
+      "tests/fixtures/v6-feedback-sequences-reference.json.gz",
+      "tests/fixtures/v6-relative-arrangements-reference.json.gz"
+    ],
+    "newInputQualification": "Opaque re-materialization of existing references after all 23-module functional checks; captured by migration-audit-02 and build-01. Existing captured inputs were unchanged. These are not selected functional-test dependencies."
+  },
+  "retainedAuditFailure": {
+    "attempt": "migration-audit-01",
+    "receipt": {
+      "path": "docs/migration/lot8b-evidence/common-integration-01/migration-audit-01/receipt.json",
+      "bytes": 1164,
+      "sha256": "1d5c79857f14ee02c181060475a5158361878af763de99aaa6bfac5ef111807a"
+    },
+    "report": {
+      "path": "docs/migration/lot8b-evidence/common-integration-01/migration-audit-01/generated-coverage.json",
+      "bytes": 2577355,
+      "sha256": "f10ecef12c438539b34cb0f328dd5767244c3eae08efb56238771f3a8023b79c"
+    },
+    "cause": "Two preexisting ignored reference archives missing from this own checkout; three missing-evidence entries because feedback is referenced twice.",
+    "remediation": "docs/migration/lot8b-evidence/common-integration-01/reference-materialization.json",
+    "rerun": "migration-audit-02",
+    "originalPayloadDecodedOrRegenerated": false
+  },
+  "independentReview": {
+    "artifact": {
+      "path": "docs/migration/lot8b-evidence/common-integration-01/independent-review.json",
+      "bytes": 16444,
+      "sha256": "24761b651b979ea22adb18399fe1d7b799c10c70925ff0d84ddc7e4b4671d3a9"
+    },
+    "status": "no_concrete_contradiction_found_in_reviewed_scopes",
+    "scope": "Static common-caller and public-domain restoration review, with original source and parent branch/typecheck receipts; not an external audit or independent execution of all 23 modules."
+  },
+  "savedCodeCheckpoint": {
+    "commit": "2583d81d856c13295040db88f5df8b3a99906bdc",
+    "branch": "lot8b-branch-routing-checkpoint-20261112",
+    "receipt": {
+      "path": "docs/migration/lot8b-evidence/common-integration-01/checkpoint-code-push-05.json",
+      "bytes": 4254,
+      "sha256": "285feaa9b9cf3f047b6c6dd144f8ce9c3fa81ee6b5846d94202141054bd552d2"
+    }
+  },
+  "nextStep": "Declare broader integration and regression qualification with executed work-form/graph attribution, then measure official complete-session cost against the actual published predecessor and prepare a separately versioned publication."
 }
