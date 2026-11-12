@@ -1,0 +1,91 @@
+{
+  "schema": "logos-engine.lot8b.final-publication-evidence-retention.v1",
+  "recordedAt": "2026-11-12T12:53:31.817795+00:00",
+  "retainedFileCount": 16,
+  "retainedBytes": 177271,
+  "files": [
+    {
+      "path": "docs/migration/lot8b-evidence/final-publication-067-01/README.md",
+      "bytes": 6750,
+      "sha256": "1b1c191c5da2dc742b4950b6539aef5f9f4ed82cd5fd76e65d866af09526aa28"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-publication-067-01/build-reconciliation.json",
+      "bytes": 1682,
+      "sha256": "53ef23ff36f970f9c4d68827fc24df33bb41fd9689743696f3a8bdd12d491494"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-publication-067-01/cost-and-publication-ready-push-07.json",
+      "bytes": 4245,
+      "sha256": "a6e64d5d5e6202ff82b0a94b59229a7646f88e4b0ae8b89bdf90d439177f3e2f"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-publication-067-01/live-01/archive-verification-attempt-01.json",
+      "bytes": 976,
+      "sha256": "e8d7994f5d3a78acbea3627c30562294aefcb08386ae936c4afa8018f8f2c725"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-publication-067-01/live-01/archive-verification.json",
+      "bytes": 12922,
+      "sha256": "a40d73a5c94de56c0d21c3e4a8d53dbac829cc07875362e8e7cb3f137fc9fc61"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-publication-067-01/live-01/environment-before.json",
+      "bytes": 1270,
+      "sha256": "a1a8e23af3c7640f141a1b4a0de81357a5b5553c409ba2285ce7d51031b91b36"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-publication-067-01/live-01/lease.json",
+      "bytes": 2111,
+      "sha256": "06cc10eec335e92cc3e35f8baf9292116d7b01d6392344ee4a9a14318b8b51d0"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-publication-067-01/live-01/lease.started.json",
+      "bytes": 801,
+      "sha256": "da03c379147563fbd55a7af088c5463bcb8fe2bd22f2d7fb4661f96c3b4c3c45"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-publication-067-01/live-01/native-deployment-result.json",
+      "bytes": 1042,
+      "sha256": "ccc9aceaa5b59471dd93d81b97e5e388553384c40062df6b7024c1d6edee054d"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-publication-067-01/live-01/saved-version-observation.json",
+      "bytes": 792,
+      "sha256": "4e76c3efb80b4f61368931bba6e68ebdd833ea038512c1853eb7d4cf847668fa"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-publication-067-01/live-01/source-workflow-result.json",
+      "bytes": 1461,
+      "sha256": "9a4e03626378e82b7c53a1d5cd5c9c3ab66ddd9246a818fbe016376cd8e6bf44"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-publication-067-01/live-01/under-lease-publication-observation.json",
+      "bytes": 676,
+      "sha256": "99d1179b0e2a8bb9103cdd21403e3870cb9ff429c00ddacdc1ec0214e0c54680"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-publication-067-01/own-status-before-publication.json",
+      "bytes": 6927,
+      "sha256": "fff5e92e340338e221357e9821e6f7788dc13d6a26774de5be4d28a41f7961b7"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-publication-067-01/prepublication-observation.json",
+      "bytes": 824,
+      "sha256": "ff5e2b3f8f90cdbc5538980eb85bdad3d32a0bb143645af1d04577bba3c01edb"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-publication-067-01/publication-plan.json",
+      "bytes": 128392,
+      "sha256": "50598565a88a41a3b1ad89fccb50466a42ebfe4aaec1eee0e9c8a5f1c3099ada"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-publication-067-01/validation-summary.json",
+      "bytes": 6400,
+      "sha256": "54d9cfd4af2d2e01a2664bca56ac605e825507e3932308d80ddf93191acd3b3d"
+    }
+  ],
+  "retentionIndexExcludedFromOwnList": true,
+  "archiveBytesRetainedInNativeSitesStorage": true,
+  "credentialPersisted": false
+}

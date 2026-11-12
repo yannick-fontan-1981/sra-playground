@@ -1,0 +1,20 @@
+{
+  "schema": "logos-engine.lot8b.archive-verification-attempt.v1",
+  "recordedAt": "2026-11-12T12:50:24.463952+00:00",
+  "attempt": 1,
+  "status": "failed_expected_manifest_archive_path",
+  "observedExitCode": 1,
+  "observedError": "AssertionError at archive member allowlist before full contents verification",
+  "expectedManifestPath": ".openai/hosting.json",
+  "observedManifestPath": "dist/.openai/hosting.json",
+  "diagnosis": "Official packageSite stages the hosting manifest under dist/.openai/hosting.json in its temporary stage. The verification assumption used the repository path, not the supported archive path.",
+  "archiveChanged": false,
+  "buildChanged": false,
+  "nativeExecution": false,
+  "toolReexecuted": false,
+  "officialPackageHelper": {
+    "path": "/home/agent/.codex/plugins/cache/openai-curated-remote/sites/1.1.6/scripts/package-site.mjs",
+    "bytes": 6060,
+    "sha256": "1c3d64f670771cb9ebb97a11058e88a62b34d79eca2e9fc557d637a3c844941a"
+  }
+}

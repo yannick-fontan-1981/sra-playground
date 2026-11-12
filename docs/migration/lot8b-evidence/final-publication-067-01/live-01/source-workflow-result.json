@@ -1,0 +1,29 @@
+{
+  "schema": "logos-engine.lot8b.native-sites-source-workflow-result.v1",
+  "recordedAt": "2026-11-12T12:52:37.418Z",
+  "command": [
+    "node",
+    "/home/agent/.codex/plugins/cache/openai-curated-remote/sites/1.1.6/scripts/site-workflow.mjs",
+    "--project-id",
+    "appgprj_6adbc388d79081918581b93b919d7258"
+  ],
+  "input": {
+    "source": {
+      "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+      "checkout_path": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+      "commit_sha": "4ff7bf45286a8a19d34401988adca587253ae41e"
+    },
+    "commands": [],
+    "archivePath": "/tmp/lot8b-final067-publication.tar",
+    "credential": "ephemeral session memory; hidden stdin; never persisted"
+  },
+  "exitCode": 0,
+  "result": {
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "checkout_path": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+    "commit_sha": "8462204043aa368faa7df280d796bb706eb53b38",
+    "archive": "/tmp/lot8b-final067-publication.tar"
+  },
+  "observedOutput": "Ready for Site workflow JSON on stdin (input is hidden).\r\n/tmp/lot8b-final067-publication.tar\r\n{\"project_id\":\"appgprj_6adbc388d79081918581b93b919d7258\",\"checkout_path\":\"/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout\",\"commit_sha\":\"8462204043aa368faa7df280d796bb706eb53b38\",\"archive\":\"/tmp/lot8b-final067-publication.tar\"}\r\n",
+  "publishOnPushAccepted": false
+}

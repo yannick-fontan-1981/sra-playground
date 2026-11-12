@@ -1,0 +1,63 @@
+{
+  "schema": "logos-engine.lot8b.publication-lease.v1",
+  "status": "released_by_owner",
+  "startedAt": "2026-11-12T12:48:27.800753+00:00",
+  "plan": "docs/migration/lot8b-evidence/final-publication-067-01/publication-plan.json",
+  "lease": "lot8b-publication-2-a2a2829740b1",
+  "maximumSeconds": 300,
+  "preflightMaximumSeconds": 180,
+  "blocking": false,
+  "peerAvailabilityWait": false,
+  "performanceLockAcquired": false,
+  "publicationPerformedByHelper": false,
+  "deploymentSuccessAssertedByHelper": false,
+  "requiresFreshPublicationAndAudienceCheckByDeliveryOwnerUnderLease": true,
+  "lock": {
+    "path": "/workspace/shared/sra-coordination/publication.lock",
+    "attempts": 1,
+    "blocking": false,
+    "lockFileRemoved": false,
+    "lockFileReplaced": false,
+    "descriptorClosed": true,
+    "pathExistedBeforeOpen": true,
+    "identity": {
+      "device": 27,
+      "inode": 2621712
+    },
+    "status": "released",
+    "acquiredAt": "2026-11-12T12:48:28.015379+00:00",
+    "finalIdentity": {
+      "device": 27,
+      "inode": 2621712
+    },
+    "sameLockFile": true,
+    "releasedAt": "2026-11-12T12:51:14.539846+00:00"
+  },
+  "planFingerprint": {
+    "bytes": 128392,
+    "sha256": "50598565a88a41a3b1ad89fccb50466a42ebfe4aaec1eee0e9c8a5f1c3099ada"
+  },
+  "executionHead": "8462204043aa368faa7df280d796bb706eb53b38",
+  "ownWorkCheck": {
+    "passed": true,
+    "allowedControllerAncestors": [
+      1,
+      2
+    ],
+    "scope": "visible_process_cwd_plus_explicit_own_status_not_cross_namespace_proof"
+  },
+  "acquiredAt": "2026-11-12T12:48:28.218916+00:00",
+  "expectedPublishedSiteVersion": 107,
+  "expectedPublishedSourceCommit": "4ff7bf45286a8a19d34401988adca587253ae41e",
+  "candidateCommit": "2cd4e7e557cb15034849da8c2794fa612cdbff18",
+  "candidateNativeVersion": "0.67.0",
+  "releasedBy": "explicit_owner_release",
+  "finalInputIntegrity": "passed",
+  "statusRelease": {
+    "updated": true,
+    "path": "/workspace/shared/sra-coordination/lot8a-status.json"
+  },
+  "finishedAt": "2026-11-12T12:51:14.541589+00:00",
+  "elapsedSeconds": 166.74086583300004,
+  "controllerExitCode": 0
+}

@@ -2,7 +2,7 @@
 
 <!-- LOT8B_FINAL067_STATUS_START -->
 
-**Jalon courant : native 0.67 qualifiée fonctionnellement et coût officiel accepté contre le 0.66 publié.** Le candidat conserve 331 fichiers natifs, digest `c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a`, et 69/76 entrées. La fenêtre ABBA complète donne STCK **−0,69 %** et SMLP **−1,80 %**, sans exclusion ; les deux dépassements locaux de restauration restent admis selon la règle globale. Voir le [bilan de coût](lot8b-evidence/final-performance-067-01/README.md) et la [feuille de route](v6-delivery-roadmap.md). La publication de la source exacte est la prochaine étape. Les limites de preuve du runtime et LKEY fermé restent conservés.
+**Jalon courant : native 0.67 publiée avec succès dans Site 108, source `8462204043aa368faa7df280d796bb706eb53b38`, avec coût officiel accepté contre 0.66.** Le publié conserve 331 fichiers natifs, digest `c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a`, et 69/76 entrées. La fenêtre ABBA complète donne STCK **−0,69 %** et SMLP **−1,80 %**, sans exclusion ; les deux dépassements locaux de restauration restent admis selon la règle globale. Voir le [bilan de coût](lot8b-evidence/final-performance-067-01/README.md) et la [feuille de route](v6-delivery-roadmap.md). Le [bilan de publication](lot8b-evidence/final-publication-067-01/README.md) conserve les reçus et le bail libéré. La prochaine qualification relève du lot 11 : trajet public 64 × 64, tickets et worker BranchRouting, puis restauration et sessions longues. Les limites de preuve du runtime et LKEY fermé restent conservés.
 
 <!-- LOT8B_FINAL067_STATUS_END -->
 

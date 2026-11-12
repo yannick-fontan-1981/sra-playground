@@ -1,0 +1,63 @@
+{
+  "recordedAt": "2026-11-12T12:48:28.013879+00:00",
+  "scope": "current_visible_execution_namespace_only",
+  "globalQuietEstablishedByThisObservation": false,
+  "processes": [
+    {
+      "pid": 1,
+      "commandName": "codex",
+      "state": "S",
+      "parentPid": 0,
+      "processGroup": 1,
+      "session": 1,
+      "userTicks": 0,
+      "systemTicks": 0,
+      "startTicks": 313087,
+      "residentPages": 3872,
+      "cwdScope": "candidate_checkout"
+    },
+    {
+      "pid": 2,
+      "commandName": "python",
+      "state": "R",
+      "parentPid": 1,
+      "processGroup": 1,
+      "session": 1,
+      "userTicks": 18,
+      "systemTicks": 7,
+      "startTicks": 313088,
+      "residentPages": 3595,
+      "cwdScope": "candidate_checkout"
+    }
+  ],
+  "visibleProcessCount": 2,
+  "truncated": false,
+  "unreadableOrVanished": 0,
+  "namespaces": {
+    "pid": "pid:[4026532307]",
+    "mnt": "mnt:[4026532305]",
+    "user": "user:[4026532375]",
+    "cgroup": "cgroup:[4026532214]"
+  },
+  "loadAverage": [
+    0.0166015625,
+    0.3037109375,
+    0.69580078125
+  ],
+  "cpuAffinity": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "clockTicksPerSecond": 100,
+  "pageBytes": 4096,
+  "cpu.max": null,
+  "memory.max": null,
+  "pids.max": null
+}

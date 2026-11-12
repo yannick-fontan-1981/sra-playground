@@ -1,0 +1,23 @@
+{
+  "schema": "logos-engine.lot8b.publication-lease.v1",
+  "status": "preflight",
+  "startedAt": "2026-11-12T12:48:27.800753+00:00",
+  "plan": "docs/migration/lot8b-evidence/final-publication-067-01/publication-plan.json",
+  "lease": "lot8b-publication-2-a2a2829740b1",
+  "maximumSeconds": 300,
+  "preflightMaximumSeconds": 180,
+  "blocking": false,
+  "peerAvailabilityWait": false,
+  "performanceLockAcquired": false,
+  "publicationPerformedByHelper": false,
+  "deploymentSuccessAssertedByHelper": false,
+  "requiresFreshPublicationAndAudienceCheckByDeliveryOwnerUnderLease": true,
+  "lock": {
+    "path": "/workspace/shared/sra-coordination/publication.lock",
+    "attempts": 0,
+    "blocking": false,
+    "lockFileRemoved": false,
+    "lockFileReplaced": false,
+    "descriptorClosed": false
+  }
+}
