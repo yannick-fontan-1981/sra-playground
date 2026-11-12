@@ -8,7 +8,7 @@ Cette conversation reprend le **Lot 10D / TemporalSelection**.
 
 Branche de travail de reprise :
 
-`recovery/lot10d-temporal-selection-restart-20261112`
+`recovery/lot10d-temporal-selection-restart2-20261112`
 
 Baseline canonique de reconstruction :
 
@@ -16,7 +16,7 @@ Baseline canonique de reconstruction :
 
 Baseline observée au démarrage de cette reprise :
 
-`658b89cfe77887eb720c95f0e6e6f8595beffdbd`
+`7e7b4364a23603eb365e46fe40b3a774266dfb40`
 
 Ancienne branche de récupération annoncée :
 
