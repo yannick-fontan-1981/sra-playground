@@ -104,3 +104,28 @@ Dès restauration d'un worker/harness réel :
 3. garder la trace détaillée hors mesure normale ;
 4. n'activer le cache que si le chemin produit des hits mesurables ;
 5. comparer au prédécesseur immédiat et à la baseline stable.
+
+
+## Rerun après correction de parité Python → TypeScript
+
+Après ajout de `pythonTruthy()` et des régressions C5/C6 :
+
+- typecheck strict : OK ;
+- suite OP/C7 : **53/53 tests passent** ;
+- 31 échantillons × 200 cycles synthétiques :
+
+| Mode | Médiane | Delta vs baseline |
+| --- | ---: | ---: |
+| baseline | 1,919 ms | — |
+| compteurs | 1,840 ms | **−4,12 %** |
+| trace détaillée | 10,155 ms | +429,10 % |
+| cache | 2,810 ms | +46,40 % |
+| compteurs + cache | 3,048 ms | +58,79 % |
+| trace détaillée + cache | 11,201 ms | +483,55 % |
+
+Le delta négatif des compteurs est interprété comme du bruit favorable, pas
+comme un gain revendiqué. Le point pertinent est l'absence de signal >10 % sur
+ce diagnostic synthétique pour le mode normal.
+
+La qualification officielle reste inchangée :
+**fonctionnellement qualifié, performance officielle à confirmer**.
