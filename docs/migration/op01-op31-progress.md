@@ -871,3 +871,55 @@ besoin, appel, non-appel, blocage, cache hit, invalidation, consommation, restau
 
 Statut performance officiel :
 **intégration fonctionnelle C1 terminée sur le noyau Logos, coût session complète à confirmer.**
+
+
+## C2 — chaîne intégrée release → postAnalysis
+
+Ajout : `src/logos-engine/v6-operation-cycle.ts`.
+
+Chaîne désormais couverte dans le noyau Logos local :
+
+**besoin OP18 → exécution → admission/release → retour observé → OP29 → OP30 → OP31**
+
+Le même `needId` traverse toute la chaîne.
+
+Dispositions conservées :
+- OP29 = `information_only` ;
+- OP30 = `persisted_only` ;
+- OP31 = `information_only`.
+
+Cas négatifs :
+- aucun retour => aucun postAnalysis ;
+- release refusée => aucun postAnalysis.
+
+Typecheck strict : **OK**.
+Suite complète locale : **27/27 tests passent**.
+
+Commit local :
+- `357ad91` — cycle intégré ;
+- `1d3989b` — preuve documentée.
+
+Sauvegardes GitHub :
+- `ea4e49296b345c48ea93ed13123d3678a0a45a39` — cycle ;
+- `acfac799d2000a983f685fbd41fbc4e915e1b4e9` — tests cycle.
+
+Mesure isolée du cycle, 501 échantillons :
+- non tracé médian ~8,262 µs ;
+- tracé médian ~34,883 µs ;
+- surcoût absolu ~26,621 µs.
+
+Cette mesure n'est pas une session STCK/SMLP. Statut officiel :
+**intégration fonctionnelle C1/C2 terminée sur le noyau Logos ; coût session complète à confirmer.**
+
+### Feuille de route actualisée
+
+| Lot | État | Prochaine étape |
+| --- | --- | --- |
+| C0 | terminé | registre stable |
+| C1 | **fonctionnel sur noyau Logos, 27 tests** | raccorder au runtime/browser réel et mesurer session |
+| C2 | **chaîne 18/28→29/30/31 intégrée** | vérifier mêmes preuves sur scénarios runtime réels |
+| C3 | audit donneur complet | raccorder seulement besoins non couverts |
+| C4 | audit donneur complet | aucun appel sans consommateur |
+| C5 | audit donneur complet | préserver boucle informationnelle |
+| C6 | audit donneur complet | préserver inconnue vs impossibilité |
+| C7 | consolidation provisoire | benchmark consolidé et scénarios runtime réels |
