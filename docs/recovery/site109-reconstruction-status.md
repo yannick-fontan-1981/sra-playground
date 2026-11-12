@@ -35,6 +35,24 @@ Au minimum, les éléments historiquement utilisés par les lots doivent être r
 - les intégrations natives des entrées déjà publiées jusqu'à 70/76
 - les preuves fonctionnelles, campagnes, restauration et coûts nécessaires pour certifier la nouvelle baseline
 
+## Progression Lot 9 — reprise 9B
+
+Branche de reprise :
+`recovery/lot9b-region-intervention-restart-20261112`
+
+État vérifié :
+- l'ancienne branche `lot9b-github-recovery-20261112` ne contient que des documents et garde-fous de récupération ; aucun runtime Region historique n'y est récupéré ;
+- le noyau V6 reconstruit présent sur la baseline (operations, composition, authority, target-binding, cache, cycle, trace) a été exercé sur un checkout local matérialisé depuis GitHub : **27/27 tests ciblés passent** après compilation TypeScript ;
+- la tentative directe `node --test *.ts` a échoué avant exécution des tests à cause du Node local 22.16, inférieur au minimum repo >=22.18 ; cet échec est environnemental ;
+- aucun chemin `region_intervention`, `chart_navigation`, `joint_channels` ou `yf_arc3_v6` n'est présent dans l'arbre canonique inspecté ;
+- le donneur exact Region n'est donc pas reconstructible actuellement avec identité historique ;
+- aucun compteur historique 70/76 ou candidat 71/76 n'est promu au statut de la reconstruction actuelle.
+
+Statut Lot 9 :
+**noyau V6 reconstruit fonctionnellement qualifié dans le périmètre ciblé ; Region non récupéré ; performance officielle à confirmer.**
+
+La suite sûre est de récupérer une source/corpus Region exact et durable, ou de définir explicitement une nouvelle reconstruction comportementale distincte de l'ancien code avant toute qualification Region.
+
 ## Branches de récupération conservées
 
 Ne pas supprimer ni écraser :
