@@ -61,3 +61,41 @@ test('analysis operation never gains physical release authority from execution',
   assert.equal(outcome.releaseAllowed, false);
   assert.equal(outcome.operationAdmission, undefined);
 });
+
+
+test('OP14 admits release only when the focused composition preserves the declared constraint', () => {
+  const op14: CompositionBundle = {
+    ...bundle('OP18'),
+    operation_key: 'OP14',
+    kind: 'realize',
+    outcome_guard: { path: ['value'], contains: 'B' },
+  };
+  const preserving = state();
+  preserving.facts = { free: true, color: 'blue' };
+  preserving.compositions[1] = {
+    id: 'B',
+    requires: { free: true },
+    effect: { color: 'blue' },
+    observed: false,
+    open_question: 'preserve color',
+  };
+  Object.assign(preserving, { preserve: { color: 'blue' } });
+
+  const accepted = executeBundleOperation(op14, preserving, 1, {
+    needId: 'need-preserve',
+    caller: 'release',
+    decisionRef: 'release-preserve',
+  });
+  assert.equal(accepted.operationAdmission?.accepted, true);
+  assert.equal(accepted.releaseAllowed, true);
+
+  const violating = structuredClone(preserving);
+  violating.compositions[1]!.effect = { color: 'red' };
+  const rejected = executeBundleOperation(op14, violating, 1, {
+    needId: 'need-preserve-violation',
+    caller: 'release',
+    decisionRef: 'release-preserve-violation',
+  });
+  assert.equal(rejected.operationAdmission?.accepted, false);
+  assert.equal(rejected.releaseAllowed, false);
+});
