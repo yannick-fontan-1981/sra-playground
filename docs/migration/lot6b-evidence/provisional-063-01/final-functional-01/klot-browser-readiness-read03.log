@@ -1,0 +1,173 @@
+HARNESS_IMPORTS /** Real games stay in the outer host; SRA receives only browser-public packets. */
+import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
+import { readFile, readdir } from 'node:fs/promises';
+import { loadPyodide } from '../../public/vendor/pyodide/pyodide.mjs';
+import { BrowserV6Agent } from '../../src/runtime/v6-agent.ts';
+import { V6AgentService } from '../../src/runtime/v6-agent-service.ts';
+import { V6_REFERENCE_COMMIT, toV6PublicObservation } from '../../src/runtime/v6-agent-protocol.ts';
+import { createNativeV6Runtime, rawNativePreviewPacking, rawNativeSelectedRigid } from '../../src/logos-engine/v6-native-runtime.ts';
+import { capturePreviewPacking } from './capture-preview-packing.ts';
+import { captureSelectedRigid } from './capture-selected-rigid.ts';
+import { hydrateNativeState } from '../../src/logos-engine/v6-native-state-graph.ts';
+import type { NativeV6Declarations } from '../../src/logos-engine/v6-native-runtime.ts';
+import type { NativeCommand, NativePublicObservation } from '../../src/logos-engine/v6-native-types.ts';
+import type { GameObservation } from '../../src/runtime/browser-games.ts';
+import type { V6AgentResult, V6AgentTransport, V6PublicObservation } from '../../src/runtime/v6-agent-protocol.ts';
+import { installWindowQuestionCapture } from './v6-window-question-capture.ts';
+import type { WindowQuestionCapture } from './v6-window-question-capture.ts';
+
+type R = Record<string, any>;
+const ROOT = new URL('../../', import.meta.url);
+const COMPONENTS = ['goal', 'frontier', 'view', 'attention', 'points', 'displays', 'controls', 'counters'];
+const PUBLIC_KEYS = ['availableActionIds', 'frame', 'frames', 'level', 'levelsCompleted', 'state', 'stepIndex'];
+const hash = (data: string | Uint8Array): string => createHash('sha256').update(data).digest('hex');
+/** JSON otherwise turns -0 into 0; preserve the exact observed numeric payload. */
+function negativeZeroPaths(value: unknown, path: (string | number)[] = []): (string | number)[][] {
+  if (typeof value === 'number') return Object.is(value, -0) ? [path] : [];
+  if (Array.isArray(value)) return value.flatMap((item, index) => negativeZeroPaths(item, [...path, index]));
+  if (value && typeof value === 'object') return Object.entries(value).flatMap(([key, item]) => negativeZeroPaths(item, [...path, key]));
+  return [];
+}
+export interface NativeGameCampaignOptions {
+  gameCode: string;
+  targetLevels: number;
+  progress?: (event: R) => void;
+  /** Evidence sink only; returned values never enter the production agent. */
+  publicTrace?: (packet: NativePublicObservation, command: NativeCommand | null) => void;
+  /** Development diagnostics only, outside the production transport. */
+9: import { createNativeV6Runtime, rawNativePreviewPacking, rawNativeSelectedRigid } from '../../src/logos-engine/v6-native-runtime.ts';
+10: import { capturePreviewPacking } from './capture-preview-packing.ts';
+11: import { captureSelectedRigid } from './capture-selected-rigid.ts';
+12: import { hydrateNativeState } from '../../src/logos-engine/v6-native-state-graph.ts';
+13: import type { NativeV6Declarations } from '../../src/logos-engine/v6-native-runtime.ts';
+14: import type { NativeCommand, NativePublicObservation } from '../../src/logos-engine/v6-native-types.ts';
+15: import type { GameObservation } from '../../src/runtime/browser-games.ts';
+32: export interface NativeGameCampaignOptions {
+33:   gameCode: string;
+34:   targetLevels: number;
+35:   progress?: (event: R) => void;
+36:   /** Evidence sink only; returned values never enter the production agent. */
+37:   publicTrace?: (packet: NativePublicObservation, command: NativeCommand | null) => void;
+38:   /** Development diagnostics only, outside the production transport. */
+84: 
+85: /** Production time/action limits; no injected replay clock or Python solver. */
+86: export async function runNativeGameCampaign(options: NativeGameCampaignOptions): Promise<R> {
+87:   const { gameCode, targetLevels } = options;
+88:   assert.match(gameCode, /^[A-Z0-9]{4}$/);
+89:   assert.ok(Number.isInteger(targetLevels) && targetLevels >= 1 && targetLevels <= 100);
+90:   const started = performance.now(), sourceBefore = await nativeSourceManifest();
+90:   const started = performance.now(), sourceBefore = await nativeSourceManifest();
+91:   const report: R = {
+92:     schema: options.recordedPublic ? 'logos-engine.v6.recorded-public-regression.v1' : 'logos-engine.v6.integrated-game-campaign.v1', game: gameCode, targetLevels,
+93:     status: 'running', referenceCommit: V6_REFERENCE_COMMIT,
+94:     budget: { levelActionCaps: Array(targetLevels).fill(600), activeSecondsPerLevel: 360, clock: 'real active compute and native execution' },
+95:     source: sourceBefore, gameAssets: {}, actions: [], boundaries: [], prefixes: [], requests: [], domainAssessments: [],
+96:     baseline: null, pythonAgentModules: null, failure: null, inventorySourceCalls: [], recolorSourceCalls: [], workshopSourceCalls: [], symbolSourceCalls: [], symbolRestoreCalls: [], feedbackSourceCalls: [], relativeArrangementSourceCalls: [], facetExampleSourceCalls: [], facetExampleRestoreCalls: [], previewPackingEvents: [], motionSourceCalls: [], motionSnapshots: {}, morphologySourceCalls: [], controlAttentionSourceCalls: [],
+105:   let windowCapture: WindowQuestionCapture | undefined;
+106:   let previewOwner: R | undefined;
+107:   let selectedRigidOwner: R | undefined;
+108:   report.selectedRigidEvents = [];
+109:   let native: Awaited<ReturnType<typeof loadPyodide>> | undefined;
+110:   let agent: BrowserV6Agent | undefined, current: GameObservation | undefined;
+111:   let lastResponse: V6AgentResult | undefined, lastCycles = 0, previousActions = 0, previousSeconds = 0;
+349:         capturePreviewPacking(preview, report.previewPackingEvents);
+350:       }
+351:       const selectedRigidAdapter = (runtime as unknown as { families: R[] }).families.find(f => f.id === 'selected_rigid');
+352:       const selectedRigid = selectedRigidAdapter ? rawNativeSelectedRigid(selectedRigidAdapter as any) : null;
+353:       if (selectedRigid) {
+354:         selectedRigidOwner = selectedRigid;
+355:         report.selectedRigidCapture = captureSelectedRigid(selectedRigid, report.selectedRigidEvents);
+612:             .filter(fact => evidence.transitions.some((_: R, index: number) =>
+613:               fact.key === `preview_packing_event:${evidence.decision_revision + index}`));
+614:           const selectedRigidFacts = reasoningFacts
+615:             .filter(fact => evidence.transitions.some((_: R, index: number) =>
+616:               fact.key === `selected_rigid_event:${evidence.decision_revision + index}`));
+617:           const anchors = (series.events as R[]).filter(event => event.kind === 'coupled_pair_epoch_anchor');
+618:           const alternating = (series.events as R[]).filter(event => event.kind === 'alternating_graph_evidence');
+697:               qualification: 'Passive observation after the real selected return and restoration; no Preview passive acquisition or injected state.',
+698:             } } : {}),
+699:             ...(graph.nodes['family_state:selected_rigid'] ? { selectedRigid: {
+700:               stateNode: 'family_state:selected_rigid', state: read('family_state:selected_rigid'),
+701:               eventsThrough: report.selectedRigidEvents.length,
+702:               instanceSourceState: selectedRigidOwner?.sourceState() ?? null,
+703:               instanceContext: selectedRigidOwner?.captureContext() ?? null,
+703:               instanceContext: selectedRigidOwner?.captureContext() ?? null,
+704:               proposal: evidence.proposal.selected_rigid_plan ? evidence.proposal : null,
+705:               acquired: selectedRigidFacts.map(fact => ({ key: fact.key, evidence: fact.evidence, revision: fact.revision, result: fact.value })),
+706:               retainedSourceFact: reasoningFacts.find(fact => fact.key === 'selected_rigid_state') ?? null,
+707:               transitions: evidence.transitions,
+708:               qualification: 'Passive capture of the unique SelectedRigid owner after actual selected acquisition and restoration. A null selected return remains an observed call. Foreign returns never invoke record; an existing source journal is nevertheless checkpointed and restored. No state, proposal, command or clock value is injected.',
+709:             } } : {}),
+1023:         return { gameCode, frame: packet.frame_rows as number[][], frames: packet.frame_packet as number[][][],
+1024:           state: packet.state, availableActionIds: packet.available_action_refs.map(ref => Number(ref.slice(6))),
+1025:           canUndo: false, canSelectLevel: false, level: packet.level, levelCount: targetLevels,
+1026:           levelsCompleted: packet.levels_completed, defaultFps: 0 };
+1027:       }
+1028:       native!.globals.set('_native_game_request', JSON.stringify(request));
+1029:       let result: R;
+1041:       report.baseline.packetsCompared += 1;
+1042:     }
+1043:     agent = new BrowserV6Agent({ transport, targetLevels, actionsPerLevel: 600, getObservation: () => current!, canDispatch: () => true, onState: () => {},
+1044:       dispatch: async action => {
+1045:         assert.equal((lastResponse!.snapshot as R).whyAct.decision.decision.status, 'action_set_released');
+1046:         const command = { action_ref: `ACTION${action.id}`, data: action.id === 6 ? { ...action.data } : {} };
+1047:         const expected = baseline?.stream[report.actions.length];
+1067:       },
+1068:     });
+1069:     for (let level = 1; level <= targetLevels; level += 1) {
+1070:       await agent.run(600);
+1071:       const snapshot = agent.snapshot as R;
+1072:       assert.notEqual(snapshot.status, 'error', snapshot.message);
+1073:       assert.ok(current.levelsCompleted >= level, `Did not complete ${gameCode} level ${level}: ${snapshot.message}`);
+1075:       const graph = runtime!.inspectKnowledge();
+1076:       for (const component of COMPONENTS) assert.ok(graph.nodes[`caller:${component}`], `Missing authoritative caller:${component}`);
+1077:       assert.equal(snapshot.caller.boundaryReplays, Math.min(level, targetLevels - 1), 'Only boundaries before the target are replayed, as in the original caller');
+1078:       const boundary = { completedLevel: level, nativeLevel: current.level, levelsCompleted: current.levelsCompleted,
+1079:         levelActions: report.actions.length - previousActions, totalActions: report.actions.length,
+1080:         levelActiveSeconds: snapshot.activeSeconds - previousSeconds, activeSeconds: snapshot.activeSeconds,
+1081:         prefixCount: snapshot.cycles, graphChain: graph.chain, graphRevision: snapshot.graphRevision, nodeCount: snapshot.nodeCount,
+1083:       report.boundaries.push(boundary); progress({ phase: 'completed-level', ...boundary });
+1084:       previousActions = report.actions.length; previousSeconds = snapshot.activeSeconds;
+1085:       if (level < targetLevels) { assert.equal(snapshot.requiresNewSession, false); assert.equal(snapshot.canStep, true); }
+1086:     }
+1087:     assert.equal(agent.snapshot.actionCount, report.actions.length);
+1088:     assert.equal(agent.snapshot.actions, report.actions.length);
+1089:     assert.equal(operationCounts.advance, report.actions.length);
+WATCH_METADATA {"schema": "logos-engine.declared-functional-input-watch.v1", "nativeSourceDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886", "nativeFileCount": 322, "fileCount": 2952, "totalBytes": 222531810}
+WATCH_REQUIRED {"tests/helpers/v6-live-game-campaign.ts": true, "tests/helpers/capture-selected-rigid.ts": true, "tests/helpers/capture-preview-packing.ts": true, "tests/helpers/v6-window-question-capture.ts": true, "scripts/run-bounded-native-campaign-proof.py": true, "scripts/run-bounded-native-campaign.mjs": true, "scripts/compare-selected-rigid-public-parity.py": true, "scripts/export-v6-selected-rigid-reference.py": true, "scripts/verify-selected-rigid-presence.py": true, "scripts/tests/qualify-selected-rigid-cold-reader.py": true, "docs/migration/lot6b-evidence/run-case-command.py": true, "docs/migration/lot6b-evidence/case-clock.py": true, "docs/migration/lot6b-evidence/provisional-063-01/final-functional-execution-plan.md": true, "src/main.ts": true, "src/runtime/v6-agent.ts": true, "src/runtime/v6-agent-client.ts": true, "src/runtime/v6-agent-worker.ts": true}
+HOST_WATCH_PATHS ["public/vendor/pyodide/annotated_types-0.7.0-py3-none-any.whl", "public/vendor/pyodide/numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl", "public/vendor/pyodide/package.json", "public/vendor/pyodide/pydantic-2.12.5-py3-none-any.whl", "public/vendor/pyodide/pydantic_core-2.41.5-cp314-cp314-pyemscripten_2026_0_wasm32.whl", "public/vendor/pyodide/pyodide-lock.json", "public/vendor/pyodide/pyodide.asm.mjs", "public/vendor/pyodide/pyodide.asm.wasm", "public/vendor/pyodide/pyodide.mjs", "public/vendor/pyodide/python_stdlib.zip", "public/vendor/pyodide/typing_extensions-4.15.0-py3-none-any.whl", "public/vendor/pyodide/typing_inspection-0.4.2-py3-none-any.whl", "src/runtime/browser-games.ts", "tests/helpers/v6-live-game-campaign.ts"]
+ORIGINAL_WATCH_COUNT 1786
+BROWSER_BOUNDARY_HANDLING 338:         this.phase = 'observing'; this.state('thinking', 'V6 is acquiring the real outcome and continuing its committed prefix…');
+339:         // Even a Pause must acquire an action that has already entered the game.
+340:         // Invalidation, unlike Pause, closes this observation's entire session.
+341:         if (!this.stillCurrent(epoch)) return;
+342:         const acquired = await this.request({ type: 'advance', sessionId, sequence: this.sequence, ticketId: pending.ticket!.id, observation: after, executionMs }, epoch);
+343:         if (!acquired) return;
+344:         const progressed = next.levelsCompleted > expected.levelsCompleted || next.level > expected.level;
+345:         if (isTerminalState(next.state)) {
+346:           this.state('stopped', `The game reports ${next.state}. Its final public outcome has been acquired.`);
+347:           return;
+348:         }
+349:         if (progressed) {
+350:           if (acquired.kind === 'stopped') this.finish(acquired.reason);
+351:           else this.state('paused', 'Level completed. V6 acquired the outcome and retained its transfer memory. Continue when ready.');
+352:           return;
+353:         }
+354:         if (acquired.kind === 'stopped') { this.finish(acquired.reason); return; }
+355:       }
+356:       if (!this.stillCurrent(epoch)) return;
+357:       if (this.pending?.kind === 'stopped') { this.finish(this.pending.reason); return; }
+358:       this.state('paused', this.stopRequested ? 'Paused. The current V6 prefix, pending command and acquired evidence are retained.'
+359:         : maxActions === 1 ? 'One action completed. Continue the same V6 plan when ready.'
+360:           : `Batch limit reached: ${applied} actions. The V6 plan and memory are retained.`);
+361:     } catch (error) {
+362:       if (!this.stillCurrent(epoch)) return;
+363:       if (error instanceof V6AgentError && error.snapshot) {
+364:         try { this.knowledge = copiedSnapshot(error.snapshot); } catch { /* Retain the last valid state. */ }
+365:       }
+366:       this.requiresNewSession = true;
+367:       const message = error instanceof Error ? error.message : String(error);
+368:       this.state('error', `${message} Start a new reasoning session to continue.`);
+369:     }
+PREVIEW_METADATA_NAMES ["docs/migration/lot6b-evidence/source-opening/sites-open-result.json"]

@@ -1,0 +1,101 @@
+{
+  "schema": "logos-engine.actual-command-execution.v1",
+  "status": "passed",
+  "command": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=5s",
+    "60s",
+    "python",
+    "-B",
+    "-c",
+    "import pathlib,json,hashlib,shutil,os,subprocess,datetime\nroot=pathlib.Path.cwd();out=pathlib.Path('docs/migration/lot6b-evidence/provisional-063-01/runtime-cache-materialization-01')\nalias=root/'public/vendor/pyodide';source=alias.resolve(strict=True);target=root/'.openai/lot6b-runtime-cache/pyodide'\nassert alias.is_symlink() and not source.is_relative_to(root)\nassert not target.exists()\nwatch=json.loads((out/'source-watch.json').read_text())['files']\nbefore={str(p.relative_to(source)):hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(source.rglob('*')) if p.is_file()}\nassert before and all(str(source/n) in watch for n in before)\nignored=subprocess.run(['git','check-ignore','--quiet','.openai/lot6b-runtime-cache/pyodide/pyodide.mjs']).returncode==0\nif not ignored:\n exclude=pathlib.Path(subprocess.check_output(['git','rev-parse','--git-path','info/exclude'],text=True).strip())\n previous=exclude.read_text() if exclude.exists() else ''\n pattern='/.openai/lot6b-runtime-cache/'\n if pattern not in previous.splitlines():\n  with exclude.open('a') as s:s.write(('' if not previous or previous.endswith('\\n') else '\\n')+pattern+'\\n')\ntarget.parent.mkdir(parents=True,exist_ok=True);shutil.copytree(source,target,symlinks=False)\nafter={str(p.relative_to(target)):hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(target.rglob('*')) if p.is_file()}\nassert before==after\nassert all(hashlib.sha256((source/n).read_bytes()).hexdigest()==h for n,h in before.items())\ntemp=alias.with_name('.pyodide-lot6b-materialization-link');assert not temp.exists() and not temp.is_symlink()\ntemp.symlink_to(os.path.relpath(target,alias.parent),target_is_directory=True);os.replace(temp,alias)\nassert alias.resolve()==target and target.is_relative_to(root)\nassert all(hashlib.sha256((alias/n).read_bytes()).hexdigest()==h for n,h in before.items())\nresult={'schema':'logos-engine.lot6b.local-runtime-materialization.v1','status':'identical_bytes_materialized','recordedAt':datetime.datetime.now(datetime.timezone.utc).isoformat(),'publicAlias':'public/vendor/pyodide','previousTarget':str(source),'currentTarget':str(target.relative_to(root)),'files':before,'fileCount':len(before),'bytes':sum((target/n).stat().st_size for n in before),'sourceBytesUnchanged':True,'destinationBytesEqual':True,'aliasReplacedAtomically':True,'nativeFilesChanged':False,'assetsImportedOrInterpreted':False,'qualification':'Only cached runtime asset location changes. The original external cache remains untouched; all bytes and public paths are retained. No case wrapper guard was changed and no game executed.'}\nwith (out/'result.json').open('x') as s:json.dump(result,s,indent=2);s.write('\\n')\nprint(json.dumps({k:v for k,v in result.items() if k!='files'}))\n"
+  ],
+  "startedAt": "2026-11-11T19:32:44.352707+00:00",
+  "finishedAt": "2026-11-11T19:32:44.612926+00:00",
+  "elapsedSeconds": 0.241876678999688,
+  "exitCode": 0,
+  "inputs": [
+    {
+      "path": "docs/migration/lot6b-evidence/record-command.py",
+      "bytes": 3056,
+      "sha256": "da05ed5bfb355afc29a9d20e79e19e51e695f39781ece9068ce0ba0e14b7d420"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/runtime-cache-materialization-01/source-watch.json",
+      "bytes": 2577,
+      "sha256": "197ad99186145e3e170ec851af1b984a93b893ff4983721f61b042ad73fb6784"
+    },
+    {
+      "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/annotated_types-0.7.0-py3-none-any.whl",
+      "bytes": 11963,
+      "sha256": "6541523b4b16c1953d2fc9b82fb86c540eea9f78fca329ab371ed13a8b0faa51"
+    },
+    {
+      "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+      "bytes": 2960568,
+      "sha256": "a292c1f5d7d8a2208cd5e94fc467604c131cabcd2fc14fed6eefde121e7fabdf"
+    },
+    {
+      "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/package.json",
+      "bytes": 2999,
+      "sha256": "40ca48e43ce4ddc68412d5b7a7ca9e2477cd4f0e672277ae468ac2245717079b"
+    },
+    {
+      "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pydantic-2.12.5-py3-none-any.whl",
+      "bytes": 463578,
+      "sha256": "04854875001e07a8a74d87b7c80296cba168773d8c9804e232d695f82484d7d7"
+    },
+    {
+      "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pydantic_core-2.41.5-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+      "bytes": 1310164,
+      "sha256": "54703fa42a0d4d574283cfb8f08050ba7820c9a42b0a21bc1286407d9a9e54da"
+    },
+    {
+      "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pyodide-lock.json",
+      "bytes": 119077,
+      "sha256": "5dc2fc119108bc148c7457dc86e7675b5c87e1cafd420b9c34c1eaef7b36c010"
+    },
+    {
+      "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pyodide.asm.mjs",
+      "bytes": 1250344,
+      "sha256": "f7cdc8ece80678ceb712f8e65ebe6d3a83203a180c399865f49612a051693635"
+    },
+    {
+      "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pyodide.asm.wasm",
+      "bytes": 9598218,
+      "sha256": "cc36e3cab04fdfc9a63ff13eb52eae2b911bf46c025cc7b281f394bd3de1d5e6"
+    },
+    {
+      "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/pyodide.mjs",
+      "bytes": 17931,
+      "sha256": "6f1d60f7bf529beb300f0f47983c921d3982363640ba20af0e38efdddbc66109"
+    },
+    {
+      "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/python_stdlib.zip",
+      "bytes": 2545637,
+      "sha256": "fa1957e5777068fc4f7437f96d860ae2fbe9c19732ba06c84e004ec16dd7dd7a"
+    },
+    {
+      "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/typing_extensions-4.15.0-py3-none-any.whl",
+      "bytes": 44613,
+      "sha256": "4fec68770a05408e668a4fa53d6bf4f0f684b9dacf820c7c5d6e97d3ad225e29"
+    },
+    {
+      "path": "/workspace/sites/sra-lot6a-recovery-20261111/.sites-checkout/public/vendor/pyodide/typing_inspection-0.4.2-py3-none-any.whl",
+      "bytes": 14610,
+      "sha256": "deb989630985f7a7296b90357a947a804a7612cecbb6439d6e71128e01f61051"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/functional-watch-attempt02.json",
+      "bytes": 483176,
+      "sha256": "b977dfc6d08741fdd6ec2155cbde7e83fb848d24c3bd1458795db9a9873232dd"
+    }
+  ],
+  "inputsUnchanged": true,
+  "output": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/runtime-cache-materialization-01/execution.log.gz",
+    "bytes": 466,
+    "sha256": "1613f08bd6f37db6696c40f7ea2934f79353f939b35f0362c9c70fc647ec6e1e"
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "schema": "logos-engine.lot8a.actual-published064-observation.v1",
+  "observedAt": "2026-11-12T01:06:29.132Z",
+  "site": {
+    "id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "title": "SRA Playground",
+    "description": "Explore symbolic reasoning through interactive games. Play manually in your browser, with the SRA browser runtime to follow.",
+    "slug": "sra-playground",
+    "status": "active",
+    "auth_client_id": "oaiapp_e799c9f79b36eabaf6e114b5ecec618960f1d2e1a5c0b792ebe8019244bf6e6e",
+    "latest_version_number": 105,
+    "current_preview_url": null,
+    "current_live_url": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "disabled_by": null,
+    "created_at": "2026-10-23T20:28:57.733337+00:00",
+    "updated_at": "2026-11-11T22:55:09.470943+00:00",
+    "latest_edit_context": {
+      "chatgpt_conversation_id": "6af4821f-d598-83e9-bc78-9245f45911fc",
+      "codex_thread_id": "6af4822f-ac70-8191-9420-503b42e8800d"
+    },
+    "expected_url": null,
+    "attached_page_id": null,
+    "current_user_role": "owner",
+    "access_mode": "custom",
+    "access_policy": {
+      "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+      "access_mode": "custom",
+      "allowed_account_user_ids": [
+        "3661d9ac-259d-4929-9330-7252c4ade156"
+      ],
+      "external_visitor_count": 0,
+      "allowed_users": [
+        {
+          "account_user_id": "3661d9ac-259d-4929-9330-7252c4ade156",
+          "email": "yannickfontan@gmail.com",
+          "name": "Yannick Fontan",
+          "avatar_url": null,
+          "role": "owner"
+        }
+      ],
+      "allowed_groups": [],
+      "allowed_workspace_group_ids": [],
+      "allowed_tenant_group_ids": [],
+      "revision": 3,
+      "updated_at": "2026-11-02T14:06:30.480596+00:00",
+      "allowed_editors": []
+    },
+    "available_access_modes": [
+      "custom",
+      "public"
+    ],
+    "external_visitor_invites_enabled": true,
+    "remix_enabled": true,
+    "schedule_request_id": "2026-11-12:5b64d509f50e3b527c42ae6ce90c0149",
+    "automations": [],
+    "requires_byop": false
+  },
+  "version": {
+    "id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_f6b1af8682948191957125a79a3fa1dc",
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "version_number": 105,
+    "source": {
+      "commit_sha": "deb9ebbbb06a8a35940b2e8f3fefdbed690ce772"
+    },
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_000000009704820e980370fec21515dd",
+      "content_hash": "sha256:2e30043ff7cef48400aee180f2da5b49f51b33c9c697286e0d54fe82b3345c9c",
+      "size_bytes": 30095360,
+      "file_count": 75
+    },
+    "deployment_id": "appgdep_6af4f20ec6708191b6e2a0ac387f5c2c"
+  },
+  "deployment": {
+    "id": "appgdep_6af4f20ec6708191b6e2a0ac387f5c2c",
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "title": "SRA Playground",
+    "version_id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_f6b1af8682948191957125a79a3fa1dc",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": "sediment://file_0000000036e081f8ae5a1d389e6258f1",
+    "provider_deployment_id": "site---6adbc388d79081918581b93b919d7258",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-11-11T22:54:24.057532+00:00"
+  },
+  "sourceOpening": {
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "checkout_path": "/workspace/sites/sra-lot8a-publish065-20261111/.sites-checkout",
+    "commit_sha": "deb9ebbbb06a8a35940b2e8f3fefdbed690ce772"
+  }
+}

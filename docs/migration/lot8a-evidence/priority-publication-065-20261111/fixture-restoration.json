@@ -1,0 +1,91 @@
+{
+  "schema": "logos-engine.lot8a.priority065-fixture-restoration.v1",
+  "recordedAt": "2026-11-12T01:08:18.254644+00:00",
+  "sourceCommit": "c58d82e0da5f0eed6b9ffa8e60f46727514b42d0",
+  "scope": "Opaque concatenation of three ignored fixture files from tracked exact-byte parts; no decoding or execution.",
+  "nativeExecutions": 0,
+  "testExecutions": 0,
+  "oracleExecutions": 0,
+  "gameExecutions": 0,
+  "files": [
+    {
+      "output": {
+        "path": "tests/fixtures/v6-feedback-sequences-reference.json.gz",
+        "bytes": 1032946,
+        "sha256": "d1bf31b8fbf899aa9d85baa5fdaf9549b7c6f6a786fab43d7ac9f88af3231b6d"
+      },
+      "partsManifest": {
+        "path": "tests/fixtures/v6-feedback-sequences-reference.json.gz.parts.json",
+        "bytes": 727,
+        "sha256": "a6d353cf9a13e583498c56b94da769b843af22f203289ebfe6a955fae7425f0b"
+      },
+      "parts": [
+        {
+          "path": "tests/fixtures/v6-feedback-sequences-reference.json.gz.part000",
+          "bytes": 900000,
+          "sha256": "df621f5beaabd752efc8576eb269bd773e39bff3cd34b8388a23f120144dca08"
+        },
+        {
+          "path": "tests/fixtures/v6-feedback-sequences-reference.json.gz.part001",
+          "bytes": 132946,
+          "sha256": "e610682240f1221de0fa5324ff28bf639012ea80756d851af758ea45c30da6b1"
+        }
+      ],
+      "matchesFrozenSourceTestInput": true,
+      "createdWithoutOverwrite": true
+    },
+    {
+      "output": {
+        "path": "tests/fixtures/v6-outline-service-reference.json.gz",
+        "bytes": 1211188,
+        "sha256": "50ce0fdf885f79c66a168b25e4327e3f97b538d49924170da6a49ede7af1685b"
+      },
+      "partsManifest": {
+        "path": "tests/fixtures/v6-outline-service-reference.json.gz.parts.json",
+        "bytes": 718,
+        "sha256": "337cfbef162b5f8ac9822dc294b4b5a5bc8b733a05c010cb089d94d3e6fea4b1"
+      },
+      "parts": [
+        {
+          "path": "tests/fixtures/v6-outline-service-reference.json.gz.part000",
+          "bytes": 900000,
+          "sha256": "8501764909a6e9707c57747871cfc1bed489f97695734baf9e7cc7c40adad892"
+        },
+        {
+          "path": "tests/fixtures/v6-outline-service-reference.json.gz.part001",
+          "bytes": 311188,
+          "sha256": "6e67f36ffd39316ca5a553d071ba4b3c0d84eb70b5a86ab83fd3ff8028764a65"
+        }
+      ],
+      "matchesFrozenSourceTestInput": true,
+      "createdWithoutOverwrite": true
+    },
+    {
+      "output": {
+        "path": "tests/fixtures/v6-relative-arrangements-reference.json.gz",
+        "bytes": 1099570,
+        "sha256": "fa52436d34ee32e7fcf4e30f67122c5bede6823d0ff2cb34980cdc4885c3f933"
+      },
+      "partsManifest": {
+        "path": "tests/fixtures/v6-relative-arrangements-reference.json.gz.parts.json",
+        "bytes": 736,
+        "sha256": "8143217aa3cd4398e74d6fa85698f40f3afadfc96eddd9118d2af80f780ee28f"
+      },
+      "parts": [
+        {
+          "path": "tests/fixtures/v6-relative-arrangements-reference.json.gz.part000",
+          "bytes": 900000,
+          "sha256": "32120859b8da92edde3c1668345cf3ebeb6b183959e8f61da34c093aa64db519"
+        },
+        {
+          "path": "tests/fixtures/v6-relative-arrangements-reference.json.gz.part001",
+          "bytes": 199570,
+          "sha256": "f2b55c493b9d18600e7a7edbc7eac363fb1c6fa4f7c04ae7055affee3b2a3f5f"
+        }
+      ],
+      "matchesFrozenSourceTestInput": true,
+      "createdWithoutOverwrite": true
+    }
+  ],
+  "status": "passed"
+}

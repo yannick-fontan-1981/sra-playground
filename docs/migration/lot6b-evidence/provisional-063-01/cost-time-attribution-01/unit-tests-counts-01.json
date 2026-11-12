@@ -1,0 +1,18 @@
+{
+  "schema": "logos-engine.lot6b-trace-created-unit-count-check.v1",
+  "checkedAt": "2026-11-11T19:22:45.049334+00:00",
+  "status": "unit_execution_or_exact_count_failed",
+  "counts": {
+    "tests": null,
+    "pass": null,
+    "fail": null,
+    "cancelled": null,
+    "skipped": null,
+    "todo": null
+  },
+  "driverExitCode": 0,
+  "executionReceipt": "docs/migration/lot6b-evidence/provisional-063-01/cost-time-attribution-01/unit-tests-execution-01.json",
+  "inputsUnchanged": true,
+  "qualificationExecuted": false,
+  "automaticNextCommand": false
+}

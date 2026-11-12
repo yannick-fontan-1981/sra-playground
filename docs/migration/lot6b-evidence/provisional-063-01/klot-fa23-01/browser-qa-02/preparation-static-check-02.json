@@ -1,0 +1,37 @@
+{
+  "schema": "logos-engine.lot6b-browser-qa-static-preparation-check.v2",
+  "recordedAt": "2026-11-11T20:09:22.418844+00:00",
+  "status": "ready_for_root_source_review_not_executed",
+  "helper": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/hold-managed-preview.py",
+    "bytes": 13477,
+    "sha256": "56f3b263f3199778b359252aa43994c496df14d261cd012ba96c047f83183541"
+  },
+  "declaration": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/execution-declaration.json",
+    "bytes": 5983,
+    "sha256": "0e976fbb6e86fa4124b4aa0c9836baa00dc0693e223a818198dcc08d6fe4e669"
+  },
+  "plan": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/plan.md",
+    "bytes": 6497,
+    "sha256": "3c26d0ffa35aab36ab0818099f8c55da5cc3e2212d2b843ee26cb3dee59cdce6"
+  },
+  "watch": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/browser-watch.json",
+    "bytes": 492742,
+    "sha256": "d26a752f59fb1b638a39f121489c872f35723e3d0882a3dfbda359e242747ff2"
+  },
+  "helperAstParsedWithoutImport": true,
+  "parentEntries": 3005,
+  "browserEntries": 3009,
+  "parentPinsChanged": [],
+  "readiness": "A complete returned URL line with own lease process alive; no exit0 wait.",
+  "cleanup": "Bounded daemon stop; own Popen wait10/terminate5/kill5 only; actual status is checked afterward even if lease reaping fails.",
+  "uiProof": "Actual root CUA closure plus operator marker; controlled lease termination is not UI success.",
+  "runtimeOrCliExecuted": false,
+  "browserOpened": false,
+  "caseClockContentsRead": false,
+  "priorExecutionReceiptsRead": false,
+  "qa01Modified": false
+}

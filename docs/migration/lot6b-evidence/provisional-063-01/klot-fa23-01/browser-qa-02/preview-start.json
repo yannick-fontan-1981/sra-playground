@@ -1,0 +1,24 @@
+{
+  "argv": [
+    "sites-preview",
+    "start",
+    "/workspace/sites/sra-lot6b-20261111/.sites-checkout"
+  ],
+  "pid": 11,
+  "pidKind": "our sites-preview CLI lease process only",
+  "exitCode": null,
+  "liveAtUrlObservation": true,
+  "stdout": "Sites preview running at http://127.0.0.1:4173/\n",
+  "stderr": "",
+  "observedUrls": [
+    "http://127.0.0.1:4173/"
+  ],
+  "timedOut": false,
+  "startedAt": "2026-11-11T20:10:57.675006+00:00",
+  "urlObservationAt": "2026-11-11T20:10:58.779022+00:00",
+  "elapsedSeconds": 1.104026396998961,
+  "urlWaitLimitSeconds": 60,
+  "stdoutFile": "preview-start.stdout.log",
+  "stderrFile": "preview-start.stderr.log",
+  "exitZeroRequiredAtReady": false
+}

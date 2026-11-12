@@ -1,0 +1,24 @@
+{
+  "schema": "logos-engine.lot6b.bounded-readback-display.v1",
+  "status": "passed",
+  "startedAt": "2026-11-11T19:46:34.638614+00:00",
+  "finishedAt": "2026-11-11T19:46:34.676035+00:00",
+  "elapsedSeconds": 0.03741596100007882,
+  "maximumShellSeconds": 30,
+  "input": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/capture-readback.json",
+    "sha256": "03e3aec41729ecf81b3497fbe699fadac5d4e18433e53d7298f66a6efff58a59"
+  },
+  "failure": null,
+  "clockCloseExitCode": 0,
+  "chargedInterval": {
+    "label": "klot-fa23-display-capture-readback",
+    "startedAt": "2026-11-11T19:46:34.634647+00:00",
+    "startedMonotonic": 28839.102432066,
+    "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+    "finishedAt": "2026-11-11T19:46:34.670256+00:00",
+    "elapsedSeconds": 0.03558868799882475
+  },
+  "chargedSeconds": 465.95319000200567,
+  "remainingSeconds": 1934.0468099979944
+}

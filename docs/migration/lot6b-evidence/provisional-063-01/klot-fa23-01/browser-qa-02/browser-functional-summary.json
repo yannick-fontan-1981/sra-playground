@@ -1,0 +1,166 @@
+{
+  "schema": "logos-engine.lot6b-browser-functional-qa.v1",
+  "status": "passed_bounded_three_levels_and_startup_pause_resume",
+  "recordedAt": "2026-11-11T20:19:50.009466+00:00",
+  "nativeDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+  "nativeFiles": 322,
+  "urlAtStart": "http://127.0.0.1:4173/?game=KLOT&level=1",
+  "finalObservedUrl": "http://127.0.0.1:4173/?game=KLOT&level=4",
+  "coldStart": {
+    "level": 1,
+    "actions": 0,
+    "levelsSolved": 0,
+    "plansCompleted": 0,
+    "newTabId": "7",
+    "noImportedLearnedState": true
+  },
+  "observedStates": {
+    "paused-state.txt": {
+      "observedAt": "2026-11-11T20:15:11.006Z",
+      "counts": [
+        0,
+        0,
+        0
+      ],
+      "paused": true,
+      "levelCompleted": false
+    },
+    "progress-01.txt": {
+      "observedAt": "2026-11-11T20:15:44.099Z",
+      "counts": [
+        12,
+        1,
+        10
+      ],
+      "paused": false,
+      "levelCompleted": true
+    },
+    "level-02-completed.txt": {
+      "observedAt": "2026-11-11T20:16:41.356Z",
+      "counts": [
+        24,
+        2,
+        18
+      ],
+      "paused": false,
+      "levelCompleted": true
+    },
+    "level-03-completed.txt": {
+      "observedAt": "2026-11-11T20:17:24.682Z",
+      "counts": [
+        38,
+        3,
+        30
+      ],
+      "paused": false,
+      "levelCompleted": true
+    }
+  },
+  "final": {
+    "levelsSolved": 3,
+    "actions": 38,
+    "plansCompleted": 30
+  },
+  "pauseResume": {
+    "requestedWhile": "Preparing the agent",
+    "intermediateMessage": "Pausing at the next V6 action boundary. The current computation will finish safely…",
+    "firstPausedObservationAt": "2026-11-11T20:14:54.732Z",
+    "firstPausedActions": 0,
+    "secondPausedObservationFile": "cua-evidence/paused-state.txt",
+    "secondPausedActions": 0,
+    "resumeControl": "Run to next level",
+    "actionsAfterResumeObserved": 1,
+    "passed": true,
+    "scope": "Startup/action-boundary pause followed by resume; no claim that a synchronous in-flight search was preempted."
+  },
+  "closure": {
+    "actualTabAbsentFromSubsequentInventory": true,
+    "previewStoppedObserved": true,
+    "commandTerminalExitCode": 0,
+    "childProcessGroupReaped": true,
+    "orphanProcessGroupTerminated": false,
+    "operatorClosureSeconds": 418.475255,
+    "operatorClosureDeadlineSeconds": 480,
+    "outerLimitSeconds": 600,
+    "wrapperElapsedSeconds": 418.63388213800135,
+    "inputsUnchanged": true
+  },
+  "planningTarget": {
+    "seconds": 360,
+    "actualWrapperSeconds": 418.63388213800135,
+    "exceeded": true,
+    "overrunSeconds": 58.633882138001354,
+    "qualification": "The entire preview interval, including context continuation and human-visible tool interaction, was charged. The 360-second target was exceeded; closure stayed below 480 seconds and the 600-second outer bound."
+  },
+  "retainedIncidents": [
+    {
+      "kind": "full_page_screenshot_timeout",
+      "observed": "Page.captureScreenshot timed out",
+      "consequence": "The attempted full-page screenshot was not created; later viewport screenshots were successfully retained."
+    },
+    {
+      "kind": "bounded_waits_for_level_completed",
+      "observed": "Two waitFor calls reached their selector deadline before the next observed completion",
+      "consequence": "Subsequent UI observations showed completion; these waits are not game failures or successful observations."
+    },
+    {
+      "kind": "asynchronous_tab_close",
+      "observed": "The first inventory immediately after close still included tab7; the next inventory contained only tab2 about:blank",
+      "firstReceipt": "cua-evidence/tab-closure.json",
+      "confirmedReceipt": "tab-closure-confirmed.json"
+    }
+  ],
+  "qualifications": [
+    "Real managed Vite development UI and its TypeScript worker were exercised. This is not a browser test of the separate production dist bundle.",
+    "Three completed levels are a bounded functional reference, not completion of the whole game.",
+    "No hidden game engine or level data were inspected for actions.",
+    "No official performance measurement or publication was performed."
+  ],
+  "evidence": [
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/cua-evidence/board-progress.png",
+      "sha256": "0445bb98125882ce62b9741e924f58584a4530761d9e056ad5f9e3d78bc7cd2a",
+      "bytes": 67626
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/cua-evidence/level-02-completed.txt",
+      "sha256": "4558473e0be3cc7e5fba16e01c292d961e25161e4ebabe411b7d41d75d9f7653",
+      "bytes": 10078
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/cua-evidence/level-03-completed.txt",
+      "sha256": "47e13cc8ce64296a201dece474043cb0a1fb90f08c8da5772cc281438c438e50",
+      "bytes": 10078
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/cua-evidence/paused-state.txt",
+      "sha256": "20dba6856eccbeaae32ae4ece1e1f59d39ac70ab0816508bb5286d5f96eea93f",
+      "bytes": 10067
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/cua-evidence/progress-01.txt",
+      "sha256": "2ca1b5fc751f7969e1b7809bdb8d3eb15392cdd616593a1c30bd45076727d5da",
+      "bytes": 10078
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/cua-evidence/running.png",
+      "sha256": "899b791ba922e2b58db15b21a7f964cb02b0eb21da9024cfcbaf858c4e78fcad",
+      "bytes": 97864
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/cua-evidence/tab-closure.json",
+      "sha256": "67680c0e0b0aa8d8222e0a5b7dffd15a832cb8ec83c59c3ddc8459e06c149cda",
+      "bytes": 278
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/cua-evidence/three-levels-completed.png",
+      "sha256": "118d95dd1ca3080d5ed2ca89d4e8bd9fd9052605ebdec65a178d85c93d16cba2",
+      "bytes": 71263
+    }
+  ],
+  "caseClockAtWrapperClosure": {
+    "chargedSeconds": 1191.1717407970073,
+    "remainingSeconds": 1208.8282592029927,
+    "readbackWillBeSeparatelyCharged": true
+  }
+}

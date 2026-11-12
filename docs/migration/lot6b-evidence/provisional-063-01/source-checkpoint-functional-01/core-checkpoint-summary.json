@@ -1,0 +1,92 @@
+{
+  "schema": "logos-engine.lot6b.functional-checkpoint-summary.v1",
+  "status": "seven_source_bins_remotely_verified",
+  "recordedAt": "2026-11-11T20:51:49.609783+00:00",
+  "baseCommit": "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+  "commit": "17d6c1aa3532e4ff74a98a309e4dfb9c3bc4fb59",
+  "branch": "lot6b-selected-rigid-checkpoint-20261111",
+  "remoteVerified": true,
+  "bins": [
+    {
+      "bin": "bin-01",
+      "parent": "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+      "commit": "004e654875978239c6499773f3225958bc9c3a82",
+      "files": 4,
+      "rawBytes": 25165811,
+      "verificationReceipt": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/bin-01-push.json",
+      "verificationReceiptSha256": "2c3d3bba75b4484270be34559fdf216cbb70a5ab1b6f4e54708001cb0b393f97"
+    },
+    {
+      "bin": "bin-02",
+      "parent": "004e654875978239c6499773f3225958bc9c3a82",
+      "commit": "d93e56d33ced20c19cd90e17f1e52520d77ecfef",
+      "files": 7,
+      "rawBytes": 25165748,
+      "verificationReceipt": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/bin-02-push.json",
+      "verificationReceiptSha256": "0be7a3ca01403aaee35c106fac1033de8e51fb980f51a5866cddaa211377ee5a"
+    },
+    {
+      "bin": "bin-03",
+      "parent": "d93e56d33ced20c19cd90e17f1e52520d77ecfef",
+      "commit": "9c87ec460406fd3723b8781e6fc5f01db978a899",
+      "files": 5,
+      "rawBytes": 25165804,
+      "verificationReceipt": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/bin-03-push.json",
+      "verificationReceiptSha256": "29d204b5edb8010899d9589192b86b40b387b62e713504334870e031826522a6"
+    },
+    {
+      "bin": "bin-04",
+      "parent": "9c87ec460406fd3723b8781e6fc5f01db978a899",
+      "commit": "802dc1a60ea58cbdc095deb25bc2b4ba22e032e6",
+      "files": 7,
+      "rawBytes": 25165817,
+      "verificationReceipt": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/bin-04-push.json",
+      "verificationReceiptSha256": "4c31b2ad916b87599b27abbb6b069c197f46c51aab01461f5098d9376c44273d"
+    },
+    {
+      "bin": "bin-05",
+      "parent": "802dc1a60ea58cbdc095deb25bc2b4ba22e032e6",
+      "commit": "775e4c33740b4065fda0fa9f69cdf875962b6e3c",
+      "files": 10,
+      "rawBytes": 25165783,
+      "verificationReceipt": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/bin-05-push.json",
+      "verificationReceiptSha256": "ec1e5b48d1d39a06b73c1eeb6ee26e6de3d263194ce1933504c87f334fa58917"
+    },
+    {
+      "bin": "bin-06",
+      "parent": "775e4c33740b4065fda0fa9f69cdf875962b6e3c",
+      "commit": "061976486a32626ec044dcd1546d7e6185e63c88",
+      "files": 58,
+      "rawBytes": 25165805,
+      "verificationReceipt": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/bin-06-push.json",
+      "verificationReceiptSha256": "83ece74254ffd3cf9471c8b7dfe213d6d7b03b1963211bd36b30c541d1426ddd"
+    },
+    {
+      "bin": "bin-07",
+      "parent": "061976486a32626ec044dcd1546d7e6185e63c88",
+      "commit": "17d6c1aa3532e4ff74a98a309e4dfb9c3bc4fb59",
+      "files": 265,
+      "rawBytes": 3059317,
+      "verificationReceipt": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/bin-07-push.json",
+      "verificationReceiptSha256": "844886a96f3924f5210a39a33de54832e5ddf9ae0db1fcd4eda1b11c98c7af83"
+    }
+  ],
+  "fileCount": 356,
+  "totalRawBytes": 154054085,
+  "maximumRawBytesPerBin": 25165817,
+  "allPlannedFilesStillMatch": true,
+  "exactGitChangedPathSet": true,
+  "nativeSourceChangedSinceValidatedBase": false,
+  "validatedNativeDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+  "validatedNativeFileCount": 322,
+  "retainedTransportFailure": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/bin-02-commit.json",
+  "failureScope": "check-ignore incompatibility refused before staging; explicit attempt02 succeeded with unchanged planned files.",
+  "pendingSmallClosure": [
+    "QA0237files and final cumulative clock",
+    "Three summary documents",
+    "Transport/release/publication metadata"
+  ],
+  "costOfficiallyMeasured": false,
+  "sitePublished": false,
+  "qualification": "Private source checkpoint, not a Site deployment. Core proofs and five cost helpers are preserved; the named small closure is separate. No KLOT payload interpreted during this opaque-byte verification."
+}

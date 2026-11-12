@@ -1,0 +1,126 @@
+{
+  "schema": "logos-engine.lot6b.released-baseline-source-integration.v1",
+  "recordedAt": "2026-11-11T19:39:09.332458+00:00",
+  "sourceCommit": "501198d7638c7a56c3b85d357beb917469899402",
+  "provenanceReview": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/vois-memory-review.json",
+  "scripts": [
+    {
+      "path": "scripts/run-released-public-regressions-streamlog.py",
+      "gitCommit": "501198d7638c7a56c3b85d357beb917469899402",
+      "gitBlob": "440af2d9034748c4afff715f8427df41654ef1df",
+      "sha256": "b05b0e113c93696be45408e4c10549f2a379c22330efbddfcaa0f09cd51309b9",
+      "bytes": 15626,
+      "action": "already_present_exact_no_write"
+    },
+    {
+      "path": "scripts/run-released-public-regressions.py",
+      "gitCommit": "501198d7638c7a56c3b85d357beb917469899402",
+      "gitBlob": "4503356b2d72076ae2483cab59f086984c1f75d9",
+      "sha256": "7988863afd2b171f31987434bb1176370be2e3afd49dead1edcdc59770d81909",
+      "bytes": 14089,
+      "action": "already_present_exact_no_write"
+    },
+    {
+      "path": "scripts/replay-public-regression-released-baseline.mjs",
+      "gitCommit": "501198d7638c7a56c3b85d357beb917469899402",
+      "gitBlob": "60a2c351ca1ba57be75c7499339c42324b7a6463",
+      "sha256": "2ce2a0e1b8f969510373ae161156b2b163d208b4e426cb1f26218f9952b3b164",
+      "bytes": 6355,
+      "action": "already_present_exact_no_write"
+    }
+  ],
+  "current6BCaptureHelper": {
+    "path": "tests/helpers/v6-live-game-campaign.ts",
+    "sha256": "d0fa63c45126e2c4d21c8c25cd350103785c537a250b2a6903410195b82d16ca",
+    "bytes": 90084
+  },
+  "nativeDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+  "nativeFiles": 322,
+  "nativeMembershipAndBytesUnchanged": true,
+  "sourceOrTestEdits": false,
+  "oldWatchInputsMatched": 2966,
+  "oldWatchInputMismatches": [],
+  "runtimeCacheReceipt": "docs/migration/lot6b-evidence/provisional-063-01/runtime-cache-materialization-01/result.json",
+  "runtimeAssets": [
+    {
+      "publicPath": "public/vendor/pyodide/annotated_types-0.7.0-py3-none-any.whl",
+      "resolvedPath": ".openai/lot6b-runtime-cache/pyodide/annotated_types-0.7.0-py3-none-any.whl",
+      "sha256": "6541523b4b16c1953d2fc9b82fb86c540eea9f78fca329ab371ed13a8b0faa51",
+      "bytes": 11963
+    },
+    {
+      "publicPath": "public/vendor/pyodide/numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+      "resolvedPath": ".openai/lot6b-runtime-cache/pyodide/numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+      "sha256": "a292c1f5d7d8a2208cd5e94fc467604c131cabcd2fc14fed6eefde121e7fabdf",
+      "bytes": 2960568
+    },
+    {
+      "publicPath": "public/vendor/pyodide/package.json",
+      "resolvedPath": ".openai/lot6b-runtime-cache/pyodide/package.json",
+      "sha256": "40ca48e43ce4ddc68412d5b7a7ca9e2477cd4f0e672277ae468ac2245717079b",
+      "bytes": 2999
+    },
+    {
+      "publicPath": "public/vendor/pyodide/pydantic-2.12.5-py3-none-any.whl",
+      "resolvedPath": ".openai/lot6b-runtime-cache/pyodide/pydantic-2.12.5-py3-none-any.whl",
+      "sha256": "04854875001e07a8a74d87b7c80296cba168773d8c9804e232d695f82484d7d7",
+      "bytes": 463578
+    },
+    {
+      "publicPath": "public/vendor/pyodide/pydantic_core-2.41.5-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+      "resolvedPath": ".openai/lot6b-runtime-cache/pyodide/pydantic_core-2.41.5-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+      "sha256": "54703fa42a0d4d574283cfb8f08050ba7820c9a42b0a21bc1286407d9a9e54da",
+      "bytes": 1310164
+    },
+    {
+      "publicPath": "public/vendor/pyodide/pyodide-lock.json",
+      "resolvedPath": ".openai/lot6b-runtime-cache/pyodide/pyodide-lock.json",
+      "sha256": "5dc2fc119108bc148c7457dc86e7675b5c87e1cafd420b9c34c1eaef7b36c010",
+      "bytes": 119077
+    },
+    {
+      "publicPath": "public/vendor/pyodide/pyodide.asm.mjs",
+      "resolvedPath": ".openai/lot6b-runtime-cache/pyodide/pyodide.asm.mjs",
+      "sha256": "f7cdc8ece80678ceb712f8e65ebe6d3a83203a180c399865f49612a051693635",
+      "bytes": 1250344
+    },
+    {
+      "publicPath": "public/vendor/pyodide/pyodide.asm.wasm",
+      "resolvedPath": ".openai/lot6b-runtime-cache/pyodide/pyodide.asm.wasm",
+      "sha256": "cc36e3cab04fdfc9a63ff13eb52eae2b911bf46c025cc7b281f394bd3de1d5e6",
+      "bytes": 9598218
+    },
+    {
+      "publicPath": "public/vendor/pyodide/pyodide.mjs",
+      "resolvedPath": ".openai/lot6b-runtime-cache/pyodide/pyodide.mjs",
+      "sha256": "6f1d60f7bf529beb300f0f47983c921d3982363640ba20af0e38efdddbc66109",
+      "bytes": 17931
+    },
+    {
+      "publicPath": "public/vendor/pyodide/python_stdlib.zip",
+      "resolvedPath": ".openai/lot6b-runtime-cache/pyodide/python_stdlib.zip",
+      "sha256": "fa1957e5777068fc4f7437f96d860ae2fbe9c19732ba06c84e004ec16dd7dd7a",
+      "bytes": 2545637
+    },
+    {
+      "publicPath": "public/vendor/pyodide/typing_extensions-4.15.0-py3-none-any.whl",
+      "resolvedPath": ".openai/lot6b-runtime-cache/pyodide/typing_extensions-4.15.0-py3-none-any.whl",
+      "sha256": "4fec68770a05408e668a4fa53d6bf4f0f684b9dacf820c7c5d6e97d3ad225e29",
+      "bytes": 44613
+    },
+    {
+      "publicPath": "public/vendor/pyodide/typing_inspection-0.4.2-py3-none-any.whl",
+      "resolvedPath": ".openai/lot6b-runtime-cache/pyodide/typing_inspection-0.4.2-py3-none-any.whl",
+      "sha256": "deb989630985f7a7296b90357a947a804a7612cecbb6439d6e71128e01f61051",
+      "bytes": 14610
+    }
+  ],
+  "runtimePublicPathsAndBytesUnchanged": true,
+  "runtimeAliasChangedToLocal6B": true,
+  "originalFailedVoisPreserved": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/vois-051/failure-diagnostic-01.json",
+  "metadataInspectionIncident": {
+    "error": "KeyError: slice(None, 1, None)",
+    "scope": "Earlier read-only attempt to print one cache.files row assumed a list; files is a mapping. No output or source was changed by that inspection."
+  },
+  "executionPerformed": false
+}

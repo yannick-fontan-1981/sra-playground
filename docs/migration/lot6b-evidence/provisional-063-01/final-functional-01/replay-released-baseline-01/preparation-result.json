@@ -1,0 +1,86 @@
+{
+  "schema": "logos-engine.lot6b.released-replay-preparation.v1",
+  "finishedAt": "2026-11-11T19:39:09.372512+00:00",
+  "status": "prepared_inputs_verified_not_executed",
+  "elapsedSeconds": 0.4996170650010754,
+  "sourceGitCommit": "501198d7638c7a56c3b85d357beb917469899402",
+  "scriptActions": [
+    {
+      "path": "scripts/run-released-public-regressions-streamlog.py",
+      "gitCommit": "501198d7638c7a56c3b85d357beb917469899402",
+      "gitBlob": "440af2d9034748c4afff715f8427df41654ef1df",
+      "sha256": "b05b0e113c93696be45408e4c10549f2a379c22330efbddfcaa0f09cd51309b9",
+      "bytes": 15626,
+      "action": "already_present_exact_no_write"
+    },
+    {
+      "path": "scripts/run-released-public-regressions.py",
+      "gitCommit": "501198d7638c7a56c3b85d357beb917469899402",
+      "gitBlob": "4503356b2d72076ae2483cab59f086984c1f75d9",
+      "sha256": "7988863afd2b171f31987434bb1176370be2e3afd49dead1edcdc59770d81909",
+      "bytes": 14089,
+      "action": "already_present_exact_no_write"
+    },
+    {
+      "path": "scripts/replay-public-regression-released-baseline.mjs",
+      "gitCommit": "501198d7638c7a56c3b85d357beb917469899402",
+      "gitBlob": "60a2c351ca1ba57be75c7499339c42324b7a6463",
+      "sha256": "2ce2a0e1b8f969510373ae161156b2b163d208b4e426cb1f26218f9952b3b164",
+      "bytes": 6355,
+      "action": "already_present_exact_no_write"
+    }
+  ],
+  "nativeDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+  "nativeFileCount": 322,
+  "existingInputFilesChecked": 2966,
+  "mismatches": [],
+  "watches": [
+    {
+      "case": "vois-051",
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/vois-051/replay-watch.json",
+      "files": 2974,
+      "bytes": 251682887
+    },
+    {
+      "case": "mind-051",
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/mind-051/replay-watch.json",
+      "files": 2974,
+      "bytes": 245350963
+    },
+    {
+      "case": "weav-051",
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/weav-051/replay-watch.json",
+      "files": 2974,
+      "bytes": 254588994
+    },
+    {
+      "case": "tria-development-4b",
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/tria-development-4b/replay-watch.json",
+      "files": 2974,
+      "bytes": 244159104
+    },
+    {
+      "case": "craf-055",
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/replay-watch.json",
+      "files": 2974,
+      "bytes": 253793134
+    },
+    {
+      "case": "isos-development-4c",
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/replay-watch.json",
+      "files": 2974,
+      "bytes": 244023129
+    },
+    {
+      "case": "kata-060-self-consistency",
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/replay-watch.json",
+      "files": 2974,
+      "bytes": 249250472
+    }
+  ],
+  "caseCount": 7,
+  "expectedComparisons": 119,
+  "oldFailedAttemptRetained": true,
+  "sourceTestsNativeOrCostHelpersChanged": false,
+  "replayExecuted": false
+}

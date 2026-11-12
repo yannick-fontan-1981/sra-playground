@@ -1,0 +1,67 @@
+{
+  "schema": "logos-engine.lot6b-no-global-lock-checkpoint.v1",
+  "observedAt": "2026-11-11T21:32:43.663148+00:00",
+  "commit": "2e555ec44e792c4f75d400205ead5de595e95791",
+  "parent": "1372d2df336f9919d7b5892160936d928720c24c",
+  "branch": "lot6b-selected-rigid-checkpoint-20261111",
+  "pushedAndRemoteVerified": true,
+  "verifiedAt": "2026-11-11T21:31:46.722Z",
+  "fileCount": 11,
+  "ordinaryGlobalLockAcquired": false,
+  "gitHooksPreserved": true,
+  "forcePush": false,
+  "mainPushed": false,
+  "sitePublicationPerformed": false,
+  "nativeAndRuntimeTestsChanged": false,
+  "guardTests": {
+    "tests": 38,
+    "suites": 0,
+    "pass": 38,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "transport": {
+    "elapsedSeconds": 1.8733835089999993,
+    "processGroupAbsent": true,
+    "directChildReaped": true,
+    "signals": []
+  },
+  "historicalLaunchers": [
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/commit-bin.py",
+      "unchanged": true
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/close-checkpoint.py",
+      "unchanged": true
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/checkpoint-transport.mjs",
+      "unchanged": true
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/transport-plan.json",
+      "unchanged": true
+    }
+  ],
+  "lockFiles": [
+    {
+      "path": "/workspace/shared/sra-coordination/performance.lock",
+      "sameDeviceInodeAndSize": true,
+      "fileNotOpened": true
+    },
+    {
+      "path": "/workspace/shared/sra-coordination/publication.lock",
+      "sameDeviceInodeAndSize": true,
+      "fileNotOpened": true
+    }
+  ],
+  "sources": [
+    "commit-01.json",
+    "push-01.json",
+    "guard-validation.json",
+    "source-review.json"
+  ]
+}

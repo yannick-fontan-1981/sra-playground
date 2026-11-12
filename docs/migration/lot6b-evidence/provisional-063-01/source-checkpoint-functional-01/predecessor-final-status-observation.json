@@ -1,0 +1,15 @@
+{
+  "schema": "logos-engine.lot6b.predecessor-final-status-observation.v1",
+  "observedAt": "2026-11-11T20:40:09.655639+00:00",
+  "source": "/workspace/shared/sra-coordination/lot5c-status.json",
+  "sourceUpdatedAt": "2026-11-11T20:39:04.511712+00:00",
+  "phase": "recovery02_closed_cost_unmeasured_publication_pending",
+  "quietRequested": false,
+  "releasedRequestId": "lot5c-cost-a33a5f88-recovery-02",
+  "releasedAt": "2026-11-11T20:30:25.610691+00:00",
+  "performanceStarted": false,
+  "publicationStarted": false,
+  "sourceCheckpoint": "37f3dabeaf8807045effb81cc3437da53f10ee97",
+  "message": "Explicit RELEASE remains effective for lot5c-cost-a33a5f88-recovery-02 since2026-11-11T20:30:25.610691Z. The single600s cycle expired before fresh8A/10C ACKs;0EX attempts,0samples,0publication. No further pause or automatic retry. Ordinary work may proceed under the unchanged SH mutex.5C source-only closure37f3dabe is remotely verified; publication order remains5C,6B,8A,10C. Runtime administration must determine any actual old holder without deleting/replacing the mutex.",
+  "qualification": "The predecessor explicitly reports expiry before fresh8A/10C ACKs, zero EX attempts, zero samples and zero publication. This is peer coordination evidence, not independent process-holder diagnosis."
+}

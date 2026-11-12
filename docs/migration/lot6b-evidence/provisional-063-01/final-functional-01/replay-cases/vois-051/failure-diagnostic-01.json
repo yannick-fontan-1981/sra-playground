@@ -1,0 +1,117 @@
+{
+  "schema": "logos-engine.lot6b.vois-replay-failure-diagnostic.v1",
+  "recordedAt": "2026-11-11T19:26:54.393383+00:00",
+  "status": "failed_attempt_preserved_no_retry",
+  "currentExecution": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/vois-051/regressions/vois-051-execution.json",
+    "command": [
+      "node",
+      "scripts/replay-v53-public-regression.mjs",
+      "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz",
+      "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+      "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/vois-051/regressions/vois-051-replay.json.gz"
+    ],
+    "elapsedSeconds": 179.6522238990001,
+    "exitCode": -6,
+    "timedOut": false,
+    "timeoutSeconds": 600,
+    "nativeSourceBeforeDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+    "nativeSourceAfterDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+    "nativeSourceUnchanged": true,
+    "immutableInputsUnchanged": true
+  },
+  "log": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/vois-051/regressions/vois-051-output.log.gz",
+    "retainedFingerprint": {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/vois-051/regressions/vois-051-output.log.gz",
+      "sha256": "50f468bb4b22c938d3a0704919db489097bae51f725d41b6fea6abafb437e75b",
+      "bytes": 7591
+    },
+    "fatalLine": "FATAL ERROR: Reached heap limit Allocation failed - JavaScript heap out of memory",
+    "usefulNativeStack": [
+      "FATAL ERROR: Reached heap limit Allocation failed - JavaScript heap out of memory",
+      "----- Native stack trace -----",
+      "",
+      " 1: 0x91d810  [node]",
+      " 2: 0x75bb1b node::OOMErrorHandler(char const*, v8::OOMDetails const&) [node]",
+      " 3: 0xc755c0  [node]",
+      " 4: 0xc756bf  [node]",
+      " 5: 0xf24835  [node]",
+      " 6: 0xf372ac  [node]",
+      " 7: 0xe6d148  [node]",
+      " 8: 0x140668e  [node]",
+      " 9: 0x1b599b6  [node]"
+    ],
+    "lastPublicStoppedEvent": {
+      "phase": "stopped",
+      "completedLevel": 3,
+      "nativeLevel": 4,
+      "levelsCompleted": 3,
+      "totalActions": 78,
+      "prefixCount": 42,
+      "activeSeconds": 148.24728813099992
+    }
+  },
+  "diagnosis": {
+    "confidence": "high_for_V8_heap_limit_failure_only",
+    "observedFailure": "V8 JavaScript heap limit exhausted; child return code -6 is SIGABRT; driver timedOut=false.",
+    "semanticComparisonCompleted": false,
+    "comparisonChecksProduced": 0,
+    "nativeSemanticDivergenceEstablished": false,
+    "serializationFailureLocationEstablished": false,
+    "locationQualification": "The fatal OOM follows target_levels_completed and the final public stopped log. The unsymbolized stack identifies node::OOMErrorHandler only; no JSON.stringify or serialization frame is shown. The exact finalization/allocation site is not established.",
+    "hostSignalQualification": "The retained evidence records SIGABRT with an explicit V8 fatal heap-allocation message, not a timeout or a recorded host SIGKILL. No kernel-level diagnosis was performed."
+  },
+  "fiveCComparison": {
+    "checkout": "/workspace/sites/sra-lot5c-recovery-20261111/.sites-checkout",
+    "executionPath": "docs/migration/lot5c-evidence/recovery/integrated-final-01/regressions/vois-051-execution.json",
+    "launchReceiptPath": "docs/migration/lot5c-evidence/recovery/integrated-final-01/regressions-preparation/retry-driver-launch.execution.json",
+    "driverCommand": [
+      "python",
+      "-B",
+      "scripts/run-released-public-regressions-streamlog.py",
+      "docs/migration/lot5c-evidence/recovery/integrated-final-01/recorded-regression-cases.json",
+      "docs/migration/lot5c-evidence/recovery/integrated-final-01",
+      "--source-manifest",
+      "docs/migration/lot5c-evidence/recovery/integrated-final-01/source-manifest.json",
+      "--node-old-space-mib",
+      "1536",
+      "--timeout-seconds",
+      "2400"
+    ],
+    "metadata": {
+      "command": [
+        "node",
+        "--expose-gc",
+        "--max-old-space-size=1536",
+        "scripts/replay-public-regression-released-baseline.mjs",
+        "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz",
+        "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+        "docs/migration/lot5c-evidence/recovery/integrated-final-01/regressions/vois-051-replay.json.gz",
+        "docs/migration/lot5c-evidence/recovery/integrated-final-01/regressions/vois-051-host-preparation.json"
+      ],
+      "status": "passed",
+      "passed": true,
+      "elapsedSeconds": 160.7179661400005,
+      "exitCode": 0,
+      "timedOut": false,
+      "timeoutSeconds": 2400,
+      "nodeOldSpaceMiB": 1536,
+      "historicalReportProcessExitedBeforeNode": true,
+      "nodeExitedBeforeComparison": true,
+      "hostPreparationPassed": true,
+      "comparisonPassed": true,
+      "comparisonChecks": 17,
+      "failedChecks": [],
+      "nativeSourceBeforeDigest": "a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57",
+      "nativeSourceAfterDigest": "a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57",
+      "nativeSourceUnchanged": true,
+      "immutableInputsUnchanged": true
+    },
+    "sameBaselineAndTracePins": true,
+    "sameOldSpaceLimitMiB": 1536,
+    "differentReplayMachinery": true,
+    "qualification": "5C succeeded with released-baseline/streamlog machinery and --expose-gc at the same 1536MiB limit. 6B used the earlier replay-v53 entry point. This is not an identical-harness comparison and does not identify SelectedRigid as the sole memory cause."
+  },
+  "actionsTaken": "Only existing receipts and logs read; no native/test/tool/watch/limit change and no VOIS retry. Other independent declared cases may proceed after fresh coordination."
+}

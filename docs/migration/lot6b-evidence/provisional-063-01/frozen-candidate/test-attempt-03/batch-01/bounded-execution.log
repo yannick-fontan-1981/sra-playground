@@ -1,0 +1,2 @@
+{"name": "delta-tests", "exitCode": 0, "counts": {"tests": 1817, "pass": 1817, "fail": 0, "cancelled": 0, "skipped": 0, "todo": 0}}
+{"status": "passed", "receipt": "docs/migration/lot6b-evidence/provisional-063-01/frozen-candidate/test-attempt-03/batch-01/validation/delta-tests-run.json"}

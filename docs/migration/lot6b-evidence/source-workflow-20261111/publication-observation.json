@@ -1,0 +1,28 @@
+{
+  "schema": "logos-engine.lot6b-publication-observation.v1",
+  "observedAt": "2026-11-11T21:33:52.392Z",
+  "site": {
+    "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+    "latestVersionNumber": 103,
+    "status": "active",
+    "liveUrl": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "accessMode": "custom",
+    "accessRevision": 3,
+    "externalVisitorCount": 0,
+    "allowedUserCount": 1
+  },
+  "latestVersion": {
+    "id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_c8356cd5ad648191a646ac0a9c059a24",
+    "version_number": 103,
+    "source": {
+      "commit_sha": "4afcbfe6a25bd3a88223be543e443bc53b9c8814"
+    },
+    "deployment_id": "appgdep_6af49db69234819195c9c093cb79a7da"
+  },
+  "nativeVersion": "0.62.0",
+  "nativeVersionAndMissingSelectedRigidProof": "docs/migration/lot6b-evidence/user-stop-nested-control-01/source-diagnosis.json",
+  "exactSourceUnchangedSinceDiagnosis": true,
+  "sourceCheckpointIsSeparate": true,
+  "officialCostMeasured": false,
+  "publicationPerformed": false
+}

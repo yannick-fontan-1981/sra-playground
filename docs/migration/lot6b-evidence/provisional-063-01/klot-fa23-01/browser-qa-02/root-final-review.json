@@ -1,0 +1,41 @@
+{
+  "schema": "logos-engine.lot6b-browser-root-review.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-11T20:32:04.331356+00:00",
+  "inputs": [
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/browser-functional-summary.json",
+      "bytes": 6299,
+      "sha256": "48ec788e8a8132f9fb07dbb11465f1113a5056b3f860228a56fd37b40939116e"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/preview-session-result.json",
+      "bytes": 3046,
+      "sha256": "f82fc19082016598a310dfb84c8f0ed8dc379d14d285da5b1d49a7ac5b7b8332"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/preview-lease-terminal.json",
+      "bytes": 861,
+      "sha256": "fa986031905c847ae152b3e9b0793c8697605f715b5c3cc775875f28976194d3"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/closure-readback-command.json",
+      "bytes": 675932,
+      "sha256": "855f6cf6f13508cfded7521075f6ffb3d743a7f3bf6cd94abbc5785acf68c1b6"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/tab-closure-confirmed.json",
+      "bytes": 446,
+      "sha256": "5061bc413a823bec950956aed1492c4ccf1a4e051d985684b81bd8251c560581"
+    }
+  ],
+  "checks": [
+    "Real CUA three-level observation and retained screenshot:38 actions,3 levels,30 plans.",
+    "Startup pause at two observations of0 actions, then successful resume.",
+    "Own CLI lease reaped exit0 without signals; helper makes no browser-functionality claim.",
+    "Actual tab closure independently confirmed by root CUA after asynchronous first inventory.",
+    "Preview explicitly stopped; wrapper and closure readback terminal without orphan group or changed inputs.",
+    "360-second planning target overrun retained;480-second operator closure and600-second outer bound respected."
+  ],
+  "qualification": "Development UI; bounded three-level test; no whole-game, production-dist-browser, cost or publication claim."
+}

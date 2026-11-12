@@ -1,0 +1,100 @@
+{
+  "schema": "logos-engine.input-watch-informational-byte-count-erratum.v1",
+  "recordedAt": "2026-11-11T18:34:00.613126+00:00",
+  "affected": [
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/functional-watch-attempt02.json",
+      "sha256": "b977dfc6d08741fdd6ec2155cbde7e83fb848d24c3bd1458795db9a9873232dd",
+      "declaredTotalBytes": 222531810,
+      "actualTotalBytes": 222535371,
+      "fileCount": 2952
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/build-watch.json",
+      "sha256": "242c1adbb5419abdc9ba7e1b145621e280dec215f81148934921671571623ff9",
+      "declaredTotalBytes": 222531810,
+      "actualTotalBytes": 222619870,
+      "fileCount": 2965
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/build-watch-attempt02.json",
+      "sha256": "48677b504bfd6fad822093488eafabe4cc8e183c230ea7a0727d302bdf175de7",
+      "declaredTotalBytes": 222531810,
+      "actualTotalBytes": 222619870,
+      "fileCount": 2965
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/conn-050/replay-watch-attempt02.json",
+      "sha256": "493d2d4c2d545bac71365b60d72a6d53c353a08923765474f6a6e856b02d5679",
+      "declaredTotalBytes": 225219181,
+      "actualTotalBytes": 225222742,
+      "fileCount": 2954
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/craf-055/replay-watch-attempt02.json",
+      "sha256": "240321094ef5617803b739a2378280d6eb1cc890a601c8e3609b6e3c7cb8a3bd",
+      "declaredTotalBytes": 235340314,
+      "actualTotalBytes": 235343875,
+      "fileCount": 2954
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/fogw-051/replay-watch-attempt02.json",
+      "sha256": "ba7eabc821b7443773ad1ada38f70aedebfc099d09d267570f8ae460663441ea",
+      "declaredTotalBytes": 230745350,
+      "actualTotalBytes": 230748911,
+      "fileCount": 2954
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/isos-development-4c/replay-watch-attempt02.json",
+      "sha256": "8926cb4f7ad74f76464621eb13c2754950b973b075a4a8f2094031f02f27ac12",
+      "declaredTotalBytes": 225570282,
+      "actualTotalBytes": 225573843,
+      "fileCount": 2954
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/kata-060-self-consistency/replay-watch-attempt02.json",
+      "sha256": "258d12f237fd84084a2812ed09902206123768c61a1e5d646f50fcca20730e8f",
+      "declaredTotalBytes": 230797563,
+      "actualTotalBytes": 230801124,
+      "fileCount": 2954
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/mind-051/replay-watch-attempt02.json",
+      "sha256": "142d3ad33a13cf291a58b3d11060ab8251cc2c18643772d9bc8f7330b4b1eafa",
+      "declaredTotalBytes": 226898120,
+      "actualTotalBytes": 226901681,
+      "fileCount": 2954
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/rswp-051/replay-watch-attempt02.json",
+      "sha256": "4bfa11b7db8c70b673c9e669a24af05595f9ca2ccb6cac9eaf3e81cbd9f6b8f4",
+      "declaredTotalBytes": 225159123,
+      "actualTotalBytes": 225162684,
+      "fileCount": 2954
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/tria-development-4b/replay-watch-attempt02.json",
+      "sha256": "a0806726a5a38e4a822c9ce9c236662d069c15b3a3bc8e8e8ec2fc2b990db101",
+      "declaredTotalBytes": 225706257,
+      "actualTotalBytes": 225709818,
+      "fileCount": 2954
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/vois-051/replay-watch-attempt02.json",
+      "sha256": "b42e9fd1328eaca66ebce64c62bf1b267f1922fa6f4059152760fca6e6ac029a",
+      "declaredTotalBytes": 233229954,
+      "actualTotalBytes": 233233515,
+      "fileCount": 2954
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-cases/weav-051/replay-watch-attempt02.json",
+      "sha256": "e8e85f30d60dd12664e8ef36d26849333e95ee69d5af9f75bd2125fdbfe8308e",
+      "declaredTotalBytes": 236136135,
+      "actualTotalBytes": 236139696,
+      "fileCount": 2954
+    }
+  ],
+  "cause": "The new test-only watch inherited the prior informational byte total, and the build watch inherited the repository-only total before adding external helper paths. File maps and SHA256 values are authoritative and unchanged; no input was omitted by this header arithmetic.",
+  "effect": "record-command/run-case-command use the actual per-file SHA256/byte fingerprints, not totalBytes. The affected targeted run verified all actual files before and after. Existing manifests and receipts remain unchanged; this sidecar corrects only the unused informational aggregate. No test or cost outcome is reclassified.",
+  "qualification": "Current files corresponding to the frozen maps determine the corrected totals; native322file inventory/digest are unchanged."
+}

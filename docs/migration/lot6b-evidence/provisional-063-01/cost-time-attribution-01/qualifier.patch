@@ -1,0 +1,173 @@
+--- before/qualify-cost-owner-graphs.mjs
++++ after/qualify-cost-owner-graphs.mjs
+@@ -29,7 +29,8 @@
+ const IDSET = new Set(IDS);
+ const SOURCE_PROOFS = ["src/logos-engine/v6-native-runtime.ts", "src/logos-engine/v6-selected-rigid.ts", "src/logos-engine/v6-selected-rigid-types.ts", "src/logos-engine/v6-selected-rigid-geometry.ts", "src/logos-engine/v6-selected-rigid-search.ts", "src/logos-engine/v6-knowledge-store.ts", "src/logos-engine/kernel.ts"];
+ const ROLE_VALIDATORS = ['src/logos-engine/kernel.ts', 'src/logos-engine/v6-knowledge-store.ts'];
+-const COMMON_VALIDATORS = ['src/logos-engine/canonical.ts',
++const TRACE_TIME_SOURCE_PROOFS = ['src/logos-engine/v6-reasoning-memory.ts', 'src/logos-engine/v6-native-authority.ts'];
++const COMMON_VALIDATORS = [...TRACE_TIME_SOURCE_PROOFS, 'src/logos-engine/canonical.ts',
+   'src/logos-engine/v6-native-state-graph.ts', 'src/logos-engine/v6-hash.ts', 'src/logos-engine/v6-src-program.ts', 'src/logos-engine/v6/programs.json',
+   'src/runtime/v6-agent-service.ts'];
+ const hash = bytes => createHash('sha256').update(bytes).digest('hex');
+@@ -123,22 +124,84 @@
+     final: Object.fromEntries(Object.entries(shape.final).filter(([key]) => !['nodeCount', 'graphRevision', 'implementation'].includes(key))) });
+   assert.deepEqual(withoutIdentityAndCounts(a), withoutIdentityAndCounts(b), 'Non-structural work changed between versions');
+ }
+-function commonNode(a, b, digestA, digestB) {
++/** One source-created trace envelope leaf, never a recursive created-key rule. */
++export class TraceCreatedAttribution {
++  constructor(windows) {
++    this.windows = {}; this.seen = new Map(); this.records = [];
++    for (const role of ['baseline', 'candidate']) {
++      const supplied = windows[role];
++      assert.ok(supplied && typeof supplied.startedAt === 'string' && typeof supplied.finishedAt === 'string', 'Trace capture window is missing');
++      const startMs = Date.parse(supplied.startedAt), finishMs = Date.parse(supplied.finishedAt);
++      assert.ok(Number.isSafeInteger(startMs) && Number.isSafeInteger(finishMs) && startMs >= 0 && finishMs >= startMs, 'Invalid trace capture interval');
++      assert.equal(new Date(startMs).toISOString(), supplied.startedAt, 'Noncanonical capture start');
++      assert.equal(new Date(finishMs).toISOString(), supplied.finishedAt, 'Noncanonical capture finish');
++      this.windows[role] = { startedAt: supplied.startedAt, finishedAt: supplied.finishedAt, startMs, finishMs };
++    }
++  }
++  prepare(a, b, sessionId) {
++    assert.ok(typeof sessionId === 'string' && sessionId.length > 0, 'Trace comparison requires its real session');
++    const pending = [];
++    for (const [role, node] of [['baseline', a], ['candidate', b]]) {
++      const match = /^reasoning:trace:([1-9][0-9]*)$/.exec(node.id);
++      assert.ok(match && Number.isSafeInteger(Number(match[1])), 'Not a real reasoning trace identifier');
++      assert.equal(node.kind, 'component_state'); assert.equal(node.component, 'native_reasoning_trace');
++      assert.equal(node.scope, sessionId, 'Trace belongs to another session');
++      const value = node.value;
++      assert.deepEqual(Object.keys(value).sort(), ['component', 'profile', 'root']);
++      assert.equal(value.component, node.id); assert.equal(value.profile, 'logos-engine.v6.state-graph.v1');
++      assert.deepEqual(Object.keys(value.root).sort(), ['kind', 'members']); assert.equal(value.root.kind, 'object');
++      const members = value.root.members;
++      assert.deepEqual(Object.keys(members).sort(), ['body', 'created', 'episode', 'id', 'kind']);
++      assert.equal(members.id, Number(match[1])); assert.equal(members.episode, 'common-observation-frontier');
++      assert.ok(typeof members.kind === 'string' && members.kind.length > 0, 'Invalid trace kind');
++      const created = members.created;
++      assert.ok(created && typeof created === 'object' && !Array.isArray(created), 'Trace created must be an encoded float64');
++      assert.deepEqual(Object.keys(created).sort(), ['bits', 'kind']); assert.equal(created.kind, 'float64');
++      assert.ok(typeof created.bits === 'string' && /^[a-f0-9]{16}$/.test(created.bits), 'Invalid trace float64 bits');
++      const seconds = Buffer.from(created.bits, 'hex').readDoubleBE(0), milliseconds = Math.round(seconds * 1000);
++      assert.ok(Number.isFinite(seconds) && Number.isSafeInteger(milliseconds) && seconds === milliseconds / 1000,
++        'Trace created is not a finite Date.now()/1000 millisecond timestamp');
++      const window = this.windows[role];
++      assert.ok(milliseconds >= window.startMs && milliseconds <= window.finishMs, 'Trace created lies outside its own capture interval: ' + role);
++      const key = JSON.stringify([role, sessionId, node.id]), prior = this.seen.get(key);
++      if (prior) assert.equal(created.bits, prior.bits, 'Trace created changed within its role/session/identity');
++      pending.push({ key, role, sessionId, nodeId: node.id, bits: created.bits, seconds, milliseconds,
++        createdAt: new Date(milliseconds).toISOString(), captureStartedAt: window.startedAt, captureFinishedAt: window.finishedAt });
++    }
++    // Shallow comparison copies replace exactly the validated bits leaf. The
++    // inputs, body, nested created fields and all other node values stay intact.
++    const comparisonValue = value => ({ ...value, root: { ...value.root, members: { ...value.root.members,
++      created: { ...value.root.members.created, bits: 'attributed_trace_envelope_timestamp' } } } });
++    return { values: [comparisonValue(a.value), comparisonValue(b.value)], commit: () => {
++      for (const row of pending) if (!this.seen.has(row.key)) {
++        this.seen.set(row.key, row); const { key, ...record } = row; this.records.push(record);
++      }
++    } };
++  }
++}
++export function commonNode(a, b, digestA, digestB, temporal = null) {
+   assert.deepEqual(Object.keys(a).sort(), Object.keys(b).sort(), 'Common node fields changed');
++  const isTrace = a.component === 'native_reasoning_trace' || b.component === 'native_reasoning_trace'
++    || String(a.id).startsWith('reasoning:trace:') || String(b.id).startsWith('reasoning:trace:');
++  let prepared = null;
++  if (isTrace) {
++    assert.ok(temporal?.attribution instanceof TraceCreatedAttribution, 'A real trace requires capture-bound time attribution');
++    prepared = temporal.attribution.prepare(a, b, temporal.sessionId);
++  }
+   for (const key of Object.keys(a)) {
+-    // The 6A qualifier explicitly made no common-value parity claim. The
+-    // stronger 6B contract refuses any unqualified common-value difference.
+-    // A future observed identity difference needs its own bounded derivation
+-    // before measurement; do not normalize arbitrary strings or subtrees.
+-    if (key === 'value') { assert.deepEqual(a.value, b.value, `Unattributed common node value changed: ${a.id}`); continue; }
++    if (key === 'value') {
++      assert.deepEqual(prepared ? prepared.values[0] : a.value, prepared ? prepared.values[1] : b.value,
++        'Unattributed common node value changed: ' + a.id); continue;
++    }
+     if (key === 'origin') {
+       assert.deepEqual(Object.keys(a.origin).sort(), Object.keys(b.origin).sort());
+       for (const name of Object.keys(a.origin)) {
+         if (name === 'source_digest') assert.deepEqual([a.origin[name], b.origin[name]], [digestA, digestB]);
+-        else assert.deepEqual(a.origin[name], b.origin[name], `Common node origin changed: ${a.id}/${name}`);
+-      }
+-    } else assert.deepEqual(a[key], b[key], `Common node metadata changed: ${a.id}/${key}`);
+-  }
++        else assert.deepEqual(a.origin[name], b.origin[name], 'Common node origin changed: ' + a.id + '/' + name);
++      }
++    } else assert.deepEqual(a[key], b[key], 'Common node metadata changed: ' + a.id + '/' + key);
++  }
++  prepared?.commit();
+ }
+ function fragmentReferences(value, nodes, found = new Set()) {
+   function visit(item) {
+@@ -156,11 +219,11 @@
+ 
+ class Qualification {
+   constructor(paths) {
+-    this.paths = paths; this.inputs = new Map(); this.forms = []; this.traces = new Map(); this.receipts = {}; this.stores = {};
++    this.paths = paths; this.inputs = new Map(); this.forms = []; this.traces = new Map(); this.receipts = {}; this.stores = {}; this.traceCreated = null;
+     this.result = { schema: 'logos-engine.lot6b-owner-cost-structural-attribution.v1',
+       status: 'functional_structure_qualification_failed', startedAt: new Date().toISOString(),
+       checks: [], nodeAttributions: [], points: [], failures: [], commandBoundaryProjections: [], sourceFactCoverage: [],
+-      commonValueCoverage: [], commonValuePolicy: { comparison: 'exact', permittedMetadataDifference: 'origin.source_digest',
++      commonValueCoverage: [], commonValuePolicy: { comparison: 'exact_except_attributed_trace_envelope_created', permittedMetadataDifference: 'origin.source_digest',
+         identityValueAttributions: [], unattributedDifferencesAllowed: 0 } };
+   }
+   async input(path) {
+@@ -215,6 +278,13 @@
+       if (this.selectedRigidPolicy) assert.deepEqual(policy, this.selectedRigidPolicy, 'Pinned SelectedRigid policy changed between roles');
+       else this.selectedRigidPolicy = policy;
+     }
++    this.traceCreated = new TraceCreatedAttribution(Object.fromEntries(['baseline', 'candidate'].map(role => [role,
++      { startedAt: this.receipts[role].startedAt, finishedAt: this.receipts[role].finishedAt }])));
++    this.result.commonValuePolicy.traceCreatedAttribution = {
++      nodeComponent: 'native_reasoning_trace', path: '/value/root/members/created/bits',
++      sourceClock: 'Date.now() / 1000', sourceFiles: TRACE_TIME_SOURCE_PROOFS,
++      captureWindows: this.traceCreated.windows, stabilityKey: ['role', 'sessionId', 'nodeId'],
++      records: this.traceCreated.records, allOtherFieldsExact: true };
+     assert.deepEqual(this.receipts.baseline.cases, this.receipts.candidate.cases);
+     this.casesRecord = this.receipts.candidate.cases; this.cases = await read(this.casesRecord.path);
+     assert.deepEqual(this.cases.cases.map(row => [row.id, row.warmupActions, row.actions]), [['STCK', 3, 10], ['SMLP', 3, 15]]);
+@@ -414,18 +484,19 @@
+     this.result.sourceFactCoverage.push({ case: b.case, form: b.form, pointIndex: b.pointIndex,
+       acquiredReturns: 0, persistedSourceFacts: 0, sourceCallIndices: [],
+       capturedNegativeProposals: right.proposals.length });
+-    for (const id of Object.keys(left.nodes)) commonNode(left.nodes[id], right.nodes[id], left.runtimeDigest, right.runtimeDigest);
++    const temporal = { attribution: this.traceCreated, sessionId: left.start.sessionId };
++    for (const id of Object.keys(left.nodes)) commonNode(left.nodes[id], right.nodes[id], left.runtimeDigest, right.runtimeDigest, temporal);
+     const common = b.knowledge.deltasAdded.filter(delta => !categories.has(delta.node.id));
+     assert.equal(common.length, a.knowledge.deltasAdded.length, 'Common delta count changed');
+     for (let index = 0; index < common.length; index++) {
+       const x = a.knowledge.deltasAdded[index], y = common[index];
+       assert.deepEqual([x.node.id, x.node.kind, x.node.revision, x.cause], [y.node.id, y.node.kind, y.node.revision, y.cause],
+         'Common delta identities, causes or order changed');
+-      commonNode(x.node, y.node, left.runtimeDigest, right.runtimeDigest);
++      commonNode(x.node, y.node, left.runtimeDigest, right.runtimeDigest, temporal);
+     }
+     this.result.commonValueCoverage.push({ case: b.case, form: b.form, pointIndex: b.pointIndex,
+       commonNodesCompared: Object.keys(left.nodes).length, commonDeltasCompared: common.length,
+-      comparison: 'exact', unattributedDifferences: 0 });
++      comparison: 'exact_except_attributed_trace_envelope_created', unattributedDifferences: 0 });
+     for (const delta of b.knowledge.deltasAdded.filter(item => categories.has(item.node.id))) {
+       const node = delta.node; let explanation = categories.get(node.id);
+       if (IDSET.has(node.id)) {
+@@ -555,7 +626,7 @@
+   audit.result.recordedAt = new Date().toISOString(); audit.result.inputs = [...audit.inputs.values()];
+   audit.result.checkedCount = audit.result.checks.length;
+   audit.result.formsSha256 = canonicalHash(audit.forms);
+-  audit.result.qualification = 'Every captured graph reconstructs from its exact complete Kernel delta chain using the validator bound to its own source freeze and identical value codecs. Every fragment identifier is checked against its content and every changed native graph root is hydrated. Added candidate nodes/deltas receive explicit installation, actual SelectedRigid checkpoint or reachable-fragment attribution, with zero source record calls or source-event facts and the exact empty source journal at every actual point in these foreign-owner cost traces. The observed acquisition owner is the registered family instance. Common node values are compared exactly; common metadata differs only at the explicitly bound origin.source_digest. Common delta identity/cause/order remains exact. Any further computed identity difference inside a value is refused pending a specific premeasurement attribution. This stricter 6B scope does not amend the historical 6A qualification. Structural counts come from the captures, without an added-node or cycle formula. The forms are fixed before any cost window and every future raw trial must match its own form exactly. No cost values, timing correction, future-run success, uncaptured measured-graph values or full caller semantic parity is inferred.';
++  audit.result.qualification = 'Every captured graph reconstructs from its exact complete Kernel delta chain using the validator bound to its own source freeze and identical value codecs. Every fragment identifier is checked against its content and every changed native graph root is hydrated. Added candidate nodes/deltas receive explicit installation, actual SelectedRigid checkpoint or reachable-fragment attribution, with zero source record calls or source-event facts and the exact empty source journal at every actual point in these foreign-owner cost traces. The observed acquisition owner is the registered family instance. Common node values are compared exactly except the encoded created leaf of native_reasoning_trace envelopes, validated as finite Date.now()/1000 timestamps within each own capture interval and stable per role/session/trace; every other trace field remains exact. Common metadata differs only at the explicitly bound origin.source_digest. Common delta identity/cause/order remains exact. Any further computed identity difference inside a value is refused pending a specific premeasurement attribution. This stricter 6B scope does not amend the historical 6A qualification. Structural counts come from the captures, without an added-node or cycle formula. The forms are fixed before any cost window and every future raw trial must match its own form exactly. No cost values, timing correction, future-run success, uncaptured measured-graph values or full caller semantic parity is inferred.';
+   await writeFile(attribution, JSON.stringify(audit.result, null, 2) + '\n', { flag: 'wx' });
+   if (audit.result.status === 'qualified_functional_structure') {
+     const value = { schema: 'logos-engine.lot6b-owner-cost-structural-fixture.v1', status: 'qualified_functional_structure',
+@@ -572,4 +643,4 @@
+     failures: audit.result.failures }));
+ }
+ 
+-await main();
++if (process.argv[1] && resolve(process.argv[1]) === SCRIPT) await main();

@@ -1,0 +1,76 @@
+{
+  "schema": "logos-engine.lot8a.priority065-diffcheck-scope.v1",
+  "recordedAt": "2026-11-12T01:09:35.365866+00:00",
+  "status": "passed_own_changes_inherited_evidence_preserved",
+  "fullMergeCheckExitCode": 2,
+  "fullMergeCheckOutput": "docs/migration/lot6b-evidence/provisional-063-01/cost-time-attribution-01/downstream-01/check-cost-static-inputs.py.patch:15: trailing whitespace.\n+ \ndocs/migration/lot6b-evidence/provisional-063-01/cost-time-attribution-01/downstream-01/check-cost-static-inputs.py.patch:179: trailing whitespace.\n+ \ndocs/migration/lot6b-evidence/provisional-063-01/cost-time-attribution-01/downstream-01/finalize-owner-cost-contract.py.patch:11: trailing whitespace.\n+ \ndocs/migration/lot6b-evidence/provisional-063-01/cost-time-attribution-01/downstream-01/finalize-owner-cost-contract.py.patch:16: trailing whitespace.\n+ \ndocs/migration/lot6b-evidence/provisional-063-01/cost-time-attribution-01/downstream-01/finalize-owner-cost-contract.py.patch:180: trailing whitespace.\n+ \ndocs/migration/lot6b-evidence/provisional-063-01/cost-time-attribution-01/downstream-01/finalize-owner-cost-contract.py.patch:222: trailing whitespace.\n+ \ndocs/migration/lot6b-evidence/provisional-063-01/cost-time-attribution-01/downstream-01/local-javascript-validator.txt:115: new blank line at EOF.\ndocs/migration/lot6b-evidence/provisional-063-01/cost-time-attribution-01/downstream-01/local-python-validator.txt:163: new blank line at EOF.\ndocs/migration/lot6b-evidence/provisional-063-01/cost-time-attribution-01/downstream-01/review-owner-costs.py.patch:14: trailing whitespace.\n+ \ndocs/migration/lot6b-evidence/provisional-063-01/cost-time-attribution-01/downstream-01/review-owner-costs.py.patch:178: trailing whitespace.\n+ \ndocs/migration/lot6b-evidence/provisional-063-01/cost-time-attribution-01/qualifier.patch:109: trailing whitespace.\n+ \ndocs/migration/lot6b-evidence/provisional-063-01/cost-time-attribution-01/qualifier.patch:171: trailing whitespace.\n+ \ndocs/migration/lot6b-evidence/provisional-063-01/final-functional-01/klot-browser-readiness-read01.log:189: trailing whitespace.\n+9: \ndocs/migration/lot6b-evidence/provisional-063-01/final-functional-01/klot-browser-readiness-read02.log:227: trailing whitespace.\n+658: \ndocs/migration/lot6b-evidence/provisional-063-01/final-functional-01/klot-browser-readiness-read02.log:246: trailing whitespace.\n+130: \ndocs/migration/lot6b-evidence/provisional-063-01/final-functional-01/klot-browser-readiness-read02.log:303: trailing whitespace.\n+111: \ndocs/migration/lot6b-evidence/provisional-063-01/final-functional-01/klot-browser-readiness-read03.log:53: trailing whitespace.\n+84: \ndocs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/cua-evidence/level-02-completed.txt:182: trailing whitespace.\n+\t\t\t\t\t\t\t217 AXListMarker ▸ \ndocs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/cua-evidence/level-02-completed.txt:195: trailing whitespace.\n+\t\t\t\t\t189 text The 100 games on this page run locally in your browser. The ongoing SRA Agent migration transfers V6 capabilities into native TypeScript and the common V7 reasoning architecture. Coordinate inputs, guarded action sequences and memory across levels are connected. The original Python game engines remain isolated from the agent. Explore the shared reasoning syntax in the \ndocs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/cua-evidence/level-03-completed.txt:182: trailing whitespace.\n+\t\t\t\t\t\t\t217 AXListMarker ▸ \ndocs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/cua-evidence/level-03-completed.txt:195: trailing whitespace.\n+\t\t\t\t\t189 text The 100 games on this page run locally in your browser. The ongoing SRA Agent migration transfers V6 capabilities into native TypeScript and the common V7 reasoning architecture. Coordinate inputs, guarded action sequences and memory across levels are connected. The original Python game engines remain isolated from the agent. Explore the shared reasoning syntax in the \ndocs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/cua-evidence/paused-state.txt:182: trailing whitespace.\n+\t\t\t\t\t\t\t217 AXListMarker ▸ \ndocs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/cua-evidence/paused-state.txt:195: trailing whitespace.\n+\t\t\t\t\t189 text The 100 games on this page run locally in your browser. The ongoing SRA Agent migration transfers V6 capabilities into native TypeScript and the common V7 reasoning architecture. Coordinate inputs, guarded action sequences and memory across levels are connected. The original Python game engines remain isolated from the agent. Explore the shared reasoning syntax in the \ndocs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/cua-evidence/progress-01.txt:182: trailing whitespace.\n+\t\t\t\t\t\t\t217 AXListMarker ▸ \ndocs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/cua-evidence/progress-01.txt:195: trailing whitespace.\n+\t\t\t\t\t189 text The 100 games on this page run locally in your browser. The ongoing SRA Agent migration transfers V6 capabilities into native TypeScript and the common V7 reasoning architecture. Coordinate inputs, guarded action sequences and memory across levels are connected. The original Python game engines remain isolated from the agent. Explore the shared reasoning syntax in the \n",
+  "ownChangedPathsCheckExitCode": 0,
+  "inheritedPathsByteExactToPublished064": [
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/cost-time-attribution-01/downstream-01/check-cost-static-inputs.py.patch",
+      "published064BytesEqual": true,
+      "sha256": "390bb9d37453c29d9767abc7aceaab1a37ea62f524ed2904c9343969ef3fb293"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/cost-time-attribution-01/downstream-01/finalize-owner-cost-contract.py.patch",
+      "published064BytesEqual": true,
+      "sha256": "121eae0056ff393c43d609bec0a8842846bc8192c870c865598954ee24645f40"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/cost-time-attribution-01/downstream-01/local-javascript-validator.txt",
+      "published064BytesEqual": true,
+      "sha256": "4f1cf067551677ea2cb021a66a0062bc632293b382ac804d8d4c6696a7edec3e"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/cost-time-attribution-01/downstream-01/local-python-validator.txt",
+      "published064BytesEqual": true,
+      "sha256": "cd5f5f4b2ec86d1cf154f4f48be9ceedfbc258699df268602f67bf58306672df"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/cost-time-attribution-01/downstream-01/review-owner-costs.py.patch",
+      "published064BytesEqual": true,
+      "sha256": "e727ff6b739d79f25fa1775c5c0581c2c4e6da81319c4c4aee8212d8e4ab9ac9"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/cost-time-attribution-01/qualifier.patch",
+      "published064BytesEqual": true,
+      "sha256": "7f2db741abb232dce87363bac916a7e23a5db795e600dbc00bb302c8e78488eb"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/klot-browser-readiness-read01.log",
+      "published064BytesEqual": true,
+      "sha256": "81a401fc2911a34a24068585ab325df16d2007b606981356e135cb18b2a98a18"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/klot-browser-readiness-read02.log",
+      "published064BytesEqual": true,
+      "sha256": "86e7b83ea25c75ec6cab7c7d6297f175e3951255efa1ea229fc0b49b84f7b52f"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/klot-browser-readiness-read03.log",
+      "published064BytesEqual": true,
+      "sha256": "934eede000d0551d3433adb514568b8e87362a2ad2a3931c1be67ac9d70fe992"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/cua-evidence/level-02-completed.txt",
+      "published064BytesEqual": true,
+      "sha256": "4558473e0be3cc7e5fba16e01c292d961e25161e4ebabe411b7d41d75d9f7653"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/cua-evidence/level-03-completed.txt",
+      "published064BytesEqual": true,
+      "sha256": "47e13cc8ce64296a201dece474043cb0a1fb90f08c8da5772cc281438c438e50"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/cua-evidence/paused-state.txt",
+      "published064BytesEqual": true,
+      "sha256": "20dba6856eccbeaae32ae4ece1e1f59d39ac70ab0816508bb5286d5f96eea93f"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-02/cua-evidence/progress-01.txt",
+      "published064BytesEqual": true,
+      "sha256": "2ca1b5fc751f7969e1b7809bdb8d3eb15392cdd616593a1c30bd45076727d5da"
+    }
+  ],
+  "qualification": "Inherited patches and raw evidence keep their exact whitespace. No native/source change. Own publication documents and roadmap pass diff --check."
+}

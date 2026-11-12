@@ -1,0 +1,37 @@
+{
+  "schema": "logos-engine.lot6b.bounded-result-readback.v1",
+  "status": "passed",
+  "startedAt": "2026-11-11T19:52:18.422978+00:00",
+  "finishedAt": "2026-11-11T19:52:18.495808+00:00",
+  "elapsedSeconds": 0.07282474100065883,
+  "maximumShellSeconds": 90,
+  "inputs": [
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/original-comparison-receipt.json",
+      "bytes": 2863,
+      "sha256": "ac54b9fbfa553d84e1be24541b5f01eadb76dbdcfe5d4e1c6aa704ba61f70b6d"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/original-comparison.json.gz",
+      "bytes": 108557,
+      "sha256": "3966ebc64b7da6974345a85d516533a87920560593192c392310451f3daf3478"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/negative-reader-01/qualification.json",
+      "bytes": 217145,
+      "sha256": "e1f170fa06a19c77d62cc3b58aae1abcbe66aa29a9d8bd879353ce0964225211"
+    }
+  ],
+  "failure": null,
+  "clockCloseExitCode": 0,
+  "chargedInterval": {
+    "label": "klot-fa23-independent-results-readback",
+    "startedAt": "2026-11-11T19:52:18.418640+00:00",
+    "startedMonotonic": 29182.886424811,
+    "bootId": "0f3a605c-a731-4342-8219-f25845d81f74",
+    "finishedAt": "2026-11-11T19:52:18.491596+00:00",
+    "elapsedSeconds": 0.0729396850001649
+  },
+  "chargedSeconds": 712.2264522220077,
+  "remainingSeconds": 1687.7735477779925
+}

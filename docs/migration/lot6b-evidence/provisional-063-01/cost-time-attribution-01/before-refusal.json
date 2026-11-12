@@ -1,0 +1,251 @@
+{
+  "schema": "logos-engine.lot6b-owner-cost-structural-attribution.v1",
+  "status": "functional_structure_qualification_failed",
+  "startedAt": "2026-11-11T18:01:12.913Z",
+  "checks": [
+    {
+      "name": "immutable_capture_provenance_before_measurement",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:warmup:0",
+      "passed": false,
+      "error": {
+        "name": "AssertionError",
+        "message": "Unattributed common node value changed: reasoning:trace:1\n+ actual - expected\n... Skipped lines\n\n  {\n    component: 'reasoning:trace:1',\n    profile: 'logos-engine.v6.state-graph.v1',\n    root: {\n      kind: 'object',\n...\n        created: {\n+         bits: '41dabd2b4330d4fe',\n-         bits: '41dabd2b4f0dc28f',\n          kind: 'float64'\n        },\n        episode: 'common-observation-frontier',\n        id: 1,\n        kind: 'src_decision'\n"
+      }
+    }
+  ],
+  "nodeAttributions": [],
+  "points": [],
+  "failures": [
+    {
+      "name": "AssertionError",
+      "message": "Unattributed common node value changed: reasoning:trace:1\n+ actual - expected\n... Skipped lines\n\n  {\n    component: 'reasoning:trace:1',\n    profile: 'logos-engine.v6.state-graph.v1',\n    root: {\n      kind: 'object',\n...\n        created: {\n+         bits: '41dabd2b4330d4fe',\n-         bits: '41dabd2b4f0dc28f',\n          kind: 'float64'\n        },\n        episode: 'common-observation-frontier',\n        id: 1,\n        kind: 'src_decision'\n"
+    }
+  ],
+  "commandBoundaryProjections": [],
+  "sourceFactCoverage": [
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 0,
+      "acquiredReturns": 0,
+      "persistedSourceFacts": 0,
+      "sourceCallIndices": [],
+      "capturedNegativeProposals": 1
+    }
+  ],
+  "commonValueCoverage": [],
+  "commonValuePolicy": {
+    "comparison": "exact",
+    "permittedMetadataDifference": "origin.source_digest",
+    "identityValueAttributions": [],
+    "unattributedDifferencesAllowed": 0
+  },
+  "generator": {
+    "path": "docs/migration/lot6b-evidence/qualify-cost-owner-graphs.mjs",
+    "bytes": 42632,
+    "sha256": "bbc882a92a4f30d110a4040c453b3d8437ba55362343e01baf5a07152ed801ab"
+  },
+  "derivedFrom": {
+    "path": "docs/migration/lot6a-evidence/qualify-cost-owner-graphs.mjs",
+    "bytes": 40668,
+    "sha256": "284e3fc3fa0ea2cb0513e6ecaf920598a5a1baa546723b0a69e0de124f0035d5"
+  },
+  "nativeDigests": {
+    "baseline": "a33a5f88f3fe0034930b2056239889bed6fab662424fc84a141a5f9a28db9e57",
+    "candidate": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886"
+  },
+  "recordedAt": "2026-11-11T18:01:14.802Z",
+  "inputs": [
+    {
+      "path": "docs/migration/lot6b-evidence/qualify-cost-owner-graphs.mjs",
+      "bytes": 42632,
+      "sha256": "bbc882a92a4f30d110a4040c453b3d8437ba55362343e01baf5a07152ed801ab"
+    },
+    {
+      "path": "docs/migration/lot6a-evidence/qualify-cost-owner-graphs.mjs",
+      "bytes": 40668,
+      "sha256": "284e3fc3fa0ea2cb0513e6ecaf920598a5a1baa546723b0a69e0de124f0035d5"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/capture-cost-owner-graphs.mjs",
+      "bytes": 25111,
+      "sha256": "6b567b2bdd39309f951e510e7e6c14fa4aade1f09f08e17961744adfa71315ed"
+    },
+    {
+      "path": "docs/migration/lot6a-evidence/capture-cost-owner-graphs.mjs",
+      "bytes": 23229,
+      "sha256": "bdeb730acce872041354d30085c7703e111bf52056bdad07e6f7d52ea0a2be64"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/functional-805b/owner-baseline.receipt.json",
+      "bytes": 116566,
+      "sha256": "bed95d45ad7f6dddd057fc23767a3396ca95612d7c67825e9e5059b1e7f98426"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/functional-805b/baseline-source-manifest.json",
+      "bytes": 37772,
+      "sha256": "6fd96a8c19867ee6740db8293c14bf241d9929a31e24f391e95d3aee4c6fab66"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/functional-805b/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/functional-805b/owner-baseline.json.gz",
+      "bytes": 5114146,
+      "sha256": "c87bd33945a9240a98260fe1753f4e1c553453c1ca161b688a34936c9790a255"
+    },
+    {
+      "path": "/workspace/sites/sra-lot6b-baseline-063-20261111/.sites-checkout/src/logos-engine/v6-native-runtime.ts",
+      "bytes": 167438,
+      "sha256": "c5bc40b3dd40b383f6bd31bbc8c77955a24c7b62a774792ccea38e9f8b79d0f3"
+    },
+    {
+      "path": "/workspace/sites/sra-lot6b-baseline-063-20261111/.sites-checkout/src/logos-engine/kernel.ts",
+      "bytes": 23637,
+      "sha256": "1cac40f5f9a3356d31ae0fd5247709eb82c5f6402aae3cb68d8edc54c838f207"
+    },
+    {
+      "path": "/workspace/sites/sra-lot6b-baseline-063-20261111/.sites-checkout/src/logos-engine/v6-knowledge-store.ts",
+      "bytes": 14849,
+      "sha256": "035d41597a5831bfa65bb1f627e3a0d05b84cc44cfda05566359873ef8c5af08"
+    },
+    {
+      "path": "/workspace/sites/sra-lot6b-baseline-063-20261111/.sites-checkout/scripts/measure-native-loop-costs.mjs",
+      "bytes": 20670,
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "/workspace/sites/sra-lot6b-baseline-063-20261111/.sites-checkout/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "bytes": 48531,
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+    },
+    {
+      "path": "/workspace/sites/sra-lot6b-baseline-063-20261111/.sites-checkout/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "bytes": 46966,
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    },
+    {
+      "path": "/workspace/sites/sra-lot6b-baseline-063-20261111/.sites-checkout/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "bytes": 53583,
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "path": "/workspace/sites/sra-lot6b-baseline-063-20261111/.sites-checkout/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "bytes": 111624,
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/functional-805b/owner-candidate.receipt.json",
+      "bytes": 116447,
+      "sha256": "2acae4389b9c5b86f61f98c96c1c21c43d5e27f4f8365bc82b0fa7df83f1e7d0"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/frozen-candidate/source-manifest.json",
+      "bytes": 38246,
+      "sha256": "2098197ea6c45c06bf42983bc1b47cd2dbe15a49f43b2f647d1884e591649f42"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/functional-805b/owner-candidate.json.gz",
+      "bytes": 5123898,
+      "sha256": "637c30a2dce3e6e002b432d346beeac1a1a05aa96d2cc007313dcb061aed43f9"
+    },
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "bytes": 172627,
+      "sha256": "267c976c386f6a459b0fc3edb05035d8b0c73173294f77a6534010dcea3ae972"
+    },
+    {
+      "path": "src/logos-engine/kernel.ts",
+      "bytes": 23637,
+      "sha256": "1cac40f5f9a3356d31ae0fd5247709eb82c5f6402aae3cb68d8edc54c838f207"
+    },
+    {
+      "path": "src/logos-engine/v6-knowledge-store.ts",
+      "bytes": 14849,
+      "sha256": "035d41597a5831bfa65bb1f627e3a0d05b84cc44cfda05566359873ef8c5af08"
+    },
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "bytes": 20670,
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "bytes": 48531,
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "bytes": 46966,
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    },
+    {
+      "path": "docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "bytes": 53583,
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "path": "docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "bytes": 111624,
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    },
+    {
+      "path": "src/logos-engine/v6-selected-rigid.ts",
+      "bytes": 29799,
+      "sha256": "767556eac7484145e40a00c191004de266aa2b952f12518e720f00a5925b1751"
+    },
+    {
+      "path": "src/logos-engine/v6-selected-rigid-types.ts",
+      "bytes": 4586,
+      "sha256": "dace249fcb41ed2e54b87cd65e733d23bfbbb76ac65bd5f1562aaa19736710a5"
+    },
+    {
+      "path": "src/logos-engine/v6-selected-rigid-geometry.ts",
+      "bytes": 8625,
+      "sha256": "c381780144d2c159f52767b5b9b4f3731023bf37379e000b8e95c8dbb59fce66"
+    },
+    {
+      "path": "src/logos-engine/v6-selected-rigid-search.ts",
+      "bytes": 8844,
+      "sha256": "fc4777ad7d2d6c6a97ab3df2e6032bda8bb296eddfa0f89e051287f40313fd91"
+    },
+    {
+      "path": "src/logos-engine/canonical.ts",
+      "bytes": 11291,
+      "sha256": "5c2884287aed82d97e7a85c905db5fb800a7e58a523c3ba128a1b61db5069cc1"
+    },
+    {
+      "path": "src/logos-engine/v6-native-state-graph.ts",
+      "bytes": 21947,
+      "sha256": "b739db6d6066a06f4175b4377f0d0ae1f351b708e5d27fbdb99c9de7e6ed0b4d"
+    },
+    {
+      "path": "src/logos-engine/v6-hash.ts",
+      "bytes": 2842,
+      "sha256": "6b86db7b533d55da900a3c65a06ec1e18547180245b3e3a2eaa837be09c669f5"
+    },
+    {
+      "path": "src/logos-engine/v6-src-program.ts",
+      "bytes": 5903,
+      "sha256": "d41717575e252784a81519e8c7853853af3c2d7372b86ecb7efb3655c3e3df77"
+    },
+    {
+      "path": "src/logos-engine/v6/programs.json",
+      "bytes": 1502394,
+      "sha256": "e006723f49460276a0753c1977ab0eabb30775409b37ba7d7af8b0b8b8527834"
+    },
+    {
+      "path": "src/runtime/v6-agent-service.ts",
+      "bytes": 18195,
+      "sha256": "02ce41d5e014fcc06f85371f552f949b9dfce56093afae4bc0fcb7aad2f60d96"
+    }
+  ],
+  "checkedCount": 2,
+  "formsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "qualification": "Every captured graph reconstructs from its exact complete Kernel delta chain using the validator bound to its own source freeze and identical value codecs. Every fragment identifier is checked against its content and every changed native graph root is hydrated. Added candidate nodes/deltas receive explicit installation, actual SelectedRigid checkpoint or reachable-fragment attribution, with zero source record calls or source-event facts and the exact empty source journal at every actual point in these foreign-owner cost traces. The observed acquisition owner is the registered family instance. Common node values are compared exactly; common metadata differs only at the explicitly bound origin.source_digest. Common delta identity/cause/order remains exact. Any further computed identity difference inside a value is refused pending a specific premeasurement attribution. This stricter 6B scope does not amend the historical 6A qualification. Structural counts come from the captures, without an added-node or cycle formula. The forms are fixed before any cost window and every future raw trial must match its own form exactly. No cost values, timing correction, future-run success, uncaptured measured-graph values or full caller semantic parity is inferred."
+}

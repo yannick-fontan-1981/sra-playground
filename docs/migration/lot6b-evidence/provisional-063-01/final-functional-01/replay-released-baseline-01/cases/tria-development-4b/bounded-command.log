@@ -1,0 +1,8 @@
+{"case": "tria-development-4b", "phase": "node_running", "elapsedSeconds": 0.0, "lastProgress": null, "nodeMemory": {"pid": 12, "VmSize": "112344 kB", "VmHWM": "2064 kB", "VmRSS": "2064 kB", "Threads": "1"}}
+{"case": "tria-development-4b", "nodeProgress": {"phase": "baseline-released"}}
+{"case": "tria-development-4b", "phase": "node_running", "elapsedSeconds": 15.08, "lastProgress": {"phase": "request", "operation": "advance", "sequence": 6}, "nodeMemory": {"pid": 12, "VmSize": "10523376 kB", "VmHWM": "508956 kB", "VmRSS": "498980 kB", "Threads": "11"}}
+{"case": "tria-development-4b", "phase": "node_running", "elapsedSeconds": 30.12, "lastProgress": {"phase": "request", "operation": "advance", "sequence": 12}, "nodeMemory": {"pid": 12, "VmSize": "10814472 kB", "VmHWM": "791884 kB", "VmRSS": "791884 kB", "Threads": "11"}}
+{"case": "tria-development-4b", "phase": "node_running", "elapsedSeconds": 45.15, "lastProgress": {"phase": "response", "operation": "advance", "sequence": 17, "kind": "stopped", "actions": 17, "cycles": 17, "level": 4, "levelsCompleted": 3, "family": "relative_arrangements", "reason": "target_levels_completed"}, "nodeMemory": {"pid": 12, "VmSize": "10932940 kB", "VmHWM": "949732 kB", "VmRSS": "910912 kB", "Threads": "11"}}
+{"case": "tria-development-4b", "phase": "comparison_running", "nodeExitCode": 0}
+{"case": "tria-development-4b", "phase": "completed", "passed": true, "actions": 17, "comparisonChecks": 17, "failedChecks": []}
+{"status": "passed", "passed": 1, "total": 1, "comparisonChecksPassed": 17}

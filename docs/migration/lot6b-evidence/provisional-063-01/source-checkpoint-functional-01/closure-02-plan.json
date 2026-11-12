@@ -1,0 +1,55 @@
+{
+  "schema": "logos-engine.lot6b.documentary-closure-plan.v1",
+  "recordedAt": "2026-11-11T20:58:18.638816+00:00",
+  "parent": "41cedc1f6a89b8639c19f0dc45eae24c264ad3c0",
+  "label": "closure-02",
+  "files": [
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/closure-01-command.json",
+      "bytes": 112447,
+      "sha256": "39aa387e385adcc0a93b3d5757b02f3dc719fadb6f627f82c3a638d09dc50f1c",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/closure-01-recovery-command.json",
+      "bytes": 116490,
+      "sha256": "f3b2653c4ca8164cf8db5ebfbc452ff3084b15545e5fe054aac1e8c02ee88ad4",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/closure-01-transport.json",
+      "bytes": 30307,
+      "sha256": "a5d3860f676594a58b9aa1dabbd32aef46b45bfce415310aa30f6d93264cee4c",
+      "mode": "0600"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/complete-checkpoint-summary.json",
+      "bytes": 1677,
+      "sha256": "1e51bd250b318ce74b500753ff8069551080c821041d08f8c7d508aac7787b90",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-selected-rigid-lineage.md",
+      "bytes": 38722,
+      "sha256": "44c0c3a2269e65a650232ae90587ea7e491937d9f3097a73e0002aa064cec403",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/lot6b-selected-rigid.md",
+      "bytes": 39071,
+      "sha256": "a7d02426e8984ef647f9df1244789050c649be6c4829d4f53e7d6cac9df785da",
+      "mode": "0644"
+    },
+    {
+      "path": "docs/migration/v6-delivery-roadmap.md",
+      "bytes": 295839,
+      "sha256": "011c21257461e66a2247dc4b046fa7e2365d659d320246fba60c4d0b98065fda",
+      "mode": "0644"
+    }
+  ],
+  "fileCount": 7,
+  "rawBytes": 634553,
+  "forceAddPaths": [],
+  "manifestSelfExcluded": true,
+  "qualification": "The plan is staged in addition to the listed files; it does not claim its own hash. Only closed own evidence, metadata, final case clock and three documents are included."
+}

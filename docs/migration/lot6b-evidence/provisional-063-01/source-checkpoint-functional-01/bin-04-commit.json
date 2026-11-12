@@ -1,0 +1,1031 @@
+{
+  "schema": "logos-engine.lot6b.single-bin-commit.v1",
+  "bin": "bin-04",
+  "status": "committed",
+  "attempt": 1,
+  "startedAt": "2026-11-11T20:47:40.321516+00:00",
+  "parent": "9c87ec460406fd3723b8781e6fc5f01db978a899",
+  "commit": "802dc1a60ea58cbdc095deb25bc2b4ba22e032e6",
+  "branch": "lot6b-selected-rigid-checkpoint-20261111",
+  "commands": [
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "rev-parse",
+        "--show-toplevel"
+      ],
+      "startedAt": "2026-11-11T20:47:40.326625+00:00",
+      "timeoutSeconds": 20,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 5,
+      "childProcessGroupId": 5,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 52,
+      "stdoutSha256": "1b9fbf98bad7efbbfe81b1e0277caa0d43308df834d0c05d84c7936d08e58f52",
+      "stdout": "/workspace/sites/sra-lot6b-20261111/.sites-checkout\n",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 5,
+          "startedAt": "2026-11-11T20:47:40.329824+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:47:40.329856+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:47:40.329861+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "rev-parse",
+        "HEAD"
+      ],
+      "startedAt": "2026-11-11T20:47:40.329972+00:00",
+      "timeoutSeconds": 20,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 6,
+      "childProcessGroupId": 6,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 41,
+      "stdoutSha256": "eef24738aa72e9eb082da159c3824cdc5d645ebd29250f539b116ebe530e2959",
+      "stdout": "9c87ec460406fd3723b8781e6fc5f01db978a899\n",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 6,
+          "startedAt": "2026-11-11T20:47:40.332329+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:47:40.332345+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:47:40.332349+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "diff",
+        "--cached",
+        "--name-only",
+        "-z"
+      ],
+      "startedAt": "2026-11-11T20:47:40.332358+00:00",
+      "timeoutSeconds": 20,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 7,
+      "childProcessGroupId": 7,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 7,
+          "startedAt": "2026-11-11T20:47:40.341961+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:47:40.341992+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:47:40.341995+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "ls-files",
+        "--deleted",
+        "-z"
+      ],
+      "startedAt": "2026-11-11T20:47:40.342010+00:00",
+      "timeoutSeconds": 20,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 8,
+      "childProcessGroupId": 8,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 8,
+          "startedAt": "2026-11-11T20:47:40.372813+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:47:40.372855+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:47:40.372859+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "check-ignore",
+        "--no-index",
+        "-z",
+        "--stdin"
+      ],
+      "startedAt": "2026-11-11T20:47:40.410426+00:00",
+      "timeoutSeconds": 20,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 9,
+      "childProcessGroupId": 9,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 297,
+      "stdoutSha256": "6033cff35f5a1306bcfb5e15e286bb893daeabcacc88ec4e70ecd9b66d5694fd",
+      "stdout": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/regressions/craf-055-output.raw.log\u0000docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/bounded-command.log\u0000",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 9,
+          "startedAt": "2026-11-11T20:47:40.414092+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:47:40.414116+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:47:40.414120+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "add",
+        "--",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/bounded-command.json",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/bounded-command.json",
+        "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-01/browser-watch.json",
+        "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/klot-campaign.json.gz",
+        "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/negative-reader-01/acquired-selection-detail/report.json.gz"
+      ],
+      "startedAt": "2026-11-11T20:47:40.414529+00:00",
+      "timeoutSeconds": 30,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 10,
+      "childProcessGroupId": 10,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 10,
+          "startedAt": "2026-11-11T20:47:41.042874+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:47:41.042912+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:47:41.042917+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "add",
+        "--force",
+        "--",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/regressions/craf-055-output.raw.log",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/bounded-command.log"
+      ],
+      "startedAt": "2026-11-11T20:47:41.042935+00:00",
+      "timeoutSeconds": 30,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 31,
+      "childProcessGroupId": 31,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 31,
+          "startedAt": "2026-11-11T20:47:41.057977+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:47:41.058017+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:47:41.058022+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "diff",
+        "--cached",
+        "--name-status",
+        "--no-renames",
+        "-z"
+      ],
+      "startedAt": "2026-11-11T20:47:41.058037+00:00",
+      "timeoutSeconds": 20,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 52,
+      "childProcessGroupId": 52,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 906,
+      "stdoutSha256": "f6334a555b2d6a5313aa7d165813458beb893af6e37630cc852f5957407c9608",
+      "stdout": "A\u0000docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/regressions/craf-055-output.raw.log\u0000A\u0000docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/bounded-command.json\u0000A\u0000docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/bounded-command.json\u0000A\u0000docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/bounded-command.log\u0000A\u0000docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-01/browser-watch.json\u0000A\u0000docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/klot-campaign.json.gz\u0000A\u0000docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/negative-reader-01/acquired-selection-detail/report.json.gz\u0000",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 52,
+          "startedAt": "2026-11-11T20:47:41.062403+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:47:41.062430+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:47:41.062434+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "ls-files",
+        "--stage",
+        "-z",
+        "--",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/regressions/craf-055-output.raw.log",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/bounded-command.json",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/bounded-command.json",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/bounded-command.log",
+        "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-01/browser-watch.json",
+        "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/klot-campaign.json.gz",
+        "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/negative-reader-01/acquired-selection-detail/report.json.gz"
+      ],
+      "startedAt": "2026-11-11T20:47:41.062463+00:00",
+      "timeoutSeconds": 20,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 53,
+      "childProcessGroupId": 53,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 1242,
+      "stdoutSha256": "138efd565abb7ca00b35936a652c43408658ce30abaf95a2e8112962ac2575b2",
+      "stdout": "100644 038528965f8dc09d1d5d402c1d594e4b303040f0 0\tdocs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/regressions/craf-055-output.raw.log\u0000100644 ef0f0411ef76e49fe8de80cca0c52a962571f638 0\tdocs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/bounded-command.json\u0000100644 2af3a33ca1d4bd7c6a716b30b4a3c2b474dcad4c 0\tdocs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/bounded-command.json\u0000100644 d541dd9dcdff300cf0a235523241e380124c3bb1 0\tdocs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/bounded-command.log\u0000100644 82d6a7f8f81766c0e0f18d3153f19fc954c4c03b 0\tdocs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-01/browser-watch.json\u0000100644 39aef42f286a41c01ae0af924c1f4b422942fed3 0\tdocs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/klot-campaign.json.gz\u0000100644 34b12b98bd0c31032642bd1407e35f5b33f9074f 0\tdocs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/negative-reader-01/acquired-selection-detail/report.json.gz\u0000",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 53,
+          "startedAt": "2026-11-11T20:47:41.066270+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:47:41.066285+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:47:41.066289+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "cat-file",
+        "blob",
+        "038528965f8dc09d1d5d402c1d594e4b303040f0"
+      ],
+      "startedAt": "2026-11-11T20:47:41.066306+00:00",
+      "timeoutSeconds": 20,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 54,
+      "childProcessGroupId": 54,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 123458,
+      "stdoutSha256": "3684e89f148fa97e9b7fcdb0f5fffda5ad52e364aeef9a3043a8d8c96614ab5c",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 54,
+          "startedAt": "2026-11-11T20:47:41.068995+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:47:41.069011+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:47:41.069015+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "cat-file",
+        "blob",
+        "ef0f0411ef76e49fe8de80cca0c52a962571f638"
+      ],
+      "startedAt": "2026-11-11T20:47:41.069123+00:00",
+      "timeoutSeconds": 20,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 55,
+      "childProcessGroupId": 55,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 664282,
+      "stdoutSha256": "295a1361f8a051a5c52f940548e71361a8e86eab1ea969614d84fb4e4a53b64f",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 55,
+          "startedAt": "2026-11-11T20:47:41.074770+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:47:41.074787+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:47:41.074790+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "cat-file",
+        "blob",
+        "2af3a33ca1d4bd7c6a716b30b4a3c2b474dcad4c"
+      ],
+      "startedAt": "2026-11-11T20:47:41.075239+00:00",
+      "timeoutSeconds": 20,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 56,
+      "childProcessGroupId": 56,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 664314,
+      "stdoutSha256": "2742035a932ae6bec4bd9b59a21689dff84061b0847f011605697942b8b7af21",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 56,
+          "startedAt": "2026-11-11T20:47:41.080018+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:47:41.080034+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:47:41.080037+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "cat-file",
+        "blob",
+        "d541dd9dcdff300cf0a235523241e380124c3bb1"
+      ],
+      "startedAt": "2026-11-11T20:47:41.080467+00:00",
+      "timeoutSeconds": 20,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 57,
+      "childProcessGroupId": 57,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 1718,
+      "stdoutSha256": "5138cd5b83b64c2eb2cc49094ffea1f477c64278ef0079f5152702d512808c36",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 57,
+          "startedAt": "2026-11-11T20:47:41.082863+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:47:41.082875+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:47:41.082878+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "cat-file",
+        "blob",
+        "82d6a7f8f81766c0e0f18d3153f19fc954c4c03b"
+      ],
+      "startedAt": "2026-11-11T20:47:41.082892+00:00",
+      "timeoutSeconds": 20,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 58,
+      "childProcessGroupId": 58,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 491692,
+      "stdoutSha256": "6751e109f5bd5499bfbc86b22ca560d7b411dff84fae6c75195b6dab73ba8093",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 58,
+          "startedAt": "2026-11-11T20:47:41.087801+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:47:41.087817+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:47:41.087820+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "cat-file",
+        "blob",
+        "39aef42f286a41c01ae0af924c1f4b422942fed3"
+      ],
+      "startedAt": "2026-11-11T20:47:41.088121+00:00",
+      "timeoutSeconds": 20,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 59,
+      "childProcessGroupId": 59,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 11699122,
+      "stdoutSha256": "dd24c51f21bbd382f57056076da7c6af7724d4c4183f458170a77e2dfec8563d",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 59,
+          "startedAt": "2026-11-11T20:47:41.183945+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:47:41.183999+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:47:41.184003+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "cat-file",
+        "blob",
+        "34b12b98bd0c31032642bd1407e35f5b33f9074f"
+      ],
+      "startedAt": "2026-11-11T20:47:41.190814+00:00",
+      "timeoutSeconds": 20,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 60,
+      "childProcessGroupId": 60,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 11521231,
+      "stdoutSha256": "1bea4059802e67b0ddf86835df6462fde49a1e3a70a10f393bc53791b9ecf49d",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 60,
+          "startedAt": "2026-11-11T20:47:41.310549+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:47:41.310611+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:47:41.310617+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "commit",
+        "-m",
+        "Checkpoint Lot 6B functional evidence bin-04/07"
+      ],
+      "startedAt": "2026-11-11T20:47:41.317332+00:00",
+      "timeoutSeconds": 120,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 61,
+      "childProcessGroupId": 61,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 1154,
+      "stdoutSha256": "c5d04b2b1b76d3cf8e243a2ba5626ed1a0e4d89e21c49c2aa695959c2d875e16",
+      "stdout": "[lot6b-selected-rigid-064 802dc1a6] Checkpoint Lot 6B functional evidence bin-04/07\n 7 files changed, 33098 insertions(+)\n create mode 100644 docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/regressions/craf-055-output.raw.log\n create mode 100644 docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/bounded-command.json\n create mode 100644 docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/bounded-command.json\n create mode 100644 docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/bounded-command.log\n create mode 100644 docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-01/browser-watch.json\n create mode 100644 docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/klot-campaign.json.gz\n create mode 100644 docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/negative-reader-01/acquired-selection-detail/report.json.gz\n",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 61,
+          "startedAt": "2026-11-11T20:47:41.358559+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:47:41.358595+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:47:41.358599+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "rev-parse",
+        "HEAD"
+      ],
+      "startedAt": "2026-11-11T20:47:41.358613+00:00",
+      "timeoutSeconds": 20,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 104,
+      "childProcessGroupId": 104,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 41,
+      "stdoutSha256": "936e704417b2aed63ffdc3e405bd53cafd80ba58caa573b43ecb8fd72788e363",
+      "stdout": "802dc1a60ea58cbdc095deb25bc2b4ba22e032e6\n",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 104,
+          "startedAt": "2026-11-11T20:47:41.364498+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:47:41.364520+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:47:41.364523+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "rev-parse",
+        "HEAD^"
+      ],
+      "startedAt": "2026-11-11T20:47:41.364538+00:00",
+      "timeoutSeconds": 20,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 105,
+      "childProcessGroupId": 105,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 41,
+      "stdoutSha256": "eef24738aa72e9eb082da159c3824cdc5d645ebd29250f539b116ebe530e2959",
+      "stdout": "9c87ec460406fd3723b8781e6fc5f01db978a899\n",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 105,
+          "startedAt": "2026-11-11T20:47:41.366580+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:47:41.366594+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:47:41.366597+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "diff",
+        "--name-status",
+        "--no-renames",
+        "-z",
+        "9c87ec460406fd3723b8781e6fc5f01db978a899",
+        "802dc1a60ea58cbdc095deb25bc2b4ba22e032e6",
+        "--"
+      ],
+      "startedAt": "2026-11-11T20:47:41.366606+00:00",
+      "timeoutSeconds": 20,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 106,
+      "childProcessGroupId": 106,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 906,
+      "stdoutSha256": "f6334a555b2d6a5313aa7d165813458beb893af6e37630cc852f5957407c9608",
+      "stdout": "A\u0000docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/regressions/craf-055-output.raw.log\u0000A\u0000docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/bounded-command.json\u0000A\u0000docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/bounded-command.json\u0000A\u0000docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/bounded-command.log\u0000A\u0000docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-01/browser-watch.json\u0000A\u0000docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/klot-campaign.json.gz\u0000A\u0000docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/negative-reader-01/acquired-selection-detail/report.json.gz\u0000",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 106,
+          "startedAt": "2026-11-11T20:47:41.369322+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:47:41.369335+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:47:41.369338+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "ls-tree",
+        "-r",
+        "-z",
+        "802dc1a60ea58cbdc095deb25bc2b4ba22e032e6",
+        "--",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/regressions/craf-055-output.raw.log",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/bounded-command.json",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/bounded-command.json",
+        "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/bounded-command.log",
+        "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-01/browser-watch.json",
+        "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/klot-campaign.json.gz",
+        "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/negative-reader-01/acquired-selection-detail/report.json.gz"
+      ],
+      "startedAt": "2026-11-11T20:47:41.369362+00:00",
+      "timeoutSeconds": 20,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 107,
+      "childProcessGroupId": 107,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 1263,
+      "stdoutSha256": "73c891e2c09ff57e365c7c691d282a816827380d92ca70b03b701deed60a7129",
+      "stdout": "100644 blob 038528965f8dc09d1d5d402c1d594e4b303040f0\tdocs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/regressions/craf-055-output.raw.log\u0000100644 blob ef0f0411ef76e49fe8de80cca0c52a962571f638\tdocs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/bounded-command.json\u0000100644 blob 2af3a33ca1d4bd7c6a716b30b4a3c2b474dcad4c\tdocs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/bounded-command.json\u0000100644 blob d541dd9dcdff300cf0a235523241e380124c3bb1\tdocs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/bounded-command.log\u0000100644 blob 82d6a7f8f81766c0e0f18d3153f19fc954c4c03b\tdocs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-01/browser-watch.json\u0000100644 blob 39aef42f286a41c01ae0af924c1f4b422942fed3\tdocs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/klot-campaign.json.gz\u0000100644 blob 34b12b98bd0c31032642bd1407e35f5b33f9074f\tdocs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/negative-reader-01/acquired-selection-detail/report.json.gz\u0000",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 107,
+          "startedAt": "2026-11-11T20:47:41.371890+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:47:41.371905+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:47:41.371907+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "--literal-pathspecs",
+        "diff",
+        "--cached",
+        "--name-only",
+        "-z"
+      ],
+      "startedAt": "2026-11-11T20:47:41.371929+00:00",
+      "timeoutSeconds": 20,
+      "timedOut": false,
+      "childProcessGroupReaped": true,
+      "orphanProcessGroupTerminated": false,
+      "processGroupClosureIncident": false,
+      "childStarted": true,
+      "errorCleanupMaximumAdditionalSeconds": 5,
+      "childPid": 108,
+      "childProcessGroupId": 108,
+      "exitCode": 0,
+      "stderr": "",
+      "stdoutBytes": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "",
+      "processGroupClosureChecks": [
+        {
+          "phase": "after_successful_communicate",
+          "processGroupId": 108,
+          "startedAt": "2026-11-11T20:47:41.382061+00:00",
+          "signals": [],
+          "initiallyVisible": false,
+          "leaderExitObservedInitially": true,
+          "finishedAt": "2026-11-11T20:47:41.382129+00:00",
+          "finallyVisible": false,
+          "directChildExitCode": 0
+        }
+      ],
+      "finishedAt": "2026-11-11T20:47:41.382134+00:00"
+    }
+  ],
+  "files": [
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/regressions/craf-055-output.raw.log",
+      "sha256": "3684e89f148fa97e9b7fcdb0f5fffda5ad52e364aeef9a3043a8d8c96614ab5c",
+      "bytes": 123458,
+      "mode": "0644",
+      "gitState": "ignored_auxiliary_of_new_closed_evidence",
+      "requiresExplicitForceAdd": true,
+      "contentHandling": "opaque_bytes_only"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/bounded-command.json",
+      "sha256": "295a1361f8a051a5c52f940548e71361a8e86eab1ea969614d84fb4e4a53b64f",
+      "bytes": 664282,
+      "mode": "0644",
+      "gitState": "new_untracked",
+      "requiresExplicitForceAdd": false,
+      "contentHandling": "opaque_bytes_only"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/bounded-command.json",
+      "sha256": "2742035a932ae6bec4bd9b59a21689dff84061b0847f011605697942b8b7af21",
+      "bytes": 664314,
+      "mode": "0644",
+      "gitState": "new_untracked",
+      "requiresExplicitForceAdd": false,
+      "contentHandling": "opaque_bytes_only"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/bounded-command.log",
+      "sha256": "5138cd5b83b64c2eb2cc49094ffea1f477c64278ef0079f5152702d512808c36",
+      "bytes": 1718,
+      "mode": "0644",
+      "gitState": "ignored_auxiliary_of_new_closed_evidence",
+      "requiresExplicitForceAdd": true,
+      "contentHandling": "opaque_bytes_only"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-01/browser-watch.json",
+      "sha256": "6751e109f5bd5499bfbc86b22ca560d7b411dff84fae6c75195b6dab73ba8093",
+      "bytes": 491692,
+      "mode": "0644",
+      "gitState": "new_untracked",
+      "requiresExplicitForceAdd": false,
+      "contentHandling": "opaque_bytes_only"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/klot-campaign.json.gz",
+      "sha256": "dd24c51f21bbd382f57056076da7c6af7724d4c4183f458170a77e2dfec8563d",
+      "bytes": 11699122,
+      "mode": "0644",
+      "gitState": "new_untracked",
+      "requiresExplicitForceAdd": false,
+      "contentHandling": "opaque_bytes_only"
+    },
+    {
+      "path": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/negative-reader-01/acquired-selection-detail/report.json.gz",
+      "sha256": "1bea4059802e67b0ddf86835df6462fde49a1e3a70a10f393bc53791b9ecf49d",
+      "bytes": 11521231,
+      "mode": "0644",
+      "gitState": "new_untracked",
+      "requiresExplicitForceAdd": false,
+      "contentHandling": "opaque_bytes_only"
+    }
+  ],
+  "networkUsed": false,
+  "automaticResetOrRetry": false,
+  "remoteVerificationPerformed": false,
+  "rootMustVerifyRemoteSeparately": true,
+  "coordinationBefore": [
+    {
+      "lane": "lot5c",
+      "updatedAt": "2026-11-11T20:39:04.511712+00:00",
+      "quietRequested": false,
+      "requestId": "lot5c-cost-a33a5f88-recovery-02"
+    },
+    {
+      "lane": "lot8a",
+      "updatedAt": "2026-11-11T20:42:24.934984+00:00",
+      "quietRequested": null,
+      "requestId": "lot5c-cost-a33a5f88-final-01"
+    },
+    {
+      "lane": "lot10c",
+      "updatedAt": "2026-11-11T20:47:11.343931+00:00",
+      "quietRequested": false,
+      "requestId": "lot5c-cost-a33a5f88-final-01"
+    }
+  ],
+  "planSha256": "39a6b0c8024fc7869acd4aeacc1438a1d68199fc4d9769bacac3a3bde66ed2d4",
+  "rawBytes": 25165817,
+  "normalAddPaths": [
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/bounded-command.json",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/bounded-command.json",
+    "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-01/browser-watch.json",
+    "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/klot-campaign.json.gz",
+    "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/negative-reader-01/acquired-selection-detail/report.json.gz"
+  ],
+  "forceAddPaths": [
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/regressions/craf-055-output.raw.log",
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/bounded-command.log"
+  ],
+  "previousPushReceipt": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/bin-03-push.json",
+    "sha256": "29d204b5edb8010899d9589192b86b40b387b62e713504334870e031826522a6",
+    "bytes": 1101
+  },
+  "coordinationImmediatelyBeforeStaging": [
+    {
+      "lane": "lot5c",
+      "updatedAt": "2026-11-11T20:39:04.511712+00:00",
+      "quietRequested": false,
+      "requestId": "lot5c-cost-a33a5f88-recovery-02"
+    },
+    {
+      "lane": "lot8a",
+      "updatedAt": "2026-11-11T20:42:24.934984+00:00",
+      "quietRequested": null,
+      "requestId": "lot5c-cost-a33a5f88-final-01"
+    },
+    {
+      "lane": "lot10c",
+      "updatedAt": "2026-11-11T20:47:11.343931+00:00",
+      "quietRequested": false,
+      "requestId": "lot5c-cost-a33a5f88-final-01"
+    }
+  ],
+  "stagedObjects": {
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/craf-055/regressions/craf-055-output.raw.log": {
+      "mode": "100644",
+      "object": "038528965f8dc09d1d5d402c1d594e4b303040f0"
+    },
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/isos-development-4c/bounded-command.json": {
+      "mode": "100644",
+      "object": "ef0f0411ef76e49fe8de80cca0c52a962571f638"
+    },
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/bounded-command.json": {
+      "mode": "100644",
+      "object": "2af3a33ca1d4bd7c6a716b30b4a3c2b474dcad4c"
+    },
+    "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/replay-released-baseline-01/cases/kata-060-self-consistency/bounded-command.log": {
+      "mode": "100644",
+      "object": "d541dd9dcdff300cf0a235523241e380124c3bb1"
+    },
+    "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/browser-qa-01/browser-watch.json": {
+      "mode": "100644",
+      "object": "82d6a7f8f81766c0e0f18d3153f19fc954c4c03b"
+    },
+    "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/klot-campaign.json.gz": {
+      "mode": "100644",
+      "object": "39aef42f286a41c01ae0af924c1f4b422942fed3"
+    },
+    "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/negative-reader-01/acquired-selection-detail/report.json.gz": {
+      "mode": "100644",
+      "object": "34b12b98bd0c31032642bd1407e35f5b33f9074f"
+    }
+  },
+  "exactCommittedPathSet": true,
+  "committedBlobsMatchPlan": true,
+  "workingFilesStillMatchPlan": true,
+  "finishedAt": "2026-11-11T20:47:41.401291+00:00",
+  "elapsedSeconds": 1.0797828719987592,
+  "actualExitCode": 0
+}

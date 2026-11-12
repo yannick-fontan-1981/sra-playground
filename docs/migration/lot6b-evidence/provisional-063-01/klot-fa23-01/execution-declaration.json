@@ -1,0 +1,67 @@
+{
+  "schema": "logos-engine.lot6b.integrated-klot-declaration.v1",
+  "declaredAt": "2026-11-11T19:33:32.795500+00:00",
+  "nativeDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+  "nativeFileCount": 322,
+  "sourceManifest": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/source-manifest.json",
+  "provisionalPredecessor": "805b30297dc1b715dbfd9f1197a9a8ba7b361b90",
+  "actualPublished063Reconciliation": "pending",
+  "game": "KLOT",
+  "coldStart": true,
+  "targetLevels": 3,
+  "maximumActions": 120,
+  "clock": "docs/migration/lot6b-evidence/klot-case-clock.json",
+  "watch": "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/functional-watch.json",
+  "commandLimitsSeconds": {
+    "capture": 360,
+    "originalReader": 300,
+    "negativeReaders": 300
+  },
+  "executionStarted": false,
+  "commands": {
+    "capture": [
+      "python",
+      "-B",
+      "scripts/run-bounded-native-campaign-proof.py",
+      "KLOT",
+      "3",
+      "120",
+      "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01"
+    ],
+    "original": [
+      "env",
+      "PYTHONHASHSEED=0",
+      "python",
+      "-B",
+      "scripts/compare-selected-rigid-public-parity.py",
+      "--root",
+      "/workspace/sites/sra-lot6b-20261111/.sites-checkout",
+      "--report",
+      "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/klot-campaign.json.gz",
+      "--output",
+      "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/original-comparison.json.gz",
+      "--receipt",
+      "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/original-comparison-receipt.json",
+      "--require-prefixes"
+    ],
+    "negative": [
+      "env",
+      "PYTHONHASHSEED=0",
+      "python",
+      "-B",
+      "scripts/tests/qualify-selected-rigid-cold-reader.py",
+      "--report",
+      "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/klot-campaign.json.gz",
+      "--positive-result",
+      "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/original-comparison.json.gz",
+      "--positive-receipt",
+      "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/original-comparison-receipt.json",
+      "--output-dir",
+      "docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/negative-reader-01",
+      "--timeout-seconds",
+      "120"
+    ]
+  },
+  "qualification": "Prospective bounded integrated proof only; all diagnostics charge the same clock. No historical result reattributed and no full-game/browser/cost/publication success inferred.",
+  "runtimeAssetMaterialization": "docs/migration/lot6b-evidence/provisional-063-01/runtime-cache-materialization-01/result.json"
+}

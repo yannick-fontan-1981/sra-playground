@@ -1,0 +1,17 @@
+{
+  "schema": "logos-engine.lot6b-browser-preview-ready.v1",
+  "status": "awaiting_root_cua",
+  "startedAt": "2026-11-11T20:10:57.673884+00:00",
+  "readyAt": "2026-11-11T20:10:58.779369+00:00",
+  "exactReturnedUrl": "http://127.0.0.1:4173/",
+  "qaUrl": "http://127.0.0.1:4173/?game=KLOT&level=1",
+  "leasePid": 11,
+  "leaseAliveAtReady": true,
+  "leaseEvidence": "preview-start.json",
+  "selection": "Only the explicitly authorized UI query game=KLOT&level=1 is appended; host/port/path remain exactly returned.",
+  "qaTargetSeconds": 360,
+  "operatorClosureDeadlineSeconds": 480,
+  "helperWaitLimitSeconds": 525,
+  "outerSupervisorLimitSeconds": 600,
+  "browserWorkerControllableByHelper": false
+}

@@ -1,0 +1,5 @@
+{
+  "recordedAt": "2026-11-11T20:16:58.135401+00:00",
+  "elapsedSeconds": 360.46142855400103,
+  "action": "Root must finish QA, actually close CUA tab, stop preview, then write operator-close.json before480s."
+}

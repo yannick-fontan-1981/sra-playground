@@ -1,0 +1,1 @@
+{"report": "docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/klot-browser-readiness-review.json", "managedPreviewUrl": null, "historicalUrlMetadata": [], "blockers": ["new_klot_manifest_absent", "final_functional_manifest_copy_absent", "functional_gate_pending", "managed_preview_build_daemon_identity_unobserved", "publication_063_provisional"]}

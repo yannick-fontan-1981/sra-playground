@@ -1,0 +1,1624 @@
+{
+  "schema": "logos-engine.lot6b-temporal-downstream-synthetic-cases.v1",
+  "qualification": "Synthetic local-validator cases only. They do not validate raw graph traversal, captured source files or a cost result.",
+  "base": {
+    "attribution": {
+      "schema": "logos-engine.lot6b-owner-cost-structural-attribution.v1",
+      "status": "qualified_functional_structure",
+      "nativeDigests": {
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "candidate": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "generator": {
+        "path": "docs/migration/lot6b-evidence/qualify-cost-owner-graphs.mjs",
+        "bytes": 123,
+        "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+      },
+      "inputs": [
+        {
+          "path": "docs/migration/lot6b-evidence/qualify-cost-owner-graphs.mjs",
+          "bytes": 123,
+          "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+        },
+        {
+          "path": "docs/migration/lot6b-evidence/capture-cost-owner-graphs.mjs",
+          "bytes": 123,
+          "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        },
+        {
+          "path": "src/logos-engine/v6-reasoning-memory.ts",
+          "bytes": 123,
+          "sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+        },
+        {
+          "path": "src/logos-engine/v6-native-authority.ts",
+          "bytes": 123,
+          "sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        },
+        {
+          "path": "synthetic/baseline.json.gz",
+          "bytes": 123,
+          "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+        },
+        {
+          "path": "synthetic/baseline.receipt.json",
+          "bytes": 123,
+          "sha256": "3333333333333333333333333333333333333333333333333333333333333333"
+        },
+        {
+          "path": "synthetic/candidate.json.gz",
+          "bytes": 123,
+          "sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+        },
+        {
+          "path": "synthetic/candidate.receipt.json",
+          "bytes": 123,
+          "sha256": "4444444444444444444444444444444444444444444444444444444444444444"
+        }
+      ],
+      "failures": [],
+      "points": [
+        {
+          "case": "STCK",
+          "form": "warmup",
+          "pointIndex": 0,
+          "baselineNodeCount": 5,
+          "baselineDeltaCount": 5
+        },
+        {
+          "case": "STCK",
+          "form": "measured",
+          "pointIndex": 0,
+          "baselineNodeCount": 5,
+          "baselineDeltaCount": 5
+        },
+        {
+          "case": "SMLP",
+          "form": "warmup",
+          "pointIndex": 0,
+          "baselineNodeCount": 5,
+          "baselineDeltaCount": 5
+        },
+        {
+          "case": "SMLP",
+          "form": "measured",
+          "pointIndex": 0,
+          "baselineNodeCount": 5,
+          "baselineDeltaCount": 5
+        }
+      ],
+      "commonValueCoverage": [
+        {
+          "case": "STCK",
+          "form": "warmup",
+          "pointIndex": 0,
+          "commonNodesCompared": 5,
+          "commonDeltasCompared": 5,
+          "comparison": "exact_except_attributed_trace_envelope_created",
+          "unattributedDifferences": 0
+        },
+        {
+          "case": "STCK",
+          "form": "measured",
+          "pointIndex": 0,
+          "commonNodesCompared": 5,
+          "commonDeltasCompared": 5,
+          "comparison": "exact_except_attributed_trace_envelope_created",
+          "unattributedDifferences": 0
+        },
+        {
+          "case": "SMLP",
+          "form": "warmup",
+          "pointIndex": 0,
+          "commonNodesCompared": 5,
+          "commonDeltasCompared": 5,
+          "comparison": "exact_except_attributed_trace_envelope_created",
+          "unattributedDifferences": 0
+        },
+        {
+          "case": "SMLP",
+          "form": "measured",
+          "pointIndex": 0,
+          "commonNodesCompared": 5,
+          "commonDeltasCompared": 5,
+          "comparison": "exact_except_attributed_trace_envelope_created",
+          "unattributedDifferences": 0
+        }
+      ],
+      "commonValuePolicy": {
+        "comparison": "exact_except_attributed_trace_envelope_created",
+        "permittedMetadataDifference": "origin.source_digest",
+        "identityValueAttributions": [],
+        "unattributedDifferencesAllowed": 0,
+        "traceCreatedAttribution": {
+          "nodeComponent": "native_reasoning_trace",
+          "path": "/value/root/members/created/bits",
+          "sourceClock": "Date.now() / 1000",
+          "sourceFiles": [
+            "src/logos-engine/v6-reasoning-memory.ts",
+            "src/logos-engine/v6-native-authority.ts"
+          ],
+          "captureWindows": {
+            "baseline": {
+              "startedAt": "2026-11-11T10:00:00.000Z",
+              "finishedAt": "2026-11-11T10:00:10.000Z",
+              "startMs": 1794391200000,
+              "finishMs": 1794391210000
+            },
+            "candidate": {
+              "startedAt": "2026-11-11T10:01:00.000Z",
+              "finishedAt": "2026-11-11T10:01:10.000Z",
+              "startMs": 1794391260000,
+              "finishMs": 1794391270000
+            }
+          },
+          "stabilityKey": [
+            "role",
+            "sessionId",
+            "nodeId"
+          ],
+          "records": [
+            {
+              "role": "baseline",
+              "sessionId": "lot6b-owner-cost-stck-warmup",
+              "nodeId": "reasoning:trace:1",
+              "bits": "41dabd0f28400000",
+              "seconds": 1794391201.0,
+              "milliseconds": 1794391201000,
+              "createdAt": "2026-11-11T10:00:01.000Z",
+              "captureStartedAt": "2026-11-11T10:00:00.000Z",
+              "captureFinishedAt": "2026-11-11T10:00:10.000Z"
+            },
+            {
+              "role": "candidate",
+              "sessionId": "lot6b-owner-cost-stck-warmup",
+              "nodeId": "reasoning:trace:1",
+              "bits": "41dabd0f37400000",
+              "seconds": 1794391261.0,
+              "milliseconds": 1794391261000,
+              "createdAt": "2026-11-11T10:01:01.000Z",
+              "captureStartedAt": "2026-11-11T10:01:00.000Z",
+              "captureFinishedAt": "2026-11-11T10:01:10.000Z"
+            },
+            {
+              "role": "baseline",
+              "sessionId": "lot6b-owner-cost-stck-measured",
+              "nodeId": "reasoning:trace:1",
+              "bits": "41dabd0f28401062",
+              "seconds": 1794391201.001,
+              "milliseconds": 1794391201001,
+              "createdAt": "2026-11-11T10:00:01.001Z",
+              "captureStartedAt": "2026-11-11T10:00:00.000Z",
+              "captureFinishedAt": "2026-11-11T10:00:10.000Z"
+            },
+            {
+              "role": "candidate",
+              "sessionId": "lot6b-owner-cost-stck-measured",
+              "nodeId": "reasoning:trace:1",
+              "bits": "41dabd0f37401062",
+              "seconds": 1794391261.001,
+              "milliseconds": 1794391261001,
+              "createdAt": "2026-11-11T10:01:01.001Z",
+              "captureStartedAt": "2026-11-11T10:01:00.000Z",
+              "captureFinishedAt": "2026-11-11T10:01:10.000Z"
+            },
+            {
+              "role": "baseline",
+              "sessionId": "lot6b-owner-cost-smlp-warmup",
+              "nodeId": "reasoning:trace:1",
+              "bits": "41dabd0f284020c5",
+              "seconds": 1794391201.002,
+              "milliseconds": 1794391201002,
+              "createdAt": "2026-11-11T10:00:01.002Z",
+              "captureStartedAt": "2026-11-11T10:00:00.000Z",
+              "captureFinishedAt": "2026-11-11T10:00:10.000Z"
+            },
+            {
+              "role": "candidate",
+              "sessionId": "lot6b-owner-cost-smlp-warmup",
+              "nodeId": "reasoning:trace:1",
+              "bits": "41dabd0f374020c5",
+              "seconds": 1794391261.002,
+              "milliseconds": 1794391261002,
+              "createdAt": "2026-11-11T10:01:01.002Z",
+              "captureStartedAt": "2026-11-11T10:01:00.000Z",
+              "captureFinishedAt": "2026-11-11T10:01:10.000Z"
+            },
+            {
+              "role": "baseline",
+              "sessionId": "lot6b-owner-cost-smlp-measured",
+              "nodeId": "reasoning:trace:1",
+              "bits": "41dabd0f28403127",
+              "seconds": 1794391201.003,
+              "milliseconds": 1794391201003,
+              "createdAt": "2026-11-11T10:00:01.003Z",
+              "captureStartedAt": "2026-11-11T10:00:00.000Z",
+              "captureFinishedAt": "2026-11-11T10:00:10.000Z"
+            },
+            {
+              "role": "candidate",
+              "sessionId": "lot6b-owner-cost-smlp-measured",
+              "nodeId": "reasoning:trace:1",
+              "bits": "41dabd0f37403127",
+              "seconds": 1794391261.003,
+              "milliseconds": 1794391261003,
+              "createdAt": "2026-11-11T10:01:01.003Z",
+              "captureStartedAt": "2026-11-11T10:01:00.000Z",
+              "captureFinishedAt": "2026-11-11T10:01:10.000Z"
+            }
+          ],
+          "allOtherFieldsExact": true
+        }
+      }
+    },
+    "receipts": {
+      "baseline": {
+        "schema": "logos-engine.lot6b-owner-cost-functional-capture-receipt.v1",
+        "status": "captured_functional_structure",
+        "role": "baseline",
+        "nativeDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "report": {
+          "path": "synthetic/baseline.json.gz",
+          "bytes": 123,
+          "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+        },
+        "generator": {
+          "path": "docs/migration/lot6b-evidence/capture-cost-owner-graphs.mjs",
+          "bytes": 123,
+          "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        },
+        "generatorAfter": {
+          "path": "docs/migration/lot6b-evidence/capture-cost-owner-graphs.mjs",
+          "bytes": 123,
+          "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        },
+        "nativeInventoryBefore": {
+          "fileCount": 2,
+          "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "files": {
+            "src/logos-engine/v6-reasoning-memory.ts": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "src/logos-engine/v6-native-authority.ts": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+          }
+        },
+        "nativeInventoryAfter": {
+          "fileCount": 2,
+          "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "files": {
+            "src/logos-engine/v6-reasoning-memory.ts": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "src/logos-engine/v6-native-authority.ts": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+          }
+        },
+        "inputsBefore": [
+          {
+            "path": "docs/migration/lot6b-evidence/capture-cost-owner-graphs.mjs",
+            "bytes": 123,
+            "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+          }
+        ],
+        "inputsAfter": [
+          {
+            "path": "docs/migration/lot6b-evidence/capture-cost-owner-graphs.mjs",
+            "bytes": 123,
+            "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+          }
+        ],
+        "nativeSourceUnchanged": true,
+        "inputsUnchanged": true,
+        "generatorUnchanged": true,
+        "failures": [],
+        "startedAt": "2026-11-11T10:00:00.000Z",
+        "finishedAt": "2026-11-11T10:00:10.000Z",
+        "sessionCount": 4,
+        "sessions": [
+          {
+            "case": "STCK",
+            "form": "warmup",
+            "sessionId": "lot6b-owner-cost-stck-warmup",
+            "status": "captured_functional_structure",
+            "captures": 1,
+            "terminalInspections": 0,
+            "shape": {
+              "requests": [
+                {
+                  "type": "init"
+                }
+              ],
+              "inspection": []
+            }
+          },
+          {
+            "case": "STCK",
+            "form": "measured",
+            "sessionId": "lot6b-owner-cost-stck-measured",
+            "status": "captured_functional_structure",
+            "captures": 1,
+            "terminalInspections": 0,
+            "shape": {
+              "requests": [
+                {
+                  "type": "init"
+                }
+              ],
+              "inspection": []
+            }
+          },
+          {
+            "case": "SMLP",
+            "form": "warmup",
+            "sessionId": "lot6b-owner-cost-smlp-warmup",
+            "status": "captured_functional_structure",
+            "captures": 1,
+            "terminalInspections": 0,
+            "shape": {
+              "requests": [
+                {
+                  "type": "init"
+                }
+              ],
+              "inspection": []
+            }
+          },
+          {
+            "case": "SMLP",
+            "form": "measured",
+            "sessionId": "lot6b-owner-cost-smlp-measured",
+            "status": "captured_functional_structure",
+            "captures": 1,
+            "terminalInspections": 0,
+            "shape": {
+              "requests": [
+                {
+                  "type": "init"
+                }
+              ],
+              "inspection": []
+            }
+          }
+        ]
+      },
+      "candidate": {
+        "schema": "logos-engine.lot6b-owner-cost-functional-capture-receipt.v1",
+        "status": "captured_functional_structure",
+        "role": "candidate",
+        "nativeDigest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "report": {
+          "path": "synthetic/candidate.json.gz",
+          "bytes": 123,
+          "sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+        },
+        "generator": {
+          "path": "docs/migration/lot6b-evidence/capture-cost-owner-graphs.mjs",
+          "bytes": 123,
+          "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        },
+        "generatorAfter": {
+          "path": "docs/migration/lot6b-evidence/capture-cost-owner-graphs.mjs",
+          "bytes": 123,
+          "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        },
+        "nativeInventoryBefore": {
+          "fileCount": 2,
+          "digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "files": {
+            "src/logos-engine/v6-reasoning-memory.ts": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "src/logos-engine/v6-native-authority.ts": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+          }
+        },
+        "nativeInventoryAfter": {
+          "fileCount": 2,
+          "digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "files": {
+            "src/logos-engine/v6-reasoning-memory.ts": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "src/logos-engine/v6-native-authority.ts": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+          }
+        },
+        "inputsBefore": [
+          {
+            "path": "docs/migration/lot6b-evidence/capture-cost-owner-graphs.mjs",
+            "bytes": 123,
+            "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+          }
+        ],
+        "inputsAfter": [
+          {
+            "path": "docs/migration/lot6b-evidence/capture-cost-owner-graphs.mjs",
+            "bytes": 123,
+            "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+          }
+        ],
+        "nativeSourceUnchanged": true,
+        "inputsUnchanged": true,
+        "generatorUnchanged": true,
+        "failures": [],
+        "startedAt": "2026-11-11T10:01:00.000Z",
+        "finishedAt": "2026-11-11T10:01:10.000Z",
+        "sessionCount": 4,
+        "sessions": [
+          {
+            "case": "STCK",
+            "form": "warmup",
+            "sessionId": "lot6b-owner-cost-stck-warmup",
+            "status": "captured_functional_structure",
+            "captures": 1,
+            "terminalInspections": 0,
+            "shape": {
+              "requests": [
+                {
+                  "type": "init"
+                }
+              ],
+              "inspection": []
+            }
+          },
+          {
+            "case": "STCK",
+            "form": "measured",
+            "sessionId": "lot6b-owner-cost-stck-measured",
+            "status": "captured_functional_structure",
+            "captures": 1,
+            "terminalInspections": 0,
+            "shape": {
+              "requests": [
+                {
+                  "type": "init"
+                }
+              ],
+              "inspection": []
+            }
+          },
+          {
+            "case": "SMLP",
+            "form": "warmup",
+            "sessionId": "lot6b-owner-cost-smlp-warmup",
+            "status": "captured_functional_structure",
+            "captures": 1,
+            "terminalInspections": 0,
+            "shape": {
+              "requests": [
+                {
+                  "type": "init"
+                }
+              ],
+              "inspection": []
+            }
+          },
+          {
+            "case": "SMLP",
+            "form": "measured",
+            "sessionId": "lot6b-owner-cost-smlp-measured",
+            "status": "captured_functional_structure",
+            "captures": 1,
+            "terminalInspections": 0,
+            "shape": {
+              "requests": [
+                {
+                  "type": "init"
+                }
+              ],
+              "inspection": []
+            }
+          }
+        ]
+      }
+    },
+    "fixture": {
+      "nativeDigests": {
+        "baseline": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "candidate": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "captureTool": {
+        "path": "docs/migration/lot6b-evidence/capture-cost-owner-graphs.mjs",
+        "bytes": 123,
+        "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+      },
+      "forms": [
+        {
+          "case": "STCK",
+          "form": "warmup",
+          "baseline": {
+            "requests": [
+              {
+                "type": "init"
+              }
+            ],
+            "inspection": []
+          },
+          "candidate": {
+            "requests": [
+              {
+                "type": "init"
+              }
+            ],
+            "inspection": []
+          }
+        },
+        {
+          "case": "STCK",
+          "form": "measured",
+          "baseline": {
+            "requests": [
+              {
+                "type": "init"
+              }
+            ],
+            "inspection": []
+          },
+          "candidate": {
+            "requests": [
+              {
+                "type": "init"
+              }
+            ],
+            "inspection": []
+          }
+        },
+        {
+          "case": "SMLP",
+          "form": "warmup",
+          "baseline": {
+            "requests": [
+              {
+                "type": "init"
+              }
+            ],
+            "inspection": []
+          },
+          "candidate": {
+            "requests": [
+              {
+                "type": "init"
+              }
+            ],
+            "inspection": []
+          }
+        },
+        {
+          "case": "SMLP",
+          "form": "measured",
+          "baseline": {
+            "requests": [
+              {
+                "type": "init"
+              }
+            ],
+            "inspection": []
+          },
+          "candidate": {
+            "requests": [
+              {
+                "type": "init"
+              }
+            ],
+            "inspection": []
+          }
+        }
+      ],
+      "captures": {
+        "baseline": {
+          "report": {
+            "path": "synthetic/baseline.json.gz",
+            "bytes": 123,
+            "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+          },
+          "receipt": {
+            "path": "synthetic/baseline.receipt.json",
+            "bytes": 123,
+            "sha256": "3333333333333333333333333333333333333333333333333333333333333333"
+          }
+        },
+        "candidate": {
+          "report": {
+            "path": "synthetic/candidate.json.gz",
+            "bytes": 123,
+            "sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+          },
+          "receipt": {
+            "path": "synthetic/candidate.receipt.json",
+            "bytes": 123,
+            "sha256": "4444444444444444444444444444444444444444444444444444444444444444"
+          }
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "name": "distinct_valid_capture_times_are_accepted",
+      "accept": true,
+      "edits": []
+    },
+    {
+      "name": "old_exact_policy_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "attribution",
+            "commonValuePolicy",
+            "comparison"
+          ],
+          "value": "exact"
+        }
+      ]
+    },
+    {
+      "name": "generic_timestamp_normalization_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "attribution",
+            "commonValuePolicy",
+            "comparison"
+          ],
+          "value": "exact_except_timestamps"
+        }
+      ]
+    },
+    {
+      "name": "broader_origin_exception_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "attribution",
+            "commonValuePolicy",
+            "permittedMetadataDifference"
+          ],
+          "value": "origin"
+        }
+      ]
+    },
+    {
+      "name": "identity_value_exception_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "attribution",
+            "commonValuePolicy",
+            "identityValueAttributions"
+          ],
+          "value": [
+            "trace"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "nonzero_unattributed_allowance_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "attribution",
+            "commonValuePolicy",
+            "unattributedDifferencesAllowed"
+          ],
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "boolean_zero_allowance_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "attribution",
+            "commonValuePolicy",
+            "unattributedDifferencesAllowed"
+          ],
+          "value": false
+        }
+      ]
+    },
+    {
+      "name": "unknown_policy_member_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "attribution",
+            "commonValuePolicy",
+            "normalizeNestedCreated"
+          ],
+          "value": true
+        }
+      ]
+    },
+    {
+      "name": "nontrace_component_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "attribution",
+            "commonValuePolicy",
+            "traceCreatedAttribution",
+            "nodeComponent"
+          ],
+          "value": "family_state"
+        }
+      ]
+    },
+    {
+      "name": "nested_body_created_exception_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "attribution",
+            "commonValuePolicy",
+            "traceCreatedAttribution",
+            "path"
+          ],
+          "value": "/value/root/members/body/created/bits"
+        }
+      ]
+    },
+    {
+      "name": "different_clock_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "attribution",
+            "commonValuePolicy",
+            "traceCreatedAttribution",
+            "sourceClock"
+          ],
+          "value": "performance.now() / 1000"
+        }
+      ]
+    },
+    {
+      "name": "different_source_list_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "attribution",
+            "commonValuePolicy",
+            "traceCreatedAttribution",
+            "sourceFiles"
+          ],
+          "value": [
+            "src/logos-engine/v6-reasoning-memory.ts"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "other_body_not_exact_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "attribution",
+            "commonValuePolicy",
+            "traceCreatedAttribution",
+            "allOtherFieldsExact"
+          ],
+          "value": false
+        }
+      ]
+    },
+    {
+      "name": "weaker_stability_key_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "attribution",
+            "commonValuePolicy",
+            "traceCreatedAttribution",
+            "stabilityKey"
+          ],
+          "value": [
+            "nodeId"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "unbound_window_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "attribution",
+            "commonValuePolicy",
+            "traceCreatedAttribution",
+            "captureWindows",
+            "candidate",
+            "startMs"
+          ],
+          "value": 1794391200000
+        }
+      ]
+    },
+    {
+      "name": "noncanonical_window_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "receipts",
+            "baseline",
+            "startedAt"
+          ],
+          "value": "2026-11-11T10:00:00Z"
+        }
+      ]
+    },
+    {
+      "name": "unbound_source_hash_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "attribution",
+            "inputs",
+            2,
+            "sha256"
+          ],
+          "value": "0000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ]
+    },
+    {
+      "name": "role_native_digest_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "receipts",
+            "baseline",
+            "nativeDigest"
+          ],
+          "value": "0000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ]
+    },
+    {
+      "name": "changed_capture_inventory_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "receipts",
+            "candidate",
+            "nativeInventoryAfter",
+            "digest"
+          ],
+          "value": "0000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ]
+    },
+    {
+      "name": "unbound_qualifier_identity_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "attribution",
+            "generator",
+            "path"
+          ],
+          "value": "synthetic/unreviewed-qualifier.mjs"
+        }
+      ]
+    },
+    {
+      "name": "unbound_capture_receipt_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "fixture",
+            "captures",
+            "candidate",
+            "receipt",
+            "sha256"
+          ],
+          "value": "0000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ]
+    },
+    {
+      "name": "changed_capture_generator_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "receipts",
+            "candidate",
+            "generatorAfter",
+            "sha256"
+          ],
+          "value": "0000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ]
+    },
+    {
+      "name": "empty_temporal_register_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "attribution",
+            "commonValuePolicy",
+            "traceCreatedAttribution",
+            "records"
+          ],
+          "value": []
+        }
+      ]
+    },
+    {
+      "name": "unknown_record_role_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "attribution",
+            "commonValuePolicy",
+            "traceCreatedAttribution",
+            "records",
+            0,
+            "role"
+          ],
+          "value": "other"
+        }
+      ]
+    },
+    {
+      "name": "unknown_record_session_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "attribution",
+            "commonValuePolicy",
+            "traceCreatedAttribution",
+            "records",
+            0,
+            "sessionId"
+          ],
+          "value": "other-session"
+        }
+      ]
+    },
+    {
+      "name": "nontrace_identifier_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "attribution",
+            "commonValuePolicy",
+            "traceCreatedAttribution",
+            "records",
+            0,
+            "nodeId"
+          ],
+          "value": "other:trace:1"
+        }
+      ]
+    },
+    {
+      "name": "zero_trace_identifier_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "attribution",
+            "commonValuePolicy",
+            "traceCreatedAttribution",
+            "records",
+            0,
+            "nodeId"
+          ],
+          "value": "reasoning:trace:0"
+        }
+      ]
+    },
+    {
+      "name": "unsafe_trace_identifier_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "attribution",
+            "commonValuePolicy",
+            "traceCreatedAttribution",
+            "records",
+            0,
+            "nodeId"
+          ],
+          "value": "reasoning:trace:9007199254740992"
+        }
+      ]
+    },
+    {
+      "name": "record_extra_body_field_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "attribution",
+            "commonValuePolicy",
+            "traceCreatedAttribution",
+            "records",
+            0,
+            "body"
+          ],
+          "value": {
+            "created": 17
+          }
+        }
+      ]
+    },
+    {
+      "name": "bits_object_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "attribution",
+            "commonValuePolicy",
+            "traceCreatedAttribution",
+            "records",
+            0,
+            "bits"
+          ],
+          "value": {
+            "kind": "float64",
+            "bits": "41dabd0f28400000"
+          }
+        }
+      ]
+    },
+    {
+      "name": "invalid_float64_bits_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "attribution",
+            "commonValuePolicy",
+            "traceCreatedAttribution",
+            "records",
+            0,
+            "bits"
+          ],
+          "value": "not-hexadecimal!"
+        }
+      ]
+    },
+    {
+      "name": "infinite_float64_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "attribution",
+            "commonValuePolicy",
+            "traceCreatedAttribution",
+            "records",
+            0,
+            "bits"
+          ],
+          "value": "7ff0000000000000"
+        }
+      ]
+    },
+    {
+      "name": "boolean_seconds_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "attribution",
+            "commonValuePolicy",
+            "traceCreatedAttribution",
+            "records",
+            0,
+            "seconds"
+          ],
+          "value": true
+        }
+      ]
+    },
+    {
+      "name": "string_milliseconds_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "attribution",
+            "commonValuePolicy",
+            "traceCreatedAttribution",
+            "records",
+            0,
+            "milliseconds"
+          ],
+          "value": "1794391201000"
+        }
+      ]
+    },
+    {
+      "name": "seconds_encoding_mismatch_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "attribution",
+            "commonValuePolicy",
+            "traceCreatedAttribution",
+            "records",
+            0,
+            "seconds"
+          ],
+          "value": 1794391202.0
+        }
+      ]
+    },
+    {
+      "name": "created_at_mismatch_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "attribution",
+            "commonValuePolicy",
+            "traceCreatedAttribution",
+            "records",
+            0,
+            "createdAt"
+          ],
+          "value": "2026-11-11T10:00:01.001Z"
+        }
+      ]
+    },
+    {
+      "name": "wrong_role_interval_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "attribution",
+            "commonValuePolicy",
+            "traceCreatedAttribution",
+            "records",
+            0,
+            "captureStartedAt"
+          ],
+          "value": "2026-11-11T10:01:00.000Z"
+        }
+      ]
+    },
+    {
+      "name": "valid_encoding_outside_capture_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "attribution",
+            "commonValuePolicy",
+            "traceCreatedAttribution",
+            "records",
+            0
+          ],
+          "value": {
+            "role": "baseline",
+            "sessionId": "lot6b-owner-cost-stck-warmup",
+            "nodeId": "reasoning:trace:1",
+            "bits": "41dabd0f2a801062",
+            "seconds": 1794391210.001,
+            "milliseconds": 1794391210001,
+            "createdAt": "2026-11-11T10:00:10.001Z",
+            "captureStartedAt": "2026-11-11T10:00:00.000Z",
+            "captureFinishedAt": "2026-11-11T10:00:10.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "name": "submillisecond_clock_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "attribution",
+            "commonValuePolicy",
+            "traceCreatedAttribution",
+            "records",
+            0
+          ],
+          "value": {
+            "role": "baseline",
+            "sessionId": "lot6b-owner-cost-stck-warmup",
+            "nodeId": "reasoning:trace:1",
+            "bits": "41dabd0f284001a3",
+            "seconds": 1794391201.0001,
+            "milliseconds": 1794391201000,
+            "createdAt": "2026-11-11T10:00:01.000Z",
+            "captureStartedAt": "2026-11-11T10:00:00.000Z",
+            "captureFinishedAt": "2026-11-11T10:00:10.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "name": "duplicate_stable_record_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "append",
+          "path": [
+            "attribution",
+            "commonValuePolicy",
+            "traceCreatedAttribution",
+            "records"
+          ],
+          "value": {
+            "role": "baseline",
+            "sessionId": "lot6b-owner-cost-stck-warmup",
+            "nodeId": "reasoning:trace:1",
+            "bits": "41dabd0f28400000",
+            "seconds": 1794391201.0,
+            "milliseconds": 1794391201000,
+            "createdAt": "2026-11-11T10:00:01.000Z",
+            "captureStartedAt": "2026-11-11T10:00:00.000Z",
+            "captureFinishedAt": "2026-11-11T10:00:10.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "name": "duplicate_unstable_record_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "append",
+          "path": [
+            "attribution",
+            "commonValuePolicy",
+            "traceCreatedAttribution",
+            "records"
+          ],
+          "value": {
+            "role": "baseline",
+            "sessionId": "lot6b-owner-cost-stck-warmup",
+            "nodeId": "reasoning:trace:1",
+            "bits": "41dabd0f28401062",
+            "seconds": 1794391201.001,
+            "milliseconds": 1794391201001,
+            "createdAt": "2026-11-11T10:00:01.001Z",
+            "captureStartedAt": "2026-11-11T10:00:00.000Z",
+            "captureFinishedAt": "2026-11-11T10:00:10.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "name": "missing_role_pair_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "remove",
+          "path": [
+            "attribution",
+            "commonValuePolicy",
+            "traceCreatedAttribution",
+            "records",
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "name": "whole_session_trace_records_missing_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "attribution",
+            "commonValuePolicy",
+            "traceCreatedAttribution",
+            "records"
+          ],
+          "value": [
+            {
+              "role": "baseline",
+              "sessionId": "lot6b-owner-cost-stck-measured",
+              "nodeId": "reasoning:trace:1",
+              "bits": "41dabd0f28401062",
+              "seconds": 1794391201.001,
+              "milliseconds": 1794391201001,
+              "createdAt": "2026-11-11T10:00:01.001Z",
+              "captureStartedAt": "2026-11-11T10:00:00.000Z",
+              "captureFinishedAt": "2026-11-11T10:00:10.000Z"
+            },
+            {
+              "role": "candidate",
+              "sessionId": "lot6b-owner-cost-stck-measured",
+              "nodeId": "reasoning:trace:1",
+              "bits": "41dabd0f37401062",
+              "seconds": 1794391261.001,
+              "milliseconds": 1794391261001,
+              "createdAt": "2026-11-11T10:01:01.001Z",
+              "captureStartedAt": "2026-11-11T10:01:00.000Z",
+              "captureFinishedAt": "2026-11-11T10:01:10.000Z"
+            },
+            {
+              "role": "baseline",
+              "sessionId": "lot6b-owner-cost-smlp-warmup",
+              "nodeId": "reasoning:trace:1",
+              "bits": "41dabd0f284020c5",
+              "seconds": 1794391201.002,
+              "milliseconds": 1794391201002,
+              "createdAt": "2026-11-11T10:00:01.002Z",
+              "captureStartedAt": "2026-11-11T10:00:00.000Z",
+              "captureFinishedAt": "2026-11-11T10:00:10.000Z"
+            },
+            {
+              "role": "candidate",
+              "sessionId": "lot6b-owner-cost-smlp-warmup",
+              "nodeId": "reasoning:trace:1",
+              "bits": "41dabd0f374020c5",
+              "seconds": 1794391261.002,
+              "milliseconds": 1794391261002,
+              "createdAt": "2026-11-11T10:01:01.002Z",
+              "captureStartedAt": "2026-11-11T10:01:00.000Z",
+              "captureFinishedAt": "2026-11-11T10:01:10.000Z"
+            },
+            {
+              "role": "baseline",
+              "sessionId": "lot6b-owner-cost-smlp-measured",
+              "nodeId": "reasoning:trace:1",
+              "bits": "41dabd0f28403127",
+              "seconds": 1794391201.003,
+              "milliseconds": 1794391201003,
+              "createdAt": "2026-11-11T10:00:01.003Z",
+              "captureStartedAt": "2026-11-11T10:00:00.000Z",
+              "captureFinishedAt": "2026-11-11T10:00:10.000Z"
+            },
+            {
+              "role": "candidate",
+              "sessionId": "lot6b-owner-cost-smlp-measured",
+              "nodeId": "reasoning:trace:1",
+              "bits": "41dabd0f37403127",
+              "seconds": 1794391261.003,
+              "milliseconds": 1794391261003,
+              "createdAt": "2026-11-11T10:01:01.003Z",
+              "captureStartedAt": "2026-11-11T10:01:00.000Z",
+              "captureFinishedAt": "2026-11-11T10:01:10.000Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "empty_point_register_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "attribution",
+            "points"
+          ],
+          "value": []
+        }
+      ]
+    },
+    {
+      "name": "reordered_point_register_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "attribution",
+            "points"
+          ],
+          "value": [
+            {
+              "case": "SMLP",
+              "form": "measured",
+              "pointIndex": 0,
+              "baselineNodeCount": 5,
+              "baselineDeltaCount": 5
+            },
+            {
+              "case": "SMLP",
+              "form": "warmup",
+              "pointIndex": 0,
+              "baselineNodeCount": 5,
+              "baselineDeltaCount": 5
+            },
+            {
+              "case": "STCK",
+              "form": "measured",
+              "pointIndex": 0,
+              "baselineNodeCount": 5,
+              "baselineDeltaCount": 5
+            },
+            {
+              "case": "STCK",
+              "form": "warmup",
+              "pointIndex": 0,
+              "baselineNodeCount": 5,
+              "baselineDeltaCount": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "point_counter_changed_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "attribution",
+            "commonValueCoverage",
+            0,
+            "commonNodesCompared"
+          ],
+          "value": 4
+        }
+      ]
+    },
+    {
+      "name": "zero_common_nodes_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "attribution",
+            "points",
+            0,
+            "baselineNodeCount"
+          ],
+          "value": 0
+        }
+      ]
+    },
+    {
+      "name": "boolean_delta_counter_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "attribution",
+            "points",
+            0,
+            "baselineDeltaCount"
+          ],
+          "value": true
+        }
+      ]
+    },
+    {
+      "name": "old_exact_coverage_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "attribution",
+            "commonValueCoverage",
+            0,
+            "comparison"
+          ],
+          "value": "exact"
+        }
+      ]
+    },
+    {
+      "name": "missing_point_coverage_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "attribution",
+            "commonValueCoverage"
+          ],
+          "value": [
+            {
+              "case": "STCK",
+              "form": "warmup",
+              "pointIndex": 0,
+              "commonNodesCompared": 5,
+              "commonDeltasCompared": 5,
+              "comparison": "exact_except_attributed_trace_envelope_created",
+              "unattributedDifferences": 0
+            },
+            {
+              "case": "STCK",
+              "form": "measured",
+              "pointIndex": 0,
+              "commonNodesCompared": 5,
+              "commonDeltasCompared": 5,
+              "comparison": "exact_except_attributed_trace_envelope_created",
+              "unattributedDifferences": 0
+            },
+            {
+              "case": "SMLP",
+              "form": "warmup",
+              "pointIndex": 0,
+              "commonNodesCompared": 5,
+              "commonDeltasCompared": 5,
+              "comparison": "exact_except_attributed_trace_envelope_created",
+              "unattributedDifferences": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "receipt_capture_counter_changed_is_refused",
+      "accept": false,
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "receipts",
+            "candidate",
+            "sessions",
+            0,
+            "captures"
+          ],
+          "value": 2
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "schema": "logos-engine.lot6b.complete-proof-checkpoint-summary.v1",
+  "status": "complete_proofs_remotely_verified",
+  "verifiedAt": "2026-11-11T20:55:52.559017+00:00",
+  "commit": "41cedc1f6a89b8639c19f0dc45eae24c264ad3c0",
+  "parentCoreCheckpoint": "17d6c1aa3532e4ff74a98a309e4dfb9c3bc4fb59",
+  "branch": "lot6b-selected-rigid-checkpoint-20261111",
+  "remoteVerified": true,
+  "closureFileCount": 78,
+  "closureRawBytes": 4433894,
+  "scope": [
+    "All seven bins of core functional proofs and five cost helpers",
+    "QA02 browser evidence and actual screenshot, closure receipts and final cumulative clock",
+    "Three updated summary documents as of core-checkpoint closure",
+    "Transport helper sources and earlier transport metadata"
+  ],
+  "nativeDigest": "fa23bb76ca4a01b5cfaa72ec6d1d4b4fc2e8969762e966ada8225265fc546886",
+  "nativeFiles": 322,
+  "nativeSourceChangedSinceValidatedBase": false,
+  "allOwnTransportProcessesClosed": true,
+  "transport": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/closure-01-transport.json",
+    "sha256": "a5d3860f676594a58b9aa1dabbd32aef46b45bfce415310aa30f6d93264cee4c",
+    "bytes": 30307
+  },
+  "retainedClosurePreflightFailure": "closure-01-command.json",
+  "closureRecovery": "closure-01-recovery-command.json",
+  "rawAccessibilitySnapshotsUnchanged": true,
+  "finalSmallMetadataUpdatePending": true,
+  "officialCostMeasured": false,
+  "sitePublished": false,
+  "qualification": "Source checkpoint with complete proofs. This receipt and the final exact checkpoint mentions are saved in the following metadata-only closure; no self-referential commit hash is claimed."
+}

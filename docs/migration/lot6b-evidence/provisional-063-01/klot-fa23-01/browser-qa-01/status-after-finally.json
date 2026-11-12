@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "sites-preview",
+    "status"
+  ],
+  "exitCode": 0,
+  "stdout": "Sites preview stopped\n",
+  "stderr": "",
+  "timedOut": false,
+  "startedAt": "2026-11-11T20:04:16.255030+00:00",
+  "finishedAt": "2026-11-11T20:04:16.255584+00:00",
+  "elapsedSeconds": 0.0005552470029215328,
+  "limitSeconds": 15
+}

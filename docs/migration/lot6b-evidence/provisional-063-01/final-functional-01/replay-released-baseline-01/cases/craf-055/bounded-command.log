@@ -1,0 +1,12 @@
+{"case": "craf-055", "phase": "node_running", "elapsedSeconds": 0.0, "lastProgress": null, "nodeMemory": {"pid": 12, "VmSize": "112336 kB", "VmHWM": "1424 kB", "VmRSS": "1424 kB", "Threads": "1"}}
+{"case": "craf-055", "nodeProgress": {"phase": "baseline-released"}}
+{"case": "craf-055", "phase": "node_running", "elapsedSeconds": 15.06, "lastProgress": {"phase": "request", "operation": "advance", "sequence": 6}, "nodeMemory": {"pid": 12, "VmSize": "10965528 kB", "VmHWM": "1262232 kB", "VmRSS": "977340 kB", "Threads": "11"}}
+{"case": "craf-055", "phase": "node_running", "elapsedSeconds": 30.11, "lastProgress": {"phase": "request", "operation": "advance", "sequence": 13}, "nodeMemory": {"pid": 12, "VmSize": "11007004 kB", "VmHWM": "1262232 kB", "VmRSS": "1020396 kB", "Threads": "11"}}
+{"case": "craf-055", "phase": "node_running", "elapsedSeconds": 45.14, "lastProgress": {"phase": "request", "operation": "advance", "sequence": 18}, "nodeMemory": {"pid": 12, "VmSize": "11086364 kB", "VmHWM": "1262232 kB", "VmRSS": "1100188 kB", "Threads": "11"}}
+{"case": "craf-055", "phase": "node_running", "elapsedSeconds": 60.18, "lastProgress": {"phase": "request", "operation": "advance", "sequence": 24}, "nodeMemory": {"pid": 12, "VmSize": "11240988 kB", "VmHWM": "1349220 kB", "VmRSS": "1255400 kB", "Threads": "11"}}
+{"case": "craf-055", "phase": "node_running", "elapsedSeconds": 75.22, "lastProgress": {"phase": "request", "operation": "advance", "sequence": 28}, "nodeMemory": {"pid": 12, "VmSize": "11393672 kB", "VmHWM": "1443796 kB", "VmRSS": "1408332 kB", "Threads": "11"}}
+{"case": "craf-055", "phase": "node_running", "elapsedSeconds": 90.25, "lastProgress": {"phase": "request", "operation": "advance", "sequence": 32}, "nodeMemory": {"pid": 12, "VmSize": "11472548 kB", "VmHWM": "1495996 kB", "VmRSS": "1487576 kB", "Threads": "11"}}
+{"case": "craf-055", "phase": "node_running", "elapsedSeconds": 105.29, "lastProgress": {"phase": "request", "operation": "resume", "sequence": 35}, "nodeMemory": {"pid": 12, "VmSize": "11480628 kB", "VmHWM": "1546000 kB", "VmRSS": "1496072 kB", "Threads": "11"}}
+{"case": "craf-055", "phase": "comparison_running", "nodeExitCode": 0}
+{"case": "craf-055", "phase": "completed", "passed": true, "actions": 36, "comparisonChecks": 17, "failedChecks": []}
+{"status": "passed", "passed": 1, "total": 1, "comparisonChecksPassed": 17}

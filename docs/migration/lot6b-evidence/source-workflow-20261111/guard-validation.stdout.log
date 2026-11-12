@@ -1,0 +1,238 @@
+TAP version 13
+# Subtest: historical quiet requests never gate ordinary work
+ok 1 - historical quiet requests never gate ordinary work
+  ---
+  duration_ms: 1.655298
+  type: 'test'
+  ...
+# Subtest: historical performance/publication started flags do not substitute for an official window
+ok 2 - historical performance/publication started flags do not substitute for an official window
+  ---
+  duration_ms: 0.184719
+  type: 'test'
+  ...
+# Subtest: absent and explicit-null official windows mean no window
+ok 3 - absent and explicit-null official windows mean no window
+  ---
+  duration_ms: 0.176306
+  type: 'test'
+  ...
+# Subtest: preparing does not gate ordinary work despite old flags
+ok 4 - preparing does not gate ordinary work despite old flags
+  ---
+  duration_ms: 0.849362
+  type: 'test'
+  ...
+# Subtest: released does not gate ordinary work despite old flags
+ok 5 - released does not gate ordinary work despite old flags
+  ---
+  duration_ms: 0.173201
+  type: 'test'
+  ...
+# Subtest: actual active performance window defers ordinary work
+ok 6 - actual active performance window defers ordinary work
+  ---
+  duration_ms: 2.779264
+  type: 'test'
+  ...
+# Subtest: actual active publication window defers ordinary work
+ok 7 - actual active publication window defers ordinary work
+  ---
+  duration_ms: 0.118108
+  type: 'test'
+  ...
+# Subtest: valid Python UTC microseconds and +00:00 are accepted
+ok 8 - valid Python UTC microseconds and +00:00 are accepted
+  ---
+  duration_ms: 0.128764
+  type: 'test'
+  ...
+# Subtest: Python microsecond deadline is not expired by millisecond truncation
+ok 9 - Python microsecond deadline is not expired by millisecond truncation
+  ---
+  duration_ms: 0.266191
+  type: 'test'
+  ...
+# Subtest: valid UTC without fractional seconds is accepted
+ok 10 - valid UTC without fractional seconds is accepted
+  ---
+  duration_ms: 0.352752
+  type: 'test'
+  ...
+# Subtest: invalid active declaration refuses: different owner
+ok 11 - invalid active declaration refuses: different owner
+  ---
+  duration_ms: 0.190347
+  type: 'test'
+  ...
+# Subtest: invalid active declaration refuses: missing owner
+ok 12 - invalid active declaration refuses: missing owner
+  ---
+  duration_ms: 0.083326
+  type: 'test'
+  ...
+# Subtest: invalid active declaration refuses: empty id
+ok 13 - invalid active declaration refuses: empty id
+  ---
+  duration_ms: 0.098769
+  type: 'test'
+  ...
+# Subtest: invalid active declaration refuses: whitespace id
+ok 14 - invalid active declaration refuses: whitespace id
+  ---
+  duration_ms: 0.187774
+  type: 'test'
+  ...
+# Subtest: invalid active declaration refuses: wrong kind
+ok 15 - invalid active declaration refuses: wrong kind
+  ---
+  duration_ms: 0.254324
+  type: 'test'
+  ...
+# Subtest: invalid active declaration refuses: future start
+ok 16 - invalid active declaration refuses: future start
+  ---
+  duration_ms: 0.168064
+  type: 'test'
+  ...
+# Subtest: invalid active declaration refuses: nonincreasing deadline
+ok 17 - invalid active declaration refuses: nonincreasing deadline
+  ---
+  duration_ms: 0.128504
+  type: 'test'
+  ...
+# Subtest: invalid active declaration refuses: numeric date coercion
+ok 18 - invalid active declaration refuses: numeric date coercion
+  ---
+  duration_ms: 0.107973
+  type: 'test'
+  ...
+# Subtest: invalid active declaration refuses: missing date
+ok 19 - invalid active declaration refuses: missing date
+  ---
+  duration_ms: 0.166471
+  type: 'test'
+  ...
+# Subtest: invalid active declaration refuses: invalid date text
+ok 20 - invalid active declaration refuses: invalid date text
+  ---
+  duration_ms: 0.123216
+  type: 'test'
+  ...
+# Subtest: invalid active declaration refuses: local time without UTC
+ok 21 - invalid active declaration refuses: local time without UTC
+  ---
+  duration_ms: 0.107331
+  type: 'test'
+  ...
+# Subtest: invalid active declaration refuses: non-UTC offset
+ok 22 - invalid active declaration refuses: non-UTC offset
+  ---
+  duration_ms: 0.103376
+  type: 'test'
+  ...
+# Subtest: invalid active declaration refuses: impossible calendar day
+ok 23 - invalid active declaration refuses: impossible calendar day
+  ---
+  duration_ms: 0.10652
+  type: 'test'
+  ...
+# Subtest: invalid active declaration refuses: midnight rollover
+ok 24 - invalid active declaration refuses: midnight rollover
+  ---
+  duration_ms: 0.110717
+  type: 'test'
+  ...
+# Subtest: invalid active declaration refuses: already released active declaration
+ok 25 - invalid active declaration refuses: already released active declaration
+  ---
+  duration_ms: 0.130527
+  type: 'test'
+  ...
+# Subtest: invalid active declaration refuses: missing active release sentinel
+ok 26 - invalid active declaration refuses: missing active release sentinel
+  ---
+  duration_ms: 0.10631
+  type: 'test'
+  ...
+# Subtest: unrecognized state refuses: undefined
+ok 27 - unrecognized state refuses: undefined
+  ---
+  duration_ms: 0.2518
+  type: 'test'
+  ...
+# Subtest: unrecognized state refuses: null
+ok 28 - unrecognized state refuses: null
+  ---
+  duration_ms: 0.102755
+  type: 'test'
+  ...
+# Subtest: unrecognized state refuses: actve
+ok 29 - unrecognized state refuses: actve
+  ---
+  duration_ms: 0.087111
+  type: 'test'
+  ...
+# Subtest: unrecognized state refuses: unknown
+ok 30 - unrecognized state refuses: unknown
+  ---
+  duration_ms: 0.094953
+  type: 'test'
+  ...
+# Subtest: non-object declaration refuses: true
+ok 31 - non-object declaration refuses: true
+  ---
+  duration_ms: 0.121163
+  type: 'test'
+  ...
+# Subtest: non-object declaration refuses: "active"
+ok 32 - non-object declaration refuses: "active"
+  ---
+  duration_ms: 0.097878
+  type: 'test'
+  ...
+# Subtest: non-object declaration refuses: []
+ok 33 - non-object declaration refuses: []
+  ---
+  duration_ms: 0.119511
+  type: 'test'
+  ...
+# Subtest: expired active window requires owner closure, including exact expiry boundary
+ok 34 - expired active window requires owner closure, including exact expiry boundary
+  ---
+  duration_ms: 0.209927
+  type: 'test'
+  ...
+# Subtest: invalid observation clock refuses
+ok 35 - invalid observation clock refuses
+  ---
+  duration_ms: 0.193883
+  type: 'test'
+  ...
+# Subtest: inspection never rewrites its input declaration
+ok 36 - inspection never rewrites its input declaration
+  ---
+  duration_ms: 0.447085
+  type: 'test'
+  ...
+# Subtest: actual status reader uses one read per lane and no global lock or mutation
+ok 37 - actual status reader uses one read per lane and no global lock or mutation
+  ---
+  duration_ms: 1.286611
+  type: 'test'
+  ...
+# Subtest: expired reader refuses once with owner identity, without retries, unlink or lock replacement
+ok 38 - expired reader refuses once with owner identity, without retries, unlink or lock replacement
+  ---
+  duration_ms: 0.647978
+  type: 'test'
+  ...
+1..38
+# tests 38
+# suites 0
+# pass 38
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 158.924247

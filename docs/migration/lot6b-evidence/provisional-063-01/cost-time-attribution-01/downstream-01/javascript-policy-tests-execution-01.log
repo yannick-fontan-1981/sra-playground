@@ -1,0 +1,316 @@
+TAP version 13
+# Subtest: distinct_valid_capture_times_are_accepted
+ok 1 - distinct_valid_capture_times_are_accepted
+  ---
+  duration_ms: 8.879009
+  type: 'test'
+  ...
+# Subtest: old_exact_policy_is_refused
+ok 2 - old_exact_policy_is_refused
+  ---
+  duration_ms: 2.474797
+  type: 'test'
+  ...
+# Subtest: generic_timestamp_normalization_is_refused
+ok 3 - generic_timestamp_normalization_is_refused
+  ---
+  duration_ms: 0.524752
+  type: 'test'
+  ...
+# Subtest: broader_origin_exception_is_refused
+ok 4 - broader_origin_exception_is_refused
+  ---
+  duration_ms: 0.449078
+  type: 'test'
+  ...
+# Subtest: identity_value_exception_is_refused
+ok 5 - identity_value_exception_is_refused
+  ---
+  duration_ms: 0.510862
+  type: 'test'
+  ...
+# Subtest: nonzero_unattributed_allowance_is_refused
+ok 6 - nonzero_unattributed_allowance_is_refused
+  ---
+  duration_ms: 0.470661
+  type: 'test'
+  ...
+# Subtest: boolean_zero_allowance_is_refused
+ok 7 - boolean_zero_allowance_is_refused
+  ---
+  duration_ms: 0.471522
+  type: 'test'
+  ...
+# Subtest: unknown_policy_member_is_refused
+ok 8 - unknown_policy_member_is_refused
+  ---
+  duration_ms: 0.466374
+  type: 'test'
+  ...
+# Subtest: nontrace_component_is_refused
+ok 9 - nontrace_component_is_refused
+  ---
+  duration_ms: 3.261164
+  type: 'test'
+  ...
+# Subtest: nested_body_created_exception_is_refused
+ok 10 - nested_body_created_exception_is_refused
+  ---
+  duration_ms: 0.732085
+  type: 'test'
+  ...
+# Subtest: different_clock_is_refused
+ok 11 - different_clock_is_refused
+  ---
+  duration_ms: 0.505043
+  type: 'test'
+  ...
+# Subtest: different_source_list_is_refused
+ok 12 - different_source_list_is_refused
+  ---
+  duration_ms: 0.394326
+  type: 'test'
+  ...
+# Subtest: other_body_not_exact_is_refused
+ok 13 - other_body_not_exact_is_refused
+  ---
+  duration_ms: 0.461858
+  type: 'test'
+  ...
+# Subtest: weaker_stability_key_is_refused
+ok 14 - weaker_stability_key_is_refused
+  ---
+  duration_ms: 0.444611
+  type: 'test'
+  ...
+# Subtest: unbound_window_is_refused
+ok 15 - unbound_window_is_refused
+  ---
+  duration_ms: 3.483531
+  type: 'test'
+  ...
+# Subtest: noncanonical_window_is_refused
+ok 16 - noncanonical_window_is_refused
+  ---
+  duration_ms: 1.487066
+  type: 'test'
+  ...
+# Subtest: unbound_source_hash_is_refused
+ok 17 - unbound_source_hash_is_refused
+  ---
+  duration_ms: 0.969224
+  type: 'test'
+  ...
+# Subtest: role_native_digest_is_refused
+ok 18 - role_native_digest_is_refused
+  ---
+  duration_ms: 0.555018
+  type: 'test'
+  ...
+# Subtest: changed_capture_inventory_is_refused
+ok 19 - changed_capture_inventory_is_refused
+  ---
+  duration_ms: 2.413655
+  type: 'test'
+  ...
+# Subtest: unbound_qualifier_identity_is_refused
+ok 20 - unbound_qualifier_identity_is_refused
+  ---
+  duration_ms: 0.499554
+  type: 'test'
+  ...
+# Subtest: unbound_capture_receipt_is_refused
+ok 21 - unbound_capture_receipt_is_refused
+  ---
+  duration_ms: 1.383449
+  type: 'test'
+  ...
+# Subtest: changed_capture_generator_is_refused
+ok 22 - changed_capture_generator_is_refused
+  ---
+  duration_ms: 0.872608
+  type: 'test'
+  ...
+# Subtest: empty_temporal_register_is_refused
+ok 23 - empty_temporal_register_is_refused
+  ---
+  duration_ms: 5.089065
+  type: 'test'
+  ...
+# Subtest: unknown_record_role_is_refused
+ok 24 - unknown_record_role_is_refused
+  ---
+  duration_ms: 2.236658
+  type: 'test'
+  ...
+# Subtest: unknown_record_session_is_refused
+ok 25 - unknown_record_session_is_refused
+  ---
+  duration_ms: 2.378643
+  type: 'test'
+  ...
+# Subtest: nontrace_identifier_is_refused
+ok 26 - nontrace_identifier_is_refused
+  ---
+  duration_ms: 2.200924
+  type: 'test'
+  ...
+# Subtest: zero_trace_identifier_is_refused
+ok 27 - zero_trace_identifier_is_refused
+  ---
+  duration_ms: 1.654588
+  type: 'test'
+  ...
+# Subtest: unsafe_trace_identifier_is_refused
+ok 28 - unsafe_trace_identifier_is_refused
+  ---
+  duration_ms: 1.544903
+  type: 'test'
+  ...
+# Subtest: record_extra_body_field_is_refused
+ok 29 - record_extra_body_field_is_refused
+  ---
+  duration_ms: 2.391993
+  type: 'test'
+  ...
+# Subtest: bits_object_is_refused
+ok 30 - bits_object_is_refused
+  ---
+  duration_ms: 1.215195
+  type: 'test'
+  ...
+# Subtest: invalid_float64_bits_is_refused
+ok 31 - invalid_float64_bits_is_refused
+  ---
+  duration_ms: 1.202456
+  type: 'test'
+  ...
+# Subtest: infinite_float64_is_refused
+ok 32 - infinite_float64_is_refused
+  ---
+  duration_ms: 1.959739
+  type: 'test'
+  ...
+# Subtest: boolean_seconds_is_refused
+ok 33 - boolean_seconds_is_refused
+  ---
+  duration_ms: 1.802121
+  type: 'test'
+  ...
+# Subtest: string_milliseconds_is_refused
+ok 34 - string_milliseconds_is_refused
+  ---
+  duration_ms: 1.738506
+  type: 'test'
+  ...
+# Subtest: seconds_encoding_mismatch_is_refused
+ok 35 - seconds_encoding_mismatch_is_refused
+  ---
+  duration_ms: 1.675901
+  type: 'test'
+  ...
+# Subtest: created_at_mismatch_is_refused
+ok 36 - created_at_mismatch_is_refused
+  ---
+  duration_ms: 1.283739
+  type: 'test'
+  ...
+# Subtest: wrong_role_interval_is_refused
+ok 37 - wrong_role_interval_is_refused
+  ---
+  duration_ms: 2.469109
+  type: 'test'
+  ...
+# Subtest: valid_encoding_outside_capture_is_refused
+ok 38 - valid_encoding_outside_capture_is_refused
+  ---
+  duration_ms: 2.084718
+  type: 'test'
+  ...
+# Subtest: submillisecond_clock_is_refused
+ok 39 - submillisecond_clock_is_refused
+  ---
+  duration_ms: 2.098579
+  type: 'test'
+  ...
+# Subtest: duplicate_stable_record_is_refused
+ok 40 - duplicate_stable_record_is_refused
+  ---
+  duration_ms: 1.793579
+  type: 'test'
+  ...
+# Subtest: duplicate_unstable_record_is_refused
+ok 41 - duplicate_unstable_record_is_refused
+  ---
+  duration_ms: 1.664063
+  type: 'test'
+  ...
+# Subtest: missing_role_pair_is_refused
+ok 42 - missing_role_pair_is_refused
+  ---
+  duration_ms: 1.690162
+  type: 'test'
+  ...
+# Subtest: whole_session_trace_records_missing_is_refused
+ok 43 - whole_session_trace_records_missing_is_refused
+  ---
+  duration_ms: 1.526555
+  type: 'test'
+  ...
+# Subtest: empty_point_register_is_refused
+ok 44 - empty_point_register_is_refused
+  ---
+  duration_ms: 1.366934
+  type: 'test'
+  ...
+# Subtest: reordered_point_register_is_refused
+ok 45 - reordered_point_register_is_refused
+  ---
+  duration_ms: 1.841381
+  type: 'test'
+  ...
+# Subtest: point_counter_changed_is_refused
+ok 46 - point_counter_changed_is_refused
+  ---
+  duration_ms: 1.547357
+  type: 'test'
+  ...
+# Subtest: zero_common_nodes_is_refused
+ok 47 - zero_common_nodes_is_refused
+  ---
+  duration_ms: 1.46293
+  type: 'test'
+  ...
+# Subtest: boolean_delta_counter_is_refused
+ok 48 - boolean_delta_counter_is_refused
+  ---
+  duration_ms: 1.316258
+  type: 'test'
+  ...
+# Subtest: old_exact_coverage_is_refused
+ok 49 - old_exact_coverage_is_refused
+  ---
+  duration_ms: 1.319683
+  type: 'test'
+  ...
+# Subtest: missing_point_coverage_is_refused
+ok 50 - missing_point_coverage_is_refused
+  ---
+  duration_ms: 1.260524
+  type: 'test'
+  ...
+# Subtest: receipt_capture_counter_changed_is_refused
+ok 51 - receipt_capture_counter_changed_is_refused
+  ---
+  duration_ms: 1.923455
+  type: 'test'
+  ...
+1..51
+# tests 51
+# suites 0
+# pass 51
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 228.924549

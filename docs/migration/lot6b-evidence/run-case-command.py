@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """Execute one bounded case task and retain every outcome in its cumulative clock.
 
-The caller holds the shared functional lock. This wrapper neither selects a
-game action nor supplies state to the command. A timeout terminates the entire
-child process group and preserves its log, journal and unsuccessful receipt.
+Ordinary functional case tasks require no global lock under the user's current
+work policy. The caller declares its bounded activity and respects an actual
+official measurement/publication window. This wrapper neither selects a game
+action nor supplies state to the command. A timeout terminates the entire child
+process group and preserves its log, journal and unsuccessful receipt.
 """
 from pathlib import Path
 from datetime import datetime, timezone

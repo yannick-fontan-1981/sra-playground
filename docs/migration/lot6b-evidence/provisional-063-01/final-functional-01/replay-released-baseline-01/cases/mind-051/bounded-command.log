@@ -1,0 +1,8 @@
+{"case": "mind-051", "phase": "node_running", "elapsedSeconds": 0.0, "lastProgress": null, "nodeMemory": {"pid": 12, "VmSize": "112336 kB", "VmHWM": "844 kB", "VmRSS": "844 kB", "Threads": "1"}}
+{"case": "mind-051", "nodeProgress": {"phase": "baseline-released"}}
+{"case": "mind-051", "phase": "node_running", "elapsedSeconds": 15.07, "lastProgress": {"phase": "request", "operation": "advance", "sequence": 10}, "nodeMemory": {"pid": 12, "VmSize": "10564400 kB", "VmHWM": "560920 kB", "VmRSS": "540860 kB", "Threads": "11"}}
+{"case": "mind-051", "phase": "node_running", "elapsedSeconds": 30.1, "lastProgress": {"phase": "request", "operation": "advance", "sequence": 21}, "nodeMemory": {"pid": 12, "VmSize": "10785336 kB", "VmHWM": "788596 kB", "VmRSS": "765304 kB", "Threads": "11"}}
+{"case": "mind-051", "phase": "node_running", "elapsedSeconds": 45.14, "lastProgress": {"phase": "request", "operation": "advance", "sequence": 30}, "nodeMemory": {"pid": 12, "VmSize": "11025968 kB", "VmHWM": "1007532 kB", "VmRSS": "1007532 kB", "Threads": "11"}}
+{"case": "mind-051", "phase": "comparison_running", "nodeExitCode": 0}
+{"case": "mind-051", "phase": "completed", "passed": true, "actions": 31, "comparisonChecks": 17, "failedChecks": []}
+{"status": "passed", "passed": 1, "total": 1, "comparisonChecksPassed": 17}

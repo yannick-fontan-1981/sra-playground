@@ -1,0 +1,24 @@
+{
+  "schema": "logos-engine.lot6b.single-bin-verified-push.v1",
+  "status": "verified",
+  "recordedAt": "2026-11-11T20:45:22.798343+00:00",
+  "bin": "bin-01",
+  "commit": "004e654875978239c6499773f3225958bc9c3a82",
+  "parent": "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+  "branch": "lot6b-selected-rigid-checkpoint-20261111",
+  "remoteVerified": true,
+  "remoteHead": "004e654875978239c6499773f3225958bc9c3a82",
+  "transport": {
+    "path": "docs/migration/lot6b-evidence/provisional-063-01/source-checkpoint-functional-01/bin-01-transport.json",
+    "sha256": "080c31d60e7630f73b428ce599a1aab198352338a26dedd5d4b07c1b8bea12c2",
+    "bytes": 30291
+  },
+  "rawBytes": 25165811,
+  "fileCount": 4,
+  "commitChildGroupsReaped": true,
+  "transportGroupAbsent": true,
+  "signals": [],
+  "forcePush": false,
+  "mainPushed": false,
+  "publicationRequested": false
+}

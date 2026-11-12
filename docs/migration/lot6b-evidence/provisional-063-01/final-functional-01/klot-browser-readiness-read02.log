@@ -1,0 +1,365 @@
+SCRIPT scripts/run-bounded-native-campaign-proof.py
+#!/usr/bin/env python3
+"""Retain one bounded cold reference and immutable, losslessly compressed evidence.
+
+The ordinary production harness owns every decision and dispatch. This outer
+process fingerprints execution inputs and archives its passive public journal.
+It does not import a Python agent or inspect the game implementation.
+"""
+from __future__ import annotations
+
+import argparse
+from datetime import datetime, timezone
+import gzip
+import hashlib
+import json
+from pathlib import Path
+import subprocess
+import time
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def sha(path):
+    value = hashlib.sha256()
+    with Path(path).open('rb') as stream:
+        for chunk in iter(lambda: stream.read(1024 * 1024), b''):
+            value.update(chunk)
+    return value.hexdigest()
+
+
+def evidence(path):
+    path = Path(path)
+    return {'path': path.relative_to(ROOT).as_posix(), 'sha256': sha(path), 'bytes': path.stat().st_size}
+
+
+def native_source():
+    files = {p.relative_to(ROOT).as_posix(): sha(p)
+             for folder in ['src/logos-engine', 'src/runtime']
+             for p in sorted((ROOT / folder).rglob('*'))
+             if p.is_file() and p.suffix in ['.ts', '.json', '.drm']}
+    ordered = dict(sorted(files.items()))
+    digest = hashlib.sha256(json.dumps(ordered, separators=(',', ':')).encode()).hexdigest()
+    return {'fileCount': len(ordered), 'digest': digest, 'files': ordered}
+
+
+def archive(source, destination):
+    with Path(source).open('rb') as incoming, Path(destination).open('xb') as outgoing:
+        with gzip.GzipFile(filename='', mode='wb', fileobj=outgoing, mtime=0) as compressed:
+            for chunk in iter(lambda: incoming.read(1024 * 1024), b''):
+                compressed.write(chunk)
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('game')
+    parser.add_argument('levels', type=int)
+    parser.add_argument('maximum_actions', type=int)
+    parser.add_argument('directory')
+    args = parser.parse_args()
+    out = ROOT / args.directory
+    before = native_source()
+    manifest_path = out / 'source-manifest.json'
+    if before != json.loads(manifest_path.read_text()):
+        raise ValueError('Current native source differs from the declared freeze')
+    stem = args.game.lower()
+    report = out / f'{stem}-campaign.json.gz'
+    trace = out / f'{stem}-public-trace.json.gz'
+    receipt = out / f'execution-{stem}.json'
+    output = out / f'{stem}-output.log.gz'
+    journal_archive = out / f'{stem}-actual-public-journal.jsonl.gz'
+    live_stem = f'v53-{out.name}-{stem}'
+    journal = ROOT.parent / f'{live_stem}-actual-public-journal.jsonl'
+    live_log = ROOT.parent / f'{live_stem}-live.log'
+    for path in [report, trace, receipt, output, journal_archive, journal, live_log]:
+        if path.exists():
+            raise FileExistsError(path)
+        path.parent.mkdir(parents=True, exist_ok=True)
+    runner = ROOT / 'scripts/run-bounded-native-campaign.mjs'
+    harness = ROOT / 'tests/helpers/v6-live-game-campaign.ts'
+    inputs_before = {'runner': evidence(runner), 'harness': evidence(harness), 'generator': evidence(Path(__file__))}
+    command = ['node', str(runner), args.game, str(args.levels), str(args.maximum_actions), str(report), str(trace), str(journal)]
+    started = datetime.now(timezone.utc).isoformat()
+    clock = time.monotonic()
+    with live_log.open('xb') as stream:
+        completed = subprocess.run(command, cwd=ROOT, stdout=stream, stderr=subprocess.STDOUT)
+    archive(live_log, output)
+    if journal.exists():
+        archive(journal, journal_archive)
+    after = native_source()
+    inputs_after = {'runner': evidence(runner), 'harness': evidence(harness), 'generator': evidence(Path(__file__))}
+    unchanged = before == after and inputs_before == inputs_after
+    result = json.loads(gzip.decompress(report.read_bytes())) if report.exists() else None
+    value = {
+        'schema': 'logos-engine.v53.actual-journaled-campaign-execution.v1',
+        'command': command, 'exitCode': completed.returncode, 'maximumAcquiredActions': args.maximum_actions, 'startedAt': started,
+        'finishedAt': datetime.now(timezone.utc).isoformat(), 'elapsedSeconds': time.monotonic() - clock,
+        'nativeSource': before, 'nativeSourceManifestDigest': before['digest'],
+        'nativeSourceAfter': after, 'nativeSourceUnchanged': before == after,
+        'executionInputs': inputs_before, 'executionInputsAfter': inputs_after,
+        'executionCodeUnchanged': unchanged, 'output': evidence(output),
+        'qualification': 'One bounded cold native common reference with the opaque public game host; an outer action cap is not a complete-game verdict. '
+                         'A passive observer journals the actual commands and all returned public packets. '
+                         'No expected action, learned state, route, Python agent or level jump is supplied.',
+    }
+    for key, path in [('report', report), ('trace', trace), ('publicJournal', journal_archive)]:
+        if path.exists():
+            value[key] = evidence(path)
+    with receipt.open('x') as stream:
+        stream.write(json.dumps(value, indent=2) + '\n')
+    print(json.dumps({'exitCode': completed.returncode, 'sourceUnchanged': unchanged,
+                      'status': result['status'] if result else None, 'outerReferenceLimit': result.get('outerReferenceLimit') if result else None,
+                      'final': result['final'] if result else None,
+                      'receipt': receipt.relative_to(ROOT).as_posix()}), flush=True)
+    if completed.returncode or not unchanged:
+        raise SystemExit(completed.returncode or 1)
+
+
+if __name__ == '__main__':
+    main()
+
+SCRIPT scripts/run-bounded-native-campaign.mjs
+/** Development reference cap. The unchanged common harness still owns decisions. */
+import { access, mkdir, writeFile } from 'node:fs/promises';
+import { appendFileSync } from 'node:fs';
+import { dirname, resolve } from 'node:path';
+import { gzipSync } from 'node:zlib';
+import { runNativeGameCampaign } from '../tests/helpers/v6-live-game-campaign.ts';
+
+const [game, target, cap, reportArgument, traceArgument, journalArgument] = process.argv.slice(2);
+const targetLevels = Number(target), maximumAcquiredActions = Number(cap);
+if (!game || !Number.isInteger(targetLevels) || targetLevels < 1
+    || !Number.isInteger(maximumAcquiredActions) || maximumAcquiredActions < 1
+    || !reportArgument || !traceArgument || !journalArgument) {
+  throw new Error('Usage: run-bounded-native-campaign.mjs GAME TARGET_LEVELS MAX_ACTIONS REPORT.gz TRACE.gz JOURNAL');
+}
+const [reportPath, tracePath, journalPath] = [reportArgument, traceArgument, journalArgument].map(value => resolve(value));
+for (const path of [reportPath, tracePath, journalPath]) {
+  try { await access(path); throw new Error(`Evidence already exists: ${path}`); }
+  catch (error) { if (error.code !== 'ENOENT') throw error; }
+  await mkdir(dirname(path), { recursive: true });
+}
+const packets = [];
+let actionCapReached = false;
+const report = await runNativeGameCampaign({ gameCode: game, targetLevels,
+  progress: event => {
+    console.log(JSON.stringify(event));
+    // A response follows acquisition and precedes acceptance/dispatch of another
+    // returned command. Stop only the outer diagnostic, never rewrite a policy.
+    if (event.phase === 'response' && event.actions >= maximumAcquiredActions
+        && event.levelsCompleted < targetLevels) {
+      actionCapReached = true;
+      throw new Error('outer_reference_acquired_action_cap');
+    }
+  },
+  publicTrace: (packet, command) => {
+    const item = { command: structuredClone(command), packet: structuredClone(packet) };
+    packets.push(item);
+    appendFileSync(journalPath, JSON.stringify(item) + '\n');
+  },
+});
+report.outerReferenceLimit = { maximumAcquiredActions, actionCapReached,
+  qualification: 'A bounded development reference, not a complete production campaign. The unchanged common harness owns every decision. If the outer action cap is reached, the last response has acquired its transition but is not accepted by the browser controller; final controller/prefix summaries may therefore lag that response. All actual public returns remain in the journal.' };
+await writeFile(reportPath, gzipSync(JSON.stringify(report) + '\n'));
+await writeFile(tracePath, gzipSync(JSON.stringify({ schema: 'logos-engine.native-public-game-trace.v1',
+  game, sourceDigest: report.source.digest, status: report.status, packets }) + '\n'));
+console.log(JSON.stringify({ status: report.status, final: report.final, failure: report.failure, actionCapReached }));
+if (report.status !== 'passed') process.exitCode = 1;
+
+SCRIPT docs/migration/lot6b-evidence/freeze-source.py
+#!/usr/bin/env python3
+"""Freeze the selected-rigid native candidate and its passive execution adapters.
+
+Derived from scripts/freeze-v53-native-source.py. The same native inventory and
+byte-parts schema are used. Preview, SelectedRigid and inherited Window passive
+evidence adapters are included explicitly. No game, native runtime, oracle or measurement is executed.
+"""
+from pathlib import Path
+import gzip, hashlib, importlib.util, io, json, subprocess, sys, tarfile
+
+ROOT = Path(__file__).resolve().parents[3]
+sys.dont_write_bytecode = True
+spec = importlib.util.spec_from_file_location('freeze_source_parent', ROOT / 'scripts/freeze-v53-native-source.py')
+parent = importlib.util.module_from_spec(spec); spec.loader.exec_module(parent)
+proof = parent.proof
+
+def main():
+    if len(sys.argv) != 2:
+        raise SystemExit('Usage: python -B docs/migration/lot6b-evidence/freeze-source.py OUTPUT_DIRECTORY')
+    out = (ROOT / sys.argv[1]).resolve(); out.relative_to(ROOT)
+    out.mkdir(parents=True, exist_ok=True)
+    if any((out / name).exists() for name in ('source-manifest.json', 'source-archive.json', 'source-archive.tar.gz')):
+        raise FileExistsError('A source freeze is immutable')
+    native = proof.native_source(); files = dict(native['files'])
+    inputs = ['tests/helpers/v6-live-game-campaign.ts', 'tests/helpers/capture-preview-packing.ts', 'tests/helpers/capture-selected-rigid.ts',
+              'tests/helpers/v6-window-question-capture.ts',
+              'scripts/run-v53-journaled-campaign.mjs', 'scripts/run-v53-campaign-proof.py',
+              'scripts/replay-v53-public-regression.mjs', 'scripts/run-v53-regression-checks.py',
+              'scripts/run-v53-release-checks.py', 'scripts/freeze-v53-native-source.py',
+              'scripts/run-recorded-public-regressions.py', 'scripts/compare-v54-regressions.py',
+              'scripts/verify-native-delta.py', 'docs/migration/lot6b-evidence/freeze-source.py',
+              'scripts/run-bounded-native-campaign.mjs', 'scripts/run-bounded-native-campaign-proof.py',
+              'package.json', 'package-lock.json', 'tsconfig.json', '.openai/hosting.json']
+    for name in inputs: files[name] = proof.sha(ROOT / name)
+    files = dict(sorted(files.items())); archive = out / 'source-archive.tar.gz'
+    with archive.open('xb') as stream, gzip.GzipFile(filename='', mode='wb', fileobj=stream, mtime=0, compresslevel=9) as zipped:
+        with tarfile.open(fileobj=zipped, mode='w|') as tar:
+            for name, expected in files.items():
+                data = (ROOT / name).read_bytes()
+                if hashlib.sha256(data).hexdigest() != expected: raise ValueError('Source changed: ' + name)
+                info = tarfile.TarInfo(name); info.size = len(data); info.mode = 0o644
+                tar.addfile(info, io.BytesIO(data))
+    if proof.native_source() != native: raise ValueError('Native source changed during freeze')
+    parent.write_json(out / 'source-manifest.json', native)
+    parent.write_json(out / 'source-archive.json', {
+        'schema': 'logos-engine.v53.frozen-source-archive.v1',
+        'baseCommit': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
+        'nativeSourceManifestDigest': native['digest'], 'files': files,
+        'archive': proof.evidence(archive), 'generator': proof.evidence(Path(__file__)),
+        'qualification': 'SelectedRigid candidate freeze. Includes exact native code and passive execution adapters; no learned state, game source or historical receipt is supplied as a production input.'})
+    parent.split(out)
+    print(json.dumps({'status': 'frozen', 'nativeDigest': native['digest'], 'nativeFiles': native['fileCount'],
+                      'archiveFiles': len(files), 'directory': str(out.relative_to(ROOT))}))
+
+if __name__ == '__main__': main()
+
+PARSER_AND_PROVENANCE scripts/compare-selected-rigid-public-parity.py
+658: 
+659: def main():
+660:     parser = argparse.ArgumentParser(description=__doc__)
+661:     parser.add_argument("--root", type=Path, default=ROOT)
+662:     parser.add_argument("--report", type=Path, required=True)
+663:     parser.add_argument("--output", type=Path, required=True)
+662:     parser.add_argument("--report", type=Path, required=True)
+663:     parser.add_argument("--output", type=Path, required=True)
+664:     parser.add_argument("--receipt", type=Path, required=True)
+665:     parser.add_argument("--without-ablations", action="store_true")
+666:     parser.add_argument("--require-prefixes", action="store_true")
+667:     args = parser.parse_args()
+667:     args = parser.parse_args()
+668:     require(not args.output.exists() and not args.receipt.exists(), "Retain previous attempts; use fresh output paths")
+669:     require(os.environ.get("PYTHONHASHSEED") == "0", "Run with PYTHONHASHSEED=0")
+670:     exporter_path = args.root / "scripts/export-v6-selected-rigid-reference.py"
+671:     presence_path = args.root / "scripts/verify-selected-rigid-presence.py"
+672:     exporter = load_module(exporter_path, "selected_rigid_original_exporter")
+PARSER_AND_PROVENANCE scripts/tests/qualify-selected-rigid-cold-reader.py
+130: 
+131: def main():
+132:     parser = argparse.ArgumentParser(description=__doc__)
+133:     parser.add_argument('--report', type=Path, required=True)
+134:     parser.add_argument('--positive-result', type=Path, required=True)
+135:     parser.add_argument('--positive-receipt', type=Path, required=True)
+134:     parser.add_argument('--positive-result', type=Path, required=True)
+135:     parser.add_argument('--positive-receipt', type=Path, required=True)
+136:     parser.add_argument('--output-dir', type=Path, required=True)
+137:     parser.add_argument('--timeout-seconds', type=int, required=True,
+138:                         help='Timeout for each of the two Python comparison subprocesses (1..300); outer case clock remains authoritative.')
+139:     args = parser.parse_args()
+214:             try:
+215:                 with log.open('xb') as stream:
+216:                     child = subprocess.run(command, cwd=ROOT, env={**os.environ, 'PYTHONHASHSEED': '0'},
+217:                                            stdout=stream, stderr=subprocess.STDOUT, timeout=args.timeout_seconds)
+218:                 case['exitCode'] = child.returncode
+219:             except subprocess.TimeoutExpired:
+PRECONDITION_FILE docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/functional-watch.json exists True
+{"keys": ["schema", "declaredAt", "nativeSourceDigest", "nativeFileCount", "files", "fileCount", "totalBytes", "qualification"], "files": 2952, "digest": null, "nativeDigest": null}
+PRECONDITION_FILE docs/migration/lot6b-evidence/provisional-063-01/final-functional-01/source-manifest.json exists False
+PRECONDITION_FILE docs/migration/lot6b-evidence/provisional-063-01/klot-fa23-01/source-manifest.json exists False
+BROWSER_CONSTRUCTOR 228: const agent = new BrowserV6Agent({
+229:   getObservation: () => observation,
+230:   canDispatch: () => ready() && mode === 'agent',
+231:   dispatch: async action => {
+232:     if (!ready() || mode !== 'agent' || !observation?.availableActionIds.includes(action.id)) {
+233:       throw new Error('The game changed before the action could be sent.');
+234:     }
+235:     const generation = selectionGeneration;
+236:     busy = true;
+237:     updateInterface();
+238:     try {
+239:       const actionStarted = performance.now();
+240:       const next = await runtime.action(action.id, action.id === 6 ? action.data : undefined);
+241:       const executionMs = performance.now() - actionStarted;
+242:       await present(next, generation);
+243:       if (generation !== selectionGeneration || next.gameCode !== selectedGame.code) {
+244:         throw new Error('The action belongs to an earlier game session.');
+245:       }
+246:       return { observation: next, executionMs };
+247:     } catch (error) {
+248:       showFailure(error, generation);
+249:       throw error;
+250:     }
+251:   },
+252:   onState: state => { agentState = state; knowledgePanel?.update(state); updateInterface(); },
+253: });
+254: element<HTMLDetailsElement>('#agent-inspection').addEventListener('toggle', () => {
+255:   if (element<HTMLDetailsElement>('#agent-inspection').open) {
+256:     knowledgePanel ??= new AgentKnowledgePanel(element('#agent-knowledge'), agent);
+BROWSER_COMMAND_CONTROLS
+106:             <button type="button" id="manual-tab" role="tab" aria-selected="true" aria-controls="manual-panel" tabindex="0">${icon('hand')}Manual</button>
+107:             <button type="button" id="agent-tab" role="tab" aria-selected="false" aria-controls="agent-panel" tabindex="-1">${icon('robot')}SRA Agent<span class="agent-mode-label">Native TS</span></button>
+108:           </div>
+109:           <span class="local-label"><span class="status-dot"></span> In your browser</span>
+110:         </div>
+111: 
+155:             </div>
+156:             <div id="agent-panel" role="tabpanel" aria-labelledby="agent-tab" data-agent-status="${AGENT_STATUS.status}" data-agent-available="${AGENT_STATUS.available}" hidden>
+157:               <h3>Solve with SRA.</h3>
+158:               <p id="agent-message" class="agent-message" role="status" aria-live="polite" aria-atomic="true" tabindex="0">Ready to run from level 1.</p>
+159:               <div class="agent-run-controls">
+160:                 <button id="agent-run" type="button" class="primary-button">Run to next level</button>
+158:               <p id="agent-message" class="agent-message" role="status" aria-live="polite" aria-atomic="true" tabindex="0">Ready to run from level 1.</p>
+159:               <div class="agent-run-controls">
+160:                 <button id="agent-run" type="button" class="primary-button">Run to next level</button>
+161:                 <button id="agent-batch" type="button" class="secondary-button">Run 16 actions</button>
+162:                 <button id="agent-step" type="button" class="secondary-button">One action</button>
+163:                 <button id="agent-pause" type="button" class="secondary-button agent-pause-wide" disabled>Pause</button>
+159:               <div class="agent-run-controls">
+160:                 <button id="agent-run" type="button" class="primary-button">Run to next level</button>
+161:                 <button id="agent-batch" type="button" class="secondary-button">Run 16 actions</button>
+162:                 <button id="agent-step" type="button" class="secondary-button">One action</button>
+163:                 <button id="agent-pause" type="button" class="secondary-button agent-pause-wide" disabled>Pause</button>
+164:               </div>
+276:   element<HTMLButtonElement>('#agent-step').disabled = !available || !(state?.canStep ?? true);
+277:   element<HTMLButtonElement>('#agent-run').disabled = !available || !(state?.canRun ?? true);
+278:   element<HTMLButtonElement>('#agent-batch').disabled = !available || !(state?.canRun ?? true);
+279:   element<HTMLButtonElement>('#agent-pause').disabled = !state?.busy;
+280:   element<HTMLButtonElement>('#agent-new-session').disabled = !ready() || Boolean(state?.busy);
+281:   element<HTMLButtonElement>('#agent-restart').disabled = !ready() || Boolean(state?.busy);
+486:   const manualTab = element<HTMLButtonElement>('#manual-tab');
+487:   const agentTab = element<HTMLButtonElement>('#agent-tab');
+488:   manualTab.setAttribute('aria-selected', String(manual));
+489:   agentTab.setAttribute('aria-selected', String(!manual));
+490:   manualTab.tabIndex = manual ? 0 : -1;
+491:   agentTab.tabIndex = manual ? -1 : 0;
+547: element('#manual-tab').addEventListener('click', () => setMode('manual'));
+548: element('#agent-tab').addEventListener('click', () => setMode('agent'));
+549: element('#return-manual').addEventListener('click', () => { setMode('manual'); focusCanvas(); });
+550: element('#agent-step').addEventListener('click', () => { void agent.step(); });
+551: element('#agent-run').addEventListener('click', () => { void agent.run(600); });
+552: element('#agent-batch').addEventListener('click', () => { void agent.run(16); });
+549: element('#return-manual').addEventListener('click', () => { setMode('manual'); focusCanvas(); });
+550: element('#agent-step').addEventListener('click', () => { void agent.step(); });
+551: element('#agent-run').addEventListener('click', () => { void agent.run(600); });
+552: element('#agent-batch').addEventListener('click', () => { void agent.run(16); });
+553: element('#agent-pause').addEventListener('click', () => agent.pause());
+554: element('#agent-new-session').addEventListener('click', () => agent.invalidate('New reasoning session. The current game position is preserved.'));
+550: element('#agent-step').addEventListener('click', () => { void agent.step(); });
+551: element('#agent-run').addEventListener('click', () => { void agent.run(600); });
+552: element('#agent-batch').addEventListener('click', () => { void agent.run(16); });
+553: element('#agent-pause').addEventListener('click', () => agent.pause());
+554: element('#agent-new-session').addEventListener('click', () => agent.invalidate('New reasoning session. The current game position is preserved.'));
+555: element('#agent-restart').addEventListener('click', () => {
+551: element('#agent-run').addEventListener('click', () => { void agent.run(600); });
+552: element('#agent-batch').addEventListener('click', () => { void agent.run(16); });
+553: element('#agent-pause').addEventListener('click', () => agent.pause());
+554: element('#agent-new-session').addEventListener('click', () => agent.invalidate('New reasoning session. The current game position is preserved.'));
+555: element('#agent-restart').addEventListener('click', () => {
+556:   const generation = selectionGeneration + 1;
+560:   void load.then(() => {
+561:     if (selectionGeneration === generation && modeGeneration === requestedMode && selectedGame.code === code && ready()) setMode('agent');
+562:   });
+563: });
+564: element('.mode-tabs').addEventListener('keydown', (event: KeyboardEvent) => {
+565:   if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+SAVED_PUBLICATION_URL /site/url https://sra-playground.yannick-fontan.chatgpt.site
+SAVED_PUBLICATION_URL /deployment/url https://sra-playground.yannick-fontan.chatgpt.site
