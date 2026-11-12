@@ -1,0 +1,53 @@
+{
+  "schema": "logos-engine.lot8b.component-stage-plan.v1",
+  "status": "declared",
+  "recordedAt": "2026-11-12T03:31:59.773750+00:00",
+  "scope": "Independent original BranchRouting corpus and native component parity, before common-runtime registration.",
+  "basePublishedSite": 107,
+  "basePublishedNativeVersion": "0.66.0",
+  "basePublishedCommit": "4ff7bf45286a8a19d34401988adca587253ae41e",
+  "newFamilyIdentifier": "branch_routing",
+  "entryPoint": "parallel_branch_routing",
+  "runtimeRegistrationInThisStage": false,
+  "newNativeReleaseVersionInThisStage": false,
+  "entryCountChangeInThisStage": false,
+  "originalReferenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "sourceCorpus": {
+    "kind": "independently_constructed_generic_rasters",
+    "maximumWidth": 32,
+    "maximumHeight": 32,
+    "maximumBars": 3,
+    "maximumLimit": 16,
+    "maximumOperations": 100,
+    "timeoutSeconds": 60,
+    "counterfactualSeedStates": "separately labeled, never native-derived or fresh acquisition claims"
+  },
+  "nativeSearchBounds": {
+    "maximumIdentityAssignments": 16384,
+    "maximumPlacements": 65536,
+    "yieldInterval": 128,
+    "configuration": "positive integers at or below declared ceilings",
+    "partialOptimumAllowed": false,
+    "recordIncomplete": "typed exception before any mutation; future caller must retain the official return pending an explicit deferred policy"
+  },
+  "validation": {
+    "originalParity": "All exported geometries, proposals, guards, acquisition returns and exact snapshots",
+    "nativeContract": "Bounds, interruption, mutation during yield, atomic incomplete record and atomic restore rejection",
+    "adjacentChecks": "Motif digest helper and generic native observer semantics only when needed",
+    "typecheck": true,
+    "fullSuiteRerun": false,
+    "officialGameRun": false,
+    "officialPerformanceMeasurement": false,
+    "publication": false
+  },
+  "ordinaryWorkRequiresGlobalLock": false,
+  "shortExclusivityOnlyForOfficialMeasurementAndPublication": true,
+  "closedLKEYReopened": false,
+  "futureCostRule": {
+    "globalMedianStrictlyBelow10PercentPerGame": [
+      "STCK",
+      "SMLP"
+    ],
+    "phaseOver10PercentAcceptableWhenBothGlobalsPass": true
+  }
+}
