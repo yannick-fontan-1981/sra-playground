@@ -44,9 +44,9 @@ sont pas mesurées.
 | OP26 | C3 | équivalent spécialisé d'admission dans plusieurs familles | goal/passage/cell/graph access | filtre multi-accès générique non démontré |
 | OP27 | C6 | préservation disponible, générateur absent | common_preservation | producteur de permutations non démontré |
 | OP28 | C2 | usage consommé et contribution démontrée dans donneur | operation_admission → release | vérifier redondance/admission dans port TS |
-| OP29 | C2 | calcul + résultat exposé, contribution non démontrée | composition_analysis/report | identifier lecteur décisionnel ou classer information_only |
-| OP30 | C2 | consommation/persistance démontrée | persist() écrit knowledge:* | tester reopen/restauration + lecture décisionnelle future |
-| OP31 | C2 | calcul + résultat exposé, contribution non démontrée | composition_analysis/report | identifier propriétaire objectif ou classer information_only |
+| OP29 | C2 | information_only dans le donneur publié | composition_analysis/report sans lecteur spécialisé trouvé | vérifier si le port TS possède un consommateur réel ; sinon conserver information_only |
+| OP30 | C2 | persisted_only dans le donneur publié | persist() écrit knowledge:* ; aucun lecteur trouvé | vérifier reopen/restauration et éventuel lecteur dans le port TS ; sinon conserver persisted_only |
+| OP31 | C2 | information_only dans le donneur publié | composition_analysis/report sans propriétaire objectif trouvé | vérifier si le port TS possède un consommateur réel ; sinon conserver information_only |
 
 ## Bilan par niveau de preuve
 
@@ -65,9 +65,10 @@ sont pas mesurées.
 - OP01, OP02, OP05, OP09, OP16, OP19, OP20, OP21, OP23, OP27.
 - Cela ne signifie pas « OP inutile » ; cela signifie qu'aucun besoin actuel ne justifie encore son raccordement.
 
-### Appel/résultat sans contribution démontrée
-- OP29, OP31.
-- OP30 au-delà de la persistance vers une décision future.
+### Dispositions informationnelles/persistées du donneur
+- OP29 : `information_only`.
+- OP30 : `persisted_only`.
+- OP31 : `information_only`.
 
 ## Besoins réellement manquants détectés
 
