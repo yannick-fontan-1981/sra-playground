@@ -111,5 +111,31 @@ test('a return from an obsolete selection generation is rejected and never prese
 
   const result = await dispatchProductAction(state(), 2, undefined, ports);
   assert.deepEqual(result, { accepted: false, stale: true, elapsedMs: 8 });
-  assert.deepEqual(events, ['busy:true', 'action', 'busy:false']);
+  assert.deepEqual(events, ['busy:true', 'action']);
+});
+
+
+test('a generation change during presentation does not release the newer selection busy state', async () => {
+  const events: string[] = [];
+  let generation = 21;
+  let now = 200;
+  const ports: DispatchPorts = {
+    action: async () => {
+      events.push('action');
+      now = 205;
+      return observation();
+    },
+    present: async () => {
+      events.push('present:start');
+      generation = 22;
+      events.push('present:stale');
+    },
+    now: () => now,
+    generation: () => generation,
+    setBusy: value => events.push(`busy:${value}`),
+  };
+
+  const result = await dispatchProductAction(state(), 3, undefined, ports);
+  assert.deepEqual(result, { accepted: false, stale: true, elapsedMs: 5 });
+  assert.deepEqual(events, ['busy:true', 'action', 'present:start', 'present:stale']);
 });
