@@ -16,9 +16,18 @@
     "present": true,
     "missing": []
   },
-  "region_reconstructed": false,
-  "region_integration_hits": [],
-  "ready_for_region_functional_qualification": false,
+  "region_reconstructed": true,
+  "region_component_path": "src/logos-engine/v6-region-intervention.ts",
+  "region_contract_path": "docs/recovery/lot9b-region-reconstruction-contract.md",
+  "region_functional_tests": {
+    "path": "tests/v6-region-intervention.test.ts",
+    "tests": 13,
+    "passed": 13,
+    "failed": 0,
+    "scope": "standalone evidence-bounded Region reconstruction core",
+    "caller_integration_qualified": false
+  },
+  "ready_for_region_functional_qualification": true,
   "official_069_prerequisites": {
     "missing": [
       "scripts/measure-native-loop-costs.mjs",
@@ -29,13 +38,20 @@
   },
   "ready_for_official_069_benchmark": false,
   "functional_test_evidence": {
-    "scope": "reconstructed V6 core only",
-    "tests": 27,
-    "passed": 27,
-    "failed": 0,
-    "direct_ts_attempt": "environment_failed_node_22_16_unknown_ts_extension",
-    "successful_path": "tsc noCheck + rewriteRelativeImportExtensions, then node --test emitted JS"
+    "v6_core": {
+      "tests": 27,
+      "passed": 27,
+      "failed": 0
+    },
+    "region_core": {
+      "tests": 13,
+      "passed": 13,
+      "failed": 0
+    },
+    "total_targeted_tests": 40,
+    "total_targeted_passed": 40,
+    "total_targeted_failed": 0
   },
-  "status": "fonctionnellement qualifié pour le noyau V6 reconstruit, performance officielle à confirmer",
-  "note": "Region is absent, so Lot 9B itself is not yet functionally qualified on the new canonical reconstruction."
+  "status": "fonctionnellement qualifié pour le noyau V6 reconstruit et le coeur Region reconstruit; raccordement caller et performance officielle à confirmer",
+  "note": "This Region implementation is a new evidence-bounded reconstruction and is not claimed to be the historical 0.69 source."
 }
