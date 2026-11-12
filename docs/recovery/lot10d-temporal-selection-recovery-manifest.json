@@ -3,7 +3,7 @@
   "lot": "10D",
   "capability": "TemporalSelection",
   "baseline_branch": "recovery/site109-reconstruction-20261112",
-  "baseline_commit": "658b89cfe77887eb720c95f0e6e6f8595beffdbd",
+  "baseline_commit": "7e7b4364a23603eb365e46fe40b3a774266dfb40",
   "recovery_source_branch": "lot10d-temporal-selection-github-20261112",
   "recovery_source_compare": {
     "merge_base": "2c9e8b45555fa21dbc4cb22a2cc66c7efb1383ac",
@@ -58,5 +58,7 @@
     "historical_selector_reconstructed": false,
     "historical_state_machine_reconstructed": false
   },
-  "next_step": "reconstruct a minimal local observation memory state only from durable producer/acquisition/restore/consumer evidence"
+  "next_step": "reconstruct a minimal local observation memory state only from durable producer/acquisition/restore/consumer evidence",
+  "working_branch": "recovery/lot10d-temporal-selection-restart2-20261112",
+  "previous_recovery_branch": "recovery/lot10d-temporal-selection-restart-20261112"
 }
