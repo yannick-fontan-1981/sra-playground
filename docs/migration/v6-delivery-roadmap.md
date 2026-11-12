@@ -2,13 +2,29 @@
 
 <!-- LOT8B_COMPONENT_STAGE_START -->
 
-## Lot 8B : contrat, référence indépendante et port du composant BranchRouting
+## Lot 8B : composant BranchRouting qualifié, raccordement commun suivant
 
 Le lot 8B poursuit `parallel_branch_routing` sur une branche et un checkout propres, depuis la **0.66 réellement publiée dans Site 107**, source `4ff7bf45286a8a19d34401988adca587253ae41e`. Le publié raccorde **68/76 entrées (89,5 %)**. La publication précédente 0.65 / Site 106 et son reçu de clôture sont conservés.
 
-Le jalon courant vise le **composant générique et sa parité originale** : contrat prospectif, corpus de petits rasters indépendant, port natif et contrôles ciblés. Il ne raccorde pas encore `parallel_branch_routing` au caller commun, ne réserve pas de nouveau numéro de publication et n’augmente pas le compteur des entrées raccordées. La boucle commune, les régressions de composition, le coût et la publication propre de 8B restent des jalons ultérieurs.
+Le jalon de **composant générique et de parité originale est terminé** : [contrat](lot8b-branch-routing.md), [filiation](lot8b-branch-routing-lineage.md), corpus original indépendant et deux modules natifs. Le [bilan vérifiable](lot8b-evidence/component-stage-01/README.md) conserve **37 observations, 20 cas géométriques, 12 scénarios et 83 opérations originales**, comparées dans les modes exact et borné complet. Les **249 tests et sous-tests de référence, 17 tests de contrat et le typage passent**, avec entrées inchangées. Le code est sauvegardé au commit `f8624e40839de891a33251b1c13b775ec213eb34` ; les reçus antérieurs, y compris les échecs, restent conservés. Ces populations ne sont pas additionnées aux anciennes suites ou à des réussites de jeu.
 
-Développement, contrôles fonctionnels, commits et push restent sans verrou global. Le coût officiel est distinct : médiane globale de session complète strictement sous +10 % pour STCK et SMLP séparément, avec une phase au-dessus de +10 % acceptable si les deux globaux passent. LKEY demeure définitivement fermé.
+`parallel_branch_routing` reste non raccordé au caller commun ; le registre conserve **68/76**, huit entrées ouvertes, et le natif publié **0.66.0**. Aucun nouveau numéro de version n’est réservé. La prochaine étape doit fournir des observations stables, borner la frontière des états restaurés et conserver les retours officiels dont l’acquisition est différée. Elle qualifie ensuite le propriétaire unique, les gardes et l’acquisition `branches:<revision>` dans le parcours commun, avec preuves contraires et ablations. Les bornes de 16 384 affectations d’identité et 65 536 placements ne sont pas une garantie générale de temps ou de mémoire.
+
+### Feuille de route courante après ce jalon
+
+| Étape | État établi | Prochaine action |
+| --- | --- | --- |
+| **8A / 0.65** | **Publication réussie dans Site 106**, reçus conservés ; coût officiel non mesuré et non accepté | Traiter ultérieurement la réserve de coût contre le vrai 0.64. |
+| **10C / 0.66** | **Publication réussie dans Site 107**, base intégrée ; registre 68/76 | Conserver les preuves et la réserve de coût officiel de cette publication. |
+| **8B, composant** | **Contrat, corpus indépendant, port et contrôles ciblés terminés** | Conserver ce jalon et ses limites ; aucun raccordement anticipé au registre. |
+| **8B, raccordement commun** | À réaliser | Fermer les limites d’entrée/restauration et d’acquisition différée ; raccorder puis qualifier les gardes, la mémoire, la restitution, les effets contraires et les ablations. |
+| **8B, qualification et livraison** | À réaliser après raccordement | Régressions affectées, formes et graphes, coût contre le publié réel, puis publication propre. |
+| 6C / 6D | `observed_rigid_cargo`, `shared_settlement` restent ouverts au registre | Poursuivre leurs transferts et qualifications sur leurs branches. |
+| Lot 9 | `chart_navigation`, `region_intervention`, `joint_channels` restent ouverts | Poursuivre les capacités propres ; `discrete_network` reste suivi hors compteur 76. |
+| 10D / 10E | `temporal_selection`, `invited_endpoints` restent ouverts au registre | Poursuivre les transferts ; les preuves préparatoires 10D sont conservées dans la base publiée. |
+| Lot 11 | Consolidation ouverte ; six portes globales encore fausses | Parité commune complète, graphes, restauration, sessions longues, coût et lisibilité. |
+
+Développement, contrôles fonctionnels, commits et push restent **sans verrou global**, sans attente de disponibilité des autres lots. Ce jalon n’a acquis aucun verrou et n’a exécuté aucune mesure officielle ni publication. Une exclusivité courte reste réservée aux futures mesures et à la publication ; aucun fichier détenu n’est supprimé. Le coût officiel 8B reste **non mesuré et non accepté** : médiane globale de session complète strictement sous +10 % pour STCK et SMLP séparément, avec une phase au-dessus de +10 % acceptable si les deux globaux passent, sans compensation entre jeux. LKEY demeure définitivement fermé. Les états de publication ci-dessus sont ceux des reçus constatés ; les sections suivantes conservent leurs étapes historiques.
 
 <!-- LOT8B_COMPONENT_STAGE_END -->
 
@@ -36,7 +52,7 @@ La [revue indépendante](lot10c-evidence/priority-publication-066-20261112/quali
 
 Le développement, les builds, les commits et les sauvegardes de branche avancent sans verrou global. Une fenêtre exclusive courte, non bloquante et bornée protège seulement la publication ; aucun ACK de disponibilité n’est demandé, aucun fichier de verrou détenu n’est supprimé. L’accès privé au propriétaire est conservé. Les reçus sont rassemblés dans le [dossier de publication 0.66](lot10c-evidence/priority-publication-066-20261112).
 
-À ce commit de préparation, aucun succès de déploiement 0.66 n’est encore revendiqué. **Les sections suivantes conservent leurs constats historiques ; le présent tableau fixe l’état courant.**
+À ce commit de préparation, aucun succès de déploiement 0.66 n’était encore revendiqué. Le reçu du Site 107 confirme désormais ce succès. **Le tableau ci-dessus conserve l’état de préparation historique ; la section 8B en tête fixe l’état courant observé.**
 
 <!-- LOT10C_PRIORITY_PUBLICATION_066_END -->
 

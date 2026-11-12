@@ -1,0 +1,288 @@
+{
+  "schema": "logos-engine.lot8b.component-source-review.v1",
+  "recordedAt": "2026-11-12T03:41:37Z",
+  "reviewer": "branch_routing_source",
+  "reviewerRole": "Original exporter and independent synthetic corpus owner; this is a consistency review, not an external independent audit.",
+  "status": "consistent_with_declared_component_scope",
+  "blockingContradictionsFound": 0,
+  "scope": {
+    "component": "BranchRouting",
+    "originalEntry": "parallel_branch_routing",
+    "originalCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+    "reviewMethod": "Read existing source, fixture, documentation, receipts and compressed logs; compare retained JSON states and already recorded file fingerprints.",
+    "sourceOrExporterExecutionsDuringReview": 0,
+    "testExecutionsDuringReview": 0,
+    "gameExecutionsDuringReview": 0,
+    "performanceMeasurementsDuringReview": 0,
+    "locksAcquiredDuringReview": 0,
+    "newReviewArtifactOnly": "docs/migration/lot8b-evidence/component-stage-01/source-review.json",
+    "readmeFingerprintIntentionallyExcluded": "docs/migration/lot8b-evidence/component-reference-03/README.md"
+  },
+  "currentOriginalCorpus": {
+    "attempt": 3,
+    "receipt": "docs/migration/lot8b-evidence/component-reference-03/execution.json",
+    "status": "passed",
+    "frames": 37,
+    "geometryCases": 20,
+    "scenarios": 12,
+    "originalStatefulOperations": 83,
+    "elapsedSecondsFromReceipt": 1.5703634890014655,
+    "declaredBounds": {
+      "timeoutSeconds": 60,
+      "maximumRasterWidth": 32,
+      "maximumRasterHeight": 32,
+      "maximumBars": 3,
+      "maximumLimit": 16,
+      "maximumCartesianCandidatesPerCall": 4096,
+      "maximumStatefulOperations": 100
+    },
+    "sourceIntegrityFromExistingExecution": {
+      "sourceBeforeCount": 1786,
+      "sourceAfterCount": 1786,
+      "sourceModified": false,
+      "reviewDidNotRerunOriginalManifestVerification": true
+    },
+    "provenanceFindings": [
+      "The exporter constructs public rasters independently and imports the pinned BranchRouting, common_multiscale_constraints and geometric_observer modules.",
+      "No native module or native result is an input to the original exporter. Game payloads, game traces and live dispatch are outside this corpus.",
+      "Tuple/set/NumPy representation normalization and the constructor-plus-detached-attributes restoration adapter are explicit. The original class has no state/restore API.",
+      "Every stateful operation retains its complete result and resulting source state. Its prior state is the scenario initialState or the previous operation afterState."
+    ]
+  },
+  "verifiedCurrentFileFingerprints": [
+    {
+      "path": "scripts/export-v6-branch-routing-reference.py",
+      "bytes": 26287,
+      "sha256": "7def846785568c7afad5786437c2ad2f2dce82e5348a37be569a38e8f6c7ef89",
+      "matched": [
+        "tests/fixtures/v6-branch-routing-reference.json:generator",
+        "docs/migration/lot8b-evidence/component-reference-03/execution.json:generator",
+        "docs/migration/lot8b-evidence/component-stage-01/reference-02/inputs-before.json",
+        "docs/migration/lot8b-evidence/component-stage-01/typecheck-01/inputs-before.json",
+        "docs/migration/lot8b-evidence/component-stage-01/contract-01/inputs-before.json"
+      ]
+    },
+    {
+      "path": "tests/fixtures/v6-branch-routing-reference.json",
+      "bytes": 542660,
+      "sha256": "e6ae197b7b982bd41f561b9df8e458436d7ce0797f39bbf86d972e55472b6769",
+      "matched": [
+        "docs/migration/lot8b-evidence/component-reference-03/execution.json:fixture",
+        "docs/migration/lot8b-evidence/component-stage-01/reference-02/inputs-before.json",
+        "docs/migration/lot8b-evidence/component-stage-01/typecheck-01/inputs-before.json",
+        "docs/migration/lot8b-evidence/component-stage-01/contract-01/inputs-before.json"
+      ]
+    },
+    {
+      "path": "src/logos-engine/v6-branch-routing-geometry.ts",
+      "sha256": "dd1e5a472ca8f417651bb4178c27fc522816de767619495da8de09f7cfc6b522",
+      "matched": [
+        "docs/migration/lot8b-evidence/component-stage-01/reference-02/inputs-before.json",
+        "docs/migration/lot8b-evidence/component-stage-01/typecheck-01/inputs-before.json",
+        "docs/migration/lot8b-evidence/component-stage-01/contract-01/inputs-before.json"
+      ]
+    },
+    {
+      "path": "src/logos-engine/v6-branch-routing.ts",
+      "sha256": "f53619f5858efb0195b5845e1452ea1ef3b6110be322bdff16e912332ac40af8",
+      "matched": [
+        "docs/migration/lot8b-evidence/component-stage-01/reference-02/inputs-before.json",
+        "docs/migration/lot8b-evidence/component-stage-01/typecheck-01/inputs-before.json",
+        "docs/migration/lot8b-evidence/component-stage-01/contract-01/inputs-before.json"
+      ]
+    },
+    {
+      "path": "tests/v6-branch-routing-reference.test.ts",
+      "sha256": "8c36fa7f6473c92b3a9c5f5fcbeab465f7831e3e6c56e0ed8d332301b47c87db",
+      "matched": ["docs/migration/lot8b-evidence/component-stage-01/reference-02/inputs-before.json"]
+    },
+    {
+      "path": "tests/v6-branch-routing-contract.test.ts",
+      "sha256": "5fa48696501956145076cd9fade45ecd1db7779dd64ef46ea63270bbac4de324",
+      "matched": ["docs/migration/lot8b-evidence/component-stage-01/contract-01/inputs-before.json"]
+    }
+  ],
+  "scenarioOrigins": {
+    "counts": {
+      "cold_original_constructor": 5,
+      "retained_original_acquisition": 4,
+      "declared_retained_counterfactual": 3
+    },
+    "coldChainsCompletingFourCalibrations": [
+      "cold_four_calibrations_move_propagate_epoch",
+      "cold_equal_cost_select_first_point_bind_move"
+    ],
+    "otherColdScenarios": [
+      "cold_diagonal_response_is_not_axial_acquisition",
+      "cold_missing_response_retains_unknown",
+      "unicode_control_order_and_python_digest"
+    ],
+    "retainedStatesComparedWithDeclaredSourceAfterState": [
+      {
+        "scenario": "guards_and_official_score_early_return",
+        "sourceScenario": "cold_four_calibrations_move_propagate_epoch",
+        "sourceStepIndex": 7,
+        "exactlyEqual": true
+      },
+      {
+        "scenario": "contrary_measured_move_revises_motion",
+        "sourceScenario": "cold_four_calibrations_move_propagate_epoch",
+        "sourceStepIndex": 7,
+        "exactlyEqual": true
+      },
+      {
+        "scenario": "remaining_and_unique_propagation_command",
+        "sourceScenario": "cold_four_calibrations_move_propagate_epoch",
+        "sourceStepIndex": 7,
+        "exactlyEqual": true
+      },
+      {
+        "scenario": "epoch_resets_current_authority_retains_learned_history",
+        "sourceScenario": "guards_and_official_score_early_return",
+        "sourceStepIndex": 10,
+        "exactlyEqual": true
+      }
+    ],
+    "counterfactualStatesComparedWithDeclaredBase": [
+      {
+        "scenario": "five_distinct_vectors_are_not_ready",
+        "changedFields": ["motion"],
+        "newPhysicalAcquisitionClaim": false
+      },
+      {
+        "scenario": "four_non_unit_vectors_do_not_supply_unit_route",
+        "changedFields": ["motion"],
+        "newPhysicalAcquisitionClaim": false
+      },
+      {
+        "scenario": "duplicate_route_vector_is_not_unique_key",
+        "changedFields": ["motion"],
+        "newPhysicalAcquisitionClaim": false
+      }
+    ],
+    "nativeReplayFinding": "Each cold case starts with a native constructor and asserts the complete cold state. Only cases explicitly carrying a retained model restore initial state. All steps compare the complete result and afterState in both exact and bounded-complete modes."
+  },
+  "nativeCommandEvidence": [
+    {
+      "receipt": "docs/migration/lot8b-evidence/component-stage-01/reference-01/receipt.json",
+      "status": "failed",
+      "exitCode": 1,
+      "tests": 1,
+      "passed": 0,
+      "failed": 1,
+      "inputCount": 349,
+      "beforeAndAfterInventoriesComparedEqual": true,
+      "finding": "Node rejected a TypeScript parameter property in strip-only mode while loading v6-branch-routing-geometry.ts. No differential comparison had run. The failed receipt and full compressed log are retained. The geometry file changed after this failure; it is not claimed to match the current successful geometry fingerprint."
+    },
+    {
+      "receipt": "docs/migration/lot8b-evidence/component-stage-01/reference-02/receipt.json",
+      "status": "passed",
+      "exitCode": 0,
+      "tests": 249,
+      "passed": 249,
+      "failed": 0,
+      "inputCount": 349,
+      "beforeAndAfterInventoriesComparedEqual": true,
+      "currentOriginalFixtureAttempt": 3,
+      "finding": "The TAP totals agree with the receipt. This native reference-02 execution consumed the current original component-reference-03 fixture, not the historical original component-reference-02 fixture."
+    },
+    {
+      "receipt": "docs/migration/lot8b-evidence/component-stage-01/typecheck-01/receipt.json",
+      "status": "passed",
+      "exitCode": 0,
+      "inputCount": 348,
+      "beforeAndAfterInventoriesComparedEqual": true,
+      "finding": "tsc --noEmit completed successfully. Its empty testCounts is appropriate: this is a typecheck, not another test case."
+    },
+    {
+      "receipt": "docs/migration/lot8b-evidence/component-stage-01/contract-01/receipt.json",
+      "status": "passed",
+      "exitCode": 0,
+      "tests": 17,
+      "passed": 17,
+      "failed": 0,
+      "inputCount": 349,
+      "beforeAndAfterInventoriesComparedEqual": true,
+      "finding": "The TAP totals agree with the receipt. Native bounded-search, interruption, acquisition and snapshot adaptations have separate component checks and explicitly declared synthetic models."
+    }
+  ],
+  "countInterpretation": {
+    "referenceTapTotal": 249,
+    "referenceTapComposition": {
+      "sourcePinsAndScope": 1,
+      "frameObservationAndIdentity": 37,
+      "geometryCases": 20,
+      "scenarioParentTestsAcrossTwoModes": 24,
+      "operationSubtestsAcrossTwoModes": 166,
+      "coldVersusCounterfactualScope": 1
+    },
+    "originalStatefulOperations": 83,
+    "statefulComparisonModes": ["source exact", "bounded complete"],
+    "separateNativeContractTests": 17,
+    "qualification": "249 is a TAP total including parent tests and nested subtests, with each of the 83 original operations compared in two native modes. It is not 249 independent scenarios or 249 original operations. The 83 operations and 20 geometry cases must not be added again as separate tests to inflate the successful native total."
+  },
+  "originalAttemptRetention": {
+    "index": "docs/migration/lot8b-evidence/component-reference-03/attempt-index.json",
+    "allIndexedSizesAndSha256CheckedAgainstRetainedBytes": true,
+    "attempts": [
+      {
+        "attempt": 1,
+        "status": "failed",
+        "receipt": "docs/migration/lot8b-evidence/component-reference-01/execution.json",
+        "retainedExporter": "docs/migration/lot8b-evidence/component-reference-01/exporter-attempt01.py",
+        "retainedExporterSha256": "86cbe935eba50d615cd1d3c1b59d4c63a71acded0fd9878834334b3a82967dce",
+        "finding": "An assertion in the synthetic scene generator failed because the original selected a move rather than the intended selection. No final fixture was written; original source was not altered. This is separate from the later native reference-01 loader failure."
+      },
+      {
+        "attempt": 2,
+        "status": "passed",
+        "receipt": "docs/migration/lot8b-evidence/component-reference-02/execution.json",
+        "retainedExporter": "docs/migration/lot8b-evidence/component-reference-02/exporter-attempt02.py",
+        "retainedExporterSha256": "95c10ba2c9010ce48b90705a0b055b4a87d11582cb4389bf1634474708c620b4",
+        "retainedFixture": "docs/migration/lot8b-evidence/component-reference-02/reference.json",
+        "retainedFixtureBytes": 523996,
+        "retainedFixtureSha256": "d58a6551552e3ec88cb9a748e91c3cc1188b32e5cd3a1da62cdeac46cc67ae05",
+        "frames": 35,
+        "geometryCases": 20,
+        "scenarios": 12,
+        "originalStatefulOperations": 83
+      },
+      {
+        "attempt": 3,
+        "status": "passed",
+        "receipt": "docs/migration/lot8b-evidence/component-reference-03/execution.json",
+        "finding": "The current corpus strengthens the contrary-response case with an actual axial response that revises motion, and the clipped-read case with a nonempty uniform highlighted fragment. Counts remain 20 geometry cases and 83 operations across 12 scenarios; two additional frames bring the total to 37."
+      }
+    ],
+    "pathSemantics": "Historical receipts retain their generation-time paths. The attempt index explicitly maps historical exporters and attempt02 fixture to byte-exact alternate retention paths. The canonical fixture path now contains attempt03. No failed attempt is reclassified."
+  },
+  "integrationStatusRead": {
+    "registryPath": "docs/migration/v6-entry-point-progress.json",
+    "entry": {"question": "parallel_branch_routing", "family": null, "status": "pending"},
+    "runtimePath": "src/logos-engine/v6-native-runtime.ts",
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.66.0",
+    "noNewBranchRoutingConnectionFoundIn": [
+      "src/logos-engine/v6-native-runtime.ts",
+      "src/logos-engine/v6-native-types.ts",
+      "scripts/audit-v6-entry-points.ts",
+      "migration/v6-transfer-map.json"
+    ],
+    "finding": "The component does not open a registry entry or increment the native runtime version. Existing source coverage inventory mentions are not a runtime connection."
+  },
+  "editorialObservation": {
+    "path": "docs/migration/lot8b-evidence/component-reference-03/README.md",
+    "finding": "The reviewed wording 'Les scènes froides apprennent quatre commandes' was broader than the fixture: only the two principal cold chains complete four acquisitions. Three other cold scenarios cover diagonal response, missing response and Unicode order.",
+    "disposition": "Reported to the root owner, who is correcting this wording separately. The README fingerprint is deliberately not frozen by this review. This editorial observation does not require another execution."
+  },
+  "limits": [
+    "This review is evidence reconciliation, not a new source run, native test execution, external audit or complete source-provider proof.",
+    "The original corpus is a small declared synthetic component domain. Synthetic score and epoch interventions do not establish a solved game or a live physical result.",
+    "Selected-owner exactly-once acquisition, runtime memory admission, full common-caller selection and restoration remain future integration work.",
+    "Native enumeration limits cover the two Cartesian searches, not total component time or memory; layout and other synchronous work retain separate integration and responsiveness obligations.",
+    "The component's synchronous bounded record can defer acquisition via BranchRoutingIncomplete. The future caller must preserve the actual official return and avoid loss or duplicate acquisition.",
+    "Owner-state protection during cooperative yields does not establish isolation of externally mutable input observations. Public input snapshots must remain stable in the future caller.",
+    "Snapshot shape, coherence and safe-integer checks are distinct from bounding arbitrary imported dimensions or coordinates to the public raster domain.",
+    "No full regression campaign, official performance measurement, accepted 8B cost, runtime connection or 8B publication follows from these component receipts.",
+    "No LKEY payload, game, reset, replay or oracle is semantically read or executed. Original whole-manifest hashing in the retained exporter receipts is opaque integrity work."
+  ]
+}

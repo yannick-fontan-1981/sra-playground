@@ -1,0 +1,307 @@
+{
+  "schema": "logos-engine.lot8b.component-qualification.v1",
+  "recordedAt": "2026-11-12T03:43:05.828803+00:00",
+  "status": "passed_with_declared_component_scope",
+  "codeCommit": "f8624e40839de891a33251b1c13b775ec213eb34",
+  "executionCommitQualification": "Checks executed with the new files present above plan commit255b260. Their exact input hashes now match committed sourcef8624e40; documentation closure is separate.",
+  "base": {
+    "siteVersion": 107,
+    "nativeVersion": "0.66.0",
+    "publishedSource": "4ff7bf45286a8a19d34401988adca587253ae41e",
+    "reconciledCommit": "c87c132a0353a8c6138ad090495f98698ef7ca6f",
+    "observation": "docs/migration/lot8b-evidence/base107-20261112/publication-observation.json"
+  },
+  "scope": {
+    "componentPort": true,
+    "commonRuntimeRegistered": false,
+    "entryCountIncremented": false,
+    "connectedEntries": 68,
+    "entryDenominator": 76,
+    "pendingEntries": [
+      {
+        "question": "observed_rigid_cargo",
+        "family": null,
+        "status": "pending"
+      },
+      {
+        "question": "parallel_branch_routing",
+        "family": null,
+        "status": "pending"
+      },
+      {
+        "question": "chart_navigation",
+        "family": null,
+        "status": "pending"
+      },
+      {
+        "question": "region_intervention",
+        "family": null,
+        "status": "pending"
+      },
+      {
+        "question": "temporal_selection",
+        "family": null,
+        "status": "pending"
+      },
+      {
+        "question": "invited_endpoints",
+        "family": null,
+        "status": "pending"
+      },
+      {
+        "question": "joint_channels",
+        "family": null,
+        "status": "pending"
+      },
+      {
+        "question": "shared_settlement",
+        "family": null,
+        "status": "pending"
+      }
+    ],
+    "newVersionReserved": false,
+    "publishedNativeVersionUnchanged": "0.66.0",
+    "commonCallerParityClaimed": false,
+    "fullGameSuccessClaimed": false,
+    "officialPerformanceMeasured": false,
+    "officialPerformanceAccepted": false,
+    "sitePublicationPerformed": false
+  },
+  "production": [
+    {
+      "path": "src/logos-engine/v6-branch-routing-geometry.ts",
+      "bytes": 16046,
+      "sha256": "dd1e5a472ca8f417651bb4178c27fc522816de767619495da8de09f7cfc6b522"
+    },
+    {
+      "path": "src/logos-engine/v6-branch-routing.ts",
+      "bytes": 22605,
+      "sha256": "f53619f5858efb0195b5845e1452ea1ef3b6110be322bdff16e912332ac40af8"
+    }
+  ],
+  "sourceIsolation": {
+    "sourceAndConfigurationDeltaFromPublishedBase": [
+      "A\tsrc/logos-engine/v6-branch-routing-geometry.ts",
+      "A\tsrc/logos-engine/v6-branch-routing.ts"
+    ],
+    "preexistingProductionFilesChanged": false,
+    "migrationMapChanged": false,
+    "originalSourceChanged": false,
+    "publishedRegistryUnchanged": true,
+    "runtimeRegistrationUnchanged": true
+  },
+  "originalCorpus": {
+    "receipt": {
+      "path": "docs/migration/lot8b-evidence/component-reference-03/execution.json",
+      "bytes": 1627,
+      "sha256": "ef4e75b3cc5f24c529ef0ed0814464e44f09f865eaa5b52d5571bf79ecb2182f"
+    },
+    "exporter": {
+      "path": "scripts/export-v6-branch-routing-reference.py",
+      "bytes": 26287,
+      "sha256": "7def846785568c7afad5786437c2ad2f2dce82e5348a37be569a38e8f6c7ef89"
+    },
+    "fixture": {
+      "path": "tests/fixtures/v6-branch-routing-reference.json",
+      "bytes": 542660,
+      "sha256": "e6ae197b7b982bd41f561b9df8e458436d7ce0797f39bbf86d972e55472b6769"
+    },
+    "frames": 37,
+    "geometryCases": 20,
+    "scenarios": 12,
+    "statefulOperations": 83,
+    "origins": {
+      "cold_original_constructor": 5,
+      "retained_original_acquisition": 4,
+      "declared_retained_counterfactual": 3
+    },
+    "originalFilesVerifiedBeforeAndAfter": [
+      1786,
+      1786
+    ],
+    "nativeImports": false,
+    "gameActionsDispatched": 0,
+    "gamePayloadsInterpreted": 0,
+    "qualification": "Small synthetic component corpus only; no game data, live dispatch, original caller integration or solved-level claim. Complete original searches on declared small domains do not qualify native interrupted-search adaptations."
+  },
+  "checks": {
+    "reference-02": {
+      "receipt": {
+        "path": "docs/migration/lot8b-evidence/component-stage-01/reference-02/receipt.json",
+        "bytes": 1114,
+        "sha256": "1acbad5a1e2bdf322404a70d7376f674483e355bbbfd9a453b3278df1235fbb8"
+      },
+      "command": [
+        "node",
+        "--test",
+        "--test-concurrency=1",
+        "--test-reporter=tap",
+        "tests/v6-branch-routing-reference.test.ts"
+      ],
+      "status": "passed",
+      "headAtExecution": "255b26069d38acf27f7e7cf7ac138a0423d1238b",
+      "testCounts": {
+        "tests": 249,
+        "suites": 0,
+        "pass": 249,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "inputsUnchanged": true,
+      "currentSavedCommitInputsMatch": true,
+      "matchedInputFiles": 349,
+      "finishedAt": "2026-11-12T03:36:14.403924+00:00",
+      "elapsedSeconds": 0.6978154630014615,
+      "durationQualification": "Command trace only, not an official performance measurement."
+    },
+    "contract-01": {
+      "receipt": {
+        "path": "docs/migration/lot8b-evidence/component-stage-01/contract-01/receipt.json",
+        "bytes": 1110,
+        "sha256": "8dd1385344a60cc509717c80b7552c5da8dcdf144bb0e736428eaefa8b6628d1"
+      },
+      "command": [
+        "node",
+        "--test",
+        "--test-concurrency=1",
+        "--test-reporter=tap",
+        "tests/v6-branch-routing-contract.test.ts"
+      ],
+      "status": "passed",
+      "headAtExecution": "255b26069d38acf27f7e7cf7ac138a0423d1238b",
+      "testCounts": {
+        "tests": 17,
+        "suites": 0,
+        "pass": 17,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "inputsUnchanged": true,
+      "currentSavedCommitInputsMatch": true,
+      "matchedInputFiles": 349,
+      "finishedAt": "2026-11-12T03:38:43.030315+00:00",
+      "elapsedSeconds": 0.38897252899914747,
+      "durationQualification": "Command trace only, not an official performance measurement."
+    },
+    "typecheck-01": {
+      "receipt": {
+        "path": "docs/migration/lot8b-evidence/component-stage-01/typecheck-01/receipt.json",
+        "bytes": 926,
+        "sha256": "71a2ca080961dde8ca6c3fa09d31d2e8ab8bbc3c86f522735343c4922bc9c744"
+      },
+      "command": [
+        "node",
+        "node_modules/typescript/bin/tsc",
+        "--noEmit"
+      ],
+      "status": "passed",
+      "headAtExecution": "255b26069d38acf27f7e7cf7ac138a0423d1238b",
+      "testCounts": {},
+      "inputsUnchanged": true,
+      "currentSavedCommitInputsMatch": true,
+      "matchedInputFiles": 348,
+      "finishedAt": "2026-11-12T03:36:35.757879+00:00",
+      "elapsedSeconds": 9.729200843999934,
+      "durationQualification": "Command trace only, not an official performance measurement."
+    }
+  },
+  "comparisonQualification": {
+    "nativeModes": [
+      "exact_complete_declared_small_domain",
+      "bounded_cooperative_complete_declared_small_domain"
+    ],
+    "uniqueOriginalStatefulOperations": 83,
+    "originalStatefulOperationsComparedPerNativeMode": 83,
+    "tapTestsAndSubtests": 249,
+    "separateNativeContractTests": 17,
+    "claimOfIndependentOriginalCasesFromSum": false,
+    "fullOutputAndStateCompared": true,
+    "fieldsOrDigestsExempted": false,
+    "contractModels": "Explicit generic counterfactual models, not original cold-acquisition claims."
+  },
+  "nativeSearchBounds": {
+    "maximumIdentityAssignments": 16384,
+    "maximumPlacements": 65536,
+    "yieldInterval": 128,
+    "positiveOnly": true,
+    "mayBeReduced": true,
+    "partialOptimumAuthorized": false,
+    "generalTimeOrMemoryBoundClaimed": false
+  },
+  "preservedAttempts": {
+    "originalIndex": {
+      "path": "docs/migration/lot8b-evidence/component-reference-03/attempt-index.json",
+      "bytes": 4604,
+      "sha256": "e92c18960ec760f0dc0124fdc44325239bbca35c4537026ed454e04b3fce2997"
+    },
+    "nativeFailedReference": {
+      "path": "docs/migration/lot8b-evidence/component-stage-01/reference-01/receipt.json",
+      "bytes": 1110,
+      "sha256": "0c0f9fdb95c98226ee3f187b11261f1b38c2a729d41e3e3d89cafd207e9b257a"
+    },
+    "nativeFailure": "Node strip-only loader rejected a TypeScript parameter property before semantic comparison; corrected with explicit fields."
+  },
+  "independentReadOnlyReview": {
+    "path": "docs/migration/lot8b-evidence/component-stage-01/source-review.json",
+    "bytes": 15727,
+    "sha256": "fb98c5d216243c03d365891dc2de4be7000550fee6e859eb03777bfd4346f141"
+  },
+  "documents": [
+    {
+      "path": "docs/migration/lot8b-branch-routing.md",
+      "bytes": 21769,
+      "sha256": "bbd4ec6b94c14aaff26f609e3f61514b9855c35c1d1db42295f12c498763bdc1"
+    },
+    {
+      "path": "docs/migration/lot8b-branch-routing-lineage.md",
+      "bytes": 11800,
+      "sha256": "5d292614b10e37a5e33b655cc6da690e53150ebb523bc1c67212e62363292d23"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/component-stage-01/README.md",
+      "bytes": 8433,
+      "sha256": "518123fd19f33b471bd27c5a6951762832ebb57b681baadede5bb792408eb885"
+    }
+  ],
+  "integrationRequirements": [
+    "Retain stable measured input snapshots and their observation identities throughout cooperative proposals.",
+    "Constrain restored dimensions, coordinates and arithmetic products to the public observation boundary before registration.",
+    "Preserve every official return whose bounded record acquisition is incomplete; process it without loss or duplicate acquisition.",
+    "Register a unique owner at the original material order; qualify guards, selected acquisition, common restore, contrary effects and ablations.",
+    "Qualify affected regressions, owner graphs and official cost separately; component search counts do not bound layout/history costs."
+  ],
+  "costRule": {
+    "measure": "complete-session median",
+    "games": [
+      "STCK",
+      "SMLP"
+    ],
+    "maximumIncreaseExclusivePercent": 10,
+    "eachGameMustPassSeparately": true,
+    "phaseAbove10PercentMayBeAcceptedWhenBothGlobalsPass": true,
+    "crossGameCompensation": false,
+    "allSamplesRetained": true,
+    "status": "unmeasured_not_accepted"
+  },
+  "workPolicy": {
+    "ownCheckout": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+    "branch": "lot8b-branch-routing-20261112",
+    "checkpointBranch": "lot8b-branch-routing-checkpoint-20261112",
+    "ordinaryWorkGlobalLockRequired": false,
+    "globalLockAcquired": false,
+    "heldLockFileDeleted": false,
+    "peerAvailabilityWait": false,
+    "shortExclusivityOnlyForOfficialPerformanceAndPublication": true,
+    "LKEY": "permanently_closed"
+  },
+  "verifiedCodeBackup": {
+    "path": "docs/migration/lot8b-evidence/component-stage-01/checkpoint-component-push-02.json",
+    "bytes": 4254,
+    "sha256": "48dc57f81ee537fceb3531091b6a1808dffd0eb92a2abab147f408f5ea1df5c3"
+  },
+  "nextStep": "Close common input/restore and deferred-acquisition contracts, then integrate and qualify parallel_branch_routing in the common caller."
+}

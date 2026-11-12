@@ -16,7 +16,7 @@ Le domaine est limité à des rasters de 32 × 32 au maximum, trois barres, une 
 
 Les attentes proviennent de l’exécution originale, sans entrée dérivée du port natif. Les tuples deviennent des tableaux JSON ; les ensembles deviennent des tableaux triés. La classe originale ne possède pas d’API `state` ou `restore` : l’adaptateur explicite reconstruit ses attributs détachés avec leurs types Python, sans changer leur valeur. Le marqueur de format ajouté est `native.branch_routing.v1`.
 
-Les scènes froides apprennent quatre commandes à partir de quatre retours raster construits et nommés. Les autres scènes partent soit d’un instantané réellement produit par ces scènes originales, soit d’un **contre-factuel retenu explicitement déclaré**. Les trois contre-factuels ne modifient que `motion` pour examiner cinq vecteurs distincts, un déplacement non unitaire ou deux clés donnant le même vecteur. Ils ne constituent pas de nouvelles acquisitions physiques.
+Les deux chaînes froides principales apprennent quatre commandes à partir de quatre retours raster construits et nommés. Les trois autres scénarios froids vérifient respectivement le retour diagonal, l’absence de réponse identifiable et le tri Unicode. Les quatre scénarios conservés partent d’un instantané réellement produit par une acquisition originale. Trois **contre-factuels retenus explicitement déclarés** ne modifient que `motion` pour examiner cinq vecteurs distincts, un déplacement non unitaire ou deux clés donnant le même vecteur. Ils ne constituent pas de nouvelles acquisitions physiques.
 
 ## Couverture acquise
 
