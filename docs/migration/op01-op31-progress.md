@@ -964,3 +964,36 @@ Prochaine étape :
 reprendre C1/C2 sur runtime réel dès restauration d'un worker/harness qualifié ;
 sinon ne pas créer d'appels OP artificiels. C7 restera ouvert pour les sessions
 STCK/SMLP séparées et le seuil global strictement < +10 % par jeu.
+
+
+## C7 — diagnostic synthétique du noyau OP
+
+Ajouts :
+- `tests/helpers/op01-op31-synthetic-session.ts` ;
+- `tests/v6-c7-diagnostic.test.ts` ;
+- `scripts/measure-op01-op31-core-costs.mjs` ;
+- mode `counters` de `OperationTraceSink`.
+
+Tests :
+- `tsc --noEmit` : OK ;
+- `tests/v6-*.test.ts` : **31/31**.
+
+Mesure diagnostique locale, 31 échantillons × 200 cycles :
+- baseline : ~1,674 ms ;
+- compteurs-only : ~1,793 ms (**+7,12 %**) ;
+- trace détaillée : ~9,589 ms (+472,86 %) ;
+- cache : ~2,834 ms (+69,29 %) ;
+- compteurs + cache : ~3,022 ms (+80,57 %).
+
+Interprétation :
+- compteurs-only = candidat au mode normal ;
+- trace détaillée = audit ciblé uniquement ;
+- cache = ne pas activer globalement sur un chemin où observation/révision changent à chaque cycle.
+
+Statut :
+**fonctionnellement qualifié, performance officielle à confirmer**.
+
+Le diagnostic ne remplace pas STCK/SMLP et n'autorise aucune revendication Site 109.
+
+Détail :
+`docs/recovery/op01-op31-c7-diagnostic-status.md`.
