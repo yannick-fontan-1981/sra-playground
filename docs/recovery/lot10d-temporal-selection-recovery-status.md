@@ -138,22 +138,27 @@ Le contrat actuel reste volontairement séparé du futur sélecteur : il valide 
 
 ## Couche reconstructible actuellement qualifiée
 
-Trois briques sont désormais versionnées et testées :
+Quatre briques sont désormais versionnées et qualifiées :
 
 1. contrat Source / sélection fail-closed ;
 2. contrat de réutilisation mémoire liée à l'observation courante ;
-3. contrat d'identité/idempotence des retours.
+3. contrat d'identité/idempotence des retours ;
+4. état TemporalSelection minimal, descriptif et restaurable.
 
-Qualification conjointe :
+Qualification cumulée ciblée :
 
-- **23/23 tests réussis** ;
-- 0 échec ;
-- aucune autorisation ACT produite par ces briques ;
+- **34 tests réussis** ;
+- **0 échec fonctionnel** ;
+- **11/11 tests** sur le dernier état minimal ;
+- typecheck strict réussi sur les quatre sources Temporal reconstruites ;
+- aucune autorisation ACT produite ;
 - aucune politique historique de choix recréée ;
 - aucun ancien champ `measurement/edit/pending/response` réintroduit sans preuve.
 
 ## Prochaine étape
 
-Assembler ces trois contrats en un **état TemporalSelection minimal d'observation** : identité courante, retours qualifiés, mémoire réutilisable et domaine d'alternatives.
+Construire un **adaptateur de consommation descriptif** qui relie l'état minimal à un résultat de sélection fourni par une autorité Source/DRM externe.
 
-Cet état devra rester purement descriptif et restaurable. La politique de choix restera séparée tant que son donneur exact n'est pas retrouvé.
+Cet adaptateur pourra exposer les preuves et marquer une frontière comme consommée, mais ne choisira pas lui-même le candidat et ne libérera aucune action.
+
+La politique historique de TemporalSelection restera explicitement manquante tant qu'un donneur durable ne la justifie pas.
