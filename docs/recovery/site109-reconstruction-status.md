@@ -35,26 +35,32 @@ Au minimum, les éléments historiquement utilisés par les lots doivent être r
 - les intégrations natives des entrées déjà publiées jusqu'à 70/76
 - les preuves fonctionnelles, campagnes, restauration et coûts nécessaires pour certifier la nouvelle baseline
 
-## Progression Lot 9 — reprise 9B
+## Progression Lot 9 - reprise 9B
 
 Branche de reprise documentaire intégrée :
 `recovery/lot9b-region-intervention-restart-20261112`
 
-Branche de reconstruction Region :
+Branche de reconstruction Region intégrée :
 `recovery/lot9b-region-reconstruction-v2-20261112`
+
+Branche owner Region :
+`recovery/lot9b-region-owner-integration-20261112`
 
 État vérifié :
 - l'ancienne branche `lot9b-github-recovery-20261112` ne contient que des documents et garde-fous de récupération ; aucun runtime Region historique n'y est récupéré ;
 - le noyau V6 reconstruit présent sur la baseline (operations, composition, authority, target-binding, cache, cycle, trace) a été exercé sur un checkout local matérialisé depuis GitHub : **27/27 tests ciblés passent** après compilation TypeScript ;
-- une nouvelle reconstruction comportementale Region, explicitement distincte de l'ancien 0.69, est maintenant définie dans `src/logos-engine/v6-region-intervention.ts` ;
+- une nouvelle reconstruction comportementale Region, explicitement distincte de l'ancien 0.69, est définie dans `src/logos-engine/v6-region-intervention.ts` ;
 - son contrat durable est `docs/recovery/lot9b-region-reconstruction-contract.md` ;
-- ce cœur Region est qualifié par **13/13 tests** : pas de proposition avant observation, réutilisation seulement via `methodRef` explicite, portée par époque, contradiction invalidante, bornes et snapshot/restauration ;
-- total des tests ciblés V6 + Region observés : **40/40 réussis** ;
-- le raccordement Region au caller commun, au worker public et aux campagnes live n'est pas encore qualifié ;
+- le coeur Region est qualifié par **13/13 tests** ;
+- une frontière owner neutre est reconstruite dans `src/logos-engine/v6-region-intervention-owner.ts` pour acquisition sélectionnée ou passive, déduplication des retours et restauration ;
+- le coeur Region + owner passent **19/19 tests** ;
+- total unique observé pour noyau V6 + Region + owner : **46/46 tests ciblés réussis** ;
+- le caller agent commun historique n'est pas reconstruit ; le dispatch produit/UI existant n'est pas traité comme son substitut ;
+- le worker public et les campagnes live ne sont pas encore qualifiés ;
 - aucun compteur historique 70/76 ou candidat 71/76 n'est promu au statut de la reconstruction actuelle.
 
 Statut Lot 9 :
-**noyau V6 et cœur Region reconstruit fonctionnellement qualifiés dans leurs périmètres ; raccordement caller et performance officielle à confirmer.**
+**noyau V6, coeur Region et frontière owner reconstruits fonctionnellement qualifiés dans leurs périmètres ; caller commun et performance officielle à confirmer.**
 
 ## Branches de récupération conservées
 
