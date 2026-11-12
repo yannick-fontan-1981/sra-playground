@@ -287,3 +287,33 @@ test('OP27 requires target, verified constraints and every protected reference',
   ];
   assert.deepEqual(executeOperation('OP27', s).value, ['ok']);
 });
+
+
+test('OP01 groups compositions only when the full declared structural signature matches', () => {
+  const s = state();
+  s.compositions.push({
+    id: 'A2',
+    requires: {},
+    effect: { free: true },
+    observed: false,
+  });
+  const groups = executeOperation('OP01', s).value as string[][];
+  assert.ok(groups.some(group => group.includes('A') && group.includes('A2')));
+  assert.equal(groups.some(group => group.includes('A') && group.includes('B')), false);
+});
+
+test('OP04 reports compositions opened by the focused effect without claiming realizability', () => {
+  const s = state();
+  assert.deepEqual(executeOperation('OP04', s).value, {
+    composition: 'B',
+    opens: ['C'],
+  });
+});
+
+test('OP11 exposes the supplied effect-to-requirement links without authorizing a plan', () => {
+  const s = state();
+  assert.deepEqual(executeOperation('OP11', s).value, {
+    A: ['B'],
+    B: ['C'],
+  });
+});
