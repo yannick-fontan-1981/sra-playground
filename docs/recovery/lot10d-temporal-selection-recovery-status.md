@@ -112,7 +112,7 @@ Critère historique conservé :
 
 Le harness officiel n'est pas encore restauré sur cette baseline.
 
-Statut actuel : **noyau Logos qualifié dans son périmètre et premier contrat TemporalSelection reconstruit avec 7/7 tests ; performance officielle à confirmer**.
+Statut actuel : **noyau Logos qualifié dans son périmètre et premiers contrats TemporalSelection reconstruits avec 23/23 tests ciblés ; performance officielle à confirmer**.
 
 ## Premier contrat TemporalSelection reconstruit
 
@@ -136,8 +136,24 @@ Qualification locale ciblée :
 
 Le contrat actuel reste volontairement séparé du futur sélecteur : il valide l'autorité Source, le domaine des alternatives, la consommation unique d'un retour et la projection fail-closed, mais ne choisit aucun candidat et n'accorde jamais ACT.
 
+## Couche reconstructible actuellement qualifiée
+
+Trois briques sont désormais versionnées et testées :
+
+1. contrat Source / sélection fail-closed ;
+2. contrat de réutilisation mémoire liée à l'observation courante ;
+3. contrat d'identité/idempotence des retours.
+
+Qualification conjointe :
+
+- **23/23 tests réussis** ;
+- 0 échec ;
+- aucune autorisation ACT produite par ces briques ;
+- aucune politique historique de choix recréée ;
+- aucun ancien champ `measurement/edit/pending/response` réintroduit sans preuve.
+
 ## Prochaine étape
 
-Établir le **modèle minimal d'état temporel** à partir de sources durables : producteur, événement d'acquisition, portée, restauration, consommateur et effet décisionnel.
+Assembler ces trois contrats en un **état TemporalSelection minimal d'observation** : identité courante, retours qualifiés, mémoire réutilisable et domaine d'alternatives.
 
-Aucun champ historique (`measurement`, `edit`, `pending`, `response`) ne sera ajouté sur la seule base des souvenirs du Site 109. Chaque champ doit être justifié par un contrat ou donneur versionné avant implémentation.
+Cet état devra rester purement descriptif et restaurable. La politique de choix restera séparée tant que son donneur exact n'est pas retrouvé.
