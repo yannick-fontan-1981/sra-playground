@@ -1,0 +1,31 @@
+{
+  "schema": "logos-engine.lot9a.documentation-reconciliation-correction.v1",
+  "recordedAt": "2026-11-12T15:15:25.042552+00:00",
+  "initialCommand": [
+    "python",
+    "docs/migration/lot9a-evidence/tools/summarize-final-delivery.py"
+  ],
+  "initialExitCode": 1,
+  "initialStatus": "failed_retained",
+  "error": {
+    "type": "AssertionError",
+    "location": "canonical native digest comparison, line38"
+  },
+  "failedTool": {
+    "path": "docs/migration/lot9a-evidence/tools/summarize-final-delivery-attempt-01.py",
+    "bytes": 12348,
+    "sha256": "0fb47dd36de47aaeeb82b3870f8f7880c094dd195fc62f7c7b0d12b22d909422"
+  },
+  "finding": "All334 path-to-hash entries matched the frozen manifest. Sorting pathlib.Path objects compares path components and did not preserve the lexical repository-relative string order of the canonical JSON. Only the summary generator needs to sort its string keys.",
+  "all334SourceHashesIdentical": true,
+  "noncanonicalDigest": "4b63d72e9d3afb908dd94977886a079e36407fd7e51babb0c25dcf1b9ad255f4",
+  "canonicalDigest": "e7a94fbc7cdcb19d8704b5d4120f27a858cbcd07e455084711510ee147f4e653",
+  "nativeCodeChanged": false,
+  "captureChanged": false,
+  "runtimeExecutions": 0,
+  "readerExecutions": 0,
+  "sessions": 0,
+  "physicalReturns": 0,
+  "initialOutputsCreated": false,
+  "correction": "Sort the repository-relative string keys before compact JSON hashing. Retain the failed generator bytes. This bookkeeping correction does not consume another work-reader attempt."
+}

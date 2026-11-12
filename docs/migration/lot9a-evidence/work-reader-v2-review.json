@@ -1,0 +1,169 @@
+{
+  "schema": "logos-engine.lot9a.work-reader-v2-independent-review.v1",
+  "status": "favorable_static_corrective_reader_preparation",
+  "reviewer": "/root/chart_geometry",
+  "recordedAt": "2026-11-12T15:04:05.530634+00:00",
+  "scope": "Independent source/diff review, retained artifact inspection and JSON/gzip/hash checks. The reviewer did not execute either functional reader or any native runtime.",
+  "amendment": {
+    "path": "docs/migration/lot9a-evidence/delivery-final-068-01/work-reader-amendment-v2.json",
+    "bytes": 76959,
+    "sha256": "ffecee495f5307d430ad07360e46cd3fd93b116b528f252a79049366b268c2bc"
+  },
+  "amendmentChecks": {
+    "pinnedInputs": 391,
+    "allFileSizesAndSha256Verified": true,
+    "uniquePaths": true,
+    "onlyCommand": "work-qualify",
+    "onlyArgvChangeFromOriginalPlan": "Select the separately frozen correction-v2/qualify-cost-owner-graphs-v2.mjs reader. Original inventory and A/B capture paths remain exact.",
+    "dependenciesUnchanged": true,
+    "budgetKeyUnchanged": "work-qualify",
+    "maximumAttempts": 2,
+    "priorAttemptsConsumed": 1,
+    "remainingAttempts": 1,
+    "maximumCumulativeSeconds": 600,
+    "priorElapsedSeconds": 50.551226686999144,
+    "remainingCumulativeSeconds": 549.4487733130009,
+    "maximumNextActiveSeconds": 300,
+    "newNativeSessions": 0,
+    "newPhysicalReturns": 0,
+    "allOriginalFailuresRetained": true,
+    "automaticRetry": false
+  },
+  "derivative": {
+    "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/correction-v2/qualify-cost-owner-graphs-v2.mjs",
+    "bytes": 81119,
+    "sha256": "7ccdcd16a359b9d9de7a4464659eaea3b73a11e4255e62169e5f2dc406fbf182"
+  },
+  "provenance": {
+    "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/correction-v2/provenance.json",
+    "bytes": 7429,
+    "sha256": "0eeb62b9ec8a294f7388d87f378416c8689df7cb4fbc27e30ed745e3201e7749"
+  },
+  "diff": {
+    "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/correction-v2/qualify-cost-owner-graphs-v2.diff",
+    "bytes": 23673,
+    "sha256": "ef82da0fc7eef6fa1d1d979d02055ae8af40151072501b944e5ac4d5bd22fa11"
+  },
+  "provenanceChecks": {
+    "fingerprintsVerified": 32,
+    "completeUnifiedDiffReconstructedExactly": true,
+    "sevenFrozenV1ToolsStillExact": true,
+    "fourOriginalFailureFilesStillExact": true,
+    "twoOriginalCapturesAndReceiptsStillExact": true,
+    "retainedSyntaxCheckOnly": true
+  },
+  "retainedFailure": [
+    {
+      "path": "docs/migration/lot9a-evidence/delivery-final-068-01/work-qualify-01/receipt.json",
+      "bytes": 3744,
+      "sha256": "dce4f63d46e3ff4c921193e5a7d9a5d52c4865858779eb0de468b2db385d742c"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/delivery-final-068-01/work-qualify-01/graph-review.json",
+      "bytes": 374380,
+      "sha256": "64c4d4b2b982d362eb01e9b791252aff70f0e0367647f7ca368d743dd647ca6a"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/delivery-final-068-01/work-qualify-01/graph-review.differences.jsonl.gz",
+      "bytes": 1033137,
+      "sha256": "dd76a98e456c2a0cddfa3944b79a301562360112e72453883ef6feae6ca4de4c"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/delivery-final-068-01/work-qualify-01/output.log.gz",
+      "bytes": 270,
+      "sha256": "f712c6ecddefe305a40f1931ec8517e7613a929e449e97a5539429c11e8a4466"
+    }
+  ],
+  "independentFailureAnalysis": {
+    "firstReaderStatusRemains": "failed",
+    "formsRead": 4,
+    "differencesRecorded": 28279,
+    "unattributedDifferences": 58,
+    "unattributedScopes": [
+      "full_snapshot"
+    ],
+    "onlyUnattributedPath": "/whyAct/decision/total_ms",
+    "notAProductionRegressionConclusion": "The only unexplained leaf is the elapsed duration exposed by an unchanged source clock producer. Semantic reports and all other leaves remain subject to the existing strict comparison.",
+    "captureSha256": {
+      "baseline": "d598c17649b43a3a9cdc579d6c25e249c4d7a72559b55bf76c9fac63dca1b954",
+      "candidate": "f2e7a8f8d8487c92dc5bdc55ce6cbf90c6a0ab5ce9aace0c63d16bfa9dbf0732"
+    }
+  },
+  "sourceAttribution": {
+    "unchangedProducerFiles": [
+      {
+        "path": "src/logos-engine/v6-composition-engine.ts",
+        "sha256": "c259548ad4b74b6aa9eaa589da3856469b73c4e1e1104ccfac55f00e8e1ead56"
+      },
+      {
+        "path": "src/logos-engine/v6-native-authority.ts",
+        "sha256": "f5a54ecac86fb097ee739dc6e4f8b4729819d58c9992fee92188527a1544b3ff"
+      },
+      {
+        "path": "src/logos-engine/v6-reasoning-memory.ts",
+        "sha256": "b55c186c99636f28c9e6e9c657b9bb50892eac06a3306be197503188069d901a"
+      }
+    ],
+    "path": "NativeCompositionAuthority constructs NativeSrcBridge with no clock override; its default uses performance.now. NativeEngine.persist clones the semantic report into a src_decision trace before NativeSrcBridge adds total_ms. The authority stores this report in lastRelease and exposes it through snapshot.whyAct.decision.",
+    "runtimeNote": "A successful ordinary WHY/ACT release appends why_act_release with the actual role graph chain. This note identifies the release, while bridgeSequence can also advance for other analysis.",
+    "onlyNewClassification": "attributed_bounded_release_report_duration",
+    "onlyNewAttributionPath": "/whyAct/decision/total_ms",
+    "internalStartAndEndTimestampsSeparatelyCaptured": false,
+    "claim": "The new scalar is source-linked and bounded by observed containing intervals; its internal timestamps are not reconstructed. The complete retained report is exact at subsequent points."
+  },
+  "independentObservedBounds": {
+    "baseline": {
+      "snapshots": 58,
+      "newReports": 21,
+      "newInInit": 4,
+      "newInResume": 17,
+      "retainedWholeReports": 37,
+      "currentHandleReleaseChainMatches": 21,
+      "withinObservedMonotonicHandleInterval": 21,
+      "withinObservedNativeElapsedGrowth": 21,
+      "uniqueCompleteSemanticBodyMatchesNewSourceTrace": 21,
+      "newTraceRevisionOneAndBeforeRelease": 21
+    },
+    "candidate": {
+      "snapshots": 58,
+      "newReports": 21,
+      "newInInit": 4,
+      "newInResume": 17,
+      "retainedWholeReports": 37,
+      "currentHandleReleaseChainMatches": 21,
+      "withinObservedMonotonicHandleInterval": 21,
+      "withinObservedNativeElapsedGrowth": 21,
+      "uniqueCompleteSemanticBodyMatchesNewSourceTrace": 21,
+      "newTraceRevisionOneAndBeforeRelease": 21
+    },
+    "allDurationsFiniteNonnegative": true,
+    "actionSetEqualsSelectedBundle": true,
+    "observationRevisionMatchesReleaseDecisionRevision": true,
+    "retainedReportComparisonIncludesTotalMs": true,
+    "processingMethod": "Python stdlib JSON/gzip traversal and data decoding of only persisted trace bodies; no import of production modules or execution of a functional reader."
+  },
+  "unchangedControls": [
+    "Complete snapshots, proposal, decision, whyAct and trace remain compared leaf-by-leaf.",
+    "All graph deltas, nodes, causes, revisions, identities, source digests, executable digests and ticket bindings remain validated.",
+    "All five common owner states, including BranchRouting, retain exact comparison.",
+    "Chart extra nodes remain confined to the three proved roots and reachable content-verified fragments.",
+    "Every unexplained difference still fails qualification.",
+    "All raw differences and their observed values remain in the output; no duration is set to zero or omitted.",
+    "Original v1 failure, tools and captures remain immutable."
+  ],
+  "blockingFindings": [],
+  "requiredNextStep": "Root may execute the one remaining predeclared work-qualify attempt under this frozen amendment. Its actual result requires a separate review; this document does not mark it passed.",
+  "qualificationLimits": [
+    "No new native execution, new capture, source oracle or game run was performed by this reviewer.",
+    "These functional timing fields are not official cost samples or performance acceptance evidence.",
+    "No worker/public-service qualification or publication follows from this static review.",
+    "The combined stage ledger keeps prior 10 sessions/14 returns plus the already declared fresh work/common scopes; a reader adds zero sessions and returns."
+  ],
+  "nativeRuntimeExecutionsByReviewer": 0,
+  "functionalReaderExecutionsByReviewer": 0,
+  "testExecutionsByReviewer": 0,
+  "officialPerformanceEligible": false,
+  "releaseAuthority": false,
+  "globalLockAcquired": false,
+  "LKEY": "closed"
+}

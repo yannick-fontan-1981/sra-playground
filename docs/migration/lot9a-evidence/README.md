@@ -1,6 +1,16 @@
-# Lot 9A : composant ChartNavigation et raccordement commun qualifiés
+# Lot 9A : ChartNavigation, du composant à la livraison fonctionnelle 0.68
 
-## Résultat courant
+## État actuel : livraison fonctionnelle finale 0.68 qualifiée
+
+Le [dossier final 0.68](delivery-final-068-01/README.md) et son [bilan vérifiable](delivery-final-068-01/validation-summary.json) complètent ce jalon de composant. Le candidat reste à **70/76**, sous une identité désormais distincte : 334 fichiers natifs, digest `e7a94fbc7cdcb19d8704b5d4120f27a858cbcd07e455084711510ee147f4e653`. Les algorithmes des 175 tests historiques sont réconciliés sans nouvelle exécution attribuée ; le build final avec TypeScript et l’audit frais du registre passent.
+
+Les formes STCK/SMLP conservent **8 sessions et 62 retours, 64 contrôles sur 58 points, 28 279 différences attribuées et zéro inexpliquée**. Les chaînes Chart sous 0.68 conservent **5 sessions, 9 retours, 52 points et 21 graphes complets**, six acquisitions actives, deux passives et une ablation. Le premier lecteur refusé sur 58 durées reste archivé ; sa correction prospectivement déclarée ne change aucune capture. Le registre comprenant les essais communs antérieurs atteint **23 sessions et 85 retours** dans ce périmètre.
+
+Le site publié reste **108 / native 0.67**, privé au propriétaire. **Le coût officiel 0.68 et sa publication restent la prochaine étape**, avec une exclusivité courte. Chaque global STCK et SMLP doit être strictement sous +10 % ; un dépassement de phase est acceptable si les deux globaux passent. Le trajet public positif de Chart via service, worker et tickets reste une qualification distincte. Le travail ordinaire et les sauvegardes ne prennent pas de verrou global. LKEY reste fermé.
+
+Les sections ci-dessous conservent les résultats du jalon de composant et leur identité historique de développement, sans les rebaptiser comme nouvelles exécutions 0.68.
+
+## Jalon historique : composant et caller commun
 
 Le propriétaire `chart_navigation` est transféré et raccordé au caller réel. Le candidat atteint **70/76 entrées raccordées (92,1 %), dont 27/33 entrées matérielles**, sans revendiquer une parité V6 complète. Le [bilan machine](validation-summary.json) conserve les périmètres, les exécutions, les échecs et les réserves.
 
@@ -76,7 +86,7 @@ La [revue statique](static-review.json) a conduit au rejet atomique des structur
 
 Ce jalon ne qualifie ni un nouveau trajet public Chart par worker/navigateur, ni une campagne différentielle complète des graphes, ni les sessions longues, ni le coût officiel. Les six portes globales du lot 11 restent fausses. LKEY demeure définitivement fermé.
 
-## Feuille de route immédiate
+## Feuille de route historique après le jalon de composant
 
 1. Qualifier les formes de livraison et les graphes exécutés de 9A, en conservant ce corpus et ses cas contraires. Déclarer sans ambiguïté les limites par lancement et cumulées, sans effacer les tentatives précédentes.
 2. Vérifier le prédécesseur réellement publié, réserver une identité de version distincte et établir le gel final.

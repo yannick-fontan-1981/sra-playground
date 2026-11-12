@@ -1,0 +1,18 @@
+{
+  "schema": "logos-engine.lot9a.final-delivery-reconciliation.v1",
+  "verifiedAt": "2026-11-12T15:15:25.622488+00:00",
+  "status": "passed",
+  "nativeFiles": 334,
+  "nativeDigest": "e7a94fbc7cdcb19d8704b5d4120f27a858cbcd07e455084711510ee147f4e653",
+  "allNativeHashesMatchFrozenManifest": true,
+  "buildFiles": 74,
+  "allBuildHashesMatch": true,
+  "entryRegistryImplementation": "logos-engine.typescript.v6.native-migration/0.68.0",
+  "commandReceiptsVerified": 9,
+  "passingCommands": 8,
+  "retainedFailedCommands": 1,
+  "allRecordedOutputsAndLogsVerified": true,
+  "officialPerformanceAccepted": false,
+  "publicationPerformed": false,
+  "failures": []
+}

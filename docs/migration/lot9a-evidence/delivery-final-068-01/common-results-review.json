@@ -1,0 +1,1033 @@
+{
+  "schema": "logos-engine.lot9a.chart-common-results-review.v1",
+  "status": "favorable_static_result_consistency_review_with_scope_limits",
+  "reviewedAt": "2026-11-12T15:03:54.844355+00:00",
+  "reviewer": "/root/chart_contract",
+  "method": "Read existing JSON/gzip artifacts and recompute fingerprints, retained-data counts and cross-report relationships using Python standard-library data operations only. The capture and qualification programs were not relaunched; no native module, runtime, owner, game or oracle was executed.",
+  "independence": {
+    "ownerAuthorIsReviewer": true,
+    "captureAndQualificationAuthorIsReviewer": true,
+    "independentOwnerReviewClaimed": false,
+    "independentToolReviewClaimed": false,
+    "separateIndependentPreparationReview": {
+      "path": "docs/migration/lot9a-evidence/delivery-preparation-review.json",
+      "bytes": 27440,
+      "sha256": "d7f899cbe05838c8d0175f202be1cd1cf1282d01a7a7ae0a3dcf896d4d8b92a6"
+    }
+  },
+  "reviewExecutions": {
+    "nativeRuntime": 0,
+    "nativeOwners": 0,
+    "originalOracle": 0,
+    "games": 0,
+    "captureRelaunches": 0,
+    "qualificationRelaunches": 0,
+    "newSessions": 0,
+    "newPhysicalReturns": 0
+  },
+  "identity": {
+    "implementation": "logos-engine.typescript.v6.native-migration/0.68.0",
+    "native": {
+      "fileCount": 334,
+      "digest": "e7a94fbc7cdcb19d8704b5d4120f27a858cbcd07e455084711510ee147f4e653"
+    },
+    "sourceReference": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+    "sourceHeadDuringBothCommands": "3eddec652362f683738e4226f8bcb1bbd1f1c426",
+    "captureInputsUnchanged": true,
+    "nativeSourceUnchanged": true,
+    "bothCommandHeadsUnchanged": true,
+    "executionPlanPinsVerified": 377,
+    "captureDeclarationPinsVerified": 15,
+    "internalCaptureInputsVerified": 350
+  },
+  "commands": [
+    {
+      "attempt": "common-capture-01",
+      "command": [
+        "node",
+        "--max-old-space-size=1536",
+        "docs/migration/lot9a-evidence/tools/delivery/chart-common/capture.mjs",
+        "--declaration",
+        "docs/migration/lot9a-evidence/delivery-final-068-01/common-declaration.json",
+        "--output",
+        "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/common-capture-01/capture"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "elapsedSeconds": 22.04100562700114,
+      "timeoutSeconds": 300,
+      "cumulativeSeconds": 22.04100562700114,
+      "maximumCumulativeSeconds": 600,
+      "inputHashesVerifiedBeforeAfterAndNow": 378,
+      "childProcessReaped": true,
+      "retainedFinalStdout": {
+        "status": "captured_synthetic_common_graphs",
+        "receipt": "docs/migration/lot9a-evidence/delivery-final-068-01/common-capture-01/capture/receipt.json",
+        "sessionStarts": 5,
+        "physicalReturns": 9,
+        "capturePoints": 52
+      },
+      "receipt": {
+        "path": "docs/migration/lot9a-evidence/delivery-final-068-01/common-capture-01/receipt.json",
+        "bytes": 10537,
+        "sha256": "f67d8718a1d76c66583843294ed64af96ab60e35e67205e0d69b5139175f3d70"
+      }
+    },
+    {
+      "attempt": "common-qualify-01",
+      "command": [
+        "node",
+        "--max-old-space-size=1536",
+        "docs/migration/lot9a-evidence/tools/delivery/chart-common/qualify.mjs",
+        "--capture",
+        "docs/migration/lot9a-evidence/delivery-final-068-01/common-capture-01/capture",
+        "--output",
+        "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/common-qualify-01/review"
+      ],
+      "status": "passed",
+      "exitCode": 0,
+      "elapsedSeconds": 11.093064430000595,
+      "timeoutSeconds": 240,
+      "cumulativeSeconds": 11.093064430000595,
+      "maximumCumulativeSeconds": 480,
+      "inputHashesVerifiedBeforeAfterAndNow": 380,
+      "childProcessReaped": true,
+      "retainedFinalStdout": {
+        "status": "qualified_synthetic_common_work_forms_and_complete_graphs",
+        "qualification": "docs/migration/lot9a-evidence/delivery-final-068-01/common-qualify-01/review/qualification.json",
+        "sessions": 5
+      },
+      "receipt": {
+        "path": "docs/migration/lot9a-evidence/delivery-final-068-01/common-qualify-01/receipt.json",
+        "bytes": 2896,
+        "sha256": "f97d8214fe0dccdfd7007ceda19644122152365afa0607961c4d536f3d902151"
+      }
+    }
+  ],
+  "internalTimers": {
+    "captureSeconds": 21.568,
+    "qualificationSeconds": 10.932,
+    "meaning": "Functional tool elapsed timers only. Outer supervised command durations include startup/finalization. None is an official performance result or a cost comparison."
+  },
+  "retention": {
+    "events": {
+      "path": "docs/migration/lot9a-evidence/delivery-final-068-01/common-capture-01/capture/events.jsonl.gz",
+      "bytes": 2367711,
+      "sha256": "5cec9b86a8d0524bfd6eefeb3222b7b6c4cbc825a71fd6a5f3056d50628b6676",
+      "rawBytes": 17109419,
+      "rawSha256": "82078e557fe7bd398bcbaaedde762129d14d4c65ef55fe12c9be80717e64a00e"
+    },
+    "jsonlRecords": 80,
+    "recordTypes": {
+      "header": 1,
+      "session_start": 5,
+      "owner_binding": 5,
+      "point": 52,
+      "physical_return": 9,
+      "controlled_cold_reset": 2,
+      "session_end": 5,
+      "footer": 1
+    },
+    "uniqueGraphBlobs": 21,
+    "graphReferencesInEvents": 73,
+    "allBlobsReferenced": true,
+    "allCompressedAndRawHashesRecomputed": true,
+    "allMaterializedGraphsEqualTheirCompleteRetainedDeltas": true,
+    "graphRawBytes": 210290728,
+    "graphGzipBytes": 23600718,
+    "aggregateRawBytes": 227400147,
+    "declaredAggregateRawLimit": 1073741824,
+    "fullSnapshotsComparedAtNativeYields": 26,
+    "sourceStateFields": [
+      "epoch",
+      "chart",
+      "position",
+      "positions",
+      "position_status",
+      "visited",
+      "grants",
+      "gains",
+      "views",
+      "blocked",
+      "evidence",
+      "portable",
+      "last",
+      "method_use"
+    ],
+    "full64x64FramePacketsRetained": true,
+    "graphChecks": [
+      {
+        "sha256": "06302abece6be68d91b6e13a974f0c8c5e05ca390ce73acedfde7e0b9260d2cc",
+        "gzipSha256": "c22971de54f3e26fb1c5daecbc4b4ee4d0f02d118f8f199825378ec563bbd1d7",
+        "rawBytes": 10088060,
+        "gzipBytes": 1132798,
+        "nodes": 219,
+        "deltas": 340,
+        "chain": "e725383be62b5fa15414cbaa7c47e670ef5cbee54f95ca64b69af62aa44365a3",
+        "fullMaterializedGraphMatchesAllRetainedDeltas": true
+      },
+      {
+        "sha256": "128d474c43d20aaea05fbfc04fc6787c4f028d92bba320d59e62ce0d254d527c",
+        "gzipSha256": "06ae0b434f7d84088d9aad13ebb0d552a9bcf92447fcdc1afb2eafd33bfcb700",
+        "rawBytes": 10898307,
+        "gzipBytes": 1212082,
+        "nodes": 237,
+        "deltas": 457,
+        "chain": "996174a38a90a5bf110783399015b5ee6c1247e3a7d8a7ce920dfe0aa4f09d32",
+        "fullMaterializedGraphMatchesAllRetainedDeltas": true
+      },
+      {
+        "sha256": "12d3af3e0418b89a76fb647e90d9b4207a5aef2f5541e35c7a8561dbfc2165b9",
+        "gzipSha256": "fae814bff9d7e85054ab5f145052bfa1c6df2443e6978de0ac1ea73eeb5c415e",
+        "rawBytes": 9868860,
+        "gzipBytes": 1111835,
+        "nodes": 217,
+        "deltas": 338,
+        "chain": "409ea06b45eb3c5e970e75a87354f64b422af50121421db5ec80361e130f8a76",
+        "fullMaterializedGraphMatchesAllRetainedDeltas": true
+      },
+      {
+        "sha256": "17fb728478aebfd5d14133bedac5b2edafa90dee340ed5bce4b53117465b4866",
+        "gzipSha256": "d4e3dab76fca1a0416e9b39be757299d8fd5deb978b70003c26ee63c90b03973",
+        "rawBytes": 10088060,
+        "gzipBytes": 1132772,
+        "nodes": 219,
+        "deltas": 340,
+        "chain": "9517efb9089f49a52b59f9bac0b3381ab5545a399ec2310d7d73d88103185f95",
+        "fullMaterializedGraphMatchesAllRetainedDeltas": true
+      },
+      {
+        "sha256": "2728dd8603f586b3ceb0d7cdd7a50fbac8faf06a1e54ec9466be6532ae54129d",
+        "gzipSha256": "011a928729ff7a864e484c082d0329bcd4d8123cac32355751a3bebcf484426a",
+        "rawBytes": 10164581,
+        "gzipBytes": 1141643,
+        "nodes": 222,
+        "deltas": 356,
+        "chain": "8e52268049b633914b886c27a981d6cde9b2bd3b61555a5130932b20815061ff",
+        "fullMaterializedGraphMatchesAllRetainedDeltas": true
+      },
+      {
+        "sha256": "374b46f8d6fc3fd9200399c0fc24ac3c7ee5fbbca34d41dd396ff26127cc4034",
+        "gzipSha256": "9104ae88df6d231ee440272eae24e3cae33925f894f42ad55cac04dbe7032479",
+        "rawBytes": 10977443,
+        "gzipBytes": 1217508,
+        "nodes": 238,
+        "deltas": 462,
+        "chain": "085623c82e0ed94e420724878d1aa4f78f4fef900116fc521f683c4b98cc4cd6",
+        "fullMaterializedGraphMatchesAllRetainedDeltas": true
+      },
+      {
+        "sha256": "4ce646875e395d83862563f5077a382fc90a1416bcefac2b46436f02baf6a38e",
+        "gzipSha256": "58650338fdf230e15b0df4bfa3990fe8dceca8d1c2750fe811b5a30477c950c0",
+        "rawBytes": 11749454,
+        "gzipBytes": 1290176,
+        "nodes": 255,
+        "deltas": 575,
+        "chain": "d64e62f01a7e696b6404d805d1b0e9353a6cc8d033887dec48cf0cacb5b5ec4d",
+        "fullMaterializedGraphMatchesAllRetainedDeltas": true
+      },
+      {
+        "sha256": "57ca6632e2ee4941ddfddc749bc863d59940ba6eb46017df59f8fa1d4383254c",
+        "gzipSha256": "b7eb2de1aa25bb6e54eb95b38505e0dace7331d041dd78111ec3904e999dcae0",
+        "rawBytes": 8787424,
+        "gzipBytes": 999356,
+        "nodes": 194,
+        "deltas": 228,
+        "chain": "2b202389eab838c27f203631a3346483fde2827f38879dd51e13e9ac50c46478",
+        "fullMaterializedGraphMatchesAllRetainedDeltas": true
+      },
+      {
+        "sha256": "5e2c064fef333c0f4a515d984b7b104dafa822ff6a9f2f5c98e165f2ba370fe2",
+        "gzipSha256": "dec204f6b242d3c2353d1df42f22aca31279307d6d5c2c2f9792ba9f32781a7e",
+        "rawBytes": 10739439,
+        "gzipBytes": 1191794,
+        "nodes": 232,
+        "deltas": 454,
+        "chain": "9eefb0f9cae1746f06347c600afe5b5e5df91ff70d913c4c7420a2c6e94a31b3",
+        "fullMaterializedGraphMatchesAllRetainedDeltas": true
+      },
+      {
+        "sha256": "70c09944c8eb9b7c8d03e859e0582506ee0a88685cf08c97269b56214f2696c1",
+        "gzipSha256": "a7e17f2e9e5f69d2cbf488bb18aa87e41334d432db3f2c3b7fd123aeab8f251f",
+        "rawBytes": 10977611,
+        "gzipBytes": 1220633,
+        "nodes": 239,
+        "deltas": 468,
+        "chain": "ead4921b9306ae06efa861e21ff6f0e3a48fa7c836b059489838c6361e3e6ebc",
+        "fullMaterializedGraphMatchesAllRetainedDeltas": true
+      },
+      {
+        "sha256": "730c1b466dc798df1e308362911372b3982903c1acc167e786601d5cada9deb7",
+        "gzipSha256": "bc985037cf83c2aa584c084b583a7032ae6d01d79c6a7522720fb434dbb700b8",
+        "rawBytes": 10088961,
+        "gzipBytes": 1132885,
+        "nodes": 219,
+        "deltas": 341,
+        "chain": "f175d06135ea4bbc18682fc13672b0a26d475e6d135f7aca3cb64242d74d1f82",
+        "fullMaterializedGraphMatchesAllRetainedDeltas": true
+      },
+      {
+        "sha256": "91c1bef668e04cb87294044ba16da3014d80a6934f2f9d099c42511a7af55b8f",
+        "gzipSha256": "9f2985bd2e7d40dcb43b86c7087f61b6313e78aec17d0d6e608a95714944b9de",
+        "rawBytes": 8787424,
+        "gzipBytes": 999347,
+        "nodes": 194,
+        "deltas": 228,
+        "chain": "b64189ea3dc4afbf5705ad88d9ea553fb6ec7870677b492ae49daebf080ffab4",
+        "fullMaterializedGraphMatchesAllRetainedDeltas": true
+      },
+      {
+        "sha256": "992449d0a1ac348b5026689299bc165921c99090e6cc2a010b1138534d65d451",
+        "gzipSha256": "946f46ad6b3089628da55fd42313507af367691d57a0f4e4a8fa389e15fc539f",
+        "rawBytes": 10164581,
+        "gzipBytes": 1141599,
+        "nodes": 222,
+        "deltas": 356,
+        "chain": "06e236ce17b5869c775c418471c08a2599cfd658987cad03990369aacf040e50",
+        "fullMaterializedGraphMatchesAllRetainedDeltas": true
+      },
+      {
+        "sha256": "ac8f0dfb01ea4c01ea7ef6d224836a9adbf790fbffc7696aa08beba18bc00442",
+        "gzipSha256": "f2f80a7f01caabab64481a08ab861a6c7c2450a2d20aecf7e9406fd992775381",
+        "rawBytes": 10152187,
+        "gzipBytes": 1140805,
+        "nodes": 221,
+        "deltas": 351,
+        "chain": "15bd8b02c4ad7bfea3f457d33ae0160682a20bf8715f02c5f0c9d675f42d86fe",
+        "fullMaterializedGraphMatchesAllRetainedDeltas": true
+      },
+      {
+        "sha256": "bace40fad07d938a72d805326468583407b83cf6eac644421f46dc63e32a2c38",
+        "gzipSha256": "7c91793469af8300b42e4784b2a992df13501e108fc53b860529f0569a07b57c",
+        "rawBytes": 10088961,
+        "gzipBytes": 1132893,
+        "nodes": 219,
+        "deltas": 341,
+        "chain": "498dc631b92c10c6d4248a0c96d37ee2b51c45230de5d40f18f90fd1e9cd6d45",
+        "fullMaterializedGraphMatchesAllRetainedDeltas": true
+      },
+      {
+        "sha256": "c57c1a31f9500f1c2a0f29ae549d48d0924896ea7838cd1880450970bbeb2d94",
+        "gzipSha256": "a3b4e6c2d33f2f4f236187004c8da6448070bcd32ed312b6f283358d227caf66",
+        "rawBytes": 10088060,
+        "gzipBytes": 1132771,
+        "nodes": 219,
+        "deltas": 340,
+        "chain": "5ca3ce169cbb3f3f04cade51eb57fb3fb8dd0556a3d6dc63f8d9cda0f1b186e5",
+        "fullMaterializedGraphMatchesAllRetainedDeltas": true
+      },
+      {
+        "sha256": "d30c31970350b72b751583209c00e415bdec948025287b54ae67fcd66db94961",
+        "gzipSha256": "68ef04e76bdb75ae70a278d25ba8eeab56e93eacdf533cd46571613c135cd348",
+        "rawBytes": 10140563,
+        "gzipBytes": 1139771,
+        "nodes": 221,
+        "deltas": 351,
+        "chain": "8fd9c59cca64649ab8f12a0c22130f7a60dff7b1a2ba92b88cc11d8f72aaa91d",
+        "fullMaterializedGraphMatchesAllRetainedDeltas": true
+      },
+      {
+        "sha256": "d3efac99e5954f0c4c973c524dc8e4eb591e5c0f4b9a7a32a65b37915655b9be",
+        "gzipSha256": "c0084f3891b227276b60de2ffd6a0828f47e67df05fd726bae93b2f85299bac5",
+        "rawBytes": 8787424,
+        "gzipBytes": 999354,
+        "nodes": 194,
+        "deltas": 228,
+        "chain": "2c9959a4ecb40e845ec52f662555eaf2acc4b593136ed54d1bf318b2e29ac1fd",
+        "fullMaterializedGraphMatchesAllRetainedDeltas": true
+      },
+      {
+        "sha256": "d7294e961ce5f7d8f24a5e2d867a1bd4e776ac89b4ff030c50ffd146379d334c",
+        "gzipSha256": "161abc59ee0e550513a0f46189faf0e6a4cb9361ec8265b7d9783653d058db27",
+        "rawBytes": 8787424,
+        "gzipBytes": 999354,
+        "nodes": 194,
+        "deltas": 228,
+        "chain": "af44230a568d998d36642495b0882daf3cd17b3a05faa21b9132949974d9fccf",
+        "fullMaterializedGraphMatchesAllRetainedDeltas": true
+      },
+      {
+        "sha256": "e597d89284778cdaa27245a790803804098070bdaa152c5e86b03f8b8509b79e",
+        "gzipSha256": "7f17ab6d7addd3d6290f0dbaa5213ec5e0eeb95df0d41e97c73b2d0943685b91",
+        "rawBytes": 8787424,
+        "gzipBytes": 999359,
+        "nodes": 194,
+        "deltas": 228,
+        "chain": "7c4a5814d3993654bb215f257db1278d04517ea4b93d6eea3cc6e9d4dd58d070",
+        "fullMaterializedGraphMatchesAllRetainedDeltas": true
+      },
+      {
+        "sha256": "ed09e656aeba82f1c433760d14beea6dd2835448d3d525133d1719d2910e02b6",
+        "gzipSha256": "dd5c3e5e13ea71e55dd9bacf3c903fd13fcf254540d9bd952eeb89db919fbae3",
+        "rawBytes": 10078480,
+        "gzipBytes": 1131983,
+        "nodes": 219,
+        "deltas": 340,
+        "chain": "e341689c92f9d5a717a99134fd890015306a8cbaaa1a58386c296d824d6d9587",
+        "fullMaterializedGraphMatchesAllRetainedDeltas": true
+      }
+    ]
+  },
+  "sessions": [
+    {
+      "caseId": "primary",
+      "initializedSessions": 1,
+      "physicalReturns": 3,
+      "activeChartAcquisitions": 3,
+      "passiveChartAcquisitions": 0,
+      "suppressedChartAcquisitions": 0,
+      "sourceFactRestorations": 3,
+      "controlledColdResets": 2,
+      "recoveredColdResets": 2,
+      "nativeRestoreCalls": 6,
+      "capturePoints": 14,
+      "methods": [
+        "initialize",
+        "held_resume",
+        "inspect",
+        "advance",
+        "inspect",
+        "resume",
+        "inspect",
+        "advance",
+        "inspect",
+        "resume",
+        "inspect",
+        "advance",
+        "inspect",
+        "close"
+      ],
+      "runtimeClosed": true,
+      "finalGraphNodes": 255,
+      "finalGraphDeltas": 575,
+      "finalGraphChain": "d64e62f01a7e696b6404d805d1b0e9353a6cc8d033887dec48cf0cacb5b5ec4d"
+    },
+    {
+      "caseId": "contrary",
+      "initializedSessions": 1,
+      "physicalReturns": 1,
+      "activeChartAcquisitions": 1,
+      "passiveChartAcquisitions": 0,
+      "suppressedChartAcquisitions": 0,
+      "sourceFactRestorations": 1,
+      "controlledColdResets": 0,
+      "recoveredColdResets": 0,
+      "nativeRestoreCalls": 2,
+      "capturePoints": 6,
+      "methods": [
+        "initialize",
+        "held_resume",
+        "inspect",
+        "advance",
+        "inspect",
+        "close"
+      ],
+      "runtimeClosed": true,
+      "finalGraphNodes": 217,
+      "finalGraphDeltas": 338,
+      "finalGraphChain": "409ea06b45eb3c5e970e75a87354f64b422af50121421db5ec80361e130f8a76"
+    },
+    {
+      "caseId": "selected-acquisition-ablation",
+      "initializedSessions": 1,
+      "physicalReturns": 1,
+      "activeChartAcquisitions": 0,
+      "passiveChartAcquisitions": 0,
+      "suppressedChartAcquisitions": 1,
+      "sourceFactRestorations": 1,
+      "controlledColdResets": 0,
+      "recoveredColdResets": 0,
+      "nativeRestoreCalls": 3,
+      "capturePoints": 8,
+      "methods": [
+        "initialize",
+        "held_resume",
+        "inspect",
+        "advance",
+        "inspect",
+        "resume",
+        "inspect",
+        "close"
+      ],
+      "runtimeClosed": true,
+      "finalGraphNodes": 221,
+      "finalGraphDeltas": 351,
+      "finalGraphChain": "8fd9c59cca64649ab8f12a0c22130f7a60dff7b1a2ba92b88cc11d8f72aaa91d"
+    },
+    {
+      "caseId": "passive-scene-equal",
+      "initializedSessions": 1,
+      "physicalReturns": 2,
+      "activeChartAcquisitions": 1,
+      "passiveChartAcquisitions": 1,
+      "suppressedChartAcquisitions": 0,
+      "sourceFactRestorations": 2,
+      "controlledColdResets": 0,
+      "recoveredColdResets": 0,
+      "nativeRestoreCalls": 4,
+      "capturePoints": 12,
+      "methods": [
+        "initialize",
+        "held_resume",
+        "inspect",
+        "advance",
+        "inspect",
+        "edit",
+        "inspect",
+        "resume",
+        "inspect",
+        "advance",
+        "inspect",
+        "close"
+      ],
+      "runtimeClosed": true,
+      "finalGraphNodes": 232,
+      "finalGraphDeltas": 454,
+      "finalGraphChain": "9eefb0f9cae1746f06347c600afe5b5e5df91ff70d913c4c7420a2c6e94a31b3"
+    },
+    {
+      "caseId": "passive-scene-changed",
+      "initializedSessions": 1,
+      "physicalReturns": 2,
+      "activeChartAcquisitions": 1,
+      "passiveChartAcquisitions": 1,
+      "suppressedChartAcquisitions": 0,
+      "sourceFactRestorations": 2,
+      "controlledColdResets": 0,
+      "recoveredColdResets": 0,
+      "nativeRestoreCalls": 4,
+      "capturePoints": 12,
+      "methods": [
+        "initialize",
+        "held_resume",
+        "inspect",
+        "advance",
+        "inspect",
+        "edit",
+        "inspect",
+        "resume",
+        "inspect",
+        "advance",
+        "inspect",
+        "close"
+      ],
+      "runtimeClosed": true,
+      "finalGraphNodes": 238,
+      "finalGraphDeltas": 462,
+      "finalGraphChain": "085623c82e0ed94e420724878d1aa4f78f4fef900116fc521f683c4b98cc4cd6"
+    }
+  ],
+  "workForms": {
+    "total": 52,
+    "methods": {
+      "initialize": 5,
+      "held_resume": 5,
+      "inspect": 21,
+      "advance": 9,
+      "resume": 5,
+      "close": 5,
+      "edit": 2
+    },
+    "everyInstanceClosed": true,
+    "noActionAcquiredDuringInspectionHeldResumeOrClose": true
+  },
+  "acquisitions": [
+    {
+      "caseId": "primary",
+      "physicalReturn": 1,
+      "pointIndex": 3,
+      "operation": 10,
+      "kind": "active",
+      "selectedFamily": "public_chart_navigation",
+      "originalInvoked": true,
+      "command": {
+        "action_ref": "ACTION4"
+      },
+      "returnedFrames": [
+        "room_b_held"
+      ],
+      "fullRasterPacketRetained": true,
+      "sourceRecordAndFullStateExact": true
+    },
+    {
+      "caseId": "primary",
+      "physicalReturn": 2,
+      "pointIndex": 7,
+      "operation": 23,
+      "kind": "active",
+      "selectedFamily": "public_chart_navigation",
+      "originalInvoked": true,
+      "command": {
+        "action_ref": "ACTION4"
+      },
+      "returnedFrames": [
+        "room_c_boundary4",
+        "room_c_empty"
+      ],
+      "fullRasterPacketRetained": true,
+      "sourceRecordAndFullStateExact": true
+    },
+    {
+      "caseId": "primary",
+      "physicalReturn": 3,
+      "pointIndex": 11,
+      "operation": 36,
+      "kind": "active",
+      "selectedFamily": "public_chart_navigation",
+      "originalInvoked": true,
+      "command": {
+        "action_ref": "ACTION4"
+      },
+      "returnedFrames": [
+        "room_d_empty"
+      ],
+      "fullRasterPacketRetained": true,
+      "sourceRecordAndFullStateExact": true
+    },
+    {
+      "caseId": "contrary",
+      "physicalReturn": 1,
+      "pointIndex": 3,
+      "operation": 10,
+      "kind": "active",
+      "selectedFamily": "public_chart_navigation",
+      "originalInvoked": true,
+      "command": {
+        "action_ref": "ACTION4"
+      },
+      "returnedFrames": [
+        "chart_contrary_anchor"
+      ],
+      "fullRasterPacketRetained": true,
+      "sourceRecordAndFullStateExact": true
+    },
+    {
+      "caseId": "selected-acquisition-ablation",
+      "physicalReturn": 1,
+      "pointIndex": 3,
+      "operation": 10,
+      "kind": "suppressed",
+      "selectedFamily": "public_chart_navigation",
+      "originalInvoked": false,
+      "command": {
+        "action_ref": "ACTION4"
+      },
+      "returnedFrames": [
+        "room_b_held"
+      ],
+      "fullRasterPacketRetained": true,
+      "sourceRecordAndFullStateExact": false
+    },
+    {
+      "caseId": "passive-scene-equal",
+      "physicalReturn": 1,
+      "pointIndex": 3,
+      "operation": 10,
+      "kind": "active",
+      "selectedFamily": "public_chart_navigation",
+      "originalInvoked": true,
+      "command": {
+        "action_ref": "ACTION4"
+      },
+      "returnedFrames": [
+        "room_b_held"
+      ],
+      "fullRasterPacketRetained": true,
+      "sourceRecordAndFullStateExact": true
+    },
+    {
+      "caseId": "passive-scene-equal",
+      "physicalReturn": 2,
+      "pointIndex": 9,
+      "operation": 16,
+      "kind": "passive",
+      "selectedFamily": "observed_frontier",
+      "originalInvoked": true,
+      "command": {
+        "action_ref": "ACTION4"
+      },
+      "returnedFrames": [
+        "room_b_equal_held"
+      ],
+      "fullRasterPacketRetained": true,
+      "sourceRecordAndFullStateExact": true
+    },
+    {
+      "caseId": "passive-scene-changed",
+      "physicalReturn": 1,
+      "pointIndex": 3,
+      "operation": 10,
+      "kind": "active",
+      "selectedFamily": "public_chart_navigation",
+      "originalInvoked": true,
+      "command": {
+        "action_ref": "ACTION4"
+      },
+      "returnedFrames": [
+        "room_b_held"
+      ],
+      "fullRasterPacketRetained": true,
+      "sourceRecordAndFullStateExact": true
+    },
+    {
+      "caseId": "passive-scene-changed",
+      "physicalReturn": 2,
+      "pointIndex": 9,
+      "operation": 16,
+      "kind": "passive",
+      "selectedFamily": "observed_frontier",
+      "originalInvoked": true,
+      "command": {
+        "action_ref": "ACTION4"
+      },
+      "returnedFrames": [
+        "room_c_boundary4",
+        "room_c_empty"
+      ],
+      "fullRasterPacketRetained": true,
+      "sourceRecordAndFullStateExact": true
+    }
+  ],
+  "restorations": {
+    "sourceRestoreMethodCalls": 11,
+    "sourceFactRestorations": 9,
+    "controlledColdResetCalls": 2,
+    "controlledResetsRepairedByActualNativeRestore": 2,
+    "nativeRestoreCalls": 19,
+    "memoryPuts": 9,
+    "memoryGets": 9,
+    "sourceFactDetails": [
+      {
+        "caseId": "primary",
+        "operation": 11,
+        "get": 1,
+        "put": 0,
+        "physicalReturn": 1,
+        "observedPutGetRestoreFullStateExact": true
+      },
+      {
+        "caseId": "primary",
+        "operation": 24,
+        "get": 3,
+        "put": 2,
+        "physicalReturn": 2,
+        "observedPutGetRestoreFullStateExact": true
+      },
+      {
+        "caseId": "primary",
+        "operation": 37,
+        "get": 5,
+        "put": 4,
+        "physicalReturn": 3,
+        "observedPutGetRestoreFullStateExact": true
+      },
+      {
+        "caseId": "contrary",
+        "operation": 11,
+        "get": 1,
+        "put": 0,
+        "physicalReturn": 1,
+        "observedPutGetRestoreFullStateExact": true
+      },
+      {
+        "caseId": "selected-acquisition-ablation",
+        "operation": 11,
+        "get": 1,
+        "put": 0,
+        "physicalReturn": 1,
+        "observedPutGetRestoreFullStateExact": true
+      },
+      {
+        "caseId": "passive-scene-equal",
+        "operation": 11,
+        "get": 1,
+        "put": 0,
+        "physicalReturn": 1,
+        "observedPutGetRestoreFullStateExact": true
+      },
+      {
+        "caseId": "passive-scene-equal",
+        "operation": 17,
+        "get": 3,
+        "put": 2,
+        "physicalReturn": 2,
+        "observedPutGetRestoreFullStateExact": true
+      },
+      {
+        "caseId": "passive-scene-changed",
+        "operation": 11,
+        "get": 1,
+        "put": 0,
+        "physicalReturn": 1,
+        "observedPutGetRestoreFullStateExact": true
+      },
+      {
+        "caseId": "passive-scene-changed",
+        "operation": 17,
+        "get": 3,
+        "put": 2,
+        "physicalReturn": 2,
+        "observedPutGetRestoreFullStateExact": true
+      }
+    ],
+    "nativeDetails": [
+      {
+        "caseId": "primary",
+        "pointIndex": 0,
+        "operation": 2,
+        "rootRevision": 1,
+        "graphRevision": 189,
+        "graphChain": "d0a5189f684f162fd6878999609a08697270997e7048ace80b797fd330881222",
+        "fullStateMatchesRestoredArguments": true
+      },
+      {
+        "caseId": "primary",
+        "pointIndex": 3,
+        "operation": 13,
+        "rootRevision": 3,
+        "graphRevision": 340,
+        "graphChain": "9517efb9089f49a52b59f9bac0b3381ab5545a399ec2310d7d73d88103185f95",
+        "fullStateMatchesRestoredArguments": true
+      },
+      {
+        "caseId": "primary",
+        "pointIndex": 5,
+        "operation": 15,
+        "rootRevision": 3,
+        "graphRevision": 340,
+        "graphChain": "9517efb9089f49a52b59f9bac0b3381ab5545a399ec2310d7d73d88103185f95",
+        "fullStateMatchesRestoredArguments": true
+      },
+      {
+        "caseId": "primary",
+        "pointIndex": 7,
+        "operation": 26,
+        "rootRevision": 4,
+        "graphRevision": 457,
+        "graphChain": "996174a38a90a5bf110783399015b5ee6c1247e3a7d8a7ce920dfe0aa4f09d32",
+        "fullStateMatchesRestoredArguments": true
+      },
+      {
+        "caseId": "primary",
+        "pointIndex": 9,
+        "operation": 28,
+        "rootRevision": 4,
+        "graphRevision": 457,
+        "graphChain": "996174a38a90a5bf110783399015b5ee6c1247e3a7d8a7ce920dfe0aa4f09d32",
+        "fullStateMatchesRestoredArguments": true
+      },
+      {
+        "caseId": "primary",
+        "pointIndex": 11,
+        "operation": 39,
+        "rootRevision": 5,
+        "graphRevision": 575,
+        "graphChain": "d64e62f01a7e696b6404d805d1b0e9353a6cc8d033887dec48cf0cacb5b5ec4d",
+        "fullStateMatchesRestoredArguments": true
+      },
+      {
+        "caseId": "contrary",
+        "pointIndex": 0,
+        "operation": 2,
+        "rootRevision": 1,
+        "graphRevision": 189,
+        "graphChain": "d0a5189f684f162fd6878999609a08697270997e7048ace80b797fd330881222",
+        "fullStateMatchesRestoredArguments": true
+      },
+      {
+        "caseId": "contrary",
+        "pointIndex": 3,
+        "operation": 13,
+        "rootRevision": 3,
+        "graphRevision": 338,
+        "graphChain": "409ea06b45eb3c5e970e75a87354f64b422af50121421db5ec80361e130f8a76",
+        "fullStateMatchesRestoredArguments": true
+      },
+      {
+        "caseId": "selected-acquisition-ablation",
+        "pointIndex": 0,
+        "operation": 2,
+        "rootRevision": 1,
+        "graphRevision": 189,
+        "graphChain": "d0a5189f684f162fd6878999609a08697270997e7048ace80b797fd330881222",
+        "fullStateMatchesRestoredArguments": true
+      },
+      {
+        "caseId": "selected-acquisition-ablation",
+        "pointIndex": 3,
+        "operation": 13,
+        "rootRevision": 3,
+        "graphRevision": 340,
+        "graphChain": "e341689c92f9d5a717a99134fd890015306a8cbaaa1a58386c296d824d6d9587",
+        "fullStateMatchesRestoredArguments": true
+      },
+      {
+        "caseId": "selected-acquisition-ablation",
+        "pointIndex": 5,
+        "operation": 14,
+        "rootRevision": 3,
+        "graphRevision": 340,
+        "graphChain": "e341689c92f9d5a717a99134fd890015306a8cbaaa1a58386c296d824d6d9587",
+        "fullStateMatchesRestoredArguments": true
+      },
+      {
+        "caseId": "passive-scene-equal",
+        "pointIndex": 0,
+        "operation": 2,
+        "rootRevision": 1,
+        "graphRevision": 189,
+        "graphChain": "d0a5189f684f162fd6878999609a08697270997e7048ace80b797fd330881222",
+        "fullStateMatchesRestoredArguments": true
+      },
+      {
+        "caseId": "passive-scene-equal",
+        "pointIndex": 3,
+        "operation": 13,
+        "rootRevision": 3,
+        "graphRevision": 340,
+        "graphChain": "5ca3ce169cbb3f3f04cade51eb57fb3fb8dd0556a3d6dc63f8d9cda0f1b186e5",
+        "fullStateMatchesRestoredArguments": true
+      },
+      {
+        "caseId": "passive-scene-equal",
+        "pointIndex": 7,
+        "operation": 14,
+        "rootRevision": 3,
+        "graphRevision": 341,
+        "graphChain": "f175d06135ea4bbc18682fc13672b0a26d475e6d135f7aca3cb64242d74d1f82",
+        "fullStateMatchesRestoredArguments": true
+      },
+      {
+        "caseId": "passive-scene-equal",
+        "pointIndex": 9,
+        "operation": 19,
+        "rootRevision": 4,
+        "graphRevision": 454,
+        "graphChain": "9eefb0f9cae1746f06347c600afe5b5e5df91ff70d913c4c7420a2c6e94a31b3",
+        "fullStateMatchesRestoredArguments": true
+      },
+      {
+        "caseId": "passive-scene-changed",
+        "pointIndex": 0,
+        "operation": 2,
+        "rootRevision": 1,
+        "graphRevision": 189,
+        "graphChain": "d0a5189f684f162fd6878999609a08697270997e7048ace80b797fd330881222",
+        "fullStateMatchesRestoredArguments": true
+      },
+      {
+        "caseId": "passive-scene-changed",
+        "pointIndex": 3,
+        "operation": 13,
+        "rootRevision": 3,
+        "graphRevision": 340,
+        "graphChain": "e725383be62b5fa15414cbaa7c47e670ef5cbee54f95ca64b69af62aa44365a3",
+        "fullStateMatchesRestoredArguments": true
+      },
+      {
+        "caseId": "passive-scene-changed",
+        "pointIndex": 7,
+        "operation": 14,
+        "rootRevision": 3,
+        "graphRevision": 341,
+        "graphChain": "498dc631b92c10c6d4248a0c96d37ee2b51c45230de5d40f18f90fd1e9cd6d45",
+        "fullStateMatchesRestoredArguments": true
+      },
+      {
+        "caseId": "passive-scene-changed",
+        "pointIndex": 9,
+        "operation": 19,
+        "rootRevision": 4,
+        "graphRevision": 462,
+        "graphChain": "085623c82e0ed94e420724878d1aa4f78f4fef900116fc521f683c4b98cc4cd6",
+        "fullStateMatchesRestoredArguments": true
+      }
+    ],
+    "nativeHydrationVerificationBasis": "The passed pinned qualification validates each complete historical root and all fragments against restoreNative arguments; this review independently cross-links all 19 graph chain/revision/owner-root identities and compares full restored source states with recorded arguments.",
+    "primaryAccounting": "Five source restore calls in primary are exactly three real source-fact restorations plus two controlled cold resets, accompanied by six native restores. The cold resets are not extra physical returns."
+  },
+  "caseFindings": {
+    "primary": "Three complete source-equal returns establish a peripheral gain hypothesis, a local permission hypothesis from the retained intermediate boundary frame, and subsequent chart arrival. All snapshots remain at zero completed levels.",
+    "contrary": "The contrary current anchor refutes the predicted arrival; full source state and event agree with the retained reference.",
+    "ablation": {
+      "originalRecordSourceInvoked": false,
+      "physicalReturnStillSupplied": true,
+      "acquiredEvidenceGainAndVisitAbsent": true,
+      "primaryNextOffer": "homologous_marker",
+      "ablatedNextOffer": "annotation_dependency",
+      "commandInBoth": {
+        "action_ref": "ACTION4"
+      },
+      "claim": "The next semantic offer changes; no difference in action_ref is claimed."
+    },
+    "passiveEqual": "The real foreign observed_frontier return retains Chart location and prior active evidence without attributing a new active gain or permit.",
+    "passiveChanged": "The real foreign observed_frontier scene change withdraws current location and preserves prior gains/grants/evidence; full source passive record and state match the reference."
+  },
+  "accounting": {
+    "thisCapture": {
+      "sessionStarts": 5,
+      "initializedSessions": 5,
+      "physicalReturns": 9,
+      "activeChartAcquisitions": 6,
+      "passiveChartAcquisitions": 2,
+      "suppressedChartAcquisitions": 1
+    },
+    "thisToolAttemptCount": 1,
+    "priorAttemptsThisTool": 0,
+    "inheritedFunctional": {
+      "initializedSessions": 10,
+      "physicalReturns": 14
+    },
+    "includingInheritedForCommonOnly": {
+      "initializedSessions": 15,
+      "physicalReturns": 23
+    },
+    "maximumNewCommonAcrossTwoDeclaredCaptures": {
+      "sessionStarts": 10,
+      "physicalReturns": 18
+    },
+    "maximumCommonIncludingInherited": {
+      "initializedSessions": 20,
+      "physicalReturns": 32
+    },
+    "separateWorkForms": "The paired work captures and their corrective reader are outside this result review. This report does not reset their consumption or award them qualification. Root maintains the combined ledger."
+  },
+  "scope": {
+    "qualifiedBoundary": "NativeV6Runtime common caller with complete unfiltered factory and retained synthetic inputs",
+    "publicWorkerQualified": false,
+    "publicServiceQualified": false,
+    "publicTicketsQualified": false,
+    "officialSolvedLevels": 0,
+    "officialGameRuns": 0,
+    "officialPerformanceMeasurement": false,
+    "globalCostThresholdAssessed": false,
+    "publicationPerformed": false,
+    "globalLockAcquired": false,
+    "LKEY": "closed",
+    "strictGlobalCommonGraphParityClaimed": false,
+    "pending": "Public facade/worker/ticket boundary, separate paired work-graph qualification, official cost measurements and publication remain distinct gates."
+  },
+  "evidence": {
+    "common-execution-plan.json": {
+      "path": "docs/migration/lot9a-evidence/delivery-final-068-01/common-execution-plan.json",
+      "bytes": 72772,
+      "sha256": "e8ca9501bc5afe4934598886ff7ae3fcfc6c134d149e29099c37da5490caf950"
+    },
+    "common-declaration.json": {
+      "path": "docs/migration/lot9a-evidence/delivery-final-068-01/common-declaration.json",
+      "bytes": 5151,
+      "sha256": "10fc90c627a560938ff7b3b170ec43968a02eb2550e21c67a41c8b939e2f45e4"
+    },
+    "common-capture-01/capture/receipt.json": {
+      "path": "docs/migration/lot9a-evidence/delivery-final-068-01/common-capture-01/capture/receipt.json",
+      "bytes": 988901,
+      "sha256": "b354121caab89b64b49a25e4ad5887b5e5b48c6f23bdc8da21ed4632814ddbaa"
+    },
+    "common-qualify-01/review/qualification.json": {
+      "path": "docs/migration/lot9a-evidence/delivery-final-068-01/common-qualify-01/review/qualification.json",
+      "bytes": 8573,
+      "sha256": "7a2c60bdf6e64c30e6ad63c85c329d8c448782e139e94da0ce4887b3036936ac"
+    }
+  },
+  "findings": []
+}

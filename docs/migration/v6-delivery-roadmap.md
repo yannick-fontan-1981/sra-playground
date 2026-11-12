@@ -1,8 +1,46 @@
 # Feuille de route V5/V6 vers Logos Engine TypeScript
 
+<!-- LOT9A_FINAL068_DELIVERY_START -->
+
+## Lot 9A : livraison fonctionnelle 0.68 qualifiée, coût et publication à suivre
+
+**La qualification des formes de travail et des graphes est terminée sous l’identité finale 0.68.0**, sur le checkout et la branche propres de 9A. Le [bilan de livraison](lot9a-evidence/delivery-final-068-01/README.md), sa [synthèse vérifiable](lot9a-evidence/delivery-final-068-01/validation-summary.json) et la [revue indépendante](lot9a-evidence/delivery-final-068-01/independent-delivery-review.json) fixent ce périmètre.
+
+Le candidat conserve **334 fichiers natifs**, digest `e7a94fbc7cdcb19d8704b5d4120f27a858cbcd07e455084711510ee147f4e653`, et **70/76 entrées raccordées (92,1 %), dont 27/33 matérielles**. Les algorithmes des 175 tests historiques restent inchangés ; seule l’identité 0.67 → 0.68 a changé depuis leur gel. Le build final avec TypeScript passe, ses 74 fichiers sont réconciliés, et l’audit frais du registre confirme le libellé 0.68 et le compteur 70/76.
+
+Les formes STCK3/STCK10/SMLP3/SMLP15 sont fraîchement capturées pour les deux rôles : **8 sessions et 62 retours**. La lecture finale conserve **64 contrôles sur 58 points, 28 279 différences attribuées et zéro inexpliquée**. BranchRouting reste commun aux deux côtés. Les cinq chaînes Chart ajoutent **5 sessions, 9 retours, 52 points et 21 graphes complets**, avec six acquisitions actives, deux passives et une ablation. Les restaurations source et natives sont liées aux états réellement persistés. L’ablation modifie l’offre suivante mais conserve ACTION4.
+
+Le premier lecteur, refusé sur 58 durées `total_ms`, reste en échec conservé. Le correctif prospectif attribue seulement ce scalaire après preuve du producteur, du rapport persistant complet, des bornes réelles de création et de sa rétention exacte. Aucune capture n’est renouvelée. Le registre suivi atteint **23 sessions et 85 retours**, en incluant les dix sessions et quatorze retours communs antérieurs ; l’ancienne réserve de formulation du plafond de huit sessions reste explicite.
+
+**Le publié observé reste Site 108 / native 0.67.0, à 69/76**, source `8462204043aa368faa7df280d796bb706eb53b38`, accès privé au propriétaire. Le coût officiel 0.68 n’est pas encore mesuré ni accepté, et 0.68 n’est pas publiée. Le résultat de coût 0.67 contre 0.66 ne lui est pas attribué.
+
+### Feuille de route actualisée
+
+| Lot ou étape | État établi | Prochaine étape |
+| --- | --- | --- |
+| **Lot 7** | **7A et 7B livrés ; complément Workshop clôturé dans Site 101 ; aucune entrée ouverte au registre** | Conserver les réserves historiques. LKEY reste définitivement fermé. |
+| 8A / 0.65 et 10C / 0.66 | Publiés dans Sites 106 et 107 | Conserver leurs réserves de coût distinctes. |
+| 8B / 0.67 | Publié dans Site 108 ; coût officiel accepté dans son périmètre | Conserver la réserve de récupération après erreur structurelle et les limites de transport navigateur. |
+| **9A : composant et caller** | **175 tests historiques qualifiés ; algorithmes réconciliés sous 0.68** | Conserver le corpus original et les preuves contraires, sans nouvel oracle. |
+| **9A : identité, formes et graphes de livraison** | **Terminés dans le périmètre déclaré : 0.68 réservée, build et registre final passés, zéro différence inexpliquée** | Utiliser ce gel exact pour la préparation de coût. |
+| **9A : coût officiel et publication** | **Prochaine étape ; aucune mesure ni publication 0.68** | Relire le publié réel, mesurer STCK/SMLP sous exclusivité courte, appliquer le seuil global, puis publier en privé sous exclusivité courte. |
+| Complément public positif Chart | Le caller natif et les rasters 64 × 64 sont qualifiés ; service/worker/tickets positifs restent distincts | Qualifier ce trajet sans extrapoler les preuves natives ni revendiquer un succès de nouveau jeu. |
+| **9B / 9C** | `region_intervention` et `joint_channels` restent ouverts | Transférer et qualifier les propriétaires et acquisitions après 9A. `discrete_network` reste hors compteur 76. |
+| 6C / 6D | `observed_rigid_cargo` et `shared_settlement` restent ouverts dans le registre intégré | Poursuivre les branches et qualifications propres ; ne pas assimiler leur travail parallèle à une publication intégrée. |
+| 10D / 10E | `temporal_selection` et `invited_endpoints` restent ouverts dans le registre intégré | Poursuivre leurs qualifications propres. |
+| **Lot 11** | **Consolidation ouverte ; six portes globales toujours fausses** | Parité complète, graphes, restauration, sessions longues, coût et lisibilité, avec les capacités restantes des lots 6, 9 et 10. |
+
+Il reste **six entrées ouvertes dans le candidat**, contre sept dans le publié 0.67. L’audit de migration conservé compte 219 composants vérifiés, 149 transferts partiels, 1 001 modules en attente et zéro module entièrement vérifié. Le raccordement 70/76 ne mesure ni le volume de code ni la parité comportementale complète. Les deux clôtures d’oracle échouées, les autres échecs historiques, la réserve du plafond de sessions et la portée structurelle des checkpoints restent documentés.
+
+**Règle de coût : augmentation de la médiane de session complète strictement inférieure à +10 % pour STCK et pour SMLP séparément. Une phase peut dépasser +10 % si les deux globaux passent, sans exclusion d’échantillon ni compensation entre jeux.** Le travail courant, les commits et les push restent sans verrou global ni attente des autres lots. Seules les mesures officielles et la publication gardent une exclusivité courte, libérée proprement sans supprimer un fichier détenu.
+
+Les sections suivantes conservent les jalons historiques et leurs propres identités, résultats et limites.
+
+<!-- LOT9A_FINAL068_DELIVERY_END -->
+
 <!-- LOT9A_COMMON_QUALIFIED_START -->
 
-## Lot 9A : ChartNavigation raccordé, candidat à 70/76
+## Jalon historique 9A : composant ChartNavigation et raccordement à 70/76
 
 **Le port du composant et son raccordement commun sont qualifiés dans le périmètre synthétique déclaré.** Le [bilan 9A](lot9a-evidence/README.md) et sa [synthèse vérifiable](lot9a-evidence/validation-summary.json) conservent **175 tests passés dans huit modules** : 134 de référence, 11 de frontière native, six du caller commun et 24 régressions affectées. Le build final avec TypeScript et les deux audits passent.
 

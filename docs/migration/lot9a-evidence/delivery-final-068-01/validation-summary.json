@@ -1,0 +1,319 @@
+{
+  "schema": "logos-engine.lot9a.final-delivery-summary.v1",
+  "recordedAt": "2026-11-12T15:15:25.622488+00:00",
+  "status": "qualified_final_identity_functional_delivery_scope",
+  "candidate": {
+    "nativeVersion": "0.68.0",
+    "nativeFiles": 334,
+    "nativeDigest": "e7a94fbc7cdcb19d8704b5d4120f27a858cbcd07e455084711510ee147f4e653",
+    "connected": 70,
+    "declared": 76,
+    "materialConnected": 27,
+    "materialDeclared": 33,
+    "sourceIdentityCheckpoint": "dcd6b5b7027615ae37eb5afd02d704987f12702f"
+  },
+  "published": {
+    "siteVersion": 108,
+    "nativeVersion": "0.67.0",
+    "connected": 69,
+    "declared": 76,
+    "sourceCommit": "8462204043aa368faa7df280d796bb706eb53b38",
+    "ownerPrivate": true
+  },
+  "retainedFunctionalTests": {
+    "passed": 175,
+    "modules": 8,
+    "newTestExecutionsClaimed": 0,
+    "qualification": "Historical algorithm evidence; literal-only reconciliation, not new0.68 test executions."
+  },
+  "build": {
+    "passed": true,
+    "includesTypeScript": true,
+    "files": 74,
+    "bytes": 30149887,
+    "allCurrentHashesMatch": true,
+    "worker": {
+      "path": "dist/assets/v6-agent-worker-BQvVnNgs.js",
+      "bytes": 7044703,
+      "sha256": "fe31e2caff224557a8bd97bcdb541be7c0f61049317b8dee1e5b4ef3be2c0478"
+    }
+  },
+  "entryAudit": {
+    "freshFinalIdentityAuditPassed": true,
+    "uninitializedFactories": 1,
+    "initializedSessions": 0,
+    "physicalReturns": 0
+  },
+  "migrationAudit": {
+    "reexecuted": false,
+    "retainedReportFailures": 0,
+    "summary": {
+      "pythonModules": 1369,
+      "pythonLines": 320375,
+      "declaredClassesAndFunctions": 12857,
+      "dataFiles": 417,
+      "verifiedModules": 0,
+      "componentVerifiedModules": 219,
+      "partiallyTransferredModules": 149,
+      "transferredUnverifiedModules": 0,
+      "pendingModules": 1001,
+      "strategyFamilies": 16
+    },
+    "completionGates": {
+      "allRequiredCapabilitiesTransferred": false,
+      "fullCommonCallerDifferentialParity": false,
+      "allDeclaredFamiliesIntegrated": false,
+      "commonGraphEditingCoversExecutedPrograms": false,
+      "pythonNumericSemanticsCovered": false,
+      "fullCampaignRegression": false
+    }
+  },
+  "factoryInventory": {
+    "owners": {
+      "baseline": 62,
+      "candidate": 63
+    },
+    "familyPrograms": {
+      "baseline": 28,
+      "candidate": 29
+    },
+    "onlyAddedOwner": "public_chart_navigation",
+    "onlyAddedProgram": "v6.chart_navigation.choose"
+  },
+  "workForms": {
+    "forms": 4,
+    "initializedSessions": 8,
+    "physicalReturns": 62,
+    "pairedChecks": 64,
+    "pairedPoints": 58,
+    "differences": 28279,
+    "unattributedDifferences": 0,
+    "strictGraphIdentityClaimed": false,
+    "firstReaderFailureRetained": true,
+    "readerAttempts": 2,
+    "readerCumulativeSeconds": 101.75737805099925,
+    "recapturePerformed": false,
+    "onlyNewAttributionPath": "/whyAct/decision/total_ms",
+    "durationQualification": "Bounded creation interval, complete persisted decision equality, exact report retention. Internal bridge timestamp subtraction is not reconstructed."
+  },
+  "chartCommon": {
+    "initializedSessions": 5,
+    "physicalReturns": 9,
+    "points": 52,
+    "fullUniqueGraphs": 21,
+    "records": 80,
+    "activeChartAcquisitions": 6,
+    "passiveChartAcquisitions": 2,
+    "suppressedChartAcquisitions": 1,
+    "controlledColdResets": 2,
+    "sourceFactRestorations": 9,
+    "nativeRestorations": 19,
+    "allInstancesClosed": true,
+    "rawBytes": 227400147,
+    "ablationOfferChanges": true,
+    "ablationPhysicalCommandChanges": false,
+    "ablationNextCommand": "ACTION4",
+    "publicPositiveChartTransportQualified": false
+  },
+  "accounting": {
+    "new": {
+      "initializedSessions": 13,
+      "physicalReturns": 71
+    },
+    "priorCommon": {
+      "initializedSessions": 10,
+      "physicalReturns": 14
+    },
+    "includingPriorCommon": {
+      "initializedSessions": 23,
+      "physicalReturns": 85
+    },
+    "maximumIncludingPriorCommon": {
+      "initializedSessions": 36,
+      "physicalReturns": 156
+    },
+    "uninitializedFactoriesThisStage": 3,
+    "priorUninitializedFactories": 2,
+    "scope": "Declared9A delivery and retained common attempts only, not every historical project campaign."
+  },
+  "commands": [
+    {
+      "attempt": "build-01",
+      "status": "passed",
+      "budgetKey": "build",
+      "elapsedSeconds": 11.36274305400002,
+      "cumulativeSeconds": 11.36274305400002,
+      "inputsUnchanged": true,
+      "headUnchanged": true,
+      "childProcessReaped": true,
+      "receipt": {
+        "path": "docs/migration/lot9a-evidence/delivery-final-068-01/build-01/receipt.json",
+        "bytes": 2199,
+        "sha256": "620b36463c5dfdbe5f9b7432b90db627c62bd1b6b206eed9f3fd5b5bc9bc6a40"
+      }
+    },
+    {
+      "attempt": "work-inventory-01",
+      "status": "passed",
+      "budgetKey": "work-inventory",
+      "elapsedSeconds": 2.438844563999737,
+      "cumulativeSeconds": 2.438844563999737,
+      "inputsUnchanged": true,
+      "headUnchanged": true,
+      "childProcessReaped": true,
+      "receipt": {
+        "path": "docs/migration/lot9a-evidence/delivery-final-068-01/work-inventory-01/receipt.json",
+        "bytes": 2951,
+        "sha256": "566c001c30194f911b785443ceb35d7e513559226fe29ae89b7d645f20d1c0e7"
+      }
+    },
+    {
+      "attempt": "work-baseline-01",
+      "status": "passed",
+      "budgetKey": "work-baseline",
+      "elapsedSeconds": 40.08279450700138,
+      "cumulativeSeconds": 40.08279450700138,
+      "inputsUnchanged": true,
+      "headUnchanged": true,
+      "childProcessReaped": true,
+      "receipt": {
+        "path": "docs/migration/lot9a-evidence/delivery-final-068-01/work-baseline-01/receipt.json",
+        "bytes": 3310,
+        "sha256": "b7d46766f0727bb0e6f24788fe92e76735963230ea3e33482141058850ee4a73"
+      }
+    },
+    {
+      "attempt": "work-candidate-01",
+      "status": "passed",
+      "budgetKey": "work-candidate",
+      "elapsedSeconds": 40.38879395599906,
+      "cumulativeSeconds": 40.38879395599906,
+      "inputsUnchanged": true,
+      "headUnchanged": true,
+      "childProcessReaped": true,
+      "receipt": {
+        "path": "docs/migration/lot9a-evidence/delivery-final-068-01/work-candidate-01/receipt.json",
+        "bytes": 3343,
+        "sha256": "7bc41c8c98a9d148975db3387c51c1d08eaed5f51c3cb4f51f4a518b93b99b4c"
+      }
+    },
+    {
+      "attempt": "work-qualify-01",
+      "status": "failed",
+      "budgetKey": "work-qualify",
+      "elapsedSeconds": 50.551226686999144,
+      "cumulativeSeconds": 50.551226686999144,
+      "inputsUnchanged": true,
+      "headUnchanged": true,
+      "childProcessReaped": true,
+      "receipt": {
+        "path": "docs/migration/lot9a-evidence/delivery-final-068-01/work-qualify-01/receipt.json",
+        "bytes": 3744,
+        "sha256": "dce4f63d46e3ff4c921193e5a7d9a5d52c4865858779eb0de468b2db385d742c"
+      }
+    },
+    {
+      "attempt": "common-capture-01",
+      "status": "passed",
+      "budgetKey": "common-capture",
+      "elapsedSeconds": 22.04100562700114,
+      "cumulativeSeconds": 22.04100562700114,
+      "inputsUnchanged": true,
+      "headUnchanged": true,
+      "childProcessReaped": true,
+      "receipt": {
+        "path": "docs/migration/lot9a-evidence/delivery-final-068-01/common-capture-01/receipt.json",
+        "bytes": 10537,
+        "sha256": "f67d8718a1d76c66583843294ed64af96ab60e35e67205e0d69b5139175f3d70"
+      }
+    },
+    {
+      "attempt": "common-qualify-01",
+      "status": "passed",
+      "budgetKey": "common-qualify",
+      "elapsedSeconds": 11.093064430000595,
+      "cumulativeSeconds": 11.093064430000595,
+      "inputsUnchanged": true,
+      "headUnchanged": true,
+      "childProcessReaped": true,
+      "receipt": {
+        "path": "docs/migration/lot9a-evidence/delivery-final-068-01/common-qualify-01/receipt.json",
+        "bytes": 2896,
+        "sha256": "f97d8214fe0dccdfd7007ceda19644122152365afa0607961c4d536f3d902151"
+      }
+    },
+    {
+      "attempt": "work-qualify-02",
+      "status": "passed",
+      "budgetKey": "work-qualify",
+      "elapsedSeconds": 51.20615136400011,
+      "cumulativeSeconds": 101.75737805099925,
+      "inputsUnchanged": true,
+      "headUnchanged": true,
+      "childProcessReaped": true,
+      "receipt": {
+        "path": "docs/migration/lot9a-evidence/delivery-final-068-01/work-qualify-02/receipt.json",
+        "bytes": 4231,
+        "sha256": "4d0d73c75edd7c1c0dc12e6e9d5ca22bf3928dc0c94ee1b4177a18839c20bd18"
+      }
+    },
+    {
+      "attempt": "final-entry-audit-01",
+      "status": "passed",
+      "budgetKey": "final-entry-audit",
+      "elapsedSeconds": 0.9358257150015561,
+      "cumulativeSeconds": 0.9358257150015561,
+      "inputsUnchanged": true,
+      "headUnchanged": true,
+      "childProcessReaped": true,
+      "receipt": {
+        "path": "docs/migration/lot9a-evidence/delivery-final-068-01/final-entry-audit-01/receipt.json",
+        "bytes": 2265,
+        "sha256": "7a5b56497e6bea15998eb7b22aa6b0cb6984e23373eec64ae17b94911a1b981d"
+      }
+    }
+  ],
+  "documentationReconciliation": {
+    "initialFailureRetained": true,
+    "nativeSourceChanged": false,
+    "scope": "Canonical string-key order corrected only in the summary generator; no new runtime, work reader, session or return.",
+    "evidence": {
+      "path": "docs/migration/lot9a-evidence/delivery-final-068-01/documentation-reconciliation-correction.json",
+      "bytes": 1503,
+      "sha256": "8f4f7bc15d43905683c5d966d04e38966ffda8f68c0c4e8a84d9ef543b0f94a5"
+    }
+  },
+  "officialCost": {
+    "measured": false,
+    "accepted": false,
+    "eachGlobalIncreaseStrictlyBelowPercent": 10,
+    "games": [
+      "STCK",
+      "SMLP"
+    ],
+    "phaseOverrunsAllowedIfEveryGlobalPasses": true,
+    "sampleExclusionAllowed": false,
+    "crossGameCompensationAllowed": false
+  },
+  "publicationPerformed": false,
+  "globalLockAcquired": false,
+  "peerAvailabilityWait": false,
+  "originalOracleExecutionsThisStage": 0,
+  "liveGameExecutionsThisStage": 0,
+  "LKEY": "permanently_closed",
+  "reservations": [
+    "Original two oracle-wrapper failures and recovered corpus remain retained; no third oracle.",
+    "Historical common maximumSessions8 was not scoped per attempt/cumulative; prior10sessions14returns remain recorded without retrospective repair.",
+    "Frozen work provenance historicalCaseRowsExact was too broad: only six execution fields are exactly unchanged; descriptive purpose strings differ. Explicit qualification retained.",
+    "First work reader failed on58total_ms leaves; it remains failed, with the narrow prospective correction and all raw differences retained.",
+    "Positive Chart public service/worker/ticket transport is outside these common graph proofs; no new official game success.",
+    "Checkpoint validation remains structural and does not guarantee authenticity or upper bounds against an artificially incompatible future raster.",
+    "Global migration gates, official0.68 cost and0.68 publication remain open."
+  ],
+  "independentReview": {
+    "path": "docs/migration/lot9a-evidence/delivery-final-068-01/independent-delivery-review.json",
+    "bytes": 41738,
+    "sha256": "264db5ad57e16beab648d819a732f5c0a1df4cf262559160e79818a8fa59ffcb"
+  },
+  "nextStep": "Prepare and run official STCK/SMLP comparison against the freshly verified published predecessor under short exclusivity, then publish final0.68 privately if both global medians remain strictly below+10%. Keep positive Chart public transport as a distinct qualification. Continue9B region_intervention and9C joint_channels afterward."
+}

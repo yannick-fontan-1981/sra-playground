@@ -1,0 +1,100 @@
+{
+  "schema": "logos-engine.lot9a-source-checkpoint-transport.v1",
+  "recordedAt": "2026-11-12T15:03:48.236266+00:00",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "ref": "refs/heads/lot9a-chart-navigation-checkpoint-20261112",
+  "expectedCommit": "af5740a0d8a3d25b444830eff126a574655e25e3",
+  "expectedRemoteBefore": "3eddec652362f683738e4226f8bcb1bbd1f1c426",
+  "status": "pushed_and_verified",
+  "pushCommandStarted": true,
+  "pushSucceeded": true,
+  "ordinaryPush": true,
+  "forceUsed": false,
+  "fetchPerformed": true,
+  "fetchSucceeded": true,
+  "fetchSourceBranchRequested": true,
+  "allowUncommittedWork": true,
+  "worktreeCleanBefore": true,
+  "worktreeCleanAfter": false,
+  "committedCheckpointOnly": true,
+  "uncommittedWorkIncluded": false,
+  "worktreeContentsCompared": false,
+  "checkpointObservations": [
+    {
+      "stage": "local_preflight",
+      "observedAt": "2026-11-12T15:03:49.465605+00:00",
+      "commit": "af5740a0d8a3d25b444830eff126a574655e25e3",
+      "worktreeClean": true
+    },
+    {
+      "stage": "source_branch_fetch",
+      "observedAt": "2026-11-12T15:03:49.516649+00:00",
+      "commit": "af5740a0d8a3d25b444830eff126a574655e25e3",
+      "worktreeClean": true
+    },
+    {
+      "stage": "source_branch_fetch",
+      "observedAt": "2026-11-12T15:03:50.798458+00:00",
+      "commit": "af5740a0d8a3d25b444830eff126a574655e25e3",
+      "worktreeClean": true
+    },
+    {
+      "stage": "missing_object_inventory",
+      "observedAt": "2026-11-12T15:03:52.080002+00:00",
+      "commit": "af5740a0d8a3d25b444830eff126a574655e25e3",
+      "worktreeClean": true
+    },
+    {
+      "stage": "remote_before",
+      "observedAt": "2026-11-12T15:03:52.979347+00:00",
+      "commit": "af5740a0d8a3d25b444830eff126a574655e25e3",
+      "worktreeClean": true
+    },
+    {
+      "stage": "remote_exact_verification",
+      "observedAt": "2026-11-12T15:04:13.301579+00:00",
+      "commit": "af5740a0d8a3d25b444830eff126a574655e25e3",
+      "worktreeClean": false
+    }
+  ],
+  "commitCreated": false,
+  "sitePublicationPerformed": false,
+  "credentialPersisted": false,
+  "inputDeadlineSeconds": 45,
+  "inputWaitHoldsPerformanceLock": false,
+  "globalLockRequired": false,
+  "globalLockAcquired": false,
+  "coordinationPolicy": "Explicit user instruction: ordinary source pushes require no global lock or predecessor publication.",
+  "generatorSha256": "6eedcbd1708243d39010b0966856ce6778e58bcca50afb97629a350efcac63b6",
+  "qualification": "Only expectedCommit, the exact already committed HEAD, is backed up. Uncommitted or untracked work is not included or claimed saved, even when explicitly allowed. Native version, functional gates, cost and Site publication require their own evidence.",
+  "localCommitBefore": "af5740a0d8a3d25b444830eff126a574655e25e3",
+  "returnedSourceBranch": "main",
+  "authenticationMode": "http_extra_header",
+  "authenticationTransport": "hidden_stdin_then_process_environment_only",
+  "sourceRemoteCommitFetched": "8462204043aa368faa7df280d796bb706eb53b38",
+  "headUnchangedAfterFetch": true,
+  "worktreeCleanAfterFetch": true,
+  "verifiedExistingRemoteAncestors": [
+    {
+      "ref": "refs/heads/lot9a-chart-navigation-checkpoint-20261112",
+      "remoteCommit": "3eddec652362f683738e4226f8bcb1bbd1f1c426",
+      "verifiedExistingAncestor": "3eddec652362f683738e4226f8bcb1bbd1f1c426",
+      "additionalFetch": false
+    }
+  ],
+  "objectInventoryExclusions": [
+    "3eddec652362f683738e4226f8bcb1bbd1f1c426",
+    "8462204043aa368faa7df280d796bb706eb53b38"
+  ],
+  "sourceMissingObjectCount": 60,
+  "sourceMissingRawBytes": 27423863,
+  "sourceMissingLargestObjectBytes": 2367711,
+  "sourceMissingObjectsAtLeast32MiB": [],
+  "sourceMissingRawLimitBytes": 41943040,
+  "objectInventoryQualification": "Raw object headers only, excluding only the freshly fetched main and ancestors independently verified on this same remote; not a measured pack size. All proof objects remain retained in remote history.",
+  "remoteCommitBefore": "3eddec652362f683738e4226f8bcb1bbd1f1c426",
+  "remoteCommitAfter": "af5740a0d8a3d25b444830eff126a574655e25e3",
+  "localCommitAfter": "af5740a0d8a3d25b444830eff126a574655e25e3",
+  "localCleanAfter": false,
+  "finishedAt": "2026-11-12T15:04:13.301601+00:00"
+}

@@ -1,0 +1,55 @@
+{
+  "schema": "logos-engine.lot9a.functional-command.v1",
+  "key": "final-entry-audit",
+  "attempt": "final-entry-audit-01",
+  "plan": {
+    "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/final-entry-audit-plan.json",
+    "bytes": 67267,
+    "sha256": "d0c8ca100e3e4f00f95bd186faf486ccf7d254b482748402040ea0391634ebe0"
+  },
+  "command": [
+    "node",
+    "scripts/audit-v6-entry-points.ts"
+  ],
+  "cwd": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout",
+  "startedAt": "2026-11-12T15:07:13.327712+00:00",
+  "timeoutSeconds": 20,
+  "budgetKey": "final-entry-audit",
+  "attemptNumber": 1,
+  "priorCumulativeSeconds": 0,
+  "maximumCumulativeSeconds": 20,
+  "correctiveReason": null,
+  "declaredMaximumSessionsThisLaunch": 0,
+  "declaredMaximumReturnsThisLaunch": 0,
+  "generator": {
+    "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/tools/delivery/run-functional-command.py",
+    "bytes": 9355,
+    "sha256": "dcd3d8f56c75c44036a9ab7d14ef92aec367db7eb8c5b30fae59d63dd30a6045"
+  },
+  "derivedFrom": {
+    "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot8b-evidence/tools/final-functional/run-functional-command.py",
+    "bytes": 7698,
+    "sha256": "a49a62551f757750a9598b2ea3a36d0c214ded79f150e3c65bddc74a83103fe9"
+  },
+  "headBefore": "af5740a0d8a3d25b444830eff126a574655e25e3",
+  "globalLockAcquired": false,
+  "officialPerformanceMeasurement": false,
+  "gameEngineExecuted": false,
+  "published": false,
+  "status": "passed",
+  "exitCode": 0,
+  "finishedAt": "2026-11-12T15:07:14.265549+00:00",
+  "elapsedSeconds": 0.9358257150015561,
+  "inputsUnchanged": true,
+  "changedInputPaths": [],
+  "log": {
+    "path": "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/delivery-final-068-01/final-entry-audit-01/output.log.gz",
+    "bytes": 179,
+    "sha256": "73b0bbe11ab681a913caffee23300bde12d763e32c904188632942a2e2131f5f"
+  },
+  "childProcessReaped": true,
+  "headAfter": "af5740a0d8a3d25b444830eff126a574655e25e3",
+  "headUnchanged": true,
+  "cumulativeSeconds": 0.9358257150015561,
+  "outputs": []
+}
