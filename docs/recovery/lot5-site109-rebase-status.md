@@ -137,6 +137,55 @@ Commits GitHub :
 - code : `e145c517bded20537cfe11e9922252a4b2f2852b`
 - tests : `2ca7606e16e4292e29ed3ac3d8869920dfd6a5aa`
 
+## 5B — acquisition et réconciliation de réponse récupérées
+
+### Acquisition du modèle
+
+Donneurs :
+- `common_addressed_field.py::fit`
+- `common_addressed_field.py::target_candidates`
+- `common_addressed_field.py::transient_contour`
+- `common_containment.py::filled`
+- `common_visible_identity.py::contains`
+
+Port :
+- `src/logos-engine/addressed-field-fit.ts`
+- `tests/addressed-field-fit.test.ts`
+
+Comportement récupéré :
+- unique correspondance mobile avant/après ;
+- exigence d'un exemplaire stationnaire de même signature ;
+- cible homologue centrée dans une enceinte ;
+- adresse x/y située dans l'empreinte de l'objet après réponse ;
+- acquisition refusée si plusieurs modèles restent possibles ;
+- contour graphique transitoire conservé comme indice, sans le promouvoir en loi physique.
+
+Commits GitHub :
+- code : `44c0987c52d2bb3ff1f9ead5e9ddc0cd2c95dedc`
+- tests : `31c1a0bd322f8499abc95514137320828645acd8`
+
+### Réponse et réfutation
+
+Donneur :
+- `common_addressed_field.py::record`, tranche après acquisition/stock et avant frontière.
+
+Port :
+- `src/logos-engine/addressed-field-response.ts`
+- `tests/addressed-field-response.test.ts`
+
+Comportement récupéré :
+- occurrence courante unique ou correspondance résiduelle unique ;
+- réponse alignée -> augmentation de la borne acceptée ;
+- absence de mouvement au-delà de la borne -> borne rejetée ;
+- déplacement incompatible -> contre-exemple et invalidation du modèle ;
+- rivalités comparées à l'ancre réellement observée ;
+- progression de calibration identique au donneur.
+
+Commit GitHub :
+- `7765f55fedea7a6b8e5658dc55d20e0ab5e17d3b`
+
+La reconstruction de 5B ne revendique toujours pas le chemin `FieldStock`, la rétention inter-niveaux complète ni le raccord runtime.
+
 ## Qualification sur la nouvelle baseline
 
 Checkout local :
@@ -147,7 +196,7 @@ Tests ciblés exécutés :
 - linked-preparation : 7 cas ;
 - addressed-material : 2 cas ;
 - observed-object-binding : 5 cas ;
-- total après ajout de la garde AddressedField : **19/19 réussis**.
+- total après acquisition + garde + réponse AddressedField : **29/29 réussis**.
 
 Typecheck :
 - `tsc --noEmit` : **réussi**.
