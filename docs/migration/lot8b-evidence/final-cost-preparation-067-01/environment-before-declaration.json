@@ -1,0 +1,76 @@
+{
+  "recordedAt": "2026-11-12T12:32:22.835415+00:00",
+  "scope": "current_visible_execution_namespace_only",
+  "globalQuietEstablishedByThisObservation": false,
+  "processes": [
+    {
+      "pid": 1,
+      "commandName": "codex",
+      "state": "S",
+      "parentPid": 0,
+      "processGroup": 1,
+      "session": 1,
+      "userTicks": 0,
+      "systemTicks": 4,
+      "startTicks": 216586,
+      "residentPages": 3872,
+      "cwdScope": "candidate_checkout"
+    },
+    {
+      "pid": 2,
+      "commandName": "bash",
+      "state": "S",
+      "parentPid": 1,
+      "processGroup": 1,
+      "session": 1,
+      "userTicks": 0,
+      "systemTicks": 0,
+      "startTicks": 216591,
+      "residentPages": 416,
+      "cwdScope": "candidate_checkout"
+    },
+    {
+      "pid": 3,
+      "commandName": "python",
+      "state": "R",
+      "parentPid": 2,
+      "processGroup": 1,
+      "session": 1,
+      "userTicks": 1,
+      "systemTicks": 3,
+      "startTicks": 216592,
+      "residentPages": 3264,
+      "cwdScope": "candidate_checkout"
+    }
+  ],
+  "visibleProcessCount": 3,
+  "truncated": false,
+  "unreadableOrVanished": 0,
+  "namespaces": {
+    "pid": "pid:[4026532374]",
+    "mnt": "mnt:[4026532302]",
+    "user": "user:[4026532441]",
+    "cgroup": "cgroup:[4026532214]"
+  },
+  "loadAverage": [
+    1.3017578125,
+    1.05859375,
+    1.029296875
+  ],
+  "cpuAffinity": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "clockTicksPerSecond": 100,
+  "pageBytes": 4096,
+  "cpu.max": null,
+  "memory.max": null,
+  "pids.max": null
+}

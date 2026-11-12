@@ -1,0 +1,110 @@
+--- prepare.py
++++ prepare-v2.py
+@@ -1,5 +1,8 @@
+ #!/usr/bin/env python3
+-"""Declare one Lot8B cost window from final, actually captured functional forms.
++"""Declare one Lot8B cost window with explicit source-inventory role paths.
++
++V2 preserves prepare.py and verifies each sourceInventory role against its own
++checkout. Generic artifact fingerprints retain their original path semantics.
+ 
+ Reads and hashes only. No native import, measurement, readiness or lock claim.
+ Outputs are new files; existing declarations and measured evidence are refused.
+@@ -83,6 +86,7 @@
+     require(baseline != ROOT, 'Distinct baseline checkout required')
+     roots = {'baseline': baseline, 'candidate': ROOT}
+     watched = {}
++    role_scoped_inputs = []
+ 
+     def resolve(name):
+         path = (ROOT / name).absolute()
+@@ -98,20 +102,34 @@
+         watched[label] = value
+         return value
+ 
+-    def verify(record):
++    def verify(record, role=None):
+         require(set(record) == {'path', 'bytes', 'sha256'}, 'Unexpected fingerprint fields')
+-        require(fp(record['path']) == record, 'Declared bytes changed: ' + record['path'])
+-
+-    def proof_fingerprints(value):
++        if role is None:
++            require(fp(record['path']) == record, 'Declared bytes changed: ' + record['path'])
++            return
++        require(role in roots and isinstance(record['path'], str), 'Unknown source-inventory role/path')
++        declared = Path(record['path'])
++        require(declared.as_posix() == record['path'] and '..' not in declared.parts,
++                'Noncanonical role-relative source path: ' + record['path'])
++        path = (roots[role] / declared).absolute()
++        require(path.is_relative_to(roots[role]), 'Source-inventory path escapes its declared role: ' + role)
++        actual = fp(path)
++        require(type(record['bytes']) is int and record['bytes'] >= 0
++                and actual['bytes'] == record['bytes'] and actual['sha256'] == record['sha256'],
++                'Declared role source bytes changed: ' + role + ':' + record['path'])
++        role_scoped_inputs.append({'role': role, 'checkout': str(roots[role]),
++                                  'declaredFingerprint': record, 'resolvedFingerprint': actual})
++
++    def proof_fingerprints(value, role=None):
+         if isinstance(value, dict):
+             if set(value) == {'path', 'bytes', 'sha256'}:
+-                verify(value)
++                verify(value, role)
+             else:
+                 for item in value.values():
+-                    proof_fingerprints(item)
++                    proof_fingerprints(item, role)
+         elif isinstance(value, list):
+             for item in value:
+-                proof_fingerprints(item)
++                proof_fingerprints(item, role)
+ 
+     output = (ROOT / args.output_directory).absolute()
+     require(output.is_relative_to(EVIDENCE) and output != EVIDENCE and not output.exists(),
+@@ -195,8 +213,18 @@
+             require(form[role]['final']['implementation'] == 'logos-engine.typescript.v6.native-migration/' + VERSIONS[role],
+                     'Final implementation was not actually captured')
+         proof_fingerprints(receipt)
+-    for artifact in [forms, graph, owners]:
++    for artifact in [forms, graph]:
+         proof_fingerprints(artifact)
++    # Only sourceInventory is role-relative. Every other owner-artifact
++    # fingerprint remains a candidate-root artifact or an explicit absolute pin.
++    proof_fingerprints({key: value for key, value in owners.items() if key != 'sourceInventory'})
++    require(set(owners['sourceInventory']) == set(roots), 'Missing or unexpected source-inventory role')
++    for role, source_inventory in owners['sourceInventory'].items():
++        require(source_inventory['checkout'] == str(roots[role])
++                and source_inventory['nativeVersion'] == VERSIONS[role]
++                and source_inventory['native'] == manifests[role],
++                'Source-inventory role identity differs: ' + role)
++        proof_fingerprints(source_inventory, role)
+     # These distinct final review/reconciliation receipts remain readable claims,
+     # not an automatic inference from the qualifier's process exit code.
+     require(isinstance(read(resolve(args.reconciliation)), dict), 'A real reconciliation receipt is required')
+@@ -207,8 +235,17 @@
+             and review['graphReview'] == fp(args.graph_review) and review['blockingObjections'] == [],
+             'Final independent functional review missing, failed or not bound to these exact proofs')
+     fp(args.functional_review)
+-    for name in ['prepare.py', 'postprocess.py', 'analyze.mjs', 'review.py', 'README.md']:
++    for name in ['prepare.py', 'prepare-v2.py', 'postprocess.py', 'analyze.mjs', 'review.py', 'README.md',
++                 'preparation-v2/prepare-v2.diff', 'preparation-v2/diagnosis.json']:
+         fp(TOOLS / name)
++    preparation_provenance = {'generator': fp(TOOLS / 'prepare-v2.py'),
++        'derivedFrom': fp(TOOLS / 'prepare.py'), 'diff': fp(TOOLS / 'preparation-v2/prepare-v2.diff'),
++        'diagnosis': fp(TOOLS / 'preparation-v2/diagnosis.json'),
++        'roleScopedSourceInventoryInputs': role_scoped_inputs,
++        'qualification': 'Only sourceInventory fingerprints use their declared role checkout. Original paths and exact bytes/hashes are retained; generic artifact fingerprint semantics are unchanged.'}
++    require(preparation_provenance['derivedFrom']['sha256'] ==
++            '22680bf1833f2fc41ce5ff058ad6ec707138d3b27bc791c1907e93babda325d9',
++            'Frozen original preparation changed')
+     stamp = datetime.now(timezone.utc).isoformat()
+     output.mkdir(parents=True)
+     for name in ['cases.json', 'comparison-policy.json']:
+@@ -226,7 +263,7 @@
+     (output / 'protocol.md').write_text(protocol)
+     fp(output / 'protocol.md')
+     contract = {'schema': 'logos-engine.lot8b-final-cost-contract.v1', 'status': 'declared_before_official_window',
+-        'recordedAt': stamp, 'performanceDirectory': relative, 'baseline': identities['baseline'], 'candidate': identities['candidate'],
++        'recordedAt': stamp, 'preparation': preparation_provenance, 'performanceDirectory': relative, 'baseline': identities['baseline'], 'candidate': identities['candidate'],
+         'nativeDigests': DIGESTS, 'cases': fp(output / 'cases.json'), 'comparisonPolicy': fp(output / 'comparison-policy.json'),
+         'expectedForms': fp(output / 'expected-forms.json'), 'protocol': fp(output / 'protocol.md'),
+         'functionalForms': fp(args.work_forms), 'graphReview': fp(args.graph_review), 'ownerInventory': fp(args.owner_inventory),
