@@ -656,3 +656,40 @@ C2 donneur est donc désormais stabilisé ainsi :
 
 Le port TypeScript devra être audité sans présumer qu'il conserve exactement
 ces dispositions.
+
+
+## C1 — carte d'implantation TypeScript prête
+
+Le document `docs/migration/op01-op31-c1-typescript-implementation-map.md`
+traduit désormais le contrat C1 en points d'implantation fichier par fichier :
+
+- `v6-operations.ts` : mesure du calcul pur, sans création de besoin ;
+- `v6-composition-engine.ts` : appel, admission, persistance ;
+- `v6-native-authority.ts` : transport du besoin, garde release/acquire ;
+- `v6-target-binding.ts` : postAnalysis OP29/30/31 ;
+- nouveau trace sink minimal suggéré, sans décision ni balayage global ;
+- cache/invalidation ;
+- tests S-C1-1 à S-C1-5 ;
+- protocole performance STCK/SMLP.
+
+Le premier patch C1 est explicitement contraint à **zéro changement de décision** :
+aucune nouvelle OP, aucune nouvelle garde, aucun changement de priorité ou
+d'écriture existante.
+
+### Statut courant
+
+- C0 : terminé.
+- C1 : contrat + carte d'implantation prêts ; intégration toujours en attente du checkout TypeScript.
+- C2 : dispositions donneuses stabilisées : OP18/28 garde, OP29 information_only, OP30 persisted_only, OP31 information_only.
+- C3-C6 : audits donneurs complets.
+- C7 : consolidation provisoire complète, performance finale non mesurée.
+
+### Dernier commit sauvegardé
+
+`beb1fc2feca35f2e71b5c010a701f4740e81f3f9`
+
+### Prochaine étape concrète
+
+Dès apparition du checkout `src/logos-engine/v6-*`, appliquer la carte C1 dans
+l'ordre : trace sink → execute → operationAdmission → persist → producteurs
+OP18/28 → postAnalysis OP29/30/31 → tests S-C1-1..5 → benchmark.
