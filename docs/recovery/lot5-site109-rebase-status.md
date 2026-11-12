@@ -274,3 +274,44 @@ Limites explicites :
 
 Porter les tranches réellement consommées de `FieldStock.record/before/after/propose`, puis raccorder l'acquisition et la réponse existantes au même propriétaire `ObservedAddressedMaterialRuntime` pour obtenir un scénario intégré :
 `apprentissage -> frontière -> revalidation -> proposition bornée -> réponse -> décision`.
+
+
+## 5B — guards et réconciliation FieldStock raccordés
+
+Donneur V6 :
+- `common_field_stock.py::bodies`
+- `common_field_stock.py::before`
+- `common_field_stock.py::after`
+- `common_field_stock.py::record`
+- `geometric_observer.py::components`
+- `typed_material_observations.py::child_present`
+
+Port supplémentaire :
+- `FieldStock.bodies()` mesure les composants monochromes 4-connexes et ne retient que les corps carrés d'un type connu hors interface ;
+- `FieldStock.before()` revalide niveau, progression, observation liée, inventaire typé et présence exacte des enfants attendus ;
+- `FieldStock.after()` ferme immédiatement le préfixe à une frontière officielle, compare le stock attendu quand il est connu et vérifie la préservation des corps non sélectionnés quand l'effet reste inconnu ;
+- `FieldStock.record()` apprend une relocalisation adressée, apprend une réécriture observée deux-parents -> un-produit, conserve les lignées sans revendiquer l'identité des pixels, et réfute les changements de contexte incompatibles ;
+- `ObservedAddressedMaterialRuntime` délègue maintenant `beforeStock/afterStock/recordStock` uniquement après revalidation courante réussie.
+
+Scénario intégré qualifié :
+`apprentissage local -> frontière officielle -> prior retenu -> revalidation nouvelle scène -> garde before -> réponse observée -> garde after -> décision d'applicabilité`.
+
+La décision reste une autorisation de consommation de connaissance revalidée, pas une sélection artificielle d'action.
+
+Tests ciblés de ce slice :
+- **16/16 réussis** ;
+- `tsc --noEmit` réussi dans le checkout local minimal ;
+- Node local 22.16.0 avec `--experimental-strip-types`.
+
+Nouveaux commits GitHub :
+- `04c6300058e89a7437d1c32ba7653fc344f617fd` — corps, guards et record FieldStock ;
+- `cfae80db4bc75ef225edab777539b03c8e5c0124` — délégation runtime seulement après revalidation ;
+- `cd784241b1703b624c0191ce518b31aec17ca0f9` — tests guards/record/scénario intégré.
+
+Limites restantes de 5B :
+- `FieldStock.preservation_obligations()` et `propose()` ne sont pas encore portés ;
+- allocations, loci, movement, offer et simulate du donneur restent à reconstruire avant de pouvoir générer une proposition stock réelle ;
+- le worker SRA V6 complet reste absent, donc le runtime raccordé est consommable par la future boucle de décision mais n'est pas encore le worker navigateur final ;
+- le harness officiel STCK/SMLP reste absent.
+
+La prochaine tranche prouvable est `preservation_obligations -> allocations/loci/movement/offer/simulate -> propose`, puis raccord OP18 du bundle produit sans appel artificiel.
