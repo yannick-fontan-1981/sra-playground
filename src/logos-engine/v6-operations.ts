@@ -216,7 +216,7 @@ export function executeOperation(key: OperationKey, state: SymbolicRecord): Oper
       result.value = ((state.remote_effects ?? []) as SymbolicRecord[]).filter(effect => pythonTruthy(effect.observation));
       break;
     case 'OP23':
-      result.value = ((state.entities ?? []) as SymbolicRecord[]).flatMap(entity => {
+      result.value = ((state.entities ?? []) as SymbolicRecord[]).flatMap((entity): SymbolicRecord[] => {
         if (pythonTruthy(entity.cycle) && pythonTruthy(entity.cycle_proof)) {
           const cycle = entity.cycle as any[];
           return [{ entity: entity.id, next: cycle[((entity.phase ?? 0) + 1) % cycle.length], evidence: entity.cycle_proof }];
