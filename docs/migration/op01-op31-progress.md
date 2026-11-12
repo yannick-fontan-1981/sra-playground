@@ -693,3 +693,106 @@ d'écriture existante.
 Dès apparition du checkout `src/logos-engine/v6-*`, appliquer la carte C1 dans
 l'ordre : trace sink → execute → operationAdmission → persist → producteurs
 OP18/28 → postAnalysis OP29/30/31 → tests S-C1-1..5 → benchmark.
+
+
+## C1/C2 — implémentation locale réelle et sauvegarde GitHub
+
+Checkout local actif : `/mnt/data/sra-playground-local`.
+
+### Runtime Logos ajouté
+
+- `src/logos-engine/v6-operation-trace.ts`
+  - trace bornée, neutre vis-à-vis des décisions ;
+  - événements besoin / opération / consommation ;
+  - modes `executed/cache_reused/not_required/blocked` ;
+  - identité de cache dépendante de l'époque, observation et révisions.
+- `src/logos-engine/v6-operations.ts`
+  - port TypeScript des calculs OP01 à OP31 depuis le donneur V6 publié ;
+  - conservation de `unknown`, `incomplete`, limites de recherche et preuves fournies.
+- `src/logos-engine/v6-composition-engine.ts`
+  - validation des bundles ;
+  - admission physique seulement pour OP14/OP18/OP28 ;
+  - résultat réel consommé avant autorisation de release ;
+  - opérations d'analyse sans autorité physique.
+- `src/logos-engine/v6-target-binding.ts`
+  - postAnalysis OP29/30/31 ;
+  - OP29 = `information_only` ;
+  - OP30 = `persisted_only`, révision courante, déduplication et restauration ;
+  - OP31 = `information_only` ;
+  - absence de données => `blocked/not_required`, sans appel artificiel.
+
+### Tests locaux exécutés
+
+Typecheck strict des fichiers `src/logos-engine/*.ts` : **OK**.
+
+Suite locale :
+
+`node --experimental-strip-types --test tests/v6-operation-trace.test.ts tests/v6-operations.test.ts tests/v6-composition-engine.test.ts tests/v6-target-binding.test.ts`
+
+Résultat : **17/17 tests passent**.
+
+Couverture démontrée :
+- besoin → appel → consommation ;
+- besoin absent / appel bloqué ;
+- cache invalidé sur révision ;
+- trace bornée ;
+- OP03 unknown ;
+- OP09 domaine complet ;
+- OP18/OP28 ;
+- OP29 confirmé/réfuté/inconnu ;
+- OP30 révision, persistance, restauration, déduplication ;
+- OP31 unknown ;
+- bundle stale / préservation ;
+- admission basée sur le résultat réel ;
+- analyse sans autorité physique.
+
+### Performance C1
+
+Micro-mesure isolée locale, 21 × 20 000 itérations :
+- OP18 seul : médiane ~0,047 µs/op ;
+- OP18 + événement trace : médiane ~3,389 µs/op ;
+- surcoût absolu ~3,342 µs/op.
+
+Cette mesure **n'est pas un benchmark de session complète**. Elle ne permet pas de conclure sur le seuil de +10 % STCK/SMLP.
+
+Statut performance :
+**intégration fonctionnelle du noyau C1/C2 terminée ; coût session STCK/SMLP à confirmer.**
+
+### Commits locaux
+
+- `e462ded` — noyau opérations + trace ;
+- `c1f2e30` — admission / release ;
+- `0e40a9d` — postAnalysis + OP30 durable ;
+- `11271f8` — preuve locale documentée.
+
+### Sauvegardes GitHub
+
+- `974974d5d0c0ba2f32c97b088b81dd818313f117` — trace core ;
+- `d6de284704012fcce212595d8ab449a0d9aa2ce1` — OP01–OP31 ;
+- `56fd7a1d7c6c48adb8cd5685ea8dc8c78088bc7b` — tests trace ;
+- `b20007d4c6fcdd980fb012095253c59456c163fc` — tests opérations ;
+- `c7f76c8ed6441e3804ee37932de68949937f7787` — composition/admission ;
+- `e746f136e74483ac4f59d61e750056be1c14c4d2` — tests admission ;
+- `93dcc33aa498e6ed4ca493d9c6740fbcd22c3e0a` — postAnalysis/knowledge ;
+- `98bea0873f99d7e844e1fe12d38bae0aa6d3b60a` — tests postAnalysis.
+
+### Feuille de route actualisée
+
+| Lot | État | Prochaine étape |
+| --- | --- | --- |
+| C0 | **terminé** | registre stable |
+| C1 | **noyau instrumenté et testé localement** | produire le signal de besoin dans l'autorité/producteurs réels et mesurer une session |
+| C2 | **18/28/29/30/31 codés selon disposition qualifiée** | brancher les producteurs réels sans modifier la décision |
+| C3 | audit donneur complet | aucun raccordement sans besoin non couvert |
+| C4 | audit donneur complet | aucun appel sans consommateur |
+| C5 | audit donneur complet | préserver boucle informationnelle |
+| C6 | audit donneur complet | préserver inconnue vs impossibilité |
+| C7 | consolidation provisoire | benchmark consolidé après intégration runtime réel |
+
+### Prochaine étape concrète
+
+Implémenter `v6-native-authority.ts` localement pour :
+1. émettre le signal de besoin **avant** OP18/OP28 ;
+2. distinguer besoin présent, absent et bloqué ;
+3. transporter le même `needId` jusqu'à `executeBundleOperation` ;
+4. ne modifier aucune sélection ni priorité.
