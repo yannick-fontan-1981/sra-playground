@@ -396,3 +396,74 @@ Poursuivre C2 en recherchant dans le donneur V6 :
 2. un propriétaire d'objectif consommant OP31 ;
 3. une lecture de `knowledge:<composition>:<property>` écrite par OP30.
 Si aucun lecteur n'existe, documenter explicitement ces opérations comme sorties informationnelles/persistées sans contribution décisionnelle démontrée.
+
+
+## C4 — regroupements et objectifs donneurs
+
+Le détail est enregistré dans `docs/migration/op01-op31-c4-donor-objectives.md`.
+
+### Périmètre réellement couvert
+
+OP01, OP02, OP05, OP10, OP15 et OP25, avec comparaison au target tree,
+aux stratégies spécialisées et au contexte borné du moteur de composition.
+
+### OP qualifiées
+
+- **OP01** : calcul de regroupement correct ; aucun consommateur runtime identifié.
+- **OP02** : équivalence prudente avec statut `incomplete` si post-state incomplet ; aucun consommateur identifié.
+- **OP05** : ambiguïtés calculables ; alternatives déjà conservées dans plusieurs mécanismes spécialisés.
+- **OP10** : objectifs finaux déjà structurés par le target tree/racine ; OP10 ressemble davantage à une vue analytique qu'à un besoin runtime prouvé.
+- **OP15** : recouvrement substantiel avec les enfants/intermédiaires du target tree, qui conservent davantage de provenance et de continuité.
+- **OP25** : filtre faible des candidats non réfutés ; le target tree possède déjà une sélection/priorité plus riche dans ses familles.
+
+### Besoins démontrés
+
+- conservation d'alternatives spécialisées : oui ;
+- cible principale liée et revalidée : oui ;
+- ouverture bornée d'un enfant/intermédiaire : oui ;
+- sélection spécialisée de cible : oui ;
+- besoin d'un regroupement générique OP01/02/05 ou d'un filtre OP25 commun : non démontré.
+
+### Producteurs / consommateurs
+
+Producteur-propriétaire principal observé : `CompositionTargetTree`.
+Consommateurs : bind/revalidation de cible et stratégies spécialisées.
+Aucun consommateur direct des résultats OP01/02/05/10/15/25 n'est démontré dans le cœur examiné.
+
+### Appels utiles / sans effet démontré
+
+Aucun nouvel appel ajouté.
+Ces six OP restent des calculs disponibles mais non activés sans besoin concret.
+
+### Fonctions spécialisées équivalentes
+
+- OP10 : target tree couvre déjà la notion de racine/objectifs dans ses familles.
+- OP15 : target tree couvre les enfants intermédiaires avec preuve et continuité.
+- OP25 : target tree couvre sélection/priorité dans ses familles.
+- OP01/02/05 : seulement recouvrements partiels ; pas d'équivalence déclarée.
+
+### Tests
+
+Aucun test relancé. Lecture de code seulement.
+
+### Performance
+
+Aucun runtime modifié ; coût inchangé.
+Statut C4 : **audit donneur avancé, aucun raccordement nécessaire démontré à ce stade**.
+
+### Feuille de route actualisée
+
+| Lot | État | Prochaine preuve concrète |
+| --- | --- | --- |
+| C0 | **terminé** | registre conservé |
+| C1 | **préparé** | instrumenter port TypeScript dès disponibilité |
+| C2 | **partiel avancé** | lecteurs OP29/31 + restauration/lecture OP30 |
+| C3 | **recouvrement qualifié** | raccorder seulement un besoin non couvert |
+| C4 | **audit donneur qualifié** | rechercher un vrai consommateur générique avant tout appel |
+| C5 | **prochaine famille utile** | qualifier information/exploration OP06/07/13/20/21/22/23 |
+| C6 | préparé | OP16/17/19/24/27 |
+| C7 | en attente | consolidation + performances |
+
+### Prochaine étape concrète
+
+Poursuivre avec C5 sur les mécanismes d'information et d'exploration déjà présents dans le donneur V6, en vérifiant si une information obtenue modifie réellement la suite plutôt que de seulement enrichir une trace.
