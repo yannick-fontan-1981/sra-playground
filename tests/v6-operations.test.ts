@@ -85,3 +85,44 @@ test('OP26 selects only verified accesses targeting the focused composition', ()
   ];
   assert.deepEqual(executeOperation('OP26', s).value, ['route']);
 });
+
+
+test('OP02 keeps incomplete paths out of proven equivalence groups', () => {
+  const s = state();
+  Object.assign(s, {
+    paths: [
+      { id: 'p1', post_state_complete: true, post_state: { room: 2 }, constraints_verified: true },
+      { id: 'p2', post_state_complete: true, post_state: { room: 2 }, constraints_verified: true },
+      { id: 'p3', post_state_complete: false, post_state: { room: 2 }, constraints_verified: true },
+    ],
+  });
+  const result = executeOperation('OP02', s);
+  assert.equal(result.status, 'incomplete');
+  assert.deepEqual(result.value, [['p1', 'p2'], ['p3']]);
+});
+
+test('OP05 exposes same-effect ambiguity without choosing a winner', () => {
+  const s = state();
+  s.compositions[2] = { ...s.compositions[2], effect: { color: 'blue' } };
+  assert.deepEqual(executeOperation('OP05', s).value, [['B', 'C']]);
+});
+
+test('OP10 and OP15 distinguish terminal goals from ready intermediate goals', () => {
+  const s = state();
+  Object.assign(s, {
+    goals: [
+      { id: 'G-final', composition: 'G', terminal: true, completed: false, requires: {} },
+      { id: 'G-mid', composition: 'B', terminal: false, completed: false, requires: { free: true } },
+      { id: 'G-unmet', composition: 'C', terminal: false, completed: false, requires: { missing: true } },
+      { id: 'G-done', composition: 'A', terminal: false, completed: true, requires: { free: true } },
+    ],
+  });
+  assert.deepEqual(executeOperation('OP10', s).value, ['G']);
+  assert.deepEqual(executeOperation('OP15', s).value, ['G-mid']);
+});
+
+test('OP25 retains non-refuted candidate objectives but does not prove feasibility', () => {
+  const s = state();
+  s.compositions[2] = { ...s.compositions[2], candidate_objective: true, feasibility: 'refuted' };
+  assert.deepEqual(executeOperation('OP25', s).value, ['B']);
+});
