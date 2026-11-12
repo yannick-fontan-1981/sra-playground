@@ -41,5 +41,22 @@
     "cross_game_compensation": false,
     "internal_phase_may_exceed_if_game_global_passes": true,
     "official_status": "to_confirm_harness_missing"
-  }
+  },
+  "reconstructed_files": [
+    "src/logos-engine/v6-temporal-selection-contract.ts",
+    "tests/v6-temporal-selection-contract.test.ts",
+    "src/logos-engine/v6-temporal-memory-contract.ts",
+    "tests/v6-temporal-memory-contract.test.ts",
+    "docs/recovery/lot10d-temporal-selection-contract.md",
+    "docs/recovery/lot10d-temporal-memory-contract.md"
+  ],
+  "functional_qualification": {
+    "command": "node --experimental-strip-types --test tests/v6-temporal-selection-contract.test.ts tests/v6-temporal-memory-contract.test.ts",
+    "tests_passed": 15,
+    "tests_failed": 0,
+    "status": "contract_layer_qualified",
+    "historical_selector_reconstructed": false,
+    "historical_state_machine_reconstructed": false
+  },
+  "next_step": "reconstruct a minimal local observation memory state only from durable producer/acquisition/restore/consumer evidence"
 }
