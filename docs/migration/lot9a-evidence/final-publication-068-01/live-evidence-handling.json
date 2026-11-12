@@ -1,0 +1,11 @@
+{
+  "schema": "logos-engine.lot9a.publication-live-evidence-handling.v1",
+  "declaredAt": "2026-11-12T15:46:11.745776+00:00",
+  "excludedPath": "docs/migration/lot9a-evidence/final-publication-068-01/live-01/",
+  "purpose": "Keep exact source HEAD stable while the publication lease and remote results are written.",
+  "onlyOwnMarkedLinesWillBeRemoved": true,
+  "terminalEvidenceWillBeCommittedAfterRelease": true,
+  "existingRulesPreserved": true,
+  "originalExclusionFileSha256": "6671fe83b7a07c8932ee89164d1f2793b2318058eb8b98dc5c06ee0a5a3b0ec1",
+  "marker": "# lot9a-final068-publication-live"
+}
