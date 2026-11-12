@@ -141,3 +141,75 @@ C7 ne pourra être déclaré terminé que lorsque :
 - les dettes C2 critiques auront une preuve ou une disposition finale explicite ;
 - toute modification runtime C2-C6 aura son coût qualifié ;
 - la version consolidée respectera ou documentera explicitement le seuil de performance.
+
+
+## Mise à jour après implémentation locale C1/C2
+
+Le chantier n'est plus seulement documentaire sur C1/C2. Un noyau TypeScript
+Logos existe maintenant sous `src/logos-engine/` avec :
+
+- OP01 à OP31 ;
+- trace besoin/appel/consommation ;
+- admission physique OP14/18/28 ;
+- production du besoin avant OP18/28 ;
+- postAnalysis OP29/30/31 ;
+- OP30 durable avec restauration/déduplication ;
+- cache pur borné par dépendances ;
+- cycle intégré release → retour → postAnalysis.
+
+Suite locale : **27/27 tests passent**, typecheck strict OK.
+
+### Preuve de non-régression structurelle
+
+Comparaison GitHub entre la base de branche
+`8f8b179718d06a51dc8818deb68c977cd5e1e820` et le head
+`c084c6c0eb8b42ac8daa78cf90265526d168c3fc` :
+
+- aucun fichier existant de `src/runtime/*` modifié ;
+- aucun jeu modifié ;
+- aucune UI modifiée ;
+- uniquement nouveaux fichiers `src/logos-engine/*`, tests et documents.
+
+Ainsi, les décisions du runtime browser existant restent inchangées tant que
+le nouveau noyau Logos n'est pas raccordé à l'agent web.
+
+### Statut C1 révisé
+
+Fonctionnellement qualifié sur le noyau Logos local pour :
+- besoin présent ;
+- besoin absent ;
+- blocage ;
+- appel exécuté ;
+- cache réutilisé ;
+- invalidation par révision ;
+- consommation garde ;
+- restauration OP30 ;
+- déduplication.
+
+Performance :
+- mesures micro isolées disponibles ;
+- **session complète STCK/SMLP non mesurée** ;
+- verdict : **intégration fonctionnelle terminée, coût à confirmer**.
+
+### Statut C2 révisé
+
+Chaîne intégrée testée :
+
+**OP18 → release → retour → OP29 → OP30 → OP31**
+
+avec dispositions :
+- OP18 : garde de release ;
+- OP29 : `information_only` ;
+- OP30 : `persisted_only` ;
+- OP31 : `information_only`.
+
+Aucun postAnalysis n'est exécuté si la release est refusée ou si aucun retour
+n'est disponible.
+
+### C7 reste provisoire
+
+C7 ne peut toujours pas être clôturé car :
+1. le noyau Logos n'est pas encore raccordé au runtime/browser SRA réel ;
+2. STCK et SMLP ne sont pas mesurés en session complète ;
+3. C3-C6 restent audits donneurs tant qu'aucun besoin runtime réel non couvert
+   n'impose un raccordement.
