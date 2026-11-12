@@ -16,3 +16,9 @@ test('dispatch presentation keeps busy held until the dispatch releases it', () 
   assert.match(main, /if \(releaseBusy\) \{\s*busy = false;\s*updateInterface\(\);\s*\}/s);
   assert.match(main, /present: \(next, generation\) => present\(next, generation, false\)/);
 });
+
+
+test('main product dispatch preserves GameObservation typing without an assertion cast', () => {
+  assert.match(main, /present: \(next, generation\) => present\(next, generation, false\)/);
+  assert.doesNotMatch(main, /next as GameObservation/);
+});
