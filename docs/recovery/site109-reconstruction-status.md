@@ -52,13 +52,14 @@ Branches intégrées/préparées :
 - ce caller ne départage jamais plusieurs propositions : 0 -> none, 1 -> selected, >1 -> ambiguous ;
 - l'adaptateur `src/logos-engine/v6-region-caller-adapter.ts` relie Region au caller sans modifier le coeur Region ;
 - caller neutre + intégration Region passent **12/12 tests** ;
-- total unique ciblé observé pour noyau V6 + Region + owner + caller : **58/58 tests réussis** ;
+- total unique ciblé observé pour noyau V6 + Region + owner + caller + worker : **72/72 tests réussis** ;
 - le dispatch produit/UI reste distinct du caller agent ;
-- le worker public, la campagne live et le harness officiel de coût restent absents ;
+- le transport worker public est reconstruit dans `src/runtime/v6-agent-worker-core.ts` + `src/runtime/v6-agent-worker.ts` et passe **14/14 tests** ; son port par défaut reste `reconstruction-pending-perception` et ne produit aucune action inventée ;
+- la perception `observation publique -> contexte owners`, la campagne live et le harness officiel de coût restent absents ;
 - aucun compteur historique 70/76 ou candidat 71/76 n'est promu au statut de la reconstruction actuelle.
 
 Statut Lot 9 :
-**noyau V6, coeur Region, owner et caller neutre fonctionnellement qualifiés dans leurs périmètres ; worker public, campagne live et performance officielle à confirmer.**
+**noyau V6, coeur Region, owner, caller neutre et transport worker fonctionnellement qualifiés dans leurs périmètres ; perception, campagne live et performance officielle à confirmer.**
 
 ## Branches de récupération conservées
 
