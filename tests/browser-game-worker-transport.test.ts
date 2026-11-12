@@ -147,3 +147,41 @@ test('request timeout rejects pending work, terminates the worker and ignores a 
   worker.emitMessage({ id: 1, result: result('TOO_LATE') });
   await Promise.resolve();
 });
+
+
+test('dispose rejects pending work and prevents any future request', async () => {
+  const { runtime, worker, timers } = harness();
+  const pending = runtime.action(1);
+
+  runtime.dispose();
+
+  await assert.rejects(pending, /session was closed/);
+  assert.equal(worker.terminated, true);
+  assert.equal(timers[0]?.cleared, true);
+  await assert.rejects(() => runtime.action(2), /session is closed/);
+});
+
+test('a worker error clears the failed worker so the next request gets a fresh worker', async () => {
+  const workers = [new FakeWorker(), new FakeWorker()];
+  let created = 0;
+  const runtime = new BrowserGameRuntime({
+    workerFactory: () => workers[created++]! as unknown as Worker,
+    requestTimeoutMs: 60_000,
+  });
+
+  const first = runtime.action(1);
+  workers[0]!.emit('error');
+  await assert.rejects(first, /local game runtime stopped/);
+  assert.equal(workers[0]!.terminated, true);
+
+  const second = runtime.action(2);
+  assert.equal(created, 2);
+  assert.deepEqual(workers[1]!.posted, [{
+    id: 2,
+    request: { type: 'action', actionId: 2 },
+  }]);
+
+  workers[1]!.emitMessage({ id: 2, result: result('RECOVERED') });
+  assert.equal((await second).gameCode, 'RECOVERED');
+  runtime.dispose();
+});
