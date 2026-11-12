@@ -54,20 +54,23 @@
     "docs/recovery/lot10d-temporal-return-contract.md",
     "src/logos-engine/v6-temporal-observation-state.ts",
     "tests/v6-temporal-observation-state.test.ts",
-    "docs/recovery/lot10d-temporal-observation-state.md"
+    "docs/recovery/lot10d-temporal-observation-state.md",
+    "src/logos-engine/v6-temporal-selection-adapter.ts",
+    "tests/v6-temporal-selection-adapter.test.ts",
+    "docs/recovery/lot10d-temporal-selection-adapter.md"
   ],
   "functional_qualification": {
-    "command": "Temporal contracts: 23/23 previously qualified; observation state: node --experimental-strip-types --test tests/v6-temporal-observation-state.test.ts",
-    "tests_passed": 34,
+    "tests_passed": 42,
     "tests_failed": 0,
-    "latest_stage_tests_passed": 11,
+    "latest_stage_tests_passed": 8,
     "latest_stage_tests_failed": 0,
-    "source_typecheck": "passed_strict",
-    "status": "minimal_temporal_observation_state_qualified",
+    "latest_stage_command": "node --experimental-strip-types --test tests/v6-temporal-selection-adapter.test.ts",
+    "source_typecheck": "passed_strict_for_5_temporal_sources",
+    "status": "descriptive_external_selection_adapter_qualified",
     "historical_selector_reconstructed": false,
     "historical_state_machine_reconstructed": false
   },
-  "next_step": "build a descriptive consumption adapter from the minimal observation state to externally supplied Source/DRM selection results, without implementing a historical selection policy",
+  "next_step": "reconstruct a Source/DRM decision receipt with workflow/source/observation/domain/result provenance, then require it in the adapter instead of a bare selectedRef",
   "working_branch": "recovery/lot10d-temporal-selection-restart2-20261112",
   "previous_recovery_branch": "recovery/lot10d-temporal-selection-restart-20261112"
 }
