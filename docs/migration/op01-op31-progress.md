@@ -1044,3 +1044,26 @@ Suite locale complète OP/C7 après ajout :
 
 Statut C3 OP14 :
 **calcul + consommation de garde + refus sur violation de préservation démontrés dans le noyau TypeScript reconstruit**.
+
+
+## C3 — preuves TypeScript OP08 / OP12 / OP26 ajoutées
+
+Tests ajoutés à `tests/v6-operations.test.ts` :
+
+- OP08 : seul le prédécesseur dont l'effet satisfait une exigence du focus est retenu ;
+- OP12 : une exigence absente reste `unknown` pendant le parcours des dépendances déclarées ;
+- OP26 : seuls les accès visant le focus avec `constraints_verified === true` sont retenus.
+
+Suite locale complète OP/C7 après ajout :
+**37/37 tests passent**, typecheck strict OK.
+
+Statut C3 actualisé :
+- OP03 : tri-état démontré ;
+- OP08 : prédécesseur effect→requires démontré sur calcul pur ;
+- OP12 : inconnue + traversal dépendances démontrés ;
+- OP14 : garde de préservation positive/négative démontrée ;
+- OP26 : filtre d'accès vérifié démontré.
+
+Ces preuves qualifient les calculs/contrats du noyau TypeScript reconstruit.
+Elles ne prouvent toujours pas qu'un besoin runtime réel appelle chacune de ces OP :
+aucun raccordement artificiel n'est ajouté.
