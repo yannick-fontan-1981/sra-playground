@@ -1086,3 +1086,52 @@ Statut C4 :
 les calculs du noyau TypeScript reconstruit sont désormais mieux verrouillés,
 mais aucun consommateur runtime générique supplémentaire n'est démontré.
 Aucun appel artificiel n'est ajouté.
+
+
+## C5/C6 — correction de parité Python → TypeScript
+
+Un test C5 a révélé une divergence réelle de portage :
+en JavaScript, `[]` et `{}` sont truthy, contrairement à Python.
+
+Impact observé :
+- OP07 pouvait retenir une frontière avec `open_goal_evidence: []`.
+
+Correction :
+- ajout de `pythonTruthy()` dans `v6-operations.ts` ;
+- application aux chemins du donneur qui reposaient sur la vérité Python :
+  OP07, OP10, OP15, OP16, OP18, OP19, OP22, OP23, OP25, OP30 ;
+- même règle appliquée à la preuve de préservation dans
+  `v6-composition-engine.ts` et à la question OP18 dans
+  `v6-native-authority.ts`.
+
+Régressions ajoutées :
+- frontière sans preuve ;
+- cycle vide ;
+- preuve OP30 vide ;
+- preuve de préservation vide ;
+- question OP18 vide.
+
+Preuves C5/C6 ajoutées :
+- OP06, OP07, OP13, OP20, OP21, OP22, OP23 ;
+- OP16, OP17, OP19, OP24, OP27.
+
+Suite locale après correction :
+**53/53 tests passent**, typecheck strict OK.
+
+Diagnostic C7 après correction, 31 × 200 cycles :
+- baseline ~1,919 ms ;
+- compteurs-only ~1,840 ms (**−4,12 %**, bruit favorable) ;
+- trace détaillée ~10,155 ms (+429,10 %) ;
+- cache sans hit utile ~2,810 ms (+46,40 %).
+
+Interprétation inchangée :
+- compteurs-only pour le mode normal ;
+- trace détaillée audit uniquement ;
+- cache uniquement sur chemins avec réutilisation réelle.
+
+Statut performance :
+**fonctionnellement qualifié, performance officielle à confirmer**.
+
+Intégration canonique :
+PR #9 fusionnée, merge commit
+`37998bf6944eee03b46313e30a741e08259a54ea`.
