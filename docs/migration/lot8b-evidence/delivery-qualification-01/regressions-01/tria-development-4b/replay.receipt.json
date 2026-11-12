@@ -1,0 +1,43 @@
+{
+  "schema": "logos-engine.lot8b.recorded-process.v1",
+  "name": "replay",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "docs/migration/lot8a-evidence/tools/replay-recorded-public-streaming.mjs",
+    "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz",
+    "docs/migration/lot4b-evidence/development/tria-live-01/tria-public-trace.json.gz",
+    "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/tria-development-4b/replay.json.gz"
+  ],
+  "cwd": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+  "startedAt": "2026-11-12T05:07:50.199811+00:00",
+  "phaseTimeoutSeconds": 600,
+  "effectiveTimeoutSeconds": 600,
+  "environment": {
+    "NODE_OPTIONS": "--max-old-space-size=1536",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONHASHSEED": "0"
+  },
+  "status": "passed",
+  "pid": 98,
+  "processGroup": 98,
+  "exitCode": 0,
+  "timedOut": false,
+  "interrupted": false,
+  "automaticRetry": false,
+  "elapsedSeconds": 42.25837936500102,
+  "lastObservedAt": "2026-11-12T05:08:20.243541+00:00",
+  "stdoutBytes": 48188,
+  "stderrBytes": 0,
+  "processGroupStopped": true,
+  "finishedAt": "2026-11-12T05:08:32.458004+00:00",
+  "stdout": {
+    "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/tria-development-4b/replay.stdout.log",
+    "bytes": 61845,
+    "sha256": "e7237368269f4ae99566d461902ff6aa49d832c87efa8ed059852a91bfecd837"
+  },
+  "stderr": {
+    "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/tria-development-4b/replay.stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

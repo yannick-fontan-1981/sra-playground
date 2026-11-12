@@ -1,0 +1,27 @@
+{
+  "schema": "logos-engine.lot8b.recorded-process.v1",
+  "name": "comparison",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "scripts/run-released-public-regressions.py",
+    "--compare-case",
+    "{\"baseline\":\"docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz\",\"trace\":\"docs/migration/lot4b-evidence/development/tria-live-01/tria-public-trace.json.gz\",\"report\":\"docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/tria-development-4b/replay.json.gz\",\"sourceManifest\":\"docs/migration/lot8b-evidence/delivery-qualification-01/candidate-native.json\",\"caseManifest\":\"docs/migration/lot8b-evidence/tools/delivery/regressions/cases.json\",\"comparison\":\"docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/tria-development-4b/comparison.json\",\"presence\":\"docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/tria-development-4b/passive-owner-presence.json\",\"requirements\":[]}"
+  ],
+  "cwd": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+  "startedAt": "2026-11-12T05:08:32.459511+00:00",
+  "phaseTimeoutSeconds": 180,
+  "effectiveTimeoutSeconds": 180,
+  "environment": {
+    "NODE_OPTIONS": "--max-old-space-size=1536",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONHASHSEED": "0"
+  },
+  "status": "started",
+  "pid": null,
+  "processGroup": null,
+  "exitCode": null,
+  "timedOut": false,
+  "interrupted": false,
+  "automaticRetry": false
+}

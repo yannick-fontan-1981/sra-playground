@@ -1,0 +1,30 @@
+{
+  "schema": "logos-engine.lot8b.recorded-process.v1",
+  "name": "replay",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "--expose-gc",
+    "--max-old-space-size=1536",
+    "docs/migration/lot8a-evidence/tools/replay-recorded-public-released-streaming-v2.mjs",
+    "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz",
+    "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+    "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/replay.json.gz",
+    "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/host-preparation.json"
+  ],
+  "cwd": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+  "startedAt": "2026-11-12T05:03:50.397538+00:00",
+  "phaseTimeoutSeconds": 600,
+  "effectiveTimeoutSeconds": 600,
+  "environment": {
+    "NODE_OPTIONS": "--max-old-space-size=1536",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONHASHSEED": "0"
+  },
+  "status": "started",
+  "pid": null,
+  "processGroup": null,
+  "exitCode": null,
+  "timedOut": false,
+  "interrupted": false,
+  "automaticRetry": false
+}

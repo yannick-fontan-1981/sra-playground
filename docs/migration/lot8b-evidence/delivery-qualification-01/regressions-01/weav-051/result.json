@@ -1,0 +1,218 @@
+{
+  "case": "weav-051",
+  "game": "WEAV",
+  "passed": true,
+  "baseline": {
+    "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz",
+    "sha256": "114906e80b2ff5817adeaa105fd4e84ea2b057d8393b202dc03f35248b350fc3"
+  },
+  "trace": {
+    "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+    "sha256": "a46f6a331e8f98767ee709c2931edd6d0abde9cc636b93ef384509c04adface2"
+  },
+  "replay": {
+    "schema": "logos-engine.lot8b.recorded-process.v1",
+    "name": "replay",
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "--expose-gc",
+      "--max-old-space-size=1536",
+      "docs/migration/lot8a-evidence/tools/replay-recorded-public-released-streaming-v2.mjs",
+      "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz",
+      "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+      "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/replay.json.gz",
+      "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/host-preparation.json"
+    ],
+    "cwd": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+    "startedAt": "2026-11-12T05:03:50.397538+00:00",
+    "phaseTimeoutSeconds": 600,
+    "effectiveTimeoutSeconds": 600,
+    "environment": {
+      "NODE_OPTIONS": "--max-old-space-size=1536",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONHASHSEED": "0"
+    },
+    "status": "passed",
+    "pid": 85,
+    "processGroup": 85,
+    "exitCode": 0,
+    "timedOut": false,
+    "interrupted": false,
+    "automaticRetry": false,
+    "elapsedSeconds": 230.26573486399866,
+    "lastObservedAt": "2026-11-12T05:07:35.657298+00:00",
+    "stdoutBytes": 266642,
+    "stderrBytes": 0,
+    "processGroupStopped": true,
+    "finishedAt": "2026-11-12T05:07:40.663250+00:00",
+    "stdout": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/replay.stdout.log",
+      "bytes": 268939,
+      "sha256": "a498e220fe3bad93a7a02069bb626305a58448941218557dd86567c32ef63f91"
+    },
+    "stderr": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/replay.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "hostPreparationPassed": true,
+  "hostPreparation": {
+    "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/host-preparation.json",
+    "bytes": 19683,
+    "sha256": "7a5464b7916b0935beaabc875300a84784828ca30a7cae96875ced570a4cd090"
+  },
+  "comparisonProcess": {
+    "schema": "logos-engine.lot8b.recorded-process.v1",
+    "name": "comparison",
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+      "-B",
+      "scripts/run-released-public-regressions.py",
+      "--compare-case",
+      "{\"baseline\":\"docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz\",\"trace\":\"docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz\",\"report\":\"docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/replay.json.gz\",\"sourceManifest\":\"docs/migration/lot8b-evidence/delivery-qualification-01/candidate-native.json\",\"caseManifest\":\"docs/migration/lot8b-evidence/tools/delivery/regressions/cases.json\",\"comparison\":\"docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/comparison.json\",\"presence\":\"docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/passive-owner-presence.json\",\"requirements\":[]}"
+    ],
+    "cwd": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+    "startedAt": "2026-11-12T05:07:40.665347+00:00",
+    "phaseTimeoutSeconds": 180,
+    "effectiveTimeoutSeconds": 180,
+    "environment": {
+      "NODE_OPTIONS": "--max-old-space-size=1536",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONHASHSEED": "0"
+    },
+    "status": "passed",
+    "pid": 97,
+    "processGroup": 97,
+    "exitCode": 0,
+    "timedOut": false,
+    "interrupted": false,
+    "automaticRetry": false,
+    "processGroupStopped": true,
+    "finishedAt": "2026-11-12T05:07:49.881580+00:00",
+    "elapsedSeconds": 9.21625595900332,
+    "stdout": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/comparison.stdout.log",
+      "bytes": 2678,
+      "sha256": "7be160ffb3f76f7ab565a75334d75fd70c7b95958d1e6c253ecb851330974b44"
+    },
+    "stderr": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/comparison.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "comparisonResult": {
+    "report": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/replay.json.gz",
+      "sha256": "81bc6c842ea8564703f8aad5e36702a2674065419004544ab007bebe12b0641f",
+      "bytes": 21259326
+    },
+    "status": "passed",
+    "actions": 81,
+    "prefixes": 81,
+    "final": {
+      "actions": 81,
+      "levelsCompleted": 3,
+      "level": 4,
+      "state": "NOT_FINISHED",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "activeSeconds": 179.92312151600015,
+      "prefixes": 81,
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 81,
+        "boundaryReplays": 2,
+        "goalEvents": 3,
+        "frontierDeltas": 163,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 82
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 82
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 62
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 42
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 7
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 83
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology"
+        ],
+        "morphologyProvider": {
+          "status": "partial_current_measurements_control_attention_and_methods",
+          "state_owner": "family_state:morphology",
+          "motion_owner": "caller:goal",
+          "forecast_owner": "family_state:public_observed_inventory",
+          "current_decision_scope": "one_source_selection_cycle",
+          "attention_owner": "caller:attention",
+          "method_owner": "caller:counters.targetMethod",
+          "entry_return_owner": "family_state:morphology.entry_access_return",
+          "connected_methods": [
+            "retained_station_method",
+            "entry_access_return",
+            "entry_rebind",
+            "entry_probe",
+            "managed_capacity",
+            "target_extension_continuation"
+          ],
+          "pending": [
+            "complete_original_caller_parity_and_domain_closure"
+          ]
+        },
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      },
+      "fullV6Parity": false,
+      "sessions": 1,
+      "operationCounts": {
+        "init": 1,
+        "advance": 81,
+        "resume": 80
+      },
+      "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.66.0"
+    },
+    "passiveOwnerPresence": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/passive-owner-presence.json",
+      "sha256": "a72dcd581e6c2c48738938cc21d3166aa727b0eca2e09a637fe4b217e10124e0",
+      "bytes": 1110
+    },
+    "passiveOwnerPresencePassed": true,
+    "passiveOwnerPrefixesChecked": 0,
+    "passiveOwnerPrefixesPassed": 0,
+    "passiveOwnerTransitionsRetained": 0,
+    "comparison": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/regressions-01/weav-051/comparison.json",
+      "sha256": "52cd9bcb6f9c16808f6e7335285b48980b413f2829894d42de28a3a237f0c523",
+      "bytes": 11033
+    },
+    "comparisonPassed": true,
+    "comparisonChecks": 17,
+    "failedChecks": []
+  },
+  "originalCheckNamesPreserved": true,
+  "inputsUnchanged": true
+}
