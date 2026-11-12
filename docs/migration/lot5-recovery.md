@@ -81,3 +81,102 @@ The local runtime is Node 22.16.0 while the repository requires >=22.18.0. The r
 ## Next Git work
 
 Recover the missing TypeScript Logos Engine source into this branch from an authoritative Git source before implementing canonical-buffer. Do not recreate the missing engine surface from memory alone.
+
+## Recovery progress from authoritative Git donor
+
+Donor repository:
+- `yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan`
+- branch: `codex/v6-combined-publication`
+- inspected donor commit: `a911106d318e79f498cccf302c54149d12cfbfeb`
+
+### 5A linked temporal preparation
+
+Donor:
+- `agents/yf_arc3_v6/laya_proto/common_linked_preparation.py`
+
+Recovery port:
+- `src/logos-engine/linked-preparation.ts`
+- `tests/linked-preparation.test.ts`
+
+Ported responsibilities:
+- complete neutral public observations before lifecycle checks;
+- delegate proposal generation to the phase relation owner;
+- mark admitted proposals with `linked_preparation_plan`;
+- delegate proposal binding;
+- complete before/after observations before phase reconciliation;
+- accumulate phase events;
+- retain official level-boundary evidence;
+- delegate preservation obligations.
+
+Local commit:
+- `dbf16ff` `feat(lot5): port linked temporal preparation adapter`
+
+GitHub commits:
+- `be0a55fd2ce081dbf6be2c5a637db2cfb9996c67`
+- `e4990e26d0de070bb446db1b271125d4cdbe11bf`
+
+### 5B observed addressed material
+
+Donors:
+- `agents/yf_arc3_v6/laya_proto/common_addressed_material.py`
+- `agents/yf_arc3_v6/laya_proto/common_addressed_field.py`
+
+Recovery port currently covers the neutral observation-completion wrapper only. `AddressedField` remains a separate donor-owned behavior and is not yet claimed as fully ported.
+
+Recovery files:
+- `src/logos-engine/addressed-material.ts`
+- `tests/addressed-material.test.ts`
+
+Local commit:
+- `ed261f0` `feat(lot5): port addressed material observation wrapper`
+
+GitHub commits:
+- `c630260e7a224b1b5834a699486f9dff5043d733`
+- `78dcc995b5dce32341868b6443794c20fa3a5f1e`
+
+### 5C observed object binding continuity
+
+Donors:
+- `agents/yf_arc3_v6/morphology_policy/guarded_binding/family.py`
+- `agents/yf_arc3_v6/morphology_policy/guarded_binding/binding.src`
+- `agents/yf_arc3_v6/morphology_policy/guarded_binding/binding.drm`
+
+Recovery port currently covers the parent-composition continuity and persistence slice:
+- stale selected frame -> `refuted` return;
+- confirmed reception separation -> `achieved` return;
+- official level boundary -> `boundary` return;
+- selected frame remains retained while effect/refutation is pending;
+- tracker remains owner of state/restore.
+
+Geometry, offer generation, ranking and action planning are not yet claimed as fully ported.
+
+Recovery files:
+- `src/logos-engine/observed-object-binding.ts`
+- `tests/observed-object-binding.test.ts`
+
+Local commit:
+- `70462c0` `feat(lot5): port object binding continuity lifecycle`
+
+GitHub commits:
+- `8dbafd4c99c52bfb49b80b50d817b1b6cf209779`
+- `50fa82f0f7656f71e8e6d549e1029a7f8703c30b`
+
+## Current recovery qualification
+
+Local checkout:
+- `/mnt/data/sra-playground-lot5-recovery`
+- branch: `recovery/lot5-canonical-buffer`
+
+Checks:
+- TypeScript typecheck: pass (`tsc --noEmit`)
+- Node tests with local Node 22.16.0 and `--experimental-strip-types`: **20/20 pass**
+
+This is a recovery qualification for the newly reconstructed slices. It does not replace the historical 270/270 canonical-buffer qualification and does not yet authorize the historical STCK/SMLP performance claim.
+
+## Next recovery work
+
+1. Port the remaining `AddressedField` behavior needed by 5B from `common_addressed_field.py` without game-specific shortcuts.
+2. Port the remaining object-binding geometry/planning path needed by 5C from the guarded-binding donor family.
+3. Reconnect these slices to an actual common runtime/consumer path.
+4. Only after the functional path exists, reconstruct the canonical JSON allocation optimization and the native-loop performance harness.
+5. Re-run STCK and SMLP independently; accept only when each complete-session median delta remains strictly below +10%.
