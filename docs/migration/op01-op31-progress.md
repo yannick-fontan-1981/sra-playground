@@ -1135,3 +1135,27 @@ Statut performance :
 Intégration canonique :
 PR #9 fusionnée, merge commit
 `37998bf6944eee03b46313e30a741e08259a54ea`.
+
+
+## Couverture calcul TypeScript OP01–OP31 complète
+
+Les derniers tests OP01, OP04 et OP11 complètent la couverture ciblée des 31 opérations.
+
+Suite locale complète :
+**56/56 tests passent**, typecheck strict OK.
+
+Document de synthèse :
+`docs/recovery/op01-op31-core-coverage-status.md`.
+
+Point essentiel :
+**31/31 calculs couverts ne signifie pas 31/31 usages runtime démontrés.**
+
+Les dispositions C0–C7 restent inchangées sur ce point :
+- aucune OP n'est raccordée pour augmenter un compteur ;
+- les fonctions spécialisées restent valides lorsqu'elles couvrent déjà le besoin ;
+- les besoins runtime non démontrés restent non raccordés ;
+- C7 reste ouvert pour la performance STCK/SMLP et les scénarios runtime réels.
+
+Merge de la couverture finale :
+PR #10, merge commit
+`54c7009fce238b694e7d8058d5e195f502378ac0`.
