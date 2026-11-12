@@ -1,5 +1,11 @@
 # Lot 8B : contrat de transfert de BranchRouting
 
+<!-- LOT8B_FINAL067_STATUS_START -->
+
+**Jalon final 0.67 :** le numéro distinct est réservé et les graphes sensibles à l'identité sont renouvelés, avec audits et build final acquis. Les [preuves de version finale](lot8b-evidence/final-version-067-01/README.md) réconcilient explicitement les résultats historiques ; le seul changement de production est le littéral 0.66.0 vers 0.67.0. Le candidat compte 69/76 entrées. À ce jalon, le coût officiel et la publication restent les prochaines étapes ; le publié constaté demeure Site 107 / native 0.66. Les paragraphes suivants conservent leurs états historiques.
+
+<!-- LOT8B_FINAL067_STATUS_END -->
+
 ## Périmètre et statut de cette étape
 
 Le lot 8B porte l’entrée originale **`parallel_branch_routing`** vers un propriétaire TypeScript distinct, **`branch_routing`**. Ce contrat décrit le composant, ses preuves de référence et son raccordement borné au moteur commun, qualifié sur les sources et tests figés au commit **`2583d81d856c13295040db88f5df8b3a99906bdc`**.

@@ -1,0 +1,1553 @@
+{
+  "schema": "logos-engine.lot8b-final-functional-review.v1",
+  "recordedAt": "2026-11-12T12:24:25.423670+00:00",
+  "status": "passed",
+  "reviewer": "final_tools_review",
+  "independentOfCaptureExecutionAndReaderAmendment": true,
+  "nativeDigests": {
+    "baseline": "ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316",
+    "candidate": "c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a"
+  },
+  "workForms": {
+    "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-02/work-forms.json",
+    "bytes": 62525,
+    "sha256": "27602bf28ed8bf7d29049d01edb9a0dad41a570142ca8ec7b2dcd5ef99918925"
+  },
+  "graphReview": {
+    "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-02/graph-review.json",
+    "bytes": 316284,
+    "sha256": "2ce3d78213d7fe4212c7396b00b1dd2444497c8186641d4cc43fac94ddcc884f"
+  },
+  "blockingObjections": [],
+  "scope": "Final native0.67 identity renewal, declared eight functional controls, retained exact published0.66 capture and explicit reuse of historical algorithm/data qualification. No official cost acceptance or publication is granted by this review.",
+  "executions": [
+    {
+      "attempt": "work-inventory-01",
+      "key": "inventory",
+      "status": "passed",
+      "receipt": {
+        "path": "docs/migration/lot8b-evidence/final-version-067-01/work-inventory-01/receipt.json",
+        "bytes": 2549,
+        "sha256": "bc6d9d7072b928e4a05399f1043896b0644486a3e7b2fd0d9da9ce2329b5dca9"
+      },
+      "plan": {
+        "path": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/final-version-067-01/functional-execution-plan.json",
+        "bytes": 672996,
+        "sha256": "d27d40656905b73270c288db27fd925ff4d00fff4e16c285943739160c448008"
+      },
+      "exitCode": 0,
+      "inputCount": 2886,
+      "inputsUnchanged": true,
+      "childProcessReaped": true,
+      "sourceHeadAtStart": "f0d5799821ba0e2f890176057342675b1614f794",
+      "elapsedSeconds": 2.663174388000016,
+      "durationQualification": "Functional command trace only; not an official performance sample."
+    },
+    {
+      "attempt": "work-candidate-01",
+      "key": "candidate-capture",
+      "status": "passed",
+      "receipt": {
+        "path": "docs/migration/lot8b-evidence/final-version-067-01/work-candidate-01/receipt.json",
+        "bytes": 2946,
+        "sha256": "ad0e31cf5523ccf021e4e679a432e0b630c2c1a4cd148167302475fd39dfd29a"
+      },
+      "plan": {
+        "path": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/final-version-067-01/functional-execution-plan.json",
+        "bytes": 672996,
+        "sha256": "d27d40656905b73270c288db27fd925ff4d00fff4e16c285943739160c448008"
+      },
+      "exitCode": 0,
+      "inputCount": 2886,
+      "inputsUnchanged": true,
+      "childProcessReaped": true,
+      "sourceHeadAtStart": "f0d5799821ba0e2f890176057342675b1614f794",
+      "elapsedSeconds": 41.365488758999845,
+      "durationQualification": "Functional command trace only; not an official performance sample."
+    },
+    {
+      "attempt": "work-qualify-02",
+      "key": "paired-qualify",
+      "status": "passed",
+      "receipt": {
+        "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-02/receipt.json",
+        "bytes": 3638,
+        "sha256": "f14c8ca65e73d48e3d3b9d493a74a93c1bf8f023cba214436c34a5a913b95845"
+      },
+      "plan": {
+        "path": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/final-version-067-01/paired-reader-execution-plan-02.json",
+        "bytes": 672811,
+        "sha256": "240569116ba8831b4a88d09b00b5dd54914bafedc9b8b908a1a0ce7dd58ec9db"
+      },
+      "exitCode": 0,
+      "inputCount": 2896,
+      "inputsUnchanged": true,
+      "childProcessReaped": true,
+      "sourceHeadAtStart": "022cf5daa7adc88cbe1a64c83322b883cb6814cf",
+      "elapsedSeconds": 46.36349077,
+      "durationQualification": "Functional command trace only; not an official performance sample."
+    },
+    {
+      "attempt": "branch-capture-01",
+      "key": "branch-capture",
+      "status": "passed",
+      "receipt": {
+        "path": "docs/migration/lot8b-evidence/final-version-067-01/branch-capture-01/receipt.json",
+        "bytes": 2836,
+        "sha256": "467fe1048692e744b666f56dcb015730870e88316cecd3088985ca72210e2973"
+      },
+      "plan": {
+        "path": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/final-version-067-01/functional-execution-plan.json",
+        "bytes": 672996,
+        "sha256": "d27d40656905b73270c288db27fd925ff4d00fff4e16c285943739160c448008"
+      },
+      "exitCode": 0,
+      "inputCount": 2886,
+      "inputsUnchanged": true,
+      "childProcessReaped": true,
+      "sourceHeadAtStart": "022cf5daa7adc88cbe1a64c83322b883cb6814cf",
+      "elapsedSeconds": 16.017210708999983,
+      "durationQualification": "Functional command trace only; not an official performance sample."
+    },
+    {
+      "attempt": "branch-qualify-01",
+      "key": "branch-qualify",
+      "status": "passed",
+      "receipt": {
+        "path": "docs/migration/lot8b-evidence/final-version-067-01/branch-qualify-01/receipt.json",
+        "bytes": 3025,
+        "sha256": "859a62d9a08305ea77ff80c1c09170c3be57e500261588e409030af2b3fd659a"
+      },
+      "plan": {
+        "path": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/final-version-067-01/functional-execution-plan.json",
+        "bytes": 672996,
+        "sha256": "d27d40656905b73270c288db27fd925ff4d00fff4e16c285943739160c448008"
+      },
+      "exitCode": 0,
+      "inputCount": 2888,
+      "inputsUnchanged": true,
+      "childProcessReaped": true,
+      "sourceHeadAtStart": "022cf5daa7adc88cbe1a64c83322b883cb6814cf",
+      "elapsedSeconds": 9.564582094000116,
+      "durationQualification": "Functional command trace only; not an official performance sample."
+    },
+    {
+      "attempt": "entry-audit-01",
+      "key": "entry-audit",
+      "status": "passed",
+      "receipt": {
+        "path": "docs/migration/lot8b-evidence/final-version-067-01/entry-audit-01/receipt.json",
+        "bytes": 1879,
+        "sha256": "0970f580d1c399a77c986b3c5bb36fd688889cf87abf4acf15faf3db2d36073e"
+      },
+      "plan": {
+        "path": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/final-version-067-01/functional-execution-plan.json",
+        "bytes": 672996,
+        "sha256": "d27d40656905b73270c288db27fd925ff4d00fff4e16c285943739160c448008"
+      },
+      "exitCode": 0,
+      "inputCount": 2886,
+      "inputsUnchanged": true,
+      "childProcessReaped": true,
+      "sourceHeadAtStart": "022cf5daa7adc88cbe1a64c83322b883cb6814cf",
+      "elapsedSeconds": 1.2161551629999394,
+      "durationQualification": "Functional command trace only; not an official performance sample."
+    },
+    {
+      "attempt": "migration-audit-01",
+      "key": "migration-audit",
+      "status": "passed",
+      "receipt": {
+        "path": "docs/migration/lot8b-evidence/final-version-067-01/migration-audit-01/receipt.json",
+        "bytes": 1899,
+        "sha256": "f9305e1df42d3e442210b11f2b899c2d742464bd15400b293f2ca4b47fb298f7"
+      },
+      "plan": {
+        "path": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/final-version-067-01/functional-execution-plan.json",
+        "bytes": 672996,
+        "sha256": "d27d40656905b73270c288db27fd925ff4d00fff4e16c285943739160c448008"
+      },
+      "exitCode": 0,
+      "inputCount": 2886,
+      "inputsUnchanged": true,
+      "childProcessReaped": true,
+      "sourceHeadAtStart": "022cf5daa7adc88cbe1a64c83322b883cb6814cf",
+      "elapsedSeconds": 5.747377687000153,
+      "durationQualification": "Functional command trace only; not an official performance sample."
+    },
+    {
+      "attempt": "build-01",
+      "key": "build",
+      "status": "passed",
+      "receipt": {
+        "path": "docs/migration/lot8b-evidence/final-version-067-01/build-01/receipt.json",
+        "bytes": 1919,
+        "sha256": "f489525b237618f620b15d7c8627830f1ffa27292a040b0097cd351bdd26a732"
+      },
+      "plan": {
+        "path": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/final-version-067-01/functional-execution-plan.json",
+        "bytes": 672996,
+        "sha256": "d27d40656905b73270c288db27fd925ff4d00fff4e16c285943739160c448008"
+      },
+      "exitCode": 0,
+      "inputCount": 2886,
+      "inputsUnchanged": true,
+      "childProcessReaped": true,
+      "sourceHeadAtStart": "022cf5daa7adc88cbe1a64c83322b883cb6814cf",
+      "elapsedSeconds": 12.199557710000136,
+      "durationQualification": "Functional command trace only; not an official performance sample."
+    },
+    {
+      "attempt": "work-qualify-01",
+      "key": "paired-qualify",
+      "status": "failed",
+      "receipt": {
+        "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-01/receipt.json",
+        "bytes": 3346,
+        "sha256": "0d2f68e09bd7ae339b210d070bb7673f9471dac9f67d419bb5b096a169a02251"
+      },
+      "plan": {
+        "path": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout/docs/migration/lot8b-evidence/final-version-067-01/functional-execution-plan.json",
+        "bytes": 672996,
+        "sha256": "d27d40656905b73270c288db27fd925ff4d00fff4e16c285943739160c448008"
+      },
+      "exitCode": 1,
+      "inputCount": 2889,
+      "inputsUnchanged": true,
+      "childProcessReaped": true,
+      "sourceHeadAtStart": "f0d5799821ba0e2f890176057342675b1614f794",
+      "elapsedSeconds": 0.8474154479999925,
+      "durationQualification": "Functional command trace only; not an official performance sample."
+    }
+  ],
+  "passedControlCount": 8,
+  "retainedFailedControlCount": 1,
+  "distinctFrozenInputPathsVerified": 2898,
+  "currentInputsStillMatchCompletedReceipts": true,
+  "pairedForms": {
+    "status": "qualified_functional_work_forms_and_individual_graphs",
+    "newCandidateSessions": 4,
+    "newCandidatePublicReturns": 31,
+    "baselineSessionsReused": 4,
+    "baselinePublicReturnsReused": 31,
+    "checks": 64,
+    "pairedGraphPoints": 58,
+    "ownerCheckpointCorrespondences": 522,
+    "differences": 22312,
+    "differenceClasses": {
+      "attributed_role_source_digest": 21249,
+      "attributed_exact_trace_created_wall_clock": 1055,
+      "attributed_branch_routing_owner_or_reachable_fragment": 8
+    },
+    "unattributedDifferences": 0,
+    "owners": {
+      "baseline": 61,
+      "candidate": 62,
+      "onlyAdded": "branch_routing"
+    },
+    "preservedFamilyPrograms": 28,
+    "forms": [
+      {
+        "case": "STCK",
+        "form": "warmup",
+        "actions": 3,
+        "levelsCompleted": 1,
+        "terminalReason": null
+      },
+      {
+        "case": "STCK",
+        "form": "measured",
+        "actions": 10,
+        "levelsCompleted": 2,
+        "terminalReason": null
+      },
+      {
+        "case": "SMLP",
+        "form": "warmup",
+        "actions": 3,
+        "levelsCompleted": 1,
+        "terminalReason": null
+      },
+      {
+        "case": "SMLP",
+        "form": "measured",
+        "actions": 15,
+        "levelsCompleted": 3,
+        "terminalReason": "target_levels_completed"
+      }
+    ],
+    "selectedMotifAcquisitions": 0,
+    "selectedBranchRoutingAcquisitions": 0,
+    "preparedOnly": true,
+    "officialPerformanceEligible": false,
+    "strictCommonGraphParity": false
+  },
+  "branchRuntime": {
+    "status": "qualified_synthetic_common_work_forms_and_graphs",
+    "counts": {
+      "sessions": 5,
+      "physicalReturns": 26,
+      "completedSourceAcquisitions": 23,
+      "ablatedReturns": 1,
+      "incompleteReturns": 2,
+      "wrapperRecordCalls": 25,
+      "nativeAdapterRecordInvocations": 24,
+      "executedModes": {
+        "calibrate": 17,
+        "move": 6,
+        "propagate": 1,
+        "select": 2
+      },
+      "unexecutedAuthorizedQuestions": 3,
+      "officialSolvedLevels": 0
+    },
+    "graphPoints": 64,
+    "graphDeltas": 3772,
+    "observedRestoreCalls": 51,
+    "calls": {
+      "initialize": 5,
+      "advance": 26,
+      "resume": 23,
+      "inspectKnowledge": 5,
+      "close": 5
+    },
+    "chains": [
+      {
+        "case": "single-positive",
+        "physicalReturns": 6,
+        "sourceAcquisitionsCompleted": 6,
+        "graphPoints": 14,
+        "graphDeltas": 872,
+        "restoreCalls": 12,
+        "unexecutedAuthorizedQuestions": 0
+      },
+      {
+        "case": "triple-prefix",
+        "physicalReturns": 7,
+        "sourceAcquisitionsCompleted": 7,
+        "graphPoints": 16,
+        "graphDeltas": 902,
+        "restoreCalls": 13,
+        "unexecutedAuthorizedQuestions": 1
+      },
+      {
+        "case": "contrary-return",
+        "physicalReturns": 5,
+        "sourceAcquisitionsCompleted": 5,
+        "graphPoints": 13,
+        "graphDeltas": 775,
+        "restoreCalls": 11,
+        "unexecutedAuthorizedQuestions": 1
+      },
+      {
+        "case": "selected-acquisition-ablation",
+        "physicalReturns": 1,
+        "sourceAcquisitionsCompleted": 0,
+        "graphPoints": 5,
+        "graphDeltas": 333,
+        "restoreCalls": 3,
+        "unexecutedAuthorizedQuestions": 1
+      },
+      {
+        "case": "incomplete-prefix",
+        "physicalReturns": 7,
+        "sourceAcquisitionsCompleted": 5,
+        "graphPoints": 16,
+        "graphDeltas": 890,
+        "restoreCalls": 12,
+        "unexecutedAuthorizedQuestions": 0
+      }
+    ],
+    "contribution": {
+      "positiveAndContraryShareFourAcquisitionsAndMoveCommand": true,
+      "contraryChangesMeasuredMotionAndNextQuestion": true,
+      "nextActionNameAloneDoesNotDistinguishCalibrateFromPropagate": true,
+      "ablationSharesFirstCommandAndPublicReturn": true,
+      "ablationLeavesControlUnlearnedAndRepeatsAction1": true,
+      "commonRestoreReadsActuallyPersistedOwner": true,
+      "incompletePrefixRetainsTwoUnacquiredPublicTransitions": true
+    },
+    "capture": {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/branch-capture-01/capture.jsonl.gz",
+      "bytes": 5258703,
+      "sha256": "13f801511bea0f3dc7972bb8b843fc19b7865bf654f47155cc6846d612749c2e"
+    },
+    "graphReview": {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/branch-qualify-01/graph-review.json",
+      "bytes": 60069,
+      "sha256": "96e873da9fd285612f690bd1aa9b6f56a732ad5f2de26605a46e105a66345593"
+    },
+    "workForms": {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/branch-qualify-01/work-forms.json",
+      "bytes": 159878,
+      "sha256": "cf08ae976b038bf0ee503705d4471f588d7324ff26a37e1ea1f56581f65ed3ad"
+    },
+    "publicServiceQualified": false,
+    "publicWorkerQualified": false,
+    "publicTicketsQualified": false,
+    "entryBoundary": "NativeV6Runtime"
+  },
+  "entryAudit": {
+    "connected": 69,
+    "declared": 76,
+    "percent": 90.8,
+    "implementation": "logos-engine.typescript.v6.native-migration/0.67.0",
+    "artifact": {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/entry-audit-01/v6-entry-point-progress.json",
+      "bytes": 19826,
+      "sha256": "f21867972f27651e73d0238e6742503b10352f8e1278d39f15febf40b44e0625"
+    }
+  },
+  "migrationAudit": {
+    "summary": {
+      "pythonModules": 1369,
+      "pythonLines": 320375,
+      "declaredClassesAndFunctions": 12857,
+      "dataFiles": 417,
+      "verifiedModules": 0,
+      "componentVerifiedModules": 215,
+      "partiallyTransferredModules": 147,
+      "transferredUnverifiedModules": 0,
+      "pendingModules": 1007,
+      "strategyFamilies": 16
+    },
+    "completionGates": {
+      "allRequiredCapabilitiesTransferred": false,
+      "fullCommonCallerDifferentialParity": false,
+      "allDeclaredFamiliesIntegrated": false,
+      "commonGraphEditingCoversExecutedPrograms": false,
+      "pythonNumericSemanticsCovered": false,
+      "fullCampaignRegression": false
+    },
+    "failures": [],
+    "artifact": {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/migration-audit-01/v6-coverage.json",
+      "bytes": 2577071,
+      "sha256": "65773bd96ebafb867495d47d1ab008340dcf9386c6d2acef9ac631dcada1c30b"
+    }
+  },
+  "build": {
+    "status": "built_from_frozen_final067_inputs",
+    "manifest": {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/build-manifest.json",
+      "bytes": 14948,
+      "sha256": "39065225503db229e2597ae2aa70822e72e05b93735aac2d6e33d70a07cd6d6b"
+    },
+    "typecheckIncludedAndBuildPassed": true,
+    "filesVerified": 74,
+    "bytesVerified": 30121789,
+    "worker": {
+      "path": "dist/assets/v6-agent-worker-XfSw5eyq.js",
+      "bytes": 7016605,
+      "sha256": "9c114f84e769879507618de08c9872020e8c65d33dc317dfe7ee959b6495a38f",
+      "finalNativeLiteralPresent": true,
+      "previous066LiteralPresent": false,
+      "branchRoutingIdentifierPresent": true
+    },
+    "browserVisualInspectionPerformed": false
+  },
+  "retainedFailures": [
+    {
+      "attempt": "work-qualify-01",
+      "status": "failed",
+      "reason": "Residual streamed preflight equality compared historical A generator to new B generator after successful receipt provenance check.",
+      "checksBeforeFailure": 1,
+      "pairedPointsCompleted": 0,
+      "inputsUnchanged": true,
+      "childReaped": true,
+      "nativeSessionExecutionByReader": 0,
+      "originalReaderPreserved": {
+        "path": "docs/migration/lot8b-evidence/tools/final-functional/work-forms/qualify-cost-owner-graphs.mjs",
+        "bytes": 55737,
+        "sha256": "e53153482728e5eca466564d078a459db07871b06d80120cc05ad825ac572f2d"
+      },
+      "amendment": {
+        "path": "docs/migration/lot8b-evidence/final-version-067-01/paired-reader-amendment.json",
+        "bytes": 2247,
+        "sha256": "009a5f0072bcfcc709555e229b49d780c9b6d22dac90626ac4cd5d92e8f4dcdb"
+      },
+      "newReader": {
+        "path": "docs/migration/lot8b-evidence/tools/final-functional/work-forms/qualify-cost-owner-graphs-v2.mjs",
+        "bytes": 55746,
+        "sha256": "98c635bb4869009babc69c37a2b9d8aa9b43bb8393d2dfaa50a0765d7c67bafb"
+      },
+      "reexecution": "work-qualify-02",
+      "newCapturesNeeded": false
+    },
+    {
+      "attempt": "historical delivery branch-capture-01",
+      "status": "failed_before_native_factory",
+      "factoryCalls": 0,
+      "physicalReturns": 0,
+      "evidence": {
+        "receipt": {
+          "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-01/capture.receipt.json",
+          "bytes": 90621,
+          "sha256": "30b8fe8dc5ca2369981d9e271834913e94f5da1ffc395eb5494993fa732d90a5"
+        },
+        "failureStage": "public_service_validation_before_runtime_factory",
+        "factoryCalls": 0,
+        "physicalReturns": 0,
+        "reason": "The public game frame must be 64 × 64.",
+        "priorArtifactsPreserved": true
+      }
+    }
+  ],
+  "historicalQualificationReuse": {
+    "testsAndSubtests": 524,
+    "testModules": 23,
+    "recordedRegressionCases": 11,
+    "recordedRegressionProjections": 187,
+    "rerun": false,
+    "historicalInputReconciliation": {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/historical-input-reconciliation.json",
+      "bytes": 916069,
+      "sha256": "0ed6fe4aad163b8c307602812dd1c09c4ca015ff87bd418122f5b1b2ef4dbb9d"
+    },
+    "qualification": "Original algorithm/data and comparator proofs retained with the sole declared implementation-literal normalization. Graphs and identities for the final candidate were renewed separately; historical results are not presented as new final executions."
+  },
+  "limits": [
+    "STCK10 form reaches two levels for its target of three; SMLP15 reaches three. These are preserved recorded forms, not new live wins.",
+    "Four common work forms show no selected positive BranchRouting acquisition; positive, contrary, ablated and incomplete behavior belongs to the separate five synthetic native chains.",
+    "Synthetic BranchRouting chains qualify NativeV6Runtime on the unchanged original small rasters; they do not qualify positive public64x64-service behavior, worker transport or service tickets.",
+    "Three final authorized questions remain unexecuted; single-positive finished state is not an official game win.",
+    "No full original common-caller parity, strict cross-version graph equality or global migration gate closure is claimed.",
+    "All functional command durations are traces only. Official complete-session performance remains a separately declared short-exclusive measurement and acceptance step.",
+    "The initial independent static tool review missed the second shared-generator equality. Its actual failure, unchanged inputs and explicit independently reviewed correction are retained; successful execution evidence supersedes static confidence for that path."
+  ],
+  "reviewMethod": "Independent retained-artifact reading, raw difference recount, raw capture record/delta/call recount, chain summary semantic checks, source/receipt/input/output fingerprints, and final build-file verification. No runtime, replay, test, game or oracle execution by this reviewer.",
+  "reviewerExecutionCounts": {
+    "nativeSessions": 0,
+    "testRuns": 0,
+    "gameSessions": 0,
+    "gameReplays": 0,
+    "oracleCalls": 0,
+    "officialPerformanceSamples": 0
+  },
+  "globalLockAcquired": false,
+  "officialPerformanceEligibilityGranted": false,
+  "publicationPerformed": false,
+  "LKEY": "permanently_closed_no_individual_payload_access_no_budget_reset",
+  "reviewedInputs": [
+    {
+      "path": ".openai/hosting.json",
+      "bytes": 106,
+      "sha256": "15296ade4f5629e260fc2d338c4cb64efe4bbf356e4be2158458cf9541791705"
+    },
+    {
+      "path": "/workspace/sites/sra-lot8b-baseline066-20261112/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "bytes": 53583,
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "path": "/workspace/sites/sra-lot8b-baseline066-20261112/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "bytes": 111624,
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    },
+    {
+      "path": "/workspace/sites/sra-lot8b-baseline066-20261112/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "bytes": 48531,
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+    },
+    {
+      "path": "/workspace/sites/sra-lot8b-baseline066-20261112/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "bytes": 46966,
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    },
+    {
+      "path": "/workspace/sites/sra-lot8b-baseline066-20261112/scripts/measure-native-loop-costs.mjs",
+      "bytes": 20670,
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "/workspace/sites/sra-lot8b-baseline066-20261112/src/logos-engine/kernel.ts",
+      "bytes": 23637,
+      "sha256": "1cac40f5f9a3356d31ae0fd5247709eb82c5f6402aae3cb68d8edc54c838f207"
+    },
+    {
+      "path": "/workspace/sites/sra-lot8b-baseline066-20261112/src/logos-engine/v6-knowledge-store.ts",
+      "bytes": 14849,
+      "sha256": "035d41597a5831bfa65bb1f627e3a0d05b84cc44cfda05566359873ef8c5af08"
+    },
+    {
+      "path": "/workspace/sites/sra-lot8b-baseline066-20261112/src/logos-engine/v6-native-runtime.ts",
+      "bytes": 175973,
+      "sha256": "ccf30009dd69f4ca717ea14259cb844884972d3c6ae93c61f2a1702edff5c8c9"
+    },
+    {
+      "path": "dist/arc-agi-3.html",
+      "bytes": 15321,
+      "sha256": "f184bc8b08b03e4de3c3a4e047b4484fa59429104d66a83ea876ac5c8b4ca899"
+    },
+    {
+      "path": "dist/architecture.html",
+      "bytes": 18137,
+      "sha256": "393ec83f9ba8a28fab69d043f72d3870325e2d1cfa053458b23cae4dd0004218"
+    },
+    {
+      "path": "dist/architecture/implementation.html",
+      "bytes": 14811,
+      "sha256": "f2d91888f8a3902b09d5a565d57772c07191f4d3da25f16728012938e5980cb7"
+    },
+    {
+      "path": "dist/architecture/memory.html",
+      "bytes": 11031,
+      "sha256": "bae156612ab97e38e2b3be0a37443d6124ee999b757cd2686a7f3f07a32cfcca"
+    },
+    {
+      "path": "dist/architecture/principle-distillation.html",
+      "bytes": 20167,
+      "sha256": "23dd57e8c8ce66000237c20588c800da91951c384c6fbeadc2d94a6835a42cff"
+    },
+    {
+      "path": "dist/architecture/reasoning-tree.html",
+      "bytes": 22585,
+      "sha256": "d968043fb97ea5f5f5fa12d2dd815aa077297cfa15b44d7a66ea08ef06dafb03"
+    },
+    {
+      "path": "dist/architecture/reasoning.html",
+      "bytes": 14403,
+      "sha256": "3b6c4430c476817f22e623cc23f5c6e4865e8458436bb4444fe8f4f9d269b2db"
+    },
+    {
+      "path": "dist/architecture/representations.html",
+      "bytes": 13465,
+      "sha256": "d47d499aa17ce4c8337a36ea8b1f18501f0b9d81a373dbf496ace1454853134a"
+    },
+    {
+      "path": "dist/architecture/symbolic-choice.html",
+      "bytes": 19545,
+      "sha256": "ee8ad417e9cd6b49d5771914c19363bce5931cc2fe06b210987482e61dbc18fb"
+    },
+    {
+      "path": "dist/assets/bundle-DhSwXDTY.json",
+      "bytes": 422274,
+      "sha256": "809bb77585831cb8a43a6e91c2a2e18eec84e8c3a5a772fddb82596823b1cd3a"
+    },
+    {
+      "path": "dist/assets/common_frontier_policy.drm-Dl1WBFy2.json",
+      "bytes": 48531,
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+    },
+    {
+      "path": "dist/assets/gallery-BNtGCBrK.js",
+      "bytes": 1030,
+      "sha256": "28910bce918066f47fa6a66241c70119626529bbeb5db8bd5f973c228ea887e4"
+    },
+    {
+      "path": "dist/assets/gallery-e3nGcIHv.css",
+      "bytes": 6037,
+      "sha256": "d3ae54b6584210af45bf9f10a56b9611f8194f1494c7cad72d26600dce7a8d70"
+    },
+    {
+      "path": "dist/assets/game-worker-CXlZYTJN.js",
+      "bytes": 1645,
+      "sha256": "7c051735fc05c6e6d31e5d93c6655dec03cec3c011871f154c03cb41729ffe60"
+    },
+    {
+      "path": "dist/assets/index-0l2q35a6.css",
+      "bytes": 8375,
+      "sha256": "5b01cec87a0dc70e6fa0759aceae88b59b2fe4c35a639355f3a80ace4dfe8f73"
+    },
+    {
+      "path": "dist/assets/index-CfGQJusx.js",
+      "bytes": 94180,
+      "sha256": "8de6f718eacb8b773ec956d2e84f0a82092937b6675255ba24b388f7a2ba1e3a"
+    },
+    {
+      "path": "dist/assets/lab-worker-Bg0iqfz3.js",
+      "bytes": 53139,
+      "sha256": "75c6be4332d8146798a20a136a19bc2bfb62cef68f7461576727380f96ca7e68"
+    },
+    {
+      "path": "dist/assets/reading-BtkRf0U9.js",
+      "bytes": 1474,
+      "sha256": "076fdd9b9dd1c922d6624ecf6122119670fc477762a8795720df153a31153f62"
+    },
+    {
+      "path": "dist/assets/reading-n65TbKcd.css",
+      "bytes": 27282,
+      "sha256": "5bf2cc9ce52413a59ce96a866a7c665448f902091a00bed040aedfb124e04eb8"
+    },
+    {
+      "path": "dist/assets/reasoning-lab-CsA8aTU7.css",
+      "bytes": 9117,
+      "sha256": "f0684f34208051cd0c3b826c3c8383a5c84b1c5a093e4c3f466edb1f1928dc7d"
+    },
+    {
+      "path": "dist/assets/reasoning-lab-dAnpUWlY.js",
+      "bytes": 12725,
+      "sha256": "6fde54bcd347a285446fe00aadfb0bab015448a724cb9c9f5539ca1a258bc1f2"
+    },
+    {
+      "path": "dist/assets/site-header-DKl4Usgc.js",
+      "bytes": 2950,
+      "sha256": "6a3e135a2bb810510f4d2c3d364b6f9c46f1330bc6fd5a755d3b44e6d361a502"
+    },
+    {
+      "path": "dist/assets/strategy-g4UuL-Tb.drm",
+      "bytes": 46966,
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    },
+    {
+      "path": "dist/assets/styles-DL3nQckm.css",
+      "bytes": 44114,
+      "sha256": "507718e8da9b7bde5815d81d46d39920dca38292ada6a071dec7c6c6d56e612e"
+    },
+    {
+      "path": "dist/assets/styles-IHo3spd-.js",
+      "bytes": 698,
+      "sha256": "785597bca2e7dd97a652a20a197c077079e635a5663433448e0e1d9fd8c98a64"
+    },
+    {
+      "path": "dist/assets/symbolic-reasoning-CKMVdpW0.js",
+      "bytes": 4022,
+      "sha256": "dd9f55d3cc4c022f7a107c0e6b0fd446e4fcaa760209a96f020d89385202bcc1"
+    },
+    {
+      "path": "dist/assets/symbolic-reasoning-ClXzdkf8.css",
+      "bytes": 3419,
+      "sha256": "8c2587aa54ade772063cf2ab6245e153587cd264c0fc07ca2a4918505a72eb45"
+    },
+    {
+      "path": "dist/assets/v6-agent-worker-XfSw5eyq.js",
+      "bytes": 7016605,
+      "sha256": "9c114f84e769879507618de08c9872020e8c65d33dc317dfe7ee959b6495a38f"
+    },
+    {
+      "path": "dist/assets/v6-knowledge-store-TSVN-Mtp.js",
+      "bytes": 1074951,
+      "sha256": "4a8e05427dca333219304a8663aa17f84c42f8f6b06f2c3b67f5ff3b83fc502b"
+    },
+    {
+      "path": "dist/contact.html",
+      "bytes": 7020,
+      "sha256": "9a11434292094696278847591ccb1364c95dddda0c89df2afb74d52ac655e673"
+    },
+    {
+      "path": "dist/favicon.svg",
+      "bytes": 704,
+      "sha256": "6af0232ec54b0f68a8bb4d3f76520ac6bb3bb4deb1080297e4ec97cb962a4c98"
+    },
+    {
+      "path": "dist/gallery.html",
+      "bytes": 149831,
+      "sha256": "f911f93d2fe135101cb21caccf2f86d18a7bbd01ec430a570d1b2a7e8bc69433"
+    },
+    {
+      "path": "dist/gallery/custom.png",
+      "bytes": 40443,
+      "sha256": "55c26c2e0c1ba517d25bd71e3d7e2b10eb63fb3a305f4bcdea3aacf20ba7ce36"
+    },
+    {
+      "path": "dist/gallery/custom_2.png",
+      "bytes": 43309,
+      "sha256": "761462d1686d3080ff4814d41bf6e6f00471a2a6bcd041717d4193182d96a16e"
+    },
+    {
+      "path": "dist/gallery/custom_3.png",
+      "bytes": 51441,
+      "sha256": "33905823143e957237e4d01d43f63ad79fc4b9a141802dd85bd29869ff372682"
+    },
+    {
+      "path": "dist/gallery/official.png",
+      "bytes": 51788,
+      "sha256": "01136766dd4d43e0c500b486ec2a984db37d757d8e543de4fe321ce3ed41a294"
+    },
+    {
+      "path": "dist/game-mosaic.png",
+      "bytes": 9619,
+      "sha256": "4d7ffcee792622cb066f5e1f9f713010487614a84ead6f82d91907e4c7be86c4"
+    },
+    {
+      "path": "dist/index.html",
+      "bytes": 1048,
+      "sha256": "deac6e39a27a9f9c359505f032a5dafa06201a8c240a886f7e93c48fef802a39"
+    },
+    {
+      "path": "dist/licenses/pyodide-MPL-2.0.txt",
+      "bytes": 16726,
+      "sha256": "393eaf2b92b3d49bea139e39b6fd205b6e99c499999986aec5554586a830dfdd"
+    },
+    {
+      "path": "dist/motivation.html",
+      "bytes": 40983,
+      "sha256": "6d46cb3c71bae00ace98c5e3551ca3499c6b03a3653b992c9cb0224732859ef9"
+    },
+    {
+      "path": "dist/provenance.json",
+      "bytes": 658,
+      "sha256": "11c49ed27cf58c54eda091082b2c449ff83bcfb6973c6cbfe477bda740a3f422"
+    },
+    {
+      "path": "dist/python/custom-games.zip",
+      "bytes": 899593,
+      "sha256": "44d108fe4feed3ce0c9587e90f071876b13730af8136cd54cbfa5c1562d87822"
+    },
+    {
+      "path": "dist/python/custom-manifest.json",
+      "bytes": 178907,
+      "sha256": "24186565f3f17f923df00465ea4a842d6058b13eab5f9109c6b6576617dd6324"
+    },
+    {
+      "path": "dist/python/custom_level_navigation.py",
+      "bytes": 7900,
+      "sha256": "8cc1716619aff08915135ebfa093fc305b211e28fabdff2c027d994d84f82c9b"
+    },
+    {
+      "path": "dist/python/game_bridge.py",
+      "bytes": 13121,
+      "sha256": "cc9df3ea6eae0057898fa01fd949322c6af0b481030f4c271b9a719f0a07983e"
+    },
+    {
+      "path": "dist/python/official-games.zip",
+      "bytes": 304996,
+      "sha256": "90b5aeaee21ec11285799287445b33d3c19f4ea4894a8a60964117f7757f59ed"
+    },
+    {
+      "path": "dist/python/official_adapter.py",
+      "bytes": 9574,
+      "sha256": "efead273b89ffe8cf595e41b9f4b25a6106e6cb6e5a7d1013ebc887cfc646837"
+    },
+    {
+      "path": "dist/reasoning-lab.html",
+      "bytes": 1049,
+      "sha256": "faf0f734c815ddd54e4fd87442d718c66410f13c55a80b94e1e65ef799fa8789"
+    },
+    {
+      "path": "dist/symbolic-reasoning.html",
+      "bytes": 32187,
+      "sha256": "0e85c8abaeaa5a5d847383cec5cd3eb26da35755d90f1ab11edfd13c733e3a6e"
+    },
+    {
+      "path": "dist/vendor/pyodide/annotated_types-0.7.0-py3-none-any.whl",
+      "bytes": 11963,
+      "sha256": "6541523b4b16c1953d2fc9b82fb86c540eea9f78fca329ab371ed13a8b0faa51"
+    },
+    {
+      "path": "dist/vendor/pyodide/numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+      "bytes": 2960568,
+      "sha256": "a292c1f5d7d8a2208cd5e94fc467604c131cabcd2fc14fed6eefde121e7fabdf"
+    },
+    {
+      "path": "dist/vendor/pyodide/package.json",
+      "bytes": 2999,
+      "sha256": "40ca48e43ce4ddc68412d5b7a7ca9e2477cd4f0e672277ae468ac2245717079b"
+    },
+    {
+      "path": "dist/vendor/pyodide/pydantic-2.12.5-py3-none-any.whl",
+      "bytes": 463578,
+      "sha256": "04854875001e07a8a74d87b7c80296cba168773d8c9804e232d695f82484d7d7"
+    },
+    {
+      "path": "dist/vendor/pyodide/pydantic_core-2.41.5-cp314-cp314-pyemscripten_2026_0_wasm32.whl",
+      "bytes": 1310164,
+      "sha256": "54703fa42a0d4d574283cfb8f08050ba7820c9a42b0a21bc1286407d9a9e54da"
+    },
+    {
+      "path": "dist/vendor/pyodide/pyodide-lock.json",
+      "bytes": 119077,
+      "sha256": "5dc2fc119108bc148c7457dc86e7675b5c87e1cafd420b9c34c1eaef7b36c010"
+    },
+    {
+      "path": "dist/vendor/pyodide/pyodide.asm.mjs",
+      "bytes": 1250344,
+      "sha256": "f7cdc8ece80678ceb712f8e65ebe6d3a83203a180c399865f49612a051693635"
+    },
+    {
+      "path": "dist/vendor/pyodide/pyodide.asm.wasm",
+      "bytes": 9598218,
+      "sha256": "cc36e3cab04fdfc9a63ff13eb52eae2b911bf46c025cc7b281f394bd3de1d5e6"
+    },
+    {
+      "path": "dist/vendor/pyodide/pyodide.mjs",
+      "bytes": 17931,
+      "sha256": "6f1d60f7bf529beb300f0f47983c921d3982363640ba20af0e38efdddbc66109"
+    },
+    {
+      "path": "dist/vendor/pyodide/python_stdlib.zip",
+      "bytes": 2545637,
+      "sha256": "fa1957e5777068fc4f7437f96d860ae2fbe9c19732ba06c84e004ec16dd7dd7a"
+    },
+    {
+      "path": "dist/vendor/pyodide/typing_extensions-4.15.0-py3-none-any.whl",
+      "bytes": 44613,
+      "sha256": "4fec68770a05408e668a4fa53d6bf4f0f684b9dacf820c7c5d6e97d3ad225e29"
+    },
+    {
+      "path": "dist/vendor/pyodide/typing_inspection-0.4.2-py3-none-any.whl",
+      "bytes": 14610,
+      "sha256": "deb989630985f7a7296b90357a947a804a7612cecbb6439d6e71128e01f61051"
+    },
+    {
+      "path": "dist/videos.html",
+      "bytes": 8663,
+      "sha256": "b6deca802c9e323306c3247e549400383e63dbc234429ae585f598c412455cd6"
+    },
+    {
+      "path": "dist/videos/01-understandable-intelligence.html",
+      "bytes": 13055,
+      "sha256": "44782a784b3bd3ba23bb25f2a4f3ca678ec9c5213d6bca7670720b82e5e0de66"
+    },
+    {
+      "path": "dist/videos/02-principle-distillation.html",
+      "bytes": 12311,
+      "sha256": "57ad6532c26a1dcd4e14afad1fb888562f1005b9751645b0562b33b44c0ba5dd"
+    },
+    {
+      "path": "dist/videos/03-operational-consciousness.html",
+      "bytes": 12947,
+      "sha256": "e5aafeccada41f000f97f7a7712620e2752c34b0ff3c280357a0a3067aa6c8c0"
+    },
+    {
+      "path": "dist/videos/04-verbalizing-reasoning.html",
+      "bytes": 11133,
+      "sha256": "59a6a45129f237a96208e83549fd283553c2d6d9505deb5f8d2c50b8b03502c8"
+    },
+    {
+      "path": "dist/videos/05-alignment.html",
+      "bytes": 12702,
+      "sha256": "352fff951e4bbf0e95966e1c6d72d22fcf4c98a2194b54f08bfcc49d74f60821"
+    },
+    {
+      "path": "dist/videos/06-primitives-of-reasoning.html",
+      "bytes": 14663,
+      "sha256": "ee09a62676e1b6a8064696da2e0ab484e780a48651360fb2809ec2d5dd53fad2"
+    },
+    {
+      "path": "dist/videos/episode-01.jpg",
+      "bytes": 91838,
+      "sha256": "cfd8654db761b2043c1a4b746b50113c7ed3c81c9e42fdf531836e41f8fb2453"
+    },
+    {
+      "path": "dist/videos/episode-02.jpg",
+      "bytes": 135572,
+      "sha256": "86eb8b4727825b22bcd634433fee5f2f58d0ca98874d40f00b828097cb2724ea"
+    },
+    {
+      "path": "dist/videos/episode-03.jpg",
+      "bytes": 136431,
+      "sha256": "c93bba8a9c5706a1972fef3748d5f73c3949cf8c3a47ac921e3b82f60c19cf4d"
+    },
+    {
+      "path": "dist/videos/episode-04.jpg",
+      "bytes": 121426,
+      "sha256": "2be40bbc9cce439d7133419ac588d45a6dfb1305354d60eb2a76aa1629da20a4"
+    },
+    {
+      "path": "dist/videos/episode-05.jpg",
+      "bytes": 175688,
+      "sha256": "7e5536baa75c8c7d7d9f8faf0ef31ac9f9efa23efebf4de68c1c2ae5b5310935"
+    },
+    {
+      "path": "dist/videos/episode-06.jpg",
+      "bytes": 145762,
+      "sha256": "e59350247899c1e62d7dfdb246788a0754d9600d3ce682597ad262818b8c92c1"
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/tools/work-forms/capture-cost-owner-graphs.mjs",
+      "bytes": 29563,
+      "sha256": "fa7c225349ad2652ff0b45cd53b7f8de7ac94d4131363e5f3c1568340d0a600f"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/baseline-native.json",
+      "bytes": 39098,
+      "sha256": "6926e8abdcf9232e4e6d06ad4b60d59e4a8fa473b56a627dc17b7f8ac18d2ac7"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-01/capture.receipt.json",
+      "bytes": 90621,
+      "sha256": "30b8fe8dc5ca2369981d9e271834913e94f5da1ffc395eb5494993fa732d90a5"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-baseline-01/baseline.json.gz",
+      "bytes": 7212928,
+      "sha256": "384a5f5bb3e00174e8113e35387132284e90a6d5a1af5303ecfe9ed0db3df893"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-baseline-01/baseline.receipt.json",
+      "bytes": 127765,
+      "sha256": "5aebb7ab6f603f305b28bb3ffd262fc4103f433ea4ac7b0e0db051d75036d084"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/baseline-native.json",
+      "bytes": 39098,
+      "sha256": "6926e8abdcf9232e4e6d06ad4b60d59e4a8fa473b56a627dc17b7f8ac18d2ac7"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/branch-capture-01/capture.jsonl.gz",
+      "bytes": 5258703,
+      "sha256": "13f801511bea0f3dc7972bb8b843fc19b7865bf654f47155cc6846d612749c2e"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/branch-capture-01/capture.receipt.json",
+      "bytes": 130162,
+      "sha256": "deeeb205cc06f2a2115dc614e143bd0c11f47a327d9a7316cc2155805153b6f2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/branch-capture-01/declaration.json",
+      "bytes": 1762,
+      "sha256": "5a8e8f2627748da0e9b65574eed914f3488ddf9ec0ab3ec1cdc77175192fb60b"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/branch-capture-01/inputs-after.json",
+      "bytes": 660182,
+      "sha256": "3fa0dd9061e8d12d97434f408ac2e0447e60cb0e84e91e68f3dcea073aef85a2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/branch-capture-01/inputs-before.json",
+      "bytes": 660182,
+      "sha256": "3fa0dd9061e8d12d97434f408ac2e0447e60cb0e84e91e68f3dcea073aef85a2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/branch-capture-01/output.log.gz",
+      "bytes": 254,
+      "sha256": "1103ee37df119ee0433e5436671a01ba05540faa59e3bbf11d696b3733aa9318"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/branch-capture-01/receipt.json",
+      "bytes": 2836,
+      "sha256": "467fe1048692e744b666f56dcb015730870e88316cecd3088985ca72210e2973"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/branch-qualify-01/declaration.json",
+      "bytes": 1958,
+      "sha256": "23a973b195abe9d9ada4f2117ee2a3ef669ddd26ad20bdd7f68a4bb40cd3c7b0"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/branch-qualify-01/graph-review.json",
+      "bytes": 60069,
+      "sha256": "96e873da9fd285612f690bd1aa9b6f56a732ad5f2de26605a46e105a66345593"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/branch-qualify-01/inputs-after.json",
+      "bytes": 660638,
+      "sha256": "b2999a6caf4b4d58d66c62448d2f2b372b9a4d3ecaac5afa21b839946c246e2f"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/branch-qualify-01/inputs-before.json",
+      "bytes": 660638,
+      "sha256": "b2999a6caf4b4d58d66c62448d2f2b372b9a4d3ecaac5afa21b839946c246e2f"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/branch-qualify-01/output.log.gz",
+      "bytes": 359,
+      "sha256": "f6680aa2891d90c619f701488a049fe4f55d58593ec4c6c65ee1ab20d2e5d926"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/branch-qualify-01/receipt.json",
+      "bytes": 3025,
+      "sha256": "859a62d9a08305ea77ff80c1c09170c3be57e500261588e409030af2b3fd659a"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/branch-qualify-01/work-forms.json",
+      "bytes": 159878,
+      "sha256": "cf08ae976b038bf0ee503705d4471f588d7324ff26a37e1ea1f56581f65ed3ad"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/build-01/declaration.json",
+      "bytes": 1438,
+      "sha256": "4ec1c695a53ebb80b35aee1c0cba77014db9d06ef8317bf612bcefe0d52e629c"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/build-01/inputs-after.json",
+      "bytes": 660182,
+      "sha256": "3fa0dd9061e8d12d97434f408ac2e0447e60cb0e84e91e68f3dcea073aef85a2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/build-01/inputs-before.json",
+      "bytes": 660182,
+      "sha256": "3fa0dd9061e8d12d97434f408ac2e0447e60cb0e84e91e68f3dcea073aef85a2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/build-01/output.log.gz",
+      "bytes": 1593,
+      "sha256": "4dea708ca65224273bf9dc4f9a656029082e60e101d6940f621cfa17ad82c4b8"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/build-01/receipt.json",
+      "bytes": 1919,
+      "sha256": "f489525b237618f620b15d7c8627830f1ffa27292a040b0097cd351bdd26a732"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/build-manifest.json",
+      "bytes": 14948,
+      "sha256": "39065225503db229e2597ae2aa70822e72e05b93735aac2d6e33d70a07cd6d6b"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/candidate-native.json",
+      "bytes": 39333,
+      "sha256": "18fcc15c6e57f1bf6aab33cc62498e6a5a76836d85b890378be957a0e6da1c57"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/entry-audit-01/declaration.json",
+      "bytes": 1393,
+      "sha256": "aa15280134e61286f2ec685a492dc54cdd3aa48a20833283c7e47f5cb5038fa7"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/entry-audit-01/inputs-after.json",
+      "bytes": 660182,
+      "sha256": "3fa0dd9061e8d12d97434f408ac2e0447e60cb0e84e91e68f3dcea073aef85a2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/entry-audit-01/inputs-before.json",
+      "bytes": 660182,
+      "sha256": "3fa0dd9061e8d12d97434f408ac2e0447e60cb0e84e91e68f3dcea073aef85a2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/entry-audit-01/output.log.gz",
+      "bytes": 180,
+      "sha256": "a9ef7580e0fcd3ce03503e1f8628c4fc5248a4c194b28a72fb7dc9e078f49d9e"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/entry-audit-01/receipt.json",
+      "bytes": 1879,
+      "sha256": "0970f580d1c399a77c986b3c5bb36fd688889cf87abf4acf15faf3db2d36073e"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/entry-audit-01/v6-entry-point-progress.json",
+      "bytes": 19826,
+      "sha256": "f21867972f27651e73d0238e6742503b10352f8e1278d39f15febf40b44e0625"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/functional-execution-plan.json",
+      "bytes": 672996,
+      "sha256": "d27d40656905b73270c288db27fd925ff4d00fff4e16c285943739160c448008"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/functional-tools-independent-review.json",
+      "bytes": 13660,
+      "sha256": "8be238b888e42672223bc0b14fa155b9c01287c11d40da1bdaabb3778b1d268f"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/historical-input-reconciliation.json",
+      "bytes": 916069,
+      "sha256": "0ed6fe4aad163b8c307602812dd1c09c4ca015ff87bd418122f5b1b2ef4dbb9d"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/migration-audit-01/declaration.json",
+      "bytes": 1410,
+      "sha256": "c609842d7c28389c9ae1d6c5c1ea134006c9600ea876d7e7614fad6e5db5f41c"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/migration-audit-01/inputs-after.json",
+      "bytes": 660182,
+      "sha256": "3fa0dd9061e8d12d97434f408ac2e0447e60cb0e84e91e68f3dcea073aef85a2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/migration-audit-01/inputs-before.json",
+      "bytes": 660182,
+      "sha256": "3fa0dd9061e8d12d97434f408ac2e0447e60cb0e84e91e68f3dcea073aef85a2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/migration-audit-01/output.log.gz",
+      "bytes": 205,
+      "sha256": "1c62c9f17c52806dffb06007d174950019b9ca47a0ce6499be6824b9613145bb"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/migration-audit-01/receipt.json",
+      "bytes": 1899,
+      "sha256": "f9305e1df42d3e442210b11f2b899c2d742464bd15400b293f2ca4b47fb298f7"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/migration-audit-01/v6-coverage.json",
+      "bytes": 2577071,
+      "sha256": "65773bd96ebafb867495d47d1ab008340dcf9386c6d2acef9ac631dcada1c30b"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/paired-reader-amendment-independent-review.json",
+      "bytes": 4180,
+      "sha256": "96835f1b18b77c4d7d63a8f60624031318628f0acecb2998e1da6397bd63622e"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/paired-reader-amendment.json",
+      "bytes": 2247,
+      "sha256": "009a5f0072bcfcc709555e229b49d780c9b6d22dac90626ac4cd5d92e8f4dcdb"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/paired-reader-execution-plan-02.json",
+      "bytes": 672811,
+      "sha256": "240569116ba8831b4a88d09b00b5dd54914bafedc9b8b908a1a0ce7dd58ec9db"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/paired-reader-v2.diff",
+      "bytes": 1774,
+      "sha256": "5e384ce550e6018b15768726cfd3d9735777cdb68906220bf186db0bc5a18302"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-candidate-01/candidate.json.gz",
+      "bytes": 7261661,
+      "sha256": "3e136eb46b890067306201f4cfa1052eab7e7b1c6bc8db9c56a10bdb173d838c"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-candidate-01/candidate.receipt.json",
+      "bytes": 127538,
+      "sha256": "7baa0809d9c0e82f66e5b2fb2183de5b955aff9a181e6e05bfeec0c9aa5d1ea4"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-candidate-01/declaration.json",
+      "bytes": 1869,
+      "sha256": "a676af635ea259ef3aa8509dbb2107a262f9916868398c7103369a53dfb1d7af"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-candidate-01/inputs-after.json",
+      "bytes": 660182,
+      "sha256": "3fa0dd9061e8d12d97434f408ac2e0447e60cb0e84e91e68f3dcea073aef85a2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-candidate-01/inputs-before.json",
+      "bytes": 660182,
+      "sha256": "3fa0dd9061e8d12d97434f408ac2e0447e60cb0e84e91e68f3dcea073aef85a2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-candidate-01/output.log.gz",
+      "bytes": 226,
+      "sha256": "1932af41d336cfcfed7af21ae776687a84cb1368549b8906b673d4f5dc9f9a56"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-candidate-01/receipt.json",
+      "bytes": 2946,
+      "sha256": "ad0e31cf5523ccf021e4e679a432e0b630c2c1a4cd148167302475fd39dfd29a"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-inventory-01/declaration.json",
+      "bytes": 1759,
+      "sha256": "8fa4e878440ce0def0ecc20d749bc6dfd3821b07bb05a4b63d2d27d1e924da78"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-inventory-01/inputs-after.json",
+      "bytes": 660182,
+      "sha256": "3fa0dd9061e8d12d97434f408ac2e0447e60cb0e84e91e68f3dcea073aef85a2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-inventory-01/inputs-before.json",
+      "bytes": 660182,
+      "sha256": "3fa0dd9061e8d12d97434f408ac2e0447e60cb0e84e91e68f3dcea073aef85a2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-inventory-01/output.log.gz",
+      "bytes": 349,
+      "sha256": "922e0fc9ac4e38b8b2d81e300e4363d1d820e9ab15fc372af9ef4596a56d850d"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-inventory-01/owner-source-inventory.json",
+      "bytes": 130694,
+      "sha256": "36e8d72ac6ccd8ec2385b1263e3dda9aa85e88d71e595f476dd5011f479795e9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-inventory-01/receipt.json",
+      "bytes": 2549,
+      "sha256": "bc6d9d7072b928e4a05399f1043896b0644486a3e7b2fd0d9da9ce2329b5dca9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-01/declaration.json",
+      "bytes": 2270,
+      "sha256": "7b5a91203ec9a5cb5c6a05d97314af7964fdcc32a09c65d2f640c6dbcd9b9a79"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-01/graph-review.differences.jsonl.gz",
+      "bytes": 20,
+      "sha256": "59869db34853933b239f1e2219cf7d431da006aa919635478511fabbfc8849d2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-01/graph-review.json",
+      "bytes": 16497,
+      "sha256": "58a0d11fd298689f1ce896ac44ded1e6a7923b9cf406ee3bca30b0914adc0a7e"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-01/inputs-after.json",
+      "bytes": 660878,
+      "sha256": "e1c7772ac8e9fc9af558999655269c351d63d382b77462baf70e61c47964c874"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-01/inputs-before.json",
+      "bytes": 660878,
+      "sha256": "e1c7772ac8e9fc9af558999655269c351d63d382b77462baf70e61c47964c874"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-01/output.log.gz",
+      "bytes": 458,
+      "sha256": "4ecfb06a433022340a6a9143573a2d3881d6f96f44ea3201a17d02f5a3c2c60d"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-01/receipt.json",
+      "bytes": 3346,
+      "sha256": "0d2f68e09bd7ae339b210d070bb7673f9471dac9f67d419bb5b096a169a02251"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-02/declaration.json",
+      "bytes": 2279,
+      "sha256": "51dce0f4465e55b5b9f05d9d16224d44ac404a8171e5d5c95d1ab7c79bd2e9eb"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-02/graph-review.differences.jsonl.gz",
+      "bytes": 723555,
+      "sha256": "713cdea50ebb9ef20fedde5660bf4485b6a1e1ba55c033bd0c08e7fd4e094ae9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-02/graph-review.json",
+      "bytes": 316284,
+      "sha256": "2ce3d78213d7fe4212c7396b00b1dd2444497c8186641d4cc43fac94ddcc884f"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-02/inputs-after.json",
+      "bytes": 662460,
+      "sha256": "f60a09ba216d2ccf1347010838429de10d25ec686e7e52a56c62836943d3ba66"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-02/inputs-before.json",
+      "bytes": 662460,
+      "sha256": "f60a09ba216d2ccf1347010838429de10d25ec686e7e52a56c62836943d3ba66"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-02/output.log.gz",
+      "bytes": 212,
+      "sha256": "1b7922466169098beedbe348f94a229b3bb58d0991abd4d74906570f260be17d"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-02/receipt.json",
+      "bytes": 3638,
+      "sha256": "f14c8ca65e73d48e3d3b9d493a74a93c1bf8f023cba214436c34a5a913b95845"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-02/work-forms.json",
+      "bytes": 62525,
+      "sha256": "27602bf28ed8bf7d29049d01edb9a0dad41a570142ca8ec7b2dcd5ef99918925"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/delivery/branch-common-capture-v2.mjs",
+      "bytes": 32210,
+      "sha256": "98c4a0af05e929807723669baefd27bc5b7ae30acb60e07c84625a8b420e4eb5"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/delivery/branch-common-qualify-v2.mjs",
+      "bytes": 58745,
+      "sha256": "dce80476cad9bcb0db4e838f944692565ae652ed1b7874a6abb153dc9893a457"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/delivery/run-functional-command.py",
+      "bytes": 7291,
+      "sha256": "7d1c35fb1a9fe30f1eb0be80f4c60a0f547f6257dd24ac68e88f0ade0a2514f9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/delivery/work-forms/capture-cost-owner-graphs.mjs",
+      "bytes": 31412,
+      "sha256": "def20965d488ff15cf225961f407853b29cee0eb22e9119cfe9f1611dcc73a3a"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/delivery/work-forms/cases.json",
+      "bytes": 1498,
+      "sha256": "65e27dbcc2f5871ab259358cc46576b2671058630be0b37c643eadad66593173"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/delivery/work-forms/record-owner-source-inventory.mjs",
+      "bytes": 15250,
+      "sha256": "073cec941143449697c06d979c07675d177d53fafd0d7d82abfeb6c446c41eb9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-functional/branch-common-capture-v2.mjs",
+      "bytes": 32919,
+      "sha256": "2005fd55c998dea8409dc72b462031a605bd673a04727c513b7f0826e6d43120"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-functional/branch-common-qualify-v2.mjs",
+      "bytes": 59211,
+      "sha256": "c896643777572d4628fbeab0c9819fd22fe0f02111008c5958204a632b4b428b"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-functional/run-functional-command.py",
+      "bytes": 7698,
+      "sha256": "a49a62551f757750a9598b2ea3a36d0c214ded79f150e3c65bddc74a83103fe9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-functional/work-forms/capture-cost-owner-graphs.mjs",
+      "bytes": 31537,
+      "sha256": "9323017b311100aea4a6be6baf9400ca245ee729291253c2181de67e4680b417"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-functional/work-forms/qualify-cost-owner-graphs-v2.mjs",
+      "bytes": 55746,
+      "sha256": "98c635bb4869009babc69c37a2b9d8aa9b43bb8393d2dfaa50a0765d7c67bafb"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-functional/work-forms/qualify-cost-owner-graphs.mjs",
+      "bytes": 55737,
+      "sha256": "e53153482728e5eca466564d078a459db07871b06d80120cc05ad825ac572f2d"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-functional/work-forms/record-owner-source-inventory.mjs",
+      "bytes": 15277,
+      "sha256": "af762f71256ce372a3b760f32b3c1687d700e6b1378012e0a1517fe61d1bedc2"
+    },
+    {
+      "path": "docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "bytes": 53583,
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "path": "docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "bytes": 111624,
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/manifest.json",
+      "bytes": 424024,
+      "sha256": "491eb3b737bbb490a1b7c212f5b1e75f5a8f84b2124b95d9dd54a0d09eca85d6"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_branch_routing.py",
+      "bytes": 12911,
+      "sha256": "b3f6a743e1ebdbf040a06a9c0d42b822c08ec28dff43cd2eb013ef41d0f27567"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "bytes": 48531,
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_multiscale_constraints.py",
+      "bytes": 16566,
+      "sha256": "01da7c7f636ed2039a364188c7f4fedb2c4c0a0e8bb6b2ba7f22b1c259eaaf12"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/composition_target_tree.json",
+      "bytes": 5341,
+      "sha256": "2a1e4f20eccb89ba2eca9f2b6cfe0e33528c283251453853f0a8a80b43d96635"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/geometric_observer.py",
+      "bytes": 9562,
+      "sha256": "1017b130cb91f799ab5bdb2f26789c2645078d9b9d226469b3915d4a7262eaac"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "bytes": 46966,
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    },
+    {
+      "path": "scripts/export-v6-branch-routing-reference.py",
+      "bytes": 26287,
+      "sha256": "7def846785568c7afad5786437c2ad2f2dce82e5348a37be569a38e8f6c7ef89"
+    },
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "bytes": 20670,
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "src/logos-engine/canonical.ts",
+      "bytes": 11291,
+      "sha256": "5c2884287aed82d97e7a85c905db5fb800a7e58a523c3ba128a1b61db5069cc1"
+    },
+    {
+      "path": "src/logos-engine/kernel.ts",
+      "bytes": 23637,
+      "sha256": "1cac40f5f9a3356d31ae0fd5247709eb82c5f6402aae3cb68d8edc54c838f207"
+    },
+    {
+      "path": "src/logos-engine/v6-branch-routing-geometry.ts",
+      "bytes": 16046,
+      "sha256": "dd1e5a472ca8f417651bb4178c27fc522816de767619495da8de09f7cfc6b522"
+    },
+    {
+      "path": "src/logos-engine/v6-branch-routing.ts",
+      "bytes": 26244,
+      "sha256": "2b9bd172c977b1590d5293b4bca69510ad2e8190dd973df7872050f1367d15ca"
+    },
+    {
+      "path": "src/logos-engine/v6-hash.ts",
+      "bytes": 2842,
+      "sha256": "6b86db7b533d55da900a3c65a06ec1e18547180245b3e3a2eaa837be09c669f5"
+    },
+    {
+      "path": "src/logos-engine/v6-knowledge-store.ts",
+      "bytes": 14849,
+      "sha256": "035d41597a5831bfa65bb1f627e3a0d05b84cc44cfda05566359873ef8c5af08"
+    },
+    {
+      "path": "src/logos-engine/v6-motif-access-geometry.ts",
+      "bytes": 15261,
+      "sha256": "36d5e1d51a1ebef5c82dea7951c18fe115af2067624447d39e37100c4a9de9b3"
+    },
+    {
+      "path": "src/logos-engine/v6-motif-access.ts",
+      "bytes": 32665,
+      "sha256": "2302d521959133b39560792d01ae4c2403a3b4b4a333ae10e089359a403394e0"
+    },
+    {
+      "path": "src/logos-engine/v6-native-authority.ts",
+      "bytes": 23736,
+      "sha256": "f5a54ecac86fb097ee739dc6e4f8b4729819d58c9992fee92188527a1544b3ff"
+    },
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "bytes": 180119,
+      "sha256": "e68adc608d73ac8d19e41a01cb7f9834a014b17f7f71b26480a14c36b4025446"
+    },
+    {
+      "path": "src/logos-engine/v6-native-state-graph.ts",
+      "bytes": 21947,
+      "sha256": "b739db6d6066a06f4175b4377f0d0ae1f351b708e5d27fbdb99c9de7e6ed0b4d"
+    },
+    {
+      "path": "src/logos-engine/v6-observed-binding.ts",
+      "bytes": 22934,
+      "sha256": "f7ed39d3215339e0facc33db3ab2ed81e6fe7afaf049f8ab148dadff590f5e73"
+    },
+    {
+      "path": "src/logos-engine/v6-ordered-recruitment-geometry.ts",
+      "bytes": 18812,
+      "sha256": "9a0a9f098cd1f0aaeab1dde7fae7764318bb346e3e607f3cac67c61ef3b7ba63"
+    },
+    {
+      "path": "src/logos-engine/v6-ordered-recruitment-policy.ts",
+      "bytes": 4059,
+      "sha256": "c75af5d348b10c79dad67a8b8c2d9e26e46556687417f2695878d507f6f1037e"
+    },
+    {
+      "path": "src/logos-engine/v6-ordered-recruitment-projection.ts",
+      "bytes": 12451,
+      "sha256": "1c6bbdb22d131b5bf23d77b0d5e1f12c1f819a146d16496a3dd598d376d9efef"
+    },
+    {
+      "path": "src/logos-engine/v6-ordered-recruitment.ts",
+      "bytes": 25007,
+      "sha256": "045ba6a18532b230568af4f12ba377e8b25a9bde31a69553e06277a0c9400b58"
+    },
+    {
+      "path": "src/logos-engine/v6-reasoning-memory.ts",
+      "bytes": 12962,
+      "sha256": "b55c186c99636f28c9e6e9c657b9bb50892eac06a3306be197503188069d901a"
+    },
+    {
+      "path": "src/logos-engine/v6-selected-rigid.ts",
+      "bytes": 29799,
+      "sha256": "767556eac7484145e40a00c191004de266aa2b952f12518e720f00a5925b1751"
+    },
+    {
+      "path": "src/logos-engine/v6-src-program.ts",
+      "bytes": 5903,
+      "sha256": "d41717575e252784a81519e8c7853853af3c2d7372b86ecb7efb3655c3e3df77"
+    },
+    {
+      "path": "src/logos-engine/v6/programs.json",
+      "bytes": 1502394,
+      "sha256": "e006723f49460276a0753c1977ab0eabb30775409b37ba7d7af8b0b8b8527834"
+    },
+    {
+      "path": "src/runtime/v6-agent-service.ts",
+      "bytes": 18195,
+      "sha256": "02ce41d5e014fcc06f85371f552f949b9dfce56093afae4bc0fcb7aad2f60d96"
+    },
+    {
+      "path": "tests/fixtures/v6-branch-routing-reference.json",
+      "bytes": 542660,
+      "sha256": "e6ae197b7b982bd41f561b9df8e458436d7ce0797f39bbf86d972e55472b6769"
+    },
+    {
+      "path": "tests/v6-branch-routing-kernel.test.ts",
+      "bytes": 29235,
+      "sha256": "e64632ee71195f528a8f19dbec4d0cc25695925fdae5de3865a9092ff8537fea"
+    }
+  ]
+}

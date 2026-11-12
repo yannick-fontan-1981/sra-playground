@@ -1,8 +1,36 @@
 # Feuille de route V5/V6 vers Logos Engine TypeScript
 
+<!-- LOT8B_FINAL067_START -->
+
+## Lot 8B : version finale 0.67 qualifiée avant mesure officielle
+
+Le [gel final 0.67](lot8b-evidence/final-version-067-01/README.md) et sa [synthèse](lot8b-evidence/final-version-067-01/validation-summary.json) conservent **331 fichiers natifs**, digest `c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a`. Le seul changement de production depuis le candidat qualifié est le numéro de version ; les 330 autres fichiers sont identiques. La version 0.67.0 est réservée pour 8B et doit encore être revérifiée lors de la publication. Le publié constaté reste **Site 107 / native 0.66.0**, source `4ff7bf45286a8a19d34401988adca587253ae41e`, à 68/76.
+
+Les graphes ont été renouvelés sous l'identité finale : **64 contrôles appariés sur 58 points, 22 312 différences attribuées et zéro inexpliquée**, puis **cinq chaînes BranchRouting, 26 retours et 23 acquisitions**, avec une ablation et deux incomplets conservés. La première lecture appariée arrêtée sur la provenance du générateur reste conservée ; la correction déclarée ne change aucune capture ni aucun contrôle sémantique. Les audits et le build final, comprenant TypeScript, passent. Les **524 tests / 23 modules** et **11 cas / 187 projections** sont réconciliés comme preuves historiques, sans nouvelle exécution attribuée.
+
+### Feuille de route courante
+
+| Étape | État | Suite |
+| --- | --- | --- |
+| 8A / 0.65 et 10C / 0.66 | Publiés dans Sites 106 et 107 ; réserves de coût historiques conservées | Ne pas les présenter comme des coûts acceptés. |
+| **8B : composant, raccordement et livraison fonctionnelle** | **Acquis dans le périmètre déclaré** | Conserver preuves, cas contraires et limites. |
+| **8B : version finale et gel** | **0.67.0 réservée ; identité finale renouvelée et build qualifié** | Utiliser exactement le gel 331/c234bb40. |
+| **8B : coût officiel** | **Prochaine étape, non encore mesuré** | Déclarer le contrat final, puis une fenêtre ABBA sous exclusivité courte contre le vrai 0.66. |
+| **8B : publication** | Non effectuée | Après qualification, vérifier la publication réelle et publier la source exacte sous bail court. |
+| 6C / 6D | `observed_rigid_cargo`, `shared_settlement` restent ouverts au registre intégré | Poursuivre leurs branches et qualifications propres. |
+| Lot 9 | `chart_navigation`, `region_intervention`, `joint_channels` restent ouverts | Poursuivre les transferts ; `discrete_network` reste hors compteur 76. |
+| 10D / 10E | `temporal_selection`, `invited_endpoints` restent ouverts au registre intégré | Poursuivre leurs qualifications et intégrations propres. |
+| Lot 11 | Six portes globales encore fausses | Parité complète, graphes, restauration, sessions longues, coût et lisibilité. |
+
+Le candidat est à **69/76 entrées (90,8 %), dont 26/33 matérielles** ; sept entrées restent ouvertes. Les formes STCK10 atteignent deux niveaux pour une cible de trois, SMLP15 trois. La preuve positive BranchRouting porte sur `NativeV6Runtime` ; elle ne qualifie pas la façade publique 64 × 64 ni le worker. Aucun nouveau succès de jeu n'est compté.
+
+**Coût : augmentation de la médiane de session complète strictement inférieure à +10 % pour chaque jeu, STCK et SMLP.** Un dépassement de phase est acceptable si les deux globaux passent ; aucun échantillon mesuré n'est écarté et aucune compensation entre jeux n'est admise. Le travail courant continue sans verrou global ni attente de disponibilité. L'exclusivité est limitée aux mesures officielles et à la publication, avec libération propre sans suppression du verrou détenu. **LKEY reste fermé.** Les sections suivantes conservent les jalons antérieurs.
+
+<!-- LOT8B_FINAL067_END -->
+
 <!-- LOT8B_DELIVERY_QUALIFICATION_START -->
 
-## Lot 8B : qualification fonctionnelle de livraison acquise
+## Jalon antérieur 8B : qualification fonctionnelle de livraison acquise
 
 **Les trois volets déclarés sont acquis : formes communes, régressions enregistrées et contribution BranchRouting dans le runtime commun.** Le [bilan de livraison](lot8b-evidence/delivery-qualification-01/README.md) et la [synthèse vérifiable](lot8b-evidence/delivery-qualification-01/validation-summary.json) conservent séparément **64 contrôles sur 58 points appariés**, 22 312 différences toutes attribuées, **11/11 cas et 187/187 projections historiques inchangées**, puis **5 chaînes / 26 retours / 23 acquisitions source réussies**. Le retour ablaté et les deux retours incomplets restent distincts des acquisitions. Le lecteur des chaînes vérifie 64 points, 3 772 deltas et 51 appels réels de restauration. La tentative initiale refusée par la façade 64 × 64, avant toute factory et tout retour, est conservée ; les nouveaux outils utilisent la vraie API native et les rasters originaux inchangés.
 

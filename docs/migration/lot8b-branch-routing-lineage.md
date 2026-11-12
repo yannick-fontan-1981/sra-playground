@@ -1,5 +1,11 @@
 # Lot 8B : filiation de BranchRouting
 
+<!-- LOT8B_FINAL067_STATUS_START -->
+
+**Jalon final 0.67 :** le numéro distinct est réservé et les graphes sensibles à l'identité sont renouvelés, avec audits et build final acquis. Les [preuves de version finale](lot8b-evidence/final-version-067-01/README.md) réconcilient explicitement les résultats historiques ; le seul changement de production est le littéral 0.66.0 vers 0.67.0. Le candidat compte 69/76 entrées. À ce jalon, le coût officiel et la publication restent les prochaines étapes ; le publié constaté demeure Site 107 / native 0.66. Les paragraphes suivants conservent leurs états historiques.
+
+<!-- LOT8B_FINAL067_STATUS_END -->
+
 ## Sources et base de travail
 
 Le transfert vise la capacité générique `parallel_branch_routing` du V6 épinglé **`786dcf51ca57773d8e3a8948ce9ea3655e7baf8e`**. Le propriétaire original est `BranchRouting`, créé comme `strategy_router.branches`. Le [contrat de transfert](lot8b-branch-routing.md) décrit les décisions, les gardes, l’état et les adaptations natives de calcul borné.

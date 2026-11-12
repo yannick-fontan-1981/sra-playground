@@ -1,0 +1,297 @@
+{
+  "schema": "logos-engine.lot8b.final-version-functional-summary.v1",
+  "recordedAt": "2026-11-12T12:25:33.725813+00:00",
+  "status": "final_version067_functionally_qualified_in_declared_scope",
+  "sourceFreezeCommit": "0f45ad517b9df98563bc03b79ee73dd3be10e362",
+  "functionalPlanCommit": "f0d5799821ba0e2f890176057342675b1614f794",
+  "readerAmendmentCommit": "022cf5daa7adc88cbe1a64c83322b883cb6814cf",
+  "ownCheckout": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+  "ownBranch": "lot8b-branch-routing-20261112",
+  "checkpointBranch": "lot8b-branch-routing-checkpoint-20261112",
+  "publishedBaseline": {
+    "siteVersion": 107,
+    "nativeVersion": "0.66.0",
+    "sourceCommit": "4ff7bf45286a8a19d34401988adca587253ae41e",
+    "observation": {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/publication-observation.json",
+      "bytes": 809,
+      "sha256": "d4230e8d55c30fd6e3d6504276590ba34237a3a5fc04171abddeb3e0b95b3a39"
+    }
+  },
+  "candidate": {
+    "nativeVersion": "0.67.0",
+    "nativeFiles": 331,
+    "nativeDigest": "c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a",
+    "registeredEntries": 69,
+    "entryDenominator": 76,
+    "materialEntries": 26,
+    "materialDenominator": 33,
+    "remainingEntries": [
+      "observed_rigid_cargo",
+      "chart_navigation",
+      "region_intervention",
+      "temporal_selection",
+      "invited_endpoints",
+      "joint_channels",
+      "shared_settlement"
+    ],
+    "reserved": true,
+    "published": false
+  },
+  "sourceReconciliation": {
+    "path": "docs/migration/lot8b-evidence/final-version-067-01/source-reconciliation.json",
+    "bytes": 2169,
+    "sha256": "efb4b9f11a768ed0ca6a8a8b77ada59b980b244b96c6abba0a589554a421ef70"
+  },
+  "historicalInputReconciliation": {
+    "path": "docs/migration/lot8b-evidence/final-version-067-01/historical-input-reconciliation.json",
+    "bytes": 916069,
+    "sha256": "0ed6fe4aad163b8c307602812dd1c09c4ca015ff87bd418122f5b1b2ef4dbb9d"
+  },
+  "historicalQualification": {
+    "commonTestsAndSubtests": 524,
+    "commonTestModules": 23,
+    "recordedRegressionCases": 11,
+    "recordedRegressionProjections": 187,
+    "rerun": false,
+    "qualification": "Historical proofs with exact unchanged algorithm/data/test inputs after the sole declared version normalization; not new final-version test executions."
+  },
+  "checks": {
+    "work-inventory-01": {
+      "receipt": {
+        "path": "docs/migration/lot8b-evidence/final-version-067-01/work-inventory-01/receipt.json",
+        "bytes": 2549,
+        "sha256": "bc6d9d7072b928e4a05399f1043896b0644486a3e7b2fd0d9da9ce2329b5dca9"
+      },
+      "key": "inventory",
+      "exitCode": 0,
+      "inputsUnchanged": true,
+      "childProcessReaped": true,
+      "executionHead": "f0d5799821ba0e2f890176057342675b1614f794",
+      "elapsedSeconds": 2.663174388000016,
+      "durationIsOfficialPerformance": false
+    },
+    "work-candidate-01": {
+      "receipt": {
+        "path": "docs/migration/lot8b-evidence/final-version-067-01/work-candidate-01/receipt.json",
+        "bytes": 2946,
+        "sha256": "ad0e31cf5523ccf021e4e679a432e0b630c2c1a4cd148167302475fd39dfd29a"
+      },
+      "key": "candidate-capture",
+      "exitCode": 0,
+      "inputsUnchanged": true,
+      "childProcessReaped": true,
+      "executionHead": "f0d5799821ba0e2f890176057342675b1614f794",
+      "elapsedSeconds": 41.365488758999845,
+      "durationIsOfficialPerformance": false
+    },
+    "work-qualify-02": {
+      "receipt": {
+        "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-02/receipt.json",
+        "bytes": 3638,
+        "sha256": "f14c8ca65e73d48e3d3b9d493a74a93c1bf8f023cba214436c34a5a913b95845"
+      },
+      "key": "paired-qualify",
+      "exitCode": 0,
+      "inputsUnchanged": true,
+      "childProcessReaped": true,
+      "executionHead": "022cf5daa7adc88cbe1a64c83322b883cb6814cf",
+      "elapsedSeconds": 46.36349077,
+      "durationIsOfficialPerformance": false
+    },
+    "branch-capture-01": {
+      "receipt": {
+        "path": "docs/migration/lot8b-evidence/final-version-067-01/branch-capture-01/receipt.json",
+        "bytes": 2836,
+        "sha256": "467fe1048692e744b666f56dcb015730870e88316cecd3088985ca72210e2973"
+      },
+      "key": "branch-capture",
+      "exitCode": 0,
+      "inputsUnchanged": true,
+      "childProcessReaped": true,
+      "executionHead": "022cf5daa7adc88cbe1a64c83322b883cb6814cf",
+      "elapsedSeconds": 16.017210708999983,
+      "durationIsOfficialPerformance": false
+    },
+    "branch-qualify-01": {
+      "receipt": {
+        "path": "docs/migration/lot8b-evidence/final-version-067-01/branch-qualify-01/receipt.json",
+        "bytes": 3025,
+        "sha256": "859a62d9a08305ea77ff80c1c09170c3be57e500261588e409030af2b3fd659a"
+      },
+      "key": "branch-qualify",
+      "exitCode": 0,
+      "inputsUnchanged": true,
+      "childProcessReaped": true,
+      "executionHead": "022cf5daa7adc88cbe1a64c83322b883cb6814cf",
+      "elapsedSeconds": 9.564582094000116,
+      "durationIsOfficialPerformance": false
+    },
+    "entry-audit-01": {
+      "receipt": {
+        "path": "docs/migration/lot8b-evidence/final-version-067-01/entry-audit-01/receipt.json",
+        "bytes": 1879,
+        "sha256": "0970f580d1c399a77c986b3c5bb36fd688889cf87abf4acf15faf3db2d36073e"
+      },
+      "key": "entry-audit",
+      "exitCode": 0,
+      "inputsUnchanged": true,
+      "childProcessReaped": true,
+      "executionHead": "022cf5daa7adc88cbe1a64c83322b883cb6814cf",
+      "elapsedSeconds": 1.2161551629999394,
+      "durationIsOfficialPerformance": false
+    },
+    "migration-audit-01": {
+      "receipt": {
+        "path": "docs/migration/lot8b-evidence/final-version-067-01/migration-audit-01/receipt.json",
+        "bytes": 1899,
+        "sha256": "f9305e1df42d3e442210b11f2b899c2d742464bd15400b293f2ca4b47fb298f7"
+      },
+      "key": "migration-audit",
+      "exitCode": 0,
+      "inputsUnchanged": true,
+      "childProcessReaped": true,
+      "executionHead": "022cf5daa7adc88cbe1a64c83322b883cb6814cf",
+      "elapsedSeconds": 5.747377687000153,
+      "durationIsOfficialPerformance": false
+    },
+    "build-01": {
+      "receipt": {
+        "path": "docs/migration/lot8b-evidence/final-version-067-01/build-01/receipt.json",
+        "bytes": 1919,
+        "sha256": "f489525b237618f620b15d7c8627830f1ffa27292a040b0097cd351bdd26a732"
+      },
+      "key": "build",
+      "exitCode": 0,
+      "inputsUnchanged": true,
+      "childProcessReaped": true,
+      "executionHead": "022cf5daa7adc88cbe1a64c83322b883cb6814cf",
+      "elapsedSeconds": 12.199557710000136,
+      "durationIsOfficialPerformance": false
+    }
+  },
+  "successfulControlGroups": 8,
+  "retainedFailedControlGroups": 1,
+  "retainedFailure": {
+    "receipt": {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-01/receipt.json",
+      "bytes": 3346,
+      "sha256": "0d2f68e09bd7ae339b210d070bb7673f9471dac9f67d419bb5b096a169a02251"
+    },
+    "amendment": {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/paired-reader-amendment.json",
+      "bytes": 2247,
+      "sha256": "009a5f0072bcfcc709555e229b49d780c9b6d22dac90626ac4cd5d92e8f4dcdb"
+    },
+    "review": {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/paired-reader-amendment-independent-review.json",
+      "bytes": 4180,
+      "sha256": "96835f1b18b77c4d7d63a8f60624031318628f0acecb2998e1da6397bd63622e"
+    },
+    "capturesRerun": false,
+    "semanticGraphControlsRelaxed": false
+  },
+  "workForms": {
+    "report": {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-02/graph-review.json",
+      "bytes": 316284,
+      "sha256": "2ce3d78213d7fe4212c7396b00b1dd2444497c8186641d4cc43fac94ddcc884f"
+    },
+    "forms": {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-02/work-forms.json",
+      "bytes": 62525,
+      "sha256": "27602bf28ed8bf7d29049d01edb9a0dad41a570142ca8ec7b2dcd5ef99918925"
+    },
+    "checks": 64,
+    "pairedPoints": 58,
+    "ownerCheckpointCorrespondences": 522,
+    "rawDifferences": 22312,
+    "unattributedDifferences": 0,
+    "differenceClasses": {
+      "attributed_role_source_digest": 21249,
+      "attributed_exact_trace_created_wall_clock": 1055,
+      "attributed_branch_routing_owner_or_reachable_fragment": 8
+    },
+    "preparedOnly": true,
+    "officialPerformanceEligible": false,
+    "strictCommonGraphParity": false
+  },
+  "branchRuntime": {
+    "report": {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/branch-qualify-01/graph-review.json",
+      "bytes": 60069,
+      "sha256": "96e873da9fd285612f690bd1aa9b6f56a732ad5f2de26605a46e105a66345593"
+    },
+    "counts": {
+      "sessions": 5,
+      "physicalReturns": 26,
+      "completedSourceAcquisitions": 23,
+      "ablatedReturns": 1,
+      "incompleteReturns": 2,
+      "wrapperRecordCalls": 25,
+      "nativeAdapterRecordInvocations": 24,
+      "executedModes": {
+        "calibrate": 17,
+        "move": 6,
+        "propagate": 1,
+        "select": 2
+      },
+      "unexecutedAuthorizedQuestions": 3,
+      "officialSolvedLevels": 0
+    },
+    "graphPoints": 64,
+    "deltas": 3772,
+    "observedRestores": 51,
+    "publicServicePositiveQualified": false,
+    "publicTicketsPositiveQualified": false,
+    "publicWorkerPositiveQualified": false
+  },
+  "build": {
+    "path": "docs/migration/lot8b-evidence/final-version-067-01/build-manifest.json",
+    "bytes": 14948,
+    "sha256": "39065225503db229e2597ae2aa70822e72e05b93735aac2d6e33d70a07cd6d6b"
+  },
+  "independentResultReview": {
+    "path": "docs/migration/lot8b-evidence/final-version-067-01/final-functional-independent-review.json",
+    "bytes": 61988,
+    "sha256": "ca7a8b58e77d97210bd984122db621d7ea7cd18c05ceebd9adaa64e17d008712"
+  },
+  "migration": {
+    "summary": {
+      "pythonModules": 1369,
+      "pythonLines": 320375,
+      "declaredClassesAndFunctions": 12857,
+      "dataFiles": 417,
+      "verifiedModules": 0,
+      "componentVerifiedModules": 215,
+      "partiallyTransferredModules": 147,
+      "transferredUnverifiedModules": 0,
+      "pendingModules": 1007,
+      "strategyFamilies": 16
+    },
+    "completionGates": {
+      "allRequiredCapabilitiesTransferred": false,
+      "fullCommonCallerDifferentialParity": false,
+      "allDeclaredFamiliesIntegrated": false,
+      "commonGraphEditingCoversExecutedPrograms": false,
+      "pythonNumericSemanticsCovered": false,
+      "fullCampaignRegression": false
+    },
+    "failures": []
+  },
+  "newLiveGameCampaign": false,
+  "newOfficialSolvedLevels": 0,
+  "officialCost": {
+    "measured": false,
+    "accepted": false,
+    "nextProtocol": "Final-source ABBA against actual published0.66; all32measured sessions and8warmups retained.",
+    "rule": "Strict median complete-session increase below10percent separately forSTCKandSMLP; phaseoverruns allowed onlywhen bothglobals pass; no crossgamecompensation."
+  },
+  "publicationPerformed": false,
+  "ordinaryWorkGlobalLockRequired": false,
+  "globalLockAcquired": false,
+  "peerAvailabilityWait": false,
+  "LKEY": "permanently_closed",
+  "evidenceRetention": "docs/migration/lot8b-evidence/final-version-067-01/evidence-retention.json",
+  "nextStep": "Freeze the separately reviewed official cost contract and bounded execution plan, measure under scoped short exclusivity, independently review all samples, then publish exact finalsource ifqualified."
+}
