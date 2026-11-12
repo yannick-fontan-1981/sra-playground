@@ -240,3 +240,84 @@ Inchangée : aucun chemin runtime sra-playground modifié. C1 reste **préparé,
 ### Prochaine étape concrète
 
 Poursuivre C1 sur le port TypeScript dès que le checkout `src/logos-engine/v6-*` est disponible. Les points d'instrumentation sont maintenant précisément dérivés du donneur : producteur avant bundle, exécution dans apply/execute, admission, release, puis consommation/persistance.
+
+
+## C3 — recouvrement spécialisé OP03/OP08/OP12/OP26
+
+Le détail est enregistré dans `docs/migration/op01-op31-c3-specialized-overlap.md`.
+
+### Périmètre réellement couvert
+
+Lecture ciblée du donneur Python V6 :
+- `composition.py::validate_bundle()` ;
+- `target_tree.py::extend_target()/bind()` ;
+- `goal_access_adapter.py` ;
+- `passage_options.py` ;
+- `cell_placement_access.py` ;
+- `alternating_graph_access.py`.
+
+### OP qualifiées
+
+- **OP03** : recouvrement partiel. La garde physique `validate_bundle()` vérifie les préconditions courantes, mais transforme une donnée absente en refus booléen au lieu de conserver `unknown`. Elle ne remplace donc pas OP03 pour le raisonnement tri-état.
+- **OP08** : le target tree sait prolonger des cibles déclarées et vérifier les conditions de leurs enfants, mais aucun producteur générique effect→requires n'est démontré.
+- **OP12** : les accès spécialisés préservent une incertitude `unknown_then_observe`, scellent le préfixe et déclenchent une acquisition avant continuation. Le parcours générique de dépendances reste distinct.
+- **OP26** : plusieurs familles produisent puis revalident elles-mêmes leur accès juste avant exécution. Dans ces familles, rajouter OP26 comme seconde admission serait potentiellement redondant ; le besoin générique ne devient pertinent que pour un vrai domaine multi-accès.
+
+### Besoins démontrés
+
+- garde physique de préconditions : démontrée ;
+- suspension/reprise sur effet d'accès inconnu : démontrée dans une famille spécialisée ;
+- admission d'accès liée à époque/observation/action/surface : démontrée dans plusieurs familles ;
+- recherche générique de prédécesseurs : non démontrée ;
+- parcours générique des dépendances inconnues : non démontré ;
+- filtre commun de plusieurs accès hétérogènes : non démontré.
+
+### Producteurs / consommateurs
+
+Producteurs spécialisés identifiés :
+- target tree ;
+- goal access ;
+- passage options ;
+- cell placement ;
+- alternating graph access.
+
+Consommateurs :
+- admission/release locale des familles ;
+- target tree pour continuité de cible et acquisition de contrôle.
+
+### Appels utiles / sans effet démontré
+
+Aucun appel OP03/08/12/26 n'a été ajouté.
+Le donneur indique au contraire qu'un raccordement naïf pourrait dupliquer des gardes existantes.
+
+### Fonctions spécialisées équivalentes
+
+- OP03 : équivalent seulement pour la **garde physique booléenne**, pas pour le verdict tri-état.
+- OP08 : recouvrement familial, pas équivalence générique.
+- OP12 : équivalent familial pour l'inconnu d'accès, pas pour une chaîne arbitraire de dépendances.
+- OP26 : équivalent spécialisé d'admission dans plusieurs familles ; sélection générique multi-accès non démontrée.
+
+### Tests
+
+Aucun test exécuté : lecture de code uniquement, sans modification runtime.
+
+### Performance
+
+Aucun coût ajouté. Statut C3 : **analyse de recouvrement avancée, intégration fonctionnelle non commencée**.
+
+### Feuille de route actualisée
+
+| Lot | État | Prochaine preuve concrète |
+| --- | --- | --- |
+| C0 | **terminé** | registre conservé |
+| C1 | **préparé** | instrumentation du port TypeScript dès publication |
+| C2 | **partiellement qualifié sur donneur** | retrouver lecteurs OP29/OP31 et prouver décision suivante |
+| C3 | **recouvrement spécialisé qualifié pour 03/08/12/26** | chercher un besoin runtime non couvert avant tout raccordement |
+| C4 | préparé | producteurs/consommateurs objectifs et regroupements |
+| C5 | préparé | questions et informations réellement décisionnelles |
+| C6 | préparé | blocages/reprises/variantes avec preuves |
+| C7 | en attente | consolidation + performances |
+
+### Prochaine étape concrète
+
+Continuer C2 sur le donneur V6 : rechercher les consommateurs réels d'OP29 et OP31 et, pour OP30, une lecture ultérieure de la connaissance persistée afin de distinguer « persistance » de « contribution à une décision ».
