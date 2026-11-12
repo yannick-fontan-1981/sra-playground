@@ -213,3 +213,34 @@ C7 ne peut toujours pas être clôturé car :
 2. STCK et SMLP ne sont pas mesurés en session complète ;
 3. C3-C6 restent audits donneurs tant qu'aucun besoin runtime réel non couvert
    n'impose un raccordement.
+
+
+## Diagnostic C7 intégré à la reconstruction canonique
+
+Le noyau OP possède maintenant un diagnostic synthétique non officiel :
+
+- `tests/helpers/op01-op31-synthetic-session.ts` ;
+- `tests/v6-c7-diagnostic.test.ts` ;
+- `scripts/measure-op01-op31-core-costs.mjs`.
+
+Résultat local qualifié :
+- `tsc --noEmit` : OK sur le checkout sparse OP vérifié contre GitHub ;
+- `tests/v6-*.test.ts` : **31/31**.
+
+Mesure diagnostique, 31 échantillons × 200 cycles :
+- baseline : ~1,674 ms ;
+- instrumentation légère `counters` : ~1,793 ms (**+7,12 %**) ;
+- trace détaillée `full` : ~9,589 ms (+472,86 %) ;
+- cache sans hit utile : ~2,834 ms (+69,29 %).
+
+Conséquence d'architecture :
+- le mode normal doit rester `counters` ;
+- la trace détaillée est réservée à l'audit ciblé ;
+- le cache ne doit pas être activé globalement quand observation/révision changent
+  à chaque cycle ; il reste opt-in sur les chemins où l'identité de dépendances
+  se répète réellement.
+
+Cette mesure est explicitement `diagnostic_only` et ne remplace pas STCK/SMLP.
+
+Statut performance :
+**fonctionnellement qualifié, performance officielle à confirmer**.
