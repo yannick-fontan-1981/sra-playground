@@ -8,6 +8,8 @@ La reconnaissance préalable est conservée dans [preparation-20261111](lot8b-ev
 
 Le jalon de raccordement commun est qualifié sur les sources et tests figés au commit **`2583d81d856c13295040db88f5df8b3a99906bdc`**. Le [bilan commun](lot8b-evidence/common-integration-01/README.md) et la [synthèse de validation](lot8b-evidence/common-integration-01/validation-summary.json) conservent les commandes, empreintes, résultats et limites. Le candidat dispose de **69/76 entrées raccordées** et n’est pas publié. **Site 107 / native 0.66.0 reste publié à 68/76** ; aucun nouveau numéro de version n’est réservé.
 
+Le [jalon de qualification de livraison](lot8b-evidence/delivery-qualification-01/README.md) réutilise exactement les mêmes 331 fichiers natifs. Leur digest canonique est `3ff1d9ad56e22aedc0fee3a0da6a3af50a1da0bc14a0ba01cb38272ba85234be` ; la [réconciliation](lot8b-evidence/delivery-qualification-01/source-digest-reconciliation.json) relie ce digest au `76a403016d2b28287194b7498f10e14727b7e3fb3f214d2f79cb0292390d54bf` historique, avec une table de chemins et hashes identique et un ordre de sérialisation différent. Les captures appariées ont été exécutées au commit documentaire `0830ca822e2e4330fa3ffb68d333167b3389fc26`, contre le véritable publié 0.66.
+
 Les chemins ci-dessous sont relatifs à `reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/`.
 
 | Source | Octets | SHA-256 |
@@ -100,9 +102,9 @@ Le [bilan commun](lot8b-evidence/common-integration-01/README.md) et sa [synthè
 | Audit de migration `migration-audit-02` | 215 `component_verified`, 147 `partial_transfer`, 1 007 `pending`, 0 `verified` ; six portes globales fausses. |
 | Build | Passé. |
 
-Les **524 tests et sous-tests Node couvrent 23 modules déclarés**. Les huit tests de parcours/intégration communs comprennent des chaînes froides, ainsi que des cas de registre, de refus et d’isolation. Ces preuves ciblées ne constituent pas toute la suite, une campagne générale, une parité complète du caller original ou une attribution complète des formes de travail et graphes.
+Les **524 tests et sous-tests Node couvrent 23 modules déclarés**. Les huit tests de parcours/intégration communs comprennent des chaînes froides, ainsi que des cas de registre, de refus et d’isolation. À elles seules, ces preuves ciblées ne constituent pas toute la suite, une campagne générale, une parité complète du caller original ou une attribution complète des formes de travail et graphes.
 
-La qualification des formes de travail et des graphes, la campagne générale et le coût contre un prédécesseur réellement publié restent distincts. Aucun jeu, rejeu de jeu, coût officiel 8B ou publication n’a lieu dans ce jalon. Une future publication nécessitera sa propre qualification et sa réservation de version. Le candidat 69/76 reste non publié, Site 107 / native 0.66.0 demeure la livraison 68/76 et aucun nouveau numéro n’est réservé.
+Le jalon historique de raccordement ne comprenait aucun jeu ni rejeu. Le dossier complémentaire qualifie **64 contrôles de formes sur 58 points, 22 312 différences attribuées sans résidu**, et **11 régressions enregistrées / 187 projections inchangées**. Les cinq chaînes de contribution restent à terminer après le refus initial de la façade 64 × 64, avant toute création du runtime. Elles emploieront la vraie API du runtime commun avec les rasters originaux, sans revendiquer les tickets ou le transport public. Les 524 tests ne sont pas relancés ni additionnés à ces populations. Aucune nouvelle campagne de jeu, mesure de coût officiel 8B ou publication n’a lieu dans ce jalon. Une future publication nécessitera sa propre qualification et sa réservation de version. Le candidat 69/76 reste non publié, Site 107 / native 0.66.0 demeure la livraison 68/76 et aucun nouveau numéro n’est réservé.
 
 La règle de coût conservée est une augmentation de la médiane globale des sessions complètes strictement inférieure à 10 % pour STCK et pour SMLP séparément. Un dépassement de phase peut être accepté si les deux critères globaux passent. Les réserves de coût des publications prioritaires antérieures restent distinctes.
 

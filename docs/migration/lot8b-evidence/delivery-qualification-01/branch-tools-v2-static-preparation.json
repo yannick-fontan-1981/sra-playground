@@ -1,0 +1,42 @@
+{
+  "schema": "logos-engine.lot8b.branch-tools-static-preparation.v2",
+  "recordedAt": "2026-11-12 05:20:45 UTC",
+  "status": "syntax_checks_passed",
+  "checks": [
+    {
+      "command": [
+        "node",
+        "--check",
+        "docs/migration/lot8b-evidence/tools/delivery/branch-common-capture-v2.mjs"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 0.004809415,
+      "stdoutAndStderr": ""
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "docs/migration/lot8b-evidence/tools/delivery/branch-common-qualify-v2.mjs"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 0.006797941,
+      "stdoutAndStderr": ""
+    }
+  ],
+  "qualification": "Only JavaScript syntax was checked. No module import, runtime, game, oracle, capture, reader or test executed by these checks.",
+  "sourceCheckpoint": "10ebead6c94114c4c6a8804bf3e22d80cc4f3583",
+  "nativeProductionModified": false,
+  "officialPerformanceMeasurement": false,
+  "fixtureLabelStaticCheck": {
+    "recordedAt": "2026-11-12T05:22:40.469885+00:00",
+    "fixture": "tests/fixtures/v6-branch-routing-reference.json",
+    "sha256": "e6ae197b7b982bd41f561b9df8e458436d7ce0797f39bbf86d972e55472b6769",
+    "frameCount": 37,
+    "compactJsonSha256Prefix16MatchesLabels": true,
+    "lastPacketFrameMatchesCurrentRows": true,
+    "nativeExecution": false,
+    "oracleExecution": false,
+    "fixtureModified": false
+  }
+}

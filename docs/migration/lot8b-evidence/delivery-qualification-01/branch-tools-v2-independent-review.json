@@ -1,0 +1,466 @@
+{
+  "schema": "logos-engine.lot8b.branch-tools-independent-review.v2",
+  "recordedAt": "2026-11-12 05:22:01 UTC",
+  "reviewer": "branch_routing_native",
+  "status": "static_review_no_blocking_objection",
+  "qualification": "Revue statique des octets finaux de capture/lecteur v2 et du changement de frontière v1 vers v2. Aucun résultat positif des cinq chaînes n'est établi par cette revue.",
+  "authorizedOutput": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-tools-v2-independent-review.json",
+  "reviewMode": {
+    "runtimeSessionsExecuted": 0,
+    "captureToolsExecuted": 0,
+    "artifactReadersExecuted": 0,
+    "nativeImportsExecuted": 0,
+    "testsExecuted": 0,
+    "syntaxChecksExecutedByReviewer": 0,
+    "originalOraclesExecuted": 0,
+    "gameActionsDispatched": 0,
+    "performanceMeasurements": 0,
+    "globalLockUsed": false,
+    "toolsModified": false,
+    "productionModified": false,
+    "fixturesModified": false,
+    "onlyThisReviewWritten": true,
+    "LKEYPayloadSourceOracleOrReplayRead": false
+  },
+  "freeze": {
+    "authorFinalHashesReceived": true,
+    "rootFreezeSignalReceived": true,
+    "authorFinalHashesIndependentlyRecomputed": true,
+    "files": [
+      {
+        "path": "docs/migration/lot8b-evidence/tools/delivery/branch-common-capture-v2.mjs",
+        "bytes": 32210,
+        "sha256": "98c4a0af05e929807723669baefd27bc5b7ae30acb60e07c84625a8b420e4eb5"
+      },
+      {
+        "path": "docs/migration/lot8b-evidence/tools/delivery/branch-common-qualify-v2.mjs",
+        "bytes": 58745,
+        "sha256": "dce80476cad9bcb0db4e838f944692565ae652ed1b7874a6abb153dc9893a457"
+      },
+      {
+        "path": "docs/migration/lot8b-evidence/tools/delivery/README-branch-common-v2.md",
+        "bytes": 12915,
+        "sha256": "37519bf3b2aa3c7ac2e28d007571645eefbf08cba9fc189a73d9d3818955397c"
+      }
+    ]
+  },
+  "candidateNative": {
+    "manifest": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/candidate-native.json",
+      "bytes": 39333,
+      "sha256": "56e7533fca83f222b866ce73478a1f925bddb8c7b7c79718e9b99d0c888dc095"
+    },
+    "fileCount": 331,
+    "digest": "3ff1d9ad56e22aedc0fee3a0da6a3af50a1da0bc14a0ba01cb38272ba85234be",
+    "qualification": "Identité du manifest candidat lu et épinglé. La capture et le lecteur doivent comparer à nouveau la table complète des fichiers avant/après ; cette revue statique ne constitue pas une nouvelle exécution d'inventaire natif."
+  },
+  "previousAttempt": {
+    "captureReceipt": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-01/capture.receipt.json",
+      "bytes": 90621,
+      "sha256": "30b8fe8dc5ca2369981d9e271834913e94f5da1ffc395eb5494993fa732d90a5"
+    },
+    "supervisorReceipt": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-01/receipt.json",
+      "bytes": 2287,
+      "sha256": "e0de9145ba5cf54d4326cc1a87a44d479d1824e984fc7ec191d510379ecad731"
+    },
+    "diagnosis": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-01-diagnosis.json",
+      "bytes": 4341,
+      "sha256": "2663996f626dc8015d5127e2e531e6b14291133f95fe5ba420bc6864955940b4"
+    },
+    "status": "failed",
+    "error": "The public game frame must be 64 × 64.",
+    "failureStage": "public_service_validation_before_native_runtime_factory",
+    "factoryCalls": 0,
+    "physicalReturns": 0,
+    "nativeSourceUnchanged": true,
+    "inputsUnchanged": true,
+    "sourceCommitUnchanged": true,
+    "processElapsedSeconds": 1.0332434869997087,
+    "elapsedSecondsArePerformanceSample": false,
+    "earlierToolsFingerprintedWithoutModification": [
+      {
+        "path": "docs/migration/lot8b-evidence/tools/delivery/branch-common-capture.mjs",
+        "bytes": 27519,
+        "sha256": "aa9dc3e0ecaefea6f90f7be2d2e2ab88324cc5c655677514fee7cb6bdb1923eb"
+      },
+      {
+        "path": "docs/migration/lot8b-evidence/tools/delivery/branch-common-qualify.mjs",
+        "bytes": 54005,
+        "sha256": "8e22c4b444b6e2e7d93d37dbb54dbbfa147218fb421d18fb40e81ba98444610a"
+      },
+      {
+        "path": "docs/migration/lot8b-evidence/tools/delivery/README-branch-common.md",
+        "bytes": 9378,
+        "sha256": "c8b4b20d3462eb6aa0d6d524c3793d309845f234a76d583d2123fd246d4e8984"
+      }
+    ]
+  },
+  "entryBoundary": {
+    "v1": "V6AgentService.handle",
+    "v2": "NativeV6Runtime",
+    "sameRealProductionFactoryAsCommonTests": true,
+    "realNativeMethods": [
+      "initialize",
+      "advance",
+      "resume",
+      "inspectKnowledge",
+      "close"
+    ],
+    "noPadding": true,
+    "noPublicValidationChange": true,
+    "noManufacturedServiceTicket": true,
+    "publicServiceQualified": false,
+    "publicWorkerQualified": false,
+    "publicTicketsQualified": false
+  },
+  "checks": [
+    {
+      "id": "real_native_dispatch_and_return_types",
+      "result": "statically_consistent",
+      "observation": "initialize, advance et resume reçoivent le même objet NativeExecution réel et conservent leur NativeRuntimeYield. inspectKnowledge renvoie la mémoire réelle, rapprochée des nœuds et deltas complets. close renvoie undefined ; le snapshot est observé séparément. Les inspections et fermetures n'ont pas de result fabriqué.",
+      "evidence": [
+        "src/logos-engine/v6-native-types.ts",
+        "src/logos-engine/v6-native-runtime.ts",
+        "docs/migration/lot8b-evidence/tools/delivery/branch-common-capture-v2.mjs",
+        "docs/migration/lot8b-evidence/tools/delivery/branch-common-qualify-v2.mjs"
+      ]
+    },
+    {
+      "id": "exact_native_command",
+      "result": "statically_preserved",
+      "observation": "advance reçoit lastYield.command lui-même. La comparaison porte sur le véritable objet natif action_ref, avec absence de data conservée. Les conversions publiques actionRef et data vide ont été retirées. Chaque retour du corpus reste précédé d'une vérification de la commande émise.",
+      "evidence": [
+        "docs/migration/lot8b-evidence/tools/delivery/branch-common-capture-v2.mjs",
+        "docs/migration/lot8b-evidence/tools/delivery/branch-common-qualify-v2.mjs",
+        "src/logos-engine/v6-native-runtime.ts"
+      ]
+    },
+    {
+      "id": "native_authorization_and_live_identity",
+      "result": "statically_preserved",
+      "observation": "L'autorisation conserve exactement observation_ref, decision_revision et action_index. authorizationIdentity est lu séparément, relié à graphChain et nativeExecutionDigest du snapshot, puis revérifié juste avant advance. La clé locale du lecteur sert uniquement au décompte. Aucun ticket de service n'est reconstruit.",
+      "evidence": [
+        "src/logos-engine/v6-native-types.ts",
+        "src/logos-engine/v6-native-runtime.ts",
+        "docs/migration/lot8b-evidence/tools/delivery/branch-common-capture-v2.mjs",
+        "docs/migration/lot8b-evidence/tools/delivery/branch-common-qualify-v2.mjs"
+      ]
+    },
+    {
+      "id": "real_method_context",
+      "result": "statically_consistent",
+      "observation": "sessionId et sequence sont identifiés comme contexte du harnais lorsqu'ils ne font pas partie des arguments natifs. call.arguments contient les arguments métier réellement transmis, call.executionArgument décrit séparément l'exécution. Les arguments initialize/advance et les appels sans argument métier resume/inspectKnowledge sont vérifiés par le lecteur.",
+      "evidence": [
+        "docs/migration/lot8b-evidence/tools/delivery/branch-common-capture-v2.mjs",
+        "docs/migration/lot8b-evidence/tools/delivery/branch-common-qualify-v2.mjs",
+        "docs/migration/lot8b-evidence/tools/delivery/README-branch-common-v2.md"
+      ]
+    },
+    {
+      "id": "unchanged_rasters_and_frame_labels",
+      "result": "statically_consistent",
+      "observation": "Le corpus03 reste épinglé sans padding. L'exportateur calcule frame_hash par SHA-256 du JSON compact des lignes, tronqué à 16 caractères hexadécimaux ; les deux outils v2 utilisent cette même formule et exigent frame_packet[-1] égal à frame_rows. Le paquet de retour complet est conservé et empreinté. Cette vérification d'outillage n'est pas présentée comme la validation du service.",
+      "evidence": [
+        "scripts/export-v6-branch-routing-reference.py",
+        "tests/fixtures/v6-branch-routing-reference.json",
+        "src/logos-engine/v6-native-observer.ts",
+        "docs/migration/lot8b-evidence/tools/delivery/branch-common-capture-v2.mjs",
+        "docs/migration/lot8b-evidence/tools/delivery/branch-common-qualify-v2.mjs"
+      ]
+    },
+    {
+      "id": "one_registered_cold_owner",
+      "result": "statically_preserved",
+      "observation": "Une factory réelle est exigée par session ; l'unique instance branch_routing enregistrée doit être entre motif_access et band_transfer avec entryPoint null. Son état constructeur froid est comparé avant initialize. Les wrappers observent ses méthodes et restaurations réelles. Aucun état acquis n'est injecté dans les cinq chaînes.",
+      "evidence": [
+        "tests/v6-branch-routing-kernel.test.ts",
+        "docs/migration/lot8b-evidence/tools/delivery/branch-common-capture-v2.mjs",
+        "docs/migration/lot8b-evidence/tools/delivery/branch-common-qualify-v2.mjs"
+      ]
+    },
+    {
+      "id": "source_acquisition_assertions",
+      "result": "unchanged_by_v1_v2_diff",
+      "observation": "Le diff conserve les comparaisons intégrales des événements et états source, la continuité sourceBefore/sourceAfter, les gardes, les deux rasters et le paquet d'animation transmis à record, les checkpoints réels et les restaurations depuis la racine propriétaire. Le seul transport d'attendus explicite reste celui des références d'observation et du point commun (6,13), distinct du point manuel composant (7,13).",
+      "evidence": [
+        "docs/migration/lot8b-evidence/tools/delivery/branch-common-qualify.mjs",
+        "docs/migration/lot8b-evidence/tools/delivery/branch-common-qualify-v2.mjs",
+        "tests/fixtures/v6-branch-routing-reference.json"
+      ]
+    },
+    {
+      "id": "actual_kernel_and_authority_links",
+      "result": "statically_preserved",
+      "observation": "Le lecteur conserve la validation des deltas complets, séquences, chaînes, hashes, schémas, portées, révisions, origines, fragments et identité des programmes. Les liens réels relient garde courant, WHY/ACT, fait state, prédiction, programme commun, racine propriétaire, préfixe et transition publique. La révision d'autorisation native remplace la révision du ticket dans les mêmes recherches de nœuds.",
+      "evidence": [
+        "docs/migration/lot8b-evidence/tools/delivery/branch-common-qualify.mjs",
+        "docs/migration/lot8b-evidence/tools/delivery/branch-common-qualify-v2.mjs",
+        "src/logos-engine/v6-knowledge-store.ts",
+        "src/logos-engine/v6-native-state-graph.ts"
+      ]
+    },
+    {
+      "id": "five_forms_and_twenty_six_returns",
+      "result": "prospective_assertions_preserved",
+      "observation": "Les cinq plans, leurs 26 retours et les distinctions entre 23 acquisitions réussies, une ablation, deux retours incomplets, 25 appels wrapper et 24 appels de l'adaptateur original restent exigés. Les trois questions finales autorisées sans retour restent séparées. Le lecteur refuse une capture incomplète, un échec enregistré, un footer manquant ou des enregistrements réordonnés.",
+      "evidence": [
+        "docs/migration/lot8b-evidence/tools/delivery/branch-common-capture-v2.mjs",
+        "docs/migration/lot8b-evidence/tools/delivery/branch-common-qualify-v2.mjs"
+      ]
+    },
+    {
+      "id": "contrary_return_and_selected_ablation",
+      "result": "statically_preserved",
+      "observation": "Les quatre calibrations et la commande de mouvement doivent être communes aux branches positive et contraire, puis le retour contraire doit réviser la mesure et la question suivante. L'ablation garde la même première commande et le même retour, mais remplace explicitement le wrapper sélectionné record par events vide ; l'absence d'apprentissage, le fait branches nul et la nouvelle calibration ACTION1 restent exigés.",
+      "evidence": [
+        "docs/migration/lot8b-evidence/tools/delivery/branch-common-capture-v2.mjs",
+        "docs/migration/lot8b-evidence/tools/delivery/branch-common-qualify-v2.mjs"
+      ]
+    },
+    {
+      "id": "incomplete_return_retention_and_terminal_resume",
+      "result": "statically_preserved",
+      "observation": "L'horloge de niveau contrôlée passe de 0 à 360001 seulement après le garde réel inchangé du second mouvement. Le premier record original doit refuser avant mutation, le second ne doit pas être appelé. Les deux transitions publiques complètes, leur refus, le lien blocked_by, acquired false, release_authority false, frontier.complete false et l'absence de faits branches restent vérifiés. resume arrêté a lieu avant close et doit conserver le résultat sans réacquisition.",
+      "evidence": [
+        "src/logos-engine/v6-native-runtime.ts",
+        "tests/v6-branch-routing-kernel.test.ts",
+        "docs/migration/lot8b-evidence/tools/delivery/branch-common-capture-v2.mjs",
+        "docs/migration/lot8b-evidence/tools/delivery/branch-common-qualify-v2.mjs"
+      ]
+    },
+    {
+      "id": "native_deadlines_and_external_supervision",
+      "result": "statically_consistent_with_declared_scope",
+      "observation": "L'objet NativeExecution réel fournit seulement yieldControl via setTimeout(0). currentExecution et acquisitionExecution continuent à dériver les bornes natives du niveau de 360000 ms. Les quatre chaînes ordinaires gardent l'horloge de production. Le plafond de 300 secondes par commande et l'old-space V8 de 1536 MiB sont à imposer par le superviseur racine ; les outils ne les imposent pas eux-mêmes. Ce plafond V8 ne borne pas toute la RSS et aucune durée n'est admissible comme coût officiel.",
+      "evidence": [
+        "src/logos-engine/v6-native-runtime.ts",
+        "docs/migration/lot8b-evidence/tools/delivery/branch-common-capture-v2.mjs",
+        "docs/migration/lot8b-evidence/tools/delivery/README-branch-common-v2.md"
+      ]
+    },
+    {
+      "id": "failure_provenance_and_frozen_inputs",
+      "result": "statically_preserved",
+      "observation": "Le reçu01 réellement observé contient l'échec 64 × 64 avant factory, zéro retour et les trois contrôles de stabilité vrais. La v2 épingle ce reçu distinct et exige fichiers natifs, entrées et HEAD inchangés pour sa propre tentative. Les sorties sont exclusives ; les anciens outils sont seulement lus et restent séparés.",
+      "evidence": [
+        "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-01/capture.receipt.json",
+        "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-01-diagnosis.json",
+        "docs/migration/lot8b-evidence/tools/delivery/branch-common-capture-v2.mjs",
+        "docs/migration/lot8b-evidence/tools/delivery/branch-common-qualify-v2.mjs"
+      ]
+    }
+  ],
+  "prospectivePopulation": {
+    "observedByThisReview": false,
+    "requiresSuccessfulCaptureAndIndependentReader": true,
+    "sessions": 5,
+    "physicalReturns": 26,
+    "completedSourceAcquisitions": 23,
+    "ablatedReturns": 1,
+    "incompleteReturns": 2,
+    "wrapperRecordCalls": 25,
+    "nativeAdapterRecordInvocations": 24,
+    "unexecutedAuthorizedQuestions": 3,
+    "modes": {
+      "calibrate": 17,
+      "select": 2,
+      "move": 6,
+      "propagate": 1
+    },
+    "sessionsDeclared": [
+      {
+        "id": "single-positive",
+        "returns": 6,
+        "completed": 6
+      },
+      {
+        "id": "triple-prefix",
+        "returns": 7,
+        "completed": 7
+      },
+      {
+        "id": "contrary-return",
+        "returns": 5,
+        "completed": 5
+      },
+      {
+        "id": "selected-acquisition-ablation",
+        "returns": 1,
+        "completed": 0
+      },
+      {
+        "id": "incomplete-prefix",
+        "returns": 7,
+        "completed": 5
+      }
+    ]
+  },
+  "rootSyntaxPreparation": {
+    "receipt": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-tools-v2-static-preparation.json",
+      "bytes": 956,
+      "sha256": "26f0cfde9aab74073ba28070088ecd40142609fbe66ca114c32d16ea6750d250"
+    },
+    "statusRead": "syntax_checks_passed",
+    "commands": 2,
+    "exitCodes": [
+      0,
+      0
+    ],
+    "executedByReviewer": false,
+    "qualification": "Reçu de préparation racine lu seulement. Le contrôle syntaxique ne prouve aucune capture, import, acquisition ou qualification de graphe."
+  },
+  "blockingObjections": [],
+  "requiredCorrectionsBeforeProspectivePlan": [],
+  "remainingLimits": [
+    "La preuve positive de la façade publique 64 × 64, de la palette 0..15, des tickets, de leur protection contre le rejeu, des copies de réponse et du transport worker reste absente.",
+    "Les rasters sont synthétiques et les retours sont fournis après vérification de la commande ; aucun jeu ni oracle original n'est exécuté par les nouveaux outils.",
+    "Les assertions préservées constituent un contrat prospectif. Les cinq chaînes et leurs décomptes ne seront acquis qu'après capture complète et lecture indépendante réussies.",
+    "Les attendus viennent du corpus composant borné. Le point commun diffère explicitement de la liste manuelle du composant et ne prouve pas une égalité universelle des domaines pointés.",
+    "caller.acquiredTransitions compte les retours réconciliés, y compris ceux dont l'effet BranchRouting est ablaté ou incomplet. finished true sans augmentation de score ne prouve aucun niveau résolu.",
+    "Les interventions d'ablation et d'expiration de l'horloge sont déclarées. Les durées de ces outils instrumentés ne sont pas des échantillons de performance officielle.",
+    "Le graphe est relu par un outil distinct utilisant les validateurs et codecs natifs épinglés. Cette indépendance d'exécution ne constitue pas une authentification externe de provenance.",
+    "Les deltas historiques complets et les historiques propriétaires ne sont pas bornés globalement par cette revue. Le plafond V8 est distinct d'un plafond RSS.",
+    "Aucune parité du caller original complet, égalité de graphe entre versions, campagne générale, acceptation de coût, nouvelle version ou publication n'est établie."
+  ],
+  "officialPerformanceEligible": false,
+  "wholeCallerParity": false,
+  "strictCrossVersionGraphParity": false,
+  "publicationEstablished": false,
+  "inputs": [
+    {
+      "path": "docs/migration/lot8b-evidence/tools/delivery/branch-common-capture-v2.mjs",
+      "bytes": 32210,
+      "sha256": "98c4a0af05e929807723669baefd27bc5b7ae30acb60e07c84625a8b420e4eb5"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/delivery/branch-common-qualify-v2.mjs",
+      "bytes": 58745,
+      "sha256": "dce80476cad9bcb0db4e838f944692565ae652ed1b7874a6abb153dc9893a457"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/delivery/README-branch-common-v2.md",
+      "bytes": 12915,
+      "sha256": "37519bf3b2aa3c7ac2e28d007571645eefbf08cba9fc189a73d9d3818955397c"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/delivery/branch-common-capture.mjs",
+      "bytes": 27519,
+      "sha256": "aa9dc3e0ecaefea6f90f7be2d2e2ab88324cc5c655677514fee7cb6bdb1923eb"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/delivery/branch-common-qualify.mjs",
+      "bytes": 54005,
+      "sha256": "8e22c4b444b6e2e7d93d37dbb54dbbfa147218fb421d18fb40e81ba98444610a"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/delivery/README-branch-common.md",
+      "bytes": 9378,
+      "sha256": "c8b4b20d3462eb6aa0d6d524c3793d309845f234a76d583d2123fd246d4e8984"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/candidate-native.json",
+      "bytes": 39333,
+      "sha256": "56e7533fca83f222b866ce73478a1f925bddb8c7b7c79718e9b99d0c888dc095"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-01/capture.receipt.json",
+      "bytes": 90621,
+      "sha256": "30b8fe8dc5ca2369981d9e271834913e94f5da1ffc395eb5494993fa732d90a5"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-01/receipt.json",
+      "bytes": 2287,
+      "sha256": "e0de9145ba5cf54d4326cc1a87a44d479d1824e984fc7ec191d510379ecad731"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-capture-01-diagnosis.json",
+      "bytes": 4341,
+      "sha256": "2663996f626dc8015d5127e2e531e6b14291133f95fe5ba420bc6864955940b4"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/branch-tools-v2-static-preparation.json",
+      "bytes": 956,
+      "sha256": "26f0cfde9aab74073ba28070088ecd40142609fbe66ca114c32d16ea6750d250"
+    },
+    {
+      "path": "tests/fixtures/v6-branch-routing-reference.json",
+      "bytes": 542660,
+      "sha256": "e6ae197b7b982bd41f561b9df8e458436d7ce0797f39bbf86d972e55472b6769"
+    },
+    {
+      "path": "scripts/export-v6-branch-routing-reference.py",
+      "bytes": 26287,
+      "sha256": "7def846785568c7afad5786437c2ad2f2dce82e5348a37be569a38e8f6c7ef89"
+    },
+    {
+      "path": "tests/v6-branch-routing-kernel.test.ts",
+      "bytes": 29235,
+      "sha256": "e64632ee71195f528a8f19dbec4d0cc25695925fdae5de3865a9092ff8537fea"
+    },
+    {
+      "path": "src/logos-engine/v6-native-types.ts",
+      "bytes": 13322,
+      "sha256": "725fb4b241549a070197f81d719f99c0dd002b2643206b9d93a8374b86269361"
+    },
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "bytes": 180119,
+      "sha256": "cfa07cd87b939e528696c07486777ef597ca3e5033f80d5333e78ab6b1e0868e"
+    },
+    {
+      "path": "src/logos-engine/v6-native-observer.ts",
+      "bytes": 22590,
+      "sha256": "1a0ffa26548bf6c1ebbd22724731c2238dc24c84074885e832b671dbbe8dfe02"
+    },
+    {
+      "path": "src/logos-engine/v6-branch-routing.ts",
+      "bytes": 26244,
+      "sha256": "2b9bd172c977b1590d5293b4bca69510ad2e8190dd973df7872050f1367d15ca"
+    },
+    {
+      "path": "src/logos-engine/v6-branch-routing-geometry.ts",
+      "bytes": 16046,
+      "sha256": "dd1e5a472ca8f417651bb4178c27fc522816de767619495da8de09f7cfc6b522"
+    },
+    {
+      "path": "src/logos-engine/v6-knowledge-store.ts",
+      "bytes": 14849,
+      "sha256": "035d41597a5831bfa65bb1f627e3a0d05b84cc44cfda05566359873ef8c5af08"
+    },
+    {
+      "path": "src/logos-engine/v6-native-state-graph.ts",
+      "bytes": 21947,
+      "sha256": "b739db6d6066a06f4175b4377f0d0ae1f351b708e5d27fbdb99c9de7e6ed0b4d"
+    },
+    {
+      "path": "src/logos-engine/canonical.ts",
+      "bytes": 11291,
+      "sha256": "5c2884287aed82d97e7a85c905db5fb800a7e58a523c3ba128a1b61db5069cc1"
+    },
+    {
+      "path": "src/logos-engine/v6-hash.ts",
+      "bytes": 2842,
+      "sha256": "6b86db7b533d55da900a3c65a06ec1e18547180245b3e3a2eaa837be09c669f5"
+    },
+    {
+      "path": "src/runtime/v6-agent-service.ts",
+      "bytes": 18195,
+      "sha256": "02ce41d5e014fcc06f85371f552f949b9dfce56093afae4bc0fcb7aad2f60d96"
+    },
+    {
+      "path": "src/runtime/v6-agent-protocol.ts",
+      "bytes": 9389,
+      "sha256": "597b4d4ab19882a37048e1fa9caeaebea2112b66e25f6294f428bb7916818aa4"
+    },
+    {
+      "path": "src/runtime/contracts.ts",
+      "bytes": 5967,
+      "sha256": "7e3bbd9e7951b1249622961bc801bdf789fb3538a85a7fb4fdc4befccf0e48bc"
+    }
+  ],
+  "inputPinCount": 26
+}
