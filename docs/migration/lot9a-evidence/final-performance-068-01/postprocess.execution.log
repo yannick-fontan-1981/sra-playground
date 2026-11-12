@@ -1,0 +1,3 @@
+{"phase": "pair1", "exitCode": 0, "receipt": {"path": "docs/migration/lot9a-evidence/final-performance-068-01/pair1.execution.json", "bytes": 2116, "sha256": "b1dfa22bf7e5c1cdf59dc2b6e6e09fad458d43f0a8d9ecba4c83f9c68437865f"}}
+{"phase": "pair2", "exitCode": 0, "receipt": {"path": "docs/migration/lot9a-evidence/final-performance-068-01/pair2.execution.json", "bytes": 2116, "sha256": "237962f2b69d81064a18136b147bbd3f9b7d9ea6e750946962267b3dc88fb19d"}}
+{"phase": "strict", "exitCode": 1, "receipt": {"path": "docs/migration/lot9a-evidence/final-performance-068-01/strict.execution.json", "bytes": 3097, "sha256": "bf6aa121f314c1d9884dfc00685e0b3eed2ab9440d73833f2edf27a7e68ec19a"}}

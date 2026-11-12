@@ -1,0 +1,56 @@
+{
+  "schema": "logos-engine.retained-tool-execution.v1",
+  "startedAt": "2026-11-12T15:42:14.734898+00:00",
+  "command": [
+    "node",
+    "scripts/compare-native-loop-costs.mjs",
+    "docs/migration/lot9a-evidence/final-performance-068-01/comparison-policy.json",
+    "docs/migration/lot9a-evidence/final-performance-068-01/cohort2/baseline.json",
+    "docs/migration/lot9a-evidence/final-performance-068-01/cohort2/after.json",
+    "docs/migration/lot9a-evidence/final-performance-068-01/cohort2/comparison.json"
+  ],
+  "inputs": [
+    {
+      "path": "scripts/compare-native-loop-costs.mjs",
+      "bytes": 9861,
+      "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/final-performance-068-01/comparison-policy.json",
+      "bytes": 991,
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/final-performance-068-01/cohort2/baseline.json",
+      "bytes": 436174,
+      "sha256": "13cf7fe336165046aef23fafdd085a2b2e4129abf5630dd494226c809035b126"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/final-performance-068-01/cohort2/after.json",
+      "bytes": 436500,
+      "sha256": "2ad2c4b0330bd78d9b55374462e499846decf6c680e1b47ba648cbf98b8134cc"
+    }
+  ],
+  "timeoutSeconds": 120,
+  "globalLockAcquired": false,
+  "nativeExecutionPerformed": false,
+  "measurementPerformed": false,
+  "finishedAt": "2026-11-12T15:42:14.852307+00:00",
+  "elapsedSeconds": 0.11723322400030156,
+  "exitCode": 0,
+  "error": null,
+  "timedOut": false,
+  "inputsUnchanged": true,
+  "outputExists": true,
+  "log": {
+    "path": "docs/migration/lot9a-evidence/final-performance-068-01/pair2.log.gz",
+    "bytes": 254,
+    "sha256": "81288d90c9f839393b9bbbbba08deb2ff69a965e24c93228105fccb94d1f9510"
+  },
+  "status": "execution_recorded",
+  "output": {
+    "path": "docs/migration/lot9a-evidence/final-performance-068-01/cohort2/comparison.json",
+    "bytes": 25602,
+    "sha256": "19da873afcd67e2a08bcbc55ed6fc45143ab331a90202b827298ffa79d703426"
+  }
+}

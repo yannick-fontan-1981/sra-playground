@@ -1,0 +1,39 @@
+{
+  "schema": "logos-engine.lot9a.cost-analysis-execution.v1",
+  "status": "passed",
+  "startedAt": "2026-11-12T15:42:15.996750+00:00",
+  "command": [
+    "python",
+    "-B",
+    "/workspace/sites/sra-lot9a-chart-navigation-20261112/.sites-checkout/docs/migration/lot9a-evidence/tools/final-cost/review.py",
+    "docs/migration/lot9a-evidence/final-performance-068-01/contract.json",
+    "docs/migration/lot9a-evidence/final-performance-068-01/analysis.json",
+    "docs/migration/lot9a-evidence/final-performance-068-01/independent-review.json"
+  ],
+  "timeoutSeconds": 120,
+  "contract": {
+    "path": "docs/migration/lot9a-evidence/final-performance-068-01/contract.json",
+    "bytes": 182234,
+    "sha256": "53058883838c3ac9d3c384db528bb687b6ecadf605f514682ecd7f4932776e6b"
+  },
+  "generator": {
+    "path": "docs/migration/lot9a-evidence/tools/final-cost/review.py",
+    "bytes": 21232,
+    "sha256": "c86a789b0acc8a746ec97098133816ce225f479e306db088c872bb88106ab221"
+  },
+  "nativeExecutionPerformed": false,
+  "measurementPerformed": false,
+  "globalLockAcquired": false,
+  "automaticRetry": false,
+  "finishedAt": "2026-11-12T15:42:16.666900+00:00",
+  "elapsedSeconds": 0.6695460909995745,
+  "exitCode": 0,
+  "error": null,
+  "childProcessReaped": true,
+  "generatorUnchanged": true,
+  "log": {
+    "path": "docs/migration/lot9a-evidence/final-performance-068-01/review.execution.log.gz",
+    "bytes": 144,
+    "sha256": "32fb2829b7aabc6be1f1dfa2634ce3b0f294f98153ab079b3e0d8b00b0726d12"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "schema": "logos-engine.lot9a.official-performance-controller.v1",
+  "status": "preflight",
+  "startedAt": "2026-11-12T15:33:35.208460+00:00",
+  "plan": "docs/migration/lot9a-evidence/final-cost-preparation-068-01/official-window-plan.json",
+  "limits": {
+    "preflightSeconds": 180,
+    "measurementSeconds": 1800,
+    "terminationGraceSeconds": 10,
+    "killGraceSeconds": 10,
+    "retentionSeconds": 60,
+    "observationIntervalSeconds": 30
+  },
+  "lease": "lot9a-performance-2-d8be021cc710",
+  "automaticRetry": false,
+  "peerAvailabilityWait": false,
+  "peerAcknowledgmentsRequired": false,
+  "measurementStarted": false,
+  "officialCostAcceptedByController": false,
+  "globalQuietInferredFromLock": false,
+  "processArgumentsCollected": false,
+  "processEnvironmentsCollected": false,
+  "lock": {
+    "path": "/workspace/shared/sra-coordination/performance.lock",
+    "attempts": 0,
+    "blocking": false,
+    "lockFileRemoved": false,
+    "lockFileReplaced": false,
+    "descriptorClosed": false
+  },
+  "cleanup": {}
+}
