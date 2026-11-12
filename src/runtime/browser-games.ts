@@ -66,8 +66,11 @@ export class BrowserGameRuntime {
       this.pending.delete(message.id);
       this.clearTimer(pending.timeout);
       if (message.error) pending.reject(new Error(message.error));
-      else if (message.result) pending.resolve({ ...message.result, gameCode: message.result.code ?? message.result.gameCode });
-      else pending.reject(new Error('The game returned an invalid response.'));
+      else if (message.result) {
+        const gameCode = message.result.code ?? message.result.gameCode;
+        if (typeof gameCode !== 'string' || !gameCode) pending.reject(new Error('The game returned an invalid response.'));
+        else pending.resolve({ ...message.result, gameCode });
+      } else pending.reject(new Error('The game returned an invalid response.'));
     });
     worker.addEventListener('error', () => this.fail(new Error('The local game runtime stopped. Please load the game again.')));
     worker.addEventListener('messageerror', () => this.fail(new Error('The game response could not be read. Please load the game again.')));
