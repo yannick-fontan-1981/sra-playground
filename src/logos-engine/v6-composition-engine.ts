@@ -1,5 +1,6 @@
 import { executeOperation, type OperationKey, type OperationResult, type SymbolicRecord } from './v6-operations.ts';
-import { type OperationTraceSink } from './v6-operation-trace.ts';
+import { type OperationCacheIdentity, type OperationTraceSink } from './v6-operation-trace.ts';
+import type { OperationResultCache } from './v6-operation-cache.ts';
 
 export interface CompositionBundle extends SymbolicRecord {
   id: string;
@@ -61,6 +62,8 @@ export interface ExecuteBundleOptions {
   caller: string;
   decisionRef: string;
   trace?: OperationTraceSink;
+  cache?: OperationResultCache;
+  cacheIdentity?: OperationCacheIdentity;
 }
 
 /** Execute the existing bundle contract without changing its decision semantics. */
@@ -71,12 +74,15 @@ export function executeBundleOperation(
   options: ExecuteBundleOptions,
 ): { result: OperationResult; bundleAdmitted: boolean; operationAdmission?: OperationAdmission; releaseAllowed: boolean } {
   const bundleAdmitted = validateBundle(bundle, state, revision);
+  const cached = options.cache && options.cacheIdentity ? options.cache.get(options.cacheIdentity) : undefined;
   const started = performance.now();
-  const result = executeOperation(bundle.operation_key, { ...state, focus: bundle.composition_ref, preserve_refs: bundle.preserve_refs });
+  const result = cached ?? executeOperation(bundle.operation_key, { ...state, focus: bundle.composition_ref, preserve_refs: bundle.preserve_refs });
   const executeUs = (performance.now() - started) * 1000;
+  if (!cached && options.cache && options.cacheIdentity) options.cache.set(options.cacheIdentity, result);
   options.trace?.record({
-    kind: 'operation', needId: options.needId, op: bundle.operation_key, caller: options.caller, mode: 'executed',
-    reason: bundle.purpose, inputRefs: [bundle.id, bundle.composition_ref], dependencyRevisions: { observation: revision },
+    kind: 'operation', needId: options.needId, op: bundle.operation_key, caller: options.caller, mode: cached ? 'cache_reused' : 'executed',
+    reason: cached ? 'valid dependency-identical operation result reused' : bundle.purpose,
+    inputRefs: [bundle.id, bundle.composition_ref], dependencyRevisions: { observation: revision },
     resultStatus: result.status === 'incomplete' ? 'partial' : 'complete',
     resultSummary: Array.isArray(result.value) ? { count: result.value.length } : { kind: typeof result.value }, executeUs,
   });
