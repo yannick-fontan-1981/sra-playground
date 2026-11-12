@@ -796,3 +796,40 @@ Implémenter `v6-native-authority.ts` localement pour :
 2. distinguer besoin présent, absent et bloqué ;
 3. transporter le même `needId` jusqu'à `executeBundleOperation` ;
 4. ne modifier aucune sélection ni priorité.
+
+
+## C1 — besoin produit avant release
+
+Ajout : `src/logos-engine/v6-native-authority.ts`.
+
+Le besoin est désormais évalué avant OP18/OP28 :
+- OP18 sans question ouverte => `not_required`, aucun calcul ;
+- OP18 avec question ouverte => événement `need`, même `needId` jusqu'à appel et consommation ;
+- OP28 bundle absent / non admis / sans actions => `blocked`, aucun calcul ;
+- OP28 admis => calcul puis admission par résultat.
+
+Typecheck strict : **OK**.
+
+Suite complète locale : **21/21 tests passent**.
+
+Nouveaux commits GitHub :
+- `6fc40e6532e93cf61538992498395524c76ba194` — native authority ;
+- `dc4925a444bac4e97201b7fec87e28debf768b0d` — tests need-to-release.
+
+Commit local correspondant :
+- `1c5bcce` — `feat: emit operation needs before native release`.
+- `eb4be05` — suivi local.
+
+### Statut C1 actualisé
+
+Le noyau C1 couvre maintenant réellement :
+- besoin présent ;
+- besoin absent ;
+- information bloquante ;
+- appel utile ;
+- consommation garde ;
+- invalidation de révision ;
+- restauration OP30 ;
+- déduplication.
+
+Prochaine étape : brancher un cache d'opérations réel dans l'autorité pour démontrer `executed` vs `cache_reused` et invalidation précise, puis qualifier son coût.
