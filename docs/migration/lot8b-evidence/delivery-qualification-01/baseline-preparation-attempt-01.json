@@ -1,0 +1,12 @@
+{
+  "schema": "logos-engine.lot8b.baseline-preparation-attempt.v1",
+  "recordedAt": "2026-11-12T04:45:17.788620+00:00",
+  "attempt": 1,
+  "status": "assertion_failed_before_execution",
+  "cause": "git worktree --no-checkout left an empty index and files; sparse-checkout configuration did not materialize it.",
+  "observedNativeFiles": 0,
+  "head": "4ff7bf45286a8a19d34401988adca587253ae41e",
+  "gameOrNativeExecution": false,
+  "candidateFilesChanged": false,
+  "globalLockAcquired": false
+}

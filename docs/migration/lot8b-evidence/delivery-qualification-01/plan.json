@@ -1,0 +1,159 @@
+{
+  "schema": "logos-engine.lot8b.delivery-functional-qualification-plan.v1",
+  "declaredAt": "2026-11-12T04:47:07.106600+00:00",
+  "status": "declared_before_execution",
+  "parentCheckpoint": "9f2d946ba9651652377b80b8029263682b47802b",
+  "validatedCodeCommit": "2583d81d856c13295040db88f5df8b3a99906bdc",
+  "publishedBaseline": {
+    "site": 107,
+    "native": "0.66.0",
+    "commit": "4ff7bf45286a8a19d34401988adca587253ae41e",
+    "checkout": "/workspace/sites/sra-lot8b-baseline066-20261112",
+    "manifest": "baseline-native.json"
+  },
+  "candidate": {
+    "checkout": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+    "manifest": "candidate-native.json",
+    "nativeFileCount": 331,
+    "canonicalDigest": "3ff1d9ad56e22aedc0fee3a0da6a3af50a1da0bc14a0ba01cb38272ba85234be",
+    "historicalDigest": "76a403016d2b28287194b7498f10e14727b7e3fb3f214d2f79cb0292390d54bf",
+    "published": false,
+    "versionReserved": false
+  },
+  "scope": "Complete the declared next functional delivery milestone: attributed BranchRouting common graphs, retained public regression streams, and paired common work forms/owner graphs against the actual published predecessor. No official cost or new game campaign is part of these commands.",
+  "phases": [
+    {
+      "id": "branch-common-graphs",
+      "chains": [
+        "simple_positive",
+        "triple_selection_move",
+        "contrary_effect",
+        "selected_acquisition_ablation",
+        "incomplete_selected_acquisition"
+      ],
+      "syntheticPublicReturns": 26,
+      "requiredEvidence": [
+        "cold actual common caller",
+        "proposal and actual dispatched command binding",
+        "current primitive guards",
+        "successful selected source events and next decision",
+        "raw complete common graph deltas and final snapshot",
+        "actual restore from common graph",
+        "contrary effect and acquisition ablation",
+        "terminal incomplete acquisition with retained full public returns and no suffix retry"
+      ],
+      "sourceFixture": "tests/fixtures/v6-branch-routing-reference.json",
+      "oracleRegenerated": false,
+      "captureTimeoutSeconds": 300,
+      "readerTimeoutSeconds": 300
+    },
+    {
+      "id": "recorded-regressions",
+      "cases": [
+        "CATR",
+        "RSWP",
+        "FOGW",
+        "VOIS",
+        "CONN",
+        "MIND",
+        "WEAV",
+        "TRIA",
+        "CRAF",
+        "ISOS",
+        "KATA"
+      ],
+      "checksPerCase": 17,
+      "expectedTotalChecks": 187,
+      "archivedActions": 390,
+      "archivedPublicPackets": 401,
+      "archivedFrames": 1755,
+      "archivedPrefixes": 289,
+      "archivedRequests": 679,
+      "archivedOfficialBoundaries": 33,
+      "gameEngineExecuted": false,
+      "LKEYIncluded": false,
+      "preflightTimeoutSeconds": 300,
+      "nodeTimeoutSecondsPerCase": 600,
+      "comparisonTimeoutSecondsPerCase": 180,
+      "campaignTimeoutSeconds": 2400,
+      "nodeOldSpaceMiB": 1536,
+      "maximumSimultaneousReplayProcesses": 1,
+      "harness": "Retained streaming tools for ten cases; retained released-streaming-v2 for WEAV. Comparator unchanged."
+    },
+    {
+      "id": "published-paired-common-work-forms",
+      "games": [
+        "STCK",
+        "SMLP"
+      ],
+      "forms": [
+        {
+          "game": "STCK",
+          "actions": 3,
+          "terminalInspections": 0
+        },
+        {
+          "game": "STCK",
+          "actions": 10,
+          "terminalInspections": 3
+        },
+        {
+          "game": "SMLP",
+          "actions": 3,
+          "terminalInspections": 0
+        },
+        {
+          "game": "SMLP",
+          "actions": 15,
+          "terminalInspections": 3
+        }
+      ],
+      "roles": [
+        "actual_published_066",
+        "branch_candidate"
+      ],
+      "captureTimeoutSecondsPerRole": 600,
+      "readerTimeoutSeconds": 600,
+      "nodeOldSpaceMiB": 1536,
+      "constraints": [
+        "strict command equality before supplying archived returns",
+        "raw graph deltas and all differences retained",
+        "own graph validation and changed-root hydration",
+        "only narrow proven source-clock scalar attribution",
+        "no automatic strict private graph equivalence or official cost eligibility",
+        "unselected BranchRouting proves preservation or refusal, not positive contribution"
+      ]
+    }
+  ],
+  "executionPolicy": {
+    "freezeExactToolsAndInputsBeforeEachPhase": true,
+    "noOverwriteAttemptDirectories": true,
+    "retainEveryFailure": true,
+    "boundedChildProcessGroups": true,
+    "existing524TestsNotRerunWithoutNewRisk": true,
+    "fullNpmTestExcluded": "The broad glob includes four modules with preloaded LKEY dependencies.",
+    "doNotOverlapReplayAndGraphCapture": "Avoid competing memory-heavy processes; ordinary development and commits remain independent.",
+    "durationsAreOfficialPerformance": false
+  },
+  "costRule": {
+    "metric": "complete-session median",
+    "strictUpperBoundPercent": 10,
+    "independentGames": [
+      "STCK",
+      "SMLP"
+    ],
+    "phaseAbove10PercentAllowedWhenBothGlobalsPass": true,
+    "crossGameCompensation": false,
+    "allSamplesRetained": true,
+    "officialMeasurementExecuted": false
+  },
+  "workPolicy": {
+    "ownCheckoutAndBranch": true,
+    "ordinaryWorkRequiresGlobalLock": false,
+    "peerAvailabilityWait": false,
+    "shortExclusivityOnlyForOfficialPerformanceAndPublication": true,
+    "heldLockFileMayBeDeleted": false,
+    "LKEY": "permanently_closed"
+  },
+  "nextAfterThisMilestone": "Review remaining attribution/reservation evidence, then official complete-session cost against the actual published predecessor and a separately versioned publication."
+}

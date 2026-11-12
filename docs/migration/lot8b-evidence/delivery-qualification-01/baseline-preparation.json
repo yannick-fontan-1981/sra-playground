@@ -1,0 +1,34 @@
+{
+  "schema": "logos-engine.lot8b.actual-published-baseline-preparation.v1",
+  "recordedAt": "2026-11-12T04:47:07.083766+00:00",
+  "checkout": "/workspace/sites/sra-lot8b-baseline066-20261112",
+  "commit": "4ff7bf45286a8a19d34401988adca587253ae41e",
+  "publishedSiteVersion": 107,
+  "publishedNativeVersion": "0.66.0",
+  "actualPublication": true,
+  "fileCount": 329,
+  "digest": "ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316",
+  "sparsePaths": [
+    "/package.json",
+    "/src/logos-engine/",
+    "/src/runtime/",
+    "/scripts/measure-native-loop-costs.mjs",
+    "/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+    "/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/composition_target_tree.json",
+    "/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+    "/docs/migration/native-campaigns-v39/stck-public-trace.json.gz*",
+    "/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz*"
+  ],
+  "ordinaryWorkGlobalLockRequired": false,
+  "globalLockAcquired": false,
+  "gameExecuted": false,
+  "gamePayloadDecoded": false,
+  "sourceFilesCopiedByGitOnly": true,
+  "measurementExecuted": false,
+  "published": false,
+  "preparationAttemptsRetained": [
+    "baseline-preparation-attempt-01.json",
+    "baseline-preparation-attempt-02.json"
+  ],
+  "workingTreeClean": true
+}

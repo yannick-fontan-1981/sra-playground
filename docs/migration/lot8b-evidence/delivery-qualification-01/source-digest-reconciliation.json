@@ -1,0 +1,18 @@
+{
+  "schema": "logos-engine.lot8b.native-digest-encoding-reconciliation.v1",
+  "recordedAt": "2026-11-12T04:47:07.106359+00:00",
+  "status": "identical_file_maps_distinct_declared_encodings",
+  "candidateFileCount": 331,
+  "historicalEvidence": "docs/migration/lot8b-evidence/common-integration-01/validation-summary.json",
+  "historicalEvidenceSha256": "3425d5caf68e37e27b2a8f64167c62221ef55a552d7b819ebb2727f564c332d0",
+  "historicalDigest": "76a403016d2b28287194b7498f10e14727b7e3fb3f214d2f79cb0292390d54bf",
+  "historicalOrdering": "Python pathlib.Path component ordering, then insertion-order compact JSON.",
+  "canonicalDigest": "3ff1d9ad56e22aedc0fee3a0da6a3af50a1da0bc14a0ba01cb38272ba85234be",
+  "canonicalOrdering": "Unicode code-point lexical order of complete repository-relative path strings, compact ASCII-escaped JSON mapping path to SHA-256.",
+  "canonicalCompatibleWith": "scripts/run-v53-campaign-proof.py native_source and retained owner graph inventory tools",
+  "completeFileMapsEqual": true,
+  "nativeSourceBytesChanged": false,
+  "historicalReceiptsChanged": false,
+  "baselineCanonicalDigest": "ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316",
+  "qualification": "Existing per-file checks and historical ordered-map hashes remain valid. New cross-lot evidence uses the canonical lexical ordering, not a source change."
+}
