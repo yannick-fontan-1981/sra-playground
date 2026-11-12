@@ -226,3 +226,51 @@ Porter le cœur de 5B `AddressedField` à partir du donneur Git V6 en isolant d'
 3. invalidation sur ambiguïté, déplacement pertinent ou changement de portée ;
 4. réponse observée et réfutation ;
 5. sauvegarde/restauration nécessaires au consommateur.
+
+
+## 5B — FieldStock et rétention à la frontière
+
+Donneurs V6 inspectés :
+- `agents/yf_arc3_v6/laya_proto/common_field_stock.py`
+- `agents/yf_arc3_v6/laya_proto/common_addressed_field.py::ensure_stock`
+- `common_addressed_field.py::record` pour la transition de niveau et la fabrication du `prior`.
+
+Port :
+- `src/logos-engine/field-stock.ts`
+- `src/logos-engine/addressed-field-retention.ts`
+- `src/runtime/observed-addressed-material-runtime.ts`
+- `tests/field-stock-retention.test.ts`
+
+Responsabilité reconstruite :
+- `AddressedField` est le propriétaire de la connaissance retenue via `prior` ;
+- `FieldStock` est une reconstruction de portée courante, créée seulement si la nouvelle observation revalide le stock rappelé ;
+- à la frontière, le `model` et le `stock` actifs sont supprimés ;
+- le `prior` survit avec une qualification explicite imposant de nouvelles liaisons / nouveaux témoins dans l'epoch suivant ;
+- aucune restauration artificielle `state/restore` n'est ajoutée à `AddressedField`, le donneur n'en possède pas.
+
+Raccord runtime initial :
+- `ObservedAddressedMaterialRuntime` conserve l'état de rétention entre observations ;
+- `mayUseRetainedKnowledge()` n'est vrai qu'après `FieldStock.create()` réussi sur la scène courante ;
+- une scène incompatible conserve le `prior` mais retourne `retained_not_applicable` ;
+- une réfutation du stock revalidé est distincte d'une simple connaissance en attente de revalidation.
+
+Qualification locale de ce slice :
+- 7/7 nouveaux tests réussis ;
+- `tsc --noEmit` réussi sur les nouveaux modules ;
+- les 29 tests historiques de 5A/5B/5C restent la dernière régression qualifiée avant ce slice et n'ont pas été rejoués intégralement dans le checkout minimal de reconstruction de cette étape.
+
+Commits GitHub :
+- `48c3563e3e919c47a90cb712e22dcf30e859563c` — FieldStock create/retained ;
+- `308c1dd0c2e5ee59d496b39844aec78ace9de0b0` — rétention AddressedField à la frontière ;
+- `8a8b1decd8f52244d17dbe5bb18ca949498f139a` — propriétaire runtime ;
+- `34484fa3a73770909e40d4d346f59cebb82bcfff` — tests de rétention/revalidation.
+
+Limites explicites :
+- `FieldStock.propose()`, `before()`, `after()` et la totalité de `record()` ne sont pas encore portés ;
+- le worker SRA V6 commun est toujours absent de la reconstruction, donc le raccord est exécutable au niveau runtime TypeScript mais pas encore branché au worker de décision complet ;
+- aucune persistance disque/processus n'est revendiquée : seule la rétention inter-observations/inter-niveaux démontrée par le donneur courant est reconstruite.
+
+## Prochaine étape 5B
+
+Porter les tranches réellement consommées de `FieldStock.record/before/after/propose`, puis raccorder l'acquisition et la réponse existantes au même propriétaire `ObservedAddressedMaterialRuntime` pour obtenir un scénario intégré :
+`apprentissage -> frontière -> revalidation -> proposition bornée -> réponse -> décision`.
