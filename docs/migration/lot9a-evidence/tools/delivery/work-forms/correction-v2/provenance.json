@@ -1,0 +1,173 @@
+{
+  "schema": "logos-engine.lot9a-reader-correction-provenance.v1",
+  "createdAt": "2026-11-12T15:02:38.760920+00:00",
+  "status": "prepared_for_independent_review_and_prospective_amendment",
+  "derivedFrom": {
+    "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/qualify-cost-owner-graphs.mjs",
+    "bytes": 68603,
+    "sha256": "324af70cfb75c29aec57cbf647f3d21be9848def151ff2357add8a8dc85c31a7"
+  },
+  "derivative": {
+    "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/correction-v2/qualify-cost-owner-graphs-v2.mjs",
+    "bytes": 81119,
+    "sha256": "7ccdcd16a359b9d9de7a4464659eaea3b73a11e4255e62169e5f2dc406fbf182"
+  },
+  "diff": {
+    "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/correction-v2/qualify-cost-owner-graphs-v2.diff",
+    "bytes": 23673,
+    "sha256": "ef82da0fc7eef6fa1d1d979d02055ae8af40151072501b944e5ac4d5bd22fa11"
+  },
+  "frozenV1ToolsUnchanged": [
+    {
+      "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/capture-cost-owner-graphs.mjs",
+      "bytes": 34460,
+      "sha256": "0d810cf771e03a0910ffad6bd937e90f8a7cad147f48014c7bdfddc154487c68"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/record-owner-source-inventory.mjs",
+      "bytes": 16924,
+      "sha256": "1bffb880b5949caf64c6e04e3cf2e5219d56c55805e3c8d539ef22bddb250e36"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/qualify-cost-owner-graphs.mjs",
+      "bytes": 68603,
+      "sha256": "324af70cfb75c29aec57cbf647f3d21be9848def151ff2357add8a8dc85c31a7"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/cases.json",
+      "bytes": 1368,
+      "sha256": "8bb390fb0b9fd2c84202c1eac55d599558b29336d410b92d76618048a2fd1124"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/README.md",
+      "bytes": 9940,
+      "sha256": "473ca6248d20f5df70c217c2f8ab55402db222e7e1bcecd2e219baa892c772c2"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/syntax-checks.json",
+      "bytes": 1787,
+      "sha256": "3421757e7ce3dad7ab8a0a4aa11fd10760e4fa751342ddfd134277f9be00f474"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/provenance.json",
+      "bytes": 9607,
+      "sha256": "5fadaaedff03558490d0c4211bb954683fdae86c5ec28241a09b02120e8adf3b"
+    }
+  ],
+  "retainedFailure": [
+    {
+      "path": "docs/migration/lot9a-evidence/delivery-final-068-01/work-qualify-01/receipt.json",
+      "bytes": 3744,
+      "sha256": "dce4f63d46e3ff4c921193e5a7d9a5d52c4865858779eb0de468b2db385d742c"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/delivery-final-068-01/work-qualify-01/graph-review.json",
+      "bytes": 374380,
+      "sha256": "64c4d4b2b982d362eb01e9b791252aff70f0e0367647f7ca368d743dd647ca6a"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/delivery-final-068-01/work-qualify-01/graph-review.differences.jsonl.gz",
+      "bytes": 1033137,
+      "sha256": "dd76a98e456c2a0cddfa3944b79a301562360112e72453883ef6feae6ca4de4c"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/delivery-final-068-01/work-qualify-01/output.log.gz",
+      "bytes": 270,
+      "sha256": "f712c6ecddefe305a40f1931ec8517e7613a929e449e97a5539429c11e8a4466"
+    }
+  ],
+  "captures": {
+    "baseline": {
+      "capture": {
+        "path": "docs/migration/lot9a-evidence/delivery-final-068-01/work-baseline-01/baseline.json.gz",
+        "bytes": 7900588,
+        "sha256": "d598c17649b43a3a9cdc579d6c25e249c4d7a72559b55bf76c9fac63dca1b954"
+      },
+      "receipt": {
+        "path": "docs/migration/lot9a-evidence/delivery-final-068-01/work-baseline-01/baseline.receipt.json",
+        "bytes": 129951,
+        "sha256": "a4a0dd02692302ccd2b36203497dd8618a5b5c2e655403b980fe220bf08244a3"
+      }
+    },
+    "candidate": {
+      "capture": {
+        "path": "docs/migration/lot9a-evidence/delivery-final-068-01/work-candidate-01/candidate.json.gz",
+        "bytes": 8867554,
+        "sha256": "f2e7a8f8d8487c92dc5bdc55ce6cbf90c6a0ab5ce9aace0c63d16bfa9dbf0732"
+      },
+      "receipt": {
+        "path": "docs/migration/lot9a-evidence/delivery-final-068-01/work-candidate-01/candidate.receipt.json",
+        "bytes": 129952,
+        "sha256": "5cc993587c85e801ab5b56500ed44f6e19c205cb8e40bbe43e74cb475195d51e"
+      }
+    }
+  },
+  "ownerInventory": {
+    "path": "docs/migration/lot9a-evidence/delivery-final-068-01/work-inventory-01/owner-source-inventory.json",
+    "bytes": 2088532,
+    "sha256": "8f66337db0df5f90146442667bd650126b29c59f069f6cad4902240ccc6f88db"
+  },
+  "nativeManifests": {
+    "baseline": {
+      "path": "docs/migration/lot9a-evidence/delivery-final-068-01/baseline-native.json",
+      "bytes": 39333,
+      "sha256": "18fcc15c6e57f1bf6aab33cc62498e6a5a76836d85b890378be957a0e6da1c57"
+    },
+    "candidate": {
+      "path": "docs/migration/lot9a-evidence/delivery-final-068-01/candidate-native.json",
+      "bytes": 39694,
+      "sha256": "10ef61a1b937cbfca47332f7138a4bd1872323434eee2c3b41c0d0fea81f5379"
+    }
+  },
+  "producerProof": {
+    "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/correction-v2/producer-proof.json",
+    "bytes": 17617,
+    "sha256": "78792c584aeea89c1de9a624751eb38c23c65a275d7b57b780761310ee4403d5"
+  },
+  "analysis": {
+    "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/correction-v2/amendment-analysis.json",
+    "bytes": 29741,
+    "sha256": "71a2b755adc66afb109ddde822b1498e9c5737a86769911308d115ca295f6647"
+  },
+  "syntaxCheck": {
+    "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/correction-v2/syntax-checks.json",
+    "bytes": 816,
+    "sha256": "eef126445874176999b7362a71f9521c866d08235fb2ac10a37ca836d92c2b0b"
+  },
+  "readme": {
+    "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/correction-v2/README.md",
+    "bytes": 5806,
+    "sha256": "7080543c0ed442aa5d4ff87507d5180d8b58a94dda8cbcb6bbf2e701f85c5254"
+  },
+  "budget": {
+    "budgetKey": "work-qualify",
+    "priorAttemptNumber": 1,
+    "priorElapsedSeconds": 50.551226686999144,
+    "maximumAttempts": 2,
+    "remainingAttempts": 1,
+    "maximumCumulativeSeconds": 600,
+    "remainingCumulativeSeconds": 549.4487733130009,
+    "maximumSecondsPerAttempt": 300,
+    "newSessions": 0,
+    "newPhysicalReturns": 0,
+    "secondFunctionalReadExecuted": false
+  },
+  "changes": [
+    "Adjust relative imports and ROOT by one directory level; derive from frozen v1.",
+    "Pin original reader, capture tool, two retained captures, failed first-read evidence and actual common producers.",
+    "Bind each new release report to the matching complete persisted src_decision body and a new role chain in its creation handle.",
+    "Bound the new duration by both original monotonic handle interval and active elapsed increase.",
+    "Require exact retained complete reports, including total_ms, on advance/inspect.",
+    "Attribute only /whyAct/decision/total_ms after both role proofs; retain all prior graph, snapshot, decision, command and owner checks."
+  ],
+  "nativeSourceChanged": false,
+  "originalToolsChanged": false,
+  "capturesChanged": false,
+  "originalOracleExecuted": false,
+  "nativeRuntimeExecuted": false,
+  "functionalReaderExecuted": false,
+  "officialPerformanceMeasurement": false,
+  "publicationPerformed": false,
+  "newNativeSessions": 0,
+  "newPhysicalReturns": 0
+}

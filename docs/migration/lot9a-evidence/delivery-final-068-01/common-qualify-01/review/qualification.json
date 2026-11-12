@@ -1,0 +1,307 @@
+{
+  "schema": "logos-engine.lot9a.chart-common-qualification.v1",
+  "status": "qualified_synthetic_common_work_forms_and_complete_graphs",
+  "startedAt": "2026-11-12T14:59:58.350Z",
+  "reader": {
+    "path": "docs/migration/lot9a-evidence/tools/delivery/chart-common/qualify.mjs",
+    "bytes": 39886,
+    "sha256": "edc24c0c2896cb0497606810ba06bb58fbf815c9690ae0f2834126359eb4b638"
+  },
+  "capture": "docs/migration/lot9a-evidence/delivery-final-068-01/common-capture-01/capture",
+  "runtimeExecutions": 0,
+  "ownerExecutions": 0,
+  "originalOraclesExecuted": 0,
+  "officialGameRuns": 0,
+  "officialSolvedLevels": 0,
+  "officialPerformanceMeasurement": false,
+  "globalLockAcquired": false,
+  "publicWorkerQualified": false,
+  "publicServiceQualified": false,
+  "publicTicketsQualified": false,
+  "failures": [],
+  "captureReceipt": {
+    "path": "docs/migration/lot9a-evidence/delivery-final-068-01/common-capture-01/capture/receipt.json",
+    "bytes": 988901,
+    "sha256": "b354121caab89b64b49a25e4ad5887b5e5b48c6f23bdc8da21ed4632814ddbaa"
+  },
+  "sessions": [
+    {
+      "caseId": "primary",
+      "physicalReturns": 3,
+      "activeChartAcquisitions": 3,
+      "passiveChartAcquisitions": 0,
+      "suppressedChartAcquisitions": 0,
+      "capturePoints": 14,
+      "sourceFactRestorations": [
+        {
+          "operation": 11,
+          "get": 1,
+          "put": 0,
+          "physicalReturn": 1
+        },
+        {
+          "operation": 24,
+          "get": 3,
+          "put": 2,
+          "physicalReturn": 2
+        },
+        {
+          "operation": 37,
+          "get": 5,
+          "put": 4,
+          "physicalReturn": 3
+        }
+      ],
+      "controlledColdResets": 2,
+      "recoveredColdResets": 2,
+      "nativeRestorations": [
+        {
+          "operation": 2,
+          "rootRevision": 1,
+          "graphRevision": 189
+        },
+        {
+          "operation": 13,
+          "rootRevision": 3,
+          "graphRevision": 340
+        },
+        {
+          "operation": 15,
+          "rootRevision": 3,
+          "graphRevision": 340
+        },
+        {
+          "operation": 26,
+          "rootRevision": 4,
+          "graphRevision": 457
+        },
+        {
+          "operation": 28,
+          "rootRevision": 4,
+          "graphRevision": 457
+        },
+        {
+          "operation": 39,
+          "rootRevision": 5,
+          "graphRevision": 575
+        }
+      ],
+      "graphNodes": 255,
+      "graphDeltas": 575,
+      "finalGraphChain": "d64e62f01a7e696b6404d805d1b0e9353a6cc8d033887dec48cf0cacb5b5ec4d",
+      "ownerOperationCount": 40,
+      "memoryOperationCount": 6
+    },
+    {
+      "caseId": "contrary",
+      "physicalReturns": 1,
+      "activeChartAcquisitions": 1,
+      "passiveChartAcquisitions": 0,
+      "suppressedChartAcquisitions": 0,
+      "capturePoints": 6,
+      "sourceFactRestorations": [
+        {
+          "operation": 11,
+          "get": 1,
+          "put": 0,
+          "physicalReturn": 1
+        }
+      ],
+      "controlledColdResets": 0,
+      "recoveredColdResets": 0,
+      "nativeRestorations": [
+        {
+          "operation": 2,
+          "rootRevision": 1,
+          "graphRevision": 189
+        },
+        {
+          "operation": 13,
+          "rootRevision": 3,
+          "graphRevision": 338
+        }
+      ],
+      "graphNodes": 217,
+      "graphDeltas": 338,
+      "finalGraphChain": "409ea06b45eb3c5e970e75a87354f64b422af50121421db5ec80361e130f8a76",
+      "ownerOperationCount": 14,
+      "memoryOperationCount": 2
+    },
+    {
+      "caseId": "selected-acquisition-ablation",
+      "physicalReturns": 1,
+      "activeChartAcquisitions": 0,
+      "passiveChartAcquisitions": 0,
+      "suppressedChartAcquisitions": 1,
+      "capturePoints": 8,
+      "sourceFactRestorations": [
+        {
+          "operation": 11,
+          "get": 1,
+          "put": 0,
+          "physicalReturn": 1
+        }
+      ],
+      "controlledColdResets": 0,
+      "recoveredColdResets": 0,
+      "nativeRestorations": [
+        {
+          "operation": 2,
+          "rootRevision": 1,
+          "graphRevision": 189
+        },
+        {
+          "operation": 13,
+          "rootRevision": 3,
+          "graphRevision": 340
+        },
+        {
+          "operation": 14,
+          "rootRevision": 3,
+          "graphRevision": 340
+        }
+      ],
+      "graphNodes": 221,
+      "graphDeltas": 351,
+      "finalGraphChain": "8fd9c59cca64649ab8f12a0c22130f7a60dff7b1a2ba92b88cc11d8f72aaa91d",
+      "ownerOperationCount": 20,
+      "memoryOperationCount": 2
+    },
+    {
+      "caseId": "passive-scene-equal",
+      "physicalReturns": 2,
+      "activeChartAcquisitions": 1,
+      "passiveChartAcquisitions": 1,
+      "suppressedChartAcquisitions": 0,
+      "capturePoints": 12,
+      "sourceFactRestorations": [
+        {
+          "operation": 11,
+          "get": 1,
+          "put": 0,
+          "physicalReturn": 1
+        },
+        {
+          "operation": 17,
+          "get": 3,
+          "put": 2,
+          "physicalReturn": 2
+        }
+      ],
+      "controlledColdResets": 0,
+      "recoveredColdResets": 0,
+      "nativeRestorations": [
+        {
+          "operation": 2,
+          "rootRevision": 1,
+          "graphRevision": 189
+        },
+        {
+          "operation": 13,
+          "rootRevision": 3,
+          "graphRevision": 340
+        },
+        {
+          "operation": 14,
+          "rootRevision": 3,
+          "graphRevision": 341
+        },
+        {
+          "operation": 19,
+          "rootRevision": 4,
+          "graphRevision": 454
+        }
+      ],
+      "graphNodes": 232,
+      "graphDeltas": 454,
+      "finalGraphChain": "9eefb0f9cae1746f06347c600afe5b5e5df91ff70d913c4c7420a2c6e94a31b3",
+      "ownerOperationCount": 20,
+      "memoryOperationCount": 4
+    },
+    {
+      "caseId": "passive-scene-changed",
+      "physicalReturns": 2,
+      "activeChartAcquisitions": 1,
+      "passiveChartAcquisitions": 1,
+      "suppressedChartAcquisitions": 0,
+      "capturePoints": 12,
+      "sourceFactRestorations": [
+        {
+          "operation": 11,
+          "get": 1,
+          "put": 0,
+          "physicalReturn": 1
+        },
+        {
+          "operation": 17,
+          "get": 3,
+          "put": 2,
+          "physicalReturn": 2
+        }
+      ],
+      "controlledColdResets": 0,
+      "recoveredColdResets": 0,
+      "nativeRestorations": [
+        {
+          "operation": 2,
+          "rootRevision": 1,
+          "graphRevision": 189
+        },
+        {
+          "operation": 13,
+          "rootRevision": 3,
+          "graphRevision": 340
+        },
+        {
+          "operation": 14,
+          "rootRevision": 3,
+          "graphRevision": 341
+        },
+        {
+          "operation": 19,
+          "rootRevision": 4,
+          "graphRevision": 462
+        }
+      ],
+      "graphNodes": 238,
+      "graphDeltas": 462,
+      "finalGraphChain": "085623c82e0ed94e420724878d1aa4f78f4fef900116fc521f683c4b98cc4cd6",
+      "ownerOperationCount": 20,
+      "memoryOperationCount": 4
+    }
+  ],
+  "rawIntegrity": {
+    "rawBytes": 17109419,
+    "rawSha256": "82078e557fe7bd398bcbaaedde762129d14d4c65ef55fe12c9be80717e64a00e",
+    "records": 80
+  },
+  "completeGraphBlobs": 21,
+  "accounting": {
+    "thisPassedCapture": {
+      "initializedSessions": 5,
+      "physicalReturns": 9,
+      "activeChartAcquisitions": 6,
+      "passiveChartAcquisitions": 2,
+      "suppressedChartAcquisitions": 1
+    },
+    "cumulativeThisTool": {
+      "sessionStarts": 5,
+      "initializedSessions": 5,
+      "physicalReturns": 9,
+      "elapsedSeconds": 21.568
+    },
+    "inheritedFunctionalAccounting": {
+      "initializedSessions": 10,
+      "physicalReturns": 14
+    },
+    "includingInherited": {
+      "initializedSessions": 15,
+      "physicalReturns": 23
+    },
+    "qualificationCreatesSessions": 0
+  },
+  "restorationQualification": "Source put/get/restore are linked in activity order and to the committed source fact. Native restore arguments match the actual historical family root and all its hydrated fragments. Two explicit cold resets are separate and are repaired by the real common graph, without another physical return.",
+  "scope": "Complete actual graphs, source facts, native snapshots, proposals, authorizations, packets and owner operations were retained and checked. No graph subset, field projection, new oracle or family execution was used by this reader. The public service/worker/ticket boundary and official costs remain outside this proof.",
+  "finishedAt": "2026-11-12T15:00:09.281Z",
+  "elapsedSeconds": 10.932
+}

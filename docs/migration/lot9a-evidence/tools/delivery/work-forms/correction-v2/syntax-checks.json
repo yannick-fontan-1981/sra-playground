@@ -1,0 +1,25 @@
+{
+  "schema": "logos-engine.lot9a-corrective-reader-syntax.v1",
+  "startedAt": "2026-11-12T15:02:38.500201+00:00",
+  "finishedAt": "2026-11-12T15:02:38.598266+00:00",
+  "elapsedSeconds": 0.09807038799954171,
+  "command": [
+    "node",
+    "--check",
+    "docs/migration/lot9a-evidence/tools/delivery/work-forms/correction-v2/qualify-cost-owner-graphs-v2.mjs"
+  ],
+  "timeoutSeconds": 15,
+  "exitCode": 0,
+  "stdout": "",
+  "stderr": "",
+  "moduleExecuted": false,
+  "importsExecuted": false,
+  "nativeSessions": 0,
+  "physicalReturns": 0,
+  "readerFunctionalExecuted": false,
+  "checked": {
+    "path": "docs/migration/lot9a-evidence/tools/delivery/work-forms/correction-v2/qualify-cost-owner-graphs-v2.mjs",
+    "bytes": 81119,
+    "sha256": "7ccdcd16a359b9d9de7a4464659eaea3b73a11e4255e62169e5f2dc406fbf182"
+  }
+}

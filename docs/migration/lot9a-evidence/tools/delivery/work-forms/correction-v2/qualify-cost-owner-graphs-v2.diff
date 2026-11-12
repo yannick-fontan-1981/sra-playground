@@ -1,0 +1,248 @@
+--- docs/migration/lot9a-evidence/tools/delivery/work-forms/qualify-cost-owner-graphs.mjs
++++ docs/migration/lot9a-evidence/tools/delivery/work-forms/correction-v2/qualify-cost-owner-graphs-v2.mjs
+@@ -2,6 +2,8 @@
+ /** Review fresh published 0.67 / final 0.68 Chart work forms, six owners, full snapshots and complete graphs.
+  * CLI: node SCRIPT INVENTORY.json BASELINE.gz BASELINE.receipt.json CANDIDATE.gz CANDIDATE.receipt.json REVIEW.json FORMS.json
+  * Reads functional captures only. No runtime, replay, game or timing report runs.
++ * Corrective v2 preserves the failed v1 and attributes only the source-produced
++ * whyAct.decision.total_ms leaf after creation and exact-retention proofs.
+  */
+ import assert from 'node:assert/strict';
+ import { createHash } from 'node:crypto';
+@@ -14,19 +16,36 @@
+ import { isDeepStrictEqual } from 'node:util';
+ import { fileURLToPath, pathToFileURL } from 'node:url';
+ import { createGunzip, createGzip, gunzipSync } from 'node:zlib';
+-import { digest, compareUnicode } from '../../../../../../src/logos-engine/canonical.ts';
+-import { decodeNativeState, NATIVE_STORE_PROFILE } from '../../../../../../src/logos-engine/v6-knowledge-store.ts';
+-import { hydrateNativeState, isNativeStateGraph } from '../../../../../../src/logos-engine/v6-native-state-graph.ts';
+-import { symbolicDigest } from '../../../../../../src/logos-engine/v6-hash.ts';
+-import { V6_NATIVE_PROGRAM_REFERENCE } from '../../../../../../src/logos-engine/v6-src-program.ts';
++import { digest, compareUnicode } from '../../../../../../../src/logos-engine/canonical.ts';
++import { decodeNativeState, NATIVE_STORE_PROFILE } from '../../../../../../../src/logos-engine/v6-knowledge-store.ts';
++import { hydrateNativeState, isNativeStateGraph } from '../../../../../../../src/logos-engine/v6-native-state-graph.ts';
++import { symbolicDigest } from '../../../../../../../src/logos-engine/v6-hash.ts';
++import { V6_NATIVE_PROGRAM_REFERENCE } from '../../../../../../../src/logos-engine/v6-src-program.ts';
+ 
+-const SCRIPT = fileURLToPath(import.meta.url), ROOT = resolve(dirname(SCRIPT), '../../../../../..');
++const SCRIPT = fileURLToPath(import.meta.url), ROOT = resolve(dirname(SCRIPT), '../../../../../../..');
+ const BASE = resolve(ROOT, 'docs/migration/lot9a-evidence');
+ const FINAL = resolve(ROOT, 'docs/migration/lot9a-evidence/delivery-final-068-01');
+ const TOOL_DIRECTORY = resolve(BASE, 'tools/delivery/work-forms');
+ const CAPTURE_TOOL = resolve(TOOL_DIRECTORY, 'capture-cost-owner-graphs.mjs');
+ const INVENTORY_TOOL = resolve(TOOL_DIRECTORY, 'record-owner-source-inventory.mjs');
+-const DERIVED_FROM = resolve(ROOT, 'docs/migration/lot8b-evidence/tools/final-functional/work-forms/qualify-cost-owner-graphs-v2.mjs');
++const DERIVED_FROM = resolve(TOOL_DIRECTORY, 'qualify-cost-owner-graphs.mjs');
++const PRIOR_READER_SHA256 = '324af70cfb75c29aec57cbf647f3d21be9848def151ff2357add8a8dc85c31a7';
++const CAPTURE_SHA256 = '0d810cf771e03a0910ffad6bd937e90f8a7cad147f48014c7bdfddc154487c68';
++const RELEASE_CLOCK_PINS = {
++  'src/logos-engine/v6-composition-engine.ts': 'c259548ad4b74b6aa9eaa589da3856469b73c4e1e1104ccfac55f00e8e1ead56',
++  'src/logos-engine/v6-native-authority.ts': 'f5a54ecac86fb097ee739dc6e4f8b4729819d58c9992fee92188527a1544b3ff',
++  'src/logos-engine/v6-reasoning-memory.ts': 'b55c186c99636f28c9e6e9c657b9bb50892eac06a3306be197503188069d901a',
++};
++const RETAINED_CAPTURE_SHA256 = {
++  baseline: 'd598c17649b43a3a9cdc579d6c25e249c4d7a72559b55bf76c9fac63dca1b954',
++  candidate: 'f2e7a8f8d8487c92dc5bdc55ce6cbf90c6a0ab5ce9aace0c63d16bfa9dbf0732',
++};
++const RETAINED_FAILURE_SHA256 = {
++  'receipt.json': 'dce4f63d46e3ff4c921193e5a7d9a5d52c4865858779eb0de468b2db385d742c',
++  'graph-review.json': '64c4d4b2b982d362eb01e9b791252aff70f0e0367647f7ca368d743dd647ca6a',
++  'graph-review.differences.jsonl.gz': 'dd76a98e456c2a0cddfa3944b79a301562360112e72453883ef6feae6ca4de4c',
++  'output.log.gz': 'f712c6ecddefe305a40f1931ec8517e7613a929e449e97a5539429c11e8a4466',
++};
+ const CAPTURE_DERIVATION = resolve(ROOT, 'docs/migration/lot8b-evidence/tools/final-functional/work-forms/capture-cost-owner-graphs.mjs');
+ const POLICY_PATH = 'reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm';
+ const OWNER = 'public_chart_navigation';
+@@ -56,7 +75,8 @@
+ const ROLE_VALIDATORS = ['src/logos-engine/kernel.ts', 'src/logos-engine/v6-knowledge-store.ts'];
+ const COMMON_VALIDATORS = ['src/logos-engine/canonical.ts',
+   'src/logos-engine/v6-native-state-graph.ts', 'src/logos-engine/v6-hash.ts', 'src/logos-engine/v6-src-program.ts', 'src/logos-engine/v6/programs.json',
+-  'src/runtime/v6-agent-service.ts', 'src/logos-engine/v6-reasoning-memory.ts', 'src/logos-engine/v6-native-authority.ts'];
++  'src/runtime/v6-agent-service.ts', 'src/logos-engine/v6-reasoning-memory.ts', 'src/logos-engine/v6-native-authority.ts',
++  'src/logos-engine/v6-composition-engine.ts'];
+ const hash = bytes => createHash('sha256').update(bytes).digest('hex');
+ const label = path => path.startsWith(ROOT + sep) ? relative(ROOT, path) : path;
+ const own = (value, key) => Object.hasOwn(value, key);
+@@ -216,7 +236,11 @@
+       preparedOnly: true, officialPerformanceEligible: false, strictCommonGraphParity: false,
+       publishedBaseline: { site: 108, sourceCommit: PUBLISHED_BASELINE, nativeVersion: '0.67.0' }, candidatePublished: false,
+       differenceCount: 0, unattributedDifferenceCount: 0, differenceClasses: {}, differenceExamples: [],
+-      traceClockBounds: [], ownerCheckpointCoverage: [], sourceFactCoverage: [] };
++      traceClockBounds: [], releaseDurationBounds: [], ownerCheckpointCoverage: [], sourceFactCoverage: [],
++      readerCorrection: { version: 2, priorAttempt: 'work-qualify-01', budgetKey: 'work-qualify',
++        priorFailurePreserved: true, recapturePerformed: false,
++        onlyNewAttributionPath: '/whyAct/decision/total_ms',
++        rule: 'Prove the exact NativeSrcBridge producer, a new release within its actual handle, and exact full-report retention at every subsequent point.' } };
+   }
+   async input(path) {
+     const record = await fingerprint(path), previous = this.inputs.get(record.path);
+@@ -236,7 +260,15 @@
+   async provenance() {
+     this.result.generator = await this.input(SCRIPT);
+     this.result.derivedFrom = await this.input(DERIVED_FROM);
++    assert.equal(this.result.derivedFrom.sha256, PRIOR_READER_SHA256, 'The failed frozen v1 reader must remain unchanged');
+     this.captureTool = await this.input(CAPTURE_TOOL);
++    assert.equal(this.captureTool.sha256, CAPTURE_SHA256, 'The original capture and its unmodified clocks must remain unchanged');
++    this.result.readerCorrection.retainedFailure = [];
++    for (const [name, expectedSha256] of Object.entries(RETAINED_FAILURE_SHA256)) {
++      const record = await this.input(resolve(FINAL, 'work-qualify-01', name));
++      assert.equal(record.sha256, expectedSha256, 'The first failed qualification evidence must remain unchanged');
++      this.result.readerCorrection.retainedFailure.push(record);
++    }
+     this.captureDerivation = await this.input(CAPTURE_DERIVATION);
+     this.result.retainedBaseline = false;
+     assert.notEqual(this.paths.baseline, this.paths.candidate, 'A/B capture files must be distinct');
+@@ -267,6 +299,7 @@
+       assert.deepEqual(await read(await this.recorded(receipt.nativeSourceBefore)), receipt.nativeInventoryBefore);
+       await this.recorded(receipt.cases);
+       assert.equal(await this.recorded(receipt.report), this.paths[role]);
++      assert.equal(receipt.report.sha256, RETAINED_CAPTURE_SHA256[role], 'Corrective reading must use the original retained capture');
+       assert.equal(new Set(receipt.inputsBefore.map(row => row.path)).size, receipt.inputsBefore.length);
+       for (const record of receipt.inputsBefore) await this.recorded(record);
+       for (const required of [receipt.cases, receipt.nativeSourceBefore, receipt.generator, receipt.derivedFrom]) {
+@@ -327,6 +360,43 @@
+     assert.equal(originalExtensions, runtimeSources.baseline.extensions, 'Other extension source bytes must remain exact');
+     this.result.activeClockSource = { baseline: runtimeSources.baseline.record, candidate: runtimeSources.candidate.record,
+       rule: 'Snapshot activeSeconds is bounded by actual runtime elapsedMs before/after the same service.handle and its unmodified performance.now interval. executionMs is zero. No clock replacement or numerical normalization.' };
++    const releaseSources = {};
++    for (const role of ['baseline', 'candidate']) {
++      releaseSources[role] = {};
++      for (const [path, expectedSha256] of Object.entries(RELEASE_CLOCK_PINS)) {
++        const record = await this.input(resolve(this.receipts[role].checkout, path));
++        assert.equal(record.sha256, expectedSha256, 'The exact release-duration producer/source changed: ' + role + '/' + path);
++        assert.equal(record.sha256, this.receipts[role].nativeInventoryBefore.files[path]);
++        releaseSources[role][path] = record;
++      }
++      const engine = await readFile(resolve(this.receipts[role].checkout, 'src/logos-engine/v6-composition-engine.ts'), 'utf8');
++      const producerStart = engine.indexOf('export class NativeSrcBridge {');
++      assert.ok(producerStart >= 0);
++      const producer = engine.slice(producerStart, engine.indexOf('\nexport { NativeEngine', producerStart));
++      assert.ok(producer.includes('this.clock = options.clock ?? (() => performance.now())'));
++      assert.ok(producer.includes('async run(request: CompositionRecord, options: ExecutionOptions = {}): Promise<CompositionReport>'));
++      assert.ok(producer.includes('const started = this.clock();'));
++      assert.ok(producer.includes('this.engine.persist(prepared, report);\n      report.total_ms = this.clock() - started;'));
++      const sourceAuthority = await readFile(resolve(this.receipts[role].checkout, 'src/logos-engine/v6-native-authority.ts'), 'utf8');
++      assert.ok(sourceAuthority.includes('readonly bridge = new NativeSrcBridge(new NeutralEngine(this.memory), { continuous: true });'));
++      assert.ok(sourceAuthority.includes('const report = await this.bridge.run(request, { signal: execution.signal });'));
++      assert.ok(sourceAuthority.includes('this.lastRelease = report;'));
++      assert.ok(sourceAuthority.includes('decision: this.lastRelease'));
++      assert.ok(engine.includes("this.memory.trace(episode, 'src_decision', report);"));
++      const sourceMemory = await readFile(resolve(this.receipts[role].checkout, 'src/logos-engine/v6-reasoning-memory.ts'), 'utf8');
++      assert.ok(sourceMemory.includes('body: copy(value), created: this.clock()'));
++      const sourceRuntime = await readFile(resolve(this.receipts[role].checkout, 'src/logos-engine/v6-native-runtime.ts'), 'utf8');
++      assert.ok(sourceRuntime.includes('if (this.authority && !await this.authority.release(proposal, this.observation, before, execution))'));
++      assert.ok(sourceRuntime.includes("this.note({ kind: 'why_act_release', admitted: true, decision_revision: this.prefix.revision,\n        native_gate: this.authority !== null, graph_chain: this.knowledge?.graphChain ?? null });"));
++    }
++    this.result.releaseDurationSource = { sources: releaseSources, capture: this.captureTool,
++      runtimeSources: { baseline: runtimeSources.baseline.record, candidate: runtimeSources.candidate.record },
++      producer: 'NativeSrcBridge.run in v6-composition-engine.ts; NativeCompositionAuthority uses its default performance.now clock without an override.',
++      persistence: 'NativeEngine.persist copies the report into a src_decision trace before NativeSrcBridge appends total_ms; the entire semantic report must equal that graph trace body.',
++      exposure: 'NativeCompositionAuthority.release stores the report in lastRelease; snapshot exposes it as whyAct.decision. A successful runtime release appends why_act_release with the actual role graph chain.',
++      newReport: 'Only init/resume may create a report in these fixed forms. The new release chain and unique matching src_decision trace must be in this same handle. Duration is finite, nonnegative and bounded by both observed monotonic handle time and active elapsed growth.',
++      retainedReport: 'On advance/inspect, the release note and complete report including total_ms must equal the original creation values exactly. Current bridgeSequence alone is not a release identifier.',
++      comparison: 'Only /whyAct/decision/total_ms may differ between roles after both proofs. Every other leaf of whyAct, decision, proposal and both complete snapshots remains compared.' };
+     this.result.coverageExtensionProof = { added: CHART_EXTENSIONS, inverseSourceLiteralRemovalExact: true };
+     assert.deepEqual(this.receipts.baseline.cases, this.receipts.candidate.cases);
+     this.casesRecord = this.receipts.candidate.cases; this.cases = await read(this.casesRecord.path);
+@@ -384,6 +454,7 @@
+       ownerOperations: [], ownerCheckpoints: [], ownerCounts: Object.fromEntries(Object.keys(OWNERS).map(key => [key, { operations: 0, checkpoints: 0, proposals: 0, records: 0, restores: 0, refusals: 0 }])),
+       traceClocks: new Map(), ownRoots: [], seenAdded: new Set(), seenRemoved: new Set(), chains: new Set(),
+       lastActiveSeconds: 0, activeClock: null, fullSnapshot: null,
++      releaseReport: null, releaseCreation: null, releaseDurationProof: null,
+       shape: { actions: 0, cycles: 0, levelsCompleted: 0, requests: [], observations: [], inspection: [], final: null } };
+   }
+   command(state, row) {
+@@ -615,6 +686,7 @@
+     assert.ok(Number.isFinite(full.activeSeconds) && full.activeSeconds >= state.lastActiveSeconds);
+     assert.ok(full.activeSeconds >= clock.elapsedBeforeMs / 1000 && full.activeSeconds <= clock.elapsedAfterMs / 1000,
+       'Full snapshot activeSeconds is outside its source-owned elapsed interval');
++    this.releaseDuration(state, row);
+     state.lastActiveSeconds = full.activeSeconds; state.activeClock = clock; state.fullSnapshot = full;
+     if (state.role === 'candidate') {
+       const node = state.nodes[CHART_PROGRAM];
+@@ -622,6 +694,62 @@
+       assert.ok(node && declared && node.kind === 'program'); assert.equal(node.revision, 1);
+       for (const name of ['kind', 'status', 'value', 'definition']) assert.deepEqual(node[name], declared[name], 'Installed Chart program changed: ' + name);
+     } else assert.equal(state.nodes[CHART_PROGRAM], undefined);
++  }
++  releaseDuration(state, row) {
++    const full = row.fullSnapshot, report = full.whyAct.decision, clock = row.activeClock;
++    assert.equal(full.whyAct.enabled, true);
++    assert.equal(full.whyAct.program, 'prototype.laya_router.route');
++    assert.ok(report && typeof report === 'object' && !Array.isArray(report));
++    assert.deepEqual(Object.keys(report).sort(), ['decision', 'src_hash', 'src_statement_count_last_slice', 'src_status', 'total_ms']);
++    assert.equal(report.src_status, 'completed'); assert.equal(report.decision.status, 'action_set_released');
++    assert.ok(Number.isFinite(report.total_ms) && report.total_ms >= 0, 'Release duration must remain finite and nonnegative');
++    const releases = full.trace.filter(entry => entry.kind === 'why_act_release');
++    assert.ok(releases.length > 0, 'A complete release report needs its actual runtime release note');
++    const release = releases[releases.length - 1];
++    assert.equal(release.admitted, true); assert.equal(release.native_gate, true);
++    assert.ok(state.chains.has(release.graph_chain));
++    assert.equal(report.decision.action_set.observation_revision, release.decision_revision);
++    assert.deepEqual(report.decision.action_set, report.decision.selected_bundle);
++    const reportSha256 = canonicalHash(report);
++    const context = { role: state.role, case: row.case, form: row.form, pointIndex: row.pointIndex,
++      recordIndex: row.recordIndex, requestType: row.request.type };
++    const isNew = state.releaseCreation === null || release.graph_chain !== state.releaseCreation.release.graph_chain;
++    if (isNew) {
++      assert.ok(['init', 'resume'].includes(row.request.type), 'These fixed forms can create release reports only during init/resume');
++      assert.equal(row.request.type === 'init', state.releaseCreation === null);
++      const releaseDelta = row.knowledge.deltasAdded.find(delta => delta.digest === release.graph_chain);
++      assert.ok(releaseDelta, 'New release chain must be created within this exact service.handle');
++      const { total_ms, ...persistedReport } = report;
++      const traces = row.knowledge.deltasAdded.filter(delta => delta.node.component === 'native_reasoning_trace')
++        .map(delta => ({ delta, value: nodeValue(delta.node, state.nodes) }))
++        .filter(item => item.value.episode === 'common-observation-frontier' && item.value.kind === 'src_decision'
++          && isDeepStrictEqual(item.value.body, persistedReport));
++      assert.equal(traces.length, 1, 'The new report must equal one complete source-persisted decision body before total_ms is appended');
++      const trace = traces[0];
++      assert.equal(trace.delta.node.revision, 1); assert.equal(own(trace.value.body, 'total_ms'), false);
++      assert.ok(trace.delta.sequence <= releaseDelta.sequence, 'The report must be persisted before its successful release note');
++      assert.ok(state.traceClocks.has(trace.delta.node.id), 'Report persistence must have its independently bounded creation clock');
++      const handleDurationMs = clock.handleFinishedMonotonicMs - clock.handleStartedMonotonicMs;
++      const activeDurationMs = clock.elapsedAfterMs - clock.elapsedBeforeMs;
++      assert.ok(total_ms <= handleDurationMs, 'New report duration exceeds its own actual service.handle interval');
++      assert.ok(total_ms <= activeDurationMs, 'New report duration exceeds active elapsed growth in its own creation handle');
++      state.releaseReport = report;
++      state.releaseCreation = { ...context, release, releaseDeltaSequence: releaseDelta.sequence,
++        reportSha256, persistedReportSha256: canonicalHash(persistedReport), persistedTraceNodeId: trace.delta.node.id,
++        persistedTraceDeltaSequence: trace.delta.sequence, persistedTraceDeltaDigest: trace.delta.digest,
++        persistedTraceClock: state.traceClocks.get(trace.delta.node.id), totalMs: total_ms,
++        activeClock: clock, handleDurationMs, activeDurationMs };
++    } else {
++      assert.ok(['advance', 'inspect'].includes(row.request.type), 'Only declared retention points may reuse an existing release report');
++      assert.deepEqual(release, state.releaseCreation.release, 'Retained release note changed');
++      assert.deepEqual(report, state.releaseReport, 'The complete retained report changed, including its original total_ms');
++      assert.equal(reportSha256, state.releaseCreation.reportSha256);
++      assert.equal(row.knowledge.deltasAdded.some(delta => delta.digest === release.graph_chain), false,
++        'A retained report cannot acquire a new release chain');
++    }
++    state.releaseDurationProof = { ...context, mode: isNew ? 'created_in_this_handle' : 'retained_exactly',
++      reportSha256, totalMs: report.total_ms, creation: state.releaseCreation };
++    this.result.releaseDurationBounds.push(state.releaseDurationProof);
+   }
+   async compareFullSnapshots(left, right, a, b, context) {
+     const before = a.fullSnapshot, after = b.fullSnapshot;
+@@ -645,6 +773,13 @@
+       } else if (path === '/activeSeconds') {
+         classification = 'attributed_full_snapshot_source_active_clock';
+         evidence = { baseline: left.activeClock, candidate: right.activeClock, source: this.result.activeClockSource };
++      } else if (path === '/whyAct/decision/total_ms') {
++        assert.equal(first.kind, 'number'); assert.equal(second.kind, 'number');
++        assert.equal(first.value, left.releaseDurationProof.totalMs); assert.equal(second.value, right.releaseDurationProof.totalMs);
++        classification = 'attributed_bounded_release_report_duration';
++        evidence = { baseline: left.releaseDurationProof, candidate: right.releaseDurationProof,
++          source: this.result.releaseDurationSource,
++          scope: 'Only this scalar duration; creation is bounded by its original handle and complete reports are retained exactly afterward. No other decision/proposal/whyAct leaf is exempt.' };
+       } else if (provedCoverage.some(root => path === root || path.startsWith(root + '/'))) {
+         classification = 'attributed_full_snapshot_exact_chart_coverage';
+         evidence = { inventory: this.result.ownerInventory, sourceExtensionProof: this.result.coverageExtensionProof,
+@@ -847,7 +982,7 @@
+   audit.result.recordedAt = new Date().toISOString(); audit.result.inputs = [...audit.inputs.values()];
+   audit.result.checkedCount = audit.result.checks.length; audit.result.formsSha256 = canonicalHash(audit.forms);
+   audit.result.differences = await fingerprint(differencesPath);
+-  audit.result.qualification = 'Fresh functional pair of exact Site 108 published 0.67 and frozen final Chart candidate 0.68. Every role graph, delta, fragment, executable digest and ticket binding is independently validated. Full snapshots, proposals, decisions, common owner states and all raw graph leaves are compared. Only the three declared Chart roots and their content-verified reachable fragments may extend population; BranchRouting is common and retains no exemption. Source identity and explicitly proved coverage additions are attributed narrowly. Exact trace creation clocks are bounded by real Date.now intervals; activeSeconds is bounded by observed real performance.now and source elapsed counters. No clock is replaced, no field is omitted, no arbitrary timing normalization is allowed, and any unexplained difference fails qualification. Chart registration/negative foreign probes are not positive acquisition or official success. No original oracle, game engine, timing readiness or publication is authorized by this artifact.';
++  audit.result.qualification = 'Fresh functional pair of exact Site 108 published 0.67 and frozen final Chart candidate 0.68. Every role graph, delta, fragment, executable digest and ticket binding is independently validated. Full snapshots, proposals, decisions, common owner states and all raw graph leaves are compared. Only the three declared Chart roots and their content-verified reachable fragments may extend population; BranchRouting is common and retains no exemption. Source identity and explicitly proved coverage additions are attributed narrowly. Exact trace creation clocks are bounded by real Date.now intervals; activeSeconds is bounded by observed real performance.now and source elapsed counters. The exact whyAct.decision.total_ms scalar is attributed only after matching the complete persisted source decision, bounding creation in its own actual handle, and proving exact full-report retention thereafter. No clock is replaced, no field is omitted, no arbitrary timing normalization is allowed, and any unexplained difference fails qualification. Chart registration/negative foreign probes are not positive acquisition or official success. No original oracle, game engine, timing readiness or publication is authorized by this artifact.';
+   await writeFile(attribution, JSON.stringify(audit.result, null, 2) + '\n', { flag: 'wx' });
+   if (audit.result.status === 'qualified_functional_work_forms_and_individual_graphs') {
+     const value = { schema: 'logos-engine.lot9a-delivery-work-forms.v1', status: audit.result.status,
