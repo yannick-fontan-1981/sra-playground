@@ -1025,3 +1025,22 @@ officielle STCK/SMLP.
 
 Statut performance :
 **fonctionnellement qualifié, performance officielle à confirmer**.
+
+
+## C3 — preuve TypeScript OP14 ajoutée
+
+Test ajouté à `tests/v6-composition-engine.test.ts` :
+
+- cas positif : la composition focus est prête et préserve la contrainte déclarée ;
+- cas négatif : son effet viole la contrainte préservée.
+
+Résultat :
+- admission OP14 acceptée uniquement dans le cas préservé ;
+- release refusée lorsque l'effet du focus contredit la préservation ;
+- aucune modification de la logique runtime, seulement une preuve de régression supplémentaire.
+
+Suite locale complète OP/C7 après ajout :
+**34/34 tests passent**, typecheck strict OK.
+
+Statut C3 OP14 :
+**calcul + consommation de garde + refus sur violation de préservation démontrés dans le noyau TypeScript reconstruit**.
