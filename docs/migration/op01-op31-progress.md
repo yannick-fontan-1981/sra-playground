@@ -923,3 +923,45 @@ Cette mesure n'est pas une session STCK/SMLP. Statut officiel :
 | C5 | audit donneur complet | préserver boucle informationnelle |
 | C6 | audit donneur complet | préserver inconnue vs impossibilité |
 | C7 | consolidation provisoire | benchmark consolidé et scénarios runtime réels |
+
+
+## Reprise canonique Site 109 — 2026-11-12
+
+Nouvelle baseline commune : `recovery/site109-reconstruction-20261112` au SHA de reprise
+`658b89cfe77887eb720c95f0e6e6f8595beffdbd`.
+
+Source de récupération OP01–OP31 :
+`op01-op31-c0-c7-audit` au SHA
+`07a6ea06e12746deea3bc1a2de031f63a4f9c93a`.
+
+La comparaison GitHub montre que la branche source OP est déjà entièrement incluse
+dans la baseline canonique : aucun changement runtime OP n'est à reporter.
+
+Checkout sparse local de contrôle :
+`/mnt/data/sra-playground-op01-site109`.
+
+Preuve d'identité :
+les 16 fichiers utilisés pour le noyau/tests OP ont été vérifiés par
+`git hash-object` contre leurs blob SHA GitHub de la baseline ; tous correspondent.
+
+Tests exécutés depuis cette baseline vérifiée :
+- `tsc --noEmit` : OK ;
+- `node --experimental-strip-types --test tests/v6-*.test.ts` : **27/27**.
+
+Composants encore manquants et non retrouvés dans les branches de récupération connues :
+- `scripts/measure-native-loop-costs.mjs` ;
+- `tests/helpers/v6-live-game-campaign.ts` ;
+- `src/runtime/v6-agent-worker.ts` ;
+- `docs/migration/v6-delivery-roadmap.md` ;
+- `docs/migration/v6-entry-point-progress.json`.
+
+Statut performance :
+**fonctionnellement qualifié, performance officielle à confirmer**.
+
+Détail de récupération :
+`docs/recovery/op01-op31-recovery-status.md`.
+
+Prochaine étape :
+reprendre C1/C2 sur runtime réel dès restauration d'un worker/harness qualifié ;
+sinon ne pas créer d'appels OP artificiels. C7 restera ouvert pour les sessions
+STCK/SMLP séparées et le seuil global strictement < +10 % par jeu.
