@@ -85,16 +85,22 @@ export async function dispatchProductAction(
     const elapsedMs = Math.max(0, finishedAt - startedAt);
     ports.onDispatchMeasured?.(elapsedMs);
 
-    if (generation !== ports.generation() || next.gameCode !== state.selectedGameCode) {
+    if (generation !== ports.generation()) {
+      return { accepted: false, stale: true, elapsedMs };
+    }
+    if (next.gameCode !== state.selectedGameCode) {
       ports.setBusy(false);
       return { accepted: false, stale: true, elapsedMs };
     }
 
     await ports.present(next, generation);
+    if (generation !== ports.generation()) {
+      return { accepted: false, stale: true, elapsedMs };
+    }
     ports.setBusy(false);
     return { accepted: true, stale: false, elapsedMs };
   } catch (error) {
-    ports.setBusy(false);
+    if (generation === ports.generation()) ports.setBusy(false);
     ports.onError?.(error, generation);
     throw error;
   }
