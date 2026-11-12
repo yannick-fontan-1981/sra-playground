@@ -1,0 +1,1587 @@
+{
+  "schema": "logos-engine.lot10c.metadata-checkpoint-plan.v1",
+  "status": "ready",
+  "generatedAt": "2026-11-11T18:29:01.524038+00:00",
+  "checkout": "/workspace/sites/sra-lot10c-20261111/.sites-checkout",
+  "expectedHEAD": "649789e7ff519396bec6ad2b6e4572fb6ee6765f",
+  "metadataOnly": true,
+  "payloadContentsRead": false,
+  "gitMutationsPerformed": false,
+  "networkUsed": false,
+  "batchRawByteLimit": 25165824,
+  "singleFileRawByteLimit": 33554432,
+  "totalBytes": 90297853,
+  "pendingPathCount": 87,
+  "pendingRegularFileCount": 87,
+  "allPendingPaths": [
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/case-activities/recr01-browser-envelope/activity-start.json",
+      "kind": "regular",
+      "bytes": 984,
+      "identity": [
+        27,
+        524726,
+        33188,
+        984,
+        1794421465056866899,
+        1794421465056866899
+      ],
+      "tracked": false,
+      "regressionArtifact": false
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/case-activities/recr01-browser-envelope/execution.json",
+      "kind": "regular",
+      "bytes": 1137,
+      "identity": [
+        27,
+        524732,
+        33188,
+        1137,
+        1794421465142554531,
+        1794421465142554531
+      ],
+      "tracked": false,
+      "regressionArtifact": false
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/case-activities/recr01-summary-binding/activity-start.json",
+      "kind": "regular",
+      "bytes": 1004,
+      "identity": [
+        27,
+        524423,
+        33188,
+        1004,
+        1794421707662094706,
+        1794421707662094706
+      ],
+      "tracked": false,
+      "regressionArtifact": false
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/case-activities/recr01-summary-binding/execution.json",
+      "kind": "regular",
+      "bytes": 1150,
+      "identity": [
+        27,
+        524447,
+        33188,
+        1150,
+        1794421707796071904,
+        1794421707796071904
+      ],
+      "tracked": false,
+      "regressionArtifact": false
+    },
+    {
+      "status": " M",
+      "path": "docs/migration/lot10c-evidence/case-clock.json",
+      "kind": "regular",
+      "bytes": 13361,
+      "identity": [
+        27,
+        4073459,
+        33188,
+        13361,
+        1794421707797591891,
+        1794421707797591891
+      ],
+      "tracked": true,
+      "regressionArtifact": false
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/coordination/checkpoint02.json",
+      "kind": "regular",
+      "bytes": 520,
+      "identity": [
+        27,
+        4073445,
+        33188,
+        520,
+        1794420844474923426,
+        1794420844474923426
+      ],
+      "tracked": false,
+      "regressionArtifact": false
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/coordination/publication-observation01.json",
+      "kind": "regular",
+      "bytes": 1600,
+      "identity": [
+        27,
+        4073452,
+        33188,
+        1600,
+        1794421026403935901,
+        1794421026403935901
+      ],
+      "tracked": false,
+      "regressionArtifact": false
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/milestone-summary.json",
+      "kind": "regular",
+      "bytes": 3044,
+      "identity": [
+        27,
+        4073458,
+        33188,
+        3044,
+        1794421707807963907,
+        1794421707807963907
+      ],
+      "tracked": false,
+      "regressionArtifact": false
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/recr01-browser01/browser-qa.json",
+      "kind": "regular",
+      "bytes": 1778,
+      "identity": [
+        27,
+        524730,
+        33188,
+        1778,
+        1794421465073578951,
+        1794421465073578951
+      ],
+      "tracked": false,
+      "regressionArtifact": false
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/recr01-proof-summary.json",
+      "kind": "regular",
+      "bytes": 6642,
+      "identity": [
+        27,
+        4073450,
+        33188,
+        6642,
+        1794421707755969029,
+        1794421707755969029
+      ],
+      "tracked": false,
+      "regressionArtifact": false
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/preflight.json",
+      "kind": "regular",
+      "bytes": 5814,
+      "identity": [
+        27,
+        524571,
+        33188,
+        5814,
+        1794420532363131957,
+        1794420532363131957
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regression-driver-output.log.gz",
+      "kind": "regular",
+      "bytes": 2384,
+      "identity": [
+        27,
+        524678,
+        33188,
+        2384,
+        1794421542322847229,
+        1794421542322847229
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regression-driver-output.raw.txt",
+      "kind": "regular",
+      "bytes": 20963,
+      "identity": [
+        27,
+        524554,
+        33188,
+        20963,
+        1794421542307964547,
+        1794421542307964547
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regression-launch.json",
+      "kind": "regular",
+      "bytes": 11494,
+      "identity": [
+        27,
+        524696,
+        33188,
+        11494,
+        1794421542352947085,
+        1794421542352947085
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/catr-051-comparison.json",
+      "kind": "regular",
+      "bytes": 11024,
+      "identity": [
+        27,
+        524585,
+        33188,
+        11024,
+        1794420553710996198,
+        1794420553710996198
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/catr-051-execution-started.json",
+      "kind": "regular",
+      "bytes": 3134,
+      "identity": [
+        27,
+        524572,
+        33188,
+        3134,
+        1794420532393507495,
+        1794420532393507495
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/catr-051-execution.json",
+      "kind": "regular",
+      "bytes": 8794,
+      "identity": [
+        27,
+        524586,
+        33188,
+        8794,
+        1794420553841420755,
+        1794420553841420755
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/catr-051-host-preparation.json",
+      "kind": "regular",
+      "bytes": 4210,
+      "identity": [
+        27,
+        524573,
+        33188,
+        4210,
+        1794420532721792012,
+        1794420532721792012
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/catr-051-output.log.gz",
+      "kind": "regular",
+      "bytes": 2685,
+      "identity": [
+        27,
+        524579,
+        33188,
+        2685,
+        1794420552490396280,
+        1794420552490396280
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/catr-051-passive-owner-presence.json",
+      "kind": "regular",
+      "bytes": 1100,
+      "identity": [
+        27,
+        524584,
+        33188,
+        1100,
+        1794420553668924373,
+        1794420553668924373
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/catr-051-replay.json.gz",
+      "kind": "regular",
+      "bytes": 2532724,
+      "identity": [
+        27,
+        524581,
+        33188,
+        2532724,
+        1794420552178386783,
+        1794420552178386783
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/conn-050-comparison.json",
+      "kind": "regular",
+      "bytes": 11027,
+      "identity": [
+        27,
+        524701,
+        33188,
+        11027,
+        1794420945261761498,
+        1794420945261761498
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/conn-050-execution-started.json",
+      "kind": "regular",
+      "bytes": 3138,
+      "identity": [
+        27,
+        524419,
+        33188,
+        3138,
+        1794420871404624868,
+        1794420871404624868
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/conn-050-execution.json",
+      "kind": "regular",
+      "bytes": 10834,
+      "identity": [
+        27,
+        524702,
+        33188,
+        10834,
+        1794420945547640978,
+        1794420945547640978
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/conn-050-host-preparation.json",
+      "kind": "regular",
+      "bytes": 6179,
+      "identity": [
+        27,
+        524684,
+        33188,
+        6179,
+        1794420872371581165,
+        1794420872371581165
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/conn-050-output.log.gz",
+      "kind": "regular",
+      "bytes": 4070,
+      "identity": [
+        27,
+        524597,
+        33188,
+        4070,
+        1794420942193984346,
+        1794420942193984346
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/conn-050-passive-owner-presence.json",
+      "kind": "regular",
+      "bytes": 1100,
+      "identity": [
+        27,
+        524700,
+        33188,
+        1100,
+        1794420945154989295,
+        1794420945154989295
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/conn-050-replay.json.gz",
+      "kind": "regular",
+      "bytes": 5362055,
+      "identity": [
+        27,
+        524577,
+        33188,
+        5362055,
+        1794420941489553768,
+        1794420941489553768
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/craf-055-comparison.json",
+      "kind": "regular",
+      "bytes": 10991,
+      "identity": [
+        27,
+        524799,
+        33188,
+        10991,
+        1794421506910204721,
+        1794421506910204721
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/craf-055-execution-started.json",
+      "kind": "regular",
+      "bytes": 3063,
+      "identity": [
+        27,
+        524708,
+        33188,
+        3063,
+        1794421382751733886,
+        1794421382751733886
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/craf-055-execution.json",
+      "kind": "regular",
+      "bytes": 12277,
+      "identity": [
+        27,
+        524809,
+        33188,
+        12277,
+        1794421507620155180,
+        1794421507620155180
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/craf-055-host-preparation.json",
+      "kind": "regular",
+      "bytes": 9417,
+      "identity": [
+        27,
+        524603,
+        33188,
+        9417,
+        1794421385037648310,
+        1794421385037648310
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/craf-055-output.log.gz",
+      "kind": "regular",
+      "bytes": 5699,
+      "identity": [
+        27,
+        524750,
+        33188,
+        5699,
+        1794421495772633625,
+        1794421495772633625
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/craf-055-passive-owner-presence.json",
+      "kind": "regular",
+      "bytes": 1101,
+      "identity": [
+        27,
+        524792,
+        33188,
+        1101,
+        1794421506849616705,
+        1794421506849616705
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/craf-055-replay.json.gz",
+      "kind": "regular",
+      "bytes": 15021371,
+      "identity": [
+        27,
+        524765,
+        33188,
+        15021371,
+        1794421495420615288,
+        1794421495420615288
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/fogw-051-comparison.json",
+      "kind": "regular",
+      "bytes": 11014,
+      "identity": [
+        27,
+        524649,
+        33188,
+        11014,
+        1794420697678027927,
+        1794420697678027927
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/fogw-051-execution-started.json",
+      "kind": "regular",
+      "bytes": 3110,
+      "identity": [
+        27,
+        524417,
+        33188,
+        3110,
+        1794420590663854270,
+        1794420590663854270
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/fogw-051-execution.json",
+      "kind": "regular",
+      "bytes": 11921,
+      "identity": [
+        27,
+        524650,
+        33188,
+        11921,
+        1794420698148151317,
+        1794420698148151317
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/fogw-051-host-preparation.json",
+      "kind": "regular",
+      "bytes": 12489,
+      "identity": [
+        27,
+        524610,
+        33188,
+        12489,
+        1794420591859593549,
+        1794420591859593549
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/fogw-051-output.log.gz",
+      "kind": "regular",
+      "bytes": 5537,
+      "identity": [
+        27,
+        524432,
+        33188,
+        5537,
+        1794420692054476190,
+        1794420692054476190
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/fogw-051-passive-owner-presence.json",
+      "kind": "regular",
+      "bytes": 1101,
+      "identity": [
+        27,
+        524593,
+        33188,
+        1101,
+        1794420697617637313,
+        1794420697617637313
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/fogw-051-replay.json.gz",
+      "kind": "regular",
+      "bytes": 12160415,
+      "identity": [
+        27,
+        524640,
+        33188,
+        12160415,
+        1794420691534461084,
+        1794420691534461084
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/isos-development-4c-comparison.json",
+      "kind": "regular",
+      "bytes": 11015,
+      "identity": [
+        27,
+        524633,
+        33188,
+        11015,
+        1794421541998172648,
+        1794421541998172648
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/isos-development-4c-execution-started.json",
+      "kind": "regular",
+      "bytes": 3138,
+      "identity": [
+        27,
+        524790,
+        33188,
+        3138,
+        1794421507658604871,
+        1794421507658604871
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/isos-development-4c-execution.json",
+      "kind": "regular",
+      "bytes": 9453,
+      "identity": [
+        27,
+        524653,
+        33188,
+        9453,
+        1794421542281995843,
+        1794421542281995843
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/isos-development-4c-host-preparation.json",
+      "kind": "regular",
+      "bytes": 4192,
+      "identity": [
+        27,
+        524945,
+        33188,
+        4192,
+        1794421509016982101,
+        1794421509016982101
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/isos-development-4c-output.log.gz",
+      "kind": "regular",
+      "bytes": 2970,
+      "identity": [
+        27,
+        524435,
+        33188,
+        2970,
+        1794421539849623353,
+        1794421539849623353
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/isos-development-4c-passive-owner-presence.json",
+      "kind": "regular",
+      "bytes": 1111,
+      "identity": [
+        27,
+        524613,
+        33188,
+        1111,
+        1794421541974731246,
+        1794421541974731246
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/isos-development-4c-replay.json.gz",
+      "kind": "regular",
+      "bytes": 3686271,
+      "identity": [
+        27,
+        524456,
+        33188,
+        3686271,
+        1794421539626387268,
+        1794421539626387268
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/mind-051-comparison.json",
+      "kind": "regular",
+      "bytes": 11012,
+      "identity": [
+        27,
+        524737,
+        33188,
+        11012,
+        1794421010371491439,
+        1794421010371491439
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/mind-051-execution-started.json",
+      "kind": "regular",
+      "bytes": 3108,
+      "identity": [
+        27,
+        524628,
+        33188,
+        3108,
+        1794420945577920099,
+        1794420945577920099
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/mind-051-execution.json",
+      "kind": "regular",
+      "bytes": 10438,
+      "identity": [
+        27,
+        524738,
+        33188,
+        10438,
+        1794421010639693091,
+        1794421010639693091
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/mind-051-host-preparation.json",
+      "kind": "regular",
+      "bytes": 8345,
+      "identity": [
+        27,
+        524706,
+        33188,
+        8345,
+        1794420946253688986,
+        1794420946253688986
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/mind-051-output.log.gz",
+      "kind": "regular",
+      "bytes": 4304,
+      "identity": [
+        27,
+        524624,
+        33188,
+        4304,
+        1794421007179402437,
+        1794421007179402437
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/mind-051-passive-owner-presence.json",
+      "kind": "regular",
+      "bytes": 1100,
+      "identity": [
+        27,
+        524736,
+        33188,
+        1100,
+        1794421010330714305,
+        1794421010330714305
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/mind-051-replay.json.gz",
+      "kind": "regular",
+      "bytes": 6520209,
+      "identity": [
+        27,
+        524734,
+        33188,
+        6520209,
+        1794421006819392398,
+        1794421006819392398
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/regression-summary.json",
+      "kind": "regular",
+      "bytes": 215275,
+      "identity": [
+        27,
+        524578,
+        33188,
+        215275,
+        1794421542307964547,
+        1794421542307964547
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/rswp-051-comparison.json",
+      "kind": "regular",
+      "bytes": 11011,
+      "identity": [
+        27,
+        524605,
+        33188,
+        11011,
+        1794420590377812864,
+        1794420590377812864
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/rswp-051-execution-started.json",
+      "kind": "regular",
+      "bytes": 3106,
+      "identity": [
+        27,
+        524582,
+        33188,
+        3106,
+        1794420553883633784,
+        1794420553883633784
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/rswp-051-execution.json",
+      "kind": "regular",
+      "bytes": 9339,
+      "identity": [
+        27,
+        524606,
+        33188,
+        9339,
+        1794420590625688953,
+        1794420590627556054
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/rswp-051-host-preparation.json",
+      "kind": "regular",
+      "bytes": 5725,
+      "identity": [
+        27,
+        524590,
+        33188,
+        5725,
+        1794420554454456759,
+        1794420554454456759
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/rswp-051-output.log.gz",
+      "kind": "regular",
+      "bytes": 3156,
+      "identity": [
+        27,
+        524434,
+        33188,
+        3156,
+        1794420588291484900,
+        1794420588291484900
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/rswp-051-passive-owner-presence.json",
+      "kind": "regular",
+      "bytes": 1100,
+      "identity": [
+        27,
+        524601,
+        33188,
+        1100,
+        1794420590302714874,
+        1794420590302714874
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/rswp-051-replay.json.gz",
+      "kind": "regular",
+      "bytes": 3905130,
+      "identity": [
+        27,
+        524401,
+        33188,
+        3905130,
+        1794420588015476462,
+        1794420588015476462
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/tria-development-4b-comparison.json",
+      "kind": "regular",
+      "bytes": 11015,
+      "identity": [
+        27,
+        524711,
+        33188,
+        11015,
+        1794421382282042595,
+        1794421382282042595
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/tria-development-4b-execution-started.json",
+      "kind": "regular",
+      "bytes": 3138,
+      "identity": [
+        27,
+        524591,
+        33188,
+        3138,
+        1794421327140111437,
+        1794421327140111437
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/tria-development-4b-execution.json",
+      "kind": "regular",
+      "bytes": 10173,
+      "identity": [
+        27,
+        524712,
+        33188,
+        10173,
+        1794421382699647952,
+        1794421382699647952
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/tria-development-4b-host-preparation.json",
+      "kind": "regular",
+      "bytes": 5283,
+      "identity": [
+        27,
+        524680,
+        33188,
+        5283,
+        1794421327848111640,
+        1794421327848111640
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/tria-development-4b-output.log.gz",
+      "kind": "regular",
+      "bytes": 3551,
+      "identity": [
+        27,
+        524703,
+        33188,
+        3551,
+        1794421379407685959,
+        1794421379407685959
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/tria-development-4b-passive-owner-presence.json",
+      "kind": "regular",
+      "bytes": 1111,
+      "identity": [
+        27,
+        524710,
+        33188,
+        1111,
+        1794421382255937847,
+        1794421382255937847
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/tria-development-4b-replay.json.gz",
+      "kind": "regular",
+      "bytes": 4280295,
+      "identity": [
+        27,
+        524707,
+        33188,
+        4280295,
+        1794421378881485689,
+        1794421378881485689
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/vois-051-comparison.json",
+      "kind": "regular",
+      "bytes": 11016,
+      "identity": [
+        27,
+        524657,
+        33188,
+        11016,
+        1794420870391226495,
+        1794420870391226495
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/vois-051-execution-started.json",
+      "kind": "regular",
+      "bytes": 3113,
+      "identity": [
+        27,
+        524641,
+        33188,
+        3113,
+        1794420698185466798,
+        1794420698185466798
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/vois-051-execution.json",
+      "kind": "regular",
+      "bytes": 14142,
+      "identity": [
+        27,
+        524676,
+        33188,
+        14142,
+        1794420871354548310,
+        1794420871355552034
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/vois-051-host-preparation.json",
+      "kind": "regular",
+      "bytes": 18591,
+      "identity": [
+        27,
+        524654,
+        33188,
+        18591,
+        1794420699650695176,
+        1794420699650695176
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/vois-051-output.log.gz",
+      "kind": "regular",
+      "bytes": 7608,
+      "identity": [
+        27,
+        524437,
+        33188,
+        7608,
+        1794420863159318180,
+        1794420863159318180
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/vois-051-passive-owner-presence.json",
+      "kind": "regular",
+      "bytes": 1101,
+      "identity": [
+        27,
+        524611,
+        33188,
+        1101,
+        1794420870324160747,
+        1794420870324160747
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/vois-051-replay.json.gz",
+      "kind": "regular",
+      "bytes": 15705194,
+      "identity": [
+        27,
+        524412,
+        33188,
+        15705194,
+        1794420862903310884,
+        1794420862903310884
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/weav-051-comparison.json",
+      "kind": "regular",
+      "bytes": 11031,
+      "identity": [
+        27,
+        524612,
+        33188,
+        11031,
+        1794421325760013148,
+        1794421325760013148
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/weav-051-execution-started.json",
+      "kind": "regular",
+      "bytes": 3141,
+      "identity": [
+        27,
+        524697,
+        33188,
+        3141,
+        1794421010676084743,
+        1794421010676084743
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/weav-051-execution.json",
+      "kind": "regular",
+      "bytes": 19341,
+      "identity": [
+        27,
+        524639,
+        33188,
+        19341,
+        1794421327112091811,
+        1794421327112091811
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/weav-051-host-preparation.json",
+      "kind": "regular",
+      "bytes": 19265,
+      "identity": [
+        27,
+        524735,
+        33188,
+        19265,
+        1794421012899562152,
+        1794421012899562152
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/weav-051-output.log.gz",
+      "kind": "regular",
+      "bytes": 10233,
+      "identity": [
+        27,
+        524587,
+        33188,
+        10233,
+        1794421313827731576,
+        1794421313827731576
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/weav-051-passive-owner-presence.json",
+      "kind": "regular",
+      "bytes": 1101,
+      "identity": [
+        27,
+        524598,
+        33188,
+        1101,
+        1794421325688053345,
+        1794421325688053345
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": "??",
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regressions/weav-051-replay.json.gz",
+      "kind": "regular",
+      "bytes": 20146055,
+      "identity": [
+        27,
+        524589,
+        33188,
+        20146055,
+        1794421313399720372,
+        1794421313399720372
+      ],
+      "tracked": false,
+      "regressionArtifact": true
+    },
+    {
+      "status": " M",
+      "path": "docs/migration/lot10c-ordered-recruitment-lineage.md",
+      "kind": "regular",
+      "bytes": 14396,
+      "identity": [
+        27,
+        3940198,
+        33188,
+        14396,
+        1794421741259752852,
+        1794421741259752852
+      ],
+      "tracked": true,
+      "regressionArtifact": false
+    },
+    {
+      "status": " M",
+      "path": "docs/migration/v6-delivery-roadmap.md",
+      "kind": "regular",
+      "bytes": 263996,
+      "identity": [
+        27,
+        3940168,
+        33188,
+        263996,
+        1794421741258311424,
+        1794421741258311424
+      ],
+      "tracked": true,
+      "regressionArtifact": false
+    }
+  ],
+  "batches": [
+    {
+      "number": 1,
+      "bytes": 23421432,
+      "fileCount": 43,
+      "paths": [
+        "docs/migration/lot10c-evidence/case-clock.json",
+        "docs/migration/lot10c-ordered-recruitment-lineage.md",
+        "docs/migration/v6-delivery-roadmap.md",
+        "docs/migration/lot10c-evidence/case-activities/recr01-browser-envelope/activity-start.json",
+        "docs/migration/lot10c-evidence/case-activities/recr01-browser-envelope/execution.json",
+        "docs/migration/lot10c-evidence/case-activities/recr01-summary-binding/activity-start.json",
+        "docs/migration/lot10c-evidence/case-activities/recr01-summary-binding/execution.json",
+        "docs/migration/lot10c-evidence/coordination/checkpoint02.json",
+        "docs/migration/lot10c-evidence/coordination/publication-observation01.json",
+        "docs/migration/lot10c-evidence/development/milestone-summary.json",
+        "docs/migration/lot10c-evidence/development/recr01-browser01/browser-qa.json",
+        "docs/migration/lot10c-evidence/development/recr01-proof-summary.json",
+        "docs/migration/lot10c-evidence/development/regressions01/preflight.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regression-driver-output.log.gz",
+        "docs/migration/lot10c-evidence/development/regressions01/regression-driver-output.raw.txt",
+        "docs/migration/lot10c-evidence/development/regressions01/regression-launch.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/catr-051-comparison.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/catr-051-execution-started.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/catr-051-execution.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/catr-051-host-preparation.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/catr-051-output.log.gz",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/catr-051-passive-owner-presence.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/catr-051-replay.json.gz",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/conn-050-comparison.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/conn-050-execution-started.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/conn-050-execution.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/conn-050-host-preparation.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/conn-050-output.log.gz",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/conn-050-passive-owner-presence.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/conn-050-replay.json.gz",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/craf-055-comparison.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/craf-055-execution-started.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/craf-055-execution.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/craf-055-host-preparation.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/craf-055-output.log.gz",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/craf-055-passive-owner-presence.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/craf-055-replay.json.gz",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/fogw-051-comparison.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/fogw-051-execution-started.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/fogw-051-execution.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/fogw-051-host-preparation.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/fogw-051-output.log.gz",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/fogw-051-passive-owner-presence.json"
+      ],
+      "singleOversizeAllowance": false
+    },
+    {
+      "number": 2,
+      "bytes": 22685793,
+      "fileCount": 22,
+      "paths": [
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/fogw-051-replay.json.gz",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/isos-development-4c-comparison.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/isos-development-4c-execution-started.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/isos-development-4c-execution.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/isos-development-4c-host-preparation.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/isos-development-4c-output.log.gz",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/isos-development-4c-passive-owner-presence.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/isos-development-4c-replay.json.gz",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/mind-051-comparison.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/mind-051-execution-started.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/mind-051-execution.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/mind-051-host-preparation.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/mind-051-output.log.gz",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/mind-051-passive-owner-presence.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/mind-051-replay.json.gz",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/regression-summary.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/rswp-051-comparison.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/rswp-051-execution-started.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/rswp-051-execution.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/rswp-051-host-preparation.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/rswp-051-output.log.gz",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/rswp-051-passive-owner-presence.json"
+      ],
+      "singleOversizeAllowance": false
+    },
+    {
+      "number": 3,
+      "bytes": 24044573,
+      "fileCount": 21,
+      "paths": [
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/rswp-051-replay.json.gz",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/tria-development-4b-comparison.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/tria-development-4b-execution-started.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/tria-development-4b-execution.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/tria-development-4b-host-preparation.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/tria-development-4b-output.log.gz",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/tria-development-4b-passive-owner-presence.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/tria-development-4b-replay.json.gz",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/vois-051-comparison.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/vois-051-execution-started.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/vois-051-execution.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/vois-051-host-preparation.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/vois-051-output.log.gz",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/vois-051-passive-owner-presence.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/vois-051-replay.json.gz",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/weav-051-comparison.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/weav-051-execution-started.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/weav-051-execution.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/weav-051-host-preparation.json",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/weav-051-output.log.gz",
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/weav-051-passive-owner-presence.json"
+      ],
+      "singleOversizeAllowance": false
+    },
+    {
+      "number": 4,
+      "bytes": 20146055,
+      "fileCount": 1,
+      "paths": [
+        "docs/migration/lot10c-evidence/development/regressions01/regressions/weav-051-replay.json.gz"
+      ],
+      "singleOversizeAllowance": false
+    }
+  ],
+  "unionExactlyMatchesPendingRegularFiles": true,
+  "allNonignoredUntrackedPathsListed": true,
+  "allBatchLimitsSatisfied": true,
+  "trackedAndNonRegressionAdditionsAllInFirstBatch": true,
+  "regressions": [
+    {
+      "path": "docs/migration/lot10c-evidence/development/regressions01/regression-launch.json",
+      "status": "passed",
+      "exitCode": 0,
+      "finishedAt": "2026-11-11T18:25:42.352529+00:00",
+      "identity": [
+        27,
+        524696,
+        33188,
+        11494,
+        1794421542352947085,
+        1794421542352947085
+      ]
+    }
+  ],
+  "coordination": [
+    {
+      "lane": "lot5c",
+      "updated_at": "2026-11-11T18:21:07.551785+00:00",
+      "quiet_requested": false,
+      "quiet_request_id": "lot10c-recr01-bb7d62-functional",
+      "performance_started": false,
+      "official_cost_active": null
+    },
+    {
+      "lane": "lot6b",
+      "updated_at": "2026-11-11T18:26:40.232119+00:00",
+      "quiet_requested": null,
+      "quiet_request_id": null,
+      "performance_started": false,
+      "official_cost_active": null
+    },
+    {
+      "lane": "lot8a",
+      "updated_at": "2026-11-11T18:27:23.688390+00:00",
+      "quiet_requested": null,
+      "quiet_request_id": "lot10c-recr01-bb7d62-functional",
+      "performance_started": false,
+      "official_cost_active": null
+    },
+    {
+      "lane": "10C",
+      "updated_at": "2026-11-11T18:27:36.044445+00:00",
+      "quiet_requested": false,
+      "quiet_request_id": "lot10c-recr01-bb7d62-functional",
+      "performance_started": false,
+      "official_cost_active": null
+    }
+  ],
+  "blockers": [],
+  "qualification": "Metadata snapshot only, not content integrity or a server pack-size guarantee. All pending paths are listed, including blockers; no implicit exclusions. Ignored files remain on disk and outside this Git pending set. Run again after any change; push each ordinary commit before preparing the next batch. Already staged/conflicted/nonregular paths or files over 32 MiB block use. No commit/stage/push commands are executed or generated."
+}

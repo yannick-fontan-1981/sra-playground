@@ -1,0 +1,254 @@
+{
+  "case": "isos-development-4c",
+  "game": "ISOS",
+  "mode": "recorded-public-replay",
+  "command": [
+    "node",
+    "--expose-gc",
+    "--max-old-space-size=1536",
+    "scripts/replay-public-regression-released-baseline.mjs",
+    "docs/migration/lot4c-evidence/development/isos-live-01/isos-campaign.json.gz",
+    "docs/migration/lot4c-evidence/development/isos-live-01/isos-public-trace.json.gz",
+    "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/isos-development-4c-replay.json.gz",
+    "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/isos-development-4c-host-preparation.json"
+  ],
+  "startedAt": "2026-11-11T21:16:25.447248+00:00",
+  "timeoutSeconds": 1200,
+  "baseline": {
+    "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-campaign.json.gz",
+    "sha256": "93e59ab1146d4eef7c944a0e1fc0ab7b0d539cc90a074abe424742be011eec37",
+    "bytes": 3027289
+  },
+  "trace": {
+    "path": "docs/migration/lot4c-evidence/development/isos-live-01/isos-public-trace.json.gz",
+    "sha256": "5b302279efb140d1c549d9650d434efb38fde0b8bc5809ab072de66159c8c329",
+    "bytes": 11183
+  },
+  "expectedActions": 12,
+  "nodeOldSpaceMiB": 1536,
+  "preflight": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/preflight.json",
+    "sha256": "74eb7a4dffac49f6c5773701be308b720a3b9acee247952126336af456551deb",
+    "bytes": 5814
+  },
+  "historicalReportProcessExitedBeforeNode": true,
+  "nativeSourceBeforeDigest": "ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316",
+  "executionInputsBefore": {
+    "scripts/run-released-public-regressions.py": "7988863afd2b171f31987434bb1176370be2e3afd49dead1edcdc59770d81909",
+    "scripts/run-recorded-public-regressions.py": "df19dc88ff29e78a1cb5935d445644e96cc9fb1ef90b73d802cf51868d2b2c40",
+    "scripts/compare-v54-regressions.py": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+    "scripts/replay-public-regression-released-baseline.mjs": "2ce2a0e1b8f969510373ae161156b2b163d208b4e426cb1f26218f9952b3b164",
+    "scripts/replay-v53-public-regression.mjs": "4359e008db8dadaac17f6504199ff20c752f40f1666ba527f1cd5f16df100a9e",
+    "scripts/run-v53-campaign-proof.py": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+    "tests/helpers/v6-live-game-campaign.ts": "e446fce35d192e902de2aa50c611f2224a9dbe925e59d20c10b8e964ed194ae2",
+    "docs/migration/lot10c-evidence/recorded-regression-cases.json": "a16f67724f53def79fe476716c12a61e8064df871911772731983fa2505da3a9",
+    "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/source-manifest.json": "6926e8abdcf9232e4e6d06ad4b60d59e4a8fa473b56a627dc17b7f8ac18d2ac7",
+    "scripts/run-released-public-regressions-streamlog.py": "b05b0e113c93696be45408e4c10549f2a379c22330efbddfcaa0f09cd51309b9"
+  },
+  "phase": "completed",
+  "finishedAt": "2026-11-11T21:16:54.084188+00:00",
+  "exitCode": 0,
+  "timedOut": false,
+  "passed": true,
+  "nodeExitObserved": true,
+  "rawOutputPath": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/isos-development-4c-output.raw.log",
+  "driverPid": 6,
+  "nodePid": 125,
+  "memorySamples": [
+    {
+      "elapsedSeconds": 0.0021991790054016747,
+      "pid": 125,
+      "VmSize": "110120 kB",
+      "VmHWM": "340 kB",
+      "VmRSS": "340 kB",
+      "Threads": "1"
+    },
+    {
+      "elapsedSeconds": 5.030591247006669,
+      "pid": 125,
+      "VmSize": "10383820 kB",
+      "VmHWM": "353396 kB",
+      "VmRSS": "353396 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 10.05626649199985,
+      "pid": 125,
+      "VmSize": "10459268 kB",
+      "VmHWM": "445280 kB",
+      "VmRSS": "433780 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 15.079897429000994,
+      "pid": 125,
+      "VmSize": "10541052 kB",
+      "VmHWM": "522764 kB",
+      "VmRSS": "516484 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 20.10147173700534,
+      "pid": 125,
+      "VmSize": "10633232 kB",
+      "VmHWM": "644072 kB",
+      "VmRSS": "609104 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 25.115479179999966,
+      "pid": 125,
+      "VmSize": "10723348 kB",
+      "VmHWM": "731336 kB",
+      "VmRSS": "701496 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 28.632269449000887,
+      "pid": 125,
+      "processPresent": false
+    }
+  ],
+  "lastObservedAt": "2026-11-11T21:16:54.081907+00:00",
+  "elapsedSeconds": 28.635018756001955,
+  "lastProgress": {
+    "status": "passed",
+    "failure": null
+  },
+  "rawOutputBytes": 45493,
+  "outputRaw": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/isos-development-4c-output.raw.log",
+    "sha256": "0fcbff3b917d255a25292c21bf9d996c0033efba0b21d4d427b131cd137492dc",
+    "bytes": 45493
+  },
+  "output": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/isos-development-4c-output.log.gz",
+    "sha256": "aa81009e4e6e2733da7f0301e7ada36fd8bdfc2f367073248b6dff25255141ff",
+    "bytes": 3002
+  },
+  "startedReceipt": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/isos-development-4c-execution-started.json",
+    "sha256": "1537abebcbe86afb62dcd0a7e4bd541a81bbc95506813ce099f9cc83b62d87b0",
+    "bytes": 3209
+  },
+  "nodeExitedBeforeComparison": true,
+  "hostPreparation": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/isos-development-4c-host-preparation.json",
+    "sha256": "13ecc2e9061933b2d3f1d5674f11ea126c6cfe3b88e657e6cad2505d924829bc",
+    "bytes": 4192
+  },
+  "hostPreparationPassed": true,
+  "report": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/isos-development-4c-replay.json.gz",
+    "sha256": "5cd0e25c7557aca8d288697c4e0dc87267f9e1fc71e7bb6d823beb6c0294d981",
+    "bytes": 3849536
+  },
+  "status": "passed",
+  "actions": 12,
+  "prefixes": 12,
+  "final": {
+    "actions": 12,
+    "levelsCompleted": 3,
+    "level": 4,
+    "state": "NOT_FINISHED",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "activeSeconds": 23.185836295999994,
+    "prefixes": 12,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 12,
+      "boundaryReplays": 2,
+      "goalEvents": 3,
+      "frontierDeltas": 25,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 13
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 13
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 11
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 10
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 1
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 13
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 14
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology"
+      ],
+      "morphologyProvider": {
+        "status": "partial_current_measurements_control_attention_and_methods",
+        "state_owner": "family_state:morphology",
+        "motion_owner": "caller:goal",
+        "forecast_owner": "family_state:public_observed_inventory",
+        "current_decision_scope": "one_source_selection_cycle",
+        "attention_owner": "caller:attention",
+        "method_owner": "caller:counters.targetMethod",
+        "entry_return_owner": "family_state:morphology.entry_access_return",
+        "connected_methods": [
+          "retained_station_method",
+          "entry_access_return",
+          "entry_rebind",
+          "entry_probe",
+          "managed_capacity",
+          "target_extension_continuation"
+        ],
+        "pending": [
+          "complete_original_caller_parity_and_domain_closure"
+        ]
+      },
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 12,
+      "resume": 11
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.66.0"
+  },
+  "passiveOwnerPresence": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/isos-development-4c-passive-owner-presence.json",
+    "sha256": "085afbbda0c2e8f94606a9d82026292eadd274f7c494c510fe0b2a57f457f945",
+    "bytes": 1125
+  },
+  "passiveOwnerPresencePassed": true,
+  "passiveOwnerPrefixesChecked": 0,
+  "passiveOwnerPrefixesPassed": 0,
+  "passiveOwnerTransitionsRetained": 0,
+  "comparison": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/isos-development-4c-comparison.json",
+    "sha256": "73dabd97e8ee3441e7cc64888307aa873b8608b93e7bc4121db8c6eb5cd19e28",
+    "bytes": 11029
+  },
+  "comparisonPassed": true,
+  "comparisonChecks": 17,
+  "failedChecks": [],
+  "nativeSourceAfterDigest": "ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316",
+  "nativeSourceUnchanged": true,
+  "immutableInputsUnchanged": true,
+  "postprocessingFinishedAt": "2026-11-11T21:16:56.381733+00:00"
+}

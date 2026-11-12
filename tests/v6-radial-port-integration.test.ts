@@ -321,7 +321,7 @@ test('the revalidation question still requires the exact current frame and avail
   assert.deepEqual(family.state(), retained, 'Neither admission nor refusal acquires a current method');
 });
 
-test('declared source order registers 67 of 76 entries with all six observed-composition branches', async () => {
+test('declared source order registers 68 of 76 entries with all six observed-composition branches', async () => {
   const runtime = await createNativeV6Runtime(declarations, { now: () => 0 });
   const coverage = runtime.snapshot().coverage as R, groups = coverage.sourceGroups as R[];
   const configuration = declarations.strategy.declarations[0]!.configuration as R;
@@ -343,6 +343,7 @@ test('declared source order registers 67 of 76 entries with all six observed-com
     observed_feedback_sequence: 'feedback_sequences',
     relative_arrangement: 'relative_arrangements',
     window_question: 'public_window_question',
+    ordered_recruitment: 'public_ordered_recruitment',
     facet_example: 'facet_examples',
     observed_addressed_material: 'public_addressed_material',
     observed_object_binding: 'public_observed_binding',
@@ -379,7 +380,7 @@ test('declared source order registers 67 of 76 entries with all six observed-com
       // A registered branch is still partial until its declared entry closes.
       if (coverage.partialEntryPoints[question]) return false;
       const family = aliases[question] ?? question;
-      const explicitEntry = family === 'public_occurrence_recall' || family === 'public_ranked_workshop' || family === 'public_axial_question' || family === 'public_window_question'
+      const explicitEntry = family === 'public_occurrence_recall' || family === 'public_ranked_workshop' || family === 'public_axial_question' || family === 'public_window_question' || family === 'public_ordered_recruitment'
         || family === 'public_symbol_transaction' || family === 'feedback_sequences' || family === 'relative_arrangements'
         || family === 'facet_examples' || family === 'public_addressed_material' || family === 'public_observed_binding' || family === 'preview_packing' || family === 'selected_rigid';
       return group.families.includes(family) && (!explicitEntry
@@ -387,8 +388,8 @@ test('declared source order registers 67 of 76 entries with all six observed-com
     });
     return [connected.length, declared.length];
   });
-  assert.deepEqual(counts, [[12, 12], [21, 21], [10, 10], [24, 33]]);
-  assert.equal(counts.reduce((sum, count) => sum + count[0]!, 0), 67);
+  assert.deepEqual(counts, [[12, 12], [21, 21], [10, 10], [25, 33]]);
+  assert.equal(counts.reduce((sum, count) => sum + count[0]!, 0), 68);
   assert.deepEqual(Object.keys(coverage.partialEntryPoints), []);
   assert.equal(coverage.observedCompositionBranches.connectedBranches.length, 6);
   assert.deepEqual(coverage.observedCompositionBranches.pendingBranches, []);

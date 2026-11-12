@@ -1,0 +1,9 @@
+{
+  "schema": "logos-engine.oracle-reference-retention.v1",
+  "recordedAt": "2026-11-11T17:14:54.162997+00:00",
+  "originalPath": "tests/fixtures/v6-ordered-recruitment-reference.json.gz",
+  "retainedPath": "docs/migration/lot10c-evidence/oracle/reference-02.json.gz",
+  "sha256": "6ddc07b76e7185739de331d091a223feb84fffac2bde44e3bf2da5f5f3840cf1",
+  "bytes": 977421,
+  "reason": "Root identified exact normalized foreign public command data:{} and cold budget9; run03 executes originals on these newly declared inputs. Explicit float/native-canonical-domain boundary retains the actual Python result separately. Earlier reference and all failing logs remain unchanged."
+}

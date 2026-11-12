@@ -1,0 +1,42 @@
+{
+  "schema": "logos-engine.lot10c.priority066-predecessor.v1",
+  "recordedAt": "2026-11-12T01:26:01.529Z",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+  "siteVersion": 106,
+  "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_a275c381613081918db90932631a8489",
+  "source": {
+    "commit_sha": "b9555039d60d5d9f771dd96b763c40f389dc62dd"
+  },
+  "archive": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_0000000053cc820e84e307cfab1e28c8",
+    "content_hash": "sha256:8b8ed266d65d9a9ca407b87d86a93d97380b7aa8807cc24c7d29e8cb946c0345",
+    "size_bytes": 30115840,
+    "file_count": 75
+  },
+  "deployment": {
+    "id": "appgdep_6af51215dd308191be4bcf9aab240ca3",
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "title": "SRA Playground",
+    "version_id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_a275c381613081918db90932631a8489",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": "sediment://file_00000000026c8212b2290e4bbf225331",
+    "provider_deployment_id": "site---6adbc388d79081918581b93b919d7258",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-11-12T01:11:05.691811+00:00"
+  },
+  "audience": {
+    "currentUserRole": "owner",
+    "accessMode": "custom",
+    "revision": 3,
+    "allowedUserCount": 1,
+    "allowedGroupCount": 0,
+    "externalVisitorCount": 0
+  },
+  "nativeVersion": "0.65.0"
+}

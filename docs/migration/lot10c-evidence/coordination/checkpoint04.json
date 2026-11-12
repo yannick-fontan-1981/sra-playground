@@ -1,0 +1,53 @@
+{
+  "schema": "logos-engine.lot10c.prepared-composition-source-checkpoint.v1",
+  "recordedAt": "2026-11-11T20:05:02.960054+00:00",
+  "status": "complete_source_checkpoint_verified",
+  "commit": "3df0fc780f479e51f51aaceb2a32ec287b67671d",
+  "remote": "3df0fc780f479e51f51aaceb2a32ec287b67671d",
+  "ref": "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111",
+  "remoteVerified": true,
+  "verifiedAt": "2026-11-11T20:03:42.817Z",
+  "sourceOnly": true,
+  "published": false,
+  "finalDeliveryAccepted": false,
+  "officialCostAccepted": false,
+  "previousVerifiedCheckpoint": "3ea5e39b7c3f18ea84baf485a2494a9b948e0984",
+  "sourceFreezeCommit": "783dc3c2d7f8b2d8902f4448ef065264b9a79db7",
+  "nativeSourceManifestDigest": "ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316",
+  "nativeFiles": 329,
+  "allPreparedInputsAreAncestors": true,
+  "executableSourcesAndCaseClockUnchangedFromFreeze": true,
+  "initialRejectedAttempt": {
+    "path": "docs/migration/lot10c-evidence/coordination/checkpoint04-rejected-push01.json",
+    "bytes": 2636,
+    "sha256": "6168004efe090f0e53d7c571bea63fd0428a14ab2610c88331f87e7101bfd3e4"
+  },
+  "successfulOrdinaryPushes": 18,
+  "ancestorPlan": {
+    "path": "docs/migration/lot10c-evidence/coordination/checkpoint04-ancestor-plan.json",
+    "bytes": 11177,
+    "sha256": "34a01a22023e8f966b532eba9b1997aae9c92b7055026ee841579da58f5e6ed7"
+  },
+  "actualReceipts": {
+    "path": "docs/migration/lot10c-evidence/coordination/checkpoint04-ancestor-receipts.json",
+    "bytes": 22878,
+    "sha256": "963d398165004a66c554f8c2e75d95d1e721e8498ec18838f868ab4ffa11e2d2"
+  },
+  "uniqueNewGitObjects": 1834,
+  "totalNewGitObjectRawBytes": 369648999,
+  "largestStageRawBytes": 40402704,
+  "serverPerPushLimitBytes": 67108864,
+  "rawSizesAreNotMeasuredPackSizes": true,
+  "allRequiredPreloadedHeadsAdvertisedAtSubsequentStages": true,
+  "retainedSourceOnlyHeads": {
+    "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111": "3df0fc780f479e51f51aaceb2a32ec287b67671d",
+    "refs/heads/lot10c-prepared-5c-transport-20261111": "c3f158ad6bb2918808993e4d18602c52d0e32ce3",
+    "refs/heads/lot10c-prepared-6b-transport-20261111": "a01e6faf330d82fa220feac0c9ad4632bb75a9de"
+  },
+  "summary": {
+    "path": "docs/migration/lot10c-evidence/prepared-composition01/composition-summary.json",
+    "bytes": 9713,
+    "sha256": "4fec2b372eddb1e1d8637a4cb8f3f2b71835cd612e1ba6aa5f55cad7f445f930"
+  },
+  "qualification": "All18 ordinary source-only sends were individually verified. Initial109.3MiB transport rejection is retained. No force, history rewriting, proof deletion, main update or native publication. This receipt documents the verified functional-evidence commit; its later documentary commit preserves the same executable sources."
+}

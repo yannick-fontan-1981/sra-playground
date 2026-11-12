@@ -4,6 +4,9 @@ dist/
 .sites-runtime/
 artifacts/
 *.log
+
+# Exact gzip retained with a verified lossless transport receipt (raw object larger than32MiB).
+/docs/migration/lot10c-evidence/development/recr01/recruitment-checkpoint.json
 .DS_Store
 public/vendor/pyodide/
 /public/vendor/pyodide
@@ -512,3 +515,22 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 /docs/migration/lot5c-evidence/recovery/integrated-final-01/regressions/tria-development-4b-replay.json.gz
 /docs/migration/lot5c-evidence/recovery/integrated-final-01/regressions/vois-051-replay.json.gz
 /docs/migration/lot5c-evidence/recovery/integrated-final-01/regressions/weav-051-replay.json.gz
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot10c-evidence/recovery-20261111/kata-supplement/replay01/regressions/kata-060-self-consistency-replay.json.gz
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/catr-051-replay.json.gz
+/docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/conn-050-replay.json.gz
+/docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/craf-055-replay.json.gz
+/docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/fogw-051-replay.json.gz
+/docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/isos-development-4c-replay.json.gz
+/docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/mind-051-replay.json.gz
+/docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/rswp-051-replay.json.gz
+/docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/tria-development-4b-replay.json.gz
+/docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/vois-051-replay.json.gz
+/docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/weav-051-replay.json.gz
+
+# Exact verified 10C frozen archives; reconstruct from source-archive-parts.json.
+/docs/migration/lot10c-evidence/recovery-20261111/composed-functional01/source-archive.tar.gz
+/docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/source-archive.tar.gz

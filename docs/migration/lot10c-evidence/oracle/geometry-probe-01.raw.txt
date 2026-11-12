@@ -1,0 +1,12 @@
+
+Traceback (most recent call last):
+  File "/workspace/sites/sra-lot10c-20261111/.sites-checkout/scripts/export-v6-ordered-recruitment-reference.py", line 194, in <module>
+    if __name__ == '__main__': main()
+                               ^^^^^^
+  File "/workspace/sites/sra-lot10c-20261111/.sites-checkout/scripts/export-v6-ordered-recruitment-reference.py", line 183, in main
+    value = build(args.probe)
+            ^^^^^^^^^^^^^^^^^
+  File "/workspace/sites/sra-lot10c-20261111/.sites-checkout/scripts/export-v6-ordered-recruitment-reference.py", line 150, in build
+    assert all(value['measurement'] is not None for value in cases.values()), {key: value['measurement'] is not None for key, value in cases.items()}
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'combat': False, 'calibrated_recruit': False, 'next_combat': False, 'vertical': False, 'three_rooms': False}

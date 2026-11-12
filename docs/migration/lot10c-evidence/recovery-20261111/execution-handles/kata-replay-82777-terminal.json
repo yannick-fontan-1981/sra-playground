@@ -1,0 +1,16 @@
+{
+  "schema": "logos-engine.executor-command-terminal.v1",
+  "sessionId": 82777,
+  "exitCode": 0,
+  "status": "passed",
+  "summary": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/kata-supplement/replay01/regressions/regression-summary.json",
+    "sha256": "5168d645671333e1ac0de66c1c8fed3f8020a8796215a73ef1a196ccabea5960",
+    "bytes": 96787
+  },
+  "review": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/kata-supplement/review.json",
+    "sha256": "5d5e1747dcec686e71cea058947faf4c4ad75c0aececec2ad3d99cb7e0bdb7ff",
+    "bytes": 1876
+  }
+}

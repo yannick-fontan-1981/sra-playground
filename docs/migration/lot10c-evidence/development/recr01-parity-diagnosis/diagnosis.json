@@ -1,0 +1,17 @@
+{
+  "observedAt": "2026-11-11T17:57:32.935796+00:00",
+  "pythonVersion": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "actualExitCode": -11,
+  "actualReaderElapsedSeconds": 90.2497542960009,
+  "periodicDumpIntervalSeconds": 30,
+  "observedDumpCount": 3,
+  "lastCompleteCallIndex": 45,
+  "lastReportedDifferences": 0,
+  "ablationsCompletedBeforeCrash": 96,
+  "lastStartedCallIndex": 46,
+  "completeParityEstablished": false,
+  "causeQualification": "Native crash coincides with the third asynchronous diagnostic traceback dump; the last dump is truncated and its frame line/function mapping is inconsistent. The underlying interpreter failure is not established. Remove the optional periodic sampler as a containment measure while preserving source profiling, comparisons, fatal diagnostics, progress and the external process bound.",
+  "failedExecution": "docs/migration/lot10c-evidence/development/recr01-parity/execution.json",
+  "failedRaw": "docs/migration/lot10c-evidence/development/recr01-parity/output.raw.txt",
+  "originalReaderSha256": "8593a0cb69148fecc5396608b2799d11348d124a6c45bf7e326a1c4362bda994"
+}

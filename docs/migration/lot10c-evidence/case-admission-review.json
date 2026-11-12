@@ -1,0 +1,119 @@
+{
+  "schema": "logos-engine.lot10c.case-admission-review.v1",
+  "game": "RECR",
+  "startedAt": "2026-11-11T17:28:05.269561+00:00",
+  "recordedAt": "2026-11-11T17:28:05.342364+00:00",
+  "generator": {
+    "path": "docs/migration/lot10c-evidence/admit-case.py",
+    "sha256": "424b9ab4d2c887616b6e21638d0a522dcd010d9a94ab7fdbcae075669fa3f37f",
+    "bytes": 7852
+  },
+  "priorMatchingCaseEvidenceFound": false,
+  "caseSpecificExecutionStarted": false,
+  "searches": [
+    {
+      "command": [
+        "rg",
+        "--files",
+        "docs/migration",
+        "tests/fixtures",
+        "/workspace/shared/sra-coordination"
+      ],
+      "scope": "Current complete repository evidence filenames and shared coordination filenames",
+      "filesEnumerated": 9152,
+      "matchingPaths": []
+    },
+    {
+      "scope": "Small clock metadata headers; named unrelated closed cases excluded before reading",
+      "checked": [
+        {
+          "path": "docs/migration/lot3f-evidence/diagnostic/vois-clock-start.json",
+          "gameHeader": "VOIS"
+        },
+        {
+          "path": "docs/migration/lot4c-evidence/integrated-final/browser/clock-aggregation-attempt-01.json",
+          "gameHeader": null
+        },
+        {
+          "path": "docs/migration/lot3c-current-evidence/continued-clock.json",
+          "gameHeader": "CWSE"
+        },
+        {
+          "path": "docs/migration/lot10a-evidence/integrated-final/browser/prior-case-clock.json",
+          "gameHeader": "TRIA"
+        },
+        {
+          "path": "docs/migration/lot10a-evidence/integrated-final/browser/case-clock-continuation.json",
+          "gameHeader": "TRIA"
+        },
+        {
+          "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-01/clock-before.json",
+          "gameHeader": "HPDL"
+        },
+        {
+          "path": "docs/migration/lot4c-evidence/case-clock.json",
+          "gameHeader": "ISOS"
+        },
+        {
+          "path": "docs/migration/lot5b-evidence/integrated-final/browser/prior-case-clock.json",
+          "gameHeader": "TRIA"
+        },
+        {
+          "path": "docs/migration/lot5b-evidence/integrated-final/browser/case-clock-continuation.json",
+          "gameHeader": "TRIA"
+        },
+        {
+          "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-01/clock-before.json",
+          "gameHeader": "HPDL"
+        },
+        {
+          "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/clocked-diagnostic-02/clock-before.json",
+          "gameHeader": "HPDL"
+        },
+        {
+          "path": "docs/migration/lot3e-evidence/diagnostic/fogw-clock-start.json",
+          "gameHeader": "FOGW"
+        },
+        {
+          "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after02/clocked-diagnostic-01/clock-before.json",
+          "gameHeader": "HPDL"
+        },
+        {
+          "path": "docs/migration/lot5a-evidence/weav/followup-clock.json",
+          "gameHeader": "WEAV"
+        },
+        {
+          "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-browser-01/clock-before.json",
+          "gameHeader": "HPDL"
+        },
+        {
+          "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-live-02/clock-before.json",
+          "gameHeader": "HPDL"
+        },
+        {
+          "path": "docs/migration/lot3d-evidence/diagnostic/sk48-clock-start.json",
+          "gameHeader": "SK48"
+        },
+        {
+          "path": "docs/migration/lot6a-evidence/case-clock.json",
+          "gameHeader": "KATA"
+        }
+      ],
+      "excluded": [
+        {
+          "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-analysis-after01/hpdl-conservative-case-work.prior-clock.json",
+          "reason": "different_named_closed_case"
+        },
+        {
+          "path": "docs/migration/lot10b-evidence/recovery-20261111/hpdl-clock.json",
+          "reason": "different_named_closed_case"
+        },
+        {
+          "path": "docs/migration/lot7b-evidence/followup-recovery/coordination/lkey-closed-clock.json",
+          "reason": "different_named_closed_case"
+        }
+      ]
+    }
+  ],
+  "qualification": "No matching earlier case evidence was found in these available project records. This is an explicit bounded admission review, not a claim about unavailable history. No engine, private level, campaign payload or acquired state was read."
+}

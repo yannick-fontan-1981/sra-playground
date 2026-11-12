@@ -1,0 +1,15 @@
+{
+  "schema": "logos-engine.lot10c.legacy-lock-closure.v1",
+  "recordedAt": "2026-11-11T21:35:59.292618+00:00",
+  "legacyReplaySession": 94287,
+  "terminalReceipt": "docs/migration/lot10c-evidence/recovery-20261111/execution-handles/main-replays-94287-terminal.json",
+  "performanceLockPath": "/workspace/shared/sra-coordination/performance.lock",
+  "observedDevice": 27,
+  "observedInode": 1971854,
+  "sameObservedInodeAsRecovery": true,
+  "ownLegacyContextCompletedNormally": true,
+  "newOrdinaryWorkAcquiredGlobalLock": false,
+  "lockFileDeletedOrReplacedByThisRecovery": false,
+  "activeNativeExecutionHandles": [],
+  "qualification": "All owned legacy native command terminals were observed. The main replay exited its own lock context normally. This final stat does not attempt to acquire or release any other process lock and does not claim that the global mutex is currently unheld."
+}

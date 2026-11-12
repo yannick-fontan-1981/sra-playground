@@ -1,0 +1,106 @@
+{
+  "schema": "logos-engine.lot10c.original-parity-execution.v1",
+  "startedAt": "2026-11-11T17:58:32.928368+00:00",
+  "finishedAt": "2026-11-11T18:00:33.555933+00:00",
+  "elapsedSeconds": 120.62760482200247,
+  "timeoutSeconds": 240,
+  "timedOut": false,
+  "exitCode": 0,
+  "command": [
+    "python",
+    "-B",
+    "scripts/compare-ordered-recruitment-public-parity.py",
+    "docs/migration/lot10c-evidence/development/recr01/recruitment-campaign.json.gz",
+    "--trace",
+    "docs/migration/lot10c-evidence/development/recr01/recruitment-public-trace.json.gz",
+    "--output",
+    "docs/migration/lot10c-evidence/development/recr01-parity02/original-parity.json.gz",
+    "--case-contract",
+    "docs/migration/lot10c-evidence/case-contract.json"
+  ],
+  "inputsBefore": [
+    {
+      "path": "scripts/compare-ordered-recruitment-public-parity.py",
+      "bytes": 72027,
+      "sha256": "27bddc6a5e7163230bec12c48bd8395c30cd6726403ccf49d3157b9fdd4b1549"
+    },
+    {
+      "path": "scripts/compare-ordered-recruitment-checkpoint-parity.py",
+      "bytes": 24055,
+      "sha256": "3d50b37d55172160537b3289b14f0418a9b8dd8ccf88d5e38cb7fee986f71bb2"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/case-contract.json",
+      "bytes": 996,
+      "sha256": "3b1bd39194961a4340a0dabcb733d0d447c3c495003ff6c510bbe0832faaccf7"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/development/recr01/recruitment-campaign.json.gz",
+      "bytes": 7006750,
+      "sha256": "bb5bf080d424a3e21312a229a4253aecf904ebb55ab78baaa6ec6e930ce365b0"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/development/recr01/recruitment-public-trace.json.gz",
+      "bytes": 35232,
+      "sha256": "e0fad661cabb078438b29a94f6b032bfefe5376f553fd5d193d26a6f4f547b29"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/development/recr01/execution-recruitment.json",
+      "bytes": 15283,
+      "sha256": "f39c9a6bfd89039a351643d398919b03e61e127610a6de5d9b433b71e3a66e7e"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/development/recr01-source/source-manifest.json",
+      "bytes": 37427,
+      "sha256": "f40b11dccc89e29264f0657501883a9f5714bbf9727c33276b8a1c9265d4309f"
+    }
+  ],
+  "inputsAfter": [
+    {
+      "path": "scripts/compare-ordered-recruitment-public-parity.py",
+      "bytes": 72027,
+      "sha256": "27bddc6a5e7163230bec12c48bd8395c30cd6726403ccf49d3157b9fdd4b1549"
+    },
+    {
+      "path": "scripts/compare-ordered-recruitment-checkpoint-parity.py",
+      "bytes": 24055,
+      "sha256": "3d50b37d55172160537b3289b14f0418a9b8dd8ccf88d5e38cb7fee986f71bb2"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/case-contract.json",
+      "bytes": 996,
+      "sha256": "3b1bd39194961a4340a0dabcb733d0d447c3c495003ff6c510bbe0832faaccf7"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/development/recr01/recruitment-campaign.json.gz",
+      "bytes": 7006750,
+      "sha256": "bb5bf080d424a3e21312a229a4253aecf904ebb55ab78baaa6ec6e930ce365b0"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/development/recr01/recruitment-public-trace.json.gz",
+      "bytes": 35232,
+      "sha256": "e0fad661cabb078438b29a94f6b032bfefe5376f553fd5d193d26a6f4f547b29"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/development/recr01/execution-recruitment.json",
+      "bytes": 15283,
+      "sha256": "f39c9a6bfd89039a351643d398919b03e61e127610a6de5d9b433b71e3a66e7e"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/development/recr01-source/source-manifest.json",
+      "bytes": 37427,
+      "sha256": "f40b11dccc89e29264f0657501883a9f5714bbf9727c33276b8a1c9265d4309f"
+    }
+  ],
+  "inputsUnchanged": true,
+  "stdout": {
+    "path": "docs/migration/lot10c-evidence/development/recr01-parity02/output.raw.txt",
+    "bytes": 117049,
+    "sha256": "f3b9437b3d340622ab9ac2282b89a9a4349093bfc802d43dc3858b200aa5ef45"
+  },
+  "result": {
+    "path": "docs/migration/lot10c-evidence/development/recr01-parity02/original-parity.json.gz",
+    "bytes": 141752,
+    "sha256": "90690a29a6e00747d58c0cfad3107c7c9b4cd925274dda9d42be33110caa235a"
+  }
+}

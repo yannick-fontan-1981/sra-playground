@@ -1,0 +1,5 @@
+{"name":"accept_cold_original_control","passed":true,"comparisonPassed":true,"exactParityPassed":true,"stop":null}
+{"name":"reject_stale_before","passed":true,"comparisonPassed":false,"exactParityPassed":false,"stop":{"callIndex":4,"error":{"name":"ValueError","message":"Acquisition must consume the current public packet and its immediate actual successor"}}}
+{"name":"reject_future_proposal","passed":true,"comparisonPassed":false,"exactParityPassed":false,"stop":{"callIndex":0,"error":{"name":"ValueError","message":"Proposal must use the current acquired public packet, never a past/future return"}}}
+{"name":"reject_future_guard","passed":true,"comparisonPassed":false,"exactParityPassed":false,"stop":{"callIndex":3,"error":{"name":"ValueError","message":"Before guard must use the current acquired public packet"}}}
+{"passed": true, "tests": 4, "output": "docs/migration/lot10c-evidence/development/parity-readers-attempt02-flow/results", "originalsVerifiedBeforeAndAfter": 1786, "consumedOriginalHashes": 726}

@@ -1,0 +1,1123 @@
+{
+  "schema": "logos-engine.lot10c.prepared-composition-test-scope-plan.v1",
+  "recordedAt": "2026-11-11T19:18:13.018243+00:00",
+  "status": "planned_not_executed",
+  "testsExecuted": false,
+  "gameOrBrowserExecuted": false,
+  "sourceOrGitMutationPerformed": false,
+  "qualification": "Metadata/source review only. The previous 1382-test proof remains development-only; this plan establishes no post-composition test result, native parity, actual case success, official cost acceptance or publication readiness.",
+  "assemblyRule": "Stable union of the actual previous 46-file 10C run with all added/modified executable root/tests *.test.ts in each immutable prepared commit versus the common published base, retaining directly affected coupled/preview modules and excluding the exact inherited three eager closed-case modules.",
+  "commonPublishedBase": "4afcbfe6a25bd3a88223be543e443bc53b9c8814",
+  "preparedCommits": {
+    "5C": "722c949e8800b580742f10a9a97751578b9cc419",
+    "6B": "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+    "8A": "7c10456a675f0e9a93089a0f679e96677ede03af"
+  },
+  "preparedTestChanges": {
+    "5C": [
+      {
+        "status": "A",
+        "path": "tests/v6-object-binding-common.test.ts"
+      },
+      {
+        "status": "A",
+        "path": "tests/v6-observed-binding-reference.test.ts"
+      },
+      {
+        "status": "A",
+        "path": "tests/v6-observed-binding.test.ts"
+      },
+      {
+        "status": "M",
+        "path": "tests/v6-radial-port-integration.test.ts"
+      }
+    ],
+    "6B": [
+      {
+        "status": "M",
+        "path": "tests/v6-coupled-pair-planning.test.ts"
+      },
+      {
+        "status": "A",
+        "path": "tests/v6-object-binding-common.test.ts"
+      },
+      {
+        "status": "A",
+        "path": "tests/v6-observed-binding-reference.test.ts"
+      },
+      {
+        "status": "A",
+        "path": "tests/v6-observed-binding.test.ts"
+      },
+      {
+        "status": "M",
+        "path": "tests/v6-preview-packing-integration.test.ts"
+      },
+      {
+        "status": "M",
+        "path": "tests/v6-radial-port-integration.test.ts"
+      },
+      {
+        "status": "A",
+        "path": "tests/v6-selected-rigid-capture.test.ts"
+      },
+      {
+        "status": "A",
+        "path": "tests/v6-selected-rigid-integration.test.ts"
+      },
+      {
+        "status": "A",
+        "path": "tests/v6-selected-rigid-native.test.ts"
+      },
+      {
+        "status": "A",
+        "path": "tests/v6-selected-rigid-reference.test.ts"
+      }
+    ],
+    "8A": [
+      {
+        "status": "A",
+        "path": "tests/v6-motif-access-contract.test.ts"
+      },
+      {
+        "status": "A",
+        "path": "tests/v6-motif-access-kernel.test.ts"
+      },
+      {
+        "status": "A",
+        "path": "tests/v6-motif-access-reference.test.ts"
+      },
+      {
+        "status": "M",
+        "path": "tests/v6-radial-port-integration.test.ts"
+      }
+    ]
+  },
+  "priorDevelopmentRun": {
+    "receipt": {
+      "path": "docs/migration/lot10c-evidence/development/recr01-source/validation/delta-tests-run.json",
+      "bytes": 178997,
+      "sha256": "e82df26d9cab4a781e6f2e16c0f508ba580508fa043b8a83c935cf8b2a278ce9"
+    },
+    "status": "passed",
+    "testFileCount": 46,
+    "testFiles": [
+      "tests/v6-ordered-recruitment-reference.test.ts",
+      "tests/v6-ordered-recruitment-kernel.test.ts",
+      "tests/v6-window-question-reference.test.ts",
+      "tests/v6-window-question-kernel.test.ts",
+      "tests/v6-axial-question-reference.test.ts",
+      "tests/v6-axial-question-kernel.test.ts",
+      "tests/v6-native-runtime.test.ts",
+      "tests/v6-native-family-registration.test.ts",
+      "tests/v6-native-caller.test.ts",
+      "tests/v6-caller-integration.test.ts",
+      "tests/v6-source-entry-routing.test.ts",
+      "tests/v6-radial-port-integration.test.ts",
+      "tests/v6-native-authority.test.ts",
+      "tests/v6-native-transition-domain.test.ts",
+      "tests/v6-native-transition-domain-integration.test.ts",
+      "tests/v6-native-observer.test.ts",
+      "tests/v6-native-checkpoint-integration.test.ts",
+      "tests/v6-native-state-graph.test.ts",
+      "tests/v6-native-persistence.test.ts",
+      "tests/v6-native-hydration-cache.test.ts",
+      "tests/v6-native-copy.test.ts",
+      "tests/v6-native-snapshot-identity.test.ts",
+      "tests/v6-native-working-witness.test.ts",
+      "tests/v6-knowledge-store.test.ts",
+      "tests/v6-incremental-memory.test.ts",
+      "tests/v6-src-program.test.ts",
+      "tests/v6-drm-projector.test.ts",
+      "tests/v6-select-reference.test.ts",
+      "tests/v6-topological-recolor-reference.test.ts",
+      "tests/v6-topological-recolor-kernel.test.ts",
+      "tests/v6-feedback-sequences-reference.test.ts",
+      "tests/v6-feedback-sequences-integration.test.ts",
+      "tests/v6-shared-series-native.test.ts",
+      "tests/v6-ranked-workshop-grounded-inquiry.test.ts",
+      "tests/v6-stationary-contact-continuation.test.ts",
+      "tests/v6-workshop-cold-caller-continuation.test.ts",
+      "tests/v6-workshop-followup-source.test.ts",
+      "tests/v6-program-control-discovery-integration.test.ts",
+      "tests/v6-preview-packing-native.test.ts",
+      "tests/v6-preview-packing-reference.test.ts",
+      "tests/v6-preview-packing-integration.test.ts",
+      "tests/v6-preview-capture.test.ts",
+      "tests/v6-acquired-continuation-priority.test.ts",
+      "tests/v6-learned-preparation-priority.test.ts",
+      "tests/v6-material-recovery-priority.test.ts",
+      "tests/v6-coupled-pair-planning.test.ts"
+    ],
+    "counts": {
+      "tests": 1382,
+      "pass": 1382,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "durationSeconds": 477.03346468200107,
+    "timeoutSeconds": 900,
+    "qualification": "Development evidence only; not rerun, relabelled, reused or promoted as a result for the merged prospective source."
+  },
+  "scopeDeclaration": {
+    "path": "docs/migration/lot10c-evidence/validation-test-scope.json",
+    "bytes": 3419,
+    "sha256": "98217551bb536a5d426e5f798d801c63b566abe6d870675829630bed5e5fdcf8"
+  },
+  "excludedClosedCaseModules": [
+    "tests/v6-ranked-workshop-kernel.test.ts",
+    "tests/v6-ranked-workshop-reference.test.ts",
+    "tests/v6-symbol-transactions-kernel.test.ts"
+  ],
+  "exclusionPolicy": "Exclude each exact module in full before Node imports; no test-name filtering can safely neutralize its eager closed-case imports. No excluded module or game payload was read by this scope assembly.",
+  "testFiles": [
+    "tests/v6-ordered-recruitment-reference.test.ts",
+    "tests/v6-ordered-recruitment-kernel.test.ts",
+    "tests/v6-window-question-reference.test.ts",
+    "tests/v6-window-question-kernel.test.ts",
+    "tests/v6-axial-question-reference.test.ts",
+    "tests/v6-axial-question-kernel.test.ts",
+    "tests/v6-native-runtime.test.ts",
+    "tests/v6-native-family-registration.test.ts",
+    "tests/v6-native-caller.test.ts",
+    "tests/v6-caller-integration.test.ts",
+    "tests/v6-source-entry-routing.test.ts",
+    "tests/v6-radial-port-integration.test.ts",
+    "tests/v6-native-authority.test.ts",
+    "tests/v6-native-transition-domain.test.ts",
+    "tests/v6-native-transition-domain-integration.test.ts",
+    "tests/v6-native-observer.test.ts",
+    "tests/v6-native-checkpoint-integration.test.ts",
+    "tests/v6-native-state-graph.test.ts",
+    "tests/v6-native-persistence.test.ts",
+    "tests/v6-native-hydration-cache.test.ts",
+    "tests/v6-native-copy.test.ts",
+    "tests/v6-native-snapshot-identity.test.ts",
+    "tests/v6-native-working-witness.test.ts",
+    "tests/v6-knowledge-store.test.ts",
+    "tests/v6-incremental-memory.test.ts",
+    "tests/v6-src-program.test.ts",
+    "tests/v6-drm-projector.test.ts",
+    "tests/v6-select-reference.test.ts",
+    "tests/v6-topological-recolor-reference.test.ts",
+    "tests/v6-topological-recolor-kernel.test.ts",
+    "tests/v6-feedback-sequences-reference.test.ts",
+    "tests/v6-feedback-sequences-integration.test.ts",
+    "tests/v6-shared-series-native.test.ts",
+    "tests/v6-ranked-workshop-grounded-inquiry.test.ts",
+    "tests/v6-stationary-contact-continuation.test.ts",
+    "tests/v6-workshop-cold-caller-continuation.test.ts",
+    "tests/v6-workshop-followup-source.test.ts",
+    "tests/v6-program-control-discovery-integration.test.ts",
+    "tests/v6-preview-packing-native.test.ts",
+    "tests/v6-preview-packing-reference.test.ts",
+    "tests/v6-preview-packing-integration.test.ts",
+    "tests/v6-preview-capture.test.ts",
+    "tests/v6-acquired-continuation-priority.test.ts",
+    "tests/v6-learned-preparation-priority.test.ts",
+    "tests/v6-material-recovery-priority.test.ts",
+    "tests/v6-coupled-pair-planning.test.ts",
+    "tests/v6-motif-access-contract.test.ts",
+    "tests/v6-motif-access-kernel.test.ts",
+    "tests/v6-motif-access-reference.test.ts",
+    "tests/v6-object-binding-common.test.ts",
+    "tests/v6-observed-binding-reference.test.ts",
+    "tests/v6-observed-binding.test.ts",
+    "tests/v6-selected-rigid-capture.test.ts",
+    "tests/v6-selected-rigid-integration.test.ts",
+    "tests/v6-selected-rigid-native.test.ts",
+    "tests/v6-selected-rigid-reference.test.ts"
+  ],
+  "testFileCount": 56,
+  "newTestFiles": [
+    "tests/v6-motif-access-contract.test.ts",
+    "tests/v6-motif-access-kernel.test.ts",
+    "tests/v6-motif-access-reference.test.ts",
+    "tests/v6-object-binding-common.test.ts",
+    "tests/v6-observed-binding-reference.test.ts",
+    "tests/v6-observed-binding.test.ts",
+    "tests/v6-selected-rigid-capture.test.ts",
+    "tests/v6-selected-rigid-integration.test.ts",
+    "tests/v6-selected-rigid-native.test.ts",
+    "tests/v6-selected-rigid-reference.test.ts"
+  ],
+  "newTestFileCount": 10,
+  "baseDeclaredTestFileCount": 33,
+  "extraTestFiles": [
+    "tests/v6-ranked-workshop-grounded-inquiry.test.ts",
+    "tests/v6-stationary-contact-continuation.test.ts",
+    "tests/v6-workshop-cold-caller-continuation.test.ts",
+    "tests/v6-workshop-followup-source.test.ts",
+    "tests/v6-program-control-discovery-integration.test.ts",
+    "tests/v6-preview-packing-native.test.ts",
+    "tests/v6-preview-packing-reference.test.ts",
+    "tests/v6-preview-packing-integration.test.ts",
+    "tests/v6-preview-capture.test.ts",
+    "tests/v6-acquired-continuation-priority.test.ts",
+    "tests/v6-learned-preparation-priority.test.ts",
+    "tests/v6-material-recovery-priority.test.ts",
+    "tests/v6-coupled-pair-planning.test.ts",
+    "tests/v6-motif-access-contract.test.ts",
+    "tests/v6-motif-access-kernel.test.ts",
+    "tests/v6-motif-access-reference.test.ts",
+    "tests/v6-object-binding-common.test.ts",
+    "tests/v6-observed-binding-reference.test.ts",
+    "tests/v6-observed-binding.test.ts",
+    "tests/v6-selected-rigid-capture.test.ts",
+    "tests/v6-selected-rigid-integration.test.ts",
+    "tests/v6-selected-rigid-native.test.ts",
+    "tests/v6-selected-rigid-reference.test.ts"
+  ],
+  "extraTestFileCount": 23,
+  "directlyAffectedCoupledAndPreviewTests": [
+    "tests/v6-coupled-pair-planning.test.ts",
+    "tests/v6-preview-packing-native.test.ts",
+    "tests/v6-preview-packing-reference.test.ts",
+    "tests/v6-preview-packing-integration.test.ts",
+    "tests/v6-preview-capture.test.ts"
+  ],
+  "testPathAvailability": [
+    {
+      "path": "tests/v6-ordered-recruitment-reference.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-ordered-recruitment-kernel.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-window-question-reference.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-window-question-kernel.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-axial-question-reference.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-axial-question-kernel.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-native-runtime.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-native-family-registration.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-native-caller.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-caller-integration.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-source-entry-routing.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-radial-port-integration.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [
+        {
+          "lane": "5C",
+          "commit": "722c949e8800b580742f10a9a97751578b9cc419",
+          "gitBlob": "79a41cddda07e50fb117ca01ce4f22e9533519bb",
+          "objectType": "blob"
+        },
+        {
+          "lane": "6B",
+          "commit": "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+          "gitBlob": "550bf00a17bfc07af0549ede3e9cafae3443ada6",
+          "objectType": "blob"
+        },
+        {
+          "lane": "8A",
+          "commit": "7c10456a675f0e9a93089a0f679e96677ede03af",
+          "gitBlob": "722ebfd1a36c3d5a25273141d1fc46fd880bc14d",
+          "objectType": "blob"
+        }
+      ],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-native-authority.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-native-transition-domain.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-native-transition-domain-integration.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-native-observer.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-native-checkpoint-integration.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-native-state-graph.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-native-persistence.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-native-hydration-cache.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-native-copy.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-native-snapshot-identity.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-native-working-witness.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-knowledge-store.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-incremental-memory.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-src-program.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-drm-projector.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-select-reference.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-topological-recolor-reference.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-topological-recolor-kernel.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-feedback-sequences-reference.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-feedback-sequences-integration.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-shared-series-native.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-ranked-workshop-grounded-inquiry.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-stationary-contact-continuation.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-workshop-cold-caller-continuation.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-workshop-followup-source.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-program-control-discovery-integration.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-preview-packing-native.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-preview-packing-reference.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-preview-packing-integration.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [
+        {
+          "lane": "6B",
+          "commit": "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+          "gitBlob": "7c58bfd2b244a31a3356b22933a0d04ff98c8411",
+          "objectType": "blob"
+        }
+      ],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-preview-capture.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-acquired-continuation-priority.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-learned-preparation-priority.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-material-recovery-priority.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-coupled-pair-planning.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [
+        {
+          "lane": "6B",
+          "commit": "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+          "gitBlob": "e0e37688aff8f2803a1099873f7cd161d7906e4d",
+          "objectType": "blob"
+        }
+      ],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-motif-access-contract.test.ts",
+      "status": "planned_import_verified_git_object",
+      "worktreeFileExists": false,
+      "immutablePreparedVersions": [
+        {
+          "lane": "8A",
+          "commit": "7c10456a675f0e9a93089a0f679e96677ede03af",
+          "gitBlob": "8cc4cc8c8f79eebbc19152af086383818691f386",
+          "objectType": "blob"
+        }
+      ],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-motif-access-kernel.test.ts",
+      "status": "planned_import_verified_git_object",
+      "worktreeFileExists": false,
+      "immutablePreparedVersions": [
+        {
+          "lane": "8A",
+          "commit": "7c10456a675f0e9a93089a0f679e96677ede03af",
+          "gitBlob": "49c569feb68821f45cb97019ae15805e43395991",
+          "objectType": "blob"
+        }
+      ],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-motif-access-reference.test.ts",
+      "status": "planned_import_verified_git_object",
+      "worktreeFileExists": false,
+      "immutablePreparedVersions": [
+        {
+          "lane": "8A",
+          "commit": "7c10456a675f0e9a93089a0f679e96677ede03af",
+          "gitBlob": "05653070f271e96649e17024a72b34fe7eb8232e",
+          "objectType": "blob"
+        }
+      ],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-object-binding-common.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [
+        {
+          "lane": "5C",
+          "commit": "722c949e8800b580742f10a9a97751578b9cc419",
+          "gitBlob": "e86a630e73d4ee19206ffcb2489494eeed66afa3",
+          "objectType": "blob"
+        },
+        {
+          "lane": "6B",
+          "commit": "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+          "gitBlob": "e86a630e73d4ee19206ffcb2489494eeed66afa3",
+          "objectType": "blob"
+        }
+      ],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-observed-binding-reference.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [
+        {
+          "lane": "5C",
+          "commit": "722c949e8800b580742f10a9a97751578b9cc419",
+          "gitBlob": "c0b16621d40a63fd995882b1cf81f5cc87d67837",
+          "objectType": "blob"
+        },
+        {
+          "lane": "6B",
+          "commit": "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+          "gitBlob": "c0b16621d40a63fd995882b1cf81f5cc87d67837",
+          "objectType": "blob"
+        }
+      ],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-observed-binding.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [
+        {
+          "lane": "5C",
+          "commit": "722c949e8800b580742f10a9a97751578b9cc419",
+          "gitBlob": "bd29789a7df0b910790fa32f25693cb092f33076",
+          "objectType": "blob"
+        },
+        {
+          "lane": "6B",
+          "commit": "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+          "gitBlob": "bd29789a7df0b910790fa32f25693cb092f33076",
+          "objectType": "blob"
+        }
+      ],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-selected-rigid-capture.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [
+        {
+          "lane": "6B",
+          "commit": "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+          "gitBlob": "8f4ce51886efcdc12130ceedd8dd53df23201ff9",
+          "objectType": "blob"
+        }
+      ],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-selected-rigid-integration.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [
+        {
+          "lane": "6B",
+          "commit": "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+          "gitBlob": "7a60c0b7d4d3291574df692d0c62a07763c38154",
+          "objectType": "blob"
+        }
+      ],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-selected-rigid-native.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [
+        {
+          "lane": "6B",
+          "commit": "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+          "gitBlob": "e17e0d56eb713ef2d5a02c4cebae2bfccba57bc4",
+          "objectType": "blob"
+        }
+      ],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    },
+    {
+      "path": "tests/v6-selected-rigid-reference.test.ts",
+      "status": "present_at_planning",
+      "worktreeFileExists": true,
+      "immutablePreparedVersions": [
+        {
+          "lane": "6B",
+          "commit": "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+          "gitBlob": "64eeb6f07bacc7800309832a521e5e12ae002848",
+          "objectType": "blob"
+        }
+      ],
+      "qualification": "Existence only; final merged bytes must be frozen and verified by the actual future release run."
+    }
+  ],
+  "presentTestFileCount": 53,
+  "plannedImportTestFileCount": 3,
+  "ignoredHistoricalProofCopies": [
+    {
+      "lane": "5C",
+      "status": "A",
+      "path": "docs/migration/lot5c-evidence/recovery/common/clock-integration-acquisition-01/execution-inputs/tests/v6-object-binding-common.test.ts",
+      "reason": "Retained historical proof input; not a root/tests executable module. No contents read."
+    },
+    {
+      "lane": "5C",
+      "status": "A",
+      "path": "docs/migration/lot5c-evidence/recovery/common/common-01/positive/original-comparison-input-sources/tests/v6-object-binding-common.test.ts",
+      "reason": "Retained historical proof input; not a root/tests executable module. No contents read."
+    },
+    {
+      "lane": "5C",
+      "status": "A",
+      "path": "docs/migration/lot5c-evidence/recovery/common/common-02/execution-inputs/tests/v6-object-binding-common.test.ts",
+      "reason": "Retained historical proof input; not a root/tests executable module. No contents read."
+    },
+    {
+      "lane": "5C",
+      "status": "A",
+      "path": "docs/migration/lot5c-evidence/recovery/common/common-clock-01/source-inputs/tests/v6-object-binding-common.test.ts",
+      "reason": "Retained historical proof input; not a root/tests executable module. No contents read."
+    },
+    {
+      "lane": "5C",
+      "status": "A",
+      "path": "docs/migration/lot5c-evidence/recovery/common/common-final-01/execution-inputs/tests/v6-object-binding-common.test.ts",
+      "reason": "Retained historical proof input; not a root/tests executable module. No contents read."
+    },
+    {
+      "lane": "5C",
+      "status": "A",
+      "path": "docs/migration/lot5c-evidence/recovery/common/recovered-common-01-inputs/tests/v6-object-binding-common.test.ts",
+      "reason": "Retained historical proof input; not a root/tests executable module. No contents read."
+    },
+    {
+      "lane": "5C",
+      "status": "A",
+      "path": "docs/migration/lot5c-evidence/recovery/source-oracle/parity-01-inputs/tests/v6-observed-binding-reference.test.ts",
+      "reason": "Retained historical proof input; not a root/tests executable module. No contents read."
+    },
+    {
+      "lane": "5C",
+      "status": "A",
+      "path": "docs/migration/lot5c-evidence/recovery/source-oracle/parity-02-inputs/tests/v6-observed-binding-reference.test.ts",
+      "reason": "Retained historical proof input; not a root/tests executable module. No contents read."
+    },
+    {
+      "lane": "6B",
+      "status": "A",
+      "path": "docs/migration/lot5c-evidence/recovery/common/clock-integration-acquisition-01/execution-inputs/tests/v6-object-binding-common.test.ts",
+      "reason": "Retained historical proof input; not a root/tests executable module. No contents read."
+    },
+    {
+      "lane": "6B",
+      "status": "A",
+      "path": "docs/migration/lot5c-evidence/recovery/common/common-01/positive/original-comparison-input-sources/tests/v6-object-binding-common.test.ts",
+      "reason": "Retained historical proof input; not a root/tests executable module. No contents read."
+    },
+    {
+      "lane": "6B",
+      "status": "A",
+      "path": "docs/migration/lot5c-evidence/recovery/common/common-02/execution-inputs/tests/v6-object-binding-common.test.ts",
+      "reason": "Retained historical proof input; not a root/tests executable module. No contents read."
+    },
+    {
+      "lane": "6B",
+      "status": "A",
+      "path": "docs/migration/lot5c-evidence/recovery/common/common-clock-01/source-inputs/tests/v6-object-binding-common.test.ts",
+      "reason": "Retained historical proof input; not a root/tests executable module. No contents read."
+    },
+    {
+      "lane": "6B",
+      "status": "A",
+      "path": "docs/migration/lot5c-evidence/recovery/common/lot6b-fa23-common-01/execution-inputs/tests/v6-object-binding-common.test.ts",
+      "reason": "Retained historical proof input; not a root/tests executable module. No contents read."
+    },
+    {
+      "lane": "6B",
+      "status": "A",
+      "path": "docs/migration/lot5c-evidence/recovery/common/recovered-common-01-inputs/tests/v6-object-binding-common.test.ts",
+      "reason": "Retained historical proof input; not a root/tests executable module. No contents read."
+    },
+    {
+      "lane": "6B",
+      "status": "A",
+      "path": "docs/migration/lot5c-evidence/recovery/source-oracle/parity-01-inputs/tests/v6-observed-binding-reference.test.ts",
+      "reason": "Retained historical proof input; not a root/tests executable module. No contents read."
+    },
+    {
+      "lane": "6B",
+      "status": "A",
+      "path": "docs/migration/lot5c-evidence/recovery/source-oracle/parity-02-inputs/tests/v6-observed-binding-reference.test.ts",
+      "reason": "Retained historical proof input; not a root/tests executable module. No contents read."
+    }
+  ],
+  "integrationRisks": [
+    {
+      "id": "passive_order_and_exactly_once",
+      "integrationContract": "Preserve Workshop passive, Recruitment passive/publication, SelectedRigid state-only, Preview state-only, then later Workshop state, Binding and Feedback. Selected owners skip their passive record. Recruitment active window_constraint and passive recruitment_event remain distinct; no passive SelectedRigid or Motif acquisition.",
+      "existingTestFiles": [
+        "tests/v6-ordered-recruitment-kernel.test.ts",
+        "tests/v6-feedback-sequences-integration.test.ts",
+        "tests/v6-object-binding-common.test.ts",
+        "tests/v6-selected-rigid-integration.test.ts",
+        "tests/v6-native-caller.test.ts"
+      ]
+    },
+    {
+      "id": "single_owner_checkpoint_and_attention",
+      "integrationContract": "Retain complete Recruitment state even without a publishable source fact. Bind selection/acquisition/restoration to one owner; Binding uses the current shared caller.attention without a second native attention checkpoint. Rigid must restore before Preview.",
+      "existingTestFiles": [
+        "tests/v6-ordered-recruitment-kernel.test.ts",
+        "tests/v6-object-binding-common.test.ts",
+        "tests/v6-selected-rigid-integration.test.ts",
+        "tests/v6-preview-packing-integration.test.ts",
+        "tests/v6-native-checkpoint-integration.test.ts"
+      ]
+    },
+    {
+      "id": "fresh_execution_budget_and_incomplete_acquisition",
+      "integrationContract": "Keep 6B currentExecution clock conversion and remainingLevelActions, refreshed before paused-prefix dispatch; keep 5C Binding acquisition deadline charged to the originating level. A bounded incomplete acquisition must not fabricate a source fact, release another action or replay the boundary.",
+      "existingTestFiles": [
+        "tests/v6-selected-rigid-integration.test.ts",
+        "tests/v6-selected-rigid-native.test.ts",
+        "tests/v6-object-binding-common.test.ts",
+        "tests/v6-feedback-sequences-integration.test.ts",
+        "tests/v6-coupled-pair-planning.test.ts"
+      ]
+    },
+    {
+      "id": "source_priority_dispatch_and_blocking_refusal",
+      "integrationContract": "Preserve configured group/subquestion order and entryPoints alignment, current WHY/ACT, SelectedRigid identity and block_unrelated_probe semantics, retained composition parents, and the specialized wrappers that forward execution/refusals.",
+      "existingTestFiles": [
+        "tests/v6-source-entry-routing.test.ts",
+        "tests/v6-native-family-registration.test.ts",
+        "tests/v6-native-authority.test.ts",
+        "tests/v6-selected-rigid-integration.test.ts",
+        "tests/v6-coupled-pair-planning.test.ts",
+        "tests/v6-acquired-continuation-priority.test.ts",
+        "tests/v6-preview-packing-integration.test.ts"
+      ]
+    },
+    {
+      "id": "motif_exclusion_and_current_return_binding",
+      "integrationContract": "Keep Motif exclusion local to the final SymmetricField fallback; retain independent earlier entries and Recruitment. Keep full animation frames on selected acquisition, current geometry revalidation and restored learned state without passive Motif learning.",
+      "existingTestFiles": [
+        "tests/v6-motif-access-kernel.test.ts",
+        "tests/v6-motif-access-contract.test.ts",
+        "tests/v6-motif-access-reference.test.ts",
+        "tests/v6-ordered-recruitment-kernel.test.ts",
+        "tests/v6-native-transition-domain-integration.test.ts"
+      ]
+    }
+  ],
+  "runnerSourceInputs": [
+    {
+      "path": "docs/migration/lot10c-evidence/run-release-checks.py",
+      "bytes": 13371,
+      "sha256": "415d2aec10fdf875dba75bf60950f49d16089c98658333f1b52c5ac76145f940"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/freeze-source.py",
+      "bytes": 8973,
+      "sha256": "69a9f051e78415fc0027d47e4d5444681f7b129896e7a573e8d6fa9d19590cdf"
+    }
+  ],
+  "runnerCompatibility": {
+    "extraTestsAcceptedAs": "JSON object with a top-level testFiles array or a JSON path array; paths must exist under root/tests and end in .test.ts.",
+    "selectionOrder": "Base declaration order followed by explicit extras, deduplicated by first occurrence.",
+    "freezerAdditionalScopePath": "docs/migration/lot10c-evidence/integrated-extra-test-scope.json",
+    "requiredProspectivePreparation": "After all merges/conflicts are resolved, root must materialize extraTestFiles from this plan into the standard integrated-extra-test-scope.json before freezing. The nested plan itself is not auto-discovered by freeze-source.py. Preserve all earlier proof artifacts unchanged.",
+    "existingExtraScopeWillOtherwiseOmitNewTests": true,
+    "campaignOnlyFreezeSuitable": false,
+    "outputBehavior": "The release runner takes the freeze directory, reads its source-manifest.json, and reserves validation/delta-tests-run.json and raw/gzip outputs exclusively; a previous output is never overwritten.",
+    "internalLock": "run-release-checks.py acquires shared nonblocking performance.lock; freeze-source.py requires an external shared nonblocking lock.",
+    "childTimeoutRangeSeconds": [
+      1,
+      2400
+    ],
+    "selectedProspectiveChildTimeoutSeconds": 1200,
+    "boundRationale": "The previous 46-file serialized child took 477.03 seconds under a 900-second ceiling. The expanded 56-file run is assigned a finite prospective 1200-second ceiling; completion within it is not assumed. Timeout/failure outputs must remain retained."
+  },
+  "futureCommands": {
+    "workingDirectory": "/workspace/sites/sra-lot10c-20261111/.sites-checkout",
+    "newFreezeDirectory": "docs/migration/lot10c-evidence/prepared-composition01/final-qualification-01",
+    "freezeArgv": [
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "180s",
+      "flock",
+      "-s",
+      "-n",
+      "/workspace/shared/sra-coordination/performance.lock",
+      "python3",
+      "-B",
+      "docs/migration/lot10c-evidence/freeze-source.py",
+      "freeze",
+      "docs/migration/lot10c-evidence/prepared-composition01/final-qualification-01"
+    ],
+    "testsArgv": [
+      "python3",
+      "-B",
+      "docs/migration/lot10c-evidence/run-release-checks.py",
+      "docs/migration/lot10c-evidence/prepared-composition01/final-qualification-01",
+      "--tests",
+      "--extra-tests",
+      "docs/migration/lot10c-evidence/integrated-extra-test-scope.json",
+      "--timeout-seconds",
+      "1200",
+      "--coordination-lock",
+      "/workspace/shared/sra-coordination/performance.lock"
+    ],
+    "actualNodeChildArgv": [
+      "node",
+      "--test",
+      "--test-concurrency=1",
+      "--test-reporter=tap",
+      "tests/v6-ordered-recruitment-reference.test.ts",
+      "tests/v6-ordered-recruitment-kernel.test.ts",
+      "tests/v6-window-question-reference.test.ts",
+      "tests/v6-window-question-kernel.test.ts",
+      "tests/v6-axial-question-reference.test.ts",
+      "tests/v6-axial-question-kernel.test.ts",
+      "tests/v6-native-runtime.test.ts",
+      "tests/v6-native-family-registration.test.ts",
+      "tests/v6-native-caller.test.ts",
+      "tests/v6-caller-integration.test.ts",
+      "tests/v6-source-entry-routing.test.ts",
+      "tests/v6-radial-port-integration.test.ts",
+      "tests/v6-native-authority.test.ts",
+      "tests/v6-native-transition-domain.test.ts",
+      "tests/v6-native-transition-domain-integration.test.ts",
+      "tests/v6-native-observer.test.ts",
+      "tests/v6-native-checkpoint-integration.test.ts",
+      "tests/v6-native-state-graph.test.ts",
+      "tests/v6-native-persistence.test.ts",
+      "tests/v6-native-hydration-cache.test.ts",
+      "tests/v6-native-copy.test.ts",
+      "tests/v6-native-snapshot-identity.test.ts",
+      "tests/v6-native-working-witness.test.ts",
+      "tests/v6-knowledge-store.test.ts",
+      "tests/v6-incremental-memory.test.ts",
+      "tests/v6-src-program.test.ts",
+      "tests/v6-drm-projector.test.ts",
+      "tests/v6-select-reference.test.ts",
+      "tests/v6-topological-recolor-reference.test.ts",
+      "tests/v6-topological-recolor-kernel.test.ts",
+      "tests/v6-feedback-sequences-reference.test.ts",
+      "tests/v6-feedback-sequences-integration.test.ts",
+      "tests/v6-shared-series-native.test.ts",
+      "tests/v6-ranked-workshop-grounded-inquiry.test.ts",
+      "tests/v6-stationary-contact-continuation.test.ts",
+      "tests/v6-workshop-cold-caller-continuation.test.ts",
+      "tests/v6-workshop-followup-source.test.ts",
+      "tests/v6-program-control-discovery-integration.test.ts",
+      "tests/v6-preview-packing-native.test.ts",
+      "tests/v6-preview-packing-reference.test.ts",
+      "tests/v6-preview-packing-integration.test.ts",
+      "tests/v6-preview-capture.test.ts",
+      "tests/v6-acquired-continuation-priority.test.ts",
+      "tests/v6-learned-preparation-priority.test.ts",
+      "tests/v6-material-recovery-priority.test.ts",
+      "tests/v6-coupled-pair-planning.test.ts",
+      "tests/v6-motif-access-contract.test.ts",
+      "tests/v6-motif-access-kernel.test.ts",
+      "tests/v6-motif-access-reference.test.ts",
+      "tests/v6-object-binding-common.test.ts",
+      "tests/v6-observed-binding-reference.test.ts",
+      "tests/v6-observed-binding.test.ts",
+      "tests/v6-selected-rigid-capture.test.ts",
+      "tests/v6-selected-rigid-integration.test.ts",
+      "tests/v6-selected-rigid-native.test.ts",
+      "tests/v6-selected-rigid-reference.test.ts"
+    ],
+    "preconditions": [
+      "All three prepared source integrations and conflict resolutions are complete.",
+      "Every selected test exists in the merged worktree; metadata existence checks at this planning stage are not final byte verification.",
+      "The standard extra-test scope matches extraTestFiles exactly and retains the three whole-module exclusions.",
+      "Fresh lane statuses show no requested/active official cost quiet interval; obtain nonblocking SH and stop on renewed quiet.",
+      "Freeze directory and all validation outputs are new.",
+      "Use the full validation/execution closure, without --campaign-only.",
+      "Keep runtime, tests, scope and verification helpers immutable throughout the actual frozen run."
+    ],
+    "commandsExecuted": false
+  },
+  "coordinationAtPlanning": {
+    "mode": "shared_nonblocking",
+    "statusObservations": [
+      {
+        "file": "lot5c-status.json",
+        "updated_at": "2026-11-11T19:16:00.226786+00:00",
+        "quiet_requested": false,
+        "performance_started": false,
+        "performance_completed": null
+      },
+      {
+        "file": "lot6b-status.json",
+        "updated_at": "2026-11-11T19:16:14.145455+00:00",
+        "quiet_requested": false,
+        "performance_started": false,
+        "performance_completed": null
+      },
+      {
+        "file": "lot8a-status.json",
+        "updated_at": "2026-11-11T19:13:21.362547+00:00",
+        "quiet_requested": null,
+        "performance_started": false,
+        "performance_completed": null
+      },
+      {
+        "file": "lot10c-status.json",
+        "updated_at": "2026-11-11T19:17:26.118233+00:00",
+        "quiet_requested": false,
+        "performance_started": false,
+        "performance_completed": null
+      }
+    ]
+  },
+  "scopeAssemblyReadTestBodies": false,
+  "scopeAssemblyReadGamePayloads": false,
+  "stagingOrCommitPerformed": false
+}

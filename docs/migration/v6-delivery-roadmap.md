@@ -1,5 +1,45 @@
 # Feuille de route V5/V6 vers Logos Engine TypeScript
 
+<!-- LOT8B_COMPONENT_STAGE_START -->
+
+## Lot 8B : contrat, référence indépendante et port du composant BranchRouting
+
+Le lot 8B poursuit `parallel_branch_routing` sur une branche et un checkout propres, depuis la **0.66 réellement publiée dans Site 107**, source `4ff7bf45286a8a19d34401988adca587253ae41e`. Le publié raccorde **68/76 entrées (89,5 %)**. La publication précédente 0.65 / Site 106 et son reçu de clôture sont conservés.
+
+Le jalon courant vise le **composant générique et sa parité originale** : contrat prospectif, corpus de petits rasters indépendant, port natif et contrôles ciblés. Il ne raccorde pas encore `parallel_branch_routing` au caller commun, ne réserve pas de nouveau numéro de publication et n’augmente pas le compteur des entrées raccordées. La boucle commune, les régressions de composition, le coût et la publication propre de 8B restent des jalons ultérieurs.
+
+Développement, contrôles fonctionnels, commits et push restent sans verrou global. Le coût officiel est distinct : médiane globale de session complète strictement sous +10 % pour STCK et SMLP séparément, avec une phase au-dessus de +10 % acceptable si les deux globaux passent. LKEY demeure définitivement fermé.
+
+<!-- LOT8B_COMPONENT_STAGE_END -->
+
+<!-- LOT10C_PRIORITY_PUBLICATION_066_BEGIN -->
+
+**Constat actualisé du lot 8B : déploiement réussi dans Site 107, source `4ff7bf45286a8a19d34401988adca587253ae41e`. Le texte de préparation ci-dessous conserve les preuves et réserves 10C ; le coût officiel reste non mesuré et non accepté.**
+## Publication 0.66 constatée : Site 107, base du travail 8B
+
+La demande explicite de l’utilisateur est de publier **0.66 en priorité, sans attendre la disponibilité des autres lots**. Le candidat 10C qualifié `547025a637ffbfeae23c15d54c96100ad8d3df5f` est réconcilié avec **0.65 réellement publiée, Site 106**, source `b9555039d60d5d9f771dd96b763c40f389dc62dd`. Le travail s’effectue dans le checkout propre `/workspace/sites/sra-lot10c-priority066-20261112`, branche `lot10c-priority066-20261112`.
+
+La [réconciliation](lot10c-evidence/priority-publication-066-20261112/source-reconciliation.json) confirme l’identité du code, des tests, des scripts et des autres entrées de compilation avec le candidat qualifié. Le natif reste **329 fichiers**, digest `ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316`, et raccorde **68/76 entrées (89,5 %)**. Les seules métadonnées supplémentaires du plan de transfert sont un lien de preuve et des notes 8A déjà présents dans 0.65. Le [build frais](lot10c-evidence/priority-publication-066-20261112/build-execution.json) et les deux audits passent ; le worker compilé contient bien **0.66.0**.
+
+La [revue indépendante](lot10c-evidence/priority-publication-066-20261112/qualification-reuse-review.json) retrouve **753 entrées source/tests**, **394 entrées de compilation** et **1 786 originaux** sans divergence. Les preuves fonctionnelles 10C conservées restent **1 767/1 767 tests dans 56 modules**, dix rejeux principaux / 170 contrôles et le complément KATA / 17 contrôles, soit **11 jeux distincts / 187 contrôles**. Leur réutilisation repose sur l’identité des entrées, sans présenter ces résultats comme une nouvelle exécution. Les preuves RECR restent attachées à leur gel historique 315, distinct du candidat 329. HPDL reste partiel et LKEY définitivement fermé.
+
+**Le coût officiel 0.66 n’est ni mesuré ni accepté. La publication prioritaire précède cette qualification, conformément à la demande courante.** Le critère futur reste une augmentation de la médiane des sessions complètes strictement inférieure à +10 % pour STCK et SMLP séparément ; une phase peut dépasser +10 % si le global du même jeu passe. Les six portes de migration globale et la parité complète restent ouvertes.
+
+| Étape | État courant avant le déploiement 0.66 | Suite |
+| --- | --- | --- |
+| 5C / 0.63 | Publié, Site 104 | Coût officiel encore ouvert |
+| 6B / 0.64 | Publié, Site 105 | Coût officiel encore ouvert ; développement 6C sur sa branche |
+| 8A / 0.65 | Publié, Site 106 | Coût officiel encore ouvert ; développement 8B sur sa branche |
+| **10C / 0.66** | **Qualification fonctionnelle conservée, réconciliation et build frais passés** | **Publication prioritaire, sans attente de disponibilité** |
+| 10D / TemporalSelection | Référence indépendante de 105 cas, deux générations identiques et sept corruptions rejetées, sauvegardées sur le checkpoint `feab56d88718ef3b9ae9fd4798254934c09ad3f3` | Reprendre le port natif des primitives, de la géométrie et de la politique ; compléter le second locus et le cycle de famille avant raccordement |
+| Autres entrées | Huit restent ouvertes au registre 68/76 | Poursuivre les lots propriétaires et la consolidation globale |
+
+Le développement, les builds, les commits et les sauvegardes de branche avancent sans verrou global. Une fenêtre exclusive courte, non bloquante et bornée protège seulement la publication ; aucun ACK de disponibilité n’est demandé, aucun fichier de verrou détenu n’est supprimé. L’accès privé au propriétaire est conservé. Les reçus sont rassemblés dans le [dossier de publication 0.66](lot10c-evidence/priority-publication-066-20261112).
+
+À ce commit de préparation, aucun succès de déploiement 0.66 n’est encore revendiqué. **Les sections suivantes conservent leurs constats historiques ; le présent tableau fixe l’état courant.**
+
+<!-- LOT10C_PRIORITY_PUBLICATION_066_END -->
+
 <!-- LOT8A_PRIORITY_PUBLICATION_065_START -->
 
 ## Lot 8A : 0.65 publiée dans Site 106
@@ -1313,7 +1353,7 @@ Les entrées restantes du tableau se réfèrent au **dernier prédécesseur nati
 | 7 | Ateliers et transactions symboliques | **0 au registre** | Interfaces mesurées, SRC et mémoire des méthodes | **Transferts 7A/7B clos** : 7A Sites 82–83/native 0.52, 7B Sites 88–89/native 0.55, coûts acceptés et propriétaires distincts. **Suivi LKEY L3 séparé**, sans requalifier les échecs ni effacer la réserve de continuation. |
 | 8 | Accès conditionné et routage de branches | **1 ouverte au registre publié** | Calibration des commandes et préfixes gardés | **8A `motif_conditioned_access` publié prioritairement dans Site 106 / native 0.65**, 67/76 entrées, preuves communes, 11 régressions et formes/graphes conservés. Coût officiel non mesuré et non accepté. **8B `parallel_branch_routing` : contrat et corpus indépendant à écrire après préparation source.** |
 | 9 | Navigation, régions et canaux | 3 | Graphes, retours publics et budgets courants | Planifié ; Recolor déjà acquis |
-| 10 | Questions d'axe, de fenêtre, d'ordre et de temps | 3 | Observations, séquences et méthodes revalidées | **10A clos, publié dans Sites 90–91 / 0.56** : 1 538 tests, cinq contrôles, 119 comparaisons et QA TRIA trois niveaux/17 actions/17 plans ; coût global accepté et réserve d'apport propre conservée. **10B, `window_question`, fonctionnellement validé avec réserve HPDL partielle ; coût global accepté, publication native 0.62 effective dans Site 102** ; **10C `ordered_recruitment` dispose de validations de développement et poursuit l’intégration de ses prédécesseurs** ; coût et publication restent à établir après 0.63, 0.64 et 0.65. **10D et 10E restent planifiés.** |
+| 10 | Questions d’axe, de fenêtre, d’ordre et de temps | **2 ouvertes au registre publié** | Observations, séquences et méthodes revalidées | **10C `ordered_recruitment` publié dans Site 107 / native 0.66**, après 10A/10B. Le coût officiel 10C reste non mesuré et non accepté. 10D `temporal_selection` et 10E `invited_endpoints` restent ouverts. HPDL conserve sa réserve partielle. |
 | 11 | Consolidation, couverture et lisibilité | Hors compteur | Résultats et preuves des lots précédents | Planifié |
 
 La réconciliation initiale avec le registre de la base 59 conserve **26 noms planifiés, 26 noms distincts, aucun nom absent et aucun nom supplémentaire**. Depuis 3F, `observed_composition_services` est raccordé ; 3G ajoute `framed_window_composition`, 3H `coupled_prefix_reference`, 3I `recurrent_series`, 4A `observed_feedback_sequence`, 7A `observed_ranked_workshop`, 5A `linked_temporal_preparation`, 4B `relative_arrangement` et 7B `observed_symbol_transaction`. **17 noms restaient ouverts** dans le gel historique 7B publié Site 88 / native 0.55, répartis dans les lots 4 à 10 : **1 + 2 + 4 + 0 + 2 + 3 + 5**. Le gel 10A / 0.56 publié dans Site 90 raccorde en plus `axial_question` : **60/76 entrées et 16 ouvertes**, réparties **1 + 2 + 4 + 0 + 2 + 3 + 4**. L'identité octet pour octet de ses entrées gelées est vérifiée après fusion des Sites 88 et 89. 4C publié raccorde ensuite `facet_example`, puis 5B publié dans Site 94 raccorde `observed_addressed_material` : **62/76 entrées et 14 ouvertes**, réparties **0 + 1 + 4 + 0 + 2 + 3 + 4**. Sa publication distincte est confirmée dans Site 94. Le gel 6A raccorde ensuite `preview_packing` : **63/76 entrées et 13 ouvertes**, réparties **0+1+3+0+2+3+4**. Le 10B réellement publié dans Site 102 ajoute `window_question` : **64/76 et 12 ouvertes**, réparties **0+1+3+0+2+3+3**. Le 5C publié dans Site 104 ajoute `observed_object_binding` : **65/76 et 11 ouvertes**, réparties **0+0+3+0+2+3+3**, avec réserve de coût officiel non mesuré. Les entrées sont détaillées ci-dessous. Les chemins directs et les fournisseurs communs gardent leur propre bilan hors registre.

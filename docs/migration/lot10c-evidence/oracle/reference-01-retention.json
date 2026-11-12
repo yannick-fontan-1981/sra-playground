@@ -1,0 +1,9 @@
+{
+  "schema": "logos-engine.oracle-reference-retention.v1",
+  "recordedAt": "2026-11-11T17:11:08.286655+00:00",
+  "originalPath": "tests/fixtures/v6-ordered-recruitment-reference.json.gz",
+  "retainedPath": "docs/migration/lot10c-evidence/oracle/reference-01.json.gz",
+  "sha256": "3132207e2e4be6be699c5baafd4f942cd649550b2017891a10acb086e8f2064e",
+  "bytes": 919810,
+  "reason": "Root requested two additional original calls at exact observed revisions for cold-kernel validation; first completed reference is retained unchanged before distinct run02."
+}

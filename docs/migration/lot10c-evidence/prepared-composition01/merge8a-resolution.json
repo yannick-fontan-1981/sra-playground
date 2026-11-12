@@ -1,0 +1,145 @@
+{
+  "schema": "lot10c.prepared-merge-resolution.v1",
+  "stage": "8a",
+  "resolvedAt": "2026-11-11T19:25:56.975776+00:00",
+  "ownParent": "2fde3355e763b1a23e64a43b6e4afc61d29e9979",
+  "incoming": "7c10456a675f0e9a93089a0f679e96677ede03af",
+  "sourceOnly": true,
+  "published": false,
+  "proposedNativeVersion": "0.66.0",
+  "actualPublishedBaseline": "Site103/native0.62",
+  "integrationTestsExecuted": false,
+  "resolvedPaths": [
+    "docs/migration/v6-coverage.json",
+    "docs/migration/v6-delivery-roadmap.md",
+    "docs/migration/v6-entry-point-progress.json",
+    "migration/v6-transfer-map.json",
+    "src/logos-engine/v6-native-runtime.ts",
+    "tests/v6-radial-port-integration.test.ts"
+  ],
+  "runtimeConflicts": 4,
+  "decisions": [
+    "Proposed unpublished0.66 identity.",
+    "Preserve SelectedRigid owner identity and restrict Motif exclusion to final SymmetricField fallback.",
+    "Union all registered owners and material entries.",
+    "Keep Workshop passive, Recruitment passive, SelectedRigid restoration, Preview restoration in original order."
+  ],
+  "unchangedAddedNativeModules": {
+    "src/logos-engine/v6-object-binding-common.ts": {
+      "sourceLane": "5c",
+      "sourceCommit": "722c949e8800b580742f10a9a97751578b9cc419",
+      "blob": "54f0bbf59ac6df1b42b5925b2f1725a0a5de03a0",
+      "unchanged": true
+    },
+    "src/logos-engine/v6-object-binding-geometry.ts": {
+      "sourceLane": "5c",
+      "sourceCommit": "722c949e8800b580742f10a9a97751578b9cc419",
+      "blob": "dd345554335fc3e94215365505d272f62b20939b",
+      "unchanged": true
+    },
+    "src/logos-engine/v6-object-binding-identity.ts": {
+      "sourceLane": "5c",
+      "sourceCommit": "722c949e8800b580742f10a9a97751578b9cc419",
+      "blob": "e8d952e66dda6b5a95ba889bf79a332f627c819e",
+      "unchanged": true
+    },
+    "src/logos-engine/v6-object-binding-planning.ts": {
+      "sourceLane": "5c",
+      "sourceCommit": "722c949e8800b580742f10a9a97751578b9cc419",
+      "blob": "a8d5e20cae69c27a077029303ad97cf994153458",
+      "unchanged": true
+    },
+    "src/logos-engine/v6-object-binding-reception.ts": {
+      "sourceLane": "5c",
+      "sourceCommit": "722c949e8800b580742f10a9a97751578b9cc419",
+      "blob": "63ab11a942c503e51bb72c78f401ee667ad93000",
+      "unchanged": true
+    },
+    "src/logos-engine/v6-object-binding-tracker.ts": {
+      "sourceLane": "5c",
+      "sourceCommit": "722c949e8800b580742f10a9a97751578b9cc419",
+      "blob": "01ec1581bcd24d7ce9d61c724af4838d0e188a41",
+      "unchanged": true
+    },
+    "src/logos-engine/v6-observed-binding-state.ts": {
+      "sourceLane": "5c",
+      "sourceCommit": "722c949e8800b580742f10a9a97751578b9cc419",
+      "blob": "3005e98f870d39d79df634da1fc5cda2b43dc845",
+      "unchanged": true
+    },
+    "src/logos-engine/v6-observed-binding.ts": {
+      "sourceLane": "5c",
+      "sourceCommit": "722c949e8800b580742f10a9a97751578b9cc419",
+      "blob": "76b2fed0d219160c4312c9e6ae3b4224b063d727",
+      "unchanged": true
+    },
+    "src/logos-engine/v6-selected-rigid-geometry.ts": {
+      "sourceLane": "6b",
+      "sourceCommit": "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+      "blob": "9902e2b498b9a7fcb46bd60f1fb6421466c57839",
+      "unchanged": true
+    },
+    "src/logos-engine/v6-selected-rigid-search.ts": {
+      "sourceLane": "6b",
+      "sourceCommit": "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+      "blob": "ee47f9fba68cf15cf5192e33ca0b6d017ba0c7b9",
+      "unchanged": true
+    },
+    "src/logos-engine/v6-selected-rigid-types.ts": {
+      "sourceLane": "6b",
+      "sourceCommit": "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+      "blob": "8b44cd81d7e66d0cf02cb9eeb8bed63bf0d667c9",
+      "unchanged": true
+    },
+    "src/logos-engine/v6-selected-rigid.ts": {
+      "sourceLane": "6b",
+      "sourceCommit": "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+      "blob": "fffe20aaed9de5ed079ec2a4fe40a3c2a2279042",
+      "unchanged": true
+    },
+    "src/logos-engine/v6-motif-access-geometry.ts": {
+      "sourceLane": "8a",
+      "sourceCommit": "7c10456a675f0e9a93089a0f679e96677ede03af",
+      "blob": "826eeb50c37f68d0360364511b608ea7125959a4",
+      "unchanged": true
+    },
+    "src/logos-engine/v6-motif-access.ts": {
+      "sourceLane": "8a",
+      "sourceCommit": "7c10456a675f0e9a93089a0f679e96677ede03af",
+      "blob": "c9f5859aeaa33b465a96ab44b6f0ac4e79af4f68",
+      "unchanged": true
+    },
+    "src/logos-engine/v5-ordered-front-reduction.ts": {
+      "sourceLane": "10c",
+      "sourceCommit": "3ea5e39b7c3f18ea84baf485a2494a9b948e0984",
+      "blob": "0fbaf147619cbb503a6934c5839fdb62f3b6c18f",
+      "unchanged": true
+    },
+    "src/logos-engine/v6-ordered-recruitment-geometry.ts": {
+      "sourceLane": "10c",
+      "sourceCommit": "3ea5e39b7c3f18ea84baf485a2494a9b948e0984",
+      "blob": "2ededa44db958a6863e89b54388ae3b5708a573b",
+      "unchanged": true
+    },
+    "src/logos-engine/v6-ordered-recruitment-policy.ts": {
+      "sourceLane": "10c",
+      "sourceCommit": "3ea5e39b7c3f18ea84baf485a2494a9b948e0984",
+      "blob": "f0031801fbcc6e47d3f6926e9eb071ad93852d5f",
+      "unchanged": true
+    },
+    "src/logos-engine/v6-ordered-recruitment-projection.ts": {
+      "sourceLane": "10c",
+      "sourceCommit": "3ea5e39b7c3f18ea84baf485a2494a9b948e0984",
+      "blob": "2a7ce81dc670f7c0d2be3103d3e3022caf14d3ed",
+      "unchanged": true
+    },
+    "src/logos-engine/v6-ordered-recruitment.ts": {
+      "sourceLane": "10c",
+      "sourceCommit": "3ea5e39b7c3f18ea84baf485a2494a9b948e0984",
+      "blob": "77ee6e3efdd6054c92e705b63cb7e9cd14c12f22",
+      "unchanged": true
+    }
+  },
+  "commonTypeFilesUnchangedFromRespectivePredecessors": true,
+  "callerExtensionRuntimeValidation": "pending actual integration tests"
+}

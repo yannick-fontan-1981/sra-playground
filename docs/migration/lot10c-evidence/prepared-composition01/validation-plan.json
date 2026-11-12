@@ -1,0 +1,20 @@
+{
+  "schema": "lot10c.prospective-composition-validation-plan.v1",
+  "declaredAt": "2026-11-11T19:33:31.020521+00:00",
+  "sourceCommit": "dd864cc645b1e9789e51d1a6c1498f4d0b18aa6f",
+  "nativeVersion": "0.66.0",
+  "developmentOnly": true,
+  "actualPublishedBaseline": "Site103/native0.62",
+  "actualPredecessorPublicationsEstablished": false,
+  "freezeDirectory": "docs/migration/lot10c-evidence/prepared-composition01/final-qualification-01",
+  "extraTestScope": "docs/migration/lot10c-evidence/integrated-extra-test-scope.json",
+  "batchPartition": "docs/migration/lot10c-evidence/prepared-test-partition.json",
+  "testFiles": 56,
+  "batches": 4,
+  "filesPerBatch": 14,
+  "childTimeoutSeconds": 300,
+  "automaticNextBatch": false,
+  "projectGates": 5,
+  "caseOrBrowserWorkDeclared": false,
+  "scope": "Prospective source composition qualification only. Actual published predecessor reconciliation, final complete-session cost and publication remain pending."
+}

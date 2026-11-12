@@ -1,0 +1,43 @@
+{
+  "schema": "logos-engine.browser-qa.v1",
+  "recordedAt": "2026-11-11T18:24:25.072795+00:00",
+  "status": "passed",
+  "nativeDigest": "bb7d62b5823d76ae7a5ecd452cb622ebb04f2b85b20fb0d2f9a5c35a1535b361",
+  "nativeVersion": "logos-engine.typescript.v6.native-migration/0.62.0",
+  "developmentOnly": true,
+  "learnedStateInjected": false,
+  "pause": {
+    "observed": "Paused.",
+    "actions": 3,
+    "observedAt": "2026-11-11T18:04:31.805Z"
+  },
+  "oneAction": {
+    "observed": "One action completed.",
+    "actions": 4,
+    "observedAt": "2026-11-11T18:04:52.201Z"
+  },
+  "resume": {
+    "observed": "Level completed.",
+    "actions": 9,
+    "levelsCompleted": 2,
+    "observedAt": "2026-11-11T18:05:31.971Z"
+  },
+  "artifacts": [
+    {
+      "path": "docs/migration/lot10c-evidence/development/recr01-browser01/qa.json",
+      "bytes": 1845,
+      "sha256": "bfc08eec143aeddd2ff2d893ccb8a3a21cb6dabe26d432f0a93ec93a8353621a"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/development/recr01-browser01/observations.json",
+      "bytes": 37999,
+      "sha256": "ddaa7d5c85322215e759e202871f5f990e1717e6b97141a1d3089e538ae08816"
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/development/recr01-browser01/one-action.png",
+      "bytes": 75540,
+      "sha256": "ff8f711d402e66fcc1981777d6faf6002b121d986d9081d81172cc0af16a669e"
+    }
+  ],
+  "qualification": "Actual cold development Vite preview controls, retained visible Pause and3->4single-step counts, then9actions/2levels after resume. Current native315files were checked after QA. This is not production publication, full-game success, final integrated-source qualification, or Recruitment contribution evidence. The first late Pause click and ten browser-extension error entries remain retained."
+}

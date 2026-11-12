@@ -1,0 +1,278 @@
+{
+  "schema": "logos-engine.lot10c.prepared-composition-development-summary.v1",
+  "recordedAt": "2026-11-11T19:50:00.754119+00:00",
+  "status": "prepared_composition_development_validated",
+  "developmentOnly": true,
+  "finalDeliveryAccepted": false,
+  "officialCostAccepted": false,
+  "publicationPerformed": false,
+  "fullCallerParity": false,
+  "nativeSource": {
+    "proposedVersion": "0.66.0",
+    "fileCount": 329,
+    "digest": "ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316",
+    "sourceCommit": "783dc3c2d7f8b2d8902f4448ef065264b9a79db7",
+    "compositionCommit": "dd864cc645b1e9789e51d1a6c1498f4d0b18aa6f",
+    "frozenFiles": 816,
+    "manifest": {
+      "path": "docs/migration/lot10c-evidence/prepared-composition01/final-qualification-01/source-manifest.json",
+      "bytes": 39098,
+      "sha256": "6926e8abdcf9232e4e6d06ad4b60d59e4a8fa473b56a627dc17b7f8ac18d2ac7"
+    },
+    "archiveReceipt": {
+      "path": "docs/migration/lot10c-evidence/prepared-composition01/final-qualification-01/source-archive.json",
+      "bytes": 97879,
+      "sha256": "3a3395b85cbb3ebd23d4f814de1561db3c133db1e74f78159c3241ba0614044d"
+    }
+  },
+  "preparedInputs": {
+    "5C": "722c949e8800b580742f10a9a97751578b9cc419",
+    "6B": "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+    "8A": "7c10456a675f0e9a93089a0f679e96677ede03af",
+    "10CPreviousDevelopment": "3ea5e39b7c3f18ea84baf485a2494a9b948e0984"
+  },
+  "projectChecks": {
+    "status": "passed",
+    "receipt": {
+      "path": "docs/migration/lot10c-evidence/prepared-composition01/final-qualification-01/validation/checks-run.json",
+      "bytes": 221819,
+      "sha256": "12a92f4d498dfd964a92559028a3fcb09a2a6b9bca6f9afd9a6fb165bb92b902"
+    },
+    "checks": [
+      {
+        "name": "typecheck",
+        "exitCode": 0
+      },
+      {
+        "name": "entry-audit",
+        "exitCode": 0,
+        "semanticPassed": true
+      },
+      {
+        "name": "migration-audit",
+        "exitCode": 0,
+        "semanticPassed": true
+      },
+      {
+        "name": "diff-check",
+        "exitCode": 0
+      },
+      {
+        "name": "build",
+        "exitCode": 0
+      }
+    ],
+    "nativeSourceUnchanged": true,
+    "sourceAndTestInputsUnchanged": true
+  },
+  "tests": {
+    "counts": {
+      "tests": 1767,
+      "pass": 1767,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "testFiles": 56,
+    "actualBatches": 4,
+    "filesPerBatch": 14,
+    "completeDeclaredCoverage": true,
+    "serialExecutionsVerified": true,
+    "monolithicExecutionClaimed": false,
+    "derivedSummary": {
+      "path": "docs/migration/lot10c-evidence/prepared-composition01/final-qualification-01/validation/development-batches-summary.json",
+      "bytes": 17998,
+      "sha256": "301b8d48ae718e9e701db8db6faf55ca9e0cdd627ce0745fb2e16308695c337c"
+    },
+    "batches": [
+      {
+        "index": 1,
+        "modules": 14,
+        "counts": {
+          "tests": 603,
+          "pass": 603,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        "startedAt": "2026-11-11T19:36:45.279074+00:00",
+        "finishedAt": "2026-11-11T19:40:01.143848+00:00",
+        "receipt": {
+          "path": "docs/migration/lot10c-evidence/prepared-composition01/final-qualification-01/validation/development-batches/batch-01/development-test-batch.json",
+          "bytes": 186407,
+          "sha256": "569102d13f4faef195ede2e7edbab6f9aca8e2d3e030662535511d117515c4f0"
+        }
+      },
+      {
+        "index": 2,
+        "modules": 14,
+        "counts": {
+          "tests": 292,
+          "pass": 292,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        "startedAt": "2026-11-11T19:40:16.167111+00:00",
+        "finishedAt": "2026-11-11T19:40:29.644259+00:00",
+        "receipt": {
+          "path": "docs/migration/lot10c-evidence/prepared-composition01/final-qualification-01/validation/development-batches/batch-02/development-test-batch.json",
+          "bytes": 186241,
+          "sha256": "0d7ec4dbdcd528ff5228a3b204c68205f157aa5c56e1153227fe370937ca5c6b"
+        }
+      },
+      {
+        "index": 3,
+        "modules": 14,
+        "counts": {
+          "tests": 308,
+          "pass": 308,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        "startedAt": "2026-11-11T19:40:39.610496+00:00",
+        "finishedAt": "2026-11-11T19:43:20.302480+00:00",
+        "receipt": {
+          "path": "docs/migration/lot10c-evidence/prepared-composition01/final-qualification-01/validation/development-batches/batch-03/development-test-batch.json",
+          "bytes": 186796,
+          "sha256": "1dbf10ba021949a9454115d9bd21b798fefe9e91722770e27e5dc5dcd12c74d0"
+        }
+      },
+      {
+        "index": 4,
+        "modules": 14,
+        "counts": {
+          "tests": 564,
+          "pass": 564,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        "startedAt": "2026-11-11T19:43:43.393090+00:00",
+        "finishedAt": "2026-11-11T19:48:22.573360+00:00",
+        "receipt": {
+          "path": "docs/migration/lot10c-evidence/prepared-composition01/final-qualification-01/validation/development-batches/batch-04/development-test-batch.json",
+          "bytes": 186517,
+          "sha256": "6f1a1010b6185e851586e458bc6023a9a7076286f51253a5a4b33a158aee4c02"
+        }
+      }
+    ]
+  },
+  "audits": {
+    "connectedEntries": 68,
+    "declaredEntries": 76,
+    "percent": 89.5,
+    "groups": [
+      {
+        "id": "goal_access",
+        "connected": 12,
+        "declared": 12
+      },
+      {
+        "id": "window_constraints",
+        "connected": 21,
+        "declared": 21
+      },
+      {
+        "id": "surface",
+        "connected": 10,
+        "declared": 10
+      },
+      {
+        "id": "factored_material_return",
+        "connected": 25,
+        "declared": 33
+      }
+    ],
+    "entryReport": {
+      "path": "docs/migration/v6-entry-point-progress.json",
+      "bytes": 19772,
+      "sha256": "d1cdbf75a9e196eedbb739bbab0d7349707915dd1533929fedda7782085312ae"
+    },
+    "migrationSummary": {
+      "complete": false,
+      "pythonModules": 1369,
+      "pythonLines": 320375,
+      "declaredClassesAndFunctions": 12857,
+      "dataFiles": 417,
+      "verifiedModules": 0,
+      "componentVerifiedModules": 214,
+      "partiallyTransferredModules": 147,
+      "transferredUnverifiedModules": 0,
+      "pendingModules": 1008,
+      "strategyFamilies": 16,
+      "failures": []
+    },
+    "migrationReport": {
+      "path": "docs/migration/v6-coverage.json",
+      "sha256": "e67c62ce72775cf55dd3c5a05cf341c7650737476478d8c37addc4018e90a674",
+      "bytes": 2574977
+    }
+  },
+  "reviews": {
+    "native": {
+      "path": "docs/migration/lot10c-evidence/prepared-composition01/independent-native-review.json",
+      "bytes": 1352,
+      "sha256": "d4cc5b2b63b62a17af1a8090a344b3d3c627fe08c5762a77745c355270c9ffd8"
+    },
+    "batching": {
+      "path": "docs/migration/lot10c-evidence/prepared-composition01/independent-batching-review.json",
+      "bytes": 1167,
+      "sha256": "b95bfec5f8242860e4ff200ccc7610eccf0187b3042537b5033eca0970898e01"
+    }
+  },
+  "actualPublicationObservation": {
+    "path": "docs/migration/lot10c-evidence/prepared-composition01/publication-observation.json",
+    "bytes": 668,
+    "sha256": "f82f08f409993782837f5030bd170640724f1b96ff7ca0da0155c3ab3c27ffb8"
+  },
+  "historicalEvidence": {
+    "nativeFiles": 315,
+    "nativeDigest": "bb7d62b5823d76ae7a5ecd452cb622ebb04f2b85b20fb0d2f9a5c35a1535b361",
+    "milestone": {
+      "path": "docs/migration/lot10c-evidence/development/milestone-summary.json",
+      "bytes": 3044,
+      "sha256": "3311d1cdade9766f5c06409722e57c4d28a4874caa3453368b8434ac2df8946b"
+    },
+    "qualification": "Prior archived regressions, RECR real-case parity and browser observations retain their original315-file source provenance. No new archived replay, live game, case oracle or browser run was performed for this prepared composition."
+  },
+  "caseBudget": {
+    "game": "RECR",
+    "maximumCumulativeSeconds": 2400,
+    "cumulativeChargedSeconds": 642.824027506,
+    "remainingSeconds": 1757.175972494,
+    "ledgerUnchanged": true,
+    "ledger": {
+      "path": "docs/migration/lot10c-evidence/case-clock.json",
+      "bytes": 13361,
+      "sha256": "a75cdfd0a131a555f8087c2b7c2625774a056b6b7eb8eea2d43dae6b503256d2"
+    }
+  },
+  "retainedLimitations": {
+    "HPDL": "partial; six-level success is not established",
+    "LKEY": "closed; the three eager modules remain excluded in full",
+    "completeMigration": false
+  },
+  "costAcceptanceRule": {
+    "scope": "median of complete measured sessions, separately for STCK and SMLP",
+    "globalIncreaseMustBeStrictlyLessThanPercent": 10,
+    "phaseIncreaseAboveTenPercentAllowedWhenSameGameGlobalPasses": true,
+    "interGameCompensationAllowed": false,
+    "allRawMeasuredSessionsRetained": true,
+    "warmupsSeparate": true,
+    "measuredOnThisComposition": false
+  },
+  "remainingDeliveryWork": [
+    "Reconcile against the actually published0.63,0.64 and0.65 predecessors in that order.",
+    "Complete the existing final-delivery qualification on its actual source identity, including archived regressions and the required bounded case/browser evidence.",
+    "Measure and review complete-session STCK/SMLP cost on the actual published predecessor; preserve all raw measurements and phase details.",
+    "Publish proposed0.66 only after these existing gates pass; preserve current audience.",
+    "Then continue Lot10D temporal_selection and Lot10E invited_endpoints."
+  ]
+}

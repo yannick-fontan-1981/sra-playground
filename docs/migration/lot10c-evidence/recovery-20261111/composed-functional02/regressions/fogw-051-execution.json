@@ -1,0 +1,366 @@
+{
+  "case": "fogw-051",
+  "game": "FOGW",
+  "mode": "recorded-public-replay",
+  "command": [
+    "node",
+    "--expose-gc",
+    "--max-old-space-size=1536",
+    "scripts/replay-public-regression-released-baseline.mjs",
+    "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz",
+    "docs/migration/lot3e-evidence/final/fogw-reception-session/fogw-public-trace.json.gz",
+    "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/fogw-051-replay.json.gz",
+    "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/fogw-051-host-preparation.json"
+  ],
+  "startedAt": "2026-11-11T21:01:57.154639+00:00",
+  "timeoutSeconds": 1200,
+  "baseline": {
+    "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz",
+    "sha256": "fe037e48df8dd3a7c302a5e85355b2b9555daa6d9d8aa56f7772fc363732726c",
+    "bytes": 8174480
+  },
+  "trace": {
+    "path": "docs/migration/lot3e-evidence/final/fogw-reception-session/fogw-public-trace.json.gz",
+    "sha256": "1d4e92e6ef063e7799bfb4237b17beb148b49bde4ab46ef26ef91a3271d44b46",
+    "bytes": 39060
+  },
+  "expectedActions": 50,
+  "nodeOldSpaceMiB": 1536,
+  "preflight": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/preflight.json",
+    "sha256": "74eb7a4dffac49f6c5773701be308b720a3b9acee247952126336af456551deb",
+    "bytes": 5814
+  },
+  "historicalReportProcessExitedBeforeNode": true,
+  "nativeSourceBeforeDigest": "ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316",
+  "executionInputsBefore": {
+    "scripts/run-released-public-regressions.py": "7988863afd2b171f31987434bb1176370be2e3afd49dead1edcdc59770d81909",
+    "scripts/run-recorded-public-regressions.py": "df19dc88ff29e78a1cb5935d445644e96cc9fb1ef90b73d802cf51868d2b2c40",
+    "scripts/compare-v54-regressions.py": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+    "scripts/replay-public-regression-released-baseline.mjs": "2ce2a0e1b8f969510373ae161156b2b163d208b4e426cb1f26218f9952b3b164",
+    "scripts/replay-v53-public-regression.mjs": "4359e008db8dadaac17f6504199ff20c752f40f1666ba527f1cd5f16df100a9e",
+    "scripts/run-v53-campaign-proof.py": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+    "tests/helpers/v6-live-game-campaign.ts": "e446fce35d192e902de2aa50c611f2224a9dbe925e59d20c10b8e964ed194ae2",
+    "docs/migration/lot10c-evidence/recorded-regression-cases.json": "a16f67724f53def79fe476716c12a61e8064df871911772731983fa2505da3a9",
+    "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/source-manifest.json": "6926e8abdcf9232e4e6d06ad4b60d59e4a8fa473b56a627dc17b7f8ac18d2ac7",
+    "scripts/run-released-public-regressions-streamlog.py": "b05b0e113c93696be45408e4c10549f2a379c22330efbddfcaa0f09cd51309b9"
+  },
+  "phase": "completed",
+  "finishedAt": "2026-11-11T21:03:37.156753+00:00",
+  "exitCode": 0,
+  "timedOut": false,
+  "passed": true,
+  "nodeExitObserved": true,
+  "rawOutputPath": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/fogw-051-output.raw.log",
+  "driverPid": 6,
+  "nodePid": 34,
+  "memorySamples": [
+    {
+      "elapsedSeconds": 0.0027716389959095977,
+      "pid": 34,
+      "VmSize": "112336 kB",
+      "VmHWM": "1284 kB",
+      "VmRSS": "1284 kB",
+      "Threads": "1"
+    },
+    {
+      "elapsedSeconds": 5.012869831996795,
+      "pid": 34,
+      "VmSize": "10654440 kB",
+      "VmHWM": "869500 kB",
+      "VmRSS": "629996 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 10.019264700000349,
+      "pid": 34,
+      "VmSize": "10657360 kB",
+      "VmHWM": "869500 kB",
+      "VmRSS": "634816 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 15.035197443998186,
+      "pid": 34,
+      "VmSize": "10671436 kB",
+      "VmHWM": "869500 kB",
+      "VmRSS": "649172 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 20.0448015189977,
+      "pid": 34,
+      "VmSize": "10759984 kB",
+      "VmHWM": "869500 kB",
+      "VmRSS": "738956 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 25.054707907998818,
+      "pid": 34,
+      "VmSize": "10799568 kB",
+      "VmHWM": "869500 kB",
+      "VmRSS": "779264 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 30.069485300999077,
+      "pid": 34,
+      "VmSize": "10826664 kB",
+      "VmHWM": "869500 kB",
+      "VmRSS": "806760 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 35.07968014299695,
+      "pid": 34,
+      "VmSize": "10912544 kB",
+      "VmHWM": "971576 kB",
+      "VmRSS": "892520 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 40.087701851996826,
+      "pid": 34,
+      "VmSize": "11032516 kB",
+      "VmHWM": "1012900 kB",
+      "VmRSS": "1012900 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 45.09571940099704,
+      "pid": 34,
+      "VmSize": "11014672 kB",
+      "VmHWM": "1050736 kB",
+      "VmRSS": "994068 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 50.10816485199757,
+      "pid": 34,
+      "VmSize": "11066316 kB",
+      "VmHWM": "1124424 kB",
+      "VmRSS": "1046316 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 55.11445769999409,
+      "pid": 34,
+      "VmSize": "11156316 kB",
+      "VmHWM": "1136924 kB",
+      "VmRSS": "1136924 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 60.137730333000945,
+      "pid": 34,
+      "VmSize": "11193704 kB",
+      "VmHWM": "1273268 kB",
+      "VmRSS": "1179844 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 65.14919791300053,
+      "pid": 34,
+      "VmSize": "11287392 kB",
+      "VmHWM": "1282032 kB",
+      "VmRSS": "1274744 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 70.15757528499671,
+      "pid": 34,
+      "VmSize": "11264364 kB",
+      "VmHWM": "1352900 kB",
+      "VmRSS": "1251932 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 75.16821082499519,
+      "pid": 34,
+      "VmSize": "11420324 kB",
+      "VmHWM": "1407568 kB",
+      "VmRSS": "1407568 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 80.18159471399849,
+      "pid": 34,
+      "VmSize": "11381084 kB",
+      "VmHWM": "1444700 kB",
+      "VmRSS": "1368420 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 85.19142160699994,
+      "pid": 34,
+      "VmSize": "11342012 kB",
+      "VmHWM": "1444700 kB",
+      "VmRSS": "1329332 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 90.2175808739994,
+      "pid": 34,
+      "VmSize": "11458952 kB",
+      "VmHWM": "1446444 kB",
+      "VmRSS": "1446444 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 95.22731201200077,
+      "pid": 34,
+      "VmSize": "11405152 kB",
+      "VmHWM": "1461448 kB",
+      "VmRSS": "1393164 kB",
+      "Threads": "11"
+    },
+    {
+      "elapsedSeconds": 99.99367586500011,
+      "pid": 34,
+      "processPresent": false
+    }
+  ],
+  "lastObservedAt": "2026-11-11T21:03:37.152402+00:00",
+  "elapsedSeconds": 99.99939132099826,
+  "lastProgress": {
+    "status": "passed",
+    "failure": null
+  },
+  "rawOutputBytes": 131229,
+  "outputRaw": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/fogw-051-output.raw.log",
+    "sha256": "e39e7969d5e83d39e385efc066836dd0141cb99a35cfb5afc08e82b9a4615657",
+    "bytes": 131229
+  },
+  "output": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/fogw-051-output.log.gz",
+    "sha256": "fdd08cf18a0aa91c949721fda77d43d492bab3d14996b0dd21e755378ba25d6b",
+    "bytes": 5545
+  },
+  "startedReceipt": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/fogw-051-execution-started.json",
+    "sha256": "60c1acda0ab2de10351bdd1e4e3d4471820ef4edbd1343869719e7976422165b",
+    "bytes": 3181
+  },
+  "nodeExitedBeforeComparison": true,
+  "hostPreparation": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/fogw-051-host-preparation.json",
+    "sha256": "bac184c58e4e4c378255f3344eab3ef056a0f4f7c7f6256730534f8ca94e3ff1",
+    "bytes": 12489
+  },
+  "hostPreparationPassed": true,
+  "report": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/fogw-051-replay.json.gz",
+    "sha256": "74917d8862a3d473dba78dedfda53bc297b742b1a94239d8cce75ca40aa6d76e",
+    "bytes": 12186050
+  },
+  "status": "passed",
+  "actions": 50,
+  "prefixes": 27,
+  "final": {
+    "actions": 50,
+    "levelsCompleted": 3,
+    "level": 4,
+    "state": "NOT_FINISHED",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "activeSeconds": 83.08344776799998,
+    "prefixes": 27,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 50,
+      "boundaryReplays": 2,
+      "goalEvents": 3,
+      "frontierDeltas": 101,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 28
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 28
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 28
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 22
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 1
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 1
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 28
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology"
+      ],
+      "morphologyProvider": {
+        "status": "partial_current_measurements_control_attention_and_methods",
+        "state_owner": "family_state:morphology",
+        "motion_owner": "caller:goal",
+        "forecast_owner": "family_state:public_observed_inventory",
+        "current_decision_scope": "one_source_selection_cycle",
+        "attention_owner": "caller:attention",
+        "method_owner": "caller:counters.targetMethod",
+        "entry_return_owner": "family_state:morphology.entry_access_return",
+        "connected_methods": [
+          "retained_station_method",
+          "entry_access_return",
+          "entry_rebind",
+          "entry_probe",
+          "managed_capacity",
+          "target_extension_continuation"
+        ],
+        "pending": [
+          "complete_original_caller_parity_and_domain_closure"
+        ]
+      },
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 50,
+      "resume": 26
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.66.0"
+  },
+  "passiveOwnerPresence": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/fogw-051-passive-owner-presence.json",
+    "sha256": "4daa725cb0b714e4fbf02e6e148b226ffc461eff34be29da4220d5051eba4e44",
+    "bytes": 1115
+  },
+  "passiveOwnerPresencePassed": true,
+  "passiveOwnerPrefixesChecked": 0,
+  "passiveOwnerPrefixesPassed": 0,
+  "passiveOwnerTransitionsRetained": 0,
+  "comparison": {
+    "path": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regressions/fogw-051-comparison.json",
+    "sha256": "06ed41089ac591ac955137d0978b92cac8e00c026eb9981e888f60ced9ddc732",
+    "bytes": 11028
+  },
+  "comparisonPassed": true,
+  "comparisonChecks": 17,
+  "failedChecks": [],
+  "nativeSourceAfterDigest": "ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316",
+  "nativeSourceUnchanged": true,
+  "immutableInputsUnchanged": true,
+  "postprocessingFinishedAt": "2026-11-11T21:03:43.156800+00:00"
+}

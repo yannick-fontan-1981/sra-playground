@@ -1,0 +1,195 @@
+#!/usr/bin/env python3
+"""Execute unchanged pinned OrderedRecruitment/V5 originals on synthetic inputs.
+
+Rasters are constructed from the source's public geometric constraints. No
+native implementation, private game engine, game dispatch or learned live state
+is read. Every pinned original is checked before and after execution.
+"""
+from __future__ import annotations
+import argparse
+from collections import Counter
+from copy import deepcopy
+from datetime import datetime, timezone
+import fcntl
+import gzip
+import hashlib
+import json
+from pathlib import Path
+import sys
+import tempfile
+from types import SimpleNamespace
+from unittest.mock import patch
+
+ROOT = Path(__file__).resolve().parents[1]
+COMMIT = '786dcf51ca57773d8e3a8948ce9ea3655e7baf8e'
+SOURCE = ROOT / 'reference/v6' / COMMIT / 'source'
+sys.dont_write_bytecode = True
+
+
+def encoded(value):
+    return json.dumps(value, ensure_ascii=False, allow_nan=False, sort_keys=True, separators=(',', ':')).encode()
+
+
+def plain(value):
+    if hasattr(value, 'model_dump'): return plain(value.model_dump())
+    if hasattr(value, 'items'): return {str(k): plain(v) for k, v in value.items()}
+    if isinstance(value, (list, tuple)): return [plain(v) for v in value]
+    if isinstance(value, (set, frozenset)): return [plain(v) for v in sorted(value)]
+    return value
+
+
+def verify_sources():
+    manifest = json.loads((SOURCE.parent / 'manifest.json').read_text())
+    assert manifest['commit'] == COMMIT and len(manifest['files']) == 1786
+    for name, record in manifest['files'].items():
+        raw = (SOURCE / name).read_bytes()
+        assert len(raw) == record['bytes'] and hashlib.sha256(raw).hexdigest() == record['sha256'], name
+    return manifest
+
+
+def capture(call):
+    try: return {'value': plain(call())}
+    except Exception as error:
+        result = {'name': type(error).__name__, 'message': str(error)}
+        if hasattr(error, 'cause'): result['cause'] = error.cause
+        if hasattr(error, 'frontier'): result['frontier'] = plain(error.frontier)
+        return {'error': result}
+
+
+def box(rows, left, top, right, bottom, color, outline=False):
+    for y in range(top, bottom + 1):
+        for x in range(left, right + 1):
+            if not outline or x in (left, right) or y in (top, bottom): rows[y][x] = color
+
+
+def inward_coordinates(n):
+    # Independent construction by sorted rings and perimeter position. This is
+    # an input layout, not a copied expected queue or a native measurement.
+    points = [(x, y) for y in range(n) for x in range(n)]
+    def position(point):
+        x, y = point; ring = min(x, y, n - 1 - x, n - 1 - y)
+        left = top = ring; right = bottom = n - 1 - ring; edge = right - left
+        if y == top: offset = x - left
+        elif x == right: offset = edge + y - top
+        elif y == bottom: offset = 2 * edge + right - x
+        else: offset = 3 * edge + bottom - y
+        return ring, offset
+    return sorted(points, key=position)
+
+
+def raster(queues=None, enemies=None, phase='COMBAT', quota=1, quotas=None,
+           palette=((2, 3), (10, 11), (12, 13)), vertical=False, shift=(0, 0),
+           link_directions=None, fill_links=False):
+    queues = [[0], []] if queues is None else deepcopy(queues)
+    enemies = [[1], [2]] if enemies is None else deepcopy(enemies)
+    assert len(queues) == len(enemies) and len(queues) >= 2
+    count = len(queues); quotas = [1] * count if quotas is None else list(quotas)
+    dx, dy = shift; top = 18 + dy
+    positions = [(2 + dx + (0 if vertical else 28 * i), top + (18 * i if vertical else 0)) for i in range(count)]
+    room_bottom = max(y + 12 for x, y in positions); button_top = room_bottom + 12
+    width = max(58 + dx, max(x + 23 for x, y in positions)); height = button_top + 13
+    rows = [[0] * width for _ in range(height)]
+    for index, pair in enumerate(palette):
+        y = 1 + 5 * index + dy
+        following = palette[(index + 1) % len(palette)]
+        for x, value in zip((1 + dx, 5 + dx), pair): box(rows, x, y, x + 2, y + 2, value)
+        for x, value in zip((14 + dx, 18 + dx), following): box(rows, x, y, x + 1, y + 1, value)
+        rows[y][10 + dx] = 5; rows[y + 1][11 + dx] = 5; rows[y + 2][10 + dx] = 5
+    for index, ((left, y), queue, enemy) in enumerate(zip(positions, queues, enemies)):
+        box(rows, left, y, left + 20, y + 12, 7, outline=True)
+        xs_left = [left + 3, left + 5, left + 7]; xs_right = [left + 13, left + 15, left + 17]
+        ys = [y + 3, y + 5, y + 7]
+        for yy in ys:
+            for xx in xs_left + xs_right: rows[yy][xx] = 1
+        for queue_values, xs, camp in ((queue, list(reversed(xs_left)), 0), (enemy, xs_right, 1)):
+            for typ, (u, v) in zip(queue_values, inward_coordinates(3)):
+                rows[ys[v] - 1][xs[u] - 1] = palette[typ][camp]
+            if queue_values: rows[ys[0]][xs[0]] = 14
+        for token in range(quotas[index]): rows[y + 10][left + 3 + 2 * token] = 6
+    for i in range(count - 1):
+        x, y = positions[i]; direction = 1 if link_directions is None else link_directions[i]
+        if vertical:
+            center = (x + 10, y + 15)
+            tip = (center[0], center[1] + direction)
+            wings = [(center[0] - 1, center[1]), (center[0] + 1, center[1])]
+        else:
+            center = (x + 24, y + 6)
+            tip = (center[0] + direction, center[1])
+            wings = [(center[0], center[1] - 1), (center[0], center[1] + 1)]
+        for xx, yy in [tip, *wings, *([center] if fill_links else [])]: rows[yy][xx] = 4
+    if phase == 'RECRUIT':
+        left, y = 2 + dx, room_bottom + 4
+        box(rows, left, y, left + max(10, 2 * quota + 2), y + 4, 7, outline=True)
+        for token in range(quota): box(rows, left + 2 + 2 * token, y + 1, left + 2 + 2 * token, y + 3, 7)
+    for index, pair in enumerate(palette):
+        x = 2 + dx + index * 10
+        box(rows, x, button_top, x + 5, button_top + 9, 7 if phase == 'RECRUIT' else 8, outline=True)
+        rows[button_top + 4][x + 2] = pair[0]
+    return rows
+
+
+def build(probe=False):
+    manifest = verify_sources(); executed = Counter(); prefix = str(SOURCE) + '/'
+    sys.path[:0] = [str(SOURCE), str(SOURCE / 'agents/yf_arc3_v6/laya_proto')]
+    def profile(frame, event, arg):
+        if event == 'call' and frame.f_code.co_filename.startswith(prefix):
+            executed[(frame.f_code.co_filename[len(prefix):], frame.f_code.co_firstlineno, frame.f_code.co_qualname)] += 1
+    sys.setprofile(profile)
+    try:
+        from agents.yf_arc3_v6.morphology_policy.ordered_recruitment import geometry, projection
+        from agents.yf_arc3_v6.morphology_policy.ordered_recruitment.family import OrderedRecruitment
+        from agents.yf_arc3_v6.morphology_policy.ordered_recruitment.policy import RecruitmentPolicy
+        from agents.yf_arc3_v5.capabilities import ordered_front_reduction_d as reduction
+        from agents.yf_arc3_v5.capabilities import mechanical_family_contracts_d as mechanical
+        from neutral_observer import measure as observe
+        cases = {}
+        for name, args in [('combat', {}), ('calibrated_recruit', {'enemies': [[], [2]], 'phase': 'RECRUIT'}),
+                           ('next_combat', {'queues': [[], [0, 1]], 'enemies': [[], [2]]}),
+                           ('vertical', {'vertical': True}), ('three_rooms', {'queues': [[0], [], []], 'enemies': [[1], [2], [0]]})]:
+            rows = raster(**args); cases[name] = {'rows': rows, 'measurement': geometry.measure(rows)}
+        if not probe: assert all(value['measurement'] is not None for value in cases.values()), {key: value['measurement'] is not None for key, value in cases.items()}
+        result = {'probe': cases, 'probeAllMeasured': all(value['measurement'] is not None for value in cases.values())} if probe else build_cases(geometry, projection, OrderedRecruitment, RecruitmentPolicy, reduction, mechanical, observe, cases)
+    finally:
+        sys.setprofile(None)
+        after_manifest = verify_sources()
+        assert manifest == after_manifest
+    imported = {Path(module.__file__).resolve() for module in list(sys.modules.values()) if getattr(module, '__file__', None)
+                and Path(module.__file__).resolve().is_relative_to(SOURCE)}
+    imported.update(SOURCE / path for path, _, _ in executed)
+    for suffix in ('*.drm', '*.src'): imported.update((SOURCE / 'agents/yf_arc3_v6/morphology_policy/ordered_recruitment').glob(suffix))
+    return {'schema': 'logos-engine.v6.ordered-recruitment-reference.v1', 'referenceCommit': COMMIT,
+        'sourceModified': False, 'fullCallerParity': False,
+        'sourceFilesVerifiedBefore': len(manifest['files']), 'sourceFilesVerifiedAfter': len(after_manifest['files']),
+        'sourceFilesVerifiedBeforeAndAfter': len(manifest['files']),
+        'generator': {'path': Path(__file__).relative_to(ROOT).as_posix(), 'sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest()},
+        'qualification': 'Unchanged original Python executed on synthetic public rasters, independently constructed geometric inputs and controlled returns. No native output is used as an oracle. No game dispatch, private engine, solved-level or full caller parity claim.',
+        'clockQualification': 'The external DWorkBudget monotonic dependency is fixed for deterministic finite-work source comparisons. Dedicated budget cases retain their actual supplied clock sequence and call count.',
+        'sourceHashes': {path.relative_to(SOURCE).as_posix(): hashlib.sha256(path.read_bytes()).hexdigest() for path in sorted(imported)},
+        'executedSourceFunctions': [{'path': path, 'line': line, 'function': name, 'calls': calls} for (path, line, name), calls in sorted(executed.items())], **result}
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output', type=Path, default=ROOT / 'tests/fixtures/v6-ordered-recruitment-reference.json.gz')
+    parser.add_argument('--probe', action='store_true')
+    parser.add_argument('--coordination-lock', type=Path, default=Path('/workspace/shared/sra-coordination/performance.lock'))
+    args = parser.parse_args(); output = args.output.resolve()
+    if output.exists() or not output.is_relative_to(ROOT) or output.is_relative_to(SOURCE.parent) or not output.name.endswith('.json.gz'):
+        parser.error('Supply a new .json.gz path in this checkout, outside pinned originals')
+    with args.coordination_lock.open('a') as lock:
+        fcntl.flock(lock.fileno(), fcntl.LOCK_SH | fcntl.LOCK_NB)
+        with tempfile.TemporaryDirectory(prefix='ordered-original-reference-') as cache:
+            sys.pycache_prefix = cache
+            value = build(args.probe)
+            value['bytecodeIsolation'] = {'dontWriteBytecode': True, 'freshPrefixEmptyAfter': not any(Path(cache).rglob('*'))}
+            assert value['bytecodeIsolation']['freshPrefixEmptyAfter']
+        raw = gzip.compress(encoded(value) + b'\n', mtime=0)
+        assert len(raw) < 32 * 1024 * 1024
+        output.parent.mkdir(parents=True, exist_ok=True)
+        with output.open('xb') as stream: stream.write(raw)
+        print(json.dumps({'path': output.relative_to(ROOT).as_posix(), 'bytes': len(raw), 'sha256': hashlib.sha256(raw).hexdigest(),
+            'groupCounts': value.get('groupCounts'), 'probeAllMeasured': value.get('probeAllMeasured'), 'sourceFilesVerifiedBeforeAndAfter': value['sourceFilesVerifiedBeforeAndAfter']}))
+        if args.probe and not value['probeAllMeasured']: raise SystemExit(1)
+
+
+if __name__ == '__main__': main()

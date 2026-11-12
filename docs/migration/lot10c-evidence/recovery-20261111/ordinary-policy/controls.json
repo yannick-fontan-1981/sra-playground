@@ -1,0 +1,45 @@
+{
+  "schema": "logos-engine.lot10c.ordinary-policy-controls.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-11T21:23:59.992038+00:00",
+  "checks": [
+    {
+      "command": [
+        "python",
+        "-B",
+        "docs/migration/lot10c-evidence/test-ordinary-entrypoints.py"
+      ],
+      "exitCode": 0,
+      "output": {
+        "path": "docs/migration/lot10c-evidence/recovery-20261111/ordinary-policy/control-01.txt",
+        "bytes": 1410,
+        "sha256": "eac5f98bde73947fbd270a4cb534adec6c215d53defafdab1840a1348960143a"
+      }
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "docs/migration/lot10c-evidence/coordination/push-ordinary-checkpoint.mjs"
+      ],
+      "exitCode": 0,
+      "output": {
+        "path": "docs/migration/lot10c-evidence/recovery-20261111/ordinary-policy/control-02.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "simulatedFunctionalChecks": 11,
+  "nativeExecution": false,
+  "globalLockAcquired": false,
+  "peerQuietGateUsed": false,
+  "inputs": {
+    "docs/migration/lot10-ordinary-work-policy.md": "431712ff53198d9924fe88329392c31967e9e20adadbebd820e0320d627184c0",
+    "docs/migration/lot10c-evidence/run-ordinary-release-checks.py": "c95c9b7b2fad8da84bfc6a1a3e83f2d5268fa198c82b6ab44b699d2c1843954d",
+    "docs/migration/lot10c-evidence/run-ordinary-regressions.py": "6614ba72a37c9fb8691e26a21427695d8a3beb4cbcc6d773cea22fef1468ce2f",
+    "docs/migration/lot10c-evidence/test-ordinary-entrypoints.py": "481646c811c910467eb05d91519e7c0dc261420271dd1b768038da8f2c22d6f9",
+    "docs/migration/lot10c-evidence/coordination/push-ordinary-checkpoint.mjs": "9773b6235e3d60fa35eea9d78cc602410cbdf17ac4a770a3e754be4fbab1e736"
+  },
+  "qualification": "Short control-plane checks: simulated admissions, executable-body preservation, no global coordination access, and source-push JavaScript syntax. These are not additional native tests or official performance samples."
+}

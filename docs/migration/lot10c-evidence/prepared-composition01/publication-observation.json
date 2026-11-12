@@ -1,0 +1,16 @@
+{
+  "observedAt": "2026-11-11T19:49:00.849Z",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "siteVersion": 103,
+  "status": "active",
+  "accessMode": "custom",
+  "accessRevision": 3,
+  "currentUserRole": "owner",
+  "currentLiveUrl": "https://sra-playground.yannick-fontan.chatgpt.site",
+  "sourceOnlyWork": true,
+  "publicationPerformed": false,
+  "actualPublishedNative": "0.62.0",
+  "actualPublishedSourceCommit": "4afcbfe6a25bd3a88223be543e443bc53b9c8814",
+  "proposedNative": "0.66.0",
+  "qualification": "Site103 observed directly. Native0.62 and its source commit retain the established Site103 provenance. Prepared0.66 has not been published."
+}

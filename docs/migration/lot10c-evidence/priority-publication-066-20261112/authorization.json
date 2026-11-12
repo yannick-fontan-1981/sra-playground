@@ -1,0 +1,20 @@
+{
+  "schema": "logos-engine.lot10c.priority066-publication-authorization.v1",
+  "recordedAt": "2026-11-12T01:26:01.529Z",
+  "userRequest": "fait la publication de manière prioritaire est forcé de **0.66** sans attendre une **disponibilité**",
+  "targetNativeVersion": "0.66.0",
+  "publicationPrioritized": true,
+  "peerAvailabilityWait": false,
+  "ordinaryWorkRequiresGlobalLock": false,
+  "performanceRunRequiredBeforeThisPriorityPublication": false,
+  "officialCostMeasured": false,
+  "officialCostAccepted": false,
+  "performanceQualificationRemainsOpen": true,
+  "costRule": "Complete-session median increase strictly below 10% for STCK and SMLP separately; a phase may exceed 10% if the same game's complete-session median passes.",
+  "publicationUsesShortNonblockingExclusiveWindow": true,
+  "heldLockFileMayBeDeleted": false,
+  "forceGitHistoryRewrite": false,
+  "preserveExistingAudience": true,
+  "caseBudgetsUnchanged": true,
+  "sourceQualification": "Reuse exact previously qualified 329-native source and tests after reconciliation with the actually published0.65, with a fresh build and retained evidence. No new functional execution is claimed."
+}

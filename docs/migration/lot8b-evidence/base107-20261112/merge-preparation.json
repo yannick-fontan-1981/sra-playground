@@ -1,0 +1,14 @@
+{
+  "schema": "logos-engine.lot8b.published107-base.v1",
+  "recordedAt": "2026-11-12T03:29:58.011065+00:00",
+  "ownParent": "2494664bd349cdb071f1df313150f72762a28ddf",
+  "actualPublishedParent": "4ff7bf45286a8a19d34401988adca587253ae41e",
+  "siteVersion": 107,
+  "nativeVersion": "0.66.0",
+  "ownBranch": "lot8b-branch-routing-20261112",
+  "checkout": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+  "roadmapConflictResolution": "Preserve complete own0.65 closure roadmap; prepend actual0.66 priority evidence and new8B component stage. Exact incoming roadmap archived without alteration.",
+  "incomingRoadmapSha256": "7c08b58dbcb2b515e0b6d99a9ff5e373444047ebbf83fa0a1d57518c26ae0beb",
+  "globalLockAcquired": false,
+  "new8BCodeYet": false
+}

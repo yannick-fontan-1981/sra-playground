@@ -1,0 +1,36 @@
+{
+  "schema": "logos-engine.v53.frozen-source-parts.v1",
+  "original": {
+    "path": "docs/migration/lot10c-evidence/development/regressions01/source-archive.tar.gz",
+    "sha256": "2546b555b07fed808aba98b63402da7188dadd2b2a40bc7d7e445e58f6e901d2",
+    "bytes": 4415436
+  },
+  "parts": [
+    {
+      "path": "docs/migration/lot10c-evidence/development/regressions01/source-archive.tar.gz.part000",
+      "sha256": "5c14cb67b1b21c6f751e0a0d825747b61aa92530bde6da62bb495d6a0004619b",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/development/regressions01/source-archive.tar.gz.part001",
+      "sha256": "5c5a876fc65f4ab29a990a4e2649cb0e6b486828bb7ff6a0f1be2984fc063286",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/development/regressions01/source-archive.tar.gz.part002",
+      "sha256": "d7d0f175781ca83944f039e68e9f3ad87237c2504884cd3c05edcb4747386b9d",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/development/regressions01/source-archive.tar.gz.part003",
+      "sha256": "6f77123414c5d6eeec0d7ed23a94e3e71ff74a8ebea55b6255136dd47cbc6c42",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot10c-evidence/development/regressions01/source-archive.tar.gz.part004",
+      "sha256": "1a33a14e23856a49c35540d0d51b557fc6b29c88da1169c82dc23daeba03f287",
+      "bytes": 815436
+    }
+  ],
+  "qualification": "Ordered byte slices of the exact frozen gzip archive. No source or evidence content changes."
+}

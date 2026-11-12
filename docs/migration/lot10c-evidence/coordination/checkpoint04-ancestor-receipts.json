@@ -1,0 +1,535 @@
+[
+  {
+    "step": {
+      "index": 1,
+      "revision": "5fa37f986071f5d763675af87ba154729a2e3864",
+      "ref": "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111"
+    },
+    "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+    "ref": "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111",
+    "head": "3df0fc780f479e51f51aaceb2a32ec287b67671d",
+    "pushedCommit": "5fa37f986071f5d763675af87ba154729a2e3864",
+    "remote": "5fa37f986071f5d763675af87ba154729a2e3864",
+    "remoteVerified": true,
+    "sourceOnly": true,
+    "published": false,
+    "pendingRegressionEvidenceFiles": 0,
+    "workingTreeQualification": "clean",
+    "verifiedAt": "2026-11-11T19:58:44.185Z",
+    "helperSha256": "40913c29a5d51e27346a7fb71ccec617bf03a196de50954e7b73e3e9f1ea4e79"
+  },
+  {
+    "step": {
+      "index": 2,
+      "commit": "d6772376858ce0659346e674034ff1f379f950f5",
+      "remoteRef": "refs/heads/lot10c-prepared-5c-transport-20261111",
+      "expectedPreviousRef": null,
+      "newRawBytes": 7853845,
+      "newRawMiB": 7.49001,
+      "exceedsPreferred24MiB": false,
+      "force": false,
+      "sourceOnly": true,
+      "published": false
+    },
+    "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+    "ref": "refs/heads/lot10c-prepared-5c-transport-20261111",
+    "head": "3df0fc780f479e51f51aaceb2a32ec287b67671d",
+    "pushedCommit": "d6772376858ce0659346e674034ff1f379f950f5",
+    "remote": "d6772376858ce0659346e674034ff1f379f950f5",
+    "requiredAdvertisedHeadsVerified": {
+      "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111": "5fa37f986071f5d763675af87ba154729a2e3864"
+    },
+    "remoteVerified": true,
+    "sourceOnly": true,
+    "published": false,
+    "pendingRegressionEvidenceFiles": 0,
+    "workingTreeQualification": "clean",
+    "verifiedAt": "2026-11-11T20:01:20.966Z",
+    "helperSha256": "32ad0e51920fc6dee19f0fedd0342e57630c5060dda6a37abbc2ac3d39760928"
+  },
+  {
+    "step": {
+      "index": 3,
+      "commit": "b9fe50d8f0e9d24cfec85bdfb36cde570df5d1f0",
+      "remoteRef": "refs/heads/lot10c-prepared-5c-transport-20261111",
+      "expectedPreviousRef": "d6772376858ce0659346e674034ff1f379f950f5",
+      "newRawBytes": 30803210,
+      "newRawMiB": 29.37623,
+      "exceedsPreferred24MiB": true,
+      "force": false,
+      "sourceOnly": true,
+      "published": false
+    },
+    "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+    "ref": "refs/heads/lot10c-prepared-5c-transport-20261111",
+    "head": "3df0fc780f479e51f51aaceb2a32ec287b67671d",
+    "pushedCommit": "b9fe50d8f0e9d24cfec85bdfb36cde570df5d1f0",
+    "remote": "b9fe50d8f0e9d24cfec85bdfb36cde570df5d1f0",
+    "requiredAdvertisedHeadsVerified": {
+      "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111": "5fa37f986071f5d763675af87ba154729a2e3864",
+      "refs/heads/lot10c-prepared-5c-transport-20261111": "d6772376858ce0659346e674034ff1f379f950f5"
+    },
+    "remoteVerified": true,
+    "sourceOnly": true,
+    "published": false,
+    "pendingRegressionEvidenceFiles": 0,
+    "workingTreeQualification": "clean",
+    "verifiedAt": "2026-11-11T20:01:26.524Z",
+    "helperSha256": "32ad0e51920fc6dee19f0fedd0342e57630c5060dda6a37abbc2ac3d39760928"
+  },
+  {
+    "step": {
+      "index": 4,
+      "commit": "d090c60aa07fb1ef7cb6e9a5b068840a3b81baec",
+      "remoteRef": "refs/heads/lot10c-prepared-5c-transport-20261111",
+      "expectedPreviousRef": "b9fe50d8f0e9d24cfec85bdfb36cde570df5d1f0",
+      "newRawBytes": 3277934,
+      "newRawMiB": 3.126081,
+      "exceedsPreferred24MiB": false,
+      "force": false,
+      "sourceOnly": true,
+      "published": false
+    },
+    "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+    "ref": "refs/heads/lot10c-prepared-5c-transport-20261111",
+    "head": "3df0fc780f479e51f51aaceb2a32ec287b67671d",
+    "pushedCommit": "d090c60aa07fb1ef7cb6e9a5b068840a3b81baec",
+    "remote": "d090c60aa07fb1ef7cb6e9a5b068840a3b81baec",
+    "requiredAdvertisedHeadsVerified": {
+      "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111": "5fa37f986071f5d763675af87ba154729a2e3864",
+      "refs/heads/lot10c-prepared-5c-transport-20261111": "b9fe50d8f0e9d24cfec85bdfb36cde570df5d1f0"
+    },
+    "remoteVerified": true,
+    "sourceOnly": true,
+    "published": false,
+    "pendingRegressionEvidenceFiles": 0,
+    "workingTreeQualification": "clean",
+    "verifiedAt": "2026-11-11T20:01:31.866Z",
+    "helperSha256": "32ad0e51920fc6dee19f0fedd0342e57630c5060dda6a37abbc2ac3d39760928"
+  },
+  {
+    "step": {
+      "index": 5,
+      "commit": "9788021949b31bcd2d30850b3030a910d7d0a2ff",
+      "remoteRef": "refs/heads/lot10c-prepared-5c-transport-20261111",
+      "expectedPreviousRef": "d090c60aa07fb1ef7cb6e9a5b068840a3b81baec",
+      "newRawBytes": 40402704,
+      "newRawMiB": 38.531021,
+      "exceedsPreferred24MiB": true,
+      "force": false,
+      "sourceOnly": true,
+      "published": false
+    },
+    "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+    "ref": "refs/heads/lot10c-prepared-5c-transport-20261111",
+    "head": "3df0fc780f479e51f51aaceb2a32ec287b67671d",
+    "pushedCommit": "9788021949b31bcd2d30850b3030a910d7d0a2ff",
+    "remote": "9788021949b31bcd2d30850b3030a910d7d0a2ff",
+    "requiredAdvertisedHeadsVerified": {
+      "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111": "5fa37f986071f5d763675af87ba154729a2e3864",
+      "refs/heads/lot10c-prepared-5c-transport-20261111": "d090c60aa07fb1ef7cb6e9a5b068840a3b81baec"
+    },
+    "remoteVerified": true,
+    "sourceOnly": true,
+    "published": false,
+    "pendingRegressionEvidenceFiles": 0,
+    "workingTreeQualification": "clean",
+    "verifiedAt": "2026-11-11T20:01:37.630Z",
+    "helperSha256": "32ad0e51920fc6dee19f0fedd0342e57630c5060dda6a37abbc2ac3d39760928"
+  },
+  {
+    "step": {
+      "index": 6,
+      "commit": "c8ff4f2b4d495e12494130112258b7a62281d93c",
+      "remoteRef": "refs/heads/lot10c-prepared-5c-transport-20261111",
+      "expectedPreviousRef": "9788021949b31bcd2d30850b3030a910d7d0a2ff",
+      "newRawBytes": 23063694,
+      "newRawMiB": 21.995253,
+      "exceedsPreferred24MiB": false,
+      "force": false,
+      "sourceOnly": true,
+      "published": false
+    },
+    "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+    "ref": "refs/heads/lot10c-prepared-5c-transport-20261111",
+    "head": "3df0fc780f479e51f51aaceb2a32ec287b67671d",
+    "pushedCommit": "c8ff4f2b4d495e12494130112258b7a62281d93c",
+    "remote": "c8ff4f2b4d495e12494130112258b7a62281d93c",
+    "requiredAdvertisedHeadsVerified": {
+      "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111": "5fa37f986071f5d763675af87ba154729a2e3864",
+      "refs/heads/lot10c-prepared-5c-transport-20261111": "9788021949b31bcd2d30850b3030a910d7d0a2ff"
+    },
+    "remoteVerified": true,
+    "sourceOnly": true,
+    "published": false,
+    "pendingRegressionEvidenceFiles": 0,
+    "workingTreeQualification": "clean",
+    "verifiedAt": "2026-11-11T20:01:45.781Z",
+    "helperSha256": "32ad0e51920fc6dee19f0fedd0342e57630c5060dda6a37abbc2ac3d39760928"
+  },
+  {
+    "step": {
+      "index": 7,
+      "commit": "54cd83b9aa11f5390eea175603dbfc84908ffffa",
+      "remoteRef": "refs/heads/lot10c-prepared-5c-transport-20261111",
+      "expectedPreviousRef": "c8ff4f2b4d495e12494130112258b7a62281d93c",
+      "newRawBytes": 27350402,
+      "newRawMiB": 26.083376,
+      "exceedsPreferred24MiB": true,
+      "force": false,
+      "sourceOnly": true,
+      "published": false
+    },
+    "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+    "ref": "refs/heads/lot10c-prepared-5c-transport-20261111",
+    "head": "3df0fc780f479e51f51aaceb2a32ec287b67671d",
+    "pushedCommit": "54cd83b9aa11f5390eea175603dbfc84908ffffa",
+    "remote": "54cd83b9aa11f5390eea175603dbfc84908ffffa",
+    "requiredAdvertisedHeadsVerified": {
+      "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111": "5fa37f986071f5d763675af87ba154729a2e3864",
+      "refs/heads/lot10c-prepared-5c-transport-20261111": "c8ff4f2b4d495e12494130112258b7a62281d93c"
+    },
+    "remoteVerified": true,
+    "sourceOnly": true,
+    "published": false,
+    "pendingRegressionEvidenceFiles": 0,
+    "workingTreeQualification": "clean",
+    "verifiedAt": "2026-11-11T20:01:56.700Z",
+    "helperSha256": "32ad0e51920fc6dee19f0fedd0342e57630c5060dda6a37abbc2ac3d39760928"
+  },
+  {
+    "step": {
+      "index": 8,
+      "commit": "861c87b9351c405ee3114f5ecbf077060eea2b71",
+      "remoteRef": "refs/heads/lot10c-prepared-5c-transport-20261111",
+      "expectedPreviousRef": "54cd83b9aa11f5390eea175603dbfc84908ffffa",
+      "newRawBytes": 23846481,
+      "newRawMiB": 22.741776,
+      "exceedsPreferred24MiB": false,
+      "force": false,
+      "sourceOnly": true,
+      "published": false
+    },
+    "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+    "ref": "refs/heads/lot10c-prepared-5c-transport-20261111",
+    "head": "3df0fc780f479e51f51aaceb2a32ec287b67671d",
+    "pushedCommit": "861c87b9351c405ee3114f5ecbf077060eea2b71",
+    "remote": "861c87b9351c405ee3114f5ecbf077060eea2b71",
+    "requiredAdvertisedHeadsVerified": {
+      "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111": "5fa37f986071f5d763675af87ba154729a2e3864",
+      "refs/heads/lot10c-prepared-5c-transport-20261111": "54cd83b9aa11f5390eea175603dbfc84908ffffa"
+    },
+    "remoteVerified": true,
+    "sourceOnly": true,
+    "published": false,
+    "pendingRegressionEvidenceFiles": 0,
+    "workingTreeQualification": "clean",
+    "verifiedAt": "2026-11-11T20:02:10.341Z",
+    "helperSha256": "32ad0e51920fc6dee19f0fedd0342e57630c5060dda6a37abbc2ac3d39760928"
+  },
+  {
+    "step": {
+      "index": 9,
+      "commit": "7c4fed10c3a3e57f581fa9df790a577f18e7a8d7",
+      "remoteRef": "refs/heads/lot10c-prepared-5c-transport-20261111",
+      "expectedPreviousRef": "861c87b9351c405ee3114f5ecbf077060eea2b71",
+      "newRawBytes": 21484536,
+      "newRawMiB": 20.48925,
+      "exceedsPreferred24MiB": false,
+      "force": false,
+      "sourceOnly": true,
+      "published": false
+    },
+    "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+    "ref": "refs/heads/lot10c-prepared-5c-transport-20261111",
+    "head": "3df0fc780f479e51f51aaceb2a32ec287b67671d",
+    "pushedCommit": "7c4fed10c3a3e57f581fa9df790a577f18e7a8d7",
+    "remote": "7c4fed10c3a3e57f581fa9df790a577f18e7a8d7",
+    "requiredAdvertisedHeadsVerified": {
+      "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111": "5fa37f986071f5d763675af87ba154729a2e3864",
+      "refs/heads/lot10c-prepared-5c-transport-20261111": "861c87b9351c405ee3114f5ecbf077060eea2b71"
+    },
+    "remoteVerified": true,
+    "sourceOnly": true,
+    "published": false,
+    "pendingRegressionEvidenceFiles": 0,
+    "workingTreeQualification": "clean",
+    "verifiedAt": "2026-11-11T20:02:20.247Z",
+    "helperSha256": "32ad0e51920fc6dee19f0fedd0342e57630c5060dda6a37abbc2ac3d39760928"
+  },
+  {
+    "step": {
+      "index": 10,
+      "commit": "738d858b2ce19182b334d7178a185fc01c36edfe",
+      "remoteRef": "refs/heads/lot10c-prepared-5c-transport-20261111",
+      "expectedPreviousRef": "7c4fed10c3a3e57f581fa9df790a577f18e7a8d7",
+      "newRawBytes": 21410071,
+      "newRawMiB": 20.418235,
+      "exceedsPreferred24MiB": false,
+      "force": false,
+      "sourceOnly": true,
+      "published": false
+    },
+    "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+    "ref": "refs/heads/lot10c-prepared-5c-transport-20261111",
+    "head": "3df0fc780f479e51f51aaceb2a32ec287b67671d",
+    "pushedCommit": "738d858b2ce19182b334d7178a185fc01c36edfe",
+    "remote": "738d858b2ce19182b334d7178a185fc01c36edfe",
+    "requiredAdvertisedHeadsVerified": {
+      "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111": "5fa37f986071f5d763675af87ba154729a2e3864",
+      "refs/heads/lot10c-prepared-5c-transport-20261111": "7c4fed10c3a3e57f581fa9df790a577f18e7a8d7"
+    },
+    "remoteVerified": true,
+    "sourceOnly": true,
+    "published": false,
+    "pendingRegressionEvidenceFiles": 0,
+    "workingTreeQualification": "clean",
+    "verifiedAt": "2026-11-11T20:02:28.614Z",
+    "helperSha256": "32ad0e51920fc6dee19f0fedd0342e57630c5060dda6a37abbc2ac3d39760928"
+  },
+  {
+    "step": {
+      "index": 11,
+      "commit": "c3f158ad6bb2918808993e4d18602c52d0e32ce3",
+      "remoteRef": "refs/heads/lot10c-prepared-5c-transport-20261111",
+      "expectedPreviousRef": "738d858b2ce19182b334d7178a185fc01c36edfe",
+      "newRawBytes": 21256836,
+      "newRawMiB": 20.272099,
+      "exceedsPreferred24MiB": false,
+      "force": false,
+      "sourceOnly": true,
+      "published": false
+    },
+    "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+    "ref": "refs/heads/lot10c-prepared-5c-transport-20261111",
+    "head": "3df0fc780f479e51f51aaceb2a32ec287b67671d",
+    "pushedCommit": "c3f158ad6bb2918808993e4d18602c52d0e32ce3",
+    "remote": "c3f158ad6bb2918808993e4d18602c52d0e32ce3",
+    "requiredAdvertisedHeadsVerified": {
+      "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111": "5fa37f986071f5d763675af87ba154729a2e3864",
+      "refs/heads/lot10c-prepared-5c-transport-20261111": "738d858b2ce19182b334d7178a185fc01c36edfe"
+    },
+    "remoteVerified": true,
+    "sourceOnly": true,
+    "published": false,
+    "pendingRegressionEvidenceFiles": 0,
+    "workingTreeQualification": "clean",
+    "verifiedAt": "2026-11-11T20:02:37.976Z",
+    "helperSha256": "32ad0e51920fc6dee19f0fedd0342e57630c5060dda6a37abbc2ac3d39760928"
+  },
+  {
+    "step": {
+      "index": 12,
+      "commit": "75fed144acb5a717f39d3f8b38f44659409bcce3",
+      "remoteRef": "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111",
+      "expectedPreviousRef": "5fa37f986071f5d763675af87ba154729a2e3864",
+      "newRawBytes": 8449644,
+      "newRawMiB": 8.058208,
+      "exceedsPreferred24MiB": false,
+      "force": false,
+      "sourceOnly": true,
+      "published": false
+    },
+    "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+    "ref": "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111",
+    "head": "3df0fc780f479e51f51aaceb2a32ec287b67671d",
+    "pushedCommit": "75fed144acb5a717f39d3f8b38f44659409bcce3",
+    "remote": "75fed144acb5a717f39d3f8b38f44659409bcce3",
+    "requiredAdvertisedHeadsVerified": {
+      "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111": "5fa37f986071f5d763675af87ba154729a2e3864",
+      "refs/heads/lot10c-prepared-5c-transport-20261111": "c3f158ad6bb2918808993e4d18602c52d0e32ce3"
+    },
+    "remoteVerified": true,
+    "sourceOnly": true,
+    "published": false,
+    "pendingRegressionEvidenceFiles": 0,
+    "workingTreeQualification": "clean",
+    "verifiedAt": "2026-11-11T20:02:45.859Z",
+    "helperSha256": "32ad0e51920fc6dee19f0fedd0342e57630c5060dda6a37abbc2ac3d39760928"
+  },
+  {
+    "step": {
+      "index": 13,
+      "commit": "4fbf518f292d77d3876da1a3dac7d63dc1a1be19",
+      "remoteRef": "refs/heads/lot10c-prepared-6b-transport-20261111",
+      "expectedPreviousRef": null,
+      "newRawBytes": 25192886,
+      "newRawMiB": 24.025808,
+      "exceedsPreferred24MiB": true,
+      "force": false,
+      "sourceOnly": true,
+      "published": false
+    },
+    "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+    "ref": "refs/heads/lot10c-prepared-6b-transport-20261111",
+    "head": "3df0fc780f479e51f51aaceb2a32ec287b67671d",
+    "pushedCommit": "4fbf518f292d77d3876da1a3dac7d63dc1a1be19",
+    "remote": "4fbf518f292d77d3876da1a3dac7d63dc1a1be19",
+    "requiredAdvertisedHeadsVerified": {
+      "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111": "75fed144acb5a717f39d3f8b38f44659409bcce3",
+      "refs/heads/lot10c-prepared-5c-transport-20261111": "c3f158ad6bb2918808993e4d18602c52d0e32ce3"
+    },
+    "remoteVerified": true,
+    "sourceOnly": true,
+    "published": false,
+    "pendingRegressionEvidenceFiles": 0,
+    "workingTreeQualification": "clean",
+    "verifiedAt": "2026-11-11T20:02:51.717Z",
+    "helperSha256": "32ad0e51920fc6dee19f0fedd0342e57630c5060dda6a37abbc2ac3d39760928"
+  },
+  {
+    "step": {
+      "index": 14,
+      "commit": "5c1b2c9f53f8a5f12526e665f82e9f84260b74b5",
+      "remoteRef": "refs/heads/lot10c-prepared-6b-transport-20261111",
+      "expectedPreviousRef": "4fbf518f292d77d3876da1a3dac7d63dc1a1be19",
+      "newRawBytes": 20349228,
+      "newRawMiB": 19.406536,
+      "exceedsPreferred24MiB": false,
+      "force": false,
+      "sourceOnly": true,
+      "published": false
+    },
+    "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+    "ref": "refs/heads/lot10c-prepared-6b-transport-20261111",
+    "head": "3df0fc780f479e51f51aaceb2a32ec287b67671d",
+    "pushedCommit": "5c1b2c9f53f8a5f12526e665f82e9f84260b74b5",
+    "remote": "5c1b2c9f53f8a5f12526e665f82e9f84260b74b5",
+    "requiredAdvertisedHeadsVerified": {
+      "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111": "75fed144acb5a717f39d3f8b38f44659409bcce3",
+      "refs/heads/lot10c-prepared-5c-transport-20261111": "c3f158ad6bb2918808993e4d18602c52d0e32ce3",
+      "refs/heads/lot10c-prepared-6b-transport-20261111": "4fbf518f292d77d3876da1a3dac7d63dc1a1be19"
+    },
+    "remoteVerified": true,
+    "sourceOnly": true,
+    "published": false,
+    "pendingRegressionEvidenceFiles": 0,
+    "workingTreeQualification": "clean",
+    "verifiedAt": "2026-11-11T20:03:12.300Z",
+    "helperSha256": "32ad0e51920fc6dee19f0fedd0342e57630c5060dda6a37abbc2ac3d39760928"
+  },
+  {
+    "step": {
+      "index": 15,
+      "commit": "17bba57ab1ed3c29dfe695e72e333a13796362eb",
+      "remoteRef": "refs/heads/lot10c-prepared-6b-transport-20261111",
+      "expectedPreviousRef": "5c1b2c9f53f8a5f12526e665f82e9f84260b74b5",
+      "newRawBytes": 23866991,
+      "newRawMiB": 22.761336,
+      "exceedsPreferred24MiB": false,
+      "force": false,
+      "sourceOnly": true,
+      "published": false
+    },
+    "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+    "ref": "refs/heads/lot10c-prepared-6b-transport-20261111",
+    "head": "3df0fc780f479e51f51aaceb2a32ec287b67671d",
+    "pushedCommit": "17bba57ab1ed3c29dfe695e72e333a13796362eb",
+    "remote": "17bba57ab1ed3c29dfe695e72e333a13796362eb",
+    "requiredAdvertisedHeadsVerified": {
+      "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111": "75fed144acb5a717f39d3f8b38f44659409bcce3",
+      "refs/heads/lot10c-prepared-5c-transport-20261111": "c3f158ad6bb2918808993e4d18602c52d0e32ce3",
+      "refs/heads/lot10c-prepared-6b-transport-20261111": "5c1b2c9f53f8a5f12526e665f82e9f84260b74b5"
+    },
+    "remoteVerified": true,
+    "sourceOnly": true,
+    "published": false,
+    "pendingRegressionEvidenceFiles": 0,
+    "workingTreeQualification": "clean",
+    "verifiedAt": "2026-11-11T20:03:19.618Z",
+    "helperSha256": "32ad0e51920fc6dee19f0fedd0342e57630c5060dda6a37abbc2ac3d39760928"
+  },
+  {
+    "step": {
+      "index": 16,
+      "commit": "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+      "remoteRef": "refs/heads/lot10c-prepared-6b-transport-20261111",
+      "expectedPreviousRef": "17bba57ab1ed3c29dfe695e72e333a13796362eb",
+      "newRawBytes": 36637941,
+      "newRawMiB": 34.940663,
+      "exceedsPreferred24MiB": true,
+      "force": false,
+      "sourceOnly": true,
+      "published": false
+    },
+    "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+    "ref": "refs/heads/lot10c-prepared-6b-transport-20261111",
+    "head": "3df0fc780f479e51f51aaceb2a32ec287b67671d",
+    "pushedCommit": "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+    "remote": "a01e6faf330d82fa220feac0c9ad4632bb75a9de",
+    "requiredAdvertisedHeadsVerified": {
+      "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111": "75fed144acb5a717f39d3f8b38f44659409bcce3",
+      "refs/heads/lot10c-prepared-5c-transport-20261111": "c3f158ad6bb2918808993e4d18602c52d0e32ce3",
+      "refs/heads/lot10c-prepared-6b-transport-20261111": "17bba57ab1ed3c29dfe695e72e333a13796362eb"
+    },
+    "remoteVerified": true,
+    "sourceOnly": true,
+    "published": false,
+    "pendingRegressionEvidenceFiles": 0,
+    "workingTreeQualification": "clean",
+    "verifiedAt": "2026-11-11T20:03:25.689Z",
+    "helperSha256": "32ad0e51920fc6dee19f0fedd0342e57630c5060dda6a37abbc2ac3d39760928"
+  },
+  {
+    "step": {
+      "index": 17,
+      "commit": "783dc3c2d7f8b2d8902f4448ef065264b9a79db7",
+      "remoteRef": "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111",
+      "expectedPreviousRef": "75fed144acb5a717f39d3f8b38f44659409bcce3",
+      "newRawBytes": 22934037,
+      "newRawMiB": 21.871602,
+      "exceedsPreferred24MiB": false,
+      "force": false,
+      "sourceOnly": true,
+      "published": false
+    },
+    "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+    "ref": "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111",
+    "head": "3df0fc780f479e51f51aaceb2a32ec287b67671d",
+    "pushedCommit": "783dc3c2d7f8b2d8902f4448ef065264b9a79db7",
+    "remote": "783dc3c2d7f8b2d8902f4448ef065264b9a79db7",
+    "requiredAdvertisedHeadsVerified": {
+      "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111": "75fed144acb5a717f39d3f8b38f44659409bcce3",
+      "refs/heads/lot10c-prepared-5c-transport-20261111": "c3f158ad6bb2918808993e4d18602c52d0e32ce3",
+      "refs/heads/lot10c-prepared-6b-transport-20261111": "a01e6faf330d82fa220feac0c9ad4632bb75a9de"
+    },
+    "remoteVerified": true,
+    "sourceOnly": true,
+    "published": false,
+    "pendingRegressionEvidenceFiles": 0,
+    "workingTreeQualification": "clean",
+    "verifiedAt": "2026-11-11T20:03:34.618Z",
+    "helperSha256": "32ad0e51920fc6dee19f0fedd0342e57630c5060dda6a37abbc2ac3d39760928"
+  },
+  {
+    "step": {
+      "index": 18,
+      "commit": "3df0fc780f479e51f51aaceb2a32ec287b67671d",
+      "remoteRef": "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111",
+      "expectedPreviousRef": "783dc3c2d7f8b2d8902f4448ef065264b9a79db7",
+      "newRawBytes": 11113405,
+      "newRawMiB": 10.598569,
+      "exceedsPreferred24MiB": false,
+      "force": false,
+      "sourceOnly": true,
+      "published": false
+    },
+    "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+    "ref": "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111",
+    "head": "3df0fc780f479e51f51aaceb2a32ec287b67671d",
+    "pushedCommit": "3df0fc780f479e51f51aaceb2a32ec287b67671d",
+    "remote": "3df0fc780f479e51f51aaceb2a32ec287b67671d",
+    "requiredAdvertisedHeadsVerified": {
+      "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111": "783dc3c2d7f8b2d8902f4448ef065264b9a79db7",
+      "refs/heads/lot10c-prepared-5c-transport-20261111": "c3f158ad6bb2918808993e4d18602c52d0e32ce3",
+      "refs/heads/lot10c-prepared-6b-transport-20261111": "a01e6faf330d82fa220feac0c9ad4632bb75a9de"
+    },
+    "remoteVerified": true,
+    "sourceOnly": true,
+    "published": false,
+    "pendingRegressionEvidenceFiles": 0,
+    "workingTreeQualification": "clean",
+    "verifiedAt": "2026-11-11T20:03:42.817Z",
+    "helperSha256": "32ad0e51920fc6dee19f0fedd0342e57630c5060dda6a37abbc2ac3d39760928"
+  }
+]

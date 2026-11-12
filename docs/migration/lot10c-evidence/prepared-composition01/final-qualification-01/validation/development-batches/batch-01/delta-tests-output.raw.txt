@@ -1,0 +1,3631 @@
+TAP version 13
+# Subtest: Axial has one cold owner and its exact source entry after Recolor with a shared stored workflow
+ok 1 - Axial has one cold owner and its exact source entry after Recolor with a shared stored workflow
+  ---
+  duration_ms: 1441.596465
+  type: 'test'
+  ...
+# Subtest: cold common caller learns a foreign selection, runs axial.select, acquires one rotation and recalls it at its next decision
+ok 2 - cold common caller learns a foreign selection, runs axial.select, acquires one rotation and recalls it at its next decision
+  ---
+  duration_ms: 2057.334311
+  type: 'test'
+  ...
+# Subtest: two real sealed no-effect inputs exhaust the source context attempts without blind rotation repetition
+ok 3 - two real sealed no-effect inputs exhaust the source context attempts without blind rotation repetition
+  ---
+  duration_ms: 2454.399242
+  type: 'test'
+  ...
+# Subtest: an old-scene intermediate frame supports rotation at a natural boundary and only methods survive restoration
+ok 4 - an old-scene intermediate frame supports rotation at a natural boundary and only methods survive restoration
+  ---
+  duration_ms: 1899.309491
+  type: 'test'
+  ...
+# Subtest: a new level with identical attribution anchors never becomes evidence for the preceding rotation
+ok 5 - a new level with identical attribution anchors never becomes evidence for the preceding rotation
+  ---
+  duration_ms: 1483.544295
+  type: 'test'
+  ...
+# Subtest: a transported rotation becomes useful only after the common caller reacquires selection in the new epoch
+ok 6 - a transported rotation becomes useful only after the common caller reacquires selection in the new epoch
+  ---
+  duration_ms: 2874.735599
+  type: 'test'
+  ...
+# Subtest: axial original geometry: unselected_anchor_grid
+ok 7 - axial original geometry: unselected_anchor_grid
+  ---
+  duration_ms: 16.064925
+  type: 'test'
+  ...
+# Subtest: axial original geometry: one_distinct_selected_marker
+ok 8 - axial original geometry: one_distinct_selected_marker
+  ---
+  duration_ms: 5.726009
+  type: 'test'
+  ...
+# Subtest: axial original geometry: empty
+ok 9 - axial original geometry: empty
+  ---
+  duration_ms: 0.186362
+  type: 'test'
+  ...
+# Subtest: axial original geometry: empty_row
+ok 10 - axial original geometry: empty_row
+  ---
+  duration_ms: 0.123938
+  type: 'test'
+  ...
+# Subtest: axial original geometry: absent_bodies
+ok 11 - axial original geometry: absent_bodies
+  ---
+  duration_ms: 3.229064
+  type: 'test'
+  ...
+# Subtest: axial original geometry: horizontal_mirror
+ok 12 - axial original geometry: horizontal_mirror
+  ---
+  duration_ms: 9.4157
+  type: 'test'
+  ...
+# Subtest: axial original geometry: vertical_mirror
+ok 13 - axial original geometry: vertical_mirror
+  ---
+  duration_ms: 8.125538
+  type: 'test'
+  ...
+# Subtest: axial original geometry: palette_bijection
+ok 14 - axial original geometry: palette_bijection
+  ---
+  duration_ms: 8.211579
+  type: 'test'
+  ...
+# Subtest: axial original geometry: translated
+ok 15 - axial original geometry: translated
+  ---
+  duration_ms: 5.237481
+  type: 'test'
+  ...
+# Subtest: axial original geometry: quantum_3
+ok 16 - axial original geometry: quantum_3
+  ---
+  duration_ms: 0.973632
+  type: 'test'
+  ...
+# Subtest: axial original geometry: quantum_7
+ok 17 - axial original geometry: quantum_7
+  ---
+  duration_ms: 12.377949
+  type: 'test'
+  ...
+# Subtest: axial original geometry: quantum_9
+ok 18 - axial original geometry: quantum_9
+  ---
+  duration_ms: 20.863072
+  type: 'test'
+  ...
+# Subtest: axial original geometry: orientation_[-1, 0]
+ok 19 - axial original geometry: orientation_[-1, 0]
+  ---
+  duration_ms: 3.011294
+  type: 'test'
+  ...
+# Subtest: axial original geometry: pivot_projection_[-1, 0]
+ok 20 - axial original geometry: pivot_projection_[-1, 0]
+  ---
+  duration_ms: 1.403553
+  type: 'test'
+  ...
+# Subtest: axial original geometry: relations_[-1, 0]
+ok 21 - axial original geometry: relations_[-1, 0]
+  ---
+  duration_ms: 0.387155
+  type: 'test'
+  ...
+# Subtest: axial original geometry: orientation_[0, 1]
+ok 22 - axial original geometry: orientation_[0, 1]
+  ---
+  duration_ms: 3.551781
+  type: 'test'
+  ...
+# Subtest: axial original geometry: pivot_projection_[0, 1]
+ok 23 - axial original geometry: pivot_projection_[0, 1]
+  ---
+  duration_ms: 0.468849
+  type: 'test'
+  ...
+# Subtest: axial original geometry: relations_[0, 1]
+ok 24 - axial original geometry: relations_[0, 1]
+  ---
+  duration_ms: 0.110127
+  type: 'test'
+  ...
+# Subtest: axial original geometry: orientation_[1, 0]
+ok 25 - axial original geometry: orientation_[1, 0]
+  ---
+  duration_ms: 2.676908
+  type: 'test'
+  ...
+# Subtest: axial original geometry: pivot_projection_[1, 0]
+ok 26 - axial original geometry: pivot_projection_[1, 0]
+  ---
+  duration_ms: 0.470702
+  type: 'test'
+  ...
+# Subtest: axial original geometry: relations_[1, 0]
+ok 27 - axial original geometry: relations_[1, 0]
+  ---
+  duration_ms: 0.177608
+  type: 'test'
+  ...
+# Subtest: axial original geometry: orientation_[0, -1]
+ok 28 - axial original geometry: orientation_[0, -1]
+  ---
+  duration_ms: 4.222936
+  type: 'test'
+  ...
+# Subtest: axial original geometry: pivot_projection_[0, -1]
+ok 29 - axial original geometry: pivot_projection_[0, -1]
+  ---
+  duration_ms: 0.339914
+  type: 'test'
+  ...
+# Subtest: axial original geometry: relations_[0, -1]
+ok 30 - axial original geometry: relations_[0, -1]
+  ---
+  duration_ms: 0.189576
+  type: 'test'
+  ...
+# Subtest: axial original geometry: multiple_selected_markers
+ok 31 - axial original geometry: multiple_selected_markers
+  ---
+  duration_ms: 4.806019
+  type: 'test'
+  ...
+# Subtest: axial original geometry: missing_unique_target
+ok 32 - axial original geometry: missing_unique_target
+  ---
+  duration_ms: 2.145324
+  type: 'test'
+  ...
+# Subtest: axial original geometry: two_target_markers
+ok 33 - axial original geometry: two_target_markers
+  ---
+  duration_ms: 2.649527
+  type: 'test'
+  ...
+# Subtest: axial original geometry: nonuniform_body_core
+ok 34 - axial original geometry: nonuniform_body_core
+  ---
+  duration_ms: 3.229004
+  type: 'test'
+  ...
+# Subtest: axial original geometry: connected_bars_source_order
+ok 35 - axial original geometry: connected_bars_source_order
+  ---
+  duration_ms: 0.293864
+  type: 'test'
+  ...
+# Subtest: axial original geometry: canonical_digest_nested_order
+ok 36 - axial original geometry: canonical_digest_nested_order
+  ---
+  duration_ms: 0.33088
+  type: 'test'
+  ...
+# Subtest: axial original geometry: outside_before_pair
+ok 37 - axial original geometry: outside_before_pair
+  ---
+  duration_ms: 0.156837
+  type: 'test'
+  ...
+# Subtest: axial original geometry: outside_after_pair
+ok 38 - axial original geometry: outside_after_pair
+  ---
+  duration_ms: 0.146632
+  type: 'test'
+  ...
+# Subtest: axial original geometry: column_between
+ok 39 - axial original geometry: column_between
+  ---
+  duration_ms: 0.110847
+  type: 'test'
+  ...
+# Subtest: axial original geometry: peer_axis_not_aligned
+ok 40 - axial original geometry: peer_axis_not_aligned
+  ---
+  duration_ms: 0.129265
+  type: 'test'
+  ...
+# Subtest: axial original geometry: peer_off_axis
+ok 41 - axial original geometry: peer_off_axis
+  ---
+  duration_ms: 0.0795
+  type: 'test'
+  ...
+# Subtest: axial original geometry: transverse_dependency
+ok 42 - axial original geometry: transverse_dependency
+  ---
+  duration_ms: 0.123367
+  type: 'test'
+  ...
+# Subtest: axial original geometry: transverse_without_dependency
+ok 43 - axial original geometry: transverse_without_dependency
+  ---
+  duration_ms: 0.079981
+  type: 'test'
+  ...
+# Subtest: axial original geometry: target_at_actor_is_outside
+ok 44 - axial original geometry: target_at_actor_is_outside
+  ---
+  duration_ms: 0.087332
+  type: 'test'
+  ...
+# Subtest: axial original family: cold_unselected_abstention
+ok 45 - axial original family: cold_unselected_abstention
+  ---
+  duration_ms: 36.01135
+  type: 'test'
+  ...
+# Subtest: axial original family: visible_selection_without_acquisition_abstains
+ok 46 - axial original family: visible_selection_without_acquisition_abstains
+  ---
+  duration_ms: 9.023586
+  type: 'test'
+  ...
+# Subtest: axial original family: zero_budget_scopes_without_offer
+ok 47 - axial original family: zero_budget_scopes_without_offer
+  ---
+  duration_ms: 3.838715
+  type: 'test'
+  ...
+# Subtest: axial original family: cold_passive_single_marker_acquisition
+ok 48 - axial original family: cold_passive_single_marker_acquisition
+  ---
+  duration_ms: 15.358327
+  type: 'test'
+  ...
+# Subtest: axial original family: acquired_selection_invokes_real_src
+ok 49 - axial original family: acquired_selection_invokes_real_src
+  ---
+  duration_ms: 10.961196
+  type: 'test'
+  ...
+# Subtest: axial original family: acquired_offers_keep_both_controls_in_source_order
+ok 50 - axial original family: acquired_offers_keep_both_controls_in_source_order
+  ---
+  duration_ms: 7.533093
+  type: 'test'
+  ...
+# Subtest: axial original family: method_signature_contract
+ok 51 - axial original family: method_signature_contract
+  ---
+  duration_ms: 2.431106
+  type: 'test'
+  ...
+# Subtest: axial original family: current_single_action_binding
+ok 52 - axial original family: current_single_action_binding
+  ---
+  duration_ms: 1.965112
+  type: 'test'
+  ...
+# Subtest: axial original family: current_before_guard
+ok 53 - axial original family: current_before_guard
+  ---
+  duration_ms: 7.548285
+  type: 'test'
+  ...
+# Subtest: axial original family: after_does_not_assume_rotation_or_goal
+ok 54 - axial original family: after_does_not_assume_rotation_or_goal
+  ---
+  duration_ms: 5.790027
+  type: 'test'
+  ...
+# Subtest: axial original family: before_stale_observation_ref
+ok 55 - axial original family: before_stale_observation_ref
+  ---
+  duration_ms: 2.167558
+  type: 'test'
+  ...
+# Subtest: axial original family: before_stale_level_epoch
+ok 56 - axial original family: before_stale_level_epoch
+  ---
+  duration_ms: 10.158553
+  type: 'test'
+  ...
+# Subtest: axial original family: before_stale_frame_hash
+ok 57 - axial original family: before_stale_frame_hash
+  ---
+  duration_ms: 3.80223
+  type: 'test'
+  ...
+# Subtest: axial original family: before_wrong_step_index
+ok 58 - axial original family: before_wrong_step_index
+  ---
+  duration_ms: 1.370082
+  type: 'test'
+  ...
+# Subtest: axial original family: before_absent_available_control
+ok 59 - axial original family: before_absent_available_control
+  ---
+  duration_ms: 10.016578
+  type: 'test'
+  ...
+# Subtest: axial original family: before_scene_measurement_changed
+ok 60 - axial original family: before_scene_measurement_changed
+  ---
+  duration_ms: 6.932273
+  type: 'test'
+  ...
+# Subtest: axial original family: before_marker_ambiguous
+ok 61 - axial original family: before_marker_ambiguous
+  ---
+  duration_ms: 4.044436
+  type: 'test'
+  ...
+# Subtest: axial original family: binding_rejects_changed_action_step
+ok 62 - axial original family: binding_rejects_changed_action_step
+  ---
+  duration_ms: 2.20833
+  type: 'test'
+  ...
+# Subtest: axial original family: binding_rejects_empty_prefix
+ok 63 - axial original family: binding_rejects_empty_prefix
+  ---
+  duration_ms: 1.228758
+  type: 'test'
+  ...
+# Subtest: axial original family: before_exact_selected_command_required
+ok 64 - axial original family: before_exact_selected_command_required
+  ---
+  duration_ms: 4.110116
+  type: 'test'
+  ...
+# Subtest: axial original family: selection_attestation_epoch_incompatible
+ok 65 - axial original family: selection_attestation_epoch_incompatible
+  ---
+  duration_ms: 4.864928
+  type: 'test'
+  ...
+# Subtest: axial original family: selection_attestation_center_incompatible
+ok 66 - axial original family: selection_attestation_center_incompatible
+  ---
+  duration_ms: 4.122864
+  type: 'test'
+  ...
+# Subtest: axial original family: selection_attestation_marker_incompatible
+ok 67 - axial original family: selection_attestation_marker_incompatible
+  ---
+  duration_ms: 3.542197
+  type: 'test'
+  ...
+# Subtest: axial original family: selection_attestation_signature_incompatible
+ok 68 - axial original family: selection_attestation_signature_incompatible
+  ---
+  duration_ms: 4.322527
+  type: 'test'
+  ...
+# Subtest: axial original family: no_public_rotation_commands
+ok 69 - axial original family: no_public_rotation_commands
+  ---
+  duration_ms: 3.938356
+  type: 'test'
+  ...
+# Subtest: axial original family: caller_inputs_do_not_override_public_control
+ok 70 - axial original family: caller_inputs_do_not_override_public_control
+  ---
+  duration_ms: 4.243497
+  type: 'test'
+  ...
+# Subtest: axial original family: outside_target_selection_acquired
+ok 71 - axial original family: outside_target_selection_acquired
+  ---
+  duration_ms: 8.851516
+  type: 'test'
+  ...
+# Subtest: axial original family: outside_target_opposed_axis_proposal
+ok 72 - axial original family: outside_target_opposed_axis_proposal
+  ---
+  duration_ms: 4.817115
+  type: 'test'
+  ...
+# Subtest: axial original family: transverse_target_selection_acquired
+ok 73 - axial original family: transverse_target_selection_acquired
+  ---
+  duration_ms: 9.616374
+  type: 'test'
+  ...
+# Subtest: axial original family: transverse_dependency_proposal
+ok 74 - axial original family: transverse_dependency_proposal
+  ---
+  duration_ms: 5.334617
+  type: 'test'
+  ...
+# Subtest: axial original family: selection_plus_foreign_change_is_not_evidence
+ok 75 - axial original family: selection_plus_foreign_change_is_not_evidence
+  ---
+  duration_ms: 9.086012
+  type: 'test'
+  ...
+# Subtest: axial original family: selection_already_present_is_not_new_evidence
+ok 76 - axial original family: selection_already_present_is_not_new_evidence
+  ---
+  duration_ms: 9.664897
+  type: 'test'
+  ...
+# Subtest: axial original family: ambiguous_marker_change_is_not_evidence
+ok 77 - axial original family: ambiguous_marker_change_is_not_evidence
+  ---
+  duration_ms: 12.560956
+  type: 'test'
+  ...
+# Subtest: axial original family: absent_before_domain_has_no_return
+ok 78 - axial original family: absent_before_domain_has_no_return
+  ---
+  duration_ms: 1.755776
+  type: 'test'
+  ...
+# Subtest: axial original family: passive_selection_disappeared
+ok 79 - axial original family: passive_selection_disappeared
+  ---
+  duration_ms: 9.746099
+  type: 'test'
+  ...
+# Subtest: axial original family: active_contrary_quarter_turn_observed
+ok 80 - axial original family: active_contrary_quarter_turn_observed
+  ---
+  duration_ms: 10.107035
+  type: 'test'
+  ...
+# Subtest: axial original family: recalled_control_changes_next_choice
+ok 81 - axial original family: recalled_control_changes_next_choice
+  ---
+  duration_ms: 6.869239
+  type: 'test'
+  ...
+# Subtest: axial original family: same_return_without_rotation_memory_selects_other_control
+ok 82 - axial original family: same_return_without_rotation_memory_selects_other_control
+  ---
+  duration_ms: 5.749785
+  type: 'test'
+  ...
+# Subtest: axial original family: passive_rotation_does_not_establish_control_law
+ok 83 - axial original family: passive_rotation_does_not_establish_control_law
+  ---
+  duration_ms: 13.95847
+  type: 'test'
+  ...
+# Subtest: axial original family: half_turn_is_not_a_quarter_rotation
+ok 84 - axial original family: half_turn_is_not_a_quarter_rotation
+  ---
+  duration_ms: 16.128702
+  type: 'test'
+  ...
+# Subtest: axial original family: no_effect_retains_attempt
+ok 85 - axial original family: no_effect_retains_attempt
+  ---
+  duration_ms: 16.305799
+  type: 'test'
+  ...
+# Subtest: axial original family: no_effect_prevents_same_control_repetition
+ok 86 - axial original family: no_effect_prevents_same_control_repetition
+  ---
+  duration_ms: 10.005922
+  type: 'test'
+  ...
+# Subtest: axial original family: second_no_effect_retains_both_attempts
+ok 87 - axial original family: second_no_effect_retains_both_attempts
+  ---
+  duration_ms: 15.659482
+  type: 'test'
+  ...
+# Subtest: axial original family: both_context_attempts_prevent_blind_repeat
+ok 88 - axial original family: both_context_attempts_prevent_blind_repeat
+  ---
+  duration_ms: 4.311451
+  type: 'test'
+  ...
+# Subtest: axial original family: changed_geometry_reopens_new_question
+ok 89 - axial original family: changed_geometry_reopens_new_question
+  ---
+  duration_ms: 4.382007
+  type: 'test'
+  ...
+# Subtest: axial original family: multiple_peers_selection_acquired
+ok 90 - axial original family: multiple_peers_selection_acquired
+  ---
+  duration_ms: 9.308467
+  type: 'test'
+  ...
+# Subtest: axial original family: multiple_peers_choose_deterministically
+ok 91 - axial original family: multiple_peers_choose_deterministically
+  ---
+  duration_ms: 6.824331
+  type: 'test'
+  ...
+# Subtest: axial original family: shared_key_multiple_peers_guard_abstains
+ok 92 - axial original family: shared_key_multiple_peers_guard_abstains
+  ---
+  duration_ms: 4.463339
+  type: 'test'
+  ...
+# Subtest: axial original family: boundary_uses_last_compatible_old_scene_sample
+ok 93 - axial original family: boundary_uses_last_compatible_old_scene_sample
+  ---
+  duration_ms: 15.145104
+  type: 'test'
+  ...
+# Subtest: axial original family: boundary_without_old_scene_sample_acquires_no_rotation
+ok 94 - axial original family: boundary_without_old_scene_sample_acquires_no_rotation
+  ---
+  duration_ms: 9.467067
+  type: 'test'
+  ...
+# Subtest: axial original family: source_identical_geometry_boundary_is_permissive
+ok 95 - axial original family: source_identical_geometry_boundary_is_permissive
+  ---
+  duration_ms: 9.748703
+  type: 'test'
+  ...
+# Subtest: axial original family: source_empty_packet_falls_back_to_return
+ok 96 - axial original family: source_empty_packet_falls_back_to_return
+  ---
+  duration_ms: 11.26066
+  type: 'test'
+  ...
+# Subtest: axial original family: malformed_intermediate_skipped
+ok 97 - axial original family: malformed_intermediate_skipped
+  ---
+  duration_ms: 15.862419
+  type: 'test'
+  ...
+# Subtest: axial original family: restored_portable_method_cannot_authorize_selection
+ok 98 - axial original family: restored_portable_method_cannot_authorize_selection
+  ---
+  duration_ms: 4.764676
+  type: 'test'
+  ...
+# Subtest: axial original family: new_epoch_selection_reacquired_from_public_return
+ok 99 - axial original family: new_epoch_selection_reacquired_from_public_return
+  ---
+  duration_ms: 16.481335
+  type: 'test'
+  ...
+# Subtest: axial original family: portable_method_current_signature_revalidated
+ok 100 - axial original family: portable_method_current_signature_revalidated
+  ---
+  duration_ms: 7.640644
+  type: 'test'
+  ...
+# Subtest: axial original family: historical_method_insufficient_evidence_not_recalled
+ok 101 - axial original family: historical_method_insufficient_evidence_not_recalled
+  ---
+  duration_ms: 7.159888
+  type: 'test'
+  ...
+# Subtest: axial original family: historical_method_foreign_signature_not_recalled
+ok 102 - axial original family: historical_method_foreign_signature_not_recalled
+  ---
+  duration_ms: 7.851514
+  type: 'test'
+  ...
+# Subtest: axial original family: historical_method_unavailable_control_not_recalled
+ok 103 - axial original family: historical_method_unavailable_control_not_recalled
+  ---
+  duration_ms: 7.157354
+  type: 'test'
+  ...
+# Subtest: axial original family: same_epoch_keeps_knowledge
+ok 104 - axial original family: same_epoch_keeps_knowledge
+  ---
+  duration_ms: 2.02956
+  type: 'test'
+  ...
+# Subtest: axial original family: new_epoch_exports_rotations_and_resets_context
+ok 105 - axial original family: new_epoch_exports_rotations_and_resets_context
+  ---
+  duration_ms: 4.204008
+  type: 'test'
+  ...
+# Subtest: axial original family: selection_without_rotation_does_not_create_portable
+ok 106 - axial original family: selection_without_rotation_does_not_create_portable
+  ---
+  duration_ms: 1.690296
+  type: 'test'
+  ...
+# Subtest: axial original family: partial_restore_preserves_other_source_fields
+ok 107 - axial original family: partial_restore_preserves_other_source_fields
+  ---
+  duration_ms: 1.703296
+  type: 'test'
+  ...
+# Subtest: axial original family: common_cold_foreign_action_acquires_selection
+ok 108 - axial original family: common_cold_foreign_action_acquires_selection
+  ---
+  duration_ms: 11.315342
+  type: 'test'
+  ...
+# Subtest: axial original family: common_cold_next_decision_is_axial
+ok 109 - axial original family: common_cold_next_decision_is_axial
+  ---
+  duration_ms: 4.184768
+  type: 'test'
+  ...
+# Subtest: axial original family: common_cold_axial_no_effect_attempt
+ok 110 - axial original family: common_cold_axial_no_effect_attempt
+  ---
+  duration_ms: 11.276634
+  type: 'test'
+  ...
+# Subtest: axial original family: common_cold_axial_contrary_rotation
+ok 111 - axial original family: common_cold_axial_contrary_rotation
+  ---
+  duration_ms: 10.680692
+  type: 'test'
+  ...
+# Subtest: axial original family: common_cold_recalled_rotation_next_decision
+ok 112 - axial original family: common_cold_recalled_rotation_next_decision
+  ---
+  duration_ms: 4.753859
+  type: 'test'
+  ...
+# Subtest: axial original DRM/SRC selection: empty
+ok 113 - axial original DRM/SRC selection: empty
+  ---
+  duration_ms: 1.473408
+  type: 'test'
+  ...
+# Subtest: axial original DRM/SRC selection: single
+ok 114 - axial original DRM/SRC selection: single
+  ---
+  duration_ms: 1.58688
+  type: 'test'
+  ...
+# Subtest: axial original DRM/SRC selection: kind_priority_before_distance
+ok 115 - axial original DRM/SRC selection: kind_priority_before_distance
+  ---
+  duration_ms: 0.986892
+  type: 'test'
+  ...
+# Subtest: axial original DRM/SRC selection: quarter_distance_before_recall
+ok 116 - axial original DRM/SRC selection: quarter_distance_before_recall
+  ---
+  duration_ms: 3.872697
+  type: 'test'
+  ...
+# Subtest: axial original DRM/SRC selection: recall_before_command
+ok 117 - axial original DRM/SRC selection: recall_before_command
+  ---
+  duration_ms: 1.264572
+  type: 'test'
+  ...
+# Subtest: axial original DRM/SRC selection: command_before_index
+ok 118 - axial original DRM/SRC selection: command_before_index
+  ---
+  duration_ms: 3.807607
+  type: 'test'
+  ...
+# Subtest: axial original DRM/SRC selection: source_index_final_tie
+ok 119 - axial original DRM/SRC selection: source_index_final_tie
+  ---
+  duration_ms: 2.834677
+  type: 'test'
+  ...
+# Subtest: axial original DRM/SRC selection: three_kinds_reversed
+ok 120 - axial original DRM/SRC selection: three_kinds_reversed
+  ---
+  duration_ms: 1.61979
+  type: 'test'
+  ...
+# Subtest: axial original DRM/SRC selection: unknown_kind_ignored
+ok 121 - axial original DRM/SRC selection: unknown_kind_ignored
+  ---
+  duration_ms: 1.104651
+  type: 'test'
+  ...
+# Subtest: axial original DRM/SRC selection: all_unknown_kinds_abstain
+ok 122 - axial original DRM/SRC selection: all_unknown_kinds_abstain
+  ---
+  duration_ms: 1.664187
+  type: 'test'
+  ...
+# Subtest: axial original DRM/SRC selection: selection_attested_current_missing
+ok 123 - axial original DRM/SRC selection: selection_attested_current_missing
+  ---
+  duration_ms: 3.644081
+  type: 'test'
+  ...
+# Subtest: axial original DRM/SRC selection: selection_attested_current_false
+ok 124 - axial original DRM/SRC selection: selection_attested_current_false
+  ---
+  duration_ms: 1.002496
+  type: 'test'
+  ...
+# Subtest: axial original DRM/SRC selection: goal_marker_unique_missing
+ok 125 - axial original DRM/SRC selection: goal_marker_unique_missing
+  ---
+  duration_ms: 1.179864
+  type: 'test'
+  ...
+# Subtest: axial original DRM/SRC selection: goal_marker_unique_false
+ok 126 - axial original DRM/SRC selection: goal_marker_unique_false
+  ---
+  duration_ms: 0.867122
+  type: 'test'
+  ...
+# Subtest: axial original DRM/SRC selection: scope_current_missing
+ok 127 - axial original DRM/SRC selection: scope_current_missing
+  ---
+  duration_ms: 0.954764
+  type: 'test'
+  ...
+# Subtest: axial original DRM/SRC selection: scope_current_false
+ok 128 - axial original DRM/SRC selection: scope_current_false
+  ---
+  duration_ms: 5.146072
+  type: 'test'
+  ...
+# Subtest: axial oracle verifies the original sources and executes the consumed V5 pivot path
+ok 129 - axial oracle verifies the original sources and executes the consumed V5 pivot path
+  ---
+  duration_ms: 36.282541
+  type: 'test'
+  ...
+# Subtest: axial cold public contrast, real SRC proposal and observed turn influence the next choice
+ok 130 - axial cold public contrast, real SRC proposal and observed turn influence the next choice
+  ---
+  duration_ms: 75.784144
+  type: 'test'
+  ...
+# Subtest: axial source tie selection is deterministic and independent of exact guard uniqueness
+ok 131 - axial source tie selection is deterministic and independent of exact guard uniqueness
+  ---
+  duration_ms: 7.553864
+  type: 'test'
+  ...
+# Subtest: axial boundary adaptation excludes the new final scene and preserves original packet ordinals
+ok 132 - axial boundary adaptation excludes the new final scene and preserves original packet ordinals
+  ---
+  duration_ms: 12.502076
+  type: 'test'
+  ...
+# Subtest: axial same-geometry new level is unknown rather than old-scene effect evidence
+ok 133 - axial same-geometry new level is unknown rather than old-scene effect evidence
+  ---
+  duration_ms: 34.25817
+  type: 'test'
+  ...
+# Subtest: axial boundary without attributable old frame keeps historical methods but resets current authority
+ok 134 - axial boundary without attributable old frame keeps historical methods but resets current authority
+  ---
+  duration_ms: 10.954346
+  type: 'test'
+  ...
+# Subtest: axial entry uses its exact source slot and no other source entry
+ok 135 - axial entry uses its exact source slot and no other source entry
+  ---
+  duration_ms: 6.124052
+  type: 'test'
+  ...
+# Subtest: axial checkpoint is detached, immutable, atomic and keeps exactly six source fields
+ok 136 - axial checkpoint is detached, immutable, atomic and keeps exactly six source fields
+  ---
+  duration_ms: 6.516716
+  type: 'test'
+  ...
+# Subtest: the live common caller acquires a real released prefix once and matches every original retained component
+    # Subtest: real goal node matches the unchanged common caller
+    ok 1 - real goal node matches the unchanged common caller
+      ---
+      duration_ms: 2.411357
+      type: 'test'
+      ...
+    # Subtest: real frontier node matches the unchanged common caller
+    ok 2 - real frontier node matches the unchanged common caller
+      ---
+      duration_ms: 1.013963
+      type: 'test'
+      ...
+    # Subtest: real view node matches the unchanged common caller
+    ok 3 - real view node matches the unchanged common caller
+      ---
+      duration_ms: 21.697804
+      type: 'test'
+      ...
+    # Subtest: real attention node matches the unchanged common caller
+    ok 4 - real attention node matches the unchanged common caller
+      ---
+      duration_ms: 0.121584
+      type: 'test'
+      ...
+    # Subtest: real points node matches the unchanged common caller
+    ok 5 - real points node matches the unchanged common caller
+      ---
+      duration_ms: 0.174424
+      type: 'test'
+      ...
+    # Subtest: real displays node matches the unchanged common caller
+    ok 6 - real displays node matches the unchanged common caller
+      ---
+      duration_ms: 0.167083
+      type: 'test'
+      ...
+    # Subtest: real controls node matches the unchanged common caller
+    ok 7 - real controls node matches the unchanged common caller
+      ---
+      duration_ms: 0.176247
+      type: 'test'
+      ...
+    # Subtest: real counters node matches the unchanged common caller
+    ok 8 - real counters node matches the unchanged common caller
+      ---
+      duration_ms: 0.085359
+      type: 'test'
+      ...
+    1..8
+ok 137 - the live common caller acquires a real released prefix once and matches every original retained component
+  ---
+  duration_ms: 3201.431537
+  type: 'test'
+  ...
+# Subtest: an independently revised fact is acquired even after an unrelated checkpoint acknowledgement
+ok 138 - an independently revised fact is acquired even after an unrelated checkpoint acknowledgement
+  ---
+  duration_ms: 860.39415
+  type: 'test'
+  ...
+# Subtest: an independently revised trace is acquired even after an unrelated checkpoint acknowledgement
+ok 139 - an independently revised trace is acquired even after an unrelated checkpoint acknowledgement
+  ---
+  duration_ms: 579.58138
+  type: 'test'
+  ...
+# Subtest: a failed authority transaction cannot be acknowledged by a later unrelated commit
+ok 140 - a failed authority transaction cannot be acknowledged by a later unrelated commit
+  ---
+  duration_ms: 613.423941
+  type: 'test'
+  ...
+# Subtest: a leaf changed after the prepared commit is read before its new identity can be acknowledged
+ok 141 - a leaf changed after the prepared commit is read before its new identity can be acknowledged
+  ---
+  duration_ms: 640.176188
+  type: 'test'
+  ...
+# Subtest: real WHY/ACT, transition acquisition and post-analysis are retained in the same executable graph
+ok 142 - real WHY/ACT, transition acquisition and post-analysis are retained in the same executable graph
+  ---
+  duration_ms: 3597.996006
+  type: 'test'
+  ...
+# Subtest: caller oracle provenance retains exact historical captures and pinned source
+ok 143 - caller oracle provenance retains exact historical captures and pinned source
+  ---
+  duration_ms: 59.791217
+  type: 'test'
+  ...
+# Subtest: native common caller: HANO first released prefix
+    # Subtest: initial caller objects
+    ok 1 - initial caller objects
+      ---
+      duration_ms: 0.369449
+      type: 'test'
+      ...
+    # Subtest: initial caller facts
+    ok 2 - initial caller facts
+      ---
+      duration_ms: 0.071568
+      type: 'test'
+      ...
+    # Subtest: source checkpoint round-trip 1
+    ok 3 - source checkpoint round-trip 1
+      ---
+      duration_ms: 0.0731
+      type: 'test'
+      ...
+    # Subtest: acquisition returns at revision 1
+    ok 4 - acquisition returns at revision 1
+      ---
+      duration_ms: 0.067242
+      type: 'test'
+      ...
+    # Subtest: caller state before assessment at revision 1
+    ok 5 - caller state before assessment at revision 1
+      ---
+      duration_ms: 0.056766
+      type: 'test'
+      ...
+    # Subtest: caller facts before assessment at revision 1
+    ok 6 - caller facts before assessment at revision 1
+      ---
+      duration_ms: 0.054772
+      type: 'test'
+      ...
+    # Subtest: full learning assessment at revision 1
+    ok 7 - full learning assessment at revision 1
+      ---
+      duration_ms: 0.080101
+      type: 'test'
+      ...
+    # Subtest: caller state after acquisition at revision 2
+    ok 8 - caller state after acquisition at revision 2
+      ---
+      duration_ms: 0.121704
+      type: 'test'
+      ...
+    # Subtest: caller facts after acquisition at revision 2
+    ok 9 - caller facts after acquisition at revision 2
+      ---
+      duration_ms: 0.100783
+      type: 'test'
+      ...
+    # Subtest: acquisition returns at revision 2
+    ok 10 - acquisition returns at revision 2
+      ---
+      duration_ms: 0.063206
+      type: 'test'
+      ...
+    # Subtest: caller state before assessment at revision 2
+    ok 11 - caller state before assessment at revision 2
+      ---
+      duration_ms: 0.067612
+      type: 'test'
+      ...
+    # Subtest: caller facts before assessment at revision 2
+    ok 12 - caller facts before assessment at revision 2
+      ---
+      duration_ms: 0.040451
+      type: 'test'
+      ...
+    # Subtest: full learning assessment at revision 2
+    ok 13 - full learning assessment at revision 2
+      ---
+      duration_ms: 0.033401
+      type: 'test'
+      ...
+    # Subtest: caller state after acquisition at revision 3
+    ok 14 - caller state after acquisition at revision 3
+      ---
+      duration_ms: 0.055363
+      type: 'test'
+      ...
+    # Subtest: caller facts after acquisition at revision 3
+    ok 15 - caller facts after acquisition at revision 3
+      ---
+      duration_ms: 0.035854
+      type: 'test'
+      ...
+    1..15
+ok 144 - native common caller: HANO first released prefix
+  ---
+  duration_ms: 523.893853
+  type: 'test'
+  ...
+# Subtest: native common caller: public viewport exploration and acquired frontier
+    # Subtest: initial caller objects
+    ok 1 - initial caller objects
+      ---
+      duration_ms: 0.219902
+      type: 'test'
+      ...
+    # Subtest: initial caller facts
+    ok 2 - initial caller facts
+      ---
+      duration_ms: 0.047222
+      type: 'test'
+      ...
+    # Subtest: source checkpoint round-trip 1
+    ok 3 - source checkpoint round-trip 1
+      ---
+      duration_ms: 0.034051
+      type: 'test'
+      ...
+    # Subtest: actual path guard at revision 1
+    ok 4 - actual path guard at revision 1
+      ---
+      duration_ms: 0.030867
+      type: 'test'
+      ...
+    # Subtest: actual outcome guard at revision 1
+    ok 5 - actual outcome guard at revision 1
+      ---
+      duration_ms: 0.031768
+      type: 'test'
+      ...
+    # Subtest: acquisition returns at revision 1
+    ok 6 - acquisition returns at revision 1
+      ---
+      duration_ms: 0.025558
+      type: 'test'
+      ...
+    # Subtest: caller state before assessment at revision 1
+    ok 7 - caller state before assessment at revision 1
+      ---
+      duration_ms: 0.026219
+      type: 'test'
+      ...
+    # Subtest: caller facts before assessment at revision 1
+    ok 8 - caller facts before assessment at revision 1
+      ---
+      duration_ms: 0.026079
+      type: 'test'
+      ...
+    # Subtest: full learning assessment at revision 1
+    ok 9 - full learning assessment at revision 1
+      ---
+      duration_ms: 0.024817
+      type: 'test'
+      ...
+    # Subtest: caller state after acquisition at revision 2
+    ok 10 - caller state after acquisition at revision 2
+      ---
+      duration_ms: 0.025468
+      type: 'test'
+      ...
+    # Subtest: caller facts after acquisition at revision 2
+    ok 11 - caller facts after acquisition at revision 2
+      ---
+      duration_ms: 0.025699
+      type: 'test'
+      ...
+    # Subtest: source checkpoint round-trip 2
+    ok 12 - source checkpoint round-trip 2
+      ---
+      duration_ms: 0.03268
+      type: 'test'
+      ...
+    # Subtest: actual path guard at revision 2
+    ok 13 - actual path guard at revision 2
+      ---
+      duration_ms: 0.025228
+      type: 'test'
+      ...
+    # Subtest: actual outcome guard at revision 2
+    ok 14 - actual outcome guard at revision 2
+      ---
+      duration_ms: 0.02643
+      type: 'test'
+      ...
+    # Subtest: acquisition returns at revision 2
+    ok 15 - acquisition returns at revision 2
+      ---
+      duration_ms: 0.023956
+      type: 'test'
+      ...
+    # Subtest: caller state before assessment at revision 2
+    ok 16 - caller state before assessment at revision 2
+      ---
+      duration_ms: 0.022865
+      type: 'test'
+      ...
+    # Subtest: caller facts before assessment at revision 2
+    ok 17 - caller facts before assessment at revision 2
+      ---
+      duration_ms: 0.021974
+      type: 'test'
+      ...
+    # Subtest: full learning assessment at revision 2
+    ok 18 - full learning assessment at revision 2
+      ---
+      duration_ms: 0.047762
+      type: 'test'
+      ...
+    # Subtest: caller state after acquisition at revision 3
+    ok 19 - caller state after acquisition at revision 3
+      ---
+      duration_ms: 0.030737
+      type: 'test'
+      ...
+    # Subtest: caller facts after acquisition at revision 3
+    ok 20 - caller facts after acquisition at revision 3
+      ---
+      duration_ms: 0.034462
+      type: 'test'
+      ...
+    # Subtest: source checkpoint round-trip 3
+    ok 21 - source checkpoint round-trip 3
+      ---
+      duration_ms: 0.03314
+      type: 'test'
+      ...
+    # Subtest: actual path guard at revision 3
+    ok 22 - actual path guard at revision 3
+      ---
+      duration_ms: 0.039219
+      type: 'test'
+      ...
+    # Subtest: actual outcome guard at revision 3
+    ok 23 - actual outcome guard at revision 3
+      ---
+      duration_ms: 0.028373
+      type: 'test'
+      ...
+    # Subtest: acquisition returns at revision 3
+    ok 24 - acquisition returns at revision 3
+      ---
+      duration_ms: 0.175174
+      type: 'test'
+      ...
+    # Subtest: caller state before assessment at revision 3
+    ok 25 - caller state before assessment at revision 3
+      ---
+      duration_ms: 0.03997
+      type: 'test'
+      ...
+    # Subtest: caller facts before assessment at revision 3
+    ok 26 - caller facts before assessment at revision 3
+      ---
+      duration_ms: 0.025689
+      type: 'test'
+      ...
+    # Subtest: full learning assessment at revision 3
+    ok 27 - full learning assessment at revision 3
+      ---
+      duration_ms: 0.027892
+      type: 'test'
+      ...
+    # Subtest: caller state after acquisition at revision 4
+    ok 28 - caller state after acquisition at revision 4
+      ---
+      duration_ms: 0.025749
+      type: 'test'
+      ...
+    # Subtest: caller facts after acquisition at revision 4
+    ok 29 - caller facts after acquisition at revision 4
+      ---
+      duration_ms: 0.024317
+      type: 'test'
+      ...
+    1..29
+ok 145 - native common caller: public viewport exploration and acquired frontier
+  ---
+  duration_ms: 358.226103
+  type: 'test'
+  ...
+# Subtest: real factory registers the four interfaces in DRM order and executes Word through SRC, WHY/ACT, acquisition and V7 activation
+ok 146 - real factory registers the four interfaces in DRM order and executes Word through SRC, WHY/ACT, acquisition and V7 activation
+  ---
+  duration_ms: 1914.834375
+  type: 'test'
+  ...
+# Subtest: native SRC/service/controller replays public HANO transitions without a Python solver
+ok 147 - native SRC/service/controller replays public HANO transitions without a Python solver
+  ---
+  duration_ms: 42261.500886
+  type: 'test'
+  ...
+# Subtest: native SRC/service/controller replays public SYME transitions without a Python solver
+ok 148 - native SRC/service/controller replays public SYME transitions without a Python solver
+  ---
+  duration_ms: 36001.800778
+  type: 'test'
+  ...
+# Subtest: native SRC/service/controller replays public DNOI transitions without a Python solver
+ok 149 - native SRC/service/controller replays public DNOI transitions without a Python solver
+  ---
+  duration_ms: 23828.221012
+  type: 'test'
+  ...
+# Subtest: native service binds one immutable ticket, preserves it on resume and burns it after the witnessed action
+ok 150 - native service binds one immutable ticket, preserves it on resume and burns it after the witnessed action
+  ---
+  duration_ms: 10.259071
+  type: 'test'
+  ...
+# Subtest: bad outcome identity, timing and animation packets do not consume a native service authorization
+ok 151 - bad outcome identity, timing and animation packets do not consume a native service authorization
+  ---
+  duration_ms: 4.0572
+  type: 'test'
+  ...
+# Subtest: a native backend state failure closes its authority and never resumes from partial evidence
+ok 152 - a native backend state failure closes its authority and never resumes from partial evidence
+  ---
+  duration_ms: 2.357192
+  type: 'test'
+  ...
+# Subtest: native runtime defers family recording until a sealed prefix and ignores paused wall time
+ok 153 - native runtime defers family recording until a sealed prefix and ignores paused wall time
+  ---
+  duration_ms: 16.316773
+  type: 'test'
+  ...
+# Subtest: native current deadlines convert caller clock 10 to runtime clock 1000
+ok 154 - native current deadlines convert caller clock 10 to runtime clock 1000
+  ---
+  duration_ms: 10.04713
+  type: 'test'
+  ...
+# Subtest: native current deadlines convert caller clock 1000 to runtime clock 10
+ok 155 - native current deadlines convert caller clock 1000 to runtime clock 10
+  ---
+  duration_ms: 9.586055
+  type: 'test'
+  ...
+# Subtest: V7 bounded assessment preserves in-domain original output: registry_retains_contradictory_candidate
+ok 156 - V7 bounded assessment preserves in-domain original output: registry_retains_contradictory_candidate
+  ---
+  duration_ms: 15.245495
+  type: 'test'
+  ...
+# Subtest: V7 bounded assessment preserves in-domain original output: library_rigid_movement
+ok 157 - V7 bounded assessment preserves in-domain original output: library_rigid_movement
+  ---
+  duration_ms: 1.454267
+  type: 'test'
+  ...
+# Subtest: V7 bounded assessment preserves in-domain original output: contact_push_is_compatibility_not_cause
+ok 158 - V7 bounded assessment preserves in-domain original output: contact_push_is_compatibility_not_cause
+  ---
+  duration_ms: 1.587769
+  type: 'test'
+  ...
+# Subtest: V7 bounded assessment preserves in-domain original output: contacted_support_did_not_move
+ok 159 - V7 bounded assessment preserves in-domain original output: contacted_support_did_not_move
+  ---
+  duration_ms: 1.539306
+  type: 'test'
+  ...
+# Subtest: V7 bounded assessment preserves in-domain original output: failed_acquired_motion_with_contact
+ok 160 - V7 bounded assessment preserves in-domain original output: failed_acquired_motion_with_contact
+  ---
+  duration_ms: 4.481361
+  type: 'test'
+  ...
+# Subtest: V7 bounded assessment preserves in-domain original output: stationarity_does_not_prove_blocking
+ok 161 - V7 bounded assessment preserves in-domain original output: stationarity_does_not_prove_blocking
+  ---
+  duration_ms: 3.478176
+  type: 'test'
+  ...
+# Subtest: V7 bounded assessment preserves in-domain original output: bounding_boxes_do_not_prove_contact
+ok 162 - V7 bounded assessment preserves in-domain original output: bounding_boxes_do_not_prove_contact
+  ---
+  duration_ms: 1.627639
+  type: 'test'
+  ...
+# Subtest: V7 bounded assessment preserves in-domain original output: same_signature_distorted_support
+ok 163 - V7 bounded assessment preserves in-domain original output: same_signature_distorted_support
+  ---
+  duration_ms: 1.554138
+  type: 'test'
+  ...
+# Subtest: V7 bounded assessment preserves in-domain original output: coordinate_basis_unknown
+ok 164 - V7 bounded assessment preserves in-domain original output: coordinate_basis_unknown
+  ---
+  duration_ms: 1.386505
+  type: 'test'
+  ...
+# Subtest: V7 bounded assessment preserves in-domain original output: sweep_bound_retains_unknown
+ok 165 - V7 bounded assessment preserves in-domain original output: sweep_bound_retains_unknown
+  ---
+  duration_ms: 1.7344
+  type: 'test'
+  ...
+# Subtest: V7 bounded assessment preserves in-domain original output: pair_catalogue_bound_is_visible
+ok 166 - V7 bounded assessment preserves in-domain original output: pair_catalogue_bound_is_visible
+  ---
+  duration_ms: 7.058906
+  type: 'test'
+  ...
+# Subtest: V7 bounded assessment preserves in-domain original output: same_conditions_conflicting_outputs_are_retained
+ok 167 - V7 bounded assessment preserves in-domain original output: same_conditions_conflicting_outputs_are_retained
+  ---
+  duration_ms: 4.276572
+  type: 'test'
+  ...
+# Subtest: V7 bounded assessment preserves in-domain original output: actual_public_HANO_0_mechanisms
+ok 168 - V7 bounded assessment preserves in-domain original output: actual_public_HANO_0_mechanisms
+  ---
+  duration_ms: 145.960359
+  type: 'test'
+  ...
+# Subtest: V7 bounded assessment preserves in-domain original output: actual_public_HANO_1_mechanisms
+ok 169 - V7 bounded assessment preserves in-domain original output: actual_public_HANO_1_mechanisms
+  ---
+  duration_ms: 101.277788
+  type: 'test'
+  ...
+# Subtest: V7 bounded assessment preserves in-domain original output: actual_public_SYME_0_mechanisms
+ok 170 - V7 bounded assessment preserves in-domain original output: actual_public_SYME_0_mechanisms
+  ---
+  duration_ms: 108.963296
+  type: 'test'
+  ...
+# Subtest: V7 bounded assessment preserves in-domain original output: actual_public_SYME_1_mechanisms
+ok 171 - V7 bounded assessment preserves in-domain original output: actual_public_SYME_1_mechanisms
+  ---
+  duration_ms: 123.539574
+  type: 'test'
+  ...
+# Subtest: V7 bounded assessment preserves in-domain original output: actual_public_DNOI_0_mechanisms
+ok 172 - V7 bounded assessment preserves in-domain original output: actual_public_DNOI_0_mechanisms
+  ---
+  duration_ms: 137.697018
+  type: 'test'
+  ...
+# Subtest: V7 bounded assessment preserves in-domain original output: actual_public_DNOI_1_mechanisms
+ok 173 - V7 bounded assessment preserves in-domain original output: actual_public_DNOI_1_mechanisms
+  ---
+  duration_ms: 123.584186
+  type: 'test'
+  ...
+# Subtest: the public dense witness still receives the exact pure-function refusal
+ok 174 - the public dense witness still receives the exact pure-function refusal
+  ---
+  duration_ms: 0.903765
+  type: 'test'
+  ...
+# Subtest: V7 retains unknown without altering either registry or any public entity
+ok 175 - V7 retains unknown without altering either registry or any public entity
+  ---
+  duration_ms: 8.337918
+  type: 'test'
+  ...
+# Subtest: 512 remains accepted by the source domain and either 513 side remains refused
+ok 176 - 512 remains accepted by the source domain and either 513 side remains refused
+  ---
+  duration_ms: 0.974292
+  type: 'test'
+  ...
+# Subtest: invalid neutral input and later evidence errors still stop acquisition
+ok 177 - invalid neutral input and later evidence errors still stop acquisition
+  ---
+  duration_ms: 1.560137
+  type: 'test'
+  ...
+# Subtest: Recruitment has one cold owner and its exact source entry and common stored workflow
+ok 178 - Recruitment has one cold owner and its exact source entry and common stored workflow
+  ---
+  duration_ms: 1538.788108
+  type: 'test'
+  ...
+# Subtest: cold common caller acquires an actual foreign return, then recruitment.select and WHY/ACT release one current append
+ok 179 - cold common caller acquires an actual foreign return, then recruitment.select and WHY/ACT release one current append
+  ---
+  duration_ms: 3513.527141
+  type: 'test'
+  ...
+# Subtest: a selected no-effect recruitment is retained as an attempt and cannot immediately repeat
+ok 180 - a selected no-effect recruitment is retained as an attempt and cannot immediately repeat
+  ---
+  duration_ms: 3218.872878
+  type: 'test'
+  ...
+# Subtest: order and last alone survive the common checkpoint without inventing a retained source method
+ok 181 - order and last alone survive the common checkpoint without inventing a retained source method
+  ---
+  duration_ms: 1832.185945
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: measured_combat
+ok 182 - ordered original geometry: measured_combat
+  ---
+  duration_ms: 12.712246
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: measured_calibrated_recruit
+ok 183 - ordered original geometry: measured_calibrated_recruit
+  ---
+  duration_ms: 9.459834
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: measured_next_combat
+ok 184 - ordered original geometry: measured_next_combat
+  ---
+  duration_ms: 5.65281
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: measured_vertical
+ok 185 - ordered original geometry: measured_vertical
+  ---
+  duration_ms: 5.062229
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: measured_three_rooms
+ok 186 - ordered original geometry: measured_three_rooms
+  ---
+  duration_ms: 6.039215
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: measured_next_with_retained_order
+ok 187 - ordered original geometry: measured_next_with_retained_order
+  ---
+  duration_ms: 4.211553
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: reversed_valid_order
+ok 188 - ordered original geometry: reversed_valid_order
+  ---
+  duration_ms: 3.700711
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: missing_order_member
+ok 189 - ordered original geometry: missing_order_member
+  ---
+  duration_ms: 5.653211
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: duplicate_order_member
+ok 190 - ordered original geometry: duplicate_order_member
+  ---
+  duration_ms: 3.952922
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: filled_connector
+ok 191 - ordered original geometry: filled_connector
+  ---
+  duration_ms: 4.027125
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: reverse_connector_direction_is_not_progression_law
+ok 192 - ordered original geometry: reverse_connector_direction_is_not_progression_law
+  ---
+  duration_ms: 4.033063
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: translated_scene
+ok 193 - ordered original geometry: translated_scene
+  ---
+  duration_ms: 5.087507
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: two_pair_legend
+ok 194 - ordered original geometry: two_pair_legend
+  ---
+  duration_ms: 3.72671
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: multiple_active_rooms
+ok 195 - ordered original geometry: multiple_active_rooms
+  ---
+  duration_ms: 4.335671
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: no_active_room
+ok 196 - ordered original geometry: no_active_room
+  ---
+  duration_ms: 3.187617
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: interior_active_without_order
+ok 197 - ordered original geometry: interior_active_without_order
+  ---
+  duration_ms: 3.226164
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: interior_active_with_retained_order
+ok 198 - ordered original geometry: interior_active_with_retained_order
+  ---
+  duration_ms: 2.889175
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: empty_frame
+ok 199 - ordered original geometry: empty_frame
+  ---
+  duration_ms: 0.132881
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: zero_width_frame
+ok 200 - ordered original geometry: zero_width_frame
+  ---
+  duration_ms: 0.055564
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: missing_first_legend_relation
+ok 201 - ordered original geometry: missing_first_legend_relation
+  ---
+  duration_ms: 1.953622
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: missing_button_field
+ok 202 - ordered original geometry: missing_button_field
+  ---
+  duration_ms: 1.843244
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: missing_front_marker
+ok 203 - ordered original geometry: missing_front_marker
+  ---
+  duration_ms: 2.211882
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: extra_front_marker
+ok 204 - ordered original geometry: extra_front_marker
+  ---
+  duration_ms: 1.896686
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: missing_third_lattice_point
+ok 205 - ordered original geometry: missing_third_lattice_point
+  ---
+  duration_ms: 2.111951
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: queue_hole_before_later_item
+ok 206 - ordered original geometry: queue_hole_before_later_item
+  ---
+  duration_ms: 1.803355
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: missing_chain_connector
+ok 207 - ordered original geometry: missing_chain_connector
+  ---
+  duration_ms: 3.008626
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: spiral_0
+ok 208 - ordered original geometry: spiral_0
+  ---
+  duration_ms: 0.063516
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: spiral_1
+ok 209 - ordered original geometry: spiral_1
+  ---
+  duration_ms: 0.050156
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: spiral_2
+ok 210 - ordered original geometry: spiral_2
+  ---
+  duration_ms: 0.038798
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: spiral_3
+ok 211 - ordered original geometry: spiral_3
+  ---
+  duration_ms: 0.035844
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: spiral_4
+ok 212 - ordered original geometry: spiral_4
+  ---
+  duration_ms: 0.038027
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: spiral_5
+ok 213 - ordered original geometry: spiral_5
+  ---
+  duration_ms: 0.038498
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: spiral_6
+ok 214 - ordered original geometry: spiral_6
+  ---
+  duration_ms: 0.040782
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: spiral_7
+ok 215 - ordered original geometry: spiral_7
+  ---
+  duration_ms: 0.044868
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: spiral_8
+ok 216 - ordered original geometry: spiral_8
+  ---
+  duration_ms: 0.048513
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: complete_two_camp_lattice
+ok 217 - ordered original geometry: complete_two_camp_lattice
+  ---
+  duration_ms: 0.127783
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: two_front_markers_missing_from_lattice
+ok 218 - ordered original geometry: two_front_markers_missing_from_lattice
+  ---
+  duration_ms: 0.117188
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: three_lattice_points_missing
+ok 219 - ordered original geometry: three_lattice_points_missing
+  ---
+  duration_ms: 0.074743
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: rectangles_current_scene
+ok 220 - ordered original geometry: rectangles_current_scene
+  ---
+  duration_ms: 0.269147
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: legend_from_actual_components
+ok 221 - ordered original geometry: legend_from_actual_components
+  ---
+  duration_ms: 0.8802
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: horizontal_connector
+ok 222 - ordered original geometry: horizontal_connector
+  ---
+  duration_ms: 0.212071
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: wrong_connector_axis
+ok 223 - ordered original geometry: wrong_connector_axis
+  ---
+  duration_ms: 0.303819
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: mixed_connector_colors
+ok 224 - ordered original geometry: mixed_connector_colors
+  ---
+  duration_ms: 0.048694
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: integer_type_keys_in_complete_measurement_digest
+ok 225 - ordered original geometry: integer_type_keys_in_complete_measurement_digest
+  ---
+  duration_ms: 1.979421
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: integer_type_keys_in_offer_digest
+ok 226 - ordered original geometry: integer_type_keys_in_offer_digest
+  ---
+  duration_ms: 0.844456
+  type: 'test'
+  ...
+# Subtest: ordered original geometry: json_scalar_types_digest
+ok 227 - ordered original geometry: json_scalar_types_digest
+  ---
+  duration_ms: 0.17872
+  type: 'test'
+  ...
+# Subtest: ordered original summary: combat
+ok 228 - ordered original summary: combat
+  ---
+  duration_ms: 0.181324
+  type: 'test'
+  ...
+# Subtest: ordered original summary: recruit
+ok 229 - ordered original summary: recruit
+  ---
+  duration_ms: 0.091528
+  type: 'test'
+  ...
+# Subtest: ordered original summary: next_combat
+ok 230 - ordered original summary: next_combat
+  ---
+  duration_ms: 0.07263
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: current_combat_all_visible_rooms
+ok 231 - ordered original complete projection: current_combat_all_visible_rooms
+  ---
+  duration_ms: 8.783251
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: recruitment_unique_surviving_append
+ok 232 - ordered original complete projection: recruitment_unique_surviving_append
+  ---
+  duration_ms: 7.490496
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: continuation_combat_last_room
+ok 233 - ordered original complete projection: continuation_combat_last_room
+  ---
+  duration_ms: 5.735886
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: remaining_0
+ok 234 - ordered original complete projection: remaining_0
+  ---
+  duration_ms: 4.693351
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: remaining_1
+ok 235 - ordered original complete projection: remaining_1
+  ---
+  duration_ms: 6.535125
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: unsupported_queue_order_hypothesis
+ok 236 - ordered original complete projection: unsupported_queue_order_hypothesis
+  ---
+  duration_ms: 3.384373
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: unsupported_append_hypothesis
+ok 237 - ordered original complete projection: unsupported_append_hypothesis
+  ---
+  duration_ms: 3.249169
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: unsupported_winner_hypothesis
+ok 238 - ordered original complete projection: unsupported_winner_hypothesis
+  ---
+  duration_ms: 3.118101
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: quota_None
+ok 239 - ordered original complete projection: quota_None
+  ---
+  duration_ms: 4.051882
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: quota_0
+ok 240 - ordered original complete projection: quota_0
+  ---
+  duration_ms: 4.576105
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: quota_9
+ok 241 - ordered original complete projection: quota_9
+  ---
+  duration_ms: 4.673512
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: incomplete_type_relation_is_not_impossibility
+ok 242 - ordered original complete projection: incomplete_type_relation_is_not_impossibility
+  ---
+  duration_ms: 3.665518
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: declared_tie_REMOVE_BOTH
+ok 243 - ordered original complete projection: declared_tie_REMOVE_BOTH
+  ---
+  duration_ms: 5.312988
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: declared_tie_KEEP_LEFT
+ok 244 - ordered original complete projection: declared_tie_KEEP_LEFT
+  ---
+  duration_ms: 5.269692
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: declared_tie_KEEP_RIGHT
+ok 245 - ordered original complete projection: declared_tie_KEEP_RIGHT
+  ---
+  duration_ms: 4.252295
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: declared_tie_STOP
+ok 246 - ordered original complete projection: declared_tie_STOP
+  ---
+  duration_ms: 4.524026
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: search_bound_0
+ok 247 - ordered original complete projection: search_bound_0
+  ---
+  duration_ms: 3.866471
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: search_bound_1
+ok 248 - ordered original complete projection: search_bound_1
+  ---
+  duration_ms: 3.700531
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: search_bound_2
+ok 249 - ordered original complete projection: search_bound_2
+  ---
+  duration_ms: 4.015898
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: search_bound_3
+ok 250 - ordered original complete projection: search_bound_3
+  ---
+  duration_ms: 4.984371
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: search_bound_4
+ok 251 - ordered original complete projection: search_bound_4
+  ---
+  duration_ms: 4.348921
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: three_visible_rooms_included
+ok 252 - ordered original complete projection: three_visible_rooms_included
+  ---
+  duration_ms: 4.940755
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: same_survivor_queues_reuse_current_call_cache
+ok 253 - ordered original complete projection: same_survivor_queues_reuse_current_call_cache
+  ---
+  duration_ms: 9.542463
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: future_room_quota_missing_blocks_whole_chain
+ok 254 - ordered original complete projection: future_room_quota_missing_blocks_whole_chain
+  ---
+  duration_ms: 7.474294
+  type: 'test'
+  ...
+# Subtest: ordered original complete projection: button_input_order_does_not_replace_type_enumeration
+ok 255 - ordered original complete projection: button_input_order_does_not_replace_type_enumeration
+  ---
+  duration_ms: 6.546751
+  type: 'test'
+  ...
+# Subtest: ordered original family: cold_no_actual_contrast_no_proposal
+ok 256 - ordered original family: cold_no_actual_contrast_no_proposal
+  ---
+  duration_ms: 26.477626
+  type: 'test'
+  ...
+# Subtest: ordered original family: foreign_single_enemy_return_calibrates
+ok 257 - ordered original family: foreign_single_enemy_return_calibrates
+  ---
+  duration_ms: 10.719741
+  type: 'test'
+  ...
+# Subtest: ordered original family: calibration_normalized_empty_command_data_source_boundary
+ok 258 - ordered original family: calibration_normalized_empty_command_data_source_boundary
+  ---
+  duration_ms: 9.779715
+  type: 'test'
+  ...
+# Subtest: ordered original family: unchanged_return_does_not_calibrate
+ok 259 - ordered original family: unchanged_return_does_not_calibrate
+  ---
+  duration_ms: 7.741838
+  type: 'test'
+  ...
+# Subtest: ordered original family: kernel_passive_no_change_revision2
+ok 260 - ordered original family: kernel_passive_no_change_revision2
+  ---
+  duration_ms: 6.515775
+  type: 'test'
+  ...
+# Subtest: ordered original family: foreign_command_identity_is_not_method_authority
+ok 261 - ordered original family: foreign_command_identity_is_not_method_authority
+  ---
+  duration_ms: 7.027488
+  type: 'test'
+  ...
+# Subtest: ordered original family: cold_recruit_without_contrast_no_offer
+ok 262 - ordered original family: cold_recruit_without_contrast_no_offer
+  ---
+  duration_ms: 4.631337
+  type: 'test'
+  ...
+# Subtest: ordered original family: all_current_offers
+ok 263 - ordered original family: all_current_offers
+  ---
+  duration_ms: 6.282943
+  type: 'test'
+  ...
+# Subtest: ordered original family: calibrated_current_recruitment_proposal
+ok 264 - ordered original family: calibrated_current_recruitment_proposal
+  ---
+  duration_ms: 7.496126
+  type: 'test'
+  ...
+# Subtest: ordered original family: current_guard_recomputes_exact_offer
+ok 265 - ordered original family: current_guard_recomputes_exact_offer
+  ---
+  duration_ms: 7.354462
+  type: 'test'
+  ...
+# Subtest: ordered original family: duplicate_exact_offer_guard_refuses
+ok 266 - ordered original family: duplicate_exact_offer_guard_refuses
+  ---
+  duration_ms: 6.84354
+  type: 'test'
+  ...
+# Subtest: ordered original family: guard_changed_observation_ref
+ok 267 - ordered original family: guard_changed_observation_ref
+  ---
+  duration_ms: 2.897297
+  type: 'test'
+  ...
+# Subtest: ordered original family: guard_changed_level_epoch
+ok 268 - ordered original family: guard_changed_level_epoch
+  ---
+  duration_ms: 1.921052
+  type: 'test'
+  ...
+# Subtest: ordered original family: guard_changed_frame_hash
+ok 269 - ordered original family: guard_changed_frame_hash
+  ---
+  duration_ms: 2.007013
+  type: 'test'
+  ...
+# Subtest: ordered original family: guard_nonzero_index
+ok 270 - ordered original family: guard_nonzero_index
+  ---
+  duration_ms: 1.910237
+  type: 'test'
+  ...
+# Subtest: ordered original family: guard_changed_actual_scene
+ok 271 - ordered original family: guard_changed_actual_scene
+  ---
+  duration_ms: 4.873453
+  type: 'test'
+  ...
+# Subtest: ordered original family: bind_rejects_inexact_action
+ok 272 - ordered original family: bind_rejects_inexact_action
+  ---
+  duration_ms: 1.856565
+  type: 'test'
+  ...
+# Subtest: ordered original family: after_never_promises_success_or_preservation
+ok 273 - ordered original family: after_never_promises_success_or_preservation
+  ---
+  duration_ms: 4.726432
+  type: 'test'
+  ...
+# Subtest: ordered original family: unavailable_current_point_action
+ok 274 - ordered original family: unavailable_current_point_action
+  ---
+  duration_ms: 9.281262
+  type: 'test'
+  ...
+# Subtest: ordered original family: no_remaining_action
+ok 275 - ordered original family: no_remaining_action
+  ---
+  duration_ms: 3.804959
+  type: 'test'
+  ...
+# Subtest: ordered original family: actual_append_reconciles_and_retains_suffix
+ok 276 - ordered original family: actual_append_reconciles_and_retains_suffix
+  ---
+  duration_ms: 11.100182
+  type: 'test'
+  ...
+# Subtest: ordered original family: continuation_reuses_validated_suffix
+ok 277 - ordered original family: continuation_reuses_validated_suffix
+  ---
+  duration_ms: 13.019817
+  type: 'test'
+  ...
+# Subtest: ordered original family: continuation_current_guard
+ok 278 - ordered original family: continuation_current_guard
+  ---
+  duration_ms: 12.142988
+  type: 'test'
+  ...
+# Subtest: ordered original family: actual_no_effect_reconciles_false
+ok 279 - ordered original family: actual_no_effect_reconciles_false
+  ---
+  duration_ms: 51.533101
+  type: 'test'
+  ...
+# Subtest: ordered original family: kernel_actual_no_effect_revision3
+ok 280 - ordered original family: kernel_actual_no_effect_revision3
+  ---
+  duration_ms: 16.557668
+  type: 'test'
+  ...
+# Subtest: ordered original family: tried_context_does_not_offer_again
+ok 281 - ordered original family: tried_context_does_not_offer_again
+  ---
+  duration_ms: 9.157366
+  type: 'test'
+  ...
+# Subtest: ordered original family: unmeasured_return_resets_order_and_continuation
+ok 282 - ordered original family: unmeasured_return_resets_order_and_continuation
+  ---
+  duration_ms: 8.779866
+  type: 'test'
+  ...
+# Subtest: ordered original family: unsupported_first_frame_is_passive_abstention
+ok 283 - ordered original family: unsupported_first_frame_is_passive_abstention
+  ---
+  duration_ms: 3.166384
+  type: 'test'
+  ...
+# Subtest: ordered original family: actual_boundary_preserves_method_not_permit
+ok 284 - ordered original family: actual_boundary_preserves_method_not_permit
+  ---
+  duration_ms: 4.943068
+  type: 'test'
+  ...
+# Subtest: ordered original family: portable_method_requires_new_current_binding
+ok 285 - ordered original family: portable_method_requires_new_current_binding
+  ---
+  duration_ms: 6.539852
+  type: 'test'
+  ...
+# Subtest: ordered original family: old_guard_refuses_new_epoch
+ok 286 - ordered original family: old_guard_refuses_new_epoch
+  ---
+  duration_ms: 2.700391
+  type: 'test'
+  ...
+# Subtest: ordered original family: restore_partial_source_fields
+ok 287 - ordered original family: restore_partial_source_fields
+  ---
+  duration_ms: 1.672226
+  type: 'test'
+  ...
+# Subtest: ordered original family: state_exact_all_seven_fields
+ok 288 - ordered original family: state_exact_all_seven_fields
+  ---
+  duration_ms: 1.626698
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: empty_abstention
+ok 289 - ordered original DRM and SRC: empty_abstention
+  ---
+  duration_ms: 1.421999
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: continuation_priority_before_cost
+ok 290 - ordered original DRM and SRC: continuation_priority_before_cost
+  ---
+  duration_ms: 2.871974
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: cost_before_survivors
+ok 291 - ordered original DRM and SRC: cost_before_survivors
+  ---
+  duration_ms: 2.076237
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: more_survivors_before_enumeration
+ok 292 - ordered original DRM and SRC: more_survivors_before_enumeration
+  ---
+  duration_ms: 1.440546
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: equal_priority_cost_survivors_keeps_first
+ok 293 - ordered original DRM and SRC: equal_priority_cost_survivors_keeps_first
+  ---
+  duration_ms: 1.406986
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: unknown_kind_refused
+ok 294 - ordered original DRM and SRC: unknown_kind_refused
+  ---
+  duration_ms: 1.334326
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: missing_fact_actual_interface_contrast
+ok 295 - ordered original DRM and SRC: missing_fact_actual_interface_contrast
+  ---
+  duration_ms: 4.211383
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: false_fact_actual_interface_contrast
+ok 296 - ordered original DRM and SRC: false_fact_actual_interface_contrast
+  ---
+  duration_ms: 1.589671
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: missing_fact_current_scene_revalidated
+ok 297 - ordered original DRM and SRC: missing_fact_current_scene_revalidated
+  ---
+  duration_ms: 1.181655
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: false_fact_current_scene_revalidated
+ok 298 - ordered original DRM and SRC: false_fact_current_scene_revalidated
+  ---
+  duration_ms: 1.298832
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: missing_fact_conditional_parent_survival
+ok 299 - ordered original DRM and SRC: missing_fact_conditional_parent_survival
+  ---
+  duration_ms: 1.301997
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: false_fact_conditional_parent_survival
+ok 300 - ordered original DRM and SRC: false_fact_conditional_parent_survival
+  ---
+  duration_ms: 1.321306
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: missing_fact_untried_context
+ok 301 - ordered original DRM and SRC: missing_fact_untried_context
+  ---
+  duration_ms: 5.79094
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: false_fact_untried_context
+ok 302 - ordered original DRM and SRC: false_fact_untried_context
+  ---
+  duration_ms: 1.29039
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: python_bool_numeric_equality
+ok 303 - ordered original DRM and SRC: python_bool_numeric_equality
+  ---
+  duration_ms: 1.287665
+  type: 'test'
+  ...
+# Subtest: ordered original DRM and SRC: string_true_is_not_boolean_true
+ok 304 - ordered original DRM and SRC: string_true_is_not_boolean_true
+  ---
+  duration_ms: 1.215146
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: left_wins
+ok 305 - ordered consumed original V5 reduction: left_wins
+  ---
+  duration_ms: 1.753289
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: right_wins
+ok 306 - ordered consumed original V5 reduction: right_wins
+  ---
+  duration_ms: 0.92704
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: both_empty
+ok 307 - ordered consumed original V5 reduction: both_empty
+  ---
+  duration_ms: 0.852899
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: empty_left
+ok 308 - ordered consumed original V5 reduction: empty_left
+  ---
+  duration_ms: 0.853279
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: empty_right
+ok 309 - ordered consumed original V5 reduction: empty_right
+  ---
+  duration_ms: 0.755261
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: consumed_prefix_preserves_order
+ok 310 - ordered consumed original V5 reduction: consumed_prefix_preserves_order
+  ---
+  duration_ms: 0.991167
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: rank_add_one
+ok 311 - ordered consumed original V5 reduction: rank_add_one
+  ---
+  duration_ms: 0.932039
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: rank_set
+ok 312 - ordered consumed original V5 reduction: rank_set
+  ---
+  duration_ms: 0.918518
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: single_duel_scope
+ok 313 - ordered consumed original V5 reduction: single_duel_scope
+  ---
+  duration_ms: 2.839199
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: signature_mismatch
+ok 314 - ordered consumed original V5 reduction: signature_mismatch
+  ---
+  duration_ms: 0.793208
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: requested_type_mismatch
+ok 315 - ordered consumed original V5 reduction: requested_type_mismatch
+  ---
+  duration_ms: 0.769883
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: domain_bound
+ok 316 - ordered consumed original V5 reduction: domain_bound
+  ---
+  duration_ms: 0.806358
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: node_bound
+ok 317 - ordered consumed original V5 reduction: node_bound
+  ---
+  duration_ms: 1.332494
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: depth_bound
+ok 318 - ordered consumed original V5 reduction: depth_bound
+  ---
+  duration_ms: 1.025279
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: tie_REMOVE_BOTH
+ok 319 - ordered consumed original V5 reduction: tie_REMOVE_BOTH
+  ---
+  duration_ms: 0.822733
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: tie_KEEP_LEFT
+ok 320 - ordered consumed original V5 reduction: tie_KEEP_LEFT
+  ---
+  duration_ms: 0.850515
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: tie_KEEP_RIGHT
+ok 321 - ordered consumed original V5 reduction: tie_KEEP_RIGHT
+  ---
+  duration_ms: 0.836695
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: tie_STOP
+ok 322 - ordered consumed original V5 reduction: tie_STOP
+  ---
+  duration_ms: 0.855592
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: head_relation_not_bound
+ok 323 - ordered consumed original V5 reduction: head_relation_not_bound
+  ---
+  duration_ms: 1.01895
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: input_domain_incomplete
+ok 324 - ordered consumed original V5 reduction: input_domain_incomplete
+  ---
+  duration_ms: 0.770615
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: time_bound_before_visit
+ok 325 - ordered consumed original V5 reduction: time_bound_before_visit
+  ---
+  duration_ms: 1.048284
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: time_bound_on_final_finish
+ok 326 - ordered consumed original V5 reduction: time_bound_on_final_finish
+  ---
+  duration_ms: 1.147184
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: resume_exact_consumed_prefix
+ok 327 - ordered consumed original V5 reduction: resume_exact_consumed_prefix
+  ---
+  duration_ms: 1.746259
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: resume_wrong_command
+ok 328 - ordered consumed original V5 reduction: resume_wrong_command
+  ---
+  duration_ms: 1.509241
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: resume_wrong_digest
+ok 329 - ordered consumed original V5 reduction: resume_wrong_digest
+  ---
+  duration_ms: 1.426696
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: resume_wrong_cursor
+ok 330 - ordered consumed original V5 reduction: resume_wrong_cursor
+  ---
+  duration_ms: 1.353385
+  type: 'test'
+  ...
+# Subtest: ordered consumed original V5 reduction: resume_wrong_ordered_suffix
+ok 331 - ordered consumed original V5 reduction: resume_wrong_ordered_suffix
+  ---
+  duration_ms: 1.196828
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: occurrence
+ok 332 - ordered original V5 model: occurrence
+  ---
+  duration_ms: 0.170738
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: numeric_rank_coercion
+ok 333 - ordered original V5 model: numeric_rank_coercion
+  ---
+  duration_ms: 0.263218
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: boolean_rank_coercion
+ok 334 - ordered original V5 model: boolean_rank_coercion
+  ---
+  duration_ms: 0.102074
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: rule
+ok 335 - ordered original V5 model: rule
+  ---
+  duration_ms: 0.0724
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: request_defaults
+ok 336 - ordered original V5 model: request_defaults
+  ---
+  duration_ms: 0.215466
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: null_resume_frontier_normalizes_empty_mapping
+ok 337 - ordered original V5 model: null_resume_frontier_normalizes_empty_mapping
+  ---
+  duration_ms: 0.210268
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: null_observation_normalizes_empty_mapping
+ok 338 - ordered original V5 model: null_observation_normalizes_empty_mapping
+  ---
+  duration_ms: 0.268736
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: duplicate_occurrence_identity
+ok 339 - ordered original V5 model: duplicate_occurrence_identity
+  ---
+  duration_ms: 0.687549
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: wrong_occurrence_camp
+ok 340 - ordered original V5 model: wrong_occurrence_camp
+  ---
+  duration_ms: 0.258601
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: duplicate_relation
+ok 341 - ordered original V5 model: duplicate_relation
+  ---
+  duration_ms: 0.161033
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: set_without_value
+ok 342 - ordered original V5 model: set_without_value
+  ---
+  duration_ms: 0.131548
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: zero_node_bound
+ok 343 - ordered original V5 model: zero_node_bound
+  ---
+  duration_ms: 0.117738
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: invalid_tie_rule
+ok 344 - ordered original V5 model: invalid_tie_rule
+  ---
+  duration_ms: 0.18533
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: negative_cursor
+ok 345 - ordered original V5 model: negative_cursor
+  ---
+  duration_ms: 0.224639
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: extra_request_key
+ok 346 - ordered original V5 model: extra_request_key
+  ---
+  duration_ms: 0.139701
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: empty_occurrence_identity
+ok 347 - ordered original V5 model: empty_occurrence_identity
+  ---
+  duration_ms: 0.094643
+  type: 'test'
+  ...
+# Subtest: ordered original V5 model: extra_occurrence_key
+ok 348 - ordered original V5 model: extra_occurrence_key
+  ---
+  duration_ms: 0.078098
+  type: 'test'
+  ...
+# Subtest: ordered named native boundary: non_integer_digest_native_boundary
+ok 349 - ordered named native boundary: non_integer_digest_native_boundary
+  ---
+  duration_ms: 0.292121
+  type: 'test'
+  ...
+# Subtest: ordered named native boundary: unsafe_integer_rank_boundary
+ok 350 - ordered named native boundary: unsafe_integer_rank_boundary
+  ---
+  duration_ms: 0.093682
+  type: 'test'
+  ...
+# Subtest: ordered reference binds its generator, all checked originals and consumed source functions
+ok 351 - ordered reference binds its generator, all checked originals and consumed source functions
+  ---
+  duration_ms: 46.478289
+  type: 'test'
+  ...
+# Subtest: ordered cache coverage comes from actual original calls within one conditional projection
+ok 352 - ordered cache coverage comes from actual original calls within one conditional projection
+  ---
+  duration_ms: 0.171029
+  type: 'test'
+  ...
+# Subtest: ordered cold method comes from actual public contrast and portable methods grant no current permit
+ok 353 - ordered cold method comes from actual public contrast and portable methods grant no current permit
+  ---
+  duration_ms: 0.256487
+  type: 'test'
+  ...
+# Subtest: ordered complete source restoration detaches caller state and returned state
+ok 354 - ordered complete source restoration detaches caller state and returned state
+  ---
+  duration_ms: 17.604909
+  type: 'test'
+  ...
+# Subtest: six cold public radial returns retain a measured method and defer the seventh invitation in the real caller
+ok 355 - six cold public radial returns retain a measured method and defer the seventh invitation in the real caller
+  ---
+  duration_ms: 9601.088423
+  type: 'test'
+  ...
+# Subtest: a current radial guard veto retains invitation priority and acquires nothing
+ok 356 - a current radial guard veto retains invitation priority and acquires nothing
+  ---
+  duration_ms: 8455.285544
+  type: 'test'
+  ...
+# Subtest: a radial proposal and copied or imported rule cannot replace acquired public-effect evidence
+ok 357 - a radial proposal and copied or imported rule cannot replace acquired public-effect evidence
+  ---
+  duration_ms: 7428.505481
+  type: 'test'
+  ...
+# Subtest: a previously learned radial turn is not priority evidence in a different epoch
+ok 358 - a previously learned radial turn is not priority evidence in a different epoch
+  ---
+  duration_ms: 2.348265
+  type: 'test'
+  ...
+# Subtest: a later radial refutation or rejected context cannot be erased by a retained rule object
+ok 359 - a later radial refutation or rejected context cannot be erased by a retained rule object
+  ---
+  duration_ms: 2.16652
+  type: 'test'
+  ...
+# Subtest: radial priority requires one selected public response with two distinct retained observation references
+ok 360 - radial priority requires one selected public response with two distinct retained observation references
+  ---
+  duration_ms: 2.625666
+  type: 'test'
+  ...
+# Subtest: a contradicted intermediate step cannot borrow a correct first radial rotation
+ok 361 - a contradicted intermediate step cannot borrow a correct first radial rotation
+  ---
+  duration_ms: 3.520791
+  type: 'test'
+  ...
+# Subtest: twelve cold public returns permit one source revalidation on the newly measured support, without asserting a current method
+ok 362 - twelve cold public returns permit one source revalidation on the newly measured support, without asserting a current method
+  ---
+  duration_ms: 14267.527377
+  type: 'test'
+  ...
+# Subtest: radial revalidation refuses absent evidence, future epochs and subsequent refutation
+ok 363 - radial revalidation refuses absent evidence, future epochs and subsequent refutation
+  ---
+  duration_ms: 2.446395
+  type: 'test'
+  ...
+# Subtest: radial revalidation cannot be widened into a multi-action or already-confirmed current prediction
+ok 364 - radial revalidation cannot be widened into a multi-action or already-confirmed current prediction
+  ---
+  duration_ms: 3.269909
+  type: 'test'
+  ...
+# Subtest: the revalidation question still requires the exact current frame and available point input
+ok 365 - the revalidation question still requires the exact current frame and available point input
+  ---
+  duration_ms: 4.588692
+  type: 'test'
+  ...
+# Subtest: declared source order registers 68 of 76 entries with all six observed-composition branches
+ok 366 - declared source order registers 68 of 76 entries with all six observed-composition branches
+  ---
+  duration_ms: 66.609158
+  type: 'test'
+  ...
+# Subtest: two source entries preserve priority while sharing one acquisition and one retained owner
+ok 367 - two source entries preserve priority while sharing one acquisition and one retained owner
+  ---
+  duration_ms: 29.515318
+  type: 'test'
+  ...
+# Subtest: a refusal at the earlier source entry stops the later entry
+ok 368 - a refusal at the earlier source entry stops the later entry
+  ---
+  duration_ms: 7.397275
+  type: 'test'
+  ...
+# Subtest: a current bounded-search witness respects its declared blocking flag (true)
+ok 369 - a current bounded-search witness respects its declared blocking flag (true)
+  ---
+  duration_ms: 6.826812
+  type: 'test'
+  ...
+# Subtest: a current bounded-search witness respects its declared blocking flag (false)
+ok 370 - a current bounded-search witness respects its declared blocking flag (false)
+  ---
+  duration_ms: 9.276955
+  type: 'test'
+  ...
+# Subtest: a current bounded-search witness respects its declared blocking flag (undefined)
+ok 371 - a current bounded-search witness respects its declared blocking flag (undefined)
+  ---
+  duration_ms: 7.164733
+  type: 'test'
+  ...
+# Subtest: a blocking witness cannot bypass current binding (stale_observation)
+ok 372 - a blocking witness cannot bypass current binding (stale_observation)
+  ---
+  duration_ms: 11.805404
+  type: 'test'
+  ...
+# Subtest: a blocking witness cannot bypass current binding (action_authority)
+ok 373 - a blocking witness cannot bypass current binding (action_authority)
+  ---
+  duration_ms: 8.296113
+  type: 'test'
+  ...
+# Subtest: source-entry wiring rejects missing adapters, misalignment and malformed entries
+ok 374 - source-entry wiring rejects missing adapters, misalignment and malformed entries
+  ---
+  duration_ms: 0.702902
+  type: 'test'
+  ...
+# Subtest: Window has one cold owner, its exact DRM entry and the common stored workflow
+ok 375 - Window has one cold owner, its exact DRM entry and the common stored workflow
+  ---
+  duration_ms: 1433.399537
+  type: 'test'
+  ...
+# Subtest: cold common caller learns a foreign edit, executes window.select and uses its actual return at the next decision
+ok 376 - cold common caller learns a foreign edit, executes window.select and uses its actual return at the next decision
+  ---
+  duration_ms: 1976.453803
+  type: 'test'
+  ...
+# Subtest: an acquired no-effect setting is retained as an attempt and cannot immediately repeat
+ok 377 - an acquired no-effect setting is retained as an attempt and cannot immediately repeat
+  ---
+  duration_ms: 1988.909649
+  type: 'test'
+  ...
+# Subtest: launch packets and last alone survive the native checkpoint without inventing a source state publication
+ok 378 - launch packets and last alone survive the native checkpoint without inventing a source state publication
+  ---
+  duration_ms: 1325.526371
+  type: 'test'
+  ...
+# Subtest: window original geometry: two_fixed_filters_configurable_capacities
+ok 379 - window original geometry: two_fixed_filters_configurable_capacities
+  ---
+  duration_ms: 16.576712
+  type: 'test'
+  ...
+# Subtest: window original geometry: prepared_current_capacities
+ok 380 - window original geometry: prepared_current_capacities
+  ---
+  duration_ms: 2.274717
+  type: 'test'
+  ...
+# Subtest: window original geometry: empty
+ok 381 - window original geometry: empty
+  ---
+  duration_ms: 0.115895
+  type: 'test'
+  ...
+# Subtest: window original geometry: empty_row
+ok 382 - window original geometry: empty_row
+  ---
+  duration_ms: 0.07277
+  type: 'test'
+  ...
+# Subtest: window original geometry: no_boxes
+ok 383 - window original geometry: no_boxes
+  ---
+  duration_ms: 0.250949
+  type: 'test'
+  ...
+# Subtest: window original geometry: horizontal_mirror
+ok 384 - window original geometry: horizontal_mirror
+  ---
+  duration_ms: 1.377712
+  type: 'test'
+  ...
+# Subtest: window original geometry: vertical_mirror
+ok 385 - window original geometry: vertical_mirror
+  ---
+  duration_ms: 1.556712
+  type: 'test'
+  ...
+# Subtest: window original geometry: palette_bijection
+ok 386 - window original geometry: palette_bijection
+  ---
+  duration_ms: 1.521639
+  type: 'test'
+  ...
+# Subtest: window original geometry: translated
+ok 387 - window original geometry: translated
+  ---
+  duration_ms: 2.585976
+  type: 'test'
+  ...
+# Subtest: window original geometry: fixed_capacity_rims
+ok 388 - window original geometry: fixed_capacity_rims
+  ---
+  duration_ms: 2.16431
+  type: 'test'
+  ...
+# Subtest: window original geometry: configurable_filter_domains
+ok 389 - window original geometry: configurable_filter_domains
+  ---
+  duration_ms: 2.026151
+  type: 'test'
+  ...
+# Subtest: window original geometry: wildcard_patch
+ok 390 - window original geometry: wildcard_patch
+  ---
+  duration_ms: 2.390371
+  type: 'test'
+  ...
+# Subtest: window original geometry: second_transform_field
+ok 391 - window original geometry: second_transform_field
+  ---
+  duration_ms: 2.609602
+  type: 'test'
+  ...
+# Subtest: window original geometry: single_word_color_rejected
+ok 392 - window original geometry: single_word_color_rejected
+  ---
+  duration_ms: 1.51594
+  type: 'test'
+  ...
+# Subtest: window original geometry: filter_absent_from_word
+ok 393 - window original geometry: filter_absent_from_word
+  ---
+  duration_ms: 2.629372
+  type: 'test'
+  ...
+# Subtest: window original geometry: box_quantum_3
+ok 394 - window original geometry: box_quantum_3
+  ---
+  duration_ms: 2.82682
+  type: 'test'
+  ...
+# Subtest: window original geometry: box_quantum_4
+ok 395 - window original geometry: box_quantum_4
+  ---
+  duration_ms: 4.248839
+  type: 'test'
+  ...
+# Subtest: window original geometry: word_quantum_2
+ok 396 - window original geometry: word_quantum_2
+  ---
+  duration_ms: 2.065371
+  type: 'test'
+  ...
+# Subtest: window original geometry: word_quantum_4
+ok 397 - window original geometry: word_quantum_4
+  ---
+  duration_ms: 2.312824
+  type: 'test'
+  ...
+# Subtest: window original geometry: word_quantum_6
+ok 398 - window original geometry: word_quantum_6
+  ---
+  duration_ms: 1.695522
+  type: 'test'
+  ...
+# Subtest: window original geometry: broken_box_ring
+ok 399 - window original geometry: broken_box_ring
+  ---
+  duration_ms: 1.715051
+  type: 'test'
+  ...
+# Subtest: window original geometry: two_regular_word_candidates
+ok 400 - window original geometry: two_regular_word_candidates
+  ---
+  duration_ms: 2.45617
+  type: 'test'
+  ...
+# Subtest: window original geometry: narrow_fixed_field_overlay
+ok 401 - window original geometry: narrow_fixed_field_overlay
+  ---
+  duration_ms: 1.594187
+  type: 'test'
+  ...
+# Subtest: window original geometry: capacity_active_slots_not_prefix
+ok 402 - window original geometry: capacity_active_slots_not_prefix
+  ---
+  duration_ms: 1.13226
+  type: 'test'
+  ...
+# Subtest: window original geometry: canonical_nested_digest
+ok 403 - window original geometry: canonical_nested_digest
+  ---
+  duration_ms: 0.792777
+  type: 'test'
+  ...
+# Subtest: window original geometry: fixed_filter_plan_product_order
+ok 404 - window original geometry: fixed_filter_plan_product_order
+  ---
+  duration_ms: 3.824557
+  type: 'test'
+  ...
+# Subtest: window original geometry: current_prepared_plan_cost_one
+ok 405 - window original geometry: current_prepared_plan_cost_one
+  ---
+  duration_ms: 0.803434
+  type: 'test'
+  ...
+# Subtest: window original geometry: complete_capture_no_rank_compaction
+ok 406 - window original geometry: complete_capture_no_rank_compaction
+  ---
+  duration_ms: 0.311551
+  type: 'test'
+  ...
+# Subtest: window original geometry: partial_capture_is_not_complete
+ok 407 - window original geometry: partial_capture_is_not_complete
+  ---
+  duration_ms: 0.305591
+  type: 'test'
+  ...
+# Subtest: window original geometry: settings_zip_ignores_extra
+ok 408 - window original geometry: settings_zip_ignores_extra
+  ---
+  duration_ms: 0.282457
+  type: 'test'
+  ...
+# Subtest: window original geometry: settings_zip_missing_box
+ok 409 - window original geometry: settings_zip_missing_box
+  ---
+  duration_ms: 0.143997
+  type: 'test'
+  ...
+# Subtest: window original geometry: window_larger_than_word
+ok 410 - window original geometry: window_larger_than_word
+  ---
+  duration_ms: 0.287814
+  type: 'test'
+  ...
+# Subtest: window original geometry: refuse_unbound_model_one_use_for_run
+ok 411 - window original geometry: refuse_unbound_model_one_use_for_run
+  ---
+  duration_ms: 0.142706
+  type: 'test'
+  ...
+# Subtest: window original geometry: refuse_unbound_model_receiver_order_hypothesis
+ok 412 - window original geometry: refuse_unbound_model_receiver_order_hypothesis
+  ---
+  duration_ms: 0.060422
+  type: 'test'
+  ...
+# Subtest: window original geometry: maximal_group_requires_full_run
+ok 413 - window original geometry: maximal_group_requires_full_run
+  ---
+  duration_ms: 0.365692
+  type: 'test'
+  ...
+# Subtest: window original geometry: configuration_domain_refused
+ok 414 - window original geometry: configuration_domain_refused
+  ---
+  duration_ms: 0.124588
+  type: 'test'
+  ...
+# Subtest: window original geometry: configuration_domain_exact_bound
+ok 415 - window original geometry: configuration_domain_exact_bound
+  ---
+  duration_ms: 0.600487
+  type: 'test'
+  ...
+# Subtest: window original geometry: empty_inner_domain
+ok 416 - window original geometry: empty_inner_domain
+  ---
+  duration_ms: 0.086321
+  type: 'test'
+  ...
+# Subtest: window original geometry: empty_product_and_empty_train
+ok 417 - window original geometry: empty_product_and_empty_train
+  ---
+  duration_ms: 0.061513
+  type: 'test'
+  ...
+# Subtest: window original geometry: current_value_outside_cycle_raises
+ok 418 - window original geometry: current_value_outside_cycle_raises
+  ---
+  duration_ms: 1.248796
+  type: 'test'
+  ...
+# Subtest: window original geometry: paint_then_downstream_capture
+ok 419 - window original geometry: paint_then_downstream_capture
+  ---
+  duration_ms: 0.360715
+  type: 'test'
+  ...
+# Subtest: window original geometry: paint_without_capture_never_completes
+ok 420 - window original geometry: paint_without_capture_never_completes
+  ---
+  duration_ms: 0.11273
+  type: 'test'
+  ...
+# Subtest: window original geometry: source_projection_node_bound_propagates
+ok 421 - window original geometry: source_projection_node_bound_propagates
+  ---
+  duration_ms: 332.167693
+  type: 'test'
+  ...
+# Subtest: window original geometry: cooperative_many_configurations
+ok 422 - window original geometry: cooperative_many_configurations
+  ---
+  duration_ms: 0.938077
+  type: 'test'
+  ...
+# Subtest: window original geometry: cooperative_source_complete_product
+ok 423 - window original geometry: cooperative_source_complete_product
+  ---
+  duration_ms: 2.476832
+  type: 'test'
+  ...
+# Subtest: window original family: cold_geometry_without_method_abstains
+ok 424 - window original family: cold_geometry_without_method_abstains
+  ---
+  duration_ms: 26.270607
+  type: 'test'
+  ...
+# Subtest: window original family: zero_remaining_still_scopes
+ok 425 - window original family: zero_remaining_still_scopes
+  ---
+  duration_ms: 5.319286
+  type: 'test'
+  ...
+# Subtest: window original family: cold_foreign_capacity_change
+ok 426 - window original family: cold_foreign_capacity_change
+  ---
+  duration_ms: 5.019383
+  type: 'test'
+  ...
+# Subtest: window original family: acquired_method_real_src_proposal
+ok 427 - window original family: acquired_method_real_src_proposal
+  ---
+  duration_ms: 8.769808
+  type: 'test'
+  ...
+# Subtest: window original family: all_current_offers
+ok 428 - window original family: all_current_offers
+  ---
+  duration_ms: 4.044721
+  type: 'test'
+  ...
+# Subtest: window original family: exact_binding
+ok 429 - window original family: exact_binding
+  ---
+  duration_ms: 2.381678
+  type: 'test'
+  ...
+# Subtest: window original family: exact_before
+ok 430 - window original family: exact_before
+  ---
+  duration_ms: 5.4211
+  type: 'test'
+  ...
+# Subtest: window original family: duplicate_full_current_offers_refuse
+ok 431 - window original family: duplicate_full_current_offers_refuse
+  ---
+  duration_ms: 7.156802
+  type: 'test'
+  ...
+# Subtest: window original family: after_never_predicts_effect
+ok 432 - window original family: after_never_predicts_effect
+  ---
+  duration_ms: 5.56666
+  type: 'test'
+  ...
+# Subtest: window original family: guard_stale_observation_ref
+ok 433 - window original family: guard_stale_observation_ref
+  ---
+  duration_ms: 2.047843
+  type: 'test'
+  ...
+# Subtest: window original family: guard_stale_level_epoch
+ok 434 - window original family: guard_stale_level_epoch
+  ---
+  duration_ms: 2.083267
+  type: 'test'
+  ...
+# Subtest: window original family: guard_stale_frame_hash
+ok 435 - window original family: guard_stale_frame_hash
+  ---
+  duration_ms: 2.068144
+  type: 'test'
+  ...
+# Subtest: window original family: guard_index_nonzero
+ok 436 - window original family: guard_index_nonzero
+  ---
+  duration_ms: 2.554319
+  type: 'test'
+  ...
+# Subtest: window original family: guard_score_only_not_direct_scope_check
+ok 437 - window original family: guard_score_only_not_direct_scope_check
+  ---
+  duration_ms: 4.585147
+  type: 'test'
+  ...
+# Subtest: window original family: guard_absent_public_action
+ok 438 - window original family: guard_absent_public_action
+  ---
+  duration_ms: 3.539778
+  type: 'test'
+  ...
+# Subtest: window original family: guard_current_rows_changed
+ok 439 - window original family: guard_current_rows_changed
+  ---
+  duration_ms: 5.194057
+  type: 'test'
+  ...
+# Subtest: window original family: binding_changed_steps
+ok 440 - window original family: binding_changed_steps
+  ---
+  duration_ms: 2.141235
+  type: 'test'
+  ...
+# Subtest: window original family: binding_changed_actions
+ok 441 - window original family: binding_changed_actions
+  ---
+  duration_ms: 1.62851
+  type: 'test'
+  ...
+# Subtest: window original family: binding_offer_payload_changed
+ok 442 - window original family: binding_offer_payload_changed
+  ---
+  duration_ms: 1.860491
+  type: 'test'
+  ...
+# Subtest: window original family: guard_full_offer_digest_changed
+ok 443 - window original family: guard_full_offer_digest_changed
+  ---
+  duration_ms: 4.54774
+  type: 'test'
+  ...
+# Subtest: window original family: guard_new_method_evidence_changes_offer
+ok 444 - window original family: guard_new_method_evidence_changes_offer
+  ---
+  duration_ms: 7.802557
+  type: 'test'
+  ...
+# Subtest: window original family: caller_inputs_do_not_override_public_domain
+ok 445 - window original family: caller_inputs_do_not_override_public_domain
+  ---
+  duration_ms: 3.326466
+  type: 'test'
+  ...
+# Subtest: window original family: remaining_below_plan_cost
+ok 446 - window original family: remaining_below_plan_cost
+  ---
+  duration_ms: 4.220997
+  type: 'test'
+  ...
+# Subtest: window original family: actual_own_setting_return
+ok 447 - window original family: actual_own_setting_return
+  ---
+  duration_ms: 4.273276
+  type: 'test'
+  ...
+# Subtest: window original family: prepared_geometry_launch_next
+ok 448 - window original family: prepared_geometry_launch_next
+  ---
+  duration_ms: 3.366896
+  type: 'test'
+  ...
+# Subtest: window original family: actual_no_effect_setting_attempt
+ok 449 - window original family: actual_no_effect_setting_attempt
+  ---
+  duration_ms: 3.465656
+  type: 'test'
+  ...
+# Subtest: window original family: attempt_excludes_same_context
+ok 450 - window original family: attempt_excludes_same_context
+  ---
+  duration_ms: 2.36972
+  type: 'test'
+  ...
+# Subtest: window original family: attempt_ablation_restores_question
+ok 451 - window original family: attempt_ablation_restores_question
+  ---
+  duration_ms: 4.471205
+  type: 'test'
+  ...
+# Subtest: window original family: method_ablation_same_current_raster
+ok 452 - window original family: method_ablation_same_current_raster
+  ---
+  duration_ms: 2.030047
+  type: 'test'
+  ...
+# Subtest: window original family: official_boundary_transports_methods_and_packet
+ok 453 - window original family: official_boundary_transports_methods_and_packet
+  ---
+  duration_ms: 3.208818
+  type: 'test'
+  ...
+# Subtest: window original family: portable_method_revalidated_in_new_epoch
+ok 454 - window original family: portable_method_revalidated_in_new_epoch
+  ---
+  duration_ms: 2.937899
+  type: 'test'
+  ...
+# Subtest: window original family: old_proposal_has_no_boundary_authority
+ok 455 - window original family: old_proposal_has_no_boundary_authority
+  ---
+  duration_ms: 1.821913
+  type: 'test'
+  ...
+# Subtest: window original family: boundary_does_not_infer_new_field_change
+ok 456 - window original family: boundary_does_not_infer_new_field_change
+  ---
+  duration_ms: 2.501729
+  type: 'test'
+  ...
+# Subtest: window original family: unmeasurable_before_returns_before_after_scope
+ok 457 - window original family: unmeasurable_before_returns_before_after_scope
+  ---
+  duration_ms: 2.171801
+  type: 'test'
+  ...
+# Subtest: window original family: launches_only_not_method
+ok 458 - window original family: launches_only_not_method
+  ---
+  duration_ms: 3.164361
+  type: 'test'
+  ...
+# Subtest: window original family: two_simultaneous_field_changes_not_a_method
+ok 459 - window original family: two_simultaneous_field_changes_not_a_method
+  ---
+  duration_ms: 2.770296
+  type: 'test'
+  ...
+# Subtest: window original family: unmeasurable_return_no_field_change
+ok 460 - window original family: unmeasurable_return_no_field_change
+  ---
+  duration_ms: 2.323661
+  type: 'test'
+  ...
+# Subtest: window original family: changed_word_not_same_field_experiment
+ok 461 - window original family: changed_word_not_same_field_experiment
+  ---
+  duration_ms: 2.533397
+  type: 'test'
+  ...
+# Subtest: window original family: unpointed_foreign_command_can_witness_field
+ok 462 - window original family: unpointed_foreign_command_can_witness_field
+  ---
+  duration_ms: 3.061054
+  type: 'test'
+  ...
+# Subtest: window original family: restore_partial_known_fields
+ok 463 - window original family: restore_partial_known_fields
+  ---
+  duration_ms: 1.086411
+  type: 'test'
+  ...
+# Subtest: window original family: state_detaches_all_six_fields
+ok 464 - window original family: state_detaches_all_six_fields
+  ---
+  duration_ms: 1.467817
+  type: 'test'
+  ...
+# Subtest: window original DRM/SRC: empty
+ok 465 - window original DRM/SRC: empty
+  ---
+  duration_ms: 1.267204
+  type: 'test'
+  ...
+# Subtest: window original DRM/SRC: one_setting
+ok 466 - window original DRM/SRC: one_setting
+  ---
+  duration_ms: 0.996406
+  type: 'test'
+  ...
+# Subtest: window original DRM/SRC: kind_priority_before_cost
+ok 467 - window original DRM/SRC: kind_priority_before_cost
+  ---
+  duration_ms: 0.985889
+  type: 'test'
+  ...
+# Subtest: window original DRM/SRC: cost_before_index
+ok 468 - window original DRM/SRC: cost_before_index
+  ---
+  duration_ms: 0.91335
+  type: 'test'
+  ...
+# Subtest: window original DRM/SRC: source_index_final_tie
+ok 469 - window original DRM/SRC: source_index_final_tie
+  ---
+  duration_ms: 1.055795
+  type: 'test'
+  ...
+# Subtest: window original DRM/SRC: unknown_kind_ignored
+ok 470 - window original DRM/SRC: unknown_kind_ignored
+  ---
+  duration_ms: 6.239065
+  type: 'test'
+  ...
+# Subtest: window original DRM/SRC: unknown_only_abstains
+ok 471 - window original DRM/SRC: unknown_only_abstains
+  ---
+  duration_ms: 1.413045
+  type: 'test'
+  ...
+# Subtest: window original DRM/SRC: field_control_observed_missing
+ok 472 - window original DRM/SRC: field_control_observed_missing
+  ---
+  duration_ms: 1.729903
+  type: 'test'
+  ...
+# Subtest: window original DRM/SRC: field_control_observed_false
+ok 473 - window original DRM/SRC: field_control_observed_false
+  ---
+  duration_ms: 3.033002
+  type: 'test'
+  ...
+# Subtest: window original DRM/SRC: current_geometry_revalidated_missing
+ok 474 - window original DRM/SRC: current_geometry_revalidated_missing
+  ---
+  duration_ms: 0.987502
+  type: 'test'
+  ...
+# Subtest: window original DRM/SRC: current_geometry_revalidated_false
+ok 475 - window original DRM/SRC: current_geometry_revalidated_false
+  ---
+  duration_ms: 2.353856
+  type: 'test'
+  ...
+# Subtest: window original DRM/SRC: conditional_coverage_complete_missing
+ok 476 - window original DRM/SRC: conditional_coverage_complete_missing
+  ---
+  duration_ms: 0.902123
+  type: 'test'
+  ...
+# Subtest: window original DRM/SRC: conditional_coverage_complete_false
+ok 477 - window original DRM/SRC: conditional_coverage_complete_false
+  ---
+  duration_ms: 0.899499
+  type: 'test'
+  ...
+# Subtest: window original DRM/SRC: cost_admissible_missing
+ok 478 - window original DRM/SRC: cost_admissible_missing
+  ---
+  duration_ms: 4.390293
+  type: 'test'
+  ...
+# Subtest: window original DRM/SRC: cost_admissible_false
+ok 479 - window original DRM/SRC: cost_admissible_false
+  ---
+  duration_ms: 1.139271
+  type: 'test'
+  ...
+# Subtest: window original DRM/SRC: untried_context_missing
+ok 480 - window original DRM/SRC: untried_context_missing
+  ---
+  duration_ms: 1.203628
+  type: 'test'
+  ...
+# Subtest: window original DRM/SRC: untried_context_false
+ok 481 - window original DRM/SRC: untried_context_false
+  ---
+  duration_ms: 0.927872
+  type: 'test'
+  ...
+# Subtest: window consumed original V5 kernel: homogeneous_exact_window
+ok 482 - window consumed original V5 kernel: homogeneous_exact_window
+  ---
+  duration_ms: 0.653617
+  type: 'test'
+  ...
+# Subtest: window consumed original V5 kernel: capture_retains_ranks_and_holes
+ok 483 - window consumed original V5 kernel: capture_retains_ranks_and_holes
+  ---
+  duration_ms: 0.193241
+  type: 'test'
+  ...
+# Subtest: window consumed original V5 kernel: heterogeneous_window
+ok 484 - window consumed original V5 kernel: heterogeneous_window
+  ---
+  duration_ms: 0.148544
+  type: 'test'
+  ...
+# Subtest: window consumed original V5 kernel: filter_mismatch
+ok 485 - window consumed original V5 kernel: filter_mismatch
+  ---
+  duration_ms: 0.095625
+  type: 'test'
+  ...
+# Subtest: window consumed original V5 kernel: wildcard_admission
+ok 486 - window consumed original V5 kernel: wildcard_admission
+  ---
+  duration_ms: 0.095484
+  type: 'test'
+  ...
+# Subtest: window consumed original V5 kernel: fixed_rank_gap
+ok 487 - window consumed original V5 kernel: fixed_rank_gap
+  ---
+  duration_ms: 0.133512
+  type: 'test'
+  ...
+# Subtest: window consumed original V5 kernel: captured_rank_hole
+ok 488 - window consumed original V5 kernel: captured_rank_hole
+  ---
+  duration_ms: 0.098569
+  type: 'test'
+  ...
+# Subtest: window consumed original V5 kernel: maximal_group_right_neighbor
+ok 489 - window consumed original V5 kernel: maximal_group_right_neighbor
+  ---
+  duration_ms: 0.082505
+  type: 'test'
+  ...
+# Subtest: window consumed original V5 kernel: captured_neighbor_not_maximal_extension
+ok 490 - window consumed original V5 kernel: captured_neighbor_not_maximal_extension
+  ---
+  duration_ms: 0.109205
+  type: 'test'
+  ...
+# Subtest: window consumed original V5 kernel: negative_rank_and_shift
+ok 491 - window consumed original V5 kernel: negative_rank_and_shift
+  ---
+  duration_ms: 0.094833
+  type: 'test'
+  ...
+# Subtest: window consumed original V5 kernel: spent_opportunity
+ok 492 - window consumed original V5 kernel: spent_opportunity
+  ---
+  duration_ms: 0.168615
+  type: 'test'
+  ...
+# Subtest: window consumed original V5 kernel: same_beat_parent_missing
+ok 493 - window consumed original V5 kernel: same_beat_parent_missing
+  ---
+  duration_ms: 0.222747
+  type: 'test'
+  ...
+# Subtest: window consumed original V5 kernel: same_beat_parent_present
+ok 494 - window consumed original V5 kernel: same_beat_parent_present
+  ---
+  duration_ms: 0.209336
+  type: 'test'
+  ...
+# Subtest: window consumed original V5 kernel: old_parent_pulse_does_not_authorize
+ok 495 - window consumed original V5 kernel: old_parent_pulse_does_not_authorize
+  ---
+  duration_ms: 0.12596
+  type: 'test'
+  ...
+# Subtest: window consumed original V5 kernel: ordered_rejection_causes
+ok 496 - window consumed original V5 kernel: ordered_rejection_causes
+  ---
+  duration_ms: 0.111849
+  type: 'test'
+  ...
+# Subtest: window consumed original V5 kernel: pulse_enables_same_beat_capture
+ok 497 - window consumed original V5 kernel: pulse_enables_same_beat_capture
+  ---
+  duration_ms: 0.190698
+  type: 'test'
+  ...
+# Subtest: window consumed original V5 kernel: paint_enables_downstream_capture
+ok 498 - window consumed original V5 kernel: paint_enables_downstream_capture
+  ---
+  duration_ms: 0.128814
+  type: 'test'
+  ...
+# Subtest: window consumed original V5 kernel: fixed_rank_second_receiver_no_compaction
+ok 499 - window consumed original V5 kernel: fixed_rank_second_receiver_no_compaction
+  ---
+  duration_ms: 0.115134
+  type: 'test'
+  ...
+# Subtest: window consumed original V5 kernel: old_pulses_filtered_by_beat
+ok 500 - window consumed original V5 kernel: old_pulses_filtered_by_beat
+  ---
+  duration_ms: 0.13243
+  type: 'test'
+  ...
+# Subtest: window consumed original V5 kernel: revisit_until_bounded_quiescence
+ok 501 - window consumed original V5 kernel: revisit_until_bounded_quiescence
+  ---
+  duration_ms: 0.177488
+  type: 'test'
+  ...
+# Subtest: window consumed original V5 kernel: depth_exhaustion_returns_no_partial_state
+ok 502 - window consumed original V5 kernel: depth_exhaustion_returns_no_partial_state
+  ---
+  duration_ms: 0.259191
+  type: 'test'
+  ...
+# Subtest: window consumed original V5 kernel: missing_revisit_termination_evidence
+ok 503 - window consumed original V5 kernel: missing_revisit_termination_evidence
+  ---
+  duration_ms: 0.25173
+  type: 'test'
+  ...
+# Subtest: window consumed original V5 kernel: missing_revisit_right_bound
+ok 504 - window consumed original V5 kernel: missing_revisit_right_bound
+  ---
+  duration_ms: 0.101153
+  type: 'test'
+  ...
+# Subtest: window consumed original V5 kernel: empty_revisit_still_requires_termination
+ok 505 - window consumed original V5 kernel: empty_revisit_still_requires_termination
+  ---
+  duration_ms: 0.127482
+  type: 'test'
+  ...
+# Subtest: window consumed original V5 kernel: zero_depth
+ok 506 - window consumed original V5 kernel: zero_depth
+  ---
+  duration_ms: 0.111699
+  type: 'test'
+  ...
+# Subtest: window consumed original V5 kernel: node_bound_first
+ok 507 - window consumed original V5 kernel: node_bound_first
+  ---
+  duration_ms: 0.141945
+  type: 'test'
+  ...
+# Subtest: window consumed original V5 kernel: time_bound_before_visit
+ok 508 - window consumed original V5 kernel: time_bound_before_visit
+  ---
+  duration_ms: 0.130236
+  type: 'test'
+  ...
+# Subtest: window consumed original V5 kernel: second_receiver_node_exhaustion
+ok 509 - window consumed original V5 kernel: second_receiver_node_exhaustion
+  ---
+  duration_ms: 0.17853
+  type: 'test'
+  ...
+# Subtest: window consumed original V5 kernel: private_kernel_does_not_apply_request_domain_wrapper
+ok 510 - window consumed original V5 kernel: private_kernel_does_not_apply_request_domain_wrapper
+  ---
+  duration_ms: 0.08593
+  type: 'test'
+  ...
+# Subtest: window consumed original model: train_identity
+ok 511 - window consumed original model: train_identity
+  ---
+  duration_ms: 0.090316
+  type: 'test'
+  ...
+# Subtest: window consumed original model: receiver_defaults
+ok 512 - window consumed original model: receiver_defaults
+  ---
+  duration_ms: 0.053741
+  type: 'test'
+  ...
+# Subtest: window consumed original model: pulse
+ok 513 - window consumed original model: pulse
+  ---
+  duration_ms: 0.065078
+  type: 'test'
+  ...
+# Subtest: window consumed original model: state_defaults
+ok 514 - window consumed original model: state_defaults
+  ---
+  duration_ms: 0.079691
+  type: 'test'
+  ...
+# Subtest: window consumed original model: duplicate_rank
+ok 515 - window consumed original model: duplicate_rank
+  ---
+  duration_ms: 0.116816
+  type: 'test'
+  ...
+# Subtest: window consumed original model: duplicate_unit
+ok 516 - window consumed original model: duplicate_unit
+  ---
+  duration_ms: 0.06613
+  type: 'test'
+  ...
+# Subtest: window consumed original model: duplicate_receiver
+ok 517 - window consumed original model: duplicate_receiver
+  ---
+  duration_ms: 0.058128
+  type: 'test'
+  ...
+# Subtest: window consumed original model: missing_order_member
+ok 518 - window consumed original model: missing_order_member
+  ---
+  duration_ms: 0.050786
+  type: 'test'
+  ...
+# Subtest: window consumed original model: duplicate_order_member
+ok 519 - window consumed original model: duplicate_order_member
+  ---
+  duration_ms: 0.09274
+  type: 'test'
+  ...
+# Subtest: window consumed original model: spent_unknown_receiver
+ok 520 - window consumed original model: spent_unknown_receiver
+  ---
+  duration_ms: 0.065989
+  type: 'test'
+  ...
+# Subtest: window consumed original model: reentry_unknown_receiver
+ok 521 - window consumed original model: reentry_unknown_receiver
+  ---
+  duration_ms: 0.054883
+  type: 'test'
+  ...
+# Subtest: window consumed original model: paint_without_actual_color
+ok 522 - window consumed original model: paint_without_actual_color
+  ---
+  duration_ms: 0.057767
+  type: 'test'
+  ...
+# Subtest: window consumed original model: unknown_parent
+ok 523 - window consumed original model: unknown_parent
+  ---
+  duration_ms: 0.057918
+  type: 'test'
+  ...
+# Subtest: window consumed original model: parent_not_prior
+ok 524 - window consumed original model: parent_not_prior
+  ---
+  duration_ms: 0.053551
+  type: 'test'
+  ...
+# Subtest: window consumed original model: duplicate_firing_bound
+ok 525 - window consumed original model: duplicate_firing_bound
+  ---
+  duration_ms: 0.091719
+  type: 'test'
+  ...
+# Subtest: window consumed original model: nonpositive_firing_bound
+ok 526 - window consumed original model: nonpositive_firing_bound
+  ---
+  duration_ms: 0.093331
+  type: 'test'
+  ...
+# Subtest: window consumed original model: negative_beat
+ok 527 - window consumed original model: negative_beat
+  ---
+  duration_ms: 0.090657
+  type: 'test'
+  ...
+# Subtest: window consumed original model: null_default_list
+ok 528 - window consumed original model: null_default_list
+  ---
+  duration_ms: 0.094433
+  type: 'test'
+  ...
+# Subtest: window consumed original model: unknown_visitation
+ok 529 - window consumed original model: unknown_visitation
+  ---
+  duration_ms: 0.077577
+  type: 'test'
+  ...
+# Subtest: window consumed original model: zero_size
+ok 530 - window consumed original model: zero_size
+  ---
+  duration_ms: 0.078618
+  type: 'test'
+  ...
+# Subtest: window consumed original model: oversized_window
+ok 531 - window consumed original model: oversized_window
+  ---
+  duration_ms: 0.072699
+  type: 'test'
+  ...
+# Subtest: window consumed original model: unknown_action
+ok 532 - window consumed original model: unknown_action
+  ---
+  duration_ms: 0.051348
+  type: 'test'
+  ...
+# Subtest: window consumed original model: unknown_field
+ok 533 - window consumed original model: unknown_field
+  ---
+  duration_ms: 0.069455
+  type: 'test'
+  ...
+# Subtest: window consumed original model: empty_identity
+ok 534 - window consumed original model: empty_identity
+  ---
+  duration_ms: 0.051217
+  type: 'test'
+  ...
+# Subtest: window consumed original model: numeric_string_rank
+ok 535 - window consumed original model: numeric_string_rank
+  ---
+  duration_ms: 0.141244
+  type: 'test'
+  ...
+# Subtest: window consumed original model: boolean_capture_coercion
+ok 536 - window consumed original model: boolean_capture_coercion
+  ---
+  duration_ms: 0.047802
+  type: 'test'
+  ...
+# Subtest: window named native boundary: unsafe_truncated_domain_exact_decimal
+ok 537 - window named native boundary: unsafe_truncated_domain_exact_decimal
+  ---
+  duration_ms: 0.217408
+  type: 'test'
+  ...
+# Subtest: window named native boundary: unsafe_integer_rank
+ok 538 - window named native boundary: unsafe_integer_rank
+  ---
+  duration_ms: 0.078238
+  type: 'test'
+  ...
+# Subtest: window reference binds its actual generator, pinned originals and newly executed case population
+ok 539 - window reference binds its actual generator, pinned originals and newly executed case population
+  ---
+  duration_ms: 27.138068
+  type: 'test'
+  ...
+# Subtest: completed cooperative plans preserve the complete original tuple, product order and costs
+ok 540 - completed cooperative plans preserve the complete original tuple, product order and costs
+  ---
+  duration_ms: 4.224472
+  type: 'test'
+  ...
+# Subtest: native cancellation after a cooperative yield discards every partially enumerated candidate
+ok 541 - native cancellation after a cooperative yield discards every partially enumerated candidate
+  ---
+  duration_ms: 2.15749
+  type: 'test'
+  ...
+# Subtest: native deadlines before work and after the final coverage never expose complete plans
+ok 542 - native deadlines before work and after the final coverage never expose complete plans
+  ---
+  duration_ms: 2.830627
+  type: 'test'
+  ...
+# Subtest: completed native proposal and current guard equal the original full source outputs
+ok 543 - completed native proposal and current guard equal the original full source outputs
+  ---
+  duration_ms: 20.555378
+  type: 'test'
+  ...
+# Subtest: aborted native proposal and guard grant no authority and acquire no attempts
+ok 544 - aborted native proposal and guard grant no authority and acquire no attempts
+  ---
+  duration_ms: 2.148346
+  type: 'test'
+  ...
+# Subtest: Window entry retains source output and rejects unrelated declared entries
+ok 545 - Window entry retains source output and rejects unrelated declared entries
+  ---
+  duration_ms: 3.152102
+  type: 'test'
+  ...
+# Subtest: native record delegates once and the source state predicate excludes launches alone
+ok 546 - native record delegates once and the source state predicate excludes launches alone
+  ---
+  duration_ms: 6.141568
+  type: 'test'
+  ...
+# Subtest: complete Window checkpoints are detached, immutable, atomic and preserve JSON types
+ok 547 - complete Window checkpoints are detached, immutable, atomic and preserve JSON types
+  ---
+  duration_ms: 5.544566
+  type: 'test'
+  ...
+# Subtest: native raster boundary refuses malformed portable pixels without acquiring source knowledge
+ok 548 - native raster boundary refuses malformed portable pixels without acquiring source knowledge
+  ---
+  duration_ms: 0.224689
+  type: 'test'
+  ...
+# Subtest: passive Window capture preserves Promise, return and exception identities and actual execution arguments
+ok 549 - passive Window capture preserves Promise, return and exception identities and actual execution arguments
+  ---
+  duration_ms: 1.181024
+  type: 'test'
+  ...
+# Subtest: passive Window capture exposes observer failures without replacing original returns or undefined rejections
+ok 550 - passive Window capture exposes observer failures without replacing original returns or undefined rejections
+  ---
+  duration_ms: 0.325241
+  type: 'test'
+  ...
+# Subtest: passive Window prefix capture reads persisted checkpoints and actual source facts without invoking persistence
+ok 551 - passive Window prefix capture reads persisted checkpoints and actual source facts without invoking persistence
+  ---
+  duration_ms: 5.412867
+  type: 'test'
+  ...
+1..551
+# tests 603
+# suites 0
+# pass 603
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 194959.66909

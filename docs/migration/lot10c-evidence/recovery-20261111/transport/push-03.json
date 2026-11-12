@@ -1,0 +1,22 @@
+{
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "ref": "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111",
+  "head": "3d90f4a90675f479c8ee706b3ff8d925a42c4d58",
+  "pushedCommit": "3d90f4a90675f479c8ee706b3ff8d925a42c4d58",
+  "remote": "3d90f4a90675f479c8ee706b3ff8d925a42c4d58",
+  "requiredAdvertisedHeadsVerified": {
+    "refs/heads/lot10c-ordered-recruitment-checkpoint-20261111": "f228e7255335bad5eebe350e082e6f1f896b5bb5"
+  },
+  "remoteVerified": true,
+  "sourceOnly": true,
+  "published": false,
+  "uncommittedPaths": 124,
+  "workingTreeClean": false,
+  "globalLockAcquired": false,
+  "peerQuietGateUsed": false,
+  "workingTreeQualification": "Only the immutable committed revision is saved; uncommitted work remains local and is not included in this checkpoint",
+  "verifiedAt": "2026-11-11T21:29:26.471Z",
+  "transportGroup": 3,
+  "proofFiles": 36,
+  "rawProofBytes": 19043286
+}

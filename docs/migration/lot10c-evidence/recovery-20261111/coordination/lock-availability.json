@@ -1,0 +1,80 @@
+{
+  "schema": "logos-engine.lot10c.recovery-lock-availability.v1",
+  "observedAt": "2026-11-11T20:42:14.650043+00:00",
+  "probes": [
+    {
+      "path": "/workspace/shared/sra-coordination/performance.lock",
+      "device": 27,
+      "inode": 1971854,
+      "exclusive": {
+        "acquired": true,
+        "releasedImmediately": true
+      },
+      "shared": {
+        "acquired": true,
+        "releasedImmediately": true
+      }
+    },
+    {
+      "path": "/workspace/shared/sra-coordination/publication.lock",
+      "device": 27,
+      "inode": 1971855,
+      "exclusive": {
+        "acquired": true,
+        "releasedImmediately": true
+      },
+      "shared": {
+        "acquired": true,
+        "releasedImmediately": true
+      }
+    }
+  ],
+  "sourceOpeningSucceeded": true,
+  "sourceOpeningCommit": "3df0fc780f479e51f51aaceb2a32ec287b67671d",
+  "peerStates": {
+    "lot5c": {
+      "updated_at": "2026-11-11T20:39:04.511712+00:00",
+      "phase": "recovery02_closed_cost_unmeasured_publication_pending",
+      "active_command": null,
+      "quiet_requested": false,
+      "performance_started": false,
+      "quiet_request_id": "lot5c-cost-a33a5f88-recovery-02",
+      "quiet_released_at": "2026-11-11T20:30:25.610691+00:00"
+    },
+    "lot6b": {
+      "updated_at": "2026-11-11T20:31:07.200353+00:00",
+      "phase": "post_recovery02_release_functional_checkpoint_closure",
+      "active_command": "Source-only checkpoint transport preparation and documentary closure. KLOT readback only if separately charged; no new game or cost.",
+      "quiet_requested": false,
+      "performance_started": false,
+      "quiet_request_id": "lot5c-cost-a33a5f88-recovery-02",
+      "quiet_released_at": null
+    },
+    "lot8a": {
+      "updated_at": "2026-11-11T20:41:32.029580+00:00",
+      "phase": "next_functional_qualification_source_review",
+      "active_command": "New user-authorized next step: inspect available common proofs and11 recorded regressions on unchanged validated composition. No execution, game, cost or publication started.",
+      "quiet_requested": null,
+      "performance_started": false,
+      "quiet_request_id": "lot5c-cost-a33a5f88-final-01",
+      "quiet_released_at": null
+    },
+    "lot10c": {
+      "updated_at": "2026-11-11T20:01:17.074830+00:00",
+      "phase": "prepared-composition-documentary-closure",
+      "active_command": "Source-only ancestor transport:18 declared sequential steps,one verified; each<=180s under SH with fresh quiet checks and exact advertised/ref verification. No automatic next step, no main update or publication.",
+      "quiet_requested": false,
+      "performance_started": false,
+      "quiet_request_id": "lot5c-cost-a33a5f88-final-01",
+      "quiet_released_at": "2026-11-11T17:53:53.132648+00:00"
+    }
+  },
+  "claim": "Instantaneous availability of the unchanged mutex only. No holder was killed, no lock was deleted or replaced. No performance isolation, fresh peer ACK or cost acceptance is claimed. Prior recovery02 quiet request was explicitly released.",
+  "publicationOrder": [
+    "5C/0.63",
+    "6B/0.64",
+    "8A/0.65",
+    "10C/0.66"
+  ],
+  "newCostRequestIssued": false
+}

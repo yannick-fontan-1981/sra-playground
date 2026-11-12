@@ -1,0 +1,11 @@
+{
+  "schema": "logos-engine.executor-command-handle.v1",
+  "sessionId": 94287,
+  "startedAt": "2026-11-11T21:00:51.167224+00:00",
+  "kind": "same_declared_ten_archived_cases",
+  "perCaseTimeoutSeconds": 1200,
+  "maximumConcurrentReplays": 1,
+  "ownedTTY": true,
+  "receipt": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional02/regression-launch.json",
+  "noAutomaticFollowup": true
+}

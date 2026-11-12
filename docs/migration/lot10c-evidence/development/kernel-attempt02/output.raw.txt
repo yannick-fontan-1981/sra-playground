@@ -1,0 +1,370 @@
+TAP version 13
+# Subtest: Recruitment has one cold owner and its exact source entry and common stored workflow
+ok 1 - Recruitment has one cold owner and its exact source entry and common stored workflow
+  ---
+  duration_ms: 2148.73042
+  type: 'test'
+  ...
+# Subtest: cold common caller acquires an actual foreign return, then recruitment.select and WHY/ACT release one current append
+not ok 2 - cold common caller acquires an actual foreign return, then recruitment.select and WHY/ACT release one current append
+  ---
+  duration_ms: 2134.610453
+  type: 'test'
+  location: '/workspace/sites/sra-lot10c-20261111/.sites-checkout/tests/v6-ordered-recruitment-kernel.test.ts:86:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    ... Skipped lines
+    
+      {
+        attempts: {},
+        continuation: null,
+        epoch: 1,
+        last: {
+    ...
+          ],
+    +     returned_frames: 1,
+    -     returned_frames: 2,
+          status: 'observed_ordered_interface'
+        },
+        methods: [
+          {
+            command: {
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    attempts:
+    continuation: ~
+    epoch: 1
+    last:
+      boundary: false
+      events:
+        0:
+          command:
+            action_ref: 'ACTION5'
+          evidence:
+            0: 'ordered:synthetic:epoch:1:revision:1:frame:d5f0d4bb9b92bc61'
+            1: 'ordered:synthetic:epoch:1:revision:2:frame:1ec35e58a98ee9ff'
+          kind: 'legend_direction_calibrated_by_actual_single_enemy_return'
+          observed_pair:
+            0: 0
+            1: 1
+          signature:
+            grid_pitch: 2
+            grid_side: 3
+            legend_pair_count: 3
+            room_shape:
+              0: 21
+              1: 13
+          source_epoch: 1
+          unknown:
+            0: 'other_relation_outcomes'
+            1: 'tie_outcome'
+            2: 'full_queue_order'
+      evidence:
+        0: 'ordered:synthetic:epoch:1:revision:1:frame:d5f0d4bb9b92bc61'
+        1: 'ordered:synthetic:epoch:1:revision:2:frame:1ec35e58a98ee9ff'
+      returned_frames: 2
+      status: 'observed_ordered_interface'
+    methods:
+      0:
+        command:
+          action_ref: 'ACTION5'
+        evidence:
+          0: 'ordered:synthetic:epoch:1:revision:1:frame:d5f0d4bb9b92bc61'
+          1: 'ordered:synthetic:epoch:1:revision:2:frame:1ec35e58a98ee9ff'
+        kind: 'legend_direction_calibrated_by_actual_single_enemy_return'
+        observed_pair:
+          0: 0
+          1: 1
+        signature:
+          grid_pitch: 2
+          grid_side: 3
+          legend_pair_count: 3
+          room_shape:
+            0: 21
+            1: 13
+        source_epoch: 1
+        unknown:
+          0: 'other_relation_outcomes'
+          1: 'tie_outcome'
+          2: 'full_queue_order'
+    order:
+      0:
+        0: 2
+        1: 18
+        2: 22
+        3: 30
+      1:
+        0: 30
+        1: 18
+        2: 50
+        3: 30
+    portable:
+  actual:
+    epoch: 1
+    order:
+      0:
+        0: 2
+        1: 18
+        2: 22
+        3: 30
+      1:
+        0: 30
+        1: 18
+        2: 50
+        3: 30
+    methods:
+      0:
+        command:
+          action_ref: 'ACTION5'
+        evidence:
+          0: 'ordered:synthetic:epoch:1:revision:1:frame:d5f0d4bb9b92bc61'
+          1: 'ordered:synthetic:epoch:1:revision:2:frame:1ec35e58a98ee9ff'
+        kind: 'legend_direction_calibrated_by_actual_single_enemy_return'
+        observed_pair:
+          0: 0
+          1: 1
+        signature:
+          grid_pitch: 2
+          grid_side: 3
+          legend_pair_count: 3
+          room_shape:
+            0: 21
+            1: 13
+        source_epoch: 1
+        unknown:
+          0: 'other_relation_outcomes'
+          1: 'tie_outcome'
+          2: 'full_queue_order'
+    portable:
+    attempts:
+    continuation: ~
+    last:
+      boundary: false
+      events:
+        0:
+          command:
+            action_ref: 'ACTION5'
+          evidence:
+            0: 'ordered:synthetic:epoch:1:revision:1:frame:d5f0d4bb9b92bc61'
+            1: 'ordered:synthetic:epoch:1:revision:2:frame:1ec35e58a98ee9ff'
+          kind: 'legend_direction_calibrated_by_actual_single_enemy_return'
+          observed_pair:
+            0: 0
+            1: 1
+          signature:
+            grid_pitch: 2
+            grid_side: 3
+            legend_pair_count: 3
+            room_shape:
+              0: 21
+              1: 13
+          source_epoch: 1
+          unknown:
+            0: 'other_relation_outcomes'
+            1: 'tie_outcome'
+            2: 'full_queue_order'
+      evidence:
+        0: 'ordered:synthetic:epoch:1:revision:1:frame:d5f0d4bb9b92bc61'
+        1: 'ordered:synthetic:epoch:1:revision:2:frame:1ec35e58a98ee9ff'
+      returned_frames: 1
+      status: 'observed_ordered_interface'
+  operator: 'deepStrictEqual'
+  stack: |-
+    coldCalibration (file:///workspace/sites/sra-lot10c-20261111/.sites-checkout/tests/v6-ordered-recruitment-kernel.test.ts:50:51)
+    async TestContext.<anonymous> (file:///workspace/sites/sra-lot10c-20261111/.sites-checkout/tests/v6-ordered-recruitment-kernel.test.ts:93:5)
+    async Test.run (node:internal/test_runner/test:1409:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: a selected no-effect recruitment is retained as an attempt and cannot immediately repeat
+not ok 3 - a selected no-effect recruitment is retained as an attempt and cannot immediately repeat
+  ---
+  duration_ms: 1963.456756
+  type: 'test'
+  location: '/workspace/sites/sra-lot10c-20261111/.sites-checkout/tests/v6-ordered-recruitment-kernel.test.ts:134:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    ... Skipped lines
+    
+      {
+        attempts: {},
+        continuation: null,
+        epoch: 1,
+        last: {
+    ...
+          ],
+    +     returned_frames: 1,
+    -     returned_frames: 2,
+          status: 'observed_ordered_interface'
+        },
+        methods: [
+          {
+            command: {
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    attempts:
+    continuation: ~
+    epoch: 1
+    last:
+      boundary: false
+      events:
+        0:
+          command:
+            action_ref: 'ACTION5'
+          evidence:
+            0: 'ordered:synthetic:epoch:1:revision:1:frame:d5f0d4bb9b92bc61'
+            1: 'ordered:synthetic:epoch:1:revision:2:frame:1ec35e58a98ee9ff'
+          kind: 'legend_direction_calibrated_by_actual_single_enemy_return'
+          observed_pair:
+            0: 0
+            1: 1
+          signature:
+            grid_pitch: 2
+            grid_side: 3
+            legend_pair_count: 3
+            room_shape:
+              0: 21
+              1: 13
+          source_epoch: 1
+          unknown:
+            0: 'other_relation_outcomes'
+            1: 'tie_outcome'
+            2: 'full_queue_order'
+      evidence:
+        0: 'ordered:synthetic:epoch:1:revision:1:frame:d5f0d4bb9b92bc61'
+        1: 'ordered:synthetic:epoch:1:revision:2:frame:1ec35e58a98ee9ff'
+      returned_frames: 2
+      status: 'observed_ordered_interface'
+    methods:
+      0:
+        command:
+          action_ref: 'ACTION5'
+        evidence:
+          0: 'ordered:synthetic:epoch:1:revision:1:frame:d5f0d4bb9b92bc61'
+          1: 'ordered:synthetic:epoch:1:revision:2:frame:1ec35e58a98ee9ff'
+        kind: 'legend_direction_calibrated_by_actual_single_enemy_return'
+        observed_pair:
+          0: 0
+          1: 1
+        signature:
+          grid_pitch: 2
+          grid_side: 3
+          legend_pair_count: 3
+          room_shape:
+            0: 21
+            1: 13
+        source_epoch: 1
+        unknown:
+          0: 'other_relation_outcomes'
+          1: 'tie_outcome'
+          2: 'full_queue_order'
+    order:
+      0:
+        0: 2
+        1: 18
+        2: 22
+        3: 30
+      1:
+        0: 30
+        1: 18
+        2: 50
+        3: 30
+    portable:
+  actual:
+    epoch: 1
+    order:
+      0:
+        0: 2
+        1: 18
+        2: 22
+        3: 30
+      1:
+        0: 30
+        1: 18
+        2: 50
+        3: 30
+    methods:
+      0:
+        command:
+          action_ref: 'ACTION5'
+        evidence:
+          0: 'ordered:synthetic:epoch:1:revision:1:frame:d5f0d4bb9b92bc61'
+          1: 'ordered:synthetic:epoch:1:revision:2:frame:1ec35e58a98ee9ff'
+        kind: 'legend_direction_calibrated_by_actual_single_enemy_return'
+        observed_pair:
+          0: 0
+          1: 1
+        signature:
+          grid_pitch: 2
+          grid_side: 3
+          legend_pair_count: 3
+          room_shape:
+            0: 21
+            1: 13
+        source_epoch: 1
+        unknown:
+          0: 'other_relation_outcomes'
+          1: 'tie_outcome'
+          2: 'full_queue_order'
+    portable:
+    attempts:
+    continuation: ~
+    last:
+      boundary: false
+      events:
+        0:
+          command:
+            action_ref: 'ACTION5'
+          evidence:
+            0: 'ordered:synthetic:epoch:1:revision:1:frame:d5f0d4bb9b92bc61'
+            1: 'ordered:synthetic:epoch:1:revision:2:frame:1ec35e58a98ee9ff'
+          kind: 'legend_direction_calibrated_by_actual_single_enemy_return'
+          observed_pair:
+            0: 0
+            1: 1
+          signature:
+            grid_pitch: 2
+            grid_side: 3
+            legend_pair_count: 3
+            room_shape:
+              0: 21
+              1: 13
+          source_epoch: 1
+          unknown:
+            0: 'other_relation_outcomes'
+            1: 'tie_outcome'
+            2: 'full_queue_order'
+      evidence:
+        0: 'ordered:synthetic:epoch:1:revision:1:frame:d5f0d4bb9b92bc61'
+        1: 'ordered:synthetic:epoch:1:revision:2:frame:1ec35e58a98ee9ff'
+      returned_frames: 1
+      status: 'observed_ordered_interface'
+  operator: 'deepStrictEqual'
+  stack: |-
+    coldCalibration (file:///workspace/sites/sra-lot10c-20261111/.sites-checkout/tests/v6-ordered-recruitment-kernel.test.ts:50:51)
+    async TestContext.<anonymous> (file:///workspace/sites/sra-lot10c-20261111/.sites-checkout/tests/v6-ordered-recruitment-kernel.test.ts:138:5)
+    async Test.run (node:internal/test_runner/test:1409:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: order and last alone survive the common checkpoint without inventing a retained source method
+ok 4 - order and last alone survive the common checkpoint without inventing a retained source method
+  ---
+  duration_ms: 2017.576522
+  type: 'test'
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 2
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 9437.003261

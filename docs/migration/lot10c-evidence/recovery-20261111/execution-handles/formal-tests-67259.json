@@ -1,0 +1,7 @@
+{
+  "schema": "logos-engine.executor-command-handle.v1",
+  "kind": "formal_affected_tests",
+  "sessionId": 67259,
+  "receipt": "docs/migration/lot10c-evidence/recovery-20261111/composed-functional01/validation/delta-tests-run.json",
+  "noAutomaticFollowup": true
+}
