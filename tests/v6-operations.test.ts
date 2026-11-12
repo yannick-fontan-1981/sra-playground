@@ -50,7 +50,7 @@ test('OP29 distinguishes confirmed, refuted and unknown', () => {
   assert.deepEqual(executeOperation('OP29', state()).value, {
     orientation: { expected: 1, observed: 1, status: 'confirmed' },
     color: { expected: 'blue', observed: 'red', status: 'refuted' },
-    door: { expected: 'open', observed: undefined, status: 'unknown' },
+    door: { expected: 'open', observed: null, status: 'unknown' },
   });
 });
 
@@ -217,7 +217,7 @@ test('OP23 predicts only proved cycles and keeps unproved autonomy unknown', () 
   });
   assert.deepEqual(executeOperation('OP23', s).value, [
     { entity: 'clock', next: 'b', evidence: 'obs-cycle' },
-    { entity: 'wanderer', next: 'unknown', evidence: undefined },
+    { entity: 'wanderer', next: 'unknown' },
   ]);
 });
 
@@ -316,4 +316,51 @@ test('OP11 exposes the supplied effect-to-requirement links without authorizing 
     A: ['B'],
     B: ['C'],
   });
+});
+
+
+test('Python None parity treats missing structural fields like explicit null in OP01 signatures', () => {
+  const s = state();
+  s.compositions = [
+    { id: 'X', requires: {}, effect: {} },
+    { id: 'Y', requires: {}, effect: {}, context: null },
+  ];
+  assert.deepEqual(executeOperation('OP01', s).value, [['X', 'Y']]);
+});
+
+test('OP02 canonical equivalence treats missing optional constraints like Python None', () => {
+  const s = state();
+  Object.assign(s, {
+    paths: [
+      { id: 'p1', post_state_complete: true, post_state: { room: 2 } },
+      { id: 'p2', post_state_complete: true, post_state: { room: 2 }, constraints_verified: null },
+    ],
+  });
+  assert.deepEqual(executeOperation('OP02', s).value, [['p1', 'p2']]);
+});
+
+test('OP20 and OP21 expose missing questions as null like Python dict.get', () => {
+  const s = state();
+  Object.assign(s, {
+    entities: [{ id: 'e1', utility: 'unknown' }],
+    spaces: [{ id: 's1', utility: 'unknown' }],
+  });
+  assert.deepEqual(executeOperation('OP20', s).value, [
+    { entity: 'e1', status: 'utility_hypothesis', question: null },
+  ]);
+  assert.deepEqual(executeOperation('OP21', s).value, [
+    { space: 's1', status: 'utility_hypothesis', question: null },
+  ]);
+});
+
+test('OP31 preserves explicit null while defaulting only missing fields', () => {
+  const s = state();
+  s.objective_assessments = [
+    { composition_ref: 'G1', satisfied: null, feasible: null, new_evidence: null },
+    { composition_ref: 'G2' },
+  ];
+  assert.deepEqual(executeOperation('OP31', s).value, [
+    { composition_ref: 'G1', satisfied: null, feasible: null, new_evidence: null },
+    { composition_ref: 'G2', satisfied: 'unknown', feasible: 'unknown', new_evidence: [] },
+  ]);
 });
