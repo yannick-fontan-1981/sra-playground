@@ -1,0 +1,32 @@
+{
+  "schema": "logos-engine.lot8b.common-functional-command.v1",
+  "status": "passed",
+  "kind": "typecheck",
+  "command": [
+    "node",
+    "node_modules/typescript/bin/tsc",
+    "--noEmit"
+  ],
+  "timeoutSeconds": 120,
+  "startedAt": "2026-11-12T04:27:12.933264+00:00",
+  "cwd": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+  "headBefore": "b5d34121d6d1e79ae673372b5969d4883dcd9de8",
+  "inputCount": 2443,
+  "globalLockAcquired": false,
+  "officialPerformanceMeasurement": false,
+  "gameExecution": false,
+  "gameReplay": false,
+  "published": false,
+  "finishedAt": "2026-11-12T04:27:21.942033+00:00",
+  "elapsedSeconds": 9.006518691001475,
+  "exitCode": 0,
+  "inputsUnchanged": true,
+  "changedInputPaths": [],
+  "log": {
+    "path": "docs/migration/lot8b-evidence/common-integration-01/typecheck-01/output.log.gz",
+    "bytes": 20,
+    "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+  },
+  "testCounts": {},
+  "outputs": []
+}

@@ -1,0 +1,45 @@
+{
+  "schema": "logos-engine.lot8b.common-functional-command.v1",
+  "status": "passed",
+  "kind": "branch",
+  "command": [
+    "node",
+    "--test",
+    "--test-concurrency=1",
+    "--test-reporter=tap",
+    "tests/v6-branch-routing-reference.test.ts",
+    "tests/v6-branch-routing-contract.test.ts",
+    "tests/v6-branch-routing-public-boundary.test.ts",
+    "tests/v6-branch-routing-kernel.test.ts"
+  ],
+  "timeoutSeconds": 360,
+  "startedAt": "2026-11-12T04:27:12.933312+00:00",
+  "cwd": "/workspace/sites/sra-lot8b-branch-routing-20261112/.sites-checkout",
+  "headBefore": "b5d34121d6d1e79ae673372b5969d4883dcd9de8",
+  "inputCount": 2447,
+  "globalLockAcquired": false,
+  "officialPerformanceMeasurement": false,
+  "gameExecution": false,
+  "gameReplay": false,
+  "published": false,
+  "finishedAt": "2026-11-12T04:27:26.433831+00:00",
+  "elapsedSeconds": 13.498214327999449,
+  "exitCode": 0,
+  "inputsUnchanged": true,
+  "changedInputPaths": [],
+  "log": {
+    "path": "docs/migration/lot8b-evidence/common-integration-01/branch-01/output.log.gz",
+    "bytes": 5650,
+    "sha256": "99ad246e6258326705659e92f3ccebb3b54a7e5c9fee068376112b6ab9805d3a"
+  },
+  "testCounts": {
+    "tests": 281,
+    "suites": 0,
+    "pass": 281,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "outputs": []
+}

@@ -53,6 +53,7 @@ const aliases: Record<string, string> = {
   rigid_port_assembly: 'port_assembly', controlled_constellation_cover: 'constellation_cover', conserved_band_transfer: 'band_transfer',
   supported_ternary_reduction: 'reduction_transport',
   motif_conditioned_access: 'motif_access',
+  parallel_branch_routing: 'branch_routing',
 };
 const lists: [string, readonly string[]][] = [
   ['goal_access', configuration.goal_access_subquestions],

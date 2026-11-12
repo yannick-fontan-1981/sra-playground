@@ -28,15 +28,35 @@ const hasData = (command: R): boolean => Boolean(command.data && Object.keys(com
 const plainRecord = (value: any): value is R => value !== null && typeof value === 'object' && !Array.isArray(value)
   && [Object.prototype, null].includes(Object.getPrototypeOf(value));
 const integer = (value: any): value is number => Number.isSafeInteger(value);
-const validPoint = (value: any): value is BranchPoint => Array.isArray(value) && value.length === 2 && value.every(integer);
-const validPosition = (value: any): value is BranchPoint => validPoint(value) && value.every(x => x >= 0);
+// validateRows in v6-native-observer.ts admits nonempty W*H <= 65_536 public
+// matrices. This is a total surface budget, not a separate budget per axis.
+// The boundary test pins this retained-state derivation to that public checker.
+const PUBLIC_FRAME_PIXELS = 65_536;
+const validPoint = (value: any): value is BranchPoint => Array.isArray(value) && value.length === 2
+  && integer(value[0]) && integer(value[1]);
+const validPosition = (value: any): value is BranchPoint => validPoint(value)
+  && value.every(x => x >= 0 && x < PUBLIC_FRAME_PIXELS);
+const publicSurface = (width: number, height: number): boolean => integer(width) && integer(height)
+  && width >= 1 && height >= 1 && width <= Math.floor(PUBLIC_FRAME_PIXELS / height);
+/** A nonempty public slice contains its nonnegative origin. Its predicted box
+ * may extend beyond the raster, so do not require the whole box here. */
+function publicOrigins(positions: any): positions is BranchPoint[] {
+  if (!Array.isArray(positions) || !positions.length || positions.length > PUBLIC_FRAME_PIXELS) return false;
+  let width = 1, height = 1;
+  for (const position of positions) {
+    if (!validPosition(position)) return false;
+    width = Math.max(width, position[0] + 1); height = Math.max(height, position[1] + 1);
+  }
+  return publicSurface(width, height);
+}
 const color = (value: any): value is number => integer(value) && value >= 0 && value <= 255;
 const unique = (items: unknown[]): boolean => new Set(items.map(branchTupleKey)).size === items.length;
 const exactKeys = (value: R, keys: readonly string[]): boolean => Object.keys(value).length === keys.length && keys.every(key => Object.hasOwn(value, key));
 const validMotion = (value: any): value is Record<string, BranchPoint> => plainRecord(value)
-  && Object.entries(value).every(([key, vector]) => key.length > 0 && validPoint(vector) && ((vector[0] === 0) !== (vector[1] === 0)));
+  && Object.entries(value).every(([key, vector]) => key.length > 0 && validPoint(vector)
+    && vector.every(component => Math.abs(component) < PUBLIC_FRAME_PIXELS) && ((vector[0] === 0) !== (vector[1] === 0)));
 const validState = (value: any): value is BranchState => Array.isArray(value) && value.length === 2
-  && Array.isArray(value[0]) && value[0].length > 0 && value[0].every(validPosition)
+  && publicOrigins(value[0])
   && unique(value[0]) && integer(value[1]) && value[1] >= 0 && value[1] < value[0].length;
 function assertJson(value: any, active = new Set<object>()): void {
   if (value === null || typeof value === 'string' || typeof value === 'boolean' || integer(value)) return;
@@ -46,21 +66,57 @@ function assertJson(value: any, active = new Set<object>()): void {
 function validModel(value: any): value is BranchModel {
   if (!plainRecord(value) || !exactKeys(value, ['axis', 'tangent', 'sign', 'unit', 'goals', 'sources', 'bars', 'active', 'highlight', 'order', 'limit', 'goal_boxes'])
     || ![0, 1].includes(value.axis) || value.tangent !== 1 - value.axis || ![-1, 1].includes(value.sign)
-    || !integer(value.unit) || value.unit < 1 || !integer(value.limit) || value.limit < 0 || !color(value.highlight)
-    || !Array.isArray(value.bars) || !value.bars.length || !value.bars.every((bar: any) => plainRecord(bar)
-      && exactKeys(bar, ['position', 'length', 'hue']) && validPosition(bar.position) && integer(bar.length) && bar.length >= 2 && color(bar.hue))
+    || !publicSurface(value.unit, value.unit) || !integer(value.limit) || value.limit < 1
+    || value.limit > Math.floor(PUBLIC_FRAME_PIXELS / value.unit) || !color(value.highlight)) return false;
+  // The quotient checks precede all geometry products. Every retained bar is
+  // a different measured component; its complete pixel area counts once.
+  const unitArea = value.unit * value.unit;
+  if (!Array.isArray(value.bars) || !value.bars.length || value.bars.length > Math.floor(PUBLIC_FRAME_PIXELS / (2 * unitArea))
+    || !value.bars.every((bar: any) => plainRecord(bar)
+      && exactKeys(bar, ['position', 'length', 'hue']) && validPosition(bar.position) && integer(bar.length) && bar.length >= 2
+      && bar.length <= Math.floor(PUBLIC_FRAME_PIXELS / unitArea) && color(bar.hue))
     || !integer(value.active) || value.active < 0 || value.active >= value.bars.length || value.bars[value.active].hue !== value.highlight
     || !Array.isArray(value.order) || value.order.length !== value.bars.length || !unique(value.order)
     || !value.order.every((index: any) => integer(index) && index >= 0 && index < value.bars.length)
-    || !Array.isArray(value.goals) || !value.goals.length || !value.goals.every((n: any, i: number) => integer(n) && n >= 0 && (i === 0 || value.goals[i - 1] < n))
-    || !Array.isArray(value.sources) || !value.sources.length || !value.sources.every((n: any, i: number) => integer(n) && n >= 0 && (i === 0 || value.sources[i - 1] <= n))
-    || !Array.isArray(value.goal_boxes) || value.goal_boxes.length < 2 || !value.goal_boxes.every((box: any) => Array.isArray(box)
-      && box.length === 4 && box.every((n: any) => integer(n) && n >= 0) && box[2] - box[0] + 1 === value.unit && box[3] - box[1] + 1 === value.unit)) return false;
+    || !Array.isArray(value.goals) || !value.goals.length || value.goals.length > value.limit
+    || !value.goals.every((n: any, i: number) => integer(n) && n >= 0 && n < value.limit && (i === 0 || value.goals[i - 1] < n))
+    || !Array.isArray(value.sources) || !value.sources.length || value.sources.length > Math.floor(PUBLIC_FRAME_PIXELS / unitArea)
+    || !value.sources.every((n: any, i: number) => integer(n) && n >= 0 && n < value.limit && (i === 0 || value.sources[i - 1] <= n))
+    || !Array.isArray(value.goal_boxes) || value.goal_boxes.length < 2 || value.goal_boxes.length > PUBLIC_FRAME_PIXELS
+    || !value.goal_boxes.every((box: any) => Array.isArray(box) && box.length === 4
+      && box.every((n: any) => integer(n) && n >= 0 && n < PUBLIC_FRAME_PIXELS)
+      && box[2] - box[0] + 1 === value.unit && box[3] - box[1] + 1 === value.unit)) return false;
+  // The source retains floor(tangentExtent / unit), not the original shape.
+  // Its aligned bars/cavities fit within unit*limit. A compatible initial
+  // rectangle must contain both that extent and all retained normal positions.
+  const tangentExtent = value.unit * value.limit;
+  let normalExtent = 1, unusedPixels = PUBLIC_FRAME_PIXELS;
+  for (const bar of value.bars) {
+    const area = unitArea * bar.length;
+    if (area > unusedPixels || bar.position[value.tangent] + value.unit * bar.length > tangentExtent) return false;
+    unusedPixels -= area; normalExtent = Math.max(normalExtent, bar.position[value.axis] + value.unit);
+  }
+  for (const box of value.goal_boxes) {
+    if (box[value.tangent + 2] + 1 > tangentExtent) return false;
+    normalExtent = Math.max(normalExtent, box[value.axis + 2] + 1);
+  }
+  if (!publicSurface(normalExtent, tangentExtent)) return false;
   const expectedOrder = value.bars.map((_: any, i: number) => i).sort((a: number, b: number) => value.sign * (value.bars[a].position[value.axis] - value.bars[b].position[value.axis]));
   return equal(expectedOrder, value.order)
     && value.bars.every((bar: any) => bar.position[value.tangent] % value.unit === 0)
     && new Set(value.goal_boxes.map((box: any) => box[value.axis])).size === 1
     && equal([...new Set<number>(value.goal_boxes.map((box: any) => box[value.tangent] / value.unit))].sort((a, b) => a - b), value.goals);
+}
+/** current is set only from complete measured identities. The public shape may
+ * change within an epoch; use a separate possible rectangle from the model's. */
+function publicMeasuredPositions(positions: BranchPoint[], model: BranchModel): boolean {
+  let width = 1, height = 1;
+  for (let i = 0; i < positions.length; i++) {
+    const position = positions[i]!, length = model.bars[i]!.length;
+    width = Math.max(width, position[0] + model.unit * (model.tangent === 0 ? length : 1));
+    height = Math.max(height, position[1] + model.unit * (model.tangent === 1 ? length : 1));
+  }
+  return publicSurface(width, height);
 }
 const tupleCompare = (left: any, right: any): number => {
   if (Array.isArray(left) && Array.isArray(right)) {
@@ -71,6 +127,9 @@ const tupleCompare = (left: any, right: any): number => {
 };
 function checkedSnapshot(snapshot: R): R {
   const value = structuredClone(snapshot); assertJson(value);
+  // Old events do not retain their historical models or frame dimensions.
+  // Check each state's necessary public origin domain independently. These
+  // checks neither authenticate provenance nor impose a total history quota.
   if (!plainRecord(value) || value.format !== 'native.branch_routing.v1' || !(value.epoch === null || integer(value.epoch))
     || !validMotion(value.motion) || !Array.isArray(value.passed) || !value.passed.every((item: any) => plainRecord(item)
       && exactKeys(item, ['score', 'ref']) && integer(item.score) && typeof item.ref === 'string')
@@ -98,6 +157,7 @@ function checkedSnapshot(snapshot: R): R {
   if (value.model === null) {
     if (value.current.length || value.verified.length || value.seen.length || Object.keys(value.refs).length || value.finished) throw new TypeError('BranchRouting context without a measured model');
   } else if (value.current.length !== value.model.bars.length || !unique(value.current)
+    || !publicMeasuredPositions(value.current, value.model)
     || value.seen.some((item: any) => item[1].length !== value.model.bars.length)) throw new TypeError('Inconsistent BranchRouting current identities');
   return value;
 }
@@ -119,7 +179,8 @@ export class BranchRouting {
     return structuredClone(value);
   }
   /** Validate all detached data before replacing any owner field. Historical
-   * event identities are checked independently of the current epoch model. */
+   * event identities are checked independently of the current epoch model;
+   * predicted seen/event poses retain the source's partial-slice semantics. */
   restore(snapshot: R): void {
     const value = checkedSnapshot(snapshot);
     this.epoch = value.epoch; this.motion = value.motion; this.passed = value.passed; this.events = value.events;

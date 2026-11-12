@@ -35,6 +35,7 @@ import { AddressedMaterial, ADDRESSED_NATIVE_SEARCH_BOUNDS } from './v6-addresse
 import { ObservedBinding, OBSERVED_BINDING_NATIVE_SEARCH_BOUNDS } from './v6-observed-binding.ts';
 import { ReductionTransport } from './v6-reduction-transport.ts';
 import { MotifAccess, MOTIF_ACCESS_NATIVE_SEARCH_BOUNDS } from './v6-motif-access.ts';
+import { BranchRouting, BranchRoutingIncomplete, BRANCH_ROUTING_NATIVE_SEARCH_BOUNDS } from './v6-branch-routing.ts';
 import { motifLattice, motifBody } from './v6-motif-access-geometry.ts';
 import { retainedReductionSuccess, reductionAcquiredContinuationWitness, continuationProposalDigest,
   CONTINUATION_PROPOSAL_DIGEST_PROFILE } from './v6-acquired-continuation.ts';
@@ -126,6 +127,10 @@ const NATIVE_CALLER_EXTENSIONS = ['current_epoch_axial_packet_attribution', 'nat
   'current_point_witness_rebind_for_equivalent_descriptions',
   'bounded_reduction_search_retained_as_unknown',
   'bounded_motif_access_paths_with_current_deadline',
+  'bounded_branch_routing_with_stable_current_inputs',
+  'validated_branch_routing_public_checkpoint',
+  'single_owner_branch_routing_selected_acquisition',
+  'branch_routing_incomplete_public_return_and_suffix_retention',
   'observed_stationary_reception_from_public_packet_frames',
   'current_uniform_reception_and_required_control_questions',
   'current_typed_analogy_control_prerequisite_question',
@@ -1228,14 +1233,24 @@ export class NativeV6Runtime implements NativeV6Backend {
       deadlineMs: acquisitionNow + Math.min(remainingActiveMs, callerRemainingMs) };
     const compositionReturns: R[] = [];
     const nativeAcquisitionsIncomplete: R[] = [];
+    // An unacquired BranchRouting return leaves a gap in this owner's ordered
+    // history. Keep every later physical return, but do not apply its suffix
+    // over that gap. Other source owners still reconcile their own returns once.
+    let branchAcquisitionBarrier: { observation_ref: string; index: number } | null = null;
     const recordSelected = async (transition: WitnessedTransition): Promise<R | null> => {
       this.check(execution);
       const common = this.caller && CALLER_PROVIDERS.includes(prefix.family.id as typeof CALLER_PROVIDERS[number]);
       const selectedSupport = this.acquisitionFamilies && Boolean(prefix.proposal.support_plan);
       const selectedFamily = selectedSupport ? this.acquisitionFamilies!.supports : prefix.family;
-      // Only the bounded binding owner consumes the native scheduling argument.
+      // These bounded selected owners consume the native scheduling argument.
       // Other source adapters retain their exact historical argument lists.
-      const record = common ? null : selectedFamily === this.acquisitionFamilies?.binding
+      const record = common ? null : selectedFamily.id === 'branch_routing' && branchAcquisitionBarrier
+        ? { events: [], native_acquisition_incomplete: true,
+          native_acquisition_refusal: branchAcquisitionRefusal(transition.after, {
+            reason: 'earlier_selected_acquisition_incomplete', source_record_attempted: false,
+            blocked_by: structuredClone(branchAcquisitionBarrier),
+          }) }
+        : selectedFamily === this.acquisitionFamilies?.binding || selectedFamily.id === 'branch_routing'
         ? await selectedFamily.record(transition.before, transition.after, transition.command,
           transition.first.frame_rows, transition.second.frame_rows, prefix.proposal, transition.index, transition.second.frame_packet, acquisitionExecution)
         : await selectedFamily.record(transition.before, transition.after, transition.command,
@@ -1245,6 +1260,9 @@ export class NativeV6Runtime implements NativeV6Backend {
       freeze(structuredClone(record));
       this.acquiredRecordCount += 1;
       const selectedIncomplete = record?.native_acquisition_incomplete === true;
+      if (selectedIncomplete && selectedFamily.id === 'branch_routing' && !branchAcquisitionBarrier) {
+        branchAcquisitionBarrier = { observation_ref: transition.after.observation_ref, index: transition.index };
+      }
       if (selectedIncomplete) nativeAcquisitionsIncomplete.push(this.acquisitionIncompletionReceipt(selectedFamily, 'selected', transition,
         record.native_acquisition_refusal as NativeRecord));
       if (!selectedIncomplete && record && this.caller && this.authority) this.retainSelectedAcquisition(selectedFamily, record, transition);
@@ -1334,7 +1352,7 @@ export class NativeV6Runtime implements NativeV6Backend {
   private retainSelectedAcquisition(family: NativeFamily, record: NativeRecordResult, transition: WitnessedTransition): void {
     const memory = this.authority!.memory, after = transition.after;
     const singleEventKeys: Record<string, string> = { window_constraints: 'window_constraint', regular_field_correspondence: 'symmetric_field',
-      orbit_constraints: 'orbit_constraint', containment: 'containment', surface_program: 'surface', code_program: 'codes', band_transfer: 'bands', reduction_transport: 'reduction', motif_access: 'motif',
+      orbit_constraints: 'orbit_constraint', containment: 'containment', surface_program: 'surface', code_program: 'codes', band_transfer: 'bands', reduction_transport: 'reduction', motif_access: 'motif', branch_routing: 'branches',
       visual_sequences: 'visual_sequence_event', feedback_sequences: 'feedback_sequence_event', relative_arrangements: 'relative_arrangement_event', facet_examples: 'facet_example_event', slot_substitution: 'slots', word_interface: 'words', port_assembly: 'ports', constellation_cover: 'constellations',
       public_framed_transfer: 'framed_transfer_event', public_outline_service: 'outline_service_event',
       public_observed_inventory: 'observed_inventory_event', public_ordered_reaction: 'reaction_event', public_reactive_contact: 'reactive_event',
@@ -1392,7 +1410,13 @@ export class NativeV6Runtime implements NativeV6Backend {
       throw new TypeError('An incomplete acquisition must bind its actual return without action authority');
     }
     const receipt = { family: family.id, mode, before: transition.before.observation_ref,
-      after: after.observation_ref, command: structuredClone(transition.command), refusal: structuredClone(refusal) };
+      after: after.observation_ref, command: structuredClone(transition.command), refusal: structuredClone(refusal),
+      ...(family.id === 'branch_routing' ? {
+        acquired: false, release_authority: false,
+        proposal_ref: `prefix_evidence:${this.prefix!.revision}`,
+        public_transition: structuredClone(transition),
+        continuation: 'terminal_stop_without_automatic_reacquisition',
+      } : {}) };
     this.note({ kind: 'native_acquisition_incomplete', ...receipt });
     return receipt;
   }
@@ -1845,7 +1869,7 @@ function fieldFamily(field: WindowConstraints): NativeFamily {
 }
 
 /** These original families return one event and preserve absent action data. */
-function originalEventFamily(family: OrbitConstraints | Containment | SurfaceProgram | CodeProgram | BandTransfer | ReductionTransport | MotifAccess): NativeFamily {
+function originalEventFamily(family: OrbitConstraints | Containment | SurfaceProgram | CodeProgram | BandTransfer | ReductionTransport | MotifAccess | BranchRouting): NativeFamily {
   return {
     id: family.familyId,
     propose: async (observation, rows, inputs, remaining) => await family.propose(observation, rows, inputs, remaining) as NativeProposal | null,
@@ -1854,6 +1878,45 @@ function originalEventFamily(family: OrbitConstraints | Containment | SurfacePro
     after: (proposal, index, before, after, first, second) => family.after(proposal, index, before, after, first, second) as NativeAfterResult,
     record: (before, after, command, first, second, proposal, index, frames) => ({ events: [family.record(before, after, command, first, second, proposal, index, frames)] }),
     state: () => family.state(), restore: state => family.restore(state),
+  };
+}
+
+/** An incomplete computation is not a negative physical response. These fields
+ * bind the unacquired official return consumed by the common sealing protocol. */
+function branchAcquisitionRefusal(after: NativeObservation, detail: R): R {
+  return { schema: 'logos-engine.native.bounded-acquisition-refusal.v1', rule: 'native.bounded_branch_routing_acquisition',
+    provider: 'branch_routing', status: 'unknown', release_authority: false,
+    observation_ref: after.observation_ref, level_epoch: after.level_epoch, frame_hash: after.frame_hash,
+    revision: after.revision, levels_completed: after.levels_completed,
+    frontier: { complete: false }, ...detail };
+}
+
+/** Keep source method signatures inside the owner. The common adapter owns
+ * immutable measured inputs, scheduling, refusal barriers and return retention. */
+function branchRoutingFamily(): NativeFamily {
+  const owner = new BranchRouting({ boundedSearch: BRANCH_ROUTING_NATIVE_SEARCH_BOUNDS });
+  return {
+    ...originalEventFamily(owner),
+    propose: async (observation, rows, inputs, remaining, execution) => {
+      const stable = freeze(structuredClone({ observation, rows, inputs }));
+      return await owner.propose(stable.observation, stable.rows, stable.inputs, remaining, execution) as NativeProposal | null;
+    },
+    currentProposalRefusal: observation => {
+      const refusal = owner.currentProposalRefusal(observation);
+      return refusal ? { ...refusal, block_unrelated_probe: true, frontier: { complete: false } } : null;
+    },
+    record: (before, after, command, first, second, proposal, index, frames, execution) => {
+      try { return { events: [owner.record(before, after, command, first, second, proposal, index, frames, execution)] }; }
+      catch (error) {
+        if (!(error instanceof BranchRoutingIncomplete)) throw error;
+        return { events: [], native_acquisition_incomplete: true,
+          native_acquisition_refusal: branchAcquisitionRefusal(after, {
+            reason: 'branch_routing_acquisition_incomplete', source_record_attempted: true,
+            search_status: 'resource_bound', search_phase: error.phase, reached_bound: error.cause,
+            examined: error.examined, bounds: { ...error.bounds },
+          }) };
+      }
+    },
   };
 }
 
@@ -2155,6 +2218,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     propose: async (observation, rows, inputs, remaining, execution) => await motifOwner.propose(observation, rows, inputs, remaining, execution) as NativeProposal | null,
     currentProposalRefusal: observation => motifOwner.currentProposalRefusal(observation),
   }, 'material_access_subquestion', 'motif_conditioned_access');
+  const branches = subquestionFamily(branchRoutingFamily(), 'material_access_subquestion', 'parallel_branch_routing');
   const visualContinuation = configuration.scored_local_rewrite.minimum_completed_rows_for_visual_continuation as number | undefined;
   const visual = visualFirst || visualContinuation ? visualSequenceFamily(new VisualSequences(), visualContinuation) : null;
   const interfaces = createNativeInterfaceFamilies();
@@ -2192,7 +2256,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     animated_contact: new AnimatedContact(policy.animated_contact_question),
   };
   const supports = new SupportNavigation(supportChildren, policy);
-  const families: NativeFamily[] = [windows, symmetric, orbit, containment, surface, code, band, framed, outline, inventory, reactive, reaction, recolor, axial, window, recruitment, workshop, symbols, fields, binding, morphology, reduction, motifs, recall, supports, feedback, arrangements, facets, preview, selectedRigid, linkedTemporal, ...Object.values(supportChildren), ...(visual ? [visual] : []), ...Object.values(interfaces)];
+  const families: NativeFamily[] = [windows, symmetric, orbit, containment, surface, code, band, framed, outline, inventory, reactive, reaction, recolor, axial, window, recruitment, workshop, symbols, fields, binding, morphology, reduction, motifs, branches, recall, supports, feedback, arrangements, facets, preview, selectedRigid, linkedTemporal, ...Object.values(supportChildren), ...(visual ? [visual] : []), ...Object.values(interfaces)];
   const registeredSubquestions = (order: readonly string[], registered: Record<string, NativeFamily>): string[] =>
     order.flatMap(question => registered[question] ? [registered[question].id] : []);
   // The cell, occurrence and program source entries share one acquired journal, but
@@ -2228,7 +2292,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     scored_local_rewrite: ['scored_local_rewrite', ...(visual && visualContinuation ? [visual.id] : [])],
     factored_material_return: configuration.factored_material_return.ordered_subquestions.flatMap(question => {
       const registered: Record<string, string> = { factored_material_return: 'factored_material_return', conditional_transit: 'conditional_transit',
-        conserved_band_transfer: band.id, supported_ternary_reduction: reduction.id, motif_conditioned_access: motifs.id, ordered_support_transfer: ordered.id,
+        conserved_band_transfer: band.id, supported_ternary_reduction: reduction.id, motif_conditioned_access: motifs.id, parallel_branch_routing: branches.id, ordered_support_transfer: ordered.id,
         observed_framed_transfer: framed.id, observed_outline_service: outline.id, observed_inventory_composition: inventory.id,
         reactive_contact_continuation: reactive.id, reactive_contact: reactive.id, ordered_reaction: reaction.id, topological_recolor: recolor.id,
         axial_question: axial.id, window_question: window.id, ordered_recruitment: recruitment.id, observed_ranked_workshop: workshop.id, observed_symbol_transaction: symbols.id, observed_addressed_material: fields.id, observed_object_binding: binding.id };
@@ -2248,7 +2312,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   });
   const materialEntryPoints = configuration.factored_material_return.ordered_subquestions.flatMap<string | null>(question => {
     if (['observed_framed_transfer', 'observed_inventory_composition', 'reactive_contact_continuation', 'reactive_contact', 'ordered_reaction', 'topological_recolor', 'axial_question', 'window_question', 'ordered_recruitment', 'observed_ranked_workshop', 'observed_symbol_transaction', 'observed_addressed_material', 'observed_object_binding'].includes(question)) return [question];
-    return ['factored_material_return', 'conditional_transit', 'motif_conditioned_access', 'conserved_band_transfer', 'supported_ternary_reduction', 'ordered_support_transfer', 'observed_outline_service'].includes(question)
+    return ['factored_material_return', 'conditional_transit', 'motif_conditioned_access', 'parallel_branch_routing', 'conserved_band_transfer', 'supported_ternary_reduction', 'ordered_support_transfer', 'observed_outline_service'].includes(question)
       || supportChildren[question] ? [null] : [];
   });
   const groups: NativeSelectionGroup[] = loaded.strategy.declarations[0]!.configuration.families.map(id => ({
