@@ -1877,6 +1877,17 @@ Le [rapport 7A](lot7a-ranked-workshop.md) et la [filiation source → TypeScript
 
 **Entrées restantes :** `chart_navigation`, `region_intervention`, `joint_channels`.
 
+**État vérifié dans Site 108 / native 0.67 :** les trois entrées restent `pending`, sans propriétaire enregistré, dans le [registre publié](v6-entry-point-progress.json). Les workflows DRM/SRC correspondants figurent déjà parmi les 37 programmes compilés dans [programs.json](../../src/logos-engine/v6/programs.json). Le travail restant porte sur les propriétaires TypeScript, leurs callbacks, l'acquisition et le raccordement commun. La vérification locale n'atteste aucun travail parallèle du lot 9.
+
+| Sous-lot | Propriétaire et workflow existant | Travail prévu |
+| --- | --- | --- |
+| **9A, prochaine étape fonctionnelle** | `ChartNavigation` / `v6.chart_navigation.choose` | Figer les sources et cas consommés ; transférer géométrie et propriétaire, fournir `chart.select`, puis qualifier proposition, acquisition, persistance et restauration. |
+| 9B | `RegionIntervention` / `v6.region_intervention.choose` | Fournir `region.select`, mesurer les régions touchées, acquérir les effets et conserver les contradictions. |
+| 9C | `JointChannels` / `v6.joint_channels.choose` | Fournir `channels.select`, préserver les affectations réfutées, la recherche bornée et la portée des prévisions. |
+| Suivi distinct hors 76 | `DiscreteNetwork` / `v6.discrete_network.choose` | Fournir `network.measure` et `network.bind` au repli source de `scored_local_rewrite`, sans l'ajouter au compteur matériel. |
+
+L'ordre 9A → 9B → 9C est un découpage de livraison, pas une dépendance de code imposée. Les positions source restent 24, 25 et 28 dans le groupe matériel ; l'acquisition passive conserve son ordre distinct **channels → regions → chart → recolor**, avec une seule acquisition par propriétaire. Pour 9A, transférer uniquement le chemin V5 consommé de `inventory_gated_navigation.py` (`ChartNode`, `ChartLink`, `ChartFragment`, `_chart_decode`) et les contrats mécaniques associés ; garder les positions alternatives, les coordonnées rationnelles et les liens effectivement observés.
+
 **Dépendances :** cartes, régions, transitions, images intermédiaires pertinentes et budgets. `topological_recolor` est acquis à la base V58 et doit rester vérifié sur les contrats affectés. Traiter aussi `discrete_network` s'il demeure absent de l'appelant commun, **hors compteur 76**, à sa position source. Une prévision de canaux absente ou périmée conserve le comportement source prévu.
 
 **Critères de fin :** transition révisant positions/chemins/affectations possibles ; intervention mesurant régions touchées et conservant les effets contraires ; affectation réfutée modifiant le plan ; prévisions limitées à leur portée valide ; contribution réelle, restauration et recherche bornée de chaque chemin ; non-régression de Recolor.
@@ -1889,7 +1900,7 @@ Le [rapport 7A](lot7a-ranked-workshop.md) et la [filiation source → TypeScript
 | --- | --- | --- |
 | 10A | `axial_question` / `v6.axial_question.choose` | Publié dans Sites 90–91 / 0.56, intégré et fonctionnel vérifié : 1 538 tests, 5 contrôles, 119 comparaisons et QA TRIA trois niveaux/17 actions/17 plans ; publications 7B/Sites 88–89 réconciliées, coût global accepté et entrées de publication vérifiées ; publication privée confirmée, contribution propre en partie ouverte |
 | 10B | `window_question` / `v6.window_question.choose` | **Livré dans Site 102 / native 0.62, avec réserve HPDL partielle** : 310 natifs/ 768 entrées gelées, digest `74143a7…`, registre 64/76 ; 1 205 tests, 5 contrôles, 10 rejeux/ 170 comparaisons passés. HPDL02 : 3 niveaux, 39 retours, arrêt 300 s ; PARTIAL 93 appels/ 76 restaurations/ 38 préfixes sans divergence, 152 ablations dont 95 appliquées et 23 changements. QA pause 2/action 3/reprise jusqu’à 7 actions et 1 niveau ; seconde attente de pause expirée conservée. Apport propre observé, réussite six niveaux et full caller non établis. Horloge 1 909,1412980339917 s débités / 490,85870196600837 s restants. Structure 8 formes/ 62 actions, préflight 77/77 et intégrité passés ; **coût global accepté : STCK +5,400572929772963 %, SMLP −1,7989027140400675 %**, revue 10 297/10 297 passée. Phase restauration SMLP +26,34362955231715 % conservée ; agrégateur historique strict sorti 1 et qualification déclarée distincte. Publication native 0.62 effective dans Site 102. Prochaine étape : 10C / `ordered_recruitment`, puis 10D / `temporal_selection` et 10E / `invited_endpoints`. |
-| 10C | `ordered_recruitment` / `v6.ordered_recruitment.choose` | Développement parallèle en cours ; qualification et publication non attestées à ce point de coordination |
+| 10C | `ordered_recruitment` / `v6.ordered_recruitment.choose` | **Publié dans Site 107 / native 0.66**, source `4ff7bf45286a8a19d34401988adca587253ae41e`, puis intégré à 0.67. Réserve de coût officiel propre à 10C conservée : non mesuré et non accepté. |
 | 10D | `temporal_selection` / `v6.temporal_selection.choose` | À réaliser |
 | 10E | `invited_endpoints` / `v6.invited_endpoints.choose` | À réaliser |
 
