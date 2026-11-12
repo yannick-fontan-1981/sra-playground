@@ -185,3 +185,15 @@ test('a worker error clears the failed worker so the next request gets a fresh w
   assert.equal((await second).gameCode, 'RECOVERED');
   runtime.dispose();
 });
+
+
+test('result without code or gameCode is rejected as an invalid worker response', async () => {
+  const { runtime, worker } = harness();
+  const pending = runtime.action(5);
+  const invalid = result('CASC') as Record<string, unknown>;
+  delete invalid.code;
+
+  worker.emitMessage({ id: 1, result: invalid });
+
+  await assert.rejects(pending, /invalid response/);
+});
