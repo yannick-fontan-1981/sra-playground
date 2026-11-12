@@ -321,3 +321,78 @@ Aucun coût ajouté. Statut C3 : **analyse de recouvrement avancée, intégratio
 ### Prochaine étape concrète
 
 Continuer C2 sur le donneur V6 : rechercher les consommateurs réels d'OP29 et OP31 et, pour OP30, une lecture ultérieure de la connaissance persistée afin de distinguer « persistance » de « contribution à une décision ».
+
+
+## C2 — consommation donneuse qualifiée
+
+Le détail est enregistré dans `docs/migration/op01-op31-c2-donor-consumption.md`.
+
+### Périmètre réellement couvert
+
+Lecture du cœur V6 donneur :
+- `operations.py` ;
+- `composition.py` ;
+- `src_bridge.py` ;
+- `composition_cases.py` ;
+- `composition_benchmark.py`.
+
+### OP qualifiées
+
+- **OP18** : calcul, appel, consommation et contribution à la garde physique de release démontrés dans le donneur.
+- **OP28** : calcul, appel, consommation et contribution à la garde physique de release démontrés dans le donneur.
+- **OP29** : calcul + résultat exposé dans le rapport, mais aucun consommateur décisionnel interne démontré.
+- **OP30** : résultat consommé par `persist()` et écrit en mémoire avec preuve/révision. Contribution à une décision future non démontrée.
+- **OP31** : calcul + résultat exposé dans le rapport, mais aucun propriétaire d'objectif consommateur démontré.
+
+### Besoins / producteurs / consommateurs
+
+- OP18 : producteurs spécialisés réels → `src_apply()` → `operation_admission()` → garde release.
+- OP28 : bundle admis → OP28 → `operation_admission()` → garde release.
+- OP29 : expected/observed → résultat tri-état → rapport ; lecteur décisionnel manquant.
+- OP30 : updates étayées/révision courante → OP30 → `persist()` → mémoire.
+- OP31 : assessments → résultat → rapport ; lecteur objectif manquant.
+
+### Appels utiles / appels sans effet démontré
+
+- OP18/OP28 : effet de garde démontré.
+- OP30 : effet d'écriture démontré, effet décisionnel futur non.
+- OP29/OP31 : actuellement `information_only` dans le cœur examiné, sauf preuve d'un consommateur externe.
+
+### Besoin non raccordé / dette de preuve détectée
+
+Le benchmark V6 commente qu'il relit « un contrat et une mise à jour OP30 » après reopen, mais son code ne relit que `composition_contract`. La clé de connaissance OP30 n'est pas vérifiée après réouverture.
+
+Dette C2 explicite :
+- tester la survie de `knowledge:B:color` après reopen/restauration ;
+- montrer ensuite une lecture décisionnelle, ou conserver la disposition « persistance seulement ».
+
+### Tests exécutés
+
+Aucun test relancé dans ce chantier.
+Les constats viennent de la lecture directe du code et des cas/benchmarks existants.
+
+### Performance
+
+Aucun changement runtime sra-playground ; aucune nouvelle mesure requise.
+Statut C2 : **qualification donneuse avancée, coût du port à confirmer après intégration**.
+
+### Feuille de route actualisée
+
+| Lot | État | Prochaine preuve concrète |
+| --- | --- | --- |
+| C0 | **terminé** | registre conservé |
+| C1 | **préparé** | instrumenter le port TypeScript dès disponibilité |
+| C2 | **qualifié sur donneur pour 18/28 ; partiel 29/30/31** | trouver lecteur OP29/31 ; prouver restauration + lecture future OP30 |
+| C3 | **recouvrement spécialisé qualifié** | chercher besoins réellement non couverts avant raccordement |
+| C4 | préparé | OP01/02/05/10/15/25 |
+| C5 | préparé | OP06/07/13/20/21/22/23 |
+| C6 | préparé | OP16/17/19/24/27 |
+| C7 | en attente | consolidation + performances |
+
+### Prochaine étape concrète
+
+Poursuivre C2 en recherchant dans le donneur V6 :
+1. un consommateur externe du rapport OP29 ;
+2. un propriétaire d'objectif consommant OP31 ;
+3. une lecture de `knowledge:<composition>:<property>` écrite par OP30.
+Si aucun lecteur n'existe, documenter explicitement ces opérations comme sorties informationnelles/persistées sans contribution décisionnelle démontrée.
