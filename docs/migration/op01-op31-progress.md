@@ -1067,3 +1067,22 @@ Statut C3 actualisé :
 Ces preuves qualifient les calculs/contrats du noyau TypeScript reconstruit.
 Elles ne prouvent toujours pas qu'un besoin runtime réel appelle chacune de ces OP :
 aucun raccordement artificiel n'est ajouté.
+
+
+## C4 — preuves TypeScript de regroupement et objectifs ajoutées
+
+Tests ajoutés à `tests/v6-operations.test.ts` :
+
+- OP02 : un chemin sans `post_state_complete === true` force `incomplete` et reste hors équivalence prouvée ;
+- OP05 : les compositions de même effet sont exposées comme ambiguïté sans sélection automatique ;
+- OP10 : seuls les goals terminaux déclarés sont retournés ;
+- OP15 : seuls les objectifs intermédiaires non terminés et dont les conditions sont satisfaites sont retenus ;
+- OP25 : un candidat non réfuté reste candidat sans être promu en faisabilité prouvée.
+
+Suite locale complète OP/C7 après ajout :
+**41/41 tests passent**, typecheck strict OK.
+
+Statut C4 :
+les calculs du noyau TypeScript reconstruit sont désormais mieux verrouillés,
+mais aucun consommateur runtime générique supplémentaire n'est démontré.
+Aucun appel artificiel n'est ajouté.
