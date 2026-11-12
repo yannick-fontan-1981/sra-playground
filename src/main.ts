@@ -337,7 +337,7 @@ function perform(action: number, data?: { x: number; y: number }): void {
   const state = productReadinessState();
   void dispatchProductAction(state, action, data, {
     action: (nextAction, nextData) => runtime.action(nextAction, nextData),
-    present: (next, generation) => present(next as GameObservation, generation, false),
+    present: (next, generation) => present(next, generation, false),
     now: () => performance.now(),
     generation: () => selectionGeneration,
     setBusy: value => {
