@@ -549,3 +549,84 @@ Le détail est enregistré dans `docs/migration/op01-op31-c3-specialized-overlap
 - **OP14** : consommation réelle dans `operation_admission()` et contribution à la garde de release démontrées ; la couche `common_preservation.py` reste l'autorité plus forte pour les témoins, révisions et inconnues.
 
 C3 possède maintenant une disposition explicite pour ses huit OP.
+
+
+## C7 — consolidation provisoire
+
+La matrice consolidée des 31 OP est enregistrée dans
+`docs/migration/op01-op31-c7-provisional-consolidation.md`.
+
+### Périmètre réellement couvert
+
+Les 31 opérations disposent maintenant d'une disposition explicite issue du
+plan et du donneur Python V6 :
+- contribution décisionnelle démontrée ;
+- recouvrement spécialisé ;
+- calcul disponible mais usage non démontré ;
+- producteur manquant ;
+- résultat exposé sans consommateur ;
+- dette de preuve précise.
+
+### OP qualifiées / dispositions finales provisoires
+
+Contribution donneuse démontrée :
+- OP14 : garde physique + préservation spécialisée ;
+- OP18 : garde de release d'expérience ;
+- OP28 : garde de release de réalisation ;
+- OP30 : consommation jusqu'à écriture mémoire, mais décision future ouverte.
+
+Résultat sans contribution décisionnelle démontrée :
+- OP29 ;
+- OP31.
+
+Recouvrements spécialisés substantiels :
+- OP03/04/06/07/08/11/12/13/15/17/22/24/26.
+
+Besoins génériques non démontrés ou producteurs manquants :
+- OP01/02/05/09/10/16/19/20/21/23/25/27 selon le détail C7.
+
+### Besoins non raccordés prioritaires
+
+- lecteur décisionnel OP29 ;
+- restauration + lecture future OP30 ;
+- propriétaire d'objectif OP31 ;
+- tri-état générique OP03 hors familles si nécessaire ;
+- deadlock global prouvé OP16 ;
+- preuve de pas forcé OP19 ;
+- cycle autonome prédictif OP23 ;
+- générateur de permutations OP27.
+
+### Tests
+
+Aucun test runtime sra-playground exécuté : le port TypeScript du plan reste absent.
+Les preuves actuelles sont des lectures directes du donneur V6 et des contrats existants.
+
+### Performance
+
+Statut :
+**audit fonctionnel donneur très avancé ; intégration du port TypeScript et coût consolidé à confirmer.**
+
+C7 n'est pas clos tant que :
+- C1 n'a pas instrumenté le port réel ;
+- toute modification C2-C6 n'a pas été mesurée ;
+- STCK et SMLP n'ont pas été comparés séparément au prédécesseur et à la baseline stable.
+
+### Feuille de route actualisée
+
+| Lot | État | Suite |
+| --- | --- | --- |
+| C0 | **terminé** | registre stable |
+| C1 | **préparé, bloqué uniquement par absence du port TS** | instrumentation et scénarios S-C1-1..5 |
+| C2 | **audit donneur avancé** | OP29/30/31 dettes ciblées |
+| C3 | **audit donneur complet** | aucun raccordement sans besoin non couvert |
+| C4 | **audit donneur complet** | aucun appel sans consommateur |
+| C5 | **audit donneur complet** | préserver boucle informationnelle existante |
+| C6 | **audit donneur complet** | préserver inconnue vs impossibilité |
+| C7 | **consolidation provisoire complète** | réconciliation port TS + performance finale |
+
+### Prochaine étape concrète
+
+Le prochain travail à valeur maximale est désormais C1 sur le checkout TypeScript
+`src/logos-engine/v6-*`. En attendant sa disponibilité, les seules dettes utiles
+à approfondir dans le donneur sont OP29/30/31 ; les autres familles ont désormais
+une disposition explicite et ne justifient pas d'ajout artificiel.
