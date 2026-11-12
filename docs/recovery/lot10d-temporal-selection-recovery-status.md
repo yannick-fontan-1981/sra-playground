@@ -112,10 +112,32 @@ Critère historique conservé :
 
 Le harness officiel n'est pas encore restauré sur cette baseline.
 
-Statut actuel : **fonctionnellement qualifié uniquement pour le noyau Logos déjà présent ; performance officielle à confirmer**.
+Statut actuel : **noyau Logos qualifié dans son périmètre et premier contrat TemporalSelection reconstruit avec 7/7 tests ; performance officielle à confirmer**.
+
+## Premier contrat TemporalSelection reconstruit
+
+Les sources durables suivantes ont permis de reconstruire un premier contrat, sans politique de choix :
+
+- `reference/sra/212d8d426f07/agents/yf_arc3_v5/runtime/compiled_selection_tree.py`
+- `reference/sra/212d8d426f07/agents/yf_arc3_v5/src/arc3/continue_after_information_probe.src`
+- `reference/sra/212d8d426f07/agents/yf_arc3_v5/src/core/release_action.src`
+
+Fichiers ajoutés :
+
+- `src/logos-engine/v6-temporal-selection-contract.ts`
+- `tests/v6-temporal-selection-contract.test.ts`
+- `docs/recovery/lot10d-temporal-selection-contract.md`
+
+Qualification locale ciblée :
+
+- commande : `node --experimental-strip-types --test tests/v6-temporal-selection-contract.test.ts`
+- résultat : **7/7 tests réussis**
+- premier essai sans le flag : échec avant chargement des tests, dû au support TypeScript de Node 22.16 dans ce conteneur
+
+Le contrat actuel reste volontairement séparé du futur sélecteur : il valide l'autorité Source, le domaine des alternatives, la consommation unique d'un retour et la projection fail-closed, mais ne choisit aucun candidat et n'accorde jamais ACT.
 
 ## Prochaine étape
 
-Chercher dans les sources donneuses et documents durables accessibles depuis GitHub un contrat TemporalSelection suffisamment précis pour écrire les premiers tests de reconstruction.
+Établir le **modèle minimal d'état temporel** à partir de sources durables : producteur, événement d'acquisition, portée, restauration, consommateur et effet décisionnel.
 
-Si aucun donneur exact n'est retrouvé, ne pas inventer l'ancien code : documenter le manque et reconstruire explicitement une nouvelle capacité sous un contrat nouveau et traçable.
+Aucun champ historique (`measurement`, `edit`, `pending`, `response`) ne sera ajouté sur la seule base des souvenirs du Site 109. Chaque champ doit être justifié par un contrat ou donneur versionné avant implémentation.
