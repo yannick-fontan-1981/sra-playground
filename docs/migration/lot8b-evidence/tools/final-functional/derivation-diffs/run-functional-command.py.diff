@@ -1,0 +1,47 @@
+--- docs/migration/lot8b-evidence/tools/delivery/run-functional-command.py
++++ docs/migration/lot8b-evidence/tools/final-functional/run-functional-command.py
+@@ -14,7 +14,9 @@
+ import traceback
+ 
+ ROOT = Path(__file__).resolve().parents[5]
+-STAGE = ROOT / 'docs/migration/lot8b-evidence/delivery-qualification-01'
++STAGE = ROOT / 'docs/migration/lot8b-evidence/final-version-067-01'
++DERIVED_FROM = ROOT / 'docs/migration/lot8b-evidence/tools/delivery/run-functional-command.py'
++DERIVED_FROM_SHA256 = '7d1c35fb1a9fe30f1eb0be80f4c60a0f547f6257dd24ac68e88f0ade0a2514f9'
+ 
+ 
+ def now():
+@@ -51,7 +53,7 @@
+     plan = json.loads(plan_path.read_text())
+     assert plan['schema'] == 'logos-engine.lot8b.functional-execution-plan.v1'
+     spec = plan['commands'][args.key]
+-    assert 1 <= spec['timeoutSeconds'] <= 1200
++    assert 1 <= spec['timeoutSeconds'] <= 300
+     attempt = STAGE / args.attempt
+     attempt.mkdir(exist_ok=False)
+     replacements = {'{attempt}': str(attempt), '{root}': str(ROOT),
+@@ -66,7 +68,7 @@
+     declared = {str((ROOT / entry['path']).resolve()): entry['sha256']
+                 for entry in plan['inputFiles']}
+     dependencies = [str((ROOT / expand(path)).resolve()) for path in spec.get('dependencies', [])]
+-    paths = sorted(set(declared) | set(dependencies) | {str(plan_path), str(Path(__file__).resolve())})
++    paths = sorted(set(declared) | set(dependencies) | {str(plan_path), str(Path(__file__).resolve()), str(DERIVED_FROM)})
+ 
+     def inventory():
+         return {path: digest(path) if Path(path).is_file() else None for path in paths}
+@@ -76,6 +78,7 @@
+     record = {'schema': 'logos-engine.lot8b.functional-command.v1', 'key': args.key,
+               'attempt': args.attempt, 'plan': file_info(plan_path), 'command': command,
+               'cwd': str(ROOT), 'startedAt': now(), 'timeoutSeconds': spec['timeoutSeconds'],
++              'generator': file_info(Path(__file__).resolve()), 'derivedFrom': file_info(DERIVED_FROM),
+               'headBefore': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
+               'globalLockAcquired': False, 'officialPerformanceMeasurement': False,
+               'gameEngineExecuted': False, 'published': False, 'status': 'running'}
+@@ -93,6 +96,7 @@
+         signal.signal(sig, interrupted)
+     try:
+         assert all(value is not None for value in before.values()), 'Declared input is missing'
++        assert before[str(DERIVED_FROM)] == DERIVED_FROM_SHA256, 'Original functional supervisor changed'
+         mismatches = [path for path, expected in declared.items() if before[path] != expected]
+         assert not mismatches, f'Frozen inputs changed: {mismatches}'
+         environment = dict(os.environ)

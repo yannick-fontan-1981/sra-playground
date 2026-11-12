@@ -1,0 +1,178 @@
+{
+  "schema": "logos-engine.lot8b.final-functional-tool-derivation.v1",
+  "recordedAt": "2026-11-12T12:08:27.829214+00:00",
+  "status": "source_prepared_not_executed",
+  "sourceCheckpoint": "8918de66cee81b8d20a75a5780ea9aab075aba68",
+  "finalEvidenceDirectory": "docs/migration/lot8b-evidence/final-version-067-01",
+  "candidate": {
+    "version": "0.67.0",
+    "nativeFileCount": 331,
+    "nativeDigest": "c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a"
+  },
+  "baseline": {
+    "version": "0.66.0",
+    "siteVersion": 107,
+    "sourceCommit": "4ff7bf45286a8a19d34401988adca587253ae41e",
+    "nativeFileCount": 329,
+    "nativeDigest": "ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316",
+    "retainedCapture": {
+      "report": {
+        "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-baseline-01/baseline.json.gz",
+        "bytes": 7212928,
+        "sha256": "384a5f5bb3e00174e8113e35387132284e90a6d5a1af5303ecfe9ed0db3df893"
+      },
+      "receipt": {
+        "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-baseline-01/baseline.receipt.json",
+        "bytes": 127765,
+        "sha256": "5aebb7ab6f603f305b28bb3ffd262fc4103f433ea4ac7b0e0db051d75036d084"
+      },
+      "generator": {
+        "path": "docs/migration/lot8b-evidence/tools/delivery/work-forms/capture-cost-owner-graphs.mjs",
+        "bytes": 31412,
+        "sha256": "def20965d488ff15cf225961f407853b29cee0eb22e9119cfe9f1611dcc73a3a"
+      },
+      "derivedFrom": {
+        "path": "docs/migration/lot8a-evidence/tools/work-forms/capture-cost-owner-graphs.mjs",
+        "bytes": 29563,
+        "sha256": "fa7c225349ad2652ff0b45cd53b7f8de7ac94d4131363e5f3c1568340d0a600f"
+      },
+      "cases": {
+        "path": "docs/migration/lot8b-evidence/tools/delivery/work-forms/cases.json",
+        "bytes": 1498,
+        "sha256": "65e27dbcc2f5871ab259358cc46576b2671058630be0b37c643eadad66593173"
+      },
+      "nativeSourceBefore": {
+        "path": "docs/migration/lot8b-evidence/delivery-qualification-01/baseline-native.json",
+        "bytes": 39098,
+        "sha256": "6926e8abdcf9232e4e6d06ad4b60d59e4a8fa473b56a627dc17b7f8ac18d2ac7"
+      }
+    }
+  },
+  "files": [
+    {
+      "original": {
+        "path": "docs/migration/lot8b-evidence/tools/delivery/work-forms/record-owner-source-inventory.mjs",
+        "bytes": 15250,
+        "sha256": "073cec941143449697c06d979c07675d177d53fafd0d7d82abfeb6c446c41eb9"
+      },
+      "derived": {
+        "path": "docs/migration/lot8b-evidence/tools/final-functional/work-forms/record-owner-source-inventory.mjs",
+        "bytes": 15277,
+        "sha256": "af762f71256ce372a3b760f32b3c1687d700e6b1378012e0a1517fe61d1bedc2"
+      },
+      "diff": {
+        "path": "docs/migration/lot8b-evidence/tools/final-functional/derivation-diffs/work-forms__record-owner-source-inventory.mjs.diff",
+        "bytes": 6380,
+        "sha256": "ce28631b90b66514c86fa9cdfee10f2d35e949c85fcf4ca89c7e270bafba2cc9"
+      }
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot8b-evidence/tools/delivery/work-forms/capture-cost-owner-graphs.mjs",
+        "bytes": 31412,
+        "sha256": "def20965d488ff15cf225961f407853b29cee0eb22e9119cfe9f1611dcc73a3a"
+      },
+      "derived": {
+        "path": "docs/migration/lot8b-evidence/tools/final-functional/work-forms/capture-cost-owner-graphs.mjs",
+        "bytes": 31537,
+        "sha256": "9323017b311100aea4a6be6baf9400ca245ee729291253c2181de67e4680b417"
+      },
+      "diff": {
+        "path": "docs/migration/lot8b-evidence/tools/final-functional/derivation-diffs/work-forms__capture-cost-owner-graphs.mjs.diff",
+        "bytes": 4997,
+        "sha256": "acc1639b9d432838bcd7ccf54e3595b85eda16cb18ad7434007df3f48f83d7f6"
+      }
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot8b-evidence/tools/delivery/work-forms/qualify-cost-owner-graphs.mjs",
+        "bytes": 52939,
+        "sha256": "56c73ed40f8b88ce9c7f02300cf4acede74eb37bacfdc94b9542c4a2a21bb662"
+      },
+      "derived": {
+        "path": "docs/migration/lot8b-evidence/tools/final-functional/work-forms/qualify-cost-owner-graphs.mjs",
+        "bytes": 55737,
+        "sha256": "e53153482728e5eca466564d078a459db07871b06d80120cc05ad825ac572f2d"
+      },
+      "diff": {
+        "path": "docs/migration/lot8b-evidence/tools/final-functional/derivation-diffs/work-forms__qualify-cost-owner-graphs.mjs.diff",
+        "bytes": 12418,
+        "sha256": "d01a327c8cb7444e77016bb007534b4c45e20de6c37a221f79418b4159bcafc9"
+      }
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot8b-evidence/tools/delivery/branch-common-capture-v2.mjs",
+        "bytes": 32210,
+        "sha256": "98c4a0af05e929807723669baefd27bc5b7ae30acb60e07c84625a8b420e4eb5"
+      },
+      "derived": {
+        "path": "docs/migration/lot8b-evidence/tools/final-functional/branch-common-capture-v2.mjs",
+        "bytes": 32919,
+        "sha256": "2005fd55c998dea8409dc72b462031a605bd673a04727c513b7f0826e6d43120"
+      },
+      "diff": {
+        "path": "docs/migration/lot8b-evidence/tools/final-functional/derivation-diffs/branch-common-capture-v2.mjs.diff",
+        "bytes": 2720,
+        "sha256": "d31580f76c51f5c14cec47b0bd4b730f45cdff29e3c81fef66354b620c2fa037"
+      }
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot8b-evidence/tools/delivery/branch-common-qualify-v2.mjs",
+        "bytes": 58745,
+        "sha256": "dce80476cad9bcb0db4e838f944692565ae652ed1b7874a6abb153dc9893a457"
+      },
+      "derived": {
+        "path": "docs/migration/lot8b-evidence/tools/final-functional/branch-common-qualify-v2.mjs",
+        "bytes": 59211,
+        "sha256": "c896643777572d4628fbeab0c9819fd22fe0f02111008c5958204a632b4b428b"
+      },
+      "diff": {
+        "path": "docs/migration/lot8b-evidence/tools/final-functional/derivation-diffs/branch-common-qualify-v2.mjs.diff",
+        "bytes": 3220,
+        "sha256": "872cf035d16c9ce329c39253429d2a01add35f7056b71e790a5d68d7a667adf4"
+      }
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot8b-evidence/tools/delivery/run-functional-command.py",
+        "bytes": 7291,
+        "sha256": "7d1c35fb1a9fe30f1eb0be80f4c60a0f547f6257dd24ac68e88f0ade0a2514f9"
+      },
+      "derived": {
+        "path": "docs/migration/lot8b-evidence/tools/final-functional/run-functional-command.py",
+        "bytes": 7698,
+        "sha256": "a49a62551f757750a9598b2ea3a36d0c214ded79f150e3c65bddc74a83103fe9"
+      },
+      "diff": {
+        "path": "docs/migration/lot8b-evidence/tools/final-functional/derivation-diffs/run-functional-command.py.diff",
+        "bytes": 2742,
+        "sha256": "a38cc6e42ec58e75773620c8d0f0fb5f51b4693ec54e1c0c943eeca725653933"
+      }
+    }
+  ],
+  "changesAllowed": [
+    "final native version and exact digest pins",
+    "new output directory and sibling tool paths at unchanged directory depth",
+    "immediate derivation fingerprints bind old8B tools",
+    "paired reader accepts only byte-pinned historical baseline capture and original generator; current generator only for final candidate",
+    "additional exact implementation checks for each captured role and native final Branch graph",
+    "functional supervisor final directory, pinned original generator evidence, and maximum per-command300seconds; child lifecycle/input/output retention unchanged"
+  ],
+  "semanticsPreserved": [
+    "same STCK/SMLP cases manifest and archived traces",
+    "all command, ticket, return, acquisition, owner, graph, restore, identity, ordering and clock attribution checks",
+    "same5Branch synthetic chains26returns and exact sourcefixture",
+    "same cold sessions, budgets, actual public packets, absence semantics and incomplete/ablation interventions",
+    "preparedOnly true and officialPerformanceEligible false; no cost readiness granted",
+    "all raw diffs and exact baseline receipts preserved"
+  ],
+  "sourceOrTestsModified": false,
+  "oldToolsModified": false,
+  "runtimeExecutions": 0,
+  "gameExecutions": 0,
+  "oracleExecutions": 0,
+  "LKEY": "permanently_closed",
+  "independentReviewRequiredBeforeExecution": true
+}

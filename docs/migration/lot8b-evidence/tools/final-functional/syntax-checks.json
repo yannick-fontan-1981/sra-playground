@@ -1,0 +1,68 @@
+{
+  "schema": "logos-engine.lot8b.final-functional-static-syntax.v1",
+  "recordedAt": "2026-11-12T12:08:37.338395+00:00",
+  "status": "passed",
+  "kind": "syntax_only_no_module_import_or_runtime_execution",
+  "checks": [
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-functional/branch-common-capture-v2.mjs",
+      "sha256": "2005fd55c998dea8409dc72b462031a605bd673a04727c513b7f0826e6d43120",
+      "argv": [
+        "node",
+        "--check",
+        "docs/migration/lot8b-evidence/tools/final-functional/branch-common-capture-v2.mjs"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-functional/branch-common-qualify-v2.mjs",
+      "sha256": "c896643777572d4628fbeab0c9819fd22fe0f02111008c5958204a632b4b428b",
+      "argv": [
+        "node",
+        "--check",
+        "docs/migration/lot8b-evidence/tools/final-functional/branch-common-qualify-v2.mjs"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-functional/work-forms/capture-cost-owner-graphs.mjs",
+      "sha256": "9323017b311100aea4a6be6baf9400ca245ee729291253c2181de67e4680b417",
+      "argv": [
+        "node",
+        "--check",
+        "docs/migration/lot8b-evidence/tools/final-functional/work-forms/capture-cost-owner-graphs.mjs"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-functional/work-forms/qualify-cost-owner-graphs.mjs",
+      "sha256": "e53153482728e5eca466564d078a459db07871b06d80120cc05ad825ac572f2d",
+      "argv": [
+        "node",
+        "--check",
+        "docs/migration/lot8b-evidence/tools/final-functional/work-forms/qualify-cost-owner-graphs.mjs"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-functional/work-forms/record-owner-source-inventory.mjs",
+      "sha256": "af762f71256ce372a3b760f32b3c1687d700e6b1378012e0a1517fe61d1bedc2",
+      "argv": [
+        "node",
+        "--check",
+        "docs/migration/lot8b-evidence/tools/final-functional/work-forms/record-owner-source-inventory.mjs"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ]
+}
