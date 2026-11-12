@@ -71,15 +71,17 @@ export interface OperationTraceSnapshot {
  */
 export class OperationTraceSink {
   readonly #capacity: number;
+  readonly #detail: 'full' | 'counters';
   readonly #events: OperationTraceEvent[] = [];
   readonly #counters = new Map<string, number>();
   #dropped = 0;
 
-  constructor(capacity = 128) {
+  constructor(capacity = 128, detail: 'full' | 'counters' = 'full') {
     if (!Number.isInteger(capacity) || capacity < 1 || capacity > 4096) {
       throw new RangeError('Operation trace capacity must be an integer in [1, 4096].');
     }
     this.#capacity = capacity;
+    this.#detail = detail;
   }
 
   record(event: OperationTraceEvent): void {
@@ -90,6 +92,7 @@ export class OperationTraceSink {
         : `${event.kind}:${event.needKind}`;
     this.#counters.set(counter, (this.#counters.get(counter) ?? 0) + 1);
 
+    if (this.#detail === 'counters') return;
     if (this.#events.length === this.#capacity) {
       this.#events.shift();
       this.#dropped += 1;
