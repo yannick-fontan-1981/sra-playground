@@ -1182,3 +1182,34 @@ Le chemin générique reste inchangé :
 - OP30 générique = `persisted_only`.
 
 Aucun appel OP générique n'est ajouté.
+
+
+## C7 — garde-fou de raccord produit Logos
+
+Audit statique sur la baseline GitHub canonique :
+
+- fichiers produit examinés hors `src/logos-engine` : **10** ;
+- imports/appels vers `logos-engine` : **0**.
+
+Le noyau OP01–OP31 est donc actuellement :
+**reconstruit et testé comme bibliothèque, mais non raccordé au produit/browser SRA**.
+
+Ajout :
+`scripts/check-op01-op31-product-wiring.mjs`.
+
+Le garde-fou distingue :
+- `logos-library-only-no-product-wiring` ;
+- `logos-product-wiring-present`.
+
+Tests du garde-fou : **3/3**.
+
+Le checkout sparse local OP ne contient pas les fichiers produit et n'est donc pas
+utilisé pour conclure sur le raccord réel ; la conclusion `0/10` vient du scan
+direct de la branche GitHub canonique.
+
+Conséquence :
+aucune qualification C1/C2 "en produit" ne peut être revendiquée tant qu'un
+fichier produit réel (par exemple un worker SRA) n'importe pas le noyau Logos.
+
+Statut performance :
+**fonctionnellement qualifié, performance officielle à confirmer**.
