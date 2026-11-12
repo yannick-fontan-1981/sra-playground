@@ -1,0 +1,106 @@
+# OP01–OP31 — diagnostic C7 non officiel
+
+## Portée
+
+Ce diagnostic mesure uniquement le noyau Logos reconstruit. Il ne remplace pas
+les sessions officielles STCK/SMLP et ne qualifie pas la performance Site 109.
+
+Branche : `recovery/op01-op31-c7-diagnostic-20261112`.
+
+## Harness
+
+Nouveaux éléments :
+- `tests/helpers/op01-op31-synthetic-session.ts` ;
+- `tests/v6-c7-diagnostic.test.ts` ;
+- `scripts/measure-op01-op31-core-costs.mjs`.
+
+La session synthétique exécute, à chaque cycle :
+
+**besoin OP18 → release → retour → OP29 → OP30 → OP31**
+
+avec révision d'observation croissante, persistance OP30 et objectif restant
+`unknown`.
+
+Le harness est explicitement marqué `diagnostic_only` et
+`official_performance_qualification=false`.
+
+## Instrumentation légère vs audit
+
+`OperationTraceSink` possède désormais deux modes :
+
+- `counters` : compteurs uniquement, aucun événement détaillé conservé ;
+- `full` : trace détaillée bornée, destinée à l'audit.
+
+Aucune décision n'est modifiée.
+
+## Tests
+
+- `tsc --noEmit` : OK ;
+- suite `tests/v6-*.test.ts` : **31/31 tests passent**.
+
+Les nouveaux tests démontrent :
+- trace OFF/ON : même résultat sémantique ;
+- cache OFF/ON : même résultat sémantique ;
+- compteurs-only : aucun événement détaillé retenu ;
+- chaîne OP18 → OP29/30/31 exercée à chaque cycle.
+
+## Mesure diagnostique
+
+Configuration :
+- 31 échantillons ;
+- 200 cycles synthétiques par échantillon ;
+- exécution locale isolée du noyau Logos.
+
+Médianes :
+
+| Mode | Médiane | Delta vs baseline |
+| --- | ---: | ---: |
+| baseline | 1,674 ms | — |
+| compteurs | 1,793 ms | **+7,12 %** |
+| trace détaillée | 9,589 ms | +472,86 % |
+| cache | 2,834 ms | +69,29 % |
+| compteurs + cache | 3,022 ms | +80,57 % |
+| trace détaillée + cache | 10,794 ms | +544,84 % |
+
+## Interprétation
+
+### Instrumentation normale
+
+Le mode `counters` passe sous +10 % dans ce diagnostic synthétique.
+Cela **ne vaut pas qualification officielle**, mais justifie le choix
+architectural : instrumentation légère en production, trace détaillée seulement
+pour les scénarios d'audit.
+
+### Trace détaillée
+
+Le coût est très supérieur à +10 %. Ce mode ne doit pas être activé en continu.
+Il reste utile pour C1/C2 ciblé et doit être mesuré séparément.
+
+### Cache
+
+Dans cette session, chaque cycle change l'identité d'observation et la révision :
+il n'y a donc aucun hit utile. Le cache ajoute seulement son coût de clé/lookup.
+
+Conclusion :
+- ne pas activer le cache globalement ;
+- l'utiliser uniquement sur les chemins où une identité de dépendances exacte
+  est réellement répétée ;
+- la garde reste revalidée même sur cache hit.
+
+## Statut performance
+
+**fonctionnellement qualifié, performance officielle à confirmer**.
+
+Le critère historique reste :
+- STCK session complète strictement < +10 % ;
+- SMLP session complète strictement < +10 % ;
+- chaque jeu séparément, aucune compensation.
+
+## Prochaine étape
+
+Dès restauration d'un worker/harness réel :
+1. exécuter STCK et SMLP instrumentation OFF ;
+2. exécuter avec compteurs-only ;
+3. garder la trace détaillée hors mesure normale ;
+4. n'activer le cache que si le chemin produit des hits mesurables ;
+5. comparer au prédécesseur immédiat et à la baseline stable.
