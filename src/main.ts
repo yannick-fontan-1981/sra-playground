@@ -278,7 +278,7 @@ function updateInterface(): void {
   canvas.tabIndex = enabled ? 0 : -1;
 }
 
-async function present(next: GameObservation, selectedGeneration: number): Promise<void> {
+async function present(next: GameObservation, selectedGeneration: number, releaseBusy = true): Promise<void> {
   if (selectedGeneration !== selectionGeneration || next.gameCode !== selectedGame.code) return;
   const generation = ++presentationGeneration;
   observation = next;
@@ -301,8 +301,10 @@ async function present(next: GameObservation, selectedGeneration: number): Promi
   }
   if (generation !== presentationGeneration || selectedGeneration !== selectionGeneration) return;
   paint(next.frame, next.palette ?? fallbackPalette);
-  busy = false;
-  updateInterface();
+  if (releaseBusy) {
+    busy = false;
+    updateInterface();
+  }
   if (next.state === 'WIN' || next.state === 'LEVEL_COMPLETE') element('#game-feedback').textContent = `Level ${next.level} complete.`;
   else if (next.state === 'GAME_OVER' || next.state === 'GAMEOVER') element('#game-feedback').textContent = 'Game over. Undo or reset to continue.';
 }
@@ -335,7 +337,7 @@ function perform(action: number, data?: { x: number; y: number }): void {
   const state = productReadinessState();
   void dispatchProductAction(state, action, data, {
     action: (nextAction, nextData) => runtime.action(nextAction, nextData),
-    present,
+    present: (next, generation) => present(next, generation, false),
     now: () => performance.now(),
     generation: () => selectionGeneration,
     setBusy: value => {
