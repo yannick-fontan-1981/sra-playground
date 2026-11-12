@@ -1,4 +1,5 @@
-import type { PublicObservationLike } from '../logos-engine/linked-preparation.ts';
+import type { PublicFrameLike, PublicObservationLike } from '../logos-engine/linked-preparation.ts';
+import type { FieldStockProposal } from '../logos-engine/field-stock.ts';
 import { createAddressedFieldRetentionState, crossAddressedFieldBoundary, ensureFieldStock, type AddressedFieldRetentionState } from '../logos-engine/addressed-field-retention.ts';
 export type AddressedKnowledgeStatus='empty'|'active_local_model'|'retained_pending_revalidation'|'revalidated_stock'|'retained_not_applicable'|'refuted';
 export class ObservedAddressedMaterialRuntime {
