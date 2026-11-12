@@ -23,9 +23,11 @@ const cycles = Number(process.env.OP_CYCLES ?? 200);
 const samples = Number(process.env.OP_SAMPLES ?? 31);
 const modes = {
   baseline: { cycles, trace: false, cache: false },
-  trace: { cycles, trace: true, cache: false },
+  counters: { cycles, trace: 'counters', cache: false },
+  full_trace: { cycles, trace: 'full', cache: false },
   cache: { cycles, trace: false, cache: true },
-  trace_cache: { cycles, trace: true, cache: true },
+  counters_cache: { cycles, trace: 'counters', cache: true },
+  full_trace_cache: { cycles, trace: 'full', cache: true },
 };
 
 const results = Object.fromEntries(Object.entries(modes).map(([name, options]) => {
@@ -39,7 +41,7 @@ const results = Object.fromEntries(Object.entries(modes).map(([name, options]) =
   }];
 }));
 
-for (const name of ['trace', 'cache', 'trace_cache']) {
+for (const name of ['counters', 'full_trace', 'cache', 'counters_cache', 'full_trace_cache']) {
   results[name].delta_vs_baseline_pct =
     ((results[name].median_ms - results.baseline.median_ms) / results.baseline.median_ms) * 100;
 }
