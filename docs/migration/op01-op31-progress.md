@@ -105,3 +105,90 @@ Statut : **baseline/protocole définis ; benchmark non requis pour C0**.
 ## Prochaine étape concrète
 
 **C1 : retrouver le checkout runtime contenant `src/logos-engine/v6-*`, puis ajouter une instrumentation légère autour de `execute`, du pont SRC, de `release/acquire` et de `postAnalysis` sans changer les décisions.** Premier rejeu : OP18/OP28 puis OP29→OP30→OP31, avec cas besoin présent, besoin absent et dépendance/révision invalidée.
+
+## C1 — préparation du contrat de trace
+
+Statut : **préparé ; intégration runtime non commencée**.
+
+### Périmètre réellement couvert
+
+Le contrat d'instrumentation est maintenant défini dans `docs/migration/op01-op31-c1-trace-contract.md`.
+
+Il couvre :
+- signal de besoin émis avant routage ;
+- exécution, réutilisation cache, non-requis et blocage ;
+- consommation réelle et effet sémantique ;
+- identités épisode/époque/observation/révision ;
+- invalidation sur observation, époque, focus, objectif/stratégie et révision ;
+- sauvegarde/restauration ;
+- bornes de trace et coûts à mesurer ;
+- scénarios S-C1-1 à S-C1-5 ;
+- chaîne témoin OP18/OP28 → OP29 → OP30 → OP31.
+
+### Nouvelle vérification de provenance
+
+Le dépôt privé `yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan` expose bien une ligne V6/V7 : son `main` visible est le commit `786dcf51ca57773d8e3a8948ce9ea3655e7baf8e`, message « Merge the V7 declarative prototype onto the V6 publication line ».
+
+Ce commit correspond aussi au snapshot source cité par S2 pour les fixtures de parité, mais il ne contient pas aux chemins attendus les fichiers TypeScript `src/logos-engine/v6-operations.ts`, `v6-native-authority.ts`, `v6-target-binding.ts` et `v6-composition-engine.ts`. Le checkout de préparation du plan `8462204…` reste donc un checkout distinct non retrouvé dans les dépôts GitHub accessibles.
+
+Cette divergence est conservée explicitement : le commit `786dcf51…` ne remplace pas silencieusement la baseline `8462204…`.
+
+### OP qualifiées à ce stade
+
+Aucune nouvelle OP n'est promue en « usage démontré ». C1 n'a pas encore observé de runtime instrumenté.
+
+Les cinq OP prioritaires restent :
+- OP18 et OP28 : appel runtime explicite selon les preuves C0 ;
+- OP29, OP30 et OP31 : appel postAnalysis explicite selon les preuves C0 ;
+- consommation et contribution : toujours à démontrer.
+
+### Besoins démontrés / producteurs / consommateurs
+
+Le contrat C1 fixe maintenant les producteurs et consommateurs à prouver, sans les déclarer existants :
+- OP18 : question ouverte → admission/release → expérience ;
+- OP28 : bundle admis → release → actions libérées ;
+- OP29 : attentes + retour du même événement → modèle/garde/décideur ;
+- OP30 : mises à jour étayées + bonne révision → propriétaire autorisé ;
+- OP31 : assessment d'objectif → maintien/fin/suspension/réorientation.
+
+### Appels utiles / appels sans effet démontré
+
+Aucun appel nouveau n'a été ajouté.
+Les appels C0 existants restent « sans contribution établie » tant que les événements `consumption` et leur effet décisionnel ne sont pas observés.
+
+### Besoins non raccordés
+
+Inchangés :
+- OP03, OP08, OP12, OP26 : producteurs historiquement manquants à rechercher en priorité ;
+- aucune fonction spécialisée équivalente n'est déclarée sans lecture du checkout runtime réel.
+
+### Tests exécutés
+
+- aucun test runtime ;
+- aucune campagne de jeux ;
+- aucune mesure de session ;
+- vérification de présence des dépôts/branches et de la provenance V6/V7 via GitHub ;
+- vérification que le checkout TypeScript attendu reste absent des chemins accessibles.
+
+### Performance
+
+Statut : **C1 préparé, coût non mesurable avant intégration runtime**.
+
+Le protocole C1 est fixé : STCK et SMLP séparément, instrumentation off/on, diagnostic détaillé séparé, seuil médian de session complète strictement inférieur à +10 % par jeu. Une mesure concurrente devra être marquée non isolée.
+
+### Feuille de route actualisée
+
+| Lot | État | Prochaine preuve concrète |
+| --- | --- | --- |
+| C0 | **terminé** | conserver le registre et la baseline documentaire |
+| C1 | **préparé, intégration runtime non commencée** | appliquer le contrat au checkout `src/logos-engine/v6-*`, exécuter S-C1-1 à S-C1-5 et mesurer le coût |
+| C2 | **prêt après instrumentation C1** | démontrer consommation/contribution OP18/28/29/30/31 |
+| C3 | **préparé prioritaire** | rechercher équivalents spécialisés OP03/08/12/26, puis raccorder les besoins prouvés |
+| C4 | préparé | OP01/02/05/10/15/25 |
+| C5 | préparé | OP06/07/13/20/21/22/23 |
+| C6 | préparé | OP16/17/19/24/27 |
+| C7 | en attente | consolidation fonctionnelle + coût prédécesseur et baseline C0 |
+
+### Prochaine étape concrète
+
+Retrouver ou publier dans le checkout de travail le runtime TypeScript correspondant au plan, puis appliquer sans adaptation sémantique le contrat C1 autour de `execute`, du pont SRC, de `release/acquire` et de `postAnalysis`.
