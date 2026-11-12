@@ -1,0 +1,41 @@
+{
+  "benchmark_contract": {
+    "cross_game_compensation_allowed": false,
+    "games": ["STCK", "SMLP"],
+    "global_threshold_percent": 10.0,
+    "measured_actions": 400,
+    "measured_sessions": 32,
+    "order": ["A1", "B1", "B2", "A2"],
+    "phase_overrun_allowed_when_same_game_global_passes": true,
+    "sample_removal_allowed": false,
+    "threshold_is_strict": true,
+    "warmup_actions": 24,
+    "warmup_sessions": 8
+  },
+  "v6_core": {
+    "present": true,
+    "missing": []
+  },
+  "region_reconstructed": false,
+  "region_integration_hits": [],
+  "ready_for_region_functional_qualification": false,
+  "official_069_prerequisites": {
+    "missing": [
+      "scripts/measure-native-loop-costs.mjs",
+      "tests/helpers/v6-live-game-campaign.ts",
+      "src/runtime/v6-agent-worker.ts",
+      "docs/migration/v6-delivery-roadmap.md"
+    ]
+  },
+  "ready_for_official_069_benchmark": false,
+  "functional_test_evidence": {
+    "scope": "reconstructed V6 core only",
+    "tests": 27,
+    "passed": 27,
+    "failed": 0,
+    "direct_ts_attempt": "environment_failed_node_22_16_unknown_ts_extension",
+    "successful_path": "tsc noCheck + rewriteRelativeImportExtensions, then node --test emitted JS"
+  },
+  "status": "fonctionnellement qualifié pour le noyau V6 reconstruit, performance officielle à confirmer",
+  "note": "Region is absent, so Lot 9B itself is not yet functionally qualified on the new canonical reconstruction."
+}
