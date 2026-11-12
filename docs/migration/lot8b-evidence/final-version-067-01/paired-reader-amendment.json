@@ -1,0 +1,47 @@
+{
+  "schema": "logos-engine.lot8b.paired-reader-provenance-amendment.v1",
+  "declaredAt": "2026-11-12T12:17:23.126113+00:00",
+  "status": "declared_manual_reader_correction_before_reexecution",
+  "retainedFailedAttempt": {
+    "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-01/receipt.json",
+    "bytes": 3346,
+    "sha256": "0d2f68e09bd7ae339b210d070bb7673f9471dac9f67d419bb5b096a169a02251"
+  },
+  "retainedFailedReport": {
+    "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-01/graph-review.json",
+    "bytes": 16497,
+    "sha256": "58a0d11fd298689f1ce896ac44ded1e6a7923b9cf406ee3bca30b0914adc0a7e"
+  },
+  "failure": "The per-record preflight generator equality still compared both roles to the new B generator after the separate receipts had already correctly pinned A to its exact historical generator.",
+  "completedChecksBeforeFailure": 1,
+  "pairedFormsCompleted": 0,
+  "nativeSessionExecutedByReader": false,
+  "nativeSourceChanged": false,
+  "captureRegenerated": false,
+  "previousReader": {
+    "path": "docs/migration/lot8b-evidence/tools/final-functional/work-forms/qualify-cost-owner-graphs.mjs",
+    "bytes": 55737,
+    "sha256": "e53153482728e5eca466564d078a459db07871b06d80120cc05ad825ac572f2d"
+  },
+  "newReader": {
+    "path": "docs/migration/lot8b-evidence/tools/final-functional/work-forms/qualify-cost-owner-graphs-v2.mjs",
+    "bytes": 55746,
+    "sha256": "98c635bb4869009babc69c37a2b9d8aa9b43bb8393d2dfaa50a0765d7c67bafb"
+  },
+  "diff": {
+    "path": "docs/migration/lot8b-evidence/final-version-067-01/paired-reader-v2.diff",
+    "bytes": 1774,
+    "sha256": "5e384ce550e6018b15768726cfd3d9735777cdb68906220bf186db0bc5a18302"
+  },
+  "changes": [
+    "New derivative names the previous final reader as its source provenance.",
+    "Every preflight record must match receipt.generator. Those receipts have already been matched to the exact retained A generator and current B generator, with all other pins intact."
+  ],
+  "semanticGraphChecksRelaxed": false,
+  "newOutputAttempt": "work-qualify-02",
+  "nextCommandTimeoutSeconds": 300,
+  "automaticRetry": false,
+  "independentReviewRequired": true,
+  "officialPerformanceEligible": false,
+  "globalLockAcquired": false
+}

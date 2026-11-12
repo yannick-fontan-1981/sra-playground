@@ -1,0 +1,20 @@
+--- docs/migration/lot8b-evidence/tools/final-functional/work-forms/qualify-cost-owner-graphs.mjs
++++ docs/migration/lot8b-evidence/tools/final-functional/work-forms/qualify-cost-owner-graphs-v2.mjs
+@@ -26,7 +26,7 @@
+ const TOOL_DIRECTORY = resolve(BASE, 'tools/final-functional/work-forms');
+ const CAPTURE_TOOL = resolve(TOOL_DIRECTORY, 'capture-cost-owner-graphs.mjs');
+ const INVENTORY_TOOL = resolve(TOOL_DIRECTORY, 'record-owner-source-inventory.mjs');
+-const DERIVED_FROM = resolve(ROOT, 'docs/migration/lot8b-evidence/tools/delivery/work-forms/qualify-cost-owner-graphs.mjs');
++const DERIVED_FROM = resolve(ROOT, 'docs/migration/lot8b-evidence/tools/final-functional/work-forms/qualify-cost-owner-graphs.mjs');
+ const CAPTURE_DERIVATION = resolve(ROOT, 'docs/migration/lot8b-evidence/tools/delivery/work-forms/capture-cost-owner-graphs.mjs');
+ const POLICY_PATH = 'reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm';
+ const OWNER = 'branch_routing';
+@@ -649,7 +649,7 @@
+           for (const [role, row] of [['baseline', a], ['candidate', b]]) {
+             const receipt = this.receipts[role]; assert.deepEqual(row.nativeSource, receipt.nativeInventoryBefore);
+             assert.deepEqual(row.manifest, receipt.nativeSourceBefore); assert.deepEqual(row.inputs, receipt.inputsBefore);
+-            assert.deepEqual(row.generator, this.captureTool); assert.deepEqual(row.cases, this.casesRecord);
++            assert.deepEqual(row.generator, receipt.generator); assert.deepEqual(row.cases, this.casesRecord);
+             assert.equal(row.measuredCostSessions, 0); assert.equal(row.plannedSessions, 4); assert.equal(row.plannedActions, 31);
+           }
+         } else if (a.type === 'session_start') {

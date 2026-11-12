@@ -1,0 +1,363 @@
+{
+  "schema": "logos-engine.lot8b-delivery-work-graph-review.v1",
+  "status": "functional_structure_qualification_failed",
+  "startedAt": "2026-11-12T12:15:06.006Z",
+  "checks": [
+    {
+      "name": "published_baseline_functional_capture_provenance",
+      "passed": true
+    }
+  ],
+  "nodeAttributions": [],
+  "points": [],
+  "failures": [
+    {
+      "name": "AssertionError",
+      "message": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   bytes: 31412,\n+   path: 'docs/migration/lot8b-evidence/tools/delivery/work-forms/capture-cost-owner-graphs.mjs',\n+   sha256: 'def20965d488ff15cf225961f407853b29cee0eb22e9119cfe9f1611dcc73a3a'\n-   bytes: 31537,\n-   path: 'docs/migration/lot8b-evidence/tools/final-functional/work-forms/capture-cost-owner-graphs.mjs',\n-   sha256: '9323017b311100aea4a6be6baf9400ca245ee729291253c2181de67e4680b417'\n  }\n"
+    }
+  ],
+  "commandBoundaryProjections": [],
+  "sourceFactCoverage": [],
+  "commonValueCoverage": [],
+  "commonValuePolicy": {
+    "comparison": "exact",
+    "permittedMetadataDifference": "origin.source_digest",
+    "identityValueAttributions": [],
+    "unattributedDifferencesAllowed": 0
+  },
+  "preparedOnly": true,
+  "officialPerformanceEligible": false,
+  "strictCommonGraphParity": false,
+  "publishedBaseline": {
+    "site": 107,
+    "sourceCommit": "4ff7bf45286a8a19d34401988adca587253ae41e",
+    "nativeVersion": "0.66.0"
+  },
+  "candidatePublished": false,
+  "differenceCount": 0,
+  "unattributedDifferenceCount": 0,
+  "differenceClasses": {},
+  "differenceExamples": [],
+  "traceClockBounds": [],
+  "ownerCheckpointCoverage": [],
+  "generator": {
+    "path": "docs/migration/lot8b-evidence/tools/final-functional/work-forms/qualify-cost-owner-graphs.mjs",
+    "bytes": 55737,
+    "sha256": "e53153482728e5eca466564d078a459db07871b06d80120cc05ad825ac572f2d"
+  },
+  "derivedFrom": {
+    "path": "docs/migration/lot8b-evidence/tools/delivery/work-forms/qualify-cost-owner-graphs.mjs",
+    "bytes": 52939,
+    "sha256": "56c73ed40f8b88ce9c7f02300cf4acede74eb37bacfdc94b9542c4a2a21bb662"
+  },
+  "retainedBaseline": {
+    "report": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-baseline-01/baseline.json.gz",
+      "bytes": 7212928,
+      "sha256": "384a5f5bb3e00174e8113e35387132284e90a6d5a1af5303ecfe9ed0db3df893"
+    },
+    "receipt": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-baseline-01/baseline.receipt.json",
+      "bytes": 127765,
+      "sha256": "5aebb7ab6f603f305b28bb3ffd262fc4103f433ea4ac7b0e0db051d75036d084"
+    },
+    "generator": {
+      "path": "docs/migration/lot8b-evidence/tools/delivery/work-forms/capture-cost-owner-graphs.mjs",
+      "bytes": 31412,
+      "sha256": "def20965d488ff15cf225961f407853b29cee0eb22e9119cfe9f1611dcc73a3a"
+    },
+    "derivedFrom": {
+      "path": "docs/migration/lot8a-evidence/tools/work-forms/capture-cost-owner-graphs.mjs",
+      "bytes": 29563,
+      "sha256": "fa7c225349ad2652ff0b45cd53b7f8de7ac94d4131363e5f3c1568340d0a600f"
+    },
+    "cases": {
+      "path": "docs/migration/lot8b-evidence/tools/delivery/work-forms/cases.json",
+      "bytes": 1498,
+      "sha256": "65e27dbcc2f5871ab259358cc46576b2671058630be0b37c643eadad66593173"
+    },
+    "nativeSourceBefore": {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/baseline-native.json",
+      "bytes": 39098,
+      "sha256": "6926e8abdcf9232e4e6d06ad4b60d59e4a8fa473b56a627dc17b7f8ac18d2ac7"
+    }
+  },
+  "ownerInventory": {
+    "path": "docs/migration/lot8b-evidence/final-version-067-01/work-inventory-01/owner-source-inventory.json",
+    "bytes": 130694,
+    "sha256": "36e8d72ac6ccd8ec2385b1263e3dda9aa85e88d71e595f476dd5011f479795e9"
+  },
+  "traceClockSource": {
+    "memory": {
+      "path": "src/logos-engine/v6-reasoning-memory.ts",
+      "bytes": 12962,
+      "sha256": "b55c186c99636f28c9e6e9c657b9bb50892eac06a3306be197503188069d901a"
+    },
+    "authority": {
+      "path": "src/logos-engine/v6-native-authority.ts",
+      "bytes": 23736,
+      "sha256": "f5a54ecac86fb097ee739dc6e4f8b4729819d58c9992fee92188527a1544b3ff"
+    },
+    "derivation": "Default NativeReasoningMemory clock is unmodified Date.now()/1000; authority constructs it without options. Each new reasoning:trace id must be bounded by its actual service.handle wall-clock interval."
+  },
+  "nativeDigests": {
+    "baseline": "ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316",
+    "candidate": "c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a"
+  },
+  "recordedAt": "2026-11-12T12:15:06.310Z",
+  "inputs": [
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-functional/work-forms/qualify-cost-owner-graphs.mjs",
+      "bytes": 55737,
+      "sha256": "e53153482728e5eca466564d078a459db07871b06d80120cc05ad825ac572f2d"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/delivery/work-forms/qualify-cost-owner-graphs.mjs",
+      "bytes": 52939,
+      "sha256": "56c73ed40f8b88ce9c7f02300cf4acede74eb37bacfdc94b9542c4a2a21bb662"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-functional/work-forms/capture-cost-owner-graphs.mjs",
+      "bytes": 31537,
+      "sha256": "9323017b311100aea4a6be6baf9400ca245ee729291253c2181de67e4680b417"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/delivery/work-forms/capture-cost-owner-graphs.mjs",
+      "bytes": 31412,
+      "sha256": "def20965d488ff15cf225961f407853b29cee0eb22e9119cfe9f1611dcc73a3a"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-baseline-01/baseline.json.gz",
+      "bytes": 7212928,
+      "sha256": "384a5f5bb3e00174e8113e35387132284e90a6d5a1af5303ecfe9ed0db3df893"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/work-baseline-01/baseline.receipt.json",
+      "bytes": 127765,
+      "sha256": "5aebb7ab6f603f305b28bb3ffd262fc4103f433ea4ac7b0e0db051d75036d084"
+    },
+    {
+      "path": "docs/migration/lot8a-evidence/tools/work-forms/capture-cost-owner-graphs.mjs",
+      "bytes": 29563,
+      "sha256": "fa7c225349ad2652ff0b45cd53b7f8de7ac94d4131363e5f3c1568340d0a600f"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/delivery/work-forms/cases.json",
+      "bytes": 1498,
+      "sha256": "65e27dbcc2f5871ab259358cc46576b2671058630be0b37c643eadad66593173"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/delivery-qualification-01/baseline-native.json",
+      "bytes": 39098,
+      "sha256": "6926e8abdcf9232e4e6d06ad4b60d59e4a8fa473b56a627dc17b7f8ac18d2ac7"
+    },
+    {
+      "path": "/workspace/sites/sra-lot8b-baseline066-20261112/src/logos-engine/v6-native-runtime.ts",
+      "bytes": 175973,
+      "sha256": "ccf30009dd69f4ca717ea14259cb844884972d3c6ae93c61f2a1702edff5c8c9"
+    },
+    {
+      "path": "/workspace/sites/sra-lot8b-baseline066-20261112/src/logos-engine/kernel.ts",
+      "bytes": 23637,
+      "sha256": "1cac40f5f9a3356d31ae0fd5247709eb82c5f6402aae3cb68d8edc54c838f207"
+    },
+    {
+      "path": "/workspace/sites/sra-lot8b-baseline066-20261112/src/logos-engine/v6-knowledge-store.ts",
+      "bytes": 14849,
+      "sha256": "035d41597a5831bfa65bb1f627e3a0d05b84cc44cfda05566359873ef8c5af08"
+    },
+    {
+      "path": "/workspace/sites/sra-lot8b-baseline066-20261112/scripts/measure-native-loop-costs.mjs",
+      "bytes": 20670,
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "/workspace/sites/sra-lot8b-baseline066-20261112/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "bytes": 48531,
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+    },
+    {
+      "path": "/workspace/sites/sra-lot8b-baseline066-20261112/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "bytes": 46966,
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    },
+    {
+      "path": "/workspace/sites/sra-lot8b-baseline066-20261112/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "bytes": 53583,
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "path": "/workspace/sites/sra-lot8b-baseline066-20261112/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "bytes": 111624,
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-candidate-01/candidate.receipt.json",
+      "bytes": 127538,
+      "sha256": "7baa0809d9c0e82f66e5b2fb2183de5b955aff9a181e6e05bfeec0c9aa5d1ea4"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/candidate-native.json",
+      "bytes": 39333,
+      "sha256": "18fcc15c6e57f1bf6aab33cc62498e6a5a76836d85b890378be957a0e6da1c57"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-candidate-01/candidate.json.gz",
+      "bytes": 7261661,
+      "sha256": "3e136eb46b890067306201f4cfa1052eab7e7b1c6bc8db9c56a10bdb173d838c"
+    },
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "bytes": 180119,
+      "sha256": "e68adc608d73ac8d19e41a01cb7f9834a014b17f7f71b26480a14c36b4025446"
+    },
+    {
+      "path": "src/logos-engine/kernel.ts",
+      "bytes": 23637,
+      "sha256": "1cac40f5f9a3356d31ae0fd5247709eb82c5f6402aae3cb68d8edc54c838f207"
+    },
+    {
+      "path": "src/logos-engine/v6-knowledge-store.ts",
+      "bytes": 14849,
+      "sha256": "035d41597a5831bfa65bb1f627e3a0d05b84cc44cfda05566359873ef8c5af08"
+    },
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "bytes": 20670,
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "bytes": 48531,
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "bytes": 46966,
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    },
+    {
+      "path": "docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "bytes": 53583,
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "path": "docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "bytes": 111624,
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/work-inventory-01/owner-source-inventory.json",
+      "bytes": 130694,
+      "sha256": "36e8d72ac6ccd8ec2385b1263e3dda9aa85e88d71e595f476dd5011f479795e9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-functional/work-forms/record-owner-source-inventory.mjs",
+      "bytes": 15277,
+      "sha256": "af762f71256ce372a3b760f32b3c1687d700e6b1378012e0a1517fe61d1bedc2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/delivery/work-forms/record-owner-source-inventory.mjs",
+      "bytes": 15250,
+      "sha256": "073cec941143449697c06d979c07675d177d53fafd0d7d82abfeb6c446c41eb9"
+    },
+    {
+      "path": "src/logos-engine/v6-reasoning-memory.ts",
+      "bytes": 12962,
+      "sha256": "b55c186c99636f28c9e6e9c657b9bb50892eac06a3306be197503188069d901a"
+    },
+    {
+      "path": "src/logos-engine/v6-native-authority.ts",
+      "bytes": 23736,
+      "sha256": "f5a54ecac86fb097ee739dc6e4f8b4729819d58c9992fee92188527a1544b3ff"
+    },
+    {
+      "path": "src/logos-engine/v6-motif-access.ts",
+      "bytes": 32665,
+      "sha256": "2302d521959133b39560792d01ae4c2403a3b4b4a333ae10e089359a403394e0"
+    },
+    {
+      "path": "src/logos-engine/v6-motif-access-geometry.ts",
+      "bytes": 15261,
+      "sha256": "36d5e1d51a1ebef5c82dea7951c18fe115af2067624447d39e37100c4a9de9b3"
+    },
+    {
+      "path": "src/logos-engine/v6-observed-binding.ts",
+      "bytes": 22934,
+      "sha256": "f7ed39d3215339e0facc33db3ab2ed81e6fe7afaf049f8ab148dadff590f5e73"
+    },
+    {
+      "path": "src/logos-engine/v6-selected-rigid.ts",
+      "bytes": 29799,
+      "sha256": "767556eac7484145e40a00c191004de266aa2b952f12518e720f00a5925b1751"
+    },
+    {
+      "path": "src/logos-engine/v6-ordered-recruitment.ts",
+      "bytes": 25007,
+      "sha256": "045ba6a18532b230568af4f12ba377e8b25a9bde31a69553e06277a0c9400b58"
+    },
+    {
+      "path": "src/logos-engine/v6-ordered-recruitment-geometry.ts",
+      "bytes": 18812,
+      "sha256": "9a0a9f098cd1f0aaeab1dde7fae7764318bb346e3e607f3cac67c61ef3b7ba63"
+    },
+    {
+      "path": "src/logos-engine/v6-ordered-recruitment-policy.ts",
+      "bytes": 4059,
+      "sha256": "c75af5d348b10c79dad67a8b8c2d9e26e46556687417f2695878d507f6f1037e"
+    },
+    {
+      "path": "src/logos-engine/v6-ordered-recruitment-projection.ts",
+      "bytes": 12451,
+      "sha256": "1c6bbdb22d131b5bf23d77b0d5e1f12c1f819a146d16496a3dd598d376d9efef"
+    },
+    {
+      "path": "src/logos-engine/v6-branch-routing.ts",
+      "bytes": 26244,
+      "sha256": "2b9bd172c977b1590d5293b4bca69510ad2e8190dd973df7872050f1367d15ca"
+    },
+    {
+      "path": "src/logos-engine/v6-branch-routing-geometry.ts",
+      "bytes": 16046,
+      "sha256": "dd1e5a472ca8f417651bb4178c27fc522816de767619495da8de09f7cfc6b522"
+    },
+    {
+      "path": "src/logos-engine/canonical.ts",
+      "bytes": 11291,
+      "sha256": "5c2884287aed82d97e7a85c905db5fb800a7e58a523c3ba128a1b61db5069cc1"
+    },
+    {
+      "path": "src/logos-engine/v6-native-state-graph.ts",
+      "bytes": 21947,
+      "sha256": "b739db6d6066a06f4175b4377f0d0ae1f351b708e5d27fbdb99c9de7e6ed0b4d"
+    },
+    {
+      "path": "src/logos-engine/v6-hash.ts",
+      "bytes": 2842,
+      "sha256": "6b86db7b533d55da900a3c65a06ec1e18547180245b3e3a2eaa837be09c669f5"
+    },
+    {
+      "path": "src/logos-engine/v6-src-program.ts",
+      "bytes": 5903,
+      "sha256": "d41717575e252784a81519e8c7853853af3c2d7372b86ecb7efb3655c3e3df77"
+    },
+    {
+      "path": "src/logos-engine/v6/programs.json",
+      "bytes": 1502394,
+      "sha256": "e006723f49460276a0753c1977ab0eabb30775409b37ba7d7af8b0b8b8527834"
+    },
+    {
+      "path": "src/runtime/v6-agent-service.ts",
+      "bytes": 18195,
+      "sha256": "02ce41d5e014fcc06f85371f552f949b9dfce56093afae4bc0fcb7aad2f60d96"
+    }
+  ],
+  "checkedCount": 1,
+  "formsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "differences": {
+    "path": "docs/migration/lot8b-evidence/final-version-067-01/work-qualify-01/graph-review.differences.jsonl.gz",
+    "bytes": 20,
+    "sha256": "59869db34853933b239f1e2219cf7d431da006aa919635478511fabbfc8849d2"
+  },
+  "qualification": "Final 0.67 identity renewal using the exact retained baseline capture, separately bound original and current generators, and fresh candidate graphs. Functional preparation against exact Site 107 published source 4ff7bf45286a8a19d34401988adca587253ae41e. Every role graph is reconstructed and validated from its own frozen Kernel/store; all fragment identities and changed roots are checked. Binding, SelectedRigid, Motif and OrderedRecruitment exist in both roles; only BranchRouting is added. Motif and BranchRouting use their actual registered wrappers, and Recruitment passive calls use its real acquisition instance. Exact work shapes exclude only independently bound implementation identity and declared structural counts. All raw common node values and common delta identities/causes/order are compared; differences remain without removing node.value or replacing clocks. Only exact reasoning:trace created scalar/float64 leaves with unmodified source clock code and actual service.handle wall-clock bounds receive clock attribution. Other private differences remain unqualified. State presence, negative proposals, graph nodes, acquiredRecords and acquiredTransitions do not establish successful BranchRouting acquisition, positive game contribution or official success. The separate cold synthetic contribution corpus and official game results retain their own scopes. This artifact grants no official timing readiness, full source/caller parity or publication."
+}
