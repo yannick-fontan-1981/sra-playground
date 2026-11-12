@@ -192,3 +192,51 @@ Le protocole C1 est fixé : STCK et SMLP séparément, instrumentation off/on, d
 ### Prochaine étape concrète
 
 Retrouver ou publier dans le checkout de travail le runtime TypeScript correspondant au plan, puis appliquer sans adaptation sémantique le contrat C1 autour de `execute`, du pont SRC, de `release/acquire` et de `postAnalysis`.
+
+
+## C1/C2 — preuves V6 donneuses ajoutées
+
+Un relevé séparé est maintenant conservé dans `docs/migration/op01-op31-v6-donor-evidence.md`.
+
+### OP qualifiées davantage
+
+Ces preuves concernent le **runtime Python V6 donneur**, pas encore le port TypeScript :
+
+- **OP18** : producteur spécialisé réel identifié dans `AlternatingGraphAccess.propose()`. Il produit question ouverte, plan, actions, préconditions, preuves, composition et `bundle_template.operation_key=OP18`; `admit()` revalide le contexte avant exécution.
+- **OP28 / OP18 / OP14** : `operation_admission()` montre que la release physique est liée au résultat effectif de l'OP, pas à sa seule invocation.
+- **OP30** : consommateur réel identifié. `composition.py::persist()` écrit les mises à jour retenues dans la mémoire avec valeur, preuve et révision.
+- **OP29** et **OP31** : aucun consommateur spécialisé n'a été trouvé dans le cœur `composition.py` examiné ; statut toujours « consommateur décisionnel non établi », sans conclure à une absence globale.
+
+### Besoins / producteurs / consommateurs démontrés
+
+Sur le donneur Python V6 :
+- besoin OP18 : question instrumentale d'accès graphe mesuré ;
+- producteur : `AlternatingGraphAccess.propose()` ;
+- consommateur de résultat physique : `operation_admission()` puis garde de release ;
+- effet : `src_release()` ne publie l'action set que si la release a été autorisée ;
+- consommateur OP30 : `persist()`, écriture de connaissance avec preuve/révision.
+
+### Appels utiles et appels sans effet démontré
+
+- OP18 : une chaîne utile donneuse existe jusqu'à la garde de release.
+- OP30 : consommation de persistance démontrée dans le donneur, mais contribution à une décision future encore à prouver.
+- OP29/OP31 : calcul présent ; effet décisionnel non démontré.
+- Aucun nouvel appel n'a été ajouté dans sra-playground.
+
+### Fonctions spécialisées équivalentes potentielles
+
+Le donneur V6 expose des stratégies et accès spécialisés qui peuvent recouvrir des besoins C3, notamment `strategy.py`, `alternating_graph_questions.py` et `alternating_graph_access.py`.
+Aucune équivalence OP03/08/12/26 n'est encore déclarée sans comparaison de contrat complète.
+
+### Tests
+
+Aucun test runtime sra-playground n'a encore été exécuté.
+La progression supplémentaire vient d'une lecture directe du snapshot V6 publié `786dcf51…`.
+
+### Performance
+
+Inchangée : aucun chemin runtime sra-playground modifié. C1 reste **préparé, coût à mesurer après intégration**.
+
+### Prochaine étape concrète
+
+Poursuivre C1 sur le port TypeScript dès que le checkout `src/logos-engine/v6-*` est disponible. Les points d'instrumentation sont maintenant précisément dérivés du donneur : producteur avant bundle, exécution dans apply/execute, admission, release, puis consommation/persistance.
