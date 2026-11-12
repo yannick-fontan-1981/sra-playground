@@ -1,0 +1,24 @@
+{
+  "schema": "logos-engine.lot9a-coordination-tools-syntax.v1",
+  "method": "Python ast.parse only; no import or execution",
+  "status": "passed",
+  "files": [
+    {
+      "path": "docs/migration/lot9a-evidence/tools/final-coordination/common.py",
+      "sha256": "6dcb18bcdea048949640b590d8178d1a6223c1ea05751df183319d008215d0be",
+      "status": "parsed"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/final-coordination/performance.py",
+      "sha256": "ac956ac581931af867c0a138a72709bbbe78186a2c3ef46af9b9a3a00484d6f3",
+      "status": "parsed"
+    },
+    {
+      "path": "docs/migration/lot9a-evidence/tools/final-coordination/publication.py",
+      "sha256": "b7842a837eae6f3aeba7f4e5ca938fa29d7691dc16bade6cb072f10bed9d49d5",
+      "status": "parsed"
+    }
+  ],
+  "noNativeExecution": true,
+  "noLockAcquisition": true
+}

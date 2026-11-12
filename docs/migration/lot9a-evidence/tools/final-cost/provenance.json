@@ -1,0 +1,96 @@
+{
+  "schema": "logos-engine.lot9a.final-cost-tools-provenance.v1",
+  "recordedAt": "2026-11-12T15:30:59.763798+00:00",
+  "status": "prepared_not_executed",
+  "nativeExecutionPerformed": false,
+  "benchmarkPerformed": false,
+  "lockAcquired": false,
+  "derivations": [
+    {
+      "source": {
+        "path": "docs/migration/lot8b-evidence/tools/final-cost/prepare-v2.py",
+        "bytes": 22196,
+        "sha256": "e5465ba2614d26fc2efba1a5b33616c18840e2fa3184032f1773477831263423"
+      },
+      "target": {
+        "path": "docs/migration/lot9a-evidence/tools/final-cost/prepare.py",
+        "bytes": 30228,
+        "sha256": "34a35bc110961d93102f17fdac1a6c853f22dbade58676c2c0c06c141db4def9"
+      },
+      "diff": {
+        "path": "docs/migration/lot9a-evidence/tools/final-cost/derivation-diffs/prepare.py.diff",
+        "bytes": 27077,
+        "sha256": "f7838b28c4a2058a2a76c02dfbd123cf70507284b06807541a52bf5abf8e6426"
+      },
+      "schemaPathAndDesignationChangesOnly": false
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot8b-evidence/tools/final-cost/analyze.mjs",
+        "bytes": 19756,
+        "sha256": "23b522ef4504fdfd7f883a0920b66ed9826f65396c4e7927faecece776670739"
+      },
+      "target": {
+        "path": "docs/migration/lot9a-evidence/tools/final-cost/analyze.mjs",
+        "bytes": 19756,
+        "sha256": "aea39b1d10babd9e8c7dafd01c0626ec3fce81b2ded910b2bfb3712324f77840"
+      },
+      "diff": {
+        "path": "docs/migration/lot9a-evidence/tools/final-cost/derivation-diffs/analyze.mjs.diff",
+        "bytes": 3200,
+        "sha256": "d5903a7bfd21e14ba55e18a430b35af9b4d2b2fd9995b52d3ef4bf2dda13b340"
+      },
+      "schemaPathAndDesignationChangesOnly": true
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot8b-evidence/tools/final-cost/postprocess.py",
+        "bytes": 5810,
+        "sha256": "8621250325ba1bcd9f3b1f08c7bb96966b5c7eae78a174a92b8c91707c73fd98"
+      },
+      "target": {
+        "path": "docs/migration/lot9a-evidence/tools/final-cost/postprocess.py",
+        "bytes": 5810,
+        "sha256": "747c5509bfe491ed51607cd27b0cd86b94c69aa64a6167051c12ad3dadb18ead"
+      },
+      "diff": {
+        "path": "docs/migration/lot9a-evidence/tools/final-cost/derivation-diffs/postprocess.py.diff",
+        "bytes": 1098,
+        "sha256": "dd34c2c1ebcfbfdb442e808af65576db46d1a02b7dc0c4ad937de5d7027f4cce"
+      },
+      "schemaPathAndDesignationChangesOnly": true
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot8b-evidence/tools/final-cost/review.py",
+        "bytes": 21232,
+        "sha256": "3074e351ac7337040b6cb6b53f6d9c512e6876323540953d4521e81abbd68149"
+      },
+      "target": {
+        "path": "docs/migration/lot9a-evidence/tools/final-cost/review.py",
+        "bytes": 21232,
+        "sha256": "c86a789b0acc8a746ec97098133816ce225f479e306db088c872bb88106ab221"
+      },
+      "diff": {
+        "path": "docs/migration/lot9a-evidence/tools/final-cost/derivation-diffs/review.py.diff",
+        "bytes": 2910,
+        "sha256": "e81d6058bb475117c5fcc40d1772256c181b10788f0574a2d3f8f0fda4c94fc6"
+      },
+      "schemaPathAndDesignationChangesOnly": true
+    }
+  ],
+  "syntax": {
+    "path": "docs/migration/lot9a-evidence/tools/final-cost/syntax-checks.json",
+    "bytes": 1605,
+    "sha256": "755b1e85cceccfae0371736ff55e5ebeb62eea4ad75c989c8d7065ec5119838a"
+  },
+  "qualifications": [
+    "prepare.py derives from the actual Lot8B prepare-v2.py and preserves role-scoped source-inventory path validation.",
+    "The final 9A review is read in its actual schema and all its 94 artifact fingerprints are verified; no surrogate review is manufactured.",
+    "The final work graph reader stays exhausted at two attempts. Initial failure, correction, raw captures and all historical scope flags remain unchanged.",
+    "Chart adds public_chart_navigation and v6.chart_navigation.choose. Four exact node/revision paths remain the only cross-role work-signature differences accepted.",
+    "All seven historical official tools and arithmetic functions are pinned and unchanged.",
+    "The three postprocessing derivatives change only their Lot9A schemas, output directory and designation; their algorithms and required actual strict refusal are unchanged.",
+    "Official readiness/isolation are owned by the separate controller. This preparation does not authorize a new native execution, oracle, game or publication."
+  ]
+}

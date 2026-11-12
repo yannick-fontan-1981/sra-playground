@@ -1,0 +1,47 @@
+--- docs/migration/lot8b-evidence/tools/final-coordination/publication.py
++++ docs/migration/lot9a-evidence/tools/final-coordination/publication.py
+@@ -1,5 +1,5 @@
+ #!/usr/bin/env python3
+-"""Own a short Lot 8B publication lease, then release the owned descriptor.
++"""Own a short Lot 9A publication lease, then release the owned descriptor.
+ 
+ No deployment or Git push is performed by this helper. The delivery owner
+ rechecks publication/access under the lease and calls the native Sites tools.
+@@ -21,11 +21,11 @@
+ SELF = Path(__file__).resolve()
+ MAXIMUM_SECONDS = 300
+ PREFLIGHT_SECONDS = 180
+-PLAN_SCHEMA = 'logos-engine.lot8b.publication-lease-plan.v1'
++PLAN_SCHEMA = 'logos-engine.lot9a.publication-lease-plan.v1'
+ 
+ 
+ def verify_plan(plan, deadline, execution_head):
+-    c.require(plan.get('schema') == PLAN_SCHEMA and plan.get('owner') == 'lot8b', 'Unsupported publication plan')
++    c.require(plan.get('schema') == PLAN_SCHEMA and plan.get('owner') == 'lot9a', 'Unsupported publication plan')
+     c.require(plan.get('publicationAuthorized') is True and plan.get('maximumSeconds') == MAXIMUM_SECONDS,
+               'Publication authorization and fixed 300 second bound required')
+     c.require(isinstance(plan.get('candidateCommit'), str) and c.COMMIT.fullmatch(plan['candidateCommit']),
+@@ -53,8 +53,8 @@
+ 
+ def main():
+     parser = argparse.ArgumentParser(description=__doc__)
+-    parser.add_argument('--plan', required=True, help='Prospective repository-relative 8B publication plan')
+-    parser.add_argument('--output', required=True, help='New repository-relative 8B lease evidence directory')
++    parser.add_argument('--plan', required=True, help='Prospective repository-relative 9A publication plan')
++    parser.add_argument('--output', required=True, help='New repository-relative 9A lease evidence directory')
+     args = parser.parse_args()
+     plan_path = c.local(args.plan, evidence=True)
+     output = c.local(args.output, evidence=True, must_exist=False)
+@@ -63,10 +63,10 @@
+     c.signals()
+     started = time.monotonic()
+     preflight_deadline = started + PREFLIGHT_SECONDS
+-    lease = 'lot8b-publication-' + str(os.getpid()) + '-' + os.urandom(6).hex()
++    lease = 'lot9a-publication-' + str(os.getpid()) + '-' + os.urandom(6).hex()
+     lock = c.ExclusiveLock('publication')
+     receipt_path = output / 'lease.json'
+-    row = {'schema': 'logos-engine.lot8b.publication-lease.v1', 'status': 'preflight',
++    row = {'schema': 'logos-engine.lot9a.publication-lease.v1', 'status': 'preflight',
+            'startedAt': c.utc(), 'plan': args.plan, 'lease': lease,
+            'maximumSeconds': MAXIMUM_SECONDS, 'preflightMaximumSeconds': PREFLIGHT_SECONDS,
+            'blocking': False, 'peerAvailabilityWait': False, 'performanceLockAcquired': False,

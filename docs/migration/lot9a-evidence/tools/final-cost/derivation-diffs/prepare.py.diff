@@ -1,0 +1,262 @@
+--- docs/migration/lot8b-evidence/tools/final-cost/prepare-v2.py
++++ docs/migration/lot9a-evidence/tools/final-cost/prepare.py
+@@ -1,8 +1,8 @@
+ #!/usr/bin/env python3
+-"""Declare one Lot8B cost window with explicit source-inventory role paths.
+-
+-V2 preserves prepare.py and verifies each sourceInventory role against its own
+-checkout. Generic artifact fingerprints retain their original path semantics.
++"""Declare one Lot9A cost window from the retained final 0.68 delivery proof.
++
++Derived from the retained Lot8B prepare-v2.py, including role-scoped source
++inventory validation. No old tool, proof, failure or qualification is changed.
+ 
+ Reads and hashes only. No native import, measurement, readiness or lock claim.
+ Outputs are new files; existing declarations and measured evidence are refused.
+@@ -18,12 +18,14 @@
+ 
+ ROOT = Path(__file__).resolve().parents[5]
+ TOOLS = Path(__file__).resolve().parent
+-EVIDENCE = ROOT / 'docs/migration/lot8b-evidence'
++EVIDENCE = ROOT / 'docs/migration/lot9a-evidence'
+ HISTORICAL = ROOT / 'docs/migration/lot3h-evidence/performance'
+-BASE_COMMIT = '4ff7bf45286a8a19d34401988adca587253ae41e'
+-DIGESTS = {'baseline': 'ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316',
+-           'candidate': 'c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a'}
+-VERSIONS = {'baseline': '0.66.0', 'candidate': '0.67.0'}
++DERIVED = ROOT / 'docs/migration/lot8b-evidence/tools/final-cost'
++DELIVERY = EVIDENCE / 'delivery-final-068-01'
++BASE_COMMIT = '8462204043aa368faa7df280d796bb706eb53b38'
++DIGESTS = {'baseline': 'c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a',
++           'candidate': 'e7a94fbc7cdcb19d8704b5d4120f27a858cbcd07e455084711510ee147f4e653'}
++VERSIONS = {'baseline': '0.67.0', 'candidate': '0.68.0'}
+ QUOTE = "si le global reste en dessous de 10% d'augmentation alors une phase qui dépasse 10% peut être accepté."
+ ORDER = ['A1', 'B1', 'B2', 'A2']
+ CASE_KEYS = ['id', 'trace', 'traceSha256', 'actions', 'targetLevels', 'warmupActions']
+@@ -133,16 +135,16 @@
+ 
+     output = (ROOT / args.output_directory).absolute()
+     require(output.is_relative_to(EVIDENCE) and output != EVIDENCE and not output.exists(),
+-            'Use a wholly new named Lot8B performance directory')
++            'Use a wholly new named Lot9A performance directory')
+     require(not (baseline / output.relative_to(ROOT)).exists(), 'Baseline output directory already exists')
+-    require(git(baseline, 'rev-parse', 'HEAD') == BASE_COMMIT, 'Baseline is not the actual Site107 source')
++    require(git(baseline, 'rev-parse', 'HEAD') == BASE_COMMIT, 'Baseline is not the actual Site108 source')
+     manifests, identities = {}, {}
+     for role in roots:
+         path = args.baseline_manifest if role == 'baseline' else args.candidate_manifest
+         manifests[role] = read(resolve(path))
+         require(manifests[role] == inventory(roots[role]), 'Native freeze mismatch: ' + role)
+         require(manifests[role]['digest'] == DIGESTS[role], 'Unexpected final native digest: ' + role)
+-        require(manifests[role]['fileCount'] == (329 if role == 'baseline' else 331), 'Unexpected native file count')
++        require(manifests[role]['fileCount'] == (331 if role == 'baseline' else 334), 'Unexpected native file count')
+         require(not git(roots[role], 'status', '--porcelain', '--', 'src/logos-engine', 'src/runtime'),
+                 'Native freeze must already be committed: ' + role)
+         text = (roots[role] / 'src/logos-engine/v6-native-runtime.ts').read_text()
+@@ -153,7 +155,7 @@
+                             'sourceCommit': git(roots[role], 'rev-parse', 'HEAD'), 'manifest': fp(path)}
+         for name in manifests[role]['files']:
+             fp(roots[role] / name)
+-    identities['baseline']['siteVersion'] = 107
++    identities['baseline']['siteVersion'] = 108
+     identities['candidate']['siteVersion'] = None
+     fp(HISTORICAL / 'declaration.json')
+     previous = read(HISTORICAL / 'declaration.json')
+@@ -178,9 +180,9 @@
+         for root in roots.values():
+             fp(root / (source + name))
+     forms, graph, owners = [read(resolve(path)) for path in [args.work_forms, args.graph_review, args.owner_inventory]]
+-    require(forms['schema'] == 'logos-engine.lot8b-delivery-work-forms.v1'
+-            and graph['schema'] == 'logos-engine.lot8b-delivery-work-graph-review.v1'
+-            and owners['schema'] == 'logos-engine.lot8b-delivery-owner-cost-source-inventory.v1', 'Unexpected functional schema')
++    require(forms['schema'] == 'logos-engine.lot9a-delivery-work-forms.v1'
++            and graph['schema'] == 'logos-engine.lot9a-delivery-work-graph-review.v1'
++            and owners['schema'] == 'logos-engine.lot9a-delivery-owner-cost-source-inventory.v1', 'Unexpected functional schema')
+     for artifact in [forms, graph]:
+         require(artifact['status'] == 'qualified_functional_work_forms_and_individual_graphs'
+                 and artifact['preparedOnly'] is True and artifact['officialPerformanceEligible'] is False
+@@ -195,9 +197,14 @@
+     functional_cases = read(resolve(forms['cases']['path']))
+     projection = lambda value: [{key: row[key] for key in CASE_KEYS} for row in value['cases']]
+     require(projection(cases) == projection(functional_cases), 'Functional and measured case semantics differ')
+-    require([x for x in owners['owners']['candidate'] if x != 'branch_routing'] == owners['owners']['baseline']
+-            and owners['owners']['candidate'].count('branch_routing') == 1
+-            and owners['programs']['candidate'] == owners['programs']['baseline'], 'Unexpected owner/program population')
++    require([x for x in owners['owners']['candidate'] if x != 'public_chart_navigation'] == owners['owners']['baseline']
++            and owners['owners']['candidate'].count('public_chart_navigation') == 1
++            and [x for x in owners['programs']['candidate'] if x != 'v6.chart_navigation.choose'] == owners['programs']['baseline']
++            and owners['programs']['candidate'].count('v6.chart_navigation.choose') == 1, 'Unexpected owner/program population')
++    require(owners['changes'] == {'ownersAdded': ['public_chart_navigation'], 'ownersRemoved': [],
++            'programsAdded': ['v6.chart_navigation.choose'], 'programsRemoved': []}, 'Unexpected owner/program delta')
++    require([len(owners['owners'][role]) for role in roots] == [62, 63]
++            and [len(owners['programs'][role]) for role in roots] == [28, 29], 'Owner/program counts differ')
+     for role in roots:
+         receipt = read(resolve(forms['captures'][role]['receipt']['path']))
+         require(receipt['status'] == 'captured_functional_structure' and receipt['role'] == role
+@@ -225,33 +232,117 @@
+                 and source_inventory['native'] == manifests[role],
+                 'Source-inventory role identity differs: ' + role)
+         proof_fingerprints(source_inventory, role)
+-    # These distinct final review/reconciliation receipts remain readable claims,
+-    # not an automatic inference from the qualifier's process exit code.
+-    require(isinstance(read(resolve(args.reconciliation)), dict), 'A real reconciliation receipt is required')
++    # Read the existing 9A review without reshaping it into a fictitious 8B gate.
++    # This is artifact reconciliation, not another work graph-reader execution.
++    require(resolve(args.reconciliation) == DELIVERY / 'final-reconciliation.json'
++            and resolve(args.functional_review) == DELIVERY / 'independent-delivery-review.json'
++            and resolve(args.work_forms) == DELIVERY / 'work-qualify-02/work-forms.json'
++            and resolve(args.graph_review) == DELIVERY / 'work-qualify-02/graph-review.json'
++            and resolve(args.owner_inventory) == DELIVERY / 'work-inventory-01/owner-source-inventory.json',
++            'Use the exact retained final delivery receipts')
++    reconciliation = read(resolve(args.reconciliation))
++    require(reconciliation['schema'] == 'logos-engine.lot9a.final-delivery-reconciliation.v1'
++            and reconciliation['status'] == 'passed' and reconciliation['failures'] == []
++            and reconciliation['nativeDigest'] == DIGESTS['candidate'] and reconciliation['nativeFiles'] == 334
++            and reconciliation['allNativeHashesMatchFrozenManifest'] is True
++            and reconciliation['allBuildHashesMatch'] is True
++            and reconciliation['allRecordedOutputsAndLogsVerified'] is True
++            and reconciliation['commandReceiptsVerified'] == 9
++            and reconciliation['passingCommands'] == 8 and reconciliation['retainedFailedCommands'] == 1
++            and reconciliation['officialPerformanceAccepted'] is False
++            and reconciliation['publicationPerformed'] is False, 'Final delivery reconciliation differs')
+     fp(args.reconciliation)
+     review = read(resolve(args.functional_review))
+-    require(review['schema'] == 'logos-engine.lot8b-final-functional-review.v1' and review['status'] == 'passed'
+-            and review['nativeDigests'] == DIGESTS and review['workForms'] == fp(args.work_forms)
+-            and review['graphReview'] == fp(args.graph_review) and review['blockingObjections'] == [],
++    require(review['schema'] == 'logos-engine.lot9a.independent-final-delivery-review.v1'
++            and review['status'] == 'favorable_independent_functional_delivery_artifact_review'
++            and review['findings'] == [] and review['releaseAuthority'] is False
++            and review['independence']['deliveryToolsAuthorIsReviewer'] is False,
+             'Final independent functional review missing, failed or not bound to these exact proofs')
++    for role in roots:
++        identity = review['sourceIdentity'][role]
++        require(identity['digest'] == DIGESTS[role] and identity['fileCount'] == manifests[role]['fileCount']
++                and identity['nativeVersion'] == VERSIONS[role], 'Independent review native identity differs')
++    require(review['sourceIdentity']['baseline']['sourceCommit'] == BASE_COMMIT
++            and review['sourceIdentity']['baseline']['siteVersion'] == 108
++            and review['sourceIdentity']['allCurrentNativeFilesMatchFrozenManifests'] is True,
++            'Independent review baseline differs')
++    for artifact in [args.work_forms, args.graph_review, args.owner_inventory,
++                     DELIVERY / 'common-capture-01/capture/receipt.json',
++                     DELIVERY / 'common-qualify-01/review/qualification.json']:
++        require(fp(artifact) in review['evidence'], 'Independent review does not bind exact artifact: ' + str(artifact))
++    for record in review['evidence']:
++        verify(record)
++    reviewed_work = review['workForms']
++    require(reviewed_work['status'] == graph['status'] and reviewed_work['forms'] == 4
++            and reviewed_work['checks'] == 64 and reviewed_work['differences'] == graph['differenceCount'] == 28279
++            and reviewed_work['unattributed'] == 0 and reviewed_work['readerAttemptsConsumed'] == 2
++            and reviewed_work['readerAttemptsRemaining'] == 0
++            and reviewed_work['originalReaderStatus'] == 'failed' and reviewed_work['correctiveReaderStatus'] == 'passed'
++            and reviewed_work['changedClassificationOnlyAt'] == '/whyAct/decision/total_ms'
++            and reviewed_work['allOtherParsedDifferenceRecordsIdentical'] is True,
++            'Retained work-reader correction/review changed')
++    require(graph['readerCorrection']['version'] == 2
++            and graph['readerCorrection']['priorFailurePreserved'] is True
++            and graph['readerCorrection']['recapturePerformed'] is False
++            and graph['readerCorrection']['onlyNewAttributionPath'] == '/whyAct/decision/total_ms'
++            and graph['differenceClasses']['attributed_bounded_release_report_duration'] == 58
++            and len(graph['releaseDurationBounds']) == 116, 'Bounded release-duration evidence differs')
++    for role in roots:
++        bounds = [r for r in graph['releaseDurationBounds'] if r['role'] == role]
++        require(len(bounds) == 58 and sum(r['mode'] == 'created_in_this_handle' for r in bounds) == 21,
++                'Release creation/retention counts differ')
++    common_capture_path = DELIVERY / 'common-capture-01/capture/receipt.json'
++    common_review_path = DELIVERY / 'common-qualify-01/review/qualification.json'
++    common_capture, common_review = read(common_capture_path), read(common_review_path)
++    require(common_capture['schema'] == 'logos-engine.lot9a.chart-common-capture.v1'
++            and common_capture['status'] == 'captured_synthetic_common_graphs'
++            and common_capture['failures'] == [] and common_capture['inputsUnchanged'] is True
++            and common_capture['nativeSourceUnchanged'] is True and common_capture['sourceHeadUnchanged'] is True
++            and common_capture['nativeBefore'] == common_capture['nativeAfter'] ==
++                {key: manifests['candidate'][key] for key in ['fileCount', 'digest']}
++            and common_capture['sessionStarts'] == common_capture['initializedSessions'] == 5
++            and common_capture['physicalReturns'] == 9 and common_capture['capturePoints'] == 52,
++            'Chart common capture differs')
++    require(common_review['schema'] == 'logos-engine.lot9a.chart-common-qualification.v1'
++            and common_review['status'] == 'qualified_synthetic_common_work_forms_and_complete_graphs'
++            and common_review['failures'] == [] and common_review['captureReceipt'] == fp(common_capture_path)
++            and common_review['completeGraphBlobs'] == 21 and common_review['runtimeExecutions'] == 0
++            and common_review['ownerExecutions'] == 0
++            and common_review['accounting']['thisPassedCapture'] == {'initializedSessions': 5,
++                'physicalReturns': 9, 'activeChartAcquisitions': 6, 'passiveChartAcquisitions': 2,
++                'suppressedChartAcquisitions': 1}, 'Chart common qualification differs')
++    require(review['commonCaller']['sessions'] == 5 and review['commonCaller']['returns'] == 9
++            and review['commonCaller']['points'] == 52 and review['commonCaller']['uniqueGraphs'] == 21,
++            'Independent common review differs')
++    for artifact in [common_capture, common_review]:
++        require(all(artifact[key] is False for key in
++            ['publicWorkerQualified', 'publicServiceQualified', 'publicTicketsQualified']),
++            'Native common scope was expanded into a public boundary claim')
++    require(all(review['publicAndPerformanceLimits'][key] is False for key in
++                ['positiveChartPublicServiceQualified', 'positiveChartPublicWorkerQualified',
++                 'positiveChartPublicTicketBoundaryQualified', 'officialPerformanceMeasurementPerformed',
++                 'globalPerformanceThresholdAssessed', 'publicationPerformedByThisStage']),
++            'Independent review historical limits were relabeled')
+     fp(args.functional_review)
+-    for name in ['prepare.py', 'prepare-v2.py', 'postprocess.py', 'analyze.mjs', 'review.py', 'README.md',
+-                 'preparation-v2/prepare-v2.diff', 'preparation-v2/diagnosis.json']:
++    for name in ['prepare.py', 'postprocess.py', 'analyze.mjs', 'review.py', 'README.md', 'provenance.json', 'syntax-checks.json']:
+         fp(TOOLS / name)
+-    preparation_provenance = {'generator': fp(TOOLS / 'prepare-v2.py'),
+-        'derivedFrom': fp(TOOLS / 'prepare.py'), 'diff': fp(TOOLS / 'preparation-v2/prepare-v2.diff'),
+-        'diagnosis': fp(TOOLS / 'preparation-v2/diagnosis.json'),
++    provenance = read(TOOLS / 'provenance.json')
++    require(provenance['schema'] == 'logos-engine.lot9a.final-cost-tools-provenance.v1', 'Unexpected tool provenance')
++    for derivation in provenance['derivations']:
++        verify(derivation['source'])
++        verify(derivation['target'])
++        verify(derivation['diff'])
++    preparation_provenance = {'generator': fp(TOOLS / 'prepare.py'),
++        'derivedFrom': fp(DERIVED / 'prepare-v2.py'),
++        'provenance': fp(TOOLS / 'provenance.json'),
+         'roleScopedSourceInventoryInputs': role_scoped_inputs,
+-        'qualification': 'Only sourceInventory fingerprints use their declared role checkout. Original paths and exact bytes/hashes are retained; generic artifact fingerprint semantics are unchanged.'}
+-    require(preparation_provenance['derivedFrom']['sha256'] ==
+-            '22680bf1833f2fc41ce5ff058ad6ec707138d3b27bc791c1907e93babda325d9',
+-            'Frozen original preparation changed')
++        'qualification': 'Only sourceInventory fingerprints use their declared role checkout. Original paths and exact bytes/hashes are retained. The existing 9A functional review, work-reader correction and common boundary are verified in their actual schemas without altering historical claims.'}
+     stamp = datetime.now(timezone.utc).isoformat()
+     output.mkdir(parents=True)
+     for name in ['cases.json', 'comparison-policy.json']:
+         (output / name).write_bytes((HISTORICAL / name).read_bytes())
+         fp(output / name)
+-    expected = {'schema': 'logos-engine.lot8b-final-cost-expected-forms.v1', 'recordedAt': stamp,
++    expected = {'schema': 'logos-engine.lot9a-final-cost-expected-forms.v1', 'recordedAt': stamp,
+                 'nativeDigests': DIGESTS, 'source': fp(args.work_forms), 'forms': forms['forms'],
+                 'qualification': 'Exact fresh final-source functional shapes, copied without transformation. Historical forms remain functional-only.'}
+     (output / 'expected-forms.json').write_text(json.dumps(expected, indent=2, ensure_ascii=False) + '\n')
+@@ -259,15 +350,21 @@
+     relative = output.relative_to(ROOT).as_posix()
+     command = ['python', '-B', 'scripts/run-native-cost-window.py', str(baseline), relative,
+                identities['baseline']['manifest']['path'], identities['candidate']['manifest']['path']]
+-    protocol = f'''# Lot 8B : coût prospectif de native 0.67\n\nDéclaré le {stamp}. Référence A : Site107/native0.66, commit {BASE_COMMIT}. Candidat B : native0.67, digest {DIGESTS['candidate']}.\n\nLa fenêtre conserve A1/B1/B2/A2, STCK10 puis SMLP15, quatre sessions froides par jeu et série. Les 32 sessions mesurées (400 actions) et huit chauffes distinctes (24 actions) sont toutes conservées. Seules les chauffes sont exclues des médianes. Huit durées complètes sont groupées par jeu/version. La médiane B doit être strictement inférieure à 1,1 fois A pour chacun des deux jeux, sans compensation ni exclusion. Les phases au-dessus de 10% restent visibles et peuvent être admises si les deux globaux passent.\n\nLes durées proviennent uniquement du runner conservé. session_elapsed mesure le parcours complet du contrôleur jusqu'au dernier retour acquis, pauses/reprises incluses. Le démarrage worker, begin, les inspections terminales et close restent hors de cette durée ; le moteur de jeu, le réseau et le rendu navigateur ne sont pas mesurés. Les phases sont imbriquées et ne s'additionnent pas. Aucun p95 pour huit durées.\n\nLes cas et la politique sont copiés octet pour octet depuis3H ; leurs anciens commentaires ne désignent pas les versions de cette fenêtre. Les cas fonctionnels sont reliés par les six champs exacts déclarés, pas par une fausse égalité de leurs fichiers. Les quatre formes finales sont copiées sans modifier leurs valeurs. Chaque future session et chauffe doit correspondre à sa propre forme. Tous les autres champs de workSignature, phases, pauses et placements doivent rester identiques entre versions et dans chaque version. Seuls observations[*].nodeCount, inspection[*].graphNodes, final.nodeCount et final.graphRevision admettent les valeurs exactes prouvées avant mesure. Aucun autre écart n'est accepté.\n\nLa comparaison stricte historique est réellement exécutée et conservée. Le lecteur complémentaire8B accepte uniquement un refus de métadonnées de travail observé, sans sortie, puis vérifie indépendamment le contrat limité ci-dessus. Il ne transforme pas ce refus en succès. Les deux comparaisons de paires et tous les temps bruts restent conservés ; leur statut de phase ne tranche pas le global. Le calculateur JavaScript réutilise les fonctions historiques inchangées. Le reviewer Python recalcule les effectifs, formes, signatures, phases et seuil strict depuis les rapports bruts.\n\nLa préparation n'établit ni readiness ni isolation. Le contrôleur externe doit acquérir une exclusivité non bloquante, superviser le groupe entier et libérer son propre descripteur sans supprimer le verrou. Le plafond proposé est1800s actives ; les réserves exactes de fermeture et de conservation sont fixées prospectivement par le plan du contrôleur. Aucun prérequis de disponibilité ou de publication des autres lots ne s'applique au travail ordinaire. Les analyses suivent la libération du verrou. Aucun nouveau jeu ni LKEY n'est exécuté.\n\nCommande mesurée, uniquement sous le contrôleur déclaré :\n\n```json\n{json.dumps(command, ensure_ascii=False)}\n```\n'''
++    protocol = f'''# Lot 9A : coût prospectif de native 0.68\n\nDéclaré le {stamp}. Référence A : Site108/native0.67, commit {BASE_COMMIT}. Candidat B : native0.68, digest {DIGESTS['candidate']}.\n\nLa fenêtre conserve A1/B1/B2/A2, STCK10 puis SMLP15, quatre sessions froides par jeu et série. Les 32 sessions mesurées (400 actions) et huit chauffes distinctes (24 actions) sont toutes conservées. Seules les chauffes sont exclues des médianes. Huit durées complètes sont groupées par jeu/version. La médiane B doit être strictement inférieure à 1,1 fois A pour chacun des deux jeux, sans compensation ni exclusion. Les phases au-dessus de 10% restent visibles et peuvent être admises si les deux globaux passent.\n\nLes durées proviennent uniquement du runner conservé. session_elapsed mesure le parcours complet du contrôleur jusqu'au dernier retour acquis, pauses/reprises incluses. Le démarrage worker, begin, les inspections terminales et close restent hors de cette durée ; le moteur de jeu, le réseau et le rendu navigateur ne sont pas mesurés. Les phases sont imbriquées et ne s'additionnent pas. Aucun p95 pour huit durées.\n\nLes cas et la politique sont copiés octet pour octet depuis3H ; leurs anciens commentaires ne désignent pas les versions de cette fenêtre. Les cas fonctionnels sont reliés par les six champs exacts déclarés, pas par une fausse égalité de leurs fichiers. Les quatre formes finales sont copiées sans modifier leurs valeurs. Chaque future session et chauffe doit correspondre à sa propre forme. Tous les autres champs de workSignature, phases, pauses et placements doivent rester identiques entre versions et dans chaque version. Seuls observations[*].nodeCount, inspection[*].graphNodes, final.nodeCount et final.graphRevision admettent les valeurs exactes prouvées avant mesure. Aucun autre écart n'est accepté.\n\nLa comparaison stricte historique est réellement exécutée et conservée. Le lecteur complémentaire9A accepte uniquement un refus de métadonnées de travail observé, sans sortie, puis vérifie indépendamment le contrat limité ci-dessus. Il ne transforme pas ce refus en succès. Les deux comparaisons de paires et tous les temps bruts restent conservés ; leur statut de phase ne tranche pas le global. Le calculateur JavaScript réutilise les fonctions historiques inchangées. Le reviewer Python recalcule les effectifs, formes, signatures, phases et seuil strict depuis les rapports bruts.\n\nLa préparation n'établit ni readiness ni isolation. Le contrôleur externe doit acquérir une exclusivité non bloquante, superviser le groupe entier et libérer son propre descripteur sans supprimer le verrou. Le plafond proposé est1800s actives ; les réserves exactes de fermeture et de conservation sont fixées prospectivement par le plan du contrôleur. Aucun prérequis de disponibilité ou de publication des autres lots ne s'applique au travail ordinaire. Les analyses suivent la libération du verrou. Aucun nouveau jeu ni LKEY n'est exécuté.\n\nCommande mesurée, uniquement sous le contrôleur déclaré :\n\n```json\n{json.dumps(command, ensure_ascii=False)}\n```\n'''
+     (output / 'protocol.md').write_text(protocol)
+     fp(output / 'protocol.md')
+-    contract = {'schema': 'logos-engine.lot8b-final-cost-contract.v1', 'status': 'declared_before_official_window',
++    contract = {'schema': 'logos-engine.lot9a-final-cost-contract.v1', 'status': 'declared_before_official_window',
+         'recordedAt': stamp, 'preparation': preparation_provenance, 'performanceDirectory': relative, 'baseline': identities['baseline'], 'candidate': identities['candidate'],
+         'nativeDigests': DIGESTS, 'cases': fp(output / 'cases.json'), 'comparisonPolicy': fp(output / 'comparison-policy.json'),
+         'expectedForms': fp(output / 'expected-forms.json'), 'protocol': fp(output / 'protocol.md'),
+         'functionalForms': fp(args.work_forms), 'graphReview': fp(args.graph_review), 'ownerInventory': fp(args.owner_inventory),
+         'functionalReview': fp(args.functional_review), 'reconciliation': fp(args.reconciliation),
++        'commonCapture': fp(common_capture_path), 'commonQualification': fp(common_review_path),
++        'retainedQualificationLimits': {'positiveChartPublicServiceQualified': False,
++            'positiveChartPublicWorkerQualified': False, 'positiveChartPublicTicketsQualified': False,
++            'workReaderAttemptsConsumed': 2, 'workReaderAttemptsRemaining': 0,
++            'workReaderFirstFailureRetained': True, 'releaseDurationAttribution': 'bounded_not_reconstructed',
++            'sourceOracleAdditionalExecutionAuthorized': False, 'LKEY': 'permanently_closed'},
+         'functionalCaseProjection': {'keys': CASE_KEYS, 'values': projection(cases), 'byteIdentityClaimed': False},
+         'historicalTools': official, 'supplementaryTools': {'analyzer': fp(TOOLS / 'analyze.mjs'), 'reviewer': fp(TOOLS / 'review.py')},
+         'measurement': {'order': ORDER, 'rounds': 4, 'measuredSessions': 32, 'measuredActions': 400,
+@@ -276,7 +373,7 @@
+         'globalRule': {'authorization': QUOTE, 'stage': 'session_elapsed', 'relativeIncreaseLimit': 0.1,
+             'comparison': 'strictly_less_than', 'allCasesMustPass': True, 'crossCaseCompensation': False,
+             'phaseOverrunsMayBeAccepted': True},
+-        'structuralRule': {'owner': 'branch_routing', 'addedPrograms': [],
++        'structuralRule': {'owner': 'public_chart_navigation', 'addedPrograms': ['v6.chart_navigation.choose'],
+             'allowedPaths': ['observations[*].nodeCount', 'inspection[*].graphNodes', 'final.nodeCount', 'final.graphRevision'],
+             'mode': 'exact_predeclared_functional_values', 'unattributedDifferencesAllowed': 0},
+         'controls': {'noNativeExecution': True, 'readinessEstablished': False, 'isolationEstablished': False,

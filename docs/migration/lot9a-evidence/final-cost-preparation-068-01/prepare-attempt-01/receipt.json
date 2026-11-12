@@ -1,0 +1,53 @@
+{
+  "schema": "logos-engine.lot9a.prospective-static-preparation.v1",
+  "status": "passed",
+  "startedAt": "2026-11-12T15:31:46.391669+00:00",
+  "command": [
+    "python",
+    "-B",
+    "docs/migration/lot9a-evidence/tools/final-cost/prepare.py",
+    "--baseline-checkout",
+    "/workspace/sites/sra-lot9a-baseline067-20261112",
+    "--baseline-manifest",
+    "docs/migration/lot9a-evidence/delivery-final-068-01/baseline-native.json",
+    "--candidate-manifest",
+    "docs/migration/lot9a-evidence/delivery-final-068-01/candidate-native.json",
+    "--reconciliation",
+    "docs/migration/lot9a-evidence/delivery-final-068-01/final-reconciliation.json",
+    "--work-forms",
+    "docs/migration/lot9a-evidence/delivery-final-068-01/work-qualify-02/work-forms.json",
+    "--graph-review",
+    "docs/migration/lot9a-evidence/delivery-final-068-01/work-qualify-02/graph-review.json",
+    "--owner-inventory",
+    "docs/migration/lot9a-evidence/delivery-final-068-01/work-inventory-01/owner-source-inventory.json",
+    "--functional-review",
+    "docs/migration/lot9a-evidence/delivery-final-068-01/independent-delivery-review.json",
+    "--output-directory",
+    "docs/migration/lot9a-evidence/final-performance-068-01"
+  ],
+  "timeoutSeconds": 120,
+  "nativeExecutionPerformed": false,
+  "globalLockAcquired": false,
+  "automaticRetry": false,
+  "generator": {
+    "path": "docs/migration/lot9a-evidence/tools/final-cost/prepare.py",
+    "bytes": 30228,
+    "sha256": "34a35bc110961d93102f17fdac1a6c853f22dbade58676c2c0c06c141db4def9"
+  },
+  "stdout": {
+    "path": "docs/migration/lot9a-evidence/final-cost-preparation-068-01/prepare-attempt-01/stdout.log.gz",
+    "bytes": 221,
+    "sha256": "f53ecf0d215f0c5953b81bf3727b7cf1a84a17cee73d013a18b08f902342b1d2"
+  },
+  "stderr": {
+    "path": "docs/migration/lot9a-evidence/final-cost-preparation-068-01/prepare-attempt-01/stderr.log.gz",
+    "bytes": 20,
+    "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+  },
+  "finishedAt": "2026-11-12T15:31:46.971335+00:00",
+  "elapsedSeconds": 0.5793061789991043,
+  "exitCode": 0,
+  "error": null,
+  "childProcessReaped": true,
+  "generatorUnchanged": true
+}

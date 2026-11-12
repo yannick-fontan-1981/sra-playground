@@ -1,0 +1,70 @@
+{
+  "schema": "logos-engine.lot9a-coordination-tools-provenance.v1",
+  "preparedAt": "2026-11-12T15:29:38.704886+00:00",
+  "scope": "prospective_controller_derivation_no_execution",
+  "sourceCheckpoint": "6f98d0651a6692e9967627ff45ba5b2c7976ac58",
+  "derivation": [
+    {
+      "source": {
+        "path": "docs/migration/lot8b-evidence/tools/final-coordination/common.py",
+        "bytes": 16512,
+        "sha256": "b036da919503dff28cfb6e3cb3a18f73b5c5eb28a26d3d82bfd5d37dbd31fb39"
+      },
+      "destination": {
+        "path": "docs/migration/lot9a-evidence/tools/final-coordination/common.py",
+        "bytes": 16496,
+        "sha256": "6dcb18bcdea048949640b590d8178d1a6223c1ea05751df183319d008215d0be"
+      },
+      "fullDiff": {
+        "path": "docs/migration/lot9a-evidence/tools/final-coordination/derivation-diffs/common.py.diff",
+        "bytes": 2776,
+        "sha256": "df9f31b200c7f9e69a15edabed69ac3e645b59398d347bfba42d62bdc20ec990"
+      }
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot8b-evidence/tools/final-coordination/performance.py",
+        "bytes": 32601,
+        "sha256": "40c1418a7b6812e10e432c4f2b3447b8b20b6b6b3faa7767cfbe01d5d604800f"
+      },
+      "destination": {
+        "path": "docs/migration/lot9a-evidence/tools/final-coordination/performance.py",
+        "bytes": 32638,
+        "sha256": "ac956ac581931af867c0a138a72709bbbe78186a2c3ef46af9b9a3a00484d6f3"
+      },
+      "fullDiff": {
+        "path": "docs/migration/lot9a-evidence/tools/final-coordination/derivation-diffs/performance.py.diff",
+        "bytes": 6321,
+        "sha256": "195e5f06c0c933da5ed0e8a2520653c3c2e7383bb0a454b723a88452d4daa930"
+      }
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot8b-evidence/tools/final-coordination/publication.py",
+        "bytes": 10505,
+        "sha256": "d955c32bcf8b41bba0823f0d36c71b2962770b8250d9105e2fd6281cb94621f8"
+      },
+      "destination": {
+        "path": "docs/migration/lot9a-evidence/tools/final-coordination/publication.py",
+        "bytes": 10505,
+        "sha256": "b7842a837eae6f3aeba7f4e5ca938fa29d7691dc16bade6cb072f10bed9d49d5"
+      },
+      "fullDiff": {
+        "path": "docs/migration/lot9a-evidence/tools/final-coordination/derivation-diffs/publication.py.diff",
+        "bytes": 2795,
+        "sha256": "d6961dd08071092a62488d815794eb40da614d5c3f2652d960a1176a279d34f5"
+      }
+    }
+  ],
+  "changes": [
+    "Lane owner, schema, evidence paths, own status and owned baseline prefix changed from lot8b/lot8a to lot9a.",
+    "Structural cost-contract rule changed from branch_routing with no added program to public_chart_navigation with v6.chart_navigation.choose.",
+    "All lock, cleanup, timeout, readiness, process observation and source integrity algorithms retained byte-for-byte after those substitutions."
+  ],
+  "noNativeExecution": true,
+  "noLockAcquisition": true,
+  "sharedFilesModified": false,
+  "historicalFilesModified": false,
+  "officialPerformanceAccepted": false,
+  "publicationPerformed": false
+}
