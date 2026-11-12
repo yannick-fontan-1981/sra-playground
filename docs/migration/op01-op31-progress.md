@@ -467,3 +467,73 @@ Statut C4 : **audit donneur avancé, aucun raccordement nécessaire démontré �
 ### Prochaine étape concrète
 
 Poursuivre avec C5 sur les mécanismes d'information et d'exploration déjà présents dans le donneur V6, en vérifiant si une information obtenue modifie réellement la suite plutôt que de seulement enrichir une trace.
+
+
+## C5 — information et exploration donneuses
+
+Le détail est enregistré dans `docs/migration/op01-op31-c5-donor-information.md`.
+
+### Périmètre réellement couvert
+
+OP06, OP07, OP13, OP20, OP21, OP22, OP23 avec lecture de :
+- `common_mechanisms.py` ;
+- `ObservedFrontier` ;
+- `composition_curiosity.py` ;
+- `TemporalQuestions` ;
+- `CompositionTargetTree` ;
+- `strategy.py`.
+
+### OP qualifiées
+
+- **OP06** : besoin réel couvert par la réfutation spécialisée de règles empiriques ; contre-exemple → statut refuted → predictive_use_allowed=False.
+- **OP07** : besoin réel couvert par `ObservedFrontier`, qui choisit une question ou un accès et produit OP18/OP28 sous bornes.
+- **OP13** : portée d'effet déjà conservée dans les règles et effets mesurés ; cette portée contrôle le droit de prédiction.
+- **OP20** : aucun besoin générique « utilité objet inconnue » démontré ; les questions sont ciblées par une décision concrète.
+- **OP21** : idem pour les espaces ; exploration orientée question, pas visite systématique.
+- **OP22** : recouvrement spécialisé partiel via expériences de contrôle/contraste et récepteurs attendus.
+- **OP23** : questions temporelles réelles, mais predictive_use_allowed=False ; aucune prévision autonome générale démontrée.
+
+### Chaîne décisionnelle démontrée
+
+Question mesurable → élection d'un information goal → OP18 → observation indépendante → reconcile → hypothèses matched/contradicted/unknown → règle maintenue ou réfutée → frontier/stratégie choisit la suite.
+
+### Performance
+
+Aucun changement runtime ; aucun coût ajouté.
+
+## C6 — blocages, reprises et variantes donneuses
+
+Le détail est enregistré dans `docs/migration/op01-op31-c6-donor-recovery.md`.
+
+### OP qualifiées
+
+- **OP16** : aucun producteur de deadlock global prouvé ; `frontier_exhausted` reste un échec local de recherche bornée.
+- **OP17** : return fork + preservation couvrent partiellement la reprise, mais pas une structure générique `authorized/preserve_verified`.
+- **OP19** : le donneur possède des préfixes conditionnels bornés et arrêt au premier effet non mesuré, mais ne prouve pas que les pas sont « forced ».
+- **OP24** : plusieurs générateurs spécialisés proposent des routes/détours observés ; filtre générique non démontré.
+- **OP27** : préservation forte disponible, mais générateur générique de permutations non identifié.
+
+### Principe confirmé
+
+Impossibilité prouvée, information manquante et recherche bornée sans résultat restent trois statuts distincts.
+
+### Performance
+
+Aucun changement runtime ; aucun coût ajouté.
+
+## Feuille de route actualisée après C5/C6
+
+| Lot | État | Prochaine preuve concrète |
+| --- | --- | --- |
+| C0 | **terminé** | registre conservé |
+| C1 | **préparé** | instrumenter port TypeScript dès disponibilité |
+| C2 | **qualifié sur donneur pour 18/28 ; partiel 29/30/31** | lecteurs OP29/31 + restauration/lecture future OP30 |
+| C3 | **recouvrement spécialisé qualifié** | raccorder seulement un besoin non couvert |
+| C4 | **audit donneur qualifié** | consommateur générique requis avant activation |
+| C5 | **audit donneur qualifié** | conserver boucle informationnelle spécialisée |
+| C6 | **audit donneur qualifié** | ne pas confondre recherche bornée et impossibilité |
+| C7 | **prochaine étape documentaire** | consolider les 31 dispositions et lister les preuves encore indispensables au port TypeScript |
+
+### Prochaine étape concrète
+
+Produire C7 provisoire : une matrice finale des 31 OP avec disposition, niveau de preuve, fonction spécialisée éventuelle, dette exacte et statut performance. C7 ne sera pas déclaré complètement clos tant que C1 n'aura pas instrumenté le port TypeScript et que les performances consolidées n'auront pas été mesurées.
