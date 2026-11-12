@@ -630,3 +630,29 @@ Le prochain travail à valeur maximale est désormais C1 sur le checkout TypeScr
 `src/logos-engine/v6-*`. En attendant sa disponibilité, les seules dettes utiles
 à approfondir dans le donneur sont OP29/30/31 ; les autres familles ont désormais
 une disposition explicite et ne justifient pas d'ajout artificiel.
+
+
+## C2 — dettes donneuses OP29/30/31 resserrées
+
+Le détail est enregistré dans `docs/migration/op01-op31-c2-residual-debts.md`.
+
+Après recherche ciblée dans les fichiers V6 liés à mémoire, résultats, objectifs,
+retours et décisions :
+
+- **OP29** : disposition donneuse = `information_only`.
+- **OP30** : disposition donneuse = `persisted_only`.
+- **OP31** : disposition donneuse = `information_only`.
+
+Aucun lecteur de `knowledge:<composition>:<property>` n'a été trouvé dans les
+fichiers V6 inspectés. Le benchmark existant ne relit pas non plus cette clé
+après reopen malgré son commentaire.
+
+C2 donneur est donc désormais stabilisé ainsi :
+- OP18 : garde de release démontrée ;
+- OP28 : garde de release démontrée ;
+- OP29 : information_only ;
+- OP30 : persisted_only ;
+- OP31 : information_only.
+
+Le port TypeScript devra être audité sans présumer qu'il conserve exactement
+ces dispositions.
