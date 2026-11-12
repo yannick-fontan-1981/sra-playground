@@ -1,5 +1,51 @@
 # Complément 8B : qualification du trajet public BranchRouting
 
+## Résultat courant : trajet positif qualifié, réserve structurelle ouverte
+
+La [lecture indépendante](qualify-02/review/qualification.json) réussit
+**661 groupes de contrôles**, sans échec, avec le statut
+`passed_in_revised_positive_scope`. La [synthèse](validation-summary.json)
+lie les captures, les preuves, leurs limites et la feuille de route.
+
+| Preuve nouvelle | Résultat observé |
+| --- | --- |
+| Trajet de production | Bundle worker publié inchangé, service, client et contrôleur réels, dans des threads Node |
+| Scénarios froids | Trois : simple, sélection/préfixe triple, retour contraire |
+| Retours, tickets consommés et acquisitions BranchRouting | **18 / 18 / 18**, répartis 6 + 7 + 5 |
+| Inspection des graphes | **58 inspections, 2 578 deltas**, 36 graphes uniques reliés à 116 références sans perte |
+| Refus récupérables | **7/7**, avec ticket et graphe conservés |
+| Pause | **4/4** : trois avant dispatch et une pendant un dispatch engagé |
+| Préfixe triple | Six retours reçus pour cinq acquisitions, puis sept acquisitions au scellement après le septième retour |
+| Contre-retour | Révision de `ACTION1` de `[0, -2]` vers `[0, 2]`, puis question de calibration effectivement autorisée |
+| Fermeture positive | Trois réponses `host_session_closed`, puis trois threads terminés et acquittés |
+| Ensemble des tentatives | Cinq threads créés, cinq fermés, y compris les deux observations terminales |
+| Identité de publication | 331 fichiers natifs, 74 membres du build et six sources publiques identiques au publié 0.67 |
+
+Les deux questions finales supplémentaires sont inspectées puis fermées, sans
+exécution. Aucun niveau réussi n'est ajouté. La capture positive a pris
+53,742 secondes, son superviseur 54,106 secondes et la lecture indépendante
+66,345 secondes ; ces durées instrumentées ne sont pas des mesures officielles
+de performance.
+
+La [sonde séparée de palette](terminal-probe-01/probe/receipt.json) confirme
+`internal: A public pixel is not a palette index.`, puis `resume` et `close`
+refusés comme `stale`, sans retour physique valide. Le contre-exemple de
+dimensions reste conservé en échec. **La récupération après ces erreurs
+structurelles n'est pas qualifiée.** Les deux paquets présentent aussi un écart
+avec leur dernière image d'animation : le message exact identifie la validation
+prioritaire atteinte, sans prétendre isoler un seul défaut dans ces paquets.
+
+La [publication observée](site-observation.json) reste **Site 108 / native 0.67**,
+active et privée au propriétaire. Cette étape n'a modifié aucun fichier de
+production, exécuté aucune nouvelle mesure officielle, acquis aucun verrou
+global ni effectué une nouvelle publication. Les coûts officiels 0.67 acceptés
+dans leur fenêtre antérieure restent distincts.
+
+**Prochaine étape fonctionnelle : 9A `chart_navigation`**, puis 9B et 9C. Le
+lot 7 est livré dans ses périmètres annoncés ; la consolidation globale du
+lot 11 reste ouverte. La réserve structurelle ci-dessus reste un suivi commun
+explicite et ne réouvre pas LKEY.
+
 ## Périmètre déclaré avant exécution
 
 Cette étape complète le lot 8B publié dans **Site 108 / native 0.67.0**,
@@ -82,4 +128,5 @@ encodage de conservation sans perte, sans modification des messages réellement
 2 Gio pour le journal et les graphes uniques non compressés ; les limites
 de 45 secondes par RPC et 360 secondes de capture restent identiques.
 
-Aucun résultat positif complet n'est encore revendiqué dans ce jalon.
+Le résultat révisé en tête de document complète ce premier constat sans changer
+son statut historique d'échec ni ses octets.

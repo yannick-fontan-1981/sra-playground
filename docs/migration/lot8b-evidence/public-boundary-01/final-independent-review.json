@@ -1,0 +1,258 @@
+{
+  "schema": "logos-engine.lot8b.public-boundary-final-independent-review.v1",
+  "reviewedAtUtc": "2026-11-12 13:34:02 UTC",
+  "reviewer": "/root/branch_public_transport",
+  "status": "favorable_with_structural_validation_reservation",
+  "scope": "Targeted independent review of retained published identity, failures, RPC closure, worker termination and graph ownership.",
+  "runtimeExecuted": false,
+  "fullQualifierRepeated": false,
+  "nativeIntegrityChecksRepeatedForPersistence": false,
+  "inputs": [
+    {
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/capture-01/capture/receipt.json",
+      "bytes": 160331,
+      "sha256": "b65d2c045add7bcf4823e0841c6e55c3ab86cb23bff161236a60fa398ec3fd62"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/capture-02/capture/receipt.json",
+      "bytes": 628485,
+      "sha256": "e7ea3d4514f53ccca3b27ba86c6c451ea3489257eb1a0e10a3be60f7cd837cfb"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/terminal-probe-01/probe/receipt.json",
+      "bytes": 297452,
+      "sha256": "6466b051040f9d5487b261c25cb657826950c1e6b604fa9d50812237704e9be2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/public-boundary-01/qualify-02/review/qualification.json",
+      "bytes": 171784,
+      "sha256": "a29d611fb688bbe97fd4b69685e72e83d152b3c28772c5c30f4af0738c286abc"
+    }
+  ],
+  "independentReader": {
+    "observedStatus": "passed_in_revised_positive_scope",
+    "assertions": 661,
+    "failures": 0,
+    "qualificationsNotReexecutedByThisReviewer": true
+  },
+  "publishedIdentity": {
+    "sourceCommit": "8462204043aa368faa7df280d796bb706eb53b38",
+    "nativeVersion": "0.67.0",
+    "siteVersion": 108,
+    "nativeDigest": "c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a",
+    "nativeFilesVerifiedEarlier": 331,
+    "buildMembersVerifiedEarlier": 74,
+    "productionRuntimeSourcesComparedWithGitShow": 6,
+    "mismatches": 0,
+    "productionChanged": false,
+    "bundle": {
+      "path": "dist/assets/v6-agent-worker-XfSw5eyq.js",
+      "bytes": 7016605,
+      "sha256": "9c114f84e769879507618de08c9872020e8c65d33dc317dfe7ee959b6495a38f"
+    },
+    "allWorkersRecordedActualEntrypointReady": true,
+    "eachWorkerFetchedOnlyTwoFingerprintVerifiedDeclaredAssets": true,
+    "nativeServiceSubstituted": false,
+    "nativeRuntimeSubstituted": false,
+    "acquiredStateInjected": false
+  },
+  "positiveCapture": {
+    "status": "captured",
+    "scope": "Revised declared synthetic public 64x64 scenarios over production worker, service, client and controller.",
+    "sessions": 3,
+    "hostDispatches": 18,
+    "publicReturns": 18,
+    "resets": 0,
+    "recoverableProtocolChecks": 7,
+    "captureElapsedMs": 53742,
+    "supervisorElapsedSeconds": 54.10569719899922,
+    "timingsEligibleForOfficialPerformance": false,
+    "beforeAfterInputsUnchanged": true,
+    "environmentErrors": 0,
+    "loggingFailures": 0
+  },
+  "closure": {
+    "actualWorkerTerminations": 5,
+    "explicitPositiveRpcCloses": 3,
+    "terminalRpcClosesReturningStale": 2,
+    "allTerminationsObservedAsRequestedThenExitThenAcknowledged": true,
+    "allWorkerExitCodes": 1,
+    "exitCodeQualification": "Every exit follows an explicit terminate request and has a matching acknowledgement; these codes do not establish unexpected worker crashes.",
+    "workers": [
+      {
+        "attempt": "capture-01",
+        "caseId": "single-positive",
+        "threadId": 1,
+        "terminationEventOrdinals": [
+          101,
+          102,
+          103
+        ],
+        "rpcClose": "stale"
+      },
+      {
+        "attempt": "capture-02",
+        "caseId": "single-positive",
+        "threadId": 1,
+        "terminationEventOrdinals": [
+          279,
+          280,
+          281
+        ],
+        "rpcClose": "ok_host_session_closed"
+      },
+      {
+        "attempt": "capture-02",
+        "caseId": "triple-prefix",
+        "threadId": 2,
+        "terminationEventOrdinals": [
+          488,
+          489,
+          490
+        ],
+        "rpcClose": "ok_host_session_closed"
+      },
+      {
+        "attempt": "capture-02",
+        "caseId": "contrary-return",
+        "threadId": 3,
+        "terminationEventOrdinals": [
+          652,
+          653,
+          654
+        ],
+        "rpcClose": "ok_host_session_closed"
+      },
+      {
+        "attempt": "terminal-probe-01",
+        "caseId": "terminal-invalid-palette",
+        "threadId": 1,
+        "terminationEventOrdinals": [
+          20,
+          21,
+          22
+        ],
+        "rpcClose": "stale"
+      }
+    ],
+    "workerIdentityQualification": "threadId is local to each capture process; attempt and caseId disambiguate repeated identifiers.",
+    "positiveCloseResults": {
+      "ok": true,
+      "kind": "stopped",
+      "phase": "stopped",
+      "reason": "host_session_closed",
+      "command": null,
+      "ticket": null
+    }
+  },
+  "structuralReservation": {
+    "status": "observed_unresolved_recovery_limitation",
+    "originalScopePassed": false,
+    "originalFailureReclassifiedAsPassed": false,
+    "productionFixClaimed": false,
+    "structuralTicketRecoveryClaimed": false,
+    "positiveScopeExcludesRecoverableChecks": [
+      "invalid_frame_dimensions",
+      "invalid_palette"
+    ],
+    "capture01": {
+      "retainedStatus": "failed",
+      "validPhysicalReturns": 0,
+      "receiptAndCompressedEventsFingerprintsVerifiedEarlier": true,
+      "eventsSha256": "27337f073a7963a0bb315e23f342cc130d8ee005898245ad4111ac18c557d3ca",
+      "frame": {
+        "height": 63,
+        "width": 64,
+        "lastAnimationEqualsFrame": false
+      },
+      "error": {
+        "code": "internal",
+        "message": "The public game frame must be 64 × 64."
+      },
+      "resumeError": "stale",
+      "closeError": "stale"
+    },
+    "paletteProbe": {
+      "retainedStatus": "captured_terminal_failure",
+      "validPhysicalReturns": 0,
+      "successfulAdvances": 0,
+      "hostDispatches": 0,
+      "frame": {
+        "height": 64,
+        "width": 64,
+        "invalidPixel": {
+          "x": 0,
+          "y": 0,
+          "value": 16
+        },
+        "lastAnimationEqualsFrame": false
+      },
+      "sameInitialSessionAndTicket": true,
+      "advanceSequence": 1,
+      "error": {
+        "code": "internal",
+        "message": "A public pixel is not a palette index."
+      },
+      "resumeSequence": 0,
+      "resumeError": "stale",
+      "closeSequence": 0,
+      "closeError": "stale"
+    },
+    "interpretation": "Exact errors establish the priority structural-validation paths. Published projection throws TypeError; service catch marks the session closed and clears its pending authorization; worker emits internal. Subsequent matching-session resume and close return stale. No separate successful terminal close RPC is claimed.",
+    "compoundInvalidityLimit": "Both malformed final frames also differ from their last animation frame. Neither retained case isolates exactly one invalid property. No additional probe was run.",
+    "staleCodeLimit": "A stale error alone does not establish closure: recoverable wrong-session/ticket/sequence controls also use stale."
+  },
+  "knowledgeBlobAttribution": {
+    "derivedFrom": "caseId enclosing each $captureKnowledgeRef in capture-02/capture/events.jsonl.gz",
+    "uniqueGraphs": 36,
+    "referenceOccurrences": 116,
+    "rawBytes": 402675854,
+    "gzipBytes": 43830137,
+    "cases": [
+      {
+        "caseId": "single-positive",
+        "uniqueGraphs": 12,
+        "referenceOccurrences": 56,
+        "rawBytes": 133492919,
+        "gzipBytes": 14521899
+      },
+      {
+        "caseId": "triple-prefix",
+        "uniqueGraphs": 13,
+        "referenceOccurrences": 34,
+        "rawBytes": 148629792,
+        "gzipBytes": 16135808
+      },
+      {
+        "caseId": "contrary-return",
+        "uniqueGraphs": 11,
+        "referenceOccurrences": 26,
+        "rawBytes": 120553143,
+        "gzipBytes": 13172430
+      }
+    ],
+    "graphsSharedAcrossCases": 0,
+    "unreferencedGraphs": 0,
+    "undeclaredReferences": 0,
+    "descriptorMismatches": 0,
+    "firstTwoCasesGzipBytes": 30657707,
+    "graphHydrationOrSemanticChecksRepeatedByThisReviewer": false
+  },
+  "limitations": [
+    "Favorable conclusion applies to the revised positive scope and the targeted evidence review; the original structural-recovery contract remains unpassed.",
+    "Observed Node worker execution does not qualify browser Worker construction, DOM, HTTP delivery or CSP.",
+    "Synthetic public returns do not establish real game execution, solved levels, complete original model identity or full V6 parity.",
+    "Functional timings are instrumented and include concurrent ordinary work; no official performance claim is made.",
+    "Graph ownership is unambiguous, but this review does not replace the independent reader's retained 661 checks.",
+    "The historical reservation's palette-not-yet-executed statement describes its earlier timestamp; the separate retained probe supplies the later observation."
+  ],
+  "reviewActivity": {
+    "sourceOrFrozenToolEdits": 0,
+    "runtimeOrProbeExecutions": 0,
+    "replayOrOracleExecutions": 0,
+    "officialPerformanceMeasurements": 0,
+    "locksAcquired": 0,
+    "publicationActions": 0,
+    "LKEY": "permanently_closed"
+  }
+}
