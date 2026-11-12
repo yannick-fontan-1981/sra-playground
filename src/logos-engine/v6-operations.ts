@@ -10,6 +10,7 @@ export interface OperationResult {
 }
 
 function normalize(value: any): any {
+  if (value === undefined) return null;
   if (Array.isArray(value)) return value.map(normalize);
   if (value && typeof value === 'object') {
     return Object.fromEntries(Object.keys(value).sort().map(key => [key, normalize(value[key])]));
@@ -26,6 +27,11 @@ function sameValue(a: any, b: any): boolean {
 }
 
 /** Match Python container truthiness used by the V6 donor implementation. */
+export function pythonGet(record: SymbolicRecord | undefined, key: string, fallback: any = null): any {
+  if (!record || !Object.hasOwn(record, key)) return fallback;
+  return record[key];
+}
+
 export function pythonTruthy(value: any): boolean {
   if (value === null || value === undefined || value === false) return false;
   if (typeof value === 'number' || typeof value === 'bigint') return value !== 0;
@@ -66,7 +72,7 @@ export function executeOperation(key: OperationKey, state: SymbolicRecord): Oper
       for (const composition of cs) {
         const signature = canonical(Object.fromEntries(
           ['kind', 'requires', 'effect', 'things', 'properties', 'relations', 'context']
-            .map(name => [name, composition[name]]),
+            .map(name => [name, pythonGet(composition, name, null)]),
         ));
         const group = groups.get(signature) ?? [];
         group.push(String(composition.id));
@@ -83,7 +89,7 @@ export function executeOperation(key: OperationKey, state: SymbolicRecord): Oper
           result.status = 'incomplete';
           signature = { unproved_equivalence: path.id };
         } else {
-          signature = { post_state: path.post_state, path_constraints: path.constraints_verified };
+          signature = { post_state: pythonGet(path, 'post_state', null), path_constraints: pythonGet(path, 'constraints_verified', null) };
         }
         const key2 = canonical(signature);
         const group = groups.get(key2) ?? [];
@@ -114,7 +120,7 @@ export function executeOperation(key: OperationKey, state: SymbolicRecord): Oper
       const expected = focus.effect ?? {};
       result.value = ((state.observations ?? []) as SymbolicRecord[]).filter(observation =>
         observation.composition === focus.id && Object.entries(expected).some(([name, value]) =>
-          !sameValue(observation.after?.[name], value)));
+          !sameValue(pythonGet(observation.after, name, null), value)));
       break;
     }
     case 'OP07':
@@ -164,17 +170,17 @@ export function executeOperation(key: OperationKey, state: SymbolicRecord): Oper
       result.value = {
         observed_effects: ((state.observations ?? []) as SymbolicRecord[])
           .filter(observation => observation.composition === focus.id)
-          .map(observation => observation.after),
+          .map(observation => pythonGet(observation, 'after', null)),
         unobserved_extent: 'unknown',
       };
       break;
     case 'OP14':
       result.value = cs.filter(composition => ready(composition) && Object.entries(state.preserve ?? {}).every(([name, expected]) =>
-        sameValue(Object.hasOwn(composition.effect ?? {}, name) ? composition.effect[name] : facts[name], expected))).map(c => c.id);
+        sameValue(Object.hasOwn(composition.effect ?? {}, name) ? composition.effect[name] : pythonGet(facts, name, null), expected))).map(c => c.id);
       break;
     case 'OP15':
       result.value = ((state.goals ?? []) as SymbolicRecord[]).filter(goal => !pythonTruthy(goal.terminal) && !pythonTruthy(goal.completed) &&
-        Object.entries(goal.requires ?? {}).every(([name, expected]) => sameValue(facts[name], expected))).map(goal => goal.id);
+        Object.entries(goal.requires ?? {}).every(([name, expected]) => sameValue(pythonGet(facts, name, null), expected))).map(goal => goal.id);
       break;
     case 'OP16':
       result.value = ((state.deadlocks ?? []) as SymbolicRecord[]).filter(deadlock => pythonTruthy(deadlock.proof) && deadlock.scope === 'global');
@@ -200,22 +206,22 @@ export function executeOperation(key: OperationKey, state: SymbolicRecord): Oper
     }
     case 'OP20':
       result.value = ((state.entities ?? []) as SymbolicRecord[]).filter(entity => entity.utility === 'unknown')
-        .map(entity => ({ entity: entity.id, status: 'utility_hypothesis', question: entity.question }));
+        .map(entity => ({ entity: entity.id, status: 'utility_hypothesis', question: pythonGet(entity, 'question', null) }));
       break;
     case 'OP21':
       result.value = ((state.spaces ?? []) as SymbolicRecord[]).filter(space => space.utility === 'unknown')
-        .map(space => ({ space: space.id, status: 'utility_hypothesis', question: space.question }));
+        .map(space => ({ space: space.id, status: 'utility_hypothesis', question: pythonGet(space, 'question', null) }));
       break;
     case 'OP22':
       result.value = ((state.remote_effects ?? []) as SymbolicRecord[]).filter(effect => pythonTruthy(effect.observation));
       break;
     case 'OP23':
-      result.value = ((state.entities ?? []) as SymbolicRecord[]).flatMap(entity => {
+      result.value = ((state.entities ?? []) as SymbolicRecord[]).flatMap((entity): SymbolicRecord[] => {
         if (pythonTruthy(entity.cycle) && pythonTruthy(entity.cycle_proof)) {
           const cycle = entity.cycle as any[];
           return [{ entity: entity.id, next: cycle[((entity.phase ?? 0) + 1) % cycle.length], evidence: entity.cycle_proof }];
         }
-        if (pythonTruthy(entity.autonomous)) return [{ entity: entity.id, next: 'unknown', evidence: undefined }];
+        if (pythonTruthy(entity.autonomous)) return [{ entity: entity.id, next: 'unknown' }];
         return [];
       });
       break;
@@ -246,7 +252,7 @@ export function executeOperation(key: OperationKey, state: SymbolicRecord): Oper
       const observed = (state.observed_properties ?? {}) as SymbolicRecord;
       result.value = Object.fromEntries(Object.entries(expected).map(([name, value]) => [name, {
         expected: value,
-        observed: observed[name],
+        observed: pythonGet(observed, name, null),
         status: !Object.hasOwn(observed, name) ? 'unknown' : sameValue(observed[name], value) ? 'confirmed' : 'refuted',
       }]));
       break;
@@ -258,9 +264,9 @@ export function executeOperation(key: OperationKey, state: SymbolicRecord): Oper
     case 'OP31':
       result.value = ((state.objective_assessments ?? []) as SymbolicRecord[]).map(assessment => ({
         composition_ref: assessment.composition_ref,
-        satisfied: assessment.satisfied ?? 'unknown',
-        feasible: assessment.feasible ?? 'unknown',
-        new_evidence: assessment.new_evidence ?? [],
+        satisfied: pythonGet(assessment, 'satisfied', 'unknown'),
+        feasible: pythonGet(assessment, 'feasible', 'unknown'),
+        new_evidence: pythonGet(assessment, 'new_evidence', []),
       }));
       break;
     default:
