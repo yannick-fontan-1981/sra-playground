@@ -2,7 +2,7 @@
 
 <!-- LOT8B_FINAL067_STATUS_START -->
 
-**Jalon final 0.67 :** le numéro distinct est réservé et les graphes sensibles à l'identité sont renouvelés, avec audits et build final acquis. Les [preuves de version finale](lot8b-evidence/final-version-067-01/README.md) réconcilient explicitement les résultats historiques ; le seul changement de production est le littéral 0.66.0 vers 0.67.0. Le candidat compte 69/76 entrées. À ce jalon, le coût officiel et la publication restent les prochaines étapes ; le publié constaté demeure Site 107 / native 0.66. Les paragraphes suivants conservent leurs états historiques.
+**Jalon courant : native 0.67 qualifiée fonctionnellement et coût officiel accepté contre le 0.66 publié.** Le candidat conserve 331 fichiers natifs, digest `c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a`, et 69/76 entrées. La fenêtre ABBA complète donne STCK **−0,69 %** et SMLP **−1,80 %**, sans exclusion ; les deux dépassements locaux de restauration restent admis selon la règle globale. Voir le [bilan de coût](lot8b-evidence/final-performance-067-01/README.md) et la [feuille de route](v6-delivery-roadmap.md). La publication de la source exacte est la prochaine étape. Les limites de preuve du runtime et LKEY fermé restent conservés.
 
 <!-- LOT8B_FINAL067_STATUS_END -->
 

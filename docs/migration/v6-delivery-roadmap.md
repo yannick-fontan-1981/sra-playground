@@ -2,11 +2,13 @@
 
 <!-- LOT8B_FINAL067_START -->
 
-## Lot 8B : version finale 0.67 qualifiée avant mesure officielle
+## Lot 8B : version finale 0.67 qualifiée, coût officiel accepté
 
 Le [gel final 0.67](lot8b-evidence/final-version-067-01/README.md) et sa [synthèse](lot8b-evidence/final-version-067-01/validation-summary.json) conservent **331 fichiers natifs**, digest `c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a`. Le seul changement de production depuis le candidat qualifié est le numéro de version ; les 330 autres fichiers sont identiques. La version 0.67.0 est réservée pour 8B et doit encore être revérifiée lors de la publication. Le publié constaté reste **Site 107 / native 0.66.0**, source `4ff7bf45286a8a19d34401988adca587253ae41e`, à 68/76.
 
 Les graphes ont été renouvelés sous l'identité finale : **64 contrôles appariés sur 58 points, 22 312 différences attribuées et zéro inexpliquée**, puis **cinq chaînes BranchRouting, 26 retours et 23 acquisitions**, avec une ablation et deux incomplets conservés. La première lecture appariée arrêtée sur la provenance du générateur reste conservée ; la correction déclarée ne change aucune capture ni aucun contrôle sémantique. Les audits et le build final, comprenant TypeScript, passent. Les **524 tests / 23 modules** et **11 cas / 187 projections** sont réconciliés comme preuves historiques, sans nouvelle exécution attribuée.
+
+Le [bilan du coût officiel](lot8b-evidence/final-performance-067-01/README.md) conserve la fenêtre ABBA du 12 novembre 2026 et ses revues indépendantes. Les médianes complètes passent de **9 921,972 à 9 853,022 ms pour STCK (−0,69 %)** et de **15 364,418 à 15 087,339 ms pour SMLP (−1,80 %)**. Les 32 sessions mesurées et huit chauffes sont conservées. Les restaurations de SMLP dans la première paire (**+30,36 %**) et de STCK dans la seconde (**+29,98 %**) restent visibles et sont admises selon la règle globale ; aucune phase regroupée ne dépasse +10 %. Le refus réel du comparateur strict historique reste conservé, avec la lecture complémentaire déclarée avant mesure et vérifiée sur les 40 formes exactes. Le verrou de mesure a été libéré après 481,3 secondes, sans suppression ou remplacement.
 
 ### Feuille de route courante
 
@@ -15,8 +17,8 @@ Les graphes ont été renouvelés sous l'identité finale : **64 contrôles appa
 | 8A / 0.65 et 10C / 0.66 | Publiés dans Sites 106 et 107 ; réserves de coût historiques conservées | Ne pas les présenter comme des coûts acceptés. |
 | **8B : composant, raccordement et livraison fonctionnelle** | **Acquis dans le périmètre déclaré** | Conserver preuves, cas contraires et limites. |
 | **8B : version finale et gel** | **0.67.0 réservée ; identité finale renouvelée et build qualifié** | Utiliser exactement le gel 331/c234bb40. |
-| **8B : coût officiel** | **Prochaine étape, non encore mesuré** | Déclarer le contrat final, puis une fenêtre ABBA sous exclusivité courte contre le vrai 0.66. |
-| **8B : publication** | Non effectuée | Après qualification, vérifier la publication réelle et publier la source exacte sous bail court. |
+| **8B : coût officiel** | **Accepté : STCK −0,69 %, SMLP −1,80 %** | ABBA complet, 32 sessions mesurées et huit chauffes conservées ; deux dépassements locaux de restauration admis selon la règle globale. |
+| **8B : publication** | **Prochaine étape ; qualification fonctionnelle et coût acquis** | Vérifier le Site, la source et l'audience sous bail court, puis publier le gel 0.67 exact. |
 | 6C / 6D | `observed_rigid_cargo`, `shared_settlement` restent ouverts au registre intégré | Poursuivre leurs branches et qualifications propres. |
 | Lot 9 | `chart_navigation`, `region_intervention`, `joint_channels` restent ouverts | Poursuivre les transferts ; `discrete_network` reste hors compteur 76. |
 | 10D / 10E | `temporal_selection`, `invited_endpoints` restent ouverts au registre intégré | Poursuivre leurs qualifications et intégrations propres. |

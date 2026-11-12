@@ -1,0 +1,715 @@
+{
+  "schema": "logos-engine.lot8b.official-performance-controller-review.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-12T12:45:07.148214+00:00",
+  "reviewer": "/root/final_tools_review",
+  "scope": "Independent post-execution review of actual controller, environment, window, four raw reports and retention receipts against the prospectively frozen plan. No timing-budget verdict is made by this review.",
+  "blockingObjections": [],
+  "reviewMethod": {
+    "execution": "read-only file inspection, SHA-256 recomputation, raw receipt population counting and Git metadata reads; this new review is the sole artifact written",
+    "runtimeExecuted": false,
+    "testsExecuted": false,
+    "campaignExecuted": false,
+    "measurementRepeated": false,
+    "lockAcquired": false,
+    "lockRemoved": false,
+    "closedCaseIndividualInputOpened": false,
+    "historicalProtocolRequirementsAdded": false
+  },
+  "controller": {
+    "path": "docs/migration/lot8b-evidence/final-performance-controller-067-01/controller.json",
+    "bytes": 6968,
+    "sha256": "f7443ba964ff60d72ae216f92ae24b838fec9bff9cf16093e588506316b0dd68"
+  },
+  "window": {
+    "path": "docs/migration/lot8b-evidence/final-performance-067-01/window.json",
+    "bytes": 10958,
+    "sha256": "c82a2660608c7103821bd7d78929945656fc41ae2dd3e69bb9224e421509e5a2"
+  },
+  "plan": {
+    "path": "docs/migration/lot8b-evidence/final-cost-preparation-067-01/official-window-plan.json",
+    "bytes": 172788,
+    "sha256": "146d6b0392e3344109ea3790ef48a190a97a9132c965c0154bb8c02f75a4aa48"
+  },
+  "readiness": {
+    "path": "docs/migration/lot8b-evidence/final-cost-preparation-067-01/official-window-readiness.json",
+    "bytes": 4933,
+    "sha256": "235ec07368a35e77b9c79d1f760fbd32b3b3006e8d862b3da1258e5bb64f2f6c"
+  },
+  "sourceIdentity": {
+    "executionHead": "05dcb0fbfbddeb6c3963452dc6191b2bf1b9a441",
+    "currentHeadAtReview": "05dcb0fbfbddeb6c3963452dc6191b2bf1b9a441",
+    "plannedCandidateAncestor": "2cd4e7e557cb15034849da8c2794fa612cdbff18",
+    "candidateNativeDiffFromPlannedAncestor": [],
+    "baselineCommit": "4ff7bf45286a8a19d34401988adca587253ae41e",
+    "baselineSiteVersion": 107,
+    "nativeInventories": {
+      "baseline": {
+        "fileCount": 329,
+        "digest": "ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316",
+        "committedNamesVerified": true,
+        "currentBytesVerified": true
+      },
+      "candidate": {
+        "fileCount": 331,
+        "digest": "c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a",
+        "committedNamesVerified": true,
+        "currentBytesVerified": true
+      }
+    },
+    "candidateCommitPolicy": "Later evidence commits are permitted by the frozen controller; exact native files, ancestry and the actual execution HEAD are verified. Both candidate reports record the same execution HEAD."
+  },
+  "nativeDigests": {
+    "baseline": "ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316",
+    "candidate": "c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a"
+  },
+  "integrity": {
+    "controllerFinalInputIntegrity": "passed",
+    "windowFinalIntegrity": "passed",
+    "planFingerprintMatchesController": true,
+    "immutableInputRowsVerified": 810,
+    "immutableInputBytesVerified": 61536640,
+    "uniqueRolePathPairs": 810,
+    "roles": {
+      "baseline": 340,
+      "candidate": 470
+    },
+    "windowInputRowsVerified": 21,
+    "bothRawBaselineCopiesByteIdentical": true,
+    "allFourRawReportAndLogHashesMatchWindow": true,
+    "retainedControllerLogHashesMatch": true,
+    "planContainsNoClosedCaseIndividualPath": true
+  },
+  "population": {
+    "actualOrder": [
+      "A1",
+      "B1",
+      "B2",
+      "A2"
+    ],
+    "allSeriesSequential": true,
+    "seriesCount": 4,
+    "measuredSessions": 32,
+    "separateWarmupSessions": 8,
+    "measuredActions": 400,
+    "warmupActions": 24,
+    "measuredSessionsPerVersionPerGame": 8,
+    "trialRoundsPerGamePerSeries": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "warmupRound": 0,
+    "measuredRounds": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "excludedMeasuredSessions": 0,
+    "automaticRetry": false,
+    "allRawTrialsRetained": true,
+    "perSeriesGame": [
+      {
+        "label": "A1",
+        "role": "baseline",
+        "game": "STCK",
+        "warmupRounds": [
+          0
+        ],
+        "measuredRounds": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "measuredActions": 40,
+        "warmupActions": 3,
+        "observedLevelsPerMeasuredSession": 2,
+        "targetLevels": 3
+      },
+      {
+        "label": "A1",
+        "role": "baseline",
+        "game": "SMLP",
+        "warmupRounds": [
+          0
+        ],
+        "measuredRounds": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "measuredActions": 60,
+        "warmupActions": 3,
+        "observedLevelsPerMeasuredSession": 3,
+        "targetLevels": 3
+      },
+      {
+        "label": "B1",
+        "role": "candidate",
+        "game": "STCK",
+        "warmupRounds": [
+          0
+        ],
+        "measuredRounds": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "measuredActions": 40,
+        "warmupActions": 3,
+        "observedLevelsPerMeasuredSession": 2,
+        "targetLevels": 3
+      },
+      {
+        "label": "B1",
+        "role": "candidate",
+        "game": "SMLP",
+        "warmupRounds": [
+          0
+        ],
+        "measuredRounds": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "measuredActions": 60,
+        "warmupActions": 3,
+        "observedLevelsPerMeasuredSession": 3,
+        "targetLevels": 3
+      },
+      {
+        "label": "B2",
+        "role": "candidate",
+        "game": "STCK",
+        "warmupRounds": [
+          0
+        ],
+        "measuredRounds": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "measuredActions": 40,
+        "warmupActions": 3,
+        "observedLevelsPerMeasuredSession": 2,
+        "targetLevels": 3
+      },
+      {
+        "label": "B2",
+        "role": "candidate",
+        "game": "SMLP",
+        "warmupRounds": [
+          0
+        ],
+        "measuredRounds": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "measuredActions": 60,
+        "warmupActions": 3,
+        "observedLevelsPerMeasuredSession": 3,
+        "targetLevels": 3
+      },
+      {
+        "label": "A2",
+        "role": "baseline",
+        "game": "STCK",
+        "warmupRounds": [
+          0
+        ],
+        "measuredRounds": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "measuredActions": 40,
+        "warmupActions": 3,
+        "observedLevelsPerMeasuredSession": 2,
+        "targetLevels": 3
+      },
+      {
+        "label": "A2",
+        "role": "baseline",
+        "game": "SMLP",
+        "warmupRounds": [
+          0
+        ],
+        "measuredRounds": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "measuredActions": 60,
+        "warmupActions": 3,
+        "observedLevelsPerMeasuredSession": 3,
+        "targetLevels": 3
+      }
+    ]
+  },
+  "executions": [
+    {
+      "label": "A1",
+      "role": "baseline",
+      "startedAt": "2026-11-12T12:32:57.734589+00:00",
+      "finishedAt": "2026-11-12T12:34:59.129282+00:00",
+      "exitCode": 0,
+      "nativeDigest": "ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316",
+      "report": {
+        "path": "/workspace/sites/sra-lot8b-baseline066-20261112/docs/migration/lot8b-evidence/final-performance-067-01/cohort1/baseline.json",
+        "bytes": 435861,
+        "sha256": "cc17af265d67e5ac1a4de3c8417f7f018ecd9586dcdec28b23622385ee5a5fa2"
+      },
+      "log": {
+        "path": "docs/migration/lot8b-evidence/final-performance-067-01/cohort1/baseline.log",
+        "bytes": 1578,
+        "sha256": "f2fb40c55e7a6413e83f294e07508ff771ee9f44b12e492b069e7efd091a812e"
+      }
+    },
+    {
+      "label": "B1",
+      "role": "candidate",
+      "startedAt": "2026-11-12T12:34:59.218421+00:00",
+      "finishedAt": "2026-11-12T12:36:57.243798+00:00",
+      "exitCode": 0,
+      "nativeDigest": "c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a",
+      "report": {
+        "path": "docs/migration/lot8b-evidence/final-performance-067-01/cohort1/after.json",
+        "bytes": 436115,
+        "sha256": "ee8a0a9fbef370696bd1391ab4198964d066681a9edc44171c075cc3e7465258"
+      },
+      "log": {
+        "path": "docs/migration/lot8b-evidence/final-performance-067-01/cohort1/after.log",
+        "bytes": 1589,
+        "sha256": "e0e1d279e4c4f9bc93352b7bc8849eea415936f127a278d395f220402656c0fc"
+      }
+    },
+    {
+      "label": "B2",
+      "role": "candidate",
+      "startedAt": "2026-11-12T12:36:57.328576+00:00",
+      "finishedAt": "2026-11-12T12:38:56.557142+00:00",
+      "exitCode": 0,
+      "nativeDigest": "c234bb404de43b380e5595cee8ad4ddfcae6e02d0fcc40286546fcf6838dd44a",
+      "report": {
+        "path": "docs/migration/lot8b-evidence/final-performance-067-01/cohort2/after.json",
+        "bytes": 436141,
+        "sha256": "29c10dcf5ddc2c8ecb2277ae576ca0a548bafeca606f51043d00e3f354ef0f5a"
+      },
+      "log": {
+        "path": "docs/migration/lot8b-evidence/final-performance-067-01/cohort2/after.log",
+        "bytes": 1564,
+        "sha256": "e99aa8ec98fc9fafe1aa5be22f566530a604e685ffea545e9428d498c6907255"
+      }
+    },
+    {
+      "label": "A2",
+      "role": "baseline",
+      "startedAt": "2026-11-12T12:38:56.647407+00:00",
+      "finishedAt": "2026-11-12T12:40:57.576694+00:00",
+      "exitCode": 0,
+      "nativeDigest": "ab674682f3345b09bec94959174fbb5bf0f1bd06154693697e5814987b572316",
+      "report": {
+        "path": "/workspace/sites/sra-lot8b-baseline066-20261112/docs/migration/lot8b-evidence/final-performance-067-01/cohort2/baseline.json",
+        "bytes": 435908,
+        "sha256": "371ff4eb940478041e97bf587f363a6c404146e00902e62b18fb10ac7d00a0e9"
+      },
+      "log": {
+        "path": "docs/migration/lot8b-evidence/final-performance-067-01/cohort2/baseline.log",
+        "bytes": 1580,
+        "sha256": "eae3839b3ec601811eb016e52fc9c5a45dff0e0e7c1df958367b548838d49a46"
+      }
+    }
+  ],
+  "terminal": {
+    "controllerStatus": "completed_pending_independent_analysis",
+    "controllerExitCode": 0,
+    "historicalWindowStatus": "passed",
+    "historicalWindowExitCode": 0,
+    "fourSeriesExitCodes": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "ownWorkCheckPassed": true,
+    "unexpectedVisibleOwnProcesses": [],
+    "directChildReaped": true,
+    "processGroup": 238,
+    "processGroupStopped": true,
+    "remainingOwnedDescendants": [],
+    "adoptedChildrenReaped": [],
+    "subreaperRestored": true,
+    "ownPerformanceStatusReleased": true,
+    "postReleaseSnapshotContainsOnlyControllerAndAncestor": true
+  },
+  "lockRelease": {
+    "path": "/workspace/shared/sra-coordination/performance.lock",
+    "acquisitionAttempts": 1,
+    "blocking": false,
+    "acquiredAt": "2026-11-12T12:32:57.002516+00:00",
+    "releasedAt": "2026-11-12T12:40:58.299381+00:00",
+    "heldWallSecondsDerivedFromReceiptTimestamps": 481.296865,
+    "declaredMaximumExclusiveSeconds": 1880,
+    "identity": {
+      "device": 27,
+      "inode": 2621834
+    },
+    "finalIdentity": {
+      "device": 27,
+      "inode": 2621834
+    },
+    "sameInode": true,
+    "sameInodeStillPresentAtReadOnlyReview": true,
+    "descriptorClosed": true,
+    "lockFileRemoved": false,
+    "lockFileReplaced": false,
+    "releaseErrors": [],
+    "currentHolderNotProbed": true
+  },
+  "environment": {
+    "before": {
+      "path": "docs/migration/lot8b-evidence/final-performance-controller-067-01/environment-before.json",
+      "bytes": 1268,
+      "sha256": "039637bdcf0b21c51380ce6d389b7aebc5512c8374ff9327a508da72fbc4aa79"
+    },
+    "during": {
+      "path": "docs/migration/lot8b-evidence/final-performance-controller-067-01/environment-during.jsonl",
+      "bytes": 23087,
+      "sha256": "c8f68de78600d533d5a51fbe4c1c3810583d25a9438b29ccbbe6729c28d7f938"
+    },
+    "after": {
+      "path": "docs/migration/lot8b-evidence/final-performance-controller-067-01/environment-after.json",
+      "bytes": 1273,
+      "sha256": "4358ada00dbbd5029086a3a53dbe9ed5cce58e2c49033e98536dafc085edb6bf"
+    },
+    "duringObservationCount": 16,
+    "intervalSeconds": {
+      "minimum": 30.033156,
+      "maximum": 30.091411
+    },
+    "observedNamespaces": {
+      "pid": "pid:[4026532303]",
+      "mnt": "mnt:[4026532301]",
+      "user": "user:[4026532370]",
+      "cgroup": "cgroup:[4026532214]"
+    },
+    "scope": "current_visible_execution_namespace_only",
+    "beforeAndAfterVisibleProcessCounts": [
+      2,
+      2
+    ],
+    "duringVisibleProcessCounts": [
+      3,
+      4
+    ],
+    "noUnexpectedVisibleOwnWorkObserved": true,
+    "snapshotsTruncated": false,
+    "unreadableOrVanishedCount": 0,
+    "cpuAffinityObserved": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "cpuResourcesExclusivelyReserved": false,
+    "processArgumentsCollected": false,
+    "processEnvironmentsCollected": false,
+    "globalQuietEstablished": false,
+    "externalOrdinaryWorkKnownAbsent": false,
+    "peerAcknowledgmentsRequired": false,
+    "peerAvailabilityWait": false
+  },
+  "rootWindowActivityDeclaration": {
+    "source": "Parent task message provided after the official window completed",
+    "declaredActivity": "Three or four tiny read-only consultations of window.json labels/status from scratch; no computation, test, build or worker execution during the window.",
+    "independentlyObservedByController": false,
+    "qualification": "These finite status reads were outside the observed execution namespace. Their timing and resource effect cannot be established by the retained process snapshots; they do not justify a universal quiet claim."
+  },
+  "receiptCounterQualification": {
+    "lastObservedAt": "2026-11-12T12:40:28.534011+00:00",
+    "lastObservationElapsedMeasurementSeconds": 451.53063114099996,
+    "lastObservationStdoutBytes": 6057,
+    "retainedFinalStdoutBytes": 6835,
+    "explanation": "elapsedMeasurementSeconds and stdoutBytes are rolling values written at the last 30-second observation, not final-duration or final-retention totals. Final window timestamps, release timestamps and retainedLogs hashes are the terminal evidence."
+  },
+  "retainedLimits": [
+    "The mutex serializes holders of its current inode. It does not suspend ordinary development work, prove global host inactivity, or observe work in other execution namespaces.",
+    "Before/during/after snapshots are scoped to the visible namespace and are periodic. They are not a continuous census of all host processes.",
+    "CPU affinity and load are observations, not exclusive CPU allocation. Periodic environment collection is retained instrumentation.",
+    "There is no added peer ACK, availability wait, predecessor publication requirement, retry, exclusion, or historical coordination gate.",
+    "STCK retains ten actions and two observed levels per measured session against a three-level target; SMLP retains fifteen actions and three levels. The review does not recast the STCK prefix as a completed three-level game.",
+    "session_elapsed excludes worker startup, begin, terminal inspection, close, game engine execution, network and browser rendering. It is not end-to-end gameplay latency.",
+    "The final controller is deliberately completed_pending_independent_analysis. Pooled per-game medians, phase overruns, exact work-form parity and acceptance under the strict global <10% policy belong to the separate post-lock analysis and independent result review.",
+    "No browser, live public game, LKEY input, oracle, historical regression campaign, or measurement was executed by this reviewer."
+  ],
+  "officialCostAcceptedByThisReview": false,
+  "reviewedPins": [
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-controller-067-01/controller.json",
+      "bytes": 6968,
+      "sha256": "f7443ba964ff60d72ae216f92ae24b838fec9bff9cf16093e588506316b0dd68"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-controller-067-01/controller.started.json",
+      "bytes": 1031,
+      "sha256": "75945649244bae0a28738e45bd8cadd7bb7f11a00bab46e1df068e0d3afb5857"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/window.json",
+      "bytes": 10958,
+      "sha256": "c82a2660608c7103821bd7d78929945656fc41ae2dd3e69bb9224e421509e5a2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-cost-preparation-067-01/official-window-plan.json",
+      "bytes": 172788,
+      "sha256": "146d6b0392e3344109ea3790ef48a190a97a9132c965c0154bb8c02f75a4aa48"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-cost-preparation-067-01/official-window-readiness.json",
+      "bytes": 4933,
+      "sha256": "235ec07368a35e77b9c79d1f760fbd32b3b3006e8d862b3da1258e5bb64f2f6c"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/baseline-native.json",
+      "bytes": 39098,
+      "sha256": "6926e8abdcf9232e4e6d06ad4b60d59e4a8fa473b56a627dc17b7f8ac18d2ac7"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-version-067-01/candidate-native.json",
+      "bytes": 39333,
+      "sha256": "18fcc15c6e57f1bf6aab33cc62498e6a5a76836d85b890378be957a0e6da1c57"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/contract.json",
+      "bytes": 161021,
+      "sha256": "5c4560add21a3e14b0f570ed72466d1f28bcd603b7e7f596a4ac3e59f9f18ab4"
+    },
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "bytes": 20670,
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "/workspace/sites/sra-lot8b-baseline066-20261112/scripts/measure-native-loop-costs.mjs",
+      "bytes": 20670,
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "scripts/compare-native-loop-costs.mjs",
+      "bytes": 9861,
+      "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb"
+    },
+    {
+      "path": "scripts/compare-native-cost-cohorts.mjs",
+      "bytes": 19460,
+      "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34"
+    },
+    {
+      "path": "scripts/run-native-cost-window.py",
+      "bytes": 8933,
+      "sha256": "0ec9c69c859d0555e963643010d2254caee8c63d1c9a98ec07cd9af0ce0ce613"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "bytes": 48531,
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+    },
+    {
+      "path": "/workspace/sites/sra-lot8b-baseline066-20261112/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "bytes": 48531,
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "bytes": 46966,
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    },
+    {
+      "path": "/workspace/sites/sra-lot8b-baseline066-20261112/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "bytes": 46966,
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "path": "/workspace/sites/sra-lot8b-baseline066-20261112/docs/migration/lot8b-evidence/final-performance-067-01/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/comparison-policy.json",
+      "bytes": 991,
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+    },
+    {
+      "path": "/workspace/sites/sra-lot8b-baseline066-20261112/docs/migration/lot8b-evidence/final-performance-067-01/comparison-policy.json",
+      "bytes": 991,
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/protocol.md",
+      "bytes": 3504,
+      "sha256": "c9f37243aa75ab2e68996342570a6dcd6b542ac9a86b72b43f38069f2778aaef"
+    },
+    {
+      "path": "/workspace/sites/sra-lot8b-baseline066-20261112/docs/migration/lot8b-evidence/final-performance-067-01/protocol.md",
+      "bytes": 3504,
+      "sha256": "c9f37243aa75ab2e68996342570a6dcd6b542ac9a86b72b43f38069f2778aaef"
+    },
+    {
+      "path": "/workspace/sites/sra-lot8b-baseline066-20261112/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "bytes": 53583,
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "path": "docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "bytes": 53583,
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "path": "/workspace/sites/sra-lot8b-baseline066-20261112/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "bytes": 111624,
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    },
+    {
+      "path": "docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "bytes": 111624,
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-controller-067-01/runner.stdout.log",
+      "bytes": 6835,
+      "sha256": "5d3dfca6240cf7bd757965bf7f71453aa43475ff1130d675a1ed137134d71a7d"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-controller-067-01/runner.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-controller-067-01/environment-during.jsonl",
+      "bytes": 23087,
+      "sha256": "c8f68de78600d533d5a51fbe4c1c3810583d25a9438b29ccbbe6729c28d7f938"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-cost-preparation-067-01/environment-before-declaration.json",
+      "bytes": 1551,
+      "sha256": "847640990637b9f9359a8fb7eacfd153057f1722903da66a65fe71cc096ccffa"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-cost-preparation-067-01/own-work-closure.json",
+      "bytes": 1245,
+      "sha256": "1bf04567945c82254d9569551472f1ba637fedb49863e27b8c9fdff79466d151"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-cost-preparation-067-01/own-status-before-window.json",
+      "bytes": 6422,
+      "sha256": "3afaea10431b7b03a3cda067f35295713482e8b7ff6d0cc0633aa1c277256ae4"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-cost-preparation-067-01/publication-observation.json",
+      "bytes": 1100,
+      "sha256": "4021a890f7982d3b91578409c31ea6119f34deb22115e38997a9fd9eee7bb0a7"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-cost-preparation-067-01/contract-independent-review.json",
+      "bytes": 10862,
+      "sha256": "889b22ff11050add3eaa1848fc65fac11aa77035df9358ac5d1249468cdbc4b8"
+    },
+    {
+      "path": "/workspace/sites/sra-lot8b-baseline066-20261112/docs/migration/lot8b-evidence/final-performance-067-01/cohort1/baseline.json",
+      "bytes": 435861,
+      "sha256": "cc17af265d67e5ac1a4de3c8417f7f018ecd9586dcdec28b23622385ee5a5fa2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/cohort1/baseline.log",
+      "bytes": 1578,
+      "sha256": "f2fb40c55e7a6413e83f294e07508ff771ee9f44b12e492b069e7efd091a812e"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/cohort1/baseline.json",
+      "bytes": 435861,
+      "sha256": "cc17af265d67e5ac1a4de3c8417f7f018ecd9586dcdec28b23622385ee5a5fa2"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/cohort1/after.json",
+      "bytes": 436115,
+      "sha256": "ee8a0a9fbef370696bd1391ab4198964d066681a9edc44171c075cc3e7465258"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/cohort1/after.log",
+      "bytes": 1589,
+      "sha256": "e0e1d279e4c4f9bc93352b7bc8849eea415936f127a278d395f220402656c0fc"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/cohort2/after.json",
+      "bytes": 436141,
+      "sha256": "29c10dcf5ddc2c8ecb2277ae576ca0a548bafeca606f51043d00e3f354ef0f5a"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/cohort2/after.log",
+      "bytes": 1564,
+      "sha256": "e99aa8ec98fc9fafe1aa5be22f566530a604e685ffea545e9428d498c6907255"
+    },
+    {
+      "path": "/workspace/sites/sra-lot8b-baseline066-20261112/docs/migration/lot8b-evidence/final-performance-067-01/cohort2/baseline.json",
+      "bytes": 435908,
+      "sha256": "371ff4eb940478041e97bf587f363a6c404146e00902e62b18fb10ac7d00a0e9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/cohort2/baseline.log",
+      "bytes": 1580,
+      "sha256": "eae3839b3ec601811eb016e52fc9c5a45dff0e0e7c1df958367b548838d49a46"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-067-01/cohort2/baseline.json",
+      "bytes": 435908,
+      "sha256": "371ff4eb940478041e97bf587f363a6c404146e00902e62b18fb10ac7d00a0e9"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-controller-067-01/environment-before.json",
+      "bytes": 1268,
+      "sha256": "039637bdcf0b21c51380ce6d389b7aebc5512c8374ff9327a508da72fbc4aa79"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-performance-controller-067-01/environment-after.json",
+      "bytes": 1273,
+      "sha256": "4358ada00dbbd5029086a3a53dbe9ed5cce58e2c49033e98536dafc085edb6bf"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-coordination/performance.py",
+      "bytes": 32601,
+      "sha256": "40c1418a7b6812e10e432c4f2b3447b8b20b6b6b3faa7767cfbe01d5d604800f"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/tools/final-coordination/common.py",
+      "bytes": 16512,
+      "sha256": "b036da919503dff28cfb6e3cb3a18f73b5c5eb28a26d3d82bfd5d37dbd31fb39"
+    },
+    {
+      "path": "docs/migration/lot8b-evidence/final-cost-preparation-067-01/preperformance-push-06.json",
+      "bytes": 4244,
+      "sha256": "3085c6938458318d3621265615fddfdc2a1ffb9b207f9ac0e05ff6f6a66f9247"
+    }
+  ]
+}
