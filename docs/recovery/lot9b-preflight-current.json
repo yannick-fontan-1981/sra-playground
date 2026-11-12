@@ -21,47 +21,40 @@
   "region_owner_path": "src/logos-engine/v6-region-intervention-owner.ts",
   "neutral_caller_path": "src/logos-engine/v6-neutral-common-caller.ts",
   "region_caller_adapter_path": "src/logos-engine/v6-region-caller-adapter.ts",
+  "worker_core_path": "src/runtime/v6-agent-worker-core.ts",
+  "worker_shell_path": "src/runtime/v6-agent-worker.ts",
+  "worker_transport_qualified": true,
+  "worker_default_decision_port": "reconstruction-pending-perception",
+  "worker_default_produces_actions": false,
   "region_contract_path": "docs/recovery/lot9b-region-reconstruction-contract.md",
-  "region_functional_tests": {
-    "component_tests": 13,
-    "owner_tests": 6,
-    "caller_tests": 9,
-    "caller_region_integration_tests": 3,
-    "selected_return_acquisition": true,
-    "passive_return_acquisition": true,
-    "duplicate_return_guard": true,
-    "ambiguous_multi_owner_selection_is_not_auto_resolved": true,
-    "snapshot_restore": true
+  "functional_test_evidence": {
+    "v6_core": { "tests": 27, "passed": 27, "failed": 0 },
+    "region_component_and_owner": { "tests": 19, "passed": 19, "failed": 0 },
+    "neutral_caller_and_region_integration": { "tests": 12, "passed": 12, "failed": 0 },
+    "worker_core_and_shell": {
+      "tests": 14,
+      "passed": 14,
+      "failed": 0,
+      "first_attempt": "13/14; shell test wait was too short, runtime unchanged",
+      "second_attempt": "14/14 after test-only asynchronous wait correction"
+    },
+    "total_unique_targeted_tests": 72,
+    "total_unique_targeted_passed": 72,
+    "total_unique_targeted_failed": 0
   },
   "official_069_prerequisites": {
-    "missing": [
+    "missing_files": [
       "scripts/measure-native-loop-costs.mjs",
       "tests/helpers/v6-live-game-campaign.ts",
-      "src/runtime/v6-agent-worker.ts",
       "docs/migration/v6-delivery-roadmap.md"
+    ],
+    "missing_capabilities": [
+      "public-observation to owner-context perception",
+      "live campaign reconstruction",
+      "official performance harness"
     ]
   },
   "ready_for_official_069_benchmark": false,
-  "functional_test_evidence": {
-    "v6_core": {
-      "tests": 27,
-      "passed": 27,
-      "failed": 0
-    },
-    "region_component_and_owner": {
-      "tests": 19,
-      "passed": 19,
-      "failed": 0
-    },
-    "neutral_caller_and_region_integration": {
-      "tests": 12,
-      "passed": 12,
-      "failed": 0
-    },
-    "total_unique_targeted_tests": 58,
-    "total_unique_targeted_passed": 58,
-    "total_unique_targeted_failed": 0
-  },
-  "status": "fonctionnellement qualifié pour le noyau V6 reconstruit, Region, son owner et le caller neutre; worker public, campagne live et performance officielle à confirmer",
-  "note": "The neutral caller intentionally does not reconstruct historical priorities: multiple proposals remain ambiguous until an external policy is justified."
+  "status": "fonctionnellement qualifié pour noyau V6, Region, owner, caller neutre et transport worker; perception, campagne live et performance officielle à confirmer",
+  "note": "The reconstructed worker validates protocol/session/sequence/budget/action semantics but intentionally takes no default action until perception is justified."
 }
