@@ -4,10 +4,13 @@ import {
   regionPublicEffectEvidence,
 } from '../src/logos-engine/v6-region-public-evidence.ts';
 
-function frameToPixels(frame) {
+function frameToPixels(frame, cache) {
   if (!Array.isArray(frame) || frame.length !== 64) {
     throw new RangeError('Region benchmark observation frame must be 64x64');
   }
+  const cached = cache?.get(frame);
+  if (cached) return cached;
+
   const pixels = new Uint8Array(64 * 64);
   let offset = 0;
   for (const row of frame) {
@@ -21,10 +24,11 @@ function frameToPixels(frame) {
       pixels[offset++] = value;
     }
   }
+  cache?.set(frame, pixels);
   return pixels;
 }
 
-function toAgentObservation(observation, sessionId, sequence) {
+function toAgentObservation(observation, sessionId, sequence, frameCache) {
   if (!observation || typeof observation !== 'object') {
     throw new TypeError('Region benchmark public observation must be an object');
   }
@@ -48,7 +52,7 @@ function toAgentObservation(observation, sessionId, sequence) {
       width: 64,
       height: 64,
       pixelFormat: 'palette-index-u8',
-      pixels: frameToPixels(observation.frame),
+      pixels: frameToPixels(observation.frame, frameCache),
     },
     availableActionIds: [...observation.availableActionIds],
     state: observation.state,
@@ -67,24 +71,48 @@ function benchmarkSessionRef(descriptor) {
   return `native-cost:${descriptor.variant}:${descriptor.game}:${descriptor.invocationIndex}`;
 }
 
+function identityMethodInput(index, descriptor) {
+  return {
+    index,
+    descriptor: {
+      invocationIndex: descriptor.invocationIndex,
+      variant: descriptor.variant,
+      game: descriptor.game,
+    },
+  };
+}
+
 /**
  * Bind the real reconstructed Region evidence path to a benchmark candidate hook.
  *
  * methodRefFor is deliberately external: Region must not invent reusable-method
  * identity from pixel similarity. If it returns undefined, ACTION6 evidence is
  * observed but not admitted into Region state.
+ *
+ * `methodRefInput: 'identity'` is reserved for producers whose identity depends
+ * only on action/session coordinates. It avoids cloning two complete public
+ * frames and the complete delta merely to return that external identity.
  */
 export function createRegionInterventionCandidateHook({
   methodRefFor,
+  methodRefInput = 'full',
+  cacheFrames = false,
   owner = new RegionInterventionOwner(),
 } = {}) {
   if (methodRefFor !== undefined && typeof methodRefFor !== 'function') {
     throw new TypeError('methodRefFor must be a function when provided');
   }
+  if (methodRefInput !== 'full' && methodRefInput !== 'identity') {
+    throw new TypeError("methodRefInput must be 'full' or 'identity'");
+  }
+  if (typeof cacheFrames !== 'boolean') {
+    throw new TypeError('cacheFrames must be a boolean');
+  }
   if (!(owner instanceof RegionInterventionOwner)) {
     throw new TypeError('owner must be a RegionInterventionOwner');
   }
 
+  const frameCache = cacheFrames ? new WeakMap() : undefined;
   const stats = {
     actionsSeen: 0,
     action6Seen: 0,
@@ -105,8 +133,8 @@ export function createRegionInterventionCandidateHook({
       if (action?.id !== 6) return { status: 'not-applicable' };
 
       const sessionId = benchmarkSessionRef(descriptor);
-      const before = toAgentObservation(beforeObservation, sessionId, index);
-      const after = toAgentObservation(observation, sessionId, index + 1);
+      const before = toAgentObservation(beforeObservation, sessionId, index, frameCache);
+      const after = toAgentObservation(observation, sessionId, index + 1, frameCache);
       const normalizedAction = {
         id: 6,
         data: {
@@ -119,14 +147,16 @@ export function createRegionInterventionCandidateHook({
       stats.usefulAction6Evidence += 1;
 
       const methodRef = methodRefFor
-        ? await methodRefFor({
-            index,
-            action: structuredClone(action),
-            beforeObservation: structuredClone(beforeObservation),
-            observation: structuredClone(observation),
-            descriptor: structuredClone(descriptor),
-            evidence: structuredClone(evidence),
-          })
+        ? await methodRefFor(methodRefInput === 'identity'
+            ? identityMethodInput(index, descriptor)
+            : {
+                index,
+                action: structuredClone(action),
+                beforeObservation: structuredClone(beforeObservation),
+                observation: structuredClone(observation),
+                descriptor: structuredClone(descriptor),
+                evidence: structuredClone(evidence),
+              })
         : undefined;
 
       if (methodRef === undefined) return { status: 'unbound-method' };
