@@ -19,16 +19,18 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22.18.0
-      - name: Apply source typing fix
+      - name: Apply source continuity fixes
         run: node scripts/fix-v6-browser-session-reactivation-typing.mjs
-      - name: Commit source fix
+      - name: Commit source fixes
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add src/runtime/v6-browser-common-campaign-host.ts
+          git add src/runtime/v6-browser-common-campaign-host.ts \
+                  src/runtime/v6-browser-agent-controller.ts \
+                  tests/v6-browser-session-reactivation.test.ts
           if git diff --cached --quiet; then
-            echo "No typing changes"
+            echo "No continuity changes"
           else
-            git commit -m "Accept typed public pixel buffers in session continuity"
+            git commit -m "Harden fresh-host fallback after failed restore"
             git push origin HEAD:${GITHUB_REF_NAME}
           fi
