@@ -891,9 +891,11 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
     strategyEditors.set(panel, editor);
   }
   const timeline = strategyTimeline(returns, editor.activeRules);
-  editor.update(board?.gameCode ?? null, timeline, (item, caption) => strategyEvidenceFrames(item, palette, caption),
+  const shown = selectTimelineEpisodes(timeline, board?.level);
+  const agentActions = mode === 'agent' ? returns.length : 0;
+  editor.update(board?.gameCode ?? null, timeline, shown, agentActions, (item, caption) => strategyEvidenceFrames(item, palette, caption),
     () => renderDiscoveryPerspectives(panel, view, board, mode, returns, groups, palette, objectives));
-  renderGenericTimeline(panel, strategies, timeline, board?.level, palette, expandedMethods);
+  renderGenericTimeline(panel, strategies, shown, palette, expandedMethods);
   const operation = planSource?.operation;
   const catalog = document.createElement('details');
   catalog.className = 'sic-details';
@@ -1161,14 +1163,21 @@ function renderDecisionConfigurations(container: Element, decision: Decision, ki
   }
 }
 
-function renderGenericTimeline(panel: HTMLElement, container: Element, timeline: ReturnType<typeof strategyTimeline>,
-  level: number | undefined, palette: readonly string[], expanded: ReadonlyMap<string | undefined, boolean>): void {
+function selectTimelineEpisodes(timeline: ReturnType<typeof strategyTimeline>, level: number | undefined) {
   const previousLevel = timeline.filter(item => item.first.fromLevel !== level).at(-1)?.first.fromLevel;
   const visible = timeline.filter(item => item.first.fromLevel === level || item.first.fromLevel === previousLevel);
   const recent = visible.slice(-12);
-  const followsContradiction = (item: typeof visible[number]) => item.facts.has('previousPredictionFailed') && item.facts.has('differentPlan');
   const highlights = visible.filter(item => item.status === 'contradicted' || followsContradiction(item)).slice(-6);
-  const selected = visible.filter(item => recent.includes(item) || highlights.includes(item));
+  return visible.filter(item => recent.includes(item) || highlights.includes(item));
+}
+
+function followsContradiction(item: ReturnType<typeof strategyTimeline>[number]) {
+  return item.facts.has('previousPredictionFailed') && item.facts.has('differentPlan');
+}
+
+function renderGenericTimeline(panel: HTMLElement, container: Element, selected: ReturnType<typeof strategyTimeline>,
+  palette: readonly string[], expanded: ReadonlyMap<string | undefined, boolean>): void {
+  const lastContradiction = selected.filter(item => item.status === 'contradicted').at(-1);
   const section = document.createElement('section');
   section.className = 'sic-strategy-configurations';
   const heading = document.createElement('h5');
@@ -1196,8 +1205,7 @@ function renderGenericTimeline(panel: HTMLElement, container: Element, timeline:
     details.className = 'sic-details';
     details.dataset.sicMethod = String(first.sequence);
     details.dataset.strategyChoice = key(first.sequence);
-    details.open = expanded.get(details.dataset.sicMethod) ?? (status === 'contradicted'
-      && episode === highlights.filter(item => item.status === 'contradicted').at(-1));
+    details.open = expanded.get(details.dataset.sicMethod) ?? episode === lastContradiction;
     title.textContent = `L${first.fromLevel} · ${actions} · ${rule?.title ?? 'Observe an action return'} · ${statuses[status]}`;
     details.append(title);
     const facts = document.createElement('dl');

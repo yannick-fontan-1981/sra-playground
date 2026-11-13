@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import type { DirectionalReturn } from '../src/sic/directional-return.ts';
-import { auditStrategyPriority, countStrategyFacts } from '../src/sic/strategy-coverage.ts';
+import { auditStrategyPriority, countStrategyFacts, measureStrategyCoverage } from '../src/sic/strategy-coverage.ts';
 import { defaultStrategyRules, matchStrategy, matchesStrategyRule, strategyClassificationChanges, strategyTimeline } from '../src/sic/strategy-timeline.ts';
 
 function step(sequence: number, planRevision: number, stepIndex: number, matched: boolean | null, action = 'Right'): DirectionalReturn {
@@ -88,4 +88,15 @@ test('priority audit counts the actual winners across games and distinguishes an
   assert.equal(onlySyme[0]?.matches, 0);
   assert.equal(onlySyme[1]?.first, 2);
   assert.equal(auditStrategyPriority([...as, ...syme], [probe!, replan!, equivalentCheck])[0]?.first, 4);
+});
+
+test('coverage counts actions once and excludes unmeasured games from the denominator', () => {
+  const history = strategyTimeline([step(1, 1, 0, true), step(2, 1, 1, true), step(3, 2, 0, null)]);
+  const length = (episode: typeof history[number]) => episode.last.sequence - episode.first.sequence + 1;
+  const legacy = { groups: countStrategyFacts(history), actions: null, actionsByFacts: null, shownActions: null, shownActionsByFacts: null };
+  const sample = { ...legacy, actions: 4, actionsByFacts: countStrategyFacts(history, length),
+    shownActions: 2, shownActionsByFacts: countStrategyFacts(history.slice(0, 1), length) };
+  assert.deepEqual(measureStrategyCoverage([legacy, sample], defaultStrategyRules), {
+    measured: 1, actions: 4, configurable: 3, shown: 2, shownConfigurable: 2,
+  });
 });

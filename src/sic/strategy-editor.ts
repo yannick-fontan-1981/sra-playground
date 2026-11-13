@@ -1,5 +1,6 @@
 import type { DirectionalReturn } from './directional-return.ts';
-import { auditStrategyPriority, countStrategyFacts, StrategyCoverage, type FactGroup } from './strategy-coverage.ts';
+import { auditStrategyPriority, countStrategyFacts, measureStrategyCoverage,
+  StrategyCoverage, type StrategySample } from './strategy-coverage.ts';
 import { defaultStrategyRules, matchStrategy, matchesStrategyRule, strategyClassificationChanges, strategyFacts,
   type StrategyRule, type strategyTimeline } from './strategy-timeline.ts';
 
@@ -72,10 +73,11 @@ export class StrategyEditor {
   private rules = readRules();
   private order = this.rules.map(rule => rule.id);
   private readonly coverage = new StrategyCoverage();
-  private groups: FactGroup[] = [];
+  private sample: StrategySample = { groups: [], actions: null, actionsByFacts: null, shownActions: null, shownActionsByFacts: null };
   private game: string | null = null;
   private readonly auditScope = document.createElement('select');
   private readonly auditSummary = document.createElement('p');
+  private readonly auditCoverage = document.createElement('p');
   private readonly auditList = document.createElement('ul');
   private readonly drafts = new Map<string, StrategyRule>();
   private readonly rulePicker = document.createElement('select');
@@ -102,7 +104,7 @@ export class StrategyEditor {
     const auditHeading = document.createElement('h5');
     auditHeading.textContent = 'Rule priority audit';
     this.auditScope.addEventListener('change', () => this.showAudit());
-    audit.append(auditHeading, labeled('Games to compare', this.auditScope), this.auditSummary, this.auditList);
+    audit.append(auditHeading, labeled('Games to compare', this.auditScope), this.auditSummary, this.auditCoverage, this.auditList);
     this.showAuditScopes();
     const details = document.createElement('details');
     details.className = 'sic-details sic-strategy-editor';
@@ -197,11 +199,15 @@ export class StrategyEditor {
 
   get activeRules(): readonly StrategyRule[] { return this.rules; }
 
-  update(game: string | null, timeline: Timeline, renderEvidence: RenderEvidence, onSave: () => void): void {
+  update(game: string | null, timeline: Timeline, shown: Timeline, actions: number, renderEvidence: RenderEvidence, onSave: () => void): void {
     this.game = game;
     this.timeline = timeline;
-    this.groups = countStrategyFacts(timeline);
-    if (game) this.coverage.record(game, this.groups);
+    const length = (episode: Timeline[number]) => episode.last.sequence - episode.first.sequence + 1;
+    this.sample = {
+      groups: countStrategyFacts(timeline), actions, actionsByFacts: countStrategyFacts(timeline, length),
+      shownActions: shown.reduce((total, episode) => total + length(episode), 0), shownActionsByFacts: countStrategyFacts(shown, length),
+    };
+    if (game && actions) this.coverage.record(game, this.sample);
     this.showAuditScopes();
     this.renderEvidence = renderEvidence;
     this.onSave = onSave;
@@ -221,7 +227,9 @@ export class StrategyEditor {
   private showAudit(): void {
     const scope = this.auditScope.value;
     const samples = this.coverage.samples;
-    const groups = scope === 'session' ? this.groups : scope === 'all' ? [...samples.values()].flat() : samples.get(scope) ?? [];
+    const chosen = samples.get(scope);
+    const selected = scope === 'session' ? [this.sample] : scope === 'all' ? [...samples.values()] : chosen ? [chosen] : [];
+    const groups = selected.flatMap(sample => sample.groups);
     const episodes = groups.reduce((total, group) => total + group.count, 0);
     const source = scope === 'session' ? this.game ?? 'Current session'
       : scope === 'all' ? `${samples.size} recorded games` : scope;
@@ -230,9 +238,21 @@ export class StrategyEditor {
     const validDraft = hasDraft && draft.every(validRule);
     const results = auditStrategyPriority(groups, validDraft ? draft : this.rules);
     this.auditList.replaceChildren();
+    const saved = measureStrategyCoverage(selected, this.rules);
+    const projected = validDraft ? measureStrategyCoverage(selected, draft) : null;
     const extent = scope === 'all' ? ' · latest sample per game' : '';
     const version = validDraft ? ' · draft rules' : ' · saved rules';
     this.auditSummary.textContent = `${source} · ${episodes} recorded episodes${extent}${version}.`;
+    this.auditCoverage.textContent = '';
+    if (saved.actions) {
+      const ratio = (count: number) => `${count}/${saved.actions} (${Math.round(100 * count / saved.actions)}%)`;
+      const shown = scope === 'session' ? 'Shown in timeline' : 'Shown in the sampled timeline';
+      const scopeNote = saved.measured < selected.length ? ` · ${saved.measured}/${selected.length} games with action counts` : '';
+      this.auditCoverage.textContent = `Recorded actions · Classified by editable rules ${ratio(saved.configurable)} · ${shown} ${ratio(saved.shown)} · Both ${ratio(saved.shownConfigurable)}${scopeNote}.`;
+      if (projected) this.auditCoverage.textContent += ` With draft rules, both would cover ${ratio(projected.shownConfigurable)}.`;
+    } else if (episodes) {
+      this.auditCoverage.textContent = 'Revisit these games to collect action counts for the coverage percentages.';
+    }
     if (!episodes) {
       this.auditSummary.textContent += ' Run the agent to collect evidence.';
       return;
