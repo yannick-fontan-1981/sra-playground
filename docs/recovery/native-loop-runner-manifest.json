@@ -1,7 +1,7 @@
 {
   "version": 1,
   "kind": "reconstructed-native-region-benchmark-manifest",
-  "status": "ready-for-official-abba-measurement",
+  "status": "qualified-functionally-and-performance",
   "historicalRunnerIdentityRecovered": false,
   "historicalCorpusRecovered": false,
   "sourceRefs": {
@@ -159,21 +159,41 @@
       "status": "passed"
     },
     "sourceRefRun": {
-      "runId": 43355474605,
-      "jobId": 131656371181,
-      "headSha": "4fd2d6d16c32ae91f7c7e4c9d9405e5f1563c42f",
+      "runId": 43355931350,
+      "jobId": 131657871662,
+      "headSha": "46fa1e388c3e26db0d1bfde5e08a0f1e15f09949",
       "typecheck": "passed",
       "targetedTests": "passed",
       "sourceRefsComputed": true,
-      "manifestVerification": "pending rerun after optimized refs update",
-      "artifactId": 14006190581,
-      "artifactZipSha256": "fba0d8d68b70080c6d980ce8b5c5e5e2c92fe90a55a57da2af6a954648692a6c"
+      "manifestVerification": "passed"
     }
   },
   "officialMeasurement": {
-    "executed": false,
-    "result": null,
-    "previousFailedMeasurementProof": "docs/recovery/lot9b-official-abba-baseline-failure.json",
-    "reason": "optimized manifest requires verification and the same official ABBA protocol must be repeated"
-  }
+    "executed": true,
+    "accepted": true,
+    "runId": 43356109888,
+    "jobId": 131658420516,
+    "measuredCommit": "2ba767fb698f58f831f1a11ad5e06b5da8cb86ee",
+    "measurementIsolation": "non-isolated-shared-github-actions-runner-no-repository-concurrency",
+    "results": {
+      "STCK": {
+        "referenceMedianMs": 54.5,
+        "candidateMedianMs": 58.39999999999782,
+        "relativeIncreasePercent": 7.1559633027482805,
+        "accepted": true
+      },
+      "SMLP": {
+        "referenceMedianMs": 123.95000000000073,
+        "candidateMedianMs": 118.15000000000146,
+        "relativeIncreasePercent": -4.6793061718428675,
+        "accepted": true
+      }
+    },
+    "sampleRemoval": 0,
+    "retries": 0,
+    "proof": "docs/recovery/lot9b-official-abba-performance-qualified.json",
+    "previousFailureProof": "docs/recovery/lot9b-official-abba-baseline-failure.json"
+  },
+  "nextLot": "9C joint_channels",
+  "counter76Incremented": false
 }
