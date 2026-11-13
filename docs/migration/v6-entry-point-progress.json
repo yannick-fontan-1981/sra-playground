@@ -5,7 +5,7 @@
   "baseline": {
     "repository": "yannick-fontan-1981/sra-playground",
     "canonicalBranch": "recovery/site109-reconstruction-20261112",
-    "canonicalCommit": "9e04bbd5569f6755178fa1b5276a112ca47d646b",
+    "canonicalCommit": "68cdddc92b4b7f0214a2d7e5a5f0ffe6c94e7216",
     "sourcePolicy": "GitHub canonical; evidence before count"
   },
   "purpose": "Inventory durable reconstructed operations and runtime capabilities without projecting them onto the unrecovered historical 76-slot registry.",
@@ -39,7 +39,7 @@
     "operationsCalculationQualified": 31,
     "operationsProductActive": 2,
     "capabilitiesFunctionalQualified": 16,
-    "capabilitiesProductActive": 7,
+    "capabilitiesProductActive": 8,
     "capabilitiesSupportingActive": 5,
     "capabilitiesOfficialPerformanceQualified": 2,
     "historicalMappedSlots": 0,
@@ -935,16 +935,19 @@
         "tests/v6-neutral-common-caller.test.ts",
         "tests/v6-neutral-common-caller-owned.test.ts",
         "tests/v6-common-campaign-owner.test.ts",
-        "tests/v6-common-campaign-session-continuity.test.ts"
+        "tests/v6-common-campaign-session-continuity.test.ts",
+        "tests/v6-browser-session-resume.test.ts"
       ],
       "proofs": [
         "docs/recovery/op01-op31-common-campaign-owner-20261112.md",
         "docs/recovery/op01-op31-session-continuity-core-20261113.md",
-        "docs/recovery/op01-op31-session-continuity-core-qualified.json"
+        "docs/recovery/op01-op31-session-continuity-core-qualified.json",
+        "docs/recovery/op01-op31-browser-session-resume-20261113.md",
+        "docs/recovery/op01-op31-browser-session-resume-qualified.json"
       ],
       "limits": [
         "Aucune priorité implicite entre propriétaires indépendants.",
-        "Le checkpoint commun est qualifié au niveau noyau, mais pas encore possédé par le host/contrôleur navigateur."
+        "La reprise n'est admise qu'aux frontières réglées ou physiquement envoyées et corrélées."
       ],
       "historicalMapping": null,
       "historicalCountDisposition": "unmapped"
@@ -954,38 +957,47 @@
       "title": "Noyau atomique de checkpoint de campagne",
       "kind": "runtime-continuity",
       "functionalStatus": "qualified-bounded",
-      "productStatus": "available-not-main",
+      "productStatus": "active",
       "performanceStatus": "not-measured-separately",
       "producers": [
+        "BrowserCommonCampaignHost checkpoint capture",
         "CommonCampaignOwner snapshot",
-        "ObservedAddressedMaterialCheckpointParticipant snapshot"
+        "ObservedAddressedMaterialCheckpointParticipant snapshot",
+        "BrowserAgentController safe-boundary ownership"
       ],
       "consumers": [
-        "CommonCampaignCheckpointCoordinator restore",
+        "BrowserCommonCampaignHost restore",
+        "BrowserAgentController reactivation",
         "fresh CommonCampaignOwner and FieldStock runtime"
       ],
-      "decisionEffect": "Préserve atomiquement l’ordre des propriétaires, le needId, l’action en attente, la déduplication et l’état FieldStock, avec rollback intégral en cas d’échec.",
+      "decisionEffect": "Préserve atomiquement la campagne, le needId, l’action en attente, la déduplication et FieldStock; reprend dans un host frais, acquiert un retour déjà envoyé sans rejouer l’action ni la présentation, et rejette les observations obsolètes.",
       "implementation": [
         "src/logos-engine/v6-common-campaign-checkpoint.ts",
         "src/logos-engine/field-stock-snapshot.ts",
         "src/logos-engine/v6-common-campaign-owner.ts",
-        "src/runtime/observed-addressed-material-checkpoint.ts"
+        "src/runtime/observed-addressed-material-checkpoint.ts",
+        "src/runtime/v6-browser-campaign-checkpoint.ts",
+        "src/runtime/v6-browser-common-campaign-host.ts",
+        "src/runtime/v6-browser-agent-controller.ts"
       ],
       "tests": [
         "tests/v6-common-campaign-session-continuity.test.ts",
         "tests/v6-common-campaign-owner.test.ts",
-        "tests/v6-neutral-common-caller.test.ts"
+        "tests/v6-neutral-common-caller.test.ts",
+        "tests/v6-browser-session-resume.test.ts"
       ],
       "proofs": [
         "docs/recovery/op01-op31-session-continuity-core-20261113.md",
         "docs/recovery/op01-op31-session-continuity-core-qualified.json",
-        "docs/migration/op01-op31-progress.md"
+        "docs/migration/op01-op31-progress.md",
+        "docs/recovery/op01-op31-browser-session-resume-20261113.md",
+        "docs/recovery/op01-op31-browser-session-resume-qualified.json"
       ],
       "limits": [
-        "Pas encore exposé par BrowserCommonCampaignHost.",
-        "Pas encore possédé par BrowserAgentController.",
-        "Aucune preuve de désactivation/réactivation Agent dans le navigateur réel.",
-        "Aucun coût de persistance produit qualifié, car le snapshot n’est pas appelé dans la boucle active."
+        "Checkpoint détenu en mémoire; aucun stockage IndexedDB, localStorage ou externe n'est qualifié.",
+        "Aucune conservation pagehide, crash ou nouveau processus n'est démontrée.",
+        "La reprise Chrome réelle et le coût de snapshot/restauration ne sont pas encore qualifiés.",
+        "La capture automatique pendant un appel physique encore en vol reste portée par le host, pas par le contrôleur."
       ],
       "historicalMapping": null,
       "historicalCountDisposition": "unmapped"
@@ -1255,23 +1267,28 @@
         "passive FieldStock observation",
         "presentation"
       ],
-      "decisionEffect": "Impose l'ordre action → acquisition sélectionnée → observation passive → présentation → décision suivante.",
+      "decisionEffect": "Impose l'ordre action → acquisition sélectionnée → observation passive → présentation → décision suivante, et restaure une frontière sûre avant toute nouvelle décision sans replay physique.",
       "implementation": [
         "src/runtime/v6-browser-common-campaign-host.ts",
-        "src/runtime/v6-browser-product-campaign-host.ts"
+        "src/runtime/v6-browser-product-campaign-host.ts",
+        "src/runtime/v6-browser-campaign-checkpoint.ts"
       ],
       "tests": [
         "tests/v6-browser-common-campaign-host.test.ts",
         "tests/v6-browser-field-stock-campaign-host.test.ts",
         "tests/v6-browser-public-unique-action6-host.test.ts",
-        "tests/v6-public-product-action6-producers.test.ts"
+        "tests/v6-public-product-action6-producers.test.ts",
+        "tests/v6-browser-session-resume.test.ts"
       ],
       "proofs": [
         "docs/recovery/op01-op31-browser-agent-controller-combined-qualification-20261112.md",
-        "docs/recovery/op01-op31-browser-public-action6-owner-20261113.md"
+        "docs/recovery/op01-op31-browser-public-action6-owner-20261113.md",
+        "docs/recovery/op01-op31-browser-session-resume-20261113.md",
+        "docs/recovery/op01-op31-browser-session-resume-qualified.json"
       ],
       "limits": [
-        "Le noyau de checkpoint existe, mais le host ne l’expose et ne le possède pas encore à une frontière navigateur sûre."
+        "La reprise est qualifiée dans les contrats TypeScript avec host frais, pas encore via une réactivation Chrome persistée.",
+        "Aucun stockage durable, pagehide, crash ou nouveau processus n'est couvert."
       ],
       "historicalMapping": null,
       "historicalCountDisposition": "unmapped"
@@ -1291,20 +1308,25 @@
         "browser campaign host",
         "main.ts product ports"
       ],
-      "decisionEffect": "Possède une seule campagne bornée, n'invente aucune action et transfère proprement vers Manual.",
+      "decisionEffect": "Possède une seule campagne bornée, capture un checkpoint aux frontières sûres, restaure avant toute décision, conserve sessionId et compteur d'actions, et repart proprement si le checkpoint est obsolète.",
       "implementation": [
         "src/runtime/v6-browser-agent-controller.ts",
-        "src/main.ts"
+        "src/main.ts",
+        "src/runtime/v6-browser-campaign-checkpoint.ts"
       ],
       "tests": [
         "tests/v6-browser-agent-controller.test.ts",
-        "tests/main-browser-agent-controller-integration.test.ts"
+        "tests/main-browser-agent-controller-integration.test.ts",
+        "tests/v6-browser-session-resume.test.ts"
       ],
       "proofs": [
-        "docs/recovery/op01-op31-browser-agent-controller-20261112.md"
+        "docs/recovery/op01-op31-browser-agent-controller-20261112.md",
+        "docs/recovery/op01-op31-browser-session-resume-20261113.md",
+        "docs/recovery/op01-op31-browser-session-resume-qualified.json"
       ],
       "limits": [
-        "Le noyau de checkpoint est qualifié hors boucle active; la désactivation puis réactivation Agent réelle n’est pas encore raccordée."
+        "Le checkpoint reste en mémoire et dispose() l'invalide volontairement.",
+        "Aucune désactivation/réactivation Chrome avec stockage durable n'est encore démontrée."
       ],
       "historicalMapping": null,
       "historicalCountDisposition": "unmapped"
@@ -1445,12 +1467,12 @@
       "reason": "Le SHA/source exact de Site 109 reste non résolu."
     },
     {
-      "id": "browser-session-reactivation",
+      "id": "browser-checkpoint-persistence",
       "status": "open",
       "blocks": [
-        "cross-activation-product-continuity"
+        "cross-page-product-continuity"
       ],
-      "reason": "Le noyau atomique campagne + FieldStock est qualifié, mais le host et le contrôleur navigateur ne possèdent pas encore le checkpoint et aucune reprise Agent réelle n’est démontrée."
+      "reason": "La reprise dans un host frais est qualifiée en TypeScript, mais aucun stockage durable, pagehide, crash, nouveau processus ou cycle Chrome réel n'est encore démontré."
     },
     {
       "id": "op31-objective-owner",
@@ -1490,6 +1512,6 @@
     "historicalRegistryRecovered": false,
     "historicalCountClaimed": false,
     "sitePublished": false,
-    "nextStep": "connect the qualified campaign checkpoint core to BrowserCommonCampaignHost and BrowserAgentController, prove real Agent reactivation, and continue searching durable evidence for the historical 76-slot schema"
+    "nextStep": "persist the active browser checkpoint with an expiration policy, qualify pagehide and real Chrome reactivation without replay or needId loss, measure snapshot/restore overhead, and continue searching durable evidence for the historical 76-slot schema"
   }
 }
