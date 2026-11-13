@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "generatedFromCommit": "4bd1a86a61e64495fa9435e1b9dcb55e4dc575a5",
+  "commonRoot": "756d6dceeac2d2ab985cbe200a6844cbe4ff49d02d75607123668f1670e74a49",
+  "candidateRoot": "b77bf3e8c9e31f4d18ac8a8468a9081dc10788b0c8c317fe7d79adb84e24e32e",
+  "reference": {
+    "sourceRef": "lot9b-region-v1:A:b3fe042acf851d006b02193446f05111406e4ddaf8332ee83125493936608050",
+    "profile": {
+      "version": 1,
+      "commonRoot": "756d6dceeac2d2ab985cbe200a6844cbe4ff49d02d75607123668f1670e74a49",
+      "execution": {
+        "corpusRef": "native-region-action6-corpus-v1",
+        "seed": 0,
+        "startLevel": 1,
+        "timingScope": "after initial public observation, through policy/hook/action loops, ending after the returned observation of the requested final action",
+        "transport": "BrowserGameRuntime -> game-worker.ts -> Pyodide -> game_bridge.py -> custom-games.zip",
+        "methodRefStrategy": "native-region-singleton:<game>:<invocationIndex>:<actionIndex>"
+      },
+      "variant": "A",
+      "regionHook": "disabled"
+    }
+  },
+  "candidate": {
+    "sourceRef": "lot9b-region-v1:B:e1a05d106ef3837969fc0502bc6eaf8f09e0a44a65780d0d778da72ae7f85ad5",
+    "profile": {
+      "version": 1,
+      "commonRoot": "756d6dceeac2d2ab985cbe200a6844cbe4ff49d02d75607123668f1670e74a49",
+      "execution": {
+        "corpusRef": "native-region-action6-corpus-v1",
+        "seed": 0,
+        "startLevel": 1,
+        "timingScope": "after initial public observation, through policy/hook/action loops, ending after the returned observation of the requested final action",
+        "transport": "BrowserGameRuntime -> game-worker.ts -> Pyodide -> game_bridge.py -> custom-games.zip",
+        "methodRefStrategy": "native-region-singleton:<game>:<invocationIndex>:<actionIndex>"
+      },
+      "variant": "B",
+      "regionHook": "enabled",
+      "candidateRoot": "b77bf3e8c9e31f4d18ac8a8468a9081dc10788b0c8c317fe7d79adb84e24e32e"
+    }
+  },
+  "commonComponents": [
+    { "path": "package-lock.json", "bytes": 29342, "sha256": "93bc180b1ecf92e7976bb54bcb3a0aef1d3e96d65c41ee300676207832cd274e" },
+    { "path": "package.json", "bytes": 878, "sha256": "099a2d82e38575ef6881442a61759846fbb9e0029f1fe44adf96cab73d5d879c" },
+    { "path": "public/python/custom-games.zip", "bytes": 899593, "sha256": "44d108fe4feed3ce0c9587e90f071876b13730af8136cd54cbfa5c1562d87822" },
+    { "path": "public/python/custom_level_navigation.py", "bytes": 7900, "sha256": "8cc1716619aff08915135ebfa093fc305b211e28fabdff2c027d994d84f82c9b" },
+    { "path": "public/python/game_bridge.py", "bytes": 13121, "sha256": "cc9df3ea6eae0057898fa01fd949322c6af0b481030f4c271b9a719f0a07983e" },
+    { "path": "public/python/official_adapter.py", "bytes": 9574, "sha256": "efead273b89ffe8cf595e41b9f4b25a6106e6cb6e5a7d1013ebc887cfc646837" },
+    { "path": "scripts/measure-native-loop-costs.mjs", "bytes": 6619, "sha256": "b2e45fd9cab5bd3ca06570c107d11d7c58b4744c0900a96a5c1049cdc3cd0579" },
+    { "path": "scripts/native-loop-explicit-runners.mjs", "bytes": 4825, "sha256": "690a7e39cf662a5712569e34155a080997bf455af360b8b593a52af20d0420d7" },
+    { "path": "scripts/native-loop-game-bridge-session.mjs", "bytes": 3688, "sha256": "d39be1533c84f89c3107c5a07a85e2689b4191a43531fbda631be2dbac3c9ca1" },
+    { "path": "scripts/native-loop-public-corpus-runner.mjs", "bytes": 5648, "sha256": "276c54d34ff411e219b8f8eaa7c74fe0118affe17bc9d7ccc7b6bfd042e5cdc0" },
+    { "path": "scripts/native-loop-region-action6-corpus.mjs", "bytes": 780, "sha256": "eb9fd3aae7fb63251522bcc9b87f13850a384deb738f9394c034a6626d6e3806" },
+    { "path": "scripts/native-loop-region-benchmark-runners.mjs", "bytes": 3802, "sha256": "39f2ecd302a6f9a389b847f04f35c74a766ef346bdf47b38a9f7a843e6d24c2c" },
+    { "path": "scripts/native-loop-region-public-action6-probe.mjs", "bytes": 4447, "sha256": "5a6c798bb29d7667f93b66a99b929fd6b2827fa061e84121734fd83fc2b57248" },
+    { "path": "scripts/native-loop-session-adapter.mjs", "bytes": 4274, "sha256": "17f3255febf242d43a7852f5a0fe06117625c21c8936332e57743c7a7239bb65" },
+    { "path": "scripts/python-runtime-assets.json", "bytes": 3389, "sha256": "e702a914cf88345d486d7d8a36c95f2076287d8935e02cc428b7a66749500d43" },
+    { "path": "src/runtime/browser-games.ts", "bytes": 4971, "sha256": "4b2caada48e67d4c9f006699e33e4896f54e9067be69da3c23d3347da9c3650a" },
+    { "path": "src/runtime/game-worker.ts", "bytes": 3329, "sha256": "52f62b68c23b2c70c2b18461da042bf08f7fe44f7be068d5fc0e3e2942ac7159" }
+  ],
+  "candidateComponents": [
+    { "path": "scripts/native-loop-region-candidate-hook.mjs", "bytes": 5392, "sha256": "771ed73fc1db2009eef685c42e677d07447a2897de4216087a5c3bcb2646e13d" },
+    { "path": "src/logos-engine/v6-public-observation-delta.ts", "bytes": 4789, "sha256": "b379f8ce7bfd55286dbae6c569483f4a8649bad5d31c9f872a20024a1c7e5870" },
+    { "path": "src/logos-engine/v6-region-intervention-owner.ts", "bytes": 3943, "sha256": "347f1e2ef9b02d2b0224d8b0eb6f730f053b45fb090349a36592c764f39db7b4" },
+    { "path": "src/logos-engine/v6-region-intervention.ts", "bytes": 8997, "sha256": "19b14b3be1ae38c5d01a44a734063f1d9c03c4b72c43d20e33f02fd6fb4e787f" },
+    { "path": "src/logos-engine/v6-region-public-evidence.ts", "bytes": 1890, "sha256": "8a887805cc885c0fdeb759debaeea84d5d92859ff795cebbfd21934770cd7452" },
+    { "path": "src/runtime/contracts.ts", "bytes": 3271, "sha256": "33b550080b033bd95d42078ececd1a693e4ebdcf97054c56570eb5523cd3a68f" }
+  ],
+  "invariants": {
+    "commonComponentsIdentical": true,
+    "sameTransport": true,
+    "sameCorpus": true,
+    "sameSeed": true,
+    "sameStartLevel": true,
+    "onlyMeasuredDifference": "B executes the real region_intervention hook; A leaves that hook disabled"
+  },
+  "qualification": {
+    "githubActionsRunId": 43353057713,
+    "githubActionsJobId": 131648475008,
+    "qualifiedHeadSha": "4bd1a86a61e64495fa9435e1b9dcb55e4dc575a5",
+    "testsPassed": 4,
+    "testsFailed": 0,
+    "artifactId": 14004562351,
+    "artifactZipSha256": "6d7844c8070bc35c93b5e16af55d96db778e01b36957b1f36eb602ffc3d7bc80"
+  }
+}
