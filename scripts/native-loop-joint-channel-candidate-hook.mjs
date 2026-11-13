@@ -4,8 +4,6 @@ import {
   PUBLIC_VISIBLE_TARGET_CHANNEL_ID,
   createPublicSmlpAddressedJointChannels,
   createPublicStckAddressedJointChannels,
-  producePublicSmlpGateCandidate,
-  producePublicStckTargetCandidate,
   publicSmlpAddressedJointContext,
   publicStckAddressedJointContext,
 } from '../src/logos-engine/v6-public-addressed-joint-channels.ts';
@@ -99,14 +97,12 @@ function gameContract(game) {
     return {
       channels: createPublicStckAddressedJointChannels,
       context: publicStckAddressedJointContext,
-      candidate: producePublicStckTargetCandidate,
     };
   }
   if (game === 'SMLP') {
     return {
       channels: createPublicSmlpAddressedJointChannels,
       context: publicSmlpAddressedJointContext,
-      candidate: producePublicSmlpGateCandidate,
     };
   }
   throw new RangeError(`unsupported joint-channel benchmark game ${String(game)}`);
@@ -127,6 +123,11 @@ function acquisitionChannelIds(receipt) {
  * hook does not alter the corpus action. It verifies equality, then routes the
  * returned public observation through the same pending need before the next
  * decision. Variant A omits this hook entirely.
+ *
+ * The benchmark selects the explicit agent-only owner seam: no FieldStock rows,
+ * no generic single-action owner and no second grid copy are materialized. The
+ * public frame remains the sole target evidence and the same joint owner, OP28
+ * authority and two-channel return acquisition remain mandatory.
  */
 export function createJointChannelCandidateHook({ game } = {}) {
   const contract = gameContract(game);
@@ -148,14 +149,25 @@ export function createJointChannelCandidateHook({ game } = {}) {
       if (sessions.size >= MAX_ACTIVE_SESSIONS) {
         throw new RangeError(`joint-channel active session count exceeds ${MAX_ACTIVE_SESSIONS}`);
       }
+      const candidateHolder = { value: undefined };
       const port = new V6CommonCampaignDecisionPort({
+        fieldStockEnabled: false,
+        publicSingleActionEnabled: false,
+        publicObservationMode: 'agent-only',
+        agentOnlyObservationOwnership: 'borrowed',
         jointChannels: contract.channels(),
         jointContextByChannel(current) {
-          return contract.context(current.agent);
+          const context = contract.context(current.agent);
+          candidateHolder.value = context[PUBLIC_VISIBLE_TARGET_CHANNEL_ID];
+          return context;
         },
       });
       port.initialize(key, 0);
-      state = { key, port, lastIndex: -1 };
+      const ownerIds = port.campaign.ownerIds;
+      if (ownerIds.length !== 1 || ownerIds[0] !== JOINT_CHANNEL_OWNER_ID) {
+        throw new Error('joint-channel benchmark port contains an unexpected owner');
+      }
+      state = { key, port, candidateHolder, lastIndex: -1 };
       sessions.set(key, state);
     }
     return state;
@@ -177,25 +189,24 @@ export function createJointChannelCandidateHook({ game } = {}) {
       }
 
       const current = toAgentObservation(observation, descriptor, index);
-      const candidate = contract.candidate(current);
-      if (!candidate) {
+      state.candidateHolder.value = undefined;
+      const decision = state.port.decide(current, Number.MAX_SAFE_INTEGER, NEVER_ABORTED);
+      const candidate = state.candidateHolder.value;
+      if (!candidate || typeof candidate !== 'object') {
         throw new Error(`joint-channel ${descriptor.game} producer found no public target at action ${index}`);
       }
       if (candidate.producerId === 'public_stck_stack_shop_target_v1') {
         if (candidate.targetKind === 'stack_card_remove') stats.stackCardTargets += 1;
         else stats.shopButtonTargets += 1;
-      } else {
+      } else if (candidate.producerId === 'public_smlp_gate_target_v1') {
         stats.smlpGateTargets += 1;
+      } else {
+        throw new Error('joint-channel benchmark received an unknown public producer');
       }
 
-      const decision = state.port.decide(current, Number.MAX_SAFE_INTEGER, NEVER_ABORTED);
       const expected = expectedAgentAction(action);
       if (!sameAction(decision, expected)) {
         throw new Error(`joint-channel decision differs from corpus at ${descriptor.game}/${index}`);
-      }
-      if (state.port.lastPrepare?.status !== 'action'
-          || state.port.lastPrepare.ownerId !== JOINT_CHANNEL_OWNER_ID) {
-        throw new Error('joint-channel benchmark decision did not originate from the joint owner');
       }
       stats.decisions += 1;
       state.lastIndex = index;
@@ -213,10 +224,11 @@ export function createJointChannelCandidateHook({ game } = {}) {
       const returned = toAgentObservation(observation, descriptor, index + 1);
       state.port.observe(returned);
       const channels = acquisitionChannelIds(state.port.lastAcquisition);
-      if (JSON.stringify(channels) !== JSON.stringify([
-        PUBLIC_ACTION_AVAILABILITY_CHANNEL_ID,
-        PUBLIC_VISIBLE_TARGET_CHANNEL_ID,
-      ])) {
+      if (
+        channels.length !== 2
+        || channels[0] !== PUBLIC_ACTION_AVAILABILITY_CHANNEL_ID
+        || channels[1] !== PUBLIC_VISIBLE_TARGET_CHANNEL_ID
+      ) {
         throw new Error('joint-channel benchmark return reached the wrong contributors');
       }
       stats.acquisitions += 1;
@@ -232,6 +244,9 @@ export function createJointChannelCandidateHook({ game } = {}) {
 export const JOINT_CHANNEL_BENCHMARK_HOOK_CONTRACT = Object.freeze({
   id: 'joint_channels',
   inputMode: 'readonly',
+  observationMode: 'agent-only-borrowed',
+  fieldStock: 'disabled',
+  publicSingleAction: 'disabled',
   games: Object.freeze(['STCK', 'SMLP']),
   channels: Object.freeze([
     PUBLIC_ACTION_AVAILABILITY_CHANNEL_ID,
