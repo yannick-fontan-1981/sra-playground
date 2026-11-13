@@ -330,8 +330,38 @@ sources.
 | 9C2 real SMLP producers | complete | preserve causal removal proof |
 | 9C3 strict real STCK producers | complete | preserve explicit prelude and exact durable report parity |
 | 9C4 official A/B performance | complete, PASS | preserve source identities, samples and artifact digest |
-| **current reconstruction registry** | **open** | **map durable capabilities before any count claim** |
+| current reconstruction registry | **complete, verified** | preserve generated totals and historical non-comparability |
 | Site publication | blocked | only from an integrated GitHub-qualified SHA |
+
+## 6.1 Current reconstruction registry
+
+The current reconstruction registry is now machine-readable, evidence-linked and
+verified from the canonical repository tree.
+
+Derived inventory:
+
+- 44 tracked entries;
+- 32 current capability boundaries;
+- 24 product-active capability boundaries;
+- 8 qualified library or non-product seams;
+- 6 separately tracked qualification harnesses;
+- 2 official performance qualifications;
+- 1 historical-only entry;
+- 5 open entries;
+- 0 resolved historical identities.
+
+The current capability count is deliberately **not** written as `32/76`.
+The historical denominator, granularity and entry identities have not been
+recovered, so the old `70/76` and `71/76` evidence remains incomparable.
+
+Durable sources:
+
+- `docs/migration/v6-current-entry-registry.json`;
+- `docs/migration/v6-current-entry-registry/*.json`;
+- `docs/migration/v6-current-entry-registry.md`;
+- `scripts/verify-v6-current-entry-registry.mjs`;
+- `tests/v6-current-entry-registry.test.mjs`;
+- GitHub Actions run `43429453769`, job `131898993265`.
 
 ## 7. Other recovery lanes
 
@@ -366,7 +396,7 @@ The project must not claim exact Site 109 parity until all of these are true:
 
 1. historical published capabilities are reconstructed or explicitly
    reevaluated;
-2. the current entry-point registry is rebuilt from durable evidence;
+2. the current entry-point registry remains verified from durable evidence;
 3. restoration contracts are qualified across reconstructed owners;
 4. campaigns remain reproducible from GitHub assets;
 5. all required performance budgets pass independently;
@@ -374,10 +404,18 @@ The project must not claim exact Site 109 parity until all of these are true:
 
 ## 9. Next step
 
-**Rebuild the current reconstruction registry.**
+**Qualify cross-owner continuity and the complete active-product composition.**
 
-Inventory every durable capability integrated on the canonical branch, link it
-to its functional and performance proofs, mark unresolved historical identity
-separately, and only then compute a current count. Do not map the old `70/76` or
-`71/76` claims automatically onto the reconstructed tree. Do not publish Site
-before this registry work and a fresh canonical qualification are complete.
+Priority order:
+
+1. persist and restore the common campaign across Agent activations, including
+   owner order, pending need, acquisition deduplication, FieldStock and joint
+   channel state;
+2. connect a physical goal owner that consumes OP31 information and changes
+   goal selection;
+3. measure the complete active four-peer browser product composition rather
+   than only isolated Region or joint-channel candidate seams;
+4. preserve the historical 70/76 mapping and exact Site 109 parity as separate
+   unresolved recovery lanes;
+5. publish Site only from an integrated and freshly qualified canonical GitHub
+   SHA, then verify the deployed revision against that SHA.
