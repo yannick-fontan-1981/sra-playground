@@ -23,7 +23,9 @@ jobs:
         run: npm ci
       - name: Test source ref contract
         run: node --test tests/native-loop-region-source-refs.test.mjs
-      - name: Compute source refs
+      - name: Verify stored source refs and official runner manifest
+        run: node scripts/verify-native-loop-runner-manifest.mjs
+      - name: Compute source refs artifact
         run: |
           node scripts/native-loop-region-source-refs.mjs \
             --output lot9b-native-region-source-refs.json
