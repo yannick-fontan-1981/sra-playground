@@ -31,10 +31,14 @@ jobs:
         run: npm run build
       - name: Verify STCK two-producer causality
         run: node --experimental-transform-types --test tests/v6-public-stck-joint-channels.test.ts
+      - name: Verify durable STCK proof contract
+        run: node --test tests/lot9c3-stck-joint-proof.test.mjs
       - name: Qualify on real public STCK archive corpus
         env:
           LOT9C3_REPORT: lot9c3-public-stck-joint-report.json
         run: node --experimental-transform-types scripts/qualify-lot9c3-public-stck-joint.mjs
+      - name: Match regenerated report to durable evidence
+        run: cmp lot9c3-public-stck-joint-report.json docs/recovery/lot9c3-public-stck-joint-report.json
       - name: Run complete TypeScript regression suite
         run: node --experimental-transform-types --test tests/*.test.ts
       - uses: actions/upload-artifact@v4
@@ -42,4 +46,4 @@ jobs:
         with:
           name: lot9c3-public-stck-joint-report
           path: lot9c3-public-stck-joint-report.json
-          if-no-files-found: warn
+          if-no-files-found: error
