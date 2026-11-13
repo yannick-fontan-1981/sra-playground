@@ -32,6 +32,26 @@ Au minimum, les éléments historiquement utilisés par les lots doivent être r
 - les intégrations natives des entrées déjà publiées jusqu'à 70/76
 - les preuves fonctionnelles, campagnes, restauration et coûts nécessaires pour certifier la nouvelle baseline
 
+## Progression Lot 5 — 5A / 5B / 5C
+
+Intégration qualifiée depuis `recovery/lot5-site109-rebase-20261112` :
+- 5A : complétion et transport d'observations liées ;
+- 5B : acquisition adressée, guards, réponse/réfutation, rétention à la frontière, revalidation `FieldStock`, stock typé, obligations de préservation, proposition bornée et bundle OP18 ;
+- 5C : continuité/persistance du parent observé dans son périmètre reconstruit.
+
+État vérifié :
+- la connaissance retenue reste un `prior` et n'est jamais applicable automatiquement à un nouvel objet ou contexte ;
+- `FieldStock.create()` doit revalider la scène courante avant toute consommation ;
+- le runtime refuse `beforeStock`, `afterStock`, `recordStock` et `proposeStock` sans stock courant revalidé ;
+- les réponses incompatibles, les changements de matériau non sélectionné et les réécritures contradictoires réfutent explicitement l'hypothèse ;
+- le plan `typed_field_stock` produit un bundle OP18 consommé par l'autorité native existante, sans nouvelle opération ni appel artificiel ;
+- la compatibilité ESM du module Lot 6C `product-presentation-effects.ts` est corrigée uniquement par l'ajout des extensions `.ts`, sans changement de comportement ;
+- GitHub Actions `43341200851` : `tsc --noEmit` réussi, **52/52 tests Lot 5**, **255/255 régressions globales** ;
+- preuve détaillée : `docs/recovery/lot5-5b-integration-qualification.md`.
+
+Statut Lot 5 :
+**5B fonctionnellement qualifié sur le runtime V6 reconstruit ; performance officielle STCK/SMLP à confirmer.**
+
 ## Progression Lot 9 - reprise 9B
 
 Branches intégrées/préparées :

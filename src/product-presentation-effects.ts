@@ -1,11 +1,11 @@
-import type { GameObservation } from './runtime/browser-games';
+import type { GameObservation } from './runtime/browser-games.ts';
 import {
   isPresentationCurrent,
   isPresentationLoopCurrent,
   presentationFeedback,
   presentationFrameDurationMs,
   presentationFrames,
-} from './product-presentation';
+} from './product-presentation.ts';
 
 export interface ProductPresentationEffectPorts {
   currentSelectionGeneration(): number;
