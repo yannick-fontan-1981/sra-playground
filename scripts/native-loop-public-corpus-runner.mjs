@@ -34,12 +34,26 @@ function defaultSelectAction({ observation }) {
   return selectNativePublicCostAction(observation);
 }
 
+function validateHookInputMode(value) {
+  if (value !== 'cloned' && value !== 'readonly') {
+    throw new TypeError('hookInputMode must be cloned or readonly');
+  }
+  return value;
+}
+
+function hookValue(value, mode) {
+  return mode === 'readonly' ? value : structuredClone(value);
+}
+
 /**
  * Candidate runner factory for a deterministic public-only corpus.
  *
  * It owns timing but not game construction. The native game factory remains a
  * separate recovery dependency. Setup and the first observation are outside
  * the measured scope; the exact requested action loop is inside.
+ *
+ * Hook inputs are cloned by default. The internal readonly mode is available
+ * only for hooks whose contract guarantees they never mutate runner-owned data.
  */
 export function createPublicCorpusSessionRunner({
   variant,
@@ -51,11 +65,13 @@ export function createPublicCorpusSessionRunner({
   createSession,
   beforeAction,
   afterAction,
+  hookInputMode = 'cloned',
 }) {
   nonEmpty(variant, 'variant');
   nonEmpty(game, 'game');
   nonEmpty(sourceRef, 'sourceRef');
   const qualifiedCorpus = validateCorpus(corpus, game);
+  const qualifiedHookInputMode = validateHookInputMode(hookInputMode);
   if (typeof selectAction !== 'function') throw new TypeError('selectAction must be a function');
   if (!Number.isInteger(seed)) throw new TypeError('seed must be an integer');
   if (typeof createSession !== 'function') throw new TypeError('createSession must be a function');
@@ -108,14 +124,16 @@ export function createPublicCorpusSessionRunner({
         const hookStarted = globalThis.performance.now();
         await beforeAction({
           index,
-          action: structuredClone(action),
-          observation: structuredClone(observation),
-          descriptor: structuredClone(descriptor),
+          action: hookValue(action, qualifiedHookInputMode),
+          observation: hookValue(observation, qualifiedHookInputMode),
+          descriptor: hookValue(descriptor, qualifiedHookInputMode),
         });
         candidateHookMs += globalThis.performance.now() - hookStarted;
       }
 
-      const beforeObservation = structuredClone(observation);
+      const beforeObservation = afterAction
+        ? hookValue(observation, qualifiedHookInputMode)
+        : undefined;
       const actionStarted = globalThis.performance.now();
       observation = await session.action(structuredClone(action));
       gameActionMs += globalThis.performance.now() - actionStarted;
@@ -124,10 +142,10 @@ export function createPublicCorpusSessionRunner({
         const hookStarted = globalThis.performance.now();
         await afterAction({
           index,
-          action: structuredClone(action),
+          action: hookValue(action, qualifiedHookInputMode),
           beforeObservation,
-          observation: structuredClone(observation),
-          descriptor: structuredClone(descriptor),
+          observation: hookValue(observation, qualifiedHookInputMode),
+          descriptor: hookValue(descriptor, qualifiedHookInputMode),
         });
         candidateHookMs += globalThis.performance.now() - hookStarted;
       }
