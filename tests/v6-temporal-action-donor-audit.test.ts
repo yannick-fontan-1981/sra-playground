@@ -93,7 +93,7 @@ test('donor map preserves permit, ACT and environment dispatch as separate bound
   assert.ok(permit < act);
   assert.ok(act < boundary);
   assert.match(source, /actionPayloadPresent: false/);
-  assert.match(source, /actionReleased: false/);
+  assert.match(source, /actionReleased: true.*future frontière environnementale/s);
   assert.match(source, /environmentDispatchAuthorized: false/);
 });
 
