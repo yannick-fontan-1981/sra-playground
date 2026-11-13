@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-import { createAStckNativeRunner, createASmlpNativeRunner, EXPLICIT_NATIVE_RUNNER_IDENTITIES } from '../scripts/native-loop-explicit-runners.mjs';
+import { createAStckNativeRunner, createASmlpNativeRunner, createBStckNativeRunner, createBSmlpNativeRunner, EXPLICIT_NATIVE_RUNNER_IDENTITIES } from '../scripts/native-loop-explicit-runners.mjs';
 
 function observation(overrides = {}) {
   return {
@@ -174,4 +174,94 @@ test('explicit A/SMLP identity is durable and pending real native execution', ()
     backend: 'python-wasm',
     status: 'reconstructed-contract-pending-real-native-execution',
   });
+});
+
+
+test('B/STCK uses the same native bridge session and calls only the explicit region_intervention hook', async () => {
+  const requests = [];
+  const hooks = [];
+  const runner = createBStckNativeRunner({
+    dispatch: async request => {
+      requests.push(structuredClone(request));
+      return observation();
+    },
+    sourceRef: 'candidate:region_intervention',
+    candidateHook: {
+      id: 'region_intervention',
+      beforeAction: async event => hooks.push(structuredClone(event)),
+    },
+  });
+
+  const sample = await runner({
+    invocationIndex: 0,
+    series: 'B1',
+    variant: 'B',
+    game: 'STCK',
+    kind: 'measured',
+    sessionIndex: 0,
+    actions: 10,
+  });
+
+  assert.deepEqual(requests[0], { type: 'load', code: 'STCK', level: 1 });
+  assert.equal(requests.length, 11);
+  assert.equal(hooks.length, 10);
+  assert.ok(hooks.every(event => event.action.id === 5));
+  assert.equal(sample.metadata.runnerRef, 'public-corpus-runner:B/STCK');
+  assert.equal(sample.metadata.sourceRef, 'candidate:region_intervention');
+});
+
+test('B/SMLP uses the identical transport/corpus shape with its own game identity', async () => {
+  let hooks = 0;
+  const requests = [];
+  const runner = createBSmlpNativeRunner({
+    dispatch: async request => {
+      requests.push(structuredClone(request));
+      return smlpObservation();
+    },
+    sourceRef: 'candidate:region_intervention',
+    candidateHook: {
+      id: 'region_intervention',
+      beforeAction: async () => { hooks += 1; },
+    },
+  });
+
+  const sample = await runner({
+    invocationIndex: 0,
+    series: 'B1',
+    variant: 'B',
+    game: 'SMLP',
+    kind: 'measured',
+    sessionIndex: 0,
+    actions: 15,
+  });
+
+  assert.deepEqual(requests[0], { type: 'load', code: 'SMLP', level: 1 });
+  assert.equal(requests.length, 16);
+  assert.equal(hooks, 15);
+  assert.equal(sample.metadata.runnerRef, 'public-corpus-runner:B/SMLP');
+});
+
+test('B runners fail closed when the candidate hook is missing or mislabeled', () => {
+  assert.throws(
+    () => createBStckNativeRunner({ dispatch: async () => observation(), sourceRef: 'candidate' }),
+    /requires an explicit region_intervention candidate hook/,
+  );
+  assert.throws(
+    () => createBStckNativeRunner({
+      dispatch: async () => observation(),
+      sourceRef: 'candidate',
+      candidateHook: { id: 'other', beforeAction() {} },
+    }),
+    /must be region_intervention/,
+  );
+});
+
+test('all four explicit runner identities are present with A/B kept distinct', () => {
+  assert.deepEqual(Object.keys(EXPLICIT_NATIVE_RUNNER_IDENTITIES).sort(), ['A_SMLP', 'A_STCK', 'B_SMLP', 'B_STCK']);
+  assert.equal(EXPLICIT_NATIVE_RUNNER_IDENTITIES.B_STCK.gameId, EXPLICIT_NATIVE_RUNNER_IDENTITIES.A_STCK.gameId);
+  assert.equal(EXPLICIT_NATIVE_RUNNER_IDENTITIES.B_SMLP.gameId, EXPLICIT_NATIVE_RUNNER_IDENTITIES.A_SMLP.gameId);
+  assert.equal(EXPLICIT_NATIVE_RUNNER_IDENTITIES.B_STCK.backend, EXPLICIT_NATIVE_RUNNER_IDENTITIES.A_STCK.backend);
+  assert.equal(EXPLICIT_NATIVE_RUNNER_IDENTITIES.B_SMLP.corpusRef, EXPLICIT_NATIVE_RUNNER_IDENTITIES.A_SMLP.corpusRef);
+  assert.equal(EXPLICIT_NATIVE_RUNNER_IDENTITIES.B_STCK.candidateHook, 'region_intervention');
+  assert.equal(EXPLICIT_NATIVE_RUNNER_IDENTITIES.B_SMLP.candidateHook, 'region_intervention');
 });
