@@ -9,6 +9,12 @@ import {
 
 export interface AgentDecisionPort {
   initialize?(sessionId: string, seed: number): void | Promise<void>;
+  /**
+   * Consume a validated public observation before any terminal or budget stop.
+   * This hook may settle the return of a previously released action but must not
+   * choose or dispatch the next action.
+   */
+  observe?(observation: AgentObservation): void | Promise<void>;
   decide(
     observation: AgentObservation,
     budgetMs: number,
@@ -105,6 +111,21 @@ export class AgentWorkerCore {
     }
     session.lastSequence = observation.sequence;
 
+    try {
+      await this.#decisionPort.observe?.(observation);
+    } catch (error) {
+      if (session.cancelled) {
+        return { type: 'stopped', sessionId: session.sessionId, reason: 'cancelled' };
+      }
+      return {
+        type: 'error',
+        sessionId: session.sessionId,
+        message: error instanceof Error ? error.message : 'Agent observation failed.',
+      };
+    }
+    if (session.cancelled) {
+      return { type: 'stopped', sessionId: session.sessionId, reason: 'cancelled' };
+    }
     if (observation.state === 'WIN') {
       return { type: 'stopped', sessionId: session.sessionId, reason: 'complete' };
     }
