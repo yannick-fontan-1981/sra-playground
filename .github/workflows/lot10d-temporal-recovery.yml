@@ -16,10 +16,16 @@ jobs:
           node-version: 22.18.0
           cache: npm
       - run: npm ci --ignore-scripts
-      - name: Run reconstructed TemporalSelection tests
+      - name: Run affected Logos V6 and reconstructed TemporalSelection tests
         run: >-
           node --experimental-strip-types --test
+          tests/v6-composition-engine.test.ts
+          tests/v6-native-authority.test.ts
+          tests/v6-operation-cache.test.ts
+          tests/v6-operation-cycle.test.ts
           tests/v6-operation-trace.test.ts
+          tests/v6-operations.test.ts
+          tests/v6-target-binding.test.ts
           tests/v6-temporal-selection-contract.test.ts
           tests/v6-temporal-memory-contract.test.ts
           tests/v6-temporal-return-contract.test.ts
@@ -45,4 +51,4 @@ jobs:
           src/logos-engine/v6-temporal-selection-adapter.ts
           src/logos-engine/v6-temporal-selection-bridge.ts
 
-# qualification-head: traced-bridge
+# qualification-head: traced-bridge-with-v6-regressions
