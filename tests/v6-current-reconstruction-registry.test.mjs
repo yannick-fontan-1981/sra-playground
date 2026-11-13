@@ -17,8 +17,8 @@ function clone(value) {
 
 test('canonical current reconstruction registry validates without using 76 as a denominator', () => {
   const result = loadAndValidateV6CurrentRegistry();
-  assert.equal(result.summary.inventoriedCapabilities, 47);
-  assert.equal(result.summary.countedCurrentCapabilities, 47);
+  assert.equal(result.summary.inventoriedCapabilities, 50);
+  assert.equal(result.summary.countedCurrentCapabilities, 50);
   assert.equal(result.summary.performanceQualifiedCapabilities, 6);
   assert.equal(result.summary.historicallyMappedCapabilities, 0);
   assert.equal(result.summary.currentCountDenominator, null);
@@ -28,7 +28,7 @@ test('canonical current reconstruction registry validates without using 76 as a 
     'addressed-learning': 11,
     'public-perception': 9,
     region: 3,
-    'runtime-product': 12,
+    'runtime-product': 15,
   });
   assert.equal(result.registrySourceFiles.length, 8);
 });
