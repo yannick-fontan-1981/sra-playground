@@ -1,11 +1,15 @@
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 
-import { OFFICIAL_COST_PROTOCOL } from './measure-native-loop-costs.mjs';
+import { OFFICIAL_COST_PROTOCOL, median } from './measure-native-loop-costs.mjs';
 import {
   computeNativeRegionSourceRefs,
   NATIVE_REGION_EXECUTION_CONTRACT,
 } from './native-loop-region-source-refs.mjs';
+
+const READY_STATUS = 'ready-for-official-abba-measurement';
+const QUALIFIED_STATUS = 'qualified-functionally-and-performance';
+const NUMERIC_TOLERANCE = 1e-9;
 
 function stable(value) {
   if (Array.isArray(value)) return `[${value.map(stable).join(',')}]`;
@@ -18,6 +22,15 @@ function stable(value) {
 function equal(actual, expected, label) {
   if (stable(actual) !== stable(expected)) {
     throw new Error(`${label} mismatch\nactual=${stable(actual)}\nexpected=${stable(expected)}`);
+  }
+}
+
+function approximateEqual(actual, expected, label, tolerance = NUMERIC_TOLERANCE) {
+  if (!Number.isFinite(actual) || !Number.isFinite(expected)) {
+    throw new Error(`${label} must compare finite numbers`);
+  }
+  if (Math.abs(actual - expected) > tolerance) {
+    throw new Error(`${label} mismatch\nactual=${actual}\nexpected=${expected}\ntolerance=${tolerance}`);
   }
 }
 
@@ -55,6 +68,82 @@ function expectedProtocolTotals() {
   };
 }
 
+function relativeIncreasePercent(candidate, reference) {
+  if (reference === 0) return candidate === 0 ? 0 : Number.POSITIVE_INFINITY;
+  return 100 * (candidate / reference - 1);
+}
+
+async function verifyQualifiedMeasurement(manifest) {
+  const measurement = manifest.officialMeasurement;
+  if (
+    measurement?.executed !== true
+    || measurement.accepted !== true
+    || typeof measurement.proof !== 'string'
+    || measurement.proof.length === 0
+  ) {
+    throw new Error('qualified manifest requires an accepted executed measurement and proof path');
+  }
+  if (measurement.sampleRemoval !== 0 || measurement.retries !== 0) {
+    throw new Error('qualified measurement must retain every sample and use no hidden retry');
+  }
+
+  const proof = JSON.parse(await readFile(measurement.proof, 'utf8'));
+  if (proof.version !== 1 || proof.status !== 'official-performance-qualified' || proof.accepted !== true) {
+    throw new Error('official performance proof identity or verdict is invalid');
+  }
+
+  equal(proof.sourceRefs.reference, manifest.sourceRefs.reference, 'proof A sourceRef');
+  equal(proof.sourceRefs.candidate, manifest.sourceRefs.candidate, 'proof B sourceRef');
+  equal(proof.sourceRefs.corpus, manifest.corpus.id, 'proof corpus');
+  equal(proof.protocol.seriesOrder, OFFICIAL_COST_PROTOCOL.seriesOrder, 'proof series order');
+  equal(proof.protocol.invocations, manifest.protocol.totals.invocations, 'proof invocation count');
+  equal(proof.protocol.warmupSessions, manifest.protocol.totals.warmupSessions, 'proof warmup session count');
+  equal(proof.protocol.warmupActions, manifest.protocol.totals.warmupActions, 'proof warmup action count');
+  equal(proof.protocol.measuredSessions, manifest.protocol.totals.measuredSessions, 'proof measured session count');
+  equal(proof.protocol.measuredActions, manifest.protocol.totals.measuredActions, 'proof measured action count');
+  equal(proof.protocol.sampleRemoval, 0, 'proof sample removal');
+  equal(proof.protocol.retries, 0, 'proof retries');
+  equal(measurement.runId, proof.measurement.runId, 'measurement run id');
+  equal(measurement.jobId, proof.measurement.jobId, 'measurement job id');
+  equal(measurement.measuredCommit, proof.measurement.measuredCommit, 'measured commit');
+  equal(measurement.measurementIsolation, proof.measurement.measurementIsolation, 'measurement isolation');
+
+  for (const game of ['STCK', 'SMLP']) {
+    const gameProof = proof.games?.[game];
+    const manifestResult = measurement.results?.[game];
+    if (!gameProof || !manifestResult) throw new Error(`qualified measurement is missing ${game}`);
+    if (!Array.isArray(gameProof.referenceDurationsMs) || gameProof.referenceDurationsMs.length !== 8) {
+      throw new Error(`${game} proof must retain eight reference samples`);
+    }
+    if (!Array.isArray(gameProof.candidateDurationsMs) || gameProof.candidateDurationsMs.length !== 8) {
+      throw new Error(`${game} proof must retain eight candidate samples`);
+    }
+
+    const referenceMedian = median(gameProof.referenceDurationsMs);
+    const candidateMedian = median(gameProof.candidateDurationsMs);
+    const increase = relativeIncreasePercent(candidateMedian, referenceMedian);
+    approximateEqual(referenceMedian, gameProof.referenceMedianMs, `${game} proof reference median`);
+    approximateEqual(candidateMedian, gameProof.candidateMedianMs, `${game} proof candidate median`);
+    approximateEqual(increase, gameProof.relativeIncreasePercent, `${game} proof relative increase`);
+    approximateEqual(referenceMedian, manifestResult.referenceMedianMs, `${game} manifest reference median`);
+    approximateEqual(candidateMedian, manifestResult.candidateMedianMs, `${game} manifest candidate median`);
+    approximateEqual(increase, manifestResult.relativeIncreasePercent, `${game} manifest relative increase`);
+
+    if (increase >= OFFICIAL_COST_PROTOCOL.globalThresholdPercent) {
+      throw new Error(`${game} official result must remain strictly below +${OFFICIAL_COST_PROTOCOL.globalThresholdPercent}%`);
+    }
+    if (gameProof.accepted !== true || manifestResult.accepted !== true) {
+      throw new Error(`${game} official result must be accepted in proof and manifest`);
+    }
+  }
+
+  return {
+    proof: measurement.proof,
+    runId: measurement.runId,
+    accepted: true,
+  };
+}
+
 export async function verifyNativeLoopRunnerManifest({
   sourceRefsPath = 'docs/recovery/native-loop-source-refs.json',
   manifestPath = 'docs/recovery/native-loop-runner-manifest.json',
@@ -71,8 +160,8 @@ export async function verifyNativeLoopRunnerManifest({
   if (manifest.version !== 1 || manifest.kind !== 'reconstructed-native-region-benchmark-manifest') {
     throw new Error('runner manifest identity is invalid');
   }
-  if (manifest.status !== 'ready-for-official-abba-measurement') {
-    throw new Error('runner manifest is not ready for official ABBA measurement');
+  if (![READY_STATUS, QUALIFIED_STATUS].includes(manifest.status)) {
+    throw new Error('runner manifest has an unsupported lifecycle status');
   }
   if (manifest.historicalRunnerIdentityRecovered !== false || manifest.historicalCorpusRecovered !== false) {
     throw new Error('runner manifest must not claim recovered historical identity');
@@ -110,6 +199,7 @@ export async function verifyNativeLoopRunnerManifest({
   equal(manifest.protocol.acceptance.phaseOverrunBlocking, OFFICIAL_COST_PROTOCOL.phaseOverrunIsBlocking, 'phase blocking');
   equal(manifest.protocol.acceptance.measuredSampleRemovalAllowed, OFFICIAL_COST_PROTOCOL.measuredSampleRemovalAllowed, 'sample removal');
 
+  if (!Array.isArray(manifest.runners)) throw new Error('runner manifest must expose the four explicit runners as an array');
   const runners = [...manifest.runners].sort((a, b) => a.id.localeCompare(b.id));
   equal(runners.map(runner => runner.id), ['A/SMLP', 'A/STCK', 'B/SMLP', 'B/STCK'], 'runner identities');
   for (const runner of runners) {
@@ -125,10 +215,22 @@ export async function verifyNativeLoopRunnerManifest({
     equal(runner.startLevel, NATIVE_REGION_EXECUTION_CONTRACT.startLevel, `${runner.id} startLevel`);
     equal(runner.warmupActions, OFFICIAL_COST_PROTOCOL.games[expectedGame].warmupActions, `${runner.id} warmup actions`);
     equal(runner.measuredActions, OFFICIAL_COST_PROTOCOL.games[expectedGame].measuredActions, `${runner.id} measured actions`);
+    if (typeof runner.factory !== 'string' || runner.factory.length === 0) {
+      throw new Error(`${runner.id} factory is missing`);
+    }
   }
 
-  if (manifest.officialMeasurement.executed !== false || manifest.officialMeasurement.result !== null) {
-    throw new Error('manifest must remain pre-measurement until official ABBA is executed');
+  let officialMeasurement;
+  if (manifest.status === READY_STATUS) {
+    if (manifest.officialMeasurement?.executed !== false || manifest.officialMeasurement?.result !== null) {
+      throw new Error('pre-measurement manifest must not claim an official ABBA result');
+    }
+    officialMeasurement = { accepted: false, executed: false, proof: null };
+  } else {
+    officialMeasurement = {
+      executed: true,
+      ...(await verifyQualifiedMeasurement(manifest)),
+    };
   }
 
   return {
@@ -137,6 +239,7 @@ export async function verifyNativeLoopRunnerManifest({
     runners: runners.map(runner => runner.id),
     protocolTotals: manifest.protocol.totals,
     status: manifest.status,
+    officialMeasurement,
   };
 }
 
