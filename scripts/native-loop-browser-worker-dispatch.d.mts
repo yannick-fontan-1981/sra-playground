@@ -1,6 +1,6 @@
 export interface BrowserWorkerBenchmarkRuntime {
-  load(game: string, level: number): Promise<Record<string, unknown>>;
-  action(actionId: number, data?: { x: number; y: number }): Promise<Record<string, unknown>>;
+  load(game: string, level?: number): Promise<unknown>;
+  action(actionId: number, data?: { x: number; y: number }): Promise<unknown>;
 }
 
 export interface BrowserWorkerBenchmarkRequest {
