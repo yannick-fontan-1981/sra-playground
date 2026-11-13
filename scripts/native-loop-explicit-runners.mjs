@@ -75,6 +75,11 @@ function requireRegionCandidateHook(candidateHook) {
   if (typeof candidateHook.afterAction !== 'function') {
     throw new TypeError('region_intervention candidate hook requires afterAction()');
   }
+  if (candidateHook.hookInputMode !== undefined
+      && candidateHook.hookInputMode !== 'cloned'
+      && candidateHook.hookInputMode !== 'readonly') {
+    throw new TypeError('region_intervention hookInputMode must be cloned or readonly');
+  }
   return candidateHook;
 }
 
@@ -104,6 +109,7 @@ function createCandidateRunner({
     }),
     beforeAction: hook.beforeAction,
     afterAction: hook.afterAction,
+    hookInputMode: hook.hookInputMode ?? 'cloned',
   });
 }
 
