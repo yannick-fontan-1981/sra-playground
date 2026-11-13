@@ -5,7 +5,7 @@
   "baseline": {
     "repository": "yannick-fontan-1981/sra-playground",
     "canonicalBranch": "recovery/site109-reconstruction-20261112",
-    "canonicalCommit": "fa76f1223d9d732a1f37a7f3bf1a8934b383e5c6",
+    "canonicalCommit": "9e04bbd5569f6755178fa1b5276a112ca47d646b",
     "sourcePolicy": "GitHub canonical; evidence before count"
   },
   "purpose": "Inventory durable reconstructed operations and runtime capabilities without projecting them onto the unrecovered historical 76-slot registry.",
@@ -34,11 +34,11 @@
   },
   "summary": {
     "operationRecords": 31,
-    "capabilityRecords": 15,
-    "inventoryRecords": 46,
+    "capabilityRecords": 16,
+    "inventoryRecords": 47,
     "operationsCalculationQualified": 31,
     "operationsProductActive": 2,
-    "capabilitiesFunctionalQualified": 15,
+    "capabilitiesFunctionalQualified": 16,
     "capabilitiesProductActive": 7,
     "capabilitiesSupportingActive": 5,
     "capabilitiesOfficialPerformanceQualified": 2,
@@ -928,18 +928,64 @@
       "decisionEffect": "Préserve none/ambiguous/pending/blocked et route un retour sélectionné une seule fois.",
       "implementation": [
         "src/logos-engine/v6-neutral-common-caller.ts",
-        "src/logos-engine/v6-common-campaign-owner.ts"
+        "src/logos-engine/v6-common-campaign-owner.ts",
+        "src/logos-engine/v6-common-campaign-checkpoint.ts"
       ],
       "tests": [
         "tests/v6-neutral-common-caller.test.ts",
         "tests/v6-neutral-common-caller-owned.test.ts",
-        "tests/v6-common-campaign-owner.test.ts"
+        "tests/v6-common-campaign-owner.test.ts",
+        "tests/v6-common-campaign-session-continuity.test.ts"
       ],
       "proofs": [
-        "docs/recovery/op01-op31-common-campaign-owner-20261112.md"
+        "docs/recovery/op01-op31-common-campaign-owner-20261112.md",
+        "docs/recovery/op01-op31-session-continuity-core-20261113.md",
+        "docs/recovery/op01-op31-session-continuity-core-qualified.json"
       ],
       "limits": [
-        "Aucune priorité implicite entre propriétaires indépendants."
+        "Aucune priorité implicite entre propriétaires indépendants.",
+        "Le checkpoint commun est qualifié au niveau noyau, mais pas encore possédé par le host/contrôleur navigateur."
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped"
+    },
+    {
+      "id": "runtime.campaign-checkpoint-core",
+      "title": "Noyau atomique de checkpoint de campagne",
+      "kind": "runtime-continuity",
+      "functionalStatus": "qualified-bounded",
+      "productStatus": "available-not-main",
+      "performanceStatus": "not-measured-separately",
+      "producers": [
+        "CommonCampaignOwner snapshot",
+        "ObservedAddressedMaterialCheckpointParticipant snapshot"
+      ],
+      "consumers": [
+        "CommonCampaignCheckpointCoordinator restore",
+        "fresh CommonCampaignOwner and FieldStock runtime"
+      ],
+      "decisionEffect": "Préserve atomiquement l’ordre des propriétaires, le needId, l’action en attente, la déduplication et l’état FieldStock, avec rollback intégral en cas d’échec.",
+      "implementation": [
+        "src/logos-engine/v6-common-campaign-checkpoint.ts",
+        "src/logos-engine/field-stock-snapshot.ts",
+        "src/logos-engine/v6-common-campaign-owner.ts",
+        "src/runtime/observed-addressed-material-checkpoint.ts"
+      ],
+      "tests": [
+        "tests/v6-common-campaign-session-continuity.test.ts",
+        "tests/v6-common-campaign-owner.test.ts",
+        "tests/v6-neutral-common-caller.test.ts"
+      ],
+      "proofs": [
+        "docs/recovery/op01-op31-session-continuity-core-20261113.md",
+        "docs/recovery/op01-op31-session-continuity-core-qualified.json",
+        "docs/migration/op01-op31-progress.md"
+      ],
+      "limits": [
+        "Pas encore exposé par BrowserCommonCampaignHost.",
+        "Pas encore possédé par BrowserAgentController.",
+        "Aucune preuve de désactivation/réactivation Agent dans le navigateur réel.",
+        "Aucun coût de persistance produit qualifié, car le snapshot n’est pas appelé dans la boucle active."
       ],
       "historicalMapping": null,
       "historicalCountDisposition": "unmapped"
@@ -1225,7 +1271,7 @@
         "docs/recovery/op01-op31-browser-public-action6-owner-20261113.md"
       ],
       "limits": [
-        "La persistance atomique entre activations Agent reste ouverte."
+        "Le noyau de checkpoint existe, mais le host ne l’expose et ne le possède pas encore à une frontière navigateur sûre."
       ],
       "historicalMapping": null,
       "historicalCountDisposition": "unmapped"
@@ -1258,7 +1304,7 @@
         "docs/recovery/op01-op31-browser-agent-controller-20261112.md"
       ],
       "limits": [
-        "Snapshot/restauration de campagne, propriétaires, needId et retour en attente non raccordés."
+        "Le noyau de checkpoint est qualifié hors boucle active; la désactivation puis réactivation Agent réelle n’est pas encore raccordée."
       ],
       "historicalMapping": null,
       "historicalCountDisposition": "unmapped"
@@ -1399,12 +1445,12 @@
       "reason": "Le SHA/source exact de Site 109 reste non résolu."
     },
     {
-      "id": "campaign-snapshot-restoration",
+      "id": "browser-session-reactivation",
       "status": "open",
       "blocks": [
-        "cross-activation-continuity"
+        "cross-activation-product-continuity"
       ],
-      "reason": "La campagne, les propriétaires, le needId et le retour en attente ne sont pas restaurés atomiquement."
+      "reason": "Le noyau atomique campagne + FieldStock est qualifié, mais le host et le contrôleur navigateur ne possèdent pas encore le checkpoint et aucune reprise Agent réelle n’est démontrée."
     },
     {
       "id": "op31-objective-owner",
@@ -1444,6 +1490,6 @@
     "historicalRegistryRecovered": false,
     "historicalCountClaimed": false,
     "sitePublished": false,
-    "nextStep": "qualify atomic snapshot/restoration and search durable evidence for the historical 76-slot schema"
+    "nextStep": "connect the qualified campaign checkpoint core to BrowserCommonCampaignHost and BrowserAgentController, prove real Agent reactivation, and continue searching durable evidence for the historical 76-slot schema"
   }
 }

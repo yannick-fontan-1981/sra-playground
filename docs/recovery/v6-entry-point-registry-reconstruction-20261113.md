@@ -3,7 +3,7 @@
 Date de consolidation : 13 novembre 2026 (America/Recife).
 
 Branche canonique auditée : `recovery/site109-reconstruction-20261112`  
-Commit de départ : `fa76f1223d9d732a1f37a7f3bf1a8934b383e5c6`
+Commit canonique audité : `9e04bbd5569f6755178fa1b5276a112ca47d646b`
 
 ## Verdict
 
@@ -29,11 +29,11 @@ Ce registre **n’est pas** la table historique perdue des 76 points d’entrée
 | Mesure | Valeur |
 | --- | ---: |
 | `operationRecords` | 31 |
-| `capabilityRecords` | 15 |
-| `inventoryRecords` | 46 |
+| `capabilityRecords` | 16 |
+| `inventoryRecords` | 47 |
 | `operationsCalculationQualified` | 31 |
 | `operationsProductActive` | 2 |
-| `capabilitiesFunctionalQualified` | 15 |
+| `capabilitiesFunctionalQualified` | 16 |
 | `capabilitiesProductActive` | 7 |
 | `capabilitiesSupportingActive` | 5 |
 | `capabilitiesOfficialPerformanceQualified` | 2 |
@@ -41,7 +41,7 @@ Ce registre **n’est pas** la table historique perdue des 76 points d’entrée
 | `historicalCount` | `null` |
 | `historicalParityClaimed` | false |
 
-Le total de 46 est un **inventaire de preuves** composé de 31 opérations et 15 capacités de haut niveau. Il ne doit jamais être présenté comme `46/76`.
+Le total de 47 est un **inventaire de preuves** composé de 31 opérations et 16 capacités de haut niveau. Il ne doit jamais être présenté comme `47/76`.
 
 ## Disposition OP01–OP31
 
@@ -94,6 +94,7 @@ OP06, OP29 et OP30 possèdent des effets spécialisés démontrés, mais ne sont
 | `logos.composition-authority` | `qualified` | `supporting-active` | `covered-by-qualified-scopes` |
 | `logos.operation-observability` | `qualified` | `supporting-active` | `not-measured-separately` |
 | `campaign.common-owner` | `qualified` | `active` | `covered-by-qualified-scopes` |
+| `runtime.campaign-checkpoint-core` | `qualified-bounded` | `available-not-main` | `not-measured-separately` |
 | `campaign.field-stock-op18` | `qualified-bounded` | `active` | `not-measured-separately` |
 | `campaign.public-simple-op28` | `qualified-bounded` | `active` | `not-measured-separately` |
 | `campaign.joint-channels-op28` | `qualified-bounded` | `active` | `official-qualified` |
@@ -113,13 +114,15 @@ Les seules qualifications officielles de performance attachées à une capacité
 
 Les autres statuts `covered-by-qualified-scopes` signifient que le composant a été traversé dans un périmètre qualifié. Ils ne constituent pas une mesure isolée de son coût.
 
+Le noyau `runtime.campaign-checkpoint-core` conserve désormais atomiquement la campagne commune, le `needId`, l’action en attente, la déduplication et l’état exact de FieldStock, avec rollback intégral. Il reste toutefois hors de la boucle navigateur active : le host et le contrôleur Agent ne possèdent pas encore le checkpoint et aucune réactivation Agent réelle n’est revendiquée.
+
 ## Gardes ouvertes
 
 | Garde | État | Raison du blocage |
 | --- | --- | --- |
 | `historical-slot-schema` | `open` | Le schéma canonique des 76 emplacements V6 n'a pas été récupéré. |
 | `site109-source-identity` | `open` | Le SHA/source exact de Site 109 reste non résolu. |
-| `campaign-snapshot-restoration` | `open` | La campagne, les propriétaires, le needId et le retour en attente ne sont pas restaurés atomiquement. |
+| `browser-session-reactivation` | `open` | Le noyau atomique campagne + FieldStock est qualifié, mais le host et le contrôleur navigateur ne possèdent pas encore le checkpoint et aucune reprise Agent réelle n’est démontrée. |
 | `op31-objective-owner` | `open` | Aucun propriétaire d'objectif produit ne maintient, termine, suspend ou réoriente la suite. |
 | `region-product-owner` | `open` | Region est qualifiée dans le runtime natif/Worker, mais pas comme propriétaire physique du contrôleur produit. |
 | `full-product-composition-performance` | `open` | Les preuves Region et joint_channels qualifient leurs seams; elles ne mesurent pas la composition produit complète des quatre propriétaires. |
@@ -130,7 +133,7 @@ Les autres statuts `covered-by-qualified-scopes` signifient que le composant a �
 Le script `scripts/check-v6-entry-point-progress.mjs` vérifie :
 
 - exactement OP01 à OP31, sans doublon ;
-- les 15 capacités de cette première reconstruction ;
+- les 16 capacités de cette reconstruction, y compris le noyau atomique de checkpoint ;
 - la cohérence des totaux dérivés ;
 - l’existence de chaque source, test et preuve référencés ;
 - l’absence de mapping historique inventé ;
@@ -150,6 +153,6 @@ Le projet peut désormais répondre précisément à deux questions différentes
 
 ## Étape suivante
 
-La priorité fonctionnelle suivante est la continuité atomique de campagne : snapshot et restauration du contrôleur, des propriétaires, des modèles retenus, du `needId` et du retour physique en attente. En parallèle, toute preuve durable permettant de reconstruire l’identité des 76 emplacements pourra être ajoutée sans modifier rétroactivement les statuts actuels.
+La priorité fonctionnelle suivante est le raccord navigateur du noyau de continuité déjà qualifié : ownership du checkpoint par le host et le contrôleur, restauration avant toute nouvelle décision, vérification de l’observation courante et reprise d’un retour en attente sans rejouer l’action. En parallèle, toute preuve durable permettant de reconstruire l’identité des 76 emplacements pourra être ajoutée sans modifier rétroactivement les statuts actuels.
 
 Aucune publication Site n’est incluse dans cette étape.

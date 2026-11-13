@@ -52,6 +52,24 @@ test('official performance status is limited to the two qualified reconstructed 
   ]);
 });
 
+test('qualified checkpoint core is recorded without claiming browser reactivation', async () => {
+  const registry = await loadRegistry(registryPath);
+  const checkpoint = registry.capabilities.find(
+    (capability: { id: string }) => capability.id === 'runtime.campaign-checkpoint-core',
+  );
+  assert.equal(checkpoint.functionalStatus, 'qualified-bounded');
+  assert.equal(checkpoint.productStatus, 'available-not-main');
+  assert.equal(checkpoint.performanceStatus, 'not-measured-separately');
+  assert.equal(
+    registry.openGates.find((gate: { id: string }) => gate.id === 'browser-session-reactivation').status,
+    'open',
+  );
+  assert.equal(
+    registry.openGates.some((gate: { id: string }) => gate.id === 'campaign-snapshot-restoration'),
+    false,
+  );
+});
+
 test('derived summary cannot be replaced by an inflated declared count', async () => {
   const registry = await loadRegistry(registryPath);
   const mutated = structuredClone(registry);

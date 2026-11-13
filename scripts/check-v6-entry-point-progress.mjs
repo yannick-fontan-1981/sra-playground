@@ -14,6 +14,7 @@ const REQUIRED_CAPABILITY_IDS = [
   'logos.composition-authority',
   'logos.operation-observability',
   'campaign.common-owner',
+  'runtime.campaign-checkpoint-core',
   'campaign.field-stock-op18',
   'campaign.public-simple-op28',
   'campaign.joint-channels-op28',
@@ -30,7 +31,7 @@ const REQUIRED_CAPABILITY_IDS = [
 const REQUIRED_OPEN_GATES = [
   'historical-slot-schema',
   'site109-source-identity',
-  'campaign-snapshot-restoration',
+  'browser-session-reactivation',
   'op31-objective-owner',
   'region-product-owner',
   'full-product-composition-performance',
@@ -189,9 +190,15 @@ export async function validateRegistry(registry, options = {}) {
     .map(record => record.id);
   push(errors, sameStringSet(officialPerformance, OFFICIAL_PERFORMANCE_CAPABILITIES), 'official performance qualification must remain limited to Region and joint channels');
 
+  const checkpointCore = capabilities.find(record => record.id === 'runtime.campaign-checkpoint-core');
+  push(errors, checkpointCore?.functionalStatus === 'qualified-bounded', 'campaign checkpoint core must remain functionally qualified');
+  push(errors, checkpointCore?.productStatus === 'available-not-main', 'campaign checkpoint core must remain outside the active browser loop until reactivation is qualified');
+  push(errors, checkpointCore?.performanceStatus === 'not-measured-separately', 'campaign checkpoint core must not claim a performance qualification');
+
   const openGates = Array.isArray(registry.openGates) ? registry.openGates : [];
   const gateIds = uniqueIds(openGates, 'openGates', errors);
   push(errors, sameStringSet(gateIds, REQUIRED_OPEN_GATES), 'openGates must preserve all unresolved reconstruction gates');
+  push(errors, openGates.find(gate => gate.id === 'browser-session-reactivation')?.status === 'open', 'browser session reactivation must remain open');
   push(errors, openGates.find(gate => gate.id === 'site-publication')?.status === 'blocked', 'Site publication must remain blocked');
 
   const derivedSummary = deriveSummary(registry);
