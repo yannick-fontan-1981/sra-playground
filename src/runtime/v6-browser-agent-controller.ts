@@ -196,10 +196,11 @@ export class BrowserAgentController {
     this.#emit();
 
     const run = this.#run(host, ports);
-    this.#runPromise = run.finally(() => {
-      if (this.#runPromise === run || this.#runPromise) this.#runPromise = null;
+    const tracked = run.finally(() => {
+      if (this.#runPromise === tracked) this.#runPromise = null;
     });
-    return this.#runPromise;
+    this.#runPromise = tracked;
+    return tracked;
   }
 
   /**
@@ -266,17 +267,13 @@ export class BrowserAgentController {
 
         const result = await host.run(state, ports);
         this.#campaignStatus = result.status;
-
-        if (result.status !== 'action') {
-          return this.#finish(stopReasonFor(result));
-        }
-
-        if (result.dispatch?.elapsedMs !== null && result.dispatch !== null) {
+        if (result.status === 'action' && result.dispatch && result.dispatch.elapsedMs !== null) {
           this.#actionsDispatched += 1;
         }
         this.#emit();
 
         if (this.#requestedStop) return this.#finish(this.#requestedStop);
+        if (result.status !== 'action') return this.#finish(stopReasonFor(result));
         if (!result.dispatch?.accepted) return this.#finish(stopReasonFor(result));
 
         const current = host.currentGameObservation ?? ports.readState().observation;
