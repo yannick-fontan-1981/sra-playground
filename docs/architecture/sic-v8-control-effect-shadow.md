@@ -172,4 +172,13 @@ Dans les paramètres actifs, le bilan de couverture énumère les combinaisons b
 
 **Avancement estimé : 92 %.** Les deux graphes sont actifs sur leur périmètre et les cinq perspectives sont visibles. L’agenda global n’a pas encore remplacé la sélection des familles par le programme SRC natif. L’atelier édite les paramètres et l’ordre de graphes existants. La création, validation et activation d’un nouveau contrat exécutable depuis l’atelier reste à qualifier, ainsi que la mesure des performances du dernier commit.
 
+La fenêtre indicative de performance a exécuté les quatre séries A1/B1/B2/A2 avec le chargeur TypeScript par défaut de Node 22.18.0. La référence A est la publication 0.65 (`b9555039`) et le candidat B est `2af0e109`. Les 32 sessions ont toutes reproduit les commandes attendues, avec 10 actions et deux niveaux acquis pour STCK, 15 actions et trois niveaux acquis pour SMLP. Les huit durées par jeu et version ont été conservées dans le calcul. STCK passe de 16,413 s à 11,806 s (−28,07 %) et SMLP de 17,734 s à 27,958 s (+57,65 %). Une exécution simultanée de la suite complète a chevauché B2 et A2. La fenêtre établit que le rejeu fonctionne, mais ne qualifie pas le coût ni le dernier commit. Les reçus locaux permettent de vérifier ce calcul.
+
+| Série | SHA-256 du reçu brut |
+| --- | --- |
+| A1 | `bf38f7bd5f67b946a1a78a02e0858e88a0a0eee9a6a4674b2a4f08d7357b693f` |
+| B1 | `7333a5c42b9fa03191f2038d3daa1fed83f00a1838ea8010bb1bc5e508ad099b` |
+| B2 | `ea9b4afda3629b195d5c62eeba54a2346fc2109ae8e6a32ba16dcde1d328c770` |
+| A2 | `cb97015885d86406812492f1dd5726a825871a782660f6b95b86f5f4d8ddd097` |
+
 Le résumé natif est construit après la décision, hors de la mesure du temps actif. L’affichage est différé au prochain rendu du navigateur après la fin d’une opération. Les tests couvrent la matrice, la révision, la portée, le fallback, l’ambiguïté, les retours natifs et la parité du transport V6 jusqu’à un retour terminal.

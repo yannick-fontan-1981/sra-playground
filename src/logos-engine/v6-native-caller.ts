@@ -308,8 +308,8 @@ export class NativeCallerCoordinator {
     const offer = this.configuration.strategy.families.includes('information_goal') ? null : await this.points.offer(observation, inputs);
     const control = await this.controls.offer(observation, inputs, this.registry());
     const proposal = await this.frontier.propose(observation, inputs, {
-      prefix_evidence: [], experimental_probes: offer ? [offer] : [], control_probe: control, sic_agenda: true,
-      sic_frontier: this.configuration.sicFrontier,
+      prefix_evidence: [], experimental_probes: offer ? [offer] : [], control_probe: control,
+      ...(this.configuration.sicFrontier ? { sic_agenda: true, sic_frontier: this.configuration.sicFrontier } : {}),
     });
     this.persistDeltas(observation); return proposal;
   }

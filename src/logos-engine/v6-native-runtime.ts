@@ -33,6 +33,7 @@ import { OrderedRecruitment } from './v6-ordered-recruitment.ts';
 import { RankedWorkshop } from './v6-ranked-workshop.ts';
 import { compileRecoveryPack, isRecoveryStop } from '../sic/active-recovery.ts';
 import { nativePlanReceipt } from '../sic/native-plan-receipt.ts';
+import { defaultFrontierConfiguration } from '../sic/frontier-configuration.ts';
 import { SymbolTransactions } from './v6-symbol-transactions.ts';
 import { AddressedMaterial, ADDRESSED_NATIVE_SEARCH_BOUNDS } from './v6-addressed-material.ts';
 import { ObservedBinding, OBSERVED_BINDING_NATIVE_SEARCH_BOUNDS } from './v6-observed-binding.ts';
@@ -2396,6 +2397,8 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     fullV6Parity: false };
   const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
   const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
-  return new NativeV6Runtime({ sourceDigest, families, groups, authorityPolicy: loaded.common, callerStrategy: configuration, sicFrontier: recovery.frontier, acquisitionFamilies: { supports, recall, framed, outline: outlineOwner, inventory, reaction, reactive, chart, recolor, axial, window, recruitment, workshop, symbols, morphology, feedback, fields, binding, preparations, preview: previewOwner, selectedRigid: selectedRigidOwner },
+  return new NativeV6Runtime({ sourceDigest, families, groups, authorityPolicy: loaded.common, callerStrategy: configuration,
+    sicFrontier: recovery.frontier ?? defaultFrontierConfiguration,
+    acquisitionFamilies: { supports, recall, framed, outline: outlineOwner, inventory, reaction, reactive, chart, recolor, axial, window, recruitment, workshop, symbols, morphology, feedback, fields, binding, preparations, preview: previewOwner, selectedRigid: selectedRigidOwner },
     maxPointOccurrences: loaded.common.input_domain.max_point_occurrences, ...(options.now ? { now: options.now } : {}) });
 }
