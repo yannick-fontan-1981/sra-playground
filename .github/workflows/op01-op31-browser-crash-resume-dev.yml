@@ -27,6 +27,16 @@ jobs:
       - name: Apply strict crash-safe persistence wiring
         run: |
           node scripts/apply-op01-op31-browser-crash-autosave.mjs
+          node --input-type=module <<'NODE'
+          import { readFile, writeFile } from 'node:fs/promises';
+          const path = 'scripts/apply-op01-op31-browser-crash-indexeddb.mjs';
+          let source = await readFile(path, 'utf8');
+          source = source.replace(
+            "console.log(JSON.stringify({\\n  status: 'strict-indexeddb-crash-checkpoint-wired',\\n  files: [mainPath, fixturePath],\\n}, null, 2));",
+            "console.log(JSON.stringify({\n  status: 'strict-indexeddb-crash-checkpoint-wired',\n  files: [mainPath, fixturePath],\n}, null, 2));",
+          );
+          await writeFile(path, source);
+          NODE
           node scripts/apply-op01-op31-browser-crash-indexeddb.mjs
           node scripts/apply-op01-op31-browser-crash-app-launch.mjs
           node scripts/apply-op01-op31-browser-crash-return-presentation.mjs
