@@ -1,0 +1,37 @@
+name: Materialize V6 browser session reactivation
+
+on:
+  push:
+    branches:
+      - recovery/v6-browser-session-reactivation-20261113
+    paths:
+      - scripts/patch-v6-browser-session-reactivation.mjs
+      - .github/workflows/v6-browser-session-reactivation-materialize.yml
+
+permissions:
+  contents: write
+
+jobs:
+  materialize:
+    runs-on: ubuntu-26.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.18.0
+      - name: Apply browser session reactivation patch
+        run: node scripts/patch-v6-browser-session-reactivation.mjs
+      - name: Commit generated implementation and tests
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add src/runtime/v6-browser-common-campaign-host.ts \
+                  src/runtime/v6-browser-product-campaign-host.ts \
+                  src/runtime/v6-browser-agent-controller.ts \
+                  tests/v6-browser-session-reactivation.test.ts
+          if git diff --cached --quiet; then
+            echo "No materialization changes"
+          else
+            git commit -m "Connect browser Agent session checkpoint restoration"
+            git push origin HEAD:${GITHUB_REF_NAME}
+          fi
