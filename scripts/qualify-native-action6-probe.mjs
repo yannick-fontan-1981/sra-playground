@@ -73,9 +73,10 @@ const report = {
 try {
   report.games.push(await qualify('STCK'));
   report.games.push(await qualify('SMLP'));
-  const smlp = report.games.find(item => item.game === 'SMLP');
-  if (!smlp || smlp.changedPixelCount <= 0) {
-    throw new Error('SMLP public ACTION6 probe produced no visible delta');
+  for (const item of report.games) {
+    if (item.changedPixelCount <= 0) {
+      throw new Error(`${item.game} public ACTION6 probe produced no visible delta`);
+    }
   }
   const target = process.env.LOT9B_NATIVE_PROBE_REPORT || 'lot9b-native-probe-report.json';
   fs.writeFileSync(target, JSON.stringify(report, null, 2) + '\n');

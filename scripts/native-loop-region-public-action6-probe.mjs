@@ -3,7 +3,7 @@ export const REGION_PUBLIC_ACTION6_PROBE_V1 = Object.freeze({
   games: Object.freeze(['STCK', 'SMLP']),
   actionId: 6,
   source: 'public 64x64 frame only',
-  rule: 'SMLP: first visible closed-gate 3x3 glyph center; STCK: first visible bottom shop-button run center',
+  rule: 'SMLP: first visible gate glyph center; STCK: visible stack-card center when the public shop bar is active, otherwise visible shop-button center',
 });
 
 function validateFrame(observation) {
@@ -98,8 +98,27 @@ export function findStckVisibleShopButtonCenter(observation) {
   return undefined;
 }
 
+const STCK_CARD_COLORS = new Set([7, 8, 9, 10, 11, 14]);
+
+export function findStckVisibleStackCardCenter(observation) {
+  const frame = validateFrame(observation);
+  for (let y = 53; y >= 0; y -= 1) {
+    const centerColor = frame[y][4];
+    if (!STCK_CARD_COLORS.has(centerColor)) continue;
+    const interior = frame[y].slice(2, 8);
+    if (interior.every(value => value === centerColor)) {
+      return { id: 6, x: 4, y };
+    }
+  }
+  return undefined;
+}
+
 export function selectRegionPublicAction6Probe(game, observation) {
   if (game === 'SMLP') return findSmlpVisibleGateCenter(observation);
-  if (game === 'STCK') return findStckVisibleShopButtonCenter(observation);
+  if (game === 'STCK') {
+    const shopButton = findStckVisibleShopButtonCenter(observation);
+    if (!shopButton) return undefined;
+    return findStckVisibleStackCardCenter(observation) ?? shopButton;
+  }
   throw new RangeError(`unsupported Region public probe game ${String(game)}`);
 }

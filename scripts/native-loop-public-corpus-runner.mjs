@@ -19,8 +19,24 @@ function validateSession(session) {
   return session;
 }
 
+function validateCorpus(corpus, game) {
+  if (!corpus || typeof corpus !== 'object') throw new TypeError('public corpus must be an object');
+  nonEmpty(corpus.id, 'corpus.id');
+  if (!Array.isArray(corpus.games) || !corpus.games.includes(game)) {
+    throw new Error(`corpus ${corpus.id} does not support game ${game}`);
+  }
+  if (!Number.isInteger(corpus.startLevel) || corpus.startLevel < 1) {
+    throw new RangeError('corpus.startLevel must be a positive integer');
+  }
+  return corpus;
+}
+
+function defaultSelectAction({ observation }) {
+  return selectNativePublicCostAction(observation);
+}
+
 /**
- * Candidate runner factory for the newly requalified public-only corpus.
+ * Candidate runner factory for a deterministic public-only corpus.
  *
  * It owns timing but not game construction. The native game factory remains a
  * separate recovery dependency. Setup and the first observation are outside
@@ -30,7 +46,9 @@ export function createPublicCorpusSessionRunner({
   variant,
   game,
   sourceRef,
-  seed = NATIVE_PUBLIC_ACTION_CORPUS_V1.seed,
+  corpus = NATIVE_PUBLIC_ACTION_CORPUS_V1,
+  selectAction = defaultSelectAction,
+  seed = corpus.seed,
   createSession,
   beforeAction,
   afterAction,
@@ -38,6 +56,8 @@ export function createPublicCorpusSessionRunner({
   nonEmpty(variant, 'variant');
   nonEmpty(game, 'game');
   nonEmpty(sourceRef, 'sourceRef');
+  const qualifiedCorpus = validateCorpus(corpus, game);
+  if (typeof selectAction !== 'function') throw new TypeError('selectAction must be a function');
   if (!Number.isInteger(seed)) throw new TypeError('seed must be an integer');
   if (typeof createSession !== 'function') throw new TypeError('createSession must be a function');
   if (beforeAction !== undefined && typeof beforeAction !== 'function') {
@@ -61,7 +81,7 @@ export function createPublicCorpusSessionRunner({
     const session = validateSession(await createSession({
       game,
       seed,
-      startLevel: NATIVE_PUBLIC_ACTION_CORPUS_V1.startLevel,
+      startLevel: qualifiedCorpus.startLevel,
       descriptor: structuredClone(descriptor),
     }));
     let observation = await session.initialObservation();
@@ -74,7 +94,12 @@ export function createPublicCorpusSessionRunner({
 
     for (let index = 0; index < descriptor.actions; index += 1) {
       const policyStarted = performance.now();
-      const action = selectNativePublicCostAction(observation);
+      const action = await selectAction({
+        game,
+        index,
+        observation: structuredClone(observation),
+        descriptor: structuredClone(descriptor),
+      });
       policyMs += performance.now() - policyStarted;
       if (!action) {
         throw new Error(`public corpus cannot choose action ${index + 1}/${descriptor.actions}`);
@@ -123,7 +148,7 @@ export function createPublicCorpusSessionRunner({
         runnerKind: 'requalified-public-corpus-candidate',
         runnerRef: `public-corpus-runner:${variant}/${game}`,
         sourceRef,
-        corpusRef: NATIVE_PUBLIC_ACTION_CORPUS_V1.id,
+        corpusRef: qualifiedCorpus.id,
         seed,
         timingScope: PUBLIC_CORPUS_TIMING_SCOPE,
         actions,

@@ -4,6 +4,7 @@ import test from 'node:test';
 import {
   findSmlpVisibleGateCenter,
   findStckVisibleShopButtonCenter,
+  findStckVisibleStackCardCenter,
   selectRegionPublicAction6Probe,
 } from '../scripts/native-loop-region-public-action6-probe.mjs';
 
@@ -13,6 +14,18 @@ function blank(fill = 5) {
 
 function observation(frame) {
   return { frame, availableActionIds: [5, 6, 7] };
+}
+
+function addVisibleStckButton(frame) {
+  for (let y = 54; y <= 58; y += 1) {
+    for (let x = 2; x <= 10; x += 1) frame[y][x] = 10;
+  }
+}
+
+function hideStckShopBar(frame) {
+  for (let y = 54; y <= 58; y += 1) {
+    for (let x = 0; x < 64; x += 1) frame[y][x] = 5;
+  }
 }
 
 test('SMLP probe selects the center of the first visible closed-gate glyph', () => {
@@ -29,13 +42,52 @@ test('SMLP probe selects the center of the first visible closed-gate glyph', () 
   assert.deepEqual(selectRegionPublicAction6Probe('SMLP', observation(f)), { id: 6, x, y });
 });
 
-test('STCK probe selects the center of the first visible bottom button run', () => {
+test('SMLP probe also detects the source-proven open-gate glyph', () => {
+  const f = blank(2);
+  const x = 18;
+  const y = 22;
+  f[y][x] = 3;
+  f[y - 1][x] = 12;
+  f[y + 1][x] = 12;
+  assert.deepEqual(findSmlpVisibleGateCenter(observation(f)), { id: 6, x, y });
+});
+
+test('STCK detector exposes the center of the first visible shop-button run', () => {
   const f = blank(5);
-  for (let y = 54; y <= 58; y += 1) {
-    for (let x = 2; x <= 10; x += 1) f[y][x] = 10;
-  }
+  addVisibleStckButton(f);
   assert.deepEqual(findStckVisibleShopButtonCenter(observation(f)), { id: 6, x: 6, y: 56 });
+});
+
+test('STCK detector finds the bottom-most visible stack-card body', () => {
+  const f = blank(4);
+  for (let y = 47; y <= 51; y += 1) {
+    for (let x = 1; x <= 8; x += 1) f[y][x] = 9;
+  }
+  assert.deepEqual(findStckVisibleStackCardCenter(observation(f)), { id: 6, x: 4, y: 51 });
+});
+
+test('STCK probe prefers removable visible stack card when public shop bar is active', () => {
+  const f = blank(4);
+  addVisibleStckButton(f);
+  for (let y = 47; y <= 51; y += 1) {
+    for (let x = 1; x <= 8; x += 1) f[y][x] = 9;
+  }
+  assert.deepEqual(selectRegionPublicAction6Probe('STCK', observation(f)), { id: 6, x: 4, y: 51 });
+});
+
+test('STCK probe falls back to visible shop button when the stack is empty', () => {
+  const f = blank(5);
+  addVisibleStckButton(f);
   assert.deepEqual(selectRegionPublicAction6Probe('STCK', observation(f)), { id: 6, x: 6, y: 56 });
+});
+
+test('STCK probe does not click a stack card unless the public shop bar proves shop state', () => {
+  const f = blank(4);
+  hideStckShopBar(f);
+  for (let y = 47; y <= 51; y += 1) {
+    for (let x = 1; x <= 8; x += 1) f[y][x] = 9;
+  }
+  assert.equal(selectRegionPublicAction6Probe('STCK', observation(f)), undefined);
 });
 
 test('public ACTION6 probe fails closed when ACTION6 is unavailable', () => {
@@ -51,15 +103,5 @@ test('public ACTION6 probe returns undefined when no public target glyph is visi
   assert.equal(findSmlpVisibleGateCenter(observation(f)), undefined);
   const stck = blank(5);
   assert.equal(findStckVisibleShopButtonCenter(observation(stck)), undefined);
-});
-
-
-test('SMLP probe also detects the source-proven open-gate glyph', () => {
-  const f = blank(2);
-  const x = 18;
-  const y = 22;
-  f[y][x] = 3;
-  f[y - 1][x] = 12;
-  f[y + 1][x] = 12;
-  assert.deepEqual(findSmlpVisibleGateCenter(observation(f)), { id: 6, x, y });
+  assert.equal(findStckVisibleStackCardCenter(observation(stck)), undefined);
 });
