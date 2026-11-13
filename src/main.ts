@@ -5,6 +5,7 @@ import { BrowserGameRuntime, type GameObservation } from './runtime/browser-game
 import { AGENT_STATUS } from './runtime/contracts';
 import { BrowserV6Agent, type V6AgentSnapshot } from './runtime/v6-agent.ts';
 import { bindSicPerspectives, renderSicPanel } from './sic/panel.ts';
+import { as66Contradiction, type ContradictionReview } from './sic/contradiction-review.ts';
 import { readControlEffectShadow } from './sic/shadow.ts';
 import { observeSpace, type SpaceReturn } from './sic/space-return.ts';
 import { compareStckRank, type StckRankTrial } from './sic/stck-stack.ts';
@@ -169,6 +170,10 @@ app.innerHTML = `
                 <button id="agent-step" type="button" class="secondary-button">One action</button>
                 <button id="agent-pause" type="button" class="secondary-button agent-pause-wide" disabled>Pause</button>
               </div>
+              <div id="agent-sic-review" hidden>
+                <label><input id="agent-sic-pause" type="checkbox"> Pause on a contradicted prediction</label>
+                <button id="agent-sic-resume" type="button" class="primary-button" hidden>Confirm and resume</button>
+              </div>
               <div class="agent-live-stats" aria-label="Agent session">
                 <div><strong id="agent-action-count">0</strong><span>actions</span></div>
                 <div><strong id="agent-level-count">0</strong><span>levels solved</span></div>
@@ -184,7 +189,7 @@ app.innerHTML = `
         <section id="sic-panel" class="sic-panel" aria-labelledby="sic-title" hidden>
           <header class="sic-header">
             <div><h3 id="sic-title">SIC · How does this command work?</h3><p data-sic-context></p></div>
-            <span class="sic-mode">Read-only preview</span>
+            <span class="sic-mode" data-sic-mode>Read-only preview</span>
           </header>
           <div class="sic-tabs" role="tablist" aria-label="SIC perspectives" data-sic-tabs>
             <button type="button" id="sic-perceptions-tab" role="tab" aria-selected="true" aria-controls="sic-perceptions">Perceptions</button>
@@ -345,6 +350,7 @@ let renderedLevelCount = -1;
 let renderedPalette = '';
 let colors: number[][] = [];
 let agentState: V6AgentSnapshot | null = null;
+let contradictionReview: ContradictionReview | null = null;
 const sicPanel = element<HTMLElement>('#sic-panel');
 bindSicPerspectives(sicPanel);
 let sicRenderPending = false;
@@ -446,7 +452,15 @@ const agent = new BrowserV6Agent({
       throw error;
     }
   },
+  onAcquired: state => {
+    const review = as66Contradiction(selectedGame.code, element<HTMLInputElement>('#agent-sic-pause').checked, state);
+    if (review) {
+      contradictionReview = review;
+      agent.pause();
+    }
+  },
   onState: state => {
+    if (contradictionReview?.sessionId !== state.sessionId) contradictionReview = null;
     const last = agentReturns.at(-1);
     if (last && !last.nativeCheck && last.sessionId === state.sessionId && last.sequence === state.sequence) {
       try {
@@ -496,9 +510,18 @@ function updateAgentInterface(): void {
   const grounded = Boolean(observation?.availableActionIds.some(id => id >= 1 && id <= 7));
   const needsRestart = Boolean(observation && !state?.sessionId && (observation.level !== 1 || observation.levelsCompleted !== 0));
   const available = mode === 'agent' && ready() && !terminal && grounded && !needsRestart;
-  element<HTMLButtonElement>('#agent-step').disabled = !available || !(state?.canStep ?? true);
-  element<HTMLButtonElement>('#agent-run').disabled = !available || !(state?.canRun ?? true);
-  element<HTMLButtonElement>('#agent-batch').disabled = !available || !(state?.canRun ?? true);
+  const reviewing = Boolean(contradictionReview);
+  element<HTMLButtonElement>('#agent-step').disabled = reviewing || !available || !(state?.canStep ?? true);
+  element<HTMLButtonElement>('#agent-run').disabled = reviewing || !available || !(state?.canRun ?? true);
+  element<HTMLButtonElement>('#agent-batch').disabled = reviewing || !available || !(state?.canRun ?? true);
+  element('#agent-sic-review').hidden = selectedGame.code !== 'AS66';
+  const reviewToggle = element<HTMLInputElement>('#agent-sic-pause');
+  reviewToggle.disabled = reviewing || Boolean(state?.busy);
+  element('[data-sic-mode]').textContent = mode === 'agent' && selectedGame.code === 'AS66' && reviewToggle.checked
+    ? 'Pause for review enabled' : 'Read-only preview';
+  const confirm = element<HTMLButtonElement>('#agent-sic-resume');
+  confirm.hidden = !reviewing;
+  confirm.disabled = !reviewing || !available || !state?.canRun;
   element<HTMLButtonElement>('#agent-pause').disabled = !state?.busy;
   element<HTMLButtonElement>('#agent-new-session').disabled = !ready() || Boolean(state?.busy);
   element<HTMLButtonElement>('#agent-restart').disabled = !ready() || Boolean(state?.busy);
@@ -518,7 +541,9 @@ function updateAgentInterface(): void {
     : observation && !grounded ? 'The game offers no action in its current public state.'
     : state?.status === 'idle' ? 'Ready to run from level 1.'
     : state?.message ?? 'Ready to run from level 1.';
-  element('#agent-message').textContent = message ?? '';
+  element('#agent-message').textContent = contradictionReview
+    ? `SIC paused after action ${contradictionReview.sequence}. The return contradicted the prediction. Confirm to continue toward the next level.`
+    : message ?? '';
   element('#agent-message').setAttribute('data-status', state?.status ?? 'idle');
   element('#agent-action-count').textContent = String(state?.actionCount ?? 0);
   element('#agent-level-count').textContent = String(state?.sessionId ? state.levelsCompleted : 0);
@@ -746,10 +771,16 @@ element('#retry-button').addEventListener('click', () => {
 element('#manual-tab').addEventListener('click', () => setMode('manual'));
 element('#agent-tab').addEventListener('click', () => setMode('agent'));
 element('#return-manual').addEventListener('click', () => { setMode('manual'); focusCanvas(); });
-element('#agent-step').addEventListener('click', () => { void agent.step(); });
-element('#agent-run').addEventListener('click', () => { void agent.run(600); });
-element('#agent-batch').addEventListener('click', () => { void agent.run(16); });
+element('#agent-step').addEventListener('click', () => { if (!contradictionReview) void agent.step(); });
+element('#agent-run').addEventListener('click', () => { if (!contradictionReview) void agent.run(600); });
+element('#agent-batch').addEventListener('click', () => { if (!contradictionReview) void agent.run(16); });
 element('#agent-pause').addEventListener('click', () => agent.pause());
+element('#agent-sic-pause').addEventListener('change', updateAgentInterface);
+element('#agent-sic-resume').addEventListener('click', () => {
+  if (!contradictionReview || !agentState?.canRun || element<HTMLButtonElement>('#agent-sic-resume').disabled) return;
+  contradictionReview = null;
+  void agent.run(600);
+});
 element('#agent-new-session').addEventListener('click', () => agent.invalidate('New reasoning session. The current game position is preserved.'));
 element('#agent-restart').addEventListener('click', () => {
   void selectGame(selectedGame.code, 'replace', 1);

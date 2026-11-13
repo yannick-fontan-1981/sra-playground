@@ -44,6 +44,8 @@ export interface V6AgentHost {
   /** Serialize one native command and await its final public visual observation. */
   dispatch(action: AgentAction): Promise<V6DispatchResult>;
   onState(snapshot: V6AgentSnapshot): void;
+  /** Optional host checkpoint, after acquiring the return and before the next action. */
+  onAcquired?(snapshot: V6AgentSnapshot): void;
 }
 
 /** Measured native time excludes the host's animation/presentation delay. */
@@ -346,6 +348,7 @@ export class BrowserV6Agent {
           this.state('stopped', `The game reports ${next.state}. Its final public outcome has been acquired.`);
           return;
         }
+        if (acquired.kind !== 'stopped') this.host.onAcquired?.(this.snapshot);
         if (progressed) {
           if (acquired.kind === 'stopped') this.finish(acquired.reason);
           else this.state('paused', 'Level completed. V6 acquired the outcome and retained its transfer memory. Continue when ready.');

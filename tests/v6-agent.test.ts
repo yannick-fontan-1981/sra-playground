@@ -5,6 +5,7 @@ import type { AgentAction } from '../src/runtime/contracts.ts';
 import { BrowserV6Agent, BrowserV6WorkerClient } from '../src/runtime/v6-agent.ts';
 import type { V6AgentSnapshot, V6DispatchResult } from '../src/runtime/v6-agent.ts';
 import { readControlEffectShadow } from '../src/sic/shadow.ts';
+import { as66Contradiction } from '../src/sic/contradiction-review.ts';
 import {
   emptyV6Snapshot, nativeV6Action, sameV6Observation, toV6PublicObservation, v6FrameHash, V6AgentError, V6_REFERENCE_COMMIT,
 } from '../src/runtime/v6-agent-protocol.ts';
@@ -96,7 +97,7 @@ class ScriptedTransport implements V6AgentTransport {
   dispose(): void { this.disposed = true; }
 }
 
-function harness(transport = new ScriptedTransport()) {
+function harness(transport = new ScriptedTransport(), onAcquired?: (snapshot: V6AgentSnapshot) => void) {
   const context = { current: board(), enabled: true, actions: [] as AgentAction[], snapshots: [] as V6AgentSnapshot[] };
   let onState: ((snapshot: V6AgentSnapshot) => void) | null = null;
   let dispatch: (action: AgentAction) => Promise<V6DispatchResult> = async action => {
@@ -105,7 +106,7 @@ function harness(transport = new ScriptedTransport()) {
     return context.current;
   };
   const agent = new BrowserV6Agent({ transport, getObservation: () => context.current, canDispatch: () => context.enabled,
-    dispatch: action => dispatch(action), onState: state => { context.snapshots.push(state); onState?.(state); } });
+    dispatch: action => dispatch(action), onAcquired, onState: state => { context.snapshots.push(state); onState?.(state); } });
   return { agent, context, transport, setDispatch: (value: typeof dispatch) => { dispatch = value; },
     setOnState: (value: typeof onState) => { onState = value; } };
 }
@@ -220,6 +221,45 @@ test('pause during first planning retains the undelivered command and resumes wi
   assert.equal(state.context.actions.length, 1);
   assert.equal(state.transport.operations.filter(operation => operation.type === 'init').length, 1);
   assert.equal(state.transport.operations.filter(operation => operation.type === 'resume').length, 0);
+});
+
+test('opt-in AS66 review pauses after acquiring a contradiction and resumes the same ticket', async () => {
+  const transport = new ScriptedTransport();
+  transport.hook = async (operation, result) => {
+    if (operation.type === 'advance' && operation.sequence <= 2) {
+      const ref = `${operation.sessionId}:epoch:1:revision:${operation.sequence + 1}:frame:x`;
+      return { ...result, snapshot: { ...result.snapshot, trace: [{ kind: 'actual_outcome',
+        observation_ref: ref, matched: operation.sequence === 2 ? false : null }] } };
+    }
+    return result;
+  };
+  const pauses: number[] = [];
+  const state = harness(transport, snapshot => {
+    if (as66Contradiction(state.context.current.gameCode, true, snapshot)) {
+      pauses.push(snapshot.sequence);
+      state.agent.pause();
+    }
+  });
+  state.context.current.gameCode = 'AS66';
+  state.setDispatch(async action => {
+    state.context.actions.push(action);
+    state.context.current = { ...board(state.context.actions.length), gameCode: 'AS66' };
+    return state.context.current;
+  });
+  await state.agent.run(3);
+  assert.deepEqual(pauses, [2]);
+  assert.equal(state.agent.snapshot.actionCount, 2);
+  assert.equal(state.agent.snapshot.paused, true);
+  assert.equal(transport.operations.at(-1)?.type, 'advance');
+  const pending = transport.ticket?.id;
+  assert.ok(pending);
+  assert.equal(as66Contradiction('SYME', true, state.agent.snapshot), null);
+  assert.equal(as66Contradiction('AS66', false, state.agent.snapshot), null);
+  assert.equal(as66Contradiction('AS66', true, { ...state.agent.snapshot, sequence: 3 }), null);
+  await state.agent.step();
+  const resumed = transport.operations.at(-1);
+  assert.equal(resumed?.type === 'advance' && resumed.ticketId, pending);
+  assert.equal(state.agent.snapshot.actionCount, 3);
 });
 
 test('pause during native execution acquires that outcome, then retains the remaining prefix', async () => {

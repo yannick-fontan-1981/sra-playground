@@ -1198,15 +1198,20 @@ function renderGenericTimeline(panel: HTMLElement, container: Element, selected:
     const { first, last, previous, next, rule, status } = episode;
     const action = (item: DirectionalReturn) => item.decision?.steps[0]?.action ?? commands[item.command] ?? 'Action';
     const actions = first.sequence === last.sequence ? String(first.sequence) : `${first.sequence}–${last.sequence}`;
+    const operation = compositionOperations.find(item => item.key === first.decision?.operation);
+    const badge = operation ? ` · ${operation.key}` : '';
     const row = document.createElement('li');
-    row.append(strategyJump(section, key(first.sequence), `${actions} · ${statuses[status]}`));
+    row.append(strategyJump(section, key(first.sequence), `${actions} · ${statuses[status]}${badge}`));
     list.append(row);
     const details = document.createElement('details'), title = document.createElement('summary');
     details.className = 'sic-details';
     details.dataset.sicMethod = String(first.sequence);
     details.dataset.strategyChoice = key(first.sequence);
     details.open = expanded.get(details.dataset.sicMethod) ?? episode === lastContradiction;
-    title.textContent = `L${first.fromLevel} · ${actions} · ${rule?.title ?? 'Observe an action return'} · ${statuses[status]}`;
+    const method = operation
+      ? `${operation.key} · ${first.decision?.question ? nativeLabel(first.decision.question) : operation.description}`
+      : rule?.title ?? 'Observe an action return';
+    title.textContent = `L${first.fromLevel} · ${actions} · ${method} · ${statuses[status]}`;
     details.append(title);
     const facts = document.createElement('dl');
     const planText = (item: DirectionalReturn) => (item.decision?.steps.slice(0, 5).map(step => step.action).join(' → ') || action(item))
@@ -1214,7 +1219,10 @@ function renderGenericTimeline(panel: HTMLElement, container: Element, selected:
     const expected = last.decision?.steps[0]?.expected;
     const check = last.nativeCheck?.reason;
     const factsList: [string, string][] = [];
+    if (operation && rule) factsList.push(['SIC strategy rule', rule.title]);
     if (rule) factsList.push(['Need', rule.need], ['Situation', rule.situation]);
+    if (operation) factsList.push(['Native composition operation', `${operation.key} · ${operation.description}`]);
+    if (!operation && first.decision?.question) factsList.push(['What the engine is trying', nativeLabel(first.decision.question)]);
     factsList.push(['Plan', planText(first)], ['Return', `${last.sequence} · ${action(last)} · ${statuses[status]}${expected ? ` · Expected: ${expected}` : ''}.`]);
     if (check && status === 'contradicted') factsList.push(['Native check', nativeLabel(check)]);
     if (status === 'contradicted' && last.toLevel > last.fromLevel) {
