@@ -79,7 +79,7 @@ source = replaceOnce(
 source = replaceOnce(
   source,
   `  durableSessionStore?.clear();\n  initialDurable = undefined;\n}\nvoid selectGame(selectedGame.code, 'replace', initialLevel, initialDurable);`,
-  `  durableSessionStore?.clear();\n  durableAutosave?.reset();\n  initialDurable = undefined;\n}\nif (initialDurable) durableAutosave?.prime(initialDurable);\nvoid selectGame(selectedGame.code, 'replace', initialLevel, initialDurable);`,
+  `  durableAutosave?.reset();\n  durableSessionStore?.clear();\n  initialDurable = undefined;\n}\nif (initialDurable) durableAutosave?.prime(initialDurable);\nvoid selectGame(selectedGame.code, 'replace', initialLevel, initialDurable);`,
   'startup autosave priming',
 );
 
