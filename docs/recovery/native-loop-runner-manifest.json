@@ -1,0 +1,172 @@
+{
+  "version": 1,
+  "kind": "reconstructed-native-region-benchmark-manifest",
+  "status": "ready-for-official-abba-measurement",
+  "historicalRunnerIdentityRecovered": false,
+  "historicalCorpusRecovered": false,
+  "sourceRefs": {
+    "commonRoot": "3935f5106c478715040b5b49e6e8ebdd6e960cd353c2eff733f7399571dc521b",
+    "candidateRoot": "b77bf3e8c9e31f4d18ac8a8468a9081dc10788b0c8c317fe7d79adb84e24e32e",
+    "reference": "lot9b-region-v1:A:46ce3478dbc07268333a6a2d423489a689cc5ff509abf1e4bf1f948b174b842c",
+    "candidate": "lot9b-region-v1:B:557ca909c4c9b68ec70d2055a02dfb5c27dffcae338f1025e3b53c67937a609f",
+    "proof": "docs/recovery/native-loop-source-refs.json"
+  },
+  "transport": {
+    "id": "browser-worker-pyodide-game-bridge-v1",
+    "path": "BrowserGameRuntime -> game-worker.ts -> Pyodide -> game_bridge.py -> custom-games.zip",
+    "backend": "python-wasm",
+    "pyodideVersion": "314.0.7",
+    "browserPython": "3.14.2",
+    "networkGameApi": false,
+    "sitesCheckoutDependency": false,
+    "parityProof": "docs/recovery/lot9b-worker-pyodide-parity-report.json"
+  },
+  "corpus": {
+    "id": "native-region-action6-corpus-v1",
+    "probeRef": "region-public-action6-probe-v1",
+    "publicOnly": true,
+    "seed": 0,
+    "startLevel": 1,
+    "preparedTrajectory": false,
+    "hiddenEngineInspection": false,
+    "methodRefStrategy": "native-region-singleton:<game>:<invocationIndex>:<actionIndex>",
+    "qualificationProof": "docs/recovery/lot9b-region-action6-corpus-report.json"
+  },
+  "timing": {
+    "scope": "after initial public observation, through policy/hook/action loops, ending after the returned observation of the requested final action",
+    "sessionConstructionIncluded": false,
+    "initialObservationIncluded": false,
+    "policyIncluded": true,
+    "candidateHookIncluded": true,
+    "gameActionAndReturnedObservationIncluded": true
+  },
+  "protocol": {
+    "seriesOrder": ["A1", "B1", "B2", "A2"],
+    "variantBySeries": {
+      "A1": "A",
+      "B1": "B",
+      "B2": "B",
+      "A2": "A"
+    },
+    "games": {
+      "STCK": {
+        "warmupActions": 3,
+        "measuredActions": 10,
+        "measuredSessionsPerSeries": 4
+      },
+      "SMLP": {
+        "warmupActions": 3,
+        "measuredActions": 15,
+        "measuredSessionsPerSeries": 4
+      }
+    },
+    "totals": {
+      "invocations": 40,
+      "warmupSessions": 8,
+      "warmupActions": 24,
+      "measuredSessions": 32,
+      "measuredActions": 400
+    },
+    "acceptance": {
+      "formula": "100 * (median_candidate / median_reference - 1)",
+      "thresholdPercent": 10,
+      "strictlyLessThan": true,
+      "exactlyTenPercentFails": true,
+      "gamesEvaluatedSeparately": true,
+      "crossGameCompensationAllowed": false,
+      "phaseOverrunBlocking": false,
+      "measuredSampleRemovalAllowed": false
+    }
+  },
+  "runners": [
+    {
+      "id": "A/STCK",
+      "variant": "A",
+      "game": "STCK",
+      "gameId": "stck-c0000001",
+      "factory": "createAStckNativeRunner",
+      "sourceRef": "lot9b-region-v1:A:46ce3478dbc07268333a6a2d423489a689cc5ff509abf1e4bf1f948b174b842c",
+      "regionHook": "disabled",
+      "seed": 0,
+      "startLevel": 1,
+      "warmupActions": 3,
+      "measuredActions": 10
+    },
+    {
+      "id": "A/SMLP",
+      "variant": "A",
+      "game": "SMLP",
+      "gameId": "smlp-c3000001",
+      "factory": "createASmlpNativeRunner",
+      "sourceRef": "lot9b-region-v1:A:46ce3478dbc07268333a6a2d423489a689cc5ff509abf1e4bf1f948b174b842c",
+      "regionHook": "disabled",
+      "seed": 0,
+      "startLevel": 1,
+      "warmupActions": 3,
+      "measuredActions": 15
+    },
+    {
+      "id": "B/STCK",
+      "variant": "B",
+      "game": "STCK",
+      "gameId": "stck-c0000001",
+      "factory": "createBStckNativeRunner",
+      "sourceRef": "lot9b-region-v1:B:557ca909c4c9b68ec70d2055a02dfb5c27dffcae338f1025e3b53c67937a609f",
+      "regionHook": "region_intervention",
+      "seed": 0,
+      "startLevel": 1,
+      "warmupActions": 3,
+      "measuredActions": 10
+    },
+    {
+      "id": "B/SMLP",
+      "variant": "B",
+      "game": "SMLP",
+      "gameId": "smlp-c3000001",
+      "factory": "createBSmlpNativeRunner",
+      "sourceRef": "lot9b-region-v1:B:557ca909c4c9b68ec70d2055a02dfb5c27dffcae338f1025e3b53c67937a609f",
+      "regionHook": "region_intervention",
+      "seed": 0,
+      "startLevel": 1,
+      "warmupActions": 3,
+      "measuredActions": 15
+    }
+  ],
+  "identityGuards": [
+    "all four runner functions are explicit and required",
+    "A and B use the same transport, game ids, corpus, seed, start level and action sequences",
+    "B alone executes the real region_intervention hook",
+    "missing or mislabeled runners and hooks fail closed",
+    "no fallback runner, hidden corpus, retry or sample substitution is allowed"
+  ],
+  "qualification": {
+    "runnerContractTests": 13,
+    "fullProtocolFunctionalRun": {
+      "runId": 43351088067,
+      "actions": 424,
+      "status": "passed"
+    },
+    "workerPyodideParityRun": {
+      "runId": 43352422359,
+      "samples": 4,
+      "actions": 31,
+      "status": "passed"
+    },
+    "sourceRefRun": {
+      "runId": 43354155809,
+      "jobId": 131652043976,
+      "headSha": "d3aebb4dce5f4a82b80e38b962f2a2cf1c58cebc",
+      "tests": 7,
+      "typecheck": "passed",
+      "sourceRefsComputed": true,
+      "manifestVerification": "passed",
+      "artifactId": 14005396940,
+      "artifactZipSha256": "614583a684e9d9dd94e924c0d86e5d33caff64836fe1d249c8540162b4194156"
+    }
+  },
+  "officialMeasurement": {
+    "executed": false,
+    "result": null,
+    "reason": "manifest verified; explicitly non-isolated official ABBA execution is the next step"
+  }
+}

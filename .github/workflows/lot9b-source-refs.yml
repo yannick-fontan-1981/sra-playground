@@ -1,0 +1,42 @@
+name: Lot 9B source refs
+
+on:
+  push:
+    branches:
+      - recovery/lot9b-source-refs-manifest-20261112
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-refs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.18.0'
+          cache: npm
+      - name: Install Node dependencies
+        run: npm ci
+      - name: Typecheck official browser harness
+        run: npm run typecheck
+      - name: Test source and transport contracts
+        run: |
+          node --test \
+            tests/native-loop-region-source-refs.test.mjs \
+            tests/native-loop-browser-worker-dispatch.test.mjs
+      - name: Compute source refs artifact
+        run: |
+          node scripts/native-loop-region-source-refs.mjs \
+            --output lot9b-native-region-source-refs.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lot9b-native-region-source-refs
+          path: lot9b-native-region-source-refs.json
+          if-no-files-found: warn
+      - name: Verify stored source refs and official runner manifest
+        run: node scripts/verify-native-loop-runner-manifest.mjs

@@ -1,4 +1,3 @@
-import { performance } from 'node:perf_hooks';
 import {
   NATIVE_PUBLIC_ACTION_CORPUS_V1,
   selectNativePublicCostAction,
@@ -90,39 +89,39 @@ export function createPublicCorpusSessionRunner({
     let candidateHookMs = 0;
     let gameActionMs = 0;
     const actions = [];
-    const started = performance.now();
+    const started = globalThis.performance.now();
 
     for (let index = 0; index < descriptor.actions; index += 1) {
-      const policyStarted = performance.now();
+      const policyStarted = globalThis.performance.now();
       const action = await selectAction({
         game,
         index,
         observation: structuredClone(observation),
         descriptor: structuredClone(descriptor),
       });
-      policyMs += performance.now() - policyStarted;
+      policyMs += globalThis.performance.now() - policyStarted;
       if (!action) {
         throw new Error(`public corpus cannot choose action ${index + 1}/${descriptor.actions}`);
       }
 
       if (beforeAction) {
-        const hookStarted = performance.now();
+        const hookStarted = globalThis.performance.now();
         await beforeAction({
           index,
           action: structuredClone(action),
           observation: structuredClone(observation),
           descriptor: structuredClone(descriptor),
         });
-        candidateHookMs += performance.now() - hookStarted;
+        candidateHookMs += globalThis.performance.now() - hookStarted;
       }
 
       const beforeObservation = structuredClone(observation);
-      const actionStarted = performance.now();
+      const actionStarted = globalThis.performance.now();
       observation = await session.action(structuredClone(action));
-      gameActionMs += performance.now() - actionStarted;
+      gameActionMs += globalThis.performance.now() - actionStarted;
 
       if (afterAction) {
-        const hookStarted = performance.now();
+        const hookStarted = globalThis.performance.now();
         await afterAction({
           index,
           action: structuredClone(action),
@@ -130,13 +129,13 @@ export function createPublicCorpusSessionRunner({
           observation: structuredClone(observation),
           descriptor: structuredClone(descriptor),
         });
-        candidateHookMs += performance.now() - hookStarted;
+        candidateHookMs += globalThis.performance.now() - hookStarted;
       }
 
       actions.push(structuredClone(action));
     }
 
-    const durationMs = performance.now() - started;
+    const durationMs = globalThis.performance.now() - started;
     return {
       durationMs,
       phases: {
