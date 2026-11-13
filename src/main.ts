@@ -10,6 +10,7 @@ import { observeSpace, type SpaceReturn } from './sic/space-return.ts';
 import { compareStckRank, type StckRankTrial } from './sic/stck-stack.ts';
 import { matchObservedRotation, observeDirectionalReturn, samplePublicAnimation, type DirectionalReturn } from './sic/directional-return.ts';
 import { captureDecisionSprites, readNativeResolution, type NativeResolution } from './sic/native-resolution.ts';
+import { observeLs20Restart, recordPursuedObjective, type PursuedObjective } from './sic/recovery.ts';
 import ls20ReviewEvidence from './sic/ls20-review-evidence.json';
 import { GAME_CATALOG, getGameByCode, type GameCatalogEntry } from './games/catalog';
 
@@ -338,6 +339,7 @@ let lastSicState: V6AgentSnapshot | null = null;
 let spaceReturns: readonly SpaceReturn[] = [];
 let stckRankReturns: readonly (StckRankTrial & { sessionId: string; sequence: number })[] = [];
 let agentReturns: readonly DirectionalReturn[] = [];
+let objectiveLedger: { sessionId: string; entries: readonly PursuedObjective[] } | null = null;
 let manualReturns: readonly DirectionalReturn[] = [];
 let manualSequence = 0;
 let lastSicReturns: readonly DirectionalReturn[] | null = null;
@@ -346,11 +348,18 @@ let lastSicMode: 'manual' | 'agent' | null = null;
 function recordPublicReturn(history: readonly DirectionalReturn[], sessionId: string, sequence: number, command: number,
   before: GameObservation, next: GameObservation, native?: NativeResolution | null): readonly DirectionalReturn[] {
   try {
-    const boundary = before.level !== next.level || before.state !== next.state;
+    const restart = before.gameCode === 'LS20' && before.level === next.level
+      ? observeLs20Restart(before.frame, next.frame, next.frames) : undefined;
+    const boundary = before.level !== next.level || before.state !== next.state || Boolean(restart);
+    const recovered = [...history].reverse().find(item => item.fromLevel === before.level && item.restart);
+    const routeBoard = native && recovered?.sessionId === sessionId && native.route.length > 1
+      && !history.some(item => item.sessionId === sessionId && item.sequence > recovered.sequence && item.routeBoard)
+      ? before.frame.map(row => [...row]) : undefined;
     const entry = observeDirectionalReturn(
       { sessionId, sequence, command, fromLevel: before.level, toLevel: next.level, frameCount: Math.max(1, next.frames.length),
         animation: samplePublicAnimation(next.frames),
-        decision: native ? captureDecisionSprites(native, before.frame, boundary ? null : next.frame) : undefined },
+        decision: native ? captureDecisionSprites(native, before.frame, boundary ? null : next.frame) : undefined,
+        restart, routeBoard },
       before.frame, next.frame, boundary, history.at(-1));
     const witness = !boundary && before.gameCode === 'LS20'
       ? ls20ReviewEvidence.rotations.find(item => item.level === before.level) : undefined;
@@ -411,6 +420,11 @@ const agent = new BrowserV6Agent({
           // Explanations never affect dispatch.
         }
         agentReturns = recordPublicReturn(agentReturns, sessionId, sequence, action.id, before, next, decision);
+        const receipt = agentReturns.at(-1);
+        if (receipt?.sessionId === sessionId && receipt.sequence === sequence) {
+          const entries = objectiveLedger?.sessionId === sessionId ? objectiveLedger.entries : [];
+          objectiveLedger = { sessionId, entries: recordPursuedObjective(entries, receipt) };
+        }
       }
       return { observation: next, executionMs };
     } catch (error) {
@@ -456,7 +470,9 @@ function updateSicPanel(): void {
         && item.sequence <= state.sequence) : [];
     renderSicPanel(sicPanel, board ? readControlEffectShadow(board, mode === 'agent' ? agentState : null, presentationGeneration) : null,
       board?.palette ?? fallbackPalette, mode === 'agent' ? visible(spaceReturns) : [], mode === 'agent' ? visible(stckRankReturns) : [],
-      board, mode, Boolean(mode === 'agent' && board && !state?.sessionId && (board.level !== 1 || board.levelsCompleted !== 0)), returns);
+      board, mode, Boolean(mode === 'agent' && board && !state?.sessionId && (board.level !== 1 || board.levelsCompleted !== 0)), returns,
+      mode === 'agent' && objectiveLedger && objectiveLedger.sessionId === state?.sessionId && state.status !== 'error'
+        ? objectiveLedger.entries.filter(item => item.last <= state.sequence) : []);
   });
 }
 

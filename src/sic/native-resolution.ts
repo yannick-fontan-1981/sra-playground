@@ -1,5 +1,5 @@
 import { cropReturn } from '../logos-engine/v6-public-return-visuals.ts';
-import type { NativeBox, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
 
 export interface NativeStep {
   readonly action: string;
@@ -16,6 +16,9 @@ export interface NativeResolution {
   readonly composition: string | null;
   readonly compositions: readonly { readonly id: string; readonly role: string | null; readonly observed: boolean | null }[];
   readonly subjects: readonly { readonly label: string; readonly box: NativeBox }[];
+  readonly route: readonly NativePoint[];
+  readonly proposalRef: string | null;
+  readonly remainingSteps: number;
   readonly guard: string | null;
   readonly pending: boolean;
   readonly steps: readonly NativeStep[];
@@ -87,7 +90,7 @@ export function readNativeResolution(agent: {
   const stepList = Array.isArray(proposal?.steps) ? proposal.steps : [];
   const plan = Array.isArray(proposal?.actions) ? proposal.actions
     : Array.isArray(traced?.actions) ? traced.actions : [];
-  const steps = plan.slice(0, 12).flatMap((action, index) => {
+  const steps = plan.slice(0, 24).flatMap((action, index) => {
     const name = actionName(action);
     return name ? [{ action: name, expected: expectedText(record(stepList[index])?.expected_after) }] : [];
   });
@@ -114,6 +117,18 @@ export function readNativeResolution(agent: {
     subjects.push({ label: 'Controlled footprint before the step', box: [point[0], point[1], point[0] + size[0] - 1, point[1] + size[1] - 1] });
   }
   const op = label(template?.operation_key);
+  const route: NativePoint[] = [];
+  const pointAt = (value: unknown): NativePoint | null => Array.isArray(value) && value.length === 2
+    && value.every(Number.isSafeInteger) ? [value[0], value[1]] : null;
+  const routeIndex = guard && Number.isSafeInteger(guard.index) ? Number(guard.index) : 0;
+  if (Array.isArray(morphology?.steps)) {
+    for (const [index, item] of morphology.steps.slice(routeIndex, routeIndex + 24).entries()) {
+      const step = record(item), from = pointAt(step?.from), to = pointAt(step?.to);
+      if (!from || !to || (index && (from[0] !== route.at(-1)?.[0] || from[1] !== route.at(-1)?.[1]))) break;
+      if (!index) route.push(from);
+      route.push(to);
+    }
+  }
   const compositions = Array.isArray(proposal?.compositions) ? proposal.compositions.slice(0, 6).flatMap(item => {
     const value = record(item);
     const id = label(value?.id);
@@ -123,7 +138,9 @@ export function readNativeResolution(agent: {
     proposalKind: label(proposal?.kind), question,
     objective: nativeObjective ?? (objectiveSource === 'question' ? question : null), objectiveSource,
     operation: op && /^OP(?:0[1-9]|[12]\d|3[01])$/.test(op) ? op : null,
-    composition: label(template?.composition_ref), compositions, subjects, guard: label(guard?.reason),
+    composition: label(template?.composition_ref), compositions, subjects, route, proposalRef: label(proposal?.proposal_id),
+    remainingSteps: Math.max(0, plan.length - routeIndex),
+    guard: label(guard?.reason),
     nextIndex: pending && guard && Number.isSafeInteger(guard.index) ? Number(guard.index) : null, steps,
     history, outcome: outcomeFamily && (result?.matched === null || typeof result?.matched === 'boolean')
       ? { family: outcomeFamily, matched: result.matched, reason: label(result.reason) } : null };
@@ -135,6 +152,10 @@ export interface DecisionSprites {
   readonly operation: string | null;
   readonly composition: string | null;
   readonly question: string | null;
+  readonly proposalRef: string | null;
+  readonly route: readonly NativePoint[];
+  readonly steps: readonly NativeStep[];
+  readonly remainingSteps: number;
   readonly sprites: readonly { readonly label: string; readonly before: NativeRows; readonly after: NativeRows | null }[];
 }
 
@@ -147,5 +168,7 @@ export function captureDecisionSprites(decision: NativeResolution, before: Nativ
       after: after && right < (after[0]?.length ?? 0) && bottom < after.length ? cropReturn(after, box, stride) : null }];
   });
   return { family: decision.family, objective: decision.objective, objectiveSource: decision.objectiveSource,
-    operation: decision.operation, composition: decision.composition, question: decision.question, sprites };
+    operation: decision.operation, composition: decision.composition, question: decision.question,
+    proposalRef: decision.proposalRef, route: decision.route, steps: decision.steps.slice(decision.nextIndex ?? 0),
+    remainingSteps: decision.remainingSteps, sprites };
 }

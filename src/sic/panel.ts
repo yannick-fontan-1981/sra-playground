@@ -9,6 +9,7 @@ import { compareDirectionTargets, summarizeDirections, type DirectionalReturn } 
 import ls20Directions from './ls20-direction-review.json';
 import ls20ShapeExit from './ls20-review-evidence.json';
 import { captureDecisionSprites, type NativeResolution } from './native-resolution.ts';
+import { firstRecovery, isLevelCompletion, type PursuedObjective } from './recovery.ts';
 import compositionOperations from './composition-operations.json';
 import type { GameObservation } from '../runtime/browser-games.ts';
 import { compareAboveColors, contrastClickContexts, describeClickContext, type ClickEffectCount } from './click-evidence.ts';
@@ -859,7 +860,7 @@ function renderBoardAndDirection(panel: HTMLElement, board: NativeRows | null, p
 
 function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null, board: GameObservation | null,
   mode: 'manual' | 'agent', returns: readonly DirectionalReturn[], groups: ReturnType<typeof summarizeDirections>,
-  palette: readonly string[]): void {
+  palette: readonly string[], objectives: readonly PursuedObjective[]): void {
   const describe = (selector: string, lines: readonly string[]) => {
     panel.querySelector(selector)!.replaceChildren(...lines.map(text => {
       const p = document.createElement('p');
@@ -903,9 +904,7 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
     strategies.append(line);
   }
   const progress = board ? `Public progress: ${board.levelsCompleted} completed · current level ${board.level} of ${board.levelCount}.` : 'Waiting for the board.';
-  describe('[data-sic-objective-body]', [progress, board?.state === 'WIN' ? 'The game reports victory.'
-    : board?.state === 'LEVEL_COMPLETE' ? 'The game reports level completion.'
-    : describePlanObjective(planSource) ?? 'The condition that completes this level is still unknown.']);
+  renderObjectives(panel, progress, board, native?.pending ? native : lastPlan, objectives);
   const last = returns.slice(-5);
   describe('[data-sic-plan-body]', [
     last.length ? `Recent actions (${mode}): ${last.map(item => commands[item.command]).join(' → ')}.` : 'No action return recorded in this session.',
@@ -919,6 +918,7 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
     line.textContent = objective;
     plan.append(line);
   }
+  renderRecovery(plan, returns, board?.level, palette);
   if (native?.steps.length) {
     const heading = document.createElement('p');
     heading.textContent = native.pending ? 'Sequence proposed by 0.68; only the marked step is currently authorized.'
@@ -1020,8 +1020,147 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
   }
 }
 
+function renderObjectives(panel: HTMLElement, progress: string, board: GameObservation | null,
+  current: Pick<NativeResolution, 'objective' | 'objectiveSource' | 'question'> | null | undefined,
+  entries: readonly PursuedObjective[]): void {
+  const section = panel.querySelector('[data-sic-objective-body]')!;
+  const paragraph = (value: string) => { const p = document.createElement('p'); p.textContent = value; return p; };
+  section.replaceChildren(paragraph(progress));
+  const cards = document.createElement('div');
+  cards.className = 'sic-objective-columns';
+  const group = (title: string) => {
+    const card = document.createElement('section'), heading = document.createElement('h5');
+    heading.textContent = title;
+    card.append(heading);
+    cards.append(card);
+    return card;
+  };
+  const active = group('Current objective');
+  active.append(paragraph(board?.state === 'WIN' ? 'The game reports victory.'
+    : describePlanObjective(current) ?? 'No current native objective observed.'));
+  if (current?.objectiveSource === 'native' && current.question) {
+    active.append(paragraph(`Immediate aim: ${nativeLabel(current.question).replace(/[.!?]$/, '')}.`));
+  }
+  const past = group('Objectives pursued');
+  if (!entries.length) past.append(paragraph('No objective has been recorded in this session.'));
+  else {
+    const details = document.createElement('details');
+    const title = document.createElement('summary');
+    title.textContent = `${entries.length} recorded episodes`;
+    const list = document.createElement('ol');
+    for (const entry of [...entries].reverse()) {
+      const row = document.createElement('li');
+      row.textContent = `Level ${entry.level} · ${entry.first === entry.last ? `action ${entry.first}` : `actions ${entry.first}–${entry.last}`} · `
+        + (isLevelCompletion(entry.source.objective) ? `Complete level ${entry.level}`
+          : nativeLabel(entry.source.objective ?? entry.source.question ?? 'Objective not retained'))
+        + (entry.advanced ? ' · Level advanced' : entry.interrupted ? ' · Interrupted by restart' : '');
+      if (entry.source.objectiveSource === 'native' && entry.source.question) {
+        row.append(paragraph(`Immediate aim: ${nativeLabel(entry.source.question).replace(/[.!?]$/, '')}.`));
+      }
+      list.append(row);
+    }
+    details.append(title, list);
+    past.append(details);
+  }
+  const future = group('Possible future objectives');
+  if (board && board.level < board.levelCount && board.state !== 'WIN') {
+    future.append(paragraph(`Reach and complete level ${board.level + 1}, if the current level is completed.`),
+      paragraph('Suggested by public progression; the native engine has not selected it.'));
+    if (board.level + 1 < board.levelCount) future.append(paragraph('Later possibility: finish the remaining levels after that.'));
+  } else future.append(paragraph('No further objective supported by the current observations.'));
+  section.append(cards);
+}
+
+function renderRecovery(container: Element, returns: readonly DirectionalReturn[], currentLevel: number | undefined,
+  palette: readonly string[]): void {
+  const levels = [...new Set(returns.filter(item => item.restart).map(item => item.fromLevel))];
+  const level = levels.find(item => item === currentLevel) ?? levels.at(-1);
+  const review = level === undefined ? null : firstRecovery(returns, level);
+  if (!review?.interrupted.restart) return;
+  const { interrupted, following, route, retained } = review;
+  const witness = interrupted.restart!;
+  const section = document.createElement('section');
+  section.className = 'sic-observations sic-recovery';
+  const title = document.createElement('h4');
+  title.textContent = `Level ${level} · First restart · Action ${interrupted.sequence}`;
+  const why = document.createElement('p');
+  const check = interrupted.nativeCheck;
+  why.textContent = `${commands[interrupted.command]} returned a full yellow flash and restored the board. The old route cannot be continued from its previous position. `
+    + (!check ? 'No native verdict was retained.'
+      : check.matched === false ? 'The native return differed from the prediction.'
+        : check.matched === true ? 'The native check still reported a match; the restart is a separate public observation.'
+          : 'The engine had no verified prediction for this return.');
+  section.append(title, why, renderFrames([
+    ['Before the interruption', witness.before],
+    ['Restart flash', witness.flash],
+    ['Board after restart', witness.after],
+  ], palette));
+  if (interrupted.decision?.sprites.length) section.append(renderFrames(
+    interrupted.decision.sprites.map(item => [item.label, item.before] as const), palette));
+  const goal = document.createElement('p');
+  goal.textContent = retained ? `Objective retained: ${isLevelCompletion(interrupted.decision?.objective) ? `complete level ${level}`
+    : nativeLabel(interrupted.decision?.objective ?? '')}.`
+    : 'The trace does not establish that the first post-restart proposal reused the same objective.';
+  section.append(goal);
+  if (interrupted.decision?.question) {
+    const aim = document.createElement('p');
+    aim.textContent = `Aim before restart: ${nativeLabel(interrupted.decision.question).replace(/[.!?]$/, '')}.`;
+    section.append(aim);
+  }
+  if (following?.decision?.question) {
+    const aim = document.createElement('p');
+    aim.textContent = `First aim after restart (action ${following.sequence}): ${nativeLabel(following.decision.question).replace(/[.!?]$/, '')}.`;
+    section.append(aim);
+  }
+  if (route?.decision) {
+    const caption = document.createElement('p');
+    const shown = route.decision.steps.map(step => step.action);
+    caption.textContent = `New native route at action ${route.sequence} · ${route.decision.remainingSteps} proposed steps: ${shown.join(' → ')}${shown.length < route.decision.remainingSteps ? ' …' : '.'}`;
+    section.append(caption);
+    if (route.routeBoard) section.append(renderRoute(route.routeBoard, route.decision.route, palette));
+    section.append(renderFrames(route.decision.sprites.map(sprite => [sprite.label, sprite.before] as const), palette));
+  } else {
+    const pending = document.createElement('p');
+    pending.textContent = 'No post-restart route with published coordinates has been captured yet.';
+    section.append(pending);
+  }
+  container.append(section);
+}
+
+function renderRoute(rows: NativeRows, points: readonly (readonly [number, number])[], palette: readonly string[]): HTMLElement {
+  const figure = document.createElement('figure');
+  figure.className = 'sic-route';
+  const width = rows[0]?.length ?? 0, height = rows.length;
+  const canvas = document.createElement('canvas');
+  canvas.width = width * 3;
+  canvas.height = height * 3;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return figure;
+  rows.forEach((row, y) => row.forEach((color, x) => {
+    ctx.fillStyle = palette[color] ?? '#000';
+    ctx.fillRect(x * 3, y * 3, 3, 3);
+  }));
+  const draw = (color: string, line: number) => {
+    ctx.beginPath();
+    points.forEach(([x, y], i) => i ? ctx.lineTo(x * 3 + 1.5, y * 3 + 1.5) : ctx.moveTo(x * 3 + 1.5, y * 3 + 1.5));
+    ctx.strokeStyle = color;
+    ctx.lineWidth = line;
+    ctx.stroke();
+  };
+  draw('#111', 4);
+  draw('#fff', 2);
+  for (const [index, [x, y]] of points.entries()) {
+    ctx.fillStyle = index === 0 ? '#64e9e2' : index === points.length - 1 ? '#ffd15a' : '#fff';
+    ctx.fillRect(x * 3, y * 3, 3, 3);
+  }
+  const caption = document.createElement('figcaption');
+  caption.textContent = `Proposed route on the returned board: ${points.map(([x, y]) => `(${x}, ${y})`).join(' → ')}.`;
+  figure.append(canvas, caption);
+  return figure;
+}
+
 function describePlanObjective(source: Pick<NativeResolution, 'objective' | 'objectiveSource'> | null | undefined) {
-  if (source?.objective === 'G_official_completion') return 'Native plan objective: complete the current level.';
+  if (source?.objectiveSource === 'native' && isLevelCompletion(source.objective)) return 'Native plan objective: complete the current level.';
   if (source?.objectiveSource === 'native' && source.objective) return `Native plan objective: ${nativeLabel(source.objective)}.`;
   if (source?.objectiveSource === 'question' && source.objective) return `Immediate aim from the native proposal: ${nativeLabel(source.objective).replace(/[.!?]$/, '')}.`;
   return source?.objectiveSource === 'unpublished' ? 'A plan exists, but its objective was not retained in the native trace.' : null;
@@ -1036,13 +1175,14 @@ function nativeLabel(value: string): string {
     compare_predicted_position: 'Compare the returned position with the planned position',
     compare_selective_entry_prediction: 'Check what happens when entering the selected area',
     measure_terminal_contact_or_boundary: 'Check whether contact changes the level or state',
+    test_next_dependency_of_a_capacity_feasible_composition: 'Test the next step of a route that fits the available reserve',
   };
   return labels[value] ?? value.replace(/_/g, ' ');
 }
 
 export function renderSicPanel(panel: HTMLElement, view: ShadowView | null, palette: readonly string[],
   space: readonly SpaceReturn[], ranks: readonly StckRankTrial[], board: GameObservation | null, mode: 'manual' | 'agent',
-  needsRestart: boolean, returns: readonly DirectionalReturn[]): void {
+  needsRestart: boolean, returns: readonly DirectionalReturn[], objectives: readonly PursuedObjective[]): void {
   panel.querySelector<HTMLElement>('[data-sic-context]')!.textContent = view
     ? `${view.gameCode} · Level ${view.frame.scope.level} · Last settled board` : '';
   panel.querySelector<HTMLElement>('[data-sic-summary]')!.textContent = view ? summaries[view.resolution.outcome] : 'Waiting for the board.';
@@ -1060,7 +1200,7 @@ export function renderSicPanel(panel: HTMLElement, view: ShadowView | null, pale
   renderSpaceReturns(panel, space, palette, view?.gameCode === 'STCK');
   const groups = summarizeDirections(returns);
   renderBoardAndDirection(panel, board?.frame ?? null, palette, needsRestart, returns);
-  renderDiscoveryPerspectives(panel, view, board, mode, returns, groups, palette);
+  renderDiscoveryPerspectives(panel, view, board, mode, returns, groups, palette, objectives);
   renderGameInformation(panel, view?.gameCode === 'STCK', ranks, view, groups, returns);
   renderMechanisms(panel, groups, returns, palette);
   renderRoles(panel, returns, palette, board?.level);

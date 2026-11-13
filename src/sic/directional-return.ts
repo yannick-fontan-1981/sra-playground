@@ -1,6 +1,7 @@
 import { cropReturn, measureChangedRegions, previewChangedRegions } from '../logos-engine/v6-public-return-visuals.ts';
 import type { NativeBox, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
 import type { DecisionSprites, NativeResolution } from './native-resolution.ts';
+import type { RestartWitness } from './recovery.ts';
 
 export interface DirectionalReturn {
   readonly sessionId: string;
@@ -11,6 +12,8 @@ export interface DirectionalReturn {
   readonly frameCount?: number;
   readonly decision?: DecisionSprites;
   readonly nativeCheck?: NonNullable<NativeResolution['outcome']>;
+  readonly restart?: RestartWitness;
+  readonly routeBoard?: NativeRows;
   readonly rotation?: { readonly tile: NativeRows; readonly before: NativeRows; readonly after: NativeRows };
   readonly animation?: readonly { readonly index: number; readonly rows: NativeRows }[];
   readonly changes: ReturnType<typeof previewChangedRegions> | null;
