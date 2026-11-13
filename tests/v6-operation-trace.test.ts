@@ -62,3 +62,32 @@ test('trace remains bounded and reports dropped events', () => {
   assert.equal(snapshot.dropped, 1);
   assert.equal(snapshot.counters['operation:OP28:executed'], 3);
 });
+
+test('trace records a non-OP capability without polluting OP counters', () => {
+  const trace = new OperationTraceSink();
+  trace.record({
+    kind: 'need', needId: 'need-temporal', needKind: 'temporal-selection',
+    reason: 'current Source domain requires an attributed selection', producer: 'temporalSelectionBridge',
+    episodeId: 'ep', levelEpoch: 2, observationId: 'obs-8', observationRevision: 8,
+    dependencyRefs: ['candidate:a', 'candidate:b'], completeness: 'complete',
+  });
+  trace.record({
+    kind: 'capability', needId: 'need-temporal', capability: 'temporal-selection',
+    caller: 'temporalSelectionBridge', mode: 'accepted', reason: 'Source/DRM receipt verified',
+    inputRefs: ['receipt:abc'], dependencyRevisions: { observation: 8 }, resultStatus: 'complete',
+    resultSummary: { selectedRef: 'candidate:b', actAuthorized: false },
+  });
+  trace.record({
+    kind: 'capability_consumption', needId: 'need-temporal', capability: 'temporal-selection',
+    consumer: 'temporalSelectionBridge', decisionRef: 'receipt:abc', effectKind: 'project',
+    semanticEffect: true, reason: 'verified external selection projected into the current domain',
+  });
+
+  const snapshot = trace.snapshot();
+  assert.deepEqual(snapshot.events.map(event => event.kind), [
+    'need', 'capability', 'capability_consumption',
+  ]);
+  assert.equal(snapshot.counters['capability:temporal-selection:accepted'], 1);
+  assert.equal(snapshot.counters['capability_consumption:temporal-selection:project'], 1);
+  assert.equal(Object.keys(snapshot.counters).some(key => key.includes('OP')), false);
+});
