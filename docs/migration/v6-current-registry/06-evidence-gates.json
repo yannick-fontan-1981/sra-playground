@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "kind": "current-v6-reconstruction-evidence-gates",
+  "gates": [
+    {
+      "id": "EG001",
+      "name": "Worker/Pyodide public semantic parity",
+      "implementationPaths": [
+        "scripts/qualify-worker-pyodide-parity.mjs",
+        "scripts/worker-pyodide-parity-contract.mjs"
+      ],
+      "proofPaths": [
+        "tests/worker-pyodide-parity-contract.test.mjs",
+        "docs/recovery/lot9b-worker-pyodide-parity-report.json"
+      ]
+    },
+    {
+      "id": "EG002",
+      "name": "Region source identity and four-runner manifest",
+      "implementationPaths": [
+        "scripts/native-loop-region-source-refs.mjs",
+        "scripts/verify-native-loop-runner-manifest.mjs"
+      ],
+      "proofPaths": [
+        "tests/native-loop-region-source-refs.test.mjs",
+        "docs/recovery/native-loop-source-refs.json",
+        "docs/recovery/native-loop-runner-manifest.json"
+      ]
+    },
+    {
+      "id": "EG003",
+      "name": "Region official ABBA performance boundary",
+      "implementationPaths": [
+        "scripts/measure-native-loop-costs.mjs",
+        "scripts/run-native-region-official-benchmark.mjs"
+      ],
+      "proofPaths": [
+        "tests/lot9b-official-performance-proof.test.mjs",
+        "docs/recovery/lot9b-official-abba-performance-qualified.json"
+      ]
+    },
+    {
+      "id": "EG004",
+      "name": "Real public SMLP and STCK joint-channel corpora",
+      "implementationPaths": [
+        "scripts/qualify-lot9c2-public-addressed-joint.mjs",
+        "scripts/qualify-lot9c3-public-stck-joint.mjs"
+      ],
+      "proofPaths": [
+        "docs/recovery/lot9c2-public-addressed-joint-channels.md",
+        "docs/recovery/lot9c3-stck-joint-performance-boundary.md"
+      ]
+    },
+    {
+      "id": "EG005",
+      "name": "Joint-channel official ABBA performance boundary",
+      "implementationPaths": [
+        "scripts/native-loop-joint-channel-official-runners.mjs",
+        "scripts/run-native-joint-channel-official-benchmark.mjs"
+      ],
+      "proofPaths": [
+        "tests/lot9c4-official-joint-channels-performance-proof.test.mjs",
+        "docs/recovery/lot9c4-official-joint-channels-performance-proof.json"
+      ]
+    },
+    {
+      "id": "EG006",
+      "name": "Bounded live-game campaign harness",
+      "implementationPaths": [
+        "tests/helpers/v6-live-game-campaign.ts"
+      ],
+      "proofPaths": [
+        "tests/v6-live-game-campaign.test.ts",
+        "docs/recovery/op01-op31-live-smlp-product-campaign-20261113.md"
+      ]
+    }
+  ]
+}
