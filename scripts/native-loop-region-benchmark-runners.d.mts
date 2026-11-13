@@ -2,6 +2,9 @@ import type {
   NativeLoopDescriptor,
   NativeLoopSample,
 } from './measure-native-loop-costs.mjs';
+import type {
+  BrowserWorkerBenchmarkRequest,
+} from './native-loop-browser-worker-dispatch.mjs';
 
 export interface RegionHookStats {
   actionsSeen: number;
@@ -36,8 +39,8 @@ export function nativeRegionBenchmarkMethodRef(input: {
 
 export function createNativeRegionBenchmarkRunSession(options: {
   dispatchByGame: {
-    STCK: (request: unknown) => Promise<unknown>;
-    SMLP: (request: unknown) => Promise<unknown>;
+    STCK: (request: BrowserWorkerBenchmarkRequest) => Promise<unknown>;
+    SMLP: (request: BrowserWorkerBenchmarkRequest) => Promise<unknown>;
   };
   referenceSourceRef: string;
   candidateSourceRef: string;
