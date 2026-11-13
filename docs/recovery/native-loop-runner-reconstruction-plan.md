@@ -1,0 +1,131 @@
+# Native STCK/SMLP runner reconstruction plan
+
+## Purpose
+
+This document defines only the evidence-backed inputs for reconstructing a new
+native STCK/SMLP cost corpus. It is not the lost historical corpus and does not
+create `docs/recovery/native-loop-runner-manifest.json`.
+
+## Durable game identities
+
+### STCK
+
+- code: `STCK`
+- id: `stck-c0000001`
+- name: Card Stack
+- family: `isometric_card_stack_combat`
+- levels: 6
+- source path: `custom_games/engines/stack_iso.py`
+- durable reference source:
+  `reference/sra/212d8d426f07/custom_games/engines/stack_iso.py`
+- Git blob at audit: `d325acce6f1e059a1905c077560b17e3eca2786f`
+
+Public engine contract:
+- non-terminal actions: ACTION5, ACTION6, ACTION7
+- terminal action: ACTION7
+
+### SMLP
+
+- code: `SMLP`
+- id: `smlp-c3000001`
+- name: Same Length Path
+- family: `same_length_path`
+- levels: 6
+- source path: `custom_games/engines/same_length_path.py`
+- durable reference source:
+  `reference/sra/212d8d426f07/custom_games/engines/same_length_path.py`
+- Git blob at audit: `c9db51d5089bdd79759088dcd53fb5b27aada1d2`
+
+Public engine contract:
+- non-terminal actions: ACTION5, ACTION6, ACTION7
+- terminal action: ACTION7
+
+## Durable runtime asset
+
+The browser/native custom source bundle is durably present as:
+
+`public/python/custom-games.zip`
+
+Git blob at audit:
+
+`a43147ebf7c6915caf634fc5f56610290c91acae`
+
+Size:
+
+899,593 bytes.
+
+`public/python/game_bridge.py` constructs custom games with:
+
+`build_seeded_engine(info.game_id, instance_seed=0)`.
+
+Therefore seed 0 is supported by durable runtime evidence.
+
+## Recovered cost protocol
+
+The reconstructed protocol requires:
+
+- A1 → B1 → B2 → A2
+- STCK warmup 3 actions
+- STCK measured 10 actions
+- SMLP warmup 3 actions
+- SMLP measured 15 actions
+- four measured sessions per game/series
+- 32 measured sessions / 400 measured actions
+- strict global median increase <10% per game
+
+## Historical corpus status
+
+No historical STCK/SMLP action sequence or four native runner implementations
+have been recovered from any GitHub branch currently accessible.
+
+The recovery branches for the cost harness and native session adapter are fully
+behind the canonical reconstruction and contain no additional runner source.
+
+Therefore no historical action corpus may be claimed.
+
+## Candidate public-only corpus V1
+
+A new candidate policy is implemented in:
+
+`scripts/native-loop-public-action-corpus.mjs`
+
+Policy:
+1. seed = 0
+2. start at level 1
+3. choose ACTION5 when it is publicly available
+4. otherwise choose the first public directional action in 1,2,3,4 order
+5. use ACTION7 only as a public fallback
+6. never invent ACTION6 coordinates
+
+This policy uses only `availableActionIds`.
+
+It is deliberately non-solving and non-oracular.
+
+## Why ACTION6 is excluded
+
+ACTION6 requires coordinates. A generic corpus policy cannot derive justified
+coordinates from the action ID alone without introducing an additional
+perception/selection contract.
+
+Excluding automatic ACTION6 prevents the benchmark corpus from smuggling in a
+hidden solver or arbitrary click coordinates.
+
+## What remains before creating the official runner manifest
+
+The candidate policy is not yet a qualified native corpus.
+
+Required next proofs:
+
+1. execute STCK and SMLP from the durable custom-games archive on a full GitHub checkout;
+2. prove the policy can provide exactly 3/10/15 actions under the recovered protocol;
+3. record every public observation/action pair for all measured sessions;
+4. freeze the resulting corpus identity;
+5. define the complete-session timing scope;
+6. pin A and B `sourceRef` values;
+7. verify seed = 0 for all sessions;
+8. implement and test all four explicit native runners;
+9. only then create `docs/recovery/native-loop-runner-manifest.json`.
+
+Until then:
+
+**fonctionnellement qualifié, performance officielle à confirmer**.
