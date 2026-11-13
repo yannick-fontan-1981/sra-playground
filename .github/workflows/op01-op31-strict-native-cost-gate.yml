@@ -1,0 +1,63 @@
+name: OP01-OP31 strict native cost acceptance gate
+
+on:
+  push:
+    branches:
+      - recovery/op01-op31-browser-field-stock-context-20261112
+
+concurrency:
+  group: op01-op31-strict-native-cost-gate
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  qualify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      LOT9B_MEASUREMENT_ISOLATION: non-isolated-shared-github-actions-runner-no-repository-concurrency
+      LOT9B_OFFICIAL_BENCHMARK_REPORT: lot9b-official-native-region-abba-report.json
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.18.0'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm ci
+      - name: Prepare pinned Pyodide assets
+        run: node scripts/prepare-python.mjs
+      - name: Execute official A1 B1 B2 A2 protocol
+        run: node scripts/run-native-region-official-benchmark.mjs
+      - name: Enforce strict per-game acceptance
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFile } from 'node:fs/promises';
+          const wrapper = JSON.parse(await readFile(process.env.LOT9B_OFFICIAL_BENCHMARK_REPORT, 'utf8'));
+          const result = wrapper?.payload?.report?.result;
+          if (!result) throw new Error('official benchmark result is missing');
+          const summary = {
+            accepted: result.accepted,
+            STCK: result.games.STCK.relativeIncreasePercent,
+            SMLP: result.games.SMLP.relativeIncreasePercent,
+            STCKAccepted: result.games.STCK.globalAccepted,
+            SMLPAccepted: result.games.SMLP.globalAccepted,
+            totals: result.totals,
+          };
+          console.log(JSON.stringify(summary, null, 2));
+          if (!result.accepted
+            || !result.games.STCK.globalAccepted
+            || !result.games.SMLP.globalAccepted) {
+            throw new Error(`strict native cost gate failed: ${JSON.stringify(summary)}`);
+          }
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: op01-op31-strict-native-cost-report
+          path: lot9b-official-native-region-abba-report.json
+          if-no-files-found: error
