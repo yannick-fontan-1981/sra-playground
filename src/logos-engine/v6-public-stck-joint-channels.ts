@@ -12,12 +12,13 @@ import type {
   JointChannelContribution,
   JointChannelContributionRequest,
 } from './v6-joint-channel-owner.ts';
+import {
+  findUniqueVisibleStckStackCardTarget,
+} from './v6-public-unique-stck-action6-port.ts';
 
 export const PUBLIC_STCK_ACTION_AVAILABILITY_CHANNEL_ID = 'public_stck_action_availability_v1';
 export const PUBLIC_STCK_VISIBLE_TARGET_CHANNEL_ID = 'public_stck_visible_target_v1';
-export const PUBLIC_STCK_TARGET_PRODUCER_ID = 'public_stck_stack_or_shop_target_v1';
-
-export type PublicStckTargetKind = 'stack_card' | 'shop_button';
+export const PUBLIC_STCK_TARGET_PRODUCER_ID = 'public_stck_unique_stack_card_target_v1';
 
 export interface PublicStckTargetCandidate {
   version: 1;
@@ -25,10 +26,8 @@ export interface PublicStckTargetCandidate {
   observationRef: string;
   jointRef: string;
   targetRef: string;
-  shopRef: string;
-  targetKind: PublicStckTargetKind;
-  targetSignature: string;
-  shopSignature: string;
+  targetKind: 'stack_card';
+  targetEvidenceRef: string;
   action: Extract<AgentAction, { id: 6 }>;
   evidenceRefs: string[];
 }
@@ -44,160 +43,47 @@ export interface PublicStckJointChannelReceipt {
   returnPayload: unknown;
 }
 
-interface PublicShopMatch {
-  startX: number;
-  endX: number;
-  x: number;
-  y: 56;
-  signature: string;
-}
-
-interface PublicStackCardMatch {
-  x: 4;
-  y: number;
-  color: number;
-  signature: string;
-}
-
-const STCK_CARD_COLORS = new Set([7, 8, 9, 10, 11, 14]);
-
 function observationRef(observation: AgentObservation): string {
   return `public-observation:${observation.sessionId}:${observation.sequence}`;
 }
 
-function validatePublicImage(observation: AgentObservation): Uint8Array {
-  if (
-    observation.image.width !== 64
-    || observation.image.height !== 64
-    || observation.image.pixelFormat !== 'palette-index-u8'
-    || !(observation.image.pixels instanceof Uint8Array)
-    || observation.image.pixels.length !== 64 * 64
-  ) {
-    throw new RangeError('public STCK target producer requires one 64x64 palette-index frame');
-  }
-  for (const value of observation.image.pixels) {
-    if (value > 15) throw new RangeError('public STCK target producer received an invalid palette index');
-  }
-  return observation.image.pixels;
-}
-
-function pixel(pixels: Uint8Array, x: number, y: number): number {
-  return pixels[y * 64 + x]!;
-}
-
-function publicShopMatch(pixels: Uint8Array): PublicShopMatch | undefined {
-  const activeColumns: boolean[] = [];
-  for (let x = 0; x < 64; x += 1) {
-    let nonBlack = 0;
-    for (let y = 54; y <= 58; y += 1) {
-      if (pixel(pixels, x, y) !== 5) nonBlack += 1;
-    }
-    activeColumns.push(nonBlack >= 2);
-  }
-
-  let startX = -1;
-  for (let x = 0; x <= 64; x += 1) {
-    const active = x < 64 ? activeColumns[x] : false;
-    if (active && startX < 0) startX = x;
-    if (!active && startX >= 0) {
-      const endX = x - 1;
-      if (endX - startX + 1 >= 5) {
-        const values: number[] = [];
-        for (let y = 54; y <= 58; y += 1) {
-          for (let column = startX; column <= endX; column += 1) {
-            values.push(pixel(pixels, column, y));
-          }
-        }
-        return {
-          startX,
-          endX,
-          x: Math.floor((startX + endX) / 2),
-          y: 56,
-          signature: values.join(','),
-        };
-      }
-      startX = -1;
-    }
-  }
-  return undefined;
-}
-
-function publicStackCardMatch(pixels: Uint8Array): PublicStackCardMatch | undefined {
-  for (let y = 53; y >= 0; y -= 1) {
-    const color = pixel(pixels, 4, y);
-    if (!STCK_CARD_COLORS.has(color)) continue;
-    const values: number[] = [];
-    for (let x = 2; x < 8; x += 1) values.push(pixel(pixels, x, y));
-    if (!values.every(value => value === color)) continue;
-    return {
-      x: 4,
-      y,
-      color,
-      signature: values.join(','),
-    };
-  }
-  return undefined;
-}
-
 /**
- * Derive the source-qualified STCK ACTION6 probe solely from the public frame.
- *
- * A public shop segment must be active before any target is admitted. While a
- * visible stack card exists, the lowest visible card is selected. Otherwise the
- * first visible shop segment is selected. The scan and tie rules exactly match
- * the already qualified 9B public Region corpus; no engine state or fixture is
- * available to this producer.
+ * Reuse the canonical ambiguity-preserving STCK detector to produce one target
+ * identity from public pixels alone. Several cards remain unresolved; this
+ * producer never ranks them and never invents a shop fallback.
  */
 export function producePublicStckTargetCandidate(
   observation: AgentObservation,
 ): PublicStckTargetCandidate | undefined {
-  if (observation.state !== 'NOT_FINISHED') return undefined;
-  const pixels = validatePublicImage(observation);
-  const shop = publicShopMatch(pixels);
-  if (!shop) return undefined;
-  const card = publicStackCardMatch(pixels);
+  const target = findUniqueVisibleStckStackCardTarget(observation);
+  if (!target) return undefined;
 
   const currentObservationRef = observationRef(observation);
-  const shopRef = [
-    'public-stck-shop',
-    currentObservationRef,
-    shop.startX,
-    shop.endX,
-    shop.signature,
-  ].join(':');
-
-  const targetKind: PublicStckTargetKind = card ? 'stack_card' : 'shop_button';
-  const targetX = card?.x ?? shop.x;
-  const targetY = card?.y ?? shop.y;
-  const targetSignature = card?.signature ?? shop.signature;
   const targetRef = [
-    'public-stck-target',
+    'public-stck-unique-card',
     currentObservationRef,
-    targetKind,
-    targetX,
-    targetY,
-    targetSignature,
+    target.x,
+    target.y,
+    target.evidenceRef,
   ].join(':');
   const action: Extract<AgentAction, { id: 6 }> = {
     id: 6,
-    data: { x: targetX, y: targetY },
+    data: { x: target.x, y: target.y },
   };
 
   return {
     version: 1,
     producerId: PUBLIC_STCK_TARGET_PRODUCER_ID,
     observationRef: currentObservationRef,
-    jointRef: `public-stck-addressed-joint:${targetRef}:ACTION6`,
+    jointRef: `public-stck-unique-card-joint:${targetRef}:ACTION6`,
     targetRef,
-    shopRef,
-    targetKind,
-    targetSignature,
-    shopSignature: shop.signature,
+    targetKind: 'stack_card',
+    targetEvidenceRef: target.evidenceRef,
     action,
     evidenceRefs: [
       currentObservationRef,
-      shopRef,
       targetRef,
+      target.evidenceRef,
       `producer:${PUBLIC_STCK_TARGET_PRODUCER_ID}`,
     ],
   };
@@ -218,13 +104,9 @@ function candidateContext(
     || candidate.jointRef.length === 0
     || typeof candidate.targetRef !== 'string'
     || candidate.targetRef.length === 0
-    || typeof candidate.shopRef !== 'string'
-    || candidate.shopRef.length === 0
-    || (candidate.targetKind !== 'stack_card' && candidate.targetKind !== 'shop_button')
-    || typeof candidate.targetSignature !== 'string'
-    || candidate.targetSignature.length === 0
-    || typeof candidate.shopSignature !== 'string'
-    || candidate.shopSignature.length === 0
+    || candidate.targetKind !== 'stack_card'
+    || typeof candidate.targetEvidenceRef !== 'string'
+    || candidate.targetEvidenceRef.length === 0
     || !Array.isArray(candidate.evidenceRefs)
     || !isAgentAction(candidate.action)
     || candidate.action.id !== 6
@@ -243,10 +125,7 @@ function verifiedTargetCandidate(
   if (!reproduced) return undefined;
   if (
     reproduced.targetRef !== candidate.targetRef
-    || reproduced.shopRef !== candidate.shopRef
-    || reproduced.targetKind !== candidate.targetKind
-    || reproduced.targetSignature !== candidate.targetSignature
-    || reproduced.shopSignature !== candidate.shopSignature
+    || reproduced.targetEvidenceRef !== candidate.targetEvidenceRef
     || reproduced.action.data.x !== candidate.action.data.x
     || reproduced.action.data.y !== candidate.action.data.y
     || reproduced.jointRef !== candidate.jointRef
@@ -315,7 +194,7 @@ export class PublicStckActionAvailabilityJointChannel extends PublicStckJointCha
   }
 }
 
-/** Contributes the revalidated visible STCK target and addressed coordinates. */
+/** Contributes the revalidated unique visible STCK card and its coordinates. */
 export class PublicStckVisibleTargetJointChannel extends PublicStckJointChannelBase {
   readonly id = PUBLIC_STCK_VISIBLE_TARGET_CHANNEL_ID;
 
