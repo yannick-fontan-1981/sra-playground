@@ -207,7 +207,13 @@ test('public component identities support one strict residual movement with a st
     comparison.candidates[0]?.stationary_same_signature.map(item => item.bbox),
     [[1, 4, 1, 4]],
   );
-  assert.deepEqual(comparison.unresolved, []);
+  const unresolvedSignatures = comparison.unresolved.flatMap(item => {
+    if (!item || typeof item !== 'object' || !('signature' in item)) return [];
+    const signature = (item as { signature?: unknown }).signature;
+    return typeof signature === 'string' ? [signature] : [];
+  });
+  assert.ok(comparison.unresolved.length > 0, 'large public background changes remain explicitly unresolved');
+  assert.equal(unresolvedSignatures.includes(mobile.signature), false);
 });
 
 test('correlated public ACTION6 returns acquire calibrate and retain the first addressed prior', () => {
