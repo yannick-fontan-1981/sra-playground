@@ -92,6 +92,34 @@ export interface FieldStockRecordResult {
   events: readonly Record<string, unknown>[];
 }
 
+export interface FieldStockDependencies {
+  digest(value: unknown): string;
+  makeLocusWitness(
+    observation: PublicObservationLike,
+    rows: readonly (readonly number[])[],
+    point: readonly [number, number],
+    reason: string,
+    evidence: readonly string[],
+  ): unknown;
+}
+
+export interface FieldStockPreservationObligation {
+  id: string;
+  meaning: string;
+  entity_predicate: {
+    palette_value: number;
+    minimum_count: number;
+    exclude_boxes: Array<readonly [number, number, number, number]>;
+  };
+  evidence: string[];
+  revision_inputs: string[];
+}
+
+export interface FieldStockProposalResult extends Record<string, unknown> {
+  status: 'proposed' | 'typed_material_access_or_rewrite_unresolved' | 'typed_field_applicability_refuted';
+  actions: Array<{ action_ref: string; data: { x: number; y: number } }>;
+}
+
 function key(x: number, y: number): string {
   return `${x},${y}`;
 }
@@ -117,6 +145,24 @@ function childPresent(body: FieldStockBody, rows: readonly (readonly number[])[]
     0 <= y + dy && y + dy < rows.length
     && 0 <= x + dx && x + dx < (rows[0]?.length ?? 0)
     && rows[y + dy]?.[x + dx] === body.palette);
+}
+
+function bodyPixels(body: FieldStockBody): Array<readonly [number, number]> {
+  const [left, top] = body.bbox;
+  return body.mask.map(([x, y]) => [left + x, top + y] as const);
+}
+
+function bodyDistanceSquared(point: readonly [number, number], body: FieldStockBody): number {
+  return Math.min(...bodyPixels(body).map(([x, y]) => (point[0] - x) ** 2 + (point[1] - y) ** 2));
+}
+
+function bodyAnchor(body: FieldStockBody): readonly [number, number] | null {
+  if (!body.offset) return null;
+  return [body.bbox[0] + body.offset[0], body.bbox[1] + body.offset[1]];
+}
+
+function toward(point: readonly [number, number], target: readonly [number, number]): number {
+  return (point[0] - target[0]) ** 2 + (point[1] - target[1]) ** 2;
 }
 
 interface Component {
@@ -363,6 +409,376 @@ export class FieldStock {
       });
     }
     return result.sort((a, b) => a.palette - b.palette || a.bbox.join(',').localeCompare(b.bbox.join(',')));
+  }
+
+
+  allocations(bodies: readonly FieldStockBody[]): {
+    remaining: Map<number, number>;
+    free: number[];
+    reserved: Set<number>;
+    ready: number[];
+  } {
+    const remaining = new Map(this.demands);
+    const free = this.zones.map((_, index) => index);
+    const assigned: Array<readonly [number, number]> = [];
+    for (const [index, body] of bodies.entries()) {
+      const position = bodyAnchor(body);
+      const matches = free.filter(zoneIndex => {
+        const point = this.zones[zoneIndex]?.point;
+        return Boolean(position && point && position[0] === point[0] && position[1] === point[1]);
+      });
+      if ((remaining.get(body.palette) ?? 0) > 0 && matches.length) {
+        const zone = matches[0]!;
+        remaining.set(body.palette, (remaining.get(body.palette) ?? 0) - 1);
+        free.splice(free.indexOf(zone), 1);
+        assigned.push([index, zone]);
+      }
+    }
+    const reserved = new Set(assigned.map(([index]) => index));
+    const ready: number[] = [];
+    for (const [symbol, count] of remaining) {
+      const options = bodies
+        .map((body, index) => ({ body, index }))
+        .filter(({ body, index }) => body.palette === symbol && !reserved.has(index))
+        .sort((a, b) => {
+          const aa = bodyAnchor(a.body);
+          const ba = bodyAnchor(b.body);
+          const ad = aa ? Math.min(...free.map(zone => toward(aa, this.zones[zone]!.point)), 0) : Number.POSITIVE_INFINITY;
+          const bd = ba ? Math.min(...free.map(zone => toward(ba, this.zones[zone]!.point)), 0) : Number.POSITIVE_INFINITY;
+          return ad - bd || a.index - b.index;
+        });
+      for (const { index } of options.slice(0, count)) {
+        ready.push(index);
+        reserved.add(index);
+      }
+    }
+    return { remaining, free, reserved, ready };
+  }
+
+  loci(
+    rows: readonly (readonly number[])[],
+    bodies: readonly FieldStockBody[],
+    selected: ReadonlySet<number>,
+  ): Array<readonly [number, number]> {
+    const result: Array<readonly [number, number]> = [];
+    for (let y = 0; y < rows.length; y += 1) {
+      for (let x = 0; x < (rows[0]?.length ?? 0); x += 1) {
+        const point = [x, y] as const;
+        const selectedOk = [...selected].every(index => bodyDistanceSquared(point, bodies[index]!) <= this.lower);
+        const othersOk = bodies.every((body, index) => selected.has(index) || bodyDistanceSquared(point, body) >= this.upper);
+        if (selectedOk && othersOk) result.push(point);
+      }
+    }
+    return result;
+  }
+
+  movement(
+    rows: readonly (readonly number[])[],
+    bodies: readonly FieldStockBody[],
+    index: number,
+    target: readonly [number, number],
+    purpose: string,
+  ): FieldStockOffer | null {
+    const body = bodies[index];
+    if (!body) return null;
+    const position = bodyAnchor(body);
+    if (!position) return null;
+    const points = this.loci(rows, bodies, new Set([index]))
+      .filter(point => point[0] !== position[0] || point[1] !== position[1]);
+    let useful = points.filter(point => toward(point, target) < toward(position, target));
+    let chosenPurpose = purpose;
+    if (!useful.length) {
+      const others = bodies.filter((_, bodyIndex) => bodyIndex !== index);
+      const separation = Math.min(...others.map(other => bodyDistanceSquared(position, other)), 0);
+      useful = points.filter(point =>
+        Math.min(...others.map(other => bodyDistanceSquared(point, other)), 0) > separation);
+      if (!useful.length) return null;
+      useful.sort((a, b) => {
+        const as = Math.min(...others.map(other => bodyDistanceSquared(a, other)), 0);
+        const bs = Math.min(...others.map(other => bodyDistanceSquared(b, other)), 0);
+        return bs - as || toward(a, target) - toward(b, target) || a[0] - b[0] || a[1] - b[1];
+      });
+      chosenPurpose = 'Separate one retained material occurrence to make a later access possible.';
+    } else {
+      useful.sort((a, b) => toward(a, target) - toward(b, target) || a[0] - b[0] || a[1] - b[1]);
+    }
+    return {
+      kind: 'move',
+      selected: [index],
+      point: useful[0]!,
+      purpose: chosenPurpose,
+      known: this.motionTypes.has(body.palette),
+      product: body.palette,
+    };
+  }
+
+  offer(
+    rows: readonly (readonly number[])[],
+    bodies: readonly FieldStockBody[],
+  ): FieldStockOffer | null {
+    const { remaining, free, reserved, ready } = this.allocations(bodies);
+    if (ready.length && free.length) {
+      const choices: Array<{ distance: number; offer: FieldStockOffer }> = [];
+      for (const index of ready) {
+        for (const zone of free) {
+          const move = this.movement(
+            rows,
+            bodies,
+            index,
+            this.zones[zone]!.point,
+            'Deliver an observed requested type while preserving the other stock.',
+          );
+          if (move) choices.push({ distance: toward(move.point, this.zones[zone]!.point), offer: move });
+        }
+      }
+      if (choices.length) {
+        choices.sort((a, b) => a.distance - b.distance);
+        return choices[0]!.offer;
+      }
+    }
+
+    const missing = [...remaining].filter(([symbol, count]) =>
+      count > 0 && !ready.some(index => bodies[index]?.palette === symbol)).map(([symbol]) => symbol);
+    if (!missing.length) return null;
+    const targetRank = Math.max(...missing.map(symbol => this.order.indexOf(symbol)));
+    const options: Array<{ rank: number; mode: number; distance: number; offer: FieldStockOffer }> = [];
+
+    for (let left = 0; left < bodies.length; left += 1) {
+      for (let right = left + 1; right < bodies.length; right += 1) {
+        const first = bodies[left]!;
+        const second = bodies[right]!;
+        const symbol = first.palette;
+        if (reserved.has(left) || reserved.has(right) || symbol !== second.palette || this.order.indexOf(symbol) >= targetRank) continue;
+        const rank = this.order.indexOf(symbol);
+        const product = this.rules[symbol]?.product ?? this.order[rank + 1]!;
+        const target = [...this.zones]
+          .map(zone => zone.point)
+          .sort((a, b) => {
+            const ad = [first, second].reduce((sum, body) => sum + toward(a, bodyAnchor(body) ?? body.bbox.slice(0, 2) as [number, number]), 0);
+            const bd = [first, second].reduce((sum, body) => sum + toward(b, bodyAnchor(body) ?? body.bbox.slice(0, 2) as [number, number]), 0);
+            return ad - bd;
+          })[0]!;
+        let points = this.loci(rows, bodies, new Set([left, right]));
+        points = points.filter(point => !this.failures.has(`${feature(first)}|${feature(second)}|${point.join(',')}`));
+        if (points.length) {
+          points.sort((a, b) => toward(a, target) - toward(b, target) || a[0] - b[0] || a[1] - b[1]);
+          options.push({
+            rank: -rank,
+            mode: 0,
+            distance: toward(points[0]!, target),
+            offer: {
+              kind: 'fuse',
+              selected: [left, right],
+              point: points[0]!,
+              product,
+              known: (this.rules[symbol]?.confirmations ?? 0) >= 2,
+              purpose: 'Test the production of a missing requested type through two observed intrants; a higher rewrite remains a hypothesis.',
+            },
+          });
+        } else {
+          for (const [moving, other] of [[left, right], [right, left]] as const) {
+            const move = this.movement(
+              rows,
+              bodies,
+              moving,
+              bodyAnchor(bodies[other]!) ?? bodies[other]!.bbox.slice(0, 2) as [number, number],
+              'Bring one producer intrant into a common field domain without consuming the other stock.',
+            );
+            if (move) options.push({ rank: -rank, mode: 1, distance: toward(move.point, target), offer: move });
+          }
+        }
+      }
+    }
+    options.sort((a, b) => a.rank - b.rank || a.mode - b.mode || a.distance - b.distance);
+    return options[0]?.offer ?? null;
+  }
+
+  simulate(
+    bodies: readonly FieldStockBody[],
+    offer: FieldStockOffer,
+  ): FieldStockBody[] | null {
+    const old = bodies[offer.selected[0]!];
+    if (!old) return null;
+    let template = this.templates[String(offer.product)];
+    if (offer.kind === 'move') {
+      template = {
+        offset: old.offset,
+        mask: old.mask,
+        size: [old.bbox[2] - old.bbox[0] + 1, old.bbox[3] - old.bbox[1] + 1],
+      };
+    }
+    if (!template || !template.offset) return null;
+    const left = offer.point[0] - template.offset[0];
+    const top = offer.point[1] - template.offset[1];
+    const [width, height] = template.size;
+    const origins = [...new Set(offer.selected.flatMap(index => bodies[index]?.origins ?? []))].sort();
+    const product: FieldStockBody = {
+      palette: offer.product,
+      bbox: [left, top, left + width - 1, top + height - 1],
+      mask: template.mask,
+      offset: template.offset,
+      origins,
+    };
+    return bodies
+      .filter((_, index) => !offer.selected.includes(index))
+      .concat(product)
+      .sort((a, b) => a.palette - b.palette || a.bbox.join(',').localeCompare(b.bbox.join(',')));
+  }
+
+  preservationObligations(
+    observation: PublicObservationLike,
+    rows: readonly (readonly number[])[],
+    deps: Pick<FieldStockDependencies, 'digest'>,
+  ): FieldStockPreservationObligation[] {
+    const counts = new Map<number, number>();
+    for (const body of this.bodies(rows)) counts.set(body.palette, (counts.get(body.palette) ?? 0) + 1);
+    for (const [symbol, required] of this.demands) {
+      const current = Math.min(required, counts.get(symbol) ?? 0);
+      this.minimums.set(symbol, Math.max(this.minimums.get(symbol) ?? 0, current));
+    }
+    return [...this.minimums]
+      .filter(([, count]) => count > 0)
+      .map(([symbol, count]) => ({
+        id: 'C_material_' + deps.digest([this.epoch, symbol]).slice(0, 16),
+        meaning: 'Retain the observed type count needed by the current request.',
+        entity_predicate: {
+          palette_value: symbol,
+          minimum_count: count,
+          exclude_boxes: [...this.interfaceBoxes],
+        },
+        evidence: [this.sceneRef, observation.observation_ref],
+        revision_inputs: [this.actionRef],
+      }));
+  }
+
+  propose(
+    observation: PublicObservationLike,
+    rows: readonly (readonly number[])[],
+    remaining: number,
+    deps: FieldStockDependencies,
+  ): FieldStockProposalResult | null {
+    if (this.invalid) {
+      return { status: 'typed_field_applicability_refuted', actions: [], question: this.invalid };
+    }
+    if (!observation.available_action_refs.includes(this.actionRef)) return null;
+
+    const bodies = this.bodies(rows);
+    const steps: Array<Record<string, unknown>> = [];
+    let state = bodies;
+    const changed = new Set<string>();
+
+    for (let count = 0; count < Math.min(16, remaining); count += 1) {
+      const offer = this.offer(rows, state);
+      if (!offer || changed.has(offer.point.join(','))) break;
+      const expected = offer.known ? this.simulate(state, offer) : null;
+      const action = { action_ref: this.actionRef, data: { x: offer.point[0], y: offer.point[1] } };
+      const witness = deps.makeLocusWitness(
+        observation,
+        rows,
+        offer.point,
+        offer.purpose ?? '',
+        [this.sceneRef, observation.observation_ref],
+      );
+      steps.push({
+        action,
+        before_bodies: state,
+        offer,
+        locus_witness: witness,
+        expected_before: {
+          level_epoch: this.epoch,
+          frame_hash: steps.length === 0 ? observation.frame_hash : null,
+        },
+        expected_after: expected,
+      });
+      if (!expected) break;
+
+      for (const index of offer.selected) {
+        for (const point of bodyPixels(state[index]!)) changed.add(point.join(','));
+      }
+      const oldFeatures = new Set(state.map(feature));
+      for (const body of expected) {
+        if (!oldFeatures.has(feature(body))) for (const point of bodyPixels(body)) changed.add(point.join(','));
+      }
+      state = expected;
+    }
+
+    if (!steps.length) return { status: 'typed_material_access_or_rewrite_unresolved', actions: [] };
+    const actions = steps.map(step => step.action as { action_ref: string; data: { x: number; y: number } });
+    const firstOffer = steps[0]!.offer as FieldStockOffer;
+    const why = firstOffer.purpose ?? '';
+    const reference = 'C_field_stock_' + deps.digest([observation.observation_ref, actions]).slice(0, 16);
+    const facts = {
+      typed_stock_observed: true,
+      request_recalled_from_scored_context: true,
+      unknown_rewrite_closes_prefix: true,
+    };
+    const obligations = this.preservationObligations(observation, rows, deps);
+    const preservationChanges = Object.fromEntries(obligations.map(item => [item.id, {
+      observation_ref: observation.observation_ref,
+      action_ref: this.actionRef,
+      actions,
+      why: 'The bound field question retains the requested material count.',
+      revise_condition: false,
+      expected_reestablishment: {
+        minimum_count: item.entity_predicate.minimum_count,
+        palette_value: item.entity_predicate.palette_value,
+      },
+    }]));
+    const countsBefore = Object.fromEntries(this.order.map(symbol => [
+      String(symbol),
+      bodies.filter(body => body.palette === symbol).length,
+    ]));
+    const acquiredMinimums = Object.fromEntries([...this.minimums].map(([symbol, count]) => [String(symbol), count]));
+    const plan = {
+      stock: true,
+      steps,
+      order: [...this.order],
+      demands: Object.fromEntries([...this.demands].map(([symbol, count]) => [String(symbol), count])),
+      counts_before: countsBefore,
+      acquired_minimums: acquiredMinimums,
+      rules: structuredClone(this.rules),
+      scope: 'Joint parentage is inferred from stable consumption and production; conserved pixel identity is not asserted.',
+    };
+    const evidence = [this.sceneRef, observation.observation_ref];
+    return {
+      status: 'proposed',
+      kind: 'typed_field_stock',
+      field_plan: plan,
+      steps,
+      actions,
+      facts,
+      preservation_changes: preservationChanges,
+      compositions: [{
+        id: reference,
+        role: 'information_question',
+        observed: false,
+        open_question: why,
+        properties: {
+          demand_counts: plan.demands,
+          available_counts: countsBefore,
+        },
+        relations: ['contributes_to:G_official_completion'],
+      }],
+      question: { reason: why, hypothesis_refs: evidence },
+      route_refs: evidence,
+      binding: {
+        observation_ref: observation.observation_ref,
+        level_epoch: this.epoch,
+        levels_completed: observation.levels_completed,
+      },
+      bundle_template: {
+        operation_key: 'OP18',
+        composition_ref: reference,
+        objective_ref: 'G_official_completion',
+        preserve_refs: [],
+        purpose: why,
+        preconditions: facts,
+        evidence,
+        actions,
+        frozen_field_plan: structuredClone(plan),
+        outcome_guard: { path: ['value'], contains: reference },
+      },
+    };
   }
 
   before(
