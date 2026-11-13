@@ -310,3 +310,18 @@ La reconstruction peut devenir la nouvelle baseline canonique seulement lorsque 
 
 Jusque-là, la branche est viable pour travailler, tester, intégrer et
 reconstruire, mais pas pour revendiquer une équivalence exacte à Site 109.
+
+## Requalification C7 du contrat de configuration canonique
+
+Le contrat navigateur accepte maintenant les deux états du cycle canonique, `ready-for-official-abba-measurement` et `qualified-functionally-and-performance`. Le contrat est inclus dans les `sourceRef` A/B et a été requalifié sur le protocole strict A1/B1/B2/A2.
+
+- commit mesuré : `ea6bc872b90261133dfc8780664b487f5917653f` ;
+- run : `43364316353`, job : `131685000996` ;
+- STCK : +2,2222 %, accepté ;
+- SMLP : +1,8695 %, accepté ;
+- 367/367 tests TypeScript ;
+- 24/24 contrats natifs ;
+- build et parité Worker/Pyodide réussis ;
+- aucune publication Site.
+
+Preuve : `docs/recovery/op01-op31-c7-config-reconciliation-20261113.md`.
