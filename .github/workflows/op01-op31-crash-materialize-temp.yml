@@ -36,7 +36,7 @@ jobs:
           PY
       - name: Package editable sources
         run: |
-          mkdir -p materialized/src/runtime materialized/src materialized/tests/browser materialized/tests materialized/scripts materialized/docs/migration materialized/docs/recovery
+          mkdir -p materialized/src/runtime materialized/src materialized/tests/browser materialized/tests materialized/scripts materialized/docs/migration materialized/docs/recovery materialized/.github/workflows
           cp src/runtime/v6-browser-durable-session.ts materialized/src/runtime/
           cp src/main.ts materialized/src/
           cp tests/browser/op01-op31-browser-durable-resume.ts materialized/tests/browser/
@@ -44,14 +44,17 @@ jobs:
           cp tests/browser/op01-op31-browser-crash-resume.html materialized/tests/browser/
           cp tests/v6-browser-durable-session.test.ts materialized/tests/
           cp tests/main-browser-durable-session-integration.test.ts materialized/tests/
+          cp tests/v6-entry-point-progress.test.ts materialized/tests/
+          cp tests/op01-op31-browser-crash-resume-contract.test.mjs materialized/tests/
           cp scripts/qualify-op01-op31-browser-crash-resume.mjs materialized/scripts/
           cp scripts/check-v6-entry-point-progress.mjs materialized/scripts/
           cp docs/migration/v6-entry-point-progress.json materialized/docs/migration/
           cp docs/migration/op01-op31-progress.md materialized/docs/migration/
           cp docs/recovery/v6-entry-point-registry-reconstruction-20261113.md materialized/docs/recovery/
           cp docs/recovery/op01-op31-browser-crash-resume-20261113.md materialized/docs/recovery/
+          cp .github/workflows/op01-op31-browser-crash-resume.yml materialized/.github/workflows/
       - uses: actions/upload-artifact@v4
         with:
-          name: op01-op31-crash-materialized
+          name: op01-op31-crash-materialized-full
           path: materialized
           retention-days: 1
