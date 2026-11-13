@@ -6,13 +6,17 @@ Dernière consolidation : 13 novembre 2026.
 
 - Dépôt : `yannick-fontan-1981/sra-playground`
 - Branche canonique cible : `recovery/site109-reconstruction-20261112`
-- Baseline canonique de la tranche courante :
+- Baseline initiale de la tranche adressée :
   `e3fa1901452423a714d3a47d5a469dbf112c55b0`
+- Canonique C7 réconcilié :
+  `d09fcc23e2dc594b9fa0bff0dab5072808c91464`
 - Branche de travail :
   `op01-op31-browser-addressed-acquisition-20261113`
-- Commit fonctionnel qualifié :
+- Commit fonctionnel de la tranche :
   `99c1d23353dbfec3e98c3770fee362b757ec2701`
-- Donneur OP01-OP31 : `op01-op31-c0-c7-audit`
+- Merge de réconciliation C7 qualifié :
+  `23694816d35f4f050e43a8660be45a063b6ee5d9`
+- Donneur OP01–OP31 : `op01-op31-c0-c7-audit`
 - Plan stable : `docs/migration/op01-op31-verification-plan.md`
 - Historique détaillé antérieur :
   `docs/migration/op01-op31-progress-history-through-b093f406.md`
@@ -34,9 +38,14 @@ Dernière consolidation : 13 novembre 2026.
   `docs/recovery/op01-op31-browser-field-stock-transport-20261112.md`
 - Acquisition adressée publique :
   `docs/recovery/op01-op31-browser-addressed-acquisition-20261113.md`
+- Qualification officielle C7 :
+  `docs/recovery/op01-op31-official-readiness-status.md`
+- Preuve officielle Region :
+  `docs/recovery/lot9b-official-abba-performance-qualified.json`
 
-Le présent fichier décrit l’état courant. Les versions antérieures restent dans
-Git et dans les rapports de recovery afin de préserver les preuves détaillées.
+Le présent fichier décrit l’état courant consolidé. Les versions antérieures
+restent dans Git et dans les rapports de recovery afin de préserver les preuves
+détaillées.
 
 ## Règle de qualification
 
@@ -66,14 +75,14 @@ La campagne commune possède maintenant :
 - un seam Worker qualifié ;
 - un seam produit/browser qualifié ;
 - un contrôleur Agent explicite et unique activé dans `main.ts` ;
-- deux propriétaires navigateur enregistrés, FieldStock OP18 et fallback OP28 ;
-- un chemin Manual toujours séparé ;
+- deux propriétaires navigateur actifs, FieldStock OP18 et fallback OP28 ;
+- un chemin Manual séparé ;
 - une mesure publique différée des entités ;
 - une acquisition passive du premier modèle adressé depuis un retour ACTION6
   déjà autorisé par un propriétaire explicite ;
-- une calibration par réponses corrélées et une rétention prudente à la
-  frontière officielle ;
-- le manifeste et le harness ABBA Worker/Pyodide dans l’état intégré.
+- une calibration par réponses corrélées ;
+- une première rétention prudente à la frontière officielle ;
+- une qualification C7 officielle du hook Region natif sur STCK et SMLP.
 
 Le contrôleur produit utilise uniquement le seam navigateur direct. Le Worker
 reste disponible pour les autres runtimes et les tests, mais n’est pas instancié
@@ -82,13 +91,15 @@ par `main.ts`.
 Statut global :
 
 **OP28 est active dans le produit ; OP18 est transportée et consommée avec un
-stock revalidé ; l’acquisition et la rétention initiales d’un modèle adressé
-sont qualifiées depuis une ACTION6 explicitement autorisée ; le propriétaire
-produit de cette première ACTION6, la continuité entre activations et le coût C7
+stock revalidé ; l’acquisition et la première rétention d’un modèle adressé sont
+qualifiées depuis une ACTION6 explicitement autorisée ; C7 est clos pour le
+protocole Region STCK/SMLP ; le propriétaire produit de la première ACTION6, la
+continuité entre activations, le coût ciblé du nouveau chemin adressé et OP31
 restent ouverts.**
 
 Cette reconstruction ne prouve ni une identité binaire avec Site 109, ni une
-parité totale V5/V6/V7.
+parité totale V5/V6/V7, ni la présence d’un registre canonique complet des 76
+points d’entrée V6.
 
 ## Architecture runtime pertinente
 
@@ -143,9 +154,9 @@ produit actuel.
 | C2 | **OP18 transportée ; OP28 active ; acquisition initiale passive qualifiée** | modèle acquis, calibré puis retenu depuis des retours ACTION6 publics corrélés ; OP18 change la proposition suivante avec stock revalidé | propriétaire produit justifiant la première ACTION6 et propriétaire OP31 |
 | C3 | **calculs et recouvrements qualifiés** | OP03/04/08/09/11/12/14/26 auditables | appeler uniquement depuis un producteur réel |
 | C4 | **audit complet, usages génériques non démontrés** | OP01/02/05/10/15/25 calculables | aucun raccord artificiel |
-| C5 | **retours spécialisés préservés** | FieldStock et Region couvrent notamment OP06/29/30 avec effet futur | contrat physique Region complet |
+| C5 | **retours spécialisés préservés** | FieldStock et Region couvrent notamment OP06/29/30 avec effet futur | propriétaire physique Region dans le produit et lot 9C `joint_channels` |
 | C6 | **audit complet** | inconnue, échec borné, ambiguïté et impossibilité restent distincts | aucun raccord sans preuve de blocage ou reprise |
-| C7 | **ouvert** | 333 tests, typecheck, build, câblage et harness ABBA présent | exécution des quatre runners et médianes par jeu sous +10 % |
+| C7 | **performance officielle qualifiée pour Region STCK/SMLP** | protocole ABBA durable, quatre runners, deux jeux strictement sous +10 %, activité Region conservée | ne pas confondre avec le coût ciblé du nouveau chemin adressé ni avec la parité des 76 entrées V6 |
 
 ## Contrôleur Agent produit
 
@@ -189,7 +200,7 @@ La nouvelle chaîne ne traite qu’une ACTION6 :
 
 Elle ne produit ni l’action ni ses coordonnées.
 
-### Entités publiques
+### Entités publiques et correspondance
 
 Les composantes visibles reçoivent une signature déterministe construite depuis
 la palette, la taille et le masque local. La position absolue reste séparée.
@@ -227,7 +238,7 @@ Le même retour devient le premier échantillon de
 Après deux témoins alignés et une borne supérieure, une frontière officielle
 convertit le modèle en prior compact avec `alignment_supported: true`.
 
-### Ordre produit
+### Ordre produit et preuve
 
 La chaîne qualifiée est :
 
@@ -240,12 +251,7 @@ La chaîne qualifiée est :
 7. présentation ;
 8. décision suivante.
 
-FieldStock ne vole pas le retour sélectionné, ne prétend pas avoir autorisé
-l’action et ne peut pas proposer depuis le hook passif.
-
-### Preuve
-
-La preuve qualifiée démontre :
+La preuve démontre :
 
 - déplacement `(1,1) → (2,1)` et acquisition du modèle ;
 - déplacement `(2,1) → (3,1)` et deuxième témoin aligné ;
@@ -263,12 +269,8 @@ action reste absent.**
 
 ## Chaîne OP18 produit
 
-### Besoin
-
 Un stock adressé retenu et revalidé laisse une demande typée insatisfaite alors
 qu’ACTION6 est disponible.
-
-### Production et consommation
 
 `BrowserFieldStockCampaignTransport` construit le contexte depuis l’observation
 publique, les lignes de palette, le niveau, le score, le runtime exact et un
@@ -343,23 +345,18 @@ explicitement évalués.
 | OP30 | fonction spécialisée démontrée | rétention, `recordStock()` et Region changent les connaissances futures |
 | OP31 | appel générique disponible, contribution absente | aucun propriétaire d’objectif produit ne maintient ou réoriente la suite |
 
-## Qualification
+## Qualification combinée
 
-### Tranche FieldStock précédente
+### Acquisition adressée et réconciliation canonique
 
-- état combiné qualifié : `70943d5715e7e44680ab307f0e8ddca27dd020aa` ;
-- régression complète : **330/330** ;
-- typecheck et build : réussis.
-
-### Acquisition adressée publique
-
-- run GitHub Actions : `43357819760` ;
-- job : `131663946577` ;
-- commit qualifié : `99c1d23353dbfec3e98c3770fee362b757ec2701` ;
+- merge de réconciliation :
+  `23694816d35f4f050e43a8660be45a063b6ee5d9` ;
+- run GitHub Actions : `43358235167` ;
+- job : `131665294852` ;
 - Node : `22.18.0` ;
 - `npm ci` : réussi ;
 - typecheck : réussi ;
-- régression complète : **333/333** ;
+- régression complète : **336/336** ;
 - échecs, annulations, tests ignorés et TODO : `0` ;
 - build de production : réussi ;
 - modules transformés : `56` ;
@@ -370,23 +367,45 @@ explicitement évalués.
 Deux vulnérabilités de dépendances de sévérité haute préexistantes restent
 signalées par `npm ci`.
 
-## Performance
+### C7 officiel Region
 
-Critère : la médiane de session complète de chaque jeu doit augmenter de
-strictement moins de 10 %. STCK et SMLP restent séparés.
+La preuve officielle durable rapporte :
+
+- statut : `official-performance-qualified` ;
+- protocole : `A1 → B1 → B2 → A2` ;
+- 40 invocations ;
+- 8 sessions de warm-up et 24 actions de warm-up ;
+- 32 sessions mesurées et 400 actions mesurées ;
+- aucun échantillon supprimé ;
+- aucun retry caché.
+
+Résultats retenus :
+
+- **STCK : A 54,5 ms, B 58,4 ms, +7,155963 % — accepté** ;
+- **SMLP : A 123,95 ms, B 118,15 ms, −4,679306 % — accepté**.
+
+Le seuil reste strictement inférieur à `+10 %` pour chaque jeu séparément.
+L’activité Region reste présente dans le candidat mesuré.
+
+Disposition C7 :
+
+**performance officielle qualifiée pour le hook Region natif sur STCK et SMLP.**
+
+Cette qualification ne prouve pas la parité totale des 76 points d’entrée V6 et
+ne mesure pas séparément le nouveau chemin d’acquisition adressée.
+
+## Performance du nouveau chemin adressé
 
 Le chemin OP28 simple ne matérialise pas les composantes publiques ajoutées. Le
 coût nouveau est limité aux retours ACTION6 évalués pour apprentissage et aux
 revalidations de prior déjà prévues.
 
-Cette limitation structurelle, le build et les tests ne remplacent pas les
-mesures de session complète. Le manifeste, les références A/B et le harness
-ABBA Worker/Pyodide sont présents, mais les quatre mesures restent à exécuter.
+Cette limitation structurelle ne remplace pas une mesure ciblée. Cette mesure
+sera pertinente lorsqu’un vrai propriétaire produit activera effectivement la
+première ACTION6 adressée.
 
-Verdict : **fonctionnellement qualifié, coût officiel à confirmer.**
-
-C7 exige encore A/STCK, A/SMLP, B/STCK et B/SMLP avec provenance, échantillons
-et médianes publiés.
+Le coût ciblé non mesuré du nouveau chemin ne réouvre pas C7 pour son périmètre
+Region déjà qualifié.
 
 ## Limites ouvertes
 
@@ -396,7 +415,8 @@ et médianes publiés.
   raccordés au produit ;
 - Region n’est pas encore un propriétaire physique du contrôleur produit ;
 - aucun propriétaire OP31 ;
-- performance C7 non close ;
+- registre canonique des 76 points d’entrée V6 absent ;
+- coût ciblé du nouveau chemin d’acquisition non mesuré séparément ;
 - aucune publication Site dans cette tranche.
 
 ## Feuille de route actualisée
@@ -414,16 +434,15 @@ et médianes publiés.
 
 ### Étape suivante : élargissement symbolique
 
-1. compléter le contrat physique Region ;
-2. enregistrer Region sans classement implicite ;
-3. généraliser les observations passives avec déduplication explicite ;
-4. identifier un propriétaire d’objectif réel avant OP31.
+1. ajouter un benchmark ciblé du chemin d’acquisition lorsqu’il devient actif ;
+2. compléter le propriétaire physique Region ;
+3. poursuivre le lot 9C `joint_channels` ;
+4. généraliser les observations passives avec déduplication explicite ;
+5. identifier un propriétaire d’objectif réel avant OP31.
 
-### Clôture C7 et publication
+### Publication
 
-1. geler baseline et candidat intégrés ;
-2. exécuter A/STCK, A/SMLP, B/STCK et B/SMLP ;
-3. publier distributions et médianes par jeu ;
-4. accepter ou corriger tout dépassement ;
-5. publier le Site uniquement depuis un commit GitHub canonique qualifié ;
-6. vérifier ensuite GitHub ↔ Site.
+1. conserver les preuves C7 officielles sans les réécrire ;
+2. intégrer chaque tranche qualifiée sur GitHub canonique ;
+3. publier le Site uniquement depuis un commit GitHub canonique qualifié ;
+4. vérifier ensuite GitHub ↔ Site.
