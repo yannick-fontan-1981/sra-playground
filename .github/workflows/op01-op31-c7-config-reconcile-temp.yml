@@ -1,0 +1,106 @@
+name: OP01-OP31 canonical C7 config reconciliation
+
+on:
+  push:
+    branches:
+      - recovery/op01-op31-c7-config-reconcile-canonical-20261113
+
+concurrency:
+  group: op01-op31-c7-config-reconcile-canonical-20261113
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  reconcile:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      LOT9B_MEASUREMENT_ISOLATION: non-isolated-shared-github-actions-runner-no-repository-concurrency
+      LOT9B_OFFICIAL_BENCHMARK_REPORT: lot9b-official-native-region-abba-report.json
+      LOT9B_WORKER_PYODIDE_REPORT: lot9b-worker-pyodide-parity-report.json
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.18.0'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: npm ci
+      - name: Prepare new source identity and ready manifest
+        run: node scripts/reconcile-canonical-c7-config-temp.mjs prepare
+      - name: Verify ready manifest
+        run: node scripts/verify-native-loop-runner-manifest.mjs
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Run complete TypeScript regression
+        run: |
+          set -o pipefail
+          node --experimental-transform-types --test tests/*.test.ts | tee c7-typescript-tests.tap
+      - name: Build product
+        run: npm run build
+      - name: Prepare pinned Pyodide assets
+        run: node scripts/prepare-python.mjs
+      - name: Test Worker Pyodide parity contract
+        run: node --test tests/worker-pyodide-parity-contract.test.mjs
+      - name: Qualify Worker Pyodide parity
+        run: node scripts/qualify-worker-pyodide-parity.mjs
+      - name: Normalize parity summary for consolidation
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFile, writeFile } from 'node:fs/promises';
+          const path = process.env.LOT9B_WORKER_PYODIDE_REPORT;
+          const report = JSON.parse(await readFile(path, 'utf8'));
+          report.samplesCompared = report.parity.samplesCompared;
+          report.stepsCompared = report.parity.stepsCompared;
+          await writeFile(path, `${JSON.stringify(report, null, 2)}\n`);
+          NODE
+      - name: Test native benchmark contracts
+        run: |
+          set -o pipefail
+          node --test \
+            tests/native-loop-cost-harness.test.mjs \
+            tests/native-loop-session-adapter.test.mjs \
+            tests/native-loop-browser-worker-dispatch.test.mjs \
+            tests/native-loop-region-source-refs.test.mjs | tee c7-native-contracts.tap
+      - name: Execute official A1 B1 B2 A2 protocol
+        run: node scripts/run-native-region-official-benchmark.mjs
+      - name: Upload official measurement
+        id: measurement_artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: op01-op31-c7-config-reconciliation-canonical-report
+          path: lot9b-official-native-region-abba-report.json
+          if-no-files-found: error
+      - name: Finalize official proof and canonical documents
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          C7_ARTIFACT_ID: ${{ steps.measurement_artifact.outputs.artifact-id }}
+          C7_ARTIFACT_DIGEST: ${{ steps.measurement_artifact.outputs.artifact-digest }}
+        run: node scripts/reconcile-canonical-c7-config-temp.mjs finalize
+      - name: Verify final proof, manifest and C7 readiness
+        run: |
+          node --test tests/lot9b-official-performance-proof.test.mjs
+          node scripts/verify-native-loop-runner-manifest.mjs
+          node scripts/check-op01-op31-c7-readiness.mjs
+      - name: Commit requalified canonical C7 evidence
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            docs/recovery/native-loop-source-refs.json \
+            docs/recovery/native-loop-runner-manifest.json \
+            docs/recovery/lot9b-official-abba-performance-qualified.json \
+            docs/recovery/lot9b-official-abba-performance-qualified.md \
+            docs/recovery/op01-op31-c7-config-reconciliation-20261113.md \
+            docs/migration/op01-op31-progress.md \
+            docs/recovery/site109-reconstruction-status.md \
+            docs/recovery/op01-op31-official-readiness-status.md
+          git commit -m "Requalify current canonical C7 configuration"
+          git push origin HEAD:${GITHUB_REF_NAME}
