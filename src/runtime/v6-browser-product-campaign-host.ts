@@ -16,6 +16,7 @@ import {
   PUBLIC_UNIQUE_STCK_ACTION6_CALLER_OWNER_ID,
   PublicUniqueStckAction6CallerOwnerAdapter,
 } from '../logos-engine/v6-public-unique-stck-action6-caller-adapter.ts';
+import { ObservedAddressedMaterialCheckpointParticipant } from './observed-addressed-material-checkpoint.ts';
 import { ObservedAddressedMaterialRuntime } from './observed-addressed-material-runtime.ts';
 import {
   BrowserCommonCampaignHost,
@@ -61,6 +62,7 @@ export function createFieldStockPublicAction6AndPublicSingleActionBrowserCampaig
 
   return new BrowserCommonCampaignHost({
     campaign,
+    checkpointParticipants: [new ObservedAddressedMaterialCheckpointParticipant(runtime)],
     eventRef: options.eventRef,
     ownerTransports: [
       fieldTransport,

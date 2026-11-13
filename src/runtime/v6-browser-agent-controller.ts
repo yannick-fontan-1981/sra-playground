@@ -3,6 +3,8 @@ import type { GameObservation } from './browser-games.ts';
 import { createFieldStockAndPublicSingleActionBrowserCampaignHost } from './v6-browser-product-campaign-host.ts';
 import type {
   BrowserCampaignDispatchPorts,
+  BrowserCampaignHostCheckpointV1,
+  BrowserCampaignHostRestoreResult,
   BrowserCampaignHostResult,
   BrowserCommonCampaignHost,
 } from './v6-browser-common-campaign-host.ts';
@@ -61,8 +63,21 @@ export interface BrowserAgentControllerPorts extends BrowserCampaignDispatchPort
 
 export type BrowserAgentCampaignHost = Pick<
   BrowserCommonCampaignHost,
-  'begin' | 'run' | 'cancel' | 'dispose' | 'currentGameObservation'
+  | 'begin'
+  | 'run'
+  | 'cancel'
+  | 'dispose'
+  | 'snapshot'
+  | 'restore'
+  | 'currentGameObservation'
 >;
+
+interface BrowserAgentControllerCheckpointV1 {
+  version: 1;
+  gameCode: string;
+  actionsDispatched: number;
+  host: BrowserCampaignHostCheckpointV1;
+}
 
 export interface BrowserAgentControllerOptions {
   createHost?: () => BrowserAgentCampaignHost;
@@ -100,6 +115,10 @@ function stopPriority(reason: BrowserAgentControllerStopReason): number {
   return 0;
 }
 
+function resumableStop(reason: BrowserAgentControllerStopReason): boolean {
+  return ['manual', 'none', 'ambiguous', 'pending', 'blocked'].includes(reason);
+}
+
 /**
  * Own a bounded, single-seam browser Agent session.
  *
@@ -125,6 +144,7 @@ export class BrowserAgentController {
   #actionsDispatched = 0;
   #sessionOrdinal = 0;
   #runPromise: Promise<BrowserAgentControllerSnapshot> | null = null;
+  #checkpoint: BrowserAgentControllerCheckpointV1 | null = null;
   #disposed = false;
 
   constructor(options: BrowserAgentControllerOptions = {}) {
@@ -159,6 +179,7 @@ export class BrowserAgentController {
     }
 
     if (terminal(observation)) {
+      this.#checkpoint = null;
       this.#phase = 'stopped';
       this.#stopReason = 'terminal';
       this.#campaignStatus = null;
@@ -173,6 +194,7 @@ export class BrowserAgentController {
       || liveState.busy
       || liveState.loading
       || liveState.failed) {
+      this.#checkpoint = null;
       this.#phase = 'stopped';
       this.#stopReason = liveState.observation === observation ? 'not-ready' : 'stale';
       this.#campaignStatus = null;
@@ -181,20 +203,46 @@ export class BrowserAgentController {
       return Promise.resolve(this.snapshot());
     }
 
-    const ordinal = ++this.#sessionOrdinal;
-    const sessionId = this.#makeSessionId(observation, ordinal);
-    if (!sessionId) throw new TypeError('browser agent session id must be non-empty');
-
     const host = this.#createHost();
-    host.begin({ sessionId, observation });
+    let sessionId: string;
+    let actionsDispatched = 0;
+    let restoreResult: BrowserCampaignHostRestoreResult | null = null;
+    const checkpoint = this.#checkpoint;
+    if (checkpoint && checkpoint.gameCode === observation.gameCode) {
+      try {
+        restoreResult = host.restore(checkpoint.host, observation);
+        sessionId = restoreResult.sessionId;
+        actionsDispatched = checkpoint.actionsDispatched;
+      } catch {
+        this.#checkpoint = null;
+        const ordinal = ++this.#sessionOrdinal;
+        sessionId = this.#makeSessionId(observation, ordinal);
+        if (!sessionId) throw new TypeError('browser agent session id must be non-empty');
+        host.begin({ sessionId, observation });
+      }
+    } else {
+      this.#checkpoint = null;
+      const ordinal = ++this.#sessionOrdinal;
+      sessionId = this.#makeSessionId(observation, ordinal);
+      if (!sessionId) throw new TypeError('browser agent session id must be non-empty');
+      host.begin({ sessionId, observation });
+    }
+
+    this.#checkpoint = null;
     this.#host = host;
     this.#sessionId = sessionId;
     this.#stopReason = null;
     this.#requestedStop = null;
     this.#campaignStatus = null;
-    this.#actionsDispatched = 0;
+    this.#actionsDispatched = actionsDispatched;
     this.#phase = 'running';
     this.#emit();
+    if (restoreResult?.acquisition) {
+      ports.onCampaignAcquired?.(
+        restoreResult.acquisition,
+        restoreResult.returnedObservation,
+      );
+    }
 
     const run = this.#run(host, ports);
     const tracked = run.finally(() => {
@@ -211,6 +259,7 @@ export class BrowserAgentController {
   deactivate(reason: 'manual' | 'replaced' = 'manual'): BrowserAgentControllerSnapshot {
     if (this.#disposed) return this.snapshot();
     if (!this.#runPromise) {
+      if (reason === 'replaced') this.#checkpoint = null;
       this.#disposeHost();
       this.#phase = 'stopped';
       this.#stopReason = reason;
@@ -231,6 +280,7 @@ export class BrowserAgentController {
   dispose(): void {
     if (this.#disposed) return;
     this.#disposed = true;
+    this.#checkpoint = null;
     this.#requestedStop = 'disposed';
     this.#host?.cancel();
     this.#disposeHost();
@@ -293,6 +343,22 @@ export class BrowserAgentController {
   }
 
   #finish(reason: BrowserAgentControllerStopReason): BrowserAgentControllerSnapshot {
+    const host = this.#host;
+    if (host && resumableStop(reason)) {
+      try {
+        const checkpoint = host.snapshot();
+        this.#checkpoint = {
+          version: 1,
+          gameCode: checkpoint.gameCode,
+          actionsDispatched: this.#actionsDispatched,
+          host: checkpoint,
+        };
+      } catch {
+        this.#checkpoint = null;
+      }
+    } else if (!resumableStop(reason)) {
+      this.#checkpoint = null;
+    }
     this.#disposeHost();
     this.#requestedStop = null;
     this.#phase = reason === 'error' ? 'error' : reason === 'disposed' ? 'disposed' : 'stopped';

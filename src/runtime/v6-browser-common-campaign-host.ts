@@ -8,6 +8,11 @@ import {
 } from '../agent-product-dispatch.ts';
 import type { FieldStockDependencies } from '../logos-engine/field-stock.ts';
 import {
+  CommonCampaignCheckpointCoordinator,
+  type CommonCampaignCheckpointParticipant,
+  type CommonCampaignCheckpointV1,
+} from '../logos-engine/v6-common-campaign-checkpoint.ts';
+import {
   CommonCampaignOwner,
   type CampaignPrepareResult,
   type CampaignReturnReceipt,
@@ -25,7 +30,10 @@ import {
 import type { AgentObservation } from './contracts.ts';
 import type { GameObservation } from './browser-games.ts';
 import { ObservedAddressedMaterialRuntime } from './observed-addressed-material-runtime.ts';
-import { BrowserAgentObservationStream } from './v6-browser-agent-observation.ts';
+import {
+  BrowserAgentObservationStream,
+  toAgentObservationFromGame,
+} from './v6-browser-agent-observation.ts';
 import { PUBLIC_ADDRESSED_FIELD_RETURN_DEPENDENCIES } from './v6-public-addressed-field-learning.ts';
 import {
   completePublicCampaignEntities,
@@ -80,6 +88,7 @@ export interface BrowserCampaignOwnerTransport {
 export interface BrowserCampaignHostOptions {
   campaign: CommonCampaignOwner;
   ownerTransports: readonly BrowserCampaignOwnerTransport[];
+  checkpointParticipants?: readonly CommonCampaignCheckpointParticipant[];
   eventRef?(input: BrowserCampaignReturnPair): string;
 }
 
@@ -110,11 +119,44 @@ export interface BrowserCampaignHostResult {
   returnedObservation: AgentObservation | null;
 }
 
+export interface BrowserCampaignPendingPhysicalReturnV1 {
+  preparation: BrowserCampaignActionPreparation;
+  beforeGameObservation: GameObservation;
+  beforeAgentObservation: AgentObservation;
+}
+
+export interface BrowserCampaignHostCheckpointV1 {
+  version: 1;
+  sessionId: string;
+  gameCode: string;
+  nextSequence: number;
+  currentGameObservation: GameObservation;
+  currentAgentObservation: AgentObservation;
+  campaign: CommonCampaignCheckpointV1;
+  pendingPhysicalReturn: BrowserCampaignPendingPhysicalReturnV1 | null;
+}
+
+export type BrowserCampaignHostRestoreStatus =
+  | 'restored'
+  | 'pending-return-waiting'
+  | 'pending-return-acquired';
+
+export interface BrowserCampaignHostRestoreResult {
+  status: BrowserCampaignHostRestoreStatus;
+  sessionId: string;
+  acquisition: CampaignReturnReceipt | null;
+  returnedObservation: AgentObservation;
+}
+
 interface ActiveBrowserCampaignSession {
   sessionId: string;
   stream: BrowserAgentObservationStream;
   gameObservation: GameObservation;
   agentObservation: AgentObservation;
+}
+
+interface ActivePhysicalReturn extends BrowserCampaignPendingPhysicalReturnV1 {
+  sent: boolean;
 }
 
 function nonEmpty(value: string, label: string): void {
@@ -147,6 +189,69 @@ function cloneAgentObservation(observation: AgentObservation): AgentObservation 
     },
     availableActionIds: [...observation.availableActionIds],
   };
+}
+
+function cloneGameObservation(observation: GameObservation): GameObservation {
+  return structuredClone(observation);
+}
+
+function objectValue(value: unknown, label: string): Record<string, unknown> {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) {
+    throw new TypeError(`${label} must be an object`);
+  }
+  return value as Record<string, unknown>;
+}
+
+function sameNumbers(left: readonly number[], right: readonly number[]): boolean {
+  return left.length === right.length && left.every((value, index) => value === right[index]);
+}
+
+function sameAgentObservation(left: AgentObservation, right: AgentObservation): boolean {
+  return left.protocolVersion === right.protocolVersion
+    && left.sessionId === right.sessionId
+    && left.sequence === right.sequence
+    && left.image.width === right.image.width
+    && left.image.height === right.image.height
+    && left.image.pixelFormat === right.image.pixelFormat
+    && sameNumbers(left.image.pixels, right.image.pixels)
+    && sameNumbers(left.availableActionIds, right.availableActionIds)
+    && left.state === right.state
+    && left.level === right.level
+    && left.levelsCompleted === right.levelsCompleted;
+}
+
+function sameAction(left: unknown, right: unknown): boolean {
+  return JSON.stringify(left) === JSON.stringify(right);
+}
+
+function browserCampaignCheckpoint(value: unknown): BrowserCampaignHostCheckpointV1 {
+  const source = objectValue(value, 'browser campaign checkpoint');
+  if (source.version !== 1) throw new TypeError('unsupported browser campaign checkpoint version');
+  nonEmpty(source.sessionId as string, 'browser campaign checkpoint session id');
+  nonEmpty(source.gameCode as string, 'browser campaign checkpoint game code');
+  if (!Number.isInteger(source.nextSequence) || (source.nextSequence as number) < 0) {
+    throw new RangeError('browser campaign checkpoint next sequence must be non-negative');
+  }
+  objectValue(source.currentGameObservation, 'browser campaign checkpoint game observation');
+  const currentAgent = objectValue(
+    source.currentAgentObservation,
+    'browser campaign checkpoint agent observation',
+  );
+  objectValue(currentAgent.image, 'browser campaign checkpoint agent image');
+  objectValue(source.campaign, 'browser campaign checkpoint campaign state');
+  if (source.pendingPhysicalReturn !== null) {
+    const pending = objectValue(
+      source.pendingPhysicalReturn,
+      'browser campaign checkpoint pending physical return',
+    );
+    const preparation = objectValue(pending.preparation, 'browser pending preparation');
+    if (preparation.status !== 'action') {
+      throw new TypeError('browser pending preparation must be an action');
+    }
+    objectValue(pending.beforeGameObservation, 'browser pending game observation');
+    objectValue(pending.beforeAgentObservation, 'browser pending agent observation');
+  }
+  return structuredClone(source) as unknown as BrowserCampaignHostCheckpointV1;
 }
 
 export interface BrowserFieldStockCampaignTransportOptions {
@@ -315,12 +420,18 @@ export class BrowserFieldStockCampaignTransport implements BrowserCampaignOwnerT
  */
 export class BrowserCommonCampaignHost {
   readonly #campaign: CommonCampaignOwner;
+  readonly #checkpoint: CommonCampaignCheckpointCoordinator;
   readonly #transports = new Map<string, BrowserCampaignOwnerTransport>();
   readonly #eventRef: (input: BrowserCampaignReturnPair) => string;
   #active: ActiveBrowserCampaignSession | null = null;
+  #pendingPhysicalReturn: ActivePhysicalReturn | null = null;
 
   constructor(options: BrowserCampaignHostOptions) {
     this.#campaign = options.campaign;
+    this.#checkpoint = new CommonCampaignCheckpointCoordinator(
+      this.#campaign,
+      options.checkpointParticipants ?? [],
+    );
     this.#eventRef = options.eventRef ?? defaultEventRef;
 
     const registered = new Set(this.#campaign.ownerIds);
@@ -345,6 +456,7 @@ export class BrowserCommonCampaignHost {
   begin(input: BrowserCampaignSessionInput): AgentObservation {
     nonEmpty(input.sessionId, 'browser campaign session id');
     if (this.#active) this.#campaign.cancel(this.#active.sessionId);
+    this.#pendingPhysicalReturn = null;
 
     const stream = new BrowserAgentObservationStream({
       sessionId: input.sessionId,
@@ -404,6 +516,14 @@ export class BrowserCommonCampaignHost {
       throw new Error(`selected campaign owner ${preparation.ownerId} has no browser transport`);
     }
 
+    const pendingPhysicalReturn: ActivePhysicalReturn = {
+      preparation: structuredClone(preparation),
+      beforeGameObservation: cloneGameObservation(active.gameObservation),
+      beforeAgentObservation: cloneAgentObservation(active.agentObservation),
+      sent: false,
+    };
+    this.#pendingPhysicalReturn = pendingPhysicalReturn;
+
     let acquisition: CampaignReturnReceipt | null = null;
     let returnedObservation: AgentObservation | null = null;
     let returnCommitted = false;
@@ -414,7 +534,13 @@ export class BrowserCommonCampaignHost {
         preparation.action.id,
         actionData(preparation),
         {
-          action: (action, data) => ports.action(action, data),
+          action: (action, data) => {
+            if (this.#active !== active || this.#pendingPhysicalReturn !== pendingPhysicalReturn) {
+              throw new Error('browser campaign action lost active ownership before dispatch');
+            }
+            pendingPhysicalReturn.sent = true;
+            return ports.action(action, data);
+          },
           present: async (next, generation) => {
             const converted = active.stream.next(next);
             const returnPair: BrowserCampaignReturnPair = {
@@ -438,6 +564,9 @@ export class BrowserCommonCampaignHost {
             active.agentObservation = converted;
             returnedObservation = cloneAgentObservation(converted);
             returnCommitted = true;
+            if (this.#pendingPhysicalReturn === pendingPhysicalReturn) {
+              this.#pendingPhysicalReturn = null;
+            }
             for (const observer of this.#transports.values()) {
               observer.observeAcquiredReturn?.(returnPair, acquisition);
             }
@@ -455,6 +584,9 @@ export class BrowserCommonCampaignHost {
 
       if (!dispatch.accepted && !returnCommitted) {
         this.#campaign.cancel(active.sessionId);
+        if (this.#pendingPhysicalReturn === pendingPhysicalReturn) {
+          this.#pendingPhysicalReturn = null;
+        }
       }
       return {
         status: 'action',
@@ -465,6 +597,199 @@ export class BrowserCommonCampaignHost {
       };
     } catch (error) {
       if (!returnCommitted) this.#campaign.cancel(active.sessionId);
+      if (this.#pendingPhysicalReturn === pendingPhysicalReturn) {
+        this.#pendingPhysicalReturn = null;
+      }
+      throw error;
+    }
+  }
+
+  snapshot(): BrowserCampaignHostCheckpointV1 {
+    const active = this.#active;
+    if (!active) throw new Error('browser campaign host has no active session to checkpoint');
+
+    const pendingCampaign = this.#campaign.pending(active.sessionId);
+    const pendingPhysical = this.#pendingPhysicalReturn;
+    if (pendingPhysical && !pendingPhysical.sent) {
+      throw new Error('browser campaign cannot checkpoint before the physical action is sent');
+    }
+    if (Boolean(pendingCampaign) !== Boolean(pendingPhysical)) {
+      throw new Error('browser campaign pending decision and physical return are inconsistent');
+    }
+    if (pendingCampaign && pendingPhysical) {
+      if (pendingCampaign.needId !== pendingPhysical.preparation.needId
+        || pendingCampaign.ownerId !== pendingPhysical.preparation.ownerId
+        || pendingCampaign.proposalRef !== pendingPhysical.preparation.proposalRef
+        || !sameAction(pendingCampaign.action, pendingPhysical.preparation.action)) {
+        throw new Error('browser campaign pending physical identity changed');
+      }
+    }
+
+    return {
+      version: 1,
+      sessionId: active.sessionId,
+      gameCode: active.gameObservation.gameCode,
+      nextSequence: active.stream.nextSequence,
+      currentGameObservation: cloneGameObservation(active.gameObservation),
+      currentAgentObservation: cloneAgentObservation(active.agentObservation),
+      campaign: this.#checkpoint.snapshot(),
+      pendingPhysicalReturn: pendingPhysical
+        ? {
+            preparation: structuredClone(pendingPhysical.preparation),
+            beforeGameObservation: cloneGameObservation(pendingPhysical.beforeGameObservation),
+            beforeAgentObservation: cloneAgentObservation(pendingPhysical.beforeAgentObservation),
+          }
+        : null,
+    };
+  }
+
+  restore(
+    value: unknown,
+    observation: GameObservation,
+  ): BrowserCampaignHostRestoreResult {
+    if (this.#active) throw new Error('browser campaign restore requires a fresh host');
+    const checkpoint = browserCampaignCheckpoint(value);
+    if (observation.gameCode !== checkpoint.gameCode) {
+      throw new Error('browser campaign checkpoint belongs to another game');
+    }
+    if (checkpoint.currentAgentObservation.sessionId !== checkpoint.sessionId) {
+      throw new Error('browser campaign checkpoint agent observation belongs to another session');
+    }
+    if (checkpoint.nextSequence !== checkpoint.currentAgentObservation.sequence + 1) {
+      throw new Error('browser campaign checkpoint sequence is not contiguous');
+    }
+
+    const storedFromGame = toAgentObservationFromGame(
+      checkpoint.currentGameObservation,
+      checkpoint.sessionId,
+      checkpoint.currentAgentObservation.sequence,
+    );
+    if (!sameAgentObservation(storedFromGame, checkpoint.currentAgentObservation)) {
+      throw new Error('browser campaign checkpoint observation identity is inconsistent');
+    }
+
+    const pendingPhysical = checkpoint.pendingPhysicalReturn;
+    if (pendingPhysical) {
+      if (!sameAgentObservation(
+        pendingPhysical.beforeAgentObservation,
+        checkpoint.currentAgentObservation,
+      )) {
+        throw new Error('browser pending return does not start from the checkpoint observation');
+      }
+      const pendingFromGame = toAgentObservationFromGame(
+        pendingPhysical.beforeGameObservation,
+        checkpoint.sessionId,
+        checkpoint.currentAgentObservation.sequence,
+      );
+      if (!sameAgentObservation(pendingFromGame, checkpoint.currentAgentObservation)) {
+        throw new Error('browser pending return game observation is inconsistent');
+      }
+    }
+
+    const liveAtStoredSequence = toAgentObservationFromGame(
+      observation,
+      checkpoint.sessionId,
+      checkpoint.currentAgentObservation.sequence,
+    );
+    const unchanged = sameAgentObservation(
+      liveAtStoredSequence,
+      checkpoint.currentAgentObservation,
+    );
+    if (!pendingPhysical && !unchanged) {
+      throw new Error('browser campaign checkpoint does not match the current public observation');
+    }
+
+    const before = this.#checkpoint.snapshot();
+    try {
+      this.#checkpoint.restore(checkpoint.campaign);
+      const stream = new BrowserAgentObservationStream({
+        sessionId: checkpoint.sessionId,
+        gameCode: checkpoint.gameCode,
+        initialSequence: checkpoint.nextSequence,
+      });
+      this.#active = {
+        sessionId: checkpoint.sessionId,
+        stream,
+        gameObservation: unchanged
+          ? observation
+          : cloneGameObservation(pendingPhysical!.beforeGameObservation),
+        agentObservation: cloneAgentObservation(checkpoint.currentAgentObservation),
+      };
+
+      const restoredPending = this.#campaign.pending(checkpoint.sessionId);
+      if (Boolean(restoredPending) !== Boolean(pendingPhysical)) {
+        throw new Error('restored browser campaign pending state is inconsistent');
+      }
+      if (restoredPending && pendingPhysical) {
+        if (restoredPending.needId !== pendingPhysical.preparation.needId
+          || restoredPending.ownerId !== pendingPhysical.preparation.ownerId
+          || restoredPending.proposalRef !== pendingPhysical.preparation.proposalRef
+          || !sameAction(restoredPending.action, pendingPhysical.preparation.action)) {
+          throw new Error('restored browser campaign pending identity changed');
+        }
+      }
+
+      if (!pendingPhysical) {
+        return {
+          status: 'restored',
+          sessionId: checkpoint.sessionId,
+          acquisition: null,
+          returnedObservation: cloneAgentObservation(checkpoint.currentAgentObservation),
+        };
+      }
+
+      if (unchanged) {
+        this.#pendingPhysicalReturn = {
+          preparation: structuredClone(pendingPhysical.preparation),
+          beforeGameObservation: cloneGameObservation(pendingPhysical.beforeGameObservation),
+          beforeAgentObservation: cloneAgentObservation(pendingPhysical.beforeAgentObservation),
+          sent: true,
+        };
+        return {
+          status: 'pending-return-waiting',
+          sessionId: checkpoint.sessionId,
+          acquisition: null,
+          returnedObservation: cloneAgentObservation(checkpoint.currentAgentObservation),
+        };
+      }
+
+      const transport = this.#transports.get(pendingPhysical.preparation.ownerId);
+      if (!transport) {
+        throw new Error(`selected campaign owner ${pendingPhysical.preparation.ownerId} has no browser transport`);
+      }
+      const converted = stream.next(observation);
+      const returnPair: BrowserCampaignReturnPair = {
+        sessionId: checkpoint.sessionId,
+        preparation: pendingPhysical.preparation,
+        beforeGameObservation: pendingPhysical.beforeGameObservation,
+        beforeAgentObservation: pendingPhysical.beforeAgentObservation,
+        afterGameObservation: observation,
+        afterAgentObservation: converted,
+      };
+      const eventRef = this.#eventRef(returnPair);
+      nonEmpty(eventRef, 'browser campaign restored return event reference');
+      const acquisition = this.#campaign.acquire({
+        sessionId: checkpoint.sessionId,
+        needId: pendingPhysical.preparation.needId,
+        eventRef,
+        payload: transport.returnPayload(returnPair),
+      });
+      this.#pendingPhysicalReturn = null;
+      this.#active.gameObservation = observation;
+      this.#active.agentObservation = converted;
+      for (const observer of this.#transports.values()) {
+        observer.observeAcquiredReturn?.(returnPair, acquisition);
+      }
+      return {
+        status: 'pending-return-acquired',
+        sessionId: checkpoint.sessionId,
+        acquisition,
+        returnedObservation: cloneAgentObservation(converted),
+      };
+    } catch (error) {
+      this.#active = null;
+      this.#pendingPhysicalReturn = null;
+      this.#checkpoint.restore(before);
       throw error;
     }
   }
@@ -472,6 +797,7 @@ export class BrowserCommonCampaignHost {
   cancel(): boolean {
     const active = this.#active;
     if (!active) return false;
+    this.#pendingPhysicalReturn = null;
     return this.#campaign.cancel(active.sessionId);
   }
 
