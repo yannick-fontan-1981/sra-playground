@@ -165,6 +165,10 @@ function toward(point: readonly [number, number], target: readonly [number, numb
   return (point[0] - target[0]) ** 2 + (point[1] - target[1]) ** 2;
 }
 
+function minOr(values: readonly number[], fallback: number): number {
+  return values.length ? Math.min(...values) : fallback;
+}
+
 interface Component {
   color: number;
   bbox: readonly [number, number, number, number];
@@ -443,8 +447,8 @@ export class FieldStock {
         .sort((a, b) => {
           const aa = bodyAnchor(a.body);
           const ba = bodyAnchor(b.body);
-          const ad = aa ? Math.min(...free.map(zone => toward(aa, this.zones[zone]!.point)), 0) : Number.POSITIVE_INFINITY;
-          const bd = ba ? Math.min(...free.map(zone => toward(ba, this.zones[zone]!.point)), 0) : Number.POSITIVE_INFINITY;
+          const ad = aa ? minOr(free.map(zone => toward(aa, this.zones[zone]!.point)), 0) : Number.POSITIVE_INFINITY;
+          const bd = ba ? minOr(free.map(zone => toward(ba, this.zones[zone]!.point)), 0) : Number.POSITIVE_INFINITY;
           return ad - bd || a.index - b.index;
         });
       for (const { index } of options.slice(0, count)) {
@@ -489,13 +493,13 @@ export class FieldStock {
     let chosenPurpose = purpose;
     if (!useful.length) {
       const others = bodies.filter((_, bodyIndex) => bodyIndex !== index);
-      const separation = Math.min(...others.map(other => bodyDistanceSquared(position, other)), 0);
+      const separation = minOr(others.map(other => bodyDistanceSquared(position, other)), 0);
       useful = points.filter(point =>
-        Math.min(...others.map(other => bodyDistanceSquared(point, other)), 0) > separation);
+        minOr(others.map(other => bodyDistanceSquared(point, other)), 0) > separation);
       if (!useful.length) return null;
       useful.sort((a, b) => {
-        const as = Math.min(...others.map(other => bodyDistanceSquared(a, other)), 0);
-        const bs = Math.min(...others.map(other => bodyDistanceSquared(b, other)), 0);
+        const as = minOr(others.map(other => bodyDistanceSquared(a, other)), 0);
+        const bs = minOr(others.map(other => bodyDistanceSquared(b, other)), 0);
         return bs - as || toward(a, target) - toward(b, target) || a[0] - b[0] || a[1] - b[1];
       });
       chosenPurpose = 'Separate one retained material occurrence to make a later access possible.';
