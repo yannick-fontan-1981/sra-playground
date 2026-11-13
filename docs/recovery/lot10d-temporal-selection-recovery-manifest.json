@@ -61,20 +61,53 @@
     "src/logos-engine/v6-temporal-decision-receipt.ts",
     "tests/v6-temporal-decision-receipt.test.ts",
     "docs/recovery/lot10d-temporal-decision-receipt.md",
+    "src/logos-engine/v6-temporal-selection-bridge.ts",
+    "tests/v6-temporal-selection-bridge.test.ts",
+    "docs/recovery/lot10d-temporal-trace-bridge.md",
     ".github/workflows/lot10d-temporal-recovery.yml"
   ],
+  "affected_shared_files": [
+    "src/logos-engine/v6-operation-trace.ts",
+    "tests/v6-operation-trace.test.ts"
+  ],
   "functional_qualification": {
-    "tests_passed": 52,
+    "tests_passed": 86,
     "tests_failed": 0,
-    "latest_ci_run_id": 43337775418,
-    "latest_ci_head": "dc40029d8fa846295424ba2695e4a3e274abea27",
+    "latest_ci_run_id": 43340758482,
+    "latest_ci_head": "1033edbb1ba23a75106e34bb5159b7f089c6f46d",
     "latest_ci_conclusion": "success",
-    "source_typecheck": "passed_strict_for_6_temporal_sources",
-    "status": "source_drm_decision_receipt_and_adapter_qualified",
+    "source_typecheck": "passed_strict_for_trace_and_7_temporal_sources",
+    "status": "traced_temporal_bridge_and_affected_v6_regressions_qualified",
     "historical_selector_reconstructed": false,
     "historical_state_machine_reconstructed": false
   },
-  "next_step": "bridge the verified decision receipt and minimal temporal state into the existing Logos V6 trace/consumption layer without ACT release",
+  "qualification_history": [
+    {
+      "run_id": 43340553068,
+      "head": "2a3d2af75984b2803831d6202c3d0f58d38a1ac8",
+      "tests_passed": 63,
+      "tests_failed": 0,
+      "typecheck": "failed_union_narrowing",
+      "qualifying": false
+    },
+    {
+      "run_id": 43340660719,
+      "head": "d9ce6406379cab1e1ed024d8053392471fc10763",
+      "tests_passed": 63,
+      "tests_failed": 0,
+      "typecheck": "passed",
+      "qualifying": true
+    },
+    {
+      "run_id": 43340758482,
+      "head": "1033edbb1ba23a75106e34bb5159b7f089c6f46d",
+      "tests_passed": 86,
+      "tests_failed": 0,
+      "typecheck": "passed",
+      "qualifying": true
+    }
+  ],
+  "next_step": "inspect the current canonical reconstruction branch for newly restored runtime owners, then connect the traced bridge only where identity, restoration and call position are justified",
   "working_branch": "recovery/lot10d-temporal-selection-restart2-20261112",
   "previous_recovery_branch": "recovery/lot10d-temporal-selection-restart-20261112"
 }
