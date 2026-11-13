@@ -5,6 +5,7 @@ on:
     branches:
       - recovery/site109-reconstruction-20261112
       - 'recovery/v6-current-reconstruction-registry-*'
+      - 'recovery/v6-current-registry-*'
     paths:
       - docs/migration/v6-entry-point-progress.json
       - docs/migration/v6-current-registry/**
