@@ -1,6 +1,6 @@
 name: Apply SIC v0.3 document
 
-# This second commit triggers the workflow after GitHub has registered it.
+# The payload chunks have been verified against the local Git blob identities.
 on:
   push:
     branches:
