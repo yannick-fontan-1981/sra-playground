@@ -1,18 +1,29 @@
 {
   "benchmark_contract": {
     "cross_game_compensation_allowed": false,
-    "games": ["STCK", "SMLP"],
-    "global_threshold_percent": 10.0,
+    "games": [
+      "STCK",
+      "SMLP"
+    ],
+    "global_threshold_percent": 10,
     "measured_actions": 400,
     "measured_sessions": 32,
-    "order": ["A1", "B1", "B2", "A2"],
+    "order": [
+      "A1",
+      "B1",
+      "B2",
+      "A2"
+    ],
     "phase_overrun_allowed_when_same_game_global_passes": true,
     "sample_removal_allowed": false,
     "threshold_is_strict": true,
     "warmup_actions": 24,
     "warmup_sessions": 8
   },
-  "v6_core": { "present": true, "missing": [] },
+  "v6_core": {
+    "present": true,
+    "missing": []
+  },
   "region_reconstructed": true,
   "region_component_path": "src/logos-engine/v6-region-intervention.ts",
   "region_owner_path": "src/logos-engine/v6-region-intervention-owner.ts",
@@ -34,21 +45,47 @@
   "historical_stck_smlp_native_runner_reconstructed": false,
   "official_cost_measurement_executed": false,
   "functional_test_evidence": {
-    "v6_core": { "tests": 27, "passed": 27, "failed": 0 },
-    "region_component_and_owner": { "tests": 19, "passed": 19, "failed": 0 },
-    "neutral_caller_and_region_integration": { "tests": 12, "passed": 12, "failed": 0 },
-    "worker_core_and_shell": { "tests": 14, "passed": 14, "failed": 0 },
-    "public_observation_delta_and_region_evidence": { "tests": 12, "passed": 12, "failed": 0 },
-    "generic_live_campaign_helper": { "tests": 7, "passed": 7, "failed": 0 },
-    "cost_protocol_orchestrator": { "tests": 8, "passed": 8, "failed": 0 },
+    "v6_core": {
+      "tests": 27,
+      "passed": 27,
+      "failed": 0
+    },
+    "region_component_and_owner": {
+      "tests": 19,
+      "passed": 19,
+      "failed": 0
+    },
+    "neutral_caller_and_region_integration": {
+      "tests": 12,
+      "passed": 12,
+      "failed": 0
+    },
+    "worker_core_and_shell": {
+      "tests": 14,
+      "passed": 14,
+      "failed": 0
+    },
+    "public_observation_delta_and_region_evidence": {
+      "tests": 12,
+      "passed": 12,
+      "failed": 0
+    },
+    "generic_live_campaign_helper": {
+      "tests": 7,
+      "passed": 7,
+      "failed": 0
+    },
+    "cost_protocol_orchestrator": {
+      "tests": 8,
+      "passed": 8,
+      "failed": 0
+    },
     "total_unique_targeted_tests": 99,
     "total_unique_targeted_passed": 99,
     "total_unique_targeted_failed": 0
   },
   "official_069_prerequisites": {
-    "missing_files": [
-      "docs/migration/v6-delivery-roadmap.md"
-    ],
+    "missing_files": [],
     "missing_capabilities": [
       "justified methodRef producer/binder for public Region evidence",
       "worker decision port that connects public perception to owner contexts",
@@ -58,5 +95,7 @@
   },
   "ready_for_official_069_benchmark": false,
   "status": "fonctionnellement qualifié pour noyau V6, Region, owner, caller neutre, transport worker, delta public, helper de campagne et protocole ABBA; runner natif STCK/SMLP et performance officielle à confirmer",
-  "note": "The cost harness reconstructs the recovered ABBA protocol and arithmetic only. It does not invent historical CLI options, checkout paths, STCK/SMLP fixtures, or official measurements."
+  "note": "The cost harness and reconstruction roadmap are durable on GitHub. Official STCK/SMLP runSession/corpus and current entry-point registry remain unqualified.",
+  "roadmap_path": "docs/migration/v6-delivery-roadmap.md",
+  "roadmap_reconstructed": true
 }
