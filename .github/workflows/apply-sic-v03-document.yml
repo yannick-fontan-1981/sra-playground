@@ -1,0 +1,76 @@
+name: Apply SIC v0.3 document
+
+on:
+  push:
+    branches:
+      - architecture/v8-human-configurable-intelligence-20261112
+    paths:
+      - .github/workflows/apply-sic-v03-document.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply-document:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: Reconstruct and verify SIC Markdown
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import base64
+          import gzip
+          import hashlib
+
+          root = Path('docs/architecture')
+          chunks = sorted(root.glob('.sic-v03-chunk-*'))
+          if len(chunks) != 7:
+              raise SystemExit(f'expected 7 SIC v0.3 chunks, found {len(chunks)}')
+
+          encoded = ''.join(path.read_text(encoding='utf-8') for path in chunks)
+          data = gzip.decompress(base64.b64decode(encoded))
+          digest = hashlib.sha256(data).hexdigest()
+          expected = '4efde21d92c328e5d0004b5ac833a95a7eb9953ff92a49746871c87c38c1bad4'
+          if digest != expected:
+              raise SystemExit(f'unexpected SIC v0.3 digest: {digest}')
+
+          text = data.decode('utf-8')
+          required = [
+              'version 0.3',
+              '## 8. Cadre de situation et graphes contextuels de résolution',
+              'Need Resolution Graph',
+              "type ApplicabilityStatus = 'applicable' | 'not_applicable' | 'unknown'",
+              'Ambiguous resolver overlap',
+              '### 22.4 Matrice contextuelle de non-régression',
+              '## Phase V8-4 : cadres de situation et graphes de résolution en shadow',
+              '## Phase V8-12 : déclaration V8',
+              '### ADR-9 : cadres de situation et résolution contextuelle',
+              '### ADR-10 : applicabilité, spécialisation et non-régression',
+          ]
+          for marker in required:
+              if marker not in text:
+                  raise SystemExit(f'missing required marker: {marker}')
+
+          if text.count('```') % 2:
+              raise SystemExit('unbalanced Markdown code fences')
+
+          target = root / 'v8-human-configurable-intelligence.md'
+          target.write_bytes(data)
+          print(f'wrote {target} ({len(data)} bytes, sha256={digest})')
+          PY
+
+      - name: Commit SIC v0.3
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/architecture/v8-human-configurable-intelligence.md
+          git commit -m "Add contextual need resolution to SIC architecture"
+          git push origin HEAD:${{ github.ref_name }}
