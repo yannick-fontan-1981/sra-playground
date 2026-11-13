@@ -61,6 +61,8 @@
 .sic-section-header select{min-height:34px;margin-inline-start:5px;border:1px solid var(--control-border);border-radius:4px;background:var(--surface-muted);color:var(--ink);padding:3px 6px}
 .sic-observations ul[data-sic-returns]{max-height:365px;overflow:auto;scroll-padding:6px;padding:4px}
 .sic-effect-row{margin-top:6px;border-top:1px solid var(--line);padding-top:5px}
+.sic-effect-count{display:block;margin-block:3px}
+[data-sic-direction-select]{max-width:100%;min-height:34px;color:var(--ink);background:var(--surface-muted);border:1px solid var(--control-border);border-radius:4px}
 .sic-observations details{margin-top:8px}
 .sic-observations summary{cursor:pointer;color:var(--accent-hover);font-size:13px}
 .sic-observations dl{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;margin:8px 0 0;font-size:12px}

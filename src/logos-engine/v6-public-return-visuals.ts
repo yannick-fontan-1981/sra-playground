@@ -22,14 +22,13 @@ export interface ChangedReturnRegion {
   readonly stride: number;
 }
 
-export function changedReturnRegions(before: NativeRows, after: NativeRows, excluded: NativeBox,
-  window?: NativeBox) {
+export function measureChangedRegions(before: NativeRows, after: NativeRows,
+  excluded: readonly NativeBox[] = [], window?: NativeBox) {
   const width = before[0]!.length, height = before.length;
   const changed = new Set<number>();
-  const [left, top, right, bottom] = excluded;
   const [startX, startY, endX, endY] = window ?? [0, 0, width - 1, height - 1];
   for (let y = startY; y <= endY; y++) for (let x = startX; x <= endX; x++) {
-    if (x >= left && x <= right && y >= top && y <= bottom) continue;
+    if (excluded.some(([left, top, right, bottom]) => x >= left && x <= right && y >= top && y <= bottom)) continue;
     if (before[y]![x] !== after[y]![x]) changed.add(y * width + x);
   }
   const regions: { box: NativeBox; pixels: number }[] = [];
@@ -48,9 +47,18 @@ export function changedReturnRegions(before: NativeRows, after: NativeRows, excl
     }
     regions.push({ box: [minX, minY, maxX, maxY], pixels: pending.length });
   }
-  const samples: ChangedReturnRegion[] = regions.sort((a, b) => b.pixels - a.pixels).slice(0, 3).map(({ box, pixels }) => {
+  return { totalPixels, regions: regions.sort((a, b) => b.pixels - a.pixels) };
+}
+
+export function previewChangedRegions(before: NativeRows, after: NativeRows,
+  measured: ReturnType<typeof measureChangedRegions>) {
+  const samples: ChangedReturnRegion[] = measured.regions.slice(0, 3).map(({ box, pixels }) => {
     const stride = previewStride(box);
     return { box, pixels, stride, before: cropReturn(before, box, stride), after: cropReturn(after, box, stride) };
   });
-  return { totalPixels, regionCount: regions.length, samples };
+  return { totalPixels: measured.totalPixels, regionCount: measured.regions.length, samples };
+}
+
+export function changedReturnRegions(before: NativeRows, after: NativeRows, excluded: NativeBox, window?: NativeBox) {
+  return previewChangedRegions(before, after, measureChangedRegions(before, after, [excluded], window));
 }

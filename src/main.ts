@@ -8,7 +8,7 @@ import { bindSicPerspectives, renderSicPanel } from './sic/panel.ts';
 import { readControlEffectShadow } from './sic/shadow.ts';
 import { observeSpace, type SpaceReturn } from './sic/space-return.ts';
 import { compareStckRank, type StckRankTrial } from './sic/stck-stack.ts';
-import { observeDirectionalReturn, type DirectionalReturn } from './sic/directional-return.ts';
+import { observeDirectionalReturn, samplePublicAnimation, type DirectionalReturn } from './sic/directional-return.ts';
 import { GAME_CATALOG, getGameByCode, type GameCatalogEntry } from './games/catalog';
 
 const websiteRepo = 'https://github.com/yannick-fontan-1981/sra-playground';
@@ -202,8 +202,8 @@ app.innerHTML = `
               <div data-sic-board-preview></div>
             </div>
             <section class="sic-observations" data-sic-latest-direction hidden>
-              <h4>Latest directional return</h4>
-              <p data-sic-direction-summary></p>
+              <h4>Compare command returns</h4>
+              <label>Return <select data-sic-direction-select></select></label>
               <div data-sic-direction-sprites></div>
             </section>
             <section class="sic-observations" aria-labelledby="sic-clicks-title">
@@ -239,6 +239,7 @@ app.innerHTML = `
                 <div data-sic-tower-test-cases></div>
               </section>
               <p data-sic-space-empty>Run Space in STCK to inspect its animation.</p>
+              <div data-sic-generic-animation></div>
               <section class="sic-observations" aria-labelledby="sic-space-info-title" data-sic-space-information hidden>
               <h4 id="sic-space-info-title">Space · Changes during the animation</h4>
               <ul data-sic-space-facts></ul>
@@ -272,15 +273,15 @@ app.innerHTML = `
             </div>
           </div>
           <div id="sic-strategies" role="tabpanel" aria-labelledby="sic-strategies-tab" tabindex="0" hidden>
-            <section class="sic-card"><h4>Ways to solve the situation</h4><p>No strategy has been consolidated by SIC yet.</p></section>
+            <section class="sic-card"><h4>Ways to solve the situation</h4><div data-sic-strategy-body></div></section>
           </div>
           <div id="sic-objectives" role="tabpanel" aria-labelledby="sic-objectives-tab" tabindex="0" hidden>
-            <section class="sic-card"><h4>What to achieve</h4><p>No objective has been registered by SIC yet.</p></section>
+            <section class="sic-card"><h4>What to achieve</h4><div data-sic-objective-body></div></section>
           </div>
           <div id="sic-plans" role="tabpanel" aria-labelledby="sic-plans-tab" tabindex="0" hidden>
             <section class="sic-card"><h4>What to do next</h4>
-              <p>No action plan has been constructed by SIC yet.</p>
               <dl><dt>Next action from V6</dt><dd data-sic-plan-next>No pending action to show.</dd></dl>
+              <div data-sic-plan-body></div>
             </section>
           </div>
         </section>
@@ -327,7 +328,24 @@ let lastSicBoard: GameObservation | null = null;
 let lastSicState: V6AgentSnapshot | null = null;
 let spaceReturns: readonly SpaceReturn[] = [];
 let stckRankReturns: readonly (StckRankTrial & { sessionId: string; sequence: number })[] = [];
-let latestDirection: DirectionalReturn | null = null;
+let agentReturns: readonly DirectionalReturn[] = [];
+let manualReturns: readonly DirectionalReturn[] = [];
+let manualSequence = 0;
+let lastSicReturns: readonly DirectionalReturn[] | null = null;
+let lastSicMode: 'manual' | 'agent' | null = null;
+
+function recordPublicReturn(history: readonly DirectionalReturn[], sessionId: string, sequence: number, command: number,
+  before: GameObservation, next: GameObservation): readonly DirectionalReturn[] {
+  try {
+    const entry = observeDirectionalReturn(
+      { sessionId, sequence, command, fromLevel: before.level, toLevel: next.level, frameCount: Math.max(1, next.frames.length),
+        animation: samplePublicAnimation(next.frames) },
+      before.frame, next.frame, before.level !== next.level || before.state !== next.state, history.at(-1));
+    return [...history.filter(item => item.sessionId === sessionId).slice(-31), entry];
+  } catch {
+    return history;
+  }
+}
 const agent = new BrowserV6Agent({
   getObservation: () => observation,
   canDispatch: () => ready() && mode === 'agent',
@@ -368,14 +386,8 @@ const agent = new BrowserV6Agent({
           // Rank evidence is optional and cannot affect the executed action.
         }
       }
-      if (action.id >= 1 && action.id <= 4 && sessionId && sessionId === agentState?.sessionId) {
-        try {
-          latestDirection = observeDirectionalReturn(
-            { sessionId, sequence, command: action.id, fromLevel: before.level, toLevel: next.level },
-            before.frame, next.frame, before.level !== next.level || before.state !== next.state);
-        } catch {
-          latestDirection = null;
-        }
+      if (sessionId && sessionId === agentState?.sessionId) {
+        agentReturns = recordPublicReturn(agentReturns, sessionId, sequence, action.id, before, next);
       }
       return { observation: next, executionMs };
     } catch (error) {
@@ -393,19 +405,23 @@ function updateSicPanel(): void {
     sicRenderPending = false;
     if (sicPanel.hidden || busy || agentState?.busy) return;
     const board = loading || failed ? null : observation;
-    if (board === lastSicBoard && agentState === lastSicState) return;
+    const history = mode === 'agent' ? agentReturns : manualReturns;
+    if (board === lastSicBoard && agentState === lastSicState && history === lastSicReturns && mode === lastSicMode) return;
     lastSicBoard = board;
     lastSicState = agentState;
+    lastSicReturns = history;
+    lastSicMode = mode;
     const state = agentState;
     const visible = <T extends { sessionId: string; sequence: number }>(entries: readonly T[]) =>
       board?.gameCode === 'STCK' && state && state.status !== 'error'
         ? entries.filter(item => item.sessionId === state.sessionId && item.sequence <= state.sequence)
         : [];
-    renderSicPanel(sicPanel, board ? readControlEffectShadow(board, agentState, presentationGeneration) : null,
-      board?.palette ?? fallbackPalette, visible(spaceReturns), visible(stckRankReturns), board?.frame ?? null,
-      Boolean(board && !state?.sessionId && board.level !== 1),
-      board && state?.sessionId && state.status !== 'error' && latestDirection?.sessionId === state.sessionId
-        && latestDirection.sequence <= state.sequence && latestDirection.toLevel === board.level ? latestDirection : null);
+    const returns = !board ? [] : mode === 'manual' ? manualReturns
+      : state?.sessionId && state.status !== 'error' ? agentReturns.filter(item => item.sessionId === state.sessionId
+        && item.sequence <= state.sequence) : [];
+    renderSicPanel(sicPanel, board ? readControlEffectShadow(board, mode === 'agent' ? agentState : null, presentationGeneration) : null,
+      board?.palette ?? fallbackPalette, mode === 'agent' ? visible(spaceReturns) : [], mode === 'agent' ? visible(stckRankReturns) : [],
+      board, mode, Boolean(mode === 'agent' && board && !state?.sessionId && (board.level !== 1 || board.levelsCompleted !== 0)), returns);
   });
 }
 
@@ -555,14 +571,20 @@ function showFailure(error: unknown, generation: number): void {
   updateInterface();
 }
 
-async function run(operation: () => Promise<GameObservation>, announcement = ''): Promise<void> {
+async function run(operation: () => Promise<GameObservation>, announcement = '', command?: number): Promise<void> {
   if (!ready() || mode !== 'manual') return;
+  const before = observation!;
   agent.invalidate('Manual play changed the observation. Start a fresh experiment when ready.');
   const generation = selectionGeneration;
   busy = true;
   updateInterface();
   try {
-    await present(await operation(), generation);
+    const next = await operation();
+    await present(next, generation);
+    if (generation === selectionGeneration && mode === 'manual') {
+      manualReturns = command === undefined ? [] : recordPublicReturn(manualReturns, `manual:${generation}`, ++manualSequence, command, before, next);
+      updateSicPanel();
+    }
     if (generation === selectionGeneration && announcement) element('#game-feedback').textContent = announcement;
   } catch (error) {
     showFailure(error, generation);
@@ -571,7 +593,7 @@ async function run(operation: () => Promise<GameObservation>, announcement = '')
 
 function perform(action: number, data?: { x: number; y: number }): void {
   if (!observation?.availableActionIds.includes(action) || ['WIN', 'LEVEL_COMPLETE', 'GAME_OVER', 'GAMEOVER'].includes(observation.state)) return;
-  void run(() => runtime.action(action, data));
+  void run(() => runtime.action(action, data), '', action);
 }
 function undo(): void {
   if (!observation?.canUndo) return;
@@ -589,7 +611,10 @@ function focusCanvas(): void {
 
 function setMode(next: 'manual' | 'agent', focusTab = false): void {
   modeGeneration += 1;
-  if (mode !== next && next === 'manual') agent.invalidate('Manual control. Start a fresh experiment when ready.');
+  if (mode !== next && next === 'manual') {
+    agent.invalidate('Manual control. Start a fresh experiment when ready.');
+    manualReturns = [];
+  }
   mode = next;
   const manual = next === 'manual';
   const manualTab = element<HTMLButtonElement>('#manual-tab');
@@ -601,7 +626,7 @@ function setMode(next: 'manual' | 'agent', focusTab = false): void {
   element('#manual-panel').hidden = !manual;
   element('#agent-panel').hidden = manual;
   element('.player').classList.toggle('is-agent-mode', !manual);
-  sicPanel.hidden = manual;
+  sicPanel.hidden = false;
   agent.refresh();
   updateInterface();
   if (focusTab) (manual ? manualTab : agentTab).focus();
@@ -613,6 +638,8 @@ async function selectGame(code: string, historyMode: 'push' | 'replace' | 'none'
   const generation = ++selectionGeneration;
   presentationGeneration += 1;
   selectedGame = game;
+  manualReturns = [];
+  manualSequence = 0;
   observation = null;
   busy = true;
   loading = true;

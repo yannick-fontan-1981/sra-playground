@@ -5,8 +5,8 @@ import type { SpaceReturn } from './space-return.ts';
 import type { StckRankTrial } from './stck-stack.ts';
 import stckCardComparisons from './stck-card-comparison.json';
 import stckTowerEffects from './stck-tower-effects.json';
-import { documentedGameModels } from './game-models.ts';
-import type { DirectionalReturn } from './directional-return.ts';
+import { summarizeDirections, type DirectionalReturn } from './directional-return.ts';
+import type { GameObservation } from '../runtime/browser-games.ts';
 import { compareAboveColors, contrastClickContexts, describeClickContext, type ClickEffectCount } from './click-evidence.ts';
 import type { Applicability, ControlEffectResolution } from './know-control-effect.ts';
 import type { ShadowView } from './shadow.ts';
@@ -189,38 +189,27 @@ function openInformation(panel: HTMLElement, subtab: string): void {
   selected.focus();
 }
 
-function renderUnderstoodControls(panel: HTMLElement, stck: boolean): void {
+function renderUnderstoodControls(panel: HTMLElement, groups: ReturnType<typeof summarizeDirections>): void {
   const container = panel.querySelector<HTMLElement>('[data-sic-understood]')!;
-  const key = stck ? 'STCK' : 'other';
-  if (container.dataset.game === key) return;
-  container.dataset.game = key;
   const title = document.createElement('h4');
   title.textContent = 'What these controls do';
   const intro = document.createElement('p');
-  intro.textContent = stck
-    ? 'STCK controls with repeatable evidence. Each result is scoped to the situations tested.'
-    : 'No control has been consolidated for this game yet.';
+  const repeated = groups.filter(group => group.repeated);
+  intro.textContent = repeated.length ? 'Repeated in this session. Object roles and general rules are still open.'
+    : 'No repeated control effect yet. Compare returns from the current session to build evidence.';
   container.replaceChildren(title, intro);
-  if (!stck) return;
-  for (const control of [
-    { label: 'Click a card · Consolidated', target: 'sic-effects',
-      effect: 'Edits the program: removes the selected card, and cards above it shift down. Verified on 9 recorded clicks and 73 controlled clicks.',
-      link: 'See click observations' },
-    { label: 'Space · Consolidated in the tested cases', target: 'sic-animations',
-      effect: 'Runs the program. Controlled trials show movement, attack removing the top card of neighbouring towers, and push depending on the destination.',
-      link: 'See the paired animations' },
-  ]) {
+  for (const group of repeated) {
     const block = document.createElement('div');
     block.className = 'sic-effect-row';
     const label = document.createElement('strong');
-    label.textContent = control.label;
+    label.textContent = `${commands[group.command]} · Repeated translation`;
     const effect = document.createElement('p');
-    effect.textContent = control.effect;
+    effect.textContent = `${group.moved} matching translations of (${group.shift}) px; ${group.stationary} stationary and ${group.unresolved} unresolved.`;
     const link = document.createElement('button');
     link.type = 'button';
     link.className = 'sic-evidence-link';
-    link.textContent = control.link;
-    link.addEventListener('click', () => openInformation(panel, control.target));
+    link.textContent = 'See command comparisons';
+    link.addEventListener('click', () => openInformation(panel, 'sic-effects'));
     block.append(label, effect, link);
     container.append(block);
   }
@@ -455,7 +444,8 @@ function renderSpaceReturns(panel: HTMLElement, returns: readonly SpaceReturn[],
   panel.querySelector<HTMLElement>('[data-sic-space-information]')!.hidden = returns.length === 0;
   const empty = panel.querySelector<HTMLElement>('[data-sic-space-empty]')!;
   empty.hidden = returns.length > 0;
-  empty.textContent = stck ? 'Run the agent until it executes Space to inspect its animation.' : 'No animation analysis is available for this game.';
+  empty.textContent = stck ? 'STCK’s detailed sprite tracking appears after the agent runs Space.' : '';
+  if (!stck) empty.hidden = true;
   const frames = panel.querySelector<HTMLElement>('[data-sic-space-frames]')!;
   const facts = panel.querySelector<HTMLElement>('[data-sic-space-facts]')!;
   frames.replaceChildren();
@@ -641,8 +631,8 @@ function renderClickComparisons(panel: HTMLElement, evidence: ShadowView['clickE
   list.replaceChildren(...rows);
 }
 
-function renderGameInformation(panel: HTMLElement, game: string | undefined, ranks: readonly StckRankTrial[], space: readonly SpaceReturn[]): void {
-  const stck = game === 'STCK';
+function renderGameInformation(panel: HTMLElement, stck: boolean, ranks: readonly StckRankTrial[], view: ShadowView | null,
+  groups: ReturnType<typeof summarizeDirections>, returns: readonly DirectionalReturn[]): void {
   const section = panel.querySelector<HTMLElement>('[data-sic-stack-rank]')!;
   section.hidden = !stck;
   if (stck) {
@@ -657,23 +647,18 @@ function renderGameInformation(panel: HTMLElement, game: string | undefined, ran
       : 'No stack click observed in this session yet.';
   }
   const model = panel.querySelector<HTMLElement>('[data-sic-game-content]')!;
-  const documented = game ? documentedGameModels[game] : undefined;
   const title = document.createElement('h4');
-  title.textContent = documented?.title ?? 'Game model';
+  title.textContent = 'Model under discovery';
   const provenance = document.createElement('p');
-  provenance.textContent = documented ? 'Source: written game description. It is separate from what SIC observes in this session.'
-    : game ? `No written or consolidated game model for ${game} yet. Perceptions shows the public board and available commands.`
-      : 'Load a board to see whether a documented model is available.';
-  const explanation = document.createElement('p');
+  provenance.textContent = 'Built from this session’s public observations.';
   model.replaceChildren(title, provenance);
-  if (!documented) return;
-  explanation.textContent = documented.summary;
-  model.append(explanation);
   const observations = document.createElement('dl');
+  const repeated = groups.filter(group => group.repeated);
   for (const [term, definition] of [
-    ...documented.relations,
-    ['Live observations', `${ranks.length} observed stack clicks and ${space.length} retained Space returns.`],
-    ['Still uncertain', documented.unresolved],
+    ['Observed', view ? `${view.commands.length} available commands on the current board; ${returns.length} recorded returns.` : 'Waiting for a public board.'],
+    ['Repeated', repeated.length ? repeated.map(group => `${commands[group.command]}: ${group.moved} matching translations`).join(' · ')
+      : 'No repeated translation established yet.'],
+    ['Still uncertain', 'What the sprites represent, what blocks a move, and what conditions explain other changes.'],
   ]) {
     const dt = document.createElement('dt'), dd = document.createElement('dd');
     dt.textContent = term!;
@@ -684,28 +669,100 @@ function renderGameInformation(panel: HTMLElement, game: string | undefined, ran
 }
 
 function renderBoardAndDirection(panel: HTMLElement, board: NativeRows | null, palette: readonly string[],
-  needsRestart: boolean, direction: DirectionalReturn | null): void {
+  needsRestart: boolean, returns: readonly DirectionalReturn[]): void {
   panel.querySelector('[data-sic-perception-scope]')!.textContent = needsRestart
-    ? 'This board is visible. To collect agent returns, restart the native agent at level 1.'
+    ? 'To collect agent returns, restart the native agent at level 1. You can inspect manual returns at this level.'
     : board ? 'Public board. Command meanings are verified separately.' : '';
   panel.querySelector('[data-sic-board-preview]')!.replaceChildren(renderFrames([['Settled board', board]], palette));
   const section = panel.querySelector<HTMLElement>('[data-sic-latest-direction]')!;
   const effect = panel.querySelector<HTMLElement>('[data-sic-direction-effect]')!;
-  section.hidden = effect.hidden = !direction;
-  if (!direction) return;
-  const { changes } = direction;
-  const summary = `Action ${direction.sequence} · ${commands[direction.command]} · `
-    + (changes ? `${changes.totalPixels} changed pixels in ${changes.regionCount} regions.`
-      : 'The game crossed a state or level boundary; the frames are not compared.');
-  panel.querySelector('[data-sic-direction-summary]')!.textContent = summary;
-  effect.textContent = summary + ' One return is an observation; it does not establish a reusable control effect.';
-  panel.querySelector('[data-sic-direction-sprites]')!.replaceChildren(...(changes?.samples ?? [])
-    .map((sample, i) => renderFrames([[`Region ${i + 1} before`, sample.before], [`Region ${i + 1} after`, sample.after]], palette)));
+  section.hidden = effect.hidden = returns.length === 0;
+  if (!returns.length) return;
+  const select = panel.querySelector<HTMLSelectElement>('[data-sic-direction-select]')!;
+  const previous = select.value;
+  const wasLatest = select.selectedIndex === 0;
+  const label = (item: DirectionalReturn) => item.translation ? 'Sprite moved'
+    : item.stationary ? 'Sprite stayed in place' : item.changes ? 'Movement unresolved' : 'Boundary';
+  select.replaceChildren(...[...returns].reverse().map(item => new Option(
+    `Level ${item.fromLevel} · Action ${item.sequence} · ${commands[item.command]} · ${label(item)}`, String(item.sequence))));
+  if (!wasLatest && returns.some(item => String(item.sequence) === previous)) select.value = previous;
+  const coordinates = (box: readonly number[]) => `(${box[0]}, ${box[1]})`;
+  const render = () => {
+    const item = returns.find(sample => String(sample.sequence) === select.value)!;
+    const body = panel.querySelector<HTMLElement>('[data-sic-direction-sprites]')!;
+    const summary = document.createElement('p');
+    summary.textContent = item.translation
+      ? `Matching sprite moved: ${coordinates(item.translation.from)} → ${coordinates(item.translation.to)}.`
+      : item.stationary ? `Matching sprite stayed at ${coordinates(item.stationary.box)}. The attempted move had no visible displacement; the reason is unverified.`
+      : item.changes ? 'No unique sprite match. The regions below show what changed.'
+      : 'Level or state transition, or incompatible images. No sprite comparison.';
+    body.replaceChildren(summary);
+    if (item.translation) body.append(renderFrames([
+      [`Before ${coordinates(item.translation.from)}`, item.translation.sprite],
+      [`After ${coordinates(item.translation.to)}`, item.translation.sprite],
+    ], palette));
+    if (item.stationary) body.append(renderFrames([
+      ['Sprite before', item.stationary.sprite], ['Sprite after', item.stationary.sprite], ['Area in requested direction', item.stationary.ahead],
+    ], palette));
+    if (!item.changes) return;
+    const other = document.createElement('p');
+    other.textContent = `${item.translation || item.stationary ? 'Other changes' : 'Visible changes'}: ${item.changes.totalPixels} pixels in ${item.changes.regionCount} regions.`;
+    body.append(other, ...item.changes.samples.map(sample => renderFrames(
+      [[`Before ${coordinates(sample.box)}`, sample.before], [`After ${coordinates(sample.box)}`, sample.after]], palette)));
+  };
+  select.onchange = render;
+  render();
+  effect.replaceChildren(...summarizeDirections(returns).map(group => {
+    const row = document.createElement('span');
+    row.className = 'sic-effect-count';
+    row.textContent = `${commands[group.command]}: ${group.moved} moved · ${group.stationary} stationary · ${group.unresolved} unresolved`;
+    return row;
+  }));
+}
+
+function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null, board: GameObservation | null,
+  mode: 'manual' | 'agent', returns: readonly DirectionalReturn[], groups: ReturnType<typeof summarizeDirections>,
+  palette: readonly string[]): void {
+  const describe = (selector: string, lines: readonly string[]) => {
+    panel.querySelector(selector)!.replaceChildren(...lines.map(text => {
+      const p = document.createElement('p');
+      p.textContent = text;
+      return p;
+    }));
+  };
+  const repeated = groups.filter(group => group.repeated);
+  describe('[data-sic-strategy-body]', [
+    repeated.length ? `Observed patterns: ${repeated.map(group => `${commands[group.command]} (${group.moved} matching translations)`).join(', ')}.`
+      : view?.commands.length ? `Available to explore: ${view.commands.map(id => commands[id]).join(', ')}.` : 'No available command observed.',
+    'No solving strategy established. Compare conditions before generalizing a return.',
+  ]);
+  const progress = board ? `Public progress: ${board.levelsCompleted} completed · current level ${board.level} of ${board.levelCount}.` : 'Waiting for the board.';
+  describe('[data-sic-objective-body]', [progress, board?.state === 'WIN' ? 'The game reports victory.'
+    : board?.state === 'LEVEL_COMPLETE' ? 'The game reports level completion.'
+    : 'The condition that completes this level is still unknown.']);
+  const last = returns.slice(-5);
+  describe('[data-sic-plan-body]', [
+    last.length ? `Recent actions (${mode}): ${last.map(item => commands[item.command]).join(' → ')}.` : 'No action return recorded in this session.',
+    'SIC has not validated a plan.',
+  ]);
+  const animations = returns.filter(item => (item.frameCount ?? 0) > 1);
+  const area = panel.querySelector('[data-sic-generic-animation]')!;
+  if (!animations.length) {
+    describe('[data-sic-generic-animation]', ['No multi-frame return observed in this session.']);
+  } else {
+    area.replaceChildren(...animations.slice(-3).reverse().map(item => {
+      const block = document.createElement('div');
+      const title = document.createElement('p');
+      title.textContent = `Level ${item.fromLevel} · Action ${item.sequence} · ${commands[item.command]} · ${item.frameCount} public frames.`;
+      block.append(title, renderFrames((item.animation ?? []).map(frame => [`Frame ${frame.index}`, frame.rows] as const), palette));
+      return block;
+    }));
+  }
 }
 
 export function renderSicPanel(panel: HTMLElement, view: ShadowView | null, palette: readonly string[],
-  space: readonly SpaceReturn[], ranks: readonly StckRankTrial[], board: NativeRows | null,
-  needsRestart: boolean, direction: DirectionalReturn | null): void {
+  space: readonly SpaceReturn[], ranks: readonly StckRankTrial[], board: GameObservation | null, mode: 'manual' | 'agent',
+  needsRestart: boolean, returns: readonly DirectionalReturn[]): void {
   panel.querySelector<HTMLElement>('[data-sic-context]')!.textContent = view
     ? `${view.gameCode} · Level ${view.frame.scope.level} · Last settled board` : '';
   panel.querySelector<HTMLElement>('[data-sic-summary]')!.textContent = view ? summaries[view.resolution.outcome] : 'Waiting for the board.';
@@ -715,12 +772,17 @@ export function renderSicPanel(panel: HTMLElement, view: ShadowView | null, pale
   panel.querySelector<HTMLElement>('[data-sic-next]')!.textContent = view?.nextAction
     ? actionLabel(view.nextAction) : 'No pending action to show.';
   panel.querySelector<HTMLElement>('[data-sic-plan-next]')!.textContent = panel.querySelector('[data-sic-next]')!.textContent;
+  panel.querySelector<HTMLElement>('[data-sic-returns-empty]')!.textContent = view?.commands.includes(6)
+    ? 'No click return recorded by V6 yet. Perceptions also shows public command returns.'
+    : 'Click is not among the commands available on this board.';
   renderClickReturns(panel, view?.clickEvidence?.returns ?? (view?.clickReturn ? [view.clickReturn] : []), palette);
   renderClickComparisons(panel, view?.clickEvidence ?? null, palette);
   renderSpaceReturns(panel, space, palette, view?.gameCode === 'STCK');
-  renderBoardAndDirection(panel, board, palette, needsRestart, direction);
-  renderGameInformation(panel, view?.gameCode, ranks, space);
-  renderUnderstoodControls(panel, view?.gameCode === 'STCK');
+  const groups = summarizeDirections(returns);
+  renderBoardAndDirection(panel, board?.frame ?? null, palette, needsRestart, returns);
+  renderDiscoveryPerspectives(panel, view, board, mode, returns, groups, palette);
+  renderGameInformation(panel, view?.gameCode === 'STCK', ranks, view, groups, returns);
+  renderUnderstoodControls(panel, groups);
   renderCardComparisons(panel, palette, view?.gameCode === 'STCK');
   renderTowerEffects(panel, palette, view?.gameCode === 'STCK');
   const check = view?.returnCheck;
