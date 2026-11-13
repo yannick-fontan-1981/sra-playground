@@ -1,0 +1,69 @@
+name: OP01-OP31 browser crash resume PR qualification
+
+on:
+  pull_request:
+    branches:
+      - recovery/op01-op31-crash-qualification-base-20261113
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  qualify-crash-resume:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.18.0
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Show browser runtime
+        run: |
+          command -v google-chrome-stable || command -v google-chrome || command -v chromium || command -v chromium-browser
+          (google-chrome-stable --version || google-chrome --version || chromium --version || chromium-browser --version)
+      - name: Apply safe-boundary autosave wiring
+        run: node scripts/apply-op01-op31-browser-crash-autosave.mjs
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Targeted crash-resume tests
+        run: >-
+          node --experimental-transform-types --test
+          tests/v6-browser-durable-autosave.test.ts
+          tests/v6-browser-durable-session.test.ts
+          tests/v6-browser-agent-live-capture.test.ts
+          tests/browser-game-runtime-checkpoint.test.ts
+          tests/main-browser-crash-autosave-integration.test.ts
+          tests/main-browser-durable-session-integration.test.ts
+          tests/op01-op31-browser-crash-resume-contract.test.mjs
+      - name: Production build
+        run: npm run build
+      - name: Real Chrome SIGKILL and Pyodide crash recovery
+        env:
+          OP01_OP31_BROWSER_CRASH_RESUME_REPORT: op01-op31-browser-crash-resume-report.json
+        run: node scripts/qualify-op01-op31-browser-crash-resume.mjs
+      - name: Verify current V6 evidence registry
+        run: node scripts/check-v6-entry-point-progress.mjs
+      - name: Full TypeScript regression
+        run: node --experimental-transform-types --test tests/*.test.ts
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: op01-op31-browser-crash-resume
+          path: op01-op31-browser-crash-resume-report.json
+          if-no-files-found: warn
+      - name: Commit qualified autosave wiring to the PR branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/main.ts
+          git diff --cached --quiet && exit 0
+          git commit -m "Activate crash-safe browser autosave boundaries"
+          git push origin HEAD:${{ github.head_ref }}
