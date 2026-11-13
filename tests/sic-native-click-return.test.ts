@@ -3,6 +3,8 @@ import test from 'node:test';
 import { projectNativeClickReturn } from '../src/logos-engine/v6-native-click-return.ts';
 import { measureNativeObservation } from '../src/logos-engine/v6-native-observer.ts';
 import { readControlEffectShadow } from '../src/sic/shadow.ts';
+import { observeSpace } from '../src/sic/space-return.ts';
+import { changedReturnRegions } from '../src/logos-engine/v6-public-return-visuals.ts';
 import { compareAboveColors, compareClickReturns, contrastClickContexts } from '../src/sic/click-evidence.ts';
 
 async function measure(rows: number[][], revision: number, level = 1, state = 'NOT_FINISHED') {
@@ -13,6 +15,29 @@ async function measure(rows: number[][], revision: number, level = 1, state = 'N
 }
 
 const command = { action_ref: 'ACTION6', data: { x: 1, y: 1 } };
+
+test('other regions exclude the clicked box and retain aligned before and after crops', () => {
+  const before = [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]];
+  const after = [[2, 2, 1, 3], [2, 2, 1, 3], [1, 1, 1, 1]];
+  const changes = changedReturnRegions(before, after, [0, 0, 1, 1]);
+  assert.deepEqual(changes, {
+    totalPixels: 2, regionCount: 1,
+    samples: [{ box: [3, 0, 3, 1], pixels: 2, stride: 1, before: [[1], [1]], after: [[3], [3]] }],
+  });
+});
+
+test('Space retains transient changes and counts every frame even when previews are sampled', () => {
+  const before = [[0, 0]];
+  const frames = Array.from({ length: 13 }, (_, index) => index === 4 ? [[1, 1]] : before);
+  const result = observeSpace({ sessionId: 's', sequence: 3, fromLevel: 1, toLevel: 1 }, before, frames);
+  assert.equal(result.peakChange, 2);
+  assert.equal(result.finalChange, 0);
+  assert.equal(result.frames.length, 13);
+  assert.equal(result.frames[5]?.changedFromPrevious, 2);
+  assert.equal(result.previews.length, 12);
+  assert.equal(result.previews[0]?.index, 1);
+  assert.equal(result.previews.at(-1)?.index, 13);
+});
 const beforeRows = [
   [0, 0, 0, 0],
   [0, 2, 2, 0],

@@ -1,5 +1,6 @@
 import type { MeasuredEntity, MeasuredObservation } from './v6-native-observer.ts';
 import type { NativeBox, NativeCommand, NativePoint, NativeRows } from './v6-native-types.ts';
+import { changedReturnRegions, cropReturn, previewStride } from './v6-public-return-visuals.ts';
 
 interface VisibleRegion {
   readonly ref: string;
@@ -37,6 +38,7 @@ export interface NativeClickReturn {
   readonly boundary: boolean;
   readonly beforeContext?: NativeClickContext;
   readonly preview?: NativeClickPreview;
+  readonly otherChanges?: ReturnType<typeof changedReturnRegions>;
 }
 
 function atPoint(observation: MeasuredObservation, [x, y]: NativePoint): MeasuredEntity | undefined {
@@ -83,19 +85,11 @@ function capturePreview(
   const [left, top, right, bottom] = target.bbox;
   const x0 = Math.max(0, left - 2), y0 = Math.max(0, top - 2);
   const x1 = Math.min(before[y0]!.length - 1, right + 2), y1 = Math.min(before.length - 1, bottom + 2);
-  const stride = Math.max(1, Math.ceil(Math.max(x1 - x0 + 1, y1 - y0 + 1) / 20));
-  function crop(rows: NativeRows): NativeRows {
-    const pixels: number[][] = [];
-    for (let y = y0; y <= y1; y += stride) {
-      const row: number[] = [];
-      for (let x = x0; x <= x1; x += stride) row.push(rows[y]![x]!);
-      pixels.push(row);
-    }
-    return pixels;
-  }
+  const box: NativeBox = [x0, y0, x1, y1];
+  const stride = previewStride(box);
   return {
-    before: crop(before),
-    after: after ? crop(after) : null,
+    before: cropReturn(before, box, stride),
+    after: after ? cropReturn(after, box, stride) : null,
     point: [Math.floor((point[0] - x0) / stride), Math.floor((point[1] - y0) / stride)],
     stride,
   };
@@ -139,6 +133,7 @@ export function projectNativeClickReturn(
     ...(target && beforeRows ? {
       beforeContext: summarizeContext(before, target, beforeRows),
       preview: capturePreview(target, point, beforeRows, boundary ? null : returnedRows),
+      ...(!boundary ? { otherChanges: changedReturnRegions(beforeRows, returnedRows, target.bbox) } : {}),
     } : {}),
   };
 }

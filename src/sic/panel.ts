@@ -1,5 +1,7 @@
 import type { AgentAction } from '../runtime/contracts.ts';
 import type { NativeClickReturn } from '../logos-engine/v6-native-click-return.ts';
+import type { NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { SpaceReturn } from './space-return.ts';
 import { compareAboveColors, contrastClickContexts, describeClickContext, type ClickEffectCount } from './click-evidence.ts';
 import type { Applicability, ControlEffectResolution } from './know-control-effect.ts';
 import type { ShadowView } from './shadow.ts';
@@ -111,12 +113,14 @@ function describeClickReturn(receipt: NativeClickReturn): [string, string] {
     : 'After: the region kept the same visible pixels.'];
 }
 
-function renderClickPreview(receipt: NativeClickReturn, palette: readonly string[]): HTMLElement | null {
-  const preview = receipt.preview;
-  if (!preview) return null;
+function renderFrames(
+  frames: readonly (readonly [string, NativeRows | null])[],
+  palette: readonly string[],
+  point?: NativePoint,
+): HTMLElement {
   const group = document.createElement('div');
   group.className = 'sic-sprites';
-  for (const [label, rows] of [['Before', preview.before], ['After', preview.after]] as const) {
+  for (const [label, rows] of frames) {
     if (!rows?.length) continue;
     const figure = document.createElement('figure');
     const canvas = document.createElement('canvas');
@@ -133,15 +137,85 @@ function renderClickPreview(receipt: NativeClickReturn, palette: readonly string
     const image = document.createElement('div');
     image.className = 'sic-sprite';
     image.setAttribute('role', 'img');
-    image.setAttribute('aria-label', `${label} the click at (${receipt.point.join(', ')})${preview.stride > 1 ? ', sampled crop' : ''}`);
-    const marker = document.createElement('span');
-    marker.style.left = `${(preview.point[0] + 0.5) / canvas.width * 100}%`;
-    marker.style.top = `${(preview.point[1] + 0.5) / canvas.height * 100}%`;
-    image.append(canvas, marker);
+    image.setAttribute('aria-label', label);
+    image.append(canvas);
+    if (point) {
+      const marker = document.createElement('span');
+      marker.style.left = `${(point[0] + 0.5) / canvas.width * 100}%`;
+      marker.style.top = `${(point[1] + 0.5) / canvas.height * 100}%`;
+      image.append(marker);
+    }
     figure.append(image, caption);
     group.append(figure);
   }
   return group;
+}
+
+function renderClickPreview(receipt: NativeClickReturn, palette: readonly string[]): HTMLElement | null {
+  const preview = receipt.preview;
+  if (!preview) return null;
+  const group = renderFrames([['Before', preview.before], ['After', preview.after]], palette, preview.point);
+  const changes = receipt.otherChanges;
+  if (!changes?.regionCount) return group;
+  const details = document.createElement('details');
+  const title = document.createElement('summary');
+  title.textContent = `Other changes in the same return · ${changes.regionCount} ${changes.regionCount === 1 ? 'region' : 'regions'}`;
+  details.append(title);
+  const note = document.createElement('p');
+  note.textContent = `${changes.totalPixels} changed pixels outside the clicked box. The largest ${changes.samples.length} regions are shown. Their link to the click is uncertain.`;
+  details.append(note);
+  for (const sample of changes.samples) {
+    const [x, y] = sample.box;
+    const label = document.createElement('p');
+    label.textContent = `Region at (${x}, ${y}) · ${sample.pixels} changed pixels`;
+    details.append(label, renderFrames([['Before', sample.before], ['After', sample.after]], palette));
+  }
+  const section = document.createElement('div');
+  section.append(group, details);
+  return section;
+}
+
+function renderSpaceReturns(panel: HTMLElement, returns: readonly SpaceReturn[], palette: readonly string[]): void {
+  panel.querySelector<HTMLElement>('[data-sic-space-perceptions]')!.hidden = returns.length === 0;
+  panel.querySelector<HTMLElement>('[data-sic-space-information]')!.hidden = returns.length === 0;
+  const frames = panel.querySelector<HTMLElement>('[data-sic-space-frames]')!;
+  const facts = panel.querySelector<HTMLElement>('[data-sic-space-facts]')!;
+  frames.replaceChildren();
+  facts.replaceChildren();
+  for (const receipt of [...returns].reverse()) {
+    const heading = `Level ${receipt.fromLevel} · Action ${receipt.sequence} · ${receipt.frameCount} ${receipt.frameCount === 1 ? 'frame' : 'frames'}`;
+    const group = document.createElement('details');
+    group.open = receipt === returns.at(-1);
+    const title = document.createElement('summary');
+    title.textContent = heading;
+    group.append(title);
+    if (receipt.previews.length < receipt.frameCount) {
+      const count = document.createElement('p');
+      count.textContent = `Showing ${receipt.previews.length} frames, including the first and last.`;
+      group.append(count);
+    }
+    group.append(renderFrames([
+      ['Before', receipt.before],
+      ...receipt.previews.map(frame => [`Frame ${frame.index}`, frame.rows] as const),
+    ], palette));
+    frames.append(group);
+    const row = document.createElement('li');
+    const label = document.createElement('strong');
+    label.textContent = heading;
+    const summary = document.createElement('p');
+    summary.textContent = `Compared with the board before Space, up to ${receipt.peakChange} pixels changed during the return and ${receipt.finalChange} differed on the last frame.`
+      + (receipt.toLevel !== receipt.fromLevel ? ` The return reached level ${receipt.toLevel}.` : '');
+    row.append(label, summary);
+    const metrics = document.createElement('details');
+    metrics.open = receipt === returns.at(-1);
+    const caption = document.createElement('summary');
+    caption.textContent = 'Pixels changed since the preceding frame';
+    const changes = document.createElement('p');
+    changes.textContent = receipt.frames.map(frame => `Frame ${frame.index}: ${frame.changedFromPrevious}`).join(' · ');
+    metrics.append(caption, changes);
+    row.append(metrics);
+    facts.append(row);
+  }
 }
 
 function renderClickReturns(panel: HTMLElement, returns: readonly NativeClickReturn[], palette: readonly string[]): void {
@@ -298,7 +372,7 @@ function renderClickComparisons(panel: HTMLElement, evidence: ShadowView['clickE
   list.replaceChildren(...rows);
 }
 
-export function renderSicPanel(panel: HTMLElement, view: ShadowView | null, palette: readonly string[]): void {
+export function renderSicPanel(panel: HTMLElement, view: ShadowView | null, palette: readonly string[], space: readonly SpaceReturn[]): void {
   panel.querySelector<HTMLElement>('[data-sic-context]')!.textContent = view
     ? `${view.gameCode} · Level ${view.frame.scope.level} · Last settled board` : '';
   panel.querySelector<HTMLElement>('[data-sic-summary]')!.textContent = view ? summaries[view.resolution.outcome] : 'Waiting for the board.';
@@ -309,6 +383,7 @@ export function renderSicPanel(panel: HTMLElement, view: ShadowView | null, pale
     ? actionLabel(view.nextAction) : 'No pending action to show.';
   renderClickReturns(panel, view?.clickEvidence?.returns ?? (view?.clickReturn ? [view.clickReturn] : []), palette);
   renderClickComparisons(panel, view?.clickEvidence ?? null, palette);
+  renderSpaceReturns(panel, space, palette);
   const check = view?.returnCheck;
   panel.querySelector<HTMLElement>('[data-sic-return]')!.textContent = !check ? 'No checked return for this board.'
     : check.matched === true ? 'The return matched the V6 plan’s expectation.'

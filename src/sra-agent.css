@@ -65,7 +65,8 @@
 .sic-observations dt{color:var(--subtle)}
 .sic-observations dd{margin:0;overflow-wrap:anywhere}
 .sic-context-contrast{border-top:1px solid var(--line);padding-top:8px}
-.sic-sprites{display:flex;align-items:flex-end;gap:12px;margin:8px 0}
+.sic-sprites{display:flex;align-items:flex-end;flex-wrap:wrap;gap:12px;margin:8px 0}
+[data-sic-space-frames] canvas{height:64px}
 .sic-sprites figure{margin:0;text-align:center}
 .sic-sprites figcaption{font-size:11px;color:var(--subtle);margin-top:3px}
 .sic-sprite{position:relative;border:1px solid var(--control-border);width:fit-content}

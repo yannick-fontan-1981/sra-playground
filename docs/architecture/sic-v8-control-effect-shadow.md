@@ -39,4 +39,16 @@ Perceptions montre le recadrage du plateau avant et après chaque clic. Informat
 
 L’avancement global est estimé à environ 12 % sur les 13 phases de la spécification, en leur donnant le même poids. Cette estimation correspond à environ une phase et demie de livrables, principalement la spécification et des parties de l’observation et de la résolution en shadow. Elle ne représente pas une validation des phases entières. Les onglets restants, le registre, l’agenda, les engagements et la boucle active sont encore à construire.
 
+## Intervention visuelle et animation STCK
+
+L’essai `python scripts/check-sic-stck-upper-neighborhood.py` utilise le ZIP livré au navigateur. Il rejoue les commandes publiques jusqu’aux deux états de départ et compare deux copies du même moteur pour chaque clic. Le rendu avant clic échange les palettes `[0, 9]` et `[4]` dans la bande du dessus. Seuls les 16 pixels de cette bande diffèrent. Le rendu normal est rétabli pour comparer les retours complets.
+
+Au niveau 1, les deux copies recolorent de 10 vers 9 en gardant la forme et la position. Au niveau 3, les deux copies produisent le même changement sans conserver la région initiale. À état de jeu fixé, l’apparence de la bande du dessus ne change donc pas le résultat du clic. L’essai ne teste pas un changement de situation jouable et ne valide pas la palette du dessus comme prédicteur.
+
+Le diagnostic interne du moteur, utilisé seulement dans l’essai, identifie un retrait à l’index 0 sur une pile de quatre cartes au niveau 1 et un retrait à l’index 4 sur une pile de cinq cartes au niveau 3. Le moteur affiche les cartes dans l’ordre de la pile. Au niveau 1, la carte suivante occupe la place libérée. Au niveau 3, le retrait de la carte du sommet laisse sa place vide. Le rang dans la pile constitue un meilleur candidat pour une future perception à vérifier sur les seules observations publiques.
+
+Pour un clic, les vignettes montrent la cible et les trois plus grandes régions de pixels modifiés hors de sa boîte. Ces régions sont observées dans le même retour. Leur rôle et leur lien causal restent à établir. Pour Space, le panneau STCK présente les trois derniers retours de la session, avec jusqu’à 12 vignettes par retour, première et dernière images incluses. Informations compte les pixels modifiés sur toutes les images. Les mesures lisent les retours déjà produits par le moteur. La première animation observée dans le navigateur comporte 21 images, avec jusqu’à 391 pixels différents du plateau initial et 335 sur la dernière image.
+
+Estimation après cette étape : environ 13 % de la V8 complète. Le progrès concerne l’observation et la vérification en shadow.
+
 Le résumé natif est construit après la décision, hors de la mesure du temps actif. L’affichage est différé au prochain rendu du navigateur après la fin d’une opération. Les tests couvrent la matrice, la révision, la portée, le fallback, l’ambiguïté, les retours natifs et la parité du transport V6 jusqu’à un retour terminal.

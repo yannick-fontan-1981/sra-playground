@@ -6,6 +6,7 @@ import { AGENT_STATUS } from './runtime/contracts';
 import { BrowserV6Agent, type V6AgentSnapshot } from './runtime/v6-agent.ts';
 import { bindSicPerspectives, renderSicPanel } from './sic/panel.ts';
 import { readControlEffectShadow } from './sic/shadow.ts';
+import { observeSpace, type SpaceReturn } from './sic/space-return.ts';
 import { GAME_CATALOG, getGameByCode, type GameCatalogEntry } from './games/catalog';
 
 const websiteRepo = 'https://github.com/yannick-fontan-1981/sra-playground';
@@ -201,8 +202,16 @@ app.innerHTML = `
               <p data-sic-returns-empty>Run the agent to see its observed clicks.</p>
               <ul data-sic-returns></ul>
             </section>
+            <section class="sic-observations" aria-labelledby="sic-space-title" data-sic-space-perceptions hidden>
+              <h4 id="sic-space-title">Space · Animation frames</h4>
+              <div data-sic-space-frames></div>
+            </section>
           </div>
           <div id="sic-information" role="tabpanel" aria-labelledby="sic-information-tab" tabindex="0" hidden>
+            <section class="sic-observations" aria-labelledby="sic-space-info-title" data-sic-space-information hidden>
+              <h4 id="sic-space-info-title">Space · Changes during the animation</h4>
+              <ul data-sic-space-facts></ul>
+            </section>
             <section class="sic-observations" aria-labelledby="sic-observations-title">
               <h4 id="sic-observations-title">Does the effect repeat?</h4>
               <p data-sic-comparison-summary></p>
@@ -261,6 +270,7 @@ bindSicPerspectives(sicPanel);
 let sicRenderPending = false;
 let lastSicBoard: GameObservation | null = null;
 let lastSicState: V6AgentSnapshot | null = null;
+let spaceReturns: readonly SpaceReturn[] = [];
 const agent = new BrowserV6Agent({
   getObservation: () => observation,
   canDispatch: () => ready() && mode === 'agent',
@@ -269,6 +279,9 @@ const agent = new BrowserV6Agent({
       throw new Error('The game changed before the action could be sent.');
     }
     const generation = selectionGeneration;
+    const before = observation;
+    const sessionId = agentState?.sessionId;
+    const sequence = (agentState?.sequence ?? 0) + 1;
     busy = true;
     updateInterface();
     try {
@@ -278,6 +291,15 @@ const agent = new BrowserV6Agent({
       await present(next, generation);
       if (generation !== selectionGeneration || next.gameCode !== selectedGame.code) {
         throw new Error('The action belongs to an earlier game session.');
+      }
+      if (action.id === 5 && before.gameCode === 'STCK' && sessionId && sessionId === agentState?.sessionId) {
+        try {
+          const entry = observeSpace({ sessionId, sequence, fromLevel: before.level, toLevel: next.level },
+            before.frame, next.frames.length ? next.frames : [next.frame]);
+          spaceReturns = [...spaceReturns.filter(item => item.sessionId === sessionId).slice(-2), entry];
+        } catch {
+          // An unavailable preview cannot affect the executed action or its return.
+        }
       }
       return { observation: next, executionMs };
     } catch (error) {
@@ -298,7 +320,12 @@ function updateSicPanel(): void {
     if (board === lastSicBoard && agentState === lastSicState) return;
     lastSicBoard = board;
     lastSicState = agentState;
-    renderSicPanel(sicPanel, board ? readControlEffectShadow(board, agentState, presentationGeneration) : null, board?.palette ?? fallbackPalette);
+    const state = agentState;
+    const settledSpace = board?.gameCode === 'STCK' && state && state.status !== 'error'
+      ? spaceReturns.filter(item => item.sessionId === state.sessionId && item.sequence <= state.sequence)
+      : [];
+    renderSicPanel(sicPanel, board ? readControlEffectShadow(board, agentState, presentationGeneration) : null,
+      board?.palette ?? fallbackPalette, settledSpace);
   });
 }
 
