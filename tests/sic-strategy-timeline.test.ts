@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import type { DirectionalReturn } from '../src/sic/directional-return.ts';
-import { defaultStrategyRules, matchStrategy, matchesStrategyRule, strategyTimeline } from '../src/sic/strategy-timeline.ts';
+import { defaultStrategyRules, matchStrategy, matchesStrategyRule, strategyClassificationChanges, strategyTimeline } from '../src/sic/strategy-timeline.ts';
 
 function step(sequence: number, planRevision: number, stepIndex: number, matched: boolean | null, action = 'Right'): DirectionalReturn {
   return { sequence, sessionId: 'public', fromLevel: 1, toLevel: 1, command: 4, changes: null, translation: null, stationary: null,
@@ -48,4 +48,22 @@ test('edited conditions reclassify past episodes without changing their native e
   assert.equal(edited[0]?.status, 'contradicted');
   assert.equal(matchesStrategyRule(edited[0]!.facts, defaultStrategyRules[1]!), true);
   assert.equal(matchStrategy(edited[0]!.facts, rules)?.id, 'replan');
+});
+
+test('swapping identically configured rules previews only the episodes whose winner changes', () => {
+  const check = { ...defaultStrategyRules[1]!, when: ['explicitPrediction'], whenAny: [] };
+  const probe = { ...defaultStrategyRules[2]!, when: ['explicitPrediction'] };
+  const withPrediction = step(1, 1, 0, false);
+  const withoutPrediction = step(2, 2, 0, true);
+  const timeline = strategyTimeline([
+    withPrediction,
+    { ...withoutPrediction, decision: { ...withoutPrediction.decision!, steps: [{ action: 'Right', expected: null }] } },
+  ], [check, probe]);
+  const changes = strategyClassificationChanges(timeline, [probe, check]);
+  assert.deepEqual(changes.map(change => [change.episode.first.sequence, change.saved?.id, change.proposed?.id]),
+    [[1, 'check-plan', 'probe']]);
+  assert.equal(changes[0]?.episode.last, withPrediction);
+  assert.equal(timeline[0]?.rule?.id, 'check-plan');
+  assert.equal(timeline[1]?.rule, null);
+  assert.equal(strategyClassificationChanges(timeline, [check, probe]).length, 0);
 });

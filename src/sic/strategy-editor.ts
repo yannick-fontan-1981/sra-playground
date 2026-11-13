@@ -1,5 +1,6 @@
 import type { DirectionalReturn } from './directional-return.ts';
-import { defaultStrategyRules, matchStrategy, matchesStrategyRule, strategyFacts, type StrategyRule, type strategyTimeline } from './strategy-timeline.ts';
+import { defaultStrategyRules, matchStrategy, matchesStrategyRule, strategyClassificationChanges, strategyFacts,
+  type StrategyRule, type strategyTimeline } from './strategy-timeline.ts';
 
 const storageKey = 'sra-playground.sic.strategy-rules.v1';
 const textLimit = 500;
@@ -19,14 +20,23 @@ function readRules(): readonly StrategyRule[] {
   try {
     const saved: unknown = JSON.parse(window.localStorage.getItem(storageKey) ?? 'null');
     if (!Array.isArray(saved)) return defaultStrategyRules;
-    return defaultStrategyRules.map(rule => {
-      const entry = saved.find(item => item?.id === rule.id);
-      if (!entry || typeof entry.need !== 'string' || typeof entry.situation !== 'string'
-          || !Array.isArray(entry.when) || !Array.isArray(entry.whenAny)) return rule;
-      const candidate = { ...rule, need: entry.need, situation: entry.situation, when: entry.when, whenAny: entry.whenAny };
-      if (typeof entry.title === 'string') candidate.title = entry.title;
-      return validRule(candidate) ? candidate : rule;
-    });
+    const remaining = new Map(defaultStrategyRules.map(rule => [rule.id, rule]));
+    const restored: StrategyRule[] = [];
+    for (const entry of saved) {
+      const rule = remaining.get(entry?.id);
+      if (!rule) continue;
+      remaining.delete(rule.id);
+      const candidate = {
+        ...rule,
+        title: typeof entry.title === 'string' ? entry.title : rule.title,
+        need: typeof entry.need === 'string' ? entry.need : rule.need,
+        situation: typeof entry.situation === 'string' ? entry.situation : rule.situation,
+        when: Array.isArray(entry.when) ? entry.when : undefined,
+        whenAny: Array.isArray(entry.whenAny) ? entry.whenAny : undefined,
+      };
+      restored.push(validRule(candidate) ? candidate : rule);
+    }
+    return [...restored, ...remaining.values()];
   } catch {
     return defaultStrategyRules;
   }
@@ -44,17 +54,35 @@ function labeled(label: string, control: HTMLElement): HTMLLabelElement {
 type Timeline = ReturnType<typeof strategyTimeline>;
 type RenderEvidence = (item: DirectionalReturn, caption: string) => readonly HTMLElement[];
 
+function episodeLabel(first: DirectionalReturn, last: DirectionalReturn) {
+  const range = first.sequence === last.sequence ? `action ${first.sequence}` : `actions ${first.sequence}–${last.sequence}`;
+  return `Level ${first.fromLevel} · ${range}`;
+}
+
+function button(label: string): HTMLButtonElement {
+  const element = document.createElement('button');
+  element.type = 'button';
+  element.textContent = label;
+  return element;
+}
+
 /** Keep the editor mounted when game returns redraw the timeline. */
 export class StrategyEditor {
   private rules = readRules();
+  private order = this.rules.map(rule => rule.id);
   private readonly drafts = new Map<string, StrategyRule>();
   private readonly rulePicker = document.createElement('select');
+  private readonly priority = document.createElement('select');
+  private readonly restoreOrder = button('Restore saved order');
   private readonly title = document.createElement('input');
   private readonly need = document.createElement('textarea');
   private readonly situation = document.createElement('textarea');
   private readonly conditionFields = new Map<string, HTMLSelectElement>();
   private readonly preview = document.createElement('div');
   private readonly summary = document.createElement('p');
+  private readonly impactTitle = document.createElement('h5');
+  private readonly impactSummary = document.createElement('p');
+  private readonly impactList = document.createElement('div');
   private readonly feedback = document.createElement('p');
   private readonly save = document.createElement('button');
   private timeline: Timeline = [];
@@ -69,8 +97,22 @@ export class StrategyEditor {
     const form = document.createElement('form');
     const scope = document.createElement('p');
     scope.textContent = 'Rules label the strategy timeline. Changes are saved in this browser.';
-    for (const rule of this.rules) this.rulePicker.add(new Option(rule.title, rule.id));
+    this.showOrder(this.order[0]!);
     this.rulePicker.addEventListener('change', () => this.loadDraft());
+    this.priority.addEventListener('change', () => {
+      const selected = this.rulePicker.value;
+      this.order = this.order.filter(id => id !== selected);
+      this.order.splice(Number(this.priority.value), 0, selected);
+      this.showOrder(selected);
+      this.feedback.textContent = '';
+      this.showPreview();
+    });
+    this.restoreOrder.addEventListener('click', () => {
+      this.order = this.rules.map(rule => rule.id);
+      this.showOrder(this.rulePicker.value);
+      this.feedback.textContent = '';
+      this.showPreview();
+    });
     this.title.required = true;
     this.title.maxLength = 120;
     for (const input of [this.need, this.situation]) {
@@ -95,21 +137,22 @@ export class StrategyEditor {
     const actions = document.createElement('div');
     actions.className = 'sic-strategy-editor-actions';
     this.save.type = 'submit';
-    this.save.textContent = 'Save rule';
-    const reset = document.createElement('button');
-    reset.type = 'button';
-    reset.textContent = 'Load defaults';
+    this.save.textContent = 'Save changes';
+    const reset = button('Load rule defaults');
     reset.addEventListener('click', () => {
       const rule = defaultStrategyRules.find(item => item.id === this.rulePicker.value)!;
       this.drafts.set(rule.id, rule);
       this.loadDraft();
     });
-    actions.append(this.save, reset);
+    actions.append(this.save, reset, this.restoreOrder);
     this.feedback.setAttribute('role', 'status');
-    form.append(scope, labeled('Strategy rule', this.rulePicker), labeled('Rule name', this.title), labeled('Need', this.need),
+    const priorityHint = document.createElement('p');
+    priorityHint.textContent = 'The first matching rule labels each episode. Position 1 has highest priority.';
+    form.append(scope, labeled('Strategy rule', this.rulePicker), labeled('Priority position', this.priority),
+      priorityHint, labeled('Rule name', this.title), labeled('Need', this.need),
       labeled('Situation', this.situation), conditions, actions, this.feedback);
     form.addEventListener('input', event => {
-      if (event.target === this.rulePicker) return;
+      if (event.target === this.rulePicker || event.target === this.priority) return;
       const rule = this.selectedRule;
       const when: string[] = [], whenAny: string[] = [];
       for (const [fact, input] of this.conditionFields) {
@@ -117,6 +160,7 @@ export class StrategyEditor {
         if (input.value === 'whenAny') whenAny.push(fact);
       }
       this.drafts.set(rule.id, { ...rule, title: this.title.value, need: this.need.value, situation: this.situation.value, when, whenAny });
+      if (event.target === this.title) this.updateRuleLabel(rule.id, this.title.value);
       this.feedback.textContent = '';
       this.showPreview();
     });
@@ -127,8 +171,11 @@ export class StrategyEditor {
     const previewTitle = document.createElement('h5');
     previewTitle.textContent = 'Matching returns in this session';
     this.summary.setAttribute('aria-live', 'polite');
+    this.impactTitle.textContent = 'Classification changes before saving';
+    this.impactSummary.setAttribute('aria-live', 'polite');
+    this.impactList.className = 'sic-strategy-rule-matches sic-strategy-rule-impact';
     this.preview.className = 'sic-strategy-rule-matches';
-    details.append(heading, form, previewTitle, this.summary, this.preview);
+    details.append(heading, form, this.impactTitle, this.impactSummary, this.impactList, previewTitle, this.summary, this.preview);
     container.append(details);
     details.addEventListener('toggle', () => { if (details.open) this.showPreview(); });
     this.loadDraft();
@@ -147,9 +194,34 @@ export class StrategyEditor {
     return this.rules.find(rule => rule.id === this.rulePicker.value)!;
   }
 
+  private get pendingRules(): StrategyRule[] {
+    const byId = new Map(this.rules.map(rule => [rule.id, this.drafts.get(rule.id) ?? rule]));
+    return this.order.map(id => byId.get(id)!);
+  }
+
+  private get orderChanged(): boolean {
+    return this.order.some((id, index) => id !== this.rules[index]?.id);
+  }
+
+  private showOrder(selected: string): void {
+    const configurations = this.pendingRules;
+    this.rulePicker.replaceChildren(...configurations.map((rule, index) => new Option(`${index + 1}. ${rule.title || 'Unnamed rule'}`, rule.id)));
+    this.rulePicker.value = selected;
+    this.priority.replaceChildren(...configurations.map((_, index) =>
+      new Option(index === 0 ? '1 · Highest' : String(index + 1), String(index))));
+    this.priority.value = String(this.order.indexOf(selected));
+    this.restoreOrder.disabled = !this.orderChanged;
+  }
+
+  private updateRuleLabel(id: string, title: string): void {
+    const index = this.order.indexOf(id);
+    this.rulePicker.options[index]!.text = `${index + 1}. ${title || 'Unnamed rule'}`;
+  }
+
   private loadDraft(): void {
     const rule = this.drafts.get(this.rulePicker.value) ?? this.selectedRule;
     this.title.value = rule.title;
+    this.updateRuleLabel(rule.id, rule.title);
     this.need.value = rule.need;
     this.situation.value = rule.situation;
     for (const [fact, input] of this.conditionFields) {
@@ -160,10 +232,11 @@ export class StrategyEditor {
   }
 
   private saveDraft(): void {
-    const rule = this.drafts.get(this.rulePicker.value);
-    if (!rule || !validRule(rule)) return;
-    const updated = this.rules.map(existing => existing.id === rule.id
-      ? { ...rule, title: rule.title.trim(), need: rule.need.trim(), situation: rule.situation.trim() } : existing);
+    const proposed = this.pendingRules;
+    if ((!this.drafts.size && !this.orderChanged) || proposed.some(rule => !validRule(rule))) return;
+    const updated = proposed.map(rule => ({
+      ...rule, title: rule.title.trim(), need: rule.need.trim(), situation: rule.situation.trim(),
+    }));
     let saved = true;
     try {
       window.localStorage.setItem(storageKey, JSON.stringify(updated));
@@ -171,20 +244,22 @@ export class StrategyEditor {
       saved = false;
     }
     this.rules = updated;
-    this.rulePicker.options[this.rulePicker.selectedIndex]!.text = this.selectedRule.title;
-    this.drafts.delete(rule.id);
+    this.drafts.clear();
+    this.showOrder(this.rulePicker.value);
     this.loadDraft();
     this.onSave();
-    this.feedback.textContent = saved ? 'Rule saved. Timeline updated.' : 'Timeline updated for this page. Browser storage is unavailable.';
+    this.feedback.textContent = saved ? 'Changes saved. Timeline updated.' : 'Timeline updated for this page. Browser storage is unavailable.';
   }
 
   private showPreview(): void {
     const rule = this.drafts.get(this.rulePicker.value) ?? this.selectedRule;
-    const valid = validRule(rule);
-    this.save.disabled = !valid || !this.drafts.has(rule.id);
+    const configurations = this.pendingRules;
+    const invalid = configurations.find(candidate => !validRule(candidate));
+    this.save.disabled = Boolean(invalid) || (!this.drafts.size && !this.orderChanged);
+    this.showImpact(configurations, invalid);
     const expanded = new Set([...this.preview.querySelectorAll<HTMLDetailsElement>('details[open]')].map(item => item.dataset.match));
     this.preview.replaceChildren();
-    if (!valid) {
+    if (!validRule(rule)) {
       this.summary.textContent = 'Enter a name, need and situation, and select at least one condition.';
       return;
     }
@@ -192,22 +267,26 @@ export class StrategyEditor {
       this.summary.textContent = 'Run the agent to preview this rule against observed returns.';
       return;
     }
-    const configurations = this.rules.map(existing => existing.id === rule.id ? rule : existing);
     const matching = this.timeline.filter(episode => matchesStrategyRule(episode.facts, rule));
     const applied = matching.filter(episode => matchStrategy(episode.facts, configurations)?.id === rule.id).length;
-    this.summary.textContent = `${matching.length} of ${this.timeline.length} recorded plan episodes match. Shown in the timeline for ${applied} after rule priority.`;
+    this.summary.textContent = `${matching.length} of ${this.timeline.length} recorded plan episodes match. This rule ranks first for ${applied}.`;
     for (const episode of [...matching].reverse()) {
       const { first, last, previous } = episode;
       const match = document.createElement('details');
       match.dataset.match = `${rule.id}:${first.sessionId}:${first.sequence}`;
       match.open = expanded.has(match.dataset.match);
       const title = document.createElement('summary');
-      const range = first.sequence === last.sequence ? `action ${first.sequence}` : `actions ${first.sequence}–${last.sequence}`;
       const appliedRule = matchStrategy(episode.facts, configurations);
-      title.textContent = `Level ${first.fromLevel} · ${range}${appliedRule?.id !== rule.id ? ` · ${appliedRule?.title} takes priority` : ''}`;
+      title.textContent = episodeLabel(first, last) + (appliedRule?.id !== rule.id ? ` · ${appliedRule?.title} takes priority` : '');
       match.append(title);
       const showEvidence = () => {
         if (!match.open || match.childElementCount > 1) return;
+        const competing = configurations.filter(candidate => matchesStrategyRule(episode.facts, candidate));
+        if (competing.length > 1) {
+          const order = document.createElement('p');
+          order.textContent = `Matching rules in priority order · ${competing.map(candidate => candidate.title).join(' → ')}`;
+          match.append(order);
+        }
         const facts = document.createElement('ul');
         const selectedFacts = [...(rule.when ?? []), ...(rule.whenAny ?? [])];
         for (const [fact, label] of factEntries) {
@@ -232,5 +311,32 @@ export class StrategyEditor {
       this.preview.append(match);
       showEvidence();
     }
+  }
+
+  private showImpact(configurations: readonly StrategyRule[], invalid?: StrategyRule): void {
+    this.impactList.replaceChildren();
+    this.impactTitle.hidden = this.impactSummary.hidden = !this.drafts.size && !this.orderChanged;
+    this.impactSummary.textContent = '';
+    if (this.impactTitle.hidden) return;
+    if (invalid) {
+      this.impactSummary.textContent = `Complete the fields and conditions for ${invalid.title || 'the unnamed rule'} to see the changes.`;
+      return;
+    }
+    if (!this.timeline.length) {
+      this.impactSummary.textContent = 'Run the agent to compare classifications on observed episodes.';
+      return;
+    }
+    const changes = strategyClassificationChanges(this.timeline, configurations);
+    this.impactSummary.textContent = changes.length
+      ? `${changes.length} of ${this.timeline.length} recorded plan episodes would change classification.`
+      : 'No recorded episodes would change classification.';
+    if (!changes.length) return;
+    const list = document.createElement('ol');
+    for (const { episode, saved, proposed } of [...changes].reverse()) {
+      const row = document.createElement('li');
+      row.textContent = `${episodeLabel(episode.first, episode.last)} · ${saved?.title ?? 'Unclassified'} → ${proposed?.title ?? 'Unclassified'}`;
+      list.append(row);
+    }
+    this.impactList.append(list);
   }
 }

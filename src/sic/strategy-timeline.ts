@@ -42,6 +42,13 @@ interface Episode {
   readonly status: 'contradicted' | 'advanced' | 'replaced' | 'confirmed' | 'unverified';
 }
 
+export function strategyClassificationChanges(timeline: readonly Episode[], configurations: readonly StrategyRule[]) {
+  return timeline.flatMap(episode => {
+    const proposed = matchStrategy(episode.facts, configurations);
+    return episode.rule?.id === proposed?.id ? [] : [{ episode, saved: episode.rule, proposed }];
+  });
+}
+
 const contiguous = (a: DirectionalReturn | undefined, b: DirectionalReturn) => a && a.sessionId === b.sessionId
   && a.toLevel === a.fromLevel && a.toLevel === b.fromLevel && a.sequence + 1 === b.sequence && !a.restart;
 const plan = (item: DirectionalReturn | undefined) => item?.decision?.planRevision ?? item?.decision?.proposalRef ?? null;
