@@ -316,3 +316,62 @@ Limites restantes de 5B :
 - le harness officiel STCK/SMLP reste absent.
 
 La prochaine tranche prouvable est `preservation_obligations -> allocations/loci/movement/offer/simulate -> propose`, puis raccord OP18 du bundle produit sans appel artificiel.
+
+
+## 5B — proposition FieldStock et raccord contractuel OP18
+
+Donneur V6 :
+- `common_field_stock.py::allocations`
+- `common_field_stock.py::loci`
+- `common_field_stock.py::movement`
+- `common_field_stock.py::offer`
+- `common_field_stock.py::simulate`
+- `common_field_stock.py::preservation_obligations`
+- `common_field_stock.py::propose`
+
+Port supplémentaire :
+- allocation des occurrences déjà livrées et des occurrences prêtes ;
+- calcul des loci compatibles avec les bornes `lower/upper` acquises ;
+- mouvement vers une zone demandée avec séparation prudente si nécessaire ;
+- proposition de fusion de deux intrants du même type seulement lorsqu'un type supérieur manque ;
+- simulation seulement pour les mouvements connus ou règles suffisamment confirmées ;
+- une réécriture inconnue ferme la proposition après une seule action expérimentale ;
+- obligations de conservation calculées sur les comptes réellement observés ;
+- production du plan `typed_field_stock`, de la composition-question, du binding et du `bundle_template` OP18 du donneur.
+
+Dépendances non inventées :
+- `digest` est injecté ;
+- `ObservedInputDomain.make_locus_witness` est injecté via `makeLocusWitness`;
+- aucune fonction de hash ou de témoin alternative n'est promue comme contrat V6.
+
+Raccord runtime :
+- `ObservedAddressedMaterialRuntime.proposeStock()` n'appelle `FieldStock.propose()` que lorsqu'un stock courant revalidé existe et n'est pas réfuté.
+
+Raccord OP18 :
+- le `bundle_template` produit conserve `operation_key: OP18`, la composition-question, les faits/préconditions, l'évidence, les actions et l'`outcome_guard` du donneur ;
+- un test de branche complète vérifie sa compatibilité avec `validateBundle()` puis `releaseBundle()` de l'autorité native existante ;
+- aucune nouvelle opération ni appel OP18 artificiel n'est ajouté au moteur.
+
+Qualification locale disponible :
+- **20/20 tests ciblés réussis** sur `FieldStock` rétention/guards/record/proposition et runtime ;
+- `tsc --noEmit` réussi ;
+- le mini-checkout local ne contient pas les anciens modules `v6-operations/composition/native-authority`, donc le test d'admission OP18 ajouté à la branche GitHub n'a pas pu être exécuté localement dans cet environnement ;
+- sa structure a été vérifiée contre les contrats existants : OP18 retourne les compositions non observées avec `open_question`, et l'autorité native exige précisément cette composition avant release.
+
+Nouveaux commits GitHub :
+- `2613654f4ec0826224583bb6cbea954d7be429d9` — proposition FieldStock ;
+- `5c47279b9cc8cabbfa1f68fd6242e07e73fda45b` — correction des sémantiques Python `min(..., default=0)` ;
+- `ee709b4cf1600f5810be21aa366861fe6f71a501` — exposition runtime de `proposeStock` ;
+- `dbaaf990df2a8dbeb71db55748024ff1d9ba03b1` — tests proposition et admission OP18 ;
+- `02cff731cd85ddb18231c00d411ead5eaf7a48a3` — assertion OP18 resserrée.
+
+### État fonctionnel 5B après cette tranche
+
+La chaîne prouvable est maintenant :
+`acquisition -> réponse -> conservation -> frontière -> revalidation -> obligations de préservation -> proposition bornée -> guards -> observation/réfutation -> bundle OP18`.
+
+Restent avant clôture complète de 5B :
+- faire exécuter le test OP18 dans un checkout complet contenant le moteur V6 reconstruit ;
+- rebaser proprement sur la branche canonique qui continue d'avancer ;
+- rejouer la régression complète disponible après rebase ;
+- restaurer le harness officiel avant toute qualification performance STCK/SMLP.
