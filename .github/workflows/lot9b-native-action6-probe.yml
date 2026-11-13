@@ -28,16 +28,23 @@ jobs:
             tests/native-loop-region-public-action6-probe.test.mjs \
             tests/native-loop-region-candidate-hook.test.mjs \
             tests/native-loop-public-corpus-runner.test.mjs \
-            tests/native-loop-explicit-runners.test.mjs
+            tests/native-loop-explicit-runners.test.mjs \
+            tests/native-loop-region-benchmark-runners.test.mjs
       - name: Execute real archive probe
         env:
           LOT9B_NATIVE_PROBE_REPORT: lot9b-native-probe-report.json
         run: node scripts/qualify-native-action6-probe.mjs
+      - name: Qualify full Region corpus protocol
+        env:
+          LOT9B_REGION_CORPUS_REPORT: lot9b-native-region-corpus-report.json
+        run: node scripts/qualify-native-region-corpus.mjs
       - name: Diagnose STCK ACTION6 reachability
         run: node scripts/diagnose-stck-action6-reachability.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: lot9b-native-action6-probe
-          path: lot9b-native-probe-report.json
+          path: |
+            lot9b-native-probe-report.json
+            lot9b-native-region-corpus-report.json
           if-no-files-found: warn
