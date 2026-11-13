@@ -164,6 +164,54 @@
       "limitations": [
         "This proves canonical product wiring, not a solved-game score or historical Site identity."
       ]
+    },
+    {
+      "id": "RC048",
+      "name": "Atomic common-campaign checkpoint coordinator",
+      "category": "runtime-product",
+      "activation": "shared-runtime",
+      "implementationPaths": [
+        "src/logos-engine/v6-common-campaign-checkpoint.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/v6-common-campaign-session-continuity.test.ts",
+        "docs/recovery/op01-op31-session-continuity-core-20261113.md"
+      ],
+      "limitations": [
+        "The coordinator is qualified as a core boundary; browser host/controller lifecycle wiring remains open."
+      ]
+    },
+    {
+      "id": "RC049",
+      "name": "Exact FieldStock and addressed-retention snapshot codec",
+      "category": "runtime-product",
+      "activation": "shared-runtime",
+      "implementationPaths": [
+        "src/logos-engine/field-stock-snapshot.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/v6-common-campaign-session-continuity.test.ts",
+        "docs/recovery/op01-op31-session-continuity-core-20261113.md"
+      ],
+      "limitations": [
+        "The codec preserves model, prior, stock, Map, Set and proof state; it does not itself own browser activation policy."
+      ]
+    },
+    {
+      "id": "RC050",
+      "name": "Observed addressed-material checkpoint participant",
+      "category": "runtime-product",
+      "activation": "product-runtime",
+      "implementationPaths": [
+        "src/runtime/observed-addressed-material-checkpoint.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/v6-common-campaign-session-continuity.test.ts",
+        "docs/recovery/op01-op31-session-continuity-core-20261113.md"
+      ],
+      "limitations": [
+        "The participant is qualified for atomic capture and rollback; reactivation through the browser controller remains open."
+      ]
     }
   ]
 }
