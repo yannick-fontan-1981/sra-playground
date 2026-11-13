@@ -33,6 +33,7 @@ export function createPublicCorpusSessionRunner({
   seed = NATIVE_PUBLIC_ACTION_CORPUS_V1.seed,
   createSession,
   beforeAction,
+  afterAction,
 }) {
   nonEmpty(variant, 'variant');
   nonEmpty(game, 'game');
@@ -41,6 +42,9 @@ export function createPublicCorpusSessionRunner({
   if (typeof createSession !== 'function') throw new TypeError('createSession must be a function');
   if (beforeAction !== undefined && typeof beforeAction !== 'function') {
     throw new TypeError('beforeAction must be a function when provided');
+  }
+  if (afterAction !== undefined && typeof afterAction !== 'function') {
+    throw new TypeError('afterAction must be a function when provided');
   }
 
   return async descriptor => {
@@ -87,9 +91,23 @@ export function createPublicCorpusSessionRunner({
         candidateHookMs += performance.now() - hookStarted;
       }
 
+      const beforeObservation = structuredClone(observation);
       const actionStarted = performance.now();
       observation = await session.action(structuredClone(action));
       gameActionMs += performance.now() - actionStarted;
+
+      if (afterAction) {
+        const hookStarted = performance.now();
+        await afterAction({
+          index,
+          action: structuredClone(action),
+          beforeObservation,
+          observation: structuredClone(observation),
+          descriptor: structuredClone(descriptor),
+        });
+        candidateHookMs += performance.now() - hookStarted;
+      }
+
       actions.push(structuredClone(action));
     }
 

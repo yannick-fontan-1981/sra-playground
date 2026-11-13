@@ -190,6 +190,7 @@ test('B/STCK uses the same native bridge session and calls only the explicit reg
     candidateHook: {
       id: 'region_intervention',
       beforeAction: async event => hooks.push(structuredClone(event)),
+      afterAction: async () => {},
     },
   });
 
@@ -223,6 +224,7 @@ test('B/SMLP uses the identical transport/corpus shape with its own game identit
     candidateHook: {
       id: 'region_intervention',
       beforeAction: async () => { hooks += 1; },
+      afterAction: async () => {},
     },
   });
 
@@ -251,7 +253,7 @@ test('B runners fail closed when the candidate hook is missing or mislabeled', (
     () => createBStckNativeRunner({
       dispatch: async () => observation(),
       sourceRef: 'candidate',
-      candidateHook: { id: 'other', beforeAction() {} },
+      candidateHook: { id: 'other', beforeAction() {}, afterAction() {} },
     }),
     /must be region_intervention/,
   );
@@ -277,6 +279,7 @@ test('native runSession routes descriptors to all four explicit runners without 
   const candidateHook = {
     id: 'region_intervention',
     beforeAction: async () => {},
+    afterAction: async () => {},
   };
   const runSession = createNativeLoopRunSession({
     A: {
@@ -296,4 +299,16 @@ test('native runSession routes descriptors to all four explicit runners without 
 
   const loads = seen.filter(item => item.endsWith(':load'));
   assert.deepEqual(loads, ['A/STCK:load', 'A/SMLP:load', 'B/STCK:load', 'B/SMLP:load']);
+});
+
+
+test('B runner rejects a Region hook without post-action observation support', () => {
+  assert.throws(
+    () => createBStckNativeRunner({
+      dispatch: async () => observation(),
+      sourceRef: 'candidate',
+      candidateHook: { id: 'region_intervention', beforeAction() {} },
+    }),
+    /requires afterAction/,
+  );
 });

@@ -65,7 +65,10 @@ function requireRegionCandidateHook(candidateHook) {
   if (typeof candidateHook.beforeAction !== 'function') {
     throw new TypeError('region_intervention candidate hook requires beforeAction()');
   }
-  return candidateHook.beforeAction;
+  if (typeof candidateHook.afterAction !== 'function') {
+    throw new TypeError('region_intervention candidate hook requires afterAction()');
+  }
+  return candidateHook;
 }
 
 function createCandidateRunner({ dispatch, sourceRef, game, candidateHook }) {
@@ -73,7 +76,7 @@ function createCandidateRunner({ dispatch, sourceRef, game, candidateHook }) {
   if (typeof dispatch !== 'function') {
     throw new TypeError(`B/${game} native runner requires game_bridge dispatch`);
   }
-  const beforeAction = requireRegionCandidateHook(candidateHook);
+  const hook = requireRegionCandidateHook(candidateHook);
   return createPublicCorpusSessionRunner({
     variant: 'B',
     game,
@@ -85,7 +88,8 @@ function createCandidateRunner({ dispatch, sourceRef, game, candidateHook }) {
       seed,
       startLevel,
     }),
-    beforeAction,
+    beforeAction: hook.beforeAction,
+    afterAction: hook.afterAction,
   });
 }
 
