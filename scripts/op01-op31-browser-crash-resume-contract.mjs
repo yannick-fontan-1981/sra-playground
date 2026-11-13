@@ -64,7 +64,20 @@ export function assertOp01Op31BrowserCrashResumeReport(report) {
   assert(second.sessionId === first.sessionId, 'post-crash sessionId changed');
   assert(second.needIdRetained === true, 'post-crash checkpoint lost the correlated needId');
   assert(second.mode === 'manual', 'post-crash fixture did not stop in Manual');
-  assert(second.canvasPresentations === 1, `returned observation was painted ${second.canvasPresentations} times`);
+  assert(second.canvasPresentations === 1, `returned observation had ${second.canvasPresentations} logical presentations`);
+  assert(
+    Number.isInteger(second.expectedReturnedObservationCanvasPaints)
+      && second.expectedReturnedObservationCanvasPaints > 0,
+    'expected returned-observation canvas paint count is missing',
+  );
+  assert(
+    second.returnedObservationCanvasPaints === second.expectedReturnedObservationCanvasPaints,
+    `returned observation painted ${second.returnedObservationCanvasPaints} frames; expected ${second.expectedReturnedObservationCanvasPaints}`,
+  );
+  assert(
+    second.totalCanvasPaints >= second.returnedObservationCanvasPaints,
+    'total canvas paint count is inconsistent',
+  );
   assert(second.extraRequestsAfterSettlement === 0, 'Agent emitted another request after settlement');
   assert(second.extraPresentationsAfterSettlement === 0, 'returned observation was presented again');
 
@@ -107,5 +120,6 @@ export function assertOp01Op31BrowserCrashResumeReport(report) {
     reconstructionRequests: second.reconstructionRequests.length,
     actionsDispatched: second.actionsDispatched,
     canvasPresentations: second.canvasPresentations,
+    returnedObservationCanvasPaints: second.returnedObservationCanvasPaints,
   };
 }
