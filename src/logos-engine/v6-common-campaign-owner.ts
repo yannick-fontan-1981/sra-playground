@@ -18,6 +18,7 @@ import {
   type CallerSelection,
   type CollectedProposal,
   type CommonCallerOwner,
+  type CommonCallerSnapshot,
 } from './v6-neutral-common-caller.ts';
 
 /**
@@ -97,7 +98,7 @@ export interface CommonCampaignOwnerOptions {
   cache?: OperationResultCache;
 }
 
-interface PendingCampaignDecision {
+export interface CommonCampaignPendingSnapshot {
   sessionId: string;
   needId: string;
   selection: CallerSelection;
@@ -106,13 +107,25 @@ interface PendingCampaignDecision {
   action: AgentAction;
 }
 
-interface SettledCampaignDecision {
+export interface CommonCampaignSettledSnapshot {
   sessionId: string;
   needId: string;
   ownerId: string;
   proposalRef: string;
   eventRef: string;
 }
+
+export interface CommonCampaignSnapshotV1 {
+  version: 1;
+  ownerIds: string[];
+  caller: CommonCallerSnapshot;
+  pending: CommonCampaignPendingSnapshot[];
+  settled: CommonCampaignSettledSnapshot[];
+}
+
+interface PendingCampaignDecision extends CommonCampaignPendingSnapshot {}
+
+interface SettledCampaignDecision extends CommonCampaignSettledSnapshot {}
 
 const MAX_PENDING_SESSIONS = 64;
 const MAX_SETTLED_NEEDS = 4096;
@@ -383,6 +396,127 @@ export class CommonCampaignOwner {
 
   get ownerIds(): string[] {
     return this.#caller.ownerIds;
+  }
+
+  snapshot(): CommonCampaignSnapshotV1 {
+    return {
+      version: 1,
+      ownerIds: this.ownerIds,
+      caller: this.#caller.snapshot(),
+      pending: [...this.#pendingBySession.values()].map(item => structuredClone(item)),
+      settled: [...this.#settledByNeed.values()].map(item => structuredClone(item)),
+    };
+  }
+
+  restore(value: unknown): void {
+    const snapshot = record(value, 'common campaign snapshot');
+    if (snapshot.version !== 1) {
+      throw new TypeError('unsupported common campaign snapshot version');
+    }
+    if (!Array.isArray(snapshot.ownerIds)) {
+      throw new TypeError('common campaign snapshot ownerIds must be an array');
+    }
+    const ownerIds = snapshot.ownerIds.map((ownerId, index) => {
+      nonEmpty(ownerId, `common campaign snapshot ownerIds[${index}]`);
+      return ownerId;
+    });
+    const currentOwnerIds = this.ownerIds;
+    if (
+      ownerIds.length !== currentOwnerIds.length
+      || ownerIds.some((ownerId, index) => ownerId !== currentOwnerIds[index])
+    ) {
+      throw new Error('campaign owner set/order mismatch during restore');
+    }
+    if (!Array.isArray(snapshot.pending) || !Array.isArray(snapshot.settled)) {
+      throw new TypeError('common campaign snapshot pending and settled values must be arrays');
+    }
+    if (snapshot.pending.length > MAX_PENDING_SESSIONS) {
+      throw new RangeError('too many pending campaign sessions');
+    }
+    if (snapshot.settled.length > MAX_SETTLED_NEEDS) {
+      throw new RangeError('too many settled campaign needs');
+    }
+
+    const restoredPending = new Map<string, PendingCampaignDecision>();
+    const pendingNeeds = new Set<string>();
+    for (const [index, raw] of snapshot.pending.entries()) {
+      const item = record(raw, `common campaign pending[${index}]`);
+      nonEmpty(item.sessionId, `common campaign pending[${index}].sessionId`);
+      nonEmpty(item.needId, `common campaign pending[${index}].needId`);
+      if (restoredPending.has(item.sessionId)) {
+        throw new Error(`duplicate pending campaign session ${item.sessionId}`);
+      }
+      if (pendingNeeds.has(item.needId)) {
+        throw new Error(`duplicate pending campaign need ${item.needId}`);
+      }
+      const selection = structuredClone(item.selection) as CallerSelection;
+      const selected = structuredClone(item.selected) as CollectedProposal;
+      if (selection.status !== 'selected' || !selection.selected || !Array.isArray(selection.proposals)) {
+        throw new TypeError('pending campaign selection must contain one selected proposal');
+      }
+      nonEmpty(selected.ownerId, 'pending campaign selected ownerId');
+      nonEmpty(selected.proposalRef, 'pending campaign selected proposalRef');
+      nonEmpty(selected.actionRef, 'pending campaign selected actionRef');
+      if (!ownerIds.includes(selected.ownerId)) {
+        throw new Error(`pending campaign owner ${selected.ownerId} is not registered`);
+      }
+      if (
+        selection.selected.ownerId !== selected.ownerId
+        || selection.selected.proposalRef !== selected.proposalRef
+        || selection.selected.actionRef !== selected.actionRef
+      ) {
+        throw new Error('pending campaign selection identity changed');
+      }
+      const payload = campaignPayload(item.payload);
+      if (!isAgentAction(item.action) || !sameAction(item.action, payload.action)) {
+        throw new TypeError('pending campaign action does not match its payload');
+      }
+      if (payload.identity.episodeId !== item.sessionId) {
+        throw new Error('pending campaign payload belongs to another session');
+      }
+      restoredPending.set(item.sessionId, {
+        sessionId: item.sessionId,
+        needId: item.needId,
+        selection,
+        selected,
+        payload: structuredClone(payload),
+        action: structuredClone(item.action),
+      });
+      pendingNeeds.add(item.needId);
+    }
+
+    const restoredSettled = new Map<string, SettledCampaignDecision>();
+    for (const [index, raw] of snapshot.settled.entries()) {
+      const item = record(raw, `common campaign settled[${index}]`);
+      nonEmpty(item.sessionId, `common campaign settled[${index}].sessionId`);
+      nonEmpty(item.needId, `common campaign settled[${index}].needId`);
+      nonEmpty(item.ownerId, `common campaign settled[${index}].ownerId`);
+      nonEmpty(item.proposalRef, `common campaign settled[${index}].proposalRef`);
+      nonEmpty(item.eventRef, `common campaign settled[${index}].eventRef`);
+      if (!ownerIds.includes(item.ownerId)) {
+        throw new Error(`settled campaign owner ${item.ownerId} is not registered`);
+      }
+      if (pendingNeeds.has(item.needId) || restoredSettled.has(item.needId)) {
+        throw new Error(`duplicate campaign need ${item.needId}`);
+      }
+      restoredSettled.set(item.needId, {
+        sessionId: item.sessionId,
+        needId: item.needId,
+        ownerId: item.ownerId,
+        proposalRef: item.proposalRef,
+        eventRef: item.eventRef,
+      });
+    }
+
+    this.#caller.restore(snapshot.caller as CommonCallerSnapshot);
+    this.#pendingBySession.clear();
+    for (const [sessionId, pending] of restoredPending) {
+      this.#pendingBySession.set(sessionId, pending);
+    }
+    this.#settledByNeed.clear();
+    for (const [needId, settled] of restoredSettled) {
+      this.#settledByNeed.set(needId, settled);
+    }
   }
 
   #rememberSettled(settled: SettledCampaignDecision): void {
