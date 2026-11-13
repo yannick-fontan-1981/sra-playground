@@ -51,6 +51,17 @@ export interface BrowserCampaignOwnerTransport {
   ownerId: string;
   context(input: BrowserCampaignObservationPair): unknown;
   returnPayload(input: BrowserCampaignReturnPair): unknown;
+  /**
+   * Observe a selected physical return only after the common campaign has routed
+   * it to the exact owner, and before the product presents that return.
+   *
+   * This hook may update owner-local boundary or retention state. It must not
+   * dispatch another action or gain release authority.
+   */
+  afterAcquire?(
+    input: BrowserCampaignReturnPair,
+    receipt: CampaignReturnReceipt,
+  ): void;
 }
 
 export interface BrowserCampaignHostOptions {
@@ -261,6 +272,7 @@ export class BrowserCommonCampaignHost {
             active.agentObservation = converted;
             returnedObservation = cloneAgentObservation(converted);
             returnCommitted = true;
+            transport.afterAcquire?.(returnPair, acquisition);
             ports.onCampaignAcquired?.(acquisition, returnedObservation);
 
             await ports.present(next, generation);
