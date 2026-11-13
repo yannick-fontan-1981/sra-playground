@@ -4,6 +4,7 @@ import type { GameObservation } from '../src/runtime/browser-games.ts';
 import type { AgentAction } from '../src/runtime/contracts.ts';
 import { BrowserV6Agent, BrowserV6WorkerClient } from '../src/runtime/v6-agent.ts';
 import type { V6AgentSnapshot, V6DispatchResult } from '../src/runtime/v6-agent.ts';
+import { readControlEffectShadow } from '../src/sic/shadow.ts';
 import {
   emptyV6Snapshot, nativeV6Action, sameV6Observation, toV6PublicObservation, v6FrameHash, V6AgentError, V6_REFERENCE_COMMIT,
 } from '../src/runtime/v6-agent-protocol.ts';
@@ -165,6 +166,40 @@ test('coordinate clicks flow intact from the authorized ticket to the real host 
   assert.deepEqual(state.context.actions, [{ id: 6, data: { x: 11, y: 63 } }]);
   assert.equal(state.transport.actions, 1);
   assert.equal(state.agent.snapshot.sequence, 1);
+});
+
+test('reading the SIC shadow leaves V6 commands and acquisition order identical through a terminal return', async () => {
+  async function campaign(shadow: boolean) {
+    const state = harness();
+    state.transport.command = { actionRef: 'ACTION6', data: { x: 11, y: 63 } };
+    state.setDispatch(async action => {
+      state.context.actions.push(action);
+      const count = state.context.actions.length;
+      state.context.current = board(count, count === 2 ? { state: 'WIN', levelsCompleted: 1 } : {});
+      return state.context.current;
+    });
+    const shadowOutcomes: string[] = [];
+    if (shadow) state.setOnState(snapshot => {
+      const view = readControlEffectShadow(state.context.current, snapshot, snapshot.sequence);
+      if (view) shadowOutcomes.push(view.resolution.outcome);
+    });
+    await state.agent.step();
+    await state.agent.run(16);
+    return {
+      actions: state.context.actions,
+      operations: state.transport.operations.map(operation => operation.type === 'advance'
+        ? [operation.type, operation.sequence, operation.ticketId.split(':').at(-1), operation.observation.state]
+        : [operation.type, operation.sequence]),
+      status: state.agent.snapshot.status,
+      shadowOutcomes,
+    };
+  }
+  const { shadowOutcomes, ...observed } = await campaign(true);
+  const { shadowOutcomes: disabled, ...baseline } = await campaign(false);
+  assert.deepEqual(observed, baseline);
+  assert.deepEqual(disabled, []);
+  assert.ok(shadowOutcomes.includes('needs_evidence'));
+  assert.equal(shadowOutcomes.at(-1), 'closed');
 });
 
 test('pause during first planning retains the undelivered command and resumes without reinitializing', async () => {

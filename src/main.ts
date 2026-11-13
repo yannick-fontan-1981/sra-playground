@@ -4,7 +4,8 @@ import { renderSiteHeader } from './site-header';
 import { BrowserGameRuntime, type GameObservation } from './runtime/browser-games';
 import { AGENT_STATUS } from './runtime/contracts';
 import { BrowserV6Agent, type V6AgentSnapshot } from './runtime/v6-agent.ts';
-import { AgentKnowledgePanel } from './agent-knowledge-panel.ts';
+import { renderSicPanel } from './sic/panel.ts';
+import { readControlEffectShadow } from './sic/shadow.ts';
 import { GAME_CATALOG, getGameByCode, type GameCatalogEntry } from './games/catalog';
 
 const websiteRepo = 'https://github.com/yannick-fontan-1981/sra-playground';
@@ -174,17 +175,31 @@ app.innerHTML = `
           </aside>
         </div>
 
-        <details id="agent-inspection" class="agent-inspection" aria-label="Agent reasoning" hidden>
-          <summary class="agent-inspection-toggle">Inspect reasoning <span>Open to display the current plan, trace and memory</span></summary>
-          <div class="agent-inspection-header"><div><p class="eyebrow">LIVE REASONING</p><h3>The current action sequence</h3></div><a class="text-link" href="/reasoning-lab.html">V7 Reasoning Lab ${icon('arrow')}</a></div>
-          <p id="agent-cycle-summary">The engine will read the current visible frame when you start.</p>
-          <p id="agent-status-detail" class="agent-inspection-message"></p>
-          <p id="agent-decision" class="agent-decision" hidden></p>
-          <div id="agent-plan" class="agent-plan"><p>No action sequence selected yet.</p></div>
-          <details id="agent-trace-details"><summary>Inspect the V6 reasoning trace <span id="agent-trace-count"></span></summary><div id="agent-trace" class="agent-trace"><p>No reasoning cycle yet.</p></div></details>
-          <div id="agent-knowledge"></div>
-          <p class="agent-boundary-note">The agent runs entirely in TypeScript, using the common SRC interpreter from V7. Pause preserves the pending action sequence. The complete V6 migration is in progress; verified paths currently include ordered-support transfers and repairs of regular visual fields.</p>
-        </details>
+        <section id="sic-panel" class="sic-panel" aria-labelledby="sic-title" hidden>
+          <header class="sic-header">
+            <div><h3 id="sic-title">SIC · How does this command work?</h3><p data-sic-context></p></div>
+            <span class="sic-mode">Read-only preview</span>
+          </header>
+          <div class="sic-grid">
+            <div class="sic-card">
+              <h4>What the game shows</h4>
+              <dl>
+                <dt>Available commands</dt><dd data-sic-commands>Waiting for the board.</dd>
+                <dt>Next action from V6</dt><dd data-sic-next>No pending action to show.</dd>
+                <dt>Last checked return</dt><dd data-sic-return>No checked return for this board.</dd>
+              </dl>
+            </div>
+            <div class="sic-card sic-question">
+              <h4>Can we verify the effect?</h4>
+              <p class="sic-summary" data-sic-summary>Waiting for the board.</p>
+              <p data-sic-evidence></p>
+            </div>
+          </div>
+          <details class="sic-details" data-sic-details hidden>
+            <summary>Methods and evidence</summary>
+            <ul data-sic-methods></ul>
+          </details>
+        </section>
 
         <p id="game-feedback" class="sr-only" aria-live="polite"></p>
       </article>
@@ -221,10 +236,10 @@ let renderedLevelCount = -1;
 let renderedPalette = '';
 let colors: number[][] = [];
 let agentState: V6AgentSnapshot | null = null;
-let knowledgePanel: AgentKnowledgePanel | null = null;
-const UNRENDERED_PROPOSAL = Symbol('unrendered proposal');
-let renderedProposal: unknown = UNRENDERED_PROPOSAL;
-let renderedTrace: readonly unknown[] | undefined;
+const sicPanel = element<HTMLElement>('#sic-panel');
+let sicRenderPending = false;
+let lastSicBoard: GameObservation | null = null;
+let lastSicState: V6AgentSnapshot | null = null;
 const agent = new BrowserV6Agent({
   getObservation: () => observation,
   canDispatch: () => ready() && mode === 'agent',
@@ -249,23 +264,22 @@ const agent = new BrowserV6Agent({
       throw error;
     }
   },
-  onState: state => { agentState = state; knowledgePanel?.update(state); updateInterface(); },
+  onState: state => { agentState = state; updateInterface(); },
 });
-element<HTMLDetailsElement>('#agent-inspection').addEventListener('toggle', () => {
-  if (element<HTMLDetailsElement>('#agent-inspection').open) {
-    knowledgePanel ??= new AgentKnowledgePanel(element('#agent-knowledge'), agent);
-    knowledgePanel.update(agentState);
-    updateAgentInterface();
-  } else {
-    knowledgePanel?.release();
-    renderedProposal = UNRENDERED_PROPOSAL; renderedTrace = undefined;
-    element('#agent-plan').replaceChildren(); element('#agent-trace').replaceChildren();
-  }
-});
-element<HTMLDetailsElement>('#agent-trace-details').addEventListener('toggle', () => {
-  if (element<HTMLDetailsElement>('#agent-trace-details').open) updateAgentInterface();
-  else { renderedTrace = undefined; element('#agent-trace').replaceChildren(); }
-});
+
+function updateSicPanel(): void {
+  if (sicPanel.hidden || sicRenderPending || busy || agentState?.busy) return;
+  sicRenderPending = true;
+  window.requestAnimationFrame(() => {
+    sicRenderPending = false;
+    if (sicPanel.hidden || busy || agentState?.busy) return;
+    const board = loading || failed ? null : observation;
+    if (board === lastSicBoard && agentState === lastSicState) return;
+    lastSicBoard = board;
+    lastSicState = agentState;
+    renderSicPanel(sicPanel, board ? readControlEffectShadow(board, agentState, presentationGeneration) : null);
+  });
+}
 
 function updateAgentInterface(): void {
   const state = agentState;
@@ -300,40 +314,7 @@ function updateAgentInterface(): void {
   element('#agent-action-count').textContent = String(state?.actionCount ?? 0);
   element('#agent-level-count').textContent = String(state?.sessionId ? state.levelsCompleted : 0);
   element('#agent-prefix-count').textContent = String(state?.cycles ?? 0);
-  // Inspection is opt-in. Closed panels neither stringify retained evidence nor
-  // rebuild the action/trace DOM as the solver advances.
-  if (mode !== 'agent' || !element<HTMLDetailsElement>('#agent-inspection').open) return;
-  element('#agent-status-detail').textContent = state?.message ?? message ?? '';
-  element('#agent-decision').textContent = state?.lastDecision ?? '';
-  element('#agent-decision').hidden = !state?.lastDecision;
-  element('#agent-cycle-summary').textContent = state?.sessionId
-    ? `${state.actionCount} actions · ${state.levelsCompleted} completed levels · ${state.cycles ?? 0} completed plans · ${state.activeSeconds.toFixed(1)} s active solving`
-    : 'The engine will read the current visible frame when you start.';
-  if (renderedProposal !== state?.proposal) {
-  renderedProposal = state?.proposal;
-  const record = (value: unknown): Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value) ? value as Record<string, unknown> : {};
-  const proposal = record(state?.proposal);
-  const question = record(proposal.question);
-  const actions = Array.isArray(proposal.actions) ? proposal.actions.slice(0, 16) : [];
-  const steps = Array.isArray(proposal.steps) ? proposal.steps : [];
-  const why = typeof question.reason === 'string' ? question.reason : '';
-  element('#agent-plan').innerHTML = actions.length
-    ? `<p class="agent-plan-purpose">${escapeHtml(why || String(proposal.kind ?? 'Committed V6 action sequence'))}</p><ol>${actions.map((value, index) => {
-      const command = record(value);
-      const data = record(command.data);
-      const expected = record(steps[index]).expected_after;
-      const label = String(command.action_ref ?? 'Action') + (command.action_ref === 'ACTION6' ? ` (${data.x}, ${data.y})` : '');
-      return `<li><code>${escapeHtml(label)}</code><span>${expected === null || expected === undefined ? 'Effect to observe' : escapeHtml(JSON.stringify(expected))}</span></li>`;
-    }).join('')}</ol><p class="agent-plan-note">Selected by V6 from the current public observations. Each action is checked against its retained conditions before execution.</p>`
-    : '<p>No action sequence selected yet.</p>';
-  }
-  const trace = state?.trace ?? [];
-  element('#agent-trace-count').textContent = trace.length ? `(${trace.length} events)` : '';
-  if (!element<HTMLDetailsElement>('#agent-trace-details').open || renderedTrace === trace) return;
-  renderedTrace = trace;
-  element('#agent-trace').innerHTML = trace.length
-    ? `${trace.length > 64 ? '<p>Showing the last 64 retained execution events.</p>' : ''}<ol>${trace.slice(-64).map(event => `<li><pre>${escapeHtml(JSON.stringify(event, null, 2))}</pre></li>`).join('')}</ol>`
-    : '<p>No reasoning cycle yet.</p>';
+  updateSicPanel();
 }
 
 function paint(frame: readonly (readonly number[])[], palette: readonly string[] = observation?.palette ?? fallbackPalette): void {
@@ -492,8 +473,7 @@ function setMode(next: 'manual' | 'agent', focusTab = false): void {
   element('#manual-panel').hidden = !manual;
   element('#agent-panel').hidden = manual;
   element('.player').classList.toggle('is-agent-mode', !manual);
-  element('#agent-inspection').hidden = manual;
-  if (manual) element<HTMLDetailsElement>('#agent-inspection').open = false;
+  sicPanel.hidden = manual;
   agent.refresh();
   updateInterface();
   if (focusTab) (manual ? manualTab : agentTab).focus();
