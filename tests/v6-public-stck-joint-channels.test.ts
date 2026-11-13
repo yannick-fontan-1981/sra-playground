@@ -27,25 +27,27 @@ function setPixel(frame: Uint8Array, x: number, y: number, value: number): void 
   frame[y * 64 + x] = value;
 }
 
-function stckFrame(options: {
-  shop?: boolean;
-  card?: boolean;
-  cardColor?: number;
-} = {}): Uint8Array {
-  const {
-    shop = true,
-    card = true,
-    cardColor = 9,
-  } = options;
-  const frame = pixels();
-  if (shop) {
-    for (let x = 4; x <= 10; x += 1) {
-      setPixel(frame, x, 55, 3);
-      setPixel(frame, x, 56, 3);
+function fillRect(
+  frame: Uint8Array,
+  x: number,
+  y: number,
+  width: number,
+  height: number,
+  value: number,
+): void {
+  for (let row = y; row < y + height; row += 1) {
+    for (let column = x; column < x + width; column += 1) {
+      setPixel(frame, column, row, value);
     }
   }
-  if (card) {
-    for (let x = 2; x < 8; x += 1) setPixel(frame, x, 52, cardColor);
+}
+
+function stckFrame(cards: Array<{ y: number; height: number; color: number }> = [
+  { y: 49, height: 4, color: 10 },
+]): Uint8Array {
+  const frame = pixels();
+  for (const card of cards) {
+    fillRect(frame, 1, card.y, 8, card.height, card.color);
   }
   return frame;
 }
@@ -74,29 +76,27 @@ function observation(
 
 const signal = new AbortController().signal;
 
-test('public STCK producer selects the lowest visible card while the shop is active', () => {
+test('public STCK producer exposes one unique visible card independently from action availability', () => {
   const candidate = producePublicStckTargetCandidate(observation());
   assert.ok(candidate);
   assert.equal(candidate.targetKind, 'stack_card');
-  assert.deepEqual(candidate.action, { id: 6, data: { x: 4, y: 52 } });
-  assert.match(candidate.targetRef, /^public-stck-target:public-observation:/);
-  assert.match(candidate.shopRef, /^public-stck-shop:public-observation:/);
+  assert.equal(candidate.targetEvidenceRef, 'public-stck-stack-card:10:49-52');
+  assert.deepEqual(candidate.action, { id: 6, data: { x: 4, y: 50 } });
+  assert.match(candidate.targetRef, /^public-stck-unique-card:public-observation:/);
   assert.deepEqual(Object.keys(publicStckAddressedJointContext(observation())).sort(), [
     PUBLIC_STCK_ACTION_AVAILABILITY_CHANNEL_ID,
     PUBLIC_STCK_VISIBLE_TARGET_CHANNEL_ID,
   ]);
+  assert.ok(producePublicStckTargetCandidate(observation(0, stckFrame(), [5])));
 });
 
-test('public STCK producer falls back to the first visible shop segment only when no card remains', () => {
-  const candidate = producePublicStckTargetCandidate(observation(0, stckFrame({ card: false })));
-  assert.ok(candidate);
-  assert.equal(candidate.targetKind, 'shop_button');
-  assert.deepEqual(candidate.action, { id: 6, data: { x: 7, y: 56 } });
-
-  assert.equal(
-    producePublicStckTargetCandidate(observation(0, stckFrame({ shop: false, card: true }))),
-    undefined,
-  );
+test('several STCK cards remain unresolved and no shop fallback is invented', () => {
+  const several = stckFrame([
+    { y: 39, height: 3, color: 9 },
+    { y: 49, height: 4, color: 10 },
+  ]);
+  assert.equal(producePublicStckTargetCandidate(observation(0, several)), undefined);
+  assert.equal(producePublicStckTargetCandidate(observation(0, stckFrame([]))), undefined);
 });
 
 test('STCK availability and visible-target channels contribute distinct evidence to one release contract', () => {
@@ -145,7 +145,7 @@ test('decision port releases STCK ACTION6 only when both public producer context
   both.initialize('lot9c3-stck-public-session', 0);
   assert.deepEqual(both.decide(observation(), 50, signal), {
     id: 6,
-    data: { x: 4, y: 52 },
+    data: { x: 4, y: 50 },
   });
   assert.equal(both.lastPrepare?.status, 'action');
   if (both.lastPrepare?.status === 'action') {
@@ -163,10 +163,10 @@ test('decision port releases STCK ACTION6 only when both public producer context
   assert.equal(targetOnly.jointOwner?.lastAssessment.status, 'incomplete');
 });
 
-test('visible STCK target contribution disappears when current pixels choose another target', () => {
+test('visible STCK target contribution disappears when current pixels prove another card', () => {
   const before = observation();
   const context = publicStckAddressedJointContext(before);
-  const changed = observation(0, stckFrame({ card: false }));
+  const changed = observation(0, stckFrame([{ y: 39, height: 3, color: 9 }]));
   const owner = new JointChannelOwner(createPublicStckAddressedJointChannels());
 
   assert.equal(owner.propose({
@@ -208,9 +208,9 @@ test('selected STCK return is routed once to both concrete public channels', () 
 
   assert.deepEqual(port.decide(observation(), 50, signal), {
     id: 6,
-    data: { x: 4, y: 52 },
+    data: { x: 4, y: 50 },
   });
-  port.observe(observation(1, stckFrame({ card: false })));
+  port.observe(observation(1, stckFrame([])));
   assert.equal(port.lastAcquisition?.routed, true);
   const result = port.lastAcquisition?.result as {
     channels: Array<{ channelId: string; result: { acquired: boolean } }>;
