@@ -1,3 +1,4 @@
+import { PublicSingleActionLogosDecisionPort } from '../logos-engine/v6-public-single-action-port.ts';
 import {
   PROTOCOL_VERSION,
   type AgentObservation,
@@ -5,6 +6,8 @@ import {
   type AgentWorkerResponse,
 } from './contracts.ts';
 import { AgentWorkerCore, type AgentDecisionPort } from './v6-agent-worker-core.ts';
+
+export const AGENT_WORKER_IMPLEMENTATION_REVISION = 'reconstruction-public-single-action-op28';
 
 export interface AgentWorkerScope {
   addEventListener(type: 'message', callback: (event: MessageEvent<unknown>) => void): void;
@@ -71,8 +74,8 @@ function sessionIdFrom(value: unknown): string {
 export function installAgentWorker(
   scope: AgentWorkerScope,
   core: AgentWorkerCore = new AgentWorkerCore(
-    new PendingPerceptionDecisionPort(),
-    { implementationRevision: 'reconstruction-pending-perception' },
+    new PublicSingleActionLogosDecisionPort(),
+    { implementationRevision: AGENT_WORKER_IMPLEMENTATION_REVISION },
   ),
 ): void {
   scope.addEventListener('message', event => {
