@@ -5,10 +5,10 @@
   "historicalRunnerIdentityRecovered": false,
   "historicalCorpusRecovered": false,
   "sourceRefs": {
-    "commonRoot": "756d6dceeac2d2ab985cbe200a6844cbe4ff49d02d75607123668f1670e74a49",
+    "commonRoot": "3935f5106c478715040b5b49e6e8ebdd6e960cd353c2eff733f7399571dc521b",
     "candidateRoot": "b77bf3e8c9e31f4d18ac8a8468a9081dc10788b0c8c317fe7d79adb84e24e32e",
-    "reference": "lot9b-region-v1:A:b3fe042acf851d006b02193446f05111406e4ddaf8332ee83125493936608050",
-    "candidate": "lot9b-region-v1:B:e1a05d106ef3837969fc0502bc6eaf8f09e0a44a65780d0d778da72ae7f85ad5",
+    "reference": "lot9b-region-v1:A:46ce3478dbc07268333a6a2d423489a689cc5ff509abf1e4bf1f948b174b842c",
+    "candidate": "lot9b-region-v1:B:557ca909c4c9b68ec70d2055a02dfb5c27dffcae338f1025e3b53c67937a609f",
     "proof": "docs/recovery/native-loop-source-refs.json"
   },
   "transport": {
@@ -85,7 +85,7 @@
       "game": "STCK",
       "gameId": "stck-c0000001",
       "factory": "createAStckNativeRunner",
-      "sourceRef": "lot9b-region-v1:A:b3fe042acf851d006b02193446f05111406e4ddaf8332ee83125493936608050",
+      "sourceRef": "lot9b-region-v1:A:46ce3478dbc07268333a6a2d423489a689cc5ff509abf1e4bf1f948b174b842c",
       "regionHook": "disabled",
       "seed": 0,
       "startLevel": 1,
@@ -98,7 +98,7 @@
       "game": "SMLP",
       "gameId": "smlp-c3000001",
       "factory": "createASmlpNativeRunner",
-      "sourceRef": "lot9b-region-v1:A:b3fe042acf851d006b02193446f05111406e4ddaf8332ee83125493936608050",
+      "sourceRef": "lot9b-region-v1:A:46ce3478dbc07268333a6a2d423489a689cc5ff509abf1e4bf1f948b174b842c",
       "regionHook": "disabled",
       "seed": 0,
       "startLevel": 1,
@@ -111,7 +111,7 @@
       "game": "STCK",
       "gameId": "stck-c0000001",
       "factory": "createBStckNativeRunner",
-      "sourceRef": "lot9b-region-v1:B:e1a05d106ef3837969fc0502bc6eaf8f09e0a44a65780d0d778da72ae7f85ad5",
+      "sourceRef": "lot9b-region-v1:B:557ca909c4c9b68ec70d2055a02dfb5c27dffcae338f1025e3b53c67937a609f",
       "regionHook": "region_intervention",
       "seed": 0,
       "startLevel": 1,
@@ -124,7 +124,7 @@
       "game": "SMLP",
       "gameId": "smlp-c3000001",
       "factory": "createBSmlpNativeRunner",
-      "sourceRef": "lot9b-region-v1:B:e1a05d106ef3837969fc0502bc6eaf8f09e0a44a65780d0d778da72ae7f85ad5",
+      "sourceRef": "lot9b-region-v1:B:557ca909c4c9b68ec70d2055a02dfb5c27dffcae338f1025e3b53c67937a609f",
       "regionHook": "region_intervention",
       "seed": 0,
       "startLevel": 1,
@@ -153,14 +153,16 @@
       "status": "passed"
     },
     "sourceRefRun": {
-      "runId": 43353057713,
-      "tests": 4,
-      "status": "passed"
+      "runId": 43353935289,
+      "tests": 7,
+      "typecheck": "passed",
+      "sourceRefsComputed": true,
+      "manifestVerification": "pending rerun after stored refs update"
     }
   },
   "officialMeasurement": {
     "executed": false,
     "result": null,
-    "reason": "manifest completed; isolated or explicitly non-isolated official ABBA execution is the next step"
+    "reason": "manifest completed; explicitly non-isolated official ABBA execution is the next step"
   }
 }
