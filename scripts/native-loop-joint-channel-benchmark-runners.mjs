@@ -7,6 +7,9 @@ import { createGameBridgeNativeSession } from './native-loop-game-bridge-session
 import { createPublicCorpusSessionRunner } from './native-loop-public-corpus-runner.mjs';
 import { createNativeLoopRunSession } from './native-loop-session-adapter.mjs';
 
+const NATIVE_BROWSER_TRANSPORT =
+  'BrowserGameRuntime -> game-worker.ts -> Pyodide -> game_bridge.py -> custom-games.zip';
+
 function nonEmpty(value, label) {
   if (typeof value !== 'string' || value.length === 0) {
     throw new TypeError(`${label} must be a non-empty string`);
@@ -23,7 +26,7 @@ function dispatchFor(dispatchByGame, game) {
 }
 
 function createRunner({ variant, game, sourceRef, dispatch, hook }) {
-  return createPublicCorpusSessionRunner({
+  const base = createPublicCorpusSessionRunner({
     variant,
     game,
     sourceRef,
@@ -44,6 +47,24 @@ function createRunner({ variant, game, sourceRef, dispatch, hook }) {
       hookInputMode: hook.hookInputMode,
     } : {}),
   });
+
+  return async descriptor => {
+    const sample = await base(descriptor);
+    const actions = Array.isArray(sample.metadata?.actions)
+      ? sample.metadata.actions
+      : [];
+    return {
+      ...sample,
+      metadata: {
+        ...sample.metadata,
+        runnerKind: 'lot9c3-official-native-joint-channel',
+        startLevel: NATIVE_JOINT_CHANNEL_ACTION6_CORPUS_V1.startLevel,
+        actionsExecuted: actions.length,
+        completedRequestedActions: actions.length === descriptor.actions,
+        transport: NATIVE_BROWSER_TRANSPORT,
+      },
+    };
+  };
 }
 
 /**
