@@ -1199,7 +1199,9 @@ function renderGenericTimeline(panel: HTMLElement, container: Element, selected:
     const action = (item: DirectionalReturn) => item.decision?.steps[0]?.action ?? commands[item.command] ?? 'Action';
     const actions = first.sequence === last.sequence ? String(first.sequence) : `${first.sequence}–${last.sequence}`;
     const operation = compositionOperations.find(item => item.key === first.decision?.operation);
-    const badge = operation ? ` · ${operation.key}` : '';
+    const searchOperation = compositionOperations.find(item => item.key === first.decision?.searchOperation);
+    const operations = [searchOperation?.key, operation?.key].filter(Boolean).join(' → ');
+    const badge = operations ? ` · ${operations}` : '';
     const row = document.createElement('li');
     row.append(strategyJump(section, key(first.sequence), `${actions} · ${statuses[status]}${badge}`));
     list.append(row);
@@ -1209,7 +1211,7 @@ function renderGenericTimeline(panel: HTMLElement, container: Element, selected:
     details.dataset.strategyChoice = key(first.sequence);
     details.open = expanded.get(details.dataset.sicMethod) ?? episode === lastContradiction;
     const method = operation
-      ? `${operation.key} · ${first.decision?.question ? nativeLabel(first.decision.question) : operation.description}`
+      ? `${operations} · ${first.decision?.question ? nativeLabel(first.decision.question) : operation.description}`
       : rule?.title ?? 'Observe an action return';
     title.textContent = `L${first.fromLevel} · ${actions} · ${method} · ${statuses[status]}`;
     details.append(title);
@@ -1221,6 +1223,7 @@ function renderGenericTimeline(panel: HTMLElement, container: Element, selected:
     const factsList: [string, string][] = [];
     if (operation && rule) factsList.push(['SIC strategy rule', rule.title]);
     if (rule) factsList.push(['Need', rule.need], ['Situation', rule.situation]);
+    if (searchOperation) factsList.push(['Access search', `${searchOperation.key} · ${searchOperation.description}`]);
     if (operation) factsList.push(['Native composition operation', `${operation.key} · ${operation.description}`]);
     if (!operation && first.decision?.question) factsList.push(['What the engine is trying', nativeLabel(first.decision.question)]);
     factsList.push(['Plan', planText(first)], ['Return', `${last.sequence} · ${action(last)} · ${statuses[status]}${expected ? ` · Expected: ${expected}` : ''}.`]);
@@ -1274,6 +1277,11 @@ function strategyEvidenceFrames(item: DirectionalReturn, palette: readonly strin
   const subject = item.decision?.sprites.find(sprite => sprite.label === 'Clicked area')
     ?? item.decision?.sprites.find(sprite => sprite.label.startsWith('Controlled footprint'));
   if (subject) frames.push([`${prefix} · ${subject.label} before`, subject.before], [`${prefix} · same area after`, subject.after]);
+  for (const sprite of item.decision?.sprites ?? []) {
+    if (sprite.label === 'Controlled root' || sprite.label.startsWith('Material ')) {
+      frames.push([`${prefix} · ${sprite.label} before`, sprite.before], [`${prefix} · same area after`, sprite.after]);
+    }
+  }
   const destination = item.decision?.sprites.find(sprite => sprite.label === 'Predicted destination');
   if (destination) frames.push([`${prefix} · predicted destination before`, destination.before],
     [`${prefix} · what returned there`, destination.after]);

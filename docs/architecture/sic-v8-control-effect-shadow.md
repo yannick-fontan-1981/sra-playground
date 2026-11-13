@@ -125,4 +125,15 @@ Deux blocages ont été reproduits avec 0.68 dans le navigateur. CASC niveau 1 s
 
 SK48 fournit le premier point de comparaison pour une correction de résolution. Le protocole proposé conserve le parcours public jusqu’à l’action 12, mesure la première divergence autorisée et exige la progression officielle au niveau 2. Il compare ensuite les commandes (coordonnées incluses), les retours stabilisés et les résultats officiels sur AS66, SYME et LKEY. CASC sert de contrôle négatif pour vérifier qu’une correction ciblant une projection contredite ne change pas un arrêt après un retour sans verdict. Ce parcours mesure l’impact d’une future correction ; la pause AS66 ne change pas la sélection des commandes et aucune correction de SK48 ou de CASC n’a été appliquée.
 
+SK48 passe au niveau 2 à l’action 19. Les douze premières commandes et leurs paquets publics concordent avec `6e2f945d`. Le retour 12 conserve l’espacement d’une chaîne de pièces contiguës alors que la projection par pixels prévoyait de le réduire. La récupération exige un témoin lié à la même géométrie et à la même époque. Elle recherche un accès selon une hypothèse de déplacement par cellules entières (OP26) et fait vérifier chaque commande séparément (OP18). Six retours confirment la projection. Le septième fait avancer le jeu. Une seconde contradiction ferme cette branche. La frise montre les deux opérations et les vignettes de la racine et des pièces.
+
+| Comparaison navigateur avant/après | Actions | Niveaux terminés | Commandes et paquets publics |
+|---|---:|---:|---|
+| AS66 | 19 | 3 | Identiques |
+| SYME | 9 | 1 | Identiques |
+| LKEY | 44 | 3 | Identiques |
+| CASC | 1 | 0 | Identiques, arrêt `frontier_unknown` conservé |
+
+L’estimation d’avancement atteint environ 80 % sur les 13 phases. Cette première récupération ne valide qu’une partie des phases V8-7 et V8-8. Il reste notamment à faire produire le besoin et la stratégie par l’agenda SIC, à compléter la chaîne OP03/OP12/OP08/OP26, à qualifier les packs, puis à migrer et mesurer les familles selon les critères V8-12. Les huit échecs de la suite historique RootedLine se reproduisent avec les mêmes noms sur le commit de départ.
+
 Le résumé natif est construit après la décision, hors de la mesure du temps actif. L’affichage est différé au prochain rendu du navigateur après la fin d’une opération. Les tests couvrent la matrice, la révision, la portée, le fallback, l’ambiguïté, les retours natifs et la parité du transport V6 jusqu’à un retour terminal.

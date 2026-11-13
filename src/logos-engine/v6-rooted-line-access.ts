@@ -5,6 +5,7 @@
  */
 import { measureRootedLine, physicalRootedLine, projectedRootedLine } from './v6-rooted-line-observation.ts';
 import { rootedLineEffect, planRootedLine } from './v6-rooted-line-mechanics.ts';
+import { planCellPush, witnessedCellPush } from './v6-rooted-line-revision.ts';
 import { symbolicDigest as identity } from './v6-hash.ts';
 import { pythonEqual as equal, pythonTruthy as truth } from './v6-operations.ts';
 import { retainNativeJson } from './v6-native-owned.ts';
@@ -69,7 +70,9 @@ export class RootedLineMemory {
     }
     const memory = structuredClone(this.lineMemory);
     if (memory.epoch !== observation.level_epoch) { memory.current = null; memory.tried = []; memory.epoch = observation.level_epoch; }
-    if (memory.refuted.some((item: R) => item.epoch === observation.level_epoch)) {
+    const refutations = memory.refuted.filter((item: R) => item.epoch === observation.level_epoch);
+    const revision = refutations.length === 1 && refutations[0].cell_push_witness && refutations[0].layout === scene.layout;
+    if (refutations.length && !revision) {
       return { status: 'unknown', reason: 'conditional_contact_model_refuted', block_unrelated_probe: true };
     }
     const available = new Set<string>(observation.available_action_refs);
@@ -77,7 +80,18 @@ export class RootedLineMemory {
       && !Object.hasOwn(memory.controls, action) && !memory.tried.includes(action));
     let actions: R[] = [], predictions: (R | null)[] = [], configurations: (R | null)[] = [], search: R | null = null;
     let why: string, kind: string;
-    if (unmeasured.length) {
+    if (revision) {
+      const effects = Object.fromEntries(Object.entries(memory.controls).filter(([action]) => available.has(action)));
+      const plan = planCellPush(scene, effects, Math.min(cfg.max_depth, config.remaining_level_actions ?? cfg.max_depth),
+        cfg.max_nodes, () => !!budget.shouldStop?.() || (budget.now ?? (() => performance.now()))() >= (budget.deadlineMs ?? Infinity));
+      if (!plan || limit < 1) return { status: 'unknown', reason: 'rooted_cell_access_unresolved', block_unrelated_probe: true };
+      actions = [{ action_ref: plan.command }];
+      predictions = [plan.prediction];
+      configurations = [null];
+      search = { operation: 'OP26', predicted_goal_distance: plan.predictedGoalDistance, model: 'conditional_cell_push_after_counterexample' };
+      why = 'Find an ordered access from the measured return using the witnessed whole-cell push. Verify the root, tip and every piece after this step.';
+      kind = 'cell_push_revision';
+    } else if (unmeasured.length) {
       actions = [{ action_ref: unmeasured[0] }]; predictions = [null]; configurations = [null]; why = cfg.control; kind = 'calibrate';
     } else if (Object.keys(memory.controls).length < cfg.probe_order.filter((action: string) => available.has(action)).length) {
       return { status: 'unknown', reason: 'rooted_control_effect_unresolved', block_unrelated_probe: true };
@@ -127,8 +141,17 @@ export class RootedLineMemory {
       } else {
         const matched = equal(physicalRootedLine(second), plan.predictions[index]); detail.matched = matched;
         if (matched) memory.current = plan.configurations[index];
-        else { memory.current = null; memory.refuted.push({ epoch: before.level_epoch, before: before.observation_ref,
-          after: after.observation_ref, command, expected: plan.predictions[index], observed: physicalRootedLine(second) }); }
+        else {
+          memory.current = null;
+          const counterexample: R = { epoch: before.level_epoch, before: before.observation_ref,
+            after: after.observation_ref, command, expected: plan.predictions[index], observed: physicalRootedLine(second) };
+          if (plan.kind === 'conditional_composition'
+              && witnessedCellPush(first, second, plan.predictions[index], memory.controls[command.action_ref])) {
+            counterexample.cell_push_witness = true;
+            counterexample.layout = first.layout;
+          }
+          memory.refuted.push(counterexample);
+        }
       }
     }
     if (boundary) { memory.current = null; memory.epoch = after.level_epoch; memory.tried = []; }

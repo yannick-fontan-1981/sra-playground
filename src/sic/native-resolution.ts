@@ -42,6 +42,7 @@ export interface NativeResolution {
   readonly objective: string | null;
   readonly objectiveSource: 'native' | 'question' | 'unpublished' | null;
   readonly operation: string | null;
+  readonly searchOperation?: string;
   readonly composition: string | null;
   readonly compositions: readonly { readonly id: string; readonly role: string | null; readonly observed: boolean | null }[];
   readonly subjects: readonly { readonly label: string; readonly box: NativeBox }[];
@@ -214,6 +215,18 @@ export function readNativeResolution(agent: {
     subjects.push({ label: 'Controlled footprint before the step', box: footprint });
   }
   const op = label(template?.operation_key);
+  const rooted = record(proposal?.rooted_line_plan);
+  const rootedScene = record(rooted?.scene);
+  const searchOperation = label(record(rooted?.search)?.operation);
+  const previousProjection = routeIndex > 0 && Array.isArray(rooted?.predictions) ? record(rooted.predictions[routeIndex - 1]) : null;
+  const rootBox = bounds(previousProjection?.root ?? rootedScene?.root);
+  if (rootBox) subjects.push({ label: 'Controlled root', box: rootBox });
+  const previousPieces = new Map(Array.isArray(previousProjection?.pieces) ? previousProjection.pieces
+    .filter(piece => Array.isArray(piece) && piece.length === 2).map(piece => [piece[0], piece[1]]) : []);
+  if (Array.isArray(rootedScene?.pieces)) for (const piece of rootedScene.pieces.slice(0, 8)) {
+    const material = record(piece), box = bounds(previousPieces.get(material?.id) ?? material?.bbox);
+    if (box) subjects.push({ label: `Material ${label(material?.type) ?? ''}`.trim(), box });
+  }
   const route: NativePoint[] = [];
   const pointAt = (value: unknown): NativePoint | null => Array.isArray(value) && value.length === 2
     && value.every(Number.isSafeInteger) ? [value[0], value[1]] : null;
@@ -239,6 +252,7 @@ export function readNativeResolution(agent: {
     proposalKind: label(proposal?.kind), question,
     objective: nativeObjective ?? (objectiveSource === 'question' ? question : null), objectiveSource,
     operation: op && /^OP(?:0[1-9]|[12]\d|3[01])$/.test(op) ? op : null,
+    searchOperation: searchOperation === 'OP26' ? searchOperation : undefined,
     composition: label(template?.composition_ref), compositions, subjects, route, proposalRef: label(proposal?.proposal_id),
     planRevision: natural(release?.decision_revision) ?? undefined,
     remainingSteps: Math.max(0, plan.length - routeIndex), footprint, context,
@@ -252,6 +266,7 @@ export interface DecisionSprites {
   readonly objective: NativeResolution['objective'];
   readonly objectiveSource: NativeResolution['objectiveSource'];
   readonly operation: string | null;
+  readonly searchOperation?: string;
   readonly composition: string | null;
   readonly question: string | null;
   readonly proposalRef: string | null;
@@ -336,7 +351,7 @@ export function captureDecisionSprites(decision: NativeResolution, before: Nativ
       after: after && targetRight < (after[0]?.length ?? 0) && targetBottom < after.length ? cropReturn(after, region, stride) : null };
   }
   return { family: decision.family, objective: decision.objective, objectiveSource: decision.objectiveSource,
-    operation: decision.operation, composition: decision.composition, question: decision.question,
+    operation: decision.operation, searchOperation: decision.searchOperation, composition: decision.composition, question: decision.question,
     proposalRef: decision.proposalRef, planRevision: decision.planRevision, route: decision.route, steps: decision.steps.slice(decision.nextIndex ?? 0),
     remainingSteps: decision.remainingSteps, stepIndex: decision.nextIndex, context, destinationSprite, strategyTarget, strategyMeter, sprites };
 }
