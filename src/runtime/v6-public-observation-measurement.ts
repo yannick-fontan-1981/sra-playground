@@ -143,7 +143,13 @@ export function completePublicCampaignEntities(
 
 export const PUBLIC_FIELD_STOCK_DEPENDENCIES: FieldStockDependencies = Object.freeze({
   digest: digestPublicValue,
-  makeLocusWitness(observation, _rows, point, reason, evidence) {
+  makeLocusWitness(
+    observation: PublicObservationLike,
+    _rows: readonly (readonly number[])[],
+    point: readonly [number, number],
+    reason: string,
+    evidence: readonly string[],
+  ): unknown {
     return {
       observation_ref: observation.observation_ref,
       point: [...point],
