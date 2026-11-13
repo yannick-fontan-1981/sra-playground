@@ -223,6 +223,7 @@ test('controller discards a stale checkpoint after a Manual action and starts a 
   let busy = false;
   let clock = 0;
   const actions: number[] = [];
+  let hostCreations = 0;
   const ports: BrowserAgentControllerPorts = {
     readState: () => productState(current, busy),
     action: async action => {
@@ -235,7 +236,10 @@ test('controller discards a stale checkpoint after a Manual action and starts a 
     setBusy: value => { busy = value; },
   };
   const controller = new BrowserAgentController({
-    createHost: () => createPublicSingleActionBrowserCampaignHost(),
+    createHost: () => {
+      hostCreations += 1;
+      return createPublicSingleActionBrowserCampaignHost();
+    },
     makeSessionId: (_observation, ordinal) => `stale:${ordinal}`,
   });
 
@@ -249,4 +253,5 @@ test('controller discards a stale checkpoint after a Manual action and starts a 
   assert.equal(restarted.stopReason, 'none');
   assert.equal(restarted.actionsDispatched, 1);
   assert.deepEqual(actions, [1, 3]);
+  assert.equal(hostCreations, 3);
 });

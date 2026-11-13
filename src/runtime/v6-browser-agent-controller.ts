@@ -203,7 +203,7 @@ export class BrowserAgentController {
       return Promise.resolve(this.snapshot());
     }
 
-    const host = this.#createHost();
+    let host = this.#createHost();
     let sessionId: string;
     let actionsDispatched = 0;
     let restoreResult: BrowserCampaignHostRestoreResult | null = null;
@@ -215,6 +215,8 @@ export class BrowserAgentController {
         actionsDispatched = checkpoint.actionsDispatched;
       } catch {
         this.#checkpoint = null;
+        host.dispose();
+        host = this.#createHost();
         const ordinal = ++this.#sessionOrdinal;
         sessionId = this.#makeSessionId(observation, ordinal);
         if (!sessionId) throw new TypeError('browser agent session id must be non-empty');
