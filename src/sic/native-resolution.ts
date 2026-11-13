@@ -19,6 +19,7 @@ export interface NativeResolution {
   readonly route: readonly NativePoint[];
   readonly proposalRef: string | null;
   readonly remainingSteps: number;
+  readonly footprint: NativeBox | null;
   readonly guard: string | null;
   readonly pending: boolean;
   readonly steps: readonly NativeStep[];
@@ -112,9 +113,11 @@ export function readNativeResolution(agent: {
   const measuredStep = Array.isArray(morphology?.steps) ? record(morphology.steps[Number(guard?.index ?? 0)]) : null;
   const point = measuredStep?.from;
   const size = morphology?.size;
+  let footprint: NativeBox | null = null;
   if (Array.isArray(point) && Array.isArray(size) && point.length === 2 && size.length === 2
       && [...point, ...size].every(Number.isSafeInteger) && size.every(n => n > 0)) {
-    subjects.push({ label: 'Controlled footprint before the step', box: [point[0], point[1], point[0] + size[0] - 1, point[1] + size[1] - 1] });
+    footprint = [point[0], point[1], point[0] + size[0] - 1, point[1] + size[1] - 1];
+    subjects.push({ label: 'Controlled footprint before the step', box: footprint });
   }
   const op = label(template?.operation_key);
   const route: NativePoint[] = [];
@@ -139,7 +142,7 @@ export function readNativeResolution(agent: {
     objective: nativeObjective ?? (objectiveSource === 'question' ? question : null), objectiveSource,
     operation: op && /^OP(?:0[1-9]|[12]\d|3[01])$/.test(op) ? op : null,
     composition: label(template?.composition_ref), compositions, subjects, route, proposalRef: label(proposal?.proposal_id),
-    remainingSteps: Math.max(0, plan.length - routeIndex),
+    remainingSteps: Math.max(0, plan.length - routeIndex), footprint,
     guard: label(guard?.reason),
     nextIndex: pending && guard && Number.isSafeInteger(guard.index) ? Number(guard.index) : null, steps,
     history, outcome: outcomeFamily && (result?.matched === null || typeof result?.matched === 'boolean')
@@ -156,6 +159,8 @@ export interface DecisionSprites {
   readonly route: readonly NativePoint[];
   readonly steps: readonly NativeStep[];
   readonly remainingSteps: number;
+  readonly stepIndex?: number | null;
+  readonly destinationSprite?: NativeRows;
   readonly sprites: readonly { readonly label: string; readonly before: NativeRows; readonly after: NativeRows | null }[];
 }
 
@@ -167,8 +172,16 @@ export function captureDecisionSprites(decision: NativeResolution, before: Nativ
     return [{ label: name, before: cropReturn(before, box, stride),
       after: after && right < (after[0]?.length ?? 0) && bottom < after.length ? cropReturn(after, box, stride) : null }];
   });
+  const next = decision.route[1];
+  const box = decision.footprint;
+  const right = next && box ? next[0] + box[2] - box[0] : -1;
+  const bottom = next && box ? next[1] + box[3] - box[1] : -1;
+  const destinationSprite = after && next && box && next[0] >= 0 && next[1] >= 0
+    && right < (after[0]?.length ?? 0) && bottom < after.length
+    ? cropReturn(after, [next[0], next[1], right, bottom], Math.max(1, Math.ceil(Math.max(right - next[0] + 1, bottom - next[1] + 1) / 20)))
+    : undefined;
   return { family: decision.family, objective: decision.objective, objectiveSource: decision.objectiveSource,
     operation: decision.operation, composition: decision.composition, question: decision.question,
     proposalRef: decision.proposalRef, route: decision.route, steps: decision.steps.slice(decision.nextIndex ?? 0),
-    remainingSteps: decision.remainingSteps, sprites };
+    remainingSteps: decision.remainingSteps, stepIndex: decision.nextIndex, destinationSprite, sprites };
 }

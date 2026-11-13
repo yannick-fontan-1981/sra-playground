@@ -286,7 +286,17 @@ app.innerHTML = `
             <section class="sic-card"><h4>Ways to solve the situation</h4><div data-sic-strategy-body></div></section>
           </div>
           <div id="sic-objectives" role="tabpanel" aria-labelledby="sic-objectives-tab" tabindex="0" hidden>
-            <section class="sic-card"><h4>What to achieve</h4><div data-sic-objective-body></div></section>
+            <section class="sic-card">
+              <h4>What to achieve</h4><p data-sic-objective-progress></p>
+              <div class="sic-tabs sic-subtabs" role="tablist" aria-label="Objectives by time" data-sic-tabs>
+                <button type="button" id="sic-past-tab" role="tab" aria-selected="false" aria-controls="sic-past" tabindex="-1">Past</button>
+                <button type="button" id="sic-present-tab" role="tab" aria-selected="true" aria-controls="sic-present">Present</button>
+                <button type="button" id="sic-future-tab" role="tab" aria-selected="false" aria-controls="sic-future" tabindex="-1">Future</button>
+              </div>
+              <div id="sic-past" role="tabpanel" aria-labelledby="sic-past-tab" tabindex="0" hidden></div>
+              <div id="sic-present" role="tabpanel" aria-labelledby="sic-present-tab" tabindex="0"></div>
+              <div id="sic-future" role="tabpanel" aria-labelledby="sic-future-tab" tabindex="0" hidden></div>
+            </section>
           </div>
           <div id="sic-plans" role="tabpanel" aria-labelledby="sic-plans-tab" tabindex="0" hidden>
             <section class="sic-card"><h4>What to do next</h4>

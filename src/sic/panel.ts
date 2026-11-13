@@ -9,7 +9,7 @@ import { compareDirectionTargets, summarizeDirections, type DirectionalReturn } 
 import ls20Directions from './ls20-direction-review.json';
 import ls20ShapeExit from './ls20-review-evidence.json';
 import { captureDecisionSprites, type NativeResolution } from './native-resolution.ts';
-import { firstRecovery, isLevelCompletion, type PursuedObjective } from './recovery.ts';
+import { compareRecoveryRoute, firstRecovery, isLevelCompletion, type PursuedObjective } from './recovery.ts';
 import compositionOperations from './composition-operations.json';
 import type { GameObservation } from '../runtime/browser-games.ts';
 import { compareAboveColors, contrastClickContexts, describeClickContext, type ClickEffectCount } from './click-evidence.ts';
@@ -1023,31 +1023,21 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
 function renderObjectives(panel: HTMLElement, progress: string, board: GameObservation | null,
   current: Pick<NativeResolution, 'objective' | 'objectiveSource' | 'question'> | null | undefined,
   entries: readonly PursuedObjective[]): void {
-  const section = panel.querySelector('[data-sic-objective-body]')!;
   const paragraph = (value: string) => { const p = document.createElement('p'); p.textContent = value; return p; };
-  section.replaceChildren(paragraph(progress));
-  const cards = document.createElement('div');
-  cards.className = 'sic-objective-columns';
-  const group = (title: string) => {
-    const card = document.createElement('section'), heading = document.createElement('h5');
-    heading.textContent = title;
-    card.append(heading);
-    cards.append(card);
-    return card;
-  };
-  const active = group('Current objective');
+  panel.querySelector('[data-sic-objective-progress]')!.textContent = progress;
+  const active = panel.querySelector('#sic-present')!;
+  active.replaceChildren();
   active.append(paragraph(board?.state === 'WIN' ? 'The game reports victory.'
     : describePlanObjective(current) ?? 'No current native objective observed.'));
   if (current?.objectiveSource === 'native' && current.question) {
     active.append(paragraph(`Immediate aim: ${nativeLabel(current.question).replace(/[.!?]$/, '')}.`));
   }
-  const past = group('Objectives pursued');
+  const past = panel.querySelector('#sic-past')!;
+  past.replaceChildren();
   if (!entries.length) past.append(paragraph('No objective has been recorded in this session.'));
   else {
-    const details = document.createElement('details');
-    const title = document.createElement('summary');
-    title.textContent = `${entries.length} recorded episodes`;
     const list = document.createElement('ol');
+    list.className = 'sic-objective-history';
     for (const entry of [...entries].reverse()) {
       const row = document.createElement('li');
       row.textContent = `Level ${entry.level} · ${entry.first === entry.last ? `action ${entry.first}` : `actions ${entry.first}–${entry.last}`} · `
@@ -1059,16 +1049,15 @@ function renderObjectives(panel: HTMLElement, progress: string, board: GameObser
       }
       list.append(row);
     }
-    details.append(title, list);
-    past.append(details);
+    past.append(paragraph(`${entries.length} recorded episodes`), list);
   }
-  const future = group('Possible future objectives');
+  const future = panel.querySelector('#sic-future')!;
+  future.replaceChildren();
   if (board && board.level < board.levelCount && board.state !== 'WIN') {
     future.append(paragraph(`Reach and complete level ${board.level + 1}, if the current level is completed.`),
       paragraph('Suggested by public progression; the native engine has not selected it.'));
     if (board.level + 1 < board.levelCount) future.append(paragraph('Later possibility: finish the remaining levels after that.'));
   } else future.append(paragraph('No further objective supported by the current observations.'));
-  section.append(cards);
 }
 
 function renderRecovery(container: Element, returns: readonly DirectionalReturn[], currentLevel: number | undefined,
@@ -1117,7 +1106,7 @@ function renderRecovery(container: Element, returns: readonly DirectionalReturn[
     const shown = route.decision.steps.map(step => step.action);
     caption.textContent = `New native route at action ${route.sequence} · ${route.decision.remainingSteps} proposed steps: ${shown.join(' → ')}${shown.length < route.decision.remainingSteps ? ' …' : '.'}`;
     section.append(caption);
-    if (route.routeBoard) section.append(renderRoute(route.routeBoard, route.decision.route, palette));
+    renderRecoveryComparison(section, route, returns, palette);
     section.append(renderFrames(route.decision.sprites.map(sprite => [sprite.label, sprite.before] as const), palette));
   } else {
     const pending = document.createElement('p');
@@ -1127,7 +1116,80 @@ function renderRecovery(container: Element, returns: readonly DirectionalReturn[
   container.append(section);
 }
 
-function renderRoute(rows: NativeRows, points: readonly (readonly [number, number])[], palette: readonly string[]): HTMLElement {
+function renderRecoveryComparison(section: HTMLElement, start: DirectionalReturn, returns: readonly DirectionalReturn[],
+  palette: readonly string[]): void {
+  const plan = start.decision!;
+  const comparison = compareRecoveryRoute(start, returns)!;
+  const { executed, replacement, interruption, completed, abandoned } = comparison;
+  const confirmed = executed.filter(item => item.nativeCheck?.matched === true).length;
+  const differed = executed.filter(item => item.nativeCheck?.matched === false).length;
+  const summary = document.createElement('p');
+  summary.textContent = `${executed.length}/${plan.remainingSteps} steps executed · ${confirmed} confirmed · ${differed} differed · ${executed.length - confirmed - differed} without a verified prediction.`;
+  section.append(summary);
+  if (replacement || interruption || completed) {
+    const event = document.createElement('p');
+    if (replacement) {
+      event.textContent = abandoned
+        ? `Replanned at action ${replacement.sequence}. The remaining ${plan.remainingSteps - executed.length} steps of the old route were left unexecuted.`
+        : `Route completed. The engine proposed a new plan at action ${replacement.sequence}.`;
+    } else if (interruption) {
+      event.textContent = `Action ${interruption.sequence} ${interruption.restart ? 'restarted the board' : 'changed the level'}.`
+        + (abandoned ? ' The rest of this route was left unexecuted.' : '');
+    } else event.textContent = 'All steps in this proposal were executed.';
+    section.append(event);
+  }
+  const choices = document.createElement('select');
+  choices.setAttribute('aria-label', 'Compare recovery steps');
+  for (const [index, step] of plan.steps.entries()) {
+    const item = executed[index];
+    const status = item?.nativeCheck?.matched === true ? 'Confirmed' : item?.nativeCheck?.matched === false ? 'Prediction differed'
+      : item ? 'Executed · no verified prediction' : abandoned ? 'Left unexecuted' : 'Pending or unavailable';
+    choices.add(new Option(`Step ${index + 1} · ${step.action} · ${status}`, String(index)));
+  }
+  if (replacement) choices.add(new Option(`Action ${replacement.sequence} · New proposal`, 'replacement'));
+  const content = document.createElement('div');
+  const update = () => {
+    const index = Number(choices.value);
+    const item = choices.value === 'replacement' ? replacement : executed[index];
+    content.replaceChildren();
+    const planned = plan.route[index + 1];
+    if (!item && !planned) return;
+    const position = document.createElement('p');
+    const movement = item?.translation;
+    if (planned) {
+      position.textContent = `Planned position (${planned.join(', ')})`
+        + (movement ? ` · Observed position (${movement.to.slice(0, 2).join(', ')})` : '.');
+      content.append(position);
+    }
+    if (!item) return;
+    const decision = item.decision;
+    const evidence = document.createElement('p');
+    evidence.textContent = choices.value === 'replacement'
+      ? `Action ${item.sequence} · ${decision?.steps[0]?.action ?? commands[item.command]} starts the new proposal.`
+      : `Action ${item.sequence} · ${item.nativeCheck?.reason ? nativeLabel(item.nativeCheck.reason) : 'No native check retained'}.`;
+    content.append(evidence, renderFrames([
+      ['Controlled sprite before', decision?.sprites.find(sprite => sprite.label === 'Controlled footprint before the step')?.before ?? null],
+      ['Returned pixels at planned position', decision?.destinationSprite ?? null],
+      ['Observed moving sprite', item.translation?.sprite ?? null],
+    ], palette));
+  };
+  choices.addEventListener('change', update);
+  if (start.routeBoard) {
+    const executedSegments = executed.flatMap(item => {
+      const movement = item.translation;
+      if (movement) return [[[movement.from[0], movement.from[1]], [movement.to[0], movement.to[1]]] as const];
+      const route = item.decision?.route;
+      return item.nativeCheck?.matched === true && route?.[0] && route[1] ? [[route[0], route[1]] as const] : [];
+    });
+    section.append(renderRoute(start.routeBoard, plan.route, executedSegments, palette));
+  }
+  section.append(choices, content);
+  update();
+}
+
+function renderRoute(rows: NativeRows, points: readonly (readonly [number, number])[],
+  executed: readonly (readonly [readonly [number, number], readonly [number, number]])[],
+  palette: readonly string[]): HTMLElement {
   const figure = document.createElement('figure');
   figure.className = 'sic-route';
   const width = rows[0]?.length ?? 0, height = rows.length;
@@ -1149,12 +1211,22 @@ function renderRoute(rows: NativeRows, points: readonly (readonly [number, numbe
   };
   draw('#111', 4);
   draw('#fff', 2);
+  ctx.beginPath();
+  for (const [[x, y], [toX, toY]] of executed) {
+    ctx.moveTo(x * 3 + 1.5, y * 3 + 1.5);
+    ctx.lineTo(toX * 3 + 1.5, toY * 3 + 1.5);
+  }
+  ctx.lineWidth = 2;
+  ctx.strokeStyle = '#64e9e2';
+  ctx.stroke();
   for (const [index, [x, y]] of points.entries()) {
     ctx.fillStyle = index === 0 ? '#64e9e2' : index === points.length - 1 ? '#ffd15a' : '#fff';
     ctx.fillRect(x * 3, y * 3, 3, 3);
   }
   const caption = document.createElement('figcaption');
-  caption.textContent = `Proposed route on the returned board: ${points.map(([x, y]) => `(${x}, ${y})`).join(' → ')}.`;
+  caption.textContent = 'White shows the proposed route. Turquoise shows observed movements and positions confirmed by the engine.';
+  canvas.setAttribute('role', 'img');
+  canvas.setAttribute('aria-label', `Proposed and executed route on the restored board. ${executed.length} movement segments shown.`);
   figure.append(canvas, caption);
   return figure;
 }

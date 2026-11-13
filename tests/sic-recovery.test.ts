@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { firstRecovery, objectiveHistory, observeLs20Restart } from '../src/sic/recovery.ts';
+import { compareRecoveryRoute, firstRecovery, objectiveHistory, observeLs20Restart } from '../src/sic/recovery.ts';
 import type { DirectionalReturn } from '../src/sic/directional-return.ts';
 import type { DecisionSprites } from '../src/sic/native-resolution.ts';
 
@@ -24,4 +24,19 @@ test('a restart ends the old episode but preserves an explicitly reused objectiv
   assert.equal(firstRecovery([action(39, { restart, decision: { ...decision, objective: 'G_protocol_completion' } }), action(40)], 2)?.retained, true);
   const uncertain = [returned[1]!, action(40, { decision: { ...decision, objectiveSource: 'question' } })];
   assert.equal(firstRecovery(uncertain, 2)?.retained, false);
+});
+
+test('the recovery comparison follows proposal identity and does not infer abandonment from a missing return', () => {
+  const step = (sequence: number, proposalRef: string, stepIndex: number): DirectionalReturn => ({
+    sessionId: 's', sequence, command: 4, fromLevel: 2, toLevel: 2, changes: null, translation: null, stationary: null,
+    decision: { ...decision, proposalRef, stepIndex, remainingSteps: 2 - stepIndex },
+  });
+  const first = step(40, 'first', 0);
+  const second = step(41, 'first', 1);
+  const next = step(42, 'next', 0);
+  assert.deepEqual(compareRecoveryRoute(first, [first, second, next]), {
+    executed: [first, second], replacement: next, interruption: undefined, completed: true, abandoned: false,
+  });
+  assert.equal(compareRecoveryRoute(first, [first, step(41, 'next', 0)])?.abandoned, true);
+  assert.equal(compareRecoveryRoute(first, [first, next])?.abandoned, false);
 });

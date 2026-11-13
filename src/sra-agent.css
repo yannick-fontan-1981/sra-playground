@@ -62,11 +62,8 @@
 .sic-observations ul[data-sic-returns]{max-height:365px;overflow:auto;scroll-padding:6px;padding:4px}
 .sic-effect-row{margin-top:6px;border-top:1px solid var(--line);padding-top:5px}
 .sic-effect-count{display:block;margin-block:3px}
-.sic-objective-columns{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:12px;margin-top:12px}
-.sic-objective-columns>section{border:1px solid var(--control-border);border-radius:5px;padding:10px;min-width:0}
-.sic-objective-columns h5{margin:0 0 7px;font-size:14px;color:var(--ink)}
-.sic-objective-columns ol{max-height:14rem;overflow:auto;margin:8px 0 0;padding-left:1.3rem}
-.sic-objective-columns li{margin-bottom:6px}
+.sic-objective-history{max-height:16rem;overflow:auto;margin:8px 0 0;padding-left:1.3rem}
+.sic-objective-history li{margin-bottom:8px}
 .sic-route{margin:10px 0}
 .sic-route canvas{display:block;width:min(100%,192px);height:auto;image-rendering:pixelated}
 .sic-route figcaption{font-size:12px;margin-top:5px}

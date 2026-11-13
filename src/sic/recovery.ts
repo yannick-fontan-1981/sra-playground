@@ -64,3 +64,29 @@ export function firstRecovery(returns: readonly DirectionalReturn[], level: numb
     && before.objectiveSource === 'native' && after.objectiveSource === 'native');
   return { interrupted, following, route, retained };
 }
+
+export function compareRecoveryRoute(start: DirectionalReturn, returns: readonly DirectionalReturn[]) {
+  const plan = start.decision;
+  if (!plan) return null;
+  const executed: DirectionalReturn[] = [];
+  let replacement: DirectionalReturn | undefined;
+  let interruption: DirectionalReturn | undefined;
+  for (const item of returns) {
+    if (item.sessionId !== start.sessionId || item.sequence < start.sequence) continue;
+    if (item.sequence !== start.sequence + executed.length || item.fromLevel !== start.fromLevel) break;
+    if (executed.length > 0) {
+      if (!item.decision?.proposalRef || !plan.proposalRef || item.decision.stepIndex == null) break;
+      const offset = plan.stepIndex ?? 0;
+      if (item.decision.proposalRef !== plan.proposalRef || item.decision.stepIndex === 0) {
+        replacement = item;
+        break;
+      }
+      if (item.decision.stepIndex !== offset + executed.length || executed.length >= plan.remainingSteps) break;
+    }
+    executed.push(item);
+    if (item.restart || item.toLevel !== item.fromLevel) { interruption = item; break; }
+  }
+  return { executed, replacement, interruption,
+    completed: executed.length === plan.remainingSteps,
+    abandoned: executed.length < plan.remainingSteps && Boolean(replacement || interruption) };
+}
