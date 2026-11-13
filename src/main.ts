@@ -1,7 +1,12 @@
 import './styles.css';
 import { renderSiteHeader } from './site-header';
 import { BrowserGameRuntime, type GameObservation } from './runtime/browser-games';
-import { AGENT_STATUS } from './runtime/contracts';
+import {
+  BROWSER_AGENT_CONTROLLER_STATUS,
+  BrowserAgentController,
+  type BrowserAgentControllerPorts,
+  type BrowserAgentControllerSnapshot,
+} from './runtime/v6-browser-agent-controller';
 import { GAME_CATALOG, PUBLIC_SOURCE_BASE, getGameByCode, type GameCatalogEntry } from './games/catalog';
 import { presentProductObservation } from './product-presentation-effects';
 import {
@@ -109,7 +114,7 @@ app.innerHTML = `
         <div class="mode-bar">
           <div class="mode-tabs" role="tablist" aria-label="Play mode">
             <button type="button" id="manual-tab" role="tab" aria-selected="true" aria-controls="manual-panel" tabindex="0">${icon('hand')}Manual</button>
-            <button type="button" id="agent-tab" role="tab" aria-selected="false" aria-controls="agent-panel" tabindex="-1">${icon('robot')}SRA Agent<span class="soon-label">Coming next</span></button>
+            <button type="button" id="agent-tab" role="tab" aria-selected="false" aria-controls="agent-panel" tabindex="-1">${icon('robot')}SRA Agent<span class="soon-label">Bounded</span></button>
           </div>
           <span class="local-label"><span class="status-dot"></span> In your browser</span>
         </div>
@@ -158,11 +163,12 @@ app.innerHTML = `
               </div>
               <p id="keyboard-help" class="sr-only">Arrow keys and Space for actions. Click the board to interact. Z or Control Z to undo. R to reset the level.</p>
             </div>
-            <div id="agent-panel" role="tabpanel" aria-labelledby="agent-tab" data-agent-status="${AGENT_STATUS.status}" data-agent-available="${AGENT_STATUS.available}" hidden>
+            <div id="agent-panel" role="tabpanel" aria-labelledby="agent-tab" data-agent-status="${BROWSER_AGENT_CONTROLLER_STATUS.status}" data-agent-available="${BROWSER_AGENT_CONTROLLER_STATUS.available}" hidden>
               <div class="agent-illustration" aria-hidden="true"><span class="node node-a"></span><span class="node node-b"></span><span class="node node-c"></span><span class="node node-d"></span><span class="node-line line-a"></span><span class="node-line line-b"></span><span class="node-line line-c"></span></div>
-              <h3>SRA is coming.</h3>
-              <p class="agent-honesty">The real agent is not connected yet.</p>
-              <button id="return-manual" type="button" class="primary-button">Play manually ${icon('arrow')}</button>
+              <h3>Bounded SRA runtime</h3>
+              <p id="agent-status" class="agent-honesty" role="status" aria-live="polite">Ready when Agent mode is selected.</p>
+              <p class="agent-honesty">It acts only when the public observation exposes one complete action that Logos can authorize. No fallback action is invented.</p>
+              <button id="return-manual" type="button" class="primary-button">Return to Manual ${icon('arrow')}</button>
               <a class="text-link" href="${agentSources}" target="_blank" rel="noopener noreferrer">SRA source references ${icon('external')}</a>
             </div>
           </aside>
@@ -174,7 +180,7 @@ app.innerHTML = `
 
     <section class="about-section wrap" id="about" aria-labelledby="about-title">
       <div class="about-heading"><p class="eyebrow">THE PROJECT</p><h2 id="about-title">About SRA</h2><div class="about-links"><a class="text-link" href="/architecture.html">Architecture ${icon('arrow')}</a><a class="text-link" href="/videos.html">Video series ${icon('arrow')}</a></div></div>
-      <div class="about-content"><p><strong>Symbolic Reasoning Agent</strong> is Yannick Fontan’s research project for interactive games. The Python agent uses explicit representations of observations, mechanisms, and goals to organize its reasoning.</p><p>The 100 games on this page run locally in your browser. Connecting the agent is the next implementation step. The architecture pages describe the code; the video series follows the project’s development.</p></div>
+      <div class="about-content"><p><strong>Symbolic Reasoning Agent</strong> is Yannick Fontan’s research project for interactive games. The Python agent uses explicit representations of observations, mechanisms, and goals to organize its reasoning.</p><p>The 100 games on this page run locally in your browser. A first bounded Agent controller now connects strict, unambiguous public decisions to the game; broader perception and planning remain under development. The architecture pages describe the code, and the video series follows the project’s development.</p></div>
     </section>
   </main>
   <footer class="site-footer wrap"><span><strong>SRA Playground</strong><span class="footer-separator">/</span>Independent research by Yannick Fontan</span><div><a href="https://arcprize.org/arc-agi/3" target="_blank" rel="noopener noreferrer">ARC Prize ${icon('external')}</a><a href="${websiteRepo}/blob/main/THIRD_PARTY_NOTICES.md" target="_blank" rel="noopener noreferrer">Licenses & notices ${icon('external')}</a></div></footer>
@@ -201,6 +207,18 @@ let presentationGeneration = 0;
 let renderedLevelCount = -1;
 let renderedPalette = '';
 let colors: number[][] = [];
+let agentSnapshot: BrowserAgentControllerSnapshot;
+const agentController = new BrowserAgentController({
+  onStateChange: snapshot => {
+    agentSnapshot = snapshot;
+    updateAgentStatus();
+    updateInterface();
+  },
+  onError: error => {
+    console.error(`Bounded Agent campaign failed for ${selectedGame.code}.`, error);
+  },
+});
+agentSnapshot = agentController.snapshot();
 
 function paint(frame: readonly (readonly number[])[], palette: readonly string[] = observation?.palette ?? fallbackPalette): void {
   if (!context || !frame.length || !frame[0]?.length) return;
@@ -244,6 +262,41 @@ function ready(): boolean {
   return productReady(productReadinessState());
 }
 
+function agentStatusMessage(snapshot: BrowserAgentControllerSnapshot): string {
+  if (snapshot.phase === 'running') {
+    const count = snapshot.actionsDispatched;
+    return `Running the bounded Logos campaign · ${count} action${count === 1 ? '' : 's'} dispatched.`;
+  }
+  if (snapshot.phase === 'stopping') return 'Finishing the current return before handing control back to Manual.';
+  if (snapshot.phase === 'error') return 'Stopped after an Agent error. Return to Manual or reload the game.';
+  if (snapshot.phase === 'disposed') return 'Agent controller disposed.';
+  if (snapshot.phase === 'idle') return 'Ready when Agent mode is selected.';
+
+  const messages: Partial<Record<NonNullable<BrowserAgentControllerSnapshot['stopReason']>, string>> = {
+    manual: 'Stopped cleanly. Manual controls own the game.',
+    replaced: 'Stopped because another game or session replaced this one.',
+    'not-started': 'Stopped because no Agent session was available.',
+    'not-ready': 'Stopped because the current game state is not ready.',
+    none: 'Stopped: no single complete symbolic proposal is available for this observation.',
+    ambiguous: 'Stopped: several symbolic proposals remain ambiguous, so no action was chosen.',
+    pending: 'Stopped: the prior symbolic action still awaits a correlated return.',
+    blocked: 'Stopped: Logos did not authorize the proposed action bundle.',
+    terminal: 'Stopped at a terminal game observation.',
+    stale: 'Stopped because the game observation or selection became stale.',
+    'action-limit': 'Stopped at the bounded campaign action limit.',
+    error: 'Stopped after an Agent error.',
+    disposed: 'Agent controller disposed.',
+  };
+  return snapshot.stopReason ? messages[snapshot.stopReason] ?? 'Agent campaign stopped.' : 'Agent campaign stopped.';
+}
+
+function updateAgentStatus(): void {
+  const panel = element<HTMLElement>('#agent-panel');
+  panel.dataset.agentPhase = agentSnapshot.phase;
+  panel.dataset.agentStopReason = agentSnapshot.stopReason ?? '';
+  element('#agent-status').textContent = agentStatusMessage(agentSnapshot);
+}
+
 function updateInterface(): void {
   const enabled = ready() && mode === 'manual';
   const complete = observation?.state === 'WIN' || observation?.state === 'LEVEL_COMPLETE';
@@ -255,6 +308,7 @@ function updateInterface(): void {
   element<HTMLButtonElement>('#undo-button').disabled = !enabled || !observation?.canUndo;
   element<HTMLButtonElement>('#reset-button').disabled = !enabled;
   element<HTMLButtonElement>('#restart-button').disabled = !enabled;
+  element<HTMLButtonElement>('#agent-tab').disabled = loading || failed || !observation;
   const levelSelect = element<HTMLSelectElement>('#level-select');
   const levelCount = observation?.canSelectLevel ? observation.levelCount : 0;
   if (levelCount !== renderedLevelCount) {
@@ -277,6 +331,7 @@ function updateInterface(): void {
   element('#game-availability').classList.toggle('is-pending', loading || failed);
   canvas.setAttribute('aria-busy', String(busy || loading));
   canvas.tabIndex = enabled ? 0 : -1;
+  updateAgentStatus();
 }
 
 async function present(next: GameObservation, selectedGeneration: number, releaseBusy = true): Promise<void> {
@@ -359,7 +414,34 @@ function focusCanvas(): void {
   canvas.focus({ preventScroll: true });
 }
 
+function agentPorts(): BrowserAgentControllerPorts {
+  return {
+    readState: productReadinessState,
+    action: (action, data) => runtime.action(action, data),
+    present: (next, generation) => present(next, generation, false),
+    now: () => performance.now(),
+    generation: () => selectionGeneration,
+    setBusy: value => {
+      busy = value;
+      updateInterface();
+    },
+    onError: (error, generation) => showFailure(error, generation),
+    yieldToBrowser: () => new Promise<void>(resolve => window.setTimeout(resolve, 0)),
+  };
+}
+
+function startAgent(): void {
+  if (mode !== 'agent' || !observation) return;
+  const current = observation;
+  void agentController.activate(current, agentPorts()).then(snapshot => {
+    if (mode === 'agent' && snapshot.stopReason === 'error') {
+      element('#game-feedback').textContent = 'The bounded Agent stopped after an error. Return to Manual or reload the game.';
+    }
+  });
+}
+
 function setMode(next: 'manual' | 'agent', focusTab = false): void {
+  if (next === 'manual' && agentController.running) agentController.deactivate('manual');
   mode = next;
   const manual = next === 'manual';
   const manualTab = element<HTMLButtonElement>('#manual-tab');
@@ -372,11 +454,13 @@ function setMode(next: 'manual' | 'agent', focusTab = false): void {
   element('#agent-panel').hidden = manual;
   element('#canvas-stage').classList.toggle('agent-preview', !manual);
   updateInterface();
+  if (!manual) startAgent();
   if (focusTab) (manual ? manualTab : agentTab).focus();
 }
 
 async function selectGame(code: string, historyMode: 'push' | 'replace' | 'none' = 'push', level?: number): Promise<void> {
   const game = getGameByCode(code) ?? defaultGame!;
+  if (agentController.running) agentController.deactivate('replaced');
   const generation = ++selectionGeneration;
   presentationGeneration += 1;
   selectedGame = game;
@@ -480,5 +564,10 @@ fullscreenButton.addEventListener('click', () => {
   const operation = document.fullscreenElement ? document.exitFullscreen() : element('#canvas-stage').requestFullscreen();
   void operation.catch(() => { element('#game-feedback').textContent = 'Full-screen mode is not available in this browser window.'; });
 });
-window.addEventListener('pagehide', event => { if (!event.persisted) runtime.dispose(); });
+window.addEventListener('pagehide', event => {
+  if (!event.persisted) {
+    agentController.dispose();
+    runtime.dispose();
+  }
+});
 void selectGame(selectedGame.code, 'replace', requestedLevel(new URL(window.location.href), selectedGame));
