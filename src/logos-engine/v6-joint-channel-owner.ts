@@ -125,13 +125,7 @@ function record(value: unknown, label: string): Record<string, unknown> {
 }
 
 function stableValue(value: unknown, seen = new Set<object>()): unknown {
-  if (
-    value === null
-    || typeof value === 'string'
-    || typeof value === 'boolean'
-  ) {
-    return value;
-  }
+  if (value === null || typeof value === 'string' || typeof value === 'boolean') return value;
   if (typeof value === 'number') {
     if (!Number.isFinite(value)) throw new TypeError('joint channel values must contain finite numbers');
     return Object.is(value, -0) ? { $number: '-0' } : value;
@@ -141,9 +135,7 @@ function stableValue(value: unknown, seen = new Set<object>()): unknown {
   if (typeof value === 'function' || typeof value === 'symbol') {
     throw new TypeError('joint channel release contracts must be structured-clone data');
   }
-  if (value instanceof Uint8Array) {
-    return { $uint8: Array.from(value) };
-  }
+  if (value instanceof Uint8Array) return { $uint8: Array.from(value) };
   if (Array.isArray(value)) {
     if (seen.has(value)) throw new TypeError('joint channel release contracts must be acyclic');
     seen.add(value);
@@ -160,26 +152,20 @@ function stableValue(value: unknown, seen = new Set<object>()): unknown {
     seen.add(value);
     const source = value as Record<string, unknown>;
     const encoded: Record<string, unknown> = {};
-    for (const key of Object.keys(source).sort()) {
-      encoded[key] = stableValue(source[key], seen);
-    }
+    for (const key of Object.keys(source).sort()) encoded[key] = stableValue(source[key], seen);
     seen.delete(value);
     return encoded;
   }
   throw new TypeError('unsupported joint channel release value');
 }
 
-function stableFingerprint(value: unknown): string {
-  return JSON.stringify(stableValue(value));
-}
-
 function releaseFingerprint(payload: CampaignLogosActionPayload): string {
-  return stableFingerprint({
+  return JSON.stringify(stableValue({
     action: payload.action,
     bundle: payload.bundle,
     state: payload.state,
     identity: payload.identity,
-  });
+  }));
 }
 
 function contributionIdentity(
@@ -237,7 +223,10 @@ function contextValue(value: unknown): JointChannelOwnerContext | undefined {
 }
 
 function selectedEnvelope(value: unknown): CampaignSelectedReturnEnvelope {
-  const envelope = record(value, 'joint channel campaign return envelope') as unknown as CampaignSelectedReturnEnvelope;
+  const envelope = record(
+    value,
+    'joint channel campaign return envelope',
+  ) as unknown as CampaignSelectedReturnEnvelope;
   if (envelope.version !== 1 || typeof envelope.needId !== 'string' || !envelope.needId) {
     throw new TypeError('invalid joint channel campaign return envelope');
   }
@@ -278,13 +267,13 @@ function correlationValue(value: unknown): JointChannelCorrelation {
 }
 
 /**
- * Bounded first joint-channel experiment.
+ * Bounded joint-channel owner.
  *
- * The owner does not rank channels and never chooses between incompatible
- * payloads. At least two explicit channels must transfer contributions bound to
- * the same public observation and the exact same native release contract. Only
- * then are they represented as one common-caller proposal. A selected physical
- * return is routed once to every contributing channel.
+ * Contributions are transferred to this owner. When several channels share the
+ * same freshly prepared payload object, its exact release fingerprint is
+ * computed once. The selected payload is then transferred directly to the
+ * common campaign instead of being cloned again. Independent payload objects
+ * still receive the complete deterministic compatibility check.
  */
 export class JointChannelOwner implements CommonCallerOwner {
   readonly id = JOINT_CHANNEL_OWNER_ID;
@@ -298,9 +287,7 @@ export class JointChannelOwner implements CommonCallerOwner {
     }
     for (const channel of channels) {
       nonEmpty(channel.id, 'joint channel id');
-      if (this.#channels.has(channel.id)) {
-        throw new Error(`duplicate joint channel ${channel.id}`);
-      }
+      if (this.#channels.has(channel.id)) throw new Error(`duplicate joint channel ${channel.id}`);
       this.#channels.set(channel.id, channel);
     }
   }
@@ -315,6 +302,7 @@ export class JointChannelOwner implements CommonCallerOwner {
     const collected: CollectedJointContribution[] = [];
     const bindingFailures: string[] = [];
     const contextByChannel = input.contextByChannel ?? {};
+    const fingerprints = new Map<CampaignLogosActionPayload, string>();
 
     for (const [channelId, channel] of this.#channels) {
       const contribution = channel.contribute({
@@ -328,13 +316,18 @@ export class JointChannelOwner implements CommonCallerOwner {
       nonEmpty(contribution.contributionRef, 'joint contributionRef');
       nonEmpty(contribution.jointRef, 'joint jointRef');
       nonEmpty(contribution.actionRef, 'joint actionRef');
-      const reasons = bindingReasons(input.observation, contribution);
-      bindingFailures.push(...reasons);
+      bindingFailures.push(...bindingReasons(input.observation, contribution));
+
+      let fingerprint = fingerprints.get(contribution.payload);
+      if (fingerprint === undefined) {
+        fingerprint = releaseFingerprint(contribution.payload);
+        fingerprints.set(contribution.payload, fingerprint);
+      }
       collected.push({
         channel,
         contribution,
         identity: contributionIdentity(contribution),
-        releaseFingerprint: releaseFingerprint(contribution.payload),
+        releaseFingerprint: fingerprint,
       });
     }
 
@@ -393,11 +386,9 @@ export class JointChannelOwner implements CommonCallerOwner {
         contributionRef: item.contribution.contributionRef,
       })),
     };
-    const payload: CampaignLogosActionPayload = {
-      ...structuredClone(first.contribution.payload),
-      correlation,
-    };
 
+    const payload = first.contribution.payload;
+    payload.correlation = correlation;
     this.#lastAssessment = {
       status: 'joint',
       jointRef,
