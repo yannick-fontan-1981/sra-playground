@@ -1,0 +1,64 @@
+name: Lot 9C3 official native joint channels ABBA
+
+on:
+  push:
+    branches:
+      - recovery/lot9c3-stck-joint-performance-20261113
+  workflow_dispatch:
+
+concurrency:
+  group: lot9c3-official-native-joint-channels-abba
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      LOT9C3_MEASUREMENT_ISOLATION: shared-github-actions-runner-workflow-concurrency-only
+      LOT9C3_OFFICIAL_BENCHMARK_REPORT: lot9c3-official-native-joint-channels-abba-report.json
+      LOT9C3_SOURCE_REFS_REPORT: lot9c3-native-joint-channel-source-refs.json
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.18.0'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Node dependencies
+        run: npm ci
+      - name: Prepare pinned Pyodide assets
+        run: node scripts/prepare-python.mjs
+      - name: Typecheck browser benchmark
+        run: npm run typecheck
+      - name: Verify joint-channel functional contract
+        run: |
+          node --experimental-transform-types --test \
+            tests/v6-public-addressed-joint-channels.test.ts \
+            tests/v6-public-stck-addressed-joint-channels.test.ts
+      - name: Verify benchmark and source identity contracts
+        run: |
+          node --test \
+            tests/native-loop-cost-harness.test.mjs \
+            tests/native-loop-session-adapter.test.mjs \
+            tests/native-loop-browser-worker-dispatch.test.mjs \
+            tests/native-loop-joint-channel-source-refs.test.mjs
+      - name: Show browser runtime
+        run: |
+          command -v google-chrome-stable || command -v google-chrome || command -v chromium || command -v chromium-browser
+          (google-chrome-stable --version || google-chrome --version || chromium --version || chromium-browser --version)
+      - name: Execute official A1 B1 B2 A2 protocol
+        run: node scripts/run-native-joint-channel-official-benchmark.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lot9c3-official-native-joint-channels-abba
+          path: |
+            lot9c3-official-native-joint-channels-abba-report.json
+            lot9c3-native-joint-channel-source-refs.json
+          if-no-files-found: warn
