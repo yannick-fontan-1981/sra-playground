@@ -31,7 +31,7 @@ const REQUIRED_CAPABILITY_IDS = [
 const REQUIRED_OPEN_GATES = [
   'historical-slot-schema',
   'site109-source-identity',
-  'browser-session-reactivation',
+  'browser-checkpoint-persistence',
   'op31-objective-owner',
   'region-product-owner',
   'full-product-composition-performance',
@@ -192,13 +192,26 @@ export async function validateRegistry(registry, options = {}) {
 
   const checkpointCore = capabilities.find(record => record.id === 'runtime.campaign-checkpoint-core');
   push(errors, checkpointCore?.functionalStatus === 'qualified-bounded', 'campaign checkpoint core must remain functionally qualified');
-  push(errors, checkpointCore?.productStatus === 'available-not-main', 'campaign checkpoint core must remain outside the active browser loop until reactivation is qualified');
+  push(errors, checkpointCore?.productStatus === 'active', 'campaign checkpoint core must remain active after browser host/controller reactivation qualification');
   push(errors, checkpointCore?.performanceStatus === 'not-measured-separately', 'campaign checkpoint core must not claim a performance qualification');
+  push(errors, checkpointCore?.implementation?.includes('src/runtime/v6-browser-campaign-checkpoint.ts'), 'campaign checkpoint core must reference the browser checkpoint contract');
+  push(errors, checkpointCore?.implementation?.includes('src/runtime/v6-browser-common-campaign-host.ts'), 'campaign checkpoint core must reference the browser host');
+  push(errors, checkpointCore?.implementation?.includes('src/runtime/v6-browser-agent-controller.ts'), 'campaign checkpoint core must reference the Agent controller');
+  push(errors, checkpointCore?.tests?.includes('tests/v6-browser-session-resume.test.ts'), 'campaign checkpoint core must retain browser session resume tests');
+  push(errors, checkpointCore?.proofs?.includes('docs/recovery/op01-op31-browser-session-resume-20261113.md'), 'campaign checkpoint core must retain the browser session resume proof');
+  push(errors, checkpointCore?.proofs?.includes('docs/recovery/op01-op31-browser-session-resume-qualified.json'), 'campaign checkpoint core must retain the structured browser session resume proof');
+
+  const browserHost = capabilities.find(record => record.id === 'runtime.browser-campaign-host');
+  push(errors, browserHost?.tests?.includes('tests/v6-browser-session-resume.test.ts'), 'browser campaign host must retain session resume coverage');
+
+  const browserController = capabilities.find(record => record.id === 'runtime.browser-agent-controller');
+  push(errors, browserController?.tests?.includes('tests/v6-browser-session-resume.test.ts'), 'browser Agent controller must retain session resume coverage');
 
   const openGates = Array.isArray(registry.openGates) ? registry.openGates : [];
   const gateIds = uniqueIds(openGates, 'openGates', errors);
   push(errors, sameStringSet(gateIds, REQUIRED_OPEN_GATES), 'openGates must preserve all unresolved reconstruction gates');
-  push(errors, openGates.find(gate => gate.id === 'browser-session-reactivation')?.status === 'open', 'browser session reactivation must remain open');
+  push(errors, openGates.some(gate => gate.id === 'browser-session-reactivation') === false, 'qualified browser session reactivation must not remain listed as open');
+  push(errors, openGates.find(gate => gate.id === 'browser-checkpoint-persistence')?.status === 'open', 'durable browser checkpoint persistence must remain open');
   push(errors, openGates.find(gate => gate.id === 'site-publication')?.status === 'blocked', 'Site publication must remain blocked');
 
   const derivedSummary = deriveSummary(registry);
