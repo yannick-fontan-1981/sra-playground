@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import type { DirectionalReturn } from '../src/sic/directional-return.ts';
+import { auditStrategyPriority, countStrategyFacts } from '../src/sic/strategy-coverage.ts';
 import { defaultStrategyRules, matchStrategy, matchesStrategyRule, strategyClassificationChanges, strategyTimeline } from '../src/sic/strategy-timeline.ts';
 
 function step(sequence: number, planRevision: number, stepIndex: number, matched: boolean | null, action = 'Right'): DirectionalReturn {
@@ -66,4 +67,25 @@ test('swapping identically configured rules previews only the episodes whose win
   assert.equal(timeline[0]?.rule?.id, 'check-plan');
   assert.equal(timeline[1]?.rule, null);
   assert.equal(strategyClassificationChanges(timeline, [check, probe]).length, 0);
+});
+
+test('priority audit counts the actual winners across games and distinguishes an absent match', () => {
+  const first = step(1, 1, 0, false), next = step(2, 2, 0, true);
+  const otherGame: DirectionalReturn = {
+    ...step(1, 1, 0, null), sessionId: 'other',
+    decision: { ...first.decision!, remainingSteps: 1, steps: [{ action: 'Right', expected: null }] },
+  };
+  const as = countStrategyFacts(strategyTimeline([first, next]));
+  const syme = countStrategyFacts(strategyTimeline([otherGame, { ...otherGame, sequence: 2 }]));
+  const [replan, check, probe] = defaultStrategyRules;
+  const equivalentCheck = { ...check!, when: ['publishedQuestion'], whenAny: [] };
+  const rules = [replan!, equivalentCheck, probe!];
+  const results = auditStrategyPriority([...as, ...syme], rules);
+  assert.equal(results[2]?.matches, 4);
+  assert.equal(results[2]?.first, 0);
+  assert.deepEqual([...results[2]!.winners].map(([rule, count]) => [rule.id, count]), [['check-plan', 3], ['replan', 1]]);
+  const onlySyme = auditStrategyPriority(syme, rules);
+  assert.equal(onlySyme[0]?.matches, 0);
+  assert.equal(onlySyme[1]?.first, 2);
+  assert.equal(auditStrategyPriority([...as, ...syme], [probe!, replan!, equivalentCheck])[0]?.first, 4);
 });

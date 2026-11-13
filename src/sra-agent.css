@@ -96,6 +96,14 @@
 .sic-strategy-rule-matches summary{padding:5px 0}
 .sic-strategy-rule-impact ol{margin:4px 0 10px;padding-left:1.5rem}
 .sic-strategy-rule-impact li{margin:4px 0;color:var(--subtle)}
+.sic-strategy-audit{margin-bottom:12px;padding:10px 12px;border:1px solid var(--line);border-radius:6px}
+.sic-strategy-audit h5,.sic-strategy-audit p{margin:0 0 6px}
+.sic-strategy-audit label{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:8px 0}
+.sic-strategy-audit select{min-height:34px;max-width:100%;padding:4px 8px;color:var(--ink);background:var(--surface-muted);border:1px solid var(--control-border);border-radius:4px}
+.sic-strategy-audit ul{display:grid;gap:6px;list-style:none;margin:0;padding:0}
+.sic-strategy-audit li{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;padding-left:8px;border-left:2px solid var(--line)}
+.sic-strategy-audit li[data-always-outranked]{border-color:var(--accent)}
+.sic-strategy-audit li p{flex-basis:100%;margin:0;color:var(--subtle)}
 [data-sic-direction-select]{max-width:100%;min-height:34px;color:var(--ink);background:var(--surface-muted);border:1px solid var(--control-border);border-radius:4px}
 .sic-observations details{margin-top:8px}
 .sic-observations summary{cursor:pointer;color:var(--accent-hover);font-size:13px}

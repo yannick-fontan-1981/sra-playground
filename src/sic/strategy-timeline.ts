@@ -8,7 +8,7 @@ export const strategyFacts = {
   explicitPrediction: 'The first step has a prediction',
   publishedQuestion: 'The engine published a question',
 } as const;
-type StrategyFact = keyof typeof strategyFacts;
+export type StrategyFact = keyof typeof strategyFacts;
 
 export interface StrategyRule {
   readonly id: string;

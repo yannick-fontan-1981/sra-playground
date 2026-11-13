@@ -1,4 +1,5 @@
 import type { DirectionalReturn } from './directional-return.ts';
+import { auditStrategyPriority, countStrategyFacts, StrategyCoverage, type FactGroup } from './strategy-coverage.ts';
 import { defaultStrategyRules, matchStrategy, matchesStrategyRule, strategyClassificationChanges, strategyFacts,
   type StrategyRule, type strategyTimeline } from './strategy-timeline.ts';
 
@@ -70,6 +71,12 @@ function button(label: string): HTMLButtonElement {
 export class StrategyEditor {
   private rules = readRules();
   private order = this.rules.map(rule => rule.id);
+  private readonly coverage = new StrategyCoverage();
+  private groups: FactGroup[] = [];
+  private game: string | null = null;
+  private readonly auditScope = document.createElement('select');
+  private readonly auditSummary = document.createElement('p');
+  private readonly auditList = document.createElement('ul');
   private readonly drafts = new Map<string, StrategyRule>();
   private readonly rulePicker = document.createElement('select');
   private readonly priority = document.createElement('select');
@@ -90,6 +97,13 @@ export class StrategyEditor {
   private onSave = () => {};
 
   constructor(container: HTMLElement) {
+    const audit = document.createElement('section');
+    audit.className = 'sic-strategy-audit';
+    const auditHeading = document.createElement('h5');
+    auditHeading.textContent = 'Rule priority audit';
+    this.auditScope.addEventListener('change', () => this.showAudit());
+    audit.append(auditHeading, labeled('Games to compare', this.auditScope), this.auditSummary, this.auditList);
+    this.showAuditScopes();
     const details = document.createElement('details');
     details.className = 'sic-details sic-strategy-editor';
     const heading = document.createElement('summary');
@@ -176,18 +190,71 @@ export class StrategyEditor {
     this.impactList.className = 'sic-strategy-rule-matches sic-strategy-rule-impact';
     this.preview.className = 'sic-strategy-rule-matches';
     details.append(heading, form, this.impactTitle, this.impactSummary, this.impactList, previewTitle, this.summary, this.preview);
-    container.append(details);
+    container.append(audit, details);
     details.addEventListener('toggle', () => { if (details.open) this.showPreview(); });
     this.loadDraft();
   }
 
   get activeRules(): readonly StrategyRule[] { return this.rules; }
 
-  update(timeline: Timeline, renderEvidence: RenderEvidence, onSave: () => void): void {
+  update(game: string | null, timeline: Timeline, renderEvidence: RenderEvidence, onSave: () => void): void {
+    this.game = game;
     this.timeline = timeline;
+    this.groups = countStrategyFacts(timeline);
+    if (game) this.coverage.record(game, this.groups);
+    this.showAuditScopes();
     this.renderEvidence = renderEvidence;
     this.onSave = onSave;
+    this.showAudit();
     if (this.preview.closest('details')?.open) this.showPreview();
+  }
+
+  private showAuditScopes(): void {
+    const selected = this.auditScope.value;
+    const games = [...this.coverage.samples.keys()].sort();
+    const options = [new Option('Current session', 'session'), new Option(`All recorded games (${games.length})`, 'all')];
+    for (const game of games) options.push(new Option(game, game));
+    this.auditScope.replaceChildren(...options);
+    this.auditScope.value = options.some(option => option.value === selected) ? selected : 'session';
+  }
+
+  private showAudit(): void {
+    const scope = this.auditScope.value;
+    const samples = this.coverage.samples;
+    const groups = scope === 'session' ? this.groups : scope === 'all' ? [...samples.values()].flat() : samples.get(scope) ?? [];
+    const episodes = groups.reduce((total, group) => total + group.count, 0);
+    const source = scope === 'session' ? this.game ?? 'Current session'
+      : scope === 'all' ? `${samples.size} recorded games` : scope;
+    const draft = this.pendingRules;
+    const hasDraft = this.drafts.size > 0 || this.orderChanged;
+    const validDraft = hasDraft && draft.every(validRule);
+    const results = auditStrategyPriority(groups, validDraft ? draft : this.rules);
+    this.auditList.replaceChildren();
+    const extent = scope === 'all' ? ' · latest sample per game' : '';
+    const version = validDraft ? ' · draft rules' : ' · saved rules';
+    this.auditSummary.textContent = `${source} · ${episodes} recorded episodes${extent}${version}.`;
+    if (!episodes) {
+      this.auditSummary.textContent += ' Run the agent to collect evidence.';
+      return;
+    }
+    for (const { rule, matches, first, winners } of results) {
+      const row = document.createElement('li');
+      const name = document.createElement('strong');
+      const status = document.createElement('span');
+      name.textContent = rule.title;
+      status.textContent = !matches ? 'No matching episodes' : !first
+        ? `Always outranked · 0 of ${matches} ranked first`
+        : `${first} of ${matches} ranked first`;
+      if (matches && !first) row.dataset.alwaysOutranked = '';
+      row.append(name, status);
+      if (winners.size) {
+        const competing = document.createElement('p');
+        competing.textContent = 'Ranked first instead · ' + [...winners].map(([winner, count]) =>
+          `${winner.title} (${count})`).join(' · ');
+        row.append(competing);
+      }
+      this.auditList.append(row);
+    }
   }
 
   private get selectedRule(): StrategyRule {
@@ -256,6 +323,7 @@ export class StrategyEditor {
     const configurations = this.pendingRules;
     const invalid = configurations.find(candidate => !validRule(candidate));
     this.save.disabled = Boolean(invalid) || (!this.drafts.size && !this.orderChanged);
+    this.showAudit();
     this.showImpact(configurations, invalid);
     const expanded = new Set([...this.preview.querySelectorAll<HTMLDetailsElement>('details[open]')].map(item => item.dataset.match));
     this.preview.replaceChildren();

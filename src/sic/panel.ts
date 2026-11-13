@@ -891,7 +891,7 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
     strategyEditors.set(panel, editor);
   }
   const timeline = strategyTimeline(returns, editor.activeRules);
-  editor.update(timeline, (item, caption) => strategyEvidenceFrames(item, palette, caption),
+  editor.update(board?.gameCode ?? null, timeline, (item, caption) => strategyEvidenceFrames(item, palette, caption),
     () => renderDiscoveryPerspectives(panel, view, board, mode, returns, groups, palette, objectives));
   renderGenericTimeline(panel, strategies, timeline, board?.level, palette, expandedMethods);
   const operation = planSource?.operation;
