@@ -129,3 +129,44 @@ Required next proofs:
 Until then:
 
 **fonctionnellement qualifié, performance officielle à confirmer**.
+
+
+## Generic session runner candidate
+
+A candidate runner factory is now implemented in:
+
+`scripts/native-loop-public-corpus-runner.mjs`
+
+It owns:
+- exact requested action count;
+- public-only corpus policy;
+- explicit A/B `sourceRef`;
+- integer seed;
+- timing scope;
+- per-phase timings for policy, candidate hook and game action;
+- metadata containing the executed action sequence.
+
+It does **not** own:
+- native game construction;
+- extraction of `custom-games.zip`;
+- historical corpus identity;
+- perception or solving.
+
+The measured timing scope is:
+
+`after initial public observation, through policy/hook/action loops, ending after the returned observation of the requested final action`.
+
+Validation on fake game ports:
+- exact 10-action STCK-style session;
+- ACTION7 fallback after terminal public state;
+- refusal of click-only ACTION6 state;
+- A/B and game mismatch rejection;
+- candidate hook exactly once per action;
+- full 40-invocation / 400-action ABBA schedule through the restored session adapter.
+
+Tests:
+**6/6 runner tests**, plus **5/5 corpus policy tests**.
+
+Remaining blocker:
+a native `createSession` implementation bound to the durable custom-games
+archive, followed by execution/recording on real STCK and SMLP.
