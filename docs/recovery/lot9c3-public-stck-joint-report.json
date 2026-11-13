@@ -1,0 +1,60 @@
+{
+  "corpus": "real-public-stck-level-1-seed-0",
+  "archive": "public/python/custom-games.zip",
+  "game": "STCK",
+  "gameId": "stck-c0000001",
+  "seed": 0,
+  "channels": [
+    "public_stck_action_availability_v1",
+    "public_stck_visible_target_v1"
+  ],
+  "selectedAction": {
+    "id": 6,
+    "data": {
+      "x": 4,
+      "y": 52
+    }
+  },
+  "selectedTargetKind": "stack_card",
+  "nextAction": {
+    "id": 6,
+    "data": {
+      "x": 4,
+      "y": 52
+    }
+  },
+  "nextTargetKind": "stack_card",
+  "changedPixelCount": 211,
+  "jointAssessment": {
+    "status": "joint",
+    "jointRef": "public-stck-addressed-joint:public-stck-target:public-observation:lot9c3-real-stck-session:0:stack_card:4:52:10,10,10,10,10,10:ACTION6",
+    "actionRef": "ACTION6",
+    "proposalRef": "joint:public-stck-addressed-joint:public-stck-target:public-observation:lot9c3-real-stck-session:0:stack_card:4:52:10,10,10,10,10,10:ACTION6:lot9c3-real-stck-session:0:public_stck_action_availability_v1+public_stck_visible_target_v1",
+    "channelIds": [
+      "public_stck_action_availability_v1",
+      "public_stck_visible_target_v1"
+    ],
+    "contributions": [
+      {
+        "channelId": "public_stck_action_availability_v1",
+        "contributionRef": "stck-availability:public-observation:lot9c3-real-stck-session:0:ACTION6",
+        "jointRef": "public-stck-addressed-joint:public-stck-target:public-observation:lot9c3-real-stck-session:0:stack_card:4:52:10,10,10,10,10,10:ACTION6",
+        "actionRef": "ACTION6"
+      },
+      {
+        "channelId": "public_stck_visible_target_v1",
+        "contributionRef": "stck-visible-target:public-stck-target:public-observation:lot9c3-real-stck-session:0:stack_card:4:52:10,10,10,10,10,10",
+        "jointRef": "public-stck-addressed-joint:public-stck-target:public-observation:lot9c3-real-stck-session:0:stack_card:4:52:10,10,10,10,10,10:ACTION6",
+        "actionRef": "ACTION6"
+      }
+    ]
+  },
+  "acquisitionChannels": [
+    "public_stck_action_availability_v1",
+    "public_stck_visible_target_v1"
+  ],
+  "causalRemoval": {
+    "availabilityMissingAction": null,
+    "targetMissingAction": null
+  }
+}
