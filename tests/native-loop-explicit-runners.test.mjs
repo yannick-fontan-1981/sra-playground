@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import { createNativeLoopRunSession } from '../scripts/native-loop-session-adapter.mjs';
 
 import { createAStckNativeRunner, createASmlpNativeRunner, createBStckNativeRunner, createBSmlpNativeRunner, EXPLICIT_NATIVE_RUNNER_IDENTITIES } from '../scripts/native-loop-explicit-runners.mjs';
 
@@ -264,4 +265,35 @@ test('all four explicit runner identities are present with A/B kept distinct', (
   assert.equal(EXPLICIT_NATIVE_RUNNER_IDENTITIES.B_SMLP.corpusRef, EXPLICIT_NATIVE_RUNNER_IDENTITIES.A_SMLP.corpusRef);
   assert.equal(EXPLICIT_NATIVE_RUNNER_IDENTITIES.B_STCK.candidateHook, 'region_intervention');
   assert.equal(EXPLICIT_NATIVE_RUNNER_IDENTITIES.B_SMLP.candidateHook, 'region_intervention');
+});
+
+
+test('native runSession routes descriptors to all four explicit runners without silent substitution', async () => {
+  const seen = [];
+  const makeDispatch = (variant, game) => async request => {
+    seen.push(`${variant}/${game}:${request.type}`);
+    return game === 'STCK' ? observation() : smlpObservation();
+  };
+  const candidateHook = {
+    id: 'region_intervention',
+    beforeAction: async () => {},
+  };
+  const runSession = createNativeLoopRunSession({
+    A: {
+      STCK: createAStckNativeRunner({ dispatch: makeDispatch('A', 'STCK'), sourceRef: 'source:A' }),
+      SMLP: createASmlpNativeRunner({ dispatch: makeDispatch('A', 'SMLP'), sourceRef: 'source:A' }),
+    },
+    B: {
+      STCK: createBStckNativeRunner({ dispatch: makeDispatch('B', 'STCK'), sourceRef: 'source:B', candidateHook }),
+      SMLP: createBSmlpNativeRunner({ dispatch: makeDispatch('B', 'SMLP'), sourceRef: 'source:B', candidateHook }),
+    },
+  });
+
+  await runSession({ invocationIndex: 0, series: 'A1', variant: 'A', game: 'STCK', kind: 'warmup', sessionIndex: 0, actions: 3 });
+  await runSession({ invocationIndex: 1, series: 'A1', variant: 'A', game: 'SMLP', kind: 'warmup', sessionIndex: 0, actions: 3 });
+  await runSession({ invocationIndex: 2, series: 'B1', variant: 'B', game: 'STCK', kind: 'warmup', sessionIndex: 0, actions: 3 });
+  await runSession({ invocationIndex: 3, series: 'B1', variant: 'B', game: 'SMLP', kind: 'warmup', sessionIndex: 0, actions: 3 });
+
+  const loads = seen.filter(item => item.endsWith(':load'));
+  assert.deepEqual(loads, ['A/STCK:load', 'A/SMLP:load', 'B/STCK:load', 'B/SMLP:load']);
 });
