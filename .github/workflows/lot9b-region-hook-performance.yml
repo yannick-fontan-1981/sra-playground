@@ -1,0 +1,53 @@
+name: Lot 9B Region hook performance correction
+
+on:
+  push:
+    branches:
+      - recovery/lot9b-region-hook-performance-20261112
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  qualify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.18.0'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Node dependencies
+        run: npm ci
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Targeted Region hook tests
+        run: |
+          node --test \
+            tests/native-loop-region-candidate-hook.test.mjs \
+            tests/native-loop-public-corpus-runner.test.mjs \
+            tests/native-loop-explicit-runners.test.mjs \
+            tests/native-loop-region-benchmark-runners.test.mjs
+      - name: Real archive full-protocol qualification
+        env:
+          LOT9B_REGION_CORPUS_REPORT: lot9b-region-hook-performance-functional-report.json
+        run: node scripts/qualify-native-region-corpus.mjs
+      - name: Compute updated source refs
+        run: |
+          node scripts/native-loop-region-source-refs.mjs \
+            --output lot9b-region-hook-performance-source-refs.json
+      - name: Verify optimized source refs and runner manifest
+        run: node scripts/verify-native-loop-runner-manifest.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lot9b-region-hook-performance
+          path: |
+            lot9b-region-hook-performance-functional-report.json
+            lot9b-region-hook-performance-source-refs.json
+          if-no-files-found: warn

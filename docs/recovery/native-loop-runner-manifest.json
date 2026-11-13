@@ -5,10 +5,10 @@
   "historicalRunnerIdentityRecovered": false,
   "historicalCorpusRecovered": false,
   "sourceRefs": {
-    "commonRoot": "3935f5106c478715040b5b49e6e8ebdd6e960cd353c2eff733f7399571dc521b",
-    "candidateRoot": "b77bf3e8c9e31f4d18ac8a8468a9081dc10788b0c8c317fe7d79adb84e24e32e",
-    "reference": "lot9b-region-v1:A:46ce3478dbc07268333a6a2d423489a689cc5ff509abf1e4bf1f948b174b842c",
-    "candidate": "lot9b-region-v1:B:557ca909c4c9b68ec70d2055a02dfb5c27dffcae338f1025e3b53c67937a609f",
+    "commonRoot": "1e40725745622641b97ca0599193360687a617caeb54f5340de4518475c0b4e5",
+    "candidateRoot": "ba388d25a42fd142c26a7184d9d196a165828b1f5fdb8f4df39a7867e48202e0",
+    "reference": "lot9b-region-v1:A:9f1a55ee13abe82e6c688e8d91fb327582f3f9a86064c1f7f019586dd2887e68",
+    "candidate": "lot9b-region-v1:B:dca04a65d09d3354ee32d3659496e2dd20f013df7d522a1fae295da4bf587ed2",
     "proof": "docs/recovery/native-loop-source-refs.json"
   },
   "transport": {
@@ -85,7 +85,7 @@
       "game": "STCK",
       "gameId": "stck-c0000001",
       "factory": "createAStckNativeRunner",
-      "sourceRef": "lot9b-region-v1:A:46ce3478dbc07268333a6a2d423489a689cc5ff509abf1e4bf1f948b174b842c",
+      "sourceRef": "lot9b-region-v1:A:9f1a55ee13abe82e6c688e8d91fb327582f3f9a86064c1f7f019586dd2887e68",
       "regionHook": "disabled",
       "seed": 0,
       "startLevel": 1,
@@ -98,7 +98,7 @@
       "game": "SMLP",
       "gameId": "smlp-c3000001",
       "factory": "createASmlpNativeRunner",
-      "sourceRef": "lot9b-region-v1:A:46ce3478dbc07268333a6a2d423489a689cc5ff509abf1e4bf1f948b174b842c",
+      "sourceRef": "lot9b-region-v1:A:9f1a55ee13abe82e6c688e8d91fb327582f3f9a86064c1f7f019586dd2887e68",
       "regionHook": "disabled",
       "seed": 0,
       "startLevel": 1,
@@ -111,7 +111,7 @@
       "game": "STCK",
       "gameId": "stck-c0000001",
       "factory": "createBStckNativeRunner",
-      "sourceRef": "lot9b-region-v1:B:557ca909c4c9b68ec70d2055a02dfb5c27dffcae338f1025e3b53c67937a609f",
+      "sourceRef": "lot9b-region-v1:B:dca04a65d09d3354ee32d3659496e2dd20f013df7d522a1fae295da4bf587ed2",
       "regionHook": "region_intervention",
       "seed": 0,
       "startLevel": 1,
@@ -124,7 +124,7 @@
       "game": "SMLP",
       "gameId": "smlp-c3000001",
       "factory": "createBSmlpNativeRunner",
-      "sourceRef": "lot9b-region-v1:B:557ca909c4c9b68ec70d2055a02dfb5c27dffcae338f1025e3b53c67937a609f",
+      "sourceRef": "lot9b-region-v1:B:dca04a65d09d3354ee32d3659496e2dd20f013df7d522a1fae295da4bf587ed2",
       "regionHook": "region_intervention",
       "seed": 0,
       "startLevel": 1,
@@ -136,14 +136,20 @@
     "all four runner functions are explicit and required",
     "A and B use the same transport, game ids, corpus, seed, start level and action sequences",
     "B alone executes the real region_intervention hook",
+    "the generic hook contract remains cloned by default",
+    "the benchmark hook declares readonly inputs and identity-only methodRef data explicitly",
     "missing or mislabeled runners and hooks fail closed",
     "no fallback runner, hidden corpus, retry or sample substitution is allowed"
   ],
   "qualification": {
     "runnerContractTests": 13,
     "fullProtocolFunctionalRun": {
-      "runId": 43351088067,
+      "runId": 43355474605,
+      "jobId": 131656371181,
+      "headSha": "4fd2d6d16c32ae91f7c7e4c9d9405e5f1563c42f",
       "actions": 424,
+      "STCKAcquisitions": 86,
+      "SMLPAcquisitions": 126,
       "status": "passed"
     },
     "workerPyodideParityRun": {
@@ -153,20 +159,21 @@
       "status": "passed"
     },
     "sourceRefRun": {
-      "runId": 43354155809,
-      "jobId": 131652043976,
-      "headSha": "d3aebb4dce5f4a82b80e38b962f2a2cf1c58cebc",
-      "tests": 7,
+      "runId": 43355474605,
+      "jobId": 131656371181,
+      "headSha": "4fd2d6d16c32ae91f7c7e4c9d9405e5f1563c42f",
       "typecheck": "passed",
+      "targetedTests": "passed",
       "sourceRefsComputed": true,
-      "manifestVerification": "passed",
-      "artifactId": 14005396940,
-      "artifactZipSha256": "614583a684e9d9dd94e924c0d86e5d33caff64836fe1d249c8540162b4194156"
+      "manifestVerification": "pending rerun after optimized refs update",
+      "artifactId": 14006190581,
+      "artifactZipSha256": "fba0d8d68b70080c6d980ce8b5c5e5e2c92fe90a55a57da2af6a954648692a6c"
     }
   },
   "officialMeasurement": {
     "executed": false,
     "result": null,
-    "reason": "manifest verified; explicitly non-isolated official ABBA execution is the next step"
+    "previousFailedMeasurementProof": "docs/recovery/lot9b-official-abba-baseline-failure.json",
+    "reason": "optimized manifest requires verification and the same official ABBA protocol must be repeated"
   }
 }

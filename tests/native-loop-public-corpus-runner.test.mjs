@@ -127,7 +127,6 @@ test('four explicit public-corpus runners satisfy the native adapter and full AB
   assert.equal(result.totals.measuredActions, 400);
 });
 
-
 test('candidate post-action hook receives both public observations and stays inside candidate timing', async () => {
   const calls = [];
   const runner = createPublicCorpusSessionRunner({
@@ -146,4 +145,69 @@ test('candidate post-action hook receives both public observations and stays ins
   assert.ok(calls[0].beforeObservation);
   assert.ok(calls[0].observation);
   assert.ok(sample.phases.candidate_hook >= 0);
+});
+
+test('cloned hook mode remains the safe default', async () => {
+  const initial = { availableActionIds: [5], state: 'NOT_FINISHED', marker: { step: 0 } };
+  const after = { availableActionIds: [5], state: 'NOT_FINISHED', marker: { step: 1 } };
+  let beforeEvent;
+  let afterEvent;
+  const runner = createPublicCorpusSessionRunner({
+    variant: 'B',
+    game: 'STCK',
+    sourceRef: 'source:B',
+    createSession: async () => ({
+      initialObservation: () => initial,
+      action: async () => after,
+    }),
+    beforeAction: event => { beforeEvent = event; },
+    afterAction: event => { afterEvent = event; },
+  });
+
+  await runner(descriptor({ variant: 'B', actions: 1 }));
+  assert.notEqual(beforeEvent.observation, initial);
+  assert.notEqual(beforeEvent.observation.marker, initial.marker);
+  assert.notEqual(afterEvent.beforeObservation, initial);
+  assert.notEqual(afterEvent.observation, after);
+  assert.deepEqual(initial.marker, { step: 0 });
+  assert.deepEqual(after.marker, { step: 1 });
+});
+
+test('readonly hook mode passes runner-owned observations without redundant cloning', async () => {
+  const initial = { availableActionIds: [5], state: 'NOT_FINISHED', marker: { step: 0 } };
+  const after = { availableActionIds: [5], state: 'NOT_FINISHED', marker: { step: 1 } };
+  let beforeEvent;
+  let afterEvent;
+  const runner = createPublicCorpusSessionRunner({
+    variant: 'B',
+    game: 'STCK',
+    sourceRef: 'source:B',
+    hookInputMode: 'readonly',
+    createSession: async () => ({
+      initialObservation: () => initial,
+      action: async () => after,
+    }),
+    beforeAction: event => { beforeEvent = event; },
+    afterAction: event => { afterEvent = event; },
+  });
+
+  await runner(descriptor({ variant: 'B', actions: 1 }));
+  assert.equal(beforeEvent.observation, initial);
+  assert.equal(afterEvent.beforeObservation, initial);
+  assert.equal(afterEvent.observation, after);
+  assert.deepEqual(initial.marker, { step: 0 });
+  assert.deepEqual(after.marker, { step: 1 });
+});
+
+test('public corpus runner rejects unknown hook input modes', () => {
+  assert.throws(
+    () => createPublicCorpusSessionRunner({
+      variant: 'B',
+      game: 'STCK',
+      sourceRef: 'source:B',
+      hookInputMode: 'unsafe',
+      createSession: async () => new FakeSession(),
+    }),
+    /hookInputMode must be cloned or readonly/,
+  );
 });
