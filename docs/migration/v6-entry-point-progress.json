@@ -5,7 +5,7 @@
   "inventoryBaseline": {
     "repository": "yannick-fontan-1981/sra-playground",
     "branch": "recovery/site109-reconstruction-20261112",
-    "commit": "81f56ce74a3413d3835bd4b30b9c3fd14570aabc"
+    "commit": "9e04bbd5569f6755178fa1b5276a112ca47d646b"
   },
   "historicalReference": {
     "siteRevision": 109,
@@ -53,10 +53,10 @@
     "counted": false
   },
   "summary": {
-    "inventoriedCapabilities": 47,
-    "qualifiedCapabilities": 47,
+    "inventoriedCapabilities": 50,
+    "qualifiedCapabilities": 50,
     "partialCapabilities": 0,
-    "countedCurrentCapabilities": 47,
+    "countedCurrentCapabilities": 50,
     "performanceQualifiedCapabilities": 6,
     "historicallyMappedCapabilities": 0,
     "evidenceGateCount": 6,
