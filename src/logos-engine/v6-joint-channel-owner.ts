@@ -3,6 +3,9 @@ import {
   type AgentAction,
   type AgentObservation,
 } from '../runtime/contracts.ts';
+import {
+  isSealedJointChannelActionPayload,
+} from './v6-joint-channel-action.ts';
 import type {
   CampaignLogosActionPayload,
   CampaignSelectedReturnEnvelope,
@@ -39,8 +42,16 @@ export interface JointChannelAcquisition {
   returnPayload: unknown;
 }
 
+export type JointChannelAcquisitionMode = 'detached' | 'readonly';
+
 export interface JointChannel {
   readonly id: string;
+  /**
+   * Detached is the default and preserves the historical per-channel clones.
+   * Readonly channels explicitly promise not to mutate the shared selected
+   * action or public return payload.
+   */
+  readonly acquisitionMode?: JointChannelAcquisitionMode;
   contribute(request: JointChannelContributionRequest): JointChannelContribution | undefined;
   acquire(event: JointChannelAcquisition): unknown;
 }
@@ -105,7 +116,6 @@ interface CollectedJointContribution {
   channel: JointChannel;
   contribution: JointChannelContribution;
   identity: JointChannelContributionIdentity;
-  releaseFingerprint: string;
 }
 
 const MIN_JOINT_CHANNELS = 2;
@@ -269,11 +279,10 @@ function correlationValue(value: unknown): JointChannelCorrelation {
 /**
  * Bounded joint-channel owner.
  *
- * Contributions are transferred to this owner. When several channels share the
- * same freshly prepared payload object, its exact release fingerprint is
- * computed once. The selected payload is then transferred directly to the
- * common campaign instead of being cloned again. Independent payload objects
- * still receive the complete deterministic compatibility check.
+ * Contributions are transferred to this owner. Identical shared payloads avoid
+ * deterministic serialization entirely; independent payload objects still
+ * receive the complete exact compatibility check. Qualified sealed payloads
+ * remain immutable and are wrapped with correlation instead of being cloned.
  */
 export class JointChannelOwner implements CommonCallerOwner {
   readonly id = JOINT_CHANNEL_OWNER_ID;
@@ -302,7 +311,6 @@ export class JointChannelOwner implements CommonCallerOwner {
     const collected: CollectedJointContribution[] = [];
     const bindingFailures: string[] = [];
     const contextByChannel = input.contextByChannel ?? {};
-    const fingerprints = new Map<CampaignLogosActionPayload, string>();
 
     for (const [channelId, channel] of this.#channels) {
       const contribution = channel.contribute({
@@ -317,17 +325,10 @@ export class JointChannelOwner implements CommonCallerOwner {
       nonEmpty(contribution.jointRef, 'joint jointRef');
       nonEmpty(contribution.actionRef, 'joint actionRef');
       bindingFailures.push(...bindingReasons(input.observation, contribution));
-
-      let fingerprint = fingerprints.get(contribution.payload);
-      if (fingerprint === undefined) {
-        fingerprint = releaseFingerprint(contribution.payload);
-        fingerprints.set(contribution.payload, fingerprint);
-      }
       collected.push({
         channel,
         contribution,
         identity: contributionIdentity(contribution),
-        releaseFingerprint: fingerprint,
       });
     }
 
@@ -354,8 +355,23 @@ export class JointChannelOwner implements CommonCallerOwner {
     if (ordered.some(item => item.contribution.actionRef !== first.contribution.actionRef)) {
       reasons.push('action_ref_mismatch');
     }
-    if (ordered.some(item => item.releaseFingerprint !== first.releaseFingerprint)) {
-      reasons.push('release_contract_mismatch');
+
+    const firstPayload = first.contribution.payload;
+    const distinctPayloads = ordered.filter(item => item.contribution.payload !== firstPayload);
+    if (distinctPayloads.length > 0) {
+      const fingerprints = new Map<CampaignLogosActionPayload, string>();
+      const fingerprint = (payload: CampaignLogosActionPayload): string => {
+        let value = fingerprints.get(payload);
+        if (value === undefined) {
+          value = releaseFingerprint(payload);
+          fingerprints.set(payload, value);
+        }
+        return value;
+      };
+      const expected = fingerprint(firstPayload);
+      if (distinctPayloads.some(item => fingerprint(item.contribution.payload) !== expected)) {
+        reasons.push('release_contract_mismatch');
+      }
     }
 
     const uniqueReasons = [...new Set(reasons)].sort();
@@ -387,8 +403,14 @@ export class JointChannelOwner implements CommonCallerOwner {
       })),
     };
 
-    const payload = first.contribution.payload;
-    payload.correlation = correlation;
+    let payload: CampaignLogosActionPayload;
+    if (distinctPayloads.length === 0 && isSealedJointChannelActionPayload(firstPayload)) {
+      payload = { ...firstPayload, correlation };
+    } else {
+      payload = firstPayload;
+      payload.correlation = correlation;
+    }
+
     this.#lastAssessment = {
       status: 'joint',
       jointRef,
@@ -414,6 +436,7 @@ export class JointChannelOwner implements CommonCallerOwner {
     const routed = correlation.channels.map(entry => {
       const channel = this.#channels.get(entry.channelId);
       if (!channel) throw new Error(`unknown selected joint channel ${entry.channelId}`);
+      const readonly = channel.acquisitionMode === 'readonly';
       const result = channel.acquire({
         eventRef: event.eventRef,
         needId: envelope.needId,
@@ -421,8 +444,10 @@ export class JointChannelOwner implements CommonCallerOwner {
         jointRef: correlation.jointRef,
         channelId: entry.channelId,
         contributionRef: entry.contributionRef,
-        action: structuredClone(envelope.action),
-        returnPayload: structuredClone(envelope.returnPayload),
+        action: readonly ? envelope.action : structuredClone(envelope.action),
+        returnPayload: readonly
+          ? envelope.returnPayload
+          : structuredClone(envelope.returnPayload),
       });
       return {
         channelId: entry.channelId,
@@ -452,4 +477,5 @@ export class JointChannelOwner implements CommonCallerOwner {
 export const JOINT_CHANNEL_LIMITS = Object.freeze({
   minChannels: MIN_JOINT_CHANNELS,
   maxChannels: MAX_JOINT_CHANNELS,
+  acquisitionModes: Object.freeze(['detached', 'readonly'] as const),
 });
