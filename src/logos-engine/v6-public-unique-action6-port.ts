@@ -41,8 +41,9 @@ function pixel(frame: Uint8Array, x: number, y: number): number {
   return frame[y * 64 + x] ?? -1;
 }
 
-function allSame(values: readonly number[]): boolean {
-  return values.length > 0 && values.every(value => value === values[0]);
+function allSame(values: readonly (number | undefined)[]): boolean {
+  const first = values[0];
+  return first !== undefined && values.every(value => value === first);
 }
 
 function uniqueTarget(
