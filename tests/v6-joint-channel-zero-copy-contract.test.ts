@@ -199,7 +199,7 @@ class DetachedChannel implements JointChannel {
       channelId: this.id,
       contributionRef: `${this.id}:contribution`,
       jointRef: 'detached-joint',
-      actionRef: 'ACTION1',
+      actionRef: `ACTION${this.payload.action.id}`,
       payload: this.payload,
     };
   }
@@ -212,7 +212,7 @@ class DetachedChannel implements JointChannel {
 
 test('generic channels retain detached action and return copies by default', () => {
   const current = observation('detached-return', new Uint8Array(64 * 64).fill(2));
-  const payload = prepareJointChannelActionPayload(current, { id: 1 }, 'detached-joint');
+  const payload = prepareJointChannelActionPayload(current, { id: 5 }, 'detached-joint');
   assert.ok(payload);
   const first = new DetachedChannel('detached-a', payload);
   const second = new DetachedChannel('detached-b', payload);
