@@ -4,11 +4,11 @@ Date : 2026-11-13
 
 Branche : `recovery/lot10d-temporal-selection-rebased-20261112`
 
-Baseline de report : `recovery/site109-reconstruction-20261112` au commit `24fcdbb16c93de59489a6bb0392cc709b7a75d14`
+Branche canonique cible : `recovery/site109-reconstruction-20261112`
 
 Tête canonique parallèle observée après ce jalon :
 
-`81f56ce74a3413d3835bd4b30b9c3fd14570aabc`
+`97ba156fd0ffb8359cb84514c91f1504d84e928c`
 
 ## Règle de portée
 
@@ -16,170 +16,143 @@ Cette feuille décrit une reconstruction qualifiée à partir de preuves GitHub 
 
 ## État actuel
 
-| Étape | Statut | Preuve / limite |
+| Étape | Statut | Limite principale |
 | --- | --- | --- |
 | audit de l'ancienne branche 10D | terminé | aucun delta récupérable |
-| contrat Source / sélection fail-closed | qualifié | sélection externe, aucun fallback |
-| mémoire courante | qualifiée | preuves liées à l'observation |
-| identité/idempotence des retours | qualifiée | scope, chronologie, produits et empreintes |
-| état minimal/restauration | qualifié | descriptif, borné, sans ACT |
-| reçu Source/DRM | qualifié | Source, DRM, observation, domaine et résultat scellés |
-| adaptateur de consommation | qualifié | ne choisit aucun candidat |
-| bridge Logos V6 | qualifié | capability séparée des OP01-OP31 |
-| port runtime passif | qualifié | sélection acceptée, action retenue |
-| audit des gates ACT | qualifié | éligibilité sans permis ni action |
-| binding candidat préparé | qualifié | `AgentAction` et cible explicites |
-| schéma historique du permis | récupéré | donneurs privés épinglés |
-| permis ACT ordinaire | qualifié | lease validée, snapshot/révision/action courants |
-| exécution ACT ordinaire | qualifiée | revalidation et transition `VALIDATED -> RELEASED` |
-| consommation/révocation du permis | qualifiée | journal terminal unique et fail-closed |
-| `ActOutput` minimal | qualifié | identités seulement, `pending_environment_boundary` |
-| checkpoint suspendu `ActionBoundary` | qualifié | lignée et contexte courants |
-| digest de transport | qualifié | adaptateur, workflow, action et contexte scellés |
-| tentative durable avant transport | qualifiée | relecture avant appel externe |
-| dispatch au plus une fois | qualifié | pas de redélivrance après tentative sans dispatch |
-| réponse et dispatch durables | qualifiés | identités, digests et observation acquis |
-| dispatch enregistré réutilisable | qualifié | aucun second transport |
-| résultat externe `unknown` | qualifié fail-closed | réconciliation requise, aucun faux succès |
-| observation causale acquise | **qualifiée** | liée au dispatch, intent, permis et événement |
-| consommation unique de l'observation | **qualifiée** | journal causal, replay idempotent |
-| `ActionObserved` | **qualifié** | intent responsable et retour observé liés |
-| transition `RELEASED -> OBSERVED` | **qualifiée** | transition de lease scellée |
-| reprise unique du checkpoint | **qualifiée** | séquence +1, frame remplacée, lignée d'action effacée |
-| checkpoint repris `ACTIVE` | **qualifié comme projection** | interpréteur scheduler non encore raccordé |
-| réconciliation externe de `unknown` | ouverte | aucune preuve externe raccordée |
-| bridge de continuation workflow | **prochaine étape** | reçu causal non encore consommé par le runtime commun |
-| nouvelle observation TemporalSelection | ouverte | état temporel post-action non reconstruit |
-| consommateur runtime final | ouvert | worker toujours inactif |
-| séries et acquisition différée | ouverte | exclues du chemin ordinaire |
+| contrat Source / sélection | qualifié | choix externe, aucun fallback |
+| mémoire et retours | qualifiés | portée et observation revalidées |
+| état TemporalSelection restaurable | qualifié | descriptif, sans ACT |
+| reçu Source/DRM | qualifié | identité et domaine scellés |
+| bridge Logos V6 | qualifié | capability distincte des OP |
+| port runtime passif | qualifié | action retenue sans ACT |
+| audit des gates ACT | qualifié | éligibilité distincte du permis |
+| binding candidat / cible / action | qualifié | action fournie extérieurement |
+| permis ACT ordinaire | qualifié | lease validée, pas de transport |
+| consommation ACT | qualifiée | permis unique, lease `released` |
+| `ActionBoundary` | qualifiée | tentative pré-transport et dispatch durable |
+| résultat externe `unknown` | fail-closed | aucune redélivrance automatique |
+| reprise causale | qualifiée | observation unique, checkpoint `ACTIVE` |
+| domaine post-action | **qualifié** | fourni par un producteur externe |
+| état TemporalSelection post-action | **qualifié** | neuf, sans mémoire/retour implicite |
+| replay de continuation | **qualifié** | idempotent, domaine divergent refusé |
+| injection scheduler passive | **prochaine étape** | aucun scheduler TypeScript raccordé |
+| exécution du checkpoint `ACTIVE` | ouverte | interpréteur commun absent |
 | producteur public du domaine | ouvert | perception/candidate factory absente |
 | politique historique TemporalSelection | absente | ne pas inventer |
-| position runtime commune | ouverte | `v6-native-runtime.ts` absent |
-| registre d'entrées | ouvert | `v6-entry-point-progress.json` absent |
-| contribution en partie réelle | ouverte | aucune campagne comportementale actuelle |
-| performance officielle | à confirmer | runners/corpus STCK/SMLP manquants |
-| intégration canonique | non réalisée | branche de lot divergente |
+| réconciliation externe `unknown` | ouverte | preuve externe encore absente |
+| consommateur runtime final | ouvert | worker par défaut inactif |
+| campagne en partie réelle | ouverte | aucun gain comportemental établi |
+| performance officielle | à confirmer | runners/corpus STCK/SMLP incomplets |
+| intégration canonique | non réalisée | branche divergente |
 | publication Site | non réalisée | interdite avant intégration GitHub |
 
 ## Qualification actuelle
 
 Commit qualifié :
 
-`f87d41a5dd76fbdab07618537746c9b61d9c7280`
+`a0536fa1dfdef9edf4c4c260385119e85e3ff922`
 
 GitHub Actions :
 
-- run `43426455317` ;
-- **255 tests réussis** ;
+- run `43429163491` ;
+- **270 tests réussis** ;
 - **0 échec** ;
-- typecheck strict réussi, incluant `v6-temporal-causal-resume.ts`.
+- typecheck strict réussi ;
+- checkout GitHub normal ;
+- aucune migration automatique ;
+- permissions GitHub en lecture seulement.
 
-Le précédent jalon comptait 240 tests. Le présent jalon ajoute :
+Le jalon ajoute 15 tests au total précédent de 255.
 
-- 15 tests fonctionnels de reprise causale ;
-- le typecheck strict du nouveau source TypeScript ;
-- les régressions existantes worker, runtime V6, Logos et TemporalSelection.
+## Chaîne reconstruite
 
-## Reprise causale - jalon terminé
+`TemporalSelection -> intent -> action préparée -> permis -> ACT -> tentative durable -> transport -> dispatch -> observation causale -> checkpoint ACTIVE -> domaine post-action -> TemporalObservationState neuf`
 
-### Donneurs récupérés
+## Bridge post-reprise - jalon terminé
 
-Les invariants proviennent du commit privé épinglé :
+### Domaine externe scellé
 
-`212d8d426f07eea2b6797c2bb647545767488a96`
+Le reçu de domaine conserve :
 
-Donneurs principaux :
+- producteur ;
+- Source, workflow et instance ;
+- run, timeline, frame et révision ;
+- raw input acquis ;
+- reçu causal, dispatch, observation et checkpoint repris ;
+- alternatives, exigences et preuves ;
+- fingerprint du domaine.
 
-- `scheduler/contracts.py` ;
-- `scheduler/runtime.py` ;
-- `logos/operations.py` ;
-- `runtime/boundary.py`.
+Le bridge valide le domaine mais ne produit aucune alternative et ne choisit aucun candidat.
 
-Document du jalon :
+### État neuf
 
-`docs/recovery/lot10d-temporal-causal-resume.md`
+Le nouvel état ne transporte pas automatiquement :
 
-### Chaîne qualifiée
+- retours de l'observation précédente ;
+- consommations de retours précédentes ;
+- contrat mémoire précédent ;
+- preuves mémoire précédentes ;
+- autorité ACT.
 
-`dispatch durable -> observation causale -> ActionObserved -> lease OBSERVED -> checkpoint ACTIVE`
+Toute réutilisation future doit être explicitement requalifiée.
 
-### Garanties
+### Reçu et idempotence
 
-- tentative et dispatch durables exacts requis ;
-- résultat `unknown` exclu du succès ;
-- Source, checkpoint, run, timeline et frame courants ;
-- révision et snapshot sémantique courants ;
-- intent responsable canonique ;
-- liaison courante du retour observé ;
-- dispatch, reçu ACT et transition de lease canoniques ;
-- observation strictement nouvelle ;
-- chronologie postérieure au dispatch ;
-- une seule consommation de l'observation ;
-- une seule reprise du checkpoint ;
-- ajout du raw input dans le binding attendu ;
-- lignée d'action en attente effacée ;
-- séquence de checkpoint incrémentée ;
-- journal borné sans éviction silencieuse ;
-- replay exact idempotent.
+Le reçu de continuation conserve la lignée causale complète et marque :
 
-### Résultat projeté
+- continuation préparée ;
+- scheduler non démarré ;
+- worker sans action ;
+- ACT non autorisé.
 
-La reprise crée :
+Le replay exact réutilise le reçu existant. Un domaine différent pour le même reçu causal est refusé.
 
-- un reçu d'observation acquise ;
-- un reçu `ActionObserved` ;
-- une transition de lease `released -> observed` ;
-- un checkpoint `active` ;
-- un reçu causal atomique.
+### Journal
 
-Le checkpoint projeté conserve l'identité de la nouvelle frame et du raw input acquis, mais le véritable interpréteur scheduler n'est pas encore appelé.
+- capacité par défaut : 128 ;
+- maximum : 1024 ;
+- une seule continuation par reçu, checkpoint, observation et domaine ;
+- aucune éviction silencieuse ;
+- restauration avec validation des fingerprints.
 
-### Protection contre le faux succès
+## Prochaine étape - `SchedulerContinuationPort`
 
-Une tentative sans dispatch durable conserve :
+Reconstruire une frontière passive :
 
-- `outcomeStatus: unknown` ;
-- `redeliveryPermitted: false` ;
-- `reconciliationRequired: true` ;
-- aucune observation consommée ;
-- aucun checkpoint repris.
+`reçu de continuation -> checkpoint ACTIVE + TemporalObservationState -> port scheduler injecté`
 
-La future réconciliation externe restera un chemin séparé.
+Le port devra produire deux résultats explicites :
 
-## Prochaine étape - bridge de continuation runtime
-
-Reconstruire séparément :
-
-`reçu causal -> checkpoint ACTIVE -> nouvelle observation TemporalSelection -> continuation du workflow`
+1. `continuation_withheld` lorsque le scheduler manque, est périmé ou refuse la lignée ;
+2. `continuation_accepted` seulement lorsqu'un consommateur injecté confirme l'identité exacte du checkpoint, de l'état et du reçu causal.
 
 La qualification devra couvrir :
 
-1. la consommation unique du reçu causal ;
-2. l'identité de la nouvelle observation liée au dispatch ;
-3. l'invalidation des preuves devenues périmées après l'action ;
-4. la conservation de la lignée dispatch / événement / intent / permis / reçu ACT ;
-5. la création ou restauration d'un `TemporalObservationState` post-action ;
-6. la séparation entre reprise du checkpoint et exécution suivante du workflow ;
-7. l'interdiction d'une seconde continuation depuis le même reçu ;
-8. l'exclusion permanente d'une tentative `unknown` non réconciliée ;
-9. le maintien du worker public en mode passif tant que le producteur et le consommateur final manquent.
+1. consommation unique du reçu de continuation ;
+2. transmission atomique du checkpoint et de l'état ;
+3. identité Source / workflow / run / timeline / frame / révision ;
+4. fingerprint du reçu, du domaine, du checkpoint et de l'état ;
+5. refus d'un scheduler absent ;
+6. refus d'un scheduler provenant d'une autre révision ;
+7. refus d'un résultat qui change le checkpoint ou l'état ;
+8. replay exact idempotent ;
+9. absence de sélection, d'ACT et d'action dans le port ;
+10. worker public toujours inactif par défaut.
 
 ## Étapes ultérieures
 
-1. construire le bridge de continuation depuis le reçu causal ;
-2. reconstruire le nouvel état temporel post-action ;
-3. raccorder le checkpoint repris à un scheduler/runtime public qualifié ;
-4. reconstruire la réconciliation externe des résultats `unknown` ;
-5. reconstruire les variantes série et acquisition différée si nécessaires ;
-6. reconstruire le producteur public du domaine et du candidat d'action ;
-7. raccorder la chaîne au runtime seulement par injection qualifiée ;
-8. construire une campagne fonctionnelle durable ;
-9. reconstruire le registre d'entrées ;
-10. restaurer les runners officiels STCK/SMLP ;
-11. mesurer selon ABBA ;
-12. réconcilier avec la tête canonique ;
-13. intégrer dans `recovery/site109-reconstruction-20261112` ;
-14. publier le Site après vérification SHA GitHub <-> Site.
+1. qualifier le port scheduler injecté ;
+2. raccorder un interpréteur commun versionné ;
+3. qualifier la continuation réelle du workflow ;
+4. reconstruire le producteur public du domaine et du candidat ;
+5. traiter la réconciliation externe des résultats `unknown` ;
+6. construire une campagne fonctionnelle durable ;
+7. reconstruire le registre des entrées ;
+8. restaurer les runners officiels STCK/SMLP ;
+9. mesurer selon ABBA ;
+10. réconcilier avec la tête canonique ;
+11. intégrer dans `recovery/site109-reconstruction-20261112` ;
+12. publier le Site après vérification SHA GitHub <-> Site.
 
 ## Performance
 
@@ -187,7 +160,7 @@ Critère historique :
 
 - STCK global strictement < +10 % ;
 - SMLP global strictement < +10 % ;
-- jeux évalués séparément ;
+- jeux séparés ;
 - aucune compensation ;
 - phase interne > +10 % admissible si le global du même jeu reste sous le seuil.
 
