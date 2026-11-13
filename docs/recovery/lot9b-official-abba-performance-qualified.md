@@ -10,8 +10,8 @@ Le sous-lot **9B `region_intervention`** est maintenant :
 
 Le protocole officiel Worker/Pyodide optimisé a passé séparément les deux jeux :
 
-- **STCK : +7,155868 % — PASS** ;
-- **SMLP : −4,679380 % — PASS**.
+- **STCK : +7,155963 % — PASS** ;
+- **SMLP : −4,679306 % — PASS**.
 
 Le seuil est strictement inférieur à +10,000 % pour chaque jeu. Aucun jeu ne
 compense l’autre.
@@ -51,9 +51,9 @@ Volumes :
 
 ## STCK
 
-- médiane A : **54,9000 ms** ;
-- médiane B : **58,8286 ms** ;
-- delta global : **+7,155868 %** ;
+- médiane A : **54,5000 ms** ;
+- médiane B : **58,4000 ms** ;
+- delta global : **+7,155963 %** ;
 - verdict : **PASS**.
 
 Phases médianes :
@@ -74,9 +74,9 @@ L’intégrité Region côté B est conservée :
 
 ## SMLP
 
-- médiane A : **123,6000 ms** ;
-- médiane B : **117,8143 ms** ;
-- delta global : **−4,679380 %** ;
+- médiane A : **123,9500 ms** ;
+- médiane B : **118,1500 ms** ;
+- delta global : **−4,679306 %** ;
 - verdict : **PASS**.
 
 Phases médianes :
