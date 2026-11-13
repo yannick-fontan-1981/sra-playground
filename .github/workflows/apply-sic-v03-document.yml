@@ -1,5 +1,6 @@
 name: Apply SIC v0.3 document
 
+# This second commit triggers the workflow after GitHub has registered it.
 on:
   push:
     branches:
