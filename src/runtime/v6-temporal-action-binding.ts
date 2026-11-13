@@ -1,5 +1,8 @@
 import type { TemporalSelectionBridgeResult } from '../logos-engine/v6-temporal-selection-bridge.ts';
-import type { TemporalObservationIdentity } from '../logos-engine/v6-temporal-selection-contract.ts';
+import type {
+  TemporalObservationIdentity,
+  TemporalSelectionAccepted,
+} from '../logos-engine/v6-temporal-selection-contract.ts';
 import type { ActionId, AgentAction, AgentObservation } from './contracts.ts';
 import { isAgentAction } from './contracts.ts';
 import { fingerprintAgentObservation } from './v6-temporal-decision-port.ts';
@@ -103,10 +106,11 @@ function validTarget(target: TemporalPreparedActionTarget): boolean {
       coordinate => Number.isInteger(coordinate) && coordinate >= 0 && coordinate < 64,
     );
   }
-  return Number.isInteger(target.actionId)
-    && target.actionId >= 0
-    && target.actionId <= 7
-    && target.actionId !== 6;
+  const actionId = target.actionId as number;
+  return Number.isInteger(actionId)
+    && actionId >= 0
+    && actionId <= 7
+    && actionId !== 6;
 }
 
 function targetMatchesAction(
@@ -180,14 +184,21 @@ export function temporalPreparedActionBindingFingerprint(
   return `fnv1a32:${(hash >>> 0).toString(16).padStart(8, '0')}`;
 }
 
-function validateWitness(
+function acceptedDecision(
   projection: TemporalSelectionBridgeResult,
-  witness: PreparedTemporalActionWitness,
-): void {
+): TemporalSelectionAccepted {
   if (projection.decision.status !== 'accepted') {
     throw new Error('cannot bind an action candidate to a refused TemporalSelection decision');
   }
-  if (witness.selectedRef !== projection.decision.selectedRef) {
+  return projection.decision;
+}
+
+function validateWitness(
+  projection: TemporalSelectionBridgeResult,
+  witness: PreparedTemporalActionWitness,
+): TemporalSelectionAccepted {
+  const decision = acceptedDecision(projection);
+  if (witness.selectedRef !== decision.selectedRef) {
     throw new Error('prepared action witness selected ref mismatch');
   }
   if (witness.decisionFingerprint !== projection.decisionRef) {
@@ -209,12 +220,13 @@ function validateWitness(
     throw new Error('prepared action witness identity or evidence domain is invalid');
   }
   if (
-    projection.decision.selectedEvidenceRefs.some(
+    decision.selectedEvidenceRefs.some(
       ref => !witness.groundingEvidenceRefs.includes(ref),
     )
   ) {
     throw new Error('prepared action witness lost selected evidence during grounding');
   }
+  return decision;
 }
 
 export function createTemporalPreparedActionBindingReceipt(
@@ -223,7 +235,7 @@ export function createTemporalPreparedActionBindingReceipt(
   observation: AgentObservation,
   candidate: TemporalPreparedActionCandidateSpec,
 ): TemporalPreparedActionBindingReceipt {
-  validateWitness(projection, witness);
+  const decision = validateWitness(projection, witness);
   if (
     !validRef(candidate.actionCandidateRef)
     || !validRef(candidate.targetRef)
@@ -247,7 +259,7 @@ export function createTemporalPreparedActionBindingReceipt(
     observationSequence: observation.sequence,
     observationFingerprint: fingerprintAgentObservation(observation),
     temporalIdentity: structuredClone(projection.state.identity),
-    selectedRef: projection.decision.selectedRef,
+    selectedRef: decision.selectedRef,
     decisionFingerprint: projection.decisionRef,
     intentRef: witness.intentRef,
     currentFrameRef: witness.currentFrameRef,
@@ -277,7 +289,7 @@ export function validateTemporalPreparedActionBindingReceipt(
   witness: PreparedTemporalActionWitness,
   observation: AgentObservation,
 ): void {
-  validateWitness(projection, witness);
+  const decision = validateWitness(projection, witness);
   if (receipt.schemaVersion !== TEMPORAL_ACTION_BINDING_SCHEMA_VERSION) {
     throw new Error('unsupported temporal prepared action binding version');
   }
@@ -291,7 +303,7 @@ export function validateTemporalPreparedActionBindingReceipt(
     throw new Error('prepared action binding Source identity mismatch');
   }
   if (
-    receipt.selectedRef !== projection.decision.selectedRef
+    receipt.selectedRef !== decision.selectedRef
     || receipt.decisionFingerprint !== projection.decisionRef
     || receipt.intentRef !== witness.intentRef
     || receipt.currentFrameRef !== witness.currentFrameRef
@@ -343,7 +355,7 @@ export function validateTemporalPreparedActionBindingReceipt(
     ...receipt.actionEvidenceRefs,
     ...receipt.targetEvidenceRefs,
   ]);
-  if (projection.decision.selectedEvidenceRefs.some(ref => !evidence.has(ref))) {
+  if (decision.selectedEvidenceRefs.some(ref => !evidence.has(ref))) {
     throw new Error('prepared action binding does not preserve selected evidence');
   }
 
@@ -360,9 +372,10 @@ export function bindTemporalPreparedActionCandidate(
   observation: AgentObservation,
 ): TemporalPreparedActionBindingResult {
   validateTemporalPreparedActionBindingReceipt(receipt, projection, witness, observation);
+  const decision = acceptedDecision(projection);
   const evidenceRefs = [...new Set([
     projection.decisionRef,
-    ...projection.decision.status === 'accepted' ? projection.decision.selectedEvidenceRefs : [],
+    ...decision.selectedEvidenceRefs,
     ...receipt.groundingEvidenceRefs,
     ...receipt.actionEvidenceRefs,
     ...receipt.targetEvidenceRefs,
