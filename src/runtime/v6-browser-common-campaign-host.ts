@@ -6,6 +6,7 @@ import {
   type ProductReadinessState,
   type XYActionData,
 } from '../agent-product-dispatch.ts';
+import type { FieldStockDependencies } from '../logos-engine/field-stock.ts';
 import {
   CommonCampaignOwner,
   type CampaignPrepareResult,
@@ -13,12 +14,24 @@ import {
   type CommonCampaignOwnerOptions,
 } from '../logos-engine/v6-common-campaign-owner.ts';
 import {
+  FieldStockCallerOwnerAdapter,
+  FIELD_STOCK_CALLER_OWNER_ID,
+  type FieldStockCampaignContext,
+} from '../logos-engine/v6-field-stock-caller-adapter.ts';
+import {
   PublicSingleActionCallerOwnerAdapter,
   PUBLIC_SINGLE_ACTION_CALLER_OWNER_ID,
 } from '../logos-engine/v6-public-single-action-caller-adapter.ts';
 import type { AgentObservation } from './contracts.ts';
 import type { GameObservation } from './browser-games.ts';
+import { ObservedAddressedMaterialRuntime } from './observed-addressed-material-runtime.ts';
 import { BrowserAgentObservationStream } from './v6-browser-agent-observation.ts';
+import {
+  completePublicCampaignEntities,
+  measurePublicCampaignObservation,
+  PUBLIC_FIELD_STOCK_DEPENDENCIES,
+  type PublicCampaignObservation,
+} from './v6-public-observation-measurement.ts';
 
 export interface BrowserCampaignObservationPair {
   sessionId: string;
@@ -51,6 +64,16 @@ export interface BrowserCampaignOwnerTransport {
   ownerId: string;
   context(input: BrowserCampaignObservationPair): unknown;
   returnPayload(input: BrowserCampaignReturnPair): unknown;
+  /**
+   * Observe a physical return after the selected owner has acquired it and
+   * before the product presents the observation. Passive owners may use this to
+   * update retained public knowledge, but they may not acquire the selected
+   * need or propose another action from this hook.
+   */
+  observeAcquiredReturn?(
+    input: BrowserCampaignReturnPair,
+    receipt: CampaignReturnReceipt,
+  ): void;
 }
 
 export interface BrowserCampaignHostOptions {
@@ -125,13 +148,126 @@ function cloneAgentObservation(observation: AgentObservation): AgentObservation 
   };
 }
 
+export interface BrowserFieldStockCampaignTransportOptions {
+  runtime?: ObservedAddressedMaterialRuntime;
+  dependencies?: FieldStockDependencies;
+  remaining?: number;
+}
+
+/**
+ * Translate the public browser observation stream into FieldStock contexts.
+ *
+ * The transport does not create an initial prior. With an empty runtime it is a
+ * neutral owner and returns no proposal. If a retained prior is explicitly
+ * supplied, connected components are materialized only for revalidation. A
+ * physical return is first acquired by the selected campaign owner, then this
+ * transport observes the same public return so a level boundary can retain and
+ * revalidate FieldStock before the next decision.
+ */
+export class BrowserFieldStockCampaignTransport implements BrowserCampaignOwnerTransport {
+  readonly ownerId = FIELD_STOCK_CALLER_OWNER_ID;
+  readonly runtime: ObservedAddressedMaterialRuntime;
+  readonly #dependencies: FieldStockDependencies;
+  readonly #remaining: number;
+  #sessionId: string | null = null;
+  #current: PublicCampaignObservation | null = null;
+  #lastBoundaryStatus: ReturnType<ObservedAddressedMaterialRuntime['boundary']> | null = null;
+  #lastRevalidationStatus: ReturnType<ObservedAddressedMaterialRuntime['revalidate']> | null = null;
+
+  constructor(options: BrowserFieldStockCampaignTransportOptions = {}) {
+    this.runtime = options.runtime ?? new ObservedAddressedMaterialRuntime();
+    this.#dependencies = options.dependencies ?? PUBLIC_FIELD_STOCK_DEPENDENCIES;
+    this.#remaining = options.remaining ?? 64;
+    if (!Number.isInteger(this.#remaining) || this.#remaining <= 0) {
+      throw new RangeError('browser FieldStock remaining budget must be a positive integer');
+    }
+  }
+
+  context(input: BrowserCampaignObservationPair): FieldStockCampaignContext {
+    this.#acceptSession(input.sessionId);
+    const measured = this.#consume(input.agentObservation);
+    return {
+      sessionId: input.sessionId,
+      observation: measured.observation,
+      rows: measured.rows,
+      remaining: this.#remaining,
+      dependencies: this.#dependencies,
+    };
+  }
+
+  returnPayload(input: BrowserCampaignReturnPair): unknown {
+    this.#acceptSession(input.sessionId);
+    const measured = measurePublicCampaignObservation(input.afterAgentObservation);
+    return {
+      after: measured.observation,
+      rows: measured.rows,
+    };
+  }
+
+  observeAcquiredReturn(
+    input: BrowserCampaignReturnPair,
+    _receipt: CampaignReturnReceipt,
+  ): void {
+    this.#acceptSession(input.sessionId);
+    this.#consume(input.afterAgentObservation);
+  }
+
+  get lastBoundaryStatus(): ReturnType<ObservedAddressedMaterialRuntime['boundary']> | null {
+    return this.#lastBoundaryStatus;
+  }
+
+  get lastRevalidationStatus(): ReturnType<ObservedAddressedMaterialRuntime['revalidate']> | null {
+    return this.#lastRevalidationStatus;
+  }
+
+  get currentPublicObservation(): PublicCampaignObservation | null {
+    return this.#current;
+  }
+
+  #acceptSession(sessionId: string): void {
+    nonEmpty(sessionId, 'browser FieldStock session id');
+    if (this.#sessionId === null) {
+      this.#sessionId = sessionId;
+      return;
+    }
+    if (this.#sessionId !== sessionId) {
+      throw new Error('browser FieldStock transport cannot be reused across sessions');
+    }
+  }
+
+  #consume(source: AgentObservation): PublicCampaignObservation {
+    const observationRef = `public-observation:${source.sessionId}:${source.sequence}`;
+    if (this.#current?.observation.observation_ref === observationRef) {
+      return this.#current;
+    }
+
+    let measured = measurePublicCampaignObservation(source);
+    if (this.#current) {
+      this.#lastBoundaryStatus = this.runtime.boundary(
+        this.#current.observation,
+        measured.observation,
+      );
+    }
+    if (this.runtime.status() === 'retained_pending_revalidation') {
+      measured = completePublicCampaignEntities(measured);
+    }
+    this.#lastRevalidationStatus = this.runtime.revalidate(
+      measured.observation,
+      measured.rows,
+    );
+    this.#current = measured;
+    return measured;
+  }
+}
+
 /**
  * Own the public product seam around CommonCampaignOwner.
  *
  * One cycle is deliberately ordered as:
  *
  * public observation -> owner contexts -> Logos preparation -> product dispatch
- * -> public return conversion -> correlated acquisition -> presentation.
+ * -> public return conversion -> correlated acquisition -> passive public return
+ * observation -> presentation.
  *
  * Therefore no next symbolic decision can be requested before the selected
  * owner has consumed the physical return carrying the same `needId`.
@@ -261,6 +397,9 @@ export class BrowserCommonCampaignHost {
             active.agentObservation = converted;
             returnedObservation = cloneAgentObservation(converted);
             returnCommitted = true;
+            for (const observer of this.#transports.values()) {
+              observer.observeAcquiredReturn?.(returnPair, acquisition);
+            }
             ports.onCampaignAcquired?.(acquisition, returnedObservation);
 
             await ports.present(next, generation);
@@ -351,5 +490,46 @@ export function createPublicSingleActionBrowserCampaignHost(
       context: input => ({ observation: input.agentObservation }),
       returnPayload: input => ({ observation: input.afterAgentObservation }),
     }],
+  });
+}
+
+export interface FieldStockAndPublicSingleActionBrowserCampaignHostOptions
+  extends PublicSingleActionBrowserCampaignHostOptions {
+  fieldStockRuntime?: ObservedAddressedMaterialRuntime;
+  fieldStockDependencies?: FieldStockDependencies;
+  fieldStockRemaining?: number;
+}
+
+/**
+ * Build the bounded product host with both the retained FieldStock OP18 owner and
+ * the strict public OP28 fallback. The neutral campaign preserves zero, one and
+ * multiple proposals exactly; no owner receives priority over another.
+ */
+export function createFieldStockAndPublicSingleActionBrowserCampaignHost(
+  options: FieldStockAndPublicSingleActionBrowserCampaignHostOptions = {},
+): BrowserCommonCampaignHost {
+  const runtime = options.fieldStockRuntime ?? new ObservedAddressedMaterialRuntime();
+  const fieldOwner = new FieldStockCallerOwnerAdapter(runtime);
+  const publicOwner = new PublicSingleActionCallerOwnerAdapter();
+  const fieldTransport = new BrowserFieldStockCampaignTransport({
+    runtime,
+    dependencies: options.fieldStockDependencies,
+    remaining: options.fieldStockRemaining,
+  });
+  const campaign = new CommonCampaignOwner(
+    [fieldOwner, publicOwner],
+    options.campaign,
+  );
+  return new BrowserCommonCampaignHost({
+    campaign,
+    eventRef: options.eventRef,
+    ownerTransports: [
+      fieldTransport,
+      {
+        ownerId: PUBLIC_SINGLE_ACTION_CALLER_OWNER_ID,
+        context: input => ({ observation: input.agentObservation }),
+        returnPayload: input => ({ observation: input.afterAgentObservation }),
+      },
+    ],
   });
 }
