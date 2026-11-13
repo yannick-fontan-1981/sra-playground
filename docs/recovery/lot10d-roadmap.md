@@ -1,6 +1,6 @@
 # Lot 10D - TemporalSelection - feuille de route de reconstruction
 
-Date : 2026-11-12
+Date : 2026-11-13
 
 Branche : `recovery/lot10d-temporal-selection-rebased-20261112`
 
@@ -8,7 +8,7 @@ Baseline de report : `recovery/site109-reconstruction-20261112` au commit `24fcd
 
 Tête canonique parallèle observée après ce jalon :
 
-`e3fa1901452423a714d3a47d5a469dbf112c55b0`
+`d7ba12eef7063cf86dfa55f43879c29bc1dfa87d`
 
 ## Règle de portée
 
@@ -29,12 +29,15 @@ Cette feuille décrit une reconstruction qualifiée à partir de preuves GitHub 
 | port runtime passif | qualifié | sélection acceptée, action retenue |
 | audit des gates ACT | qualifié | éligibilité sans permis ni action |
 | binding candidat préparé | qualifié | `AgentAction` et cible explicites, CI 181/181 |
-| schéma historique du permis | **récupéré** | donneurs privés épinglés par commit et blobs |
-| permis ACT ordinaire | **qualifié** | lease validée, snapshot/révision/action courants, CI 202/202 |
-| exécution ACT | **prochaine étape** | lease pas encore passée à `RELEASED` |
-| consommation/révocation du permis | ouverte | aucun reçu persistant de consommation unique |
-| frontière d'envoi exactement une fois | ouverte | `ActionBoundary` non reconstruite |
-| séries et acquisition différée | ouverte | volontairement exclues du permis ordinaire |
+| schéma historique du permis | récupéré | donneurs privés épinglés par commit et blobs |
+| permis ACT ordinaire | qualifié | lease validée, snapshot/révision/action courants, CI 202/202 |
+| exécution ACT ordinaire | **qualifiée** | revalidation courante et transition `VALIDATED -> RELEASED` |
+| consommation/révocation du permis | **qualifiée** | journal terminal unique et fail-closed, CI 225/225 |
+| `ActOutput` minimal | **qualifié** | identités seulement, `pending_environment_boundary` |
+| frontière d'envoi exactement une fois | **prochaine étape** | `ActionBoundary` non reconstruite |
+| résultat de transport incertain | ouverte | redélivrance et réconciliation à reconstruire |
+| acquisition et reprise causale | ouverte | observation et workflow non raccordés |
+| séries et acquisition différée | ouverte | volontairement exclues du chemin ordinaire |
 | producteur public du domaine | ouvert | perception/candidate factory absente |
 | politique historique TemporalSelection | absente | ne pas inventer |
 | position runtime commune | ouverte | `v6-native-runtime.ts` absent |
@@ -46,28 +49,28 @@ Cette feuille décrit une reconstruction qualifiée à partir de preuves GitHub 
 
 ## Qualification actuelle
 
-Commit de code et de provenance qualifié :
+Commit de code et d'invariants qualifié :
 
-`467562a1e939e1d8fdc2609d0f212e73df5aeb24`
+`ad3437f87f8ea490b1bf1575fe0a1ffba5b1ef70`
 
 GitHub Actions :
 
-- run `43356644647` ;
-- **202 tests réussis** ;
+- run `43359714683` ;
+- **225 tests réussis** ;
 - **0 échec** ;
 - typecheck strict réussi.
 
-Le précédent jalon comptait 181 tests. Le présent jalon ajoute :
+Le précédent jalon comptait 202 tests. Le présent jalon ajoute :
 
-- 18 tests du permis ACT ordinaire ;
-- 3 tests anti-dérive des donneurs privés ;
+- 20 tests de consommation et révocation ACT ;
+- 3 tests anti-dérive supplémentaires des donneurs ;
 - le typecheck strict du nouveau source TypeScript.
 
-## Permis ACT ordinaire - jalon terminé
+## Consommation ACT ordinaire - jalon terminé
 
 ### Donneurs récupérés
 
-Le schéma et la séparation des autorités ont été retrouvés au commit privé épinglé :
+La revalidation ACT, `ActOutput` et la séparation avec la frontière environnementale ont été retrouvés au commit privé épinglé :
 
 `212d8d426f07eea2b6797c2bb647545767488a96`
 
@@ -77,98 +80,108 @@ Carte publique :
 
 Les donneurs couvrent :
 
-- le schéma historique de `ActionIntent` utile au chemin de release ;
-- `ConcentrationLease` ;
-- `ActionReleasePermit` ;
-- la revalidation ACT ;
-- la transition de lease vers `RELEASED` ;
-- la revalidation du scheduler avant dispatch ;
+- le schéma historique utile du permis et de la lease ;
+- la revalidation des supports, responsabilités et contextes ;
+- la transition de concentration vers `RELEASED` ;
+- le `ActOutput` minimal `pending_environment_boundary` ;
+- la revalidation scheduler avant transport ;
 - la frontière d'envoi exactement une fois et sa récupération.
 
 Le code privé n'est pas republié.
 
 ### Chaîne reconstruite
 
-`TemporalSelection acceptée -> intent préparé -> binding candidat/action -> audit éligible -> lease validated -> permis ACT`
+`TemporalSelection acceptée -> intent préparé -> binding candidat/action -> audit éligible -> permis ACT -> consommation ACT`
 
-### Garanties du permis
+### Garanties de consommation
 
-- identité Source, décision, intent, binding et observation préservée ;
-- session, séquence, identité temporelle et révision explicites ;
-- snapshot pré-action lié à l'observation publique exacte ;
+- empreintes du binding, du permis et de la lease revalidées ;
+- Source, workflow, session, timeline et frame courants ;
+- révision et identité temporelle exactes ;
+- séquence, image publique et snapshot pré-action exacts ;
+- permis et lease canoniques ;
+- lease toujours validée et non expirée ;
 - action encore disponible ;
-- effet attendu appartenant à l'intent gelé ;
-- références de viability, commitment, DRM, SRC, principe, prémisses et falsificateurs déjà qualifiées ;
-- lease non périmée ;
-- permis non périmé et ne dépassant pas la lease ;
-- preuves explicites, uniques et bornées ;
-- empreintes de lease et de permis ;
-- aucune série ni acquisition différée sur le chemin courant.
+- supports non retirés ;
+- responsabilité et preuves de consommation du but courantes ;
+- continuation parent et transport des contributions courants ;
+- contexte canonique d'exécution courant ;
+- une seule identité terminale par permis ;
+- journal borné sans éviction silencieuse ;
+- empreintes de transition et de reçu.
 
-### Sortie
+### Succès ACT
 
-Après succès :
+Le succès produit :
 
-- `actionPermitPresent: true` ;
-- `releaseEligible: true` ;
-- `actAuthorized: true` ;
+- transition `validated -> released` ;
+- `permitConsumed: true` ;
+- `permitReusable: false` ;
+- `actCompleted: true` ;
+- `actionReleased: true` vers la future frontière ;
+- un `ActOutput` minimal.
+
+Il conserve :
+
 - `actionPayloadPresent: false` ;
-- `actionReleased: false` ;
-- `environmentDispatchAuthorized: false`.
+- `environmentDispatchAuthorized: false` ;
+- aucun `AgentAction` ni cible exécutable.
 
-Le permis autorise uniquement une future consommation ACT. Il ne contient pas le payload d'action et n'autorise pas le transport environnemental.
+### Révocation ACT
 
-Le worker public reste `reconstruction-pending-perception`, le port retourne toujours `undefined` et le statut reste `action_withheld`.
+Une divergence produit une transition terminale :
 
-## Prochaine étape - consommation ACT et transition de lease
+- `validated -> invalidated` ;
+- ou `validated -> expired`.
 
-Reconstruire depuis les donneurs durables :
+Une révocation persistée ne peut pas être annulée par un appel ultérieur présentant de nouveau des faits courants.
 
-`permis courant -> revalidation ACT -> lease RELEASED -> ActOutput`
+### Idempotence
 
-La qualification devra vérifier :
+- rejouer exactement le même permis retourne le reçu existant ;
+- aucun second `ActOutput` n'est émis ;
+- le même `permitRef` avec une autre empreinte est refusé ;
+- doublons et altérations d'un snapshot restauré sont refusés ;
+- un journal plein échoue fermé.
 
-1. l'intent, le binding et le permis exacts ;
-2. Source, session, timeline, frame, révision et snapshot courants ;
-3. les preuves de responsabilité, de continuité et de consommation de buts ;
-4. le binding de continuation parent ;
-5. l'action et la lease encore admissibles ;
-6. l'absence d'expiration ;
-7. une seule transition `VALIDATED -> RELEASED` ;
-8. une consommation ou révocation persistée ;
-9. un `ActOutput` transportant seulement action, intent et permis ;
-10. toujours aucun envoi direct vers l'environnement.
-
-### Étape suivante après ACT
+## Prochaine étape - `ActionBoundary`
 
 Reconstruire séparément :
 
-`ActOutput -> ActionBoundary -> tentative durable -> transport exactement une fois -> acquisition -> réconciliation`
+`ActOutput -> checkpoint suspendu courant -> tentative durable -> transport exactement une fois -> acquisition -> réconciliation`
 
-Cette frontière devra :
+La qualification devra couvrir :
 
-- persister la tentative avant l'appel externe ;
-- refuser une redélivrance lorsque le résultat est inconnu ;
-- réutiliser un dispatch déjà enregistré ;
-- vérifier intent, permis, dispatch et réponse ;
-- reprendre la chaîne causale exacte ;
-- ne produire aucun faux succès en cas de résultat incertain.
+1. la relecture du même intent, permis et reçu ACT ;
+2. le checkpoint réellement suspendu et la Source courante ;
+3. la révision, le snapshot, la responsabilité et la lease `released` ;
+4. un digest de requête couvrant adaptateur, workflow, timeline, frame, intent, permis et contexte monde ;
+5. la tentative persistée avant le premier appel externe ;
+6. l'interdiction de redélivrer automatiquement après résultat inconnu ;
+7. la réutilisation d'un dispatch déjà enregistré ;
+8. la validation de la réponse contre dispatch, intent et permis ;
+9. l'acquisition de l'observation causale ;
+10. la reprise et la réconciliation du workflow ;
+11. l'absence de faux succès lorsque le résultat externe reste indéterminé.
+
+Le prochain composant ne devra pas être activé par défaut dans le worker avant qualification complète de son journal et de sa récupération.
 
 ## Étapes ultérieures
 
-1. qualifier la consommation ACT et la transition de lease ;
-2. qualifier la consommation unique et la révocation du permis ;
-3. reconstruire `ActionBoundary` et sa récupération ;
-4. reconstruire les variantes série et acquisition différée si elles sont nécessaires ;
-5. reconstruire le producteur public du domaine et du candidat d'action ;
-6. raccorder la chaîne au runtime uniquement par injection qualifiée ;
-7. construire une campagne fonctionnelle durable ;
-8. reconstruire le registre d'entrées ;
-9. restaurer les runners officiels STCK/SMLP ;
-10. mesurer selon ABBA ;
-11. réconcilier avec la tête canonique ;
-12. intégrer dans `recovery/site109-reconstruction-20261112` ;
-13. publier le Site après vérification SHA GitHub <-> Site.
+1. qualifier `ActionBoundary` et le digest de requête ;
+2. qualifier la tentative durable avant transport ;
+3. qualifier l'envoi exactement une fois et le résultat incertain ;
+4. qualifier l'acquisition et la reprise causale ;
+5. reconstruire les variantes série et acquisition différée si nécessaires ;
+6. reconstruire le producteur public du domaine et du candidat d'action ;
+7. raccorder la chaîne au runtime uniquement par injection qualifiée ;
+8. construire une campagne fonctionnelle durable ;
+9. reconstruire le registre d'entrées ;
+10. restaurer les runners officiels STCK/SMLP ;
+11. mesurer selon ABBA ;
+12. réconcilier avec la tête canonique ;
+13. intégrer dans `recovery/site109-reconstruction-20261112` ;
+14. publier le Site après vérification SHA GitHub <-> Site.
 
 ## Performance
 
