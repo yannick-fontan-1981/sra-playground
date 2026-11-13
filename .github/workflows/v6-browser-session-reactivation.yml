@@ -43,5 +43,22 @@ jobs:
           tests/v6-common-campaign-session-continuity.test.ts
       - name: Complete TypeScript regression suite
         run: node --experimental-transform-types --test tests/*.test.ts
-      - name: Production build
-        run: npm run build
+      - name: Capture production build diagnostics
+        run: |
+          set +e
+          npm run build > browser-session-reactivation-build.log 2>&1
+          status=$?
+          cat browser-session-reactivation-build.log
+          echo "$status" > browser-session-reactivation-build.status
+          exit 0
+      - name: Upload production build diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v6-browser-session-reactivation-build-diagnostics
+          path: |
+            browser-session-reactivation-build.log
+            browser-session-reactivation-build.status
+          if-no-files-found: error
+      - name: Enforce production build result
+        run: test "$(cat browser-session-reactivation-build.status)" -eq 0
