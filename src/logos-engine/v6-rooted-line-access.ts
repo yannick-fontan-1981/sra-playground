@@ -7,8 +7,10 @@ import { measureRootedLine, physicalRootedLine, projectedRootedLine } from './v6
 import { rootedLineEffect, planRootedLine } from './v6-rooted-line-mechanics.ts';
 import { planCellPush, witnessedCellPush } from './v6-rooted-line-revision.ts';
 import { resolveRootedRecovery } from './v6-rooted-line-recovery-operations.ts';
-import { admitContactRecoveryNeed, defaultRecoveryPack, rootedRecoveryStrategy, type ContactRecoveryNeed } from '../sic/active-recovery.ts';
+import { admitContactRecoveryNeed, contactRecoveryOrder, defaultRecoveryPack, rootedRecoveryStrategy,
+  type ContactRecoveryNeed, type ContactStrategy } from '../sic/active-recovery.ts';
 import { recoveryRevision } from '../sic/recovery-pack.ts';
+import { runStrategyAgenda, type Applicability } from '../sic/strategy-agenda.ts';
 import { symbolicDigest as identity } from './v6-hash.ts';
 import { pythonEqual as equal, pythonTruthy as truth } from './v6-operations.ts';
 import { retainNativeJson } from './v6-native-owned.ts';
@@ -91,26 +93,48 @@ export class RootedLineMemory {
       && !Object.hasOwn(memory.controls, action) && !memory.tried.includes(action));
     let actions: R[] = [], predictions: (R | null)[] = [], configurations: (R | null)[] = [], search: R | null = null;
     let why: string, kind: string;
-    if (revision.status === 'shadow') {
-      return { status: 'unknown', reason: 'sic_recovery_shadow', block_unrelated_probe: true,
-        release_authority: false, recovery_operations: revision.operations, recovery_evidence: revision.evidence };
-    }
-    if (revision.status === 'selected') {
-      const effects = Object.fromEntries(Object.entries(memory.controls).filter(([action]) => available.has(action)));
+    if (revision.status === 'selected' || revision.status === 'shadow') {
+      const effects = Object.fromEntries(Object.entries<R>(memory.controls).filter(([action]) => available.has(action)));
       const bounds = revision.configuration;
-      const plan = planCellPush(scene, effects, Math.min(bounds.maxDepth, cfg.max_depth, config.remaining_level_actions ?? cfg.max_depth),
-        Math.min(bounds.maxNodes, cfg.max_nodes), () => !!budget.shouldStop?.() || (budget.now ?? (() => performance.now()))() >= (budget.deadlineMs ?? Infinity));
-      if (!plan || limit < 1) return { status: 'unknown', reason: 'rooted_cell_access_unresolved',
-        block_unrelated_probe: true, release_authority: false };
+      const maxDepth = Math.min(bounds.maxDepth, cfg.max_depth, config.remaining_level_actions ?? cfg.max_depth);
+      const maxNodes = Math.min(bounds.maxNodes, cfg.max_nodes);
+      let visited = 0;
+      const timedOut = () => !!budget.shouldStop?.() || (budget.now ?? (() => performance.now()))() >= (budget.deadlineMs ?? Infinity);
+      const vertical = new Set(Object.entries(effects).filter(([, effect]) =>
+        Math.abs(effect.root_translation[0]) === scene.unit + 2 && effect.root_translation[1] === 0 && effect.extent_delta === 0)
+        .map(([action]) => action));
+      const reposition = 'reposition_root_before_contact';
+      const agenda = runStrategyAgenda((bounds.strategyOrder ?? contactRecoveryOrder).map(id => {
+        const applicability: Applicability = id !== reposition ? 'applicable'
+          : revision.assigned ? 'inapplicable' : vertical.size ? 'applicable' : 'undetermined';
+        const reason = id !== reposition ? 'The current layout has a witnessed whole-cell contact.'
+          : revision.assigned ? 'The need already has a checked step; finish the alignment from its current state.'
+          : vertical.size ? 'A measured root translation is available for the first recovery step.'
+          : 'No measured root translation is available.';
+        return { id, applicability, reason, plan: () => limit >= 1
+          ? planCellPush(scene, effects, maxDepth, maxNodes - visited, timedOut, {
+            allowFirst: id === reposition ? command => vertical.has(command) : undefined,
+            visit: () => { visited++; },
+          })
+          : null };
+      }), bounds.mode);
+      const receipt = { needId: revision.needId, configuration: bounds, packDigest: recoveryRevision(bounds).digest,
+        agenda: agenda.entries, visited };
+      if (!agenda.selected) return { status: 'unknown', reason: revision.status === 'shadow' ? 'sic_recovery_shadow' : 'rooted_cell_access_unresolved',
+        block_unrelated_probe: true, release_authority: false, recovery_operations: revision.operations,
+        recovery_evidence: revision.evidence, sic_decision: receipt };
+      const { id: strategy, plan } = agenda.selected;
       actions = [{ action_ref: plan.command }];
       predictions = [plan.prediction];
       configurations = [null];
       search = { operation: 'OP26', predicted_goal_distance: plan.predictedGoalDistance, model: 'conditional_cell_push_after_counterexample',
         recovery_operations: [...revision.operations, { key: 'OP26', finding: `Find a conditional access of ${plan.predictedGoalDistance} moves and check its first command.` }],
         recovery_evidence: revision.evidence,
-        sic_decision: { strategy: revision.strategy, needId: revision.needId, configuration: bounds, packDigest: recoveryRevision(bounds).digest,
+        sic_decision: { ...receipt, strategy,
           objective: { ...rootedRecoveryStrategy.objective, parent: 'G_official_completion' } } };
-      why = 'Find an ordered access from the measured return using the witnessed whole-cell push. Verify the root, tip and every piece after this step.';
+      why = strategy === reposition
+        ? 'Begin the access with a measured root translation. Verify the root, tip and every piece after this step.'
+        : 'Find an ordered access from the measured return using the witnessed whole-cell push. Verify the root, tip and every piece after this step.';
       kind = 'cell_push_revision';
     } else if (unmeasured.length) {
       actions = [{ action_ref: unmeasured[0] }]; predictions = [null]; configurations = [null]; why = cfg.control; kind = 'calibrate';

@@ -1,5 +1,7 @@
 import { cropReturn } from '../logos-engine/v6-public-return-visuals.ts';
-import { rootedRecoveryStrategy, type ContactRecoveryNeed } from './active-recovery.ts';
+import { contactRecoveryStrategies, isContactStrategy, isRecoveryStop, rootedRecoveryStrategy,
+  type ContactRecoveryNeed, type ContactStrategy } from './active-recovery.ts';
+import type { AgendaEntry } from './strategy-agenda.ts';
 import type { NativeBox, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
 
 export interface NativeStep {
@@ -46,7 +48,7 @@ export interface NativeResolution {
   readonly searchOperation?: string;
   readonly recoveryOperations?: readonly { key: string; finding: string }[];
   readonly recoveryDecision?: { readonly strategy: string; readonly need: string; readonly objective: SicObjective | null; readonly maxDepth: number;
-    readonly maxNodes: number; readonly packDigest: string | null };
+    readonly maxNodes: number; readonly packDigest: string | null; readonly agenda?: readonly AgendaEntry[] };
   readonly recoveryAction?: number;
   readonly composition: string | null;
   readonly compositions: readonly { readonly id: string; readonly role: string | null; readonly observed: boolean | null }[];
@@ -77,6 +79,27 @@ const record = (value: unknown): Record<string, unknown> | null =>
   value !== null && typeof value === 'object' && !Array.isArray(value) ? value as Record<string, unknown> : null;
 const label = (value: unknown) => typeof value === 'string' && value.length <= 320 ? value : null;
 const natural = (value: unknown) => typeof value === 'number' && Number.isSafeInteger(value) && value >= 0 ? value : null;
+
+function readRecoveryAgenda(value: unknown): AgendaEntry<ContactStrategy>[] {
+  return Array.isArray(value) ? value.slice(0, Object.keys(contactRecoveryStrategies).length).flatMap(item => {
+    const entry = record(item), reason = label(entry?.reason), applicability = entry?.applicability, result = entry?.result;
+    if (!isContactStrategy(entry?.id) || !reason
+      || (applicability !== 'applicable' && applicability !== 'inapplicable' && applicability !== 'undetermined')
+      || (result !== 'selected' && result !== 'no_plan' && result !== 'lower_priority' && result !== 'skipped' && result !== 'shadow')) return [];
+    return [{ id: entry.id, applicability, result, reason }];
+  }) : [];
+}
+
+export function readRecoveryRefusal(agent: { sessionId: string | null; sequence: number; level: number; trace: readonly unknown[] }) {
+  if (!agent.sessionId) return null;
+  const scope = `${agent.sessionId}:epoch:${agent.level}:revision:${agent.sequence + 1}:frame:`;
+  const refusal = agent.trace.slice(-128).reverse().map(record).find(event =>
+    event?.kind === 'sic_recovery_refusal' && typeof event.observation_ref === 'string' && event.observation_ref.startsWith(scope));
+  if (!isRecoveryStop(refusal?.reason)) return null;
+  const agenda = readRecoveryAgenda(record(refusal?.decision)?.agenda);
+  return agenda.length ? { reason: refusal.reason, agenda } : null;
+}
+
 const actions: Record<string, string> = { ACTION1: 'Up', ACTION2: 'Down', ACTION3: 'Left', ACTION4: 'Right',
   ACTION5: 'Space', ACTION6: 'Click', ACTION7: 'Action 7' };
 
@@ -242,9 +265,10 @@ export function readNativeResolution(agent: {
   const recoveryObjective = target?.id === rootedRecoveryStrategy.objective.id && targetLabel &&
     target.parent === nativeObjective && nativeObjective
     ? { id: rootedRecoveryStrategy.objective.id, label: targetLabel, parent: nativeObjective } : null;
-  const recoveryDecision = sic?.strategy === rootedRecoveryStrategy.id && recoveryPack?.mode === 'active'
+  const agenda = readRecoveryAgenda(sic?.agenda);
+  const recoveryDecision = isContactStrategy(sic?.strategy) && recoveryPack?.mode === 'active'
     && maxDepth !== null && maxNodes !== null
-    ? { strategy: rootedRecoveryStrategy.label, need: rootedRecoveryStrategy.need, objective: recoveryObjective,
+    ? { strategy: contactRecoveryStrategies[sic.strategy], need: rootedRecoveryStrategy.need, objective: recoveryObjective, agenda,
       maxDepth, maxNodes, packDigest: typeof sic.packDigest === 'string' && /^[a-f0-9]{64}$/.test(sic.packDigest) ? sic.packDigest : null }
     : undefined;
   const returnedNeed = record(result?.sic_need);

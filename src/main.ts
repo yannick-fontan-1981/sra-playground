@@ -298,6 +298,9 @@ app.innerHTML = `
                   <p>Applies after a new agent session starts. Shadow mode records the counterexample and stops at that decision.</p>
                   <label for="sic-recovery-mode">Recovery mode</label>
                   <select id="sic-recovery-mode" name="mode"><option value="active">Active</option><option value="shadow">Shadow</option></select>
+                  <label for="sic-recovery-priority">First contact-recovery strategy</label>
+                  <select id="sic-recovery-priority" name="priority"></select>
+                  <p data-sic-recovery-fallback></p>
                   <label>Maximum search depth <input name="maxDepth" type="number" required min="1" max="88" step="1"></label>
                   <label>Maximum states <input name="maxNodes" type="number" required min="1" max="1000" step="1"></label>
                   <button type="submit">Save recovery settings</button>

@@ -19,6 +19,8 @@ import { compareAboveColors, contrastClickContexts, describeClickContext, type C
 import type { Applicability, ControlEffectResolution } from './know-control-effect.ts';
 import type { ShadowView } from './shadow.ts';
 import type { SituationKey } from './situation.ts';
+import { contactRecoveryStrategies, isContactStrategy } from './active-recovery.ts';
+import type { AgendaEntry } from './strategy-agenda.ts';
 
 const commands: Readonly<Record<number, string>> = {
   1: 'Up', 2: 'Down', 3: 'Left', 4: 'Right', 5: 'Space', 6: 'Click', 7: 'Action 7',
@@ -885,6 +887,13 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
       : view?.commands.length ? `Available to explore: ${view.commands.map(id => commands[id]).join(', ')}.` : 'No available command observed.',
   ]);
   const strategies = panel.querySelector('[data-sic-strategy-body]')!;
+  if (view?.recoveryRefusal) {
+    const summary = document.createElement('p');
+    summary.textContent = view.recoveryRefusal.reason === 'sic_recovery_shadow'
+      ? 'The contact-recovery agenda ran in shadow. No recovery command was released.'
+      : 'The contact-recovery agenda found no admissible plan within the current limits.';
+    strategies.append(summary, renderRecoveryAgenda(view.recoveryRefusal.agenda));
+  }
   let editor = strategyEditors.get(panel);
   if (!editor) {
     editor = new StrategyEditor(panel.querySelector<HTMLElement>('[data-sic-strategy-editor]')!);
@@ -1271,6 +1280,7 @@ function renderGenericTimeline(panel: HTMLElement, container: Element, selected:
       term.textContent = name; value.textContent = description; facts.append(term, value);
     }
     details.append(facts);
+    if (recoveryDecision?.agenda?.length) details.append(renderRecoveryAgenda(recoveryDecision.agenda));
     const recoveryOperations = first.decision?.recoveryOperations;
     if (recoveryOperations?.length) {
       const recovery = document.createElement('ol');
@@ -1826,4 +1836,19 @@ export function renderSicPanel(panel: HTMLElement, view: ShadowView | null, pale
     }
     return row;
   }));
+}
+function renderRecoveryAgenda(agenda: readonly AgendaEntry[]): HTMLOListElement {
+  const ranking = document.createElement('ol');
+  ranking.className = 'sic-recovery-timeline';
+  ranking.setAttribute('aria-label', 'Contact recovery priority');
+  const outcomes = { selected: 'Selected', no_plan: 'No plan found within limits', lower_priority: 'Lower priority',
+    skipped: 'Conditions not met', shadow: 'Applicable in shadow' };
+  for (const entry of agenda) {
+    if (!isContactStrategy(entry.id)) continue;
+    const candidate = document.createElement('li');
+    const outcome = entry.applicability === 'undetermined' ? 'Applicability uncertain' : outcomes[entry.result];
+    candidate.textContent = `${contactRecoveryStrategies[entry.id]} · ${outcome}. ${entry.reason}`;
+    ranking.append(candidate);
+  }
+  return ranking;
 }

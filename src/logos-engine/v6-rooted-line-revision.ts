@@ -35,7 +35,8 @@ export function witnessedCellPush(before: R, after: R, expected: R, effect: R): 
 
 /** Search a conditional lattice model after evidence for whole-cell contact.
  * The caller admits one step at a time and verifies the full public projection. */
-export function planCellPush(scene: R, effects: R, limit: number, maxNodes: number, timedOut: () => boolean) {
+export function planCellPush(scene: R, effects: R, limit: number, maxNodes: number, timedOut: () => boolean,
+  options: { allowFirst?: (command: string) => boolean; visit?: () => void } = {}) {
   const stride = scene.unit + 2, [left, top, right, bottom] = scene.field;
   const pieces: R[] = scene.pieces;
   const first = scene.tip - scene.unit;
@@ -90,6 +91,7 @@ export function planCellPush(scene: R, effects: R, limit: number, maxNodes: numb
   const seen = new Set([key(start)]);
   for (let i = 0; i < queue.length && i < maxNodes; i++) {
     if (timedOut()) return null;
+    options.visit?.();
     const entry = queue[i]!;
     const inOrder = entry.state.pieces.map((cell, index) => ({ cell, index })).filter(({ cell }) => onRod(entry.state, cell))
       .sort((a, b) => a.cell[0] - b.cell[0]).map(({ index }) => index);
@@ -106,6 +108,7 @@ export function planCellPush(scene: R, effects: R, limit: number, maxNodes: numb
     if (entry.depth >= limit) continue;
     for (const { command, dy, extent } of moves) {
       if (queue.length >= maxNodes) break;
+      if (!entry.first && options.allowFirst && !options.allowFirst(command)) continue;
       const state = predict(entry.state, dy, extent);
       if (!state || seen.has(key(state))) continue;
       seen.add(key(state));

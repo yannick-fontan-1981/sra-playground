@@ -1,4 +1,4 @@
-import { compileRecoveryPack, defaultRecoveryPack, type RecoveryPack } from './active-recovery.ts';
+import { compileRecoveryPack, contactRecoveryOrder, contactRecoveryStrategies, defaultRecoveryPack, type RecoveryPack } from './active-recovery.ts';
 import { nextRecoveryRevision, readRecoveryRevision, recoveryRevision } from './recovery-pack.ts';
 
 const storageKey = 'sra.sic.contact-recovery.revisions.v1';
@@ -10,6 +10,14 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
   const revision = form.querySelector<HTMLElement>('[data-sic-recovery-revision]')!;
   const rollback = form.querySelector<HTMLButtonElement>('[data-sic-recovery-rollback]')!;
   const mode = form.elements.namedItem('mode') as HTMLSelectElement;
+  const priority = form.elements.namedItem('priority') as HTMLSelectElement;
+  const fallback = form.querySelector<HTMLElement>('[data-sic-recovery-fallback]')!;
+  priority.replaceChildren(...contactRecoveryOrder.map(id => new Option(contactRecoveryStrategies[id], id)));
+  const showFallback = () => {
+    const next = contactRecoveryOrder.find(id => id !== priority.value);
+    fallback.textContent = next ? `Then try ${contactRecoveryStrategies[next]} if it applies and no plan was found.` : '';
+  };
+  priority.addEventListener('change', showFallback);
   const depth = form.elements.namedItem('maxDepth') as HTMLInputElement;
   const nodes = form.elements.namedItem('maxNodes') as HTMLInputElement;
   const json = form.elements.namedItem('pack') as HTMLTextAreaElement;
@@ -30,6 +38,8 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
     mode.value = pack.mode;
     depth.value = String(pack.maxDepth);
     nodes.value = String(pack.maxNodes);
+    priority.value = (pack.strategyOrder ?? contactRecoveryOrder)[0]!;
+    showFallback();
   }
   function showSaved() {
     const suffix = saved.previous ? ` · Previous ${saved.previous.digest.slice(0, 12)}` : '';
@@ -47,7 +57,8 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
   form.addEventListener('submit', event => {
     event.preventDefault();
     try {
-      const candidate = compileRecoveryPack({ version: 1, mode: mode.value, maxDepth: depth.valueAsNumber, maxNodes: nodes.valueAsNumber });
+      const strategyOrder = [priority.value, ...contactRecoveryOrder.filter(id => id !== priority.value)];
+      const candidate = compileRecoveryPack({ version: 1, mode: mode.value, maxDepth: depth.valueAsNumber, maxNodes: nodes.valueAsNumber, strategyOrder });
       save(nextRecoveryRevision(saved.current, saved.previous, recoveryRevision(candidate)));
       status.textContent = `Saved ${candidate.mode} recovery for the next agent session.`;
     } catch (error) {
@@ -73,10 +84,13 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
       const draft = readRecoveryRevision(JSON.parse(json.value));
       showDraft(draft.configuration);
       const current = saved.current.configuration;
+      const currentFirst = (current.strategyOrder ?? contactRecoveryOrder)[0]!;
+      const draftFirst = (draft.configuration.strategyOrder ?? contactRecoveryOrder)[0]!;
       const differences = [
         current.mode === draft.configuration.mode ? null : `mode ${current.mode} → ${draft.configuration.mode}`,
         current.maxDepth === draft.configuration.maxDepth ? null : `depth ${current.maxDepth} → ${draft.configuration.maxDepth}`,
         current.maxNodes === draft.configuration.maxNodes ? null : `states ${current.maxNodes} → ${draft.configuration.maxNodes}`,
+        currentFirst === draftFirst ? null : `first strategy → ${contactRecoveryStrategies[draftFirst]}`,
       ].filter(Boolean);
       status.textContent = differences.length
         ? `Preview ${draft.digest.slice(0, 12)} · ${differences.join(' · ')}. Save recovery settings to apply it next session.`

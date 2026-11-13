@@ -458,6 +458,8 @@ export class NativeV6Runtime implements NativeV6Backend {
       if (proposal.status !== 'proposed') {
         await this.persistFamilies({ workflow: SELECTION_PROGRAM, step: 'selection', statement: 'source.refusal' }, this.authority?.checkpointWrites() ?? []);
         if (proposal.release_authority === false && proposal.block_unrelated_probe === true && isRecoveryStop(proposal.reason)) {
+          this.note({ kind: 'sic_recovery_refusal', observation_ref: this.observation.observation_ref, reason: proposal.reason,
+            decision: proposal.sic_decision, evidence: proposal.recovery_evidence });
           this.stop(proposal.reason);
           return;
         }

@@ -1,11 +1,23 @@
 import { symbolicDigest } from '../logos-engine/v6-hash.ts';
 
+export const contactRecoveryStrategies = Object.freeze({
+  revise_rooted_contact: 'Revise the contact projection',
+  reposition_root_before_contact: 'Reposition the root before aligning the pieces',
+});
+export type ContactStrategy = keyof typeof contactRecoveryStrategies;
+export const contactRecoveryOrder = Object.freeze(['revise_rooted_contact', 'reposition_root_before_contact'] as const);
+
+export function isContactStrategy(input: unknown): input is ContactStrategy {
+  return typeof input === 'string' && Object.hasOwn(contactRecoveryStrategies, input);
+}
+
 /** Validated settings for the contact-recovery capability. */
 export interface RecoveryPack {
   readonly version: 1;
   readonly mode: 'active' | 'shadow';
   readonly maxDepth: number;
   readonly maxNodes: number;
+  readonly strategyOrder?: readonly ContactStrategy[];
 }
 
 export const defaultRecoveryPack: RecoveryPack = Object.freeze({
@@ -13,9 +25,10 @@ export const defaultRecoveryPack: RecoveryPack = Object.freeze({
 });
 
 export function compileRecoveryPack(input: unknown = defaultRecoveryPack): RecoveryPack {
-  if (!input || typeof input !== 'object' || Array.isArray(input) ||
-      Object.keys(input).sort().join(',') !== 'maxDepth,maxNodes,mode,version') {
-    throw new TypeError('Recovery configuration requires version, mode, maxDepth and maxNodes.');
+  if (!input || typeof input !== 'object' || Array.isArray(input)) throw new TypeError('Expected a recovery configuration.');
+  const fields = Object.keys(input).sort().join(',');
+  if (fields !== 'maxDepth,maxNodes,mode,version' && fields !== 'maxDepth,maxNodes,mode,strategyOrder,version') {
+    throw new TypeError('Recovery configuration accepts version, mode, maxDepth, maxNodes and optional strategyOrder.');
   }
   const pack = input as Record<string, unknown>;
   if (pack.version !== 1) throw new TypeError('Unsupported recovery configuration version.');
@@ -25,12 +38,16 @@ export function compileRecoveryPack(input: unknown = defaultRecoveryPack): Recov
   if (!bounded(pack.maxDepth, defaultRecoveryPack.maxDepth) || !bounded(pack.maxNodes, defaultRecoveryPack.maxNodes)) {
     throw new RangeError('Recovery limits must be 1–88 moves and 1–1000 states.');
   }
-  return Object.freeze({ version: 1, mode: pack.mode, maxDepth: pack.maxDepth, maxNodes: pack.maxNodes });
+  const order = pack.strategyOrder;
+  if (Object.hasOwn(pack, 'strategyOrder') && (!Array.isArray(order) || order.length !== contactRecoveryOrder.length
+    || !contactRecoveryOrder.every(id => order.includes(id)))) {
+    throw new TypeError('Recovery strategy order must contain each registered strategy exactly once.');
+  }
+  return Object.freeze({ version: 1, mode: pack.mode, maxDepth: pack.maxDepth, maxNodes: pack.maxNodes,
+    ...(Array.isArray(order) && order[0] !== contactRecoveryOrder[0] ? { strategyOrder: Object.freeze([...order]) } : {}) });
 }
 
 export const rootedRecoveryStrategy = Object.freeze({
-  id: 'revise_rooted_contact',
-  label: 'Revise the contact projection',
   needKind: 'restore_rooted_contact_projection',
   need: 'Restore a projection that accounts for the contact chain',
   objective: { id: 'find_ordered_contact_access', label: 'Find an access that puts the pieces in the reference order' },
@@ -90,6 +107,6 @@ export function selectRootedRecovery(pack: RecoveryPack, refutations: readonly R
   if (retained?.id === need.id && retained.status !== 'admitted' && retained.status !== 'assigned') return { status: 'unresolved' } as const;
   return {
     status: pack.mode === 'active' ? 'selected' : 'shadow',
-    strategy: rootedRecoveryStrategy.id, needId: need.id, evidence: need.evidence, configuration: pack,
+    needId: need.id, evidence: need.evidence, configuration: pack, assigned: retained?.id === need.id && retained.status === 'assigned',
   } as const;
 }

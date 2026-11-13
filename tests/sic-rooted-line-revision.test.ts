@@ -6,7 +6,7 @@ import { RootedLineMemory, rootedLineAfter, rootedLineBefore } from '../src/logo
 import { planCellPush } from '../src/logos-engine/v6-rooted-line-revision.ts';
 import { measureRootedLine } from '../src/logos-engine/v6-rooted-line-observation.ts';
 import { readNativeResolution } from '../src/sic/native-resolution.ts';
-import { compileRecoveryPack, defaultRecoveryPack, selectRootedRecovery } from '../src/sic/active-recovery.ts';
+import { compileRecoveryPack, contactRecoveryOrder, defaultRecoveryPack, selectRootedRecovery } from '../src/sic/active-recovery.ts';
 import { nextRecoveryRevision, readRecoveryRevision, recoveryRevision } from '../src/sic/recovery-pack.ts';
 
 const trace = new URL('../docs/migration/lot3d-evidence/final/sk48-rooted-session/sk48-public-trace.json.gz', import.meta.url);
@@ -41,6 +41,7 @@ test('an observed push chain unblocks rooted-line search, retaining its estimate
   assert.equal(ignored?.actions, undefined);
   assert.equal(ignored?.block_unrelated_probe, true);
   assert.equal(ignored?.release_authority, false);
+  assert.deepEqual(ignored?.sic_decision.agenda.map((entry: { result: string }) => entry.result), ['shadow', 'shadow']);
   const narrow = compileRecoveryPack({ ...defaultRecoveryPack, maxDepth: 1 });
   const limited = memory.propose(current, rows, [], 16, { ...config, sic_recovery: narrow });
   assert.equal(limited?.reason, 'rooted_cell_access_unresolved');
@@ -55,6 +56,18 @@ test('an observed push chain unblocks rooted-line search, retaining its estimate
   assert.deepEqual(revised.rooted_line_plan.search.recovery_evidence, [observation(11).observation_ref, current.observation_ref]);
   assert.equal(revised.bundle_template.operation_key, 'OP18');
   assert.deepEqual(revised.actions, [{ action_ref: 'ACTION3' }]);
+  const alternativePack = compileRecoveryPack({ ...defaultRecoveryPack, strategyOrder: [...contactRecoveryOrder].reverse() });
+  const alternate = memory.propose(current, rows, [], 16, { ...config, sic_recovery: alternativePack })!;
+  assert.deepEqual(alternate.actions, [{ action_ref: 'ACTION1' }]);
+  assert.equal(alternate.rooted_line_plan.search.predicted_goal_distance, 9);
+  assert.equal(alternate.rooted_line_plan.search.sic_decision.needId, revised.rooted_line_plan.search.sic_decision.needId);
+  assert.deepEqual(alternate.rooted_line_plan.search.sic_decision.agenda.map((entry: { id: string; result: string }) => [entry.id, entry.result]),
+    [['reposition_root_before_contact', 'selected'], ['revise_rooted_contact', 'lower_priority']]);
+  const constrained = memory.propose(current, rows, [], 16, {
+    ...config, sic_recovery: compileRecoveryPack({ ...alternativePack, maxDepth: 7 }),
+  })!;
+  assert.deepEqual(constrained.actions, revised.actions);
+  assert.deepEqual(constrained.rooted_line_plan.search.sic_decision.agenda.map((entry: { result: string }) => entry.result), ['no_plan', 'selected']);
   const view = readNativeResolution({
     sessionId: 'local', sequence: last, level: 1, trace: [], lastDecision: 'public_occurrence_recall',
     proposal: revised, phase: 'authorised_not_executed',
@@ -86,6 +99,8 @@ test('the recovery pack accepts only the native capability and bounded search li
   assert.throws(() => compileRecoveryPack({ ...defaultRecoveryPack, action: 'ACTION3' }), TypeError);
   assert.throws(() => compileRecoveryPack({ ...defaultRecoveryPack, version: 2 }), TypeError);
   assert.throws(() => compileRecoveryPack({ ...defaultRecoveryPack, maxNodes: 1001 }), RangeError);
+  assert.throws(() => compileRecoveryPack({ ...defaultRecoveryPack, strategyOrder: [contactRecoveryOrder[0], contactRecoveryOrder[0]] }), TypeError);
+  assert.deepEqual(compileRecoveryPack({ ...defaultRecoveryPack, strategyOrder: contactRecoveryOrder }), defaultRecoveryPack);
 });
 
 test('portable recovery packs validate content and preserve the last distinct revision', () => {
