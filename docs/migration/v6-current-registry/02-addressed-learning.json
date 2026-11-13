@@ -1,0 +1,142 @@
+{
+  "version": 1,
+  "kind": "current-v6-reconstruction-entry-fragment",
+  "category": "addressed-learning",
+  "entries": [
+    {
+      "id": "RC013",
+      "name": "Observed object binding",
+      "category": "addressed-learning",
+      "activation": "shared-runtime",
+      "implementationPaths": [
+        "src/logos-engine/observed-object-binding.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/observed-object-binding.test.ts"
+      ]
+    },
+    {
+      "id": "RC014",
+      "name": "Addressed material model",
+      "category": "addressed-learning",
+      "activation": "shared-runtime",
+      "implementationPaths": [
+        "src/logos-engine/addressed-material.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/addressed-material.test.ts"
+      ]
+    },
+    {
+      "id": "RC015",
+      "name": "Addressed field fitting",
+      "category": "addressed-learning",
+      "activation": "shared-runtime",
+      "implementationPaths": [
+        "src/logos-engine/addressed-field-fit.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/addressed-field-fit.test.ts"
+      ]
+    },
+    {
+      "id": "RC016",
+      "name": "Addressed field pre-action guard",
+      "category": "addressed-learning",
+      "activation": "shared-runtime",
+      "implementationPaths": [
+        "src/logos-engine/addressed-field-guard.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/addressed-field-guard.test.ts"
+      ]
+    },
+    {
+      "id": "RC017",
+      "name": "Addressed field response classification",
+      "category": "addressed-learning",
+      "activation": "shared-runtime",
+      "implementationPaths": [
+        "src/logos-engine/addressed-field-response.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/addressed-field-response.test.ts"
+      ]
+    },
+    {
+      "id": "RC018",
+      "name": "Addressed field retention across boundaries",
+      "category": "addressed-learning",
+      "activation": "shared-runtime",
+      "implementationPaths": [
+        "src/logos-engine/addressed-field-retention.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/field-stock-retention.test.ts"
+      ]
+    },
+    {
+      "id": "RC019",
+      "name": "Linked preparation lifecycle",
+      "category": "addressed-learning",
+      "activation": "shared-runtime",
+      "implementationPaths": [
+        "src/logos-engine/linked-preparation.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/linked-preparation.test.ts"
+      ]
+    },
+    {
+      "id": "RC020",
+      "name": "FieldStock learning, proposal and retention lifecycle",
+      "category": "addressed-learning",
+      "activation": "shared-runtime",
+      "implementationPaths": [
+        "src/logos-engine/field-stock.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/field-stock-proposal.test.ts",
+        "tests/field-stock-retention.test.ts"
+      ]
+    },
+    {
+      "id": "RC021",
+      "name": "FieldStock common-campaign caller adapter",
+      "category": "addressed-learning",
+      "activation": "shared-runtime",
+      "implementationPaths": [
+        "src/logos-engine/v6-field-stock-caller-adapter.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/v6-field-stock-common-campaign.test.ts",
+        "tests/op01-op31-field-stock-op18-trace.test.ts"
+      ]
+    },
+    {
+      "id": "RC022",
+      "name": "Observed addressed-material runtime",
+      "category": "addressed-learning",
+      "activation": "product-runtime",
+      "implementationPaths": [
+        "src/runtime/observed-addressed-material-runtime.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/v6-browser-field-stock-campaign-host.test.ts",
+        "tests/v6-public-addressed-field-learning.test.ts"
+      ]
+    },
+    {
+      "id": "RC023",
+      "name": "Public addressed-field acquisition pipeline",
+      "category": "addressed-learning",
+      "activation": "shared-runtime",
+      "implementationPaths": [
+        "src/runtime/v6-public-addressed-field-learning.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/v6-public-addressed-field-learning.test.ts"
+      ]
+    }
+  ]
+}

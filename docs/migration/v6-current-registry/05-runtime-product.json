@@ -1,0 +1,217 @@
+{
+  "version": 1,
+  "kind": "current-v6-reconstruction-entry-fragment",
+  "category": "runtime-product",
+  "entries": [
+    {
+      "id": "RC036",
+      "name": "Browser game runtime transport",
+      "category": "runtime-product",
+      "activation": "product-runtime",
+      "implementationPaths": [
+        "src/runtime/browser-games.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/browser-game-worker-transport.test.ts",
+        "tests/product-dispatch-browser-runtime-integration.test.ts"
+      ]
+    },
+    {
+      "id": "RC037",
+      "name": "Game Worker to Pyodide bridge",
+      "category": "runtime-product",
+      "activation": "product-runtime",
+      "implementationPaths": [
+        "src/runtime/game-worker.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/browser-game-worker-transport.test.ts",
+        "docs/recovery/lot9b-worker-pyodide-parity-report.json"
+      ],
+      "limitations": [
+        "Parity qualified; this is not an independent performance qualification."
+      ]
+    },
+    {
+      "id": "RC038",
+      "name": "V6 agent Worker campaign core",
+      "category": "runtime-product",
+      "activation": "worker-runtime",
+      "implementationPaths": [
+        "src/runtime/v6-agent-worker-core.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/v6-agent-worker-core.test.ts",
+        "tests/v6-worker-logos-campaign.test.ts"
+      ]
+    },
+    {
+      "id": "RC039",
+      "name": "V6 agent Worker message boundary",
+      "category": "runtime-product",
+      "activation": "worker-runtime",
+      "implementationPaths": [
+        "src/runtime/v6-agent-worker.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/v6-agent-worker.test.ts"
+      ]
+    },
+    {
+      "id": "RC040",
+      "name": "Browser agent observation stream",
+      "category": "runtime-product",
+      "activation": "product-runtime",
+      "implementationPaths": [
+        "src/runtime/v6-browser-agent-observation.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/v6-browser-agent-observation.test.ts"
+      ]
+    },
+    {
+      "id": "RC041",
+      "name": "Browser common campaign host",
+      "category": "runtime-product",
+      "activation": "product-runtime",
+      "implementationPaths": [
+        "src/runtime/v6-browser-common-campaign-host.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/v6-browser-common-campaign-host.test.ts"
+      ]
+    },
+    {
+      "id": "RC042",
+      "name": "Browser product campaign composition",
+      "category": "runtime-product",
+      "activation": "product-runtime",
+      "implementationPaths": [
+        "src/runtime/v6-browser-product-campaign-host.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/v6-browser-public-unique-action6-host.test.ts",
+        "tests/v6-browser-field-stock-campaign-host.test.ts"
+      ],
+      "performanceStatus": "open",
+      "limitations": [
+        "The full product composition is functionally qualified; its aggregate product cost is not claimed by the separate Region and joint-channel benchmarks."
+      ]
+    },
+    {
+      "id": "RC043",
+      "name": "Browser Agent controller",
+      "category": "runtime-product",
+      "activation": "product-runtime",
+      "implementationPaths": [
+        "src/runtime/v6-browser-agent-controller.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/v6-browser-agent-controller.test.ts"
+      ]
+    },
+    {
+      "id": "RC044",
+      "name": "Product action dispatch contract",
+      "category": "runtime-product",
+      "activation": "product-runtime",
+      "implementationPaths": [
+        "src/agent-product-dispatch.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/agent-product-dispatch.test.ts",
+        "tests/main-product-dispatch-integration.test.ts"
+      ]
+    },
+    {
+      "id": "RC045",
+      "name": "Product presentation contract",
+      "category": "runtime-product",
+      "activation": "product-runtime",
+      "implementationPaths": [
+        "src/product-presentation.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/product-presentation.test.ts"
+      ]
+    },
+    {
+      "id": "RC046",
+      "name": "Product presentation effects and controlled DOM host",
+      "category": "runtime-product",
+      "activation": "product-runtime",
+      "implementationPaths": [
+        "src/product-presentation-effects.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/product-presentation-effects.test.ts",
+        "tests/product-presentation-controlled-dom-host.test.ts",
+        "tests/main-product-presentation-effects-integration.test.ts"
+      ]
+    },
+    {
+      "id": "RC047",
+      "name": "Agent-mode product activation in main",
+      "category": "runtime-product",
+      "activation": "product-runtime",
+      "implementationPaths": [
+        "src/main.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/main-browser-agent-controller-integration.test.ts",
+        "tests/op01-op31-product-wiring.test.ts"
+      ],
+      "limitations": [
+        "This proves canonical product wiring, not a solved-game score or historical Site identity."
+      ]
+    },
+    {
+      "id": "RC048",
+      "name": "Atomic common-campaign checkpoint coordinator",
+      "category": "runtime-product",
+      "activation": "shared-runtime",
+      "implementationPaths": [
+        "src/logos-engine/v6-common-campaign-checkpoint.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/v6-common-campaign-session-continuity.test.ts",
+        "docs/recovery/op01-op31-session-continuity-core-20261113.md"
+      ],
+      "limitations": [
+        "The coordinator is qualified as a core boundary; browser host/controller lifecycle wiring remains open."
+      ]
+    },
+    {
+      "id": "RC049",
+      "name": "Exact FieldStock and addressed-retention snapshot codec",
+      "category": "runtime-product",
+      "activation": "shared-runtime",
+      "implementationPaths": [
+        "src/logos-engine/field-stock-snapshot.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/v6-common-campaign-session-continuity.test.ts",
+        "docs/recovery/op01-op31-session-continuity-core-20261113.md"
+      ],
+      "limitations": [
+        "The codec preserves model, prior, stock, Map, Set and proof state; it does not itself own browser activation policy."
+      ]
+    },
+    {
+      "id": "RC050",
+      "name": "Observed addressed-material checkpoint participant",
+      "category": "runtime-product",
+      "activation": "product-runtime",
+      "implementationPaths": [
+        "src/runtime/observed-addressed-material-checkpoint.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/v6-common-campaign-session-continuity.test.ts",
+        "docs/recovery/op01-op31-session-continuity-core-20261113.md"
+      ],
+      "limitations": [
+        "The participant is qualified for atomic capture and rollback; reactivation through the browser controller remains open."
+      ]
+    }
+  ]
+}

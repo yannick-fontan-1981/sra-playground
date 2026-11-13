@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "kind": "current-v6-reconstruction-capability-registry",
+  "inventoryDate": "2026-11-13",
+  "inventoryBaseline": {
+    "repository": "yannick-fontan-1981/sra-playground",
+    "branch": "recovery/site109-reconstruction-20261112",
+    "commit": "9e04bbd5569f6755178fa1b5276a112ca47d646b"
+  },
+  "historicalReference": {
+    "siteRevision": 109,
+    "nativeVersion": "0.68",
+    "reportedImplemented": 70,
+    "reportedTotal": 76,
+    "unresolvedSourceSha": "d90ce5b64fffa53cca201e2a6a49450fd123f299",
+    "sourceIdentityResolved": false,
+    "mappingStatus": "unresolved",
+    "comparableToCurrentRegistry": false
+  },
+  "countingPolicy": {
+    "unit": "one independently owned or callable semantic capability boundary with durable implementation and functional proof on the canonical reconstruction",
+    "qualifiedEntryCounted": true,
+    "partialEntryCounted": false,
+    "benchmarkAndTestInfrastructureCounted": false,
+    "operationsCatalogueCountedAsOneAggregate": true,
+    "historicalDenominatorAppliedToCurrentCount": false,
+    "exclusions": [
+      "individual helper functions inside one semantic boundary",
+      "tests, fixtures, workflows and benchmark harnesses",
+      "documentation-only historical claims",
+      "the 31 Logos operations as 31 historical V6 entry points",
+      "unintegrated recovery branches"
+    ]
+  },
+  "entryDefaults": {
+    "status": "qualified",
+    "counted": true,
+    "qualification": "functional",
+    "performanceStatus": "not-required-for-current-claim",
+    "performanceProofPaths": [],
+    "historicalMapping": {
+      "status": "unresolved",
+      "historicalEntryIds": []
+    },
+    "limitations": []
+  },
+  "evidenceGateDefaults": {
+    "status": "qualified",
+    "counted": false
+  },
+  "openGapDefaults": {
+    "status": "open",
+    "counted": false
+  },
+  "summary": {
+    "inventoriedCapabilities": 50,
+    "qualifiedCapabilities": 50,
+    "partialCapabilities": 0,
+    "countedCurrentCapabilities": 50,
+    "performanceQualifiedCapabilities": 6,
+    "historicallyMappedCapabilities": 0,
+    "evidenceGateCount": 6,
+    "openGapCount": 9,
+    "currentCountDenominator": null
+  },
+  "entryFiles": [
+    "docs/migration/v6-current-registry/01-symbolic-engine.json",
+    "docs/migration/v6-current-registry/02-addressed-learning.json",
+    "docs/migration/v6-current-registry/03-public-perception.json",
+    "docs/migration/v6-current-registry/04-region.json",
+    "docs/migration/v6-current-registry/05-runtime-product.json"
+  ],
+  "evidenceGatesFile": "docs/migration/v6-current-registry/06-evidence-gates.json",
+  "openGapsFile": "docs/migration/v6-current-registry/07-open-gaps.json"
+}

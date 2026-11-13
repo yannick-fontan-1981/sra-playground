@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "kind": "current-v6-reconstruction-open-gaps",
+  "gaps": [
+    {
+      "id": "G001",
+      "name": "Historical 70/76 slot mapping",
+      "reason": "No durable per-slot registry or one-to-one mapping from Site 109/native 0.68 to the current tree is available.",
+      "evidencePaths": [
+        "docs/migration/v6-delivery-roadmap.md"
+      ]
+    },
+    {
+      "id": "G002",
+      "name": "Exact Site 109/native 0.68 source identity",
+      "reason": "The historical source SHA d90ce5b64fffa53cca201e2a6a49450fd123f299 remains unresolved.",
+      "evidencePaths": [
+        "docs/migration/v6-delivery-roadmap.md"
+      ]
+    },
+    {
+      "id": "G003",
+      "name": "Current chart_navigation reconstruction",
+      "reason": "Historical 9A evidence exists, but the exact implementation is not reconstructed on the canonical branch.",
+      "evidencePaths": [
+        "docs/migration/v6-delivery-roadmap.md"
+      ]
+    },
+    {
+      "id": "G004",
+      "name": "Browser host/controller checkpoint wiring across activations",
+      "reason": "The atomic checkpoint core, pending need identity, return dedupe and exact FieldStock state are qualified, but the browser host and Agent controller do not yet invoke them during deactivation and reactivation.",
+      "evidencePaths": [
+        "docs/migration/op01-op31-progress.md",
+        "docs/recovery/op01-op31-session-continuity-core-20261113.md"
+      ]
+    },
+    {
+      "id": "G005",
+      "name": "Region as an active browser product owner",
+      "reason": "Region is functionally and performance qualified in its reconstructed boundary but is not a peer owner in the active browser product composition.",
+      "evidencePaths": [
+        "docs/migration/op01-op31-progress.md"
+      ]
+    },
+    {
+      "id": "G006",
+      "name": "Real product objective owner for OP31",
+      "reason": "No current product owner produces and consumes an OP31 objective assessment with decision authority.",
+      "evidencePaths": [
+        "docs/migration/op01-op31-progress.md"
+      ]
+    },
+    {
+      "id": "G007",
+      "name": "Lot 10 temporal selection integration",
+      "reason": "Durable Lot 10 evidence is preserved separately and has not been integrated into the canonical reconstruction.",
+      "evidencePaths": [
+        "docs/migration/v6-delivery-roadmap.md"
+      ]
+    },
+    {
+      "id": "G008",
+      "name": "Lot 8 historical source recovery",
+      "reason": "No authoritative Lot 8 branch or source has been identified in the current repository evidence.",
+      "evidencePaths": [
+        "docs/migration/v6-delivery-roadmap.md"
+      ]
+    },
+    {
+      "id": "G009",
+      "name": "Site publication from the reconstructed registry baseline",
+      "reason": "No Site publication is claimed by this registry step; publication remains downstream of canonical integration and fresh verification.",
+      "evidencePaths": [
+        "docs/migration/git-site-sync-policy.md"
+      ]
+    }
+  ]
+}
