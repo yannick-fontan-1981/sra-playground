@@ -29,7 +29,7 @@ sont pas mesurées.
 | OP11 | C3 | recouvrement familial | target tree | réseau générique de déblocage non démontré |
 | OP12 | C3 | recouvrement spécialisé substantiel | unknown_then_observe / acquire_missing_control | parcours générique depends_on encore distinct |
 | OP13 | C5 | recouvrement spécialisé fort | scope des règles/effets | vue transversale seulement si consommée |
-| OP14 | C3 | usage consommé dans le donneur | operation_admission + common_preservation | port TS à vérifier ; OP seule ne prouve pas la sûreté |
+| OP14 | C3 | donneur consommé ; reconstruction TS bridge-only | operation_admission + common_preservation ; native authority ne route pas OP14 | producteur/besoin runtime à démontrer avant tout raccordement |
 | OP15 | C4 | recouvrement spécialisé substantiel | enfants du target tree | ne pas dupliquer le propriétaire de hiérarchie |
 | OP16 | C6 | producteur manquant | frontier_exhausted reste local | deadlock global prouvé non disponible |
 | OP17 | C6 | recouvrement partiel | return_fork + preservation | structure recovery authorized/preserve_verified non démontrée |
