@@ -178,8 +178,10 @@ export class ObservedAddressedMaterialRuntime {
     }
 
     this.field.epoch = before.level_epoch;
-    this.field.model = structuredClone(fit.model);
-    this.field.indicator = fit.indicator ? structuredClone(fit.indicator) : null;
+    this.field.model = { ...structuredClone(fit.model) };
+    this.field.indicator = fit.indicator
+      ? { ...structuredClone(fit.indicator) }
+      : null;
     const response = recordAddressedFieldResponse(
       this.field as unknown as AddressedFieldResponseState,
       before,
