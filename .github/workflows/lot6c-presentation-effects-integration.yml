@@ -1,0 +1,53 @@
+name: Lot 6C presentation effects integration
+
+on:
+  push:
+    branches:
+      - recovery/lot6c-presentation-effects-integration-20261112
+
+permissions:
+  contents: write
+
+jobs:
+  integrate-and-qualify:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out recovery branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.18.0'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Integrate presentation effects into main
+        run: node scripts/recovery/integrate-lot6c-presentation-effects.mjs
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Run TypeScript tests
+        run: npm test
+
+      - name: Verify patch cleanliness
+        run: git diff --check
+
+      - name: Commit integrated main
+        run: |
+          if git diff --quiet; then
+            echo 'No integration changes to commit.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add src/main.ts
+          git commit -m 'refactor(lot6c): connect main to presentation effect ports'
+          git push origin HEAD:${GITHUB_REF_NAME}
