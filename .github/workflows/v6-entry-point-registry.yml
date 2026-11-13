@@ -1,40 +1,36 @@
-name: Materialize V6 entry-point registry
+name: V6 reconstructed entry-point registry
 
 on:
-  push:
-    branches:
-      - recovery/v6-entry-point-registry-20261113
+  pull_request:
     paths:
-      - scripts/materialize-v6-entry-point-registry-a.mjs
-      - scripts/materialize-v6-entry-point-registry-b.mjs
-      - .github/workflows/v6-entry-point-registry.yml
+      - 'docs/migration/v6-entry-point-progress.json'
+      - 'docs/recovery/v6-entry-point-registry-reconstruction-20261113.md'
+      - 'scripts/check-v6-entry-point-progress.mjs'
+      - 'tests/v6-entry-point-progress.test.ts'
+      - '.github/workflows/v6-entry-point-registry.yml'
+  workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  materialize:
+  verify:
     runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22.18.0
-      - name: Materialize registry files
-        run: |
-          node scripts/materialize-v6-entry-point-registry-a.mjs
-          node scripts/materialize-v6-entry-point-registry-b.mjs
-      - name: Commit generated registry
-        run: |
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add docs/migration/v6-entry-point-progress.json \
-                  scripts/check-v6-entry-point-progress.mjs \
-                  tests/v6-entry-point-progress.test.ts \
-                  docs/recovery/v6-entry-point-registry-reconstruction-20261113.md
-          if git diff --cached --quiet; then
-            echo "No materialization changes"
-          else
-            git commit -m "Reconstruct V6 entry-point evidence registry"
-            git push origin HEAD:${GITHUB_REF_NAME}
-          fi
+          cache: npm
+      - run: npm ci
+      - name: Validate machine registry and evidence paths
+        run: node scripts/check-v6-entry-point-progress.mjs
+      - name: Run registry guards
+        run: node --experimental-transform-types --test tests/v6-entry-point-progress.test.ts
+      - name: Preserve OP catalogue and call-site regressions
+        run: >-
+          node --experimental-transform-types --test
+          tests/v6-operations.test.ts
+          tests/op01-op31-call-sites.test.ts
+      - name: Production build
+        run: npm run build
