@@ -56,7 +56,8 @@ function recordSkipped(
   reason: string,
   options: PostAnalysisOptions,
 ): PostAnalysisReceipt {
-  options.trace?.record({
+  if (options.trace?.countersOnly) options.trace.countOperation(op, mode);
+  else options.trace?.record({
     kind: 'operation', needId: options.needId, op, caller: 'postAnalysis', mode, reason,
     inputRefs: [], dependencyRevisions: { observation: options.observationRevision },
     resultStatus: mode === 'blocked' ? 'unknown' : 'not_produced',
@@ -72,12 +73,14 @@ function executeAnalysis(
 ): OperationResult {
   const started = performance.now();
   const result = executeOperation(op as OperationKey, { ...state, focus: focusRef, observation_revision: options.observationRevision });
-  options.trace?.record({
+  const executeUs = (performance.now() - started) * 1000;
+  if (options.trace?.countersOnly) options.trace.countOperation(op, 'executed');
+  else options.trace?.record({
     kind: 'operation', needId: options.needId, op, caller: 'postAnalysis', mode: 'executed', reason: 'post-analysis contract',
     inputRefs: [focusRef], dependencyRevisions: { observation: options.observationRevision },
     resultStatus: result.status === 'incomplete' ? 'partial' : 'complete',
     resultSummary: Array.isArray(result.value) ? { count: result.value.length } : { kind: typeof result.value },
-    executeUs: (performance.now() - started) * 1000,
+    executeUs,
   });
   return result;
 }
@@ -93,7 +96,8 @@ export function postAnalysis(
     receipts.push(recordSkipped('OP29', 'blocked', 'expected properties unavailable', options));
   } else {
     const result = executeAnalysis('OP29', state, focusRef, options);
-    options.trace?.record({
+    if (options.trace?.countersOnly) options.trace.countConsumption('OP29', 'information_only');
+    else options.trace?.record({
       kind: 'consumption', needId: options.needId, op: 'OP29', consumer: 'postAnalysisReport',
       decisionRef: options.decisionRef, effectKind: 'information_only', semanticEffect: false,
       reason: 'comparison is exposed but no decision owner consumes it',
@@ -110,7 +114,8 @@ export function postAnalysis(
       const key = `knowledge:${update.composition_ref}:${update.property}`;
       if (options.knowledge.put(key, { value: update.value, evidence: String(update.evidence), revision: Number(update.revision) })) writes += 1;
     }
-    options.trace?.record({
+    if (options.trace?.countersOnly) options.trace.countConsumption('OP30', 'persisted_only');
+    else options.trace?.record({
       kind: 'consumption', needId: options.needId, op: 'OP30', consumer: 'knowledgeStore',
       decisionRef: options.decisionRef, effectKind: 'persisted_only', semanticEffect: writes > 0,
       reason: writes > 0 ? 'validated knowledge updates persisted' : 'no new durable knowledge written',
@@ -122,7 +127,8 @@ export function postAnalysis(
     receipts.push(recordSkipped('OP31', 'not_required', 'no objective assessments supplied', options));
   } else {
     const result = executeAnalysis('OP31', state, focusRef, options);
-    options.trace?.record({
+    if (options.trace?.countersOnly) options.trace.countConsumption('OP31', 'information_only');
+    else options.trace?.record({
       kind: 'consumption', needId: options.needId, op: 'OP31', consumer: 'postAnalysisReport',
       decisionRef: options.decisionRef, effectKind: 'information_only', semanticEffect: false,
       reason: 'assessment is exposed but no objective owner consumes it',
