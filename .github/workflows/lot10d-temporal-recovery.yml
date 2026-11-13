@@ -26,6 +26,7 @@ jobs:
           tests/v6-temporal-action-binding.test.ts
           tests/v6-temporal-action-release-permit.test.ts
           tests/v6-temporal-act-consumption.test.ts
+          tests/v6-temporal-action-boundary.test.ts
           tests/v6-temporal-action-donor-audit.test.ts
           tests/v6-composition-engine.test.ts
           tests/v6-native-authority.test.ts
@@ -41,7 +42,7 @@ jobs:
           tests/v6-temporal-decision-receipt.test.ts
           tests/v6-temporal-selection-adapter.test.ts
           tests/v6-temporal-selection-bridge.test.ts
-      - name: Typecheck reconstructed TemporalSelection, action binding, permit, ACT consumption, audit, passive port and shared trace sources
+      - name: Typecheck reconstructed TemporalSelection, action binding, permit, ACT consumption, ActionBoundary, audit, passive port and shared trace sources
         run: >-
           npx tsc --noEmit
           --target ES2022
@@ -66,5 +67,6 @@ jobs:
           src/runtime/v6-temporal-action-binding.ts
           src/runtime/v6-temporal-action-release-permit.ts
           src/runtime/v6-temporal-act-consumption.ts
+          src/runtime/v6-temporal-action-boundary.ts
 
-# qualification-head: temporal-act-consumption
+# qualification-head: temporal-action-boundary-dispatch
