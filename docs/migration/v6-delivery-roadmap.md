@@ -156,7 +156,7 @@ Status:
 
 **generic bounded joint owner functionally qualified.**
 
-#### 9C2 real public producers
+#### 9C2 real public SMLP producers
 
 Real qualified producers:
 
@@ -194,11 +194,70 @@ GitHub Actions evidence:
 
 Status:
 
-**9C2 functionally qualified on a real public SMLP corpus; official 9C performance remains open.**
+**9C2 functionally qualified on a real public SMLP corpus.**
 
 Proof:
 
 `docs/recovery/lot9c2-public-addressed-joint-channels.md`
+
+#### 9C3 real STCK path and official performance
+
+The second public target producer `public_stck_stack_shop_target_v1` revalidates
+one of two visible STCK target kinds while the public shop bar is active:
+
+- lowest visible stack-card face, for removal;
+- first active shop button, when no card face is visible.
+
+It uses no hidden `at_shop` flag, stack contents, button identity or prepared
+trajectory. `public_action_availability_v1` remains separately required.
+
+Functional qualification on the real archive exercised ten native STCK actions,
+both target kinds, causal removal of either channel and acquisition by both
+contributors. The optimized joint-only seam keeps the normal Worker defaults
+unchanged while avoiding FieldStock rows and unrelated owners for this bounded
+owner set.
+
+Official ABBA proof:
+
+- workflow run `43364459043`;
+- job `131685629232`;
+- qualified code commit `5412c2a95a77ea9901855d1620263709b07540bf`;
+- source corpus `native-joint-channel-action6-corpus-v1`;
+- same browser/Pyodide transport, archive, seed and action sequence for A and B;
+- 8 warmup sessions / 24 warmup actions;
+- 32 measured sessions / 400 measured actions;
+- no measured sample removed;
+- STCK A median `61.45 ms`;
+- STCK B median `62.90 ms`;
+- STCK delta `+2.3596419853493256%`;
+- SMLP A median `121.95 ms`;
+- SMLP B median `126.55 ms`;
+- SMLP delta `+3.772037720376109%`;
+- STCK and SMLP both strictly below `+10%`;
+- accepted: `true`.
+
+B executed and acquired every expected decision:
+
+- STCK: `86/86` decisions and `86/86` acquisitions, including 62 card targets
+  and 24 shop-button targets;
+- SMLP: `126/126` decisions and `126/126` acquisitions;
+- residual active sessions: `0`.
+
+Status:
+
+**9C is functionally and officially performance-qualified in its reconstructed bounded scope.**
+
+Proofs:
+
+- `docs/recovery/lot9c3-official-abba-performance-qualified.md`;
+- `docs/recovery/lot9c3-official-abba-performance-qualified.json`.
+
+Limits retained:
+
+- no historical implementation identity claim;
+- no general solver claim;
+- no registry count increment;
+- no Site publication claim.
 
 ## 5. Performance contract
 
@@ -216,12 +275,7 @@ The strict official protocol remains:
 - internal phase overruns remain visible but do not fail when the same game's
   complete-session global delta passes.
 
-9B has passed this protocol.
-
-9C has not yet run an official performance comparison because the current real
-functional corpus proves the two-producer joint only on SMLP. A comparable STCK
-joint path or an explicit evidence-backed disposition is still required before
-an official two-game ABBA run.
+Both 9B and 9C have passed this protocol independently.
 
 ## 6. Immediate roadmap
 
@@ -233,8 +287,9 @@ an official two-game ABBA run.
 | 9C0 historical audit | complete | preserve unresolved identity |
 | 9C1 bounded joint owner | complete | preserve neutral ambiguity |
 | 9C2 real SMLP producers | complete | preserve causal removal proof |
-| **9C3 second corpus/performance boundary** | **open** | **qualify STCK joint path or record evidence-backed non-applicability, then define A/B timing** |
-| current reconstruction registry | open | rebuild before count claims |
+| 9C3 real STCK path | complete | preserve public-only target proof |
+| 9C3 official ABBA | complete, PASS | preserve all samples and source refs |
+| **current reconstruction registry** | **open** | **rebuild evidence-backed entry-point progress before count claims** |
 | Site publication | blocked | only from an integrated GitHub-qualified SHA |
 
 ## 7. Other recovery lanes
@@ -278,10 +333,9 @@ The project must not claim exact Site 109 parity until all of these are true:
 
 ## 9. Next step
 
-**Continue with Lot 9C3.**
+**Rebuild the current reconstruction registry.**
 
-Qualify a second real, nonredundant public joint-channel path for STCK, or
-produce a durable evidence-backed disposition explaining why STCK is not a
-valid `joint_channels` exercise. Only then define the 9C A/B source identities,
-timing scope and official ABBA execution. Do not fabricate a STCK channel,
-benchmark corpus or historical count.
+Create an evidence-backed `docs/migration/v6-entry-point-progress.json` from the
+actual canonical tree. Each entry must state its implementation, consumer,
+qualification and unresolved limits. Do not copy the historical 70/76 or 71/76
+counts into the current reconstruction without proving every included entry.
