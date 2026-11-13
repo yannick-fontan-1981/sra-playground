@@ -69,8 +69,12 @@ function requireRegionCandidateHook(candidateHook) {
   if (candidateHook.id !== 'region_intervention') {
     throw new Error('B native runner candidate hook id must be region_intervention');
   }
-  if (candidateHook.inputMode !== 'borrowed-readonly') {
-    throw new Error('region_intervention candidate hook must declare borrowed-readonly inputs');
+  if (
+    candidateHook.inputMode !== undefined
+    && candidateHook.inputMode !== 'cloned'
+    && candidateHook.inputMode !== 'borrowed-readonly'
+  ) {
+    throw new Error('region_intervention candidate hook inputMode must be cloned or borrowed-readonly');
   }
   if (typeof candidateHook.beforeAction !== 'function') {
     throw new TypeError('region_intervention candidate hook requires beforeAction()');
@@ -107,7 +111,7 @@ function createCandidateRunner({
     }),
     beforeAction: hook.beforeAction,
     afterAction: hook.afterAction,
-    hookInputMode: hook.inputMode,
+    hookInputMode: hook.inputMode ?? 'cloned',
   });
 }
 
