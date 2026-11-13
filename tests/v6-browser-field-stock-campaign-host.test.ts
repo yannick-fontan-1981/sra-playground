@@ -276,7 +276,7 @@ test('passive FieldStock retains but does not falsely apply knowledge after an O
   }
   assert.deepEqual(events, ['action:4', 'acquired', 'present']);
   assert.notEqual(runtime.field.stock, originalStock);
-  assert.equal(runtime.field.stock, undefined);
+  assert.equal(runtime.field.stock, null);
   assert.ok(runtime.field.prior);
   assert.equal(runtime.status(), 'retained_pending_revalidation');
 });
