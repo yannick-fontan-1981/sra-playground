@@ -1,6 +1,6 @@
 # Symbolic Intelligence Configuration — Architecture V8 de l'intelligence configurable par l'humain
 
-**Statut :** proposition normative, version 0.2  
+**Statut :** proposition normative, version 0.3  
 **Date initiale :** 12 novembre 2026  
 **Révision :** 13 novembre 2026  
 **Nom officiel :** **Symbolic Intelligence Configuration (SIC)**  
@@ -31,19 +31,23 @@ Ces cinq perspectives ne sont pas cinq moteurs indépendants. Elles sont cinq pr
 
 Le système introduit aussi un concept transversal, le **besoin**, qui exprime ce qui manque pour progresser. Un besoin n'est pas une sixième perspective principale. Il relie les cinq perspectives et explique pourquoi un raisonnement doit continuer, changer de méthode ou créer un sous-objectif.
 
+Le besoin seul ne détermine toutefois jamais la méthode applicable. Il est interprété dans un **cadre de situation** révisable, puis traité par un **graphe contextuel de résolution** propre à son type. Cette couture empêche une stratégie valable pour une morphologie, une topologie ou un modèle de contrôle d'être appliquée silencieusement à une autre situation qui exprime pourtant le même besoin abstrait.
+
 L'ambition de transformer la manière dont l'intelligence artificielle est construite impose une exigence particulière : cette architecture doit être plus rigoureuse, plus testable et plus compréhensible qu'un prototype de recherche ordinaire. Cette ambition est traitée ici comme une obligation d'ingénierie, pas comme une affirmation marketing.
 
 ---
 
 ## 2. Thèse architecturale
 
-Le système repose sur cinq structures complémentaires :
+Le système repose sur sept structures complémentaires :
 
 | Structure | Rôle |
 |---|---|
 | **Graphe d'informations** | Représenter ce qui est observé, appris, supposé, prédit, contredit ou encore inconnu |
+| **Cadre de situation** | Qualifier la morphologie, la topologie, le contrôle, la dynamique, les contraintes et la phase pertinentes pour la décision |
 | **Registre de besoins** | Représenter ce qui manque pour progresser, sans transformer automatiquement chaque manque en objectif |
-| **Agenda de stratégies** | Déterminer quelles méthodes peuvent répondre aux besoins actuels |
+| **Graphes contextuels de résolution** | Ordonner, spécialiser, composer ou exclure les réponses possibles à chaque type de besoin |
+| **Agenda de stratégies** | Arbitrer entre les engagements applicables après résolution contextuelle |
 | **Arbre d'engagements** | Représenter ce que l'agent a effectivement décidé de poursuivre et où il doit revenir |
 | **Journal sémantique** | Conserver ce qui s'est réellement produit, dans quel ordre, avec quelles preuves |
 
@@ -58,9 +62,11 @@ Le système repose sur cinq structures complémentaires :
 
 La formule centrale est :
 
-> Le graphe représente ce qui peut être vrai.  
+> Le graphe d'informations représente ce qui peut être vrai.  
+> Le cadre de situation représente dans quel régime cognitif local le besoin doit être interprété.  
 > Le registre de besoins représente ce qui manque.  
-> L'agenda représente ce qui peut être fait.  
+> Le graphe contextuel de résolution représente comment ce manque peut être traité dans cette situation.  
+> L'agenda représente ce qui peut recevoir l'engagement actif.  
 > L'arbre d'engagements représente ce que l'agent a décidé de poursuivre.  
 > Le journal représente ce qui s'est réellement passé.
 
@@ -89,6 +95,13 @@ Les mots **DOIT**, **NE DOIT PAS**, **DEVRAIT** et **PEUT** sont utilisés au se
 15. **Le système DOIT pouvoir expliquer pourquoi un élément est apparu, pourquoi il est actif, ce qui le satisferait et ce qui le rendrait périmé.**
 16. **Le système DOIT posséder exactement un token de concentration ; il peut être libre ou détenu par un seul engagement, jamais dupliqué.**
 17. **La configuration SIC déclarative DOIT être bornée et conçue pour terminer par défaut ; les extensions procédurales peuvent être Turing-complètes seulement sous contrats, budgets et permissions explicites.**
+18. **Un besoin abstrait NE DOIT PAS suffire à sélectionner une stratégie ; la sélection DOIT aussi dépendre d'un cadre de situation révisé et prouvé.**
+19. **Toute stratégie DOIT déclarer un domaine d'applicabilité, des contre-indications et sa relation de spécialisation, composition ou fallback avec les autres réponses au même besoin.**
+20. **L'applicabilité DOIT être ternaire : `applicable`, `not_applicable` ou `unknown` ; une dimension inconnue NE DOIT PAS être traitée comme fausse.**
+21. **Chaque type de besoin destiné à plusieurs méthodes DOIT posséder un graphe contextuel de résolution qui ordonne ou compose explicitement ces méthodes.**
+22. **Deux stratégies dont les domaines se chevauchent sans spécialisation, ordre, composition ou discriminant déclaré constituent une erreur de configuration.**
+23. **Une stratégie générale DOIT être définie par des invariants morphologiques, topologiques, causaux et opérationnels, non par le seul nom d'un jeu ou une ressemblance superficielle.**
+24. **Une révision pertinente du cadre de situation DOIT invalider la résolution et réexaminer l'engagement sans dupliquer automatiquement le besoin.**
 
 ### 3.2 Principe de parallélisme contrôlé
 
@@ -136,6 +149,9 @@ Cette spécification couvre :
 
 - la représentation des cinq perspectives ;
 - les besoins typés ;
+- les cadres de situation révisables ;
+- les graphes contextuels de résolution par type de besoin ;
+- les domaines d'applicabilité, contre-indications et relations de spécialisation ;
 - la sélection des stratégies ;
 - la production des objectifs ;
 - la construction et l'exécution des plans ;
@@ -381,7 +397,10 @@ La perspective **Stratégies** répond à :
 Une stratégie déclare :
 
 - les types de besoins auxquels elle répond ;
-- ses préconditions ;
+- son domaine d'applicabilité dans le cadre de situation ;
+- ses préconditions positives ;
+- ses contre-indications et dimensions inconnues tolérées ;
+- ses relations de spécialisation, composition ou fallback ;
 - ses inhibitions ;
 - les informations consommées ;
 - les opérations Logos utilisées ;
@@ -533,9 +552,13 @@ proposition de besoin
         ↓
 registre de besoins
         ↓
-stratégies compatibles
+cadre de situation
         ↓
-arbitrage
+graphe contextuel de résolution
+        ↓
+stratégies applicables ou besoins discriminants
+        ↓
+arbitrage de l'engagement
         ↓
 objectif et plan
 ```
@@ -569,7 +592,371 @@ Aucun nœud NE PEUT :
 
 ---
 
-## 8. Modèle canonique minimal
+## 8. Cadre de situation et graphes contextuels de résolution
+
+### 8.1 Pourquoi le besoin abstrait ne suffit pas
+
+Un même besoin peut apparaître dans des situations qui exigent des méthodes incompatibles.
+
+`Need<ReachTarget>` peut signifier :
+
+- déplacer directement un acteur dans une grille ;
+- sélectionner puis translater un polyomino ;
+- pousser un objet intermédiaire ;
+- emprunter un portail ;
+- attendre une entité autonome ;
+- transformer d'abord la morphologie du sujet ;
+- découvrir encore le modèle de contrôle.
+
+Raccorder directement toutes ces méthodes au même type de besoin recréerait les effets de bord que SIC cherche à supprimer. La véritable clé de résolution est :
+
+```text
+Besoin
++ cadre de situation
++ portée
++ preuves disponibles
++ phase courante
++ engagements en cours
+→ graphe contextuel de résolution
+→ stratégies applicables
+```
+
+Le besoin reste abstrait et transférable. Le cadre de situation et le graphe de résolution déterminent comment il peut être traité ici et maintenant.
+
+### 8.2 Cadre de situation
+
+Un **cadre de situation** (*Situation Frame*) est une synthèse typée, partielle et révisable des dimensions qui discriminent les méthodes applicables.
+
+Il ne copie pas tout le graphe d'informations. Il référence uniquement les propriétés utiles à la résolution actuelle.
+
+Dimensions initiales recommandées :
+
+| Dimension | Exemples |
+|---|---|
+| **Morphologie** | point, acteur mobile, bloc rigide, polyomino, objet composite, objet déformable |
+| **Topologie** | grille, graphe, régions, couloirs, portails, espace de placement |
+| **Modèle de contrôle** | directionnel, clic direct, sélection puis commande, contrôle indirect, inconnu |
+| **Affordances** | pousser, tirer, tourner, colorer, transporter, activer, attendre |
+| **Dynamique** | statique, autonome, périodique, réactive, temporisée |
+| **Observabilité** | complète, partielle, brouillard, état masqué, effet différé |
+| **Réversibilité** | réversible, coûteuse, destructive, irréversible, inconnue |
+| **Contraintes** | pas, temps, oxygène, inventaire, ordre, collisions, conservation |
+| **Phase** | assimilation, classification, exploration, préparation, exécution, validation, reprise |
+| **Historique pertinent** | essais, transformations, frontières, méthodes acquises, réfutations |
+
+Chaque trait du cadre possède :
+
+- une valeur ou `unknown` ;
+- un profil épistémique ;
+- des preuves ;
+- une révision ;
+- une portée ;
+- des règles d'invalidation.
+
+Le cadre peut rester incomplet. Le système ne calcule que les discriminants demandés par les graphes de résolution actuellement pertinents.
+
+### 8.3 Construction du cadre par les stratégies racines
+
+Les trois racines V5 prennent ici un rôle précis :
+
+- **Assimilation** construit et révise le cadre depuis les observations, retours, identités, frontières et contradictions ;
+- **Exploration** acquiert les discriminants encore inconnus lorsqu'ils empêchent une résolution sûre ;
+- **Solving** applique une stratégie compatible lorsque le cadre est suffisamment qualifié.
+
+```text
+Assimilation
+→ cadre de situation partiel
+→ besoin
+→ discriminant manquant ?
+   ├── oui → Exploration
+   └── non → Solving
+```
+
+Une révision du cadre peut suspendre un plan de Solving, produire un besoin d'Exploration, puis permettre un retour vers le parent.
+
+### 8.4 Domaine d'applicabilité
+
+Chaque stratégie déclare une **enveloppe d'applicabilité** comprenant :
+
+- conditions positives ;
+- contre-indications ;
+- preuves minimales ;
+- dimensions inconnues tolérées ;
+- portée ;
+- invariants à préserver ;
+- version du schéma de situation ;
+- relation avec les stratégies plus générales ou spécialisées.
+
+Exemple :
+
+```yaml
+strategy:
+  id: direct-grid-navigation
+  responds_to:
+    - reach_target
+
+  applies_when:
+    topology: bounded_grid
+    control_model: directional_actions
+    subject_traits:
+      all: [directly_mobile, localized]
+    obstacle_dynamics: static
+    observability: complete
+
+  forbids:
+    - movement_requires_selection
+    - object_mediated_control
+    - autonomous_motion_dominant
+    - destructive_move_unbounded
+
+  requires_evidence:
+    - traversability_model_complete
+
+  specializes:
+    - generic-spatial-progress
+```
+
+Les contre-indications sont aussi importantes que les préconditions. Une stratégie qui sait quand elle fonctionne mais pas quand elle devient incorrecte reste dangereuse.
+
+### 8.5 Applicabilité ternaire
+
+L'évaluation d'une stratégie retourne :
+
+```text
+applicable
+not_applicable
+unknown
+```
+
+- `applicable` : les gardes requises sont prouvées et aucune contre-indication n'est établie ;
+- `not_applicable` : une contradiction ou une contre-indication est établie ;
+- `unknown` : un discriminant nécessaire manque ou reste ambigu.
+
+`unknown` ne vaut jamais `false`.
+
+Lorsque l'applicabilité est inconnue, le graphe peut :
+
+- réutiliser une information revalidable ;
+- demander une perception ciblée ;
+- produire un besoin de discrimination ;
+- choisir une stratégie sûre sous information partielle ;
+- rester explicitement bloqué.
+
+### 8.6 Graphe contextuel de résolution du besoin
+
+Chaque type de besoin pouvant être satisfait par plusieurs méthodes possède un **Need Resolution Graph** configuré par l'humain.
+
+Ce graphe décrit :
+
+- les discriminants à examiner ;
+- les gardes ;
+- l'ordre de spécialisation ;
+- les sous-besoins ;
+- les compositions ;
+- les fallbacks autorisés ;
+- les arrêts de sécurité ;
+- les conditions de sortie.
+
+Types de nœuds initiaux :
+
+| Nœud | Sémantique |
+|---|---|
+| `ALL` | tous les enfants doivent contribuer |
+| `ANY` | une contribution suffisante termine la branche |
+| `SEQUENCE` | les enfants sont traités dans l'ordre |
+| `SELECT` | une branche est choisie par discriminants explicites |
+| `FALLBACK` | les branches sont essayées dans l'ordre déclaré |
+| `GUARD` | conditionne l'accès à une branche |
+| `EXPLORE` | produit un besoin destiné à acquérir un discriminant |
+| `STOP` | interdit la poursuite dans cette situation |
+| `REUSE` | cherche une information ou méthode revalidable |
+| `STRATEGY` | référence une stratégie candidate |
+
+Le stockage canonique est un graphe typé, généralement acyclique. Une projection en arbre est produite pour une instance de résolution donnée.
+
+> Stockage en graphe, évaluation ordonnée, présentation en arbre.
+
+### 8.7 Graphe statique et instance runtime
+
+Deux objets sont distingués :
+
+1. **ResolutionGraphDefinition** : configuration versionnée commune à un type de besoin ;
+2. **ResolutionInstance** : évaluation du graphe pour un besoin, un cadre et une révision précis.
+
+L'instance runtime conserve :
+
+- branches examinées ;
+- discriminants utilisés ;
+- résultats `applicable`, `not_applicable` ou `unknown` ;
+- stratégies rejetées et raisons ;
+- sous-besoins produits ;
+- branche sélectionnée ;
+- ambiguïtés restantes ;
+- révisions du besoin, du cadre et du graphe.
+
+Exemple de lecture humaine :
+
+```text
+Need N-42 : atteindre la sortie
+
+Situation :
+  topology = bounded_grid
+  control_model = directional_actions
+  subject = directly_mobile
+  obstacles = static
+
+Branches :
+  direct-grid-navigation → applicable
+  portal-navigation → not_applicable : aucune preuve de portail
+  object-mediated-transport → not_applicable : acteur directement mobile
+  establish-control-model → inutile : contrôle déjà acquis
+
+Sélection :
+  direct-grid-navigation
+```
+
+### 8.8 Ordre déterministe de résolution
+
+L'ordre normatif est :
+
+1. normaliser le besoin et le cadre ;
+2. évaluer les gardes du graphe ;
+3. éliminer les branches `not_applicable` ;
+4. produire les besoins nécessaires aux branches `unknown` ;
+5. appliquer la relation de spécialisation ;
+6. appliquer l'ordre `SEQUENCE`, `SELECT` ou `FALLBACK` déclaré ;
+7. vérifier preuves, risques, coûts et réversibilité ;
+8. conserver `ambiguous` si aucune règle autorisée ne départage encore.
+
+Une stratégie spécialisée applicable précède sa stratégie générique. Un fallback n'est utilisé que si les branches antérieures sont explicitement inapplicables, échouées ou épuisées selon leur contrat.
+
+Aucun score global opaque ne remplace cet ordre.
+
+### 8.9 Chevauchements et trous de couverture
+
+Le compilateur SIC doit détecter les chevauchements :
+
+```text
+Ambiguous resolver overlap
+
+Need:
+  reach_target
+
+Strategies:
+  direct-grid-navigation
+  cautious-grid-navigation
+
+Overlapping domain:
+  topology = grid
+  control_model = directional
+  obstacle_dynamics = static
+
+No specialization, order, composition or discriminator is declared.
+```
+
+Un chevauchement est valide seulement si une relation explicite existe :
+
+- `specializes` ;
+- `fallback_for` ;
+- composition `ALL` ou `SEQUENCE` ;
+- branches `SELECT` mutuellement discriminées ;
+- coexistence non conflictuelle démontrée.
+
+Le compilateur et les tests doivent aussi détecter les régions non couvertes.
+
+Une région non couverte produit selon la politique :
+
+- une erreur de compilation pour un domaine déclaré fermé ;
+- un avertissement et un besoin `classify_or_extend_resolver` pour un domaine ouvert ;
+- jamais un fallback arbitraire.
+
+### 8.10 Généralisation par invariants
+
+Une stratégie générale est configurée avec des traits structurels et causaux :
+
+```text
+rigid
+selectable
+translatable
+multi_cell
+bounded
+observable
+selection_then_transform
+exact_region_target
+```
+
+Elle ne doit pas dépendre directement de :
+
+- nom du jeu ;
+- numéro du niveau ;
+- couleur arbitraire ;
+- coordonnées mémorisées ;
+- ressemblance visuelle sans causalité.
+
+Une exception liée à un jeu reste possible uniquement comme diagnostic ou compatibilité temporaire, avec justification, expiration et interdiction de promotion en stratégie générale.
+
+### 8.11 Révision du cadre sans duplication du besoin
+
+Le besoin canonique et sa résolution ont des cycles de vie distincts.
+
+Une modification du cadre ne recrée pas automatiquement le besoin. Elle invalide l'instance de résolution et provoque sa réévaluation.
+
+Clé de cache recommandée :
+
+```text
+needId
++ needRevision
++ situationFrameId
++ situationFrameRevision
++ resolutionGraphVersion
+```
+
+Un plan ou objectif sélectionné conserve la révision du cadre qui a autorisé son engagement. Si un discriminant pertinent change :
+
+1. l'autorisation d'action est invalidée ;
+2. le plan est suspendu ;
+3. l'instance de résolution est recalculée ;
+4. les informations encore valides sont conservées ;
+5. le token est retourné ou réorienté selon le résultat.
+
+### 8.12 Exemple : `ReachTarget`
+
+```text
+ReachTarget
+│
+├── contrôle connu ?
+│   ├── non → EXPLORE Need<EstablishControlModel>
+│   └── oui
+│
+├── sujet directement mobile ?
+│   ├── oui
+│   │   ├── topologie de grille connue ?
+│   │   │   ├── oui → STRATEGY DirectGridNavigation
+│   │   │   └── non → EXPLORE Need<MapTraversability>
+│   │
+│   └── non
+│
+├── mouvement médié par un objet ?
+│   ├── oui → STRATEGY ObjectMediatedTransport
+│   └── non
+│
+├── portail établi ?
+│   ├── oui → STRATEGY PortalRoutePlanning
+│   └── non
+│
+├── dynamique autonome dominante ?
+│   ├── oui → STRATEGY TemporalInterceptPlanning
+│   └── non
+│
+└── aucune branche suffisamment qualifiée
+    └── EXPLORE Need<ClassifyMovementMechanism>
+```
+
+Le même besoin abstrait peut ainsi conduire à des stratégies différentes sans contaminer les autres morphologies ou dispositions.
+
+---
+
+## 9. Modèle canonique minimal
 
 Les interfaces suivantes sont normatives au niveau sémantique. Leur syntaxe TypeScript exacte peut évoluer.
 
@@ -635,7 +1022,90 @@ interface EpistemicProfile {
 }
 ```
 
-### 8.1 Proposition de besoin
+### 9.1 Cadre de situation et résolution
+
+```ts
+type ApplicabilityStatus = 'applicable' | 'not_applicable' | 'unknown';
+
+interface SituationTrait {
+  key: string;
+  value: string | number | boolean | 'unknown';
+  epistemicProfileRef: NodeId;
+  evidenceRefs: EvidenceRef[];
+  revision: Revision;
+  invalidatedBy: string[];
+}
+
+interface SituationFrame extends CanonicalNode {
+  kind: 'situation_frame';
+  missionRef: NodeId;
+  rootMode: 'assimilation' | 'exploration' | 'solving';
+  traitRefs: NodeId[];
+  phaseRefs: NodeId[];
+  relevantHistoryRefs: NodeId[];
+}
+
+interface ApplicabilityEnvelope {
+  id: string;
+  requires: string[];
+  forbids: string[];
+  acceptsUnknown: string[];
+  requiredEvidence: string[];
+  invariantRefs: string[];
+  scopeContractRef: string;
+}
+
+interface ResolutionGraphDefinition {
+  id: string;
+  version: string;
+  needKind: string;
+  rootNodeRef: string;
+  nodeRefs: string[];
+  domainPolicy: 'open' | 'closed';
+}
+
+type ResolutionNodeKind =
+  | 'ALL'
+  | 'ANY'
+  | 'SEQUENCE'
+  | 'SELECT'
+  | 'FALLBACK'
+  | 'GUARD'
+  | 'EXPLORE'
+  | 'STOP'
+  | 'REUSE'
+  | 'STRATEGY';
+
+interface ResolutionNodeDefinition {
+  id: string;
+  kind: ResolutionNodeKind;
+  childRefs: string[];
+  conditionRef?: string;
+  strategyRef?: string;
+  needTemplateRef?: string;
+}
+
+interface ResolutionEvaluation {
+  nodeRef: string;
+  status: ApplicabilityStatus | 'selected' | 'blocked' | 'ambiguous';
+  evidenceRefs: EvidenceRef[];
+  missingDiscriminantRefs: string[];
+  reason: string;
+}
+
+interface ResolutionInstance extends CanonicalNode {
+  kind: 'resolution_instance';
+  needRef: NodeId;
+  situationFrameRef: NodeId;
+  situationFrameRevision: Revision;
+  resolutionGraphRef: string;
+  resolutionGraphVersion: string;
+  evaluationRefs: NodeId[];
+  selectedStrategyRef?: NodeId;
+}
+```
+
+### 9.2 Proposition de besoin
 
 ```ts
 interface NeedProposal {
@@ -644,6 +1114,8 @@ interface NeedProposal {
   requestedResult: string;
   subjectRefs: NodeId[];
   scope: ScopeRef;
+  situationFrameRef: NodeId;
+  situationFrameRevision: Revision;
   causedByRef: NodeId;
   blocksRefs: NodeId[];
   evidenceRefs: EvidenceRef[];
@@ -654,7 +1126,7 @@ interface NeedProposal {
 }
 ```
 
-### 8.2 Besoin admis
+### 9.3 Besoin admis
 
 ```ts
 type NeedStatus =
@@ -672,6 +1144,10 @@ interface NeedRecord extends CanonicalNode {
   needKind: string;
   requestedResult: string;
   status: NeedStatus;
+  situationFrameRef: NodeId;
+  situationFrameRevision: Revision;
+  resolutionGraphRef?: string;
+  resolutionInstanceRef?: NodeId;
   subjectRefs: NodeId[];
   blocksRefs: NodeId[];
   satisfactionContractRef: string;
@@ -682,7 +1158,7 @@ interface NeedRecord extends CanonicalNode {
 }
 ```
 
-### 8.3 Contribution
+### 9.4 Contribution
 
 ```ts
 interface NeedContribution extends CanonicalNode {
@@ -700,13 +1176,18 @@ interface NeedContribution extends CanonicalNode {
 }
 ```
 
-### 8.4 Stratégie
+### 9.5 Stratégie
 
 ```ts
 interface StrategyDefinition {
   id: string;
   version: string;
   respondsToNeedKinds: string[];
+  applicabilityEnvelopeRef: string;
+  resolutionGraphRefs: string[];
+  specializes: string[];
+  fallbackFor: string[];
+  composesWith: string[];
   requires: string[];
   inhibits: string[];
   operations: string[];
@@ -721,13 +1202,16 @@ interface StrategyDefinition {
 }
 ```
 
-### 8.5 Objectif et plan
+### 9.6 Objectif et plan
 
 ```ts
 interface ObjectiveInstance extends CanonicalNode {
   kind: 'objective';
   emitterStrategyRef: NodeId;
   servesNeedRef: NodeId;
+  situationFrameRef: NodeId;
+  situationFrameRevision: Revision;
+  resolutionInstanceRef: NodeId;
   parentObjectiveRef?: NodeId;
   successContractRef: string;
   failureContractRef?: string;
@@ -741,6 +1225,9 @@ interface PlanInstance extends CanonicalNode {
   kind: 'plan';
   objectiveRef: NodeId;
   strategyRef: NodeId;
+  situationFrameRef: NodeId;
+  situationFrameRevision: Revision;
+  resolutionInstanceRef: NodeId;
   stepRefs: NodeId[];
   currentStepRef?: NodeId;
 }
@@ -760,7 +1247,7 @@ interface PlanStep extends CanonicalNode {
 
 ---
 
-## 9. Cycle cognitif synchronisé
+## 10. Cycle cognitif synchronisé
 
 Le moteur suit un cycle inspiré des automates industriels, des circuits synchrones et des transactions de base de données.
 
@@ -769,10 +1256,12 @@ flowchart TD
     A[Observation publique] --> B[Snapshot stable]
     B --> C[Perceptions et mesures]
     C --> D[Delta d'informations]
-    D --> E[Propositions de besoins]
+    D --> SF[Construction ou révision du cadre de situation]
+    SF --> E[Propositions de besoins]
     E --> F[Normalisation du registre de besoins]
-    F --> G[Stratégies candidates]
-    G --> H[Arbitrage]
+    F --> R[Évaluation des graphes contextuels de résolution]
+    R --> G[Stratégies applicables et sous-besoins discriminants]
+    G --> H[Arbitrage de l'engagement]
     H --> I[Transaction d'engagement]
     I --> J[Étape de plan autorisée]
     J --> K[Logos / opérations OP]
@@ -781,7 +1270,7 @@ flowchart TD
     M --> A
 ```
 
-### 9.1 Phases
+### 10.1 Phases
 
 1. **Capture**
    - valider l'observation publique ;
@@ -797,43 +1286,55 @@ flowchart TD
    - créer ou réviser les informations ;
    - conserver contradictions et inconnues.
 
-4. **Proposition de besoins**
-   - examiner les plans bloqués, objectifs, informations et perceptions ;
-   - produire des propositions idempotentes.
+4. **Cadre de situation**
+   - construire ou réviser seulement les traits pertinents ;
+   - associer valeur, preuve, statut épistémique et révision ;
+   - invalider les résolutions dépendantes lorsque le cadre change.
 
-5. **Normalisation**
+5. **Proposition de besoins**
+   - examiner les plans bloqués, objectifs, informations et perceptions ;
+   - produire des propositions idempotentes liées au cadre courant.
+
+6. **Normalisation**
    - dédupliquer ;
    - fusionner ;
    - satisfaire immédiatement si possible ;
    - expirer les besoins périmés ;
    - détecter les cycles.
 
-6. **Candidature des stratégies**
-   - rechercher les stratégies répondant aux besoins admis ;
-   - appliquer gardes et inhibitions ;
-   - produire des candidatures, sans mutation.
+7. **Résolution contextuelle**
+   - sélectionner le graphe du type de besoin ;
+   - évaluer les branches avec le cadre ;
+   - produire `applicable`, `not_applicable` ou `unknown` ;
+   - créer les sous-besoins de discrimination nécessaires ;
+   - appliquer spécialisation, composition et fallback déclarés.
 
-7. **Arbitrage**
-   - appliquer les bandes de priorité ;
+8. **Candidature des stratégies**
+   - ne conserver que les stratégies atteintes par le graphe ;
+   - appliquer gardes, contre-indications et preuves minimales ;
+   - produire des candidatures sans mutation.
+
+9. **Arbitrage**
+   - appliquer les bandes de priorité entre engagements applicables ;
    - départager de façon déterministe ;
    - sélectionner au plus un nouvel engagement focal.
 
-8. **Transaction d'engagement**
-   - créer ensemble stratégie sélectionnée, objectif, plan et point de reprise ;
-   - attribuer le token de concentration ;
-   - appliquer le delta de manière atomique.
+10. **Transaction d'engagement**
+    - créer ensemble stratégie sélectionnée, objectif, plan, instance de résolution et point de reprise ;
+    - attribuer le token de concentration ;
+    - appliquer le delta de manière atomique.
 
-9. **Libération de l'étape**
-   - revalider la portée ;
-   - appeler les OP utiles ;
-   - produire une action ou rester explicitement bloqué/ambigu.
+11. **Libération de l'étape**
+    - revalider besoin, cadre et résolution ;
+    - appeler les OP utiles ;
+    - produire une action ou rester explicitement bloqué/ambigu.
 
-10. **Retour**
+12. **Retour**
     - l'action reste en attente jusqu'à l'observation suivante ;
     - le retour est acquis avant toute nouvelle décision ;
-    - les informations, objectifs et plans sont révisés au cycle suivant.
+    - les informations, le cadre, les objectifs et les plans sont révisés au cycle suivant.
 
-### 9.2 Barrière de cycle
+### 10.2 Barrière de cycle
 
 Les nouveaux besoins dérivés pendant le cycle N ne deviennent éligibles à l'arbitrage qu'au cycle N+1.
 
@@ -841,9 +1342,9 @@ Exception : une garde critique peut empêcher immédiatement une action devenue 
 
 ---
 
-## 10. Gestionnaire des besoins
+## 11. Gestionnaire des besoins
 
-### 10.1 Responsabilités
+### 11.1 Responsabilités
 
 Le `NeedRegistry` est l'unique propriétaire des besoins canoniques.
 
@@ -863,7 +1364,7 @@ Il doit :
 - conserver les contributions ;
 - produire une explication.
 
-### 10.2 Échelle de résolution
+### 11.2 Échelle de résolution
 
 Avant de créer un objectif, le registre et l'agenda essaient, dans cet ordre :
 
@@ -878,7 +1379,7 @@ Avant de créer un objectif, le registre et l'agenda essaient, dans cet ordre :
 
 Un objectif est créé seulement lorsqu'une stratégie sélectionnée doit engager des ressources pour obtenir le résultat.
 
-### 10.3 Identité et déduplication
+### 11.3 Identité et déduplication
 
 Une identité de besoin doit inclure au minimum :
 
@@ -893,7 +1394,7 @@ Deux propositions équivalentes dans la même portée fusionnent leurs preuves.
 
 Une proposition identique ne doit pas créer plusieurs objectifs.
 
-### 10.4 Cycles
+### 11.4 Cycles
 
 Le registre doit détecter :
 
@@ -911,11 +1412,21 @@ Réponses possibles :
 
 Aucune boucle ne doit continuer silencieusement.
 
+### 11.5 Besoin stable, résolution révisable
+
+Le `NeedRegistry` possède le besoin. Le registre des cadres possède le `SituationFrame`. Le registre des résolveurs possède les définitions et instances de résolution.
+
+Une révision de morphologie, topologie, contrôle ou dynamique ne crée pas nécessairement un nouveau besoin. Elle invalide l'instance de résolution et réévalue les méthodes applicables.
+
+Le besoin est recréé uniquement si son identité sémantique change : résultat demandé, sujets, portée, parent bloqué ou contrat de satisfaction.
+
+Cette séparation évite que chaque variation perceptive multiplie artificiellement les besoins tout en empêchant la réutilisation d'une décision devenue incorrecte.
+
 ---
 
-## 11. Agenda des stratégies
+## 12. Agenda des stratégies après résolution contextuelle
 
-### 11.1 Bandes de priorité
+### 12.1 Bandes de priorité
 
 L'agenda utilise des bandes ordonnées, pas un score pondéré opaque.
 
@@ -929,22 +1440,28 @@ Ordre recommandé :
 6. **Préparer une alternative**
 7. **Explorer de façon opportuniste**
 
-### 11.2 Départage déterministe
+### 12.2 Départage déterministe
 
-À l'intérieur d'une bande :
+Le graphe contextuel détermine d'abord quelles stratégies peuvent être comparées et dans quel ordre structurel.
+
+À l'intérieur d'une même bande et d'une même branche encore comparable :
 
 1. lien avec l'objectif focal ;
-2. capacité à satisfaire complètement le besoin ;
-3. qualité des preuves ;
-4. risque ;
-5. coût estimé ;
-6. valeur d'information ;
-7. ancienneté ;
-8. identifiant stable.
+2. stratégie la plus spécialisée dont le domaine est prouvé ;
+3. ordre explicite du graphe (`SELECT`, `SEQUENCE`, `FALLBACK`) ;
+4. capacité à satisfaire complètement le besoin ;
+5. qualité et fraîcheur des preuves ;
+6. risque et réversibilité ;
+7. coût estimé ;
+8. valeur d'information ;
+9. ancienneté ;
+10. identifiant stable.
 
 Le départage est lexicographique. Les coefficients numériques globaux sont évités par défaut.
 
-### 11.3 Ambiguïté
+Une stratégie générique ne concurrence pas une stratégie spécialisée applicable comme si elles étaient équivalentes. Une stratégie `unknown` ne peut pas gagner silencieusement sur une stratégie prouvée.
+
+### 12.3 Ambiguïté
 
 Si plusieurs stratégies restent équivalentes après les critères autorisés :
 
@@ -953,7 +1470,7 @@ Si plusieurs stratégies restent équivalentes après les critères autorisés :
 - une stratégie de désambiguïsation peut proposer un besoin d'information ;
 - l'interface montre les alternatives.
 
-### 11.4 Famine et équité
+### 12.4 Famine et équité
 
 Un besoin latent ne doit pas devenir prioritaire uniquement parce qu'il est ancien. L'ancienneté intervient après pertinence, preuve, risque et coût.
 
@@ -964,11 +1481,23 @@ Le moteur doit néanmoins détecter :
 - objectif suspendu sans reprise possible ;
 - priorité inversée.
 
+### 12.5 Couverture, chevauchements et ambiguïté
+
+L'agenda ne scanne pas toutes les stratégies associées au nom du besoin. Il reçoit uniquement les branches atteintes par le graphe de résolution.
+
+Trois cas doivent rester distincts :
+
+- **chevauchement de configuration** : plusieurs stratégies couvrent le même domaine sans relation déclarée ; erreur de compilation ;
+- **ambiguïté de situation** : le cadre ne contient pas encore le discriminant nécessaire ; besoin d'Exploration ou attente ;
+- **égalité légitime** : plusieurs engagements restent comparables après toutes les règles ; résultat runtime `ambiguous`.
+
+Cette distinction empêche de corriger une ambiguïté perceptive avec une priorité arbitraire et de masquer un défaut de configuration derrière un fallback.
+
 ---
 
-## 12. Token de concentration, graphe d'attente et arbre d'engagements
+## 13. Token de concentration, graphe d'attente et arbre d'engagements
 
-### 12.1 Unicité normative
+### 13.1 Unicité normative
 
 Le système possède **exactement un token de concentration**.
 
@@ -979,7 +1508,7 @@ Le système possède **exactement un token de concentration**.
 
 Il n'existe pas d'extension V8 à plusieurs tokens. Le parallélisme reste autorisé pour les perceptions, acquisitions passives, mesures, simulations et candidatures, mais une seule branche peut commander la prochaine action publique.
 
-### 12.2 Graphe canonique et projection humaine en arbre
+### 13.2 Graphe canonique et projection humaine en arbre
 
 Les besoins, objectifs, stratégies et plans en attente sont conservés dans un graphe canonique, car un même besoin peut bloquer plusieurs objectifs et une information peut contribuer à plusieurs branches.
 
@@ -1005,7 +1534,7 @@ Règle de représentation :
 
 Les priorités en attente peuvent donc être organisées en arbre pour la compréhension, sans perdre les relations multiples du graphe sous-jacent.
 
-### 12.3 Arbre d'engagements
+### 13.3 Arbre d'engagements
 
 ```text
 Stratégie racine
@@ -1030,7 +1559,7 @@ Chaque sous-objectif conserve :
 - état du parent ;
 - preuves acquises.
 
-### 12.4 Délégation, retour et réorientation
+### 13.4 Délégation, retour et réorientation
 
 Le token peut être :
 
@@ -1040,7 +1569,7 @@ Le token peut être :
 
 Aucun retour ne doit dépendre d'une convention implicite de pile d'appels.
 
-### 12.5 Activités sans token
+### 13.5 Activités sans token
 
 Les activités suivantes peuvent continuer sans posséder le token :
 
@@ -1056,9 +1585,9 @@ Elles ne peuvent ni créer un engagement actif ni libérer une action.
 
 ---
 
-## 13. Hypothèses et simulations
+## 14. Hypothèses et simulations
 
-### 13.1 Hypothèses
+### 14.1 Hypothèses
 
 Une hypothèse est une information provisoire.
 
@@ -1074,7 +1603,7 @@ Elle reste dans la perspective Informations, avec :
 
 Une stratégie peut décider de produire un objectif pour examiner une hypothèse. L'hypothèse n'est pas dupliquée dans Objectifs : l'objectif la référence.
 
-### 13.2 Simulations
+### 14.2 Simulations
 
 Une simulation est une activité de raisonnement exécutée dans un fork immuable du snapshot.
 
@@ -1094,7 +1623,7 @@ Le résultat est enregistré comme information `simulated`.
 
 Une simulation ne satisfait pas un besoin exigeant une preuve observée, sauf si le contrat de satisfaction autorise explicitement une preuve de modèle.
 
-### 13.3 Séparation des mondes
+### 14.3 Séparation des mondes
 
 Le système doit distinguer :
 
@@ -1107,7 +1636,7 @@ Le système doit distinguer :
 Aucun identifiant d'objet simulé ne peut être confondu avec un objet observé sans relation de correspondance explicite.
 
 
-### 13.4 Profil épistémique sans score global opaque
+### 14.4 Profil épistémique sans score global opaque
 
 Une information ne reçoit pas une confiance globale unique telle que `0.73` lorsque ce nombre fusionnerait des dimensions différentes.
 
@@ -1149,7 +1678,7 @@ Des nombres locaux restent autorisés lorsqu'ils possèdent un sens défini, par
 
 ---
 
-## 14. Transaction cognitive
+## 15. Transaction cognitive
 
 Une transaction cognitive est un delta atomique.
 
@@ -1179,7 +1708,7 @@ Si une vérification échoue, aucun changement partiel n'est appliqué.
 
 ---
 
-## 15. Journal sémantique
+## 16. Journal sémantique
 
 Le journal conserve les événements significatifs :
 
@@ -1222,7 +1751,7 @@ Le journal est borné en mémoire active et peut être compacté en snapshots pe
 
 ---
 
-## 16. Portée, invalidation et révision
+## 17. Portée, invalidation et révision
 
 Chaque élément doit déclarer ce qui l'invalide.
 
@@ -1246,7 +1775,7 @@ Toute réutilisation inter-niveaux ou inter-objets exige une revalidation explic
 
 ---
 
-## 17. OP01 à OP31 comme services de besoins
+## 18. OP01 à OP31 comme services de besoins
 
 Les OP ne sont pas des étapes obligatoires d'un pipeline fixe. Elles sont des services déclenchés par des besoins et consommés par des décisions.
 
@@ -1286,9 +1815,9 @@ Une fonction spécialisée peut répondre au besoin sans OP générique si :
 
 ---
 
-## 18. Configuration humaine
+## 19. Configuration humaine
 
-## 18.1 Symbolic Intelligence Configuration
+## 19.1 Symbolic Intelligence Configuration
 
 **Symbolic Intelligence Configuration (SIC)** est le nom unique du langage et du cadre de configuration décrit par cette architecture.
 
@@ -1304,7 +1833,9 @@ pack/
   types.yaml
   perceptions/
   information/
+  situations/
   needs/
+  resolvers/
   strategies/
   objectives/
   plans/
@@ -1320,6 +1851,9 @@ Un pack déclare :
 - types ;
 - détecteurs disponibles ;
 - types de besoins ;
+- traits et schémas de cadres de situation ;
+- graphes contextuels de résolution ;
+- domaines d'applicabilité et contre-indications ;
 - stratégies ;
 - objectifs ;
 - plans ;
@@ -1330,7 +1864,7 @@ Un pack déclare :
 - textes d'explication ;
 - version et dépendances.
 
-### 18.2 Frontières et dépendances entre Intelligence Packs
+### 19.2 Frontières et dépendances entre Intelligence Packs
 
 Un Intelligence Pack est un module de capacités. Sa frontière indique ce qu'il possède, ce qu'il expose, ce qu'il importe et ce qu'il est autorisé à faire.
 
@@ -1390,7 +1924,7 @@ Le compilateur SIC doit traiter explicitement :
 
 Les packs ne se modifient pas directement entre eux. Ils communiquent par types, besoins, informations, contributions et contrats versionnés.
 
-### 18.3 Exemple de stratégie déclarative
+### 19.3 Exemple de stratégie déclarative
 
 ```yaml
 strategy:
@@ -1399,6 +1933,19 @@ strategy:
 
   responds_to:
     - need: know_control_effect
+
+  applies_when:
+    control_model: action_on_identified_control
+    subject_observability: before_and_after
+    effect_attribution: isolatable
+
+  forbids:
+    - subject_identity_ambiguous
+    - concurrent_uncontrolled_effects
+    - irreversible_risk_unbounded
+
+  specializes:
+    - generic-information-acquisition
 
   requires:
     - information: control_visible
@@ -1447,12 +1994,13 @@ strategy:
       bloquée du plan parent.
 ```
 
-### 18.4 Contrat de besoin déclaratif
+### 19.4 Contrat de besoin déclaratif
 
 ```yaml
 need:
   id: know_control_effect
   result_type: attributed_effect
+  resolver: know-control-effect-resolution
 
   identity:
     - control_ref
@@ -1476,7 +2024,58 @@ need:
     - subject_ref_invalidated
 ```
 
-### 18.5 Limite entre configuration et code
+### 19.5 Graphe de résolution déclaratif
+
+```yaml
+resolver:
+  id: reach-target-resolution
+  version: 1.0.0
+  need: reach_target
+  domain_policy: open
+
+  root:
+    kind: SELECT
+    branches:
+      - guard: control_model == unknown
+        node:
+          kind: EXPLORE
+          need: establish_control_model
+
+      - guard:
+          all:
+            - subject.directly_mobile
+            - topology == bounded_grid
+            - control_model == directional_actions
+        node:
+          kind: STRATEGY
+          strategy: direct-grid-navigation
+
+      - guard: movement.object_mediated
+        node:
+          kind: STRATEGY
+          strategy: object-mediated-transport
+
+      - guard: portal_relation == established
+        node:
+          kind: STRATEGY
+          strategy: portal-route-planning
+
+      - otherwise:
+          kind: EXPLORE
+          need: classify_movement_mechanism
+```
+
+Le compilateur produit pour chaque graphe :
+
+- carte de couverture ;
+- chevauchements ;
+- régions non couvertes ;
+- stratégies inatteignables ;
+- discriminants jamais produits ;
+- cycles ;
+- branches dont le fallback masque toujours les suivantes.
+
+### 19.6 Limite entre configuration et code
 
 La configuration SIC déclarative doit rester :
 
@@ -1513,57 +2112,65 @@ Une primitive TypeScript ne peut pas créer directement un objectif ou libérer 
 
 ---
 
-## 19. Atelier de création d'intelligence
+## 20. Atelier de création d'intelligence
 
 L'interface auteur doit guider un humain dans cet ordre :
 
 1. **Définir le vocabulaire**
-   - objets, relations, événements, propriétés.
+   - objets, relations, événements, propriétés et traits.
 
 2. **Définir ce qui est observable**
-   - détecteurs, mesures, ambiguïtés, preuves.
+   - détecteurs, mesures, ambiguïtés et preuves.
 
 3. **Définir les informations**
-   - statuts, portée, révision, conservation.
+   - statuts, portée, révision et conservation.
 
-4. **Définir les besoins**
-   - résultat demandé, satisfaction, expiration, identité.
+4. **Définir les cadres de situation**
+   - dimensions discriminantes, sources, valeurs inconnues et invalidations.
 
-5. **Définir les stratégies**
-   - besoins servis, gardes, inhibitions, opérations.
+5. **Définir les besoins**
+   - résultat demandé, satisfaction, expiration et identité.
 
-6. **Définir les objectifs**
-   - réussite, échec, suspension, retour.
+6. **Définir les graphes de résolution**
+   - gardes, spécialisation, composition, séquence, fallback, exploration et stop.
 
-7. **Définir les plans**
-   - étapes, gardes, effets attendus, besoins dérivés.
+7. **Définir les stratégies**
+   - besoins servis, domaine d'applicabilité, contre-indications, opérations et relations avec les autres stratégies.
 
-8. **Définir les politiques**
-   - priorité, budgets, risques, invariants éthiques.
+8. **Définir les objectifs**
+   - réussite, échec, suspension et retour.
 
-9. **Écrire les tests**
-   - cas positif, refus, ambiguïté, contradiction, frontière, restauration.
+9. **Définir les plans**
+   - étapes, gardes, effets attendus et besoins dérivés.
 
-10. **Compiler et lint**
+10. **Définir les politiques**
+    - priorité, budgets, risques et invariants éthiques.
+
+11. **Écrire les tests contextuels**
+    - cas positif, cas négatif, frontière d'applicabilité, inconnue, autre morphologie, contradiction, frontière et restauration.
+
+12. **Compiler et lint**
     - références ;
     - cycles ;
     - propriétaires ;
     - bornes ;
-    - ambiguïtés ;
+    - chevauchements ;
+    - trous de couverture ;
     - règles inatteignables.
 
-11. **Exécuter en shadow**
+13. **Exécuter en shadow**
     - aucune autorité réelle ;
-    - comparaison avec le runtime courant.
+    - comparaison avec le runtime courant ;
+    - matrice de situations pour un même besoin.
 
-12. **Promouvoir**
+14. **Promouvoir**
     - feature flag ;
     - canary ;
     - preuve ;
     - révision ;
     - rollback.
 
-### 19.1 Vues de l'atelier
+### 20.1 Vues de l'atelier
 
 L'atelier expose :
 
@@ -1575,11 +2182,16 @@ L'atelier expose :
 - comparateur de versions ;
 - explorateur de preuves ;
 - matrice besoins/stratégies ;
+- cadre de situation courant ;
+- arbre d'une instance de résolution ;
+- carte des domaines d'applicabilité ;
+- rapport de chevauchements et trous de couverture ;
+- matrice de non-régression entre situations ;
 - couverture de tests ;
 - coût estimé et mesuré ;
 - rapport de contradictions.
 
-### 19.2 Questions disponibles partout
+### 20.2 Questions disponibles partout
 
 Chaque élément doit offrir :
 
@@ -1592,7 +2204,7 @@ Chaque élément doit offrir :
 - **Que se passerait-il s'il était désactivé ?**
 - **À quel objectif supérieur contribue-t-il ?**
 
-### 19.3 Rôles humains et promotion
+### 20.3 Rôles humains et promotion
 
 Les rôles décrivent des responsabilités, pas nécessairement des personnes différentes. Une même personne peut cumuler tous les rôles dans un projet individuel.
 
@@ -1616,7 +2228,7 @@ draft
 
 Chaque transition conserve auteur, vérificateur, promoteur, preuve, version et possibilité de rollback.
 
-### 19.4 Création, évolution et promotion des contrats
+### 20.4 Création, évolution et promotion des contrats
 
 Il faut distinguer :
 
@@ -1629,13 +2241,21 @@ La création d'un nouveau contrat exécutable est donc principalement un process
 
 ---
 
-## 20. Validation statique et vérification formelle
+## 21. Validation statique et vérification formelle
 
 Le compilateur doit refuser ou avertir sur :
 
 - référence inconnue ;
 - besoin sans stratégie possible ;
 - stratégie sans besoin servi ;
+- stratégie associée à un besoin sans domaine d'applicabilité ;
+- stratégie sans contre-indication lorsque son domaine n'est pas universel ;
+- graphe de résolution absent pour un besoin polymorphe ;
+- chevauchement non ordonné entre stratégies ;
+- région non couverte dans un domaine déclaré fermé ;
+- discriminant exigé mais jamais produit ;
+- confusion entre `unknown` et `not_applicable` ;
+- spécialisation fondée uniquement sur un nom de jeu sans dérogation explicite ;
 - objectif sans stratégie émettrice ;
 - plan sans objectif ;
 - étape sans réussite observable ;
@@ -1653,7 +2273,7 @@ Le compilateur doit refuser ou avertir sur :
 - contrat de satisfaction contradictoire ;
 - dépendance de version incompatible.
 
-### 20.1 Sens de la vérification formelle
+### 21.1 Sens de la vérification formelle
 
 La vérification formelle ne prétend pas démontrer que l'agent est intelligent ni qu'il résoudra tous les problèmes. Elle sert à démontrer ou explorer rigoureusement des invariants structurels, par exemple :
 
@@ -1663,7 +2283,7 @@ La vérification formelle ne prétend pas démontrer que l'agent est intelligent
 - une transaction ne peut pas être appliquée partiellement ;
 - un besoin ne peut pas être dupliqué dans la même portée.
 
-### 20.2 Niveaux de vérification
+### 21.2 Niveaux de vérification
 
 | Niveau | Technique | Portée recommandée |
 |---:|---|---|
@@ -1674,7 +2294,7 @@ La vérification formelle ne prétend pas démontrer que l'agent est intelligent
 | **4** | solveurs SAT/SMT pour gardes, conflits, activabilité et exclusivité | politiques et contrats complexes |
 | **5** | preuve assistée pour un micro-noyau minimal | plus tard, invariants critiques uniquement |
 
-### 20.3 Stratégie de déploiement
+### 21.3 Stratégie de déploiement
 
 La cible initiale est :
 
@@ -1688,9 +2308,9 @@ La cible initiale est :
 
 ---
 
-## 21. Tests et preuves
+## 22. Tests et preuves
 
-### 21.1 Niveaux de test
+### 22.1 Niveaux de test
 
 1. **Schéma**
    - parsing, types, références.
@@ -1722,7 +2342,7 @@ La cible initiale est :
 10. **Performance**
     - coût désactivé, shadow, autorité active.
 
-### 21.2 Cas obligatoires pour chaque capacité
+### 22.2 Cas obligatoires pour chaque capacité
 
 - besoin présent ;
 - besoin absent ;
@@ -1739,7 +2359,7 @@ La cible initiale est :
 - retour inattendu ;
 - action devenue indisponible.
 
-### 21.3 Propriétés globales
+### 22.3 Propriétés globales
 
 Le système doit démontrer :
 
@@ -1754,11 +2374,42 @@ Le système doit démontrer :
 - aucune OP utile sans producteur et consommateur ;
 - aucune décision cachée dans un fallback.
 
+### 22.4 Matrice contextuelle de non-régression
+
+Chaque stratégie doit fournir au minimum :
+
+1. **tests positifs** : situations où elle doit être atteinte et applicable ;
+2. **tests négatifs** : morphologies, topologies ou contrôles où elle doit être exclue ;
+3. **tests de frontière** : situations partiellement connues où le résultat attendu est `unknown` ;
+4. **tests de spécialisation** : la stratégie spécialisée domine la générique seulement dans son domaine ;
+5. **tests de fallback** : le fallback n'est utilisé qu'après l'échec contractuel des branches antérieures ;
+6. **tests inter-situations** : modifier une stratégie pour un jeu ne change pas la résolution d'une autre situation du même besoin sans raison déclarée.
+
+Exemple de matrice :
+
+| Besoin | Cadre de situation | Résolution attendue |
+|---|---|
+| `reach_target` | grille, acteur directement mobile, contrôle directionnel | `direct-grid-navigation` |
+| `reach_target` | objet rigide sélectionné, transformation indirecte | `rigid-object-relocation` |
+| `reach_target` | portail établi | `portal-route-planning` |
+| `reach_target` | contrôle inconnu | besoin `establish_control_model` |
+| `reach_target` | dynamique autonome dominante | `temporal-intercept-planning` |
+
+Tests métamorphiques recommandés :
+
+- changer un trait non pertinent ne doit pas modifier la branche ;
+- changer un discriminant pertinent doit invalider la résolution ;
+- remplacer une valeur connue par `unknown` ne doit pas produire `not_applicable` ;
+- une révision du cadre doit réévaluer le graphe sans dupliquer le besoin ;
+- une stratégie liée à un jeu par son nom doit échouer à la promotion générale.
+
+Toute modification d'une stratégie doit exécuter la matrice complète de son type de besoin, pas seulement le scénario qui a motivé la modification.
+
 ---
 
-## 22. Performance
+## 23. Performance
 
-### 22.1 Critère historique du projet
+### 23.1 Critère historique du projet
 
 Pour les jeux de référence :
 
@@ -1768,7 +2419,7 @@ Pour les jeux de référence :
 - aucune compensation ;
 - une phase peut dépasser +10 % si le global du même jeu reste conforme.
 
-### 22.2 Budgets V8
+### 23.2 Budgets V8
 
 Les seuils suivants sont des cibles d'ingénierie, pas un remplacement du critère historique :
 
@@ -1778,12 +2429,15 @@ Les seuils suivants sont des cibles d'ingénierie, pas un remplacement du critè
 - première boucle active : préserver le seuil global historique ;
 - chaque phase doit suivre le coût cumulé depuis la baseline de départ.
 
-### 22.3 Techniques
+### 23.3 Techniques
 
 - snapshots immuables partagés ;
 - deltas ;
 - calcul à la demande ;
 - index par type de besoin ;
+- index par traits de situation et discriminants demandés ;
+- évaluation uniquement des graphes liés aux besoins actifs ;
+- résolution incrémentale sur révision du cadre ;
 - index par portée ;
 - caches avec révisions exactes ;
 - trace bornée ;
@@ -1795,13 +2449,16 @@ Les seuils suivants sont des cibles d'ingénierie, pas un remplacement du critè
 
 ---
 
-## 23. Persistance et restauration
+## 24. Persistance et restauration
 
 Le snapshot persistant doit contenir :
 
 - informations persistantes ;
 - hypothèses et réfutations utiles ;
 - besoins persistants admis ;
+- cadres de situation et traits persistants utiles ;
+- instances de résolution nécessaires à l'explication ou à la reprise ;
+- versions des graphes de résolution ;
 - arbre d'engagements ;
 - objectifs suspendus ;
 - plans et points de reprise ;
@@ -1832,7 +2489,7 @@ Après restauration :
 
 ---
 
-## 24. Éthique, responsabilité et sécurité
+## 25. Éthique, responsabilité et sécurité
 
 Une intelligence configurable par l'humain doit rendre visible :
 
@@ -1870,7 +2527,7 @@ Un LLM ne doit pas :
 
 ---
 
-## 25. Intégration avec le TypeScript courant
+## 26. Intégration avec le TypeScript courant
 
 Les composants actuels offrent déjà des coutures utiles :
 
@@ -1884,18 +2541,23 @@ Les composants actuels offrent déjà des coutures utiles :
 V8 ne doit pas dupliquer ces mécanismes. Il doit :
 
 1. généraliser les besoins ;
-2. relier les propriétaires à un registre commun ;
-3. ajouter l'agenda ;
-4. formaliser objectifs et plans ;
-5. rendre les engagements persistants ;
-6. transformer les traces en projections humaines.
+2. construire un `SituationFrame` partagé à partir des observations et informations ;
+3. introduire un registre de graphes contextuels de résolution ;
+4. relier les propriétaires à un registre commun ;
+5. ajouter l'agenda après le filtrage contextuel ;
+6. formaliser objectifs et plans ;
+7. rendre les engagements persistants ;
+8. transformer les traces en projections humaines.
 
-### 25.1 Correspondance initiale
+### 26.1 Correspondance initiale
 
 | Composant courant | Rôle V8 futur |
 |---|---|
 | `AgentObservation` | snapshot public |
-| owner de famille | producteur de perception, information ou stratégie candidate |
+| futur `SituationFrameBuilder` | synthèse incrémentale des discriminants pertinents |
+| futur `ResolutionGraphRegistry` | définitions versionnées par type de besoin |
+| futur `ResolutionGraphEvaluator` | instance de résolution liée au besoin et au cadre |
+| owner de famille | producteur de perception, information ou stratégie candidate avec domaine déclaré |
 | `needId` campagne | identité de besoin ou de contribution |
 | `NeutralCommonCaller` | précurseur de collecte sans classement caché |
 | `CommonCampaignOwner` | précurseur du gestionnaire d'engagement/action |
@@ -1907,7 +2569,7 @@ V8 ne doit pas dupliquer ces mécanismes. Il doit :
 
 ---
 
-## 26. Mise en place itérative
+## 27. Mise en place itérative
 
 ## Phase V8-0 : spécification et décisions d'architecture
 
@@ -1926,6 +2588,8 @@ Livrables :
 - ADR sur les rôles et la promotion ;
 - ADR sur le cycle de développement des contrats ;
 - ADR sur les frontières entre Intelligence Packs ;
+- ADR sur les cadres de situation et leur révision ;
+- ADR sur les graphes contextuels de résolution, l'applicabilité ternaire et la spécialisation ;
 - schémas JSON/TypeScript préliminaires ;
 - matrice familles actuelles → rôles V8.
 
@@ -1963,6 +2627,7 @@ Critères :
 Ajouter :
 
 - types de besoins initiaux ;
+- références vers le cadre de situation courant ;
 - producteurs depuis plans, informations et perceptions ;
 - déduplication temporaire ;
 - tableau de couverture.
@@ -1997,13 +2662,40 @@ Critères :
 - aucune influence sur la décision ;
 - coût shadow cumulé mesuré.
 
-## Phase V8-4 : agenda de stratégies en shadow
+## Phase V8-4 : cadres de situation et graphes de résolution en shadow
+
+**But :** démontrer que le même besoin peut être routé différemment selon des invariants de situation, sans modifier les actions réelles.
+
+Ajouter :
+
+- `SituationFrameBuilder` incrémental ;
+- traits morphologiques, topologiques, de contrôle et de dynamique initiaux ;
+- applicabilité ternaire ;
+- `ResolutionGraphRegistry` ;
+- `ResolutionGraphEvaluator` ;
+- relations `specializes`, `fallback_for` et composition ;
+- instances runtime projetées sous forme d'arbre ;
+- carte de couverture et détection des chevauchements.
+
+Critères :
+
+- au moins un même besoin résolu correctement dans trois cadres différents ;
+- une dimension inconnue produit `unknown`, jamais `not_applicable` ;
+- une révision du cadre invalide la résolution sans dupliquer le besoin ;
+- les chevauchements non ordonnés sont refusés ;
+- les trous d'un domaine fermé sont refusés ;
+- aucune action réelle n'est modifiée ;
+- coût shadow mesuré.
+
+## Phase V8-5 : agenda de stratégies en shadow
 
 **But :** produire et départager les stratégies candidates sans autorité.
 
 Ajouter :
 
 - registre des stratégies ;
+- consommation des seules branches atteintes par les graphes de résolution ;
+- ordre de spécialisation et fallbacks déclarés ;
 - bandes de priorité ;
 - départage déterministe ;
 - ambiguïté explicite ;
@@ -2017,7 +2709,7 @@ Critères :
 - aucune formule opaque ;
 - starvation détectée.
 
-## Phase V8-5 : objectifs et plans en shadow
+## Phase V8-6 : objectifs et plans en shadow
 
 **But :** construire l'arbre d'engagements parallèle.
 
@@ -2037,7 +2729,7 @@ Critères :
 - chaque interruption a un retour ;
 - shadow parity sur des traces réelles.
 
-## Phase V8-6 : première boucle active
+## Phase V8-7 : première boucle active
 
 **Boucle recommandée :**
 
@@ -2070,7 +2762,7 @@ Critères :
 - restauration ;
 - performance conforme.
 
-## Phase V8-7 : liaison OP03/OP08/OP12/OP26
+## Phase V8-8 : liaison OP03/OP08/OP12/OP26
 
 **But :** démontrer la composition de besoins.
 
@@ -2093,7 +2785,7 @@ Critères :
 - inconnue conservée si données incomplètes ;
 - coût borné.
 
-## Phase V8-8 : Intelligence Packs SIC et compilateur
+## Phase V8-9 : Intelligence Packs SIC et compilateur
 
 Ajouter :
 
@@ -2115,7 +2807,7 @@ Critères :
 - pack incompatible refusé ;
 - provenance complète.
 
-## Phase V8-9 : atelier humain SIC
+## Phase V8-10 : atelier humain SIC
 
 Ajouter :
 
@@ -2138,7 +2830,7 @@ Critères :
 - expliquer une décision ;
 - retrouver la preuve.
 
-## Phase V8-10 : migration progressive des familles
+## Phase V8-11 : migration progressive des familles
 
 Pour chaque famille :
 
@@ -2153,7 +2845,7 @@ Pour chaque famille :
 
 La migration n'est pas un big bang.
 
-## Phase V8-11 : déclaration V8
+## Phase V8-12 : déclaration V8
 
 Le runtime est déclaré V8 lorsque :
 
@@ -2161,6 +2853,9 @@ Le runtime est déclaré V8 lorsque :
 - les objectifs sont toujours émis par des stratégies ;
 - les plans portent toutes les actions ;
 - les besoins sont canoniques et persistants ;
+- les cadres de situation sont révisables et prouvés ;
+- chaque besoin polymorphe possède un graphe de résolution qualifié ;
+- les chevauchements et trous de couverture sont contrôlés ;
 - l'interface expose les cinq perspectives ;
 - l'atelier produit au moins une capacité utile sans code spécifique ;
 - les principales familles ont migré ;
@@ -2169,7 +2864,7 @@ Le runtime est déclaré V8 lorsque :
 
 ---
 
-## 27. Ordre recommandé des premiers besoins
+## 28. Ordre recommandé des premiers besoins
 
 1. `know_control_effect`
 2. `satisfy_precondition`
@@ -2180,17 +2875,24 @@ Le runtime est déclaré V8 lorsque :
 7. `find_admissible_access`
 8. `compare_expected_observed`
 
-Ces besoins couvrent un grand nombre de familles existantes sans imposer une ontologie trop large au départ.
+Ces besoins couvrent un grand nombre de familles existantes sans imposer une ontologie trop large au départ. Chaque besoin introduit doit être accompagné d'un cadre minimal de discriminants et, dès qu'il possède plusieurs méthodes, d'un graphe contextuel de résolution.
 
 ---
 
-## 28. Risques et réponses
+## 29. Risques et réponses
 
 | Risque | Réponse |
 |---|---|
 | Explosion du nombre de besoins | déduplication, portée, latence, budgets |
 | Oscillation des stratégies | hystérésis, cycle de vie, cooldown, engagements persistants |
-| Priorité opaque | bandes et départage lexicographique |
+| Même besoin, morphologies incompatibles | cadre de situation et graphes de résolution par besoin |
+| Stratégie trop générale | enveloppe d'applicabilité, contre-indications et tests négatifs |
+| Chevauchement entre stratégies | erreur de compilation sans relation explicite |
+| Trou de couverture | politique de domaine ouvert/fermé et besoin de classification |
+| Inconnue interprétée comme fausse | applicabilité ternaire |
+| Explosion combinatoire des contextes | traits composables, discriminants à la demande, héritage et résolution incrémentale |
+| Régression entre jeux | matrice contextuelle complète pour chaque type de besoin |
+| Priorité opaque | bandes et départage lexicographique après résolution contextuelle |
 | Configuration trop puissante | noyau déclaratif borné et terminant par défaut ; extensions procédurales Turing-complètes sous contrats, budgets et permissions |
 | Effets de bord | snapshots, propositions, transactions |
 | Besoins récursifs infinis | profondeur, cycle detection, budget |
@@ -2205,7 +2907,7 @@ Ces besoins couvrent un grand nombre de familles existantes sans imposer une ont
 
 ---
 
-## 29. Décisions d'architecture retenues et ADR à rédiger
+## 30. Décisions d'architecture retenues et ADR à rédiger
 
 Les orientations suivantes sont désormais retenues. Les ADR ne servent plus à choisir entre plusieurs directions concurrentes, mais à conserver durablement le contexte, la décision et ses conséquences.
 
@@ -2253,9 +2955,31 @@ Décision : le runtime apprend des instances sous des contrats existants. Un nou
 
 Décision : chaque pack possède namespace, version, imports, exports, permissions, propriétaires, règles de surcharge, tests et provenance. Les packs communiquent par contrats typés et ne se mutent pas directement.
 
+### ADR-9 : cadres de situation et résolution contextuelle
+
+Décision :
+
+- le besoin abstrait n'est jamais une clé suffisante de sélection ;
+- Assimilation construit un cadre partiel et révisable ;
+- Exploration acquiert les discriminants manquants ;
+- Solving applique les stratégies dont l'applicabilité est prouvée ;
+- chaque besoin polymorphe possède un graphe contextuel de résolution ;
+- une révision du cadre invalide la résolution, pas automatiquement le besoin.
+
+### ADR-10 : applicabilité, spécialisation et non-régression
+
+Décision :
+
+- toute stratégie déclare conditions positives, contre-indications et preuves minimales ;
+- l'applicabilité est ternaire ;
+- les stratégies d'un même besoin déclarent spécialisation, composition, ordre ou discriminants ;
+- les chevauchements non ordonnés sont refusés ;
+- les capacités générales sont définies par invariants, non par noms de jeux ;
+- toute modification exécute une matrice inter-situations du besoin concerné.
+
 ---
 
-## 30. Définition de réussite
+## 31. Définition de réussite
 
 La réussite ne se mesure pas uniquement au nombre de jeux résolus.
 
@@ -2264,18 +2988,20 @@ Le système atteint sa finalité lorsqu'un humain peut :
 1. définir un vocabulaire ;
 2. déclarer ce qui est perceptible ;
 3. représenter des informations et hypothèses ;
-4. définir un besoin ;
-5. associer plusieurs stratégies ;
-6. définir les objectifs qu'elles produisent ;
-7. définir des plans conditionnels ;
-8. tester sur des situations positives et négatives ;
-9. voir exactement pourquoi la stratégie s'active ;
-10. suivre l'objectif et le plan ;
-11. voir l'action et son retour ;
-12. corriger une règle sans effets de bord imprévisibles ;
-13. comparer deux révisions ;
-14. publier une version vérifiable ;
-15. assumer la responsabilité de l'intelligence conçue.
+4. définir un cadre de situation et ses discriminants ;
+5. définir un besoin ;
+6. organiser ses réponses dans un graphe contextuel de résolution ;
+7. associer plusieurs stratégies avec leurs domaines et contre-indications ;
+8. définir les objectifs qu'elles produisent ;
+9. définir des plans conditionnels ;
+10. tester la même stratégie sur des situations positives, négatives et limites ;
+11. voir exactement pourquoi une branche est applicable, rejetée ou inconnue ;
+12. suivre l'objectif et le plan ;
+13. voir l'action et son retour ;
+14. corriger une règle sans effets de bord imprévisibles ;
+15. comparer deux révisions et leurs cartes de couverture ;
+16. publier une version vérifiable ;
+17. assumer la responsabilité de l'intelligence conçue.
 
 La promesse centrale est alors concrète :
 
@@ -2283,16 +3009,19 @@ La promesse centrale est alors concrète :
 
 ---
 
-## 31. Première tranche recommandée
+## 32. Première tranche recommandée
 
 La première tranche de travail doit rester petite et démontrable.
 
 ### Livrables
 
 - types `NeedProposal`, `NeedRecord`, `NeedContribution` ;
+- types `SituationFrame`, `ApplicabilityEnvelope`, `ResolutionGraphDefinition` et `ResolutionInstance` ;
 - classification des propositions sous Assimilation, Exploration ou Solving ;
 - journal sémantique étendu ;
 - `NeedRegistry` en shadow ;
+- `SituationFrameBuilder` en shadow ;
+- premier graphe de résolution en shadow ;
 - un producteur depuis une étape bloquée ;
 - un producteur depuis une information inconnue ;
 - un répondant `learn-control-effect` ;
@@ -2305,11 +3034,15 @@ La première tranche de travail doit rester petite et démontrable.
 ```text
 Le plan courant veut déplacer une pièce.
 L'effet de la commande est inconnu.
+Assimilation décrit le sujet comme rigide, sélectionné et observable.
 Le plan propose un besoin.
-Le registre l'admet.
-La stratégie d'expérience devient candidate.
-L'agenda explique pourquoi elle serait choisie.
+Le registre l'admet sans le dupliquer.
+Le graphe `know_control_effect` exclut les méthodes incompatibles.
+La stratégie d'expérience devient applicable.
+L'agenda explique pourquoi cette branche serait engagée.
 Un objectif et un plan sont construits en shadow.
+Le cadre change ensuite vers un sujet directement mobile.
+La même instance de besoin est réévaluée et une autre branche devient applicable.
 Le runtime actuel garde l'autorité.
 Les deux raisonnements sont comparés.
 ```
@@ -2321,6 +3054,8 @@ La tranche shadow doit démontrer :
 - stabilité ;
 - explication humaine ;
 - absence de duplication ;
+- résolution différente du même besoin dans plusieurs cadres ;
+- absence de régression sur la matrice inter-situations ;
 - restauration ;
 - absence d'effet sur les actions ;
 - coût mesuré ;
@@ -2328,7 +3063,7 @@ La tranche shadow doit démontrer :
 
 ---
 
-## 32. Règle de migration finale
+## 33. Règle de migration finale
 
 Aucun ancien mécanisme n'est supprimé parce que V8 possède une structure plus élégante.
 
@@ -2347,7 +3082,7 @@ Cette règle évite qu'une refonte conceptuelle détruise des capacités acquise
 
 ---
 
-## 33. Conclusion
+## 34. Conclusion
 
 L'arbre V5 répondait à un problème réel : trop de conditions parallèles pouvaient agir sans ordre, sans propriétaire et sans point de reprise explicite.
 
@@ -2360,6 +3095,28 @@ L'arbre V5 répondait à un problème réel : trop de conditions parallèles pou
 - les machines à états pour le temps ;
 - le journal pour la preuve ;
 - les contrats déclaratifs pour la création humaine.
+
+Le besoin n'est donc pas un routeur universel. Il exprime le résultat manquant. Le cadre de situation qualifie le régime local. Le graphe contextuel de résolution ordonne les méthodes possibles. L'agenda n'arbitre qu'entre les engagements dont l'applicabilité a déjà été établie.
+
+Cette séparation répond au risque fondamental de régression entre jeux : une stratégie créée pour un besoin dans une morphologie ne devient pas applicable à toutes les situations portant le même nom. Elle ne peut être atteinte que par les discriminants, invariants et relations de spécialisation configurés et testés.
+
+La formule complète devient :
+
+```text
+Mission
+→ Assimilation
+→ cadre de situation
+→ besoin
+→ graphe contextuel de résolution
+→ Exploration si un discriminant manque
+→ Solving si une méthode est applicable
+→ stratégie
+→ objectif
+→ plan
+→ action
+→ retour
+→ nouvelle Assimilation
+```
 
 Le système n'interdit pas aux nœuds de faire émerger de nouveaux besoins. Il interdit qu'ils transforment directement ces besoins en engagements incontrôlés.
 
