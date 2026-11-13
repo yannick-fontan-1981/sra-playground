@@ -138,28 +138,35 @@ Le contrat actuel reste volontairement séparé du futur sélecteur : il valide 
 
 ## Couche reconstructible actuellement qualifiée
 
-Cinq briques sont désormais versionnées et qualifiées :
+Six briques sont désormais versionnées et qualifiées :
 
 1. contrat Source / sélection fail-closed ;
 2. contrat de réutilisation mémoire liée à l'observation courante ;
 3. contrat d'identité/idempotence des retours ;
 4. état TemporalSelection minimal, descriptif et restaurable ;
-5. adaptateur descriptif pour consommer un résultat de sélection fourni de l'extérieur.
+5. adaptateur descriptif de consommation ;
+6. reçu de décision Source/DRM avec provenance complète.
 
-Qualification cumulée ciblée :
+Qualification GitHub CI la plus récente :
 
-- **42 tests réussis** ;
-- **0 échec fonctionnel** ;
-- **8/8 tests** sur le dernier adaptateur ;
-- typecheck strict réussi sur les cinq sources Temporal reconstruites ;
-- aucune autorisation ACT produite ;
-- aucune politique historique de choix recréée ;
-- aucun ancien champ `measurement/edit/pending/response` réintroduit sans preuve.
+- run : `43337775418` ;
+- head code qualifié : `dc40029d8fa846295424ba2695e4a3e274abea27` ;
+- **52 tests réussis** ;
+- **0 échec** ;
+- typecheck strict réussi sur les six sources Temporal reconstruites.
+
+Aucune autorisation ACT n'est produite.
+
+La politique historique de sélection et l'ancien state machine restent explicitement non reconstruits.
 
 ## Prochaine étape
 
-Reconstruire un **reçu de décision Source/DRM** portant l'identité complète de la décision externe : workflow, source hash, observation/révision, domaine, résultat et preuves.
+Raccorder l'état minimal et le reçu vérifié au **noyau Logos V6 existant**, sous forme d'un bridge décisionnel et traçable.
 
-L'adaptateur devra ensuite exiger ce reçu plutôt qu'un simple `selectedRef`.
+Le bridge devra établir :
 
-Cette étape renforcera la provenance de la sélection sans introduire de politique de choix ni de libération ACT.
+`besoin → domaine Source → reçu vérifié → projection → consommation`
+
+et enregistrer cette chaîne via les mécanismes de trace existants, sans libérer de commande de jeu.
+
+La performance officielle reste à confirmer tant que le harness STCK/SMLP n'est pas restauré.
