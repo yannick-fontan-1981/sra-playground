@@ -1,0 +1,45 @@
+name: Lot 5 Addressed Material Qualification
+
+on:
+  push:
+    branches:
+      - recovery/lot5-site109-rebase-20261112
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  qualify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 22.18
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.18.0
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Run Lot 5 targeted tests
+        run: >-
+          node --test
+          tests/linked-preparation.test.ts
+          tests/addressed-material.test.ts
+          tests/addressed-field-guard.test.ts
+          tests/addressed-field-fit.test.ts
+          tests/addressed-field-response.test.ts
+          tests/field-stock-retention.test.ts
+          tests/field-stock-proposal.test.ts
+          tests/observed-object-binding.test.ts
+
+      - name: Run full regression suite
+        run: npm test
