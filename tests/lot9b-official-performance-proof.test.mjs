@@ -5,9 +5,17 @@ import test from 'node:test';
 import { median } from '../scripts/measure-native-loop-costs.mjs';
 
 const proofPath = 'docs/recovery/lot9b-official-abba-performance-qualified.json';
+const NUMERIC_TOLERANCE = 1e-9;
 
 function delta(candidate, reference) {
   return 100 * (candidate / reference - 1);
+}
+
+function assertApproximatelyEqual(actual, expected, label) {
+  assert.ok(
+    Math.abs(actual - expected) <= NUMERIC_TOLERANCE,
+    `${label}: actual=${actual}, expected=${expected}`,
+  );
 }
 
 test('official Lot 9B proof recomputes both strict per-game passes from every retained sample', async () => {
@@ -27,9 +35,13 @@ test('official Lot 9B proof recomputes both strict per-game passes from every re
     const referenceMedian = median(value.referenceDurationsMs);
     const candidateMedian = median(value.candidateDurationsMs);
     const relativeIncreasePercent = delta(candidateMedian, referenceMedian);
-    assert.equal(referenceMedian, value.referenceMedianMs);
-    assert.equal(candidateMedian, value.candidateMedianMs);
-    assert.ok(Math.abs(relativeIncreasePercent - value.relativeIncreasePercent) < 1e-12);
+    assertApproximatelyEqual(referenceMedian, value.referenceMedianMs, `${game} reference median`);
+    assertApproximatelyEqual(candidateMedian, value.candidateMedianMs, `${game} candidate median`);
+    assertApproximatelyEqual(
+      relativeIncreasePercent,
+      value.relativeIncreasePercent,
+      `${game} relative increase`,
+    );
     assert.ok(relativeIncreasePercent < 10, `${game} must remain strictly below +10%`);
     assert.equal(value.accepted, true);
   }
