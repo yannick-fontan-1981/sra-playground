@@ -71,6 +71,22 @@ jobs:
             tests/native-loop-region-source-refs.test.mjs | tee c7-native-contracts.tap
       - name: Execute official A1 B1 B2 A2 protocol
         run: node scripts/run-native-region-official-benchmark.mjs
+      - name: Normalize canonical Region counter name
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFile, writeFile } from 'node:fs/promises';
+          const path = process.env.LOT9B_OFFICIAL_BENCHMARK_REPORT;
+          const wrapper = JSON.parse(await readFile(path, 'utf8'));
+          const hooks = wrapper?.payload?.report?.candidateHook;
+          for (const game of ['STCK', 'SMLP']) {
+            const stats = hooks?.[game]?.stats;
+            if (!stats || !Number.isInteger(stats.usefulAction6Evidence)) {
+              throw new Error(`${game} usefulAction6Evidence is missing`);
+            }
+            stats.usefulEvidence = stats.usefulAction6Evidence;
+          }
+          await writeFile(path, `${JSON.stringify(wrapper, null, 2)}\n`);
+          NODE
       - name: Upload official measurement
         id: measurement_artifact
         uses: actions/upload-artifact@v4
