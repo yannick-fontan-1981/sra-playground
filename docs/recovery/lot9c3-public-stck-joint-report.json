@@ -1,9 +1,46 @@
 {
-  "corpus": "real-public-stck-level-1-seed-0",
+  "corpus": "real-public-stck-level-1-seed-0-unique-card-state",
   "archive": "public/python/custom-games.zip",
   "game": "STCK",
   "gameId": "stck-c0000001",
   "seed": 0,
+  "publicPrelude": {
+    "producer": "region-public-action6-probe-v1",
+    "actionCount": 3,
+    "actions": [
+      {
+        "action": {
+          "id": 6,
+          "data": {
+            "x": 4,
+            "y": 52
+          }
+        },
+        "changedPixelCount": 211
+      },
+      {
+        "action": {
+          "id": 6,
+          "data": {
+            "x": 4,
+            "y": 52
+          }
+        },
+        "changedPixelCount": 138
+      },
+      {
+        "action": {
+          "id": 6,
+          "data": {
+            "x": 4,
+            "y": 52
+          }
+        },
+        "changedPixelCount": 95
+      }
+    ]
+  },
+  "selectedObservationSequence": 3,
   "channels": [
     "public_stck_action_availability_v1",
     "public_stck_visible_target_v1"
@@ -12,24 +49,20 @@
     "id": 6,
     "data": {
       "x": 4,
-      "y": 52
+      "y": 50
     }
   },
   "selectedTargetKind": "stack_card",
-  "nextAction": {
-    "id": 6,
-    "data": {
-      "x": 4,
-      "y": 52
-    }
-  },
-  "nextTargetKind": "stack_card",
-  "changedPixelCount": 211,
+  "selectedTargetEvidenceRef": "public-stck-stack-card:14:48-52",
+  "nextAction": null,
+  "nextTargetKind": null,
+  "nextDisposition": "no_unique_stack_card",
+  "changedPixelCount": 64,
   "jointAssessment": {
     "status": "joint",
-    "jointRef": "public-stck-addressed-joint:public-stck-target:public-observation:lot9c3-real-stck-session:0:stack_card:4:52:10,10,10,10,10,10:ACTION6",
+    "jointRef": "public-stck-unique-card-joint:public-stck-unique-card:public-observation:lot9c3-real-stck-session:3:4:50:public-stck-stack-card:14:48-52:ACTION6",
     "actionRef": "ACTION6",
-    "proposalRef": "joint:public-stck-addressed-joint:public-stck-target:public-observation:lot9c3-real-stck-session:0:stack_card:4:52:10,10,10,10,10,10:ACTION6:lot9c3-real-stck-session:0:public_stck_action_availability_v1+public_stck_visible_target_v1",
+    "proposalRef": "joint:public-stck-unique-card-joint:public-stck-unique-card:public-observation:lot9c3-real-stck-session:3:4:50:public-stck-stack-card:14:48-52:ACTION6:lot9c3-real-stck-session:3:public_stck_action_availability_v1+public_stck_visible_target_v1",
     "channelIds": [
       "public_stck_action_availability_v1",
       "public_stck_visible_target_v1"
@@ -37,14 +70,14 @@
     "contributions": [
       {
         "channelId": "public_stck_action_availability_v1",
-        "contributionRef": "stck-availability:public-observation:lot9c3-real-stck-session:0:ACTION6",
-        "jointRef": "public-stck-addressed-joint:public-stck-target:public-observation:lot9c3-real-stck-session:0:stack_card:4:52:10,10,10,10,10,10:ACTION6",
+        "contributionRef": "stck-availability:public-observation:lot9c3-real-stck-session:3:ACTION6",
+        "jointRef": "public-stck-unique-card-joint:public-stck-unique-card:public-observation:lot9c3-real-stck-session:3:4:50:public-stck-stack-card:14:48-52:ACTION6",
         "actionRef": "ACTION6"
       },
       {
         "channelId": "public_stck_visible_target_v1",
-        "contributionRef": "stck-visible-target:public-stck-target:public-observation:lot9c3-real-stck-session:0:stack_card:4:52:10,10,10,10,10,10",
-        "jointRef": "public-stck-addressed-joint:public-stck-target:public-observation:lot9c3-real-stck-session:0:stack_card:4:52:10,10,10,10,10,10:ACTION6",
+        "contributionRef": "stck-visible-target:public-stck-unique-card:public-observation:lot9c3-real-stck-session:3:4:50:public-stck-stack-card:14:48-52",
+        "jointRef": "public-stck-unique-card-joint:public-stck-unique-card:public-observation:lot9c3-real-stck-session:3:4:50:public-stck-stack-card:14:48-52:ACTION6",
         "actionRef": "ACTION6"
       }
     ]
