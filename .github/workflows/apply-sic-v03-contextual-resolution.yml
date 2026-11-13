@@ -1,0 +1,1240 @@
+name: Apply SIC v0.3 contextual resolution update
+
+on:
+  push:
+    branches:
+      - architecture/v8-human-configurable-intelligence-20261112
+    paths:
+      - .github/workflows/apply-sic-v03-contextual-resolution.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply-document:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: Update and verify SIC document
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          path = Path('docs/architecture/v8-human-configurable-intelligence.md')
+          text = path.read_text(encoding='utf-8')
+
+          def replace_once(old: str, new: str, label: str) -> None:
+              global text
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f'{label}: expected one occurrence, found {count}')
+              text = text.replace(old, new, 1)
+
+          def insert_before(anchor: str, block: str, label: str) -> None:
+              global text
+              count = text.count(anchor)
+              if count != 1:
+                  raise SystemExit(f'{label}: expected one anchor, found {count}')
+              text = text.replace(anchor, block + anchor, 1)
+
+          def replace_between(start: str, end: str, block: str, label: str) -> None:
+              global text
+              i = text.find(start)
+              if i < 0:
+                  raise SystemExit(f'{label}: start marker missing')
+              j = text.find(end, i + len(start))
+              if j < 0:
+                  raise SystemExit(f'{label}: end marker missing')
+              text = text[:i] + block + text[j:]
+
+          replace_once('**Statut :** proposition normative, version 0.2',
+                       '**Statut :** proposition normative, version 0.3',
+                       'version')
+
+          replace_once(
+              "Le système introduit aussi un concept transversal, le **besoin**, qui exprime ce qui manque pour progresser. Un besoin n'est pas une sixième perspective principale. Il relie les cinq perspectives et explique pourquoi un raisonnement doit continuer, changer de méthode ou créer un sous-objectif.\n",
+              "Le système introduit aussi un concept transversal, le **besoin**, qui exprime ce qui manque pour progresser. Un besoin n'est pas une sixième perspective principale. Il relie les cinq perspectives et explique pourquoi un raisonnement doit continuer, changer de méthode ou créer un sous-objectif.\n\nLe besoin seul ne détermine toutefois jamais la méthode applicable. Il est interprété dans un **cadre de situation** révisable, puis traité par un **graphe contextuel de résolution** propre à son type. Cette couture empêche une stratégie valable pour une morphologie, une topologie ou un modèle de contrôle d'être appliquée silencieusement à une autre situation qui exprime pourtant le même besoin abstrait.\n",
+              'finality context')
+
+          old_thesis_start = 'Le système repose sur cinq structures complémentaires :\n\n'
+          old_thesis_end = "À ces structures s'ajoutent :\n"
+          new_thesis = '''Le système repose sur sept structures complémentaires :
+
+| Structure | Rôle |
+|---|---|
+| **Graphe d'informations** | Représenter ce qui est observé, appris, supposé, prédit, contredit ou encore inconnu |
+| **Cadre de situation** | Qualifier la morphologie, la topologie, le contrôle, la dynamique, les contraintes et la phase pertinentes pour la décision |
+| **Registre de besoins** | Représenter ce qui manque pour progresser, sans transformer automatiquement chaque manque en objectif |
+| **Graphes contextuels de résolution** | Ordonner, spécialiser, composer ou exclure les réponses possibles à chaque type de besoin |
+| **Agenda de stratégies** | Arbitrer entre les engagements applicables après résolution contextuelle |
+| **Arbre d'engagements** | Représenter ce que l'agent a effectivement décidé de poursuivre et où il doit revenir |
+| **Journal sémantique** | Conserver ce qui s'est réellement produit, dans quel ordre, avec quelles preuves |
+
+'''
+          replace_between(old_thesis_start, old_thesis_end, new_thesis, 'thesis structures')
+
+          replace_once(
+              "> Le graphe représente ce qui peut être vrai.  \n> Le registre de besoins représente ce qui manque.  \n> L'agenda représente ce qui peut être fait.  \n> L'arbre d'engagements représente ce que l'agent a décidé de poursuivre.  \n> Le journal représente ce qui s'est réellement passé.\n",
+              "> Le graphe d'informations représente ce qui peut être vrai.  \n> Le cadre de situation représente dans quel régime cognitif local le besoin doit être interprété.  \n> Le registre de besoins représente ce qui manque.  \n> Le graphe contextuel de résolution représente comment ce manque peut être traité dans cette situation.  \n> L'agenda représente ce qui peut recevoir l'engagement actif.  \n> L'arbre d'engagements représente ce que l'agent a décidé de poursuivre.  \n> Le journal représente ce qui s'est réellement passé.\n",
+              'central formula')
+
+          replace_once(
+              '17. **La configuration SIC déclarative DOIT être bornée et conçue pour terminer par défaut ; les extensions procédurales peuvent être Turing-complètes seulement sous contrats, budgets et permissions explicites.**\n',
+              '''17. **La configuration SIC déclarative DOIT être bornée et conçue pour terminer par défaut ; les extensions procédurales peuvent être Turing-complètes seulement sous contrats, budgets et permissions explicites.**
+18. **Un besoin abstrait NE DOIT PAS suffire à sélectionner une stratégie ; la sélection DOIT aussi dépendre d'un cadre de situation révisé et prouvé.**
+19. **Toute stratégie DOIT déclarer un domaine d'applicabilité, des contre-indications et sa relation de spécialisation, composition ou fallback avec les autres réponses au même besoin.**
+20. **L'applicabilité DOIT être ternaire : `applicable`, `not_applicable` ou `unknown` ; une dimension inconnue NE DOIT PAS être traitée comme fausse.**
+21. **Chaque type de besoin destiné à plusieurs méthodes DOIT posséder un graphe contextuel de résolution qui ordonne ou compose explicitement ces méthodes.**
+22. **Deux stratégies dont les domaines se chevauchent sans spécialisation, ordre, composition ou discriminant déclaré constituent une erreur de configuration.**
+23. **Une stratégie générale DOIT être définie par des invariants morphologiques, topologiques, causaux et opérationnels, non par le seul nom d'un jeu ou une ressemblance superficielle.**
+24. **Une révision pertinente du cadre de situation DOIT invalider la résolution et réexaminer l'engagement sans dupliquer automatiquement le besoin.**
+''',
+              'normative contextual principles')
+
+          replace_once(
+              '- les besoins typés ;\n- la sélection des stratégies ;',
+              '- les besoins typés ;\n- les cadres de situation révisables ;\n- les graphes contextuels de résolution par type de besoin ;\n- les domaines d\'applicabilité, contre-indications et relations de spécialisation ;\n- la sélection des stratégies ;',
+              'scope additions')
+
+          # Insert one new major section before the canonical model. Shift existing
+          # numbered sections 8..33 so the numbering remains sequential.
+          for number in range(33, 7, -1):
+              pattern = rf'^(#{{2,4}}\s+){number}(?=\.)'
+              text = re.sub(pattern, lambda match, n=number: f'{match.group(1)}{n + 1}', text, flags=re.MULTILINE)
+
+          contextual_section = r'''---
+
+## 8. Cadre de situation et graphes contextuels de résolution
+
+### 8.1 Pourquoi le besoin abstrait ne suffit pas
+
+Un même besoin peut apparaître dans des situations qui exigent des méthodes incompatibles.
+
+`Need<ReachTarget>` peut signifier :
+
+- déplacer directement un acteur dans une grille ;
+- sélectionner puis translater un polyomino ;
+- pousser un objet intermédiaire ;
+- emprunter un portail ;
+- attendre une entité autonome ;
+- transformer d'abord la morphologie du sujet ;
+- découvrir encore le modèle de contrôle.
+
+Raccorder directement toutes ces méthodes au même type de besoin recréerait les effets de bord que SIC cherche à supprimer. La véritable clé de résolution est :
+
+```text
+Besoin
++ cadre de situation
++ portée
++ preuves disponibles
++ phase courante
++ engagements en cours
+→ graphe contextuel de résolution
+→ stratégies applicables
+```
+
+Le besoin reste abstrait et transférable. Le cadre de situation et le graphe de résolution déterminent comment il peut être traité ici et maintenant.
+
+### 8.2 Cadre de situation
+
+Un **cadre de situation** (*Situation Frame*) est une synthèse typée, partielle et révisable des dimensions qui discriminent les méthodes applicables.
+
+Il ne copie pas tout le graphe d'informations. Il référence uniquement les propriétés utiles à la résolution actuelle.
+
+Dimensions initiales recommandées :
+
+| Dimension | Exemples |
+|---|---|
+| **Morphologie** | point, acteur mobile, bloc rigide, polyomino, objet composite, objet déformable |
+| **Topologie** | grille, graphe, régions, couloirs, portails, espace de placement |
+| **Modèle de contrôle** | directionnel, clic direct, sélection puis commande, contrôle indirect, inconnu |
+| **Affordances** | pousser, tirer, tourner, colorer, transporter, activer, attendre |
+| **Dynamique** | statique, autonome, périodique, réactive, temporisée |
+| **Observabilité** | complète, partielle, brouillard, état masqué, effet différé |
+| **Réversibilité** | réversible, coûteuse, destructive, irréversible, inconnue |
+| **Contraintes** | pas, temps, oxygène, inventaire, ordre, collisions, conservation |
+| **Phase** | assimilation, classification, exploration, préparation, exécution, validation, reprise |
+| **Historique pertinent** | essais, transformations, frontières, méthodes acquises, réfutations |
+
+Chaque trait du cadre possède :
+
+- une valeur ou `unknown` ;
+- un profil épistémique ;
+- des preuves ;
+- une révision ;
+- une portée ;
+- des règles d'invalidation.
+
+Le cadre peut rester incomplet. Le système ne calcule que les discriminants demandés par les graphes de résolution actuellement pertinents.
+
+### 8.3 Construction du cadre par les stratégies racines
+
+Les trois racines V5 prennent ici un rôle précis :
+
+- **Assimilation** construit et révise le cadre depuis les observations, retours, identités, frontières et contradictions ;
+- **Exploration** acquiert les discriminants encore inconnus lorsqu'ils empêchent une résolution sûre ;
+- **Solving** applique une stratégie compatible lorsque le cadre est suffisamment qualifié.
+
+```text
+Assimilation
+→ cadre de situation partiel
+→ besoin
+→ discriminant manquant ?
+   ├── oui → Exploration
+   └── non → Solving
+```
+
+Une révision du cadre peut suspendre un plan de Solving, produire un besoin d'Exploration, puis permettre un retour vers le parent.
+
+### 8.4 Domaine d'applicabilité
+
+Chaque stratégie déclare une **enveloppe d'applicabilité** comprenant :
+
+- conditions positives ;
+- contre-indications ;
+- preuves minimales ;
+- dimensions inconnues tolérées ;
+- portée ;
+- invariants à préserver ;
+- version du schéma de situation ;
+- relation avec les stratégies plus générales ou spécialisées.
+
+Exemple :
+
+```yaml
+strategy:
+  id: direct-grid-navigation
+  responds_to:
+    - reach_target
+
+  applies_when:
+    topology: bounded_grid
+    control_model: directional_actions
+    subject_traits:
+      all: [directly_mobile, localized]
+    obstacle_dynamics: static
+    observability: complete
+
+  forbids:
+    - movement_requires_selection
+    - object_mediated_control
+    - autonomous_motion_dominant
+    - destructive_move_unbounded
+
+  requires_evidence:
+    - traversability_model_complete
+
+  specializes:
+    - generic-spatial-progress
+```
+
+Les contre-indications sont aussi importantes que les préconditions. Une stratégie qui sait quand elle fonctionne mais pas quand elle devient incorrecte reste dangereuse.
+
+### 8.5 Applicabilité ternaire
+
+L'évaluation d'une stratégie retourne :
+
+```text
+applicable
+not_applicable
+unknown
+```
+
+- `applicable` : les gardes requises sont prouvées et aucune contre-indication n'est établie ;
+- `not_applicable` : une contradiction ou une contre-indication est établie ;
+- `unknown` : un discriminant nécessaire manque ou reste ambigu.
+
+`unknown` ne vaut jamais `false`.
+
+Lorsque l'applicabilité est inconnue, le graphe peut :
+
+- réutiliser une information revalidable ;
+- demander une perception ciblée ;
+- produire un besoin de discrimination ;
+- choisir une stratégie sûre sous information partielle ;
+- rester explicitement bloqué.
+
+### 8.6 Graphe contextuel de résolution du besoin
+
+Chaque type de besoin pouvant être satisfait par plusieurs méthodes possède un **Need Resolution Graph** configuré par l'humain.
+
+Ce graphe décrit :
+
+- les discriminants à examiner ;
+- les gardes ;
+- l'ordre de spécialisation ;
+- les sous-besoins ;
+- les compositions ;
+- les fallbacks autorisés ;
+- les arrêts de sécurité ;
+- les conditions de sortie.
+
+Types de nœuds initiaux :
+
+| Nœud | Sémantique |
+|---|---|
+| `ALL` | tous les enfants doivent contribuer |
+| `ANY` | une contribution suffisante termine la branche |
+| `SEQUENCE` | les enfants sont traités dans l'ordre |
+| `SELECT` | une branche est choisie par discriminants explicites |
+| `FALLBACK` | les branches sont essayées dans l'ordre déclaré |
+| `GUARD` | conditionne l'accès à une branche |
+| `EXPLORE` | produit un besoin destiné à acquérir un discriminant |
+| `STOP` | interdit la poursuite dans cette situation |
+| `REUSE` | cherche une information ou méthode revalidable |
+| `STRATEGY` | référence une stratégie candidate |
+
+Le stockage canonique est un graphe typé, généralement acyclique. Une projection en arbre est produite pour une instance de résolution donnée.
+
+> Stockage en graphe, évaluation ordonnée, présentation en arbre.
+
+### 8.7 Graphe statique et instance runtime
+
+Deux objets sont distingués :
+
+1. **ResolutionGraphDefinition** : configuration versionnée commune à un type de besoin ;
+2. **ResolutionInstance** : évaluation du graphe pour un besoin, un cadre et une révision précis.
+
+L'instance runtime conserve :
+
+- branches examinées ;
+- discriminants utilisés ;
+- résultats `applicable`, `not_applicable` ou `unknown` ;
+- stratégies rejetées et raisons ;
+- sous-besoins produits ;
+- branche sélectionnée ;
+- ambiguïtés restantes ;
+- révisions du besoin, du cadre et du graphe.
+
+Exemple de lecture humaine :
+
+```text
+Need N-42 : atteindre la sortie
+
+Situation :
+  topology = bounded_grid
+  control_model = directional_actions
+  subject = directly_mobile
+  obstacles = static
+
+Branches :
+  direct-grid-navigation → applicable
+  portal-navigation → not_applicable : aucune preuve de portail
+  object-mediated-transport → not_applicable : acteur directement mobile
+  establish-control-model → inutile : contrôle déjà acquis
+
+Sélection :
+  direct-grid-navigation
+```
+
+### 8.8 Ordre déterministe de résolution
+
+L'ordre normatif est :
+
+1. normaliser le besoin et le cadre ;
+2. évaluer les gardes du graphe ;
+3. éliminer les branches `not_applicable` ;
+4. produire les besoins nécessaires aux branches `unknown` ;
+5. appliquer la relation de spécialisation ;
+6. appliquer l'ordre `SEQUENCE`, `SELECT` ou `FALLBACK` déclaré ;
+7. vérifier preuves, risques, coûts et réversibilité ;
+8. conserver `ambiguous` si aucune règle autorisée ne départage encore.
+
+Une stratégie spécialisée applicable précède sa stratégie générique. Un fallback n'est utilisé que si les branches antérieures sont explicitement inapplicables, échouées ou épuisées selon leur contrat.
+
+Aucun score global opaque ne remplace cet ordre.
+
+### 8.9 Chevauchements et trous de couverture
+
+Le compilateur SIC doit détecter les chevauchements :
+
+```text
+Ambiguous resolver overlap
+
+Need:
+  reach_target
+
+Strategies:
+  direct-grid-navigation
+  cautious-grid-navigation
+
+Overlapping domain:
+  topology = grid
+  control_model = directional
+  obstacle_dynamics = static
+
+No specialization, order, composition or discriminator is declared.
+```
+
+Un chevauchement est valide seulement si une relation explicite existe :
+
+- `specializes` ;
+- `fallback_for` ;
+- composition `ALL` ou `SEQUENCE` ;
+- branches `SELECT` mutuellement discriminées ;
+- coexistence non conflictuelle démontrée.
+
+Le compilateur et les tests doivent aussi détecter les régions non couvertes.
+
+Une région non couverte produit selon la politique :
+
+- une erreur de compilation pour un domaine déclaré fermé ;
+- un avertissement et un besoin `classify_or_extend_resolver` pour un domaine ouvert ;
+- jamais un fallback arbitraire.
+
+### 8.10 Généralisation par invariants
+
+Une stratégie générale est configurée avec des traits structurels et causaux :
+
+```text
+rigid
+selectable
+translatable
+multi_cell
+bounded
+observable
+selection_then_transform
+exact_region_target
+```
+
+Elle ne doit pas dépendre directement de :
+
+- nom du jeu ;
+- numéro du niveau ;
+- couleur arbitraire ;
+- coordonnées mémorisées ;
+- ressemblance visuelle sans causalité.
+
+Une exception liée à un jeu reste possible uniquement comme diagnostic ou compatibilité temporaire, avec justification, expiration et interdiction de promotion en stratégie générale.
+
+### 8.11 Révision du cadre sans duplication du besoin
+
+Le besoin canonique et sa résolution ont des cycles de vie distincts.
+
+Une modification du cadre ne recrée pas automatiquement le besoin. Elle invalide l'instance de résolution et provoque sa réévaluation.
+
+Clé de cache recommandée :
+
+```text
+needId
++ needRevision
++ situationFrameId
++ situationFrameRevision
++ resolutionGraphVersion
+```
+
+Un plan ou objectif sélectionné conserve la révision du cadre qui a autorisé son engagement. Si un discriminant pertinent change :
+
+1. l'autorisation d'action est invalidée ;
+2. le plan est suspendu ;
+3. l'instance de résolution est recalculée ;
+4. les informations encore valides sont conservées ;
+5. le token est retourné ou réorienté selon le résultat.
+
+### 8.12 Exemple : `ReachTarget`
+
+```text
+ReachTarget
+│
+├── contrôle connu ?
+│   ├── non → EXPLORE Need<EstablishControlModel>
+│   └── oui
+│
+├── sujet directement mobile ?
+│   ├── oui
+│   │   ├── topologie de grille connue ?
+│   │   │   ├── oui → STRATEGY DirectGridNavigation
+│   │   │   └── non → EXPLORE Need<MapTraversability>
+│   │
+│   └── non
+│
+├── mouvement médié par un objet ?
+│   ├── oui → STRATEGY ObjectMediatedTransport
+│   └── non
+│
+├── portail établi ?
+│   ├── oui → STRATEGY PortalRoutePlanning
+│   └── non
+│
+├── dynamique autonome dominante ?
+│   ├── oui → STRATEGY TemporalInterceptPlanning
+│   └── non
+│
+└── aucune branche suffisamment qualifiée
+    └── EXPLORE Need<ClassifyMovementMechanism>
+```
+
+Le même besoin abstrait peut ainsi conduire à des stratégies différentes sans contaminer les autres morphologies ou dispositions.
+
+'''
+          anchor = '\n---\n\n## 9. Modèle canonique minimal\n'
+          insert_before(anchor, contextual_section, 'contextual resolution section')
+
+          # Extend canonical interfaces.
+          model_types = r'''### 9.1 Cadre de situation et résolution
+
+```ts
+type ApplicabilityStatus = 'applicable' | 'not_applicable' | 'unknown';
+
+interface SituationTrait {
+  key: string;
+  value: string | number | boolean | 'unknown';
+  epistemicProfileRef: NodeId;
+  evidenceRefs: EvidenceRef[];
+  revision: Revision;
+  invalidatedBy: string[];
+}
+
+interface SituationFrame extends CanonicalNode {
+  kind: 'situation_frame';
+  missionRef: NodeId;
+  rootMode: 'assimilation' | 'exploration' | 'solving';
+  traitRefs: NodeId[];
+  phaseRefs: NodeId[];
+  relevantHistoryRefs: NodeId[];
+}
+
+interface ApplicabilityEnvelope {
+  id: string;
+  requires: string[];
+  forbids: string[];
+  acceptsUnknown: string[];
+  requiredEvidence: string[];
+  invariantRefs: string[];
+  scopeContractRef: string;
+}
+
+interface ResolutionGraphDefinition {
+  id: string;
+  version: string;
+  needKind: string;
+  rootNodeRef: string;
+  nodeRefs: string[];
+  domainPolicy: 'open' | 'closed';
+}
+
+type ResolutionNodeKind =
+  | 'ALL'
+  | 'ANY'
+  | 'SEQUENCE'
+  | 'SELECT'
+  | 'FALLBACK'
+  | 'GUARD'
+  | 'EXPLORE'
+  | 'STOP'
+  | 'REUSE'
+  | 'STRATEGY';
+
+interface ResolutionNodeDefinition {
+  id: string;
+  kind: ResolutionNodeKind;
+  childRefs: string[];
+  conditionRef?: string;
+  strategyRef?: string;
+  needTemplateRef?: string;
+}
+
+interface ResolutionEvaluation {
+  nodeRef: string;
+  status: ApplicabilityStatus | 'selected' | 'blocked' | 'ambiguous';
+  evidenceRefs: EvidenceRef[];
+  missingDiscriminantRefs: string[];
+  reason: string;
+}
+
+interface ResolutionInstance extends CanonicalNode {
+  kind: 'resolution_instance';
+  needRef: NodeId;
+  situationFrameRef: NodeId;
+  situationFrameRevision: Revision;
+  resolutionGraphRef: string;
+  resolutionGraphVersion: string;
+  evaluationRefs: NodeId[];
+  selectedStrategyRef?: NodeId;
+}
+```
+
+'''
+          insert_before('### 9.1 Proposition de besoin\n', model_types, 'canonical situation types')
+
+          replace_once(
+              '  scope: ScopeRef;\n  causedByRef: NodeId;',
+              '  scope: ScopeRef;\n  situationFrameRef: NodeId;\n  situationFrameRevision: Revision;\n  causedByRef: NodeId;',
+              'need proposal frame')
+          replace_once(
+              "  status: NeedStatus;\n  subjectRefs: NodeId[];",
+              "  status: NeedStatus;\n  situationFrameRef: NodeId;\n  situationFrameRevision: Revision;\n  resolutionGraphRef?: string;\n  resolutionInstanceRef?: NodeId;\n  subjectRefs: NodeId[];",
+              'need record frame')
+
+          old_strategy = '''interface StrategyDefinition {
+  id: string;
+  version: string;
+  respondsToNeedKinds: string[];
+  requires: string[];
+  inhibits: string[];
+  operations: string[];
+  objectiveTemplateRef: string;
+  planTemplateRef: string;
+  priorityBand: string;
+  tieBreakers: string[];
+  expiresOn: string[];
+  maxDerivedNeeds: number;
+  maxDerivedDepth: number;
+  explanationTemplate: string;
+}'''
+          new_strategy = '''interface StrategyDefinition {
+  id: string;
+  version: string;
+  respondsToNeedKinds: string[];
+  applicabilityEnvelopeRef: string;
+  resolutionGraphRefs: string[];
+  specializes: string[];
+  fallbackFor: string[];
+  composesWith: string[];
+  requires: string[];
+  inhibits: string[];
+  operations: string[];
+  objectiveTemplateRef: string;
+  planTemplateRef: string;
+  priorityBand: string;
+  tieBreakers: string[];
+  expiresOn: string[];
+  maxDerivedNeeds: number;
+  maxDerivedDepth: number;
+  explanationTemplate: string;
+}'''
+          replace_once(old_strategy, new_strategy, 'strategy interface')
+
+          replace_once(
+              "  servesNeedRef: NodeId;\n  parentObjectiveRef?: NodeId;",
+              "  servesNeedRef: NodeId;\n  situationFrameRef: NodeId;\n  situationFrameRevision: Revision;\n  resolutionInstanceRef: NodeId;\n  parentObjectiveRef?: NodeId;",
+              'objective frame')
+          replace_once(
+              "  strategyRef: NodeId;\n  stepRefs: NodeId[];",
+              "  strategyRef: NodeId;\n  situationFrameRef: NodeId;\n  situationFrameRevision: Revision;\n  resolutionInstanceRef: NodeId;\n  stepRefs: NodeId[];",
+              'plan frame')
+
+          # Replace the cognitive cycle and phase list.
+          old_cycle = '''```mermaid
+flowchart TD
+    A[Observation publique] --> B[Snapshot stable]
+    B --> C[Perceptions et mesures]
+    C --> D[Delta d'informations]
+    D --> E[Propositions de besoins]
+    E --> F[Normalisation du registre de besoins]
+    F --> G[Stratégies candidates]
+    G --> H[Arbitrage]
+    H --> I[Transaction d'engagement]
+    I --> J[Étape de plan autorisée]
+    J --> K[Logos / opérations OP]
+    K --> L[Action publique]
+    L --> M[Retour public suivant]
+    M --> A
+```'''
+          new_cycle = '''```mermaid
+flowchart TD
+    A[Observation publique] --> B[Snapshot stable]
+    B --> C[Perceptions et mesures]
+    C --> D[Delta d'informations]
+    D --> SF[Construction ou révision du cadre de situation]
+    SF --> E[Propositions de besoins]
+    E --> F[Normalisation du registre de besoins]
+    F --> R[Évaluation des graphes contextuels de résolution]
+    R --> G[Stratégies applicables et sous-besoins discriminants]
+    G --> H[Arbitrage de l'engagement]
+    H --> I[Transaction d'engagement]
+    I --> J[Étape de plan autorisée]
+    J --> K[Logos / opérations OP]
+    K --> L[Action publique]
+    L --> M[Retour public suivant]
+    M --> A
+```'''
+          replace_once(old_cycle, new_cycle, 'cycle diagram')
+
+          phases = r'''### 10.1 Phases
+
+1. **Capture**
+   - valider l'observation publique ;
+   - attribuer session, séquence et époque ;
+   - figer le snapshot.
+
+2. **Perception**
+   - exécuter les détecteurs admissibles ;
+   - produire uniquement des résultats et signaux purs.
+
+3. **Révision des informations**
+   - normaliser les perceptions ;
+   - créer ou réviser les informations ;
+   - conserver contradictions et inconnues.
+
+4. **Cadre de situation**
+   - construire ou réviser seulement les traits pertinents ;
+   - associer valeur, preuve, statut épistémique et révision ;
+   - invalider les résolutions dépendantes lorsque le cadre change.
+
+5. **Proposition de besoins**
+   - examiner les plans bloqués, objectifs, informations et perceptions ;
+   - produire des propositions idempotentes liées au cadre courant.
+
+6. **Normalisation**
+   - dédupliquer ;
+   - fusionner ;
+   - satisfaire immédiatement si possible ;
+   - expirer les besoins périmés ;
+   - détecter les cycles.
+
+7. **Résolution contextuelle**
+   - sélectionner le graphe du type de besoin ;
+   - évaluer les branches avec le cadre ;
+   - produire `applicable`, `not_applicable` ou `unknown` ;
+   - créer les sous-besoins de discrimination nécessaires ;
+   - appliquer spécialisation, composition et fallback déclarés.
+
+8. **Candidature des stratégies**
+   - ne conserver que les stratégies atteintes par le graphe ;
+   - appliquer gardes, contre-indications et preuves minimales ;
+   - produire des candidatures sans mutation.
+
+9. **Arbitrage**
+   - appliquer les bandes de priorité entre engagements applicables ;
+   - départager de façon déterministe ;
+   - sélectionner au plus un nouvel engagement focal.
+
+10. **Transaction d'engagement**
+    - créer ensemble stratégie sélectionnée, objectif, plan, instance de résolution et point de reprise ;
+    - attribuer le token de concentration ;
+    - appliquer le delta de manière atomique.
+
+11. **Libération de l'étape**
+    - revalider besoin, cadre et résolution ;
+    - appeler les OP utiles ;
+    - produire une action ou rester explicitement bloqué/ambigu.
+
+12. **Retour**
+    - l'action reste en attente jusqu'à l'observation suivante ;
+    - le retour est acquis avant toute nouvelle décision ;
+    - les informations, le cadre, les objectifs et les plans sont révisés au cycle suivant.
+
+'''
+          replace_between('### 10.1 Phases\n', '### 10.2 Barrière de cycle\n', phases, 'cycle phases')
+
+          need_revision = r'''### 11.5 Besoin stable, résolution révisable
+
+Le `NeedRegistry` possède le besoin. Le registre des cadres possède le `SituationFrame`. Le registre des résolveurs possède les définitions et instances de résolution.
+
+Une révision de morphologie, topologie, contrôle ou dynamique ne crée pas nécessairement un nouveau besoin. Elle invalide l'instance de résolution et réévalue les méthodes applicables.
+
+Le besoin est recréé uniquement si son identité sémantique change : résultat demandé, sujets, portée, parent bloqué ou contrat de satisfaction.
+
+Cette séparation évite que chaque variation perceptive multiplie artificiellement les besoins tout en empêchant la réutilisation d'une décision devenue incorrecte.
+
+'''
+          insert_before('\n---\n\n## 12. Agenda des stratégies\n', '\n' + need_revision, 'need resolution lifecycle')
+
+          replace_once('## 12. Agenda des stratégies',
+                       '## 12. Agenda des stratégies après résolution contextuelle',
+                       'agenda title')
+
+          old_tiebreak = '''### 12.2 Départage déterministe
+
+À l'intérieur d'une bande :
+
+1. lien avec l'objectif focal ;
+2. capacité à satisfaire complètement le besoin ;
+3. qualité des preuves ;
+4. risque ;
+5. coût estimé ;
+6. valeur d'information ;
+7. ancienneté ;
+8. identifiant stable.
+
+Le départage est lexicographique. Les coefficients numériques globaux sont évités par défaut.
+'''
+          new_tiebreak = '''### 12.2 Départage déterministe
+
+Le graphe contextuel détermine d'abord quelles stratégies peuvent être comparées et dans quel ordre structurel.
+
+À l'intérieur d'une même bande et d'une même branche encore comparable :
+
+1. lien avec l'objectif focal ;
+2. stratégie la plus spécialisée dont le domaine est prouvé ;
+3. ordre explicite du graphe (`SELECT`, `SEQUENCE`, `FALLBACK`) ;
+4. capacité à satisfaire complètement le besoin ;
+5. qualité et fraîcheur des preuves ;
+6. risque et réversibilité ;
+7. coût estimé ;
+8. valeur d'information ;
+9. ancienneté ;
+10. identifiant stable.
+
+Le départage est lexicographique. Les coefficients numériques globaux sont évités par défaut.
+
+Une stratégie générique ne concurrence pas une stratégie spécialisée applicable comme si elles étaient équivalentes. Une stratégie `unknown` ne peut pas gagner silencieusement sur une stratégie prouvée.
+'''
+          replace_once(old_tiebreak, new_tiebreak, 'agenda tiebreak')
+
+          agenda_coverage = r'''### 12.5 Couverture, chevauchements et ambiguïté
+
+L'agenda ne scanne pas toutes les stratégies associées au nom du besoin. Il reçoit uniquement les branches atteintes par le graphe de résolution.
+
+Trois cas doivent rester distincts :
+
+- **chevauchement de configuration** : plusieurs stratégies couvrent le même domaine sans relation déclarée ; erreur de compilation ;
+- **ambiguïté de situation** : le cadre ne contient pas encore le discriminant nécessaire ; besoin d'Exploration ou attente ;
+- **égalité légitime** : plusieurs engagements restent comparables après toutes les règles ; résultat runtime `ambiguous`.
+
+Cette distinction empêche de corriger une ambiguïté perceptive avec une priorité arbitraire et de masquer un défaut de configuration derrière un fallback.
+
+'''
+          insert_before('\n---\n\n## 13. Token de concentration', '\n' + agenda_coverage, 'agenda coverage')
+
+          # Configuration and human authoring.
+          replace_once(
+              '  information/\n  needs/\n  strategies/',
+              '  information/\n  situations/\n  needs/\n  resolvers/\n  strategies/',
+              'pack tree')
+          replace_once(
+              '- types de besoins ;\n- stratégies ;',
+              '- types de besoins ;\n- traits et schémas de cadres de situation ;\n- graphes contextuels de résolution ;\n- domaines d\'applicabilité et contre-indications ;\n- stratégies ;',
+              'pack declarations')
+
+          replace_once(
+              '  responds_to:\n    - need: know_control_effect\n\n  requires:',
+              '''  responds_to:
+    - need: know_control_effect
+
+  applies_when:
+    control_model: action_on_identified_control
+    subject_observability: before_and_after
+    effect_attribution: isolatable
+
+  forbids:
+    - subject_identity_ambiguous
+    - concurrent_uncontrolled_effects
+    - irreversible_risk_unbounded
+
+  specializes:
+    - generic-information-acquisition
+
+  requires:''',
+              'strategy applicability yaml')
+
+          replace_once(
+              '  result_type: attributed_effect\n\n  identity:',
+              '  result_type: attributed_effect\n  resolver: know-control-effect-resolution\n\n  identity:',
+              'need resolver yaml')
+
+          resolver_example = r'''### 19.5 Graphe de résolution déclaratif
+
+```yaml
+resolver:
+  id: reach-target-resolution
+  version: 1.0.0
+  need: reach_target
+  domain_policy: open
+
+  root:
+    kind: SELECT
+    branches:
+      - guard: control_model == unknown
+        node:
+          kind: EXPLORE
+          need: establish_control_model
+
+      - guard:
+          all:
+            - subject.directly_mobile
+            - topology == bounded_grid
+            - control_model == directional_actions
+        node:
+          kind: STRATEGY
+          strategy: direct-grid-navigation
+
+      - guard: movement.object_mediated
+        node:
+          kind: STRATEGY
+          strategy: object-mediated-transport
+
+      - guard: portal_relation == established
+        node:
+          kind: STRATEGY
+          strategy: portal-route-planning
+
+      - otherwise:
+          kind: EXPLORE
+          need: classify_movement_mechanism
+```
+
+Le compilateur produit pour chaque graphe :
+
+- carte de couverture ;
+- chevauchements ;
+- régions non couvertes ;
+- stratégies inatteignables ;
+- discriminants jamais produits ;
+- cycles ;
+- branches dont le fallback masque toujours les suivantes.
+
+### 19.6 Limite entre configuration et code
+'''
+          replace_once('### 19.5 Limite entre configuration et code\n', resolver_example, 'resolver config section')
+
+          workshop = r'''L'interface auteur doit guider un humain dans cet ordre :
+
+1. **Définir le vocabulaire**
+   - objets, relations, événements, propriétés et traits.
+
+2. **Définir ce qui est observable**
+   - détecteurs, mesures, ambiguïtés et preuves.
+
+3. **Définir les informations**
+   - statuts, portée, révision et conservation.
+
+4. **Définir les cadres de situation**
+   - dimensions discriminantes, sources, valeurs inconnues et invalidations.
+
+5. **Définir les besoins**
+   - résultat demandé, satisfaction, expiration et identité.
+
+6. **Définir les graphes de résolution**
+   - gardes, spécialisation, composition, séquence, fallback, exploration et stop.
+
+7. **Définir les stratégies**
+   - besoins servis, domaine d'applicabilité, contre-indications, opérations et relations avec les autres stratégies.
+
+8. **Définir les objectifs**
+   - réussite, échec, suspension et retour.
+
+9. **Définir les plans**
+   - étapes, gardes, effets attendus et besoins dérivés.
+
+10. **Définir les politiques**
+    - priorité, budgets, risques et invariants éthiques.
+
+11. **Écrire les tests contextuels**
+    - cas positif, cas négatif, frontière d'applicabilité, inconnue, autre morphologie, contradiction, frontière et restauration.
+
+12. **Compiler et lint**
+    - références ;
+    - cycles ;
+    - propriétaires ;
+    - bornes ;
+    - chevauchements ;
+    - trous de couverture ;
+    - règles inatteignables.
+
+13. **Exécuter en shadow**
+    - aucune autorité réelle ;
+    - comparaison avec le runtime courant ;
+    - matrice de situations pour un même besoin.
+
+14. **Promouvoir**
+    - feature flag ;
+    - canary ;
+    - preuve ;
+    - révision ;
+    - rollback.
+
+'''
+          replace_between("L'interface auteur doit guider un humain dans cet ordre :\n", '### 20.1 Vues de l\'atelier\n', workshop, 'author workflow')
+
+          replace_once(
+              '- matrice besoins/stratégies ;\n- couverture de tests ;',
+              '- matrice besoins/stratégies ;\n- cadre de situation courant ;\n- arbre d\'une instance de résolution ;\n- carte des domaines d\'applicabilité ;\n- rapport de chevauchements et trous de couverture ;\n- matrice de non-régression entre situations ;\n- couverture de tests ;',
+              'studio views')
+
+          # Validation and tests.
+          replace_once(
+              '- stratégie sans besoin servi ;\n- objectif sans stratégie émettrice ;',
+              '''- stratégie sans besoin servi ;
+- stratégie associée à un besoin sans domaine d'applicabilité ;
+- stratégie sans contre-indication lorsque son domaine n'est pas universel ;
+- graphe de résolution absent pour un besoin polymorphe ;
+- chevauchement non ordonné entre stratégies ;
+- région non couverte dans un domaine déclaré fermé ;
+- discriminant exigé mais jamais produit ;
+- confusion entre `unknown` et `not_applicable` ;
+- spécialisation fondée uniquement sur un nom de jeu sans dérogation explicite ;
+- objectif sans stratégie émettrice ;''',
+              'validation contextual errors')
+
+          contextual_tests = r'''### 22.4 Matrice contextuelle de non-régression
+
+Chaque stratégie doit fournir au minimum :
+
+1. **tests positifs** : situations où elle doit être atteinte et applicable ;
+2. **tests négatifs** : morphologies, topologies ou contrôles où elle doit être exclue ;
+3. **tests de frontière** : situations partiellement connues où le résultat attendu est `unknown` ;
+4. **tests de spécialisation** : la stratégie spécialisée domine la générique seulement dans son domaine ;
+5. **tests de fallback** : le fallback n'est utilisé qu'après l'échec contractuel des branches antérieures ;
+6. **tests inter-situations** : modifier une stratégie pour un jeu ne change pas la résolution d'une autre situation du même besoin sans raison déclarée.
+
+Exemple de matrice :
+
+| Besoin | Cadre de situation | Résolution attendue |
+|---|---|---|
+| `reach_target` | grille, acteur directement mobile, contrôle directionnel | `direct-grid-navigation` |
+| `reach_target` | objet rigide sélectionné, transformation indirecte | `rigid-object-relocation` |
+| `reach_target` | portail établi | `portal-route-planning` |
+| `reach_target` | contrôle inconnu | besoin `establish_control_model` |
+| `reach_target` | dynamique autonome dominante | `temporal-intercept-planning` |
+
+Tests métamorphiques recommandés :
+
+- changer un trait non pertinent ne doit pas modifier la branche ;
+- changer un discriminant pertinent doit invalider la résolution ;
+- remplacer une valeur connue par `unknown` ne doit pas produire `not_applicable` ;
+- une révision du cadre doit réévaluer le graphe sans dupliquer le besoin ;
+- une stratégie liée à un jeu par son nom doit échouer à la promotion générale.
+
+Toute modification d'une stratégie doit exécuter la matrice complète de son type de besoin, pas seulement le scénario qui a motivé la modification.
+
+'''
+          insert_before('\n---\n\n## 23. Performance\n', '\n' + contextual_tests, 'contextual tests')
+
+          replace_once(
+              '- index par type de besoin ;\n- index par portée ;',
+              '- index par type de besoin ;\n- index par traits de situation et discriminants demandés ;\n- évaluation uniquement des graphes liés aux besoins actifs ;\n- résolution incrémentale sur révision du cadre ;\n- index par portée ;',
+              'performance contextual indexes')
+
+          replace_once(
+              '- besoins persistants admis ;\n- arbre d\'engagements ;',
+              '- besoins persistants admis ;\n- cadres de situation et traits persistants utiles ;\n- instances de résolution nécessaires à l\'explication ou à la reprise ;\n- versions des graphes de résolution ;\n- arbre d\'engagements ;',
+              'persistence contextual state')
+
+          # TypeScript integration.
+          replace_once(
+              '1. généraliser les besoins ;\n2. relier les propriétaires à un registre commun ;\n3. ajouter l\'agenda ;',
+              '1. généraliser les besoins ;\n2. construire un `SituationFrame` partagé à partir des observations et informations ;\n3. introduire un registre de graphes contextuels de résolution ;\n4. relier les propriétaires à un registre commun ;\n5. ajouter l\'agenda après le filtrage contextuel ;',
+              'typescript integration steps')
+          replace_once(
+              '4. formaliser objectifs et plans ;\n5. rendre les engagements persistants ;\n6. transformer les traces en projections humaines.',
+              '6. formaliser objectifs et plans ;\n7. rendre les engagements persistants ;\n8. transformer les traces en projections humaines.',
+              'typescript integration renumber')
+          replace_once(
+              '| `AgentObservation` | snapshot public |\n| owner de famille | producteur de perception, information ou stratégie candidate |',
+              '| `AgentObservation` | snapshot public |\n| futur `SituationFrameBuilder` | synthèse incrémentale des discriminants pertinents |\n| futur `ResolutionGraphRegistry` | définitions versionnées par type de besoin |\n| futur `ResolutionGraphEvaluator` | instance de résolution liée au besoin et au cadre |\n| owner de famille | producteur de perception, information ou stratégie candidate avec domaine déclaré |',
+              'typescript mapping')
+
+          # Iterative roadmap: make contextual resolution a separate shadow phase.
+          for number in range(11, 3, -1):
+              text = text.replace(f'## Phase V8-{number} :', f'## Phase V8-{number + 1} :', 1)
+          text = text.replace('V8-0 à V8-11', 'V8-0 à V8-12')
+
+          replace_once(
+              '- ADR sur les frontières entre Intelligence Packs ;\n- schémas JSON/TypeScript préliminaires ;',
+              '- ADR sur les frontières entre Intelligence Packs ;\n- ADR sur les cadres de situation et leur révision ;\n- ADR sur les graphes contextuels de résolution, l\'applicabilité ternaire et la spécialisation ;\n- schémas JSON/TypeScript préliminaires ;',
+              'v8-0 adrs')
+
+          replace_once(
+              '- types de besoins initiaux ;\n- producteurs depuis plans, informations et perceptions ;',
+              '- types de besoins initiaux ;\n- références vers le cadre de situation courant ;\n- producteurs depuis plans, informations et perceptions ;',
+              'v8-2 frame refs')
+
+          phase_v84 = r'''## Phase V8-4 : cadres de situation et graphes de résolution en shadow
+
+**But :** démontrer que le même besoin peut être routé différemment selon des invariants de situation, sans modifier les actions réelles.
+
+Ajouter :
+
+- `SituationFrameBuilder` incrémental ;
+- traits morphologiques, topologiques, de contrôle et de dynamique initiaux ;
+- applicabilité ternaire ;
+- `ResolutionGraphRegistry` ;
+- `ResolutionGraphEvaluator` ;
+- relations `specializes`, `fallback_for` et composition ;
+- instances runtime projetées sous forme d'arbre ;
+- carte de couverture et détection des chevauchements.
+
+Critères :
+
+- au moins un même besoin résolu correctement dans trois cadres différents ;
+- une dimension inconnue produit `unknown`, jamais `not_applicable` ;
+- une révision du cadre invalide la résolution sans dupliquer le besoin ;
+- les chevauchements non ordonnés sont refusés ;
+- les trous d'un domaine fermé sont refusés ;
+- aucune action réelle n'est modifiée ;
+- coût shadow mesuré.
+
+'''
+          insert_before('## Phase V8-5 : agenda de stratégies en shadow\n', phase_v84, 'new v8-4 phase')
+
+          replace_once(
+              '- registre des stratégies ;\n- bandes de priorité ;',
+              '- registre des stratégies ;\n- consommation des seules branches atteintes par les graphes de résolution ;\n- ordre de spécialisation et fallbacks déclarés ;\n- bandes de priorité ;',
+              'agenda phase contextual')
+
+          replace_once(
+              '- les besoins sont canoniques et persistants ;\n- l\'interface expose les cinq perspectives ;',
+              '- les besoins sont canoniques et persistants ;\n- les cadres de situation sont révisables et prouvés ;\n- chaque besoin polymorphe possède un graphe de résolution qualifié ;\n- les chevauchements et trous de couverture sont contrôlés ;\n- l\'interface expose les cinq perspectives ;',
+              'v8 declaration contextual')
+
+          replace_once(
+              'Ces besoins couvrent un grand nombre de familles existantes sans imposer une ontologie trop large au départ.\n',
+              'Ces besoins couvrent un grand nombre de familles existantes sans imposer une ontologie trop large au départ. Chaque besoin introduit doit être accompagné d\'un cadre minimal de discriminants et, dès qu\'il possède plusieurs méthodes, d\'un graphe contextuel de résolution.\n',
+              'first needs resolver note')
+
+          replace_once(
+              '| Oscillation des stratégies | hystérésis, cycle de vie, cooldown, engagements persistants |\n| Priorité opaque | bandes et départage lexicographique |',
+              '''| Oscillation des stratégies | hystérésis, cycle de vie, cooldown, engagements persistants |
+| Même besoin, morphologies incompatibles | cadre de situation et graphes de résolution par besoin |
+| Stratégie trop générale | enveloppe d'applicabilité, contre-indications et tests négatifs |
+| Chevauchement entre stratégies | erreur de compilation sans relation explicite |
+| Trou de couverture | politique de domaine ouvert/fermé et besoin de classification |
+| Inconnue interprétée comme fausse | applicabilité ternaire |
+| Explosion combinatoire des contextes | traits composables, discriminants à la demande, héritage et résolution incrémentale |
+| Régression entre jeux | matrice contextuelle complète pour chaque type de besoin |
+| Priorité opaque | bandes et départage lexicographique après résolution contextuelle |''',
+              'risk table contextual')
+
+          adr_context = r'''### ADR-9 : cadres de situation et résolution contextuelle
+
+Décision :
+
+- le besoin abstrait n'est jamais une clé suffisante de sélection ;
+- Assimilation construit un cadre partiel et révisable ;
+- Exploration acquiert les discriminants manquants ;
+- Solving applique les stratégies dont l'applicabilité est prouvée ;
+- chaque besoin polymorphe possède un graphe contextuel de résolution ;
+- une révision du cadre invalide la résolution, pas automatiquement le besoin.
+
+### ADR-10 : applicabilité, spécialisation et non-régression
+
+Décision :
+
+- toute stratégie déclare conditions positives, contre-indications et preuves minimales ;
+- l'applicabilité est ternaire ;
+- les stratégies d'un même besoin déclarent spécialisation, composition, ordre ou discriminants ;
+- les chevauchements non ordonnés sont refusés ;
+- les capacités générales sont définies par invariants, non par noms de jeux ;
+- toute modification exécute une matrice inter-situations du besoin concerné.
+
+'''
+          insert_before('\n---\n\n## 31. Définition de réussite\n', '\n' + adr_context, 'contextual ADRs')
+
+          replace_once(
+              '4. définir un besoin ;\n5. associer plusieurs stratégies ;\n6. définir les objectifs qu\'elles produisent ;',
+              '4. définir un cadre de situation et ses discriminants ;\n5. définir un besoin ;\n6. organiser ses réponses dans un graphe contextuel de résolution ;\n7. associer plusieurs stratégies avec leurs domaines et contre-indications ;\n8. définir les objectifs qu\'elles produisent ;',
+              'success criteria contextual')
+          replace_once(
+              '7. définir des plans conditionnels ;\n8. tester sur des situations positives et négatives ;\n9. voir exactement pourquoi la stratégie s\'active ;\n10. suivre l\'objectif et le plan ;\n11. voir l\'action et son retour ;\n12. corriger une règle sans effets de bord imprévisibles ;\n13. comparer deux révisions ;\n14. publier une version vérifiable ;\n15. assumer la responsabilité de l\'intelligence conçue.',
+              '9. définir des plans conditionnels ;\n10. tester la même stratégie sur des situations positives, négatives et limites ;\n11. voir exactement pourquoi une branche est applicable, rejetée ou inconnue ;\n12. suivre l\'objectif et le plan ;\n13. voir l\'action et son retour ;\n14. corriger une règle sans effets de bord imprévisibles ;\n15. comparer deux révisions et leurs cartes de couverture ;\n16. publier une version vérifiable ;\n17. assumer la responsabilité de l\'intelligence conçue.',
+              'success criteria renumber')
+
+          replace_once(
+              '- types `NeedProposal`, `NeedRecord`, `NeedContribution` ;\n- journal sémantique étendu ;\n- `NeedRegistry` en shadow ;',
+              '- types `NeedProposal`, `NeedRecord`, `NeedContribution` ;\n- types `SituationFrame`, `ApplicabilityEnvelope`, `ResolutionGraphDefinition` et `ResolutionInstance` ;\n- journal sémantique étendu ;\n- `NeedRegistry` en shadow ;\n- `SituationFrameBuilder` en shadow ;\n- premier graphe de résolution en shadow ;',
+              'first slice deliverables')
+
+          replace_once(
+              '''Le plan courant veut déplacer une pièce.
+L'effet de la commande est inconnu.
+Le plan propose un besoin.
+Le registre l'admet.
+La stratégie d'expérience devient candidate.
+L'agenda explique pourquoi elle serait choisie.
+Un objectif et un plan sont construits en shadow.
+Le runtime actuel garde l'autorité.
+Les deux raisonnements sont comparés.''',
+              '''Le plan courant veut déplacer une pièce.
+L'effet de la commande est inconnu.
+Assimilation décrit le sujet comme rigide, sélectionné et observable.
+Le plan propose un besoin.
+Le registre l'admet sans le dupliquer.
+Le graphe `know_control_effect` exclut les méthodes incompatibles.
+La stratégie d'expérience devient applicable.
+L'agenda explique pourquoi cette branche serait engagée.
+Un objectif et un plan sont construits en shadow.
+Le cadre change ensuite vers un sujet directement mobile.
+La même instance de besoin est réévaluée et une autre branche devient applicable.
+Le runtime actuel garde l'autorité.
+Les deux raisonnements sont comparés.''',
+              'first slice scenario')
+
+          replace_once(
+              '- absence de duplication ;\n- restauration ;',
+              '- absence de duplication ;\n- résolution différente du même besoin dans plusieurs cadres ;\n- absence de régression sur la matrice inter-situations ;\n- restauration ;',
+              'promotion criteria contextual')
+
+          conclusion_add = r'''
+Le besoin n'est donc pas un routeur universel. Il exprime le résultat manquant. Le cadre de situation qualifie le régime local. Le graphe contextuel de résolution ordonne les méthodes possibles. L'agenda n'arbitre qu'entre les engagements dont l'applicabilité a déjà été établie.
+
+Cette séparation répond au risque fondamental de régression entre jeux : une stratégie créée pour un besoin dans une morphologie ne devient pas applicable à toutes les situations portant le même nom. Elle ne peut être atteinte que par les discriminants, invariants et relations de spécialisation configurés et testés.
+
+La formule complète devient :
+
+```text
+Mission
+→ Assimilation
+→ cadre de situation
+→ besoin
+→ graphe contextuel de résolution
+→ Exploration si un discriminant manque
+→ Solving si une méthode est applicable
+→ stratégie
+→ objectif
+→ plan
+→ action
+→ retour
+→ nouvelle Assimilation
+```
+'''
+          insert_before('\nLe système n\'interdit pas aux nœuds de faire émerger de nouveaux besoins.', conclusion_add + '\n', 'conclusion contextual')
+
+          # Global terminology and phase references.
+          text = text.replace('version 0.2', 'version 0.3')
+          text = text.replace('V8-0 à V8-11', 'V8-0 à V8-12')
+
+          required = [
+              'version 0.3',
+              '## 8. Cadre de situation et graphes contextuels de résolution',
+              'Need Resolution Graph',
+              "type ApplicabilityStatus = 'applicable' | 'not_applicable' | 'unknown'",
+              'Ambiguous resolver overlap',
+              '## Phase V8-4 : cadres de situation et graphes de résolution en shadow',
+              '## Phase V8-12 : déclaration V8',
+              '### ADR-9 : cadres de situation et résolution contextuelle',
+              '### ADR-10 : applicabilité, spécialisation et non-régression',
+              'matrice contextuelle de non-régression',
+          ]
+          for marker in required:
+              if marker not in text:
+                  raise SystemExit(f'missing required marker: {marker}')
+
+          forbidden = [
+              'Le système repose sur cinq structures complémentaires',
+              'Besoin → stratégies candidates',
+              '## Phase V8-11 : déclaration V8',
+          ]
+          for marker in forbidden:
+              if marker in text:
+                  raise SystemExit(f'forbidden obsolete marker remains: {marker}')
+
+          if text.count('```') % 2:
+              raise SystemExit('unbalanced Markdown code fences')
+
+          headings = re.findall(r'^## (\d+)\.', text, flags=re.MULTILINE)
+          expected_headings = [str(number) for number in range(1, 35)]
+          if headings != expected_headings:
+              raise SystemExit(f'unexpected major heading sequence: {headings}')
+
+          path.write_text(text, encoding='utf-8')
+          print(f'updated {path}: {len(text.splitlines())} lines')
+          PY
+
+      - name: Commit updated SIC specification
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/architecture/v8-human-configurable-intelligence.md
+          git diff --cached --stat
+          git commit -m "Add contextual need resolution to SIC architecture"
+          git push origin HEAD:${{ github.ref_name }}
