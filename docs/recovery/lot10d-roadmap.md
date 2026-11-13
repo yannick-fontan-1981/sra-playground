@@ -6,156 +6,134 @@ Branche : `recovery/lot10d-temporal-selection-rebased-20261112`
 
 Baseline de report : `recovery/site109-reconstruction-20261112` au commit `24fcdbb16c93de59489a6bb0392cc709b7a75d14`
 
-Tête canonique parallèle observée après le présent jalon :
+Tête canonique parallèle observée après ce jalon :
 
-`8cc510e0a0d09704eb508b3aa2216b4d63482af4`
+`67602172665b79e2b282b37b63f80dc24feff3b0`
 
 ## Règle de portée
 
-Cette feuille de route décrit une nouvelle reconstruction qualifiée à partir de preuves GitHub durables.
-
-Elle ne revendique ni identité de code ni parité fonctionnelle complète avec l'ancien Site 109 / native 0.68.
+Cette feuille décrit une reconstruction qualifiée à partir de preuves GitHub durables. Elle ne revendique ni identité de code ni parité complète avec Site 109 / native 0.68.
 
 ## État actuel
 
 | Étape | Statut | Preuve / limite |
 | --- | --- | --- |
-| audit de l'ancienne branche 10D | terminé | aucun delta 10D récupérable |
-| contrat Source / sélection fail-closed | qualifié | sélection externe seulement, aucun fallback |
-| mémoire courante | qualifiée | preuve rappelée + preuve courante liée à l'observation |
-| identité/idempotence des retours | qualifiée | scope, chronologie, produits, révisions et empreintes |
-| état minimal/restauration | qualifié | état descriptif, borné, `actAuthorized: false` |
+| audit de l'ancienne branche 10D | terminé | aucun delta récupérable |
+| contrat Source / sélection fail-closed | qualifié | sélection externe, aucun fallback |
+| mémoire courante | qualifiée | preuves rappelées et courantes liées à l'observation |
+| identité/idempotence des retours | qualifiée | scope, chronologie, produits et empreintes |
+| état minimal/restauration | qualifié | descriptif, borné, sans ACT |
 | reçu Source/DRM | qualifié | Source, DRM, observation, domaine et résultat scellés |
-| adaptateur de consommation | qualifié | ne choisit pas le candidat |
-| bridge vers trace Logos | qualifié | capability séparée des OP01-OP31 |
-| compatibilité worker/V6 rebasée | qualifiée | régressions worker et V6 incluses |
-| port `AgentDecisionPort` passif | qualifié | aucune action sans ACT séparé |
-| audit des donneurs ACT | **terminé** | ordre des gates récupéré depuis les Source V5 |
-| contrat d'éligibilité aux gates ACT | **qualifié** | CI 160/160, ne produit ni permis ni action |
+| adaptateur de consommation | qualifié | ne choisit aucun candidat |
+| bridge Logos V6 | qualifié | capability séparée des OP01-OP31 |
+| port runtime passif | qualifié | sélection acceptée, action retenue |
+| audit des gates ACT | qualifié | ordre durable, aucun permis produit |
+| binding candidat préparé | **qualifié** | `AgentAction` et cible explicites, CI 181/181 |
+| permis ACT historique | **prochaine étape** | `source_action_release_permit` incomplet |
+| consommation/révocation du permis | ouverte | aucun dispatch autorisé |
+| producteur public du domaine | ouvert | perception/candidate factory absente |
 | politique historique TemporalSelection | absente | ne pas inventer |
-| producteur public du domaine | ouvert | aucune perception/candidate factory justifiée |
-| schéma historique `ActionIntent` | partiellement documenté | forme exacte non récupérée |
-| liaison candidat -> `AgentAction` | **prochaine étape** | aucune conversion implicite admise |
-| `ActionReleasePermit` historique | ouvert | encodage et consommation non récupérés |
 | position runtime commune | ouverte | `v6-native-runtime.ts` absent |
-| registre d'entrées reconstruit | ouvert | `v6-entry-point-progress.json` absent |
-| contribution en partie réelle | ouverte | aucune campagne comportementale TemporalSelection actuelle |
+| registre d'entrées | ouvert | `v6-entry-point-progress.json` absent |
+| contribution en partie réelle | ouverte | aucune campagne comportementale actuelle |
 | performance officielle | à confirmer | runners/corpus STCK/SMLP manquants |
-| intégration canonique | non réalisée | branche de lot encore séparée |
-| publication Site | non réalisée | interdite avant intégration GitHub qualifiée |
+| intégration canonique | non réalisée | branche de lot séparée |
+| publication Site | non réalisée | interdite avant intégration GitHub |
 
 ## Qualification actuelle
 
-Commit de code qualifié :
+Commit qualifié :
 
-`a474b6c1862879f79272bd44cdf05b8235fe7c54`
+`169a3a958507f12d52b86c45668137101895e893`
 
-GitHub Actions :
+Run GitHub Actions :
 
-- run `43348069627` ;
-- **160 tests réussis** ;
+- run `43351773278` ;
+- **181 tests réussis** ;
 - **0 échec** ;
 - typecheck strict réussi.
 
-Le précédent jalon comptait 145 tests. L'audit ACT ajoute 15 tests couvrant l'identité de l'intent, les preuves, les gates de release et l'absence permanente d'action.
+Le jalon ajoute :
 
-Le worker public reste en mode :
+- 16 tests de binding d'action ;
+- 5 tests directs des donneurs ;
+- une validation stricte du nouveau source TypeScript.
 
-`reconstruction-pending-perception`
+## Binding candidat préparé - jalon terminé
 
-et ne produit aucune action par défaut.
+### Donneurs
 
-## Audit ACT - jalon terminé
-
-### Donneurs récupérés
-
-- `src/core/release_action.src`
-- `src/core/released_action_cycle.src`
-- `src/arc3/conditional_reasoning_tree.src`
-- `src/arc3/continue_after_information_probe.src`
+- `reference/.../agent.py`
+- `reference/.../src/core/released_action_cycle.src`
+- `reference/.../src/arc3/conditional_reasoning_tree.src`
+- `reference/.../docs/architecture/resolving_architecture_overview.md`
 
 ### Chaîne établie
 
-`selected branch -> prepared intent -> grounding -> wisdom -> release_action -> ACT`
+`TemporalSelection acceptée -> intent préparé -> cible explicite -> AgentAction candidate`
 
-TemporalSelection ne détient donc pas l'autorité ACT.
+Le candidat est fourni par un producteur externe. Le binding ne le déduit pas du seul `selectedRef`.
 
-### Gates portées
+### Garanties
 
-- binding du candidat, de la décision et de l'observation ;
-- action actuellement disponible ;
-- grounding courant ;
-- commitment ;
-- viability ;
-- engagement expérimental courant ;
-- preuve de contrôle courante ;
-- mémoire revalidée ;
-- continuité et influence parentales ;
-- sécurité replay ;
-- sécurité endpoint.
+- identité Source et décision préservées ;
+- observation publique exacte ;
+- session et séquence exactes ;
+- action valide et actuellement disponible ;
+- cible cohérente avec le payload public ;
+- preuves sélectionnées préservées ;
+- domaines de preuves explicites, uniques et bornés ;
+- empreinte de binding déterministe ;
+- aucune autorité ACT.
 
-L'audit retourne seulement :
+### Sortie
 
-- `eligible` ;
-- `blocked` ;
-- `deferred`.
+Même après succès :
 
-Même `eligible` conserve :
-
-- `actionPayloadPresent: false` ;
+- `actionCandidatePresent: true` ;
+- `actionPermitPresent: false` ;
+- `releaseEligible: false` ;
 - `actionReleased: false` ;
 - `actAuthorized: false`.
 
-## Prochaine étape - liaison intent vers action
+## Prochaine étape - permis ACT distinct
 
-Rechercher dans les donneurs durables :
+Rechercher le donneur durable exact de :
 
-1. la forme exacte d'un `ActionIntent` préparé ;
-2. le lien entre `selectedRef` et `actionWitnessRef` ;
-3. la cible, les paramètres et l'identité de l'action ;
-4. la validation face aux `availableActionIds` courants ;
-5. l'identité et la fraîcheur d'un `ActionReleasePermit` ;
-6. la consommation unique et la révocation ;
-7. le consommateur runtime final qui produit l'`AgentAction`.
+`prepared action binding -> source_action_release_permit -> dispatch -> acquisition`
 
-### Issue A - donneur récupérable
+Le contrat attendu, s'il est justifié, devra couvrir :
 
-Reconstruire séparément :
+1. identité du producteur du permis ;
+2. liaison au binding et à l'intent ;
+3. contexte courant `run/timeline/frame/revision` ;
+4. engagement, viability, grounding, contrôle, mémoire, parent et sécurité ;
+5. action toujours disponible ;
+6. consommation unique ;
+7. révocation sur changement de contexte ou de preuve ;
+8. dispatch seulement par le consommateur runtime autorisé ;
+9. trace distincte du candidat, du permis et du dispatch.
 
-- un contrat d'intent d'action attribué ;
-- une liaison exact candidate/target/action ;
-- un permis ACT distinct ;
-- un consommateur runtime borné et traçable.
+### Issue A - donneur complet récupérable
 
-La qualification devra vérifier :
+Reconstruire le permis et son consommateur avec tests fail-closed, sans remplacer le worker public par défaut.
 
-- observation et révision exactes ;
-- action disponible ;
-- paramètres valides ;
-- preuves toujours actives ;
-- aucune réutilisation après révocation ;
-- une seule consommation du permis ;
-- refus fail-closed de toute divergence.
+### Issue B - donneur incomplet
 
-### Issue B - donneur non récupérable
-
-Documenter le manque et conserver le port en mode `action_withheld`.
-
-Toute nouvelle liaison devra être un nouveau contrat explicitement spécifié, qualifié et distingué de la restitution historique de Site 109.
+Documenter le manque et conserver `action_withheld`. Un nouveau permis devra être spécifié comme une nouvelle conception, pas comme une restitution supposée de Site 109.
 
 ## Étapes ultérieures
 
-1. terminer l'audit de liaison `prepared intent -> AgentAction` ;
-2. reconstruire un permis ACT séparé uniquement si le donneur le justifie ;
-3. retrouver ou concevoir explicitement le producteur public du domaine TemporalSelection ;
-4. raccorder le port au worker uniquement par injection qualifiée ;
-5. reconstruire une campagne fonctionnelle durable ;
-6. reconstruire le registre d'entrées ;
-7. restaurer les runners officiels STCK/SMLP ;
-8. mesurer selon ABBA ;
-9. réconcilier avec la tête canonique ;
-10. intégrer dans `recovery/site109-reconstruction-20261112` ;
-11. publier le Site seulement après vérification SHA GitHub <-> Site.
+1. qualifier le permis ACT et sa consommation, si reconstructibles ;
+2. reconstruire le producteur public du domaine et du candidat d'action ;
+3. raccorder la chaîne au runtime uniquement par injection qualifiée ;
+4. construire une campagne fonctionnelle durable ;
+5. reconstruire le registre d'entrées ;
+6. restaurer les runners officiels STCK/SMLP ;
+7. mesurer selon ABBA ;
+8. réconcilier avec la tête canonique ;
+9. intégrer dans `recovery/site109-reconstruction-20261112` ;
+10. publier le Site après vérification SHA GitHub <-> Site.
 
 ## Performance
 
@@ -163,8 +141,8 @@ Critère historique :
 
 - STCK global strictement < +10 % ;
 - SMLP global strictement < +10 % ;
-- jeux séparés ;
+- jeux évalués séparément ;
 - aucune compensation ;
-- dépassement interne admissible si le global du même jeu passe.
+- phase interne > +10 % admissible si le global du même jeu reste sous le seuil.
 
 Statut : **fonctionnellement qualifié, performance officielle à confirmer**.
