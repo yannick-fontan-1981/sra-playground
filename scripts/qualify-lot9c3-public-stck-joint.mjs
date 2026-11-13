@@ -20,6 +20,9 @@ import {
 import {
   V6CommonCampaignDecisionPort,
 } from '../src/runtime/v6-common-campaign-decision-port.ts';
+import {
+  findStckVisibleStackCardCenter,
+} from './native-loop-region-public-action6-probe.mjs';
 
 const child = spawn('python3', ['scripts/native-python-archive-session.py'], {
   stdio: ['pipe', 'pipe', 'inherit'],
@@ -93,19 +96,27 @@ function port(mode = 'both') {
 
 const signal = new AbortController().signal;
 const report = {
-  corpus: 'real-public-stck-level-1-seed-0',
+  corpus: 'real-public-stck-level-1-seed-0-unique-card-state',
   archive: 'public/python/custom-games.zip',
   game: 'STCK',
   gameId: null,
   seed: 0,
+  publicPrelude: {
+    producer: 'region-public-action6-probe-v1',
+    actionCount: 0,
+    actions: [],
+  },
+  selectedObservationSequence: null,
   channels: [
     PUBLIC_STCK_ACTION_AVAILABILITY_CHANNEL_ID,
     PUBLIC_STCK_VISIBLE_TARGET_CHANNEL_ID,
   ],
   selectedAction: null,
   selectedTargetKind: null,
+  selectedTargetEvidenceRef: null,
   nextAction: null,
   nextTargetKind: null,
+  nextDisposition: null,
   changedPixelCount: null,
   jointAssessment: null,
   acquisitionChannels: [],
@@ -116,34 +127,61 @@ const report = {
 };
 
 try {
-  const publicBefore = await request({ type: 'load', code: 'STCK' });
-  const before = agentObservation(publicBefore, 0);
-  report.gameId = publicBefore.gameId;
-  const firstCandidate = producePublicStckTargetCandidate(before);
-  assert.ok(firstCandidate);
-  assert.equal(firstCandidate.targetKind, 'stack_card');
+  let publicCurrent = await request({ type: 'load', code: 'STCK' });
+  report.gameId = publicCurrent.gameId;
+  let sequence = 0;
+  let current = agentObservation(publicCurrent, sequence);
+  let candidate = producePublicStckTargetCandidate(current);
+
+  for (let step = 0; !candidate && step < 16; step += 1) {
+    const preludeAction = findStckVisibleStackCardCenter(publicCurrent);
+    assert.ok(
+      preludeAction,
+      'public STCK prelude exhausted visible cards before reaching a unique-card state',
+    );
+    const publicNext = await request({
+      type: 'action',
+      actionId: preludeAction.id,
+      data: { x: preludeAction.x, y: preludeAction.y },
+    });
+    const next = agentObservation(publicNext, sequence + 1);
+    report.publicPrelude.actions.push({
+      action: { id: preludeAction.id, data: { x: preludeAction.x, y: preludeAction.y } },
+      changedPixelCount: changedPixels(current, next),
+    });
+    publicCurrent = publicNext;
+    sequence += 1;
+    current = next;
+    candidate = producePublicStckTargetCandidate(current);
+  }
+
+  assert.ok(candidate, 'public STCK prelude did not reach a unique-card state within 16 actions');
+  report.publicPrelude.actionCount = report.publicPrelude.actions.length;
+  assert.ok(report.publicPrelude.actionCount > 0);
+  report.selectedObservationSequence = sequence;
+  report.selectedTargetEvidenceRef = candidate.targetEvidenceRef;
 
   const full = port('both');
-  full.initialize(before.sessionId, 0);
-  const action = full.decide(before, 50, signal);
-  assert.deepEqual(action, firstCandidate.action);
+  full.initialize(current.sessionId, 0);
+  const action = full.decide(current, 50, signal);
+  assert.deepEqual(action, candidate.action);
   assert.equal(full.lastPrepare?.status, 'action');
   if (full.lastPrepare?.status === 'action') {
     assert.equal(full.lastPrepare.ownerId, JOINT_CHANNEL_OWNER_ID);
   }
   report.selectedAction = structuredClone(action);
-  report.selectedTargetKind = firstCandidate.targetKind;
+  report.selectedTargetKind = candidate.targetKind;
   report.jointAssessment = full.jointOwner?.lastAssessment ?? null;
 
   const availabilityOnly = port('availability');
-  availabilityOnly.initialize(before.sessionId, 0);
-  report.causalRemoval.targetMissingAction = availabilityOnly.decide(before, 50, signal) ?? null;
+  availabilityOnly.initialize(current.sessionId, 0);
+  report.causalRemoval.targetMissingAction = availabilityOnly.decide(current, 50, signal) ?? null;
   assert.equal(report.causalRemoval.targetMissingAction, null);
   assert.equal(availabilityOnly.jointOwner?.lastAssessment.status, 'incomplete');
 
   const targetOnly = port('target');
-  targetOnly.initialize(before.sessionId, 0);
-  report.causalRemoval.availabilityMissingAction = targetOnly.decide(before, 50, signal) ?? null;
+  targetOnly.initialize(current.sessionId, 0);
+  report.causalRemoval.availabilityMissingAction = targetOnly.decide(current, 50, signal) ?? null;
   assert.equal(report.causalRemoval.availabilityMissingAction, null);
   assert.equal(targetOnly.jointOwner?.lastAssessment.status, 'incomplete');
 
@@ -152,8 +190,8 @@ try {
     actionId: action.id,
     data: action.data,
   });
-  const after = agentObservation(publicAfter, 1);
-  report.changedPixelCount = changedPixels(before, after);
+  const after = agentObservation(publicAfter, sequence + 1);
+  report.changedPixelCount = changedPixels(current, after);
   assert.ok(report.changedPixelCount > 0);
 
   full.observe(after);
@@ -167,11 +205,16 @@ try {
   ]);
 
   const nextCandidate = producePublicStckTargetCandidate(after);
-  assert.ok(nextCandidate);
-  const nextAction = full.decide(after, 50, signal);
-  assert.deepEqual(nextAction, nextCandidate.action);
-  report.nextAction = structuredClone(nextAction);
-  report.nextTargetKind = nextCandidate.targetKind;
+  if (nextCandidate) {
+    const nextAction = full.decide(after, 50, signal);
+    assert.deepEqual(nextAction, nextCandidate.action);
+    report.nextAction = structuredClone(nextAction);
+    report.nextTargetKind = nextCandidate.targetKind;
+    report.nextDisposition = 'another_unique_card';
+  } else {
+    assert.equal(full.decide(after, 50, signal), undefined);
+    report.nextDisposition = 'no_unique_stack_card';
+  }
 
   const output = process.env.LOT9C3_REPORT || 'lot9c3-public-stck-joint-report.json';
   fs.writeFileSync(output, `${JSON.stringify(report, null, 2)}\n`);
