@@ -126,7 +126,7 @@ try {
   const full = port('both');
   full.initialize(before.sessionId, 0);
   const action = full.decide(before, 50, signal);
-  assert.deepEqual(action, { id: 6, data: { x: 4, y: 52 } });
+  assert.deepEqual(action, firstCandidate.action);
   assert.equal(full.lastPrepare?.status, 'action');
   if (full.lastPrepare?.status === 'action') {
     assert.equal(full.lastPrepare.ownerId, JOINT_CHANNEL_OWNER_ID);
