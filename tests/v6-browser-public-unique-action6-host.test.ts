@@ -4,6 +4,7 @@ import test from 'node:test';
 import type { ProductReadinessState } from '../src/agent-product-dispatch.ts';
 import { PUBLIC_UNIQUE_ACTION6_CALLER_OWNER_ID } from '../src/logos-engine/v6-public-unique-action6-caller-adapter.ts';
 import type { GameObservation } from '../src/runtime/browser-games.ts';
+import { ObservedAddressedMaterialRuntime } from '../src/runtime/observed-addressed-material-runtime.ts';
 import { createFieldStockPublicAction6AndPublicSingleActionBrowserCampaignHost } from '../src/runtime/v6-browser-product-campaign-host.ts';
 
 function rows(fill = 2): number[][] {
@@ -50,13 +51,32 @@ function productState(current: GameObservation): ProductReadinessState {
   };
 }
 
-test('active product host releases, dispatches and acquires one public SMLP ACTION6', async () => {
+class TrackingAddressedRuntime extends ObservedAddressedMaterialRuntime {
+  readonly events: string[];
+
+  constructor(events: string[]) {
+    super();
+    this.events = events;
+  }
+
+  override observeAddressedReturn(
+    ...args: Parameters<ObservedAddressedMaterialRuntime['observeAddressedReturn']>
+  ): ReturnType<ObservedAddressedMaterialRuntime['observeAddressedReturn']> {
+    this.events.push('passive-field-stock');
+    return super.observeAddressedReturn(...args);
+  }
+}
+
+test('active product host releases, dispatches, acquires and passively observes one public SMLP ACTION6', async () => {
   const beforeRows = rows();
   closedVerticalGate(beforeRows, 32, 26);
   const before = observation('SMLP', beforeRows);
   const after = observation('SMLP', rows());
-  const host = createFieldStockPublicAction6AndPublicSingleActionBrowserCampaignHost();
   const events: string[] = [];
+  const runtime = new TrackingAddressedRuntime(events);
+  const host = createFieldStockPublicAction6AndPublicSingleActionBrowserCampaignHost({
+    fieldStockRuntime: runtime,
+  });
   let dispatched: { action: number; data?: { x: number; y: number } } | undefined;
 
   host.begin({ sessionId: 'browser-product-action6', observation: before });
@@ -83,9 +103,13 @@ test('active product host releases, dispatches and acquires one public SMLP ACTI
   assert.equal(result.dispatch?.accepted, true);
   assert.deepEqual(events, [
     'action:6:32:26',
+    'passive-field-stock',
     `acquired:${result.preparation.needId}`,
     'present',
   ]);
+  assert.equal(runtime.field.model, null);
+  assert.equal(runtime.field.prior, null);
+  assert.equal(runtime.field.stock, null);
 });
 
 test('two public ACTION6 targets remain ambiguous before Logos and dispatch', async () => {
