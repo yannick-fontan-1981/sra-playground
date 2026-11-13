@@ -58,9 +58,14 @@ export function createNativeRegionBenchmarkRunSession({
     corpus: NATIVE_REGION_ACTION6_CORPUS_V1,
     selectAction: selectNativeRegionAction6CostAction,
   };
+  const candidateHook = {
+    methodRefFor: nativeRegionBenchmarkMethodRef,
+    methodRefInput: 'identity',
+    cacheFrames: true,
+  };
   const hooks = {
-    STCK: createRegionInterventionCandidateHook({ methodRefFor: nativeRegionBenchmarkMethodRef }),
-    SMLP: createRegionInterventionCandidateHook({ methodRefFor: nativeRegionBenchmarkMethodRef }),
+    STCK: createRegionInterventionCandidateHook(candidateHook),
+    SMLP: createRegionInterventionCandidateHook(candidateHook),
   };
 
   const runners = {
