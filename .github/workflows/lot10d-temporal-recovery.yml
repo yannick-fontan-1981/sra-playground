@@ -19,12 +19,14 @@ jobs:
       - name: Run reconstructed TemporalSelection tests
         run: >-
           node --experimental-strip-types --test
+          tests/v6-operation-trace.test.ts
           tests/v6-temporal-selection-contract.test.ts
           tests/v6-temporal-memory-contract.test.ts
           tests/v6-temporal-return-contract.test.ts
           tests/v6-temporal-observation-state.test.ts
           tests/v6-temporal-decision-receipt.test.ts
           tests/v6-temporal-selection-adapter.test.ts
+          tests/v6-temporal-selection-bridge.test.ts
       - name: Typecheck reconstructed TemporalSelection sources
         run: >-
           npx tsc --noEmit
@@ -34,11 +36,13 @@ jobs:
           --allowImportingTsExtensions
           --strict
           --skipLibCheck
+          src/logos-engine/v6-operation-trace.ts
           src/logos-engine/v6-temporal-selection-contract.ts
           src/logos-engine/v6-temporal-memory-contract.ts
           src/logos-engine/v6-temporal-return-contract.ts
           src/logos-engine/v6-temporal-observation-state.ts
           src/logos-engine/v6-temporal-decision-receipt.ts
           src/logos-engine/v6-temporal-selection-adapter.ts
+          src/logos-engine/v6-temporal-selection-bridge.ts
 
-# qualification-head: decision-receipt
+# qualification-head: traced-bridge
