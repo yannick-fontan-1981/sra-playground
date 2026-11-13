@@ -1,0 +1,126 @@
+[
+  {
+    "key": "OP01",
+    "description": "Lister les compositions disponibles distinctes"
+  },
+  {
+    "key": "OP02",
+    "description": "Regrouper les parcours seulement si leur état causal final complet est équivalent"
+  },
+  {
+    "key": "OP03",
+    "description": "Relever les préconditions et contraintes encore inconnues d'une composition nécessaire"
+  },
+  {
+    "key": "OP04",
+    "description": "Lister les possibilités qu'une composition rend accessibles"
+  },
+  {
+    "key": "OP05",
+    "description": "Distinguer les mécanismes possibles lorsque leurs effets observés sont semblables"
+  },
+  {
+    "key": "OP06",
+    "description": "Rechercher les contre-exemples et exceptions à un effet supposé"
+  },
+  {
+    "key": "OP07",
+    "description": "Rejoindre un point d'exploration accessible et utile à un objectif ouvert"
+  },
+  {
+    "key": "OP08",
+    "description": "Chercher les compositions qui peuvent satisfaire les préconditions d'une composition voulue"
+  },
+  {
+    "key": "OP09",
+    "description": "Identifier les compositions communes à toutes les alternatives complètes"
+  },
+  {
+    "key": "OP10",
+    "description": "Identifier les compositions correspondant aux objectifs terminaux déclarés"
+  },
+  {
+    "key": "OP11",
+    "description": "Identifier les compositions qui débloquent d'autres compositions"
+  },
+  {
+    "key": "OP12",
+    "description": "Identifier les inconnues dans les dépendances d'une composition bloquée"
+  },
+  {
+    "key": "OP13",
+    "description": "Délimiter la portée observée et les limites inconnues de l'effet d'une composition"
+  },
+  {
+    "key": "OP14",
+    "description": "Filtrer les compositions par les contraintes et préconditions connues"
+  },
+  {
+    "key": "OP15",
+    "description": "Choisir les contributions intermédiaires actuellement réalisables vers l'objectif"
+  },
+  {
+    "key": "OP16",
+    "description": "Lister les blocages globaux prouvés, en conservant les inconnues"
+  },
+  {
+    "key": "OP17",
+    "description": "Examiner les réagencements et resets explicitement autorisés"
+  },
+  {
+    "key": "OP18",
+    "description": "Lister les compositions inconnues dont un test ferait progresser la connaissance"
+  },
+  {
+    "key": "OP19",
+    "description": "Dérouler un préfixe de coups explicitement prouvés obligatoires"
+  },
+  {
+    "key": "OP20",
+    "description": "Conserver des hypothèses d'utilité pour les objets encore inexpliqués"
+  },
+  {
+    "key": "OP21",
+    "description": "Conserver des hypothèses d'utilité pour les espaces encore inexpliqués"
+  },
+  {
+    "key": "OP22",
+    "description": "Lister les espaces reliés par des effets à distance observés"
+  },
+  {
+    "key": "OP23",
+    "description": "Simuler les entités selon leurs cycles ou transitions explicitement observés"
+  },
+  {
+    "key": "OP24",
+    "description": "Chercher un détour au même résultat causal qui respecte les contraintes"
+  },
+  {
+    "key": "OP25",
+    "description": "Choisir une composition à atteindre, maintenir ou explorer"
+  },
+  {
+    "key": "OP26",
+    "description": "Chercher les accès admissibles à une composition cible"
+  },
+  {
+    "key": "OP27",
+    "description": "Chercher les permutations préservant les compositions protégées"
+  },
+  {
+    "key": "OP28",
+    "description": "Engager un ensemble d'actions validé vers une composition intermédiaire"
+  },
+  {
+    "key": "OP29",
+    "description": "Comparer la composition obtenue et ses effets aux attentes"
+  },
+  {
+    "key": "OP30",
+    "description": "Réviser les connaissances sur une composition à partir des observations"
+  },
+  {
+    "key": "OP31",
+    "description": "Réexaminer la pertinence de la composition cible après un changement"
+  }
+]

@@ -8,6 +8,8 @@ import stckTowerEffects from './stck-tower-effects.json';
 import { compareDirectionTargets, summarizeDirections, type DirectionalReturn } from './directional-return.ts';
 import ls20Directions from './ls20-direction-review.json';
 import ls20ShapeExit from './ls20-review-evidence.json';
+import { captureDecisionSprites, type NativeResolution } from './native-resolution.ts';
+import compositionOperations from './composition-operations.json';
 import type { GameObservation } from '../runtime/browser-games.ts';
 import { compareAboveColors, contrastClickContexts, describeClickContext, type ClickEffectCount } from './click-evidence.ts';
 import type { Applicability, ControlEffectResolution } from './know-control-effect.ts';
@@ -238,15 +240,24 @@ function renderMechanisms(panel: HTMLElement, groups: ReturnType<typeof summariz
   }
 }
 
-function renderRoles(panel: HTMLElement, returns: readonly DirectionalReturn[], palette: readonly string[]): void {
+function renderRoles(panel: HTMLElement, returns: readonly DirectionalReturn[], palette: readonly string[], level: number | undefined): void {
   const container = panel.querySelector<HTMLElement>('[data-sic-roles]')!;
   const title = document.createElement('h4');
   title.textContent = 'Roles under discovery';
-  const latest = [...returns].reverse().find(item => item.translation || item.stationary);
+  const local = returns.filter(item => item.fromLevel === level && item.toLevel === level);
+  const latest = [...local].reverse().find(item => item.translation || item.stationary);
   const note = document.createElement('p');
   note.textContent = latest ? 'These roles describe what the sprites did in the observed return. Their game-specific meaning is still open.'
     : 'No role assigned yet. Roles start from the observed behavior of sprites.';
   container.replaceChildren(title, note);
+  const rotation = [...local].reverse().find(item => item.rotation);
+  if (rotation?.rotation) {
+    const label = document.createElement('strong');
+    label.textContent = `Rotation changer · observed at action ${rotation.sequence}`;
+    container.append(label, renderFrames([
+      ['Tile entered', rotation.rotation.tile], ['Indicator before', rotation.rotation.before], ['Indicator after', rotation.rotation.after],
+    ], palette));
+  }
   if (!latest) return;
   container.append(renderFrames([
     ['Tracked sprite', latest.translation?.sprite ?? latest.stationary?.sprite ?? null],
@@ -857,6 +868,9 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
     }));
   };
   const repeated = groups.filter(group => group.repeated);
+  const native = view?.native;
+  const lastPlan = [...returns].reverse().find(item => item.fromLevel === board?.level && item.decision)?.decision;
+  const planSource = native?.pending ? native : lastPlan ?? (native?.steps.length ? native : null);
   describe('[data-sic-strategy-body]', [
     view?.native?.family ? `Native 0.68 · Selected method: ${nativeLabel(view.native.family)}.`
       : repeated.length ? `Observed patterns: ${repeated.map(group => `${commands[group.command]} (${group.moved} matching translations)`).join(', ')}.`
@@ -865,11 +879,33 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
       : view?.native?.family ? 'The native trace has no retained purpose for this selection.'
         : 'No solving strategy established. Compare conditions before generalizing a return.',
   ]);
+  const strategies = panel.querySelector('[data-sic-strategy-body]')!;
+  const operation = planSource?.operation;
+  const catalog = document.createElement('details');
+  catalog.className = 'sic-details';
+  const catalogTitle = document.createElement('summary');
+  catalogTitle.textContent = operation ? `Composition operations · ${operation} in this plan` : 'Composition operations · OP01–OP31';
+  const distinction = document.createElement('p');
+  distinction.textContent = 'These are symbolic operations on compositions. Only a code published with this proposal is attributed to the plan.';
+  const entries = document.createElement('ol');
+  for (const item of compositionOperations) {
+    const row = document.createElement('li');
+    row.textContent = `${item.key} · ${item.description}${item.key === operation ? ' · attached to this plan' : ''}`;
+    entries.append(row);
+  }
+  catalog.append(catalogTitle, distinction, entries);
+  strategies.append(catalog);
+  const composition = native?.compositions.find(item => item.id === planSource?.composition);
+  if (planSource?.composition) {
+    const line = document.createElement('p');
+    line.textContent = composition?.role ? `Composition role: ${nativeLabel(composition.role)}${composition.observed === false ? ' · proposed' : ''}.`
+      : 'This plan references a native composition; no role was retained.';
+    strategies.append(line);
+  }
   const progress = board ? `Public progress: ${board.levelsCompleted} completed · current level ${board.level} of ${board.levelCount}.` : 'Waiting for the board.';
   describe('[data-sic-objective-body]', [progress, board?.state === 'WIN' ? 'The game reports victory.'
     : board?.state === 'LEVEL_COMPLETE' ? 'The game reports level completion.'
-    : view?.native?.objective === 'G_official_completion' ? 'Current native objective: advance the level as reported by the game.'
-      : 'The condition that completes this level is still unknown.']);
+    : describePlanObjective(planSource) ?? 'The condition that completes this level is still unknown.']);
   const last = returns.slice(-5);
   describe('[data-sic-plan-body]', [
     last.length ? `Recent actions (${mode}): ${last.map(item => commands[item.command]).join(' → ')}.` : 'No action return recorded in this session.',
@@ -877,7 +913,12 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
       : 'No current native condition retained.',
   ]);
   const plan = panel.querySelector('[data-sic-plan-body]')!;
-  const native = view?.native;
+  const objective = describePlanObjective(planSource);
+  if (objective) {
+    const line = document.createElement('p');
+    line.textContent = objective;
+    plan.append(line);
+  }
   if (native?.steps.length) {
     const heading = document.createElement('p');
     heading.textContent = native.pending ? 'Sequence proposed by 0.68; only the marked step is currently authorized.'
@@ -889,6 +930,10 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
       list.append(row);
     });
     plan.append(heading, list);
+    if (board && native.pending && native.subjects.length) {
+      const subjects = captureDecisionSprites(native, board.frame, null).sprites;
+      plan.append(renderFrames(subjects.map(item => [item.label, item.before] as const), palette));
+    }
   }
   if (native?.outcome) {
     const outcome = document.createElement('p');
@@ -898,21 +943,66 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
       + (native.outcome.reason ? ` ${nativeLabel(native.outcome.reason)}.` : '');
     plan.append(outcome);
   }
-  if (native?.history.length) {
+  const history = returns.filter(item => item.nativeCheck).map(item => ({
+    ...item.nativeCheck!, sequence: item.sequence, level: item.fromLevel,
+  }));
+  if (history.length || native?.history.length) {
     const details = document.createElement('details');
     details.className = 'sic-details';
     const title = document.createElement('summary');
     title.textContent = 'Executed steps and native checks';
     const list = document.createElement('ol');
-    for (const event of native.history) {
-      const row = document.createElement('li');
-      const input = returns.find(item => item.sequence === event.sequence);
-      row.textContent = `Action ${event.sequence}${input ? ` · ${commands[input.command]}` : ''} · ${nativeLabel(event.family)} · `
-        + (event.matched === true ? 'prediction matched' : event.matched === false ? 'prediction differed' : 'no verified prediction')
-        + (event.reason ? ` · ${nativeLabel(event.reason)}` : '');
-      list.append(row);
-    }
-    details.append(title, list);
+    const levels = [...new Set(history.map(item => item.level))].sort((a, b) => b - a);
+    const levelSelect = document.createElement('select');
+    levelSelect.setAttribute('aria-label', 'Executed actions by level');
+    levels.forEach(level => levelSelect.add(new Option(`Level ${level}`, String(level))));
+    const preferred = levels.includes(board?.level ?? 0) ? board!.level : levels[0];
+    if (preferred) levelSelect.value = String(preferred);
+    const renderChecks = () => {
+      list.replaceChildren();
+      const selection = history.length ? history.filter(item => item.level === Number(levelSelect.value)) : native?.history ?? [];
+      for (const event of [...selection].reverse()) {
+        const row = document.createElement('li');
+        const input = returns.find(item => item.sequence === event.sequence);
+        const check = document.createElement('details');
+        const summary = document.createElement('summary');
+        summary.textContent = `Action ${event.sequence}${input ? ` · ${commands[input.command]}` : ''} · ${nativeLabel(event.family)} · `
+          + (event.matched === true ? 'prediction matched' : event.matched === false ? 'prediction differed' : 'no verified prediction')
+          + (event.reason ? ` · ${nativeLabel(event.reason)}` : '');
+        check.append(summary);
+        check.addEventListener('toggle', () => {
+          if (!check.open || check.childElementCount > 1) return;
+          const relevant = input?.decision?.family === event.family ? input.decision : undefined;
+          if (relevant?.sprites.length) {
+            const title = document.createElement('p');
+            title.textContent = 'Regions referenced by the native proposal (same coordinates before and after).';
+            check.append(title, ...relevant.sprites.map(item => renderFrames([
+              [`${item.label} · before`, item.before], ['Same region after', item.after],
+            ], palette)));
+          } else {
+            const missing = document.createElement('p');
+            missing.textContent = 'The native proposal did not provide a sprite location for this step.';
+            check.append(missing);
+          }
+          if (input?.translation || input?.changes?.samples.length) {
+            const title = document.createElement('p');
+            title.textContent = 'Visible return measured independently by SIC.';
+            check.append(title, renderFrames([
+              ['Translated sprite', input.translation?.sprite ?? null],
+              ['Changed region before', input.changes?.samples[0]?.before ?? null],
+              ['Changed region after', input.changes?.samples[0]?.after ?? null],
+            ], palette));
+          }
+        });
+        row.append(check);
+        list.append(row);
+      }
+    };
+    levelSelect.addEventListener('change', renderChecks);
+    renderChecks();
+    details.append(title);
+    if (levels.length) details.append(levelSelect);
+    details.append(list);
     plan.append(details);
   }
   const animations = returns.filter(item => (item.frameCount ?? 0) > 1);
@@ -928,6 +1018,13 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
       return block;
     }));
   }
+}
+
+function describePlanObjective(source: Pick<NativeResolution, 'objective' | 'objectiveSource'> | null | undefined) {
+  if (source?.objective === 'G_official_completion') return 'Native plan objective: complete the current level.';
+  if (source?.objectiveSource === 'native' && source.objective) return `Native plan objective: ${nativeLabel(source.objective)}.`;
+  if (source?.objectiveSource === 'question' && source.objective) return `Immediate aim from the native proposal: ${nativeLabel(source.objective).replace(/[.!?]$/, '')}.`;
+  return source?.objectiveSource === 'unpublished' ? 'A plan exists, but its objective was not retained in the native trace.' : null;
 }
 
 function nativeLabel(value: string): string {
@@ -966,7 +1063,7 @@ export function renderSicPanel(panel: HTMLElement, view: ShadowView | null, pale
   renderDiscoveryPerspectives(panel, view, board, mode, returns, groups, palette);
   renderGameInformation(panel, view?.gameCode === 'STCK', ranks, view, groups, returns);
   renderMechanisms(panel, groups, returns, palette);
-  renderRoles(panel, returns, palette);
+  renderRoles(panel, returns, palette, board?.level);
   renderOfflineReview(panel, view?.gameCode === 'LS20' ? view.frame.scope.level : null, palette);
   renderCardComparisons(panel, palette, view?.gameCode === 'STCK');
   renderTowerEffects(panel, palette, view?.gameCode === 'STCK');

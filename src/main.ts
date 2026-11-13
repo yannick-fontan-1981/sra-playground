@@ -8,7 +8,9 @@ import { bindSicPerspectives, renderSicPanel } from './sic/panel.ts';
 import { readControlEffectShadow } from './sic/shadow.ts';
 import { observeSpace, type SpaceReturn } from './sic/space-return.ts';
 import { compareStckRank, type StckRankTrial } from './sic/stck-stack.ts';
-import { observeDirectionalReturn, samplePublicAnimation, type DirectionalReturn } from './sic/directional-return.ts';
+import { matchObservedRotation, observeDirectionalReturn, samplePublicAnimation, type DirectionalReturn } from './sic/directional-return.ts';
+import { captureDecisionSprites, readNativeResolution, type NativeResolution } from './sic/native-resolution.ts';
+import ls20ReviewEvidence from './sic/ls20-review-evidence.json';
 import { GAME_CATALOG, getGameByCode, type GameCatalogEntry } from './games/catalog';
 
 const websiteRepo = 'https://github.com/yannick-fontan-1981/sra-playground';
@@ -342,13 +344,18 @@ let lastSicReturns: readonly DirectionalReturn[] | null = null;
 let lastSicMode: 'manual' | 'agent' | null = null;
 
 function recordPublicReturn(history: readonly DirectionalReturn[], sessionId: string, sequence: number, command: number,
-  before: GameObservation, next: GameObservation): readonly DirectionalReturn[] {
+  before: GameObservation, next: GameObservation, native?: NativeResolution | null): readonly DirectionalReturn[] {
   try {
+    const boundary = before.level !== next.level || before.state !== next.state;
     const entry = observeDirectionalReturn(
       { sessionId, sequence, command, fromLevel: before.level, toLevel: next.level, frameCount: Math.max(1, next.frames.length),
-        animation: samplePublicAnimation(next.frames) },
-      before.frame, next.frame, before.level !== next.level || before.state !== next.state, history.at(-1));
-    return [...history.filter(item => item.sessionId === sessionId).slice(-31), entry];
+        animation: samplePublicAnimation(next.frames),
+        decision: native ? captureDecisionSprites(native, before.frame, boundary ? null : next.frame) : undefined },
+      before.frame, next.frame, boundary, history.at(-1));
+    const witness = !boundary && before.gameCode === 'LS20'
+      ? ls20ReviewEvidence.rotations.find(item => item.level === before.level) : undefined;
+    const rotation = witness ? matchObservedRotation(entry, before.frame, next.frame, witness) : undefined;
+    return [...history.filter(item => item.sessionId === sessionId).slice(-95), { ...entry, rotation }];
   } catch {
     return history;
   }
@@ -364,6 +371,7 @@ const agent = new BrowserV6Agent({
     const before = observation;
     const sessionId = agentState?.sessionId;
     const sequence = (agentState?.sequence ?? 0) + 1;
+    const nativeSnapshot = agentState;
     busy = true;
     updateInterface();
     try {
@@ -394,7 +402,15 @@ const agent = new BrowserV6Agent({
         }
       }
       if (sessionId && sessionId === agentState?.sessionId) {
-        agentReturns = recordPublicReturn(agentReturns, sessionId, sequence, action.id, before, next);
+        let decision: NativeResolution | null = null;
+        try {
+          if (nativeSnapshot?.level === before.level && nativeSnapshot.phase === 'authorised_not_executed') {
+            decision = readNativeResolution(nativeSnapshot);
+          }
+        } catch {
+          // Explanations never affect dispatch.
+        }
+        agentReturns = recordPublicReturn(agentReturns, sessionId, sequence, action.id, before, next, decision);
       }
       return { observation: next, executionMs };
     } catch (error) {
@@ -402,7 +418,19 @@ const agent = new BrowserV6Agent({
       throw error;
     }
   },
-  onState: state => { agentState = state; updateInterface(); },
+  onState: state => {
+    const last = agentReturns.at(-1);
+    if (last && !last.nativeCheck && last.sessionId === state.sessionId && last.sequence === state.sequence) {
+      try {
+        const outcome = readNativeResolution(state)?.outcome;
+        if (outcome) agentReturns = [...agentReturns.slice(0, -1), { ...last, nativeCheck: outcome }];
+      } catch {
+        // A missed display receipt does not change the native session.
+      }
+    }
+    agentState = state;
+    updateInterface();
+  },
 });
 
 function updateSicPanel(): void {

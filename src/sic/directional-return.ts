@@ -1,5 +1,6 @@
 import { cropReturn, measureChangedRegions, previewChangedRegions } from '../logos-engine/v6-public-return-visuals.ts';
 import type { NativeBox, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { DecisionSprites, NativeResolution } from './native-resolution.ts';
 
 export interface DirectionalReturn {
   readonly sessionId: string;
@@ -8,6 +9,9 @@ export interface DirectionalReturn {
   readonly fromLevel: number;
   readonly toLevel: number;
   readonly frameCount?: number;
+  readonly decision?: DecisionSprites;
+  readonly nativeCheck?: NonNullable<NativeResolution['outcome']>;
+  readonly rotation?: { readonly tile: NativeRows; readonly before: NativeRows; readonly after: NativeRows };
   readonly animation?: readonly { readonly index: number; readonly rows: NativeRows }[];
   readonly changes: ReturnType<typeof previewChangedRegions> | null;
   readonly translation: { readonly from: NativeBox; readonly to: NativeBox; readonly sprite: NativeRows;
@@ -19,6 +23,20 @@ export interface DirectionalReturn {
 const axes: Readonly<Record<number, NativePoint>> = { 1: [0, -1], 2: [0, 1], 3: [-1, 0], 4: [1, 0] };
 const equalAt = (rows: NativeRows, sprite: NativeRows, x: number, y: number) =>
   sprite.every((row, dy) => row.every((color, dx) => rows[y + dy]?.[x + dx] === color));
+
+/** Match a previously verified tile and indicator transition to this actual return. */
+export function matchObservedRotation(receipt: DirectionalReturn, before: NativeRows, after: NativeRows,
+  witness: { readonly tile: NativeRows; readonly before: NativeRows; readonly after: NativeRows }): DirectionalReturn['rotation'] {
+  const target = receipt.translation?.targetBefore;
+  if (!target || JSON.stringify(target) !== JSON.stringify(witness.tile)) return undefined;
+  const matches: NativePoint[] = [];
+  for (let y = 0; y + witness.before.length <= before.length; y++) {
+    for (let x = 0; x + (witness.before[0]?.length ?? 0) <= (before[y]?.length ?? 0); x++) {
+      if (equalAt(before, witness.before, x, y) && equalAt(after, witness.after, x, y)) matches.push([x, y]);
+    }
+  }
+  return matches.length === 1 ? witness : undefined;
+}
 
 export function samplePublicAnimation(frames: readonly NativeRows[]) {
   if (frames.length < 2) return undefined;

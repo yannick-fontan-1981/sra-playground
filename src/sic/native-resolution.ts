@@ -1,3 +1,6 @@
+import { cropReturn } from '../logos-engine/v6-public-return-visuals.ts';
+import type { NativeBox, NativeRows } from '../logos-engine/v6-native-types.ts';
+
 export interface NativeStep {
   readonly action: string;
   readonly expected: string | null;
@@ -8,6 +11,11 @@ export interface NativeResolution {
   readonly proposalKind: string | null;
   readonly question: string | null;
   readonly objective: string | null;
+  readonly objectiveSource: 'native' | 'question' | 'unpublished' | null;
+  readonly operation: string | null;
+  readonly composition: string | null;
+  readonly compositions: readonly { readonly id: string; readonly role: string | null; readonly observed: boolean | null }[];
+  readonly subjects: readonly { readonly label: string; readonly box: NativeBox }[];
   readonly guard: string | null;
   readonly pending: boolean;
   readonly steps: readonly NativeStep[];
@@ -19,7 +27,7 @@ export interface NativeResolution {
 
 const record = (value: unknown): Record<string, unknown> | null =>
   value !== null && typeof value === 'object' && !Array.isArray(value) ? value as Record<string, unknown> : null;
-const label = (value: unknown) => typeof value === 'string' && value.length <= 128 ? value : null;
+const label = (value: unknown) => typeof value === 'string' && value.length <= 320 ? value : null;
 const actions: Record<string, string> = { ACTION1: 'Up', ACTION2: 'Down', ACTION3: 'Left', ACTION4: 'Right',
   ACTION5: 'Space', ACTION6: 'Click', ACTION7: 'Action 7' };
 
@@ -85,10 +93,59 @@ export function readNativeResolution(agent: {
   });
   const outcomeFamily = label(result?.family);
   if (!family && !outcomeFamily) return null;
+  const template = record(proposal?.bundle_template);
+  const question = label(record(proposal?.question ?? traced?.question)?.reason) ?? label(template?.purpose);
+  const nativeObjective = label(template?.objective_ref);
+  const objectiveSource = nativeObjective ? 'native' : steps.length && question ? 'question' : steps.length ? 'unpublished' : null;
+  const morphology = record(proposal?.morphology_plan);
+  const pair = record(morphology?.pair);
+  const subjects: NativeResolution['subjects'][number][] = [];
+  const bounds = (value: unknown): NativeBox | null => Array.isArray(value) && value.length === 4
+    && value.every(Number.isSafeInteger) ? [value[0], value[1], value[2], value[3]] : null;
+  if (Array.isArray(pair?.sites)) for (const [index, site] of pair.sites.slice(0, 2).entries()) {
+    const box = bounds(site);
+    if (box) subjects.push({ label: `Pattern compared by the engine ${index + 1}`, box });
+  }
+  const measuredStep = Array.isArray(morphology?.steps) ? record(morphology.steps[Number(guard?.index ?? 0)]) : null;
+  const point = measuredStep?.from;
+  const size = morphology?.size;
+  if (Array.isArray(point) && Array.isArray(size) && point.length === 2 && size.length === 2
+      && [...point, ...size].every(Number.isSafeInteger) && size.every(n => n > 0)) {
+    subjects.push({ label: 'Controlled footprint before the step', box: [point[0], point[1], point[0] + size[0] - 1, point[1] + size[1] - 1] });
+  }
+  const op = label(template?.operation_key);
+  const compositions = Array.isArray(proposal?.compositions) ? proposal.compositions.slice(0, 6).flatMap(item => {
+    const value = record(item);
+    const id = label(value?.id);
+    return id ? [{ id, role: label(value?.role), observed: typeof value?.observed === 'boolean' ? value.observed : null }] : [];
+  }) : [];
   return { family, pending: pending && !!proposal,
-    proposalKind: label(proposal?.kind), question: label(record(proposal?.question ?? traced?.question)?.reason),
-    objective: label(record(proposal?.bundle_template)?.objective_ref), guard: label(guard?.reason),
+    proposalKind: label(proposal?.kind), question,
+    objective: nativeObjective ?? (objectiveSource === 'question' ? question : null), objectiveSource,
+    operation: op && /^OP(?:0[1-9]|[12]\d|3[01])$/.test(op) ? op : null,
+    composition: label(template?.composition_ref), compositions, subjects, guard: label(guard?.reason),
     nextIndex: pending && guard && Number.isSafeInteger(guard.index) ? Number(guard.index) : null, steps,
     history, outcome: outcomeFamily && (result?.matched === null || typeof result?.matched === 'boolean')
       ? { family: outcomeFamily, matched: result.matched, reason: label(result.reason) } : null };
+}
+export interface DecisionSprites {
+  readonly family: string | null;
+  readonly objective: NativeResolution['objective'];
+  readonly objectiveSource: NativeResolution['objectiveSource'];
+  readonly operation: string | null;
+  readonly composition: string | null;
+  readonly question: string | null;
+  readonly sprites: readonly { readonly label: string; readonly before: NativeRows; readonly after: NativeRows | null }[];
+}
+
+export function captureDecisionSprites(decision: NativeResolution, before: NativeRows, after: NativeRows | null): DecisionSprites {
+  const sprites = decision.subjects.flatMap(({ label: name, box }) => {
+    const [x, y, right, bottom] = box;
+    if (x < 0 || y < 0 || x > right || y > bottom || right >= (before[0]?.length ?? 0) || bottom >= before.length) return [];
+    const stride = Math.max(1, Math.ceil(Math.max(right - x + 1, bottom - y + 1) / 20));
+    return [{ label: name, before: cropReturn(before, box, stride),
+      after: after && right < (after[0]?.length ?? 0) && bottom < after.length ? cropReturn(after, box, stride) : null }];
+  });
+  return { family: decision.family, objective: decision.objective, objectiveSource: decision.objectiveSource,
+    operation: decision.operation, composition: decision.composition, question: decision.question, sprites };
 }
