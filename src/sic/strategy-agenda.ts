@@ -41,9 +41,9 @@ export function compileStrategyGraph<Id extends string, Key extends string>(
   return Object.freeze(graph);
 }
 
-function evaluateStrategyGuards<Key extends string>(facts: Readonly<Record<Key, StrategyFact>>,
+function evaluateStrategyGuards<Key extends string>(facts: Readonly<Partial<Record<Key, StrategyFact>>>,
   guards: readonly [StrategyGuard<Key>, ...StrategyGuard<Key>[]]) {
-  const tested = guards.map(guard => ({ ...guard, observed: facts[guard.fact] }));
+  const tested = guards.map(guard => ({ ...guard, observed: facts[guard.fact] ?? { value: 'unknown' as const } }));
   const contradicted = tested.find(guard => guard.observed.value !== 'unknown' && guard.observed.value !== guard.expected);
   const unknown = tested.find(guard => guard.observed.value === 'unknown');
   const applicability: Applicability = contradicted ? 'inapplicable' : unknown ? 'undetermined' : 'applicable';
@@ -93,7 +93,7 @@ function runStrategyAgenda<Id extends string, Plan>(candidates: readonly Strateg
 
 export function resolveStrategyGraph<Id extends string, Key extends string, Plan>({
   graph, facts, mode, planners, priorities = graph.priorities,
-}: { graph: StrategyGraph<Id, Key>; facts: Readonly<Record<Key, StrategyFact>>; mode: 'active' | 'shadow';
+}: { graph: StrategyGraph<Id, Key>; facts: Readonly<Partial<Record<Key, StrategyFact>>>; mode: 'active' | 'shadow';
   planners: Readonly<Record<Id, () => Plan | null>>; priorities?: readonly Id[] }) {
   const candidates = priorities.map(id => {
     const assessment = evaluateStrategyGuards(facts, graph.strategies[id]);
