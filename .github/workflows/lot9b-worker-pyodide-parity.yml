@@ -1,0 +1,44 @@
+name: Lot 9B Worker Pyodide parity
+
+on:
+  push:
+    branches:
+      - recovery/lot9b-worker-pyodide-transport-20261112
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  parity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.18.0'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Node dependencies
+        run: npm ci
+      - name: Prepare pinned Pyodide assets
+        run: node scripts/prepare-python.mjs
+      - name: Show browser runtime
+        run: |
+          command -v google-chrome-stable || command -v google-chrome || command -v chromium || command -v chromium-browser
+          (google-chrome-stable --version || google-chrome --version || chromium --version || chromium-browser --version)
+      - name: Test parity contract
+        run: node --test tests/worker-pyodide-parity-contract.test.mjs
+      - name: Qualify Worker Pyodide parity
+        env:
+          LOT9B_WORKER_PYODIDE_REPORT: lot9b-worker-pyodide-parity-report.json
+        run: node scripts/qualify-worker-pyodide-parity.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lot9b-worker-pyodide-parity
+          path: lot9b-worker-pyodide-parity-report.json
+          if-no-files-found: warn

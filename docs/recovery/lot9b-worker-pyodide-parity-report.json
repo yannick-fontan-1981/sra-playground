@@ -1,0 +1,121 @@
+{
+  "version": 1,
+  "status": "worker-pyodide-functional-parity-qualified",
+  "qualification": "functional-parity-only-not-official-performance",
+  "transport": "BrowserGameRuntime -> game-worker.ts -> Pyodide -> game_bridge.py -> custom-games.zip",
+  "timingDisposition": "not_measured_for_acceptance",
+  "runtime": {
+    "reference": "cpython-custom-games-archive",
+    "candidate": "browser-game-worker-pyodide",
+    "referenceBackend": "python-native-archive",
+    "candidateBackend": "python-wasm",
+    "pyodideVersion": "314.0.7",
+    "browserPython": "3.14.2",
+    "node": "22.18.0",
+    "chrome": "156.0.8078.79"
+  },
+  "parity": {
+    "samplesCompared": 4,
+    "stepsCompared": 31,
+    "allMatched": true,
+    "fields": [
+      "game",
+      "actionsRequested",
+      "gameId",
+      "initial.frameHash",
+      "initial.availableActionIds",
+      "initial.state",
+      "initial.level",
+      "initial.levelsCompleted",
+      "steps.action",
+      "steps.changedPixelCount",
+      "steps.frameHash",
+      "steps.availableActionIds",
+      "steps.state",
+      "steps.level",
+      "steps.levelsCompleted"
+    ]
+  },
+  "samples": {
+    "STCK_3": {
+      "gameId": "stck-c0000001",
+      "initialFrameHash": "80a028f10a54e97bddb3130b5089a5b3902b2bfde249876864aa9610f728c25f",
+      "actions": [
+        { "id": 6, "x": 4, "y": 52 },
+        { "id": 6, "x": 4, "y": 52 },
+        { "id": 6, "x": 4, "y": 52 }
+      ],
+      "changedPixelCounts": [211, 138, 95],
+      "frameHashes": [
+        "611e1df20f0e74e6dbdf7725bbf6788987c644195d550a141cde2c181fd47404",
+        "63a4b066b1f9b0d98f69c9f8db606c3c2513b98f2e2a9fe36fdbc0c1bb9f9d1d",
+        "dd61d6f622877a6e2fa5f5dbffe1f6e5938b82d463f6ed3a44a35ed5cacc9ce7"
+      ],
+      "matched": true
+    },
+    "STCK_10": {
+      "gameId": "stck-c0000001",
+      "initialFrameHash": "80a028f10a54e97bddb3130b5089a5b3902b2bfde249876864aa9610f728c25f",
+      "actions": [
+        { "id": 6, "x": 4, "y": 52 },
+        { "id": 6, "x": 4, "y": 52 },
+        { "id": 6, "x": 4, "y": 52 },
+        { "id": 6, "x": 4, "y": 52 },
+        { "id": 6, "x": 6, "y": 56 },
+        { "id": 6, "x": 4, "y": 52 },
+        { "id": 6, "x": 6, "y": 56 },
+        { "id": 6, "x": 4, "y": 52 },
+        { "id": 6, "x": 6, "y": 56 },
+        { "id": 6, "x": 4, "y": 52 }
+      ],
+      "changedPixelCounts": [211, 138, 95, 64, 64, 64, 64, 64, 64, 64],
+      "frameHashes": [
+        "611e1df20f0e74e6dbdf7725bbf6788987c644195d550a141cde2c181fd47404",
+        "63a4b066b1f9b0d98f69c9f8db606c3c2513b98f2e2a9fe36fdbc0c1bb9f9d1d",
+        "dd61d6f622877a6e2fa5f5dbffe1f6e5938b82d463f6ed3a44a35ed5cacc9ce7",
+        "6ae43263d7129f3367e39791ba6e8b64178b61711b4c81da8b0f5a9407a3daf4",
+        "f2066e2d20cca8307c247c060f67dfd6afb025dbae1a3af4af0e2248e45aa8ff",
+        "6ae43263d7129f3367e39791ba6e8b64178b61711b4c81da8b0f5a9407a3daf4",
+        "f2066e2d20cca8307c247c060f67dfd6afb025dbae1a3af4af0e2248e45aa8ff",
+        "6ae43263d7129f3367e39791ba6e8b64178b61711b4c81da8b0f5a9407a3daf4",
+        "f2066e2d20cca8307c247c060f67dfd6afb025dbae1a3af4af0e2248e45aa8ff",
+        "6ae43263d7129f3367e39791ba6e8b64178b61711b4c81da8b0f5a9407a3daf4"
+      ],
+      "matched": true
+    },
+    "SMLP_3": {
+      "gameId": "smlp-c3000001",
+      "initialFrameHash": "0be203b6ce80ac043c30f42b08b925eeccb433d124957070d77b93903e67635c",
+      "action": { "id": 6, "x": 32, "y": 26 },
+      "repetitions": 3,
+      "changedPixelCountPerAction": 9,
+      "frameHashAlternation": [
+        "90888a03979b86c5f515ab0e21b11512314861cd067517f5d34705a23bbac1ac",
+        "0be203b6ce80ac043c30f42b08b925eeccb433d124957070d77b93903e67635c"
+      ],
+      "matched": true
+    },
+    "SMLP_15": {
+      "gameId": "smlp-c3000001",
+      "initialFrameHash": "0be203b6ce80ac043c30f42b08b925eeccb433d124957070d77b93903e67635c",
+      "action": { "id": 6, "x": 32, "y": 26 },
+      "repetitions": 15,
+      "changedPixelCountPerAction": 9,
+      "frameHashAlternation": [
+        "90888a03979b86c5f515ab0e21b11512314861cd067517f5d34705a23bbac1ac",
+        "0be203b6ce80ac043c30f42b08b925eeccb433d124957070d77b93903e67635c"
+      ],
+      "matched": true
+    }
+  },
+  "githubActions": {
+    "runId": 43352422359,
+    "jobId": 131646423929,
+    "qualifiedHeadSha": "db27cfd16bbf6d7d8c439951964a4b3b418a919c",
+    "contractTestsPassed": 4,
+    "contractTestsFailed": 0,
+    "artifactId": 14003939069,
+    "artifactZipSha256": "2a775384ad45d401ad893a7d14af1799080b342624973db06773a5372ebf0f38"
+  },
+  "next": "pin explicit A/B sourceRef identities before creating the official runner manifest"
+}
