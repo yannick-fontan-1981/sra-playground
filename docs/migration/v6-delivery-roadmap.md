@@ -1,13 +1,14 @@
-# V6 delivery roadmap — canonical reconstruction
+# V6 delivery roadmap - canonical reconstruction
 
-> Reconstructed on 2026-11-12 from durable GitHub evidence.
+> Reconstructed from durable GitHub evidence.
 >
-> This document is **not** the lost historical roadmap and does not certify that
-> the current GitHub tree is identical to Site 109 / native 0.68.
+> This roadmap does not certify that the current tree is identical to Site 109
+> or native 0.68. Historical counts remain evidence only until the canonical
+> registry is reconstructed and verified.
 
 ## 1. Canonical source and publication rule
 
-Canonical code source:
+Repository:
 
 `yannick-fontan-1981/sra-playground`
 
@@ -17,265 +18,270 @@ Canonical reconstruction branch:
 
 Mandatory publication chain:
 
-`work → tests → commit → push GitHub → integrate canonical reconstruction → Site publish → verify GitHub SHA ↔ Site SHA`
+`work -> tests -> commit -> push GitHub -> integrate canonical branch -> publish Site -> verify Site SHA against GitHub SHA`
 
-No Site publication is authorized from an unpushed or temporary-only checkout.
+No useful change may remain only in a temporary checkout or Site environment.
 
-## 2. Historical reference, evidence only
+## 2. Historical reference
 
-The historical target being reconstructed is recorded as:
+Unresolved historical target:
 
 - Site 109;
-- historical native version 0.68;
-- historical registry count 70/76;
-- historical Site/source SHA `d90ce5b64fffa53cca201e2a6a49450fd123f299`.
+- native version 0.68;
+- historical count 70/76;
+- unresolved Site/source SHA `d90ce5b64fffa53cca201e2a6a49450fd123f299`.
 
-That SHA is not resolvable in the accessible GitHub repository.
+The former Lot 9 candidate 0.69 and its historical 71/76 claim are not promoted
+into the current reconstruction.
 
-Therefore the current reconstruction must not be described as an exact Site 109
-copy until parity is re-established.
+## 3. Reconstructed V6 foundation
 
-Historical Lot 9 evidence also records a former 0.69 candidate at 71/76 and
-28/33 material, but its source checkpoint is unresolved and that count is not
-promoted to the current reconstruction.
+The canonical branch contains qualified reconstructions for:
 
-## 3. Current reconstructed V6 foundation
-
-The canonical branch currently contains and has targeted functional evidence for:
-
-- V6 operations;
-- composition engine;
-- native authority;
+- V6 operations OP01 to OP31;
+- composition engine and native authority;
 - target binding;
-- operation cache;
-- operation cycle;
-- operation trace.
+- operation cache, cycle and trace;
+- public observation transport;
+- neutral common caller;
+- common OP18/OP28 campaign owner;
+- browser/product and Worker campaign seams;
+- public observation measurement and delta;
+- bounded live-game campaign helpers;
+- ABBA performance harness and explicit native runners.
 
-Targeted V6-core qualification recorded by Lot 9 restart:
+The operation audit documents remain authoritative for each
+need -> call -> result -> consumer -> decision-effect disposition.
 
-**27/27 tests passed.**
+## 4. Lot 9
 
-The OP01–OP31 recovery lane has additionally reconstructed operation contracts,
-tracing and core calculation coverage. Its own audit documents remain the
-authority for operation-by-operation dispositions.
+### 4.1 9A `chart_navigation`
 
-## 4. Lot 9 reconstruction
+Historical evidence is preserved, but the exact historical implementation is
+not reconstructed on the canonical branch.
 
-### 4.1 9A — `chart_navigation`
+Status:
 
-Historical behavior and qualification are documented in prior evidence, but the
-historical ChartNavigation source has not been recovered into the canonical
-GitHub reconstruction.
+**historical evidence preserved; current implementation unresolved.**
 
-Current status:
+### 4.2 9B `region_intervention`
 
-**historical evidence preserved; current implementation not reconstructed.**
+9B is a new evidence-bounded reconstruction, not the lost 0.69 source.
 
-Do not count historical ChartNavigation as present in the current registry.
+Qualified boundaries include:
 
-### 4.2 9B — `region_intervention`
+- Region model and owner;
+- neutral caller integration;
+- public Worker transport;
+- public pixel delta and Region evidence;
+- explicit `methodRef` binding with no similarity-based invention;
+- four explicit A/B x STCK/SMLP runners;
+- public ACTION6 corpus on the real game archive;
+- Worker/Pyodide transport parity;
+- pinned A/B `sourceRef` identities;
+- runner manifest and strict ABBA protocol.
 
-The historical 0.69 implementation could not be recovered exactly. A new,
-evidence-bounded implementation is being reconstructed explicitly as a new
-implementation.
+Official performance proof:
 
-Durably integrated components:
+- GitHub Actions run `43356109888`;
+- job `131649311850`;
+- qualified commit `7d2788f9e9278dc657e5ad12e6e4e1002f3559f1`;
+- 8 warmup sessions and 24 excluded warmup actions;
+- 32 measured sessions and 400 measured actions;
+- no measured sample removed;
+- STCK reference median `3.700 ms`;
+- STCK candidate median `3.600 ms`;
+- STCK delta `-2.7027027027026976%`;
+- SMLP reference median `2.600 ms`;
+- SMLP candidate median `2.600 ms`;
+- SMLP delta `0%`;
+- both games strictly below `+10%`;
+- accepted: `true`.
 
-- `src/logos-engine/v6-region-intervention.ts`
-- `src/logos-engine/v6-region-intervention-owner.ts`
-- `src/logos-engine/v6-neutral-common-caller.ts`
-- `src/logos-engine/v6-region-caller-adapter.ts`
-- `src/runtime/v6-agent-worker-core.ts`
-- `src/runtime/v6-agent-worker.ts`
-- `src/logos-engine/v6-public-observation-delta.ts`
-- `src/logos-engine/v6-region-public-evidence.ts`
-- `tests/helpers/v6-live-game-campaign.ts`
-- `scripts/measure-native-loop-costs.mjs`
+Status:
 
-Current targeted evidence:
+**functionally and officially performance-qualified in the reconstructed 9B scope.**
 
-| Area | Tests | Status |
-| --- | ---: | --- |
-| reconstructed V6 core | 27/27 | passed |
-| Region core + owner | 19/19 | passed |
-| neutral caller + Region integration | 12/12 | passed |
-| worker core + public shell | 14/14 | passed |
-| public observation delta + Region evidence | 12/12 | passed |
-| generic bounded live-campaign helper | 7/7 | passed |
-| ABBA cost protocol/orchestrator | 8/8 | passed |
-| explicit native session adapter | 9/9 | passed |
-| **Total targeted evidence** | **108/108** | **passed** |
+Limits retained:
 
-Important semantic limits:
+- no historical source identity claim;
+- no inferred equivalence between unrelated Region methods;
+- no registry count increment;
+- no Site publication claim.
 
-- no historical owner priority is invented;
-- multiple owner proposals remain `ambiguous`;
-- public pixel deltas do not infer a `methodRef`;
-- Region method reuse requires an explicit justified `methodRef`;
-- the default public worker decision port is
-  `reconstruction-pending-perception` and does not invent an action;
-- the generic campaign helper is not claimed to reproduce the historical
-  STCK/SMLP campaign corpus;
-- the cost harness reconstructs the ABBA protocol and arithmetic, not the lost
-  historical CLI/checkouts/native runner;
-- `scripts/native-loop-session-adapter.mjs` dispatches only to four explicit
-  A/B × STCK/SMLP runners and owns neither timing nor corpus.
+Proofs:
 
-Current Lot 9B status:
+- `docs/recovery/lot9b-official-abba-performance-qualified.md`;
+- `docs/recovery/lot9b-completion-and-lot9c-roadmap.md`;
+- `docs/recovery/native-loop-source-refs.json`;
+- `docs/recovery/native-loop-runner-manifest.json`.
 
-**functionally qualified for the reconstructed component boundaries above;
-native STCK/SMLP runner and official performance remain to be confirmed.**
+### 4.3 9C `joint_channels`
 
-### 4.3 9C — `joint_channels`
+#### 9C0 recovery audit
 
-Not yet reconstructed on the canonical GitHub baseline.
+No exact historical implementation or checkpoint was recovered. The durable
+contract is behavioral: multiple symbolic channels may contribute distinct,
+compatible evidence to one action without creating hidden priority or erasing
+independent ambiguity.
 
-Start only after the shared caller/perception contracts used by 9B are stable
-enough to avoid duplicating incompatible infrastructure.
+Status:
+
+**audit complete; exact historical source unresolved.**
+
+#### 9C1 bounded causal owner
+
+Integrated components:
+
+- `src/logos-engine/v6-joint-channel-owner.ts`;
+- `src/logos-engine/v6-joint-channel-action.ts`;
+- common campaign integration.
+
+Qualified properties:
+
+- at least two explicit contributions are required;
+- compatibility is exact, not ranked;
+- incompatible actions remain unresolved;
+- an independent proposal remains ambiguous beside a joint proposal;
+- a selected return is routed once to every contributor;
+- one missing contribution removes the action.
+
+Qualification:
+
+- production build: PASS;
+- targeted causal tests: **8/8 PASS**;
+- TypeScript regression suite: **344/344 PASS**.
+
+Status:
+
+**generic bounded joint owner functionally qualified.**
+
+#### 9C2 real public producers
+
+Real qualified producers:
+
+1. `public_action_availability_v1`
+   - contributes current ACTION6 admissibility from the public action list;
+   - contributes no target geometry.
+2. `public_visible_target_v1`
+   - contributes one revalidated visible SMLP gate and addressed ACTION6
+     coordinates from the public 64x64 palette frame;
+   - reads no hidden game state, fixture, route or prepared solution.
+
+The two channels produce distinct evidence identities and one exact compatible
+release contract.
+
+Real corpus qualification:
+
+- archive: `public/python/custom-games.zip`;
+- game: SMLP `smlp-c3000001`;
+- seed: 0;
+- selected action: `ACTION6(x=32, y=26)`;
+- changed public pixels: `9`;
+- removing either producer yields no action;
+- selected return acquired by both channels.
+
+GitHub Actions evidence:
+
+- run `43361101707`;
+- job `131674532862`;
+- qualified head `9b8a3b56b806537782e63c946fe529ffe78a776a`;
+- production build: PASS;
+- targeted 9C2 tests: **7/7 PASS**;
+- real archive qualifier: PASS;
+- complete TypeScript regression suite: **351/351 PASS**;
+- failures, cancellations, skipped tests and TODOs: `0`.
+
+Status:
+
+**9C2 functionally qualified on a real public SMLP corpus; official 9C performance remains open.**
+
+Proof:
+
+`docs/recovery/lot9c2-public-addressed-joint-channels.md`
 
 ## 5. Performance contract
 
-Recovered official protocol:
+The strict official protocol remains:
 
-- order: A1 → B1 → B2 → A2;
-- each series runs STCK then SMLP;
-- one warmup per game/series;
-- warmup: 3 actions;
-- four measured sessions per game/series;
-- STCK measured session: 10 actions;
-- SMLP measured session: 15 actions;
-- total warmups: 8 sessions / 24 actions;
-- total measured: 32 sessions / 400 actions;
-- no measured-sample removal;
+- A1 -> B1 -> B2 -> A2;
+- STCK and SMLP evaluated separately;
+- 8 warmup sessions, 24 excluded warmup actions;
+- 32 measured sessions, 400 measured actions;
 - no hidden retry;
-- STCK and SMLP evaluated separately.
-
-Acceptance:
-
-- STCK complete-session global median increase **strictly < +10%**;
-- SMLP complete-session global median increase **strictly < +10%**;
-- exactly +10% fails;
+- no measured sample removal;
 - no cross-game compensation;
-- an internal phase may exceed +10% when the global of the same game remains
-  strictly below +10%;
-- phase overruns remain visible in the evidence.
+- acceptance requires each game to remain strictly below `+10.000%`;
+- exactly `+10.000%` fails;
+- internal phase overruns remain visible but do not fail when the same game's
+  complete-session global delta passes.
 
-Current performance status:
+9B has passed this protocol.
 
-**performance official to be confirmed.**
+9C has not yet run an official performance comparison because the current real
+functional corpus proves the two-producer joint only on SMLP. A comparable STCK
+joint path or an explicit evidence-backed disposition is still required before
+an official two-game ABBA run.
 
-No current reconstruction benchmark result is claimed.
+## 6. Immediate roadmap
 
-Historical 0.68-vs-0.67 cost numbers remain historical evidence only and must
-not be reused as qualification of the reconstructed baseline.
-
-## 6. Missing prerequisites before official Lot 9B cost
-
-Still required:
-
-1. durable, justified producer/binder for Region `methodRef`;
-2. decision port connecting public observation/perception to owner contexts;
-3. four explicit native runners A/STCK, A/SMLP, B/STCK and B/SMLP with durable corpus/fixtures and a qualified timing scope;
-4. official measurement execution under the recovered ABBA protocol;
-5. independent result review and preservation of all measured samples;
-6. explicit reconstruction registry / entry-point progress before making any
-   current 70/76 or 71/76 claim.
-
-The files below are no longer missing, but their reconstructed scope must remain
-explicit:
-
-- `src/runtime/v6-agent-worker.ts`;
-- `tests/helpers/v6-live-game-campaign.ts`;
-- `scripts/measure-native-loop-costs.mjs`.
+| Step | Status | Next proof |
+| --- | --- | --- |
+| 9B functional reconstruction | complete | preserve regressions |
+| 9B Worker/Pyodide parity | complete | preserve source identities |
+| 9B official ABBA | complete, PASS | preserve all samples |
+| 9C0 historical audit | complete | preserve unresolved identity |
+| 9C1 bounded joint owner | complete | preserve neutral ambiguity |
+| 9C2 real SMLP producers | complete | preserve causal removal proof |
+| **9C3 second corpus/performance boundary** | **open** | **qualify STCK joint path or record evidence-backed non-applicability, then define A/B timing** |
+| current reconstruction registry | open | rebuild before count claims |
+| Site publication | blocked | only from an integrated GitHub-qualified SHA |
 
 ## 7. Other recovery lanes
 
 ### Lot 5
 
-Recovery branch:
-
-`recovery/lot5-canonical-buffer`
-
-Its historical candidate must not be treated as restored until its exact source
-or a newly requalified reconstruction is present on the canonical branch.
+Core FieldStock, OP18 and common campaign seams are functionally qualified in
+their reconstructed scopes. Activation, broader acquisition and restoration
+remain governed by Lot 5 proof documents.
 
 ### Lot 6
 
-Recovery branch:
-
-`recovery/lot6c-product-dispatch`
-
-Canonical reconstruction contains durable Lot 6 recovery/runtime documents and
-product-dispatch work. Lot 6 documents are authoritative for its detailed
-qualification and remaining gaps.
+Product dispatch and presentation work is integrated in the canonical
+reconstruction. Lot 6 documents remain authoritative for detailed status.
 
 ### Lot 8
 
-No complete source branch was recovered.
-
-Any reconstruction must begin from the canonical reconstruction and use only
-durable evidence, without inventing the lost implementation.
+No complete source branch was recovered. Any reconstruction must use durable
+evidence only.
 
 ### Lot 10
 
-Recovery branch:
+Recovery work remains separate until explicitly compared, tested and integrated.
 
-`lot10d-temporal-selection-github-20261112`
+### OP01 to OP31
 
-Its work remains separate until explicitly compared, tested and integrated into
-the canonical reconstruction.
-
-### OP01–OP31
-
-Recovery/audit branch:
-
-`op01-op31-c0-c7-audit`
-
-Core operation reconstruction has been integrated progressively. The
-OP01–OP31 audit documents remain the source for detailed need → call → result →
-consumer → decision-effect dispositions.
+The operation audit and its progress documents remain the detailed source of
+truth for operation reachability and consumer effects.
 
 ## 8. Reconstruction-level gates
 
-The reconstruction is not ready to claim Site109 parity until all of the
-following are satisfied:
+The project must not claim exact Site 109 parity until all of these are true:
 
-1. public/browser/worker runtime complete enough for actual agent execution;
-2. historical published capabilities either reconstructed or explicitly
+1. historical published capabilities are reconstructed or explicitly
    reevaluated;
-3. current entry-point registry rebuilt with evidence-backed counts;
-4. restoration/checkpoint contracts qualified across reconstructed owners;
-5. campaigns reproducible from durable GitHub fixtures;
-6. official STCK/SMLP cost protocol executable with a real native runner;
-7. both global performance budgets accepted independently;
-8. any Site publication linked back to a durable canonical GitHub SHA.
+2. the current entry-point registry is rebuilt from durable evidence;
+3. restoration contracts are qualified across reconstructed owners;
+4. campaigns remain reproducible from GitHub assets;
+5. all required performance budgets pass independently;
+6. any Site publication is linked to a durable canonical GitHub SHA.
 
-## 9. Immediate Lot 9 roadmap
+## 9. Next step
 
-| Step | Status | Next proof |
-| --- | --- | --- |
-| historical Lot 9 recovery audit | complete | preserve unresolved identities |
-| V6 core | targeted functional qualification complete | preserve regression coverage |
-| Region core | reconstructed and qualified | preserve explicit evidence contract |
-| Region owner | reconstructed and qualified | preserve selected/passive dedupe |
-| neutral common caller | reconstructed and qualified | no implicit priority |
-| worker transport boundary | reconstructed and qualified | connect justified decision port |
-| public pixel delta | reconstructed and qualified | preserve no-method-inference rule |
-| generic live campaign helper | reconstructed and qualified | obtain durable STCK/SMLP ports/fixtures |
-| ABBA cost orchestrator | reconstructed and qualified | explicit native adapter available |
-| native session adapter | reconstructed and qualified | provide four real A/B × STCK/SMLP runners |
-| **native STCK/SMLP runners** | **open** | **next priority** |
-| official Lot 9B cost | open | execute after runner restoration |
-| current reconstruction registry | open | rebuild before count claims |
-| 9C `joint_channels` | open | after shared infrastructure stabilizes |
-| Site publication | blocked | only after GitHub-qualified integrated state |
+**Continue with Lot 9C3.**
 
-## 10. Next step
-
-**Recover or reconstruct the four explicit native STCK/SMLP runners from durable
-evidence.**
-
-If the original corpus or runner identity cannot be established, create a new
-runner only when its inputs, session semantics and measured scope can be stated
-explicitly and requalified. Do not substitute unrelated games for STCK/SMLP and
-do not manufacture benchmark numbers.
+Qualify a second real, nonredundant public joint-channel path for STCK, or
+produce a durable evidence-backed disposition explaining why STCK is not a
+valid `joint_channels` exercise. Only then define the 9C A/B source identities,
+timing scope and official ABBA execution. Do not fabricate a STCK channel,
+benchmark corpus or historical count.
