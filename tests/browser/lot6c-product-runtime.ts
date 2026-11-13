@@ -215,18 +215,17 @@ async function main(): Promise<void> {
 
     const rect = canvas.getBoundingClientRect();
     assert(rect.width > 0 && rect.height > 0, 'the compiled browser canvas has no layout size');
-    const clientX = rect.left + rect.width * 0.25;
-    const clientY = rect.top + rect.height * 0.75;
-    const expectedPoint = {
-      x: Math.max(0, Math.min(canvas.width - 1, Math.floor(((clientX - rect.left) / rect.width) * canvas.width))),
-      y: Math.max(0, Math.min(canvas.height - 1, Math.floor(((clientY - rect.top) / rect.height) * canvas.height))),
-    };
-    canvas.dispatchEvent(new MouseEvent('click', {
+    const clickEvent = new MouseEvent('click', {
       bubbles: true,
-      clientX,
-      clientY,
+      clientX: rect.left + rect.width * 0.25,
+      clientY: rect.top + rect.height * 0.75,
       view: window,
-    }));
+    });
+    const expectedPoint = {
+      x: Math.max(0, Math.min(canvas.width - 1, Math.floor(((clickEvent.clientX - rect.left) / rect.width) * canvas.width))),
+      y: Math.max(0, Math.min(canvas.height - 1, Math.floor(((clickEvent.clientY - rect.top) / rect.height) * canvas.height))),
+    };
+    canvas.dispatchEvent(clickEvent);
     const action6BusyDuring = isBusy(canvas);
     await waitFor('ACTION6 terminal presentation', () => (
       requests.length >= 3
