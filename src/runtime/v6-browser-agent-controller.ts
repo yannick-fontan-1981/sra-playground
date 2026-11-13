@@ -1,7 +1,7 @@
 import type { ProductReadinessState } from '../agent-product-dispatch.ts';
 import type { GameObservation } from './browser-games.ts';
 import {
-  createPublicSingleActionBrowserCampaignHost,
+  createFieldStockAndPublicSingleActionBrowserCampaignHost,
   type BrowserCampaignDispatchPorts,
   type BrowserCampaignHostResult,
   type BrowserCommonCampaignHost,
@@ -128,7 +128,8 @@ export class BrowserAgentController {
   #disposed = false;
 
   constructor(options: BrowserAgentControllerOptions = {}) {
-    this.#createHost = options.createHost ?? (() => createPublicSingleActionBrowserCampaignHost());
+    this.#createHost = options.createHost
+      ?? (() => createFieldStockAndPublicSingleActionBrowserCampaignHost());
     this.#makeSessionId = options.makeSessionId
       ?? ((observation, ordinal) => `browser-agent:${observation.gameCode}:${ordinal}`);
     this.#maxActions = options.maxActions ?? 64;
