@@ -1,0 +1,49 @@
+name: Synchronize V6 registry roadmap
+
+on:
+  push:
+    branches:
+      - 'recovery/v6-current-entry-registry-*'
+    paths:
+      - '.github/workflows/v6-current-entry-registry-roadmap-sync.yml'
+      - 'docs/migration/v6-current-entry-registry.json'
+      - 'docs/migration/v6-current-entry-registry/*.json'
+      - 'docs/migration/v6-delivery-roadmap.md'
+      - 'scripts/sync-v6-delivery-roadmap-registry.mjs'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: v6-current-entry-registry-roadmap-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-26.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.18.0
+
+      - name: Synchronize delivery roadmap
+        run: node scripts/sync-v6-delivery-roadmap-registry.mjs
+
+      - name: Commit synchronized roadmap
+        run: |
+          if git diff --quiet -- docs/migration/v6-delivery-roadmap.md; then
+            echo "Roadmap already synchronized."
+            exit 0
+          fi
+          git diff --check
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/migration/v6-delivery-roadmap.md
+          git commit -m "docs(roadmap): close current registry reconstruction"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
