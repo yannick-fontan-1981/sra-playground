@@ -1280,7 +1280,12 @@ function renderGenericTimeline(panel: HTMLElement, container: Element, selected:
       term.textContent = name; value.textContent = description; facts.append(term, value);
     }
     details.append(facts);
-    if (recoveryDecision?.agenda?.length) details.append(renderRecoveryAgenda(recoveryDecision.agenda));
+    if (recoveryDecision?.agenda?.length) {
+      const context = document.createElement('p');
+      context.textContent = recoveryDecision.situationAction === undefined ? 'Judged from the current board.'
+        : `Judged from the board after action ${recoveryDecision.situationAction}.`;
+      details.append(context, renderRecoveryAgenda(recoveryDecision.agenda, recoveryDecision.agendaEvidence));
+    }
     const recoveryOperations = first.decision?.recoveryOperations;
     if (recoveryOperations?.length) {
       const recovery = document.createElement('ol');
@@ -1837,7 +1842,8 @@ export function renderSicPanel(panel: HTMLElement, view: ShadowView | null, pale
     return row;
   }));
 }
-function renderRecoveryAgenda(agenda: readonly AgendaEntry[]): HTMLOListElement {
+function renderRecoveryAgenda(agenda: readonly AgendaEntry[],
+  evidence?: NonNullable<NativeResolution['recoveryDecision']>['agendaEvidence']): HTMLOListElement {
   const ranking = document.createElement('ol');
   ranking.className = 'sic-recovery-timeline';
   ranking.setAttribute('aria-label', 'Contact recovery priority');
@@ -1847,7 +1853,9 @@ function renderRecoveryAgenda(agenda: readonly AgendaEntry[]): HTMLOListElement 
     if (!isContactStrategy(entry.id)) continue;
     const candidate = document.createElement('li');
     const outcome = entry.applicability === 'undetermined' ? 'Applicability uncertain' : outcomes[entry.result];
-    candidate.textContent = `${contactRecoveryStrategies[entry.id]} · ${outcome}. ${entry.reason}`;
+    const actions = evidence?.[entry.id];
+    const sources = actions?.length ? ` Evidence from ${actions.length === 1 ? 'action' : 'actions'} ${actions.join(', ')}.` : '';
+    candidate.textContent = `${contactRecoveryStrategies[entry.id]} · ${outcome}. ${entry.reason}${sources}`;
     ranking.append(candidate);
   }
   return ranking;

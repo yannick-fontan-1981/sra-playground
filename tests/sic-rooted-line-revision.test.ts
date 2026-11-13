@@ -61,6 +61,9 @@ test('an observed push chain unblocks rooted-line search, retaining its estimate
   assert.deepEqual(alternate.actions, [{ action_ref: 'ACTION1' }]);
   assert.equal(alternate.rooted_line_plan.search.predicted_goal_distance, 9);
   assert.equal(alternate.rooted_line_plan.search.sic_decision.needId, revised.rooted_line_plan.search.sic_decision.needId);
+  assert.deepEqual(alternate.rooted_line_plan.search.sic_decision.situation, revised.rooted_line_plan.search.sic_decision.situation);
+  assert.equal(alternate.rooted_line_plan.search.sic_decision.situation.revision, current.observation_ref);
+  assert.ok(alternate.rooted_line_plan.search.sic_decision.situation.facts.availableRootTranslation.evidence.length > 1);
   assert.deepEqual(alternate.rooted_line_plan.search.sic_decision.agenda.map((entry: { id: string; result: string }) => [entry.id, entry.result]),
     [['reposition_root_before_contact', 'selected'], ['revise_rooted_contact', 'lower_priority']]);
   const constrained = memory.propose(current, rows, [], 16, {
@@ -77,6 +80,8 @@ test('an observed push chain unblocks rooted-line search, retaining its estimate
   assert.deepEqual(view?.recoveryDecision?.objective, { id: 'find_ordered_contact_access',
     label: 'Find an access that puts the pieces in the reference order', parent: 'G_official_completion' });
   assert.equal(view?.recoveryDecision?.maxDepth, 88);
+  assert.equal(view?.recoveryDecision?.situationAction, 12);
+  assert.ok(view?.recoveryDecision?.agendaEvidence?.reposition_root_before_contact?.includes(12));
   assert.equal(view?.recoveryDecision?.packDigest, recoveryRevision(defaultRecoveryPack).digest);
   assert.equal(view?.operation, 'OP18');
   assert.deepEqual(view?.recoveryOperations?.map(operation => operation.key), ['OP03', 'OP12', 'OP08', 'OP26']);

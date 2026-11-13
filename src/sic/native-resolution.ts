@@ -48,7 +48,8 @@ export interface NativeResolution {
   readonly searchOperation?: string;
   readonly recoveryOperations?: readonly { key: string; finding: string }[];
   readonly recoveryDecision?: { readonly strategy: string; readonly need: string; readonly objective: SicObjective | null; readonly maxDepth: number;
-    readonly maxNodes: number; readonly packDigest: string | null; readonly agenda?: readonly AgendaEntry[] };
+    readonly maxNodes: number; readonly packDigest: string | null; readonly agenda?: readonly AgendaEntry[];
+    readonly situationAction?: number; readonly agendaEvidence?: Readonly<Partial<Record<ContactStrategy, readonly number[]>>> };
   readonly recoveryAction?: number;
   readonly composition: string | null;
   readonly compositions: readonly { readonly id: string; readonly role: string | null; readonly observed: boolean | null }[];
@@ -86,7 +87,8 @@ function readRecoveryAgenda(value: unknown): AgendaEntry<ContactStrategy>[] {
     if (!isContactStrategy(entry?.id) || !reason
       || (applicability !== 'applicable' && applicability !== 'inapplicable' && applicability !== 'undetermined')
       || (result !== 'selected' && result !== 'no_plan' && result !== 'lower_priority' && result !== 'skipped' && result !== 'shadow')) return [];
-    return [{ id: entry.id, applicability, result, reason }];
+    const evidence = Array.isArray(entry.evidence) ? entry.evidence.slice(0, 16).filter((ref): ref is string => typeof ref === 'string') : [];
+    return [{ id: entry.id, applicability, result, reason, evidence }];
   }) : [];
 }
 
@@ -266,9 +268,14 @@ export function readNativeResolution(agent: {
     target.parent === nativeObjective && nativeObjective
     ? { id: rootedRecoveryStrategy.objective.id, label: targetLabel, parent: nativeObjective } : null;
   const agenda = readRecoveryAgenda(sic?.agenda);
+  const situation = record(sic?.situation);
+  const situationAction = priorAction(situation?.revision) ?? undefined;
+  const agendaEvidence = Object.fromEntries(agenda.map(entry => [entry.id,
+    [...new Set((entry.evidence ?? []).flatMap(ref => priorAction(ref) ?? []))].sort((a, b) => a - b),
+  ]));
   const recoveryDecision = isContactStrategy(sic?.strategy) && recoveryPack?.mode === 'active'
     && maxDepth !== null && maxNodes !== null
-    ? { strategy: contactRecoveryStrategies[sic.strategy], need: rootedRecoveryStrategy.need, objective: recoveryObjective, agenda,
+    ? { strategy: contactRecoveryStrategies[sic.strategy], need: rootedRecoveryStrategy.need, objective: recoveryObjective, agenda, situationAction, agendaEvidence,
       maxDepth, maxNodes, packDigest: typeof sic.packDigest === 'string' && /^[a-f0-9]{64}$/.test(sic.packDigest) ? sic.packDigest : null }
     : undefined;
   const returnedNeed = record(result?.sic_need);

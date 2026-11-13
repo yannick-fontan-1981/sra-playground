@@ -7,10 +7,10 @@ import { measureRootedLine, physicalRootedLine, projectedRootedLine } from './v6
 import { rootedLineEffect, planRootedLine } from './v6-rooted-line-mechanics.ts';
 import { planCellPush, witnessedCellPush } from './v6-rooted-line-revision.ts';
 import { resolveRootedRecovery } from './v6-rooted-line-recovery-operations.ts';
-import { admitContactRecoveryNeed, contactRecoveryOrder, defaultRecoveryPack, rootedRecoveryStrategy,
-  type ContactRecoveryNeed, type ContactStrategy } from '../sic/active-recovery.ts';
+import { admitContactRecoveryNeed, contactRecoveryGraph, contactRecoveryOrder, contactSituation, defaultRecoveryPack,
+  evaluateContactStrategy, rootedRecoveryStrategy, type ContactRecoveryNeed } from '../sic/active-recovery.ts';
 import { recoveryRevision } from '../sic/recovery-pack.ts';
-import { runStrategyAgenda, type Applicability } from '../sic/strategy-agenda.ts';
+import { runStrategyAgenda } from '../sic/strategy-agenda.ts';
 import { symbolicDigest as identity } from './v6-hash.ts';
 import { pythonEqual as equal, pythonTruthy as truth } from './v6-operations.ts';
 import { retainNativeJson } from './v6-native-owned.ts';
@@ -103,22 +103,20 @@ export class RootedLineMemory {
       const vertical = new Set(Object.entries(effects).filter(([, effect]) =>
         Math.abs(effect.root_translation[0]) === scene.unit + 2 && effect.root_translation[1] === 0 && effect.extent_delta === 0)
         .map(([action]) => action));
+      const controlEvidence = [...vertical].flatMap(action => Array.isArray(effects[action]?.evidence_refs)
+        ? effects[action]!.evidence_refs.filter((item: unknown): item is string => typeof item === 'string') : []);
+      const situation = contactSituation(revision, observation.observation_ref, controlEvidence);
       const reposition = 'reposition_root_before_contact';
-      const agenda = runStrategyAgenda((bounds.strategyOrder ?? contactRecoveryOrder).map(id => {
-        const applicability: Applicability = id !== reposition ? 'applicable'
-          : revision.assigned ? 'inapplicable' : vertical.size ? 'applicable' : 'undetermined';
-        const reason = id !== reposition ? 'The current layout has a witnessed whole-cell contact.'
-          : revision.assigned ? 'The need already has a checked step; finish the alignment from its current state.'
-          : vertical.size ? 'A measured root translation is available for the first recovery step.'
-          : 'No measured root translation is available.';
-        return { id, applicability, reason, plan: () => limit >= 1
+      const agenda = runStrategyAgenda((bounds.strategyOrder ?? contactRecoveryOrder).map(id => ({
+        ...evaluateContactStrategy(id, situation), plan: () => limit >= 1
           ? planCellPush(scene, effects, maxDepth, maxNodes - visited, timedOut, {
             allowFirst: id === reposition ? command => vertical.has(command) : undefined,
             visit: () => { visited++; },
           })
-          : null };
-      }), bounds.mode);
+          : null,
+      })), bounds.mode);
       const receipt = { needId: revision.needId, configuration: bounds, packDigest: recoveryRevision(bounds).digest,
+        situation, graph: { id: contactRecoveryGraph.id, version: contactRecoveryGraph.version, order: contactRecoveryGraph.order },
         agenda: agenda.entries, visited };
       if (!agenda.selected) return { status: 'unknown', reason: revision.status === 'shadow' ? 'sic_recovery_shadow' : 'rooted_cell_access_unresolved',
         block_unrelated_probe: true, release_authority: false, recovery_operations: revision.operations,

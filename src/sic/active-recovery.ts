@@ -1,4 +1,5 @@
 import { symbolicDigest } from '../logos-engine/v6-hash.ts';
+import { evaluateStrategyGuards, type StrategyFact, type StrategyGuard } from './strategy-agenda.ts';
 
 export const contactRecoveryStrategies = Object.freeze({
   revise_rooted_contact: 'Revise the contact projection',
@@ -52,6 +53,41 @@ export const rootedRecoveryStrategy = Object.freeze({
   need: 'Restore a projection that accounts for the contact chain',
   objective: { id: 'find_ordered_contact_access', label: 'Find an access that puts the pieces in the reference order' },
 });
+
+type ContactFact = 'wholeCellContact' | 'availableRootTranslation' | 'alreadyAssigned';
+export const contactRecoveryGraph = Object.freeze({
+  id: 'rooted-contact-access',
+  version: 1,
+  order: 'FALLBACK',
+  strategies: {
+    revise_rooted_contact: [
+      { fact: 'wholeCellContact', expected: true, label: 'Whole-cell contact witnessed in the current layout' },
+    ],
+    reposition_root_before_contact: [
+      { fact: 'wholeCellContact', expected: true, label: 'Whole-cell contact witnessed in the current layout' },
+      { fact: 'alreadyAssigned', expected: false, label: 'No checked recovery step yet' },
+      { fact: 'availableRootTranslation', expected: true, label: 'A measured root translation is available' },
+    ],
+  } satisfies Record<ContactStrategy, readonly [StrategyGuard<ContactFact>, ...StrategyGuard<ContactFact>[]]>,
+});
+
+export function contactSituation(choice: { needId: string; evidence: readonly [string, string]; assignmentRef: string | null },
+  observationRef: string, observedTranslations: readonly string[]) {
+  const facts: Record<ContactFact, StrategyFact> = {
+    wholeCellContact: { value: true, evidence: choice.evidence },
+    alreadyAssigned: choice.assignmentRef ? { value: true, evidence: [choice.assignmentRef] }
+      : { value: false, evidence: [observationRef, ...choice.evidence] },
+    availableRootTranslation: observedTranslations.length
+      ? { value: true, evidence: [observationRef, ...new Set(observedTranslations)] } : { value: 'unknown' },
+  };
+  return { id: 'sic-situation:' + symbolicDigest([contactRecoveryGraph.id, choice.needId]), revision: observationRef, facts };
+}
+
+export function evaluateContactStrategy(id: ContactStrategy, situation: ReturnType<typeof contactSituation>) {
+  const guards = evaluateStrategyGuards<ContactFact>(situation.facts, contactRecoveryGraph.strategies[id]);
+  return { id, applicability: guards.applicability, reason: guards.reason,
+    evidence: [...new Set(guards.tested.flatMap(guard => guard.observed.value === 'unknown' ? [] : guard.observed.evidence))] };
+}
 
 export function isRecoveryStop(reason: unknown): reason is 'sic_recovery_shadow' | 'rooted_cell_access_unresolved' {
   return reason === 'sic_recovery_shadow' || reason === 'rooted_cell_access_unresolved';
@@ -107,6 +143,7 @@ export function selectRootedRecovery(pack: RecoveryPack, refutations: readonly R
   if (retained?.id === need.id && retained.status !== 'admitted' && retained.status !== 'assigned') return { status: 'unresolved' } as const;
   return {
     status: pack.mode === 'active' ? 'selected' : 'shadow',
-    needId: need.id, evidence: need.evidence, configuration: pack, assigned: retained?.id === need.id && retained.status === 'assigned',
+    needId: need.id, evidence: need.evidence, configuration: pack,
+    assignmentRef: retained?.id === need.id && retained.status === 'assigned' ? retained.outcomeRef ?? observationRef : null,
   } as const;
 }
