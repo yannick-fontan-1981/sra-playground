@@ -42,4 +42,4 @@ jobs:
           tests/observed-object-binding.test.ts
 
       - name: Run full regression suite
-        run: npm test
+        run: node --experimental-transform-types --test tests/*.test.ts
