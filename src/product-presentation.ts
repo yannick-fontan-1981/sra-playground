@@ -9,6 +9,16 @@ export function isPresentationCurrent(
   return selectedGeneration === currentSelectionGeneration && nextGameCode === selectedGameCode;
 }
 
+export function isPresentationLoopCurrent(
+  presentationGeneration: number,
+  currentPresentationGeneration: number,
+  selectedGeneration: number,
+  currentSelectionGeneration: number,
+): boolean {
+  return presentationGeneration === currentPresentationGeneration
+    && selectedGeneration === currentSelectionGeneration;
+}
+
 export function presentationFrames(
   observation: Pick<GameObservation, 'frames' | 'frame'>,
 ): readonly number[][][] {
