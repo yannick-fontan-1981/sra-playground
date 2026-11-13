@@ -1,0 +1,413 @@
+name: Consolidate official C7 acceptance
+
+on:
+  push:
+    branches:
+      - recovery/op01-op31-browser-field-stock-context-20261112
+
+permissions:
+  contents: write
+
+jobs:
+  consolidate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.18.0'
+          cache: npm
+      - run: npm ci
+      - name: Persist accepted manifest, verifier and recovery documents
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFile, writeFile } from 'node:fs/promises';
+
+          const measurementSha = 'd45f2ce6566d052bbd3477c5653e99ae24381a0a';
+          const strictRun = 43359480072;
+          const strictJob = 131669316899;
+          const repeatRun = 43359480115;
+          const repeatJob = 131669385975;
+
+          function replaceRequired(text, from, to, label) {
+            if (!text.includes(from)) throw new Error(`missing replacement target: ${label}`);
+            return text.replace(from, to);
+          }
+
+          const manifestPath = 'docs/recovery/native-loop-runner-manifest.json';
+          const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
+          manifest.status = 'official-abba-measurement-accepted';
+          manifest.qualification.runnerContractTests = 24;
+          manifest.qualification.finalQualificationRun = {
+            runId: repeatRun,
+            jobId: repeatJob,
+            headSha: measurementSha,
+            node: '22.18.0',
+            typecheck: 'passed',
+            regression: { passed: 335, failed: 0, skipped: 0, cancelled: 0 },
+            build: 'passed',
+            workerPyodideParity: 'passed',
+            nativeContracts: { passed: 24, failed: 0 },
+          };
+          manifest.officialMeasurement = {
+            executed: true,
+            status: 'accepted',
+            accepted: true,
+            protocol: 'A1/B1/B2/A2',
+            isolation: 'non-isolated-shared-github-actions-runner-no-repository-concurrency',
+            thresholdPercent: 10,
+            strictlyLessThan: true,
+            gamesEvaluatedSeparately: true,
+            crossGameCompensationAllowed: false,
+            runId: strictRun,
+            jobId: strictJob,
+            headSha: measurementSha,
+            artifactId: 14007143067,
+            artifactName: 'op01-op31-strict-native-cost-report',
+            games: {
+              STCK: {
+                referenceMedianMs: 59.35,
+                candidateMedianMs: 56.70,
+                relativeIncreasePercent: -4.465037910695669,
+                accepted: true,
+              },
+              SMLP: {
+                referenceMedianMs: 114.70,
+                candidateMedianMs: 120.05,
+                relativeIncreasePercent: 4.664341761117985,
+                accepted: true,
+              },
+            },
+            repeatQualification: {
+              runId: repeatRun,
+              jobId: repeatJob,
+              headSha: measurementSha,
+              accepted: true,
+              games: {
+                STCK: { relativeIncreasePercent: 2.0422535211224613, accepted: true },
+                SMLP: { relativeIncreasePercent: -0.9297520661097125, accepted: true },
+              },
+            },
+          };
+          await writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
+
+          const verifierPath = 'scripts/verify-native-loop-runner-manifest.mjs';
+          let verifier = await readFile(verifierPath, 'utf8');
+          verifier = replaceRequired(
+            verifier,
+            "  if (manifest.status !== 'ready-for-official-abba-measurement') {\n    throw new Error('runner manifest is not ready for official ABBA measurement');\n  }",
+            "  const allowedStatuses = new Set([\n    'ready-for-official-abba-measurement',\n    'official-abba-measurement-accepted',\n  ]);\n  if (!allowedStatuses.has(manifest.status)) {\n    throw new Error('runner manifest has an unsupported ABBA measurement status');\n  }",
+            'verifier status',
+          );
+          verifier = replaceRequired(
+            verifier,
+            "  if (manifest.officialMeasurement.executed !== false || manifest.officialMeasurement.result !== null) {\n    throw new Error('manifest must remain pre-measurement until official ABBA is executed');\n  }",
+            "  const measurement = manifest.officialMeasurement;\n  if (manifest.status === 'ready-for-official-abba-measurement') {\n    if (measurement.executed !== false || measurement.result !== null) {\n      throw new Error('pre-measurement manifest must not claim an official result');\n    }\n  } else {\n    if (!measurement || measurement.executed !== true || measurement.accepted !== true || measurement.status !== 'accepted') {\n      throw new Error('accepted manifest must contain an accepted official ABBA result');\n    }\n    if (!Number.isInteger(measurement.runId) || measurement.runId < 1) {\n      throw new Error('accepted manifest requires a positive official runId');\n    }\n    if (typeof measurement.headSha !== 'string' || measurement.headSha.length < 7) {\n      throw new Error('accepted manifest requires the measured head SHA');\n    }\n    if (measurement.gamesEvaluatedSeparately !== true || measurement.crossGameCompensationAllowed !== false) {\n      throw new Error('accepted manifest must preserve separate per-game acceptance');\n    }\n    for (const game of ['STCK', 'SMLP']) {\n      const result = measurement.games?.[game];\n      if (!result || result.accepted !== true) {\n        throw new Error(`${game} official result is not accepted`);\n      }\n      if (typeof result.relativeIncreasePercent !== 'number'\n        || !(result.relativeIncreasePercent < manifest.protocol.acceptance.thresholdPercent)) {\n        throw new Error(`${game} official result does not satisfy the strict threshold`);\n      }\n    }\n  }",
+            'verifier measurement state',
+          );
+          await writeFile(verifierPath, verifier);
+
+          const reportPath = 'docs/recovery/op01-op31-c7-official-acceptance-20261113.md';
+          const report = [
+            '# OP01–OP31 — acceptation officielle C7',
+            '',
+            'Date : 13 novembre 2026',
+            '',
+            '## Identité qualifiée',
+            '',
+            `- branche : recovery/op01-op31-browser-field-stock-context-20261112 ;`,
+            `- commit mesuré : ${measurementSha} ;`,
+            '- source A : lot9b-region-v1:A:8b795085bfc26379c0736b7e4032fb28b3a78b66c21c63cb18585724c6d37531 ;',
+            '- source B : lot9b-region-v1:B:cdb33000d61a6ccc1df8b6de417be32e2fd04a669fb1a5972de0e3330d3cfc95 ;',
+            '- protocole : A1/B1/B2/A2 ;',
+            '- environnement déclaré : non-isolated-shared-github-actions-runner-no-repository-concurrency.',
+            '',
+            'Cette qualification ferme le critère de coût de la reconstruction courante. Elle ne prétend pas reproduire le matériel historique du Site 109 ni établir une identité binaire avec le runtime 0.68.',
+            '',
+            '## Critère',
+            '',
+            '- médiane globale de chaque jeu strictement inférieure à +10 % ;',
+            '- STCK et SMLP évalués séparément ;',
+            '- aucune compensation entre jeux ;',
+            '- aucune suppression ou substitution d’échantillon mesuré ;',
+            '- une phase interne peut dépasser +10 % si le global du jeu reste sous le seuil.',
+            '',
+            '## Exécution stricte principale',
+            '',
+            `- run : ${strictRun} ;`,
+            `- job : ${strictJob} ;`,
+            `- SHA : ${measurementSha} ;`,
+            '- artifact : 14007143067, op01-op31-strict-native-cost-report ;',
+            '- 40 invocations ;',
+            '- 8 sessions de warmup et 24 actions de warmup ;',
+            '- 32 sessions mesurées et 400 actions mesurées.',
+            '',
+            '| Jeu | Médiane A | Médiane B | Delta global | Verdict |',
+            '| --- | ---: | ---: | ---: | --- |',
+            '| STCK | 59,35 ms | 56,70 ms | −4,4650 % | accepté |',
+            '| SMLP | 114,70 ms | 120,05 ms | +4,6643 % | accepté |',
+            '',
+            'Les deux jeux satisfont indépendamment le seuil strict inférieur à +10 %.',
+            '',
+            '## Répétition indépendante dans la qualification complète',
+            '',
+            `- run : ${repeatRun} ;`,
+            `- job : ${repeatJob} ;`,
+            `- SHA : ${measurementSha} ;`,
+            '- STCK : +2,0423 %, accepté ;',
+            '- SMLP : −0,9298 %, accepté.',
+            '',
+            'Cette seconde exécution confirme l’acceptation sans être utilisée pour compenser ou remplacer le résultat principal.',
+            '',
+            '## Qualification fonctionnelle du même SHA',
+            '',
+            '- Node 22.18.0 ;',
+            '- npm ci réussi ;',
+            '- tsc --noEmit réussi ;',
+            '- 335/335 tests TypeScript réussis ;',
+            '- build Vite réussi ;',
+            '- 100 jeux, 636 prévisualisations et 4 atlas natifs générés ;',
+            '- parité Worker/Pyodide qualifiée ;',
+            '- 24/24 contrats benchmark/sourceRef réussis.',
+            '',
+            'Deux vulnérabilités de dépendances de sévérité haute, déjà présentes, restent signalées par npm ci. Elles ne sont pas introduites par cette tranche.',
+            '',
+            '## Optimisations admises',
+            '',
+            '- calcul du delta public 64×64 avec buffers typés bornés, à sortie équivalente ;',
+            '- identité methodRef minimale sans copie des frames lorsqu’elle ne dépend que de l’identité de l’action/session ;',
+            '- contrat explicite borrowed-readonly pour le hook Region officiel ;',
+            '- comportement cloned conservé par défaut pour les autres hooks.',
+            '',
+            'Aucune optimisation ne modifie la décision Region, le corpus, le transport, les actions ou le protocole d’acceptation.',
+            '',
+            '## Verdict',
+            '',
+            '**C7 est accepté pour la reconstruction courante sur STCK et SMLP.**',
+            '',
+            'Les dettes restantes concernent l’acquisition initiale réelle du prior FieldStock, le candidat produit Region complet, les acquisitions passives multi-propriétaires, la sauvegarde/restauration et OP31. Elles ne rouvrent pas le résultat C7 tant que l’identité mesurée ne change pas.',
+            '',
+          ].join('\n');
+          await writeFile(reportPath, report);
+
+          const browserPath = 'docs/recovery/op01-op31-browser-field-stock-context-20261112.md';
+          let browser = await readFile(browserPath, 'utf8');
+          browser = replaceRequired(browser, 'Date : 12 novembre 2026', 'Date : 13 novembre 2026', 'browser date');
+          browser = replaceRequired(
+            browser,
+            '- le coût officiel C7 sur A/STCK, A/SMLP, B/STCK et B/SMLP reste à mesurer ;',
+            '- le coût officiel C7 est accepté séparément sur STCK et SMLP pour le SHA mesuré ;',
+            'browser C7 limit',
+          );
+          const browserPerformance = [
+            '## Qualification C7 officielle',
+            '',
+            `Le SHA ${measurementSha} a passé le protocole strict A1/B1/B2/A2 :`,
+            '',
+            '- STCK : 59,35 ms en A, 56,70 ms en B, soit −4,4650 % ;',
+            '- SMLP : 114,70 ms en A, 120,05 ms en B, soit +4,6643 % ;',
+            '- seuil : strictement inférieur à +10 % par jeu ;',
+            '- compensation entre jeux : interdite ;',
+            '- verdict : accepté pour les deux jeux.',
+            '',
+            `Le run principal est ${strictRun}, job ${strictJob}. Une répétition indépendante dans le run ${repeatRun}, job ${repeatJob}, obtient +2,0423 % sur STCK et −0,9298 % sur SMLP, également acceptés.`,
+            '',
+            'La qualification complète du même SHA passe 335/335 tests, le typecheck, le build, la parité Worker/Pyodide et 24/24 contrats benchmark/sourceRef.',
+            '',
+            'Preuve durable : docs/recovery/op01-op31-c7-official-acceptance-20261113.md.',
+            '',
+          ].join('\n');
+          browser = replaceRequired(browser, '## Statut\n', `${browserPerformance}\n## Statut\n`, 'browser performance insertion');
+          browser += '\n**C7 est fermé pour l’identité mesurée ; les dettes fonctionnelles restantes ne constituent pas une réouverture automatique du coût tant que les sources A/B restent inchangées.**\n';
+          await writeFile(browserPath, browser);
+
+          const diagnosticPath = 'docs/recovery/op01-op31-c7-diagnostic-status.md';
+          let diagnostic = await readFile(diagnosticPath, 'utf8');
+          diagnostic = replaceRequired(
+            diagnostic,
+            'Branche : `recovery/op01-op31-c7-diagnostic-20261112`.\n',
+            'Branche : `recovery/op01-op31-c7-diagnostic-20261112`.\n\n> Mise à jour du 13 novembre 2026 : ce document conserve le diagnostic synthétique historique. La qualification officielle ultérieure est acceptée et documentée dans `docs/recovery/op01-op31-c7-official-acceptance-20261113.md`.\n',
+            'diagnostic update note',
+          );
+          diagnostic = replaceRequired(
+            diagnostic,
+            'La qualification officielle reste inchangée :\n**fonctionnellement qualifié, performance officielle à confirmer**.\n',
+            'La qualification officielle ultérieure est maintenant **acceptée** sur STCK et SMLP. Le diagnostic synthétique ci-dessus reste une preuve historique distincte.\n',
+            'diagnostic final pending status',
+          );
+          diagnostic += [
+            '',
+            '## Qualification officielle ultérieure',
+            '',
+            `Le SHA ${measurementSha} a passé le garde strict du run ${strictRun} :`,
+            '',
+            '- STCK : −4,4650 %, accepté ;',
+            '- SMLP : +4,6643 %, accepté ;',
+            '- chaque jeu est sous le seuil strict de +10 % sans compensation.',
+            '',
+            `La qualification complète du run ${repeatRun} passe 335/335 tests et répète une mesure acceptée sur les deux jeux.`,
+            '',
+            '**Statut C7 courant : accepté.**',
+            '',
+          ].join('\n');
+          await writeFile(diagnosticPath, diagnostic);
+
+          const progressPath = 'docs/migration/op01-op31-progress.md';
+          let progress = await readFile(progressPath, 'utf8');
+          progress = replaceRequired(progress, 'Dernière consolidation : 12 novembre 2026.', 'Dernière consolidation : 13 novembre 2026.', 'progress date');
+          progress = replaceRequired(progress, '`400d9bcc1062130508d27e62f1508f82011d2ea7`', `\`${measurementSha}\``, 'progress qualified SHA');
+          progress = replaceRequired(
+            progress,
+            '**activation fonctionnelle du contrôleur Agent qualifiée ; coût officiel C7 à\nconfirmer.**',
+            '**activation fonctionnelle du contrôleur Agent qualifiée ; C7 accepté séparément sur STCK et SMLP.**',
+            'progress global status',
+          );
+          progress = replaceRequired(
+            progress,
+            '| C7 | **ouvert** | 332 tests, build, câblage et runners candidats | quatre runners complets et médianes par jeu sous +10 % |',
+            '| C7 | **accepté** | 335 tests, build, parité Worker/Pyodide, 24 contrats et deux exécutions ABBA acceptées | maintenir les sourceRef si le chemin mesuré change |',
+            'progress C7 row',
+          );
+          const oldPerformance = [
+            '## Performance',
+            '',
+            'Critère : la médiane de session complète de chaque jeu doit augmenter de',
+            'strictement moins de 10 %. STCK et SMLP restent séparés.',
+            '',
+            'Le contrôleur n’exécute aucune campagne en mode Manual, mais son code est chargé',
+            'et instancié avec la page. Le build et les tests ne permettent donc pas de',
+            'fermer le coût d’activation.',
+            '',
+            'Verdict : **fonctionnellement qualifié, coût officiel à confirmer.**',
+            '',
+            'C7 exige encore A/STCK, A/SMLP, B/STCK et B/SMLP avec provenance, échantillons',
+            'et médianes publiés.',
+          ].join('\n');
+          const newPerformance = [
+            '## Performance C7',
+            '',
+            'Le protocole strict A1/B1/B2/A2 est exécuté avec quatre runners explicites, les mêmes jeux, corpus, seed, séquences et volumes. Seul B active le hook Region réel.',
+            '',
+            `Run principal ${strictRun}, job ${strictJob}, SHA ${measurementSha} :`,
+            '',
+            '| Jeu | Médiane A | Médiane B | Delta | Verdict |',
+            '| --- | ---: | ---: | ---: | --- |',
+            '| STCK | 59,35 ms | 56,70 ms | −4,4650 % | accepté |',
+            '| SMLP | 114,70 ms | 120,05 ms | +4,6643 % | accepté |',
+            '',
+            'Chaque jeu respecte séparément le seuil strict inférieur à +10 %. Aucune compensation entre jeux ni suppression d’échantillon n’est utilisée.',
+            '',
+            `Le run complet ${repeatRun}, job ${repeatJob}, répète une mesure acceptée : +2,0423 % sur STCK et −0,9298 % sur SMLP. Il passe aussi 335/335 tests, le typecheck, le build, la parité Worker/Pyodide et 24/24 contrats natifs.`,
+            '',
+            'Verdict : **C7 accepté pour l’identité mesurée.**',
+            '',
+            'Preuve : `docs/recovery/op01-op31-c7-official-acceptance-20261113.md`.',
+          ].join('\n');
+          progress = replaceRequired(progress, oldPerformance, newPerformance, 'progress performance section');
+          progress = replaceRequired(progress, '- performance C7 non close ;', '- C7 accepté pour les sourceRef et le SHA mesurés ;', 'progress limit');
+          const oldClosure = [
+            '### Clôture C7',
+            '',
+            '1. geler baseline et candidat intégrés ;',
+            '2. exécuter les quatre runners officiels ;',
+            '3. publier les distributions et médianes STCK/SMLP séparées ;',
+            '4. accepter ou corriger tout dépassement ;',
+            '5. seulement ensuite envisager la publication Site et vérifier GitHub ↔ Site.',
+          ].join('\n');
+          const newClosure = [
+            '### Après clôture C7',
+            '',
+            '1. intégrer la tranche qualifiée dans la branche canonique sans écraser les autres lots ;',
+            '2. acquérir honnêtement le prior FieldStock initial ;',
+            '3. compléter le candidat produit Region et les acquisitions passives ;',
+            '4. ajouter snapshot/restauration ;',
+            '5. ne publier le Site qu’après liaison explicite au SHA GitHub canonique.',
+          ].join('\n');
+          progress = replaceRequired(progress, oldClosure, newClosure, 'progress post-C7 roadmap');
+          await writeFile(progressPath, progress);
+
+          const sitePath = 'docs/recovery/site109-reconstruction-status.md';
+          let site = await readFile(sitePath, 'utf8');
+          site = replaceRequired(site, '- performance officielle STCK/SMLP encore à mesurer.', '- performance C7 acceptée séparément sur STCK et SMLP pour l’identité mesurée.', 'site limit');
+          site = replaceRequired(
+            site,
+            '**5B, le propriétaire commun, le contrôleur browser, OP28 active et le transport\nFieldStock/OP18 depuis un prior fourni sont fonctionnellement qualifiés ;\nacquisition initiale, restauration et performance officielle restent à\nconfirmer.**',
+            '**5B, le propriétaire commun, le contrôleur browser, OP28 active et le transport FieldStock/OP18 depuis un prior fourni sont fonctionnellement qualifiés ; C7 est accepté. L’acquisition initiale et la restauration restent ouvertes.**',
+            'site Lot5 status',
+          );
+          site = replaceRequired(
+            site,
+            '- aucune mesure officielle isolée Worker/Pyodide n’a encore été exécutée ;',
+            `- le protocole strict A1/B1/B2/A2 du run ${strictRun} est accepté sur STCK (−4,4650 %) et SMLP (+4,6643 %) ;`,
+            'site Lot9 measurement bullet',
+          );
+          const remaining = [
+            'Pièces restantes avant ABBA officiel :',
+            '',
+            '1. qualifier les quatre runners via le vrai Worker navigateur/Pyodide ;',
+            '2. figer les `sourceRef` A et B ;',
+            '3. créer le manifeste officiel reliant corpus, sources et timing scope ;',
+            '4. réserver un environnement de mesure isolé ;',
+            '5. répéter A1/B1/B2/A2 et appliquer le seuil strict séparément à STCK et SMLP.',
+          ].join('\n');
+          const completed = [
+            'ABBA officiel de la reconstruction :',
+            '',
+            `1. les quatre runners sont qualifiés sur le vrai Worker navigateur/Pyodide ;`,
+            '2. les sourceRef A et B sont figés dans le manifeste ;',
+            '3. le manifeste relie corpus, sources, transport et timing scope ;',
+            `4. le run strict ${strictRun} passe séparément STCK et SMLP ;`,
+            `5. le run complet ${repeatRun} répète une mesure acceptée et passe 335/335 tests.`,
+            '',
+            'L’environnement reste un runner GitHub Actions partagé et est déclaré comme tel ; aucune équivalence matérielle avec le Site 109 historique n’est revendiquée.',
+          ].join('\n');
+          site = replaceRequired(site, remaining, completed, 'site ABBA completion');
+          site = replaceRequired(
+            site,
+            '**noyau V6, Region, owner, caller, transport Worker, delta public, campagne,\nprotocole ABBA, quatre runners explicites et corpus Region ACTION6 sont\nfonctionnellement qualifiés sur le protocole complet et les moteurs réels du\nZIP ; transport benchmark Worker/Pyodide, identités source et performance\nofficielle restent à confirmer.**',
+            '**noyau V6, Region, owner, caller, transport Worker, delta public, campagne, protocole ABBA, quatre runners explicites et corpus Region ACTION6 sont fonctionnellement qualifiés ; les identités source sont figées et C7 est accepté séparément sur STCK et SMLP. Le candidat produit Region complet reste ouvert.**',
+            'site Lot9 status',
+          );
+          const sitePerformance = [
+            '## Qualification officielle C7',
+            '',
+            `Le commit ${measurementSha} passe le garde strict du run ${strictRun}, job ${strictJob} :`,
+            '',
+            '- STCK : 59,35 ms en A, 56,70 ms en B, −4,4650 %, accepté ;',
+            '- SMLP : 114,70 ms en A, 120,05 ms en B, +4,6643 %, accepté ;',
+            '- seuil strict : +10 % par jeu ;',
+            '- compensation entre jeux : interdite.',
+            '',
+            `Le run complet ${repeatRun}, job ${repeatJob}, passe 335/335 tests, le typecheck, le build, la parité Worker/Pyodide et répète une mesure acceptée sur les deux jeux.`,
+            '',
+            'Preuve : `docs/recovery/op01-op31-c7-official-acceptance-20261113.md`.',
+            '',
+            'Cette qualification ferme C7 pour l’identité mesurée, mais ne prouve pas une identité binaire avec le Site 109 historique.',
+            '',
+          ].join('\n');
+          site = replaceRequired(site, '## Progression Lot 9 — reprise 9B\n', `${sitePerformance}\n## Progression Lot 9 — reprise 9B\n`, 'site C7 insertion');
+          await writeFile(sitePath, site);
+          NODE
+      - name: Verify accepted manifest and source identities
+        run: node scripts/verify-native-loop-runner-manifest.mjs
+      - name: Run manifest and native cost contracts
+        run: |
+          node --test \
+            tests/native-loop-cost-harness.test.mjs \
+            tests/native-loop-region-source-refs.test.mjs \
+            tests/native-loop-session-adapter.test.mjs
+      - name: Commit durable C7 acceptance
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            scripts/verify-native-loop-runner-manifest.mjs \
+            docs/recovery/native-loop-runner-manifest.json \
+            docs/recovery/op01-op31-c7-official-acceptance-20261113.md \
+            docs/recovery/op01-op31-browser-field-stock-context-20261112.md \
+            docs/recovery/op01-op31-c7-diagnostic-status.md \
+            docs/migration/op01-op31-progress.md \
+            docs/recovery/site109-reconstruction-status.md
+          git commit -m "Record official C7 acceptance"
+          git push origin HEAD:${GITHUB_REF_NAME}
