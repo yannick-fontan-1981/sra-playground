@@ -446,3 +446,18 @@ Region déjà qualifié.
 2. intégrer chaque tranche qualifiée sur GitHub canonique ;
 3. publier le Site uniquement depuis un commit GitHub canonique qualifié ;
 4. vérifier ensuite GitHub ↔ Site.
+
+## Requalification C7 du contrat de configuration canonique
+
+Le contrat navigateur accepte maintenant les deux états du cycle canonique, `ready-for-official-abba-measurement` et `qualified-functionally-and-performance`. Le contrat est inclus dans les `sourceRef` A/B et a été requalifié sur le protocole strict A1/B1/B2/A2.
+
+- commit mesuré : `1428683411e91423747ef5021b30d96d528dc362` ;
+- run : `43363531876`, job : `131682410527` ;
+- STCK : -1,3550 %, accepté ;
+- SMLP : +2,1409 %, accepté ;
+- 355/355 tests TypeScript ;
+- 24/24 contrats natifs ;
+- build et parité Worker/Pyodide réussis ;
+- aucune publication Site.
+
+Preuve : `docs/recovery/op01-op31-c7-config-reconciliation-20261113.md`.

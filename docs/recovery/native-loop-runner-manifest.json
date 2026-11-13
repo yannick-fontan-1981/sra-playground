@@ -5,10 +5,10 @@
   "historicalRunnerIdentityRecovered": false,
   "historicalCorpusRecovered": false,
   "sourceRefs": {
-    "commonRoot": "1e40725745622641b97ca0599193360687a617caeb54f5340de4518475c0b4e5",
+    "commonRoot": "fe5c516b5ef43ab022ef51b5db8a3834bc02ad9b189788da434c30ce87f2a836",
     "candidateRoot": "ba388d25a42fd142c26a7184d9d196a165828b1f5fdb8f4df39a7867e48202e0",
-    "reference": "lot9b-region-v1:A:9f1a55ee13abe82e6c688e8d91fb327582f3f9a86064c1f7f019586dd2887e68",
-    "candidate": "lot9b-region-v1:B:dca04a65d09d3354ee32d3659496e2dd20f013df7d522a1fae295da4bf587ed2",
+    "reference": "lot9b-region-v1:A:99faf15665a8401a4b5e9867f1cfd1935d68f6171c46c839c34818f04b51f231",
+    "candidate": "lot9b-region-v1:B:8e23f39ba219a43a3d5b7cc7644551dea24ca0fc0216d5b58a8c808fdc315a83",
     "proof": "docs/recovery/native-loop-source-refs.json"
   },
   "transport": {
@@ -41,7 +41,12 @@
     "gameActionAndReturnedObservationIncluded": true
   },
   "protocol": {
-    "seriesOrder": ["A1", "B1", "B2", "A2"],
+    "seriesOrder": [
+      "A1",
+      "B1",
+      "B2",
+      "A2"
+    ],
     "variantBySeries": {
       "A1": "A",
       "B1": "B",
@@ -85,7 +90,7 @@
       "game": "STCK",
       "gameId": "stck-c0000001",
       "factory": "createAStckNativeRunner",
-      "sourceRef": "lot9b-region-v1:A:9f1a55ee13abe82e6c688e8d91fb327582f3f9a86064c1f7f019586dd2887e68",
+      "sourceRef": "lot9b-region-v1:A:99faf15665a8401a4b5e9867f1cfd1935d68f6171c46c839c34818f04b51f231",
       "regionHook": "disabled",
       "seed": 0,
       "startLevel": 1,
@@ -98,7 +103,7 @@
       "game": "SMLP",
       "gameId": "smlp-c3000001",
       "factory": "createASmlpNativeRunner",
-      "sourceRef": "lot9b-region-v1:A:9f1a55ee13abe82e6c688e8d91fb327582f3f9a86064c1f7f019586dd2887e68",
+      "sourceRef": "lot9b-region-v1:A:99faf15665a8401a4b5e9867f1cfd1935d68f6171c46c839c34818f04b51f231",
       "regionHook": "disabled",
       "seed": 0,
       "startLevel": 1,
@@ -111,7 +116,7 @@
       "game": "STCK",
       "gameId": "stck-c0000001",
       "factory": "createBStckNativeRunner",
-      "sourceRef": "lot9b-region-v1:B:dca04a65d09d3354ee32d3659496e2dd20f013df7d522a1fae295da4bf587ed2",
+      "sourceRef": "lot9b-region-v1:B:8e23f39ba219a43a3d5b7cc7644551dea24ca0fc0216d5b58a8c808fdc315a83",
       "regionHook": "region_intervention",
       "seed": 0,
       "startLevel": 1,
@@ -124,7 +129,7 @@
       "game": "SMLP",
       "gameId": "smlp-c3000001",
       "factory": "createBSmlpNativeRunner",
-      "sourceRef": "lot9b-region-v1:B:dca04a65d09d3354ee32d3659496e2dd20f013df7d522a1fae295da4bf587ed2",
+      "sourceRef": "lot9b-region-v1:B:8e23f39ba219a43a3d5b7cc7644551dea24ca0fc0216d5b58a8c808fdc315a83",
       "regionHook": "region_intervention",
       "seed": 0,
       "startLevel": 1,
@@ -142,7 +147,7 @@
     "no fallback runner, hidden corpus, retry or sample substitution is allowed"
   ],
   "qualification": {
-    "runnerContractTests": 13,
+    "runnerContractTests": 24,
     "fullProtocolFunctionalRun": {
       "runId": 43355474605,
       "jobId": 131656371181,
@@ -153,39 +158,61 @@
       "status": "passed"
     },
     "workerPyodideParityRun": {
-      "runId": 43352422359,
+      "runId": 43363531876,
+      "jobId": 131682410527,
       "samples": 4,
       "actions": 31,
       "status": "passed"
     },
     "sourceRefRun": {
-      "runId": 43355931350,
-      "jobId": 131657871662,
-      "headSha": "46fa1e388c3e26db0d1bfde5e08a0f1e15f09949",
-      "typecheck": "passed",
-      "targetedTests": "passed",
+      "runId": 43363531876,
+      "jobId": 131682410527,
+      "headSha": "1428683411e91423747ef5021b30d96d528dc362",
       "sourceRefsComputed": true,
       "manifestVerification": "passed"
+    },
+    "finalRequalificationRun": {
+      "runId": 43363531876,
+      "jobId": 131682410527,
+      "headSha": "1428683411e91423747ef5021b30d96d528dc362",
+      "node": "v22.18.0",
+      "typecheck": "passed",
+      "regression": {
+        "passed": 355,
+        "failed": 0,
+        "skipped": 0,
+        "cancelled": 0
+      },
+      "build": "passed",
+      "workerPyodideParity": {
+        "status": "worker-pyodide-functional-parity-qualified",
+        "samplesCompared": 4,
+        "stepsCompared": 31
+      },
+      "nativeContracts": {
+        "passed": 24,
+        "failed": 0
+      }
     }
   },
   "officialMeasurement": {
     "executed": true,
     "accepted": true,
-    "runId": 43356109888,
-    "jobId": 131658420516,
-    "measuredCommit": "2ba767fb698f58f831f1a11ad5e06b5da8cb86ee",
+    "runId": 43363531876,
+    "jobId": 131682410527,
+    "measuredCommit": "1428683411e91423747ef5021b30d96d528dc362",
     "measurementIsolation": "non-isolated-shared-github-actions-runner-no-repository-concurrency",
     "results": {
       "STCK": {
-        "referenceMedianMs": 54.5,
-        "candidateMedianMs": 58.39999999999782,
-        "relativeIncreasePercent": 7.1559633027482805,
+        "referenceMedianMs": 36.900000000001455,
+        "candidateMedianMs": 36.400000000001455,
+        "relativeIncreasePercent": -1.3550135501354532,
         "accepted": true
       },
       "SMLP": {
-        "referenceMedianMs": 123.95000000000073,
-        "candidateMedianMs": 118.15000000000146,
-        "relativeIncreasePercent": -4.6793061718428675,
+        "referenceMedianMs": 72.40000000000146,
+        "candidateMedianMs": 73.94999999999709,
+        "relativeIncreasePercent": 2.14088397789447,
         "accepted": true
       }
     },
@@ -195,5 +222,44 @@
     "previousFailureProof": "docs/recovery/lot9b-official-abba-baseline-failure.json"
   },
   "nextLot": "9C joint_channels",
-  "counter76Incremented": false
+  "counter76Incremented": false,
+  "officialMeasurementHistory": [
+    {
+      "sourceRefs": {
+        "commonRoot": "1e40725745622641b97ca0599193360687a617caeb54f5340de4518475c0b4e5",
+        "candidateRoot": "ba388d25a42fd142c26a7184d9d196a165828b1f5fdb8f4df39a7867e48202e0",
+        "reference": "lot9b-region-v1:A:9f1a55ee13abe82e6c688e8d91fb327582f3f9a86064c1f7f019586dd2887e68",
+        "candidate": "lot9b-region-v1:B:dca04a65d09d3354ee32d3659496e2dd20f013df7d522a1fae295da4bf587ed2",
+        "proof": "docs/recovery/native-loop-source-refs.json"
+      },
+      "measurement": {
+        "executed": true,
+        "accepted": true,
+        "runId": 43356109888,
+        "jobId": 131658420516,
+        "measuredCommit": "2ba767fb698f58f831f1a11ad5e06b5da8cb86ee",
+        "measurementIsolation": "non-isolated-shared-github-actions-runner-no-repository-concurrency",
+        "results": {
+          "STCK": {
+            "referenceMedianMs": 54.5,
+            "candidateMedianMs": 58.39999999999782,
+            "relativeIncreasePercent": 7.1559633027482805,
+            "accepted": true
+          },
+          "SMLP": {
+            "referenceMedianMs": 123.95000000000073,
+            "candidateMedianMs": 118.15000000000146,
+            "relativeIncreasePercent": -4.6793061718428675,
+            "accepted": true
+          }
+        },
+        "sampleRemoval": 0,
+        "retries": 0,
+        "proof": "docs/recovery/lot9b-official-abba-performance-qualified.json",
+        "previousFailureProof": "docs/recovery/lot9b-official-abba-baseline-failure.json"
+      },
+      "supersededBy": "1428683411e91423747ef5021b30d96d528dc362",
+      "reason": "benchmark configuration contract became part of the pinned common source identity"
+    }
+  ]
 }

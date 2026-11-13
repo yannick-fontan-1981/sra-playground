@@ -4,27 +4,32 @@
   "lot": "9B region_intervention",
   "measurement": {
     "kind": "official-native-region-abba-result",
-    "runId": 43356109888,
-    "jobId": 131658420516,
-    "measuredCommit": "2ba767fb698f58f831f1a11ad5e06b5da8cb86ee",
-    "canonicalCodeCommit": "e2b93371bf1272dd0f68ab56daeeabaebd880f44",
+    "runId": 43363531876,
+    "jobId": 131682410527,
+    "measuredCommit": "1428683411e91423747ef5021b30d96d528dc362",
+    "canonicalCodeCommit": "1428683411e91423747ef5021b30d96d528dc362",
     "measurementIsolation": "non-isolated-shared-github-actions-runner-no-repository-concurrency",
-    "chrome": "Google Chrome 157.0.8103.78",
+    "chrome": "Google Chrome 157.0.8103.50",
     "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.0.0 Safari/537.36",
     "hardwareConcurrency": 4,
     "crossOriginIsolated": false,
-    "startedAt": "2026-11-13T03:18:43.871Z",
-    "finishedAt": "2026-11-13T03:18:55.950Z",
-    "artifactId": 14004949988,
-    "artifactZipSha256": "5ce52300d1da85523cc72fb5601004e812f5b3788f7bc3725b1fc72cf45c76b2"
+    "startedAt": "2026-11-13T04:09:02.509Z",
+    "finishedAt": "2026-11-13T04:09:07.005Z",
+    "artifactId": 14008784912,
+    "artifactZipSha256": "fbbf982a13defb6e5ea7da80e85b3cf3c7f21cbe86fa49466f46f93dd92293f8"
   },
   "sourceRefs": {
-    "reference": "lot9b-region-v1:A:9f1a55ee13abe82e6c688e8d91fb327582f3f9a86064c1f7f019586dd2887e68",
-    "candidate": "lot9b-region-v1:B:dca04a65d09d3354ee32d3659496e2dd20f013df7d522a1fae295da4bf587ed2",
+    "reference": "lot9b-region-v1:A:99faf15665a8401a4b5e9867f1cfd1935d68f6171c46c839c34818f04b51f231",
+    "candidate": "lot9b-region-v1:B:8e23f39ba219a43a3d5b7cc7644551dea24ca0fc0216d5b58a8c808fdc315a83",
     "corpus": "native-region-action6-corpus-v1"
   },
   "protocol": {
-    "seriesOrder": ["A1", "B1", "B2", "A2"],
+    "seriesOrder": [
+      "A1",
+      "B1",
+      "B2",
+      "A2"
+    ],
     "invocations": 40,
     "warmupSessions": 8,
     "warmupActions": 24,
@@ -35,60 +40,90 @@
   },
   "games": {
     "STCK": {
-      "referenceDurationsMs": [56.1, 54.2, 54.3, 54.7, 65.9, 55.1, 54.2, 53.3],
-      "candidateDurationsMs": [60.5, 58.5, 58.6, 58.9, 55.9, 58.3, 54.9, 54.2],
-      "referenceMedianMs": 54.5,
-      "candidateMedianMs": 58.39999999999782,
-      "relativeIncreasePercent": 7.1559633027482805,
+      "referenceDurationsMs": [
+        39.39999999999418,
+        37.39999999999418,
+        39.60000000000582,
+        36.80000000000291,
+        35.09999999999127,
+        34.80000000000291,
+        37,
+        34.69999999999709
+      ],
+      "candidateDurationsMs": [
+        38.19999999999709,
+        36.5,
+        36.30000000000291,
+        35.80000000000291,
+        36.90000000000873,
+        37.89999999999418,
+        35.5,
+        35.30000000000291
+      ],
+      "referenceMedianMs": 36.900000000001455,
+      "candidateMedianMs": 36.400000000001455,
+      "relativeIncreasePercent": -1.3550135501354532,
       "thresholdPercent": 10,
       "accepted": true,
       "phases": {
         "publicPolicy": {
-          "referenceMedianMs": 6.099999999983993,
-          "candidateMedianMs": 6.350000000002183,
-          "relativeIncreasePercent": 4.098360656046651
+          "referenceMedianMs": 4.150000000001455,
+          "candidateMedianMs": 4.100000000013097,
+          "relativeIncreasePercent": -1.2048192768274957
         },
         "candidateHook": {
           "referenceMedianMs": 0,
-          "candidateMedianMs": 1,
+          "candidateMedianMs": 0.5,
           "relativeIncreasePercent": null
         },
         "gameAction": {
-          "referenceMedianMs": 48.40000000001237,
-          "candidateMedianMs": 51.049999999991996,
-          "relativeIncreasePercent": 5.475206611526762
+          "referenceMedianMs": 32.8999999999869,
+          "candidateMedianMs": 31.60000000000582,
+          "relativeIncreasePercent": -3.951367781099091
         }
       }
     },
     "SMLP": {
-      "referenceDurationsMs": [119.8, 124.1, 125.2, 123.4, 109.0, 133.9, 123.8, 139.2],
-      "candidateDurationsMs": [128.2, 126.5, 591.1, 108.4, 110.5, 109.3, 113.3, 123.0],
-      "referenceMedianMs": 123.95000000000073,
-      "candidateMedianMs": 118.15000000000146,
-      "relativeIncreasePercent": -4.6793061718428675,
+      "referenceDurationsMs": [
+        75.80000000000291,
+        72.80000000000291,
+        73.80000000000291,
+        71.80000000000291,
+        72,
+        73.40000000000873,
+        70.89999999999418,
+        71.59999999999127
+      ],
+      "candidateDurationsMs": [
+        77.60000000000582,
+        74.89999999999418,
+        247.1999999999971,
+        72.39999999999418,
+        72.60000000000582,
+        76.90000000000873,
+        73,
+        71.40000000000873
+      ],
+      "referenceMedianMs": 72.40000000000146,
+      "candidateMedianMs": 73.94999999999709,
+      "relativeIncreasePercent": 2.14088397789447,
       "thresholdPercent": 10,
       "accepted": true,
-      "retainedOutlier": {
-        "series": "B1",
-        "sessionIndex": 2,
-        "durationMs": 591.1,
-        "removed": false
-      },
       "phases": {
         "publicPolicy": {
-          "referenceMedianMs": 14.400000000001455,
-          "candidateMedianMs": 14.10000000000582,
-          "relativeIncreasePercent": -2.083333333302806
+          "referenceMedianMs": 8.89999999999418,
+          "candidateMedianMs": 9.149999999986903,
+          "relativeIncreasePercent": 2.8089887639650257
         },
         "candidateHook": {
           "referenceMedianMs": 0,
-          "candidateMedianMs": 1.0500000000029104,
+          "candidateMedianMs": 0.4499999999825377,
           "relativeIncreasePercent": null
         },
         "gameAction": {
-          "referenceMedianMs": 109.700000000008,
-          "candidateMedianMs": 102.79999999999927,
-          "relativeIncreasePercent": -6.289881494993832
+          "referenceMedianMs": 63.70000000001164,
+          "candidateMedianMs": 64.40000000001601,
+          "relativeIncreasePercent": 1.0989010989077563
         }
       }
     }
