@@ -22,12 +22,15 @@ type MeterStrip = readonly [axis: 'x' | 'y', line: number, color: number, anchor
 
 interface NativeStrategyContext {
   readonly route: string | null;
+  readonly pairRef: string | null;
   readonly color: 'equal' | 'different' | null;
+  readonly colors: readonly [number, number] | null;
   readonly capacityNeeded: boolean;
   readonly directCost: number | null;
   readonly totalCost: number | null;
   readonly plannedCharges: number;
   readonly colorWitness: number | null;
+  readonly patternWitness: number | null;
   readonly meter: { readonly strip: MeterStrip | null; readonly steps: number; readonly units: number;
     readonly rate: number; readonly capacity: number | null } | null;
 }
@@ -153,6 +156,7 @@ export function readNativeResolution(agent: {
     ? [strip[0], strip[1], strip[2], strip[3], strip[4]] : null;
   const meterSteps = natural(forecast?.steps_before_empty), meterUnits = natural(forecast?.current_units), meterRate = natural(forecast?.loss_per_step);
   const color = facts?.color_relation;
+  const colors = record(facts?.feature_residuals)?.observed_colors;
   const context: NativePlanContext | null = morphology ? {
     obligation: label(morphology.obligation),
     access: label(morphology.access_phase),
@@ -164,12 +168,16 @@ export function readNativeResolution(agent: {
     entryActions: [...new Set(entryActions)],
     strategy: {
       route: label(morphology.route_key),
+      pairRef: label(facts?.pair_ref),
       color: color === 'equal' || color === 'different' ? color : null,
+      colors: Array.isArray(colors) && colors.length === 2 && colors.every(value => natural(value) !== null)
+        ? [colors[0], colors[1]] : null,
       capacityNeeded: facts?.capacity_needed === true,
       directCost: natural(facts?.direct_goal_cost_lower_bound),
       totalCost: natural(morphology.total_cost),
       plannedCharges: Array.isArray(morphology.charge_order) ? morphology.charge_order.length : 0,
       colorWitness: priorAction(record(facts?.feature_reaccess)?.effect_after),
+      patternWitness: priorAction(facts?.single_pattern_change_observation_ref),
       meter: meterSteps !== null && meterUnits !== null && meterRate
         ? { strip: meterStrip, steps: meterSteps, units: meterUnits, rate: meterRate, capacity: natural(forecast?.capacity_steps) } : null,
     },

@@ -76,6 +76,11 @@
 .sic-strategy-configurations dt{font-weight:600}
 .sic-strategy-configurations dd{margin:0;color:var(--subtle)}
 .sic-strategy-gauge .sic-sprite canvas{max-width:168px;max-height:72px}
+.sic-strategy-chain{padding:10px 12px;margin:10px 0;border:1px solid var(--line);border-radius:6px}
+.sic-strategy-chain h6{margin:0;font-size:13px}
+.sic-strategy-chain ol{display:flex;align-items:center;gap:0 8px;flex-wrap:wrap;list-style:none;margin:4px 0 0;padding:0}
+.sic-strategy-chain li:not(:last-child)::after{content:"→";margin-left:8px;color:var(--subtle)}
+.sic-strategy-reuse>div{margin:6px 0 10px;padding-left:12px;border-left:2px solid var(--line)}
 [data-sic-direction-select]{max-width:100%;min-height:34px;color:var(--ink);background:var(--surface-muted);border:1px solid var(--control-border);border-radius:4px}
 .sic-observations details{margin-top:8px}
 .sic-observations summary{cursor:pointer;color:var(--accent-hover);font-size:13px}

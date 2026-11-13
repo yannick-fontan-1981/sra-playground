@@ -95,7 +95,7 @@ app.innerHTML = `
     <section class="playground-section wrap" id="playground" aria-labelledby="playground-title">
       <div class="section-line"><div class="playground-heading-group"><h2 class="playground-heading" id="playground-title">ARC AGI <span>3</span></h2><a class="text-link" href="/arc-agi-3.html">What is ARC-AGI-3? ${icon('arrow')}</a></div><a class="catalog-count" href="/gallery.html" aria-label="75 New Games and 25 official games: browse all 100 games">${GAME_CATALOG.length} GAMES<span>/</span>25 OFFICIAL + 75 CUSTOM</a></div>
       <p class="custom-game-credit"><strong>75 new custom games</strong><span class="custom-game-author">created or compiled by <span>Yannick Fontan.</span></span></p>
-      <article class="player">
+      <article class="player is-agent-mode">
         <header class="player-header">
           <div class="game-identity">
             <span class="game-code-badge" id="game-code">${selectedGame.code}</span>
@@ -110,8 +110,8 @@ app.innerHTML = `
 
         <div class="mode-bar">
           <div class="mode-tabs" role="tablist" aria-label="Play mode">
-            <button type="button" id="manual-tab" role="tab" aria-selected="true" aria-controls="manual-panel" tabindex="0">${icon('hand')}Manual</button>
-            <button type="button" id="agent-tab" role="tab" aria-selected="false" aria-controls="agent-panel" tabindex="-1">${icon('robot')}SRA Agent<span class="agent-mode-label">Native TS</span></button>
+            <button type="button" id="manual-tab" role="tab" aria-selected="false" aria-controls="manual-panel" tabindex="-1">${icon('hand')}Manual</button>
+            <button type="button" id="agent-tab" role="tab" aria-selected="true" aria-controls="agent-panel" tabindex="0">${icon('robot')}SRA Agent<span class="agent-mode-label">Native TS</span></button>
           </div>
           <span class="local-label"><span class="status-dot"></span> In your browser</span>
         </div>
@@ -134,7 +134,7 @@ app.innerHTML = `
           </div>
 
           <aside class="control-column minimal-control-column">
-            <div id="manual-panel" role="tabpanel" aria-labelledby="manual-tab">
+            <div id="manual-panel" role="tabpanel" aria-labelledby="manual-tab" hidden>
               <div class="level-controls" aria-label="Level navigation">
                 <div class="level-picker">
                   <label for="level-select">LEVEL</label>
@@ -160,7 +160,7 @@ app.innerHTML = `
               </div>
               <p id="keyboard-help" class="sr-only">Arrow keys and Space for actions. Click the board to interact. Z or Control Z to undo. R to reset the level.</p>
             </div>
-            <div id="agent-panel" role="tabpanel" aria-labelledby="agent-tab" data-agent-status="${AGENT_STATUS.status}" data-agent-available="${AGENT_STATUS.available}" hidden>
+            <div id="agent-panel" role="tabpanel" aria-labelledby="agent-tab" data-agent-status="${AGENT_STATUS.status}" data-agent-available="${AGENT_STATUS.available}">
               <h3>Solve with SRA.</h3>
               <p id="agent-message" class="agent-message" role="status" aria-live="polite" aria-atomic="true" tabindex="0">Ready to run from level 1.</p>
               <div class="agent-run-controls">
@@ -330,8 +330,7 @@ if (!context) throw new Error('This browser does not support the 2D canvas.');
 context.imageSmoothingEnabled = false;
 const runtime = new BrowserGameRuntime();
 let observation: GameObservation | null = null;
-let mode: 'manual' | 'agent' = 'manual';
-let modeGeneration = 0;
+let mode: 'manual' | 'agent' = 'agent';
 let busy = false;
 let loading = false;
 let failed = false;
@@ -671,7 +670,6 @@ function focusCanvas(): void {
 }
 
 function setMode(next: 'manual' | 'agent', focusTab = false): void {
-  modeGeneration += 1;
   if (mode !== next && next === 'manual') {
     agent.invalidate('Manual control. Start a fresh experiment when ready.');
     manualReturns = [];
@@ -713,7 +711,7 @@ async function selectGame(code: string, historyMode: 'push' | 'replace' | 'none'
   element('#selection-feedback').textContent = `${game.code} selected.`;
   canvas.setAttribute('aria-label', `${game.code} game board. Use the arrow keys, Space, or click to interact.`);
   document.title = `SRA Playground · ${game.code} — Symbolic Reasoning Agent`;
-  setMode('manual');
+  setMode(mode);
   if (historyMode !== 'none') {
     const url = new URL(window.location.href);
     url.searchParams.set('game', game.code);
@@ -749,13 +747,7 @@ element('#agent-batch').addEventListener('click', () => { void agent.run(16); })
 element('#agent-pause').addEventListener('click', () => agent.pause());
 element('#agent-new-session').addEventListener('click', () => agent.invalidate('New reasoning session. The current game position is preserved.'));
 element('#agent-restart').addEventListener('click', () => {
-  const generation = selectionGeneration + 1;
-  const code = selectedGame.code;
-  const load = selectGame(code, 'replace', 1);
-  const requestedMode = modeGeneration;
-  void load.then(() => {
-    if (selectionGeneration === generation && modeGeneration === requestedMode && selectedGame.code === code && ready()) setMode('agent');
-  });
+  void selectGame(selectedGame.code, 'replace', 1);
 });
 element('.mode-tabs').addEventListener('keydown', (event: KeyboardEvent) => {
   if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;

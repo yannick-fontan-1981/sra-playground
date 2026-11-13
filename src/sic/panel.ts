@@ -10,7 +10,7 @@ import ls20Directions from './ls20-direction-review.json';
 import ls20ShapeExit from './ls20-review-evidence.json';
 import { captureDecisionSprites, type NativeResolution } from './native-resolution.ts';
 import { compareRecoveryRoute, firstRecovery, isLevelCompletion, recoveryContinuation, type PursuedObjective } from './recovery.ts';
-import { explainDecision, strategyEpisodes, strategyOutcome, type Decision } from './decision-configurations.ts';
+import { explainDecision, orientationAfter, strategyEpisodes, strategyLinks, strategyOutcome, type Decision, type StrategyLink } from './decision-configurations.ts';
 import compositionOperations from './composition-operations.json';
 import type { GameObservation } from '../runtime/browser-games.ts';
 import { compareAboveColors, contrastClickContexts, describeClickContext, type ClickEffectCount } from './click-evidence.ts';
@@ -1160,7 +1160,29 @@ function renderStrategyEpisodes(container: Element, returns: readonly Directiona
   intro.textContent = visible.length || current.length ? 'What the engine needed, what it chose, and what the game returned.'
     : 'No strategy configuration matched the native evidence captured so far.';
   section.append(heading, intro);
-  const important = new Set(['colorContact', 'reserveContact', 'reserveAndColor']);
+  const important = new Set(['colorContact', 'reserveContact', 'reserveAndColor', 'targetContact']);
+  const cardId = (first: DirectionalReturn, when: string) => `${first.sessionId}:${first.sequence}:${when}`;
+  const chainLevel = visible.filter(item => item.configuration.when === 'colorContact'
+    || item.configuration.when === 'reserveAndColor').at(-1)?.first.fromLevel;
+  const chain = visible.filter(({ configuration, first, last: end }) => first.fromLevel === chainLevel
+    && (important.has(configuration.when) || (configuration.when === 'reserveRoute' && end.decision?.context?.effect === 'modifier')));
+  if (chain.length > 1) {
+    const nav = document.createElement('nav'), list = document.createElement('ol');
+    nav.setAttribute('aria-label', `Level ${chainLevel} strategy sequence`);
+    nav.className = 'sic-strategy-chain';
+    const title = document.createElement('h6');
+    title.textContent = `Level ${chainLevel} · From the first recharge to the target`;
+    for (const { configuration, first, last: end } of chain) {
+      const row = document.createElement('li');
+      const label = configuration.when === 'reserveRoute' ? 'Test orientation'
+        : configuration.when === 'reserveContact' ? 'Recharge' : configuration.when === 'colorContact' ? 'Test color'
+          : configuration.when === 'reserveAndColor' ? 'Color and reserve' : 'Try the target';
+      row.append(strategyJump(section, cardId(first, configuration.when), `${end.sequence} · ${label}`));
+      list.append(row);
+    }
+    nav.append(title, list);
+    section.append(nav);
+  }
   for (const configuration of current) {
     if (visible.some(item => item.configuration.when === configuration.when && item.last.decision?.proposalRef === pending?.proposalRef)) continue;
     const active = document.createElement('p');
@@ -1172,11 +1194,12 @@ function renderStrategyEpisodes(container: Element, returns: readonly Directiona
     const strategy = start.context?.strategy;
     const details = document.createElement('details'), title = document.createElement('summary');
     details.className = 'sic-details';
-    details.dataset.strategyChoice = `${first.sessionId}:${first.sequence}:${configuration.when}`;
+    details.dataset.strategyChoice = cardId(first, configuration.when);
     details.open = expanded.get(details.dataset.strategyChoice) ?? (important.has(configuration.when)
       && !visible.some(other => other.configuration.when === configuration.when && other.first.sequence > first.sequence));
     const actions = first.sequence === end.sequence ? `action ${first.sequence}` : `actions ${first.sequence}–${end.sequence}`;
-    title.textContent = `L${first.fromLevel} · ${actions} · ${configuration.title}`;
+    const orientation = configuration.when === 'reserveRoute' && decision.context?.effect === 'modifier';
+    title.textContent = `L${first.fromLevel} · ${actions} · ${orientation ? 'Test orientation within the reserve' : configuration.title}`;
     const facts = document.createElement('dl');
     const evidence = [
       strategy?.color === 'different' && (configuration.when === 'colorContact' || configuration.when === 'reserveAndColor')
@@ -1190,11 +1213,14 @@ function renderStrategyEpisodes(container: Element, returns: readonly Directiona
     ].filter(Boolean).join(' ');
     const meter = decision.strategyMeter;
     const measured = meter?.unitsAfter != null ? ` Gauge length: ${meter.unitsBefore} → ${meter.unitsAfter} pixels.` : '';
+    const poseAfter = orientation ? orientationAfter(end, returns) : null;
+    const pose = poseAfter === 'aligned' ? ' Before the next action, the engine measured aligned motifs.'
+      : poseAfter === 'different' ? ' Before the next action, the engine still measured an orientation difference.' : '';
     const factsList = [
       ['Need', configuration.need],
       ['Situation', [configuration.situation, evidence].filter(Boolean).join(' ')],
-      ['Choice', configuration.choice],
-      ['Return', strategyOutcome(configuration, end) + measured],
+      ['Choice', orientation ? 'Reach the orientation contact while keeping enough reserve to continue.' : configuration.choice],
+      ['Return', strategyOutcome(configuration, end) + pose + measured],
     ] as const;
     for (const [name, description] of factsList) {
       const term = document.createElement('dt'), value = document.createElement('dd');
@@ -1202,34 +1228,110 @@ function renderStrategyEpisodes(container: Element, returns: readonly Directiona
       facts.append(term, value);
     }
     details.append(title, facts);
+    const links = strategyLinks({ configuration, first, last: end }, episodes, returns);
+    const uncertainty = configuration.when === 'reserveContact'
+      ? 'A gauge rise confirms this return; it does not establish that every similar tile refills it.'
+      : configuration.when === 'colorContact'
+        ? 'This contact tests one color transition. Other colors or repeat contacts may behave differently.'
+        : configuration.when === 'targetContact'
+          ? 'The successful contact shows which conditions held together. It does not isolate which of them are necessary.'
+          : orientation ? 'A pose measurement can justify the next step. It does not establish that every approach produces the same rotation.'
+            : null;
+    if (uncertainty) {
+      const note = document.createElement('p');
+      note.textContent = `Still uncertain: ${uncertainty}`;
+      details.append(note);
+    }
     const frames = () => {
       if (!details.open || details.querySelector('.sic-sprites')) return;
       const target = decision.strategyTarget ?? start.strategyTarget;
       const terminal = decision.remainingSteps === 1 && decision.stepIndex != null;
       if (target) details.append(renderFrames([['Planned tile · before', target.before],
         ['Planned tile · after the last step', terminal ? target.after : null]], palette));
-      if (configuration.when === 'colorContact' || configuration.when === 'reserveAndColor') {
+      if (configuration.when === 'colorContact' || configuration.when === 'reserveAndColor' || configuration.when === 'targetContact' || orientation) {
         for (const [index, sprite] of decision.sprites.filter(sprite => sprite.label.startsWith('Pattern compared')).entries()) {
           details.append(renderFrames([[`Motif ${index + 1} · before`, sprite.before],
             [`Motif ${index + 1} · after`, sprite.after]], palette));
         }
       }
       if (meter || start.strategyMeter) {
-        const gaugeFrames = renderFrames(meter ? [['Gauge · before the last step', meter.before],
-          ['Gauge · after the last step', meter.after]] : [['Gauge · at selection', start.strategyMeter!.before]], palette);
-        gaugeFrames.classList.add('sic-strategy-gauge');
-        for (const canvas of gaugeFrames.querySelectorAll('canvas')) {
-          const scale = Math.min(3, 168 / canvas.width, 72 / canvas.height);
-          canvas.style.width = `${canvas.width * scale}px`;
-          canvas.style.height = `${canvas.height * scale}px`;
+        details.append(renderStrategyGauge(meter ? [['Gauge · before the last step', meter.before],
+          ['Gauge · after the last step', meter.after]] : [['Gauge · at selection', start.strategyMeter!.before]], palette));
+      }
+      if (links.length) {
+        const reused = document.createElement('details');
+        reused.className = 'sic-details sic-strategy-reuse';
+        const summary = document.createElement('summary');
+        summary.textContent = 'What the engine used';
+        reused.append(summary);
+        for (const link of links) {
+          const sourceCard = visible.find(item => item.first.sequence <= link.source.sequence && item.last.sequence === link.source.sequence);
+          const jump = sourceCard ? strategyJump(section, cardId(sourceCard.first, sourceCard.configuration.when), `See action ${link.source.sequence}`) : null;
+          renderStrategyLink(reused, link, first, palette, jump);
         }
-        details.append(gaugeFrames);
+        details.append(reused);
       }
     };
     details.addEventListener('toggle', frames);
     section.append(details);
     frames();
   }
+  container.append(section);
+}
+
+function strategyJump(section: HTMLElement, id: string, label: string): HTMLButtonElement {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'sic-evidence-link';
+  button.textContent = label;
+  button.addEventListener('click', () => {
+    const target = [...section.querySelectorAll<HTMLDetailsElement>('details[data-strategy-choice]')]
+      .find(details => details.dataset.strategyChoice === id);
+    if (!target) return;
+    target.open = true;
+    target.querySelector('summary')?.focus();
+    target.scrollIntoView({ block: 'nearest' });
+  });
+  return button;
+}
+
+function renderStrategyGauge(frames: readonly (readonly [string, NativeRows | null])[], palette: readonly string[]): HTMLElement {
+  const group = renderFrames(frames, palette);
+  group.classList.add('sic-strategy-gauge');
+  for (const canvas of group.querySelectorAll('canvas')) {
+    const scale = Math.min(3, 168 / canvas.width, 72 / canvas.height);
+    canvas.style.width = `${canvas.width * scale}px`;
+    canvas.style.height = `${canvas.height * scale}px`;
+  }
+  return group;
+}
+
+function renderStrategyLink(container: Element, link: StrategyLink, first: DirectionalReturn, palette: readonly string[],
+  jump: HTMLButtonElement | null): void {
+  const section = document.createElement('div'), text = document.createElement('p');
+  const action = link.source.sequence, source = link.source.decision, current = first.decision;
+  if (link.kind === 'gauge') {
+    const a = source?.strategyMeter, b = current?.strategyMeter;
+    text.textContent = `Measured again: the same gauge refilled at action ${action}. This choice used its current reading (${b?.unitsBefore} pixels).`;
+    section.append(text);
+    if (a?.after && b) section.append(renderStrategyGauge([[`After action ${action}`, a.after], ['Gauge at this choice', b.before]], palette));
+  } else {
+    text.textContent = link.kind === 'color' ? `Measured again: the motifs that matched after action ${action} still matched when this choice was made.`
+      : link.kind === 'nativeColor' ? `Cited by 0.68: the earlier color effect at action ${action}.`
+        : link.kind === 'nativePattern' ? `Cited by 0.68: the change to one motif at action ${action}.`
+          : `Cited by 0.68: the earlier contact used to plan the approach at action ${action}.`;
+    section.append(text);
+    const sourceMotifs = source?.sprites.filter(sprite => sprite.label.startsWith('Pattern compared')) ?? [];
+    const currentMotifs = current?.sprites.filter(sprite => sprite.label.startsWith('Pattern compared')) ?? [];
+    for (const [index, sprite] of sourceMotifs.entries()) {
+      section.append(renderFrames([
+        [`Motif ${index + 1} · before action ${action}`, sprite.before],
+        [`Motif ${index + 1} · after action ${action}`, sprite.after],
+        [`Motif ${index + 1} · this choice`, currentMotifs[index]?.before ?? null],
+      ], palette));
+    }
+  }
+  if (jump) section.append(jump);
   container.append(section);
 }
 

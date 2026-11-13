@@ -54,7 +54,7 @@ const configurations: readonly Configuration[] = [
     choice: 'Follow the next segment of that route and check the return before proceeding.',
   },
   {
-    kind: 'strategy', when: 'targetContact',
+    kind: 'strategy', when: 'targetContact', title: 'Try the aligned target',
     need: 'Check whether the target advances the level',
     situation: 'The engine measures aligned motifs and proposes contact with the target.',
     choice: 'Try the contact and check the level reported by the game.',
@@ -110,7 +110,9 @@ export function strategyEpisodes(returns: readonly DirectionalReturn[], sessionI
 export function strategyOutcome(configuration: Configuration, item: DirectionalReturn): string {
   const decision = item.decision;
   if (!decision) return 'No return for this choice yet.';
-  if (item.fromLevel !== item.toLevel) return 'The game advanced. The local effect cannot be separated from the level change.';
+  if (item.fromLevel !== item.toLevel) return configuration.when === 'targetContact' && item.toLevel > item.fromLevel
+    ? `The contact advanced the game to level ${item.toLevel}.`
+    : 'The game advanced. The local effect cannot be separated from the level change.';
   if (item.restart) return 'The game restarted. The local effect cannot be separated from the restart.';
   if (decision.remainingSteps !== 1 || decision.stepIndex == null) return item.nativeCheck?.matched === false
     ? 'The latest step differed from the prediction; this segment’s final effect was not reached.'
@@ -123,27 +125,98 @@ export function strategyOutcome(configuration: Configuration, item: DirectionalR
     return 'The gauge change could not be verified on this return.';
   }
   if (configuration.when === 'colorContact' || (configuration.when === 'reserveAndColor' && decision.context?.effect === 'feature_probe')) {
-    const [a, b] = decision.sprites.filter(sprite => sprite.label.startsWith('Pattern compared'));
-    if (a?.after && b?.after) {
-      const same = (x: NativeRows, y: NativeRows) => JSON.stringify(x) === JSON.stringify(y);
-      const recolored = (before: NativeRows, after: NativeRows) => {
-        const changes = new Map<number, number>();
-        const unchanged = new Set<number>();
-        before.forEach((row, y) => row.forEach((color, x) => {
-          const next = after[y]?.[x];
-          if (next === color) unchanged.add(color);
-          else if (next !== undefined) changes.set(color, changes.has(color) && changes.get(color) !== next ? -1 : next);
-        }));
-        return changes.size === 1 && [...changes].every(([from, to]) => to >= 0 && !unchanged.has(from) && !unchanged.has(to));
-      };
-      if ((same(a.before, a.after) && recolored(b.before, b.after)) || (same(b.before, b.after) && recolored(a.before, a.after))) {
-        return 'One motif changed color in place; the other kept the same pixels.';
-      }
-      if (same(a.before, a.after) && same(b.before, b.after)) return 'Neither motif changed on this return.';
-    }
-    return 'The two crops do not isolate a color change on this return.';
+    const result = colorReturn(item);
+    return result === 'changed' ? 'One motif changed color in place; the other kept the same pixels.'
+      : result === 'unchanged' ? 'Neither motif changed on this return.'
+        : 'The two crops do not isolate a color change on this return.';
   }
   return item.nativeCheck?.matched === true ? 'The engine confirmed the predicted step.'
     : item.nativeCheck?.matched === false ? 'The observed step differed from the prediction.'
       : 'The engine did not publish a matching check for this step.';
+}
+
+function colorReturn(item: DirectionalReturn): 'changed' | 'unchanged' | null {
+  const decision = item.decision;
+  if (!decision || item.restart || item.fromLevel !== item.toLevel || decision.remainingSteps !== 1 || decision.stepIndex == null) return null;
+  const [a, b] = decision.sprites.filter(sprite => sprite.label.startsWith('Pattern compared'));
+  if (a?.after && b?.after) {
+    const same = (x: NativeRows, y: NativeRows) => JSON.stringify(x) === JSON.stringify(y);
+    const recolored = (before: NativeRows, after: NativeRows) => {
+      const changes = new Map<number, number>();
+      const unchanged = new Set<number>();
+      before.forEach((row, y) => row.forEach((color, x) => {
+        const next = after[y]?.[x];
+        if (next === color) unchanged.add(color);
+        else if (next !== undefined) changes.set(color, changes.has(color) && changes.get(color) !== next ? -1 : next);
+      }));
+      return changes.size === 1 && [...changes].every(([from, to]) => to >= 0 && !unchanged.has(from) && !unchanged.has(to));
+    };
+    if ((same(a.before, a.after) && recolored(b.before, b.after)) || (same(b.before, b.after) && recolored(a.before, a.after))) {
+      return 'changed';
+    }
+    if (same(a.before, a.after) && same(b.before, b.after)) return 'unchanged';
+  }
+  return null;
+}
+
+export function orientationAfter(item: DirectionalReturn, returns: readonly DirectionalReturn[]) {
+  const pair = item.decision?.context?.strategy?.pairRef;
+  if (!pair || item.restart || item.fromLevel !== item.toLevel) return null;
+  const next = returns.find(candidate => candidate.sequence === item.sequence + 1
+    && candidate.sessionId === item.sessionId && candidate.fromLevel === item.fromLevel);
+  const context = next?.decision?.context;
+  return context?.strategy?.pairRef === pair ? context.orientation : null;
+}
+
+type Episode = ReturnType<typeof strategyEpisodes>[number];
+export type StrategyLink = { readonly kind: 'gauge' | 'color' | 'nativeColor' | 'nativePattern' | 'nativeEntry';
+  readonly source: DirectionalReturn };
+
+/** Explain reuse from published references, or from a freshly measured property of the same subject. */
+export function strategyLinks(episode: Episode, episodes: readonly Episode[], returns: readonly DirectionalReturn[]): StrategyLink[] {
+  const { first } = episode;
+  const context = first.decision?.context, strategy = context?.strategy;
+  if (!strategy) return [];
+  const scoped = (item: DirectionalReturn) => item.sessionId === first.sessionId && item.fromLevel === first.fromLevel
+    && item.toLevel === first.fromLevel && item.sequence < first.sequence && !item.restart;
+  const mostRecentRestart = [...returns].reverse().find(item => item.sessionId === first.sessionId
+    && item.fromLevel === first.fromLevel && item.sequence < first.sequence && item.restart)?.sequence ?? -1;
+  const live = (item: DirectionalReturn) => scoped(item) && item.sequence > mostRecentRestart;
+  const links: StrategyLink[] = [];
+  const candidates = episodes.filter(item => live(item.last)).sort((a, b) => b.last.sequence - a.last.sequence);
+  const findReturn = (action: number | null | undefined) => returns.find(item => item.sequence === action && scoped(item));
+  const nativeColor = findReturn(strategy.colorWitness);
+  if (nativeColor) links.push({ kind: 'nativeColor', source: nativeColor });
+  const nativePattern = findReturn(strategy.patternWitness);
+  if (nativePattern) links.push({ kind: 'nativePattern', source: nativePattern });
+  const nativeEntry = [...(context?.entryActions ?? [])].sort((a, b) => b - a).map(findReturn).find(Boolean);
+  if (nativeEntry && nativeEntry !== nativePattern) links.push({ kind: 'nativeEntry', source: nativeEntry });
+
+  const strip = strategy.meter?.strip, meter = first.decision?.strategyMeter;
+  if (strip && meter && first.decision?.stepIndex === 0) {
+    const recharge = candidates.find(item => {
+      const measured = item.last.decision?.strategyMeter, sourceStrip = item.last.decision?.context?.strategy?.meter?.strip;
+      return item.last.decision?.context?.effect === 'capacity_probe' && item.last.decision.remainingSteps === 1
+        && item.last.decision.stepIndex != null && measured?.unitsAfter != null && measured.unitsAfter > measured.unitsBefore
+        && sourceStrip && strip.every((value, index) => value === sourceStrip[index]);
+    });
+    if (recharge) links.push({ kind: 'gauge', source: recharge.last });
+  }
+  if (!nativeColor && strategy.pairRef && strategy.color === 'equal' && strategy.colors && strategy.colors[0] === strategy.colors[1]) {
+    const color = candidates.find(item => (item.configuration.when === 'colorContact' || item.last.decision?.context?.effect === 'feature_probe')
+      && item.last.decision?.context?.strategy?.pairRef === strategy.pairRef && colorReturn(item.last) === 'changed');
+    if (color) {
+      // A later proposal can remeasure the match without citing the contact itself.
+      const [a, b] = color.last.decision!.sprites.filter(sprite => sprite.label.startsWith('Pattern compared'));
+      const beforeColors = color.last.decision?.context?.strategy?.colors;
+      const matched = (index: number, sprite: NonNullable<typeof a>) => {
+        const original = beforeColors?.[index], target = strategy.colors![0];
+        return original != null && sprite.after && sprite.before.some((row, y) => row.some((value, x) =>
+          value === original && sprite.after![y]?.[x] === target))
+          && sprite.before.every((row, y) => row.every((value, x) => value !== original || sprite.after![y]?.[x] === target));
+      };
+      if (a && b && matched(0, a) && matched(1, b)) links.push({ kind: 'color', source: color.last });
+    }
+  }
+  return links;
 }

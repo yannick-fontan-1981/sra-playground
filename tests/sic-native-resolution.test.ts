@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { captureDecisionSprites, readNativeResolution } from '../src/sic/native-resolution.ts';
-import { explainDecision, strategyEpisodes, strategyOutcome } from '../src/sic/decision-configurations.ts';
+import { explainDecision, orientationAfter, strategyEpisodes, strategyLinks, strategyOutcome } from '../src/sic/decision-configurations.ts';
 import type { DirectionalReturn } from '../src/sic/directional-return.ts';
 
 test('native explanation separates the pending step, its guard, and the latest observed result', () => {
@@ -51,16 +51,17 @@ test('an authorized proposal keeps its objective, operation and bounded native s
 });
 
 test('strategy configurations tie recharge and color to separate, scoped public returns', () => {
-  const snapshots = (route: string, sequence: number, guardIndex: number, extra = {}) => readNativeResolution({
+  const snapshots = (route: string, sequence: number, guardIndex: number, extra = {}, facts = {}) => readNativeResolution({
     sessionId: 's', sequence, level: 3, lastDecision: 'morphology', phase: 'authorised_not_executed',
     trace: [{ kind: 'proposal', family: 'morphology' }, { kind: 'before_guard', family: 'morphology', admitted: true, index: guardIndex }],
     proposal: { proposal_id: route, actions: [{ action_ref: 'ACTION4' }, { action_ref: 'ACTION4' }],
       binding: { observation_ref: 's:epoch:3:revision:9:frame:b' },
       morphology_plan: { route_key: route, access_phase: 'contact', pair: { sites: [[0, 0, 1, 1], [2, 0, 3, 1]] }, size: [1, 1],
         steps: [{ from: [0, 2], to: [1, 2] }, { from: [1, 2], to: [2, 2] }], ...extra },
-      morphology: { measured_facts: { color_relation: 'different', capacity_needed: true, direct_goal_cost_lower_bound: 6,
+      morphology: { measured_facts: { color_relation: 'different', pair_ref: 'pair', feature_residuals: { observed_colors: [1, 3] },
+        capacity_needed: true, direct_goal_cost_lower_bound: 6,
         meter_forecast: { measured_strip: ['x', 3, 4, 'hi', 4], steps_before_empty: 2, current_units: 2, loss_per_step: 1, capacity_steps: 4 },
-        feature_reaccess: { effect_after: 'old:epoch:3:revision:5:frame:a' } } } },
+        feature_reaccess: { effect_after: 'old:epoch:3:revision:5:frame:a' }, ...facts } } },
   })!;
   const before = [[1, 0, 3, 0], [0, 1, 0, 3], [2, 0, 8, 0], [0, 0, 4, 4]];
   const nearing = [...before.slice(0, 3), [0, 0, 0, 4]];
@@ -86,4 +87,26 @@ test('strategy configurations tie recharge and color to separate, scoped public 
   assert.match(strategyOutcome(episodes[1]!.configuration, { ...returns[2]!, toLevel: 4 }), /cannot be separated/);
   assert.equal(snapshots('managed_access', 10, 1).context?.strategy?.colorWitness, null);
   assert.deepEqual(explainDecision(snapshots('capacity_access_probe', 9, 0)).map(rule => rule.when), ['reserveAccess']);
+
+  const aligned = { color_relation: 'equal', orientation_relation: 'aligned', feature_residuals: { observed_colors: [3, 3] },
+    single_pattern_change_observation_ref: 's:epoch:3:revision:11:frame:b' };
+  const exit = { ...receipt(13, captureDecisionSprites(snapshots('peer', 12, 0, {}, aligned), recolored, null)), toLevel: 4 };
+  const timeline = [...returns, exit];
+  const linked = strategyEpisodes(timeline, 's');
+  const final = linked.at(-1)!;
+  assert.deepEqual(strategyLinks(final, linked, timeline).map(link => [link.kind, link.source.sequence]),
+    [['nativePattern', 10], ['color', 11]]);
+  assert.match(strategyOutcome(final.configuration, exit), /advanced the game to level 4/);
+  assert.deepEqual(strategyLinks(final, linked, [...returns, { ...returns[3]!, sessionId: 's', restart: {} as NonNullable<DirectionalReturn['restart']> }, exit])
+    .map(link => [link.kind, link.source.sequence]), [['nativePattern', 10]]);
+  const afterRecharge = { ...receipt(12, captureDecisionSprites(snapshots('peer', 11, 0, {}, {
+    ...aligned, single_pattern_change_observation_ref: 'other:epoch:3:revision:11:frame:b',
+    meter_forecast: { measured_strip: ['x', 3, 4, 'hi', 4], steps_before_empty: 4, current_units: 4, loss_per_step: 1, capacity_steps: 4 },
+  }), [...recolored.slice(0, 3), [4, 4, 4, 4]], null)), toLevel: 4 };
+  const history = [...returns, afterRecharge];
+  const episodesAfterRecharge = strategyEpisodes(history, 's');
+  assert.deepEqual(strategyLinks(episodesAfterRecharge.at(-1)!, episodesAfterRecharge, history).map(link => [link.kind, link.source.sequence]),
+    [['gauge', 10], ['color', 11]]);
+  assert.equal(orientationAfter(returns[2]!, history), 'aligned');
+  assert.equal(orientationAfter(returns[2]!, [...returns, { ...afterRecharge, sessionId: 'other' }]), null);
 });
