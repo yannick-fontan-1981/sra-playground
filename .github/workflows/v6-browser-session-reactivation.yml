@@ -1,0 +1,47 @@
+name: V6 browser session reactivation
+
+on:
+  push:
+    branches:
+      - recovery/v6-browser-session-reactivation-20261113
+    paths:
+      - 'src/runtime/v6-browser-common-campaign-host.ts'
+      - 'src/runtime/v6-browser-product-campaign-host.ts'
+      - 'src/runtime/v6-browser-agent-controller.ts'
+      - 'tests/v6-browser-session-reactivation.test.ts'
+      - '.github/workflows/v6-browser-session-reactivation.yml'
+  pull_request:
+    paths:
+      - 'src/runtime/v6-browser-common-campaign-host.ts'
+      - 'src/runtime/v6-browser-product-campaign-host.ts'
+      - 'src/runtime/v6-browser-agent-controller.ts'
+      - 'tests/v6-browser-session-reactivation.test.ts'
+      - 'docs/recovery/v6-browser-session-reactivation-20261113.md'
+      - 'docs/recovery/v6-browser-session-reactivation-qualified.json'
+      - '.github/workflows/v6-browser-session-reactivation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  qualify:
+    runs-on: ubuntu-26.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.18.0
+          cache: npm
+      - run: npm ci
+      - name: Targeted browser continuity contracts
+        run: >-
+          node --experimental-transform-types --test
+          tests/v6-browser-session-reactivation.test.ts
+          tests/v6-browser-common-campaign-host.test.ts
+          tests/v6-browser-agent-controller.test.ts
+          tests/v6-common-campaign-session-continuity.test.ts
+      - name: Complete TypeScript regression suite
+        run: node --experimental-transform-types --test tests/*.test.ts
+      - name: Production build
+        run: npm run build
