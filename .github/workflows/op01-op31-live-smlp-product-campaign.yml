@@ -1,0 +1,46 @@
+name: OP01-OP31 live SMLP product campaign
+
+on:
+  push:
+    branches:
+      - op01-op31-live-smlp-pyodide-campaign-20261113
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  qualify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.18.0'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: npm ci
+      - name: Full TypeScript regression
+        run: node --experimental-transform-types --test tests/*.test.ts
+      - name: Production build and pinned Pyodide assets
+        run: npm run build
+      - name: Show browser runtime
+        run: |
+          command -v google-chrome-stable || command -v google-chrome || command -v chromium || command -v chromium-browser
+          (google-chrome-stable --version || google-chrome --version || chromium --version || chromium-browser --version)
+      - name: Qualify live SMLP product campaign
+        env:
+          OP01_OP31_LIVE_SMLP_REPORT: op01-op31-live-smlp-product-campaign-report.json
+        run: node scripts/qualify-op01-op31-live-smlp-product-campaign.mjs
+      - name: Product wiring report
+        run: node scripts/check-op01-op31-product-wiring.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: op01-op31-live-smlp-product-campaign
+          path: op01-op31-live-smlp-product-campaign-report.json
+          if-no-files-found: warn
