@@ -31,8 +31,8 @@ jobs:
           path = Path('scripts/apply-op01-op31-browser-session-resume.mjs')
           source = path.read_text(encoding='utf-8')
           source = source.replace(
-              "      : structuredClone(record(checkpoint.current, 'browser FieldStock checkpoint current'))\\n        as unknown as PublicCampaignObservation;\\n",
-              "      : (structuredClone(record(checkpoint.current, 'browser FieldStock checkpoint current'))\\n        as unknown as PublicCampaignObservation);\\n",
+              "    const current = checkpoint.current === null\\n      ? null\\n      : structuredClone(record(checkpoint.current, 'browser FieldStock checkpoint current'))\\n        as unknown as PublicCampaignObservation;\\n",
+              "    const restoreCurrent = (candidate: unknown): PublicCampaignObservation => {\\n      const cloned = structuredClone(record(candidate, 'browser FieldStock checkpoint current'));\\n      return cloned as unknown as PublicCampaignObservation;\\n    };\\n    const current = checkpoint.current === null\\n      ? null\\n      : restoreCurrent(checkpoint.current);\\n",
           )
           marker = '\nconst controller = `'
           if marker not in source:
