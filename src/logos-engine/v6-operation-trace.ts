@@ -84,13 +84,30 @@ export class OperationTraceSink {
     this.#detail = detail;
   }
 
-  record(event: OperationTraceEvent): void {
-    const counter = event.kind === 'operation'
-      ? `${event.kind}:${event.op}:${event.mode}`
-      : event.kind === 'consumption'
-        ? `${event.kind}:${event.op}:${event.effectKind}`
-        : `${event.kind}:${event.needKind}`;
+  get countersOnly(): boolean {
+    return this.#detail === 'counters';
+  }
+
+  #increment(counter: string): void {
     this.#counters.set(counter, (this.#counters.get(counter) ?? 0) + 1);
+  }
+
+  countNeed(needKind: string): void {
+    this.#increment(`need:${needKind}`);
+  }
+
+  countOperation(op: `OP${string}`, mode: OperationTraceMode): void {
+    this.#increment(`operation:${op}:${mode}`);
+  }
+
+  countConsumption(op: `OP${string}`, effectKind: OperationEffectKind): void {
+    this.#increment(`consumption:${op}:${effectKind}`);
+  }
+
+  record(event: OperationTraceEvent): void {
+    if (event.kind === 'operation') this.countOperation(event.op, event.mode);
+    else if (event.kind === 'consumption') this.countConsumption(event.op, event.effectKind);
+    else this.countNeed(event.needKind);
 
     if (this.#detail === 'counters') return;
     if (this.#events.length === this.#capacity) {
