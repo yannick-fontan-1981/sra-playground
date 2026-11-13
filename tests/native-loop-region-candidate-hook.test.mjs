@@ -135,7 +135,7 @@ test('identity-only method binding omits full observations while preserving expl
   assert.equal('beforeObservation' in methodInput, false);
   assert.equal('observation' in methodInput, false);
   assert.equal('evidence' in methodInput, false);
-  assert.equal(hook.owner.model.has('identity-STCK-7-2'), true);
+  assert.equal(hook.owner.model.get('identity-STCK-7-2')?.actionRef, 'ACTION6');
 });
 
 test('useful ACTION6 evidence stays unbound when no external methodRef producer is supplied', async () => {
