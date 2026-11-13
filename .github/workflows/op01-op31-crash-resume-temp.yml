@@ -35,7 +35,11 @@ jobs:
               for index in range(7)
           )
           source = zlib.decompress(base64.b64decode(payload))
-          exec(compile(source, 'apply-op01-op31-crash-resume-temp.py', 'exec'))
+          patch_file = Path.cwd() / 'scripts' / 'apply-op01-op31-crash-resume-temp.py'
+          exec(
+              compile(source, str(patch_file), 'exec'),
+              {'__file__': str(patch_file), '__name__': '__main__'},
+          )
           PY
       - name: Build production bundle
         run: npm run build
