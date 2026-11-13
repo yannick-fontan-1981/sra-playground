@@ -182,7 +182,7 @@ interface Prefix {
   family: NativeFamily; proposal: NativeProposal; revision: number; index: number; witnessed: WitnessedTransition[];
   released: boolean; interruption: string | null;
   nativeBindings: NativeRecord[];
-  sicPlanId?: string;
+  sicPlan?: ReturnType<typeof nativePlanReceipt>;
 }
 export interface NativeSelectionGroup {
   readonly id: string;
@@ -1205,10 +1205,10 @@ export class NativeV6Runtime implements NativeV6Backend {
       this.note({ kind: 'why_act_release', admitted: true, decision_revision: this.prefix.revision,
         native_gate: this.authority !== null, graph_chain: this.knowledge?.graphChain ?? null });
     }
-    if (!this.prefix.sicPlanId) {
+    if (!this.prefix.sicPlan) {
       const receipt = nativePlanReceipt(family.id, proposal, this.observation, index);
-      this.prefix.sicPlanId = receipt.id;
-      this.note({ kind: 'sic_native_plan', ...receipt });
+      this.prefix.sicPlan = freeze(receipt);
+      this.note({ kind: 'sic_native_plan', ...this.prefix.sicPlan });
     }
     this.kind = 'action'; this.reason = null; return true;
   }
@@ -1231,7 +1231,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       if (preserved && !preserved.admitted) result = { matched: false, seal_prefix: true, reason: preserved.reason };
       prefix.witnessed.push({ command: freeze(structuredClone(outcome.command)), before, after, first, second: this.current!, index: prefix.index, outcome: freeze(structuredClone(result)) });
       this.note({ kind: 'actual_outcome', family: prefix.family.id, index: prefix.index, ...result, observation_ref: after.observation_ref,
-        ...(prefix.sicPlanId ? { sic_plan: prefix.sicPlanId } : {}) });
+        ...(prefix.sicPlan ? { sic_plan: prefix.sicPlan.id } : {}) });
       this.check(execution);
       const boundary = first.level !== this.current!.level || first.levels_completed !== this.current!.levels_completed;
       prefix.index += 1;
@@ -1378,6 +1378,11 @@ export class NativeV6Runtime implements NativeV6Backend {
     await this.persistFamilies({ workflow: SELECTION_PROGRAM, step: 'sealed_prefix', statement: 'outcome.acquire' }, [{
       id: evidenceId, kind: 'prefix_evidence', family: prefix.family.id, status: 'observed',
       value: { decision_revision: prefix.revision, proposal: prefix.proposal, selection: this.selectionReceipt,
+        ...(prefix.sicPlan ? { sic_plan: {
+          id: prefix.sicPlan.id, family: prefix.sicPlan.family, strategy: prefix.sicPlan.strategy,
+          objective: prefix.sicPlan.objective, subObjective: prefix.sicPlan.subObjective,
+          observationRef: prefix.sicPlan.observationRef, index: prefix.sicPlan.index, planned: prefix.sicPlan.planned,
+        } } : {}),
         ...(prefix.nativeBindings.length ? { native_bindings: prefix.nativeBindings } : {}),
         ...(compositionReturns.length ? { composition_dependency_returns: compositionReturns } : {}),
         ...(nativeAcquisitionsIncomplete.length ? { native_acquisitions_incomplete: nativeAcquisitionsIncomplete } : {}),

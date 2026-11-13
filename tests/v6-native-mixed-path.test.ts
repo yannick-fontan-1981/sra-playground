@@ -4,6 +4,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { NativeV6Runtime } from '../src/logos-engine/v6-native-runtime.ts';
+import { hydrateNativeState } from '../src/logos-engine/v6-native-state-graph.ts';
 import { ObservedInputDomain } from '../src/logos-engine/v6-native-observer.ts';
 import type { NativeCommand, NativeFamily, NativeRecord } from '../src/logos-engine/v6-native-types.ts';
 import { BrowserV6Agent } from '../src/runtime/v6-agent.ts';
@@ -110,6 +111,15 @@ function assertAcquiredOnce(state: ReturnType<typeof harness>, count: number): v
   assert.equal(released.length, 1);
   assert.deepEqual(released[0]!.commands, state.commands);
   assert.ok(trace(state).filter(event => event.kind === 'actual_outcome').every(event => event.sic_plan === released[0]!.id));
+  const graph = state.runtime.inspectKnowledge();
+  const evidence = Object.values(graph.nodes).filter(node => node.kind === 'prefix_evidence');
+  assert.equal(evidence.length, 1);
+  const persisted = hydrateNativeState(evidence[0]!.value, id => graph.nodes[id]?.value) as NativeRecord;
+  const { kind, command, commands, ...receipt } = released[0]!;
+  assert.equal(kind, 'sic_native_plan');
+  assert.deepEqual(persisted.sic_plan, receipt);
+  assert.deepEqual(persisted.proposal.actions, commands);
+  assert.deepEqual(persisted.proposal.actions[persisted.sic_plan.index], command);
   assert.equal(trace(state).filter(event => event.kind === 'sealed_prefix').length, 1);
   assert.notEqual(state.agent.snapshot.status, 'error', state.agent.snapshot.message);
 }
