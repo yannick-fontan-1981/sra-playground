@@ -218,3 +218,32 @@ Therefore A/STCK is currently:
 **reconstructed contract, pending real native execution qualification**.
 
 No official ABBA benchmark is authorized yet.
+
+
+## Reconstruction progress — A/SMLP explicit runner
+
+The second explicit reference runner is reconstructed on the same durable
+`game_bridge` boundary as A/STCK.
+
+A/SMLP identity:
+- variant: `A`
+- game code: `SMLP`
+- game id: `smlp-c3000001`
+- backend: `python-wasm`
+- corpus: `native-public-action-corpus-v1`
+- seed: `0`
+- start level: `1`
+- measured action count: `15`
+
+The runner rejects STCK identity drift and does not provide a fallback backend.
+
+Combined explicit reference-runner contract suite:
+**7/7 passed** for A/STCK + A/SMLP.
+
+A/SMLP status:
+**reconstructed contract, pending real native execution qualification**.
+
+Reference side A is now structurally complete at the bridge-contract level.
+The next reconstruction target is B/STCK, where the candidate-only
+`region_intervention` hook must be made explicit without changing the
+transport, corpus, seed or game session configuration.

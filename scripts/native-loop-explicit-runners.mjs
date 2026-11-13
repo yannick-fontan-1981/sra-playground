@@ -35,11 +35,41 @@ export function createAStckNativeRunner({ dispatch, sourceRef }) {
   });
 }
 
+export function createASmlpNativeRunner({ dispatch, sourceRef }) {
+  nonEmpty(sourceRef, 'sourceRef');
+  if (typeof dispatch !== 'function') {
+    throw new TypeError('A/SMLP native runner requires game_bridge dispatch');
+  }
+
+  return createPublicCorpusSessionRunner({
+    variant: 'A',
+    game: 'SMLP',
+    sourceRef,
+    seed: 0,
+    createSession: ({ game, seed, startLevel }) => createGameBridgeNativeSession({
+      dispatch,
+      game,
+      seed,
+      startLevel,
+    }),
+  });
+}
+
 export const EXPLICIT_NATIVE_RUNNER_IDENTITIES = Object.freeze({
   A_STCK: Object.freeze({
     variant: 'A',
     game: 'STCK',
     gameId: 'stck-c0000001',
+    corpusRef: 'native-public-action-corpus-v1',
+    seed: 0,
+    startLevel: 1,
+    backend: 'python-wasm',
+    status: 'reconstructed-contract-pending-real-native-execution',
+  }),
+  A_SMLP: Object.freeze({
+    variant: 'A',
+    game: 'SMLP',
+    gameId: 'smlp-c3000001',
     corpusRef: 'native-public-action-corpus-v1',
     seed: 0,
     startLevel: 1,
