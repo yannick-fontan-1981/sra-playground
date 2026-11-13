@@ -53,9 +53,9 @@ export function createASmlpNativeRunner({ dispatch, sourceRef, corpus, selectAct
     game: 'SMLP',
     sourceRef,
     ...corpusOptions(corpus, selectAction),
-    createSession: ({ game, seed, startLevel }) => createGameBridgeNativeSession({
+    createSession: ({ game: requestedGame, seed, startLevel }) => createGameBridgeNativeSession({
       dispatch,
-      game,
+      game: requestedGame,
       seed,
       startLevel,
     }),
@@ -68,6 +68,9 @@ function requireRegionCandidateHook(candidateHook) {
   }
   if (candidateHook.id !== 'region_intervention') {
     throw new Error('B native runner candidate hook id must be region_intervention');
+  }
+  if (candidateHook.inputMode !== 'borrowed-readonly') {
+    throw new Error('region_intervention candidate hook must declare borrowed-readonly inputs');
   }
   if (typeof candidateHook.beforeAction !== 'function') {
     throw new TypeError('region_intervention candidate hook requires beforeAction()');
@@ -104,6 +107,7 @@ function createCandidateRunner({
     }),
     beforeAction: hook.beforeAction,
     afterAction: hook.afterAction,
+    hookInputMode: hook.inputMode,
   });
 }
 
