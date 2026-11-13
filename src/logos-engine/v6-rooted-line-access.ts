@@ -7,10 +7,10 @@ import { measureRootedLine, physicalRootedLine, projectedRootedLine } from './v6
 import { rootedLineEffect, planRootedLine } from './v6-rooted-line-mechanics.ts';
 import { planCellPush, witnessedCellPush } from './v6-rooted-line-revision.ts';
 import { resolveRootedRecovery } from './v6-rooted-line-recovery-operations.ts';
-import { admitContactRecoveryNeed, contactRecoveryGraph, contactRecoveryOrder, contactSituation, defaultRecoveryPack,
-  evaluateContactStrategy, rootedRecoveryStrategy, type ContactRecoveryNeed } from '../sic/active-recovery.ts';
+import { admitContactRecoveryNeed, contactRecoveryGraph, contactSituation, defaultRecoveryPack,
+  rootedRecoveryStrategy, type ContactRecoveryNeed } from '../sic/active-recovery.ts';
 import { recoveryRevision } from '../sic/recovery-pack.ts';
-import { runStrategyAgenda } from '../sic/strategy-agenda.ts';
+import { resolveStrategyGraph } from '../sic/strategy-agenda.ts';
 import { symbolicDigest as identity } from './v6-hash.ts';
 import { pythonEqual as equal, pythonTruthy as truth } from './v6-operations.ts';
 import { retainNativeJson } from './v6-native-owned.ts';
@@ -107,14 +107,14 @@ export class RootedLineMemory {
         ? effects[action]!.evidence_refs.filter((item: unknown): item is string => typeof item === 'string') : []);
       const situation = contactSituation(revision, observation.observation_ref, controlEvidence);
       const reposition = 'reposition_root_before_contact';
-      const agenda = runStrategyAgenda((bounds.strategyOrder ?? contactRecoveryOrder).map(id => ({
-        ...evaluateContactStrategy(id, situation), plan: () => limit >= 1
-          ? planCellPush(scene, effects, maxDepth, maxNodes - visited, timedOut, {
-            allowFirst: id === reposition ? command => vertical.has(command) : undefined,
-            visit: () => { visited++; },
-          })
-          : null,
-      })), bounds.mode);
+      const searchAccess = (allowFirst?: (command: string) => boolean) => limit >= 1
+        ? planCellPush(scene, effects, maxDepth, maxNodes - visited, timedOut, {
+          allowFirst, visit: () => { visited++; },
+        }) : null;
+      const agenda = resolveStrategyGraph({ graph: contactRecoveryGraph, facts: situation.facts, mode: bounds.mode,
+        priorities: bounds.strategyOrder,
+        planners: { revise_rooted_contact: () => searchAccess(), [reposition]: () => searchAccess(command => vertical.has(command)) },
+      });
       const receipt = { needId: revision.needId, configuration: bounds, packDigest: recoveryRevision(bounds).digest,
         situation, graph: { id: contactRecoveryGraph.id, version: contactRecoveryGraph.version, order: contactRecoveryGraph.order },
         agenda: agenda.entries, visited };

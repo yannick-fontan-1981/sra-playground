@@ -1,4 +1,4 @@
-import { evaluateStrategyGuards, runStrategyAgenda, type StrategyFact, type StrategyGuard } from './strategy-agenda.ts';
+import { compileStrategyGraph, resolveStrategyGraph, type StrategyFact } from './strategy-agenda.ts';
 import { sicNeedId } from './need-identity.ts';
 
 export const frontierStrategies = {
@@ -12,19 +12,23 @@ export function frontierInformationNeed(scope: string, subject: string, parentOb
     satisfactionContract: 'acquire_the_selected_input_return' } as const;
   return { ...identity, id: sicNeedId(identity), evidence, status: 'assigned' } as const;
 }
-const guards = {
-  test_local_input: [{ fact: 'openInputHere', expected: true, label: 'An admitted input remains untried on this board' }],
-  reach_open_input: [{ fact: 'openInputHere', expected: false, label: 'The admitted inputs on this board have all been tried' }],
-} satisfies Record<FrontierStrategy, readonly [StrategyGuard<'openInputHere'>]>;
+const graph = compileStrategyGraph<FrontierStrategy, 'openInputHere'>({
+  id: 'frontier-information', version: 1, order: 'FALLBACK', priorities: ['test_local_input', 'reach_open_input'],
+  strategies: {
+    test_local_input: [{ fact: 'openInputHere', expected: true, label: 'An admitted input remains untried on this board' }],
+    reach_open_input: [{ fact: 'openInputHere', expected: false, label: 'The admitted inputs on this board have all been tried' }],
+  },
+}, ['openInputHere']);
 
 export function selectFrontierStrategy<T>(firstQuestion: T | undefined, observationRef: string) {
   const facts: Record<'openInputHere', StrategyFact> = {
     openInputHere: { value: firstQuestion !== undefined, evidence: [observationRef] },
   };
-  return runStrategyAgenda<FrontierStrategy, { question: T | null }>([
-    { id: 'test_local_input', ...evaluateStrategyGuards(facts, guards.test_local_input), evidence: [observationRef],
-      plan: () => firstQuestion === undefined ? null : { question: firstQuestion } },
-    { id: 'reach_open_input', ...evaluateStrategyGuards(facts, guards.reach_open_input), evidence: [observationRef],
-      plan: () => ({ question: null }) },
-  ] as const, 'active');
+  return resolveStrategyGraph<FrontierStrategy, 'openInputHere', { question: T | null }>({
+    graph, facts, mode: 'active',
+    planners: {
+      test_local_input: () => firstQuestion === undefined ? null : { question: firstQuestion },
+      reach_open_input: () => ({ question: null }),
+    },
+  });
 }
