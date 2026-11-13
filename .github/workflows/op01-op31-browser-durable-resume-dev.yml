@@ -25,7 +25,7 @@ jobs:
         run: npm run typecheck
       - name: Targeted durable resume tests
         run: >-
-          node --test
+          node --experimental-transform-types --test
           tests/browser-game-runtime-checkpoint.test.ts
           tests/v6-browser-durable-session.test.ts
           tests/v6-browser-session-resume.test.ts
