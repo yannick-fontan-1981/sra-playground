@@ -34,6 +34,10 @@ Dernière consolidation : 13 novembre 2026.
   `docs/recovery/op01-op31-browser-addressed-acquisition-20261113.md`
 - Propriétaires ACTION6 publics produit :
   `docs/recovery/op01-op31-browser-public-action6-owner-20261113.md`
+- Campagne SMLP réelle sous Pyodide :
+  `docs/recovery/op01-op31-live-smlp-product-campaign-20261113.md`
+- Noyau de continuité de session :
+  `docs/recovery/op01-op31-session-continuity-core-20261113.md`
 - Lot 9C2 public conjoint :
   `docs/recovery/lot9c2-public-addressed-joint-channels.md`
 - Qualification officielle C7 :
@@ -82,6 +86,11 @@ La campagne commune possède maintenant :
 - une qualification causale réelle du propriétaire conjoint SMLP sur le corpus
   natif seed 0 ;
 - une qualification fonctionnelle produit des propriétaires ACTION6 SMLP/STCK ;
+- une campagne SMLP réelle qualifiée sur Chrome, Pyodide et la même archive que
+  la référence CPython ;
+- un noyau de checkpoint versionné pour la campagne, son `needId` en attente,
+  sa déduplication et l'état complet FieldStock ;
+- une restauration atomique avec rollback en cas de refus d'un participant ;
 - une qualification C7 officielle du hook Region natif sur STCK et SMLP.
 
 Le contrôleur produit utilise uniquement le seam navigateur direct. Le Worker
@@ -94,9 +103,11 @@ Statut global :
 SMLP et une carte STCK publique unique ; OP18 est transportée et consommée avec
 un stock revalidé ; les retours ACTION6 sélectionnés traversent l’acquisition du
 propriétaire puis l’observation passive FieldStock ; C7 reste clos pour le
-protocole Region STCK/SMLP. La continuité entre activations, une campagne produit
-réelle complète, le coût ciblé de la nouvelle composition et OP31 restent
-ouverts.**
+protocole Region STCK/SMLP. Le noyau de continuité sait maintenant restaurer le
+`needId`, l'action en attente, la déduplication et FieldStock sans double
+acquisition. Son raccord au host et au contrôleur navigateur, une campagne de
+résolution produit complète, le coût ciblé de la nouvelle composition et OP31
+restent ouverts.**
 
 Cette reconstruction ne prouve ni une identité binaire avec Site 109, ni une
 parité totale V5/V6/V7, ni la présence d’un registre canonique complet des 76
@@ -123,7 +134,13 @@ points d’entrée V6.
 - `src/runtime/v6-browser-agent-controller.ts` : propriétaire unique de la
   session Agent et boucle bornée ;
 - `src/runtime/observed-addressed-material-runtime.ts` : acquisition locale,
-  calibration, rétention et revalidation FieldStock.
+  calibration, rétention et revalidation FieldStock ;
+- `src/logos-engine/field-stock-snapshot.ts` : codec exact du modèle, prior,
+  stock, `Map`, `Set` et preuves ;
+- `src/logos-engine/v6-common-campaign-checkpoint.ts` : checkpoint atomique de
+  campagne et participants avec rollback ;
+- `src/runtime/observed-addressed-material-checkpoint.ts` : participant
+  explicite du runtime FieldStock.
 
 ### Seam Worker conservé
 
@@ -157,11 +174,11 @@ produit actuel.
 | Lot | État courant | Preuve acquise | Dette suivante |
 | --- | --- | --- | --- |
 | C0 | **terminé** | 31 calculs inventoriés et dispositions explicites | maintenir les statuts par besoin |
-| C1 | **contrôleur produit actif et qualifié** | campagne unique, même `needId`, acquisition sélectionnée avant observation passive, transfert Manual gracieux | snapshot/restauration de la campagne, des propriétaires et du retour en attente |
-| C2 | **OP18 et OP28 actives ; premières ACTION6 produit qualifiées** | SMLP joint consomme deux contributions ; STCK produit une coordonnée avec une carte unique ; retour acquis avant observation passive | campagne produit réelle complète, continuité et propriétaire OP31 |
+| C1 | **contrôleur produit actif ; noyau de checkpoint qualifié** | campagne unique, même `needId`, acquisition sélectionnée avant observation passive ; snapshot/restauration de la campagne, du retour en attente, de la déduplication et de FieldStock ; rollback atomique | raccorder le checkpoint au host et au contrôleur, puis qualifier une désactivation/réactivation navigateur réelle |
+| C2 | **OP18 et OP28 actives ; premières ACTION6 produit qualifiées** | SMLP joint consomme deux contributions et traverse Pyodide sur trois retours réels ; STCK produit une coordonnée bornée ; retour acquis avant observation passive | campagne de résolution produit complète, raccord STCK conjoint et propriétaire OP31 |
 | C3 | **calculs et recouvrements qualifiés** | OP03/04/08/09/11/12/14/26 auditables | appeler uniquement depuis un producteur réel |
 | C4 | **audit complet, usages génériques non démontrés** | OP01/02/05/10/15/25 calculables | aucun raccord artificiel |
-| C5 | **retours spécialisés préservés** | FieldStock et Region couvrent notamment OP06/29/30 avec effet futur | propriétaire physique Region et seconde contribution STCK réellement indépendante |
+| C5 | **retours spécialisés préservés** | FieldStock et Region couvrent notamment OP06/29/30 avec effet futur ; le Lot 9C3 établit deux contributions STCK causales | propriétaire physique Region et raccord du propriétaire conjoint STCK au host produit |
 | C6 | **audit complet** | inconnue, échec borné, ambiguïté et impossibilité restent distincts | aucun raccord sans preuve de blocage ou reprise |
 | C7 | **performance officielle qualifiée pour Region STCK/SMLP** | protocole ABBA durable, quatre runners, deux jeux strictement sous +10 %, activité Region conservée | mesurer séparément la nouvelle composition produit sans réécrire la preuve Region |
 
@@ -359,8 +376,10 @@ La qualification combinée démontre :
 - ordre action → acquisition sélectionnée → observation passive → présentation ;
 - absence d’apprentissage FieldStock forcé sur un retour insuffisant.
 
-Elle ne constitue pas encore une campagne navigateur complète contre Pyodide ni
-une qualification native complète du producteur STCK.
+La campagne SMLP réelle contre Pyodide est désormais qualifiée sur trois cycles
+consécutifs avec parité CPython. Elle ne constitue pas une résolution complète du
+niveau. Le propriétaire conjoint STCK est qualifié par le Lot 9C3, mais son
+raccord au host produit reste séparé.
 
 ### C7 officiel Region
 
@@ -400,12 +419,13 @@ composition produit.
 
 ## Limites ouvertes
 
-- aucune campagne navigateur produit complète SMLP/STCK qualifiée contre le
-  transport Pyodide réel ;
-- STCK ne possède pas encore deux contributions causales indépendantes ;
-- aucune persistance du modèle, du prior ou du stock entre activations Agent ;
+- aucune campagne de résolution complète SMLP/STCK qualifiée dans le produit ;
+- le propriétaire conjoint STCK qualifié n'est pas encore le propriétaire actif
+  du host produit ;
+- le noyau de persistance du modèle, du prior et du stock n'est pas encore appelé
+  entre deux activations Agent ;
 - snapshot/restauration de la campagne, des propriétaires, du `needId` et de
-  l’action en attente non raccordés au produit ;
+  l’action en attente non raccordés au host et au contrôleur produit ;
 - Region n’est pas encore un propriétaire physique du contrôleur produit ;
 - aucun propriétaire OP31 ;
 - registre canonique des 76 points d’entrée V6 absent ;
@@ -414,25 +434,22 @@ composition produit.
 
 ## Feuille de route actualisée
 
-### Étape immédiate : campagne produit réelle
+### Étape immédiate : raccorder la continuité au navigateur
 
-1. exécuter une campagne navigateur bornée sur SMLP avec le propriétaire conjoint
-   réellement actif contre le transport Pyodide ;
-2. vérifier le même `needId` du besoin jusqu’aux deux acquisitions de canal ;
-3. confirmer l’ordre acquisition sélectionnée → observation passive →
-   présentation sur les observations réelles ;
-4. conserver `none` lorsque plusieurs portes publiques subsistent ;
-5. publier la provenance et les résultats sans transformer cette campagne en
-   preuve de performance.
+1. faire posséder le coordinateur de checkpoint par le host produit ;
+2. exposer snapshot et restauration sans dupliquer la politique de campagne ;
+3. recréer un host et un runtime FieldStock frais lors de la réactivation Agent ;
+4. restaurer avant toute nouvelle décision et vérifier l'observation courante ;
+5. reprendre un retour en attente sans rejouer l'action ;
+6. prouver dans une fixture navigateur réelle l'absence de perte de `needId`,
+   de double acquisition et de double ACTION6.
 
-### Étape suivante : STCK et continuité
+### Étape suivante : STCK conjoint produit
 
-1. qualifier le producteur STCK sur son corpus natif ;
-2. rechercher une seconde contribution réellement indépendante avant toute
-   généralisation conjointe STCK ;
-3. ajouter snapshot/restauration atomiques de la campagne, des propriétaires, du
-   modèle, du prior, du stock et du retour en attente ;
-4. vérifier une réactivation Agent sans perte ni double consommation.
+1. remplacer le propriétaire STCK autonome par le propriétaire conjoint qualifié ;
+2. conserver les deux contributions causales et leurs preuves d'ablation ;
+3. empêcher deux propriétaires concurrents de proposer la même ACTION6 ;
+4. qualifier le chemin complet sur le corpus natif et sous Pyodide.
 
 ### Performance et élargissement symbolique
 
@@ -448,6 +465,29 @@ composition produit.
 1. intégrer chaque tranche qualifiée sur GitHub canonique ;
 2. publier le Site uniquement depuis un commit GitHub canonique qualifié ;
 3. vérifier ensuite GitHub ↔ Site.
+
+## Qualification du noyau de continuité C1
+
+Le candidat `0bb35cd44c9ebfa86a94345cb5167d5861d1e52f` a été qualifié par le run
+`43426558286`, job `131889275186`.
+
+Résultats :
+
+- tests ciblés campagne/caller/checkpoint : **20/20** ;
+- régression TypeScript complète : **385/385** ;
+- build de production : réussi ;
+- modules transformés : `62` ;
+- galerie : `100` jeux, `636` prévisualisations, `4` atlas ;
+- même `needId` restauré avant acquisition ;
+- première acquisition routée, répétition classée `duplicate` ;
+- déduplication conservée après une seconde restauration ;
+- rollback complet lorsqu'un participant refuse son état.
+
+La preuve durable est
+`docs/recovery/op01-op31-session-continuity-core-20261113.md`.
+
+Cette qualification porte sur le noyau. Le host et le contrôleur navigateur ne
+l'appellent pas encore, et aucune surcharge produit n'est revendiquée.
 
 ## Requalification C7 du contrat de configuration canonique
 
