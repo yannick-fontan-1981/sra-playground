@@ -60,6 +60,11 @@ export interface BrowserAgentControllerCheckpointV1 {
   host: BrowserCommonCampaignHostCheckpointV1;
   actionsDispatched: number;
   sessionOrdinal: number;
+  /**
+   * Present on new durable captures. Older in-memory V1 checkpoints omitted the
+   * field and are normalized during parsing when a physical return is pending.
+   */
+  pendingDispatchCounted?: boolean;
 }
 
 export interface BrowserAgentControllerPorts extends BrowserCampaignDispatchPorts {
@@ -128,7 +133,9 @@ function checkpointable(reason: BrowserAgentControllerStopReason): boolean {
   ].includes(reason);
 }
 
-function parseControllerCheckpoint(value: unknown): BrowserAgentControllerCheckpointV1 {
+export function parseBrowserAgentControllerCheckpoint(
+  value: unknown,
+): BrowserAgentControllerCheckpointV1 {
   if (!value || typeof value !== 'object' || Array.isArray(value)) {
     throw new TypeError('browser agent controller checkpoint must be an object');
   }
@@ -136,7 +143,7 @@ function parseControllerCheckpoint(value: unknown): BrowserAgentControllerCheckp
   if (checkpoint.version !== 1 || !checkpoint.host) {
     throw new TypeError('unsupported browser agent controller checkpoint');
   }
-  const actionsDispatched = checkpoint.actionsDispatched;
+  let actionsDispatched = checkpoint.actionsDispatched;
   const sessionOrdinal = checkpoint.sessionOrdinal;
   if (!Number.isInteger(actionsDispatched) || (actionsDispatched ?? -1) < 0) {
     throw new RangeError('browser agent checkpoint actionsDispatched must be non-negative');
@@ -144,7 +151,31 @@ function parseControllerCheckpoint(value: unknown): BrowserAgentControllerCheckp
   if (!Number.isInteger(sessionOrdinal) || (sessionOrdinal ?? -1) < 0) {
     throw new RangeError('browser agent checkpoint sessionOrdinal must be non-negative');
   }
-  return structuredClone(checkpoint) as BrowserAgentControllerCheckpointV1;
+  if (
+    checkpoint.pendingDispatchCounted !== undefined
+    && typeof checkpoint.pendingDispatchCounted !== 'boolean'
+  ) {
+    throw new TypeError('browser agent pendingDispatchCounted must be boolean');
+  }
+
+  const cloned = structuredClone(checkpoint) as BrowserAgentControllerCheckpointV1;
+  const hasPendingDispatch = Boolean(cloned.host.session?.pendingReturn);
+  let pendingDispatchCounted = cloned.pendingDispatchCounted ?? false;
+  if (pendingDispatchCounted && !hasPendingDispatch) {
+    throw new Error('browser agent checkpoint counted a pending dispatch that is not present');
+  }
+  if (hasPendingDispatch && !pendingDispatchCounted) {
+    actionsDispatched = (actionsDispatched as number) + 1;
+    pendingDispatchCounted = true;
+  }
+
+  return {
+    version: 1,
+    host: structuredClone(cloned.host),
+    actionsDispatched: actionsDispatched as number,
+    sessionOrdinal: sessionOrdinal as number,
+    pendingDispatchCounted,
+  };
 }
 
 /**
@@ -174,6 +205,7 @@ export class BrowserAgentController {
   #sessionOrdinal = 0;
   #runPromise: Promise<BrowserAgentControllerSnapshot> | null = null;
   #checkpoint: BrowserAgentControllerCheckpointV1 | null = null;
+  #activePendingCounted = false;
   #disposed = false;
 
   constructor(options: BrowserAgentControllerOptions = {}) {
@@ -243,10 +275,12 @@ export class BrowserAgentController {
           sessionId = host.sessionId ?? retained.host.session?.sessionId ?? null;
           if (!sessionId) throw new Error('restored browser campaign has no session id');
           this.#actionsDispatched = retained.actionsDispatched;
+          this.#activePendingCounted = Boolean(retained.pendingDispatchCounted);
           this.#checkpoint = null;
         } catch (error) {
           this.#onCheckpointRejected?.(error, structuredClone(retained));
           this.#checkpoint = null;
+          this.#activePendingCounted = false;
           host.dispose();
           host = this.#createHost();
         }
@@ -261,6 +295,7 @@ export class BrowserAgentController {
       if (!sessionId) throw new TypeError('browser agent session id must be non-empty');
       host.begin({ sessionId, observation });
       this.#actionsDispatched = 0;
+      this.#activePendingCounted = false;
     }
 
     this.#host = host;
@@ -331,11 +366,22 @@ export class BrowserAgentController {
     return this.#checkpoint ? structuredClone(this.#checkpoint) : null;
   }
 
+  /** Capture the currently safe host boundary without stopping the controller. */
+  captureCheckpoint(): BrowserAgentControllerCheckpointV1 | null {
+    if (this.#checkpoint) return structuredClone(this.#checkpoint);
+    return this.#host ? this.#captureHostCheckpoint(this.#host) : null;
+  }
+
+  /** Invalidate only the retained resume state; it never cancels an active run. */
+  clearCheckpoint(): void {
+    this.#checkpoint = null;
+  }
+
   restoreCheckpoint(value: unknown): void {
     if (this.#disposed || this.#runPromise || this.#host) {
       throw new Error('browser agent checkpoint restore requires an idle controller');
     }
-    this.#checkpoint = parseControllerCheckpoint(value);
+    this.#checkpoint = parseBrowserAgentControllerCheckpoint(value);
   }
 
   get running(): boolean {
@@ -358,6 +404,9 @@ export class BrowserAgentController {
         this.#campaignStatus = result.status;
         if (result.status === 'action' && result.dispatch && result.dispatch.elapsedMs !== null) {
           this.#actionsDispatched += 1;
+          this.#activePendingCounted = false;
+        } else if (result.status === 'resumed') {
+          this.#activePendingCounted = false;
         }
         this.#emit();
 
@@ -386,22 +435,32 @@ export class BrowserAgentController {
     }
   }
 
+  #captureHostCheckpoint(
+    host: BrowserAgentCampaignHost,
+  ): BrowserAgentControllerCheckpointV1 | null {
+    if (!host.snapshot) return null;
+    try {
+      const hostCheckpoint = host.snapshot();
+      if (!hostCheckpoint.session) return null;
+      const hasPendingDispatch = Boolean(hostCheckpoint.session.pendingReturn);
+      const actionsDispatched = this.#actionsDispatched
+        + (hasPendingDispatch && !this.#activePendingCounted ? 1 : 0);
+      return parseBrowserAgentControllerCheckpoint({
+        version: 1,
+        host: hostCheckpoint,
+        actionsDispatched,
+        sessionOrdinal: this.#sessionOrdinal,
+        pendingDispatchCounted: hasPendingDispatch,
+      });
+    } catch {
+      return null;
+    }
+  }
+
   #finish(reason: BrowserAgentControllerStopReason): BrowserAgentControllerSnapshot {
     const host = this.#host;
-    if (host && checkpointable(reason) && host.snapshot) {
-      try {
-        const hostCheckpoint = host.snapshot();
-        if (hostCheckpoint.session) {
-          this.#checkpoint = {
-            version: 1,
-            host: hostCheckpoint,
-            actionsDispatched: this.#actionsDispatched,
-            sessionOrdinal: this.#sessionOrdinal,
-          };
-        }
-      } catch {
-        this.#checkpoint = null;
-      }
+    if (host && checkpointable(reason)) {
+      this.#checkpoint = this.#captureHostCheckpoint(host);
     } else if (!checkpointable(reason)) {
       this.#checkpoint = null;
     }
@@ -416,6 +475,7 @@ export class BrowserAgentController {
   #disposeHost(): void {
     const host = this.#host;
     this.#host = null;
+    this.#activePendingCounted = false;
     host?.dispose();
   }
 

@@ -1,0 +1,408 @@
+{
+  "schema_version": 1,
+  "qualification": "op01-op31-browser-durable-resume",
+  "date": "2026-11-13",
+  "repository": "yannick-fontan-1981/sra-playground",
+  "branch": "op01-op31-browser-durable-resume-20261113",
+  "canonical_branch": "recovery/site109-reconstruction-20261112",
+  "canonical_commit_included": "e465e78aa48b69e81e8b5afadbc094428387cfe9",
+  "reconciliation_merge": "1bd7b8646876ae92ace1215222537b542b688b76",
+  "qualification_trigger_commit": "00fa3deb1d937c3bfb21b01406f192f9c7de5096",
+  "github_actions": {
+    "run_id": 43443562882,
+    "job_id": 131947080084,
+    "node": "v22.18.0"
+  },
+  "targeted_tests": {
+    "tests": 34,
+    "pass": 34,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "full_typescript_regression": {
+    "tests": 413,
+    "pass": 413,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "reconstructed_v6_registry": {
+    "valid": true,
+    "operation_records": 31,
+    "capability_records": 16,
+    "historical_slots_mapped": 0
+  },
+  "production_build": {
+    "passed": true,
+    "modules_transformed": 67,
+    "games": 100,
+    "level_previews": 636,
+    "native_atlases": 4
+  },
+  "browser_reload": {
+    "version": 1,
+    "status": "browser-durable-session-reload-qualified",
+    "qualification": "functional-real-chrome-pyodide-reload-not-official-performance",
+    "browser": {
+      "version": 1,
+      "status": "browser-durable-session-reload-qualified",
+      "runtime": "chrome-reload-browser-game-runtime-pyodide",
+      "replayPolicy": "deterministic-command-journal",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.0.0 Safari/537.36",
+      "game": "SMLP",
+      "backend": "python-wasm",
+      "phaseOne": {
+        "version": 1,
+        "needId": "need:op01-op31-durable-smlp-session:op01-op31-durable-smlp-session:level:1:public-observation:op01-op31-durable-smlp-session:0:OP28:joint-bundle:op01-op31-durable-smlp-session:level:1:0:public-addressed-joint:public-smlp-gate:public-observation:op01-op31-durable-smlp-session:0:open_horizontal:32:26:2,12,2,2,3,2,2,12,2:ACTION6:ACTION6",
+        "proposalRef": "joint:public-addressed-joint:public-smlp-gate:public-observation:op01-op31-durable-smlp-session:0:open_horizontal:32:26:2,12,2,2,3,2,2,12,2:ACTION6:op01-op31-durable-smlp-session:0:public_action_availability_v1+public_visible_target_v1",
+        "action": {
+          "id": 6,
+          "x": 32,
+          "y": 26
+        },
+        "initialIdentity": "browser-game-observation:fa5933e7e1596c024f0b2604af357608",
+        "returnedIdentity": "browser-game-observation:3c5cdb881c067061f797c1c76007f7bf",
+        "changedPixelCount": 9,
+        "phaseOnePostedRequests": [
+          {
+            "type": "load",
+            "code": "SMLP",
+            "level": 1
+          },
+          {
+            "type": "action",
+            "actionId": 6,
+            "data": {
+              "x": 32,
+              "y": 26
+            }
+          }
+        ],
+        "runtimeCommittedEntries": 1,
+        "runtimePendingSequence": 2,
+        "controllerActionsDispatched": 1
+      },
+      "phaseTwo": {
+        "replayedEntries": 1,
+        "replayedPending": true,
+        "reconstructionRequests": [
+          {
+            "type": "load",
+            "code": "SMLP",
+            "level": 1
+          },
+          {
+            "type": "action",
+            "actionId": 6,
+            "data": {
+              "x": 32,
+              "y": 26
+            }
+          }
+        ],
+        "reconstructedIdentity": "browser-game-observation:3c5cdb881c067061f797c1c76007f7bf",
+        "controllerActionCalls": 0,
+        "presentationCalls": 0,
+        "acquisition": {
+          "needId": "need:op01-op31-durable-smlp-session:op01-op31-durable-smlp-session:level:1:public-observation:op01-op31-durable-smlp-session:0:OP28:joint-bundle:op01-op31-durable-smlp-session:level:1:0:public-addressed-joint:public-smlp-gate:public-observation:op01-op31-durable-smlp-session:0:open_horizontal:32:26:2,12,2,2,3,2,2,12,2:ACTION6:ACTION6",
+          "ownerId": "joint_channels_v1",
+          "proposalRef": "joint:public-addressed-joint:public-smlp-gate:public-observation:op01-op31-durable-smlp-session:0:open_horizontal:32:26:2,12,2,2,3,2,2,12,2:ACTION6:op01-op31-durable-smlp-session:0:public_action_availability_v1+public_visible_target_v1",
+          "routed": true,
+          "duplicate": false
+        },
+        "controller": {
+          "seam": "browser-common-campaign",
+          "phase": "stopped",
+          "sessionId": "op01-op31-durable-smlp-session",
+          "stopReason": "manual",
+          "campaignStatus": "resumed",
+          "actionsDispatched": 1
+        }
+      },
+      "causalProofs": {
+        "pageReloadOccurred": true,
+        "freshWorkerCreated": true,
+        "pyodideJournalReplayed": true,
+        "pendingPhysicalActionReplayedOnceToReconstructState": true,
+        "sameNeedIdAcquired": true,
+        "acquisitionRoutedOnce": true,
+        "agentPhysicalActionReplayedAfterRestore": false,
+        "returnedObservationPresentedTwice": false,
+        "actionCountPreserved": true,
+        "sessionIdPreserved": true,
+        "changedPixels": 9
+      },
+      "proofBoundary": {
+        "rawPythonHeapSnapshot": false,
+        "deterministicReplayRequired": true,
+        "localStorageUsed": true,
+        "crossBrowserQualified": false,
+        "crashWithoutPagehideQualified": false,
+        "performanceQualified": false,
+        "sitePublished": false
+      }
+    },
+    "verification": {
+      "game": "SMLP",
+      "backend": "python-wasm",
+      "action": {
+        "id": 6,
+        "x": 32,
+        "y": 26
+      },
+      "needId": "need:op01-op31-durable-smlp-session:op01-op31-durable-smlp-session:level:1:public-observation:op01-op31-durable-smlp-session:0:OP28:joint-bundle:op01-op31-durable-smlp-session:level:1:0:public-addressed-joint:public-smlp-gate:public-observation:op01-op31-durable-smlp-session:0:open_horizontal:32:26:2,12,2,2,3,2,2,12,2:ACTION6:ACTION6",
+      "changedPixelCount": 9,
+      "phaseOneRequests": 2,
+      "reconstructionRequests": 2,
+      "controllerActionCalls": 0,
+      "presentationCalls": 0,
+      "actionsDispatched": 1
+    },
+    "timingDisposition": "not_measured_for_acceptance",
+    "performanceScope": "C7 Region remains unchanged; durable resume overhead is not qualified here",
+    "sitePublished": false
+  },
+  "causal_proofs": {
+    "local_storage_checkpoint_versioned": true,
+    "pagehide_saved_before_dispose": true,
+    "fresh_worker_created_after_reload": true,
+    "deterministic_runtime_journal_replayed": true,
+    "every_settled_observation_verified": true,
+    "pending_action_replayed_once_to_reconstruct_runtime": true,
+    "same_need_id_acquired": true,
+    "agent_action_calls_after_restore": 0,
+    "returned_observation_second_presentations": 0,
+    "action_count_preserved": true,
+    "session_id_preserved": true,
+    "field_stock_and_campaign_restored_atomically": true,
+    "canonical_real_worker_session_resume_requalified": true,
+    "canonical_pending_return_resume_requalified": true,
+    "canonical_real_workers_qualified": 2,
+    "canonical_physical_actions_qualified": 2,
+    "canonical_replayed_actions": 0,
+    "canonical_duplicate_presentations": 0
+  },
+  "proof_boundary": {
+    "raw_python_heap_snapshot": false,
+    "deterministic_replay_required": true,
+    "default_ttl_hours": 12,
+    "maximum_ttl_hours": 24,
+    "maximum_storage_bytes": 4500000,
+    "crash_without_pagehide_qualified": false,
+    "cross_browser_qualified": false,
+    "all_games_qualified": false,
+    "cross_device_qualified": false,
+    "performance_qualified": false,
+    "site_published": false
+  },
+  "final_reconciliation_merge": "a8d4615b08c2beac9e44d3963a4a7b490b08716d",
+  "canonical_contract_tests": {
+    "tests": 5,
+    "pass": 5,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "canonical_live_session_resume": {
+    "version": 1,
+    "status": "live-smlp-browser-session-resume-qualified",
+    "qualification": "functional-real-browser-not-official-performance",
+    "candidate": {
+      "version": 1,
+      "runtime": "browser-agent-controller-game-worker-pyodide",
+      "transport": "BrowserAgentController/BrowserCommonCampaignHost -> BrowserGameRuntime -> real module Worker -> Pyodide -> game_bridge.py -> custom-games.zip",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.0.0 Safari/537.36",
+      "controller": {
+        "game": "SMLP",
+        "gameId": "smlp-c3000001",
+        "backend": "python-wasm",
+        "worker": {
+          "instances": 1,
+          "requests": [
+            {
+              "type": "load",
+              "code": "SMLP",
+              "level": 1
+            },
+            {
+              "type": "action",
+              "actionId": 6,
+              "data": {
+                "x": 32,
+                "y": 26
+              }
+            }
+          ]
+        },
+        "initialFrameHash": "0be203b6ce80ac043c30f42b08b925eeccb433d124957070d77b93903e67635c",
+        "finalFrameHash": "90888a03979b86c5f515ab0e21b11512314861cd067517f5d34705a23bbac1ac",
+        "changedPixelCount": 9,
+        "hostCount": 2,
+        "physicalActionCalls": 1,
+        "presentations": 1,
+        "acquisitions": [
+          {
+            "needId": "need:op01-op31-live-controller-resume:op01-op31-live-controller-resume:level:1:public-observation:op01-op31-live-controller-resume:0:OP28:joint-bundle:op01-op31-live-controller-resume:level:1:0:public-addressed-joint:public-smlp-gate:public-observation:op01-op31-live-controller-resume:0:open_horizontal:32:26:2,12,2,2,3,2,2,12,2:ACTION6:ACTION6",
+            "ownerId": "joint_channels_v1",
+            "proposalRef": "joint:public-addressed-joint:public-smlp-gate:public-observation:op01-op31-live-controller-resume:0:open_horizontal:32:26:2,12,2,2,3,2,2,12,2:ACTION6:op01-op31-live-controller-resume:0:public_action_availability_v1+public_visible_target_v1",
+            "routed": true,
+            "duplicate": false
+          }
+        ],
+        "busyTransitions": [
+          true,
+          false
+        ],
+        "stopRequest": {
+          "phase": "stopping",
+          "stopReason": "manual",
+          "campaignStatus": null,
+          "sessionId": "op01-op31-live-controller-resume",
+          "actionsDispatched": 0
+        },
+        "firstActivation": {
+          "phase": "stopped",
+          "stopReason": "manual",
+          "campaignStatus": "action",
+          "sessionId": "op01-op31-live-controller-resume",
+          "actionsDispatched": 1
+        },
+        "secondActivation": {
+          "phase": "stopped",
+          "stopReason": "action-limit",
+          "campaignStatus": null,
+          "sessionId": "op01-op31-live-controller-resume",
+          "actionsDispatched": 1
+        },
+        "retainedSessionId": "op01-op31-live-controller-resume",
+        "checkpointPendingStage": null,
+        "snapshots": [
+          {
+            "phase": "running",
+            "stopReason": null,
+            "campaignStatus": null,
+            "sessionId": "op01-op31-live-controller-resume",
+            "actionsDispatched": 0
+          },
+          {
+            "phase": "stopping",
+            "stopReason": "manual",
+            "campaignStatus": null,
+            "sessionId": "op01-op31-live-controller-resume",
+            "actionsDispatched": 0
+          },
+          {
+            "phase": "stopping",
+            "stopReason": "manual",
+            "campaignStatus": "action",
+            "sessionId": "op01-op31-live-controller-resume",
+            "actionsDispatched": 1
+          },
+          {
+            "phase": "stopped",
+            "stopReason": "manual",
+            "campaignStatus": "action",
+            "sessionId": "op01-op31-live-controller-resume",
+            "actionsDispatched": 1
+          },
+          {
+            "phase": "running",
+            "stopReason": null,
+            "campaignStatus": null,
+            "sessionId": "op01-op31-live-controller-resume",
+            "actionsDispatched": 1
+          },
+          {
+            "phase": "stopped",
+            "stopReason": "action-limit",
+            "campaignStatus": null,
+            "sessionId": "op01-op31-live-controller-resume",
+            "actionsDispatched": 1
+          }
+        ]
+      },
+      "pendingReturn": {
+        "game": "SMLP",
+        "gameId": "smlp-c3000001",
+        "backend": "python-wasm",
+        "worker": {
+          "instances": 1,
+          "requests": [
+            {
+              "type": "load",
+              "code": "SMLP",
+              "level": 1
+            },
+            {
+              "type": "action",
+              "actionId": 6,
+              "data": {
+                "x": 32,
+                "y": 26
+              }
+            }
+          ]
+        },
+        "initialFrameHash": "0be203b6ce80ac043c30f42b08b925eeccb433d124957070d77b93903e67635c",
+        "finalFrameHash": "90888a03979b86c5f515ab0e21b11512314861cd067517f5d34705a23bbac1ac",
+        "changedPixelCount": 9,
+        "physicalActionCalls": 1,
+        "originalPresentations": 1,
+        "originalAcquisitions": [
+          {
+            "needId": "need:op01-op31-live-pending-resume:op01-op31-live-pending-resume:level:1:public-observation:op01-op31-live-pending-resume:0:OP28:joint-bundle:op01-op31-live-pending-resume:level:1:0:public-addressed-joint:public-smlp-gate:public-observation:op01-op31-live-pending-resume:0:open_horizontal:32:26:2,12,2,2,3,2,2,12,2:ACTION6:ACTION6",
+            "ownerId": "joint_channels_v1",
+            "proposalRef": "joint:public-addressed-joint:public-smlp-gate:public-observation:op01-op31-live-pending-resume:0:open_horizontal:32:26:2,12,2,2,3,2,2,12,2:ACTION6:op01-op31-live-pending-resume:0:public_action_availability_v1+public_visible_target_v1",
+            "routed": true,
+            "duplicate": false
+          }
+        ],
+        "originalBusyTransitions": [
+          true,
+          false
+        ],
+        "checkpointStage": "dispatched",
+        "pendingNeedId": "need:op01-op31-live-pending-resume:op01-op31-live-pending-resume:level:1:public-observation:op01-op31-live-pending-resume:0:OP28:joint-bundle:op01-op31-live-pending-resume:level:1:0:public-addressed-joint:public-smlp-gate:public-observation:op01-op31-live-pending-resume:0:open_horizontal:32:26:2,12,2,2,3,2,2,12,2:ACTION6:ACTION6",
+        "originalResult": {
+          "status": "action",
+          "needId": "need:op01-op31-live-pending-resume:op01-op31-live-pending-resume:level:1:public-observation:op01-op31-live-pending-resume:0:OP28:joint-bundle:op01-op31-live-pending-resume:level:1:0:public-addressed-joint:public-smlp-gate:public-observation:op01-op31-live-pending-resume:0:open_horizontal:32:26:2,12,2,2,3,2,2,12,2:ACTION6:ACTION6",
+          "sequence": 1
+        },
+        "resumedResult": {
+          "status": "resumed",
+          "needId": "need:op01-op31-live-pending-resume:op01-op31-live-pending-resume:level:1:public-observation:op01-op31-live-pending-resume:0:OP28:joint-bundle:op01-op31-live-pending-resume:level:1:0:public-addressed-joint:public-smlp-gate:public-observation:op01-op31-live-pending-resume:0:open_horizontal:32:26:2,12,2,2,3,2,2,12,2:ACTION6:ACTION6",
+          "sequence": 1
+        },
+        "replayActions": 0,
+        "duplicatePresentations": 0,
+        "resumedAcquisitions": [
+          {
+            "needId": "need:op01-op31-live-pending-resume:op01-op31-live-pending-resume:level:1:public-observation:op01-op31-live-pending-resume:0:OP28:joint-bundle:op01-op31-live-pending-resume:level:1:0:public-addressed-joint:public-smlp-gate:public-observation:op01-op31-live-pending-resume:0:open_horizontal:32:26:2,12,2,2,3,2,2,12,2:ACTION6:ACTION6",
+            "ownerId": "joint_channels_v1",
+            "proposalRef": "joint:public-addressed-joint:public-smlp-gate:public-observation:op01-op31-live-pending-resume:0:open_horizontal:32:26:2,12,2,2,3,2,2,12,2:ACTION6:op01-op31-live-pending-resume:0:public_action_availability_v1+public_visible_target_v1",
+            "routed": true,
+            "duplicate": false
+          }
+        ]
+      }
+    },
+    "assertions": {
+      "realWorkersQualified": 2,
+      "physicalActionsQualified": 2,
+      "controllerReactivationsQualified": 1,
+      "dispatchedReturnsResumed": 1,
+      "replayedActions": 0,
+      "duplicatePresentations": 0,
+      "preservedNeedIds": [
+        "need:op01-op31-live-controller-resume:op01-op31-live-controller-resume:level:1:public-observation:op01-op31-live-controller-resume:0:OP28:joint-bundle:op01-op31-live-controller-resume:level:1:0:public-addressed-joint:public-smlp-gate:public-observation:op01-op31-live-controller-resume:0:open_horizontal:32:26:2,12,2,2,3,2,2,12,2:ACTION6:ACTION6",
+        "need:op01-op31-live-pending-resume:op01-op31-live-pending-resume:level:1:public-observation:op01-op31-live-pending-resume:0:OP28:joint-bundle:op01-op31-live-pending-resume:level:1:0:public-addressed-joint:public-smlp-gate:public-observation:op01-op31-live-pending-resume:0:open_horizontal:32:26:2,12,2,2,3,2,2,12,2:ACTION6:ACTION6"
+      ]
+    },
+    "timingDisposition": "not_measured_for_acceptance",
+    "performanceScope": "C7 Region remains unchanged; snapshot and restore cost are not qualified by this report"
+  }
+}

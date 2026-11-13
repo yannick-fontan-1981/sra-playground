@@ -31,7 +31,7 @@ const REQUIRED_CAPABILITY_IDS = [
 const REQUIRED_OPEN_GATES = [
   'historical-slot-schema',
   'site109-source-identity',
-  'browser-checkpoint-persistence',
+  'browser-checkpoint-crash-recovery',
   'op31-objective-owner',
   'region-product-owner',
   'full-product-composition-performance',
@@ -200,6 +200,15 @@ export async function validateRegistry(registry, options = {}) {
   push(errors, checkpointCore?.tests?.includes('tests/v6-browser-session-resume.test.ts'), 'campaign checkpoint core must retain browser session resume tests');
   push(errors, checkpointCore?.proofs?.includes('docs/recovery/op01-op31-browser-session-resume-20261113.md'), 'campaign checkpoint core must retain the browser session resume proof');
   push(errors, checkpointCore?.proofs?.includes('docs/recovery/op01-op31-browser-session-resume-qualified.json'), 'campaign checkpoint core must retain the structured browser session resume proof');
+  push(errors, checkpointCore?.implementation?.includes('src/runtime/browser-games.ts'), 'campaign checkpoint core must reference the deterministic browser runtime journal');
+  push(errors, checkpointCore?.implementation?.includes('src/runtime/v6-browser-durable-session.ts'), 'campaign checkpoint core must reference the durable session codec');
+  push(errors, checkpointCore?.implementation?.includes('src/main.ts'), 'campaign checkpoint core must reference the product persistence wiring');
+  push(errors, checkpointCore?.tests?.includes('tests/browser-game-runtime-checkpoint.test.ts'), 'campaign checkpoint core must retain runtime replay tests');
+  push(errors, checkpointCore?.tests?.includes('tests/v6-browser-durable-session.test.ts'), 'campaign checkpoint core must retain durable codec tests');
+  push(errors, checkpointCore?.tests?.includes('tests/v6-browser-agent-live-capture.test.ts'), 'campaign checkpoint core must retain in-flight capture tests');
+  push(errors, checkpointCore?.tests?.includes('tests/main-browser-durable-session-integration.test.ts'), 'campaign checkpoint core must retain product persistence wiring tests');
+  push(errors, checkpointCore?.proofs?.includes('docs/recovery/op01-op31-browser-durable-resume-20261113.md'), 'campaign checkpoint core must retain the durable browser report');
+  push(errors, checkpointCore?.proofs?.includes('docs/recovery/op01-op31-browser-durable-resume-qualified.json'), 'campaign checkpoint core must retain the structured durable browser proof');
 
   const browserHost = capabilities.find(record => record.id === 'runtime.browser-campaign-host');
   push(errors, browserHost?.tests?.includes('tests/v6-browser-session-resume.test.ts'), 'browser campaign host must retain session resume coverage');
@@ -211,7 +220,8 @@ export async function validateRegistry(registry, options = {}) {
   const gateIds = uniqueIds(openGates, 'openGates', errors);
   push(errors, sameStringSet(gateIds, REQUIRED_OPEN_GATES), 'openGates must preserve all unresolved reconstruction gates');
   push(errors, openGates.some(gate => gate.id === 'browser-session-reactivation') === false, 'qualified browser session reactivation must not remain listed as open');
-  push(errors, openGates.find(gate => gate.id === 'browser-checkpoint-persistence')?.status === 'open', 'durable browser checkpoint persistence must remain open');
+  push(errors, openGates.some(gate => gate.id === 'browser-checkpoint-persistence') === false, 'qualified localStorage/pagehide persistence must not remain open');
+  push(errors, openGates.find(gate => gate.id === 'browser-checkpoint-crash-recovery')?.status === 'open', 'crash-without-pagehide and cross-browser recovery must remain open');
   push(errors, openGates.find(gate => gate.id === 'site-publication')?.status === 'blocked', 'Site publication must remain blocked');
 
   const derivedSummary = deriveSummary(registry);
