@@ -34,8 +34,20 @@ jobs:
       - name: Typecheck
         run: npm run typecheck
 
-      - name: Run TypeScript tests
-        run: npm test
+      - name: Run Lot 6C presentation tests
+        run: >-
+          node --experimental-transform-types --test
+          tests/agent-product-dispatch.test.ts
+          tests/browser-game-action-request.test.ts
+          tests/browser-game-worker-transport.test.ts
+          tests/product-dispatch-browser-runtime-integration.test.ts
+          tests/product-presentation.test.ts
+          tests/product-presentation-effects.test.ts
+          tests/main-product-dispatch-integration.test.ts
+          tests/main-product-presentation-effects-integration.test.ts
+
+      - name: Run full TypeScript regression suite
+        run: node --experimental-transform-types --test tests/*.test.ts
 
       - name: Verify patch cleanliness
         run: git diff --check
