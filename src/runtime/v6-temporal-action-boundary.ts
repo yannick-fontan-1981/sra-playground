@@ -339,6 +339,12 @@ function validRevision(value: number): boolean {
   return Number.isInteger(value) && value >= 0;
 }
 
+function validLevelEpoch(value: string | number): boolean {
+  return typeof value === 'string'
+    ? validRef(value)
+    : validRevision(value);
+}
+
 function validUniqueRefs(
   values: readonly string[],
   minimum = 1,
@@ -947,7 +953,7 @@ function validateResponse(
     || response.actReceiptRef !== request.actReceiptRef
     || !validRef(response.observationIdentity.episodeId)
     || !validRef(response.observationIdentity.observationId)
-    || !validRevision(response.observationIdentity.levelEpoch)
+    || !validLevelEpoch(response.observationIdentity.levelEpoch)
     || !validRevision(response.observationIdentity.observationRevision)
     || response.observationIdentity.episodeId !== request.timelineRef
     || response.observationIdentity.observationRevision <= request.stateRevision
@@ -1074,7 +1080,7 @@ function validateDispatch(
     || !validRef(dispatch.actionRef)
     || !validRef(dispatch.observationIdentity.episodeId)
     || !validRef(dispatch.observationIdentity.observationId)
-    || !validRevision(dispatch.observationIdentity.levelEpoch)
+    || !validLevelEpoch(dispatch.observationIdentity.levelEpoch)
     || !validRevision(dispatch.observationIdentity.observationRevision)
     || dispatch.observationFingerprint
       !== fingerprintAgentObservation(dispatch.observation)
@@ -1364,13 +1370,12 @@ export async function dispatchTemporalActOutput(
     attempt,
   );
 
-  await input.qualificationHooks?.afterAttemptPersistedBeforeTransport?.(
-    structuredClone(request),
-    structuredClone(persistedAttemptJournal),
-  );
-
   let response: TemporalEnvironmentActionResponse;
   try {
+    await input.qualificationHooks?.afterAttemptPersistedBeforeTransport?.(
+      structuredClone(request),
+      structuredClone(persistedAttemptJournal),
+    );
     response = await input.transport.execute(structuredClone(request));
     await input.qualificationHooks?.afterTransportBeforeDispatchPersistence?.(
       structuredClone(request),
