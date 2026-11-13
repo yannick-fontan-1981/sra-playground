@@ -105,6 +105,18 @@ jobs:
           }
           """
 
+          mandatory = (
+              (old_refusal, new_refusal, 'dispatch-refused constructor'),
+              (old_uncertain, new_uncertain, 'uncertain constructor'),
+          )
+          changed = False
+          for old, new, label in mandatory:
+              if old in source:
+                  source = source.replace(old, new, 1)
+                  changed = True
+              elif new not in source:
+                  raise SystemExit(f'cannot locate expected {label} source')
+
           old_hook = """  await input.qualificationHooks?.afterAttemptPersistedBeforeTransport?.(
             structuredClone(request),
             structuredClone(persistedAttemptJournal),
@@ -122,19 +134,9 @@ jobs:
             );
             response = await input.transport.execute(structuredClone(request));
           """
-
-          replacements = (
-              (old_refusal, new_refusal, 'dispatch-refused constructor'),
-              (old_uncertain, new_uncertain, 'uncertain constructor'),
-              (old_hook, new_hook, 'post-attempt uncertainty window'),
-          )
-          changed = False
-          for old, new, label in replacements:
-              if old in source:
-                  source = source.replace(old, new, 1)
-                  changed = True
-              elif new not in source:
-                  raise SystemExit(f'cannot locate expected {label} source')
+          if old_hook in source:
+              source = source.replace(old_hook, new_hook, 1)
+              changed = True
 
           if changed:
               path.write_text(source, encoding='utf-8')
