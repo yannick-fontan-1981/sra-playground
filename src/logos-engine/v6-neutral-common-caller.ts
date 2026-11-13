@@ -59,6 +59,15 @@ function routeKey(ownerId: string, eventRef: string): string {
   return `${ownerId}\u0000${eventRef}`;
 }
 
+function ownedProposal(proposal: CommonCallerProposal): CollectedProposal {
+  return {
+    ownerId: proposal.ownerId,
+    proposalRef: proposal.proposalRef,
+    actionRef: proposal.actionRef,
+    ...Object.hasOwn(proposal, 'payload') ? { payload: proposal.payload } : {},
+  };
+}
+
 export class NeutralCommonCaller {
   readonly #owners = new Map<string, CommonCallerOwner>();
   readonly #routedEventKeys = new Set<string>();
@@ -74,7 +83,30 @@ export class NeutralCommonCaller {
     this.#owners.set(owner.id, owner);
   }
 
+  /**
+   * Detached collection for general callers. Proposal payloads are cloned so
+   * neither the owner nor the consumer can mutate the other's copy.
+   */
   collect(contextByOwner: Readonly<Record<string, unknown>> = {}): CollectedProposal[] {
+    return this.#collect(contextByOwner, 'detached');
+  }
+
+  /**
+   * Ownership-transfer collection for a bounded orchestration layer.
+   *
+   * Every owner must return a fresh proposal and relinquish its payload until
+   * the corresponding return is routed. The caller keeps the payload private;
+   * public receipts must expose identity only. This avoids repeatedly cloning a
+   * potentially large symbolic state while preserving a single clear owner.
+   */
+  collectOwned(contextByOwner: Readonly<Record<string, unknown>> = {}): CollectedProposal[] {
+    return this.#collect(contextByOwner, 'owned');
+  }
+
+  #collect(
+    contextByOwner: Readonly<Record<string, unknown>>,
+    mode: 'detached' | 'owned',
+  ): CollectedProposal[] {
     const proposals: CollectedProposal[] = [];
     const refs = new Set<string>();
 
@@ -93,23 +125,37 @@ export class NeutralCommonCaller {
         throw new RangeError(`caller proposal count exceeds ${MAX_PROPOSALS}`);
       }
       refs.add(proposal.proposalRef);
-      proposals.push(structuredClone(proposal));
+      proposals.push(mode === 'detached' ? structuredClone(proposal) : ownedProposal(proposal));
     }
 
     return proposals;
   }
 
   select(proposals: readonly CollectedProposal[]): CallerSelection {
+    return this.#select(proposals, 'detached');
+  }
+
+  /** Select already-owned proposals without cloning their payloads again. */
+  selectOwned(proposals: readonly CollectedProposal[]): CallerSelection {
+    return this.#select(proposals, 'owned');
+  }
+
+  #select(
+    proposals: readonly CollectedProposal[],
+    mode: 'detached' | 'owned',
+  ): CallerSelection {
     if (!Array.isArray(proposals)) throw new TypeError('proposals must be an array');
     if (proposals.length === 0) return { status: 'none', proposals: [] };
     if (proposals.length > MAX_PROPOSALS) {
       throw new RangeError(`caller proposal count exceeds ${MAX_PROPOSALS}`);
     }
-    const cloned = proposals.map(proposal => structuredClone(proposal));
-    if (cloned.length === 1) {
-      return { status: 'selected', selected: cloned[0], proposals: cloned };
+    const retained = mode === 'detached'
+      ? proposals.map(proposal => structuredClone(proposal))
+      : [...proposals];
+    if (retained.length === 1) {
+      return { status: 'selected', selected: retained[0], proposals: retained };
     }
-    return { status: 'ambiguous', proposals: cloned };
+    return { status: 'ambiguous', proposals: retained };
   }
 
   routeSelected(
