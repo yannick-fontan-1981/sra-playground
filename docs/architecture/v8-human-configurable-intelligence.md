@@ -1,7 +1,9 @@
-# Architecture V8 de l'intelligence configurable par l'humain
+# Symbolic Intelligence Configuration — Architecture V8 de l'intelligence configurable par l'humain
 
-**Statut :** proposition normative, version 0.1  
-**Date :** 12 novembre 2026  
+**Statut :** proposition normative, version 0.2  
+**Date initiale :** 12 novembre 2026  
+**Révision :** 13 novembre 2026  
+**Nom officiel :** **Symbolic Intelligence Configuration (SIC)**  
 **Projet :** SRA Playground / ARC-3-AGENT  
 **Moteur :** Logos Engine  
 **Branche de rédaction :** `architecture/v8-human-configurable-intelligence-20261112`  
@@ -14,6 +16,8 @@
 Cette architecture vise une finalité plus ambitieuse qu'un nouvel agent de jeu :
 
 > permettre à un être humain de concevoir, configurer, observer, tester, corriger et transmettre de l'intelligence sous une forme explicite.
+
+**Symbolic Intelligence Configuration (SIC)** est le nom officiel de cette discipline, de son langage de configuration et de son cadre d'ingénierie. Aucun second nom concurrent n'est introduit dans cette spécification.
 
 L'objectif n'est pas de fournir une interface décorative autour d'un mécanisme opaque. L'objectif est que les éléments déterminants de l'intelligence soient réellement représentés, exécutés et inspectables sous les perspectives suivantes :
 
@@ -49,7 +53,7 @@ Le système repose sur cinq structures complémentaires :
 - un **token de concentration** pour l'engagement actif ;
 - une **transaction cognitive** pour appliquer les décisions sans état intermédiaire incohérent ;
 - un **bac à sable de simulation** séparé du monde observé ;
-- un **langage déclaratif de contrats** destiné aux auteurs humains ;
+- le langage **Symbolic Intelligence Configuration** destiné aux auteurs humains ;
 - des **primitives TypeScript pures et typées** pour les calculs qui ne peuvent pas être exprimés déclarativement.
 
 La formule centrale est :
@@ -83,6 +87,8 @@ Les mots **DOIT**, **NE DOIT PAS**, **DEVRAIT** et **PEUT** sont utilisés au se
 13. **Une recherche interrompue NE DOIT PAS être présentée comme une impossibilité démontrée.**
 14. **Une absence de changement visible NE DOIT PAS être généralisée en absence d'effet sans contrat suffisant.**
 15. **Le système DOIT pouvoir expliquer pourquoi un élément est apparu, pourquoi il est actif, ce qui le satisferait et ce qui le rendrait périmé.**
+16. **Le système DOIT posséder exactement un token de concentration ; il peut être libre ou détenu par un seul engagement, jamais dupliqué.**
+17. **La configuration SIC déclarative DOIT être bornée et conçue pour terminer par défaut ; les extensions procédurales peuvent être Turing-complètes seulement sous contrats, budgets et permissions explicites.**
 
 ### 3.2 Principe de parallélisme contrôlé
 
@@ -118,6 +124,8 @@ Un auteur humain DEVRAIT pouvoir configurer une nouvelle capacité sans écrire 
 
 Du code TypeScript supplémentaire est requis seulement pour une nouvelle primitive de calcul, un nouveau détecteur perceptif ou un nouvel effet non exprimable avec les primitives existantes.
 
+La configuration SIC ordinaire reste bornée, inspectable et garantie terminante lorsque ses contrats le permettent. Le système complet demeure expressif et Turing-complet grâce aux primitives TypeScript et extensions procédurales explicitement enregistrées.
+
 ---
 
 ## 4. Périmètre et non-objectifs
@@ -146,7 +154,6 @@ Cette spécification couvre :
 La première mise en œuvre ne vise pas :
 
 - plusieurs agents autonomes négociant entre eux ;
-- plusieurs tokens de concentration actifs par défaut ;
 - l'apprentissage automatique de nouvelles primitives exécutables sans validation humaine ;
 - la génération libre de code de production par un LLM ;
 - la migration immédiate de toutes les familles V5/V6 ;
@@ -398,6 +405,47 @@ rejected
 expired
 ```
 
+### 6.3.1 Mission et stratégies racines
+
+La **mission** est un contrat externe persistant qui définit la finalité générale, les contraintes et les critères de responsabilité du système. Elle n'est pas elle-même un objectif actif. Une stratégie racine transforme la mission, les observations et les informations courantes en besoins, objectifs et engagements explicites.
+
+V8 conserve et formalise les trois racines fondamentales de la V5 :
+
+| Stratégie racine | Question directrice | Responsabilités principales |
+|---|---|---|
+| **Assimilation** | Qu'est-ce qui vient d'être observé et comment l'intégrer correctement ? | acquisition du retour, identité, révision des informations, contradictions, revalidation, frontières |
+| **Exploration** | Que faut-il découvrir pour pouvoir progresser ? | inconnues, hypothèses, expériences discriminantes, effets de commandes, limites, acquisition d'information |
+| **Solving** | Comment obtenir effectivement le résultat demandé ? | choix de cible, satisfaction de préconditions, composition, planification, exécution, ressources, reprise du parent |
+
+Structure normative :
+
+```text
+Mission
+├── Assimilation
+├── Exploration
+└── Solving
+    ↓
+Besoins et stratégies spécialisées
+    ↓
+Objectifs
+    ↓
+Plans
+    ↓
+Actions et retours
+```
+
+Ces trois racines ne sont pas trois missions indépendantes. Elles organisent les méthodes fondamentales par lesquelles une mission produit du raisonnement. Assimilation peut continuer en arrière-plan pour des acquisitions passives ; toute réorientation active qui commande la prochaine action reste soumise au token unique.
+
+Les cinq perspectives peuvent également posséder des racines de navigation dans l'interface, mais ces racines sont des vues de lecture :
+
+- Perceptions : observation ou cycle courant ;
+- Informations : modèle du monde et mémoire ;
+- Stratégies : Assimilation, Exploration et Solving, puis leurs stratégies spécialisées ;
+- Objectifs : arbre des engagements reliés à la mission ;
+- Plans d'actions : plans actifs, suspendus et futurs.
+
+Elles ne créent pas cinq autorités concurrentes.
+
 ## 6.4 Objectifs
 
 La perspective **Objectifs** répond à :
@@ -561,6 +609,29 @@ interface CanonicalNode {
   invalidatedBy: string[];
   createdAtCycle: number;
   updatedAtCycle: number;
+}
+```
+
+```ts
+interface EpistemicProfile {
+  status:
+    | 'observed'
+    | 'acquired'
+    | 'inferred'
+    | 'hypothesized'
+    | 'simulated'
+    | 'remembered'
+    | 'unknown'
+    | 'contradicted'
+    | 'stale'
+    | 'revalidated'
+    | 'refuted';
+  completeness: 'complete' | 'partial' | 'unknown';
+  supportRefs: NodeId[];
+  contradictionRefs: NodeId[];
+  freshnessRevision: Revision;
+  transferStatus: 'local' | 'portable' | 'requires_revalidation' | 'not_portable';
+  ambiguityRefs: NodeId[];
 }
 ```
 
@@ -895,15 +966,46 @@ Le moteur doit néanmoins détecter :
 
 ---
 
-## 12. Token de concentration et arbre d'engagements
+## 12. Token de concentration, graphe d'attente et arbre d'engagements
 
-### 12.1 Règle par défaut
+### 12.1 Unicité normative
 
-Un seul objectif possède le token de concentration.
+Le système possède **exactement un token de concentration**.
 
-Les perceptions, acquisitions passives et calculs de fond peuvent continuer sans token.
+À tout instant, ce token est :
 
-### 12.2 Arbre d'engagements
+- libre ; ou
+- détenu par un seul engagement actif.
+
+Il n'existe pas d'extension V8 à plusieurs tokens. Le parallélisme reste autorisé pour les perceptions, acquisitions passives, mesures, simulations et candidatures, mais une seule branche peut commander la prochaine action publique.
+
+### 12.2 Graphe canonique et projection humaine en arbre
+
+Les besoins, objectifs, stratégies et plans en attente sont conservés dans un graphe canonique, car un même besoin peut bloquer plusieurs objectifs et une information peut contribuer à plusieurs branches.
+
+L'interface les projette sous forme d'arbre, notamment sous les trois stratégies racines :
+
+```text
+Mission
+├── Assimilation
+│   ├── Intégrer le dernier retour
+│   └── Résoudre une contradiction d'identité
+├── Exploration
+│   ├── Déterminer l'effet du bouton  ← TOKEN
+│   └── Vérifier si le passage reste ouvert
+└── Solving
+    ├── Ouvrir la porte
+    │   └── Atteindre le bouton
+    └── Rejoindre la cible
+```
+
+Règle de représentation :
+
+> stockage canonique en graphe, lecture humaine en arbre, concentration unique.
+
+Les priorités en attente peuvent donc être organisées en arbre pour la compréhension, sans perdre les relations multiples du graphe sous-jacent.
+
+### 12.3 Arbre d'engagements
 
 ```text
 Stratégie racine
@@ -928,7 +1030,7 @@ Chaque sous-objectif conserve :
 - état du parent ;
 - preuves acquises.
 
-### 12.3 Délégation, retour et réorientation
+### 12.4 Délégation, retour et réorientation
 
 Le token peut être :
 
@@ -937,6 +1039,20 @@ Le token peut être :
 - **réorienté** si la stratégie ou le contexte est invalidé.
 
 Aucun retour ne doit dépendre d'une convention implicite de pile d'appels.
+
+### 12.5 Activités sans token
+
+Les activités suivantes peuvent continuer sans posséder le token :
+
+- perception passive ;
+- acquisition du retour d'une action déjà engagée ;
+- mise à jour d'informations non conflictuelle ;
+- simulation bornée ;
+- génération de candidats ;
+- calcul de priorités en attente ;
+- compactage du journal.
+
+Elles ne peuvent ni créer un engagement actif ni libérer une action.
 
 ---
 
@@ -989,6 +1105,47 @@ Le système doit distinguer :
 - plans futurs.
 
 Aucun identifiant d'objet simulé ne peut être confondu avec un objet observé sans relation de correspondance explicite.
+
+
+### 13.4 Profil épistémique sans score global opaque
+
+Une information ne reçoit pas une confiance globale unique telle que `0.73` lorsque ce nombre fusionnerait des dimensions différentes.
+
+Elle porte un **profil épistémique** composé de :
+
+- statut : observé, acquis, inféré, hypothétique, simulé, contredit, réfuté ;
+- preuves favorables ;
+- contradictions ;
+- complétude ;
+- portée ;
+- fraîcheur et révision ;
+- transférabilité ;
+- état de revalidation ;
+- ambiguïté restante.
+
+Exemple :
+
+```yaml
+epistemic_profile:
+  status: hypothesized
+  support:
+    - observed_translation_after_ACTION2
+    - repeated_effect_same_scope
+  contradictions: []
+  completeness: partial
+  scope:
+    level: 3
+    object: piece-P
+    configuration: selected
+  freshness:
+    observation_revision: 17
+  transfer:
+    status: not_revalidated
+  ambiguity:
+    status: one_alternative_remaining
+```
+
+Des nombres locaux restent autorisés lorsqu'ils possèdent un sens défini, par exemple une distance, une fréquence, une similarité géométrique ou une probabilité statistique calibrée. Ils ne sont pas agrégés silencieusement en une confiance générale.
 
 ---
 
@@ -1131,9 +1288,14 @@ Une fonction spécialisée peut répondre au besoin sans OP générique si :
 
 ## 18. Configuration humaine
 
-## 18.1 Intelligence Pack
+## 18.1 Symbolic Intelligence Configuration
 
-L'unité de configuration humaine est un **Intelligence Pack** versionné.
+**Symbolic Intelligence Configuration (SIC)** est le nom unique du langage et du cadre de configuration décrit par cette architecture.
+
+SIC permet de définir, versionner, valider et exécuter les contrats qui relient perceptions, informations, besoins, stratégies, objectifs et plans.
+
+L'unité distribuable et versionnée de SIC est un **Intelligence Pack**.
+
 
 ```text
 pack/
@@ -1168,7 +1330,67 @@ Un pack déclare :
 - textes d'explication ;
 - version et dépendances.
 
-### 18.2 Exemple de stratégie déclarative
+### 18.2 Frontières et dépendances entre Intelligence Packs
+
+Un Intelligence Pack est un module de capacités. Sa frontière indique ce qu'il possède, ce qu'il expose, ce qu'il importe et ce qu'il est autorisé à faire.
+
+Chaque pack doit déclarer :
+
+- un namespace et une version ;
+- ses imports et plages de versions compatibles ;
+- ses exports ;
+- les types et contrats qu'il possède ;
+- ses permissions de lecture, proposition et contribution ;
+- ses éventuelles extensions procédurales ;
+- ses règles de surcharge ;
+- ses tests et sa provenance.
+
+Exemple :
+
+```yaml
+pack:
+  id: causal-experimentation
+  version: 1.0.0
+
+imports:
+  - public-observation: ">=1.0 <2.0"
+  - object-identity: ">=1.0 <2.0"
+
+exports:
+  needs:
+    - know_control_effect
+  strategies:
+    - controlled_experiment
+  plans:
+    - before_act_after_compare
+
+permissions:
+  read:
+    - observed_object
+    - action_return
+  propose:
+    - need
+    - strategy
+  contribute:
+    - information
+    - need_evidence
+  mutate: []
+```
+
+Le compilateur SIC doit traiter explicitement :
+
+- collisions de noms ;
+- versions incompatibles ;
+- propriétaire ambigu ;
+- surcharge d'une stratégie générique par une stratégie spécialisée ;
+- dépendances circulaires ;
+- permissions excessives ;
+- imports non utilisés ;
+- exports sans consommateur.
+
+Les packs ne se modifient pas directement entre eux. Ils communiquent par types, besoins, informations, contributions et contrats versionnés.
+
+### 18.3 Exemple de stratégie déclarative
 
 ```yaml
 strategy:
@@ -1225,7 +1447,7 @@ strategy:
       bloquée du plan parent.
 ```
 
-### 18.3 Contrat de besoin déclaratif
+### 18.4 Contrat de besoin déclaratif
 
 ```yaml
 need:
@@ -1254,16 +1476,26 @@ need:
     - subject_ref_invalidated
 ```
 
-### 18.4 Limite entre configuration et code
+### 18.5 Limite entre configuration et code
 
-La configuration doit rester :
+La configuration SIC déclarative doit rester :
 
 - déclarative ;
 - déterministe ;
 - validable statiquement ;
-- non Turing-complète par défaut ;
 - bornée ;
+- garantie terminante par défaut lorsque ses contrats le permettent ;
 - versionnée.
+
+Le système complet reste Turing-complet grâce à des extensions procédurales explicites. Toute extension procédurale doit déclarer :
+
+- son propriétaire ;
+- ses entrées et sorties typées ;
+- ses effets autorisés ;
+- ses budgets de temps, mémoire et profondeur ;
+- ses règles d'annulation ;
+- ses permissions ;
+- ses tests et sa provenance.
 
 Le code TypeScript fournit :
 
@@ -1360,9 +1592,44 @@ Chaque élément doit offrir :
 - **Que se passerait-il s'il était désactivé ?**
 - **À quel objectif supérieur contribue-t-il ?**
 
+### 19.3 Rôles humains et promotion
+
+Les rôles décrivent des responsabilités, pas nécessairement des personnes différentes. Une même personne peut cumuler tous les rôles dans un projet individuel.
+
+| Rôle | Responsabilité |
+|---|---|
+| **Auteur** | crée ou modifie vocabulaire, besoins, stratégies, objectifs, plans et tests |
+| **Vérificateur** | examine cohérence, effets de bord, preuves, cas négatifs, sécurité et performance |
+| **Promoteur / approbateur** | autorise le passage d'une révision vers un statut exécutable supérieur |
+| **Opérateur** | active, surveille, désactive ou restaure une version |
+| **Auditeur / observateur** | reconstruit après coup la provenance et la justification d'une décision |
+
+Cycle de promotion recommandé :
+
+```text
+draft
+→ validated
+→ shadow
+→ active
+→ stable
+```
+
+Chaque transition conserve auteur, vérificateur, promoteur, preuve, version et possibilité de rollback.
+
+### 19.4 Création, évolution et promotion des contrats
+
+Il faut distinguer :
+
+1. **apprentissage d'instances pendant l'exécution** : l'agent acquiert des faits ou méthodes sous des contrats existants ;
+2. **proposition de contrat candidat** : le runtime ou un humain suggère une généralisation, sans autorité exécutable ;
+3. **développement du contrat** : formulation, portée, tests, vérification, exécution shadow, revue et promotion ;
+4. **activation** : le contrat versionné devient utilisable sous feature flag ou politique explicite.
+
+La création d'un nouveau contrat exécutable est donc principalement un processus de développement et de gouvernance. Le runtime peut proposer, mais ne promeut pas silencieusement ses propres règles.
+
 ---
 
-## 20. Validation statique
+## 20. Validation statique et vérification formelle
 
 Le compilateur doit refuser ou avertir sur :
 
@@ -1385,6 +1652,39 @@ Le compilateur doit refuser ou avertir sur :
 - configuration inatteignable ;
 - contrat de satisfaction contradictoire ;
 - dépendance de version incompatible.
+
+### 20.1 Sens de la vérification formelle
+
+La vérification formelle ne prétend pas démontrer que l'agent est intelligent ni qu'il résoudra tous les problèmes. Elle sert à démontrer ou explorer rigoureusement des invariants structurels, par exemple :
+
+- il n'existe jamais deux tokens de concentration ;
+- une action ne peut pas être libérée sans plan ;
+- un objectif actif possède toujours une stratégie émettrice ;
+- une transaction ne peut pas être appliquée partiellement ;
+- un besoin ne peut pas être dupliqué dans la même portée.
+
+### 20.2 Niveaux de vérification
+
+| Niveau | Technique | Portée recommandée |
+|---:|---|---|
+| **0** | validation syntaxique : schémas, types, champs, références | tous les fichiers SIC |
+| **1** | validation sémantique statique : propriétaires, budgets, cycles évidents, contradictions | tous les Intelligence Packs |
+| **2** | tests de propriétés : idempotence, déduplication, restauration, absence de mutation | runtime, registre et transactions |
+| **3** | exploration exhaustive de machines à états bornées / model checking | token, objectifs, plans, promotion |
+| **4** | solveurs SAT/SMT pour gardes, conflits, activabilité et exclusivité | politiques et contrats complexes |
+| **5** | preuve assistée pour un micro-noyau minimal | plus tard, invariants critiques uniquement |
+
+### 20.3 Stratégie de déploiement
+
+La cible initiale est :
+
+- niveaux 0 et 1 pour tous les packs ;
+- niveau 2 pour le runtime commun ;
+- niveau 3 pour les machines à états fondamentales ;
+- niveau 4 pour les conflits difficiles ;
+- niveau 5 seulement si le micro-noyau est suffisamment petit et stable.
+
+> On ne formalise pas toute l'intelligence. On formalise les règles qui empêchent l'intelligence de devenir incohérente.
 
 ---
 
@@ -1609,16 +1909,23 @@ V8 ne doit pas dupliquer ces mécanismes. Il doit :
 
 ## 26. Mise en place itérative
 
-## Phase V8-0 : spécification et ADR
+## Phase V8-0 : spécification et décisions d'architecture
+
+Un **ADR** (*Architecture Decision Record*, ou registre de décision d'architecture) conserve le contexte, les options, la décision, ses raisons et ses conséquences.
 
 **But :** figer le vocabulaire et les invariants sans changer le runtime.
 
 Livrables :
 
 - ce document ;
-- ADR sur besoins ;
-- ADR sur token de concentration ;
-- ADR sur langage déclaratif ;
+- ADR sur Symbolic Intelligence Configuration ;
+- ADR sur mission et stratégies racines Assimilation / Exploration / Solving ;
+- ADR sur l'unicité du token et le graphe d'attente ;
+- ADR sur le profil épistémique ;
+- ADR sur les niveaux de vérification formelle ;
+- ADR sur les rôles et la promotion ;
+- ADR sur le cycle de développement des contrats ;
+- ADR sur les frontières entre Intelligence Packs ;
 - schémas JSON/TypeScript préliminaires ;
 - matrice familles actuelles → rôles V8.
 
@@ -1786,7 +2093,7 @@ Critères :
 - inconnue conservée si données incomplètes ;
 - coût borné.
 
-## Phase V8-8 : Intelligence Packs et compilateur
+## Phase V8-8 : Intelligence Packs SIC et compilateur
 
 Ajouter :
 
@@ -1808,7 +2115,7 @@ Critères :
 - pack incompatible refusé ;
 - provenance complète.
 
-## Phase V8-9 : atelier humain
+## Phase V8-9 : atelier humain SIC
 
 Ajouter :
 
@@ -1884,7 +2191,7 @@ Ces besoins couvrent un grand nombre de familles existantes sans imposer une ont
 | Explosion du nombre de besoins | déduplication, portée, latence, budgets |
 | Oscillation des stratégies | hystérésis, cycle de vie, cooldown, engagements persistants |
 | Priorité opaque | bandes et départage lexicographique |
-| Configuration trop puissante | DSL non Turing-complète et plugins bornés |
+| Configuration trop puissante | noyau déclaratif borné et terminant par défaut ; extensions procédurales Turing-complètes sous contrats, budgets et permissions |
 | Effets de bord | snapshots, propositions, transactions |
 | Besoins récursifs infinis | profondeur, cycle detection, budget |
 | Mémoire obsolète | portée et revalidation |
@@ -1898,64 +2205,53 @@ Ces besoins couvrent un grand nombre de familles existantes sans imposer une ont
 
 ---
 
-## 29. Décisions ouvertes à traiter par ADR
+## 29. Décisions d'architecture retenues et ADR à rédiger
 
-Ces questions ne bloquent pas V8-0 à V8-3, mais doivent être décidées avant l'autorité complète.
+Les orientations suivantes sont désormais retenues. Les ADR ne servent plus à choisir entre plusieurs directions concurrentes, mais à conserver durablement le contexte, la décision et ses conséquences.
 
-### ADR-1 : nom du langage
+### ADR-1 : Symbolic Intelligence Configuration
 
-Proposition : **Logos Cognitive Contracts**, extension des TERMS, CLAIMS, TYPES, CONTRACTS et opérations Logos existantes.
+Décision : **Symbolic Intelligence Configuration (SIC)** est le nom unique du langage, de la discipline et du cadre de configuration.
 
-### ADR-2 : représentation de la mission racine
+### ADR-2 : mission et stratégies racines
 
-Défaut proposé :
+Décision :
 
 - la mission est un contrat externe persistant ;
-- une stratégie racine transforme mission + observation en objectif ;
-- la mission elle-même n'est pas un objectif.
+- la mission n'est pas un objectif ;
+- **Assimilation**, **Exploration** et **Solving** sont les trois stratégies racines ;
+- elles produisent ou délèguent vers les stratégies spécialisées et objectifs appropriés ;
+- les racines des cinq perspectives sont des racines de navigation, pas des missions concurrentes.
 
-### ADR-3 : nombre de tokens de concentration
+### ADR-3 : unicité du token et attentes
 
-Défaut : un seul token.  
-Extension future : plusieurs tokens seulement pour des domaines prouvés indépendants.
+Décision :
 
-### ADR-4 : confiance
+- le token de concentration est unique par définition ;
+- les priorités en attente sont conservées dans un graphe canonique ;
+- elles sont présentées à l'humain sous forme d'arbre ;
+- les activités passives et simulations peuvent continuer sans token ;
+- une seule branche commande la prochaine action.
 
-Défaut : éviter un score global unique. Utiliser :
+### ADR-4 : profil épistémique
 
-- statut ;
-- type de preuve ;
-- complétude ;
-- contradictions ;
-- domaine ;
-- révision.
+Décision : aucun score global opaque de confiance. Une information expose statut, preuves, contradictions, complétude, portée, fraîcheur, transfert, revalidation et ambiguïté.
 
-### ADR-5 : formalisation
+### ADR-5 : vérification formelle graduée
 
-Décider jusqu'où utiliser :
+Décision : appliquer les niveaux 0 à 5 décrits au §20, avec niveaux 0 et 1 obligatoires pour les packs, niveau 2 pour le runtime, niveau 3 pour les machines fondamentales, et niveaux supérieurs ciblés.
 
-- vérification de machines à états ;
-- property-based testing ;
-- SAT/SMT pour certains contrats ;
-- model checking pour les invariants critiques.
+### ADR-6 : rôles humains et promotion
 
-### ADR-6 : promotion humaine
+Décision : distinguer auteur, vérificateur, promoteur, opérateur et auditeur. Ces rôles sont cumulables par une même personne. La promotion suit `draft → validated → shadow → active → stable`.
 
-Définir les rôles :
+### ADR-7 : création et évolution des contrats
 
-- auteur ;
-- réviseur ;
-- approbateur ;
-- opérateur ;
-- observateur.
+Décision : le runtime apprend des instances sous des contrats existants. Un nouveau contrat exécutable suit un processus de développement, tests, shadow, revue, versioning et promotion. Une proposition automatique reste non autoritative.
 
-### ADR-7 : apprentissage de nouveaux contrats
+### ADR-8 : frontières entre Intelligence Packs
 
-Défaut : l'agent peut proposer un contrat, mais un humain ou une politique explicite doit l'approuver avant qu'il devienne exécutable.
-
-### ADR-8 : frontières entre packs
-
-Définir import, surcharge, priorité, compatibilité et résolution de conflits.
+Décision : chaque pack possède namespace, version, imports, exports, permissions, propriétaires, règles de surcharge, tests et provenance. Les packs communiquent par contrats typés et ne se mutent pas directement.
 
 ---
 
@@ -1994,6 +2290,7 @@ La première tranche de travail doit rester petite et démontrable.
 ### Livrables
 
 - types `NeedProposal`, `NeedRecord`, `NeedContribution` ;
+- classification des propositions sous Assimilation, Exploration ou Solving ;
 - journal sémantique étendu ;
 - `NeedRegistry` en shadow ;
 - un producteur depuis une étape bloquée ;
@@ -2054,7 +2351,7 @@ Cette règle évite qu'une refonte conceptuelle détruise des capacités acquise
 
 L'arbre V5 répondait à un problème réel : trop de conditions parallèles pouvaient agir sans ordre, sans propriétaire et sans point de reprise explicite.
 
-V8 conserve l'intuition fondamentale de cet arbre, mais répartit les responsabilités :
+**Symbolic Intelligence Configuration** conserve l'intuition fondamentale de cet arbre dans son architecture V8, mais répartit les responsabilités :
 
 - le graphe pour la connaissance ;
 - les besoins pour les manques ;
