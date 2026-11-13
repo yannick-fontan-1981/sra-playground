@@ -184,7 +184,8 @@ Branches intégrées/préparées :
 - `recovery/lot9b-region-intervention-restart-20261112` ;
 - `recovery/lot9b-region-reconstruction-v2-20261112` ;
 - `recovery/lot9b-region-owner-integration-20261112` ;
-- `recovery/lot9b-neutral-caller-20261112`.
+- `recovery/lot9b-neutral-caller-20261112` ;
+- `recovery/lot9b-stck-public-stack-probe-20261112`.
 
 État vérifié :
 
@@ -215,29 +216,58 @@ Branches intégrées/préparées :
 - le hook B suit le vrai chemin
   `regionPublicEffectEvidence → bindRegionMethod → RegionInterventionOwner.acquire`
   sans inférence de `methodRef` ;
-- la qualification GitHub Actions du vrai `custom-games.zip` est opérationnelle :
-  suite ciblée Lot 9B **29/29** ;
-- probe natif SMLP ACTION6 utile : **9 pixels modifiés** à `x=32,y=26` ;
-- probe STCK ACTION6 non utile : **0 pixel modifié** à `x=6,y=56` ;
-- l’audit du corpus public STCK V1 montre qu’ACTION5 reste disponible en état non
-  terminal, empêchant le sélecteur public strict de choisir honnêtement ACTION6 ;
 - les quatre identités de runners A/STCK, A/SMLP, B/STCK et B/SMLP sont
-  reconstruites et routées explicitement au niveau du contrat `game_bridge` ;
-- aucune mesure officielle de coût n’a encore été exécutée ;
+  reconstruites et routées explicitement ;
+- le corpus public générique V1 reste impropre à Region, car ACTION5 est toujours
+  prioritaire sur ACTION6 ;
+- le corpus spécialisé public `native-region-action6-corpus-v1` est maintenant
+  reconstruit et qualifié sur le vrai `custom-games.zip`, seed 0 ;
+- STCK détecte publiquement le shop actif, retire une carte visible à `(4,52)`
+  puis alterne retrait/ajout ; chaque action du protocole produit un delta utile
+  compris entre **64 et 211 pixels** ;
+- SMLP détecte publiquement une porte et clique `(32,26)` ; chaque action produit
+  exactement **9 pixels** de delta ;
+- A et B utilisent les mêmes jeux, seed, corpus, séquences et volumes ; seul B
+  active le vrai hook Region ;
+- les `methodRef` de qualification sont des identités singleton explicites et ne
+  prétendent aucune équivalence entre interventions ;
+- le protocole fonctionnel complet a exécuté **40 invocations**, **8 warmups**,
+  **24 actions de warmup**, **32 sessions mesurées** et **400 actions mesurées** ;
+- les séquences A/B sont déterministes et identiques par jeu/type/index de
+  session ;
+- côté B, STCK a acquis **86/86** retours utiles et SMLP **126/126** ;
+- GitHub Actions `43351088067`, job `131642041309`, SHA
+  `0b0e34c76f63b8c29251e297a2973d4ada80de4c` : **36/36 tests réussis**, probe
+  natif réussi et protocole fonctionnel complet réussi ;
+- preuve : `docs/recovery/lot9b-region-action6-corpus-qualification.md` et
+  `docs/recovery/lot9b-region-action6-corpus-report.json` ;
+- les temps CPython obtenus sur le runner GitHub partagé sont conservés comme
+  diagnostics non officiels uniquement ; ils ne constituent ni une acceptation
+  ni un échec du seuil de 10 % ;
+- aucune mesure officielle isolée Worker/Pyodide n’a encore été exécutée ;
 - aucun compteur historique 70/76 ou candidat 71/76 n’est promu au statut de la
   reconstruction actuelle.
 
-Region n’est pas encore inscrit dans les hôtes communs : il lui manque un
-candidat public complet
+Region n’est pas encore inscrit dans les hôtes communs : il lui manque encore
+un candidat produit complet
 `AgentAction + CompositionBundle + état symbolique + identity` qualifié. Aucun
-bundle ou `methodRef` artificiel n’est ajouté.
+bundle ou `methodRef` de réutilisation artificiel n’est ajouté.
+
+Pièces restantes avant ABBA officiel :
+
+1. qualifier les quatre runners via le vrai Worker navigateur/Pyodide ;
+2. figer les `sourceRef` A et B ;
+3. créer le manifeste officiel reliant corpus, sources et timing scope ;
+4. réserver un environnement de mesure isolé ;
+5. répéter A1/B1/B2/A2 et appliquer le seuil strict séparément à STCK et SMLP.
 
 Statut Lot 9 :
 
 **noyau V6, Region, owner, caller, transport Worker, delta public, campagne,
-protocole ABBA et probe natif SMLP ACTION6 sont qualifiés dans leurs périmètres ;
-STCK reste sans chemin ACTION6 public utile et la performance officielle reste
-à confirmer.**
+protocole ABBA, quatre runners explicites et corpus Region ACTION6 sont
+fonctionnellement qualifiés sur le protocole complet et les moteurs réels du
+ZIP ; transport benchmark Worker/Pyodide, identités source et performance
+officielle restent à confirmer.**
 
 ## Branches de récupération conservées
 

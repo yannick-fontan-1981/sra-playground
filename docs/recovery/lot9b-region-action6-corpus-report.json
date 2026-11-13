@@ -1,0 +1,109 @@
+{
+  "version": 1,
+  "status": "functional-full-protocol-qualified-performance-official-pending",
+  "historicalCorpusRecovered": false,
+  "archive": {
+    "path": "public/python/custom-games.zip",
+    "gitBlob": "a43147ebf7c6915caf634fc5f56610290c91acae",
+    "seed": 0
+  },
+  "corpus": {
+    "id": "native-region-action6-corpus-v1",
+    "probeRef": "region-public-action6-probe-v1",
+    "startLevel": 1,
+    "publicOnly": true
+  },
+  "protocol": {
+    "seriesOrder": ["A1", "B1", "B2", "A2"],
+    "invocations": 40,
+    "warmupSessions": 8,
+    "warmupActions": 24,
+    "measuredSessions": 32,
+    "measuredActions": 400,
+    "stckMeasuredActionsPerSession": 10,
+    "smlpMeasuredActionsPerSession": 15
+  },
+  "games": {
+    "STCK": {
+      "gameId": "stck-c0000001",
+      "firstAction": { "id": 6, "x": 4, "y": 52 },
+      "firstChangedPixelCount": 211,
+      "allProtocolActionsUseful": true,
+      "minChangedPixelCount": 64,
+      "maxChangedPixelCount": 211,
+      "referenceSessions": 10,
+      "referenceActions": 86,
+      "candidateSessions": 10,
+      "candidateActions": 86,
+      "candidateRegion": {
+        "actionsSeen": 86,
+        "action6Seen": 86,
+        "usefulEvidence": 86,
+        "boundEvidence": 86,
+        "acquisitions": 86,
+        "singletonMethods": 86
+      }
+    },
+    "SMLP": {
+      "gameId": "smlp-c3000001",
+      "firstAction": { "id": 6, "x": 32, "y": 26 },
+      "firstChangedPixelCount": 9,
+      "allProtocolActionsUseful": true,
+      "minChangedPixelCount": 9,
+      "maxChangedPixelCount": 9,
+      "referenceSessions": 10,
+      "referenceActions": 126,
+      "candidateSessions": 10,
+      "candidateActions": 126,
+      "candidateRegion": {
+        "actionsSeen": 126,
+        "action6Seen": 126,
+        "usefulEvidence": 126,
+        "boundEvidence": 126,
+        "acquisitions": 126,
+        "singletonMethods": 126
+      }
+    }
+  },
+  "identity": {
+    "sameCorpusForAAndB": true,
+    "sameSeedForAAndB": true,
+    "sameGameTransportForAAndB": true,
+    "deterministicSequencesEqualForAAndB": true,
+    "onlyCandidateDifference": "real region_intervention hook enabled",
+    "methodRefStrategy": "native-region-singleton:<game>:<invocationIndex>:<actionIndex>"
+  },
+  "qualification": {
+    "githubActionsRunId": 43351088067,
+    "githubActionsJobId": 131642041309,
+    "qualifiedHeadSha": "0b0e34c76f63b8c29251e297a2973d4ada80de4c",
+    "targetedTestsPassed": 36,
+    "targetedTestsFailed": 0,
+    "artifactId": 14004415631,
+    "artifactZipSha256": "4a83f4fbe2a5bfd4195f5516f9adc045fdbdb18364fbe69a7631dacd0e347bf8"
+  },
+  "diagnosticTiming": {
+    "official": false,
+    "environment": "shared GitHub Actions runner with CPython archive session",
+    "STCK": {
+      "referenceMedianMs": 22.6506235,
+      "candidateMedianMs": 42.98671,
+      "relativeIncreasePercent": 89.7815748869,
+      "candidateHookMedianMs": 18.962047
+    },
+    "SMLP": {
+      "referenceMedianMs": 40.155492,
+      "candidateMedianMs": 67.2718205,
+      "relativeIncreasePercent": 67.5283184178,
+      "candidateHookMedianMs": 26.860477
+    },
+    "acceptanceDisposition": "not_applicable_non_official"
+  },
+  "remainingBeforeOfficialBenchmark": [
+    "qualify browser Worker/Pyodide transport",
+    "pin durable A and B sourceRef values",
+    "create official runner manifest",
+    "run in isolated measurement environment",
+    "execute official A1-B1-B2-A2 protocol"
+  ]
+}

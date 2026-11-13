@@ -8,6 +8,13 @@ function nonEmpty(value, label) {
   return value;
 }
 
+function corpusOptions(corpus, selectAction) {
+  return {
+    ...(corpus === undefined ? {} : { corpus, seed: corpus.seed }),
+    ...(selectAction === undefined ? {} : { selectAction }),
+  };
+}
+
 /**
  * First explicit reconstructed native benchmark runner: A/STCK.
  *
@@ -15,7 +22,7 @@ function nonEmpty(value, label) {
  * The runner therefore cannot silently fall back to a fake, HTTP, Sites, or
  * alternate game implementation.
  */
-export function createAStckNativeRunner({ dispatch, sourceRef }) {
+export function createAStckNativeRunner({ dispatch, sourceRef, corpus, selectAction }) {
   nonEmpty(sourceRef, 'sourceRef');
   if (typeof dispatch !== 'function') {
     throw new TypeError('A/STCK native runner requires game_bridge dispatch');
@@ -25,7 +32,7 @@ export function createAStckNativeRunner({ dispatch, sourceRef }) {
     variant: 'A',
     game: 'STCK',
     sourceRef,
-    seed: 0,
+    ...corpusOptions(corpus, selectAction),
     createSession: ({ game, seed, startLevel }) => createGameBridgeNativeSession({
       dispatch,
       game,
@@ -35,7 +42,7 @@ export function createAStckNativeRunner({ dispatch, sourceRef }) {
   });
 }
 
-export function createASmlpNativeRunner({ dispatch, sourceRef }) {
+export function createASmlpNativeRunner({ dispatch, sourceRef, corpus, selectAction }) {
   nonEmpty(sourceRef, 'sourceRef');
   if (typeof dispatch !== 'function') {
     throw new TypeError('A/SMLP native runner requires game_bridge dispatch');
@@ -45,7 +52,7 @@ export function createASmlpNativeRunner({ dispatch, sourceRef }) {
     variant: 'A',
     game: 'SMLP',
     sourceRef,
-    seed: 0,
+    ...corpusOptions(corpus, selectAction),
     createSession: ({ game, seed, startLevel }) => createGameBridgeNativeSession({
       dispatch,
       game,
@@ -71,7 +78,14 @@ function requireRegionCandidateHook(candidateHook) {
   return candidateHook;
 }
 
-function createCandidateRunner({ dispatch, sourceRef, game, candidateHook }) {
+function createCandidateRunner({
+  dispatch,
+  sourceRef,
+  game,
+  candidateHook,
+  corpus,
+  selectAction,
+}) {
   nonEmpty(sourceRef, 'sourceRef');
   if (typeof dispatch !== 'function') {
     throw new TypeError(`B/${game} native runner requires game_bridge dispatch`);
@@ -81,7 +95,7 @@ function createCandidateRunner({ dispatch, sourceRef, game, candidateHook }) {
     variant: 'B',
     game,
     sourceRef,
-    seed: 0,
+    ...corpusOptions(corpus, selectAction),
     createSession: ({ game: requestedGame, seed, startLevel }) => createGameBridgeNativeSession({
       dispatch,
       game: requestedGame,
