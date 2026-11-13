@@ -1,5 +1,5 @@
 import type { PublicFrameLike, PublicObservationLike } from '../logos-engine/linked-preparation.ts';
-import type { FieldStockProposal } from '../logos-engine/field-stock.ts';
+import type { FieldStockDependencies, FieldStockProposal, FieldStockProposalResult } from '../logos-engine/field-stock.ts';
 import {
   createAddressedFieldRetentionState,
   crossAddressedFieldBoundary,
@@ -34,6 +34,16 @@ export class ObservedAddressedMaterialRuntime {
     if (!this.field.prior) return 'empty';
     const stock = ensureFieldStock(this.field, observation, rows);
     return stock ? 'revalidated_stock' : 'retained_not_applicable';
+  }
+
+  proposeStock(
+    observation: PublicObservationLike,
+    rows: readonly (readonly number[])[],
+    remaining: number,
+    deps: FieldStockDependencies,
+  ): FieldStockProposalResult | null {
+    if (!this.field.stock || this.field.stock.invalid) return null;
+    return this.field.stock.propose(observation, rows, remaining, deps);
   }
 
   beforeStock(
