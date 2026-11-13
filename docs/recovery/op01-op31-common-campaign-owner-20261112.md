@@ -9,8 +9,11 @@ Baseline canonique de départ :
 `recovery/site109-reconstruction-20261112` au commit
 `87a538a1c776fb974a1767f30fea735aac28ded9`.
 
-Baseline canonique relue avant intégration :
+Baseline canonique réconciliée avant qualification finale :
 `6304bec8c99a05b0023692f8fe7f432394acaa11`.
+
+Commit de réconciliation, baseline canonique premier parent :
+`ed032442acdeb7c703e8f40917099184aa459ada`.
 
 Plan stable :
 `docs/migration/op01-op31-verification-plan.md`.
@@ -148,14 +151,14 @@ résultats publics ni dans les reçus. Seule l’identité de proposition est re
 Le retour est acheminé au propriétaire original sans recopier à nouveau le gros
 état symbolique.
 
-Diagnostic après optimisation, 21 échantillons × 2 000 cycles :
+Diagnostic final sur l’arbre réconcilié, 21 échantillons × 2 000 cycles :
 
-- aucun besoin direct : `0,343 µs/cycle` ;
-- aucun besoin via campagne commune : `0,289 µs/cycle` ;
-- release OP28 directe : `3,467 µs/cycle` ;
-- campagne commune avec retour corrélé : `9,381 µs/cycle` ;
-- surcoût absolu restant : `5,914 µs/cycle` ;
-- réduction du coût du chemin commun : environ `84,8 %` par rapport à la
+- aucun besoin direct : `0,233 µs/cycle` ;
+- aucun besoin via campagne commune : `0,349 µs/cycle` ;
+- release OP28 directe : `2,337 µs/cycle` ;
+- campagne commune avec retour corrélé : `6,894 µs/cycle` ;
+- surcoût absolu restant : `4,557 µs/cycle` ;
+- réduction du coût du chemin commun : environ `88,9 %` par rapport à la
   première version.
 
 Le pourcentage relatif au chemin direct reste élevé parce que la référence ne
@@ -165,17 +168,19 @@ aussi propriété, état en attente, retour, déduplication et acheminement.
 Ce diagnostic est uniquement un micro-test OP28. Il ne remplace pas une session
 native STCK ou SMLP.
 
-## Qualification
+## Qualification finale réconciliée
 
 GitHub Actions :
 
-- run : `43346240327` ;
-- job : `131626183883` ;
-- commit qualifié : `4392f59907e30a1769e9f7305d3e2bfbba4c0d8c` ;
+- run : `43346791891` ;
+- job : `131627959298` ;
+- commit qualifié : `d5fc07b9c825078c7a241d6511eb91287befbc7f` ;
+- baseline canonique intégrée comme premier parent :
+  `6304bec8c99a05b0023692f8fe7f432394acaa11` ;
 - Node : `22.18.0` ;
 - `npm ci` : réussi ;
 - `npm run typecheck` : réussi ;
-- régression TypeScript complète : **282/282 tests réussis** ;
+- régression TypeScript complète : **286/286 tests réussis** ;
 - diagnostic de campagne : réussi.
 
 Le workflow temporaire de qualification est supprimé avant intégration et ne
