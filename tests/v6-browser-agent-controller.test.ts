@@ -279,3 +279,35 @@ test('host failure becomes an explicit error stop and is reported once', async (
   assert.equal(errors.length, 1);
   assert.match(String(errors[0]), /synthetic host failure/);
 });
+
+test('disposing an in-flight campaign preserves disposed ownership even when cancellation rejects', async () => {
+  const initial = observation([1]);
+  let rejectRun!: (error: unknown) => void;
+  const pending = new Promise<BrowserCampaignHostResult>((_resolve, reject) => { rejectRun = reject; });
+  const errors: unknown[] = [];
+  let cancelCalls = 0;
+  let disposeCalls = 0;
+  const host = {
+    currentGameObservation: initial,
+    begin: () => ({} as never),
+    run: async () => pending,
+    cancel: () => { cancelCalls += 1; return true; },
+    dispose: () => { disposeCalls += 1; },
+  } as BrowserAgentCampaignHost;
+  const harness = controlledPorts(initial, async () => initial);
+  const controller = new BrowserAgentController({
+    createHost: () => host,
+    onError: error => errors.push(error),
+  });
+
+  const running = controller.activate(initial, harness.ports);
+  controller.dispose();
+  rejectRun(new Error('cancelled during pagehide'));
+  const result = await running;
+
+  assert.equal(result.phase, 'disposed');
+  assert.equal(result.stopReason, 'disposed');
+  assert.equal(cancelCalls, 1);
+  assert.equal(disposeCalls, 1);
+  assert.deepEqual(errors, []);
+});
