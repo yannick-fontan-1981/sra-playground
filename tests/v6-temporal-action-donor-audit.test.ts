@@ -52,7 +52,7 @@ test('retained-grid action workflows prepare an intent but do not execute the en
 
 test('architecture ledger requires the exact intent permit dispatch acquisition chain', () => {
   const source = donor('reference/sra/212d8d426f07/docs/architecture/resolving_architecture_overview.md');
-  assert.match(source, /exact suspended execution,\s*intent\/permit\/dispatch\/acquisition chain/);
-  assert.match(source, /reject duplicate reconciliation/);
-  assert.match(source, /checks canonical intent, permit, dispatch, acquisition and observation order/);
+  assert.match(source, /exact suspended execution,\s*intent\/permit\/dispatch\/acquisition chain/i);
+  assert.match(source, /reject duplicate reconciliation/i);
+  assert.match(source, /checks canonical intent, permit,\s*dispatch, acquisition and observation order/i);
 });
