@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "requestedAt": "2026-11-13T02:47:00Z",
+  "canonicalBaseCommit": "85d8c5e57a26ae3f02a0e89c49f5894dc571bf70",
+  "branch": "recovery/lot9b-official-measurement-20261112",
+  "referenceSourceRef": "lot9b-region-v1:A:46ce3478dbc07268333a6a2d423489a689cc5ff509abf1e4bf1f948b174b842c",
+  "candidateSourceRef": "lot9b-region-v1:B:557ca909c4c9b68ec70d2055a02dfb5c27dffcae338f1025e3b53c67937a609f",
+  "protocol": "A1-B1-B2-A2",
+  "measurementIsolation": "non-isolated-shared-github-actions-runner-no-repository-concurrency",
+  "sourceIdentityImpact": "none; this request file is outside the hashed benchmark component sets"
+}
