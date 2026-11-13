@@ -137,7 +137,7 @@ export function comparePublicObservations(
         touchedTransitionKeys[touchedTransitionCount] = transitionKey;
         touchedTransitionCount += 1;
       }
-      transitionCounts[transitionKey] += 1;
+      transitionCounts[transitionKey] = transitionCounts[transitionKey]! + 1;
 
       let neighbor: number;
       if (y > 0) {
