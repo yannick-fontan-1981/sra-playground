@@ -20,10 +20,9 @@ export interface PublicUniqueStckAction6Preparation {
 
 const STCK_CARD_COLORS = new Set([7, 8, 9, 10, 11, 14]);
 
-function publicFrame(observation: AgentObservation): Uint8Array | undefined {
+function publicImageFrame(observation: AgentObservation): Uint8Array | undefined {
   if (
     observation.state !== 'NOT_FINISHED'
-    || !observation.availableActionIds.includes(6)
     || observation.image.width !== 64
     || observation.image.height !== 64
     || observation.image.pixelFormat !== 'palette-index-u8'
@@ -38,17 +37,9 @@ function pixel(frame: Uint8Array, x: number, y: number): number {
   return frame[y * 64 + x] ?? -1;
 }
 
-/**
- * Detect one visible STCK stack card without using the historical bottom-most
- * ranking rule. Each public card body is a solid 8-pixel-wide block in the left
- * stack panel, with at least two rows and a one-row gap between cards.
- */
-export function findUniqueStckStackCardTarget(
-  observation: AgentObservation,
+function uniqueStackCardTarget(
+  frame: Uint8Array,
 ): PublicUniqueStckAction6Target | undefined {
-  const frame = publicFrame(observation);
-  if (!frame) return undefined;
-
   const runs: Array<{ color: number; startY: number; endY: number }> = [];
   let active: { color: number; startY: number; endY: number } | undefined;
 
@@ -77,6 +68,32 @@ export function findUniqueStckStackCardTarget(
     y: Math.floor((run.startY + run.endY) / 2),
     evidenceRef: `public-stck-stack-card:${run.color}:${run.startY}-${run.endY}`,
   };
+}
+
+/**
+ * Detect one visible STCK stack card from the public image alone.
+ *
+ * This image-only producer deliberately does not inspect action availability so
+ * a separate symbolic channel can own physical ACTION6 admissibility. Several
+ * public cards remain unresolved; no ranking rule is introduced.
+ */
+export function findUniqueVisibleStckStackCardTarget(
+  observation: AgentObservation,
+): PublicUniqueStckAction6Target | undefined {
+  const frame = publicImageFrame(observation);
+  return frame ? uniqueStackCardTarget(frame) : undefined;
+}
+
+/**
+ * Detect one actionable STCK stack card without using the historical bottom-most
+ * ranking rule. Each public card body is a solid 8-pixel-wide block in the left
+ * stack panel, with at least two rows and a one-row gap between cards.
+ */
+export function findUniqueStckStackCardTarget(
+  observation: AgentObservation,
+): PublicUniqueStckAction6Target | undefined {
+  if (!observation.availableActionIds.includes(6)) return undefined;
+  return findUniqueVisibleStckStackCardTarget(observation);
 }
 
 /**
