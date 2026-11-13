@@ -1247,6 +1247,21 @@ function renderGenericTimeline(panel: HTMLElement, container: Element, selected:
       term.textContent = name; value.textContent = description; facts.append(term, value);
     }
     details.append(facts);
+    const recoveryOperations = first.decision?.recoveryOperations;
+    if (recoveryOperations?.length) {
+      const recovery = document.createElement('ol');
+      recovery.className = 'sic-recovery-timeline';
+      recovery.setAttribute('aria-label', 'How the blocked plan recovered');
+      for (const { key: op, finding } of recoveryOperations) {
+        const step = document.createElement('li');
+        step.textContent = `${op} · ${finding}`;
+        recovery.append(step);
+      }
+      details.append(recovery);
+      const action = first.decision?.recoveryAction;
+      const source = selected.find(item => action === item.last.sequence && item.first.sessionId === first.sessionId);
+      if (source) details.append(strategyJump(section, key(source.first.sequence), `See the counterexample at action ${action}`));
+    }
     const source = status === 'contradicted' || status === 'replaced' ? last : followsContradiction(episode) ? previous : last;
     const addSprites = () => {
       if (!details.open || details.querySelector('[data-return-sprites]') || !source) return;

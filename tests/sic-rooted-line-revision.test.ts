@@ -30,6 +30,9 @@ test('an observed push chain unblocks rooted-line search, retaining its estimate
   assert.equal(state.refuted[0]?.cell_push_witness, true);
   const revised = memory.propose(current, rows, [], 16, config)!;
   assert.equal(revised.rooted_line_plan.search.operation, 'OP26');
+  assert.deepEqual(revised.rooted_line_plan.search.recovery_operations.map((operation: { key: string }) => operation.key),
+    ['OP03', 'OP12', 'OP08', 'OP26']);
+  assert.deepEqual(revised.rooted_line_plan.search.recovery_evidence, [observation(11).observation_ref, current.observation_ref]);
   assert.equal(revised.bundle_template.operation_key, 'OP18');
   assert.deepEqual(revised.actions, [{ action_ref: 'ACTION3' }]);
   assert.equal(rootedLineBefore(revised, 0, rows, {

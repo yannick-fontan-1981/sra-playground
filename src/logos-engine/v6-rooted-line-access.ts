@@ -6,6 +6,7 @@
 import { measureRootedLine, physicalRootedLine, projectedRootedLine } from './v6-rooted-line-observation.ts';
 import { rootedLineEffect, planRootedLine } from './v6-rooted-line-mechanics.ts';
 import { planCellPush, witnessedCellPush } from './v6-rooted-line-revision.ts';
+import { resolveRootedRecovery } from './v6-rooted-line-recovery-operations.ts';
 import { symbolicDigest as identity } from './v6-hash.ts';
 import { pythonEqual as equal, pythonTruthy as truth } from './v6-operations.ts';
 import { retainNativeJson } from './v6-native-owned.ts';
@@ -71,8 +72,8 @@ export class RootedLineMemory {
     const memory = structuredClone(this.lineMemory);
     if (memory.epoch !== observation.level_epoch) { memory.current = null; memory.tried = []; memory.epoch = observation.level_epoch; }
     const refutations = memory.refuted.filter((item: R) => item.epoch === observation.level_epoch);
-    const revision = refutations.length === 1 && refutations[0].cell_push_witness && refutations[0].layout === scene.layout;
-    if (refutations.length && !revision) {
+    const revision = resolveRootedRecovery(refutations, scene.layout);
+    if (revision.status === 'unresolved') {
       return { status: 'unknown', reason: 'conditional_contact_model_refuted', block_unrelated_probe: true };
     }
     const available = new Set<string>(observation.available_action_refs);
@@ -80,7 +81,7 @@ export class RootedLineMemory {
       && !Object.hasOwn(memory.controls, action) && !memory.tried.includes(action));
     let actions: R[] = [], predictions: (R | null)[] = [], configurations: (R | null)[] = [], search: R | null = null;
     let why: string, kind: string;
-    if (revision) {
+    if (revision.status === 'ready') {
       const effects = Object.fromEntries(Object.entries(memory.controls).filter(([action]) => available.has(action)));
       const plan = planCellPush(scene, effects, Math.min(cfg.max_depth, config.remaining_level_actions ?? cfg.max_depth),
         cfg.max_nodes, () => !!budget.shouldStop?.() || (budget.now ?? (() => performance.now()))() >= (budget.deadlineMs ?? Infinity));
@@ -88,7 +89,9 @@ export class RootedLineMemory {
       actions = [{ action_ref: plan.command }];
       predictions = [plan.prediction];
       configurations = [null];
-      search = { operation: 'OP26', predicted_goal_distance: plan.predictedGoalDistance, model: 'conditional_cell_push_after_counterexample' };
+      search = { operation: 'OP26', predicted_goal_distance: plan.predictedGoalDistance, model: 'conditional_cell_push_after_counterexample',
+        recovery_operations: [...revision.operations, { key: 'OP26', finding: `Find a conditional access of ${plan.predictedGoalDistance} moves and check its first command.` }],
+        recovery_evidence: revision.evidence };
       why = 'Find an ordered access from the measured return using the witnessed whole-cell push. Verify the root, tip and every piece after this step.';
       kind = 'cell_push_revision';
     } else if (unmeasured.length) {

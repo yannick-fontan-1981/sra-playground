@@ -134,6 +134,8 @@ SK48 passe au niveau 2 à l’action 19. Les douze premières commandes et leurs
 | LKEY | 44 | 3 | Identiques |
 | CASC | 1 | 0 | Identiques, arrêt `frontier_unknown` conservé |
 
-L’estimation d’avancement atteint environ 80 % sur les 13 phases. Cette première récupération ne valide qu’une partie des phases V8-7 et V8-8. Il reste notamment à faire produire le besoin et la stratégie par l’agenda SIC, à compléter la chaîne OP03/OP12/OP08/OP26, à qualifier les packs, puis à migrer et mesurer les familles selon les critères V8-12. Les huit échecs de la suite historique RootedLine se reproduisent avec les mêmes noms sur le commit de départ.
+La récupération publie aussi les étapes qui justifient son admission. OP03 relève la nécessité d’une projection compatible avec le contact, OP12 conserve l’inconnue après la contradiction, OP08 trouve dans le retour le témoin qui autorise l’hypothèse de poussée par cellule, puis OP26 recherche l’accès. Depuis la carte de stratégie, SIC relie ces opérations à l’action 12. Si les témoins manquent ou que la géométrie change, la récupération ne propose pas de commande.
+
+L’estimation d’avancement atteint environ 80 % sur les 13 phases. Cette récupération ne valide qu’une partie des phases V8-7 et V8-8. Il reste notamment à faire produire le besoin et la stratégie par l’agenda SIC, à qualifier les packs, puis à migrer et mesurer les familles selon les critères V8-12. Les huit échecs de la suite historique RootedLine se reproduisent avec les mêmes noms sur le commit de départ.
 
 Le résumé natif est construit après la décision, hors de la mesure du temps actif. L’affichage est différé au prochain rendu du navigateur après la fin d’une opération. Les tests couvrent la matrice, la révision, la portée, le fallback, l’ambiguïté, les retours natifs et la parité du transport V6 jusqu’à un retour terminal.
