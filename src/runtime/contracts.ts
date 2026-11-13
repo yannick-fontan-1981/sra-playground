@@ -1,13 +1,13 @@
 /**
- * Public boundary for a future, genuine SRA Web Worker.
- * This is a protocol, not an agent implementation or a solver.
+ * Public boundary for the bounded browser Agent preview and the reconstructed
+ * SRA Web Worker. The protocol exposes only public observations and actions.
  */
 import type { PipesObservation } from '../games/pipes.ts';
 
 export const AGENT_STATUS = Object.freeze({
-  available: false,
+  available: true,
   name: 'SRA',
-  status: 'port-pending',
+  status: 'browser-common-campaign-op28-preview',
 } as const);
 
 export const PROTOCOL_VERSION = 1 as const;
