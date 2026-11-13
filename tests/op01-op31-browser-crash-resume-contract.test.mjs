@@ -56,6 +56,9 @@ function validReport() {
       needIdRetained: true,
       mode: 'manual',
       canvasPresentations: 1,
+      returnedObservationCanvasPaints: 3,
+      expectedReturnedObservationCanvasPaints: 3,
+      totalCanvasPaints: 5,
       extraRequestsAfterSettlement: 0,
       extraPresentationsAfterSettlement: 0,
     },
@@ -93,6 +96,7 @@ test('hard-crash resume report accepts the exact bounded proof', () => {
   assert.equal(summary.changedPixelCount, 9);
   assert.equal(summary.actionsDispatched, 1);
   assert.equal(summary.canvasPresentations, 1);
+  assert.equal(summary.returnedObservationCanvasPaints, 3);
 });
 
 test('hard-crash resume report rejects a graceful page lifecycle', () => {
@@ -104,7 +108,7 @@ test('hard-crash resume report rejects a graceful page lifecycle', () => {
   );
 });
 
-test('hard-crash resume report rejects a second Agent action or presentation', () => {
+test('hard-crash resume report rejects a second Agent action or logical presentation', () => {
   const actionReplay = validReport();
   actionReplay.phaseTwo.extraRequestsAfterSettlement = 1;
   assert.throws(
@@ -116,7 +120,23 @@ test('hard-crash resume report rejects a second Agent action or presentation', (
   duplicatePresentation.phaseTwo.canvasPresentations = 2;
   assert.throws(
     () => assertOp01Op31BrowserCrashResumeReport(duplicatePresentation),
-    /painted 2 times/u,
+    /2 logical presentations/u,
+  );
+});
+
+test('hard-crash resume report rejects missing or duplicate animation paints', () => {
+  const missingPaint = validReport();
+  missingPaint.phaseTwo.returnedObservationCanvasPaints = 2;
+  assert.throws(
+    () => assertOp01Op31BrowserCrashResumeReport(missingPaint),
+    /painted 2 frames; expected 3/u,
+  );
+
+  const duplicatePaint = validReport();
+  duplicatePaint.phaseTwo.returnedObservationCanvasPaints = 6;
+  assert.throws(
+    () => assertOp01Op31BrowserCrashResumeReport(duplicatePaint),
+    /painted 6 frames; expected 3/u,
   );
 });
 
