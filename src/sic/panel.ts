@@ -1,6 +1,6 @@
 import type { AgentAction } from '../runtime/contracts.ts';
 import type { NativeClickReturn } from '../logos-engine/v6-native-click-return.ts';
-import { contrastClickContexts, describeClickContext, type ClickEffectCount } from './click-evidence.ts';
+import { compareAboveColors, contrastClickContexts, describeClickContext, type ClickEffectCount } from './click-evidence.ts';
 import type { Applicability, ControlEffectResolution } from './know-control-effect.ts';
 import type { ShadowView } from './shadow.ts';
 import type { SituationKey } from './situation.ts';
@@ -111,7 +111,40 @@ function describeClickReturn(receipt: NativeClickReturn): [string, string] {
     : 'After: the region kept the same visible pixels.'];
 }
 
-function renderClickReturns(panel: HTMLElement, returns: readonly NativeClickReturn[]): void {
+function renderClickPreview(receipt: NativeClickReturn, palette: readonly string[]): HTMLElement | null {
+  const preview = receipt.preview;
+  if (!preview) return null;
+  const group = document.createElement('div');
+  group.className = 'sic-sprites';
+  for (const [label, rows] of [['Before', preview.before], ['After', preview.after]] as const) {
+    if (!rows?.length) continue;
+    const figure = document.createElement('figure');
+    const canvas = document.createElement('canvas');
+    canvas.width = rows[0]!.length;
+    canvas.height = rows.length;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) continue;
+    rows.forEach((row, y) => row.forEach((value, x) => {
+      ctx.fillStyle = palette[value] ?? '#000';
+      ctx.fillRect(x, y, 1, 1);
+    }));
+    const caption = document.createElement('figcaption');
+    caption.textContent = label;
+    const image = document.createElement('div');
+    image.className = 'sic-sprite';
+    image.setAttribute('role', 'img');
+    image.setAttribute('aria-label', `${label} the click at (${receipt.point.join(', ')})${preview.stride > 1 ? ', sampled crop' : ''}`);
+    const marker = document.createElement('span');
+    marker.style.left = `${(preview.point[0] + 0.5) / canvas.width * 100}%`;
+    marker.style.top = `${(preview.point[1] + 0.5) / canvas.height * 100}%`;
+    image.append(canvas, marker);
+    figure.append(image, caption);
+    group.append(figure);
+  }
+  return group;
+}
+
+function renderClickReturns(panel: HTMLElement, returns: readonly NativeClickReturn[], palette: readonly string[]): void {
   const levelFilter = panel.querySelector<HTMLSelectElement>('[data-sic-level]')!;
   const previous = levelFilter.value;
   const levels = [...new Set(returns.map(receipt => receipt.fromLevel))].sort((a, b) => a - b);
@@ -128,6 +161,8 @@ function renderClickReturns(panel: HTMLElement, returns: readonly NativeClickRet
     const heading = document.createElement('strong');
     heading.textContent = `Level ${receipt.fromLevel} · Action ${receipt.sequence} · Click (${receipt.point.join(', ')})`;
     row.append(heading);
+    const preview = renderClickPreview(receipt, palette);
+    if (preview) row.append(preview);
     for (const description of describeClickReturn(receipt)) {
       const line = document.createElement('p');
       line.textContent = description;
@@ -172,6 +207,12 @@ function renderContextContrast(effects: readonly ClickEffectCount[]): HTMLElemen
       ? 'Some measurements distinguish these returns. Their causal role is still unknown.'
       : 'The measured context does not separate the outcomes.';
   context.append(heading, assessment);
+  const pairs = compareAboveColors(effects);
+  const contrast = document.createElement('p');
+  contrast.textContent = pairs.length
+    ? `${pairs.length} matched ${pairs.length === 1 ? 'pair' : 'pairs'} with different colors above. Recoloring differed in ${pairs.filter(pair => pair.recolorDiffers).length}. This is a comparison of measured features.`
+    : 'No pair isolates the colors above. Their predictive value is still unknown.';
+  context.append(contrast);
   for (const { label, values, separates } of differences) {
     const line = document.createElement('p');
     const description = values.map((group, index) => {
@@ -184,7 +225,7 @@ function renderContextContrast(effects: readonly ClickEffectCount[]): HTMLElemen
   return context;
 }
 
-function renderClickComparisons(panel: HTMLElement, evidence: ShadowView['clickEvidence']): void {
+function renderClickComparisons(panel: HTMLElement, evidence: ShadowView['clickEvidence'], palette: readonly string[]): void {
   const summary = panel.querySelector<HTMLElement>('[data-sic-comparison-summary]')!;
   const scope = panel.querySelector<HTMLElement>('[data-sic-comparison-scope]')!;
   const list = panel.querySelector<HTMLUListElement>('[data-sic-comparison-list]')!;
@@ -196,6 +237,7 @@ function renderClickComparisons(panel: HTMLElement, evidence: ShadowView['clickE
   }
   const repeated = evidence.comparisons.filter(group => group.status === 'repeated').length;
   const varied = evidence.comparisons.filter(group => group.status === 'varied').length;
+  const pairs = evidence.comparisons.flatMap(group => compareAboveColors(group.effects));
   const counts = [
     repeated ? `${repeated} ${repeated === 1 ? 'pattern repeated' : 'patterns repeated'}` : 'No repeated pattern yet',
     varied ? `${varied} with different outcomes` : '',
@@ -203,6 +245,8 @@ function renderClickComparisons(panel: HTMLElement, evidence: ShadowView['clickE
   summary.textContent = counts.join(' · ');
   scope.textContent = [
     'Compared within this session by measured shape, starting color and click position within the region.',
+    pairs.length ? `Across all groups, ${pairs.length} matched pairs differ only in the measured colors above. Recoloring differs in ${pairs.filter(pair => pair.recolorDiffers).length} pairs.`
+      : 'No matched pairs vary only in the measured colors above.',
     'The role of the region and whether the result transfers to other situations remain uncertain.',
     evidence.boundaries ? `${evidence.boundaries} game boundary returns excluded.` : '',
     evidence.unidentified ? `${evidence.unidentified} clicks without a visible region excluded.` : '',
@@ -241,7 +285,10 @@ function renderClickComparisons(panel: HTMLElement, evidence: ShadowView['clickE
         inspect.textContent = 'View return';
         inspect.setAttribute('aria-label', `View level ${level}, action ${receipts[0]!.sequence}, in Perceptions`);
         inspect.addEventListener('click', () => showReturn(panel, receipts[0]!));
-        line.append(outcome, inspect);
+        line.append(outcome);
+        const preview = renderClickPreview(receipts[0]!, palette);
+        if (preview) line.append(preview);
+        line.append(inspect);
         row.append(line);
       }
     }
@@ -251,7 +298,7 @@ function renderClickComparisons(panel: HTMLElement, evidence: ShadowView['clickE
   list.replaceChildren(...rows);
 }
 
-export function renderSicPanel(panel: HTMLElement, view: ShadowView | null): void {
+export function renderSicPanel(panel: HTMLElement, view: ShadowView | null, palette: readonly string[]): void {
   panel.querySelector<HTMLElement>('[data-sic-context]')!.textContent = view
     ? `${view.gameCode} · Level ${view.frame.scope.level} · Last settled board` : '';
   panel.querySelector<HTMLElement>('[data-sic-summary]')!.textContent = view ? summaries[view.resolution.outcome] : 'Waiting for the board.';
@@ -260,8 +307,8 @@ export function renderSicPanel(panel: HTMLElement, view: ShadowView | null): voi
     : view ? 'No command available.' : 'Waiting for the board.';
   panel.querySelector<HTMLElement>('[data-sic-next]')!.textContent = view?.nextAction
     ? actionLabel(view.nextAction) : 'No pending action to show.';
-  renderClickReturns(panel, view?.clickEvidence?.returns ?? (view?.clickReturn ? [view.clickReturn] : []));
-  renderClickComparisons(panel, view?.clickEvidence ?? null);
+  renderClickReturns(panel, view?.clickEvidence?.returns ?? (view?.clickReturn ? [view.clickReturn] : []), palette);
+  renderClickComparisons(panel, view?.clickEvidence ?? null, palette);
   const check = view?.returnCheck;
   panel.querySelector<HTMLElement>('[data-sic-return]')!.textContent = !check ? 'No checked return for this board.'
     : check.matched === true ? 'The return matched the V6 plan’s expectation.'

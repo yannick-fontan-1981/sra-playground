@@ -65,6 +65,12 @@
 .sic-observations dt{color:var(--subtle)}
 .sic-observations dd{margin:0;overflow-wrap:anywhere}
 .sic-context-contrast{border-top:1px solid var(--line);padding-top:8px}
+.sic-sprites{display:flex;align-items:flex-end;gap:12px;margin:8px 0}
+.sic-sprites figure{margin:0;text-align:center}
+.sic-sprites figcaption{font-size:11px;color:var(--subtle);margin-top:3px}
+.sic-sprite{position:relative;border:1px solid var(--control-border);width:fit-content}
+.sic-sprite canvas{display:block;width:auto;height:44px;max-width:90px;object-fit:contain;image-rendering:pixelated}
+.sic-sprite span{position:absolute;transform:translate(-50%,-50%);width:7px;height:7px;border:1px solid #fff;box-shadow:0 0 0 1px #000;border-radius:50%}
 .sic-evidence-link{min-height:30px;padding:2px 0;border:0;background:transparent;color:var(--accent-hover);font-size:13px;text-decoration:underline;text-underline-offset:3px}
 @media(max-width:900px){.is-agent-mode .minimal-play-area{grid-template-columns:minmax(0,1fr) 280px}.is-agent-mode .minimal-play-area .board-column,.is-agent-mode .minimal-control-column{padding:22px 18px}}
 @media(max-width:760px){.is-agent-mode .minimal-play-area{grid-template-columns:1fr}.is-agent-mode .minimal-control-column{border-left:0;border-top:1px solid var(--line)}.is-agent-mode .minimal-control-column #agent-panel{max-width:600px}.agent-live-stats strong{font-size:26px}.agent-live-stats span{font-size:13px}.agent-mode-label{font-size:10px}.sic-panel{padding:20px 16px}.sic-grid{grid-template-columns:1fr}}

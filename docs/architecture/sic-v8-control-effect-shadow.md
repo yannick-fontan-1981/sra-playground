@@ -29,4 +29,14 @@ Le replay STCK des trois premiers niveaux conserve les 35 actions. Dans le group
 
 Les prochaines perspectives, **Stratégies**, **Objectifs** et **Plans d’actions**, pourront utiliser la même navigation quand leurs données en lecture seule seront disponibles.
 
+## Recherche d’un contraste isolant les couleurs du dessus
+
+Une paire doit appartenir au même groupe de forme, couleur initiale et point de clic relatif. L’état public, les commandes, le nombre de régions similaires et les palettes à gauche, à droite et en dessous doivent coïncider. La palette du dessus doit différer. Ce test compare des mesures résumées et laisse ouverts les autres facteurs visibles ou cachés.
+
+Le moteur natif 0.68 a résolu les quatre premiers niveaux de STCK en 45 actions. Aucun appariement ne satisfait le filtre dans les 32 clics retenus. Quatre traces publiques de STCK (V39 à V42) fournissent 34 retours distincts après déduplication par niveau, observations publiques et commande. Sur 56 paires partageant la cible mesurée et le point relatif, aucune n’isole les couleurs du dessus. Leur valeur prédictive pour la recoloration reste indéterminée.
+
+Perceptions montre le recadrage du plateau avant et après chaque clic. Informations affiche les mêmes vignettes pour les exemples qui soutiennent les résultats. Le cadre reste fixe autour de la région initiale et le repère indique le point cliqué. Une vignette est échantillonnée quand le cadre dépasse 20 pixels sur un côté. Une frontière de jeu donne seulement l’image avant.
+
+L’avancement global est estimé à environ 12 % sur les 13 phases de la spécification, en leur donnant le même poids. Cette estimation correspond à environ une phase et demie de livrables, principalement la spécification et des parties de l’observation et de la résolution en shadow. Elle ne représente pas une validation des phases entières. Les onglets restants, le registre, l’agenda, les engagements et la boucle active sont encore à construire.
+
 Le résumé natif est construit après la décision, hors de la mesure du temps actif. L’affichage est différé au prochain rendu du navigateur après la fin d’une opération. Les tests couvrent la matrice, la révision, la portée, le fallback, l’ambiguïté, les retours natifs et la parité du transport V6 jusqu’à un retour terminal.

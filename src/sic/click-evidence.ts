@@ -50,6 +50,34 @@ export function contrastClickContexts(effects: readonly ClickEffectCount[]) {
   return { differences, missing };
 }
 
+export interface AboveColorPair {
+  readonly left: NativeClickReturn;
+  readonly right: NativeClickReturn;
+  readonly recolorDiffers: boolean;
+}
+
+/** Compare within one target group and hold the other recorded context measurements fixed. */
+export function compareAboveColors(effects: readonly ClickEffectCount[]): readonly AboveColorPair[] {
+  const samples = effects.flatMap(effect => effect.returns.flatMap(receipt => {
+    if (!receipt.beforeContext) return [];
+    const { state, commands, matchingRegions, neighborhood } = receipt.beforeContext;
+    return [{
+      receipt,
+      recolored: effect.kind === 'recolor',
+      above: neighborhood.above.join(','),
+      controls: JSON.stringify([state, commands, matchingRegions, neighborhood.left, neighborhood.right, neighborhood.below]),
+    }];
+  }));
+  const pairs: AboveColorPair[] = [];
+  for (const [index, sample] of samples.entries()) {
+    for (const other of samples.slice(index + 1)) {
+      if (sample.controls !== other.controls || sample.above === other.above) continue;
+      pairs.push({ left: sample.receipt, right: other.receipt, recolorDiffers: sample.recolored !== other.recolored });
+    }
+  }
+  return pairs;
+}
+
 export function compareClickReturns(returns: readonly NativeClickReturn[], omitted: number): ClickEvidence {
   const groups = new Map<string, NativeClickReturn[]>();
   const seen = new Set<number>();

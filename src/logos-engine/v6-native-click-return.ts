@@ -16,6 +16,13 @@ export interface NativeClickContext {
   readonly neighborhood: Readonly<Record<'above' | 'right' | 'below' | 'left', readonly number[]>>;
 }
 
+export interface NativeClickPreview {
+  readonly before: NativeRows;
+  readonly after: NativeRows | null;
+  readonly point: NativePoint;
+  readonly stride: number;
+}
+
 export interface NativeClickReturn {
   readonly beforeRef: string;
   readonly afterRef: string;
@@ -29,6 +36,7 @@ export interface NativeClickReturn {
   readonly sameSupport: boolean;
   readonly boundary: boolean;
   readonly beforeContext?: NativeClickContext;
+  readonly preview?: NativeClickPreview;
 }
 
 function atPoint(observation: MeasuredObservation, [x, y]: NativePoint): MeasuredEntity | undefined {
@@ -69,6 +77,30 @@ function summarizeContext(before: MeasuredObservation, target: MeasuredEntity, r
   };
 }
 
+function capturePreview(
+  target: MeasuredEntity, point: NativePoint, before: NativeRows, after: NativeRows | null,
+): NativeClickPreview {
+  const [left, top, right, bottom] = target.bbox;
+  const x0 = Math.max(0, left - 2), y0 = Math.max(0, top - 2);
+  const x1 = Math.min(before[y0]!.length - 1, right + 2), y1 = Math.min(before.length - 1, bottom + 2);
+  const stride = Math.max(1, Math.ceil(Math.max(x1 - x0 + 1, y1 - y0 + 1) / 20));
+  function crop(rows: NativeRows): NativeRows {
+    const pixels: number[][] = [];
+    for (let y = y0; y <= y1; y += stride) {
+      const row: number[] = [];
+      for (let x = x0; x <= x1; x += stride) row.push(rows[y]![x]!);
+      pixels.push(row);
+    }
+    return pixels;
+  }
+  return {
+    before: crop(before),
+    after: after ? crop(after) : null,
+    point: [Math.floor((point[0] - x0) / stride), Math.floor((point[1] - y0) / stride)],
+    stride,
+  };
+}
+
 /** Compact diagnostic of an already executed command, using the native public measurements. */
 export function projectNativeClickReturn(
   command: NativeCommand, before: MeasuredObservation, after: MeasuredObservation, returnedRows: NativeRows,
@@ -104,6 +136,9 @@ export function projectNativeClickReturn(
     changedTargetPixels,
     sameSupport,
     boundary,
-    ...(target && beforeRows ? { beforeContext: summarizeContext(before, target, beforeRows) } : {}),
+    ...(target && beforeRows ? {
+      beforeContext: summarizeContext(before, target, beforeRows),
+      preview: capturePreview(target, point, beforeRows, boundary ? null : returnedRows),
+    } : {}),
   };
 }

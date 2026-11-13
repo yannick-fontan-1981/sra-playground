@@ -3,7 +3,7 @@ import test from 'node:test';
 import { projectNativeClickReturn } from '../src/logos-engine/v6-native-click-return.ts';
 import { measureNativeObservation } from '../src/logos-engine/v6-native-observer.ts';
 import { readControlEffectShadow } from '../src/sic/shadow.ts';
-import { compareClickReturns, contrastClickContexts } from '../src/sic/click-evidence.ts';
+import { compareAboveColors, compareClickReturns, contrastClickContexts } from '../src/sic/click-evidence.ts';
 
 async function measure(rows: number[][], revision: number, level = 1, state = 'NOT_FINISHED') {
   return measureNativeObservation({
@@ -50,6 +50,38 @@ test('the click context measures the board before the action and clips at the ed
     state: 'NOT_FINISHED', commands: ['ACTION6'], matchingRegions: 1,
     neighborhood: { above: [], right: [3, 4], below: [5], left: [] },
   });
+  assert.deepEqual(receipt?.preview, {
+    before: rows, after: beforeRows.slice(0, 3).map(row => row.slice(0, 3)), point: [0, 0], stride: 1,
+  });
+});
+
+test('sprite previews are bounded and omit the after image at a game boundary', async () => {
+  const rows = Array.from({ length: 64 }, () => Array(64).fill(2));
+  const before = await measure(rows, 1);
+  const after = await measure(rows, 2, 2);
+  const receipt = projectNativeClickReturn(command, before, after, rows, rows);
+  assert.equal(receipt?.preview?.stride, 4);
+  assert.equal(receipt?.preview?.before.length, 16);
+  assert.equal(receipt?.preview?.before[0]?.length, 16);
+  assert.equal(receipt?.preview?.after, null);
+});
+
+test('the above-color contrast excludes changes to other measured conditions', async () => {
+  const before = await measure(beforeRows, 1);
+  const recolored = beforeRows.map(row => row.map(pixel => pixel === 2 ? 3 : pixel));
+  const first = projectNativeClickReturn(command, before, await measure(recolored, 2), recolored, beforeRows);
+  assert.ok(first?.beforeContext);
+  const context = first.beforeContext;
+  const alternative = {
+    ...first, sequence: 2, sameSupport: false,
+    beforeContext: { ...context, neighborhood: { ...context.neighborhood, above: [4] } },
+  };
+  const confounded = {
+    ...alternative, sequence: 3,
+    beforeContext: { ...context, neighborhood: { ...alternative.beforeContext.neighborhood, right: [7] } },
+  };
+  const group = compareClickReturns([first, alternative, confounded], 0).comparisons[0]!;
+  assert.deepEqual(compareAboveColors(group.effects), [{ left: first, right: alternative, recolorDiffers: true }]);
 });
 
 test('context contrasts require disjoint values for every observed outcome and complete samples', async () => {

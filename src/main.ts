@@ -298,7 +298,7 @@ function updateSicPanel(): void {
     if (board === lastSicBoard && agentState === lastSicState) return;
     lastSicBoard = board;
     lastSicState = agentState;
-    renderSicPanel(sicPanel, board ? readControlEffectShadow(board, agentState, presentationGeneration) : null);
+    renderSicPanel(sicPanel, board ? readControlEffectShadow(board, agentState, presentationGeneration) : null, board?.palette ?? fallbackPalette);
   });
 }
 
