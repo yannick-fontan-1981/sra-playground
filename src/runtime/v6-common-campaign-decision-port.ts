@@ -16,6 +16,11 @@ import {
   FieldStockCallerOwnerAdapter,
   FIELD_STOCK_CALLER_OWNER_ID,
 } from '../logos-engine/v6-field-stock-caller-adapter.ts';
+import {
+  JOINT_CHANNEL_OWNER_ID,
+  JointChannelOwner,
+  type JointChannel,
+} from '../logos-engine/v6-joint-channel-owner.ts';
 import type { CommonCallerOwner } from '../logos-engine/v6-neutral-common-caller.ts';
 import type { OperationResultCache } from '../logos-engine/v6-operation-cache.ts';
 import type { OperationTraceSink } from '../logos-engine/v6-operation-trace.ts';
@@ -34,6 +39,12 @@ export interface V6CommonCampaignDecisionPortOptions {
   fieldStockRuntimeFactory?: () => ObservedAddressedMaterialRuntime;
   fieldStockDependencies?: FieldStockDependencies;
   fieldStockRemaining?: number;
+  /** Optional bounded multi-channel owner; absent by default. */
+  jointChannels?: readonly JointChannel[];
+  /** Explicit public context for each joint channel on the current observation. */
+  jointContextByChannel?: (
+    current: PublicCampaignObservation,
+  ) => Readonly<Record<string, unknown>>;
   additionalOwners?: readonly CommonCallerOwner[];
   additionalContextByOwner?: (
     current: PublicCampaignObservation,
@@ -51,11 +62,16 @@ export type AddressedBoundaryReceipt = ReturnType<ObservedAddressedMaterialRunti
  * knowledge even when no next action may be requested. Non-terminal observations
  * are then revalidated before the next proposal. The host never ranks ambiguous
  * proposals and never invents ACTION6 coordinates.
+ *
+ * A joint-channel owner is installed only when explicit channels are supplied.
+ * It can collapse compatible contributions into one proposal, but an independent
+ * owner proposal still makes the common campaign ambiguous.
  */
 export class V6CommonCampaignDecisionPort implements AgentDecisionPort {
   readonly options: V6CommonCampaignDecisionPortOptions;
   #campaign!: CommonCampaignOwner;
   #fieldRuntime!: ObservedAddressedMaterialRuntime;
+  #jointOwner: JointChannelOwner | undefined;
   #sessionId: string | null = null;
   #current: PublicCampaignObservation | undefined;
   #lastPrepare: CampaignPrepareResult | undefined;
@@ -158,8 +174,17 @@ export class V6CommonCampaignDecisionPort implements AgentDecisionPort {
     if (!current || current.agent.state === 'WIN' || signal.aborted) return undefined;
 
     const extraContexts = this.options.additionalContextByOwner?.(current) ?? {};
+    const jointContext = this.#jointOwner
+      ? {
+          [JOINT_CHANNEL_OWNER_ID]: {
+            observation: current.agent,
+            contextByChannel: this.options.jointContextByChannel?.(current) ?? {},
+          },
+        }
+      : {};
     const prepared = this.#campaign.prepare(current.agent, {
       ...extraContexts,
+      ...jointContext,
       [FIELD_STOCK_CALLER_OWNER_ID]: {
         sessionId: current.agent.sessionId,
         observation: current.observation,
@@ -183,6 +208,10 @@ export class V6CommonCampaignDecisionPort implements AgentDecisionPort {
 
   get fieldRuntime(): ObservedAddressedMaterialRuntime {
     return this.#fieldRuntime;
+  }
+
+  get jointOwner(): JointChannelOwner | undefined {
+    return this.#jointOwner;
   }
 
   get pendingDecision(): ReturnType<CommonCampaignOwner['pending']> {
@@ -214,8 +243,12 @@ export class V6CommonCampaignDecisionPort implements AgentDecisionPort {
   #rebuildCampaign(): void {
     this.#fieldRuntime = this.options.fieldStockRuntimeFactory?.()
       ?? new ObservedAddressedMaterialRuntime();
+    this.#jointOwner = this.options.jointChannels && this.options.jointChannels.length > 0
+      ? new JointChannelOwner(this.options.jointChannels)
+      : undefined;
     const owners: CommonCallerOwner[] = [
       new FieldStockCallerOwnerAdapter(this.#fieldRuntime),
+      ...(this.#jointOwner ? [this.#jointOwner] : []),
       new PublicSingleActionCallerOwnerAdapter(),
       ...(this.options.additionalOwners ?? []),
     ];
