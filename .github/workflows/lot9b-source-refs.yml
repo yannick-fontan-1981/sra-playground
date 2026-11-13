@@ -12,7 +12,7 @@ permissions:
 jobs:
   source-refs:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -21,16 +21,22 @@ jobs:
           cache: npm
       - name: Install Node dependencies
         run: npm ci
-      - name: Test source ref contract
-        run: node --test tests/native-loop-region-source-refs.test.mjs
-      - name: Verify stored source refs and official runner manifest
-        run: node scripts/verify-native-loop-runner-manifest.mjs
+      - name: Typecheck official browser harness
+        run: npm run typecheck
+      - name: Test source and transport contracts
+        run: |
+          node --test \
+            tests/native-loop-region-source-refs.test.mjs \
+            tests/native-loop-browser-worker-dispatch.test.mjs
       - name: Compute source refs artifact
         run: |
           node scripts/native-loop-region-source-refs.mjs \
             --output lot9b-native-region-source-refs.json
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: lot9b-native-region-source-refs
           path: lot9b-native-region-source-refs.json
-          if-no-files-found: error
+          if-no-files-found: warn
+      - name: Verify stored source refs and official runner manifest
+        run: node scripts/verify-native-loop-runner-manifest.mjs
