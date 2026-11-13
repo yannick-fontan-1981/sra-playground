@@ -32,6 +32,8 @@ jobs:
         env:
           LOT9B_NATIVE_PROBE_REPORT: lot9b-native-probe-report.json
         run: node scripts/qualify-native-action6-probe.mjs
+      - name: Diagnose STCK ACTION6 reachability
+        run: node scripts/diagnose-stck-action6-reachability.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
