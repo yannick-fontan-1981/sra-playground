@@ -1291,3 +1291,38 @@ Détail :
 
 Statut :
 **fonctionnellement qualifié au contrat Worker, performance officielle à confirmer**.
+
+
+## C1/C7 — optimisation du mode counters
+
+Le premier diagnostic ABBA synthétique montrait un coût fixe excessif :
+- STCK-label +95,44 % ;
+- SMLP-label +54,48 %.
+
+Cause :
+les payloads détaillés de trace étaient encore construits en mode `counters`.
+
+Optimisation :
+- `countNeed()` ;
+- `countOperation()` ;
+- `countConsumption()` ;
+- aucun objet détaillé construit en mode normal ;
+- mode `full` inchangé.
+
+Validation :
+- **61/61 tests passent** ;
+- typecheck strict OK ;
+- compteurs `counters` et `full` identiques sur régression dédiée.
+
+Rerun ABBA synthétique :
+- STCK-label : **−15,66 %** (bruit favorable) ;
+- SMLP-label : **+1,68 %**.
+
+Le diagnostic synthétique passe désormais le seuil sur les deux labels, mais
+reste non officiel.
+
+Détail :
+`docs/recovery/op01-op31-fast-counters-status.md`.
+
+Statut :
+**fonctionnellement qualifié, performance officielle à confirmer**.

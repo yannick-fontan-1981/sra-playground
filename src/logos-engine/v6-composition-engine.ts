@@ -79,8 +79,10 @@ export function executeBundleOperation(
   const result = cached ?? executeOperation(bundle.operation_key, { ...state, focus: bundle.composition_ref, preserve_refs: bundle.preserve_refs });
   const executeUs = (performance.now() - started) * 1000;
   if (!cached && options.cache && options.cacheIdentity) options.cache.set(options.cacheIdentity, result);
-  options.trace?.record({
-    kind: 'operation', needId: options.needId, op: bundle.operation_key, caller: options.caller, mode: cached ? 'cache_reused' : 'executed',
+  const operationMode = cached ? 'cache_reused' : 'executed';
+  if (options.trace?.countersOnly) options.trace.countOperation(bundle.operation_key, operationMode);
+  else options.trace?.record({
+    kind: 'operation', needId: options.needId, op: bundle.operation_key, caller: options.caller, mode: operationMode,
     reason: cached ? 'valid dependency-identical operation result reused' : bundle.purpose,
     inputRefs: [bundle.id, bundle.composition_ref], dependencyRevisions: { observation: revision },
     resultStatus: result.status === 'incomplete' ? 'partial' : 'complete',
@@ -93,7 +95,8 @@ export function executeBundleOperation(
 
   const admission = operationAdmission(bundle, result);
   const releaseAllowed = bundleAdmitted && admission.accepted;
-  options.trace?.record({
+  if (options.trace?.countersOnly) options.trace.countConsumption(bundle.operation_key, 'guard');
+  else options.trace?.record({
     kind: 'consumption', needId: options.needId, op: bundle.operation_key, consumer: 'operationAdmission',
     decisionRef: options.decisionRef, effectKind: 'guard', semanticEffect: true,
     reason: releaseAllowed ? 'bundle and operation result admit release' : 'bundle or operation result rejects release',

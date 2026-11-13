@@ -33,7 +33,8 @@ export function assessReleaseNeed(
 
   if (bundle.operation_key === 'OP18') {
     if (!focus) {
-      trace?.record({
+      if (trace?.countersOnly) trace.countNeed('exploration-question');
+      else trace?.record({
         kind: 'need', needId: id, needKind: 'exploration-question', reason: 'focus composition is unavailable',
         producer: 'nativeAuthority.release', episodeId: identity.episodeId, levelEpoch: identity.levelEpoch,
         observationId: identity.observationId, observationRevision: identity.observationRevision,
@@ -45,7 +46,8 @@ export function assessReleaseNeed(
     if (pythonTruthy(focus.observed) || !pythonTruthy(focus.open_question)) {
       return { status: 'not_required', needId: id, reason: 'no unresolved open question for this composition', completeness: 'not_produced' };
     }
-    trace?.record({
+    if (trace?.countersOnly) trace.countNeed('exploration-question');
+    else trace?.record({
       kind: 'need', needId: id, needKind: 'exploration-question', reason: String(focus.open_question),
       producer: 'nativeAuthority.release', episodeId: identity.episodeId, levelEpoch: identity.levelEpoch,
       observationId: identity.observationId, observationRevision: identity.observationRevision,
@@ -58,7 +60,8 @@ export function assessReleaseNeed(
   if (bundle.operation_key === 'OP28') {
     const runtimeBundle = ((state.bundles ?? []) as SymbolicRecord[]).find(candidate => candidate.id === bundle.id);
     const reason = 'realize the currently selected admitted bundle';
-    trace?.record({
+    if (trace?.countersOnly) trace.countNeed('realize-bundle');
+    else trace?.record({
       kind: 'need', needId: id, needKind: 'realize-bundle', reason,
       producer: 'nativeAuthority.release', episodeId: identity.episodeId, levelEpoch: identity.levelEpoch,
       observationId: identity.observationId, observationRevision: identity.observationRevision,
@@ -86,9 +89,11 @@ export function releaseBundle(
 ): { need: ReleaseNeed; releaseAllowed: boolean; result?: ReturnType<typeof executeBundleOperation> } {
   const need = assessReleaseNeed(bundle, state, identity, trace);
   if (need.status !== 'needed') {
-    trace?.record({
+    const mode = need.status === 'blocked' ? 'blocked' : 'not_required';
+    if (trace?.countersOnly) trace.countOperation(bundle.operation_key, mode);
+    else trace?.record({
       kind: 'operation', needId: need.needId, op: bundle.operation_key, caller: 'nativeAuthority.release',
-      mode: need.status === 'blocked' ? 'blocked' : 'not_required', reason: need.reason,
+      mode, reason: need.reason,
       inputRefs: [bundle.id, bundle.composition_ref], dependencyRevisions: { observation: identity.observationRevision },
       resultStatus: need.completeness,
     });

@@ -62,3 +62,33 @@ test('trace remains bounded and reports dropped events', () => {
   assert.equal(snapshot.dropped, 1);
   assert.equal(snapshot.counters['operation:OP28:executed'], 3);
 });
+
+
+test('primitive counters-only API matches full-mode counter keys without retaining events', () => {
+  const light = new OperationTraceSink(8, 'counters');
+  const full = new OperationTraceSink(8, 'full');
+
+  light.countNeed('exploration-question');
+  light.countOperation('OP18', 'executed');
+  light.countConsumption('OP18', 'guard');
+
+  full.record({
+    kind: 'need', needId: 'n', needKind: 'exploration-question', reason: 'q', producer: 'p',
+    episodeId: 'e', levelEpoch: 1, observationId: 'o', observationRevision: 1,
+    dependencyRefs: [], completeness: 'complete',
+  });
+  full.record({
+    kind: 'operation', needId: 'n', op: 'OP18', caller: 'c', mode: 'executed',
+    reason: 'r', inputRefs: [], dependencyRevisions: {}, resultStatus: 'complete',
+  });
+  full.record({
+    kind: 'consumption', needId: 'n', op: 'OP18', consumer: 'c', decisionRef: 'd',
+    effectKind: 'guard', semanticEffect: true, reason: 'r',
+  });
+
+  assert.deepEqual(light.snapshot().counters, full.snapshot().counters);
+  assert.deepEqual(light.snapshot().events, []);
+  assert.equal(full.snapshot().events.length, 3);
+  assert.equal(light.countersOnly, true);
+  assert.equal(full.countersOnly, false);
+});
