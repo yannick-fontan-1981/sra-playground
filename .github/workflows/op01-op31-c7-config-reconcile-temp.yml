@@ -3,7 +3,7 @@ name: OP01-OP31 canonical C7 config reconciliation
 on:
   push:
     branches:
-      - recovery/op01-op31-c7-config-reconcile-canonical-staging-disabled
+      - recovery/op01-op31-c7-config-reconcile-canonical-20261113
 
 concurrency:
   group: op01-op31-c7-config-reconcile-canonical-20261113
