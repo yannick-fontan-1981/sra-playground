@@ -22,6 +22,7 @@ jobs:
           tests/v6-agent-worker-core.test.ts
           tests/v6-agent-worker.test.ts
           tests/v6-temporal-decision-port.test.ts
+          tests/v6-temporal-act-release-audit.test.ts
           tests/v6-composition-engine.test.ts
           tests/v6-native-authority.test.ts
           tests/v6-operation-cache.test.ts
@@ -36,7 +37,7 @@ jobs:
           tests/v6-temporal-decision-receipt.test.ts
           tests/v6-temporal-selection-adapter.test.ts
           tests/v6-temporal-selection-bridge.test.ts
-      - name: Typecheck reconstructed TemporalSelection, passive port and shared trace sources
+      - name: Typecheck reconstructed TemporalSelection, ACT audit, passive port and shared trace sources
         run: >-
           npx tsc --noEmit
           --target ES2022
@@ -57,5 +58,6 @@ jobs:
           src/runtime/v6-agent-worker-core.ts
           src/runtime/v6-agent-worker.ts
           src/runtime/v6-temporal-decision-port.ts
+          src/runtime/v6-temporal-act-release-audit.ts
 
-# qualification-head: passive-temporal-decision-port
+# qualification-head: temporal-act-release-audit
