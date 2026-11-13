@@ -1,1 +1,218 @@
-{"version":1,"generatedFromCommit":"4fd2d6d16c32ae91f7c7e4c9d9405e5f1563c42f","commonRoot":"1e40725745622641b97ca0599193360687a617caeb54f5340de4518475c0b4e5","candidateRoot":"ba388d25a42fd142c26a7184d9d196a165828b1f5fdb8f4df39a7867e48202e0","reference":{"sourceRef":"lot9b-region-v1:A:9f1a55ee13abe82e6c688e8d91fb327582f3f9a86064c1f7f019586dd2887e68","profile":{"version":1,"commonRoot":"1e40725745622641b97ca0599193360687a617caeb54f5340de4518475c0b4e5","execution":{"corpusRef":"native-region-action6-corpus-v1","seed":0,"startLevel":1,"timingScope":"after initial public observation, through policy/hook/action loops, ending after the returned observation of the requested final action","transport":"BrowserGameRuntime -> game-worker.ts -> Pyodide -> game_bridge.py -> custom-games.zip","methodRefStrategy":"native-region-singleton:<game>:<invocationIndex>:<actionIndex>"},"variant":"A","regionHook":"disabled"}},"candidate":{"sourceRef":"lot9b-region-v1:B:dca04a65d09d3354ee32d3659496e2dd20f013df7d522a1fae295da4bf587ed2","profile":{"version":1,"commonRoot":"1e40725745622641b97ca0599193360687a617caeb54f5340de4518475c0b4e5","execution":{"corpusRef":"native-region-action6-corpus-v1","seed":0,"startLevel":1,"timingScope":"after initial public observation, through policy/hook/action loops, ending after the returned observation of the requested final action","transport":"BrowserGameRuntime -> game-worker.ts -> Pyodide -> game_bridge.py -> custom-games.zip","methodRefStrategy":"native-region-singleton:<game>:<invocationIndex>:<actionIndex>"},"variant":"B","regionHook":"enabled","candidateRoot":"ba388d25a42fd142c26a7184d9d196a165828b1f5fdb8f4df39a7867e48202e0"}},"commonComponents":[{"path":".github/workflows/lot9b-official-native-region-abba.yml","bytes":2052,"sha256":"64522f46751ff7efda0951316f22cb685c70dea3d466b878b9886fdeb520f033"},{"path":"benchmarks/native-region-official.html","bytes":449,"sha256":"f89413ff7d1837dbaf9e5fbd40ac5796f706f960940a52ce8a92a8d18953f902"},{"path":"package-lock.json","bytes":29342,"sha256":"93bc180b1ecf92e7976bb54bcb3a0aef1d3e96d65c41ee300676207832cd274e"},{"path":"package.json","bytes":878,"sha256":"099a2d82e38575ef6881442a61759846fbb9e0029f1fe44adf96cab73d5d879c"},{"path":"public/python/custom-games.zip","bytes":899593,"sha256":"44d108fe4feed3ce0c9587e90f071876b13730af8136cd54cbfa5c1562d87822"},{"path":"public/python/custom_level_navigation.py","bytes":7900,"sha256":"8cc1716619aff08915135ebfa093fc305b211e28fabdff2c027d994d84f82c9b"},{"path":"public/python/game_bridge.py","bytes":13121,"sha256":"cc9df3ea6eae0057898fa01fd949322c6af0b481030f4c271b9a719f0a07983e"},{"path":"public/python/official_adapter.py","bytes":9574,"sha256":"efead273b89ffe8cf595e41b9f4b25a6106e6cb6e5a7d1013ebc887cfc646837"},{"path":"scripts/measure-native-loop-costs.mjs","bytes":6619,"sha256":"b2e45fd9cab5bd3ca06570c107d11d7c58b4744c0900a96a5c1049cdc3cd0579"},{"path":"scripts/native-loop-browser-worker-dispatch.mjs","bytes":2391,"sha256":"f28e668e4275477485b24c0dcfe8e775fea67e3efd01bd25523a133c2a6766e5"},{"path":"scripts/native-loop-explicit-runners.mjs","bytes":5122,"sha256":"117813c807dc5beba33ccc3ecf2387e5c8ea01e3bb37c44c992a0e292deb4094"},{"path":"scripts/native-loop-game-bridge-session.mjs","bytes":3688,"sha256":"d39be1533c84f89c3107c5a07a85e2689b4191a43531fbda631be2dbac3c9ca1"},{"path":"scripts/native-loop-public-corpus-runner.mjs","bytes":6424,"sha256":"4dd621abb57f1a269a365ee09c0fdd835cada6318066bf1cf36ed34652afd62a"},{"path":"scripts/native-loop-region-action6-corpus.mjs","bytes":780,"sha256":"eb9fd3aae7fb63251522bcc9b87f13850a384deb738f9394c034a6626d6e3806"},{"path":"scripts/native-loop-region-benchmark-runners.mjs","bytes":4056,"sha256":"4adb05b4441b719a5cc677b7a7b80bfa39d3fb70fa5c70e05d0292a49dfdc3ce"},{"path":"scripts/native-loop-region-public-action6-probe.mjs","bytes":4447,"sha256":"5a6c798bb29d7667f93b66a99b929fd6b2827fa061e84121734fd83fc2b57248"},{"path":"scripts/native-loop-session-adapter.mjs","bytes":4274,"sha256":"17f3255febf242d43a7852f5a0fe06117625c21c8936332e57743c7a7239bb65"},{"path":"scripts/prepare-python.mjs","bytes":1595,"sha256":"6368a9e8929fb9065475165392b515aa5f212fbfdf60daecafd449e73a45da2a"},{"path":"scripts/python-runtime-assets.json","bytes":3389,"sha256":"e702a914cf88345d486d7d8a36c95f2076287d8935e02cc428b7a66749500d43"},{"path":"scripts/run-native-region-official-benchmark.mjs","bytes":7322,"sha256":"0513977bb9e68656b73a4d47d71453b047572b17770bcacd9da15578c6a6887d"},{"path":"src/benchmarks/native-region-official-benchmark.ts","bytes":5240,"sha256":"f8a13a4d02cbd653d863c2d6506ba9e66cd475d6c6359af22cd28891fb22f16a"},{"path":"src/runtime/browser-games.ts","bytes":4971,"sha256":"4b2caada48e67d4c9f006699e33e4896f54e9067be69da3c23d3347da9c3650a"},{"path":"src/runtime/game-worker.ts","bytes":3329,"sha256":"52f62b68c23b2c70c2b18461da042bf08f7fe44f7be068d5fc0e3e2942ac7159"},{"path":"vite.config.ts","bytes":820,"sha256":"53ec21df1189c6bfc96960e46b80e2537f4f6f61425771b1b6648adb0227d9b1"}],"candidateComponents":[{"path":"scripts/native-loop-region-candidate-hook.mjs","bytes":6330,"sha256":"e834e8a89037fb5ee890728eeb1d5bf3fcd70b5dd7b635096adc9be953762c09"},{"path":"src/logos-engine/v6-public-observation-delta.ts","bytes":4789,"sha256":"b379f8ce7bfd55286dbae6c569483f4a8649bad5d31c9f872a20024a1c7e5870"},{"path":"src/logos-engine/v6-region-intervention-owner.ts","bytes":3943,"sha256":"347f1e2ef9b02d2b0224d8b0eb6f730f053b45fb090349a36592c764f39db7b4"},{"path":"src/logos-engine/v6-region-intervention.ts","bytes":8997,"sha256":"19b14b3be1ae38c5d01a44a734063f1d9c03c4b72c43d20e33f02fd6fb4e787f"},{"path":"src/logos-engine/v6-region-public-evidence.ts","bytes":1890,"sha256":"8a887805cc885c0fdeb759debaeea84d5d92859ff795cebbfd21934770cd7452"},{"path":"src/runtime/contracts.ts","bytes":3271,"sha256":"33b550080b033bd95d42078ececd1a693e4ebdcf97054c56570eb5523cd3a68f"}],"invariants":{"commonComponentsIdentical":true,"sameTransport":true,"sameCorpus":true,"sameSeed":true,"sameStartLevel":true,"onlyMeasuredDifference":"B executes the real region_intervention hook; A leaves that hook disabled"},"qualification":{"githubActionsRunId":43355474605,"githubActionsJobId":131656371181,"qualifiedHeadSha":"4fd2d6d16c32ae91f7c7e4c9d9405e5f1563c42f","typecheckPassed":true,"targetedTestsPassed":true,"fullProtocolFunctionalQualificationPassed":true,"STCKAcquisitions":86,"SMLPAcquisitions":126,"artifactId":14006190581,"artifactZipSha256":"fba0d8d68b70080c6d980ce8b5c5e5e2c92fe90a55a57da2af6a954648692a6c","diagnosticTimingDisposition":"non_official"}}
+{
+  "version": 1,
+  "generatedFromCommit": "ea6bc872b90261133dfc8780664b487f5917653f",
+  "commonRoot": "fe5c516b5ef43ab022ef51b5db8a3834bc02ad9b189788da434c30ce87f2a836",
+  "candidateRoot": "ba388d25a42fd142c26a7184d9d196a165828b1f5fdb8f4df39a7867e48202e0",
+  "reference": {
+    "sourceRef": "lot9b-region-v1:A:99faf15665a8401a4b5e9867f1cfd1935d68f6171c46c839c34818f04b51f231",
+    "profile": {
+      "version": 1,
+      "commonRoot": "fe5c516b5ef43ab022ef51b5db8a3834bc02ad9b189788da434c30ce87f2a836",
+      "execution": {
+        "corpusRef": "native-region-action6-corpus-v1",
+        "seed": 0,
+        "startLevel": 1,
+        "timingScope": "after initial public observation, through policy/hook/action loops, ending after the returned observation of the requested final action",
+        "transport": "BrowserGameRuntime -> game-worker.ts -> Pyodide -> game_bridge.py -> custom-games.zip",
+        "methodRefStrategy": "native-region-singleton:<game>:<invocationIndex>:<actionIndex>"
+      },
+      "variant": "A",
+      "regionHook": "disabled"
+    }
+  },
+  "candidate": {
+    "sourceRef": "lot9b-region-v1:B:8e23f39ba219a43a3d5b7cc7644551dea24ca0fc0216d5b58a8c808fdc315a83",
+    "profile": {
+      "version": 1,
+      "commonRoot": "fe5c516b5ef43ab022ef51b5db8a3834bc02ad9b189788da434c30ce87f2a836",
+      "execution": {
+        "corpusRef": "native-region-action6-corpus-v1",
+        "seed": 0,
+        "startLevel": 1,
+        "timingScope": "after initial public observation, through policy/hook/action loops, ending after the returned observation of the requested final action",
+        "transport": "BrowserGameRuntime -> game-worker.ts -> Pyodide -> game_bridge.py -> custom-games.zip",
+        "methodRefStrategy": "native-region-singleton:<game>:<invocationIndex>:<actionIndex>"
+      },
+      "variant": "B",
+      "regionHook": "enabled",
+      "candidateRoot": "ba388d25a42fd142c26a7184d9d196a165828b1f5fdb8f4df39a7867e48202e0"
+    }
+  },
+  "commonComponents": [
+    {
+      "path": ".github/workflows/lot9b-official-native-region-abba.yml",
+      "bytes": 2052,
+      "sha256": "64522f46751ff7efda0951316f22cb685c70dea3d466b878b9886fdeb520f033"
+    },
+    {
+      "path": "benchmarks/native-region-official.html",
+      "bytes": 449,
+      "sha256": "f89413ff7d1837dbaf9e5fbd40ac5796f706f960940a52ce8a92a8d18953f902"
+    },
+    {
+      "path": "package-lock.json",
+      "bytes": 29342,
+      "sha256": "93bc180b1ecf92e7976bb54bcb3a0aef1d3e96d65c41ee300676207832cd274e"
+    },
+    {
+      "path": "package.json",
+      "bytes": 878,
+      "sha256": "099a2d82e38575ef6881442a61759846fbb9e0029f1fe44adf96cab73d5d879c"
+    },
+    {
+      "path": "public/python/custom-games.zip",
+      "bytes": 899593,
+      "sha256": "44d108fe4feed3ce0c9587e90f071876b13730af8136cd54cbfa5c1562d87822"
+    },
+    {
+      "path": "public/python/custom_level_navigation.py",
+      "bytes": 7900,
+      "sha256": "8cc1716619aff08915135ebfa093fc305b211e28fabdff2c027d994d84f82c9b"
+    },
+    {
+      "path": "public/python/game_bridge.py",
+      "bytes": 13121,
+      "sha256": "cc9df3ea6eae0057898fa01fd949322c6af0b481030f4c271b9a719f0a07983e"
+    },
+    {
+      "path": "public/python/official_adapter.py",
+      "bytes": 9574,
+      "sha256": "efead273b89ffe8cf595e41b9f4b25a6106e6cb6e5a7d1013ebc887cfc646837"
+    },
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "bytes": 6619,
+      "sha256": "b2e45fd9cab5bd3ca06570c107d11d7c58b4744c0900a96a5c1049cdc3cd0579"
+    },
+    {
+      "path": "scripts/native-loop-browser-worker-dispatch.mjs",
+      "bytes": 2391,
+      "sha256": "f28e668e4275477485b24c0dcfe8e775fea67e3efd01bd25523a133c2a6766e5"
+    },
+    {
+      "path": "scripts/native-loop-explicit-runners.mjs",
+      "bytes": 5122,
+      "sha256": "117813c807dc5beba33ccc3ecf2387e5c8ea01e3bb37c44c992a0e292deb4094"
+    },
+    {
+      "path": "scripts/native-loop-game-bridge-session.mjs",
+      "bytes": 3688,
+      "sha256": "d39be1533c84f89c3107c5a07a85e2689b4191a43531fbda631be2dbac3c9ca1"
+    },
+    {
+      "path": "scripts/native-loop-public-corpus-runner.mjs",
+      "bytes": 6424,
+      "sha256": "4dd621abb57f1a269a365ee09c0fdd835cada6318066bf1cf36ed34652afd62a"
+    },
+    {
+      "path": "scripts/native-loop-region-action6-corpus.mjs",
+      "bytes": 780,
+      "sha256": "eb9fd3aae7fb63251522bcc9b87f13850a384deb738f9394c034a6626d6e3806"
+    },
+    {
+      "path": "scripts/native-loop-region-benchmark-runners.mjs",
+      "bytes": 4056,
+      "sha256": "4adb05b4441b719a5cc677b7a7b80bfa39d3fb70fa5c70e05d0292a49dfdc3ce"
+    },
+    {
+      "path": "scripts/native-loop-region-public-action6-probe.mjs",
+      "bytes": 4447,
+      "sha256": "5a6c798bb29d7667f93b66a99b929fd6b2827fa061e84121734fd83fc2b57248"
+    },
+    {
+      "path": "scripts/native-loop-session-adapter.mjs",
+      "bytes": 4274,
+      "sha256": "17f3255febf242d43a7852f5a0fe06117625c21c8936332e57743c7a7239bb65"
+    },
+    {
+      "path": "scripts/prepare-python.mjs",
+      "bytes": 1595,
+      "sha256": "6368a9e8929fb9065475165392b515aa5f212fbfdf60daecafd449e73a45da2a"
+    },
+    {
+      "path": "scripts/python-runtime-assets.json",
+      "bytes": 3389,
+      "sha256": "e702a914cf88345d486d7d8a36c95f2076287d8935e02cc428b7a66749500d43"
+    },
+    {
+      "path": "scripts/run-native-region-official-benchmark.mjs",
+      "bytes": 7322,
+      "sha256": "0513977bb9e68656b73a4d47d71453b047572b17770bcacd9da15578c6a6887d"
+    },
+    {
+      "path": "src/benchmarks/native-region-official-benchmark.ts",
+      "bytes": 4716,
+      "sha256": "96c597321ebfe22d58ad0a725e8f31231c5675e28c87ee4c472a70b5d1c8173a"
+    },
+    {
+      "path": "src/benchmarks/native-region-official-config.ts",
+      "bytes": 1971,
+      "sha256": "fd377ab459943339c44cb1f35d98a77967d09e81b1cf2b88d2ef5020e5bbdaf0"
+    },
+    {
+      "path": "src/runtime/browser-games.ts",
+      "bytes": 4971,
+      "sha256": "4b2caada48e67d4c9f006699e33e4896f54e9067be69da3c23d3347da9c3650a"
+    },
+    {
+      "path": "src/runtime/game-worker.ts",
+      "bytes": 3329,
+      "sha256": "52f62b68c23b2c70c2b18461da042bf08f7fe44f7be068d5fc0e3e2942ac7159"
+    },
+    {
+      "path": "vite.config.ts",
+      "bytes": 820,
+      "sha256": "53ec21df1189c6bfc96960e46b80e2537f4f6f61425771b1b6648adb0227d9b1"
+    }
+  ],
+  "candidateComponents": [
+    {
+      "path": "scripts/native-loop-region-candidate-hook.mjs",
+      "bytes": 6330,
+      "sha256": "e834e8a89037fb5ee890728eeb1d5bf3fcd70b5dd7b635096adc9be953762c09"
+    },
+    {
+      "path": "src/logos-engine/v6-public-observation-delta.ts",
+      "bytes": 4789,
+      "sha256": "b379f8ce7bfd55286dbae6c569483f4a8649bad5d31c9f872a20024a1c7e5870"
+    },
+    {
+      "path": "src/logos-engine/v6-region-intervention-owner.ts",
+      "bytes": 3943,
+      "sha256": "347f1e2ef9b02d2b0224d8b0eb6f730f053b45fb090349a36592c764f39db7b4"
+    },
+    {
+      "path": "src/logos-engine/v6-region-intervention.ts",
+      "bytes": 8997,
+      "sha256": "19b14b3be1ae38c5d01a44a734063f1d9c03c4b72c43d20e33f02fd6fb4e787f"
+    },
+    {
+      "path": "src/logos-engine/v6-region-public-evidence.ts",
+      "bytes": 1890,
+      "sha256": "8a887805cc885c0fdeb759debaeea84d5d92859ff795cebbfd21934770cd7452"
+    },
+    {
+      "path": "src/runtime/contracts.ts",
+      "bytes": 3271,
+      "sha256": "33b550080b033bd95d42078ececd1a693e4ebdcf97054c56570eb5523cd3a68f"
+    }
+  ],
+  "invariants": {
+    "commonComponentsIdentical": true,
+    "sameTransport": true,
+    "sameCorpus": true,
+    "sameSeed": true,
+    "sameStartLevel": true,
+    "onlyMeasuredDifference": "B executes the real region_intervention hook; A leaves that hook disabled"
+  },
+  "qualification": {
+    "status": "official-requalification-accepted",
+    "runId": 43364316353,
+    "jobId": 131685000996,
+    "headSha": "ea6bc872b90261133dfc8780664b487f5917653f",
+    "commonComponentCount": 25,
+    "candidateComponentCount": 6,
+    "referenceSourceRef": "lot9b-region-v1:A:99faf15665a8401a4b5e9867f1cfd1935d68f6171c46c839c34818f04b51f231",
+    "candidateSourceRef": "lot9b-region-v1:B:8e23f39ba219a43a3d5b7cc7644551dea24ca0fc0216d5b58a8c808fdc315a83"
+  }
+}

@@ -44,10 +44,16 @@ test('official Lot 9B proof recomputes both strict per-game passes from every re
     );
     assert.ok(relativeIncreasePercent < 10, `${game} must remain strictly below +10%`);
     assert.equal(value.accepted, true);
+
+    if (value.retainedOutlier) {
+      assert.equal(value.retainedOutlier.removed, false);
+      assert.ok(
+        value.candidateDurationsMs.includes(value.retainedOutlier.durationMs),
+        `${game} retained outlier must remain in the measured samples`,
+      );
+    }
   }
 
-  assert.ok(proof.games.SMLP.candidateDurationsMs.includes(591.1));
-  assert.equal(proof.games.SMLP.retainedOutlier.removed, false);
   assert.equal(proof.disposition.counter76Incremented, false);
   assert.equal(proof.disposition.nextLot, '9C joint_channels');
 });
@@ -70,4 +76,22 @@ test('official proof retains all Region acquisitions', async () => {
     acquisitions: 126,
     methods: 126,
   });
+});
+
+test('official proof retains the rejected first canonical requalification attempt', async () => {
+  const proof = JSON.parse(await readFile(proofPath, 'utf8'));
+  const attempt = proof.failedRequalificationAttempts?.find(
+    item => item.runId === 43364040206 && item.jobId === 131684105998,
+  );
+  assert.ok(attempt, 'rejected run 43364040206 must remain in the proof');
+  assert.equal(attempt.accepted, false);
+  assert.equal(attempt.retainedSamples, true);
+  assert.equal(attempt.retriesWithinRun, 0);
+  assert.equal(attempt.games.STCK.accepted, true);
+  assert.equal(attempt.games.SMLP.accepted, false);
+  assertApproximatelyEqual(
+    attempt.games.SMLP.relativeIncreasePercent,
+    11.379529561353618,
+    'rejected SMLP delta',
+  );
 });
