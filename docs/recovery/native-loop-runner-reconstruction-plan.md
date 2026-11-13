@@ -306,3 +306,65 @@ official ABBA remains blocked until:
 Status remains:
 
 **fonctionnellement qualifié, performance officielle à confirmer**.
+
+
+## Reconstruction progress — real `region_intervention` candidate hook binding
+
+The B-side benchmark hook is now bound to the actual reconstructed Region path:
+
+`public observation before/after ACTION6 → regionPublicEffectEvidence() → bindRegionMethod() → RegionInterventionOwner.acquire()`
+
+Implementation:
+- `scripts/native-loop-region-candidate-hook.mjs`;
+- `scripts/native-loop-public-corpus-runner.mjs` now supports a measured post-action hook;
+- B explicit runners require both `beforeAction()` and `afterAction()`.
+
+Important invariants:
+- non-ACTION6 actions are a strict Region no-op;
+- ACTION6 evidence is derived only from public 64×64 palette observations;
+- useful ACTION6 evidence is not admitted without an external `methodRef`;
+- the benchmark hook never infers or invents `methodRef`;
+- malformed `methodRef` output fails closed;
+- the hook uses the real `RegionInterventionOwner`, not a benchmark-only model;
+- post-action Region work is included in the measured candidate-hook phase.
+
+Tests added:
+- non-ACTION6 no-op;
+- useful ACTION6 delta is acquired by Region when an explicit methodRef producer exists;
+- useful ACTION6 delta stays unbound without a methodRef producer;
+- malformed methodRef fails;
+- B runners require post-action hook support;
+- public corpus runner forwards before/after public observations to the measured post-action hook.
+
+Execution status in this recovery environment:
+**tests written on GitHub, local execution not yet confirmed**, because this
+environment cannot clone/fetch the repository through Git networking and the
+repository currently has no GitHub Actions workflow available for this suite.
+
+### Corpus exercise result
+
+The real hook binding exposes the remaining blocker more precisely:
+
+`native-public-action-corpus-v1` prefers ACTION5 whenever it is available.
+
+The Region evidence path is ACTION6-specific.
+
+Therefore, under the currently reconstructed public corpus, the real Region
+hook is expected to execute only its non-ACTION6 no-op path on the documented
+STCK/SMLP public states `[5, 6, 7]`.
+
+No official performance run is valid yet, because it would not prove the cost
+of meaningful Region evidence processing.
+
+Next required evidence:
+1. execute the new tests in a full checkout;
+2. inspect real STCK/SMLP public observations from `custom-games.zip`;
+3. establish whether any naturally reached corpus state removes ACTION5 or
+   otherwise justifies ACTION6 with public coordinates;
+4. if no such state exists, recover an evidence-backed historical ACTION6
+   corpus or define a new public coordinate-selection contract before timing;
+5. only then pin A/B source refs and run ABBA.
+
+Status remains:
+
+**fonctionnellement qualifié dans les reconstructed contracts; performance officielle à confirmer**.
