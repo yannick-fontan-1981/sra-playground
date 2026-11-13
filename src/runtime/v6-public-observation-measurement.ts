@@ -10,6 +10,8 @@ export interface PublicCampaignObservation {
 
 export interface MeasuredPublicEntity {
   component_ref: string;
+  signature: string;
+  position: readonly [number, number];
   palette_value: number;
   bbox: readonly [number, number, number, number];
   mask: readonly (readonly [number, number])[];
@@ -92,13 +94,23 @@ export function measurePublicEntities(
   observationRef: string,
   rows: readonly (readonly number[])[],
 ): MeasuredPublicEntity[] {
-  return components(rows).map((component, index) => ({
-    component_ref: `${observationRef}:component:${index}`,
-    palette_value: component.color,
-    bbox: component.bbox,
-    mask: component.mask,
-    rectangular: component.rectangular,
-  }));
+  return components(rows).map((component, index) => {
+    const [left, top, right, bottom] = component.bbox;
+    const signature = `public-component:${digestPublicValue({
+      palette_value: component.color,
+      size: [right - left + 1, bottom - top + 1],
+      mask: component.mask,
+    })}`;
+    return {
+      component_ref: `${observationRef}:component:${index}`,
+      signature,
+      position: [left, top],
+      palette_value: component.color,
+      bbox: component.bbox,
+      mask: component.mask,
+      rectangular: component.rectangular,
+    };
+  });
 }
 
 /**
@@ -106,7 +118,8 @@ export function measurePublicEntities(
  *
  * Entity measurement is deliberately optional. The common OP28 path needs only
  * the public worker contract; connected components are materialized only when a
- * retained FieldStock prior must be revalidated in the current scene.
+ * retained FieldStock prior must be revalidated in the current scene or when an
+ * explicit ACTION6 return is being evaluated for addressed-field learning.
  */
 export function measurePublicCampaignObservation(
   source: AgentObservation,

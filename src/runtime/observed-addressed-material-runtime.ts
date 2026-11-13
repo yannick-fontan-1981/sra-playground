@@ -1,6 +1,17 @@
 import type { PublicFrameLike, PublicObservationLike } from '../logos-engine/linked-preparation.ts';
 import type { FieldStockDependencies, FieldStockProposal, FieldStockProposalResult } from '../logos-engine/field-stock.ts';
 import {
+  fitAddressedField,
+  type ResidualCorrespondencesForFit,
+} from '../logos-engine/addressed-field-fit.ts';
+import {
+  recordAddressedFieldResponse,
+  type AddressedFieldResponseDependencies,
+  type AddressedFieldResponseModel,
+  type AddressedFieldResponseResult,
+  type AddressedFieldResponseState,
+} from '../logos-engine/addressed-field-response.ts';
+import {
   createAddressedFieldRetentionState,
   crossAddressedFieldBoundary,
   ensureFieldStock,
@@ -15,6 +26,62 @@ export type AddressedKnowledgeStatus =
   | 'retained_not_applicable'
   | 'refuted';
 
+export interface AddressedReturnLearningDependencies {
+  unchanged: AddressedFieldResponseDependencies['unchanged'];
+  residualCorrespondences: ResidualCorrespondencesForFit;
+}
+
+export type AddressedReturnLearningStatus =
+  | 'unaddressed_return'
+  | 'official_boundary'
+  | 'retained_or_stock_owned'
+  | 'field_fit_unresolved'
+  | 'field_model_incomplete'
+  | 'field_model_acquired'
+  | AddressedFieldResponseResult['status'];
+
+export interface AddressedReturnLearningResult {
+  status: AddressedReturnLearningStatus;
+  events: readonly Record<string, unknown>[];
+  responseStatus?: AddressedFieldResponseResult['status'];
+  sampleCount: number;
+}
+
+function numericPair(value: unknown): value is readonly [number, number] {
+  return Array.isArray(value)
+    && value.length === 2
+    && value.every(item => typeof item === 'number' && Number.isFinite(item));
+}
+
+function responseModel(value: unknown): value is AddressedFieldResponseModel {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
+  const model = value as Record<string, unknown>;
+  return typeof model.signature === 'string'
+    && model.signature.length > 0
+    && typeof model.action_ref === 'string'
+    && model.action_ref.length > 0
+    && numericPair(model.offset)
+    && numericPair(model.position);
+}
+
+function isAddressedCommand(command: { action_ref: string; data?: Record<string, unknown> }): boolean {
+  if (command.action_ref !== 'ACTION6') return false;
+  const data = command.data ?? {};
+  const keys = Object.keys(data).sort();
+  if (keys.length !== 2 || keys[0] !== 'x' || keys[1] !== 'y') return false;
+  return [data.x, data.y].every(value =>
+    typeof value === 'number'
+    && Number.isInteger(value)
+    && value >= 0
+    && value < 64);
+}
+
+function sameOfficialScope(before: PublicObservationLike, after: PublicObservationLike): boolean {
+  return before.level_epoch === after.level_epoch
+    && before.levels_completed === after.levels_completed
+    && before.state === after.state;
+}
+
 /**
  * Runtime owner for the retained addressed-field slice.
  *
@@ -26,6 +93,118 @@ export class ObservedAddressedMaterialRuntime {
 
   boundary(before: PublicObservationLike, after: PublicObservationLike): ReturnType<typeof crossAddressedFieldBoundary> {
     return crossAddressedFieldBoundary(this.field, before, after);
+  }
+
+  /**
+   * Observe one already-authorized public ACTION6 return.
+   *
+   * This method never proposes an action. It may acquire a local addressed model
+   * only from one unique residual movement with a stationary same-signature
+   * exemplar and one unique centered target hypothesis. Later correlated returns
+   * calibrate or refute that model. A retained prior or active stock always keeps
+   * ownership and is never overwritten by this learning path.
+   */
+  observeAddressedReturn(
+    before: PublicObservationLike,
+    after: PublicObservationLike,
+    command: { action_ref: string; data?: Record<string, unknown> },
+    first: readonly (readonly number[])[],
+    second: readonly (readonly number[])[],
+    frames: readonly (readonly (readonly number[])[])[] | null | undefined,
+    dependencies: AddressedReturnLearningDependencies,
+  ): AddressedReturnLearningResult {
+    if (!isAddressedCommand(command)) {
+      return {
+        status: 'unaddressed_return',
+        events: [],
+        sampleCount: this.field.samples.length,
+      };
+    }
+    if (!sameOfficialScope(before, after)) {
+      return {
+        status: 'official_boundary',
+        events: [],
+        sampleCount: this.field.samples.length,
+      };
+    }
+    if (this.field.stock || this.field.prior) {
+      return {
+        status: 'retained_or_stock_owned',
+        events: [],
+        sampleCount: this.field.samples.length,
+      };
+    }
+
+    if (this.field.model) {
+      if (!responseModel(this.field.model)) {
+        return {
+          status: 'field_model_incomplete',
+          events: [],
+          sampleCount: this.field.samples.length,
+        };
+      }
+      const result = recordAddressedFieldResponse(
+        this.field as unknown as AddressedFieldResponseState,
+        before,
+        after,
+        command,
+        first,
+        second,
+        dependencies,
+      );
+      return {
+        status: result.status,
+        events: structuredClone(result.events),
+        responseStatus: result.status,
+        sampleCount: this.field.samples.length,
+      };
+    }
+
+    const fit = fitAddressedField(
+      before,
+      after,
+      command,
+      first,
+      second,
+      frames,
+      dependencies.residualCorrespondences,
+    );
+    if (!fit) {
+      return {
+        status: 'field_fit_unresolved',
+        events: [],
+        sampleCount: this.field.samples.length,
+      };
+    }
+
+    this.field.epoch = before.level_epoch;
+    this.field.model = { ...structuredClone(fit.model) };
+    this.field.indicator = fit.indicator
+      ? { ...structuredClone(fit.indicator) }
+      : null;
+    const response = recordAddressedFieldResponse(
+      this.field as unknown as AddressedFieldResponseState,
+      before,
+      after,
+      command,
+      first,
+      second,
+      dependencies,
+    );
+    const events = [
+      structuredClone(fit.event),
+      ...structuredClone(response.events),
+    ];
+    this.field.events = events;
+
+    return {
+      status: response.status === 'field_refuted'
+        ? 'field_refuted'
+        : 'field_model_acquired',
+      events: structuredClone(events),
+      responseStatus: response.status,
+      sampleCount: this.field.samples.length,
+    };
   }
 
   revalidate(observation: PublicObservationLike, rows: readonly (readonly number[])[]): AddressedKnowledgeStatus {
