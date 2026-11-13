@@ -30,6 +30,11 @@ jobs:
           from pathlib import Path
           path = Path('scripts/apply-op01-op31-browser-session-resume.mjs')
           source = path.read_text(encoding='utf-8')
+          first_patch = "await patchFile('src/runtime/v6-browser-campaign-checkpoint.ts'"
+          host_patch = "await patchFile('src/runtime/v6-browser-common-campaign-host.ts'"
+          if first_patch not in source or host_patch not in source:
+              raise SystemExit('temporary host patch boundary not found')
+          source = source[:source.index(first_patch)] + source[source.index(host_patch):]
           source = source.replace(
               "    const current = checkpoint.current === null\\n      ? null\\n      : structuredClone(record(checkpoint.current, 'browser FieldStock checkpoint current'))\\n        as unknown as PublicCampaignObservation;\\n",
               "    const restoreCurrent = (candidate: unknown): PublicCampaignObservation => {\\n      const cloned = structuredClone(record(candidate, 'browser FieldStock checkpoint current'));\\n      return cloned as unknown as PublicCampaignObservation;\\n    };\\n    const current = checkpoint.current === null\\n      ? null\\n      : restoreCurrent(checkpoint.current);\\n",
