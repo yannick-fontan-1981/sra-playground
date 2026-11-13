@@ -91,12 +91,19 @@ test('priority audit counts the actual winners across games and distinguishes an
 });
 
 test('coverage counts actions once and excludes unmeasured games from the denominator', () => {
-  const history = strategyTimeline([step(1, 1, 0, true), step(2, 1, 1, true), step(3, 2, 0, null)]);
+  const first = step(1, 1, 0, true), second = step(2, 1, 1, true);
+  const recoveryDecision = { strategy: 'Revise contact', need: 'Restore a projection',
+    objective: { id: 'seek', label: 'Find access', parent: 'G_official_completion' }, maxDepth: 88, maxNodes: 1000, packDigest: null };
+  const history = strategyTimeline([
+    { ...first, decision: { ...first.decision!, recoveryDecision } },
+    { ...second, decision: { ...second.decision!, recoveryDecision } },
+    step(3, 2, 0, null),
+  ]);
   const length = (episode: typeof history[number]) => episode.last.sequence - episode.first.sequence + 1;
   const legacy = { groups: countStrategyFacts(history), actions: null, actionsByFacts: null, shownActions: null, shownActionsByFacts: null };
   const sample = { ...legacy, actions: 4, actionsByFacts: countStrategyFacts(history, length),
     shownActions: 2, shownActionsByFacts: countStrategyFacts(history.slice(0, 1), length) };
   assert.deepEqual(measureStrategyCoverage([legacy, sample], defaultStrategyRules), {
-    measured: 1, actions: 4, configurable: 3, shown: 2, shownConfigurable: 2,
+    measured: 1, actions: 4, configurable: 3, shown: 2, shownConfigurable: 2, active: 2, shownActive: 2,
   });
 });

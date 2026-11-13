@@ -33,9 +33,11 @@ export function countStrategyFacts<T extends { readonly facts: ReadonlySet<Strat
 }
 
 export function measureStrategyCoverage(samples: readonly StrategySample[], rules: readonly StrategyRule[]) {
-  let actions = 0, configurable = 0, shown = 0, shownConfigurable = 0, measured = 0;
+  let actions = 0, configurable = 0, shown = 0, shownConfigurable = 0, active = 0, shownActive = 0, measured = 0;
   const classified = (groups: readonly FactGroup[]) => groups.reduce((total, group) =>
     total + (rules.some(rule => matchesStrategyRule(group.facts, rule)) ? group.count : 0), 0);
+  const guided = (groups: readonly FactGroup[]) => groups.reduce((total, group) =>
+    total + (group.facts.has('activeRecovery') ? group.count : 0), 0);
   for (const sample of samples) {
     if (sample.actions === null || sample.shownActions === null || !sample.actionsByFacts || !sample.shownActionsByFacts) continue;
     measured++;
@@ -43,8 +45,10 @@ export function measureStrategyCoverage(samples: readonly StrategySample[], rule
     configurable += classified(sample.actionsByFacts);
     shown += sample.shownActions;
     shownConfigurable += classified(sample.shownActionsByFacts);
+    active += guided(sample.actionsByFacts);
+    shownActive += guided(sample.shownActionsByFacts);
   }
-  return { actions, configurable, shown, shownConfigurable, measured };
+  return { actions, configurable, shown, shownConfigurable, active, shownActive, measured };
 }
 
 export function auditStrategyPriority(groups: readonly FactGroup[], rules: readonly StrategyRule[]) {
