@@ -5,6 +5,9 @@ Date : 12 novembre 2026
 Baseline canonique finale de départ :
 `edb19e247c409941af35165cdf37a0440cbe6adf`
 
+Commit combiné qualifié :
+`a79aa291bd61cbbfd8c7a3579ca5df8afee06e90`
+
 Documents spécialisés :
 
 - noyau du propriétaire commun : ce document ;
@@ -164,8 +167,22 @@ Il qualifie :
 - aucune nouvelle décision après ce retour terminal ;
 - propagation des erreurs d’observation.
 
-Qualification antérieure : run `43348904523`, job `131634904435`, commit
+Qualification initiale : run `43348904523`, job `131634904435`, commit
 `08a04a9da59b0f385d080acf6091d4acdcf800c6`, **304/304 tests**.
+
+### Qualification combinée
+
+Le raccord Worker a ensuite été appliqué sur le canonique contenant déjà l’hôte
+browser/product :
+
+- run : `43349587061` ;
+- job : `131637119489` ;
+- commit : `a79aa291bd61cbbfd8c7a3579ca5df8afee06e90` ;
+- Node `22.18.0` ;
+- `npm ci` réussi ;
+- `npm run typecheck` réussi ;
+- régression complète : **313/313 tests réussis** ;
+- échecs, annulations, tests ignorés et TODO : `0`.
 
 Les deux hôtes restent inactifs dans `main.ts`. Ils ne doivent pas être exécutés
 simultanément sur la même session sans contrôleur produit explicite.
@@ -198,7 +215,7 @@ Aucun bundle ou `methodRef` artificiel n’est ajouté.
   lorsqu’un prior explicite est revalidé ; constructeur de contexte browser
   FieldStock encore absent.
 - **OP28** : chaîne complète démontrée dans l’hôte browser et dans le Worker,
-  avec retour corrélé au même `needId`.
+  avec retour corrélé au même `needId`, y compris sur retour terminal Worker.
 - **OP29/OP30** : consommation spécialisée FieldStock/Region conservée ; aucun
   doublon générique.
 - **OP31** : toujours sans propriétaire d’objectif produit.
@@ -221,6 +238,6 @@ Aucun bundle ou `methodRef` artificiel n’est ajouté.
 ## Statut
 
 **Le noyau commun, l’hôte browser/product OP28 et l’hôte Worker OP18/OP28 sont
-fonctionnellement qualifiés dans leurs périmètres. Activation produit, choix
-d’un contrôleur unique, acquisition FieldStock initiale, Region commun,
-restauration et performance officielle restent ouverts.**
+fonctionnellement qualifiés ensemble. Activation produit, choix d’un contrôleur
+unique, acquisition FieldStock initiale, Region commun, restauration et
+performance officielle restent ouverts.**
