@@ -30,6 +30,30 @@ const prior: RetainedAddressedFieldPrior = {
   qualification: 'retained',
 };
 
+function revalidationPrior(): RetainedAddressedFieldPrior {
+  return {
+    action_ref: 'ACTION6',
+    lower_squared: 4,
+    upper_squared: 9,
+    boundary: 'prior-boundary',
+    request_row: 5,
+    goal_region: {
+      size: [3, 3],
+      envelope: [
+        [0, 0], [0, 1], [0, 2],
+        [1, 0], [1, 1], [1, 2],
+        [2, 0], [2, 1], [2, 2],
+      ],
+    },
+    class_templates: {
+      '1': { size: [1, 1], offset: [0, 0], mask: [[0, 0]], alignment_supported: true },
+      '2': { size: [1, 1], offset: [0, 0], mask: [[0, 0]], alignment_supported: true },
+      '3': { size: [1, 1], offset: [0, 0], mask: [[0, 0]], alignment_supported: true },
+    },
+    qualification: 'retained local hypothesis; new occurrence and field require revalidation',
+  };
+}
+
 function blankRows(): number[][] {
   return Array.from({ length: 64 }, () => Array(64).fill(0));
 }
@@ -57,11 +81,18 @@ function fillRect(
 
 function revalidationRows(): number[][] {
   const rows = blankRows();
-  rows[1]![1] = 1;
-  rows[1]![3] = 2;
-  rows[1]![5] = 3;
-  fillRect(rows, 8, 0, 2, 2, 2);
-  rows[10]![10] = 9;
+  fillRect(rows, 1, 1, 2, 2, 1);
+  fillRect(rows, 4, 1, 2, 2, 2);
+  fillRect(rows, 7, 1, 2, 2, 3);
+  fillRect(rows, 1, 5, 2, 2, 2);
+  for (let offset = 0; offset < 3; offset += 1) {
+    rows[4]![10 + offset] = 9;
+    rows[6]![10 + offset] = 9;
+    rows[4 + offset]![10] = 9;
+    rows[4 + offset]![12] = 9;
+  }
+  rows[20]![20] = 1;
+  rows[20]![24] = 1;
   return rows;
 }
 
@@ -164,7 +195,7 @@ test('browser product host routes OP18 return into FieldStock before the next ac
 
 test('retained FieldStock prior is revalidated only from the current public image', () => {
   const runtime = new ObservedAddressedMaterialRuntime();
-  runtime.field.prior = structuredClone(prior);
+  runtime.field.prior = revalidationPrior();
   const transport = new BrowserFieldStockCampaignTransport({ runtime, remaining: 16 });
   const visible = gameObservation(revalidationRows(), [6]);
   const stream = new BrowserAgentObservationStream({
@@ -209,7 +240,7 @@ test('empty browser FieldStock runtime does not invent ACTION6 coordinates', asy
   assert.equal(dispatches, 0);
 });
 
-test('passive FieldStock observes an OP28 level return only after OP28 acquisition', async () => {
+test('passive FieldStock retains but does not falsely apply knowledge after an OP28 level return', async () => {
   const runtime = new ObservedAddressedMaterialRuntime();
   const originalStock = stockFixture();
   runtime.field.stock = originalStock;
@@ -241,16 +272,13 @@ test('passive FieldStock observes an OP28 level return only after OP28 acquisiti
   if (result.preparation?.status === 'action') {
     assert.equal(result.preparation.ownerId, 'public_single_action_op28');
     assert.deepEqual(result.preparation.action, { id: 4 });
+    assert.equal(result.acquisition?.needId, result.preparation.needId);
   }
   assert.deepEqual(events, ['action:4', 'acquired', 'present']);
   assert.notEqual(runtime.field.stock, originalStock);
-  assert.equal(runtime.status(), 'revalidated_stock');
-  assert.equal(runtime.field.stock?.epoch, 3);
-  assert.deepEqual(runtime.field.stock?.order, [1, 2, 3]);
-  assert.equal(
-    runtime.field.stock?.sceneRef,
-    'public-observation:browser-passive-boundary:1',
-  );
+  assert.equal(runtime.field.stock, undefined);
+  assert.ok(runtime.field.prior);
+  assert.equal(runtime.status(), 'retained_pending_revalidation');
 });
 
 test('browser Agent controller defaults to the combined OP18 and OP28 host', () => {
