@@ -284,6 +284,7 @@ export class BrowserAgentController {
       }
       return this.#finish(this.#disposed ? 'disposed' : 'replaced');
     } catch (error) {
+      if (this.#disposed) return this.#finish('disposed');
       const snapshot = this.#finish('error');
       this.#onError?.(error, snapshot);
       return snapshot;
