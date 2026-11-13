@@ -7,10 +7,28 @@ const roadmapPath = resolve(root, 'docs/migration/v6-delivery-roadmap.md');
 const checkOnly = process.argv.includes('--check');
 
 function replaceOnce(source, before, after, label) {
-  const first = source.indexOf(before);
-  assert.notEqual(first, -1, `missing roadmap anchor: ${label}`);
-  assert.equal(source.indexOf(before, first + before.length), -1, `duplicate roadmap anchor: ${label}`);
-  return source.slice(0, first) + after + source.slice(first + before.length);
+  const beforeFirst = source.indexOf(before);
+  if (beforeFirst !== -1) {
+    assert.equal(
+      source.indexOf(before, beforeFirst + before.length),
+      -1,
+      `duplicate roadmap anchor: ${label}`,
+    );
+    return source.slice(0, beforeFirst) + after + source.slice(beforeFirst + before.length);
+  }
+
+  const afterFirst = source.indexOf(after);
+  assert.notEqual(
+    afterFirst,
+    -1,
+    `missing roadmap anchor or synchronized block: ${label}`,
+  );
+  assert.equal(
+    source.indexOf(after, afterFirst + after.length),
+    -1,
+    `duplicate synchronized roadmap block: ${label}`,
+  );
+  return source;
 }
 
 function synchronizedRoadmap(source) {
