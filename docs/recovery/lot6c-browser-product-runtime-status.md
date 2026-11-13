@@ -6,9 +6,9 @@ Work branch: `recovery/lot6c-browser-product-runtime-20261112`
 
 Canonical branch: `recovery/site109-reconstruction-20261112`
 
-Reconciled candidate before this status commit: `612dc0a594498819aa90bc5b0245871d43a43dbe`
+Final reconciled candidate before this status commit: `c8b36b652b98335a7316ab9f900d92eab11b71a5`
 
-Qualification workflow run: `43355994545`
+Final qualification workflow run: `43356246463`
 
 Status: **QUALIFIED — functional browser integration only**
 
@@ -26,13 +26,18 @@ No production source file, game rule or game-specific solution was changed by th
 
 ## Reconciliation with the canonical branch
 
-While this qualification was running, the canonical reconstruction branch advanced with the browser FieldStock OP18 transport. The current qualification branch was therefore reconciled with canonical commit `db2fb0f5051c6b7e1b4a599edee7c31158d62557` before the final evidence run.
+The canonical reconstruction branch advanced twice while this qualification was running:
 
-The reconciled candidate is merge commit `612dc0a594498819aa90bc5b0245871d43a43dbe`. All evidence below was rerun on that combined candidate rather than on the earlier branch base.
+1. browser FieldStock OP18 transport at canonical commit `db2fb0f5051c6b7e1b4a599edee7c31158d62557`;
+2. bounded Lot 9B Region hook performance correction at canonical commit `e2b93371bf1272dd0f68ab56daeeabaebd880f44`.
+
+Both canonical advances were merged into the Lot 6C work branch before final acceptance. The last combined candidate is merge commit `c8b36b652b98335a7316ab9f900d92eab11b71a5`.
+
+All final evidence below was rerun on that combined candidate rather than on an earlier branch base.
 
 ## Evidence
 
-GitHub Actions workflow run `43355994545` completed successfully on the reconciled candidate.
+GitHub Actions workflow run `43356246463` completed successfully on the final reconciled candidate.
 
 ### Production build
 
@@ -81,7 +86,7 @@ Headless Google Chrome `156.0.8078.79` loaded the real Vite `src/main.ts` produc
 - terminal `Level 1 complete.` feedback;
 - visible terminal overlay titled `Level complete`.
 
-The generated qualification report was uploaded as GitHub Actions artifact `14005878005` (1,020 bytes).
+The generated qualification report was uploaded as GitHub Actions artifact `14006535911` (1,019 bytes), digest `sha256:ccd57b5184998a902723b8a6344a8d8dbcff205e1dda687817dd68b8f553d235`.
 
 The first browser attempt exposed only a harness-oracle issue: browser `MouseEvent.clientX` and `clientY` are integer-valued, while the expected point had been calculated from pre-dispatch fractional values. The product correctly transmitted the browser event coordinates. The oracle was corrected to derive its expected point from the actual dispatched event; no production code changed.
 
