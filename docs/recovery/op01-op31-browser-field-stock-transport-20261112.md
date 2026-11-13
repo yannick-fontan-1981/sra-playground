@@ -7,6 +7,9 @@ Date : 12 novembre 2026
 - Dépôt : `yannick-fontan-1981/sra-playground`
 - Branche canonique cible : `recovery/site109-reconstruction-20261112`
 - Baseline canonique de départ : `97e036fc6609a4822feffe0f834a120f831c1397`
+- Canonique lot 9B réconciliée : `85d8c5e57a26ae3f02a0e89c49f5894dc571bf70`
+- Merge de réconciliation : `70943d5715e7e44680ab307f0e8ddca27dd020aa`
+- PR de réconciliation : `#54`
 - Branche de travail : `op01-op31-browser-field-stock-20261112`
 - Plan : `docs/migration/op01-op31-verification-plan.md`
 - Suivi consolidé : `docs/migration/op01-op31-progress.md`
@@ -167,13 +170,28 @@ Les tests historiques continuent de vérifier la neutralité des propriétaires,
 l’ambiguïté non classée, les retours périmés, les erreurs de transport et la
 séparation Manual/Agent.
 
-## Qualification
+## Qualification fonctionnelle de la tranche
 
-Qualification finale du code :
+Première qualification du code FieldStock avant réconciliation concurrente :
 
 - run GitHub Actions : `43354913250` ;
 - job : `131654533095` ;
 - commit qualifié : `bce3e89cbfd1cfc21245edf675d27870df524607` ;
+- régression TypeScript complète : **330/330 réussis** ;
+- typecheck et build : réussis.
+
+## Qualification combinée canonique
+
+La branche canonique a ensuite intégré le manifeste, les références A/B et le
+harness ABBA Worker/Pyodide du lot 9B. Ces 17 fichiers ne chevauchaient aucun
+fichier fonctionnel FieldStock. Ils ont été fusionnés dans la branche de travail
+par la PR `#54`, puis l’état combiné a été entièrement requalifié.
+
+Résultat final combiné :
+
+- run GitHub Actions : `43355369134` ;
+- job : `131656026153` ;
+- commit qualifié : `70943d5715e7e44680ab307f0e8ddca27dd020aa` ;
 - Node : `22.18.0` ;
 - `npm ci` : réussi ;
 - `npm run typecheck` : réussi ;
@@ -186,10 +204,12 @@ Qualification finale du code :
 - modules transformés : `53` ;
 - galerie : `100` jeux, `636` prévisualisations et `4` atlas natifs ;
 - rapport de câblage : `logos-product-wiring-present` ;
-- fichiers source inspectés par la garde : `22`.
+- fichiers source inspectés par la garde : `23`.
 
-`npm ci` signale toujours deux vulnérabilités de dépendances de sévérité haute
-préexistantes. Cette tranche ne les introduit ni ne les corrige.
+Les cinq tests propres au transport navigateur FieldStock sont inclus dans cette
+régression combinée et réussissent. `npm ci` signale toujours deux
+vulnérabilités de dépendances de sévérité haute préexistantes. Cette tranche ne
+les introduit ni ne les corrige.
 
 ## Performance
 
@@ -199,6 +219,10 @@ et SMLP évalués séparément.
 Le transport FieldStock est chargé avec le produit, mais ne matérialise les
 composantes visibles que lorsqu’un prior attend une revalidation. Les tests et
 le build ne remplacent pas une mesure de session complète.
+
+Le harness ABBA officiel non isolé est désormais présent dans l’état combiné,
+mais cette tranche n’exécute pas les quatre mesures R5 et ne revendique aucun
+résultat de coût.
 
 Verdict :
 
