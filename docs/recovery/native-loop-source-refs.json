@@ -1,13 +1,13 @@
 {
   "version": 1,
-  "generatedFromCommit": "9e8f5f3d778f5d45c5e428174d66e2a803872813",
-  "commonRoot": "172deb5585686fbd247ce7d99a6f891bd122bf32411ab5d1a659fe6142752d6c",
+  "generatedFromCommit": "85cc125d62ece043ce6d4d908bd801f340af4e08",
+  "commonRoot": "d5999b46fe6a61015549d2a26b7c3838ed1f3dfb3bb2a1fe5d153c0e323e3728",
   "candidateRoot": "ea30cffbba09d5c05bf1a6133aafbb966c8cb3fe5a128f0ccc6cd9c5def7105d",
   "reference": {
-    "sourceRef": "lot9b-region-v1:A:8b795085bfc26379c0736b7e4032fb28b3a78b66c21c63cb18585724c6d37531",
+    "sourceRef": "lot9b-region-v1:A:1312569ad68db2d0fb3837c357df27219ffce117f383937c37d3605de61078d2",
     "profile": {
       "version": 1,
-      "commonRoot": "172deb5585686fbd247ce7d99a6f891bd122bf32411ab5d1a659fe6142752d6c",
+      "commonRoot": "d5999b46fe6a61015549d2a26b7c3838ed1f3dfb3bb2a1fe5d153c0e323e3728",
       "execution": {
         "corpusRef": "native-region-action6-corpus-v1",
         "seed": 0,
@@ -21,10 +21,10 @@
     }
   },
   "candidate": {
-    "sourceRef": "lot9b-region-v1:B:cdb33000d61a6ccc1df8b6de417be32e2fd04a669fb1a5972de0e3330d3cfc95",
+    "sourceRef": "lot9b-region-v1:B:75569fb1471c4731488ede1f2b4adffdcb47b977d22af05504fe905362104b3a",
     "profile": {
       "version": 1,
-      "commonRoot": "172deb5585686fbd247ce7d99a6f891bd122bf32411ab5d1a659fe6142752d6c",
+      "commonRoot": "d5999b46fe6a61015549d2a26b7c3838ed1f3dfb3bb2a1fe5d153c0e323e3728",
       "execution": {
         "corpusRef": "native-region-action6-corpus-v1",
         "seed": 0,
@@ -141,8 +141,13 @@
     },
     {
       "path": "src/benchmarks/native-region-official-benchmark.ts",
-      "bytes": 5240,
-      "sha256": "f8a13a4d02cbd653d863c2d6506ba9e66cd475d6c6359af22cd28891fb22f16a"
+      "bytes": 4716,
+      "sha256": "96c597321ebfe22d58ad0a725e8f31231c5675e28c87ee4c472a70b5d1c8173a"
+    },
+    {
+      "path": "src/benchmarks/native-region-official-config.ts",
+      "bytes": 1964,
+      "sha256": "2ebc86d432e635f8c3899eca06ec889e0d6e0e35e1219d19ca0fc1058dd7a617"
     },
     {
       "path": "src/runtime/browser-games.ts",

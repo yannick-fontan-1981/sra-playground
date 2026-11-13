@@ -1,14 +1,14 @@
 {
   "version": 1,
   "kind": "reconstructed-native-region-benchmark-manifest",
-  "status": "official-abba-measurement-accepted",
+  "status": "ready-for-official-abba-measurement",
   "historicalRunnerIdentityRecovered": false,
   "historicalCorpusRecovered": false,
   "sourceRefs": {
-    "commonRoot": "172deb5585686fbd247ce7d99a6f891bd122bf32411ab5d1a659fe6142752d6c",
+    "commonRoot": "d5999b46fe6a61015549d2a26b7c3838ed1f3dfb3bb2a1fe5d153c0e323e3728",
     "candidateRoot": "ea30cffbba09d5c05bf1a6133aafbb966c8cb3fe5a128f0ccc6cd9c5def7105d",
-    "reference": "lot9b-region-v1:A:8b795085bfc26379c0736b7e4032fb28b3a78b66c21c63cb18585724c6d37531",
-    "candidate": "lot9b-region-v1:B:cdb33000d61a6ccc1df8b6de417be32e2fd04a669fb1a5972de0e3330d3cfc95",
+    "reference": "lot9b-region-v1:A:1312569ad68db2d0fb3837c357df27219ffce117f383937c37d3605de61078d2",
+    "candidate": "lot9b-region-v1:B:75569fb1471c4731488ede1f2b4adffdcb47b977d22af05504fe905362104b3a",
     "proof": "docs/recovery/native-loop-source-refs.json"
   },
   "transport": {
@@ -90,7 +90,7 @@
       "game": "STCK",
       "gameId": "stck-c0000001",
       "factory": "createAStckNativeRunner",
-      "sourceRef": "lot9b-region-v1:A:8b795085bfc26379c0736b7e4032fb28b3a78b66c21c63cb18585724c6d37531",
+      "sourceRef": "lot9b-region-v1:A:1312569ad68db2d0fb3837c357df27219ffce117f383937c37d3605de61078d2",
       "regionHook": "disabled",
       "seed": 0,
       "startLevel": 1,
@@ -103,7 +103,7 @@
       "game": "SMLP",
       "gameId": "smlp-c3000001",
       "factory": "createASmlpNativeRunner",
-      "sourceRef": "lot9b-region-v1:A:8b795085bfc26379c0736b7e4032fb28b3a78b66c21c63cb18585724c6d37531",
+      "sourceRef": "lot9b-region-v1:A:1312569ad68db2d0fb3837c357df27219ffce117f383937c37d3605de61078d2",
       "regionHook": "disabled",
       "seed": 0,
       "startLevel": 1,
@@ -116,7 +116,7 @@
       "game": "STCK",
       "gameId": "stck-c0000001",
       "factory": "createBStckNativeRunner",
-      "sourceRef": "lot9b-region-v1:B:cdb33000d61a6ccc1df8b6de417be32e2fd04a669fb1a5972de0e3330d3cfc95",
+      "sourceRef": "lot9b-region-v1:B:75569fb1471c4731488ede1f2b4adffdcb47b977d22af05504fe905362104b3a",
       "regionHook": "region_intervention",
       "seed": 0,
       "startLevel": 1,
@@ -129,7 +129,7 @@
       "game": "SMLP",
       "gameId": "smlp-c3000001",
       "factory": "createBSmlpNativeRunner",
-      "sourceRef": "lot9b-region-v1:B:cdb33000d61a6ccc1df8b6de417be32e2fd04a669fb1a5972de0e3330d3cfc95",
+      "sourceRef": "lot9b-region-v1:B:75569fb1471c4731488ede1f2b4adffdcb47b977d22af05504fe905362104b3a",
       "regionHook": "region_intervention",
       "seed": 0,
       "startLevel": 1,
@@ -158,75 +158,63 @@
       "status": "passed"
     },
     "sourceRefRun": {
-      "runId": 43359430572,
-      "headSha": "9e8f5f3d778f5d45c5e428174d66e2a803872813",
+      "runId": 43361294252,
+      "headSha": "85cc125d62ece043ce6d4d908bd801f340af4e08",
       "sourceRefsComputed": true,
       "manifestVerification": "passed-before-commit"
-    },
-    "finalQualificationRun": {
-      "runId": 43359480115,
-      "jobId": 131669385975,
-      "headSha": "d45f2ce6566d052bbd3477c5653e99ae24381a0a",
-      "node": "22.18.0",
-      "typecheck": "passed",
-      "regression": {
-        "passed": 335,
-        "failed": 0,
-        "skipped": 0,
-        "cancelled": 0
-      },
-      "build": "passed",
-      "workerPyodideParity": "passed",
-      "nativeContracts": {
-        "passed": 24,
-        "failed": 0
-      }
     }
   },
   "officialMeasurement": {
-    "executed": true,
-    "status": "accepted",
-    "accepted": true,
-    "protocol": "A1/B1/B2/A2",
-    "isolation": "non-isolated-shared-github-actions-runner-no-repository-concurrency",
-    "thresholdPercent": 10,
-    "strictlyLessThan": true,
-    "gamesEvaluatedSeparately": true,
-    "crossGameCompensationAllowed": false,
-    "runId": 43359480072,
-    "jobId": 131669316899,
-    "headSha": "d45f2ce6566d052bbd3477c5653e99ae24381a0a",
-    "artifactId": 14007143067,
-    "artifactName": "op01-op31-strict-native-cost-report",
-    "games": {
-      "STCK": {
-        "referenceMedianMs": 59.35,
-        "candidateMedianMs": 56.7,
-        "relativeIncreasePercent": -4.465037910695669,
-        "accepted": true
-      },
-      "SMLP": {
-        "referenceMedianMs": 114.7,
-        "candidateMedianMs": 120.05,
-        "relativeIncreasePercent": 4.664341761117985,
-        "accepted": true
-      }
-    },
-    "repeatQualification": {
-      "runId": 43359480115,
-      "jobId": 131669385975,
-      "headSha": "d45f2ce6566d052bbd3477c5653e99ae24381a0a",
+    "executed": false,
+    "result": null,
+    "reason": "benchmark config validation and fail-fast reporting changed the common source identity; strict official ABBA measurement pending"
+  },
+  "officialMeasurementHistory": [
+    {
+      "executed": true,
+      "status": "accepted",
       "accepted": true,
+      "protocol": "A1/B1/B2/A2",
+      "isolation": "non-isolated-shared-github-actions-runner-no-repository-concurrency",
+      "thresholdPercent": 10,
+      "strictlyLessThan": true,
+      "gamesEvaluatedSeparately": true,
+      "crossGameCompensationAllowed": false,
+      "runId": 43359480072,
+      "jobId": 131669316899,
+      "headSha": "d45f2ce6566d052bbd3477c5653e99ae24381a0a",
+      "artifactId": 14007143067,
+      "artifactName": "op01-op31-strict-native-cost-report",
       "games": {
         "STCK": {
-          "relativeIncreasePercent": 2.0422535211224613,
+          "referenceMedianMs": 59.35,
+          "candidateMedianMs": 56.7,
+          "relativeIncreasePercent": -4.465037910695669,
           "accepted": true
         },
         "SMLP": {
-          "relativeIncreasePercent": -0.9297520661097125,
+          "referenceMedianMs": 114.7,
+          "candidateMedianMs": 120.05,
+          "relativeIncreasePercent": 4.664341761117985,
           "accepted": true
+        }
+      },
+      "repeatQualification": {
+        "runId": 43359480115,
+        "jobId": 131669385975,
+        "headSha": "d45f2ce6566d052bbd3477c5653e99ae24381a0a",
+        "accepted": true,
+        "games": {
+          "STCK": {
+            "relativeIncreasePercent": 2.0422535211224613,
+            "accepted": true
+          },
+          "SMLP": {
+            "relativeIncreasePercent": -0.9297520661097125,
+            "accepted": true
+          }
         }
       }
     }
-  }
+  ]
 }
