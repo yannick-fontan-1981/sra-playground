@@ -1,0 +1,115 @@
+{
+  "version": 1,
+  "status": "official-performance-qualified",
+  "accepted": true,
+  "benchmark": "lot9c4-strict-joint-channels-v1",
+  "generatedFromCommit": "f98f490359908fd30e2177d819b98fdd958f6f20",
+  "generatedAt": "2026-11-13T04:40:38.707Z",
+  "github": {
+    "runId": 43366962676,
+    "jobId": 131693534425,
+    "artifactId": 14010801556,
+    "artifactName": "lot9c4-official-strict-joint-channels-abba",
+    "artifactDigest": "sha256:9b85ab0a249da7b1f7e0362eb190bcc5ad6c768d04c8cea26f8e464c10826a1f",
+    "rawReportSha256": "sha256:bff263b416755eddcbbb3f16f8aef03c31c51535283f3c58d44d6c53f9c31566"
+  },
+  "environment": {
+    "chrome": "Google Chrome 156.0.8078.79",
+    "isolation": "shared-github-actions-runner-workflow-concurrency-only",
+    "transport": "BrowserGameRuntime -> game-worker.ts -> Pyodide -> game_bridge.py -> custom-games.zip"
+  },
+  "sourceRefs": {
+    "contract": "lot9c4-strict-joint-source-identity-v1",
+    "commonRoot": "2c7219c7ebf0104fbb8ef7136ec9a6a38f873b7646417c79dcf680ce8bb3fa0a",
+    "candidateRoot": "60162233df3b98bb76863dd67b4e9ccf8198397528fbe48cedbbb36055a9ed2e",
+    "reference": "lot9c4-strict-joint:A:2c7219c7ebf0104fbb8ef7136ec9a6a38f873b7646417c79dcf680ce8bb3fa0a",
+    "candidate": "lot9c4-strict-joint:B:2c7219c7ebf0104fbb8ef7136ec9a6a38f873b7646417c79dcf680ce8bb3fa0a:60162233df3b98bb76863dd67b4e9ccf8198397528fbe48cedbbb36055a9ed2e"
+  },
+  "protocol": {
+    "seriesOrder": ["A1", "B1", "B2", "A2"],
+    "variantBySeries": {"A1": "A", "B1": "B", "B2": "B", "A2": "A"},
+    "invocations": 40,
+    "warmupSessions": 8,
+    "measuredSessions": 32,
+    "warmupActions": 24,
+    "measuredActions": 400,
+    "thresholdPercent": 10,
+    "thresholdIsStrict": true,
+    "phaseOverrunIsBlocking": false,
+    "crossGameCompensationAllowed": false,
+    "measuredSampleRemovalAllowed": false,
+    "sampleRemoval": 0,
+    "retries": 0
+  },
+  "corpus": {
+    "id": "lot9c4-strict-public-joint-corpus-v1",
+    "games": ["STCK", "SMLP"],
+    "seed": 0,
+    "startLevel": 1,
+    "stck": {
+      "excludedPreludeProducer": "region-public-action6-probe-v1",
+      "excludedPreludeActionsPerTarget": 3,
+      "excludedPreludeAction": {"id": 6, "x": 4, "y": 52},
+      "excludedPreludeChangedPixels": [211, 138, 95],
+      "targetAction": {"id": 6, "x": 4, "y": 50},
+      "targetChangedPixels": 64
+    },
+    "smlp": {"targetChangedPixels": 9}
+  },
+  "timingScope": {
+    "STCK": "sum of requested strict target-action cycles only; each cycle starts after a fresh native session and its identical three-action public prelude, then includes public target selection, optional B joint prepare, the target Browser/Pyodide action, returned observation conversion and optional B acquisition",
+    "SMLP": "after initial public observation, through the requested public target selection, optional B joint prepare, Browser/Pyodide action, returned observation conversion and optional B acquisition loops"
+  },
+  "runnerIdentities": {
+    "A": {
+      "STCK": {"id": "lot9c4:A/STCK", "jointChannels": "disabled"},
+      "SMLP": {"id": "lot9c4:A/SMLP", "jointChannels": "disabled"}
+    },
+    "B": {
+      "STCK": {"id": "lot9c4:B/STCK", "jointChannels": "strict-unique-card"},
+      "SMLP": {"id": "lot9c4:B/SMLP", "jointChannels": "qualified-row-major-gate"}
+    },
+    "corpusRef": "lot9c4-strict-public-joint-corpus-v1",
+    "stckPrelude": "three identical public setup actions per measured strict target action, excluded from both A and B timing and retained in metadata",
+    "invariant": "A and B use the same checkout, Browser/Pyodide transport, archive, seed, setup policy and target actions; only B executes the qualified joint owner, OP28 and two-channel acquisition"
+  },
+  "candidateStats": {
+    "STCK": {"decisions": 86, "acquisitions": 86, "targetCycles": 86, "excludedPreludeActions": 258, "completedProtocolSessions": 10},
+    "SMLP": {"decisions": 126, "acquisitions": 126, "targetCycles": 126, "excludedPreludeActions": 0, "completedProtocolSessions": 10}
+  },
+  "games": {
+    "STCK": {
+      "referenceDurationsMs": [48.499999999992724, 47.800000000010186, 46.80000000000291, 48.50000000001455, 46.40000000000873, 45.90000000000873, 46.800000000032014, 46.69999999998254],
+      "candidateDurationsMs": [53.69999999999709, 47.499999999992724, 49.80000000000291, 47.70000000001164, 49.800000000010186, 49.000000000007276, 47.60000000002765, 60.60000000002037],
+      "referenceMedianMs": 46.80000000001746,
+      "candidateMedianMs": 49.40000000000509,
+      "relativeIncreasePercent": 5.5555555555270475,
+      "accepted": true,
+      "phases": {
+        "candidate_hook": {"baselineCount": 8, "candidateCount": 8, "baselineMedianMs": 0, "candidateMedianMs": 0.9000000000050932, "relativeIncreasePercent": null},
+        "game_action": {"baselineCount": 8, "candidateCount": 8, "baselineMedianMs": 46.80000000001746, "candidateMedianMs": 47.95000000001528, "relativeIncreasePercent": 2.457264957259375},
+        "public_policy": {"baselineCount": 8, "candidateCount": 8, "baselineMedianMs": 0, "candidateMedianMs": 0, "relativeIncreasePercent": 0}
+      }
+    },
+    "SMLP": {
+      "referenceDurationsMs": [122.5, 112.09999999999854, 99.69999999999709, 228.90000000000146, 96.30000000000291, 96.59999999999127, 96.60000000000582, 98.89999999999418],
+      "candidateDurationsMs": [97.40000000000146, 99.40000000000146, 97.90000000000146, 99.59999999999854, 99.69999999999709, 96.89999999999418, 99, 100.5],
+      "referenceMedianMs": 99.29999999999563,
+      "candidateMedianMs": 99.20000000000073,
+      "relativeIncreasePercent": -0.10070493453666618,
+      "accepted": true,
+      "phases": {
+        "candidate_hook": {"baselineCount": 8, "candidateCount": 8, "baselineMedianMs": 0, "candidateMedianMs": 1.5500000000101863, "relativeIncreasePercent": null},
+        "game_action": {"baselineCount": 8, "candidateCount": 8, "baselineMedianMs": 98.19999999999709, "candidateMedianMs": 96.74999999998909, "relativeIncreasePercent": -1.4765784114134872},
+        "public_policy": {"baselineCount": 8, "candidateCount": 8, "baselineMedianMs": 0.6000000000203727, "candidateMedianMs": 0.4499999999970896, "relativeIncreasePercent": -25.00000000303165}
+      }
+    }
+  },
+  "disposition": {
+    "historicalParityClaimed": false,
+    "counter76Incremented": false,
+    "sitePublished": false,
+    "lot9cComplete": true,
+    "nextStep": "rebuild current reconstruction registry before count claims"
+  }
+}
