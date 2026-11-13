@@ -1,0 +1,171 @@
+{
+  "version": 1,
+  "status": "accepted",
+  "qualification": "lot9c3-official-native-joint-channels-abba",
+  "run": 43364459043,
+  "job": 131685629232,
+  "qualifiedCommit": "5412c2a95a77ea9901855d1620263709b07540bf",
+  "artifact": {
+    "id": 14009079375,
+    "name": "lot9c3-official-native-joint-channels-abba",
+    "sha256": "f56c9ad48784da55ab30e18bbb5a097a405fc3b225fed66062b91385fd72c22d",
+    "files": [
+      "lot9c3-official-native-joint-channels-abba-report.json",
+      "lot9c3-native-joint-channel-source-refs.json"
+    ]
+  },
+  "environment": {
+    "measurementIsolation": "shared-github-actions-runner-workflow-concurrency-only",
+    "chrome": "Google Chrome 157.0.8103.50",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.0.0 Safari/537.36"
+  },
+  "measurement": {
+    "isolation": "shared-github-actions-runner-workflow-concurrency-only",
+    "timingScope": "complete native session: load through final returned observation; B additionally includes the real joint-channel decision and acquisition hook",
+    "transport": "BrowserGameRuntime -> game-worker.ts -> Pyodide -> game_bridge.py -> custom-games.zip",
+    "corpusRef": "native-joint-channel-action6-corpus-v1"
+  },
+  "sourceRefs": {
+    "reference": {
+      "sourceRef": "lot9c-joint-v1:A:910f99e7890d9b48ac3fc2a907f578bcee012091773a724bad926499d83913a0",
+      "profile": {
+        "variant": "A",
+        "jointChannels": "disabled",
+        "commonRoot": "910f99e7890d9b48ac3fc2a907f578bcee012091773a724bad926499d83913a0"
+      }
+    },
+    "candidate": {
+      "sourceRef": "lot9c-joint-v1:B:910f99e7890d9b48ac3fc2a907f578bcee012091773a724bad926499d83913a0:152317533b21cb1df84c85c3e0757d295e78674fa04b1bcd7acc17a8130e5e17",
+      "profile": {
+        "variant": "B",
+        "jointChannels": "enabled",
+        "commonRoot": "910f99e7890d9b48ac3fc2a907f578bcee012091773a724bad926499d83913a0",
+        "candidateRoot": "152317533b21cb1df84c85c3e0757d295e78674fa04b1bcd7acc17a8130e5e17"
+      }
+    },
+    "commonRoot": "910f99e7890d9b48ac3fc2a907f578bcee012091773a724bad926499d83913a0",
+    "candidateRoot": "152317533b21cb1df84c85c3e0757d295e78674fa04b1bcd7acc17a8130e5e17",
+    "invariants": {
+      "sameCheckout": true,
+      "sameWorkerPyodideTransport": true,
+      "sameGameArchive": "public/python/custom-games.zip",
+      "sameCorpus": "native-joint-channel-action6-corpus-v1",
+      "sameSeed": 0,
+      "sameStartLevel": 1,
+      "onlyMeasuredSemanticDifference": "B executes joint-channel public producers, exact compatibility, OP28 release and return acquisition; A omits that hook"
+    }
+  },
+  "protocol": {
+    "seriesOrder": ["A1", "B1", "B2", "A2"],
+    "variantBySeries": {"A1": "A", "B1": "B", "B2": "B", "A2": "A"},
+    "games": {
+      "STCK": {"warmupActions": 3, "measuredActions": 10, "measuredSessionsPerSeries": 4},
+      "SMLP": {"warmupActions": 3, "measuredActions": 15, "measuredSessionsPerSeries": 4}
+    },
+    "globalThresholdPercent": 10,
+    "thresholdIsStrict": true,
+    "phaseOverrunIsBlocking": false,
+    "crossGameCompensationAllowed": false,
+    "measuredSampleRemovalAllowed": false
+  },
+  "totals": {
+    "invocations": 40,
+    "warmupSessions": 8,
+    "measuredSessions": 32,
+    "warmupActions": 24,
+    "measuredActions": 400
+  },
+  "games": {
+    "STCK": {
+      "baselineMeasuredSessions": 8,
+      "candidateMeasuredSessions": 8,
+      "baselineMedianMs": 61.44999999999709,
+      "candidateMedianMs": 62.89999999999418,
+      "relativeIncreasePercent": 2.3596419853493256,
+      "globalAccepted": true,
+      "phases": {
+        "candidate_hook": {"baselineCount": 8, "candidateCount": 8, "baselineMedianMs": 0, "candidateMedianMs": 2.6999999999898137, "relativeIncreasePercent": null},
+        "game_action": {"baselineCount": 8, "candidateCount": 8, "baselineMedianMs": 54.450000000004366, "candidateMedianMs": 53.19999999999709, "relativeIncreasePercent": -2.295684113879115},
+        "public_policy": {"baselineCount": 8, "candidateCount": 8, "baselineMedianMs": 6.900000000008731, "candidateMedianMs": 6.80000000000291, "relativeIncreasePercent": -1.44927536240137}
+      },
+      "phaseOverruns": {
+        "candidate_hook": {"baselineCount": 8, "candidateCount": 8, "baselineMedianMs": 0, "candidateMedianMs": 2.6999999999898137, "relativeIncreasePercent": null}
+      }
+    },
+    "SMLP": {
+      "baselineMeasuredSessions": 8,
+      "candidateMeasuredSessions": 8,
+      "baselineMedianMs": 121.94999999999709,
+      "candidateMedianMs": 126.54999999999563,
+      "relativeIncreasePercent": 3.772037720376109,
+      "globalAccepted": true,
+      "phases": {
+        "candidate_hook": {"baselineCount": 8, "candidateCount": 8, "baselineMedianMs": 0, "candidateMedianMs": 4.700000000004366, "relativeIncreasePercent": null},
+        "game_action": {"baselineCount": 8, "candidateCount": 8, "baselineMedianMs": 106.80000000000291, "candidateMedianMs": 106.30000000000291, "relativeIncreasePercent": -0.4681647940074751},
+        "public_policy": {"baselineCount": 8, "candidateCount": 8, "baselineMedianMs": 14.949999999982538, "candidateMedianMs": 14.750000000014552, "relativeIncreasePercent": -1.337792641927893}
+      },
+      "phaseOverruns": {
+        "candidate_hook": {"baselineCount": 8, "candidateCount": 8, "baselineMedianMs": 0, "candidateMedianMs": 4.700000000004366, "relativeIncreasePercent": null}
+      }
+    }
+  },
+  "hookStats": {
+    "STCK": {"actionsSeen": 86, "decisions": 86, "acquisitions": 86, "completedSessions": 10, "stackCardTargets": 62, "shopButtonTargets": 24, "smlpGateTargets": 0, "activeSessions": 0},
+    "SMLP": {"actionsSeen": 126, "decisions": 126, "acquisitions": 126, "completedSessions": 10, "stackCardTargets": 0, "shopButtonTargets": 0, "smlpGateTargets": 126, "activeSessions": 0}
+  },
+  "accepted": true,
+  "measuredSamples": {
+    "STCK": {
+      "A": [
+        {"series":"A1","invocationIndex":1,"sessionIndex":0,"actions":10,"durationMs":84.5,"phases":{"public_policy":9.10000000000582,"candidate_hook":0,"game_action":75.30000000000291}},
+        {"series":"A1","invocationIndex":2,"sessionIndex":1,"actions":10,"durationMs":62.30000000000291,"phases":{"public_policy":7.099999999976717,"candidate_hook":0,"game_action":55.20000000002619}},
+        {"series":"A1","invocationIndex":3,"sessionIndex":2,"actions":10,"durationMs":63.20000000001164,"phases":{"public_policy":6.900000000008731,"candidate_hook":0,"game_action":56.30000000000291}},
+        {"series":"A1","invocationIndex":4,"sessionIndex":3,"actions":10,"durationMs":68.5,"phases":{"public_policy":7.69999999999709,"candidate_hook":0,"game_action":60.5}},
+        {"series":"A2","invocationIndex":31,"sessionIndex":0,"actions":10,"durationMs":59.19999999999709,"phases":{"public_policy":6.399999999979627,"candidate_hook":0,"game_action":52.80000000001746}},
+        {"series":"A2","invocationIndex":32,"sessionIndex":1,"actions":10,"durationMs":57.60000000000582,"phases":{"public_policy":6.5,"candidate_hook":0,"game_action":51.10000000000582}},
+        {"series":"A2","invocationIndex":33,"sessionIndex":2,"actions":10,"durationMs":60.59999999999127,"phases":{"public_policy":6.900000000008731,"candidate_hook":0,"game_action":53.69999999998254}},
+        {"series":"A2","invocationIndex":34,"sessionIndex":3,"actions":10,"durationMs":58.30000000000291,"phases":{"public_policy":6.599999999991269,"candidate_hook":0,"game_action":51.70000000001164}}
+      ],
+      "B": [
+        {"series":"B1","invocationIndex":11,"sessionIndex":0,"actions":10,"durationMs":67.19999999999709,"phases":{"public_policy":6.80000000000291,"candidate_hook":5.099999999991269,"game_action":55.30000000000291}},
+        {"series":"B1","invocationIndex":12,"sessionIndex":1,"actions":10,"durationMs":63.19999999999709,"phases":{"public_policy":6.80000000000291,"candidate_hook":3.1000000000058208,"game_action":53.19999999998254}},
+        {"series":"B1","invocationIndex":13,"sessionIndex":2,"actions":10,"durationMs":62.59999999999127,"phases":{"public_policy":6.7999999999883585,"candidate_hook":2.7000000000116415,"game_action":52.99999999998545}},
+        {"series":"B1","invocationIndex":14,"sessionIndex":3,"actions":10,"durationMs":64.09999999999127,"phases":{"public_policy":6.799999999959255,"candidate_hook":3.5000000000436557,"game_action":53.59999999999127}},
+        {"series":"B2","invocationIndex":21,"sessionIndex":0,"actions":10,"durationMs":62.5,"phases":{"public_policy":7.100000000005821,"candidate_hook":2.099999999976717,"game_action":53.20000000001164}},
+        {"series":"B2","invocationIndex":22,"sessionIndex":1,"actions":10,"durationMs":64.80000000000291,"phases":{"public_policy":6.800000000032014,"candidate_hook":2.3999999999650754,"game_action":55.60000000000582}},
+        {"series":"B2","invocationIndex":23,"sessionIndex":2,"actions":10,"durationMs":61.69999999999709,"phases":{"public_policy":6.800000000032014,"candidate_hook":2.699999999967986,"game_action":52.19999999999709}},
+        {"series":"B2","invocationIndex":24,"sessionIndex":3,"actions":10,"durationMs":61.80000000000291,"phases":{"public_policy":6.399999999994179,"candidate_hook":2.400000000023283,"game_action":52.89999999999418}}
+      ]
+    },
+    "SMLP": {
+      "A": [
+        {"series":"A1","invocationIndex":6,"sessionIndex":0,"actions":15,"durationMs":126,"phases":{"public_policy":15.099999999962165,"candidate_hook":0,"game_action":110.90000000003783}},
+        {"series":"A1","invocationIndex":7,"sessionIndex":1,"actions":15,"durationMs":124.5,"phases":{"public_policy":14.999999999985448,"candidate_hook":0,"game_action":109.50000000001455}},
+        {"series":"A1","invocationIndex":8,"sessionIndex":2,"actions":15,"durationMs":127,"phases":{"public_policy":15.300000000032014,"candidate_hook":0,"game_action":111.69999999996799}},
+        {"series":"A1","invocationIndex":9,"sessionIndex":3,"actions":15,"durationMs":120.19999999999709,"phases":{"public_policy":14.899999999979627,"candidate_hook":0,"game_action":105.20000000001164}},
+        {"series":"A2","invocationIndex":36,"sessionIndex":0,"actions":15,"durationMs":123.69999999999709,"phases":{"public_policy":15.19999999999709,"candidate_hook":0,"game_action":108.39999999999418}},
+        {"series":"A2","invocationIndex":37,"sessionIndex":1,"actions":15,"durationMs":118.60000000000582,"phases":{"public_policy":14.199999999982538,"candidate_hook":0,"game_action":104.20000000001164}},
+        {"series":"A2","invocationIndex":38,"sessionIndex":2,"actions":15,"durationMs":119,"phases":{"public_policy":14.60000000000582,"candidate_hook":0,"game_action":104.29999999998836}},
+        {"series":"A2","invocationIndex":39,"sessionIndex":3,"actions":15,"durationMs":118.69999999999709,"phases":{"public_policy":14.200000000026193,"candidate_hook":0,"game_action":104.39999999996508}}
+      ],
+      "B": [
+        {"series":"B1","invocationIndex":16,"sessionIndex":0,"actions":15,"durationMs":143.5,"phases":{"public_policy":14.899999999965075,"candidate_hook":7.1000000000494765,"game_action":121.49999999998545}},
+        {"series":"B1","invocationIndex":17,"sessionIndex":1,"actions":15,"durationMs":824.8000000000029,"phases":{"public_policy":14.69999999999709,"candidate_hook":5.2000000000116415,"game_action":804.8000000000029}},
+        {"series":"B1","invocationIndex":18,"sessionIndex":2,"actions":15,"durationMs":123.5,"phases":{"public_policy":14.80000000000291,"candidate_hook":4.600000000034925,"game_action":103.89999999996508}},
+        {"series":"B1","invocationIndex":19,"sessionIndex":3,"actions":15,"durationMs":129.10000000000582,"phases":{"public_policy":15.69999999999709,"candidate_hook":4.2999999999738066,"game_action":109.10000000003492}},
+        {"series":"B2","invocationIndex":26,"sessionIndex":0,"actions":15,"durationMs":122.90000000000873,"phases":{"public_policy":14.5,"candidate_hook":4.7000000000116415,"game_action":103.60000000000582}},
+        {"series":"B2","invocationIndex":27,"sessionIndex":1,"actions":15,"durationMs":126.69999999999709,"phases":{"public_policy":14.999999999985448,"candidate_hook":4.69999999999709,"game_action":107.00000000001455}},
+        {"series":"B2","invocationIndex":28,"sessionIndex":2,"actions":15,"durationMs":126.39999999999418,"phases":{"public_policy":14.699999999982538,"candidate_hook":6.000000000014552,"game_action":105.59999999999127}},
+        {"series":"B2","invocationIndex":29,"sessionIndex":3,"actions":15,"durationMs":124.80000000000291,"phases":{"public_policy":14.700000000026193,"candidate_hook":4.599999999918509,"game_action":105.40000000005239}}
+      ]
+    }
+  },
+  "sampleMetadataInvariant": {
+    "corpusRef": "native-joint-channel-action6-corpus-v1",
+    "seed": 0,
+    "startLevel": 1,
+    "transport": "BrowserGameRuntime -> game-worker.ts -> Pyodide -> game_bridge.py -> custom-games.zip",
+    "allSessionsCompletedRequestedActions": true,
+    "fullActionSequencesAndWarmups": "preserved in artifact 14009079375"
+  }
+}
