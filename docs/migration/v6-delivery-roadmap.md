@@ -103,7 +103,8 @@ Current targeted evidence:
 | public observation delta + Region evidence | 12/12 | passed |
 | generic bounded live-campaign helper | 7/7 | passed |
 | ABBA cost protocol/orchestrator | 8/8 | passed |
-| **Total targeted evidence** | **99/99** | **passed** |
+| explicit native session adapter | 9/9 | passed |
+| **Total targeted evidence** | **108/108** | **passed** |
 
 Important semantic limits:
 
@@ -116,7 +117,9 @@ Important semantic limits:
 - the generic campaign helper is not claimed to reproduce the historical
   STCK/SMLP campaign corpus;
 - the cost harness reconstructs the ABBA protocol and arithmetic, not the lost
-  historical CLI/checkouts/native runner.
+  historical CLI/checkouts/native runner;
+- `scripts/native-loop-session-adapter.mjs` dispatches only to four explicit
+  A/B × STCK/SMLP runners and owns neither timing nor corpus.
 
 Current Lot 9B status:
 
@@ -172,7 +175,7 @@ Still required:
 
 1. durable, justified producer/binder for Region `methodRef`;
 2. decision port connecting public observation/perception to owner contexts;
-3. native STCK/SMLP `runSession` implementation and durable corpus/fixtures;
+3. four explicit native runners A/STCK, A/SMLP, B/STCK and B/SMLP with durable corpus/fixtures and a qualified timing scope;
 4. official measurement execution under the recovered ABBA protocol;
 5. independent result review and preservation of all measured samples;
 6. explicit reconstruction registry / entry-point progress before making any
@@ -259,8 +262,9 @@ following are satisfied:
 | worker transport boundary | reconstructed and qualified | connect justified decision port |
 | public pixel delta | reconstructed and qualified | preserve no-method-inference rule |
 | generic live campaign helper | reconstructed and qualified | obtain durable STCK/SMLP ports/fixtures |
-| ABBA cost orchestrator | reconstructed and qualified | provide real native `runSession` |
-| **native STCK/SMLP runner** | **open** | **next priority** |
+| ABBA cost orchestrator | reconstructed and qualified | explicit native adapter available |
+| native session adapter | reconstructed and qualified | provide four real A/B × STCK/SMLP runners |
+| **native STCK/SMLP runners** | **open** | **next priority** |
 | official Lot 9B cost | open | execute after runner restoration |
 | current reconstruction registry | open | rebuild before count claims |
 | 9C `joint_channels` | open | after shared infrastructure stabilizes |
@@ -268,7 +272,7 @@ following are satisfied:
 
 ## 10. Next step
 
-**Recover or reconstruct the native STCK/SMLP session runner from durable
+**Recover or reconstruct the four explicit native STCK/SMLP runners from durable
 evidence.**
 
 If the original corpus or runner identity cannot be established, create a new

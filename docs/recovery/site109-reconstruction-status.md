@@ -49,17 +49,18 @@ Branches intégrées/préparées :
 - ce caller ne départage jamais plusieurs propositions : 0 -> none, 1 -> selected, >1 -> ambiguous ;
 - l'adaptateur `src/logos-engine/v6-region-caller-adapter.ts` relie Region au caller sans modifier le coeur Region ;
 - caller neutre + intégration Region passent **12/12 tests** ;
-- total unique ciblé observé pour noyau V6 + Region + owner + caller + worker + delta public + campagne générique + protocole coût : **99/99 tests réussis** ;
+- total unique ciblé observé pour noyau V6 + Region + owner + caller + worker + delta public + campagne générique + protocole coût : **108/108 tests réussis** ;
 - le dispatch produit/UI reste distinct du caller agent ;
 - le transport worker public est reconstruit dans `src/runtime/v6-agent-worker-core.ts` + `src/runtime/v6-agent-worker.ts` et passe **14/14 tests** ; son port par défaut reste `reconstruction-pending-perception` et ne produit aucune action inventée ;
 - la couche `observation publique -> delta visible` est reconstruite dans `src/logos-engine/v6-public-observation-delta.ts` et `src/logos-engine/v6-region-public-evidence.ts` ; elle passe **12/12 tests** et ne déduit jamais de `methodRef` à partir de la ressemblance visuelle ;
 - le helper de campagne générique et borné est reconstruit dans `tests/helpers/v6-live-game-campaign.ts` et passe **7/7 tests** ; il conserve ACTION6, borne les pas, valide session/séquence et propage les erreurs worker sans dispatch caché ;
 - le protocole ABBA de coût est reconstruit dans `scripts/measure-native-loop-costs.mjs` et passe **8/8 tests** : A1/B1/B2/A2, 8 warmups, 32 sessions mesurées, 24 + 400 actions, seuil global strict <10 % par jeu, phases >10 % conservées mais non bloquantes, aucun retry caché ;
-- la production justifiée du `methodRef`, le branchement du worker vers les contextes owners et le runner/corpus natif historique STCK/SMLP restent absents ; aucune mesure officielle de coût n'a encore été exécutée ;
+- l'adaptateur `scripts/native-loop-session-adapter.mjs` est reconstruit et passe **9/9 tests** ; il exige explicitement A/STCK, A/SMLP, B/STCK et B/SMLP, sans chronométrage, corpus ou fallback implicite ;
+- la production justifiée du `methodRef`, le branchement du worker vers les contextes owners et les quatre runners/corpus natifs STCK/SMLP restent absents ; aucune mesure officielle de coût n'a encore été exécutée ;
 - aucun compteur historique 70/76 ou candidat 71/76 n'est promu au statut de la reconstruction actuelle.
 
 Statut Lot 9 :
-**noyau V6, coeur Region, owner, caller neutre, transport worker, delta public, helper de campagne générique et protocole ABBA fonctionnellement qualifiés dans leurs périmètres ; runner natif STCK/SMLP et performance officielle à confirmer.**
+**noyau V6, coeur Region, owner, caller neutre, transport worker, delta public, helper de campagne, protocole ABBA et adaptateur runSession fonctionnellement qualifiés dans leurs périmètres ; quatre runners natifs STCK/SMLP et performance officielle à confirmer.**
 
 ## Branches de récupération conservées
 
