@@ -92,6 +92,9 @@ function identityMethodInput(index, descriptor) {
  * `methodRefInput: 'identity'` is reserved for producers whose identity depends
  * only on action/session coordinates. It avoids cloning two complete public
  * frames and the complete delta merely to return that external identity.
+ *
+ * The hook consumes runner inputs synchronously as borrowed read-only public
+ * snapshots. It never mutates or retains the action, descriptor, or frame arrays.
  */
 export function createRegionInterventionCandidateHook({
   methodRefFor,
@@ -123,6 +126,7 @@ export function createRegionInterventionCandidateHook({
 
   return {
     id: 'region_intervention',
+    inputMode: 'borrowed-readonly',
     owner,
     stats,
     beforeAction({ action }) {
