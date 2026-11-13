@@ -283,7 +283,11 @@ app.innerHTML = `
             </div>
           </div>
           <div id="sic-strategies" role="tabpanel" aria-labelledby="sic-strategies-tab" tabindex="0" hidden>
-            <section class="sic-card"><h4>Ways to solve the situation</h4><div data-sic-strategy-body></div></section>
+            <section class="sic-card">
+              <h4>Ways to solve the situation</h4>
+              <div data-sic-strategy-editor></div>
+              <div data-sic-strategy-body></div>
+            </section>
           </div>
           <div id="sic-objectives" role="tabpanel" aria-labelledby="sic-objectives-tab" tabindex="0" hidden>
             <section class="sic-card">

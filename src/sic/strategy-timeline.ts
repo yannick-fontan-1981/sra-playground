@@ -1,7 +1,14 @@
 import rules from './strategy-rules.json' with { type: 'json' };
 import type { DirectionalReturn } from './directional-return.ts';
 
-type StrategyFact = 'previousPredictionFailed' | 'differentPlan' | 'multipleSteps' | 'explicitPrediction' | 'publishedQuestion';
+export const strategyFacts = {
+  previousPredictionFailed: 'Previous return contradicted a prediction',
+  differentPlan: 'A different plan was selected',
+  multipleSteps: 'The plan has several steps',
+  explicitPrediction: 'The first step has a prediction',
+  publishedQuestion: 'The engine published a question',
+} as const;
+type StrategyFact = keyof typeof strategyFacts;
 
 export interface StrategyRule {
   readonly id: string;
@@ -12,13 +19,17 @@ export interface StrategyRule {
   readonly whenAny?: readonly string[];
 }
 
-/** A read-only rule catalog. Unknown predicates cannot activate a configuration. */
-export function matchStrategy(facts: ReadonlySet<StrategyFact>, configurations: readonly StrategyRule[] = rules): StrategyRule | null {
+export const defaultStrategyRules: readonly StrategyRule[] = rules;
+
+export function matchesStrategyRule(facts: ReadonlySet<StrategyFact>, rule: StrategyRule): boolean {
   const matches = (key: string) => facts.has(key as StrategyFact);
-  return configurations.find(rule => {
-    const all = rule.when ?? [], any = rule.whenAny ?? [];
-    return (all.length > 0 || any.length > 0) && all.every(matches) && (!any.length || any.some(matches));
-  }) ?? null;
+  const all = rule.when ?? [], any = rule.whenAny ?? [];
+  return (all.length > 0 || any.length > 0) && all.every(matches) && (!any.length || any.some(matches));
+}
+
+/** Earlier configurations take priority when several conditions match. */
+export function matchStrategy(facts: ReadonlySet<StrategyFact>, configurations: readonly StrategyRule[] = defaultStrategyRules): StrategyRule | null {
+  return configurations.find(rule => matchesStrategyRule(facts, rule)) ?? null;
 }
 
 interface Episode {
@@ -27,6 +38,7 @@ interface Episode {
   readonly previous: DirectionalReturn | null;
   readonly next: DirectionalReturn | null;
   readonly rule: StrategyRule | null;
+  readonly facts: ReadonlySet<StrategyFact>;
   readonly status: 'contradicted' | 'advanced' | 'replaced' | 'confirmed' | 'unverified';
 }
 
@@ -37,7 +49,7 @@ const replaces = (a: DirectionalReturn | undefined, b: DirectionalReturn | undef
   && plan(b) !== null && plan(a) !== plan(b);
 
 /** Group only observed actions. An unanswered check or a new plan alone is no contradiction. */
-export function strategyTimeline(returns: readonly DirectionalReturn[]): Episode[] {
+export function strategyTimeline(returns: readonly DirectionalReturn[], configurations = defaultStrategyRules): Episode[] {
   const groups: { start: number; end: number }[] = [];
   for (const [i, step] of returns.entries()) {
     if (!step.decision) continue;
@@ -60,6 +72,6 @@ export function strategyTimeline(returns: readonly DirectionalReturn[]): Episode
     const status = last.nativeCheck?.matched === false ? 'contradicted' : last.toLevel > last.fromLevel ? 'advanced'
       : next && last.decision!.remainingSteps > 1 && replaces(last, next) ? 'replaced'
         : last.nativeCheck?.matched === true ? 'confirmed' : 'unverified';
-    return { first, last, previous, next, rule: matchStrategy(facts), status };
+    return { first, last, previous, next, facts, rule: matchStrategy(facts, configurations), status };
   });
 }

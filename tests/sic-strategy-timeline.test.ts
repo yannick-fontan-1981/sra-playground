@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import type { DirectionalReturn } from '../src/sic/directional-return.ts';
-import { matchStrategy, strategyTimeline } from '../src/sic/strategy-timeline.ts';
+import { defaultStrategyRules, matchStrategy, matchesStrategyRule, strategyTimeline } from '../src/sic/strategy-timeline.ts';
 
 function step(sequence: number, planRevision: number, stepIndex: number, matched: boolean | null, action = 'Right'): DirectionalReturn {
   return { sequence, sessionId: 'public', fromLevel: 1, toLevel: 1, command: 4, changes: null, translation: null, stationary: null,
@@ -31,4 +31,21 @@ test('a custom configuration matches its own predicates without game or action i
   assert.equal(matchStrategy(new Set(['differentPlan', 'publishedQuestion']), [rule]), rule);
   assert.equal(matchStrategy(new Set(['differentPlan']), [rule]), null);
   assert.equal(matchStrategy(new Set(['differentPlan']), [{ ...rule, whenAny: ['unknown'] }]), null);
+});
+
+test('edited conditions reclassify past episodes without changing their native evidence', () => {
+  const first = step(1, 1, 0, false), next = step(2, 2, 0, true, 'Up');
+  const history = [first, next];
+  const rules = defaultStrategyRules.map(rule => rule.id === 'replan'
+    ? { ...rule, need: 'Check the next step', when: ['explicitPrediction'] } : rule);
+  const original = strategyTimeline(history);
+  const edited = strategyTimeline(history, rules);
+  assert.equal(original[0]?.rule?.id, 'check-plan');
+  assert.equal(edited[0]?.rule?.id, 'replan');
+  assert.equal(edited[0]?.rule?.need, 'Check the next step');
+  assert.equal(edited[0]?.last, first);
+  assert.equal(edited[0]?.next, next);
+  assert.equal(edited[0]?.status, 'contradicted');
+  assert.equal(matchesStrategyRule(edited[0]!.facts, defaultStrategyRules[1]!), true);
+  assert.equal(matchStrategy(edited[0]!.facts, rules)?.id, 'replan');
 });

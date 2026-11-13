@@ -12,6 +12,7 @@ import { captureDecisionSprites, type NativeResolution } from './native-resoluti
 import { compareRecoveryRoute, firstRecovery, isLevelCompletion, recoveryContinuation, type PursuedObjective } from './recovery.ts';
 import { explainDecision, orientationAfter, strategyEpisodes, strategyLinks, strategyOutcome, type Decision, type StrategyLink } from './decision-configurations.ts';
 import { strategyTimeline } from './strategy-timeline.ts';
+import { StrategyEditor } from './strategy-editor.ts';
 import compositionOperations from './composition-operations.json';
 import type { GameObservation } from '../runtime/browser-games.ts';
 import { compareAboveColors, contrastClickContexts, describeClickContext, type ClickEffectCount } from './click-evidence.ts';
@@ -860,6 +861,8 @@ function renderBoardAndDirection(panel: HTMLElement, board: NativeRows | null, p
   }));
 }
 
+const strategyEditors = new WeakMap<HTMLElement, StrategyEditor>();
+
 function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null, board: GameObservation | null,
   mode: 'manual' | 'agent', returns: readonly DirectionalReturn[], groups: ReturnType<typeof summarizeDirections>,
   palette: readonly string[], objectives: readonly PursuedObjective[]): void {
@@ -882,7 +885,14 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
       : view?.commands.length ? `Available to explore: ${view.commands.map(id => commands[id]).join(', ')}.` : 'No available command observed.',
   ]);
   const strategies = panel.querySelector('[data-sic-strategy-body]')!;
-  const timeline = strategyTimeline(returns);
+  let editor = strategyEditors.get(panel);
+  if (!editor) {
+    editor = new StrategyEditor(panel.querySelector<HTMLElement>('[data-sic-strategy-editor]')!);
+    strategyEditors.set(panel, editor);
+  }
+  const timeline = strategyTimeline(returns, editor.activeRules);
+  editor.update(timeline, (item, caption) => strategyEvidenceFrames(item, palette, caption),
+    () => renderDiscoveryPerspectives(panel, view, board, mode, returns, groups, palette, objectives));
   renderGenericTimeline(panel, strategies, timeline, board?.level, palette, expandedMethods);
   const operation = planSource?.operation;
   const catalog = document.createElement('details');
@@ -1156,7 +1166,8 @@ function renderGenericTimeline(panel: HTMLElement, container: Element, timeline:
   const previousLevel = timeline.filter(item => item.first.fromLevel !== level).at(-1)?.first.fromLevel;
   const visible = timeline.filter(item => item.first.fromLevel === level || item.first.fromLevel === previousLevel);
   const recent = visible.slice(-12);
-  const highlights = visible.filter(item => item.status === 'contradicted' || item.rule?.id === 'replan').slice(-6);
+  const followsContradiction = (item: typeof visible[number]) => item.facts.has('previousPredictionFailed') && item.facts.has('differentPlan');
+  const highlights = visible.filter(item => item.status === 'contradicted' || followsContradiction(item)).slice(-6);
   const selected = visible.filter(item => recent.includes(item) || highlights.includes(item));
   const section = document.createElement('section');
   section.className = 'sic-strategy-configurations';
@@ -1217,7 +1228,7 @@ function renderGenericTimeline(panel: HTMLElement, container: Element, timeline:
       term.textContent = name; value.textContent = description; facts.append(term, value);
     }
     details.append(facts);
-    const source = status === 'contradicted' || status === 'replaced' ? last : rule?.id === 'replan' ? previous : last;
+    const source = status === 'contradicted' || status === 'replaced' ? last : followsContradiction(episode) ? previous : last;
     const addSprites = () => {
       if (!details.open || details.querySelector('[data-return-sprites]') || !source) return;
       const samples = document.createElement('div');
