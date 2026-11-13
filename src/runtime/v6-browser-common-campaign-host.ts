@@ -26,6 +26,7 @@ import type { AgentObservation } from './contracts.ts';
 import type { GameObservation } from './browser-games.ts';
 import { ObservedAddressedMaterialRuntime } from './observed-addressed-material-runtime.ts';
 import { BrowserAgentObservationStream } from './v6-browser-agent-observation.ts';
+import { PUBLIC_ADDRESSED_FIELD_RETURN_DEPENDENCIES } from './v6-public-addressed-field-learning.ts';
 import {
   completePublicCampaignEntities,
   measurePublicCampaignObservation,
@@ -157,12 +158,11 @@ export interface BrowserFieldStockCampaignTransportOptions {
 /**
  * Translate the public browser observation stream into FieldStock contexts.
  *
- * The transport does not create an initial prior. With an empty runtime it is a
- * neutral owner and returns no proposal. If a retained prior is explicitly
- * supplied, connected components are materialized only for revalidation. A
- * physical return is first acquired by the selected campaign owner, then this
- * transport observes the same public return so a level boundary can retain and
- * revalidate FieldStock before the next decision.
+ * With an empty runtime this transport remains a neutral owner and returns no
+ * proposal. It may, however, observe an ACTION6 return already authorized for
+ * another explicit owner and acquire a strictly supported local addressed model.
+ * It never creates that action or its coordinates. Retained priors still require
+ * fresh public revalidation before FieldStock can propose OP18.
  */
 export class BrowserFieldStockCampaignTransport implements BrowserCampaignOwnerTransport {
   readonly ownerId = FIELD_STOCK_CALLER_OWNER_ID;
@@ -173,6 +173,7 @@ export class BrowserFieldStockCampaignTransport implements BrowserCampaignOwnerT
   #current: PublicCampaignObservation | null = null;
   #lastBoundaryStatus: ReturnType<ObservedAddressedMaterialRuntime['boundary']> | null = null;
   #lastRevalidationStatus: ReturnType<ObservedAddressedMaterialRuntime['revalidate']> | null = null;
+  #lastAddressedLearningStatus: ReturnType<ObservedAddressedMaterialRuntime['observeAddressedReturn']> | null = null;
 
   constructor(options: BrowserFieldStockCampaignTransportOptions = {}) {
     this.runtime = options.runtime ?? new ObservedAddressedMaterialRuntime();
@@ -209,6 +210,7 @@ export class BrowserFieldStockCampaignTransport implements BrowserCampaignOwnerT
     _receipt: CampaignReturnReceipt,
   ): void {
     this.#acceptSession(input.sessionId);
+    this.#observeAddressedReturn(input);
     this.#consume(input.afterAgentObservation);
   }
 
@@ -218,6 +220,10 @@ export class BrowserFieldStockCampaignTransport implements BrowserCampaignOwnerT
 
   get lastRevalidationStatus(): ReturnType<ObservedAddressedMaterialRuntime['revalidate']> | null {
     return this.#lastRevalidationStatus;
+  }
+
+  get lastAddressedLearningStatus(): ReturnType<ObservedAddressedMaterialRuntime['observeAddressedReturn']> | null {
+    return this.#lastAddressedLearningStatus;
   }
 
   get currentPublicObservation(): PublicCampaignObservation | null {
@@ -233,6 +239,41 @@ export class BrowserFieldStockCampaignTransport implements BrowserCampaignOwnerT
     if (this.#sessionId !== sessionId) {
       throw new Error('browser FieldStock transport cannot be reused across sessions');
     }
+  }
+
+  #observeAddressedReturn(input: BrowserCampaignReturnPair): void {
+    const action = input.preparation.action;
+    const sameScope = input.beforeAgentObservation.level === input.afterAgentObservation.level
+      && input.beforeAgentObservation.levelsCompleted === input.afterAgentObservation.levelsCompleted
+      && input.beforeAgentObservation.state === input.afterAgentObservation.state;
+    const status = this.runtime.status();
+    if (
+      action.id !== 6
+      || !sameScope
+      || (status !== 'empty' && status !== 'active_local_model')
+    ) {
+      this.#lastAddressedLearningStatus = null;
+      return;
+    }
+
+    const before = completePublicCampaignEntities(
+      measurePublicCampaignObservation(input.beforeAgentObservation),
+    );
+    const after = completePublicCampaignEntities(
+      measurePublicCampaignObservation(input.afterAgentObservation),
+    );
+    this.#lastAddressedLearningStatus = this.runtime.observeAddressedReturn(
+      before.observation,
+      after.observation,
+      {
+        action_ref: 'ACTION6',
+        data: { x: action.data.x, y: action.data.y },
+      },
+      before.rows,
+      after.rows,
+      input.afterGameObservation.frames,
+      PUBLIC_ADDRESSED_FIELD_RETURN_DEPENDENCIES,
+    );
   }
 
   #consume(source: AgentObservation): PublicCampaignObservation {
