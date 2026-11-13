@@ -12,10 +12,7 @@
     "warmup_actions": 24,
     "warmup_sessions": 8
   },
-  "v6_core": {
-    "present": true,
-    "missing": []
-  },
+  "v6_core": { "present": true, "missing": [] },
   "region_reconstructed": true,
   "region_component_path": "src/logos-engine/v6-region-intervention.ts",
   "region_owner_path": "src/logos-engine/v6-region-intervention-owner.ts",
@@ -23,23 +20,21 @@
   "region_caller_adapter_path": "src/logos-engine/v6-region-caller-adapter.ts",
   "worker_core_path": "src/runtime/v6-agent-worker-core.ts",
   "worker_shell_path": "src/runtime/v6-agent-worker.ts",
+  "public_delta_path": "src/logos-engine/v6-public-observation-delta.ts",
+  "region_public_evidence_path": "src/logos-engine/v6-region-public-evidence.ts",
   "worker_transport_qualified": true,
   "worker_default_decision_port": "reconstruction-pending-perception",
   "worker_default_produces_actions": false,
-  "region_contract_path": "docs/recovery/lot9b-region-reconstruction-contract.md",
+  "public_observation_delta_qualified": true,
+  "public_observation_delta_infers_method_ref": false,
   "functional_test_evidence": {
     "v6_core": { "tests": 27, "passed": 27, "failed": 0 },
     "region_component_and_owner": { "tests": 19, "passed": 19, "failed": 0 },
     "neutral_caller_and_region_integration": { "tests": 12, "passed": 12, "failed": 0 },
-    "worker_core_and_shell": {
-      "tests": 14,
-      "passed": 14,
-      "failed": 0,
-      "first_attempt": "13/14; shell test wait was too short, runtime unchanged",
-      "second_attempt": "14/14 after test-only asynchronous wait correction"
-    },
-    "total_unique_targeted_tests": 72,
-    "total_unique_targeted_passed": 72,
+    "worker_core_and_shell": { "tests": 14, "passed": 14, "failed": 0 },
+    "public_observation_delta_and_region_evidence": { "tests": 12, "passed": 12, "failed": 0 },
+    "total_unique_targeted_tests": 84,
+    "total_unique_targeted_passed": 84,
     "total_unique_targeted_failed": 0
   },
   "official_069_prerequisites": {
@@ -49,12 +44,13 @@
       "docs/migration/v6-delivery-roadmap.md"
     ],
     "missing_capabilities": [
-      "public-observation to owner-context perception",
+      "justified methodRef producer/binder for public Region evidence",
+      "worker decision port that connects public perception to owner contexts",
       "live campaign reconstruction",
       "official performance harness"
     ]
   },
   "ready_for_official_069_benchmark": false,
-  "status": "fonctionnellement qualifié pour noyau V6, Region, owner, caller neutre et transport worker; perception, campagne live et performance officielle à confirmer",
-  "note": "The reconstructed worker validates protocol/session/sequence/budget/action semantics but intentionally takes no default action until perception is justified."
+  "status": "fonctionnellement qualifié pour noyau V6, Region, owner, caller neutre, transport worker et delta public; liaison methodRef, campagne live et performance officielle à confirmer",
+  "note": "Public pixels are converted only to observed change regions and deterministic effect signatures. Method identity remains explicit and is never inferred from visual similarity."
 }
