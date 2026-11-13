@@ -181,8 +181,20 @@ Qualification avant la dernière réconciliation canonique :
 - `npm run build` : réussi ;
 - échecs, annulations, tests ignorés et TODO : `0`.
 
-Une qualification finale est exécutée après la réconciliation avec
-`67602172665b79e2b282b37b63f80dc24feff3b0` et la consolidation documentaire.
+Qualification finale après réconciliation canonique et consolidation
+documentaire :
+
+- run GitHub Actions : `43352433446` ;
+- job : `131646460291` ;
+- commit qualifié : `2242fa89f1758898c1e228c4b28bbe67f3d8625d` ;
+- canonique réconcilié : `67602172665b79e2b282b37b63f80dc24feff3b0` ;
+- Node : `22.18.0` ;
+- `npm ci` : réussi ;
+- `npm run typecheck` : réussi ;
+- régression complète : **325/325 tests réussis** ;
+- `npm run build` : réussi ;
+- génération : 100 jeux, 636 aperçus de niveaux et quatre atlas natifs ;
+- échecs, annulations, tests ignorés et TODO : `0`.
 
 Deux vulnérabilités de dépendances de sévérité haute déjà présentes restent
 signalées par `npm ci`. Cette tranche ne les introduit ni ne les corrige.
