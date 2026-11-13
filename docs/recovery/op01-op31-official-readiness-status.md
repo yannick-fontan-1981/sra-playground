@@ -194,3 +194,19 @@ Le contrat navigateur accepte maintenant les deux états du cycle canonique, `re
 - aucune publication Site.
 
 Preuve : `docs/recovery/op01-op31-c7-config-reconciliation-20261113.md`.
+
+## Registre courant V6 reconstruit — 13 novembre 2026
+
+Le garde séparé qui signalait l'absence totale de
+`docs/migration/v6-entry-point-progress.json` est désormais fermé pour l'état
+**courant reconstruit**.
+
+Le registre compte OP01–OP31 comme une seule frontière agrégée et conserve leurs
+dispositions détaillées dans le suivi OP. Il ne transforme donc pas les 31
+opérations en 31 anciens points d'entrée V6.
+
+La qualification C7 Region reste inchangée. Le mapping individuel vers les 76
+slots historiques et l'identité exacte de Site 109 restent non résolus et
+continuent de bloquer toute revendication de parité historique.
+
+Qualification d'intégration : run GitHub Actions `43428714453`.

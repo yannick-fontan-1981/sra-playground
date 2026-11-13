@@ -325,3 +325,24 @@ Le contrat navigateur accepte maintenant les deux états du cycle canonique, `re
 - aucune publication Site.
 
 Preuve : `docs/recovery/op01-op31-c7-config-reconciliation-20261113.md`.
+
+## Registre courant V6 reconstruit — 13 novembre 2026
+
+La reconstruction canonique possède désormais un registre machine vérifiable de
+**50 frontières de capacité courantes**. Le compteur est calculé depuis les
+entrées et leurs preuves, sans appliquer le dénominateur historique 76.
+
+Le registre couvre aussi le noyau de continuité intégré : campagne et
+participants checkpointés atomiquement, `needId` en attente, déduplication des
+retours et état exact FieldStock. Son activation dans le cycle de vie du host et
+du contrôleur navigateur reste ouverte.
+
+Preuves :
+
+- `docs/migration/v6-entry-point-progress.json` ;
+- `docs/recovery/v6-current-reconstruction-registry-20261113.md` ;
+- `scripts/verify-v6-current-reconstruction-registry.mjs` ;
+- run d'intégration `43428714453`.
+
+Aucune identité binaire avec Site 109 et aucune parité `50/76` ne sont
+revendiquées. Aucune publication Site n'appartient à cette étape.

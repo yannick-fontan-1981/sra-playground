@@ -503,3 +503,19 @@ Le contrat navigateur accepte maintenant les deux états du cycle canonique, `re
 - aucune publication Site.
 
 Preuve : `docs/recovery/op01-op31-c7-config-reconciliation-20261113.md`.
+
+## Registre courant V6 reconstruit — 13 novembre 2026
+
+Le registre courant de la reconstruction est maintenant durable :
+
+- **50** capacités fonctionnellement qualifiées ;
+- **6** capacités avec preuve de performance ;
+- **0** correspondance historique revendiquée ;
+- OP01–OP31 représentées par une seule entrée agrégée afin d'éviter tout
+  gonflement artificiel du compteur.
+
+Le noyau de continuité ajoute trois frontières courantes : coordinateur de
+checkpoint atomique, codec exact FieldStock/rétention, et participant du runtime
+adressé. Leur raccord au host et au contrôleur reste ouvert.
+
+Run d'intégration : `43428714453`. Aucune publication Site.

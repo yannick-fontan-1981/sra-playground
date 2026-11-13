@@ -381,3 +381,25 @@ to its functional and performance proofs, mark unresolved historical identity
 separately, and only then compute a current count. Do not map the old `70/76` or
 `71/76` claims automatically onto the reconstructed tree. Do not publish Site
 before this registry work and a fresh canonical qualification are complete.
+
+## Registre courant V6 reconstruit — 13 novembre 2026
+
+L'absence du registre courant est fermée par
+`docs/migration/v6-entry-point-progress.json` et son vérificateur fail-closed.
+
+- capacités courantes qualifiées : **50** ;
+- frontières avec preuve de performance : **6** ;
+- portes de preuve non comptées : **6** ;
+- lacunes ouvertes : **9** ;
+- correspondances prouvées avec les slots historiques : **0** ;
+- dénominateur courant : **aucun**.
+
+Ce résultat ne signifie pas `50/76`. La revendication historique Site 109 / native
+0.68 reste séparée, et le SHA
+`d90ce5b64fffa53cca201e2a6a49450fd123f299` reste non résolu.
+
+Le registre inclut le noyau de continuité de session, son checkpoint atomique et
+le codec exact FieldStock. Le raccord du checkpoint au host et au contrôleur
+navigateur reste la prochaine dette fonctionnelle.
+
+Qualification d'intégration : run GitHub Actions `43428714453`.
