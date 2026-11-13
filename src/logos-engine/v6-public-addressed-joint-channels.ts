@@ -5,7 +5,9 @@ import {
 } from '../runtime/contracts.ts';
 import {
   prepareJointChannelActionPayload,
+  sealJointChannelActionPayload,
 } from './v6-joint-channel-action.ts';
+import type { CampaignLogosActionPayload } from './v6-common-campaign-owner.ts';
 import type {
   JointChannel,
   JointChannelAcquisition,
@@ -48,6 +50,15 @@ interface GateMatch {
   orientation: GateOrientation;
   patchSignature: string;
 }
+
+const TRUSTED_CANDIDATE_OBSERVATIONS = new WeakMap<
+  PublicSmlpGateCandidate,
+  AgentObservation
+>();
+const TRUSTED_CANDIDATE_PAYLOADS = new WeakMap<
+  PublicSmlpGateCandidate,
+  CampaignLogosActionPayload
+>();
 
 function observationRef(observation: AgentObservation): string {
   return `public-observation:${observation.sessionId}:${observation.sequence}`;
@@ -166,11 +177,17 @@ function candidateFromMatch(
     match.y,
     match.patchSignature,
   ].join(':');
-  const action: Extract<AgentAction, { id: 6 }> = {
+  const action = {
     id: 6,
-    data: { x: match.x, y: match.y },
-  };
-  return {
+    data: Object.freeze({ x: match.x, y: match.y }),
+  } as Extract<AgentAction, { id: 6 }>;
+  Object.freeze(action);
+  const evidenceRefs = Object.freeze([
+    currentObservationRef,
+    targetRef,
+    `producer:${PUBLIC_SMLP_GATE_PRODUCER_ID}`,
+  ]) as unknown as string[];
+  const candidate = Object.freeze({
     version: 1,
     producerId: PUBLIC_SMLP_GATE_PRODUCER_ID,
     observationRef: currentObservationRef,
@@ -179,12 +196,10 @@ function candidateFromMatch(
     patchSignature: match.patchSignature,
     orientation: match.orientation,
     action,
-    evidenceRefs: [
-      currentObservationRef,
-      targetRef,
-      `producer:${PUBLIC_SMLP_GATE_PRODUCER_ID}`,
-    ],
-  };
+    evidenceRefs,
+  }) as PublicSmlpGateCandidate;
+  TRUSTED_CANDIDATE_OBSERVATIONS.set(candidate, observation);
+  return candidate;
 }
 
 /**
@@ -249,6 +264,9 @@ function verifiedTargetCandidate(
 ): PublicSmlpGateCandidate | undefined {
   const candidate = candidateContext(request);
   if (!candidate) return undefined;
+  if (TRUSTED_CANDIDATE_OBSERVATIONS.get(candidate) === request.observation) {
+    return candidate;
+  }
   const reproduced = producePublicSmlpGateCandidate(request.observation);
   if (!reproduced) return undefined;
   if (
@@ -264,8 +282,29 @@ function verifiedTargetCandidate(
   return candidate;
 }
 
+function contributionPayload(
+  request: JointChannelContributionRequest,
+  candidate: PublicSmlpGateCandidate,
+): CampaignLogosActionPayload | undefined {
+  const trusted = TRUSTED_CANDIDATE_OBSERVATIONS.get(candidate) === request.observation;
+  if (trusted) {
+    const cached = TRUSTED_CANDIDATE_PAYLOADS.get(candidate);
+    if (cached) return cached;
+  }
+  const payload = prepareJointChannelActionPayload(
+    request.observation,
+    candidate.action,
+    candidate.jointRef,
+  );
+  if (!payload || !trusted) return payload;
+  const sealed = sealJointChannelActionPayload(payload);
+  TRUSTED_CANDIDATE_PAYLOADS.set(candidate, sealed);
+  return sealed;
+}
+
 abstract class PublicAddressedJointChannelBase implements JointChannel {
   abstract readonly id: string;
+  readonly acquisitionMode = 'readonly' as const;
 
   abstract contribute(
     request: JointChannelContributionRequest,
@@ -282,8 +321,8 @@ abstract class PublicAddressedJointChannelBase implements JointChannel {
       needId: event.needId,
       proposalRef: event.proposalRef,
       jointRef: event.jointRef,
-      action: structuredClone(event.action),
-      returnPayload: structuredClone(event.returnPayload),
+      action: event.action,
+      returnPayload: event.returnPayload,
     };
   }
 
@@ -292,11 +331,7 @@ abstract class PublicAddressedJointChannelBase implements JointChannel {
     candidate: PublicSmlpGateCandidate,
     contributionRef: string,
   ): JointChannelContribution | undefined {
-    const payload = prepareJointChannelActionPayload(
-      request.observation,
-      candidate.action,
-      candidate.jointRef,
-    );
+    const payload = contributionPayload(request, candidate);
     if (!payload) return undefined;
     return {
       channelId: this.id,
@@ -350,8 +385,8 @@ function contextFromCandidate(
 ): Readonly<Record<string, unknown>> {
   if (!candidate) return {};
   return {
-    [PUBLIC_ACTION_AVAILABILITY_CHANNEL_ID]: structuredClone(candidate),
-    [PUBLIC_VISIBLE_TARGET_CHANNEL_ID]: structuredClone(candidate),
+    [PUBLIC_ACTION_AVAILABILITY_CHANNEL_ID]: candidate,
+    [PUBLIC_VISIBLE_TARGET_CHANNEL_ID]: candidate,
   };
 }
 
