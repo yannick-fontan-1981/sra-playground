@@ -45,6 +45,26 @@ export function findSmlpVisibleGateCenter(observation) {
         const surround = [patch[0][0], patch[0][1], patch[0][2], patch[2][0], patch[2][1], patch[2][2]];
         if (same(surround) && surround[0] !== 5) return { id: 6, x, y };
       }
+
+      const openHorizontalColor = patch[0][1];
+      const openHorizontal = (
+        patch[2][1] === openHorizontalColor
+        && ![2, 3, 4, 5].includes(openHorizontalColor)
+        && patch[1][1] === 3
+        && [patch[0][0], patch[0][2], patch[1][0], patch[1][2], patch[2][0], patch[2][2]]
+          .every(value => value === 2)
+      );
+      if (openHorizontal) return { id: 6, x, y };
+
+      const openVerticalColor = patch[1][0];
+      const openVertical = (
+        patch[1][2] === openVerticalColor
+        && ![2, 3, 4, 5].includes(openVerticalColor)
+        && patch[1][1] === 3
+        && [patch[0][0], patch[0][1], patch[0][2], patch[2][0], patch[2][1], patch[2][2]]
+          .every(value => value === 2)
+      );
+      if (openVertical) return { id: 6, x, y };
     }
   }
   return undefined;
