@@ -40,3 +40,5 @@ jobs:
           src/logos-engine/v6-temporal-observation-state.ts
           src/logos-engine/v6-temporal-decision-receipt.ts
           src/logos-engine/v6-temporal-selection-adapter.ts
+
+# qualification-head: decision-receipt
