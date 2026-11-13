@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "kind": "current-v6-reconstruction-entry-fragment",
+  "category": "region",
+  "entries": [
+    {
+      "id": "RC033",
+      "name": "Region intervention model",
+      "category": "region",
+      "activation": "specialized-runtime",
+      "implementationPaths": [
+        "src/logos-engine/v6-region-intervention.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/v6-region-intervention.test.ts"
+      ],
+      "performanceStatus": "qualified",
+      "qualification": "functional-and-performance",
+      "performanceProofPaths": [
+        "docs/recovery/lot9b-official-abba-performance-qualified.json"
+      ],
+      "limitations": [
+        "Qualified in the reconstructed Region boundary; not claimed as the active physical owner in the browser product."
+      ]
+    },
+    {
+      "id": "RC034",
+      "name": "Region intervention owner",
+      "category": "region",
+      "activation": "specialized-runtime",
+      "implementationPaths": [
+        "src/logos-engine/v6-region-intervention-owner.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/v6-region-intervention-owner.test.ts"
+      ],
+      "performanceStatus": "qualified",
+      "qualification": "functional-and-performance",
+      "performanceProofPaths": [
+        "docs/recovery/lot9b-official-abba-performance-qualified.json"
+      ],
+      "limitations": [
+        "Not registered as a peer owner in the current browser product composition."
+      ]
+    },
+    {
+      "id": "RC035",
+      "name": "Region common-caller adapter",
+      "category": "region",
+      "activation": "specialized-runtime",
+      "implementationPaths": [
+        "src/logos-engine/v6-region-caller-adapter.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/v6-region-caller-integration.test.ts"
+      ],
+      "performanceStatus": "qualified",
+      "qualification": "functional-and-performance",
+      "performanceProofPaths": [
+        "docs/recovery/lot9b-official-abba-performance-qualified.json"
+      ]
+    }
+  ]
+}
