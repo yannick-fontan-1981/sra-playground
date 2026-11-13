@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   reconcile-live-resume-evidence:
@@ -58,3 +58,15 @@ jobs:
             docs/recovery/op01-op31-live-smlp-session-resume-qualified.json
             tests/v6-entry-point-live-resume-evidence.test.ts
           if-no-files-found: warn
+      - name: Materialize generated evidence blobs
+        if: success()
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add docs/migration/op01-op31-progress.md
+          git add docs/migration/v6-entry-point-progress.json
+          git add docs/recovery/op01-op31-live-smlp-session-resume-20261113.md
+          git add docs/recovery/op01-op31-live-smlp-session-resume-qualified.json
+          git add tests/v6-entry-point-live-resume-evidence.test.ts
+          git commit -m "Materialize reconciled live resume evidence"
+          git push origin HEAD:op01-op31-live-resume-evidence-reconcile-20261113
