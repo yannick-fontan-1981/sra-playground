@@ -1,0 +1,134 @@
+{
+  "version": 1,
+  "auditGeneratedAt": "2026-11-13T03:27:29.065703+00:00",
+  "status": "trace-only-contract-reconstruction-required",
+  "historicalImplementationAdmitted": false,
+  "historicalContractAdmitted": false,
+  "counts": {
+    "productSourceHits": 0,
+    "testHits": 14,
+    "docsOrMetadataHits": 851,
+    "commitMessageHits": 8,
+    "historyPatchHits": 19
+  },
+  "conclusion": "Seules des traces de tests, documentation, scripts, métadonnées ou historique sont retrouvées. Elles ne prouvent pas une implémentation produit récupérable.",
+  "nextStep": "Extraire uniquement les obligations comportementales explicitement démontrées par ces traces, puis laisser tous les champs non prouvés à l’état inconnu.",
+  "contractFields": {
+    "channel_identity": {
+      "label": "Identité stable d’un canal",
+      "status": "unproven",
+      "evidence": [],
+      "admittedValue": null
+    },
+    "channel_payload": {
+      "label": "Données portées par un canal",
+      "status": "unproven",
+      "evidence": [],
+      "admittedValue": null
+    },
+    "join_predicate": {
+      "label": "Condition prouvée permettant de joindre deux canaux",
+      "status": "unproven",
+      "evidence": [],
+      "admittedValue": null
+    },
+    "joint_identity": {
+      "label": "Identité de la liaison jointe",
+      "status": "unproven",
+      "evidence": [],
+      "admittedValue": null
+    },
+    "cardinality": {
+      "label": "Nombre de canaux autorisés par liaison",
+      "status": "unproven",
+      "evidence": [],
+      "admittedValue": null
+    },
+    "temporal_scope": {
+      "label": "Portée session/niveau/révision",
+      "status": "unproven",
+      "evidence": [],
+      "admittedValue": null
+    },
+    "creation_rule": {
+      "label": "Règle de création",
+      "status": "unproven",
+      "evidence": [],
+      "admittedValue": null
+    },
+    "removal_rule": {
+      "label": "Règle de retrait",
+      "status": "unproven",
+      "evidence": [],
+      "admittedValue": null
+    },
+    "contradiction_rule": {
+      "label": "Traitement des contradictions",
+      "status": "unproven",
+      "evidence": [],
+      "admittedValue": null
+    },
+    "proposal_rule": {
+      "label": "Condition de proposition",
+      "status": "unproven",
+      "evidence": [],
+      "admittedValue": null
+    },
+    "selection_rule": {
+      "label": "Interaction avec ambiguïté et caller commun",
+      "status": "unproven",
+      "evidence": [],
+      "admittedValue": null
+    },
+    "return_acquisition": {
+      "label": "Acquisition et déduplication du retour",
+      "status": "unproven",
+      "evidence": [],
+      "admittedValue": null
+    },
+    "decision_consumer": {
+      "label": "Consommateur décisionnel réel",
+      "status": "unproven",
+      "evidence": [],
+      "admittedValue": null
+    },
+    "future_effect": {
+      "label": "Effet sur une décision future",
+      "status": "unproven",
+      "evidence": [],
+      "admittedValue": null
+    },
+    "bounds": {
+      "label": "Bornes mémoire/recherche",
+      "status": "unproven",
+      "evidence": [],
+      "admittedValue": null
+    },
+    "snapshot_restore": {
+      "label": "Snapshot et restauration",
+      "status": "unproven",
+      "evidence": [],
+      "admittedValue": null
+    },
+    "public_producer": {
+      "label": "Producteur fondé sur données publiques",
+      "status": "unproven",
+      "evidence": [],
+      "admittedValue": null
+    },
+    "performance_corpus": {
+      "label": "Corpus qui exerce réellement le périmètre",
+      "status": "unproven",
+      "evidence": [],
+      "admittedValue": null
+    }
+  },
+  "guardrails": [
+    "No semantics inferred from the name joint_channels.",
+    "No product source admitted by automated matching alone.",
+    "No hidden ranking, priority or channel fusion may be invented.",
+    "Unknown fields remain explicitly unproven.",
+    "Lot 9B contracts and official performance qualification remain frozen unless a regression is demonstrated.",
+    "The 76-entry counter remains unchanged."
+  ]
+}
