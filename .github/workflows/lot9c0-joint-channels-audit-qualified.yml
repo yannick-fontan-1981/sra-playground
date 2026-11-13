@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   audit:
@@ -38,6 +38,23 @@ jobs:
         run: npm run build
       - name: Run complete TypeScript regression suite
         run: node --experimental-transform-types --test tests/*.test.ts
+      - name: Persist generated audit evidence
+        if: github.event_name == 'push'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            docs/recovery/lot9c-joint-channels-audit.md \
+            docs/recovery/lot9c-joint-channels-audit.json \
+            docs/recovery/lot9c-joint-channels-contract-status.md \
+            docs/recovery/lot9c-joint-channels-contract-status.json \
+            docs/recovery/lot9c-joint-channels-evidence-context.md
+          if git diff --cached --quiet; then
+            echo "Audit evidence is already durable."
+          else
+            git commit -m "docs(lot9c0): persist qualified recovery audit [skip ci]"
+            git push
+          fi
       - uses: actions/upload-artifact@v4
         if: always()
         with:
