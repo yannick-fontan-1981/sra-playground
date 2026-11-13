@@ -5,10 +5,10 @@
   "historicalRunnerIdentityRecovered": false,
   "historicalCorpusRecovered": false,
   "sourceRefs": {
-    "commonRoot": "91c8076357fdd8a21f6d13ac774390d58617bd55eca02a7a063143a63719d305",
-    "candidateRoot": "b2413a0db9bbe897815a05e0ee04e490cc16ed7eb538d8fcd94a3d58dea5d146",
-    "reference": "lot9b-region-v1:A:2d7cd98abcb78d33553c7cd7082350d81d12b28e5dc551ac55a136ae2ffcaa05",
-    "candidate": "lot9b-region-v1:B:08181795d82ee38e62d375fb10358d4136096c0b290049a9c3d9ac8d9c9450fa",
+    "commonRoot": "172deb5585686fbd247ce7d99a6f891bd122bf32411ab5d1a659fe6142752d6c",
+    "candidateRoot": "ea30cffbba09d5c05bf1a6133aafbb966c8cb3fe5a128f0ccc6cd9c5def7105d",
+    "reference": "lot9b-region-v1:A:8b795085bfc26379c0736b7e4032fb28b3a78b66c21c63cb18585724c6d37531",
+    "candidate": "lot9b-region-v1:B:cdb33000d61a6ccc1df8b6de417be32e2fd04a669fb1a5972de0e3330d3cfc95",
     "proof": "docs/recovery/native-loop-source-refs.json"
   },
   "transport": {
@@ -90,7 +90,7 @@
       "game": "STCK",
       "gameId": "stck-c0000001",
       "factory": "createAStckNativeRunner",
-      "sourceRef": "lot9b-region-v1:A:2d7cd98abcb78d33553c7cd7082350d81d12b28e5dc551ac55a136ae2ffcaa05",
+      "sourceRef": "lot9b-region-v1:A:8b795085bfc26379c0736b7e4032fb28b3a78b66c21c63cb18585724c6d37531",
       "regionHook": "disabled",
       "seed": 0,
       "startLevel": 1,
@@ -103,7 +103,7 @@
       "game": "SMLP",
       "gameId": "smlp-c3000001",
       "factory": "createASmlpNativeRunner",
-      "sourceRef": "lot9b-region-v1:A:2d7cd98abcb78d33553c7cd7082350d81d12b28e5dc551ac55a136ae2ffcaa05",
+      "sourceRef": "lot9b-region-v1:A:8b795085bfc26379c0736b7e4032fb28b3a78b66c21c63cb18585724c6d37531",
       "regionHook": "disabled",
       "seed": 0,
       "startLevel": 1,
@@ -116,7 +116,7 @@
       "game": "STCK",
       "gameId": "stck-c0000001",
       "factory": "createBStckNativeRunner",
-      "sourceRef": "lot9b-region-v1:B:08181795d82ee38e62d375fb10358d4136096c0b290049a9c3d9ac8d9c9450fa",
+      "sourceRef": "lot9b-region-v1:B:cdb33000d61a6ccc1df8b6de417be32e2fd04a669fb1a5972de0e3330d3cfc95",
       "regionHook": "region_intervention",
       "seed": 0,
       "startLevel": 1,
@@ -129,7 +129,7 @@
       "game": "SMLP",
       "gameId": "smlp-c3000001",
       "factory": "createBSmlpNativeRunner",
-      "sourceRef": "lot9b-region-v1:B:08181795d82ee38e62d375fb10358d4136096c0b290049a9c3d9ac8d9c9450fa",
+      "sourceRef": "lot9b-region-v1:B:cdb33000d61a6ccc1df8b6de417be32e2fd04a669fb1a5972de0e3330d3cfc95",
       "regionHook": "region_intervention",
       "seed": 0,
       "startLevel": 1,
@@ -158,8 +158,8 @@
       "status": "passed"
     },
     "sourceRefRun": {
-      "runId": 43358880041,
-      "headSha": "54fd3547bc1d3ba1f770fc97df57446758b2468f",
+      "runId": 43359430572,
+      "headSha": "9e8f5f3d778f5d45c5e428174d66e2a803872813",
       "sourceRefsComputed": true,
       "manifestVerification": "passed-before-commit"
     }
@@ -167,6 +167,6 @@
   "officialMeasurement": {
     "executed": false,
     "result": null,
-    "reason": "optimized candidate identity verified; strict official ABBA measurement pending"
+    "reason": "borrowed-readonly Region hook identity verified; strict official ABBA measurement pending"
   }
 }

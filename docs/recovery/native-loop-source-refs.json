@@ -1,13 +1,13 @@
 {
   "version": 1,
-  "generatedFromCommit": "54fd3547bc1d3ba1f770fc97df57446758b2468f",
-  "commonRoot": "91c8076357fdd8a21f6d13ac774390d58617bd55eca02a7a063143a63719d305",
-  "candidateRoot": "b2413a0db9bbe897815a05e0ee04e490cc16ed7eb538d8fcd94a3d58dea5d146",
+  "generatedFromCommit": "9e8f5f3d778f5d45c5e428174d66e2a803872813",
+  "commonRoot": "172deb5585686fbd247ce7d99a6f891bd122bf32411ab5d1a659fe6142752d6c",
+  "candidateRoot": "ea30cffbba09d5c05bf1a6133aafbb966c8cb3fe5a128f0ccc6cd9c5def7105d",
   "reference": {
-    "sourceRef": "lot9b-region-v1:A:2d7cd98abcb78d33553c7cd7082350d81d12b28e5dc551ac55a136ae2ffcaa05",
+    "sourceRef": "lot9b-region-v1:A:8b795085bfc26379c0736b7e4032fb28b3a78b66c21c63cb18585724c6d37531",
     "profile": {
       "version": 1,
-      "commonRoot": "91c8076357fdd8a21f6d13ac774390d58617bd55eca02a7a063143a63719d305",
+      "commonRoot": "172deb5585686fbd247ce7d99a6f891bd122bf32411ab5d1a659fe6142752d6c",
       "execution": {
         "corpusRef": "native-region-action6-corpus-v1",
         "seed": 0,
@@ -21,10 +21,10 @@
     }
   },
   "candidate": {
-    "sourceRef": "lot9b-region-v1:B:08181795d82ee38e62d375fb10358d4136096c0b290049a9c3d9ac8d9c9450fa",
+    "sourceRef": "lot9b-region-v1:B:cdb33000d61a6ccc1df8b6de417be32e2fd04a669fb1a5972de0e3330d3cfc95",
     "profile": {
       "version": 1,
-      "commonRoot": "91c8076357fdd8a21f6d13ac774390d58617bd55eca02a7a063143a63719d305",
+      "commonRoot": "172deb5585686fbd247ce7d99a6f891bd122bf32411ab5d1a659fe6142752d6c",
       "execution": {
         "corpusRef": "native-region-action6-corpus-v1",
         "seed": 0,
@@ -35,7 +35,7 @@
       },
       "variant": "B",
       "regionHook": "enabled",
-      "candidateRoot": "b2413a0db9bbe897815a05e0ee04e490cc16ed7eb538d8fcd94a3d58dea5d146"
+      "candidateRoot": "ea30cffbba09d5c05bf1a6133aafbb966c8cb3fe5a128f0ccc6cd9c5def7105d"
     }
   },
   "commonComponents": [
@@ -91,8 +91,8 @@
     },
     {
       "path": "scripts/native-loop-explicit-runners.mjs",
-      "bytes": 4825,
-      "sha256": "690a7e39cf662a5712569e34155a080997bf455af360b8b593a52af20d0420d7"
+      "bytes": 5165,
+      "sha256": "51dca5d0eed1c18ec6966df1d33bfc6dee3c22472f41544cd1a5550043809071"
     },
     {
       "path": "scripts/native-loop-game-bridge-session.mjs",
@@ -101,8 +101,8 @@
     },
     {
       "path": "scripts/native-loop-public-corpus-runner.mjs",
-      "bytes": 5711,
-      "sha256": "26619bbe3357e1527f81d51390e88056a35cb5b7a0aa127865d49cf616472c1c"
+      "bytes": 7082,
+      "sha256": "c0f79a13965966acf83e7c7f806a31f42a41be9f591d3e579fc716af8a5bea2c"
     },
     {
       "path": "scripts/native-loop-region-action6-corpus.mjs",
@@ -163,8 +163,8 @@
   "candidateComponents": [
     {
       "path": "scripts/native-loop-region-candidate-hook.mjs",
-      "bytes": 6482,
-      "sha256": "6f28966523ce3162168a9eeeaa75809960c8fc5899b608e95941251dbabe6fdd"
+      "bytes": 6682,
+      "sha256": "55a70a8e5e0a7871df6485f3f79e705e8f8765a69b268390d4ae68c6025ca37f"
     },
     {
       "path": "src/logos-engine/v6-public-observation-delta.ts",
