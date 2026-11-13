@@ -204,15 +204,15 @@ Proof:
 
 The canonical product owner now preserves STCK ambiguity: exactly one visible
 stack card is required and several cards are never ranked. 9C3 separates that
-strict public decision into two real channels :
+strict public decision into two real channels:
 
 1. `public_stck_action_availability_v1`
    - contributes only current ACTION6 admissibility;
    - contributes no card geometry.
 2. `public_stck_visible_target_v1`
-   - uses the canonical image-only unique-card detector ;
-   - contributes one revision-bound card identity and addressed coordinates ;
-   - returns no contribution for zero or several cards ;
+   - uses the canonical image-only unique-card detector;
+   - contributes one revision-bound card identity and addressed coordinates;
+   - returns no contribution for zero or several cards;
    - never invents a shop target.
 
 The initial real STCK frame contains several cards. An explicit public prelude,
@@ -225,13 +225,13 @@ Real corpus qualification:
 - archive: `public/python/custom-games.zip`;
 - game: STCK `stck-c0000001`;
 - seed: 0;
-- prelude producer: `region-public-action6-probe-v1` ;
-- prelude actions: three `ACTION6(x=4, y=52)` ;
-- unique-card evidence: `public-stck-stack-card:14:48-52` ;
-- joint action: `ACTION6(x=4, y=50)` ;
-- changed public pixels after the joint return: `64` ;
-- removing either producer yields no action ;
-- selected return is acquired by both channels ;
+- prelude producer: `region-public-action6-probe-v1`;
+- prelude actions: three `ACTION6(x=4, y=52)`;
+- unique-card evidence: `public-stck-stack-card:14:48-52`;
+- joint action: `ACTION6(x=4, y=50)`;
+- changed public pixels after the joint return: `64`;
+- removing either producer yields no action;
+- selected return is acquired by both channels;
 - the next observation has no unique stack card, so 9C produces no next action.
 
 The qualification deliberately does not reuse the earlier permissive rule that
@@ -241,13 +241,62 @@ proof.
 
 Status:
 
-**9C3 functionally qualified on a real public STCK unique-card subcorpus; the two-game functional prerequisite for official 9C performance is complete.**
+**9C3 functionally qualified on a real public STCK unique-card subcorpus.**
 
 Proofs:
 
 - `docs/recovery/lot9c3-stck-joint-performance-boundary.md`;
 - `docs/recovery/lot9c3-public-stck-joint-report.json`;
 - `tests/lot9c3-stck-joint-proof.test.mjs`.
+
+#### 9C4 official A/B performance
+
+A and B use the same checkout, Browser/Pyodide transport, game archive, seed,
+public target policy and physical actions. Only B executes the qualified joint
+owner, OP28 release and selected return acquisition by both channels.
+
+The STCK three-action prelude is identical and excluded from both A and B timing.
+It remains fully retained in metadata. The official order is
+`A1 -> B1 -> B2 -> A2`.
+
+Official proof:
+
+- GitHub Actions run `43366962676`;
+- job `131693534425`;
+- measured commit `f98f490359908fd30e2177d819b98fdd958f6f20`;
+- 40 invocations;
+- 8 warmup sessions and 24 warmup actions;
+- 32 measured sessions and 400 measured actions;
+- no measured sample removed;
+- no protocol retry;
+- STCK reference median `46.80000000001746 ms`;
+- STCK candidate median `49.40000000000509 ms`;
+- STCK delta `+5.5555555555270475%`;
+- SMLP reference median `99.29999999999563 ms`;
+- SMLP candidate median `99.20000000000073 ms`;
+- SMLP delta `-0.10070493453666618%`;
+- both games strictly below `+10%`;
+- candidate coverage: 86 STCK decisions/acquisitions and 126 SMLP
+  decisions/acquisitions;
+- accepted: `true`.
+
+The first visible performance attempt was rejected at approximately `+13.08%`
+for STCK and `+22.97%` for SMLP. No threshold or corpus was changed. Allocations
+were reduced by reusing qualified perception, sharing one sealed payload between
+compatible channels and skipping copies only for explicitly read-only
+acquisitions. Generic detached behavior remains covered by tests.
+
+Status:
+
+**9C0 to 9C4 are functionally and officially performance-qualified in the reconstructed scope.**
+
+Proofs:
+
+- `docs/recovery/lot9c4-official-joint-channels-performance-qualified.md`;
+- `docs/recovery/lot9c4-official-joint-channels-performance-proof.json`;
+- `tests/lot9c4-official-joint-channels-performance-proof.test.mjs`;
+- raw 40-invocation report in GitHub artifact `14010801556`, digest
+  `sha256:9b85ab0a249da7b1f7e0362eb190bcc5ad6c768d04c8cea26f8e464c10826a1f`.
 
 ## 5. Performance contract
 
@@ -265,14 +314,9 @@ The strict official protocol remains:
 - internal phase overruns remain visible but do not fail when the same game's
   complete-session global delta passes.
 
-9B has passed this protocol.
-
-9C now has real, causally qualified public joint paths for SMLP and STCK.
-Official performance remains open because the A/B source identities, runner
-manifest and timed joint-channel scope have not yet been frozen and executed.
-For STCK, A and B must apply the same three-action public prelude policy. The
-prelude may be included in both timed sessions or excluded from both, but never
-included on only one side.
+9B and 9C have both passed this protocol in their explicitly reconstructed
+scopes. Neither qualification proves identity with the lost historical 0.68/0.69
+sources.
 
 ## 6. Immediate roadmap
 
@@ -285,8 +329,8 @@ included on only one side.
 | 9C1 bounded joint owner | complete | preserve neutral ambiguity |
 | 9C2 real SMLP producers | complete | preserve causal removal proof |
 | 9C3 strict real STCK producers | complete | preserve explicit prelude and exact durable report parity |
-| **9C4 official A/B performance** | **open** | **freeze A/B source refs, identical STCK prelude timing and runners, then execute strict two-game ABBA** |
-| current reconstruction registry | open | rebuild before count claims |
+| 9C4 official A/B performance | complete, PASS | preserve source identities, samples and artifact digest |
+| **current reconstruction registry** | **open** | **map durable capabilities before any count claim** |
 | Site publication | blocked | only from an integrated GitHub-qualified SHA |
 
 ## 7. Other recovery lanes
@@ -330,14 +374,10 @@ The project must not claim exact Site 109 parity until all of these are true:
 
 ## 9. Next step
 
-**Continue with Lot 9C4.**
+**Rebuild the current reconstruction registry.**
 
-Freeze one reference A path without the joint-channel candidate and one candidate
-B path with the qualified joint channels. Give every path a durable `sourceRef`,
-create explicit STCK and SMLP runners that exercise the real 9C2 and 9C3 public
-corpora, and declare the timed boundary before measuring. For STCK, execute the
-same public prelude in A and B and either include it in both timers or exclude it
-from both. Execute the full ABBA protocol with no measured sample removal.
-Accept only when each game's complete-session median remains strictly below
-`+10.000%`. Do not infer historical parity, restore a registry count or publish
-Site from the functional qualification alone.
+Inventory every durable capability integrated on the canonical branch, link it
+to its functional and performance proofs, mark unresolved historical identity
+separately, and only then compute a current count. Do not map the old `70/76` or
+`71/76` claims automatically onto the reconstructed tree. Do not publish Site
+before this registry work and a fresh canonical qualification are complete.

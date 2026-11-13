@@ -8,10 +8,47 @@ import type { CampaignLogosActionPayload } from './v6-common-campaign-owner.ts';
 import type { AuthorityObservationIdentity } from './v6-native-authority.ts';
 import type { SymbolicRecord } from './v6-operations.ts';
 
+const SEALED_JOINT_PAYLOADS = new WeakSet<object>();
+
 function nonEmpty(value: unknown, label: string): asserts value is string {
   if (typeof value !== 'string' || value.length === 0) {
     throw new TypeError(`${label} must be a non-empty string`);
   }
+}
+
+function deepFreezeStructured(value: unknown, seen = new WeakSet<object>()): void {
+  if (!value || typeof value !== 'object' || seen.has(value)) return;
+  if (ArrayBuffer.isView(value)) return;
+  seen.add(value);
+  if (Array.isArray(value)) {
+    for (const item of value) deepFreezeStructured(item, seen);
+  } else {
+    for (const item of Object.values(value as Record<string, unknown>)) {
+      deepFreezeStructured(item, seen);
+    }
+  }
+  Object.freeze(value);
+}
+
+/**
+ * Seal a payload that is owned by a qualified public joint-channel producer.
+ *
+ * A sealed payload may be shared by compatible contributions because every
+ * nested value is immutable. Generic callers remain mutable and continue to be
+ * detached by JointChannelOwner before transfer to the common campaign.
+ */
+export function sealJointChannelActionPayload(
+  payload: CampaignLogosActionPayload,
+): CampaignLogosActionPayload {
+  deepFreezeStructured(payload);
+  SEALED_JOINT_PAYLOADS.add(payload);
+  return payload;
+}
+
+export function isSealedJointChannelActionPayload(
+  value: unknown,
+): value is CampaignLogosActionPayload {
+  return !!value && typeof value === 'object' && SEALED_JOINT_PAYLOADS.has(value);
 }
 
 /**

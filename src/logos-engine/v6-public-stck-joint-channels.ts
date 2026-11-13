@@ -5,7 +5,9 @@ import {
 } from '../runtime/contracts.ts';
 import {
   prepareJointChannelActionPayload,
+  sealJointChannelActionPayload,
 } from './v6-joint-channel-action.ts';
+import type { CampaignLogosActionPayload } from './v6-common-campaign-owner.ts';
 import type {
   JointChannel,
   JointChannelAcquisition,
@@ -43,6 +45,15 @@ export interface PublicStckJointChannelReceipt {
   returnPayload: unknown;
 }
 
+const TRUSTED_CANDIDATE_OBSERVATIONS = new WeakMap<
+  PublicStckTargetCandidate,
+  AgentObservation
+>();
+const TRUSTED_CANDIDATE_PAYLOADS = new WeakMap<
+  PublicStckTargetCandidate,
+  CampaignLogosActionPayload
+>();
+
 function observationRef(observation: AgentObservation): string {
   return `public-observation:${observation.sessionId}:${observation.sequence}`;
 }
@@ -66,12 +77,18 @@ export function producePublicStckTargetCandidate(
     target.y,
     target.evidenceRef,
   ].join(':');
-  const action: Extract<AgentAction, { id: 6 }> = {
+  const action = {
     id: 6,
-    data: { x: target.x, y: target.y },
-  };
-
-  return {
+    data: Object.freeze({ x: target.x, y: target.y }),
+  } as Extract<AgentAction, { id: 6 }>;
+  Object.freeze(action);
+  const evidenceRefs = Object.freeze([
+    currentObservationRef,
+    targetRef,
+    target.evidenceRef,
+    `producer:${PUBLIC_STCK_TARGET_PRODUCER_ID}`,
+  ]) as unknown as string[];
+  const candidate = Object.freeze({
     version: 1,
     producerId: PUBLIC_STCK_TARGET_PRODUCER_ID,
     observationRef: currentObservationRef,
@@ -80,13 +97,10 @@ export function producePublicStckTargetCandidate(
     targetKind: 'stack_card',
     targetEvidenceRef: target.evidenceRef,
     action,
-    evidenceRefs: [
-      currentObservationRef,
-      targetRef,
-      target.evidenceRef,
-      `producer:${PUBLIC_STCK_TARGET_PRODUCER_ID}`,
-    ],
-  };
+    evidenceRefs,
+  }) as PublicStckTargetCandidate;
+  TRUSTED_CANDIDATE_OBSERVATIONS.set(candidate, observation);
+  return candidate;
 }
 
 function candidateContext(
@@ -121,6 +135,9 @@ function verifiedTargetCandidate(
 ): PublicStckTargetCandidate | undefined {
   const candidate = candidateContext(request);
   if (!candidate) return undefined;
+  if (TRUSTED_CANDIDATE_OBSERVATIONS.get(candidate) === request.observation) {
+    return candidate;
+  }
   const reproduced = producePublicStckTargetCandidate(request.observation);
   if (!reproduced) return undefined;
   if (
@@ -135,8 +152,29 @@ function verifiedTargetCandidate(
   return candidate;
 }
 
+function contributionPayload(
+  request: JointChannelContributionRequest,
+  candidate: PublicStckTargetCandidate,
+): CampaignLogosActionPayload | undefined {
+  const trusted = TRUSTED_CANDIDATE_OBSERVATIONS.get(candidate) === request.observation;
+  if (trusted) {
+    const cached = TRUSTED_CANDIDATE_PAYLOADS.get(candidate);
+    if (cached) return cached;
+  }
+  const payload = prepareJointChannelActionPayload(
+    request.observation,
+    candidate.action,
+    candidate.jointRef,
+  );
+  if (!payload || !trusted) return payload;
+  const sealed = sealJointChannelActionPayload(payload);
+  TRUSTED_CANDIDATE_PAYLOADS.set(candidate, sealed);
+  return sealed;
+}
+
 abstract class PublicStckJointChannelBase implements JointChannel {
   abstract readonly id: string;
+  readonly acquisitionMode = 'readonly' as const;
 
   abstract contribute(
     request: JointChannelContributionRequest,
@@ -153,8 +191,8 @@ abstract class PublicStckJointChannelBase implements JointChannel {
       needId: event.needId,
       proposalRef: event.proposalRef,
       jointRef: event.jointRef,
-      action: structuredClone(event.action),
-      returnPayload: structuredClone(event.returnPayload),
+      action: event.action,
+      returnPayload: event.returnPayload,
     };
   }
 
@@ -163,11 +201,7 @@ abstract class PublicStckJointChannelBase implements JointChannel {
     candidate: PublicStckTargetCandidate,
     contributionRef: string,
   ): JointChannelContribution | undefined {
-    const payload = prepareJointChannelActionPayload(
-      request.observation,
-      candidate.action,
-      candidate.jointRef,
-    );
+    const payload = contributionPayload(request, candidate);
     if (!payload) return undefined;
     return {
       channelId: this.id,
@@ -223,7 +257,7 @@ export function publicStckAddressedJointContext(
   const candidate = producePublicStckTargetCandidate(observation);
   if (!candidate) return {};
   return {
-    [PUBLIC_STCK_ACTION_AVAILABILITY_CHANNEL_ID]: structuredClone(candidate),
-    [PUBLIC_STCK_VISIBLE_TARGET_CHANNEL_ID]: structuredClone(candidate),
+    [PUBLIC_STCK_ACTION_AVAILABILITY_CHANNEL_ID]: candidate,
+    [PUBLIC_STCK_VISIBLE_TARGET_CHANNEL_ID]: candidate,
   };
 }
