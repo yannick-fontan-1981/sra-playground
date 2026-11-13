@@ -1,0 +1,98 @@
+{
+  "version": 1,
+  "status": "official-performance-failed-smlp",
+  "primaryRun": {
+    "runId": 43354466595,
+    "jobId": 131653056843,
+    "commit": "85d8c5e57a26ae3f02a0e89c49f5894dc571bf70",
+    "measurementIsolation": "non-isolated-shared-github-actions-runner-no-repository-concurrency",
+    "chrome": "157.0.8103.78",
+    "hardwareConcurrency": 4,
+    "sourceRefs": {
+      "reference": "lot9b-region-v1:A:46ce3478dbc07268333a6a2d423489a689cc5ff509abf1e4bf1f948b174b842c",
+      "candidate": "lot9b-region-v1:B:557ca909c4c9b68ec70d2055a02dfb5c27dffcae338f1025e3b53c67937a609f"
+    },
+    "totals": {
+      "invocations": 40,
+      "warmupSessions": 8,
+      "warmupActions": 24,
+      "measuredSessions": 32,
+      "measuredActions": 400
+    },
+    "games": {
+      "STCK": {
+        "referenceMedianMs": 69.09999999999127,
+        "candidateMedianMs": 74.04999999998836,
+        "relativeIncreasePercent": 7.163531114323751,
+        "accepted": true,
+        "phases": {
+          "candidateHookMedianMs": 21.000000000014552,
+          "referenceGameActionMedianMs": 54.54999999997381,
+          "candidateGameActionMedianMs": 42.49999999998545,
+          "referencePolicyMedianMs": 6.5,
+          "candidatePolicyMedianMs": 4.900000000008731
+        },
+        "candidateRegion": {
+          "actionsSeen": 86,
+          "action6Seen": 86,
+          "usefulEvidence": 86,
+          "boundEvidence": 86,
+          "acquisitions": 86,
+          "methods": 86
+        }
+      },
+      "SMLP": {
+        "referenceMedianMs": 99.75,
+        "candidateMedianMs": 144.0500000000029,
+        "relativeIncreasePercent": 44.411027568925235,
+        "accepted": false,
+        "phases": {
+          "candidateHookMedianMs": 43.549999999959255,
+          "referenceGameActionMedianMs": 78.55000000001746,
+          "candidateGameActionMedianMs": 79.59999999997672,
+          "gameActionRelativeIncreasePercent": 1.3367281985474433,
+          "referencePolicyMedianMs": 10.89999999999418,
+          "candidatePolicyMedianMs": 10.899999999877764
+        },
+        "candidateRegion": {
+          "actionsSeen": 126,
+          "action6Seen": 126,
+          "usefulEvidence": 126,
+          "boundEvidence": 126,
+          "acquisitions": 126,
+          "methods": 126
+        }
+      }
+    },
+    "accepted": false,
+    "localizedCost": "candidate_hook",
+    "artifactId": 14004873060,
+    "artifactZipSha256": "4a9c9ce7b258f7a17ec237a6f8433c96581f636c00d016403bc1142a2ac7a75c"
+  },
+  "duplicateRunNotSelected": {
+    "runId": 43354501792,
+    "jobId": 131653393087,
+    "commit": "83bb377c000c7e0b929b833c957cbcf139887070",
+    "STCKRelativeIncreasePercent": 25.632562632368284,
+    "SMLPRelativeIncreasePercent": 43.85542168672517,
+    "STCKCandidateHookMedianMs": 16.650000000023283,
+    "SMLPCandidateHookMedianMs": 36.34999999997672,
+    "accepted": false,
+    "artifactId": 14004644274,
+    "artifactZipSha256": "10b695cc0808f7b095ed11e870400db2b400524d13d4b17396bca9ed68ce3297",
+    "disposition": "corroborating-only-never-used-to-replace-primary-run"
+  },
+  "correctionScope": {
+    "allowed": [
+      "remove redundant benchmark-only public-frame clones",
+      "pass identity-only methodRef inputs",
+      "preserve default cloned hook contract"
+    ],
+    "mustPreserve": [
+      "corpus actions and coordinates",
+      "transport and game configuration",
+      "all Region evidence and acquisition counts",
+      "A1-B1-B2-A2 order and all samples"
+    ]
+  }
+}
