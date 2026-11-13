@@ -216,6 +216,23 @@ les états runtime stables réellement contractuels.
 - prévisualisations : `636`
 - atlas natifs : `4`
 
+### Qualification finale sur branche propre
+
+- run : `43354182065`
+- job : `131652130993`
+- commit qualifié : `30acc1f67f243e0d88979a30bc749d00b866b1a5`
+- scripts et workflows de consolidation temporaires absents
+- Node : `22.18.0`
+- `npm ci` : réussi
+- `npm run typecheck` : réussi
+- régression complète : **332/332 tests réussis**
+- échecs, annulations, tests ignorés et TODO : `0`
+- build Vite : réussi
+- modules transformés : `49`
+- catalogue : `100` jeux
+- prévisualisations : `636`
+- atlas natifs : `4`
+
 Deux vulnérabilités de dépendances de sévérité haute déjà présentes restent
 signalées par `npm ci`. Cette tranche ne les introduit ni ne les modifie.
 
