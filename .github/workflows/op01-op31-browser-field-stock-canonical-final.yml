@@ -1,0 +1,60 @@
+name: OP01-OP31 browser FieldStock canonical final
+
+on:
+  push:
+    branches:
+      - recovery/op01-op31-browser-field-stock-context-20261112
+
+concurrency:
+  group: op01-op31-browser-field-stock-canonical-final
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  qualify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      LOT9B_MEASUREMENT_ISOLATION: non-isolated-shared-github-actions-runner-no-repository-concurrency
+      LOT9B_OFFICIAL_BENCHMARK_REPORT: lot9b-official-native-region-abba-report.json
+      LOT9B_WORKER_PYODIDE_REPORT: lot9b-worker-pyodide-parity-report.json
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.18.0'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: npm ci
+      - name: Typecheck reconstructed runtime
+        run: npm run typecheck
+      - name: Run complete TypeScript regression
+        run: node --experimental-transform-types --test tests/*.test.ts
+      - name: Build product
+        run: npm run build
+      - name: Prepare pinned Pyodide assets
+        run: node scripts/prepare-python.mjs
+      - name: Test Worker Pyodide parity contract
+        run: node --test tests/worker-pyodide-parity-contract.test.mjs
+      - name: Qualify Worker Pyodide parity
+        run: node scripts/qualify-worker-pyodide-parity.mjs
+      - name: Verify official manifest and stored source refs
+        run: node scripts/verify-native-loop-runner-manifest.mjs
+      - name: Test native benchmark and source-ref contracts
+        run: |
+          node --test \
+            tests/native-loop-cost-harness.test.mjs \
+            tests/native-loop-session-adapter.test.mjs \
+            tests/native-loop-browser-worker-dispatch.test.mjs \
+            tests/native-loop-region-source-refs.test.mjs
+      - name: Recompute native source refs
+        run: |
+          node scripts/native-loop-region-source-refs.mjs \
+            --output lot9b-native-region-source-refs.json
+      - name: Execute official A1 B1 B2 A2 protocol
+        run: node scripts/run-native-region-official-benchmark.mjs
