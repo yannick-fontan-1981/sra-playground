@@ -11,134 +11,138 @@ Fichiers principaux :
 - `src/logos-engine/v6-temporal-selection-bridge.ts`
 - `tests/v6-temporal-selection-bridge.test.ts`
 
-Fichier partagé étendu de manière additive :
+Fichiers partagés étendus de manière additive :
 
 - `src/logos-engine/v6-operation-trace.ts`
+- `tests/v6-operation-trace.test.ts`
 
-## Pourquoi une extension du sink était nécessaire
+## Pourquoi une extension du sink est nécessaire
 
-Le contrat initial de `OperationTraceSink` ne représentait que :
+Le contrat historique du sink représente les besoins et les appels OP01–OP31. TemporalSelection n'est pas qualifié comme une OP particulière.
 
-- `need` ;
-- `operation` portant une clé `OPxx` ;
-- `consumption` portant une clé `OPxx`.
+Utiliser artificiellement OP25, OP28 ou une pseudo-OP aurait pollué le registre des opérations et produit une fausse preuve d'usage.
 
-TemporalSelection n'est pas qualifié comme un appel réel à une OP particulière. Utiliser artificiellement OP25, OP28 ou une pseudo-OP aurait pollué les compteurs OP01–OP31 et aurait créé une fausse preuve d'usage.
-
-Le sink accepte donc maintenant deux événements additionnels :
+Le sink accepte donc aussi :
 
 - `capability` ;
 - `capability_consumption`.
 
-Cette extension conserve la borne, les copies détachées, les compteurs et le comportement des événements OP existants.
+Les compteurs restent séparés :
+
+- `operation:OPxx:*` ;
+- `consumption:OPxx:*` ;
+- `capability:temporal-selection:*` ;
+- `capability_consumption:temporal-selection:*`.
+
+## Fusion avec la trace canonique récente
+
+La baseline canonique `24fcdbb16c93de59489a6bb0392cc709b7a75d14` contient un mode de diagnostic léger :
+
+- `full` conserve les événements bornés ;
+- `counters` ne conserve aucun payload et incrémente seulement les compteurs.
+
+Le report rebasé conserve ce mécanisme et ajoute les primitives :
+
+- `countCapability` ;
+- `countCapabilityConsumption`.
+
+Les mêmes clés de compteurs sont produites en mode `full` et `counters`.
 
 ## Chaîne tracée
 
 Le bridge enregistre :
 
 1. `need:temporal-selection` ;
-2. réception et vérification du reçu Source/DRM ;
+2. vérification du reçu Source/DRM ;
 3. projection acceptée, refusée ou bloquée ;
-4. consommation sémantique `project` ou `refuse` ;
+4. consommation `project` ou `refuse` ;
 5. consommation optionnelle et idempotente de la frontière de preuve exacte.
 
-La chaîne obtenue est :
+La chaîne est :
 
 `besoin → domaine Source → reçu vérifié → projection → consommation`
 
-Le bridge ne choisit pas le candidat. Le `selectedRef` provient toujours du reçu externe attribué.
+Le bridge ne choisit pas le candidat. Le `selectedRef` provient du reçu externe attribué.
 
 ## Invariants
 
-- aucun événement `operation` ou `consumption` OP n'est créé par TemporalSelection ;
-- les compteurs OP01–OP31 restent séparés ;
-- un reçu altéré produit une trace `blocked` puis l'erreur est propagée ;
+- aucune fausse OP n'est créée ;
+- un reçu altéré produit une trace `blocked` avant propagation de l'erreur ;
 - un refus vérifié reste un refus, sans fallback ;
 - une frontière de retour est consommée au plus une fois ;
 - une preuve non reliée au candidat sélectionné est refusée ;
 - le même reçu et la même observation donnent le même `needId` ;
-- `actAuthorized` reste `false` dans tous les résultats et résumés.
+- `actAuthorized` reste `false` ;
+- le mode `counters` ne retient aucun état détaillé.
 
-## Qualification et correction
+## Historique de qualification avant rebase
 
-### Première exécution élargie
+Premier passage élargi :
 
-Run GitHub Actions : `43340553068`
+- run `43340553068` ;
+- 63/63 tests fonctionnels réussis ;
+- typecheck échoué sur le rétrécissement d'une union TypeScript ;
+- passage non déclaré qualifiant.
 
-Head : `2a3d2af75984b2803831d6202c3d0f58d38a1ac8`
+Correction :
+
+- commit `d9ce6406379cab1e1ed024d8053392471fc10763` ;
+- run `43340660719` ;
+- 63/63 tests et typecheck réussis.
+
+Régressions V6 voisines :
+
+- run `43340758482` ;
+- head `1033edbb1ba23a75106e34bb5159b7f089c6f46d` ;
+- 86/86 tests et typecheck réussis.
+
+## Qualification du report rebasé
+
+Branche :
+
+`recovery/lot10d-temporal-selection-rebased-20261112`
+
+Commit qualifié :
+
+`b759a7adb5d459211a1ca7984acdc5062bbb88ca`
+
+Run GitHub Actions :
+
+`43341620341`
+
+Périmètre :
+
+- worker core ;
+- worker public ;
+- V6 composition/authority/cache/cycle/trace/operations/target binding ;
+- toutes les sources et suites TemporalSelection reconstruites.
 
 Résultat :
 
-- **63/63 tests fonctionnels réussis** ;
-- typecheck échoué sur trois accès à l'union `TemporalSelectionContractResult` non correctement rétrécie.
-
-Ce passage n'a pas été déclaré qualifiant.
-
-### Correction
-
-Commit de correction :
-
-`d9ce6406379cab1e1ed024d8053392471fc10763`
-
-La décision est maintenant explicitement séparée en branches `accepted` et `refused` avant la construction du résumé de trace.
-
-Run GitHub Actions : `43340660719`
-
-Résultat :
-
-- **63/63 tests réussis** ;
+- **130/130 tests réussis** ;
+- 0 échec, annulation, skip ou todo ;
 - typecheck strict réussi.
 
-### Régressions V6 affectées
-
-Le workflow a ensuite été élargi aux suites :
-
-- composition engine ;
-- native authority ;
-- operation cache ;
-- operation cycle ;
-- operation trace ;
-- operations OP ;
-- target binding ;
-- toutes les suites TemporalSelection reconstruites.
-
-Run GitHub Actions final : `43340758482`
-
-Head qualifié :
-
-`1033edbb1ba23a75106e34bb5159b7f089c6f46d`
-
-Résultat :
-
-- **86 tests** ;
-- **86 réussis** ;
-- **0 échec** ;
-- typecheck strict réussi sur le sink et les sources TemporalSelection.
-
-Les durées CI ne constituent pas une mesure officielle de performance de l'agent.
+Les durées CI ne constituent pas une mesure officielle du coût de l'agent.
 
 ## Statut fonctionnel
 
-Le bridge est fonctionnellement qualifié dans son périmètre : décision externe attribuée, projection fail-closed, consommation de preuve et trace bornée.
+Le bridge est fonctionnellement qualifié dans son périmètre : décision externe attribuée, projection fail-closed, consommation de preuve, trace bornée et compatibilité avec le worker restauré.
 
 Il ne constitue pas encore :
 
 - le caller runtime complet ;
 - une politique TemporalSelection ;
 - une autorité de libération d'action ;
-- une preuve de contribution dans une partie réelle ;
-- une restauration de Site 109.
+- une preuve de contribution en partie réelle ;
+- une restauration exacte de Site 109.
 
 ## Performance
 
-Le harness officiel STCK/SMLP reste absent de cette branche.
+Le protocole ABBA est restauré, mais les runners officiels STCK/SMLP manquent encore.
 
 Statut : **fonctionnellement qualifié, performance officielle à confirmer**.
 
-Le critère historique reste : global strictement inférieur à +10 % pour STCK et SMLP séparément, sans compensation entre jeux.
-
 ## Prochaine étape
 
-Examiner la tête actuelle de `recovery/site109-reconstruction-20261112` afin d'identifier les composants runtime restaurés en parallèle.
-
-Ensuite, raccorder le bridge à un propriétaire runtime minimal seulement si l'identité, la restauration et la position d'appel peuvent être justifiées par le code désormais présent sur GitHub.
+Construire un `AgentDecisionPort` passif et explicitement alimenté. Il devra retourner `undefined` tant que l'enveloppe Source, l'état TemporalSelection, le reçu attribué et une autorité ACT séparée ne sont pas présents et valides.

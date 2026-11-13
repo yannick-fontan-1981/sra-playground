@@ -54,16 +54,21 @@
     "TemporalSelection runtime call position",
     "native STCK/SMLP runners and official corpus"
   ],
-  "previous_qualification": {
-    "tests_passed": 86,
+  "qualification": {
+    "status": "qualified_on_rebased_canonical_runtime",
+    "tests_passed": 130,
     "tests_failed": 0,
-    "ci_run_id": 43340758482,
-    "ci_head": "1033edbb1ba23a75106e34bb5159b7f089c6f46d",
-    "typecheck": "passed",
-    "qualifies_rebased_branch": false
-  },
-  "rebased_qualification": {
-    "status": "pending_ci"
+    "tests_cancelled": 0,
+    "tests_skipped": 0,
+    "tests_todo": 0,
+    "ci_run_id": 43341620341,
+    "ci_head": "b759a7adb5d459211a1ca7984acdc5062bbb88ca",
+    "ci_conclusion": "success",
+    "typecheck": "passed_strict_for_trace_temporal_and_worker_sources",
+    "worker_regressions_included": true,
+    "v6_core_regressions_included": true,
+    "historical_selector_reconstructed": false,
+    "historical_state_machine_reconstructed": false
   },
   "performance": {
     "stck_global_max_increase_percent_exclusive": 10,
@@ -72,7 +77,9 @@
     "internal_phase_may_exceed_if_game_global_passes": true,
     "official_status": "to_confirm_native_runners_missing"
   },
-  "historical_selector_reconstructed": false,
-  "historical_state_machine_reconstructed": false,
-  "next_step": "qualify the rebased port, then design a worker decision port only for explicitly supplied and attributable TemporalSelection inputs"
+  "integration": {
+    "integrated_into_canonical_reconstruction": false,
+    "site_published": false
+  },
+  "next_step": "build a passive explicitly-fed AgentDecisionPort that returns undefined unless a complete attributable TemporalSelection input and a separate ACT-release contract are supplied"
 }
