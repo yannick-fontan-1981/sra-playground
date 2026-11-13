@@ -107,7 +107,8 @@ Dans le port `present` du dispatch, l’ordre est obligatoire :
 3. appeler `CommonCampaignOwner.acquire()` avec le même `sessionId`, le même
    propriétaire, la même proposition et le même `needId` ;
 4. mettre à jour l’observation courante de l’hôte ;
-5. seulement ensuite présenter le résultat à l’interface.
+5. appeler le hook propriétaire facultatif `afterAcquire()` ;
+6. seulement ensuite présenter le résultat à l’interface.
 
 Une nouvelle décision symbolique ne peut donc pas être demandée entre le retour
 du jeu et sa consommation par le propriétaire sélectionné.
@@ -138,6 +139,17 @@ utilisable sans perception privée :
 
 Cette fabrique démontre la couture produit. Elle ne constitue pas un
 planificateur général et n’est pas présentée comme le SRA complet.
+
+## Hôte combiné OP18/OP28
+
+`createPublicAndFieldStockBrowserCampaignHost()` enregistre FieldStock et le
+fallback OP28. FieldStock reste inerte sans prior, mesure les composants
+publics uniquement pour une revalidation nécessaire et produit OP18 seulement
+après applicabilité courante. L’ambiguïté entre propriétaires reste conservée.
+
+Le hook `afterAcquire()` permet à FieldStock d’appliquer la frontière et la
+rétention seulement après consommation spécialisée du retour, sans acquérir
+d’autorité de dispatch.
 
 ## Tests ajoutés
 
@@ -180,66 +192,39 @@ présents.
 présentes dans l’arbre. Elles ne sont pas introduites ni corrigées par cette
 tranche fonctionnelle.
 
-## Performance
+## Activation et performance
 
-Le plan conserve le critère suivant : pour chaque jeu de référence, la médiane
-de session complète doit augmenter de strictement moins de 10 %, avec STCK et
-SMLP évalués séparément.
+Le contrôleur produit canonique instancie désormais l’hôte combiné OP18/OP28.
+Son runtime FieldStock est vide par défaut : le chemin actif demeure OP28 tant
+qu’aucun prior réel n’a été acquis et revalidé.
 
-Cette tranche ajoute une classe de bibliothèque mais ne l’instancie pas dans
-`main.ts` et ne l’exécute dans aucune session utilisateur. Elle ne modifie donc
-pas le chemin de jeu actif actuel. Un micro-benchmark isolé de la classe ne
-remplacerait pas la mesure requise sur les sessions complètes.
+Qualification combinée : run `43353708964`, job `131650593632`, typecheck,
+**332/332 tests** et build Vite réussis.
 
-Verdict : **intégration fonctionnelle du seam terminée, coût d’activation à
-confirmer**.
-
-La mesure officielle devra être faite après raccordement d’un contrôleur Agent
-réel et des contextes spécialisés, sur A/STCK, A/SMLP, B/STCK et B/SMLP selon le
-manifeste C7.
-
-## Ce qui n’est volontairement pas activé
-
-- `main.ts` ne crée pas encore `BrowserCommonCampaignHost` ;
-- les clics du mode Manual restent des actions humaines directes ;
-- l’onglet Agent ne prétend pas encore exécuter la campagne commune ;
-- aucune boucle automatique n’enchaîne les décisions ;
-- aucune observation privée du moteur n’est ajoutée ;
-- FieldStock n’a pas encore de constructeur de contexte produit depuis chaque
-  observation navigateur ;
-- Region n’a toujours pas de contrat physique complet
-  `AgentAction + CompositionBundle + état + identity` ;
-- aucun propriétaire d’objectif OP31 n’est raccordé ;
-- les décisions communes en attente n’ont pas encore de snapshot/restauration ;
-- les états produit non représentables par le protocole agent restent refusés
-  plutôt que convertis silencieusement ;
-- aucune publication Site n’est effectuée.
+Le mode Manual ne traverse pas la campagne. Le coût des sessions Agent actives
+reste néanmoins à qualifier sur A/STCK, A/SMLP, B/STCK et B/SMLP, avec une
+médiane strictement sous +10 % pour chaque jeu.
 
 ## Dispositions OP
 
-- **OP18** : inchangée, chaîne FieldStock démontrée en bibliothèque jusqu’à la
-  décision suivante ; le transport navigateur générique est maintenant prêt,
-  mais le constructeur de contexte produit FieldStock manque encore.
-- **OP28** : seam produit/browser complet démontré pour le fallback public
-  strict, de l’observation jusqu’au retour acquis avant présentation.
-- **OP29/OP30** : consommateurs spécialisés inchangés ; aucun appel générique
-  redondant ajouté.
-- **OP31** : toujours sans propriétaire d’objectif produit démontré.
+- **OP18** : contexte browser, revalidation publique, ACTION6 mesurée, retour
+  spécialisé et frontière post-acquisition qualifiés lorsqu’un prior est fourni ;
+  acquisition initiale encore absente.
+- **OP28** : seam produit/browser complet conservé pour le fallback public strict.
+- **OP29/OP30** : consommateurs spécialisés FieldStock conservés sans appel
+  générique redondant.
+- **OP31** : toujours sans propriétaire d’objectif produit.
 - **Autres OP** : aucune activation artificielle.
 
 ## Prochaine étape
 
-Construire un contrôleur explicite de mode Agent, séparé du chemin Manual :
+Construire l’acquisition initiale honnête du prior FieldStock :
 
-1. créer une session d’hôte après le chargement d’un jeu ;
-2. produire les contextes uniquement pour les propriétaires réellement
-   applicables ;
-3. exécuter au plus une campagne à la fois ;
-4. arrêter proprement sur `none`, `ambiguous`, `blocked`, terminal ou erreur ;
-5. ne jamais transformer l’absence de proposition en action par défaut ;
-6. ajouter le constructeur de contexte produit FieldStock ;
-7. qualifier ensuite les sessions complètes et leur coût avant activation
-   publique.
+1. identifier les témoins publics suffisants ;
+2. produire un prior compact avec provenance ;
+3. l’injecter dans le runtime produit sans le rendre directement applicable ;
+4. laisser le transport actuel le revalider dans la scène courante ;
+5. démontrer une vraie campagne OP18 jusqu’à la décision suivante ;
+6. qualifier ensuite le coût C7.
 
-GitHub reste la source canonique. Aucune publication Site n’est autorisée avant
-intégration durable du contrôleur, qualification et vérification GitHub ↔ Site.
+GitHub reste la source canonique. Aucune publication Site n’est incluse.

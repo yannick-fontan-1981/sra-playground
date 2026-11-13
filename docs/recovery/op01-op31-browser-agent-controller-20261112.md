@@ -178,20 +178,26 @@ présentation, ni les règles d’obsolescence, ni les coordonnées ACTION6.
 
 ## Périmètre réellement actif
 
-Le host créé par défaut reste le fallback OP28 public strict :
+Le host créé par défaut enregistre deux propriétaires :
 
-- exactement une action simple distincte hors RESET ;
-- observation non terminale ;
-- aucune coordonnée à inventer ;
-- aucune ACTION6 sans producteur de coordonnées ;
-- plusieurs actions publiques produisent `none` ;
-- plusieurs propriétaires produiraient `ambiguous` ;
-- la release Logos et l’acquisition du retour restent obligatoires.
+- FieldStock/OP18 ;
+- l’action publique simple unique/OP28.
 
-Le produit dispose donc maintenant d’une vraie boucle Agent, mais cette boucle
-est volontairement étroite. Elle démontre la propriété de session et le chemin
-physique complet ; elle ne démontre pas encore une perception ou une
-planification générale.
+Le runtime FieldStock est neuf et vide à chaque création par défaut. Son
+inscription ne lui donne donc aucun pouvoir :
+
+- aucun prior → aucun composant mesuré pour FieldStock ;
+- aucune revalidation → aucune proposition OP18 ;
+- ACTION6 seule → `none`, sans coordonnées inventées ;
+- une action simple unique → OP28 comme avant ;
+- plusieurs propositions complètes → `ambiguous` sans classement.
+
+Lorsqu’un prior est explicitement fourni à une fabrique contrôlée, le transport
+browser le revalide depuis les pixels publics avant OP18. Cette capacité est
+qualifiée, mais le produit ne découvre pas encore le prior initial.
+
+Le produit dispose donc d’une vraie boucle Agent et d’un transport OP18 prudent,
+sans prétendre encore une acquisition ou planification générale.
 
 ## Tests ajoutés
 
@@ -223,23 +229,31 @@ planification générale.
 - message public borné ;
 - absence de fallback caché.
 
+### FieldStock par défaut
+
+`tests/v6-browser-agent-controller-field-stock-default.test.ts` vérifie la
+fabrique combinée et l’arrêt `none` sans dispatch lorsque seule ACTION6 est
+disponible mais qu’aucun prior FieldStock n’existe.
+
 ## Qualification
 
-Qualification GitHub Actions finale du code :
+Qualification historique du contrôleur : run `43351836350`, job
+`131644500100`, **325/325 tests** et build réussis.
 
-- run : `43351836350` ;
-- job : `131644500100` ;
-- commit qualifié : `50948c69806d8682313ed61d7364399e699b365f` ;
+Qualification actuelle avec le transport FieldStock enregistré par défaut :
+
+- run : `43353708964` ;
+- job : `131650593632` ;
+- commit : `400d9bcc1062130508d27e62f1508f82011d2ea7` ;
 - Node : `22.18.0` ;
 - `npm ci` : réussi ;
-- `npm run typecheck` : réussi ;
-- régression TypeScript complète : **325/325 tests réussis** ;
-- build de production Vite : réussi ;
-- génération du catalogue : 100 jeux et 636 prévisualisations ;
-- rapport : `logos-product-wiring-present`.
+- typecheck : réussi ;
+- régression complète : **332/332 tests réussis** ;
+- build Vite : réussi ;
+- 100 jeux, 636 prévisualisations et 4 atlas générés.
 
-`npm ci` signale encore deux vulnérabilités de dépendances de sévérité haute
-préexistantes. Cette tranche ne les introduit ni ne les corrige.
+Deux vulnérabilités de dépendances de sévérité haute préexistantes restent
+signalées. Cette tranche ne les introduit ni ne les corrige.
 
 ## Performance
 
@@ -261,43 +275,39 @@ de déclarer le seuil garanti.
 
 ## Dispositions OP affectées
 
-- **OP28** : première activation produit réelle, sous le contrat mono-action
-  simple strict. La chaîne besoin, admission, action, retour, acquisition et
-  arrêt ou décision suivante est active lorsque l’utilisateur choisit Agent.
-- **OP18** : inchangée dans le produit navigateur. Le seam sait la transporter,
-  mais aucun constructeur `FieldStockCampaignContext` à partir d’une vraie
-  observation produit n’est encore enregistré dans le contrôleur.
-- **OP29/OP30** : consommateurs spécialisés existants inchangés ; aucun appel
-  générique redondant ajouté.
-- **OP31** : toujours sans propriétaire d’objectif produit démontré.
+- **OP28** : activation produit réelle conservée sous le contrat mono-action
+  strict.
+- **OP18** : propriétaire et transport navigateur enregistrés ; revalidation,
+  ACTION6 et retour qualifiés lorsqu’un prior réel est fourni ; acquisition
+  initiale absente du produit.
+- **OP29/OP30** : consommation spécialisée et frontière post-acquisition
+  conservées sans appel générique redondant.
+- **OP31** : toujours sans propriétaire d’objectif produit.
 - **Autres OP** : aucune activation artificielle.
 
 ## Limites ouvertes
 
-- le contrôleur par défaut n’expose que le propriétaire OP28 public strict ;
-- FieldStock ne reçoit pas encore un contexte produit navigateur réel ;
+- aucun mécanisme produit n’acquiert encore le prior FieldStock initial ;
+- le runtime FieldStock par défaut reste vide ;
 - Region ne possède pas encore le contrat physique commun complet ;
-- les acquisitions passives multi-propriétaires ne sont pas orchestrées par ce
-  premier contrôleur ;
-- les sessions Agent en attente ne disposent pas encore d’une sauvegarde et
-  restauration produit ;
+- les acquisitions passives multi-propriétaires ne sont pas orchestrées ;
+- les sessions et connaissances Agent ne disposent pas encore d’une sauvegarde
+  et restauration produit ;
 - aucun propriétaire OP31 n’est raccordé ;
 - la performance officielle C7 reste ouverte ;
-- aucune publication Site n’est effectuée par cette tranche.
+- aucune publication Site n’est effectuée.
 
 ## Prochaine étape
 
-La prochaine tranche utile n’est pas d’ajouter une autre boucle générale. Elle
-consiste à élargir les producteurs réels derrière le contrôleur unique :
+La prochaine tranche doit acquérir le prior initial à partir d’un besoin public
+réel, puis utiliser le transport déjà qualifié :
 
-1. construire `FieldStockCampaignContext` depuis l’observation publique et les
-   connaissances adressées déjà revalidées ;
-2. enregistrer le propriétaire FieldStock et son transport navigateur sans
-   casser l’ambiguïté neutre ;
-3. démontrer OP18 en session produit jusqu’à la proposition suivante ;
-4. compléter ensuite le contrat physique Region ;
-5. identifier un propriétaire d’objectif avant toute activation OP31 ;
-6. exécuter enfin les quatre runners C7 et publier les médianes par jeu.
+1. détecter les témoins publics d’un champ adressé ;
+2. produire un prior local avec provenance et limites ;
+3. le conserver comme hypothèse non applicable ;
+4. laisser la scène courante le revalider ;
+5. démontrer OP18 jusqu’à la décision suivante en campagne réelle ;
+6. poursuivre ensuite Region, restauration, OP31 et C7.
 
 GitHub reste la source canonique. Toute publication Site future devra pointer
-vers un commit canonique intégré et être vérifiée GitHub ↔ Site.
+vers un commit canonique intégré et vérifié.

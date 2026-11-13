@@ -84,6 +84,17 @@ Commit de suppression :
 Le workflow ne doit pas être intégré dans la branche canonique. Les preuves de
 son exécution restent dans GitHub Actions et dans le présent rapport.
 
+## Évolution postérieure : FieldStock browser
+
+Le contrôleur qualifié par le présent rapport utilise désormais la fabrique
+combinée FieldStock/OP28. Le runtime FieldStock reste vide par défaut et ne
+produit aucune ACTION6 sans prior réel. Avec un prior fourni, le contexte est
+revalidé depuis les pixels publics avant OP18.
+
+Qualification postérieure : run `43353708964`, job `131650593632`,
+**332/332 tests**, typecheck et build réussis. Rapport :
+`docs/recovery/op01-op31-browser-field-stock-context-20261112.md`.
+
 ## Performance
 
 Cette qualification prouve la correction fonctionnelle, le typecheck, la

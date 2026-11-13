@@ -69,113 +69,78 @@ Intégration qualifiée depuis `recovery/lot5-site109-rebase-20261112` :
 
 ## Propriétaire commun OP18/OP28
 
-Le noyau `CommonCampaignOwner` possède maintenant deux hôtes qualifiés et
-complémentaires.
+Le produit navigateur possède maintenant un contrôleur Agent unique et borné.
+Il instancie le seam browser direct ; le Worker commun reste qualifié mais n’est
+pas instancié par `main.ts`.
 
-### Hôte browser/product
+### Chaîne produit active
 
-`src/runtime/v6-browser-common-campaign-host.ts` qualifie la couture directe :
+`BrowserAgentController` possède une seule session, une limite de 64 actions et
+un transfert Agent → Manual gracieux après règlement d’un retour déjà en vol.
+Il s’arrête sans fallback sur `none`, `ambiguous`, `pending`, `blocked`, terminal,
+obsolescence, erreur ou limite.
 
-**GameObservation → AgentObservation → contextes owners → CommonCampaignOwner →
-Logos → AgentProductDispatch → BrowserGameRuntime → acquisition avant
-présentation.**
+Le mode Manual conserve son dispatch historique et ne traverse aucune campagne
+Agent.
 
-Propriétés vérifiées :
+### OP28
 
-- correspondance exacte owner/transport ;
-- même `needId` de la release à l’acquisition ;
-- ACTION6 et coordonnées conservées ;
-- acquisition avant présentation ;
-- refus des observations périmées ;
-- annulation sur transport, obsolescence ou remplacement de session ;
-- aucune décision cachée en cas de `none`, `ambiguous` ou `blocked`.
+Le propriétaire public strict reste actif lorsque l’observation expose une seule
+action simple complète. La chaîne traverse autorité Logos, dispatch physique,
+retour corrélé au même `needId`, acquisition et présentation.
 
-Qualification :
+### FieldStock / OP18 dans le browser
 
-- run `43348635198` ;
-- job `131633987557` ;
-- commit `8a73045e594bac9892f8846564b76c367c5fcccd` ;
-- **300/300 tests réussis**.
+`BrowserFieldStockOwnerTransport` est maintenant enregistré avec OP28 dans
+l’hôte par défaut.
 
-### Hôte Worker
+Il reste inerte lorsque le runtime est vide. Un prior explicitement fourni doit
+être revalidé uniquement depuis la scène publique 64×64 avant toute proposition
+OP18. Un stock provenant d’une autre session est rétrogradé en prior et ne peut
+pas contourner cette revalidation.
 
-Le Worker V6 reconstruit utilise désormais
-`V6CommonCampaignDecisionPort` par défaut.
+Le retour sélectionné est consommé par `afterStock()` et `recordStock()` avant
+la frontière locale et avant la présentation.
 
-Composants principaux :
+Scénario qualifié : prior public revalidé, ACTION6 vers `(22,20)`, réécriture
+conjointe observée, puis rétention correcte lors d’une frontière officielle.
 
-- `src/runtime/v6-public-observation-measurement.ts` ;
-- `src/runtime/v6-common-campaign-decision-port.ts` ;
-- `src/runtime/v6-agent-worker-core.ts` ;
-- `src/runtime/v6-agent-worker.ts`.
-
-Chaîne vérifiée :
-
-1. l’observation publique 64×64 est copiée et validée ;
-2. le retour de l’action précédente est acquis avec le même `needId` ;
-3. une frontière officielle est traitée ;
-4. un prior FieldStock est revalidé seulement si nécessaire ;
-5. les propositions sont collectées sans classement ;
-6. zéro proposition reste `none` ;
-7. plusieurs propositions restent `ambiguous` ;
-8. une proposition unique peut être libérée par OP18 ou OP28 ;
-9. l’observation suivante est consommée avant la décision suivante.
-
-Le hook `AgentDecisionPort.observe()` garantit aussi que :
-
-- une observation `WIN` règle le dernier retour puis arrête la campagne sans
-  demander une nouvelle action ;
-- un budget de décision nul règle le retour puis s’arrête ;
-- une erreur d’observation empêche toute décision.
-
-Effet OP18 démontré : ACTION6 vers `(3,1)`, déplacement observé et enregistré,
-puis ACTION6 suivante vers `(4,1)`.
-
-Prudence conservée :
-
-- aucun prior FieldStock n’est injecté par défaut ;
-- ACTION6 seule ne produit aucune coordonnée inventée ;
-- aucune OP n’est appelée lorsque le domaine est vide ou ambigu ;
-- Region n’est pas ajouté sans candidat public complet et qualifié.
+Le produit ne possède toutefois encore aucun mécanisme d’acquisition initiale
+du prior. Le runtime créé par défaut est donc vide et ACTION6 seule produit
+`none` sans coordonnées inventées.
 
 ### Qualification combinée
 
-Le raccord Worker a été qualifié sur la baseline contenant déjà l’hôte
-browser/product :
-
-- run GitHub Actions : `43349587061` ;
-- job : `131637119489` ;
-- commit qualifié : `a79aa291bd61cbbfd8c7a3579ca5df8afee06e90` ;
-- baseline : `edb19e247c409941af35165cdf37a0440cbe6adf` ;
+- run GitHub Actions : `43353708964` ;
+- job : `131650593632` ;
+- commit qualifié : `400d9bcc1062130508d27e62f1508f82011d2ea7` ;
 - Node `22.18.0` ;
-- `npm ci` réussi ;
-- `npm run typecheck` réussi ;
-- régression TypeScript complète : **313/313 tests réussis** ;
-- échecs, annulations, tests ignorés et TODO : `0`.
+- typecheck réussi ;
+- **332/332 tests réussis** ;
+- build Vite réussi ;
+- 100 jeux, 636 prévisualisations et 4 atlas générés.
 
 Preuves :
 
 - `docs/recovery/op01-op31-common-campaign-owner-20261112.md` ;
 - `docs/recovery/op01-op31-browser-campaign-host-20261112.md` ;
-- `docs/recovery/op01-op31-worker-common-campaign-20261112.md`.
-
-Les deux hôtes restent inactifs dans `main.ts`. Ils ne doivent pas contrôler la
-même session simultanément sans contrôleur produit explicite.
+- `docs/recovery/op01-op31-worker-common-campaign-20261112.md` ;
+- `docs/recovery/op01-op31-browser-agent-controller-20261112.md` ;
+- `docs/recovery/op01-op31-browser-field-stock-context-20261112.md`.
 
 Limites :
 
-- aucun contrôleur Agent n’active encore un seam unique ;
-- l’acquisition initiale du prior FieldStock depuis une vraie campagne reste
-  absente ;
-- Region commun, acquisition passive et snapshot/restauration restent ouverts ;
-- OP31 n’a pas de propriétaire d’objectif produit ;
+- acquisition initiale du prior FieldStock absente ;
+- Region commun, acquisition passive et snapshot/restauration ouverts ;
+- OP31 sans propriétaire d’objectif produit ;
 - performance officielle STCK/SMLP encore à mesurer.
 
 Statut Lot 5 :
 
-**5B, OP18/OP28, le propriétaire commun et ses hôtes browser et Worker sont
-fonctionnellement qualifiés ; activation produit, acquisition initiale,
-restauration et performance officielle restent à confirmer.**
+**5B, le propriétaire commun, le contrôleur browser, OP28 active et le transport
+FieldStock/OP18 depuis un prior fourni sont fonctionnellement qualifiés ;
+acquisition initiale, restauration et performance officielle restent à
+confirmer.**
 
 ## Progression Lot 9 — reprise 9B
 
