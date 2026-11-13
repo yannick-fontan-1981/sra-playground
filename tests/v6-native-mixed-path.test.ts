@@ -106,6 +106,10 @@ function assertAcquiredOnce(state: ReturnType<typeof harness>, count: number): v
   assert.equal(state.runtime.snapshot().actions, count);
   assert.equal(state.runtime.snapshot().cycles, 1);
   assert.equal(trace(state).filter(event => event.kind === 'actual_outcome').length, count);
+  const released = trace(state).filter(event => event.kind === 'sic_native_plan');
+  assert.equal(released.length, 1);
+  assert.deepEqual(released[0]!.commands, state.commands);
+  assert.ok(trace(state).filter(event => event.kind === 'actual_outcome').every(event => event.sic_plan === released[0]!.id));
   assert.equal(trace(state).filter(event => event.kind === 'sealed_prefix').length, 1);
   assert.notEqual(state.agent.snapshot.status, 'error', state.agent.snapshot.message);
 }

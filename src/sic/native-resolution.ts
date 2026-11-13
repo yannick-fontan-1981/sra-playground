@@ -57,6 +57,7 @@ export interface NativeResolution {
   readonly route: readonly NativePoint[];
   readonly proposalRef: string | null;
   readonly planRevision?: number;
+  readonly releasedPlan?: { readonly family: string; readonly planned: number; readonly objective: string | null };
   readonly remainingSteps: number;
   readonly footprint: NativeBox | null;
   readonly context: NativePlanContext | null;
@@ -161,6 +162,12 @@ export function readNativeResolution(agent: {
     event?.kind === 'before_guard' && event.family === family && event.admitted === true) : null;
   const release = pending && guard ? entries.slice(proposalAt + 1).reverse().find(event =>
     event?.kind === 'why_act_release' && event.admitted === true) : null;
+  const planReceipt = pending && proposalAt >= 0 && proposal ? entries.slice(proposalAt + 1).find(event =>
+    event?.kind === 'sic_native_plan' && event.family === family
+    && typeof event.observationRef === 'string' && event.observationRef.startsWith(`${scope}${agent.level}:`))
+    : result?.sic_plan ? entries.find(event => event?.kind === 'sic_native_plan' && event.id === result.sic_plan) : null;
+  const receiptFamily = label(planReceipt?.family), receiptSize = natural(planReceipt?.planned);
+  const releasedPlan = receiptFamily && receiptSize ? { family: receiptFamily, planned: receiptSize, objective: label(planReceipt?.objective) } : undefined;
   const traced = proposalAt >= 0 && result && proposalAt < entries.indexOf(result) && result.family === family
     ? entries[proposalAt] : null;
   const stepList = Array.isArray(proposal?.steps) ? proposal.steps : [];
@@ -324,6 +331,7 @@ export function readNativeResolution(agent: {
     recoveryAction: recoveryAction ?? undefined,
     composition: label(template?.composition_ref), compositions, subjects, route, proposalRef: label(proposal?.proposal_id),
     planRevision: natural(release?.decision_revision) ?? undefined,
+    releasedPlan,
     remainingSteps: Math.max(0, plan.length - routeIndex), footprint, context,
     guard: label(guard?.reason),
     nextIndex: pending && guard && Number.isSafeInteger(guard.index) ? Number(guard.index) : null, steps,

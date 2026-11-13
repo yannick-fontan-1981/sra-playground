@@ -32,6 +32,7 @@ import { WindowQuestion } from './v6-window-question.ts';
 import { OrderedRecruitment } from './v6-ordered-recruitment.ts';
 import { RankedWorkshop } from './v6-ranked-workshop.ts';
 import { compileRecoveryPack, isRecoveryStop } from '../sic/active-recovery.ts';
+import { nativePlanReceipt } from '../sic/native-plan-receipt.ts';
 import { SymbolTransactions } from './v6-symbol-transactions.ts';
 import { AddressedMaterial, ADDRESSED_NATIVE_SEARCH_BOUNDS } from './v6-addressed-material.ts';
 import { ObservedBinding, OBSERVED_BINDING_NATIVE_SEARCH_BOUNDS } from './v6-observed-binding.ts';
@@ -181,6 +182,7 @@ interface Prefix {
   family: NativeFamily; proposal: NativeProposal; revision: number; index: number; witnessed: WitnessedTransition[];
   released: boolean; interruption: string | null;
   nativeBindings: NativeRecord[];
+  sicPlanId?: string;
 }
 export interface NativeSelectionGroup {
   readonly id: string;
@@ -1200,6 +1202,11 @@ export class NativeV6Runtime implements NativeV6Backend {
       this.note({ kind: 'why_act_release', admitted: true, decision_revision: this.prefix.revision,
         native_gate: this.authority !== null, graph_chain: this.knowledge?.graphChain ?? null });
     }
+    if (!this.prefix.sicPlanId) {
+      const receipt = nativePlanReceipt(family.id, proposal, this.observation, index);
+      this.prefix.sicPlanId = receipt.id;
+      this.note({ kind: 'sic_native_plan', ...receipt });
+    }
     this.kind = 'action'; this.reason = null; return true;
   }
 
@@ -1220,7 +1227,8 @@ export class NativeV6Runtime implements NativeV6Backend {
       const preserved = this.caller?.preservation(prefix.proposal, this.current!, after, true, publicBoundary);
       if (preserved && !preserved.admitted) result = { matched: false, seal_prefix: true, reason: preserved.reason };
       prefix.witnessed.push({ command: freeze(structuredClone(outcome.command)), before, after, first, second: this.current!, index: prefix.index, outcome: freeze(structuredClone(result)) });
-      this.note({ kind: 'actual_outcome', family: prefix.family.id, index: prefix.index, ...result, observation_ref: after.observation_ref });
+      this.note({ kind: 'actual_outcome', family: prefix.family.id, index: prefix.index, ...result, observation_ref: after.observation_ref,
+        ...(prefix.sicPlanId ? { sic_plan: prefix.sicPlanId } : {}) });
       this.check(execution);
       const boundary = first.level !== this.current!.level || first.levels_completed !== this.current!.levels_completed;
       prefix.index += 1;

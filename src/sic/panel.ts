@@ -970,6 +970,12 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
       plan.append(renderFrames(subjects.map(item => [item.label, item.before] as const), palette));
     }
   }
+  if (native?.releasedPlan) {
+    const line = document.createElement('p');
+    const receipt = native.releasedPlan;
+    line.textContent = `Guarded plan · ${nativeLabel(receipt.family)} · ${receipt.planned} ${receipt.planned === 1 ? 'command' : 'commands'}.`;
+    plan.append(line);
+  }
   if (native?.outcome) {
     const outcome = document.createElement('p');
     const result = native.outcome.matched === true ? 'matched the prediction'
