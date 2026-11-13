@@ -24,6 +24,7 @@ jobs:
           tests/v6-temporal-decision-port.test.ts
           tests/v6-temporal-act-release-audit.test.ts
           tests/v6-temporal-action-binding.test.ts
+          tests/v6-temporal-action-release-permit.test.ts
           tests/v6-temporal-action-donor-audit.test.ts
           tests/v6-composition-engine.test.ts
           tests/v6-native-authority.test.ts
@@ -39,7 +40,7 @@ jobs:
           tests/v6-temporal-decision-receipt.test.ts
           tests/v6-temporal-selection-adapter.test.ts
           tests/v6-temporal-selection-bridge.test.ts
-      - name: Typecheck reconstructed TemporalSelection, action binding, ACT audit, passive port and shared trace sources
+      - name: Typecheck reconstructed TemporalSelection, action binding, permit, ACT audit, passive port and shared trace sources
         run: >-
           npx tsc --noEmit
           --target ES2022
@@ -62,5 +63,6 @@ jobs:
           src/runtime/v6-temporal-decision-port.ts
           src/runtime/v6-temporal-act-release-audit.ts
           src/runtime/v6-temporal-action-binding.ts
+          src/runtime/v6-temporal-action-release-permit.ts
 
-# qualification-head: temporal-prepared-action-binding
+# qualification-head: temporal-action-release-permit
