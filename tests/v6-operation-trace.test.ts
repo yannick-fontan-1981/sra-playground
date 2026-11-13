@@ -63,8 +63,7 @@ test('trace remains bounded and reports dropped events', () => {
   assert.equal(snapshot.counters['operation:OP28:executed'], 3);
 });
 
-
-test('primitive counters-only API matches full-mode counter keys without retaining events', () => {
+test('primitive counters-only API matches full-mode OP counter keys without retaining events', () => {
   const light = new OperationTraceSink(8, 'counters');
   const full = new OperationTraceSink(8, 'full');
 
@@ -91,4 +90,54 @@ test('primitive counters-only API matches full-mode counter keys without retaini
   assert.equal(full.snapshot().events.length, 3);
   assert.equal(light.countersOnly, true);
   assert.equal(full.countersOnly, false);
+});
+
+test('trace records a non-OP capability without polluting OP counters', () => {
+  const trace = new OperationTraceSink();
+  trace.record({
+    kind: 'need', needId: 'need-temporal', needKind: 'temporal-selection',
+    reason: 'current Source domain requires an attributed selection', producer: 'temporalSelectionBridge',
+    episodeId: 'ep', levelEpoch: 2, observationId: 'obs-8', observationRevision: 8,
+    dependencyRefs: ['candidate:a', 'candidate:b'], completeness: 'complete',
+  });
+  trace.record({
+    kind: 'capability', needId: 'need-temporal', capability: 'temporal-selection',
+    caller: 'temporalSelectionBridge', mode: 'accepted', reason: 'Source/DRM receipt verified',
+    inputRefs: ['receipt:abc'], dependencyRevisions: { observation: 8 }, resultStatus: 'complete',
+    resultSummary: { selectedRef: 'candidate:b', actAuthorized: false },
+  });
+  trace.record({
+    kind: 'capability_consumption', needId: 'need-temporal', capability: 'temporal-selection',
+    consumer: 'temporalSelectionBridge', decisionRef: 'receipt:abc', effectKind: 'project',
+    semanticEffect: true, reason: 'verified external selection projected into the current domain',
+  });
+
+  const snapshot = trace.snapshot();
+  assert.deepEqual(snapshot.events.map(event => event.kind), [
+    'need', 'capability', 'capability_consumption',
+  ]);
+  assert.equal(snapshot.counters['capability:temporal-selection:accepted'], 1);
+  assert.equal(snapshot.counters['capability_consumption:temporal-selection:project'], 1);
+  assert.equal(Object.keys(snapshot.counters).some(key => key.includes('OP')), false);
+});
+
+test('counters-only capability trace matches full-mode keys without retaining events', () => {
+  const light = new OperationTraceSink(8, 'counters');
+  const full = new OperationTraceSink(8, 'full');
+
+  light.countCapability('temporal-selection', 'accepted');
+  light.countCapabilityConsumption('temporal-selection', 'project');
+
+  full.record({
+    kind: 'capability', needId: 'n', capability: 'temporal-selection', caller: 'c', mode: 'accepted',
+    reason: 'r', inputRefs: [], dependencyRevisions: {}, resultStatus: 'complete',
+  });
+  full.record({
+    kind: 'capability_consumption', needId: 'n', capability: 'temporal-selection', consumer: 'c',
+    decisionRef: 'd', effectKind: 'project', semanticEffect: true, reason: 'r',
+  });
+
+  assert.deepEqual(light.snapshot().counters, full.snapshot().counters);
+  assert.deepEqual(light.snapshot().events, []);
+  assert.equal(full.snapshot().events.length, 2);
 });

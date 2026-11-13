@@ -10,6 +10,9 @@ export type OperationEffectKind =
   | 'information_only'
   | 'persisted_only';
 
+export type CapabilityTraceMode = 'accepted' | 'refused' | 'blocked';
+export type CapabilityEffectKind = 'project' | 'consume_evidence' | 'refuse';
+
 export interface OperationNeedEvent {
   kind: 'need';
   needId: string;
@@ -54,7 +57,39 @@ export interface OperationConsumptionEvent {
   reason: string;
 }
 
-export type OperationTraceEvent = OperationNeedEvent | OperationCallEvent | OperationConsumptionEvent;
+/** Decision event for a bounded capability that is not an OP01-OP31 call. */
+export interface CapabilityDecisionEvent {
+  kind: 'capability';
+  needId: string;
+  capability: string;
+  caller: string;
+  mode: CapabilityTraceMode;
+  reason: string;
+  inputRefs: string[];
+  dependencyRevisions: Record<string, string | number>;
+  resultStatus: OperationCompleteness;
+  resultSummary?: unknown;
+  executeUs?: number;
+  traceBytes?: number;
+}
+
+export interface CapabilityConsumptionEvent {
+  kind: 'capability_consumption';
+  needId: string;
+  capability: string;
+  consumer: string;
+  decisionRef: string;
+  effectKind: CapabilityEffectKind;
+  semanticEffect: boolean | 'unknown';
+  reason: string;
+}
+
+export type OperationTraceEvent =
+  | OperationNeedEvent
+  | OperationCallEvent
+  | OperationConsumptionEvent
+  | CapabilityDecisionEvent
+  | CapabilityConsumptionEvent;
 
 export interface OperationTraceSnapshot {
   readonly dropped: number;
@@ -63,11 +98,12 @@ export interface OperationTraceSnapshot {
 }
 
 /**
- * Bounded, decision-neutral operation trace.
+ * Bounded, decision-neutral operation/capability trace.
  *
- * The sink never invokes an operation and never decides whether one is needed.
- * Producers/callers/consumers explicitly emit events at their existing decision
- * points. Normal mode keeps only a small bounded tail and counters.
+ * The sink never invokes an operation or capability and never decides whether
+ * one is needed. Producers/callers/consumers explicitly emit events at their
+ * existing decision points. Normal mode keeps only a small bounded tail and
+ * counters; counters mode retains no event payloads.
  */
 export class OperationTraceSink {
   readonly #capacity: number;
@@ -104,10 +140,32 @@ export class OperationTraceSink {
     this.#increment(`consumption:${op}:${effectKind}`);
   }
 
+  countCapability(capability: string, mode: CapabilityTraceMode): void {
+    this.#increment(`capability:${capability}:${mode}`);
+  }
+
+  countCapabilityConsumption(capability: string, effectKind: CapabilityEffectKind): void {
+    this.#increment(`capability_consumption:${capability}:${effectKind}`);
+  }
+
   record(event: OperationTraceEvent): void {
-    if (event.kind === 'operation') this.countOperation(event.op, event.mode);
-    else if (event.kind === 'consumption') this.countConsumption(event.op, event.effectKind);
-    else this.countNeed(event.needKind);
+    switch (event.kind) {
+      case 'operation':
+        this.countOperation(event.op, event.mode);
+        break;
+      case 'consumption':
+        this.countConsumption(event.op, event.effectKind);
+        break;
+      case 'capability':
+        this.countCapability(event.capability, event.mode);
+        break;
+      case 'capability_consumption':
+        this.countCapabilityConsumption(event.capability, event.effectKind);
+        break;
+      case 'need':
+        this.countNeed(event.needKind);
+        break;
+    }
 
     if (this.#detail === 'counters') return;
     if (this.#events.length === this.#capacity) {

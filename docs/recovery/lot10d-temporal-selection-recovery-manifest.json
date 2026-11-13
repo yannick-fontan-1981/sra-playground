@@ -1,0 +1,78 @@
+{
+  "schema_version": 2,
+  "lot": "10D",
+  "capability": "TemporalSelection",
+  "working_branch": "recovery/lot10d-temporal-selection-rebased-20261112",
+  "baseline_branch": "recovery/site109-reconstruction-20261112",
+  "baseline_commit": "24fcdbb16c93de59489a6bb0392cc709b7a75d14",
+  "previous_working_branch": "recovery/lot10d-temporal-selection-restart2-20261112",
+  "historical_recovery_source_branch": "lot10d-temporal-selection-github-20261112",
+  "historical_recovery_source_compare": {
+    "merge_base": "2c9e8b45555fa21dbc4cb22a2cc66c7efb1383ac",
+    "ahead_by": 0,
+    "recoverable_changed_files": []
+  },
+  "reconstructed_files": [
+    "src/logos-engine/v6-temporal-selection-contract.ts",
+    "src/logos-engine/v6-temporal-memory-contract.ts",
+    "src/logos-engine/v6-temporal-return-contract.ts",
+    "src/logos-engine/v6-temporal-observation-state.ts",
+    "src/logos-engine/v6-temporal-decision-receipt.ts",
+    "src/logos-engine/v6-temporal-selection-adapter.ts",
+    "src/logos-engine/v6-temporal-selection-bridge.ts",
+    "tests/v6-temporal-selection-contract.test.ts",
+    "tests/v6-temporal-memory-contract.test.ts",
+    "tests/v6-temporal-return-contract.test.ts",
+    "tests/v6-temporal-observation-state.test.ts",
+    "tests/v6-temporal-decision-receipt.test.ts",
+    "tests/v6-temporal-selection-adapter.test.ts",
+    "tests/v6-temporal-selection-bridge.test.ts",
+    "docs/recovery/lot10d-temporal-selection-contract.md",
+    "docs/recovery/lot10d-temporal-memory-contract.md",
+    "docs/recovery/lot10d-temporal-return-contract.md",
+    "docs/recovery/lot10d-temporal-observation-state.md",
+    "docs/recovery/lot10d-temporal-decision-receipt.md",
+    "docs/recovery/lot10d-temporal-selection-adapter.md",
+    "docs/recovery/lot10d-temporal-trace-bridge.md",
+    ".github/workflows/lot10d-temporal-recovery.yml"
+  ],
+  "merged_shared_files": [
+    "src/logos-engine/v6-operation-trace.ts",
+    "tests/v6-operation-trace.test.ts"
+  ],
+  "canonical_runtime_available": [
+    "src/runtime/v6-agent-worker-core.ts",
+    "src/runtime/v6-agent-worker.ts",
+    "tests/helpers/v6-live-game-campaign.ts",
+    "scripts/measure-native-loop-costs.mjs",
+    "docs/migration/v6-delivery-roadmap.md"
+  ],
+  "canonical_runtime_open": [
+    "src/logos-engine/v6-native-runtime.ts",
+    "docs/migration/v6-entry-point-progress.json",
+    "TemporalSelection public domain producer",
+    "TemporalSelection runtime call position",
+    "native STCK/SMLP runners and official corpus"
+  ],
+  "previous_qualification": {
+    "tests_passed": 86,
+    "tests_failed": 0,
+    "ci_run_id": 43340758482,
+    "ci_head": "1033edbb1ba23a75106e34bb5159b7f089c6f46d",
+    "typecheck": "passed",
+    "qualifies_rebased_branch": false
+  },
+  "rebased_qualification": {
+    "status": "pending_ci"
+  },
+  "performance": {
+    "stck_global_max_increase_percent_exclusive": 10,
+    "smlp_global_max_increase_percent_exclusive": 10,
+    "cross_game_compensation": false,
+    "internal_phase_may_exceed_if_game_global_passes": true,
+    "official_status": "to_confirm_native_runners_missing"
+  },
+  "historical_selector_reconstructed": false,
+  "historical_state_machine_reconstructed": false,
+  "next_step": "qualify the rebased port, then design a worker decision port only for explicitly supplied and attributable TemporalSelection inputs"
+}

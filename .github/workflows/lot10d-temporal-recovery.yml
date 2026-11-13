@@ -1,0 +1,59 @@
+name: Lot10D Temporal recovery contracts
+
+on:
+  push:
+    branches:
+      - recovery/lot10d-temporal-selection-rebased-20261112
+  workflow_dispatch:
+
+jobs:
+  temporal-contracts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.18.0
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Run affected V6 runtime, Logos and TemporalSelection tests
+        run: >-
+          node --experimental-strip-types --test
+          tests/v6-agent-worker-core.test.ts
+          tests/v6-agent-worker.test.ts
+          tests/v6-composition-engine.test.ts
+          tests/v6-native-authority.test.ts
+          tests/v6-operation-cache.test.ts
+          tests/v6-operation-cycle.test.ts
+          tests/v6-operation-trace.test.ts
+          tests/v6-operations.test.ts
+          tests/v6-target-binding.test.ts
+          tests/v6-temporal-selection-contract.test.ts
+          tests/v6-temporal-memory-contract.test.ts
+          tests/v6-temporal-return-contract.test.ts
+          tests/v6-temporal-observation-state.test.ts
+          tests/v6-temporal-decision-receipt.test.ts
+          tests/v6-temporal-selection-adapter.test.ts
+          tests/v6-temporal-selection-bridge.test.ts
+      - name: Typecheck reconstructed TemporalSelection and shared trace sources
+        run: >-
+          npx tsc --noEmit
+          --target ES2022
+          --module ESNext
+          --moduleResolution Bundler
+          --allowImportingTsExtensions
+          --strict
+          --skipLibCheck
+          src/logos-engine/v6-operation-trace.ts
+          src/logos-engine/v6-temporal-selection-contract.ts
+          src/logos-engine/v6-temporal-memory-contract.ts
+          src/logos-engine/v6-temporal-return-contract.ts
+          src/logos-engine/v6-temporal-observation-state.ts
+          src/logos-engine/v6-temporal-decision-receipt.ts
+          src/logos-engine/v6-temporal-selection-adapter.ts
+          src/logos-engine/v6-temporal-selection-bridge.ts
+          src/runtime/contracts.ts
+          src/runtime/v6-agent-worker-core.ts
+          src/runtime/v6-agent-worker.ts
+
+# qualification-head: rebased-traced-bridge-with-runtime-regressions
