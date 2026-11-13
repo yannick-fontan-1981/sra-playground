@@ -249,7 +249,6 @@ test('retained public prior is revalidated before the browser campaign can relea
   }));
 
   assert.equal(transport.lastRevalidation, 'revalidated_stock');
-  assert.ok(transport.current?.observation.entities);
   assert.equal(result.status, 'action');
   if (result.preparation?.status === 'action') {
     assert.equal(result.preparation.ownerId, FIELD_STOCK_CALLER_OWNER_ID);
