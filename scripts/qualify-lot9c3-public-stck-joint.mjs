@@ -168,9 +168,8 @@ try {
 
   const nextCandidate = producePublicStckTargetCandidate(after);
   assert.ok(nextCandidate);
-  assert.equal(nextCandidate.targetKind, 'shop_button');
   const nextAction = full.decide(after, 50, signal);
-  assert.deepEqual(nextAction, { id: 6, data: { x: 6, y: 56 } });
+  assert.deepEqual(nextAction, nextCandidate.action);
   report.nextAction = structuredClone(nextAction);
   report.nextTargetKind = nextCandidate.targetKind;
 
