@@ -3,13 +3,7 @@ import { renderSiteHeader } from './site-header';
 import { BrowserGameRuntime, type GameObservation } from './runtime/browser-games';
 import { AGENT_STATUS } from './runtime/contracts';
 import { GAME_CATALOG, PUBLIC_SOURCE_BASE, getGameByCode, type GameCatalogEntry } from './games/catalog';
-import {
-  isPresentationCurrent,
-  isPresentationLoopCurrent,
-  presentationFeedback,
-  presentationFrameDurationMs,
-  presentationFrames,
-} from './product-presentation';
+import { presentProductObservation } from './product-presentation-effects';
 import {
   dispatchProductAction,
   ready as productReady,
@@ -286,32 +280,29 @@ function updateInterface(): void {
 }
 
 async function present(next: GameObservation, selectedGeneration: number, releaseBusy = true): Promise<void> {
-  if (!isPresentationCurrent(selectedGeneration, selectionGeneration, next.gameCode, selectedGame.code)) return;
-  const generation = ++presentationGeneration;
-  observation = next;
-  loading = false;
-  failed = false;
-  const url = new URL(window.location.href);
-  url.searchParams.set('game', next.gameCode);
-  url.searchParams.set('level', String(next.level));
-  if (url.href !== window.location.href) window.history.replaceState(null, '', url);
-  updateInterface();
-  const frames = presentationFrames(next);
-  for (let i = 0; i < frames.length; i += 1) {
-    if (!isPresentationLoopCurrent(generation, presentationGeneration, selectedGeneration, selectionGeneration)) return;
-    paint(frames[i]!, next.palette ?? fallbackPalette);
-    if (i < frames.length - 1) {
-      await new Promise<void>(resolve => window.setTimeout(resolve, presentationFrameDurationMs(next, i)));
-    }
-  }
-  if (!isPresentationLoopCurrent(generation, presentationGeneration, selectedGeneration, selectionGeneration)) return;
-  paint(next.frame, next.palette ?? fallbackPalette);
-  if (releaseBusy) {
-    busy = false;
-    updateInterface();
-  }
-  const feedback = presentationFeedback(next);
-  if (feedback) element('#game-feedback').textContent = feedback;
+  await presentProductObservation(next, selectedGeneration, {
+    currentSelectionGeneration: () => selectionGeneration,
+    currentPresentationGeneration: () => presentationGeneration,
+    nextPresentationGeneration: () => {
+      presentationGeneration += 1;
+      return presentationGeneration;
+    },
+    selectedGameCode: () => selectedGame.code,
+    setObservation: value => { observation = value; },
+    setLoading: value => { loading = value; },
+    setFailed: value => { failed = value; },
+    syncLocation: value => {
+      const url = new URL(window.location.href);
+      url.searchParams.set('game', value.gameCode);
+      url.searchParams.set('level', String(value.level));
+      if (url.href !== window.location.href) window.history.replaceState(null, '', url);
+    },
+    updateInterface,
+    paint: (frame, palette) => paint(frame, palette),
+    wait: delayMs => new Promise<void>(resolve => window.setTimeout(resolve, delayMs)),
+    setBusy: value => { busy = value; },
+    setFeedback: message => { element('#game-feedback').textContent = message; },
+  }, { fallbackPalette, releaseBusy });
 }
 
 function showFailure(error: unknown, generation: number): void {
