@@ -398,15 +398,15 @@ Qualification fonctionnelle initiale :
 
 - run GitHub Actions : `43362500453` ;
 - job : `131679075165` ;
-- candidat : `e821e3221b049bf03ab6d8e3c5977cc10dcfe7` non applicable ;
-- candidat réellement qualifié de cette tranche initiale :
-  `e821e3221b049b59bc65fe4ea18fad9d3dc13246` ;
-- régression TypeScript : **363/363** ;
-- build : réussi ;
-- câblage : `logos-product-wiring-present`.
-
-La première valeur de candidat ci-dessus est explicitement marquée non applicable
-pour éviter toute confusion avec le commit de branche réellement qualifié.
+- candidat : `e821e3221b049b59bc65fe4ea18fad9d3dc13246` ;
+- Node : `22.18.0` ;
+- régression TypeScript complète : **363/363** ;
+- échecs, annulations, tests ignorés et TODO : `0` ;
+- build de production : réussi ;
+- modules transformés : `62` ;
+- galerie : `100` jeux, `636` prévisualisations, `4` atlas natifs ;
+- câblage : `logos-product-wiring-present` ;
+- fichiers source inspectés : `25`.
 
 ### Campagne produit SMLP réelle
 
