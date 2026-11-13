@@ -34,6 +34,7 @@ import {
 } from './observed-addressed-material-runtime.ts';
 
 export type PublicCampaignObservationMode = 'full' | 'agent-only';
+export type AgentOnlyObservationOwnership = 'copy' | 'borrowed';
 
 export interface V6CommonCampaignDecisionPortOptions {
   trace?: OperationTraceSink;
@@ -44,6 +45,11 @@ export interface V6CommonCampaignDecisionPortOptions {
   publicSingleActionEnabled?: boolean;
   /** Defaults to full. Agent-only skips rows/entities and requires FieldStock disabled. */
   publicObservationMode?: PublicCampaignObservationMode;
+  /**
+   * Defaults to copy. Borrowed is valid only in agent-only mode when the caller
+   * owns an already isolated immutable observation for the decision lifetime.
+   */
+  agentOnlyObservationOwnership?: AgentOnlyObservationOwnership;
   fieldStockRuntimeFactory?: () => ObservedAddressedMaterialRuntime;
   fieldStockDependencies?: FieldStockDependencies;
   fieldStockRemaining?: number;
@@ -78,8 +84,9 @@ function cloneAgentObservation(source: AgentObservation): AgentObservation {
  */
 function measureAgentOnlyCampaignObservation(
   source: AgentObservation,
+  ownership: AgentOnlyObservationOwnership,
 ): PublicCampaignObservation {
-  const agent = cloneAgentObservation(source);
+  const agent = ownership === 'borrowed' ? source : cloneAgentObservation(source);
   const observationRef = `public-observation:${agent.sessionId}:${agent.sequence}`;
   return {
     agent,
@@ -135,6 +142,10 @@ export class V6CommonCampaignDecisionPort implements AgentDecisionPort {
     }
     if (this.#observationMode === 'agent-only' && this.#fieldStockEnabled) {
       throw new Error('agent-only public observation mode requires FieldStock to be disabled');
+    }
+    if (this.#observationMode !== 'agent-only'
+      && options.agentOnlyObservationOwnership !== undefined) {
+      throw new Error('agentOnlyObservationOwnership is valid only in agent-only mode');
     }
     this.#rebuildCampaign();
   }
@@ -311,9 +322,13 @@ export class V6CommonCampaignDecisionPort implements AgentDecisionPort {
     return this.options.publicObservationMode ?? 'full';
   }
 
+  get #agentOnlyObservationOwnership(): AgentOnlyObservationOwnership {
+    return this.options.agentOnlyObservationOwnership ?? 'copy';
+  }
+
   #measure(observation: AgentObservation): PublicCampaignObservation {
     return this.#observationMode === 'agent-only'
-      ? measureAgentOnlyCampaignObservation(observation)
+      ? measureAgentOnlyCampaignObservation(observation, this.#agentOnlyObservationOwnership)
       : measurePublicCampaignObservation(observation);
   }
 
