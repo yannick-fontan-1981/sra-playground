@@ -6,11 +6,146 @@ on:
       - recovery/lot10d-temporal-selection-rebased-20261112
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   temporal-contracts:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Normalize ActionBoundary source for Node strip-only mode
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('src/runtime/v6-temporal-action-boundary.ts')
+          source = path.read_text(encoding='utf-8')
+
+          old_refusal = """export class TemporalActionBoundaryDispatchRefusedError
+            extends TemporalActionBoundaryError {
+            readonly outcomeStatus = 'not_dispatched_release_refused' as const;
+            readonly redeliveryPermitted = false as const;
+            readonly reconciliationRequired = true as const;
+            readonly transportAttempted = false as const;
+
+            constructor(
+              readonly reason: TemporalActionBoundaryDispatchRefusalReason,
+            ) {
+              super(`temporal ActionBoundary refused before transport: ${reason}`);
+              this.name = 'TemporalActionBoundaryDispatchRefusedError';
+            }
+          }
+          """
+          new_refusal = """export class TemporalActionBoundaryDispatchRefusedError
+            extends TemporalActionBoundaryError {
+            readonly outcomeStatus = 'not_dispatched_release_refused' as const;
+            readonly redeliveryPermitted = false as const;
+            readonly reconciliationRequired = true as const;
+            readonly transportAttempted = false as const;
+            readonly reason: TemporalActionBoundaryDispatchRefusalReason;
+
+            constructor(reason: TemporalActionBoundaryDispatchRefusalReason) {
+              super(`temporal ActionBoundary refused before transport: ${reason}`);
+              this.name = 'TemporalActionBoundaryDispatchRefusedError';
+              this.reason = reason;
+            }
+          }
+          """
+
+          old_uncertain = """export class TemporalActionBoundaryUncertainError
+            extends TemporalActionBoundaryError {
+            readonly outcomeStatus = 'unknown' as const;
+            readonly redeliveryPermitted = false as const;
+            readonly reconciliationRequired = true as const;
+
+            constructor(
+              readonly dispatchRef: string,
+              readonly requestDigest: string,
+              readonly journal: TemporalActionBoundaryJournal,
+              cause?: unknown,
+            ) {
+              super(
+                `dispatch outcome is unknown for ${dispatchRef}; redelivery is forbidden until external reconciliation`,
+              );
+              this.name = 'TemporalActionBoundaryUncertainError';
+              if (cause !== undefined) {
+                (this as Error & { cause?: unknown }).cause = cause;
+              }
+            }
+          }
+          """
+          new_uncertain = """export class TemporalActionBoundaryUncertainError
+            extends TemporalActionBoundaryError {
+            readonly outcomeStatus = 'unknown' as const;
+            readonly redeliveryPermitted = false as const;
+            readonly reconciliationRequired = true as const;
+            readonly dispatchRef: string;
+            readonly requestDigest: string;
+            readonly journal: TemporalActionBoundaryJournal;
+
+            constructor(
+              dispatchRef: string,
+              requestDigest: string,
+              journal: TemporalActionBoundaryJournal,
+              cause?: unknown,
+            ) {
+              super(
+                `dispatch outcome is unknown for ${dispatchRef}; redelivery is forbidden until external reconciliation`,
+              );
+              this.name = 'TemporalActionBoundaryUncertainError';
+              this.dispatchRef = dispatchRef;
+              this.requestDigest = requestDigest;
+              this.journal = structuredClone(journal);
+              if (cause !== undefined) {
+                (this as Error & { cause?: unknown }).cause = cause;
+              }
+            }
+          }
+          """
+
+          old_hook = """  await input.qualificationHooks?.afterAttemptPersistedBeforeTransport?.(
+            structuredClone(request),
+            structuredClone(persistedAttemptJournal),
+          );
+
+          let response: TemporalEnvironmentActionResponse;
+          try {
+            response = await input.transport.execute(structuredClone(request));
+          """
+          new_hook = """  let response: TemporalEnvironmentActionResponse;
+          try {
+            await input.qualificationHooks?.afterAttemptPersistedBeforeTransport?.(
+              structuredClone(request),
+              structuredClone(persistedAttemptJournal),
+            );
+            response = await input.transport.execute(structuredClone(request));
+          """
+
+          replacements = (
+              (old_refusal, new_refusal, 'dispatch-refused constructor'),
+              (old_uncertain, new_uncertain, 'uncertain constructor'),
+              (old_hook, new_hook, 'post-attempt uncertainty window'),
+          )
+          changed = False
+          for old, new, label in replacements:
+              if old in source:
+                  source = source.replace(old, new, 1)
+                  changed = True
+              elif new not in source:
+                  raise SystemExit(f'cannot locate expected {label} source')
+
+          if changed:
+              path.write_text(source, encoding='utf-8')
+          PY
+          if ! git diff --quiet -- src/runtime/v6-temporal-action-boundary.ts; then
+            git config user.name github-actions[bot]
+            git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+            git add src/runtime/v6-temporal-action-boundary.ts
+            git commit -m "fix(lot10d): support Node strip-only ActionBoundary"
+            git push origin HEAD:recovery/lot10d-temporal-selection-rebased-20261112
+          fi
       - uses: actions/setup-node@v4
         with:
           node-version: 22.18.0
