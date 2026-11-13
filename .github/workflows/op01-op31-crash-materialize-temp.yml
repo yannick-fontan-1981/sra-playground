@@ -55,6 +55,7 @@ jobs:
           cp .github/workflows/op01-op31-browser-crash-resume.yml materialized/.github/workflows/
       - uses: actions/upload-artifact@v4
         with:
-          name: op01-op31-crash-materialized-full
+          name: op01-op31-crash-materialized-full-hidden
           path: materialized
           retention-days: 1
+          include-hidden-files: true
