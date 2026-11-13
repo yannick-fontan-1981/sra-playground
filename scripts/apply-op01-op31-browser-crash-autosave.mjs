@@ -84,5 +84,4 @@ source = replaceOnce(
 );
 
 await writeFile(MAIN, source);
-await import('./apply-op01-op31-browser-crash-phase-routing.mjs');
 console.log('Applied safe-boundary autosave wiring to src/main.ts');
