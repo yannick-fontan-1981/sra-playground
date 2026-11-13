@@ -29,6 +29,7 @@ Commit épinglé :
 | `agents/yf_arc3_v5/action_authority/contracts.py` | `6384f5f790beda7525e3554c3ec38c08d92bbbca` | projection jointe de priorité, utilité, intent, action, candidat, objectif, engagement, prémisses, effets attendus et falsificateurs |
 | `agents/yf_arc3_v5/logos/operations.py` | `2c713bb31dc4d8ec8f1774be87018832c3a91eb6` | schémas historiques `ActionIntent`, `ConcentrationLease` et `ActionReleasePermit` |
 | `agents/yf_arc3_v5/operators/runtime.py` | `17a46b4ea93fd635cd6f075a837c44cf9d24fbbe` | revalidation ACT, transition de lease vers `RELEASED`, production d'un `ActOutput` sans transport environnemental |
+| `agents/yf_arc3_v5/operators/contracts.py` | `42c3168529abdf1a0d379b34726b2efdbb7d55e8` | forme publique historique de `ActOutput` et statut `pending_environment_boundary` |
 | `agents/yf_arc3_v5/scheduler/runtime.py` | `258324dcb643bc1d76d4d02766e9ff6b50fbc879` | revalidation du checkpoint, de Source, de la révision, du snapshot, de l'intent, du permis, de la responsabilité et de la lease avant transport |
 | `agents/yf_arc3_v5/runtime/boundary.py` | `03b49289a5611b81b74024d179ecfd727e0301f4` | frontière d'envoi exactement une fois, tentative durable avant transport, refus de redélivrer un résultat incertain, reprise causale exacte |
 | `agents/yf_arc3_v5/runtime/contracts.py` | `8d4200b32217aea168433cc3c49aa895f8340394` | contrats transport-only de la frontière environnementale unique |
@@ -112,7 +113,8 @@ Le résultat ACT transporte seulement :
 
 - `action_ref` ;
 - `action_intent_id` ;
-- `action_release_permit_id`.
+- `action_release_permit_id` ;
+- `dispatch_status = pending_environment_boundary`.
 
 Le transport environnemental reste dans `ActionBoundary`.
 
@@ -135,9 +137,9 @@ Conséquences :
 
 La consommation exactement une fois appartient donc à une étape séparée du permis reconstruit ici.
 
-## Mapping public V6 du présent jalon
+## Mapping public V6 du permis
 
-Le contrat public reconstruit utilise uniquement les identités déjà disponibles dans le runtime navigateur :
+Le contrat public du permis utilise uniquement les identités déjà disponibles dans le runtime navigateur :
 
 - `sessionId` ;
 - `sequence` ;
@@ -157,26 +159,82 @@ Le mapping est volontairement explicite :
 
 Ce mapping n'est pas présenté comme la sérialisation historique originale.
 
-## Limites du jalon
+## Reconstruction publique de la consommation ACT ordinaire
 
-Le jalon courant reconstruit seulement un permis ordinaire à action unique :
+Le module public `v6-temporal-act-consumption.ts` reconstruit la frontière qui suit immédiatement le permis, sans reconstruire le transport.
 
-- lease validée ;
-- action courante disponible ;
-- snapshot et révision exacts ;
-- preuves causales conservées ;
-- empreintes déterministes ;
-- `actAuthorized: true` pour franchir la future frontière ACT ;
+Le mapping courant est :
+
+- `runRef` correspond au `sessionId` public ;
+- `timelineRef` correspond à l'`episodeId` de l'identité temporelle ;
+- `frameRef` correspond à l'`observationId` ;
+- `stateRevision` correspond à l'`observationRevision` ;
+- le snapshot courant correspond à l'empreinte exacte de l'`AgentObservation` publique ;
+- l'identité de disponibilité reste `available-action:<session>:<sequence>:<id>`.
+
+Avant consommation, la reconstruction revalide séparément :
+
+- Source, workflow et session ;
+- timeline, frame, révision et identité temporelle ;
+- séquence, image publique et snapshot pré-action ;
+- empreintes canoniques du permis et de la lease ;
+- lease toujours `validated` et non expirée ;
+- action toujours disponible ;
+- absence de supports retirés ;
+- responsabilité courante ;
+- preuves courantes de consommation du but ;
+- continuation parent ;
+- transport des contributions ;
+- contexte canonique d'exécution.
+
+### Issue consommée
+
+Quand toutes les revalidations réussissent :
+
+- la transition est `VALIDATED -> RELEASED` ;
+- le permis devient terminal et non réutilisable ;
+- un `ActOutput` minimal est produit avec `dispatch_status = pending_environment_boundary` ;
+- `actionReleased: true` signifie uniquement « relâchée vers la future frontière environnementale » ;
 - `actionPayloadPresent: false` ;
-- `actionReleased: false` ;
-- `environmentDispatchAuthorized: false`.
+- `environmentDispatchAuthorized: false` ;
+- aucun `AgentAction` ni cible exécutable ne figure dans le reçu.
+
+### Issue révoquée
+
+Quand le contexte n'est plus courant, la reconstruction produit un reçu terminal de révocation :
+
+- transition `VALIDATED -> INVALIDATED`, ou `VALIDATED -> EXPIRED` pour une fenêtre écoulée ;
+- aucun `ActOutput` ;
+- aucune action libérée ;
+- aucune possibilité de réutiliser le permis.
+
+Une révocation déjà journalisée demeure terminale même si un appel ultérieur présente de nouveau des faits courants. Cela évite qu'un permis périmé ou explicitement retiré puisse renaître silencieusement.
+
+### Idempotence et journal
+
+Le journal public conserve une identité terminale unique par permis :
+
+- rejouer exactement le même permis réutilise son reçu sans produire un second `ActOutput` ;
+- le même `permitRef` avec une autre empreinte est refusé ;
+- le journal est borné et échoue fermé quand il est plein, plutôt que de supprimer l'historique d'unicité ;
+- les empreintes du reçu et de la transition détectent toute divergence de payload.
+
+Cette unicité concerne la consommation ACT du permis. Elle ne remplace pas l'envoi exactement une fois de l'environnement, qui reste la responsabilité future d'`ActionBoundary` avec son journal de tentative durable.
+
+## Limites après consommation ACT
+
+Le permis ordinaire et sa consommation ACT sont maintenant reconstruits pour une action unique avec lease déjà validée.
 
 Restent séparés :
 
-- l'exécution ACT et la transition vers `RELEASED` ;
-- le journal de consommation unique ;
-- le consumer final du permis ;
-- la frontière d'envoi et sa récupération après résultat incertain ;
+- l'admission d'un `ActOutput` par `ActionBoundary` ;
+- le checkpoint suspendu exact ;
+- le digest de requête de transport ;
+- la tentative durable écrite avant l'appel externe ;
+- le résultat `unknown` et l'interdiction de redélivrer ;
+- le dispatch enregistré et réutilisable ;
+- l'acquisition de la nouvelle observation ;
+- la reprise et la réconciliation causales ;
 - les séries pré-déclarées ;
 - l'acquisition différée de concentration ;
 - la campagne comportementale réelle ;
