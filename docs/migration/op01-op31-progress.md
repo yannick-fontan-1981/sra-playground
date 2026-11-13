@@ -6,12 +6,18 @@ Dernière consolidation : 12 novembre 2026.
 
 - Dépôt : `yannick-fontan-1981/sra-playground`
 - Branche canonique cible : `recovery/site109-reconstruction-20261112`
-- Baseline canonique de la tranche :
+- Baseline canonique initiale de la tranche :
   `97e036fc6609a4822feffe0f834a120f831c1397`
+- Canonique lot 9B réconciliée :
+  `85d8c5e57a26ae3f02a0e89c49f5894dc571bf70`
+- Merge de réconciliation :
+  `70943d5715e7e44680ab307f0e8ddca27dd020aa`
 - Branche de travail :
   `op01-op31-browser-field-stock-20261112`
-- Commit fonctionnel qualifié :
+- Commit fonctionnel FieldStock qualifié :
   `bce3e89cbfd1cfc21245edf675d27870df524607`
+- Commit combiné qualifié :
+  `70943d5715e7e44680ab307f0e8ddca27dd020aa`
 - Donneur OP01–OP31 : `op01-op31-c0-c7-audit`
 - Plan stable : `docs/migration/op01-op31-verification-plan.md`
 - Historique détaillé antérieur :
@@ -65,7 +71,9 @@ La campagne commune possède maintenant :
 - un seam produit/browser qualifié ;
 - un contrôleur Agent explicite et unique activé dans `main.ts` ;
 - deux propriétaires navigateur enregistrés, FieldStock OP18 et fallback OP28 ;
-- un chemin Manual toujours séparé.
+- un chemin Manual toujours séparé ;
+- le manifeste et le harness ABBA Worker/Pyodide du lot 9B dans le même état
+  combiné qualifié.
 
 Le contrôleur produit utilise uniquement le seam navigateur direct. Le Worker
 reste disponible pour les autres runtimes et les tests, mais n’est pas instancié
@@ -128,7 +136,7 @@ produit actuel.
 | C4 | **audit complet, usages génériques non démontrés** | OP01/02/05/10/15/25 calculables | aucun raccord artificiel |
 | C5 | **retours spécialisés préservés** | FieldStock et Region couvrent notamment OP06/29/30 avec effet futur | contrat physique Region complet |
 | C6 | **audit complet** | inconnue, échec borné et impossibilité restent distincts | aucun raccord sans preuve de blocage ou reprise |
-| C7 | **ouvert** | 330 tests, typecheck, build, câblage et runners candidats | quatre runners complets et médianes par jeu sous +10 % |
+| C7 | **ouvert** | 330 tests, typecheck, build, câblage et harness ABBA présent | exécution des quatre runners et médianes par jeu sous +10 % |
 
 ## Contrôleur Agent produit
 
@@ -270,11 +278,21 @@ fallback n’est autorisé.
 
 ## Qualification
 
-Qualification finale du code de cette tranche :
+### Code FieldStock avant réconciliation
 
 - run GitHub Actions : `43354913250` ;
 - job : `131654533095` ;
 - commit : `bce3e89cbfd1cfc21245edf675d27870df524607` ;
+- régression complète : **330/330** ;
+- typecheck et build : réussis.
+
+### État combiné après réconciliation canonique
+
+- PR de réconciliation : `#54` ;
+- merge de réconciliation : `70943d5715e7e44680ab307f0e8ddca27dd020aa` ;
+- run GitHub Actions : `43355369134` ;
+- job : `131656026153` ;
+- commit qualifié : `70943d5715e7e44680ab307f0e8ddca27dd020aa` ;
 - Node : `22.18.0` ;
 - `npm ci` : réussi ;
 - typecheck : réussi ;
@@ -284,10 +302,11 @@ Qualification finale du code de cette tranche :
 - modules transformés : `53` ;
 - galerie : 100 jeux, 636 prévisualisations, 4 atlas natifs ;
 - câblage : `logos-product-wiring-present` ;
-- fichiers source inspectés : `22`.
+- fichiers source inspectés : `23`.
 
-Deux vulnérabilités de dépendances de sévérité haute préexistantes restent
-signalées par `npm ci`.
+Les cinq tests propres au transport navigateur FieldStock réussissent dans
+l’état combiné. Deux vulnérabilités de dépendances de sévérité haute
+préexistantes restent signalées par `npm ci`.
 
 ## Performance
 
@@ -297,6 +316,10 @@ strictement moins de 10 %. STCK et SMLP restent séparés.
 Le transport FieldStock ne matérialise les composantes visibles que lorsqu’un
 prior attend une revalidation. Le build et les tests ne permettent cependant
 pas de fermer le coût d’activation.
+
+Le manifeste, les références A/B et le harness ABBA Worker/Pyodide sont présents
+dans l’état combiné. Les quatre mesures de coût ne sont pas exécutées dans cette
+tranche et aucune compensation entre jeux n’est permise.
 
 Verdict : **fonctionnellement qualifié, coût officiel à confirmer.**
 
