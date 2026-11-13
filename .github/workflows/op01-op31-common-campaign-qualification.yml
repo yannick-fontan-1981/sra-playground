@@ -22,3 +22,5 @@ jobs:
       - run: npm run typecheck
       - name: Full TypeScript regression
         run: node --experimental-transform-types --test tests/*.test.ts
+      - name: Common campaign micro-diagnostic
+        run: node --experimental-transform-types scripts/measure-op01-op31-common-campaign-costs.mjs
