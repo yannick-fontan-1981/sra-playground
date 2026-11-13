@@ -93,25 +93,49 @@ export function runTemporalSelectionBridge(
       consumeReturn: options.consumeReturn,
     });
     const executeUs = (performance.now() - started) * 1000;
-    const accepted = consumption.decision.status === 'accepted';
+    const decision = consumption.decision;
+
+    let mode: 'accepted' | 'refused';
+    let selectedRef: string | null;
+    let refusalReason: string | null;
+    let traceReason: string;
+    let effectKind: 'project' | 'refuse';
+    let semanticEffect: boolean;
+    let consumptionReason: string;
+
+    if (decision.status === 'accepted') {
+      mode = 'accepted';
+      selectedRef = decision.selectedRef;
+      refusalReason = null;
+      traceReason = 'Source/DRM decision receipt verified and projected into the current domain';
+      effectKind = 'project';
+      semanticEffect = true;
+      consumptionReason = 'verified external selection projected without granting ACT';
+    } else {
+      mode = 'refused';
+      selectedRef = null;
+      refusalReason = decision.reason;
+      traceReason = `Source/DRM decision receipt verified with refusal: ${decision.reason}`;
+      effectKind = 'refuse';
+      semanticEffect = false;
+      consumptionReason = 'verified refusal preserved without fallback or ACT';
+    }
 
     options.trace?.record({
       kind: 'capability',
       needId: id,
       capability: CAPABILITY,
       caller,
-      mode: accepted ? 'accepted' : 'refused',
-      reason: accepted
-        ? 'Source/DRM decision receipt verified and projected into the current domain'
-        : `Source/DRM decision receipt verified with refusal: ${consumption.decision.reason}`,
+      mode,
+      reason: traceReason,
       inputRefs: refs,
       dependencyRevisions: {
         observation: state.identity.observationRevision,
       },
       resultStatus: 'complete',
       resultSummary: {
-        selectedRef: accepted ? consumption.decision.selectedRef : null,
-        refusalReason: accepted ? null : consumption.decision.reason,
+        selectedRef,
+        refusalReason,
         decisionFingerprint: decisionReceipt.decisionFingerprint,
         alternativeCount: state.alternatives.length,
         actAuthorized: false,
@@ -125,11 +149,9 @@ export function runTemporalSelectionBridge(
       capability: CAPABILITY,
       consumer,
       decisionRef: decisionReceipt.decisionFingerprint,
-      effectKind: accepted ? 'project' : 'refuse',
-      semanticEffect: accepted,
-      reason: accepted
-        ? 'verified external selection projected without granting ACT'
-        : 'verified refusal preserved without fallback or ACT',
+      effectKind,
+      semanticEffect,
+      reason: consumptionReason,
     });
 
     if (options.consumeReturn) {
