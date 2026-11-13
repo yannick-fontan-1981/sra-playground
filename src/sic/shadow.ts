@@ -5,10 +5,12 @@ import type { NativeClickReturn } from '../logos-engine/v6-native-click-return.t
 import { compareClickReturns, type ClickEvidence } from './click-evidence.ts';
 import { evaluateControlEffect, type ControlEffectResolution } from './know-control-effect.ts';
 import type { EvidenceRef, SituationFrame } from './situation.ts';
+import { readNativeResolution, type NativeResolution } from './native-resolution.ts';
 
 type ShadowBoard = Pick<GameObservation, 'gameCode' | 'level' | 'state' | 'availableActionIds'>;
 type ShadowAgent = Pick<V6AgentSnapshot, 'sessionId' | 'sequence' | 'status' | 'busy' | 'trace' | 'pendingAction'
-  | 'level' | 'lastClickReturn' | 'clickReturns' | 'omittedClickReturns'>;
+  | 'level' | 'lastClickReturn' | 'clickReturns' | 'omittedClickReturns'>
+  & Partial<Pick<V6AgentSnapshot, 'lastDecision' | 'proposal' | 'phase'>>;
 
 export interface ShadowView {
   readonly gameCode: string;
@@ -19,6 +21,7 @@ export interface ShadowView {
   readonly clickReturn: NativeClickReturn | null;
   readonly clickEvidence: ClickEvidence | null;
   readonly resolution: ControlEffectResolution;
+  readonly native: NativeResolution | null;
 }
 
 function findReturn(agent: ShadowAgent, board: ShadowBoard): ShadowView['returnCheck'] {
@@ -80,6 +83,9 @@ export function readControlEffectShadow(board: ShadowBoard, agent: ShadowAgent |
     returnCheck,
     clickReturn,
     clickEvidence: current && current.status !== 'error' ? readClickEvidence(current) : null,
+    native: current && current.status !== 'error' ? readNativeResolution({
+      ...current, lastDecision: current.lastDecision ?? null, proposal: current.proposal ?? null, phase: current.phase ?? null,
+    }) : null,
     // The receipt describes a past click. It cannot bind the next command's subject.
     resolution: evaluateControlEffect({
       scope,

@@ -255,15 +255,15 @@ function renderRoles(panel: HTMLElement, returns: readonly DirectionalReturn[], 
   ], palette));
 }
 
-function renderOfflineReview(panel: HTMLElement, isLs20: boolean, palette: readonly string[]): void {
+function renderOfflineReview(panel: HTMLElement, level: number | null, palette: readonly string[]): void {
   const mechanisms = panel.querySelector<HTMLElement>('[data-sic-mechanism-review]')!;
   const roles = panel.querySelector<HTMLElement>('[data-sic-role-review]')!;
-  const key = isLs20 ? palette.join(',') : 'hidden';
+  const key = level ? `${level}:${palette.join(',')}` : 'hidden';
   if (mechanisms.dataset.review === key) return;
   mechanisms.dataset.review = key;
   mechanisms.replaceChildren();
   roles.replaceChildren();
-  if (!isLs20) return;
+  if (!level) return;
   const review = (title: string) => {
     const box = document.createElement('details');
     box.className = 'sic-observations';
@@ -274,7 +274,7 @@ function renderOfflineReview(panel: HTMLElement, isLs20: boolean, palette: reado
     box.append(label, source);
     return box;
   };
-  const mechanismReview = review('Offline review · Directions and shape matching');
+  const mechanismReview = review('Offline review · Directions');
   const directions = document.createElement('ul');
   const words: Record<number, string> = { 1: 'up', 2: 'down', 3: 'left', 4: 'right' };
   for (const item of ls20Directions.commands) {
@@ -286,13 +286,31 @@ function renderOfflineReview(panel: HTMLElement, isLs20: boolean, palette: reado
   const open = ls20Directions.targets.find(group => group.colors.length === 1 && group.colors[0] === 3);
   const closed = ls20Directions.targets.find(group => group.colors.length === 1 && group.colors[0] === 4);
   contrast.textContent = `${ls20Directions.count} directional returns. A plain color-3 target moved in ${open?.moved} cases; a plain color-4 target was stationary in ${closed?.stationary} cases. The cropped examples are two consecutive Up returns on level ${ls20Directions.example.level}.`;
-  const shape = document.createElement('p');
-  shape.textContent = `The shape changer modifies the player’s shape without changing color or orientation (level ${ls20ShapeExit.summary.shapeLevel}). At the tested exit (level ${ls20ShapeExit.summary.exitLevel}), the same Up action advanced with the matching shape and stayed blocked when only shape was changed. Color and orientation were held fixed.`;
   mechanismReview.append(directions, contrast, renderFrames([
     ['Tracked sprite', ls20Directions.example.sprite], ['Target · moved', ls20Directions.example.movedTarget],
     ['Target · no movement', ls20Directions.example.blockedTarget],
-  ], palette), shape);
-  const roleReview = review('Offline review · Shape changer, target and exit');
+  ], palette));
+  mechanisms.append(mechanismReview);
+  const rotation = ls20ShapeExit.rotations.find(sample => sample.level === level);
+  if (rotation) {
+    const rotationReview = review(`Level ${level} · Rotation changer evidence`);
+    const note = document.createElement('p');
+    note.textContent = `Recorded action ${rotation.action} changed orientation while the shape and color stayed the same. There is no shape changer on this level.`;
+    rotationReview.append(note, renderFrames([
+      ['Rotation changer', rotation.tile], ['Indicator before', rotation.before], ['Indicator after', rotation.after],
+    ], palette));
+    roles.append(rotationReview);
+  }
+  if (level !== ls20ShapeExit.summary.shapeLevel) return;
+  const shape = document.createElement('p');
+  const run = ls20ShapeExit.sameRun;
+  shape.textContent = `Level 4 replay: the shape changes on action ${run.shapeAction} and stays the same until action ${run.exitAction} advances to level ${run.resultLevel}. The color was adjusted separately (actions ${run.colorActions.join(', ')}).`;
+  mechanismReview.append(shape);
+  const roleReview = review('Level 4 only · Shape changer and exit evidence');
+  const inference = document.createElement('p');
+  const publicReview = ls20ShapeExit.publicReview;
+  inference.textContent = `From public returns alone: ${publicReview.changer ? 'a candidate appearance changer' : 'no appearance changer localized'} and ${publicReview.exit ? 'an exit candidate at the level transition' : 'no exit localized'}. ${publicReview.otherAppearanceCandidates} other appearance changes were also proposed. This evidence does not yet distinguish shape, color and rotation reliably.`;
+  roleReview.append(inference);
   const sprites = ls20ShapeExit.sprites;
   const link = document.createElement('button');
   link.type = 'button';
@@ -304,7 +322,7 @@ function renderOfflineReview(panel: HTMLElement, isLs20: boolean, palette: reado
     ['Moving sprite', 'Moves in the direction requested if the next position allows it.', [['Observed sprite', sprites.mover]]],
     ['Shape changer', 'Crossing this tile changes the shape shown in the indicator.', [
       ['Tile', sprites.plate], ['Indicator before', sprites.before], ['Indicator after', sprites.after]]],
-    ['Exit and required shape', 'The exit tests the matching shape, color and orientation. The shape changer can supply the shape part of that match.', [
+    ['Exit and required shape', 'The exit tests shape, color and orientation. The shape changer supplies the shape part of that match.', [
       ['Exit', sprites.exit], ['Required shape', sprites.target]]],
   ] as const) {
     const row = document.createElement('li');
@@ -315,8 +333,11 @@ function renderOfflineReview(panel: HTMLElement, isLs20: boolean, palette: reado
     row.append(label, copy, renderFrames(previews, palette));
     roleCards.append(row);
   }
-  roleReview.append(roleCards, link);
-  mechanisms.append(mechanismReview);
+  const candidates = renderFrames([
+    ['Public candidate · appearance changer', publicReview.changer?.sprite ?? null],
+    ['Public candidate · exit', publicReview.exit?.sprite ?? null],
+  ], palette);
+  roleReview.append(candidates, roleCards, link);
   roles.append(roleReview);
 }
 
@@ -837,19 +858,63 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
   };
   const repeated = groups.filter(group => group.repeated);
   describe('[data-sic-strategy-body]', [
-    repeated.length ? `Observed patterns: ${repeated.map(group => `${commands[group.command]} (${group.moved} matching translations)`).join(', ')}.`
+    view?.native?.family ? `Native 0.68 · Selected method: ${nativeLabel(view.native.family)}.`
+      : repeated.length ? `Observed patterns: ${repeated.map(group => `${commands[group.command]} (${group.moved} matching translations)`).join(', ')}.`
       : view?.commands.length ? `Available to explore: ${view.commands.map(id => commands[id]).join(', ')}.` : 'No available command observed.',
-    'No solving strategy established. Compare conditions before generalizing a return.',
+    view?.native?.question ? `What this method checks: ${nativeLabel(view.native.question).replace(/[.!?]$/, '')}.`
+      : view?.native?.family ? 'The native trace has no retained purpose for this selection.'
+        : 'No solving strategy established. Compare conditions before generalizing a return.',
   ]);
   const progress = board ? `Public progress: ${board.levelsCompleted} completed · current level ${board.level} of ${board.levelCount}.` : 'Waiting for the board.';
   describe('[data-sic-objective-body]', [progress, board?.state === 'WIN' ? 'The game reports victory.'
     : board?.state === 'LEVEL_COMPLETE' ? 'The game reports level completion.'
-    : 'The condition that completes this level is still unknown.']);
+    : view?.native?.objective === 'G_official_completion' ? 'Current native objective: advance the level as reported by the game.'
+      : 'The condition that completes this level is still unknown.']);
   const last = returns.slice(-5);
   describe('[data-sic-plan-body]', [
     last.length ? `Recent actions (${mode}): ${last.map(item => commands[item.command]).join(' → ')}.` : 'No action return recorded in this session.',
-    'SIC has not validated a plan.',
+    view?.native?.guard ? `Native condition checked: ${nativeLabel(view.native.guard)}.`
+      : 'No current native condition retained.',
   ]);
+  const plan = panel.querySelector('[data-sic-plan-body]')!;
+  const native = view?.native;
+  if (native?.steps.length) {
+    const heading = document.createElement('p');
+    heading.textContent = native.pending ? 'Sequence proposed by 0.68; only the marked step is currently authorized.'
+      : 'Last proposal retained in the trace. These steps are not a record of execution.';
+    const list = document.createElement('ol');
+    native.steps.forEach((step, index) => {
+      const row = document.createElement('li');
+      row.textContent = `${step.action}${step.expected ? ` → ${step.expected}` : ''}${index === native.nextIndex ? ' · authorized now' : ''}`;
+      list.append(row);
+    });
+    plan.append(heading, list);
+  }
+  if (native?.outcome) {
+    const outcome = document.createElement('p');
+    const result = native.outcome.matched === true ? 'matched the prediction'
+      : native.outcome.matched === false ? 'differed from the prediction' : 'had no verified prediction';
+    outcome.textContent = `Latest executed return (${nativeLabel(native.outcome.family)}): ${result}.`
+      + (native.outcome.reason ? ` ${nativeLabel(native.outcome.reason)}.` : '');
+    plan.append(outcome);
+  }
+  if (native?.history.length) {
+    const details = document.createElement('details');
+    details.className = 'sic-details';
+    const title = document.createElement('summary');
+    title.textContent = 'Executed steps and native checks';
+    const list = document.createElement('ol');
+    for (const event of native.history) {
+      const row = document.createElement('li');
+      const input = returns.find(item => item.sequence === event.sequence);
+      row.textContent = `Action ${event.sequence}${input ? ` · ${commands[input.command]}` : ''} · ${nativeLabel(event.family)} · `
+        + (event.matched === true ? 'prediction matched' : event.matched === false ? 'prediction differed' : 'no verified prediction')
+        + (event.reason ? ` · ${nativeLabel(event.reason)}` : '');
+      list.append(row);
+    }
+    details.append(title, list);
+    plan.append(details);
+  }
   const animations = returns.filter(item => (item.frameCount ?? 0) > 1);
   const area = panel.querySelector('[data-sic-generic-animation]')!;
   if (!animations.length) {
@@ -863,6 +928,19 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
       return block;
     }));
   }
+}
+
+function nativeLabel(value: string): string {
+  const labels: Readonly<Record<string, string>> = {
+    morphology: 'Compare shapes and test a route',
+    acquire_control_for_target: 'Find which element the controls move',
+    test_peer_contact_after_measured_selective_alignment: 'Test contact with the target after measuring alignment',
+    current_geometry_bound: 'The measured geometry still supports this step',
+    compare_predicted_position: 'Compare the returned position with the planned position',
+    compare_selective_entry_prediction: 'Check what happens when entering the selected area',
+    measure_terminal_contact_or_boundary: 'Check whether contact changes the level or state',
+  };
+  return labels[value] ?? value.replace(/_/g, ' ');
 }
 
 export function renderSicPanel(panel: HTMLElement, view: ShadowView | null, palette: readonly string[],
@@ -889,7 +967,7 @@ export function renderSicPanel(panel: HTMLElement, view: ShadowView | null, pale
   renderGameInformation(panel, view?.gameCode === 'STCK', ranks, view, groups, returns);
   renderMechanisms(panel, groups, returns, palette);
   renderRoles(panel, returns, palette);
-  renderOfflineReview(panel, view?.gameCode === 'LS20', palette);
+  renderOfflineReview(panel, view?.gameCode === 'LS20' ? view.frame.scope.level : null, palette);
   renderCardComparisons(panel, palette, view?.gameCode === 'STCK');
   renderTowerEffects(panel, palette, view?.gameCode === 'STCK');
   const check = view?.returnCheck;
