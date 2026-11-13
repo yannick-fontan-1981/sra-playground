@@ -14,23 +14,31 @@ historique `d90ce5b64fffa53cca201e2a6a49450fd123f299` reste non résolue.
 
 La sortie courante est donc exprimée comme :
 
-**47 frontières de capacité reconstruites, fonctionnellement qualifiées, sans
+**50 frontières de capacité reconstruites, fonctionnellement qualifiées, sans
 dénominateur historique.**
 
-Ce nombre ne signifie pas `47/76`.
+Ce nombre ne signifie pas `50/76`.
 
 ## Baseline inventoriée
 
 - dépôt : `yannick-fontan-1981/sra-playground` ;
 - branche canonique : `recovery/site109-reconstruction-20261112` ;
-- commit de départ de l’inventaire :
-  `81f56ce74a3413d3835bd4b30b9c3fd14570aabc` ;
+- commit de départ de l’inventaire consolidé :
+  `9e04bbd5569f6755178fa1b5276a112ca47d646b` ;
 - fichier machine :
   `docs/migration/v6-entry-point-progress.json` ;
 - vérificateur :
   `scripts/verify-v6-current-reconstruction-registry.mjs` ;
 - garde de test :
   `tests/v6-current-reconstruction-registry.test.mjs`.
+
+La baseline inclut le noyau de continuité de session intégré le même jour :
+
+- checkpoint atomique de campagne et des participants ;
+- restauration du `needId` et de l’action en attente ;
+- conservation de la déduplication des retours ;
+- codec exact du modèle, du prior et du stock FieldStock ;
+- rollback si un participant refuse sa restauration.
 
 ## Unité de comptage
 
@@ -59,8 +67,8 @@ chaque opération reste dans le suivi OP01–OP31.
 | Apprentissage adressé | 11 |
 | Perception publique | 9 |
 | Region | 3 |
-| Runtime et produit | 12 |
-| **Total courant** | **47** |
+| Runtime et produit | 15 |
+| **Total courant** | **50** |
 
 Autres compteurs :
 
@@ -69,6 +77,15 @@ Autres compteurs :
 - lacunes ouvertes : **9** ;
 - correspondances prouvées avec les slots historiques : **0** ;
 - dénominateur appliqué au compteur courant : **aucun**.
+
+Les trois capacités ajoutées après le premier inventaire sont :
+
+1. le coordinateur atomique de checkpoint de campagne ;
+2. le codec exact FieldStock et rétention adressée ;
+3. le participant checkpoint du runtime de matériau adressé observé.
+
+Elles sont fonctionnellement qualifiées comme noyau. Leur raccord au cycle de
+vie du host et du contrôleur navigateur reste une dette séparée.
 
 ## Frontières de performance
 
@@ -84,6 +101,9 @@ fonctionnels du produit dont le coût global n’a pas été mesuré séparémen
 conservent `performanceStatus: open` ou
 `not-required-for-current-claim`. Le registre ne transforme pas une preuve
 fonctionnelle en preuve de performance.
+
+Le noyau de continuité est donc compté comme capacité fonctionnelle, mais ne
+reçoit aucune revendication de performance produit.
 
 ## Séparation avec l’historique
 
@@ -129,7 +149,8 @@ Le registre ne masque pas les dettes suivantes :
 1. mapping individuel des 76 slots historiques ;
 2. résolution de la source exacte Site 109 / native 0.68 ;
 3. reconstruction courante de `chart_navigation` ;
-4. snapshot et restauration atomiques entre activations produit ;
+4. raccord du checkpoint atomique au host et au contrôleur lors d’une vraie
+   désactivation/réactivation Agent ;
 5. Region comme propriétaire physique actif dans le produit navigateur ;
 6. propriétaire d’objectif réel pour OP31 ;
 7. intégration du Lot 10 temporal selection ;
@@ -144,6 +165,6 @@ Les prochaines capacités pourront être ajoutées seulement avec :
 **implémentation durable → preuve fonctionnelle → statut de performance
 explicite → validation automatique → mise à jour calculée du compteur.**
 
-La prochaine étape fonctionnelle reste la fermeture des lacunes produit, en
-commençant par la persistance atomique de campagne et le propriétaire physique
-Region, sans réinterpréter le compteur historique.
+La prochaine étape fonctionnelle reste le raccord du noyau de checkpoint au
+host et au contrôleur navigateur, puis l’activation de Region comme propriétaire
+physique du produit, sans réinterpréter le compteur historique.
