@@ -5,8 +5,7 @@ on:
     branches:
       - recovery/v6-entry-point-registry-20261113
     paths:
-      - scripts/materialize-v6-entry-point-registry-v2-a.mjs
-      - scripts/materialize-v6-entry-point-registry-v2-b.mjs
+      - scripts/patch-v6-entry-point-registry-session-continuity.mjs
       - .github/workflows/v6-entry-point-registry-refresh.yml
 
 permissions:
@@ -20,10 +19,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22.18.0
-      - name: Refresh registry files
-        run: |
-          node scripts/materialize-v6-entry-point-registry-v2-a.mjs
-          node scripts/materialize-v6-entry-point-registry-v2-b.mjs
+      - name: Patch registry for qualified session continuity core
+        run: node scripts/patch-v6-entry-point-registry-session-continuity.mjs
       - name: Commit refreshed registry
         run: |
           git config user.name github-actions[bot]
