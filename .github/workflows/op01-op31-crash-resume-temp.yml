@@ -24,7 +24,19 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Apply crash-resume slice
-        run: python3 scripts/apply-op01-op31-crash-resume-temp.py
+        run: |
+          python3 - <<'PY'
+          import base64
+          import zlib
+          from pathlib import Path
+
+          payload = ''.join(
+              Path(f'scripts/.op01-op31-crash-resume.part{index}').read_text(encoding='utf-8').strip()
+              for index in range(7)
+          )
+          source = zlib.decompress(base64.b64decode(payload))
+          exec(compile(source, 'apply-op01-op31-crash-resume-temp.py', 'exec'))
+          PY
       - name: Build production bundle
         run: npm run build
       - name: Verify targeted TypeScript boundaries
