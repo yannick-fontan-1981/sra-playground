@@ -1,0 +1,144 @@
+{
+  "version": 1,
+  "kind": "current-v6-reconstruction-entry-fragment",
+  "category": "public-perception",
+  "entries": [
+    {
+      "id": "RC024",
+      "name": "Public observation measurement",
+      "category": "public-perception",
+      "activation": "shared-runtime",
+      "implementationPaths": [
+        "src/runtime/v6-public-observation-measurement.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/v6-public-observation-measurement.test.ts"
+      ]
+    },
+    {
+      "id": "RC025",
+      "name": "Public observation delta and changed-region extraction",
+      "category": "public-perception",
+      "activation": "shared-runtime",
+      "implementationPaths": [
+        "src/logos-engine/v6-public-observation-delta.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/v6-public-observation-delta.test.ts"
+      ]
+    },
+    {
+      "id": "RC026",
+      "name": "Public single-action OP28 producer",
+      "category": "public-perception",
+      "activation": "shared-runtime",
+      "implementationPaths": [
+        "src/logos-engine/v6-public-single-action-port.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/v6-public-single-action-port.test.ts"
+      ]
+    },
+    {
+      "id": "RC027",
+      "name": "Public single-action campaign adapter",
+      "category": "public-perception",
+      "activation": "shared-runtime",
+      "implementationPaths": [
+        "src/logos-engine/v6-public-single-action-caller-adapter.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/v6-public-observation-op28-chain.test.ts"
+      ]
+    },
+    {
+      "id": "RC028",
+      "name": "Public SMLP addressed joint channels",
+      "category": "public-perception",
+      "activation": "specialized-runtime",
+      "implementationPaths": [
+        "src/logos-engine/v6-public-addressed-joint-channels.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/v6-public-addressed-joint-channels.test.ts",
+        "docs/recovery/lot9c2-public-addressed-joint-channels.md"
+      ],
+      "performanceStatus": "qualified",
+      "qualification": "functional-and-performance",
+      "performanceProofPaths": [
+        "docs/recovery/lot9c4-official-joint-channels-performance-proof.json"
+      ],
+      "limitations": [
+        "The product context remains stricter than the row-major benchmark producer when several gates are visible."
+      ]
+    },
+    {
+      "id": "RC029",
+      "name": "Public STCK joint channels",
+      "category": "public-perception",
+      "activation": "specialized-runtime",
+      "implementationPaths": [
+        "src/logos-engine/v6-public-stck-joint-channels.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/v6-public-stck-joint-channels.test.ts",
+        "docs/recovery/lot9c3-stck-joint-performance-boundary.md"
+      ],
+      "performanceStatus": "qualified",
+      "qualification": "functional-and-performance",
+      "performanceProofPaths": [
+        "docs/recovery/lot9c4-official-joint-channels-performance-proof.json"
+      ]
+    },
+    {
+      "id": "RC030",
+      "name": "Unique public STCK ACTION6 producer",
+      "category": "public-perception",
+      "activation": "product-runtime",
+      "implementationPaths": [
+        "src/logos-engine/v6-public-unique-stck-action6-port.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/v6-public-product-action6-producers.test.ts"
+      ],
+      "performanceStatus": "open",
+      "limitations": [
+        "Functionally qualified in the product composition; no separate product-composition performance claim is made."
+      ]
+    },
+    {
+      "id": "RC031",
+      "name": "Unique public STCK ACTION6 campaign adapter",
+      "category": "public-perception",
+      "activation": "product-runtime",
+      "implementationPaths": [
+        "src/logos-engine/v6-public-unique-stck-action6-caller-adapter.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/v6-browser-public-unique-action6-host.test.ts"
+      ],
+      "performanceStatus": "open",
+      "limitations": [
+        "Functionally qualified in the product composition; no separate product-composition performance claim is made."
+      ]
+    },
+    {
+      "id": "RC032",
+      "name": "Public Region evidence binding",
+      "category": "public-perception",
+      "activation": "specialized-runtime",
+      "implementationPaths": [
+        "src/logos-engine/v6-region-public-evidence.ts"
+      ],
+      "functionalProofPaths": [
+        "tests/v6-public-observation-delta.test.ts",
+        "tests/native-loop-region-candidate-hook.test.mjs"
+      ],
+      "performanceStatus": "qualified",
+      "qualification": "functional-and-performance",
+      "performanceProofPaths": [
+        "docs/recovery/lot9b-official-abba-performance-qualified.json"
+      ]
+    }
+  ]
+}
