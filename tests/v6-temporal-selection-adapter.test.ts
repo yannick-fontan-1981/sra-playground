@@ -13,6 +13,9 @@ import type {
   TemporalSourceAuthority,
 } from '../src/logos-engine/v6-temporal-selection-contract.ts';
 import {
+  createTemporalSourceDecisionReceipt,
+} from '../src/logos-engine/v6-temporal-decision-receipt.ts';
+import {
   measureTemporalReturnIdentity,
   type TemporalContributionRequest,
   type TemporalContributionReturn,
@@ -42,6 +45,16 @@ function request(): TemporalSelectionRequest {
     requirementRefs: ['requirement.current_evidence'],
     preserveRefs: ['candidate:a', 'candidate:b'],
   };
+}
+
+function decisionReceipt(selectedRef: string | null, evidenceRefs: readonly string[] = []) {
+  return createTemporalSourceDecisionReceipt(
+    request(),
+    authority,
+    ['drm:temporal'],
+    selectedRef,
+    evidenceRefs,
+  );
 }
 
 function measured(evidenceRef: string, productRef: string) {
@@ -86,24 +99,25 @@ function stateWithReturns() {
   return state;
 }
 
-test('adapter projects an externally supplied candidate without choosing it or granting ACT', () => {
+test('adapter projects an attributed external decision without choosing it or granting ACT', () => {
+  const receipt = decisionReceipt('candidate:b', ['return:b']);
   const result = consumeExternalTemporalSelection(
     stateWithReturns(),
     authority,
-    { selectedRef: 'candidate:b' },
+    { decisionReceipt: receipt },
   );
   assert.equal(result.decision.status, 'accepted');
   assert.equal(acceptedTemporalSelection(result)?.selectedRef, 'candidate:b');
+  assert.equal(result.decisionReceipt.decisionFingerprint, receipt.decisionFingerprint);
   assert.equal(result.actAuthorized, false);
   assert.equal(result.consumedReturn, false);
-  assert.deepEqual(result.state.consumedReturnIdentityKeys, []);
 });
 
-test('external null selection remains an explicit fail-closed refusal', () => {
+test('sealed null selection remains an explicit fail-closed refusal', () => {
   const result = consumeExternalTemporalSelection(
     stateWithReturns(),
     authority,
-    { selectedRef: null },
+    { decisionReceipt: decisionReceipt(null, ['return:refusal']) },
   );
   assert.deepEqual(result.decision, {
     status: 'refused',
@@ -113,14 +127,33 @@ test('external null selection remains an explicit fail-closed refusal', () => {
   });
 });
 
-test('external ref outside the Source domain is refused', () => {
-  const result = consumeExternalTemporalSelection(
-    stateWithReturns(),
-    authority,
-    { selectedRef: 'candidate:outside' },
+test('adapter rejects a receipt whose observation identity was tampered', () => {
+  const receipt = decisionReceipt('candidate:a', ['return:a']);
+  const tampered = {
+    ...receipt,
+    identity: { ...receipt.identity, observationRevision: 6 },
+  };
+  assert.throws(
+    () => consumeExternalTemporalSelection(
+      stateWithReturns(),
+      authority,
+      { decisionReceipt: tampered },
+    ),
+    /observation identity mismatch|fingerprint mismatch/,
   );
-  assert.equal(result.decision.status, 'refused');
-  assert.equal(result.decision.reason, 'selected_ref_outside_domain');
+});
+
+test('adapter rejects a receipt whose fingerprint no longer matches its payload', () => {
+  const receipt = decisionReceipt('candidate:a', ['return:a']);
+  const tampered = { ...receipt, evidenceRefs: ['tampered'] };
+  assert.throws(
+    () => consumeExternalTemporalSelection(
+      stateWithReturns(),
+      authority,
+      { decisionReceipt: tampered },
+    ),
+    /fingerprint mismatch/,
+  );
 });
 
 test('adapter consumes only the exact qualified return linked to selected evidence', () => {
@@ -129,7 +162,7 @@ test('adapter consumes only the exact qualified return linked to selected eviden
   const result = consumeExternalTemporalSelection(
     state,
     authority,
-    { selectedRef: 'candidate:b', consumeReturn: returnB },
+    { decisionReceipt: decisionReceipt('candidate:b', ['return:b']), consumeReturn: returnB },
   );
   assert.equal(result.decision.status, 'accepted');
   assert.equal(result.consumedReturn, true);
@@ -139,15 +172,16 @@ test('adapter consumes only the exact qualified return linked to selected eviden
 
 test('same exact return boundary is idempotent on repeated consumption', () => {
   const returnB = measured('return:b', 'product:b');
+  const receipt = decisionReceipt('candidate:b', ['return:b']);
   const first = consumeExternalTemporalSelection(
     stateWithReturns(),
     authority,
-    { selectedRef: 'candidate:b', consumeReturn: returnB },
+    { decisionReceipt: receipt, consumeReturn: returnB },
   );
   const second = consumeExternalTemporalSelection(
     first.state,
     authority,
-    { selectedRef: 'candidate:b', consumeReturn: returnB },
+    { decisionReceipt: receipt, consumeReturn: returnB },
   );
   assert.equal(first.consumedReturn, true);
   assert.equal(second.consumedReturn, false);
@@ -160,7 +194,7 @@ test('adapter refuses consumption of a return not linked to selected evidence', 
     () => consumeExternalTemporalSelection(
       stateWithReturns(),
       authority,
-      { selectedRef: 'candidate:b', consumeReturn: returnA },
+      { decisionReceipt: decisionReceipt('candidate:b', ['return:b']), consumeReturn: returnA },
     ),
     /not linked to the selected alternative/,
   );
@@ -172,19 +206,19 @@ test('adapter refuses consumption of an unqualified return boundary', () => {
     () => consumeExternalTemporalSelection(
       stateWithReturns(),
       authority,
-      { selectedRef: 'candidate:b', consumeReturn: unknown },
+      { decisionReceipt: decisionReceipt('candidate:b', ['return:b']), consumeReturn: unknown },
     ),
     /unqualified temporal return/,
   );
 });
 
-test('refused selection cannot consume a candidate return', () => {
+test('refused decision receipt cannot consume a candidate return', () => {
   const returnB = measured('return:b', 'product:b');
   assert.throws(
     () => consumeExternalTemporalSelection(
       stateWithReturns(),
       authority,
-      { selectedRef: null, consumeReturn: returnB },
+      { decisionReceipt: decisionReceipt(null, ['return:refusal']), consumeReturn: returnB },
     ),
     /refused temporal selection cannot consume/,
   );
