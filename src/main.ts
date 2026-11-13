@@ -2,6 +2,11 @@ import './styles.css';
 import { renderSiteHeader } from './site-header';
 import { BrowserGameRuntime, type GameObservation } from './runtime/browser-games';
 import {
+  BrowserDurableSessionStore,
+  createBrowserDurableSessionCheckpoint,
+  type BrowserDurableSessionCheckpointV1,
+} from './runtime/v6-browser-durable-session';
+import {
   BROWSER_AGENT_CONTROLLER_STATUS,
   BrowserAgentController,
   type BrowserAgentControllerPorts,
@@ -197,6 +202,12 @@ const context = canvas.getContext('2d', { alpha: false });
 if (!context) throw new Error('This browser does not support the 2D canvas.');
 context.imageSmoothingEnabled = false;
 const runtime = new BrowserGameRuntime();
+let durableSessionStore: BrowserDurableSessionStore | null = null;
+try {
+  durableSessionStore = new BrowserDurableSessionStore(window.localStorage);
+} catch (error) {
+  console.warn('Durable browser session storage is unavailable.', error);
+}
 let observation: GameObservation | null = null;
 let mode: 'manual' | 'agent' = 'manual';
 let busy = false;
@@ -217,8 +228,44 @@ const agentController = new BrowserAgentController({
   onError: error => {
     console.error(`Bounded Agent campaign failed for ${selectedGame.code}.`, error);
   },
+  onCheckpointRejected: error => {
+    durableSessionStore?.clear();
+    console.warn('A durable Agent checkpoint was rejected.', error);
+  },
 });
 agentSnapshot = agentController.snapshot();
+
+function invalidateDurableResume(): void {
+  durableSessionStore?.clear();
+  agentController.clearCheckpoint();
+}
+
+function persistDurableSession(): boolean {
+  if (!durableSessionStore) return false;
+  const agent = agentController.captureCheckpoint();
+  if (!agent) {
+    durableSessionStore.clear();
+    return false;
+  }
+  try {
+    const checkpoint = createBrowserDurableSessionCheckpoint({
+      runtime: runtime.snapshot(),
+      agent,
+      selectionGeneration,
+      mode,
+    });
+    const saved = durableSessionStore.save(checkpoint);
+    if (saved.status !== 'saved') {
+      console.warn('The durable browser session was not saved.', saved);
+      return false;
+    }
+    return true;
+  } catch (error) {
+    durableSessionStore.clear();
+    console.warn('The current browser session is not at a durable boundary.', error);
+    return false;
+  }
+}
 
 function paint(frame: readonly (readonly number[])[], palette: readonly string[] = observation?.palette ?? fallbackPalette): void {
   if (!context || !frame.length || !frame[0]?.length) return;
@@ -373,6 +420,7 @@ function showFailure(error: unknown, generation: number): void {
 
 async function run(operation: () => Promise<GameObservation>, announcement = ''): Promise<void> {
   if (!ready() || mode !== 'manual') return;
+  invalidateDurableResume();
   const generation = selectionGeneration;
   busy = true;
   updateInterface();
@@ -386,6 +434,7 @@ async function run(operation: () => Promise<GameObservation>, announcement = '')
 
 function perform(action: number, data?: { x: number; y: number }): void {
   const state = productReadinessState();
+  if (mode === 'manual' && productReady(state)) invalidateDurableResume();
   void dispatchProductAction(state, action, data, {
     action: (nextAction, nextData) => runtime.action(nextAction, nextData),
     present: (next, generation) => present(next, generation, false),
@@ -458,8 +507,19 @@ function setMode(next: 'manual' | 'agent', focusTab = false): void {
   if (focusTab) (manual ? manualTab : agentTab).focus();
 }
 
-async function selectGame(code: string, historyMode: 'push' | 'replace' | 'none' = 'push', level?: number): Promise<void> {
+async function selectGame(
+  code: string,
+  historyMode: 'push' | 'replace' | 'none' = 'push',
+  level?: number,
+  durable?: BrowserDurableSessionCheckpointV1,
+): Promise<void> {
   const game = getGameByCode(code) ?? defaultGame!;
+  if (durable) {
+    durableSessionStore?.clear();
+    selectionGeneration = Math.max(selectionGeneration, durable.selectionGeneration);
+  } else {
+    invalidateDurableResume();
+  }
   if (agentController.running) agentController.deactivate('replaced');
   const generation = ++selectionGeneration;
   presentationGeneration += 1;
@@ -486,9 +546,29 @@ async function selectGame(code: string, historyMode: 'push' | 'replace' | 'none'
     else if (url.href !== window.location.href) window.history.pushState(null, '', url);
   }
   try {
-    await present(await runtime.load(game.code, level), generation);
+    if (durable) {
+      const restored = await runtime.restore(durable.runtime);
+      agentController.restoreCheckpoint(durable.agent);
+      await present(restored.observation, generation);
+      element('#game-feedback').textContent = restored.replayedPending
+        ? 'The saved Agent return was reconstructed and is ready to be acquired.'
+        : 'The saved browser session was restored.';
+      if (durable.mode === 'agent' && generation === selectionGeneration) setMode('agent');
+    } else {
+      await present(await runtime.load(game.code, level), generation);
+    }
   } catch (error) {
-    showFailure(error, generation);
+    if (!durable) {
+      showFailure(error, generation);
+      return;
+    }
+    console.warn('Durable browser session restore was rejected; loading a fresh game.', error);
+    agentController.clearCheckpoint();
+    try {
+      await present(await runtime.load(game.code, level), generation);
+    } catch (fallbackError) {
+      showFailure(fallbackError, generation);
+    }
   }
 }
 
@@ -565,9 +645,28 @@ fullscreenButton.addEventListener('click', () => {
   void operation.catch(() => { element('#game-feedback').textContent = 'Full-screen mode is not available in this browser window.'; });
 });
 window.addEventListener('pagehide', event => {
+  persistDurableSession();
   if (!event.persisted) {
     agentController.dispose();
     runtime.dispose();
   }
 });
-void selectGame(selectedGame.code, 'replace', requestedLevel(new URL(window.location.href), selectedGame));
+window.addEventListener('pageshow', event => {
+  if (event.persisted) durableSessionStore?.clear();
+});
+
+const initialUrl = new URL(window.location.href);
+const initialLevel = requestedLevel(initialUrl, selectedGame);
+const storedSession = durableSessionStore?.load(Date.now(), selectedGame.code);
+let initialDurable = storedSession?.status === 'ready'
+  ? storedSession.checkpoint
+  : undefined;
+if (
+  initialDurable
+  && initialLevel !== undefined
+  && initialDurable.agent.host.session?.gameObservation.level !== initialLevel
+) {
+  durableSessionStore?.clear();
+  initialDurable = undefined;
+}
+void selectGame(selectedGame.code, 'replace', initialLevel, initialDurable);
