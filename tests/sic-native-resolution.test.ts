@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { captureDecisionSprites, readNativeResolution } from '../src/sic/native-resolution.ts';
+import { explainDecision } from '../src/sic/decision-configurations.ts';
 
 test('native explanation separates the pending step, its guard, and the latest observed result', () => {
   const command = { action_ref: 'ACTION1' };
@@ -27,7 +28,9 @@ test('an authorized proposal keeps its objective, operation and bounded native s
     trace: [{ kind: 'proposal', family: 'morphology' }, { kind: 'before_guard', family: 'morphology', index: 0, admitted: true }],
     proposal: { actions: [{ action_ref: 'ACTION1' }], binding: { observation_ref: 's:epoch:2:revision:6:frame:b' },
       bundle_template: { objective_ref: 'G_official_completion', operation_key: 'OP18', composition_ref: 'composition:morphology:test' },
-      morphology_plan: { pair: { sites: [[0, 0, 1, 1], [12, 12, 15, 15]] }, steps: [{ from: [1, 1] }], size: [2, 2] } },
+      morphology_plan: { pair: { sites: [[0, 0, 1, 1], [12, 12, 15, 15]] }, steps: [{ from: [1, 1] }], size: [2, 2],
+        access_phase: 'contact', physical_effect: 'modifier', entry_model: { residual: 2, entry_delta: 1, observation_ref: 's:epoch:2:revision:6:frame:b',
+          evidence: ['s:epoch:2:revision:6:frame:b', 's:epoch:2:revision:4:frame:a', 's:epoch:1:revision:2:frame:z'] } } },
   };
   const decision = readNativeResolution(snapshot)!;
   assert.equal(decision.objectiveSource, 'native');
@@ -36,6 +39,8 @@ test('an authorized proposal keeps its objective, operation and bounded native s
   assert.equal(captured.sprites.length, 2);
   assert.deepEqual(captured.sprites[0]?.before, [[0, 1], [1, 2]]);
   assert.equal(captured.sprites[0]?.after, null);
+  assert.deepEqual(captured.context?.entryActions, [3]);
+  assert.deepEqual(explainDecision(captured).map(rule => rule.when), ['orientationContact', 'levelObjective']);
   assert.equal(readNativeResolution({ ...snapshot, level: 3 })?.subjects.length, 0);
   const withoutObjective = readNativeResolution({ ...snapshot, proposal: {
     actions: snapshot.proposal.actions, question: { reason: 'Find a route to the next known position' },

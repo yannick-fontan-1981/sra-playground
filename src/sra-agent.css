@@ -67,6 +67,8 @@
 .sic-route{margin:10px 0}
 .sic-route canvas{display:block;width:min(100%,192px);height:auto;image-rendering:pixelated}
 .sic-route figcaption{font-size:12px;margin-top:5px}
+.sic-recovery-timeline{padding-left:1.5rem}
+.sic-recovery-timeline>li{margin-bottom:6px}
 [data-sic-direction-select]{max-width:100%;min-height:34px;color:var(--ink);background:var(--surface-muted);border:1px solid var(--control-border);border-radius:4px}
 .sic-observations details{margin-top:8px}
 .sic-observations summary{cursor:pointer;color:var(--accent-hover);font-size:13px}

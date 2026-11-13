@@ -6,6 +6,17 @@ export interface NativeStep {
   readonly expected: string | null;
 }
 
+export interface NativePlanContext {
+  readonly obligation: string | null;
+  readonly access: string | null;
+  readonly effect: string | null;
+  readonly orientation: 'aligned' | 'different' | 'ambiguous' | null;
+  readonly residual: number | null;
+  readonly entryDelta: number | null;
+  readonly entryStatus: string | null;
+  readonly entryActions: readonly number[];
+}
+
 export interface NativeResolution {
   readonly family: string | null;
   readonly proposalKind: string | null;
@@ -20,6 +31,7 @@ export interface NativeResolution {
   readonly proposalRef: string | null;
   readonly remainingSteps: number;
   readonly footprint: NativeBox | null;
+  readonly context: NativePlanContext | null;
   readonly guard: string | null;
   readonly pending: boolean;
   readonly steps: readonly NativeStep[];
@@ -102,6 +114,27 @@ export function readNativeResolution(agent: {
   const nativeObjective = label(template?.objective_ref);
   const objectiveSource = nativeObjective ? 'native' : steps.length && question ? 'question' : steps.length ? 'unpublished' : null;
   const morphology = record(proposal?.morphology_plan);
+  const entry = record(morphology?.entry_model);
+  const facts = record(record(proposal?.morphology)?.measured_facts);
+  const orientation = facts?.orientation_relation;
+  const quarterTurns = (value: unknown) => typeof value === 'number' && Number.isInteger(value) && value >= 0 && value < 4 ? value : null;
+  const entryActions = Array.isArray(entry?.evidence) ? entry.evidence.slice(0, 16).flatMap(ref => {
+    const prefix = `${scope}${agent.level}:revision:`;
+    if (typeof ref !== 'string' || !ref.startsWith(prefix) || ref === activeRef || ref === entry?.observation_ref) return [];
+    const match = /^(\d+):frame:/.exec(ref.slice(prefix.length));
+    const sequence = match ? Number(match[1]) - 1 : 0;
+    return sequence > 0 && sequence <= agent.sequence ? [sequence] : [];
+  }) : [];
+  const context: NativePlanContext | null = morphology ? {
+    obligation: label(morphology.obligation),
+    access: label(morphology.access_phase),
+    effect: label(morphology.physical_effect ?? morphology.route_key),
+    orientation: orientation === 'aligned' || orientation === 'different' || orientation === 'ambiguous' ? orientation : null,
+    residual: quarterTurns(entry?.residual),
+    entryDelta: quarterTurns(entry?.entry_delta),
+    entryStatus: label(entry?.status),
+    entryActions: [...new Set(entryActions)],
+  } : null;
   const pair = record(morphology?.pair);
   const subjects: NativeResolution['subjects'][number][] = [];
   const bounds = (value: unknown): NativeBox | null => Array.isArray(value) && value.length === 4
@@ -142,7 +175,7 @@ export function readNativeResolution(agent: {
     objective: nativeObjective ?? (objectiveSource === 'question' ? question : null), objectiveSource,
     operation: op && /^OP(?:0[1-9]|[12]\d|3[01])$/.test(op) ? op : null,
     composition: label(template?.composition_ref), compositions, subjects, route, proposalRef: label(proposal?.proposal_id),
-    remainingSteps: Math.max(0, plan.length - routeIndex), footprint,
+    remainingSteps: Math.max(0, plan.length - routeIndex), footprint, context,
     guard: label(guard?.reason),
     nextIndex: pending && guard && Number.isSafeInteger(guard.index) ? Number(guard.index) : null, steps,
     history, outcome: outcomeFamily && (result?.matched === null || typeof result?.matched === 'boolean')
@@ -160,6 +193,7 @@ export interface DecisionSprites {
   readonly steps: readonly NativeStep[];
   readonly remainingSteps: number;
   readonly stepIndex?: number | null;
+  readonly context?: NativePlanContext | null;
   readonly destinationSprite?: NativeRows;
   readonly sprites: readonly { readonly label: string; readonly before: NativeRows; readonly after: NativeRows | null }[];
 }
@@ -183,5 +217,5 @@ export function captureDecisionSprites(decision: NativeResolution, before: Nativ
   return { family: decision.family, objective: decision.objective, objectiveSource: decision.objectiveSource,
     operation: decision.operation, composition: decision.composition, question: decision.question,
     proposalRef: decision.proposalRef, route: decision.route, steps: decision.steps.slice(decision.nextIndex ?? 0),
-    remainingSteps: decision.remainingSteps, stepIndex: decision.nextIndex, destinationSprite, sprites };
+    remainingSteps: decision.remainingSteps, stepIndex: decision.nextIndex, context: decision.context, destinationSprite, sprites };
 }

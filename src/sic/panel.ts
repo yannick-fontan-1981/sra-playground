@@ -9,7 +9,8 @@ import { compareDirectionTargets, summarizeDirections, type DirectionalReturn } 
 import ls20Directions from './ls20-direction-review.json';
 import ls20ShapeExit from './ls20-review-evidence.json';
 import { captureDecisionSprites, type NativeResolution } from './native-resolution.ts';
-import { compareRecoveryRoute, firstRecovery, isLevelCompletion, type PursuedObjective } from './recovery.ts';
+import { compareRecoveryRoute, firstRecovery, isLevelCompletion, recoveryContinuation, type PursuedObjective } from './recovery.ts';
+import { explainDecision, type Decision } from './decision-configurations.ts';
 import compositionOperations from './composition-operations.json';
 import type { GameObservation } from '../runtime/browser-games.ts';
 import { compareAboveColors, contrastClickContexts, describeClickContext, type ClickEffectCount } from './click-evidence.ts';
@@ -881,6 +882,7 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
         : 'No solving strategy established. Compare conditions before generalizing a return.',
   ]);
   const strategies = panel.querySelector('[data-sic-strategy-body]')!;
+  if (planSource) renderDecisionConfigurations(strategies, planSource, 'strategy');
   const operation = planSource?.operation;
   const catalog = document.createElement('details');
   catalog.className = 'sic-details';
@@ -1021,7 +1023,7 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
 }
 
 function renderObjectives(panel: HTMLElement, progress: string, board: GameObservation | null,
-  current: Pick<NativeResolution, 'objective' | 'objectiveSource' | 'question'> | null | undefined,
+  current: Pick<NativeResolution, 'objective' | 'objectiveSource' | 'question'> & Partial<Pick<NativeResolution, 'context'>> | null | undefined,
   entries: readonly PursuedObjective[]): void {
   const paragraph = (value: string) => { const p = document.createElement('p'); p.textContent = value; return p; };
   panel.querySelector('[data-sic-objective-progress]')!.textContent = progress;
@@ -1032,6 +1034,7 @@ function renderObjectives(panel: HTMLElement, progress: string, board: GameObser
   if (current?.objectiveSource === 'native' && current.question) {
     active.append(paragraph(`Immediate aim: ${nativeLabel(current.question).replace(/[.!?]$/, '')}.`));
   }
+  if (current) renderDecisionConfigurations(active, current, 'objective');
   const past = panel.querySelector('#sic-past')!;
   past.replaceChildren();
   if (!entries.length) past.append(paragraph('No objective has been recorded in this session.'));
@@ -1108,12 +1111,119 @@ function renderRecovery(container: Element, returns: readonly DirectionalReturn[
     section.append(caption);
     renderRecoveryComparison(section, route, returns, palette);
     section.append(renderFrames(route.decision.sprites.map(sprite => [sprite.label, sprite.before] as const), palette));
+    renderRecoveryContinuation(section, route, returns, palette);
   } else {
     const pending = document.createElement('p');
     pending.textContent = 'No post-restart route with published coordinates has been captured yet.';
     section.append(pending);
   }
   container.append(section);
+}
+
+function renderDecisionConfigurations(container: Element, decision: Decision, kind?: 'strategy' | 'objective'): void {
+  for (const configuration of explainDecision(decision)) {
+    if (kind && configuration.kind !== kind) continue;
+    const details = document.createElement('details');
+    details.className = 'sic-details';
+    const title = document.createElement('summary');
+    title.textContent = 'Why this ' + configuration.kind + '?';
+    const facts = document.createElement('dl');
+    for (const [label, description] of [
+      ['Need', configuration.need], ['Situation', configuration.situation], ['Choice', configuration.choice],
+    ] as const) {
+      const term = document.createElement('dt'), value = document.createElement('dd');
+      term.textContent = label;
+      value.textContent = description;
+      facts.append(term, value);
+    }
+    details.append(title, facts);
+    container.append(details);
+  }
+}
+
+function renderRecoveryContinuation(section: HTMLElement, first: DirectionalReturn,
+  returns: readonly DirectionalReturn[], palette: readonly string[]): void {
+  const plans = recoveryContinuation(first, returns);
+  if (!plans.length) return;
+  const heading = document.createElement('h5');
+  heading.textContent = 'From the first contact to the exit';
+  const timeline = document.createElement('ol');
+  timeline.className = 'sic-recovery-timeline';
+  for (const start of plans) {
+    const comparison = compareRecoveryRoute(start, returns)!;
+    const end = comparison.executed.at(-1) ?? start;
+    const plan = start.decision!;
+    const context = plan.context;
+    const row = document.createElement('li'), details = document.createElement('details');
+    const title = document.createElement('summary');
+    const contact = context?.access === 'contact' && comparison.completed;
+    const range = start.sequence === end.sequence ? `Action ${start.sequence}` : `Actions ${start.sequence}–${end.sequence}`;
+    const label = end.toLevel > end.fromLevel ? `Exit · Level ${end.toLevel}`
+      : contact && context.effect === 'modifier' ? 'Orientation contact'
+        : contact && context.effect === 'capacity_probe' ? 'Reserve contact'
+          : contact && context.effect === 'peer' ? 'Target contact'
+            : comparison.abandoned ? 'Route replaced' : 'Approach';
+    title.textContent = `${range} · ${label}`;
+    row.dataset.sicPlanAction = String(start.sequence);
+    details.append(title);
+    details.addEventListener('toggle', () => {
+      if (!details.open || details.childElementCount > 1) return;
+      const note = document.createElement('p');
+      note.textContent = plan.question ? nativeLabel(plan.question).replace(/[.!?]$/, '') + '.' : 'The proposal has no recorded question.';
+      details.append(note);
+      if (context?.entryActions.length && context.entryDelta !== null) {
+        const evidence = document.createElement('p');
+        const gap = context.residual === 0 ? 'The motifs are aligned.' : context.residual === null ? ''
+          : `The motifs are ${context.residual} quarter turns apart.`;
+        evidence.textContent = `The plan uses a rotation of ${context.entryDelta} quarter turn(s) per contact. ${gap}`;
+        details.append(evidence);
+        const links = document.createElement('div');
+        links.className = 'sic-animation-controls';
+        for (const action of context.entryActions) {
+          const source = plans.find(item => item.sequence <= action
+            && (compareRecoveryRoute(item, returns)?.executed.at(-1)?.sequence ?? item.sequence) >= action);
+          if (!source || source.sequence >= start.sequence) continue;
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.textContent = `Contact at action ${action}`;
+          button.addEventListener('click', () => {
+            const target = timeline.querySelector<HTMLDetailsElement>(`[data-sic-plan-action="${source.sequence}"] > details`);
+            if (!target) return;
+            target.open = true;
+            target.querySelector('summary')?.focus();
+          });
+          links.append(button);
+        }
+        if (links.childElementCount) details.append(links);
+      } else if (context?.orientation === 'aligned' || context?.orientation === 'different') {
+        const orientation = document.createElement('p');
+        orientation.textContent = context.orientation === 'aligned' ? 'The engine measures the two motifs as aligned.' : 'The engine measures different orientations for the two motifs.';
+        details.append(orientation);
+      }
+      if (contact) {
+        if (end.rotation) details.append(renderFrames([
+          ['Tile entered', end.rotation.tile],
+          ['Orientation before', end.rotation.before],
+          ['Orientation after', end.rotation.after],
+        ], palette));
+        const sprites = end.decision?.sprites.filter(sprite => sprite.label.startsWith('Pattern compared')) ?? [];
+        for (const sprite of sprites) details.append(renderFrames([
+          [`${sprite.label} · before contact`, sprite.before],
+          ['After contact', sprite.after],
+        ], palette));
+        if (end.toLevel > end.fromLevel) {
+          const boundary = document.createElement('p');
+          boundary.textContent = `The return advances to level ${end.toLevel}.`;
+          details.append(boundary, renderFrames((end.animation ?? []).map(item => [`Return frame ${item.index}`, item.rows] as const), palette));
+        }
+      }
+      renderDecisionConfigurations(details, plan);
+      renderRecoveryComparison(details, start, returns, palette);
+    });
+    row.append(details);
+    timeline.append(row);
+  }
+  section.append(heading, timeline);
 }
 
 function renderRecoveryComparison(section: HTMLElement, start: DirectionalReturn, returns: readonly DirectionalReturn[],

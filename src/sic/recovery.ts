@@ -90,3 +90,15 @@ export function compareRecoveryRoute(start: DirectionalReturn, returns: readonly
     completed: executed.length === plan.remainingSteps,
     abandoned: executed.length < plan.remainingSteps && Boolean(replacement || interruption) };
 }
+
+/** Follow successive captured proposals until the next restart, level boundary or missing decision. */
+export function recoveryContinuation(first: DirectionalReturn, returns: readonly DirectionalReturn[]) {
+  const plans: DirectionalReturn[] = [];
+  let next = compareRecoveryRoute(first, returns)?.replacement;
+  while (next) {
+    plans.push(next);
+    const following = compareRecoveryRoute(next, returns)?.replacement;
+    next = following && following.sequence > next.sequence ? following : undefined;
+  }
+  return plans;
+}

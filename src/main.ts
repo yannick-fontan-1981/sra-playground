@@ -363,8 +363,8 @@ function recordPublicReturn(history: readonly DirectionalReturn[], sessionId: st
     const boundary = before.level !== next.level || before.state !== next.state || Boolean(restart);
     const recovered = [...history].reverse().find(item => item.fromLevel === before.level && item.restart);
     const routeBoard = native && recovered?.sessionId === sessionId && native.route.length > 1
-      && !history.some(item => item.sessionId === sessionId && item.sequence > recovered.sequence && item.routeBoard)
-      ? before.frame.map(row => [...row]) : undefined;
+      && (native.nextIndex === 0 || !history.some(item => item.sessionId === sessionId && item.sequence > recovered.sequence && item.routeBoard))
+      ? before.frame : undefined;
     const entry = observeDirectionalReturn(
       { sessionId, sequence, command, fromLevel: before.level, toLevel: next.level, frameCount: Math.max(1, next.frames.length),
         animation: samplePublicAnimation(next.frames),
