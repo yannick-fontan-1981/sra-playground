@@ -71,8 +71,12 @@ export async function verifyNativeLoopRunnerManifest({
   if (manifest.version !== 1 || manifest.kind !== 'reconstructed-native-region-benchmark-manifest') {
     throw new Error('runner manifest identity is invalid');
   }
-  if (manifest.status !== 'ready-for-official-abba-measurement') {
-    throw new Error('runner manifest is not ready for official ABBA measurement');
+  const allowedStatuses = new Set([
+    'ready-for-official-abba-measurement',
+    'official-abba-measurement-accepted',
+  ]);
+  if (!allowedStatuses.has(manifest.status)) {
+    throw new Error('runner manifest has an unsupported ABBA measurement status');
   }
   if (manifest.historicalRunnerIdentityRecovered !== false || manifest.historicalCorpusRecovered !== false) {
     throw new Error('runner manifest must not claim recovered historical identity');
@@ -127,8 +131,34 @@ export async function verifyNativeLoopRunnerManifest({
     equal(runner.measuredActions, OFFICIAL_COST_PROTOCOL.games[expectedGame].measuredActions, `${runner.id} measured actions`);
   }
 
-  if (manifest.officialMeasurement.executed !== false || manifest.officialMeasurement.result !== null) {
-    throw new Error('manifest must remain pre-measurement until official ABBA is executed');
+  const measurement = manifest.officialMeasurement;
+  if (manifest.status === 'ready-for-official-abba-measurement') {
+    if (measurement.executed !== false || measurement.result !== null) {
+      throw new Error('pre-measurement manifest must not claim an official result');
+    }
+  } else {
+    if (!measurement || measurement.executed !== true || measurement.accepted !== true || measurement.status !== 'accepted') {
+      throw new Error('accepted manifest must contain an accepted official ABBA result');
+    }
+    if (!Number.isInteger(measurement.runId) || measurement.runId < 1) {
+      throw new Error('accepted manifest requires a positive official runId');
+    }
+    if (typeof measurement.headSha !== 'string' || measurement.headSha.length < 7) {
+      throw new Error('accepted manifest requires the measured head SHA');
+    }
+    if (measurement.gamesEvaluatedSeparately !== true || measurement.crossGameCompensationAllowed !== false) {
+      throw new Error('accepted manifest must preserve separate per-game acceptance');
+    }
+    for (const game of ['STCK', 'SMLP']) {
+      const result = measurement.games?.[game];
+      if (!result || result.accepted !== true) {
+        throw new Error(`${game} official result is not accepted`);
+      }
+      if (typeof result.relativeIncreasePercent !== 'number'
+        || !(result.relativeIncreasePercent < manifest.protocol.acceptance.thresholdPercent)) {
+        throw new Error(`${game} official result does not satisfy the strict threshold`);
+      }
+    }
   }
 
   return {

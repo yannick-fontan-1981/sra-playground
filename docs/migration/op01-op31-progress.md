@@ -1,6 +1,6 @@
 # Progression OP01 à OP31 du Logos Engine
 
-Dernière consolidation : 12 novembre 2026.
+Dernière consolidation : 13 novembre 2026.
 
 ## Références canoniques
 
@@ -11,7 +11,7 @@ Dernière consolidation : 12 novembre 2026.
 - Branche de travail :
   `recovery/op01-op31-browser-field-stock-context-20261112`
 - Commit combiné qualifié :
-  `400d9bcc1062130508d27e62f1508f82011d2ea7`
+  `d45f2ce6566d052bbd3477c5653e99ae24381a0a`
 - Donneur OP01–OP31 : `op01-op31-c0-c7-audit`
 - Plan stable : `docs/migration/op01-op31-verification-plan.md`
 - Historique détaillé antérieur :
@@ -74,8 +74,7 @@ instancié par `main.ts`. Les deux ne contrôlent donc pas la même session.
 
 Statut global :
 
-**activation fonctionnelle du contrôleur Agent qualifiée ; coût officiel C7 à
-confirmer.**
+**activation fonctionnelle du contrôleur Agent qualifiée ; C7 accepté séparément sur STCK et SMLP.**
 
 Cette reconstruction ne prouve pas une identité binaire avec le Site 109
 historique ni une parité totale V5/V6/V7.
@@ -133,7 +132,7 @@ produit actuel.
 | C4 | **audit complet, usages génériques non démontrés** | OP01/02/05/10/15/25 calculables | aucun raccord artificiel |
 | C5 | **retours spécialisés préservés** | FieldStock/Region couvrent notamment OP06/29/30 avec effet futur | contrat physique Region complet |
 | C6 | **audit complet** | inconnue, échec borné et impossibilité restent distincts | aucun raccord sans preuve de blocage ou reprise |
-| C7 | **ouvert** | 332 tests, build, câblage et runners candidats | quatre runners complets et médianes par jeu sous +10 % |
+| C7 | **accepté** | 335 tests, build, parité Worker/Pyodide, 24 contrats et deux exécutions ABBA acceptées | maintenir les sourceRef si le chemin mesuré change |
 
 ## Contrôleur Agent produit
 
@@ -282,19 +281,24 @@ Qualification FieldStock browser et contrôleur par défaut :
 - galerie : 100 jeux, 636 prévisualisations et 4 atlas ;
 - aucune ACTION6 inventée avec runtime FieldStock vide.
 
-## Performance
+## Performance C7
 
-Critère : la médiane de session complète de chaque jeu doit augmenter de
-strictement moins de 10 %. STCK et SMLP restent séparés.
+Le protocole strict A1/B1/B2/A2 est exécuté avec quatre runners explicites, les mêmes jeux, corpus, seed, séquences et volumes. Seul B active le hook Region réel.
 
-Le contrôleur n’exécute aucune campagne en mode Manual, mais son code est chargé
-et instancié avec la page. Le build et les tests ne permettent donc pas de
-fermer le coût d’activation.
+Run principal 43359480072, job 131669316899, SHA d45f2ce6566d052bbd3477c5653e99ae24381a0a :
 
-Verdict : **fonctionnellement qualifié, coût officiel à confirmer.**
+| Jeu | Médiane A | Médiane B | Delta | Verdict |
+| --- | ---: | ---: | ---: | --- |
+| STCK | 59,35 ms | 56,70 ms | −4,4650 % | accepté |
+| SMLP | 114,70 ms | 120,05 ms | +4,6643 % | accepté |
 
-C7 exige encore A/STCK, A/SMLP, B/STCK et B/SMLP avec provenance, échantillons
-et médianes publiés.
+Chaque jeu respecte séparément le seuil strict inférieur à +10 %. Aucune compensation entre jeux ni suppression d’échantillon n’est utilisée.
+
+Le run complet 43359480115, job 131669385975, répète une mesure acceptée : +2,0423 % sur STCK et −0,9298 % sur SMLP. Il passe aussi 335/335 tests, le typecheck, le build, la parité Worker/Pyodide et 24/24 contrats natifs.
+
+Verdict : **C7 accepté pour l’identité mesurée.**
+
+Preuve : `docs/recovery/op01-op31-c7-official-acceptance-20261113.md`.
 
 ## Limites ouvertes
 
@@ -305,7 +309,7 @@ et médianes publiés.
 - acquisitions passives multi-propriétaires non orchestrées dans le produit ;
 - aucune sauvegarde/restauration d’une session Agent en attente ;
 - aucun propriétaire OP31 ;
-- performance C7 non close ;
+- C7 accepté pour les sourceRef et le SHA mesurés ;
 - aucune publication Site dans cette tranche.
 
 ## Feuille de route actualisée
@@ -326,10 +330,10 @@ et médianes publiés.
 3. ajouter snapshot/restauration du propriétaire et de ses connaissances ;
 4. identifier un propriétaire d’objectif réel avant OP31.
 
-### Clôture C7
+### Après clôture C7
 
-1. geler baseline et candidat intégrés ;
-2. exécuter les quatre runners officiels ;
-3. publier les distributions et médianes STCK/SMLP séparées ;
-4. accepter ou corriger tout dépassement ;
-5. seulement ensuite envisager la publication Site et vérifier GitHub ↔ Site.
+1. intégrer la tranche qualifiée dans la branche canonique sans écraser les autres lots ;
+2. acquérir honnêtement le prior FieldStock initial ;
+3. compléter le candidat produit Region et les acquisitions passives ;
+4. ajouter snapshot/restauration ;
+5. ne publier le Site qu’après liaison explicite au SHA GitHub canonique.

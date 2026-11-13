@@ -1,6 +1,6 @@
 # OP01–OP31 — contexte FieldStock de la campagne navigateur
 
-Date : 12 novembre 2026
+Date : 13 novembre 2026
 
 ## Références
 
@@ -257,8 +257,24 @@ signalées par `npm ci`. Cette tranche ne les introduit ni ne les modifie.
 - Region n’a toujours pas de candidat physique commun complet ;
 - l’acquisition passive multi-propriétaires reste non orchestrée ;
 - snapshot/restauration des campagnes et connaissances produit reste absent ;
-- le coût officiel C7 sur A/STCK, A/SMLP, B/STCK et B/SMLP reste à mesurer ;
+- le coût officiel C7 est accepté séparément sur STCK et SMLP pour le SHA mesuré ;
 - aucune publication Site n’est effectuée.
+
+## Qualification C7 officielle
+
+Le SHA d45f2ce6566d052bbd3477c5653e99ae24381a0a a passé le protocole strict A1/B1/B2/A2 :
+
+- STCK : 59,35 ms en A, 56,70 ms en B, soit −4,4650 % ;
+- SMLP : 114,70 ms en A, 120,05 ms en B, soit +4,6643 % ;
+- seuil : strictement inférieur à +10 % par jeu ;
+- compensation entre jeux : interdite ;
+- verdict : accepté pour les deux jeux.
+
+Le run principal est 43359480072, job 131669316899. Une répétition indépendante dans le run 43359480115, job 131669385975, obtient +2,0423 % sur STCK et −0,9298 % sur SMLP, également acceptés.
+
+La qualification complète du même SHA passe 335/335 tests, le typecheck, le build, la parité Worker/Pyodide et 24/24 contrats benchmark/sourceRef.
+
+Preuve durable : docs/recovery/op01-op31-c7-official-acceptance-20261113.md.
 
 ## Statut
 
@@ -270,3 +286,5 @@ revalidation.**
 
 **L’acquisition initiale du prior reste la prochaine dette : le produit ne
 prétend pas encore découvrir seul cette connaissance.**
+
+**C7 est fermé pour l’identité mesurée ; les dettes fonctionnelles restantes ne constituent pas une réouverture automatique du coût tant que les sources A/B restent inchangées.**

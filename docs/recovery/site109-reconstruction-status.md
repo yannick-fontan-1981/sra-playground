@@ -133,14 +133,26 @@ Limites :
 - acquisition initiale du prior FieldStock absente ;
 - Region commun, acquisition passive et snapshot/restauration ouverts ;
 - OP31 sans propriétaire d’objectif produit ;
-- performance officielle STCK/SMLP encore à mesurer.
+- performance C7 acceptée séparément sur STCK et SMLP pour l’identité mesurée.
 
 Statut Lot 5 :
 
-**5B, le propriétaire commun, le contrôleur browser, OP28 active et le transport
-FieldStock/OP18 depuis un prior fourni sont fonctionnellement qualifiés ;
-acquisition initiale, restauration et performance officielle restent à
-confirmer.**
+**5B, le propriétaire commun, le contrôleur browser, OP28 active et le transport FieldStock/OP18 depuis un prior fourni sont fonctionnellement qualifiés ; C7 est accepté. L’acquisition initiale et la restauration restent ouvertes.**
+
+## Qualification officielle C7
+
+Le commit d45f2ce6566d052bbd3477c5653e99ae24381a0a passe le garde strict du run 43359480072, job 131669316899 :
+
+- STCK : 59,35 ms en A, 56,70 ms en B, −4,4650 %, accepté ;
+- SMLP : 114,70 ms en A, 120,05 ms en B, +4,6643 %, accepté ;
+- seuil strict : +10 % par jeu ;
+- compensation entre jeux : interdite.
+
+Le run complet 43359480115, job 131669385975, passe 335/335 tests, le typecheck, le build, la parité Worker/Pyodide et répète une mesure acceptée sur les deux jeux.
+
+Preuve : `docs/recovery/op01-op31-c7-official-acceptance-20261113.md`.
+
+Cette qualification ferme C7 pour l’identité mesurée, mais ne prouve pas une identité binaire avec le Site 109 historique.
 
 ## Progression Lot 9 — reprise 9B
 
@@ -209,7 +221,7 @@ Branches intégrées/préparées :
 - les temps CPython obtenus sur le runner GitHub partagé sont conservés comme
   diagnostics non officiels uniquement ; ils ne constituent ni une acceptation
   ni un échec du seuil de 10 % ;
-- aucune mesure officielle isolée Worker/Pyodide n’a encore été exécutée ;
+- le protocole strict A1/B1/B2/A2 du run 43359480072 est accepté sur STCK (−4,4650 %) et SMLP (+4,6643 %) ;
 - aucun compteur historique 70/76 ou candidat 71/76 n’est promu au statut de la
   reconstruction actuelle.
 
@@ -218,21 +230,19 @@ un candidat produit complet
 `AgentAction + CompositionBundle + état symbolique + identity` qualifié. Aucun
 bundle ou `methodRef` de réutilisation artificiel n’est ajouté.
 
-Pièces restantes avant ABBA officiel :
+ABBA officiel de la reconstruction :
 
-1. qualifier les quatre runners via le vrai Worker navigateur/Pyodide ;
-2. figer les `sourceRef` A et B ;
-3. créer le manifeste officiel reliant corpus, sources et timing scope ;
-4. réserver un environnement de mesure isolé ;
-5. répéter A1/B1/B2/A2 et appliquer le seuil strict séparément à STCK et SMLP.
+1. les quatre runners sont qualifiés sur le vrai Worker navigateur/Pyodide ;
+2. les sourceRef A et B sont figés dans le manifeste ;
+3. le manifeste relie corpus, sources, transport et timing scope ;
+4. le run strict 43359480072 passe séparément STCK et SMLP ;
+5. le run complet 43359480115 répète une mesure acceptée et passe 335/335 tests.
+
+L’environnement reste un runner GitHub Actions partagé et est déclaré comme tel ; aucune équivalence matérielle avec le Site 109 historique n’est revendiquée.
 
 Statut Lot 9 :
 
-**noyau V6, Region, owner, caller, transport Worker, delta public, campagne,
-protocole ABBA, quatre runners explicites et corpus Region ACTION6 sont
-fonctionnellement qualifiés sur le protocole complet et les moteurs réels du
-ZIP ; transport benchmark Worker/Pyodide, identités source et performance
-officielle restent à confirmer.**
+**noyau V6, Region, owner, caller, transport Worker, delta public, campagne, protocole ABBA, quatre runners explicites et corpus Region ACTION6 sont fonctionnellement qualifiés ; les identités source sont figées et C7 est accepté séparément sur STCK et SMLP. Le candidat produit Region complet reste ouvert.**
 
 ## Branches de récupération conservées
 

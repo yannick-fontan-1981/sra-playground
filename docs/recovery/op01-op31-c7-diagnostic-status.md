@@ -7,6 +7,8 @@ les sessions officielles STCK/SMLP et ne qualifie pas la performance Site 109.
 
 Branche : `recovery/op01-op31-c7-diagnostic-20261112`.
 
+> Mise à jour du 13 novembre 2026 : ce document conserve le diagnostic synthétique historique. La qualification officielle ultérieure est acceptée et documentée dans `docs/recovery/op01-op31-c7-official-acceptance-20261113.md`.
+
 ## Harness
 
 Nouveaux éléments :
@@ -127,5 +129,16 @@ Le delta négatif des compteurs est interprété comme du bruit favorable, pas
 comme un gain revendiqué. Le point pertinent est l'absence de signal >10 % sur
 ce diagnostic synthétique pour le mode normal.
 
-La qualification officielle reste inchangée :
-**fonctionnellement qualifié, performance officielle à confirmer**.
+La qualification officielle ultérieure est maintenant **acceptée** sur STCK et SMLP. Le diagnostic synthétique ci-dessus reste une preuve historique distincte.
+
+## Qualification officielle ultérieure
+
+Le SHA d45f2ce6566d052bbd3477c5653e99ae24381a0a a passé le garde strict du run 43359480072 :
+
+- STCK : −4,4650 %, accepté ;
+- SMLP : +4,6643 %, accepté ;
+- chaque jeu est sous le seuil strict de +10 % sans compensation.
+
+La qualification complète du run 43359480115 passe 335/335 tests et répète une mesure acceptée sur les deux jeux.
+
+**Statut C7 courant : accepté.**
