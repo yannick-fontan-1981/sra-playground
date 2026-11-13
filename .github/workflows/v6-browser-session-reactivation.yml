@@ -1,6 +1,6 @@
 name: V6 browser session reactivation
 
-# Requalification trigger after accepting Array and Uint8Array public pixels.
+# Requalification trigger after typed-pixel support and fresh-host restore fallback.
 on:
   push:
     branches:
