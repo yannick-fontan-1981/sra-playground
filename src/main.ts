@@ -306,6 +306,10 @@ app.innerHTML = `
                   <label for="sic-frontier-input-order">Priority among equally supported experiments</label>
                   <select id="sic-frontier-input-order" name="frontierInputOrder"></select>
                   <p data-sic-frontier-preview></p>
+                  <details class="sic-details">
+                    <summary>Strategy graph coverage</summary>
+                    <div data-sic-graph-coverage></div>
+                  </details>
                   <button type="submit">Save SIC settings</button>
                   <button type="button" data-sic-recovery-rollback>Restore previous revision</button>
                   <details class="sic-details">

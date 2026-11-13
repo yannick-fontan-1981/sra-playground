@@ -15,7 +15,7 @@ export function frontierInformationNeed(scope: string, subject: string, parentOb
     satisfactionContract: 'acquire_the_selected_input_return' } as const;
   return { ...identity, id: sicNeedId(identity), evidence, status: 'assigned' } as const;
 }
-const graph = compileStrategyGraph<FrontierStrategy, 'openInputHere'>({
+export const frontierStrategyGraph = compileStrategyGraph<FrontierStrategy, 'openInputHere'>({
   id: 'frontier-information', version: 1, order: 'FALLBACK', priorities: ['test_local_input', 'reach_open_input'],
   strategies: {
     test_local_input: [{ fact: 'openInputHere', expected: true, label: 'An admitted input remains untried on this board' }],
@@ -28,7 +28,7 @@ export function selectFrontierStrategy<T>(firstQuestion: T | undefined, observat
     openInputHere: { value: firstQuestion !== undefined, evidence: [observationRef] },
   };
   return resolveStrategyGraph<FrontierStrategy, 'openInputHere', { question: T | null }>({
-    graph, facts, mode: 'active',
+    graph: frontierStrategyGraph, facts, mode: 'active',
     planners: {
       test_local_input: () => firstQuestion === undefined ? null : { question: firstQuestion },
       reach_open_input: () => ({ question: null }),

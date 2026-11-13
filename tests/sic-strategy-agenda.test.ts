@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { compileStrategyGraph, resolveStrategyGraph } from '../src/sic/strategy-agenda.ts';
+import { auditStrategyGraph, compileStrategyGraph, resolveStrategyGraph } from '../src/sic/strategy-agenda.ts';
 
 const dimensions = ['contact', 'room'] as const;
 const graph = compileStrategyGraph<'direct' | 'detour', typeof dimensions[number]>({
@@ -36,4 +36,11 @@ test('the graph uses the next proven strategy only when the first has no admissi
   ]);
   assert.throws(() => compileStrategyGraph({ ...graph, priorities: ['direct', 'direct'] }, dimensions), /strategy order/);
   assert.throws(() => compileStrategyGraph(graph, ['room']), /applicability conditions/);
+});
+
+test('the declarative audit counts each situation once and exposes fallback overlap', () => {
+  assert.deepEqual(auditStrategyGraph(graph), {
+    dimensions, combinations: 4, covered: 3, uncovered: 1, overlapping: 1,
+    matches: [{ id: 'direct', applicable: 2, first: 2 }, { id: 'detour', applicable: 2, first: 1 }],
+  });
 });

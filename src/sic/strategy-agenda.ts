@@ -41,6 +41,27 @@ export function compileStrategyGraph<Id extends string, Key extends string>(
   return Object.freeze(graph);
 }
 
+/** Count complete boolean situations covered by this graph. Missing evidence
+ * is handled separately at runtime and never qualifies a guard. */
+export function auditStrategyGraph<Id extends string, Key extends string>(graph: StrategyGraph<Id, Key>, priorities = graph.priorities) {
+  const dimensions = [...new Set(graph.priorities.flatMap(id => graph.strategies[id].map(guard => guard.fact)))];
+  if (dimensions.length > 12) throw new RangeError('The exhaustive SIC graph audit supports at most 12 boolean dimensions.');
+  const combinations = 2 ** dimensions.length, offsets = new Map(dimensions.map((fact, i) => [fact, i]));
+  const matches = priorities.map(id => ({ id, applicable: 0, first: 0 }));
+  let covered = 0, overlapping = 0;
+  for (let bits = 0; bits < combinations; bits++) {
+    const applicable = matches.filter(({ id }) => graph.strategies[id].every(guard =>
+      Boolean(bits & (1 << offsets.get(guard.fact)!)) === guard.expected));
+    if (applicable.length > 0) {
+      covered++;
+      applicable[0]!.first++;
+    }
+    if (applicable.length > 1) overlapping++;
+    for (const entry of applicable) entry.applicable++;
+  }
+  return { dimensions, combinations, covered, uncovered: combinations - covered, overlapping, matches };
+}
+
 function evaluateStrategyGuards<Key extends string>(facts: Readonly<Partial<Record<Key, StrategyFact>>>,
   guards: readonly [StrategyGuard<Key>, ...StrategyGuard<Key>[]]) {
   const tested = guards.map(guard => ({ ...guard, observed: facts[guard.fact] ?? { value: 'unknown' as const } }));

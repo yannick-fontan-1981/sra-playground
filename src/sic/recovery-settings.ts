@@ -1,6 +1,8 @@
-import { compileRecoveryPack, contactRecoveryOrder, contactRecoveryStrategies, defaultRecoveryPack, type RecoveryPack } from './active-recovery.ts';
+import { compileRecoveryPack, contactRecoveryGraph, contactRecoveryOrder, contactRecoveryStrategies, defaultRecoveryPack, isContactStrategy, type RecoveryPack } from './active-recovery.ts';
 import { nextRecoveryRevision, readRecoveryRevision, recoveryRevision } from './recovery-pack.ts';
 import { defaultFrontierConfiguration, frontierInputOrders, isFrontierInputOrder, type FrontierInputOrder } from './frontier-configuration.ts';
+import { frontierStrategies, frontierStrategyGraph } from './frontier-strategy.ts';
+import { auditStrategyGraph, type StrategyGraph } from './strategy-agenda.ts';
 
 const storageKey = 'sra.sic.contact-recovery.revisions.v1';
 const legacyKey = 'sra.sic.contact-recovery.v1';
@@ -15,6 +17,7 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
   const inputOrder = form.elements.namedItem('frontierInputOrder') as HTMLSelectElement;
   inputOrder.replaceChildren(...Object.entries(frontierInputOrders).map(([id, title]) => new Option(title, id)));
   const fallback = form.querySelector<HTMLElement>('[data-sic-recovery-fallback]')!;
+  const coverage = form.querySelector<HTMLElement>('[data-sic-graph-coverage]')!;
   const priorityPreview = form.querySelector<HTMLElement>('[data-sic-frontier-preview]')!;
   let comparedChoices: readonly { sequence: number; order: FrontierInputOrder; choices: Readonly<Record<FrontierInputOrder, string>> }[] = [];
   const renderPriorityPreview = () => {
@@ -35,6 +38,9 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
   const showFallback = () => {
     const next = contactRecoveryOrder.find(id => id !== priority.value);
     fallback.textContent = next ? `Then try ${contactRecoveryStrategies[next]} if it applies and no plan was found.` : '';
+    if (!isContactStrategy(priority.value) || !next) return;
+    coverage.replaceChildren(graphCoverage('Contact recovery', contactRecoveryGraph, contactRecoveryStrategies, [priority.value, next]),
+      graphCoverage('Exploration', frontierStrategyGraph, frontierStrategies, frontierStrategyGraph.priorities));
   };
   priority.addEventListener('change', showFallback);
   const depth = form.elements.namedItem('maxDepth') as HTMLInputElement;
@@ -124,4 +130,13 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
     }
   });
   return () => saved.current.configuration;
+}
+
+function graphCoverage<Id extends string, Key extends string>(title: string, graph: StrategyGraph<Id, Key>,
+  labels: Readonly<Record<Id, string>>, priorities: readonly Id[]) {
+  const { covered, combinations, overlapping, matches } = auditStrategyGraph(graph, priorities);
+  const result = document.createElement('p');
+  const winners = matches.map(row => `${labels[row.id]} ranked first in ${row.first}.`);
+  result.textContent = `${title} · Guards cover ${covered}/${combinations} possible fact combinations, including ${overlapping} with several applicable strategies. ${winners.join(' ')}`;
+  return result;
 }
