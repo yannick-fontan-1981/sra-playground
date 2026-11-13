@@ -61,9 +61,9 @@ export interface ContactRecoveryNeed {
 
 function readObservationRef(value: string) {
   const match = /^(.+:epoch:[1-9]\d*):revision:([1-9]\d*):frame:.+$/.exec(value);
-  if (!match) return null;
-  const revision = Number(match[2]);
-  return Number.isSafeInteger(revision) ? { scope: match[1], revision } : null;
+  const scope = match?.[1];
+  const revision = Number(match?.[2]);
+  return scope && Number.isSafeInteger(revision) ? { scope, revision } : null;
 }
 
 export function admitContactRecoveryNeed(witness: ReturnWitness, layout: string): ContactRecoveryNeed | null {

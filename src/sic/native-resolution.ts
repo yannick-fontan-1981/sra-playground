@@ -249,7 +249,8 @@ export function readNativeResolution(agent: {
     : undefined;
   const returnedNeed = record(result?.sic_need);
   const needStatus = returnedNeed?.status;
-  const recoveryNeed = typeof returnedNeed?.id === 'string' && /^sic-need:[a-f0-9]{64}$/.test(returnedNeed.id)
+  const recoveryNeed: NonNullable<NativeResolution['outcome']>['recoveryNeed'] =
+    typeof returnedNeed?.id === 'string' && /^sic-need:[a-f0-9]{64}$/.test(returnedNeed.id)
     && (needStatus === 'assigned' || needStatus === 'satisfied' || needStatus === 'refuted' || needStatus === 'expired')
     ? { id: returnedNeed.id, status: needStatus } : undefined;
   const previousProjection = routeIndex > 0 && Array.isArray(rooted?.predictions) ? record(rooted.predictions[routeIndex - 1]) : null;
