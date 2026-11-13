@@ -11,6 +11,7 @@ import ls20ShapeExit from './ls20-review-evidence.json';
 import { captureDecisionSprites, type NativeResolution } from './native-resolution.ts';
 import { compareRecoveryRoute, firstRecovery, isLevelCompletion, recoveryContinuation, type PursuedObjective } from './recovery.ts';
 import { explainDecision, orientationAfter, strategyEpisodes, strategyLinks, strategyOutcome, type Decision, type StrategyLink } from './decision-configurations.ts';
+import { strategyTimeline } from './strategy-timeline.ts';
 import compositionOperations from './composition-operations.json';
 import type { GameObservation } from '../runtime/browser-games.ts';
 import { compareAboveColors, contrastClickContexts, describeClickContext, type ClickEffectCount } from './click-evidence.ts';
@@ -873,20 +874,16 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
   const native = view?.native;
   const lastPlan = [...returns].reverse().find(item => item.fromLevel === board?.level && item.decision)?.decision;
   const planSource = native?.pending ? native : lastPlan ?? (native?.steps.length ? native : null);
-  const strategyBody = panel.querySelector('[data-sic-strategy-body]')!;
-  const expanded = new Map([...strategyBody.querySelectorAll<HTMLDetailsElement>('details[data-strategy-choice]')]
-    .map(details => [details.dataset.strategyChoice, details.open] as const));
+  const expandedMethods = new Map([...panel.querySelectorAll<HTMLDetailsElement>('[data-sic-method]')]
+    .map(details => [details.dataset.sicMethod, details.open] as const));
   describe('[data-sic-strategy-body]', [
-    view?.native?.family ? `Native 0.68 · Selected method: ${nativeLabel(view.native.family)}.`
+    view?.native?.family ? 'Methods reconstructed from the decisions and returns of Native TS 0.68.'
       : repeated.length ? `Observed patterns: ${repeated.map(group => `${commands[group.command]} (${group.moved} matching translations)`).join(', ')}.`
       : view?.commands.length ? `Available to explore: ${view.commands.map(id => commands[id]).join(', ')}.` : 'No available command observed.',
-    view?.native?.question ? `What this method checks: ${nativeLabel(view.native.question).replace(/[.!?]$/, '')}.`
-      : view?.native?.family ? 'The native trace has no retained purpose for this selection.'
-        : 'No solving strategy established. Compare conditions before generalizing a return.',
   ]);
   const strategies = panel.querySelector('[data-sic-strategy-body]')!;
-  renderStrategyEpisodes(strategies, returns, native?.pending ? native : null, board?.level, palette, expanded);
-  if (planSource) renderDecisionConfigurations(strategies, planSource, 'strategy');
+  const timeline = strategyTimeline(returns);
+  renderGenericTimeline(panel, strategies, timeline, board?.level, palette, expandedMethods);
   const operation = planSource?.operation;
   const catalog = document.createElement('details');
   catalog.className = 'sic-details';
@@ -910,7 +907,12 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
     strategies.append(line);
   }
   const progress = board ? `Public progress: ${board.levelsCompleted} completed · current level ${board.level} of ${board.levelCount}.` : 'Waiting for the board.';
-  renderObjectives(panel, progress, board, native?.pending ? native : lastPlan, objectives);
+  renderObjectives(panel, progress, board, native?.pending ? native : lastPlan, objectives, timeline);
+  const objectiveTimeline = panel.querySelector('#sic-objective-evidence')!;
+  const expanded = new Map([...objectiveTimeline.querySelectorAll<HTMLDetailsElement>('details[data-strategy-choice]')]
+    .map(details => [details.dataset.strategyChoice, details.open] as const));
+  objectiveTimeline.replaceChildren();
+  renderStrategyEpisodes(panel, objectiveTimeline, returns, timeline, native?.pending ? native : null, board?.level, palette, expanded);
   const last = returns.slice(-5);
   describe('[data-sic-plan-body]', [
     last.length ? `Recent actions (${mode}): ${last.map(item => commands[item.command]).join(' → ')}.` : 'No action return recorded in this session.',
@@ -1028,7 +1030,7 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
 
 function renderObjectives(panel: HTMLElement, progress: string, board: GameObservation | null,
   current: Pick<NativeResolution, 'objective' | 'objectiveSource' | 'question'> & Partial<Pick<NativeResolution, 'context'>> | null | undefined,
-  entries: readonly PursuedObjective[]): void {
+  entries: readonly PursuedObjective[], timeline: ReturnType<typeof strategyTimeline>): void {
   const paragraph = (value: string) => { const p = document.createElement('p'); p.textContent = value; return p; };
   panel.querySelector('[data-sic-objective-progress]')!.textContent = progress;
   const active = panel.querySelector('#sic-present')!;
@@ -1054,6 +1056,10 @@ function renderObjectives(panel: HTMLElement, progress: string, board: GameObser
       if (entry.source.objectiveSource === 'native' && entry.source.question) {
         row.append(paragraph(`Immediate aim: ${nativeLabel(entry.source.question).replace(/[.!?]$/, '')}.`));
       }
+      const method = timeline.find(item => item.first.fromLevel === entry.level
+        && item.last.sequence >= entry.first && item.first.sequence <= entry.last && item.rule
+        && panel.querySelector(`[data-sic-method="${item.first.sequence}"]`));
+      if (method?.rule) row.append(perspectiveJump(panel, 'strategies', `[data-sic-method="${method.first.sequence}"]`, `Strategy: ${method.rule.title}`));
       list.append(row);
     }
     past.append(paragraph(`${entries.length} recorded episodes`), list);
@@ -1145,20 +1151,128 @@ function renderDecisionConfigurations(container: Element, decision: Decision, ki
   }
 }
 
-function renderStrategyEpisodes(container: Element, returns: readonly DirectionalReturn[], pending: NativeResolution | null,
+function renderGenericTimeline(panel: HTMLElement, container: Element, timeline: ReturnType<typeof strategyTimeline>,
+  level: number | undefined, palette: readonly string[], expanded: ReadonlyMap<string | undefined, boolean>): void {
+  const previousLevel = timeline.filter(item => item.first.fromLevel !== level).at(-1)?.first.fromLevel;
+  const visible = timeline.filter(item => item.first.fromLevel === level || item.first.fromLevel === previousLevel);
+  const recent = visible.slice(-12);
+  const highlights = visible.filter(item => item.status === 'contradicted' || item.rule?.id === 'replan').slice(-6);
+  const selected = visible.filter(item => recent.includes(item) || highlights.includes(item));
+  const section = document.createElement('section');
+  section.className = 'sic-strategy-configurations';
+  const heading = document.createElement('h5');
+  heading.textContent = 'Strategy timeline';
+  section.append(heading);
+  if (!selected.length) {
+    const note = document.createElement('p');
+    note.textContent = 'No native plan and return recorded in this session yet.';
+    section.append(note);
+  }
+  const statuses = { contradicted: 'Prediction contradicted', advanced: 'Level advanced', replaced: 'Plan replaced',
+    confirmed: 'Prediction matched', unverified: 'No confirmed prediction' };
+  const nav = document.createElement('nav'), list = document.createElement('ol');
+  nav.className = 'sic-strategy-chain';
+  nav.setAttribute('aria-label', 'Strategy timeline by action');
+  const key = (n: number) => `method:${n}`;
+  for (const episode of selected) {
+    const { first, last, previous, next, rule, status } = episode;
+    const action = (item: DirectionalReturn) => item.decision?.steps[0]?.action ?? commands[item.command] ?? 'Action';
+    const actions = first.sequence === last.sequence ? String(first.sequence) : `${first.sequence}–${last.sequence}`;
+    const row = document.createElement('li');
+    row.append(strategyJump(section, key(first.sequence), `${actions} · ${statuses[status]}`));
+    list.append(row);
+    const details = document.createElement('details'), title = document.createElement('summary');
+    details.className = 'sic-details';
+    details.dataset.sicMethod = String(first.sequence);
+    details.dataset.strategyChoice = key(first.sequence);
+    details.open = expanded.get(details.dataset.sicMethod) ?? (status === 'contradicted'
+      && episode === highlights.filter(item => item.status === 'contradicted').at(-1));
+    title.textContent = `L${first.fromLevel} · ${actions} · ${rule?.title ?? 'Observe an action return'} · ${statuses[status]}`;
+    details.append(title);
+    const facts = document.createElement('dl');
+    const planText = (item: DirectionalReturn) => (item.decision?.steps.slice(0, 5).map(step => step.action).join(' → ') || action(item))
+      + ((item.decision?.remainingSteps ?? 0) > 5 ? ' → …' : '');
+    const expected = last.decision?.steps[0]?.expected;
+    const check = last.nativeCheck?.reason;
+    const factsList: [string, string][] = [];
+    if (rule) factsList.push(['Need', rule.need], ['Situation', rule.situation]);
+    factsList.push(['Plan', planText(first)], ['Return', `${last.sequence} · ${action(last)} · ${statuses[status]}${expected ? ` · Expected: ${expected}` : ''}.`]);
+    if (check && status === 'contradicted') factsList.push(['Native check', nativeLabel(check)]);
+    if (status === 'contradicted' && last.toLevel > last.fromLevel) {
+      factsList.push(['Progress', `The game still advanced to level ${last.toLevel}.`]);
+    }
+    if ((status === 'contradicted' || status === 'replaced') && next) {
+      factsList.push(['Next plan', `Action ${next.sequence} · ${planText(next)}.`]);
+      if (isLevelCompletion(last.decision?.objective) && isLevelCompletion(next.decision?.objective)) {
+        factsList.push(['Objective', 'The objective of completing the level stayed the same.']);
+      }
+    }
+    if (status === 'contradicted' || status === 'replaced') {
+      factsList.push(['Still uncertain', status === 'contradicted'
+        ? 'The return invalidates the prediction for this step. It does not establish why the prediction failed.'
+        : 'The next plan was different; the engine did not report that this return refuted the previous plan.']);
+    }
+    for (const [name, description] of factsList) {
+      const term = document.createElement('dt'), value = document.createElement('dd');
+      term.textContent = name; value.textContent = description; facts.append(term, value);
+    }
+    details.append(facts);
+    const source = status === 'contradicted' || status === 'replaced' ? last : rule?.id === 'replan' ? previous : last;
+    const addSprites = () => {
+      if (!details.open || details.querySelector('[data-return-sprites]') || !source) return;
+      const samples = document.createElement('div');
+      samples.dataset.returnSprites = '';
+      samples.append(...strategyEvidenceFrames(source, palette, `Action ${source.sequence}`));
+      if (status === 'contradicted' && next) samples.append(...strategyEvidenceFrames(next, palette, `New plan · action ${next.sequence}`));
+      if (!samples.querySelector('canvas')) {
+        const note = document.createElement('p');
+        note.textContent = 'No localized sprite retained for this return.';
+        samples.append(note);
+      }
+      details.append(samples);
+    };
+    details.addEventListener('toggle', addSprites);
+    section.append(details);
+    addSprites();
+  }
+  if (selected.length) {
+    nav.append(list);
+    heading.after(nav);
+  }
+  container.append(section);
+}
+
+function strategyEvidenceFrames(item: DirectionalReturn, palette: readonly string[], prefix: string): HTMLElement[] {
+  const frames: (readonly [string, NativeRows | null])[] = [];
+  const subject = item.decision?.sprites.find(sprite => sprite.label === 'Clicked area')
+    ?? item.decision?.sprites.find(sprite => sprite.label.startsWith('Controlled footprint'));
+  if (subject) frames.push([`${prefix} · ${subject.label} before`, subject.before], [`${prefix} · same area after`, subject.after]);
+  const destination = item.decision?.sprites.find(sprite => sprite.label === 'Predicted destination');
+  if (destination) frames.push([`${prefix} · predicted destination before`, destination.before],
+    [`${prefix} · what returned there`, destination.after]);
+  if (item.translation) frames.push([`${prefix} · moved sprite`, item.translation.sprite], [`${prefix} · destination before`, item.translation.targetBefore]);
+  else if (item.stationary) frames.push([`${prefix} · stationary sprite`, item.stationary.sprite], [`${prefix} · area ahead`, item.stationary.ahead]);
+  for (const [index, changed] of (item.changes?.samples ?? []).slice(0, item.nativeCheck?.matched === false ? 3 : 1).entries()) {
+    frames.push([`${prefix} · change ${index + 1} before`, changed.before], [`${prefix} · change ${index + 1} after`, changed.after]);
+  }
+  if (!frames.length && item.decision?.strategyTarget) frames.push([`${prefix} · planned area`, item.decision.strategyTarget.before]);
+  return frames.length ? [renderFrames(frames, palette)] : [];
+}
+
+function renderStrategyEpisodes(panel: HTMLElement, container: Element, returns: readonly DirectionalReturn[], timeline: ReturnType<typeof strategyTimeline>, pending: NativeResolution | null,
   level: number | undefined, palette: readonly string[], expanded: ReadonlyMap<string | undefined, boolean>): void {
   const last = returns.at(-1);
   const episodes = last ? strategyEpisodes(returns, last.sessionId) : [];
   const current = pending ? explainDecision(pending).filter(rule => rule.title) : [];
   const priorLevel = episodes.filter(item => item.first.fromLevel !== level).at(-1)?.first.fromLevel;
   const visible = episodes.filter(item => item.first.fromLevel === level || item.first.fromLevel === priorLevel).slice(-16);
+  if (!visible.length && !current.length) return;
   const section = document.createElement('section');
   section.className = 'sic-strategy-configurations';
   const heading = document.createElement('h5');
-  heading.textContent = 'Strategy configurations';
+  heading.textContent = 'Immediate aims and their evidence';
   const intro = document.createElement('p');
-  intro.textContent = visible.length || current.length ? 'What the engine needed, what it chose, and what the game returned.'
-    : 'No strategy configuration matched the native evidence captured so far.';
+  intro.textContent = 'What the engine tried to find out or achieve, and what the game returned.';
   section.append(heading, intro);
   const important = new Set(['colorContact', 'reserveContact', 'reserveAndColor', 'targetContact']);
   const cardId = (first: DirectionalReturn, when: string) => `${first.sessionId}:${first.sequence}:${when}`;
@@ -1171,7 +1285,7 @@ function renderStrategyEpisodes(container: Element, returns: readonly Directiona
     nav.setAttribute('aria-label', `Level ${chainLevel} strategy sequence`);
     nav.className = 'sic-strategy-chain';
     const title = document.createElement('h6');
-    title.textContent = `Level ${chainLevel} · From the first recharge to the target`;
+    title.textContent = `Level ${chainLevel} · Sequence of immediate aims`;
     for (const { configuration, first, last: end } of chain) {
       const row = document.createElement('li');
       const label = configuration.when === 'reserveRoute' ? 'Test orientation'
@@ -1228,6 +1342,13 @@ function renderStrategyEpisodes(container: Element, returns: readonly Directiona
       facts.append(term, value);
     }
     details.append(title, facts);
+    const method = timeline.find(episode => first.sequence >= episode.first.sequence && first.sequence <= episode.last.sequence);
+    if (method?.rule && panel.querySelector(`[data-sic-method="${method.first.sequence}"]`)) {
+      details.append(perspectiveJump(panel, 'strategies', `[data-sic-method="${method.first.sequence}"]`, `Strategy: ${method.rule.title}`));
+      const methodCard = panel.querySelector(`[data-sic-method="${method.first.sequence}"]`)!;
+      methodCard.append(perspectiveJump(panel, 'objectives', `[id="sic-aim-${first.sequence}-${configuration.when}"]`, 'See the immediate aim'));
+    }
+    details.id = `sic-aim-${first.sequence}-${configuration.when}`;
     const links = strategyLinks({ configuration, first, last: end }, episodes, returns);
     const uncertainty = configuration.when === 'reserveContact'
       ? 'A gauge rise confirms this return; it does not establish that every similar tile refills it.'
@@ -1277,6 +1398,22 @@ function renderStrategyEpisodes(container: Element, returns: readonly Directiona
     frames();
   }
   container.append(section);
+}
+
+function perspectiveJump(panel: HTMLElement, tab: 'strategies' | 'objectives', selector: string, label: string) {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'sic-evidence-link';
+  button.textContent = label;
+  button.addEventListener('click', () => {
+    const target = panel.querySelector<HTMLElement>(selector);
+    if (!target) return;
+    selectPerspective(panel, panel.querySelector<HTMLButtonElement>(`#sic-${tab}-tab`)!);
+    if (target instanceof HTMLDetailsElement) target.open = true;
+    (target.querySelector('summary') ?? target).focus();
+    target.scrollIntoView({ block: 'nearest' });
+  });
+  return button;
 }
 
 function strategyJump(section: HTMLElement, id: string, label: string): HTMLButtonElement {
@@ -1549,6 +1686,8 @@ function nativeLabel(value: string): string {
     test_peer_contact_after_measured_selective_alignment: 'Test contact with the target after measuring alignment',
     current_geometry_bound: 'The measured geometry still supports this step',
     compare_predicted_position: 'Compare the returned position with the planned position',
+    compare_frozen_slide_endpoint_and_static_support: 'Check the expected stopping position and whether the rest of the board stayed as predicted',
+    complete_forecast_board_comparison: 'Compare the returned board with the full forecast',
     compare_selective_entry_prediction: 'Check what happens when entering the selected area',
     measure_terminal_contact_or_boundary: 'Check whether contact changes the level or state',
     test_next_dependency_of_a_capacity_feasible_composition: 'Test the next step of a route that fits the available reserve',

@@ -1,0 +1,23 @@
+[
+  {
+    "id": "replan",
+    "title": "Revise after a failed prediction",
+    "need": "Find another way to pursue the objective",
+    "situation": "The previous return contradicted a prediction and the engine selected a different plan.",
+    "when": ["previousPredictionFailed", "differentPlan"]
+  },
+  {
+    "id": "check-plan",
+    "title": "Execute and check a plan",
+    "need": "Make progress while checking the expected result",
+    "situation": "The engine published several steps or a prediction to check.",
+    "whenAny": ["multipleSteps", "explicitPrediction"]
+  },
+  {
+    "id": "probe",
+    "title": "Test an open question",
+    "need": "Reduce uncertainty before committing to further steps",
+    "situation": "The engine published a question and selected an action to try.",
+    "when": ["publishedQuestion"]
+  }
+]

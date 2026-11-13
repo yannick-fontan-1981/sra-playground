@@ -296,6 +296,7 @@ app.innerHTML = `
               <div id="sic-past" role="tabpanel" aria-labelledby="sic-past-tab" tabindex="0" hidden></div>
               <div id="sic-present" role="tabpanel" aria-labelledby="sic-present-tab" tabindex="0"></div>
               <div id="sic-future" role="tabpanel" aria-labelledby="sic-future-tab" tabindex="0" hidden></div>
+              <div id="sic-objective-evidence"></div>
             </section>
           </div>
           <div id="sic-plans" role="tabpanel" aria-labelledby="sic-plans-tab" tabindex="0" hidden>

@@ -23,6 +23,22 @@ test('native explanation separates the pending step, its guard, and the latest o
   assert.equal(info?.outcome?.matched, true);
 });
 
+test('a released plan without a morphology proposal can show its expected destination', () => {
+  const command = { action_ref: 'ACTION4' };
+  const state = readNativeResolution({
+    sessionId: 's', sequence: 2, level: 1, lastDecision: 'support', phase: 'authorised_not_executed',
+    proposal: { actions: [command, command], support_plan: { body_type: [4, 1, 1] },
+      steps: [{ from: [0, 0], to: [1, 0] }, { expected_before: { body_position: [1, 0] }, expected_after: { body_position: [2, 0] } }] },
+    trace: [{ kind: 'proposal', family: 'support' },
+      { kind: 'why_act_release', admitted: true, decision_revision: 5 },
+      { kind: 'before_guard', family: 'support', index: 1, admitted: true }],
+  })!;
+  const receipt = captureDecisionSprites(state, [[0, 4, 0]], [[4, 0, 0]]);
+  assert.equal(receipt.planRevision, 5);
+  assert.equal(receipt.steps[0]?.expected, 'Position (2, 0)');
+  assert.deepEqual(receipt.sprites.find(sprite => sprite.label === 'Predicted destination')?.after, [[0]]);
+});
+
 test('an authorized proposal keeps its objective, operation and bounded native sprite evidence', () => {
   const snapshot = {
     sessionId: 's', sequence: 5, level: 2, lastDecision: 'morphology', phase: 'authorised_not_executed',

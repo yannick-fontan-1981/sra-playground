@@ -47,6 +47,7 @@ export interface NativeResolution {
   readonly subjects: readonly { readonly label: string; readonly box: NativeBox }[];
   readonly route: readonly NativePoint[];
   readonly proposalRef: string | null;
+  readonly planRevision?: number;
   readonly remainingSteps: number;
   readonly footprint: NativeBox | null;
   readonly context: NativePlanContext | null;
@@ -76,11 +77,14 @@ function actionName(value: unknown): string | null {
 }
 
 function expectedText(value: unknown): string | null {
+  if (typeof value === 'string' && value.length) return 'Compare the returned board with the forecast';
   const expected = record(value);
   if (!expected) return null;
-  if (Array.isArray(expected.position) && expected.position.length === 2 && expected.position.every(Number.isSafeInteger)) {
-    return `Position (${expected.position.join(', ')})`;
+  const position = expected.position ?? expected.body_position;
+  if (Array.isArray(position) && position.length === 2 && position.every(Number.isSafeInteger)) {
+    return `Position (${position.join(', ')})`;
   }
+  if (Object.values(expected).includes('unknown')) return null;
   return 'Check predicted effect';
 }
 
@@ -117,6 +121,8 @@ export function readNativeResolution(agent: {
   const proposalAt = entries.map(event => event?.kind === 'proposal' && event.family === family).lastIndexOf(true);
   const guard = proposal && proposalAt >= 0 ? entries.slice(proposalAt + 1).reverse().find(event =>
     event?.kind === 'before_guard' && event.family === family && event.admitted === true) : null;
+  const release = pending && guard ? entries.slice(proposalAt + 1).reverse().find(event =>
+    event?.kind === 'why_act_release' && event.admitted === true) : null;
   const traced = proposalAt >= 0 && result && proposalAt < entries.indexOf(result) && result.family === family
     ? entries[proposalAt] : null;
   const stepList = Array.isArray(proposal?.steps) ? proposal.steps : [];
@@ -190,9 +196,17 @@ export function readNativeResolution(agent: {
     const box = bounds(site);
     if (box) subjects.push({ label: `Pattern compared by the engine ${index + 1}`, box });
   }
-  const measuredStep = Array.isArray(morphology?.steps) ? record(morphology.steps[Number(guard?.index ?? 0)]) : null;
+  const routeIndex = guard && Number.isSafeInteger(guard.index) ? Number(guard.index) : 0;
+  const support = record(proposal?.support_plan);
+  const bodyType = Array.isArray(support?.body_type) && support.body_type.length === 3 ? support.body_type : null;
+  const positionSteps = Array.isArray(morphology?.steps) ? morphology.steps
+    : stepList.map(item => {
+      const step = record(item), earlier = record(step?.expected_before), later = record(step?.expected_after);
+      return { from: step?.from ?? earlier?.body_position, to: step?.to ?? later?.body_position };
+    });
+  const measuredStep = record(positionSteps[routeIndex]);
   const point = measuredStep?.from;
-  const size = morphology?.size;
+  const size = morphology?.size ?? (bodyType ? [bodyType[2], bodyType[1]] : null);
   let footprint: NativeBox | null = null;
   if (Array.isArray(point) && Array.isArray(size) && point.length === 2 && size.length === 2
       && [...point, ...size].every(Number.isSafeInteger) && size.every(n => n > 0)) {
@@ -203,9 +217,13 @@ export function readNativeResolution(agent: {
   const route: NativePoint[] = [];
   const pointAt = (value: unknown): NativePoint | null => Array.isArray(value) && value.length === 2
     && value.every(Number.isSafeInteger) ? [value[0], value[1]] : null;
-  const routeIndex = guard && Number.isSafeInteger(guard.index) ? Number(guard.index) : 0;
-  if (Array.isArray(morphology?.steps)) {
-    for (const [index, item] of morphology.steps.slice(routeIndex, routeIndex + 24).entries()) {
+  const command = record(plan[routeIndex]), click = record(command?.data);
+  if (command?.action_ref === 'ACTION6' && natural(click?.x) !== null && natural(click?.y) !== null) {
+    const x = Number(click!.x), y = Number(click!.y);
+    subjects.push({ label: 'Clicked area', box: [Math.max(0, x - 3), Math.max(0, y - 3), x + 3, y + 3] });
+  }
+  if (positionSteps.length) {
+    for (const [index, item] of positionSteps.slice(routeIndex, routeIndex + 24).entries()) {
       const step = record(item), from = pointAt(step?.from), to = pointAt(step?.to);
       if (!from || !to || (index && (from[0] !== route.at(-1)?.[0] || from[1] !== route.at(-1)?.[1]))) break;
       if (!index) route.push(from);
@@ -222,6 +240,7 @@ export function readNativeResolution(agent: {
     objective: nativeObjective ?? (objectiveSource === 'question' ? question : null), objectiveSource,
     operation: op && /^OP(?:0[1-9]|[12]\d|3[01])$/.test(op) ? op : null,
     composition: label(template?.composition_ref), compositions, subjects, route, proposalRef: label(proposal?.proposal_id),
+    planRevision: natural(release?.decision_revision) ?? undefined,
     remainingSteps: Math.max(0, plan.length - routeIndex), footprint, context,
     guard: label(guard?.reason),
     nextIndex: pending && guard && Number.isSafeInteger(guard.index) ? Number(guard.index) : null, steps,
@@ -236,6 +255,7 @@ export interface DecisionSprites {
   readonly composition: string | null;
   readonly question: string | null;
   readonly proposalRef: string | null;
+  readonly planRevision?: number;
   readonly route: readonly NativePoint[];
   readonly steps: readonly NativeStep[];
   readonly remainingSteps: number;
@@ -279,8 +299,11 @@ function captureMeter(meter: NonNullable<NativeStrategyContext['meter']>, before
 }
 
 export function captureDecisionSprites(decision: NativeResolution, before: NativeRows, after: NativeRows | null): DecisionSprites {
-  const sprites = decision.subjects.flatMap(({ label: name, box }) => {
-    const [x, y, right, bottom] = box;
+  const sprites = decision.subjects.flatMap(({ label: name, box: original }) => {
+    const [x, y, r, b] = original;
+    const right = name === 'Clicked area' ? Math.min(r, (before[0]?.length ?? 0) - 1) : r;
+    const bottom = name === 'Clicked area' ? Math.min(b, before.length - 1) : b;
+    const box: NativeBox = [x, y, right, bottom];
     if (x < 0 || y < 0 || x > right || y > bottom || right >= (before[0]?.length ?? 0) || bottom >= before.length) return [];
     const stride = Math.max(1, Math.ceil(Math.max(right - x + 1, bottom - y + 1) / 20));
     return [{ label: name, before: cropReturn(before, box, stride),
@@ -294,6 +317,11 @@ export function captureDecisionSprites(decision: NativeResolution, before: Nativ
     && right < (after[0]?.length ?? 0) && bottom < after.length
     ? cropReturn(after, [next[0], next[1], right, bottom], Math.max(1, Math.ceil(Math.max(right - next[0] + 1, bottom - next[1] + 1) / 20)))
     : undefined;
+  if (next && box && next[0] >= 0 && next[1] >= 0 && right < (before[0]?.length ?? 0) && bottom < before.length) {
+    const stride = Math.max(1, Math.ceil(Math.max(right - next[0] + 1, bottom - next[1] + 1) / 20));
+    sprites.push({ label: 'Predicted destination', before: cropReturn(before, [next[0], next[1], right, bottom], stride),
+      after: destinationSprite ?? null });
+  }
   const target = decision.route.at(-1), context = decision.context;
   const strategy = context?.strategy;
   const strategyMeter = strategy?.meter ? captureMeter(strategy.meter, before, after, decision.nextIndex === 0) : undefined;
@@ -309,6 +337,6 @@ export function captureDecisionSprites(decision: NativeResolution, before: Nativ
   }
   return { family: decision.family, objective: decision.objective, objectiveSource: decision.objectiveSource,
     operation: decision.operation, composition: decision.composition, question: decision.question,
-    proposalRef: decision.proposalRef, route: decision.route, steps: decision.steps.slice(decision.nextIndex ?? 0),
+    proposalRef: decision.proposalRef, planRevision: decision.planRevision, route: decision.route, steps: decision.steps.slice(decision.nextIndex ?? 0),
     remainingSteps: decision.remainingSteps, stepIndex: decision.nextIndex, context, destinationSprite, strategyTarget, strategyMeter, sprites };
 }
