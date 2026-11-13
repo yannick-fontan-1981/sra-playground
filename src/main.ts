@@ -2,6 +2,12 @@ import './styles.css';
 import { renderSiteHeader } from './site-header';
 import { BrowserGameRuntime, type GameObservation } from './runtime/browser-games';
 import { AGENT_STATUS } from './runtime/contracts';
+import { createPublicSingleActionBrowserCampaignHost } from './runtime/v6-browser-common-campaign-host';
+import {
+  V6AgentModeController,
+  isTerminalGameObservation,
+  type AgentModeRunResult,
+} from './runtime/v6-agent-mode-controller';
 import { GAME_CATALOG, PUBLIC_SOURCE_BASE, getGameByCode, type GameCatalogEntry } from './games/catalog';
 import { presentProductObservation } from './product-presentation-effects';
 import {
@@ -109,7 +115,7 @@ app.innerHTML = `
         <div class="mode-bar">
           <div class="mode-tabs" role="tablist" aria-label="Play mode">
             <button type="button" id="manual-tab" role="tab" aria-selected="true" aria-controls="manual-panel" tabindex="0">${icon('hand')}Manual</button>
-            <button type="button" id="agent-tab" role="tab" aria-selected="false" aria-controls="agent-panel" tabindex="-1">${icon('robot')}SRA Agent<span class="soon-label">Coming next</span></button>
+            <button type="button" id="agent-tab" role="tab" aria-selected="false" aria-controls="agent-panel" tabindex="-1">${icon('robot')}SRA Agent<span class="soon-label">Bounded preview</span></button>
           </div>
           <span class="local-label"><span class="status-dot"></span> In your browser</span>
         </div>
@@ -160,9 +166,11 @@ app.innerHTML = `
             </div>
             <div id="agent-panel" role="tabpanel" aria-labelledby="agent-tab" data-agent-status="${AGENT_STATUS.status}" data-agent-available="${AGENT_STATUS.available}" hidden>
               <div class="agent-illustration" aria-hidden="true"><span class="node node-a"></span><span class="node node-b"></span><span class="node node-c"></span><span class="node node-d"></span><span class="node-line line-a"></span><span class="node-line line-b"></span><span class="node-line line-c"></span></div>
-              <h3>SRA is coming.</h3>
-              <p class="agent-honesty">The real agent is not connected yet.</p>
-              <button id="return-manual" type="button" class="primary-button">Play manually ${icon('arrow')}</button>
+              <h3>Bounded SRA runtime</h3>
+              <p class="agent-honesty">This public OP28 preview runs only when one simple action is uniquely available. It stops instead of guessing.</p>
+              <p id="agent-runtime-status" class="agent-honesty" role="status" aria-live="polite">Ready to run a bounded local campaign.</p>
+              <button id="run-agent" type="button" class="primary-button">Run bounded agent ${icon('arrow')}</button>
+              <button id="return-manual" type="button" class="secondary-button">Stop and play manually</button>
               <a class="text-link" href="${agentSources}" target="_blank" rel="noopener noreferrer">SRA source references ${icon('external')}</a>
             </div>
           </aside>
@@ -174,7 +182,7 @@ app.innerHTML = `
 
     <section class="about-section wrap" id="about" aria-labelledby="about-title">
       <div class="about-heading"><p class="eyebrow">THE PROJECT</p><h2 id="about-title">About SRA</h2><div class="about-links"><a class="text-link" href="/architecture.html">Architecture ${icon('arrow')}</a><a class="text-link" href="/videos.html">Video series ${icon('arrow')}</a></div></div>
-      <div class="about-content"><p><strong>Symbolic Reasoning Agent</strong> is Yannick Fontan’s research project for interactive games. The Python agent uses explicit representations of observations, mechanisms, and goals to organize its reasoning.</p><p>The 100 games on this page run locally in your browser. Connecting the agent is the next implementation step. The architecture pages describe the code; the video series follows the project’s development.</p></div>
+      <div class="about-content"><p><strong>Symbolic Reasoning Agent</strong> is Yannick Fontan’s research project for interactive games. The Python agent uses explicit representations of observations, mechanisms, and goals to organize its reasoning.</p><p>The 100 games on this page run locally in your browser. A bounded public OP28 Agent controller is now connected as an explicit preview. Broader symbolic producers remain under reconstruction; the architecture pages describe the code and limits.</p></div>
     </section>
   </main>
   <footer class="site-footer wrap"><span><strong>SRA Playground</strong><span class="footer-separator">/</span>Independent research by Yannick Fontan</span><div><a href="https://arcprize.org/arc-agi/3" target="_blank" rel="noopener noreferrer">ARC Prize ${icon('external')}</a><a href="${websiteRepo}/blob/main/THIRD_PARTY_NOTICES.md" target="_blank" rel="noopener noreferrer">Licenses & notices ${icon('external')}</a></div></footer>
@@ -191,6 +199,12 @@ const context = canvas.getContext('2d', { alpha: false });
 if (!context) throw new Error('This browser does not support the 2D canvas.');
 context.imageSmoothingEnabled = false;
 const runtime = new BrowserGameRuntime();
+const agentModeController = new V6AgentModeController({
+  seam: 'browser-common-campaign',
+  host: createPublicSingleActionBrowserCampaignHost(),
+  maxSteps: 64,
+});
+let agentSessionCounter = 0;
 let observation: GameObservation | null = null;
 let mode: 'manual' | 'agent' = 'manual';
 let busy = false;
@@ -277,6 +291,10 @@ function updateInterface(): void {
   element('#game-availability').classList.toggle('is-pending', loading || failed);
   canvas.setAttribute('aria-busy', String(busy || loading));
   canvas.tabIndex = enabled ? 0 : -1;
+  element<HTMLButtonElement>('#run-agent').disabled = mode !== 'agent'
+    || !ready()
+    || isTerminalGameObservation(observation)
+    || agentModeController.running;
 }
 
 async function present(next: GameObservation, selectedGeneration: number, releaseBusy = true): Promise<void> {
@@ -313,6 +331,72 @@ function showFailure(error: unknown, generation: number): void {
   console.error(`Game operation failed for ${selectedGame.code}.`, error);
   element('#runtime-message').textContent = `Could not load ${selectedGame.code}. Please retry.`;
   element('#game-feedback').textContent = 'The game could not continue. Retry to reload it.';
+  updateInterface();
+}
+
+function setAgentStatus(message: string): void {
+  element('#agent-runtime-status').textContent = message;
+}
+
+function describeAgentResult(result: AgentModeRunResult): string {
+  const actions = `${result.steps} ${result.steps === 1 ? 'action' : 'actions'}`;
+  switch (result.reason) {
+    case 'complete': return `Agent stopped after ${actions}: the game reports completion.`;
+    case 'game-over': return `Agent stopped after ${actions}: the game reports game over.`;
+    case 'none': return `Stopped safely after ${actions}: no symbolic owner proposed an action.`;
+    case 'ambiguous': return `Stopped safely after ${actions}: several proposals remain ambiguous.`;
+    case 'blocked': return `Stopped safely after ${actions}: the Logos authority blocked the proposal.`;
+    case 'max-steps': return `Stopped at the hard bound of ${actions}.`;
+    case 'dispatch-rejected': return `Stopped after ${actions}: the product rejected the action.`;
+    case 'stale': return `Stopped after ${actions}: the game selection changed.`;
+    case 'product-not-ready': return 'Waiting: the game is not ready for an Agent action.';
+    case 'stale-product-observation': return 'Waiting: the visible observation is no longer current.';
+    case 'pending': return 'Waiting: the previous action still owns its return.';
+    case 'error': return `Stopped after ${actions}: the Agent seam reported an error.`;
+    case 'manual': return 'Agent stopped. Manual mode owns the game.';
+    case 'game-change': return 'Agent stopped because another game or level was selected.';
+    default: return `Agent stopped after ${actions} without inventing a fallback action.`;
+  }
+}
+
+async function runAgent(): Promise<void> {
+  if (mode !== 'agent' || !observation || !ready()) return;
+  if (isTerminalGameObservation(observation)) {
+    setAgentStatus('The current game state is terminal. No Agent action is requested.');
+    updateInterface();
+    return;
+  }
+
+  const generation = selectionGeneration;
+  const sessionId = `browser-agent:${selectedGame.code}:${generation}:${++agentSessionCounter}`;
+  try {
+    agentModeController.begin({ sessionId, observation });
+  } catch (error) {
+    console.error('Agent session could not start.', error);
+    setAgentStatus('The public observation cannot start an Agent session.');
+    updateInterface();
+    return;
+  }
+
+  setAgentStatus('Agent running locally with one explicit campaign owner.');
+  updateInterface();
+  const result = await agentModeController.runUntilStop({
+    state: productReadinessState,
+    ports: {
+      action: (action, data) => runtime.action(action, data),
+      present: (next, nextGeneration) => present(next, nextGeneration, false),
+      now: () => performance.now(),
+      generation: () => selectionGeneration,
+      setBusy: value => {
+        busy = value;
+        updateInterface();
+      },
+      onError: (error, errorGeneration) => showFailure(error, errorGeneration),
+    },
+  });
+
+  if (generation !== selectionGeneration || mode !== 'agent') return;
+  setAgentStatus(describeAgentResult(result));
   updateInterface();
 }
 
@@ -360,6 +444,10 @@ function focusCanvas(): void {
 }
 
 function setMode(next: 'manual' | 'agent', focusTab = false): void {
+  if (mode === 'agent' && next === 'manual') {
+    agentModeController.stop('manual');
+    setAgentStatus('Agent stopped. Manual mode owns the game.');
+  }
   mode = next;
   const manual = next === 'manual';
   const manualTab = element<HTMLButtonElement>('#manual-tab');
@@ -371,11 +459,18 @@ function setMode(next: 'manual' | 'agent', focusTab = false): void {
   element('#manual-panel').hidden = !manual;
   element('#agent-panel').hidden = manual;
   element('#canvas-stage').classList.toggle('agent-preview', !manual);
+  if (!manual && !agentModeController.running) {
+    setAgentStatus(isTerminalGameObservation(observation)
+      ? 'The current game state is terminal. No Agent action is requested.'
+      : 'Ready to run the bounded public OP28 campaign.');
+  }
   updateInterface();
   if (focusTab) (manual ? manualTab : agentTab).focus();
 }
 
 async function selectGame(code: string, historyMode: 'push' | 'replace' | 'none' = 'push', level?: number): Promise<void> {
+  agentModeController.stop('game-change');
+  setAgentStatus('Load the game, then choose Agent mode to start a bounded campaign.');
   const game = getGameByCode(code) ?? defaultGame!;
   const generation = ++selectionGeneration;
   presentationGeneration += 1;
@@ -421,6 +516,7 @@ element('#retry-button').addEventListener('click', () => {
 });
 element('#manual-tab').addEventListener('click', () => setMode('manual'));
 element('#agent-tab').addEventListener('click', () => setMode('agent'));
+element('#run-agent').addEventListener('click', () => { void runAgent(); });
 element('#return-manual').addEventListener('click', () => { setMode('manual'); focusCanvas(); });
 element('.mode-tabs').addEventListener('keydown', (event: KeyboardEvent) => {
   if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
@@ -480,5 +576,10 @@ fullscreenButton.addEventListener('click', () => {
   const operation = document.fullscreenElement ? document.exitFullscreen() : element('#canvas-stage').requestFullscreen();
   void operation.catch(() => { element('#game-feedback').textContent = 'Full-screen mode is not available in this browser window.'; });
 });
-window.addEventListener('pagehide', event => { if (!event.persisted) runtime.dispose(); });
+window.addEventListener('pagehide', event => {
+  if (!event.persisted) {
+    agentModeController.dispose();
+    runtime.dispose();
+  }
+});
 void selectGame(selectedGame.code, 'replace', requestedLevel(new URL(window.location.href), selectedGame));
