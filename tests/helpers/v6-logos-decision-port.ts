@@ -28,10 +28,16 @@ export interface LogosDecisionPortOptions {
  * or synthesize a bundle. Those responsibilities remain external dependencies.
  */
 export class LogosDecisionPort implements AgentDecisionPort {
+  readonly producer: LogosDecisionProducer;
+  readonly options: LogosDecisionPortOptions;
+
   constructor(
-    readonly producer: LogosDecisionProducer,
-    readonly options: LogosDecisionPortOptions = {},
-  ) {}
+    producer: LogosDecisionProducer,
+    options: LogosDecisionPortOptions = {},
+  ) {
+    this.producer = producer;
+    this.options = options;
+  }
 
   decide(observation: AgentObservation): AgentAction | undefined {
     const prepared = this.producer(observation);
