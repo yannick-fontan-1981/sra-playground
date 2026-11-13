@@ -6,24 +6,23 @@ Date : 2026-11-13
 
 - Lot : **10D / TemporalSelection**
 - Branche : `recovery/lot10d-temporal-selection-rebased-20261112`
-- Baseline de report : `recovery/site109-reconstruction-20261112` au commit `24fcdbb16c93de59489a6bb0392cc709b7a75d14`
-- Tête canonique parallèle observée après ce jalon : `81f56ce74a3413d3835bd4b30b9c3fd14570aabc`
+- Baseline de report historique : `24fcdbb16c93de59489a6bb0392cc709b7a75d14`
+- Branche canonique : `recovery/site109-reconstruction-20261112`
+- Tête canonique parallèle observée après ce jalon : `97ba156fd0ffb8359cb84514c91f1504d84e928c`
 
-La divergence parallèle n'est pas une intégration. Aucune parité complète avec Site 109 / native 0.68 n'est revendiquée.
+La branche du lot n'est pas encore intégrée. Aucune identité complète avec Site 109 / native 0.68 n'est revendiquée.
 
 ## Nature de la reconstruction
 
-L'ancienne branche historique ne contenait aucun delta 10D récupérable. Le code actuel est une reconstruction qualifiée à partir de contrats et donneurs GitHub durables.
+L'ancienne branche historique 10D ne contenait aucun delta récupérable. Le code actuel est une reconstruction qualifiée à partir de contrats GitHub durables et de donneurs V5 épinglés.
 
-Les sources historiques utiles ont été retrouvées dans le dépôt V5 privé au commit :
+Le donneur privé utilisé pour les invariants ACT, dispatch et reprise reste :
 
 `212d8d426f07eea2b6797c2bb647545767488a96`
 
-Le code privé n'est pas republié. Les invariants récupérés sont décrits dans les documents publics du lot.
+Le code privé n'est pas republié.
 
-## Couche reconstruite
-
-Les briques présentes sont maintenant :
+## Briques reconstruites
 
 1. sélection Source fail-closed ;
 2. mémoire liée à l'observation ;
@@ -31,186 +30,139 @@ Les briques présentes sont maintenant :
 4. état descriptif restaurable ;
 5. reçu Source/DRM ;
 6. adaptateur de consommation ;
-7. bridge traçable Logos V6 ;
+7. bridge de trace Logos V6 ;
 8. port runtime passif ;
-9. audit des gates d'éligibilité ACT ;
-10. binding attribué d'un candidat `AgentAction` préparé ;
-11. permis ACT ordinaire lié à une lease de concentration validée ;
-12. consommation ACT ordinaire, transition de lease et révocation terminale ;
-13. `ActionBoundary` durable jusqu'au dispatch enregistré et à l'observation acquise ;
-14. qualification causale de l'observation, consommation unique et projection d'un checkpoint repris.
+9. audit des gates ACT ;
+10. binding candidat / cible / action préparée ;
+11. permis ACT ordinaire ;
+12. consommation ACT, transition de lease et révocation ;
+13. `ActionBoundary` avec tentative durable et dispatch ;
+14. reprise causale et checkpoint `ACTIVE` ;
+15. bridge post-reprise vers un `TemporalObservationState` neuf.
 
-Derniers fichiers ajoutés :
+Derniers fichiers :
 
-- `src/runtime/v6-temporal-causal-resume.ts`
-- `tests/v6-temporal-causal-resume.test.ts`
-- `docs/recovery/lot10d-temporal-causal-resume.md`
+- `src/runtime/v6-temporal-resume-continuation.ts`
+- `tests/v6-temporal-resume-continuation.test.ts`
+- `docs/recovery/lot10d-temporal-resume-continuation.md`
 
-## Chaîne publique qualifiée
+## Chaîne qualifiée
 
-La chaîne reconstruite atteint désormais :
+`TemporalSelection -> intent -> binding action -> audit ACT -> permis -> consommation ACT -> checkpoint suspendu -> tentative durable -> transport -> dispatch durable -> observation causale -> ActionObserved -> lease OBSERVED -> checkpoint ACTIVE -> domaine post-action externe -> TemporalObservationState neuf`
 
-`TemporalSelection -> intent préparé -> binding action -> audit ACT -> permis -> consommation ACT -> checkpoint suspendu -> tentative durable -> transport -> dispatch durable -> observation causale -> ActionObserved -> lease OBSERVED -> checkpoint ACTIVE`
+Le worker public n'utilise pas cette chaîne par défaut.
 
-Le worker public n'utilise pas encore cette chaîne par défaut.
+## Bridge post-reprise
 
-## Reprise causale reconstruite
+Le nouveau bridge reçoit :
 
-Le nouveau composant reçoit :
+- un journal de reprise causale durable ;
+- un reçu causal précis ;
+- un domaine d'alternatives post-action fourni extérieurement ;
+- l'autorité Source ;
+- l'autorité courante de continuation.
 
-- le journal durable `ActionBoundary` ;
-- l'identité du dispatch ;
-- le checkpoint suspendu ;
-- le permis ;
-- le reçu ACT consommé ;
-- l'autorité courante de reprise.
+Il vérifie :
 
-Il exige une tentative et un dispatch durables exacts.
-
-Il revalide :
-
-- les empreintes du permis, de la lease, du reçu ACT et du dispatch ;
-- la lignée checkpoint / intent / permis / reçu ACT / action ;
+- reçu causal et checkpoint repris courants ;
 - Source, workflow et instance ;
-- run, timeline, frame suspendue et révision ;
-- snapshot sémantique pré-action ;
-- responsabilité et intent responsable ;
-- liaison courante du retour observé ;
-- identité et chronologie de l'observation acquise ;
-- dispatch, reçu ACT et transition de lease canoniques.
+- run, timeline, frame et révision ;
+- producteur externe du domaine ;
+- identité de l'observation causale ;
+- domaine complet des alternatives ;
+- fingerprints du reçu, du domaine et de l'état.
 
-Une divergence produit un refus avant consommation de l'observation.
+Le bridge ne produit ni candidats ni sélection. Il scelle un domaine déjà fourni et construit un état temporel descriptif.
 
-## Reçu causal atomique
+## Invalidation des preuves pré-action
 
-Une reprise qualifiée crée ensemble :
+Le nouvel état commence toujours sans héritage implicite :
 
-1. un reçu d'observation acquise ;
-2. un reçu `ActionObserved` ;
-3. une transition de lease `released -> observed` ;
-4. un checkpoint repris ;
-5. un reçu global de reprise causale.
+- aucun retour qualifié ;
+- aucune identité de retour consommée ;
+- aucun contrat de mémoire ;
+- aucune preuve mémoire ;
+- aucune autorité ACT.
 
-Le checkpoint repris :
+Les marqueurs du reçu sont :
 
-- passe à `active` ;
-- avance sa séquence d'une unité ;
-- pointe vers la nouvelle frame ;
-- lie le raw input acquis au binding de frame attendu ;
-- ajoute l'observation aux références consommées ;
-- efface la lignée d'action en attente ;
-- conserve les identités du dispatch, de l'événement, de l'intent et du permis dans les reçus causaux.
+- `priorQualifiedReturnsCarried: false` ;
+- `priorMemoryReuseCarried: false` ;
+- `continuationPrepared: true` ;
+- `schedulerExecutionStarted: false` ;
+- `workerActionProduced: false` ;
+- `actAuthorized: false`.
 
-Cette projection reprend les invariants du scheduler historique sans prétendre recréer sa sérialisation exacte.
+Toute réutilisation future de mémoire ou de retour devra être requalifiée sur la nouvelle observation.
 
-## Consommation unique
+## Idempotence et journal
 
-Le journal causal est borné et fail-closed :
+Le journal de continuation est borné et fail-closed :
 
 - capacité par défaut : 128 ;
-- maximum configurable : 1024 ;
-- une seule reprise par dispatch ;
-- une seule reprise par checkpoint suspendu ;
-- une seule consommation par observation acquise ;
-- une seule consommation par événement environnemental ;
+- maximum : 1024 ;
+- une continuation par reçu causal ;
+- une continuation par checkpoint repris ;
+- une continuation par observation causale ;
+- une identité de domaine ;
 - aucune éviction silencieuse ;
-- restauration avec validation de toutes les empreintes.
+- restauration avec validation des empreintes.
 
-Rejouer exactement la même chaîne retourne le reçu existant :
+Le replay exact retourne le reçu existant sans produire un second état. Un autre domaine pour le même reçu causal est refusé.
 
-- `reused: true` ;
-- aucun second checkpoint émis ;
-- aucune seconde consommation ;
-- aucun second `ActionObserved`.
+## Séparation du scheduler
 
-## Résultat inconnu maintenu hors succès
+Le jalon prépare une continuation, mais n'exécute pas encore le scheduler commun.
 
-Une tentative durable sans dispatch durable reste :
+Il ne :
 
-- `outcomeStatus: unknown` ;
-- `redeliveryPermitted: false` ;
-- `reconciliationRequired: true` ;
-- `observationConsumed: false` ;
-- `checkpointResumed: false`.
-
-La reprise causale ne fabrique donc jamais une observation ni un succès lorsqu'une preuve durable du résultat externe manque.
-
-La réconciliation externe d'un résultat `unknown` reste ouverte et doit rester séparée de la reprise normale.
-
-## Séparation avec l'exécution suivante du workflow
-
-La couche produit un checkpoint repris `active`, mais n'exécute pas encore l'interpréteur scheduler après cette reprise.
-
-Elle ne :
-
-- choisit aucun nouveau candidat ;
-- ne produit aucune nouvelle action ;
-- ne conserve aucun payload `AgentAction` ;
+- choisit aucune alternative ;
+- prépare aucune action ;
 - ne réautorise pas ACT ;
-- ne redéclenche pas le transport ;
-- ne transforme pas automatiquement l'observation en nouvel état TemporalSelection.
+- ne transporte rien vers l'environnement ;
+- ne remplace pas le worker public ;
+- ne transforme pas automatiquement le checkpoint `ACTIVE` en nouvelle exécution de workflow.
 
-Le worker public reste :
-
-`reconstruction-pending-perception`
-
-Le port continue à retourner `undefined`. Le statut global reste donc :
-
-`action_withheld`
-
-jusqu'à qualification du bridge de continuation et du consommateur runtime final.
+Le worker reste `reconstruction-pending-perception` et le statut runtime global reste `action_withheld`.
 
 ## Qualification GitHub CI
 
-Commit de code, tests et workflow qualifié :
+Commit de code, tests et workflow :
 
-`f87d41a5dd76fbdab07618537746c9b61d9c7280`
+`a0536fa1dfdef9edf4c4c260385119e85e3ff922`
 
 Run GitHub Actions :
 
-`43426455317`
+`43429163491`
 
 Résultat :
 
-- **255 tests** ;
-- **255 réussis** ;
+- **270 tests** ;
+- **270 réussis** ;
 - **0 échec** ;
 - 0 annulé ;
 - 0 ignoré ;
 - 0 todo ;
-- typecheck TypeScript strict réussi ;
-- checkout GitHub normal ;
-- aucune migration automatique ;
-- aucune permission d'écriture du workflow de qualification.
+- typecheck TypeScript strict réussi.
 
-Le jalon ajoute au précédent total de 240 :
+Le jalon ajoute 15 tests au total précédent de 255.
 
-- 15 tests fonctionnels de reprise causale ;
-- le typecheck strict de `v6-temporal-causal-resume.ts` ;
-- les régressions worker, runtime V6, Logos et TemporalSelection.
+`npm ci` signale toujours deux vulnérabilités de sévérité élevée dans les dépendances de la baseline. Aucune correction forcée n'a été appliquée dans ce lot.
 
-`npm ci` signale toujours deux vulnérabilités de sévérité élevée dans les dépendances de la baseline. Aucune correction forcée n'a été appliquée dans ce lot, car elle toucherait un périmètre partagé qui exige une qualification séparée.
+## Limites ouvertes
 
-## Limites générales restantes
-
-Ne sont toujours pas reconstruits ou qualifiés :
-
-- la politique historique de sélection TemporalSelection ;
-- l'ancien state machine Site 109 ;
-- le producteur public des domaines et candidats ;
-- le producteur historique exact du mapping `selectedRef -> AgentAction` ;
-- la réconciliation externe d'une tentative `unknown` ;
-- la preuve externe qu'un effet incertain a ou n'a pas eu lieu ;
-- la consommation du checkpoint repris par le véritable scheduler ;
-- la continuation du workflow après reprise ;
-- la création du nouvel état TemporalSelection depuis l'observation causale ;
-- le consommateur runtime final ;
-- les séries pré-déclarées ;
-- l'acquisition différée de concentration ;
-- la position dans le runtime commun ;
-- le registre des entrées ;
-- une contribution en partie réelle ;
-- les runners et corpus officiels STCK/SMLP.
+- politique historique TemporalSelection ;
+- producteur public des domaines et candidats ;
+- mapping historique exact `selectedRef -> AgentAction` ;
+- réconciliation externe d'une tentative `unknown` ;
+- scheduler TypeScript commun ;
+- consommation réelle du checkpoint repris ;
+- consommateur runtime final ;
+- séries pré-déclarées ;
+- acquisition différée de concentration ;
+- registre des entrées ;
+- campagne en partie réelle ;
+- runners et corpus officiels STCK/SMLP.
 
 ## Performance
 
@@ -220,24 +172,22 @@ Critère conservé :
 
 - STCK global strictement inférieur à +10 % ;
 - SMLP global strictement inférieur à +10 % ;
-- chaque jeu séparément ;
-- aucune compensation entre jeux ;
+- jeux évalués séparément ;
+- aucune compensation ;
 - une phase interne peut dépasser +10 % si le global du même jeu reste sous le seuil.
 
 ## Prochaine étape
 
-Reconstruire le bridge de continuation après reprise :
+Reconstruire une frontière d'injection scheduler passive :
 
-`reçu causal -> checkpoint ACTIVE -> nouvelle observation temporelle -> continuation du workflow`
+`reçu de continuation -> checkpoint ACTIVE + TemporalObservationState -> SchedulerContinuationPort`
 
-La prochaine qualification devra :
+Elle devra :
 
-1. consommer le reçu causal une seule fois ;
-2. créer une identité de nouvelle observation liée au dispatch ;
-3. éviter toute réutilisation automatique des preuves devenues périmées ;
-4. conserver dispatch, événement, intent, permis et reçu ACT comme lignée ;
-5. raccorder la nouvelle observation au `TemporalObservationState` ;
-6. séparer la reprise du checkpoint de l'exécution ultérieure du workflow ;
-7. empêcher une seconde continuation depuis le même reçu ;
-8. maintenir une tentative `unknown` hors de cette chaîne ;
-9. laisser le worker public inactif tant que le producteur public et le consommateur runtime final ne sont pas qualifiés.
+1. consommer le reçu de continuation une seule fois ;
+2. transmettre ensemble le checkpoint et l'état temporel ;
+3. retourner `continuation_withheld` si aucun scheduler qualifié n'est injecté ;
+4. empêcher un replay divergent ;
+5. conserver la lignée causale complète ;
+6. ne produire aucune action par elle-même ;
+7. maintenir le worker public inactif jusqu'au raccordement du producteur public et du consommateur runtime final.
