@@ -1,0 +1,52 @@
+name: OP01-OP31 live SMLP session resume
+
+on:
+  push:
+    branches:
+      - op01-op31-live-chrome-session-resume-20261113
+    paths:
+      - '.github/workflows/op01-op31-live-smlp-session-resume.yml'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'tsconfig.json'
+      - 'vite.config.ts'
+      - 'src/**'
+      - 'scripts/**'
+      - 'tests/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  live-smlp-session-resume:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.18.0'
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Show browser runtime
+        run: |
+          command -v google-chrome-stable || command -v google-chrome || command -v chromium || command -v chromium-browser
+          (google-chrome-stable --version || google-chrome --version || chromium --version || chromium-browser --version)
+      - name: Build production bundle
+        run: npm run build
+      - name: Run complete TypeScript regression suite
+        run: node --experimental-transform-types --test tests/*.test.ts
+      - name: Test session-resume report contract
+        run: node --test tests/op01-op31-live-smlp-session-resume-contract.test.mjs
+      - name: Qualify real Chrome Worker and Pyodide session continuity
+        env:
+          OP01_OP31_LIVE_SMLP_SESSION_RESUME_REPORT: op01-op31-live-smlp-session-resume-report.json
+        run: node scripts/qualify-op01-op31-live-smlp-session-resume.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: op01-op31-live-smlp-session-resume
+          path: op01-op31-live-smlp-session-resume-report.json
+          if-no-files-found: warn
