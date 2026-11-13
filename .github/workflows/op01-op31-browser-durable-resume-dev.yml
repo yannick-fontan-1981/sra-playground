@@ -57,7 +57,7 @@ jobs:
           grep -q '67 modules transformed' /tmp/op01-op31-build.log
           grep -q '100 games' /tmp/op01-op31-build.log
           grep -q '636 level previews' /tmp/op01-op31-build.log
-          grep -q '4 native atlas' /tmp/op01-op31-build.log
+          grep -q 'four native image atlas' /tmp/op01-op31-build.log
 
       - name: Real Chrome and Pyodide reload qualification
         env:
