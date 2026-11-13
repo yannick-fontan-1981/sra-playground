@@ -1260,3 +1260,34 @@ Disposition OP14 mise à jour :
 - producteur/besoin runtime : **non démontré**.
 
 Aucun appel OP14 n'est ajouté artificiellement.
+
+
+## C1/C2 — preuve Worker → Logos avec producteur symbolique explicite
+
+Le worker générique et le helper de campagne sont désormais restaurés.
+
+Ajouts test-only :
+- `tests/helpers/v6-logos-decision-port.ts` ;
+- `tests/v6-worker-logos-campaign.test.ts`.
+
+Preuves :
+- OP18 traverse Worker → autorité → opération → garde → action ;
+- OP28 traverse le même chemin pour un bundle admis ;
+- le même `needId` est conservé sur OP18 ;
+- sans producteur symbolique : aucune action ;
+- OP14 reste `not_required` dans l'autorité native ;
+- une action non liée au bundle est rejetée.
+
+Suite ciblée OP + worker :
+**60/60 tests passent**, typecheck strict du bridge/runtime concerné OK.
+
+Limite :
+le producteur symbolique/perception reste absent du produit.
+Le bridge est volontairement situé sous `tests/helpers` et n'est pas un raccord
+produit.
+
+Détail :
+`docs/recovery/op01-op31-worker-campaign-proof.md`.
+
+Statut :
+**fonctionnellement qualifié au contrat Worker, performance officielle à confirmer**.
