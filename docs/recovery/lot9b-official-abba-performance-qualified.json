@@ -37,35 +37,35 @@
     "STCK": {
       "referenceDurationsMs": [56.1, 54.2, 54.3, 54.7, 65.9, 55.1, 54.2, 53.3],
       "candidateDurationsMs": [60.5, 58.5, 58.6, 58.9, 55.9, 58.3, 54.9, 54.2],
-      "referenceMedianMs": 54.89999999999418,
-      "candidateMedianMs": 58.82857142857143,
-      "relativeIncreasePercent": 7.15586781161509,
+      "referenceMedianMs": 54.5,
+      "candidateMedianMs": 58.39999999999782,
+      "relativeIncreasePercent": 7.1559633027482805,
       "thresholdPercent": 10,
       "accepted": true,
       "phases": {
         "publicPolicy": {
           "referenceMedianMs": 6.099999999983993,
           "candidateMedianMs": 6.350000000002183,
-          "relativeIncreasePercent": 4.098360656036486
+          "relativeIncreasePercent": 4.098360656046651
         },
         "candidateHook": {
           "referenceMedianMs": 0,
-          "candidateMedianMs": 1.0,
+          "candidateMedianMs": 1,
           "relativeIncreasePercent": null
         },
         "gameAction": {
           "referenceMedianMs": 48.40000000001237,
           "candidateMedianMs": 51.049999999991996,
-          "relativeIncreasePercent": 5.475206611525589
+          "relativeIncreasePercent": 5.475206611526762
         }
       }
     },
     "SMLP": {
       "referenceDurationsMs": [119.8, 124.1, 125.2, 123.4, 109.0, 133.9, 123.8, 139.2],
       "candidateDurationsMs": [128.2, 126.5, 591.1, 108.4, 110.5, 109.3, 113.3, 123.0],
-      "referenceMedianMs": 123.59999999999854,
-      "candidateMedianMs": 117.81428571428572,
-      "relativeIncreasePercent": -4.679380489622764,
+      "referenceMedianMs": 123.95000000000073,
+      "candidateMedianMs": 118.15000000000146,
+      "relativeIncreasePercent": -4.6793061718428675,
       "thresholdPercent": 10,
       "accepted": true,
       "retainedOutlier": {
@@ -78,7 +78,7 @@
         "publicPolicy": {
           "referenceMedianMs": 14.400000000001455,
           "candidateMedianMs": 14.10000000000582,
-          "relativeIncreasePercent": -2.083333333301301
+          "relativeIncreasePercent": -2.083333333302806
         },
         "candidateHook": {
           "referenceMedianMs": 0,
@@ -88,7 +88,7 @@
         "gameAction": {
           "referenceMedianMs": 109.700000000008,
           "candidateMedianMs": 102.79999999999927,
-          "relativeIncreasePercent": -6.289881494994787
+          "relativeIncreasePercent": -6.289881494993832
         }
       }
     }
