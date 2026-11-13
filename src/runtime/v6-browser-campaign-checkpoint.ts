@@ -46,6 +46,10 @@ function object(value: unknown, label: string): Record<string, unknown> {
   return value as Record<string, unknown>;
 }
 
+function cloneTypedRecord<T>(value: unknown, label: string): T {
+  return structuredClone(object(value, label)) as T;
+}
+
 function nonEmpty(value: unknown, label: string): asserts value is string {
   if (typeof value !== 'string' || value.length === 0) {
     throw new TypeError(`${label} must be a non-empty string`);
@@ -112,10 +116,10 @@ function parsePendingReturn(
   if (pending.version !== 1 || pending.stage !== 'dispatched') {
     throw new TypeError('unsupported browser campaign pending return checkpoint');
   }
-  const preparation = object(
+  const preparation = cloneTypedRecord<BrowserCheckpointActionPreparation>(
     pending.preparation,
     'browser campaign pending preparation',
-  ) as unknown as BrowserCheckpointActionPreparation;
+  );
   if (
     preparation.status !== 'action'
     || typeof preparation.needId !== 'string'
@@ -128,13 +132,15 @@ function parsePendingReturn(
     throw new TypeError('browser campaign pending preparation must be an action');
   }
 
-  const beforeGameObservation = structuredClone(
-    object(pending.beforeGameObservation, 'browser campaign pending game observation'),
-  ) as unknown as GameObservation;
-  const beforeAgentObservation = cloneBrowserAgentObservation(
-    object(pending.beforeAgentObservation, 'browser campaign pending agent observation')
-      as unknown as AgentObservation,
+  const beforeGameObservation = cloneTypedRecord<GameObservation>(
+    pending.beforeGameObservation,
+    'browser campaign pending game observation',
   );
+  const rawBeforeAgentObservation = cloneTypedRecord<AgentObservation>(
+    pending.beforeAgentObservation,
+    'browser campaign pending agent observation',
+  );
+  const beforeAgentObservation = cloneBrowserAgentObservation(rawBeforeAgentObservation);
   if (!sameBrowserGameObservation(beforeGameObservation, session.gameObservation)) {
     throw new Error('browser campaign pending return is bound to another game observation');
   }
@@ -161,9 +167,10 @@ export function parseBrowserCommonCampaignHostCheckpoint(
   if (checkpoint.version !== 1) {
     throw new TypeError('unsupported browser campaign host checkpoint version');
   }
-  const common = structuredClone(
-    object(checkpoint.common, 'browser campaign common checkpoint'),
-  ) as unknown as CommonCampaignCheckpointV1;
+  const common = cloneTypedRecord<CommonCampaignCheckpointV1>(
+    checkpoint.common,
+    'browser campaign common checkpoint',
+  );
   if (checkpoint.session === null) {
     return { version: 1, common, session: null };
   }
@@ -177,13 +184,15 @@ export function parseBrowserCommonCampaignHostCheckpoint(
   nonEmpty(rawSession.observationIdentity, 'browser campaign checkpoint observation identity');
   nonNegativeInteger(rawSession.nextSequence, 'browser campaign checkpoint nextSequence');
 
-  const gameObservation = structuredClone(
-    object(rawSession.gameObservation, 'browser campaign checkpoint game observation'),
-  ) as unknown as GameObservation;
-  const agentObservation = cloneBrowserAgentObservation(
-    object(rawSession.agentObservation, 'browser campaign checkpoint agent observation')
-      as unknown as AgentObservation,
+  const gameObservation = cloneTypedRecord<GameObservation>(
+    rawSession.gameObservation,
+    'browser campaign checkpoint game observation',
   );
+  const rawAgentObservation = cloneTypedRecord<AgentObservation>(
+    rawSession.agentObservation,
+    'browser campaign checkpoint agent observation',
+  );
+  const agentObservation = cloneBrowserAgentObservation(rawAgentObservation);
   if (gameObservation.gameCode !== rawSession.gameCode) {
     throw new Error('browser campaign checkpoint game code changed');
   }
@@ -198,8 +207,8 @@ export function parseBrowserCommonCampaignHostCheckpoint(
   }
   validateAgentBinding(gameObservation, agentObservation, rawSession.sessionId);
 
-  const session = {
-    version: 1 as const,
+  const session: BrowserCampaignSessionCheckpointV1 = {
+    version: 1,
     sessionId: rawSession.sessionId,
     gameCode: rawSession.gameCode,
     nextSequence: rawSession.nextSequence,
@@ -210,7 +219,7 @@ export function parseBrowserCommonCampaignHostCheckpoint(
   };
   session.pendingReturn = parsePendingReturn(rawSession.pendingReturn, session);
 
-  const pending = common.campaign?.pending ?? [];
+  const pending = common.campaign.pending ?? [];
   const matching = pending.filter(item => item.sessionId === session.sessionId);
   if (session.pendingReturn) {
     if (matching.length !== 1) {
