@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - recovery/lot9b-native-probe-ci-20261112
+      - recovery/lot9b-stck-public-stack-probe-20261112
   workflow_dispatch:
 
 permissions:
