@@ -34,12 +34,49 @@ function defaultSelectAction({ observation }) {
   return selectNativePublicCostAction(observation);
 }
 
+function validateHookInputMode(value) {
+  if (value !== 'cloned' && value !== 'borrowed-readonly') {
+    throw new TypeError("hookInputMode must be 'cloned' or 'borrowed-readonly'");
+  }
+  return value;
+}
+
+function beforeHookEvent(mode, index, action, observation, descriptor) {
+  if (mode === 'borrowed-readonly') {
+    return { index, action, observation, descriptor };
+  }
+  return {
+    index,
+    action: structuredClone(action),
+    observation: structuredClone(observation),
+    descriptor: structuredClone(descriptor),
+  };
+}
+
+function afterHookEvent(mode, index, action, beforeObservation, observation, descriptor) {
+  if (mode === 'borrowed-readonly') {
+    return { index, action, beforeObservation, observation, descriptor };
+  }
+  return {
+    index,
+    action: structuredClone(action),
+    beforeObservation,
+    observation: structuredClone(observation),
+    descriptor: structuredClone(descriptor),
+  };
+}
+
 /**
  * Candidate runner factory for a deterministic public-only corpus.
  *
  * It owns timing but not game construction. The native game factory remains a
  * separate recovery dependency. Setup and the first observation are outside
  * the measured scope; the exact requested action loop is inside.
+ *
+ * Hooks are defensively cloned by default. A trusted internal hook may declare
+ * `borrowed-readonly` to consume the already-public action and observation
+ * snapshots without allocating complete duplicate 64x64 frames. Such a hook
+ * must not mutate or retain those borrowed values.
  */
 export function createPublicCorpusSessionRunner({
   variant,
@@ -51,11 +88,13 @@ export function createPublicCorpusSessionRunner({
   createSession,
   beforeAction,
   afterAction,
+  hookInputMode = 'cloned',
 }) {
   nonEmpty(variant, 'variant');
   nonEmpty(game, 'game');
   nonEmpty(sourceRef, 'sourceRef');
   const qualifiedCorpus = validateCorpus(corpus, game);
+  const qualifiedHookInputMode = validateHookInputMode(hookInputMode);
   if (typeof selectAction !== 'function') throw new TypeError('selectAction must be a function');
   if (!Number.isInteger(seed)) throw new TypeError('seed must be an integer');
   if (typeof createSession !== 'function') throw new TypeError('createSession must be a function');
@@ -106,29 +145,35 @@ export function createPublicCorpusSessionRunner({
 
       if (beforeAction) {
         const hookStarted = globalThis.performance.now();
-        await beforeAction({
+        await beforeAction(beforeHookEvent(
+          qualifiedHookInputMode,
           index,
-          action: structuredClone(action),
-          observation: structuredClone(observation),
-          descriptor: structuredClone(descriptor),
-        });
+          action,
+          observation,
+          descriptor,
+        ));
         candidateHookMs += globalThis.performance.now() - hookStarted;
       }
 
-      const beforeObservation = structuredClone(observation);
+      const beforeObservation = afterAction
+        ? (qualifiedHookInputMode === 'borrowed-readonly'
+            ? observation
+            : structuredClone(observation))
+        : undefined;
       const actionStarted = globalThis.performance.now();
       observation = await session.action(structuredClone(action));
       gameActionMs += globalThis.performance.now() - actionStarted;
 
       if (afterAction) {
         const hookStarted = globalThis.performance.now();
-        await afterAction({
+        await afterAction(afterHookEvent(
+          qualifiedHookInputMode,
           index,
-          action: structuredClone(action),
+          action,
           beforeObservation,
-          observation: structuredClone(observation),
-          descriptor: structuredClone(descriptor),
-        });
+          observation,
+          descriptor,
+        ));
         candidateHookMs += globalThis.performance.now() - hookStarted;
       }
 
