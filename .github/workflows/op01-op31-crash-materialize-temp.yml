@@ -1,0 +1,57 @@
+name: Temporary OP01-OP31 crash materialization
+
+on:
+  push:
+    branches:
+      - recovery/op01-op31-crash-resume-20261113
+    paths:
+      - '.github/workflows/op01-op31-crash-materialize-temp.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  materialize:
+    runs-on: ubuntu-26.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply current crash slice
+        run: |
+          python3 - <<'PY'
+          import base64
+          import zlib
+          from pathlib import Path
+
+          payload = ''.join(
+              Path(f'scripts/.op01-op31-crash-resume.part{index}').read_text(encoding='utf-8').strip()
+              for index in range(7)
+          )
+          source = zlib.decompress(base64.b64decode(payload))
+          patch_file = Path.cwd() / 'scripts' / 'apply-op01-op31-crash-resume-temp.py'
+          exec(
+              compile(source, str(patch_file), 'exec'),
+              {'__file__': str(patch_file), '__name__': '__main__'},
+          )
+          PY
+      - name: Package editable sources
+        run: |
+          mkdir -p materialized/src/runtime materialized/src materialized/tests/browser materialized/tests materialized/scripts materialized/docs/migration materialized/docs/recovery
+          cp src/runtime/v6-browser-durable-session.ts materialized/src/runtime/
+          cp src/main.ts materialized/src/
+          cp tests/browser/op01-op31-browser-durable-resume.ts materialized/tests/browser/
+          cp tests/browser/op01-op31-browser-crash-resume.ts materialized/tests/browser/
+          cp tests/browser/op01-op31-browser-crash-resume.html materialized/tests/browser/
+          cp tests/v6-browser-durable-session.test.ts materialized/tests/
+          cp tests/main-browser-durable-session-integration.test.ts materialized/tests/
+          cp scripts/qualify-op01-op31-browser-crash-resume.mjs materialized/scripts/
+          cp scripts/check-v6-entry-point-progress.mjs materialized/scripts/
+          cp docs/migration/v6-entry-point-progress.json materialized/docs/migration/
+          cp docs/migration/op01-op31-progress.md materialized/docs/migration/
+          cp docs/recovery/v6-entry-point-registry-reconstruction-20261113.md materialized/docs/recovery/
+          cp docs/recovery/op01-op31-browser-crash-resume-20261113.md materialized/docs/recovery/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: op01-op31-crash-materialized
+          path: materialized
+          retention-days: 1
