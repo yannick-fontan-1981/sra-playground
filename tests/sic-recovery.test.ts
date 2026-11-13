@@ -40,3 +40,16 @@ test('the recovery comparison follows proposal identity and does not infer aband
   assert.equal(compareRecoveryRoute(first, [first, step(41, 'next', 0)])?.abandoned, true);
   assert.equal(compareRecoveryRoute(first, [first, next])?.abandoned, false);
 });
+
+test('an executed SIC sub-objective starts a separate episode under the same native goal', () => {
+  const objective = { id: 'find_ordered_contact_access', label: 'Find an ordered access', parent: 'G_official_completion' };
+  const recoveryDecision = { strategy: 'Revise contact', need: 'Restore a projection', objective, maxDepth: 88, maxNodes: 1000, packDigest: null };
+  const action = (sequence: number, proposal: DecisionSprites, toLevel = 1): DirectionalReturn => ({
+    sessionId: 's', sequence, command: 3, fromLevel: 1, toLevel, changes: null, translation: null, stationary: null, decision: proposal,
+  });
+  const revised = { ...decision, recoveryDecision };
+  const report = objectiveHistory([action(12, decision), action(13, revised), action(14, revised, 2)]);
+  assert.deepEqual(report.map(item => [item.first, item.last, item.source.objective, item.sic?.id, item.advanced]), [
+    [12, 12, objective.parent, undefined, false], [13, 14, objective.parent, objective.id, true],
+  ]);
+});

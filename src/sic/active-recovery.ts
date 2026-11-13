@@ -30,7 +30,7 @@ export const rootedRecoveryStrategy = Object.freeze({
   id: 'revise_rooted_contact',
   label: 'Revise the contact projection',
   need: 'Restore a projection that accounts for the contact chain',
-  objective: 'Find an access that puts the pieces in the reference order',
+  objective: { id: 'find_ordered_contact_access', label: 'Find an access that puts the pieces in the reference order' },
 });
 
 export function isRecoveryStop(reason: unknown): reason is 'sic_recovery_shadow' | 'rooted_cell_access_unresolved' {

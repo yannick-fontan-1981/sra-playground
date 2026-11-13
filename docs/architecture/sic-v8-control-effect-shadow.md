@@ -142,4 +142,6 @@ La récupération de contact dispose maintenant d’une configuration exécutabl
 
 La configuration de récupération s’exporte en JSON avec l’identifiant de capacité, la version de schéma et une empreinte SHA-256. L’import valide le schéma et le contenu, puis affiche les paramètres différents avant l’enregistrement. On peut restaurer la révision précédente pour la prochaine session. La frise affiche l’empreinte utilisée pour l’action, même si les paramètres enregistrés depuis ont changé. L’empreinte contrôle l’intégrité du contenu. L’identité du signataire et la qualification de la migration d’autres capacités restent à traiter.
 
+La stratégie de récupération émet le sous-objectif stable « trouver un accès qui remet les pièces dans l’ordre de référence », relié au but natif de terminer le niveau. Il apparaît dans Objectifs et Plans d’actions pendant la résolution. Passé conserve le sous-objectif après la frontière et relie l’épisode à la stratégie et à ses preuves.
+
 Le résumé natif est construit après la décision, hors de la mesure du temps actif. L’affichage est différé au prochain rendu du navigateur après la fin d’une opération. Les tests couvrent la matrice, la révision, la portée, le fallback, l’ambiguïté, les retours natifs et la parité du transport V6 jusqu’à un retour terminal.

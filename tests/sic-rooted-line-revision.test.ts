@@ -57,6 +57,8 @@ test('an observed push chain unblocks rooted-line search, retaining its estimate
   });
   assert.equal(view?.recoveryAction, 12);
   assert.equal(view?.recoveryDecision?.strategy, 'Revise the contact projection');
+  assert.deepEqual(view?.recoveryDecision?.objective, { id: 'find_ordered_contact_access',
+    label: 'Find an access that puts the pieces in the reference order', parent: 'G_official_completion' });
   assert.equal(view?.recoveryDecision?.maxDepth, 88);
   assert.equal(view?.recoveryDecision?.packDigest, recoveryRevision(defaultRecoveryPack).digest);
   assert.equal(view?.operation, 'OP18');

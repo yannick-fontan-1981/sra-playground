@@ -1,6 +1,6 @@
 import type { NativeRows } from '../logos-engine/v6-native-types.ts';
 import { samplePublicAnimation, type DirectionalReturn } from './directional-return.ts';
-import type { NativeResolution } from './native-resolution.ts';
+import type { NativeResolution, SicObjective } from './native-resolution.ts';
 
 export interface RestartWitness {
   readonly before: NativeRows;
@@ -27,6 +27,7 @@ export interface PursuedObjective {
   readonly first: number;
   readonly last: number;
   readonly source: ObjectiveSource;
+  readonly sic?: SicObjective;
   readonly advanced: boolean;
   readonly interrupted: boolean;
 }
@@ -40,15 +41,16 @@ export function recordPursuedObjective(items: readonly PursuedObjective[], item:
   if (!decision?.objective && !decision?.question) return items;
   const { objective, objectiveSource, question } = decision;
   const source = { objective, objectiveSource, question };
+  const sic = decision.recoveryDecision?.objective ?? undefined;
   const last = items.at(-1);
   const advanced = item.toLevel > item.fromLevel;
   const interrupted = Boolean(item.restart);
   if (last && last.last + 1 === item.sequence && last.level === item.fromLevel && !last.advanced && !last.interrupted
     && last.source.objective === source.objective && last.source.objectiveSource === source.objectiveSource
-    && last.source.question === source.question) {
+    && last.source.question === source.question && last.sic?.id === sic?.id) {
     return [...items.slice(0, -1), { ...last, last: item.sequence, advanced, interrupted }];
   }
-  return [...items.slice(-127), { level: item.fromLevel, first: item.sequence, last: item.sequence, source, advanced, interrupted }];
+  return [...items.slice(-127), { level: item.fromLevel, first: item.sequence, last: item.sequence, source, sic, advanced, interrupted }];
 }
 
 export function firstRecovery(returns: readonly DirectionalReturn[], level: number) {

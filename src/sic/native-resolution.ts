@@ -45,7 +45,7 @@ export interface NativeResolution {
   readonly operation: string | null;
   readonly searchOperation?: string;
   readonly recoveryOperations?: readonly { key: string; finding: string }[];
-  readonly recoveryDecision?: { readonly strategy: string; readonly need: string; readonly objective: string; readonly maxDepth: number;
+  readonly recoveryDecision?: { readonly strategy: string; readonly need: string; readonly objective: SicObjective | null; readonly maxDepth: number;
     readonly maxNodes: number; readonly packDigest: string | null };
   readonly recoveryAction?: number;
   readonly composition: string | null;
@@ -64,6 +64,12 @@ export interface NativeResolution {
   readonly outcome: { readonly family: string; readonly matched: boolean | null; readonly reason: string | null } | null;
   readonly history: readonly { readonly sequence: number; readonly level: number; readonly family: string;
     readonly matched: boolean | null; readonly reason: string | null }[];
+}
+
+export interface SicObjective {
+  readonly id: string;
+  readonly label: string;
+  readonly parent: string;
 }
 
 const record = (value: unknown): Record<string, unknown> | null =>
@@ -231,9 +237,13 @@ export function readNativeResolution(agent: {
   const recoveryAction = Array.isArray(search?.recovery_evidence) ? priorAction(search.recovery_evidence[1]) : null;
   const sic = record(search?.sic_decision), recoveryPack = record(sic?.configuration);
   const maxDepth = natural(recoveryPack?.maxDepth), maxNodes = natural(recoveryPack?.maxNodes);
+  const target = record(sic?.objective), targetLabel = label(target?.label);
+  const recoveryObjective = target?.id === rootedRecoveryStrategy.objective.id && targetLabel &&
+    target.parent === nativeObjective && nativeObjective
+    ? { id: rootedRecoveryStrategy.objective.id, label: targetLabel, parent: nativeObjective } : null;
   const recoveryDecision = sic?.strategy === rootedRecoveryStrategy.id && recoveryPack?.mode === 'active'
     && maxDepth !== null && maxNodes !== null
-    ? { strategy: rootedRecoveryStrategy.label, need: rootedRecoveryStrategy.need, objective: rootedRecoveryStrategy.objective,
+    ? { strategy: rootedRecoveryStrategy.label, need: rootedRecoveryStrategy.need, objective: recoveryObjective,
       maxDepth, maxNodes, packDigest: typeof sic.packDigest === 'string' && /^[a-f0-9]{64}$/.test(sic.packDigest) ? sic.packDigest : null }
     : undefined;
   const previousProjection = routeIndex > 0 && Array.isArray(rooted?.predictions) ? record(rooted.predictions[routeIndex - 1]) : null;

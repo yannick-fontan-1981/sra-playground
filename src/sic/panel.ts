@@ -938,6 +938,12 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
     line.textContent = objective;
     plan.append(line);
   }
+  const planRecovery = planSource?.recoveryDecision?.objective;
+  if (planRecovery) {
+    const line = document.createElement('p');
+    line.textContent = `SIC sub-objective: ${planRecovery.label}.`;
+    plan.append(line);
+  }
   renderRecovery(plan, returns, board?.level, palette);
   if (native?.steps.length) {
     const heading = document.createElement('p');
@@ -1041,7 +1047,8 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
 }
 
 function renderObjectives(panel: HTMLElement, progress: string, board: GameObservation | null,
-  current: Pick<NativeResolution, 'objective' | 'objectiveSource' | 'question'> & Partial<Pick<NativeResolution, 'context'>> | null | undefined,
+  current: Pick<NativeResolution, 'objective' | 'objectiveSource' | 'question' | 'recoveryDecision'>
+    & Partial<Pick<NativeResolution, 'context'>> | null | undefined,
   entries: readonly PursuedObjective[], timeline: ReturnType<typeof strategyTimeline>): void {
   const paragraph = (value: string) => { const p = document.createElement('p'); p.textContent = value; return p; };
   panel.querySelector('[data-sic-objective-progress]')!.textContent = progress;
@@ -1049,6 +1056,9 @@ function renderObjectives(panel: HTMLElement, progress: string, board: GameObser
   active.replaceChildren();
   active.append(paragraph(board?.state === 'WIN' ? 'The game reports victory.'
     : describePlanObjective(current) ?? 'No current native objective observed.'));
+  if (current?.recoveryDecision?.objective) {
+    active.append(paragraph(`SIC sub-objective: ${current.recoveryDecision.objective.label}.`));
+  }
   if (current?.objectiveSource === 'native' && current.question) {
     active.append(paragraph(`Immediate aim: ${nativeLabel(current.question).replace(/[.!?]$/, '')}.`));
   }
@@ -1068,10 +1078,12 @@ function renderObjectives(panel: HTMLElement, progress: string, board: GameObser
       if (entry.source.objectiveSource === 'native' && entry.source.question) {
         row.append(paragraph(`Immediate aim: ${nativeLabel(entry.source.question).replace(/[.!?]$/, '')}.`));
       }
+      if (entry.sic) row.append(paragraph(`SIC sub-objective: ${entry.sic.label}.`));
       const method = timeline.find(item => item.first.fromLevel === entry.level
-        && item.last.sequence >= entry.first && item.first.sequence <= entry.last && item.rule
+        && item.last.sequence >= entry.first && item.first.sequence <= entry.last && (item.rule || item.first.decision?.recoveryDecision)
         && panel.querySelector(`[data-sic-method="${item.first.sequence}"]`));
-      if (method?.rule) row.append(perspectiveJump(panel, 'strategies', `[data-sic-method="${method.first.sequence}"]`, `Strategy: ${method.rule.title}`));
+      const strategy = method?.first.decision?.recoveryDecision?.strategy ?? method?.rule?.title;
+      if (method && strategy) row.append(perspectiveJump(panel, 'strategies', `[data-sic-method="${method.first.sequence}"]`, `Strategy: ${strategy}`));
       list.append(row);
     }
     past.append(paragraph(`${entries.length} recorded episodes`), list);
@@ -1245,8 +1257,8 @@ function renderGenericTimeline(panel: HTMLElement, container: Element, selected:
     const recoveryDecision = first.decision?.recoveryDecision;
     if (recoveryDecision) {
       factsList.push(['SIC need', recoveryDecision.need], ['Active strategy', recoveryDecision.strategy],
-        ['Recovery objective', recoveryDecision.objective],
         ['Configured search limits', `${recoveryDecision.maxDepth} moves · ${recoveryDecision.maxNodes} states`]);
+      if (recoveryDecision.objective) factsList.push(['Recovery objective', recoveryDecision.objective.label]);
       if (recoveryDecision.packDigest) factsList.push(['Pack revision', recoveryDecision.packDigest.slice(0, 12)]);
     }
     for (const [name, description] of factsList) {

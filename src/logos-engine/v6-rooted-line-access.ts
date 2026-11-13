@@ -7,7 +7,7 @@ import { measureRootedLine, physicalRootedLine, projectedRootedLine } from './v6
 import { rootedLineEffect, planRootedLine } from './v6-rooted-line-mechanics.ts';
 import { planCellPush, witnessedCellPush } from './v6-rooted-line-revision.ts';
 import { resolveRootedRecovery } from './v6-rooted-line-recovery-operations.ts';
-import { defaultRecoveryPack } from '../sic/active-recovery.ts';
+import { defaultRecoveryPack, rootedRecoveryStrategy } from '../sic/active-recovery.ts';
 import { recoveryRevision } from '../sic/recovery-pack.ts';
 import { symbolicDigest as identity } from './v6-hash.ts';
 import { pythonEqual as equal, pythonTruthy as truth } from './v6-operations.ts';
@@ -100,7 +100,8 @@ export class RootedLineMemory {
       search = { operation: 'OP26', predicted_goal_distance: plan.predictedGoalDistance, model: 'conditional_cell_push_after_counterexample',
         recovery_operations: [...revision.operations, { key: 'OP26', finding: `Find a conditional access of ${plan.predictedGoalDistance} moves and check its first command.` }],
         recovery_evidence: revision.evidence,
-        sic_decision: { strategy: revision.strategy, needId: revision.needId, configuration: bounds, packDigest: recoveryRevision(bounds).digest } };
+        sic_decision: { strategy: revision.strategy, needId: revision.needId, configuration: bounds, packDigest: recoveryRevision(bounds).digest,
+          objective: { ...rootedRecoveryStrategy.objective, parent: 'G_official_completion' } } };
       why = 'Find an ordered access from the measured return using the witnessed whole-cell push. Verify the root, tip and every piece after this step.';
       kind = 'cell_push_revision';
     } else if (unmeasured.length) {
