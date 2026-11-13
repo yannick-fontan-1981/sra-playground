@@ -5,6 +5,7 @@ import { AGENT_STATUS } from './runtime/contracts';
 import { GAME_CATALOG, PUBLIC_SOURCE_BASE, getGameByCode, type GameCatalogEntry } from './games/catalog';
 import {
   isPresentationCurrent,
+  isPresentationLoopCurrent,
   presentationFeedback,
   presentationFrameDurationMs,
   presentationFrames,
@@ -297,13 +298,13 @@ async function present(next: GameObservation, selectedGeneration: number, releas
   updateInterface();
   const frames = presentationFrames(next);
   for (let i = 0; i < frames.length; i += 1) {
-    if (generation !== presentationGeneration || selectedGeneration !== selectionGeneration) return;
+    if (!isPresentationLoopCurrent(generation, presentationGeneration, selectedGeneration, selectionGeneration)) return;
     paint(frames[i]!, next.palette ?? fallbackPalette);
     if (i < frames.length - 1) {
       await new Promise<void>(resolve => window.setTimeout(resolve, presentationFrameDurationMs(next, i)));
     }
   }
-  if (generation !== presentationGeneration || selectedGeneration !== selectionGeneration) return;
+  if (!isPresentationLoopCurrent(generation, presentationGeneration, selectedGeneration, selectionGeneration)) return;
   paint(next.frame, next.palette ?? fallbackPalette);
   if (releaseBusy) {
     busy = false;
