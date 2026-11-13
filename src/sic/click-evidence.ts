@@ -1,4 +1,4 @@
-import type { NativeClickReturn } from '../logos-engine/v6-native-click-return.ts';
+import type { NativeClickContext, NativeClickReturn } from '../logos-engine/v6-native-click-return.ts';
 
 export interface ClickEffectCount {
   readonly kind: 'recolor' | 'unchanged' | 'other_change';
@@ -21,6 +21,33 @@ export interface ClickEvidence {
   readonly boundaries: number;
   readonly unidentified: number;
   readonly omitted: number;
+}
+
+const contextFields = [
+  ['Board state', (context: NativeClickContext) => context.state],
+  ['Available actions', (context: NativeClickContext) => context.commands.map(action => action.replace(/^ACTION/, '')).join(', ') || 'None'],
+  ['Matching regions', (context: NativeClickContext) => String(context.matchingRegions)],
+  ...(['above', 'right', 'below', 'left'] as const).map(direction => [
+    `Colors ${direction}`,
+    (context: NativeClickContext) => context.neighborhood[direction].join(', ') || 'Outside board',
+  ] as const),
+] as const;
+
+export function describeClickContext(context: NativeClickContext): readonly [string, string][] {
+  return contextFields.map(([label, read]) => [label, read(context)]);
+}
+
+export function contrastClickContexts(effects: readonly ClickEffectCount[]) {
+  const groups = effects.map(effect => effect.returns.flatMap(receipt => receipt.beforeContext ? [receipt.beforeContext] : []));
+  const missing = effects.reduce((total, effect, index) => total + effect.count - groups[index]!.length, 0);
+  const differences = contextFields.flatMap(([label, read]) => {
+    const values = groups.map(group => [...new Set(group.map(read))].sort());
+    if (new Set(values.flat()).size < 2) return [];
+    const separates = missing === 0 && values.every((group, index) =>
+      group.every(value => values.every((other, otherIndex) => index === otherIndex || !other.includes(value))));
+    return [{ label, values, separates }];
+  });
+  return { differences, missing };
 }
 
 export function compareClickReturns(returns: readonly NativeClickReturn[], omitted: number): ClickEvidence {

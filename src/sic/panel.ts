@@ -1,6 +1,6 @@
 import type { AgentAction } from '../runtime/contracts.ts';
 import type { NativeClickReturn } from '../logos-engine/v6-native-click-return.ts';
-import type { ClickEffectCount } from './click-evidence.ts';
+import { contrastClickContexts, describeClickContext, type ClickEffectCount } from './click-evidence.ts';
 import type { Applicability, ControlEffectResolution } from './know-control-effect.ts';
 import type { ShadowView } from './shadow.ts';
 import type { SituationKey } from './situation.ts';
@@ -133,6 +133,21 @@ function renderClickReturns(panel: HTMLElement, returns: readonly NativeClickRet
       line.textContent = description;
       row.append(line);
     }
+    if (receipt.beforeContext) {
+      const context = document.createElement('details');
+      const summary = document.createElement('summary');
+      summary.textContent = 'Before the click';
+      const facts = document.createElement('dl');
+      for (const [label, value] of describeClickContext(receipt.beforeContext)) {
+        const term = document.createElement('dt');
+        const description = document.createElement('dd');
+        term.textContent = label;
+        description.textContent = value;
+        facts.append(term, description);
+      }
+      context.append(summary, facts);
+      row.append(context);
+    }
     return row;
   }));
   filterClickRows(panel);
@@ -142,6 +157,31 @@ function observedEffect(effect: ClickEffectCount): string {
   if (effect.kind === 'recolor') return `Changed to palette color ${effect.afterPalette} with the same shape and position`;
   if (effect.kind === 'unchanged') return 'Kept the same visible pixels';
   return 'Pixels changed. The resulting region could not be matched exactly';
+}
+
+function renderContextContrast(effects: readonly ClickEffectCount[]): HTMLElement {
+  const context = document.createElement('details');
+  context.className = 'sic-context-contrast';
+  context.open = true;
+  const heading = document.createElement('summary');
+  heading.textContent = 'What differed before the clicks?';
+  const { differences, missing } = contrastClickContexts(effects);
+  const assessment = document.createElement('p');
+  assessment.textContent = missing ? `Context missing for ${missing} ${missing === 1 ? 'return' : 'returns'}.`
+    : differences.some(field => field.separates)
+      ? 'Some measurements distinguish these returns. Their causal role is still unknown.'
+      : 'The measured context does not separate the outcomes.';
+  context.append(heading, assessment);
+  for (const { label, values, separates } of differences) {
+    const line = document.createElement('p');
+    const description = values.map((group, index) => {
+      const levels = effects[index]!.levels.join(', ');
+      return `Level ${levels} (${observedEffect(effects[index]!)}): ${group.join(' / ') || 'Unknown'}`;
+    });
+    line.textContent = `${label}${separates ? ' (separates these returns)' : ''} · ${description.join(' · ')}`;
+    context.append(line);
+  }
+  return context;
 }
 
 function renderClickComparisons(panel: HTMLElement, evidence: ShadowView['clickEvidence']): void {
@@ -205,6 +245,7 @@ function renderClickComparisons(panel: HTMLElement, evidence: ShadowView['clickE
         row.append(line);
       }
     }
+    if (status === 'varied') row.append(renderContextContrast(effects));
     return row;
   });
   list.replaceChildren(...rows);

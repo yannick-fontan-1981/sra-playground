@@ -1227,7 +1227,7 @@ export class NativeV6Runtime implements NativeV6Backend {
     // Read-only diagnostic after the native decision, outside its active clock.
     this.lastClickReturn = null;
     try {
-      this.lastClickReturn = projectNativeClickReturn(outcome.command, before, this.observation!, this.current!.frame_rows);
+      this.lastClickReturn = projectNativeClickReturn(outcome.command, before, this.observation!, this.current!.frame_rows, first.frame_rows);
       if (this.lastClickReturn) {
         const capacity = 32;
         if (this.clickReturns.length === capacity) this.omittedClickReturns += 1;

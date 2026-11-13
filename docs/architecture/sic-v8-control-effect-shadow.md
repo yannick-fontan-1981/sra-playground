@@ -23,6 +23,10 @@ Sur STCK, les trois premiers niveaux ont été résolus en 35 actions. Pour une 
 
 L’onglet **Perceptions** liste les retours avant/après, avec un filtre par niveau. L’onglet **Information** regroupe les retours comparables et affiche les résultats par niveau. Chaque résultat ouvre un retour correspondant dans Perceptions. La variation entre les niveaux 1 et 3 est affichée en tête de la comparaison STCK. Les onglets sont utilisables à la souris et au clavier avec les flèches, Début et Fin.
 
+Pour les retours qui divergent, SIC compare l’état public avant le clic, les commandes disponibles, le nombre de régions de même signature et les couleurs dans les bandes de deux pixels autour de la boîte de la région, sans les coins. Une mesure distingue les résultats observés quand chaque retour possède le contexte et que les ensembles de valeurs sont disjoints entre résultats. Cette distinction décrit l’échantillon. Elle ne démontre pas de mécanisme causal. La mesure réutilise le plateau public et les régions que V6 possédait avant l’action.
+
+Le replay STCK des trois premiers niveaux conserve les 35 actions. Dans le groupe de quatre clics sur la région de 40 pixels, le voisinage du niveau 1 contient les couleurs 0 et 9 au-dessus, et 0 et 3 à droite. Les trois retours du niveau 3 ont la couleur 4 au-dessus, et 3 et 4 à droite. Les ensembles en dessous et à gauche diffèrent aussi. Le nombre de régions similaires se recoupe entre les deux niveaux. L’état public et les commandes disponibles sont identiques pour les quatre clics. Les couleurs voisines fournissent des pistes à vérifier sur d’autres retours où ces indices varient séparément.
+
 Les prochaines perspectives, **Stratégies**, **Objectifs** et **Plans d’actions**, pourront utiliser la même navigation quand leurs données en lecture seule seront disponibles.
 
 Le résumé natif est construit après la décision, hors de la mesure du temps actif. L’affichage est différé au prochain rendu du navigateur après la fin d’une opération. Les tests couvrent la matrice, la révision, la portée, le fallback, l’ambiguïté, les retours natifs et la parité du transport V6 jusqu’à un retour terminal.

@@ -3,7 +3,7 @@ import test from 'node:test';
 import { projectNativeClickReturn } from '../src/logos-engine/v6-native-click-return.ts';
 import { measureNativeObservation } from '../src/logos-engine/v6-native-observer.ts';
 import { readControlEffectShadow } from '../src/sic/shadow.ts';
-import { compareClickReturns } from '../src/sic/click-evidence.ts';
+import { compareClickReturns, contrastClickContexts } from '../src/sic/click-evidence.ts';
 
 async function measure(rows: number[][], revision: number, level = 1, state = 'NOT_FINISHED') {
   return measureNativeObservation({
@@ -39,6 +39,37 @@ test('a native click receipt counts the addressed mask and recognizes exact supp
   // The native runtime can carry a non-coordinate command with no data field.
   const space = { action_ref: 'ACTION5' } as typeof command;
   assert.equal(projectNativeClickReturn(space, before, after, afterRows), null);
+});
+
+test('the click context measures the board before the action and clips at the edge', async () => {
+  const rows = [[2, 3, 4], [2, 3, 4], [5, 6, 7]];
+  const before = await measure(rows, 1);
+  const after = await measure(beforeRows, 2);
+  const receipt = projectNativeClickReturn({ action_ref: 'ACTION6', data: { x: 0, y: 0 } }, before, after, beforeRows, rows);
+  assert.deepEqual(receipt?.beforeContext, {
+    state: 'NOT_FINISHED', commands: ['ACTION6'], matchingRegions: 1,
+    neighborhood: { above: [], right: [3, 4], below: [5], left: [] },
+  });
+});
+
+test('context contrasts require disjoint values for every observed outcome and complete samples', async () => {
+  const before = await measure(beforeRows, 1);
+  const recolored = beforeRows.map(row => row.map(pixel => pixel === 2 ? 3 : pixel));
+  const first = projectNativeClickReturn(command, before, await measure(recolored, 2), recolored, beforeRows);
+  assert.ok(first?.beforeContext);
+  const second = {
+    ...first, sequence: 2, sameSupport: false,
+    beforeContext: { ...first.beforeContext, matchingRegions: 2 },
+  };
+  const distinct = compareClickReturns([first, second], 0).comparisons[0]!;
+  assert.deepEqual(contrastClickContexts(distinct.effects), {
+    differences: [{ label: 'Matching regions', values: [['1'], ['2']], separates: true }], missing: 0,
+  });
+  const overlap = compareClickReturns([first, second, { ...second, sequence: 3, beforeContext: first.beforeContext }], 0).comparisons[0]!;
+  assert.equal(contrastClickContexts(overlap.effects).differences[0]?.separates, false);
+  const missing = compareClickReturns([first, second, { ...second, sequence: 3, beforeContext: undefined }], 0).comparisons[0]!;
+  assert.equal(contrastClickContexts(missing.effects).differences[0]?.separates, false);
+  assert.equal(contrastClickContexts(missing.effects).missing, 1);
 });
 
 test('a shape change is not a same-support recolor and a new level is not a local effect', async () => {

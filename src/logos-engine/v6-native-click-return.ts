@@ -9,6 +9,13 @@ interface VisibleRegion {
   readonly pixels: number;
 }
 
+export interface NativeClickContext {
+  readonly state: string;
+  readonly commands: readonly string[];
+  readonly matchingRegions: number;
+  readonly neighborhood: Readonly<Record<'above' | 'right' | 'below' | 'left', readonly number[]>>;
+}
+
 export interface NativeClickReturn {
   readonly beforeRef: string;
   readonly afterRef: string;
@@ -21,6 +28,7 @@ export interface NativeClickReturn {
   readonly changedTargetPixels: number;
   readonly sameSupport: boolean;
   readonly boundary: boolean;
+  readonly beforeContext?: NativeClickContext;
 }
 
 function atPoint(observation: MeasuredObservation, [x, y]: NativePoint): MeasuredEntity | undefined {
@@ -37,9 +45,34 @@ function region(entity: MeasuredEntity | undefined): VisibleRegion | null {
   } : null;
 }
 
+function summarizeContext(before: MeasuredObservation, target: MeasuredEntity, rows: NativeRows): NativeClickContext {
+  const [left, top, right, bottom] = target.bbox;
+  const depth = 2;
+  function colors(x0: number, y0: number, x1: number, y1: number): number[] {
+    const palette = new Set<number>();
+    for (let y = Math.max(0, y0); y <= Math.min(y1, rows.length - 1); y++) {
+      const row = rows[y]!;
+      for (let x = Math.max(0, x0); x <= Math.min(x1, row.length - 1); x++) palette.add(row[x]!);
+    }
+    return [...palette].sort((a, b) => a - b);
+  }
+  return {
+    state: before.state,
+    commands: [...new Set(before.available_action_refs)].sort(),
+    matchingRegions: before.entities.filter(entity => entity.signature === target.signature).length,
+    neighborhood: {
+      above: colors(left, top - depth, right, top - 1),
+      right: colors(right + 1, top, right + depth, bottom),
+      below: colors(left, bottom + 1, right, bottom + depth),
+      left: colors(left - depth, top, left - 1, bottom),
+    },
+  };
+}
+
 /** Compact diagnostic of an already executed command, using the native public measurements. */
 export function projectNativeClickReturn(
   command: NativeCommand, before: MeasuredObservation, after: MeasuredObservation, returnedRows: NativeRows,
+  beforeRows?: NativeRows,
 ): NativeClickReturn | null {
   if (command.action_ref !== 'ACTION6') return null;
   const x = command.data?.x, y = command.data?.y;
@@ -71,5 +104,6 @@ export function projectNativeClickReturn(
     changedTargetPixels,
     sameSupport,
     boundary,
+    ...(target && beforeRows ? { beforeContext: summarizeContext(before, target, beforeRows) } : {}),
   };
 }
