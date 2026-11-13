@@ -1,0 +1,1449 @@
+{
+  "schemaVersion": 1,
+  "registryKind": "reconstructed-capability-evidence",
+  "generatedAt": "2026-11-13",
+  "baseline": {
+    "repository": "yannick-fontan-1981/sra-playground",
+    "canonicalBranch": "recovery/site109-reconstruction-20261112",
+    "canonicalCommit": "fa76f1223d9d732a1f37a7f3bf1a8934b383e5c6",
+    "sourcePolicy": "GitHub canonical; evidence before count"
+  },
+  "purpose": "Inventory durable reconstructed operations and runtime capabilities without projecting them onto the unrecovered historical 76-slot registry.",
+  "qualificationLevels": [
+    "implementation-present",
+    "calculation-qualified",
+    "producer-demonstrated",
+    "call-observed",
+    "result-consumed",
+    "decision-effect-demonstrated",
+    "performance-qualified"
+  ],
+  "historical76": {
+    "targetSlots": 76,
+    "historicalClaimsObserved": [
+      70,
+      71
+    ],
+    "slotSchemaRecovered": false,
+    "mappedSlots": 0,
+    "currentCount": null,
+    "parityClaimed": false,
+    "site109ParityClaimed": false,
+    "unresolvedSiteSourceSha": "d90ce5b64fffa53cca201e2a6a49450fd123f299",
+    "reason": "The historical slot identities and authoritative slot-to-capability mapping are not present in durable GitHub evidence."
+  },
+  "summary": {
+    "operationRecords": 31,
+    "capabilityRecords": 15,
+    "inventoryRecords": 46,
+    "operationsCalculationQualified": 31,
+    "operationsProductActive": 2,
+    "capabilitiesFunctionalQualified": 15,
+    "capabilitiesProductActive": 7,
+    "capabilitiesSupportingActive": 5,
+    "capabilitiesOfficialPerformanceQualified": 2,
+    "historicalMappedSlots": 0,
+    "historicalCount": null,
+    "historicalParityClaimed": false
+  },
+  "operations": [
+    {
+      "id": "OP01",
+      "calculationStatus": "qualified",
+      "runtimeUse": "available-not-consumed",
+      "productActive": false,
+      "decisionEffect": "not-demonstrated",
+      "producers": [],
+      "consumers": [],
+      "implementation": [
+        "src/logos-engine/v6-operations.ts"
+      ],
+      "tests": [
+        "tests/v6-operations.test.ts"
+      ],
+      "proofs": [
+        "docs/migration/op01-op31-progress.md",
+        "docs/recovery/op01-op31-core-coverage-status.md"
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped",
+      "notes": "Aucun regroupement structurel consommé par le runtime actif."
+    },
+    {
+      "id": "OP02",
+      "calculationStatus": "qualified",
+      "runtimeUse": "available-not-consumed",
+      "productActive": false,
+      "decisionEffect": "not-demonstrated",
+      "producers": [],
+      "consumers": [],
+      "implementation": [
+        "src/logos-engine/v6-operations.ts"
+      ],
+      "tests": [
+        "tests/v6-operations.test.ts"
+      ],
+      "proofs": [
+        "docs/migration/op01-op31-progress.md",
+        "docs/recovery/op01-op31-core-coverage-status.md"
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped",
+      "notes": "Aucun domaine complet de chemins équivalents produit et consommé."
+    },
+    {
+      "id": "OP03",
+      "calculationStatus": "qualified",
+      "runtimeUse": "producer-missing",
+      "productActive": false,
+      "decisionEffect": "not-demonstrated",
+      "producers": [],
+      "consumers": [],
+      "implementation": [
+        "src/logos-engine/v6-operations.ts"
+      ],
+      "tests": [
+        "tests/v6-operations.test.ts"
+      ],
+      "proofs": [
+        "docs/migration/op01-op31-progress.md",
+        "docs/recovery/op01-op31-core-coverage-status.md"
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped",
+      "notes": "Les préconditions spécialisées restent gardées dans leurs familles."
+    },
+    {
+      "id": "OP04",
+      "calculationStatus": "qualified",
+      "runtimeUse": "available-not-consumed",
+      "productActive": false,
+      "decisionEffect": "not-demonstrated",
+      "producers": [],
+      "consumers": [],
+      "implementation": [
+        "src/logos-engine/v6-operations.ts"
+      ],
+      "tests": [
+        "tests/v6-operations.test.ts"
+      ],
+      "proofs": [
+        "docs/migration/op01-op31-progress.md",
+        "docs/recovery/op01-op31-core-coverage-status.md"
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped",
+      "notes": "Aucun réseau commun d'ouvertures consommé."
+    },
+    {
+      "id": "OP05",
+      "calculationStatus": "qualified",
+      "runtimeUse": "available-not-consumed",
+      "productActive": false,
+      "decisionEffect": "not-demonstrated",
+      "producers": [],
+      "consumers": [],
+      "implementation": [
+        "src/logos-engine/v6-operations.ts"
+      ],
+      "tests": [
+        "tests/v6-operations.test.ts"
+      ],
+      "proofs": [
+        "docs/migration/op01-op31-progress.md",
+        "docs/recovery/op01-op31-core-coverage-status.md"
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped",
+      "notes": "L'ambiguïté est traitée structurellement sans appel artificiel."
+    },
+    {
+      "id": "OP06",
+      "calculationStatus": "qualified",
+      "runtimeUse": "specialized-decision-effect",
+      "productActive": false,
+      "decisionEffect": "demonstrated-specialized",
+      "producers": [
+        "FieldStock",
+        "Region"
+      ],
+      "consumers": [
+        "future-proposal-gates"
+      ],
+      "implementation": [
+        "src/logos-engine/field-stock.ts",
+        "src/logos-engine/v6-operations.ts",
+        "src/logos-engine/v6-region-intervention.ts"
+      ],
+      "tests": [
+        "tests/v6-operations.test.ts"
+      ],
+      "proofs": [
+        "docs/migration/op01-op31-progress.md",
+        "docs/recovery/op01-op31-core-coverage-status.md"
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped",
+      "notes": "Les contradictions FieldStock/Region affectent les propositions futures."
+    },
+    {
+      "id": "OP07",
+      "calculationStatus": "qualified",
+      "runtimeUse": "producer-missing",
+      "productActive": false,
+      "decisionEffect": "not-demonstrated",
+      "producers": [],
+      "consumers": [],
+      "implementation": [
+        "src/logos-engine/v6-operations.ts"
+      ],
+      "tests": [
+        "tests/v6-operations.test.ts"
+      ],
+      "proofs": [
+        "docs/migration/op01-op31-progress.md",
+        "docs/recovery/op01-op31-core-coverage-status.md"
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped",
+      "notes": "Aucune frontière liée à un objectif ouvert n'est produite."
+    },
+    {
+      "id": "OP08",
+      "calculationStatus": "qualified",
+      "runtimeUse": "family-covered-no-generic-call",
+      "productActive": false,
+      "decisionEffect": "not-demonstrated",
+      "producers": [],
+      "consumers": [],
+      "implementation": [
+        "src/logos-engine/v6-operations.ts"
+      ],
+      "tests": [
+        "tests/v6-operations.test.ts"
+      ],
+      "proofs": [
+        "docs/migration/op01-op31-progress.md",
+        "docs/recovery/op01-op31-core-coverage-status.md"
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped",
+      "notes": "Aucun graphe transversal fiable effect→requires n'est consommé."
+    },
+    {
+      "id": "OP09",
+      "calculationStatus": "qualified",
+      "runtimeUse": "available-not-consumed",
+      "productActive": false,
+      "decisionEffect": "not-demonstrated",
+      "producers": [],
+      "consumers": [],
+      "implementation": [
+        "src/logos-engine/v6-operations.ts"
+      ],
+      "tests": [
+        "tests/v6-operations.test.ts"
+      ],
+      "proofs": [
+        "docs/migration/op01-op31-progress.md",
+        "docs/recovery/op01-op31-core-coverage-status.md"
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped",
+      "notes": "Aucune preuve de domaine complet d'alternatives."
+    },
+    {
+      "id": "OP10",
+      "calculationStatus": "qualified",
+      "runtimeUse": "available-not-consumed",
+      "productActive": false,
+      "decisionEffect": "not-demonstrated",
+      "producers": [],
+      "consumers": [],
+      "implementation": [
+        "src/logos-engine/v6-operations.ts"
+      ],
+      "tests": [
+        "tests/v6-operations.test.ts"
+      ],
+      "proofs": [
+        "docs/migration/op01-op31-progress.md",
+        "docs/recovery/op01-op31-core-coverage-status.md"
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped",
+      "notes": "Aucun propriétaire de buts terminaux ne consomme le résultat."
+    },
+    {
+      "id": "OP11",
+      "calculationStatus": "qualified",
+      "runtimeUse": "available-not-consumed",
+      "productActive": false,
+      "decisionEffect": "not-demonstrated",
+      "producers": [],
+      "consumers": [],
+      "implementation": [
+        "src/logos-engine/v6-operations.ts"
+      ],
+      "tests": [
+        "tests/v6-operations.test.ts"
+      ],
+      "proofs": [
+        "docs/migration/op01-op31-progress.md",
+        "docs/recovery/op01-op31-core-coverage-status.md"
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped",
+      "notes": "Aucun réseau commun de déblocages produit puis choisi."
+    },
+    {
+      "id": "OP12",
+      "calculationStatus": "qualified",
+      "runtimeUse": "family-covered-no-generic-call",
+      "productActive": false,
+      "decisionEffect": "not-demonstrated",
+      "producers": [],
+      "consumers": [],
+      "implementation": [
+        "src/logos-engine/v6-operations.ts"
+      ],
+      "tests": [
+        "tests/v6-operations.test.ts"
+      ],
+      "proofs": [
+        "docs/migration/op01-op31-progress.md",
+        "docs/recovery/op01-op31-core-coverage-status.md"
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped",
+      "notes": "Les inconnues restent spécialisées sans chaîne générique démontrée."
+    },
+    {
+      "id": "OP13",
+      "calculationStatus": "qualified",
+      "runtimeUse": "specialized-bounded-no-generic-consumer",
+      "productActive": false,
+      "decisionEffect": "bounded-specialized-only",
+      "producers": [
+        "specialized-models"
+      ],
+      "consumers": [],
+      "implementation": [
+        "src/logos-engine/v6-operations.ts"
+      ],
+      "tests": [
+        "tests/v6-operations.test.ts"
+      ],
+      "proofs": [
+        "docs/migration/op01-op31-progress.md",
+        "docs/recovery/op01-op31-core-coverage-status.md"
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped",
+      "notes": "La portée est bornée dans les modèles spécialisés."
+    },
+    {
+      "id": "OP14",
+      "calculationStatus": "qualified",
+      "runtimeUse": "bridge-only-native-release-missing",
+      "productActive": false,
+      "decisionEffect": "not-demonstrated",
+      "producers": [
+        "composition-bridge"
+      ],
+      "consumers": [],
+      "implementation": [
+        "src/logos-engine/v6-composition-engine.ts",
+        "src/logos-engine/v6-native-authority.ts",
+        "src/logos-engine/v6-operations.ts"
+      ],
+      "tests": [
+        "tests/v6-composition-engine.test.ts",
+        "tests/v6-native-authority.test.ts",
+        "tests/v6-operations.test.ts"
+      ],
+      "proofs": [
+        "docs/migration/op01-op31-progress.md",
+        "docs/recovery/op01-op31-core-coverage-status.md"
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped",
+      "notes": "L'admission existe au bridge, mais aucune autorité physique produit ne la route."
+    },
+    {
+      "id": "OP15",
+      "calculationStatus": "qualified",
+      "runtimeUse": "available-not-consumed",
+      "productActive": false,
+      "decisionEffect": "not-demonstrated",
+      "producers": [],
+      "consumers": [],
+      "implementation": [
+        "src/logos-engine/v6-operations.ts"
+      ],
+      "tests": [
+        "tests/v6-operations.test.ts"
+      ],
+      "proofs": [
+        "docs/migration/op01-op31-progress.md",
+        "docs/recovery/op01-op31-core-coverage-status.md"
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped",
+      "notes": "Aucun sélecteur réel d'objectif intermédiaire."
+    },
+    {
+      "id": "OP16",
+      "calculationStatus": "qualified",
+      "runtimeUse": "available-not-consumed",
+      "productActive": false,
+      "decisionEffect": "not-demonstrated",
+      "producers": [],
+      "consumers": [],
+      "implementation": [
+        "src/logos-engine/v6-operations.ts"
+      ],
+      "tests": [
+        "tests/v6-operations.test.ts"
+      ],
+      "proofs": [
+        "docs/migration/op01-op31-progress.md",
+        "docs/recovery/op01-op31-core-coverage-status.md"
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped",
+      "notes": "Aucun producteur de blocage global prouvé."
+    },
+    {
+      "id": "OP17",
+      "calculationStatus": "qualified",
+      "runtimeUse": "available-not-consumed",
+      "productActive": false,
+      "decisionEffect": "not-demonstrated",
+      "producers": [],
+      "consumers": [],
+      "implementation": [
+        "src/logos-engine/v6-operations.ts"
+      ],
+      "tests": [
+        "tests/v6-operations.test.ts"
+      ],
+      "proofs": [
+        "docs/migration/op01-op31-progress.md",
+        "docs/recovery/op01-op31-core-coverage-status.md"
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped",
+      "notes": "Aucune reprise autorisée avec préservation complète."
+    },
+    {
+      "id": "OP18",
+      "calculationStatus": "qualified",
+      "runtimeUse": "product-active",
+      "productActive": true,
+      "decisionEffect": "demonstrated",
+      "producers": [
+        "FieldStockCallerOwnerAdapter"
+      ],
+      "consumers": [
+        "operationAdmission",
+        "CommonCampaignOwner",
+        "FieldStock-next-proposal"
+      ],
+      "implementation": [
+        "src/logos-engine/field-stock.ts",
+        "src/logos-engine/v6-composition-engine.ts",
+        "src/logos-engine/v6-field-stock-caller-adapter.ts",
+        "src/logos-engine/v6-native-authority.ts",
+        "src/logos-engine/v6-operations.ts",
+        "src/logos-engine/v6-region-intervention.ts"
+      ],
+      "tests": [
+        "tests/op01-op31-field-stock-op18-trace.test.ts",
+        "tests/v6-composition-engine.test.ts",
+        "tests/v6-field-stock-common-campaign.test.ts",
+        "tests/v6-native-authority.test.ts",
+        "tests/v6-operations.test.ts"
+      ],
+      "proofs": [
+        "docs/migration/op01-op31-progress.md",
+        "docs/recovery/op01-op31-browser-field-stock-transport-20261112.md",
+        "docs/recovery/op01-op31-core-coverage-status.md"
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped",
+      "notes": "Chaîne produit transportée et consommée lorsqu'un stock courant revalidé existe."
+    },
+    {
+      "id": "OP19",
+      "calculationStatus": "qualified",
+      "runtimeUse": "available-not-consumed",
+      "productActive": false,
+      "decisionEffect": "not-demonstrated",
+      "producers": [],
+      "consumers": [],
+      "implementation": [
+        "src/logos-engine/v6-operations.ts"
+      ],
+      "tests": [
+        "tests/v6-operations.test.ts"
+      ],
+      "proofs": [
+        "docs/migration/op01-op31-progress.md",
+        "docs/recovery/op01-op31-core-coverage-status.md"
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped",
+      "notes": "Aucun préfixe forcé prouvé produit."
+    },
+    {
+      "id": "OP20",
+      "calculationStatus": "qualified",
+      "runtimeUse": "available-not-consumed",
+      "productActive": false,
+      "decisionEffect": "not-demonstrated",
+      "producers": [],
+      "consumers": [],
+      "implementation": [
+        "src/logos-engine/v6-operations.ts"
+      ],
+      "tests": [
+        "tests/v6-operations.test.ts"
+      ],
+      "proofs": [
+        "docs/migration/op01-op31-progress.md",
+        "docs/recovery/op01-op31-core-coverage-status.md"
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped",
+      "notes": "Aucune question d'utilité d'objet liée à une stratégie active."
+    },
+    {
+      "id": "OP21",
+      "calculationStatus": "qualified",
+      "runtimeUse": "available-not-consumed",
+      "productActive": false,
+      "decisionEffect": "not-demonstrated",
+      "producers": [],
+      "consumers": [],
+      "implementation": [
+        "src/logos-engine/v6-operations.ts"
+      ],
+      "tests": [
+        "tests/v6-operations.test.ts"
+      ],
+      "proofs": [
+        "docs/migration/op01-op31-progress.md",
+        "docs/recovery/op01-op31-core-coverage-status.md"
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped",
+      "notes": "Aucune question d'utilité d'espace liée à un objectif actif."
+    },
+    {
+      "id": "OP22",
+      "calculationStatus": "qualified",
+      "runtimeUse": "available-not-consumed",
+      "productActive": false,
+      "decisionEffect": "not-demonstrated",
+      "producers": [],
+      "consumers": [],
+      "implementation": [
+        "src/logos-engine/v6-operations.ts"
+      ],
+      "tests": [
+        "tests/v6-operations.test.ts"
+      ],
+      "proofs": [
+        "docs/migration/op01-op31-progress.md",
+        "docs/recovery/op01-op31-core-coverage-status.md"
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped",
+      "notes": "Aucun effet distant attribué et consommé transversalement."
+    },
+    {
+      "id": "OP23",
+      "calculationStatus": "qualified",
+      "runtimeUse": "available-not-consumed",
+      "productActive": false,
+      "decisionEffect": "not-demonstrated",
+      "producers": [],
+      "consumers": [],
+      "implementation": [
+        "src/logos-engine/v6-operations.ts"
+      ],
+      "tests": [
+        "tests/v6-operations.test.ts"
+      ],
+      "proofs": [
+        "docs/migration/op01-op31-progress.md",
+        "docs/recovery/op01-op31-core-coverage-status.md"
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped",
+      "notes": "Aucun cycle autonome prouvé n'alimente un plan réel."
+    },
+    {
+      "id": "OP24",
+      "calculationStatus": "qualified",
+      "runtimeUse": "available-not-consumed",
+      "productActive": false,
+      "decisionEffect": "not-demonstrated",
+      "producers": [],
+      "consumers": [],
+      "implementation": [
+        "src/logos-engine/v6-operations.ts"
+      ],
+      "tests": [
+        "tests/v6-operations.test.ts"
+      ],
+      "proofs": [
+        "docs/migration/op01-op31-progress.md",
+        "docs/recovery/op01-op31-core-coverage-status.md"
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped",
+      "notes": "Aucun générateur de chemins alternatifs vérifiés."
+    },
+    {
+      "id": "OP25",
+      "calculationStatus": "qualified",
+      "runtimeUse": "available-not-consumed",
+      "productActive": false,
+      "decisionEffect": "not-demonstrated",
+      "producers": [],
+      "consumers": [],
+      "implementation": [
+        "src/logos-engine/v6-operations.ts"
+      ],
+      "tests": [
+        "tests/v6-operations.test.ts"
+      ],
+      "proofs": [
+        "docs/migration/op01-op31-progress.md",
+        "docs/recovery/op01-op31-core-coverage-status.md"
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped",
+      "notes": "La non-réfutation est conservée sans fausse preuve de faisabilité."
+    },
+    {
+      "id": "OP26",
+      "calculationStatus": "qualified",
+      "runtimeUse": "family-covered-no-generic-call",
+      "productActive": false,
+      "decisionEffect": "not-demonstrated",
+      "producers": [],
+      "consumers": [],
+      "implementation": [
+        "src/logos-engine/v6-operations.ts"
+      ],
+      "tests": [
+        "tests/v6-operations.test.ts"
+      ],
+      "proofs": [
+        "docs/migration/op01-op31-progress.md",
+        "docs/recovery/op01-op31-core-coverage-status.md"
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped",
+      "notes": "Aucun domaine commun d'accès vérifiés vers une cible."
+    },
+    {
+      "id": "OP27",
+      "calculationStatus": "qualified",
+      "runtimeUse": "available-not-consumed",
+      "productActive": false,
+      "decisionEffect": "not-demonstrated",
+      "producers": [],
+      "consumers": [],
+      "implementation": [
+        "src/logos-engine/v6-operations.ts"
+      ],
+      "tests": [
+        "tests/v6-operations.test.ts"
+      ],
+      "proofs": [
+        "docs/migration/op01-op31-progress.md",
+        "docs/recovery/op01-op31-core-coverage-status.md"
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped",
+      "notes": "Aucune permutation avec préservation complète."
+    },
+    {
+      "id": "OP28",
+      "calculationStatus": "qualified",
+      "runtimeUse": "product-active",
+      "productActive": true,
+      "decisionEffect": "demonstrated",
+      "producers": [
+        "PublicSingleActionCallerOwnerAdapter",
+        "JointChannelOwner",
+        "PublicUniqueStckAction6CallerOwnerAdapter"
+      ],
+      "consumers": [
+        "operationAdmission",
+        "product-dispatch",
+        "selected-owner-acquisition"
+      ],
+      "implementation": [
+        "src/logos-engine/v6-composition-engine.ts",
+        "src/logos-engine/v6-native-authority.ts",
+        "src/logos-engine/v6-operations.ts",
+        "src/logos-engine/v6-public-addressed-joint-channels.ts",
+        "src/logos-engine/v6-public-single-action-port.ts",
+        "src/logos-engine/v6-public-unique-stck-action6-port.ts"
+      ],
+      "tests": [
+        "tests/v6-composition-engine.test.ts",
+        "tests/v6-native-authority.test.ts",
+        "tests/v6-operations.test.ts",
+        "tests/v6-public-addressed-joint-channels.test.ts",
+        "tests/v6-public-single-action-port.test.ts",
+        "tests/v6-public-stck-joint-channels.test.ts"
+      ],
+      "proofs": [
+        "docs/migration/op01-op31-progress.md",
+        "docs/recovery/op01-op31-browser-public-action6-owner-20261113.md",
+        "docs/recovery/op01-op31-core-coverage-status.md"
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped",
+      "notes": "Chaînes produit actives pour l'action simple, SMLP conjoint et STCK unique."
+    },
+    {
+      "id": "OP29",
+      "calculationStatus": "qualified",
+      "runtimeUse": "specialized-decision-effect",
+      "productActive": false,
+      "decisionEffect": "demonstrated-specialized",
+      "producers": [
+        "addressed-response",
+        "FieldStock",
+        "Region"
+      ],
+      "consumers": [
+        "afterStock",
+        "Region-model"
+      ],
+      "implementation": [
+        "src/logos-engine/field-stock.ts",
+        "src/logos-engine/v6-operations.ts",
+        "src/logos-engine/v6-region-intervention.ts",
+        "src/logos-engine/v6-target-binding.ts"
+      ],
+      "tests": [
+        "tests/v6-operations.test.ts",
+        "tests/v6-target-binding.test.ts"
+      ],
+      "proofs": [
+        "docs/migration/op01-op31-progress.md",
+        "docs/recovery/op01-op31-core-coverage-status.md"
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped",
+      "notes": "Les retours utiles sont comparés et modifient les états spécialisés."
+    },
+    {
+      "id": "OP30",
+      "calculationStatus": "qualified",
+      "runtimeUse": "specialized-decision-effect",
+      "productActive": false,
+      "decisionEffect": "demonstrated-specialized",
+      "producers": [
+        "FieldStock",
+        "Region"
+      ],
+      "consumers": [
+        "recordStock",
+        "future-knowledge"
+      ],
+      "implementation": [
+        "src/logos-engine/field-stock.ts",
+        "src/logos-engine/v6-operations.ts",
+        "src/logos-engine/v6-region-intervention.ts",
+        "src/logos-engine/v6-target-binding.ts"
+      ],
+      "tests": [
+        "tests/v6-operations.test.ts",
+        "tests/v6-target-binding.test.ts"
+      ],
+      "proofs": [
+        "docs/migration/op01-op31-progress.md",
+        "docs/recovery/op01-op31-core-coverage-status.md"
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped",
+      "notes": "La rétention et les mises à jour changent les connaissances futures."
+    },
+    {
+      "id": "OP31",
+      "calculationStatus": "qualified",
+      "runtimeUse": "generic-call-no-objective-owner",
+      "productActive": false,
+      "decisionEffect": "not-demonstrated",
+      "producers": [
+        "target-binding-post-analysis"
+      ],
+      "consumers": [],
+      "implementation": [
+        "src/logos-engine/v6-operations.ts",
+        "src/logos-engine/v6-target-binding.ts"
+      ],
+      "tests": [
+        "tests/v6-operations.test.ts",
+        "tests/v6-target-binding.test.ts"
+      ],
+      "proofs": [
+        "docs/migration/op01-op31-progress.md",
+        "docs/recovery/op01-op31-core-coverage-status.md"
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped",
+      "notes": "L'appel générique existe, mais aucun propriétaire d'objectif produit ne maintient ou réoriente la suite."
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "logos.operation-catalog",
+      "title": "Catalogue de calcul OP01–OP31",
+      "kind": "logos-core",
+      "functionalStatus": "qualified",
+      "productStatus": "supporting-active",
+      "performanceStatus": "not-measured-separately",
+      "producers": [
+        "need-specific callers"
+      ],
+      "consumers": [
+        "V6CompositionEngine",
+        "V6NativeAuthority",
+        "V6TargetBinding"
+      ],
+      "decisionEffect": "Dépend de la disposition de chaque opération; seules les chaînes démontrées sont promues.",
+      "implementation": [
+        "src/logos-engine/v6-operations.ts"
+      ],
+      "tests": [
+        "tests/v6-operations.test.ts",
+        "tests/op01-op31-call-sites.test.ts"
+      ],
+      "proofs": [
+        "docs/recovery/op01-op31-core-coverage-status.md",
+        "docs/migration/op01-op31-progress.md"
+      ],
+      "limits": [
+        "La disponibilité d'un calcul ne prouve pas un besoin runtime ni un effet décisionnel."
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped"
+    },
+    {
+      "id": "logos.composition-authority",
+      "title": "Moteur de composition, autorité native et liaison de cible",
+      "kind": "logos-core",
+      "functionalStatus": "qualified",
+      "productStatus": "supporting-active",
+      "performanceStatus": "covered-by-qualified-scopes",
+      "producers": [
+        "CompositionBundle",
+        "current public revision"
+      ],
+      "consumers": [
+        "operationAdmission",
+        "releaseBundle",
+        "postAnalysis"
+      ],
+      "decisionEffect": "Garde OP18/OP28, corrélation du besoin et analyse du retour.",
+      "implementation": [
+        "src/logos-engine/v6-composition-engine.ts",
+        "src/logos-engine/v6-native-authority.ts",
+        "src/logos-engine/v6-target-binding.ts"
+      ],
+      "tests": [
+        "tests/v6-composition-engine.test.ts",
+        "tests/v6-native-authority.test.ts",
+        "tests/v6-target-binding.test.ts"
+      ],
+      "proofs": [
+        "docs/migration/op01-op31-progress.md"
+      ],
+      "limits": [
+        "OP14 n'est pas routée par l'autorité produit; OP31 n'a pas de propriétaire d'objectif."
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped"
+    },
+    {
+      "id": "logos.operation-observability",
+      "title": "Trace, cache et cycle d'opérations",
+      "kind": "logos-support",
+      "functionalStatus": "qualified",
+      "productStatus": "supporting-active",
+      "performanceStatus": "not-measured-separately",
+      "producers": [
+        "operation need/call/consumption events"
+      ],
+      "consumers": [
+        "bounded diagnostics",
+        "cache validation"
+      ],
+      "decisionEffect": "Observe sans créer de besoin ni d'autorité de décision.",
+      "implementation": [
+        "src/logos-engine/v6-operation-trace.ts",
+        "src/logos-engine/v6-operation-cache.ts",
+        "src/logos-engine/v6-operation-cycle.ts"
+      ],
+      "tests": [
+        "tests/v6-operation-trace.test.ts",
+        "tests/v6-operation-cache.test.ts",
+        "tests/v6-operation-cycle.test.ts",
+        "tests/v6-c7-diagnostic.test.ts"
+      ],
+      "proofs": [
+        "docs/migration/op01-op31-c1-typescript-implementation-map.md",
+        "docs/migration/op01-op31-progress.md"
+      ],
+      "limits": [
+        "La trace détaillée reste un mode d'audit borné, pas le mode normal."
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped"
+    },
+    {
+      "id": "campaign.common-owner",
+      "title": "Propriétaire commun neutre de campagne",
+      "kind": "campaign",
+      "functionalStatus": "qualified",
+      "productStatus": "active",
+      "performanceStatus": "covered-by-qualified-scopes",
+      "producers": [
+        "peer owner proposals"
+      ],
+      "consumers": [
+        "V6NativeAuthority",
+        "selected owner acquisition"
+      ],
+      "decisionEffect": "Préserve none/ambiguous/pending/blocked et route un retour sélectionné une seule fois.",
+      "implementation": [
+        "src/logos-engine/v6-neutral-common-caller.ts",
+        "src/logos-engine/v6-common-campaign-owner.ts"
+      ],
+      "tests": [
+        "tests/v6-neutral-common-caller.test.ts",
+        "tests/v6-neutral-common-caller-owned.test.ts",
+        "tests/v6-common-campaign-owner.test.ts"
+      ],
+      "proofs": [
+        "docs/recovery/op01-op31-common-campaign-owner-20261112.md"
+      ],
+      "limits": [
+        "Aucune priorité implicite entre propriétaires indépendants."
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped"
+    },
+    {
+      "id": "campaign.field-stock-op18",
+      "title": "Propriétaire FieldStock OP18",
+      "kind": "campaign-owner",
+      "functionalStatus": "qualified-bounded",
+      "productStatus": "active",
+      "performanceStatus": "not-measured-separately",
+      "producers": [
+        "revalidated retained FieldStock with unmet typed demand"
+      ],
+      "consumers": [
+        "CommonCampaignOwner",
+        "FieldStock afterStock/recordStock",
+        "next proposal"
+      ],
+      "decisionEffect": "Le retour corrélé modifie la proposition suivante lorsque le stock courant est revalidé.",
+      "implementation": [
+        "src/logos-engine/v6-field-stock-caller-adapter.ts",
+        "src/logos-engine/field-stock.ts",
+        "src/runtime/observed-addressed-material-runtime.ts"
+      ],
+      "tests": [
+        "tests/v6-field-stock-common-campaign.test.ts",
+        "tests/v6-browser-field-stock-campaign-host.test.ts",
+        "tests/op01-op31-field-stock-op18-trace.test.ts"
+      ],
+      "proofs": [
+        "docs/recovery/op01-op31-browser-field-stock-transport-20261112.md",
+        "docs/recovery/op01-op31-browser-addressed-acquisition-20261113.md",
+        "docs/recovery/lot5-5b-integration-qualification.md"
+      ],
+      "limits": [
+        "N'agit que lorsqu'un stock applicable est revalidé depuis la scène publique courante."
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped"
+    },
+    {
+      "id": "campaign.public-simple-op28",
+      "title": "Propriétaire public simple OP28",
+      "kind": "campaign-owner",
+      "functionalStatus": "qualified-bounded",
+      "productStatus": "active",
+      "performanceStatus": "not-measured-separately",
+      "producers": [
+        "one sole public simple action"
+      ],
+      "consumers": [
+        "CommonCampaignOwner",
+        "V6NativeAuthority",
+        "product dispatch"
+      ],
+      "decisionEffect": "Libère uniquement l'unique action simple complète; aucune ACTION6 sans coordonnées n'est inventée.",
+      "implementation": [
+        "src/logos-engine/v6-public-single-action-port.ts",
+        "src/logos-engine/v6-public-single-action-caller-adapter.ts"
+      ],
+      "tests": [
+        "tests/v6-public-single-action-port.test.ts",
+        "tests/v6-public-observation-op28-chain.test.ts",
+        "tests/v6-common-campaign-owner.test.ts"
+      ],
+      "proofs": [
+        "docs/recovery/op01-op31-public-observation-op28-slice-20261112.md",
+        "docs/recovery/op01-op31-browser-public-action6-owner-20261113.md"
+      ],
+      "limits": [
+        "Plusieurs actions restent ambiguës; ACTION6 exige un producteur spécialisé."
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped"
+    },
+    {
+      "id": "campaign.joint-channels-op28",
+      "title": "Canaux conjoints publics SMLP/STCK OP28",
+      "kind": "campaign-owner",
+      "functionalStatus": "qualified-bounded",
+      "productStatus": "active",
+      "performanceStatus": "official-qualified",
+      "producers": [
+        "SMLP action availability",
+        "SMLP visible target",
+        "STCK action availability",
+        "STCK unique visible card"
+      ],
+      "consumers": [
+        "JointChannelOwner",
+        "CommonCampaignOwner",
+        "V6NativeAuthority",
+        "two-channel acquisition"
+      ],
+      "decisionEffect": "Deux preuves compatibles produisent une seule action; retirer un canal retire l'action.",
+      "implementation": [
+        "src/logos-engine/v6-joint-channel-action.ts",
+        "src/logos-engine/v6-joint-channel-owner.ts",
+        "src/logos-engine/v6-public-addressed-joint-channels.ts",
+        "src/logos-engine/v6-public-stck-joint-channels.ts",
+        "src/logos-engine/v6-public-unique-stck-action6-port.ts",
+        "src/logos-engine/v6-public-unique-stck-action6-caller-adapter.ts"
+      ],
+      "tests": [
+        "tests/v6-joint-channel-owner.test.ts",
+        "tests/v6-joint-channel-zero-copy-contract.test.ts",
+        "tests/v6-public-addressed-joint-channels.test.ts",
+        "tests/v6-public-stck-joint-channels.test.ts",
+        "tests/v6-public-product-action6-producers.test.ts",
+        "tests/v6-browser-public-unique-action6-host.test.ts",
+        "tests/native-loop-joint-channel-official-hook.test.ts",
+        "tests/lot9c4-official-joint-channels-performance-proof.test.mjs"
+      ],
+      "proofs": [
+        "docs/recovery/lot9c1-functional-qualification.md",
+        "docs/recovery/lot9c2-public-addressed-joint-channels.md",
+        "docs/recovery/lot9c3-stck-joint-performance-boundary.md",
+        "docs/recovery/lot9c4-official-joint-channels-performance-qualified.md",
+        "docs/recovery/lot9c4-official-joint-channels-performance-proof.json"
+      ],
+      "limits": [
+        "SMLP produit exige une cible unique; STCK exige une carte unique; aucune identité historique n'est revendiquée."
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped"
+    },
+    {
+      "id": "learning.addressed-field-stock",
+      "title": "Apprentissage et rétention de matière adressée",
+      "kind": "learning",
+      "functionalStatus": "qualified-bounded",
+      "productStatus": "supporting-active",
+      "performanceStatus": "not-measured-separately",
+      "producers": [
+        "correlated public ACTION6 returns",
+        "strict residual movement evidence"
+      ],
+      "consumers": [
+        "ObservedAddressedMaterialRuntime",
+        "FieldStock",
+        "OP18 owner"
+      ],
+      "decisionEffect": "Acquiert, calibre, retient et revalide un modèle seulement sous les gardes publiques strictes.",
+      "implementation": [
+        "src/logos-engine/addressed-field-fit.ts",
+        "src/logos-engine/addressed-field-guard.ts",
+        "src/logos-engine/addressed-field-response.ts",
+        "src/logos-engine/addressed-field-retention.ts",
+        "src/logos-engine/addressed-material.ts",
+        "src/logos-engine/field-stock.ts",
+        "src/runtime/v6-public-addressed-field-learning.ts",
+        "src/runtime/observed-addressed-material-runtime.ts"
+      ],
+      "tests": [
+        "tests/addressed-field-fit.test.ts",
+        "tests/addressed-field-guard.test.ts",
+        "tests/addressed-field-response.test.ts",
+        "tests/addressed-material.test.ts",
+        "tests/field-stock-proposal.test.ts",
+        "tests/field-stock-retention.test.ts",
+        "tests/v6-public-addressed-field-learning.test.ts"
+      ],
+      "proofs": [
+        "docs/recovery/op01-op31-browser-addressed-acquisition-20261113.md",
+        "docs/recovery/lot5-5b-integration-qualification.md"
+      ],
+      "limits": [
+        "Les correspondances ambiguës restent unresolved; aucune connaissance n'est créée par la seule exécution d'une action."
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped"
+    },
+    {
+      "id": "learning.region-intervention",
+      "title": "Region intervention",
+      "kind": "learning",
+      "functionalStatus": "qualified-bounded",
+      "productStatus": "available-not-main",
+      "performanceStatus": "official-qualified",
+      "producers": [
+        "public ACTION6 delta with explicit method binding"
+      ],
+      "consumers": [
+        "Region owner",
+        "neutral caller",
+        "future Region proposal"
+      ],
+      "decisionEffect": "Apprend une méthode explicite, la réfute sur contradiction et propose sans inventer d'équivalence.",
+      "implementation": [
+        "src/logos-engine/v6-region-intervention.ts",
+        "src/logos-engine/v6-region-intervention-owner.ts",
+        "src/logos-engine/v6-region-caller-adapter.ts",
+        "src/logos-engine/v6-region-public-evidence.ts",
+        "src/logos-engine/v6-public-observation-delta.ts"
+      ],
+      "tests": [
+        "tests/v6-region-intervention.test.ts",
+        "tests/v6-region-intervention-owner.test.ts",
+        "tests/v6-region-caller-integration.test.ts",
+        "tests/v6-public-observation-delta.test.ts",
+        "tests/lot9b-official-performance-proof.test.mjs"
+      ],
+      "proofs": [
+        "docs/recovery/lot9b-official-abba-performance-qualified.md",
+        "docs/recovery/lot9b-official-abba-performance-qualified.json",
+        "docs/recovery/lot9b-worker-pyodide-parity.md"
+      ],
+      "limits": [
+        "Qualifiée dans le runtime natif/Worker; pas encore propriétaire physique du contrôleur produit principal."
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped"
+    },
+    {
+      "id": "runtime.public-observation",
+      "title": "Transport et mesure de l'observation publique",
+      "kind": "runtime",
+      "functionalStatus": "qualified",
+      "productStatus": "supporting-active",
+      "performanceStatus": "covered-by-qualified-scopes",
+      "producers": [
+        "BrowserGameRuntime GameObservation"
+      ],
+      "consumers": [
+        "browser agent controller",
+        "campaign owners",
+        "Worker campaign",
+        "public learning"
+      ],
+      "decisionEffect": "Convertit seulement l'image publique 64×64, les actions et l'état, avec séquence monotone et révision.",
+      "implementation": [
+        "src/runtime/contracts.ts",
+        "src/runtime/v6-browser-agent-observation.ts",
+        "src/runtime/v6-public-observation-measurement.ts",
+        "src/logos-engine/v6-public-observation-delta.ts"
+      ],
+      "tests": [
+        "tests/v6-browser-agent-observation.test.ts",
+        "tests/v6-public-observation-measurement.test.ts",
+        "tests/v6-public-observation-delta.test.ts"
+      ],
+      "proofs": [
+        "docs/recovery/op01-op31-browser-agent-controller-20261112.md",
+        "docs/recovery/op01-op31-worker-common-campaign-20261112.md"
+      ],
+      "limits": [
+        "Aucun état moteur caché ne doit traverser ce contrat."
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped"
+    },
+    {
+      "id": "runtime.browser-campaign-host",
+      "title": "Host navigateur commun et composition produit",
+      "kind": "runtime",
+      "functionalStatus": "qualified",
+      "productStatus": "active",
+      "performanceStatus": "covered-by-qualified-scopes",
+      "producers": [
+        "current product observation",
+        "four peer owners"
+      ],
+      "consumers": [
+        "product dispatch",
+        "selected owner acquisition",
+        "passive FieldStock observation",
+        "presentation"
+      ],
+      "decisionEffect": "Impose l'ordre action → acquisition sélectionnée → observation passive → présentation → décision suivante.",
+      "implementation": [
+        "src/runtime/v6-browser-common-campaign-host.ts",
+        "src/runtime/v6-browser-product-campaign-host.ts"
+      ],
+      "tests": [
+        "tests/v6-browser-common-campaign-host.test.ts",
+        "tests/v6-browser-field-stock-campaign-host.test.ts",
+        "tests/v6-browser-public-unique-action6-host.test.ts",
+        "tests/v6-public-product-action6-producers.test.ts"
+      ],
+      "proofs": [
+        "docs/recovery/op01-op31-browser-agent-controller-combined-qualification-20261112.md",
+        "docs/recovery/op01-op31-browser-public-action6-owner-20261113.md"
+      ],
+      "limits": [
+        "La persistance atomique entre activations Agent reste ouverte."
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped"
+    },
+    {
+      "id": "runtime.browser-agent-controller",
+      "title": "Contrôleur Agent produit",
+      "kind": "runtime",
+      "functionalStatus": "qualified",
+      "productStatus": "active",
+      "performanceStatus": "not-measured-separately",
+      "producers": [
+        "explicit Agent mode selection",
+        "current non-terminal observation"
+      ],
+      "consumers": [
+        "browser campaign host",
+        "main.ts product ports"
+      ],
+      "decisionEffect": "Possède une seule campagne bornée, n'invente aucune action et transfère proprement vers Manual.",
+      "implementation": [
+        "src/runtime/v6-browser-agent-controller.ts",
+        "src/main.ts"
+      ],
+      "tests": [
+        "tests/v6-browser-agent-controller.test.ts",
+        "tests/main-browser-agent-controller-integration.test.ts"
+      ],
+      "proofs": [
+        "docs/recovery/op01-op31-browser-agent-controller-20261112.md"
+      ],
+      "limits": [
+        "Snapshot/restauration de campagne, propriétaires, needId et retour en attente non raccordés."
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped"
+    },
+    {
+      "id": "runtime.worker-campaign",
+      "title": "Runtime Worker de campagne Logos",
+      "kind": "runtime",
+      "functionalStatus": "qualified",
+      "productStatus": "available-not-main",
+      "performanceStatus": "covered-by-qualified-scopes",
+      "producers": [
+        "AgentObservation worker requests"
+      ],
+      "consumers": [
+        "V6CommonCampaignDecisionPort",
+        "OP18/OP28 owners",
+        "worker response transport"
+      ],
+      "decisionEffect": "Acquiert le retour précédent avant la décision suivante, y compris aux limites terminales et de budget.",
+      "implementation": [
+        "src/runtime/v6-agent-worker.ts",
+        "src/runtime/v6-agent-worker-core.ts",
+        "src/runtime/v6-common-campaign-decision-port.ts"
+      ],
+      "tests": [
+        "tests/v6-agent-worker.test.ts",
+        "tests/v6-agent-worker-core.test.ts",
+        "tests/v6-common-campaign-decision-port.test.ts",
+        "tests/v6-worker-logos-campaign.test.ts"
+      ],
+      "proofs": [
+        "docs/recovery/op01-op31-worker-common-campaign-20261112.md",
+        "docs/recovery/lot9b-worker-pyodide-parity.md"
+      ],
+      "limits": [
+        "Le contrôleur produit principal utilise le seam navigateur direct, pas ce Worker."
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped"
+    },
+    {
+      "id": "runtime.product-dispatch-presentation",
+      "title": "Dispatch et présentation produit",
+      "kind": "runtime",
+      "functionalStatus": "qualified",
+      "productStatus": "active",
+      "performanceStatus": "covered-by-qualified-scopes",
+      "producers": [
+        "authorized AgentAction"
+      ],
+      "consumers": [
+        "BrowserGameRuntime",
+        "DOM presentation",
+        "selection generation owner"
+      ],
+      "decisionEffect": "Préserve ACTION6, disponibilité, stale generation, busy ownership, erreurs et ordre de présentation.",
+      "implementation": [
+        "src/agent-product-dispatch.ts",
+        "src/product-presentation.ts",
+        "src/product-presentation-effects.ts",
+        "src/runtime/browser-games.ts"
+      ],
+      "tests": [
+        "tests/agent-product-dispatch.test.ts",
+        "tests/main-product-dispatch-integration.test.ts",
+        "tests/product-dispatch-browser-runtime-integration.test.ts",
+        "tests/product-presentation.test.ts",
+        "tests/product-presentation-effects.test.ts",
+        "tests/product-presentation-controlled-dom-host.test.ts"
+      ],
+      "proofs": [
+        "docs/migration/op01-op31-progress.md"
+      ],
+      "limits": [
+        "Aucune décision symbolique n'est prise dans cette couche."
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped"
+    },
+    {
+      "id": "qualification.native-abba-harness",
+      "title": "Harness natif officiel ABBA",
+      "kind": "qualification",
+      "functionalStatus": "qualified",
+      "productStatus": "benchmark-only",
+      "performanceStatus": "not-applicable",
+      "producers": [
+        "explicit A/STCK, A/SMLP, B/STCK, B/SMLP runners"
+      ],
+      "consumers": [
+        "strict per-game performance verdicts",
+        "durable proof artifacts"
+      ],
+      "decisionEffect": "Mesure sans retirer d'échantillon, sans retry caché et sans compensation entre jeux.",
+      "implementation": [
+        "scripts/measure-native-loop-costs.mjs",
+        "scripts/native-loop-session-adapter.mjs",
+        "scripts/run-native-region-official-benchmark.mjs",
+        "scripts/run-native-joint-channel-official-benchmark.mjs",
+        "tests/helpers/v6-live-game-campaign.ts"
+      ],
+      "tests": [
+        "tests/native-loop-cost-harness.test.mjs",
+        "tests/native-loop-session-adapter.test.mjs",
+        "tests/native-loop-explicit-runners.test.mjs",
+        "tests/native-loop-region-benchmark-runners.test.mjs",
+        "tests/native-loop-joint-channel-official-source-refs.test.mjs"
+      ],
+      "proofs": [
+        "docs/recovery/op01-op31-official-readiness-status.md",
+        "docs/recovery/lot9b-official-abba-performance-qualified.json",
+        "docs/recovery/lot9c4-official-joint-channels-performance-proof.json"
+      ],
+      "limits": [
+        "Chaque preuve qualifie uniquement son seam explicitement identifié."
+      ],
+      "historicalMapping": null,
+      "historicalCountDisposition": "unmapped"
+    }
+  ],
+  "openGates": [
+    {
+      "id": "historical-slot-schema",
+      "status": "open",
+      "blocks": [
+        "historical-count",
+        "historical-parity"
+      ],
+      "reason": "Le schéma canonique des 76 emplacements V6 n'a pas été récupéré."
+    },
+    {
+      "id": "site109-source-identity",
+      "status": "open",
+      "blocks": [
+        "site109-parity"
+      ],
+      "reason": "Le SHA/source exact de Site 109 reste non résolu."
+    },
+    {
+      "id": "campaign-snapshot-restoration",
+      "status": "open",
+      "blocks": [
+        "cross-activation-continuity"
+      ],
+      "reason": "La campagne, les propriétaires, le needId et le retour en attente ne sont pas restaurés atomiquement."
+    },
+    {
+      "id": "op31-objective-owner",
+      "status": "open",
+      "blocks": [
+        "op31-decision-contribution"
+      ],
+      "reason": "Aucun propriétaire d'objectif produit ne maintient, termine, suspend ou réoriente la suite."
+    },
+    {
+      "id": "region-product-owner",
+      "status": "open",
+      "blocks": [
+        "region-main-product-activation"
+      ],
+      "reason": "Region est qualifiée dans le runtime natif/Worker, mais pas comme propriétaire physique du contrôleur produit."
+    },
+    {
+      "id": "full-product-composition-performance",
+      "status": "open",
+      "blocks": [
+        "full-product-performance-claim"
+      ],
+      "reason": "Les preuves Region et joint_channels qualifient leurs seams; elles ne mesurent pas la composition produit complète des quatre propriétaires."
+    },
+    {
+      "id": "site-publication",
+      "status": "blocked",
+      "blocks": [
+        "site-release"
+      ],
+      "reason": "Aucune publication avant intégration canonique, qualification fraîche et liaison explicite GitHub ↔ Site."
+    }
+  ],
+  "disposition": {
+    "registryReconstructed": true,
+    "historicalRegistryRecovered": false,
+    "historicalCountClaimed": false,
+    "sitePublished": false,
+    "nextStep": "qualify atomic snapshot/restoration and search durable evidence for the historical 76-slot schema"
+  }
+}
