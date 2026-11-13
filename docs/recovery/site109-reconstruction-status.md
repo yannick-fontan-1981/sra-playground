@@ -56,11 +56,11 @@ Branches intégrées/préparées :
 - le helper de campagne générique et borné est reconstruit dans `tests/helpers/v6-live-game-campaign.ts` et passe **7/7 tests** ; il conserve ACTION6, borne les pas, valide session/séquence et propage les erreurs worker sans dispatch caché ;
 - le protocole ABBA de coût est reconstruit dans `scripts/measure-native-loop-costs.mjs` et passe **8/8 tests** : A1/B1/B2/A2, 8 warmups, 32 sessions mesurées, 24 + 400 actions, seuil global strict <10 % par jeu, phases >10 % conservées mais non bloquantes, aucun retry caché ;
 - l'adaptateur `scripts/native-loop-session-adapter.mjs` est reconstruit et passe **9/9 tests** ; il exige explicitement A/STCK, A/SMLP, B/STCK et B/SMLP, sans chronométrage, corpus ou fallback implicite ;
-- la production justifiée du `methodRef`, le branchement du worker vers les contextes owners et les quatre runners/corpus natifs STCK/SMLP restent absents ; aucune mesure officielle de coût n'a encore été exécutée ;
+- la production justifiée du `methodRef` et le branchement produit du worker vers les contextes owners restent absents ; les quatre identités de runners A/STCK, A/SMLP, B/STCK et B/SMLP sont maintenant reconstruites et routées explicitement au niveau du contrat `game_bridge`, avec 12/12 tests ciblés, mais l'exécution réelle Pyodide/`custom-games.zip`, le binding réel du hook B `region_intervention`, la preuve que le corpus exerce effectivement ce périmètre et les `sourceRef` A/B restent à qualifier ; aucune mesure officielle de coût n'a encore été exécutée ;
 - aucun compteur historique 70/76 ou candidat 71/76 n'est promu au statut de la reconstruction actuelle.
 
 Statut Lot 9 :
-**noyau V6, coeur Region, owner, caller neutre, transport worker, delta public, helper de campagne, protocole ABBA et adaptateur runSession fonctionnellement qualifiés dans leurs périmètres ; quatre runners natifs STCK/SMLP et performance officielle à confirmer.**
+**noyau V6, coeur Region, owner, caller neutre, transport worker, delta public, helper de campagne, protocole ABBA, adaptateur runSession et contrats explicites des quatre runners A/B × STCK/SMLP fonctionnellement qualifiés dans leurs périmètres ; exécution native réelle des runners, binding réel du hook Region et performance officielle à confirmer.**
 
 ## Branches de récupération conservées
 
