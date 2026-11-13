@@ -1,0 +1,48 @@
+name: Lot 9C0 joint_channels audit qualification
+
+on:
+  push:
+    branches:
+      - recovery/lot9c0-joint-channels-audit-qualified-20261113
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.18.0
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Fetch every remote branch
+        run: git fetch --all --prune
+      - name: Generate recovery evidence audit
+        run: python3 scripts/audit-lot9c-joint-channels.py
+      - name: Derive conservative contract status
+        run: python3 scripts/derive-lot9c-joint-channels-contract-status.py
+      - name: Verify the 9C0 audit contract
+        run: node --test tests/lot9c-joint-channels-audit.test.mjs
+      - name: Build production bundle
+        run: npm run build
+      - name: Run complete TypeScript regression suite
+        run: node --experimental-transform-types --test tests/*.test.ts
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lot9c0-joint-channels-audit-qualified
+          path: |
+            docs/recovery/lot9c-joint-channels-audit.md
+            docs/recovery/lot9c-joint-channels-audit.json
+            docs/recovery/lot9c-joint-channels-contract-status.md
+            docs/recovery/lot9c-joint-channels-contract-status.json
+            docs/recovery/lot9c-joint-channels-evidence-context.md
+          if-no-files-found: error
