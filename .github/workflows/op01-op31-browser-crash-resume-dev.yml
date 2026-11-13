@@ -7,10 +7,11 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   qualify-crash-resume:
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
@@ -51,3 +52,11 @@ jobs:
           name: op01-op31-browser-crash-resume
           path: op01-op31-browser-crash-resume-report.json
           if-no-files-found: warn
+      - name: Commit qualified autosave wiring
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/main.ts
+          git diff --cached --quiet && exit 0
+          git commit -m "Activate crash-safe browser autosave boundaries"
+          git push origin HEAD:${GITHUB_REF_NAME}
