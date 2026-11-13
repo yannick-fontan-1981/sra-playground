@@ -1,11 +1,11 @@
-import type { GameObservation } from './runtime/browser-games';
+import type { GameObservation } from './runtime/browser-games.ts';
 import {
   isPresentationCurrent,
   isPresentationLoopCurrent,
   presentationFeedback,
   presentationFrameDurationMs,
   presentationFrames,
-} from './product-presentation';
+} from './product-presentation.ts';
 
 export interface ProductPresentationEffectPorts {
   currentSelectionGeneration(): number;
@@ -39,20 +39,20 @@ export interface ProductPresentationEffectResult {
 /**
  * Execute the effectful presentation sequence behind explicit ports.
  *
- * The ordering mirrors the historical main.ts flow: accept the observation,
- * synchronize location and controls, paint animation frames, paint the final
- * frame, optionally release busy, then publish terminal feedback.
+ * Dispatch timing has already stopped before this function starts. The busy
+ * flag remains owned by the dispatch generation until presentation and the
+ * final interface update are complete.
  */
 export async function presentProductObservation(
-  next: GameObservation,
-  selectedGeneration: number,
+  observation: GameObservation,
+  selectionGeneration: number,
   ports: ProductPresentationEffectPorts,
   options: ProductPresentationEffectOptions,
 ): Promise<ProductPresentationEffectResult> {
   if (!isPresentationCurrent(
-    selectedGeneration,
+    selectionGeneration,
     ports.currentSelectionGeneration(),
-    next.gameCode,
+    observation.gameCode,
     ports.selectedGameCode(),
   )) {
     return {
@@ -64,49 +64,49 @@ export async function presentProductObservation(
     };
   }
 
-  const presentationGeneration = ports.nextPresentationGeneration();
-  const palette = next.palette ?? options.fallbackPalette;
-  let animationFramesPainted = 0;
-
-  ports.setObservation(next);
+  ports.setObservation(observation);
   ports.setLoading(false);
   ports.setFailed(false);
-  ports.syncLocation(next);
+  ports.syncLocation(observation);
   ports.updateInterface();
 
-  const frames = presentationFrames(next);
-  for (let frameIndex = 0; frameIndex < frames.length; frameIndex += 1) {
-    if (!isPresentationLoopCurrent(
-      presentationGeneration,
-      ports.currentPresentationGeneration(),
-      selectedGeneration,
-      ports.currentSelectionGeneration(),
-    )) {
-      return {
-        accepted: false,
-        stale: true,
+  const presentationGeneration = ports.nextPresentationGeneration();
+  const frames = presentationFrames(observation);
+  const delayMs = presentationFrameDurationMs(observation);
+  let animationFramesPainted = 0;
+
+  if (frames.length > 1) {
+    for (const frame of frames) {
+      if (!isPresentationLoopCurrent(
         presentationGeneration,
-        animationFramesPainted,
-        finalFramePainted: false,
-      };
-    }
-
-    ports.paint(frames[frameIndex]!, palette);
-    animationFramesPainted += 1;
-
-    if (frameIndex < frames.length - 1) {
-      await ports.wait(presentationFrameDurationMs(next, frameIndex));
+        ports.currentPresentationGeneration(),
+        selectionGeneration,
+        ports.currentSelectionGeneration(),
+        observation.gameCode,
+        ports.selectedGameCode(),
+      )) {
+        return {
+          accepted: true,
+          stale: true,
+          presentationGeneration,
+          animationFramesPainted,
+          finalFramePainted: false,
+        };
+      }
+      ports.paint(frame, observation.palette ?? options.fallbackPalette);
+      animationFramesPainted += 1;
+      if (delayMs > 0) await ports.wait(delayMs);
     }
   }
 
-  if (!isPresentationLoopCurrent(
-    presentationGeneration,
-    ports.currentPresentationGeneration(),
-    selectedGeneration,
+  if (!isPresentationCurrent(
+    selectionGeneration,
     ports.currentSelectionGeneration(),
+    observation.gameCode,
+    ports.selectedGameCode(),
   )) {
     return {
-      accepted: false,
+      accepted: true,
       stale: true,
       presentationGeneration,
       animationFramesPainted,
@@ -114,15 +114,10 @@ export async function presentProductObservation(
     };
   }
 
-  ports.paint(next.frame, palette);
-
-  if (options.releaseBusy ?? true) {
-    ports.setBusy(false);
-    ports.updateInterface();
-  }
-
-  const feedback = presentationFeedback(next);
+  ports.paint(observation.frame, observation.palette ?? options.fallbackPalette);
+  const feedback = presentationFeedback(observation);
   if (feedback) ports.setFeedback(feedback);
+  if (options.releaseBusy !== false) ports.setBusy(false);
 
   return {
     accepted: true,
