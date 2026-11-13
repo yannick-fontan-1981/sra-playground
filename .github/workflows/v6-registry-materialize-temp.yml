@@ -1,4 +1,4 @@
-name: Temporary V6 registry materialization
+name: Temporary V6 registry synchronization
 
 on:
   push:
@@ -9,30 +9,46 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  materialize:
+  synchronize:
     runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@v4
-      - name: Package registry sources
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.18.0
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Synchronize registry with qualified browser resume
+        run: python3 scripts/sync-v6-registry-session-resume-temp.py
+      - name: Validate registry and targeted resume guards
         run: |
-          mkdir -p materialized/docs/migration materialized/docs/recovery materialized/scripts materialized/tests materialized/src/runtime materialized/.github/workflows
-          cp docs/migration/v6-entry-point-progress.json materialized/docs/migration/
-          cp docs/recovery/v6-entry-point-registry-reconstruction-20261113.md materialized/docs/recovery/
-          cp docs/recovery/op01-op31-browser-session-resume-20261113.md materialized/docs/recovery/
-          cp docs/recovery/op01-op31-browser-session-resume-qualified.json materialized/docs/recovery/
-          cp scripts/check-v6-entry-point-progress.mjs materialized/scripts/
-          cp tests/v6-entry-point-progress.test.ts materialized/tests/
-          cp tests/v6-browser-session-resume.test.ts materialized/tests/
-          cp src/runtime/v6-browser-campaign-checkpoint.ts materialized/src/runtime/
-          cp src/runtime/v6-browser-common-campaign-host.ts materialized/src/runtime/
-          cp src/runtime/v6-browser-agent-controller.ts materialized/src/runtime/
-          cp .github/workflows/v6-entry-point-registry.yml materialized/.github/workflows/
+          node scripts/check-v6-entry-point-progress.mjs
+          node --experimental-transform-types --test \
+            tests/v6-entry-point-progress.test.ts \
+            tests/v6-browser-session-resume.test.ts
+      - name: Commit synchronized registry
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            docs/migration/v6-entry-point-progress.json \
+            docs/recovery/v6-entry-point-registry-reconstruction-20261113.md \
+            scripts/check-v6-entry-point-progress.mjs \
+            tests/v6-entry-point-progress.test.ts
+          git diff --cached --check
+          git commit -m "docs(registry): activate browser checkpoint evidence"
+          git push
       - uses: actions/upload-artifact@v4
         with:
-          name: v6-registry-materialized
-          path: materialized
+          name: v6-registry-synchronized
+          path: |
+            docs/migration/v6-entry-point-progress.json
+            docs/recovery/v6-entry-point-registry-reconstruction-20261113.md
+            scripts/check-v6-entry-point-progress.mjs
+            tests/v6-entry-point-progress.test.ts
           if-no-files-found: error
           retention-days: 1
