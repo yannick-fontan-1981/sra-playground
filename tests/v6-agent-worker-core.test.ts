@@ -19,9 +19,11 @@ function observation(overrides: Partial<AgentObservation> = {}): AgentObservatio
 
 class Port implements AgentDecisionPort {
   initialized: Array<[string, number]> = [];
+  observed: number[] = [];
   cancelled: string[] = [];
   decision: AgentAction | undefined = { id: 1 };
   async initialize(sessionId: string, seed: number) { this.initialized.push([sessionId, seed]); }
+  observe(value: AgentObservation) { this.observed.push(value.sequence); }
   decide(): AgentAction | undefined { return this.decision; }
   cancel(sessionId: string) { this.cancelled.push(sessionId); }
 }
@@ -41,12 +43,14 @@ test('observation before initialize is rejected', async () => {
   assert.equal(result.type, 'error');
 });
 
-test('valid decision returns an available action with matching sequence', async () => {
-  const core = new AgentWorkerCore(new Port(), { implementationRevision: 'test-rev' });
+test('valid observation is consumed before the decision is requested', async () => {
+  const port = new Port();
+  const core = new AgentWorkerCore(port, { implementationRevision: 'test-rev' });
   await core.handle({ type: 'initialize', protocolVersion: 1, sessionId: 'session-1', seed: 1 });
   assert.deepEqual(await core.handle({ type: 'observe', observation: observation({ sequence: 3 }), budgetMs: 50 }), {
     type: 'action', sessionId: 'session-1', sequence: 3, action: { id: 1 },
   });
+  assert.deepEqual(port.observed, [3]);
 });
 
 test('sequence must increase monotonically', async () => {
@@ -57,7 +61,7 @@ test('sequence must increase monotonically', async () => {
   assert.equal(repeated.type, 'error');
 });
 
-test('WIN observation stops complete without asking decision port', async () => {
+test('WIN observation is consumed before complete stop without asking for another decision', async () => {
   const port = new Port();
   let calls = 0;
   port.decide = () => { calls += 1; return { id: 1 }; };
@@ -66,15 +70,34 @@ test('WIN observation stops complete without asking decision port', async () => 
   assert.deepEqual(await core.handle({ type: 'observe', observation: observation({ state: 'WIN' }), budgetMs: 50 }), {
     type: 'stopped', sessionId: 'session-1', reason: 'complete',
   });
+  assert.deepEqual(port.observed, [0]);
   assert.equal(calls, 0);
 });
 
-test('non-positive budget stops without decision', async () => {
-  const core = new AgentWorkerCore(new Port(), { implementationRevision: 'test-rev' });
+test('non-positive budget still consumes the observation without requesting a decision', async () => {
+  const port = new Port();
+  let calls = 0;
+  port.decide = () => { calls += 1; return { id: 1 }; };
+  const core = new AgentWorkerCore(port, { implementationRevision: 'test-rev' });
   await core.handle({ type: 'initialize', protocolVersion: 1, sessionId: 'session-1', seed: 1 });
   assert.deepEqual(await core.handle({ type: 'observe', observation: observation(), budgetMs: 0 }), {
     type: 'stopped', sessionId: 'session-1', reason: 'budget',
   });
+  assert.deepEqual(port.observed, [0]);
+  assert.equal(calls, 0);
+});
+
+test('observation hook failure is reported before any decision', async () => {
+  const port = new Port();
+  let calls = 0;
+  port.observe = () => { throw new Error('observation update failed'); };
+  port.decide = () => { calls += 1; return { id: 1 }; };
+  const core = new AgentWorkerCore(port, { implementationRevision: 'test-rev' });
+  await core.handle({ type: 'initialize', protocolVersion: 1, sessionId: 'session-1', seed: 1 });
+  assert.deepEqual(await core.handle({ type: 'observe', observation: observation(), budgetMs: 50 }), {
+    type: 'error', sessionId: 'session-1', message: 'observation update failed',
+  });
+  assert.equal(calls, 0);
 });
 
 test('invalid or unavailable decisions are rejected', async () => {
