@@ -12,6 +12,9 @@
 - séquences A/B identiques et déterministes ;
 - transport réel `BrowserGameRuntime → game-worker.ts → Pyodide` qualifié ;
 - parité CPython/Pyodide exacte sur 4 campagnes et 31 actions ;
+- `sourceRef` A/B figés et vérifiés ;
+- manifeste officiel des quatre runners vérifié ;
+- harness officiel Worker/Pyodide construit, typechecké et couvert par tests ;
 - preuves GitHub Actions et rapports durables.
 
 ## R1 — transport benchmark Worker/Pyodide
@@ -21,16 +24,6 @@ Statut : **qualifié**.
 Le harness réel utilise :
 
 `BrowserGameRuntime → game-worker.ts → Pyodide → game_bridge.py → custom-games.zip`
-
-Critères satisfaits :
-
-- chargement réel de `custom-games.zip` ;
-- observation publique du contrat browser ;
-- ACTION6 avec coordonnées conservées ;
-- aucune inspection moteur ;
-- session neuve seed 0 par campagne ;
-- erreur propagée sans fallback ;
-- aucun checkout Sites.
 
 Preuve :
 
@@ -55,45 +48,111 @@ Preuve :
 
 `docs/recovery/lot9b-worker-pyodide-parity-report.json`
 
-## Reste avant mesure officielle
+## R3 — `sourceRef` A/B
 
-### R3 — `sourceRef` A/B
+Statut : **qualifié**.
 
-Figer des identités durables :
+Identités finales :
 
-- A : baseline canonique de référence ;
-- B : même baseline + candidat 9B Region ;
-- hashes des fichiers constitutifs ;
-- preuve que transport, corpus et configuration sont identiques ;
-- différence A/B limitée au hook Region mesuré.
+- A :
+  `lot9b-region-v1:A:46ce3478dbc07268333a6a2d423489a689cc5ff509abf1e4bf1f948b174b842c` ;
+- B :
+  `lot9b-region-v1:B:557ca909c4c9b68ec70d2055a02dfb5c27dffcae338f1025e3b53c67937a609f`.
 
-### R4 — manifeste officiel
+Racines :
 
-Créer seulement après R3 :
+- composants communs :
+  `3935f5106c478715040b5b49e6e8ebdd6e960cd353c2eff733f7399571dc521b` ;
+- composants Region candidats :
+  `b77bf3e8c9e31f4d18ac8a8468a9081dc10788b0c8c317fe7d79adb84e24e32e`.
+
+Le périmètre commun contient transport, Pyodide, ZIP, corpus, runners,
+protocole, scope de timing et harness officiel. Le périmètre B supplémentaire
+contient uniquement le hook et les composants Region nécessaires.
+
+Propriétés testées :
+
+- un changement commun invalide A et B ;
+- un changement Region invalide B seulement ;
+- aucun chemin ne se trouve simultanément dans les deux périmètres ;
+- le hook Region reste la seule différence mesurée.
+
+Preuve :
+
+`docs/recovery/native-loop-source-refs.json`
+
+Qualification finale :
+
+- run : `43354155809` ;
+- job : `131652043976` ;
+- typecheck : réussi ;
+- tests de contrats source/transport : **7/7** ;
+- recalcul des empreintes : réussi ;
+- vérification anti-dérive du manifeste : réussie.
+
+## R4 — manifeste officiel
+
+Statut : **qualifié**.
+
+Manifeste :
 
 `docs/recovery/native-loop-runner-manifest.json`
 
-Le manifeste devra nommer les quatre runners, leurs sources, le corpus, le
-scope de timing et les preuves de qualification.
+Il fixe :
 
-### R5 — mesure isolée
+- A/STCK ;
+- A/SMLP ;
+- B/STCK ;
+- B/SMLP ;
+- les deux `sourceRef` ;
+- le corpus ;
+- le transport Worker/Pyodide ;
+- le seed et le niveau initial ;
+- le scope de timing ;
+- les volumes ;
+- le seuil strict ;
+- les interdictions de fallback, retry et retrait d’échantillon.
 
-Exécuter exactement :
+Le script :
+
+`scripts/verify-native-loop-runner-manifest.mjs`
+
+recalcule les composants et bloque toute dérive.
+
+## R5 — mesure officielle
+
+Statut : **prête à exécuter**.
+
+Le workflow :
+
+`.github/workflows/lot9b-official-native-region-abba.yml`
+
+ne s’exécute que sur la branche dédiée :
+
+`recovery/lot9b-official-measurement-20261112`
+
+Il exécutera exactement :
 
 `A1 → B1 → B2 → A2`
 
-Séparément pour STCK et SMLP, avec :
+avec :
 
 - 8 warmups ;
 - 24 actions de warmup exclues ;
 - 32 sessions mesurées ;
 - 400 actions mesurées ;
 - aucun échantillon supprimé ;
-- absence de mesure concurrente, ou signalement explicite si impossible.
+- concurrency GitHub dédiée au benchmark du dépôt.
 
-### R6 — décision
+L’environnement GitHub Actions restera explicitement classé :
 
-Calculer :
+**non isolé, runner partagé, sans autre benchmark concurrent du dépôt**.
+
+Cette nature devra être conservée dans le rapport final.
+
+## R6 — décision
+
+Calcul :
 
 `delta_global = 100 * (median_candidate / median_reference - 1)`
 
@@ -107,6 +166,6 @@ Les diagnostics CPython antérieurs ne sont pas un résultat R5/R6.
 
 ## Prochaine action immédiate
 
-R3 : calculer et figer les `sourceRef` A/B à partir des composants communs et
-des seuls composants Region actifs côté B. Après vérification, construire le
-manifeste officiel R4.
+Intégrer R3/R4 dans la branche canonique, créer la branche dédiée R5 depuis
+cette intégration exacte, puis laisser le workflow officiel produire le rapport
+ABBA complet sans modifier les runners ni le corpus.
