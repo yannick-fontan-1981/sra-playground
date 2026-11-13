@@ -6,6 +6,10 @@ Branche : `recovery/lot10d-temporal-selection-rebased-20261112`
 
 Baseline de report : `recovery/site109-reconstruction-20261112` au commit `24fcdbb16c93de59489a6bb0392cc709b7a75d14`
 
+Tête canonique parallèle observée après le présent jalon :
+
+`8cc510e0a0d09704eb508b3aa2216b4d63482af4`
+
 ## Règle de portée
 
 Cette feuille de route décrit une nouvelle reconstruction qualifiée à partir de preuves GitHub durables.
@@ -25,11 +29,14 @@ Elle ne revendique ni identité de code ni parité fonctionnelle complète avec 
 | adaptateur de consommation | qualifié | ne choisit pas le candidat |
 | bridge vers trace Logos | qualifié | capability séparée des OP01-OP31 |
 | compatibilité worker/V6 rebasée | qualifiée | régressions worker et V6 incluses |
-| port `AgentDecisionPort` passif | **qualifié** | CI 145/145, aucune action sans ACT séparé |
+| port `AgentDecisionPort` passif | qualifié | aucune action sans ACT séparé |
+| audit des donneurs ACT | **terminé** | ordre des gates récupéré depuis les Source V5 |
+| contrat d'éligibilité aux gates ACT | **qualifié** | CI 160/160, ne produit ni permis ni action |
 | politique historique TemporalSelection | absente | ne pas inventer |
 | producteur public du domaine | ouvert | aucune perception/candidate factory justifiée |
-| autorité ACT séparée | **audit suivant** | la sélection seule ne donne jamais ACT |
-| liaison candidat -> `AgentAction` | ouverte | aucune conversion implicite admise |
+| schéma historique `ActionIntent` | partiellement documenté | forme exacte non récupérée |
+| liaison candidat -> `AgentAction` | **prochaine étape** | aucune conversion implicite admise |
+| `ActionReleasePermit` historique | ouvert | encodage et consommation non récupérés |
 | position runtime commune | ouverte | `v6-native-runtime.ts` absent |
 | registre d'entrées reconstruit | ouvert | `v6-entry-point-progress.json` absent |
 | contribution en partie réelle | ouverte | aucune campagne comportementale TemporalSelection actuelle |
@@ -41,16 +48,16 @@ Elle ne revendique ni identité de code ni parité fonctionnelle complète avec 
 
 Commit de code qualifié :
 
-`f303174c1104d1f8aa61ade8e628e4b6636d9caa`
+`a474b6c1862879f79272bd44cdf05b8235fe7c54`
 
 GitHub Actions :
 
-- run `43345997522` ;
-- **145 tests réussis** ;
+- run `43348069627` ;
+- **160 tests réussis** ;
 - **0 échec** ;
 - typecheck strict réussi.
 
-Le précédent jalon comptait 130 tests. Le port passif ajoute 15 tests couvrant son identité, ses refus, sa file bornée, sa trace et son intégration au worker.
+Le précédent jalon comptait 145 tests. L'audit ACT ajoute 15 tests couvrant l'identité de l'intent, les preuves, les gates de release et l'absence permanente d'action.
 
 Le worker public reste en mode :
 
@@ -58,62 +65,88 @@ Le worker public reste en mode :
 
 et ne produit aucune action par défaut.
 
-## Port de décision passif - jalon terminé
+## Audit ACT - jalon terminé
 
-Le port reçoit explicitement :
+### Donneurs récupérés
 
-- `TemporalObservationState` ;
-- `TemporalSourceAuthority` ;
-- `TemporalSourceDecisionReceipt` ;
-- éventuellement `TemporalReturnMeasurement` ;
-- une liaison à l'observation worker publique exacte.
+- `src/core/release_action.src`
+- `src/core/released_action_cycle.src`
+- `src/arc3/conditional_reasoning_tree.src`
+- `src/arc3/continue_after_information_probe.src`
 
-Il ne reçoit aucune action et impose :
+### Chaîne établie
 
-`actAuthorization: null`
+`selected branch -> prepared intent -> grounding -> wisdom -> release_action -> ACT`
 
-Comportement courant :
+TemporalSelection ne détient donc pas l'autorité ACT.
 
-- enveloppe absente ou invalide : `undefined` ;
-- sélection externe refusée : `undefined` ;
-- sélection externe acceptée : projection enregistrée, puis `undefined` ;
-- aucune action libérée ;
-- aucune modification du port public par défaut.
+### Gates portées
 
-## Prochaine étape - audit de l'autorité ACT
+- binding du candidat, de la décision et de l'observation ;
+- action actuellement disponible ;
+- grounding courant ;
+- commitment ;
+- viability ;
+- engagement expérimental courant ;
+- preuve de contrôle courante ;
+- mémoire revalidée ;
+- continuité et influence parentales ;
+- sécurité replay ;
+- sécurité endpoint.
 
-Avant de concevoir un contrat de libération, rechercher dans les donneurs durables V5/V6 :
+L'audit retourne seulement :
 
-1. qui détient l'autorité d'agir ;
-2. quelle identité relie cette autorité à l'observation courante ;
-3. comment une proposition sélectionnée devient une cible et une `AgentAction` disponible ;
-4. quelles preuves doivent rester actives ;
-5. quelles révisions invalident l'autorisation ;
-6. comment empêcher la double consommation ;
-7. quel composant runtime consomme réellement le reçu.
+- `eligible` ;
+- `blocked` ;
+- `deferred`.
+
+Même `eligible` conserve :
+
+- `actionPayloadPresent: false` ;
+- `actionReleased: false` ;
+- `actAuthorized: false`.
+
+## Prochaine étape - liaison intent vers action
+
+Rechercher dans les donneurs durables :
+
+1. la forme exacte d'un `ActionIntent` préparé ;
+2. le lien entre `selectedRef` et `actionWitnessRef` ;
+3. la cible, les paramètres et l'identité de l'action ;
+4. la validation face aux `availableActionIds` courants ;
+5. l'identité et la fraîcheur d'un `ActionReleasePermit` ;
+6. la consommation unique et la révocation ;
+7. le consommateur runtime final qui produit l'`AgentAction`.
 
 ### Issue A - donneur récupérable
 
-Reconstruire uniquement les invariants prouvés, puis qualifier :
+Reconstruire séparément :
 
-- autorité distincte ;
-- fraîcheur ;
-- domaine d'actions disponibles ;
-- cible et paramètres ;
-- consommation unique ;
-- révocation ;
-- trace décisionnelle.
+- un contrat d'intent d'action attribué ;
+- une liaison exact candidate/target/action ;
+- un permis ACT distinct ;
+- un consommateur runtime borné et traçable.
+
+La qualification devra vérifier :
+
+- observation et révision exactes ;
+- action disponible ;
+- paramètres valides ;
+- preuves toujours actives ;
+- aucune réutilisation après révocation ;
+- une seule consommation du permis ;
+- refus fail-closed de toute divergence.
 
 ### Issue B - donneur non récupérable
 
-Documenter le manque et conserver le port en mode passif.
+Documenter le manque et conserver le port en mode `action_withheld`.
 
-Une nouvelle politique ACT ne pourra être conçue qu'en tant que nouveau contrat explicitement spécifié et qualifié, jamais comme restitution supposée de Site 109.
+Toute nouvelle liaison devra être un nouveau contrat explicitement spécifié, qualifié et distingué de la restitution historique de Site 109.
 
 ## Étapes ultérieures
 
-1. terminer l'audit ACT et de liaison candidat -> action ;
-2. reconstruire ou concevoir explicitement un contrat ACT séparé si justifié ;
+1. terminer l'audit de liaison `prepared intent -> AgentAction` ;
+2. reconstruire un permis ACT séparé uniquement si le donneur le justifie ;
 3. retrouver ou concevoir explicitement le producteur public du domaine TemporalSelection ;
 4. raccorder le port au worker uniquement par injection qualifiée ;
 5. reconstruire une campagne fonctionnelle durable ;

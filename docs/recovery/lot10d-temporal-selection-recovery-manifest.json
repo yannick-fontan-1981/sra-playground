@@ -1,11 +1,12 @@
 {
-  "schema_version": 3,
+  "schema_version": 4,
   "lot": "10D",
   "capability": "TemporalSelection",
   "working_branch": "recovery/lot10d-temporal-selection-rebased-20261112",
   "baseline_branch": "recovery/site109-reconstruction-20261112",
   "baseline_commit": "24fcdbb16c93de59489a6bb0392cc709b7a75d14",
   "canonical_head_observed_before_stage": "87a538a1c776fb974a1767f30fea735aac28ded9",
+  "canonical_head_observed_after_stage": "8cc510e0a0d09704eb508b3aa2216b4d63482af4",
   "previous_working_branch": "recovery/lot10d-temporal-selection-restart2-20261112",
   "historical_recovery_source_branch": "lot10d-temporal-selection-github-20261112",
   "historical_recovery_source_compare": {
@@ -22,6 +23,7 @@
     "src/logos-engine/v6-temporal-selection-adapter.ts",
     "src/logos-engine/v6-temporal-selection-bridge.ts",
     "src/runtime/v6-temporal-decision-port.ts",
+    "src/runtime/v6-temporal-act-release-audit.ts",
     "tests/v6-temporal-selection-contract.test.ts",
     "tests/v6-temporal-memory-contract.test.ts",
     "tests/v6-temporal-return-contract.test.ts",
@@ -30,6 +32,7 @@
     "tests/v6-temporal-selection-adapter.test.ts",
     "tests/v6-temporal-selection-bridge.test.ts",
     "tests/v6-temporal-decision-port.test.ts",
+    "tests/v6-temporal-act-release-audit.test.ts",
     "docs/recovery/lot10d-temporal-selection-contract.md",
     "docs/recovery/lot10d-temporal-memory-contract.md",
     "docs/recovery/lot10d-temporal-return-contract.md",
@@ -38,6 +41,7 @@
     "docs/recovery/lot10d-temporal-selection-adapter.md",
     "docs/recovery/lot10d-temporal-trace-bridge.md",
     "docs/recovery/lot10d-temporal-decision-port.md",
+    "docs/recovery/lot10d-temporal-act-release-audit.md",
     ".github/workflows/lot10d-temporal-recovery.yml"
   ],
   "merged_shared_files": [
@@ -56,27 +60,33 @@
     "docs/migration/v6-entry-point-progress.json",
     "TemporalSelection public domain producer",
     "TemporalSelection runtime call position",
-    "separate ACT release authority and receipt",
-    "candidate to AgentAction binding",
+    "historical ActionIntent schema",
+    "exact selectedRef to AgentAction binding",
+    "historical ActionReleasePermit encoding",
+    "final runtime ACT consumer",
     "native STCK/SMLP runners and official corpus"
   ],
   "qualification": {
-    "status": "passive_temporal_decision_port_qualified",
-    "tests_passed": 145,
+    "status": "temporal_act_release_gate_audit_qualified",
+    "tests_passed": 160,
     "tests_failed": 0,
     "tests_cancelled": 0,
     "tests_skipped": 0,
     "tests_todo": 0,
-    "new_port_tests_passed": 15,
-    "ci_run_id": 43345997522,
-    "ci_head": "f303174c1104d1f8aa61ade8e628e4b6636d9caa",
+    "new_act_audit_tests_passed": 15,
+    "ci_run_id": 43348069627,
+    "ci_head": "a474b6c1862879f79272bd44cdf05b8235fe7c54",
     "ci_conclusion": "success",
-    "typecheck": "passed_strict_for_trace_temporal_passive_port_and_worker_sources",
+    "typecheck": "passed_strict_for_trace_temporal_worker_passive_port_and_act_audit_sources",
     "worker_regressions_included": true,
     "v6_core_regressions_included": true,
     "passive_port_worker_integration_included": true,
+    "act_release_gate_order_audited": true,
+    "act_release_eligibility_contract_qualified": true,
+    "action_binding_reconstructed": false,
+    "action_release_permit_reconstructed": false,
+    "action_payload_released": false,
     "default_worker_replaced": false,
-    "act_authority_reconstructed": false,
     "historical_selector_reconstructed": false,
     "historical_state_machine_reconstructed": false
   },
@@ -89,6 +99,21 @@
     "embedded_act_authorization_allowed": false,
     "default_decide_result": "undefined"
   },
+  "act_release_audit_contract": {
+    "donor_gate_order_preserved": true,
+    "selection_binding_required": true,
+    "decision_fingerprint_required": true,
+    "observation_and_frame_binding_required": true,
+    "current_action_availability_required": true,
+    "grounding_required": true,
+    "commitment_and_viability_required": true,
+    "current_control_memory_and_parent_evidence_required": true,
+    "fatal_replay_and_endpoint_safety_required": true,
+    "eligible_is_not_release_permit": true,
+    "action_payload_present": false,
+    "action_released": false,
+    "act_authorized": false
+  },
   "performance": {
     "stck_global_max_increase_percent_exclusive": 10,
     "smlp_global_max_increase_percent_exclusive": 10,
@@ -100,5 +125,5 @@
     "integrated_into_canonical_reconstruction": false,
     "site_published": false
   },
-  "next_step": "audit durable V5/V6 donors for a separate ACT release identity, freshness rules and exact candidate-to-AgentAction binding; document the gap before designing any new contract if the historical authority cannot be recovered"
+  "next_step": "recover the exact prepared-intent-to-AgentAction binding and historical release permit/consumer; if unavailable, preserve action_withheld and specify any replacement only as a new explicit contract"
 }

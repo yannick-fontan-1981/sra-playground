@@ -15,19 +15,19 @@ Baseline canonique utilisée pour le report :
 - branche : `recovery/site109-reconstruction-20261112`
 - commit : `24fcdbb16c93de59489a6bb0392cc709b7a75d14`
 
-La branche canonique observée au début du présent jalon avait avancé jusqu'à :
+La branche canonique observée après ce jalon avait avancé jusqu'à :
 
-`87a538a1c776fb974a1767f30fea735aac28ded9`
+`8cc510e0a0d09704eb508b3aa2216b4d63482af4`
 
-Cette divergence parallèle n'est pas assimilée à une intégration. Une nouvelle réconciliation sera nécessaire avant le port canonique.
+Cette divergence parallèle n'est pas une intégration. Une nouvelle réconciliation reste obligatoire avant tout port canonique.
 
 ## Nature de la reconstruction
 
-L'ancienne branche historique `lot10d-temporal-selection-github-20261112` ne contenait aucun delta 10D récupérable. Le code actuel est donc une reconstruction qualifiée à partir de preuves GitHub durables, pas une copie certifiée de Site 109.
+L'ancienne branche historique `lot10d-temporal-selection-github-20261112` ne contenait aucun delta 10D récupérable. Le code actuel est une reconstruction qualifiée depuis des preuves GitHub durables, pas une copie certifiée de Site 109.
 
 Aucune parité Site 109 / native 0.68 n'est revendiquée.
 
-## Couche TemporalSelection actuellement reconstruite
+## Couche TemporalSelection reconstruite
 
 Les briques suivantes sont présentes :
 
@@ -38,83 +38,94 @@ Les briques suivantes sont présentes :
 5. reçu de décision Source/DRM avec provenance ;
 6. adaptateur de consommation d'une décision externe ;
 7. bridge traçable vers le noyau Logos V6 ;
-8. port runtime passif compatible avec `AgentDecisionPort`.
+8. port runtime passif compatible avec `AgentDecisionPort` ;
+9. audit distinct des gates d'éligibilité à la release ACT.
 
-Fichiers principaux ajoutés par la dernière étape :
+Derniers fichiers ajoutés :
 
-- `src/runtime/v6-temporal-decision-port.ts`
-- `tests/v6-temporal-decision-port.test.ts`
-- `docs/recovery/lot10d-temporal-decision-port.md`
+- `src/runtime/v6-temporal-act-release-audit.ts`
+- `tests/v6-temporal-act-release-audit.test.ts`
+- `docs/recovery/lot10d-temporal-act-release-audit.md`
 
-## Port de décision passif
+## Résultat de l'audit ACT
 
-Le port reçoit une enveloppe explicitement fournie et liée à :
+Les donneurs V5 durables établissent que la sélection ne libère jamais directement une action.
 
-- une session worker ;
-- une séquence publique exacte ;
-- l'empreinte de l'observation publique ;
-- l'identité épisode / observation / révision TemporalSelection ;
-- un état restaurable ;
-- une autorité Source ;
-- un reçu Source/DRM ;
-- éventuellement une frontière de retour qualifiée.
+### Chaîne durable observée
 
-Il ne :
+`selected branch -> prepared ActionIntent -> action grounding -> operational wisdom -> release_action -> ACT`
 
-- lit pas de données privées du jeu ;
-- ne déduit pas la sémantique des pixels ;
-- ne fabrique pas les alternatives ;
-- ne choisit pas un candidat ;
-- ne produit pas d'action ;
-- ne déduit pas ACT depuis la sélection.
+Les sources principales sont :
 
-Une sélection acceptée est projetée, mais la sortie reste :
+- `reference/sra/212d8d426f07/agents/yf_arc3_v5/src/core/release_action.src`
+- `reference/sra/212d8d426f07/agents/yf_arc3_v5/src/core/released_action_cycle.src`
+- `reference/sra/212d8d426f07/agents/yf_arc3_v5/src/arc3/conditional_reasoning_tree.src`
+- `reference/sra/212d8d426f07/agents/yf_arc3_v5/src/arc3/continue_after_information_probe.src`
 
-`undefined`
+Les gates récupérables avec preuve sont :
 
-avec le statut :
+- sélection acceptée et liée au même `selectedRef` ;
+- même décision, observation et frame courante ;
+- intent, witness d'action, famille et attentes explicitement identifiés ;
+- preuves de grounding préservant les preuves de sélection ;
+- action courante disponible ;
+- grounding valide ;
+- commitment `commit` ;
+- viability `viable` ou `conditional` ;
+- engagement expérimental courant ;
+- preuves de contrôle courantes ;
+- contrat mémoire valide ;
+- continuité et influence parentales revalidées ;
+- absence de replay fatal observé ;
+- endpoint `not_applicable` ou `clear`.
+
+Les refus et reports restent explicites :
+
+- `revise`, `reject`, viability `blocked`, replay fatal et contact hostile bloquent ;
+- `defer`, viability `undetermined` et sécurité non résolue reportent.
+
+## Contrat d'audit ajouté
+
+`auditTemporalActRelease(...)` reçoit :
+
+- une projection TemporalSelection déjà qualifiée ;
+- un witness d'intent déjà préparé ;
+- les faits explicites des gates de release.
+
+Il retourne :
+
+- `eligible` ;
+- `blocked` ;
+- `deferred`.
+
+Même si toutes les gates passent, le résultat conserve :
+
+- `actionPayloadPresent: false` ;
+- `actionReleased: false` ;
+- `actAuthorized: false`.
+
+`eligible` signifie uniquement que les gates connues sont satisfaites. Ce n'est pas un `ActionReleasePermit` et ce n'est pas une permission physique d'agir.
+
+## Ce qui n'a pas été inventé
+
+Les donneurs accessibles ne suffisent pas encore à reconstruire exactement :
+
+- le schéma historique complet de `ActionIntent` ;
+- la conversion `selectedRef -> cible -> AgentAction` ;
+- les coordonnées ou paramètres exacts d'une action TemporalSelection ;
+- l'encodage historique de `ActionReleasePermit` ;
+- le producteur runtime de chaque preuve de release ;
+- le consommateur final et la position exacte dans l'ancien runtime Site 109.
+
+Le port runtime reste donc en mode :
 
 `action_withheld`
 
-et :
-
-`actionReleased: false`
-
-## Garanties fail-closed
-
-Le port refuse ou bloque :
-
-- l'absence d'enveloppe ;
-- une autre session ;
-- une observation publique différente ;
-- un binding altéré ;
-- un reçu périmé ;
-- un domaine divergent ;
-- un état ou des preuves non restaurables ;
-- une enveloppe dupliquée ;
-- une autorité ACT embarquée ;
-- un budget invalide ou un signal interrompu.
-
-La file est bornée à 32 enveloppes. Les enveloppes antérieures sont supprimées, tandis qu'une enveloppe future exacte reste en attente.
-
-## Trace
-
-Le sink distingue maintenant :
-
-- `operation:OPxx:*` ;
-- `consumption:OPxx:*` ;
-- `capability:temporal-selection:*` ;
-- `capability_consumption:temporal-selection:*` ;
-- `capability:temporal-decision-port:*` ;
-- `capability_consumption:temporal-decision-port:*`.
-
-Le mode `counters` conserve les compteurs sans retenir les payloads d'événements.
+et retourne toujours `undefined`.
 
 ## Worker public
 
-Le nouveau port est qualifié par injection dans `AgentWorkerCore`.
-
-Il ne remplace pas le port public par défaut :
+Le port passif et l'audit ACT sont qualifiés par injection. Ils ne remplacent pas le port public par défaut :
 
 `PendingPerceptionDecisionPort`
 
@@ -122,37 +133,49 @@ Le worker public conserve la révision :
 
 `reconstruction-pending-perception`
 
-et ne fabrique toujours aucune action.
+et ne fabrique aucune action.
 
 ## Qualification GitHub CI
 
 Commit de code qualifié :
 
-`f303174c1104d1f8aa61ade8e628e4b6636d9caa`
+`a474b6c1862879f79272bd44cdf05b8235fe7c54`
 
 Run GitHub Actions :
 
-`43345997522`
+`43348069627`
 
 Résultat :
 
-- **145 tests** ;
-- **145 réussis** ;
+- **160 tests** ;
+- **160 réussis** ;
 - **0 échec** ;
 - 0 annulé, ignoré ou todo ;
-- typecheck strict réussi sur le sink, TemporalSelection, le port passif et les sources worker concernées.
+- typecheck strict réussi sur le sink, TemporalSelection, le worker, le port passif et l'audit ACT.
 
-La nouvelle étape ajoute 15 tests au précédent jalon de 130 tests.
+Le présent jalon ajoute **15 tests** au précédent total de 145.
 
-## Limites fonctionnelles
+Les tests couvrent notamment :
+
+- binding sélection / décision / observation ;
+- domaines d'attentes et de preuves ;
+- disponibilité et grounding ;
+- commitment et viability ;
+- preuves courantes de contrôle, mémoire et parent ;
+- replay fatal et endpoint ;
+- distinction `blocked` / `deferred` / `eligible` ;
+- absence de payload d'action et d'autorité ACT.
+
+## Limites fonctionnelles restantes
 
 Ne sont toujours pas reconstruits :
 
 - la politique historique de choix TemporalSelection ;
 - l'ancien state machine Site 109 ;
 - le producteur public justifié des domaines/candidats ;
-- une identité d'autorité ACT séparée ;
+- le schéma historique complet de l'intent ;
 - la liaison exacte candidat -> cible -> `AgentAction` ;
+- le permis ACT historique et sa consommation unique ;
 - `src/logos-engine/v6-native-runtime.ts` ;
 - la position finale dans le runtime commun ;
 - le registre reconstruit des entrées ;
@@ -175,12 +198,16 @@ Critère conservé :
 
 ## Prochaine étape
 
-Auditer les donneurs durables V5/V6 afin d'identifier, sans l'inventer :
+Chercher un donneur durable de la liaison exacte :
 
-1. une identité d'autorité ACT distincte de TemporalSelection ;
-2. un reçu ou contrat de libération ;
-3. la liaison exacte entre candidat sélectionné, cible et `AgentAction` ;
-4. les règles de fraîcheur, consommation unique, disponibilité et révocation ;
-5. le consommateur runtime réel de cette autorisation.
+`prepared ActionIntent -> AgentAction publique -> ActionReleasePermit -> consommateur runtime`
 
-Si la politique historique ne peut pas être récupérée, le manque devra être documenté avant toute conception nouvelle. Une sélection acceptée ne doit jamais devenir implicitement une permission d'agir.
+Si ce donneur est retrouvé, reconstruire séparément :
+
+1. le contrat d'intent d'action attribué ;
+2. la liaison vers une action actuellement disponible ;
+3. un permis ACT lié à l'observation et à la révision ;
+4. la consommation unique et la révocation ;
+5. la trace du consommateur runtime.
+
+S'il reste absent, conserver `action_withheld` et documenter le manque. Toute nouvelle liaison devra être présentée comme un nouveau contrat explicitement spécifié et qualifié, jamais comme une restitution supposée de Site 109.
