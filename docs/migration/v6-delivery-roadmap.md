@@ -202,52 +202,52 @@ Proof:
 
 #### 9C3 real public STCK producers
 
-Real qualified producers:
+The canonical product owner now preserves STCK ambiguity: exactly one visible
+stack card is required and several cards are never ranked. 9C3 separates that
+strict public decision into two real channels :
 
 1. `public_stck_action_availability_v1`
    - contributes only current ACTION6 admissibility;
-   - contributes no card or shop geometry.
+   - contributes no card geometry.
 2. `public_stck_visible_target_v1`
-   - reproduces the current card or shop target from the public STCK frame;
-   - contributes the addressed coordinates and a revision-bound target identity;
-   - rejects stale or pixel-incompatible context.
+   - uses the canonical image-only unique-card detector ;
+   - contributes one revision-bound card identity and addressed coordinates ;
+   - returns no contribution for zero or several cards ;
+   - never invents a shop target.
 
-The target producer follows the already qualified 9B public boundary: an active
-shop segment must be visible, the lowest visible stack card is selected while a
-card remains, and the first visible shop segment is selected after the visible
-stack is empty.
+The initial real STCK frame contains several cards. An explicit public prelude,
+already qualified in 9B, executes three visible-card probes before 9C. Its
+public pixel deltas are `211`, `138` and `95`. The first applicable 9C state is
+public revision `3`, where one card is proved.
 
 Real corpus qualification:
 
 - archive: `public/python/custom-games.zip`;
 - game: STCK `stck-c0000001`;
 - seed: 0;
-- selected action: `ACTION6(x=4, y=52)`;
-- selected target kind: `stack_card`;
-- changed public pixels after return: `211`;
-- the next target is remesured from the next public revision;
-- removing either producer yields no action;
-- selected return acquired by both channels.
+- prelude producer: `region-public-action6-probe-v1` ;
+- prelude actions: three `ACTION6(x=4, y=52)` ;
+- unique-card evidence: `public-stck-stack-card:14:48-52` ;
+- joint action: `ACTION6(x=4, y=50)` ;
+- changed public pixels after the joint return: `64` ;
+- removing either producer yields no action ;
+- selected return is acquired by both channels ;
+- the next observation has no unique stack card, so 9C produces no next action.
 
-GitHub Actions evidence:
-
-- successful run `43363393229`;
-- job `131681943602`;
-- source-qualified head `50b8eb855ac941cdbed78b0004d09e7742611ebb`;
-- production build: PASS;
-- targeted 9C3 tests: **7/7 PASS**;
-- real archive qualifier: PASS;
-- complete TypeScript regression suite: **358/358 PASS**;
-- failures, cancellations, skipped tests and TODOs: `0`.
+The qualification deliberately does not reuse the earlier permissive rule that
+selected the lowest card or fell back to the shop. The durable report is
+regenerated from the real archive and compared byte-for-byte with the committed
+proof.
 
 Status:
 
-**9C3 functionally qualified on a real public STCK corpus; the two-game functional prerequisite for official 9C performance is complete.**
+**9C3 functionally qualified on a real public STCK unique-card subcorpus; the two-game functional prerequisite for official 9C performance is complete.**
 
 Proofs:
 
 - `docs/recovery/lot9c3-stck-joint-performance-boundary.md`;
-- `docs/recovery/lot9c3-public-stck-joint-report.json`.
+- `docs/recovery/lot9c3-public-stck-joint-report.json`;
+- `tests/lot9c3-stck-joint-proof.test.mjs`.
 
 ## 5. Performance contract
 
@@ -267,9 +267,12 @@ The strict official protocol remains:
 
 9B has passed this protocol.
 
-9C now has real, causally qualified public joint paths for both SMLP and STCK.
+9C now has real, causally qualified public joint paths for SMLP and STCK.
 Official performance remains open because the A/B source identities, runner
 manifest and timed joint-channel scope have not yet been frozen and executed.
+For STCK, A and B must apply the same three-action public prelude policy. The
+prelude may be included in both timed sessions or excluded from both, but never
+included on only one side.
 
 ## 6. Immediate roadmap
 
@@ -281,8 +284,8 @@ manifest and timed joint-channel scope have not yet been frozen and executed.
 | 9C0 historical audit | complete | preserve unresolved identity |
 | 9C1 bounded joint owner | complete | preserve neutral ambiguity |
 | 9C2 real SMLP producers | complete | preserve causal removal proof |
-| 9C3 real STCK producers | complete | preserve archive and durable report parity |
-| **9C4 official A/B performance** | **open** | **freeze A/B source refs and runners, then execute strict two-game ABBA** |
+| 9C3 strict real STCK producers | complete | preserve explicit prelude and exact durable report parity |
+| **9C4 official A/B performance** | **open** | **freeze A/B source refs, identical STCK prelude timing and runners, then execute strict two-game ABBA** |
 | current reconstruction registry | open | rebuild before count claims |
 | Site publication | blocked | only from an integrated GitHub-qualified SHA |
 
@@ -332,7 +335,9 @@ The project must not claim exact Site 109 parity until all of these are true:
 Freeze one reference A path without the joint-channel candidate and one candidate
 B path with the qualified joint channels. Give every path a durable `sourceRef`,
 create explicit STCK and SMLP runners that exercise the real 9C2 and 9C3 public
-corpora, and define the timed boundary before measuring. Execute the full ABBA
-protocol with no measured sample removal. Accept only when each game's complete
-session median remains strictly below `+10.000%`. Do not infer historical parity,
-restore a registry count or publish Site from the functional qualification alone.
+corpora, and declare the timed boundary before measuring. For STCK, execute the
+same public prelude in A and B and either include it in both timers or exclude it
+from both. Execute the full ABBA protocol with no measured sample removal.
+Accept only when each game's complete-session median remains strictly below
+`+10.000%`. Do not infer historical parity, restore a registry count or publish
+Site from the functional qualification alone.
