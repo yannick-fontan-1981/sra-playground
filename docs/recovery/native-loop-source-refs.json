@@ -1,13 +1,13 @@
 {
   "version": 1,
-  "generatedFromCommit": "4bd1a86a61e64495fa9435e1b9dcb55e4dc575a5",
-  "commonRoot": "756d6dceeac2d2ab985cbe200a6844cbe4ff49d02d75607123668f1670e74a49",
+  "generatedFromCommit": "40b61965bd07a3ac92a78e6e690862046017f0d3",
+  "commonRoot": "3935f5106c478715040b5b49e6e8ebdd6e960cd353c2eff733f7399571dc521b",
   "candidateRoot": "b77bf3e8c9e31f4d18ac8a8468a9081dc10788b0c8c317fe7d79adb84e24e32e",
   "reference": {
-    "sourceRef": "lot9b-region-v1:A:b3fe042acf851d006b02193446f05111406e4ddaf8332ee83125493936608050",
+    "sourceRef": "lot9b-region-v1:A:46ce3478dbc07268333a6a2d423489a689cc5ff509abf1e4bf1f948b174b842c",
     "profile": {
       "version": 1,
-      "commonRoot": "756d6dceeac2d2ab985cbe200a6844cbe4ff49d02d75607123668f1670e74a49",
+      "commonRoot": "3935f5106c478715040b5b49e6e8ebdd6e960cd353c2eff733f7399571dc521b",
       "execution": {
         "corpusRef": "native-region-action6-corpus-v1",
         "seed": 0,
@@ -21,10 +21,10 @@
     }
   },
   "candidate": {
-    "sourceRef": "lot9b-region-v1:B:e1a05d106ef3837969fc0502bc6eaf8f09e0a44a65780d0d778da72ae7f85ad5",
+    "sourceRef": "lot9b-region-v1:B:557ca909c4c9b68ec70d2055a02dfb5c27dffcae338f1025e3b53c67937a609f",
     "profile": {
       "version": 1,
-      "commonRoot": "756d6dceeac2d2ab985cbe200a6844cbe4ff49d02d75607123668f1670e74a49",
+      "commonRoot": "3935f5106c478715040b5b49e6e8ebdd6e960cd353c2eff733f7399571dc521b",
       "execution": {
         "corpusRef": "native-region-action6-corpus-v1",
         "seed": 0,
@@ -39,6 +39,8 @@
     }
   },
   "commonComponents": [
+    { "path": ".github/workflows/lot9b-official-native-region-abba.yml", "bytes": 2052, "sha256": "64522f46751ff7efda0951316f22cb685c70dea3d466b878b9886fdeb520f033" },
+    { "path": "benchmarks/native-region-official.html", "bytes": 449, "sha256": "f89413ff7d1837dbaf9e5fbd40ac5796f706f960940a52ce8a92a8d18953f902" },
     { "path": "package-lock.json", "bytes": 29342, "sha256": "93bc180b1ecf92e7976bb54bcb3a0aef1d3e96d65c41ee300676207832cd274e" },
     { "path": "package.json", "bytes": 878, "sha256": "099a2d82e38575ef6881442a61759846fbb9e0029f1fe44adf96cab73d5d879c" },
     { "path": "public/python/custom-games.zip", "bytes": 899593, "sha256": "44d108fe4feed3ce0c9587e90f071876b13730af8136cd54cbfa5c1562d87822" },
@@ -46,16 +48,21 @@
     { "path": "public/python/game_bridge.py", "bytes": 13121, "sha256": "cc9df3ea6eae0057898fa01fd949322c6af0b481030f4c271b9a719f0a07983e" },
     { "path": "public/python/official_adapter.py", "bytes": 9574, "sha256": "efead273b89ffe8cf595e41b9f4b25a6106e6cb6e5a7d1013ebc887cfc646837" },
     { "path": "scripts/measure-native-loop-costs.mjs", "bytes": 6619, "sha256": "b2e45fd9cab5bd3ca06570c107d11d7c58b4744c0900a96a5c1049cdc3cd0579" },
+    { "path": "scripts/native-loop-browser-worker-dispatch.mjs", "bytes": 2391, "sha256": "f28e668e4275477485b24c0dcfe8e775fea67e3efd01bd25523a133c2a6766e5" },
     { "path": "scripts/native-loop-explicit-runners.mjs", "bytes": 4825, "sha256": "690a7e39cf662a5712569e34155a080997bf455af360b8b593a52af20d0420d7" },
     { "path": "scripts/native-loop-game-bridge-session.mjs", "bytes": 3688, "sha256": "d39be1533c84f89c3107c5a07a85e2689b4191a43531fbda631be2dbac3c9ca1" },
-    { "path": "scripts/native-loop-public-corpus-runner.mjs", "bytes": 5648, "sha256": "276c54d34ff411e219b8f8eaa7c74fe0118affe17bc9d7ccc7b6bfd042e5cdc0" },
+    { "path": "scripts/native-loop-public-corpus-runner.mjs", "bytes": 5711, "sha256": "26619bbe3357e1527f81d51390e88056a35cb5b7a0aa127865d49cf616472c1c" },
     { "path": "scripts/native-loop-region-action6-corpus.mjs", "bytes": 780, "sha256": "eb9fd3aae7fb63251522bcc9b87f13850a384deb738f9394c034a6626d6e3806" },
     { "path": "scripts/native-loop-region-benchmark-runners.mjs", "bytes": 3802, "sha256": "39f2ecd302a6f9a389b847f04f35c74a766ef346bdf47b38a9f7a843e6d24c2c" },
     { "path": "scripts/native-loop-region-public-action6-probe.mjs", "bytes": 4447, "sha256": "5a6c798bb29d7667f93b66a99b929fd6b2827fa061e84121734fd83fc2b57248" },
     { "path": "scripts/native-loop-session-adapter.mjs", "bytes": 4274, "sha256": "17f3255febf242d43a7852f5a0fe06117625c21c8936332e57743c7a7239bb65" },
+    { "path": "scripts/prepare-python.mjs", "bytes": 1595, "sha256": "6368a9e8929fb9065475165392b515aa5f212fbfdf60daecafd449e73a45da2a" },
     { "path": "scripts/python-runtime-assets.json", "bytes": 3389, "sha256": "e702a914cf88345d486d7d8a36c95f2076287d8935e02cc428b7a66749500d43" },
+    { "path": "scripts/run-native-region-official-benchmark.mjs", "bytes": 7322, "sha256": "0513977bb9e68656b73a4d47d71453b047572b17770bcacd9da15578c6a6887d" },
+    { "path": "src/benchmarks/native-region-official-benchmark.ts", "bytes": 5240, "sha256": "f8a13a4d02cbd653d863c2d6506ba9e66cd475d6c6359af22cd28891fb22f16a" },
     { "path": "src/runtime/browser-games.ts", "bytes": 4971, "sha256": "4b2caada48e67d4c9f006699e33e4896f54e9067be69da3c23d3347da9c3650a" },
-    { "path": "src/runtime/game-worker.ts", "bytes": 3329, "sha256": "52f62b68c23b2c70c2b18461da042bf08f7fe44f7be068d5fc0e3e2942ac7159" }
+    { "path": "src/runtime/game-worker.ts", "bytes": 3329, "sha256": "52f62b68c23b2c70c2b18461da042bf08f7fe44f7be068d5fc0e3e2942ac7159" },
+    { "path": "vite.config.ts", "bytes": 820, "sha256": "53ec21df1189c6bfc96960e46b80e2537f4f6f61425771b1b6648adb0227d9b1" }
   ],
   "candidateComponents": [
     { "path": "scripts/native-loop-region-candidate-hook.mjs", "bytes": 5392, "sha256": "771ed73fc1db2009eef685c42e677d07447a2897de4216087a5c3bcb2646e13d" },
@@ -74,12 +81,14 @@
     "onlyMeasuredDifference": "B executes the real region_intervention hook; A leaves that hook disabled"
   },
   "qualification": {
-    "githubActionsRunId": 43353057713,
-    "githubActionsJobId": 131648475008,
-    "qualifiedHeadSha": "4bd1a86a61e64495fa9435e1b9dcb55e4dc575a5",
-    "testsPassed": 4,
-    "testsFailed": 0,
-    "artifactId": 14004562351,
-    "artifactZipSha256": "6d7844c8070bc35c93b5e16af55d96db778e01b36957b1f36eb602ffc3d7bc80"
+    "githubActionsRunId": 43353935289,
+    "githubActionsJobId": 131651326277,
+    "qualifiedHeadSha": "40b61965bd07a3ac92a78e6e690862046017f0d3",
+    "typecheckPassed": true,
+    "contractTestsPassed": 7,
+    "contractTestsFailed": 0,
+    "artifactId": 14005122414,
+    "artifactZipSha256": "840c90cd551a450efae27d39b0454396096f1689f435f62debf359e8720f5633",
+    "manifestVerificationAtThisRun": "expected_failure_stored_refs_not_yet_updated"
   }
 }
