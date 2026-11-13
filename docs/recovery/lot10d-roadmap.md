@@ -1,14 +1,14 @@
-# Lot 10D — TemporalSelection — feuille de route de reconstruction
+# Lot 10D - TemporalSelection - feuille de route de reconstruction
 
 Date : 2026-11-12
 
 Branche : `recovery/lot10d-temporal-selection-rebased-20261112`
 
-Baseline : `recovery/site109-reconstruction-20261112` au commit `24fcdbb16c93de59489a6bb0392cc709b7a75d14`
+Baseline de report : `recovery/site109-reconstruction-20261112` au commit `24fcdbb16c93de59489a6bb0392cc709b7a75d14`
 
 ## Règle de portée
 
-Cette feuille de route décrit une **nouvelle reconstruction qualifiée** à partir de preuves GitHub durables.
+Cette feuille de route décrit une nouvelle reconstruction qualifiée à partir de preuves GitHub durables.
 
 Elle ne revendique ni identité de code ni parité fonctionnelle complète avec l'ancien Site 109 / native 0.68.
 
@@ -23,12 +23,14 @@ Elle ne revendique ni identité de code ni parité fonctionnelle complète avec 
 | état minimal/restauration | qualifié | état descriptif, borné, `actAuthorized: false` |
 | reçu Source/DRM | qualifié | Source, DRM, observation, domaine et résultat scellés |
 | adaptateur de consommation | qualifié | ne choisit pas le candidat |
-| bridge vers trace Logos | qualifié | capability séparée des OP01–OP31 |
-| compatibilité worker/V6 rebasée | qualifiée | CI 130/130, typecheck strict |
+| bridge vers trace Logos | qualifié | capability séparée des OP01-OP31 |
+| compatibilité worker/V6 rebasée | qualifiée | régressions worker et V6 incluses |
+| port `AgentDecisionPort` passif | **qualifié** | CI 145/145, aucune action sans ACT séparé |
 | politique historique TemporalSelection | absente | ne pas inventer |
 | producteur public du domaine | ouvert | aucune perception/candidate factory justifiée |
+| autorité ACT séparée | **audit suivant** | la sélection seule ne donne jamais ACT |
+| liaison candidat -> `AgentAction` | ouverte | aucune conversion implicite admise |
 | position runtime commune | ouverte | `v6-native-runtime.ts` absent |
-| autorité ACT | ouverte et séparée | aucune commande ne doit être libérée par le bridge |
 | registre d'entrées reconstruit | ouvert | `v6-entry-point-progress.json` absent |
 | contribution en partie réelle | ouverte | aucune campagne comportementale TemporalSelection actuelle |
 | performance officielle | à confirmer | runners/corpus STCK/SMLP manquants |
@@ -37,16 +39,18 @@ Elle ne revendique ni identité de code ni parité fonctionnelle complète avec 
 
 ## Qualification actuelle
 
-Commit de code rebasé :
+Commit de code qualifié :
 
-`b759a7adb5d459211a1ca7984acdc5062bbb88ca`
+`f303174c1104d1f8aa61ade8e628e4b6636d9caa`
 
 GitHub Actions :
 
-- run `43341620341` ;
-- **130 tests réussis** ;
+- run `43345997522` ;
+- **145 tests réussis** ;
 - **0 échec** ;
 - typecheck strict réussi.
+
+Le précédent jalon comptait 130 tests. Le port passif ajoute 15 tests couvrant son identité, ses refus, sa file bornée, sa trace et son intégration au worker.
 
 Le worker public reste en mode :
 
@@ -54,53 +58,71 @@ Le worker public reste en mode :
 
 et ne produit aucune action par défaut.
 
-## Étape suivante — port de décision passif
+## Port de décision passif - jalon terminé
 
-Créer un port compatible avec `AgentDecisionPort` qui reçoit explicitement, depuis un producteur injecté :
+Le port reçoit explicitement :
 
 - `TemporalObservationState` ;
 - `TemporalSourceAuthority` ;
 - `TemporalSourceDecisionReceipt` ;
 - éventuellement `TemporalReturnMeasurement` ;
-- un contrat ACT distinct, si et seulement s'il existe une preuve durable permettant d'en définir le schéma.
+- une liaison à l'observation worker publique exacte.
 
-### Comportement obligatoire
+Il ne reçoit aucune action et impose :
 
-En l'absence d'un de ces éléments ou en cas de divergence :
+`actAuthorization: null`
 
-`decide(...) → undefined`
+Comportement courant :
 
-Le port ne doit pas :
+- enveloppe absente ou invalide : `undefined` ;
+- sélection externe refusée : `undefined` ;
+- sélection externe acceptée : projection enregistrée, puis `undefined` ;
+- aucune action libérée ;
+- aucune modification du port public par défaut.
 
-- analyser les pixels ;
-- fabriquer les alternatives ;
-- sélectionner lui-même un candidat ;
-- transformer des coordonnées arbitraires en action ;
-- déduire une autorisation ACT depuis la seule sélection ;
-- remplacer le port par défaut du worker avant qualification explicite.
+## Prochaine étape - audit de l'autorité ACT
 
-### Qualification attendue
+Avant de concevoir un contrat de libération, rechercher dans les donneurs durables V5/V6 :
 
-- initialisation et reset de session ;
-- liaison stricte session/observation/révision ;
-- refus d'un reçu périmé ou d'un domaine divergent ;
-- restauration de l'état minimal ;
-- trace `counters` et `full` ;
-- aucune action sans contrat ACT ;
-- non-régression worker et V6 core.
+1. qui détient l'autorité d'agir ;
+2. quelle identité relie cette autorité à l'observation courante ;
+3. comment une proposition sélectionnée devient une cible et une `AgentAction` disponible ;
+4. quelles preuves doivent rester actives ;
+5. quelles révisions invalident l'autorisation ;
+6. comment empêcher la double consommation ;
+7. quel composant runtime consomme réellement le reçu.
+
+### Issue A - donneur récupérable
+
+Reconstruire uniquement les invariants prouvés, puis qualifier :
+
+- autorité distincte ;
+- fraîcheur ;
+- domaine d'actions disponibles ;
+- cible et paramètres ;
+- consommation unique ;
+- révocation ;
+- trace décisionnelle.
+
+### Issue B - donneur non récupérable
+
+Documenter le manque et conserver le port en mode passif.
+
+Une nouvelle politique ACT ne pourra être conçue qu'en tant que nouveau contrat explicitement spécifié et qualifié, jamais comme restitution supposée de Site 109.
 
 ## Étapes ultérieures
 
-1. retrouver ou concevoir explicitement le producteur public du domaine TemporalSelection ;
-2. qualifier un contrat ACT séparé, sans réutiliser la décision comme autorisation ;
-3. raccorder passivement le port au worker par injection, sans remplacer le défaut ;
-4. reconstruire une campagne fonctionnelle durable ;
-5. reconstruire le registre d'entrées ;
-6. restaurer les runners officiels STCK/SMLP ;
-7. mesurer selon ABBA ;
-8. réconcilier avec la tête canonique ;
-9. intégrer dans `recovery/site109-reconstruction-20261112` ;
-10. publier le Site seulement après vérification SHA GitHub ↔ Site.
+1. terminer l'audit ACT et de liaison candidat -> action ;
+2. reconstruire ou concevoir explicitement un contrat ACT séparé si justifié ;
+3. retrouver ou concevoir explicitement le producteur public du domaine TemporalSelection ;
+4. raccorder le port au worker uniquement par injection qualifiée ;
+5. reconstruire une campagne fonctionnelle durable ;
+6. reconstruire le registre d'entrées ;
+7. restaurer les runners officiels STCK/SMLP ;
+8. mesurer selon ABBA ;
+9. réconcilier avec la tête canonique ;
+10. intégrer dans `recovery/site109-reconstruction-20261112` ;
+11. publier le Site seulement après vérification SHA GitHub <-> Site.
 
 ## Performance
 
