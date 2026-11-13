@@ -55,6 +55,32 @@ for (const scenario of fixture.scenarios) test(`V6 observed frontier original se
   }
 });
 
+test('the production agenda preserves frontier commands and declares why it probes locally or follows an observed route', async () => {
+  const choices = new Set<string>();
+  for (const scenario of fixture.scenarios) {
+    const source = new ObservedFrontier(scenario.target, scenario.maximum);
+    const saved = new Map<string, any>();
+    for (const row of scenario.steps) {
+      if (row.error) continue;
+      if (row.operation === 'propose' && row.expected?.status === 'proposed'
+          && row.kwargs?.return_episode == null && row.kwargs?.curiosity == null && row.kwargs?.control_acquisition == null) {
+        const candidate = new ObservedFrontier(scenario.target, scenario.maximum, source.snapshot());
+        const result = await candidate.propose(...[row.args[0], row.args[1], { ...row.kwargs, sic_agenda: true }] as Parameters<ObservedFrontier['propose']>);
+        assert.ok(result?.sic_frontier_decision);
+        const { sic_frontier_decision: receipt, ...proposal } = result!;
+        choices.add(receipt.strategy);
+        assert.deepEqual(proposal.actions, row.expected.actions);
+        assert.deepEqual(proposal.steps, row.expected.steps);
+        assert.equal(receipt.objective.parent, proposal.bundle_template.objective_ref);
+      }
+      const result = await runOperation(source, row, saved);
+      if (row.save) saved.set(row.save, structuredClone(result));
+    }
+  }
+  assert.ok(choices.has('test_local_input'));
+  assert.ok(choices.has('reach_open_input'));
+});
+
 test('V6 frontier rejects tampered, duplicate or reordered retained events without replacing its chain', async () => {
   const scenario = fixture.scenarios[0], first = scenario.steps.flatMap((step: any) => step.deltas)[0];
   const graph = new ObservedFrontier();

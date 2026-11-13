@@ -250,6 +250,7 @@ export class StrategyEditor {
       const scopeNote = saved.measured < selected.length ? ` · ${saved.measured}/${selected.length} games with action counts` : '';
       this.auditCoverage.textContent = `Recorded actions · Classified by editable rules ${ratio(saved.configurable)} · ${shown} ${ratio(saved.shown)} · Both ${ratio(saved.shownConfigurable)}${scopeNote}.`;
       this.auditCoverage.textContent += ` Guided by active SIC ${ratio(saved.active)} · Guided by SIC and visible ${ratio(saved.shownActive)}.`;
+      this.auditCoverage.textContent += ` Guided by editable active strategies ${ratio(saved.activeConfigurable)}.`;
       if (projected) this.auditCoverage.textContent += ` With draft rules, both would cover ${ratio(projected.shownConfigurable)}.`;
     } else if (episodes) {
       this.auditCoverage.textContent = 'Revisit these games to collect action counts for the coverage percentages.';

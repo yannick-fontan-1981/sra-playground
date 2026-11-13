@@ -306,7 +306,9 @@ export class NativeCallerCoordinator {
   async frontierOffer(observation: NativeObservation, inputs: readonly NativeCommand[]): Promise<R | null> {
     const offer = this.configuration.strategy.families.includes('information_goal') ? null : await this.points.offer(observation, inputs);
     const control = await this.controls.offer(observation, inputs, this.registry());
-    const proposal = await this.frontier.propose(observation, inputs, { prefix_evidence: [], experimental_probes: offer ? [offer] : [], control_probe: control });
+    const proposal = await this.frontier.propose(observation, inputs, {
+      prefix_evidence: [], experimental_probes: offer ? [offer] : [], control_probe: control, sic_agenda: true,
+    });
     this.persistDeltas(observation); return proposal;
   }
   /** Exact current-control questions from StrategyRouter.choose. Inspection

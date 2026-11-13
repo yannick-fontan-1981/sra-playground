@@ -104,6 +104,6 @@ test('coverage counts actions once and excludes unmeasured games from the denomi
   const sample = { ...legacy, actions: 4, actionsByFacts: countStrategyFacts(history, length),
     shownActions: 2, shownActionsByFacts: countStrategyFacts(history.slice(0, 1), length) };
   assert.deepEqual(measureStrategyCoverage([legacy, sample], defaultStrategyRules), {
-    measured: 1, actions: 4, configurable: 3, shown: 2, shownConfigurable: 2, active: 2, shownActive: 2,
+    measured: 1, actions: 4, configurable: 3, shown: 2, shownConfigurable: 2, active: 2, shownActive: 2, activeConfigurable: 2,
   });
 });

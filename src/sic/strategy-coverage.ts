@@ -33,11 +33,11 @@ export function countStrategyFacts<T extends { readonly facts: ReadonlySet<Strat
 }
 
 export function measureStrategyCoverage(samples: readonly StrategySample[], rules: readonly StrategyRule[]) {
-  let actions = 0, configurable = 0, shown = 0, shownConfigurable = 0, active = 0, shownActive = 0, measured = 0;
+  let actions = 0, configurable = 0, shown = 0, shownConfigurable = 0, active = 0, shownActive = 0, activeConfigurable = 0, measured = 0;
   const classified = (groups: readonly FactGroup[]) => groups.reduce((total, group) =>
     total + (rules.some(rule => matchesStrategyRule(group.facts, rule)) ? group.count : 0), 0);
   const guided = (groups: readonly FactGroup[]) => groups.reduce((total, group) =>
-    total + (group.facts.has('activeRecovery') ? group.count : 0), 0);
+    total + (group.facts.has('activeRecovery') || group.facts.has('activeFrontier') ? group.count : 0), 0);
   for (const sample of samples) {
     if (sample.actions === null || sample.shownActions === null || !sample.actionsByFacts || !sample.shownActionsByFacts) continue;
     measured++;
@@ -47,8 +47,10 @@ export function measureStrategyCoverage(samples: readonly StrategySample[], rule
     shownConfigurable += classified(sample.shownActionsByFacts);
     active += guided(sample.actionsByFacts);
     shownActive += guided(sample.shownActionsByFacts);
+    activeConfigurable += sample.actionsByFacts.reduce((total, group) =>
+      total + (group.facts.has('activeRecovery') ? group.count : 0), 0);
   }
-  return { actions, configurable, shown, shownConfigurable, active, shownActive, measured };
+  return { actions, configurable, shown, shownConfigurable, active, shownActive, activeConfigurable, measured };
 }
 
 export function auditStrategyPriority(groups: readonly FactGroup[], rules: readonly StrategyRule[]) {

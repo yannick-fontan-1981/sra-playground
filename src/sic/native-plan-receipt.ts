@@ -4,7 +4,7 @@ import type { NativeObservation, NativeProposal } from '../logos-engine/v6-nativ
 export function nativePlanReceipt(family: string, proposal: NativeProposal, observation: NativeObservation, index: number) {
   const template = proposal.bundle_template;
   const rooted = proposal.rooted_line_plan;
-  const decision = objectField(objectField(rooted, 'search'), 'sic_decision');
+  const decision = objectField(objectField(rooted, 'search'), 'sic_decision') ?? proposal.sic_frontier_decision;
   const sicStrategy = objectField(decision, 'strategy'), sicTarget = objectField(decision, 'objective');
   const nativeTarget = objectField(template, 'objective_ref');
   const objective = typeof nativeTarget === 'string' && nativeTarget.length > 0 ? nativeTarget : null;

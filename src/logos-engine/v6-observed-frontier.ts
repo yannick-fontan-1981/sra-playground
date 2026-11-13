@@ -6,6 +6,7 @@ import { factConditionHolds } from './v6-drm-projector.ts';
 import type { DrmCondition } from './v6-drm-projector.ts';
 import { predictCandidateRule } from './v6-transition-learning.ts';
 import { retainNativeJson } from './v6-native-owned.ts';
+import { selectFrontierStrategy } from '../sic/frontier-strategy.ts';
 
 type R = Record<string, any>;
 export const FRONTIER_SCHEMA = 'prototype.observed_frontier.v1';
@@ -46,6 +47,7 @@ export function frontierRules(assessment: R): R[] {
 export interface FrontierProposeOptions {
   prefix_evidence?: readonly R[]; experimental_probes?: readonly R[]; control_probe?: R | null;
   control_acquisition?: R | null; curiosity?: R | null; return_episode?: readonly (readonly [R, string, R])[] | null;
+  sic_agenda?: boolean;
 }
 
 /** Internal checkpoint ownership. The default source-compatible object remains
@@ -335,11 +337,15 @@ export class ObservedFrontier {
       const q = questions.find(q => same(frontierAction(q.action), frontierAction(bound.action)));
       if (q) questions = [{ ...q, reason: 'test_control_after_observed_local_change', priority: -1, hypothesis_refs: [control!.rule_ref], control_experiment: copy(control) }, ...questions.filter(other => other !== q)];
     }
+    const agenda = options.sic_agenda === true && options.return_episode == null && curiosity === null && acquisition === null
+      ? selectFrontierStrategy(questions[0], frontierRef(observation)) : null;
     let path: R[], question: R, kind: string;
     if (options.return_episode != null) {
       const contrast = await closedReturnContrast(this, options.return_episode, index, this.max_prefix);
       if (contrast === null) return null; [path, question] = contrast; kind = 'access';
-    } else if (questions.length) { path = []; question = questions[0]!; kind = 'experiment'; }
+    } else if (agenda?.selected?.id === 'test_local_input' || (!agenda && questions.length)) {
+      path = []; question = agenda?.selected?.plan.question ?? questions[0]!; kind = 'experiment';
+    }
     else {
       const accessed = await this.access(index);
       if (accessed[0] === null) return { status: 'frontier_exhausted', actions: [], reason: 'no_untried_admitted_input_or_observed_access_within_current_epoch_and_replay_bound',
@@ -385,7 +391,10 @@ export class ObservedFrontier {
     const proposalId = `proposal:${await digest([index, question.question_ref, steps, this.sequence])}`;
     const binding = { observation_ref: frontierRef(observation), level_epoch: protocol.level_epoch, levels_completed: protocol.levels_completed, knowledge_revision: this.knowledge_revision };
     await this.commit('proposal', { proposal_id: proposalId, kind, question_ref: question.question_ref, steps, binding });
+    const sicFrontier = agenda?.selected ? { strategy: agenda.selected.id, agenda: agenda.entries,
+      objective: { id: question.question_ref, label: 'Observe the effect of the selected untried input', parent: goal } } : null;
     return { status: 'proposed', proposal_id: proposalId, kind, actions, steps, facts, compositions, bundle_template: template, binding, question, route_refs: routeRefs, planned_access_length: path.length, conditional_prefix_length: steps.length,
+      ...(sicFrontier ? { sic_frontier_decision: sicFrontier } : {}),
       prefix_qualification: 'provisional_observed_path_with_per_step_falsifiers; never_global_state_certification', library_hypothesis_refs: question.hypothesis_refs,
       supplementary_evidence_refs: (options.prefix_evidence ?? []).filter(p => truth(p.evidence_ref)).map(p => p.evidence_ref).slice(0, 8), graph_transmitted_to_SRC: false, release_authority: false };
   }

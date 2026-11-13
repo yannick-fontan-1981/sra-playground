@@ -947,7 +947,7 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
     line.textContent = objective;
     plan.append(line);
   }
-  const planRecovery = planSource?.recoveryDecision?.objective;
+  const planRecovery = planSource?.recoveryDecision?.objective ?? planSource?.frontierStrategy?.objective;
   if (planRecovery) {
     const line = document.createElement('p');
     line.textContent = `SIC sub-objective: ${planRecovery.label}.`;
@@ -1062,7 +1062,7 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
 }
 
 function renderObjectives(panel: HTMLElement, progress: string, board: GameObservation | null,
-  current: Pick<NativeResolution, 'objective' | 'objectiveSource' | 'question' | 'recoveryDecision'>
+  current: Pick<NativeResolution, 'objective' | 'objectiveSource' | 'question' | 'recoveryDecision' | 'frontierStrategy'>
     & Partial<Pick<NativeResolution, 'context'>> | null | undefined,
   entries: readonly PursuedObjective[], timeline: ReturnType<typeof strategyTimeline>): void {
   const paragraph = (value: string) => { const p = document.createElement('p'); p.textContent = value; return p; };
@@ -1071,8 +1071,9 @@ function renderObjectives(panel: HTMLElement, progress: string, board: GameObser
   active.replaceChildren();
   active.append(paragraph(board?.state === 'WIN' ? 'The game reports victory.'
     : describePlanObjective(current) ?? 'No current native objective observed.'));
-  if (current?.recoveryDecision?.objective) {
-    active.append(paragraph(`SIC sub-objective: ${current.recoveryDecision.objective.label}.`));
+  const currentSubObjective = current?.recoveryDecision?.objective ?? current?.frontierStrategy?.objective;
+  if (currentSubObjective) {
+    active.append(paragraph(`SIC sub-objective: ${currentSubObjective.label}.`));
   }
   if (current?.objectiveSource === 'native' && current.question) {
     active.append(paragraph(`Immediate aim: ${nativeLabel(current.question).replace(/[.!?]$/, '')}.`));
@@ -1095,9 +1096,10 @@ function renderObjectives(panel: HTMLElement, progress: string, board: GameObser
       }
       if (entry.sic) row.append(paragraph(`SIC sub-objective: ${entry.sic.label}.`));
       const method = timeline.find(item => item.first.fromLevel === entry.level
-        && item.last.sequence >= entry.first && item.first.sequence <= entry.last && (item.rule || item.first.decision?.recoveryDecision)
+        && item.last.sequence >= entry.first && item.first.sequence <= entry.last
+        && (item.rule || item.first.decision?.recoveryDecision || item.first.decision?.frontierStrategy)
         && panel.querySelector(`[data-sic-method="${item.first.sequence}"]`));
-      const strategy = method?.first.decision?.recoveryDecision?.strategy ?? method?.rule?.title;
+      const strategy = method?.first.decision?.recoveryDecision?.strategy ?? method?.first.decision?.frontierStrategy?.title ?? method?.rule?.title;
       if (method && strategy) row.append(perspectiveJump(panel, 'strategies', `[data-sic-method="${method.first.sequence}"]`, `Strategy: ${strategy}`));
       list.append(row);
     }
@@ -1252,6 +1254,8 @@ function renderGenericTimeline(panel: HTMLElement, container: Element, selected:
     if (rule) factsList.push(['Need', rule.need], ['Situation', rule.situation]);
     if (searchOperation) factsList.push(['Access search', `${searchOperation.key} · ${searchOperation.description}`]);
     if (operation) factsList.push(['Native composition operation', `${operation.key} · ${operation.description}`]);
+    const frontierStrategy = first.decision?.frontierStrategy;
+    if (frontierStrategy) factsList.push(['Frontier strategy', frontierStrategy.title], ['Information objective', frontierStrategy.objective.label]);
     if (!operation && first.decision?.question) factsList.push(['What the engine is trying', nativeLabel(first.decision.question)]);
     factsList.push(['Plan', planText(first)], ['Return', `${last.sequence} · ${action(last)} · ${statuses[status]}${expected ? ` · Expected: ${expected}` : ''}.`]);
     if (check && status === 'contradicted') factsList.push(['Native check', nativeLabel(check)]);

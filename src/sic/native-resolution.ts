@@ -2,6 +2,7 @@ import { cropReturn } from '../logos-engine/v6-public-return-visuals.ts';
 import { contactRecoveryStrategies, isContactStrategy, isRecoveryStop, rootedRecoveryStrategy,
   type ContactRecoveryNeed, type ContactStrategy } from './active-recovery.ts';
 import type { AgendaEntry } from './strategy-agenda.ts';
+import { frontierStrategies } from './frontier-strategy.ts';
 import type { NativeBox, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
 
 export interface NativeStep {
@@ -58,6 +59,7 @@ export interface NativeResolution {
   readonly proposalRef: string | null;
   readonly planRevision?: number;
   readonly releasedPlan?: { readonly family: string; readonly planned: number; readonly objective: string | null };
+  readonly frontierStrategy?: { readonly title: string; readonly objective: SicObjective };
   readonly remainingSteps: number;
   readonly footprint: NativeBox | null;
   readonly context: NativePlanContext | null;
@@ -182,6 +184,12 @@ export function readNativeResolution(agent: {
   const template = record(proposal?.bundle_template);
   const question = label(record(proposal?.question ?? traced?.question)?.reason) ?? label(template?.purpose);
   const nativeObjective = label(template?.objective_ref);
+  const frontier = record(proposal?.sic_frontier_decision), frontierTarget = record(frontier?.objective);
+  const frontierId = label(frontier?.strategy), frontierObjectiveId = label(frontierTarget?.id), frontierObjectiveLabel = label(frontierTarget?.label);
+  const frontierStrategy = nativeObjective && frontierObjectiveId && frontierObjectiveLabel && frontierTarget?.parent === nativeObjective
+    && (frontierId === 'test_local_input' || frontierId === 'reach_open_input')
+    ? { title: frontierStrategies[frontierId], objective: { id: frontierObjectiveId, label: frontierObjectiveLabel, parent: nativeObjective } }
+    : undefined;
   const objectiveSource = nativeObjective ? 'native' : steps.length && question ? 'question' : steps.length ? 'unpublished' : null;
   const morphology = record(proposal?.morphology_plan);
   const entry = record(morphology?.entry_model);
@@ -332,6 +340,7 @@ export function readNativeResolution(agent: {
     composition: label(template?.composition_ref), compositions, subjects, route, proposalRef: label(proposal?.proposal_id),
     planRevision: natural(release?.decision_revision) ?? undefined,
     releasedPlan,
+    frontierStrategy,
     remainingSteps: Math.max(0, plan.length - routeIndex), footprint, context,
     guard: label(guard?.reason),
     nextIndex: pending && guard && Number.isSafeInteger(guard.index) ? Number(guard.index) : null, steps,
@@ -346,6 +355,7 @@ export interface DecisionSprites {
   readonly searchOperation?: string;
   readonly recoveryOperations?: readonly { key: string; finding: string }[];
   readonly recoveryDecision?: NativeResolution['recoveryDecision'];
+  readonly frontierStrategy?: NativeResolution['frontierStrategy'];
   readonly recoveryAction?: number;
   readonly composition: string | null;
   readonly question: string | null;
@@ -433,6 +443,7 @@ export function captureDecisionSprites(decision: NativeResolution, before: Nativ
   return { family: decision.family, objective: decision.objective, objectiveSource: decision.objectiveSource,
     operation: decision.operation, searchOperation: decision.searchOperation, recoveryOperations: decision.recoveryOperations,
     recoveryDecision: decision.recoveryDecision,
+    frontierStrategy: decision.frontierStrategy,
     recoveryAction: decision.recoveryAction, composition: decision.composition, question: decision.question,
     proposalRef: decision.proposalRef, planRevision: decision.planRevision, route: decision.route, steps: decision.steps.slice(decision.nextIndex ?? 0),
     remainingSteps: decision.remainingSteps, stepIndex: decision.nextIndex, context, destinationSprite, strategyTarget, strategyMeter, sprites };

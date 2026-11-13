@@ -41,7 +41,7 @@ export function recordPursuedObjective(items: readonly PursuedObjective[], item:
   if (!decision?.objective && !decision?.question) return items;
   const { objective, objectiveSource, question } = decision;
   const source = { objective, objectiveSource, question };
-  const sic = decision.recoveryDecision?.objective ?? undefined;
+  const sic = decision.recoveryDecision?.objective ?? decision.frontierStrategy?.objective ?? undefined;
   const last = items.at(-1);
   const advanced = item.toLevel > item.fromLevel;
   const interrupted = Boolean(item.restart);

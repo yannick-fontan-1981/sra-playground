@@ -8,6 +8,7 @@ export const strategyFacts = {
   explicitPrediction: 'The first step has a prediction',
   publishedQuestion: 'The engine published a question',
   activeRecovery: 'SIC contact recovery selected the guarded action',
+  activeFrontier: 'The SIC frontier agenda selected how to investigate an untried command',
 } as const;
 export type StrategyFact = keyof typeof strategyFacts;
 
@@ -78,6 +79,7 @@ export function strategyTimeline(returns: readonly DirectionalReturn[], configur
     if (first.decision!.steps[0]?.expected) facts.add('explicitPrediction');
     if (first.decision!.question) facts.add('publishedQuestion');
     if (first.decision!.recoveryDecision?.objective) facts.add('activeRecovery');
+    if (first.decision!.frontierStrategy) facts.add('activeFrontier');
     const status = last.nativeCheck?.matched === false ? 'contradicted' : last.toLevel > last.fromLevel ? 'advanced'
       : next && last.decision!.remainingSteps > 1 && replaces(last, next) ? 'replaced'
         : last.nativeCheck?.matched === true ? 'confirmed' : 'unverified';
