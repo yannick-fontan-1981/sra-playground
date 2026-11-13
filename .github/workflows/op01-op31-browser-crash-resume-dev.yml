@@ -24,9 +24,10 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm ci
-      - name: Apply safe-boundary autosave wiring
+      - name: Apply strict crash-safe persistence wiring
         run: |
           node scripts/apply-op01-op31-browser-crash-autosave.mjs
+          node scripts/apply-op01-op31-browser-crash-indexeddb.mjs
           node scripts/apply-op01-op31-browser-crash-app-launch.mjs
           node scripts/apply-op01-op31-browser-crash-return-presentation.mjs
       - name: Typecheck
