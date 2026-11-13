@@ -67,20 +67,35 @@ function benchmarkSessionRef(descriptor) {
   return `native-cost:${descriptor.variant}:${descriptor.game}:${descriptor.invocationIndex}`;
 }
 
+function validateMethodRefInput(value) {
+  if (value !== 'full' && value !== 'identity') {
+    throw new TypeError('methodRefInput must be full or identity');
+  }
+  return value;
+}
+
 /**
  * Bind the real reconstructed Region evidence path to a benchmark candidate hook.
  *
  * methodRefFor is deliberately external: Region must not invent reusable-method
  * identity from pixel similarity. If it returns undefined, ACTION6 evidence is
  * observed but not admitted into Region state.
+ *
+ * The default `full` mode preserves the general callback contract with cloned
+ * observations and evidence. The internal `identity` mode is for an explicitly
+ * scoped method-ref producer that needs only action/session identity and never
+ * reads or mutates public frames. It enables readonly runner inputs and avoids
+ * redundant 64x64 frame clones without changing Region evidence acquisition.
  */
 export function createRegionInterventionCandidateHook({
   methodRefFor,
+  methodRefInput = 'full',
   owner = new RegionInterventionOwner(),
 } = {}) {
   if (methodRefFor !== undefined && typeof methodRefFor !== 'function') {
     throw new TypeError('methodRefFor must be a function when provided');
   }
+  const qualifiedMethodRefInput = validateMethodRefInput(methodRefInput);
   if (!(owner instanceof RegionInterventionOwner)) {
     throw new TypeError('owner must be a RegionInterventionOwner');
   }
@@ -95,6 +110,8 @@ export function createRegionInterventionCandidateHook({
 
   return {
     id: 'region_intervention',
+    hookInputMode: qualifiedMethodRefInput === 'identity' ? 'readonly' : 'cloned',
+    methodRefInput: qualifiedMethodRefInput,
     owner,
     stats,
     beforeAction({ action }) {
@@ -118,16 +135,19 @@ export function createRegionInterventionCandidateHook({
       if (!evidence || !evidence.useful) return { status: 'no-useful-effect' };
       stats.usefulAction6Evidence += 1;
 
-      const methodRef = methodRefFor
-        ? await methodRefFor({
-            index,
-            action: structuredClone(action),
-            beforeObservation: structuredClone(beforeObservation),
-            observation: structuredClone(observation),
-            descriptor: structuredClone(descriptor),
-            evidence: structuredClone(evidence),
-          })
-        : undefined;
+      let methodRef;
+      if (methodRefFor) {
+        methodRef = qualifiedMethodRefInput === 'identity'
+          ? await methodRefFor({ index, descriptor })
+          : await methodRefFor({
+              index,
+              action: structuredClone(action),
+              beforeObservation: structuredClone(beforeObservation),
+              observation: structuredClone(observation),
+              descriptor: structuredClone(descriptor),
+              evidence: structuredClone(evidence),
+            });
+      }
 
       if (methodRef === undefined) return { status: 'unbound-method' };
       if (typeof methodRef !== 'string' || methodRef.length === 0) {
