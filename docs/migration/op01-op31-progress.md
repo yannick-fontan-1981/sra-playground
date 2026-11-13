@@ -1,24 +1,18 @@
 # Progression OP01 à OP31 du Logos Engine
 
-Dernière consolidation : 12 novembre 2026.
+Dernière consolidation : 13 novembre 2026.
 
 ## Références canoniques
 
 - Dépôt : `yannick-fontan-1981/sra-playground`
 - Branche canonique cible : `recovery/site109-reconstruction-20261112`
-- Baseline canonique initiale de la tranche :
-  `97e036fc6609a4822feffe0f834a120f831c1397`
-- Canonique lot 9B réconciliée :
-  `85d8c5e57a26ae3f02a0e89c49f5894dc571bf70`
-- Merge de réconciliation :
-  `70943d5715e7e44680ab307f0e8ddca27dd020aa`
+- Baseline canonique de la tranche courante :
+  `e3fa1901452423a714d3a47d5a469dbf112c55b0`
 - Branche de travail :
-  `op01-op31-browser-field-stock-20261112`
-- Commit fonctionnel FieldStock qualifié :
-  `bce3e89cbfd1cfc21245edf675d27870df524607`
-- Commit combiné qualifié :
-  `70943d5715e7e44680ab307f0e8ddca27dd020aa`
-- Donneur OP01–OP31 : `op01-op31-c0-c7-audit`
+  `op01-op31-browser-addressed-acquisition-20261113`
+- Commit fonctionnel qualifié :
+  `99c1d23353dbfec3e98c3770fee362b757ec2701`
+- Donneur OP01-OP31 : `op01-op31-c0-c7-audit`
 - Plan stable : `docs/migration/op01-op31-verification-plan.md`
 - Historique détaillé antérieur :
   `docs/migration/op01-op31-progress-history-through-b093f406.md`
@@ -38,6 +32,8 @@ Dernière consolidation : 12 novembre 2026.
   `docs/recovery/op01-op31-browser-agent-controller-20261112.md`
 - Transport FieldStock navigateur :
   `docs/recovery/op01-op31-browser-field-stock-transport-20261112.md`
+- Acquisition adressée publique :
+  `docs/recovery/op01-op31-browser-addressed-acquisition-20261113.md`
 
 Le présent fichier décrit l’état courant. Les versions antérieures restent dans
 Git et dans les rapports de recovery afin de préserver les preuves détaillées.
@@ -72,8 +68,12 @@ La campagne commune possède maintenant :
 - un contrôleur Agent explicite et unique activé dans `main.ts` ;
 - deux propriétaires navigateur enregistrés, FieldStock OP18 et fallback OP28 ;
 - un chemin Manual toujours séparé ;
-- le manifeste et le harness ABBA Worker/Pyodide du lot 9B dans le même état
-  combiné qualifié.
+- une mesure publique différée des entités ;
+- une acquisition passive du premier modèle adressé depuis un retour ACTION6
+  déjà autorisé par un propriétaire explicite ;
+- une calibration par réponses corrélées et une rétention prudente à la
+  frontière officielle ;
+- le manifeste et le harness ABBA Worker/Pyodide dans l’état intégré.
 
 Le contrôleur produit utilise uniquement le seam navigateur direct. Le Worker
 reste disponible pour les autres runtimes et les tests, mais n’est pas instancié
@@ -81,9 +81,11 @@ par `main.ts`.
 
 Statut global :
 
-**OP28 est active dans le produit ; le transport et la consommation OP18 produit
-sont qualifiés avec un stock revalidé ; l’acquisition initiale du prior et le
-coût officiel C7 restent ouverts.**
+**OP28 est active dans le produit ; OP18 est transportée et consommée avec un
+stock revalidé ; l’acquisition et la rétention initiales d’un modèle adressé
+sont qualifiées depuis une ACTION6 explicitement autorisée ; le propriétaire
+produit de cette première ACTION6, la continuité entre activations et le coût C7
+restent ouverts.**
 
 Cette reconstruction ne prouve ni une identité binaire avec Site 109, ni une
 parité totale V5/V6/V7.
@@ -98,12 +100,16 @@ parité totale V5/V6/V7.
   ACTION6 et erreurs ;
 - `src/product-presentation-effects.ts` : présentation et effets DOM ;
 - `src/runtime/v6-browser-agent-observation.ts` : conversion publique 64 × 64 ;
+- `src/runtime/v6-public-observation-measurement.ts` : mesure publique et
+  identités de composantes différées ;
+- `src/runtime/v6-public-addressed-field-learning.ts` : correspondances
+  résiduelles strictes et dépendances de réponse ;
 - `src/runtime/v6-browser-common-campaign-host.ts` : propriétaires OP18/OP28,
-  dispatch, acquisition, observation passive et présentation ;
+  dispatch, acquisition, apprentissage passif, revalidation et présentation ;
 - `src/runtime/v6-browser-agent-controller.ts` : propriétaire unique de la
   session Agent et boucle bornée ;
-- `src/runtime/observed-addressed-material-runtime.ts` : rétention et
-  revalidation FieldStock.
+- `src/runtime/observed-addressed-material-runtime.ts` : acquisition locale,
+  calibration, rétention et revalidation FieldStock.
 
 ### Seam Worker conservé
 
@@ -116,13 +122,16 @@ Le Worker acquiert correctement les retours OP18/OP28, y compris les retours
 terminaux ou sans budget de décision. Il n’est pas utilisé par le contrôleur
 produit actuel.
 
-### Autorité et propriétaires
+### Autorité, modèles et propriétaires
 
 - `src/logos-engine/v6-native-authority.ts` ;
 - `src/logos-engine/v6-neutral-common-caller.ts` ;
 - `src/logos-engine/v6-common-campaign-owner.ts` ;
 - `src/logos-engine/v6-public-single-action-caller-adapter.ts` ;
 - `src/logos-engine/v6-field-stock-caller-adapter.ts` ;
+- `src/logos-engine/addressed-field-fit.ts` ;
+- `src/logos-engine/addressed-field-response.ts` ;
+- `src/logos-engine/addressed-field-retention.ts` ;
 - `src/logos-engine/field-stock.ts`.
 
 ## État C0 à C7
@@ -130,13 +139,13 @@ produit actuel.
 | Lot | État courant | Preuve acquise | Dette suivante |
 | --- | --- | --- | --- |
 | C0 | **terminé** | 31 calculs inventoriés et dispositions explicites | maintenir les statuts par besoin |
-| C1 | **contrôleur produit actif et qualifié** | campagne unique, même `needId`, transfert Manual gracieux, observation passive après acquisition | snapshot/restauration du propriétaire et du prior |
-| C2 | **OP18 transportée dans Worker et navigateur ; OP28 active dans le produit** | OP18 change la proposition suivante dans le host produit avec stock revalidé ; OP28 traverse le produit réel | acquisition initiale honnête du prior et propriétaire OP31 |
+| C1 | **contrôleur produit actif et qualifié** | campagne unique, même `needId`, acquisition sélectionnée avant observation passive, transfert Manual gracieux | snapshot/restauration de la campagne, du modèle, du prior et du retour en attente |
+| C2 | **OP18 transportée ; OP28 active ; acquisition initiale passive qualifiée** | modèle acquis, calibré puis retenu depuis des retours ACTION6 publics corrélés ; OP18 change la proposition suivante avec stock revalidé | propriétaire produit justifiant la première ACTION6 et propriétaire OP31 |
 | C3 | **calculs et recouvrements qualifiés** | OP03/04/08/09/11/12/14/26 auditables | appeler uniquement depuis un producteur réel |
 | C4 | **audit complet, usages génériques non démontrés** | OP01/02/05/10/15/25 calculables | aucun raccord artificiel |
 | C5 | **retours spécialisés préservés** | FieldStock et Region couvrent notamment OP06/29/30 avec effet futur | contrat physique Region complet |
-| C6 | **audit complet** | inconnue, échec borné et impossibilité restent distincts | aucun raccord sans preuve de blocage ou reprise |
-| C7 | **ouvert** | 330 tests, typecheck, build, câblage et harness ABBA présent | exécution des quatre runners et médianes par jeu sous +10 % |
+| C6 | **audit complet** | inconnue, échec borné, ambiguïté et impossibilité restent distincts | aucun raccord sans preuve de blocage ou reprise |
+| C7 | **ouvert** | 333 tests, typecheck, build, câblage et harness ABBA présent | exécution des quatre runners et médianes par jeu sous +10 % |
 
 ## Contrôleur Agent produit
 
@@ -152,12 +161,105 @@ Il garantit :
 - arrêt sur `none`, `ambiguous`, `pending`, `blocked`, terminal, obsolescence,
   erreur ou limite ;
 - limite par défaut de 64 actions ;
+- acquisition par le propriétaire sélectionné avant toute observation passive ;
 - acquisition avant décision suivante ;
 - transfert Agent vers Manual après règlement du retour en vol ;
 - priorité du remplacement de jeu sur une simple demande Manual ;
 - fermeture `disposed` stable pendant `pagehide`.
 
 Le mode Manual reste direct et n’appelle aucune campagne Agent.
+
+## Acquisition initiale adressée
+
+### Besoin
+
+Le runtime FieldStock produit démarrait vide. Il pouvait transporter et consommer
+OP18 avec un stock injecté ou revalidé, mais ne pouvait pas construire son
+premier modèle depuis un retour produit réel.
+
+### Source de preuve
+
+La nouvelle chaîne ne traite qu’une ACTION6 :
+
+- déjà autorisée par un propriétaire explicite ;
+- portant deux coordonnées entières publiques ;
+- revenue dans le même niveau, le même compteur de niveaux terminés et le même
+  état officiel ;
+- observée après l’acquisition du propriétaire sélectionné.
+
+Elle ne produit ni l’action ni ses coordonnées.
+
+### Entités publiques
+
+Les composantes visibles reçoivent une signature déterministe construite depuis
+la palette, la taille et le masque local. La position absolue reste séparée.
+
+La correspondance :
+
+1. retire les occurrences exactement stationnaires ;
+2. accepte seulement un résidu ancien et un résidu nouveau pour la même
+   signature ;
+3. conserve tout autre changement comme `unresolved` ;
+4. n’utilise aucune proximité ou classification implicite.
+
+Les modifications du grand composant de fond restent donc explicitement
+inconnues et ne sont pas attribuées au mobile.
+
+### Acquisition et calibration
+
+`fitAddressedField()` n’acquiert le modèle qu’avec :
+
+- un mouvement résiduel unique ;
+- un exemplaire stationnaire de même signature ;
+- un mobile rectangulaire ;
+- une seule cible de même silhouette et palette différente ;
+- une enceinte unique centrée autour de cette cible ;
+- un point ACTION6 appartenant au corps déplacé.
+
+Le même retour devient le premier échantillon de
+`recordAddressedFieldResponse()`. Les retours suivants peuvent :
+
+- relever la borne inférieure sur déplacement aligné ;
+- enregistrer une borne supérieure sur réponse stationnaire ;
+- réfuter le modèle sur déplacement vers une autre ancre ;
+- rester non résolus sans mutation si la correspondance est ambiguë.
+
+Après deux témoins alignés et une borne supérieure, une frontière officielle
+convertit le modèle en prior compact avec `alignment_supported: true`.
+
+### Ordre produit
+
+La chaîne qualifiée est :
+
+1. action physique du propriétaire sélectionné ;
+2. retour public ;
+3. acquisition avec le même `needId` par ce propriétaire ;
+4. apprentissage passif FieldStock ;
+5. frontière ou revalidation éventuelle ;
+6. notification produit ;
+7. présentation ;
+8. décision suivante.
+
+FieldStock ne vole pas le retour sélectionné, ne prétend pas avoir autorisé
+l’action et ne peut pas proposer depuis le hook passif.
+
+### Preuve
+
+La preuve qualifiée démontre :
+
+- déplacement `(1,1) → (2,1)` et acquisition du modèle ;
+- déplacement `(2,1) → (3,1)` et deuxième témoin aligné ;
+- ACTION6 distante sans mouvement et borne supérieure `16` ;
+- frontière officielle et rétention du premier prior ;
+- conservation des bornes et du support d’alignement ;
+- apprentissage dans le vrai host navigateur seulement après l’acquisition du
+  propriétaire ACTION6 explicite.
+
+Disposition :
+
+**acquisition, calibration et première rétention adressée démontrées depuis des
+retours ACTION6 publics explicites ; le propriétaire produit de la première
+action reste absent.**
 
 ## Chaîne OP18 produit
 
@@ -166,20 +268,11 @@ Le mode Manual reste direct et n’appelle aucune campagne Agent.
 Un stock adressé retenu et revalidé laisse une demande typée insatisfaite alors
 qu’ACTION6 est disponible.
 
-### Production
+### Production et consommation
 
-`BrowserFieldStockCampaignTransport` construit le contexte depuis :
-
-- l’observation publique 64 × 64 ;
-- les lignes de palette copiées ;
-- le niveau et le score publics ;
-- le runtime FieldStock exact du propriétaire ;
-- un budget borné.
-
-Les composantes visibles ne sont matérialisées que lorsqu’un prior attend une
-revalidation.
-
-### Appel et consommation
+`BrowserFieldStockCampaignTransport` construit le contexte depuis l’observation
+publique, les lignes de palette, le niveau, le score, le runtime exact et un
+budget borné.
 
 `FieldStockCallerOwnerAdapter` :
 
@@ -190,32 +283,15 @@ revalidation.
 - appelle `afterStock()` puis `recordStock()` ;
 - modifie la proposition suivante.
 
-La preuve navigateur qualifiée produit ACTION6 `(3,1)`, acquiert son retour,
-puis produit ACTION6 `(4,1)`.
+La preuve navigateur produit ACTION6 `(3,1)`, acquiert son retour, puis produit
+ACTION6 `(4,1)`.
 
 Disposition OP18 :
 
 **transport, release, action, retour, acquisition et effet sur la décision
-suivante démontrés dans le produit lorsqu’un stock courant revalidé existe.**
-
-Limite : le runtime produit par défaut démarre vide. L’acquisition initiale du
-premier prior et sa persistance entre sessions ne sont pas encore raccordées.
-
-## Observation passive FieldStock
-
-Après l’acquisition du propriétaire sélectionné, le même retour public peut être
-observé passivement par FieldStock avant présentation.
-
-Cette observation permet notamment :
-
-- de détecter une frontière atteinte par une action OP28 ;
-- de convertir un stock actif en prior compact ;
-- de tenter une revalidation sur la nouvelle scène publique ;
-- de conserver le prior comme hypothèse non applicable si la scène ne confirme
-  pas sa géométrie.
-
-Elle ne peut pas acquérir le `needId` sélectionné, prétendre avoir choisi
-l’action ou émettre une seconde action depuis le hook.
+suivante démontrés dans le produit lorsqu’un stock courant revalidé existe. Le
+prior peut maintenant provenir de la chaîne publique d’acquisition, mais aucune
+première ACTION6 autonome n’est encore générée.**
 
 ## Chaîne OP28 produit
 
@@ -223,22 +299,13 @@ Le fallback public strict produit une proposition uniquement lorsque
 l’observation expose exactement une action simple distincte hors RESET et ne
 requiert aucune coordonnée manquante.
 
-La chaîne reste :
-
-1. observation publique ;
-2. proposition propriétaire OP28 ;
-3. bundle validé ;
-4. autorité Logos ;
-5. dispatch produit ;
-6. retour public ;
-7. acquisition avec le même `needId` ;
-8. observation passive éventuelle ;
-9. présentation ;
-10. arrêt ou décision suivante.
-
 ACTION6 seule sans coordonnées ne produit rien. Plusieurs actions publiques
-produisent `none`. Plusieurs propriétaires resteraient `ambiguous`. Aucun
+produisent `none`. Plusieurs propriétaires produisent `ambiguous`. Aucun
 fallback n’est autorisé.
+
+La mesure supplémentaire des composantes n’est pas exécutée sur le chemin OP28
+simple. Elle reste limitée aux revalidations de prior et aux retours ACTION6
+explicitement évalués.
 
 ## Disposition des 31 opérations
 
@@ -261,7 +328,7 @@ fallback n’est autorisé.
 | OP15 | calcul qualifié, usage produit non démontré | aucun sélecteur réel d’objectif intermédiaire |
 | OP16 | calcul qualifié, usage produit non démontré | aucun producteur de blocage global prouvé |
 | OP17 | calcul qualifié, usage produit non démontré | aucune reprise autorisée avec préservation complète |
-| OP18 | **chaîne produit transportée et consommée avec stock revalidé** | bundle, action, même `needId`, acquisition et proposition suivante ; prior initial absent |
+| OP18 | **chaîne produit transportée et consommée ; chemin initial vers le prior qualifié** | modèle acquis depuis retour ACTION6 externe, calibré, retenu, revalidable puis consommable ; premier propriétaire ACTION6 absent |
 | OP19 | calcul qualifié, usage produit non démontré | aucun préfixe forcé prouvé produit |
 | OP20 | calcul qualifié, usage produit non démontré | aucune question d’utilité d’objet liée à une stratégie active |
 | OP21 | calcul qualifié, usage produit non démontré | aucune question d’utilité d’espace liée à un objectif actif |
@@ -271,55 +338,50 @@ fallback n’est autorisé.
 | OP25 | calcul qualifié, usage produit non démontré | non-réfutation conservée sans fausse preuve de faisabilité |
 | OP26 | manquante ou recouverte familialement | aucun domaine commun d’accès vérifiés vers une cible |
 | OP27 | calcul qualifié, usage produit non démontré | aucune permutation avec préservation complète |
-| OP28 | **chaîne produit active sous condition stricte** | bundle admis, action physique, même `needId`, acquisition avant suite |
-| OP29 | fonction spécialisée démontrée | `afterStock()` et Region comparent les retours utiles |
-| OP30 | fonction spécialisée démontrée | `recordStock()` et Region changent les propositions futures |
+| OP28 | **chaîne produit active sous condition stricte** | bundle admis, action physique, même `needId`, acquisition avant suite ; aucune coordonnée ACTION6 inventée |
+| OP29 | fonction spécialisée démontrée | réponses adressées, `afterStock()` et Region comparent les retours utiles |
+| OP30 | fonction spécialisée démontrée | rétention, `recordStock()` et Region changent les connaissances futures |
 | OP31 | appel générique disponible, contribution absente | aucun propriétaire d’objectif produit ne maintient ou réoriente la suite |
 
 ## Qualification
 
-### Code FieldStock avant réconciliation
+### Tranche FieldStock précédente
 
-- run GitHub Actions : `43354913250` ;
-- job : `131654533095` ;
-- commit : `bce3e89cbfd1cfc21245edf675d27870df524607` ;
+- état combiné qualifié : `70943d5715e7e44680ab307f0e8ddca27dd020aa` ;
 - régression complète : **330/330** ;
 - typecheck et build : réussis.
 
-### État combiné après réconciliation canonique
+### Acquisition adressée publique
 
-- PR de réconciliation : `#54` ;
-- merge de réconciliation : `70943d5715e7e44680ab307f0e8ddca27dd020aa` ;
-- run GitHub Actions : `43355369134` ;
-- job : `131656026153` ;
-- commit qualifié : `70943d5715e7e44680ab307f0e8ddca27dd020aa` ;
+- run GitHub Actions : `43357819760` ;
+- job : `131663946577` ;
+- commit qualifié : `99c1d23353dbfec3e98c3770fee362b757ec2701` ;
 - Node : `22.18.0` ;
 - `npm ci` : réussi ;
 - typecheck : réussi ;
-- régression complète : **330/330** ;
+- régression complète : **333/333** ;
 - échecs, annulations, tests ignorés et TODO : `0` ;
 - build de production : réussi ;
-- modules transformés : `53` ;
+- modules transformés : `56` ;
 - galerie : 100 jeux, 636 prévisualisations, 4 atlas natifs ;
 - câblage : `logos-product-wiring-present` ;
-- fichiers source inspectés : `23`.
+- fichiers source inspectés : `24`.
 
-Les cinq tests propres au transport navigateur FieldStock réussissent dans
-l’état combiné. Deux vulnérabilités de dépendances de sévérité haute
-préexistantes restent signalées par `npm ci`.
+Deux vulnérabilités de dépendances de sévérité haute préexistantes restent
+signalées par `npm ci`.
 
 ## Performance
 
 Critère : la médiane de session complète de chaque jeu doit augmenter de
 strictement moins de 10 %. STCK et SMLP restent séparés.
 
-Le transport FieldStock ne matérialise les composantes visibles que lorsqu’un
-prior attend une revalidation. Le build et les tests ne permettent cependant
-pas de fermer le coût d’activation.
+Le chemin OP28 simple ne matérialise pas les composantes publiques ajoutées. Le
+coût nouveau est limité aux retours ACTION6 évalués pour apprentissage et aux
+revalidations de prior déjà prévues.
 
-Le manifeste, les références A/B et le harness ABBA Worker/Pyodide sont présents
-dans l’état combiné. Les quatre mesures de coût ne sont pas exécutées dans cette
-tranche et aucune compensation entre jeux n’est permise.
+Cette limitation structurelle, le build et les tests ne remplacent pas les
+mesures de session complète. Le manifeste, les références A/B et le harness
+ABBA Worker/Pyodide sont présents, mais les quatre mesures restent à exécuter.
 
 Verdict : **fonctionnellement qualifié, coût officiel à confirmer.**
 
@@ -328,10 +390,10 @@ et médianes publiés.
 
 ## Limites ouvertes
 
-- aucun producteur produit du premier prior FieldStock ;
-- aucune persistance FieldStock entre deux activations Agent ;
-- snapshot/restauration de la campagne et de l’action en attente non raccordés au
-  produit ;
+- aucun propriétaire produit ne justifie encore la première ACTION6 adressée ;
+- aucune persistance du modèle, du prior ou du stock entre activations Agent ;
+- snapshot/restauration de la campagne, du `needId` et de l’action en attente non
+  raccordés au produit ;
 - Region n’est pas encore un propriétaire physique du contrôleur produit ;
 - aucun propriétaire OP31 ;
 - performance C7 non close ;
@@ -339,13 +401,15 @@ et médianes publiés.
 
 ## Feuille de route actualisée
 
-### Étape immédiate : acquisition initiale et continuité FieldStock
+### Étape immédiate : propriétaire initial et continuité
 
-1. identifier un événement public suffisant pour retenir le premier prior
-   adressé sans oracle ;
-2. exiger plusieurs observations et réponses corrélées avant promotion ;
-3. injecter le prior dans le runtime produit uniquement après preuve ;
-4. ajouter snapshot/restauration du prior, du stock et du `needId` en attente ;
+1. identifier un besoin réel produisant des coordonnées ACTION6 depuis la seule
+   observation publique ;
+2. enregistrer ce producteur comme propriétaire neutre sans priorité implicite ;
+3. démontrer que ses retours alimentent l’acquisition et la rétention ici
+   qualifiées ;
+4. ajouter snapshot/restauration atomiques du modèle, du prior, du stock, du
+   propriétaire commun et du retour en attente ;
 5. vérifier une réactivation Agent sans perte ni double consommation.
 
 ### Étape suivante : élargissement symbolique
