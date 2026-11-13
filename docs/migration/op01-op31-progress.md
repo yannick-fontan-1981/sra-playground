@@ -1326,3 +1326,32 @@ Détail :
 
 Statut :
 **fonctionnellement qualifié, performance officielle à confirmer**.
+
+
+## C7 — readiness officielle renforcée après restauration du harness
+
+Éléments désormais présents :
+- protocole ABBA de coût ;
+- adapter runSession explicite ;
+- helper de campagne ;
+- worker public ;
+- roadmap V6 reconstruite.
+
+Toujours absent :
+- `docs/migration/v6-entry-point-progress.json`.
+
+Toujours manquant :
+- quatre runners natifs A/STCK, A/SMLP, B/STCK, B/SMLP avec corpus qualifié.
+
+Le gate C7 exige maintenant un manifeste
+`docs/recovery/native-loop-runner-manifest.json` où chaque runner fixe :
+`runnerRef`, `sourceRef`, `seed`, `corpusRef`, `timingScope` et preuves.
+
+Tests du gate renforcé :
+**4/4**.
+
+Détail :
+`docs/recovery/op01-op31-official-readiness-status.md`.
+
+Statut :
+**fonctionnellement qualifié, performance officielle à confirmer**.
