@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "status": "live-smlp-product-campaign-qualified",
   "qualification": "functional-real-browser-not-official-performance",
   "date": "2026-11-13",
@@ -12,6 +12,37 @@
     "artifact_id": 14010025857,
     "artifact_name": "op01-op31-live-smlp-product-campaign",
     "artifact_digest": "sha256:328d3536f7bbdffef972f4870dbc8243a34b4c89198ef8cff6756fbb4bdbe7e4"
+  },
+  "canonical_reconciliation": {
+    "canonical_base_commit": "418a566339966513797397f0e8541b21744f8647",
+    "canonical_base_subject": "Merge STCK joint-channel reconstruction",
+    "branch": "op01-op31-live-smlp-pyodide-rebased-20261113",
+    "reconciliation_pull_request": 76,
+    "reconciliation_merge_commit": "b2c4eac98d5c5a6d96a0c2ba2ffa4df5ed668b34",
+    "canonical_progress_restore_commit": "9729f89348266ed6979c18703f42d383cfd4d3a8"
+  },
+  "combined_qualification": {
+    "repository": "yannick-fontan-1981/sra-playground",
+    "branch": "op01-op31-live-smlp-pyodide-rebased-20261113",
+    "qualified_commit": "17257541e75c5565baa534645e9e66998f2e57d3",
+    "workflow_run": 43365742241,
+    "workflow_job": 131689606950,
+    "artifact_id": 14010406288,
+    "artifact_name": "op01-op31-live-smlp-product-campaign-rebased",
+    "artifact_size_bytes": 2013,
+    "artifact_digest": "sha256:872a9f762b73c70cc7e07db3a30f14af6ea3aaf7d881f58f0c6284fc901cfe83",
+    "canonical_stck_guards": {
+      "typescript_tests": {
+        "file": "tests/v6-public-stck-joint-channels.test.ts",
+        "passed": 7,
+        "failed": 0
+      },
+      "durable_proof_tests": {
+        "file": "tests/lot9c3-stck-joint-proof.test.mjs",
+        "passed": 4,
+        "failed": 0
+      }
+    }
   },
   "environment": {
     "node": "22.18.0",
@@ -203,7 +234,7 @@
     "hasStock": false,
     "samples": 0
   },
-  "regression": {
+  "initial_regression": {
     "tests": 363,
     "passed": 363,
     "failed": 0,
@@ -218,10 +249,29 @@
     "product_wiring": "logos-product-wiring-present",
     "scanned_source_files": 25
   },
+  "regression": {
+    "tests": 374,
+    "passed": 374,
+    "failed": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "production_build": "pass",
+    "modules_transformed": 62,
+    "gallery_games": 100,
+    "gallery_previews": 636,
+    "native_atlases": 4,
+    "product_wiring": "logos-product-wiring-present",
+    "scanned_source_files": 26
+  },
   "performance": {
     "qualified": false,
     "disposition": "not_measured_for_acceptance",
     "scope": "C7 Region remains unchanged; this report does not qualify product-owner cost"
+  },
+  "site_publication": {
+    "performed": false,
+    "reason": "This tranche is GitHub-only and no Site publication was requested or qualified."
   },
   "known_dependency_note": "npm ci reported two pre-existing high severity vulnerabilities."
 }
