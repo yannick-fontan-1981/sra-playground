@@ -142,3 +142,16 @@ Le SHA d45f2ce6566d052bbd3477c5653e99ae24381a0a a passé le garde strict du run 
 La qualification complète du run 43359480115 passe 335/335 tests et répète une mesure acceptée sur les deux jeux.
 
 **Statut C7 courant : accepté.**
+
+## Requalification C7 de l’identité 5669bb2e
+
+Le commit `5669bb2edf38b1fa431050a2ca996833aad86876` remplace l’identité courante de mesure après ajout du contrat de configuration et du rapport fail-fast du benchmark.
+
+- garde strict : run `43361492824`, job `131675839595` ;
+- STCK : +0,8464 %, accepté ;
+- SMLP : −5,0546 %, accepté ;
+- qualification complète : run `43361492842`, job `131675894613` ;
+- 339/339 tests, build, parité Worker/Pyodide et 24/24 contrats réussis ;
+- répétition : STCK +0,4643 %, SMLP +0,1379 %, acceptés.
+
+L’ancienne mesure reste historique et n’est pas transférée à cette identité.

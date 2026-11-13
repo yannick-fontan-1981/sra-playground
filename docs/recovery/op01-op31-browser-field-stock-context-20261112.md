@@ -262,19 +262,21 @@ signalées par `npm ci`. Cette tranche ne les introduit ni ne les modifie.
 
 ## Qualification C7 officielle
 
-Le SHA d45f2ce6566d052bbd3477c5653e99ae24381a0a a passé le protocole strict A1/B1/B2/A2 :
+Le SHA `5669bb2edf38b1fa431050a2ca996833aad86876` a passé le protocole strict A1/B1/B2/A2 :
 
-- STCK : 59,35 ms en A, 56,70 ms en B, soit −4,4650 % ;
-- SMLP : 114,70 ms en A, 120,05 ms en B, soit +4,6643 % ;
+- STCK : 41,35 ms en A, 41,70 ms en B, soit +0,8464 % ;
+- SMLP : 87,05 ms en A, 82,65 ms en B, soit −5,0546 % ;
 - seuil : strictement inférieur à +10 % par jeu ;
 - compensation entre jeux : interdite ;
 - verdict : accepté pour les deux jeux.
 
-Le run principal est 43359480072, job 131669316899. Une répétition indépendante dans le run 43359480115, job 131669385975, obtient +2,0423 % sur STCK et −0,9298 % sur SMLP, également acceptés.
+Le run principal est `43361492824`, job `131675839595`. La qualification complète du run `43361492842`, job `131675894613`, répète une mesure acceptée : +0,4643 % sur STCK et +0,1379 % sur SMLP.
 
-La qualification complète du même SHA passe 335/335 tests, le typecheck, le build, la parité Worker/Pyodide et 24/24 contrats benchmark/sourceRef.
+Le même SHA passe 339/339 tests, le typecheck, le build, la parité Worker/Pyodide et 24/24 contrats benchmark/sourceRef.
 
-Preuve durable : docs/recovery/op01-op31-c7-official-acceptance-20261113.md.
+Le correctif de configuration permet la requalification d’un manifeste déjà accepté et transforme toute erreur de chargement en rapport explicite, sans attente de timeout.
+
+Preuve durable : `docs/recovery/op01-op31-c7-official-acceptance-20261113.md`.
 
 ## Statut
 

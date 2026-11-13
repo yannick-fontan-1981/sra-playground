@@ -337,3 +337,16 @@ Preuve : `docs/recovery/op01-op31-c7-official-acceptance-20261113.md`.
 3. compléter le candidat produit Region et les acquisitions passives ;
 4. ajouter snapshot/restauration ;
 5. ne publier le Site qu’après liaison explicite au SHA GitHub canonique.
+
+## Requalification C7 de l’identité 5669bb2e
+
+Le commit `5669bb2edf38b1fa431050a2ca996833aad86876` remplace l’identité courante de mesure après ajout du contrat de configuration et du rapport fail-fast du benchmark.
+
+- garde strict : run `43361492824`, job `131675839595` ;
+- STCK : +0,8464 %, accepté ;
+- SMLP : −5,0546 %, accepté ;
+- qualification complète : run `43361492842`, job `131675894613` ;
+- 339/339 tests, build, parité Worker/Pyodide et 24/24 contrats réussis ;
+- répétition : STCK +0,4643 %, SMLP +0,1379 %, acceptés.
+
+L’ancienne mesure reste historique et n’est pas transférée à cette identité.

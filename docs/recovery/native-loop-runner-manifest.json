@@ -1,7 +1,7 @@
 {
   "version": 1,
   "kind": "reconstructed-native-region-benchmark-manifest",
-  "status": "ready-for-official-abba-measurement",
+  "status": "official-abba-measurement-accepted",
   "historicalRunnerIdentityRecovered": false,
   "historicalCorpusRecovered": false,
   "sourceRefs": {
@@ -162,12 +162,87 @@
       "headSha": "85cc125d62ece043ce6d4d908bd801f340af4e08",
       "sourceRefsComputed": true,
       "manifestVerification": "passed-before-commit"
+    },
+    "finalQualificationRun": {
+      "runId": 43361492842,
+      "jobId": 131675894613,
+      "headSha": "5669bb2edf38b1fa431050a2ca996833aad86876",
+      "node": "22.18.0",
+      "typecheck": "passed",
+      "regression": {
+        "passed": 339,
+        "failed": 0,
+        "skipped": 0,
+        "cancelled": 0
+      },
+      "build": "passed",
+      "workerPyodideParity": {
+        "status": "passed",
+        "samplesCompared": 4,
+        "stepsCompared": 31
+      },
+      "nativeContracts": {
+        "passed": 24,
+        "failed": 0
+      }
     }
   },
   "officialMeasurement": {
-    "executed": false,
-    "result": null,
-    "reason": "benchmark config validation and fail-fast reporting changed the common source identity; strict official ABBA measurement pending"
+    "executed": true,
+    "status": "accepted",
+    "accepted": true,
+    "protocol": "A1/B1/B2/A2",
+    "isolation": "non-isolated-shared-github-actions-runner-no-repository-concurrency",
+    "thresholdPercent": 10,
+    "strictlyLessThan": true,
+    "gamesEvaluatedSeparately": true,
+    "crossGameCompensationAllowed": false,
+    "runId": 43361492824,
+    "jobId": 131675839595,
+    "headSha": "5669bb2edf38b1fa431050a2ca996833aad86876",
+    "artifactId": 14008357592,
+    "artifactName": "op01-op31-strict-native-cost-report",
+    "totals": {
+      "invocations": 40,
+      "warmupSessions": 8,
+      "warmupActions": 24,
+      "measuredSessions": 32,
+      "measuredActions": 400
+    },
+    "games": {
+      "STCK": {
+        "referenceMedianMs": 41.35,
+        "candidateMedianMs": 41.7,
+        "relativeIncreasePercent": 0.8464328899690399,
+        "accepted": true
+      },
+      "SMLP": {
+        "referenceMedianMs": 87.05,
+        "candidateMedianMs": 82.65,
+        "relativeIncreasePercent": -5.054566341184941,
+        "accepted": true
+      }
+    },
+    "repeatQualification": {
+      "runId": 43361492842,
+      "jobId": 131675894613,
+      "headSha": "5669bb2edf38b1fa431050a2ca996833aad86876",
+      "accepted": true,
+      "games": {
+        "STCK": {
+          "referenceMedianMs": 53.85,
+          "candidateMedianMs": 54.1,
+          "relativeIncreasePercent": 0.46425255338227167,
+          "accepted": true
+        },
+        "SMLP": {
+          "referenceMedianMs": 108.75,
+          "candidateMedianMs": 108.9,
+          "relativeIncreasePercent": 0.13793103448074273,
+          "accepted": true
+        }
+      }
+    }
   },
   "officialMeasurementHistory": [
     {

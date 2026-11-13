@@ -285,3 +285,16 @@ La reconstruction peut devenir la nouvelle baseline canonique seulement lorsque 
 
 Jusque-là, la branche est viable pour travailler, tester, intégrer et
 reconstruire, mais pas pour revendiquer une équivalence exacte à Site 109.
+
+## Requalification C7 de l’identité 5669bb2e
+
+Le commit `5669bb2edf38b1fa431050a2ca996833aad86876` remplace l’identité courante de mesure après ajout du contrat de configuration et du rapport fail-fast du benchmark.
+
+- garde strict : run `43361492824`, job `131675839595` ;
+- STCK : +0,8464 %, accepté ;
+- SMLP : −5,0546 %, accepté ;
+- qualification complète : run `43361492842`, job `131675894613` ;
+- 339/339 tests, build, parité Worker/Pyodide et 24/24 contrats réussis ;
+- répétition : STCK +0,4643 %, SMLP +0,1379 %, acceptés.
+
+L’ancienne mesure reste historique et n’est pas transférée à cette identité.
