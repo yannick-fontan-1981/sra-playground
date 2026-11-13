@@ -1,0 +1,227 @@
+{
+  "version": 1,
+  "status": "live-smlp-product-campaign-qualified",
+  "qualification": "functional-real-browser-not-official-performance",
+  "date": "2026-11-13",
+  "source": {
+    "repository": "yannick-fontan-1981/sra-playground",
+    "branch": "op01-op31-live-smlp-pyodide-campaign-20261113",
+    "qualified_commit": "ef54b59ed68e75207ba77a182016b357248c6cc6",
+    "workflow_run": 43364453319,
+    "workflow_job": 131685442943,
+    "artifact_id": 14010025857,
+    "artifact_name": "op01-op31-live-smlp-product-campaign",
+    "artifact_digest": "sha256:328d3536f7bbdffef972f4870dbc8243a34b4c89198ef8cff6756fbb4bdbe7e4"
+  },
+  "environment": {
+    "node": "22.18.0",
+    "reference_python": "3.12.16",
+    "browser_python": "3.14.2",
+    "chrome": "156.0.8078.79"
+  },
+  "transport": "BrowserGameRuntime -> game-worker.ts -> Pyodide -> game_bridge.py -> custom-games.zip -> BrowserCommonCampaignHost -> JointChannelOwner -> OP28 -> product dispatch",
+  "game": {
+    "code": "SMLP",
+    "game_id": "smlp-c3000001",
+    "seed": 0,
+    "start_level": 1
+  },
+  "backends": {
+    "reference": "python-native-archive",
+    "candidate": "python-wasm"
+  },
+  "initial": {
+    "frameHash": "0be203b6ce80ac043c30f42b08b925eeccb433d124957070d77b93903e67635c",
+    "availableActionIds": [
+      5,
+      6,
+      7
+    ],
+    "state": "NOT_FINISHED",
+    "level": 1,
+    "levelsCompleted": 0
+  },
+  "cycles": [
+    {
+      "index": 1,
+      "observation_revision": 0,
+      "gate_orientation": "open_horizontal",
+      "action": {
+        "id": 6,
+        "x": 32,
+        "y": 26
+      },
+      "changed_pixel_count": 9,
+      "frame_hash": "90888a03979b86c5f515ab0e21b11512314861cd067517f5d34705a23bbac1ac",
+      "reference_frame_hash": "90888a03979b86c5f515ab0e21b11512314861cd067517f5d34705a23bbac1ac",
+      "reference_match": true,
+      "available_action_ids": [
+        5,
+        6,
+        7
+      ],
+      "state": "NOT_FINISHED",
+      "level": 1,
+      "levels_completed": 0,
+      "need_id_sha256": "8248935010700f2decd36601ad5d87375ed3b4ed9076fc0980a25bdb89260257",
+      "dispatch_accepted": true,
+      "dispatch_stale": false,
+      "acquisition_routed": true,
+      "acquisition_duplicate": false,
+      "channel_ids": [
+        "public_action_availability_v1",
+        "public_visible_target_v1"
+      ],
+      "all_channels_acquired": true,
+      "field_learning_status": "field_fit_unresolved",
+      "field_knowledge_status": "empty",
+      "events": [
+        "action:6:32:26",
+        "action-return",
+        "passive-field-stock",
+        "acquired",
+        "present"
+      ],
+      "busy_transitions": [
+        true,
+        false
+      ]
+    },
+    {
+      "index": 2,
+      "observation_revision": 1,
+      "gate_orientation": "closed_vertical",
+      "action": {
+        "id": 6,
+        "x": 32,
+        "y": 26
+      },
+      "changed_pixel_count": 9,
+      "frame_hash": "0be203b6ce80ac043c30f42b08b925eeccb433d124957070d77b93903e67635c",
+      "reference_frame_hash": "0be203b6ce80ac043c30f42b08b925eeccb433d124957070d77b93903e67635c",
+      "reference_match": true,
+      "available_action_ids": [
+        5,
+        6,
+        7
+      ],
+      "state": "NOT_FINISHED",
+      "level": 1,
+      "levels_completed": 0,
+      "need_id_sha256": "11f8d8d15d2bf780b8e1685e313eb27dab854e390885f66aed8e46383f27c826",
+      "dispatch_accepted": true,
+      "dispatch_stale": false,
+      "acquisition_routed": true,
+      "acquisition_duplicate": false,
+      "channel_ids": [
+        "public_action_availability_v1",
+        "public_visible_target_v1"
+      ],
+      "all_channels_acquired": true,
+      "field_learning_status": "field_fit_unresolved",
+      "field_knowledge_status": "empty",
+      "events": [
+        "action:6:32:26",
+        "action-return",
+        "passive-field-stock",
+        "acquired",
+        "present"
+      ],
+      "busy_transitions": [
+        true,
+        false
+      ]
+    },
+    {
+      "index": 3,
+      "observation_revision": 2,
+      "gate_orientation": "open_horizontal",
+      "action": {
+        "id": 6,
+        "x": 32,
+        "y": 26
+      },
+      "changed_pixel_count": 9,
+      "frame_hash": "90888a03979b86c5f515ab0e21b11512314861cd067517f5d34705a23bbac1ac",
+      "reference_frame_hash": "90888a03979b86c5f515ab0e21b11512314861cd067517f5d34705a23bbac1ac",
+      "reference_match": true,
+      "available_action_ids": [
+        5,
+        6,
+        7
+      ],
+      "state": "NOT_FINISHED",
+      "level": 1,
+      "levels_completed": 0,
+      "need_id_sha256": "21a746d51ecc5aa37f59f44f5296e3af5d0432edab5a42e6089037898e13cd16",
+      "dispatch_accepted": true,
+      "dispatch_stale": false,
+      "acquisition_routed": true,
+      "acquisition_duplicate": false,
+      "channel_ids": [
+        "public_action_availability_v1",
+        "public_visible_target_v1"
+      ],
+      "all_channels_acquired": true,
+      "field_learning_status": "field_fit_unresolved",
+      "field_knowledge_status": "empty",
+      "events": [
+        "action:6:32:26",
+        "action-return",
+        "passive-field-stock",
+        "acquired",
+        "present"
+      ],
+      "busy_transitions": [
+        true,
+        false
+      ]
+    }
+  ],
+  "causality": {
+    "owner_id": "joint_channels_v1",
+    "required_channels": [
+      "public_action_availability_v1",
+      "public_visible_target_v1"
+    ],
+    "event_order": [
+      "action:6:32:26",
+      "action-return",
+      "passive-field-stock",
+      "acquired",
+      "present"
+    ],
+    "same_need_id_through_campaign_and_both_channels": true,
+    "need_ids_distinct_between_cycles": true,
+    "selected_acquisition_before_passive_observation": true,
+    "passive_field_stock_remained_empty": true
+  },
+  "final_field_stock": {
+    "status": "empty",
+    "hasModel": false,
+    "hasPrior": false,
+    "hasStock": false,
+    "samples": 0
+  },
+  "regression": {
+    "tests": 363,
+    "passed": 363,
+    "failed": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "production_build": "pass",
+    "modules_transformed": 62,
+    "gallery_games": 100,
+    "gallery_previews": 636,
+    "native_atlases": 4,
+    "product_wiring": "logos-product-wiring-present",
+    "scanned_source_files": 25
+  },
+  "performance": {
+    "qualified": false,
+    "disposition": "not_measured_for_acceptance",
+    "scope": "C7 Region remains unchanged; this report does not qualify product-owner cost"
+  },
+  "known_dependency_note": "npm ci reported two pre-existing high severity vulnerabilities."
+}
