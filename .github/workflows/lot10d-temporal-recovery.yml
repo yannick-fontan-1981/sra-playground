@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Normalize ActionBoundary source for Node strip-only mode
+      - name: Finalize ActionBoundary temporal identity and uncertainty window
         shell: bash
         run: |
           python - <<'PY'
@@ -22,120 +22,73 @@ jobs:
 
           path = Path('src/runtime/v6-temporal-action-boundary.ts')
           source = path.read_text(encoding='utf-8')
-
-          old_refusal = """export class TemporalActionBoundaryDispatchRefusedError
-            extends TemporalActionBoundaryError {
-            readonly outcomeStatus = 'not_dispatched_release_refused' as const;
-            readonly redeliveryPermitted = false as const;
-            readonly reconciliationRequired = true as const;
-            readonly transportAttempted = false as const;
-
-            constructor(
-              readonly reason: TemporalActionBoundaryDispatchRefusalReason,
-            ) {
-              super(`temporal ActionBoundary refused before transport: ${reason}`);
-              this.name = 'TemporalActionBoundaryDispatchRefusedError';
-            }
-          }
-          """
-          new_refusal = """export class TemporalActionBoundaryDispatchRefusedError
-            extends TemporalActionBoundaryError {
-            readonly outcomeStatus = 'not_dispatched_release_refused' as const;
-            readonly redeliveryPermitted = false as const;
-            readonly reconciliationRequired = true as const;
-            readonly transportAttempted = false as const;
-            readonly reason: TemporalActionBoundaryDispatchRefusalReason;
-
-            constructor(reason: TemporalActionBoundaryDispatchRefusalReason) {
-              super(`temporal ActionBoundary refused before transport: ${reason}`);
-              this.name = 'TemporalActionBoundaryDispatchRefusedError';
-              this.reason = reason;
-            }
-          }
-          """
-
-          old_uncertain = """export class TemporalActionBoundaryUncertainError
-            extends TemporalActionBoundaryError {
-            readonly outcomeStatus = 'unknown' as const;
-            readonly redeliveryPermitted = false as const;
-            readonly reconciliationRequired = true as const;
-
-            constructor(
-              readonly dispatchRef: string,
-              readonly requestDigest: string,
-              readonly journal: TemporalActionBoundaryJournal,
-              cause?: unknown,
-            ) {
-              super(
-                `dispatch outcome is unknown for ${dispatchRef}; redelivery is forbidden until external reconciliation`,
-              );
-              this.name = 'TemporalActionBoundaryUncertainError';
-              if (cause !== undefined) {
-                (this as Error & { cause?: unknown }).cause = cause;
-              }
-            }
-          }
-          """
-          new_uncertain = """export class TemporalActionBoundaryUncertainError
-            extends TemporalActionBoundaryError {
-            readonly outcomeStatus = 'unknown' as const;
-            readonly redeliveryPermitted = false as const;
-            readonly reconciliationRequired = true as const;
-            readonly dispatchRef: string;
-            readonly requestDigest: string;
-            readonly journal: TemporalActionBoundaryJournal;
-
-            constructor(
-              dispatchRef: string,
-              requestDigest: string,
-              journal: TemporalActionBoundaryJournal,
-              cause?: unknown,
-            ) {
-              super(
-                `dispatch outcome is unknown for ${dispatchRef}; redelivery is forbidden until external reconciliation`,
-              );
-              this.name = 'TemporalActionBoundaryUncertainError';
-              this.dispatchRef = dispatchRef;
-              this.requestDigest = requestDigest;
-              this.journal = structuredClone(journal);
-              if (cause !== undefined) {
-                (this as Error & { cause?: unknown }).cause = cause;
-              }
-            }
-          }
-          """
-
-          mandatory = (
-              (old_refusal, new_refusal, 'dispatch-refused constructor'),
-              (old_uncertain, new_uncertain, 'uncertain constructor'),
-          )
           changed = False
-          for old, new, label in mandatory:
+
+          valid_revision = """function validRevision(value: number): boolean {
+            return Number.isInteger(value) && value >= 0;
+          }
+          """
+          valid_revision_and_epoch = """function validRevision(value: number): boolean {
+            return Number.isInteger(value) && value >= 0;
+          }
+
+          function validLevelEpoch(value: string | number): boolean {
+            return typeof value === 'string'
+              ? validRef(value)
+              : validRevision(value);
+          }
+          """
+          if 'function validLevelEpoch(' not in source:
+              if valid_revision not in source:
+                  raise SystemExit('cannot locate validRevision helper')
+              source = source.replace(
+                  valid_revision,
+                  valid_revision_and_epoch,
+                  1,
+              )
+              changed = True
+
+          old_epoch_checks = (
+              '!validRevision(response.observationIdentity.levelEpoch)',
+              '!validRevision(dispatch.observationIdentity.levelEpoch)',
+          )
+          new_epoch_checks = (
+              '!validLevelEpoch(response.observationIdentity.levelEpoch)',
+              '!validLevelEpoch(dispatch.observationIdentity.levelEpoch)',
+          )
+          for old, new in zip(old_epoch_checks, new_epoch_checks):
               if old in source:
                   source = source.replace(old, new, 1)
                   changed = True
               elif new not in source:
-                  raise SystemExit(f'cannot locate expected {label} source')
+                  raise SystemExit(f'cannot locate temporal epoch check: {old}')
 
-          old_hook = """  await input.qualificationHooks?.afterAttemptPersistedBeforeTransport?.(
-            structuredClone(request),
-            structuredClone(persistedAttemptJournal),
-          );
-
-          let response: TemporalEnvironmentActionResponse;
-          try {
-            response = await input.transport.execute(structuredClone(request));
-          """
-          new_hook = """  let response: TemporalEnvironmentActionResponse;
-          try {
-            await input.qualificationHooks?.afterAttemptPersistedBeforeTransport?.(
-              structuredClone(request),
-              structuredClone(persistedAttemptJournal),
-            );
-            response = await input.transport.execute(structuredClone(request));
-          """
-          if old_hook in source:
-              source = source.replace(old_hook, new_hook, 1)
+          lines = source.splitlines()
+          hook_marker = 'await input.qualificationHooks?.afterAttemptPersistedBeforeTransport?.('
+          hook_index = next(
+              (index for index, line in enumerate(lines) if line.strip() == hook_marker),
+              None,
+          )
+          if hook_index is not None:
+              response_index = next(
+                  index
+                  for index in range(hook_index + 1, len(lines))
+                  if lines[index].strip() == 'let response: TemporalEnvironmentActionResponse;'
+              )
+              hook_lines = lines[hook_index:response_index]
+              while hook_lines and not hook_lines[-1].strip():
+                  hook_lines.pop()
+              del lines[hook_index:response_index]
+              if lines[hook_index].strip() != 'let response: TemporalEnvironmentActionResponse;':
+                  raise SystemExit('response declaration did not move into expected position')
+              if lines[hook_index + 1].strip() != 'try {':
+                  raise SystemExit('transport try block did not follow response declaration')
+              indented_hook = [
+                  f'  {line}' if line.strip() else line
+                  for line in hook_lines
+              ]
+              lines[hook_index + 2:hook_index + 2] = indented_hook
+              source = '\n'.join(lines) + '\n'
               changed = True
 
           if changed:
@@ -145,7 +98,7 @@ jobs:
             git config user.name github-actions[bot]
             git config user.email 41898282+github-actions[bot]@users.noreply.github.com
             git add src/runtime/v6-temporal-action-boundary.ts
-            git commit -m "fix(lot10d): support Node strip-only ActionBoundary"
+            git commit -m "fix(lot10d): align ActionBoundary temporal identity"
             git push origin HEAD:recovery/lot10d-temporal-selection-rebased-20261112
           fi
       - uses: actions/setup-node@v4
