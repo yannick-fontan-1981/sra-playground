@@ -1,0 +1,36 @@
+name: V6 reconstructed entry-point registry
+
+on:
+  pull_request:
+    paths:
+      - 'docs/migration/v6-entry-point-progress.json'
+      - 'docs/recovery/v6-entry-point-registry-reconstruction-20261113.md'
+      - 'scripts/check-v6-entry-point-progress.mjs'
+      - 'tests/v6-entry-point-progress.test.ts'
+      - '.github/workflows/v6-entry-point-registry.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-26.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.18.0
+          cache: npm
+      - run: npm ci
+      - name: Validate machine registry and evidence paths
+        run: node scripts/check-v6-entry-point-progress.mjs
+      - name: Run registry guards
+        run: node --experimental-transform-types --test tests/v6-entry-point-progress.test.ts
+      - name: Preserve OP catalogue and call-site regressions
+        run: >-
+          node --experimental-transform-types --test
+          tests/v6-operations.test.ts
+          tests/op01-op31-call-sites.test.ts
+      - name: Production build
+        run: npm run build
