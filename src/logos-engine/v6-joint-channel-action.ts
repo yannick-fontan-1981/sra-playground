@@ -8,10 +8,16 @@ import type { CampaignLogosActionPayload } from './v6-common-campaign-owner.ts';
 import type { AuthorityObservationIdentity } from './v6-native-authority.ts';
 import type { SymbolicRecord } from './v6-operations.ts';
 
+const payloadCache = new WeakMap<AgentObservation, Map<string, CampaignLogosActionPayload>>();
+
 function nonEmpty(value: unknown, label: string): asserts value is string {
   if (typeof value !== 'string' || value.length === 0) {
     throw new TypeError(`${label} must be a non-empty string`);
   }
+}
+
+function payloadCacheKey(action: AgentAction, jointRef: string): string {
+  return `${jointRef}\u0000${JSON.stringify(action)}`;
 }
 
 /**
@@ -21,6 +27,11 @@ function nonEmpty(value: unknown, label: string): asserts value is string {
  * This helper performs no perception, ranking or tie-breaking. It merely binds
  * an agreed action to the current public observation so independently produced
  * contributions can prove exact release-contract equality.
+ *
+ * Multiple channels contributing to the same in-memory observation receive the
+ * same immutable-by-contract payload identity. This avoids constructing and
+ * fingerprinting an identical symbolic bundle once per channel. The cache is
+ * observation-scoped and disappears when that public observation is collected.
  */
 export function prepareJointChannelActionPayload(
   observation: AgentObservation,
@@ -31,6 +42,10 @@ export function prepareJointChannelActionPayload(
   if (observation.state !== 'NOT_FINISHED') return undefined;
   if (!isAgentAction(action)) return undefined;
   if (!observation.availableActionIds.includes(action.id)) return undefined;
+
+  const key = payloadCacheKey(action, jointRef);
+  const cached = payloadCache.get(observation)?.get(key);
+  if (cached) return cached;
 
   const selectedAction = structuredClone(action);
   const actionRef = `ACTION${selectedAction.id}`;
@@ -91,10 +106,17 @@ export function prepareJointChannelActionPayload(
     observationRevision: observation.sequence,
   };
 
-  return {
+  const payload: CampaignLogosActionPayload = {
     action: selectedAction,
     bundle,
     state,
     identity,
   };
+  let byKey = payloadCache.get(observation);
+  if (!byKey) {
+    byKey = new Map<string, CampaignLogosActionPayload>();
+    payloadCache.set(observation, byKey);
+  }
+  byKey.set(key, payload);
+  return payload;
 }
