@@ -24,24 +24,19 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm ci
-      - name: Repair temporary generator quoting
+      - name: Restrict temporary patch driver to remaining host changes
         run: |
           python - <<'PY'
           from pathlib import Path
           path = Path('scripts/apply-op01-op31-browser-session-resume.mjs')
-          source = path.read_text()
-          source = source.replace(
-              "?? ((observation, ordinal) => `browser-agent:${observation.gameCode}:${ordinal}`);",
-              "?? ((observation, ordinal) => ['browser-agent', observation.gameCode, ordinal].join(':'));",
-          )
-          source = source.replace(
-              "return `fresh-session:${ordinal}`;",
-              "return ['fresh-session', ordinal].join(':');",
-          )
-          path.write_text(source)
+          source = path.read_text(encoding='utf-8')
+          marker = '\nconst controller = `'
+          if marker not in source:
+              raise SystemExit('temporary patch boundary not found')
+          path.write_text(source.split(marker, 1)[0] + '\n', encoding='utf-8')
           PY
           node --check scripts/apply-op01-op31-browser-session-resume.mjs
-      - name: Apply browser session resume patch
+      - name: Apply browser host session resume patch
         run: node scripts/apply-op01-op31-browser-session-resume.mjs
       - name: Targeted browser continuity tests
         run: node --experimental-transform-types --test tests/v6-browser-session-resume.test.ts tests/v6-common-campaign-session-continuity.test.ts tests/v6-browser-common-campaign-host.test.ts tests/v6-browser-agent-controller.test.ts tests/v6-browser-product-campaign-host.test.ts
