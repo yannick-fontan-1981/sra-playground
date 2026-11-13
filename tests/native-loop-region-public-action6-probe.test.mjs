@@ -22,6 +22,12 @@ function addVisibleStckButton(frame) {
   }
 }
 
+function hideStckShopBar(frame) {
+  for (let y = 54; y <= 58; y += 1) {
+    for (let x = 0; x < 64; x += 1) frame[y][x] = 5;
+  }
+}
+
 test('SMLP probe selects the center of the first visible closed-gate glyph', () => {
   const f = blank(2);
   const x = 20;
@@ -77,6 +83,7 @@ test('STCK probe falls back to visible shop button when the stack is empty', () 
 
 test('STCK probe does not click a stack card unless the public shop bar proves shop state', () => {
   const f = blank(4);
+  hideStckShopBar(f);
   for (let y = 47; y <= 51; y += 1) {
     for (let x = 1; x <= 8; x += 1) f[y][x] = 9;
   }
