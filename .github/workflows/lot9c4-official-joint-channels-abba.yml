@@ -1,0 +1,73 @@
+name: Lot 9C4 official strict joint channels ABBA
+
+on:
+  push:
+    branches:
+      - recovery/lot9c4-official-joint-performance-20261113
+  workflow_dispatch:
+
+concurrency:
+  group: lot9c4-official-strict-joint-channels-abba
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      LOT9C4_MEASUREMENT_ISOLATION: shared-github-actions-runner-workflow-concurrency-only
+      LOT9C4_OFFICIAL_BENCHMARK_REPORT: lot9c4-official-native-joint-channels-abba-report.json
+      LOT9C4_SOURCE_REFS_REPORT: lot9c4-native-joint-channel-source-refs.json
+      LOT9C2_REPORT: lot9c4-smlp-functional-report.json
+      LOT9C3_REPORT: lot9c4-stck-functional-report.json
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.18.0'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: npm ci
+      - name: Build production bundle
+        run: npm run build
+      - name: Verify strict SMLP and STCK joint seams
+        run: |
+          node --experimental-transform-types --test \
+            tests/v6-public-addressed-joint-channels.test.ts \
+            tests/v6-public-stck-joint-channels.test.ts \
+            tests/native-loop-joint-channel-official-hook.test.ts
+      - name: Requalify real public SMLP and strict STCK corpora
+        run: |
+          node --experimental-transform-types scripts/qualify-lot9c2-public-addressed-joint.mjs
+          node --experimental-transform-types scripts/qualify-lot9c3-public-stck-joint.mjs
+      - name: Verify ABBA, runner adapter and source identity contracts
+        run: |
+          node --test \
+            tests/native-loop-cost-harness.test.mjs \
+            tests/native-loop-session-adapter.test.mjs \
+            tests/native-loop-browser-worker-dispatch.test.mjs \
+            tests/native-loop-joint-channel-official-source-refs.test.mjs
+      - name: Run complete TypeScript regression suite
+        run: node --experimental-transform-types --test tests/*.test.ts
+      - name: Show browser runtime
+        run: |
+          command -v google-chrome-stable || command -v google-chrome || command -v chromium || command -v chromium-browser
+          (google-chrome-stable --version || google-chrome --version || chromium --version || chromium-browser --version)
+      - name: Execute official A1 B1 B2 A2 protocol
+        run: node scripts/run-native-joint-channel-official-benchmark.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lot9c4-official-strict-joint-channels-abba
+          path: |
+            lot9c4-official-native-joint-channels-abba-report.json
+            lot9c4-native-joint-channel-source-refs.json
+            lot9c4-smlp-functional-report.json
+            lot9c4-stck-functional-report.json
+          if-no-files-found: warn
