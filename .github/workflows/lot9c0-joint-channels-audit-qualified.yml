@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - recovery/lot9c0-joint-channels-audit-qualified-20261113
+  pull_request:
+    branches:
+      - recovery/site109-reconstruction-20261112
   workflow_dispatch:
 
 permissions:
