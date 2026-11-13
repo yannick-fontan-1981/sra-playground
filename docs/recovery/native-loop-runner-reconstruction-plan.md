@@ -247,3 +247,62 @@ Reference side A is now structurally complete at the bridge-contract level.
 The next reconstruction target is B/STCK, where the candidate-only
 `region_intervention` hook must be made explicit without changing the
 transport, corpus, seed or game session configuration.
+
+
+## Reconstruction progress — B/STCK and B/SMLP explicit runner contracts
+
+The two candidate runner contracts are now explicit.
+
+They preserve the A-side session configuration:
+- same `game_bridge` boundary;
+- same game ids;
+- same `python-wasm` backend;
+- same seed 0;
+- same start level 1;
+- same public corpus;
+- same requested action counts.
+
+The only structural B-side addition is a mandatory candidate hook with identity:
+
+`region_intervention`
+
+The hook is inside the measured action loop and is called exactly once before
+each game action. Missing, malformed or differently labelled hooks fail closed.
+
+Combined explicit-runner suite:
+**12/12 passed**.
+
+The suite proves:
+- A/STCK starts through the STCK bridge contract;
+- A/SMLP starts through the SMLP bridge contract;
+- B/STCK uses the same STCK transport/corpus plus the explicit candidate hook;
+- B/SMLP uses the same SMLP transport/corpus plus the explicit candidate hook;
+- A/B game ids and backends remain identical;
+- `createNativeLoopRunSession` routes descriptors to all four explicit runners;
+- there is no silent runner substitution.
+
+Important remaining limitation:
+
+The current public corpus selects ACTION5 while available and never invents
+ACTION6 coordinates. The reconstructed Region evidence/proposal path is
+ACTION6-specific. Therefore these B runner contracts do **not** yet prove that
+the real `region_intervention` implementation executes meaningful Region
+work during STCK/SMLP sessions.
+
+B/STCK and B/SMLP status:
+
+**runner contract reconstructed; real Region hook binding and real native
+execution still required**.
+
+Consequently the four runner identities are now structurally present, but
+official ABBA remains blocked until:
+1. the bridge is executed against the real Pyodide/custom-games archive;
+2. the B hook is bound to the actual candidate implementation rather than a
+   contract stub;
+3. the measured corpus is shown to exercise the candidate perimeter or an
+   evidence-backed alternative corpus is reconstructed;
+4. sourceRef identities for A and B are pinned.
+
+Status remains:
+
+**fonctionnellement qualifié, performance officielle à confirmer**.
