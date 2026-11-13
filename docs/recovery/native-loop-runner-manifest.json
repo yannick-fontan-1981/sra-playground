@@ -153,16 +153,20 @@
       "status": "passed"
     },
     "sourceRefRun": {
-      "runId": 43353935289,
+      "runId": 43354155809,
+      "jobId": 131652043976,
+      "headSha": "d3aebb4dce5f4a82b80e38b962f2a2cf1c58cebc",
       "tests": 7,
       "typecheck": "passed",
       "sourceRefsComputed": true,
-      "manifestVerification": "pending rerun after stored refs update"
+      "manifestVerification": "passed",
+      "artifactId": 14005396940,
+      "artifactZipSha256": "614583a684e9d9dd94e924c0d86e5d33caff64836fe1d249c8540162b4194156"
     }
   },
   "officialMeasurement": {
     "executed": false,
     "result": null,
-    "reason": "manifest completed; explicitly non-isolated official ABBA execution is the next step"
+    "reason": "manifest verified; explicitly non-isolated official ABBA execution is the next step"
   }
 }
