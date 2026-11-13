@@ -131,37 +131,32 @@ function orientationAt(
   return openVertical ? 'open_vertical' : undefined;
 }
 
-function firstVisibleSmlpGate(observation: AgentObservation): GateMatch | undefined {
+function visibleSmlpGates(
+  observation: AgentObservation,
+  limit = Number.POSITIVE_INFINITY,
+): GateMatch[] {
   const pixels = validatePublicImage(observation);
+  const matches: GateMatch[] = [];
   for (let y = 8; y <= 58; y += 1) {
     for (let x = 1; x <= 62; x += 1) {
       const orientation = orientationAt(pixels, x, y);
       if (!orientation) continue;
-      return {
+      matches.push({
         x,
         y,
         orientation,
         patchSignature: patchValues(pixels, x, y).join(','),
-      };
+      });
+      if (matches.length >= limit) return matches;
     }
   }
-  return undefined;
+  return matches;
 }
 
-/**
- * Public producer used by the first real 9C2 corpus.
- *
- * It scans only the visible 64x64 palette frame, using the source-qualified
- * SMLP gate glyphs and an explicit row-major tie rule. It never reads engine
- * state, fixtures, control identifiers, routes or prepared solutions.
- */
-export function producePublicSmlpGateCandidate(
+function candidateFromMatch(
   observation: AgentObservation,
-): PublicSmlpGateCandidate | undefined {
-  if (observation.state !== 'NOT_FINISHED') return undefined;
-  const match = firstVisibleSmlpGate(observation);
-  if (!match) return undefined;
-
+  match: GateMatch,
+): PublicSmlpGateCandidate {
   const currentObservationRef = observationRef(observation);
   const targetRef = [
     'public-smlp-gate',
@@ -190,6 +185,37 @@ export function producePublicSmlpGateCandidate(
       `producer:${PUBLIC_SMLP_GATE_PRODUCER_ID}`,
     ],
   };
+}
+
+/**
+ * Public producer used by the first real 9C2 corpus.
+ *
+ * It scans only the visible 64x64 palette frame, using the source-qualified
+ * SMLP gate glyphs and the already-qualified explicit row-major tie rule. It
+ * never reads engine state, fixtures, control identifiers, routes or prepared
+ * solutions.
+ */
+export function producePublicSmlpGateCandidate(
+  observation: AgentObservation,
+): PublicSmlpGateCandidate | undefined {
+  if (observation.state !== 'NOT_FINISHED') return undefined;
+  const [match] = visibleSmlpGates(observation, 1);
+  return match ? candidateFromMatch(observation, match) : undefined;
+}
+
+/**
+ * Strict product variant: expose a candidate only when the public frame contains
+ * exactly one source-qualified SMLP gate. Several gates remain unresolved; no
+ * row-major ranking is introduced into the active browser product.
+ */
+export function produceUniquePublicSmlpGateCandidate(
+  observation: AgentObservation,
+): PublicSmlpGateCandidate | undefined {
+  if (observation.state !== 'NOT_FINISHED') return undefined;
+  const matches = visibleSmlpGates(observation, 2);
+  return matches.length === 1
+    ? candidateFromMatch(observation, matches[0]!)
+    : undefined;
 }
 
 function candidateContext(
@@ -319,14 +345,26 @@ export function createPublicSmlpAddressedJointChannels(): readonly JointChannel[
   ];
 }
 
-/** Build the explicit per-channel context expected by V6CommonCampaignDecisionPort. */
-export function publicSmlpAddressedJointContext(
-  observation: AgentObservation,
+function contextFromCandidate(
+  candidate: PublicSmlpGateCandidate | undefined,
 ): Readonly<Record<string, unknown>> {
-  const candidate = producePublicSmlpGateCandidate(observation);
   if (!candidate) return {};
   return {
     [PUBLIC_ACTION_AVAILABILITY_CHANNEL_ID]: structuredClone(candidate),
     [PUBLIC_VISIBLE_TARGET_CHANNEL_ID]: structuredClone(candidate),
   };
+}
+
+/** Build the already-qualified row-major context used by Lot 9C2. */
+export function publicSmlpAddressedJointContext(
+  observation: AgentObservation,
+): Readonly<Record<string, unknown>> {
+  return contextFromCandidate(producePublicSmlpGateCandidate(observation));
+}
+
+/** Build the ambiguity-preserving context used by the active browser product. */
+export function publicUniqueSmlpAddressedJointContext(
+  observation: AgentObservation,
+): Readonly<Record<string, unknown>> {
+  return contextFromCandidate(produceUniquePublicSmlpGateCandidate(observation));
 }
