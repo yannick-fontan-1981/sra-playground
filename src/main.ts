@@ -185,6 +185,9 @@ app.innerHTML = `
           <div class="sic-tabs" role="tablist" aria-label="SIC perspectives" data-sic-tabs>
             <button type="button" id="sic-perceptions-tab" role="tab" aria-selected="true" aria-controls="sic-perceptions">Perceptions</button>
             <button type="button" id="sic-information-tab" role="tab" aria-selected="false" aria-controls="sic-information" tabindex="-1">Information</button>
+            <button type="button" id="sic-strategies-tab" role="tab" aria-selected="false" aria-controls="sic-strategies" tabindex="-1">Strategies</button>
+            <button type="button" id="sic-objectives-tab" role="tab" aria-selected="false" aria-controls="sic-objectives" tabindex="-1">Objectives</button>
+            <button type="button" id="sic-plans-tab" role="tab" aria-selected="false" aria-controls="sic-plans" tabindex="-1">Action plans</button>
           </div>
           <div id="sic-perceptions" role="tabpanel" aria-labelledby="sic-perceptions-tab" tabindex="0">
             <div class="sic-card">
@@ -211,10 +214,18 @@ app.innerHTML = `
           <div id="sic-information" role="tabpanel" aria-labelledby="sic-information-tab" tabindex="0" hidden>
             <div class="sic-tabs sic-subtabs" role="tablist" aria-label="Types of information" data-sic-tabs>
               <button type="button" id="sic-effects-tab" role="tab" aria-selected="true" aria-controls="sic-effects">Command effects</button>
+              <button type="button" id="sic-understood-tab" role="tab" aria-selected="false" aria-controls="sic-understood" tabindex="-1">Understood controls</button>
               <button type="button" id="sic-animations-tab" role="tab" aria-selected="false" aria-controls="sic-animations" tabindex="-1">Animations</button>
               <button type="button" id="sic-game-model-tab" role="tab" aria-selected="false" aria-controls="sic-game-model" tabindex="-1">Game model</button>
             </div>
+            <div id="sic-understood" role="tabpanel" aria-labelledby="sic-understood-tab" tabindex="0" hidden>
+              <section class="sic-card" data-sic-understood></section>
+            </div>
             <div id="sic-animations" role="tabpanel" aria-labelledby="sic-animations-tab" tabindex="0" hidden>
+              <section class="sic-observations" aria-labelledby="sic-card-test-title" data-sic-card-test hidden>
+                <h4 id="sic-card-test-title">Space · Change one card</h4>
+                <div data-sic-card-test-cases></div>
+              </section>
               <p data-sic-space-empty>Run Space in STCK to inspect its animation.</p>
               <section class="sic-observations" aria-labelledby="sic-space-info-title" data-sic-space-information hidden>
               <h4 id="sic-space-info-title">Space · Changes during the animation</h4>
@@ -246,6 +257,18 @@ app.innerHTML = `
               <ul data-sic-methods></ul>
             </details>
             </div>
+          </div>
+          <div id="sic-strategies" role="tabpanel" aria-labelledby="sic-strategies-tab" tabindex="0" hidden>
+            <section class="sic-card"><h4>Ways to solve the situation</h4><p>No strategy has been consolidated by SIC yet.</p></section>
+          </div>
+          <div id="sic-objectives" role="tabpanel" aria-labelledby="sic-objectives-tab" tabindex="0" hidden>
+            <section class="sic-card"><h4>What to achieve</h4><p>No objective has been registered by SIC yet.</p></section>
+          </div>
+          <div id="sic-plans" role="tabpanel" aria-labelledby="sic-plans-tab" tabindex="0" hidden>
+            <section class="sic-card"><h4>What to do next</h4>
+              <p>No action plan has been constructed by SIC yet.</p>
+              <dl><dt>Next action from V6</dt><dd data-sic-plan-next>No pending action to show.</dd></dl>
+            </section>
           </div>
         </section>
 

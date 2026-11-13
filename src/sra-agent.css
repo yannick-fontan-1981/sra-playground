@@ -28,7 +28,7 @@
 .sic-header h3{margin:0;font-size:clamp(19px,3vw,23px);line-height:1.3;font-weight:600}
 .sic-header p{margin:5px 0 0;color:var(--subtle);font-size:13px}
 .sic-mode{padding:5px 9px;border:1px solid var(--control-border);border-radius:5px;color:var(--accent-hover);font-size:12px}
-.sic-tabs{display:flex;gap:6px;border-bottom:1px solid var(--line);margin-bottom:14px}
+.sic-tabs{display:flex;flex-wrap:wrap;gap:6px;border-bottom:1px solid var(--line);margin-bottom:14px}
 .sic-tabs button{min-height:42px;padding:6px 14px;border:0;border-bottom:2px solid transparent;background:transparent;color:var(--muted);font-size:14px}
 .sic-tabs [aria-selected="true"]{border-bottom-color:var(--accent);color:var(--ink);background:var(--surface-raised)}
 .sic-subtabs{flex-wrap:wrap}
@@ -76,6 +76,9 @@
 .sic-animation-evidence{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,140px),1fr));gap:8px;margin:8px 0}
 .sic-animation-evidence>div{min-width:0;padding:8px;border:1px solid var(--line);border-radius:4px}
 .sic-animation-evidence .sic-sprite canvas{height:30px}
+.sic-program{display:flex;flex-wrap:wrap;gap:4px;margin:7px 0}
+.sic-program span{padding:2px 5px;border:1px solid var(--line);border-radius:4px;font-size:11px}
+.sic-program [data-sic-changed-card]{border:2px solid var(--accent);font-weight:650;color:var(--ink)}
 .sic-observations ul[data-sic-space-facts]{grid-template-columns:1fr}
 .sic-sprites figure{margin:0;text-align:center}
 .sic-sprites figcaption{font-size:11px;color:var(--subtle);margin-top:3px}

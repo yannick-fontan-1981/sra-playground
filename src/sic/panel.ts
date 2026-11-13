@@ -3,6 +3,7 @@ import type { NativeClickReturn } from '../logos-engine/v6-native-click-return.t
 import type { NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
 import type { SpaceReturn } from './space-return.ts';
 import type { StckRankTrial } from './stck-stack.ts';
+import stckCardComparisons from './stck-card-comparison.json';
 import { compareAboveColors, contrastClickContexts, describeClickContext, type ClickEffectCount } from './click-evidence.ts';
 import type { Applicability, ControlEffectResolution } from './know-control-effect.ts';
 import type { ShadowView } from './shadow.ts';
@@ -175,6 +176,118 @@ function renderClickPreview(receipt: NativeClickReturn, palette: readonly string
   const section = document.createElement('div');
   section.append(group, details);
   return section;
+}
+
+function openInformation(panel: HTMLElement, subtab: string): void {
+  const parent = panel.querySelector<HTMLButtonElement>('#sic-information-tab')!;
+  const selected = panel.querySelector<HTMLButtonElement>(`#${subtab}-tab`)!;
+  selectPerspective(panel, parent);
+  selectPerspective(panel, selected);
+  selected.focus();
+}
+
+function renderUnderstoodControls(panel: HTMLElement, stck: boolean): void {
+  const container = panel.querySelector<HTMLElement>('[data-sic-understood]')!;
+  const key = stck ? 'STCK' : 'other';
+  if (container.dataset.game === key) return;
+  container.dataset.game = key;
+  const title = document.createElement('h4');
+  title.textContent = 'What these controls do';
+  const intro = document.createElement('p');
+  intro.textContent = stck
+    ? 'STCK controls with repeatable evidence. Each result is scoped to the situations tested.'
+    : 'No control has been consolidated for this game yet.';
+  container.replaceChildren(title, intro);
+  if (!stck) return;
+  for (const control of [
+    { label: 'Click a card · Consolidated', target: 'sic-effects',
+      effect: 'Edits the program: removes the selected card, and cards above it shift down. Verified on 9 recorded clicks and 73 controlled clicks.',
+      link: 'See click observations' },
+    { label: 'Space · Consolidated in the tested cases', target: 'sic-animations',
+      effect: 'Runs the program. Replacing one movement card changes the immediate displacement; a blocked move can leave the player in place.',
+      link: 'See the paired animations' },
+  ]) {
+    const block = document.createElement('div');
+    block.className = 'sic-effect-row';
+    const label = document.createElement('strong');
+    label.textContent = control.label;
+    const effect = document.createElement('p');
+    effect.textContent = control.effect;
+    const link = document.createElement('button');
+    link.type = 'button';
+    link.className = 'sic-evidence-link';
+    link.textContent = control.link;
+    link.addEventListener('click', () => openInformation(panel, control.target));
+    block.append(label, effect, link);
+    container.append(block);
+  }
+}
+
+function renderCardComparisons(panel: HTMLElement, palette: readonly string[], stck: boolean): void {
+  const section = panel.querySelector<HTMLElement>('[data-sic-card-test]')!;
+  section.hidden = !stck;
+  const container = panel.querySelector<HTMLElement>('[data-sic-card-test-cases]')!;
+  const key = stck ? palette.join(',') : 'hidden';
+  if (container.dataset.palette === key) return;
+  container.dataset.palette = key;
+  container.replaceChildren();
+  if (!stck) return;
+  const method = document.createElement('p');
+  method.textContent = 'Offline test: two copies of the same game state run Space. Only the outlined card differs. The paired images are aligned by phase of that instruction.';
+  container.append(method);
+  const phases = ['Before the card', 'Wind-up', 'Attempted move', 'End of this card'];
+  const coord = (point: readonly number[]) => `(${point.join(', ')})`;
+  for (const pair of stckCardComparisons) {
+    const block = document.createElement('details');
+    block.open = pair.id === 'two-directions';
+    const title = document.createElement('summary');
+    title.textContent = `Level ${pair.level} · Card ${pair.rank} from bottom · ${pair.id === 'blocked' ? 'Movement vs. no movement' : 'Two directions from the same cell'}`;
+    const note = document.createElement('p');
+    note.textContent = `Same cell before the card: ${coord(pair.origin)}. The replacement changes the immediate result from ${coord(pair.baseline.destination)} to ${coord(pair.variant.destination)} (row, column).`;
+    const select = document.createElement('select');
+    select.setAttribute('aria-label', `Level ${pair.level} · Compared phase`);
+    phases.forEach((label, index) => select.add(new Option(label, String(index))));
+    select.selectedIndex = 2;
+    const controls = document.createElement('div');
+    controls.className = 'sic-animation-controls';
+    controls.append(select);
+    const body = document.createElement('div');
+    body.className = 'sic-animation-evidence';
+    const render = () => {
+      body.replaceChildren();
+      for (const [label, variant] of [['Original', pair.baseline], ['One card replaced', pair.variant]] as const) {
+        const side = document.createElement('div');
+        const heading = document.createElement('strong');
+        heading.textContent = `${label} · ${variant.card}`;
+        const program = document.createElement('div');
+        program.className = 'sic-program';
+        program.setAttribute('aria-label', 'Program in order from bottom to top');
+        variant.program.forEach((card, index) => {
+          const item = document.createElement('span');
+          item.textContent = card;
+          if (index + 1 === pair.rank) {
+            item.dataset.sicChangedCard = '';
+            item.setAttribute('aria-label', `Compared card: ${card}`);
+          }
+          program.append(item);
+        });
+        const frame = variant.frames[select.selectedIndex]!;
+        const position = document.createElement('p');
+        position.textContent = `Player cell: ${coord(frame.position)}`;
+        side.append(heading, program, renderFrames([
+          ['Compared card', frame.focus], ['Board near the starting cell', frame.board], ['Player', frame.player],
+        ], palette), position);
+        body.append(side);
+      }
+    };
+    select.addEventListener('change', render);
+    render();
+    block.append(title, note, controls, body);
+    container.append(block);
+  }
+  const scope = document.createElement('p');
+  scope.textContent = 'Attribution stops at the end of the replaced card. Later instructions and flashes can also differ; the test does not assign each later change directly to that card.';
+  container.append(scope);
 }
 
 function renderSpaceFramePicker(receipt: SpaceReturn, palette: readonly string[], board: boolean): HTMLElement {
@@ -517,10 +630,13 @@ export function renderSicPanel(panel: HTMLElement, view: ShadowView | null, pale
     : view ? 'No command available.' : 'Waiting for the board.';
   panel.querySelector<HTMLElement>('[data-sic-next]')!.textContent = view?.nextAction
     ? actionLabel(view.nextAction) : 'No pending action to show.';
+  panel.querySelector<HTMLElement>('[data-sic-plan-next]')!.textContent = panel.querySelector('[data-sic-next]')!.textContent;
   renderClickReturns(panel, view?.clickEvidence?.returns ?? (view?.clickReturn ? [view.clickReturn] : []), palette);
   renderClickComparisons(panel, view?.clickEvidence ?? null, palette);
   renderSpaceReturns(panel, space, palette, view?.gameCode === 'STCK');
   renderGameInformation(panel, view?.gameCode === 'STCK', ranks, space);
+  renderUnderstoodControls(panel, view?.gameCode === 'STCK');
+  renderCardComparisons(panel, palette, view?.gameCode === 'STCK');
   const check = view?.returnCheck;
   panel.querySelector<HTMLElement>('[data-sic-return]')!.textContent = !check ? 'No checked return for this board.'
     : check.matched === true ? 'The return matched the V6 plan’s expectation.'
