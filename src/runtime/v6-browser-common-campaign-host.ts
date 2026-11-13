@@ -8,6 +8,10 @@ import {
 } from '../agent-product-dispatch.ts';
 import type { FieldStockDependencies } from '../logos-engine/field-stock.ts';
 import {
+  CommonCampaignCheckpointCoordinator,
+  type CommonCampaignCheckpointParticipant,
+} from '../logos-engine/v6-common-campaign-checkpoint.ts';
+import {
   CommonCampaignOwner,
   type CampaignPrepareResult,
   type CampaignReturnReceipt,
@@ -25,6 +29,15 @@ import {
 import type { AgentObservation } from './contracts.ts';
 import type { GameObservation } from './browser-games.ts';
 import { ObservedAddressedMaterialRuntime } from './observed-addressed-material-runtime.ts';
+import {
+  ObservedAddressedMaterialCheckpointParticipant,
+} from './observed-addressed-material-checkpoint.ts';
+import {
+  browserGameObservationIdentity,
+  parseBrowserCommonCampaignHostCheckpoint,
+  sameBrowserGameObservation,
+  type BrowserCommonCampaignHostCheckpointV1,
+} from './v6-browser-campaign-checkpoint.ts';
 import { BrowserAgentObservationStream } from './v6-browser-agent-observation.ts';
 import { PUBLIC_ADDRESSED_FIELD_RETURN_DEPENDENCIES } from './v6-public-addressed-field-learning.ts';
 import {
@@ -80,6 +93,7 @@ export interface BrowserCampaignOwnerTransport {
 export interface BrowserCampaignHostOptions {
   campaign: CommonCampaignOwner;
   ownerTransports: readonly BrowserCampaignOwnerTransport[];
+  checkpointParticipants?: readonly CommonCampaignCheckpointParticipant[];
   eventRef?(input: BrowserCampaignReturnPair): string;
 }
 
@@ -99,6 +113,7 @@ export interface BrowserCampaignDispatchPorts extends DispatchPorts<GameObservat
 export type BrowserCampaignHostStatus =
   | 'not-started'
   | 'not-ready'
+  | 'resumed'
   | CampaignPrepareResult['status'];
 
 export interface BrowserCampaignHostResult {
@@ -115,6 +130,20 @@ interface ActiveBrowserCampaignSession {
   stream: BrowserAgentObservationStream;
   gameObservation: GameObservation;
   agentObservation: AgentObservation;
+}
+
+interface PendingBrowserCampaignReturn {
+  preparation: BrowserCampaignActionPreparation;
+  beforeGameObservation: GameObservation;
+  beforeAgentObservation: AgentObservation;
+  dispatched: boolean;
+}
+
+function record(value: unknown, label: string): Record<string, unknown> {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) {
+    throw new TypeError(`${label} must be an object`);
+  }
+  return value as Record<string, unknown>;
 }
 
 function nonEmpty(value: string, label: string): void {
@@ -164,8 +193,13 @@ export interface BrowserFieldStockCampaignTransportOptions {
  * It never creates that action or its coordinates. Retained priors still require
  * fresh public revalidation before FieldStock can propose OP18.
  */
-export class BrowserFieldStockCampaignTransport implements BrowserCampaignOwnerTransport {
+export const BROWSER_FIELD_STOCK_CAMPAIGN_TRANSPORT_CHECKPOINT_ID =
+  'browser_field_stock_campaign_transport_v1';
+
+export class BrowserFieldStockCampaignTransport
+implements BrowserCampaignOwnerTransport, CommonCampaignCheckpointParticipant {
   readonly ownerId = FIELD_STOCK_CALLER_OWNER_ID;
+  readonly checkpointId = BROWSER_FIELD_STOCK_CAMPAIGN_TRANSPORT_CHECKPOINT_ID;
   readonly runtime: ObservedAddressedMaterialRuntime;
   readonly #dependencies: FieldStockDependencies;
   readonly #remaining: number;
@@ -212,6 +246,43 @@ export class BrowserFieldStockCampaignTransport implements BrowserCampaignOwnerT
     this.#acceptSession(input.sessionId);
     this.#observeAddressedReturn(input);
     this.#consume(input.afterAgentObservation);
+  }
+
+  snapshot(): unknown {
+    return {
+      version: 1,
+      sessionId: this.#sessionId,
+      current: structuredClone(this.#current),
+    };
+  }
+
+  restore(value: unknown): void {
+    const checkpoint = record(value, 'browser FieldStock transport checkpoint');
+    if (checkpoint.version !== 1) {
+      throw new TypeError('unsupported browser FieldStock transport checkpoint version');
+    }
+    const sessionId = checkpoint.sessionId;
+    if (sessionId !== null && (typeof sessionId !== 'string' || sessionId.length === 0)) {
+      throw new TypeError('browser FieldStock checkpoint sessionId must be null or non-empty');
+    }
+    const restoreCurrent = (candidate: unknown): PublicCampaignObservation => {
+      const cloned = structuredClone(record(candidate, 'browser FieldStock checkpoint current'));
+      return cloned as unknown as PublicCampaignObservation;
+    };
+    const current = checkpoint.current === null
+      ? null
+      : restoreCurrent(checkpoint.current);
+    if (current && sessionId === null) {
+      throw new Error('browser FieldStock checkpoint current observation has no session');
+    }
+    if (current && current.agent.sessionId !== sessionId) {
+      throw new Error('browser FieldStock checkpoint current observation belongs to another session');
+    }
+    this.#sessionId = sessionId;
+    this.#current = current;
+    this.#lastBoundaryStatus = null;
+    this.#lastRevalidationStatus = null;
+    this.#lastAddressedLearningStatus = null;
   }
 
   get lastBoundaryStatus(): ReturnType<ObservedAddressedMaterialRuntime['boundary']> | null {
@@ -315,12 +386,19 @@ export class BrowserFieldStockCampaignTransport implements BrowserCampaignOwnerT
  */
 export class BrowserCommonCampaignHost {
   readonly #campaign: CommonCampaignOwner;
+  readonly #checkpoint: CommonCampaignCheckpointCoordinator;
   readonly #transports = new Map<string, BrowserCampaignOwnerTransport>();
   readonly #eventRef: (input: BrowserCampaignReturnPair) => string;
   #active: ActiveBrowserCampaignSession | null = null;
+  #pendingReturn: PendingBrowserCampaignReturn | null = null;
+  #activeRuns = 0;
 
   constructor(options: BrowserCampaignHostOptions) {
     this.#campaign = options.campaign;
+    this.#checkpoint = new CommonCampaignCheckpointCoordinator(
+      this.#campaign,
+      options.checkpointParticipants,
+    );
     this.#eventRef = options.eventRef ?? defaultEventRef;
 
     const registered = new Set(this.#campaign.ownerIds);
@@ -345,6 +423,7 @@ export class BrowserCommonCampaignHost {
   begin(input: BrowserCampaignSessionInput): AgentObservation {
     nonEmpty(input.sessionId, 'browser campaign session id');
     if (this.#active) this.#campaign.cancel(this.#active.sessionId);
+    this.#pendingReturn = null;
 
     const stream = new BrowserAgentObservationStream({
       sessionId: input.sessionId,
@@ -367,6 +446,8 @@ export class BrowserCommonCampaignHost {
   ): Promise<BrowserCampaignHostResult> {
     const active = this.#active;
     if (!active) return this.#emptyResult('not-started');
+    const resumed = this.#resumePendingReturn(state, ports);
+    if (resumed) return resumed;
     if (!productReady(state)) {
       return this.#emptyResult('not-ready', 'product-not-ready');
     }
@@ -404,9 +485,18 @@ export class BrowserCommonCampaignHost {
       throw new Error(`selected campaign owner ${preparation.ownerId} has no browser transport`);
     }
 
+    const pendingReturn: PendingBrowserCampaignReturn = {
+      preparation: structuredClone(preparation),
+      beforeGameObservation: structuredClone(active.gameObservation),
+      beforeAgentObservation: cloneAgentObservation(active.agentObservation),
+      dispatched: false,
+    };
+    this.#pendingReturn = pendingReturn;
+
     let acquisition: CampaignReturnReceipt | null = null;
     let returnedObservation: AgentObservation | null = null;
     let returnCommitted = false;
+    this.#activeRuns += 1;
 
     try {
       const dispatch = await dispatchProductAction(
@@ -414,7 +504,10 @@ export class BrowserCommonCampaignHost {
         preparation.action.id,
         actionData(preparation),
         {
-          action: (action, data) => ports.action(action, data),
+          action: (action, data) => {
+            if (this.#pendingReturn === pendingReturn) pendingReturn.dispatched = true;
+            return ports.action(action, data);
+          },
           present: async (next, generation) => {
             const converted = active.stream.next(next);
             const returnPair: BrowserCampaignReturnPair = {
@@ -438,6 +531,7 @@ export class BrowserCommonCampaignHost {
             active.agentObservation = converted;
             returnedObservation = cloneAgentObservation(converted);
             returnCommitted = true;
+            if (this.#pendingReturn === pendingReturn) this.#pendingReturn = null;
             for (const observer of this.#transports.values()) {
               observer.observeAcquiredReturn?.(returnPair, acquisition);
             }
@@ -455,6 +549,7 @@ export class BrowserCommonCampaignHost {
 
       if (!dispatch.accepted && !returnCommitted) {
         this.#campaign.cancel(active.sessionId);
+        if (this.#pendingReturn === pendingReturn) this.#pendingReturn = null;
       }
       return {
         status: 'action',
@@ -465,18 +560,194 @@ export class BrowserCommonCampaignHost {
       };
     } catch (error) {
       if (!returnCommitted) this.#campaign.cancel(active.sessionId);
+      if (this.#pendingReturn === pendingReturn) this.#pendingReturn = null;
       throw error;
+    } finally {
+      this.#activeRuns -= 1;
     }
+  }
+
+  snapshot(): BrowserCommonCampaignHostCheckpointV1 {
+    const common = this.#checkpoint.snapshot();
+    const active = this.#active;
+    if (!active) {
+      return { version: 1, common, session: null };
+    }
+
+    const pending = this.#campaign.pending(active.sessionId);
+    let pendingReturn: BrowserCommonCampaignHostCheckpointV1['session'] extends infer T
+      ? T extends { pendingReturn: infer P } ? P : never
+      : never = null;
+    if (pending) {
+      const tracked = this.#pendingReturn;
+      if (!tracked?.dispatched) {
+        throw new Error('browser campaign pending need has not reached physical dispatch');
+      }
+      if (
+        pending.needId !== tracked.preparation.needId
+        || pending.ownerId !== tracked.preparation.ownerId
+        || pending.proposalRef !== tracked.preparation.proposalRef
+      ) {
+        throw new Error('browser campaign pending dispatch identity changed');
+      }
+      pendingReturn = {
+        version: 1,
+        stage: 'dispatched',
+        preparation: structuredClone(tracked.preparation),
+        beforeGameObservation: structuredClone(tracked.beforeGameObservation),
+        beforeAgentObservation: cloneAgentObservation(tracked.beforeAgentObservation),
+      };
+    }
+    if (this.#activeRuns > 0 && pendingReturn === null) {
+      throw new Error('browser campaign checkpoint requires a settled or dispatched boundary');
+    }
+
+    return parseBrowserCommonCampaignHostCheckpoint({
+      version: 1,
+      common,
+      session: {
+        version: 1,
+        sessionId: active.sessionId,
+        gameCode: active.gameObservation.gameCode,
+        nextSequence: active.stream.nextSequence,
+        observationIdentity: browserGameObservationIdentity(active.gameObservation),
+        gameObservation: structuredClone(active.gameObservation),
+        agentObservation: cloneAgentObservation(active.agentObservation),
+        pendingReturn,
+      },
+    });
+  }
+
+  restore(value: unknown, liveObservation: GameObservation): AgentObservation {
+    if (this.#active || this.#activeRuns > 0) {
+      throw new Error('browser campaign host restore requires a fresh host');
+    }
+    const checkpoint = parseBrowserCommonCampaignHostCheckpoint(value);
+    const session = checkpoint.session;
+    if (!session) throw new Error('browser campaign checkpoint has no active session');
+    if (liveObservation.gameCode !== session.gameCode) {
+      throw new Error('browser campaign checkpoint belongs to another game');
+    }
+    const sameObservation = sameBrowserGameObservation(
+      liveObservation,
+      session.gameObservation,
+    );
+    if (!sameObservation && !session.pendingReturn) {
+      throw new Error('browser campaign checkpoint observation is stale');
+    }
+
+    const stream = new BrowserAgentObservationStream({
+      sessionId: session.sessionId,
+      gameCode: session.gameCode,
+      initialSequence: session.nextSequence,
+    });
+    this.#checkpoint.restore(checkpoint.common);
+    this.#active = {
+      sessionId: session.sessionId,
+      stream,
+      gameObservation: sameObservation
+        ? liveObservation
+        : structuredClone(session.gameObservation),
+      agentObservation: cloneAgentObservation(session.agentObservation),
+    };
+    this.#pendingReturn = session.pendingReturn
+      ? {
+          preparation: structuredClone(session.pendingReturn.preparation),
+          beforeGameObservation: structuredClone(session.pendingReturn.beforeGameObservation),
+          beforeAgentObservation: cloneAgentObservation(session.pendingReturn.beforeAgentObservation),
+          dispatched: true,
+        }
+      : null;
+    return cloneAgentObservation(session.agentObservation);
+  }
+
+  #resumePendingReturn(
+    state: ProductReadinessState,
+    ports: BrowserCampaignDispatchPorts,
+  ): BrowserCampaignHostResult | null {
+    const active = this.#active;
+    const tracked = this.#pendingReturn;
+    if (!active || !tracked) return null;
+    if (!productReady(state)) {
+      return this.#emptyResult('not-ready', 'product-not-ready');
+    }
+    const live = state.observation as GameObservation | null;
+    if (!live || live.gameCode !== active.gameObservation.gameCode) {
+      return this.#emptyResult('not-ready', 'stale-product-observation');
+    }
+    const pending = this.#campaign.prepare(active.agentObservation);
+    if (pending.status !== 'pending') {
+      throw new Error('browser campaign dispatched return lost its pending need');
+    }
+    if (
+      pending.needId !== tracked.preparation.needId
+      || pending.ownerId !== tracked.preparation.ownerId
+      || pending.proposalRef !== tracked.preparation.proposalRef
+    ) {
+      throw new Error('browser campaign restored pending identity changed');
+    }
+    if (sameBrowserGameObservation(live, tracked.beforeGameObservation)) {
+      return {
+        status: 'pending',
+        preparation: pending,
+        dispatch: null,
+        acquisition: null,
+        returnedObservation: null,
+      };
+    }
+    if (!tracked.dispatched) {
+      throw new Error('browser campaign cannot consume a return for an undispatched action');
+    }
+
+    const transport = this.#transports.get(tracked.preparation.ownerId);
+    if (!transport) {
+      throw new Error(`selected campaign owner ${tracked.preparation.ownerId} has no browser transport`);
+    }
+    const converted = active.stream.next(live);
+    const returnPair: BrowserCampaignReturnPair = {
+      sessionId: active.sessionId,
+      preparation: tracked.preparation,
+      beforeGameObservation: tracked.beforeGameObservation,
+      beforeAgentObservation: tracked.beforeAgentObservation,
+      afterGameObservation: live,
+      afterAgentObservation: converted,
+    };
+    const eventRef = this.#eventRef(returnPair);
+    nonEmpty(eventRef, 'browser campaign resumed return event reference');
+    const acquisition = this.#campaign.acquire({
+      sessionId: active.sessionId,
+      needId: tracked.preparation.needId,
+      eventRef,
+      payload: transport.returnPayload(returnPair),
+    });
+    active.gameObservation = live;
+    active.agentObservation = converted;
+    this.#pendingReturn = null;
+    for (const observer of this.#transports.values()) {
+      observer.observeAcquiredReturn?.(returnPair, acquisition);
+    }
+    const returnedObservation = cloneAgentObservation(converted);
+    ports.onCampaignAcquired?.(acquisition, returnedObservation);
+    return {
+      status: 'resumed',
+      preparation: tracked.preparation,
+      dispatch: null,
+      acquisition,
+      returnedObservation,
+    };
   }
 
   cancel(): boolean {
     const active = this.#active;
     if (!active) return false;
-    return this.#campaign.cancel(active.sessionId);
+    const cancelled = this.#campaign.cancel(active.sessionId);
+    if (cancelled) this.#pendingReturn = null;
+    return cancelled;
   }
 
   dispose(): void {
     this.cancel();
+    this.#pendingReturn = null;
     this.#active = null;
   }
 
@@ -564,6 +835,10 @@ export function createFieldStockAndPublicSingleActionBrowserCampaignHost(
   return new BrowserCommonCampaignHost({
     campaign,
     eventRef: options.eventRef,
+    checkpointParticipants: [
+      new ObservedAddressedMaterialCheckpointParticipant(runtime),
+      fieldTransport,
+    ],
     ownerTransports: [
       fieldTransport,
       {
