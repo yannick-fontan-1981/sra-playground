@@ -56,3 +56,51 @@ test('architecture ledger requires the exact intent permit dispatch acquisition 
   assert.match(source, /reject duplicate reconciliation/i);
   assert.match(source, /checks canonical intent, permit,\s*dispatch, acquisition and observation order/i);
 });
+
+test('pinned private donor map records the recovered historical release-permit schema', () => {
+  const source = donor('docs/recovery/lot10d-temporal-action-release-donor-map.md');
+  assert.match(source, /212d8d426f07eea2b6797c2bb647545767488a96/);
+  for (const blob of [
+    '6384f5f790beda7525e3554c3ec38c08d92bbbca',
+    '2c713bb31dc4d8ec8f1774be87018832c3a91eb6',
+    '17a46b4ea93fd635cd6f075a837c44cf9d24fbbe',
+    '258324dcb643bc1d76d4d02766e9ff6b50fbc879',
+    '03b49289a5611b81b74024d179ecfd727e0301f4',
+    '8d4200b32217aea168433cc3c49aa895f8340394',
+  ]) {
+    assert.match(source, new RegExp(blob));
+  }
+  for (const field of [
+    'action_intent_id',
+    'viability_assessment_id',
+    'commitment_decision_id',
+    'available_action_ref',
+    'pre_action_snapshot_digest',
+    'valid_through_state_revision',
+    'concentration_lease',
+  ]) {
+    assert.match(source, new RegExp(field));
+  }
+});
+
+test('donor map preserves permit, ACT and environment dispatch as separate boundaries', () => {
+  const source = donor('docs/recovery/lot10d-temporal-action-release-donor-map.md');
+  const binding = source.indexOf('le binding prépare une action candidate');
+  const permit = source.indexOf('le permis lie l\'intent');
+  const act = source.indexOf('ACT revalide les preuves');
+  const boundary = source.indexOf('`ActionBoundary` revérifie');
+  assert.ok(binding >= 0 && binding < permit);
+  assert.ok(permit < act);
+  assert.ok(act < boundary);
+  assert.match(source, /actionPayloadPresent: false/);
+  assert.match(source, /actionReleased: false/);
+  assert.match(source, /environmentDispatchAuthorized: false/);
+});
+
+test('donor map attributes exactly-once delivery to ActionBoundary rather than to permit creation', () => {
+  const source = donor('docs/recovery/lot10d-temporal-action-release-donor-map.md');
+  assert.match(source, /persiste une tentative avant l'appel externe/);
+  assert.match(source, /redélivrance est interdite/);
+  assert.match(source, /dispatch déjà enregistré est réutilisé sans nouvel envoi/);
+  assert.match(source, /consommation exactement une fois appartient donc à une étape séparée/);
+});
