@@ -25,7 +25,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Apply safe-boundary autosave wiring
-        run: node scripts/apply-op01-op31-browser-crash-autosave.mjs
+        run: |
+          node scripts/apply-op01-op31-browser-crash-autosave.mjs
+          node scripts/apply-op01-op31-browser-crash-app-launch.mjs
       - name: Typecheck
         run: npm run typecheck
       - name: Targeted crash-resume tests
