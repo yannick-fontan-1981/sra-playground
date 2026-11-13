@@ -33,9 +33,17 @@ import {
   type AddressedKnowledgeStatus,
 } from './observed-addressed-material-runtime.ts';
 
+export type PublicCampaignObservationMode = 'full' | 'agent-only';
+
 export interface V6CommonCampaignDecisionPortOptions {
   trace?: OperationTraceSink;
   cache?: OperationResultCache;
+  /** Defaults to true. Disable only when no FieldStock owner consumes rows. */
+  fieldStockEnabled?: boolean;
+  /** Defaults to true. */
+  publicSingleActionEnabled?: boolean;
+  /** Defaults to full. Agent-only skips rows/entities and requires FieldStock disabled. */
+  publicObservationMode?: PublicCampaignObservationMode;
   fieldStockRuntimeFactory?: () => ObservedAddressedMaterialRuntime;
   fieldStockDependencies?: FieldStockDependencies;
   fieldStockRemaining?: number;
@@ -53,6 +61,41 @@ export interface V6CommonCampaignDecisionPortOptions {
 
 export type AddressedBoundaryReceipt = ReturnType<ObservedAddressedMaterialRuntime['boundary']>;
 
+function cloneAgentObservation(source: AgentObservation): AgentObservation {
+  return {
+    ...source,
+    image: {
+      ...source.image,
+      pixels: Uint8Array.from(source.image.pixels),
+    },
+    availableActionIds: [...source.availableActionIds],
+  };
+}
+
+/**
+ * Minimal public wrapper for owners that consume the validated AgentObservation
+ * directly and do not need FieldStock rows, entities or a content frame hash.
+ */
+function measureAgentOnlyCampaignObservation(
+  source: AgentObservation,
+): PublicCampaignObservation {
+  const agent = cloneAgentObservation(source);
+  const observationRef = `public-observation:${agent.sessionId}:${agent.sequence}`;
+  return {
+    agent,
+    observation: {
+      observation_ref: observationRef,
+      revision: agent.sequence,
+      level_epoch: agent.level,
+      levels_completed: agent.levelsCompleted,
+      state: agent.state,
+      frame_hash: `public-frame-not-materialized:${agent.sessionId}:${agent.sequence}`,
+      available_action_refs: agent.availableActionIds.map(id => `ACTION${id}`),
+    },
+    rows: [],
+  };
+}
+
 /**
  * Persistent worker-side host for the canonical CommonCampaignOwner.
  *
@@ -66,6 +109,11 @@ export type AddressedBoundaryReceipt = ReturnType<ObservedAddressedMaterialRunti
  * A joint-channel owner is installed only when explicit channels are supplied.
  * It can collapse compatible contributions into one proposal, but an independent
  * owner proposal still makes the common campaign ambiguous.
+ *
+ * The optional agent-only mode is a bounded performance seam for owner sets
+ * that consume only AgentObservation. It does not weaken public validation,
+ * release authority, ambiguity handling or return acquisition. FieldStock must
+ * be explicitly disabled because its contract requires rows and entity state.
  */
 export class V6CommonCampaignDecisionPort implements AgentDecisionPort {
   readonly options: V6CommonCampaignDecisionPortOptions;
@@ -84,6 +132,9 @@ export class V6CommonCampaignDecisionPort implements AgentDecisionPort {
     if (options.fieldStockRemaining !== undefined
       && (!Number.isInteger(options.fieldStockRemaining) || options.fieldStockRemaining < 1)) {
       throw new RangeError('FieldStock remaining budget must be a positive integer');
+    }
+    if (this.#observationMode === 'agent-only' && this.#fieldStockEnabled) {
+      throw new Error('agent-only public observation mode requires FieldStock to be disabled');
     }
     this.#rebuildCampaign();
   }
@@ -114,7 +165,7 @@ export class V6CommonCampaignDecisionPort implements AgentDecisionPort {
     }
 
     const previous = this.#current;
-    let current = measurePublicCampaignObservation(observation);
+    let current = this.#measure(observation);
     const pending = this.#campaign.pending(observation.sessionId);
     if (pending) {
       if (!previous) {
@@ -124,13 +175,25 @@ export class V6CommonCampaignDecisionPort implements AgentDecisionPort {
         sessionId: observation.sessionId,
         needId: pending.needId,
         eventRef: current.observation.observation_ref,
-        payload: {
-          after: current.observation,
-          rows: current.rows,
-        },
+        payload: this.#fieldStockEnabled
+          ? {
+              after: current.observation,
+              rows: current.rows,
+            }
+          : {
+              after: current.observation,
+            },
       });
     } else {
       this.#lastAcquisition = undefined;
+    }
+
+    if (!this.#fieldStockEnabled) {
+      this.#lastBoundary = undefined;
+      this.#lastRevalidation = undefined;
+      this.#current = current;
+      this.#lastPrepare = undefined;
+      return;
     }
 
     if (previous) {
@@ -173,29 +236,31 @@ export class V6CommonCampaignDecisionPort implements AgentDecisionPort {
     const current = this.#current;
     if (!current || current.agent.state === 'WIN' || signal.aborted) return undefined;
 
-    const extraContexts = this.options.additionalContextByOwner?.(current) ?? {};
-    const jointContext = this.#jointOwner
-      ? {
-          [JOINT_CHANNEL_OWNER_ID]: {
-            observation: current.agent,
-            contextByChannel: this.options.jointContextByChannel?.(current) ?? {},
-          },
-        }
-      : {};
-    const prepared = this.#campaign.prepare(current.agent, {
-      ...extraContexts,
-      ...jointContext,
-      [FIELD_STOCK_CALLER_OWNER_ID]: {
+    const contexts: Record<string, unknown> = {
+      ...(this.options.additionalContextByOwner?.(current) ?? {}),
+    };
+    if (this.#jointOwner) {
+      contexts[JOINT_CHANNEL_OWNER_ID] = {
+        observation: current.agent,
+        contextByChannel: this.options.jointContextByChannel?.(current) ?? {},
+      };
+    }
+    if (this.#fieldStockEnabled) {
+      contexts[FIELD_STOCK_CALLER_OWNER_ID] = {
         sessionId: current.agent.sessionId,
         observation: current.observation,
         rows: current.rows,
         remaining: this.options.fieldStockRemaining ?? 16,
         dependencies: this.options.fieldStockDependencies ?? PUBLIC_FIELD_STOCK_DEPENDENCIES,
-      },
-      [PUBLIC_SINGLE_ACTION_CALLER_OWNER_ID]: {
+      };
+    }
+    if (this.#publicSingleActionEnabled) {
+      contexts[PUBLIC_SINGLE_ACTION_CALLER_OWNER_ID] = {
         observation: current.agent,
-      },
-    });
+      };
+    }
+
+    const prepared = this.#campaign.prepare(current.agent, contexts);
     this.#lastPrepare = prepared;
     return prepared.status === 'action'
       ? structuredClone(prepared.action)
@@ -234,6 +299,24 @@ export class V6CommonCampaignDecisionPort implements AgentDecisionPort {
     return this.#lastRevalidation;
   }
 
+  get #fieldStockEnabled(): boolean {
+    return this.options.fieldStockEnabled !== false;
+  }
+
+  get #publicSingleActionEnabled(): boolean {
+    return this.options.publicSingleActionEnabled !== false;
+  }
+
+  get #observationMode(): PublicCampaignObservationMode {
+    return this.options.publicObservationMode ?? 'full';
+  }
+
+  #measure(observation: AgentObservation): PublicCampaignObservation {
+    return this.#observationMode === 'agent-only'
+      ? measureAgentOnlyCampaignObservation(observation)
+      : measurePublicCampaignObservation(observation);
+  }
+
   #assertSession(observation: AgentObservation): void {
     if (!this.#sessionId || observation.sessionId !== this.#sessionId) {
       throw new Error('common campaign observation does not belong to the initialized session');
@@ -247,9 +330,9 @@ export class V6CommonCampaignDecisionPort implements AgentDecisionPort {
       ? new JointChannelOwner(this.options.jointChannels)
       : undefined;
     const owners: CommonCallerOwner[] = [
-      new FieldStockCallerOwnerAdapter(this.#fieldRuntime),
+      ...(this.#fieldStockEnabled ? [new FieldStockCallerOwnerAdapter(this.#fieldRuntime)] : []),
       ...(this.#jointOwner ? [this.#jointOwner] : []),
-      new PublicSingleActionCallerOwnerAdapter(),
+      ...(this.#publicSingleActionEnabled ? [new PublicSingleActionCallerOwnerAdapter()] : []),
       ...(this.options.additionalOwners ?? []),
     ];
     this.#campaign = new CommonCampaignOwner(owners, {
