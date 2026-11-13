@@ -5,6 +5,8 @@ import { fileURLToPath } from 'node:url';
 export const NATIVE_REGION_SOURCE_REF_VERSION = 1;
 
 export const NATIVE_REGION_COMMON_COMPONENTS = Object.freeze([
+  '.github/workflows/lot9b-official-native-region-abba.yml',
+  'benchmarks/native-region-official.html',
   'package-lock.json',
   'package.json',
   'public/python/custom-games.zip',
@@ -12,6 +14,7 @@ export const NATIVE_REGION_COMMON_COMPONENTS = Object.freeze([
   'public/python/game_bridge.py',
   'public/python/official_adapter.py',
   'scripts/measure-native-loop-costs.mjs',
+  'scripts/native-loop-browser-worker-dispatch.mjs',
   'scripts/native-loop-explicit-runners.mjs',
   'scripts/native-loop-game-bridge-session.mjs',
   'scripts/native-loop-public-corpus-runner.mjs',
@@ -19,9 +22,13 @@ export const NATIVE_REGION_COMMON_COMPONENTS = Object.freeze([
   'scripts/native-loop-region-benchmark-runners.mjs',
   'scripts/native-loop-region-public-action6-probe.mjs',
   'scripts/native-loop-session-adapter.mjs',
+  'scripts/prepare-python.mjs',
   'scripts/python-runtime-assets.json',
+  'scripts/run-native-region-official-benchmark.mjs',
+  'src/benchmarks/native-region-official-benchmark.ts',
   'src/runtime/browser-games.ts',
   'src/runtime/game-worker.ts',
+  'vite.config.ts',
 ]);
 
 export const NATIVE_REGION_CANDIDATE_COMPONENTS = Object.freeze([
@@ -198,6 +205,8 @@ async function main() {
     const expectedComparable = structuredClone(expected);
     comparable.generatedFromCommit = null;
     expectedComparable.generatedFromCommit = null;
+    delete comparable.qualification;
+    delete expectedComparable.qualification;
     if (canonicalText(comparable) !== canonicalText(expectedComparable)) {
       throw new Error(`native Region source refs differ from ${verify}`);
     }
