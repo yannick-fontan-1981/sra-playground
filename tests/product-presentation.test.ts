@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import {
   isPresentationCurrent,
+  isPresentationLoopCurrent,
   presentationFeedback,
   presentationFrameDurationMs,
   presentationFrames,
@@ -47,4 +48,11 @@ test('game-over states produce recovery feedback and normal states stay silent',
   assert.equal(presentationFeedback({ state: 'GAME_OVER', level: 1 }), 'Game over. Undo or reset to continue.');
   assert.equal(presentationFeedback({ state: 'GAMEOVER', level: 1 }), 'Game over. Undo or reset to continue.');
   assert.equal(presentationFeedback({ state: 'NOT_FINISHED', level: 1 }), '');
+});
+
+
+test('presentation loop remains current only while both presentation and selection generations match', () => {
+  assert.equal(isPresentationLoopCurrent(5, 5, 9, 9), true);
+  assert.equal(isPresentationLoopCurrent(4, 5, 9, 9), false);
+  assert.equal(isPresentationLoopCurrent(5, 5, 8, 9), false);
 });
