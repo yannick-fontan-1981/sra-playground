@@ -6,16 +6,14 @@ Dernière consolidation : 13 novembre 2026.
 
 - Dépôt : `yannick-fontan-1981/sra-playground`
 - Branche canonique cible : `recovery/site109-reconstruction-20261112`
-- Baseline initiale de la tranche adressée :
-  `e3fa1901452423a714d3a47d5a469dbf112c55b0`
-- Canonique C7 réconcilié :
-  `d09fcc23e2dc594b9fa0bff0dab5072808c91464`
+- Canonique Lot 9C2 de référence :
+  `342d14b990169e292ec1078cef3ef297302b2baa`
 - Branche de travail :
-  `op01-op31-browser-addressed-acquisition-20261113`
-- Commit fonctionnel de la tranche :
-  `99c1d23353dbfec3e98c3770fee362b757ec2701`
-- Merge de réconciliation C7 qualifié :
-  `23694816d35f4f050e43a8660be45a063b6ee5d9`
+  `op01-op31-browser-public-action6-owner-20261113`
+- Merge de réconciliation Lot 9C2 :
+  `a723eac529643374f77b58e24e8ad16120d13923`
+- Candidat fonctionnel qualifié :
+  `e821e3221b049b59bc65fe4ea18fad9d3dc13246`
 - Donneur OP01–OP31 : `op01-op31-c0-c7-audit`
 - Plan stable : `docs/migration/op01-op31-verification-plan.md`
 - Historique détaillé antérieur :
@@ -28,16 +26,16 @@ Dernière consolidation : 13 novembre 2026.
   `docs/recovery/op01-op31-lot5-op18-reconciliation-20261112.md`
 - Propriétaire commun :
   `docs/recovery/op01-op31-common-campaign-owner-20261112.md`
-- Hôte navigateur :
-  `docs/recovery/op01-op31-browser-campaign-host-20261112.md`
-- Hôte Worker :
-  `docs/recovery/op01-op31-worker-common-campaign-20261112.md`
 - Contrôleur Agent :
   `docs/recovery/op01-op31-browser-agent-controller-20261112.md`
 - Transport FieldStock navigateur :
   `docs/recovery/op01-op31-browser-field-stock-transport-20261112.md`
 - Acquisition adressée publique :
   `docs/recovery/op01-op31-browser-addressed-acquisition-20261113.md`
+- Propriétaires ACTION6 publics produit :
+  `docs/recovery/op01-op31-browser-public-action6-owner-20261113.md`
+- Lot 9C2 public conjoint :
+  `docs/recovery/lot9c2-public-addressed-joint-channels.md`
 - Qualification officielle C7 :
   `docs/recovery/op01-op31-official-readiness-status.md`
 - Preuve officielle Region :
@@ -75,13 +73,15 @@ La campagne commune possède maintenant :
 - un seam Worker qualifié ;
 - un seam produit/browser qualifié ;
 - un contrôleur Agent explicite et unique activé dans `main.ts` ;
-- deux propriétaires navigateur actifs, FieldStock OP18 et fallback OP28 ;
+- quatre propriétaires navigateur pairs : FieldStock OP18, propriétaire conjoint
+  SMLP OP28, propriétaire strict STCK OP28 et fallback simple OP28 ;
 - un chemin Manual séparé ;
 - une mesure publique différée des entités ;
-- une acquisition passive du premier modèle adressé depuis un retour ACTION6
-  déjà autorisé par un propriétaire explicite ;
-- une calibration par réponses corrélées ;
-- une première rétention prudente à la frontière officielle ;
+- une acquisition passive du premier modèle adressé depuis un retour ACTION6 ;
+- une calibration par réponses corrélées et une rétention prudente ;
+- une qualification causale réelle du propriétaire conjoint SMLP sur le corpus
+  natif seed 0 ;
+- une qualification fonctionnelle produit des propriétaires ACTION6 SMLP/STCK ;
 - une qualification C7 officielle du hook Region natif sur STCK et SMLP.
 
 Le contrôleur produit utilise uniquement le seam navigateur direct. Le Worker
@@ -90,12 +90,13 @@ par `main.ts`.
 
 Statut global :
 
-**OP28 est active dans le produit ; OP18 est transportée et consommée avec un
-stock revalidé ; l’acquisition et la première rétention d’un modèle adressé sont
-qualifiées depuis une ACTION6 explicitement autorisée ; C7 est clos pour le
-protocole Region STCK/SMLP ; le propriétaire produit de la première ACTION6, la
-continuité entre activations, le coût ciblé du nouveau chemin adressé et OP31
-restent ouverts.**
+**OP28 est active dans le produit pour une action simple, une décision conjointe
+SMLP et une carte STCK publique unique ; OP18 est transportée et consommée avec
+un stock revalidé ; les retours ACTION6 sélectionnés traversent l’acquisition du
+propriétaire puis l’observation passive FieldStock ; C7 reste clos pour le
+protocole Region STCK/SMLP. La continuité entre activations, une campagne produit
+réelle complète, le coût ciblé de la nouvelle composition et OP31 restent
+ouverts.**
 
 Cette reconstruction ne prouve ni une identité binaire avec Site 109, ni une
 parité totale V5/V6/V7, ni la présence d’un registre canonique complet des 76
@@ -115,8 +116,10 @@ points d’entrée V6.
   identités de composantes différées ;
 - `src/runtime/v6-public-addressed-field-learning.ts` : correspondances
   résiduelles strictes et dépendances de réponse ;
-- `src/runtime/v6-browser-common-campaign-host.ts` : propriétaires OP18/OP28,
-  dispatch, acquisition, apprentissage passif, revalidation et présentation ;
+- `src/runtime/v6-browser-common-campaign-host.ts` : dispatch, acquisition,
+  observations passives, revalidation et présentation ;
+- `src/runtime/v6-browser-product-campaign-host.ts` : composition active des
+  quatre propriétaires pairs ;
 - `src/runtime/v6-browser-agent-controller.ts` : propriétaire unique de la
   session Agent et boucle bornée ;
 - `src/runtime/observed-addressed-material-runtime.ts` : acquisition locale,
@@ -140,6 +143,10 @@ produit actuel.
 - `src/logos-engine/v6-common-campaign-owner.ts` ;
 - `src/logos-engine/v6-public-single-action-caller-adapter.ts` ;
 - `src/logos-engine/v6-field-stock-caller-adapter.ts` ;
+- `src/logos-engine/v6-joint-channel-owner.ts` ;
+- `src/logos-engine/v6-public-addressed-joint-channels.ts` ;
+- `src/logos-engine/v6-public-unique-stck-action6-port.ts` ;
+- `src/logos-engine/v6-public-unique-stck-action6-caller-adapter.ts` ;
 - `src/logos-engine/addressed-field-fit.ts` ;
 - `src/logos-engine/addressed-field-response.ts` ;
 - `src/logos-engine/addressed-field-retention.ts` ;
@@ -150,18 +157,19 @@ produit actuel.
 | Lot | État courant | Preuve acquise | Dette suivante |
 | --- | --- | --- | --- |
 | C0 | **terminé** | 31 calculs inventoriés et dispositions explicites | maintenir les statuts par besoin |
-| C1 | **contrôleur produit actif et qualifié** | campagne unique, même `needId`, acquisition sélectionnée avant observation passive, transfert Manual gracieux | snapshot/restauration de la campagne, du modèle, du prior et du retour en attente |
-| C2 | **OP18 transportée ; OP28 active ; acquisition initiale passive qualifiée** | modèle acquis, calibré puis retenu depuis des retours ACTION6 publics corrélés ; OP18 change la proposition suivante avec stock revalidé | propriétaire produit justifiant la première ACTION6 et propriétaire OP31 |
+| C1 | **contrôleur produit actif et qualifié** | campagne unique, même `needId`, acquisition sélectionnée avant observation passive, transfert Manual gracieux | snapshot/restauration de la campagne, des propriétaires et du retour en attente |
+| C2 | **OP18 et OP28 actives ; premières ACTION6 produit qualifiées** | SMLP joint consomme deux contributions ; STCK produit une coordonnée avec une carte unique ; retour acquis avant observation passive | campagne produit réelle complète, continuité et propriétaire OP31 |
 | C3 | **calculs et recouvrements qualifiés** | OP03/04/08/09/11/12/14/26 auditables | appeler uniquement depuis un producteur réel |
 | C4 | **audit complet, usages génériques non démontrés** | OP01/02/05/10/15/25 calculables | aucun raccord artificiel |
-| C5 | **retours spécialisés préservés** | FieldStock et Region couvrent notamment OP06/29/30 avec effet futur | propriétaire physique Region dans le produit et lot 9C `joint_channels` |
+| C5 | **retours spécialisés préservés** | FieldStock et Region couvrent notamment OP06/29/30 avec effet futur | propriétaire physique Region et seconde contribution STCK réellement indépendante |
 | C6 | **audit complet** | inconnue, échec borné, ambiguïté et impossibilité restent distincts | aucun raccord sans preuve de blocage ou reprise |
-| C7 | **performance officielle qualifiée pour Region STCK/SMLP** | protocole ABBA durable, quatre runners, deux jeux strictement sous +10 %, activité Region conservée | ne pas confondre avec le coût ciblé du nouveau chemin adressé ni avec la parité des 76 entrées V6 |
+| C7 | **performance officielle qualifiée pour Region STCK/SMLP** | protocole ABBA durable, quatre runners, deux jeux strictement sous +10 %, activité Region conservée | mesurer séparément la nouvelle composition produit sans réécrire la preuve Region |
 
 ## Contrôleur Agent produit
 
 `BrowserAgentController` est activé uniquement après sélection explicite du mode
-Agent. Il utilise `BrowserCommonCampaignHost` et n’instancie pas le Worker.
+Agent. Il utilise la composition de `v6-browser-product-campaign-host.ts` et
+n’instancie pas le Worker.
 
 Il garantit :
 
@@ -180,101 +188,76 @@ Il garantit :
 
 Le mode Manual reste direct et n’appelle aucune campagne Agent.
 
+## Premières ACTION6 produit
+
+### SMLP : propriétaire conjoint
+
+Le propriétaire conjoint SMLP consomme deux contributions distinctes :
+
+1. ACTION6 est disponible dans l’observation courante ;
+2. une porte visible est revalidée et fournit ses coordonnées publiques.
+
+Les deux contributions doivent partager le même `jointRef` et la même action.
+Supprimer l’une d’elles supprime la proposition. Le retour sélectionné est acquis
+par les deux canaux avec le même `needId`.
+
+Le Lot 9C2 conserve sa qualification row-major sur le corpus natif SMLP seed 0.
+Le produit navigateur emploie une variante plus stricte : exactement une porte
+qualifiée est exigée. Plusieurs portes visibles produisent `none`, sans classement
+local.
+
+### STCK : carte publique unique
+
+Le propriétaire STCK examine uniquement le frame public 64 × 64 et exige une
+seule carte qualifiée dans la pile gauche. La coordonnée est le centre public du
+corps de carte. Plusieurs cartes restent non résolues.
+
+Il ne réutilise pas la règle de benchmark « carte la plus basse », ne lit aucun
+état moteur et n’importe aucune solution préparée.
+
+### Ordre produit
+
+La chaîne active est :
+
+1. besoin public borné ;
+2. données publiques produites ;
+3. proposition propriétaire ;
+4. bundle OP28 et autorité Logos ;
+5. ACTION6 physique ;
+6. retour public corrélé ;
+7. acquisition avec le même `needId` par le propriétaire sélectionné ;
+8. observation passive FieldStock ;
+9. notification produit ;
+10. présentation ;
+11. décision suivante.
+
+La preuve produit vérifie que l’observation passive a lieu mais ne crée ni modèle,
+ni prior, ni stock lorsque le retour reste insuffisant pour `fitAddressedField()`.
+
 ## Acquisition initiale adressée
 
-### Besoin
+Le runtime FieldStock peut toujours acquérir un premier modèle depuis une suite
+de retours ACTION6 publics lorsque les conditions strictes sont réunies :
 
-Le runtime FieldStock produit démarrait vide. Il pouvait transporter et consommer
-OP18 avec un stock injecté ou revalidé, mais ne pouvait pas construire son
-premier modèle depuis un retour produit réel.
+- mouvement résiduel unique ;
+- exemplaire stationnaire de même signature ;
+- mobile rectangulaire ;
+- cible unique de même silhouette et palette différente ;
+- enceinte centrée unique ;
+- point ACTION6 appartenant au corps déplacé.
 
-### Source de preuve
+Les correspondances ambiguës restent `unresolved`. Après deux témoins alignés et
+une borne supérieure, une frontière officielle peut convertir le modèle en prior
+compact avec `alignment_supported: true`.
 
-La nouvelle chaîne ne traite qu’une ACTION6 :
-
-- déjà autorisée par un propriétaire explicite ;
-- portant deux coordonnées entières publiques ;
-- revenue dans le même niveau, le même compteur de niveaux terminés et le même
-  état officiel ;
-- observée après l’acquisition du propriétaire sélectionné.
-
-Elle ne produit ni l’action ni ses coordonnées.
-
-### Entités publiques et correspondance
-
-Les composantes visibles reçoivent une signature déterministe construite depuis
-la palette, la taille et le masque local. La position absolue reste séparée.
-
-La correspondance :
-
-1. retire les occurrences exactement stationnaires ;
-2. accepte seulement un résidu ancien et un résidu nouveau pour la même
-   signature ;
-3. conserve tout autre changement comme `unresolved` ;
-4. n’utilise aucune proximité ou classification implicite.
-
-Les modifications du grand composant de fond restent donc explicitement
-inconnues et ne sont pas attribuées au mobile.
-
-### Acquisition et calibration
-
-`fitAddressedField()` n’acquiert le modèle qu’avec :
-
-- un mouvement résiduel unique ;
-- un exemplaire stationnaire de même signature ;
-- un mobile rectangulaire ;
-- une seule cible de même silhouette et palette différente ;
-- une enceinte unique centrée autour de cette cible ;
-- un point ACTION6 appartenant au corps déplacé.
-
-Le même retour devient le premier échantillon de
-`recordAddressedFieldResponse()`. Les retours suivants peuvent :
-
-- relever la borne inférieure sur déplacement aligné ;
-- enregistrer une borne supérieure sur réponse stationnaire ;
-- réfuter le modèle sur déplacement vers une autre ancre ;
-- rester non résolus sans mutation si la correspondance est ambiguë.
-
-Après deux témoins alignés et une borne supérieure, une frontière officielle
-convertit le modèle en prior compact avec `alignment_supported: true`.
-
-### Ordre produit et preuve
-
-La chaîne qualifiée est :
-
-1. action physique du propriétaire sélectionné ;
-2. retour public ;
-3. acquisition avec le même `needId` par ce propriétaire ;
-4. apprentissage passif FieldStock ;
-5. frontière ou revalidation éventuelle ;
-6. notification produit ;
-7. présentation ;
-8. décision suivante.
-
-La preuve démontre :
-
-- déplacement `(1,1) → (2,1)` et acquisition du modèle ;
-- déplacement `(2,1) → (3,1)` et deuxième témoin aligné ;
-- ACTION6 distante sans mouvement et borne supérieure `16` ;
-- frontière officielle et rétention du premier prior ;
-- conservation des bornes et du support d’alignement ;
-- apprentissage dans le vrai host navigateur seulement après l’acquisition du
-  propriétaire ACTION6 explicite.
-
-Disposition :
-
-**acquisition, calibration et première rétention adressée démontrées depuis des
-retours ACTION6 publics explicites ; le propriétaire produit de la première
-action reste absent.**
+Les nouveaux propriétaires rendent désormais possible l’origine produit de
+certains retours ACTION6, mais chaque retour reste soumis aux gardes historiques.
+Aucune connaissance n’est créée simplement parce qu’une action a été exécutée.
 
 ## Chaîne OP18 produit
 
 Un stock adressé retenu et revalidé laisse une demande typée insatisfaite alors
 qu’ACTION6 est disponible.
-
-`BrowserFieldStockCampaignTransport` construit le contexte depuis l’observation
-publique, les lignes de palette, le niveau, le score, le runtime exact et un
-budget borné.
 
 `FieldStockCallerOwnerAdapter` :
 
@@ -285,29 +268,26 @@ budget borné.
 - appelle `afterStock()` puis `recordStock()` ;
 - modifie la proposition suivante.
 
-La preuve navigateur produit ACTION6 `(3,1)`, acquiert son retour, puis produit
-ACTION6 `(4,1)`.
+La preuve navigateur historique produit ACTION6 `(3,1)`, acquiert son retour,
+puis produit ACTION6 `(4,1)`.
 
 Disposition OP18 :
 
 **transport, release, action, retour, acquisition et effet sur la décision
-suivante démontrés dans le produit lorsqu’un stock courant revalidé existe. Le
-prior peut maintenant provenir de la chaîne publique d’acquisition, mais aucune
-première ACTION6 autonome n’est encore générée.**
+suivante démontrés lorsqu’un stock courant revalidé existe. Les retours initiaux
+peuvent désormais provenir de propriétaires produit publics bornés.**
 
 ## Chaîne OP28 produit
 
-Le fallback public strict produit une proposition uniquement lorsque
-l’observation expose exactement une action simple distincte hors RESET et ne
-requiert aucune coordonnée manquante.
+Trois formes OP28 sont actives sous des contrats distincts :
 
-ACTION6 seule sans coordonnées ne produit rien. Plusieurs actions publiques
-produisent `none`. Plusieurs propriétaires produisent `ambiguous`. Aucun
-fallback n’est autorisé.
+1. action publique simple unique, sans coordonnée ;
+2. décision conjointe SMLP avec disponibilité et cible visible ;
+3. ACTION6 STCK avec une carte publique unique.
 
-La mesure supplémentaire des composantes n’est pas exécutée sur le chemin OP28
-simple. Elle reste limitée aux revalidations de prior et aux retours ACTION6
-explicitement évalués.
+ACTION6 sans coordonnées et sans producteur spécialisé ne produit rien. Plusieurs
+cibles spécialisées produisent `none`. Plusieurs propriétaires indépendants
+produisent `ambiguous`. Aucun fallback ne masque ces états.
 
 ## Disposition des 31 opérations
 
@@ -330,7 +310,7 @@ explicitement évalués.
 | OP15 | calcul qualifié, usage produit non démontré | aucun sélecteur réel d’objectif intermédiaire |
 | OP16 | calcul qualifié, usage produit non démontré | aucun producteur de blocage global prouvé |
 | OP17 | calcul qualifié, usage produit non démontré | aucune reprise autorisée avec préservation complète |
-| OP18 | **chaîne produit transportée et consommée ; chemin initial vers le prior qualifié** | modèle acquis depuis retour ACTION6 externe, calibré, retenu, revalidable puis consommable ; premier propriétaire ACTION6 absent |
+| OP18 | **chaîne produit transportée et consommée** | modèle adressé acquis depuis retours corrélés, retenu, revalidable puis consommable ; nouveaux retours produit possibles mais toujours soumis aux gardes |
 | OP19 | calcul qualifié, usage produit non démontré | aucun préfixe forcé prouvé produit |
 | OP20 | calcul qualifié, usage produit non démontré | aucune question d’utilité d’objet liée à une stratégie active |
 | OP21 | calcul qualifié, usage produit non démontré | aucune question d’utilité d’espace liée à un objectif actif |
@@ -340,47 +320,57 @@ explicitement évalués.
 | OP25 | calcul qualifié, usage produit non démontré | non-réfutation conservée sans fausse preuve de faisabilité |
 | OP26 | manquante ou recouverte familialement | aucun domaine commun d’accès vérifiés vers une cible |
 | OP27 | calcul qualifié, usage produit non démontré | aucune permutation avec préservation complète |
-| OP28 | **chaîne produit active sous condition stricte** | bundle admis, action physique, même `needId`, acquisition avant suite ; aucune coordonnée ACTION6 inventée |
+| OP28 | **chaînes produit actives sous conditions strictes** | fallback simple, SMLP conjoint et STCK unique : bundle admis, action physique, même `needId`, acquisition avant suite |
 | OP29 | fonction spécialisée démontrée | réponses adressées, `afterStock()` et Region comparent les retours utiles |
 | OP30 | fonction spécialisée démontrée | rétention, `recordStock()` et Region changent les connaissances futures |
 | OP31 | appel générique disponible, contribution absente | aucun propriétaire d’objectif produit ne maintient ou réoriente la suite |
 
 ## Qualification combinée
 
-### Acquisition adressée et réconciliation canonique
+### Propriétaires produit ACTION6
 
-- merge de réconciliation :
-  `23694816d35f4f050e43a8660be45a063b6ee5d9` ;
-- run GitHub Actions : `43358235167` ;
-- job : `131665294852` ;
+- run GitHub Actions : `43362500453` ;
+- job : `131679075165` ;
+- candidat : `e821e3221b049b59bc65fe4ea18fad9d3dc13246` ;
 - Node : `22.18.0` ;
 - `npm ci` : réussi ;
 - typecheck : réussi ;
-- régression complète : **336/336** ;
+- régression TypeScript complète : **363/363** ;
 - échecs, annulations, tests ignorés et TODO : `0` ;
 - build de production : réussi ;
-- modules transformés : `56` ;
+- modules transformés : `62` ;
 - galerie : 100 jeux, 636 prévisualisations, 4 atlas natifs ;
 - câblage : `logos-product-wiring-present` ;
-- fichiers source inspectés : `24`.
+- fichiers source inspectés : `25`.
 
 Deux vulnérabilités de dépendances de sévérité haute préexistantes restent
 signalées par `npm ci`.
 
+### Portée fonctionnelle
+
+La qualification combinée démontre :
+
+- activation du propriétaire conjoint SMLP dans le host produit ;
+- consommation des deux contributions causales avant ACTION6 ;
+- acquisition du même retour et du même `needId` par les deux canaux ;
+- refus produit de plusieurs portes SMLP ;
+- production STCK uniquement avec une carte publique unique ;
+- refus de plusieurs cartes STCK et des jeux non supportés ;
+- ordre action → acquisition sélectionnée → observation passive → présentation ;
+- absence d’apprentissage FieldStock forcé sur un retour insuffisant.
+
+Elle ne constitue pas encore une campagne navigateur complète contre Pyodide ni
+une qualification native complète du producteur STCK.
+
 ### C7 officiel Region
 
-La preuve officielle durable rapporte :
+La preuve officielle durable conserve :
 
-- statut : `official-performance-qualified` ;
-- protocole : `A1 → B1 → B2 → A2` ;
+- protocole `A1 → B1 → B2 → A2` ;
 - 40 invocations ;
-- 8 sessions de warm-up et 24 actions de warm-up ;
-- 32 sessions mesurées et 400 actions mesurées ;
+- 32 sessions et 400 actions mesurées ;
 - aucun échantillon supprimé ;
-- aucun retry caché.
-
-Résultats retenus :
-
+- aucun retry caché ;
 - **STCK : A 54,5 ms, B 58,4 ms, +7,155963 % — accepté** ;
 - **SMLP : A 123,95 ms, B 118,15 ms, −4,679306 % — accepté**.
 
@@ -392,57 +382,69 @@ Disposition C7 :
 **performance officielle qualifiée pour le hook Region natif sur STCK et SMLP.**
 
 Cette qualification ne prouve pas la parité totale des 76 points d’entrée V6 et
-ne mesure pas séparément le nouveau chemin d’acquisition adressée.
+ne mesure pas la nouvelle composition produit.
 
-## Performance du nouveau chemin adressé
+## Performance de la nouvelle composition
 
-Le chemin OP28 simple ne matérialise pas les composantes publiques ajoutées. Le
-coût nouveau est limité aux retours ACTION6 évalués pour apprentissage et aux
-revalidations de prior déjà prévues.
+Les nouveaux producteurs SMLP/STCK sont maintenant actifs dans le host produit.
+Leur coût n’appartient pas à l’ancienne mesure Region C7 et n’est pas encore
+qualifié séparément.
 
-Cette limitation structurelle ne remplace pas une mesure ciblée. Cette mesure
-sera pertinente lorsqu’un vrai propriétaire produit activera effectivement la
-première ACTION6 adressée.
+Le contexte produit SMLP s’arrête après deux portes visibles et le producteur
+STCK s’arrête après deux cartes qualifiées, ce qui borne les refus d’ambiguïté.
+Cette propriété structurelle ne remplace pas une mesure de session complète.
 
-Le coût ciblé non mesuré du nouveau chemin ne réouvre pas C7 pour son périmètre
-Region déjà qualifié.
+Le coût ciblé non mesuré ne réouvre pas C7 pour son périmètre Region déjà
+qualifié, mais bloque une revendication de performance pour la nouvelle
+composition produit.
 
 ## Limites ouvertes
 
-- aucun propriétaire produit ne justifie encore la première ACTION6 adressée ;
+- aucune campagne navigateur produit complète SMLP/STCK qualifiée contre le
+  transport Pyodide réel ;
+- STCK ne possède pas encore deux contributions causales indépendantes ;
 - aucune persistance du modèle, du prior ou du stock entre activations Agent ;
-- snapshot/restauration de la campagne, du `needId` et de l’action en attente non
-  raccordés au produit ;
+- snapshot/restauration de la campagne, des propriétaires, du `needId` et de
+  l’action en attente non raccordés au produit ;
 - Region n’est pas encore un propriétaire physique du contrôleur produit ;
 - aucun propriétaire OP31 ;
 - registre canonique des 76 points d’entrée V6 absent ;
-- coût ciblé du nouveau chemin d’acquisition non mesuré séparément ;
+- coût ciblé de la nouvelle composition produit non mesuré séparément ;
 - aucune publication Site dans cette tranche.
 
 ## Feuille de route actualisée
 
-### Étape immédiate : propriétaire initial et continuité
+### Étape immédiate : campagne produit réelle
 
-1. identifier un besoin réel produisant des coordonnées ACTION6 depuis la seule
-   observation publique ;
-2. enregistrer ce producteur comme propriétaire neutre sans priorité implicite ;
-3. démontrer que ses retours alimentent l’acquisition et la rétention ici
-   qualifiées ;
-4. ajouter snapshot/restauration atomiques du modèle, du prior, du stock, du
-   propriétaire commun et du retour en attente ;
-5. vérifier une réactivation Agent sans perte ni double consommation.
+1. exécuter une campagne navigateur bornée sur SMLP avec le propriétaire conjoint
+   réellement actif contre le transport Pyodide ;
+2. vérifier le même `needId` du besoin jusqu’aux deux acquisitions de canal ;
+3. confirmer l’ordre acquisition sélectionnée → observation passive →
+   présentation sur les observations réelles ;
+4. conserver `none` lorsque plusieurs portes publiques subsistent ;
+5. publier la provenance et les résultats sans transformer cette campagne en
+   preuve de performance.
 
-### Étape suivante : élargissement symbolique
+### Étape suivante : STCK et continuité
 
-1. ajouter un benchmark ciblé du chemin d’acquisition lorsqu’il devient actif ;
+1. qualifier le producteur STCK sur son corpus natif ;
+2. rechercher une seconde contribution réellement indépendante avant toute
+   généralisation conjointe STCK ;
+3. ajouter snapshot/restauration atomiques de la campagne, des propriétaires, du
+   modèle, du prior, du stock et du retour en attente ;
+4. vérifier une réactivation Agent sans perte ni double consommation.
+
+### Performance et élargissement symbolique
+
+1. mesurer séparément le coût de la composition produit active ;
 2. compléter le propriétaire physique Region ;
-3. poursuivre le lot 9C `joint_channels` ;
-4. généraliser les observations passives avec déduplication explicite ;
-5. identifier un propriétaire d’objectif réel avant OP31.
+3. généraliser les observations passives avec déduplication explicite ;
+4. identifier un propriétaire d’objectif réel avant OP31 ;
+5. reconstruire séparément le registre des 76 points d’entrée si une revendication
+   de compteur ou de parité devient nécessaire.
 
 ### Publication
 
-1. conserver les preuves C7 officielles sans les réécrire ;
-2. intégrer chaque tranche qualifiée sur GitHub canonique ;
-3. publier le Site uniquement depuis un commit GitHub canonique qualifié ;
-4. vérifier ensuite GitHub ↔ Site.
+1. intégrer chaque tranche qualifiée sur GitHub canonique ;
+2. publier le Site uniquement depuis un commit GitHub canonique qualifié ;
+3. vérifier ensuite GitHub ↔ Site.
