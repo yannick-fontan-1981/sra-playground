@@ -57,20 +57,24 @@
     "docs/recovery/lot10d-temporal-observation-state.md",
     "src/logos-engine/v6-temporal-selection-adapter.ts",
     "tests/v6-temporal-selection-adapter.test.ts",
-    "docs/recovery/lot10d-temporal-selection-adapter.md"
+    "docs/recovery/lot10d-temporal-selection-adapter.md",
+    "src/logos-engine/v6-temporal-decision-receipt.ts",
+    "tests/v6-temporal-decision-receipt.test.ts",
+    "docs/recovery/lot10d-temporal-decision-receipt.md",
+    ".github/workflows/lot10d-temporal-recovery.yml"
   ],
   "functional_qualification": {
-    "tests_passed": 42,
+    "tests_passed": 52,
     "tests_failed": 0,
-    "latest_stage_tests_passed": 8,
-    "latest_stage_tests_failed": 0,
-    "latest_stage_command": "node --experimental-strip-types --test tests/v6-temporal-selection-adapter.test.ts",
-    "source_typecheck": "passed_strict_for_5_temporal_sources",
-    "status": "descriptive_external_selection_adapter_qualified",
+    "latest_ci_run_id": 43337775418,
+    "latest_ci_head": "dc40029d8fa846295424ba2695e4a3e274abea27",
+    "latest_ci_conclusion": "success",
+    "source_typecheck": "passed_strict_for_6_temporal_sources",
+    "status": "source_drm_decision_receipt_and_adapter_qualified",
     "historical_selector_reconstructed": false,
     "historical_state_machine_reconstructed": false
   },
-  "next_step": "reconstruct a Source/DRM decision receipt with workflow/source/observation/domain/result provenance, then require it in the adapter instead of a bare selectedRef",
+  "next_step": "bridge the verified decision receipt and minimal temporal state into the existing Logos V6 trace/consumption layer without ACT release",
   "working_branch": "recovery/lot10d-temporal-selection-restart2-20261112",
   "previous_recovery_branch": "recovery/lot10d-temporal-selection-restart-20261112"
 }
