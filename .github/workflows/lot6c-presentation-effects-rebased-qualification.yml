@@ -1,0 +1,38 @@
+name: Lot 6C presentation effects rebased qualification
+
+on:
+  push:
+    branches:
+      - recovery/lot6c-presentation-effects-integration-rebased-20261112
+
+permissions:
+  contents: read
+
+jobs:
+  qualify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.18.0'
+          cache: npm
+      - run: npm ci
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Lot 6C targeted suite
+        run: >-
+          node --experimental-transform-types --test
+          tests/agent-product-dispatch.test.ts
+          tests/browser-game-action-request.test.ts
+          tests/browser-game-worker-transport.test.ts
+          tests/product-dispatch-browser-runtime-integration.test.ts
+          tests/product-presentation.test.ts
+          tests/product-presentation-effects.test.ts
+          tests/main-product-dispatch-integration.test.ts
+          tests/main-product-presentation-effects-integration.test.ts
+      - name: Full TypeScript regression suite
+        run: node --experimental-transform-types --test tests/*.test.ts
+      - name: Check repository diff
+        run: git diff --check && test -z "$(git status --short)"
