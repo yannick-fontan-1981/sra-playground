@@ -8,8 +8,10 @@ Dernière consolidation : 12 novembre 2026.
 - Branche canonique cible : `recovery/site109-reconstruction-20261112`
 - Baseline canonique au début de cette étape :
   `87a538a1c776fb974a1767f30fea735aac28ded9`
-- Baseline canonique relue avant intégration :
+- Baseline canonique réconciliée avant qualification finale :
   `6304bec8c99a05b0023692f8fe7f432394acaa11`
+- Commit de réconciliation de la branche de travail :
+  `ed032442acdeb7c703e8f40917099184aa459ada`
 - Branche de travail : `op01-op31-common-campaign-owner-20261112`
 - Donneur OP01–OP31 : `op01-op31-c0-c7-audit`
 - Plan : `docs/migration/op01-op31-verification-plan.md`
@@ -238,7 +240,7 @@ absence.
 | OP14 | **admission bridge présente, routage natif absent** | aucun besoin produit dans l’autorité actuelle | garde bridge | non en produit |
 | autres OP | **hors périmètre actuel** | aucun nouveau besoin runtime établi | selon audits C3–C6 | non revendiquée |
 
-## Tests et qualification
+## Tests et qualification finale réconciliée
 
 Nouveaux tests de cette étape :
 
@@ -263,15 +265,16 @@ Preuves couvertes :
 - retour FieldStock confirmé → prochaine action différente ;
 - transfert propriétaire sans fuite du payload dans le résultat public.
 
-Qualification GitHub Actions :
+Qualification GitHub Actions sur l’arbre contenant les derniers apports Lot 6C
+et Region :
 
-- run : `43346240327` ;
-- job : `131626183883` ;
-- commit qualifié : `4392f59907e30a1769e9f7305d3e2bfbba4c0d8c` ;
+- run : `43346791891` ;
+- job : `131627959298` ;
+- commit qualifié : `d5fc07b9c825078c7a241d6511eb91287befbc7f` ;
 - Node : `22.18.0` ;
 - `npm ci` : réussi ;
 - `npm run typecheck` : réussi ;
-- régression TypeScript complète : **282/282 tests réussis** ;
+- régression TypeScript complète : **286/286 tests réussis** ;
 - diagnostic de coût : réussi.
 
 Le workflow temporaire est supprimé avant intégration.
@@ -283,14 +286,14 @@ La première version détachée du transport commun mesurait environ :
 - release OP28 directe : `4,07 µs/cycle` ;
 - campagne commune avec retour : `61,90 µs/cycle`.
 
-Après transfert propriétaire unique :
+Après transfert propriétaire unique, sur l’arbre réconcilié :
 
-- aucun besoin direct : `0,343 µs/cycle` ;
-- aucun besoin via campagne : `0,289 µs/cycle` ;
-- release OP28 directe : `3,467 µs/cycle` ;
-- campagne commune avec retour corrélé : `9,381 µs/cycle` ;
-- surcoût absolu restant : `5,914 µs/cycle` ;
-- réduction du coût du chemin commun : environ `84,8 %`.
+- aucun besoin direct : `0,233 µs/cycle` ;
+- aucun besoin via campagne : `0,349 µs/cycle` ;
+- release OP28 directe : `2,337 µs/cycle` ;
+- campagne commune avec retour corrélé : `6,894 µs/cycle` ;
+- surcoût absolu restant : `4,557 µs/cycle` ;
+- réduction du coût du chemin commun : environ `88,9 %`.
 
 Cette mesure comprend propriété, état en attente, acheminement du retour et
 déduplication, alors que la référence directe ne fait que préparer et libérer
