@@ -5,7 +5,7 @@
   "baseline": {
     "repository": "yannick-fontan-1981/sra-playground",
     "canonicalBranch": "recovery/site109-reconstruction-20261112",
-    "canonicalCommit": "549c06dc5ff4d23ecfea92ecfd260896a2a533f3",
+    "canonicalCommit": "e465e78aa48b69e81e8b5afadbc094428387cfe9",
     "sourcePolicy": "GitHub canonical; evidence before count"
   },
   "purpose": "Inventory durable reconstructed operations and runtime capabilities without projecting them onto the unrecovered historical 76-slot registry.",

@@ -521,27 +521,27 @@ Cette preuve contractuelle reste la fondation du raccord host/contrôleur. La pe
 
 ## Qualification de la continuité durable C1
 
-La tranche durable inclut le canonique `549c06dc5ff4d23ecfea92ecfd260896a2a533f3` via le merge de réconciliation `1bd7b8646876ae92ace1215222537b542b688b76`.
+La qualification finale inclut le canonique `e465e78aa48b69e81e8b5afadbc094428387cfe9` via le merge de réconciliation `a8d4615b08c2beac9e44d3963a4a7b490b08716d`.
 
-Résultats de qualification :
+Résultats :
 
 - tests ciblés continuité durable : **34/34** ;
+- contrats de la fixture canonique : **5/5** ;
 - régression TypeScript complète : **413/413** ;
 - registre V6 reconstruit : valide ;
 - build production : réussi, **67** modules, 100 jeux, 636 prévisualisations et 4 atlas ;
-- Chrome headless et Pyodide : SMLP niveau 1, ACTION6 `(32,26)`, delta réel de 9 pixels ;
-- rechargement complet de page et création d'un worker frais ;
-- replay vérifié de `load + ACTION6` pour reconstruire le runtime ;
-- même observation retournée, même `sessionId`, même compteur et même `needId` ;
-- acquisition routée une fois, sans nouvel appel Agent à `action()` et sans seconde présentation ;
+- rechargement Chrome/Pyodide : SMLP niveau 1, ACTION6 `(32,26)`, delta réel de 9 pixels ;
+- worker frais, replay vérifié de `load + ACTION6`, même observation, même `sessionId`, compteur et `needId` ;
+- acquisition routée une fois, sans nouvel appel Agent et sans seconde présentation ;
+- fixture canonique complémentaire : 2 vrais Workers, 2 actions physiques, 1 réactivation et 1 retour envoyé repris, zéro replay contrôleur et zéro présentation dupliquée ;
 - aucune publication Site et aucune qualification de performance revendiquée.
 
-Preuves durables :
+Preuves :
 
 - `docs/recovery/op01-op31-browser-durable-resume-20261113.md` ;
 - `docs/recovery/op01-op31-browser-durable-resume-qualified.json`.
 
-La reconstruction inter-page est volontairement explicite : le tas Python n'est pas sérialisé. Le runtime est rejoué dans un worker neuf et chaque observation réglée est comparée à son identité publique avant que l'Agent puisse reprendre.
+Le tas Python n'est pas sérialisé. Le runtime durable est reconstruit dans un worker neuf et chaque observation réglée est vérifiée avant reprise de l'Agent.
 
 ## Requalification C7 du contrat de configuration canonique
 
