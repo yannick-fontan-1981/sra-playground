@@ -1355,3 +1355,41 @@ Détail :
 
 Statut :
 **fonctionnellement qualifié, performance officielle à confirmer**.
+
+
+## C7 — corpus candidat STCK/SMLP public-only
+
+Les jeux STCK et SMLP sont durables dans le catalogue et leurs engines de
+référence sont publiés individuellement.
+
+Preuves :
+- STCK : `stack_iso.py`, 6 niveaux, ACTION5/6/7 hors terminal, ACTION7 au terminal ;
+- SMLP : `same_length_path.py`, 6 niveaux, ACTION5/6/7 hors terminal, ACTION7 au terminal ;
+- `public/python/game_bridge.py` construit les custom games avec `instance_seed=0` ;
+- archive durable : `public/python/custom-games.zip`, blob Git
+  `a43147ebf7c6915caf634fc5f56610290c91acae`.
+
+Aucun corpus historique d'actions STCK/SMLP n'a été retrouvé.
+
+Un corpus **candidat de reconstruction** est ajouté :
+
+`scripts/native-loop-public-action-corpus.mjs`
+
+Règle :
+- seed 0 ;
+- niveau 1 ;
+- ACTION5 si disponible ;
+- sinon premier directionnel public 1/2/3/4 ;
+- ACTION7 seulement en fallback public ;
+- jamais de coordonnées ACTION6 inventées.
+
+Tests : **5/5**.
+
+Ce corpus n'est pas ajouté au manifeste officiel tant qu'il n'a pas été exécuté
+sur les vrais assets et gelé avec observations/actions, sourceRef et timing scope.
+
+Plan :
+`docs/recovery/native-loop-runner-reconstruction-plan.md`.
+
+Statut :
+**fonctionnellement qualifié, performance officielle à confirmer**.
