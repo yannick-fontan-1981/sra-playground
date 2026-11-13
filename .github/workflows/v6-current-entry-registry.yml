@@ -11,6 +11,7 @@ on:
       - 'docs/migration/v6-current-entry-registry.md'
       - 'docs/migration/v6-delivery-roadmap.md'
       - 'scripts/verify-v6-current-entry-registry.mjs'
+      - 'scripts/sync-v6-delivery-roadmap-registry.mjs'
       - 'tests/v6-current-entry-registry.test.mjs'
   pull_request:
     paths:
@@ -20,6 +21,7 @@ on:
       - 'docs/migration/v6-current-entry-registry.md'
       - 'docs/migration/v6-delivery-roadmap.md'
       - 'scripts/verify-v6-current-entry-registry.mjs'
+      - 'scripts/sync-v6-delivery-roadmap-registry.mjs'
       - 'tests/v6-current-entry-registry.test.mjs'
 
 concurrency:
@@ -42,6 +44,9 @@ jobs:
 
       - name: Verify registry and generated Markdown
         run: node scripts/verify-v6-current-entry-registry.mjs
+
+      - name: Verify delivery roadmap registry status
+        run: node scripts/sync-v6-delivery-roadmap-registry.mjs --check
 
       - name: Run registry contract tests
         run: node --test tests/v6-current-entry-registry.test.mjs
