@@ -104,3 +104,35 @@ test('donor map attributes exactly-once delivery to ActionBoundary rather than t
   assert.match(source, /dispatch déjà enregistré est réutilisé sans nouvel envoi/);
   assert.match(source, /consommation exactement une fois appartient donc à une étape séparée/);
 });
+
+test('donor map records the minimal historical ActOutput pending the environment boundary', () => {
+  const source = donor('docs/recovery/lot10d-temporal-action-release-donor-map.md');
+  for (const field of [
+    'action_ref',
+    'action_intent_id',
+    'action_release_permit_id',
+    'pending_environment_boundary',
+  ]) {
+    assert.match(source, new RegExp(field));
+  }
+  assert.match(source, /Le transport environnemental reste dans `ActionBoundary`/);
+});
+
+test('donor map preserves current-context revalidation and the validated-to-released transition', () => {
+  const source = donor('docs/recovery/lot10d-temporal-action-release-donor-map.md');
+  assert.match(source, /VALIDATED -> RELEASED/);
+  assert.match(source, /absence de supports retirés/);
+  assert.match(source, /responsabilité courante/);
+  assert.match(source, /preuves courantes de consommation du but/);
+  assert.match(source, /continuation parent/);
+  assert.match(source, /contexte canonique d'exécution/);
+});
+
+test('donor map keeps terminal ACT consumption separate from exactly-once environment delivery', () => {
+  const source = donor('docs/recovery/lot10d-temporal-action-release-donor-map.md');
+  assert.match(source, /actionReleased: true.*future frontière environnementale/s);
+  assert.match(source, /environmentDispatchAuthorized: false/);
+  assert.match(source, /aucun `AgentAction` ni cible exécutable/);
+  assert.match(source, /ne remplace pas l'envoi exactement une fois de l'environnement/);
+  assert.match(source, /responsabilité future d'`ActionBoundary`/);
+});
