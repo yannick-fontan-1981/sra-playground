@@ -34,6 +34,7 @@ function validateDispatches(dispatchByGame) {
  * Singleton method identities make no cross-intervention equivalence claim.
  * Each useful public ACTION6 return is admitted as its own explicitly scoped
  * method family, which exercises Region learning without inventing reuse.
+ * This producer uses only invocation/action identity and never public frames.
  */
 export function nativeRegionBenchmarkMethodRef({ index, descriptor }) {
   if (!descriptor || !Number.isInteger(descriptor.invocationIndex)) {
@@ -59,8 +60,14 @@ export function createNativeRegionBenchmarkRunSession({
     selectAction: selectNativeRegionAction6CostAction,
   };
   const hooks = {
-    STCK: createRegionInterventionCandidateHook({ methodRefFor: nativeRegionBenchmarkMethodRef }),
-    SMLP: createRegionInterventionCandidateHook({ methodRefFor: nativeRegionBenchmarkMethodRef }),
+    STCK: createRegionInterventionCandidateHook({
+      methodRefFor: nativeRegionBenchmarkMethodRef,
+      methodRefInput: 'identity',
+    }),
+    SMLP: createRegionInterventionCandidateHook({
+      methodRefFor: nativeRegionBenchmarkMethodRef,
+      methodRefInput: 'identity',
+    }),
   };
 
   const runners = {
@@ -104,6 +111,7 @@ export const NATIVE_REGION_BENCHMARK_RUNNER_IDENTITIES = Object.freeze({
   referenceVariant: 'A: same native transport and ACTION6 corpus, Region hook disabled',
   candidateVariant: 'B: same native transport and ACTION6 corpus, real region_intervention hook enabled',
   methodRefStrategy: 'one explicit singleton methodRef per invocation/action; no inferred method equivalence',
+  methodRefInput: 'identity-only; public frames are not cloned for method identity',
   games: Object.freeze({
     STCK: Object.freeze({ gameId: 'stck-c0000001', seed: 0, startLevel: 1 }),
     SMLP: Object.freeze({ gameId: 'smlp-c3000001', seed: 0, startLevel: 1 }),
