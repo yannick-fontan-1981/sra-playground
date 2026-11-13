@@ -1,0 +1,42 @@
+name: V6 current reconstruction registry
+
+on:
+  push:
+    branches:
+      - recovery/site109-reconstruction-20261112
+      - 'recovery/v6-current-reconstruction-registry-*'
+    paths:
+      - docs/migration/v6-entry-point-progress.json
+      - docs/migration/v6-current-registry/**
+      - docs/recovery/v6-current-reconstruction-registry-20261113.md
+      - docs/migration/v6-delivery-roadmap.md
+      - scripts/verify-v6-current-reconstruction-registry.mjs
+      - tests/v6-current-reconstruction-registry.test.mjs
+      - .github/workflows/v6-current-reconstruction-registry.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.18.0'
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Verify current reconstruction registry
+        run: node scripts/verify-v6-current-reconstruction-registry.mjs
+      - name: Test registry guard
+        run: node --test tests/v6-current-reconstruction-registry.test.mjs
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Full TypeScript regression
+        run: node --experimental-transform-types --test tests/*.test.ts
+      - name: Production build
+        run: npm run build
