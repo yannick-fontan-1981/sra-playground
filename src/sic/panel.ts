@@ -1247,6 +1247,7 @@ function renderGenericTimeline(panel: HTMLElement, container: Element, selected:
       factsList.push(['SIC need', recoveryDecision.need], ['Active strategy', recoveryDecision.strategy],
         ['Recovery objective', recoveryDecision.objective],
         ['Configured search limits', `${recoveryDecision.maxDepth} moves · ${recoveryDecision.maxNodes} states`]);
+      if (recoveryDecision.packDigest) factsList.push(['Pack revision', recoveryDecision.packDigest.slice(0, 12)]);
     }
     for (const [name, description] of factsList) {
       const term = document.createElement('dt'), value = document.createElement('dd');

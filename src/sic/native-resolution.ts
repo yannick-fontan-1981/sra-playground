@@ -45,7 +45,8 @@ export interface NativeResolution {
   readonly operation: string | null;
   readonly searchOperation?: string;
   readonly recoveryOperations?: readonly { key: string; finding: string }[];
-  readonly recoveryDecision?: { readonly strategy: string; readonly need: string; readonly objective: string; readonly maxDepth: number; readonly maxNodes: number };
+  readonly recoveryDecision?: { readonly strategy: string; readonly need: string; readonly objective: string; readonly maxDepth: number;
+    readonly maxNodes: number; readonly packDigest: string | null };
   readonly recoveryAction?: number;
   readonly composition: string | null;
   readonly compositions: readonly { readonly id: string; readonly role: string | null; readonly observed: boolean | null }[];
@@ -232,7 +233,8 @@ export function readNativeResolution(agent: {
   const maxDepth = natural(recoveryPack?.maxDepth), maxNodes = natural(recoveryPack?.maxNodes);
   const recoveryDecision = sic?.strategy === rootedRecoveryStrategy.id && recoveryPack?.mode === 'active'
     && maxDepth !== null && maxNodes !== null
-    ? { strategy: rootedRecoveryStrategy.label, need: rootedRecoveryStrategy.need, objective: rootedRecoveryStrategy.objective, maxDepth, maxNodes }
+    ? { strategy: rootedRecoveryStrategy.label, need: rootedRecoveryStrategy.need, objective: rootedRecoveryStrategy.objective,
+      maxDepth, maxNodes, packDigest: typeof sic.packDigest === 'string' && /^[a-f0-9]{64}$/.test(sic.packDigest) ? sic.packDigest : null }
     : undefined;
   const previousProjection = routeIndex > 0 && Array.isArray(rooted?.predictions) ? record(rooted.predictions[routeIndex - 1]) : null;
   const rootBox = bounds(previousProjection?.root ?? rootedScene?.root);

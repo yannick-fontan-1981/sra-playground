@@ -7,6 +7,7 @@ import { planCellPush } from '../src/logos-engine/v6-rooted-line-revision.ts';
 import { measureRootedLine } from '../src/logos-engine/v6-rooted-line-observation.ts';
 import { readNativeResolution } from '../src/sic/native-resolution.ts';
 import { compileRecoveryPack, defaultRecoveryPack, selectRootedRecovery } from '../src/sic/active-recovery.ts';
+import { nextRecoveryRevision, readRecoveryRevision, recoveryRevision } from '../src/sic/recovery-pack.ts';
 
 const trace = new URL('../docs/migration/lot3d-evidence/final/sk48-rooted-session/sk48-public-trace.json.gz', import.meta.url);
 const policy = new URL('../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm', import.meta.url);
@@ -57,6 +58,7 @@ test('an observed push chain unblocks rooted-line search, retaining its estimate
   assert.equal(view?.recoveryAction, 12);
   assert.equal(view?.recoveryDecision?.strategy, 'Revise the contact projection');
   assert.equal(view?.recoveryDecision?.maxDepth, 88);
+  assert.equal(view?.recoveryDecision?.packDigest, recoveryRevision(defaultRecoveryPack).digest);
   assert.equal(view?.operation, 'OP18');
   assert.deepEqual(view?.recoveryOperations?.map(operation => operation.key), ['OP03', 'OP12', 'OP08', 'OP26']);
   assert.equal(rootedLineBefore(revised, 0, rows, {
@@ -71,4 +73,19 @@ test('the recovery pack accepts only the native capability and bounded search li
   assert.throws(() => compileRecoveryPack({ ...defaultRecoveryPack, action: 'ACTION3' }), TypeError);
   assert.throws(() => compileRecoveryPack({ ...defaultRecoveryPack, version: 2 }), TypeError);
   assert.throws(() => compileRecoveryPack({ ...defaultRecoveryPack, maxNodes: 1001 }), RangeError);
+});
+
+test('portable recovery packs validate content and preserve the last distinct revision', () => {
+  const active = recoveryRevision(defaultRecoveryPack);
+  const shadow = recoveryRevision({ ...defaultRecoveryPack, mode: 'shadow' });
+  assert.notEqual(active.digest, shadow.digest);
+  const exported = JSON.parse(JSON.stringify(shadow));
+  assert.deepEqual(readRecoveryRevision(exported), shadow);
+  assert.throws(() => readRecoveryRevision({ ...exported, schemaVersion: 2 }), /version/);
+  assert.throws(() => readRecoveryRevision({ ...exported, configuration: undefined }), /configuration/);
+  assert.throws(() => readRecoveryRevision({ ...exported, configuration: active.configuration }), /digest/);
+  assert.throws(() => readRecoveryRevision({ ...exported, actions: [] }), TypeError);
+  const saved = nextRecoveryRevision(active, null, shadow);
+  assert.deepEqual(saved, { current: shadow, previous: active });
+  assert.deepEqual(nextRecoveryRevision(saved.current, saved.previous, readRecoveryRevision(exported)), saved);
 });

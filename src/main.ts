@@ -301,6 +301,15 @@ app.innerHTML = `
                   <label>Maximum search depth <input name="maxDepth" type="number" required min="1" max="88" step="1"></label>
                   <label>Maximum states <input name="maxNodes" type="number" required min="1" max="1000" step="1"></label>
                   <button type="submit">Save recovery settings</button>
+                  <button type="button" data-sic-recovery-rollback>Restore previous revision</button>
+                  <details class="sic-details">
+                    <summary>Import or export a recovery pack</summary>
+                    <label for="sic-recovery-pack">Pack JSON</label>
+                    <textarea id="sic-recovery-pack" name="pack" rows="6" maxlength="32768" spellcheck="false"></textarea>
+                    <button type="button" data-sic-recovery-export>Show saved pack</button>
+                    <button type="button" data-sic-recovery-import>Preview pack settings</button>
+                    <p data-sic-recovery-revision></p>
+                  </details>
                   <p role="status" data-sic-recovery-status></p>
                 </form>
               </details>
