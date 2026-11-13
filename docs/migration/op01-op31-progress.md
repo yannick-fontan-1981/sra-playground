@@ -6,12 +6,14 @@ Dernière consolidation : 12 novembre 2026.
 
 - Dépôt : `yannick-fontan-1981/sra-playground`
 - Branche canonique cible : `recovery/site109-reconstruction-20261112`
-- Baseline canonique intégrée avant la qualification combinée :
-  `edb19e247c409941af35165cdf37a0440cbe6adf`
-- Branche de travail finale :
-  `recovery/lot5b-worker-common-campaign-final-20261112`
-- Commit combiné qualifié :
-  `a79aa291bd61cbbfd8c7a3579ca5df8afee06e90`
+- Baseline canonique avant activation produit :
+  `4bf27669ce8f2945aa7672f134ffe1cefcac35ae`
+- Canonique réconcilié avant qualification finale :
+  `67602172665b79e2b282b37b63f80dc24feff3b0`
+- Commit de réconciliation de la branche :
+  `d8c5e2bd3595798031d07611b4de7992834ef679`
+- Branche de travail :
+  `recovery/op01-op31-agent-mode-controller-20261112`
 - Donneur OP01–OP31 : `op01-op31-c0-c7-audit`
 - Plan stable : `docs/migration/op01-op31-verification-plan.md`
 - Historique détaillé antérieur à la première consolidation :
@@ -28,6 +30,8 @@ Dernière consolidation : 12 novembre 2026.
   `docs/recovery/op01-op31-browser-campaign-host-20261112.md`
 - Hôte Worker :
   `docs/recovery/op01-op31-worker-common-campaign-20261112.md`
+- Contrôleur produit Agent explicite :
+  `docs/recovery/op01-op31-agent-mode-controller-20261112.md`
 
 Le présent fichier est l’état courant consolidé. Les versions précédentes
 restent disponibles dans Git afin de conserver toutes les preuves, mesures et
@@ -86,7 +90,9 @@ Statut global :
   ACTION6 et erreur ;
 - `src/product-presentation-effects.ts` : présentation et effets DOM bornés ;
 - `src/runtime/v6-browser-common-campaign-host.ts` : couture directe entre
-  campagne commune, dispatch physique, acquisition du retour et présentation.
+  campagne commune, dispatch physique, acquisition du retour et présentation ;
+- `src/runtime/v6-agent-mode-controller.ts` : propriétaire produit d’un seam
+  Agent unique, campagne bornée, arrêt explicite et séparation Manual/Agent.
 
 ### Worker commun
 
@@ -127,7 +133,7 @@ Statut global :
 | Lot | État courant | Preuve acquise | Dette suivante |
 | --- | --- | --- | --- |
 | C0 | **terminé** | 31 calculs inventoriés, dispositions et provenance conservées | maintenir les statuts par besoin, pas par compteur |
-| C1 | **campagne commune, hôte browser et hôte Worker qualifiés** | collecte bornée, ambiguïté, release, attente, même `needId`, acquisition browser et Worker, y compris retour terminal | activer un contrôleur Agent explicite et unique dans le produit |
+| C1 | **contrôleur Agent produit explicite activé sur le seam browser OP28 strict** | un seul seam, campagne bornée, séparation Manual, arrêt sans fallback, même `needId` jusqu’au retour | raccorder les producteurs réels puis qualifier le coût d’activation |
 | C2 | **OP18 jusqu’à la décision suivante ; OP28 jusqu’au retour physique sur les deux seams** | FieldStock modifie la proposition suivante ; OP28 traverse dispatch browser ou Worker et règle aussi `WIN`/budget nul | constructeur de contexte produit FieldStock et propriétaire OP31 |
 | C3 | **calculs et recouvrements qualifiés** | OP03/04/08/09/11/12/14/26 auditables ; spécialisations identifiées | appeler uniquement depuis un producteur runtime réel |
 | C4 | **audit complet, usages génériques non démontrés** | OP01/02/05/10/15/25 calculables | ne pas activer sans producteur et consommateur réels |
@@ -243,11 +249,14 @@ transports. Il refuse une observation périmée, annule une décision non régl�
 aucune coordonnée ACTION6. Il acquiert toute action en attente avant de demander
 la suivante.
 
-Les clics Manual ne traversent pas ces hôtes. `main.ts` n’en instancie aucun.
-L’onglet Agent ne revendique donc pas prématurément une boucle SRA active.
+`main.ts` sélectionne maintenant explicitement le seam browser OP28 strict par
+`V6AgentModeController`. La campagne ne démarre qu’après action volontaire sur
+le bouton Agent et reste bornée à 64 actions. Le Worker commun reste qualifié
+mais n’est pas instancié dans le produit.
 
-Les deux hôtes ne doivent pas contrôler simultanément la même session sans un
-contrôleur produit explicite.
+Les clics Manual conservent leur chemin historique et appellent toujours
+`dispatchProductAction()` sans traverser le contrôleur Agent. Le passage au
+mode Manual ou un changement de jeu annule la seule campagne Agent autorisée.
 
 ## Disposition des 31 opérations
 
@@ -315,6 +324,22 @@ contrôleur produit explicite.
 - régression TypeScript complète : **313/313 tests réussis** ;
 - échecs, annulations, tests ignorés et TODO : `0`.
 
+### Contrôleur Agent produit explicite
+
+Qualification avec activation volontaire du seam browser OP28 strict :
+
+- run : `43351837880` ;
+- job : `131644504939` ;
+- commit qualifié avant réconciliation finale :
+  `1ac5067d58adede51443da270b2f2b75ef6f0c9b` ;
+- `npm run typecheck` : réussi ;
+- régression complète : **325/325 tests réussis** ;
+- `npm run build` : réussi ;
+- échecs, annulations, tests ignorés et TODO : `0`.
+
+La qualification finale après réconciliation canonique est enregistrée dans
+`docs/recovery/op01-op31-agent-mode-controller-20261112.md`.
+
 Preuves combinées :
 
 - même `needId` de la release à l’acquisition ;
@@ -352,59 +377,54 @@ Diagnostic du noyau commun :
 
 Ce diagnostic n’est pas le benchmark officiel.
 
-Les deux hôtes restent inactifs dans `main.ts`. Ils n’ajoutent donc pas de coût
-au chemin utilisateur courant. Le coût d’activation reste à mesurer sur les
-quatre runners C7.
+Le seam browser OP28 est maintenant activable uniquement sur commande explicite
+dans l’onglet Agent. Le chemin Manual ne crée ni session ni cycle Agent. Le coût
+des campagnes Agent actives reste à mesurer sur les quatre runners C7.
 
 Verdict : **fonctionnellement qualifié, coût d’activation à confirmer**.
 
 ## Limites encore ouvertes
 
-- aucun contrôleur Agent ne possède encore la boucle produit ;
-- `main.ts` ne crée ni l’hôte browser ni la campagne Worker ;
-- aucun choix explicite n’empêche encore deux seams de contrôler la même session
-  après activation future ;
-- FieldStock n’a pas de constructeur initial de contexte depuis l’observation
-  produit ;
-- Region n’a pas de contrat physique commun complet ;
+- seul le propriétaire public OP28 strict est activé dans le produit ;
+- le Worker commun reste inactif dans `main.ts` afin d’éviter deux autorités
+  concurrentes sur une même session ;
+- FieldStock n’a pas encore de constructeur initial de contexte browser ;
+- aucun prior FieldStock réel n’est acquis par l’interface ;
+- Region n’a pas encore de candidat physique commun complet ;
 - les acquisitions passives multi-owners ne sont pas orchestrées ;
-- les campagnes et actions en attente n’ont pas de snapshot/restauration complet ;
+- les campagnes et actions en attente n’ont pas de snapshot/restauration
+  complet ;
 - aucun propriétaire OP31 n’est raccordé ;
-- les états non représentables par le protocole agent restent refusés ;
+- les états non représentables par le protocole Agent restent refusés ;
 - la performance officielle C7 reste ouverte ;
 - aucune publication Site n’est effectuée.
 
 ## Feuille de route actualisée
 
-### Étape immédiate : contrôleur Agent explicite et unique
-
-1. choisir explicitement le seam actif : hôte browser direct ou Worker ;
-2. créer une seule session de campagne après chargement du jeu ;
-3. l’exécuter uniquement lorsque le mode Agent est actif ;
-4. conserver le chemin Manual totalement séparé ;
-5. exécuter au plus une campagne à la fois ;
-6. arrêter sur `none`, `ambiguous`, `blocked`, terminal ou erreur ;
-7. ne jamais substituer une action par défaut à l’absence de proposition.
-
-### Étape suivante : producteurs réels
+### Étape immédiate : producteurs symboliques réels
 
 1. construire `FieldStockCampaignContext` depuis les observations publiques et
-   les connaissances déjà revalidées ;
+   une connaissance réellement acquise ;
 2. reconstruire l’acquisition initiale honnête du prior FieldStock ;
-3. compléter le contrat physique Region avant son enregistrement commun ;
-4. orchestrer les acquisitions passives utiles sans double consommation ;
-5. identifier un vrai propriétaire d’objectif avant toute activation OP31.
+3. raccorder FieldStock au seam browser sans étendre artificiellement OP28 ;
+4. compléter le candidat physique Region avant son enregistrement commun ;
+5. maintenir l’arrêt `none`/`ambiguous` tant qu’aucun producteur n’est unique.
 
-### Restauration, performance et publication
+### Étape suivante : restauration et objectifs
 
 1. ajouter snapshot/restauration des campagnes et décisions en attente ;
-2. exécuter les régressions fonctionnelles ;
-3. compléter le manifeste des quatre runners ;
-4. mesurer A/STCK, A/SMLP, B/STCK et B/SMLP séparément ;
-5. conserver strictement moins de +10 % de médiane par jeu ;
-6. intégrer sur la branche canonique GitHub ;
-7. publier le Site seulement lorsque le code correspondant est durablement sur
+2. orchestrer les acquisitions passives utiles sans double consommation ;
+3. identifier un vrai propriétaire d’objectif avant toute activation OP31.
+
+### Performance et publication
+
+1. exécuter les régressions fonctionnelles et campagnes browser réelles ;
+2. compléter le manifeste des quatre runners ;
+3. mesurer A/STCK, A/SMLP, B/STCK et B/SMLP séparément ;
+4. conserver strictement moins de +10 % de médiane par jeu ;
+5. intégrer sur la branche canonique GitHub ;
+6. publier le Site seulement lorsque le code correspondant est durablement sur
    GitHub ;
-8. vérifier ensuite GitHub ↔ Site.
+7. vérifier ensuite GitHub ↔ Site.
 
 Aucune publication Site n’appartient à la tranche courante.

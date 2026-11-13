@@ -184,8 +184,10 @@ browser/product :
 - régression complète : **313/313 tests réussis** ;
 - échecs, annulations, tests ignorés et TODO : `0`.
 
-Les deux hôtes restent inactifs dans `main.ts`. Ils ne doivent pas être exécutés
-simultanément sur la même session sans contrôleur produit explicite.
+Le produit sélectionne maintenant explicitement l’hôte browser OP28 strict via
+`V6AgentModeController`. Le Worker commun reste inactif dans `main.ts`, ce qui
+empêche deux autorités concurrentes sur la même session. Le mode Manual garde
+son chemin de dispatch séparé.
 
 ## Ambiguïté et cas négatifs
 
@@ -223,12 +225,10 @@ Aucun bundle ou `methodRef` artificiel n’est ajouté.
 
 ## Limites restantes
 
-- aucun hôte n’est activé dans `main.ts` ;
-- aucun contrôleur Agent ne choisit encore explicitement l’unique seam de
-  campagne à exécuter ;
+- seul OP28 public strict est activé dans le produit ;
 - acquisition initiale du prior FieldStock depuis une vraie campagne absente ;
 - constructeur de contexte browser FieldStock absent ;
-- Region sans contrat public complet ;
+- Region sans candidat physique commun complet ;
 - acquisition passive non orchestrée par le propriétaire commun ;
 - snapshot/restauration complet des campagnes en attente absent ;
 - OP31 sans owner produit ;
@@ -237,7 +237,8 @@ Aucun bundle ou `methodRef` artificiel n’est ajouté.
 
 ## Statut
 
-**Le noyau commun, l’hôte browser/product OP28 et l’hôte Worker OP18/OP28 sont
-fonctionnellement qualifiés ensemble. Activation produit, choix d’un contrôleur
-unique, acquisition FieldStock initiale, Region commun, restauration et
-performance officielle restent ouverts.**
+**Le noyau commun, l’hôte browser/product OP28, l’hôte Worker OP18/OP28 et
+le contrôleur produit unique sont fonctionnellement qualifiés ensemble.**
+
+**FieldStock browser, acquisition initiale, Region commun, restauration, OP31
+et performance officielle restent ouverts.**

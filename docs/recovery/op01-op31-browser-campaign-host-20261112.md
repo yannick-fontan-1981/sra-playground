@@ -180,39 +180,31 @@ présents.
 présentes dans l’arbre. Elles ne sont pas introduites ni corrigées par cette
 tranche fonctionnelle.
 
-## Performance
+## Activation produit et performance
 
-Le plan conserve le critère suivant : pour chaque jeu de référence, la médiane
-de session complète doit augmenter de strictement moins de 10 %, avec STCK et
-SMLP évalués séparément.
+Depuis la tranche contrôleur Agent, `main.ts` instancie cet hôte uniquement
+derrière `V6AgentModeController` et la fabrique
+`createPublicSingleActionBrowserCampaignHost()`.
 
-Cette tranche ajoute une classe de bibliothèque mais ne l’instancie pas dans
-`main.ts` et ne l’exécute dans aucune session utilisateur. Elle ne modifie donc
-pas le chemin de jeu actif actuel. Un micro-benchmark isolé de la classe ne
-remplacerait pas la mesure requise sur les sessions complètes.
+L’activation reste explicite : sélectionner l’onglet Agent ne lance rien ; le
+bouton **Run bounded agent** crée la session. Une seule campagne peut posséder
+la session et la borne produit est fixée à 64 actions. Le retour au mode Manual
+ou un changement de jeu annule la campagne en cours.
 
-Verdict : **intégration fonctionnelle du seam terminée, coût d’activation à
-confirmer**.
+Le chemin Manual n’exécute pas le contrôleur Agent. Le coût d’une campagne
+Agent active doit néanmoins être qualifié selon C7 : médiane strictement sous
++10 % pour STCK et SMLP séparément sur les quatre runners.
 
-La mesure officielle devra être faite après raccordement d’un contrôleur Agent
-réel et des contextes spécialisés, sur A/STCK, A/SMLP, B/STCK et B/SMLP selon le
-manifeste C7.
+Qualification produit initiale : run `43351837880`, job `131644504939`,
+**325/325 tests**, typecheck et build réussis. Voir
+`docs/recovery/op01-op31-agent-mode-controller-20261112.md`.
 
-## Ce qui n’est volontairement pas activé
+Ce qui reste volontairement inactif :
 
-- `main.ts` ne crée pas encore `BrowserCommonCampaignHost` ;
-- les clics du mode Manual restent des actions humaines directes ;
-- l’onglet Agent ne prétend pas encore exécuter la campagne commune ;
-- aucune boucle automatique n’enchaîne les décisions ;
-- aucune observation privée du moteur n’est ajoutée ;
-- FieldStock n’a pas encore de constructeur de contexte produit depuis chaque
-  observation navigateur ;
-- Region n’a toujours pas de contrat physique complet
-  `AgentAction + CompositionBundle + état + identity` ;
-- aucun propriétaire d’objectif OP31 n’est raccordé ;
-- les décisions communes en attente n’ont pas encore de snapshot/restauration ;
-- les états produit non représentables par le protocole agent restent refusés
-  plutôt que convertis silencieusement ;
+- le Worker commun n’est pas instancié dans `main.ts` ;
+- FieldStock browser n’a pas encore de contexte initial réel ;
+- Region n’a pas encore de contrat physique commun complet ;
+- aucun owner OP31 n’est activé ;
 - aucune publication Site n’est effectuée.
 
 ## Dispositions OP
@@ -229,17 +221,14 @@ manifeste C7.
 
 ## Prochaine étape
 
-Construire un contrôleur explicite de mode Agent, séparé du chemin Manual :
+Étendre la campagne uniquement à partir de producteurs réellement qualifiés :
 
-1. créer une session d’hôte après le chargement d’un jeu ;
-2. produire les contextes uniquement pour les propriétaires réellement
-   applicables ;
-3. exécuter au plus une campagne à la fois ;
-4. arrêter proprement sur `none`, `ambiguous`, `blocked`, terminal ou erreur ;
-5. ne jamais transformer l’absence de proposition en action par défaut ;
-6. ajouter le constructeur de contexte produit FieldStock ;
-7. qualifier ensuite les sessions complètes et leur coût avant activation
-   publique.
+1. construire un contexte FieldStock browser depuis l’observation publique et
+   une connaissance réellement acquise ;
+2. raccorder ce propriétaire sans retirer l’ambiguïté ni inventer ACTION6 ;
+3. compléter le candidat physique Region avant son inscription ;
+4. ajouter snapshot/restauration du contrôleur et des besoins en attente ;
+5. qualifier les sessions complètes et le coût officiel C7.
 
 GitHub reste la source canonique. Aucune publication Site n’est autorisée avant
-intégration durable du contrôleur, qualification et vérification GitHub ↔ Site.
+intégration durable, qualification et vérification GitHub ↔ Site.

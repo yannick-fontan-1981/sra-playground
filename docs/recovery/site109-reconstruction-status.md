@@ -157,14 +157,31 @@ Preuves :
 
 - `docs/recovery/op01-op31-common-campaign-owner-20261112.md` ;
 - `docs/recovery/op01-op31-browser-campaign-host-20261112.md` ;
-- `docs/recovery/op01-op31-worker-common-campaign-20261112.md`.
+- `docs/recovery/op01-op31-worker-common-campaign-20261112.md` ;
+- `docs/recovery/op01-op31-agent-mode-controller-20261112.md`.
 
-Les deux hôtes restent inactifs dans `main.ts`. Ils ne doivent pas contrôler la
-même session simultanément sans contrôleur produit explicite.
+`main.ts` sélectionne maintenant un seul seam produit : l’hôte browser OP28
+public strict, possédé par `V6AgentModeController`. La campagne démarre seulement
+sur commande explicite, reste bornée à 64 actions et s’arrête sur `none`,
+`ambiguous`, `blocked`, terminal, erreur ou obsolescence.
+
+Le Worker commun reste qualifié mais inactif dans `main.ts`. Le contrôleur
+empêche ainsi deux autorités de campagne de piloter la même session. Le mode
+Manual conserve son dispatch historique et annule la campagne Agent lorsqu’il
+reprend la propriété.
+
+Qualification produit initiale :
+
+- run `43351837880` ;
+- job `131644504939` ;
+- commit `1ac5067d58adede51443da270b2f2b75ef6f0c9b` ;
+- typecheck réussi ;
+- **325/325 tests réussis** ;
+- build Vite réussi.
 
 Limites :
 
-- aucun contrôleur Agent n’active encore un seam unique ;
+- seul OP28 public strict est activé dans le produit ;
 - l’acquisition initiale du prior FieldStock depuis une vraie campagne reste
   absente ;
 - Region commun, acquisition passive et snapshot/restauration restent ouverts ;
@@ -173,9 +190,9 @@ Limites :
 
 Statut Lot 5 :
 
-**5B, OP18/OP28, le propriétaire commun et ses hôtes browser et Worker sont
-fonctionnellement qualifiés ; activation produit, acquisition initiale,
-restauration et performance officielle restent à confirmer.**
+**5B, OP18/OP28, le propriétaire commun, ses hôtes et le contrôleur produit
+borné OP28 sont fonctionnellement qualifiés ; acquisition FieldStock initiale,
+Region commun, restauration et performance officielle restent à confirmer.**
 
 ## Progression Lot 9 — reprise 9B
 

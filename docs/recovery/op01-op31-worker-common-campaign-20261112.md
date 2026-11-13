@@ -157,12 +157,12 @@ Logos → AgentProductDispatch → BrowserGameRuntime → acquisition avant
 présentation.**
 
 Cet hôte direct conserve ACTION6 et ses coordonnées, annule les retours obsolètes
-et refuse les observations produit périmées. Il reste inactif dans `main.ts`.
+et refuse les observations produit périmées. Il est maintenant le seul seam
+sélectionné dans `main.ts`, derrière `V6AgentModeController`.
 
 Le raccord Worker n’altère pas cet hôte et ne lui retire aucune responsabilité.
-La prochaine architecture produit devra choisir explicitement le contrôleur
-utilisé, sans faire exécuter deux propriétaires de campagne concurrents sur la
-même session.
+Le Worker commun reste volontairement inactif dans `main.ts`, évitant deux
+propriétaires de campagne concurrents sur la même session.
 
 ## Qualifications
 
@@ -203,8 +203,8 @@ canonique.
 
 ## Limites conservées
 
-- `main.ts` n’active ni l’hôte browser ni le Worker commun ;
-- aucun contrôleur produit ne choisit encore explicitement entre ces deux seams ;
+- `main.ts` active uniquement l’hôte browser OP28 strict ;
+- le Worker commun reste qualifié mais inactif dans le produit ;
 - l’acquisition initiale d’un prior FieldStock depuis une vraie campagne reste
   absente ;
 - Region n’est pas enregistré dans le port Worker commun ;
@@ -217,9 +217,10 @@ canonique.
 
 ## Statut
 
-**Le propriétaire commun est raccordé au Worker V6 reconstruit, en complément de
-l’hôte browser/product canonique. Les retours OP18/OP28 sont corrélés au même
-`needId`, y compris en terminaison, et FieldStock modifie la décision suivante.**
+**Le propriétaire commun reste raccordé au Worker V6 reconstruit, en complément
+du seam browser désormais sélectionné par un contrôleur produit unique. Les
+retours OP18/OP28 sont corrélés au même `needId`, y compris en terminaison, et
+FieldStock modifie la décision suivante.**
 
-**Activation produit, choix d’un contrôleur unique, acquisition initiale,
-Region commun, restauration et performance officielle restent ouverts.**
+**Activation Worker produit, acquisition initiale, Region commun, restauration,
+OP31 et performance officielle restent ouverts.**
