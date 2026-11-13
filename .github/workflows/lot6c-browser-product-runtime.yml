@@ -4,6 +4,15 @@ on:
   push:
     branches:
       - recovery/lot6c-browser-product-runtime-20261112
+    paths:
+      - '.github/workflows/lot6c-browser-product-runtime.yml'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'tsconfig.json'
+      - 'vite.config.ts'
+      - 'src/**'
+      - 'scripts/**'
+      - 'tests/**'
   workflow_dispatch:
 
 permissions:
@@ -27,6 +36,8 @@ jobs:
           (google-chrome-stable --version || google-chrome --version || chromium --version || chromium-browser --version)
       - name: Build production bundle
         run: npm run build
+      - name: Run complete regression suite
+        run: npm test
       - name: Test browser report contract
         run: node --test tests/lot6c-browser-product-runtime-contract.test.mjs
       - name: Qualify compiled browser product path
