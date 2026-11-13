@@ -185,6 +185,7 @@ async function removeChromeProfile(path) {
 async function createBrowserReport() {
   let resolvePayload;
   let rejectPayload;
+  let timeoutHandle;
   const payloadPromise = new Promise((resolve, reject) => {
     resolvePayload = resolve;
     rejectPayload = reject;
@@ -248,7 +249,10 @@ async function createBrowserReport() {
     chrome.stderr.on('data', chunk => { stderr += chunk; });
 
     const timeout = new Promise((_, reject) => {
-      setTimeout(() => reject(new Error(`Worker/Pyodide browser qualification timed out\n${stderr.slice(-4000)}`)), 600_000);
+      timeoutHandle = setTimeout(
+        () => reject(new Error(`Worker/Pyodide browser qualification timed out\n${stderr.slice(-4000)}`)),
+        600_000,
+      );
     });
     const payload = await Promise.race([payloadPromise, timeout]);
     if (!payload || payload.status !== 'success') {
@@ -256,6 +260,7 @@ async function createBrowserReport() {
     }
     return payload.report;
   } finally {
+    if (timeoutHandle !== undefined) clearTimeout(timeoutHandle);
     await stopProcess(chrome);
     await server.close();
     await removeChromeProfile(chromeProfile);
