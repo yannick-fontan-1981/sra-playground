@@ -26,6 +26,7 @@ export const NATIVE_REGION_COMMON_COMPONENTS = Object.freeze([
   'scripts/python-runtime-assets.json',
   'scripts/run-native-region-official-benchmark.mjs',
   'src/benchmarks/native-region-official-benchmark.ts',
+  'src/benchmarks/native-region-official-config.ts',
   'src/runtime/browser-games.ts',
   'src/runtime/game-worker.ts',
   'vite.config.ts',
