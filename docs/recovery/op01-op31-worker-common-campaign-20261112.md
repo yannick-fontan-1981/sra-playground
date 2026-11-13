@@ -11,6 +11,9 @@ Baseline canonique incluant l’hôte browser/product :
 Commit Worker précédemment qualifié :
 `08a04a9da59b0f385d080acf6091d4acdcf800c6`
 
+Commit combiné qualifié :
+`a79aa291bd61cbbfd8c7a3579ca5df8afee06e90`
+
 Documents associés :
 
 - `docs/recovery/op01-op31-common-campaign-owner-20261112.md` ;
@@ -161,7 +164,9 @@ La prochaine architecture produit devra choisir explicitement le contrôleur
 utilisé, sans faire exécuter deux propriétaires de campagne concurrents sur la
 même session.
 
-## Qualification antérieure du Worker
+## Qualifications
+
+### Qualification Worker sur la baseline précédente
 
 Sur la baseline `8cc510e0` :
 
@@ -174,8 +179,27 @@ Sur la baseline `8cc510e0` :
 - **304/304 tests réussis** ;
 - aucun échec, annulation, test ignoré ou TODO.
 
-La qualification finale combinée avec l’hôte browser/product est enregistrée
-après exécution du workflow temporaire de la branche finale.
+### Qualification finale combinée
+
+Sur la baseline canonique `edb19e24`, qui contient déjà l’hôte browser/product :
+
+- run : `43349587061` ;
+- job : `131637119489` ;
+- commit qualifié : `a79aa291bd61cbbfd8c7a3579ca5df8afee06e90` ;
+- Node `22.18.0` ;
+- `npm ci` réussi ;
+- `npm run typecheck` réussi ;
+- régression TypeScript complète : **313/313 tests réussis** ;
+- échecs : `0` ;
+- annulés : `0` ;
+- ignorés : `0` ;
+- TODO : `0`.
+
+Deux vulnérabilités de dépendances de sévérité haute, déjà présentes, sont
+signalées par `npm ci`. Cette tranche ne les introduit ni ne les modifie.
+
+Le workflow temporaire de qualification est supprimé avant intégration
+canonique.
 
 ## Limites conservées
 
