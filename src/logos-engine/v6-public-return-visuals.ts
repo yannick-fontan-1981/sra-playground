@@ -22,11 +22,13 @@ export interface ChangedReturnRegion {
   readonly stride: number;
 }
 
-export function changedReturnRegions(before: NativeRows, after: NativeRows, excluded: NativeBox) {
+export function changedReturnRegions(before: NativeRows, after: NativeRows, excluded: NativeBox,
+  window?: NativeBox) {
   const width = before[0]!.length, height = before.length;
   const changed = new Set<number>();
   const [left, top, right, bottom] = excluded;
-  for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
+  const [startX, startY, endX, endY] = window ?? [0, 0, width - 1, height - 1];
+  for (let y = startY; y <= endY; y++) for (let x = startX; x <= endX; x++) {
     if (x >= left && x <= right && y >= top && y <= bottom) continue;
     if (before[y]![x] !== after[y]![x]) changed.add(y * width + x);
   }

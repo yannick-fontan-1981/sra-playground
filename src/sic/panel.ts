@@ -2,6 +2,7 @@ import type { AgentAction } from '../runtime/contracts.ts';
 import type { NativeClickReturn } from '../logos-engine/v6-native-click-return.ts';
 import type { NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
 import type { SpaceReturn } from './space-return.ts';
+import type { StckRankTrial } from './stck-stack.ts';
 import { compareAboveColors, contrastClickContexts, describeClickContext, type ClickEffectCount } from './click-evidence.ts';
 import type { Applicability, ControlEffectResolution } from './know-control-effect.ts';
 import type { ShadowView } from './shadow.ts';
@@ -52,7 +53,7 @@ function actionLabel(action: AgentAction): string {
 }
 
 function selectPerspective(panel: HTMLElement, selected: HTMLButtonElement): void {
-  for (const tab of panel.querySelectorAll<HTMLButtonElement>('[data-sic-tabs] [role="tab"]')) {
+  for (const tab of selected.closest('[data-sic-tabs]')!.querySelectorAll<HTMLButtonElement>('[role="tab"]')) {
     const active = tab === selected;
     tab.setAttribute('aria-selected', String(active));
     tab.tabIndex = active ? 0 : -1;
@@ -68,24 +69,25 @@ function filterClickRows(panel: HTMLElement): void {
 }
 
 export function bindSicPerspectives(panel: HTMLElement): void {
-  const tabList = panel.querySelector<HTMLElement>('[data-sic-tabs]')!;
-  const tabs = [...tabList.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
-  for (const tab of tabs) tab.addEventListener('click', () => selectPerspective(panel, tab));
-  tabList.addEventListener('keydown', event => {
-    const index = tabs.findIndex(tab => tab === event.target);
-    if (index < 0) return;
-    let next: number;
-    switch (event.key) {
-      case 'ArrowLeft': next = (index + tabs.length - 1) % tabs.length; break;
-      case 'ArrowRight': next = (index + 1) % tabs.length; break;
-      case 'Home': next = 0; break;
-      case 'End': next = tabs.length - 1; break;
-      default: return;
-    }
-    event.preventDefault();
-    tabs[next]!.focus();
-    selectPerspective(panel, tabs[next]!);
-  });
+  for (const tabList of panel.querySelectorAll<HTMLElement>('[data-sic-tabs]')) {
+    const tabs = [...tabList.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
+    for (const tab of tabs) tab.addEventListener('click', () => selectPerspective(panel, tab));
+    tabList.addEventListener('keydown', event => {
+      const index = tabs.findIndex(tab => tab === event.target);
+      if (index < 0) return;
+      let next: number;
+      switch (event.key) {
+        case 'ArrowLeft': next = (index + tabs.length - 1) % tabs.length; break;
+        case 'ArrowRight': next = (index + 1) % tabs.length; break;
+        case 'Home': next = 0; break;
+        case 'End': next = tabs.length - 1; break;
+        default: return;
+      }
+      event.preventDefault();
+      tabs[next]!.focus();
+      selectPerspective(panel, tabs[next]!);
+    });
+  }
   panel.querySelector('[data-sic-level]')!.addEventListener('change', () => filterClickRows(panel));
 }
 
@@ -175,9 +177,112 @@ function renderClickPreview(receipt: NativeClickReturn, palette: readonly string
   return section;
 }
 
-function renderSpaceReturns(panel: HTMLElement, returns: readonly SpaceReturn[], palette: readonly string[]): void {
+function renderSpaceFramePicker(receipt: SpaceReturn, palette: readonly string[], board: boolean): HTMLElement {
+  const player = document.createElement('div');
+  player.className = 'sic-animation-player';
+  const controls = document.createElement('div');
+  controls.className = 'sic-animation-controls';
+  const previous = document.createElement('button');
+  previous.type = 'button';
+  previous.textContent = 'Previous frame';
+  const next = document.createElement('button');
+  next.type = 'button';
+  next.textContent = 'Next frame';
+  const select = document.createElement('select');
+  select.setAttribute('aria-label', 'Animation frame');
+  for (let index = 0; index <= receipt.frameCount; index++) {
+    select.add(new Option(index === 0 ? 'Before Space' : `Frame ${index} / ${receipt.frameCount}`, String(index)));
+  }
+  controls.append(previous, select, next);
+  const body = document.createElement('div');
+  const render = () => {
+    const index = Number(select.value);
+    const frame = receipt.frames[index - 1];
+    previous.disabled = index === 0;
+    next.disabled = index === receipt.frameCount;
+    body.replaceChildren();
+    if (board) {
+      const images: [string, NativeRows][] = frame
+        ? [[index === 1 ? 'Before Space' : `Frame ${index - 1}`, receipt.frames[index - 2]?.rows ?? receipt.before],
+          [`Frame ${index}`, frame.rows]]
+        : [['Before Space', receipt.before]];
+      body.append(renderFrames(images, palette));
+    }
+    const note = document.createElement('p');
+    note.setAttribute('role', 'status');
+    note.textContent = !frame ? 'Board before execution.'
+      : frame.boundary ? 'Level transition or reset. Sprite identities are not carried across this frame.'
+      : frame.obscured ? 'A full-board flash hides the towers. Sprite matches are paused.'
+      : `${frame.changedFromPrevious} pixels changed since the previous image; ${frame.changedFromBefore} differ from before Space.`;
+    body.append(note);
+    if (!frame || frame.boundary || frame.obscured) return;
+    const evidence = document.createElement('div');
+    evidence.className = 'sic-animation-evidence';
+    const focus = document.createElement('div');
+    const focusLabel = document.createElement('strong');
+    focusLabel.textContent = 'Highlighted in the program';
+    focus.append(focusLabel);
+    if (frame.focus.length) {
+      focus.append(renderFrames(frame.focus.map(item => [`Card ${item.rank} from bottom`, item.rows] as const), palette));
+      if (frame.focus.length > 1) {
+        const ambiguous = document.createElement('p');
+        ambiguous.textContent = 'Several cards are highlighted. The exact card in focus is uncertain.';
+        focus.append(ambiguous);
+      }
+    } else {
+      const empty = document.createElement('p');
+      empty.textContent = 'No card highlight detected in this frame.';
+      focus.append(empty);
+    }
+    const effects = document.createElement('div');
+    const label = document.createElement('strong');
+    label.textContent = 'What moved or changed in the same frame';
+    effects.append(label);
+    for (const sprite of frame.sprites) {
+      const effect = document.createElement('p');
+      const name = sprite.kind === 'player' ? 'Player' : 'Opponent';
+      const where = (item: typeof sprite.before) => item ? `(${item.anchor.join(', ')})` : '—';
+      effect.textContent = `${name} #${sprite.track} · ${sprite.effect} · ${where(sprite.before)} → ${where(sprite.after)}`;
+      effects.append(effect, renderFrames([['Previous', sprite.before?.rows ?? null], ['Now', sprite.after?.rows ?? null]], palette));
+    }
+    if (!frame.sprites.length) {
+      const empty = document.createElement('p');
+      empty.textContent = 'No tracked tower changed in this frame.';
+      effects.append(empty);
+    }
+    if (frame.regions?.samples.length) {
+      const details = document.createElement('details');
+      details.open = !frame.sprites.length;
+      const title = document.createElement('summary');
+      title.textContent = `Changed board regions · ${frame.regions.regionCount}`;
+      details.append(title);
+      for (const sample of frame.regions.samples) {
+        const position = document.createElement('p');
+        position.textContent = `Region at (${sample.box[0]}, ${sample.box[1]}) · ${sample.pixels} pixels`;
+        details.append(position, renderFrames([['Previous', sample.before], ['Now', sample.after]], palette));
+      }
+      effects.append(details);
+    }
+    evidence.append(focus, effects);
+    const relation = document.createElement('p');
+    relation.textContent = 'Aligned by frame. A highlight can coincide with a movement or flash; the link is observational.';
+    body.append(evidence, relation);
+  };
+  previous.addEventListener('click', () => { select.selectedIndex--; render(); });
+  next.addEventListener('click', () => { select.selectedIndex++; render(); });
+  select.addEventListener('change', render);
+  select.selectedIndex = Math.max(0, receipt.frames.find(frame => frame.focus.length && frame.sprites.length)?.index ?? 1);
+  render();
+  player.append(controls, body);
+  return player;
+}
+
+function renderSpaceReturns(panel: HTMLElement, returns: readonly SpaceReturn[], palette: readonly string[], stck: boolean): void {
   panel.querySelector<HTMLElement>('[data-sic-space-perceptions]')!.hidden = returns.length === 0;
   panel.querySelector<HTMLElement>('[data-sic-space-information]')!.hidden = returns.length === 0;
+  const empty = panel.querySelector<HTMLElement>('[data-sic-space-empty]')!;
+  empty.hidden = returns.length > 0;
+  empty.textContent = stck ? 'Run the agent until it executes Space to inspect its animation.' : 'No animation analysis is available for this game.';
   const frames = panel.querySelector<HTMLElement>('[data-sic-space-frames]')!;
   const facts = panel.querySelector<HTMLElement>('[data-sic-space-facts]')!;
   frames.replaceChildren();
@@ -189,15 +294,7 @@ function renderSpaceReturns(panel: HTMLElement, returns: readonly SpaceReturn[],
     const title = document.createElement('summary');
     title.textContent = heading;
     group.append(title);
-    if (receipt.previews.length < receipt.frameCount) {
-      const count = document.createElement('p');
-      count.textContent = `Showing ${receipt.previews.length} frames, including the first and last.`;
-      group.append(count);
-    }
-    group.append(renderFrames([
-      ['Before', receipt.before],
-      ...receipt.previews.map(frame => [`Frame ${frame.index}`, frame.rows] as const),
-    ], palette));
+    group.append(renderSpaceFramePicker(receipt, palette, true));
     frames.append(group);
     const row = document.createElement('li');
     const label = document.createElement('strong');
@@ -207,13 +304,12 @@ function renderSpaceReturns(panel: HTMLElement, returns: readonly SpaceReturn[],
       + (receipt.toLevel !== receipt.fromLevel ? ` The return reached level ${receipt.toLevel}.` : '');
     row.append(label, summary);
     const metrics = document.createElement('details');
-    metrics.open = receipt === returns.at(-1);
     const caption = document.createElement('summary');
     caption.textContent = 'Pixels changed since the preceding frame';
     const changes = document.createElement('p');
     changes.textContent = receipt.frames.map(frame => `Frame ${frame.index}: ${frame.changedFromPrevious}`).join(' · ');
     metrics.append(caption, changes);
-    row.append(metrics);
+    row.append(renderSpaceFramePicker(receipt, palette, false), metrics);
     facts.append(row);
   }
 }
@@ -372,7 +468,47 @@ function renderClickComparisons(panel: HTMLElement, evidence: ShadowView['clickE
   list.replaceChildren(...rows);
 }
 
-export function renderSicPanel(panel: HTMLElement, view: ShadowView | null, palette: readonly string[], space: readonly SpaceReturn[]): void {
+function renderGameInformation(panel: HTMLElement, stck: boolean, ranks: readonly StckRankTrial[], space: readonly SpaceReturn[]): void {
+  const section = panel.querySelector<HTMLElement>('[data-sic-stack-rank]')!;
+  section.hidden = !stck;
+  if (stck) {
+    panel.querySelector('[data-sic-stack-report]')!.textContent =
+      'A click removes the selected card. At the top the slot empties; lower down, the card just above takes its place. Same-color cards can hide this shift.';
+    const matched = ranks.filter(item => item.stackShiftMatched && item.actualColor === item.expectedColor).length;
+    const last = ranks.at(-1);
+    const description = last?.actual === 'same-color' ? 'the slot kept its color'
+      : last?.actual === 'recolored' ? 'the slot changed color' : 'the slot emptied';
+    panel.querySelector('[data-sic-stack-live]')!.textContent = last
+      ? `In this session: ${matched}/${ranks.length} visible stack shifts matched. Latest: level ${last.level}, card ${last.rank} of ${last.depth} from the bottom; ${description}.`
+      : 'No stack click observed in this session yet.';
+  }
+  const model = panel.querySelector<HTMLElement>('[data-sic-game-content]')!;
+  const title = document.createElement('h4');
+  title.textContent = stck ? 'STCK is a programmable machine' : 'Game model';
+  const explanation = document.createElement('p');
+  explanation.textContent = stck
+    ? 'The column on the left is the program. Clicks edit its cards. Space runs the programmed sequence on the isometric board.'
+    : 'No game model is documented for this game yet.';
+  model.replaceChildren(title, explanation);
+  if (!stck) return;
+  const observations = document.createElement('dl');
+  for (const [term, definition] of [
+    ['Edit', 'Click a card to remove it. The shop buttons can add cards.'],
+    ['Program', 'The order of the cards matters. The stack represents movement, attack and push instructions.'],
+    ['Run', 'Space switches from editing to execution. Cards are highlighted while the board returns an animation.'],
+    ['Evidence', `Documented STCK mechanic. Current session: ${ranks.length} observed stack clicks and ${space.length} retained Space returns.`],
+    ['Still uncertain', 'If several cards light up together, their highlight does not identify a unique instruction. A matching frame alone cannot attribute every change to that instruction.'],
+  ]) {
+    const dt = document.createElement('dt'), dd = document.createElement('dd');
+    dt.textContent = term!;
+    dd.textContent = definition!;
+    observations.append(dt, dd);
+  }
+  model.append(observations);
+}
+
+export function renderSicPanel(panel: HTMLElement, view: ShadowView | null, palette: readonly string[],
+  space: readonly SpaceReturn[], ranks: readonly StckRankTrial[]): void {
   panel.querySelector<HTMLElement>('[data-sic-context]')!.textContent = view
     ? `${view.gameCode} · Level ${view.frame.scope.level} · Last settled board` : '';
   panel.querySelector<HTMLElement>('[data-sic-summary]')!.textContent = view ? summaries[view.resolution.outcome] : 'Waiting for the board.';
@@ -383,7 +519,8 @@ export function renderSicPanel(panel: HTMLElement, view: ShadowView | null, pale
     ? actionLabel(view.nextAction) : 'No pending action to show.';
   renderClickReturns(panel, view?.clickEvidence?.returns ?? (view?.clickReturn ? [view.clickReturn] : []), palette);
   renderClickComparisons(panel, view?.clickEvidence ?? null, palette);
-  renderSpaceReturns(panel, space, palette);
+  renderSpaceReturns(panel, space, palette, view?.gameCode === 'STCK');
+  renderGameInformation(panel, view?.gameCode === 'STCK', ranks, space);
   const check = view?.returnCheck;
   panel.querySelector<HTMLElement>('[data-sic-return]')!.textContent = !check ? 'No checked return for this board.'
     : check.matched === true ? 'The return matched the V6 plan’s expectation.'

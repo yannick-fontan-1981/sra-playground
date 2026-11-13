@@ -26,7 +26,7 @@ test('other regions exclude the clicked box and retain aligned before and after 
   });
 });
 
-test('Space retains transient changes and counts every frame even when previews are sampled', () => {
+test('Space retains the image and counts for every step, including transient changes', () => {
   const before = [[0, 0]];
   const frames = Array.from({ length: 13 }, (_, index) => index === 4 ? [[1, 1]] : before);
   const result = observeSpace({ sessionId: 's', sequence: 3, fromLevel: 1, toLevel: 1 }, before, frames);
@@ -34,9 +34,8 @@ test('Space retains transient changes and counts every frame even when previews 
   assert.equal(result.finalChange, 0);
   assert.equal(result.frames.length, 13);
   assert.equal(result.frames[5]?.changedFromPrevious, 2);
-  assert.equal(result.previews.length, 12);
-  assert.equal(result.previews[0]?.index, 1);
-  assert.equal(result.previews.at(-1)?.index, 13);
+  assert.equal(result.frames[4]?.rows[0]?.[0], 1);
+  assert.equal(result.frames.at(-1)?.index, 13);
 });
 const beforeRows = [
   [0, 0, 0, 0],

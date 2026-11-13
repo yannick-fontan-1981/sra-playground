@@ -31,6 +31,8 @@
 .sic-tabs{display:flex;gap:6px;border-bottom:1px solid var(--line);margin-bottom:14px}
 .sic-tabs button{min-height:42px;padding:6px 14px;border:0;border-bottom:2px solid transparent;background:transparent;color:var(--muted);font-size:14px}
 .sic-tabs [aria-selected="true"]{border-bottom-color:var(--accent);color:var(--ink);background:var(--surface-raised)}
+.sic-subtabs{flex-wrap:wrap}
+.sic-subtabs button{font-size:13px;min-height:36px;padding-inline:10px}
 .sic-tabs button:focus-visible,.sic-evidence-link:focus-visible,.sic-observations li:focus{outline:2px solid var(--accent);outline-offset:2px}
 .sic-card{padding:15px 17px;border:1px solid var(--line);border-radius:6px;background:var(--surface);overflow-wrap:anywhere}
 .sic-card h4{margin:0 0 12px;color:var(--ink);font-size:15px;font-weight:600}
@@ -67,6 +69,14 @@
 .sic-context-contrast{border-top:1px solid var(--line);padding-top:8px}
 .sic-sprites{display:flex;align-items:flex-end;flex-wrap:wrap;gap:12px;margin:8px 0}
 [data-sic-space-frames] canvas{height:64px}
+.sic-animation-player{margin:10px 0}
+.sic-animation-controls{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.sic-animation-controls button,.sic-animation-controls select{min-height:34px;border:1px solid var(--control-border);border-radius:4px;background:var(--surface-muted);color:var(--ink);font-size:12px;padding:4px 7px}
+.sic-animation-controls button:disabled{opacity:.5}
+.sic-animation-evidence{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,140px),1fr));gap:8px;margin:8px 0}
+.sic-animation-evidence>div{min-width:0;padding:8px;border:1px solid var(--line);border-radius:4px}
+.sic-animation-evidence .sic-sprite canvas{height:30px}
+.sic-observations ul[data-sic-space-facts]{grid-template-columns:1fr}
 .sic-sprites figure{margin:0;text-align:center}
 .sic-sprites figcaption{font-size:11px;color:var(--subtle);margin-top:3px}
 .sic-sprite{position:relative;border:1px solid var(--control-border);width:fit-content}

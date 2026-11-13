@@ -7,6 +7,7 @@ import { BrowserV6Agent, type V6AgentSnapshot } from './runtime/v6-agent.ts';
 import { bindSicPerspectives, renderSicPanel } from './sic/panel.ts';
 import { readControlEffectShadow } from './sic/shadow.ts';
 import { observeSpace, type SpaceReturn } from './sic/space-return.ts';
+import { compareStckRank, type StckRankTrial } from './sic/stck-stack.ts';
 import { GAME_CATALOG, getGameByCode, type GameCatalogEntry } from './games/catalog';
 
 const websiteRepo = 'https://github.com/yannick-fontan-1981/sra-playground';
@@ -208,9 +209,26 @@ app.innerHTML = `
             </section>
           </div>
           <div id="sic-information" role="tabpanel" aria-labelledby="sic-information-tab" tabindex="0" hidden>
-            <section class="sic-observations" aria-labelledby="sic-space-info-title" data-sic-space-information hidden>
+            <div class="sic-tabs sic-subtabs" role="tablist" aria-label="Types of information" data-sic-tabs>
+              <button type="button" id="sic-effects-tab" role="tab" aria-selected="true" aria-controls="sic-effects">Command effects</button>
+              <button type="button" id="sic-animations-tab" role="tab" aria-selected="false" aria-controls="sic-animations" tabindex="-1">Animations</button>
+              <button type="button" id="sic-game-model-tab" role="tab" aria-selected="false" aria-controls="sic-game-model" tabindex="-1">Game model</button>
+            </div>
+            <div id="sic-animations" role="tabpanel" aria-labelledby="sic-animations-tab" tabindex="0" hidden>
+              <p data-sic-space-empty>Run Space in STCK to inspect its animation.</p>
+              <section class="sic-observations" aria-labelledby="sic-space-info-title" data-sic-space-information hidden>
               <h4 id="sic-space-info-title">Space · Changes during the animation</h4>
               <ul data-sic-space-facts></ul>
+              </section>
+            </div>
+            <div id="sic-game-model" role="tabpanel" aria-labelledby="sic-game-model-tab" tabindex="0" hidden>
+              <section class="sic-card" data-sic-game-content></section>
+            </div>
+            <div id="sic-effects" role="tabpanel" aria-labelledby="sic-effects-tab" tabindex="0">
+            <section class="sic-observations" data-sic-stack-rank hidden>
+              <h4>STCK · Position in the program stack</h4>
+              <p data-sic-stack-report></p>
+              <p data-sic-stack-live></p>
             </section>
             <section class="sic-observations" aria-labelledby="sic-observations-title">
               <h4 id="sic-observations-title">Does the effect repeat?</h4>
@@ -227,6 +245,7 @@ app.innerHTML = `
               <summary>Methods and evidence</summary>
               <ul data-sic-methods></ul>
             </details>
+            </div>
           </div>
         </section>
 
@@ -271,6 +290,7 @@ let sicRenderPending = false;
 let lastSicBoard: GameObservation | null = null;
 let lastSicState: V6AgentSnapshot | null = null;
 let spaceReturns: readonly SpaceReturn[] = [];
+let stckRankReturns: readonly (StckRankTrial & { sessionId: string; sequence: number })[] = [];
 const agent = new BrowserV6Agent({
   getObservation: () => observation,
   canDispatch: () => ready() && mode === 'agent',
@@ -301,6 +321,16 @@ const agent = new BrowserV6Agent({
           // An unavailable preview cannot affect the executed action or its return.
         }
       }
+      if (action.id === 6 && before.gameCode === 'STCK' && before.level === next.level
+          && before.state === next.state && sessionId && sessionId === agentState?.sessionId) {
+        try {
+          const trial = compareStckRank(before.frame, next.frame, [action.data.x, action.data.y], before.level);
+          if (trial) stckRankReturns = [...stckRankReturns.filter(item => item.sessionId === sessionId).slice(-31),
+            { ...trial, sessionId, sequence }];
+        } catch {
+          // Rank evidence is optional and cannot affect the executed action.
+        }
+      }
       return { observation: next, executionMs };
     } catch (error) {
       showFailure(error, generation);
@@ -321,11 +351,12 @@ function updateSicPanel(): void {
     lastSicBoard = board;
     lastSicState = agentState;
     const state = agentState;
-    const settledSpace = board?.gameCode === 'STCK' && state && state.status !== 'error'
-      ? spaceReturns.filter(item => item.sessionId === state.sessionId && item.sequence <= state.sequence)
-      : [];
+    const visible = <T extends { sessionId: string; sequence: number }>(entries: readonly T[]) =>
+      board?.gameCode === 'STCK' && state && state.status !== 'error'
+        ? entries.filter(item => item.sessionId === state.sessionId && item.sequence <= state.sequence)
+        : [];
     renderSicPanel(sicPanel, board ? readControlEffectShadow(board, agentState, presentationGeneration) : null,
-      board?.palette ?? fallbackPalette, settledSpace);
+      board?.palette ?? fallbackPalette, visible(spaceReturns), visible(stckRankReturns));
   });
 }
 
