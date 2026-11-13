@@ -55,6 +55,48 @@ export function createASmlpNativeRunner({ dispatch, sourceRef }) {
   });
 }
 
+function requireRegionCandidateHook(candidateHook) {
+  if (!candidateHook || typeof candidateHook !== 'object') {
+    throw new TypeError('B native runner requires an explicit region_intervention candidate hook');
+  }
+  if (candidateHook.id !== 'region_intervention') {
+    throw new Error('B native runner candidate hook id must be region_intervention');
+  }
+  if (typeof candidateHook.beforeAction !== 'function') {
+    throw new TypeError('region_intervention candidate hook requires beforeAction()');
+  }
+  return candidateHook.beforeAction;
+}
+
+function createCandidateRunner({ dispatch, sourceRef, game, candidateHook }) {
+  nonEmpty(sourceRef, 'sourceRef');
+  if (typeof dispatch !== 'function') {
+    throw new TypeError(`B/${game} native runner requires game_bridge dispatch`);
+  }
+  const beforeAction = requireRegionCandidateHook(candidateHook);
+  return createPublicCorpusSessionRunner({
+    variant: 'B',
+    game,
+    sourceRef,
+    seed: 0,
+    createSession: ({ game: requestedGame, seed, startLevel }) => createGameBridgeNativeSession({
+      dispatch,
+      game: requestedGame,
+      seed,
+      startLevel,
+    }),
+    beforeAction,
+  });
+}
+
+export function createBStckNativeRunner(options) {
+  return createCandidateRunner({ ...options, game: 'STCK' });
+}
+
+export function createBSmlpNativeRunner(options) {
+  return createCandidateRunner({ ...options, game: 'SMLP' });
+}
+
 export const EXPLICIT_NATIVE_RUNNER_IDENTITIES = Object.freeze({
   A_STCK: Object.freeze({
     variant: 'A',
@@ -75,5 +117,27 @@ export const EXPLICIT_NATIVE_RUNNER_IDENTITIES = Object.freeze({
     startLevel: 1,
     backend: 'python-wasm',
     status: 'reconstructed-contract-pending-real-native-execution',
+  }),
+  B_STCK: Object.freeze({
+    variant: 'B',
+    game: 'STCK',
+    gameId: 'stck-c0000001',
+    corpusRef: 'native-public-action-corpus-v1',
+    seed: 0,
+    startLevel: 1,
+    backend: 'python-wasm',
+    candidateHook: 'region_intervention',
+    status: 'reconstructed-contract-pending-real-region-hook-and-native-execution',
+  }),
+  B_SMLP: Object.freeze({
+    variant: 'B',
+    game: 'SMLP',
+    gameId: 'smlp-c3000001',
+    corpusRef: 'native-public-action-corpus-v1',
+    seed: 0,
+    startLevel: 1,
+    backend: 'python-wasm',
+    candidateHook: 'region_intervention',
+    status: 'reconstructed-contract-pending-real-region-hook-and-native-execution',
   }),
 });
