@@ -1213,3 +1213,26 @@ fichier produit réel (par exemple un worker SRA) n'importe pas le noyau Logos.
 
 Statut performance :
 **fonctionnellement qualifié, performance officielle à confirmer**.
+
+
+## C0/C7 — garde-fou des callsites directs OP
+
+Ajout :
+`scripts/check-op01-op31-call-sites.mjs`.
+
+Callsites directs autorisés de `executeOperation()` :
+- `src/logos-engine/v6-composition-engine.ts` ;
+- `src/logos-engine/v6-target-binding.ts`.
+
+Validation sur le noyau réel :
+- callsites trouvés : **2** ;
+- callsites inattendus : **0** ;
+- statut : `logos-operation-callsites-qualified`.
+
+Tests du garde-fou : **2/2**.
+
+Toute nouvelle invocation directe de `executeOperation()` hors de ces bridges
+fait désormais échouer le contrôle tant qu'elle n'est pas explicitement qualifiée.
+
+Objectif :
+empêcher l'ajout d'appels OP artificiels destinés à augmenter un compteur.
