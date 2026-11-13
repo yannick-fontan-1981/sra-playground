@@ -448,3 +448,90 @@ Next qualification:
    a different public-only target detector;
 5. only after both games are qualified, consider a Region-specific corpus
    identity shared identically by A and B.
+
+
+## Native archive qualification — GitHub Actions
+
+A durable GitHub Actions qualification harness is now present:
+
+- workflow: `.github/workflows/lot9b-native-action6-probe.yml`
+- Python archive session: `scripts/native-python-archive-session.py`
+- Node qualifier: `scripts/qualify-native-action6-probe.mjs`
+- STCK reachability diagnostic: `scripts/diagnose-stck-action6-reachability.mjs`
+
+The harness extracts the actual durable asset
+`public/python/custom-games.zip`, imports `custom_games.registry`, builds
+seeded engines with seed 0, and applies the same JavaScript public probe to the
+real native frames.
+
+Successful qualification run:
+
+- GitHub Actions run: `43347821466`
+- head SHA: `e1fbbde0e87e5f8454b9a2f31140ce05d80fda4f`
+- targeted Lot 9B suite: **29/29 passed**
+- real archive probe step: **passed**
+- STCK reachability diagnostic: **passed as diagnostic execution**
+
+### SMLP real native result
+
+Initial public actions:
+`[5, 6, 7]`
+
+Public probe selected:
+`ACTION6(x=32, y=26)`
+
+Observed public delta:
+**9 changed pixels**
+
+Level remained 1 and state remained `NOT_FINISHED`.
+
+Therefore `region-public-action6-probe-v1` is **natively qualified for SMLP**
+as a public-only ACTION6 coordinate producer that creates useful visible
+evidence.
+
+### STCK real native result
+
+Initial public actions:
+`[5, 6, 7]`
+
+Public probe selected:
+`ACTION6(x=6, y=56)`
+
+Observed public delta:
+**0 changed pixels**
+
+A fresh-session diagnostic then tested:
+- 0 through 16 ACTION5 launches;
+- each count from a fresh seed-0 reset;
+- followed by the same public-only ACTION6 button probe.
+
+Every tested state remained:
+- level 1;
+- `NOT_FINISHED`;
+- ACTION6 probe at `x=6,y=56`;
+- **0 changed pixels** after the click.
+
+Therefore the current STCK public button probe is **not useful evidence** for
+Region, and repeated ACTION5 alone does not reach an effective shop-click
+state within the tested 0..16 launch window.
+
+No hidden `at_shop` field, engine inspection or fixture coordinate was used
+to reach this conclusion.
+
+### Consequence for official performance
+
+A Region-specific benchmark corpus cannot yet be frozen for both games:
+
+- SMLP: public ACTION6 probe qualified;
+- STCK: public ACTION6 useful-effect path still missing.
+
+Because the acceptance rule requires STCK and SMLP separately, SMLP cannot
+compensate for the missing STCK path.
+
+Official ABBA remains blocked.
+
+Next STCK task:
+identify a **publicly observable, non-oracular** way to reach or detect an
+ACTION6-effective STCK state, or recover durable historical STCK ACTION6
+coordinates/corpus evidence. If neither exists, STCK cannot validly serve as a
+meaningful Region cost game under the current reconstructed contract.

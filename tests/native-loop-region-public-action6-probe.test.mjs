@@ -52,3 +52,14 @@ test('public ACTION6 probe returns undefined when no public target glyph is visi
   const stck = blank(5);
   assert.equal(findStckVisibleShopButtonCenter(observation(stck)), undefined);
 });
+
+
+test('SMLP probe also detects the source-proven open-gate glyph', () => {
+  const f = blank(2);
+  const x = 18;
+  const y = 22;
+  f[y][x] = 3;
+  f[y - 1][x] = 12;
+  f[y + 1][x] = 12;
+  assert.deepEqual(findSmlpVisibleGateCenter(observation(f)), { id: 6, x, y });
+});
