@@ -19,13 +19,18 @@ Le premier rapprochement a conservé les deux historiques :
 - parent Lot 5 : `5f8752a821ceb338d2fdf2b9c601a790cc94bbd4` ;
 - commit de rapprochement : `a0f251dd9e2f5e10ea9e6f1f0928d8f472bc2fa5`.
 
-Aucun fichier 5A/5B/5C n’existait sur la branche canonique au moment du rapprochement. Les ajouts ont donc été portés sans remplacement de composants concurrents.
+Le second rapprochement a repris la tête canonique plus récente sans écrasement :
+- parent canonique : `530b1c45af4036ba697fdef0584c6e87cc279be6` ;
+- parent Lot 5 qualifié : `90aa1f955869b3fff234b445eb91a2f784d5786b` ;
+- candidat combiné : `d5d12cb013d78517a971328ee95eb57468c273f1`.
+
+Aucun fichier 5A/5B/5C n’existait sur la branche canonique lors de ces rapprochements. Les ajouts ont donc été portés sans remplacement de composants concurrents.
 
 ## Qualification GitHub Actions
 
 Workflow temporaire de branche : `.github/workflows/lot5-addressed-material-qualification.yml`.
 
-Exécution réussie :
+Première exécution complète réussie :
 - run GitHub Actions : `43340509677` ;
 - commit qualifié : `90aa1f955869b3fff234b445eb91a2f784d5786b` ;
 - Node : `22.18.0` ;
@@ -36,6 +41,8 @@ Exécution réussie :
 - test `FieldStock bundle template is admitted by the existing OP18 native authority` : réussi.
 
 La première exécution diagnostique avait utilisé le chargeur TypeScript strip-only et échouait sur trois parameter properties préexistantes hors Lot 5. La commande complète a été corrigée vers `node --experimental-transform-types --test tests/*.test.ts`, sans changement du code fonctionnel.
+
+Le présent commit documentaire déclenche une nouvelle qualification sur l’arbre combiné dont le premier parent est `530b1c45af4036ba697fdef0584c6e87cc279be6`. L’intégration canonique ne doit être avancée qu’après succès de cette exécution.
 
 ## Statut fonctionnel
 
@@ -60,4 +67,4 @@ Cette qualification ne remplace pas le protocole officiel STCK/SMLP. Aucun bench
 
 ## Intégration
 
-Ce document accompagne le candidat d’intégration vers la tête canonique la plus récente. Le workflow temporaire de qualification reste propre à la branche Lot 5 et ne doit pas nécessairement être conservé dans l’arbre canonique publié.
+Le workflow temporaire de qualification reste propre à la branche Lot 5 et ne doit pas être conservé dans l’arbre canonique publié. Le document de qualification et les fichiers fonctionnels/tests peuvent être intégrés après succès de la qualification exacte du candidat combiné.
