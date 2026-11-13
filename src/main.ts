@@ -8,6 +8,7 @@ import { bindSicPerspectives, renderSicPanel } from './sic/panel.ts';
 import { readControlEffectShadow } from './sic/shadow.ts';
 import { observeSpace, type SpaceReturn } from './sic/space-return.ts';
 import { compareStckRank, type StckRankTrial } from './sic/stck-stack.ts';
+import { observeDirectionalReturn, type DirectionalReturn } from './sic/directional-return.ts';
 import { GAME_CATALOG, getGameByCode, type GameCatalogEntry } from './games/catalog';
 
 const websiteRepo = 'https://github.com/yannick-fontan-1981/sra-playground';
@@ -197,7 +198,14 @@ app.innerHTML = `
                 <dt>Next action from V6</dt><dd data-sic-next>No pending action to show.</dd>
                 <dt>Latest V6 check</dt><dd data-sic-return>No checked return for this board.</dd>
               </dl>
+              <p data-sic-perception-scope></p>
+              <div data-sic-board-preview></div>
             </div>
+            <section class="sic-observations" data-sic-latest-direction hidden>
+              <h4>Latest directional return</h4>
+              <p data-sic-direction-summary></p>
+              <div data-sic-direction-sprites></div>
+            </section>
             <section class="sic-observations" aria-labelledby="sic-clicks-title">
               <div class="sic-section-header">
                 <h4 id="sic-clicks-title">Click returns</h4>
@@ -226,6 +234,10 @@ app.innerHTML = `
                 <h4 id="sic-card-test-title">Space · Change one card</h4>
                 <div data-sic-card-test-cases></div>
               </section>
+              <section class="sic-observations" aria-labelledby="sic-tower-test-title" data-sic-tower-test hidden>
+                <h4 id="sic-tower-test-title">Space · Attack and push</h4>
+                <div data-sic-tower-test-cases></div>
+              </section>
               <p data-sic-space-empty>Run Space in STCK to inspect its animation.</p>
               <section class="sic-observations" aria-labelledby="sic-space-info-title" data-sic-space-information hidden>
               <h4 id="sic-space-info-title">Space · Changes during the animation</h4>
@@ -236,6 +248,7 @@ app.innerHTML = `
               <section class="sic-card" data-sic-game-content></section>
             </div>
             <div id="sic-effects" role="tabpanel" aria-labelledby="sic-effects-tab" tabindex="0">
+            <p data-sic-direction-effect hidden></p>
             <section class="sic-observations" data-sic-stack-rank hidden>
               <h4>STCK · Position in the program stack</h4>
               <p data-sic-stack-report></p>
@@ -314,6 +327,7 @@ let lastSicBoard: GameObservation | null = null;
 let lastSicState: V6AgentSnapshot | null = null;
 let spaceReturns: readonly SpaceReturn[] = [];
 let stckRankReturns: readonly (StckRankTrial & { sessionId: string; sequence: number })[] = [];
+let latestDirection: DirectionalReturn | null = null;
 const agent = new BrowserV6Agent({
   getObservation: () => observation,
   canDispatch: () => ready() && mode === 'agent',
@@ -354,6 +368,15 @@ const agent = new BrowserV6Agent({
           // Rank evidence is optional and cannot affect the executed action.
         }
       }
+      if (action.id >= 1 && action.id <= 4 && sessionId && sessionId === agentState?.sessionId) {
+        try {
+          latestDirection = observeDirectionalReturn(
+            { sessionId, sequence, command: action.id, fromLevel: before.level, toLevel: next.level },
+            before.frame, next.frame, before.level !== next.level || before.state !== next.state);
+        } catch {
+          latestDirection = null;
+        }
+      }
       return { observation: next, executionMs };
     } catch (error) {
       showFailure(error, generation);
@@ -379,7 +402,10 @@ function updateSicPanel(): void {
         ? entries.filter(item => item.sessionId === state.sessionId && item.sequence <= state.sequence)
         : [];
     renderSicPanel(sicPanel, board ? readControlEffectShadow(board, agentState, presentationGeneration) : null,
-      board?.palette ?? fallbackPalette, visible(spaceReturns), visible(stckRankReturns));
+      board?.palette ?? fallbackPalette, visible(spaceReturns), visible(stckRankReturns), board?.frame ?? null,
+      Boolean(board && !state?.sessionId && board.level !== 1),
+      board && state?.sessionId && state.status !== 'error' && latestDirection?.sessionId === state.sessionId
+        && latestDirection.sequence <= state.sequence && latestDirection.toLevel === board.level ? latestDirection : null);
   });
 }
 

@@ -4,6 +4,9 @@ import type { NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts
 import type { SpaceReturn } from './space-return.ts';
 import type { StckRankTrial } from './stck-stack.ts';
 import stckCardComparisons from './stck-card-comparison.json';
+import stckTowerEffects from './stck-tower-effects.json';
+import { documentedGameModels } from './game-models.ts';
+import type { DirectionalReturn } from './directional-return.ts';
 import { compareAboveColors, contrastClickContexts, describeClickContext, type ClickEffectCount } from './click-evidence.ts';
 import type { Applicability, ControlEffectResolution } from './know-control-effect.ts';
 import type { ShadowView } from './shadow.ts';
@@ -204,7 +207,7 @@ function renderUnderstoodControls(panel: HTMLElement, stck: boolean): void {
       effect: 'Edits the program: removes the selected card, and cards above it shift down. Verified on 9 recorded clicks and 73 controlled clicks.',
       link: 'See click observations' },
     { label: 'Space · Consolidated in the tested cases', target: 'sic-animations',
-      effect: 'Runs the program. Replacing one movement card changes the immediate displacement; a blocked move can leave the player in place.',
+      effect: 'Runs the program. Controlled trials show movement, attack removing the top card of neighbouring towers, and push depending on the destination.',
       link: 'See the paired animations' },
   ]) {
     const block = document.createElement('div');
@@ -288,6 +291,63 @@ function renderCardComparisons(panel: HTMLElement, palette: readonly string[], s
   const scope = document.createElement('p');
   scope.textContent = 'Attribution stops at the end of the replaced card. Later instructions and flashes can also differ; the test does not assign each later change directly to that card.';
   container.append(scope);
+}
+
+function renderTowerEffects(panel: HTMLElement, palette: readonly string[], stck: boolean): void {
+  const section = panel.querySelector<HTMLElement>('[data-sic-tower-test]')!;
+  section.hidden = !stck;
+  const container = panel.querySelector<HTMLElement>('[data-sic-tower-test-cases]')!;
+  const key = stck ? palette.join(',') : 'hidden';
+  if (container.dataset.palette === key) return;
+  container.dataset.palette = key;
+  container.replaceChildren();
+  if (!stck) return;
+  const intro = document.createElement('p');
+  intro.textContent = 'Controlled STCK board: identical terrain and towers, with one card changed. The cyan control left all five towers unchanged during its instruction. Only the player instruction is compared, before any opponent acts.';
+  container.append(intro);
+  const coord = (point: readonly number[]) => `(${point.join(', ')})`;
+  for (const trial of stckTowerEffects) {
+    const block = document.createElement('details');
+    const title = document.createElement('summary');
+    const attack = trial.card === 'red';
+    title.textContent = attack ? 'Red · Attack neighbouring towers' : 'Pink · Push neighbouring towers';
+    const overview = document.createElement('p');
+    overview.textContent = attack
+      ? 'The four neighbours, including the diagonal, lose their top card without moving. A tower that loses its last card disappears. The distant tower is unchanged.'
+      : 'A free floor allows one step away. Missing floor and an occupied destination block the push. A pushed tower disappears if it falls into a hole. The distant tower is unchanged.';
+    const controls = document.createElement('div');
+    controls.className = 'sic-animation-controls';
+    const select = document.createElement('select');
+    select.setAttribute('aria-label', attack ? 'Attack phase' : 'Push phase');
+    ['Before the card', 'Effect during the flash', 'After the card'].forEach((phase, i) => select.add(new Option(phase, String(i))));
+    select.selectedIndex = 2;
+    controls.append(select);
+    const body = document.createElement('div');
+    const render = () => {
+      const phase = select.selectedIndex;
+      const frame = trial.frames[phase]!;
+      body.replaceChildren(renderFrames([['Selected card', frame.focus], ['Nearby board', frame.board]], palette));
+      const towers = document.createElement('ul');
+      for (const tower of trial.towers) {
+        const row = document.createElement('li');
+        const label = document.createElement('strong');
+        label.textContent = tower.condition;
+        const before = tower.frames[0]!, after = tower.frames[phase]!;
+        const status = document.createElement('p');
+        status.textContent = phase === 0 ? `${coord(before.cell)} · ${before.cards} card(s)`
+          : `${coord(before.cell)} → ${coord(after.cell)} · ${before.cards} → ${after.cards} cards`
+            + (!after.alive ? ' · Tower gone' : ' · Tower remains');
+        row.append(label, status, renderFrames(phase ? [['Before', before.sprite], ['Selected phase', after.sprite]]
+          : [['Before', before.sprite]], palette));
+        towers.append(row);
+      }
+      body.append(towers);
+    };
+    select.addEventListener('change', render);
+    render();
+    block.append(title, overview, controls, body);
+    container.append(block);
+  }
 }
 
 function renderSpaceFramePicker(receipt: SpaceReturn, palette: readonly string[], board: boolean): HTMLElement {
@@ -581,7 +641,8 @@ function renderClickComparisons(panel: HTMLElement, evidence: ShadowView['clickE
   list.replaceChildren(...rows);
 }
 
-function renderGameInformation(panel: HTMLElement, stck: boolean, ranks: readonly StckRankTrial[], space: readonly SpaceReturn[]): void {
+function renderGameInformation(panel: HTMLElement, game: string | undefined, ranks: readonly StckRankTrial[], space: readonly SpaceReturn[]): void {
+  const stck = game === 'STCK';
   const section = panel.querySelector<HTMLElement>('[data-sic-stack-rank]')!;
   section.hidden = !stck;
   if (stck) {
@@ -596,21 +657,23 @@ function renderGameInformation(panel: HTMLElement, stck: boolean, ranks: readonl
       : 'No stack click observed in this session yet.';
   }
   const model = panel.querySelector<HTMLElement>('[data-sic-game-content]')!;
+  const documented = game ? documentedGameModels[game] : undefined;
   const title = document.createElement('h4');
-  title.textContent = stck ? 'STCK is a programmable machine' : 'Game model';
+  title.textContent = documented?.title ?? 'Game model';
+  const provenance = document.createElement('p');
+  provenance.textContent = documented ? 'Source: written game description. It is separate from what SIC observes in this session.'
+    : game ? `No written or consolidated game model for ${game} yet. Perceptions shows the public board and available commands.`
+      : 'Load a board to see whether a documented model is available.';
   const explanation = document.createElement('p');
-  explanation.textContent = stck
-    ? 'The column on the left is the program. Clicks edit its cards. Space runs the programmed sequence on the isometric board.'
-    : 'No game model is documented for this game yet.';
-  model.replaceChildren(title, explanation);
-  if (!stck) return;
+  model.replaceChildren(title, provenance);
+  if (!documented) return;
+  explanation.textContent = documented.summary;
+  model.append(explanation);
   const observations = document.createElement('dl');
   for (const [term, definition] of [
-    ['Edit', 'Click a card to remove it. The shop buttons can add cards.'],
-    ['Program', 'The order of the cards matters. The stack represents movement, attack and push instructions.'],
-    ['Run', 'Space switches from editing to execution. Cards are highlighted while the board returns an animation.'],
-    ['Evidence', `Documented STCK mechanic. Current session: ${ranks.length} observed stack clicks and ${space.length} retained Space returns.`],
-    ['Still uncertain', 'If several cards light up together, their highlight does not identify a unique instruction. A matching frame alone cannot attribute every change to that instruction.'],
+    ...documented.relations,
+    ['Live observations', `${ranks.length} observed stack clicks and ${space.length} retained Space returns.`],
+    ['Still uncertain', documented.unresolved],
   ]) {
     const dt = document.createElement('dt'), dd = document.createElement('dd');
     dt.textContent = term!;
@@ -620,8 +683,29 @@ function renderGameInformation(panel: HTMLElement, stck: boolean, ranks: readonl
   model.append(observations);
 }
 
+function renderBoardAndDirection(panel: HTMLElement, board: NativeRows | null, palette: readonly string[],
+  needsRestart: boolean, direction: DirectionalReturn | null): void {
+  panel.querySelector('[data-sic-perception-scope]')!.textContent = needsRestart
+    ? 'This board is visible. To collect agent returns, restart the native agent at level 1.'
+    : board ? 'Public board. Command meanings are verified separately.' : '';
+  panel.querySelector('[data-sic-board-preview]')!.replaceChildren(renderFrames([['Settled board', board]], palette));
+  const section = panel.querySelector<HTMLElement>('[data-sic-latest-direction]')!;
+  const effect = panel.querySelector<HTMLElement>('[data-sic-direction-effect]')!;
+  section.hidden = effect.hidden = !direction;
+  if (!direction) return;
+  const { changes } = direction;
+  const summary = `Action ${direction.sequence} · ${commands[direction.command]} · `
+    + (changes ? `${changes.totalPixels} changed pixels in ${changes.regionCount} regions.`
+      : 'The game crossed a state or level boundary; the frames are not compared.');
+  panel.querySelector('[data-sic-direction-summary]')!.textContent = summary;
+  effect.textContent = summary + ' One return is an observation; it does not establish a reusable control effect.';
+  panel.querySelector('[data-sic-direction-sprites]')!.replaceChildren(...(changes?.samples ?? [])
+    .map((sample, i) => renderFrames([[`Region ${i + 1} before`, sample.before], [`Region ${i + 1} after`, sample.after]], palette)));
+}
+
 export function renderSicPanel(panel: HTMLElement, view: ShadowView | null, palette: readonly string[],
-  space: readonly SpaceReturn[], ranks: readonly StckRankTrial[]): void {
+  space: readonly SpaceReturn[], ranks: readonly StckRankTrial[], board: NativeRows | null,
+  needsRestart: boolean, direction: DirectionalReturn | null): void {
   panel.querySelector<HTMLElement>('[data-sic-context]')!.textContent = view
     ? `${view.gameCode} · Level ${view.frame.scope.level} · Last settled board` : '';
   panel.querySelector<HTMLElement>('[data-sic-summary]')!.textContent = view ? summaries[view.resolution.outcome] : 'Waiting for the board.';
@@ -634,9 +718,11 @@ export function renderSicPanel(panel: HTMLElement, view: ShadowView | null, pale
   renderClickReturns(panel, view?.clickEvidence?.returns ?? (view?.clickReturn ? [view.clickReturn] : []), palette);
   renderClickComparisons(panel, view?.clickEvidence ?? null, palette);
   renderSpaceReturns(panel, space, palette, view?.gameCode === 'STCK');
-  renderGameInformation(panel, view?.gameCode === 'STCK', ranks, space);
+  renderBoardAndDirection(panel, board, palette, needsRestart, direction);
+  renderGameInformation(panel, view?.gameCode, ranks, space);
   renderUnderstoodControls(panel, view?.gameCode === 'STCK');
   renderCardComparisons(panel, palette, view?.gameCode === 'STCK');
+  renderTowerEffects(panel, palette, view?.gameCode === 'STCK');
   const check = view?.returnCheck;
   panel.querySelector<HTMLElement>('[data-sic-return]')!.textContent = !check ? 'No checked return for this board.'
     : check.matched === true ? 'The return matched the V6 plan’s expectation.'

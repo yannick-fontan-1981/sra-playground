@@ -84,6 +84,7 @@
 .sic-sprites figcaption{font-size:11px;color:var(--subtle);margin-top:3px}
 .sic-sprite{position:relative;border:1px solid var(--control-border);width:fit-content}
 .sic-sprite canvas{display:block;width:auto;height:44px;max-width:90px;object-fit:contain;image-rendering:pixelated}
+[data-sic-board-preview] canvas{height:96px;max-width:96px}
 .sic-sprite span{position:absolute;transform:translate(-50%,-50%);width:7px;height:7px;border:1px solid #fff;box-shadow:0 0 0 1px #000;border-radius:50%}
 .sic-evidence-link{min-height:30px;padding:2px 0;border:0;background:transparent;color:var(--accent-hover);font-size:13px;text-decoration:underline;text-underline-offset:3px}
 @media(max-width:900px){.is-agent-mode .minimal-play-area{grid-template-columns:minmax(0,1fr) 280px}.is-agent-mode .minimal-play-area .board-column,.is-agent-mode .minimal-control-column{padding:22px 18px}}
