@@ -11,12 +11,12 @@ test('main routes product actions through the shared dispatch contract', () => {
   assert.doesNotMatch(main, /void run\(\(\) => runtime\.action\(action, data\)\)/);
 });
 
-test('dispatch presentation keeps busy held until the dispatch releases it', () => {
-  assert.match(main, /async function present\(next: GameObservation, selectedGeneration: number, releaseBusy = true\)/);
-  assert.match(main, /if \(releaseBusy\) \{\s*busy = false;\s*updateInterface\(\);\s*\}/s);
+test('dispatch presentation keeps busy ownership until the dispatch releases it', () => {
+  assert.match(main, /import \{ presentProductObservation \} from '\.\/product-presentation-effects';/);
+  assert.match(main, /await presentProductObservation\(next, selectedGeneration/);
+  assert.match(main, /\}, \{ fallbackPalette, releaseBusy \}\);/);
   assert.match(main, /present: \(next, generation\) => present\(next, generation, false\)/);
 });
-
 
 test('main product dispatch preserves GameObservation typing without an assertion cast', () => {
   assert.match(main, /present: \(next, generation\) => present\(next, generation, false\)/);
