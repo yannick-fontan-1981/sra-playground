@@ -70,6 +70,7 @@ export interface NativeResolution {
   readonly steps: readonly NativeStep[];
   readonly nextIndex: number | null;
   readonly outcome: { readonly family: string; readonly matched: boolean | null; readonly reason: string | null;
+    readonly frontierOutcome?: { readonly objective: string; readonly status: 'observed' | 'access_interrupted' };
     readonly recoveryNeed?: { readonly id: string; readonly status: ContactRecoveryNeed['status'] } } | null;
   readonly history: readonly { readonly sequence: number; readonly level: number; readonly family: string;
     readonly matched: boolean | null; readonly reason: string | null }[];
@@ -300,6 +301,11 @@ export function readNativeResolution(agent: {
       maxDepth, maxNodes, packDigest: typeof sic.packDigest === 'string' && /^[a-f0-9]{64}$/.test(sic.packDigest) ? sic.packDigest : null }
     : undefined;
   const returnedNeed = record(result?.sic_need);
+  const frontierResult = record(result?.sic_frontier_outcome);
+  const frontierOutcome: NonNullable<NativeResolution['outcome']>['frontierOutcome'] =
+    typeof frontierResult?.objective === 'string' && /^Q_[a-f0-9]{20}$/.test(frontierResult.objective)
+    && (frontierResult.status === 'observed' || frontierResult.status === 'access_interrupted')
+    ? { objective: frontierResult.objective, status: frontierResult.status } : undefined;
   const needStatus = returnedNeed?.status;
   const recoveryNeed: NonNullable<NativeResolution['outcome']>['recoveryNeed'] =
     typeof returnedNeed?.id === 'string' && /^sic-need:[a-f0-9]{64}$/.test(returnedNeed.id)
@@ -351,7 +357,8 @@ export function readNativeResolution(agent: {
     guard: label(guard?.reason),
     nextIndex: pending && guard && Number.isSafeInteger(guard.index) ? Number(guard.index) : null, steps,
     history, outcome: outcomeFamily && (result?.matched === null || typeof result?.matched === 'boolean')
-      ? { family: outcomeFamily, matched: result.matched, reason: label(result.reason), ...(recoveryNeed ? { recoveryNeed } : {}) } : null };
+      ? { family: outcomeFamily, matched: result.matched, reason: label(result.reason),
+        ...(recoveryNeed ? { recoveryNeed } : {}), ...(frontierOutcome ? { frontierOutcome } : {}) } : null };
 }
 export interface DecisionSprites {
   readonly family: string | null;

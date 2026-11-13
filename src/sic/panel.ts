@@ -1264,6 +1264,10 @@ function renderGenericTimeline(panel: HTMLElement, container: Element, selected:
     const frontierStrategy = first.decision?.frontierStrategy;
     if (frontierStrategy) {
       factsList.push(['Frontier strategy', frontierStrategy.title], ['Information objective', frontierStrategy.objective.label]);
+      const learned = last.nativeCheck?.frontierOutcome;
+      if (learned?.objective === frontierStrategy.objective.id) factsList.push(['Information outcome', learned.status === 'observed'
+        ? 'The untried input was executed and its public return was acquired.'
+        : 'The observed route was interrupted before the untried input.']);
       if (frontierStrategy.inputOrder) factsList.push(['Experiment priority', frontierInputOrders[frontierStrategy.inputOrder]]);
       if (frontierStrategy.choices && frontierStrategy.choices.least_tried !== frontierStrategy.choices.command_order) {
         const { least_tried, command_order } = frontierStrategy.choices;

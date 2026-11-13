@@ -56,6 +56,11 @@ export interface FrontierProposeOptions {
  * mutable and snapshot() always returns detached values in either mode. */
 export interface NativeFrontierOptions { nativeOwned?: boolean }
 
+function sicFrontierOutcome(decision: R | undefined, expected: R | null, actual: R) {
+  const status = expected === null ? 'observed' : !same(actual, expected) ? 'access_interrupted' : null;
+  return decision && status ? { objective: decision.objective.id, status } : null;
+}
+
 export class ObservedFrontier {
   target_levels: number; max_prefix: number;
   nodes: R = {}; observations: R = {}; edges: R = {}; rules: R = {};
@@ -121,7 +126,10 @@ export class ObservedFrontier {
         this.rules[rule.rule_id] = rule;
       }
       if (truth(p.navigation_trial)) this.navigation_trials[p.navigation_trial] = (this.navigation_trials[p.navigation_trial] ?? 0) + 1;
-      if (this.pending && p.proposal_id === this.pending.proposal_id) this.pending.executed++;
+      if (this.pending && p.proposal_id === this.pending.proposal_id) {
+        this.pending.executed++;
+        if (p.sic_outcome) this.pending.sic_outcome = p.sic_outcome;
+      }
     } else if (kind === 'proposal') this.pending = { ...p, executed: 0 };
     else throw new TypeError('Unknown frontier delta kind');
     this.sequence = event.sequence; this.chain = event.digest;
@@ -163,7 +171,8 @@ export class ObservedFrontier {
       }
       if (truth(p.navigation_trial)) next.navigation_trials = { ...previous.navigation_trials,
         [p.navigation_trial]: (previous.navigation_trials[p.navigation_trial] ?? 0) + 1 };
-      if (previous.pending && p.proposal_id === previous.pending.proposal_id) next.pending = { ...previous.pending, executed: previous.pending.executed + 1 };
+      if (previous.pending && p.proposal_id === previous.pending.proposal_id) next.pending = { ...previous.pending, executed: previous.pending.executed + 1,
+        ...(p.sic_outcome ? { sic_outcome: p.sic_outcome } : {}) };
     } else if (kind === 'proposal') next.pending = { ...p, executed: 0 };
     else throw new TypeError('Unknown frontier delta kind');
     next.sequence = event.sequence; next.chain = event.digest;
@@ -220,15 +229,21 @@ export class ObservedFrontier {
     const models = (name: string) => sorted(new Set<string>((library[name] ?? []).map((m: R) => m.model).filter(truth)));
     const summary = { library_status: library.status ?? 'unknown', compatible_models: models('compatible'), refuted_models: models('refuted'), unknown_models: models('unknown'), construction_status: assessment.construction?.status ?? 'unexplained_transition_retained' };
     let navigationTrial: string | null = null, proposalId: string | null = null;
+    let sicOutcome: R | null = null;
     if (this.pending && this.pending.executed < this.pending.steps.length) {
       const expected = this.pending.steps[this.pending.executed];
       if (expected.before_index === source && await frontierActionKey(expected.action) === key) {
         proposalId = this.pending.proposal_id;
         if (this.pending.kind === 'access') navigationTrial = await digest([source, key, this.pending.question_ref]);
+        if (this.pending.sic_frontier && !this.pending.sic_outcome) {
+          const outcome = sicFrontierOutcome(this.pending.sic_frontier, expected.expected_after, frontierProtocol(after));
+          if (outcome) sicOutcome = { ...outcome, transition: transitionRef };
+        }
       }
     }
     const payload = { source, target, action, action_key: key, transition_ref: transitionRef, edge_id: `edge:${await digest([source, key, target])}`,
-      assessment: summary, rules: frontierRules(assessment), proposal_id: proposalId, navigation_trial: navigationTrial };
+      assessment: summary, rules: frontierRules(assessment), proposal_id: proposalId, navigation_trial: navigationTrial,
+      ...(sicOutcome ? { sic_outcome: sicOutcome } : {}) };
     await this.commit('transition', payload);
     const progress = after.levels_completed > before.levels_completed, boundary = after.level_epoch !== before.level_epoch;
     return { status: 'observed_transition_retained', transition_ref: transitionRef, edge_ref: payload.edge_id,
@@ -408,11 +423,12 @@ export class ObservedFrontier {
     if (own(question, 'control_experiment')) { const exp = question.control_experiment; template.purpose = exp.question; template.frozen_control_experiment = exp; template.evidence.push(...exp.evidence_refs); }
     const proposalId = `proposal:${await digest([index, question.question_ref, steps, this.sequence])}`;
     const binding = { observation_ref: frontierRef(observation), level_epoch: protocol.level_epoch, levels_completed: protocol.levels_completed, knowledge_revision: this.knowledge_revision };
-    await this.commit('proposal', { proposal_id: proposalId, kind, question_ref: question.question_ref, steps, binding });
     const inputRanked = !own(question, 'experiment') && !own(question, 'control_experiment');
     const sicFrontier = agenda?.selected ? { strategy: agenda.selected.id, agenda: agenda.entries, inputOrder: order, inputRanked,
       ...(inputRanked && kind === 'experiment' && choices.least_tried && choices.command_order ? { choices } : {}),
       objective: { id: question.question_ref, label: 'Observe the effect of the selected untried input', parent: goal } } : null;
+    await this.commit('proposal', { proposal_id: proposalId, kind, question_ref: question.question_ref, steps, binding,
+      ...(sicFrontier ? { sic_frontier: sicFrontier } : {}) });
     return { status: 'proposed', proposal_id: proposalId, kind, actions, steps, facts, compositions, bundle_template: template, binding, question, route_refs: routeRefs, planned_access_length: path.length, conditional_prefix_length: steps.length,
       ...(sicFrontier ? { sic_frontier_decision: sicFrontier } : {}),
       prefix_qualification: 'provisional_observed_path_with_per_step_falsifiers; never_global_state_certification', library_hypothesis_refs: question.hypothesis_refs,
@@ -433,10 +449,12 @@ export class ObservedFrontier {
   checkOutcome(proposal: R, observation: R, actionIndex: number): R {
     if (!(actionIndex >= 0 && actionIndex < (proposal.steps ?? []).length)) throw new RangeError('Outcome outside bound action set');
     const actual = frontierProtocol(observation), expected = proposal.steps[actionIndex].expected_after, progress = actual.levels_completed > proposal.binding.levels_completed;
-    if (expected === null) return { status: 'unknown_effect_observed', matched: null, seal_prefix: true, official_progress: progress };
+    const outcome = sicFrontierOutcome(proposal.sic_frontier_decision, expected, actual);
+    const evidence = outcome ? { sic_frontier_outcome: outcome } : {};
+    if (expected === null) return { status: 'unknown_effect_observed', matched: null, seal_prefix: true, official_progress: progress, ...evidence };
     if (same(actual, expected)) return { status: 'matched_public_projection', matched: true, seal_prefix: actionIndex === proposal.steps.length - 1, official_progress: progress, qualification: 'supports_conditional_edge_only' };
     return { status: 'diverged_public_projection', matched: false, seal_prefix: true, official_progress: progress,
-      differing_fields: Object.keys(expected).filter(key => !same(actual[key], expected[key])), remaining_suffix_authorized: false };
+      differing_fields: Object.keys(expected).filter(key => !same(actual[key], expected[key])), remaining_suffix_authorized: false, ...evidence };
   }
 }
 

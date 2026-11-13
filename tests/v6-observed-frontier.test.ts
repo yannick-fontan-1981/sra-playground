@@ -94,6 +94,12 @@ test('the SIC input order breaks ties between equally supported commands on the 
   assert.deepEqual(alternate?.actions, [commands[0]]);
   assert.deepEqual(normal?.sic_frontier_decision.choices, alternate?.sic_frontier_decision.choices);
   assert.equal((await stable.guard(alternate!, board)).admitted, true);
+  const after = { ...board, observation_ref: 'frontier-test:epoch:1:revision:2:frame:after', frame_hash: 'after' };
+  await stable.recordTransition(board, commands[0]!, after);
+  const restored = new ObservedFrontier(3, 16, stable.snapshot());
+  assert.deepEqual(restored.pending?.sic_frontier, alternate?.sic_frontier_decision);
+  assert.equal(restored.pending?.sic_outcome.status, 'observed');
+  assert.equal(restored.pending?.sic_outcome.objective, alternate?.sic_frontier_decision.objective.id);
 });
 
 test('V6 frontier rejects tampered, duplicate or reordered retained events without replacing its chain', async () => {
