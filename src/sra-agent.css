@@ -46,6 +46,12 @@
 .sic-details li span{font-size:12px;color:var(--accent-hover)}
 .sic-details li span[data-applicability="not_applicable"]{color:var(--muted)}
 .sic-details li p{flex-basis:100%;margin:0;color:var(--subtle);font-size:13px;line-height:1.5}
+.sic-observations{margin-top:16px;padding:15px 17px;border:1px solid var(--line);border-radius:6px;background:var(--surface)}
+.sic-observations h4{font-size:16px;margin:0 0 6px}
+.sic-observations p{font-size:13px;line-height:1.5;color:var(--subtle);margin:4px 0}
+.sic-observations ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:9px;list-style:none;padding:0;margin:10px 0}
+.sic-observations li{padding:9px 12px;border:1px solid var(--line);border-radius:5px}
+.sic-observations li strong{font-size:14px}
 @media(max-width:900px){.is-agent-mode .minimal-play-area{grid-template-columns:minmax(0,1fr) 280px}.is-agent-mode .minimal-play-area .board-column,.is-agent-mode .minimal-control-column{padding:22px 18px}}
 @media(max-width:760px){.is-agent-mode .minimal-play-area{grid-template-columns:1fr}.is-agent-mode .minimal-control-column{border-left:0;border-top:1px solid var(--line)}.is-agent-mode .minimal-control-column #agent-panel{max-width:600px}.agent-live-stats strong{font-size:26px}.agent-live-stats span{font-size:13px}.agent-mode-label{font-size:10px}.sic-panel{padding:20px 16px}.sic-grid{grid-template-columns:1fr}}
 @media(max-width:420px){.agent-mode-label{padding:2px 4px}.mode-tabs{gap:10px}.mode-tabs button{gap:5px}.sic-card dl{grid-template-columns:1fr;gap:3px}.sic-card dd:not(:last-child){margin-bottom:7px}}

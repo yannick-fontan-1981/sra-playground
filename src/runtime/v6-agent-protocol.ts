@@ -70,6 +70,8 @@ export interface V6BackendSnapshot {
   graphRevision?: number;
   nativeExecutionDigest?: string;
   lastClickReturn?: NativeClickReturn;
+  clickReturns?: readonly NativeClickReturn[];
+  omittedClickReturns?: number;
 }
 
 export type V6Phase = 'authorised_not_executed' | 'sealed_prefix' | 'stopped';

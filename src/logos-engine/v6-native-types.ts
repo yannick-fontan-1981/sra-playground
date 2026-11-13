@@ -213,6 +213,8 @@ export interface NativeRuntimeSnapshot extends NativeRecord {
   readonly graphRevision?: number;
   readonly nativeExecutionDigest?: string;
   readonly lastClickReturn?: NativeClickReturn;
+  readonly clickReturns?: readonly NativeClickReturn[];
+  readonly omittedClickReturns?: number;
 }
 
 export interface NativeAuthorization {

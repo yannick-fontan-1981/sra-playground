@@ -202,6 +202,12 @@ app.innerHTML = `
             <summary>Methods and evidence</summary>
             <ul data-sic-methods></ul>
           </details>
+          <section class="sic-observations" aria-labelledby="sic-observations-title" data-sic-comparisons hidden>
+            <h4 id="sic-observations-title">Does the effect repeat?</h4>
+            <p data-sic-comparison-summary></p>
+            <ul data-sic-comparison-list></ul>
+            <p data-sic-comparison-scope></p>
+          </section>
         </section>
 
         <p id="game-feedback" class="sr-only" aria-live="polite"></p>

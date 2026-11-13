@@ -2,11 +2,13 @@ import type { GameObservation } from '../runtime/browser-games.ts';
 import { isTerminalState, type AgentAction } from '../runtime/contracts.ts';
 import type { V6AgentSnapshot } from '../runtime/v6-agent.ts';
 import type { NativeClickReturn } from '../logos-engine/v6-native-click-return.ts';
+import { compareClickReturns, type ClickEvidence } from './click-evidence.ts';
 import { evaluateControlEffect, type ControlEffectResolution } from './know-control-effect.ts';
 import type { EvidenceRef, SituationFrame } from './situation.ts';
 
 type ShadowBoard = Pick<GameObservation, 'gameCode' | 'level' | 'state' | 'availableActionIds'>;
-type ShadowAgent = Pick<V6AgentSnapshot, 'sessionId' | 'sequence' | 'status' | 'busy' | 'trace' | 'pendingAction' | 'level' | 'lastClickReturn'>;
+type ShadowAgent = Pick<V6AgentSnapshot, 'sessionId' | 'sequence' | 'status' | 'busy' | 'trace' | 'pendingAction'
+  | 'level' | 'lastClickReturn' | 'clickReturns' | 'omittedClickReturns'>;
 
 export interface ShadowView {
   readonly gameCode: string;
@@ -15,6 +17,7 @@ export interface ShadowView {
   readonly nextAction: AgentAction | null;
   readonly returnCheck: { readonly matched: boolean | null; readonly evidence: EvidenceRef } | null;
   readonly clickReturn: NativeClickReturn | null;
+  readonly clickEvidence: ClickEvidence | null;
   readonly resolution: ControlEffectResolution;
 }
 
@@ -37,6 +40,16 @@ function bindClickReturn(agent: ShadowAgent, board: ShadowBoard, returnRef: stri
   if (!receipt || receipt.toLevel !== board.level || receipt.afterRef !== returnRef) return null;
   const beforePrefix = `${agent.sessionId}:epoch:${receipt.fromLevel}:revision:${agent.sequence}:frame:`;
   return receipt.beforeRef.startsWith(beforePrefix) ? receipt : null;
+}
+
+function readClickEvidence(agent: ShadowAgent): ClickEvidence | null {
+  const returns = agent.clickReturns?.filter(receipt => {
+    const { sequence, fromLevel, toLevel } = receipt;
+    return Number.isSafeInteger(sequence) && sequence > 0 && sequence <= agent.sequence
+      && receipt.beforeRef.startsWith(`${agent.sessionId}:epoch:${fromLevel}:revision:${sequence}:frame:`)
+      && receipt.afterRef.startsWith(`${agent.sessionId}:epoch:${toLevel}:revision:${sequence + 1}:frame:`);
+  });
+  return returns?.length ? compareClickReturns(returns, agent.omittedClickReturns ?? 0) : null;
 }
 
 /** Project a settled public snapshot. No commands, graph reads or writes go back to V6. */
@@ -66,6 +79,7 @@ export function readControlEffectShadow(board: ShadowBoard, agent: ShadowAgent |
     nextAction: hasCommand ? nextAction : null,
     returnCheck,
     clickReturn,
+    clickEvidence: current && current.status !== 'error' ? readClickEvidence(current) : null,
     // The receipt describes a past click. It cannot bind the next command's subject.
     resolution: evaluateControlEffect({
       scope,

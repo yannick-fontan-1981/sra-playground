@@ -1,4 +1,5 @@
 import type { AgentAction } from '../runtime/contracts.ts';
+import type { ClickEffectCount } from './click-evidence.ts';
 import type { Applicability, ControlEffectResolution } from './know-control-effect.ts';
 import type { ShadowView } from './shadow.ts';
 import type { SituationKey } from './situation.ts';
@@ -76,9 +77,59 @@ function clickDetails(receipt: ShadowView['clickReturn']): {
     control,
     effect,
     uncertainty: receipt.target
-      ? 'The region is visible. Its role in the game and whether the change repeats are still uncertain.'
+      ? 'The region is visible. Its role in the game is still uncertain.'
       : 'The subject of the click and its effect are still uncertain.',
   };
+}
+
+function observedEffect(effect: ClickEffectCount): string {
+  if (effect.kind === 'recolor') return `Changed to palette color ${effect.afterPalette} with the same shape and position`;
+  if (effect.kind === 'unchanged') return 'Kept the same visible pixels';
+  return 'Pixels changed. The resulting region could not be matched exactly';
+}
+
+function renderClickComparisons(panel: HTMLElement, evidence: ShadowView['clickEvidence']): void {
+  const section = panel.querySelector<HTMLElement>('[data-sic-comparisons]')!;
+  section.hidden = !evidence;
+  if (!evidence) return;
+  const repeated = evidence.comparisons.filter(group => group.status === 'repeated').length;
+  const varied = evidence.comparisons.filter(group => group.status === 'varied').length;
+  const counts = [
+    repeated ? `${repeated} ${repeated === 1 ? 'pattern repeated' : 'patterns repeated'}` : 'No repeated pattern yet',
+    varied ? `${varied} with different outcomes` : '',
+  ].filter(Boolean);
+  panel.querySelector<HTMLElement>('[data-sic-comparison-summary]')!.textContent = counts.join(' · ');
+  panel.querySelector<HTMLElement>('[data-sic-comparison-scope]')!.textContent = [
+    'Compared within this session by measured shape, starting color and click position within the region.',
+    'The role of the region and whether the result transfers to other situations remain uncertain.',
+    evidence.boundaries ? `${evidence.boundaries} game boundary returns excluded.` : '',
+    evidence.unidentified ? `${evidence.unidentified} clicks without a visible region excluded.` : '',
+    evidence.omitted ? `${evidence.omitted} older clicks outside the retained window.` : '',
+  ].filter(Boolean).join(' ');
+  const labels = {
+    repeated: 'Repeated observation',
+    varied: 'Different outcomes',
+    single: 'Seen once',
+    unresolved: 'Effect uncertain',
+  } as const;
+  const rows = evidence.comparisons.map(({ example, status, effects, count }) => {
+    const row = document.createElement('li');
+    const heading = document.createElement('strong');
+    const target = example.target!;
+    const offset = [example.point[0] - target.box[0], example.point[1] - target.box[1]];
+    heading.textContent = `${labels[status]} · ${count} ${count === 1 ? 'click' : 'clicks'}`;
+    const condition = document.createElement('p');
+    condition.textContent = `${target.pixels} px region · starting palette color ${target.palette} · click offset (${offset.join(', ')})`;
+    row.append(heading, condition);
+    for (const effect of effects) {
+      const line = document.createElement('p');
+      const level = effect.levels.length === 1 ? 'level' : 'levels';
+      line.textContent = `${observedEffect(effect)} · ${effect.count}× on ${level} ${effect.levels.join(', ')}`;
+      row.append(line);
+    }
+    return row;
+  });
+  panel.querySelector<HTMLUListElement>('[data-sic-comparison-list]')!.replaceChildren(...rows);
 }
 
 export function renderSicPanel(panel: HTMLElement, view: ShadowView | null): void {
@@ -96,6 +147,7 @@ export function renderSicPanel(panel: HTMLElement, view: ShadowView | null): voi
   const uncertainty = panel.querySelector<HTMLElement>('[data-sic-uncertainty]')!;
   uncertainty.textContent = detailsOfClick.uncertainty;
   uncertainty.hidden = !detailsOfClick.uncertainty;
+  renderClickComparisons(panel, view?.clickEvidence ?? null);
   const check = view?.returnCheck;
   panel.querySelector<HTMLElement>('[data-sic-return]')!.textContent = !check ? 'No checked return for this board.'
     : check.matched === true ? 'The return matched the V6 plan’s expectation.'

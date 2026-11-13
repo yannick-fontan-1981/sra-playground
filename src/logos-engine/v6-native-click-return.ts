@@ -3,6 +3,7 @@ import type { NativeBox, NativeCommand, NativePoint, NativeRows } from './v6-nat
 
 interface VisibleRegion {
   readonly ref: string;
+  readonly signature: string;
   readonly box: NativeBox;
   readonly palette: number;
   readonly pixels: number;
@@ -13,6 +14,7 @@ export interface NativeClickReturn {
   readonly afterRef: string;
   readonly fromLevel: number;
   readonly toLevel: number;
+  readonly sequence: number;
   readonly point: NativePoint;
   readonly target: VisibleRegion | null;
   readonly atPointAfter: VisibleRegion | null;
@@ -30,7 +32,9 @@ function atPoint(observation: MeasuredObservation, [x, y]: NativePoint): Measure
 }
 
 function region(entity: MeasuredEntity | undefined): VisibleRegion | null {
-  return entity ? { ref: entity.id, box: entity.bbox, palette: entity.palette_value, pixels: entity.area } : null;
+  return entity ? {
+    ref: entity.id, signature: entity.signature, box: entity.bbox, palette: entity.palette_value, pixels: entity.area,
+  } : null;
 }
 
 /** Compact diagnostic of an already executed command, using the native public measurements. */
@@ -60,6 +64,7 @@ export function projectNativeClickReturn(
     afterRef: after.observation_ref,
     fromLevel: before.level_epoch,
     toLevel: after.level_epoch,
+    sequence: before.revision,
     point,
     target: region(target),
     atPointAfter: region(returned),

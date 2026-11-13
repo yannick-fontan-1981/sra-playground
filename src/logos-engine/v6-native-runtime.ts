@@ -224,6 +224,8 @@ export class NativeV6Runtime implements NativeV6Backend {
   private current: NativePublicObservation | null = null;
   private observation: MeasuredObservation | null = null;
   private lastClickReturn: NativeClickReturn | null = null;
+  private clickReturns: readonly NativeClickReturn[] = [];
+  private omittedClickReturns = 0;
   private prefix: Prefix | null = null;
   private actions = 0;
   private revision = 0;
@@ -1226,6 +1228,11 @@ export class NativeV6Runtime implements NativeV6Backend {
     this.lastClickReturn = null;
     try {
       this.lastClickReturn = projectNativeClickReturn(outcome.command, before, this.observation!, this.current!.frame_rows);
+      if (this.lastClickReturn) {
+        const capacity = 32;
+        if (this.clickReturns.length === capacity) this.omittedClickReturns += 1;
+        this.clickReturns = [...this.clickReturns.slice(-(capacity - 1)), this.lastClickReturn];
+      }
     } catch {
       // A diagnostic failure cannot change the completed transition or its reply.
     }
@@ -1794,6 +1801,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       activeSeconds: (this.elapsedMs + this.runningMs()) / 1000, lastDecision: this.lastFamily, trace: this.trace.slice(), reason: this.reason,
       sourceCommit: this.sourceCommit, sourceDigest: this.sourceDigest, proposal: this.prefix?.proposal ?? null,
       ...(this.lastClickReturn ? { lastClickReturn: this.lastClickReturn } : {}),
+      ...(this.clickReturns.length ? { clickReturns: this.clickReturns, omittedClickReturns: this.omittedClickReturns } : {}),
       implementation: NATIVE_V6_IMPLEMENTATION, coverage: { status: 'in_progress', registeredFamilies: this.families.map(f => f.id),
         sourceGroups: this.groups, emptySourceGroups: this.groups.filter(group => !group.families.length).map(group => group.id),
         partialEntryPoints: {},
