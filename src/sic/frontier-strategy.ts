@@ -6,7 +6,10 @@ export const frontierStrategies = {
   reach_open_input: 'Reach a known board with an untried input',
 } as const;
 
-type FrontierStrategy = keyof typeof frontierStrategies;
+export type FrontierStrategy = keyof typeof frontierStrategies;
+export function isFrontierStrategy(value: unknown): value is FrontierStrategy {
+  return typeof value === 'string' && Object.hasOwn(frontierStrategies, value);
+}
 export function frontierInformationNeed(scope: string, subject: string, parentObjective: string, evidence: readonly string[]) {
   const identity = { kind: 'observe_untried_input_effect', scope, subjects: [subject], parentObjective,
     satisfactionContract: 'acquire_the_selected_input_return' } as const;

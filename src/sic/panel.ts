@@ -19,7 +19,8 @@ import { compareAboveColors, contrastClickContexts, describeClickContext, type C
 import type { Applicability, ControlEffectResolution } from './know-control-effect.ts';
 import type { ShadowView } from './shadow.ts';
 import type { SituationKey } from './situation.ts';
-import { contactRecoveryStrategies, isContactStrategy } from './active-recovery.ts';
+import { contactRecoveryStrategies } from './active-recovery.ts';
+import { frontierStrategies } from './frontier-strategy.ts';
 import type { AgendaEntry } from './strategy-agenda.ts';
 import { frontierInputOrders } from './frontier-configuration.ts';
 
@@ -893,7 +894,7 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
     summary.textContent = view.recoveryRefusal.reason === 'sic_recovery_shadow'
       ? 'The contact-recovery agenda ran in shadow. No recovery command was released.'
       : 'The contact-recovery agenda found no admissible plan within the current limits.';
-    strategies.append(summary, renderRecoveryAgenda(view.recoveryRefusal.agenda));
+    strategies.append(summary, renderAgenda('Contact recovery priority', contactRecoveryStrategies, view.recoveryRefusal.agenda));
   }
   let editor = strategyEditors.get(panel);
   if (!editor) {
@@ -1246,9 +1247,9 @@ function renderGenericTimeline(panel: HTMLElement, container: Element, selected:
     details.dataset.sicMethod = String(first.sequence);
     details.dataset.strategyChoice = key(first.sequence);
     details.open = expanded.get(details.dataset.sicMethod) ?? episode === lastContradiction;
-    const method = operation
-      ? `${operations} · ${first.decision?.question ? nativeLabel(first.decision.question) : operation.description}`
-      : rule?.title ?? 'Observe an action return';
+    const chosen = first.decision?.recoveryDecision?.strategy ?? first.decision?.frontierStrategy?.title;
+    const method = [operations, chosen ?? (first.decision?.question ? nativeLabel(first.decision.question)
+      : operation?.description ?? rule?.title ?? 'Observe an action return')].filter(Boolean).join(' · ');
     title.textContent = `L${first.fromLevel} · ${actions} · ${method} · ${statuses[status]}`;
     details.append(title);
     const facts = document.createElement('dl');
@@ -1312,8 +1313,9 @@ function renderGenericTimeline(panel: HTMLElement, container: Element, selected:
       const context = document.createElement('p');
       context.textContent = recoveryDecision.situationAction === undefined ? 'Judged from the current board.'
         : `Judged from the board after action ${recoveryDecision.situationAction}.`;
-      details.append(context, renderRecoveryAgenda(recoveryDecision.agenda, recoveryDecision.agendaEvidence));
+      details.append(context, renderAgenda('Contact recovery priority', contactRecoveryStrategies, recoveryDecision.agenda, recoveryDecision.agendaEvidence));
     }
+    if (frontierStrategy?.agenda.length) details.append(renderAgenda('Exploration strategy priority', frontierStrategies, frontierStrategy.agenda));
     const recoveryOperations = first.decision?.recoveryOperations;
     if (recoveryOperations?.length) {
       const recovery = document.createElement('ol');
@@ -1870,20 +1872,20 @@ export function renderSicPanel(panel: HTMLElement, view: ShadowView | null, pale
     return row;
   }));
 }
-function renderRecoveryAgenda(agenda: readonly AgendaEntry[],
-  evidence?: NonNullable<NativeResolution['recoveryDecision']>['agendaEvidence']): HTMLOListElement {
+function renderAgenda<Id extends string>(label: string, labels: Readonly<Record<Id, string>>, agenda: readonly AgendaEntry<Id>[],
+  evidence?: Readonly<Partial<Record<Id, readonly number[]>>>): HTMLOListElement {
   const ranking = document.createElement('ol');
   ranking.className = 'sic-recovery-timeline';
-  ranking.setAttribute('aria-label', 'Contact recovery priority');
+  ranking.setAttribute('aria-label', label);
   const outcomes = { selected: 'Selected', no_plan: 'No plan found within limits', lower_priority: 'Lower priority',
     skipped: 'Conditions not met', shadow: 'Applicable in shadow' };
   for (const entry of agenda) {
-    if (!isContactStrategy(entry.id)) continue;
+    if (!Object.hasOwn(labels, entry.id)) continue;
     const candidate = document.createElement('li');
     const outcome = entry.applicability === 'undetermined' ? 'Applicability uncertain' : outcomes[entry.result];
     const actions = evidence?.[entry.id];
     const sources = actions?.length ? ` Evidence from ${actions.length === 1 ? 'action' : 'actions'} ${actions.join(', ')}.` : '';
-    candidate.textContent = `${contactRecoveryStrategies[entry.id]} · ${outcome}. ${entry.reason}${sources}`;
+    candidate.textContent = `${labels[entry.id]} · ${outcome}. ${entry.reason}${sources}`;
     ranking.append(candidate);
   }
   return ranking;

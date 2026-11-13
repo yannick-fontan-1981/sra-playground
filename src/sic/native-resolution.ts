@@ -2,7 +2,7 @@ import { cropReturn } from '../logos-engine/v6-public-return-visuals.ts';
 import { contactRecoveryStrategies, isContactStrategy, isRecoveryStop, rootedRecoveryStrategy,
   type ContactRecoveryNeed, type ContactStrategy } from './active-recovery.ts';
 import type { AgendaEntry } from './strategy-agenda.ts';
-import { frontierStrategies } from './frontier-strategy.ts';
+import { frontierStrategies, isFrontierStrategy, type FrontierStrategy } from './frontier-strategy.ts';
 import { isFrontierInputOrder, type FrontierInputOrder } from './frontier-configuration.ts';
 import type { NativeBox, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
 
@@ -50,7 +50,7 @@ export interface NativeResolution {
   readonly searchOperation?: string;
   readonly recoveryOperations?: readonly { key: string; finding: string }[];
   readonly recoveryDecision?: { readonly strategy: string; readonly need: string; readonly objective: SicObjective | null; readonly maxDepth: number;
-    readonly maxNodes: number; readonly packDigest: string | null; readonly agenda?: readonly AgendaEntry[];
+    readonly maxNodes: number; readonly packDigest: string | null; readonly agenda?: readonly AgendaEntry<ContactStrategy>[];
     readonly situationAction?: number; readonly agendaEvidence?: Readonly<Partial<Record<ContactStrategy, readonly number[]>>> };
   readonly recoveryAction?: number;
   readonly composition: string | null;
@@ -61,7 +61,7 @@ export interface NativeResolution {
   readonly planRevision?: number;
   readonly releasedPlan?: { readonly family: string; readonly planned: number; readonly objective: string | null };
   readonly frontierStrategy?: { readonly title: string; readonly objective: SicObjective; readonly inputOrder: FrontierInputOrder | null;
-    readonly choices?: Readonly<Record<FrontierInputOrder, string>> };
+    readonly choices?: Readonly<Record<FrontierInputOrder, string>>; readonly agenda: readonly AgendaEntry<FrontierStrategy>[] };
   readonly remainingSteps: number;
   readonly footprint: NativeBox | null;
   readonly context: NativePlanContext | null;
@@ -87,10 +87,10 @@ const record = (value: unknown): Record<string, unknown> | null =>
 const label = (value: unknown) => typeof value === 'string' && value.length <= 320 ? value : null;
 const natural = (value: unknown) => typeof value === 'number' && Number.isSafeInteger(value) && value >= 0 ? value : null;
 
-function readRecoveryAgenda(value: unknown): AgendaEntry<ContactStrategy>[] {
-  return Array.isArray(value) ? value.slice(0, Object.keys(contactRecoveryStrategies).length).flatMap(item => {
+function readAgenda<Id extends string>(value: unknown, accepts: (id: unknown) => id is Id): AgendaEntry<Id>[] {
+  return Array.isArray(value) ? value.slice(0, 16).flatMap(item => {
     const entry = record(item), reason = label(entry?.reason), applicability = entry?.applicability, result = entry?.result;
-    if (!isContactStrategy(entry?.id) || !reason
+    if (!accepts(entry?.id) || !reason
       || (applicability !== 'applicable' && applicability !== 'inapplicable' && applicability !== 'undetermined')
       || (result !== 'selected' && result !== 'no_plan' && result !== 'lower_priority' && result !== 'skipped' && result !== 'shadow')) return [];
     const evidence = Array.isArray(entry.evidence) ? entry.evidence.slice(0, 16).filter((ref): ref is string => typeof ref === 'string') : [];
@@ -104,7 +104,7 @@ export function readRecoveryRefusal(agent: { sessionId: string | null; sequence:
   const refusal = agent.trace.slice(-128).reverse().map(record).find(event =>
     event?.kind === 'sic_recovery_refusal' && typeof event.observation_ref === 'string' && event.observation_ref.startsWith(scope));
   if (!isRecoveryStop(refusal?.reason)) return null;
-  const agenda = readRecoveryAgenda(record(refusal?.decision)?.agenda);
+  const agenda = readAgenda(record(refusal?.decision)?.agenda, isContactStrategy);
   return agenda.length ? { reason: refusal.reason, agenda } : null;
 }
 
@@ -188,13 +188,14 @@ export function readNativeResolution(agent: {
   const question = label(record(proposal?.question ?? traced?.question)?.reason) ?? label(template?.purpose);
   const nativeObjective = label(template?.objective_ref);
   const frontier = record(proposal?.sic_frontier_decision), frontierTarget = record(frontier?.objective);
-  const frontierId = label(frontier?.strategy), frontierObjectiveId = label(frontierTarget?.id), frontierObjectiveLabel = label(frontierTarget?.label);
+  const frontierId = frontier?.strategy, frontierObjectiveId = label(frontierTarget?.id), frontierObjectiveLabel = label(frontierTarget?.label);
   const frontierChoices = record(frontier?.choices);
   const leastTried = actionName(frontierChoices?.least_tried), commandOrder = actionName(frontierChoices?.command_order);
   const frontierStrategy = nativeObjective && frontierObjectiveId && frontierObjectiveLabel && frontierTarget?.parent === nativeObjective
-    && (frontierId === 'test_local_input' || frontierId === 'reach_open_input')
+    && isFrontierStrategy(frontierId)
     ? { title: frontierStrategies[frontierId], objective: { id: frontierObjectiveId, label: frontierObjectiveLabel, parent: nativeObjective },
       inputOrder: frontier?.inputRanked === true && isFrontierInputOrder(frontier.inputOrder) ? frontier.inputOrder : null,
+      agenda: readAgenda(frontier?.agenda, isFrontierStrategy),
       ...(leastTried && commandOrder ? { choices: { least_tried: leastTried, command_order: commandOrder } } : {}) }
     : undefined;
   const objectiveSource = nativeObjective ? 'native' : steps.length && question ? 'question' : steps.length ? 'unpublished' : null;
@@ -289,7 +290,7 @@ export function readNativeResolution(agent: {
   const recoveryObjective = target?.id === rootedRecoveryStrategy.objective.id && targetLabel &&
     target.parent === nativeObjective && nativeObjective
     ? { id: rootedRecoveryStrategy.objective.id, label: targetLabel, parent: nativeObjective } : null;
-  const agenda = readRecoveryAgenda(sic?.agenda);
+  const agenda = readAgenda(sic?.agenda, isContactStrategy);
   const situation = record(sic?.situation);
   const situationAction = priorAction(situation?.revision) ?? undefined;
   const agendaEvidence = Object.fromEntries(agenda.map(entry => [entry.id,
