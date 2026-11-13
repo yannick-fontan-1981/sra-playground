@@ -10,35 +10,52 @@
 - 40 invocations, 8 warmups, 32 sessions mesurées, 24 + 400 actions ;
 - chaque action produit un delta public utile ;
 - séquences A/B identiques et déterministes ;
+- transport réel `BrowserGameRuntime → game-worker.ts → Pyodide` qualifié ;
+- parité CPython/Pyodide exacte sur 4 campagnes et 31 actions ;
 - preuves GitHub Actions et rapports durables.
 
-## Reste avant mesure officielle
+## R1 — transport benchmark Worker/Pyodide
 
-### R1 — transport benchmark Worker/Pyodide
+Statut : **qualifié**.
 
-Construire un `dispatch` de benchmark lié au vrai Worker navigateur et au
-`game_bridge.py` exécuté par Pyodide, sans serveur externe ni checkout Sites.
+Le harness réel utilise :
 
-Critères :
+`BrowserGameRuntime → game-worker.ts → Pyodide → game_bridge.py → custom-games.zip`
+
+Critères satisfaits :
 
 - chargement réel de `custom-games.zip` ;
-- observation publique identique au contrat browser ;
+- observation publique du contrat browser ;
 - ACTION6 avec coordonnées conservées ;
 - aucune inspection moteur ;
-- session neuve seed 0 par invocation ;
-- erreur propagée sans fallback.
+- session neuve seed 0 par campagne ;
+- erreur propagée sans fallback ;
+- aucun checkout Sites.
 
-### R2 — parité CPython/Pyodide
+Preuve :
 
-Comparer au minimum :
+`docs/recovery/lot9b-worker-pyodide-parity.md`
 
-- action initiale sélectionnée ;
-- séquence 3/10/15 actions ;
-- identité de jeu ;
-- nombre de pixels modifiés par action ;
-- niveau et état après chaque action.
+## R2 — parité CPython/Pyodide
 
-Toute divergence bloque le benchmark officiel.
+Statut : **qualifié**.
+
+Comparaison exacte :
+
+- STCK 3 actions ;
+- STCK 10 actions ;
+- SMLP 3 actions ;
+- SMLP 15 actions ;
+- **4/4 campagnes** ;
+- **31/31 actions** ;
+- actions, coordonnées, deltas, hashes de frames, niveau, état et actions
+  disponibles identiques.
+
+Preuve :
+
+`docs/recovery/lot9b-worker-pyodide-parity-report.json`
+
+## Reste avant mesure officielle
 
 ### R3 — `sourceRef` A/B
 
@@ -47,11 +64,12 @@ Figer des identités durables :
 - A : baseline canonique de référence ;
 - B : même baseline + candidat 9B Region ;
 - hashes des fichiers constitutifs ;
-- preuve que transport, corpus et configuration sont identiques.
+- preuve que transport, corpus et configuration sont identiques ;
+- différence A/B limitée au hook Region mesuré.
 
 ### R4 — manifeste officiel
 
-Créer seulement après R1–R3 :
+Créer seulement après R3 :
 
 `docs/recovery/native-loop-runner-manifest.json`
 
@@ -85,9 +103,10 @@ Acceptation uniquement si :
 - SMLP < +10.000 % ;
 - aucun jeu ne compense l’autre.
 
-Les diagnostics CPython actuels ne sont pas un résultat R5/R6.
+Les diagnostics CPython antérieurs ne sont pas un résultat R5/R6.
 
 ## Prochaine action immédiate
 
-R1 : reconstruire le transport benchmark Worker/Pyodide et ajouter une campagne
-de parité courte avant toute mesure officielle.
+R3 : calculer et figer les `sourceRef` A/B à partir des composants communs et
+des seuls composants Region actifs côté B. Après vérification, construire le
+manifeste officiel R4.
