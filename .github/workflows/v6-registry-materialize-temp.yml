@@ -1,0 +1,38 @@
+name: Temporary V6 registry materialization
+
+on:
+  push:
+    branches:
+      - recovery/v6-registry-session-resume-sync-20261113
+    paths:
+      - '.github/workflows/v6-registry-materialize-temp.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  materialize:
+    runs-on: ubuntu-26.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Package registry sources
+        run: |
+          mkdir -p materialized/docs/migration materialized/docs/recovery materialized/scripts materialized/tests materialized/src/runtime materialized/.github/workflows
+          cp docs/migration/v6-entry-point-progress.json materialized/docs/migration/
+          cp docs/recovery/v6-entry-point-registry-reconstruction-20261113.md materialized/docs/recovery/
+          cp docs/recovery/op01-op31-browser-session-resume-20261113.md materialized/docs/recovery/
+          cp docs/recovery/op01-op31-browser-session-resume-qualified.json materialized/docs/recovery/
+          cp scripts/check-v6-entry-point-progress.mjs materialized/scripts/
+          cp tests/v6-entry-point-progress.test.ts materialized/tests/
+          cp tests/v6-browser-session-resume.test.ts materialized/tests/
+          cp src/runtime/v6-browser-campaign-checkpoint.ts materialized/src/runtime/
+          cp src/runtime/v6-browser-common-campaign-host.ts materialized/src/runtime/
+          cp src/runtime/v6-browser-agent-controller.ts materialized/src/runtime/
+          cp .github/workflows/v6-entry-point-registry.yml materialized/.github/workflows/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: v6-registry-materialized
+          path: materialized
+          if-no-files-found: error
+          retention-days: 1
