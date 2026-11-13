@@ -368,3 +368,83 @@ Next required evidence:
 Status remains:
 
 **fonctionnellement qualifié dans les reconstructed contracts; performance officielle à confirmer**.
+
+
+## Source audit — ACTION5 availability blocks Region in corpus V1
+
+Durable engine source now proves the issue is structural, not incidental.
+
+STCK `public_state()`:
+- non-terminal: `ACTION5, ACTION6, ACTION7`;
+- terminal WIN: `ACTION7`.
+
+SMLP `_envelope()`:
+- non-terminal: `ACTION5, ACTION6, ACTION7`;
+- terminal WIN: `ACTION7`.
+
+Because `native-public-action-corpus-v1` always prefers ACTION5, it cannot
+select ACTION6 on either benchmark game while the game is non-terminal.
+
+No historical commit carrying a durable STCK/SMLP ACTION6 benchmark corpus was
+found by commit search.
+
+Therefore corpus V1 is formally unsuitable for measuring meaningful
+`region_intervention` ACTION6 work.
+
+## Candidate public ACTION6 probe contract
+
+A new non-official candidate is added in:
+
+`scripts/native-loop-region-public-action6-probe.mjs`
+
+Identity:
+
+`region-public-action6-probe-v1`
+
+It reads only:
+- the public 64×64 palette frame;
+- public `availableActionIds`;
+- the benchmark game code.
+
+It does not read engine objects, level fixtures, hidden geometry, `view()`,
+`inspect()`, shop state, control ids or prepared trajectories.
+
+### SMLP
+
+The engine source proves a closed gate is rendered as a 3×3 same-color block
+with a black horizontal or vertical center line.
+
+The public probe scans row-major for that visible glyph and returns its center
+as ACTION6 coordinates.
+
+### STCK
+
+The engine source proves the shop-button bar is rendered in public rows 54–58.
+The probe scans those public rows for the first sufficiently wide visible
+non-black button run and returns its visible center.
+
+The probe does not assume that the player is currently at a shop. Therefore a
+STCK click may legitimately have no effect; useful-effect qualification remains
+a real-runtime requirement.
+
+### Tests
+
+Autonomous selector tests executed locally:
+**4/4 passed**.
+
+Covered:
+- SMLP closed-gate center selection;
+- STCK visible bottom-button center selection;
+- fail closed when ACTION6 is unavailable;
+- return `undefined` when no public target glyph is visible.
+
+This candidate is not yet an official corpus and is not wired into ABBA.
+
+Next qualification:
+1. run it against genuine STCK/SMLP observations from `custom-games.zip`;
+2. confirm selected coordinates are reproducible from public frames;
+3. confirm SMLP produces a useful public delta;
+4. determine whether STCK produces useful deltas at session start or requires
+   a different public-only target detector;
+5. only after both games are qualified, consider a Region-specific corpus
+   identity shared identically by A and B.
