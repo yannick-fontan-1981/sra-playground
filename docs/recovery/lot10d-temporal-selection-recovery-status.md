@@ -7,17 +7,25 @@ Date : 2026-11-12
 - Lot : **10D / TemporalSelection**
 - Branche : `recovery/lot10d-temporal-selection-rebased-20261112`
 - Baseline de report : `recovery/site109-reconstruction-20261112` au commit `24fcdbb16c93de59489a6bb0392cc709b7a75d14`
-- Tête canonique parallèle observée après ce jalon : `67602172665b79e2b282b37b63f80dc24feff3b0`
+- Tête canonique parallèle observée après ce jalon : `e3fa1901452423a714d3a47d5a469dbf112c55b0`
 
-La divergence parallèle n'est pas une intégration. Aucune parité avec Site 109 / native 0.68 n'est revendiquée.
+La divergence parallèle n'est pas une intégration. Aucune parité complète avec Site 109 / native 0.68 n'est revendiquée.
 
 ## Nature de la reconstruction
 
-L'ancienne branche historique ne contenait aucun delta 10D récupérable. Le code actuel est une reconstruction qualifiée depuis des donneurs et contrats durables versionnés sur GitHub.
+L'ancienne branche historique ne contenait aucun delta 10D récupérable. Le code actuel est une reconstruction qualifiée à partir de contrats et donneurs GitHub durables.
+
+Pour le permis ACT, les sources historiques utiles ont été retrouvées dans le dépôt V5 privé au commit :
+
+`212d8d426f07eea2b6797c2bb647545767488a96`
+
+Le code privé n'est pas republié. Les chemins, blobs Git et invariants récupérés sont conservés dans :
+
+`docs/recovery/lot10d-temporal-action-release-donor-map.md`
 
 ## Couche reconstruite
 
-Les briques présentes sont :
+Les briques présentes sont maintenant :
 
 1. sélection Source fail-closed ;
 2. mémoire liée à l'observation ;
@@ -28,102 +36,155 @@ Les briques présentes sont :
 7. bridge traçable Logos V6 ;
 8. port runtime passif ;
 9. audit des gates d'éligibilité ACT ;
-10. binding attribué d'un candidat `AgentAction` préparé.
+10. binding attribué d'un candidat `AgentAction` préparé ;
+11. permis ACT ordinaire lié à une lease de concentration validée.
 
 Derniers fichiers ajoutés :
 
-- `src/runtime/v6-temporal-action-binding.ts`
-- `tests/v6-temporal-action-binding.test.ts`
-- `tests/v6-temporal-action-donor-audit.test.ts`
-- `docs/recovery/lot10d-temporal-action-binding.md`
+- `src/runtime/v6-temporal-action-release-permit.ts`
+- `tests/v6-temporal-action-release-permit.test.ts`
+- `docs/recovery/lot10d-temporal-action-release-permit.md`
+- `docs/recovery/lot10d-temporal-action-release-donor-map.md`
 
-## Binding du candidat d'action
+## Schéma historique récupéré
 
-Le nouveau reçu lie explicitement :
+Les donneurs V5 établissent que le permis historique lie au minimum :
 
-- le workflow et le source hash ;
+- l'identité de l'intent ;
+- l'évaluation de viability ;
+- la décision de commitment ;
+- l'action disponible ;
+- le snapshot pré-action ;
+- la révision maximale de validité ;
+- une lease de concentration ;
+- éventuellement une série pré-déclarée ou une acquisition différée de concentration.
+
+Les donneurs établissent également que :
+
+- le permis ne transporte pas directement l'action vers l'environnement ;
+- ACT revalide le contexte et fait passer la lease à `RELEASED` ;
+- `ActionBoundary` revérifie encore le checkpoint avant le premier transport ;
+- la tentative est persistée avant l'appel externe ;
+- un résultat incertain interdit toute redélivrance automatique ;
+- l'acquisition et la réconciliation restent des étapes séparées.
+
+## Permis ACT ordinaire reconstruit
+
+Le nouveau reçu public lie :
+
+- l'identité Source ;
 - la session et la séquence publiques ;
 - l'empreinte exacte de l'observation publique ;
-- l'identité temporelle ;
-- le candidat TemporalSelection et l'empreinte de décision ;
-- l'intent, la frame, le witness et la famille d'action ;
-- une cible explicite ;
-- une `AgentAction` publique déjà préparée ;
-- les attentes, preuves de grounding, d'action et de cible ;
-- une empreinte déterministe du binding.
+- l'identité et la révision temporelles ;
+- l'intent et le binding du candidat d'action ;
+- le candidat TemporalSelection et la décision ;
+- la cible et l'identifiant public de l'action ;
+- l'identité courante de disponibilité ;
+- le snapshot pré-action ;
+- la viability et le commitment ;
+- les décisions DRM et SRC ;
+- le principe, l'effet attendu, les prémisses et falsificateurs ;
+- une lease de concentration `validated` ;
+- une empreinte de lease et une empreinte de permis.
 
-Le composant ne transforme pas lui-même `selectedRef` en action. La cible et l'action candidate sont fournies par un producteur externe puis vérifiées.
+Le mapping public utilise l'`observationRevision`, l'empreinte de l'`AgentObservation` et une identité locale de disponibilité. Il ne prétend pas reproduire octet pour octet la sérialisation historique.
 
-Pour `ACTION6`, les coordonnées de la cible et du payload doivent être identiques. Pour les autres actions, l'identifiant de la cible doit correspondre à celui de l'action.
+## Conditions de création
 
-Le binding est refusé si :
+Un permis ne peut être créé que si :
 
-- la sélection est refusée ;
-- l'intent ne conserve pas la décision et l'observation ;
-- la session, la séquence ou l'image publique diffèrent ;
-- l'action n'est pas une `AgentAction` valide ;
-- l'action n'est plus disponible ;
-- la cible et le payload divergent ;
-- les preuves sélectionnées sont perdues ;
-- les domaines de preuves sont vides, dupliqués ou hors borne ;
-- le payload du reçu a été altéré.
+- la sélection est acceptée ;
+- l'intent et le binding appartiennent à la même décision et à la même observation ;
+- l'audit ACT est exactement `eligible` ;
+- l'action reste disponible ;
+- l'effet attendu appartient à l'intent gelé ;
+- toutes les références d'autorité existent déjà dans les preuves qualifiées ;
+- le permis n'est pas périmé ;
+- la lease n'est pas périmée ;
+- le permis ne dépasse pas la durée de la lease ;
+- les domaines de preuves sont explicites, uniques et bornés ;
+- les empreintes restent intactes.
 
-## Séparation ACT maintenue
+Les doublons de preuves sont refusés avant canonicalisation.
 
-Un binding valide expose un candidat d'action, mais conserve :
+## Autorité conservée et limites
 
-- `actionCandidatePresent: true` ;
-- `actionPermitPresent: false` ;
-- `releaseEligible: false` ;
+Un permis valide expose :
+
+- `actionPermitPresent: true` ;
+- `releaseEligible: true` ;
+- `actAuthorized: true` ;
+- `actionPayloadPresent: false` ;
 - `actionReleased: false` ;
-- `actAuthorized: false`.
+- `environmentDispatchAuthorized: false`.
 
-Le port runtime continue donc à retourner `undefined` et reste en statut `action_withheld`.
+`actAuthorized: true` autorise seulement l'entrée dans une future étape ACT distincte. Cela ne prouve pas que la lease est passée à `RELEASED` et ne permet pas d'envoyer l'action au jeu.
 
-Le worker public reste `reconstruction-pending-perception` et n'est pas remplacé.
+Le reçu et sa projection ne contiennent ni `candidateAction` ni cible exécutable.
 
-## Donneurs durables verrouillés
+## Portée encore retenue
 
-Les tests documentaires contrôlent :
+Le chemin courant couvre seulement une action ordinaire unique avec une lease déjà validée.
 
-- `agent.py` et son autorité `source_action_release_permit` ;
-- le contexte exact `run/timeline/frame/revision` avant dispatch ;
-- l'ordre `grounding -> wisdom -> release -> ACT` ;
-- les workflows qui préparent une action sans exécuter l'environnement ;
-- la chaîne architecturale exacte `intent -> permit -> dispatch -> acquisition`.
+Restent explicitement absents :
+
+- la transition de lease `VALIDATED -> RELEASED` ;
+- la revalidation ACT au moment exact de la consommation ;
+- le journal de consommation unique ;
+- la révocation persistée ;
+- le consommateur runtime final ;
+- la frontière d'envoi exactement une fois ;
+- la récupération d'un résultat de transport incertain ;
+- les séries pré-déclarées ;
+- l'acquisition différée de concentration ;
+- le producteur public du candidat d'action ;
+- une exécution comportementale réelle.
+
+Le worker public reste :
+
+`reconstruction-pending-perception`
+
+Le port continue à retourner `undefined` et le statut reste :
+
+`action_withheld`
 
 ## Qualification GitHub CI
 
 Commit qualifié :
 
-`169a3a958507f12d52b86c45668137101895e893`
+`467562a1e939e1d8fdc2609d0f212e73df5aeb24`
 
 Run GitHub Actions :
 
-`43351773278`
+`43356644647`
 
 Résultat :
 
-- **181 tests** ;
-- **181 réussis** ;
+- **202 tests** ;
+- **202 réussis** ;
 - **0 échec** ;
 - 0 annulé, ignoré ou todo ;
 - typecheck TypeScript strict réussi.
 
-Le jalon ajoute 16 tests fonctionnels du binding et 5 tests directs des donneurs au précédent total de 160.
+Le jalon ajoute au précédent total de 181 :
 
-## Limites restantes
+- 18 tests fonctionnels du permis ;
+- 3 contrôles anti-dérive de la carte des donneurs privés ;
+- le typecheck strict du nouveau module.
 
-Ne sont pas encore reconstruits :
+`npm ci` signale toujours deux vulnérabilités de sévérité élevée dans les dépendances de la baseline. Aucune correction forcée n'a été appliquée dans ce lot, car elle toucherait un périmètre partagé qui exige une qualification séparée.
 
-- la politique historique de sélection ;
+## Limites générales restantes
+
+Ne sont toujours pas reconstruits ou qualifiés :
+
+- la politique historique de sélection TemporalSelection ;
 - l'ancien state machine Site 109 ;
-- le producteur public des candidats ;
-- le schéma historique complet de `ActionIntent` ;
+- le producteur public des domaines et candidats ;
 - le producteur historique exact du mapping `selectedRef -> AgentAction` ;
-- le reçu complet `source_action_release_permit` ;
-- sa consommation unique et sa révocation ;
-- le consommateur runtime final ;
+- l'exécution ACT et la transition de lease ;
+- la consommation unique et la révocation du permis ;
+- `ActionBoundary` et son journal de transport ;
 - la position dans le runtime commun ;
 - le registre des entrées ;
 - une contribution en partie réelle ;
@@ -143,14 +204,16 @@ Critère conservé :
 
 ## Prochaine étape
 
-Rechercher et reconstruire, uniquement avec preuve durable, le reçu distinct `source_action_release_permit` :
+Reconstruire la consommation ACT distincte :
 
-1. identité du permis et de son producteur ;
-2. binding exact au candidat préparé ;
-3. observation, frame, timeline et révision courantes ;
-4. gates finales de release ;
-5. consommation unique ;
-6. révocation ;
-7. consommateur runtime final.
+1. relecture du permis et du binding exacts ;
+2. revalidation de Source, session, timeline, frame, révision et snapshot ;
+3. revalidation des preuves de responsabilité et de continuité ;
+4. revalidation de l'action autorisée et de la lease ;
+5. transition unique `VALIDATED -> RELEASED` ;
+6. reçu persistant de consommation ou de révocation ;
+7. production d'un `ActOutput` sans transport direct.
 
-Si la chaîne historique reste incomplète, le candidat d'action restera visible mais inexécutable. Toute nouvelle conception devra être explicitement distinguée d'une restitution de Site 109.
+Ensuite seulement, reconstruire `ActionBoundary` avec tentative durable, envoi exactement une fois, traitement du résultat incertain, acquisition et réconciliation.
+
+Le worker restera en `action_withheld` jusqu'à qualification de toute cette chaîne.
