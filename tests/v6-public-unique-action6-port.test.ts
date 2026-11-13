@@ -125,7 +125,7 @@ test('the unique target becomes an admitted OP28 bundle with a complete ACTION6'
   assert.ok(prepared);
   assert.deepEqual(prepared.action, { id: 6, data: { x: 32, y: 26 } });
   assert.equal(prepared.bundle.operation_key, 'OP28');
-  assert.equal(prepared.bundle.actions.length, 1);
+  assert.deepEqual(prepared.bundle.actions, [{ id: 6, data: { x: 32, y: 26 } }]);
 
   const release = releaseBundle(
     prepared.bundle,
@@ -133,7 +133,9 @@ test('the unique target becomes an admitted OP28 bundle with a complete ACTION6'
     prepared.identity,
   );
   assert.equal(release.releaseAllowed, true);
-  assert.deepEqual(release.actions, [{ id: 6, data: { x: 32, y: 26 } }]);
+  assert.equal(release.result?.bundleAdmitted, true);
+  assert.equal(release.result?.operationAdmission?.accepted, true);
+  assert.equal(release.result?.operationAdmission?.reason, 'operation_selected_reference');
 });
 
 test('observation revision participates in the ACTION6 bundle identity', () => {
