@@ -34,4 +34,5 @@ jobs:
           tests/main-browser-durable-session-integration.test.ts
           tests/main-browser-agent-controller-integration.test.ts
       - name: Real Chrome and Pyodide reload qualification
+        # Executes two page lifetimes in one fresh Chrome profile.
         run: node scripts/qualify-op01-op31-browser-durable-resume.mjs
