@@ -2,26 +2,31 @@
 
 Date : 12 novembre 2026
 
-Branche de travail :
+Branche d’origine :
 `op01-op31-common-campaign-owner-20261112`
 
-Baseline canonique de départ :
-`recovery/site109-reconstruction-20261112` au commit
-`87a538a1c776fb974a1767f30fea735aac28ded9`.
+Raccord Worker :
+`recovery/lot5b-worker-common-campaign-20261112`
 
-Baseline canonique réconciliée avant qualification finale :
-`6304bec8c99a05b0023692f8fe7f432394acaa11`.
+Baseline canonique initiale :
+`87a538a1c776fb974a1767f30fea735aac28ded9`
 
-Commit de réconciliation, baseline canonique premier parent :
-`ed032442acdeb7c703e8f40917099184aa459ada`.
+Baseline canonique réconciliée pour le raccord Worker :
+`8cc510e0a0d09704eb508b3aa2216b4d63482af4`
+
+Commit Worker qualifié :
+`08a04a9da59b0f385d080acf6091d4acdcf800c6`
 
 Plan stable :
-`docs/migration/op01-op31-verification-plan.md`.
+`docs/migration/op01-op31-verification-plan.md`
+
+Preuve détaillée du raccord Worker :
+`docs/recovery/op01-op31-worker-common-campaign-20261112.md`
 
 ## Objectif
 
-Cette étape construit le plus petit propriétaire commun capable de conserver la
-chaîne suivante sans inventer de perception, de classement ou d’autorité :
+Construire puis raccorder le plus petit propriétaire commun capable de conserver
+la chaîne suivante sans inventer de perception, de classement ou d’autorité :
 
 **observation publique → propositions propriétaires → ambiguïté ou sélection
 unique → bundle Logos → action → retour public corrélé → consommateur exact →
@@ -31,15 +36,14 @@ Le propriétaire commun ne fusionne pas les états internes des familles et ne
 classe pas leurs propositions. Il fournit uniquement :
 
 - une collecte bornée ;
-- une sélection structurelle lorsque le domaine contient exactement une
-  proposition ;
-- une ambiguïté explicite lorsqu’il en contient plusieurs ;
+- une sélection structurelle lorsqu’il existe exactement une proposition ;
+- une ambiguïté explicite lorsqu’il en existe plusieurs ;
 - une autorisation physique par le Logos Engine ;
 - une corrélation `sessionId` / proposition / bundle / action / `needId` ;
 - un retour routé au propriétaire exact ;
 - une déduplication du même retour physique.
 
-## Composants ajoutés
+## Composants du noyau commun
 
 ### `v6-common-campaign-owner.ts`
 
@@ -52,8 +56,7 @@ Le propriétaire commun :
 - valide session, observation, révision, action publique et appartenance de
   l’action au bundle ;
 - conserve au plus une action en attente par session ;
-- refuse une nouvelle décision tant que le retour de l’action précédente n’a
-  pas été acquis ;
+- refuse une nouvelle décision tant que le retour précédent n’est pas acquis ;
 - exige le même `needId` au retour ;
 - route le retour au seul propriétaire sélectionné ;
 - ignore un doublon exact déjà acquis ;
@@ -62,15 +65,12 @@ Le propriétaire commun :
 
 ### `v6-public-single-action-caller-adapter.ts`
 
-Cet adaptateur expose le fallback OP28 existant au propriétaire commun :
+Cet adaptateur expose le fallback OP28 existant :
 
 - une seule action simple publique distincte hors RESET ;
 - aucune ACTION6 sans coordonnées ;
 - aucune décision lorsqu’il existe plusieurs choix ;
-- aucun apprentissage sur le retour.
-
-Il permet de vérifier le transport commun sans transformer ce fallback en
-planificateur général.
+- aucun apprentissage artificiel sur le retour.
 
 ### `v6-field-stock-caller-adapter.ts`
 
@@ -78,176 +78,187 @@ Cet adaptateur raccorde le premier producteur symbolique spécialisé complet :
 
 - `ObservedAddressedMaterialRuntime.proposeStock()` produit une proposition
   bornée ;
-- `beforeStock()` revalide le stock, la scène et le préfixe avant exposition ;
-- la première action ACTION6 mesurée est convertie en `AgentAction` ;
+- `beforeStock()` revalide le stock, la scène et le préfixe ;
+- la première action ACTION6 mesurée devient une `AgentAction` ;
 - le bundle OP18 est reconstruit à la révision courante ;
-- l’état symbolique conserve question, faits, objectif et éventuelles preuves
-  de préservation ;
-- le retour est corrélé au même `needId` ;
+- l’état symbolique conserve question, faits, objectif et preuves ;
+- le retour reste lié au même `needId` ;
 - `afterStock()` compare le résultat ;
-- `recordStock()` confirme, apprend, enregistre un échec ou réfute la règle.
+- `recordStock()` confirme, apprend, enregistre un échec ou réfute.
 
-Le propriétaire commun n’appelle donc pas OP29 ou OP30 de façon redondante : les
-consommateurs spécialisés FieldStock restent l’autorité du retour de cette
-famille.
+Aucun appel générique OP29 ou OP30 n’est ajouté en double : les consommateurs
+spécialisés FieldStock restent l’autorité du retour de cette famille.
 
-## Chaîne OP18 démontrée jusqu’à la décision suivante
+## Transport propriétaire et coût diagnostique
 
-Le scénario de régression utilise un stock de type `2` initialement en `(1,1)`
-et une zone demandée en `(4,1)`.
+Le caller neutre expose deux contrats :
 
-1. FieldStock produit une première action ACTION6 vers `(3,1)`.
-2. Le propriétaire commun conserve la proposition unique.
-3. `releaseBundle()` produit le besoin `exploration-question`.
-4. OP18 sélectionne la composition ouverte.
-5. `operationAdmission()` consomme le résultat et autorise l’action.
-6. Le même `needId` est conservé dans les trois événements
-   `need → operation → consumption`.
-7. Le retour public montre le matériau en `(3,1)`.
-8. `afterStock()` confirme le résultat attendu.
-9. `recordStock()` enregistre le déplacement typé observé.
-10. La campagne suivante produit ACTION6 vers `(4,1)`.
-
-La décision suivante est donc réellement différente après consommation du
-retour. Cette preuve dépasse le niveau « opération appelée » :
-
-**besoin → données → OP18 → résultat → garde → action → retour spécialisé →
-prochaine action modifiée.**
-
-## Ambiguïté et absence de besoin
-
-Les cas négatifs sont conservés :
-
-- zéro proposition : `none`, aucune OP ;
-- plusieurs propositions : `ambiguous`, aucune OP et aucun propriétaire choisi ;
-- ACTION6 indisponible : aucune proposition FieldStock ;
-- garde FieldStock liée à une autre époque : aucune proposition ;
-- bundle OP28 non admis : `blocked`, aucune action en attente ;
-- révision publique incohérente : erreur avant appel utile ;
-- retour sans besoin en attente ou avec un autre `needId` : rejet ;
-- même retour exact : dédupliqué.
-
-## Transport propriétaire et optimisation
-
-La première version utilisait le chemin détaché du caller neutre. Chaque étape
-recopiait profondément proposition, bundle, état symbolique et corrélation.
-
-Premier diagnostic :
-
-- release OP28 directe : environ `4,07 µs/cycle` ;
-- campagne commune avec retour : environ `61,90 µs/cycle` ;
-- surcoût absolu : environ `57,83 µs/cycle`.
-
-Cette conception n’a pas été retenue.
-
-Le caller neutre expose désormais deux contrats distincts :
-
-- `collect()/select()` : sémantique détachée historique, avec copie ;
+- `collect()/select()` : propositions détachées et copiées ;
 - `collectOwned()/selectOwned()` : transfert explicite d’une proposition neuve
   au propriétaire commun.
 
-Dans le second contrat, le payload reste privé et n’est exposé ni dans les
-résultats publics ni dans les reçus. Seule l’identité de proposition est rendue.
-Le retour est acheminé au propriétaire original sans recopier à nouveau le gros
-état symbolique.
+Le second conserve le payload privé et évite de recopier plusieurs fois bundle,
+état symbolique et corrélation.
 
-Diagnostic final sur l’arbre réconcilié, 21 échantillons × 2 000 cycles :
+Diagnostic final du noyau, 21 échantillons × 2 000 cycles :
 
 - aucun besoin direct : `0,233 µs/cycle` ;
 - aucun besoin via campagne commune : `0,349 µs/cycle` ;
 - release OP28 directe : `2,337 µs/cycle` ;
-- campagne commune avec retour corrélé : `6,894 µs/cycle` ;
-- surcoût absolu restant : `4,557 µs/cycle` ;
-- réduction du coût du chemin commun : environ `88,9 %` par rapport à la
-  première version.
+- campagne commune avec retour : `6,894 µs/cycle` ;
+- surcoût absolu : `4,557 µs/cycle` ;
+- réduction par rapport à la première version détachée : environ `88,9 %`.
 
-Le pourcentage relatif au chemin direct reste élevé parce que la référence ne
-fait que préparer et libérer une action, tandis que la campagne commune assure
-aussi propriété, état en attente, retour, déduplication et acheminement.
+Ce micro-diagnostic ne remplace pas une mesure native STCK ou SMLP.
 
-Ce diagnostic est uniquement un micro-test OP28. Il ne remplace pas une session
-native STCK ou SMLP.
+## Chaîne OP18 démontrée
 
-## Qualification finale réconciliée
+Le scénario de régression initial utilise un matériau de type `2` en `(1,1)` et
+une zone demandée en `(4,1)` :
 
-GitHub Actions :
+1. FieldStock produit ACTION6 vers `(3,1)` ;
+2. OP18 sélectionne la composition ouverte ;
+3. `operationAdmission()` autorise l’action ;
+4. le même `needId` traverse `need → operation → consumption` ;
+5. le retour montre le matériau en `(3,1)` ;
+6. `afterStock()` confirme le résultat ;
+7. `recordStock()` enregistre le déplacement ;
+8. la proposition suivante produit ACTION6 vers `(4,1)`.
 
-- run : `43346791891` ;
-- job : `131627959298` ;
-- commit qualifié : `d5fc07b9c825078c7a241d6511eb91287befbc7f` ;
-- baseline canonique intégrée comme premier parent :
-  `6304bec8c99a05b0023692f8fe7f432394acaa11` ;
-- Node : `22.18.0` ;
-- `npm ci` : réussi ;
-- `npm run typecheck` : réussi ;
-- régression TypeScript complète : **286/286 tests réussis** ;
-- diagnostic de campagne : réussi.
+La chaîne atteint donc réellement la décision suivante.
 
-Le workflow temporaire de qualification est supprimé avant intégration et ne
-doit pas entrer dans la branche canonique.
+## Chaîne OP28 démontrée
 
-`npm ci` signale deux vulnérabilités de dépendances de sévérité haute déjà
-présentes dans l’arbre de dépendances. Elles ne sont pas provoquées ni corrigées
-par ce lot fonctionnel.
+Lorsque l’observation publique expose exactement une action simple admise :
 
-## Dispositions OP actualisées
+1. l’adaptateur construit le bundle OP28 ;
+2. le propriétaire commun vérifie session, révision et disponibilité ;
+3. `releaseBundle()` appelle OP28 ;
+4. `operationAdmission()` consomme le résultat ;
+5. l’action reste en attente ;
+6. le retour portant le même `needId` est routé au propriétaire OP28.
 
-- **OP18** : chaîne complète démontrée jusqu’au retour spécialisé et à la
-  décision suivante pour FieldStock.
-- **OP28** : chaîne commune démontrée pour le fallback public strict, avec
-  retour corrélé mais sans apprentissage.
-- **OP29/OP30** : besoins déjà consommés par `FieldStock.after()/record()` dans
-  cette famille ; aucun appel générique ajouté.
-- **OP31** : aucun propriétaire d’objectif produit n’est encore démontré.
-- **OP03/08/12/26 et autres familles** : dispositions antérieures inchangées ;
-  aucun appel artificiel n’est ajouté.
+ACTION6 seule ne déclenche rien car ses coordonnées restent inconnues. Plusieurs
+choix restent explicitement ambigus.
+
+## Raccord au Worker V6 reconstruit
+
+Le noyau commun est maintenant instancié par
+`src/runtime/v6-common-campaign-decision-port.ts`, utilisé par défaut dans
+`src/runtime/v6-agent-worker.ts`.
+
+La couche `v6-public-observation-measurement.ts` :
+
+- copie et valide l’observation publique 64×64 ;
+- conserve uniquement pixels, actions, état, niveau et progression publics ;
+- produit une identité déterministe ;
+- matérialise les composants 4-connexes seulement lorsqu’un prior FieldStock
+  doit être revalidé.
+
+Le port Worker exécute l’ordre suivant :
+
+1. acquérir le retour de l’action précédente avec le même `needId` ;
+2. franchir une éventuelle frontière officielle ;
+3. revalider le prior FieldStock dans une scène non terminale ;
+4. collecter les propositions propriétaires ;
+5. conserver `none` ou `ambiguous` sans appel OP ;
+6. autoriser l’unique proposition ;
+7. retourner l’action au cœur Worker.
+
+Le contrat `AgentDecisionPort` possède maintenant un hook `observe()` distinct
+de `decide()`. Toute observation publique validée est consommée avant :
+
+- l’arrêt terminal `WIN` ;
+- l’arrêt pour budget non positif ;
+- la demande d’une nouvelle décision.
+
+Ainsi, le dernier retour OP18 ou OP28 est acquis même lorsqu’aucune action
+suivante n’est possible. Aucune nouvelle proposition n’est demandée après ce
+retour terminal.
+
+Le Worker par défaut n’injecte aucun prior FieldStock. Il ne peut donc pas
+inventer ACTION6 ou ses coordonnées.
+
+## Cas négatifs préservés
+
+- zéro proposition : `none`, aucune OP ;
+- plusieurs propositions : `ambiguous`, aucune OP ;
+- ACTION6 sans connaissance revalidée : aucune décision ;
+- bundle refusé : `blocked`, aucune action en attente ;
+- retour avec un autre `needId` : rejet ;
+- doublon exact : dédupliqué ;
+- erreur du hook d’observation : erreur explicite, aucune décision ;
+- `WIN` ou budget nul : retour acquis puis arrêt, sans action suivante.
 
 ## Region
 
-Region dispose déjà d’un propriétaire spécialisé, d’un adaptateur de caller,
-d’une acquisition passive/sélectionnée, d’une déduplication et d’un effet sur
-les propositions futures.
+Region dispose d’un propriétaire spécialisé, d’un adaptateur de caller, d’une
+acquisition sélectionnée/passive, d’une déduplication et d’un effet futur.
 
-Il n’est pas enregistré dans `CommonCampaignOwner` pendant cette étape parce que
-son adaptateur actuel n’expose pas encore un contrat physique complet
-`AgentAction + CompositionBundle + état symbolique + identity` compatible avec
-`releaseBundle()`.
+Il n’est pas enregistré dans le port Worker commun, car son adaptateur ne produit
+pas encore le contrat complet
+`AgentAction + CompositionBundle + état symbolique + identity` attendu par
+`releaseBundle()` dans une proposition publique qualifiée.
 
-L’ajouter malgré cette absence créerait une autorité implicite ou un bundle
-artificiel. La dette est donc conservée explicitement.
+Aucun bundle artificiel ou `methodRef` inféré n’est ajouté pour contourner cette
+absence.
+
+## Qualifications
+
+Qualification du noyau commun :
+
+- run : `43346791891` ;
+- job : `131627959298` ;
+- commit : `d5fc07b9c825078c7a241d6511eb91287befbc7f` ;
+- typecheck réussi ;
+- **286/286 tests réussis** ;
+- diagnostic de coût réussi.
+
+Qualification finale du raccord Worker, après intégration du canonique
+`8cc510e0` :
+
+- run : `43348904523` ;
+- job : `131634904435` ;
+- commit : `08a04a9da59b0f385d080acf6091d4acdcf800c6` ;
+- Node : `22.18.0` ;
+- `npm ci` : réussi ;
+- `npm run typecheck` : réussi ;
+- régression TypeScript complète : **304/304 tests réussis** ;
+- aucun échec, annulation, test ignoré ou TODO.
+
+Les workflows temporaires sont supprimés avant intégration canonique.
+
+## Dispositions OP actualisées
+
+- **OP18** : chaîne complète raccordée au Worker lorsque FieldStock possède un
+  prior explicite revalidé ; retour consommé avant la décision suivante.
+- **OP28** : chaîne complète raccordée au Worker pour le fallback public strict,
+  y compris retour terminal ou budget nul.
+- **OP29/OP30** : consommation spécialisée FieldStock/Region conservée ; aucun
+  doublon générique.
+- **OP31** : aucun propriétaire d’objectif produit démontré.
+- **OP03/08/12/26 et autres familles** : dispositions antérieures inchangées ;
+  aucun appel artificiel ajouté.
 
 ## Limites restantes
 
-- `main.ts` n’instancie pas encore le propriétaire commun ;
-- le dispatch produit réel ne conserve pas encore le `needId` de la décision
-  jusqu’à son retour ;
-- aucun hôte navigateur ne construit encore les contextes FieldStock/Region à
-  partir de chaque observation ;
-- Region doit obtenir un vrai bundle/action Logos avant enregistrement dans la
-  campagne commune ;
-- le propriétaire commun ne possède pas encore de snapshot/restauration de ses
-  décisions en attente ;
-- l’acquisition passive de retours par des propriétaires non sélectionnés n’est
-  pas orchestrée par cette classe ;
+- `main.ts` ne crée pas encore une campagne SRA live autour du Worker ;
+- le produit ne dispatch pas encore une décision Worker vers
+  `BrowserGameRuntime` puis son retour au même Worker ;
+- l’acquisition initiale d’un prior FieldStock depuis une vraie campagne
+  navigateur reste absente ;
+- Region n’est pas encore un owner du port Worker commun ;
+- l’acquisition passive des owners non sélectionnés n’est pas orchestrée ;
+- le port Worker commun ne possède pas encore de snapshot/restauration complet ;
 - aucun propriétaire d’objectif OP31 n’est raccordé ;
-- la performance officielle STCK/SMLP reste non qualifiée.
+- la performance officielle A/B × STCK/SMLP reste non qualifiée ;
+- aucune parité exacte avec Site 109 / native 0.68 n’est revendiquée.
 
 ## Statut
 
-**fonctionnellement qualifié, performance officielle à confirmer**.
+**Le propriétaire commun et son raccord Worker OP18/OP28 sont fonctionnellement
+qualifiés. Le raccord produit live, l’acquisition initiale FieldStock, Region
+commun, la restauration et la performance officielle restent à confirmer.**
 
-## Prochaine étape
-
-Construire l’hôte produit/browser autour de `CommonCampaignOwner` :
-
-1. adapter chaque `GameObservation` en observation agent et observation
-   spécialisée ;
-2. alimenter les propriétaires réellement applicables ;
-3. conserver une ambiguïté au lieu de sélectionner arbitrairement ;
-4. dispatcher l’action autorisée via `AgentProductDispatch` ;
-5. conserver `needId`, propriétaire et proposition pendant le dispatch ;
-6. acquérir le retour avant présentation de la décision suivante ;
-7. seulement ensuite demander la proposition suivante.
-
-Aucune publication Site n’est autorisée avant intégration durable de ce chemin
-sur GitHub et vérification GitHub ↔ Site.
+Aucune publication Site n’est autorisée avant intégration durable du chemin
+produit sur GitHub et vérification GitHub ↔ Site.

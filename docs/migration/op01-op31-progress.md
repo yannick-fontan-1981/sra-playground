@@ -6,16 +6,16 @@ Dernière consolidation : 12 novembre 2026.
 
 - Dépôt : `yannick-fontan-1981/sra-playground`
 - Branche canonique cible : `recovery/site109-reconstruction-20261112`
-- Baseline canonique au début de cette étape :
-  `87a538a1c776fb974a1767f30fea735aac28ded9`
-- Baseline canonique réconciliée avant qualification finale :
-  `6304bec8c99a05b0023692f8fe7f432394acaa11`
-- Commit de réconciliation de la branche de travail :
-  `ed032442acdeb7c703e8f40917099184aa459ada`
-- Branche de travail : `op01-op31-common-campaign-owner-20261112`
+- Baseline canonique intégrée avant qualification finale :
+  `8cc510e0a0d09704eb508b3aa2216b4d63482af4`
+- Branche de travail : `recovery/lot5b-worker-common-campaign-20261112`
+- Commit de réconciliation avec le canonique :
+  `3ad3328df6b85f4fc0e1f534fd4bf138efbca359`
+- Commit fonctionnel qualifié :
+  `08a04a9da59b0f385d080acf6091d4acdcf800c6`
 - Donneur OP01–OP31 : `op01-op31-c0-c7-audit`
-- Plan : `docs/migration/op01-op31-verification-plan.md`
-- Historique détaillé antérieur à la première consolidation :
+- Plan stable : `docs/migration/op01-op31-verification-plan.md`
+- Historique détaillé antérieur :
   `docs/migration/op01-op31-progress-history-through-b093f406.md`
 - Reprise Lot 6 et seam Worker :
   `docs/recovery/op01-op31-lot6-runtime-reconnection-20261112.md`
@@ -23,17 +23,20 @@ Dernière consolidation : 12 novembre 2026.
   `docs/recovery/op01-op31-public-observation-op28-slice-20261112.md`
 - Réconciliation Lot 5 et chaîne OP18 :
   `docs/recovery/op01-op31-lot5-op18-reconciliation-20261112.md`
-- Propriétaire commun et retour corrélé :
+- Propriétaire commun :
   `docs/recovery/op01-op31-common-campaign-owner-20261112.md`
+- Raccord Worker du propriétaire commun :
+  `docs/recovery/op01-op31-worker-common-campaign-20261112.md`
 
-Le présent fichier est l’état courant consolidé. L’ancien suivi intégral a été
-conservé dans Git afin de ne perdre aucune preuve, mesure ou décision antérieure.
+Le présent fichier est l’état courant consolidé. L’historique Git conserve les
+preuves, mesures et décisions précédentes.
 
 ## Règle de qualification
 
 Une utilisation réelle suit la chaîne :
 
-**besoin identifié → données produites → appel justifié → résultat → consommateur → effet sur la décision.**
+**besoin identifié → données produites → appel justifié → résultat →
+consommateur → effet sur la décision.**
 
 Les niveaux restent distincts :
 
@@ -44,301 +47,270 @@ Les niveaux restent distincts :
 5. contribution démontrée ;
 6. coût qualifié.
 
-Un compteur d’appels, un import ou une trace sans consommateur ne suffisent pas.
-Aucune OP n’est ajoutée uniquement pour atteindre 31 appels.
+Un compteur, un import ou une trace sans consommateur ne suffisent pas. Aucune
+OP n’est ajoutée uniquement pour atteindre 31 appels.
 
 ## Provenance et limites historiques
 
-Le fichier actuel `src/runtime/v6-agent-worker.ts` est une reconstruction. La
-source officielle historique du worker Site 109 et le runtime/campaign complet
-historiquement utilisé n’ont pas été retrouvés. Aucune identité ou parité avec
-cet ancien worker n’est revendiquée.
+`src/runtime/v6-agent-worker.ts` reste une reconstruction. La source officielle
+historique du Worker Site 109 et le runtime/campaign complet de native 0.68 n’ont
+pas été retrouvés. Aucune identité binaire ou parité exacte n’est revendiquée.
 
-Les composants Lot 5 `FieldStock` et matériaux adressés sont également une
-reconstruction qualifiée à partir des sources donneuses et des contrats publics.
-Ils ne prouvent pas une parité binaire avec l’ancien Site 109.
+Les composants FieldStock et matériaux adressés sont également des
+reconstructions qualifiées à partir de sources donneuses et de contrats publics.
 
-Le benchmark officiel historique n’est pas restauré sous une forme permettant
-de qualifier les quatre runners natifs A/STCK, A/SMLP, B/STCK et B/SMLP. Les
-diagnostics synthétiques ou ciblés restent informatifs uniquement.
+Les quatre identités de runners A/STCK, A/SMLP, B/STCK et B/SMLP sont
+reconstruites au niveau du contrat. L’exécution native ACTION6 a été qualifiée
+sur SMLP, mais le benchmark officiel global par jeu reste absent.
 
 Statut performance global :
 
-**fonctionnellement qualifié, performance officielle à confirmer**.
+**fonctionnellement qualifié, performance officielle à confirmer.**
 
 ## Composants runtime pertinents
 
-### Transport, dispatch et Worker
+### Transport et Worker
 
-- `src/runtime/browser-games.ts` et `game-worker.ts` : transport jeu et retour
-  public réel ;
-- `src/runtime/contracts.ts` : protocole public `AgentObservation` / `AgentAction` ;
-- `src/runtime/v6-agent-worker-core.ts` : budget, annulation, séquence et validation ;
-- `src/runtime/v6-agent-worker.ts` : enveloppe Worker reconstruite ;
-- `src/agent-product-dispatch.ts` : dispatch produit et retour du jeu ;
-- `src/runtime/v6-browser-agent-observation.ts` : adaptation stricte
-  `GameObservation → AgentObservation` sans état caché.
+- `src/runtime/browser-games.ts` et `game-worker.ts` : transport jeu public ;
+- `src/runtime/contracts.ts` : contrats `AgentObservation` / `AgentAction` ;
+- `src/runtime/v6-browser-agent-observation.ts` : adaptation publique stricte ;
+- `src/runtime/v6-agent-worker-core.ts` : séquence, budget, annulation et hook
+  d’observation avant arrêt terminal ;
+- `src/runtime/v6-agent-worker.ts` : enveloppe Worker, dont le port par défaut est
+  désormais la campagne commune OP18/OP28 ;
+- `src/agent-product-dispatch.ts` : dispatch produit existant, non encore relié à
+  une campagne SRA live.
 
 ### Matériaux adressés et FieldStock
 
-- `src/runtime/observed-addressed-material-runtime.ts` : propriétaire de
-  rétention, frontière, revalidation et stock courant ;
+- `src/runtime/observed-addressed-material-runtime.ts` : rétention, frontière,
+  revalidation et stock courant ;
 - `src/logos-engine/addressed-field-*.ts` : acquisition, réponse, garde,
-  rétention et fit adressés ;
-- `src/logos-engine/field-stock.ts` : producteur borné de question, plan,
-  préservation, actions coordonnées et bundle OP18 ;
+  rétention et fit ;
+- `src/logos-engine/field-stock.ts` : question, plan borné, préservation,
+  coordonnées ACTION6 et bundle OP18 ;
 - `src/logos-engine/linked-preparation.ts` et
-  `observed-object-binding.ts` : liaisons publiques et préparation.
+  `observed-object-binding.ts` : liaisons et préparation publiques.
 
-### Appels Logos et campagne commune
+### Campagne commune et observation publique
 
-- `src/logos-engine/v6-public-single-action-port.ts` : producteur OP28 limité au
-  seul cas où une action simple non-RESET est publiquement unique et complète ;
-- `src/logos-engine/v6-neutral-common-caller.ts` : collecte neutre,
-  ambiguïté, routage et déduplication ;
-- `src/logos-engine/v6-common-campaign-owner.ts` : propriété de la décision,
-  autorisation Logos, attente et corrélation du retour ;
-- `src/logos-engine/v6-public-single-action-caller-adapter.ts` : exposition du
-  fallback OP28 au caller commun ;
-- `src/logos-engine/v6-field-stock-caller-adapter.ts` : exposition de FieldStock
-  OP18 et retour spécialisé au caller commun.
+- `src/logos-engine/v6-neutral-common-caller.ts` : collecte neutre et ambiguïté ;
+- `src/logos-engine/v6-common-campaign-owner.ts` : propriété, release Logos,
+  attente, retour et déduplication ;
+- `src/logos-engine/v6-field-stock-caller-adapter.ts` : owner OP18 ;
+- `src/logos-engine/v6-public-single-action-caller-adapter.ts` : owner OP28 ;
+- `src/runtime/v6-public-observation-measurement.ts` : mesure 64×64 publique et
+  composants 4-connexes différés ;
+- `src/runtime/v6-common-campaign-decision-port.ts` : hôte Worker persistant,
+  acquisition du retour, frontière, revalidation et proposition suivante.
 
 ## État courant C0 à C7
 
 | Lot | État courant | Preuve acquise | Dette suivante |
 | --- | --- | --- | --- |
 | C0 | **terminé** | 31 calculs inventoriés, dispositions et provenance conservées | maintenir les statuts par besoin, pas par compteur |
-| C1 | **propriétaire commun fonctionnel dans la bibliothèque runtime** | collecte bornée, ambiguïté conservée, release OP18/OP28, action en attente, retour corrélé au même `needId` | instancier cette campagne dans l’hôte produit/browser |
-| C2 | **OP18 démontrée jusqu’à la décision suivante ; OP28 jusqu’au retour corrélé** | FieldStock compare et enregistre le retour puis produit une action suivante différente | raccorder le dispatch produit réel et attribuer OP31 à un propriétaire réel |
-| C3 | **calculs et recouvrements qualifiés** | OP03/08/12/14/26 couvertes au niveau noyau ; spécialisations donneuses identifiées | appeler uniquement lorsqu’un producteur runtime réel établit le besoin |
-| C4 | **audit complet, usages génériques non démontrés** | OP01/02/05/10/15/25 calculables | ne pas activer sans producteur et consommateur réels |
-| C5 | **retours spécialisés préservés** | FieldStock et Region couvrent des besoins OP06/29/30 avec effet futur | donner à Region un vrai bundle/action Logos avant enregistrement commun |
-| C6 | **audit complet** | inconnue, échec borné et impossibilité restent distincts | aucun raccordement sans preuve de blocage/reprise/variante |
-| C7 | **ouvert** | garde-fous, diagnostics ciblés et corpus/runners candidats disponibles | runners natifs qualifiés, manifeste complet et STCK/SMLP séparés < +10 % |
+| C1 | **propriétaire commun raccordé au Worker reconstruit** | collecte bornée, ambiguïté, release OP18/OP28, attente et retour au même `needId`, y compris terminal | créer la campagne SRA live dans le produit |
+| C2 | **OP18 et OP28 consommées avec effet démontré** | FieldStock modifie l’action suivante ; OP28 règle aussi son dernier retour sur `WIN` ou budget nul | relier Worker, dispatch produit et observation post-action réelle |
+| C3 | **calculs et recouvrements qualifiés** | OP03/08/12/14/26 couvertes au noyau ; spécialisations identifiées | appeler seulement lorsqu’un producteur réel établit le besoin |
+| C4 | **audit complet, usages génériques non démontrés** | OP01/02/05/10/15/25 calculables | ne pas activer sans producteur et consommateur |
+| C5 | **retours spécialisés préservés** | FieldStock et Region couvrent OP06/29/30 avec effet futur | donner à Region un candidat public complet avant enregistrement commun |
+| C6 | **audit complet** | inconnue, échec borné et impossibilité distincts | aucun raccord sans preuve de blocage/reprise/variante |
+| C7 | **ouvert** | garde-fous, ABBA, runners explicites et probe SMLP ACTION6 natif qualifié | mesurer A/B × STCK/SMLP et respecter < +10 % par jeu |
 
-## Chaîne complète reconstruite OP18 : FieldStock
+## Chaîne réelle OP18 : FieldStock
 
-### Besoin identifié
+### Besoin et données
 
-Un stock adressé a été retenu puis revalidé dans la scène courante. Une demande
-typée manque dans une zone officielle et l’action adressée ACTION6 est
-publiquement disponible.
-
-### Données produites
+Un stock adressé retenu est revalidé dans la scène courante. Une demande typée
+manque et ACTION6 est publiquement disponible.
 
 `FieldStock.propose()` produit :
 
-- une question ouverte mesurable ;
-- une composition non observée ;
-- un plan borné à 16 pas ;
-- des actions ACTION6 avec coordonnées mesurées ;
-- des obligations de préservation ;
-- les faits et preuves de scène ;
-- un `bundle_template.operation_key = OP18` avec outcome guard.
+- question ouverte mesurable ;
+- composition non observée ;
+- plan borné à 16 pas ;
+- ACTION6 avec coordonnées mesurées ;
+- obligations de préservation ;
+- faits et preuves ;
+- `bundle_template.operation_key = OP18` avec outcome guard.
 
-### Appel et garde
+### Appel, retour et effet
 
-`FieldStockCallerOwnerAdapter` revalide d’abord la scène avec `beforeStock()`.
-Le propriétaire commun conserve la proposition uniquement si elle est la seule
-proposition du domaine courant.
+1. le port Worker consomme d’abord l’observation publique ;
+2. le prior est revalidé si nécessaire ;
+3. l’owner FieldStock exécute `beforeStock()` ;
+4. la proposition unique est remise au propriétaire commun ;
+5. `releaseBundle()` appelle OP18 ;
+6. `operationAdmission()` garde l’action ;
+7. l’observation suivante est acquise avec le même `needId` ;
+8. `afterStock()` compare ;
+9. `recordStock()` confirme, apprend, enregistre un échec ou réfute ;
+10. la proposition suivante tient compte de ce résultat.
 
-`releaseBundle()` émet le besoin `exploration-question`, appelle OP18 et reçoit
-la référence de la composition lorsque le contrat est cohérent.
-`operationAdmission()` consomme ce résultat et autorise la release uniquement si
-l’outcome guard correspond.
+Scénario démontré : ACTION6 vers `(3,1)`, déplacement observé, puis ACTION6 vers
+`(4,1)`.
 
-### Retour et effet sur la décision suivante
+Disposition OP18 :
 
-Le propriétaire commun conserve session, propriétaire, proposition, bundle,
-action et `needId` jusqu’au retour.
+**chaîne raccordée au Worker lorsqu’un prior explicite est disponible et
+revalidé ; acquisition initiale publique du prior encore absente.**
 
-Le retour est routé uniquement à FieldStock :
+## Chaîne réelle OP28 : action publique unique
 
-- `afterStock()` compare le résultat attendu ;
-- `recordStock()` confirme, apprend, enregistre un échec ou réfute ;
-- un retour déjà acquis est dédupliqué ;
-- un retour avec un autre besoin ou une révision non croissante est rejeté.
+Sous le contrat public strict d’une seule action simple non RESET :
 
-Scénario démontré :
-
-1. matériau de type 2 en `(1,1)` ;
-2. première action ACTION6 vers `(3,1)` ;
-3. retour confirmé et déplacement enregistré ;
-4. prochaine proposition ACTION6 vers `(4,1)`.
-
-Disposition OP18 : **chaîne complète démontrée jusqu’au consommateur spécialisé
-et à la décision suivante dans le runtime reconstruit.**
-
-## Chaîne commune OP28 : action publique unique
-
-Pour le seul contrat où l’observation publique expose exactement une action
-simple distincte hors RESET :
-
-1. l’adaptateur public produit une observation validée ;
-2. l’adaptateur de caller construit le bundle OP28 ;
-3. le propriétaire commun vérifie session, révision et action disponible ;
+1. l’observation publique est validée ;
+2. l’owner OP28 prépare le bundle ;
+3. le caller confirme l’unicité ;
 4. `releaseBundle()` appelle OP28 ;
 5. `operationAdmission()` consomme le résultat ;
-6. l’action reste en attente jusqu’au retour portant le même `needId` ;
-7. le retour est routé au propriétaire OP28 exact.
+6. le Worker retourne l’action ;
+7. l’observation suivante règle le retour au même `needId` avant toute nouvelle
+   décision.
 
-Actions admises : ACTION1, ACTION2, ACTION3, ACTION4, ACTION5 et ACTION7.
-ACTION6 seule ne déclenche rien car ses coordonnées restent inconnues. Plusieurs
-choix publics restent explicitement ambigus et ne déclenchent aucune OP.
+Le hook `AgentDecisionPort.observe()` garantit cette acquisition avant :
 
-Disposition OP28 : **chaîne commune démontrée sous condition stricte ; aucune
-perception ou planification générale n’est revendiquée.**
+- une nouvelle décision ;
+- l’arrêt `WIN` ;
+- l’arrêt pour budget non positif.
+
+Aucune décision supplémentaire n’est demandée après un retour terminal.
+
+Disposition OP28 :
+
+**chaîne raccordée au Worker sous condition publique stricte, y compris retour
+terminal.**
 
 ## Neutralité et ambiguïté
 
-`CommonCampaignOwner` ne choisit pas entre plusieurs propriétaires :
-
-- zéro proposition → `none` ;
-- une proposition → validation puis autorité Logos ;
-- plusieurs propositions → `ambiguous` ;
+- 0 proposition → `none` ;
+- 1 proposition → validation puis release Logos ;
+- plus d’une proposition → `ambiguous` ;
 - bundle refusé → `blocked` ;
-- action libérée → `action`, puis `pending` jusqu’au retour.
+- action libérée → attente jusqu’au retour corrélé.
 
-Aucune OP n’est appelée dans les cas `none` ou `ambiguous`.
-
-Le caller neutre conserve deux contrats :
-
-- `collect()/select()` : propositions détachées et copiées ;
-- `collectOwned()/selectOwned()` : transfert explicite d’une proposition neuve
-  au propriétaire commun.
-
-Le second évite de recopier plusieurs fois bundle, état symbolique et
-corrélation. Les résultats publics n’exposent que l’identité de proposition.
+Aucune OP n’est appelée dans les cas `none` ou `ambiguous`. Le Worker n’injecte
+aucun prior FieldStock par défaut et n’invente aucune coordonnée ACTION6.
 
 ## Region
 
-Region possède déjà une boucle spécialisée avec acquisition passive ou
-sélectionnée, déduplication, snapshot et effet sur les propositions futures.
+Region possède déjà un owner spécialisé, un adaptateur, une acquisition
+sélectionnée/passive, une déduplication, un snapshot et un effet futur.
 
-Region n’est pas encore enregistré dans le propriétaire commun, car son
-adaptateur actuel ne produit pas encore le contrat physique complet
-`AgentAction + CompositionBundle + état symbolique + identity` attendu par
-`releaseBundle()`.
+Le probe natif qualifié montre :
 
-Aucun bundle artificiel ni autorité implicite n’est ajouté pour contourner cette
-absence.
+- SMLP ACTION6 utile : **9 pixels modifiés** à `x=32,y=26` ;
+- STCK ACTION6 non utile dans le probe public retenu : **0 pixel modifié** à
+  `x=6,y=56` ;
+- le corpus public STCK V1 conserve ACTION5 disponible, ce qui empêche le
+  sélecteur public strict de choisir honnêtement ACTION6 en état non terminal.
+
+Region n’est pas inscrit dans le port Worker commun tant qu’il ne produit pas un
+candidat public complet
+`AgentAction + CompositionBundle + état symbolique + identity`. Aucun
+`methodRef` ou bundle artificiel n’est inventé.
 
 ## Statut des opérations prioritaires
 
 | OP | Statut exact | Producteur | Consommateur | Contribution démontrée |
 | --- | --- | --- | --- | --- |
-| OP18 | **chaîne complète démontrée pour FieldStock** | `FieldStock.propose()` après revalidation courante | `operationAdmission()`, puis `afterStock()/recordStock()` | garde l’action et modifie la proposition suivante |
-| OP28 | **chaîne commune démontrée sous condition stricte** | adaptateur action publique unique | `operationAdmission()`, puis propriétaire OP28 | garde l’action et corrèle son retour |
-| OP29 | **assuré par fonctions spécialisées** pour FieldStock/Region ; générique sans consommateur produit | retour avant/après spécialisé | modèle spécialisé | comparaison peut invalider ou sceller la suite |
-| OP30 | **assuré par fonctions spécialisées** pour FieldStock/Region ; générique `persisted_only` | observation de rewrite/effet | règle, échec ou réfutation spécialisée | propositions futures modifiées |
-| OP31 | **appel existant sans consommateur démontré** | postAnalysis générique disponible | aucun propriétaire d’objectif produit | non démontrée |
-| OP03 | **bloqué par producteur générique manquant** | aucune production tri-état générale depuis le produit | admission/plan potentiel | non |
-| OP08 | **bloqué ou recouvert familialement** | pas de graphe transversal effect→requires produit | stratégie potentielle | non générique |
-| OP12 | **bloqué ou recouvert familialement** | inconnues d’accès spécialisées seulement | acquisition spécialisée | non générique |
-| OP26 | **bloqué ou recouvert familialement** | admissions spécialisées, pas de domaine multi-accès commun | garde spécialisée | non générique |
-| OP06 | **déjà assuré par fonctions spécialisées** | retour Region/FieldStock | modèle spécialisé | contradiction change la suite |
-| OP14 | **admission bridge présente, routage natif absent** | aucun besoin produit dans l’autorité actuelle | garde bridge | non en produit |
-| autres OP | **hors périmètre actuel** | aucun nouveau besoin runtime établi | selon audits C3–C6 | non revendiquée |
+| OP18 | **raccordée au Worker sous prior revalidé** | `FieldStock.propose()` | admission, `afterStock()` et `recordStock()` | garde l’action et modifie la suivante |
+| OP28 | **raccordée au Worker sous condition stricte** | owner action publique unique | admission et acquisition corrélée | garde l’action et règle le retour, même terminal |
+| OP29 | **assurée par fonctions spécialisées** FieldStock/Region | retour avant/après | modèle spécialisé | peut invalider ou sceller la suite |
+| OP30 | **assurée par fonctions spécialisées** FieldStock/Region | observation de rewrite/effet | règle, échec ou réfutation | propositions futures modifiées |
+| OP31 | **appel disponible, propriétaire produit absent** | postAnalyse générique | aucun propriétaire d’objectif | non démontrée en produit |
+| OP03 | **bloquée par producteur générique manquant** | aucune production tri-état générale | admission/plan potentiel | non |
+| OP08 | **bloquée ou recouverte familialement** | pas de graphe transversal produit | stratégie potentielle | non générique |
+| OP12 | **bloquée ou recouverte familialement** | inconnues d’accès spécialisées | acquisition spécialisée | non générique |
+| OP26 | **bloquée ou recouverte familialement** | admissions spécialisées | garde spécialisée | non générique |
+| OP06 | **assurée par fonctions spécialisées** | retour Region/FieldStock | modèle spécialisé | contradiction change la suite |
+| OP14 | **admission bridge présente, routage natif absent** | aucun besoin produit actuel | garde bridge | non en produit |
+| autres OP | **hors périmètre actuel** | aucun nouveau besoin établi | selon C3–C6 | non revendiquée |
 
-## Tests et qualification finale réconciliée
+## Qualification
 
-Nouveaux tests de cette étape :
-
-- `tests/v6-common-campaign-owner.test.ts` ;
-- `tests/v6-field-stock-common-campaign.test.ts` ;
-- `tests/v6-neutral-common-caller-owned.test.ts`.
-
-Preuves couvertes :
-
-- aucune proposition → aucune OP ;
-- une proposition → besoin, opération, consommation et action ;
-- plusieurs propositions → ambiguïté sans classement ni appel ;
-- même `needId` de la release au retour ;
-- une seule action en attente par session ;
-- bundle refusé → aucune action en attente ;
-- retour exact dédupliqué ;
-- retour contradictoire rejeté ;
-- FieldStock `before()` avant release ;
-- FieldStock `after()/record()` après retour ;
-- action adressée absente → aucun proposal et aucun appel ;
-- époque ou révision incohérente → rejet ;
-- retour FieldStock confirmé → prochaine action différente ;
-- transfert propriétaire sans fuite du payload dans le résultat public.
-
-Qualification GitHub Actions sur l’arbre contenant les derniers apports Lot 6C
-et Region :
+### Noyau du propriétaire commun
 
 - run : `43346791891` ;
 - job : `131627959298` ;
-- commit qualifié : `d5fc07b9c825078c7a241d6511eb91287befbc7f` ;
-- Node : `22.18.0` ;
-- `npm ci` : réussi ;
-- `npm run typecheck` : réussi ;
-- régression TypeScript complète : **286/286 tests réussis** ;
-- diagnostic de coût : réussi.
+- commit : `d5fc07b9c825078c7a241d6511eb91287befbc7f` ;
+- typecheck réussi ;
+- **286/286 tests réussis** ;
+- diagnostic de coût réussi.
 
-Le workflow temporaire est supprimé avant intégration.
+### Raccord Worker final réconcilié
+
+- run : `43348904523` ;
+- job : `131634904435` ;
+- commit : `08a04a9da59b0f385d080acf6091d4acdcf800c6` ;
+- baseline intégrée : `8cc510e0a0d09704eb508b3aa2216b4d63482af4` ;
+- Node `22.18.0` ;
+- `npm ci` réussi ;
+- `npm run typecheck` réussi ;
+- régression TypeScript complète : **304/304 tests réussis** ;
+- aucun échec, annulation, test ignoré ou TODO.
+
+Preuves nouvelles :
+
+- mesure publique copiée, bornée et sans fuite par référence ;
+- composants visibles calculés seulement pour la revalidation FieldStock ;
+- OP28 et OP18 traversent le Worker commun ;
+- même `needId` de la release au retour ;
+- résultat FieldStock consommé avant la proposition suivante ;
+- `WIN` et budget nul règlent le retour sans nouvelle décision ;
+- erreur d’observation empêche toute décision ;
+- ambiguïté sans opération cachée ;
+- ACTION6 inconnue sans prior explicite.
+
+Les workflows temporaires sont supprimés avant intégration canonique.
 
 ## Performance
 
-La première version détachée du transport commun mesurait environ :
-
-- release OP28 directe : `4,07 µs/cycle` ;
-- campagne commune avec retour : `61,90 µs/cycle`.
-
-Après transfert propriétaire unique, sur l’arbre réconcilié :
+Diagnostic du propriétaire commun :
 
 - aucun besoin direct : `0,233 µs/cycle` ;
 - aucun besoin via campagne : `0,349 µs/cycle` ;
-- release OP28 directe : `2,337 µs/cycle` ;
-- campagne commune avec retour corrélé : `6,894 µs/cycle` ;
-- surcoût absolu restant : `4,557 µs/cycle` ;
-- réduction du coût du chemin commun : environ `88,9 %`.
+- OP28 direct : `2,337 µs/cycle` ;
+- campagne avec retour : `6,894 µs/cycle` ;
+- surcoût absolu : `4,557 µs/cycle`.
 
-Cette mesure comprend propriété, état en attente, acheminement du retour et
-déduplication, alors que la référence directe ne fait que préparer et libérer
-l’action.
+Ce diagnostic n’est pas le benchmark officiel. La clôture C7 exige toujours :
 
-Ce diagnostic ne remplace pas le benchmark officiel. Les règles de clôture C7
-restent :
-
-- STCK global strictement inférieur à +10 % ;
-- SMLP global strictement inférieur à +10 % ;
+- STCK global strictement inférieur à `+10 %` ;
+- SMLP global strictement inférieur à `+10 %` ;
 - jeux séparés ;
 - aucune compensation ;
-- phases internes informatives si le global du jeu reste conforme.
-
-Statut :
-
-**fonctionnellement qualifié, performance officielle à confirmer**.
+- phases internes informatives si le global reste conforme.
 
 ## Besoins encore sans traitement
 
-- hôte navigateur commun créant la campagne et les contextes propriétaires ;
-- dispatch réel de l’action autorisée vers `BrowserGameRuntime` ;
-- conservation du `needId` à travers `AgentProductDispatch` ;
-- acquisition du retour avant demande de la décision suivante ;
-- contrat bundle/action Logos pour Region ;
-- acquisition passive orchestrée pour des propriétaires non sélectionnés ;
-- snapshot/restauration des décisions communes en attente ;
+- campagne SRA live créée par le produit ;
+- dispatch de la décision Worker vers `BrowserGameRuntime` puis retour réel au
+  même Worker ;
+- acquisition initiale d’un prior FieldStock depuis la campagne navigateur ;
+- candidat Region public complet et inscription dans la campagne commune ;
+- acquisition passive orchestrée pour les owners non sélectionnés ;
+- snapshot/restauration du port Worker, de l’observation courante et de la
+  décision en attente ;
 - propriétaire d’objectif consommant OP31 ;
-- lecture future de la connaissance générique OP30 ;
-- transport borné des traces/compteurs vers le produit ou le harness ;
-- perception et planification générales pour les situations à plusieurs actions ;
-- quatre runners natifs qualifiés et mesures STCK/SMLP officielles.
+- lecture future générique OP30 ;
+- traces/compteurs bornés vers produit ou harness ;
+- perception et planification générales lorsque plusieurs actions sont
+  possibles ;
+- mesures officielles A/B × STCK/SMLP.
 
 ## Prochaine étape concrète
 
-Construire l’hôte produit/browser qui :
+Construire l’hôte produit live qui :
 
-1. reçoit chaque `GameObservation` ;
-2. construit l’observation agent et les observations spécialisées ;
-3. alimente seulement les propriétaires applicables ;
-4. conserve l’ambiguïté plutôt que choisir arbitrairement ;
-5. dispatch l’action autorisée ;
-6. conserve `needId`, propriétaire et proposition pendant le dispatch ;
-7. acquiert le retour avant la prochaine demande de décision ;
-8. présente ensuite la nouvelle observation.
+1. crée et initialise une session Worker par campagne ;
+2. transforme chaque `GameObservation` public en observation Worker monotone ;
+3. remet la décision autorisée au dispatch partagé ;
+4. conserve `none` et `ambiguous` sans fallback inventé ;
+5. remet l’observation post-action réelle au même Worker ;
+6. ne produit un prior FieldStock ou un candidat Region qu’après preuve publique
+   suffisante ;
+7. qualifie ensuite restauration et coût natif.
 
-Aucun Site ne doit être publié avant intégration durable du code correspondant
-sur GitHub et vérification GitHub ↔ Site.
+Aucun Site ne doit être publié avant intégration durable du chemin produit sur
+GitHub et vérification GitHub ↔ Site.
