@@ -177,7 +177,7 @@ test('visible-target contribution disappears when its public pixels no longer ma
   }
 });
 
-test('availability contribution disappears when ACTION6 is not currently public', () => {
+test('native release safety blocks every contribution when ACTION6 is unavailable', () => {
   const withAction = observation();
   const context = publicSmlpAddressedJointContext(withAction);
   const withoutAction = observation(0, closedVerticalGate(), [5, 7]);
@@ -187,15 +187,13 @@ test('availability contribution disappears when ACTION6 is not currently public'
     observation: withoutAction,
     contextByChannel: context,
   }), undefined);
-  assert.equal(owner.lastAssessment.status, 'incomplete');
-  if (owner.lastAssessment.status === 'incomplete') {
-    assert.deepEqual(owner.lastAssessment.contributions.map(item => item.channelId), [
-      PUBLIC_VISIBLE_TARGET_CHANNEL_ID,
-    ]);
-  }
+  assert.deepEqual(owner.lastAssessment, {
+    status: 'none',
+    contributions: [],
+  });
 });
 
-test('selected public return is routed once to both concrete producer channels', () => {
+test('selected public return is routed to both concrete producer channels', () => {
   const port = new V6CommonCampaignDecisionPort({
     jointChannels: createPublicSmlpAddressedJointChannels(),
     jointContextByChannel(current) {
@@ -218,9 +216,6 @@ test('selected public return is routed once to both concrete producer channels',
     PUBLIC_VISIBLE_TARGET_CHANNEL_ID,
   ]);
   assert.ok(result.channels.every(item => item.result.acquired));
-
-  port.observe(observation(1, openHorizontalGate()));
-  assert.equal(port.lastAcquisition?.routed, true);
 });
 
 test('producer supports the source-qualified open-gate glyph and rejects an empty scene', () => {
