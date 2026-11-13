@@ -3,7 +3,7 @@
 Date de consolidation : 13 novembre 2026 (America/Recife).
 
 Branche canonique auditée : `recovery/site109-reconstruction-20261112`  
-Commit canonique audité : `9e04bbd5569f6755178fa1b5276a112ca47d646b`
+Commit canonique audité : `68cdddc92b4b7f0214a2d7e5a5f0ffe6c94e7216`
 
 ## Verdict
 
@@ -34,7 +34,7 @@ Ce registre **n’est pas** la table historique perdue des 76 points d’entrée
 | `operationsCalculationQualified` | 31 |
 | `operationsProductActive` | 2 |
 | `capabilitiesFunctionalQualified` | 16 |
-| `capabilitiesProductActive` | 7 |
+| `capabilitiesProductActive` | 8 |
 | `capabilitiesSupportingActive` | 5 |
 | `capabilitiesOfficialPerformanceQualified` | 2 |
 | `historicalMappedSlots` | 0 |
@@ -94,7 +94,7 @@ OP06, OP29 et OP30 possèdent des effets spécialisés démontrés, mais ne sont
 | `logos.composition-authority` | `qualified` | `supporting-active` | `covered-by-qualified-scopes` |
 | `logos.operation-observability` | `qualified` | `supporting-active` | `not-measured-separately` |
 | `campaign.common-owner` | `qualified` | `active` | `covered-by-qualified-scopes` |
-| `runtime.campaign-checkpoint-core` | `qualified-bounded` | `available-not-main` | `not-measured-separately` |
+| `runtime.campaign-checkpoint-core` | `qualified-bounded` | `active` | `not-measured-separately` |
 | `campaign.field-stock-op18` | `qualified-bounded` | `active` | `not-measured-separately` |
 | `campaign.public-simple-op28` | `qualified-bounded` | `active` | `not-measured-separately` |
 | `campaign.joint-channels-op28` | `qualified-bounded` | `active` | `official-qualified` |
@@ -114,7 +114,18 @@ Les seules qualifications officielles de performance attachées à une capacité
 
 Les autres statuts `covered-by-qualified-scopes` signifient que le composant a été traversé dans un périmètre qualifié. Ils ne constituent pas une mesure isolée de son coût.
 
-Le noyau `runtime.campaign-checkpoint-core` conserve désormais atomiquement la campagne commune, le `needId`, l’action en attente, la déduplication et l’état exact de FieldStock, avec rollback intégral. Il reste toutefois hors de la boucle navigateur active : le host et le contrôleur Agent ne possèdent pas encore le checkpoint et aucune réactivation Agent réelle n’est revendiquée.
+Le noyau `runtime.campaign-checkpoint-core` conserve atomiquement la campagne commune, le `needId`, l’action en attente, la déduplication et l’état exact de FieldStock, avec rollback intégral. Il est maintenant raccordé au host produit et au contrôleur Agent : un host frais peut reprendre une frontière réglée, et un retour déjà physiquement envoyé peut être acquis avec le même `needId` sans rejouer l’action ni la présentation. Un checkpoint réglé devenu obsolète est refusé avant toute nouvelle décision.
+
+La qualification correspondante est durable :
+
+- `docs/recovery/op01-op31-browser-session-resume-20261113.md` ;
+- `docs/recovery/op01-op31-browser-session-resume-qualified.json` ;
+- run GitHub Actions `43431242149`, job `131904989533` ;
+- **25/25** tests ciblés ;
+- **396/396** régressions TypeScript ;
+- build de production réussi.
+
+La frontière reste bornée : le checkpoint du contrôleur est en mémoire, `dispose()` l’invalide, et aucun stockage IndexedDB/localStorage, `pagehide`, crash, nouveau processus ou cycle de réactivation Chrome persisté n’est encore qualifié.
 
 ## Gardes ouvertes
 
@@ -122,7 +133,7 @@ Le noyau `runtime.campaign-checkpoint-core` conserve désormais atomiquement la 
 | --- | --- | --- |
 | `historical-slot-schema` | `open` | Le schéma canonique des 76 emplacements V6 n'a pas été récupéré. |
 | `site109-source-identity` | `open` | Le SHA/source exact de Site 109 reste non résolu. |
-| `browser-session-reactivation` | `open` | Le noyau atomique campagne + FieldStock est qualifié, mais le host et le contrôleur navigateur ne possèdent pas encore le checkpoint et aucune reprise Agent réelle n’est démontrée. |
+| `browser-checkpoint-persistence` | `open` | La reprise dans un host frais est qualifiée en TypeScript, mais aucun stockage durable, `pagehide`, crash, nouveau processus ou cycle Chrome réel n’est encore démontré. |
 | `op31-objective-owner` | `open` | Aucun propriétaire d'objectif produit ne maintient, termine, suspend ou réoriente la suite. |
 | `region-product-owner` | `open` | Region est qualifiée dans le runtime natif/Worker, mais pas comme propriétaire physique du contrôleur produit. |
 | `full-product-composition-performance` | `open` | Les preuves Region et joint_channels qualifient leurs seams; elles ne mesurent pas la composition produit complète des quatre propriétaires. |
@@ -133,13 +144,14 @@ Le noyau `runtime.campaign-checkpoint-core` conserve désormais atomiquement la 
 Le script `scripts/check-v6-entry-point-progress.mjs` vérifie :
 
 - exactement OP01 à OP31, sans doublon ;
-- les 16 capacités de cette reconstruction, y compris le noyau atomique de checkpoint ;
+- les 16 capacités de cette reconstruction, y compris le checkpoint navigateur maintenant actif ;
 - la cohérence des totaux dérivés ;
 - l’existence de chaque source, test et preuve référencés ;
 - l’absence de mapping historique inventé ;
 - le maintien du compteur historique à `null` ;
 - la limitation des opérations produit à OP18 et OP28 ;
 - la limitation des qualifications officielles de performance à Region et `joint_channels` ;
+- la fermeture du garde de réactivation TypeScript et le maintien du garde de persistance navigateur ;
 - le blocage de la publication Site.
 
 Le test `tests/v6-entry-point-progress.test.ts` rejette notamment un compteur gonflé, une identité OP dupliquée ou une preuve absente.
@@ -153,6 +165,6 @@ Le projet peut désormais répondre précisément à deux questions différentes
 
 ## Étape suivante
 
-La priorité fonctionnelle suivante est le raccord navigateur du noyau de continuité déjà qualifié : ownership du checkpoint par le host et le contrôleur, restauration avant toute nouvelle décision, vérification de l’observation courante et reprise d’un retour en attente sans rejouer l’action. En parallèle, toute preuve durable permettant de reconstruire l’identité des 76 emplacements pourra être ajoutée sans modifier rétroactivement les statuts actuels.
+La priorité fonctionnelle suivante est la persistance sûre du checkpoint déjà actif : politique d’expiration, liaison à l’identité du jeu et à la génération produit, capture à `pagehide`, puis vraie désactivation/réactivation dans Chrome contre Pyodide sans double action, double acquisition, double présentation ni perte de `needId`. Le coût de snapshot/restauration devra être mesuré séparément avant toute revendication de performance. En parallèle, toute preuve durable permettant de reconstruire l’identité des 76 emplacements pourra être ajoutée sans modifier rétroactivement les statuts actuels.
 
 Aucune publication Site n’est incluse dans cette étape.
