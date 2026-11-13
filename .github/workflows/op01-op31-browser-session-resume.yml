@@ -30,6 +30,10 @@ jobs:
           from pathlib import Path
           path = Path('scripts/apply-op01-op31-browser-session-resume.mjs')
           source = path.read_text(encoding='utf-8')
+          source = source.replace(
+              "      : structuredClone(record(checkpoint.current, 'browser FieldStock checkpoint current'))\\n        as unknown as PublicCampaignObservation;\\n",
+              "      : (structuredClone(record(checkpoint.current, 'browser FieldStock checkpoint current'))\\n        as unknown as PublicCampaignObservation);\\n",
+          )
           marker = '\nconst controller = `'
           if marker not in source:
               raise SystemExit('temporary patch boundary not found')
