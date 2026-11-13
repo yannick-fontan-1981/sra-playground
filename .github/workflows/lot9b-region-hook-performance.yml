@@ -41,6 +41,8 @@ jobs:
         run: |
           node scripts/native-loop-region-source-refs.mjs \
             --output lot9b-region-hook-performance-source-refs.json
+      - name: Verify optimized source refs and runner manifest
+        run: node scripts/verify-native-loop-runner-manifest.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
