@@ -1420,3 +1420,93 @@ Aucun manifeste officiel n'est créé.
 
 Statut :
 **fonctionnellement qualifié, performance officielle à confirmer**.
+
+
+## C1/C2 — reprise sur les contrats Lot 6 et point d’intégration réel
+
+Détail complet :
+`docs/recovery/op01-op31-lot6-runtime-reconnection-20261112.md`.
+
+Baseline canonique relue avant cette étape :
+`e98caa0e5d939dccc962a2258aa99237e0fa7b97`.
+
+### Nouveaux composants runtime qualifiés
+
+- transport jeu navigateur et retour réel : `browser-games.ts`, `game-worker.ts` ;
+- dispatch produit et présentation : `agent-product-dispatch.ts`,
+  `product-presentation.ts`, `main.ts` ;
+- transport agent : `contracts.ts`, `v6-agent-worker-core.ts`,
+  `v6-agent-worker.ts` ;
+- delta public et boucle spécialisée Region ;
+- premier runner explicite A/STCK, encore en statut
+  `reconstructed-contract-pending-real-native-execution`.
+
+### Point d’intégration Logos
+
+Le seam propre est :
+
+`AgentWorkerCore` → `AgentDecisionPort.decide(observation, budgetMs, signal)`.
+
+Statut : **raccordable au niveau transport, non raccordé au niveau décision
+symbolique**.
+
+Le worker produit installe encore `PendingPerceptionDecisionPort`, qui retourne
+`undefined`. Le produit n’appelle donc aucune OP et n’en consomme aucun résultat.
+La preuve Worker → Logos existante reste test-only et exige un producteur
+symbolique externe explicite.
+
+### Statuts prioritaires
+
+- OP18, OP28 : **bloqué par runtime manquant** ;
+- OP29, OP30, OP31 génériques : **appel existant sans consommateur démontré** ;
+- OP03, OP08, OP12, OP26 : **bloqué par runtime manquant** ;
+- OP06 dans Region : **déjà assuré par fonction spécialisée** ;
+- OP14 : **bloqué par runtime manquant**, admission bridge présente mais aucun
+  besoin/producteur produit ni routage de l’autorité native ;
+- autres OP : **hors périmètre actuel** pour cette reprise produit.
+
+### Contrats encore manquants
+
+- hôte agent produit ;
+- adaptateur générique `GameObservation` → `AgentObservation` ;
+- producteur observation → état symbolique → objectif/question → bundle/action ;
+- corrélateur action/retour avec `needId` ;
+- propriétaire d’objectif consommant OP31 ;
+- lecteur décisionnel futur de la connaissance OP30 ;
+- propriétaire de mémoire/snapshot et transport borné des traces.
+
+### Tests
+
+Aucun nouveau test ajouté et aucune suite relancée : cette étape ne modifie aucun
+chemin d’exécution et l’environnement courant ne contient pas de checkout
+matérialisé. Les résultats historiques restent référencés sans être présentés
+comme un nouveau run.
+
+### Performance
+
+Le premier runner A/STCK ne suffit pas à qualifier les quatre combinaisons
+A/STCK, A/SMLP, B/STCK et B/SMLP sur exécution native réelle. Aucun benchmark de
+remplacement n’est déclaré officiel.
+
+Statut :
+**fonctionnellement qualifié, performance officielle à confirmer**.
+
+### Feuille de route actualisée
+
+| Lot | État après reprise Lot 6 | Prochaine preuve |
+| --- | --- | --- |
+| C0 | **terminé** | conserver les dispositions et la provenance |
+| C1 | **fonctionnel bibliothèque/contrat Worker, produit bloqué** | brancher un producteur symbolique borné sur `AgentDecisionPort` |
+| C2 | **noyau/test-only qualifié, produit non raccordé** | observation réelle → OP → consommateur → décision suivante |
+| C3 | **calculs et recouvrements qualifiés** | appeler seulement depuis un besoin produit réel |
+| C4 | **audit complet** | aucun appel sans consommateur réel |
+| C5 | **audit complet, Region spécialisé disponible** | préserver la contribution spécialisée sans duplication générique |
+| C6 | **audit complet** | conserver inconnue, échec borné et impossibilité distincts |
+| C7 | **ouvert** | quatre runners natifs qualifiés + manifeste + STCK/SMLP séparés < +10 % |
+
+### Prochaine étape concrète
+
+Récupérer ou construire la plus petite tranche probante qui alimente
+`AgentDecisionPort` depuis une observation réelle, puis démontrer sur un même
+événement : besoin → OP18/OP28 → action → retour → consommateur → décision
+suivante. Aucun worker parallèle ni appel OP artificiel ne doit être ajouté.
