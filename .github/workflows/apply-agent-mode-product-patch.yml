@@ -1,0 +1,27 @@
+name: Apply Agent mode product integration
+
+on:
+  push:
+    branches:
+      - recovery/op01-op31-agent-mode-controller-20261112
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python scripts/apply-agent-mode-product-patch.py
+      - name: Commit generated product integration
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/main.ts src/runtime/contracts.ts tests/main-agent-mode-controller-integration.test.ts
+          if git diff --cached --quiet; then
+            echo "Agent product integration already applied."
+          else
+            git commit -m "Activate bounded Agent product controller"
+            git push origin HEAD:${GITHUB_REF_NAME}
+          fi
