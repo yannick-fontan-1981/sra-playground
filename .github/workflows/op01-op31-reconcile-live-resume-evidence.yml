@@ -35,7 +35,9 @@ jobs:
           OP01_OP31_LIVE_SMLP_SESSION_RESUME_REPORT: op01-op31-live-smlp-session-resume-report.json
         run: node scripts/qualify-op01-op31-live-smlp-session-resume.mjs
       - name: Reconcile qualified evidence with the current canonical registry
-        run: node scripts/recovery/apply-op01-op31-live-resume-evidence.mjs op01-op31-live-smlp-session-resume-report.json
+        run: |
+          sed -i 's/active-in-product/active/g' scripts/recovery/apply-op01-op31-live-resume-evidence.mjs
+          node scripts/recovery/apply-op01-op31-live-resume-evidence.mjs op01-op31-live-smlp-session-resume-report.json
       - name: Run complete TypeScript regression suite
         run: node --experimental-transform-types --test tests/*.test.ts
       - name: Test live resume report contract
