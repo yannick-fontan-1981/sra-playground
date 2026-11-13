@@ -4,6 +4,7 @@ import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import readline from 'node:readline';
+import { setTimeout as delay } from 'node:timers/promises';
 import { createServer } from 'vite';
 
 import { selectNativeRegionAction6CostAction } from './native-loop-region-action6-corpus.mjs';
@@ -154,6 +155,33 @@ function findChrome() {
   return found;
 }
 
+async function stopProcess(child) {
+  if (!child || child.exitCode !== null || child.signalCode !== null) return;
+  const exited = new Promise(resolve => child.once('exit', resolve));
+  child.kill('SIGTERM');
+  await Promise.race([exited, delay(5_000)]);
+  if (child.exitCode === null && child.signalCode === null) {
+    const killed = new Promise(resolve => child.once('exit', resolve));
+    child.kill('SIGKILL');
+    await Promise.race([killed, delay(5_000)]);
+  }
+}
+
+async function removeChromeProfile(path) {
+  for (let attempt = 0; attempt < 5; attempt += 1) {
+    try {
+      await rm(path, { recursive: true, force: true });
+      return;
+    } catch (error) {
+      if (attempt === 4) {
+        console.warn(`Chrome profile cleanup failed without invalidating parity: ${error}`);
+        return;
+      }
+      await delay(250 * (attempt + 1));
+    }
+  }
+}
+
 async function createBrowserReport() {
   let resolvePayload;
   let rejectPayload;
@@ -228,9 +256,9 @@ async function createBrowserReport() {
     }
     return payload.report;
   } finally {
-    chrome?.kill('SIGTERM');
+    await stopProcess(chrome);
     await server.close();
-    await rm(chromeProfile, { recursive: true, force: true });
+    await removeChromeProfile(chromeProfile);
   }
 }
 
