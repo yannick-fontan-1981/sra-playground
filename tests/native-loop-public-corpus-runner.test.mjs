@@ -126,3 +126,24 @@ test('four explicit public-corpus runners satisfy the native adapter and full AB
   assert.equal(result.totals.measuredSessions, 32);
   assert.equal(result.totals.measuredActions, 400);
 });
+
+
+test('candidate post-action hook receives both public observations and stays inside candidate timing', async () => {
+  const calls = [];
+  const runner = createPublicCorpusSessionRunner({
+    variant: 'B',
+    game: 'STCK',
+    sourceRef: 'source:B',
+    createSession: async () => new FakeSession(),
+    beforeAction: async () => {},
+    afterAction: async event => {
+      calls.push(event);
+    },
+  });
+  const sample = await runner(descriptor({ variant: 'B', actions: 3 }));
+  assert.equal(calls.length, 3);
+  assert.deepEqual(calls[0].action, { id: 5 });
+  assert.ok(calls[0].beforeObservation);
+  assert.ok(calls[0].observation);
+  assert.ok(sample.phases.candidate_hook >= 0);
+});
