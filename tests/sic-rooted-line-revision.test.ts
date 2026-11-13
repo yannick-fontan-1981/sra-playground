@@ -5,6 +5,7 @@ import { gunzipSync } from 'node:zlib';
 import { RootedLineMemory, rootedLineBefore } from '../src/logos-engine/v6-rooted-line-access.ts';
 import { planCellPush } from '../src/logos-engine/v6-rooted-line-revision.ts';
 import { measureRootedLine } from '../src/logos-engine/v6-rooted-line-observation.ts';
+import { readNativeResolution } from '../src/sic/native-resolution.ts';
 
 const trace = new URL('../docs/migration/lot3d-evidence/final/sk48-rooted-session/sk48-public-trace.json.gz', import.meta.url);
 const policy = new URL('../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm', import.meta.url);
@@ -35,6 +36,13 @@ test('an observed push chain unblocks rooted-line search, retaining its estimate
   assert.deepEqual(revised.rooted_line_plan.search.recovery_evidence, [observation(11).observation_ref, current.observation_ref]);
   assert.equal(revised.bundle_template.operation_key, 'OP18');
   assert.deepEqual(revised.actions, [{ action_ref: 'ACTION3' }]);
+  const view = readNativeResolution({
+    sessionId: 'local', sequence: last, level: 1, trace: [], lastDecision: 'public_occurrence_recall',
+    proposal: revised, phase: 'authorised_not_executed',
+  });
+  assert.equal(view?.recoveryAction, 12);
+  assert.equal(view?.operation, 'OP18');
+  assert.deepEqual(view?.recoveryOperations?.map(operation => operation.key), ['OP03', 'OP12', 'OP08', 'OP26']);
   assert.equal(rootedLineBefore(revised, 0, rows, {
     epoch: 1, score: 0, observation_ref: current.observation_ref, available: current.available_action_refs,
   }).admitted, true);
