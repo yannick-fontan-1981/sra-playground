@@ -72,6 +72,8 @@ test('real Region candidate hook binds useful ACTION6 public delta into RegionIn
       return 'explicit-method-1';
     },
   });
+  assert.equal(hook.hookInputMode, 'cloned');
+  assert.equal(hook.methodRefInput, 'full');
   const before = publicObservation();
   const afterFrame = frame(0);
   afterFrame[20][10] = 8;
@@ -137,5 +139,47 @@ test('real Region hook rejects invented or malformed methodRef output', async ()
       descriptor: descriptor(),
     }),
     /non-empty string or undefined/,
+  );
+});
+
+test('identity-only methodRef input avoids frame cloning and keeps real Region acquisition', async () => {
+  const descriptorValue = descriptor();
+  let received;
+  const hook = createRegionInterventionCandidateHook({
+    methodRefInput: 'identity',
+    methodRefFor: input => {
+      received = input;
+      return `singleton:${input.descriptor.game}:${input.index}`;
+    },
+  });
+  assert.equal(hook.hookInputMode, 'readonly');
+  assert.equal(hook.methodRefInput, 'identity');
+
+  const before = publicObservation({ nonCloneable: () => 'before' });
+  const afterFrame = frame(0);
+  afterFrame[3][3] = 10;
+  const after = publicObservation({ frame: afterFrame, nonCloneable: () => 'after' });
+
+  hook.beforeAction({ action: { id: 6, x: 3, y: 3 } });
+  const result = await hook.afterAction({
+    index: 4,
+    action: { id: 6, x: 3, y: 3 },
+    beforeObservation: before,
+    observation: after,
+    descriptor: descriptorValue,
+  });
+
+  assert.equal(result.status, 'learned');
+  assert.deepEqual(Object.keys(received).sort(), ['descriptor', 'index']);
+  assert.equal(received.index, 4);
+  assert.equal(received.descriptor, descriptorValue);
+  assert.equal(hook.owner.model.get('singleton:STCK:4')?.evidence.length, 1);
+  assert.equal(hook.stats.acquisitions, 1);
+});
+
+test('candidate hook rejects unknown methodRef input modes', () => {
+  assert.throws(
+    () => createRegionInterventionCandidateHook({ methodRefInput: 'unsafe' }),
+    /methodRefInput must be full or identity/,
   );
 });

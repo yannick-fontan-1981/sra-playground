@@ -94,12 +94,19 @@ function makeRunner({ variant, game, sourceRef, hook }) {
     createSession: createArchiveSessionFactory(variant, game),
     beforeAction: hook?.beforeAction,
     afterAction: hook?.afterAction,
+    hookInputMode: hook?.hookInputMode ?? 'cloned',
   });
 }
 
 const hooks = {
-  STCK: createRegionInterventionCandidateHook({ methodRefFor: nativeRegionBenchmarkMethodRef }),
-  SMLP: createRegionInterventionCandidateHook({ methodRefFor: nativeRegionBenchmarkMethodRef }),
+  STCK: createRegionInterventionCandidateHook({
+    methodRefFor: nativeRegionBenchmarkMethodRef,
+    methodRefInput: 'identity',
+  }),
+  SMLP: createRegionInterventionCandidateHook({
+    methodRefFor: nativeRegionBenchmarkMethodRef,
+    methodRefInput: 'identity',
+  }),
 };
 
 const runSession = createNativeLoopRunSession({
@@ -158,6 +165,8 @@ try {
     archive: 'public/python/custom-games.zip',
     seed: 0,
     corpusRef: NATIVE_REGION_ACTION6_CORPUS_V1.id,
+    hookInputMode: 'readonly',
+    methodRefInput: 'identity',
     totals: result.totals,
     deterministicSequences: sequences,
     diagnostics: {
