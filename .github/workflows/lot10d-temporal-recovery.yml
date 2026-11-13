@@ -1,0 +1,42 @@
+name: Lot10D Temporal recovery contracts
+
+on:
+  push:
+    branches:
+      - recovery/lot10d-temporal-selection-restart2-20261112
+  workflow_dispatch:
+
+jobs:
+  temporal-contracts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.18.0
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Run reconstructed TemporalSelection tests
+        run: >-
+          node --experimental-strip-types --test
+          tests/v6-temporal-selection-contract.test.ts
+          tests/v6-temporal-memory-contract.test.ts
+          tests/v6-temporal-return-contract.test.ts
+          tests/v6-temporal-observation-state.test.ts
+          tests/v6-temporal-decision-receipt.test.ts
+          tests/v6-temporal-selection-adapter.test.ts
+      - name: Typecheck reconstructed TemporalSelection sources
+        run: >-
+          npx tsc --noEmit
+          --target ES2022
+          --module ESNext
+          --moduleResolution Bundler
+          --allowImportingTsExtensions
+          --strict
+          --skipLibCheck
+          src/logos-engine/v6-temporal-selection-contract.ts
+          src/logos-engine/v6-temporal-memory-contract.ts
+          src/logos-engine/v6-temporal-return-contract.ts
+          src/logos-engine/v6-temporal-observation-state.ts
+          src/logos-engine/v6-temporal-decision-receipt.ts
+          src/logos-engine/v6-temporal-selection-adapter.ts
