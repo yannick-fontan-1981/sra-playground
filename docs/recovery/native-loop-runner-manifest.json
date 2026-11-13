@@ -5,10 +5,10 @@
   "historicalRunnerIdentityRecovered": false,
   "historicalCorpusRecovered": false,
   "sourceRefs": {
-    "commonRoot": "3935f5106c478715040b5b49e6e8ebdd6e960cd353c2eff733f7399571dc521b",
-    "candidateRoot": "b77bf3e8c9e31f4d18ac8a8468a9081dc10788b0c8c317fe7d79adb84e24e32e",
-    "reference": "lot9b-region-v1:A:46ce3478dbc07268333a6a2d423489a689cc5ff509abf1e4bf1f948b174b842c",
-    "candidate": "lot9b-region-v1:B:557ca909c4c9b68ec70d2055a02dfb5c27dffcae338f1025e3b53c67937a609f",
+    "commonRoot": "91c8076357fdd8a21f6d13ac774390d58617bd55eca02a7a063143a63719d305",
+    "candidateRoot": "c2d205cc869e2525e89fb71fd6188961792a1f6dcb3a526276361a474e45bd9d",
+    "reference": "lot9b-region-v1:A:2d7cd98abcb78d33553c7cd7082350d81d12b28e5dc551ac55a136ae2ffcaa05",
+    "candidate": "lot9b-region-v1:B:dfb34f99f9e60f648080bcb8770573fe306a9d6df84a18d9b5b07a0deaf5229c",
     "proof": "docs/recovery/native-loop-source-refs.json"
   },
   "transport": {
@@ -41,7 +41,12 @@
     "gameActionAndReturnedObservationIncluded": true
   },
   "protocol": {
-    "seriesOrder": ["A1", "B1", "B2", "A2"],
+    "seriesOrder": [
+      "A1",
+      "B1",
+      "B2",
+      "A2"
+    ],
     "variantBySeries": {
       "A1": "A",
       "B1": "B",
@@ -85,7 +90,7 @@
       "game": "STCK",
       "gameId": "stck-c0000001",
       "factory": "createAStckNativeRunner",
-      "sourceRef": "lot9b-region-v1:A:46ce3478dbc07268333a6a2d423489a689cc5ff509abf1e4bf1f948b174b842c",
+      "sourceRef": "lot9b-region-v1:A:2d7cd98abcb78d33553c7cd7082350d81d12b28e5dc551ac55a136ae2ffcaa05",
       "regionHook": "disabled",
       "seed": 0,
       "startLevel": 1,
@@ -98,7 +103,7 @@
       "game": "SMLP",
       "gameId": "smlp-c3000001",
       "factory": "createASmlpNativeRunner",
-      "sourceRef": "lot9b-region-v1:A:46ce3478dbc07268333a6a2d423489a689cc5ff509abf1e4bf1f948b174b842c",
+      "sourceRef": "lot9b-region-v1:A:2d7cd98abcb78d33553c7cd7082350d81d12b28e5dc551ac55a136ae2ffcaa05",
       "regionHook": "disabled",
       "seed": 0,
       "startLevel": 1,
@@ -111,7 +116,7 @@
       "game": "STCK",
       "gameId": "stck-c0000001",
       "factory": "createBStckNativeRunner",
-      "sourceRef": "lot9b-region-v1:B:557ca909c4c9b68ec70d2055a02dfb5c27dffcae338f1025e3b53c67937a609f",
+      "sourceRef": "lot9b-region-v1:B:dfb34f99f9e60f648080bcb8770573fe306a9d6df84a18d9b5b07a0deaf5229c",
       "regionHook": "region_intervention",
       "seed": 0,
       "startLevel": 1,
@@ -124,7 +129,7 @@
       "game": "SMLP",
       "gameId": "smlp-c3000001",
       "factory": "createBSmlpNativeRunner",
-      "sourceRef": "lot9b-region-v1:B:557ca909c4c9b68ec70d2055a02dfb5c27dffcae338f1025e3b53c67937a609f",
+      "sourceRef": "lot9b-region-v1:B:dfb34f99f9e60f648080bcb8770573fe306a9d6df84a18d9b5b07a0deaf5229c",
       "regionHook": "region_intervention",
       "seed": 0,
       "startLevel": 1,
@@ -153,20 +158,15 @@
       "status": "passed"
     },
     "sourceRefRun": {
-      "runId": 43354155809,
-      "jobId": 131652043976,
-      "headSha": "d3aebb4dce5f4a82b80e38b962f2a2cf1c58cebc",
-      "tests": 7,
-      "typecheck": "passed",
+      "runId": 43355698109,
+      "headSha": "0145c3ae3fe9dd689733275ac4b2f9f083f2d72f",
       "sourceRefsComputed": true,
-      "manifestVerification": "passed",
-      "artifactId": 14005396940,
-      "artifactZipSha256": "614583a684e9d9dd94e924c0d86e5d33caff64836fe1d249c8540162b4194156"
+      "manifestVerification": "passed-before-commit"
     }
   },
   "officialMeasurement": {
     "executed": false,
     "result": null,
-    "reason": "manifest verified; explicitly non-isolated official ABBA execution is the next step"
+    "reason": "optimized candidate identity verified; strict official ABBA measurement pending"
   }
 }
