@@ -8,14 +8,22 @@ Date : 13 novembre 2026
 - Branche canonique cible : `recovery/site109-reconstruction-20261112`
 - Baseline canonique de départ :
   `e3fa1901452423a714d3a47d5a469dbf112c55b0`
+- Canonique C7 réconcilié :
+  `d09fcc23e2dc594b9fa0bff0dab5072808c91464`
 - Branche de travail :
   `op01-op31-browser-addressed-acquisition-20261113`
-- Commit fonctionnel qualifié :
+- Commit fonctionnel de la tranche :
   `99c1d23353dbfec3e98c3770fee362b757ec2701`
+- Merge de réconciliation C7 qualifié :
+  `23694816d35f4f050e43a8660be45a063b6ee5d9`
 - Plan stable : `docs/migration/op01-op31-verification-plan.md`
 - Suivi consolidé : `docs/migration/op01-op31-progress.md`
 - Tranche précédente :
   `docs/recovery/op01-op31-browser-field-stock-transport-20261112.md`
+- Qualification officielle C7 :
+  `docs/recovery/op01-op31-official-readiness-status.md`
+- Preuve officielle Region :
+  `docs/recovery/lot9b-official-abba-performance-qualified.json`
 
 ## Objectif
 
@@ -33,7 +41,7 @@ calibrées → frontière officielle → prior compact retenu.**
 Cette chaîne est volontairement passive. Elle ne choisit pas ACTION6, ne crée
 pas ses coordonnées et ne gagne aucune autorité de décision.
 
-## Limite de qualification
+## Limite exacte de qualification
 
 La qualification acquise est :
 
@@ -46,7 +54,7 @@ Elle ne démontre pas encore :
 - un propriétaire produit capable de justifier lui-même la première ACTION6 ;
 - une politique d’exploration ;
 - une restauration entre deux activations Agent ;
-- une persistance durable du prior ;
+- une persistance durable du modèle, du prior ou du stock ;
 - une utilisation autonome de ce prior dans une campagne produit fraîche.
 
 ## Mesure publique d’entités
@@ -230,7 +238,7 @@ La preuve vérifie :
 - le runtime passe de `empty` à `active_local_model` ;
 - aucune action ou coordonnée n’est produite par FieldStock.
 
-## Fichiers
+## Fichiers de la tranche
 
 ### Ajoutés
 
@@ -243,15 +251,19 @@ La preuve vérifie :
 - `src/runtime/observed-addressed-material-runtime.ts` ;
 - `src/runtime/v6-browser-common-campaign-host.ts`.
 
-## Qualification
+## Qualification combinée
 
-- run GitHub Actions : `43357819760` ;
-- job : `131663946577` ;
-- commit qualifié : `99c1d23353dbfec3e98c3770fee362b757ec2701` ;
+La branche a été réconciliée avec le canonique contenant la qualification C7
+Region avant la qualification finale.
+
+- merge de réconciliation :
+  `23694816d35f4f050e43a8660be45a063b6ee5d9` ;
+- run GitHub Actions : `43358235167` ;
+- job : `131665294852` ;
 - Node : `22.18.0` ;
 - `npm ci` : réussi ;
 - `npm run typecheck` : réussi ;
-- régression TypeScript complète : **333/333 réussis** ;
+- régression TypeScript complète : **336/336 réussis** ;
 - échecs : `0` ;
 - annulés : `0` ;
 - ignorés : `0` ;
@@ -265,18 +277,35 @@ La preuve vérifie :
 Deux vulnérabilités de dépendances de sévérité haute préexistantes restent
 signalées par `npm ci`.
 
-## Performance
+## Performance et C7
 
-Le chemin courant OP28 simple ne matérialise pas les composantes publiques
-supplémentaires. Le coût nouveau est limité aux retours ACTION6 explicites
-évalués pour apprentissage, ainsi qu’aux revalidations de prior déjà prévues.
+C7 reste **officiellement qualifié** pour le protocole natif Region STCK/SMLP
+restauré. Cette tranche ne modifie ni la preuve, ni le corpus, ni les runners,
+ni le verdict existant.
 
-Cette propriété structurelle ne remplace pas les quatre mesures C7 de session
-complète.
+La preuve officielle durable rapporte :
+
+- **STCK : médiane A 54,5 ms, médiane B 58,4 ms, +7,155963 % — PASS** ;
+- **SMLP : médiane A 123,95 ms, médiane B 118,15 ms, −4,679306 % — PASS** ;
+- seuil strict : augmentation médiane inférieure à `+10 %` par jeu ;
+- ordre ABBA : `A1 → B1 → B2 → A2` ;
+- 40 invocations, 32 sessions mesurées et 400 actions mesurées ;
+- aucun échantillon supprimé et aucun retry caché.
+
+La qualification C7 porte sur le hook Region natif mesuré par ce protocole. Elle
+ne constitue ni une mesure du nouveau chemin d’acquisition adressée, ni une
+preuve de parité totale des 76 points d’entrée V6.
+
+Le nouveau chemin n’ajoute pas de mesure d’entités au parcours OP28 simple. Son
+coût est limité aux retours ACTION6 explicitement évalués et aux revalidations
+de prior. Un benchmark ciblé devra être exécuté lorsqu’un vrai propriétaire
+produit activera effectivement cette acquisition.
 
 Verdict :
 
-**acquisition fonctionnellement qualifiée ; coût officiel C7 à confirmer.**
+- **C7 Region STCK/SMLP reste clos et qualifié** ;
+- **coût ciblé de l’acquisition adressée non mesuré séparément** ;
+- cette absence ne réouvre pas C7 pour son périmètre déjà qualifié.
 
 ## Dispositions OP
 
@@ -285,7 +314,8 @@ Verdict :
   toujours un propriétaire produit qui justifie la première ACTION6.
 - **OP28** : contrat strict inchangé ; ACTION6 sans coordonnées reste sans
   proposition.
-- **OP29/OP30** : cycle spécialisé de retour et de rétention préservé.
+- **OP29/OP30** : cycle spécialisé de réponse, apprentissage et rétention
+  préservé.
 - **OP31** : aucun propriétaire d’objectif produit démontré.
 - **Autres OP** : aucune activation artificielle.
 
@@ -296,7 +326,8 @@ Verdict :
 - aucun snapshot/restauration du `needId` ou de l’action en attente ;
 - Region n’est pas encore propriétaire physique du contrôleur produit ;
 - aucun propriétaire OP31 ;
-- performance C7 non close ;
+- registre canonique des 76 points d’entrée V6 toujours absent ;
+- coût ciblé du nouveau chemin d’acquisition non mesuré séparément ;
 - aucune publication Site.
 
 ## Prochaine étape
@@ -309,9 +340,11 @@ Verdict :
 4. ajouter snapshot et restauration atomiques du modèle, du prior, du stock, de
    la campagne et du retour en attente ;
 5. vérifier une réactivation sans perte ni double consommation ;
-6. compléter ensuite le propriétaire physique Region ;
-7. identifier un propriétaire d’objectif réel avant OP31 ;
-8. exécuter enfin les quatre runners C7.
+6. ajouter un benchmark ciblé du chemin adressé lorsque celui-ci devient
+   effectivement actif ;
+7. compléter ensuite le propriétaire physique Region et le lot 9C
+   `joint_channels` ;
+8. identifier un propriétaire d’objectif réel avant OP31.
 
 Aucune publication Site n’appartient à cette tranche. GitHub reste la source
 canonique durable.
