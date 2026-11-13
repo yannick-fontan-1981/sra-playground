@@ -8,24 +8,24 @@ Date : 2026-11-13
 - Branche : `recovery/lot10d-temporal-selection-rebased-20261112`
 - Baseline de report historique : `24fcdbb16c93de59489a6bb0392cc709b7a75d14`
 - Branche canonique : `recovery/site109-reconstruction-20261112`
-- Tête canonique parallèle observée après ce jalon : `97ba156fd0ffb8359cb84514c91f1504d84e928c`
+- Tête canonique parallèle observée pendant ce jalon : `68cdddc92b4b7f0214a2d7e5a5f0ffe6c94e7216`
 
-La branche du lot n'est pas encore intégrée. Aucune identité complète avec Site 109 / native 0.68 n'est revendiquée.
+La branche du lot n’est pas encore intégrée. Aucune identité complète avec Site 109 / native 0.68 n’est revendiquée.
 
 ## Nature de la reconstruction
 
-L'ancienne branche historique 10D ne contenait aucun delta récupérable. Le code actuel est une reconstruction qualifiée à partir de contrats GitHub durables et de donneurs V5 épinglés.
+L’ancienne branche historique 10D ne contenait aucun delta récupérable. Le code actuel est une reconstruction qualifiée à partir de contrats GitHub durables et de donneurs V5 épinglés.
 
 Le donneur privé utilisé pour les invariants ACT, dispatch et reprise reste :
 
 `212d8d426f07eea2b6797c2bb647545767488a96`
 
-Le code privé n'est pas republié.
+Le code privé n’est pas republié.
 
 ## Briques reconstruites
 
 1. sélection Source fail-closed ;
-2. mémoire liée à l'observation ;
+2. mémoire liée à l’observation ;
 3. identité et idempotence des retours ;
 4. état descriptif restaurable ;
 5. reçu Source/DRM ;
@@ -38,90 +38,124 @@ Le code privé n'est pas republié.
 12. consommation ACT, transition de lease et révocation ;
 13. `ActionBoundary` avec tentative durable et dispatch ;
 14. reprise causale et checkpoint `ACTIVE` ;
-15. bridge post-reprise vers un `TemporalObservationState` neuf.
+15. bridge post-reprise vers un `TemporalObservationState` neuf ;
+16. port passif de handoff vers un consommateur scheduler injecté.
 
 Derniers fichiers :
 
-- `src/runtime/v6-temporal-resume-continuation.ts`
-- `tests/v6-temporal-resume-continuation.test.ts`
-- `docs/recovery/lot10d-temporal-resume-continuation.md`
+- `src/runtime/v6-temporal-scheduler-continuation-port.ts`
+- `tests/v6-temporal-scheduler-continuation-port.test.ts`
+- `docs/recovery/lot10d-temporal-scheduler-continuation-port.md`
 
 ## Chaîne qualifiée
 
-`TemporalSelection -> intent -> binding action -> audit ACT -> permis -> consommation ACT -> checkpoint suspendu -> tentative durable -> transport -> dispatch durable -> observation causale -> ActionObserved -> lease OBSERVED -> checkpoint ACTIVE -> domaine post-action externe -> TemporalObservationState neuf`
+`TemporalSelection -> intent -> binding action -> audit ACT -> permis -> consommation ACT -> checkpoint suspendu -> tentative durable -> transport -> dispatch durable -> observation causale -> ActionObserved -> lease OBSERVED -> checkpoint ACTIVE -> domaine post-action externe -> TemporalObservationState neuf -> enveloppe de handoff scheduler`
 
-Le worker public n'utilise pas cette chaîne par défaut.
+Le worker public n’utilise pas cette chaîne par défaut.
 
-## Bridge post-reprise
+## Port passif de continuation scheduler
 
-Le nouveau bridge reçoit :
+Le nouveau port reçoit une enveloppe attribuée contenant ensemble :
 
-- un journal de reprise causale durable ;
-- un reçu causal précis ;
-- un domaine d'alternatives post-action fourni extérieurement ;
-- l'autorité Source ;
-- l'autorité courante de continuation.
+- le reçu de continuation post-reprise ;
+- le checkpoint repris `ACTIVE` ;
+- le nouvel état temporel ;
+- leurs empreintes ;
+- la lignée complète du dispatch causal ;
+- une raison explicite.
 
-Il vérifie :
+L’enveloppe ne transporte aucun `selectedRef`, aucun candidat d’action, aucun payload `AgentAction` et aucune autorité ACT.
 
-- reçu causal et checkpoint repris courants ;
-- Source, workflow et instance ;
-- run, timeline, frame et révision ;
-- producteur externe du domaine ;
-- identité de l'observation causale ;
-- domaine complet des alternatives ;
-- fingerprints du reçu, du domaine et de l'état.
+Ses champs de sécurité restent :
 
-Le bridge ne produit ni candidats ni sélection. Il scelle un domaine déjà fourni et construit un état temporel descriptif.
+- `schedulerExecutionAuthorization: null` ;
+- `workerAction: null` ;
+- `actAuthorization: null`.
 
-## Invalidation des preuves pré-action
+## Mode sans scheduler
 
-Le nouvel état commence toujours sans héritage implicite :
+Sans port scheduler qualifié injecté, la résolution est explicitement :
 
-- aucun retour qualifié ;
-- aucune identité de retour consommée ;
-- aucun contrat de mémoire ;
-- aucune preuve mémoire ;
-- aucune autorité ACT.
+`continuation_withheld`
 
-Les marqueurs du reçu sont :
+Dans ce cas :
 
-- `priorQualifiedReturnsCarried: false` ;
-- `priorMemoryReuseCarried: false` ;
-- `continuationPrepared: true` ;
+- le reçu de continuation n’est pas consommé ;
+- l’enveloppe reste en attente ;
+- le scheduler n’est pas appelé ;
+- aucune action n’est produite ;
+- ACT reste absent.
+
+L’absence d’interpréteur ne devient donc jamais un faux succès.
+
+## Handoff injecté
+
+Un port injecté reçoit exactement le checkpoint, l’état temporel, le reçu et la lignée causale.
+
+Il peut répondre `accepted` ou `refused`, mais son accusé doit conserver :
+
 - `schedulerExecutionStarted: false` ;
 - `workerActionProduced: false` ;
 - `actAuthorized: false`.
 
-Toute réutilisation future de mémoire ou de retour devra être requalifiée sur la nouvelle observation.
+Une acceptation signifie uniquement que le même consommateur runtime a pris possession du checkpoint et de l’état pour une future étape qualifiée.
 
-## Idempotence et journal
+Elle ne signifie pas que le scheduler a exécuté une instruction.
 
-Le journal de continuation est borné et fail-closed :
+## Revalidation courante
+
+Avant tout appel du consommateur, le port revalide indépendamment :
+
+- reçu de continuation ;
+- checkpoint repris ;
+- nouvel état temporel ;
+- Source ;
+- workflow et instance ;
+- run ;
+- timeline ;
+- frame ;
+- révision.
+
+Une divergence bloque avant l’appel du scheduler injecté.
+
+## Consommation unique et journal
+
+Une réponse valide, acceptée ou refusée, produit un reçu terminal de handoff et consomme la continuation une seule fois.
+
+Le journal est borné et fail-closed :
 
 - capacité par défaut : 128 ;
 - maximum : 1024 ;
-- une continuation par reçu causal ;
-- une continuation par checkpoint repris ;
-- une continuation par observation causale ;
-- une identité de domaine ;
+- une identité par continuation ;
+- une identité par enveloppe ;
+- une identité par accusé ;
 - aucune éviction silencieuse ;
 - restauration avec validation des empreintes.
 
-Le replay exact retourne le reçu existant sans produire un second état. Un autre domaine pour le même reçu causal est refusé.
+Un replay exact retourne le reçu existant sans rappeler le port injecté.
 
-## Séparation du scheduler
+Les erreurs avant consommation, notamment absence de scheduler, annulation, contexte périmé, exception du consommateur ou accusé invalide, laissent l’enveloppe en attente.
 
-Le jalon prépare une continuation, mais n'exécute pas encore le scheduler commun.
+## Trace Logos V6
+
+La capability suivante est tracée séparément des OP01-OP31 :
+
+`temporal-scheduler-continuation-port`
+
+Les modes `full` et `counters` sont qualifiés.
+
+## Séparation du scheduler réel
+
+Le jalon qualifie la prise de possession, pas l’interpréteur.
 
 Il ne :
 
 - choisit aucune alternative ;
-- prépare aucune action ;
+- prépare aucune nouvelle action ;
 - ne réautorise pas ACT ;
-- ne transporte rien vers l'environnement ;
+- ne transporte rien vers l’environnement ;
 - ne remplace pas le worker public ;
-- ne transforme pas automatiquement le checkpoint `ACTIVE` en nouvelle exécution de workflow.
+- n’exécute aucune étape du scheduler.
 
 Le worker reste `reconstruction-pending-perception` et le statut runtime global reste `action_withheld`.
 
@@ -129,34 +163,34 @@ Le worker reste `reconstruction-pending-perception` et le statut runtime global 
 
 Commit de code, tests et workflow :
 
-`a0536fa1dfdef9edf4c4c260385119e85e3ff922`
+`a5878570afa473c8de3a3f03d47b1fece27a4c82`
 
 Run GitHub Actions :
 
-`43429163491`
+`43438970837`
 
 Résultat :
 
-- **270 tests** ;
-- **270 réussis** ;
+- **287 tests** ;
+- **287 réussis** ;
 - **0 échec** ;
 - 0 annulé ;
 - 0 ignoré ;
 - 0 todo ;
 - typecheck TypeScript strict réussi.
 
-Le jalon ajoute 15 tests au total précédent de 255.
+Le jalon ajoute 17 tests au total précédent de 270.
 
-`npm ci` signale toujours deux vulnérabilités de sévérité élevée dans les dépendances de la baseline. Aucune correction forcée n'a été appliquée dans ce lot.
+`npm ci` signale toujours deux vulnérabilités de sévérité élevée dans les dépendances de la baseline. Aucune correction forcée n’a été appliquée dans ce lot.
 
 ## Limites ouvertes
 
 - politique historique TemporalSelection ;
 - producteur public des domaines et candidats ;
 - mapping historique exact `selectedRef -> AgentAction` ;
-- réconciliation externe d'une tentative `unknown` ;
-- scheduler TypeScript commun ;
-- consommation réelle du checkpoint repris ;
+- réconciliation externe d’une tentative `unknown` ;
+- interpréteur scheduler TypeScript commun ;
+- contrat du résultat d’une étape scheduler ;
 - consommateur runtime final ;
 - séries pré-déclarées ;
 - acquisition différée de concentration ;
@@ -178,16 +212,16 @@ Critère conservé :
 
 ## Prochaine étape
 
-Reconstruire une frontière d'injection scheduler passive :
+Auditer les donneurs durables du scheduler et reconstruire le contrat d’une étape d’interprétation après handoff :
 
-`reçu de continuation -> checkpoint ACTIVE + TemporalObservationState -> SchedulerContinuationPort`
+`handoff accepté -> checkpoint ACTIVE + TemporalObservationState -> résultat scheduler borné`
 
-Elle devra :
+La prochaine qualification devra distinguer explicitement :
 
-1. consommer le reçu de continuation une seule fois ;
-2. transmettre ensemble le checkpoint et l'état temporel ;
-3. retourner `continuation_withheld` si aucun scheduler qualifié n'est injecté ;
-4. empêcher un replay divergent ;
-5. conserver la lignée causale complète ;
-6. ne produire aucune action par elle-même ;
-7. maintenir le worker public inactif jusqu'au raccordement du producteur public et du consommateur runtime final.
+1. la prise de possession déjà qualifiée ;
+2. le début réel de l’exécution ;
+3. le résultat de l’étape ;
+4. une éventuelle nouvelle décision ;
+5. une éventuelle nouvelle chaîne d’action.
+
+Aucune politique scheduler ne sera inventée si son donneur durable exact reste absent.
