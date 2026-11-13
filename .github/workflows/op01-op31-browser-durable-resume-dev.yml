@@ -12,7 +12,7 @@ permissions:
 jobs:
   validate-core:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -28,5 +28,10 @@ jobs:
           node --experimental-transform-types --test
           tests/browser-game-runtime-checkpoint.test.ts
           tests/v6-browser-durable-session.test.ts
+          tests/v6-browser-agent-live-capture.test.ts
           tests/v6-browser-session-resume.test.ts
           tests/browser-game-worker-transport.test.ts
+          tests/main-browser-durable-session-integration.test.ts
+          tests/main-browser-agent-controller-integration.test.ts
+      - name: Real Chrome and Pyodide reload qualification
+        run: node scripts/qualify-op01-op31-browser-durable-resume.mjs
