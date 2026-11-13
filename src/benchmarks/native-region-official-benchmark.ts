@@ -1,38 +1,20 @@
 import { runNativeLoopCostProtocol } from '../../scripts/measure-native-loop-costs.mjs';
 import { createBrowserWorkerGameBridgeDispatch } from '../../scripts/native-loop-browser-worker-dispatch.mjs';
 import { createNativeRegionBenchmarkRunSession } from '../../scripts/native-loop-region-benchmark-runners.mjs';
+import {
+  validateNativeRegionBenchmarkConfig,
+  type NativeRegionBenchmarkConfig,
+} from './native-region-official-config.ts';
 import { BrowserGameRuntime } from '../runtime/browser-games.ts';
 
 type BenchmarkGame = 'STCK' | 'SMLP';
 
-interface BenchmarkConfig {
-  manifestVersion: number;
-  manifestStatus: string;
-  referenceSourceRef: string;
-  candidateSourceRef: string;
-  corpusRef: string;
-  measurementIsolation: string;
-  requestedAt: string;
-}
+type BenchmarkConfig = NativeRegionBenchmarkConfig;
 
 async function loadConfig(): Promise<BenchmarkConfig> {
   const response = await fetch('/__lot9b-benchmark-config', { cache: 'no-store' });
   if (!response.ok) throw new Error(`benchmark config returned ${response.status}`);
-  const config = await response.json() as BenchmarkConfig;
-  if (config.manifestVersion !== 1 || config.manifestStatus !== 'ready-for-official-abba-measurement') {
-    throw new Error('official benchmark manifest is not ready');
-  }
-  for (const [label, value] of [
-    ['referenceSourceRef', config.referenceSourceRef],
-    ['candidateSourceRef', config.candidateSourceRef],
-    ['corpusRef', config.corpusRef],
-    ['measurementIsolation', config.measurementIsolation],
-  ] as const) {
-    if (typeof value !== 'string' || value.length === 0) {
-      throw new TypeError(`${label} must be a non-empty string`);
-    }
-  }
-  return config;
+  return validateNativeRegionBenchmarkConfig(await response.json());
 }
 
 function verifySamples(result: Awaited<ReturnType<typeof runNativeLoopCostProtocol>>, config: BenchmarkConfig): void {
@@ -71,9 +53,10 @@ async function postReport(payload: unknown): Promise<void> {
 async function main(): Promise<void> {
   const status = document.querySelector<HTMLPreElement>('#status');
   const runtime = new BrowserGameRuntime({ requestTimeoutMs: 300_000 });
-  const config = await loadConfig();
+  let config: BenchmarkConfig | undefined;
 
   try {
+    config = await loadConfig();
     if (status) status.textContent = 'initializing explicit A/B × STCK/SMLP runners';
     const dispatchByGame: Record<BenchmarkGame, ReturnType<typeof createBrowserWorkerGameBridgeDispatch>> = {
       STCK: createBrowserWorkerGameBridgeDispatch({ runtime, game: 'STCK' }),
@@ -123,7 +106,11 @@ async function main(): Promise<void> {
     const message = error instanceof Error ? `${error.name}: ${error.message}\n${error.stack ?? ''}` : String(error);
     document.body.dataset.status = 'error';
     if (status) status.textContent = message;
-    await postReport({ status: 'error', error: message, config });
+    await postReport({
+      status: 'error',
+      error: message,
+      ...(config ? { config } : {}),
+    });
   } finally {
     runtime.dispose();
   }
