@@ -154,7 +154,7 @@ test('FieldStock bundle template is admitted by the existing OP18 native authori
 
   const state = {
     compositions:[
-      { id:'G_official_completion', observed:false, open_question:'complete official objective' },
+      { id:'G_official_completion', observed:true },
       composition,
     ],
     facts:proposal?.facts,
@@ -168,6 +168,5 @@ test('FieldStock bundle template is admitted by the existing OP18 native authori
   });
   assert.equal(released.need.status,'needed');
   assert.equal(released.releaseAllowed,true);
-  assert.deepEqual(released.result?.result.value,[bundle.composition_ref,'G_official_completion'].sort((a,b)=>0).filter(()=>true).slice(0,1).length ? released.result?.result.value : []);
-  assert.ok((released.result?.result.value as string[]).includes(bundle.composition_ref));
+  assert.deepEqual(released.result?.result.value,[bundle.composition_ref]);
 });
