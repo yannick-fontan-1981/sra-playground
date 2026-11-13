@@ -60,6 +60,8 @@ export function validateNativeRunnerManifest(root = process.cwd()) {
       || runner.variant !== variant
       || runner.game !== game
       || !nonEmptyString(runner.runnerRef)
+      || !nonEmptyString(runner.sourceRef)
+      || !Number.isInteger(runner.seed)
       || !nonEmptyString(runner.corpusRef)
       || !nonEmptyString(runner.timingScope)
       || !Array.isArray(evidence)
