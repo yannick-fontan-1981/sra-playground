@@ -1,0 +1,32 @@
+name: OP01-OP31 browser durable resume dev
+
+on:
+  push:
+    branches:
+      - op01-op31-browser-durable-resume-20261113
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-core:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.18.0
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Targeted durable resume tests
+        run: >-
+          node --test
+          tests/browser-game-runtime-checkpoint.test.ts
+          tests/v6-browser-durable-session.test.ts
+          tests/v6-browser-session-resume.test.ts
+          tests/browser-game-worker-transport.test.ts
