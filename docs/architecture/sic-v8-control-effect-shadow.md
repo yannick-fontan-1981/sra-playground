@@ -21,6 +21,8 @@ Le panneau compare jusqu’aux 32 derniers clics de la session. Il groupe les r�
 
 Sur STCK, les trois premiers niveaux ont été résolus en 35 actions. Pour une région de 37 pixels et un clic au point relatif (4, 2), la région garde les mêmes pixels dans 8 retours avec la couleur initiale 8, 5 retours avec la couleur 9 et 3 retours avec la couleur 10. Pour une région de 40 pixels, de couleur initiale 10 et cliquée au point relatif (3, 2), le retour du niveau 1 montre une recoloration vers 9 à forme et position identiques. Trois retours du niveau 3 changent les pixels sans correspondance exacte de la région. Les conditions visibles de ce groupe ne suffisent donc pas à prédire la recoloration.
 
-Cette comparaison peut alimenter la future perspective Informations. La perspective Perceptions pourra montrer les observations qui soutiennent une comparaison. Stratégies, Objectifs et Plans d’actions pourront ensuite exposer leurs données avec des onglets communs à mesure que leurs projections deviennent disponibles.
+L’onglet **Perceptions** liste les retours avant/après, avec un filtre par niveau. L’onglet **Information** regroupe les retours comparables et affiche les résultats par niveau. Chaque résultat ouvre un retour correspondant dans Perceptions. La variation entre les niveaux 1 et 3 est affichée en tête de la comparaison STCK. Les onglets sont utilisables à la souris et au clavier avec les flèches, Début et Fin.
+
+Les prochaines perspectives, **Stratégies**, **Objectifs** et **Plans d’actions**, pourront utiliser la même navigation quand leurs données en lecture seule seront disponibles.
 
 Le résumé natif est construit après la décision, hors de la mesure du temps actif. L’affichage est différé au prochain rendu du navigateur après la fin d’une opération. Les tests couvrent la matrice, la révision, la portée, le fallback, l’ambiguïté, les retours natifs et la parité du transport V6 jusqu’à un retour terminal.

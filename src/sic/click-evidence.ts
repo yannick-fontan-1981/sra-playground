@@ -5,6 +5,7 @@ export interface ClickEffectCount {
   readonly count: number;
   readonly levels: readonly number[];
   readonly afterPalette?: number;
+  readonly returns: readonly NativeClickReturn[];
 }
 
 export interface ClickComparison {
@@ -15,6 +16,7 @@ export interface ClickComparison {
 }
 
 export interface ClickEvidence {
+  readonly returns: readonly NativeClickReturn[];
   readonly comparisons: readonly ClickComparison[];
   readonly boundaries: number;
   readonly unidentified: number;
@@ -24,11 +26,13 @@ export interface ClickEvidence {
 export function compareClickReturns(returns: readonly NativeClickReturn[], omitted: number): ClickEvidence {
   const groups = new Map<string, NativeClickReturn[]>();
   const seen = new Set<number>();
+  const distinctReturns: NativeClickReturn[] = [];
   let boundaries = 0, unidentified = 0;
 
   for (const receipt of returns) {
     if (seen.has(receipt.sequence)) continue;
     seen.add(receipt.sequence);
+    distinctReturns.push(receipt);
     if (receipt.boundary) {
       boundaries++;
       continue;
@@ -47,25 +51,27 @@ export function compareClickReturns(returns: readonly NativeClickReturn[], omitt
   }
 
   const comparisons = [...groups.values()].map(summarizeGroup).sort((left, right) =>
-    Number(right.count > 1) - Number(left.count > 1) || right.example.sequence - left.example.sequence);
-  return { comparisons, boundaries, unidentified, omitted };
+    Number(right.status === 'varied') - Number(left.status === 'varied')
+    || Number(right.count > 1) - Number(left.count > 1) || right.example.sequence - left.example.sequence);
+  return { returns: distinctReturns, comparisons, boundaries, unidentified, omitted };
 }
 
 function summarizeGroup(group: readonly NativeClickReturn[]): ClickComparison {
   const outcomes = new Map<string, {
-    kind: ClickEffectCount['kind']; afterPalette?: number; count: number; levels: Set<number>;
+    kind: ClickEffectCount['kind']; afterPalette?: number; returns: NativeClickReturn[];
   }>();
   for (const receipt of group) {
     const palette = receipt.sameSupport ? receipt.atPointAfter?.palette : undefined;
     const recolored = palette !== undefined && palette !== receipt.target!.palette;
     const kind = recolored ? 'recolor' : receipt.changedTargetPixels === 0 ? 'unchanged' : 'other_change';
     const key = recolored ? `recolor:${palette}` : kind;
-    const outcome = outcomes.get(key) ?? { kind, ...(recolored ? { afterPalette: palette } : {}), count: 0, levels: new Set<number>() };
-    outcome.count++;
-    outcome.levels.add(receipt.fromLevel);
+    const outcome = outcomes.get(key) ?? { kind, ...(recolored ? { afterPalette: palette } : {}), returns: [] };
+    outcome.returns.push(receipt);
     outcomes.set(key, outcome);
   }
-  const effects = [...outcomes.values()].map(effect => ({ ...effect, levels: [...effect.levels].sort((a, b) => a - b) }));
+  const effects = [...outcomes.values()].map(effect => ({
+    ...effect, count: effect.returns.length, levels: [...new Set(effect.returns.map(receipt => receipt.fromLevel))].sort((a, b) => a - b),
+  }));
   const status = effects.length > 1 ? 'varied'
     : effects[0]?.kind === 'other_change' ? 'unresolved'
     : group.length > 1 ? 'repeated' : 'single';

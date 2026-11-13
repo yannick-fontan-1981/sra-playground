@@ -23,21 +23,23 @@
 #agent-unsupported{margin:0 0 12px}
 #agent-restart{font-size:14px;min-height:42px;border:1px solid var(--control-border);border-radius:4px;background:var(--surface-raised);padding:8px 12px}
 .sic-panel{padding:24px 28px;border-top:1px solid var(--line);background:var(--surface-muted)}
-.sic-panel[hidden],.sic-details[hidden]{display:none}
+.sic-panel [hidden],.sic-panel[hidden]{display:none}
 .sic-header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px 20px;flex-wrap:wrap;margin-bottom:16px}
 .sic-header h3{margin:0;font-size:clamp(19px,3vw,23px);line-height:1.3;font-weight:600}
 .sic-header p{margin:5px 0 0;color:var(--subtle);font-size:13px}
 .sic-mode{padding:5px 9px;border:1px solid var(--control-border);border-radius:5px;color:var(--accent-hover);font-size:12px}
-.sic-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.sic-tabs{display:flex;gap:6px;border-bottom:1px solid var(--line);margin-bottom:14px}
+.sic-tabs button{min-height:42px;padding:6px 14px;border:0;border-bottom:2px solid transparent;background:transparent;color:var(--muted);font-size:14px}
+.sic-tabs [aria-selected="true"]{border-bottom-color:var(--accent);color:var(--ink);background:var(--surface-raised)}
+.sic-tabs button:focus-visible,.sic-evidence-link:focus-visible,.sic-observations li:focus{outline:2px solid var(--accent);outline-offset:2px}
 .sic-card{padding:15px 17px;border:1px solid var(--line);border-radius:6px;background:var(--surface);overflow-wrap:anywhere}
 .sic-card h4{margin:0 0 12px;color:var(--ink);font-size:15px;font-weight:600}
 .sic-card dl{display:grid;grid-template-columns:auto 1fr;gap:9px 15px;margin:0;font-size:13px;line-height:1.45}
 .sic-card dt{color:var(--subtle)}
 .sic-card dd{margin:0;color:var(--ink)}
-.sic-question{border-inline-start:3px solid var(--accent)}
+.sic-question{margin-top:12px;border-inline-start:3px solid var(--accent)}
 .sic-question p{margin:0;color:var(--muted);font-size:14px;line-height:1.55}
 .sic-question .sic-summary{color:var(--ink);font-size:17px;font-weight:600;margin-bottom:6px}
-.sic-question p[data-sic-uncertainty]:not([hidden]){margin-bottom:8px}
 .sic-details{margin-top:10px}
 .sic-details summary{padding:10px 0;cursor:pointer;color:var(--accent-hover);font-size:14px;width:fit-content}
 .sic-details ul{list-style:none;margin:0;padding:0;display:grid;gap:7px}
@@ -52,6 +54,12 @@
 .sic-observations ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:9px;list-style:none;padding:0;margin:10px 0}
 .sic-observations li{padding:9px 12px;border:1px solid var(--line);border-radius:5px}
 .sic-observations li strong{font-size:14px}
+.sic-section-header{display:flex;align-items:baseline;justify-content:space-between;gap:8px 12px;flex-wrap:wrap}
+.sic-section-header label{font-size:13px;color:var(--muted)}
+.sic-section-header select{min-height:34px;margin-inline-start:5px;border:1px solid var(--control-border);border-radius:4px;background:var(--surface-muted);color:var(--ink);padding:3px 6px}
+.sic-observations ul[data-sic-returns]{max-height:365px;overflow:auto;scroll-padding:6px;padding:4px}
+.sic-effect-row{margin-top:6px;border-top:1px solid var(--line);padding-top:5px}
+.sic-evidence-link{min-height:30px;padding:2px 0;border:0;background:transparent;color:var(--accent-hover);font-size:13px;text-decoration:underline;text-underline-offset:3px}
 @media(max-width:900px){.is-agent-mode .minimal-play-area{grid-template-columns:minmax(0,1fr) 280px}.is-agent-mode .minimal-play-area .board-column,.is-agent-mode .minimal-control-column{padding:22px 18px}}
 @media(max-width:760px){.is-agent-mode .minimal-play-area{grid-template-columns:1fr}.is-agent-mode .minimal-control-column{border-left:0;border-top:1px solid var(--line)}.is-agent-mode .minimal-control-column #agent-panel{max-width:600px}.agent-live-stats strong{font-size:26px}.agent-live-stats span{font-size:13px}.agent-mode-label{font-size:10px}.sic-panel{padding:20px 16px}.sic-grid{grid-template-columns:1fr}}
 @media(max-width:420px){.agent-mode-label{padding:2px 4px}.mode-tabs{gap:10px}.mode-tabs button{gap:5px}.sic-card dl{grid-template-columns:1fr;gap:3px}.sic-card dd:not(:last-child){margin-bottom:7px}}

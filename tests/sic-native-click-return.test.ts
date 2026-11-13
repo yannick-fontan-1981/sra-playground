@@ -101,7 +101,10 @@ test('SIC compares exact visible starting conditions, separates outcomes, and ex
   };
   const repeated = compareClickReturns([first, shifted, shifted], 4);
   assert.equal(repeated.comparisons[0]?.status, 'repeated');
-  assert.deepEqual(repeated.comparisons[0]?.effects, [{ kind: 'recolor', afterPalette: 3, count: 2, levels: [1, 2] }]);
+  assert.deepEqual(repeated.comparisons[0]?.effects, [
+    { kind: 'recolor', afterPalette: 3, count: 2, levels: [1, 2], returns: [first, shifted] },
+  ]);
+  assert.deepEqual(repeated.returns, [first, shifted]);
   assert.equal(repeated.omitted, 4);
 
   const comparison = compareClickReturns([
@@ -115,9 +118,11 @@ test('SIC compares exact visible starting conditions, separates outcomes, and ex
   ], 0);
   assert.equal(comparison.comparisons[0]?.status, 'varied');
   assert.deepEqual(comparison.comparisons[0]?.effects.map(effect => effect.kind), ['recolor', 'unchanged']);
+  assert.deepEqual(comparison.comparisons[0]?.effects.map(effect => effect.returns.map(receipt => receipt.sequence)), [[1, 3], [4]]);
   assert.deepEqual(comparison.comparisons.slice(1).map(group => group.status), ['single', 'single']);
   assert.equal(comparison.boundaries, 1);
   assert.equal(comparison.unidentified, 1);
+  assert.deepEqual(comparison.returns.map(receipt => receipt.sequence), [1, 3, 4, 5, 6, 7, 8]);
 });
 
 test('different destination colors are different outcomes and unmatched changes stay unresolved', async () => {

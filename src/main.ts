@@ -4,7 +4,7 @@ import { renderSiteHeader } from './site-header';
 import { BrowserGameRuntime, type GameObservation } from './runtime/browser-games';
 import { AGENT_STATUS } from './runtime/contracts';
 import { BrowserV6Agent, type V6AgentSnapshot } from './runtime/v6-agent.ts';
-import { renderSicPanel } from './sic/panel.ts';
+import { bindSicPerspectives, renderSicPanel } from './sic/panel.ts';
 import { readControlEffectShadow } from './sic/shadow.ts';
 import { GAME_CATALOG, getGameByCode, type GameCatalogEntry } from './games/catalog';
 
@@ -180,34 +180,45 @@ app.innerHTML = `
             <div><h3 id="sic-title">SIC · How does this command work?</h3><p data-sic-context></p></div>
             <span class="sic-mode">Read-only preview</span>
           </header>
-          <div class="sic-grid">
+          <div class="sic-tabs" role="tablist" aria-label="SIC perspectives" data-sic-tabs>
+            <button type="button" id="sic-perceptions-tab" role="tab" aria-selected="true" aria-controls="sic-perceptions">Perceptions</button>
+            <button type="button" id="sic-information-tab" role="tab" aria-selected="false" aria-controls="sic-information" tabindex="-1">Information</button>
+          </div>
+          <div id="sic-perceptions" role="tabpanel" aria-labelledby="sic-perceptions-tab" tabindex="0">
             <div class="sic-card">
-              <h4>What the game shows</h4>
+              <h4>Current board</h4>
               <dl>
                 <dt>Available commands</dt><dd data-sic-commands>Waiting for the board.</dd>
                 <dt>Next action from V6</dt><dd data-sic-next>No pending action to show.</dd>
-                <dt>Last observed command</dt><dd data-sic-control>No addressed return for this board yet.</dd>
-                <dt>Visible effect</dt><dd data-sic-effect>Waiting for a checked return.</dd>
-                <dt>V6 check</dt><dd data-sic-return>No checked return for this board.</dd>
+                <dt>Latest V6 check</dt><dd data-sic-return>No checked return for this board.</dd>
               </dl>
             </div>
+            <section class="sic-observations" aria-labelledby="sic-clicks-title">
+              <div class="sic-section-header">
+                <h4 id="sic-clicks-title">Click returns</h4>
+                <label data-sic-level-filter hidden>Level <select data-sic-level></select></label>
+              </div>
+              <p data-sic-returns-empty>Run the agent to see its observed clicks.</p>
+              <ul data-sic-returns></ul>
+            </section>
+          </div>
+          <div id="sic-information" role="tabpanel" aria-labelledby="sic-information-tab" tabindex="0" hidden>
+            <section class="sic-observations" aria-labelledby="sic-observations-title">
+              <h4 id="sic-observations-title">Does the effect repeat?</h4>
+              <p data-sic-comparison-summary></p>
+              <ul data-sic-comparison-list></ul>
+              <p data-sic-comparison-scope></p>
+            </section>
             <div class="sic-card sic-question">
-              <h4>Can we verify the effect?</h4>
+              <h4>What remains to be verified?</h4>
               <p class="sic-summary" data-sic-summary>Waiting for the board.</p>
-              <p data-sic-uncertainty hidden></p>
               <p data-sic-evidence></p>
             </div>
+            <details class="sic-details" data-sic-details hidden>
+              <summary>Methods and evidence</summary>
+              <ul data-sic-methods></ul>
+            </details>
           </div>
-          <details class="sic-details" data-sic-details hidden>
-            <summary>Methods and evidence</summary>
-            <ul data-sic-methods></ul>
-          </details>
-          <section class="sic-observations" aria-labelledby="sic-observations-title" data-sic-comparisons hidden>
-            <h4 id="sic-observations-title">Does the effect repeat?</h4>
-            <p data-sic-comparison-summary></p>
-            <ul data-sic-comparison-list></ul>
-            <p data-sic-comparison-scope></p>
-          </section>
         </section>
 
         <p id="game-feedback" class="sr-only" aria-live="polite"></p>
@@ -246,6 +257,7 @@ let renderedPalette = '';
 let colors: number[][] = [];
 let agentState: V6AgentSnapshot | null = null;
 const sicPanel = element<HTMLElement>('#sic-panel');
+bindSicPerspectives(sicPanel);
 let sicRenderPending = false;
 let lastSicBoard: GameObservation | null = null;
 let lastSicState: V6AgentSnapshot | null = null;
