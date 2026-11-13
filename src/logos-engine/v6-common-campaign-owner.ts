@@ -24,9 +24,9 @@ import {
  * Payload contract for an owner that wants the common campaign to authorize a
  * physical action through the native Logos authority.
  *
- * `correlation` is owner-specific, cloneable material that must survive until
- * the public return is routed back to the selected owner. It must not contain
- * functions, DOM objects or hidden engine state.
+ * The owner creates a fresh payload and transfers it to the campaign. The
+ * campaign keeps it private until the matching public return is routed.
+ * `correlation` must not contain functions, DOM objects or hidden engine state.
  */
 export interface CampaignLogosActionPayload {
   action: AgentAction;
@@ -36,11 +36,17 @@ export interface CampaignLogosActionPayload {
   correlation?: unknown;
 }
 
-/** Exact envelope routed back to the owner selected for the action. */
+export interface CampaignProposalIdentity {
+  ownerId: string;
+  proposalRef: string;
+  actionRef: string;
+}
+
+/** Exact identity and correlation routed back to the selected owner. */
 export interface CampaignSelectedReturnEnvelope {
   version: 1;
   needId: string;
-  proposal: CollectedProposal;
+  proposal: CampaignProposalIdentity;
   action: AgentAction;
   correlation?: unknown;
   returnPayload: unknown;
@@ -59,8 +65,8 @@ export interface CampaignReturnReceipt extends CallerRouteReceipt {
 }
 
 export type CampaignPrepareResult =
-  | { status: 'none'; proposals: CollectedProposal[] }
-  | { status: 'ambiguous'; proposals: CollectedProposal[] }
+  | { status: 'none'; proposals: CampaignProposalIdentity[] }
+  | { status: 'ambiguous'; proposals: CampaignProposalIdentity[] }
   | {
       status: 'pending';
       needId: string;
@@ -73,7 +79,7 @@ export type CampaignPrepareResult =
       ownerId: string;
       proposalRef: string;
       need: ReleaseNeed;
-      proposals: CollectedProposal[];
+      proposals: CampaignProposalIdentity[];
     }
   | {
       status: 'action';
@@ -83,7 +89,7 @@ export type CampaignPrepareResult =
       observationId: string;
       needId: string;
       action: AgentAction;
-      proposals: CollectedProposal[];
+      proposals: CampaignProposalIdentity[];
     };
 
 export interface CommonCampaignOwnerOptions {
@@ -132,6 +138,18 @@ function integer(value: unknown, label: string): asserts value is number {
 
 function sameAction(left: unknown, right: AgentAction): boolean {
   return JSON.stringify(left) === JSON.stringify(right);
+}
+
+function proposalIdentity(proposal: CollectedProposal): CampaignProposalIdentity {
+  return {
+    ownerId: proposal.ownerId,
+    proposalRef: proposal.proposalRef,
+    actionRef: proposal.actionRef,
+  };
+}
+
+function proposalIdentities(proposals: readonly CollectedProposal[]): CampaignProposalIdentity[] {
+  return proposals.map(proposalIdentity);
 }
 
 function campaignPayload(value: unknown): CampaignLogosActionPayload {
@@ -227,13 +245,14 @@ export class CommonCampaignOwner {
       return { status: 'none', proposals: [] };
     }
 
-    const proposals = this.#caller.collect(contextByOwner);
-    const selection = this.#caller.select(proposals);
+    const proposals = this.#caller.collectOwned(contextByOwner);
+    const selection = this.#caller.selectOwned(proposals);
+    const publicProposals = proposalIdentities(selection.proposals);
     if (selection.status === 'none') {
-      return { status: 'none', proposals: selection.proposals };
+      return { status: 'none', proposals: publicProposals };
     }
     if (selection.status === 'ambiguous' || !selection.selected) {
-      return { status: 'ambiguous', proposals: selection.proposals };
+      return { status: 'ambiguous', proposals: publicProposals };
     }
 
     const selected = selection.selected;
@@ -253,7 +272,7 @@ export class CommonCampaignOwner {
         ownerId: selected.ownerId,
         proposalRef: selected.proposalRef,
         need: release.need,
-        proposals: selection.proposals,
+        proposals: publicProposals,
       };
     }
 
@@ -261,13 +280,14 @@ export class CommonCampaignOwner {
       throw new RangeError(`campaign pending session count exceeds ${MAX_PENDING_SESSIONS}`);
     }
 
+    const action = structuredClone(payload.action);
     const pendingDecision: PendingCampaignDecision = {
       sessionId: observation.sessionId,
       needId: release.need.needId,
       selection,
       selected,
       payload,
-      action: structuredClone(payload.action),
+      action,
     };
     this.#pendingBySession.set(observation.sessionId, pendingDecision);
 
@@ -278,8 +298,8 @@ export class CommonCampaignOwner {
       bundleId: payload.bundle.id,
       observationId: payload.identity.observationId,
       needId: release.need.needId,
-      action: structuredClone(payload.action),
-      proposals: selection.proposals,
+      action: structuredClone(action),
+      proposals: publicProposals,
     };
   }
 
@@ -313,9 +333,9 @@ export class CommonCampaignOwner {
     const envelope: CampaignSelectedReturnEnvelope = {
       version: 1,
       needId: pending.needId,
-      proposal: structuredClone(pending.selected),
-      action: structuredClone(pending.action),
-      correlation: structuredClone(pending.payload.correlation),
+      proposal: proposalIdentity(pending.selected),
+      action: pending.action,
+      correlation: pending.payload.correlation,
       returnPayload: input.payload,
     };
     const receipt = this.#caller.routeSelected(
