@@ -1,11 +1,11 @@
 import type { ProductReadinessState } from '../agent-product-dispatch.ts';
 import type { GameObservation } from './browser-games.ts';
 import {
-  createPublicSingleActionBrowserCampaignHost,
   type BrowserCampaignDispatchPorts,
   type BrowserCampaignHostResult,
   type BrowserCommonCampaignHost,
 } from './v6-browser-common-campaign-host.ts';
+import { createPublicAndFieldStockBrowserCampaignHost } from './v6-browser-field-stock-campaign.ts';
 
 /**
  * The first product controller deliberately owns exactly one qualified seam.
@@ -128,7 +128,7 @@ export class BrowserAgentController {
   #disposed = false;
 
   constructor(options: BrowserAgentControllerOptions = {}) {
-    this.#createHost = options.createHost ?? (() => createPublicSingleActionBrowserCampaignHost());
+    this.#createHost = options.createHost ?? (() => createPublicAndFieldStockBrowserCampaignHost());
     this.#makeSessionId = options.makeSessionId
       ?? ((observation, ordinal) => `browser-agent:${observation.gameCode}:${ordinal}`);
     this.#maxActions = options.maxActions ?? 64;
